@@ -5,7 +5,7 @@ typedef struct {
 	int tile;
 	int bar;
 	char pad0c[0x2c];
-} SEL_54f600;
+} DUELL_PERSON_SLOT;
 
 typedef struct {
 	char pad0[0x5c];
@@ -14,7 +14,7 @@ typedef struct {
 	int f1d0;
 	char pad1d4[0x2f0 - 0x1d4];
 	char* owner;
-} TILE_54f600;
+} DUELL_TILE_VIEW;
 
 extern pos14_7f4c00 gm_GameTime;
 extern char* g_77255c;
@@ -30,24 +30,24 @@ char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_CompareGameTime(void*, void*);
 void __cdecl he_DeclineDuell(char*, char*, unsigned char*);
 void __cdecl he_AcceptDuell(char*, char*, char*);
-void __cdecl fcn_00545780(char*);
+void __cdecl d2_CloseActionPopup(char*);
 void __cdecl he_FreeAction(char*);
 int __cdecl d2_CreateActionPopupSlot(char*, int, int, char*, int);
 void __cdecl sb_PlayVoice(char*, char*, int, int, int, int, int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl gm_AddTime(char*, int, int, int);
-int __cdecl d2_BuildPersonStatusDesc(SEL_54f600*);
-int __cdecl d2_DrawPersonTile(int, int, int, SEL_54f600*);
+int __cdecl d2_BuildPersonStatusDesc(DUELL_PERSON_SLOT*);
+int __cdecl d2_DrawPersonTile(int, int, int, DUELL_PERSON_SLOT*);
 void __cdecl cm_SendSetHE(int, void*);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x0054f600 */
-void __cdecl fcn_0054f600(char* o)
+void __cdecl he_RunDuellIntro(char* o)
 {
 	char* entity;
 	char* v4;
 	char* v6;
-	SEL_54f600 s;
+	DUELL_PERSON_SLOT s;
 	int state;
 
 	v6 = 0;
@@ -63,7 +63,7 @@ void __cdecl fcn_0054f600(char* o)
 		case 1:
 			if (gm_CompareGameTime(&gm_GameTime, o + 0x52) > 0) {
 				he_DeclineDuell(entity, v4, (unsigned char*) v6);
-				fcn_00545780(o);
+				d2_CloseActionPopup(o);
 				he_FreeAction(o);
 				return;
 			}
@@ -78,7 +78,7 @@ void __cdecl fcn_0054f600(char* o)
 			} else if (g_100f1dc == 1) {
 				he_DeclineDuell(entity, v4, (unsigned char*) v6);
 			}
-			fcn_00545780(o);
+			d2_CloseActionPopup(o);
 			he_FreeAction(o);
 			return;
 		case 0:
@@ -113,7 +113,7 @@ void __cdecl fcn_0054f600(char* o)
 		}
 	} else {
 		if (*(int*) (o + 0x74) != 0) {
-			fcn_00545780(o);
+			d2_CloseActionPopup(o);
 		}
 		if (entity != 0) {
 			*(pos14_7f4c00*) (entity + 0x52) = gm_GameTime;

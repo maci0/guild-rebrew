@@ -30,8 +30,8 @@ void __cdecl ch_SpawnAmbientDog(AMBIENT_ANIMAL_SLOT*);
 void __cdecl gm_SpawnAmbientSheep(AMBIENT_ANIMAL_SLOT*);
 void __cdecl ch_SpawnAmbientCow(AMBIENT_ANIMAL_SLOT*);
 void __cdecl ch_SpawnAmbientLivestock(AMBIENT_ANIMAL_SLOT*, int);
-void __cdecl fcn_004bc540(AMBIENT_ANIMAL_SLOT*);
-void __cdecl fcn_004bc6b0(AMBIENT_ANIMAL_SLOT*);
+void __cdecl anm_UpdateCat(AMBIENT_ANIMAL_SLOT*);
+void __cdecl anm_UpdateSheep(AMBIENT_ANIMAL_SLOT*);
 
 
 /* Per-tick driver for the 32 ambient slots: may spawn one, then updates and
@@ -85,14 +85,14 @@ void __cdecl gm_UpdateAmbientAnimals(void)
 		switch (s->kind) {
 		case 0:
 		case 1:
-			fcn_004bc540(s);
+			anm_UpdateCat(s);
 			break;
 		case 3:
 		case 4:
 		case 5:
 		case 6:
 		case 7:
-			fcn_004bc6b0(s);
+			anm_UpdateSheep(s);
 			break;
 		case 2:
 			gm_InitAmbientBirds(s);

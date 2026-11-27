@@ -6,11 +6,11 @@ typedef struct {
 	int f4;
 	int f8;
 	unsigned short fc;
-} fcn_00564f90_rec;
+} HE_END_TIME_REC;
 #pragma pack(pop)
 // SIZE 0xe
 
-void __cdecl fcn_00564f90(char* a1)
+void __cdecl he_ResetActionEndTime(char* a1)
 {
-	*(fcn_00564f90_rec*) (a1 + 0x52) = *(fcn_00564f90_rec*) (a1 + 0x44);
+	*(HE_END_TIME_REC*) (a1 + 0x52) = *(HE_END_TIME_REC*) (a1 + 0x44);
 }

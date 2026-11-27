@@ -1,4 +1,4 @@
-void __cdecl fcn_005338a0(void);
+void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void* p, int n);
 char* __cdecl RegisterStatusText(char* name, int id, int len);
 void __cdecl d2_OpenMeisterbriefDialog(char* obj);
@@ -6,10 +6,10 @@ void __cdecl d2_SelectWealthOverviewTarget(char* obj);
 void __cdecl d2_ShowMoneyExchangeDialog(char* obj);
 void __cdecl d2_ShowLoanDialog(char* obj);
 void __cdecl d2_RunGeldleiheWechselDialog(char* obj);
-void __cdecl fcn_005a4e00(char* obj);
+void __cdecl d2_RunKreditGeberDialog(char* obj);
 
 /* ADDRESS: GOLDTL 0x005a7200 */
-void __cdecl fcn_005a7200(char* subject)
+void __cdecl d2_RunBankContactMenu(char* subject)
 {
 	char* s1;
 	char* s2;
@@ -19,7 +19,7 @@ void __cdecl fcn_005a7200(char* subject)
 
 	s3 = 0;
 	s4 = 0;
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	if (!main_RunFrameLoop((void*) 0x5a7200, 0x67fff)) {
 		return;
 	}
@@ -44,7 +44,7 @@ void __cdecl fcn_005a7200(char* subject)
 					if (obj == s1) {
 						d2_RunGeldleiheWechselDialog(subject);
 					} else if (obj == s2) {
-						fcn_005a4e00(subject);
+						d2_RunKreditGeberDialog(subject);
 					}
 				} else {
 					if (obj == s1) {

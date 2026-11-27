@@ -4,7 +4,7 @@ int __cdecl fcn_0064f170(int, int, int);
 void __cdecl d3snd_StopSourceVoiceSafe(int);
 
 /* ADDRESS: GOLDTL 0x00515f30 */
-void __cdecl fcn_00515f30(int record)
+void __cdecl d3snd_StopSceneObjectSfxVoice(int record)
 {
 	if (fcn_0064f170(record, 0x6a1f7c, 4) != 0) {
 		return;

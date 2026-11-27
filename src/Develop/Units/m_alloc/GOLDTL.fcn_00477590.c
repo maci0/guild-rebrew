@@ -11,7 +11,7 @@ void __cdecl d2_WritePixelRgb(char*, char, char, char);
    used bounds, blank the two row markers, pack each glyph run into the block
    and return a right-sized copy. */
 /* ADDRESS: GOLDTL 0x00477590 */
-unsigned int* __cdecl fcn_00477590(int originX, int originY, unsigned int width,
+unsigned int* __cdecl shp_GrabBit24(int originX, int originY, unsigned int width,
                                    unsigned int height, int pixels, char a5, int rowStride)
 {
     unsigned int minx;

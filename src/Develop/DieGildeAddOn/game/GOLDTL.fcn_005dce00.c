@@ -18,7 +18,7 @@ typedef struct Ent {
 #include "client_packet_builder.h"
 
 void __cdecl io_FormatTextBuffer(char*, int);
-int __cdecl fcn_005bdc30(int, int*, char*, int, int);
+int __cdecl d2_RunCityScrollMapDialog(int, int*, char*, int, int);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
 int __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
@@ -43,7 +43,7 @@ int __cdecl gm_ObjHalveWorkerLevel(char* cmd, char* arg)
 		desc[4] = 4;
 		desc[2] = 0x90010;
 		desc[3] = 0;
-		obj = fcn_005bdc30(1, desc, name, 0, 0);
+		obj = d2_RunCityScrollMapDialog(1, desc, name, 0, 0);
 		if (obj == 0) {
 			goto end;
 		}

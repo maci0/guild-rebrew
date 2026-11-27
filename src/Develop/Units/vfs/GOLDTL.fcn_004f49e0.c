@@ -30,7 +30,7 @@ extern Pair_99f800 g_99f800[0x800];
 
 int __cdecl vfs_fwrite(void *, int, int, int);
 
-int __cdecl fcn_004f49e0(int fp)
+int __cdecl ls_SaveCrimeRecords(int fp)
 {
 	int n1;
 	int n2;

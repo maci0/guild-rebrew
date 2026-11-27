@@ -6,7 +6,7 @@ extern unsigned char g_773d75;
 extern void* g_14a558c;
 
 int __cdecl fcn_005015e0(int* out, int a, int b, int c);
-int __cdecl fcn_005bdc30(int a, int* b, void* c, int d, int e);
+int __cdecl d2_RunCityScrollMapDialog(int a, int* b, void* c, int d, int e);
 int __cdecl fcn_00502cd0(int a, int b, ...);
 int __cdecl fcn_00502850(void);
 float __cdecl fcn_0042e450(void);
@@ -38,7 +38,7 @@ int __cdecl gm_ObjForceSellBuildingStock(char* actor, char* action)
 		request[4] = 6;
 		request[2] = 0xa0744300;
 		request[3] = one;
-		recordAddr = fcn_005bdc30(one, request, g_14a558c, 0, 0);
+		recordAddr = d2_RunCityScrollMapDialog(one, request, g_14a558c, 0, 0);
 		if (recordAddr == 0)
 			return 0;
 	} else {

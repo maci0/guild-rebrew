@@ -15,7 +15,7 @@ void __cdecl ls_QuickSave(void);
 void __cdecl cm_RequestIncreaseGameSpeed(void);
 void __cdecl cm_SendDecreaseGameSpeed(void);
 void __cdecl gm_ApplyGameSettings(void);
-void __cdecl fcn_00533a40(int);
+void __cdecl d2_ShowStatusBanner(int);
 
 void __cdecl main_HandleHotkeyAction(void)
 {
@@ -54,7 +54,7 @@ void __cdecl main_HandleHotkeyAction(void)
 			cm_SendDecreaseGameSpeed();
 		}
 	} else if (g_14cf950 == 0x4e || g_14cf950 == 0x4a) {
-		fcn_00533a40(g_14a5538);
+		d2_ShowStatusBanner(g_14a5538);
 	}
 }
 unsigned char _dpad_14cf902[78];

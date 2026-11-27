@@ -8,7 +8,7 @@ char* __cdecl sbs_GetFirstSetSample(int dir, char* buf, int size);
 char* __cdecl sbs_GetNextSample(char* p, char* buf, int size);
 
 /* ADDRESS: GOLDTL 0x00423f60 */
-int __cdecl fcn_00423f60(int a1, char* src)
+int __cdecl sbs_RenameRootSample(int a1, char* src)
 {
 	char* dest;
 
@@ -21,7 +21,7 @@ int __cdecl fcn_00423f60(int a1, char* src)
 }
 
 /* ADDRESS: GOLDTL 0x00423f90 */
-int __cdecl fcn_00423f90(int dir, const char* name, const char* src)
+int __cdecl sbs_RenameSetSample(int dir, const char* name, const char* src)
 {
 	char buf[0x100];
 	char* p;

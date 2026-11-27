@@ -4,7 +4,7 @@ extern float g_66291c;
 
 float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 void __cdecl d2_BuildPersonStatusDesc(void*);
-int __cdecl fcn_005cf720(unsigned short, unsigned short, int, int);
+int __cdecl gm_MatchesTargetFilter(unsigned short, unsigned short, int, int);
 
 /* ADDRESS: GOLDTL 0x005cb670 */
 int __cdecl d2_CollectHighFavorEntities(char* sourceRecord, int n, char* results, int a3)
@@ -61,7 +61,7 @@ int __cdecl d2_CollectHighFavorEntities(char* sourceRecord, int n, char* results
 	}
 	for (i = 0; i < count; i++) {
 		d2_BuildPersonStatusDesc(results + i * 0x38);
-		*(int*) (results + i * 0x38 + 0x30) = fcn_005cf720(*(unsigned short*) sourceRecord,
+		*(int*) (results + i * 0x38 + 0x30) = gm_MatchesTargetFilter(*(unsigned short*) sourceRecord,
 			*(unsigned short*) *(int*) (results + i * 0x38), a3, 0);
 	}
 	return count;

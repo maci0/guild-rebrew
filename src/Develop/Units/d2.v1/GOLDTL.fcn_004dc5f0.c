@@ -3,7 +3,7 @@
 extern char g_6b5c60[];
 
 char* __cdecl gm_LookupEntityRecordById(int id);
-int __cdecl fcn_004dc230(char* a, char* p, char* q, int* out);
+int __cdecl d2_RunCouncilVoteDialog(char* a, char* p, char* q, int* out);
 int __cdecl amt_IsNextOfficeStep(char* a, int v);
 int __cdecl cut_ShowSessionDialog(char c, char* a, int* args, int* out);
 int __cdecl fcn_0064d41a(char* buf, char* fmt, ...);
@@ -32,7 +32,7 @@ void __cdecl cut_HandleOfficeSessionStep(char* o, int* m)
 		if (p == 0 || q == 0) {
 			return;
 		}
-		r = fcn_004dc230(a, p, q, &out);
+		r = d2_RunCouncilVoteDialog(a, p, q, &out);
 		*(int*) (o + 0x98) = out;
 		*(int*) (o + 0x94) = r;
 		fcn_0064d41a(o + 0x14, &(*(char*)g_6b5c60));

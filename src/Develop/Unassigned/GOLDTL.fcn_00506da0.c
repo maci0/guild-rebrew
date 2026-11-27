@@ -7,7 +7,7 @@ typedef struct {
 
 extern Rec6 g_6995d8[];
 
-Rec6 __cdecl fcn_00506da0(int idx)
+Rec6 __cdecl gm_GetCategoryStatTemplate(int idx)
 {
 	if (idx >= 0x23) {
 		return g_6995d8[0];

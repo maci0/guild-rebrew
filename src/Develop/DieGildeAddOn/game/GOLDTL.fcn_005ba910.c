@@ -4,20 +4,20 @@ unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl d2_LoadForm(int, int, char*);
 int __cdecl d2_CreateWindowTextButton(int, int, int);
 void __cdecl d2_CenterDialogWindows(int);
-void __cdecl fcn_0057e880(int, char*, int, int);
+void __cdecl d2_DispatchTutorialInput(int, char*, int, int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl d2_CreateButtonRow(int, int, int*, int, ...);
 int __cdecl d2_SetSlotVisibility(int, int);
-float __cdecl fcn_0050bbb0(int);
+float __cdecl gm_CalcLevelProductionBonus(int);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 int __cdecl d2_GetFormWindow(int, int, int, int*, int*, int*);
 void __cdecl d2_DrawPanelFrame(int, int, int);
-void __cdecl fcn_00533f40(int, int, int, int);
+void __cdecl d2_CreateWindowScrollbar(int, int, int, int);
 void __cdecl io_AppendText(int, ...);
 void __cdecl d2_ResetBuildingUiSlots(void);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
-void __cdecl fcn_005c5da0(int, int, int, int, int);
+void __cdecl d2_OpenEntityQuickSlots(int, int, int, int, int);
 void __cdecl d2_ResetUiInputAndBounds(void);
 int __cdecl gm_IsGebaeudeOpen(int, int, int);
 int __cdecl gm_HasActiveSpecialObject(char*, int);
@@ -45,10 +45,10 @@ void __cdecl fcn_0051af00(int, int, ...);
 int __cdecl cm_BeginPacketFieldDelta(char*, int);
 int __cdecl cm_AppendCommandSyncField(int, int, int, void*);
 void __cdecl cm_SendSetAttribute(void);
-void __cdecl fcn_00533a40(int);
+void __cdecl d2_ShowStatusBanner(int);
 int __cdecl d2_SetControlText(int, int);
 int __cdecl d2_SetFormVisibility(int, int);
-void __cdecl fcn_004bfe00(int);
+void __cdecl d2_RunTradeRouteEditor(int);
 int __cdecl d2_GetControlValue(int);
 int __cdecl gm_GetStorageSlotCapacity(int, int);
 int __cdecl d2_AddWindowField(int, int, int, int, int);
@@ -86,7 +86,7 @@ int __cdecl gm_eval_SlotVoll(int, int, int);
 int __cdecl d2_DispatchTutorialEvent(int, int, int, int);
 int __cdecl fcn_0050b750(int, int);
 int __cdecl cm_RequestClearLagerslot(int, int);
-int __cdecl fcn_005bdc30(int, int, int, int, int);
+int __cdecl d2_RunCityScrollMapDialog(int, int, int, int, int);
 int __cdecl gm_CheckEntityType(int);
 int __cdecl d3snd_PlayWorkerOrderVoice(void);
 int __cdecl fcn_005ba0e0(int, int, int, int, int, float, int, int);
@@ -363,7 +363,7 @@ l_after:
 	}
 
 	/* 0x5bacd6: open the panel window and select its fourth page */
-	fcn_0057e880(0x23, (char*) buildingArg, 0, 0);
+	d2_DispatchTutorialInput(0x23, (char*) buildingArg, 0, 0);
 	f.v2c = d2_LoadForm(0, 0, (char*) 0x6aa5d0);
 	d2_CenterDialogWindows(f.v2c);
 	d2_SetForm(f.v2c, 4);
@@ -392,10 +392,10 @@ l_after:
 
 	if (modeFlags == 2) {
 		f.v40 = 1;
-		f.v50 = fcn_0050bbb0(*(unsigned short*) 0x774970);
+		f.v50 = gm_CalcLevelProductionBonus(*(unsigned short*) 0x774970);
 	} else if (modeFlags == 4) {
 		f.v3c = 1;
-		f.v50 = fcn_0050bbb0(*(unsigned short*) 0x774970);
+		f.v50 = gm_CalcLevelProductionBonus(*(unsigned short*) 0x774970);
 	} else if (*(short*) (f.v14 + 0x27) == *(short*) 0x774970) {
 		f.v4c = 1;
 	} else {
@@ -404,7 +404,7 @@ l_after:
 			/* 0x5bae4e: the search result lands in the v88 slot, not a1 */
 			f.v88 = (int) gm_StartFilteredEntitySearch(1, 0, 0x44);
 			f.v40 = 1;
-			f.v50 = fcn_0050bbb0(*(unsigned short*) 0x774970);
+			f.v50 = gm_CalcLevelProductionBonus(*(unsigned short*) 0x774970);
 		}
 		f.v3c = 1;
 		if (f.v54 != -1) {
@@ -451,7 +451,7 @@ l_after:
 	}
 
 	/* 0x5baf75: the item rectangle and its definition-table entry */
-	fcn_00533f40(0x270, 0x15c, *(int*) 0x772514,
+	d2_CreateWindowScrollbar(0x270, 0x15c, *(int*) 0x772514,
 	             d2_GetFormWindow(f.v2c, 2, 0x5e2, &f.v130, &f.v134, &f.vB4));
 	*(int*) (*(int*) 0x1015ea0 + f.vB4 * 0x2f4 + 0x84) = 0x54;
 	d2_SetForm(f.v2c, 3);
@@ -473,7 +473,7 @@ l_after:
 	d2_SetForm(f.v2c, 0);
 
 	/* 0x5bb0ab: the two scroll-bar rows and the item table entry */
-	fcn_005c5da0(*(int*) 0x772514, 0x172, 0x64,
+	d2_OpenEntityQuickSlots(*(int*) 0x772514, 0x172, 0x64,
 	             *(unsigned short*) 0x774970, 0x1f3c);
 	d2_SetForm(f.v2c, 0);
 	f.v78 = d2_AddElementToWindow(0x261, 0xd2, 0x528, *(int*) 0x772514);
@@ -754,7 +754,7 @@ l_slot:
 		goto l_slot_handles;
 	}
 	if ((*(char*) (idx + 0x20) & 1) != 0) {
-		fcn_00533a40(*(int*) 0x14a56e0);
+		d2_ShowStatusBanner(*(int*) 0x14a56e0);
 	} else {
 		*(signed char*) (idx + 0x28) =
 		    (signed char) (((int) (*(signed char*) (idx + 0x28)) + 1) % 3);
@@ -772,7 +772,7 @@ l_slot_handles:
 	if (*(int*) 0x100f1dc != -1 && *(int*) 0x67d370 == e->f1c
 	    && (*(char*) (idx + 0x20) & 1) == 0) {
 		d2_SetFormVisibility(f.v2c, 0);
-		fcn_004bfe00(idx);
+		d2_RunTradeRouteEditor(idx);
 		d2_SetFormVisibility(f.v2c, 1);
 	}
 	if ((*(char*) (idx + 0x13) & 0x20) != 0 || (*(char*) (idx + 0x20) & 1) != 0) {
@@ -1097,7 +1097,7 @@ l_5bc295:
 
 l_5bc2f8:
 	if ((*(char*) (e->f00 + 0x20) & 1) != 0) {
-		fcn_00533a40(*(int*) 0x14a56e0);
+		d2_ShowStatusBanner(*(int*) 0x14a56e0);
 		goto l_5bc1d3;
 	}
 	idx = (int) e->f00;
@@ -1109,7 +1109,7 @@ l_5bc2f8:
 		goto l_5bc370;
 	}
 	fcn_0051af00((int) f.v15D8, 0xee, f.v14);
-	fcn_00533a40((int) (f.v15D8 + 0xc));
+	d2_ShowStatusBanner((int) (f.v15D8 + 0xc));
 	goto l_5bc1d7;
 l_5bc370:
 	i = (int) fcn_00502cd0(*(int*) (idx + 0x14), 1, 0, 0x1dd);
@@ -1134,7 +1134,7 @@ l_5bc3fa:
 			continue;
 		}
 		if ((*(char*) (e->f00 + 0x20) & 1) != 0) {
-			fcn_00533a40(*(int*) 0x14a56e0);
+			d2_ShowStatusBanner(*(int*) 0x14a56e0);
 		} else {
 			e->f08 = (e->f08 == 0) ? 1 : 0;
 		}
@@ -1199,7 +1199,7 @@ l_5bc5ce:
 		goto l_5bc632;
 	}
 	fcn_0051af00((int) f.v16D8, 0xee, f.v14);
-	fcn_00533a40((int) (f.v16D8 + 0xc));
+	d2_ShowStatusBanner((int) (f.v16D8 + 0xc));
 	goto l_5bc1d7;
 
 l_5bc632:
@@ -1234,7 +1234,7 @@ l_5bc700:
 	for (i = 0; i < 16; i++, e++) {
 		if (e->f00 != 0 && e->f0c == *(int*) 0x67d370) {
 			if ((*(char*) (f.v6D8[i].f00 + 0x20) & 1) != 0) {
-				fcn_00533a40(*(int*) 0x14a56e0);
+				d2_ShowStatusBanner(*(int*) 0x14a56e0);
 			} else {
 				f.v6D8[i].f08 = 1;
 				f.v20 = (int) f.v6D8[i].f00;
@@ -1313,12 +1313,12 @@ l_5bc8d0:
 		if (d2_DispatchTutorialEvent(0x28, f.v14, 0, slot_value) == 0) {
 			goto l_5bca98;
 		}
-		fcn_0057e880(0x28, (char*) f.v14, 0, slot_value);
+		d2_DispatchTutorialInput(0x28, (char*) f.v14, 0, slot_value);
 	} else if (f.v70 != 0) {
 		if (d2_DispatchTutorialEvent(0x26, f.v14, 0, slot_value) == 0) {
 			goto l_5bca98;
 		}
-		fcn_0057e880(0x26, (char*) f.v14, 0, slot_value);
+		d2_DispatchTutorialInput(0x26, (char*) f.v14, 0, slot_value);
 	}
 	if (idx > 0) {
 		cm_SendSellObjekt(*(int*) (f.v18 + 2), *(int*) (f.v98 + 2), slot_value, idx,
@@ -1328,7 +1328,7 @@ l_5bc8d0:
 		fcn_0051af00((int) (f.v210 + 0x238), 0xed,
 		             (int) (*(float*) &f.v28 * *(float*) &f.v64
 		                    - *(float*) &f.v28));
-		fcn_00533a40((int) (f.v210 + 0x238));
+		d2_ShowStatusBanner((int) (f.v210 + 0x238));
 		sb_PlayVoice(0, 0x68aed0, 1, 0x3f, 0x7f, 0, 0);
 	}
 	if (idx > 0) {
@@ -1573,7 +1573,7 @@ l_5bcf9f:
 			}
 		}
 		fcn_0051af00((int) (f.v210 + 0x138), 0xce, j, 0xc10);
-		idx = fcn_005bdc30(0x11, (int) f.v210, (int) (f.v210 + 0x138), 0, 0);
+		idx = d2_RunCityScrollMapDialog(0x11, (int) f.v210, (int) (f.v210 + 0x138), 0, 0);
 		if (idx == 0 || idx == buildingArg) {
 			goto l_5bd26b;
 		}
@@ -1643,7 +1643,7 @@ l_5bd177:
 l_5bd240:
 		if (f.v10 > 0) {
 			fcn_0051af00((int) (f.v210 + 0x138), 0xe3, f.v10);
-			fcn_00533a40((int) (f.v210 + 0x138));
+			d2_ShowStatusBanner((int) (f.v210 + 0x138));
 		}
 l_5bd26b:
 		d2_SetFormVisibility(f.v2c, 1);
@@ -1802,7 +1802,7 @@ l_5bd632:
 		d2_DestroyForm(f.vA4);
 		*(int*) 0x7746cc = f.v88;
 	}
-	fcn_0057e880(0x23, (char*) 0, 1, 0);
+	d2_DispatchTutorialInput(0x23, (char*) 0, 1, 0);
 	return 0;
 
 }

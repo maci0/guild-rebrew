@@ -9,7 +9,7 @@ int __cdecl gm_GetSeasonTreasury(int, signed char);
 int __cdecl he_StartHandlungSearch(int, int, int);
 int __cdecl he_fn_Handlung(void);
 int __cdecl gm_GetOppositeStatIndex(int);
-int __cdecl fcn_00507910(int);
+int __cdecl gm_MapBuildingCatToGuildSlot(int);
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl gm_GetRangeStatId(int, int);
 int __cdecl gm_JobToBuildingType(int);
@@ -65,7 +65,7 @@ unsigned int __cdecl ai_StartChangeProfession(int a0, char* a1, int a2, int* a3,
 	do {
 		if (*(unsigned char*) (i + lpGebaeudeINST) != 0) {
 			p = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[lpGebaeudeINST[i]];
-			v12[fcn_00507910(((BUILDING_PROTOTYPE*)p)->category)]++;
+			v12[gm_MapBuildingCatToGuildSlot(((BUILDING_PROTOTYPE*)p)->category)]++;
 		}
 		i += 0xa9;
 	} while (i < 0xa900);

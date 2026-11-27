@@ -43,14 +43,14 @@ extern char g_6b5c60[];
 void __cdecl cm_SaveGameAndWait(int, char*);
 void __cdecl ls_LoadSavePreview(char*);
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
-int __cdecl fcn_0051e490(void* stream, int flags);
+int __cdecl ls_WriteSaveHeader(void* stream, int flags);
 #include "Develop/Units/vfs/vfs.h"
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 unsigned int __cdecl vfs_CalcCrc32(unsigned char*, unsigned int);
 int __cdecl cm_RequestSysMessage(int, void*);
 void __cdecl cm_StepCommandQueue(void);
 void __cdecl ls_SaveGame(char*, char*, int);
-void __cdecl fcn_00533a40(char*);
+void __cdecl d2_ShowStatusBanner(char*);
 
 void __cdecl ls_SaveNetworkGame(char* name, char* title)
 {
@@ -81,7 +81,7 @@ void __cdecl ls_SaveNetworkGame(char* name, char* title)
 		sprintf(path, "Gamedata\\network\\%s.SAV", name);
 		f = vfs_Tfopen(path, "wb", g_6b7fdc);
 		if (f != 0) {
-			fcn_0051e490(f, 5);
+			ls_WriteSaveHeader(f, 5);
 			CloseVfsStream(f);
 		}
 		f = vfs_Tfopen(path, "rb", g_6b7fdc);
@@ -109,6 +109,6 @@ void __cdecl ls_SaveNetworkGame(char* name, char* title)
 		ls_SaveGame(path, title, 6);
 		sprintf(path, "Gamedata\\network\\%s.SAV", name);
 		ls_SaveGame(path, title, 5);
-		fcn_00533a40(g_6b5c60);
+		d2_ShowStatusBanner(g_6b5c60);
 	}
 }

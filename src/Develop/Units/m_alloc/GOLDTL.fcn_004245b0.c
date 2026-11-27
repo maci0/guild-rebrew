@@ -5,7 +5,7 @@
 void __cdecl m_FreeTracked(void* p);
 
 /* ADDRESS: GOLDTL 0x004245b0 */
-int __cdecl fcn_004245b0(char* name)
+int __cdecl sbs_UnloadSoundBanks(char* name)
 {
 	char* e;
 	char* prev;

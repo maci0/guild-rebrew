@@ -9,7 +9,7 @@ extern char g_6a9924[];
 extern char g_6a9914[];
 extern char g_6a9580[];
 
-void __cdecl fcn_005338a0(void);
+void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d3_TriggerFriedhofChatScript(char*);
@@ -21,7 +21,7 @@ void __cdecl d2_ShowLagerOptions(char*, int);
 void __cdecl d2_OpenMeisterbriefDialog(char*);
 
 /* ADDRESS: GOLDTL 0x0058fdc0 */
-void __cdecl fcn_0058fdc0(char* e)
+void __cdecl d2_RunFriedhofKapelleMenu(char* e)
 {
 	int r1;
 	int r2;
@@ -34,8 +34,8 @@ void __cdecl fcn_0058fdc0(char* e)
 	r3 = 0;
 	r4 = 0;
 	r5 = 0;
-	fcn_005338a0();
-	while (main_RunFrameLoop((void*) fcn_0058fdc0, 0x67fff) != 0) {
+	d2_ClearStatusTextSlots();
+	while (main_RunFrameLoop((void*) d2_RunFriedhofKapelleMenu, 0x67fff) != 0) {
 		d3_TriggerFriedhofChatScript(e);
 		if (g_7746d8 & 0x200) {
 			r1 = RegisterStatusText(g_6a9934, g_14b5874, 0x13);

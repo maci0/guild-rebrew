@@ -3,7 +3,7 @@
 __declspec(dllimport) int __stdcall WritePrivateProfileStringA(const char *, const char *, const char *, const char *);
 
 /* ADDRESS: GOLDTL 0x005e12d0 */
-void __cdecl fcn_005e12d0(void)
+void __cdecl io_SaveIniSettings(void)
 {
     char v1[32];
     _itoa(*(unsigned char *)0x776665,v1,10);

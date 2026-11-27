@@ -17,8 +17,8 @@ int __cdecl fcn_0064d41a(char* buf, char* fmt, ...);
 int __cdecl cut_RandMod(int a);
 void __cdecl msx_StartMusicIfAllowed(int a);
 int __cdecl gm_LookupEntityRecordById(int id);
-void* __cdecl fcn_004e4ae0(char* name, int a);
-void __cdecl fcn_004e4730(char* name);
+void* __cdecl sb_LoadLocalizedSampleBankIfAllowed(char* name, int a);
+void __cdecl cut_StartSceneCutscene(char* name);
 void* __cdecl d3_FindSceneObject(int a, int b, int c, char* name);
 void __cdecl SelectTextureSet(int a, int b, int c, int d);
 void __cdecl d3_TransformPoint(int a, int b, int* c);
@@ -28,7 +28,7 @@ int __cdecl gm_SelectEntityHeadSet(unsigned short a);
 void* __cdecl evt_StartGfxScript(char* name, int a);
 void __cdecl d3snd_QueueSoundIfAllowed(int id, int bank, char* label, int a, int b);
 void __cdecl d2_SetFormVisibility(int dlg, int a);
-void __cdecl fcn_00471d80(int dlg, int a);
+void __cdecl d2_CenterForm(int dlg, int a);
 void __cdecl cut_WaitForScript(int a);
 void __cdecl cut_RunTurnRound(int arg, int* ids);
 void __cdecl cut_WaitTicks(int a);
@@ -122,10 +122,10 @@ void __cdecl cut_RunAuction(int* arg)
 		states[i] = 0;
 		ids[i] = -1;
 	}
-	bank_intro = (int) fcn_004e4ae0("VERSTEIGERUNG_INTRO.sbf", 0);
-	bank_bids = (int) fcn_004e4ae0("VERSTEIGERUNG_GEBOTE.sbf", 0);
-	bank_comments = (int) fcn_004e4ae0("VERSTEIGERUNG_KOMMENTARE.sbf", 0);
-	fcn_004e4730("Versteigerung.ed3");
+	bank_intro = (int) sb_LoadLocalizedSampleBankIfAllowed("VERSTEIGERUNG_INTRO.sbf", 0);
+	bank_bids = (int) sb_LoadLocalizedSampleBankIfAllowed("VERSTEIGERUNG_GEBOTE.sbf", 0);
+	bank_comments = (int) sb_LoadLocalizedSampleBankIfAllowed("VERSTEIGERUNG_KOMMENTARE.sbf", 0);
+	cut_StartSceneCutscene("Versteigerung.ed3");
 	npc = (int) d3_FindSceneObject(0, 0x40, 0, "ub_STAFELEI");
 	if (npc != 0) {
 		if (proto->kind == 0x0b)
@@ -200,7 +200,7 @@ void __cdecl cut_RunAuction(int* arg)
 	dlg = (int) d2_LoadForm(0, 0, "cutscenes\\pacht_main");
 	if (g_772f3c != 0)
 		d2_SetFormVisibility(dlg, 0);
-	fcn_00471d80(dlg, 3);
+	d2_CenterForm(dlg, 3);
 	d2_SetForm(dlg, 0);
 	io_AppendText((void*) 0x1aa2, (void*) building, (void*) price);
 	cut_WaitForScript(cand);

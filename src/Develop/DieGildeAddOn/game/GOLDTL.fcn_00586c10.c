@@ -13,7 +13,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl sv_ClearObjectSelection(void);
 void __cdecl ResetDisplayCounters(void);
 void __cdecl d2_ResetUiInputAndBounds(void);
-void* __cdecl fcn_004730c0(int, int, int, int, int, int, int);
+void* __cdecl d2_StartScreenFade(int, int, int, int, int, int, int);
 void __cdecl d3_SetViewport(float, float, float, float, float, float, float, int, int);
 void __cdecl d2_UpdateHudVisibility(int);
 void __cdecl d3_SelectSceneContext(int, char);
@@ -23,15 +23,15 @@ void __cdecl d3_TransformPoint(char*, float*, float*);
 char* __cdecl fcn_00442910(int, float*, float*, char*);
 int __cdecl d3_ApplyObjectAnimation(char*, char*, int);
 int __cdecl d2_ClearSurface(void*);
-void __cdecl fcn_00473150(char*);
+void __cdecl d2_ReleaseOverlaySprite(char*);
 void __cdecl d2_CreateCannonControls(int, int);
-void __cdecl fcn_00588200(char*, char*, char*);
+void __cdecl d2_UpdateKanoneDialog(char*, char*, char*);
 char __cdecl d3_SetObjectVisible(char*, char);
 char __cdecl d3_SetSubtreeVisible(int, unsigned char);
 void __cdecl he_SetGfxInfoEnabledByKey(int, int);
 void __cdecl d3_UpdateCannonAimMatrices(char*);
 void __cdecl d2_UpdateKanoneCamera(char*, float);
-void __cdecl fcn_00587a50(char*);
+void __cdecl d3_UpdateCannonAimCamera(char*);
 void __cdecl d2_UpdateDealSummaryLog(char*);
 void __cdecl d2_SwitchKanoneMode(int, int, int, int, int);
 int __cdecl d2_CheckKanoneFireInput(char*);
@@ -39,12 +39,12 @@ int __cdecl d2_FireKanone(void*, char*);
 void __cdecl d2_DestroyForm(int);
 void __cdecl d2_DestroyElement(int);
 char __cdecl d3_DestroyObject(int);
-void __cdecl fcn_00533a40(char*);
+void __cdecl d2_ShowStatusBanner(char*);
 void __cdecl d3_SetNodePosition(char*, int*);
 void __cdecl d3_SetObjectRotation(char*, int*);
 void __cdecl d3_UpdateSceneDetailLevel(int, int);
-void __cdecl fcn_00443230(int);
-void __cdecl fcn_00528fd0(void);
+void __cdecl d3_PrecacheAllSceneTextures(int);
+void __cdecl d2_RestoreHudPanels(void);
 
 /* ADDRESS: GOLDTL 0x00586c10 */
 void __cdecl d2_RunKanoneUI(char* obj)
@@ -114,7 +114,7 @@ void __cdecl d2_RunKanoneUI(char* obj)
     d2_ResetUiInputAndBounds();
     g_7e2700 = 0;
     g_100f8c0[0] = 0;
-    sp = (char*) fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0x5a, 1);
+    sp = (char*) d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0x5a, 1);
     while (!(*(u8*) sp & 4))
         main_RunFrameLoop(0, flags | 0x100);
 
@@ -197,11 +197,11 @@ void __cdecl d2_RunKanoneUI(char* obj)
     d2_ClearSurface((void*) g_77250c);
     main_RunFrameLoop(0, 0x86);
     d2_ClearSurface((void*) g_77250c);
-    fcn_00473150(sp);
+    d2_ReleaseOverlaySprite(sp);
 
-    sp = (char*) fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0x5a, 0xa);
+    sp = (char*) d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0x5a, 0xa);
     d2_CreateCannonControls((int) S, (int) res);
-    fcn_00588200(obj, (char*) S, res);
+    d2_UpdateKanoneDialog(obj, (char*) S, res);
     if (*(int*) ((char*) S + 0xa0) > *(int*) ((char*) S + 0xdc))
         *(int*) ((char*) S + 0xa0) = *(int*) ((char*) S + 0xdc);
     for (i = 0; i < 3; i++)
@@ -226,8 +226,8 @@ void __cdecl d2_RunKanoneUI(char* obj)
             g_774654 = 1;
         } else {
             d2_UpdateKanoneCamera((char*) S, dt);
-            fcn_00587a50((char*) S);
-            fcn_00588200(obj, (char*) S, res);
+            d3_UpdateCannonAimCamera((char*) S);
+            d2_UpdateKanoneDialog(obj, (char*) S, res);
             d2_UpdateDealSummaryLog((char*) S);
             if (*(int*) (res + 4) == 0) {
                 if (g_100f1dc != -1) {
@@ -249,8 +249,8 @@ void __cdecl d2_RunKanoneUI(char* obj)
         *(int*) ((char*) S + 0x68) = *(int*) ((char*) S + 0x6c);
     }
 
-    fcn_00533a40((char*) 0x6b5c60);
-    sp = (char*) fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0x5a, 1);
+    d2_ShowStatusBanner((char*) 0x6b5c60);
+    sp = (char*) d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0x5a, 1);
     while (!(*(u8*) sp & 4))
         main_RunFrameLoop(0, flags);
     d2_DestroyForm(*(int*) ((char*) S + 0xa4));
@@ -282,15 +282,15 @@ void __cdecl d2_RunKanoneUI(char* obj)
     g_1040484 = s1;
     g_104048c = s3;
     d2_UpdateHudVisibility(1);
-    fcn_00528fd0();
+    d2_RestoreHudPanels();
     d3_SelectSceneContext(g28, 0);
     if (g_6b89c0 != 0)
         d3_ResetSkyDomeNormals((char*) g_6b89c0, 1);
     d3_SetNodePosition((char*) d3_ActiveCamera, p);
     d3_SetObjectRotation((char*) d3_ActiveCamera, v);
     d3_UpdateSceneDetailLevel(g_6b8300, 0);
-    fcn_00443230(1);
-    fcn_00473150(sp);
-    fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0x5a, 0xa);
+    d3_PrecacheAllSceneTextures(1);
+    d2_ReleaseOverlaySprite(sp);
+    d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0x5a, 0xa);
     gm_SetSlotCallback(*(int*) (obj + 1), 0, 0);
 }

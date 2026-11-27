@@ -1,7 +1,7 @@
 int __cdecl gm_IsLocalSimEntity(char*);
 
 // SIZE 0xc
-struct ent_555490 {
+struct SIM_ENTITY_ENTRY {
 	char* e;
 	int a;
 	int b;
@@ -9,7 +9,7 @@ struct ent_555490 {
 
 
 /* ADDRESS: GOLDTL 0x00555490 */
-int __cdecl fcn_00555490(char* o, struct ent_555490* tab, int* out)
+int __cdecl gm_FindMatchingSimEntry(char* o, struct SIM_ENTITY_ENTRY* tab, int* out)
 {
 	int i;
 

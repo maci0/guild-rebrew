@@ -1,0 +1,37 @@
+typedef void* D3DX_FONT_PTR;
+
+#include "Develop/Units/d8_vesa/d3d_device_view.h"
+extern void* g_6b5de4;
+extern int g_14ce860;
+extern int g_14ce864;
+
+/* ADDRESS: GOLDTL 0x0041b510 */
+void __cdecl d3_DrawOverlayText(int viewportX, int viewportY, int a3, int a4, int a5, int a6)
+{
+	int vp[4];
+	unsigned int packed;
+	D3DX_FONT_PTR obj;
+	void** vtbl;
+
+	if (g_6b5de4 == 0) {
+		return;
+	}
+	vp[0] = viewportX;
+	vp[1] = viewportY;
+	vp[2] = g_14ce860 - 1;
+	vp[3] = g_14ce864 - 1;
+	obj = g_6b5de0;
+	vtbl = (void**) ((D3D_DEVICE_VIEW*) obj)->vtbl;
+	((void (__stdcall*) (D3DX_FONT_PTR)) vtbl[0x88 / 4])(obj);
+	packed = (unsigned int) (unsigned char) a4 | 0xffffff00;
+	packed <<= 8;
+	packed |= (unsigned int) (a5 & 0xff);
+	packed <<= 8;
+	packed |= (unsigned int) (a6 & 0xff);
+	obj = g_6b5de4;
+	vtbl = *(void***) obj;
+	((void (__stdcall*) (D3DX_FONT_PTR, int, int, int*, int, unsigned int)) vtbl[0x18 / 4])(obj, a3, -1, vp, 0x20, packed);
+	obj = g_6b5de0;
+	vtbl = (void**) ((D3D_DEVICE_VIEW*) obj)->vtbl;
+	((void (__stdcall*) (D3DX_FONT_PTR)) vtbl[0x8c / 4])(obj);
+}

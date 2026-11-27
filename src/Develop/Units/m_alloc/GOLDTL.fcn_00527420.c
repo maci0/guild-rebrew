@@ -12,9 +12,9 @@ int g_6a2598 = 0xffffffff;
 extern int g_6a2524;
 
 void __cdecl d2_DestroyElement(int h);
-void __cdecl fcn_00475f80(int h);
-void __cdecl fcn_0047ac60(int h, int v);
-void __cdecl fcn_004752e0(int h);
+void __cdecl d2_ReleaseSurface(int h);
+void __cdecl d2_ReleaseSurfaceGroup(int h, int v);
+void __cdecl d2_FreeHudRectSlot(int h);
 void __cdecl d2_DestroyHudOverlay(void);
 void __cdecl d2_CloseWindow(int h);
 void __cdecl d2_DestroySelectionPanel(void);
@@ -30,23 +30,23 @@ void __cdecl d2_DestroyAllHudPanels(void)
 		}
 	}
 	if (g_774680 != 0) {
-		fcn_00475f80(g_774680);
+		d2_ReleaseSurface(g_774680);
 		g_774680 = 0;
 	}
 	if (g_774684 != 0) {
-		fcn_00475f80(g_774684);
+		d2_ReleaseSurface(g_774684);
 		g_774684 = 0;
 	}
 	if (g_774674 != 0) {
-		fcn_0047ac60(g_774674, 0);
+		d2_ReleaseSurfaceGroup(g_774674, 0);
 		g_774674 = 0;
 	}
 	if (g_774678 != 0) {
-		fcn_0047ac60(g_774678, 0);
+		d2_ReleaseSurfaceGroup(g_774678, 0);
 		g_774678 = 0;
 	}
 	if (g_77467c != 0) {
-		fcn_0047ac60(g_77467c, 0);
+		d2_ReleaseSurfaceGroup(g_77467c, 0);
 		g_77467c = 0;
 	}
 	if (g_6a25fc != -1) {
@@ -54,7 +54,7 @@ void __cdecl d2_DestroyAllHudPanels(void)
 		g_6a25fc = -1;
 	}
 	if (g_6a25a8 != -1) {
-		fcn_004752e0(g_6a25a8);
+		d2_FreeHudRectSlot(g_6a25a8);
 	}
 	d2_DestroyHudOverlay();
 	g_6a25ac = -1;

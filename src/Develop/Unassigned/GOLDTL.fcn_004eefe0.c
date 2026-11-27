@@ -4,7 +4,7 @@
 
 extern Entry68e020 g_68e020[32];
 
-int __cdecl fcn_004eefe0(void)
+int __cdecl gm_CountUnusedPresetCharacters(void)
 {
 	int n;
 	unsigned int i;

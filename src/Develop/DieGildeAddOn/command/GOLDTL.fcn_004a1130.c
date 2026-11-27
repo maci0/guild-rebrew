@@ -18,11 +18,11 @@ int __cdecl cm_RunDummyUnversehrtheit(void);
 int __cdecl ai_StartDummyBeruf(void);
 int __cdecl cm_RunDummyBeruf(void);
 int __cdecl ai_StartDummyVergnuegen(void);
-int __cdecl fcn_00495a70(void);
+int __cdecl ai_RunDummyVergnuegen(void);
 int __cdecl ai_StartBildung(void);
 int __cdecl ai_RunBildung(void);
 int __cdecl ai_StartBildungBeruf(void);
-int __cdecl fcn_00496480(void);
+int __cdecl ai_RunBildungBeruf(void);
 int __cdecl ai_ScoreBestechung(void);
 int __cdecl ai_StartBestechung(void);
 int __cdecl ai_RunBestechung(void);
@@ -37,9 +37,9 @@ int __cdecl ai_StartRaumKaufen(void);
 int __cdecl ai_RunRaumKaufen(void);
 int __cdecl ai_StartRepairBuilding(void);
 int __cdecl ai_RunRepairBuilding(void);
-int __cdecl fcn_00497990(void);
-int __cdecl fcn_00497e60(void);
-int __cdecl fcn_00497ec0(void);
+int __cdecl ai_StartWohnsitzKaufen(void);
+int __cdecl ai_RunWohnsitzKaufen(void);
+int __cdecl ai_StartWohnsitzBauen(void);
 int __cdecl ai_RunWohnsitzBauen(void);
 int __cdecl ai_StartWohnsitzUpgraden(void);
 int __cdecl ai_RunWohnsitzUpgraden(void);
@@ -249,7 +249,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	strcpy(d.name, "DummyVergnuegen");
 	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartDummyVergnuegen;
-	d.run = fcn_00495a70;
+	d.run = ai_RunDummyVergnuegen;
 	d.flags = 0x1;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -317,7 +317,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	strcpy(d.name, "Bildung (Beruf)");
 	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartBildungBeruf;
-	d.run = fcn_00496480;
+	d.run = ai_RunBildungBeruf;
 	d.flags = 0x1;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -656,8 +656,8 @@ int __cdecl am_RegisterGameMethods(char* e)
 	d.type = 0x10;
 	strcpy(d.name, "Wohnsitz kaufen");
 	d.score = ai_ComputeBaseActionScore;
-	d.start = fcn_00497990;
-	d.run = fcn_00497e60;
+	d.start = ai_StartWohnsitzKaufen;
+	d.run = ai_RunWohnsitzKaufen;
 	d.flags = 0x3;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -690,7 +690,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	d.type = 0x11;
 	strcpy(d.name, "Wohnsitz bauen");
 	d.score = ai_ComputeBaseActionScore;
-	d.start = fcn_00497ec0;
+	d.start = ai_StartWohnsitzBauen;
 	d.run = ai_RunWohnsitzBauen;
 	d.flags = 0x3;
 	if (am_RegisterMethod(&d, e) == 0) {

@@ -21,7 +21,7 @@ extern char g_6753fc[]; /* "bewegung/gehen" */
 int __cdecl d3sm_GetObjectSuperMap(char*);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 int __cdecl ch_AdjustHeightToGround(char*);
-int __cdecl fcn_004094c0(char*, int);
+int __cdecl ch_BuildWalkPath(char*, int);
 void __cdecl ch_PlayFootstepSound(char*, int);
 int __cdecl ch_StartWalkAnimation(char*, int);
 int __cdecl ch_UpdateWalkOnPath(char*, int);
@@ -96,7 +96,7 @@ void __cdecl ch_WalkOnPath(char* obj)
 				ch_RemoveQueueEntry(obj);
 				return;
 			}
-			if (!fcn_004094c0(obj, res)) {
+			if (!ch_BuildWalkPath(obj, res)) {
 				return;
 			}
 		}

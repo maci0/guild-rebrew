@@ -8,7 +8,7 @@ int __cdecl sbs_GetFileSize(unsigned int a0);
 char* __cdecl strncpy(char* dst, const char* src, unsigned int n);
 
 /* ADDRESS: GOLDTL 0x00424420 */
-unsigned int __cdecl fcn_00424420(unsigned int bankName)
+unsigned int __cdecl sbs_AddSample(unsigned int bankName)
 {
 	char* v2;
 	char* v3;

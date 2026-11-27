@@ -8,7 +8,7 @@ void __cdecl shp_WriteFrameOffsets(const void* src, char* hdr);
 /* Block-encodes the colour-keyed sprite rectangle found inside the plane at
  * a5 (stride a7, origin a1) and returns the packed block buffer. */
 /* ADDRESS: GOLDTL 0x00477e70 */
-char* __cdecl fcn_00477e70(int a1, int a2, int width, int height, int a5, unsigned char a8, int a7)
+char* __cdecl shp_EncodeSpriteBlock(int a1, int a2, int width, int height, int a5, unsigned char a8, int a7)
 {
 	unsigned short minx;
 	unsigned short maxx;

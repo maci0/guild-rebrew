@@ -4,12 +4,12 @@ extern char g_6b5c60[];
 
 void* __cdecl m_alloc(int size, char* tag);
 void __cdecl d3_LoadFloorTexture(int* obj, char* name, int flag);
-void __cdecl fcn_0043f6b0(int* obj);
+void __cdecl d3_InitFloorGrid(int* obj);
 
 #pragma optimize("y", off)
 
 /* ADDRESS: GOLDTL 0x004400b0 */
-int* __cdecl fcn_004400b0(int gridSize, char* a1, char* a2, char** a3, float a4, float a5)
+int* __cdecl d3_CreateFloor(int gridSize, char* a1, char* a2, char** a3, float a4, float a5)
 {
 	int* obj;
 	char* p;
@@ -74,7 +74,7 @@ int* __cdecl fcn_004400b0(int gridSize, char* a1, char* a2, char** a3, float a4,
 	}
 	strncpy((char*) obj + 0x7da4, a1, 0x40);
 	strncpy((char*) obj + 0x7de4, a2, 0x40);
-	fcn_0043f6b0(obj);
+	d3_InitFloorGrid(obj);
 	return obj;
 }
 /* Layout scaffolding: shifts the next source object to its reference

@@ -29,7 +29,7 @@ extern int g_6acf80;
 extern int g_6acf84;
 extern HWND g_774940;
 
-typedef struct Gfx538 {
+typedef struct D3_WINDOW_GFX_CONFIG {
 	int w2;
 	int h2;
 	int fmt;
@@ -52,14 +52,14 @@ typedef struct Gfx538 {
 	float f74;
 	float f78;
 	float f7c;
-} Gfx538;
+} D3_WINDOW_GFX_CONFIG;
 
 /* Creates the game window and the D3D8.1 device: work-area sizing, window
  * style round-trip, render-state defaults and the gfx file list. */
 /* ADDRESS: GOLDTL 0x00538850 */
-int __cdecl fcn_00538850(int topmost)
+int __cdecl main_CreateGameWindowAndDevice(int topmost)
 {
-	Gfx538 g;
+	D3_WINDOW_GFX_CONFIG g;
 	RECT work;
 	RECT rc;
 	char text[MAX_PATH];

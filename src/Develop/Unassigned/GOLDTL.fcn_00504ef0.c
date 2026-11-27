@@ -1,7 +1,7 @@
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* ADDRESS: GOLDTL 0x00504ef0 */
-int __cdecl fcn_00504ef0(int type, int* out)
+int __cdecl gm_FindBuildingPrototypesByCategory(int type, int* out)
 {
 	int n;
 	int i;

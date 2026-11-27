@@ -5,9 +5,9 @@ extern void* __cdecl m_alloc(unsigned int size, const char* tag);
 extern void __cdecl m_FreeTracked(void* ptr);
 void* __cdecl vfs_Tfopen(const char*, const char*, void*);
 void __cdecl CloseVfsStream(void*);
-void __cdecl fcn_0044a770(void*, int);
+void __cdecl d3_FinalizeStockObjectMesh(void*, int);
 void __cdecl d3_LoadFlInfoChunks(void*, void*);
-char __cdecl fcn_0044f0e0(char*);
+char __cdecl d3_CheckVfsHeaderFlag(char*);
 void __cdecl d3_AddFLChunk(char*, char);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 int __cdecl d3_LoadOrReuseTexture(char*, int, int, int);
@@ -151,7 +151,7 @@ BGF_OBJ* __cdecl d3_LoadAGF(char* name, char* objectName, char* nametab, int nam
 	if (!strstr(buf, (char*) 0x67af00)) {
 		goto done;
 	}
-	ok = fcn_0044f0e0(buf);
+	ok = d3_CheckVfsHeaderFlag(buf);
 	obj = d3_LoadFastChunk(buf, objectName, nametab, namestep, namecount);
 	if (obj == 0) {
 		d3_AddFLChunk(buf, ok);
@@ -160,7 +160,7 @@ BGF_OBJ* __cdecl d3_LoadAGF(char* name, char* objectName, char* nametab, int nam
 	}
 	if (obj != 0) {
 		obj->flags ^= (obj->flags ^ ((ok == 0) << 1)) & 2;
-		fcn_0044a770(obj, 0);
+		d3_FinalizeStockObjectMesh(obj, 0);
 		return obj;
 	}
 	copy_dst = &hdr;
@@ -496,7 +496,7 @@ BGF_OBJ* __cdecl d3_LoadAGF(char* name, char* objectName, char* nametab, int nam
 		obj->teile[i].wert[4] = hdr.teil[i].wert[4];
 		obj->teile[i].wert[5] = hdr.teil[i].wert[5];
 	}
-	fcn_0044a770(obj, 1);
+	d3_FinalizeStockObjectMesh(obj, 1);
 
 cleanup:
 	if (hdr.anzahl_tex > 0 && hdr.tex != 0) {

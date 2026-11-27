@@ -18,7 +18,7 @@ unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream);
 /* Writes the 0x99-byte node pools at 0x9bade0 and 0xaed740 into a save stream,
  * turning each linked-list pointer back into its pool index. */
 /* ADDRESS: GOLDTL 0x00521530 */
-int __cdecl fcn_00521530(void* fp)
+int __cdecl ls_SaveNodePools(void* fp)
 {
 	int index;
 	node99_save buf;

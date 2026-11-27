@@ -10,7 +10,7 @@ typedef struct tag_GS_STRAFTAT_REC_HIGH {
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 
-int __cdecl fcn_0051e070(void);
+int __cdecl main_GetLanguage(void);
 
 int __cdecl gs_FormatStraftatTextHigh(void* output, GS_STRAFTAT_REC_HIGH request, int count)
 {
@@ -53,7 +53,7 @@ int __cdecl gs_FormatStraftatTextHigh(void* output, GS_STRAFTAT_REC_HIGH request
 		io_FormatTextBuffer(output, formatOffset + 0x1473, (char*) &request + 4, entityId);
 		break;
 	case 0x18:
-		switch (fcn_0051e070()) {
+		switch (main_GetLanguage()) {
 		case 0:
 		case 1:
 			io_FormatTextBuffer(output, formatOffset + 0x1478, (char*) &request + 4, entityId, name);

@@ -66,11 +66,11 @@ Mat* __stdcall D3DXMatrixTranspose(Mat*, Mat*);
 Plane* __stdcall fcn_005ee04a(Plane*, Plane*, Mat*);
 Plane* __stdcall fcn_005ed45f(void*, Plane*);
 void __cdecl d3_VisitSceneObjects(int, int, int, void (__cdecl*)(void), void*);
-void __cdecl fcn_00451f80(void);
+void __cdecl d3_VisitRenderSceneNode(void);
 
 
 /* ADDRESS: GOLDTL 0x00451df0 */
-void __cdecl fcn_00451df0(Ent* e)
+void __cdecl d3_RenderPlanarReflections(Ent* e)
 {
 	Plane p;
 	Mat m;
@@ -94,7 +94,7 @@ void __cdecl fcn_00451df0(Ent* e)
 	D3DXMatrixTranspose((Mat*) g_1040c80, (Mat*) g_1040c80);
 	((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*)g_6b5de0), 0x16, 2);
 	g_6b8000 = 1;
-	d3_VisitSceneObjects(g_67a370, 0, 0x40, fcn_00451f80, &big);
+	d3_VisitSceneObjects(g_67a370, 0, 0x40, d3_VisitRenderSceneNode, &big);
 	g_6b8000 = 0;
 	((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*)g_6b5de0), 0x16, 3);
 }

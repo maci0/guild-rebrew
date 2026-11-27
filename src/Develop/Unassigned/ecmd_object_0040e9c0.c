@@ -8,7 +8,7 @@ int __cdecl d3_AnimateObjectToTransform(char* e, float x, float y, float z, floa
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 int __cdecl d3_AnimateObjectToTransform(char* e, float x, float y, float z, float rx, float ry, float rz, int w, int f);
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
-void __cdecl fcn_00442d90(char* e, int v);
+void __cdecl d3_ReplaceObjectModel(char* e, int v);
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
 /* ADDRESS: GOLDTL 0x0040e9c0 */
@@ -85,7 +85,7 @@ int __cdecl ecmd_RotateObjectRelative(char** a, int* x, int* y, int* z, int* w)
 int __cdecl ecmd_ReplaceObject(char** a, int* v)
 {
 	if (*a != 0) {
-		fcn_00442d90(*a, *v);
+		d3_ReplaceObjectModel(*a, *v);
 		return 1;
 	}
 	evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "invalid object");

@@ -4,12 +4,12 @@
 #include <string.h>
 
 // SIZE 0x24c
-typedef struct Tpl_4c2100 {
+typedef struct MSX_LOCATION_TRACK_MAP {
 	int kind;
 	int owner;
 	int cls;
 	char names[6][0x60];
-} Tpl_4c2100;
+} MSX_LOCATION_TRACK_MAP;
 
 #include "client_types.h"
 #include "g_688118.h"
@@ -21,7 +21,7 @@ extern unsigned char* lpGebaeudePROT;
 extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern IdGroup g_688118[];
-extern Tpl_4c2100 g_6819b8[];
+extern MSX_LOCATION_TRACK_MAP g_6819b8[];
 extern char g_772c10[];
 extern char s_68a14c[];
 extern char s_68a130[];
@@ -34,7 +34,7 @@ unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
 /* ADDRESS: GOLDTL 0x004c2100 */
-void __cdecl fcn_004c2100(void)
+void __cdecl msx_StartLocationTrack(void)
 {
 	unsigned char* e;
 	int kind;
@@ -45,7 +45,7 @@ void __cdecl fcn_004c2100(void)
 	int c;
 	char* s;
 	char* name;
-	Tpl_4c2100* p;
+	MSX_LOCATION_TRACK_MAP* p;
 	int k;
 	Chan_14cc460* track;
 

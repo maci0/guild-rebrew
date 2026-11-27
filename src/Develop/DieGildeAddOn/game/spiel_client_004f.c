@@ -25,7 +25,7 @@ int __cdecl gm_AmountToUnits(int a, unsigned char k);
 int __cdecl fcn_0050b750(int a, unsigned char k);
 
 /* ADDRESS: GOLDTL 0x004f25a0 */
-int __cdecl fcn_004f25a0(char* req)
+int __cdecl gv_RentGravePlot(char* req)
 {
 	void* entity1;
 	void* entity2;
@@ -89,7 +89,7 @@ int __cdecl fcn_004f25a0(char* req)
 /* ADDRESS: GOLD 0x4f24a0 */
 
 /* ADDRESS: GOLDTL 0x004f45b0 */
-int __cdecl fcn_004f45b0(unsigned short* e)
+int __cdecl gm_CalcScaledWealthValue(unsigned short* e)
 {
 	double x;
 	int pr;

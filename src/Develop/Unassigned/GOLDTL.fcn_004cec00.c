@@ -5,7 +5,7 @@ extern int g_67a370;
 int __cdecl gm_IsMapTileWalkable(int x, int y);
 
 /* ADDRESS: GOLDTL 0x004cec00 */
-int __cdecl fcn_004cec00(int x, int y, int *out_x, int *out_y)
+int __cdecl gm_FindNearestWalkableTile(int x, int y, int *out_x, int *out_y)
 {
 	int radius;
 	char* m;

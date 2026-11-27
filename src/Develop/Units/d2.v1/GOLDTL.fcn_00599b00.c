@@ -1,7 +1,7 @@
 #include "client_dialog_helpers.h"
 #include "client_actions.h"
 #include "client_types.h"
-typedef struct { unsigned char kind, unknown01[0x24c]; } BuildingProto599b00;
+typedef struct { unsigned char kind, unknown01[0x24c]; } D2_STADT_BAUEN_PROTO;
 typedef struct {
     char unknown00[4]; unsigned char kind; char unknown05[3];
     int actor, target; char unknown10[0x18]; pos14_7f4c00 pos;
@@ -9,7 +9,7 @@ typedef struct {
     int owner, category, cost; char unknown64[0x1c];
     float location[3]; char unknown8c[4]; float rotation[3];
     char name[0x3f], unknowndb[0x1d];
-} BuildingMsg599b00;
+} D2_STADT_BAUEN_MSG;
 extern int gm_GameTime;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
@@ -52,13 +52,13 @@ void __cdecl d2_ScrollWindow(int a, int b, int c);
 int __cdecl main_RunFrameLoop(int a, int b);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00599b00 */
-void __cdecl fcn_00599b00(void)
+void __cdecl d2_RunStadtBauenDialog(void)
 {
 	int cats[5];
 	unsigned char* catp;
 	char name[260];
 	char key[128];
-	BuildingMsg599b00 msg;
+	D2_STADT_BAUEN_MSG msg;
 	int query, cost, selected;
 	int raw;
 	int dlg;
@@ -68,7 +68,7 @@ void __cdecl fcn_00599b00(void)
 	int cat;
 	int last;
 	int ent;
-	BuildingProto599b00* rec;
+	D2_STADT_BAUEN_PROTO* rec;
 	unsigned char kind;
 	char* src;
 	char* dst;
@@ -100,7 +100,7 @@ void __cdecl fcn_00599b00(void)
 	row = 0x40;
 	for (i = 0; cats[i] != 0; i++) {
 		cat = cats[i];
-		rec = &((BuildingProto599b00*)lpGebaeudePROT)[cat];
+		rec = &((D2_STADT_BAUEN_PROTO*)lpGebaeudePROT)[cat];
 		kind = rec->kind;
 		if (kind != last && last != -1) {
 			row += 0x50;

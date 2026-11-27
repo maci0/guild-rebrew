@@ -26,7 +26,7 @@ int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl he_FreeAction(char*);
-int __cdecl fcn_0051e070(void);
+int __cdecl main_GetLanguage(void);
 
 void __cdecl he_RunFriedhofStealAction(char* e)
 {
@@ -72,7 +72,7 @@ void __cdecl he_RunFriedhofStealAction(char* e)
 			if (sel != 0) {
 				gm_GetSeasonPrice(*(unsigned short*) sel, g_773d75);
 				cm_SendSellObjekt(-1, *(int*) (r + 2), *(unsigned short*) sel, 1, g_773d75, 0);
-				switch (fcn_0051e070()) {
+				switch (main_GetLanguage()) {
 				case 0:
 				case 2:
 					io_FormatTextBuffer(buf, 0x414b, 0x229, *(int*) (o + 0x16c), *(unsigned short*) sel * 2 + 0x9a8);

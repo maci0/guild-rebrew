@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x004f6810 */
-int __cdecl fcn_004f6810(char* a1, unsigned int kind)
+int __cdecl gm_ValidateProzessCharge(char* a1, unsigned int kind)
 {
 	int result;
 

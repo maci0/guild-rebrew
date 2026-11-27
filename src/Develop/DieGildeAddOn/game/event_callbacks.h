@@ -15,12 +15,12 @@ void __cdecl cut_RunProzess(char* event);
 void __cdecl cut_RunCombatCutscene(char* event);
 void __cdecl cut_MainDuell(char* event);
 void __cdecl cut_PlayHinrichtung(char* event);
-void __cdecl fcn_004e2090(char* event);
+void __cdecl cut_PlayHochzeitCutscene(char* event);
 void __cdecl cut_PlayBirthCutscene(char* event);
 void __cdecl cut_PlayDeathCutscene(char* event);
 void __cdecl cut_RunPleiteCutscene(char* event);
 void __cdecl cut_RunAuction(char* event);
-void __cdecl fcn_004e4180(char* event);
+void __cdecl he_RunSalonEvent(char* event);
 
 /* Reconstructed court decision callback; other phase-slot contracts remain open. */
 void __cdecl cut_PromptProzessChoice(char* participant, int* action);

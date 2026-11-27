@@ -47,7 +47,7 @@ int __cdecl amt_fio_LoadAemter(void* stream, int version);
 #include "client_scene_loader.h"
 int __cdecl gm_RebuildLoadedReferences(void);
 
-int __cdecl fcn_00525b40(void)
+int __cdecl ls_WaitAndLoadNetSave(void)
 {
 	int hdr[0x3f];
 

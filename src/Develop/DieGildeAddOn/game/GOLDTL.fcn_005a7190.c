@@ -17,7 +17,7 @@ extern __int64 g_666018;
 
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl d2_OpenTargetPicker(Query*, char*, int, void*);
-void __cdecl fcn_005a6e90(void);
+void __cdecl d2_ShowWealthOverviewDialog(void);
 void __cdecl d3_EndCameraAndUiMode(void);
 
 void __cdecl d2_SelectWealthOverviewTarget(void)
@@ -30,6 +30,6 @@ void __cdecl d2_SelectWealthOverviewTarget(void)
 	q.x10 = 6;
 	q.mask = g_666018;
 	io_FormatTextBuffer(buf, 0x18ec);
-	d2_OpenTargetPicker(&q, buf, 0, (void*) fcn_005a6e90);
+	d2_OpenTargetPicker(&q, buf, 0, (void*) d2_ShowWealthOverviewDialog);
 	d3_EndCameraAndUiMode();
 }

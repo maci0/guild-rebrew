@@ -6,7 +6,7 @@ extern int __cdecl ch_ReplanBlockedPath(void *, int, char *);
 extern void __cdecl ch_FinishAni(void *);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 #include "Develop/DieGildeAddOn/game/ch_ground.h"
-extern void __cdecl fcn_004090d0(void *);
+extern void __cdecl ch_BuildWalkPathBuffer(void *);
 extern void __cdecl m_FreeTracked(void *);
 extern void __cdecl d3_SetNodePosition(int, void *);
 extern float __cdecl d3_ComputeYawToTarget(int, float *);
@@ -100,7 +100,7 @@ Lafter:
         if (*(int *)(eventEntry + 0xf8) % 4 == 0) {
             if (!CompareVector3WithinTolerance((void *)(eventEntry + 0x134),
                     (void *)(*(int *)(*(int *)(eventEntry + 0x110) + 0x34) + 0x4c), 70.0f))
-                fcn_004090d0(eventEntry);
+                ch_BuildWalkPathBuffer(eventEntry);
         }
     }
     ++*(int *)(eventEntry + 0xf8);

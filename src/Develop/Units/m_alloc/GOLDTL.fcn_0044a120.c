@@ -1,15 +1,15 @@
-struct unk_44a120;
+struct D3_MESH_COM_IFACE;
 
 // SIZE 0xc
-struct unkvtbl_44a120 {
-	long (__stdcall* QueryInterface)(struct unk_44a120*, void*, void**);
-	unsigned long (__stdcall* AddRef)(struct unk_44a120*);
-	unsigned long (__stdcall* Release)(struct unk_44a120*);
+struct D3_MESH_COM_VTBL {
+	long (__stdcall* QueryInterface)(struct D3_MESH_COM_IFACE*, void*, void**);
+	unsigned long (__stdcall* AddRef)(struct D3_MESH_COM_IFACE*);
+	unsigned long (__stdcall* Release)(struct D3_MESH_COM_IFACE*);
 };
 
 // SIZE 0x4
-struct unk_44a120 {
-	struct unkvtbl_44a120* vtbl;
+struct D3_MESH_COM_IFACE {
+	struct D3_MESH_COM_VTBL* vtbl;
 };
 
 extern unsigned long g_14ce728;
@@ -18,7 +18,7 @@ void __cdecl m_FreeTracked(void*);
 void __cdecl d3_ReleaseTexture(char*);
 
 /* ADDRESS: GOLDTL 0x0044a120 */
-void __cdecl fcn_0044a120(char* e)
+void __cdecl d3_ReleaseAGFMesh(char* e)
 {
 	char* p;
 	int i;
@@ -44,7 +44,7 @@ void __cdecl fcn_0044a120(char* e)
 	*(int*) (e + 0x284) = 0;
 	p = *(char**) (e + 0x264);
 	if (p != 0) {
-		g_14ce728 = (*(struct unk_44a120**) &p)->vtbl->Release((struct unk_44a120*) p);
+		g_14ce728 = (*(struct D3_MESH_COM_IFACE**) &p)->vtbl->Release((struct D3_MESH_COM_IFACE*) p);
 		*(int*) (e + 0x264) = 0;
 	}
 	m_FreeTracked(*(void**) (e + 0x27c));
@@ -58,7 +58,7 @@ void __cdecl fcn_0044a120(char* e)
 	if ((*(unsigned char*) (e + 0x2a1) & 2) != 0) {
 		p = *(char**) (e + 0x268);
 		if (p != 0) {
-			g_14ce728 = (*(struct unk_44a120**) &p)->vtbl->Release((struct unk_44a120*) p);
+			g_14ce728 = (*(struct D3_MESH_COM_IFACE**) &p)->vtbl->Release((struct D3_MESH_COM_IFACE*) p);
 			*(int*) (e + 0x268) = 0;
 		}
 		m_FreeTracked(*(void**) (e + 0x294));

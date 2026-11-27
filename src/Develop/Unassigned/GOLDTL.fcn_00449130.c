@@ -34,7 +34,7 @@ extern int g_6b8480;
 extern int d3_ActiveCamera;
 
 void __cdecl d2_ToggleMouseClipBounds(int flag);
-void __cdecl fcn_004125c0(int x, int y);
+void __cdecl io_SetMouseCursorPos(int x, int y);
 char __cdecl d3_StepObjectBasisTransform(int obj, float* a1, float* a2, int g, char* a5,
 	char* a6);
 void __cdecl d3_SetNodePosition(int h, char* p);
@@ -154,7 +154,7 @@ int __cdecl d3_UpdateFreeCameraInput(void)
 	if (g_14ce8e4 == 0 && g_14ce8d0 == 0 && g_6772c4 == 0) {
 		g_6772c4 = 1;
 		d2_ToggleMouseClipBounds(1);
-		fcn_004125c0((int) g_14ce8c0, (int) g_14ce8c2);
+		io_SetMouseCursorPos((int) g_14ce8c0, (int) g_14ce8c2);
 	}
 	if (g_14ce904 != 0) {
 		rotate[2] = rotate[2] + g_662cf8;

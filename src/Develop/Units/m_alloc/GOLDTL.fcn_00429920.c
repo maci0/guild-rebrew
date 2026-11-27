@@ -4,7 +4,7 @@ extern char g_14cb3c0[];
 extern void *__cdecl m_alloc(unsigned int size, const char *tag);
 
 /* ADDRESS: GOLDTL 0x00429920 */
-int __cdecl fcn_00429920(void)
+int __cdecl evt_AllocScriptEngineBuffers(void)
 {
 	unsigned long *p;
 	int i;

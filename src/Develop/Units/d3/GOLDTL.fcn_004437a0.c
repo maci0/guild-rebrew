@@ -17,13 +17,13 @@ void __cdecl fcn_00442e30(void);
 void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl d3_DisposeObject(void*);
 void __cdecl d3_FreeMeshObject(void*);
-void __cdecl fcn_0043bcf0(int);
-void __cdecl fcn_00459b40(int);
+void __cdecl d3_ReleaseRenderDeviceContext(int);
+void __cdecl d3_FreeSkyDome(int);
 void __cdecl m_FreeTracked(int);
 
 
 /* ADDRESS: GOLDTL 0x004437a0 */
-char __cdecl fcn_004437a0(int idx)
+char __cdecl d3_DisposeSceneContext(int idx)
 {
 	int prev;
 	char ok;
@@ -41,11 +41,11 @@ char __cdecl fcn_004437a0(int idx)
 					d3_FreeMeshObject(((void*)d3_SceneRenderListHead));
 				}
 				if (g_6b8300 != 0) {
-					fcn_0043bcf0(g_6b8300);
+					d3_ReleaseRenderDeviceContext(g_6b8300);
 					g_6b8300 = 0;
 				}
 				if (g_6b89c0 != 0) {
-					fcn_00459b40(g_6b89c0);
+					d3_FreeSkyDome(g_6b89c0);
 					g_6b89c0 = 0;
 				}
 				if (((Slot*)g_1043340)[idx].res != 0) {

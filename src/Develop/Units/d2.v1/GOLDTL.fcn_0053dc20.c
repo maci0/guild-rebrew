@@ -1,7 +1,7 @@
 extern int __cdecl d2_LoadForm(int a, int b, const char *name);
 extern void __cdecl d2_CenterDialogWindows(int obj);
 extern void __cdecl d2_SetForm(int obj, int a);
-extern int __cdecl fcn_0051e070(void);
+extern int __cdecl main_GetLanguage(void);
 extern int __cdecl io_AppendText(int id, ...);
 extern int __cdecl d2_GetWindowListItem(int obj, int a, int b);
 extern int __cdecl d2_CreateRadioGroup(int a, int b, int c, int d);
@@ -13,7 +13,7 @@ extern void __cdecl d2_UpdateRadioGroup(int obj);
 extern void __cdecl hst_SetHistoryScrollModeFlag(int a);
 extern void __cdecl d2_SetFormVisibility(int obj, int a);
 extern int __cdecl d2_RunChooseMissionDialog(void);
-extern int __cdecl fcn_004e4470(const char *name);
+extern int __cdecl cut_PlayEventScript(const char *name);
 extern void __cdecl cut_WaitForScript(int a);
 extern int __cdecl gm_FindHeadIconIndex(const char *name);
 extern int __cdecl d2_RunChoosePlayerDialog(int a, int b);
@@ -57,7 +57,7 @@ int __cdecl d2_RunChooseHistoryDialog(void)
 	obj = d2_LoadForm(0, 0, (const char *) 0x68116c);
 	d2_CenterDialogWindows(obj);
 	d2_SetForm(obj, 0);
-	if (fcn_0051e070()) {
+	if (main_GetLanguage()) {
 		v4 = io_AppendText(0x1ac0, 0x1ac2, 0x1ac4, 0x1ac2, 0x1ac4, 1);
 		firstOption = d2_GetWindowListItem(obj, 0, v4);
 		lastOption = d2_GetWindowListItem(obj, 0, v4 + 1);
@@ -137,13 +137,13 @@ label_53de5c:
 				g_7e242c = v13;
 				if (!v2) {
 					main_LoopFlags = 0x12d6;
-					cut_WaitForScript(fcn_004e4470((const char *) 0x6a4040));
+					cut_WaitForScript(cut_PlayEventScript((const char *) 0x6a4040));
 				}
 				v2 = 0;
 				again = d2_RunChoosePlayerDialog(0xc6, 0);
 				if (again == 0) {
 					main_LoopFlags = 0x12d6;
-					cut_WaitForScript(fcn_004e4470((const char *) 0x6a4024));
+					cut_WaitForScript(cut_PlayEventScript((const char *) 0x6a4024));
 					retry = 1;
 				} else {
 					v4 = d2_RunChooseCharacterIntroDialog(0);

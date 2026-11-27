@@ -8,7 +8,7 @@ int __cdecl fcn_00442910(int a, char* pos, float* rot, char* name);
 int __cdecl d3_ApplyObjectAnimation(int h, char* name, int k);
 
 /* ADDRESS: GOLDTL 0x004dfd10 */
-int __cdecl fcn_004dfd10(char* e)
+int __cdecl d3_SpawnBlutlacheEffect(char* e)
 {
 	float rot[3];
 	int h;

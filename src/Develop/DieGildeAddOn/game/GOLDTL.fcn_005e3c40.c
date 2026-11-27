@@ -12,25 +12,25 @@ extern int d2_ScreenHeight;
 extern int g_1040494;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-unsigned char* __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
+unsigned char* __cdecl d2_StartScreenFade(int, int, int, int, char*, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00533cf0(int);
+void __cdecl d2_MarkDialogFormControls(int);
 void __cdecl d2_ClearScreen(void);
-void __cdecl fcn_00473150(unsigned char*);
+void __cdecl d2_ReleaseOverlaySprite(unsigned char*);
 void __cdecl d2_UpdateHudVisibility(int);
-void __cdecl fcn_00528fd0(void);
+void __cdecl d2_RestoreHudPanels(void);
 
 void __cdecl d2_RestoreHudAfterPause(void)
 {
 	unsigned char* p;
 
-	p = fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, g_67d67c, 0x1e, 1);
+	p = d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, g_67d67c, 0x1e, 1);
 	while (!(*p & 4)) {
 		main_RunFrameLoop(0, 0x24087);
 	}
 	if (g_774954 != 0) {
 		d2_ClearScreen();
-		fcn_00473150(p);
+		d2_ReleaseOverlaySprite(p);
 		g_774670 = 6;
 		return;
 	}
@@ -40,8 +40,8 @@ void __cdecl d2_RestoreHudAfterPause(void)
 	((Rect*)&g_1040480)->bottom = ((Rect*)&g_6a3764)->bottom;
 	d2_ClearScreen();
 	d2_UpdateHudVisibility(1);
-	fcn_00528fd0();
-	fcn_00533cf0(0);
-	fcn_00473150(p);
-	fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, g_67d67c, 0x32, 0xa);
+	d2_RestoreHudPanels();
+	d2_MarkDialogFormControls(0);
+	d2_ReleaseOverlaySprite(p);
+	d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, g_67d67c, 0x32, 0xa);
 }

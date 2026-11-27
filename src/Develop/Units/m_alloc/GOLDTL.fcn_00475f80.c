@@ -1,28 +1,28 @@
-typedef struct fcn_00475f80_com fcn_00475f80_com;
+typedef struct D2_SURFACE_COM D2_SURFACE_COM;
 typedef struct {
 	char pad0[0x8];
-	int(__stdcall* release)(fcn_00475f80_com*);
-} fcn_00475f80_vtbl;
+	int(__stdcall* release)(D2_SURFACE_COM*);
+} D2_SURFACE_COM_VTBL;
 // SIZE 0xc
-struct fcn_00475f80_com {
-	fcn_00475f80_vtbl* vtbl;
+struct D2_SURFACE_COM {
+	D2_SURFACE_COM_VTBL* vtbl;
 };
 
 typedef struct {
 	char pad0[0x20];
-	fcn_00475f80_com* f20;
-	fcn_00475f80_com* f24;
+	D2_SURFACE_COM* f20;
+	D2_SURFACE_COM* f24;
 	char pad28[0x14];
 	int f3c;
 	int f40;
-} fcn_00475f80_obj;
+} D2_SURFACE_REC;
 
-int __cdecl d2_UnlockSurface(fcn_00475f80_obj*);
+int __cdecl d2_UnlockSurface(D2_SURFACE_REC*);
 void __cdecl m_FreeTracked(void*);
 
 
 /* ADDRESS: GOLDTL 0x00475f80 */
-int __cdecl fcn_00475f80(fcn_00475f80_obj* o)
+int __cdecl d2_ReleaseSurface(D2_SURFACE_REC* o)
 {
 	if (o == 0)
 		return 0;

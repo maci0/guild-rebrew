@@ -4,7 +4,7 @@
 extern unsigned char* lpGebaeudePROT;
 extern int g_774800;
 
-int __cdecl fcn_00507910(int);
+int __cdecl gm_MapBuildingCatToGuildSlot(int);
 int __cdecl gm_CheckStatLevel(int, int);
 
 int __cdecl gm_GetBuildingUiFlags(unsigned short* who, unsigned char* p, short* cmd)
@@ -15,7 +15,7 @@ int __cdecl gm_GetBuildingUiFlags(unsigned short* who, unsigned char* p, short* 
 	int i;
 
 	t = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*p];
-	lvl = gm_CheckStatLevel(*who, fcn_00507910((((BUILDING_PROTOTYPE*)t)->category)));
+	lvl = gm_CheckStatLevel(*who, gm_MapBuildingCatToGuildSlot((((BUILDING_PROTOTYPE*)t)->category)));
 	flags = 0x81;
 	if (*(unsigned short*) (p + 0x25) == *who) {
 		flags |= 0x103c;

@@ -14,7 +14,7 @@ extern int g_67a370;
 void __cdecl d3_TraverseSceneObjects(int, int, int, void*);
 #include "Develop/Units/d3/d3_d3d.h"
 
-void __cdecl fcn_00443230(int flag)
+void __cdecl d3_PrecacheAllSceneTextures(int flag)
 {
 	unsigned int i;
 

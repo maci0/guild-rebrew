@@ -20,7 +20,7 @@ extern float g_6628bc;
 typedef struct {
 	unsigned char type;
 	char rest[0x24c];
-} BldProt_497ec0;
+} BLD_PROT_TYPE_VIEW;
 
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl gm_GetSeasonTreasury(short*, unsigned char);
@@ -30,7 +30,7 @@ int __cdecl ai_PrepareBuildSite(int, short*, int, Cmd*, Cmd*, int);
 int __cdecl ai_StartKreditNehmen(int, short*, int, Cmd*, Cmd*);
 
 /* ADDRESS: GOLDTL 0x00497ec0 */
-int __cdecl fcn_00497ec0(int a0, short* entity, int a2, Cmd* request, Cmd* a4)
+int __cdecl ai_StartWohnsitzBauen(int a0, short* entity, int a2, Cmd* request, Cmd* a4)
 {
 	int n;
 	int chain[4] = {7, 6, 5, 4};
@@ -63,7 +63,7 @@ int __cdecl fcn_00497ec0(int a0, short* entity, int a2, Cmd* request, Cmd* a4)
 	do {
 		if (*(unsigned char*) p != 0) {
 			id = *(unsigned char*) p;
-			rec = (unsigned char*) &((BldProt_497ec0*) lpGebaeudePROT)[id];
+			rec = (unsigned char*) &((BLD_PROT_TYPE_VIEW*) lpGebaeudePROT)[id];
 			lo = 0;
 			hi = 0;
 			if (rec[0] > 0x1f) {
@@ -88,7 +88,7 @@ int __cdecl fcn_00497ec0(int a0, short* entity, int a2, Cmd* request, Cmd* a4)
 					q = *(unsigned char**) ((char*) entity + 0x170);
 					if (q != 0) {
 						id = *q;
-						rec = (unsigned char*) &((BldProt_497ec0*) lpGebaeudePROT)[id];
+						rec = (unsigned char*) &((BLD_PROT_TYPE_VIEW*) lpGebaeudePROT)[id];
 						if (rec[0] == 2 && !(q[0x5a] & 0x41)) {
 							t = rec[0x247];
 							if (t < 2 || t == 3) {
@@ -170,7 +170,7 @@ int __cdecl fcn_00497ec0(int a0, short* entity, int a2, Cmd* request, Cmd* a4)
 				q = *(unsigned char**) ((char*) entity + 0x170);
 				if (q != 0) {
 					id = *q;
-					if (((BldProt_497ec0*) lpGebaeudePROT)[id].type != 2)
+					if (((BLD_PROT_TYPE_VIEW*) lpGebaeudePROT)[id].type != 2)
 						return 0;
 					v = *(int*) ((char*) request + 4);
 					if (v - id != 1)
@@ -198,7 +198,7 @@ int __cdecl fcn_00497ec0(int a0, short* entity, int a2, Cmd* request, Cmd* a4)
 					*a4 = out;
 					return 0x11;
 				}
-				if (((BldProt_497ec0*) lpGebaeudePROT)[request->f1].type != 2)
+				if (((BLD_PROT_TYPE_VIEW*) lpGebaeudePROT)[request->f1].type != 2)
 					return 0;
 				if (!ai_PrepareBuildSite(a0, entity, a2, &cmd, &out, 1))
 					return 0;

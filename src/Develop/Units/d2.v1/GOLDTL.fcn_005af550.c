@@ -57,7 +57,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005af550 */
-int __cdecl fcn_005af550(int unused, char* param)
+int __cdecl d2_RunStadtwacheDispatchDialog(int unused, char* param)
 {
 	Packet pkt;
 	char buf[0x400];
@@ -132,7 +132,7 @@ int __cdecl fcn_005af550(int unused, char* param)
 				g_774654 = 1;
 			}
 		}
-	} while (main_RunFrameLoop((void*) fcn_005af550, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_RunStadtwacheDispatchDialog, 0x677c7) != 0);
 	d2_DestroyForm(dlg);
 	return flag;
 }

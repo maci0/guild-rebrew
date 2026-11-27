@@ -2,12 +2,12 @@
 
 #pragma optimize("y", off)
 
-int __cdecl fcn_004524e0(int, int, int, int, int, int);
+int __cdecl d3_CreateParticleSystem(int, int, int, int, int, int);
 void __cdecl d3_SetEffectPosition(void*, int);
 void __cdecl d3_SetEffectDirection(void*, void*, int);
 
 /* ADDRESS: GOLDTL 0x00454460 */
-int __cdecl fcn_00454460(int a0, int a1, int a2, int a3, int* a4, int a5, int* a6)
+int __cdecl d3_CreateParticleEmitter(int a0, int a1, int a2, int a3, int* a4, int a5, int* a6)
 {
 	int* s;
 
@@ -17,11 +17,11 @@ int __cdecl fcn_00454460(int a0, int a1, int a2, int a3, int* a4, int a5, int* a
 	s = 0;
 	v = *a6;
 	if (v == 0) {
-		s = (int*) fcn_004524e0(a2, a3, (int) a4, a5, a0, 0x452c60);
+		s = (int*) d3_CreateParticleSystem(a2, a3, (int) a4, a5, a0, 0x452c60);
 	} else if (v == 1) {
-		s = (int*) fcn_004524e0(a2, a3, (int) a4, a5, a0, 0x453470);
+		s = (int*) d3_CreateParticleSystem(a2, a3, (int) a4, a5, a0, 0x453470);
 	} else if (v == 2) {
-		s = (int*) fcn_004524e0(a2, a3, (int) a4, a5, a0, 0x453d80);
+		s = (int*) d3_CreateParticleSystem(a2, a3, (int) a4, a5, a0, 0x453d80);
 	}
 	if (s != 0) {
 		d3_SetEffectPosition(s, a1);

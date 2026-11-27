@@ -1,26 +1,26 @@
 typedef struct
 {
 	char b[0x4a4];
-} fcn_00449f90_Part;
+} D3_MODEL_PART;
 // SIZE 0x4a4
 
 typedef struct
 {
 	char pad000[0xf4];
-	fcn_00449f90_Part parts[3];
-	fcn_00449f90_Part extra;
-} fcn_00449f90_Mesh;
+	D3_MODEL_PART parts[3];
+	D3_MODEL_PART extra;
+} D3_MODEL_MESH;
 // SIZE 0x1384
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl d3_FindCachedModel(char* s);
 void __cdecl d3_AddObjectDrawData(char* o);
-void __cdecl fcn_00449ba0(char* o, void* part, char* name);
+void __cdecl d3_AttachModelPart(char* o, void* part, char* name);
 char __cdecl d3_FormatModelVariantName(char* a, int b, int mode, char* key, char* val);
 
 /* ADDRESS: GOLDTL 0x00449f90 */
-void __cdecl fcn_00449f90(char* o, void* part, char* name)
+void __cdecl d3_AttachCachedModelParts(char* o, void* part, char* name)
 {
 	int i;
 	int n;
@@ -30,22 +30,22 @@ void __cdecl fcn_00449f90(char* o, void* part, char* name)
 		if (d3_FindCachedModel(name) == 0) {
 			return;
 		}
-		if (*(fcn_00449f90_Mesh**) (o + 0x1ec) == 0) {
+		if (*(D3_MODEL_MESH**) (o + 0x1ec) == 0) {
 			d3_AddObjectDrawData(o);
 		}
-		fcn_00449ba0(o, part, name);
+		d3_AttachModelPart(o, part, name);
 		return;
 	}
 	d3_FormatModelVariantName(name, 0, 0, buf, 0);
 	if (d3_FindCachedModel(buf) == 0) {
 		return;
 	}
-	if (*(fcn_00449f90_Mesh**) (o + 0x1ec) == 0) {
+	if (*(D3_MODEL_MESH**) (o + 0x1ec) == 0) {
 		d3_AddObjectDrawData(o);
 	}
-	fcn_00449ba0(o, &(*(fcn_00449f90_Mesh**) (o + 0x1ec))->parts[0], buf);
+	d3_AttachModelPart(o, &(*(D3_MODEL_MESH**) (o + 0x1ec))->parts[0], buf);
 	if (d3_FormatModelVariantName(name, 0, -1, buf, 0) && d3_FindCachedModel(buf) != 0) {
-		fcn_00449ba0(o, &(*(fcn_00449f90_Mesh**) (o + 0x1ec))->extra, buf);
+		d3_AttachModelPart(o, &(*(D3_MODEL_MESH**) (o + 0x1ec))->extra, buf);
 	}
 	if ((d3_LODMode & 0x7f) == 1) {
 		n = 1;
@@ -54,7 +54,7 @@ void __cdecl fcn_00449f90(char* o, void* part, char* name)
 				break;
 			}
 			if (d3_FormatModelVariantName(name, 0, i, buf, 0) && d3_FindCachedModel(buf) != 0) {
-				fcn_00449ba0(o, &(*(fcn_00449f90_Mesh**) (o + 0x1ec))->parts[n], buf);
+				d3_AttachModelPart(o, &(*(D3_MODEL_MESH**) (o + 0x1ec))->parts[n], buf);
 				n++;
 			}
 		}

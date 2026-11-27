@@ -12,7 +12,7 @@ void __cdecl d3snd_StopObjectVoice(int, int);
 void __cdecl d3snd_StopSourceVoice(int);
 
 /* ADDRESS: GOLDTL 0x004c39b0 */
-void __cdecl fcn_004c39b0(void)
+void __cdecl snd_PlayMarketAmbient(void)
 {
 	int h;
 	int t;
@@ -31,7 +31,7 @@ void __cdecl fcn_004c39b0(void)
 }
 
 /* ADDRESS: GOLDTL 0x004c3a10 */
-void __cdecl fcn_004c3a10(void)
+void __cdecl snd_StopMarketAmbient(void)
 {
 	if (g_772d30 != 0) {
 		SetSoundControlValue(g_772d30, 0);

@@ -6,8 +6,8 @@ extern void* d3d_Device;
 extern int d3d_LastResult;
 
 int __cdecl d3d_LogResultError(char* source, int line, char* expression);
-void __cdecl fcn_00438780(void);
-void __cdecl fcn_00443230(int flag);
+void __cdecl d3d_EndScene(void);
+void __cdecl d3_PrecacheAllSceneTextures(int flag);
 void __cdecl d3_PrecacheObjectTextures(char* object);
 
 #ifdef REBREW_GOLD

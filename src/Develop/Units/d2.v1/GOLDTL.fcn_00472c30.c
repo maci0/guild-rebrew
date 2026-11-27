@@ -5,7 +5,7 @@ void __cdecl d2_Plot(int, int, unsigned char, unsigned char, unsigned char);
  * a6. Axis-parallel segments become straight runs, the rest use the
  * Bresenham error accumulator. */
 /* ADDRESS: GOLDTL 0x00472c30 */
-void __cdecl fcn_00472c30(int x0, int y0, int x1, int y1, unsigned char a4, unsigned char a5, unsigned char a6)
+void __cdecl d2_DrawLine(int x0, int y0, int x1, int y1, unsigned char a4, unsigned char a5, unsigned char a6)
 {
 	int n;
 	int sx;

@@ -21,7 +21,7 @@ void __cdecl hst_SplitFormatPrefix(char*, char*, int*, int*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 int __cdecl atoi(char*);
 #include "Develop/DieGildeAddOn/game/spiel.h"
-int __cdecl fcn_004ae0f0(int);
+int __cdecl hst_IsCandidateUnlisted(int);
 
 int __cdecl gm_IsSlotActivePerson(unsigned short a1);
 
@@ -98,7 +98,7 @@ int __cdecl hst_SelectRichestPerson(int mode, int* pairs, int idx, char* text, v
 	for (i = 0; i < 768; i++) {
 		if (gm_IsSlotActivePerson((unsigned short) i) != 0 && (n == 0 || (*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].gender) == want)) {
 			v = gm_WalkEntityChain((unsigned short) i);
-			if (v > best && fcn_004ae0f0((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id)) != 0) {
+			if (v > best && hst_IsCandidateUnlisted((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id)) != 0) {
 				best = v;
 				r = ((Rec21c*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]);
 			}

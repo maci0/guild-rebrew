@@ -38,7 +38,7 @@ extern char g_14cf950;
 extern char g_7f4ca4[];
 extern pos14_7f4c00 gm_GameTime;
 
-void __cdecl fcn_005338a0(void);
+void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void*, int);
 char* __cdecl RegisterStatusText(char* name, char* path, int arg);
 void __cdecl d2_OpenContactEinkaufPanel(char* e);
@@ -60,7 +60,7 @@ void __cdecl d2_RunWirtshausContactMenu(char* target, char* actor)
 	char* p2;
 	char* p3;
 
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	while (main_RunFrameLoop(d2_RunWirtshausContactMenu, 0x67fff)) {
 		d2_OpenContactEinkaufPanel(target);
 		p1 = RegisterStatusText("contact_WUERFELSPIEL", g_14ab4ec, 0x16);

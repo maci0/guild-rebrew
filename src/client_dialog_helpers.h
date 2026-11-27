@@ -104,7 +104,7 @@ extern unsigned char* lpGebaeudeINST;
 
 /* Graph and frame drawing. fcn_00472c30 draws one line segment.
  * Matched sibling 0x005d3c20. */
-void __cdecl fcn_00472c30(int x0, int y0, int x1, int y1, int r, int g, int b);
+void __cdecl d2_DrawLine(int x0, int y0, int x1, int y1, int r, int g, int b);
 
 /* Graph drawers, all matched RELOC. */
 void __cdecl d2_DrawYellowHistoryGraph(GRAPH_VALUE cur, int w, int h);
@@ -153,7 +153,7 @@ float __cdecl gm_GetSeasonPrice(int id, unsigned char kind);
  * action code; ai_StartKreditNehmen (GoldTL 0x0049e900) rates them and fills the two action packets;
  * fcn_004a4bb0 checks whether the unit can start the action. Types and
  * argument shapes come from their own definitions; see conflicts above. */
-int __cdecl fcn_00497ec0(int action, short* target, int a2, Cmd* out1,
+int __cdecl ai_StartWohnsitzBauen(int action, short* target, int a2, Cmd* out1,
     Cmd* out2);
 int __cdecl ai_StartKreditNehmen(int code, short* target, char* ent, char* out1,
     char* out2);

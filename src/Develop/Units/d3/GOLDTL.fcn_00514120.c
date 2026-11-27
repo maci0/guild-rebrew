@@ -43,14 +43,14 @@ void __cdecl d3_SelectSceneContext(int, int);
 char __cdecl d3_LoadCityScene(char*);
 void __cdecl srv_InitBuildingTypeTable(void);
 void __cdecl cm_InitCrimeRecords(void);
-int __cdecl fcn_0051e070(void);
+int __cdecl main_GetLanguage(void);
 void* __cdecl d3_FindSceneObject(int, int, int, char*);
 
 void __cdecl d3_TraverseSceneObjects(int, int, int, void*);
 void __cdecl gm_BindBuildingSceneObjects(void);
 void __cdecl d3_ResolveSceneObjectProtoId(void);
 void __cdecl d3_InheritSceneNodeData(void);
-void __cdecl fcn_00513d40(char*);
+void __cdecl d3_PlaceBuildingProxyBoxes(char*);
 void __cdecl cm_BeginCommandSync(void);
 void __cdecl cm_RequestAllocRaum(int, int, int, int);
 int __cdecl cm_RequestAllocSpieler(int, int, int, short, int, unsigned char, int, int);
@@ -71,7 +71,7 @@ void* __cdecl gm_AddObjekt(void);
 void __cdecl gm_UpdateAllTownSeasonPrices(void);
 void __cdecl gm_InitTownGoodsTable(int);
 void __cdecl gm_UpdateMarketStockSlots(int);
-int __cdecl fcn_0045b700(Device*, int, int);
+int __cdecl d3sm_CreateMap(Device*, int, int);
 
 int __cdecl gm_LoadCityMap(char* map)
 {
@@ -88,7 +88,7 @@ int __cdecl gm_LoadCityMap(char* map)
 	}
 	srv_InitBuildingTypeTable();
 	cm_InitCrimeRecords();
-	if (fcn_0051e070() != 0) {
+	if (main_GetLanguage() != 0) {
 		folder = d3_FindSceneObject(0, 0x100, 0, "ordner_CITIES_GER");
 	} else {
 		folder = d3_FindSceneObject(0, 0x100, 0, "ordner_CITIES_INT");
@@ -99,22 +99,22 @@ int __cdecl gm_LoadCityMap(char* map)
 	d3_TraverseSceneObjects(g_67a370, 0, 0x140, gm_BindBuildingSceneObjects);
 	d3_TraverseSceneObjects(g_67a370, 0, 0x40, d3_ResolveSceneObjectProtoId);
 	d3_TraverseSceneObjects(g_67a370, 0, 0x20, d3_InheritSceneNodeData);
-	fcn_00513d40("bk_BRUNNEN");
-	fcn_00513d40("bk_GEFAENGNIS");
-	fcn_00513d40("bk_HANDWERK");
-	fcn_00513d40("bk_KIRCHE_KL");
-	fcn_00513d40("bk_KIRCHE_MT");
-	fcn_00513d40("bk_KIRCHE_GR");
-	fcn_00513d40("bk_RATHAUS");
-	fcn_00513d40("bk_STADTWACHE");
-	fcn_00513d40("bk_WIRTSHAUS_KL");
-	fcn_00513d40("bk_WIRTSHAUS_GR");
-	fcn_00513d40("bk_WOHNSITZ_KL");
-	fcn_00513d40("bk_WOHNSITZ_GR");
-	fcn_00513d40("bk_ZUNFTHAUS");
-	fcn_00513d40("bk_RAUBRITTERFESTE");
-	fcn_00513d40("bk_DOMIZIL");
-	fcn_00513d40("bk_STATUEN");
+	d3_PlaceBuildingProxyBoxes("bk_BRUNNEN");
+	d3_PlaceBuildingProxyBoxes("bk_GEFAENGNIS");
+	d3_PlaceBuildingProxyBoxes("bk_HANDWERK");
+	d3_PlaceBuildingProxyBoxes("bk_KIRCHE_KL");
+	d3_PlaceBuildingProxyBoxes("bk_KIRCHE_MT");
+	d3_PlaceBuildingProxyBoxes("bk_KIRCHE_GR");
+	d3_PlaceBuildingProxyBoxes("bk_RATHAUS");
+	d3_PlaceBuildingProxyBoxes("bk_STADTWACHE");
+	d3_PlaceBuildingProxyBoxes("bk_WIRTSHAUS_KL");
+	d3_PlaceBuildingProxyBoxes("bk_WIRTSHAUS_GR");
+	d3_PlaceBuildingProxyBoxes("bk_WOHNSITZ_KL");
+	d3_PlaceBuildingProxyBoxes("bk_WOHNSITZ_GR");
+	d3_PlaceBuildingProxyBoxes("bk_ZUNFTHAUS");
+	d3_PlaceBuildingProxyBoxes("bk_RAUBRITTERFESTE");
+	d3_PlaceBuildingProxyBoxes("bk_DOMIZIL");
+	d3_PlaceBuildingProxyBoxes("bk_STATUEN");
 	cm_BeginCommandSync();
 	cm_RequestAllocRaum(0x44, -1, 0, 0);
 	cm_RequestAllocRaum(0x45, -1, 0, 0);
@@ -166,11 +166,11 @@ int __cdecl gm_LoadCityMap(char* map)
 	d3_SelectSceneContext(1, 0);
 	d3_SelectSceneContext(0, 0);
 	if (((Device*)g_6b8300)->kind == 0x80) {
-		((Scene*) g_67a370)->view = fcn_0045b700(((Device*)g_6b8300), 0x100, 2);
+		((Scene*) g_67a370)->view = d3sm_CreateMap(((Device*)g_6b8300), 0x100, 2);
 	} else if (((Device*)g_6b8300)->kind == 0x40) {
-		((Scene*) g_67a370)->view = fcn_0045b700(((Device*)g_6b8300), 0x80, 2);
+		((Scene*) g_67a370)->view = d3sm_CreateMap(((Device*)g_6b8300), 0x80, 2);
 	} else {
-		((Scene*) g_67a370)->view = fcn_0045b700(((Device*)g_6b8300), 0x100, 2);
+		((Scene*) g_67a370)->view = d3sm_CreateMap(((Device*)g_6b8300), 0x100, 2);
 	}
 	return 0;
 }

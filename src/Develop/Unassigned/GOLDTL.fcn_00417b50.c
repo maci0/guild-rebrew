@@ -10,7 +10,7 @@ typedef struct {
 	unsigned char d;
 } Bytes4;
 
-int* __cdecl fcn_004524e0(int n, const char* name, Bytes4 f, float a, int b, void (__cdecl* cb)(void));
+int* __cdecl d3_CreateParticleSystem(int n, const char* name, Bytes4 f, float a, int b, void (__cdecl* cb)(void));
 void __cdecl d3_UpdateBloodSprayParticles(void);
 
 int* __cdecl d3_SpawnBlutEffect(int a1, int a2, int v0, int v1, int v2, int v3)
@@ -22,7 +22,7 @@ int* __cdecl d3_SpawnBlutEffect(int a1, int a2, int v0, int v1, int v2, int v3)
 	memset(&f, 0, sizeof(f));
 	f.c |= 2;
 	f.a = 0x7f;
-	s = fcn_004524e0(200, "Blut", f, 1.0f, a1, d3_UpdateBloodSprayParticles);
+	s = d3_CreateParticleSystem(200, "Blut", f, 1.0f, a1, d3_UpdateBloodSprayParticles);
 	if (s != 0) {
 		s[8] = a2 * 2 | 1;
 		s[0] = v0;

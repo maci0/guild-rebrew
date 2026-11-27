@@ -3,7 +3,7 @@
 
 void __cdecl m_FreeTracked(void*);
 
-void __cdecl fcn_004bbd50(void)
+void __cdecl gm_FreeAmbientAnimalSlots(void)
 {
 	if (g_7728e8 != 0) {
 		m_FreeTracked(g_7728e8);

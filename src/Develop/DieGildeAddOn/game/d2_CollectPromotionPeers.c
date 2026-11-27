@@ -1,6 +1,6 @@
 int __cdecl amt_ListPromotionOffices(unsigned char* a1, int max, int* out);
 int __cdecl d2_BuildPersonStatusDesc(void* sel);
-int __cdecl fcn_005cf720(unsigned short a, unsigned short b, int c, int d);
+int __cdecl gm_MatchesTargetFilter(unsigned short a, unsigned short b, int c, int d);
 
 /* ADDRESS: GOLDTL 0x005cc100 */
 int __cdecl d2_CollectPromotionPeers(char* entity, unsigned int capacity, char* results, int query)
@@ -52,7 +52,7 @@ int __cdecl d2_CollectPromotionPeers(char* entity, unsigned int capacity, char* 
 					*(char**) out = ent;
 					*(int*) (out + 0x34) = ids[i];
 					d2_BuildPersonStatusDesc(out);
-					*(int*) (out + 0x30) = fcn_005cf720(*(unsigned short*) entity,
+					*(int*) (out + 0x30) = gm_MatchesTargetFilter(*(unsigned short*) entity,
 						*(unsigned short*) *(char**) out, query, 0);
 					count++;
 					out += 0x38;

@@ -8,7 +8,7 @@ extern int g_14ad0e8;
 extern int g_7746a0;
 extern int g_6a25f0;
 
-void __cdecl fcn_005338a0(void);
+void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d3_UpdateBuildingInteriorState(void);
@@ -16,7 +16,7 @@ void __cdecl d2_HandleErnten(char*, int);
 void __cdecl d2_OpenTransportPanel(char*);
 void __cdecl d2_ShowLagerOptions(char*, int);
 void __cdecl d2_RunMetalProduktionDialog(char*);
-void __cdecl fcn_005c5b10(char*);
+void __cdecl d2_RunGelageDialog(char*);
 void __cdecl d2_RunWorkerTrainingDialog(char*);
 void __cdecl ob_HandleBepflanzung(char*);
 
@@ -36,7 +36,7 @@ void __cdecl d2_RunHolzfaellerInteriorHud(char* e)
 	gelage = 0;
 	sp = 0;
 	zs = 0;
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	x = *(int*) (e + 0x71);
 	while (main_RunFrameLoop((void*) d2_RunHolzfaellerInteriorHud, 0x67fff) != 0) {
 		if (g_7746d8 & 0x200) {
@@ -57,7 +57,7 @@ void __cdecl d2_RunHolzfaellerInteriorHud(char* e)
 			} else if (g_7746a0 == holz) {
 				d2_RunMetalProduktionDialog(e);
 			} else if (g_7746a0 == gelage) {
-				fcn_005c5b10(e);
+				d2_RunGelageDialog(e);
 			} else if (g_7746a0 == zs) {
 				d2_RunWorkerTrainingDialog(e);
 			} else if (g_7746a0 == sp) {

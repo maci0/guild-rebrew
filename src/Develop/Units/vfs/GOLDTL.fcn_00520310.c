@@ -3,7 +3,7 @@ extern char g_868060[];
 extern unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream);
 
 /* ADDRESS: GOLDTL 0x00520310 */
-unsigned int __cdecl fcn_00520310(unsigned int stream)
+unsigned int __cdecl ls_SaveMarketsAndSeasons(unsigned int stream)
 {
 	char* row;
 	char* p;

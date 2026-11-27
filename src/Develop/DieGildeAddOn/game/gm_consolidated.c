@@ -28,7 +28,7 @@ void __cdecl cm_RequestModifyHealth(int id, int k);
 void __cdecl cm_SendTraceEnd(char* s);
 
 /* ADDRESS: GOLDTL 0x004aaa60 */
-int __cdecl fcn_004aaa60(char* actor, int a2, char* x)
+int __cdecl aip_ExecPamphlet(char* actor, int a2, char* x)
 {
 	char msg[0xf8];
 	char* target;
@@ -58,7 +58,7 @@ int __cdecl fcn_004aaa60(char* actor, int a2, char* x)
 }
 
 /* ADDRESS: GOLDTL 0x004aab30 */
-int __cdecl fcn_004aab30(char* actor, int a2, char* x)
+int __cdecl aip_ExecDrohen(char* actor, int a2, char* x)
 {
 	char msg[0xf8];
 	float f;

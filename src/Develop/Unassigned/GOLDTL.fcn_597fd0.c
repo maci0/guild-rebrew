@@ -4,10 +4,10 @@
 
 int __cdecl main_RunFrameLoop(void*, int);
 
-void __cdecl fcn_0058f700(void)
+void __cdecl d2_RunDefaultBuildingInterior(void)
 {
 	int r;
 	do {
-		r = main_RunFrameLoop((void*) fcn_0058f700, 0x67fff);
+		r = main_RunFrameLoop((void*) d2_RunDefaultBuildingInterior, 0x67fff);
 	} while (r != 0);
 }

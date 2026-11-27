@@ -39,7 +39,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl d2_SetElementEnabled(int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
-void __cdecl fcn_0058b030(char* a, struct seldlg* d)
+void __cdecl d2_InitGraveyardSelectionList(char* a, struct seldlg* d)
 {
 	char* s;
 	int i;

@@ -7,7 +7,7 @@ extern char g_6b5c60[];
 
 void __cdecl cut_FadeToBlack(void);
 void __cdecl sb_StopVoice(int, int);
-void __cdecl fcn_004230e0(int);
+void __cdecl sb_ReleaseSampleBank(int);
 void __cdecl d2_DestroyForm(int);
 void __cdecl evt_StopScriptIfActive(int);
 int __cdecl evt_StartGfxScript(char*, char*);
@@ -21,7 +21,7 @@ int __cdecl cut_ReleaseSceneContexts(int* scene)
 	if (scene[3] != 0)
 		sb_StopVoice(scene[3], 0);
 	scene[3] = 0;
-	fcn_004230e0(scene[2]);
+	sb_ReleaseSampleBank(scene[2]);
 	if (scene[1] != -1)
 		d2_DestroyForm(scene[1]);
 	if (scene[0] != -1)

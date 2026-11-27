@@ -14,19 +14,19 @@ extern int g_67a370;
 #endif
 
 // SIZE 0x84
-struct list_514d80 {
+struct FACKEL_OBJ_LIST {
 	char* a[32];
 	int n;
 };
 
-void __cdecl d3_VisitSceneObjects(int, int, int, void*, struct list_514d80*);
+void __cdecl d3_VisitSceneObjects(int, int, int, void*, struct FACKEL_OBJ_LIST*);
 void __cdecl d3_ReparentObject(char*, int);
 
-char __cdecl d3_CollectFackelObjects(char*, struct list_514d80*);
+char __cdecl d3_CollectFackelObjects(char*, struct FACKEL_OBJ_LIST*);
 
-void __cdecl fcn_00514d80(int x)
+void __cdecl d3_ReparentFackelLights(int x)
 {
-	struct list_514d80 l;
+	struct FACKEL_OBJ_LIST l;
 	char* o;
 	char* next;
 	int i;

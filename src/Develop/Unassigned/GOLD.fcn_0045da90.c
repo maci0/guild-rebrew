@@ -1,4 +1,4 @@
-void __cdecl fcn_0045d7f0(char* owner, char* node);
+void __cdecl d3_UnlinkSkyLayer(char* owner, char* node);
 void __cdecl m_FreeTracked(void* p);
 
 /* ADDRESS: GOLD 0x0045da90 */
@@ -9,7 +9,7 @@ void __cdecl d3_DestroySky(char* owner)
 		return;
 	}
 	while ((node = *(char**) (owner + 0xac0)) != 0) {
-		fcn_0045d7f0(owner, node);
+		d3_UnlinkSkyLayer(owner, node);
 	}
 	m_FreeTracked(owner);
 }

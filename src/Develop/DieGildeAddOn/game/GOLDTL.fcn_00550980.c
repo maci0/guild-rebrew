@@ -35,7 +35,7 @@ extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl gm_CompareGameTime(pos14_7f4c00*, pos14_7f4c00*);
-void __cdecl fcn_00545780(char*);
+void __cdecl d2_CloseActionPopup(char*);
 void __cdecl he_FreeAction(char*);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl d2_CreateActionPopupSlot(char*, int, int, char*, int);
@@ -52,7 +52,7 @@ void __cdecl he_RunMeisterpruefungExam(char* u)
 
 	if (*(int*) (u + 0x70) == -1 || *(int*) (u + 0x70) == -2) {
 		if (*(char**) (u + 0x74) != 0) {
-			fcn_00545780(u);
+			d2_CloseActionPopup(u);
 		}
 		he_FreeAction(u);
 		return;
@@ -79,7 +79,7 @@ void __cdecl he_RunMeisterpruefungExam(char* u)
 		break;
 	case 1:
 		if (gm_CompareGameTime(&gm_GameTime, (pos14_7f4c00*) (u + 0x52)) > 0) {
-			fcn_00545780(u);
+			d2_CloseActionPopup(u);
 			he_FreeAction(u);
 			return;
 		}
@@ -101,12 +101,12 @@ void __cdecl he_RunMeisterpruefungExam(char* u)
 			m.other = v;
 			m.owner = ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id;
 			cm_SendCopyEntityData(&m);
-			fcn_00545780(u);
+			d2_CloseActionPopup(u);
 			he_FreeAction(u);
 			return;
 		}
 		if (g_100f1dc == 1) {
-			fcn_00545780(u);
+			d2_CloseActionPopup(u);
 			he_FreeAction(u);
 			return;
 		}

@@ -7,7 +7,7 @@ extern int g_6b86dc;
 
 
 void __cdecl d3_TraverseSceneObjects(int, int, int, void*);
-void __cdecl fcn_00515f30(void);
+void __cdecl d3snd_StopSceneObjectSfxVoice(void);
 void __cdecl d3snd_StopAllAmbientVoices(void);
 char* __cdecl evt_FindScriptById(int);
 void __cdecl evt_RequestScriptExit(char*);
@@ -19,7 +19,7 @@ void __cdecl d3_CleanupBuildingScene(void)
 {
 	char* p;
 
-	d3_TraverseSceneObjects(g_67a370, 0, 0xa0, (void*) fcn_00515f30);
+	d3_TraverseSceneObjects(g_67a370, 0, 0xa0, (void*) d3snd_StopSceneObjectSfxVoice);
 	d3snd_StopAllAmbientVoices();
 	g_6b86d8 = 0x400;
 	g_6b86dc = 0x40;

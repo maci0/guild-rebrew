@@ -2,7 +2,7 @@
 
 int __cdecl sb_LoadSampleBank(void);
 
-int __cdecl fcn_004e4ac0(void)
+int __cdecl sb_LoadSampleBankIfAllowed(void)
 {
 	if (*(int*) 0x772f3c != 0) {
 		return 0;

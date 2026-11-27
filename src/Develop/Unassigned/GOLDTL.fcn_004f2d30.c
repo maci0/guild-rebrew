@@ -18,7 +18,7 @@ typedef struct
 #pragma pack(pop)
 // SIZE 0x20
 
-int __cdecl fcn_004c6c30(void*);
+int __cdecl gv_EnqueueSlotCommand(void*);
 
 int __cdecl gv_RequestUpdateProductionProgress(int building, int slot_type, int slot_index, int delta)
 {
@@ -34,5 +34,5 @@ int __cdecl gv_RequestUpdateProductionProgress(int building, int slot_type, int 
 	msg.f10 = (char) slot_index;
 	msg.f11 = 0;
 	msg.f13 = delta;
-	return fcn_004c6c30(&msg);
+	return gv_EnqueueSlotCommand(&msg);
 }

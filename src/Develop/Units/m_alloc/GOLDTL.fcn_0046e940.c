@@ -82,7 +82,7 @@ extern int g_67d390;
 extern int g_67d3a0;
 extern char g_1015f40[];
 
-int __cdecl fcn_004770a0(int* p, int kind);
+int __cdecl d2_CreateSurface(int* p, int kind);
 void __cdecl d2_ClearSurface(int h);
 int __cdecl d2_AllocateElement(void);
 int __cdecl m_alloc(int size, char* tag);
@@ -141,7 +141,7 @@ found:
 		memset(v9, 0, sizeof(v9));
 		v9[1] = width;
 		v9[2] = height;
-		h = fcn_004770a0(v9, 0xb);
+		h = d2_CreateSurface(v9, 0xb);
 		rec->x30 = h;
 		if (h == 0) {
 			return 0;
@@ -151,7 +151,7 @@ found:
 		memset(v9, 0, sizeof(v9));
 		v9[1] = rec->xc;
 		v9[2] = rec->x10;
-		h = fcn_004770a0(v9, 0xb);
+		h = d2_CreateSurface(v9, 0xb);
 		rec->x34 = h;
 		if (h == 0) {
 			return 0;
@@ -162,7 +162,7 @@ found:
 		v9[1] = rec->xc;
 		v9[2] = rec->x10;
 		v9[10] = 0x15;
-		h = fcn_004770a0(v9, 10);
+		h = d2_CreateSurface(v9, 10);
 		rec->x38 = h;
 		d2_ClearSurface(h);
 		if (rec->x38 == 0) {

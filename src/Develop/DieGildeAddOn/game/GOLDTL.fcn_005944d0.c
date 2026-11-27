@@ -8,7 +8,7 @@ typedef struct { unsigned char kind; unsigned char unknown01[0x24c]; } BUILDING_
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 int __cdecl d2_CheckOwnerBlocked(void*);
-void __cdecl fcn_0057e880(int, int, int, int);
+void __cdecl d2_DispatchTutorialInput(int, int, int, int);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_InitPlayerBar(void*, unsigned int);
@@ -16,7 +16,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl d2_ResetBuildingUiSlots(void);
 void __cdecl d2_DrawPanelFrame(int, int, int);
-int __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
+int __cdecl d2_CreateWindowScrollbar(int, int, int, int, int, int*, int*, int*);
 int __cdecl d2_GetFormWindow(int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl fcn_00502cd0(int, int, int, ...);
@@ -76,7 +76,7 @@ unsigned int __cdecl d2_RunProduktionDialog(unsigned char* building)
 	if (item) {
 		return 0;
 	}
-	fcn_0057e880(0x1f, 0, 0, 0);
+	d2_DispatchTutorialInput(0x1f, 0, 0, 0);
 	window = d2_LoadForm(0, 0, (char*) 0x6aa148);
 	saved = window;
 	d2_CenterDialogWindows(window);
@@ -114,7 +114,7 @@ unsigned int __cdecl d2_RunProduktionDialog(unsigned char* building)
 		break;
 	}
 	d2_DrawPanelFrame(d2_CurrentWindowId, id, 0x742);
-	fcn_00533f40(0x270, 0x15e, d2_CurrentWindowId,
+	d2_CreateWindowScrollbar(0x270, 0x15e, d2_CurrentWindowId,
 	             d2_GetFormWindow(window, 2), 0x78, &rect2, &rect1, &listControl);
 	*(unsigned int*) ((int) g_1015ea0 + 0x84 + listControl * 0x2f4) = 0x54;
 	d2_SetOverlayAnimation(0, 0);
@@ -260,7 +260,7 @@ unsigned int __cdecl d2_RunProduktionDialog(unsigned char* building)
 											}
 										}
 										found = cm_GetCommandResult(found);
-										fcn_0057e880(0x20, 0, 0, 0);
+										d2_DispatchTutorialInput(0x20, 0, 0, 0);
 									}
 found_row:
 									d3snd_PlayWorkerOrderVoice();
@@ -430,7 +430,7 @@ after_input:
 				                            *(int*) (d2_CurrentWindowId * 0x3cc + 0x10161b4));
 				d2_DestroyForm(saved);
 				d2_RestoreHudAfterDialog();
-				fcn_0057e880(0x1f, 0, 1, 0);
+				d2_DispatchTutorialInput(0x1f, 0, 1, 0);
 				return 0;
 			}
 		}

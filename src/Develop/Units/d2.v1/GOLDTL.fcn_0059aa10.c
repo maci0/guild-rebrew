@@ -32,7 +32,7 @@ extern char s_68b7ac[];
 extern pos14_7f4c00 gm_GameTime;
 
 int __cdecl d2_TutorialAllowsFlag(int);
-void __cdecl fcn_0057e880(int, int, int, int);
+void __cdecl d2_DispatchTutorialInput(int, int, int, int);
 void* __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl d2_OpenDependencyDiagram(char*, char*, void*);
 int __cdecl d2_ShowModalMessageBox(char*, int);
@@ -87,7 +87,7 @@ void __cdecl d2_RunTechTreeDialog(char* a0, int a1)
 	if (a0 == g_7746c4) {
 		if (!d2_TutorialAllowsFlag(0x200))
 			return;
-		fcn_0057e880(0x11, (int) a0, 0, a1);
+		d2_DispatchTutorialInput(0x11, (int) a0, 0, a1);
 	}
 	house = (char *)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) g_774970];
 	q = fcn_00502cd0(*(int*) (a0 + 0x5d), 1, 0, a1);
@@ -162,7 +162,7 @@ void __cdecl d2_RunTechTreeDialog(char* a0, int a1)
 
 
 							if (ok && d2_ShowModalMessageBox(buf, 1)) {
-								fcn_0057e880(0x2b, (int) a0, 0, sel);
+								d2_DispatchTutorialInput(0x2b, (int) a0, 0, sel);
 								cm_SendLogAction(s_6aa328);
 								if (*(unsigned short*) (a0 + 0x27) != *(unsigned short*) gm_CityEntity) {
 									cm_RequestMoveCredits(-1, *(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) *(unsigned short*) (a0 + 0x27)] + 4), (char) g_773d75, amount);
@@ -224,5 +224,5 @@ tail:
 	d2_CloseDependencyDiagram();
 	g_7746f8 = 0;
 	if (a0 == g_7746c4)
-		fcn_0057e880(0x11, (int) a0, 1, a1);
+		d2_DispatchTutorialInput(0x11, (int) a0, 1, a1);
 }

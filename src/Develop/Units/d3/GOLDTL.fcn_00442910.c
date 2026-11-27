@@ -1,44 +1,44 @@
 
 
-typedef struct Inner0442910 {
+typedef struct MODEL_SUBMESH_INFO {
 	char pad0[0x1e4];
 	unsigned int count;
-} Inner0442910;
+} MODEL_SUBMESH_INFO;
 
-typedef struct Slot0442910 {
-	Inner0442910* inner;
+typedef struct MODEL_LOD_SLOT {
+	MODEL_SUBMESH_INFO* inner;
 	int** tex;
 	char pad8[0x4a4 - 8];
-} Slot0442910;
+} MODEL_LOD_SLOT;
 // SIZE 0x4a4
 
-typedef struct Ov0442910 {
+typedef struct MODEL_LOD_SET {
 	char pad0[0x40c];
-	Slot0442910 slots[3];
+	MODEL_LOD_SLOT slots[3];
 	char pad11f8[0x163c - 0x11f8];
 	unsigned char count;
-} Ov0442910;
+} MODEL_LOD_SET;
 
-typedef struct Obj0442910 {
+typedef struct MODEL_SCENE_OBJ {
 	char pad0[0x1ec];
-	Ov0442910* ov;
-} Obj0442910;
+	MODEL_LOD_SET* ov;
+} MODEL_SCENE_OBJ;
 
-Obj0442910* __cdecl d3_SpawnObject(int kind, int id);
-void __cdecl d3_AttachSceneNode(Obj0442910* parent, Obj0442910* o);
+MODEL_SCENE_OBJ* __cdecl d3_SpawnObject(int kind, int id);
+void __cdecl d3_AttachSceneNode(MODEL_SCENE_OBJ* parent, MODEL_SCENE_OBJ* o);
 int __cdecl d3_FindCachedModel(int id);
 void __cdecl d3_LoadModel(int a, int b);
-void __cdecl fcn_00449f90(Obj0442910* o, int z, int id);
+void __cdecl d3_AttachCachedModelParts(MODEL_SCENE_OBJ* o, int z, int id);
 void __cdecl fcn_0045ce90(int* t);
-void __cdecl d3_SetNodePosition(Obj0442910* o, int a);
-void __cdecl d3_SetObjectRotation(Obj0442910* o, int a);
-void __cdecl fcn_00439aa0(Obj0442910* o);
-void __cdecl d3_DisposeObject(Obj0442910* o);
+void __cdecl d3_SetNodePosition(MODEL_SCENE_OBJ* o, int a);
+void __cdecl d3_SetObjectRotation(MODEL_SCENE_OBJ* o, int a);
+void __cdecl fcn_00439aa0(MODEL_SCENE_OBJ* o);
+void __cdecl d3_DisposeObject(MODEL_SCENE_OBJ* o);
 
-Obj0442910* __cdecl fcn_00442910(Obj0442910* parent, int a, int b, int id)
+MODEL_SCENE_OBJ* __cdecl fcn_00442910(MODEL_SCENE_OBJ* parent, int a, int b, int id)
 {
-	Obj0442910* o;
-	Ov0442910* ov;
+	MODEL_SCENE_OBJ* o;
+	MODEL_LOD_SET* ov;
 	int** t;
 	unsigned int n;
 	unsigned int i;
@@ -53,7 +53,7 @@ Obj0442910* __cdecl fcn_00442910(Obj0442910* parent, int a, int b, int id)
 	if (d3_FindCachedModel(id) == 0) {
 		d3_LoadModel(id, id);
 	}
-	fcn_00449f90(o, 0, id);
+	d3_AttachCachedModelParts(o, 0, id);
 	ov = o->ov;
 	if (ov != 0 && ov->slots[0].inner != 0) {
 		for (i = 0; i < ov->count; i++) {

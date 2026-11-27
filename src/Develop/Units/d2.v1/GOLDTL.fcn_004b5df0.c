@@ -50,7 +50,7 @@ int __cdecl cm_RequestSysMessage(int, Req*);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl cm_StepCommandQueue(void);
 void __cdecl d2_DestroyForm(int);
-int* __cdecl fcn_004b3d80(int a, int b, int c);
+int* __cdecl gm_AllocRandomMissionJob(int a, int b, int c);
 void __cdecl d2_ShowMissionSpecDialog(int a1, int flags);
 void __cdecl main_ExitToGameLoop(int flags);
 
@@ -129,7 +129,7 @@ void __cdecl d2_RunMissionDialog(int flags)
 	} while (main_RunFrameLoop(d2_RunMissionDialog, mode) != 0);
 	d2_DestroyForm(dlg);
 	if (done) {
-		p = fcn_004b3d80(ent->entity_id, level, 1);
+		p = gm_AllocRandomMissionJob(ent->entity_id, level, 1);
 		m2.id = ent->entity_id;
 		m2.x10 = 0;
 		h = cm_RequestSysMessage(10, &m2);

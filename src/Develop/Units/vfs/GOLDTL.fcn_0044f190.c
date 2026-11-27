@@ -5,7 +5,7 @@ extern struct VFS_DIR* g_6b7fdc;
 
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
 int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream);
-int __cdecl fcn_0044d770(void*);
+int __cdecl vfs_ReadStreamToken(void*);
 int __cdecl fcn_004011f0(void* stream, void* dst);
 int __cdecl vfs_fseek(void*, int, int);
 #include "Develop/Units/vfs/vfs.h"
@@ -24,7 +24,7 @@ void* __cdecl vfs_OpenFastChunk(char* name)
 	}
 	vfs_ReadData((char*) &magic, 4, 1, h);
 	for (;;) {
-		t = fcn_0044d770(h);
+		t = vfs_ReadStreamToken(h);
 		if (t == 0x2d) {
 			fcn_004011f0(h, &size);
 			fcn_004011f0(h, &id);

@@ -3,7 +3,7 @@ extern int g_67530c;
 extern char __cdecl SelectTextureSet(void* e, void* o, unsigned char lod, char refresh);
 
 /* ADDRESS: GOLDTL 0x004fdcf0 */
-void __cdecl fcn_004fdcf0(int* a0)
+void __cdecl d3_UpdateEntityTextureVariant(int* a0)
 {
     char* obj;
     char* ctx;

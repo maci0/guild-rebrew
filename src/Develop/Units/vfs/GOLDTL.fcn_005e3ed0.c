@@ -8,7 +8,7 @@ void __cdecl d2_SetBackdropResource(int);
 void __cdecl ls_CaptureSavePreview(void);
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
 unsigned char* __cdecl m_alloc(int, char*);
-void __cdecl fcn_0041bb70(int, unsigned char*, unsigned char*, unsigned char*);
+void __cdecl gfx_UnpackPixelRgb(int, unsigned char*, unsigned char*, unsigned char*);
 int __cdecl vfs_fwrite(void*, int, int, void*);
 void __cdecl m_FreeTracked(void*);
 #include "Develop/Units/vfs/vfs.h"
@@ -29,7 +29,7 @@ void __cdecl ls_WriteSavePreviewPixels(int previewModeArg, char* name)
 		buf = m_alloc(0xe100, g_6a23b0);
 		for (y = 0; y < 120; y++) {
 			for (x = 0; x < 160; x++) {
-				fcn_0041bb70(ls_SavePreviewPixels[n], &buf[n * 3], &buf[n * 3 + 1], &buf[n * 3 + 2]);
+				gfx_UnpackPixelRgb(ls_SavePreviewPixels[n], &buf[n * 3], &buf[n * 3 + 1], &buf[n * 3 + 2]);
 				n++;
 			}
 		}

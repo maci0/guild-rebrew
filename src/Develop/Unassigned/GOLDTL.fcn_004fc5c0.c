@@ -2,7 +2,7 @@
 
 void __cdecl gm_GetLawEntry(int, int*);
 
-void __cdecl fcn_004fc5c0(float* out)
+void __cdecl gm_ComputeLawNormalizedRatios(float* out)
 {
 	int buf[9];
 	int i;

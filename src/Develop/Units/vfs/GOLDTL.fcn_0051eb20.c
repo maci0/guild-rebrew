@@ -6,7 +6,7 @@ extern unsigned char* lpGebaeudeINST;
 void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl d3_SaveScene(int, int);
 
-int __cdecl fcn_0051eb20(int a)
+int __cdecl gm_SaveSceneSnapshot(int a)
 {
 	int save;
 	int i;

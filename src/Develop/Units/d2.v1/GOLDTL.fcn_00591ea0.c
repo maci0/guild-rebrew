@@ -18,7 +18,7 @@ void __cdecl d2_InitWindowBounds(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText(int);
 int __cdecl d2_GetFormWindow(int, int);
-int __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
+int __cdecl d2_CreateWindowScrollbar(int, int, int, int, int, int*, int*, int*);
 void __cdecl d2_CreateButtonRow(int, int, int*, int, int, int);
 void __cdecl fcn_00476b60(void);
 void __cdecl d2_ClearRadioGroup(int);
@@ -74,7 +74,7 @@ void __cdecl d2_RunGebHotkeysDialog(void)
 	d2_SetForm(win, 2);
 	io_AppendText(0x205b);
 	d2_SetForm(win, 0);
-	fcn_00533f40(0x214, 0x168, *(int*) &d2_CurrentWindowId,
+	d2_CreateWindowScrollbar(0x214, 0x168, *(int*) &d2_CurrentWindowId,
 		d2_GetFormWindow(win, 1),
 		0x38, &b1, &b2, &b3);
 	d2_SetForm(win, 3);

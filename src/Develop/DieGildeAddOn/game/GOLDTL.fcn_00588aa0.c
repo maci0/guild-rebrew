@@ -61,7 +61,7 @@ float __cdecl gm_GetCannonPowerScale(char* p);
 int __cdecl gm_SendCannonVolleys(char* a0, char* a1, unsigned int* a2,
 	unsigned int* a3, unsigned int* a4, float a5, int a6, unsigned int a7);
 float __cdecl gm_CalcArtilleryVolleyCost(int level, int percent, int count);
-int __cdecl fcn_005e8e80(Particle* o, Vec3* pos, Vec3* dir, float speed,
+int __cdecl d3_SpawnPhysicsParticle(Particle* o, Vec3* pos, Vec3* dir, float speed,
 	float b, float a);
 int __cdecl d3_PerturbParticleVelocity(float* p, float spread, float* dir, float lift,
 	float* up, float scale);
@@ -128,7 +128,7 @@ int __cdecl d2_FireKanone(Emitter* emitter, char* building)
 		pos0.x = dir1.x * 50.0f; pos0.y = dir1.y * 50.0f; pos0.z = dir1.z * 50.0f;
 		pos0.x += emitter->pos.x; pos0.y += emitter->pos.y;
 		pos0.z += emitter->pos.z;
-		fcn_005e8e80(&p0, &pos0, &emitter->dir1, speed, b, 7874.0f);
+		d3_SpawnPhysicsParticle(&p0, &pos0, &emitter->dir1, speed, b, 7874.0f);
 		d3_PerturbParticleVelocity((float*) &p0, spread, &emitter->dir2, spread, &emitter->dir3,
 			scale);
 		h = gm_SendCannonVolleys(building,
@@ -146,8 +146,8 @@ int __cdecl d2_FireKanone(Emitter* emitter, char* building)
 		pos0.x = dir2.x * (-5.0f) + px;
 		pos0.y = dir2.y * (-5.0f) + py;
 		pos0.z = dir2.z * (-5.0f) + pz;
-		fcn_005e8e80(&p1, &pos1, &emitter->dir1, speed, b, 7874.0f);
-		fcn_005e8e80(&p0, &pos0, &emitter->dir1, speed, b, 7874.0f);
+		d3_SpawnPhysicsParticle(&p1, &pos1, &emitter->dir1, speed, b, 7874.0f);
+		d3_SpawnPhysicsParticle(&p0, &pos0, &emitter->dir1, speed, b, 7874.0f);
 		d3_PerturbParticleVelocity((float*) &p1, spread, &emitter->dir2, spread, &emitter->dir3,
 			scale);
 		d3_PerturbParticleVelocity((float*) &p0, spread, &emitter->dir2, spread, &emitter->dir3,
@@ -179,9 +179,9 @@ int __cdecl d2_FireKanone(Emitter* emitter, char* building)
 			+ dir3.y * (-3.0f) + py;
 		pos0.z = dir2.z * (-5.0f)
 			+ dir3.z * (-3.0f) + pz;
-		fcn_005e8e80(&p2, &pos2, &emitter->dir1, speed, b, 7874.0f);
-		fcn_005e8e80(&p0, &pos0, &emitter->dir1, speed, b, 7874.0f);
-		fcn_005e8e80(&p1, &pos1, &emitter->dir1, speed, b, 7874.0f);
+		d3_SpawnPhysicsParticle(&p2, &pos2, &emitter->dir1, speed, b, 7874.0f);
+		d3_SpawnPhysicsParticle(&p0, &pos0, &emitter->dir1, speed, b, 7874.0f);
+		d3_SpawnPhysicsParticle(&p1, &pos1, &emitter->dir1, speed, b, 7874.0f);
 		d3_PerturbParticleVelocity((float*) &p2, spread, &emitter->dir2, spread, &emitter->dir3,
 			scale);
 		d3_PerturbParticleVelocity((float*) &p0, spread, &emitter->dir2, spread, &emitter->dir3,

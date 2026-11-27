@@ -35,7 +35,7 @@ void __cdecl cm_SendChangePlayerIdentity(int, int);
 char *__cdecl gm_LookupEntityRecordById(int);
 float __cdecl fcn_00505e30(unsigned short);
 void __cdecl gm_GetEntityDate(char *, char *);
-int __cdecl fcn_00509120(char *, char *);
+int __cdecl gm_CalcPersonBirthDate(char *, char *);
 int __cdecl gm_AccumulateTyped2(char *);
 int __cdecl gm_WalkEntityChain(unsigned short);
 int __cdecl io_AppendText();
@@ -92,7 +92,7 @@ void __cdecl d2_ShowSpielerInfoDialog(unsigned short *person, int read_only)
 	gm_GetEntityDate((char *)person, (char *)&dt);
 	io_FormatTextBuffer(buf12, "*%i.%i.%i", dt.day, dt.month, dt.year);
 	io_AppendText("$3>$L%s$A$0>", buf12);
-	if (fcn_00509120((char *)person, (char *)&dt) != 0) {
+	if (gm_CalcPersonBirthDate((char *)person, (char *)&dt) != 0) {
 		io_FormatTextBuffer(buf12, "+%i.%i.%i", dt.day, dt.month, dt.year);
 		io_AppendText("$3>$L%s$A$0>", buf12);
 		ok = 1;

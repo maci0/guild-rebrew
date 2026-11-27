@@ -9,7 +9,7 @@ void* __cdecl m_alloc(unsigned int size, const char* tag);
 void __cdecl d3_InitSceneObject(char* o);
 
 /* ADDRESS: GOLDTL 0x004524e0 */
-char* __cdecl fcn_004524e0(unsigned int entryCount, char* assetName, int a2, float a3, int a4, int a5)
+char* __cdecl d3_CreateParticleSystem(unsigned int entryCount, char* assetName, int a2, float a3, int a4, int a5)
 {
 	char* s;
 	int stamp;

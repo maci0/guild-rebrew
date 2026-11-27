@@ -1,7 +1,7 @@
 void __cdecl gm_PostPeriodicCityReport(void);
 extern float g_773d4c, g_773d50;
 /* ADDRESS: GOLDTL 0x004fb4e0 */
-void __cdecl fcn_004fb4e0(char* a)
+void __cdecl gm_UpdateCityEconomyStats(char* a)
 {
 	int count;
 	int sum;

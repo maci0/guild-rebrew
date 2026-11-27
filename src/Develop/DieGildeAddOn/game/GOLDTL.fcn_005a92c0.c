@@ -47,7 +47,7 @@ void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl cm_SendCopyEntityData(char*);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, int, int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
-void __cdecl fcn_0057e880(int, int, int, int);
+void __cdecl d2_DispatchTutorialInput(int, int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
@@ -167,7 +167,7 @@ void __cdecl d2_RunBuergerrechtDialog(char* p)
 				cm_RequestTransferCurrencyNoKill(*(int*) (q + 2), ent->entity_id, 0, 0x3e80);
 				cm_RequestChangeBits(ent->entity_id, 0x1c8, 4, 0, 0x4000);
 				io_FormatTextBuffer(text, 0x19ff);
-				fcn_0057e880(0x2e, 0, 0, 0);
+				d2_DispatchTutorialInput(0x2e, 0, 0, 0);
 				ok = 1;
 				d2_ShowModalMessageBox(text, 0);
 			}
@@ -177,6 +177,6 @@ void __cdecl d2_RunBuergerrechtDialog(char* p)
 	d2_DestroyForm(h);
 	d3_EndCameraAndUiMode();
 	if (ok) {
-		fcn_0057e880(0x2e, 0, 1, 0);
+		d2_DispatchTutorialInput(0x2e, 0, 1, 0);
 	}
 }

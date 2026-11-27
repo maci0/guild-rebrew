@@ -32,7 +32,7 @@ void __cdecl m_FreeTracked(void* p);
 
 /* Loads /gamedata/ai/historical.dfn into the two record tables; on any
  * failure both tables are freed and emptied and -1 is returned. */
-int __cdecl fcn_004acc00(Table* t)
+int __cdecl ai_LoadHistoricalDfn(Table* t)
 {
 	int magic;
 	void* f;

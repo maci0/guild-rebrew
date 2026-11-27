@@ -6,7 +6,7 @@ extern Slot100f200 g_100f200[];
 #include <string.h>
 
 /* ADDRESS: GOLDTL 0x00475290 */
-int __cdecl fcn_00475290(int a, int b, int c, int d, int e)
+int __cdecl d2_AllocHudRectSlot(int a, int b, int c, int d, int e)
 {
 	int n;
 	Slot100f200* p;
@@ -27,7 +27,7 @@ int __cdecl fcn_00475290(int a, int b, int c, int d, int e)
 }
 
 /* ADDRESS: GOLDTL 0x004752e0 */
-void __cdecl fcn_004752e0(int i)
+void __cdecl d2_FreeHudRectSlot(int i)
 {
 	if (g_100f804 >= 1 && i >= 0) {
 		memset(&g_100f200[i], 0, sizeof(g_100f200[i]));

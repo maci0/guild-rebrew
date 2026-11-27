@@ -16,11 +16,11 @@ extern int g_772504;
 extern int g_772508;
 extern volatile int g_6b7fac;
 
-void __cdecl fcn_0047b5d0(void* p);
+void __cdecl d2_FreeAnimTrackList(void* p);
 void __cdecl m_FreeTracked(void* p);
 
 /* ADDRESS: GOLDTL 0x00465850 */
-int __cdecl fcn_00465850(void)
+int __cdecl vfs_EvictOldestCacheEntry(void)
 {
 	int i;
 	int best;
@@ -39,7 +39,7 @@ int __cdecl fcn_00465850(void)
 		return 0;
 	}
 	if (((VfsEntry*)g_772500)[best].kind < 0x10) {
-		fcn_0047b5d0(((VfsEntry*)g_772500)[best].data);
+		d2_FreeAnimTrackList(((VfsEntry*)g_772500)[best].data);
 	} else {
 		m_FreeTracked(((VfsEntry*)g_772500)[best].data);
 		((VfsEntry*)g_772500)[best].data = 0;

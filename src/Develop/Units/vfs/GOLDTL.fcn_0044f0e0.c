@@ -9,7 +9,7 @@ int __cdecl vfs_ReadByte(void* stream, void* dst);
 int __cdecl fcn_004011f0(void* stream, void* dst);
 #include "Develop/Units/vfs/vfs.h"
 
-char __cdecl fcn_0044f0e0(char* name)
+char __cdecl d3_CheckVfsHeaderFlag(char* name)
 {
 	int v;
 	int magic;

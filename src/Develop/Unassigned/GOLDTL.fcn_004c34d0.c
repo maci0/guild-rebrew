@@ -6,24 +6,24 @@ extern int g_772e70;
 extern int g_772e74;
 extern int g_772e7c;
 
-void __cdecl fcn_004230e0(int);
+void __cdecl sb_ReleaseSampleBank(int);
 
 void __cdecl d3snd_FreeObjectSoundBanks(void)
 {
 	if (g_772e6c != 0) {
-		fcn_004230e0(g_772e6c);
+		sb_ReleaseSampleBank(g_772e6c);
 		g_772e6c = 0;
 	}
 	if (g_772e70 != 0) {
-		fcn_004230e0(g_772e70);
+		sb_ReleaseSampleBank(g_772e70);
 		g_772e70 = 0;
 	}
 	if (g_772e74 != 0) {
-		fcn_004230e0(g_772e74);
+		sb_ReleaseSampleBank(g_772e74);
 		g_772e74 = 0;
 	}
 	if (g_772e7c != 0) {
-		fcn_004230e0(g_772e7c);
+		sb_ReleaseSampleBank(g_772e7c);
 		g_772e7c = 0;
 	}
 }

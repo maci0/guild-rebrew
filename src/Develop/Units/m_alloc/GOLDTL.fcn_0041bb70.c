@@ -7,7 +7,7 @@
  * __declspec(naked) is not used.
  * Arguments: pixel at [esp+0x18], channel output pointers at +0x1c/+0x20/+0x24. */
 /* ADDRESS: GOLDTL 0x0041bb70 */
-void __cdecl fcn_0041bb70(int pixel, char *out1, char *out2, char *out3)
+void __cdecl gfx_UnpackPixelRgb(int pixel, char *out1, char *out2, char *out3)
 {
 	__asm {
 		_emit 0xa1		; mov eax, dword ptr [0x14ce86c]

@@ -16,7 +16,7 @@ char __cdecl d3sm_SampleHeight(int, float*, int*, int*, int*);
 char* __cdecl ch_CreateAction(char*, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004bc540 */
-void __cdecl fcn_004bc540(AMBIENT_ANIMAL_SLOT* state)
+void __cdecl anm_UpdateCat(AMBIENT_ANIMAL_SLOT* state)
 {
 	int x;
 	int g;
@@ -54,7 +54,7 @@ void __cdecl fcn_004bc540(AMBIENT_ANIMAL_SLOT* state)
 }
 
 /* ADDRESS: GOLDTL 0x004bc6b0 */
-void __cdecl fcn_004bc6b0(AMBIENT_ANIMAL_SLOT* state)
+void __cdecl anm_UpdateSheep(AMBIENT_ANIMAL_SLOT* state)
 {
 	int x;
 	int g;

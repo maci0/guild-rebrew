@@ -34,12 +34,12 @@ void __cdecl d3_DisposeObject(char* object);
 void __cdecl fcn_00439aa0(char* object);
 void __cdecl d3_SetActiveCamera(char* object);
 char* __cdecl d3_CloneObject(char* object);
-void __cdecl fcn_0043b850(void* stream);
+void __cdecl d3e_ReadSceneEvents(void* stream);
 int __cdecl d3_GetSceneVersionSlotCount(unsigned version);
 char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsigned char resources);
 char* __cdecl d3_int_io_LoadFloor(void* stream, int version);
 void __cdecl d3sm_Rebuild(char* resource, int mode);
-char* __cdecl fcn_0045b700(int a1, int n, int a3);
+char* __cdecl d3sm_CreateMap(int a1, int n, int a3);
 void __cdecl gv_Free3Fields(int* slot);
 void __cdecl fcn_0045cfa0(SCENE_PROGRESS progress);
 int __cdecl _strcmpi(const char* a, const char* b);
@@ -192,7 +192,7 @@ char __cdecl d3_LoadScene(const char* filename, void* stream, SCENE_PROGRESS pro
 			obj = *(char**) (obj + 0x1f4);
 		}
 		if (version >= 0x3a6c00a7) {
-			fcn_0043b850(s);
+			d3e_ReadSceneEvents(s);
 		}
 	} else {
 		ReportClientMessage("Scene too old... Sorry!");
@@ -217,7 +217,7 @@ char __cdecl d3_LoadScene(const char* filename, void* stream, SCENE_PROGRESS pro
 		if (g_6b89e4 != 0) {
 			d3sm_Rebuild(g_6b89e4, 0);
 		} else {
-			g_6b89e4 = fcn_0045b700(0, -g_6b89b0, 1);
+			g_6b89e4 = d3sm_CreateMap(0, -g_6b89b0, 1);
 		}
 	} else if (g_6b89e4 != 0) {
 		gv_Free3Fields((int*) g_6b89e4);

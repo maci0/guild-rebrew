@@ -50,7 +50,7 @@ int __cdecl io_SelectDelimitedString(char*, int, int);
 int __cdecl fcn_0064d530(char*, const char*, unsigned int);
 int __cdecl atoi(char*);
 int __cdecl io_CopyTrailingDigits(char*, int, char*);
-int __cdecl fcn_0051e070(void);
+int __cdecl main_GetLanguage(void);
 int __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl ReportClientMessage(char*);
@@ -206,7 +206,7 @@ body:
 					k = i - io_CopyTrailingDigits(buf, e, b3);
 					sprintf(tmp, g_6a22d8, res, b3, st.tmpl);
 				}
-				if (fcn_0051e070() == 0 && state == 2) {
+				if (main_GetLanguage() == 0 && state == 2) {
 					tmp[0] = (char) toupper(tmp[0]);
 				}
 			}
@@ -222,7 +222,7 @@ body:
 				} else {
 					sprintf(tmp, g_68b3f8, res, st.tmpl);
 				}
-				if (fcn_0051e070() == 0 && state == 4) {
+				if (main_GetLanguage() == 0 && state == 4) {
 					tmp[0] = (char) toupper(tmp[0]);
 				}
 			}
@@ -238,7 +238,7 @@ body:
 				} else {
 					sprintf(tmp, g_68b3f8, res, st.tmpl);
 				}
-				if (fcn_0051e070() == 0 && state == 6) {
+				if (main_GetLanguage() == 0 && state == 6) {
 					tmp[0] = (char) toupper(tmp[0]);
 				}
 			}
@@ -604,21 +604,21 @@ body:
 				sprintf(tmp, g_68b3f8,
 					io_SelectDelimitedString(g_14a540c[(*(int*) (num + 0xc))], r, 4),
 					s98);
-				if (fcn_0051e070() == 0 && state == 2) {
+				if (main_GetLanguage() == 0 && state == 2) {
 					tmp[0] = (char) toupper((unsigned char) tmp[0]);
 				}
 			} else if (state == 3 || state == 4) {
 				sprintf(tmp, g_68b3f8,
 					io_SelectDelimitedString(g_14a5400[(*(int*) (num + 0xc))], r, 4),
 					s98);
-				if (fcn_0051e070() == 0 && state == 4) {
+				if (main_GetLanguage() == 0 && state == 4) {
 					tmp[0] = (char) toupper((unsigned char) tmp[0]);
 				}
 			} else {
 				sprintf(tmp, g_68b3f8,
 					io_SelectDelimitedString(g_14a5418[(*(int*) (num + 0xc))], r, 4),
 					s98);
-				if (fcn_0051e070() == 0 && state == 6) {
+				if (main_GetLanguage() == 0 && state == 6) {
 					tmp[0] = (char) toupper((unsigned char) tmp[0]);
 				}
 			}

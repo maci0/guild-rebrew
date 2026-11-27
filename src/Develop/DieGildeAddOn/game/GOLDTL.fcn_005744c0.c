@@ -20,7 +20,7 @@ char __cdecl d3_DestroyObject(int);
 void __cdecl d3_SetSubtreeVisible(int, int);
 void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl d3_RemoveSubTreeFromCellTree(int, int);
-void __cdecl fcn_004550e0(int, int);
+void __cdecl d3_PopulateQuadtreeNode(int, int);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 void __cdecl rd_ConnectBuildingToSupermap(int, int);
 int __cdecl cm_GetCommandStatus(int);
@@ -394,7 +394,7 @@ LfailB:
 				d3_ApplySeasonTextureSet(*(int*) (v15 + 0x61));
 			}
 			if (g_773dd8) {
-				fcn_004550e0(*(int*) (v15 + 0x61), g_773dd8);
+				d3_PopulateQuadtreeNode(*(int*) (v15 + 0x61), g_773dd8);
 			}
 			v8 = *(int*) (v15 + 0x61);
 			if (v8 && *(int*) (v8 + 0x218) == 1) {

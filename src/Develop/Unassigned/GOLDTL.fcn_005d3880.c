@@ -17,7 +17,7 @@ extern Pt5d36_99ec2c g_99ec2c[16];
 
 extern float g_6640cc;
 
-void __cdecl fcn_00472c30(int, int, int, int, int, int, int);
+void __cdecl d2_DrawLine(int, int, int, int, int, int, int);
 
 void __cdecl d2_DrawMoodHistoryGraph(MOOD_GRAPH_VALUES s, int w, int h)
 {
@@ -45,8 +45,8 @@ void __cdecl d2_DrawMoodHistoryGraph(MOOD_GRAPH_VALUES s, int w, int h)
 		x1 = x0 + step;
 		t = ((MOOD_GRAPH_SAMPLE*)g_99ec2c)[i].v;
 		u = ((MOOD_GRAPH_SAMPLE*)g_99ec2c)[i + 1].v;
-		fcn_00472c30(x0, (int) (by - t * sy), x1, (int) (by - u * sy), 0x10, 0xee, 0x10);
+		d2_DrawLine(x0, (int) (by - t * sy), x1, (int) (by - u * sy), 0x10, 0xee, 0x10);
 		x0 = x1;
 	}
-	fcn_00472c30(step * 15 + 0x2d, (int) (by - ((MOOD_GRAPH_SAMPLE*)g_99ec2c)[15].v * sy), step * 16 + 0x2d, (int) (by - s.f[9] * sy), 0x10, 0xee, 0x10);
+	d2_DrawLine(step * 15 + 0x2d, (int) (by - ((MOOD_GRAPH_SAMPLE*)g_99ec2c)[15].v * sy), step * 16 + 0x2d, (int) (by - s.f[9] * sy), 0x10, 0xee, 0x10);
 }

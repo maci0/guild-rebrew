@@ -4,7 +4,7 @@ extern int g_67a370;
 int __cdecl sprintf(char*, const char*, ...);
 #include "client_scene_loader.h"
 void __cdecl d3_TraverseSceneObjects(int, int, int, void (__cdecl*)(void));
-void __cdecl fcn_00510bd0(void);
+void __cdecl d3_InitBuildingSceneAnimRates(void);
 
 char __cdecl d3_LoadCityScene(const char* name)
 {
@@ -14,6 +14,6 @@ char __cdecl d3_LoadCityScene(const char* name)
 	if (!d3_LoadScene(path, 0, 0)) {
 		return 0;
 	}
-	d3_TraverseSceneObjects(g_67a370, 0, 6, fcn_00510bd0);
+	d3_TraverseSceneObjects(g_67a370, 0, 6, d3_InitBuildingSceneAnimRates);
 	return 1;
 }

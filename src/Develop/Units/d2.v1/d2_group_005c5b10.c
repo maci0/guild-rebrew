@@ -179,7 +179,7 @@ unsigned char _dpad_6ab570[1424] = {
 };
 
 /* ADDRESS: GOLDTL 0x005c5b10 */
-void __cdecl fcn_005c5b10(char* a)
+void __cdecl d2_RunGelageDialog(char* a)
 {
 	int btn2;
 	Packet pkt;
@@ -203,7 +203,7 @@ void __cdecl fcn_005c5b10(char* a)
 	btn2 = d2_GetWindowListItem(dlg, 2, s + 1);
 	v = gm_AmountToUnits(gm_AccumulateTyped2(&((Player*)g_7f4ca0)[g_774970]), g_773d75) > 1000 ? 1000 : gm_AmountToUnits(gm_AccumulateTyped2(&((Player*)g_7f4ca0)[g_774970]), g_773d75);
 	d2_SetElementValue(sl, 0x64, v, 0x64);
-	if (main_RunFrameLoop((void*) fcn_005c5b10, 0x677c7) != 0) {
+	if (main_RunFrameLoop((void*) d2_RunGelageDialog, 0x677c7) != 0) {
 		do {
 			if (g_100f1dc == 2) {
 				if (btn2 != -1 && d2_CurrentElementId == btn2) {
@@ -228,14 +228,14 @@ void __cdecl fcn_005c5b10(char* a)
 			if (g_14ce8e0 != 0) {
 				g_774654 = 1;
 			}
-		} while (main_RunFrameLoop((void*) fcn_005c5b10, 0x677c7) != 0);
+		} while (main_RunFrameLoop((void*) d2_RunGelageDialog, 0x677c7) != 0);
 	}
 	d3_EndCameraAndUiMode();
 	d2_DestroyForm(dlg);
 }
 
 /* ADDRESS: GOLDTL 0x005c5da0 */
-void __cdecl fcn_005c5da0(int layer, int x, int y, unsigned short who, int text)
+void __cdecl d2_OpenEntityQuickSlots(int layer, int x, int y, unsigned short who, int text)
 {
 	int i;
 

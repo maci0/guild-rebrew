@@ -7,7 +7,7 @@ extern char g_6a2f5c[];
 extern int d2_CurrentWindowId;
 
 void __cdecl d2_CreateActionPopupSlot(int, int, int, char*, int);
-void __cdecl fcn_00471d80(int, int);
+void __cdecl d2_CenterForm(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_InitWindowBounds(int);
@@ -31,7 +31,7 @@ int __cdecl d2_OpenTutorialMainDialog(void)
 	if (v == 0) {
 		return -1;
 	}
-	fcn_00471d80(*(int*) (v + 8), 3);
+	d2_CenterForm(*(int*) (v + 8), 3);
 	d2_CenterDialogWindows(*(int*) (*(int*) (g_665f08[7] + 0x74) + 8));
 	d2_SetForm(*(int*) (*(int*) (g_665f08[7] + 0x74) + 8), 0);
 	d2_InitWindowBounds(d2_CurrentWindowId);

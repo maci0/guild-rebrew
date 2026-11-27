@@ -11,7 +11,7 @@ void __cdecl m_FreeTracked(void*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
 /* ADDRESS: GOLDTL 0x004230e0 */
-int __cdecl fcn_004230e0(char* a0)
+int __cdecl sb_ReleaseSampleBank(char* a0)
 {
 	int r;
 	char* bank;

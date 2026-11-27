@@ -4,7 +4,7 @@
 
 extern float g_66414c;
 
-int __cdecl fcn_00507910(int);
+int __cdecl gm_MapBuildingCatToGuildSlot(int);
 int __cdecl gm_CheckStatLevel(int, int);
 int __cdecl gm_GetOppositeStatIndex(int);
 int __cdecl gm_GetTypeProductValue(int);
@@ -72,7 +72,7 @@ int __cdecl ai_StartBetriebBauen(int target_action, short *ent, int mode, Cmd *o
 	while (idx < 0xa900) {
 		if (lpGebaeudeINST[idx] != 0 && *(short *) (lpGebaeudeINST + idx + 0x27) == *ent) {
 			p = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(int) lpGebaeudeINST[idx]];
-			type = fcn_00507910(((BUILDING_PROTOTYPE*)p)->category);
+			type = gm_MapBuildingCatToGuildSlot(((BUILDING_PROTOTYPE*)p)->category);
 			if (type > 0 && type < 0x10) {
 				sum += ((BUILDING_PROTOTYPE*)p)->level;
 				count++;
@@ -135,7 +135,7 @@ int __cdecl ai_StartBetriebBauen(int target_action, short *ent, int mode, Cmd *o
 				add ecx, ebx
 				rep stosb
 			}
-			t = fcn_00497ec0(0x13, ent, 0, &o1, &o2);
+			t = ai_StartWohnsitzBauen(0x13, ent, 0, &o1, &o2);
 			if (t != 0) {
 				*out1 = o1;
 				*out2 = o2;
@@ -153,7 +153,7 @@ int __cdecl ai_StartBetriebBauen(int target_action, short *ent, int mode, Cmd *o
 			t = *p;
 			type = ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[t].level;
 			if (type < ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[t].level_limit) {
-				v = fcn_00507910(((BUILDING_PROTOTYPE*)lpGebaeudePROT)[t].category);
+				v = gm_MapBuildingCatToGuildSlot(((BUILDING_PROTOTYPE*)lpGebaeudePROT)[t].category);
 				t = gm_CheckStatLevel(*ent, v);
 				if (t != 0) {
 					t = gm_GetOppositeStatIndex(t);

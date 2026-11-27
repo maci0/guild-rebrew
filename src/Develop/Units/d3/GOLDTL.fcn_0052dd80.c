@@ -3,7 +3,7 @@ extern int g_67a370;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 // SIZE 0x84
-struct list_52dd80 {
+struct D3_WIMPEL_NODE_LIST {
 	int n;
 	char* a[32];
 };
@@ -12,8 +12,8 @@ struct list_52dd80 {
 
 #include <string.h>
 
-void __cdecl d3_VisitSceneObjects(int, char*, int, void*, struct list_52dd80*);
-char __cdecl d3_CollectWimpelNodes(char*, struct list_52dd80*);
+void __cdecl d3_VisitSceneObjects(int, char*, int, void*, struct D3_WIMPEL_NODE_LIST*);
+char __cdecl d3_CollectWimpelNodes(char*, struct D3_WIMPEL_NODE_LIST*);
 void __cdecl d3_RemoveSubTreeFromCellTree(char*, int);
 
 
@@ -26,9 +26,9 @@ void __cdecl d3_RemoveSubTreeFromCellTree(char*, int);
 #endif
 
 /* ADDRESS: GOLD 0x005286e0 */
-void __cdecl fcn_0052dd80(char* e)
+void __cdecl d3_DestroyEntityWimpelNodes(char* e)
 {
-	struct list_52dd80 l;
+	struct D3_WIMPEL_NODE_LIST l;
 	char* o;
 	int saved;
 	int i;

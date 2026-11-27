@@ -64,11 +64,11 @@ void __cdecl d2_DestroyElement(int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl d2_ShowTxt(int, int, char*, int);
 int __cdecl d2_CreateElement(int, int, int);
-int __cdecl fcn_0046fcd0(int, int, char*);
+int __cdecl d2_CreateShowTxtElement(int, int, char*);
 void __cdecl d2_UpdateBuildingGroundplan(int);
 char* __cdecl d2_SelectFont(int);
 void __cdecl gm_PackGameTime(int*, char*);
-int __cdecl fcn_0051e070(void);
+int __cdecl main_GetLanguage(void);
 int __cdecl gm_GetSeasonFromDate(char*, int);
 void __cdecl d2_DrawDefaultFontText(int, int, int, char*, int);
 void* __cdecl d2_GetResourceData(int);
@@ -107,7 +107,7 @@ struct town_frame {
 };
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00527f60 */
-void __cdecl fcn_00527f60(unsigned char a0, int a1)
+void __cdecl d2_RefreshTownView(unsigned char a0, int a1)
 {
 	struct town_frame fr;
 	int three = 3;
@@ -214,7 +214,7 @@ void __cdecl fcn_00527f60(unsigned char a0, int a1)
 		((D2_CONTROL_TL*) g_1015ea0)[g_6a2594].value_05c = 1;
 		((D2_CONTROL_TL*) g_1015ea0)[g_6a2594].kind = 8;
 
-		g_6a25a4 = fcn_0046fcd0((short) (g_1040494 - 0x6a),
+		g_6a25a4 = d2_CreateShowTxtElement((short) (g_1040494 - 0x6a),
 					(short) (d2_ScreenHeight - 0x7e),
 					g_6b5c60);
 		((D2_CONTROL_TL*) g_1015ea0)[g_6a25a4].value_06c = 1;
@@ -264,7 +264,7 @@ void __cdecl fcn_00527f60(unsigned char a0, int a1)
 	d2_UpdateBuildingGroundplan(a1);
 	d2_SelectFont(0x55);
 	gm_PackGameTime((int*) 0x7f4c00, (char*) &fr.pos);
-	if (fcn_0051e070() == 2) {
+	if (main_GetLanguage() == 2) {
 		sprintf(fr.text, (char*) 0x6a2e5c,
 			*(int*) (0x14a5450
 				 + gm_GetSeasonFromDate((char*) &fr.pos,

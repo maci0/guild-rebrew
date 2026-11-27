@@ -31,7 +31,7 @@ extern char g_1043060;
 
 void __cdecl d3_VisitSceneObjects(D3_SCENE_CTX* s, D3_SCENE_OBJ* o, int mask, void* fn, void* ctx);
 void __cdecl d3_TransferObjectSceneCallback(void);
-void __cdecl fcn_00443030(D3_SCENE_CTX* s);
+void __cdecl d3_InitSceneLevel(D3_SCENE_CTX* s);
 
 /* ADDRESS: GOLDTL 0x00443900 */
 char __cdecl d3_MoveObjectToScene(D3_SCENE_OBJ* o, D3_SCENE_CTX* from, D3_SCENE_CTX* to)
@@ -84,7 +84,7 @@ char __cdecl d3_MoveObjectToScene(D3_SCENE_OBJ* o, D3_SCENE_CTX* from, D3_SCENE_
 		to->fa4 = (*(void**)&d3_SceneRenderListHead);
 		to->fa8 = (*(void**)&g_1040958);
 	} else if (to->head == 0) {
-		fcn_00443030(to);
+		d3_InitSceneLevel(to);
 	}
 	o->next = &(*(D3_SCENE_OBJ*)d3_SceneObjectSentinel);
 	p = to->tail;

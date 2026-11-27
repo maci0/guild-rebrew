@@ -21,7 +21,7 @@ int __cdecl d2_AddWindowValueGauge();
 int __cdecl d2_CreateGuiWindow();
 float __cdecl gm_CalcEntityFavor(unsigned int, unsigned int, unsigned int);
 int __cdecl d2_SetElementEnabled();
-int __cdecl fcn_005cf720(unsigned short, unsigned short, int, int);
+int __cdecl gm_MatchesTargetFilter(unsigned short, unsigned short, int, int);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x005c99a0 */
 int __cdecl d2_DrawPersonCardGrid(int a0, int mode, int filter, int itemCount, D2_PERSON_CARD_ITEM* items, int owner)
@@ -151,7 +151,7 @@ int __cdecl d2_DrawPersonCardGrid(int a0, int mode, int filter, int itemCount, D
 			if (owner != 0 && *(char*) (owner + 2) == 6 && *(int*) ((int) item->obj + 0x210) == *(int*) (owner + 4)) {
 				d2_AddElementToWindow((int) *(short*) (g_772500 + 0x1ebd8) + (left), y, 0x6d3, d2_CurrentWindowId);
 			}
-			if (filter == 0 || fcn_005cf720(*(unsigned short*) &g_774970, *(unsigned short*) item->obj, filter, 0) != 0) {
+			if (filter == 0 || gm_MatchesTargetFilter(*(unsigned short*) &g_774970, *(unsigned short*) item->obj, filter, 0) != 0) {
 				((D2_CONTROL_TL*)(*(int*)&g_1015ea0))[item->win].value_05c = 1;
 				((D2_CONTROL_TL*)(*(int*)&g_1015ea0))[item->win].flags_1d0 = 3;
 				*(int*)&((D2_CONTROL_TL*)(*(int*)&g_1015ea0))[item->win].associated_object = (int) item->obj;

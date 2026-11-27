@@ -44,7 +44,7 @@ void __cdecl d2_DrawFieldSliderPopup(char* f, int surf);
 void __cdecl d2_DrawElementTooltip(char* e);
 int __cdecl d2_DrawMouseCursor(int x, int y);
 void __cdecl d2_FlushQueuedQuads(int a, int b, int c);
-void __cdecl fcn_004732c0(void);
+void __cdecl d2_UpdateAllScreenFades(void);
 void __cdecl d2_SelectFont(int font);
 void __cdecl d2_DrawWordWrappedText(int x, int y, int w, int h, int surf, char* text, int flags);
 void __cdecl d2_SetSurfaceClipRect(int a, int b, int c, int d, char* e);
@@ -361,7 +361,7 @@ label_46aadd:
 	d2_SetClipRect(0, 0, g_1040494, d2_ScreenHeight);
 	d2_DrawMouseCursor(g_772570, g_772574);
 	d2_FlushQueuedQuads(0, 0, 0);
-	fcn_004732c0();
+	d2_UpdateAllScreenFades();
 	g_772524 = (int) d2_GetResourceData(d2_FindResourceByName((char*) 0x67d474));
 	d2_FontHeight = 0x18;
 	g_77251c++;

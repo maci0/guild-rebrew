@@ -6,7 +6,7 @@ extern char g_68bda0[];
 
 int __cdecl fcn_0064f170(char*, char*, int);
 
-char __cdecl fcn_004d35b0(char* node, char* entity)
+char __cdecl d3_CollectEnemyWareNode(char* node, char* entity)
 {
 	unsigned short* w;
 

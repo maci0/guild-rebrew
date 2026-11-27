@@ -26,7 +26,7 @@ extern unsigned short g_773e40[];
 #include "client_types.h"
 extern D2_FORM_RECORD g_1038140[];
 
-void __cdecl fcn_00533cf0(int mark)
+void __cdecl d2_MarkDialogFormControls(int mark)
 {
 	int i;
 	int k;

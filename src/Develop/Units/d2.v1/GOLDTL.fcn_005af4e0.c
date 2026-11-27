@@ -20,7 +20,7 @@ extern int g_14abcc0;
 
 int __cdecl d2_CheckOwnerBlocked(char*);
 void __cdecl d2_InitPlayerBar(char*, int);
-void __cdecl fcn_005bdc30(int, Req*, int, void*, int);
+void __cdecl d2_RunCityScrollMapDialog(int, Req*, int, void*, int);
 void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl sv_ClearObjectSelection(void);
 int __cdecl ConfirmProductionSelection(int, char*);
@@ -40,7 +40,7 @@ void __cdecl d2_ShowProductionSelection(char* a)
 		return;
 	}
 	d2_InitPlayerBar(a, 0);
-	fcn_005bdc30(1, &req, g_14abcc0, (void*) ConfirmProductionSelection, 0);
+	d2_RunCityScrollMapDialog(1, &req, g_14abcc0, (void*) ConfirmProductionSelection, 0);
 	d2_RestoreHudAfterDialog();
 	sv_ClearObjectSelection();
 }

@@ -15,7 +15,7 @@
 #include "client_types.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
-#define SLOTS ((Sefde0Slot*) g_7731b8)
+#define SLOTS ((D3_PROJECTILE_SLOT*) g_7731b8)
 
 typedef struct Sefde0Entry {
 	int f00[12];
@@ -25,7 +25,7 @@ typedef struct Sefde0Entry {
 	int f60[2];
 } Sefde0Entry;
 
-typedef struct Sefde0Slot {
+typedef struct D3_PROJECTILE_SLOT {
 	int id;
 	int flags;
 	float x;
@@ -37,7 +37,7 @@ typedef struct Sefde0Slot {
 	char* objects[3];
 	int (*callback)(int);
 	int* data;
-} Sefde0Slot;
+} D3_PROJECTILE_SLOT;
 
 extern int g_7731b8[];
 extern pos14_7f4c00 g_772fe8;
@@ -54,7 +54,7 @@ void __cdecl d3_ReleaseLightSlot(int);
 void __cdecl gm_ApplyCannonImpact(int, int, int, int*);
 
 /* ADDRESS: GOLDTL 0x004efde0 */
-void __cdecl fcn_004efde0(void)
+void __cdecl d3_UpdateCannonProjectiles(void)
 {
 	int save;
 	int elapsed;

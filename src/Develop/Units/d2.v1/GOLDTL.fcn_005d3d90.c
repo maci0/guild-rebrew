@@ -29,7 +29,7 @@ typedef struct {
 } Loc;
 
 void __cdecl d2_ClearPaintbox(void);
-void __cdecl fcn_00472c30(int, int, int, int, int, int, int);
+void __cdecl d2_DrawLine(int, int, int, int, int, int, int);
 int __cdecl d2_EqualizeWindowButtonWidths(int, int, char *, int);
 int __cdecl d2_MeasureTextWidth(char *, int);
 void __cdecl gm_PackGameTime(int *, char *);
@@ -73,12 +73,12 @@ void __cdecl d2_DrawCityHistoryCharts(unsigned short flags, Gfx g, int win)
 	if (flags & 0x10)
 		d2_DrawMagentaHistoryGraph(*(GRAPH_VALUE *) &g, w - 1, h);
 	d2_PlotRadius = 0;
-	fcn_00472c30(0x2d, 8, 0x2d, h - 0x13, 0x10, 0x10, 0x10);
-	fcn_00472c30(0x2d, h - 0x13, w - 0x3b, h - 0x13, 0x10, 0x10, 0x10);
+	d2_DrawLine(0x2d, 8, 0x2d, h - 0x13, 0x10, 0x10, 0x10);
+	d2_DrawLine(0x2d, h - 0x13, w - 0x3b, h - 0x13, 0x10, 0x10, 0x10);
 	y = (float) h - g_66293c;
 	for (i = 0; i < 4; i++) {
 		n = (int) ((float) i * g_6628bc * y + g_662924);
-		fcn_00472c30(0x28, n, 0x2d, n, 0x10, 0x10, 0x10);
+		d2_DrawLine(0x28, n, 0x2d, n, 0x10, 0x10, 0x10);
 	}
 	for (i = 0, n = 0x64; n > 0; i++, n -= 0x19) {
 		io_FormatTextBuffer(loc.buf, (char *) 0x6acbec, n);
@@ -88,10 +88,10 @@ void __cdecl d2_DrawCityHistoryCharts(unsigned short flags, Gfx g, int win)
 	}
 	if (m != 0) {
 		x1 = w - 0x3c;
-		fcn_00472c30(x1, 8, x1, h - 0x13, 0x10, 0x10, 0x10);
+		d2_DrawLine(x1, 8, x1, h - 0x13, 0x10, 0x10, 0x10);
 		x2 = w - 0x37;
-		fcn_00472c30(x2, 8, x1, 8, 0x10, 0x10, 0x10);
-		fcn_00472c30(x2, (h - 0x1e) / 2 + 8, x1, (h - 0x1e) / 2 + 8, 0x10, 0x10, 0x10);
+		d2_DrawLine(x2, 8, x1, 8, 0x10, 0x10, 0x10);
+		d2_DrawLine(x2, (h - 0x1e) / 2 + 8, x1, (h - 0x1e) / 2 + 8, 0x10, 0x10, 0x10);
 		io_FormatTextBuffer(loc.buf, (char *) 0x67d444, m);
 		d = d2_MeasureTextWidth(loc.buf, 0x55) + 2;
 		id = d2_EqualizeWindowButtonWidths(x1, 5, loc.buf, d2_CurrentWindowId);
@@ -117,13 +117,13 @@ void __cdecl d2_DrawCityHistoryCharts(unsigned short flags, Gfx g, int win)
 	gm_PackGameTime(loc.src, loc.out);
 	for (i = 0xf; i != 0; i--) {
 		n = step * i + 0x2d;
-		fcn_00472c30(n, h - 0x13, n, h - 0x10, 0x10, 0x10, 0x10);
+		d2_DrawLine(n, h - 0x13, n, h - 0x10, 0x10, 0x10, 0x10);
 		if (loc.out[1] == 1) {
 			io_FormatTextBuffer(loc.buf, (char *) 0x67d444, *(short *) (loc.out + 2));
 			d = d2_MeasureTextWidth(loc.buf, 0x55);
 			id = d2_EqualizeWindowButtonWidths(n, h - 0xd, loc.buf, d2_CurrentWindowId);
 			*(int *) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].width)) = d;
-			fcn_00472c30(n, h - 0x13, n, h - 0xd, 0x10, 0x10, 0x10);
+			d2_DrawLine(n, h - 0x13, n, h - 0xd, 0x10, 0x10, 0x10);
 		}
 		loc.src[0]--;
 		gm_PackGameTime(loc.src, loc.out);

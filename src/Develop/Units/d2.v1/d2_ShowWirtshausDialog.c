@@ -25,7 +25,7 @@ int __cdecl gm_ResolveWirtshausOffer();
 int __cdecl gm_IsDiceStageValid();
 int __cdecl gm_ExecuteDiceStage();
 int __cdecl ai_EvalBlackjackAction();
-int __cdecl fcn_00493000();
+int __cdecl gm_UpdateBlackjackState();
 int __cdecl cm_RequestTransferCurrencyNoKill();
 int __cdecl fcn_00502850();
 int __cdecl fcn_00502cd0();
@@ -40,7 +40,7 @@ int __cdecl sv_ResetSelectionState();
 int __cdecl d2_InitWindowBounds();
 int __cdecl main_RunFrameLoop();
 int __cdecl d2_ShowWirtshausRules();
-int __cdecl fcn_005a0cd0();
+int __cdecl d2_ShowWirtshausDiceStep();
 int __cdecl d2_ShowWirtshausRoundResult();
 void __cdecl d3_EndCameraAndUiMode(void);
 
@@ -239,45 +239,45 @@ void __cdecl d2_ShowWirtshausDialog(void)
         v32 = 0;
         v33 = 0;
         if (v25) {
-          fcn_005a0cd0(&v14,v12,1,windowId,3,0x96,0);
+          d2_ShowWirtshausDiceStep(&v14,v12,1,windowId,3,0x96,0);
         }
         else {
-          fcn_005a0cd0(&v14,v24,1,windowId,2,0x96,0);
+          d2_ShowWirtshausDiceStep(&v14,v24,1,windowId,2,0x96,0);
         }
         if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) {
           gm_ExecuteDiceStage(&v14,v13[2],1);
-          fcn_00493000(&v14);
+          gm_UpdateBlackjackState(&v14);
           if (v25) {
-            fcn_005a0cd0(&v14,v12,1,windowId,3,0x14,1);
+            d2_ShowWirtshausDiceStep(&v14,v12,1,windowId,3,0x14,1);
           }
           else {
-            fcn_005a0cd0(&v14,v24,1,windowId,2,0x14,1);
+            d2_ShowWirtshausDiceStep(&v14,v24,1,windowId,2,0x14,1);
           }
           if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) {
             if (v25) {
-              fcn_005a0cd0(&v14,v24,1,windowId,2,0x96,0);
+              d2_ShowWirtshausDiceStep(&v14,v24,1,windowId,2,0x96,0);
             }
             else {
-              fcn_005a0cd0(&v14,v12,1,windowId,3,0x96,0);
+              d2_ShowWirtshausDiceStep(&v14,v12,1,windowId,3,0x96,0);
             }
             if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) {
               gm_ExecuteDiceStage(&v14,v21[0],1);
-              fcn_00493000(&v14);
+              gm_UpdateBlackjackState(&v14);
               if (v25) {
-                fcn_005a0cd0(&v14,v24,1,windowId,2,0x14,1);
+                d2_ShowWirtshausDiceStep(&v14,v24,1,windowId,2,0x14,1);
               }
               else {
-                fcn_005a0cd0(&v14,v12,1,windowId,3,0x14,1);
+                d2_ShowWirtshausDiceStep(&v14,v12,1,windowId,3,0x14,1);
               }
               if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) {
                 if ((v13[1] != 5) && (v13[1] != 6)) {
                   if (!v25) {
                     v9 = ai_EvalBlackjackAction(&v14,*v24);
-                    fcn_005a0cd0(&v14,v24,v9,windowId,2,0x96,0);
+                    d2_ShowWirtshausDiceStep(&v14,v24,v9,windowId,2,0x96,0);
                     if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) {
                       gm_ExecuteDiceStage(&v14,*v24,v9);
-                      fcn_00493000(&v14);
-                      fcn_005a0cd0(&v14,v24,v9,windowId,2,0x14,1);
+                      gm_UpdateBlackjackState(&v14);
+                      d2_ShowWirtshausDiceStep(&v14,v24,v9,windowId,2,0x14,1);
                       if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) goto label_5a1b81;
                     }
                     goto label_532ef0;
@@ -317,16 +317,16 @@ label_5a1b81:
                           d2_SetForm(windowId,4);
                           io_AppendText(0x6811b0);
                           d2_ClearWindowChildren((*(int *)&d2_CurrentWindowId),1);
-                          fcn_005a0cd0(&v14,v12,v22[v11 * 0x43 + 1],windowId,3,0x96,0);
+                          d2_ShowWirtshausDiceStep(&v14,v12,v22[v11 * 0x43 + 1],windowId,3,0x96,0);
                           gm_ExecuteDiceStage(&v14,v3,v22[v11 * 0x43 + 1]);
-                          fcn_00493000(&v14);
-                          fcn_005a0cd0(&v14,v12,v22[v11 * 0x43 + 1],windowId,3,0x14,1);
+                          gm_UpdateBlackjackState(&v14);
+                          d2_ShowWirtshausDiceStep(&v14,v12,v22[v11 * 0x43 + 1],windowId,3,0x14,1);
                           if ((v13[1] != 5) && (v13[1] != 6)) {
                             v9 = ai_EvalBlackjackAction(&v14,*v24);
-                            fcn_005a0cd0(&v14,v24,v9,windowId,2,0x96,0);
+                            d2_ShowWirtshausDiceStep(&v14,v24,v9,windowId,2,0x96,0);
                             gm_ExecuteDiceStage(&v14,*v24,v9);
-                            fcn_00493000(&v14);
-                            fcn_005a0cd0(&v14,v24,v9,windowId,2,0x14,1);
+                            gm_UpdateBlackjackState(&v14);
+                            d2_ShowWirtshausDiceStep(&v14,v24,v9,windowId,2,0x14,1);
                             if ((v13[1] != 5) && (v13[1] != 6)) break;
                           }
                           v25 = 1;

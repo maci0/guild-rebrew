@@ -2,10 +2,10 @@ int __cdecl _strcmpi(const char*, const char*);
 extern int g_67a370;
 
 void __cdecl d3_VisitSceneObjects(int, char*, int, void*, void*);
-int __cdecl fcn_00445680(char*, char**);
+int __cdecl d3_FindSceneObjectMatchCallback(char*, char**);
 
 /* ADDRESS: GOLDTL 0x00445680 */
-int __cdecl fcn_00445680(char* s, char** st)
+int __cdecl d3_FindSceneObjectMatchCallback(char* s, char** st)
 {
 	char* p;
 
@@ -25,7 +25,7 @@ int __cdecl fcn_00445680(char* s, char** st)
 }
 
 /* ADDRESS: GOLDTL 0x004456e0 */
-char* __cdecl fcn_004456e0(char* o, int flags, char* ptr, char* name)
+char* __cdecl d3_FindSceneObjectByPtrOrName(char* o, int flags, char* ptr, char* name)
 {
 	char* st[3];
 	int saved;
@@ -40,7 +40,7 @@ char* __cdecl fcn_004456e0(char* o, int flags, char* ptr, char* name)
 		saved = *(int*) (o + 0x1f4);
 		*(int*) (o + 0x1f4) = 0;
 	}
-	d3_VisitSceneObjects(g_67a370, o, flags | 0x200, fcn_00445680, st);
+	d3_VisitSceneObjects(g_67a370, o, flags | 0x200, d3_FindSceneObjectMatchCallback, st);
 	if (o != 0) {
 		*(int*) (o + 0x1f4) = saved;
 	}

@@ -15,7 +15,7 @@ extern int d2_ScreenHeight;
 extern int g_1040494;
 extern char g_67d67c[];
 
-typedef void(__cdecl* hook_4e4730)(char*, int, char*, int);
+typedef void(__cdecl* CutsceneUiCallback)(char*, int, char*, int);
 
 int __cdecl d3_FindFreeSceneContext(void);
 void __cdecl d3_SelectSceneContext(int, int);
@@ -26,12 +26,12 @@ void __cdecl d2_ClearSurface(int);
 int __cdecl gm_GetSeason(int*);
 void __cdecl d3_ApplySceneLightingPreset(void);
 #include "Develop/Units/d3/d3_d3d.h"
-void __cdecl fcn_00473150(int);
-void __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
+void __cdecl d2_ReleaseOverlaySprite(int);
+void __cdecl d2_StartScreenFade(int, int, int, int, char*, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004e4730 */
-void __cdecl fcn_004e4730(char* sceneName)
+void __cdecl cut_StartSceneCutscene(char* sceneName)
 {
 	char buf[0x80];
 	char* ui;
@@ -67,14 +67,14 @@ void __cdecl fcn_004e4730(char* sceneName)
 	g_772f4c++;
 	if (((char*)g_67a370) != 0) {
 		ui = *(char**) (((char*)g_67a370) + 0x3c8);
-		if (ui != 0 && *(hook_4e4730*) (ui + 0x210) != 0)
-			(*(hook_4e4730*) (ui + 0x210))(((char*)g_67a370), 4, ui + 0x214, 0);
+		if (ui != 0 && *(CutsceneUiCallback*) (ui + 0x210) != 0)
+			(*(CutsceneUiCallback*) (ui + 0x210))(((char*)g_67a370), 4, ui + 0x214, 0);
 	}
 	g_68bfc4 = evt_LastGfxScriptId;
-	fcn_00443230(1);
+	d3_PrecacheAllSceneTextures(1);
 	if ((*(int*)&g_772f50) != 0) {
-		fcn_00473150((*(int*)&g_772f50));
+		d2_ReleaseOverlaySprite((*(int*)&g_772f50));
 		(*(int*)&g_772f50) = 0;
 	}
-	fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, "BLACK", 0x5a, 0xa);
+	d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, "BLACK", 0x5a, 0xa);
 }

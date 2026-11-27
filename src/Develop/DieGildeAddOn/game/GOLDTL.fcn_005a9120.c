@@ -7,7 +7,7 @@ extern char g_7f4ca0[];
 extern int g_14abb58;
 extern char g_6aae28[];
 
-void __cdecl fcn_005338a0(void);
+void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_ShowGildenkasseDialog(int);
@@ -16,7 +16,7 @@ void __cdecl d2_RunStadtkasseMenu(int building)
 {
 	int x;
 
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	while (main_RunFrameLoop(d2_RunStadtkasseMenu, 0x67fff) != 0) {
 		if (((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])[0x166] != 0) {
 			x = RegisterStatusText(g_6aae28, g_14abb58, 0x16);

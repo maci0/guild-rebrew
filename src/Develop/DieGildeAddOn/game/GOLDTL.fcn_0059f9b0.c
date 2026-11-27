@@ -9,7 +9,7 @@ extern char g_6aa78c[];
 extern char g_6aa77c[];
 extern char g_6aa764[];
 
-void __cdecl fcn_005338a0(void);
+void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_ShowFestInvitation(int, int);
@@ -23,7 +23,7 @@ void __cdecl d2_RunSocialActionsHud(int entity, int mode)
 	int y;
 	int z;
 
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	while (main_RunFrameLoop(d2_RunSocialActionsHud, 0x67fff) != 0) {
 		x = RegisterStatusText(g_6aa78c, g_14ab0b8, 0x16);
 		y = RegisterStatusText(g_6aa77c, g_14aadd8, 0xc);

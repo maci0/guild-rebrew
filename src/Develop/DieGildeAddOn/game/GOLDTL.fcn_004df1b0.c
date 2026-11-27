@@ -4,7 +4,7 @@
 
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl d2_LoadForm(int, int, char*);
-void __cdecl fcn_00471d80(int, int);
+void __cdecl d2_CenterForm(int, int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
@@ -16,7 +16,7 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 unsigned int __cdecl cut_RandMod(unsigned int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 int __cdecl gm_CalcProzessBasePenalty(char*);
-int __cdecl fcn_004f6810(char*, unsigned int);
+int __cdecl gm_ValidateProzessCharge(char*, unsigned int);
 void __cdecl d2_SetElementEnabled(int, int);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
@@ -59,7 +59,7 @@ void __cdecl cut_PromptProzessChoice(char* participant, int* action)
         if (*(int*) (participant + 0x10) != action[6]) return;
         *(float*) (participant + 0x98) = *(int*) (other + 0x24) + *(float*) (other + 0x1c);
         dialog = d2_LoadForm(0, 0, "cutscenes\\prozess");
-        fcn_00471d80(dialog, 3);
+        d2_CenterForm(dialog, 3);
         d2_SetForm(dialog, 0);
         io_AppendText(0x14bc, *(unsigned short*) own);
         g_100f1dc = -1;
@@ -84,7 +84,7 @@ void __cdecl cut_PromptProzessChoice(char* participant, int* action)
     case 1:
         if (*(int*) (participant + 0x10) != action[5]) return;
         dialog = d2_LoadForm(0, 0, "cutscenes\\prozess");
-        fcn_00471d80(dialog, 3);
+        d2_CenterForm(dialog, 3);
         d2_SetForm(dialog, 0);
         io_AppendText(0x14cb, *(unsigned short*) own, *(unsigned short*) other);
         g_100f1dc = -1;
@@ -112,7 +112,7 @@ void __cdecl cut_PromptProzessChoice(char* participant, int* action)
         value = (gm_WalkEntityChain(*(unsigned short*) own)
             + gm_WalkEntityChain(*(unsigned short*) other)) / 2000;
         dialog = d2_LoadForm(0, 0, "cutscenes\\folterwahl");
-        fcn_00471d80(dialog, 3);
+        d2_CenterForm(dialog, 3);
         d2_SetForm(dialog, 0);
         io_AppendText(0x14db, *(unsigned short*) own);
         for (i = 0; i < 3; i++) {
@@ -143,7 +143,7 @@ void __cdecl cut_PromptProzessChoice(char* participant, int* action)
     case 3:
         if (*(int*) (participant + 0x10) != action[10]) return;
         dialog = d2_LoadForm(0, 0, "cutscenes\\folterwahl");
-        fcn_00471d80(dialog, 3);
+        d2_CenterForm(dialog, 3);
         d2_SetForm(dialog, 0);
         io_AppendText(0x14e3, *(unsigned short*) own, *(unsigned short*) other, *(unsigned short*) other);
         g_100f1dc = -1;
@@ -169,7 +169,7 @@ void __cdecl cut_PromptProzessChoice(char* participant, int* action)
     case 6:
         if (*(int*) (participant + 0x10) != action[6]) return;
         dialog = d2_LoadForm(0, 0, "cutscenes\\prozess");
-        fcn_00471d80(dialog, 3);
+        d2_CenterForm(dialog, 3);
         d2_SetForm(dialog, 0);
         io_AppendText(0x1512, *(unsigned short*) own);
         g_100f1dc = -1;
@@ -195,7 +195,7 @@ void __cdecl cut_PromptProzessChoice(char* participant, int* action)
         value = *(int*) (participant + 0x10);
         if (value != action[7] && value != action[8] && value != action[9]) return;
         dialog = d2_LoadForm(0, 0, "cutscenes\\prozess");
-        fcn_00471d80(dialog, 3);
+        d2_CenterForm(dialog, 3);
         d2_SetForm(dialog, 0);
         io_AppendText(0x1529, *(unsigned short*) own);
         io_AppendText(0x152a);
@@ -226,7 +226,7 @@ void __cdecl cut_PromptProzessChoice(char* participant, int* action)
         available[2] = -1;
         base = gm_CalcProzessBasePenalty((char*) action);
         dialog = d2_LoadForm(0, 0, "cutscenes\\prozess");
-        fcn_00471d80(dialog, 3);
+        d2_CenterForm(dialog, 3);
         d2_SetForm(dialog, 0);
         io_AppendText(0x1532, *(unsigned short*) own);
         i = 0;
@@ -234,7 +234,7 @@ void __cdecl cut_PromptProzessChoice(char* participant, int* action)
         do {
             choice = d2_GetWindowListItem(dialog, 0, io_AppendText(0x1533, text_id));
             available[i] = choice;
-            if (fcn_004f6810(other, i + base)) d2_SetElementEnabled(choice, 0);
+            if (gm_ValidateProzessCharge(other, i + base)) d2_SetElementEnabled(choice, 0);
             i++;
             text_id += 3;
         } while (i < 3);

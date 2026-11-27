@@ -13,7 +13,7 @@ extern int g_67a370;
 void* __cdecl m_PoolAlloc(void*, int, int);
 void __cdecl m_pool_free(void*, void*);
 void __cdecl d3_VisitSceneObjects(int, int, int, void*, void*);
-char __cdecl fcn_004545c0(char*, char*);
+char __cdecl d3_CollectActiveMeshObjects(char*, char*);
 void __cdecl d3_SplitQuadtreeNode(char*, int, int, int);
 
 char* __cdecl d3_BuildSceneQuadtree(int node, int mask, int split_limit, int max_depth)
@@ -25,7 +25,7 @@ char* __cdecl d3_BuildSceneQuadtree(int node, int mask, int split_limit, int max
 	*(int*) (ctx + 0x44) = mask;
 	*(int*) (ctx + 0x34) = split_limit;
 	*(int*) (ctx + 0x38) = max_depth;
-	d3_VisitSceneObjects(g_67a370, node, mask, fcn_004545c0, ctx);
+	d3_VisitSceneObjects(g_67a370, node, mask, d3_CollectActiveMeshObjects, ctx);
 	d3_SplitQuadtreeNode(ctx, split_limit, 1, max_depth);
 	if (*(int*) (ctx + 0x30) == 0) {
 		m_pool_free(g_6b89a0, ctx);

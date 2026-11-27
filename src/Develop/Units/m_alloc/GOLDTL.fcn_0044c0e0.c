@@ -5,15 +5,15 @@ extern char* g_1042efc;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 char* __cdecl d3_AppendVfsAssetPath(char* s, char* sub);
-void __cdecl fcn_0044b340(char* name, int* a, int* b, int* c);
+void __cdecl d3_LoadTextureSet(char* name, int* a, int* b, int* c);
 char* __cdecl d3_LoadAGF(char* buf, char* name, int a, int b, int c);
 void __cdecl m_FreeTracked(int p);
-void __cdecl fcn_0044a120(void);
+void __cdecl d3_ReleaseAGFMesh(void);
 void __cdecl d3_ComputeNodeBoundsBox(void);
 float __cdecl d3_GetModelRadius(int, char*);
 
 /* ADDRESS: GOLDTL 0x0044c0e0 */
-char* __cdecl fcn_0044c0e0(char* path, char* name)
+char* __cdecl d3_LoadCachedModel(char* path, char* name)
 {
 	char* r;
 	char* p;
@@ -30,9 +30,9 @@ char* __cdecl fcn_0044c0e0(char* path, char* name)
 		c = 0;
 		a = 0;
 		strcpy(buf, p);
-		fcn_0044b340(name, &a, &b, &c);
+		d3_LoadTextureSet(name, &a, &b, &c);
 		if (a == 0) {
-			fcn_0044b340(path, &a, &b, &c);
+			d3_LoadTextureSet(path, &a, &b, &c);
 		}
 		x = a;
 		r = d3_LoadAGF(buf, name, x, b, c);
@@ -40,7 +40,7 @@ char* __cdecl fcn_0044c0e0(char* path, char* name)
 			if (x != 0 && *(int*) (r + 0x200) != x) {
 				m_FreeTracked(x);
 			}
-			*(void**) (r + 0x1ec) = (void*) fcn_0044a120;
+			*(void**) (r + 0x1ec) = (void*) d3_ReleaseAGFMesh;
 			*(void**) (r + 0x1f0) = (void*) d3_ComputeNodeBoundsBox;
 			*(void**) (r + 0x1f4) = (void*) d3_GetModelRadius;
 		} else if (x != 0) {

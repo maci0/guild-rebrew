@@ -2,14 +2,14 @@ typedef struct {
 	int (*f0)(void);
 	int (*f1)(void);
 	int (__stdcall* release)(void*);
-} fcn_0043bcf0_vtbl;
+} D3_RENDER_CTX_VTBL;
 /* SIZE 0xc */
 
 void __cdecl d3_ReleaseTexture(int);
 void __cdecl m_FreeTracked(void*);
 
 /* ADDRESS: GOLDTL 0x0043bcf0 */
-void __cdecl fcn_0043bcf0(int a)
+void __cdecl d3_ReleaseRenderDeviceContext(int a)
 {
 	char* e;
 	char* q;
@@ -35,12 +35,12 @@ void __cdecl fcn_0043bcf0(int a)
 				*(int*) (e - 4) = 0;
 				p = (int*) *(int*) (e - 0x18);
 				if (p != 0) {
-					*(int*) 0x14ce728 = ((fcn_0043bcf0_vtbl*) *p)->release(p);
+					*(int*) 0x14ce728 = ((D3_RENDER_CTX_VTBL*) *p)->release(p);
 					*(int*) (e - 0x18) = 0;
 				}
 				p = (int*) *(int*) (e - 0x14);
 				if (p != 0) {
-					*(int*) 0x14ce728 = ((fcn_0043bcf0_vtbl*) *p)->release(p);
+					*(int*) 0x14ce728 = ((D3_RENDER_CTX_VTBL*) *p)->release(p);
 					*(int*) (e - 0x14) = 0;
 				}
 			}
@@ -48,12 +48,12 @@ void __cdecl fcn_0043bcf0(int a)
 			for (k = 0; k < 8; k++) {
 				p = (int*) *(int*) (s - 4);
 				if (p != 0) {
-					*(int*) 0x14ce728 = ((fcn_0043bcf0_vtbl*) *p)->release(p);
+					*(int*) 0x14ce728 = ((D3_RENDER_CTX_VTBL*) *p)->release(p);
 					*(int*) (s - 4) = 0;
 				}
 				p = (int*) *(int*) s;
 				if (p != 0) {
-					*(int*) 0x14ce728 = ((fcn_0043bcf0_vtbl*) *p)->release(p);
+					*(int*) 0x14ce728 = ((D3_RENDER_CTX_VTBL*) *p)->release(p);
 					*(int*) s = 0;
 				}
 				if (*(int*) (s - 0x14) != 0) {

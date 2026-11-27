@@ -2,7 +2,7 @@
 #include "Develop/Units/d3/d3_camera.h"
 extern char g_14cf950; extern unsigned char g_1040600; extern char* d3_ObjectListHead;
 int __cdecl d3_ResetRenderStates(void *flags);
-int __cdecl fcn_00436f70(int enable);
+int __cdecl d3_SetFogEnabled(int enable);
 void *__cdecl d3_NextVisibleSceneNode(void *node);
 int __cdecl d3_TraverseSceneObjects(int a, int b, int c, const char *s);
 int __cdecl d3_InvalidateSceneRenderCache(int a);
@@ -79,7 +79,7 @@ char __cdecl d3_HandleDebugCameraHotkeys(void)
 			*(char *) 0x6b8019 = !*(char *) 0x6b8019;
 			return 0;
 		case 0x15:
-			fcn_00436f70(!*(char *) 0x6b7ff9);
+			d3_SetFogEnabled(!*(char *) 0x6b7ff9);
 			return 0;
 		}
 	}

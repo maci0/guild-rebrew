@@ -51,7 +51,7 @@ extern float g_664e88;
 #define flt_inv32768 3.0518509447574615e-05f
 
 /* ADDRESS: GOLDTL 0x004c0cd0 */
-void __cdecl fcn_004c0cd0(void)
+void __cdecl d3snd_UpdateRainSoundTier(void)
 {
     float d;
     float s;

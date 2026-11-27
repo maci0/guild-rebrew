@@ -1,5 +1,5 @@
 unsigned short __cdecl gm_RandomMod(int n);
-int __cdecl fcn_004f6040(int* ids, int* d, unsigned short id);
+int __cdecl gm_CollectFrequentCrimeTargets(int* ids, int* d, unsigned short id);
 char* __cdecl gm_LookupEntityRecordById(int id);
 
 /* ADDRESS: GOLDTL 0x004a93a0 */
@@ -17,7 +17,7 @@ int __cdecl ai_PreparePriv0x03(int unused1, char* actor, int unused2, int unused
 	if (actor[0x166] == 0xd) {
 		return 0;
 	}
-	count = fcn_004f6040(ids, d, *(unsigned short*) actor);
+	count = gm_CollectFrequentCrimeTargets(ids, d, *(unsigned short*) actor);
 	if (count <= 0) {
 		return 0;
 	}

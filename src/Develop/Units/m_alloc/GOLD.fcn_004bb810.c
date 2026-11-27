@@ -3,7 +3,7 @@
 
 void* __cdecl m_alloc(int, int);
 
-void __cdecl fcn_004bb810(void)
+void __cdecl anm_InitAnimalArray(void)
 {
 	void* p;
 	p = m_alloc(0x2480, 0x602768);

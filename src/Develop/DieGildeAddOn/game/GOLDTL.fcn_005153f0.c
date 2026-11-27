@@ -39,7 +39,7 @@ extern unsigned char g_773d75;
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl cm_SendSetGebBesitzer(int, int, int);
-int __cdecl fcn_004c6090(Player*, int, int, int);
+int __cdecl cm_RequestAssignWorker(Player*, int, int, int);
 int __cdecl cm_SendSellObjekt(int, int, int, int, char, int);
 
 void __cdecl gm_InitStartingBuildingsAndWorkers(void)
@@ -70,7 +70,7 @@ void __cdecl gm_InitStartingBuildingsAndWorkers(void)
 				cm_AppendPacketFieldDelta(4, 1, (char*) inst - g_aed32c + 0x39, &value);
 				cm_RequestChangeAttribute();
 				cm_SendSetGebBesitzer(inst->id, ent->entity_id, ent->entity_id);
-				fcn_004c6090(inst, 1, 0, ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[inst->office].worker_kind[0]);
+				cm_RequestAssignWorker(inst, 1, 0, ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[inst->office].worker_kind[0]);
 				cm_SendSellObjekt(inst->id, -1, 0x135, 1, (*(char*)&g_773d75), 0);
 			}
 		}

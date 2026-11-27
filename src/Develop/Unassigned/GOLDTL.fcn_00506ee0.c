@@ -4,7 +4,7 @@ typedef struct {
 	char pad0[0x164];
 	unsigned char b164;
 	char pad165[0x21c - 0x165];
-} Rec506ee0;
+} ENTITY_KIND_SLOT_VIEW;
 // SIZE 0x21c
 
 extern char g_7f4ca0[];
@@ -12,13 +12,13 @@ extern char g_7f4ca0[];
 /* ADDRESS: GOLDTL 0x00506ee0 */
 int __cdecl fcn_00506ee0(unsigned short id, int n, ...)
 {
-	Rec506ee0 rec;
+	ENTITY_KIND_SLOT_VIEW rec;
 	va_list ap;
 	int r;
 	int i;
 
 	r = 0;
-	rec = ((Rec506ee0*)g_7f4ca0)[id];
+	rec = ((ENTITY_KIND_SLOT_VIEW*)g_7f4ca0)[id];
 	if (n <= -1) {
 		return r;
 	}

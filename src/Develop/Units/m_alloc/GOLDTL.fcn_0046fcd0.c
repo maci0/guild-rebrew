@@ -1,7 +1,7 @@
 typedef struct
 {
 	int i[0x2f4 / 4];
-} fcn_0046fcd0_Ent;
+} D2_SHOWTXT_ENT;
 // SIZE 0x2f4
 
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -15,7 +15,7 @@ int __cdecl m_alloc(int, char*);
 int __cdecl d2_MeasureTextWidth(char*, int);
 
 /* ADDRESS: GOLDTL 0x0046fcd0 */
-int __cdecl fcn_0046fcd0(int xpos, int ypos, char* name)
+int __cdecl d2_CreateShowTxtElement(int xpos, int ypos, char* name)
 {
 	int idx;
 	char c;

@@ -28,7 +28,7 @@ int __cdecl he_QueueTradeWareCommand(char*, char*, char*);
 int __cdecl cut_AssignTargetOrder(char*, char*, char*, int, int);
 TACTICAL_SLOT_PKT* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
 int __cdecl cm_SendUpdateCutsceneEntitySlot(int, TACTICAL_SLOT_PKT*);
-void __cdecl fcn_00533a40(char*);
+void __cdecl d2_ShowStatusBanner(char*);
 
 /* ADDRESS: GOLDTL 0x004d15c0 */
 char __cdecl cut_DispatchTacticalOrder(char* context, char* targetEntity)
@@ -82,7 +82,7 @@ char __cdecl cut_DispatchTacticalOrder(char* context, char* targetEntity)
 				r = 1;
 				goto end;
 			}
-			fcn_00533a40(g_14a9a10);
+			d2_ShowStatusBanner(g_14a9a10);
 		}
 	}
 end:

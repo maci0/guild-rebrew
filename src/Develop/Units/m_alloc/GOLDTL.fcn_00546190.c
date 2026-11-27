@@ -29,7 +29,7 @@ extern int g_7749d8;
 extern int g_7dc424;
 
 void __cdecl m_FreeTracked(void*);
-void __cdecl fcn_00545780(HE_ACTION*);
+void __cdecl d2_CloseActionPopup(HE_ACTION*);
 
 void __cdecl he_FreeAction(HE_ACTION* u)
 {
@@ -53,7 +53,7 @@ void __cdecl he_FreeAction(HE_ACTION* u)
 			return;
 		}
 		if (((HE_ACTION**)g_7d1980)[i]->slot != 0 && ((struct slot*) ((HE_ACTION**)g_7d1980)[i]->slot)->dlg != -1) {
-			fcn_00545780(((HE_ACTION**)g_7d1980)[i]);
+			d2_CloseActionPopup(((HE_ACTION**)g_7d1980)[i]);
 		}
 		((HE_ACTION**)g_7d1980)[i] = 0;
 		if (i == g_7749d8) {

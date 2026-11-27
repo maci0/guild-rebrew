@@ -34,7 +34,7 @@ int __cdecl cm_SendCutCommand55(int, int, Ev_4d89c0*);
 int __cdecl gm_GetEquippedCombatGear(int);
 int __cdecl gm_FindEntityActiveItem(int);
 int __cdecl gm_FindOrCreateEntitySlot(int, int);
-int __cdecl fcn_004cec00(int, int, int*, int*);
+int __cdecl gm_FindNearestWalkableTile(int, int, int*, int*);
 float __cdecl gm_CalcEntityFlatDistance(int, unsigned int);
 int __cdecl cut_AssignTargetOrder(int, int, int, int, int);
 int __cdecl cut_RandMod(int);
@@ -80,7 +80,7 @@ unsigned int __cdecl cut_ExecuteCombatAttack(int ctx, unsigned int actorArg, int
 				goto fail;
 			if (d3sm_SampleHeight(v7, *(int*) (v9 + 0x34) + 0x4c, (int*) &actorArg, &targetEnt, &ctx) == 0)
 				goto fail;
-			if (fcn_004cec00(actorArg, targetEnt, (int*) &actorArg, &targetEnt) == 0)
+			if (gm_FindNearestWalkableTile(actorArg, targetEnt, (int*) &actorArg, &targetEnt) == 0)
 				goto fail;
 			return cm_RequestChTalkAction(*(int*) (*(int*) (actor + 0x184) + 0x34), actorArg, targetEnt, 0);
 		}

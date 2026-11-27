@@ -7,7 +7,7 @@ extern const float g_6628a8;
 int __cdecl rand(void);
 void __cdecl d3_NormalizeVector(float* v);
 
-typedef struct fcn_00452c60_Particle {
+typedef struct EMITTER_PARTICLE {
 	float f00;
 	float f04;
 	float f08;
@@ -34,13 +34,13 @@ typedef struct fcn_00452c60_Particle {
 	char f50;
 	char flags;
 	char pad52[2];
-} fcn_00452c60_Particle; 
+} EMITTER_PARTICLE; 
 
-typedef struct fcn_00452c60_Emitter {
+typedef struct PARTICLE_EMITTER {
 	char pad00[0x20];
 	int f20;
 	int f24;
-	fcn_00452c60_Particle* particles;
+	EMITTER_PARTICLE* particles;
 	char pad2c[0x0c];
 	float f38;
 	float f3c;
@@ -91,12 +91,12 @@ typedef struct fcn_00452c60_Emitter {
 	void* sub;
 	char padE0[4];
 	float fe4;
-} fcn_00452c60_Emitter;
+} PARTICLE_EMITTER;
 
-typedef struct fcn_00452c60_Sub {
+typedef struct EMITTER_TEXTURE_INFO {
 	char pad00[0x5c];
 	unsigned char n;
-} fcn_00452c60_Sub;
+} EMITTER_TEXTURE_INFO;
 
 #pragma data_seg(".text")
 #include <stdlib.h>
@@ -113,9 +113,9 @@ void __cdecl d3_NormalizeVector(float* v);
 #pragma data_seg(".text")
 
 /* ADDRESS: GOLDTL 0x00452c60 */
-unsigned char __cdecl fcn_00452c60(fcn_00452c60_Emitter* e, unsigned int t)
+unsigned char __cdecl d3_UpdateDirectedEmitter(PARTICLE_EMITTER* e, unsigned int t)
 {
-	fcn_00452c60_Particle* p;
+	EMITTER_PARTICLE* p;
 	int cnt;
 	int den;
 	int i;
@@ -137,8 +137,8 @@ unsigned char __cdecl fcn_00452c60(fcn_00452c60_Emitter* e, unsigned int t)
 	if (e->f68 > e->f6c)
 		len = -len;
 	lim = (e->d4 & 0x80) ? (int) (e->count * e->fb4) : e->count;
-	if (e->sub != 0 && ((fcn_00452c60_Sub*) e->sub)->n > 0)
-		den = ((fcn_00452c60_Sub*) e->sub)->n;
+	if (e->sub != 0 && ((EMITTER_TEXTURE_INFO*) e->sub)->n > 0)
+		den = ((EMITTER_TEXTURE_INFO*) e->sub)->n;
 	e->f38 = 1.0f / e->c4;
 	e->f3c = 1.0f / (e->cc - e->c8);
 	e->f40 = 1.0f / (float) fabs(e->f6c - e->f68);
@@ -277,7 +277,7 @@ unsigned char __cdecl fcn_00452c60(fcn_00452c60_Emitter* e, unsigned int t)
    random direction, integrate live slots by the elapsed time, fade and retire
    expired slots. Returns 0 once the slot budget is filled. */
 /* ADDRESS: GOLDTL 0x00453470 */
-char __cdecl fcn_00453470(void* a1, unsigned int tick)
+char __cdecl d3_UpdateDriftEmitter(void* a1, unsigned int tick)
 {
 	char* e;
 	char* p;

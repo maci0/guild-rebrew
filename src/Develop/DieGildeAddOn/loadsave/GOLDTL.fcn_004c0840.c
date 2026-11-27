@@ -15,7 +15,7 @@ int __cdecl ls_ReadVfsDataChecked(void* dst, int size, int count, int handle);
 void* __cdecl m_alloc(int size, char* file);
 void __cdecl m_FreeTracked(void* p);
 int __cdecl gm_FindRecordById(int id);
-char* __cdecl fcn_004be1f0(int head);
+char* __cdecl rt_AllocRoutePoint(int head);
 
 /* Reads a table of 0x40-byte records and appends each record to its owner list. */
 /* ADDRESS: GOLDTL 0x004c0840 */
@@ -49,7 +49,7 @@ int __cdecl ls_LoadRoutePoints(int n)
 		x = (char*) gm_FindRecordById(rec->id);
 		*(int*) (x + 0x29) = 0;
 		do {
-			dst = (char*) fcn_004be1f0(*(int*) (x + 0x29));
+			dst = (char*) rt_AllocRoutePoint(*(int*) (x + 0x29));
 			if (*(int*) (x + 0x29) == 0)
 				*(int*) (x + 0x29) = (int) dst;
 			*(int*) dst = rec->id;

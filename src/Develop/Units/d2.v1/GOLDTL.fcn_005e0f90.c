@@ -65,13 +65,13 @@ extern int d2_CurrentElementId;
 
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_PositionFormWindows(int, int);
-void __cdecl fcn_00471d80(int, int);
+void __cdecl d2_CenterForm(int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_InitWindowBounds(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetFormWindow(int, int);
-void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
+void __cdecl d2_CreateWindowScrollbar(int, int, int, int, int, int*, int*, int*);
 void __cdecl d2_PopulateSaveSlotList(int, int, void*, void*, char*, int);
 void __cdecl d2_SetElementEnabled(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -80,7 +80,7 @@ void __cdecl d2_SetSlotVisibility(int, int);
 int __cdecl d2_EditSlotTextInput(int, int, char*);
 int __cdecl d2_ConfirmTextIdMessageBox(char*, int);
 int __cdecl ls_CanSaveGame(void);
-void __cdecl fcn_00533a40(char*);
+void __cdecl d2_ShowStatusBanner(char*);
 int __cdecl cm_RequestSysMessage(int, Msg*);
 void __cdecl d2_DestroyForm(int);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -103,14 +103,14 @@ int __cdecl d2_ShowNetworkLoadGame(void)
 	wait = main_LoopFlags;
 	dlg = d2_LoadForm(0, 0, s_6acfdc);
 	d2_PositionFormWindows(dlg, 1);
-	fcn_00471d80(dlg, 2);
+	d2_CenterForm(dlg, 2);
 	d2_SetForm(dlg, 0);
 	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(0, 2);
 	io_AppendText(0x1c58);
 	d2_SetForm(0, 0);
-	fcn_00533f40(0x214, 0x168, d2_CurrentWindowId, d2_GetFormWindow(dlg, 1), 0x82, &a, &b, &c);
+	d2_CreateWindowScrollbar(0x214, 0x168, d2_CurrentWindowId, d2_GetFormWindow(dlg, 1), 0x82, &a, &b, &c);
 	d2_PopulateSaveSlotList(dlg, 1, slots, recs, s_6acff0, 1);
 	d2_SetElementEnabled(slots[0].h, 0);
 	sel = d2_GetFormWindow(dlg, 1);
@@ -140,7 +140,7 @@ int __cdecl d2_ShowNetworkLoadGame(void)
 				}
 				if (!flag || d2_ConfirmTextIdMessageBox(g_14ac64c, 0x101)) {
 					if (!ls_CanSaveGame()) {
-						fcn_00533a40(g_14ac604);
+						d2_ShowStatusBanner(g_14ac604);
 					} else {
 						memset(&m, 0, sizeof(m));
 						m.f0 = i;

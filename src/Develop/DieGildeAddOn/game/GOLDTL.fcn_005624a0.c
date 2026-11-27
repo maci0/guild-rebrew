@@ -14,7 +14,7 @@ extern char s_6a6578[];
 extern char s_67ed14[];
 
 char* __cdecl gm_LookupEntityRecordById(int);
-float __cdecl fcn_005101e0(unsigned char*, int, int, int);
+float __cdecl gm_GetScaledWorkforceOutput(unsigned char*, int, int, int);
 int __cdecl gm_AccumulateTyped2(char*);
 int __cdecl gm_GetSeasonTreasury(char*, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);

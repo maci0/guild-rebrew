@@ -10,7 +10,7 @@ extern double g_6640f8;
 extern double g_664108;
 
 int __cdecl d2_LoadForm(int, int, char*);
-void __cdecl fcn_00471d80(int, int);
+void __cdecl d2_CenterForm(int, int);
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl cut_GetBuildingCombatType(int);
 void __cdecl d2_SetForm(int, int);
@@ -76,7 +76,7 @@ unsigned int __cdecl cut_RunCombatStartDialog(int dialogState)
 	count = 0;
 	sel = 0;
 	win = d2_LoadForm(0, 0, (char*) 0x68be84);
-	fcn_00471d80(win, 3);
+	d2_CenterForm(win, 3);
 	g_772ea8 = 0;
 	id = (int) gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (dialogState + 0x14));
 	rec = (int) gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (dialogState + 0x10c));

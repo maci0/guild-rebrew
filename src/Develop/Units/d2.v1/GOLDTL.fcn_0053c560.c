@@ -38,11 +38,11 @@ typedef void (__cdecl *VirtFn)(int, int, int, int);
 
 
 int __cdecl d3_ClearSceneObjectCache(void);
-int __cdecl fcn_005338a0(void);
+int __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl d3_SelectSceneContext(int, int);
 Figure *__cdecl ch_CreateCharacterAtSceneObject(char *, char *, int);
 int __cdecl d2_LoadForm(int, int, char *);
-void __cdecl fcn_00471d80(int, int);
+void __cdecl d2_CenterForm(int, int);
 void __cdecl d3_InitSkyLayer(char *);
 int __cdecl d3_BlendSceneLightingPreset(unsigned int, float, float, int);
 void __cdecl d2_DestroyForm(int);
@@ -57,14 +57,14 @@ int __cdecl d2_RunChooseTalentDialog(void);
 int __cdecl d2_ShowChooseProfessionDialog(int);
 unsigned int __cdecl d2_ChooseCharacterModel(int);
 void __cdecl d2_SetFormVisibility(int, int);
-char *__cdecl fcn_004730c0(int, int, int, int, char *, int, int);
+char *__cdecl d2_StartScreenFade(int, int, int, int, char *, int, int);
 int __cdecl ch_DestroyCharacter(char *);
 void *__cdecl evt_FindScriptById(int);
 int __cdecl evt_RequestScriptExit(char *);
 void __cdecl evt_WaitForScriptExit(int);
 void __cdecl gv_Free3Fields(void *);
 void __cdecl d3_DestroySkyLayer(void);
-void __cdecl fcn_00473150(char *);
+void __cdecl d2_ReleaseOverlaySprite(char *);
 
 /* ADDRESS: GOLDTL 0x0053c560 */
 int __cdecl d2_RunParentProfessionSelection(void)
@@ -104,7 +104,7 @@ int __cdecl d2_RunParentProfessionSelection(void)
 	memset((void *) 0x7e1fc0, 0, 0x2c);
 	memset((void *) 0x7e1fc0, -1, 0x18);
 	d3_ClearSceneObjectCache();
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	d3_SelectSceneContext(1, 0);
 	base = g_67a370;
 	if (base != 0) {
@@ -131,7 +131,7 @@ int __cdecl d2_RunParentProfessionSelection(void)
 	rhMann = ch_CreateCharacterAtSceneObject((char *) 0x6a3e00, (char *) 0x6a3e14, 2);
 	rhFrau = ch_CreateCharacterAtSceneObject((char *) 0x6a3dec, (char *) 0x6a3c78, 6);
 	obj = d2_LoadForm(0, 0, (char *) 0x6a3dd4);
-	fcn_00471d80(obj, 1);
+	d2_CenterForm(obj, 1);
 	d3_InitSkyLayer((char *) 0x6a3dc4);
 	i = 4;
 	d3_BlendSceneLightingPreset(i, 0, 1.0f, 1);
@@ -229,7 +229,7 @@ slot_found:
 			}
 		} while (main_RunFrameLoop((int) d2_RunParentProfessionSelection, 0x12d6) != 0);
 		if (ret == 1) {
-			spr = fcn_004730c0(0, 0, g_1040494,
+			spr = d2_StartScreenFade(0, 0, g_1040494,
 			    d2_ScreenHeight, (char *) 0x67d67c, 0x5a, 1);
 			while ((*(unsigned char *) spr & 4) == 0)
 				main_RunFrameLoop(0, 0xc6);
@@ -279,6 +279,6 @@ slot_found:
 	d3_CameraAnimating = 0;
 	d3_ActiveCameraAnimation = 0;
 	if (spr != 0)
-		fcn_00473150(spr);
+		d2_ReleaseOverlaySprite(spr);
 	return ret;
 }

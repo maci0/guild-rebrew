@@ -34,14 +34,14 @@ void __cdecl d2_InitPlayerBar(int, int);
 void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl d3_EndCameraAndUiMode(void);
 void __cdecl d2_DrawPanelFrame(int, int, int);
-void __cdecl fcn_00533f40(int, int, int, int);
+void __cdecl d2_CreateWindowScrollbar(int, int, int, int);
 void __cdecl d2_ResetBuildingUiSlots(void);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl gm_GetMsgField(char*, char*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl he_AssignActionSlot(char*, char*, int, char*);
 void __cdecl d2_RunProduktionDialog(int);
-void __cdecl fcn_00594de0(int, int, int, char*);
+void __cdecl d2_UpdateProduktionPanels(int, int, int, char*);
 int __cdecl d2_SyncWareProduktionSlotGrid(int, int);
 void __cdecl d2_RefreshWorkshopInventoryGrids(int, int, int, int);
 void __cdecl d3snd_PlayWorkerOrderVoice(void);
@@ -115,7 +115,7 @@ int __cdecl d2_ShowProductionDialog(char* building)
 	*(int*) &((D2_WIN*)((char*)g_1015f40 + k))->pad3a8[8] = 0xe;
 	*(int*) &((D2_WIN*)((char*)g_1015f40 + k))->pad3a8[12] = 0xe;
 	d2_DrawPanelFrame(d2_CurrentWindowId, 0x70b, 0x742);
-	fcn_00533f40(0x270, 0x15e, d2_CurrentWindowId, d2_GetFormWindow(h, 2, 0x78, &v16, &v15, &item));
+	d2_CreateWindowScrollbar(0x270, 0x15e, d2_CurrentWindowId, d2_GetFormWindow(h, 2, 0x78, &v16, &v15, &item));
 	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[item].font)) = 0x54;
 	d2_SetOverlayAnimation(0, 0);
 	do {
@@ -363,7 +363,7 @@ int __cdecl d2_ShowProductionDialog(char* building)
 		}
 		itoa(count - 1, buf, 10);
 		d2_SetLabelText(item, buf);
-		fcn_00594de0(h, 2, count, p3);
+		d2_UpdateProduktionPanels(h, 2, count, p3);
 		d2_SyncWareProduktionSlotGrid((int) building, (int) p2);
 		d2_RefreshWorkshopInventoryGrids(h, 1, 0, (int) building);
 	} while (main_RunFrameLoop(d2_RunProduktionDialog, 0x677c7) != 0);

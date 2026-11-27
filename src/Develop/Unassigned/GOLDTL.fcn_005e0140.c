@@ -8,7 +8,7 @@ int __cdecl vfs_ListFilesByExtension(char *, char *, void *);
 int __cdecl vfs_Tfopen(char *, char *, int);
 int __cdecl ls_LoadSavegameHeader(int, char *);
 int __cdecl CloseVfsStream(int);
-int __cdecl fcn_005e0090(int, void *, int, void *);
+int __cdecl ls_AssignSavegameSlot(int, void *, int, void *);
 int __cdecl d2_SetForm(int, int);
 int __cdecl d2_CreateChildWindow(int, int, int, int, int, int);
 int __cdecl d2_ShowTxt(int, int, char *, int);
@@ -42,7 +42,7 @@ void __cdecl d2_PopulateSaveSlotList(int a, int b, void *items, void *records, c
             continue;
         }
         CloseVfsStream(file);
-        index = fcn_005e0090(16, items, (unsigned char)header[0x6d], rec);
+        index = ls_AssignSavegameSlot(16, items, (unsigned char)header[0x6d], rec);
         if (index == -1) continue;
         d2_SetForm(a, b);
         row = (char *)items + index * 0x220;
@@ -87,7 +87,7 @@ void __cdecl d2_PopulateSaveSlotList(int a, int b, void *items, void *records, c
         if (*(int *)(row + 8) != -1) continue;
         memset(empty, 0, sizeof(empty));
         sprintf(empty + 9, *(char **)0x14ac640, i);
-        index = fcn_005e0090(16, items, i, empty);
+        index = ls_AssignSavegameSlot(16, items, i, empty);
         if (index == -1) continue;
         d2_SetForm(a, b);
         row = (char *)items + index * 0x220;

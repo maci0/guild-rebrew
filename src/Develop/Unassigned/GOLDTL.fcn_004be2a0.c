@@ -13,7 +13,7 @@ struct ROUTE_NODE {
 	ROUTE_NODE* next;
 };
 
-ROUTE_NODE* __cdecl fcn_004be1f0(ROUTE_NODE*);
+ROUTE_NODE* __cdecl rt_AllocRoutePoint(ROUTE_NODE*);
 
 
 /* ADDRESS: GOLDTL 0x004be2a0 */
@@ -25,7 +25,7 @@ ROUTE_NODE* __cdecl rt_CloneRoutePoints(ROUTE_NODE* src)
 	q = 0;
 	head = 0;
 	for (; src != 0; src = src->next) {
-		q = fcn_004be1f0(q);
+		q = rt_AllocRoutePoint(q);
 		if (head == 0)
 			head = q;
 		q->a = src->a;

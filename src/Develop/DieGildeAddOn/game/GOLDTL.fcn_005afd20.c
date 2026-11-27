@@ -14,7 +14,7 @@ extern char s_6a9924[];
 extern char s_6ab384[];
 extern char s_6ab368[];
 
-void __cdecl fcn_005338a0(void);
+void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
@@ -37,7 +37,7 @@ void __cdecl d2_RunZollamtMenu(char* building)
 	e = 0;
 	c = 0;
 	d = 0;
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	if (main_RunFrameLoop((void*) d2_RunZollamtMenu, 0x67fff) != 0) {
 		do {
 			if (g_7746d8 & 0x200) {

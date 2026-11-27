@@ -16,7 +16,7 @@ int __cdecl amt_CanUpgradeBuildingTier2(ZUNFT_UPGRADE_ENTITY_VIEW* e);
 void __cdecl d2_ShowModalMessageBox(int, int);
 void __cdecl d2_CheckActionBlocker(ZUNFT_UPGRADE_ENTITY_VIEW* e, int);
 void __cdecl d2_RunZunftLevel2Dialog(void);
-void __cdecl fcn_005bdc30(int, char*, int, void (__cdecl*)(void), int);
+void __cdecl d2_RunCityScrollMapDialog(int, char*, int, void (__cdecl*)(void), int);
 
 #pragma optimize("y", off)
 void __cdecl d2_StartZunftLevel2Action(void)
@@ -60,6 +60,6 @@ void __cdecl d2_StartZunftLevel2Action(void)
 	*(char**) (buf + 8) = g_7d4190;
 	*(int*) (buf + 0xc) = 1;
 	*(int*) (buf + 0x4c) = 0x727;
-	fcn_005bdc30(1, buf, g_14aac9c, d2_RunZunftLevel2Dialog, 0);
+	d2_RunCityScrollMapDialog(1, buf, g_14aac9c, d2_RunZunftLevel2Dialog, 0);
 }
 #pragma optimize("", on)

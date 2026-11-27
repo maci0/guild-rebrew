@@ -26,7 +26,7 @@ extern char s_675908[];
 extern char s_68b1e0[];
 
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00473150(char*);
+void __cdecl d2_ReleaseOverlaySprite(char*);
 void __cdecl d3_SelectSceneContext(int, int);
 char __cdecl d3_LoadScene(const char*, void*, SCENE_PROGRESS);
 void __cdecl gv_Free3Fields(int*);
@@ -42,10 +42,10 @@ void __cdecl ch_SetPosition(char*, float*, int);
 int __cdecl d3_FindFreeSceneContext(void);
 void __cdecl ReportClientMessage(const char*);
 int __cdecl d3_ResolveSceneObjectProtoId(char*);
-void __cdecl fcn_00510bd0(char*);
+void __cdecl d3_InitBuildingSceneAnimRates(char*);
 void __cdecl d2_UpdateProgressOverlay(int, int, int);
 void __cdecl gm_AdvanceGameClock(void);
-char* __cdecl fcn_004730c0(int, int, int, int, int, int, int);
+char* __cdecl d2_StartScreenFade(int, int, int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00510c90 */
 void __cdecl init_LoadObjektScene(int objectTypeIndex)
@@ -71,11 +71,11 @@ void __cdecl init_LoadObjektScene(int objectTypeIndex)
 		unsigned char* ch;
 
 		flags = (main_LoopFlags & 0xfffffff7) | 0x100080;
-		ch = (unsigned char*) fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, s_67d67c, 0x32, 1);
+		ch = (unsigned char*) d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, s_67d67c, 0x32, 1);
 		while ((*ch & 4) == 0) {
 			main_RunFrameLoop(0, flags);
 		}
-		fcn_00473150((char*) ch);
+		d2_ReleaseOverlaySprite((char*) ch);
 		progress = (int) d2_UpdateProgressOverlay;
 	}
 	if ((g_7747b0 & 8) && !tb_IsCallbackPaused((TIMER_CALLBACK) gm_AdvanceGameClock)) {
@@ -93,7 +93,7 @@ void __cdecl init_LoadObjektScene(int objectTypeIndex)
 		if (d3_LoadScene(path, 0, (SCENE_PROGRESS) progress)) {
 			d3_SelectSceneContext(d3_CurrentContextIndex, 0);
 			d3_TraverseSceneObjects(g_67a370, 0, 0x1e0, (void (__cdecl*)(void)) d3_ResolveSceneObjectProtoId);
-			d3_TraverseSceneObjects(g_67a370, 0, 6, (void (__cdecl*)(void)) fcn_00510bd0);
+			d3_TraverseSceneObjects(g_67a370, 0, 6, (void (__cdecl*)(void)) d3_InitBuildingSceneAnimRates);
 			init_SceneContextIndices[objectTypeIndex] = (char) type;
 			d3_SelectSceneContext(saved, 0);
 		}
@@ -111,7 +111,7 @@ void __cdecl init_LoadObjektScene(int objectTypeIndex)
 				d3sm_GetSceneSuperMap((char*) g_67a370);
 				d3sm_Rebuild((char*) *(int*) (g_67a370 + 0xb0), g_6b8300);
 				d3_TraverseSceneObjects(g_67a370, 0, 0x1e0, (void (__cdecl*)(void)) d3_ResolveSceneObjectProtoId);
-				d3_TraverseSceneObjects(g_67a370, 0, 6, (void (__cdecl*)(void)) fcn_00510bd0);
+				d3_TraverseSceneObjects(g_67a370, 0, 6, (void (__cdecl*)(void)) d3_InitBuildingSceneAnimRates);
 				p = ch_CharacterSlots;
 				do {
 					obj = (char*) *p;

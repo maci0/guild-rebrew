@@ -19,7 +19,7 @@ extern float g_6652c8;
 extern char g_6a5a10[];
 
 int __cdecl gm_CompareGameTime(pos14_7f4c00*, char*);
-void __cdecl fcn_00545780(char*);
+void __cdecl d2_CloseActionPopup(char*);
 void __cdecl he_FreeAction(char*);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
@@ -59,20 +59,20 @@ void __cdecl he_RunMeisterpruefungPrompt(char* u)
 				cm_RequestMoveCredits(*(int*) (gm_CityEntity + 4), ((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id, g_773d75,
 				    (int) (gm_WalkEntityChain(*(unsigned short*) (u + 8)) * g_6652c8));
 				gm_AdjustOfficeHoldersFavor(*(unsigned short*) (u + 8), 8);
-				fcn_00545780(u);
+				d2_CloseActionPopup(u);
 				he_FreeAction(u);
 				return;
 			}
 			if (g_100f1dc == 1) {
 				gm_AdjustOfficeHoldersFavor(*(unsigned short*) (u + 8), -6);
-				fcn_00545780(u);
+				d2_CloseActionPopup(u);
 				he_FreeAction(u);
 			}
 			break;
 		}
 	} else {
 		if (*(char**) (u + 0x74) != 0) {
-			fcn_00545780(u);
+			d2_CloseActionPopup(u);
 		}
 		he_FreeAction(u);
 	}

@@ -54,7 +54,7 @@ void __cdecl cut_ResetEventSlots(unsigned char*);
 int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl cm_RequestSysMessage(int, void*);
 void __cdecl cm_WaitNetworkSyncBanner(int);
-int __cdecl fcn_00533a40(int);
+int __cdecl d2_ShowStatusBanner(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl cm_StageRawPacketPayload(int, rec35c*);
@@ -104,7 +104,7 @@ label_4e526f:
 			cm_WaitNetworkSyncBanner(g_14ac5e8);
 		}
 	}
-	fcn_00533a40((int) &g_6b5c60);
+	d2_ShowStatusBanner((int) &g_6b5c60);
 	if (g_7747b0 & 8) {
 		for (i = 0; i < (int) cutscene[0x30]; i++) {
 			g_772f28 = i;
@@ -179,7 +179,7 @@ label_4e526f:
 			}
 			while (cut_AreAllPlayersDone(cutscene) == 0) {
 				d2_AppendPendingPlayerNames(cutscene);
-				fcn_00533a40(g_14ac5ec);
+				d2_ShowStatusBanner(g_14ac5ec);
 				main_RunFrameLoop(0, cut_EventLoopFlags | 0x8000);
 			}
 		} else if (kind == 0) {

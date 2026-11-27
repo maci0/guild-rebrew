@@ -5,13 +5,13 @@ extern char g_10432c0[];
 int __cdecl d3_GetContextIndex(char* p);
 void __cdecl d3_SelectSceneContext(int a, int b);
 void __cdecl d3_InitUniverse(int flags);
-int __cdecl fcn_0045b700(int a, int b, int c);
+int __cdecl d3sm_CreateMap(int a, int b, int c);
 void __cdecl ch_BackupGrid(int r);
 void __cdecl d3_DeinitUniverse(int flags);
 int __cdecl d3_GetContextIndex(char* p);
 void __cdecl d3_SelectSceneContext(int a, int b);
 void __cdecl d3_InitUniverse(int flags);
-int __cdecl fcn_0045b700(int a, int b, int c);
+int __cdecl d3sm_CreateMap(int a, int b, int c);
 void __cdecl ch_BackupGrid(int r);
 void __cdecl d3_DeinitUniverse(int flags);
 
@@ -40,7 +40,7 @@ int __cdecl d3sm_GetObjectSuperMap(char* obj)
 			d3_InitUniverse(flags);
 		}
 		*(int*) (*(char**) (obj + 0x88) + 0xb0) =
-			fcn_0045b700(g_6b8300, *(int*) (*(char**) (obj + 0x88) + 0xb4), 2);
+			d3sm_CreateMap(g_6b8300, *(int*) (*(char**) (obj + 0x88) + 0xb4), 2);
 		scene = *(char**) (obj + 0x88);
 		supermap = *(int*) (scene + 0xb0);
 		if (scene != g_10432c0 && (*(char**)&g_67a370) == scene && supermap != 0) {
@@ -76,7 +76,7 @@ int __cdecl d3sm_GetSceneSuperMap(char* scene)
 			flags = ctx_flags & ~2;
 			d3_InitUniverse(flags);
 		}
-		supermap = fcn_0045b700(g_6b8300, *(int*) (scene + 0xb4), 2);
+		supermap = d3sm_CreateMap(g_6b8300, *(int*) (scene + 0xb4), 2);
 		*(int*) (scene + 0xb0) = supermap;
 		if (scene != g_10432c0 && (*(char**)&g_67a370) == scene && supermap != 0) {
 			ch_BackupGrid(supermap);

@@ -12,7 +12,7 @@ char* __cdecl fcn_00442910(int, float*, float*, char*);
 
 
 /* ADDRESS: GOLDTL 0x004cc030 */
-int __cdecl fcn_004cc030(char* cmd, char* result)
+int __cdecl cm_ExSwapEntityModel(char* cmd, char* result)
 {
 	char* o;
 	char* n;

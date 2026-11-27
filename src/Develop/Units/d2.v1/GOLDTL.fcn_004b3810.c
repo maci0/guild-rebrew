@@ -17,7 +17,7 @@ extern char* g_77255c;
 extern int g_100f1dc;
 #include "client_dialog_state.h"
 
-int __cdecl fcn_004b3720(char* name, char* text, int arg);
+int __cdecl hst_ReadNextChronicleEntry(char* name, char* text, int arg);
 int __cdecl d2_CreateScrollPerga(void);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl d2_SetForm(int k, int i);
@@ -28,7 +28,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyScrollPerga(void);
 
 /* ADDRESS: GOLDTL 0x004b3810 */
-void __cdecl fcn_004b3810(int arg)
+void __cdecl d2_ShowHistoryScrollDialog(int arg)
 {
 	char text[0x1fb8];
 	char name[0x100];
@@ -85,7 +85,7 @@ void __cdecl fcn_004b3810(int arg)
 			rep stosb
 		}
 	}
-	if (fcn_004b3720(name, text, arg) != 1) {
+	if (hst_ReadNextChronicleEntry(name, text, arg) != 1) {
 		return;
 	}
 	h = d2_CreateScrollPerga();
@@ -154,7 +154,7 @@ void __cdecl fcn_004b3810(int arg)
 					rep stosb
 				}
 			}
-			if (fcn_004b3720(name, text, arg) != 1) {
+			if (hst_ReadNextChronicleEntry(name, text, arg) != 1) {
 				g_774654 = 1;
 			} else {
 				d2_SetForm(h, 2);
@@ -169,6 +169,6 @@ void __cdecl fcn_004b3810(int arg)
 				io_AppendText((int) "$C$Z$[%s$]", name);
 			}
 		}
-	} while (main_RunFrameLoop(fcn_004b3810, 0x66087) != 0);
+	} while (main_RunFrameLoop(d2_ShowHistoryScrollDialog, 0x66087) != 0);
 	d2_DestroyScrollPerga();
 }

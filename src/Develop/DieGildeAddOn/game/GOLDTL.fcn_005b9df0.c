@@ -31,7 +31,7 @@ void __cdecl cm_SendCopyEntityData(char*);
 void __cdecl gm_CalcEntityInventoryStats(char*, char*);
 int __cdecl gm_CalcEscortCost(int, int);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
-void __cdecl fcn_0057e880(int, char*, int, int);
+void __cdecl d2_DispatchTutorialInput(int, char*, int, int);
 
 int __cdecl cm_DispatchCartTransfer(int playerIdx, char* cart, char* origin, char* dest)
 {
@@ -65,7 +65,7 @@ int __cdecl cm_DispatchCartTransfer(int playerIdx, char* cart, char* origin, cha
 			cm_RequestTransferCurrencyNoKill(-1, ((ENTITY_RECORD_VIEW*)g_7f4ca0)[playerIdx].entity_id, g_773d75, res);
 		}
 		if (playerIdx == g_774970) {
-			fcn_0057e880(0x24, dest, 0, 0);
+			d2_DispatchTutorialInput(0x24, dest, 0, 0);
 		}
 	}
 	return res;

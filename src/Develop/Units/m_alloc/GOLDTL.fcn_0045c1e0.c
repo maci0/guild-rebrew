@@ -8,7 +8,7 @@ void __cdecl d3_ReleaseTexture(char* p);
 void __cdecl m_FreeTracked(void* p);
 
 /* ADDRESS: GOLDTL 0x0045c1e0 */
-void __cdecl fcn_0045c1e0(void)
+void __cdecl d3_ReleaseAllRenderTextures(void)
 {
 	unsigned int i;
 	char* p;

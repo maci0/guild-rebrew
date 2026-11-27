@@ -34,7 +34,7 @@ void __cdecl cm_SendLogAction(char* s);
 void __cdecl cm_SendTraceEnd(char* s);
 void __cdecl cm_SendCopyEntityData(char* msg);
 void __cdecl cm_RequestMoveCredits(int a, int b, char c, int n);
-int __cdecl fcn_0051e070(void);
+int __cdecl main_GetLanguage(void);
 void __cdecl io_FormatTextBuffer(void* out, int id, ...);
 void __cdecl he_MessageBoxQuickjump(int a, int b, char* text, int c, int d, int e, int f, int g, int h);
 
@@ -94,7 +94,7 @@ void __cdecl gm_TryAutoUpgradeBuildingSlots(char* building, char* owner, int cha
 	cm_SendLogAction(g_67e33c);
 	cm_SendCopyEntityData(msg);
 	cm_RequestMoveCredits(-1, ((Ent*)g_7f4ca0)[*(unsigned short*) (*(char**) (owner + 0x16c) + 0x27)].handle, (*(char*)&g_773d75), 0x1f40);
-	switch (fcn_0051e070()) {
+	switch (main_GetLanguage()) {
 	case 0:
 		if (n == 1) {
 			io_FormatTextBuffer(buf, 0x1bbc, *(unsigned short*) owner, *(char**) (owner + 0x16c));

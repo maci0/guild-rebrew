@@ -4,7 +4,7 @@ char* __cdecl gm_SearchTable67(int);
 int __cdecl gm_CheckEntityType(char*);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 char* __cdecl gm_SetupEntityQuery(char*);
-void __cdecl fcn_004c5580(char*, int, char*);
+void __cdecl cm_SendRawEntityPacket(char*, int, char*);
 
 
 /* ADDRESS: GOLD 0x004e48b0 */
@@ -51,8 +51,8 @@ void __cdecl he_SendCmdMessage(int* a1, char* a2, char* text, char* extra)
 	if (extra != 0 && *extra != 0) {
 		memcpy(buf + n, extra, strlen(extra) + 1);
 		message[0x9c] |= 0x10;
-		fcn_004c5580(message, strlen(extra) + n + 1, buf);
+		cm_SendRawEntityPacket(message, strlen(extra) + n + 1, buf);
 	} else {
-		fcn_004c5580(message, strlen(text) + 1, text);
+		cm_SendRawEntityPacket(message, strlen(text) + 1, text);
 	}
 }

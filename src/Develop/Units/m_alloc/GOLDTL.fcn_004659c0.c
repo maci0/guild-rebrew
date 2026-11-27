@@ -22,10 +22,10 @@ extern int g_67dabc;
 extern char s_67d410[];
 extern char s_67d3d4[];
 
-int __cdecl fcn_00465850(void);
+int __cdecl vfs_EvictOldestCacheEntry(void);
 char* __cdecl m_alloc(int size, char* tag);
 int __cdecl fcn_0065f220(const char* a, const char* b);
-char* __cdecl fcn_0047acf0(char* p);
+char* __cdecl d2_BuildShapeBank(char* p);
 void __cdecl m_FreeTracked(char* p);
 
 /* ADDRESS: GOLDTL 0x004659c0 */
@@ -38,7 +38,7 @@ int __cdecl d2_Show(int idx, char* path)
 
 	if (((fcn_004659c0_Def*)g_772500)[idx].data == 0) {
 		while (((fcn_004659c0_Def*)g_772500)[idx].size + g_772508 > g_67d36c) {
-			if (fcn_00465850() == 0) {
+			if (vfs_EvictOldestCacheEntry() == 0) {
 				break;
 			}
 		}
@@ -66,7 +66,7 @@ int __cdecl d2_Show(int idx, char* path)
 				}
 			}
 			old = ((fcn_004659c0_Def*)g_772500)[idx].data;
-			((fcn_004659c0_Def*)g_772500)[idx].data = fcn_0047acf0(old);
+			((fcn_004659c0_Def*)g_772500)[idx].data = d2_BuildShapeBank(old);
 			m_FreeTracked(old);
 			g_67dabc = save;
 		}

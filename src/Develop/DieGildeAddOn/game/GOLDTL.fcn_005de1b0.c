@@ -42,7 +42,7 @@ extern __int64 g_666018;
 extern char* g_14a558c;
 extern char* g_14a5590;
 
-Unit* __cdecl fcn_005bdc30(int, Req*, char*, int, int);
+Unit* __cdecl d2_RunCityScrollMapDialog(int, Req*, char*, int, int);
 unsigned char* __cdecl d2_OpenTargetPicker(Req*, char*, int, int);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 
@@ -70,7 +70,7 @@ int __cdecl gm_ObjSabotageBuildingHealth(unsigned char* obj, int* arg)
 		req.size = -1;
 		req.kind = 6;
 		req.cd = 0x1a0744300;
-		q = fcn_005bdc30(1, &req, g_14a558c, 0, 0);
+		q = d2_RunCityScrollMapDialog(1, &req, g_14a558c, 0, 0);
 		if (q == 0) {
 			return 0;
 		}

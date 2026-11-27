@@ -39,7 +39,7 @@ extern char g_6b5c60[];
 int __cdecl d2_AddElementToWindow(int x, int y, int kind, int owner);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
-int __cdecl fcn_00533f40(int x, int y, int owner, int other, int arg5, int* id2, int* id1, int* id3)
+int __cdecl d2_CreateWindowScrollbar(int x, int y, int owner, int other, int arg5, int* id2, int* id1, int* id3)
 {
 	D2_WIN* s;
 

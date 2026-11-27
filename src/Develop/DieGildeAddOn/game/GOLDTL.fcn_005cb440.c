@@ -39,7 +39,7 @@ typedef struct Node {
 
 int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl d2_BuildPersonStatusDesc(Row*);
-int __cdecl fcn_005cf720(unsigned short, unsigned short, int, int);
+int __cdecl gm_MatchesTargetFilter(unsigned short, unsigned short, int, int);
 Node* __cdecl he_fn_Handlung(void);
 Node* __cdecl he_StartHandlungSearch(int, int, int);
 
@@ -158,7 +158,7 @@ next:
 	o = rows;
 	for (i = 0; i < n; i++) {
 		d2_BuildPersonStatusDesc(o);
-		o->val = fcn_005cf720(subject->id, o->ent->id, filterKind, 0);
+		o->val = gm_MatchesTargetFilter(subject->id, o->ent->id, filterKind, 0);
 		o = (Row*) ((char*) o + 0x38);
 	}
 	return n;

@@ -28,7 +28,7 @@ int __cdecl gm_GetBuildingTechEffect(int, int, int);
 int __cdecl d2_GetFormWindow(int, int);
 void __cdecl d2_InitWindowBounds(int);
 void __cdecl d2_CenterDialogWindows(int);
-void __cdecl fcn_005338a0(void);
+void __cdecl d2_ClearStatusTextSlots(void);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
@@ -66,7 +66,7 @@ void __cdecl d2_ShowSchneidereiPlauschDialog(ENTITY_RECORD* other)
 	}
 	d2_InitWindowBounds(d2_GetFormWindow(dlg, 0));
 	d2_CenterDialogWindows(dlg);
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x4227);
 	io_AppendText(0x422b, other->entity_index, count, 0x422c, other->entity_index, 1);

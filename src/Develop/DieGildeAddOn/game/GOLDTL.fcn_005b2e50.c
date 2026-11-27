@@ -5,7 +5,7 @@ extern char g_6b5c60[];
 
 
 
-int  __cdecl fcn_0051e070(void);
+int  __cdecl main_GetLanguage(void);
 void __cdecl io_FormatTextBuffer(void*, int, int, int, int);
 void __cdecl he_PostEntityMessage(int, int, void*, int, int, void*);
 
@@ -15,7 +15,7 @@ void __cdecl he_NotifyStorageTransfer(void* entity, void* otherEntity, int count
 
 	t = *(char*) ((char*) entity + 2);
 	if (t == 6 || t == 7) {
-		switch (fcn_0051e070()) {
+		switch (main_GetLanguage()) {
 		case 0:
 		case 2:
 			io_FormatTextBuffer(g_774a80, 0x4150, *(unsigned short*) otherEntity, count,

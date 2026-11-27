@@ -3,7 +3,7 @@
 int __cdecl fcn_0041e620(void);
 void __cdecl ShutdownVideo(void);
 void __cdecl fcn_004c2d90(float, int);
-unsigned char* __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
+unsigned char* __cdecl d2_StartScreenFade(int, int, int, int, char*, int, int);
 void __cdecl main_RunFrameLoop(int, int);
 void __cdecl main_PumpWindowMessages(void);
 void __cdecl io_PollKeyboardInput(void);
@@ -11,7 +11,7 @@ void __cdecl io_AcquireKeyboard(int);
 void __cdecl io_AcquireMouse(int);
 int __cdecl OpenMovieWindow(char*, void*, void*, int, int, int, int, int);
 int __cdecl PlayVideo(int);
-void __cdecl fcn_00473150(unsigned char*);
+void __cdecl d2_ReleaseOverlaySprite(unsigned char*);
 
 
 __declspec(dllimport) void __stdcall Sleep(unsigned long);
@@ -36,7 +36,7 @@ void __cdecl main_PlayOutroMovie(void)
 		fcn_0041e620();
 	}
 	fcn_004c2d90(0.0f, 0x3e8);
-	h = fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, (char*) 0x67d67c, 0x5a, 1);
+	h = d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, (char*) 0x67d67c, 0x5a, 1);
 	for (;;) {
 		if ((*h & 4) && !(g_678158 >= 0.0f)) {
 			break;
@@ -57,7 +57,7 @@ void __cdecl main_PlayOutroMovie(void)
 	g_7747d4 = OpenMovieWindow(b, 0, (void*) main_Instance, 0, 0, 0, 0, 0x8a);
 	Sleep(0xc8);
 	PlayVideo(g_7747d4);
-	fcn_00473150(h);
+	d2_ReleaseOverlaySprite(h);
 	main_PumpWindowMessages();
 	g_662264((int) g_774940);
 	io_AcquireKeyboard(1);

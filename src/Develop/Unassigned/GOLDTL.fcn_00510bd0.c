@@ -1,7 +1,7 @@
 
 
 /* ADDRESS: GOLDTL 0x00510bd0 */
-void __cdecl fcn_00510bd0(char* o)
+void __cdecl d3_InitBuildingSceneAnimRates(char* o)
 {
 	int i;
 

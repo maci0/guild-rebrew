@@ -9,7 +9,7 @@ int __cdecl gm_SelectEntityHeadSet(int);
 char* __cdecl ch_CreateAtPosition(char*, float*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl d3_SetObjectRotation(char*, int*);
-void __cdecl fcn_004fdcf0(char*);
+void __cdecl d3_UpdateEntityTextureVariant(char*);
 void __cdecl ch_AssignHeadIcon(char*);
 
 /* ADDRESS: GOLDTL 0x004fe2e0 */
@@ -71,7 +71,7 @@ have:
 				d3_SetObjectRotation(*(char**) (*(char**) (entity + 0x184) + 0x34), rotPtr);
 			}
 			strcpy(entity + 0x1f4, v6);
-			fcn_004fdcf0(entity);
+			d3_UpdateEntityTextureVariant(entity);
 			ch_AssignHeadIcon(entity);
 		}
 	}

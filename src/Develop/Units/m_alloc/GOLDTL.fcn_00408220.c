@@ -2,7 +2,7 @@
 
 void* __cdecl m_alloc(int, void*);
 
-void __cdecl fcn_00408220(int a1)
+void __cdecl ch_AllocMap(int a1)
 {
 	void* p;
 

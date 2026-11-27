@@ -12,7 +12,7 @@ extern void __cdecl d2_AppendShapeToBank(void*, void*);
  * header decides whether the clone is placed before or after the base region.
  * a2 == 0 frees the source. Returns 0 for a record without a payload. */
 /* ADDRESS: GOLDTL 0x00479660 */
-void* __cdecl fcn_00479660(char* bank, int mode, int keepOriginal)
+void* __cdecl d2_ConvertShapeBankTo16(char* bank, int mode, int keepOriginal)
 {
 	int size = *(int*) (bank + 0x30);
 	int sum = 0;

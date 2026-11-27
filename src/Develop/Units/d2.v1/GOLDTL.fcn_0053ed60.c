@@ -22,7 +22,7 @@ extern int g_14b5e54;
 extern int d2_CurrentWindowId;
 
 void __cdecl d3_ClearSceneObjectCache(void);
-void __cdecl fcn_005338a0(void);
+void __cdecl d2_ClearStatusTextSlots(void);
 void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl d3_SetNodePosition(char*, int*);
 void __cdecl d3_SetObjectRotation(char*, int*);
@@ -41,10 +41,10 @@ void __cdecl RegisterStatusText(char*, char*, int);
 char* __cdecl fcn_00442910(int, void*, void*, char*);
 void __cdecl d3_ApplyObjectAnimation(char*, char*, int);
 char __cdecl d3_SetObjectVisible(char*, char);
-int __cdecl fcn_004e4470(char*);
+int __cdecl cut_PlayEventScript(char*);
 void __cdecl cut_WaitForScript(int);
 int __cdecl d2_LoadForm(int, int, char*);
-void __cdecl fcn_00471d80(int, int);
+void __cdecl d2_CenterForm(int, int);
 void __cdecl d2_PositionFormWindows(int, int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -53,7 +53,7 @@ void __cdecl d2_CreateButtonRow(int, int, int*, int, ...);
 int __cdecl main_RunFrameLoop(void*, int);
 char* __cdecl d3_FindSceneObjectAtScreenPoint(float, float, int, int);
 int __cdecl fcn_0064f170(char*, char*, int);
-void __cdecl fcn_0053eb60(int);
+void __cdecl d2_RunChooseOpponentsDialog(int);
 void __cdecl d2_SetFormVisibility(int, int);
 int __cdecl d2_RunChooseIntroMenu(void);
 int __cdecl d2_RunChooseHistoryDialog(void);
@@ -99,7 +99,7 @@ int __cdecl d2_RunChooseCityDialog(int unused, int network)
 	prev = 0;
 	highlight = -1;
 	d3_ClearSceneObjectCache();
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	d3_SelectSceneContext(0, 0);
 	d3_SetNodePosition(d3_ActiveCamera, (int*) (d3_ActiveCamera + 0x5c));
 	d3_SetObjectRotation(d3_ActiveCamera, (int*) (d3_ActiveCamera + 0x90));
@@ -154,15 +154,15 @@ int __cdecl d2_RunChooseCityDialog(int unused, int network)
 	d3_SetObjectVisible(city, 0);
 	main_LoopFlags = 0x12d6;
 	cut_EventLoopFlags = 0x12d6;
-	cut_WaitForScript(fcn_004e4470((char*) 0x6a4024));
+	cut_WaitForScript(cut_PlayEventScript((char*) 0x6a4024));
 	win1 = d2_LoadForm(0, 0, (char*) 0x6a3dd4);
-	fcn_00471d80(win1, 3);
+	d2_CenterForm(win1, 3);
 	d2_PositionFormWindows(win1, 1);
 	d2_SetForm(win1, 0);
 	io_AppendText(0x1abb);
 	d3_SetViewport((float) g_1040494, (float) d2_ScreenHeight, 0.0f, 0.0f, g_10529c8, g_10421a0, g_10432a4, g_1040494, d2_ScreenHeight);
 	win2 = d2_LoadForm(0, 0, (char*) 0x6a4194);
-	fcn_00471d80(win2, 3);
+	d2_CenterForm(win2, 3);
 	d2_PositionFormWindows(win2, 1);
 	d2_SetForm(win2, 2);
 	d2_CreateButtonRow(d2_CurrentWindowId, 0, tmp_ids, 2, g_14b5e50, g_14b5e54);
@@ -220,7 +220,7 @@ int __cdecl d2_RunChooseCityDialog(int unused, int network)
 			if (d2_CurrentElementId == info_id) {
 				d2_SetFormVisibility(win2, 0);
 				d2_SetFormVisibility(win1, 0);
-				fcn_0053eb60(highlight);
+				d2_RunChooseOpponentsDialog(highlight);
 				d2_SetFormVisibility(win2, 1);
 				d2_SetFormVisibility(win1, 1);
 				if (g_100f1dc != 2) {

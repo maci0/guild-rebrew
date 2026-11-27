@@ -15,13 +15,13 @@ extern void __cdecl d3_SetObjectRotation(void*, float*);
 extern void __cdecl d3_SetNodePosition(void*, float*);
 extern void __cdecl d3_NormalizeVector(float*);
 extern float __cdecl d3_WrapYawDelta(int, int);
-extern void* __cdecl fcn_005e8850(void);
+extern void* __cdecl d3_GetDefaultParticleColor(void);
 extern void __stdcall D3DXMatrixTranspose(float*, float*);
 extern int __cdecl d2_GetControlValue(int);
 extern void __cdecl d3_UpdateCannonAimMatrices(char*);
 
 /* ADDRESS: GOLDTL 0x00587a50 */
-void __cdecl fcn_00587a50(char* o)
+void __cdecl d3_UpdateCannonAimCamera(char* o)
 {
 	float f;
 	float d1;
@@ -53,7 +53,7 @@ void __cdecl fcn_00587a50(char* o)
 	v[6] = 0.0f;
 	v[7] = 0.0f;
 
-	c = fcn_005e8850();
+	c = d3_GetDefaultParticleColor();
 	D3DXMatrixTranspose(m, ((struct node98*) *(void**) (o + 0x98))->m);
 	v[2] = 0.0f;
 	v[4] = 0.0f;

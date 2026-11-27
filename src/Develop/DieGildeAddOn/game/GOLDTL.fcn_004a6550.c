@@ -25,7 +25,7 @@ extern float g_6660f4;
 
 void __cdecl gm_CalcArtillerySpread(char* p, float* o1, float* o2);
 float __cdecl gm_GetCannonPowerScale(char* p);
-int __cdecl fcn_005e8e80(char* o, float* pos, float* dir, float speed, float b, float a);
+int __cdecl d3_SpawnPhysicsParticle(char* o, float* pos, float* dir, float speed, float b, float a);
 int __cdecl d3_PerturbParticleVelocity(float* p, float spread, float* dir, float lift, float* up, float scale);
 float __cdecl gm_CalcArtilleryVolleyCost(int level, int percent, int count);
 int __cdecl gm_SendCannonVolleys(char* a0, char* a1, float* a2, float* a3, float* a4, float a5, int a6, unsigned int a7);
@@ -90,7 +90,7 @@ int __cdecl ai_FireCannonVolley(char* actor, char* cannon)
 		pos.x += g_772850;
 		pos.y += g_772854;
 		pos.z += g_772858;
-		fcn_005e8e80(buf1, &pos.x, (float*) 0x772860, speed,
+		d3_SpawnPhysicsParticle(buf1, &pos.x, (float*) 0x772860, speed,
 			bits, g_6660f4);
 		d3_PerturbParticleVelocity((float*) buf1, ss[0], (float*) 0x772870, ss[0],
 			(float*) 0x772880, ss[1]);
@@ -117,9 +117,9 @@ int __cdecl ai_FireCannonVolley(char* actor, char* cannon)
 		pos2.x += g_664450 * g_772870;
 		pos2.y += g_664450 * g_772874;
 		pos2.z += g_664450 * g_772878;
-		fcn_005e8e80(buf2, &pos.x, (float*) 0x772860, speed,
+		d3_SpawnPhysicsParticle(buf2, &pos.x, (float*) 0x772860, speed,
 			bits, g_6660f4);
-		fcn_005e8e80(buf1, &pos2.x, (float*) 0x772860, speed,
+		d3_SpawnPhysicsParticle(buf1, &pos2.x, (float*) 0x772860, speed,
 			bits, g_6660f4);
 		d3_PerturbParticleVelocity((float*) buf2, ss[0], (float*) 0x772870, ss[0],
 			(float*) 0x772880, ss[1]);
@@ -163,11 +163,11 @@ int __cdecl ai_FireCannonVolley(char* actor, char* cannon)
 		pos2.x += g_664450 * g_772870;
 		pos2.y += g_664450 * g_772874;
 		pos2.z += g_664450 * g_772878;
-		fcn_005e8e80(buf3, &pos3.x, (float*) 0x772860, speed,
+		d3_SpawnPhysicsParticle(buf3, &pos3.x, (float*) 0x772860, speed,
 			bits, g_6660f4);
-		fcn_005e8e80(buf1, &pos2.x, (float*) 0x772860, speed,
+		d3_SpawnPhysicsParticle(buf1, &pos2.x, (float*) 0x772860, speed,
 			bits, g_6660f4);
-		fcn_005e8e80(buf2, &pos.x, (float*) 0x772860, speed,
+		d3_SpawnPhysicsParticle(buf2, &pos.x, (float*) 0x772860, speed,
 			bits, g_6660f4);
 		d3_PerturbParticleVelocity((float*) buf3, ss[0], (float*) 0x772870, ss[0],
 			(float*) 0x772880, ss[1]);

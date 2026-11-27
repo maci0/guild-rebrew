@@ -18,7 +18,7 @@ typedef struct
 #pragma pack(pop)
 // SIZE 0x20
 
-int __cdecl fcn_004c6c30(void*);
+int __cdecl gv_EnqueueSlotCommand(void*);
 
 int __cdecl gv_SendExtendProductionTime(int slot, int building, int worktype, int slotIndex, short duration, int cost)
 {
@@ -34,5 +34,5 @@ int __cdecl gv_SendExtendProductionTime(int slot, int building, int worktype, in
 	msg.f10 = (char) slotIndex;
 	msg.f11 = duration;
 	msg.f13 = cost;
-	return fcn_004c6c30(&msg);
+	return gv_EnqueueSlotCommand(&msg);
 }

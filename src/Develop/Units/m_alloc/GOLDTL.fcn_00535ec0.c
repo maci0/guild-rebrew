@@ -35,7 +35,7 @@ void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl cm_StepCommandQueue(void);
 
 /* ADDRESS: GOLDTL 0x00535ec0 */
-void __cdecl fcn_00535ec0(void)
+void __cdecl d2_DispatchDebugHotkey(void)
 {
 	/* Slot, seat and action records are built in fixed char buffers and
 	   written through byte offsets; the slot table stride is 0x21c. */

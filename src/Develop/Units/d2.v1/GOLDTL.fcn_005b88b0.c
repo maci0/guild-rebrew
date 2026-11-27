@@ -52,7 +52,7 @@ typedef struct
 
 #define GUI(i) (((Ctl*) *(void**) 0x1015ea0)[i])
 
-void* __cdecl fcn_00534c40(unsigned int, int, char, ...);
+void* __cdecl d2_OpenJournalBook(unsigned int, int, char, ...);
 void __cdecl d2_UpdatePagedPanel(char*);
 void __cdecl d2_HandleBookPageButton(char*);
 int __cdecl gm_FormatEntityTitleAndName(int, int, int, char*);
@@ -77,7 +77,7 @@ void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl cm_SendTraceEnd(int);
 void __cdecl d2_UpdateGauge(unsigned char*, Row*, int);
 void __cdecl d2_ClearGauge(Row*);
-float __cdecl fcn_005101e0(unsigned char*, int, int, int);
+float __cdecl gm_GetScaledWorkforceOutput(unsigned char*, int, int, int);
 int __cdecl d2_ShowModalMessageBox(char*, int);
 int __cdecl gm_CollectBuildingObjectSlots(unsigned char*, int*);
 void __cdecl d2_DestroyElement(int);
@@ -93,7 +93,7 @@ int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 void __cdecl d2_SetElementValue(int, ...);
 void __cdecl d2_ClearRadioGroup(int);
-void __cdecl fcn_00534f30(char*);
+void __cdecl d3_CloseBookPagerDialog(char*);
 void __cdecl d3_EndCameraAndUiMode(void);
 float __cdecl gm_ApplyEntityHealthDelta(unsigned short, int);
 void __cdecl fcn_0051af00(char*, char*, ...);
@@ -146,7 +146,7 @@ void __cdecl d2_RunPersonalbuchDialog(char* building, int winCtx)
 	hC = -1;
 	hD = -1;
 
-	win = (char*) fcn_00534c40(winCtx, 0x6a42c8, 4, 0x6ac340, 0x6ac300, 0x6ac314,
+	win = (char*) d2_OpenJournalBook(winCtx, 0x6a42c8, 4, 0x6ac340, 0x6ac300, 0x6ac314,
 	                          0x6ac328);
 	d2_UpdatePagedPanel(win);
 	gm_FormatEntityTitleAndName(*(unsigned short*) (building + 0x27), 1, 2, numA);
@@ -331,7 +331,7 @@ after_gage:
 				d2_SetForm(gage.win, 2);
 				hD = d2_GetWindowListItem(gage.win, 2,
 				                  io_AppendText((char*) 0x1a22,
-				                                (int) fcn_005101e0(
+				                                (int) gm_GetScaledWorkforceOutput(
 				                                    (unsigned char*) building, building[0],
 				                                    0, -1),
 				                                (((BUILDING_PROTOTYPE*)ent)->worker_kind[0]) + 0x130));
@@ -584,7 +584,7 @@ after2:
 	if (hD != -1) {
 		d2_ClearRadioGroup(hD);
 	}
-	fcn_00534f30(win);
+	d3_CloseBookPagerDialog(win);
 	d3_EndCameraAndUiMode();
 }
 /* Layout scaffolding: shifts the next source object to its reference

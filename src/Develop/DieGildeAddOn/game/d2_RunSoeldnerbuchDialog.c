@@ -101,7 +101,7 @@ extern int lpGebaeudePROT;
 extern unsigned char g_773d75;
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
-void* __cdecl fcn_00534c40(unsigned int, int, int, ...);
+void* __cdecl d2_OpenJournalBook(unsigned int, int, int, ...);
 void __cdecl d2_UpdatePagedPanel(char*);
 void __cdecl d2_HandleBookPageButton(char*);
 int __cdecl gm_FormatEntityTitleAndName(int, int, int, char*);
@@ -128,7 +128,7 @@ int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 int __cdecl d2_SetLabelText(int, char*);
 int __cdecl d2_EqualizeWindowButtonWidths(int, int, char*, int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
-float __cdecl fcn_005101e0(unsigned char*, int, int, int);
+float __cdecl gm_GetScaledWorkforceOutput(unsigned char*, int, int, int);
 int __cdecl d2_ShowModalMessageBox(char*, int);
 int __cdecl fcn_0051af00(char*, char*, ...);
 int __cdecl gm_GetEntityRelation(int, int);
@@ -136,7 +136,7 @@ void __cdecl d2_CreateGuiWindow(int, int, int, int);
 int __cdecl fcn_004693b0(int, int);
 void __cdecl d2_AddToRadioGroup(int, int);
 void __cdecl d2_ClearRadioGroup(int);
-void __cdecl fcn_00534f30(char*);
+void __cdecl d3_CloseBookPagerDialog(char*);
 void __cdecl d3_EndCameraAndUiMode(void);
 int __cdecl fcn_00505370(char*);
 #include "Develop/DieGildeAddOn/game/entity_record.h"
@@ -160,7 +160,7 @@ void __cdecl d2_RunSoeldnerbuchDialog(unsigned char* building, int buildingId)
 	f.hA = -1;
 	f.hRadio = -1;
 	f.ent = (unsigned char*) ((int) &((BUILDING_PROTOTYPE*) lpGebaeudePROT)[building[0]]);
-	f.win = (char*) fcn_00534c40(buildingId, 0x6a42c8, 4, 0x6ac340, 0x6ac300,
+	f.win = (char*) d2_OpenJournalBook(buildingId, 0x6a42c8, 4, 0x6ac340, 0x6ac300,
 	                           0x6ac314, 0x6ac328);
 	d2_UpdatePagedPanel(f.win);
 	gm_FormatEntityTitleAndName(*(unsigned short*) (building + 0x27), 1, 2, f.numA);
@@ -474,7 +474,7 @@ void __cdecl d2_RunSoeldnerbuchDialog(unsigned char* building, int buildingId)
 			f.hC = -1;
 			f.hD = -1;
 			if (f.rows[i].obj == 0) {
-				n = (int) fcn_005101e0(
+				n = (int) gm_GetScaledWorkforceOutput(
 				    (unsigned char*) ((int) &((ENTITY_RECORD*) 0x7f4ca0)[*(unsigned short*) (building + 0x27)
 						
 						]),
@@ -590,6 +590,6 @@ void __cdecl d2_RunSoeldnerbuchDialog(unsigned char* building, int buildingId)
 	if (f.hRadio != -1) {
 		d2_ClearRadioGroup(f.hRadio);
 	}
-	fcn_00534f30(f.win);
+	d3_CloseBookPagerDialog(f.win);
 	d3_EndCameraAndUiMode();
 }

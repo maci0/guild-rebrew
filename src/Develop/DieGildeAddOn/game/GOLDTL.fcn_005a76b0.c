@@ -22,7 +22,7 @@ void __cdecl d3_SetNodePosition(void*, void*);
 void __cdecl d3_SetObjectRotation(void*, void*);
 int __cdecl fcn_00504bd0(int);
 int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
-void __cdecl fcn_0057e880(int, void*, int, int);
+void __cdecl d2_DispatchTutorialInput(int, void*, int, int);
 int __cdecl evt_FindScriptById(int);
 void __cdecl evt_RequestScriptExit(void*);
 void __cdecl evt_WaitForScriptExit(int);
@@ -43,10 +43,10 @@ void __cdecl d2_RunMixingProductionMenu(int, void*);
 void __cdecl d2_RunIdleBuildingInterior0xd6(int, void*);
 void __cdecl d2_RunAlchemistCreatureHud(int, void*);
 void __cdecl d2_RunSteinmetzMenu(int, void*);
-void __cdecl fcn_005a7200(int, void*);
+void __cdecl d2_RunBankContactMenu(int, void*);
 void __cdecl d2_RunKircheMenu(int, void*);
 void __cdecl d2_RunKircheAltarMenu(int, void*);
-void __cdecl fcn_005acf90(int, void*);
+void __cdecl d2_RunKerkerplanHotspot(int, void*);
 void __cdecl d2_RunKerkermeisterMenu(int, void*);
 void __cdecl d2_RunIdleBuildingInterior0xbb(int, void*);
 void __cdecl d2_RunRaeuberlagerMenu(int, void*);
@@ -185,7 +185,7 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
                 d3_CameraHorizontalIndex = 0;
                 d3_CameraVerticalStep = 0;
             }
-            fcn_0057e880(0x19, msg, 0, 0);
+            d2_DispatchTutorialInput(0x19, msg, 0, 0);
             switch (*(u16*) msg) {
     case 0x13:
         d2_RunCharacterActionsHud(*(int*)&g_7746c4, msg);
@@ -227,7 +227,7 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
         d2_RunSteinmetzMenu(*(int*)&g_7746c4, msg);
         break;
     case 0xa5:
-        fcn_005a7200(*(int*)&g_7746c4, msg);
+        d2_RunBankContactMenu(*(int*)&g_7746c4, msg);
         break;
     case 0xe5:
     case 0xe6:
@@ -237,7 +237,7 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
         d2_RunKircheAltarMenu(*(int*)&g_7746c4, msg);
         break;
     case 0xb7:
-        fcn_005acf90(*(int*)&g_7746c4, msg);
+        d2_RunKerkerplanHotspot(*(int*)&g_7746c4, msg);
         break;
     case 0xba:
         d2_RunKerkermeisterMenu(*(int*)&g_7746c4, msg);
@@ -318,7 +318,7 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
                 fcn_00597fd0(msg);
                 break;
             }
-            fcn_0057e880(0x1a, msg, 0, 0);
+            d2_DispatchTutorialInput(0x1a, msg, 0, 0);
             *(int*) 0x7746d0 = (int) msg;
             if (r != -1) {
                 msg = (char*) evt_FindScriptById(r);

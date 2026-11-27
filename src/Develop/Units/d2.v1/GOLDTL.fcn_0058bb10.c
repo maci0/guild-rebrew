@@ -70,9 +70,9 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_InitWindowBounds(int);
 int __cdecl io_AppendText(int, ...);
-void __cdecl fcn_0058b030(char*, SelDlg*);
+void __cdecl d2_InitGraveyardSelectionList(char*, SelDlg*);
 void __cdecl d2_PopulateBuildingSlotList(char*, DialogState*, unsigned int);
-void __cdecl fcn_0058b440(unsigned int, unsigned int*, int, int);
+void __cdecl d2_PopulateHireCandidateRows(unsigned int, unsigned int*, int, int);
 char __cdecl gm_GetEntitySlotIndex(int, void*);
 void __cdecl d2_SetFormVisibility(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -124,9 +124,9 @@ void __cdecl d2_RunGraveyardPickerDialog(PickResult* result, char* graveyard, in
 	st.form7 = d2_CurrentWindowId;
 
 	st.type = 0; st.selected = 0; st.row = 0;
-	fcn_0058b030(graveyard, (SelDlg*)&st);
+	d2_InitGraveyardSelectionList(graveyard, (SelDlg*)&st);
 	d2_PopulateBuildingSlotList(graveyard, &st, 0xffffffff);
-	fcn_0058b440((unsigned int) graveyard, (unsigned int*) &st, -1, mode);
+	d2_PopulateHireCandidateRows((unsigned int) graveyard, (unsigned int*) &st, -1, mode);
 	g_100f1dc = -1;
 	deadline += 0x96;
 	selft = st.selected;
@@ -208,7 +208,7 @@ void __cdecl d2_RunGraveyardPickerDialog(PickResult* result, char* graveyard, in
 			}
 		}
 		if (flags & 4) {
-			fcn_0058b030(graveyard, (SelDlg*)&st);
+			d2_InitGraveyardSelectionList(graveyard, (SelDlg*)&st);
 			selft = st.selected;
 		}
 		if (flags & 2) {
@@ -216,7 +216,7 @@ void __cdecl d2_RunGraveyardPickerDialog(PickResult* result, char* graveyard, in
 			selft = st.selected;
 		}
 		if (flags & 1) {
-			fcn_0058b440((unsigned int) graveyard, (unsigned int*) &st, cur, mode);
+			d2_PopulateHireCandidateRows((unsigned int) graveyard, (unsigned int*) &st, cur, mode);
 			selft = st.selected;
 		}
 		if (main_RunFrameLoop((void*) 0x58bb10, 0x677c7) == 0) {

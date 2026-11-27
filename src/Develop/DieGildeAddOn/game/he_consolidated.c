@@ -13,9 +13,9 @@ void __cdecl cut_HandleOfficeSessionStep(void);
 void __cdecl cut_HandleOfficeSessionEvent(void);
 void __cdecl cut_HandleProzessEvent(void);
 void __cdecl cut_SelectDuellResponse(void);
-void __cdecl fcn_004e1900(void);
+void __cdecl d2_RunDuellPromptDialog(void);
 void __cdecl fcn_004e1950(void);
-void __cdecl fcn_004e3de0(void);
+void __cdecl cut_RunAuctionBidDialog(void);
 void __cdecl cut_HandleAuctionEvent(void);
 void __cdecl cut_MainDuell(char*);
 
@@ -44,13 +44,13 @@ void __cdecl cut_InitCutsceneRegistry(void)
 	cut_RegisterEventCallbacks(1, cut_RunOfficeSessions, (void*) cut_HandleOfficeSessionStep, (void*) cut_HandleOfficeSessionEvent, 0, 0);
 	cut_RegisterEventCallbacks(2, cut_RunProzess, (void*) cut_PromptProzessChoice, (void*) cut_HandleProzessEvent, cut_NotifyProzess, 0);
 	cut_RegisterEventCallbacks(3, cut_RunCombatCutscene, (void*) cut_SkipCombatCutscene, 0, cut_NotifyCombatCutscene, 1);
-	cut_RegisterEventCallbacks(4, cut_MainDuell, (void*) fcn_004e1900, (void*) cut_SelectDuellResponse, cut_NotifyDuell, 0);
+	cut_RegisterEventCallbacks(4, cut_MainDuell, (void*) d2_RunDuellPromptDialog, (void*) cut_SelectDuellResponse, cut_NotifyDuell, 0);
 	cut_RegisterEventCallbacks(5, cut_PlayHinrichtung, 0, 0, cut_NotifyHinrichtung, 0);
-	cut_RegisterEventCallbacks(6, fcn_004e2090, 0, 0, gm_NotifyHochzeit, 0);
+	cut_RegisterEventCallbacks(6, cut_PlayHochzeitCutscene, 0, 0, gm_NotifyHochzeit, 0);
 	cut_RegisterEventCallbacks(7, cut_PlayBirthCutscene, 0, 0, gm_NotifyGeburt, 0);
 	cut_RegisterEventCallbacks(8, cut_PlayDeathCutscene, 0, 0, cut_CheckDeathCutscene, 0);
 	cut_RegisterEventCallbacks(9, cut_RunPleiteCutscene, 0, 0, 0, 0);
-	cut_RegisterEventCallbacks(10, cut_RunAuction, (void*) fcn_004e3de0, (void*) cut_HandleAuctionEvent, cut_BroadcastCutsceneNotice, 1);
-	cut_RegisterEventCallbacks(11, fcn_004e4180, 0, 0, 0, 0);
+	cut_RegisterEventCallbacks(10, cut_RunAuction, (void*) cut_RunAuctionBidDialog, (void*) cut_HandleAuctionEvent, cut_BroadcastCutsceneNotice, 1);
+	cut_RegisterEventCallbacks(11, he_RunSalonEvent, 0, 0, 0, 0);
 	cut_ResetEventSlots(0);
 }

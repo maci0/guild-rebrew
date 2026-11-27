@@ -11,7 +11,7 @@ void __cdecl d2_DestroyForm(int h);
 void __cdecl d2_PositionControl(int x, int y, int slot);
 
 /* ADDRESS: GOLDTL 0x00545780 */
-void __cdecl fcn_00545780(char* obj)
+void __cdecl d2_CloseActionPopup(char* obj)
 {
     int i;
 

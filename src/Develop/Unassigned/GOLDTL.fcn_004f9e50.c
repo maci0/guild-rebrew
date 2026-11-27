@@ -5,7 +5,7 @@ int __cdecl amt_HandleOfficeSupport(char*, int*);
 
 
 /* ADDRESS: GOLDTL 0x004f9e50 */
-int __cdecl fcn_004f9e50(char* e, int* s)
+int __cdecl gm_HandleOfficeSupportPrivilege(char* e, int* s)
 {
 	int r;
 	char* p;

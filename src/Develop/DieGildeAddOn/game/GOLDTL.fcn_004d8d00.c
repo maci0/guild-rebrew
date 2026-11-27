@@ -22,7 +22,7 @@ void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 int __cdecl cm_GetCommandStatus(int);
 int __cdecl cm_SendCutCommand55(void*, int, void*);
 int __cdecl cm_SendUpdateCutsceneEntitySlot(int, void*);
-int __cdecl fcn_004cec00(int, int, int*, int*);
+int __cdecl gm_FindNearestWalkableTile(int, int, int*, int*);
 void __cdecl d3_GridPointToWorld(int, int, int, float*);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -135,7 +135,7 @@ void __cdecl gm_UpdateTaskProgress(char* context)
 				break;
 			p->timer = -1;
 			if (!p->c0c) {
-				if (!fcn_004cec00(p->f10, p->f14, &v10, &v14))
+				if (!gm_FindNearestWalkableTile(p->f10, p->f14, &v10, &v14))
 					break;
 				sprintf(be8, (char*)0x68b85c, *(int*)(obj + 4));
 				p->c0c = 1;
@@ -184,7 +184,7 @@ void __cdecl gm_UpdateTaskProgress(char* context)
 			if (*(int*)ent == 0x174) {
 				v24 = 0;
 				if (!p->c1d && !p->c0c) {
-					if (fcn_004cec00(p->f14, p->f18, &v10, &v14)) {
+					if (gm_FindNearestWalkableTile(p->f14, p->f18, &v10, &v14)) {
 						p->f14 = v10;
 						p->f18 = v14;
 						cm_RequestChTalkAction((char*)ent34(obj), v10, v14, 0);
@@ -368,7 +368,7 @@ tail1_body:
 			if (!p->c0c) {
 				if (!CompareVector3WithinTolerance(vec,
 					(float*)(ent34(obj) + 0x4c), 50.0f)) {
-					if (fcn_004cec00(p->f10, p->f14, &v10, &v14)) {
+					if (gm_FindNearestWalkableTile(p->f10, p->f14, &v10, &v14)) {
 						sprintf(bb8, (char*)0x68b85c, *(int*)(obj + 4));
 						p->c0c = 1;
 						p->timer = cm_SendCutCommand55(obj, 6, msg.f);
@@ -399,7 +399,7 @@ tail1_body:
 				if (*(int*)(*(int*)(obj + 0x184) + 0x128) == 0) {
 					p->c0c = 1;
 					cm_SendCutCommand55(obj, 6, msg.f);
-					if (!fcn_004cec00(*((unsigned char*)p + 0x20),
+					if (!gm_FindNearestWalkableTile(*((unsigned char*)p + 0x20),
 						*((unsigned char*)p + 0x21), &v10, &v14))
 						break;
 					n = ent34(obj);
@@ -423,7 +423,7 @@ tail1_body:
 				d3_TransformPoint((char*)n, (float*)(n + 0x4c), vec);
 				if (!d3sm_SampleHeight(base, (float*)(n + 0x4c), &v10, &v14, &v28))
 					break;
-				if (!fcn_004cec00(v10, v14, &v10, &v14))
+				if (!gm_FindNearestWalkableTile(v10, v14, &v10, &v14))
 					break;
 				*((unsigned char*)msg.f + 0x20) = (unsigned char)v10;
 				*((unsigned char*)msg.f + 0x21) = (unsigned char)v14;
@@ -463,7 +463,7 @@ tail1_body:
 			if (!p->c0c) {
 				if (!CompareVector3WithinTolerance(vec,
 					(float*)(ent34(obj) + 0x4c), 49.5f)) {
-					if (fcn_004cec00(p->f20, p->f24, &v10, &v14)) {
+					if (gm_FindNearestWalkableTile(p->f20, p->f24, &v10, &v14)) {
 						p->c0c = 1;
 						p->f20 = v10;
 						p->f24 = v14;
@@ -510,7 +510,7 @@ case4b:
 				break;
 			p->timer = -1;
 			if (!p->c0c) {
-				if (!fcn_004cec00(p->f10, p->f14, &v10, &v14))
+				if (!gm_FindNearestWalkableTile(p->f10, p->f14, &v10, &v14))
 					break;
 				sprintf(b118, (char*)0x68b85c, *(int*)(obj + 4));
 				p->c0c = 1;

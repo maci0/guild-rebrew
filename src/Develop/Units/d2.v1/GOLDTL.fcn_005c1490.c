@@ -17,10 +17,10 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_DestroyForm(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
-int __cdecl fcn_004ac1e0(unsigned short);
-unsigned short __cdecl fcn_004ac2c0(unsigned short, unsigned short);
-int __cdecl fcn_004ac320(unsigned short*);
-void __cdecl fcn_004ac410(unsigned char*, int, unsigned short);
+int __cdecl gm_GetBardEventEntry(unsigned short);
+unsigned short __cdecl d2_GetBardPoemTextId(unsigned short, unsigned short);
+int __cdecl gm_CalcBardPoemCost(unsigned short*);
+void __cdecl gm_ApplyBardPoemEffect(unsigned char*, int, unsigned short);
 int __cdecl io_AppendText();
 void __cdecl d3_EndCameraAndUiMode(void);
 void __cdecl d2_InitWindowBounds(int);
@@ -47,8 +47,8 @@ void __cdecl d2_ShowBardPoemDialog(void)
 	g_100f1dc = -1;
 	d2_SetForm(h, 1);
 	if (elem != 0 && *(int*) (elem + 0x70) == 2) {
-		rec = (char*) fcn_004ac1e0(*(unsigned short*) (elem + 0xac));
-		fcn_004ac2c0(*(unsigned short*) (elem + 0xac),
+		rec = (char*) gm_GetBardEventEntry(*(unsigned short*) (elem + 0xac));
+		d2_GetBardPoemTextId(*(unsigned short*) (elem + 0xac),
 		    *(unsigned short*) (elem + 0xae));
 		e2 = (char*) he_StartHandlungSearch(3, 0, 0x11, 3, *(int*) (elem + 4), 2,
 		    (int) g_774970);
@@ -66,7 +66,7 @@ void __cdecl d2_ShowBardPoemDialog(void)
 			d3_EndCameraAndUiMode();
 			return;
 		}
-		e2 = (char*) fcn_004ac320((unsigned short*)
+		e2 = (char*) gm_CalcBardPoemCost((unsigned short*)
 		    ((char*) &((ENTITY_RECORD*) g_7f4ca0)[(int) g_774970]));
 		if (e2 == 0) {
 			io_AppendText(0x1e28);
@@ -88,7 +88,7 @@ void __cdecl d2_ShowBardPoemDialog(void)
 				g_774654 = 1;
 			} else if (g_100f1dc != -1) {
 				if (g_100f1dc == 2) {
-					fcn_004ac410((unsigned char*)
+					gm_ApplyBardPoemEffect((unsigned char*)
 					    ((char*) &((ENTITY_RECORD*) g_7f4ca0)[(int) g_774970]), (int) e2,
 					    *(unsigned short*) (elem + 0xac));
 					r = 1;

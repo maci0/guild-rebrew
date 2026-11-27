@@ -101,7 +101,7 @@ char __cdecl d3_DestroyObject(D3_OBJECT* object)
 #ifdef REBREW_GOLD
 void __cdecl d3_ReleaseResourceSlot(char*);
 #else
-void __cdecl fcn_00456b10(char*);
+void __cdecl d3_ReleaseMeshSlotTextures(char*);
 #endif
 void __cdecl d3_CleanupObjectAuxSlots(D3_OBJECT* object)
 {
@@ -112,7 +112,7 @@ void __cdecl d3_CleanupObjectAuxSlots(D3_OBJECT* object)
 #ifdef REBREW_GOLD
                 d3_ReleaseResourceSlot((char*) &object->zeichendaten->zusatz[i]);
 #else
-                fcn_00456b10((char*) &object->zeichendaten->zusatz[i]);
+                d3_ReleaseMeshSlotTextures((char*) &object->zeichendaten->zusatz[i]);
 #endif
                 object->zeichendaten->zusatz[i].objekt = 0;
                 object->zeichendaten->zusatz[i].unbekannt_a = 0;

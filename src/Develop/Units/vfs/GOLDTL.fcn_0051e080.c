@@ -8,28 +8,28 @@ void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* roo
 unsigned int __cdecl vfs_fwrite(const void* data, int size, int count, void* stream);
 void __cdecl ls_PrepareSavedSceneRefs(void);
 void __cdecl ls_RebindSavedSceneRefs(void);
-int __cdecl fcn_0051e490(void* stream, int flags);
-int __cdecl fcn_0051eb20(void* stream);
+int __cdecl ls_WriteSaveHeader(void* stream, int flags);
+int __cdecl gm_SaveSceneSnapshot(void* stream);
 int __cdecl ls_fio_SaveObjekteINST(void* stream);
 int __cdecl fcn_0051ecf0(void* stream);
 int __cdecl ls_SaveDynamicEntities(void* stream);
 int __cdecl ls_SaveEntities(void* stream);
 int __cdecl ls_SaveFiguresAndAnimQueue(void* stream);
-int __cdecl fcn_00520310(void* stream);
+int __cdecl ls_SaveMarketsAndSeasons(void* stream);
 int __cdecl ls_SaveRelationMatrices(void* stream);
-int __cdecl fcn_005208e0(void* stream);
-int __cdecl fcn_00520d80(void* stream);
+int __cdecl ls_SaveCityStatsAndCrimeGrid(void* stream);
+int __cdecl ls_SaveAvatarStatesThunk(void* stream);
 int __cdecl he_SaveEvents(void* stream);
 int __cdecl ls_SaveCutscenes(void* stream);
 int __cdecl ls_SaveHistoryState(void* stream);
-int __cdecl fcn_00521530(void* stream);
+int __cdecl ls_SaveNodePools(void* stream);
 int __cdecl ls_SaveWeatherAndSlots(void* stream);
 int __cdecl amt_fio_SaveAemter(void* stream);
-int __cdecl fcn_004f49e0(void* stream);
-int __cdecl fcn_004b64b0(void* stream);
+int __cdecl ls_SaveCrimeRecords(void* stream);
+int __cdecl ls_SaveMissionJobs(void* stream);
 int __cdecl ls_SaveAlchemyDrawSlots(void* stream);
 int __cdecl ls_SaveHighOfficeTargets(void* stream);
-int __cdecl fcn_004c0740(void* stream);
+int __cdecl ls_SaveRoutes(void* stream);
 int __cdecl ls_SaveSlot779d00(void* stream);
 int __cdecl ls_SaveList774a78(void* stream);
 
@@ -43,7 +43,7 @@ int __cdecl ls_SaveGame(char* name, char* slot, int flags)
 		return 0;
 	strcpy((char*) 0x7e2480, slot);
 	ls_PrepareSavedSceneRefs();
-	if (fcn_0051e490(stream, flags) == 0) {
+	if (ls_WriteSaveHeader(stream, flags) == 0) {
 		goto failure;
 	}
 	vfs_fwrite((void*) 0x699364, 4, 1, stream);
@@ -78,7 +78,7 @@ int __cdecl ls_SaveGame(char* name, char* slot, int flags)
 		ls_RebindSavedSceneRefs();
 		return 0;
 	}
-	if (fcn_00520310(stream) == 0) {
+	if (ls_SaveMarketsAndSeasons(stream) == 0) {
 		CloseVfsStream(stream);
 		ls_RebindSavedSceneRefs();
 		return 0;
@@ -88,13 +88,13 @@ int __cdecl ls_SaveGame(char* name, char* slot, int flags)
 		ls_RebindSavedSceneRefs();
 		return 0;
 	}
-	if (fcn_0051eb20(stream) == 0) {
+	if (gm_SaveSceneSnapshot(stream) == 0) {
 		CloseVfsStream(stream);
 		ls_RebindSavedSceneRefs();
 		return 0;
 	}
 	if (!(flags & 2)) {
-		if (fcn_004f49e0(stream) == 0) {
+		if (ls_SaveCrimeRecords(stream) == 0) {
 			CloseVfsStream(stream);
 			ls_RebindSavedSceneRefs();
 			return 0;
@@ -104,12 +104,12 @@ int __cdecl ls_SaveGame(char* name, char* slot, int flags)
 			ls_RebindSavedSceneRefs();
 			return 0;
 		}
-		if (fcn_005208e0(stream) == 0) {
+		if (ls_SaveCityStatsAndCrimeGrid(stream) == 0) {
 			CloseVfsStream(stream);
 			ls_RebindSavedSceneRefs();
 			return 0;
 		}
-		if (fcn_00520d80(stream) == 0) {
+		if (ls_SaveAvatarStatesThunk(stream) == 0) {
 			CloseVfsStream(stream);
 			ls_RebindSavedSceneRefs();
 			return 0;
@@ -129,7 +129,7 @@ int __cdecl ls_SaveGame(char* name, char* slot, int flags)
 			ls_RebindSavedSceneRefs();
 			return 0;
 		}
-		if (fcn_00521530(stream) == 0) {
+		if (ls_SaveNodePools(stream) == 0) {
 			CloseVfsStream(stream);
 			ls_RebindSavedSceneRefs();
 			return 0;
@@ -144,7 +144,7 @@ int __cdecl ls_SaveGame(char* name, char* slot, int flags)
 			ls_RebindSavedSceneRefs();
 			return 0;
 		}
-		if (fcn_004b64b0(stream) == 0) {
+		if (ls_SaveMissionJobs(stream) == 0) {
 			CloseVfsStream(stream);
 			ls_RebindSavedSceneRefs();
 			return 0;
@@ -169,7 +169,7 @@ int __cdecl ls_SaveGame(char* name, char* slot, int flags)
 			ls_RebindSavedSceneRefs();
 			return 0;
 		}
-		if (fcn_004c0740(stream) == 0) {
+		if (ls_SaveRoutes(stream) == 0) {
 			CloseVfsStream(stream);
 			ls_RebindSavedSceneRefs();
 			return 0;

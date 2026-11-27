@@ -16,7 +16,7 @@ typedef struct
 // SIZE 0x20
 #pragma pack(pop)
 
-int __cdecl fcn_004c6c30(GV_SLOT_CMD_MSG* m);
+int __cdecl gv_EnqueueSlotCommand(GV_SLOT_CMD_MSG* m);
 
 int __cdecl gv_SendSetGraveOwner(int* a, char* b, int c, int d)
 {
@@ -38,5 +38,5 @@ int __cdecl gv_SendSetGraveOwner(int* a, char* b, int c, int d)
 	m.d = (char) d;
 	m.e = 0;
 	m.f = 0;
-	return fcn_004c6c30(&m);
+	return gv_EnqueueSlotCommand(&m);
 }

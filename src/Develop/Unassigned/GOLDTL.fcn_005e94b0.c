@@ -4,7 +4,7 @@ char __cdecl d3sm_SampleHeight(int, float *, int *, int *, float *);
 int __cdecl d3_TraceTerrainSegment(int, float *, float *, int, int, int *, int *);
 
 /* ADDRESS: GOLDTL 0x005e94b0 */
-int __cdecl fcn_005e94b0(char *obj)
+int __cdecl d3_StepProjectile(char *obj)
 {
     float gravity;
     float initial[3], next[3], step[3], dv[3];

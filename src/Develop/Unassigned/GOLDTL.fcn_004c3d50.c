@@ -25,7 +25,7 @@ extern char* g_14cbca4;
 extern volatile int g_6b7fac;
 extern unsigned int g_aecde4;
 
-void __cdecl fcn_004c3f70(void);
+void __cdecl cm_SendCommandQueueInit(void);
 int __cdecl cm_RecvSceneInitPacket(void);
 void __cdecl nt_CloseClientConnection(void);
 
@@ -55,7 +55,7 @@ void __cdecl cm_ResetCommandQueue(void)
 		g_fb5760[i].f0 = 1;
 	}
 	g_14cbca4 = &g_1005780;
-	fcn_004c3f70();
+	cm_SendCommandQueueInit();
 	if (cm_RecvSceneInitPacket() != 0)
 		nt_CloseClientConnection();
 	(*(int *)&g_aecde4) = g_6b7fac;

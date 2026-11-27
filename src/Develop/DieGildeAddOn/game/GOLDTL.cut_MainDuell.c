@@ -32,7 +32,7 @@ unsigned short __cdecl gm_RandomMod(int a);
 char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl cut_HandleDuellOfficeLoss(char* a0);
 void __cdecl cut_ResetEventSlots(void* event);
-void __cdecl fcn_004e4730(char* name);
+void __cdecl cut_StartSceneCutscene(char* name);
 void __cdecl cut_InitShufflePool(int v);
 void __cdecl d3_UpdateSeasonTextures(void);
 int __cdecl gm_GetSeason(int* p);
@@ -42,13 +42,13 @@ void __cdecl d3_ResetActionTimers(void);
 void __cdecl msx_StartMusicIfAllowed(char* s);
 void* __cdecl sb_LoadSampleBank(char* name, int init);
 int __cdecl sb_LoadLocalizedSampleBank(char* name, int x);
-int __cdecl fcn_004e4470(char* name);
+int __cdecl cut_PlayEventScript(char* name);
 int __cdecl ch_SpawnEntityCharacter(char* a0, int a1, int* a2, int* a3, int a4, int* a5);
 void __cdecl ch_SetBodyAttachment(char* e, int mode, char* name);
 int __cdecl d2_SetForm(int k, int i);
 void __cdecl io_AppendText(int a, ...);
 int __cdecl fcn_0064d41a(char* out, char* fmt, ...);
-int __cdecl fcn_004e4b20(int a, int b, char* c, int d);
+int __cdecl d3snd_PlaySoundEffectIfAllowed(int a, int b, char* c, int d);
 int __cdecl sb_CheckVoicePlaying(int* a);
 void __cdecl cut_WaitTicks(int dur);
 char* __cdecl d3_FindSceneObject(int o, int flags, int ptr, char* name);
@@ -73,7 +73,7 @@ void __cdecl evt_StopScriptIfActive(int a);
 void __cdecl cut_WaitForScriptExit(int a);
 void __cdecl cut_CleanupCutscene(void);
 void __cdecl cut_FadeToBlack(void);
-void __cdecl fcn_004230e0(char* p);
+void __cdecl sb_ReleaseSampleBank(char* p);
 void __cdecl d3_ClearActionTimers(void);
 void __cdecl ReportClientMessage(char* msg);
 int __cdecl msx_RestoreMusicIfAllowed(void);
@@ -124,7 +124,7 @@ void __cdecl cut_MainDuell(char* a0)
     }
     cut_ResetEventSlots(a0);
     lvl = (signed char) a0[0x7c];
-    fcn_004e4730(scene[lvl]);
+    cut_StartSceneCutscene(scene[lvl]);
     cut_InitShufflePool(0xa);
     d3_UpdateSeasonTextures();
     sel = gm_GetSeason((int*) 0x7f4c00);
@@ -146,7 +146,7 @@ void __cdecl cut_MainDuell(char* a0)
 
     snd = (int) sb_LoadSampleBank((char*) 0x68ce14, 0);
     bank = sb_LoadLocalizedSampleBank((char*) 0x68ce08, 0);
-    event = fcn_004e4470((char*) 0x68cde8);
+    event = cut_PlayEventScript((char*) 0x68cde8);
 
     e1 = gm_LookupEntityRecordById(*(int*) (a0 + 0x34));
     e2 = gm_LookupEntityRecordById(*(int*) (a0 + 0x38));
@@ -171,7 +171,7 @@ void __cdecl cut_MainDuell(char* a0)
         io_AppendText(0x6811b0);
         io_AppendText(lvl + i);
         fcn_0064d41a(buf1, (char*) 0x68cd94, i);
-        p = (char*) fcn_004e4b20(-7, 0, buf1, -1);
+        p = (char*) d3snd_PlaySoundEffectIfAllowed(-7, 0, buf1, -1);
         if (p != 0) {
             while (sb_CheckVoicePlaying((int*) p) != 0)
                 cut_WaitTicks(2);
@@ -355,8 +355,8 @@ void __cdecl cut_MainDuell(char* a0)
     evt_StopScriptIfActive(event);
     cut_WaitForScriptExit(event);
     cut_CleanupCutscene();
-    fcn_004230e0((char*) bank);
-    fcn_004230e0((char*) snd);
+    sb_ReleaseSampleBank((char*) bank);
+    sb_ReleaseSampleBank((char*) snd);
     d3_ClearActionTimers();
     msx_RestoreMusicIfAllowed(); return;
     }

@@ -33,7 +33,7 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetFormWindow(int, int, int, int*, int*, int*);
-void __cdecl fcn_00533f40(int, int, int, int);
+void __cdecl d2_CreateWindowScrollbar(int, int, int, int);
 float __cdecl eval_ObjektPreis2Credits(int, int);
 int __cdecl d2_AddElementToWindow(int, int, char*, int);
 int __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -127,7 +127,7 @@ void __cdecl d2_RunRoomUpgradeDialog(unsigned char* productionBuilding)
 	io_AppendText(0x17ce);
 	d2_SetForm(han, 0);
 	if (nslots > 4) {
-		fcn_00533f40((*(int**) 0x77255c)[4] - 0x4c, (*(int**) 0x77255c)[3] - 0x20,
+		d2_CreateWindowScrollbar((*(int**) 0x77255c)[4] - 0x4c, (*(int**) 0x77255c)[3] - 0x20,
 		             d2_CurrentWindowId,
 		             d2_GetFormWindow(han, 2, 0x3c, &coord_y, &coord_x, &child));
 		((D2_CONTROL_TL*) (g_1015ea0))[child].font = 0x56;

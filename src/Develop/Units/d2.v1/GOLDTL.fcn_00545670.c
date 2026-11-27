@@ -5,10 +5,10 @@ extern int g_77e8a0;
 extern int d2_CurrentWindowId;
 extern D2_ACTION_POPUP_SLOT g_77e8c0[16];
 
-int __cdecl fcn_005455b0(void);
+int __cdecl d2_EvictOldestActionPopupSlot(void);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl d2_LoadForm(int, int, int);
-void __cdecl fcn_00471d80(int, int);
+void __cdecl d2_CenterForm(int, int);
 void __cdecl d2_SetFormVisibility(int, int);
 int __cdecl d2_SetForm(int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -32,7 +32,7 @@ int __cdecl d2_CreateActionPopupSlot(char* e, short a2, short a3, int a4, int a5
 found_slot:
 	if (i >= 0x10) {
 allocate_slot:
-		i = fcn_005455b0();
+		i = d2_EvictOldestActionPopupSlot();
 	}
 	if (i == -1) {
 		*(int*) (e + 0x74) = 0;
@@ -48,7 +48,7 @@ allocate_slot:
 	v = *(int*) ((char*) *(int*) (e + 0x74) + 4);
 	((D2_CONTROL_TL*) (g_1015ea0))[v].value_058 = 1;
 	*(int*) ((char*) *(int*) (e + 0x74) + 8) = d2_LoadForm(a2, a3, a4);
-	fcn_00471d80(*(int*) ((char*) *(int*) (e + 0x74) + 8), 3);
+	d2_CenterForm(*(int*) ((char*) *(int*) (e + 0x74) + 8), 3);
 	d2_SetFormVisibility(*(int*) ((char*) *(int*) (e + 0x74) + 8), 0);
 	if (*(int*) ((char*) *(int*) (e + 0x74) + 4) == -1) {
 		__asm { int 3 }

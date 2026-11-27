@@ -38,11 +38,11 @@ extern float g_666100;
 extern float g_6628a8;
 extern volatile int g_6b7fac;
 
-V4* __cdecl fcn_005e8850(void);
+V4* __cdecl d3_GetDefaultParticleColor(void);
 
 
 /* ADDRESS: GOLDTL 0x005e8de0 */
-int __cdecl fcn_005e8de0(float a, float b, float* out)
+int __cdecl d3_CalcParticleSphereMass(float a, float b, float* out)
 {
 	float b2;
 
@@ -60,14 +60,14 @@ int __cdecl fcn_005e8de0(float a, float b, float* out)
 
 
 /* ADDRESS: GOLDTL 0x005e8e80 */
-int __cdecl fcn_005e8e80(Particle* o, V3* pos, V3* dir, float speed, float b, float a)
+int __cdecl d3_SpawnPhysicsParticle(Particle* o, V3* pos, V3* dir, float speed, float b, float a)
 {
 	float info[5];
 	V4* c;
 	float v;
 
-	c = fcn_005e8850();
-	fcn_005e8de0(a, b, info);
+	c = d3_GetDefaultParticleColor();
+	d3_CalcParticleSphereMass(a, b, info);
 	*(V3*) &o->cur = *dir;
 	o->cur.w = speed / info[4] * g_6660fc;
 	o->cur.x *= o->cur.w;

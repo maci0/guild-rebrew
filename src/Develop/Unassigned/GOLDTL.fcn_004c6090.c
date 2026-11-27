@@ -3,7 +3,7 @@ void* __cdecl gm_FindAvailableResidence(int a, int b);
 int __cdecl cm_EnqueueClientPacket(void* req);
 
 /* ADDRESS: GOLDTL 0x004c6090 */
-int __cdecl fcn_004c6090(int a0, char a1, int a2, int a3)
+int __cdecl cm_RequestAssignWorker(int a0, char a1, int a2, int a3)
 {
 	char buf[0x9c];
 	char* q;

@@ -7,7 +7,7 @@ int __cdecl fcn_0064e1fd(void*);
 
 
 /* ADDRESS: GOLDTL 0x004757d0 */
-int __cdecl fcn_004757d0(const char* name)
+int __cdecl d2_GetBmpBitDepth(const char* name)
 {
 	unsigned char hdr[40];
 	void* f;

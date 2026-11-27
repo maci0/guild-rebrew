@@ -15,7 +15,7 @@ __declspec(dllimport) int __stdcall AIL_get_preference(int);
 #pragma optimize("y", off)
 
 /* ADDRESS: GOLDTL 0x0042a120 */
-int __cdecl fcn_0042a120(int* out, int channels, int bits, int rate)
+int __cdecl msx_OpenDigOutput(int* out, int channels, int bits, int rate)
 {
 	char* rec;
 	int index;

@@ -6,7 +6,7 @@ extern Win_1015f40 g_1015f40[0x60];
 extern char s_67d54c[];
 
 void __cdecl d3_SafeReleaseSceneResource(void* tex);
-void* __cdecl fcn_0047ce00(const char* name, int a2);
+void* __cdecl d3_LoadTextureWithDefaultTint(const char* name, int a2);
 #include "Develop/Units/Error/error_message.h"
 typedef D2_FORM_RECORD Obj;
 

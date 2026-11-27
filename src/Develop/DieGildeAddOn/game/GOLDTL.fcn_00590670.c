@@ -1,5 +1,5 @@
 #include "client_data.h"
-extern int g_100f888, g_6a99e8, g_14ce8e8, g_6772c4, d2_MouseX, d2_MouseY, d2_CurrentElementId, d2_SuppressOverlay; void __cdecl d2_DestroyForm(int); void __cdecl fcn_004125c0(int, int);
+extern int g_100f888, g_6a99e8, g_14ce8e8, g_6772c4, d2_MouseX, d2_MouseY, d2_CurrentElementId, d2_SuppressOverlay; void __cdecl d2_DestroyForm(int); void __cdecl io_SetMouseCursorPos(int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 int __cdecl d2_OpenObjektUpgradeTooltip(int);
@@ -33,7 +33,7 @@ void __cdecl d2_UpdateSceneTooltip(void)
 		*(int*) 0x6a99ec = -1;
 		*(int*) 0x774a24 = 0;
 		g_6772c4 = 1;
-		fcn_004125c0(d2_MouseX, d2_MouseY);
+		io_SetMouseCursorPos(d2_MouseX, d2_MouseY);
 		v3 = g_100f888;
 		tooltipWindow = g_6a99e8;
 	}

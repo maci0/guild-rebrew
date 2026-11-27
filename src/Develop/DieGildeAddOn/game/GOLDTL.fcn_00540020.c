@@ -98,11 +98,11 @@ int __cdecl gm_GetSeason(int*);
 int __cdecl gm_QuerySeason(pos14_7f4c00*);
 void __cdecl gm_UpdateDaylightSchedule(pos14_7f4c00*);
 int __cdecl ahm_DealPlayerPrototypes(void);
-void* __cdecl fcn_004730c0(int, int, int, int, int, int, int);
+void* __cdecl d2_StartScreenFade(int, int, int, int, int, int, int);
 int __cdecl main_RunFrameLoop(int, int);
 void __cdecl d2_SetBackdropResource(int);
 void __cdecl d2_ClearBackdropResource(void);
-void __cdecl fcn_00473150(void*);
+void __cdecl d2_ReleaseOverlaySprite(void*);
 void __cdecl sv_WaitForNetworkSync(int);
 void __cdecl d2_DestroyScrollPerga(void);
 void __cdecl gm_BuildDealSummary(int, void*);
@@ -129,7 +129,7 @@ void __cdecl cm_RequestKillSpieler(int, int);
 int __cdecl he_SumEventCostsForSubject(int);
 void __cdecl d3_ResetWorldSceneState(void);
 void __cdecl d2_UpdateHudVisibility(int);
-void __cdecl fcn_00528fd0(void);
+void __cdecl d2_RestoreHudPanels(void);
 int __cdecl fcn_0050d2a0(void*);
 void* __cdecl fcn_00503fe0(int, int, int);
 void* __cdecl fcn_00502cd0(int, int, int, int);
@@ -198,13 +198,13 @@ void __cdecl gm_BeginPlayerTurn(void)
 		g_1040484 = 0;
 		g_104048c = d2_ScreenHeight;
 		if (g_774978 == 0) {
-			hp = fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0, 1);
+			hp = d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0, 1);
 			while (!(*(unsigned char*) hp & 4)) {
 				main_RunFrameLoop(0, 0x24087);
 			}
 			d2_SetBackdropResource(0x79d);
-			fcn_00473150(hp);
-			fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0x32, 0xa);
+			d2_ReleaseOverlaySprite(hp);
+			d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0x32, 0xa);
 		}
 	}
 	if (g_7747b0 & 4) {
@@ -371,7 +371,7 @@ void __cdecl gm_BeginPlayerTurn(void)
 				*(int*) 0x774654 = 1;
 			}
 		}
-		hp = fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0x1e, 1);
+		hp = d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0x1e, 1);
 		while (!(*(unsigned char*) hp & 4)) {
 			main_RunFrameLoop(0, *(int*) 0x7e46ac | 0x80);
 		}
@@ -391,12 +391,12 @@ void __cdecl gm_BeginPlayerTurn(void)
 	g_104048c = g_6a3770;
 	d3_ResetWorldSceneState();
 	d2_UpdateHudVisibility(1);
-	fcn_00528fd0();
+	d2_RestoreHudPanels();
 	if (g_6a3420 != 0) {
 		if (hp != 0) {
-			fcn_00473150(hp);
+			d2_ReleaseOverlaySprite(hp);
 		}
-		fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0x32, 0xa);
+		d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0x32, 0xa);
 	}
 	if (g_6a25b8 != -1) {
 		d2_SetFormVisibility(g_6a25b8, 1);

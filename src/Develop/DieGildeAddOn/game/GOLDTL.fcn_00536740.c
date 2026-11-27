@@ -7,7 +7,7 @@ extern int g_67a370;
 
 
 
-void __cdecl fcn_004cf180(void);
+void __cdecl cut_UpdateActiveBombs(void);
 void __cdecl sb_PlayVoice(int, char*, int, int, int, int, int);
 void __cdecl cut_PlayHitReaction(int);
 char __cdecl d3sm_RaycastScreenPoint(int, int, int, int*, int*);
@@ -22,7 +22,7 @@ void __cdecl gm_HandleCannonAimInput(void)
 	char buf[16];
 	int p;
 
-	fcn_004cf180();
+	cut_UpdateActiveBombs();
 	if (g_14cf736 != 0) {
 		g_7725c4 = 0x21;
 		if (g_14ce8d8 != 0) {

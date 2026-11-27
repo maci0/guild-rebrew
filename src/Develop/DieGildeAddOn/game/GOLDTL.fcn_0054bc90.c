@@ -9,7 +9,7 @@ extern int __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsig
 extern void __cdecl cm_RequestChangeAttribute(void);
 extern int __cdecl cm_SendSetHE(int, char*);
 extern int __cdecl gm_CompareGameTime(char*, char*);
-extern void __cdecl fcn_00545780(char*);
+extern void __cdecl d2_CloseActionPopup(char*);
 extern int __cdecl he_PostEntityMessage(int, int, char*, unsigned char, int, char*);
 extern int __cdecl d2_CreateActionPopupSlot(char*, int, int, char*, int);
 extern int __cdecl d2_SetForm(int, int);
@@ -37,7 +37,7 @@ void __cdecl he_RunInvitation(char* action)
 	v15 = 0;
 	if (*(int*) (action + 0x70) == -1 || *(int*) (action + 0x70) == -2) {
 		if (*(int*) (action + 0x74))
-			fcn_00545780(action);
+			d2_CloseActionPopup(action);
 		he_FreeAction(action);
 		return;
 	}
@@ -45,27 +45,27 @@ void __cdecl he_RunInvitation(char* action)
 		gm_ResolveEntityById(&v10, 0, 0, *(unsigned int*) (action + 0x10));
 		if (v10 == 0) {
 			if (*(int*) (action + 0x74))
-				fcn_00545780(action);
+				d2_CloseActionPopup(action);
 			he_FreeAction(action);
 			return;
 		}
 		v13 = fcn_00502cd0(*(unsigned int*) (v10 + 0x5d), 1, 0, 0x17);
 		if (v13 == 0) {
 			if (*(int*) (action + 0x74))
-				fcn_00545780(action);
+				d2_CloseActionPopup(action);
 			he_FreeAction(action);
 			return;
 		}
 		if (*(unsigned short*) (v10 + 0x27) == 0xffff) {
 			if (*(int*) (action + 0x74))
-				fcn_00545780(action);
+				d2_CloseActionPopup(action);
 			he_FreeAction(action);
 			return;
 		}
 		v7 = (unsigned short*) ((unsigned int) *(unsigned short*) (v10 + 0x27) * 0x21c + (unsigned long) &g_7f4ca0);
 		if (v7 == 0) {
 			if (*(int*) (action + 0x74))
-				fcn_00545780(action);
+				d2_CloseActionPopup(action);
 			he_FreeAction(action);
 			return;
 		}
@@ -73,14 +73,14 @@ void __cdecl he_RunInvitation(char* action)
 		v15 = he_StartHandlungSearch(2, 1, *(unsigned int*) (action + 0xc0), 0, 0x37);
 		if (v15 == 0) {
 			if (*(int*) (action + 0x74))
-				fcn_00545780(action);
+				d2_CloseActionPopup(action);
 			he_FreeAction(action);
 			return;
 		}
 		v7 = (unsigned short*) ((unsigned int) *(unsigned short*) (v15 + 8) * 0x21c + (unsigned long) &g_7f4ca0);
 		if (v7 == 0) {
 			if (*(int*) (action + 0x74))
-				fcn_00545780(action);
+				d2_CloseActionPopup(action);
 			he_FreeAction(action);
 			return;
 		}
@@ -146,7 +146,7 @@ void __cdecl he_RunInvitation(char* action)
 		return;
 	case 1:
 		if (gm_CompareGameTime((char*) &gm_GameTime, action + 0x52) > 0) {
-			fcn_00545780(action);
+			d2_CloseActionPopup(action);
 			*(int*) (action + 0x70) = *(int*) (action + 0x70) + 1;
 			return;
 		}
@@ -199,7 +199,7 @@ void __cdecl he_RunInvitation(char* action)
 				he_PostEntityMessage(*(int*) (v7 + 2), -1, text, 0, 0x5ec, 0);
 			}
 		}
-		fcn_00545780(action);
+		d2_CloseActionPopup(action);
 		he_FreeAction(action);
 		return;
 	case 0:

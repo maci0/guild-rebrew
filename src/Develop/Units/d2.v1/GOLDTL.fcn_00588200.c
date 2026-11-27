@@ -7,9 +7,9 @@ void __cdecl gm_GetArtilleryLimits(char*, int*, int*);
 void __cdecl d2_CreateGuiWindow(int, ...);
 void __cdecl d2_SetElementEnabled(int, int);
 int __cdecl gm_CanFireCannonShot(char*, int, int, int, int*, int*);
-float __cdecl fcn_005e8860(void);
+float __cdecl gm_GetNormalizedWeatherStrength(void);
 #include "Develop/Units/d2.v1/d2_gui.h"
-float __cdecl fcn_00580070(float*);
+float __cdecl d2_CalcKanoneProgress(float*);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_EqualizeWindowButtonWidths(int, int, char*, int);
@@ -18,7 +18,7 @@ void __cdecl io_FormatTextBuffer(char*, char*, ...);
 int __cdecl gm_GetSeasonTreasury(char*, unsigned char);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00588200 */
-void __cdecl fcn_00588200(char* obj, char* panel, char* a2)
+void __cdecl d2_UpdateKanoneDialog(char* obj, char* panel, char* a2)
 {
 	int level;
 	int percent;
@@ -61,8 +61,8 @@ void __cdecl fcn_00588200(char* obj, char* panel, char* a2)
 	d2_SetElementEnabled(*(int*) (panel + 0xb8), show);
 	d2_SetElementEnabled(*(int*) (panel + 0xbc),
 	             (~*(unsigned int*) (a2 + 4) >> 1) & 1);
-	d2_CreateGuiWindow(*(int*) (panel + 0xa8), 0, 100, (int) (fcn_005e8860() * 100.0f), 1);
-	d2_CreateGuiWindow(*(int*) (panel + 0xac), 0, 100, (int) (fcn_00580070((float*) panel) * 100.0f), 1);
+	d2_CreateGuiWindow(*(int*) (panel + 0xa8), 0, 100, (int) (gm_GetNormalizedWeatherStrength() * 100.0f), 1);
+	d2_CreateGuiWindow(*(int*) (panel + 0xac), 0, 100, (int) (d2_CalcKanoneProgress((float*) panel) * 100.0f), 1);
 	d2_CreateGuiWindow(*(int*) (panel + 0xc4), 0, 100,
 	             (int) (*(float*) (a2 + 8 + *(int*) (panel + 0xa0) * 4) * 100.0f), 1);
 	d2_SetForm(*(int*) (panel + 0xc0), 2);

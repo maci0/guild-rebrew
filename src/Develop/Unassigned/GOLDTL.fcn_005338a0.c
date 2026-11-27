@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x005338a0 */
-void __cdecl fcn_005338a0(void)
+void __cdecl d2_ClearStatusTextSlots(void)
 {
 	int a;
 

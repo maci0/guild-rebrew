@@ -3,7 +3,7 @@
 
 int __cdecl m_FreeTracked(int);
 
-void __cdecl fcn_00479ed0(void)
+void __cdecl d2_FreeSpriteRemapLut(void)
 {
 	int h;
 	if (*(int*) 0xf8a630 != 0) {

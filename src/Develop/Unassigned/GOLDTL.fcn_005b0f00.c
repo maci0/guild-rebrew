@@ -22,7 +22,7 @@ extern int g_778d20;
 extern int d2_MouseX;
 extern int d2_MouseY;
 
-void __cdecl fcn_004125c0(int x, int y);
+void __cdecl io_SetMouseCursorPos(int x, int y);
 
 /* ADDRESS: GOLDTL 0x005b0f00 */
 int __cdecl d2_UpdateWindowDrag(char* w)
@@ -80,7 +80,7 @@ int __cdecl d2_UpdateWindowDrag(char* w)
 		g_774a70 = 0;
 		d2_MouseTopBoundary = g_774a48;
 		g_6772c4 = 1;
-		fcn_004125c0(d2_MouseX, d2_MouseY);
+		io_SetMouseCursorPos(d2_MouseX, d2_MouseY);
 		g_774a74 = 0;
 	}
 	return r;

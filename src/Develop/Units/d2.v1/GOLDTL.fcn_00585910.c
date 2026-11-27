@@ -54,7 +54,7 @@ void __cdecl d2_DrawSegmentedBar(int, int, int, int);
 int __cdecl d2_AddWindowTextButton(int, int, int, char*, int);
 void __cdecl d2_SetElementWidth(int, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
-char* __cdecl fcn_004ee160(char*);
+char* __cdecl ahm_CalcWorkshopOutputScore(char*);
 void __cdecl d2_SetFormVisibility(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
@@ -122,7 +122,7 @@ void __cdecl d2_RunAlchemistryWorkshopDialog(char* e)
 	d2_SetElementFont(item, 0x53);
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[item].value_06c) = 1;
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[item].width) = 0xc8;
-	io_FormatTextBuffer(buf, (char*) 0x4040, fcn_004ee160(e));
+	io_FormatTextBuffer(buf, (char*) 0x4040, ahm_CalcWorkshopOutputScore(e));
 	item = d2_ShowTxt(0x12c, 0x82, buf, ids[1]);
 	d2_SetElementFont(item, 0x53);
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[item].value_06c) = 1;
@@ -196,7 +196,7 @@ void __cdecl d2_RunAlchemistryWorkshopDialog(char* e)
 			d2_SetElementFont(item, 0x53);
 			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[item].value_06c) = 1;
 			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[item].width) = 0xc8;
-			io_FormatTextBuffer(buf, (char*) 0x4040, fcn_004ee160(e));
+			io_FormatTextBuffer(buf, (char*) 0x4040, ahm_CalcWorkshopOutputScore(e));
 			item = d2_ShowTxt(0x12c, 0x82, buf, ids[1]);
 			d2_SetElementFont(item, 0x53);
 			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[item].value_06c) = 1;

@@ -4,7 +4,7 @@
 void __cdecl d3_ComposeObserverMatrix(void*, char*, int, void*);
 void __cdecl d3_MatrixToEulerAngles(void*, int);
 
-void __cdecl fcn_00455240(void* obj, int a2)
+void __cdecl d3_GetObjectEulerRotation(void* obj, int a2)
 {
 	char buf[0x40];
 

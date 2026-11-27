@@ -13,13 +13,13 @@ typedef struct
 extern Timer14 g_9b4900[16];
 
 char __cdecl d3_GetObjectScreenRect(void*, int*);
-int __cdecl fcn_0046fcd0(int x, int y, char* name);
+int __cdecl d2_CreateShowTxtElement(int x, int y, char* name);
 void __cdecl d2_PositionControl(int x, int y, int slot);
 void __cdecl d2_DestroyElement(int slot);
 void __cdecl d2_SetSlotVisibility(int slot, int flag);
 
 /* ADDRESS: GOLDTL 0x004cfca0 */
-void __cdecl fcn_004cfca0(void)
+void __cdecl d2_UpdateFloatingStatTexts(void)
 {
 	int r[4];
 	char buf[64];
@@ -49,7 +49,7 @@ void __cdecl fcn_004cfca0(void)
 			} else {
 				sprintf(buf, "%i", g_9b4900[i].ticks);
 			}
-			g_9b4900[i].handle = fcn_0046fcd0(px, (int) ((float) py + g_9b4900[i].speed), buf);
+			g_9b4900[i].handle = d2_CreateShowTxtElement(px, (int) ((float) py + g_9b4900[i].speed), buf);
 		} else {
 			d2_PositionControl(px, (int) ((float) py + g_9b4900[i].speed), g_9b4900[i].handle);
 		}

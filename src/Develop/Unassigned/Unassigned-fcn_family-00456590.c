@@ -31,16 +31,16 @@ typedef struct
 	unsigned int key;
 	char b;
 	char pad11[0x14 - 0x11];
-} fcn_00456630_Slot;
+} D3_SHADOW_TEX_CACHE_SLOT;
 
-extern fcn_00456630_Slot* g_6b89b4;
+extern D3_SHADOW_TEX_CACHE_SLOT* g_6b89b4;
 extern unsigned int g_6b89a8;
 extern unsigned int g_6b89ac;
 
-int __cdecl fcn_00456590(fcn_00456630_Slot* s, int a, char b, unsigned int key, unsigned int stamp);
+int __cdecl d3_BindShadowMapTexture(D3_SHADOW_TEX_CACHE_SLOT* s, int a, char b, unsigned int key, unsigned int stamp);
 
 /* ADDRESS: GOLDTL 0x00456590 */
-int __cdecl fcn_00456590(Tex* t, int* owner, char flag, unsigned int id, int x8)
+int __cdecl d3_BindShadowMapTexture(Tex* t, int* owner, char flag, unsigned int id, int x8)
 {
 	Col c;
 
@@ -65,10 +65,10 @@ int __cdecl fcn_00456590(Tex* t, int* owner, char flag, unsigned int id, int x8)
 }
 
 /* ADDRESS: GOLDTL 0x00456630 */
-int __cdecl fcn_00456630(int a, char b, unsigned int key, unsigned int stamp, int unused)
+int __cdecl d3_AcquireCachedShadowTexture(int a, char b, unsigned int key, unsigned int stamp, int unused)
 {
-	fcn_00456630_Slot* s;
-	fcn_00456630_Slot* best;
+	D3_SHADOW_TEX_CACHE_SLOT* s;
+	D3_SHADOW_TEX_CACHE_SLOT* best;
 	unsigned int i;
 	unsigned int bs;
 
@@ -81,11 +81,11 @@ int __cdecl fcn_00456630(int a, char b, unsigned int key, unsigned int stamp, in
 			best = s;
 		}
 		if (s->key == 0) {
-			return fcn_00456590(s, a, b, key, stamp);
+			return d3_BindShadowMapTexture(s, a, b, key, stamp);
 		}
 	}
 	if (best != 0 && stamp - bs > g_6b89ac) {
-		return fcn_00456590(best, a, b, key, stamp);
+		return d3_BindShadowMapTexture(best, a, b, key, stamp);
 	}
 	best = 0;
 	bs = stamp;
@@ -97,7 +97,7 @@ int __cdecl fcn_00456630(int a, char b, unsigned int key, unsigned int stamp, in
 		}
 	}
 	if (best != 0 && stamp - bs > 1) {
-		return fcn_00456590(best, a, b, key, stamp);
+		return d3_BindShadowMapTexture(best, a, b, key, stamp);
 	}
 	return 0;
 }

@@ -48,7 +48,7 @@ void __cdecl d2_SetElementEnabled(int i, int flag);
 int __cdecl amt_ApplyForOffice(char*, int);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl cm_StepCommandQueue(void);
-void __cdecl fcn_0057e880(int, int, int, int);
+void __cdecl d2_DispatchTutorialInput(int, int, int, int);
 int __cdecl amt_GetOfficeGroup(int a);
 void __cdecl d2_RunOfficeListDialog(int, int, int, int, void*);
 void __cdecl fcn_0052f7a0(void);
@@ -154,7 +154,7 @@ int __cdecl d2_RunAmtsbewerbungDialog(char* who, int id)
 				if (cm_GetCommandStatus(r) == 1) {
 					res = 1;
 				}
-				fcn_0057e880(0x2f, 0, 0, id);
+				d2_DispatchTutorialInput(0x2f, 0, 0, id);
 			}
 			else if (d2_CurrentElementId == hb) {
 				r = amt_GetOfficeGroup(id);
@@ -170,7 +170,7 @@ int __cdecl d2_RunAmtsbewerbungDialog(char* who, int id)
 	}
 	if (res != 0) {
 		g_774654 = 1;
-		fcn_0057e880(0x2f, 0, 1, id);
+		d2_DispatchTutorialInput(0x2f, 0, 1, id);
 	}
 	return res;
 }

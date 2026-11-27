@@ -7,7 +7,7 @@ extern int g_772f3c;
 #include "client_dialog_state.h"
 
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_004cfca0(void);
+void __cdecl d2_UpdateFloatingStatTexts(void);
 void __cdecl d2_AppendPendingPlayerNames(int);
 void __cdecl cut_WaitSeconds(int);
 
@@ -31,7 +31,7 @@ int __cdecl cut_WaitForTimeoutOrInput(int secs, int(__cdecl* cb)(int), int arg)
 			} else if ((*(unsigned int*)&g_6b7fac) >= secs * (1.0 / 14.0) + start) {
 				g_774654 = 1;
 			}
-			fcn_004cfca0();
+			d2_UpdateFloatingStatTexts();
 			d2_AppendPendingPlayerNames((*(int*)&cut_ActiveCutscene));
 		} while (main_RunFrameLoop(cut_WaitSeconds, cut_EventLoopFlags | 0x8000) != 0);
 	}

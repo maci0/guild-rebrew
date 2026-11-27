@@ -17,7 +17,7 @@ typedef struct LC_OBJECT_LIST {
 int __cdecl lc_GetBauplatzPrefix(int key, char* out);
 int __cdecl lc_GetGebaeudeBauplatz(LC_GEBAEUDE_BAUPLATZ* out, unsigned char* obj);
 char __cdecl lc_MatchGebaeudeBauplatzNode(char* object, void* context);
-char __cdecl fcn_005982d0(char* object, void* context);
+char __cdecl lc_CollectVegetationObjects(char* object, void* context);
 char __cdecl fcn_0058fa00(char* object, void* context);
 void __cdecl lc_SetVegetationVisible(char* node, int flag);
 

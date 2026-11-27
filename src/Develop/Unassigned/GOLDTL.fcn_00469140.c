@@ -44,7 +44,7 @@ extern int d2_ScreenHeight;
 extern int g_1040494;
 
 int __cdecl d2_AllocateElement(void);
-Surf* __cdecl fcn_004770a0(Desc*, int);
+Surf* __cdecl d2_CreateSurface(Desc*, int);
 int __cdecl d2_LockSurface(Surf*);
 void __cdecl d2_UnlockSurface(Surf*);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -103,7 +103,7 @@ int __cdecl d2_CreateBitmapElement(int x, int y, int w, int h, char* src)
 	desc.h = h;
 	desc.w = w;
 	desc.x28 = 0x17;
-	*(Surf**) &((D2_CONTROL_TL*) g_1015ea0)[idx].payload.fields.value_08c = fcn_004770a0(&desc, 0);
+	*(Surf**) &((D2_CONTROL_TL*) g_1015ea0)[idx].payload.fields.value_08c = d2_CreateSurface(&desc, 0);
 	s = *(Surf**) &((D2_CONTROL_TL*) g_1015ea0)[idx].payload.fields.value_08c;
 	if (d2_LockSurface(s)) {
 		for (i = 0; i < h; i++) {

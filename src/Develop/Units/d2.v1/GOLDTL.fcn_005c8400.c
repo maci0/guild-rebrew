@@ -44,7 +44,7 @@ void __cdecl d2_CloseWindow(int);
 void __cdecl d2_DestroyElement(int);
 int __cdecl he_GetActiveKrediteByBorrower(int, int, char**);
 int __cdecl d2_GetFormWindow(int, int);
-void __cdecl fcn_00533f40(int x, int y, int owner, int other, int arg5, int* id2, int* id1, int* id3);
+void __cdecl d2_CreateWindowScrollbar(int x, int y, int owner, int other, int arg5, int* id2, int* id1, int* id3);
 int __cdecl d2_AddElementToWindow(int x, int y, int id, int win);
 int __cdecl d2_CreateChildWindow(int x, int y, int cx, int cy, int a5, int win);
 char* __cdecl gm_SearchTable67(int);
@@ -105,7 +105,7 @@ int __cdecl d2_RunGeldInfoDialog(void)
 	}
 	cy = *(short*) (g_772500 + 0x269d8);
 	d2_SetForm(h, 0);
-	fcn_00533f40(0x215, 0x16b, d2_CurrentWindowId, d2_GetFormWindow(h, 3), 0x6a, &id2, &id1, &id3);
+	d2_CreateWindowScrollbar(0x215, 0x16b, d2_CurrentWindowId, d2_GetFormWindow(h, 3), 0x6a, &id2, &id1, &id3);
 	for (i = 0; i < n; i++) {
 		d2_SetForm(h, 3);
 		lines[i].btn = d2_AddElementToWindow((*(int*) (g_77255c + 0xc) - cy) >> 1, i * 0x6a, 0x75a, d2_CurrentWindowId);

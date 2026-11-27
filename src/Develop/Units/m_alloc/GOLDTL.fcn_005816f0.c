@@ -51,7 +51,7 @@ void __cdecl d2_CheckTutCh2Step3Done(void);
 void __cdecl d2_CheckTutCh2RathausStepDone(void);
 void __cdecl d2_UpdateTutCh2Action110Step(void);
 void __cdecl d2_UpdateTutCh2Cat0dStep(void);
-void __cdecl fcn_0057f2e0(void);
+void __cdecl d2_InitTutCh2GildeStep(void);
 void __cdecl d2_UpdateTutCh2Node13Step(void);
 void __cdecl d2_FocusTutorialBuilding0x0a(void);
 void __cdecl d2_UpdateTutCh2Node74Step(void);
@@ -346,7 +346,7 @@ int* __cdecl d2_CreateTutorialChapter2(void)
 	p[0xb] = 0x429;
 	p[0xc] = 0x8e;
 	p[0xf] = (int) d2_AllowTutCh2RathausMsg19;
-	p[0xd] = (int) fcn_0057f2e0;
+	p[0xd] = (int) d2_InitTutCh2GildeStep;
 	p[0xe] = (int) d2_UpdateTutCh2Cat0dStep;
 	p[0x10] = 1;
 	p[0x11] = 0x2148;

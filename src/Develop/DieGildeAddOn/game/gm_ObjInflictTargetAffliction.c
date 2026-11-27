@@ -4,7 +4,7 @@ extern int g_7f4c08;
 extern short g_7f4c0c;
 extern short g_aed32c;
 
-int __cdecl fcn_005bdc30(int a, int* dlg, char* txt, int c, int d);
+int __cdecl d2_RunCityScrollMapDialog(int a, int* dlg, char* txt, int c, int d);
 void __cdecl io_FormatTextBuffer(char* buf, int fmt, ...);
 void __cdecl cm_SendCopyEntityData(char* msg);
 void __cdecl cm_BeginPacketFieldDelta(int a, int b);
@@ -40,7 +40,7 @@ int __cdecl gm_ObjInflictTargetAffliction(char* cmd, char* action)
 		dlg[1] = -1;
 		dlg[4] = 6;
 		dlg[2] = 4;
-		esi = (char*) fcn_005bdc30(1, dlg, txt, 0, 0);
+		esi = (char*) d2_RunCityScrollMapDialog(1, dlg, txt, 0, 0);
 		if (esi == 0 || *(short*) (esi + 0x27) == 0) {
 			return 0;
 		}

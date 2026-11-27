@@ -36,11 +36,11 @@ void __cdecl d3_SetObjectVisible(char* o, int v);
 void __cdecl d2_ResetFormBackground(int h);
 void __cdecl d2_DestroyForm(int h);
 void __cdecl d2_DestroyElement(int h);
-void __cdecl fcn_00436f70(int v);
+void __cdecl d3_SetFogEnabled(int v);
 void __cdecl m_FreeTracked(void* p);
 void __cdecl sb_PlayVoice(int h, char* s, int a, int b, int c, int d, int e);
 
-void __cdecl fcn_00534f30(Pager* p)
+void __cdecl d3_CloseBookPagerDialog(Pager* p)
 {
 	char* e;
 	int i;
@@ -74,7 +74,7 @@ void __cdecl fcn_00534f30(Pager* p)
 			d2_DestroyElement(p->cb_b);
 		}
 		if (p->sound != 0) {
-			fcn_00436f70(1);
+			d3_SetFogEnabled(1);
 		}
 		m_FreeTracked(p);
 		sb_PlayVoice(g_7747c4, g_6a3194, 1, 0x3f, 0x7f, 0, 0);

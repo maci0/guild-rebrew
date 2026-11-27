@@ -10,7 +10,7 @@ extern char g_7749e8;
 extern int g_7749e4;
 
 int __cdecl d2_CreateActionPopupSlot(char*, short, short, char*, int);
-void __cdecl fcn_00545780(char*);
+void __cdecl d2_CloseActionPopup(char*);
 void __cdecl he_FreeAction(char*);
 char* __cdecl gm_LookupEntityRecordById(int);
 int* __cdecl d3snd_QueueSound(int, int, char*, int, int);
@@ -43,7 +43,7 @@ void __cdecl d2_ShowTitleAward(char* o)
 	state = *(int*) (o + 0x70);
 	if (state == -2 || state == -1 || *slot == -1 || g == 0) {
 		if (*(int*) (o + 0x74))
-			fcn_00545780(o);
+			d2_CloseActionPopup(o);
 		he_FreeAction(o);
 		return;
 	}
@@ -58,7 +58,7 @@ void __cdecl d2_ShowTitleAward(char* o)
 		if (g_100f884 != *(int*) (id + 8) && g_7749e8 == 0)
 			return;
 		if (g_100f1dc == 2) {
-			fcn_00545780(o);
+			d2_CloseActionPopup(o);
 			he_FreeAction(o);
 			return;
 		}
@@ -67,7 +67,7 @@ void __cdecl d2_ShowTitleAward(char* o)
 		if (g_7749e4 != id)
 			return;
 		g_7749e8 = 0;
-		fcn_00545780(o);
+		d2_CloseActionPopup(o);
 		he_FreeAction(o);
 		return;
 	}

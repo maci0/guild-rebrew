@@ -1,8 +1,8 @@
 #include "client_town.h"
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 extern char* lpObjektePROT;
-extern int __cdecl fcn_00502450(int a, int b);
-extern int __cdecl fcn_005024e0(int a, int b);
+extern int __cdecl gm_CalcTownSlotTargetStock(int a, int b);
+extern int __cdecl gm_CalcTownSlotProductionSupply(int a, int b);
 extern float __cdecl eval_ObjektPreis2Credits(int a, int b);
 
 /* ADDRESS: GOLDTL 0x005016f0 */
@@ -20,9 +20,9 @@ void __cdecl gm_InitTownGoodsTable(int which)
 		*(int*) dst = *(int*) (0x696608 + i * 0x80);
 		kind = *def;
 		if (kind != 0x17 && kind != 0x25) {
-			*(float*) (dst - 0x10) = (float) fcn_00502450(which, i);
+			*(float*) (dst - 0x10) = (float) gm_CalcTownSlotTargetStock(which, i);
 		} else {
-			*(int*) (dst + 4) = fcn_005024e0(which, i);
+			*(int*) (dst + 4) = gm_CalcTownSlotProductionSupply(which, i);
 		}
 		*(float*) (dst + 8) = eval_ObjektPreis2Credits(*(unsigned short*) (dst - 0x30), 100);
 		*(int*) (dst - 0xc) = *(int*) (dst - 0x10);

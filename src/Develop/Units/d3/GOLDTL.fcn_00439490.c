@@ -18,8 +18,8 @@ extern int g_6b8064;
 void __cdecl d3_SelectSceneContext(int a, int b);
 void __cdecl d3_DisposeObject(char* p);
 void __cdecl d3_FreeMeshObject(char* p);
-void __cdecl fcn_0043bcf0(int a);
-void __cdecl fcn_00459b40(int a);
+void __cdecl d3_ReleaseRenderDeviceContext(int a);
+void __cdecl d3_FreeSkyDome(int a);
 void __cdecl m_FreeTracked(void* p);
 void __cdecl d3_ReleaseRenderVertexBuffer(void);
 #include "Develop/Units/d3/d3_animation.h"
@@ -27,8 +27,8 @@ void __cdecl m_pool_free_all(int* p);
 void __cdecl d3_DestroySkySystem(void);
 void __cdecl d3s_ReleaseCache(void);
 void __cdecl fcn_0043bc20(void);
-void __cdecl fcn_0045c1e0(void);
-void __cdecl fcn_00450ad0(void);
+void __cdecl d3_ReleaseAllRenderTextures(void);
+void __cdecl d3_ResetLightBuffers(void);
 void __cdecl fcn_00436fc0(void);
 
 /* ADDRESS: GOLDTL 0x00439490 */
@@ -53,11 +53,11 @@ void __cdecl d3_Shutdown(void)
 				d3_FreeMeshObject(d3_SceneRenderListHead);
 			}
 			if (g_6b8300 != 0) {
-				fcn_0043bcf0(g_6b8300);
+				d3_ReleaseRenderDeviceContext(g_6b8300);
 				g_6b8300 = 0;
 			}
 			if (g_6b89c0 != 0) {
-				fcn_00459b40(g_6b89c0);
+				d3_FreeSkyDome(g_6b89c0);
 				g_6b89c0 = 0;
 			}
 			if (*(void**) (((char*)g_67a370) + 0x3c8) != 0) {
@@ -73,11 +73,11 @@ void __cdecl d3_Shutdown(void)
 		d3_DisposeObject(d3_ObjectListHead);
 	}
 	if (g_6b8300 != 0) {
-		fcn_0043bcf0(g_6b8300);
+		d3_ReleaseRenderDeviceContext(g_6b8300);
 		g_6b8300 = 0;
 	}
 	if (g_6b89c0 != 0) {
-		fcn_00459b40(g_6b89c0);
+		d3_FreeSkyDome(g_6b89c0);
 		g_6b89c0 = 0;
 	}
 	d3_ReleaseRenderVertexBuffer();
@@ -95,8 +95,8 @@ void __cdecl d3_Shutdown(void)
 	d3_DestroySkySystem();
 	d3s_ReleaseCache();
 	fcn_0043bc20();
-	fcn_0045c1e0();
-	fcn_00450ad0();
+	d3_ReleaseAllRenderTextures();
+	d3_ResetLightBuffers();
 	g_1041d08 = 0;
 	fcn_00436fc0();
 }

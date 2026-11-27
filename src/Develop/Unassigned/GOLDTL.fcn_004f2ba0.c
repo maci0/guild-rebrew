@@ -1,7 +1,7 @@
 
 
 
-int __cdecl fcn_004c6c30(char*);
+int __cdecl gv_EnqueueSlotCommand(char*);
 
 int __cdecl gv_RequestActivateSection(char* owner, char* entity, int fieldType)
 {
@@ -23,5 +23,5 @@ int __cdecl gv_RequestActivateSection(char* owner, char* entity, int fieldType)
 	buf[0x10] = 0;
 	*(short*) (buf + 0x11) = 0;
 	*(int*) (buf + 0x13) = 0;
-	return fcn_004c6c30(buf);
+	return gv_EnqueueSlotCommand(buf);
 }

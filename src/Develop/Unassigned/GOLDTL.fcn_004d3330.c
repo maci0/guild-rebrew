@@ -6,7 +6,7 @@ extern int g_67a370;
 float __cdecl gm_ScorePositionBalance(char* self, int x, int z, float range);
 
 /* ADDRESS: GOLDTL 0x004d3330 */
-int __cdecl fcn_004d3330(char* self, int centerCol, int centerRow, int searchRadius,
+int __cdecl gm_FindBestCombatCell(char* self, int centerCol, int centerRow, int searchRadius,
 	unsigned int* outCol, unsigned int* outRow)
 {
 	char* map;

@@ -26,7 +26,7 @@ int __cdecl ch_UpdateFade();
 int __cdecl ch_UpdateWait();
 char* __cdecl m_alloc(int, const char*);
 void __cdecl ch_DeclareAction(int, void*, int, const char*, int);
-int __cdecl fcn_00408220(float);
+int __cdecl ch_AllocMap(float);
 
 
 /* Allocates the character action queue and registers the action handlers. */
@@ -58,7 +58,7 @@ int __cdecl ch_InitActionQueue(void)
 	ch_DeclareAction(59, ch_UpdateWait, 1, &(*(char*)g_6b5c60), 1);
 	ch_DeclareAction(52, UsingGate, 1, &(*(char*)g_6b5c60), 5);
 	memset(g_1551f40, 0, sizeof(g_1551f40));
-	(*(int*)&g_6b5c5c) = fcn_00408220(60.0f);
+	(*(int*)&g_6b5c5c) = ch_AllocMap(60.0f);
 	return 1;
 }
 unsigned char _dpad_6b5c60[92] = {

@@ -7,7 +7,7 @@ int __cdecl fcn_0064e1fd(void*);
 
 
 /* ADDRESS: GOLDTL 0x00479ff0 */
-int __cdecl fcn_00479ff0(const char* name, char* data)
+int __cdecl shp_SaveShapeFile(const char* name, char* data)
 {
 	void* f;
 

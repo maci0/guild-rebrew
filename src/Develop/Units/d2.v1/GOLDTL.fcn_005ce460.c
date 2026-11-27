@@ -20,7 +20,7 @@ extern int g_100f1dc;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
 
-Book *__cdecl fcn_00534c40(char *, char *, int, char *, char *);
+Book *__cdecl d2_OpenJournalBook(char *, char *, int, char *, char *);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
 void __cdecl gm_FormatLawName(char *, int);
@@ -29,7 +29,7 @@ void __cdecl gm_GetLawEntry(int, Law *);
 void __cdecl d2_RunGesetzbuchInfoDialog(int, int);
 void __cdecl d2_UpdatePagedPanel(Book *);
 int __cdecl main_RunFrameLoop(void *, int);
-void __cdecl fcn_00534f30(Book *);
+void __cdecl d3_CloseBookPagerDialog(Book *);
 void __cdecl d3_EndCameraAndUiMode(void);
 
 void __cdecl d2_RunGesetzbuchDialog(int cmd)
@@ -50,7 +50,7 @@ void __cdecl d2_RunGesetzbuchDialog(int cmd)
 
 	switch (cmd) {
 	case 0x111:
-		w = fcn_00534c40("ob_GESETZBUCH_STRAFRECHT", "Buch", 2, "Buch\\Gesetzbuch", "Buch\\Gesetzbuch");
+		w = d2_OpenJournalBook("ob_GESETZBUCH_STRAFRECHT", "Buch", 2, "Buch\\Gesetzbuch", "Buch\\Gesetzbuch");
 		first = 0x11;
 		last = 0x1d;
 		base = 0x1452;
@@ -58,7 +58,7 @@ void __cdecl d2_RunGesetzbuchDialog(int cmd)
 		split = 6;
 		break;
 	case 0x112:
-		w = fcn_00534c40("ob_GESETZBUCH_STEUERN", "Buch", 2, "Buch\\Gesetzbuch", "Buch\\Gesetzbuch");
+		w = d2_OpenJournalBook("ob_GESETZBUCH_STEUERN", "Buch", 2, "Buch\\Gesetzbuch", "Buch\\Gesetzbuch");
 		first = 9;
 		last = 0x11;
 		base = 0x142a;
@@ -66,7 +66,7 @@ void __cdecl d2_RunGesetzbuchDialog(int cmd)
 		split = 4;
 		break;
 	case 0x113:
-		w = fcn_00534c40("ob_GESETZBUCH_VERFASSUNG", "Buch", 2, "Buch\\Gesetzbuch", "Buch\\Gesetzbuch");
+		w = d2_OpenJournalBook("ob_GESETZBUCH_VERFASSUNG", "Buch", 2, "Buch\\Gesetzbuch", "Buch\\Gesetzbuch");
 		first = 0;
 		last = 9;
 		base = 0x13fd;
@@ -125,6 +125,6 @@ void __cdecl d2_RunGesetzbuchDialog(int cmd)
 			g_774654 = 1;
 		}
 	} while (main_RunFrameLoop(d2_RunGesetzbuchDialog, 0x677c7) != 0);
-	fcn_00534f30(w);
+	d3_CloseBookPagerDialog(w);
 	d3_EndCameraAndUiMode();
 }

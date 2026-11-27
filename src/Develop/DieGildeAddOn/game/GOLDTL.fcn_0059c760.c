@@ -8,7 +8,7 @@ extern int g_14ad208;
 extern char g_6aa39c[];
 extern char g_6aa38c[];
 
-void __cdecl fcn_005338a0(void);
+void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_ShowProductionDialog(int);
@@ -21,7 +21,7 @@ void __cdecl d2_RunMineInteriorHud(int a)
 
 	x = 0;
 	y = 0;
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	while (main_RunFrameLoop(d2_RunMineInteriorHud, 0x67fff) != 0) {
 		if (g_7746d8 & 0x200) {
 			x = RegisterStatusText(g_6aa39c, g_14ad230, 0x16);

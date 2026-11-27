@@ -29,7 +29,7 @@ void __cdecl d2_ClearRadioGroup(int);
 void __cdecl d2_DestroyForm(void *);
 void __cdecl d3_EndCameraAndUiMode(void);
 int __cdecl d2_DispatchAlchemyOrder(int, void *, int);
-void __cdecl fcn_005263d0(void *, char *, int);
+void __cdecl d2_ShowGreenMessageBox(void *, char *, int);
 
 /* ADDRESS: GOLDTL 0x5848b0 */
 void __cdecl d2_RunAlchemyDialog(int a0)
@@ -69,7 +69,7 @@ void __cdecl d2_RunAlchemyDialog(int a0)
 	}
 	if (count == 0) {
 		io_FormatTextBuffer(msg, 0x404a, 0x868060 + g_773d75 * 0x2f4);
-		fcn_005263d0(*(void **)0x14b5404, msg, 0);
+		d2_ShowGreenMessageBox(*(void **)0x14b5404, msg, 0);
 		d3_EndCameraAndUiMode();
 		return;
 	}

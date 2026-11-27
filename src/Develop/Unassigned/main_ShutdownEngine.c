@@ -1,15 +1,15 @@
-void __cdecl fcn_005381a0(void);
+void __cdecl main_ShutdownGameModules(void);
 void __cdecl main_ShutdownSubsystems(void);
-void __cdecl fcn_00538790(void);
+void __cdecl main_ShutdownClientSubsystems(void);
 void __cdecl fcn_00538140(void);
 void __cdecl main_SetScreensaverActive(int v);
 
 /* ADDRESS: GOLDTL 0x00538220 */
 void __cdecl main_ShutdownEngine(void)
 {
-	fcn_005381a0();
+	main_ShutdownGameModules();
 	main_ShutdownSubsystems();
-	fcn_00538790();
+	main_ShutdownClientSubsystems();
 	fcn_00538140();
 	if (*(int*) 0x7e246c != 0)
 		return;

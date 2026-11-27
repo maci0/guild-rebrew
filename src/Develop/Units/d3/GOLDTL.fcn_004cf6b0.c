@@ -26,7 +26,7 @@ int __cdecl sb_PlayVoice(char* bank, const char* name, int loop, int pan,
 void __cdecl d3_GridPointToWorld(int g, int x, int z, float* out);
 unsigned int __cdecl cut_RandMod(unsigned int n);
 void __cdecl d3_ScheduleActionTimer(int a1, int a2, int a3);
-int __cdecl fcn_004d4790(char* e);
+int __cdecl cut_HandleUnitDefeat(char* e);
 int __cdecl ch_QueuePlayAnimation(char* e, const char* name, int param);
 void __cdecl d3_DestroyObject(int p);
 int __cdecl d3_BuildFloorGeometry(int m);
@@ -113,7 +113,7 @@ int __cdecl d3_UpdateMineExplosions(void)
 								} else {
 									d3_ScheduleActionTimer(*q, dmg2, 2);
 								}
-								if (!fcn_004d4790(e)) {
+								if (!cut_HandleUnitDefeat(e)) {
 									ch_QueuePlayAnimation((char*) other, "kampf/arm_greifen", 1);
 								}
 							}

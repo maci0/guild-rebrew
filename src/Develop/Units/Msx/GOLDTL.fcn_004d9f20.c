@@ -53,7 +53,7 @@ void __cdecl d2_InitCombatHud(int);
 #include "Develop/Units/Msx/msx.h"
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl ch_SetAnimationPaused(Obj*, int);
-void __cdecl fcn_00533a40(char*);
+void __cdecl d2_ShowStatusBanner(char*);
 void __cdecl d2_UpdateCombatFrame(int);
 Ent* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl cut_AssignCombatTeamOrders(Ent*);
@@ -91,10 +91,10 @@ void __cdecl cut_RunTacticalCombat(int arg)
 					ch_SetAnimationPaused(((Unit**)ch_ContextCharacters)[i]->obj, g_772e94);
 				}
 			}
-			fcn_00533a40(&(*(char*)g_6b5c60));
+			d2_ShowStatusBanner(&(*(char*)g_6b5c60));
 		}
 		if (g_772e94 != 0) {
-			fcn_00533a40(g_14a97d4);
+			d2_ShowStatusBanner(g_14a97d4);
 		} else {
 			d2_UpdateCombatFrame(arg);
 		}

@@ -3,7 +3,7 @@
 void __cdecl d3_TransformPoint(char* src, char* pos, float* out);
 int __cdecl d3_LoadObjectFile(char* name, int a, int b);
 void __cdecl d3_SetNodePosition(char* h, float* pos);
-void __cdecl fcn_00455240(char* src, float* out);
+void __cdecl d3_GetObjectEulerRotation(char* src, float* out);
 void __cdecl d3_SetObjectRotation(char* h, float* v);
 
 int __cdecl CreateObjectGroupAtDummy(char** name, char** a)
@@ -18,7 +18,7 @@ int __cdecl CreateObjectGroupAtDummy(char** name, char** a)
 	d3_TransformPoint(*a, *a + 0x4c, pos);
 	h = d3_LoadObjectFile(*name, 0, 0);
 	d3_SetNodePosition((char*)h, pos);
-	fcn_00455240(*a, rot);
+	d3_GetObjectEulerRotation(*a, rot);
 	d3_SetObjectRotation((char*)h, rot);
 	return h;
 }

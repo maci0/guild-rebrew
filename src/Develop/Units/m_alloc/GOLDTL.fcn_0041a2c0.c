@@ -7,7 +7,7 @@ extern unsigned int g_6b5de8;
 void __cdecl m_FreeTracked(void* p);
 void* __cdecl fcn_0064d740(void* dst, const void* src, unsigned int n);
 
-void __cdecl fcn_0041a2c0(int idx)
+void __cdecl d3_RemoveDisplayAdapter(int idx)
 {
 	m_FreeTracked(g_6b5dd0[idx].data);
 	g_6b5dd0[idx].data = 0;

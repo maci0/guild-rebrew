@@ -8,7 +8,7 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl d2_AddWindowScrollButtons(int, int, int, int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_004ad190(void);
+int __cdecl amt_GetSpecialOfficeId(void);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_OpenTagesordnungDialog(void);
 void __cdecl d2_DestroyForm(int);
@@ -97,7 +97,7 @@ void __cdecl d2_RunTagesordnungDialog(int a0, int a1, int level)
 			}
 		}
 	} else {
-		k = fcn_004ad190();
+		k = amt_GetSpecialOfficeId();
 		v9 = 0;
 		pick[0] = 0;
 		pick[1] = 0;

@@ -45,18 +45,18 @@ extern int g_772610;
 extern RGB_COLOR g_100f1a0;
 
 Tiles* __cdecl d2_AllocShapeBuffer(int, int);
-Tex* __cdecl fcn_004770a0(TexDesc* d, int fmt);
+Tex* __cdecl d2_CreateSurface(TexDesc* d, int fmt);
 void __cdecl d2_BlitSurfaceToSurface(int, int, int, int, Img*, int, int, Tex*);
 int __cdecl d2_LockSurface(Tex*);
 void __cdecl d2_ReadSurfacePixel(int, int, Tex*, RGB_COLOR*);
 void __cdecl d2_WriteSurfacePixel(int, int, unsigned char, unsigned char, unsigned char, Tex*);
 void __cdecl d2_UnlockSurface(Tex*);
-void __cdecl fcn_00475f80(Tex*);
+void __cdecl d2_ReleaseSurface(Tex*);
 void __cdecl d2_UpdateTextureBytes(Tex*);
 long __stdcall fcn_006114ff(void*, void*, void*, void*, void*, void*, int, unsigned int);
 
 /* ADDRESS: GOLDTL 0x0047b640 */
-Tiles* __cdecl fcn_0047b640(int x, int y, int w, int h, Img* img, int size)
+Tiles* __cdecl d2_CreateTiledSurface(int x, int y, int w, int h, Img* img, int size)
 {
 	TexDesc d;
 	Tiles* res;
@@ -93,7 +93,7 @@ Tiles* __cdecl fcn_0047b640(int x, int y, int w, int h, Img* img, int size)
 		d.w = tile;
 		d.h = tile;
 		d.fmt = img->fmt;
-		t = fcn_004770a0(&d, 0);
+		t = d2_CreateSurface(&d, 0);
 		g_77260c++;
 		d2_BlitSurfaceToSurface(i % cols * tile + x, i / cols * tile + y, tile, tile, img, 0, 0, t);
 		if (g_100f1a0.r || g_100f1a0.g || g_100f1a0.b) {
@@ -118,9 +118,9 @@ Tiles* __cdecl fcn_0047b640(int x, int y, int w, int h, Img* img, int size)
 		} else {
 			d.fmt = g_67dab8;
 		}
-		t2 = fcn_004770a0(&d, 0);
+		t2 = d2_CreateSurface(&d, 0);
 		fcn_006114ff(t2->surf, 0, 0, t->surf, 0, 0, -1, 0xff000000);
-		fcn_00475f80(t);
+		d2_ReleaseSurface(t);
 		d2_UpdateTextureBytes(t2);
 		g_772610 += t2->bytes;
 		res->tex[i] = t2;

@@ -17,11 +17,11 @@ typedef struct Group {
 extern int g_772610;
 extern int g_77260c;
 
-void __cdecl fcn_00475f80(Item* p);
+void __cdecl d2_ReleaseSurface(Item* p);
 void __cdecl m_FreeTracked(void* p);
 
 /* ADDRESS: GOLDTL 0x0047ac60 */
-void __cdecl fcn_0047ac60(Group* g)
+void __cdecl d2_ReleaseSurfaceGroup(Group* g)
 {
 	int i;
 
@@ -29,7 +29,7 @@ void __cdecl fcn_0047ac60(Group* g)
 		g->items[i]->refs--;
 		if (g->items[i]->refs <= 0) {
 			g_772610 -= g->items[i]->size;
-			fcn_00475f80(g->items[i]);
+			d2_ReleaseSurface(g->items[i]);
 			g_77260c--;
 		}
 	}

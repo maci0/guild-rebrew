@@ -116,7 +116,7 @@ void __cdecl gm_UpdateDaylightSchedule(void*);
 int __cdecl gm_QuerySeason(void*);
 void __cdecl gm_UpdateWeatherAndSky(void*, int);
 void __cdecl d3_ResetWorldSceneState(void);
-void __cdecl fcn_00528fd0(void);
+void __cdecl d2_RestoreHudPanels(void);
 void __cdecl gm_BeginPlayerTurn(void);
 int __cdecl cm_RequestSysMessage(int, void*);
 int __cdecl cm_GetCommandStatus(int);
@@ -155,10 +155,10 @@ void* __cdecl m_alloc(int, const char*);
 void __cdecl m_FreeTracked(void*);
 void __cdecl ls_LoadSavePreview(char*);
 void __cdecl ls_SaveGame(char*, char*, int);
-void __cdecl fcn_005bd820(void);
+void __cdecl d2_LoadCityMapImage(void);
 void __cdecl d2_InitDefaultBookmarks(void);
 void __cdecl d3_RebuildWorldScene(void);
-void __cdecl fcn_00514fc0(void);
+void __cdecl d3_RebuildSceneQuadtree(void);
 void __cdecl gm_ApplyGameSettings(void);
 void __cdecl d3_SetViewport(float, float, float, float, int, int, int, int, int);
 int __cdecl gm_SearchTable67(int);
@@ -168,7 +168,7 @@ void __cdecl init_LoadGebaeudeScene(int);
 void __cdecl d2_EnterBuildingObjekt(void*, int, void*);
 void __cdecl cm_SendCopyEntityData(void*);
 void* __cdecl d2_GetHudThemeResourceId(void);
-void __cdecl fcn_00526db0(void*);
+void __cdecl d2_InitHudPanels(void*);
 void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl main_RundenBeginn(void);
 
@@ -393,15 +393,15 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 		}
 	}
 	main_PumpWindowMessages();
-	fcn_005bd820();
+	d2_LoadCityMapImage();
 	main_PumpWindowMessages();
 	main_FadeOutToBlack();
 	d2_SuppressOverlay = 0;
-	fcn_00526db0(d2_GetHudThemeResourceId());
+	d2_InitHudPanels(d2_GetHudThemeResourceId());
 	d3_SelectSceneContext(0, 0);
 	if ((g_7747b0 & 1) && (!(g_7747b0 & 0x40))) {
 		d3_RebuildWorldScene();
-		fcn_00514fc0();
+		d3_RebuildSceneQuadtree();
 		d2_InitDefaultBookmarks();
 	}
 	gm_ApplyGameSettings();
@@ -499,7 +499,7 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 			gm_BeginPlayerTurn();
 		} else {
 			d3_ResetWorldSceneState();
-			fcn_00528fd0();
+			d2_RestoreHudPanels();
 			if (g_7747b0 & 4) {
 				cm_RequestSysMessage(1, 0);
 				if (g_7747b0 & 4) {

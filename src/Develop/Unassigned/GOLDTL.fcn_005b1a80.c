@@ -32,7 +32,7 @@ void __cdecl hp_SyncProdSetting(char* p)
 	}
 }
 
-float __cdecl fcn_005b1910(char* o);
+float __cdecl gm_NextLCGFloat(char* o);
 extern float g_662cf8;
 
 
@@ -50,7 +50,7 @@ int __cdecl hp_PickWeightedProdItem(char* p)
 	if (o == 0) {
 		return 0;
 	}
-	thr = (int) (fcn_005b1910(o) * g_662cf8);
+	thr = (int) (gm_NextLCGFloat(o) * g_662cf8);
 	k = 0;
 	res = 0;
 	sum = 0;

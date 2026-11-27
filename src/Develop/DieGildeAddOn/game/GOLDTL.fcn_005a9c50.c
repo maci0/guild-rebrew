@@ -25,7 +25,7 @@ extern char s_6aaf08[];
 extern char s_6aaef4[];
 extern char s_6aaedc[];
 
-void __cdecl fcn_005338a0(void);
+void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 int __cdecl d2_IsTutorialActionAllowed(int);
@@ -41,7 +41,7 @@ void __cdecl d2_RunRathausCouncilMenu(int building)
 	int d;
 	int e;
 
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	if (main_RunFrameLoop((void*) d2_RunRathausCouncilMenu, 0x67fff) != 0) {
 		do {
 			if (d2_IsTutorialActionAllowed(0x1000) == 1) {

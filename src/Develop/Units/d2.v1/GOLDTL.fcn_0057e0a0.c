@@ -18,19 +18,19 @@ void __cdecl d2_SetElementEnabled(int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl d3snd_PlaySoundEffect(int, int, int, int);
 void __cdecl d3_EndCameraAndUiMode(void);
-void __cdecl fcn_00533a40(int);
+void __cdecl d2_ShowStatusBanner(int);
 void __cdecl d2_HighlightSelectedControl(int);
-int __cdecl fcn_0057e880(int, int, int, int);
+int __cdecl d2_DispatchTutorialInput(int, int, int, int);
 int __cdecl d2_ShowTutorialPage(void);
 int __cdecl d2_PollTutorialVoiceDone(void);
 void __cdecl d2_ShowTutorialInlineForm(void);
 void __cdecl d2_HideTutorialHint(void);
-void __cdecl fcn_00580420(void);
+void __cdecl d2_ShowTutorialStepMessage(void);
 void __cdecl d2_HideTutorialPrompt(void);
 void __cdecl d2_UpdateTutorialProgress(void);
 void __cdecl d2_ShowTutorialStep(void);
 int __cdecl d2_CheckTutorialCueClicked(void);
-void __cdecl fcn_00584160(int);
+void __cdecl d2_UpdateTutorialArrow(int);
 
 /* ADDRESS: GOLDTL 0x0057e0a0 */
 int __cdecl d2_StepTutorialStateMachine(void)
@@ -62,7 +62,7 @@ int __cdecl d2_StepTutorialStateMachine(void)
 	if (g_665f08[0xc] == 1 && g_665f08[0] != 9) {
 		g_665f08[0xc] = 0;
 		d2_HideTutorialPrompt();
-		fcn_00584160(2);
+		d2_UpdateTutorialArrow(2);
 	}
 	if (g_774a18 == 0) {
 		return 0;
@@ -96,7 +96,7 @@ int __cdecl d2_StepTutorialStateMachine(void)
 			g_665f08[0xf] = 1;
 		}
 		if (*(int *)((int)g_665f08[6] + 0x38) != 0) {
-			fcn_0057e880(2, 0, 0, 0);
+			d2_DispatchTutorialInput(2, 0, 0, 0);
 		}
 		g_665f08[0x14] = 0;
 		if (*(int *)((int)g_665f08[6] + 0x64) == 0) {
@@ -135,7 +135,7 @@ ret0:
 		return 0;
 	case 4:
 		if (*(int *)((int)g_665f08[6] + 0x40) == 3) {
-			fcn_0057e880(0, 0, 0, 0);
+			d2_DispatchTutorialInput(0, 0, 0, 0);
 			return 0;
 		}
 		if (((unsigned int) g_6b7fac) > *(int *)((int)g_665f08[6] + 0x2c) + g_665f08[2]) {
@@ -219,13 +219,13 @@ label7:
 		}
 		if (g_665f08[0xc] == 0 && *(int *)((int)g_665f08[6] + 0x1c) != 0) {
 			g_665f08[0xc] = 1;
-			fcn_00580420();
-			fcn_00584160(0);
+			d2_ShowTutorialStepMessage();
+			d2_UpdateTutorialArrow(0);
 		}
 		if (g_665f08[0xc] == 1) {
 			d2_BringFormToFront(g_665f08[0xd]);
 		}
-		fcn_00584160(1);
+		d2_UpdateTutorialArrow(1);
 		return 0;
 	case 10:
 		if (g_665f08[10] == 1) {
@@ -246,7 +246,7 @@ label7:
 		if (*(int *)((int)g_665f08[6] + 0x24) == 0) {
 			break;
 		}
-		fcn_00533a40(*(int *)(*(int *)((int)g_665f08[6] + 0x24) * 4 + 0x14a5320));
+		d2_ShowStatusBanner(*(int *)(*(int *)((int)g_665f08[6] + 0x24) * 4 + 0x14a5320));
 		if (*(int *)((int)g_665f08[6] + 0x28) != 0) {
 			if (g_665f08[5] != 0) {
 				if (sb_CheckVoicePlaying(g_665f08[5]) != 0) {
@@ -278,7 +278,7 @@ label7:
 		if (*(int *)((int)g_665f08[6] + 0x24) == 0) {
 			break;
 		}
-		fcn_00533a40(*(int *)(*(int *)((int)g_665f08[6] + 0x24) * 4 + 0x14a5320));
+		d2_ShowStatusBanner(*(int *)(*(int *)((int)g_665f08[6] + 0x24) * 4 + 0x14a5320));
 		if (*(int *)((int)g_665f08[6] + 0x28) != 0) {
 			if (g_665f08[5] != 0) {
 				if (sb_CheckVoicePlaying(g_665f08[5]) != 0) {
@@ -304,7 +304,7 @@ label7:
 		g_665f08[6] = *(int *)((int)g_665f08[6] + 0x70);
 		g_665f08[0] = 1;
 		g_665f08[1] = 1;
-		fcn_00533a40((int)(void *)0x6b5c60);
+		d2_ShowStatusBanner((int)(void *)0x6b5c60);
 		break;
 	default:
 		break;

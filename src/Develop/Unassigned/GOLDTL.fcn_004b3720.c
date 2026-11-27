@@ -6,7 +6,7 @@ int __cdecl hst_ParseDate(int, int, int*, int);
 int __cdecl hst_ParseTextPasses(char*, int, int);
 
 /* ADDRESS: GOLDTL 0x004b3720 */
-int __cdecl fcn_004b3720(int a0, char* outputText, int a2)
+int __cdecl hst_ReadNextChronicleEntry(int a0, char* outputText, int a2)
 {
 	int pos;
 	int result;

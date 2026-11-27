@@ -12,7 +12,7 @@ void __cdecl d2_DestroySelectionPanel(void);
 void __cdecl sv_ClearObjectSelection(void);
 void __cdecl d2_SetFormVisibility(int, int);
 int __cdecl fcn_00502cd0(int, int, int, int);
-void __cdecl fcn_0057e880(int, int, int, int);
+void __cdecl d2_DispatchTutorialInput(int, int, int, int);
 void __cdecl d2_RunTradeInventoryPanel(int, int);
 
 void __cdecl d2_OpenMarktstandPanel(int buildingArg, int queryTypeId)
@@ -27,14 +27,14 @@ void __cdecl d2_OpenMarktstandPanel(int buildingArg, int queryTypeId)
 	}
 	(*(int*)&g_7746cc) = fcn_00502cd0(*(int*) (g_773d78 + 0x5d), 1, 0, queryTypeId);
 	if ((*(int*)&g_7746cc) != 0) {
-		fcn_0057e880(0x17, (*(int*)&g_7746cc), 0, queryTypeId);
+		d2_DispatchTutorialInput(0x17, (*(int*)&g_7746cc), 0, queryTypeId);
 		while ((*(int*)&g_7746cc) != 0) {
 			g_7746d4 = 1;
 			d2_RunTradeInventoryPanel(buildingArg, 9);
 		}
 	}
-	fcn_0057e880(0x18, (*(int*)&g_7746cc), 0, queryTypeId);
-	fcn_0057e880(0x17, (*(int*)&g_7746cc), 1, queryTypeId);
+	d2_DispatchTutorialInput(0x18, (*(int*)&g_7746cc), 0, queryTypeId);
+	d2_DispatchTutorialInput(0x17, (*(int*)&g_7746cc), 1, queryTypeId);
 	(*(int*)&g_7746cc) = 0;
 	if (g_6a25b8 != -1) {
 		d2_SetFormVisibility(g_6a25b8, 1);

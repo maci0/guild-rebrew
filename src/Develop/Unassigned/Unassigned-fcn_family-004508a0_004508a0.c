@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-typedef struct Anim04508a0 {
+typedef struct D3_FLICKER_ANIM {
 	char pad0[0x24];
 	float peak;
 	char pad28[0x194 - 0x28];
@@ -8,9 +8,9 @@ typedef struct Anim04508a0 {
 	float scale;
 	unsigned int period;
 	float value;
-} Anim04508a0;
+} D3_FLICKER_ANIM;
 
-typedef struct Obj04508a0 {
+typedef struct D3_FLICKER_OBJ {
 	char pad0[0x58];
 	float next;
 	char pad5c[4];
@@ -18,18 +18,18 @@ typedef struct Obj04508a0 {
 	char pad64[4];
 	float prev;
 	char pad6c[0x1e8 - 0x6c];
-	Anim04508a0* anim;
-} Obj04508a0;
+	D3_FLICKER_ANIM* anim;
+} D3_FLICKER_OBJ;
 extern char* g_6b86e8;
 extern int g_6b8708;
 extern int g_6b8704;
 
-void __cdecl fcn_004508a0(char* p);
+void __cdecl d3_UpdateLightFlicker(char* p);
 
 /* ADDRESS: GOLDTL 0x004508a0 */
-void __cdecl fcn_004508a0(Obj04508a0* o)
+void __cdecl d3_UpdateLightFlicker(D3_FLICKER_OBJ* o)
 {
-	Anim04508a0* a;
+	D3_FLICKER_ANIM* a;
 	float* p;
 	double m;
 	float s;
@@ -69,13 +69,13 @@ void __cdecl fcn_004508a0(Obj04508a0* o)
 }
 
 /* ADDRESS: GOLDTL 0x004509c0 */
-void __cdecl fcn_004509c0(void)
+void __cdecl d3_UpdateSceneLightFlickers(void)
 {
 	char* p;
 
 	for (p = g_6b86e8; p != 0 && g_6b8708 < g_6b8704; p = *(char**) (p + 0x1f0)) {
 		if (*(int*) (p + 0x218) == 6) {
-			fcn_004508a0(p);
+			d3_UpdateLightFlicker(p);
 		}
 	}
 }

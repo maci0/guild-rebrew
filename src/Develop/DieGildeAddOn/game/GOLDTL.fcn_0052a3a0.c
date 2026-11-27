@@ -72,19 +72,19 @@ double __cdecl sin(double);
 double __cdecl cos(double);
 #pragma intrinsic(sin, cos)
 
-int* __cdecl fcn_00459ae0(float, float, float);
+int* __cdecl d3_CreateSky(float, float, float);
 int __cdecl d3_CreateSkyLayer(int, int, int, Col, float, int, float, float);
 void __cdecl d3_SetSkyLayerScrollSpeed(int, int, float);
-void __cdecl fcn_004597f0(int, int);
+void __cdecl d3_RemoveSkyLayer(int, int);
 void __cdecl gm_InitWeatherWave(int, int, Vec24*, Vec24*);
 void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl d3_ApplySceneLightingPreset(void);
 void __cdecl d3_UpdateDaylightPhase(GAME_TIMESTAMP*);
-int* __cdecl fcn_00415310(int);
+int* __cdecl d3_CreateRain(int);
 void __cdecl d3_DestroyRain(int);
 int* __cdecl d3_CreateSnowEffect(int);
-void __cdecl fcn_004162c0(int);
-void __cdecl fcn_00416300(int*, int, ...);
+void __cdecl d3_DestroySnowEffect(int);
+void __cdecl d3_SetSnowEffectOptions(int*, int, ...);
 void __cdecl d3_SetRainEffectOptions(int*, int, ...);
 
 /* ADDRESS: GOLDTL 0x0052a3a0 */
@@ -156,29 +156,29 @@ void __cdecl gm_UpdateWeatherAndSky(GAME_TIMESTAMP* now, int flag)
 				g_7e4538 = 0;
 			}
 		} else if (g_7e4538 == 0) {
-			g_7e4538 = (int) fcn_00415310(maxv);
+			g_7e4538 = (int) d3_CreateRain(maxv);
 		}
 		if (g_7e453c == 0) {
 			g_7e453c = (int) d3_CreateSnowEffect(maxv);
 		}
-		fcn_00416300((int*) g_7e453c, 2, 0, 0, 3, 0xff);
-		fcn_00416300((int*) g_7e453c, 1, 0, 0);
+		d3_SetSnowEffectOptions((int*) g_7e453c, 2, 0, 0, 3, 0xff);
+		d3_SetSnowEffectOptions((int*) g_7e453c, 1, 0, 0);
 	} else {
 		if (g_7e453c != 0) {
-			fcn_004162c0(g_7e453c);
+			d3_DestroySnowEffect(g_7e453c);
 			g_7e453c = 0;
 		}
 		if (g_7e4538 == 0) {
-			g_7e4538 = (int) fcn_00415310(maxv);
+			g_7e4538 = (int) d3_CreateRain(maxv);
 		}
 		d3_SetRainEffectOptions((int*) g_7e4538, 1, 0, 0);
 	}
 	if (g_6b89c0 == 0) {
-		g_6b89c0 = (int) fcn_00459ae0(-0.95f, -0.2f, 600.0f);
+		g_6b89c0 = (int) d3_CreateSky(-0.95f, -0.2f, 600.0f);
 	}
 	for (i = 0; i < 6; i++) {
 		if (g_7e4540[i] != 0) {
-			fcn_004597f0(g_6b89c0, g_7e4540[i]);
+			d3_RemoveSkyLayer(g_6b89c0, g_7e4540[i]);
 			g_7e4540[i] = 0;
 		}
 	}

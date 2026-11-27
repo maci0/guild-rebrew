@@ -21,7 +21,7 @@ extern char g_7f4ca0[];
 int __cdecl FindStraftatIndexById(int b);
 
 /* ADDRESS: GOLDTL 0x004f6040 */
-int __cdecl fcn_004f6040(int* ids, int* d, unsigned short k)
+int __cdecl gm_CollectFrequentCrimeTargets(int* ids, int* d, unsigned short k)
 {
 	int list[0x200];
 	char* e;

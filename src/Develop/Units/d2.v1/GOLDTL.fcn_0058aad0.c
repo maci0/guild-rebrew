@@ -11,7 +11,7 @@ extern int g_14b5400;
 extern int g_14b53fc;
 extern int g_14b59d0[];
 
-void __cdecl fcn_005338a0(void);
+void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void (__cdecl*)(char*, char*), int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_OpenTransportPanel(char*);
@@ -46,7 +46,7 @@ void __cdecl d2_RunAlchemistMenu(char* a, char* b)
 	book = 0;
 	alchcontract = 0;
 	alch = 0;
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	while (main_RunFrameLoop(d2_RunAlchemistMenu, 0x67fff) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;

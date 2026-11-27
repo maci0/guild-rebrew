@@ -2,7 +2,7 @@
 
 void __cdecl m_FreeTracked(void*);
 
-void __cdecl fcn_00456560(void)
+void __cdecl d3s_FreeCache(void)
 {
 	void* p;
 

@@ -2,7 +2,7 @@
 
 extern char g_67515c[];
 char __cdecl vfs_ReadBmpInfo(const char* name, int* width, int* height, int* bpp);
-char __cdecl fcn_00401650(const char* name, unsigned char* pixels, unsigned char* pal, int flags);
+char __cdecl vfs_LoadBmpBuffer(const char* name, unsigned char* pixels, unsigned char* pal, int flags);
 unsigned char* __cdecl m_alloc(int size, char* tag);
 void __cdecl m_FreeTracked(void* p);
 
@@ -35,7 +35,7 @@ char __cdecl vfs_CalcBmpAverageColor(const char* name, unsigned char* out)
 		return 0;
 	}
 	pix = m_alloc(n, g_67515c);
-	if (fcn_00401650(name, pix, pal, 7)) {
+	if (vfs_LoadBmpBuffer(name, pix, pal, 7)) {
 		{
 			int len;
 			unsigned int* d;

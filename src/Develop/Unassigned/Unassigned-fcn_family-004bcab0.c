@@ -11,11 +11,11 @@ extern char g_681430[];
 extern char g_6813f4[];
 extern char g_681420[];
 
-void __cdecl fcn_004bcae0(void);
-char* __cdecl fcn_004bcab0(char*);
+void __cdecl anm_SpawnQueuedAnimals(void);
+char* __cdecl anm_QueueAnimalModel(char*);
 
 /* ADDRESS: GOLDTL 0x004bcab0 */
-char* __cdecl fcn_004bcab0(char* name)
+char* __cdecl anm_QueueAnimalModel(char* name)
 {
 	int index;
 	char* found;
@@ -29,7 +29,7 @@ char* __cdecl fcn_004bcab0(char* name)
 }
 
 /* ADDRESS: GOLDTL 0x004bcae0 */
-void __cdecl fcn_004bcae0(void)
+void __cdecl anm_SpawnQueuedAnimals(void)
 {
 	int i;
 
@@ -41,15 +41,15 @@ void __cdecl fcn_004bcae0(void)
 }
 
 /* ADDRESS: GOLDTL 0x004bcb20 */
-void __cdecl fcn_004bcb20(void)
+void __cdecl anm_QueueDefaultAnimalModels(void)
 {
 	if (g_7728f4 != 0)
-		fcn_004bcae0();
-	fcn_004bcab0(g_6813e8);
-	fcn_004bcab0(g_6813dc);
-	fcn_004bcab0(g_68140c);
-	fcn_004bcab0(g_681430);
-	fcn_004bcab0(g_6813f4);
-	fcn_004bcab0(g_681430);
-	fcn_004bcab0(g_681420);
+		anm_SpawnQueuedAnimals();
+	anm_QueueAnimalModel(g_6813e8);
+	anm_QueueAnimalModel(g_6813dc);
+	anm_QueueAnimalModel(g_68140c);
+	anm_QueueAnimalModel(g_681430);
+	anm_QueueAnimalModel(g_6813f4);
+	anm_QueueAnimalModel(g_681430);
+	anm_QueueAnimalModel(g_681420);
 }

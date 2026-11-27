@@ -4,7 +4,7 @@ extern int g_14ad1f8;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_7746a0;
 
-void __cdecl fcn_005338a0(void);
+void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_OpenContactEinkaufPanel(char*);
@@ -16,7 +16,7 @@ void __cdecl d2_ShowHandelSearch(char*, int);
 void __cdecl d2_OpenMeisterbriefDialog(char*);
 extern int g_14ad1f0;
 
-void __cdecl fcn_005338a0(void);
+void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_OpenContactEinkaufPanel(char*);
@@ -44,7 +44,7 @@ void __cdecl d2_RunParfumerieProductionMenu(char* building, int searchArg)
 	meister = 0;
 	sammeln = 0;
 	personal = 0;
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	while (main_RunFrameLoop((void*) d2_RunParfumerieProductionMenu, 0x67fff) != 0) {
 		if (g_7746d8 & 0x200) {
 			sammeln = RegisterStatusText("contact_SAMMELN", g_14ab314, 0x16);
@@ -92,7 +92,7 @@ void __cdecl d2_RunMixingProductionMenu(char* e, int a2)
 	prod = 0;
 	sammeln = 0;
 	personal = 0;
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	while (main_RunFrameLoop((void*) d2_RunMixingProductionMenu, 0x67fff) != 0) {
 		if (g_7746d8 & 0x200) {
 			sammeln = RegisterStatusText("contact_SAMMELN", g_14ab314, 0x16);

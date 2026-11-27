@@ -24,8 +24,8 @@ extern char g_7f4ca0[];
 extern double g_6640e8;
 
 int __cdecl io_AppendText(int, ...);
-char* __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
-void __cdecl fcn_00473150(unsigned char*);
+char* __cdecl d2_StartScreenFade(int, int, int, int, char*, int, int);
+void __cdecl d2_ReleaseOverlaySprite(unsigned char*);
 int __cdecl main_RunFrameLoop(int, int);
 int __cdecl fcn_00509570(int);
 void __cdecl d3_SetNodePosition(char*, int*);
@@ -96,7 +96,7 @@ void __cdecl d2_RunRoundSummaryDialog(void)
 	e1ec = 0;
 	*(int*) (char*) &g_7e2700 = 0;
 	if (g_6a3420 != 0) {
-		win = (unsigned char*) fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, "BLACK", 0x1e, 1);
+		win = (unsigned char*) d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, "BLACK", 0x1e, 1);
 		while ((*win & 4) == 0) {
 			main_RunFrameLoop(0, main_LoopFlags);
 		}
@@ -118,10 +118,10 @@ void __cdecl d2_RunRoundSummaryDialog(void)
 	dlg = d2_CreateScrollPerga();
 	d2_CenterDialogWindows(dlg);
 	if (g1f4 != 0) {
-		fcn_00473150((unsigned char*) g1f4);
+		d2_ReleaseOverlaySprite((unsigned char*) g1f4);
 		g1f4 = 0;
 	}
-	fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, "BLACK", 0x1e, 10);
+	d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, "BLACK", 0x1e, 10);
 	d2_SetForm(dlg, 2);
 	io_AppendText(0x7d);
 	gm_PackGameTime((void*) (char*) gm_GameTime, stamp);
@@ -337,7 +337,7 @@ fold:
 	*(int*) (sel + 0x50) = 0;
 	*(int*) (sel + 0x54) = 0;
 	if (g1f4 != 0) {
-		fcn_00473150((unsigned char*) g1f4);
+		d2_ReleaseOverlaySprite((unsigned char*) g1f4);
 		g1f4 = 0;
 	}
 	n = gm_CheckAndCollectEntityDebt((char*) ((((unsigned short)g_774970) & 0xffff) * 0x21c + (int) (char*) g_7f4ca0),
@@ -351,7 +351,7 @@ fold:
 		*(int*) (panel + 0xc) = *(int*) ((((unsigned short)g_774970) & 0xffff) * 0x21c + 0x7f4ca4);
 		*(int*) (panel + 0x34) = *(int*) (panel + 0xc);
 		if (g1f4 != 0) {
-			fcn_00473150((unsigned char*) g1f4);
+			d2_ReleaseOverlaySprite((unsigned char*) g1f4);
 		}
 		cut_ExecuteCutscene(panel);
 		if (g_774968 != 0) {

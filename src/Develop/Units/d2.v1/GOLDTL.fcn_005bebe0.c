@@ -65,10 +65,10 @@ int __cdecl io_AppendText(int id, ...);
 int __cdecl d2_AddElementToWindow(int x, int y, int id, int layer);
 void __cdecl d2_InitWindowBounds(int i);
 void __cdecl d2_DrawSegmentedBar(int x0, int y, int len, int t);
-int __cdecl fcn_0051e070(void);
+int __cdecl main_GetLanguage(void);
 void __cdecl d3_EndCameraAndUiMode(void);
 int __cdecl main_RunFrameLoop(void* fn, int a);
-void __cdecl fcn_0057e880(int a, int b, int c, int d);
+void __cdecl d2_DispatchTutorialInput(int a, int b, int c, int d);
 void __cdecl gm_AddTime(Tbebe*, int, int, int);
 int __cdecl gm_GetElapsedMinutes(void*, void*);
 void __cdecl cm_RequestModifyHealth(int a, int b);
@@ -141,7 +141,7 @@ void __cdecl d2_RunTalenteDialog(int a0, int a1, int broadcastSlot)
 		io_AppendText(0x16b2);
 	} else if (*(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 0x194) >= (int) color) {
 		if (miss == 0) {
-			switch (fcn_0051e070()) {
+			switch (main_GetLanguage()) {
 			case 0:
 				io_AppendText(0x16b1, color, broadcastSlot + 0x16b7);
 				break;
@@ -151,7 +151,7 @@ void __cdecl d2_RunTalenteDialog(int a0, int a1, int broadcastSlot)
 			}
 			flag = 1;
 		} else {
-			switch (fcn_0051e070()) {
+			switch (main_GetLanguage()) {
 			case 0:
 				io_AppendText(0x16b0,
 					     (*(unsigned char*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 9) != 0 ? 0x28 : 0) + 0x253 +
@@ -193,7 +193,7 @@ void __cdecl d2_RunTalenteDialog(int a0, int a1, int broadcastSlot)
 				msg.f8 = *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 4);
 				msg.fc = *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 4);
 				cm_SendCopyEntityData(&msg);
-				fcn_0057e880(0x2c, 0, 0, broadcastSlot);
+				d2_DispatchTutorialInput(0x2c, 0, 0, broadcastSlot);
 				g_774654 = 1;
 			}
 		} else if (g_100f1dc == 1) {

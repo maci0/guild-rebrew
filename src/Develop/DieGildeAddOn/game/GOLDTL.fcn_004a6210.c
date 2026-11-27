@@ -28,7 +28,7 @@ int __cdecl gm_GetCannonShotEndpoints(char*, void*, int, void*);
 void __cdecl gm_GetArtilleryLimits(char*, int*, int*);
 void __cdecl gm_ComputeCannonShotStats(int, void*);
 float __cdecl gm_GetCannonPowerScale(char*);
-int __cdecl fcn_005e8de0(float, float, float*);
+int __cdecl d3_CalcParticleSphereMass(float, float, float*);
 void __cdecl d3_CalcSpeedRangeFromMass(float, float, char*, float*);
 int __cdecl gm_SolveBallisticTrajectory(void*, void*, void*, void*, void*, void*, void*, void*, void*);
 int __cdecl _ftol(void);
@@ -80,7 +80,7 @@ int __cdecl gm_ComputeCannonShot(char* actor, char* building, int targetEnt)
 	if (*(int*) (actor + 0x194) < profile[1]) return 0;
 	value.level = gm_GetCannonPowerScale(building);
 	row = gm_RandomMod(row + 1) & 0xffff;
-	fcn_005e8de0(g_6660f4, *(float*) (col * 0xc + 0x665290), entry);
+	d3_CalcParticleSphereMass(g_6660f4, *(float*) (col * 0xc + 0x665290), entry);
 	off = col * 0xc;
 	d3_CalcSpeedRangeFromMass(*(float*) (off + 0x665288),
 		value.level * *(float*) (off + 0x66528c), (char*) entry, range);

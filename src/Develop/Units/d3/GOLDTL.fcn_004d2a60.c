@@ -5,7 +5,7 @@ extern unsigned short g_774970;
 
 void __cdecl cut_FadeToBlack(void);
 void __cdecl d3_DestroyObject(int);
-void __cdecl fcn_004230e0(int);
+void __cdecl sb_ReleaseSampleBank(int);
 void __cdecl gv_SpawnIfPending(int);
 char* __cdecl gm_LookupEntityRecordById(int);
 float __cdecl gm_ApplyEntityHealthDelta(unsigned short, int);
@@ -28,23 +28,23 @@ void __cdecl cut_CleanupCombatScene(int dlg)
 		d3_DestroyObject(v);
 		*(int*) 0x772ea0 = 0;
 	}
-	fcn_004230e0(*(int*) 0x772ebc);
-	fcn_004230e0(*(int*) 0x772ec0);
-	fcn_004230e0(*(int*) 0x772ec4);
-	fcn_004230e0(*(int*) 0x772ec8);
-	fcn_004230e0(*(int*) 0x772ecc);
-	fcn_004230e0(*(int*) 0x772ed0);
-	fcn_004230e0(*(int*) 0x772ed4);
-	fcn_004230e0(*(int*) 0x772edc);
-	fcn_004230e0(*(int*) 0x772ee4);
-	fcn_004230e0(*(int*) 0x772eec);
-	fcn_004230e0(*(int*) 0x772ef4);
+	sb_ReleaseSampleBank(*(int*) 0x772ebc);
+	sb_ReleaseSampleBank(*(int*) 0x772ec0);
+	sb_ReleaseSampleBank(*(int*) 0x772ec4);
+	sb_ReleaseSampleBank(*(int*) 0x772ec8);
+	sb_ReleaseSampleBank(*(int*) 0x772ecc);
+	sb_ReleaseSampleBank(*(int*) 0x772ed0);
+	sb_ReleaseSampleBank(*(int*) 0x772ed4);
+	sb_ReleaseSampleBank(*(int*) 0x772edc);
+	sb_ReleaseSampleBank(*(int*) 0x772ee4);
+	sb_ReleaseSampleBank(*(int*) 0x772eec);
+	sb_ReleaseSampleBank(*(int*) 0x772ef4);
 	if (*(int*) 0x772f00 != *(int*) 0x772f04) {
-		fcn_004230e0(*(int*) 0x772ed8);
-		fcn_004230e0(*(int*) 0x772ee0);
-		fcn_004230e0(*(int*) 0x772ee8);
-		fcn_004230e0(*(int*) 0x772ef0);
-		fcn_004230e0(*(int*) 0x772ef8);
+		sb_ReleaseSampleBank(*(int*) 0x772ed8);
+		sb_ReleaseSampleBank(*(int*) 0x772ee0);
+		sb_ReleaseSampleBank(*(int*) 0x772ee8);
+		sb_ReleaseSampleBank(*(int*) 0x772ef0);
+		sb_ReleaseSampleBank(*(int*) 0x772ef8);
 	}
 	for (i = 0; i < g_772f08; i++) {
 		d3_DestroyObject(*(int*) (0x9b9e40 + i * 4));

@@ -20,13 +20,13 @@ extern char g_14cf950;
 #include "client_dialog_state.h"
 extern float g_6a24e4;
 
-unsigned char* __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
+unsigned char* __cdecl d2_StartScreenFade(int, int, int, int, char*, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00473150(unsigned char*);
+void __cdecl d2_ReleaseOverlaySprite(unsigned char*);
 void __cdecl d2_ClearScreen(void);
 void __cdecl d2_SetBackdropResource(int);
 int __cdecl d2_CreateWindow(int, int, int, int, int);
-void __cdecl fcn_00471c80(int, int);
+void __cdecl d2_CenterWindow(int, int);
 void __cdecl io_AppendText(int, ...);
 void __cdecl d2_CloseWindow(int);
 
@@ -38,16 +38,16 @@ void __cdecl d2_ShowCreditsScreen(void)
 	int i;
 
 	speed = 4;
-	fade = fcn_004730c0(0, 0, g_fb9072, g_fb9070, s_67d67c, 0x3c, 1);
+	fade = d2_StartScreenFade(0, 0, g_fb9072, g_fb9070, s_67d67c, 0x3c, 1);
 	while ((*fade & 4) == 0) {
 		main_RunFrameLoop(0, 0x24087);
 	}
-	fcn_00473150(fade);
-	fcn_004730c0(0, 0, g_fb9072, g_fb9070, s_67d67c, 0x3c, 10);
+	d2_ReleaseOverlaySprite(fade);
+	d2_StartScreenFade(0, 0, g_fb9072, g_fb9070, s_67d67c, 0x3c, 10);
 	d2_ClearScreen();
 	d2_SetBackdropResource(0x7ad);
 	win = d2_CreateWindow(100, 0, 0x258, g_fb9070, 0x10);
-	fcn_00471c80(win, 1);
+	d2_CenterWindow(win, 1);
 	io_AppendText(0x2004);
 	(*(GOLD_GUI_WINDOW**)&g_77255c)->scroll = -g_fb9070;
 	i = 0;
@@ -72,7 +72,7 @@ void __cdecl d2_ShowCreditsScreen(void)
 			speed = 1;
 		}
 	}
-	fade = fcn_004730c0(0, 0, g_fb9072, g_fb9070, s_67d67c, 0x3c, 1);
+	fade = d2_StartScreenFade(0, 0, g_fb9072, g_fb9070, s_67d67c, 0x3c, 1);
 	while ((*fade & 4) == 0) {
 		main_RunFrameLoop(0, 0x24087);
 		(*(GOLD_GUI_WINDOW**)&g_77255c) = &g_f8f120[win];
@@ -90,7 +90,7 @@ void __cdecl d2_ShowCreditsScreen(void)
 	}
 	d2_CloseWindow(win);
 	d2_SetBackdropResource(0x797);
-	fcn_00473150(fade);
-	fcn_004730c0(0, 0, g_fb9072, g_fb9070, s_67d67c, 0x3c, 10);
+	d2_ReleaseOverlaySprite(fade);
+	d2_StartScreenFade(0, 0, g_fb9072, g_fb9070, s_67d67c, 0x3c, 10);
 	d2_SuppressOverlay = 0;
 }

@@ -30,7 +30,7 @@ extern TexSlot g_100f840;
 #include "client_types.h"
 
 
-void* __cdecl fcn_004770a0(TexDesc* d, int fmt);
+void* __cdecl d2_CreateSurface(TexDesc* d, int fmt);
 
 /* ADDRESS: GOLDTL 0x00473df0 */
 void __cdecl d2_InitOverlayState(void)
@@ -43,21 +43,21 @@ void __cdecl d2_InitOverlayState(void)
 	memset(&d, 0, sizeof(d));
 	d.w = 0x40;
 	d.h = 0x40;
-	g_100f8a0 = fcn_004770a0(&d, 1);
+	g_100f8a0 = d2_CreateSurface(&d, 1);
 	for (i = 0; i < 3; i++) {
 		memset(&d, 0, sizeof(d));
 		g_100f860[i].a = -1;
 		g_100f860[i].b = -1;
 		d.w = 0x80;
 		d.h = 0x80;
-		g_100f860[i].tex = fcn_004770a0(&d, 3);
+		g_100f860[i].tex = d2_CreateSurface(&d, 3);
 	}
 	memset(&d, 0, sizeof(d));
 	g_100f840.a = -1;
 	g_100f840.b = -1;
 	d.w = 0x100;
 	d.h = 0x100;
-	g_100f840.tex = fcn_004770a0(&d, 3);
+	g_100f840.tex = d2_CreateSurface(&d, 3);
 	for (i = 0; i < 6; i++) {
 		((Tag*)d2_DisplayCounters)[i].id = -1;
 		((Tag*)d2_DisplayCounters)[i].val = 0;

@@ -54,7 +54,7 @@ typedef struct {
 
 // FUNCTION: GOLDTL 0x0043f6b0
 
-void __cdecl fcn_0043f6b0(Grid* g)
+void __cdecl d3_InitFloorGrid(Grid* g)
 {
 	int i;
 	int j;

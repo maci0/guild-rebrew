@@ -1,26 +1,26 @@
 typedef struct {
 	int id;
 	int b;
-} fcn_004ae0f0_pair;
+} HST_GROUP_SLOT_PAIR;
 
 typedef struct {
 	int a;
-	fcn_004ae0f0_pair e[8];
-} fcn_004ae0f0_group;
+	HST_GROUP_SLOT_PAIR e[8];
+} HST_GROUP_SLOT_DESC;
 // SIZE 0x44
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 
 /* ADDRESS: GOLDTL 0x004ae0f0 */
-int __cdecl fcn_004ae0f0(int id)
+int __cdecl hst_IsCandidateUnlisted(int id)
 {
 	int j;
 	int i;
 
 	for (j = 0; j < 4; j++) {
 		for (i = 0; i < 8; i++) {
-			if (((fcn_004ae0f0_group*)g_1007bc0)[j].e[i].id == id)
+			if (((HST_GROUP_SLOT_DESC*)g_1007bc0)[j].e[i].id == id)
 				return 0;
 		}
 	}

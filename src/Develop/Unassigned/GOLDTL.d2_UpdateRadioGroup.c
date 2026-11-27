@@ -1,6 +1,6 @@
 #include "client_data.h"
 extern D2_RADIO_GROUP g_102cbc4[8];
-extern int g_14ce904, g_14ce900, d2_CurrentElementId, g_67d38c, g_14ce8d8, g_14ce8cc; void __cdecl d2_SelectRadioGroup(int, int); int __cdecl fcn_004125c0(int, int);
+extern int g_14ce904, g_14ce900, d2_CurrentElementId, g_67d38c, g_14ce8d8, g_14ce8cc; void __cdecl d2_SelectRadioGroup(int, int); int __cdecl io_SetMouseCursorPos(int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00469630 */
@@ -61,7 +61,7 @@ scan:
 	if (alt) {
 		id = g_102cbc4[groupIndex].ids[sel];
 		alt = (char*) &((D2_CONTROL_TL*) g_1015ea0)[id];
-		fcn_004125c0(
+		io_SetMouseCursorPos(
 			(int) (((D2_CONTROL_TL*) alt)->width * 0.5
 				+ ((D2_CONTROL_TL*) alt)->x),
 			(int) (((D2_CONTROL_TL*) alt)->height * 0.5

@@ -17,7 +17,7 @@ extern char* g_14abce8;
 int __cdecl d2_CheckOwnerBlocked(int);
 void __cdecl d2_InitPlayerBar(int, int);
 void __cdecl d2_SelectBetriebsPruefungTarget(void);
-void __cdecl fcn_005bdc30(int, Req*, char*, void*, int);
+void __cdecl d2_RunCityScrollMapDialog(int, Req*, char*, void*, int);
 void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl sv_ClearObjectSelection(void);
 
@@ -33,7 +33,7 @@ void __cdecl d2_StartZollkasseTargetSelect(int building)
 		req.d = 1;
 		req.id = 0x727;
 		d2_InitPlayerBar(building, 0);
-		fcn_005bdc30(1, &req, g_14abce8, d2_SelectBetriebsPruefungTarget, 0);
+		d2_RunCityScrollMapDialog(1, &req, g_14abce8, d2_SelectBetriebsPruefungTarget, 0);
 		d2_RestoreHudAfterDialog();
 		sv_ClearObjectSelection();
 	}

@@ -34,7 +34,7 @@ char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 float __cdecl d3_ComputeYawToTarget(char*, float*);
 void __cdecl d3_SetObjectEulerRotation(char*, int, float, int);
-void __cdecl fcn_004cfca0(void);
+void __cdecl d2_UpdateFloatingStatTexts(void);
 
 
 /* Ages the effect timers of the 32 tracked records, then drives their
@@ -172,7 +172,7 @@ void __cdecl cut_UpdateCombatEffects(void)
 			}
 		}
 	}
-	fcn_004cfca0();
+	d2_UpdateFloatingStatTexts();
 }
 unsigned char _dpad_7e3a58[2056];
 #if defined(REBREW_SERVER) || defined(REBREW_GOLD)

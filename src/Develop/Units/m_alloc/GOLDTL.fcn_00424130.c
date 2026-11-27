@@ -6,7 +6,7 @@ char* __cdecl sbs_FindSet(char* name);
 void __cdecl m_FreeTracked(void* p);
 
 /* ADDRESS: GOLDTL 0x00424130 */
-int __cdecl fcn_00424130(char* set, char* name)
+int __cdecl sbs_RemoveSetSamples(char* set, char* name)
 {
 	char* scope;
 	char* e;

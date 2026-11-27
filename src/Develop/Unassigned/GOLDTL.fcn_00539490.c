@@ -43,7 +43,7 @@ void __cdecl d3_SetViewport(float, float, float, float, int, int, int, int, int)
 void __cdecl d2_ClearSurface(int);
 void __cdecl d2_SetBackdropResource(int);
 
-int __cdecl fcn_00539490(void)
+int __cdecl d2_StartLocalSessionSetup(void)
 {
 	if (d2_ChoosePlayerCount() != 0) {
 		d2_ClearBackdropResource();

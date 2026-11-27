@@ -30,9 +30,9 @@ typedef struct Desc {
 } Desc;
 // SIZE 0x5c
 
-char* __cdecl fcn_004770a0(Desc* d, int kind);
-int __cdecl fcn_00476120(int x, int y, int w, int h, char* img, int sx, int sy, Target* t);
-void __cdecl fcn_00475f80(char* img);
+char* __cdecl d2_CreateSurface(Desc* d, int kind);
+int __cdecl d2_BlitSurfaceCore(int x, int y, int w, int h, char* img, int sx, int sy, Target* t);
+void __cdecl d2_ReleaseSurface(char* img);
 
 int __cdecl d2_BlitBufferToSurface(int x, int y, int w, int h, char* src, int sx, int sy, Target* t)
 {
@@ -72,13 +72,13 @@ int __cdecl d2_BlitBufferToSurface(int x, int y, int w, int h, char* src, int sx
 	memset(&d, 0, sizeof(d));
 	d.one = 1;
 	d.src = src;
-	img = fcn_004770a0(&d, 4);
+	img = d2_CreateSurface(&d, 4);
 	if (handle == 0 || img == 0) {
 		return 0;
 	}
-	if (fcn_00476120(x, y, w, h, img, sx, sy, t) == 0) {
+	if (d2_BlitSurfaceCore(x, y, w, h, img, sx, sy, t) == 0) {
 		return 0;
 	}
-	fcn_00475f80(img);
+	d2_ReleaseSurface(img);
 	return 1;
 }

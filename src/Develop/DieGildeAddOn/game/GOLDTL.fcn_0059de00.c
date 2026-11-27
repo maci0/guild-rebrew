@@ -25,13 +25,13 @@ extern char s_6a9580[];
 extern char s_6aa3d0[];
 extern char s_6aa508[];
 
-void __cdecl fcn_005338a0(void);
+void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl d3_UpdateBuildingInteriorState(void);
 void __cdecl d2_ShowLagerOptions(char*, int);
-void __cdecl fcn_005c5b10(char*);
+void __cdecl d2_RunGelageDialog(char*);
 void __cdecl d2_OpenTransportPanel(char*);
 void __cdecl d2_RunEquipmentDialog(char*);
 void __cdecl d2_RunWorkerTrainingDialog(char*);
@@ -68,7 +68,7 @@ void __cdecl d2_RunRaeuberInteriorHud(char* e)
 	g = 0;
 	l = 0;
 	m = 0;
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	if (main_RunFrameLoop((void*) d2_RunRaeuberInteriorHud, 0x67fff) != 0) {
 		do {
 			if (g_7746d8 & 0x200) {
@@ -97,7 +97,7 @@ void __cdecl d2_RunRaeuberInteriorHud(char* e)
 					d2_ShowLagerOptions(e, *(int*) (e + 0x5d));
 				}
 				else if (g_7746a0 == i) {
-					fcn_005c5b10(e);
+					d2_RunGelageDialog(e);
 				}
 				else if (g_7746a0 == j) {
 					d2_OpenTransportPanel(e);

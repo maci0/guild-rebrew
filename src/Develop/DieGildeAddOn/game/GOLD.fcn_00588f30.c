@@ -23,7 +23,7 @@ char* __cdecl he_fn_Handlung(void);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl d2_DrawSkillBar(int, int, char*, int, int);
-void __cdecl fcn_0057e880(int, char*, int, int);
+void __cdecl d2_DispatchTutorialInput(int, char*, int, int);
 
 int __cdecl d2_CreatePersonTooltip(char* entity)
 {
@@ -137,6 +137,6 @@ int __cdecl d2_CreatePersonTooltip(char* entity)
 		d2_ShowTxt(0, i * 15, buf, d2_CurrentWindowId);
 		d2_DrawSkillBar(0x64, i * 15 + 2, entity, i, 0x4df);
 	}
-	fcn_0057e880(7, entity, 0, 0);
+	d2_DispatchTutorialInput(7, entity, 0, 0);
 	return dlg;
 }

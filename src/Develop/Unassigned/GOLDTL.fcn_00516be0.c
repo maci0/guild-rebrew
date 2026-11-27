@@ -12,7 +12,7 @@ extern float g_67bc20;
 
 
 /* ADDRESS: GOLDTL 0x00516be0 */
-void __cdecl fcn_00516be0(void)
+void __cdecl d3_SetExteriorLightingDefaults(void)
 {
 	g_67bbec = 1.0f;
 	g_67bbf0 = 1.0f;

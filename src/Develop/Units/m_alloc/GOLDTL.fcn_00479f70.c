@@ -7,7 +7,7 @@ extern char s_67daa0[];
 char* __cdecl m_alloc(int size, const char* tag);
 
 /* ADDRESS: GOLDTL 0x00479f70 */
-char* __cdecl fcn_00479f70(const char* name)
+char* __cdecl d2_LoadShapeBank(const char* name)
 {
 	FILE* f;
 	int len;

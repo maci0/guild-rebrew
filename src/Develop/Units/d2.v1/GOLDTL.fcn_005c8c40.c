@@ -14,7 +14,7 @@ extern int g_777ca0;
 extern int g_776c90;
 extern int g_775338;
 extern int g_774654;
-int __cdecl d2_TutorialAllowsFlag(int); void __cdecl fcn_0057e880(int, int, int, int);
+int __cdecl d2_TutorialAllowsFlag(int); void __cdecl d2_DispatchTutorialInput(int, int, int, int);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
@@ -67,7 +67,7 @@ void __cdecl d2_OpenPlayerStats(void)
 	if (d2_TutorialAllowsFlag(0x800) == 0) {
 		return;
 	}
-	fcn_0057e880(0x13, 0, 0, 0);
+	d2_DispatchTutorialInput(0x13, 0, 0, 0);
 	save = d2_LoadForm(0, 0, (char*) 0x6ac890);
 	d2_CenterDialogWindows(save);
 	d2_SetForm(save, 0);
@@ -168,7 +168,7 @@ void __cdecl d2_OpenPlayerStats(void)
 		if (v4 != -1) {
 			d2_DestroyForm(v4);
 		}
-		fcn_0057e880(0x13, 0, 1, 0);
+		d2_DispatchTutorialInput(0x13, 0, 1, 0);
 		return;
 	}
 }

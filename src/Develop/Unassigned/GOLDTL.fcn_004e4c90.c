@@ -7,7 +7,7 @@ extern int g_772f3c;
 #include "client_dialog_state.h"
 
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_004cfca0(void);
+void __cdecl d2_UpdateFloatingStatTexts(void);
 void __cdecl d2_AppendPendingPlayerNames(int);
 
 void __cdecl cut_WaitTicks(int dur)
@@ -22,7 +22,7 @@ void __cdecl cut_WaitTicks(int dur)
 	do {
 		if (cut_CurrentTick >= end + dur)
 			g_774654 = 1;
-		fcn_004cfca0();
+		d2_UpdateFloatingStatTexts();
 		d2_AppendPendingPlayerNames((*(int*)&cut_ActiveCutscene));
 	} while (main_RunFrameLoop(cut_WaitTicks, cut_EventLoopFlags | 0x8000) != 0);
 }

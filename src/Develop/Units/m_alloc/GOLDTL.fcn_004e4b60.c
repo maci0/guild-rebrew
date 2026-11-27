@@ -11,7 +11,7 @@ extern int g_772f68;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_772f64;
 
-int __cdecl fcn_00459ae0(float a, float b, float c);
+int __cdecl d3_CreateSky(float a, float b, float c);
 int __cdecl d3_CreateSkyLayer(int h, int a, int b, D3_SKY_COLOR c, float d, int e, float f, float g);
 void __cdecl d3_SetSkyLayerScrollSpeed(int h, int s, int a);
 void __cdecl d3_SetSkyLayerTransition(int h, int s, int a, float b);
@@ -22,7 +22,7 @@ void __cdecl d3_InitSkyLayer(int textureName)
 	D3_SKY_COLOR c;
 
 	if (g_772f3c == 0) {
-		g_6b89c0 = g_772f68 = fcn_00459ae0(-2.25f, -0.2f, 600.0f);
+		g_6b89c0 = g_772f68 = d3_CreateSky(-2.25f, -0.2f, 600.0f);
 		*(int*) &c = 0;
 		c.b = 0;
 		g_772f64 = d3_CreateSkyLayer(g_772f68, 0, textureName, c, 3.0f, 0, 0.8f, -0.25f);

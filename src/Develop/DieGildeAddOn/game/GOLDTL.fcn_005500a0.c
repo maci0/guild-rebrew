@@ -9,7 +9,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 
 void __cdecl he_FreeAction(char*);
-int __cdecl fcn_004c6090(unsigned char*, int, int, int);
+int __cdecl cm_RequestAssignWorker(unsigned char*, int, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
 void __cdecl he_AllocRndGeselle(char* o)
@@ -23,7 +23,7 @@ void __cdecl he_AllocRndGeselle(char* o)
 		he_FreeAction(o);
 	}
 	t = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*e];
-	*(int*) (o + 0xbc) = fcn_004c6090(e, 0, t->role_22f, 0);
+	*(int*) (o + 0xbc) = cm_RequestAssignWorker(e, 0, t->role_22f, 0);
 	*(pos14_7f4c00*) (o + 0x52) = gm_GameTime;
 	gm_AddTime((pos14_7f4c00*) (o + 0x52), 0, 6, 0);
 }

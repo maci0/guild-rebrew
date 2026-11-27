@@ -9,7 +9,7 @@ extern unsigned char g_7f4ca2[];
 extern unsigned int g_7f4ca4[];
 
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
-int __cdecl fcn_005bdc30(int, int*, char*, int, int);
+int __cdecl d2_RunCityScrollMapDialog(int, int*, char*, int, int);
 int __cdecl cm_SendCopyEntityData(char*);
 int __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
@@ -66,7 +66,7 @@ int __cdecl gm_UseSmokeOrUnkendunkEffect(char* entity, int* target)
 		set[4] = 6;
 		set[2] = 0xa0744300;
 		set[3] = 1;
-		pkt = (char*) fcn_005bdc30(1, set, name, 0, 0);
+		pkt = (char*) d2_RunCityScrollMapDialog(1, set, name, 0, 0);
 		if (pkt == 0) {
 			goto done;
 		}

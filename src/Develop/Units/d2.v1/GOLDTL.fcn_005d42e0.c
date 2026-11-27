@@ -30,7 +30,7 @@ extern float g_662cf8;
 extern double g_662c38;
 
 int __cdecl d2_TutorialAllowsFlag(int a);
-void __cdecl fcn_0057e880(int a, int b, int c, int d);
+void __cdecl d2_DispatchTutorialInput(int a, int b, int c, int d);
 char* __cdecl d2_LoadForm(int a, int b, char* name);
 void __cdecl d2_CenterDialogWindows(char* dlg);
 void __cdecl d2_SetForm(char* dlg, int page);
@@ -41,7 +41,7 @@ void __cdecl d2_DrawCityHistoryCharts(unsigned short flags, Gfx g, int rec);
 char* __cdecl d2_AddElementToWindow(int x, int y, int id, int layer);
 void __cdecl d2_EqualizeWindowButtonWidths(int a, int y, char* text, int rec);
 int __cdecl d2_CreateGuiWindow(int id, int mask);
-void __cdecl fcn_00472c30(int x1, int y1, int x2, int y2, int r, int g, int b);
+void __cdecl d2_DrawLine(int x1, int y1, int x2, int y2, int r, int g, int b);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 int __cdecl d2_GetControlValue(int id);
 int __cdecl main_RunFrameLoop(void* fn, int id);
@@ -86,7 +86,7 @@ void __cdecl d2_RunStadtStatistikDialog(void)
 	if (!d2_TutorialAllowsFlag(0x10)) {
 		return;
 	}
-	fcn_0057e880(0xc, 0, 0, 0);
+	d2_DispatchTutorialInput(0xc, 0, 0, 0);
 	dlg = d2_LoadForm(0, 0, "panel\\statistik_stadt");
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(dlg);
@@ -127,7 +127,7 @@ void __cdecl d2_RunStadtStatistikDialog(void)
 		*(char*) &g = cp[0];
 		*(char*) &b = cp[1];
 		for (j = i + 5; j < i + 15; j++) {
-			fcn_00472c30(((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width - 1, j,
+			d2_DrawLine(((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width - 1, j,
 				((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width - 0xb, j, r, g, b);
 		}
 		row++;
@@ -150,5 +150,5 @@ void __cdecl d2_RunStadtStatistikDialog(void)
 		}
 	}
 	d2_DestroyForm(dlg);
-	fcn_0057e880(0xc, 0, 1, 0);
+	d2_DispatchTutorialInput(0xc, 0, 1, 0);
 }

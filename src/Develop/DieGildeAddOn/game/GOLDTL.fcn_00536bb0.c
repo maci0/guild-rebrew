@@ -18,9 +18,9 @@ extern int g_6b89c0;
 
 int __cdecl fcn_0065f220(const char*, const char*);
 unsigned short __cdecl gm_RandomMod(int);
-void __cdecl fcn_00416300(int, ...);
+void __cdecl d3_SetSnowEffectOptions(int, ...);
 void __cdecl d3_SetRainEffectOptions(int, ...);
-void __cdecl fcn_004599d0(void*, void*);
+void __cdecl d3_SetSkyLayerTexture(void*, void*);
 void __cdecl d3_SetSkyLayerTransition(void*, void*, unsigned char, float);
 void __cdecl d3_SetSkyLayerScrollSpeed(void*, void*, float);
 
@@ -36,7 +36,7 @@ void __cdecl d3_UpdateWeatherAndSkyBlend(void)
 
 	g_7e4534 = g_7f4c04 & 0xffff;
 	if (g_7e453c != 0) {
-		fcn_00416300(g_7e453c, 1, 1, g_7e43a8[g_7e4534], 1000);
+		d3_SetSnowEffectOptions(g_7e453c, 1, 1, g_7e43a8[g_7e4534], 1000);
 	}
 	if (g_7e4538 != 0) {
 		if (g_7e453c != 0) {
@@ -59,7 +59,7 @@ void __cdecl d3_UpdateWeatherAndSkyBlend(void)
 		lim = g_7e43a8[(g_7e4534 + 1) % 0x18];
 	}
 	if (g_7e453c != 0) {
-		fcn_00416300(g_7e453c, 1, 2, (int) ((double) -f1 * (double) lim * 2.0),
+		d3_SetSnowEffectOptions(g_7e453c, 1, 2, (int) ((double) -f1 * (double) lim * 2.0),
 		             (int) ((double) -f2 * (double) lim * 2.0), 1000);
 	}
 	if (g_7e4538 != 0) {
@@ -91,7 +91,7 @@ void __cdecl d3_UpdateWeatherAndSkyBlend(void)
 			}
 			name = (char*) (0x6a2818 + i * 0x4c);
 		}
-		fcn_004599d0(g_7e4544, name);
+		d3_SetSkyLayerTexture(g_7e4544, name);
 		*(int*) g_7e4544 = *(int*) (name + 0x40);
 		((int*) g_7e4544)[6] = *(int*) (name + 0x44);
 		((int*) g_7e4544)[5] = *(int*) (name + 0x48);
@@ -117,7 +117,7 @@ void __cdecl d3_UpdateWeatherAndSkyBlend(void)
 			}
 			name = (char*) (0x6a2818 + i * 0x4c);
 		}
-		fcn_004599d0(g_7e4540, name);
+		d3_SetSkyLayerTexture(g_7e4540, name);
 		*(int*) g_7e4540 = *(int*) (name + 0x40);
 		((int*) g_7e4540)[6] = *(int*) (name + 0x44);
 		((int*) g_7e4540)[5] = *(int*) (name + 0x48);

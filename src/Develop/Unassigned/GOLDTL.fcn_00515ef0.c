@@ -1,5 +1,5 @@
 #include <string.h>
-void __cdecl fcn_00515ef0(char* e)
+void __cdecl d3_InitGateNodeFlags(char* e)
 {
 	if (strstr(e, "gate")) {
 		e[0x214] &= 0xbf;

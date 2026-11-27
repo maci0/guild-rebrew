@@ -6,10 +6,10 @@ int __cdecl fcn_0065f220(const char* a, const char* b);
 
 extern char g_1052f00[];
 
-int __cdecl fcn_0042b370(const char* name);
+int __cdecl txt_FindLabelIndex(const char* name);
 
 /* ADDRESS: GOLDTL 0x0042b370 */
-int __cdecl fcn_0042b370(const char* name)
+int __cdecl txt_FindLabelIndex(const char* name)
 {
 	int i;
 
@@ -22,7 +22,7 @@ int __cdecl fcn_0042b370(const char* name)
 }
 
 /* ADDRESS: GOLDTL 0x0042b3c0 */
-void __cdecl fcn_0042b3c0(void)
+void __cdecl txt_GenerateTextIndexHeader(void)
 {
 	char* p;
 	char* q;
@@ -70,7 +70,7 @@ void __cdecl fcn_0042b3c0(void)
 			name[len] = 0;
 			if (strcmp(name, "_NULL") == 0)
 				strcpy(name, "_OB_NULL");
-			value = fcn_0042b370(name);
+			value = txt_FindLabelIndex(name);
 			if (value == -1)
 				printf("Textlabel nicht gefunden: %s", name);
 			sprintf(tmp, "#define %s %i", name, value);
@@ -103,7 +103,7 @@ void __cdecl fcn_0042b3c0(void)
 			name[len] = 0;
 			if (strcmp(name, "_NULL") == 0)
 				strcpy(name, "_GB_NULL");
-			value = fcn_0042b370(name);
+			value = txt_FindLabelIndex(name);
 			if (value == -1)
 				printf("Textlabel nicht gefunden: %s", name);
 			sprintf(tmp, "#define %s %i", name, value);

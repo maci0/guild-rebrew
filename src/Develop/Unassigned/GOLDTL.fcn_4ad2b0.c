@@ -2,7 +2,7 @@
 // fcn_004ad190 — if((unsigned)[0x7728d0]<3) return [0x664e10 + h*4]; return 0.
 
 /* ADDRESS: GOLDTL 0x004ad2b0 */
-int __cdecl fcn_004ad190(void)
+int __cdecl amt_GetSpecialOfficeId(void)
 {
 	unsigned int h;
 	h = *(unsigned int*) 0x7728d0;

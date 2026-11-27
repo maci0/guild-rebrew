@@ -20,14 +20,14 @@ extern char* g_14a79c0[];
 typedef struct { unsigned char kind; unsigned char unknown01[0x24c]; } COMBAT_BUILDING_STUB;
 
 void __cdecl d2_SetMouseTooltip(char*);
-void __cdecl fcn_00533a40(char*);
+void __cdecl d2_ShowStatusBanner(char*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl fcn_00502cd0(int, ...);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl gm_CheckCombatGearWear(char*);
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 int __cdecl d2_LoadForm(int, int, char*);
-void __cdecl fcn_00471d80(int, int);
+void __cdecl d2_CenterForm(int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(int, ...);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -57,7 +57,7 @@ void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendCommandSyncField(int, int, int, int*);
 void __cdecl cm_RequestChangeAttribute(void);
 #include "Develop/Units/d2.v1/d2_gui.h"
-int __cdecl fcn_00507910(int);
+int __cdecl gm_MapBuildingCatToGuildSlot(int);
 int __cdecl gm_CheckStatLevel(int, int);
 int __cdecl gm_RandomMod(unsigned short);
 void __cdecl gm_AdjustGebaeudeCondition(char*, int);
@@ -102,7 +102,7 @@ int __cdecl d2_ShowCombatEndCutscene(char* ctx)
 	mode = 0;
 	rec = 0;
 	d2_SetMouseTooltip(g_6b5c60);
-	fcn_00533a40(g_6b5c60);
+	d2_ShowStatusBanner(g_6b5c60);
 	if (*(int*) (self + 0x10c) != -1) {
 		ent = gm_StartFilteredEntitySearch(1, 1, *(int*) (self + 0x10c));
 		rec = fcn_00502cd0(*(int*) (ent + 0x5d), 2, 6, 0, 0x116);
@@ -163,7 +163,7 @@ int __cdecl d2_ShowCombatEndCutscene(char* ctx)
 		}
 	}
 	screen = d2_LoadForm(0, 0, "cutscenes\\combat_end");
-	fcn_00471d80(screen, 3);
+	d2_CenterForm(screen, 3);
 	d2_SetForm(screen, 2);
 	io_AppendText(0x7d);
 	d2_SetForm(screen, 1);
@@ -408,7 +408,7 @@ reduce:
 			goto sync;
 		}
 	} else if (self[0x7c] != 0 && side == g_772e9c && g_772e9c[2] != 6 && g_772e9c[2] != 7) {
-		i = fcn_00507910((unsigned char) *ent);
+		i = gm_MapBuildingCatToGuildSlot((unsigned char) *ent);
 		if (gm_CheckStatLevel(*(unsigned short*) g_772e9c, i) == 0 || *ent == 0xd || *ent == 0xc || *ent == 0xb) {
 			mask = 0xffff;
 			choice = (gm_RandomMod(3) & mask) + 1;

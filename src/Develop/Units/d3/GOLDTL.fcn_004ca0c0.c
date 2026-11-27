@@ -15,7 +15,7 @@ void __cdecl init_SetPflanzenMap(char*, int);
 
 
 /* ADDRESS: GOLDTL 0x004ca0c0 */
-int __cdecl fcn_004ca0c0(int cmd, char* result)
+int __cdecl plt_ExecutePlantSlotCommand(int cmd, char* result)
 {
 	char status;
 	void* entity;

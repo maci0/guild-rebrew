@@ -4,7 +4,7 @@
 
 int __cdecl cm_EnqueueClientPacket(char*);
 
-int __cdecl fcn_004c6700(char* e)
+int __cdecl cm_SendUpdateCharacterSubRecord(char* e)
 {
 	char tmp[2][2];
 	char buf[0x9c];

@@ -24,7 +24,7 @@ extern int g_6b8480;
 extern int g_6b8484;
 extern float g_6628a8;
 
-int __cdecl fcn_00449600(int a);
+int __cdecl d3_SelectDebugLightAxis(int a);
 int __cdecl d3_StepObjectBasisTransform(int self, float* dir, float* view, int pos,
 	float* outA, float* outB);
 void __cdecl d3_SetNodePosition(int h, float* p);
@@ -33,7 +33,7 @@ void __cdecl UpdateSceneLighting(int a);
 int __cdecl d3_HandleDebugCameraHotkeys(void);
 
 /* ADDRESS: GOLDTL 0x00449600 */
-int __cdecl fcn_00449600(int a1)
+int __cdecl d3_SelectDebugLightAxis(int a1)
 {
 	switch (a1) {
 	case 1:
@@ -47,7 +47,7 @@ int __cdecl fcn_00449600(int a1)
 }
 
 /* ADDRESS: GOLDTL 0x00449630 */
-int __cdecl fcn_00449630(void)
+int __cdecl d3_HandleDebugObjectInput(void)
 {
 	char changed;
 	char dirty;
@@ -76,7 +76,7 @@ int __cdecl fcn_00449630(void)
 	changed = 0;
 	if (h == 0)
 		return 0;
-	handle = fcn_00449600(g_1041d68);
+	handle = d3_SelectDebugLightAxis(g_1041d68);
 	ang = g_6628a8;
 	mx = g_14ce8c0;
 	ht = g_14ce864;

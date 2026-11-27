@@ -5,7 +5,7 @@
 char* __cdecl sbs_FindSet(char*);
 
 /* ADDRESS: GOLDTL 0x00423de0 */
-int __cdecl fcn_00423de0(char* s)
+int __cdecl sbs_RenameCurrentSet(char* s)
 {
 	int r = 0;
 
@@ -19,7 +19,7 @@ int __cdecl fcn_00423de0(char* s)
 }
 
 /* ADDRESS: GOLDTL 0x00423f20 */
-int __cdecl fcn_00423f20(char* a1, char* s)
+int __cdecl sbs_RenameNamedSet(char* a1, char* s)
 {
 	int r = 0;
 	char* p;

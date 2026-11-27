@@ -6,7 +6,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
-void __cdecl fcn_004c6c30(char* data)
+void __cdecl gv_EnqueueSlotCommand(char* data)
 {
 	char buf[0x9c];
 

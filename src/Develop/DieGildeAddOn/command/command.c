@@ -2405,7 +2405,7 @@ LAB_1000e0e7:
 	extern short g_774970;
 	extern char cm_LastObjectId[];
 	extern int __cdecl io_FormatTextBuffer();
-	extern void __cdecl fcn_00533a40();
+	extern void __cdecl d2_ShowStatusBanner();
 	extern int __cdecl sb_PlayVoice();
 
 	short* source_dynamic_entity;
@@ -2695,7 +2695,7 @@ LAB_1000e0e7:
 			io_FormatTextBuffer(log_buffer, 0x7c,
 				14 * (int)*(unsigned char*)source_existing_entity + 0x48e,
 				*(int*)(cmd + 0x23));
-			fcn_00533a40(log_buffer);
+			d2_ShowStatusBanner(log_buffer);
 			sb_PlayVoice(0, "RollenKurz_s_01", 1, 0x3f, 0x7f, 0, 0);
 		}
 	}
@@ -3896,7 +3896,7 @@ unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 void __cdecl d3_UpdateBuildingView(void* ent, int v);
 void __cdecl gm_UpdateWeatherAndSky(void* t, int flag);
 void __cdecl d3_UpdateBuildingWimpelTextures(int idx);
-void __cdecl fcn_00533a40(void* p);
+void __cdecl d2_ShowStatusBanner(void* p);
 void __cdecl gm_ApplyGameSettings(void);
 
 /* ADDRESS: GOLDTL 0x004c9550 */
@@ -4034,7 +4034,7 @@ int __cdecl cm_ExSysMessage(char* pkt, char* out)
 			v = 4;
 		*(int*) 0x68a9cc = v;
 		*(int*) 0x68a9c8 = *(int*) (0x664ea8 + v * 4);
-		fcn_00533a40(*(void**) (0x14ac528 + v * 4));
+		d2_ShowStatusBanner(*(void**) (0x14ac528 + v * 4));
 		gm_ApplyGameSettings();
 		break;
 	case 19:
@@ -5085,7 +5085,7 @@ void __cdecl d3_BindEntitySceneObject(int h, void* p, int n);
 void __cdecl lc_GetBauplatzPrefix(int id, char* dst);
 int __cdecl lc_GetGebaeudeBauplatz(char* name, void* p);
 void __cdecl d3_VisitSceneObjects(int a, int b, int c, int d, void* out);
-void __cdecl fcn_005982d0(void);
+void __cdecl lc_CollectVegetationObjects(void);
 void __cdecl ReportClientMessage(char* msg);
 void __cdecl d3_CreateEntityFlagPennant(void* p);
 void __cdecl rd_ConnectBuildingToSupermap(int a, int b);
@@ -5160,7 +5160,7 @@ load:
 	sprintf(name, "cm_ExCreateGeb(): bauplatze name:%s", tmp);
 	if (lc_GetGebaeudeBauplatz(shortname, geb) != 0) {
 		memset(&list, 0, sizeof list);
-		d3_VisitSceneObjects(g_67a370, *(int*)(shortname + 0x50), 0x2c0, (int) fcn_005982d0, &list);
+		d3_VisitSceneObjects(g_67a370, *(int*)(shortname + 0x50), 0x2c0, (int) lc_CollectVegetationObjects, &list);
 		for (i = 0; i < list.count; i++) {
 			if (g_773dd8 != 0)
 				d3_RemoveSubTreeFromCellTree(list.items[i], (int*) g_773dd8);

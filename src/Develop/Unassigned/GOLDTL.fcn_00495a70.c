@@ -1,5 +1,5 @@
 /* ADDRESS: GOLDTL 0x00495a70 */
-int __cdecl fcn_00495a70(void)
+int __cdecl ai_RunDummyVergnuegen(void)
 {
 	return 3;
 }

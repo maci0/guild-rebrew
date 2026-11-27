@@ -52,7 +52,7 @@ void __cdecl d3_UpdateCameraAtScreenEdges(void);
 void __cdecl d3_AnimateCameraToStoredTransform(void);
 void __cdecl d2_UpdateSelectionPanels(void);
 void __cdecl sv_ResetSelectionState(void);
-void __cdecl fcn_005338a0(void);
+void __cdecl d2_ClearStatusTextSlots(void);
 void __cdecl d2_HighlightSelectedControl(int);
 void __cdecl d2_StepTutorialStateMachine(void);
 int __cdecl d2_DispatchTutorialEvent(int, int, int, int);
@@ -263,7 +263,7 @@ done:
 		return;
 	}
 	g_7746d8 = gm_GetEntityUiFlags(g_774970, v4, g_7746cc, 0);
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	g_7747a0 = v4;
 	g_7747a4 = g_7746cc;
 	g_7746d4 = 0;

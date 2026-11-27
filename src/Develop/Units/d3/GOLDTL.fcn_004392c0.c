@@ -14,8 +14,8 @@ extern int g_67a370;
 void __cdecl d3_SelectSceneContext(int a, int b);
 void __cdecl d3_DisposeObject(char* p);
 void __cdecl d3_FreeMeshObject(char* p);
-void __cdecl fcn_0043bcf0(int a);
-void __cdecl fcn_00459b40(int a);
+void __cdecl d3_ReleaseRenderDeviceContext(int a);
+void __cdecl d3_FreeSkyDome(int a);
 void __cdecl m_FreeTracked(void* p);
 void __cdecl d3_ReleaseRenderVertexBuffer(void);
 void __cdecl d3_InitRenderVertexBuffer(void);
@@ -43,11 +43,11 @@ void __cdecl d3_ResetScene(void)
 				d3_FreeMeshObject(d3_SceneRenderListHead);
 			}
 			if (g_6b8300 != 0) {
-				fcn_0043bcf0(g_6b8300);
+				d3_ReleaseRenderDeviceContext(g_6b8300);
 				g_6b8300 = 0;
 			}
 			if (g_6b89c0 != 0) {
-				fcn_00459b40(g_6b89c0);
+				d3_FreeSkyDome(g_6b89c0);
 				g_6b89c0 = 0;
 			}
 			if (*(void**) (((char*)g_67a370) + 0x3c8) != 0) {
@@ -63,11 +63,11 @@ void __cdecl d3_ResetScene(void)
 		d3_DisposeObject(d3_ObjectListHead);
 	}
 	if (g_6b8300 != 0) {
-		fcn_0043bcf0(g_6b8300);
+		d3_ReleaseRenderDeviceContext(g_6b8300);
 		g_6b8300 = 0;
 	}
 	if (g_6b89c0 != 0) {
-		fcn_00459b40(g_6b89c0);
+		d3_FreeSkyDome(g_6b89c0);
 		g_6b89c0 = 0;
 	}
 	if (*(void**) (((char*)g_67a370) + 0x3c8) != 0) {

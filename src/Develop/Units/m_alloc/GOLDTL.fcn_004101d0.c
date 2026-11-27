@@ -3,7 +3,7 @@
 #include "Develop/Units/m_alloc/m_alloc_checks.h"
 void __cdecl evt_LogScriptError(void*, int, char*);
 
-int __cdecl fcn_004101d0(char** a1, int* a2, int* a3, int* a4)
+int __cdecl evt_SetEmitterSize(char** a1, int* a2, int* a3, int* a4)
 {
 	char* allocation;
 

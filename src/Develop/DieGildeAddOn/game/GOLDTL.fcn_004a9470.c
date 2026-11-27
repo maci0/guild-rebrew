@@ -5,7 +5,7 @@ typedef struct Info {
 } Info;
 // SIZE 0x18
 
-int __cdecl fcn_004f6040(int* ids, int* d, unsigned short id);
+int __cdecl gm_CollectFrequentCrimeTargets(int* ids, int* d, unsigned short id);
 char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl amt_GetRoleTemplate(int job, Info* info);
 
@@ -23,7 +23,7 @@ int __cdecl ai_PreparePrivErpressung(int unused1, char* actor, int unused3, int 
 	if (*(int*) (actor + 0x194) < 2 || (*(int*) (actor + 0x1c8) & 0x100)) {
 		return 0;
 	}
-	n = fcn_004f6040(ids, d, *(unsigned short*) actor);
+	n = gm_CollectFrequentCrimeTargets(ids, d, *(unsigned short*) actor);
 	if (n <= 0) {
 		return 0;
 	}

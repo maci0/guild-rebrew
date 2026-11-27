@@ -15,7 +15,7 @@ extern char g_67bc28[];
 
 void* __cdecl m_alloc(int, void*);
 
-void __cdecl fcn_00450a30(int nlist, int nactive)
+void __cdecl d3_InitLightBuffers(int nlist, int nactive)
 {
 	int i;
 

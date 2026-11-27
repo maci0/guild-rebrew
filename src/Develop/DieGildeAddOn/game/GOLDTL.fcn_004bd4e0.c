@@ -18,7 +18,7 @@ extern char s_681664[];
 extern char s_681658[];
 extern char s_68149c[];
 
-char* __cdecl fcn_0045b700(int* a1, int n, int a3);
+char* __cdecl d3sm_CreateMap(int* a1, int n, int a3);
 void __cdecl gv_Free3Fields(char* p);
 void __cdecl rd_AddUnusedBauplatzToSupermap(int a);
 int __cdecl lc_GetBauplatzPrefix(int a1, char* out);
@@ -63,7 +63,7 @@ int __cdecl rd_ConnectBuildingToSupermap(int sceneObjectArg, int typeIdArg)
 	if (g_104336c == 0) {
 		return 0;
 	}
-	g_1005904 = fcn_0045b700(g_104336c, *g_104336c, 2);
+	g_1005904 = d3sm_CreateMap(g_104336c, *g_104336c, 2);
 	if (g_1005904 == 0) {
 		return 0;
 	}

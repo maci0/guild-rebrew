@@ -4,11 +4,11 @@ extern pos14_7f4c00 gm_GameTime;
 extern D2_ACTION_POPUP_SLOT g_77e8c0[16];
 
 int __cdecl gm_CompareGameTime(pos14_7f4c00*, pos14_7f4c00*);
-void __cdecl fcn_00545780(char*);
+void __cdecl d2_CloseActionPopup(char*);
 void __cdecl he_FreeAction(char*);
 
 /* ADDRESS: GOLDTL 0x005455b0 */
-unsigned int __cdecl fcn_005455b0(void)
+unsigned int __cdecl d2_EvictOldestActionPopupSlot(void)
 {
 	pos14_7f4c00 pos;
 	D2_ACTION_POPUP_SLOT* r;
@@ -31,7 +31,7 @@ unsigned int __cdecl fcn_005455b0(void)
 		}
 	}
 	if (found != 0) {
-		fcn_00545780(found);
+		d2_CloseActionPopup(found);
 		he_FreeAction(found);
 		return 0xf;
 	}

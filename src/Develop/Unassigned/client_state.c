@@ -4,7 +4,7 @@ extern short g_14ce8c0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 void __cdecl io_PollMouseInput(void);
 
-struct cam_412610 {
+struct IO_CURSOR_STATE {
 	int v[0x13];
 };
 
@@ -12,7 +12,7 @@ void __cdecl io_PollKeyboardInput(void);
 void __cdecl io_PollKeyboardInput(void);
 
 /* ADDRESS: GOLDTL 0x004125c0 */
-void __cdecl fcn_004125c0(int x, int y)
+void __cdecl io_SetMouseCursorPos(int x, int y)
 {
 	((short*)g_14cf900)[0] = (short) x;
 	((short*)g_14cf900)[1] = (short) y;
@@ -27,15 +27,15 @@ void __cdecl fcn_004125c0(int x, int y)
 
 /* Resets the camera to its saved start state and reapplies it. */
 /* ADDRESS: GOLDTL 0x00412610 */
-void __cdecl fcn_00412610(void)
+void __cdecl io_ResetInputToCursor(void)
 {
 	io_PollMouseInput();
-	(*(struct cam_412610*)&g_14ce8c0) = (*(struct cam_412610*)g_14cf900);
+	(*(struct IO_CURSOR_STATE*)&g_14ce8c0) = (*(struct IO_CURSOR_STATE*)g_14cf900);
 	io_PollKeyboardInput();
 }
 
 /* ADDRESS: GOLDTL 0x00412630 */
-void __cdecl fcn_00412630(void)
+void __cdecl io_PopQueuedInputState(void)
 {
 	int i;
 	unsigned char* rec;

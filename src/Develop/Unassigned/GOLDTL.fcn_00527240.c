@@ -4,7 +4,7 @@ extern int g_6a25a4;
 
 
 /* ADDRESS: GOLDTL 0x00527240 */
-int __cdecl fcn_00527240(int x)
+int __cdecl d2_IsHudOverlayControl(int x)
 {
 	if (g_6a2578 == x) {
 		return 1;

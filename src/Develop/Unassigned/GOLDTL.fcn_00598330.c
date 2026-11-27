@@ -10,7 +10,7 @@ char __cdecl d3_VisitSceneObjectsUntilStopped(char*, char*, unsigned int, char (
 #define lc_WalkScene d3_VisitSceneObjectsUntilStopped
 #else
 char __cdecl d3_VisitSceneObjects(char*, char*, unsigned int, char (__cdecl*)(char*, void*), void*);
-#define lc_Collect fcn_005982d0
+#define lc_Collect lc_CollectVegetationObjects
 #define lc_WalkScene d3_VisitSceneObjects
 #endif
 /* 0x442d50 / Gold 0x447300 keeps a numeric object context. */

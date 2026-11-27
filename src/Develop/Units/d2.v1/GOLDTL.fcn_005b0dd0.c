@@ -17,7 +17,7 @@ extern int g_774a64;
 extern char s_6ab3e4[];
 
 int __cdecl d2_LoadForm(int, int, char*);
-void __cdecl fcn_00471d80(int, int);
+void __cdecl d2_CenterForm(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl d2_CreateChildWindow(int, int, int, int, int, int);
 void __cdecl d2_AddWindowFrame(int, int);
@@ -27,7 +27,7 @@ int __cdecl io_AppendText(char*, ...);
 int __cdecl d2_InitLandkarteDialog(MsgBox* m)
 {
 	m->dlg = d2_LoadForm(0, 0, s_6ab3e4);
-	fcn_00471d80(m->dlg, 3);
+	d2_CenterForm(m->dlg, 3);
 	d2_SetForm(m->dlg, 0);
 	m->win = d2_CreateChildWindow(0x4a, 0x4c, 0x206, 0x164, 0, d2_CurrentWindowId);
 	d2_CurrentWindowId = m->win;

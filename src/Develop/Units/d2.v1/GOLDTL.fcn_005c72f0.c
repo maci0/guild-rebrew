@@ -39,7 +39,7 @@ int __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl d2_ResetBuildingUiSlots(void);
 int __cdecl d2_DrawPanelFrame(int, int, int);
 int __cdecl d2_GetFormWindow(int, int, int, int*, int*, int*);
-int __cdecl fcn_00533f40(int, int, int, int);
+int __cdecl d2_CreateWindowScrollbar(int, int, int, int);
 int __cdecl d2_SyncWareProduktionSlotGrid(int, int);
 int __cdecl d2_RefreshWorkshopInventoryGrids(int, int, int, int);
 int __cdecl d2_SyncProduktionSlotGrid(int, int);
@@ -122,7 +122,7 @@ int __cdecl d2_RunEquipmentDialog(int objectArg)
 	d2_ResetBuildingUiSlots();
 	d2_SetForm(win, 0);
 	d2_DrawPanelFrame(d2_CurrentWindowId, 0x72f, 0);
-	fcn_00533f40(0x270, 0x15c, d2_CurrentWindowId,
+	d2_CreateWindowScrollbar(0x270, 0x15c, d2_CurrentWindowId,
 			d2_GetFormWindow(win, 2, 0x78, v10, v9buf, &v8));
 	((D2_CONTROL_TL*) (g_1015ea0))[v8].font = 0x54;
 	def = g_item_def_table + (unsigned int) *p * 0x41;

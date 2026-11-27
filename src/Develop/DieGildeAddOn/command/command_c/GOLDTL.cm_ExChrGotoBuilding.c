@@ -29,7 +29,7 @@ int __cdecl init_AllocateGebaeudeSceneSlot(char*);
 int __cdecl ch_QueueStandUpAnimation(char*, char*);
 char* __cdecl ch_UseGate(char*, char*, char*, int, int, int);
 char* __cdecl d3_FindSceneObject(int, int, int, char*);
-char* __cdecl fcn_004456e0(char*, int, int, char*);
+char* __cdecl d3_FindSceneObjectByPtrOrName(char*, int, int, char*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 char __cdecl d3sm_SampleHeight(char*, float*, int*, int*, float*);
 char* __cdecl ch_CreateAction(char*, int, ...);
@@ -145,7 +145,7 @@ int __cdecl cm_ExChrGotoBuilding(char* e, char* out)
 				u = d3_FindSceneObject(*(int*) (C + 0x61), 0x100, 0,
 				    (char*) &g_68149c);
 				if (u == 0)
-					u = fcn_004456e0(*(int*) (B + 0x61), 0x100, 0,
+					u = d3_FindSceneObjectByPtrOrName(*(int*) (B + 0x61), 0x100, 0,
 					    (char*) &g_68149c);
 				if (u == 0)
 					u = *(char**) (C + 0x61);
@@ -217,7 +217,7 @@ after:
 			u = d3_FindSceneObject(*(int*) (B + 0x61), 0x100, 0,
 			    (char*) &g_68149c);
 			if (u == 0) {
-				u = fcn_004456e0(*(int*) (B + 0x61), 0x100, 0,
+				u = d3_FindSceneObjectByPtrOrName(*(int*) (B + 0x61), 0x100, 0,
 				    (char*) &g_68149c);
 				if (u == 0)
 					u = *(char**) (B + 0x61);
@@ -272,7 +272,7 @@ b3:
 		u = d3_FindSceneObject(*(int*) (B + 0x61), 0x100, 0,
 		    (char*) &g_68149c);
 		if (u == 0)
-			u = fcn_004456e0(*(int*) (B + 0x61), 0x100, 0,
+			u = d3_FindSceneObjectByPtrOrName(*(int*) (B + 0x61), 0x100, 0,
 			    (char*) &g_68149c);
 		if (u != 0) {
 			m = g_1043370[0];

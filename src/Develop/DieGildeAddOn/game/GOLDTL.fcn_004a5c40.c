@@ -4,7 +4,7 @@
 extern int g_77261c;
 
 unsigned short __cdecl gm_RandomMod(unsigned short);
-int __cdecl fcn_005cf720(unsigned short, unsigned short, void*, int);
+int __cdecl gm_MatchesTargetFilter(unsigned short, unsigned short, void*, int);
 float __cdecl gm_CalcEntityFavor(unsigned int, unsigned int, unsigned int);
 int __cdecl amt_GetRoleLevel(int);
 
@@ -32,7 +32,7 @@ unsigned int __cdecl ai_CollectEligibleEntities(unsigned short* source, unsigned
 	if (g_77261c != 0) {
 		query[1] = actionKind;
 		query[16] = 0;
-		if (fcn_005cf720(*source, *(unsigned short*) g_77261c, query, 0) != 0) {
+		if (gm_MatchesTargetFilter(*source, *(unsigned short*) g_77261c, query, 0) != 0) {
 			have = 1;
 			*out = *(unsigned short*) g_77261c;
 		}
@@ -56,7 +56,7 @@ unsigned int __cdecl ai_CollectEligibleEntities(unsigned short* source, unsigned
 				if (tries == 0) {
 					break;
 				}
-				if (fcn_005cf720(*source, cand, query, 0) != 0) {
+				if (gm_MatchesTargetFilter(*source, cand, query, 0) != 0) {
 					if (checkFavor != 0) {
 						favor = gm_CalcEntityFavor(cand, *source, 1);
 						if (favor < minFavor || favor > maxFavor) {

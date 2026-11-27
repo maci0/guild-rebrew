@@ -7,7 +7,7 @@ extern char s_67a464[];
 int __cdecl fcn_0065f220(const char* a, const char* b);
 void __cdecl d3_CleanupObjectResources(char* o);
 int __cdecl d3_LoadModel(char* a, char* b);
-void __cdecl fcn_00449f90(char* o, int a, char* name);
+void __cdecl d3_AttachCachedModelParts(char* o, int a, char* name);
 void __cdecl d3_InvalidateSubTreeFlags(char* o, int a);
 
 /* ADDRESS: GOLDTL 0x0043aad0 */
@@ -40,7 +40,7 @@ char __cdecl d3_ReloadObjectResourcesCallback(char* o, SCENE_PROGRESS_CONTEXT* c
 	}
 	d3_CleanupObjectResources(o);
 	if (d3_LoadModel(buf, buf)) {
-		fcn_00449f90(o, 0, buf);
+		d3_AttachCachedModelParts(o, 0, buf);
 	}
 	d3_InvalidateSubTreeFlags(o, 1);
 	return 1;

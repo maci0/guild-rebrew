@@ -9,7 +9,7 @@ void* __cdecl m_alloc(int, int);
 void __cdecl m_FreeTracked(void*);
 
 /* ADDRESS: GOLDTL 0x004754b0 */
-unsigned char __cdecl fcn_004754b0(void* path, void* pixels, unsigned char a3)
+unsigned char __cdecl d2_GetBMPData(void* path, void* pixels, unsigned char a3)
 {
 	BITMAPINFOHEADER hdr;
 	unsigned char v10[2];

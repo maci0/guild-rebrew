@@ -4,14 +4,14 @@ typedef struct {
     float x;
     int y;
     int z;
-} Vec535970;
+} D3_OFFSET_VEC3;
 
-void __cdecl d3_AnimateObjectTransform(char *, char *, Vec535970 *, int, int);
+void __cdecl d3_AnimateObjectTransform(char *, char *, D3_OFFSET_VEC3 *, int, int);
 
 /* ADDRESS: GOLDTL 0x00535970 */
 void __cdecl fcn_00535970(char *e)
 {
-    Vec535970 v;
+    D3_OFFSET_VEC3 v;
 
     v.x = *(float *) (e + 0x84) + g_665e30;
     v.y = *(int *) (e + 0x88);

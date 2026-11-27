@@ -32,7 +32,7 @@ extern int g_774654;
 extern int g_666018, g_66601c;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 int __cdecl d3snd_PlaySoundEffect(int, int, char*, int);
-void __cdecl fcn_005263d0(int, int, int);
+void __cdecl d2_ShowGreenMessageBox(int, int, int);
 char* __cdecl d2_OpenTargetPicker(int*, int, int, void*);
 void __cdecl d3_EndCameraAndUiMode(void);
 int __cdecl d2_LoadForm(int, int, char*);
@@ -72,7 +72,7 @@ void __cdecl d2_RunBlutracheDialog(char* entity)
 
 	if (*(unsigned char*) &((ENTITY_RECORD*) g_7f4ca0)[g_774970].entity_flags & 0x10) {
 		d3snd_PlaySoundEffect(-7, 0, (char*) 0x6ad46c, -1);
-		fcn_005263d0(*(int*) 0x14b5a24, *(int*) 0x14b5a28, 0);
+		d2_ShowGreenMessageBox(*(int*) 0x14b5a24, *(int*) 0x14b5a28, 0);
 		return;
 	}
 	memset(query, 0, sizeof(query));

@@ -4205,7 +4205,6 @@ GOLDTL.0x004e9580	amt_GetRankLimits	0	RENAMED+CLEANED	src/Develop/Unassigned/GOL
 2026-11-27	GOLD.0x004758e0	fcn_004758e0	d2_FreeWindowSlot	inferred	high	GOLDTL.0x0046f390	Destroys GOLD GuiObj window slot, closes children via fcn_00472cd0, destroys surfaces via d2_DestroySurface and zeroes struct; GOLD twin of GOLDTL d2_DestroyWindow (disambiguated as d2_FreeWindowSlot).
 2026-11-27	GOLD.0x00477520	fcn_00477520	d2_ResetSelectedControl	inferred	high	GOLDTL.0x00473fe0	Clears active control pointer g_006ed9dc, resets control selection flag and restores saved mouse boundary; GOLD twin of GOLDTL d2_ClearSelectedControl (disambiguated as d2_ResetSelectedControl).
 2026-11-27	GOLD.0x0047d9d0	fcn_0047d9d0	ai_InitGoodsAndContext	inferred	high	GOLDTL.0x0047ce90	Native GOLD 0x0047d9d0 (called from GOLD.main_OpenEngine.c:156) initializes context tables and goods IDs; GOLD twin of GOLDTL ai_InitContextAndGoodsLists (disambiguated as ai_InitGoodsAndContext).
-2026-11-27	GOLDTL.0x0047a310	fcn_0047a310	fcn_0047a310	skipped	low	-	Bare ret instruction (0x0047a310: c3) with zero callers or pointer references in Europa1400Gold_TL.exe and src/.
 2026-11-27	GOLDTL.0x004a73f0	fcn_004a73f0	gm_FindCardHighStraight	inferred	high	-	Sorts 5 cards in Hand* out and checks strictly increasing ranks starting at 1; called by gm_CheckCardRoyalFlush (GOLDTL.fcn_004a76d0.c:7), companion to gm_FindCardLowStraight; multi-file Card/Hand out of scope.
 2026-11-27	GOLDTL.0x004b20d0	fcn_004b20d0	hst_SetHistoryScrollModeFlag	inferred	medium	GOLD.0x004b1f90	Stores byte mode flag g_7728d4 read by hst_ShowDueHistoryScroll (0/1/2 dispatch), persisted in load/save (0x5251c0/0x521420), and updated from Menu\CHOOSEHISTORY radio selection; GOLDTL twin of GOLD hst_SetHistoryScrollMode (disambiguated as hst_SetHistoryScrollModeFlag).
 2026-11-27	GOLDTL.0x004be2a0	fcn_004be2a0	rt_CloneRoutePoints	inferred	high	-	Deep-copies doubly-linked route waypoint node list via fcn_004be1f0; called from cm_ExSetEntityRoute.c:41 paired with rt_FreeRoutePoints; proposed file-local types fcn_004be2a0_block->ROUTE_BLOCK and fcn_004be2a0_node->ROUTE_NODE.
@@ -4215,7 +4214,6 @@ GOLDTL.0x004e9580	amt_GetRankLimits	0	RENAMED+CLEANED	src/Develop/Unassigned/GOL
 2026-11-27	GOLDTL.0x004da1b0	fcn_004da1b0	d2_DrawElapsedTimer	inferred	high	-	Selects font 0x54 and draws elapsed time (g_6b7fac - g_772f54) * 14 formatted as '%2i : %2i : %3i ms' (0x68bfd0) in frame loop GOLDTL.fcn_005373e0.c:419.
 2026-11-27	GOLDTL.0x004e5980	fcn_004e5980	cut_PauseWorldAndCharacters	inferred	high	-	Pauses gm_AdvanceGameClock via tb_SetCallbackPaused and sets pause flag 4 across active ch_CharacterSlots; called from cut_ExecuteCutscene (GOLDTL.fcn_004e5a00.c:171).
 2026-11-27	GOLDTL.0x004f1450	fcn_004f1450	gv_PickMaxFieldEntry	inferred	medium	-	Scans Rec44 array entries with id != -1 and returns the id having maximum sum over 5 byte stats b[0..4]; sibling of gv_PickRandomFieldEntry; multi-file Rec44 out of scope.
-2026-11-27	GOLDTL.0x004f5cc0	fcn_004f5cc0	fcn_004f5cc0	skipped	low	-	Bitmask switch (a1==1 ? (a0&0xf0)<0x30 : 0) with zero callers or pointer references in Europa1400Gold_TL.exe and src/.
 2026-11-27	GOLDTL.0x004f91f0	fcn_004f91f0	gm_HandleSeniorGegenspionagePrivilege	inferred	high	-	Privilege dispatch @0x690508 after gm_HandleBuergermeisterPrivilege handling roles 0x0f/0x15/0x1b counter-espionage dialog d2_RunGegenspionageDialog (disambiguated from gm_HandleGegenspionagePrivilege in GOLDTL.fcn_004f8bb0.c).
 2026-11-27	GOLDTL.0x004facb0	fcn_004facb0	gm_PushCityHistorySample	inferred	high	-	Shifts 16-slot city history sample ring g_99ec20 by 1 and appends current city report metrics into slot 15; called in GOLDTL.fcn_00543080.c:160; proposed file-local type Hist14->CITY_HISTORY_SAMPLE.
 2026-11-27	GOLDTL.0x00500e40	fcn_00500e40	init_BuildObjectProducerTables	inferred	high	-	Populates object-to-building producer/tier lookup tables (0x8f9480, 0x99e0a0) from lpGebaeudePROT and lpObjektePROT during GOLDTL.fcn_00501040.c:82 data init; proposed file-local types Rec500e->OBJ_PRODUCER_PROTO and Bld500e->BLD_PRODUCER_PROTO.
@@ -4227,17 +4225,14 @@ GOLDTL.0x004e9580	amt_GetRankLimits	0	RENAMED+CLEANED	src/Develop/Unassigned/GOL
 2026-11-27	GOLDTL.0x00545410	fcn_00545410	he_AllocDummyEvent	inferred	high	-	Empty alloc callback for he_RegisterHandler(1, fcn_00545410, fcn_00545420) in he_InitEventSystem (GOLDTL.fcn_00545430.c:30), companion to he_AllocNone.
 2026-11-27	GOLDTL.0x0054b800	fcn_0054b800	he_StartFreeActionStub	inferred	high	-	Start callback for action id 48 in he_RegisterActionHandlers (GOLDTL.fcn_0055b3e0.c:147) immediately freeing the action via he_FreeAction.
 2026-11-27	GOLDTL.0x0055af10	fcn_0055af10	he_StartTutorialEvent	inferred	high	-	Start callback for action id 135 in he_RegisterActionHandlers (GOLDTL.fcn_0055b3e0.c:323) calling d2_BindTutorialAction and freeing on failure; paired with he_UpdateTutorialEvent.
-2026-11-27	GOLDTL.0x005710f0	fcn_005710f0	fcn_005710f0	skipped	low	-	Stub returning 0 (xor eax, eax; ret) called in he_ShutdownEventSystem alongside unreversed stubs fcn_0055bc30 and fcn_005758e0; original subsystem unknown.
 2026-11-27	GOLDTL.0x0057e870	fcn_0057e870	d2_ResumeTutorialUpdates	inferred	high	-	Sets g_774a18 = 1 to resume tutorial updates, inverse of d2_PauseTutorialUpdates (GOLDTL.fcn_0057e860.c); called on pause dialog exit in GOLDTL.fcn_005e43f0.c:132.
 2026-11-27	GOLDTL.0x005a3b30	fcn_005a3b30	d2_HandleMarketSquareObjects	inferred	high	-	Registers ob_MARKTSTAND_*/ob_SCHWARZES_BRETT/ob_TRIBUENE/contact_MARKTFLECKEN hitboxes and opens corresponding market or notice-board dialogs; called in d2_RunWorldHudLoop (GOLDTL.fcn_0059a340.c:208).
-2026-11-27	GOLDTL.0x005c8090	fcn_005c8090	fcn_005c8090	skipped	low	-	Bare main_RunFrameLoop wrapper with zero callers or table references in src/; insufficient context for semantic role.
 2026-11-27	GOLDTL.0x005ce0f0	fcn_005ce0f0	d2_OpenTagesordnungDialog	attested	high	-	Wraps 'special\tagesordnung' dialog runner fcn_005ce110 via fcn_005cde50 and closes UI camera mode via d3_EndCameraAndUiMode; called in GOLDTL.fcn_005a91b0.c:50 and GOLDTL.fcn_005ce110.c:147.
 2026-11-27	GOLDTL.0x005e6dd0	fcn_005e6dd0	d2_DestroyCardGameForm	inferred	high	-	Destroys card-game form g_6ad568 via d2_DestroyForm and resets handle to -1; called from card-game loop GOLDTL.fcn_005e6e00.c:52, 258 (using gm_InitCardGame).
 2026-11-27	GOLDTL.0x00411740	fcn_005de62f	io_ClearMouseAndKeyState	inferred	medium	-	Zeros 12 input/mouse state ints (0x14ce8e0..0x14cf94c); called in GOLDTL.fcn_00533090.c:151 on input/tutorial clear.
 2026-11-27	GOLDTL.0x0040f910	fcn_0040f910	ecmd_ZoomOnObject	attested	high	-	Registered as script command 'ZoomOnObject' (0x676fbc) in evt_RegisterSceneCommands (GOLDTL.fcn_00410870.c:34); focuses camera on scene object via d3_FindSceneObject and d3_AnimateCameraToNode.
 2026-11-27	GOLDTL.0x00422140	fcn_00422140	msx_SetSampleFadeDuration	inferred	medium	-	Sets sample fade duration global g_678de8 read by sample volume fade updater GOLDTL.fcn_00422150.c:44, 65, 68, 70 (distinct from msx_SetFadeDuration at GOLDTL.0x00420200).
 2026-11-27	GOLDTL.0x0042e400	fcn_0042e400	ch_ValidateSceneObjects	inferred	medium	-	Calls ch_ValidateObjectTables() and invokes fcn_0042e3f0() (d3_VisitSceneObjects traversal).
-2026-11-27	GOLDTL.0x0043b4e0	fcn_0043b4e0	fcn_0043b4e0	skipped	low	-	Constant stub returning 1 (mov eax, 1; ret) referenced only by getter fcn_0043b4f0; no semantic context in src/.
 2026-11-27	GOLDTL.0x0044dc00	fcn_0044dc00	d3_ReadMatUTile	inferred	high	-	Binary chunk table (@0x67b6e4) reader for 4-byte material field at offset +0xcc (uTile verified via d3_ParseMatUTile in GOLDTL.fcn_0044d250.c:8), adjacent to +0xd0 d3_ReadMatVTile.
 2026-11-27	GOLDTL.0x0046bd20	fcn_0046bd20	d2_DrawWordWrappedText	inferred	high	-	Word-wrapping multiline text renderer loading _FONT and drawing glyphs/background quads; disambiguated from d2_DrawWrappedText (GOLD.fcn_0046bd20.c) and d2_RenderWrappedText (GOLD.fcn_0046f190.c).
 2026-11-27	GOLDTL.0x00479e40	fcn_00479e40	shp_ShowShapeFromBankWithMode	attested	high	-	Shape-bank blitter logging 'shp_ShowShapeFromBank:Shapenr is invalidate! Bank:%s' (0x67da68), setting shape entry mode byte +0xd=5 before d2_BlitShape; disambiguated from shp_ShowShapeFromBank and shp_ShowShapeFromBankMode2.
@@ -4246,9 +4241,7 @@ GOLDTL.0x004e9580	amt_GetRankLimits	0	RENAMED+CLEANED	src/Develop/Unassigned/GOL
 2026-11-27	GOLDTL.0x004da170	fcn_004da170	cut_SkipCombatCutscene	inferred	high	-	Registered in cut_RegisterEventCallbacks(3, cut_RunCombatCutscene, fcn_004da170, ...) in he_consolidated.c:46; dispatches cut_ResolveSimpleCombat or fcn_004d9f20 depending on g_772f2c.
 2026-11-27	GOLDTL.0x004f88d0	fcn_004f88d0	gm_HandleImperialRankPrivilege	inferred	high	-	Privilege dispatch @0x6904e0 handling noble grades 0x1e..0x21 (+0x169) and showing privilege message via d2_ShowPrivilegMessage.
 2026-11-27	GOLDTL.0x0050fe80	fcn_0050fe80	gm_FindLowestRelationSlot	inferred	high	-	Scans all 768 active entity slots in g_7f4ca0 and returns the slot index with minimum signed relation score in g_869480.
-2026-11-27	GOLDTL.0x005435d0	fcn_005435d0	fcn_005435d0	skipped	low	-	Compiled constant stub returning 1 (mov eax, 1; ret) polled by game frame loop before message 0x79; original check is stripped in binary.
 2026-11-27	GOLDTL.0x0057b000	fcn_0057b000	he_StartMeisterpruefung	attested	high	-	Registered as handler 0x92 start callback in GOLDTL.fcn_005780b0.c:41 paired with fcn_0057b1f0 ('Berufe\Messagebox_Meisterpruefung'); schedules next exam timestamp.
-2026-11-27	GOLDTL.0x005dcba0	fcn_005dcba0	fcn_005dcba0	skipped	low	-	Constant stub returning 1 (mov eax, 1; ret) stored in dialog table @0x6abe48; insufficient context to distinguish check semantics.
 2026-11-27	GOLD.0x005aacd0	fcn_005aacd0	d2_OpenWorkerRosterBook	inferred	high	GOLDTL.0x005b6300	Opens 'Buch\Personalbuch_1' / 'Personalbuch_1_Diebesgilde' book panel with worker rows and gm_FindBuildingOwner; GOLD twin of GOLDTL.0x005b6300 (d2_RunPersonalbuchDialog already taken); MSG/SEL/FRAME multi-file out of scope.
 2026-11-27	GOLDTL.0x004b5530	fcn_004b5530	d2_ShowMissionSpecDialog	inferred	high	-	Loads 'special\mission', formats _AUFTRAEGE_VERGABE_HS_%.2d voice/text from gm_LookupMissionSpec and runs frame loop; called from d2_RunMissionDialog (disambiguated from d2_RunMissionBriefingDialog at GOLDTL.fcn_004b5630.c).
 2026-11-27	GOLDTL.0x004da510	fcn_004da510	d2_UpdateVoteTallyIcons	inferred	high	-	Resets vote category rows or appends vote tally pips across 3 vote rows during office session cutscene (cut_RunOfficeSessions, GOLDTL.fcn_004da690.c:325,391,403,410).
@@ -4671,3 +4664,257 @@ GOLDTL.0x004e9580	amt_GetRankLimits	0	RENAMED+CLEANED	src/Develop/Unassigned/GOL
 2026-11-27	GOLDTL.0x004bbd20	fcn_004bbd20	gm_AllocAmbientAnimals	inferred	high	-	Allocates "anm:animals" pool g_1015b7c; RELOC 40/40.
 2026-11-27	GOLDTL.0x0052f710	fcn_0052f710	d2_DestroySelectionPanel	inferred	high	-	Frees selection panel g_6a25b8 and g_6a25c4[4]; RELOC 130/130.
 2026-11-27	GOLDTL.0x0044f190	fcn_0044f190	vfs_OpenFastChunk	inferred	high	-	Seeks fast chunk 0x2d id 0xfab50005 for d3_LoadFastChunk; RELOC 184/184.
+2026-11-27	GOLDTL.0x00531620	fcn_00531620	sv_UpdateObjectSelection	inferred	high	-	Updates g_7f4ca0 selection slots and scene cell hitboxes for sv_HandleObjects (proposed).
+2026-11-27	GOLD.0x00479ed0	fcn_00479ed0	d2_FreeSpriteRemapLut	inferred	high	-	Frees 16-bit RLE remap LUT at g_6f0460 when !0xf8a630 (proposed).
+2026-11-27	GOLDTL.0x00495a70	fcn_00495a70	ai_RunDummyVergnuegen	attested	high	-	GOLDTL.fcn_004a1130.c "DummyVergnuegen" pairs ai_StartDummyVergnuegen with fcn_00495a70 (proposed).
+2026-11-27	GOLDTL.0x004adfe0	fcn_004adfe0	gm_AdvanceHistoricalEntry	inferred	high	-	Advances g_7728c4 cursor in g_67fbb0, sibling of gm_AdvanceRulerHistoricalEntry (proposed).
+2026-11-27	GOLDTL.0x004b3db0	fcn_004b3db0	gm_PickRandomMissionEntry	inferred	high	-	Picks random entry in g_680bd0 via g_680c44 (proposed).
+2026-11-27	GOLDTL.0x004be530	fcn_004be530	d2_PollRadioSlots	inferred	high	-	Polls g_10058a0[0..7] via d2_PollRadioSlotControl (proposed).
+2026-11-27	GOLDTL.0x004c6700	fcn_004c6700	cm_SendUpdateCharacterSubRecord	inferred	high	-	Sends net opcode 0x4f handled by cm_ExUpdateCharacterSubRecord (proposed).
+2026-11-27	GOLDTL.0x004ce430	fcn_004ce430	d3_ApplyLobbySceneUpdate	inferred	high	-	Applies net lobby scene entry add/clear/delete and chat log (proposed).
+2026-11-27	GOLDTL.0x004d3330	fcn_004d3330	gm_FindBestCombatCell	inferred	high	-	Finds lowest-cost walkable cell for cut_AssignCombatUnitOrder (proposed).
+2026-11-27	GOLDTL.0x004e4ac0	fcn_004e4ac0	sb_LoadSampleBankIfAllowed	inferred	high	-	Checks g_772f3c==0 guard then calls sb_LoadSampleBank (proposed).
+2026-11-27	GOLDTL.0x004eefe0	fcn_004eefe0	gm_CountUnusedPresetCharacters	inferred	high	-	Counts g_68e020 entries with used==0 (proposed).
+2026-11-27	GOLDTL.0x004f5830	fcn_004f5830	cm_PruneCompletedStraftaten	inferred	high	-	Prunes completed Straftat entries via cm_SendRemoveStraftat (proposed).
+2026-11-27	GOLDTL.0x004f7310	fcn_004f7310	gm_HandleRankBelow3Privilege	inferred	high	-	Privilege check for entity rank < 3 with 0x1d33/0x1d34 messages (proposed).
+2026-11-27	GOLDTL.0x004f9ad0	fcn_004f9ad0	gm_HandleWunderPrivilege	inferred	high	-	Privilege handler for action 0x1a dispatching gm_HandleWunder (proposed).
+2026-11-27	GOLDTL.0x004fc5c0	fcn_004fc5c0	gm_ComputeLawNormalizedRatios	inferred	high	-	Normalizes gm_GetLawEntry(9..15) counts into out[0..6] (proposed).
+2026-11-27	GOLDTL.0x00506da0	fcn_00506da0	gm_GetCategoryStatTemplate	inferred	high	-	Returns g_6995d8[idx] bounded at 0x23 (proposed).
+2026-11-27	GOLDTL.0x0050be50	fcn_0050be50	gm_CollectBuildingComponents	inferred	high	-	Walks building upgrade tree and appends component indices (proposed).
+2026-11-27	GOLDTL.0x00515f30	fcn_00515f30	d3snd_StopSceneObjectSfxVoice	attested	high	-	Checks "sfx_" prefix on scene object name and stops voice via d3snd_StopSourceVoiceSafe (proposed).
+2026-11-27	GOLDTL.0x00528fd0	fcn_00528fd0	d2_RestoreHudPanels	inferred	high	-	Clears draw surface and restores town view and HUD panels (proposed).
+2026-11-27	GOLDTL.0x00533a40	fcn_00533a40	d2_ShowStatusBanner	inferred	high	-	Copies status banner text into g_7e5fc0 and sets g_6a251c timestamp (proposed).
+2026-11-27	GOLDTL.0x00539490	fcn_00539490	d2_StartLocalSessionSetup	inferred	high	-	Clears lobby session slots and starts local session initialization (proposed).
+2026-11-27	GOLDTL.0x00555490	fcn_00555490	gm_FindMatchingSimEntry	inferred	high	-	Scans simulation entity table for matching candidate (proposed).
+2026-11-27	GOLDTL.0x00564f90	fcn_00564f90	he_ResetActionEndTime	inferred	high	-	Copies action start timestamp +0x44 into end timestamp +0x52 (proposed).
+2026-11-27	GOLDTL.0x0057ae40	fcn_0057ae40	he_StartNecromancerFog	inferred	high	-	Registered as handler 0x91 start paired with he_UpdateNecromancerFog (proposed).
+2026-11-27	GOLDTL.0x00584800	fcn_00584800	d2_RenderTutorialDebugInfo	attested	high	-	Renders "Tutorial Framework is not running" and tutorial debug info (proposed).
+2026-11-27	GOLDTL.0x005b1910	fcn_005b1910	gm_NextLCGFloat	inferred	high	-	Advances LCG seed and returns normalized [0,1) float (proposed).
+2026-11-27	GOLDTL.0x005cc520	fcn_005cc520	d2_LayoutDialogItemGrid	inferred	high	-	Centers dialog items vertically in d2_CurrentWindowId and calls d2_EnableDialogItems (proposed).
+2026-11-27	GOLDTL.0x005e2660	fcn_005e2660	d2_RunAdvancedGfxOptionsDialog	attested	high	-	Opens "menu\options_advance_gfx" and applies gamma settings via d3_SetGammaParams (proposed).
+2026-11-27	GOLDTL.0x005e8860	fcn_005e8860	gm_GetNormalizedWeatherStrength	inferred	high	-	Returns d3_ClampNormalizeFloat(g_6ad634) updated by gm_InitWeatherWave/gm_UpdateWeatherWave (proposed).
+2026-11-27	GOLDTL.0x004ac300	fcn_004ac1e0	gm_GetBardEventEntry	inferred	high	-	Looks up entry in 0x664480[0x33] for d2_ShowBardPoemDialog and SpecialEvents\barde\barde_create.esc (proposed).
+2026-11-27	GOLDTL.0x0041a8d0	fcn_0041a8d0	d3_CompareDisplayModes	inferred	high	-	qsort comparator for display modes comparing width, height, and d3_GetFormatBpp (proposed).
+2026-11-27	GOLDTL.0x0042a020	fcn_0042a020	evt_GetLoadAndRunGfxScriptFunc	inferred	high	-	Returns (int)evt_LoadAndRunGfxScript function pointer (proposed).
+2026-11-27	GOLDTL.0x00438a40	fcn_00438a40	d3_GetLastRenderedVertexCount	inferred	high	-	Returns saved vertex count 0x6b8044 snapshotted from d3_RenderedVertexCount (proposed).
+2026-11-27	GOLDTL.0x0044d080	fcn_0044d080	d3_ParseMatBlendMode	attested	high	-	Parses "MIX" (=1) and "ADD" (=2) material blend modes into +0xc0 (proposed).
+2026-11-27	GOLDTL.0x0044de70	fcn_0044de70	d3_ReadFaceMaterialId	inferred	high	-	Reads stream face material ID into mesh context (proposed).
+2026-11-27	GOLDTL.0x00475e20	fcn_00475e20	d2_WriteBmpFile	inferred	high	-	Writes 8-bit paletted Windows BMP file (proposed).
+2026-11-27	GOLDTL.0x004a7710	fcn_004a7710	gm_CountMatchingCardSuits	inferred	high	-	Counts Card_1007ce0 entries matching suit idx (proposed).
+2026-11-27	GOLDTL.0x004ce1a0	fcn_004ce1a0	d3_GetLocalSceneEntry	inferred	high	-	Returns d3_LookupSceneEntry(*(int*)0x9badd0) for local slot (proposed).
+2026-11-27	GOLDTL.0x004f1860	fcn_004f1860	gm_HasActiveCandidateSlot	inferred	high	-	Checks candidate roster capacity in g_6652f8[*a2] (proposed).
+2026-11-27	GOLDTL.0x00532b40	fcn_00532b40	d2_DrawActiveFormLabels	inferred	high	-	Draws active D2_FORM_RECORD +0x230 labels via d2_DrawWordWrappedText (proposed).
+2026-11-27	GOLDTL.0x005530d0	fcn_005530d0	he_StartSchutzgeldDialog	inferred	high	-	Registered as handler 99 start paired with he_RunSchutzgeldDialog (proposed).
+2026-11-27	GOLDTL.0x0058f6a0	fcn_0058f6a0	d2_RunAlternLassenDialog	attested	high	-	Called from GOLDTL.fcn_0058f0a0.c on contact_ALTERN_LASSEN click (proposed).
+2026-11-27	GOLDTL.0x00420210	fcn_00420210	msx_UpdateTracks	inferred	high	-	Updates active msx_Tracks[0..9], fades, and master volume (proposed).
+2026-11-27	GOLDTL.0x004b3490	fcn_004b3490	hst_ShowDueTextScroll	inferred	high	-	Reads hst_ReadDueText and displays d2_CreateScrollPerga modal (proposed).
+2026-11-27	GOLDTL.0x004bf8e0	fcn_004bf8e0	d2_RunRoutingSettingsDialog	attested	high	-	Opens "misc\routing_settings" dialog and configures route waypoints (proposed).
+2026-11-27	GOLDTL.0x004e3de0	fcn_004e3de0	cut_RunAuctionBidDialog	attested	high	-	Opens "cutscenes\pacht" auction bid dialog for cut_RunAuction (proposed).
+2026-11-27	GOLDTL.0x00533bb0	fcn_00533bb0	d2_LayoutCenteredButtonRow	inferred	high	-	Creates centered button row via d2_AddWindowTextButton/d2_MeasureTextWidth/d2_SetElementWidth (proposed).
+2026-11-27	GOLDTL.0x0054f600	fcn_0054f600	he_RunDuellIntro	inferred	high	-	Registered via he_RegisterHandler(70, he_InitDuellIntro, fcn_0054f600) (proposed).
+2026-11-27	GOLDTL.0x0058b030	fcn_0058b030	d2_InitGraveyardSelectionList	inferred	high	-	Adds 4 g_665f58 graveyard selection list icons (proposed).
+2026-11-27	GOLDTL.0x005936f0	fcn_005936f0	d2_RunPlayerEditorDialog	attested	high	-	Opens "Menu\CHOOSEPLAYER" player editor dialog (proposed).
+2026-11-27	GOLDTL.0x005a02b0	fcn_005a02b0	d2_RunMeisterpruefungDialog	attested	high	-	Opens "locations\wohnsitz\meisterpruefung" exam dialog (proposed).
+2026-11-27	GOLDTL.0x005a7200	fcn_005a7200	d2_RunBankContactMenu	attested	high	-	Checks contact_GELDWECHSEL, contact_KREDITE, contact_MEISTERBRIEF, contact_VERMOEGENSUEBERSICHT (proposed).
+2026-11-27	GOLDTL.0x004c8d70	fcn_004c8d70	cm_ExChangeFloat	inferred	high	SERVER.cm_ExChangeFloat	Exact GOLDTL twin of command.c:3548 cm_ExChangeFloat (+m_0x18 at ent+m_0x14); GUARDS command.c
+2026-11-27	GOLDTL.0x004cdb10	fcn_004cdb10	cm_ExAllocAlchemist	attested	high	SERVER.cm_ExAllocAlchemist	Exact GOLDTL twin of command.c:5772/5788 cm_ExAllocAlchemist; GUARDS command.c
+2026-11-27	GOLDTL.0x004cc410	fcn_004cc410	cm_ExAssignOffice	inferred	high	SERVER.cm_ExAssignOffice	Exact GOLDTL twin of command.c:4922 cm_ExAssignOffice; GUARDS command.c
+2026-11-27	GOLDTL.0x00441400	fcn_00441400	d3_RenderFloorTerrain	inferred	high	-	Renders 8x8 floor terrain cell layers with opaque and alpha passes; renamed 3 local types; Cell shared.	src/Develop/Units/d3/GOLDTL.fcn_00441400.c
+2026-11-27	GOLDTL.0x00451df0	fcn_00451df0	d3_RenderPlanarReflections	inferred	high	-	Transforms mirror/water plane into reflection matrices and renders 0x40 subtree with flipped cull.	src/Develop/Units/d3/GOLDTL.fcn_00451df0.c
+2026-11-27	GOLDTL.0x004cf180	fcn_004cf180	cut_UpdateActiveBombs	inferred	high	-	Ticks active bomb slots (0x9ba1c0..0x9ba2c0), spawns smoke/debris/explosion, applies blast damage.	src/Develop/Units/d3/GOLDTL.fcn_004cf180.c
+2026-11-27	GOLDTL.0x004efde0	fcn_004efde0	d3_UpdateCannonProjectiles	inferred	high	-	Steps 8 "kugel" projectiles via gm_ApplyCannonImpact; Sefde0Slot->D3_PROJECTILE_SLOT; shared Sefde0Entry.	src/Develop/Units/d3/GOLDTL.fcn_004efde0.c
+2026-11-27	GOLDTL.0x005982d0	fcn_005982d0	lc_CollectVegetationObjects	attested	high	-	Scene visitor callback collecting up to 32 "vg_" vegetation nodes into LC_OBJECT_LIST for lc_SetVegetationVisible.	src/Develop/Units/d3/GOLDTL.fcn_005982d0.c
+2026-11-27	GOLD.0x00457c80	fcn_00457c80	d3_CollectQuadtreeNode	inferred	high	GOLDTL.0x004545c0	GOLD twin of GOLDTL.0x004545c0 appending enabled scene objects into quadtree ctx list; shared Link.	src/Develop/Units/m_alloc/GOLD.fcn_00457c80.c
+2026-11-27	GOLDTL.0x00401650	fcn_00401650	vfs_LoadBmpBuffer	attested	high	-	Loads 8/24-bit VFS BMP via "!bmp:LoadBMPBuffer" tags, flips rows, quantizes/packs; shared BmpInfoHeader.	src/Develop/Units/m_alloc/GOLDTL.fcn_00401650.c
+2026-11-27	GOLDTL.0x004162c0	fcn_004162c0	d3_DestroySnowEffect	inferred	high	-	Releases texture +0x90 and frees snow emitter buffers/struct on g_7e453c beside d3_DestroyRain.	src/Develop/Units/m_alloc/GOLDTL.fcn_004162c0.c
+2026-11-27	GOLDTL.0x00424130	fcn_00424130	sbs_RemoveSetSamples	inferred	high	-	Removes named sample (or clears all samples) from sbs_FindSet sample bank and subtracts byte sizes.	src/Develop/Units/m_alloc/GOLDTL.fcn_00424130.c
+2026-11-27	GOLDTL.0x0042a120	fcn_0042a120	msx_OpenDigOutput	attested	high	-	Allocates msx_WaveDrivers slot ("sfx_OpenDigOutput"), calls AIL_waveOutOpen, and inits handle arrays.	src/Develop/Units/m_alloc/GOLDTL.fcn_0042a120.c
+2026-11-27	GOLDTL.0x00443030	fcn_00443030	d3_InitSceneLevel	attested	high	-	Initializes Level struct, spawns "MegaCam", and fills lighting slots; shared Vec3/Pal/Slot/Ent/Level.	src/Develop/Units/m_alloc/GOLDTL.fcn_00443030.c
+2026-11-27	GOLDTL.0x0044a9f0	fcn_0044a9f0	d3_GenerateVertexExpandedMesh	attested	high	-	Allocates "d3io:GenerateVertexExpandedMesh(PointRef)" buffers and splits shared vertices by UV seams.	src/Develop/Units/m_alloc/GOLDTL.fcn_0044a9f0.c
+2026-11-27	GOLDTL.0x004524e0	fcn_004524e0	d3_CreateParticleSystem	attested	high	-	Allocates "d3_par:ParticleSystem" emitter, binds texture via d3_LoadTextureSurface, links scene obj.	src/Develop/Units/m_alloc/GOLDTL.fcn_004524e0.c
+2026-11-27	GOLDTL.0x004597f0	fcn_004597f0	d3_RemoveSkyLayer	inferred	high	GOLD.0x0045d7f0	Unlinks sky layer node from +0x24 list, releases texture +0x1c, and frees node for 00459b40.	src/Develop/Units/m_alloc/GOLDTL.fcn_004597f0.c
+2026-11-27	GOLDTL.0x004754b0	fcn_004754b0	d2_GetBMPData	attested	high	-	Reads 8-bit RLE/raw BMP pixels ("gfx:tGetBMPData") with optional vertical flip for d2_LoadBitmap8.	src/Develop/Units/m_alloc/GOLDTL.fcn_004754b0.c
+2026-11-27	GOLDTL.0x00477ae0	fcn_00477ae0	shp_GrabBit24NoRS	attested	high	-	Crops 24-bit bitmap block ("shp_t:GrabBit24NoRS:ShapeHeader"), repaints markers, packs tight shape.	src/Develop/Units/m_alloc/GOLDTL.fcn_00477ae0.c
+2026-11-27	GOLDTL.0x0047ac60	fcn_0047ac60	d2_ReleaseSurfaceGroup	inferred	high	-	Decrements item refcounts, releases zero-ref textures via 00475f80, and frees group; shared Item.	src/Develop/Units/m_alloc/GOLDTL.fcn_0047ac60.c
+2026-11-27	GOLDTL.0x004be1f0	fcn_004be1f0	rt_AllocRoutePoint	attested	high	-	Allocates "rt_point" node and appends up to 8 points for ls_LoadRoutePoints; _node->RT_POINT_NODE.	src/Develop/Units/m_alloc/GOLDTL.fcn_004be1f0.c
+2026-11-27	GOLDTL.0x004e7310	fcn_004e7310	ch_AssertValidCharacterSlot	inferred	high	-	Checks m_is_tracked on character slot and inner +0x34 object for 004e7390 over ch_CharacterSlots.	src/Develop/Units/m_alloc/GOLDTL.fcn_004e7310.c
+2026-11-27	GOLDTL.0x00526db0	fcn_00526db0	d2_InitHudPanels	inferred	high	-	Initializes HUD theme windows, bar surfaces g_774674..g_774684 (paired with d2_DestroyAllHudPanels).	src/Develop/Units/m_alloc/GOLDTL.fcn_00526db0.c
+2026-11-27	GOLDTL.0x005bd820	fcn_005bd820	d2_LoadCityMapImage	attested	high	-	Frees/reloads city map "%sbmp\maps\%s.bmp" into g_774a64 and sets map scale for main_RunGameLoop.	src/Develop/Units/m_alloc/GOLDTL.fcn_005bd820.c
+2026-11-27	GOLDTL.0x00446cd0	fcn_00446cd0	d3_SaveSceneFile	inferred	high	-	Writes scene magic/fog/light slots and objects to VFS stream; _Key->D3_CAM_KEY; _Cam in header.	src/Develop/Units/vfs/GOLDTL.fcn_00446cd0.c
+2026-11-27	GOLDTL.0x004b64b0	fcn_004b64b0	ls_SaveMissionJobs	inferred	high	-	Writes g_6a3440 and 128 mission job records g_10069a0 for ls_SaveGame; shared rec24 out of scope.	src/Develop/Units/vfs/GOLDTL.fcn_004b64b0.c
+2026-11-27	GOLDTL.0x00538790	fcn_00538790	main_ShutdownClientSubsystems	inferred	high	-	Shuts down timer, VFS, validator, allocator, log/error handler, and video at client exit.	src/Develop/Units/vfs/GOLDTL.fcn_00538790.c
+2026-11-27	GOLDTL.0x0055f590	fcn_0055f590	he_StartEventMessagebox	inferred	high	-	Start handler resetting state/+0xec and keeping player kind-6 actions for he_RunEventMessagebox.	src/Develop/DieGildeAddOn/game/GOLDTL.fcn_0055f5c0.c
+2026-11-27	GOLDTL.0x0055f5c0	fcn_0055f5c0	he_RunEventMessagebox	attested	high	-	Runs "misc\EventMessagebox*" handler tick (voice, QJ focus jump, sound cue, cutscene timeout).	src/Develop/DieGildeAddOn/game/GOLDTL.fcn_0055f5c0.c
+2026-11-27	GOLDTL.0x004ac320	fcn_004ac320	gm_CalcBardPoemCost	inferred	high	-	Computes clamped bard poem fee [1600, 16000] if entity can afford it for d2_ShowBardPoemDialog.	src/Develop/DieGildeAddOn/game/spiel_client_004ac.c
+2026-11-27	GOLDTL.0x004ac410	fcn_004ac410	gm_ApplyBardPoemEffect	inferred	high	-	Pays bard fee, sets 0x20000 flag, and applies attribute or favor boost for d2_ShowBardPoemDialog.	src/Develop/DieGildeAddOn/game/spiel_client_004ac.c
+2026-11-27	GOLDTL.0x00423f60	fcn_00423f60	sbs_RenameRootSample	inferred	high	-	Renames sample bank root sample slot looked up by fcn_00423a50.	src/Develop/Unassigned/Unassigned-fcn_family-00423f60_00423f60.c
+2026-11-27	GOLDTL.0x00423f90	fcn_00423f90	sbs_RenameSetSample	inferred	high	-	Iterates sbs_GetFirstSetSample/sbs_GetNextSample in set and overwrites matching sample name.	src/Develop/Unassigned/Unassigned-fcn_family-00423f60_00423f60.c
+2026-11-27	GOLDTL.0x004508a0	fcn_004508a0	d3_UpdateLightFlicker	inferred	high	-	Interpolates noisy light flicker intensity over period; Anim04508a0->D3_FLICKER_ANIM, Obj->OBJ.	src/Develop/Unassigned/Unassigned-fcn_family-004508a0_004508a0.c
+2026-11-27	GOLDTL.0x004509c0	fcn_004509c0	d3_UpdateSceneLightFlickers	inferred	high	-	Iterates g_6b86e8 type-6 scene lights calling d3_UpdateLightFlicker during d3_RenderScene.	src/Develop/Unassigned/Unassigned-fcn_family-004508a0_004508a0.c
+2026-11-27	GOLDTL.0x00475830	fcn_00475830	d2_ReadBmp24Dimensions	inferred	high	-	Reads uncompressed 24-bit BMP header returning (height<<16)|width; shared BmpInfo out of scope.	src/Develop/Unassigned/Unassigned-fcn_family-00475830.c
+2026-11-27	GOLDTL.0x00475c10	fcn_00475c10	d2_LoadBmp24Surface	inferred	high	-	Allocates 24-bit surface, loads BMP pixels via 00475a00; called by d2_LoadCityMapImage; shared.	src/Develop/Unassigned/Unassigned-fcn_family-00475830.c
+2026-11-27	GOLDTL.0x004cf9f0	fcn_004cf9f0	d3_GetObjectEntity	inferred	high	-	Returns entity slot pointer stored at D3_OBJECT+0x204 for combat gear drop/collect.	src/Develop/DieGildeAddOn/game/GOLDTL.fcn_004cf9f0.c
+2026-11-27	GOLDTL.0x004d4790	fcn_004d4790	cut_HandleUnitDefeat	inferred	high	-	Plays "kampf/todumfallen"+"Schmerzschrei", spawns blood, and drops held gear when HP < 5%.	src/Develop/DieGildeAddOn/game/GOLDTL.fcn_004cf9f0.c
+2026-11-27	GOLDTL.0x004d4ee0	fcn_004d4ee0	cut_CollectGroundItem	inferred	high	-	Attaches picked-up ground object +0x180 back to unit +0x1ac and hides subtree (004d8660).	src/Develop/DieGildeAddOn/game/GOLDTL.fcn_004cf9f0.c
+2026-11-27	GOLDTL.0x004cb7f0	fcn_004cb7f0	cm_ExSetGebUpgrade	attested	high	-	Client twin of command.c:4666 cm_ExSetGebUpgrade (already highest level diagnostic); GUARDS command.c.	src/Develop/DieGildeAddOn/game/GOLDTL.fcn_004cb7f0.c
+2026-11-27	GOLDTL.0x004cc450	fcn_004cb910	cm_ExExecuteOffice	attested	high	-	Client twin of command.c:4931 cm_ExExecuteOffice calling amt_ApplyOfficeAssignment; GUARDS command.c.	src/Develop/Unassigned/GOLDTL.fcn_4cc450.c
+2026-11-27	GOLDTL.0x004546e0	fcn_004546e0	d3_ComputeObjectBounds	inferred	high	none	Computes node AABB lo/hi via d3_ComputeNodeBoundsBox for d3_SplitQuadtreeNode
+2026-11-27	GOLDTL.0x004d1ad0	fcn_004d1ad0	d3_SpawnCombatFlagObjects	inferred	high	none	Spawns ub_FLUCHTFLAGGE (sp_ESCAPE) and ub_CONQUER objects at dummy points
+2026-11-27	GOLDTL.0x00514d80	fcn_00514d80	d3_ReparentFackelLights	inferred	high	none	Collects Fackel containers via d3_CollectFackelObjects and reparents rLicht lights; list_514d80 (--type)
+2026-11-27	GOLDTL.0x005a8c30	fcn_005a8c30	d3_FocusObjectAndRunInterior	inferred	high	none	Animates camera onto selected object, runs fcn_0058f700 interior loop, restores camera
+2026-11-27	GOLDTL.0x00416300	fcn_00416300	d3_SetSnowEffectOptions	inferred	high	none	Configures Snow/Flake particle parameters on g_7e453c in d3_UpdateWeatherAndSkyBlend
+2026-11-27	GOLDTL.0x00424270	fcn_00424270	sbs_AddSampleToSet	inferred	high	none	Allocates 0x108 sample entry in sbs_FindSet and updates set/bank byte totals
+2026-11-27	GOLDTL.0x0042a2d0	fcn_0042a2d0	msx_ReleaseWaveDriver	inferred	high	none	Closes wave driver handle via g_6623a8, frees buffers, clears msx_WaveDrivers slot
+2026-11-27	GOLDTL.0x0044b340	fcn_0044b340	d3_LoadTextureSet	attested	high	none	Reads .TXS magic 0x23f209ae with m_alloc tag d3_io:LoadtextureSet
+2026-11-27	GOLDTL.0x00454460	fcn_00454460	d3_CreateParticleEmitter	inferred	high	none	Allocates particle emitter via fcn_004524e0 and copies 0xa4-byte EMITTER_CONFIG
+2026-11-27	GOLDTL.0x004599d0	fcn_004599d0	d3_SetSkyLayerTexture	inferred	high	none	Releases old texture and loads/binds new sky layer texture via d3_LoadOrReuseTexture
+2026-11-27	GOLDTL.0x00465850	fcn_00465850	vfs_EvictOldestCacheEntry	inferred	high	none	LRU-evicts oldest unreferenced VfsEntry in g_772500 and decrements g_772508
+2026-11-27	GOLDTL.0x004757d0	fcn_004757d0	d2_GetBmpBitDepth	inferred	high	none	Reads BMP BITMAPINFOHEADER biBitCount field from offset 14+14
+2026-11-27	GOLDTL.0x00477e70	fcn_00477e70	shp_EncodeSpriteBlock	inferred	high	none	Block-encodes colour-keyed 16-bit sprite rect and writes frame offsets
+2026-11-27	GOLDTL.0x0047acf0	fcn_0047acf0	d2_BuildShapeBank	inferred	high	none	Builds packed shape bank over surfaces and registers it; ShapeRect47acf0/ShapeHeader47acf0 (--type)
+2026-11-27	GOLDTL.0x004c0a10	fcn_004c0a10	d3snd_RemoveActiveVoice	inferred	high	none	Unlinks key from g_772d34 active voice list and frees node; fcn_004c0a10_node (--type)
+2026-11-27	GOLDTL.0x004ed240	fcn_004ed240	ahm_LoadAlchemyDataIni	attested	high	none	Loads alchemy_data.ini player prototypes and ahm_FindObjektByObName entries
+2026-11-27	GOLDTL.0x00527f60	fcn_00527f60	d2_RefreshTownView	inferred	high	none	Tears down/rebuilds town HUD element cache and refreshes label texts
+2026-11-27	GOLDTL.0x0045a9d0	fcn_0045a9d0	d3sm_DrawMeshTriangles	attested	high	none	Transforms d3sm:Points mesh vertices and emits visible triangles; 5 types (--type)
+2026-11-27	GOLDTL.0x00446df0	fcn_00446df0	d3_LoadSceneHeaderAndObjects	inferred	high	none	Reads scene fog, g_1041d80 palette slots, and rd_object list (distinct from d3_LoadScene)
+2026-11-27	GOLDTL.0x004c0740	fcn_004c0740	ls_SaveRoutes	inferred	high	none	Counts and writes rt_CountRoutePoints route nodes for type 0x1d entities in ls_SaveGame
+2026-11-27	GOLDTL.0x00520310	fcn_00520310	ls_SaveMarketsAndSeasons	inferred	high	none	Serializes 5 SEASON_TABLE market tables g_85ab80 and 4 g_868060 season slots in ls_SaveGame
+2026-11-27	GOLDTL.0x0044f010	fcn_0044f010	vfs_SeekFastChunkOffset	inferred	high	none	Scans VFS chunk stream for 0xfab50005 fast chunk and returns offset via fcn_00430c50
+2026-11-27	GOLDTL.0x005e8de0	fcn_005e8de0	d3_CalcParticleSphereMass	inferred	high	none	Computes hemisphere area and sphere volume*density mass for physics particle
+2026-11-27	GOLDTL.0x005e8e80	fcn_005e8e80	d3_SpawnPhysicsParticle	inferred	high	none	Initializes physics Particle velocity, color, origin, mass, area, and tick
+2026-11-27	GOLDTL.0x004bc540	fcn_004bc540	anm_UpdateCat	attested	high	none	Attested string "anm_UpdateCat"; updates ambient cat/dog animation and walk
+2026-11-27	GOLDTL.0x004bc6b0	fcn_004bc6b0	anm_UpdateSheep	attested	high	none	Attested string "anm_UpdateSheep"; updates ambient livestock animation and walk
+2026-11-27	GOLDTL.0x0042b370	fcn_0042b370	txt_FindLabelIndex	attested	high	none	Looks up text label name in g_11cd000 and returns g_14b7320 index
+2026-11-27	GOLDTL.0x0042b3c0	fcn_0042b3c0	txt_GenerateTextIndexHeader	attested	high	none	Parses a_obj.h and a_geb.h to generate f3_textindex.h #define constants
+2026-11-27	GOLDTL.0x00452c60	fcn_00452c60	d3_UpdateDirectedEmitter	inferred	high	none	Emitter update mode 0 integrating particle positions, fade, and retirement; 3 types (--type)
+2026-11-27	GOLDTL.0x00453470	fcn_00453470	d3_UpdateDriftEmitter	inferred	high	none	Emitter update mode 1 spawning random-angle drifting particles and integrating slots
+2026-11-27	GOLDTL.0x00479ed0	fcn_00479ed0	shp_ShowShapeFromBankRle	inferred	medium	none	Sets shape kind 1 (RLE mode in d2_BlitShape) and draws bank entry
+2026-11-27	GOLDTL.0x004b60c0	fcn_004b60c0	d2_DispatchMissionDialog	inferred	high	none	Dispatches mission selection to fcn_004b5b40 when g_6a3440 == 5 or d2_RunMissionDialog
+2026-11-27	GOLDTL.0x004b62c0	fcn_004b62c0	d2_DispatchMissionBriefing	inferred	high	none	Dispatches mission briefing to fcn_004b60e0 when g_6a3440 == 5 or d2_ShowMissionDialog
+2026-11-27	GOLDTL.0x004b6470	fcn_004b6470	d2_HandleMissionTurnEnd	inferred	high	none	Routes active-player vs spectator mission end dialogs or fcn_004b62e0
+2026-11-27	GOLDTL.0x00442d90	fcn_00442d90	d3_ReplaceObjectModel	inferred	high	-	Disposes object draw data/refs and loads/attaches new model; called by ecmd_ReplaceObject.
+2026-11-27	GOLDTL.0x00455240	fcn_00455240	d3_GetObjectEulerRotation	inferred	high	-	Calls d3_ComposeObserverMatrix and d3_MatrixToEulerAngles; called by CreateObjectGroupAtDummy.
+2026-11-27	GOLDTL.0x004d45c0	fcn_004d45c0	cut_RunCombatTickLoop	inferred	high	-	Runs main_RunFrameLoop for dur cut_CurrentTick ticks updating combat hover, effects, and mines.
+2026-11-27	GOLDTL.0x0052b230	fcn_0052b230	d3_UpdateMouseDragCamera	inferred	high	-	Rotates or pans d3_ActiveCamera on mouse-drag deltas and updates d3_CameraTargetRotation.
+2026-11-27	GOLDTL.0x005d04c0	fcn_005d04c0	d3_ShowMapTableTowerMarkers	inferred	high	-	Spawns 4 animated sp_STADTTURM markers between Kartentisch corner dummies until click, then destroys them.
+2026-11-27	GOLD.0x0040f5d0	fcn_0040f5d0	evt_SetEmitterFlags	attested	high	GOLDTL.0x004104e0	Attested GOLD registrar binds SetEmitterFlags (0x5f2d80); evt_ avoids GOLDTL collision.
+2026-11-27	GOLD.0x0045d7f0	fcn_0045d7f0	d3_UnlinkSkyLayer	inferred	high	GOLDTL.0x004597f0	Unlinks sky node from owner+0xac0, releases scene ref, frees node; called by d3_DestroySky.
+2026-11-27	GOLDTL.0x004090d0	fcn_004090d0	ch_BuildWalkPathBuffer	inferred	high	-	Projects walk target via FindPath/ch_DownsamplePath and allocates 'ch_t:waypoints' path buffer.
+2026-11-27	GOLDTL.0x0041a2c0	fcn_0041a2c0	d3_RemoveDisplayAdapter	inferred	high	-	Frees DISPLAY_ADAPTER_INFO slot and compacts g_6b5dd0; called by d3_ClearDisplayAdapterList.
+2026-11-27	GOLDTL.0x00424420	fcn_00424420	sbs_AddSample	attested	high	-	Attested alloc tag 0x679000 'sbs_AddSample'; registers 0x108-byte sample node in sbs_BankManager.
+2026-11-27	GOLDTL.0x0042dfb0	fcn_0042dfb0	tr_AllocTraceBuffer	attested	medium	-	Alloc tag 0x679e54 'tr_startup' allocates count*0x84 trace buffer g_6b7fd8; called by main_InitRuntime.
+2026-11-27	GOLDTL.0x0043bcf0	fcn_0043bcf0	d3_ReleaseRenderDeviceContext	inferred	high	-	Releases g_6b8300 textures, D3D interface blocks, and node pools; called by d3_Shutdown.
+2026-11-27	GOLDTL.0x00449ba0	fcn_00449ba0	d3_AttachModelPart	inferred	high	-	Attaches cached Stock-Object model part and binds textures ('d3_io:CurTexSet'); called by fcn_00449f90.
+2026-11-27	GOLDTL.0x0044c0e0	fcn_0044c0e0	d3_LoadCachedModel	inferred	high	-	Loads .bgf/.agf model into g_1042efc cache with bounds/release callbacks; called by d3_AcquireModel/d3_LoadModel.
+2026-11-27	GOLDTL.0x00454560	fcn_00454560	d3_FreeQuadtreeNode	inferred	high	-	Recursively frees quadtree child nodes and g_6b89a4/g_6b89a0 payloads; called by d3_PopulateQuadtreeNode.
+2026-11-27	GOLDTL.0x00459ae0	fcn_00459ae0	d3_CreateSky	attested	high	-	Attested alloc tag 0x67bcd8 'd3_sky:Create'; creates sky dome buffers/normals; called by d3_InitSkyLayer.
+2026-11-27	GOLDTL.0x00465c60	fcn_00465c60	vfs_ShutdownResources	inferred	high	-	Tears down anim tracks, VfsEntry table g_772500, VFS archives, vertex buffers, and tracked allocations.
+2026-11-27	GOLDTL.0x00475a00	fcn_00475a00	d2_LoadBmpToSurface	inferred	high	-	Loads 24-bit uncompressed BMP into 32-bit Surface with black color-key; called by fcn_00475c10.
+2026-11-27	GOLDTL.0x004788b0	fcn_004788b0	shp_CreateSpriteFromSurface	inferred	high	-	Dispatches 8/16/24-bit sprite grabbers on Surf*; called by sim_LoadBmpShape (sim.c:860).
+2026-11-27	GOLDTL.0x0047b5d0	fcn_0047b5d0	d2_FreeAnimTrackList	inferred	high	-	Frees anim track list elements via fcn_0047ac60 and frees list; called by vfs_ShutdownResources.
+2026-11-27	GOLDTL.0x004c0a80	fcn_004c0a80	d3snd_TrackQueuedVoice	attested	medium	-	Alloc tag 0x689d24 'f3snd: snd_AddToQueue'; tracks active voice node in g_772d34 for d3snd_QueueSound.
+2026-11-27	GOLDTL.0x004edce0	fcn_004edce0	ahm_FreeAlchemyPrototypes	inferred	high	-	Frees g_772fdc player and g_772fe4 recipe prototype arrays and zeroes counts; called at shutdown.
+2026-11-27	GOLDTL.0x00534c40	fcn_00534c40	d2_OpenJournalBook	attested	high	GOLD.0x0052f390	Attested tag 0x6a3180 'f3_sv:OpenBook:b'; GOLDTL twin of d2_OpenBook (taken in GOLD.fcn_0052f390.c).
+2026-11-27	GOLDTL.0x0044b200	fcn_0044b200	d3_WriteTxsFile	inferred	high	-	Replaces .bgf suffix with .TXS and writes magic 0x23f209ae grid dimensions and tile names.
+2026-11-27	GOLDTL.0x004ed800	fcn_004ed800	ahm_LoadAlchemyData	inferred	high	-	Reads /gamedata/ai/alchemy.dfn ('RmHa' magic) into g_772fdc and g_772fe4 prototypes.
+2026-11-27	GOLDTL.0x005208e0	fcn_005208e0	ls_SaveCityStatsAndCrimeGrid	inferred	high	-	Writes city stats ring g_99ec20 and CRIME_GRID_CELL g_99ef80[9][8] to stream; called by ls_SaveGame.
+2026-11-27	GOLDTL.0x0042d630	fcn_0042d630	txt_FindTextBank	inferred	high	-	Searches loaded txt_TextBanks[0..127] by bank name; called by txt_ReloadTextFile/txt_ReleaseTextBank.
+2026-11-27	GOLDTL.0x004aaa60	fcn_004aaa60	aip_ExecPamphlet	attested	high	-	Attested AI string 0x67fb2c 'aip_ExecPamphlet'; called by ai_RunPamphlete (GOLDTL.fcn_0049ccb0.c).
+2026-11-27	GOLDTL.0x004aab30	fcn_004aab30	aip_ExecDrohen	attested	high	-	Attested AI string 0x67fb40 'aip_ExecDrohen'; runs skill duel and deducts health; called by ai_RunDrohen.
+2026-11-27	GOLDTL.0x004f25a0	fcn_004f25a0	gv_RentGravePlot	inferred	high	-	Checks category 0x1d graveyard slot via gv_IsGraveSlotFree, transfers goods, notifies he_NotifyFriedhofEvent08.
+2026-11-27	GOLDTL.0x004f45b0	fcn_004f45b0	gm_CalcScaledWealthValue	inferred	high	-	Clamps entity wealth to [10000..100000], computes log-scaled fee via fcn_0050b750; called by he_RunDeathPact.
+2026-11-27	GOLDTL.0x00436df0	fcn_00436df0	d3_SetViewportAndProjection	inferred	high	-	Caches params and applies D3D SetViewport and SetTransform perspective matrix; called by fcn_00438da0.
+2026-11-27	GOLDTL.0x00436f70	fcn_00436f70	d3_SetFogEnabled	inferred	high	-	Toggles g_6b7ff9 and D3D fog render state when cap bit set; called by d3_CloseBookPagerDialog etc.
+2026-11-27	GOLDTL.0x00456590	fcn_00456590	d3_BindShadowMapTexture	inferred	high	-	Binds or recreates texture slot Tex* when dimensions/owner change; called by fcn_00456630.
+2026-11-27	GOLDTL.0x00456630	fcn_00456630	d3_AcquireCachedShadowTexture	inferred	high	-	LRU allocator over g_6b89b4[g_6b89a8] shadow texture slots calling fcn_00456590; called by fcn_00457290.
+2026-11-27	GOLD.0x00519ad0	fcn_00519ad0	ls_ResolveSavedSceneRefs	inferred	high	GOLDTL.0x0051ea70	GOLD twin of ls_RebindSavedSceneRefs; resolves lpGebaeudeINST and g_f31161 refs.
+2026-11-27	GOLD.0x00519b80	fcn_00519b80	ls_SaveSceneWithBuildingIds	inferred	high	GOLDTL.0x0051eb20	Saves building IDs around fcn_0044aa10 (GOLD d3_SaveScene), then restores pointers.
+2026-11-27	GOLDTL.0x004bcab0	fcn_004bcab0	anm_QueueAnimalModel	inferred	high	-	Acquires animal model via d3_AcquireModel and appends unique entry to g_1006920[g_7728f4++]; called 7x by 0x4bcb20.
+2026-11-27	GOLDTL.0x004bcae0	fcn_004bcae0	anm_SpawnQueuedAnimals	inferred	high	-	Calls gv_SpawnIfPending across g_1006920 slots and clears entries; called by fcn_004bcb20.
+2026-11-27	GOLDTL.0x004bcb20	fcn_004bcb20	anm_QueueDefaultAnimalModels	inferred	high	-	Flushes queued slots via fcn_004bcae0 then queues 7 animal models (hund, katze, kuh, pferd, schaf, schwein).
+2026-11-27	GOLDTL.0x004cc590	fcn_004cc590	cm_ExAllocCharacter	attested	high	SERVER	Client twin of cm_ExAllocCharacter (command.c:4943, slot 0x68ab04, cmd 0x49); added command.c to GUARDS.txt.
+2026-11-27	GOLD.0x004c67a0	fcn_004c67a0	cm_ValidateGeneric	inferred	high	SERVER	GOLD twin of cm_ValidateGeneric (command.c:1438, .data:0x60c034); added command.c to GUARDS.txt.
+2026-11-27	GOLDTL.0x0050a7e0	fcn_0050a7e0	gm_AllocSpieler	attested	high	SERVER	Client twin of gm_AllocSpieler (spiel.c:5375); calls amt_InitRulerEntity; added spiel.c to GUARDS.txt.
+2026-11-27	GOLDTL.0x004c9160	fcn_004c9160	cm_ExCopyEntityData	attested	high	SERVER	Client twin of cm_ExCopyEntityData (command.c:3612, .data:0x68aa50, cmd 0x1c); added command.c to GUARDS.txt.
+2026-11-27	GOLDTL.0x004c0cd0	fcn_004c0cd0	d3snd_UpdateRainSoundTier	inferred	high	-	Updates rain loop voice volume/playback by weather tier; caller GOLDTL.fcn_005373e0.c:338.
+2026-11-27	GOLDTL.0x004d4700	fcn_004d4700	ch_RunDeathFallAction	inferred	high	-	Queued action callback for Koerperfaellt sound and ub_Blutlache spawn (004cf9f0:41).
+2026-11-27	GOLDTL.0x0052dd80	fcn_0052dd80	d3_DestroyEntityWimpelNodes	inferred	high	GOLD.0x005286e0	Shared definition removing/destroying entity wimpel nodes (d3_RefreshBuildingPennants).
+2026-11-27	GOLD.0x00438780	fcn_00438780	d3d_EndScene	attested	high	-	Calls d3d_Device->lpVtbl->EndScene(d3d_Device) with diagnostic string.
+2026-11-27	GOLD.0x0040f690	fcn_0040f690	evt_SetEmitterInitFill	inferred	high	GOLDTL.0x004105a0	Sets particle emitter b5 fill flag; GOLD twin of SetEmitterInitFill.
+2026-11-27	GOLD.0x004bb810	fcn_004bb810	anm_InitAnimalArray	inferred	high	-	Allocates 0x2480 animal array into g_6f0738 with tag "anm:animals" (0x602768).
+2026-11-27	GOLDTL.0x004094c0	fcn_004094c0	ch_BuildWalkPath	inferred	high	-	Builds A* world walk path via FindPath and ch_DownsamplePath (ch_WalkOnPath:99).
+2026-11-27	GOLDTL.0x0041bb70	fcn_0041bb70	gfx_UnpackPixelRgb	inferred	high	-	Unpacks RGB565/X1R5G5B5/RGB32 pixel into R/G/B bytes (0051e490, 005e3ed0).
+2026-11-27	GOLDTL.0x004245b0	fcn_004245b0	sbs_UnloadSoundBanks	inferred	high	-	Unlinks and frees sound bank entries from sbs_BankManager+0x38 for sbs_DestroySB.
+2026-11-27	GOLDTL.0x0042e0e0	fcn_0042e0e0	tr_FreeStartupBuffer	inferred	high	-	Frees g_6b7fd8 ("tr_startup" buffer allocated by 0042dfb0) during shutdown 00538790.
+2026-11-27	GOLDTL.0x0043f6b0	fcn_0043f6b0	d3_InitFloorGrid	inferred	high	-	Allocates d3_fl Divide/TexUVs buffers, initializes 8x8 floor grid and builds geometry.
+2026-11-27	GOLDTL.0x00449f90	fcn_00449f90	d3_AttachCachedModelParts	inferred	high	-	Attaches cached LOD and extra parts via d3_FindCachedModel and fcn_00449ba0.
+2026-11-27	GOLDTL.0x00450a30	fcn_00450a30	d3_InitLightBuffers	inferred	high	-	Builds LUT and allocates "d3l:ActiveLights" and "d3l:LightList" buffers.
+2026-11-27	GOLDTL.0x004545c0	fcn_004545c0	d3_CollectActiveMeshObjects	inferred	high	GOLD.0x00457c80	Appends active mesh Link nodes in bounds for d3_CollectObjectsInBounds.
+2026-11-27	GOLDTL.0x00459b40	fcn_00459b40	d3_FreeSkyDome	inferred	high	-	Releases sky dome subnodes (004597f0), d3_ReleaseSkyDomeBuffers, and m_FreeTracked.
+2026-11-27	GOLDTL.0x0046fcd0	fcn_0046fcd0	d2_CreateShowTxtElement	inferred	high	-	Allocates kind 0x43 text widget with 0x101-byte buffer tagged "d2:ShowTxt".
+2026-11-27	GOLDTL.0x00475f80	fcn_00475f80	d2_ReleaseSurface	inferred	high	GOLD.0x00478fb0	Unlocks surface, releases COM pointers, and frees struct (GOLD d2_DestroySurface twin).
+2026-11-27	GOLDTL.0x00479660	fcn_00479660	d2_ConvertShapeBankTo16	inferred	high	-	Converts 8-bit/mode-2 shape bank into 16-bit shape bank via shp_ConvertTo16.
+2026-11-27	GOLDTL.0x0047b640	fcn_0047b640	d2_CreateTiledSurface	inferred	high	-	Splits Img into tile x tile Tex surfaces and uploads via d2_UpdateTextureBytes.
+2026-11-27	GOLDTL.0x004c0b40	fcn_004c0b40	d3snd_UpdateVoiceQueue	inferred	high	-	Advances g_772d34 voice queue and frees finished nodes (005373e0:342).
+2026-11-27	GOLDTL.0x00513d40	fcn_00513d40	d3_PlaceBuildingProxyBoxes	inferred	high	-	Replaces "bk_*" / "!bk_*" building proxy placeholders in gm_LoadCityMap.
+2026-11-27	GOLDTL.0x00535ec0	fcn_00535ec0	d2_DispatchDebugHotkey	inferred	high	-	Dispatches debug DirectInput scancode actions on g_14cf950 (005365d0).
+2026-11-27	GOLDTL.0x00401360	fcn_00401360	vfs_WriteInt	inferred	high	-	Writes 4-byte integer via vfs_fwrite (distinct from vfs_WriteDword/vfs_WriteInt32).
+2026-11-27	GOLDTL.0x0044d770	fcn_0044d770	vfs_ReadStreamToken	inferred	high	-	Reads 1-byte token (0..0x3a, 0x2b EOF, 0x27 error) for d3_LoadBinaryAnimStream.
+2026-11-27	GOLDTL.0x004f49e0	fcn_004f49e0	ls_SaveCrimeRecords	inferred	high	-	Writes cm_LastCrimeId, g_68ff80, g_9a3800 and g_99f800 for ls_SaveGame.
+2026-11-27	GOLDTL.0x00520d80	fcn_00520d80	ls_SaveAvatarStatesThunk	inferred	high	-	Wrapper forwarding ls_SaveGame call (0051e080:112) to ls_SaveAvatarStates.
+2026-11-27	GOLDTL.0x00497990	fcn_00497990	ai_StartWohnsitzKaufen	attested	high	-	Registered as d.start for method 0x10 "Wohnsitz kaufen" at GOLDTL.fcn_004a1130.c:659.
+2026-11-27	GOLDTL.0x00497e60	fcn_00497e60	ai_RunWohnsitzKaufen	attested	high	-	Registered as d.run for method 0x10 "Wohnsitz kaufen" at GOLDTL.fcn_004a1130.c:660.
+2026-11-27	GOLDTL.0x00445680	fcn_00445680	d3_FindSceneObjectMatchCallback	inferred	high	-	d3_VisitSceneObjects callback matching optional '!', ptr, and name for 004456e0.
+2026-11-27	GOLDTL.0x004456e0	fcn_004456e0	d3_FindSceneObjectByPtrOrName	inferred	high	-	Finds scene object under g_67a370 via 00445680 (GOLDTL.cm_ExChrGotoBuilding.c).
+2026-11-27	GOLDTL.0x00456b10	fcn_00456b10	d3_ReleaseMeshSlotTextures	inferred	high	-	Releases texture and COM +0x80/+0x84 interfaces on mesh zusatz slot (d3_object.c:115).
+2026-11-27	GOLDTL.0x00456c10	fcn_00456c10	d3_ReleaseAllShadowTextures	inferred	high	-	Releases g_1040610 shadow texture COM slots up to g_10405fc before d3_AllocShadowTextures.
+2026-11-27	GOLD.0x00428ce0	fcn_00428ce0	evt_SetScriptFlowFlag1	inferred	high	GOLDTL.0x00427570	Sets *(evt_CurrentScript+0xc84)=1; GOLD twin of evt_SetScriptFlowState1.
+2026-11-27	GOLD.0x00428cf0	fcn_00428cf0	evt_SetScriptFlowFlag2	inferred	high	GOLDTL.0x00427580	Sets *(evt_CurrentScript+0xc84)=2; GOLD twin of evt_SetScriptFlowState2.
+2026-11-27	GOLDTL.0x004125c0	fcn_004125c0	io_SetMouseCursorPos	inferred	high	-	Clamps/sets g_14ce8c0/g_14ce8c2 cursor coords and calls SetCursorPos.
+2026-11-27	GOLDTL.0x00412610	fcn_00412610	io_ResetInputToCursor	inferred	high	-	Copies g_14cf900 cursor snapshot into g_14ce8c0.
+2026-11-27	GOLDTL.0x00412630	fcn_00412630	io_PopQueuedInputState	inferred	high	-	Pops next 0x4c-byte input snapshot from g_14ce986[32] (GOLDTL.main_Menue.c:106).
+2026-11-27	GOLDTL.0x00493000	fcn_00493000	gm_UpdateBlackjackState	inferred	high	-	Advances 17-and-4 blackjack state machine for d2_ShowWirtshausDialog (ai_EvalBlackjackAction).
+2026-11-27	GOLDTL.0x004ac2c0	fcn_004ac2c0	d2_GetBardPoemTextId	inferred	high	-	Returns clamped bard poem text ID (0x1e2b/0x1e35 + v) for d2_ShowBardPoemDialog (special\barde).
+2026-11-27	GOLDTL.0x004b3d80	fcn_004b3d80	gm_AllocRandomMissionJob	inferred	high	-	Picks random mission entry via fcn_004b3db0 and passes to gm_AllocMissionJob (ls_StartNetworkGame).
+2026-11-27	GOLDTL.0x004be520	fcn_004be520	d2_PollRadioSlotControl	inferred	high	-	Calls d2_GetControlValue(*p) on D2_RADIO_SLOT entries for GOLDTL.fcn_004be530.c.
+2026-11-27	GOLDTL.0x004c6090	fcn_004c6090	cm_RequestAssignWorker	inferred	high	-	Enqueues cmd 0x3d (0x4cbde0) creating/assigning worker citizen and residence to building.
+2026-11-27	GOLDTL.0x004ce210	fcn_004ce210	lb_RequestToggleReady	inferred	high	-	Enqueues lobby cmd 0x5f (lb_DispatchLobbyCommand) from d2_RunNetLobbySetup ready toggle.
+2026-11-27	GOLDTL.0x004d1cf0	fcn_004d1cf0	d3_CollectCombatArenaMarkers	inferred	high	-	Traverses scene 0x67a370 with fcn_004d1ad0 collecting dummy_sp_ESCAPE/dummy_CONQUER markers.
+2026-11-27	GOLDTL.0x004ee160	fcn_004ee160	ahm_CalcWorkshopOutputScore	inferred	high	-	Sums alchemy workshop recipe & squared essence output for gm_CalcBuildingRoundBalance.
+2026-11-27	GOLDTL.0x004f1890	fcn_004f1890	gm_MatchSlotEntryId	inferred	high	-	FindSlotEntryFiltered predicate comparing 0x44-stride entry ID against needle (0x4f1a10).
+2026-11-27	GOLDTL.0x004f6810	fcn_004f6810	gm_ValidateProzessCharge	inferred	high	-	Validates trial charge kind (<10) and entity prereqs for cutscenes\prozess (0x4df1b0).
+2026-11-27	GOLDTL.0x004f99d0	fcn_004f99d0	gm_DispatchCourtTrialAction	inferred	high	-	Action table .data:0x690528 handler invoking court trial accusation fcn_005da820/gs_StartCourtTrial.
+2026-11-27	GOLDTL.0x004fc3a0	fcn_004fc3a0	gm_CalcWeightedLawFactor	inferred	high	-	Sums 12 weighted gm_GetLawEntry(0x11..0x1c) entries for GOLDTL.fcn_004faed0.c:160.
+2026-11-27	GOLDTL.0x00504ef0	fcn_00504ef0	gm_FindBuildingPrototypesByCategory	inferred	high	-	Collects lpGebaeudePROT indices matching category into out[] (0x504f30).
+2026-11-27	GOLDTL.0x0050bbb0	fcn_0050bbb0	gm_CalcLevelProductionBonus	inferred	high	-	Computes ENTITY_RECORD_VIEW levels[0] production multiplier (v/1008+1 above 42) for 0x5af320/0x5ba910.
+2026-11-27	GOLDTL.0x00515ef0	fcn_00515ef0	d3_InitGateNodeFlags	inferred	high	-	d3_TraverseSceneObjects callback flagging "gate" scene nodes at +0x214/+0x224 (0x5167c0).
+2026-11-27	GOLDTL.0x00527240	fcn_00527240	d2_IsHudOverlayControl	inferred	high	-	Returns 1 if x matches one of the 10 HUD overlay widget handles g_6a2578..g_6a25a4.
+2026-11-27	GOLDTL.0x005338a0	fcn_005338a0	d2_ClearStatusTextSlots	inferred	high	-	Clears 0x7e46c0..0x7e5fc0 hover status text slots and resets +0x224 hover flags (lc_location.c).
+2026-11-27	GOLDTL.0x00551210	fcn_00551210	he_StartPeriodicStipend	inferred	high	-	Action 91 starter paired with he_RunPeriodicStipend in GOLDTL.fcn_0055b3e0.c:214.
+2026-11-27	GOLDTL.0x005779c0	fcn_005779c0	gm_HasMatchingLawEntry	inferred	high	-	Returns gm_FindMatchingLawEntry(a) >= 0.
+2026-11-27	GOLDTL.0x00584160	fcn_00584160	d2_UpdateTutorialArrow	inferred	high	-	Shows/animates/hides tutorial Bezier guide arrow using d2_EvalCubicBezier2D (0x57e0a0).
+2026-11-27	GOLDTL.0x005b18c0	fcn_005b18c0	d2_DestroyMapDialog	inferred	high	-	Destroys map dialog form and up to 0x300 child handles (0x5bdc30, 0x4bfe00).
+2026-11-27	GOLDTL.0x005cc320	fcn_005cc320	d2_LayoutDynastyCandidateList	inferred	high	-	Table 0x6ac8b8 layout paired with d2_CollectDynastyCandidates (0x5cb440).
+2026-11-27	GOLDTL.0x005e12d0	fcn_005e12d0	io_SaveIniSettings	attested	high	-	Saves Gfx/Sound/Game INI settings via WritePrivateProfileStringA (counterpart to io_LoadIniSettings).
+2026-11-27	GOLDTL.0x005e8850	fcn_005e8850	d3_GetDefaultParticleColor	inferred	high	-	Returns &g_6ad628 default RGBA color for particle init (0x5e8e80, 0x587a50).
+2026-11-27	GOLDTL.0x005886f0	fcn_00580070	d2_CalcKanoneProgress	inferred	high	-	Normalizes cannon progress slider ratio (panel[4]-min)/(max-min) for 0x588200.
+2026-11-27	GOLDTL.0x00417570	fcn_00417570	d3_UpdateParticleEmitter	inferred	high	-	Updates 0x54-stride emitter particles (velocity, position, fade, respawn).
+2026-11-27	GOLDTL.0x004287c0	fcn_004287c0	evt_RequestAllScriptsExit	inferred	high	-	Iterates g_6b7e94 script slots calling evt_RequestScriptExit on active scripts.
+2026-11-27	GOLDTL.0x0044cf20	fcn_0044cf20	d3_ParseMatDone	attested	high	-	ASCII material parser 0x67b240 *DONE* token handler incrementing material index.
+2026-11-27	GOLDTL.0x0044dcf0	fcn_0044dcf0	d3_ReadNumMaterials	attested	high	-	Binary .B material parser 0x67b728 tok=0x04 (NUM_MATERIALS) allocating 224B slots.
+2026-11-27	GOLDTL.0x00472fe0	fcn_00472fe0	d2_DrawSpriteClipped	inferred	high	-	Sets clip rect and calls d2_DrawSpriteFromSet; local type fcn_00472fe0_Ctx->D2_CLIP_RECT_CTX.
+2026-11-27	GOLDTL.0x004a71a0	fcn_004a71a0	gm_FindCardTwoPair	inferred	high	-	Finds two distinct card pairs via gm_FindCardPair and gm_FindCardRankGroup.
+2026-11-27	GOLDTL.0x004ce180	fcn_004ce180	lb_GetPlayerList	inferred	high	-	Returns &g_9baa20 lobby player list for 0x5934d0/0x5926f0.
+2026-11-27	GOLDTL.0x004f0e10	fcn_004f0e10	gm_SetSlot170Flag	inferred	high	-	Looks up Slot170 entry via gm_FindSlot170Entry and sets +0x14 flag to 0/1.
+2026-11-27	GOLDTL.0x004fb390	fcn_004fb390	gm_UpdateEconomyStats	inferred	high	-	Collects occupancy stats, computes EMA/slope and sends cm_RequestUpdateEconomyStats.
+2026-11-27	GOLDTL.0x005512f0	fcn_005512f0	he_StartPeriodicApDrain	inferred	high	-	Action 92 starter paired with he_RunPeriodicApDrain in GOLDTL.fcn_0055b3e0.c:217.
+2026-11-27	GOLDTL.0x0057f2e0	fcn_0057f2e0	d2_InitTutCh2GildeStep	inferred	high	-	Tutorial Ch2 step init callback searching cat 1,5,10 building and calling d2_EnterBuildingObjekt.
+2026-11-27	GOLDTL.0x004bf000	fcn_004bf000	d2_CreateRouteWareSlot	inferred	high	-	Adds value gauge and field for trade route ware slot (GOLDTL.fcn_004bf1b0.c).
+2026-11-27	GOLDTL.0x004e2090	fcn_004e2090	cut_PlayHochzeitCutscene	attested	high	-	Plays wedding cutscene (HOCHZEIT_NEU.sbf/cutscenes\hochzeit) in he_consolidated.c:49.
+2026-11-27	GOLDTL.0x0052ea30	fcn_0052ea30	d2_UpdateSelectionPanel	inferred	high	-	Updates bottom HUD selection panel g_6a25b8 and d2_CurrentValueBar for GOLDTL.fcn_0052f7b0.c.
+2026-11-27	GOLDTL.0x00545780	fcn_00545780	d2_CloseActionPopup	inferred	high	-	Destroys active D2_ACTION_POPUP_SLOT in g_77e8c0[16] and shifts remaining popups (0x550980).
+2026-11-27	GOLDTL.0x00588200	fcn_00588200	d2_UpdateKanoneDialog	inferred	high	-	Updates cannon volley controls, limits, cost and labels in d2_SwitchKanoneMode (0x588710).
+2026-11-27	GOLDTL.0x00593360	fcn_00593360	d2_DrawNetLobbyPlayerInfo	inferred	high	-	Renders player coat of arms, name, rank & religion in d2_RunNetLobbySetup (0x5926f0).
+2026-11-27	GOLDTL.0x0059fa80	fcn_0059fa80	d2_RunGeliebteDetailDialog	inferred	high	-	Runs locations\wohnsitz\geliebte2 interaction dialog (GOLDTL.fcn_0059fe60.c).
+2026-11-27	GOLDTL.0x005a66b0	fcn_005a66b0	d2_ConfirmExchangeGoods	inferred	high	-	Confirms ware exchange in d2_RunGeldleiheWechselDialog; local type Row5a66->D2_GOODS_PROTO_ROW.
+2026-11-27	GOLDTL.0x005bdc30	fcn_005bdc30	d2_RunCityScrollMapDialog	inferred	high	-	Runs MsgCtx city scroll-map dialog (d2_BuildCityScrollMap/d2_UpdateCityScrollMap).

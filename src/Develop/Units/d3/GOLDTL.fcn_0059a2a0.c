@@ -13,7 +13,7 @@ extern char g_14cf950;
 extern int g_7e35c0[];
 
 void __cdecl d2_RunWorldHudLoop(void);
-void __cdecl fcn_0057e880(int, int, int, int);
+void __cdecl d2_DispatchTutorialInput(int, int, int, int);
 #include "client_scene_transform.h"
 void __cdecl d3_AnimateObjectTransform(char*, float*, float*, int, int);
 
@@ -23,7 +23,7 @@ void __cdecl d3_HandleCameraLevelKey(void)
 	float x;
 
 	if (g_14cf950 == '1' && d3_ActiveCamera != 0 && ((Mode59a2*)g_7e35c0)[g_774650].fn == (void*) d2_RunWorldHudLoop) {
-		fcn_0057e880(0x16, 0, 0, 0);
+		d2_DispatchTutorialInput(0x16, 0, 0, 0);
 		x = *(float*) (d3_ActiveCamera + 0x84);
 		v[0] = x;
 		v[1] = 0;

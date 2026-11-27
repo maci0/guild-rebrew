@@ -1,7 +1,7 @@
 int __cdecl m_is_tracked(void* p);
 
 /* ADDRESS: GOLDTL 0x004e7310 */
-void __cdecl fcn_004e7310(char* p)
+void __cdecl ch_AssertValidCharacterSlot(char* p)
 {
 	char* inner;
 

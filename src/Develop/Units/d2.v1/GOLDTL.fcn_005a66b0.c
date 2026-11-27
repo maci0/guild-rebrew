@@ -12,7 +12,7 @@
 
 typedef struct {
 	char b[0x2f4];
-} Row5a66;
+} D2_GOODS_PROTO_ROW;
 // SIZE 0x2f4
 
 
@@ -34,7 +34,7 @@ int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 void __cdecl cm_SendCopyEntityData(char*);
 void __cdecl d2_DestroyForm(int);
 
-int __cdecl fcn_005a66b0(char* who, int n, int w, unsigned char k)
+int __cdecl d2_ConfirmExchangeGoods(char* who, int n, int w, unsigned char k)
 {
 	int res;
 	int h;
@@ -47,8 +47,8 @@ int __cdecl fcn_005a66b0(char* who, int n, int w, unsigned char k)
 	h = d2_LoadForm(0, 0, g_6aacdc);
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 1);
-	io_AppendText(0x1909, w, n * 2 + 0x9a8, &((Row5a66*)g_868060)[k], k);
-	if (main_RunFrameLoop(fcn_005a66b0, 0x677c7) != 0) {
+	io_AppendText(0x1909, w, n * 2 + 0x9a8, &((D2_GOODS_PROTO_ROW*)g_868060)[k], k);
+	if (main_RunFrameLoop(d2_ConfirmExchangeGoods, 0x677c7) != 0) {
 		do {
 			if (g_14ce8e0 != 0 || g_100f1dc == 1) {
 				g_774654 = 1;
@@ -76,7 +76,7 @@ int __cdecl fcn_005a66b0(char* who, int n, int w, unsigned char k)
 			} else if (g_100f1dc == 1) {
 				g_774654 = 1;
 			}
-		} while (main_RunFrameLoop(fcn_005a66b0, 0x677c7) != 0);
+		} while (main_RunFrameLoop(d2_ConfirmExchangeGoods, 0x677c7) != 0);
 	}
 	d2_DestroyForm(h);
 	return res;

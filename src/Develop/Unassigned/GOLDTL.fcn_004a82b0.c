@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-int __cdecl fcn_004a8070(int, int*, int*, int*, int*);
+int __cdecl gm_EvaluateCardHand(int, int*, int*, int*, int*);
 int __cdecl gm_GetHighestCard(int*, int);
 
 /* ADDRESS: GOLDTL 0x004a82b0 */
@@ -21,7 +21,7 @@ int __cdecl gm_ResolveCardGameWinner(void)
 	tbl = g_1007cd4;
 	for (i = 0; i < 3; i++) {
 		if (*(int*) (tbl + i * 0x34 + 0x2c) < 0) {
-			res[i] = fcn_004a8070(i, &a[i], &c[i], &b[i], &d[i]);
+			res[i] = gm_EvaluateCardHand(i, &a[i], &c[i], &b[i], &d[i]);
 			*(int*) (tbl + i * 0x34 + 0x34) = res[i];
 			tbl = g_1007cd4;
 		} else {

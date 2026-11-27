@@ -7,7 +7,7 @@ extern int g_77250c;
 void __cdecl d2_SelectFont(int);
 void __cdecl d2_DrawWordWrappedText(int, int, int, int, int, char*, int);
 
-void __cdecl fcn_005337a0(void)
+void __cdecl d2_DrawMouseTooltip(void)
 {
 	if (g_100f8c0[0] != 0 && g_7766ba != 0) {
 		d2_SelectFont(0x54);

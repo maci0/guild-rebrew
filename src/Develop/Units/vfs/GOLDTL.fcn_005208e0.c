@@ -6,7 +6,7 @@ extern GRAPH_SAMPLE g_99ec20[16];
 extern CRIME_GRID_CELL g_99ef80[9][8];
 
 /* ADDRESS: GOLDTL 0x005208e0 */
-int __cdecl fcn_005208e0(char* fp)
+int __cdecl ls_SaveCityStatsAndCrimeGrid(char* fp)
 {
 	int i;
 	int r;

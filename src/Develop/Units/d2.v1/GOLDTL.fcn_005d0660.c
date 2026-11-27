@@ -29,7 +29,7 @@ extern int d2_CurrentElementId;			/* 0x0067d370 */
 extern char g_7f4ca0[];			/* 0x007f4ca0 */
 
 int __cdecl d2_TutorialAllowsFlag(int);
-void __cdecl fcn_0057e880(int, int, int, int);
+void __cdecl d2_DispatchTutorialInput(int, int, int, int);
 int __cdecl gm_LookupEntityRecordById(unsigned int);
 void* __cdecl d2_LoadForm(short, short, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -39,7 +39,7 @@ int __cdecl io_AppendText(int, ...);
 void __cdecl d2_ClearPaintbox(void);
 int __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
-void __cdecl fcn_00472c30(int, int, int, int, int, int, int);
+void __cdecl d2_DrawLine(int, int, int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl d2_ShowCenteredText(char*, int, int, int, int);
 void __cdecl d2_SetFormVisibility(int, int);
@@ -84,7 +84,7 @@ void __cdecl d2_RunStammbaumDialog(unsigned int a0, unsigned char a1, int a2, un
 	if (!d2_TutorialAllowsFlag(1)) {
 		return;
 	}
-	fcn_0057e880(6, 0, 0, 0);
+	d2_DispatchTutorialInput(6, 0, 0, 0);
 	ent = gm_LookupEntityRecordById(a0);
 	if (!ent) {
 		return;
@@ -355,7 +355,7 @@ id]) + 0x18c), d2_CurrentWindowId);
 
 					p = (char*) &tabA[0].x;
 					for (k = 0; k < 2; k++) {
-						fcn_00472c30(*(unsigned short*) p,
+						d2_DrawLine(*(unsigned short*) p,
 						    *(unsigned short*) (p + 2) + h + 5,
 						    *(unsigned short*) p, posY[1], 0x10, 0x10, 0x10);
 						p += 0x10;
@@ -370,7 +370,7 @@ id]) + 0x18c), d2_CurrentWindowId);
 					p = (char*) tabB;
 					for (k = 0; k < 6; k++) {
 						if (*(short*) p != -1 && k != 3) {
-							fcn_00472c30(*(short*) (p + 8),
+							d2_DrawLine(*(short*) (p + 8),
 							    *(short*) (p + 0xa) + h + 5,
 							    *(short*) (p + 8), posY[1],
 							    0x10, 0x10, 0x10);
@@ -387,7 +387,7 @@ id]) + 0x18c), d2_CurrentWindowId);
 				if (nb != idx) {
 					idx++;
 				}
-				fcn_00472c30(nb, posY[1], idx, posY[1], 0x10, 0x10, 0x10);
+				d2_DrawLine(nb, posY[1], idx, posY[1], 0x10, 0x10, 0x10);
 				tabC[0].y = 0x122;
 				if (nc) {
 					char* p;
@@ -459,14 +459,14 @@ id]) + 0x18c), d2_CurrentWindowId);
 						idx = *(short*) (&tabB[3].x) & 0xffff;
 						p = (char*) &tabB[2].x;
 						for (k = 0; k < 2; k++) {
-							fcn_00472c30(*(short*) p,
+							d2_DrawLine(*(short*) p,
 							    *(short*) (p + 2) + h + 5,
 							    *(short*) p,
 							    (((int) (*(short*) (&tabC[0].y) & 0xffff) -
 							    t0 - h) / 2) + t0 + h, 0x10, 0x10, 0x10);
 							p += 0x10;
 						}
-						fcn_00472c30(nb,
+						d2_DrawLine(nb,
 						    (((int) (*(short*) (&tabC[0].y) & 0xffff) -
 						    t0 - h) / 2) + t0 + h, nb + 1,
 						    (((int) (*(short*) (&tabC[0].y) & 0xffff) -
@@ -477,7 +477,7 @@ id]) + 0x18c), d2_CurrentWindowId);
 						if (*(short*) (p - 8) == -1) {
 							break;
 						}
-						fcn_00472c30(*(short*) p,
+						d2_DrawLine(*(short*) p,
 						    *(short*) (p + 2) + h + 5,
 						    *(short*) p,
 						    (((int) (*(short*) (&tabC[0].y) & 0xffff) -
@@ -491,14 +491,14 @@ id]) + 0x18c), d2_CurrentWindowId);
 						p += 0x10;
 					}
 					if (nc) {
-						fcn_00472c30(idx,
+						d2_DrawLine(idx,
 						    (((int) (*(short*) (&tabC[0].y) & 0xffff) -
 						    t0 - h) / 2) + t0 + h, idx + 1,
 						    (((int) (*(short*) (&tabC[0].y) & 0xffff) -
 						    t0 - h) / 2) + t0 + h,
 						    0x10, 0x10, 0x10);
 						if (!flag) {
-							fcn_00472c30(posY[0],
+							d2_DrawLine(posY[0],
 							    t0 + h + 5, posY[0],
 							    (((int) (*(short*) (&tabC[0].y) & 0xffff) -
 							    t0 - h) / 2) + t0 + h,
@@ -644,5 +644,5 @@ id]) + 0x18c), d2_CurrentWindowId);
 		}
 	}
 	d2_DestroyForm(win);
-	fcn_0057e880(6, 0, 1, 0);
+	d2_DispatchTutorialInput(6, 0, 1, 0);
 }

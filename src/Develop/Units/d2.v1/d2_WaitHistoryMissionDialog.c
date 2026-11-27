@@ -16,7 +16,7 @@ void __cdecl io_AppendText(int, int);
 int __cdecl main_RunFrameLoop(int, int);
 void __cdecl d2_DestroyForm(char*);
 void __cdecl d2_ShowMissionSpecDialog(int, int);
-void __cdecl fcn_004b5a80(int);
+void __cdecl d2_RunSpecialMissionDialog(int);
 void __cdecl main_ExitToGameLoop(int);
 void __cdecl d2_WaitHistoryMissionDialog(int);
 
@@ -59,7 +59,7 @@ void __cdecl d2_WaitHistoryMissionDialog(int flags)
 		return;
 	}
 	if (r == 2) {
-		fcn_004b5a80(v);
+		d2_RunSpecialMissionDialog(v);
 		return;
 	}
 	if (r == 3) {

@@ -15,14 +15,14 @@ extern char g_14cf950;
 #define fcn_005c0020 fcn_005b46e0
 #endif
 
-void __cdecl fcn_005338a0(void);
+void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl d2_IsTutorialActionAllowed(int);
 int __cdecl d2_IsTutorialInactive(void);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_RunTalenteDialog(char*, int, int);
 void __cdecl fcn_005c0020(char*);
-void __cdecl fcn_005a02b0(char*);
+void __cdecl d2_RunMeisterpruefungDialog(char*);
 void __cdecl d2_OpenSpionageTargetPicker(char*);
 void __cdecl d2_ShowWeinkellerDialog(char*);
 void __cdecl d2_ShowGeliebteDialog(char*);
@@ -36,7 +36,7 @@ void __cdecl d2_RunCharacterActionsHud(char* e, int mode)
 	int spionage;
 	int meister;
 
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	while (main_RunFrameLoop((void*) d2_RunCharacterActionsHud, 0x67fff) != 0) {
 		if (d2_IsTutorialActionAllowed(8) == 1) {
 			verhandeln = RegisterStatusText("contact_VERHANDELN", g_14ad318, 0xc);
@@ -63,7 +63,7 @@ void __cdecl d2_RunCharacterActionsHud(char* e, int mode)
 			} else if (g_7746a0 == beweis) {
 				fcn_005c0020(e);
 			} else if (g_7746a0 == spionage) {
-				fcn_005a02b0(e);
+				d2_RunMeisterpruefungDialog(e);
 			} else if (g_7746a0 == meister) {
 				d2_OpenSpionageTargetPicker(e);
 			} else if (g_7746a0 == suicide) {

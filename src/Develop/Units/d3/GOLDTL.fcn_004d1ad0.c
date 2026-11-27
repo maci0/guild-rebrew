@@ -10,7 +10,7 @@ char __cdecl SelectTextureSet(void* obj, void* ctx, unsigned char a, char b);
 void __cdecl d3_TransformPoint(char* object, float* in, float* out);
 
 /* ADDRESS: GOLDTL 0x004d1ad0 */
-char __cdecl fcn_004d1ad0(char* dummy)
+char __cdecl d3_SpawnCombatFlagObjects(char* dummy)
 {
 	float dir[3];
 	float pos[4];

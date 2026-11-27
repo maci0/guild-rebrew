@@ -36,7 +36,7 @@ extern void __cdecl io_FormatTextBuffer(char*, int, ...);
 extern void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 extern void __cdecl gm_TransferEntityBuildings(char*, int);
 extern void __cdecl cm_RequestKillSpieler(int, int);
-extern char* __cdecl fcn_005bdc30(int, int*, char*, int, int);
+extern char* __cdecl d2_RunCityScrollMapDialog(int, int*, char*, int, int);
 extern int __cdecl d2_LoadForm(int, int, char*);
 extern void __cdecl d2_SetOverlayAnimation(int, int);
 extern void __cdecl d2_CenterDialogWindows(int);
@@ -123,7 +123,7 @@ unsigned int __cdecl d2_ShowExpelWorkerDialog(char* entity, int* action)
 	found.cd_hi = g_66601c;
 	found.a = 0;
 	io_FormatTextBuffer(name, 0x9b);
-	rec = fcn_005bdc30(1, (int*) &found, name, 0, 0);
+	rec = d2_RunCityScrollMapDialog(1, (int*) &found, name, 0, 0);
 	if (rec == 0)
 		return 0;
 	if (*(unsigned short*) (rec + 0x27) == 0xffff)

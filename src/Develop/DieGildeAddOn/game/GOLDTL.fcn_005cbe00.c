@@ -2,7 +2,7 @@ int __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl he_fn_Handlung(void);
 int __cdecl he_StartHandlungSearch(int a, ...);
 void __cdecl d2_BuildPersonStatusDesc(int *out);
-int __cdecl fcn_005cf720(unsigned short a, unsigned short b, int c, int d);
+int __cdecl gm_MatchesTargetFilter(unsigned short a, unsigned short b, int c, int d);
 
 /* ADDRESS: GOLDTL 0x005cbe00 */
 int __cdecl d2_CollectDuelOrPruegelCandidates(int *src, unsigned limit, int *out, int filterKind)
@@ -83,7 +83,7 @@ int __cdecl d2_CollectDuelOrPruegelCandidates(int *src, unsigned limit, int *out
 			n = count;
 			do {
 				d2_BuildPersonStatusDesc(out);
-				out[0xc] = fcn_005cf720(
+				out[0xc] = gm_MatchesTargetFilter(
 				    *(unsigned short *) src,
 				    *(unsigned short *) out[0], filterKind, 0);
 				out = (int *) ((char *) out + 0x38);

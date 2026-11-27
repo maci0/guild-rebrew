@@ -2,44 +2,44 @@ int __cdecl m_pool_clear();
 int __cdecl d3_EndScenePass();
 int __cdecl d3_SetRenderMaterialState();
 void __cdecl d3_SetFogRange(float a, float b);
-int __cdecl fcn_004385e0();
-int __cdecl fcn_00440f70();
-int __cdecl fcn_00441400();
+int __cdecl d3_RenderRootSceneObjects();
+int __cdecl d3_RenderWaterFloorCells();
+int __cdecl d3_RenderFloorTerrain();
 int __cdecl d3_UpdateFloorVisibility();
 float __cdecl d3_CalcFloorFogDistance();
 int __cdecl d3_BeginScenePass();
 void __cdecl d3_CollectSceneLights(int ctx, unsigned char mask);
-void __cdecl fcn_004509c0(void);
+void __cdecl d3_UpdateSceneLightFlickers(void);
 int __cdecl d3_SelectActiveObjectLights();
-int __cdecl fcn_00451df0();
+int __cdecl d3_RenderPlanarReflections();
 int __cdecl d3_RenderSceneList();
 int __cdecl d3_BuildSceneShadows();
 int __cdecl d3_RenderShadowPatches();
 int __cdecl d3_UpdateAndRenderSky();
 
-typedef struct Dev_43ad20 Dev_43ad20;
-typedef struct DevVtbl_43ad20 {
+typedef struct D3_SCENE_DEVICE D3_SCENE_DEVICE;
+typedef struct D3_SCENE_DEVICE_VTBL {
 	char pad0[0x90];
-	int (__stdcall* Clear)(Dev_43ad20* self, int count, void* rects, int flags, int color, float z, int stencil);
-	int (__stdcall* SetTransform)(Dev_43ad20* self, int state, void* m);
+	int (__stdcall* Clear)(D3_SCENE_DEVICE* self, int count, void* rects, int flags, int color, float z, int stencil);
+	int (__stdcall* SetTransform)(D3_SCENE_DEVICE* self, int state, void* m);
 	char pad98[0xc8 - 0x98];
-	int (__stdcall* SetRenderState)(Dev_43ad20* self, int state, int value);
+	int (__stdcall* SetRenderState)(D3_SCENE_DEVICE* self, int state, int value);
 	char padcc[0xf4 - 0xcc];
-	int (__stdcall* SetTexture)(Dev_43ad20* self, int stage, int tex);
-} DevVtbl_43ad20;
-struct Dev_43ad20 {
-	DevVtbl_43ad20* vtbl;
+	int (__stdcall* SetTexture)(D3_SCENE_DEVICE* self, int stage, int tex);
+} D3_SCENE_DEVICE_VTBL;
+struct D3_SCENE_DEVICE {
+	D3_SCENE_DEVICE_VTBL* vtbl;
 };
 
-typedef struct Mesh_43ad20 Mesh_43ad20;
-typedef struct MeshVtbl_43ad20 {
+typedef struct D3_SCENE_MESH D3_SCENE_MESH;
+typedef struct D3_SCENE_MESH_VTBL {
 	void* QueryInterface;
 	void* AddRef;
 	void* Release;
-	int (__stdcall* DrawSubset)(Mesh_43ad20* self, int i);
-} MeshVtbl_43ad20;
-struct Mesh_43ad20 {
-	MeshVtbl_43ad20* vtbl;
+	int (__stdcall* DrawSubset)(D3_SCENE_MESH* self, int i);
+} D3_SCENE_MESH_VTBL;
+struct D3_SCENE_MESH {
+	D3_SCENE_MESH_VTBL* vtbl;
 };
 
 extern void* g_6b5de0;
@@ -51,9 +51,9 @@ extern void* g_6b8068;
 extern char* g_6b86ec;
 extern char g_1052bd0[1];
 extern unsigned char g_6b7ffe;
-#define DEV_43ad20 ((Dev_43ad20*) g_6b5de0)
+#define DEV_43ad20 ((D3_SCENE_DEVICE*) g_6b5de0)
 /* ADDRESS: GOLDTL 0x0043ad20 */
-void __cdecl fcn_0043ad20(char a0, int a1)
+void __cdecl d3_RenderScene(char a0, int a1)
 {
 	int v3;
 	int v10;
@@ -79,7 +79,7 @@ void __cdecl fcn_0043ad20(char a0, int a1)
 		*(int*) 0x1043028 = 0;
 		d3_CollectSceneLights(*(int*) 0x6b8014, ((unsigned char) g_1052bd0[0] & 0x1c) != 0);
 		if (a0) {
-			fcn_004509c0();
+			d3_UpdateSceneLightFlickers();
 		}
 		if ((unsigned char) g_1052bd0[0] & 0x1c) {
 			d3_BuildSceneShadows();
@@ -102,16 +102,16 @@ void __cdecl fcn_0043ad20(char a0, int a1)
 			d3_UpdateAndRenderSky(g_6b89c0);
 		}
 		if (*(int*) 0x6b8300) {
-			fcn_00441400(*(int*) 0x6b8300);
+			d3_RenderFloorTerrain(*(int*) 0x6b8300);
 		}
 		*(int*) 0x6b8054 = 0;
 		g_6b8050 = 0;
 		DEV_43ad20->vtbl->SetRenderState(DEV_43ad20, 0x89, 1);
 		for (v3 = (int) g_6b86ec; v3; v3 = *(int*) (v3 + 0x1f0)) {
-			fcn_004385e0(v3, 0);
+			d3_RenderRootSceneObjects(v3, 0);
 		}
 		if (*(int*) 0x1043028) {
-			fcn_00451df0(*(int*) 0x1043028);
+			d3_RenderPlanarReflections(*(int*) 0x1043028);
 		}
 		for (outer = (int*) g_6b8068; outer; outer = (int*) outer[10]) {
 			DEV_43ad20->vtbl->SetTransform(DEV_43ad20, 0x100, (void*) outer[1]);
@@ -132,7 +132,7 @@ void __cdecl fcn_0043ad20(char a0, int a1)
 					v10 = (~drawNode[6] & 0x8000000U | 0x10000000) >> 0x1b;
 					DEV_43ad20->vtbl->SetRenderState(DEV_43ad20, 0x16, v10);
 				}
-				((Mesh_43ad20*) drawNode[2])->vtbl->DrawSubset((Mesh_43ad20*) drawNode[2], drawNode[6] & 0x7ffffff);
+				((D3_SCENE_MESH*) drawNode[2])->vtbl->DrawSubset((D3_SCENE_MESH*) drawNode[2], drawNode[6] & 0x7ffffff);
 				drawNode = (int*) drawNode[9];
 			} while (drawNode);
 		}
@@ -142,7 +142,7 @@ void __cdecl fcn_0043ad20(char a0, int a1)
 			d3_RenderShadowPatches(*(int*) 0x6b8014);
 		}
 		if (*(int*) 0x6b8300) {
-			fcn_00440f70(*(int*) 0x6b8300, a1);
+			d3_RenderWaterFloorCells(*(int*) 0x6b8300, a1);
 		}
 		m_pool_clear(0x6b8064);
 		g_6b8068 = 0;

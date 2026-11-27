@@ -1,4 +1,4 @@
-void __cdecl fcn_00456b10(void* entry);
+void __cdecl d3_ReleaseMeshSlotTextures(void* entry);
 
 /* ADDRESS: GOLDTL 0x00456d50 */
 char __cdecl d3_ClearMatchingAuxSlot(char* this, int id)
@@ -9,7 +9,7 @@ char __cdecl d3_ClearMatchingAuxSlot(char* this, int id)
 		for (i = 0; i < 0x270; i += 0x9c) {
 			if (*(int*) (*(int*) (this + 0x1ec) + i + 0x1384) != 0 &&
 			    *(int*) (*(int*) (this + 0x1ec) + i + 0x138c) == id) {
-				fcn_00456b10((void*) (*(int*) (this + 0x1ec) + i + 0x1384));
+				d3_ReleaseMeshSlotTextures((void*) (*(int*) (this + 0x1ec) + i + 0x1384));
 				*(int*) (*(int*) (this + 0x1ec) + i + 0x138c) = 0;
 				*(int*) (*(int*) (this + 0x1ec) + i + 0x13a0) = 0;
 				*(int*) (*(int*) (this + 0x1ec) + i + 0x13a4) = 0;

@@ -4,7 +4,7 @@
 typedef struct {
 	char kind;
 	char pad[0x40];
-} Obj41;
+} SEASON_SLOT_KIND_HDR;
 #pragma pack(pop)
 // SIZE 0x41
 
@@ -14,7 +14,7 @@ extern double g_665b80;
 extern double g_665b78;
 
 /* ADDRESS: GOLDTL 0x00502450 */
-int __cdecl fcn_00502450(int a, int b)
+int __cdecl gm_CalcTownSlotTargetStock(int a, int b)
 {
 	unsigned short w;
 	OBJECT_PROTOTYPE* o;
@@ -36,7 +36,7 @@ unsigned char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 
 /* ADDRESS: GOLDTL 0x005024e0 */
-int __cdecl fcn_005024e0(int a, int b)
+int __cdecl gm_CalcTownSlotProductionSupply(int a, int b)
 {
 	char* c;
 	int sum;

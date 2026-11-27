@@ -21,7 +21,7 @@ typedef struct Query {
 extern char* g_77261c;
 extern unsigned int g_7728bc;
 
-int __cdecl fcn_005cf720(unsigned short a, unsigned short b, Query* q, int c);
+int __cdecl gm_MatchesTargetFilter(unsigned short a, unsigned short b, Query* q, int c);
 ENTITY_CANDIDATE* __cdecl gm_StepEntityCandidateRing(void);
 
 int __cdecl gm_FindEntityCandidate(unsigned short* actor, int queryFlags, unsigned int excludedCount, char* excludedIds, float minScore, float maxScore, unsigned short* outId)
@@ -41,14 +41,14 @@ int __cdecl gm_FindEntityCandidate(unsigned short* actor, int queryFlags, unsign
 	if (((unsigned short*)g_77261c) != 0 && !(query.flags & 0x10000000)) {
 		query.x40 = 0;
 		query.flags = queryFlags;
-		if (fcn_005cf720(*actor, *((unsigned short*)g_77261c), &query, 0) != 0) {
+		if (gm_MatchesTargetFilter(*actor, *((unsigned short*)g_77261c), &query, 0) != 0) {
 			*outId = *((unsigned short*)g_77261c);
 			return 1;
 		}
 	}
 	query.x40 = 0;
 	for (i = (*(int*)&g_7728bc); candidate = gm_StepEntityCandidateRing(), i != 0 && candidate->entity != 0; i--) {
-		if (!(candidate->score < minScore) && !(candidate->score > maxScore) && fcn_005cf720(*actor, *(unsigned short*)candidate->entity, &query, 0) != 0) {
+		if (!(candidate->score < minScore) && !(candidate->score > maxScore) && gm_MatchesTargetFilter(*actor, *(unsigned short*)candidate->entity, &query, 0) != 0) {
 			*outId = *(unsigned short*)candidate->entity;
 			return 1;
 		}

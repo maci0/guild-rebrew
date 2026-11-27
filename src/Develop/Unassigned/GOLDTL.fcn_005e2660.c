@@ -3,7 +3,7 @@
 int __cdecl d2_LoadForm(int, int, char *);
 void __cdecl d2_UpdateViewportCenter(int);
 void __cdecl d2_PositionFormWindows(int, int);
-void __cdecl fcn_00471d80(int, int);
+void __cdecl d2_CenterForm(int, int);
 int __cdecl d2_SetForm(int, int);
 void __cdecl d2_InitWindowBounds(int);
 int __cdecl io_AppendText(char *, ...);
@@ -16,12 +16,12 @@ void __cdecl d2_SetValueGaugeLabel(int, int);
 int __cdecl d2_GetControlValue(int);
 void __cdecl d3_SetGammaParams(float *, float *, float *);
 int __cdecl main_RunFrameLoop(void *, int);
-void __cdecl fcn_005e12d0(void);
+void __cdecl io_SaveIniSettings(void);
 void __cdecl d3_ApplyGraphicsOptions(void);
 void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005e2660 */
-void __cdecl fcn_005e2660(void)
+void __cdecl d2_RunAdvancedGfxOptionsDialog(void)
 {
     int i, flags, dialog, accepted, first, second, selection[2];
     int a[4], b[4], c[4];
@@ -31,7 +31,7 @@ void __cdecl fcn_005e2660(void)
     dialog = d2_LoadForm(0, 0, (char *)0x6ad2b0);
     d2_UpdateViewportCenter(flags);
     d2_PositionFormWindows(dialog, 1);
-    fcn_00471d80(dialog, 2);
+    d2_CenterForm(dialog, 2);
     d2_SetForm(dialog, 0);
     d2_InitWindowBounds(*(int *)0x772514);
     d2_SetForm(dialog, 2);
@@ -67,7 +67,7 @@ void __cdecl fcn_005e2660(void)
     d2_SetElementValue(a[3], 0, 100, (int)(*(float *)0x77667c * 100.0f));
     d2_SetElementValue(b[3], 0, 150, (int)(*(float *)0x77668c * 100.0f));
     d2_SetElementValue(c[3], 0, 150, (int)(*(float *)0x77669c * 100.0f));
-    while (main_RunFrameLoop((void *)fcn_005e2660, flags)) {
+    while (main_RunFrameLoop((void *)d2_RunAdvancedGfxOptionsDialog, flags)) {
         if (*(int *)0x14ce8e0 || *(unsigned char *)0x14cf950 == 1)
             g_774654 = 1;
         if (*(int *)0x100f1dc != -1) {
@@ -102,7 +102,7 @@ void __cdecl fcn_005e2660(void)
         *(float *)0x77667c = d2_GetControlValue(a[3]) * 0.01f;
         *(float *)0x77668c = d2_GetControlValue(b[3]) * 0.01f;
         *(float *)0x77669c = d2_GetControlValue(c[3]) * 0.01f;
-        fcn_005e12d0();
+        io_SaveIniSettings();
     }
     d3_ApplyGraphicsOptions();
     d2_DestroyForm(dialog);

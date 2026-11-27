@@ -6,7 +6,7 @@ extern int g_14ad270;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_7746a0;
 
-void __cdecl fcn_005338a0(void);
+void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_OpenContactEinkaufPanel(char*);
@@ -29,7 +29,7 @@ void __cdecl d2_RunSteinmetzMenu(char* e)
 	prod = 0;
 	meister = 0;
 	personal = 0;
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	while (main_RunFrameLoop((void*) d2_RunSteinmetzMenu, 0x67fff) != 0) {
 		d2_OpenContactEinkaufPanel(e);
 		if (g_7746d8 & 0x200) {

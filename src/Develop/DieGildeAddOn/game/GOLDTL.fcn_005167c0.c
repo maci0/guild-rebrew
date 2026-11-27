@@ -23,7 +23,7 @@ int __cdecl gm_GetSeason(char*);
 int __cdecl gm_GetBuildingTypeCategory(int);
 unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 void __cdecl d3_SetInteriorLightingDefaults(void);
-void __cdecl fcn_00516be0(void);
+void __cdecl d3_SetExteriorLightingDefaults(void);
 char* __cdecl d3_FindSceneObject(char*, int, char*, char*);
 char __cdecl d3_SetSubtreeVisible(int, unsigned char);
 int __cdecl gm_CheckEntityType(char*);
@@ -34,14 +34,14 @@ void __cdecl gm_UpdateResidenceOwnerDecor(char*);
 int __cdecl d3_GetContextIndex(int);
 void __cdecl ch_SetVisible(char*, int);
 #include "Develop/DieGildeAddOn/game/ch_ground.h"
-void __cdecl fcn_004fdcf0(char*);
+void __cdecl d3_UpdateEntityTextureVariant(char*);
 void __cdecl ch_AssignHeadIcon(char*);
 void* __cdecl gm_NextEntityQueryMatch(void);
 void __cdecl ch_UpdateAttachedModelPosition(char*, int);
 void __cdecl d3_ApplyVegetationTextureSet(void);
 void __cdecl d3_ApplySeasonTextureSet(void);
 void __cdecl d3_UpdateBuildingSlotVisibility(void);
-void __cdecl fcn_00515ef0(void);
+void __cdecl d3_InitGateNodeFlags(void);
 
 /* ADDRESS: GOLDTL 0x005167c0 */
 void __cdecl d3_UpdateBuildingView(unsigned char* building, int queryId)
@@ -66,7 +66,7 @@ void __cdecl d3_UpdateBuildingView(unsigned char* building, int queryId)
 	} else {
 		type = g_7f3b00[((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*building].category];
 		g_7f3b24 = 0;
-		fcn_00516be0();
+		d3_SetExteriorLightingDefaults();
 	}
 	if (d3_CurrentContextIndex != type
 	    || (g_7746c4 != 0 && (unsigned char*) g_7746c4 != building)
@@ -109,7 +109,7 @@ void __cdecl d3_UpdateBuildingView(unsigned char* building, int queryId)
 	g_7f3ee0 = (char*) building;
 	ch_CollectContextCharacters((char*) building);
 	d3_TraverseSceneObjects(g_67a370, 0, 0x1e0, d3_UpdateBuildingSlotVisibility);
-	d3_TraverseSceneObjects(g_67a370, 0, 0x20, fcn_00515ef0);
+	d3_TraverseSceneObjects(g_67a370, 0, 0x20, d3_InitGateNodeFlags);
 	gm_UpdateResidenceOwnerDecor((char*) building);
 	i = 0;
 	if (rec->category == 0x16) {
@@ -141,7 +141,7 @@ void __cdecl d3_UpdateBuildingView(unsigned char* building, int queryId)
 			    && i < count) {
 				ch_SetVisible((char*) obj, 1);
 				ch_PlaceOnGround((char*) *p, 0);
-				fcn_004fdcf0((char*) p - 0x184);
+				d3_UpdateEntityTextureVariant((char*) p - 0x184);
 				ch_AssignHeadIcon((char*) p - 0x184);
 				i++;
 			} else {

@@ -9,7 +9,7 @@ extern char g_6b5c60[];
 int __cdecl gm_CompareGameTime(pos14_7f4c00*, char*);
 int __cdecl d2_CreateActionPopupSlot(char*, int, int, char*, int);
 void __cdecl he_FreeAction(char*);
-void __cdecl fcn_00545780(char*);
+void __cdecl d2_CloseActionPopup(char*);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_GetOppositeStatIndex(int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
@@ -72,7 +72,7 @@ void __cdecl he_RunMeisterpruefungNotice(char* u)
 				q = fcn_00502cd0(*(int*) (*(char**) (h + 0x170) + 0x5d), 2, 0, 0x13, 6);
 				d2_EnterBuildingObjekt(*(char**) (h + 0x170), *(int*) (q + 2), g_6b5c60);
 			}
-			fcn_00545780(u);
+			d2_CloseActionPopup(u);
 			he_FreeAction(u);
 			return;
 		} else if (g_100f1dc != 1) {
@@ -80,7 +80,7 @@ void __cdecl he_RunMeisterpruefungNotice(char* u)
 		}
 	case -2:
 	case -1:
-		fcn_00545780(u);
+		d2_CloseActionPopup(u);
 		he_FreeAction(u);
 		break;
 	}

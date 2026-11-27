@@ -14,7 +14,7 @@ void __cdecl gm_KillAllSpieler(void);
 void __cdecl gm_ResetAllEntities(void);
 void __cdecl gm_CleanupObjectEntities(void);
 void __cdecl d3_ClearAllSceneContexts(void);
-int __cdecl fcn_0051e070(void);
+int __cdecl main_GetLanguage(void);
 #include "client_scene_loader.h"
 
 void __cdecl main_LoadCitySelectionScene(char* name, int net)
@@ -39,7 +39,7 @@ void __cdecl main_LoadCitySelectionScene(char* name, int net)
 	d3_ClearAllSceneContexts();
 	d3_SelectSceneContext(0, 0);
 	fcn_00442e30();
-	if (fcn_0051e070() == 0) {
+	if (main_GetLanguage() == 0) {
 		d3_LoadScene("scenes/*ChooseCity.ed3", 0, 0);
 	} else {
 		d3_LoadScene("scenes/*ChooseCity_Europa.ed3", 0, 0);

@@ -3,14 +3,14 @@ extern char g_6ab4b8[];
 
 
 
-int  __cdecl fcn_0051e070(void);
+int  __cdecl main_GetLanguage(void);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl io_FormatTextBuffer(void*, int, int, int, void*, int);
 void __cdecl he_PostEntityMessage(int, int, void*, int, int, void*);
 
 void __cdecl he_NotifyHeimsuchung(void* subject, void* recipient, void* target)
 {
-	switch (fcn_0051e070()) {
+	switch (main_GetLanguage()) {
 	case 0:
 	case 2:
 		io_FormatTextBuffer(g_774a80, 0x409b, gm_RandomMod(3) + 0x409c,

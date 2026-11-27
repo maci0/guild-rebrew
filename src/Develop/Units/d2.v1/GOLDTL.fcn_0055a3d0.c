@@ -12,7 +12,7 @@ extern char g_6a5a10[];
 extern char g_6811b0[];
 
 int __cdecl gm_CompareGameTime(pos14_7f4c00*, char*);
-void __cdecl fcn_00545780(char*);
+void __cdecl d2_CloseActionPopup(char*);
 void __cdecl he_FreeAction(char*);
 char* __cdecl he_StartHandlungSearch(int, ...);
 int __cdecl d2_CreateActionPopupSlot(char*, int, int, char*, int);
@@ -42,7 +42,7 @@ void __cdecl he_RunMeisterpruefungNoticePrompt(char* u)
 			break;
 		case 1:
 			if (gm_CompareGameTime(&gm_GameTime, u + 0x52) > 0) {
-				fcn_00545780(u);
+				d2_CloseActionPopup(u);
 				he_FreeAction(u);
 				return;
 			}
@@ -56,19 +56,19 @@ void __cdecl he_RunMeisterpruefungNoticePrompt(char* u)
 			if (g_100f1dc == 2) {
 				o = he_StartHandlungSearch(2, 2, *(unsigned short*) (u + 8), 1, *(int*) (u + 0xb0));
 				*(int*) (o + 0xb0) = 1;
-				fcn_00545780(u);
+				d2_CloseActionPopup(u);
 				he_FreeAction(u);
 				return;
 			}
 			if (g_100f1dc == 1) {
-				fcn_00545780(u);
+				d2_CloseActionPopup(u);
 				he_FreeAction(u);
 			}
 			break;
 		}
 	} else {
 		if (*(char**) (u + 0x74) != 0) {
-			fcn_00545780(u);
+			d2_CloseActionPopup(u);
 		}
 		he_FreeAction(u);
 	}

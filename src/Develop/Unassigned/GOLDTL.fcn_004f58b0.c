@@ -8,7 +8,7 @@ extern Pair_99f800 g_99f800[0x800];
 
 /* The scan is a goto loop tested at the top: a for or while loop gives the
  * same instructions but lays the -1 exit out ahead of the shared epilogue. */
-int __cdecl fcn_004f58b0(int owner, int key)
+int __cdecl gs_AllocEvidenceSlot(int owner, int key)
 {
 	int found;
 	int res;

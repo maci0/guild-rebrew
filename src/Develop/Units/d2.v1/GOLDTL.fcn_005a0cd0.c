@@ -6,7 +6,7 @@ void __cdecl d2_RenderDiceRollIcons(int, unsigned char*);
 void __cdecl d2_RenderPlayerDiceIcons(int, unsigned char*);
 extern volatile int g_6b7fac; extern unsigned short g_774970; extern char g_7f4ca4[];
 /* ADDRESS: GOLDTL 0x005a0cd0 */
-void __cdecl fcn_005a0cd0(unsigned char* a0, unsigned char* a1, int mode, int windowId, int formId, int duration, int a6)
+void __cdecl d2_ShowWirtshausDiceStep(unsigned char* a0, unsigned char* a1, int mode, int windowId, int formId, int duration, int a6)
 {
 	unsigned int start;
 	char buf[256];

@@ -24,7 +24,7 @@ extern int g_6a2c04;
 extern char g_6abaec[];
 
 int __cdecl d2_LoadForm(int, int, char*);
-void __cdecl fcn_00471d80(int, int);
+void __cdecl d2_CenterForm(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_DestroyForm(int);
@@ -44,7 +44,7 @@ void __cdecl d2_ShowSupermap(Map5b52* m, int x0, int y0, int x1, int y1)
 
 	frame = 0;
 	h = d2_LoadForm(0, 0, g_6abaec);
-	fcn_00471d80(h, 3);
+	d2_CenterForm(h, 3);
 	g_6b7fc0 = 1;
 	g_6a2c04 = 0;
 	while (main_RunFrameLoop((void*) d2_ShowSupermap, 0x277c7) != 0) {

@@ -80,7 +80,7 @@ int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl d2_CreateRadioGroup(int, ...);
 void __cdecl d2_AddToRadioGroup(int, int);
 float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
-int __cdecl fcn_005cf720(unsigned short, unsigned short, void*, int);
+int __cdecl gm_MatchesTargetFilter(unsigned short, unsigned short, void*, int);
 int __cdecl d2_EqualizeWindowButtonWidths(int, int, char*, int);
 void __cdecl d2_SetElementFont(int, int);
 int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
@@ -192,7 +192,7 @@ int __cdecl d2_RunLawTargetSelectDialog(unsigned char* rec, unsigned char* a2, i
 					s = &slots[i];
 					shown = 1;
 					if (a2 != 0 && *(int*) (a2 + 4) != 0) {
-						shown = fcn_005cf720(g_774970, (unsigned short) s->id,
+						shown = gm_MatchesTargetFilter(g_774970, (unsigned short) s->id,
 						                     a2, (int) rec);
 						if ((*(int*) a2 | shown) == 0) {
 							continue;

@@ -16,7 +16,7 @@ typedef struct Query {
 extern char *g_77261c;
 extern int gm_RandomSearchSteps[];
 
-int __cdecl fcn_005cf720(unsigned short, unsigned short, Query *, int);
+int __cdecl gm_MatchesTargetFilter(unsigned short, unsigned short, Query *, int);
 unsigned short __cdecl gm_RandomMod(int);
 float __cdecl gm_CalcEntityFavor(int, int, int);
 
@@ -45,7 +45,7 @@ unsigned int __cdecl gm_FindFilteredEntity(unsigned short *entity, int filterFla
 	if (g_77261c != 0) {
 		q.x40 = 0;
 		q.flags = filterFlags;
-		if (fcn_005cf720(*entity, *((unsigned short *) g_77261c), &q, 0) != 0) {
+		if (gm_MatchesTargetFilter(*entity, *((unsigned short *) g_77261c), &q, 0) != 0) {
 			*out = *((unsigned short *) g_77261c);
 			return 1;
 		}
@@ -66,7 +66,7 @@ unsigned int __cdecl gm_FindFilteredEntity(unsigned short *entity, int filterFla
 			}
 			return 0;
 		}
-		if (fcn_005cf720(*entity, (unsigned short) i, &q, 0) != 0) {
+		if (gm_MatchesTargetFilter(*entity, (unsigned short) i, &q, 0) != 0) {
 			if (flag == 0 || (val = gm_CalcEntityFavor(i, *entity, 1), !(val < minFavor) && !(val > maxFavor))) {
 				found = 1;
 				*out = (unsigned short) i;

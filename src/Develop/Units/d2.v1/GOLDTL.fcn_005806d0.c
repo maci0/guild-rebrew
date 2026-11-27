@@ -35,7 +35,7 @@ void __cdecl d2_DestroyForm(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
 int __cdecl d2_LoadForm(int, int, char*);
-void __cdecl fcn_00471d80(int, int);
+void __cdecl d2_CenterForm(int, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl sb_CheckVoicePlaying(int);
 void __cdecl sb_StopVoice(int, int);
@@ -91,7 +91,7 @@ int __cdecl d2_ShowTutorialStep(void)
 				((struct tutor*)g_665f08)->dlg = d2_LoadForm(0, 0, "tutorial\\bottom_form");
 				break;
 			}
-			fcn_00471d80(((struct tutor*)g_665f08)->dlg, 3);
+			d2_CenterForm(((struct tutor*)g_665f08)->dlg, 3);
 			((struct tutor*)g_665f08)->state = ((struct tutor*)g_665f08)->lesson->steps[((struct tutor*)g_665f08)->index].kind;
 		}
 		d2_SetForm(((struct tutor*)g_665f08)->dlg, 1);

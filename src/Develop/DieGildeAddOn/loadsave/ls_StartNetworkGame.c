@@ -20,7 +20,7 @@ void __cdecl gm_InitCityAndTradeState(char a0);
 void __cdecl init_LocalData(void);
 void __cdecl gm_RestockTownMarket(char a0);
 int __cdecl ls_SendGame(char *path);
-int __cdecl fcn_00525b40(void);
+int __cdecl ls_WaitAndLoadNetSave(void);
 void __cdecl main_PumpWindowMessages(void);
 void __cdecl cm_StepCommandQueue(void);
 void __cdecl sv_WaitForNetworkSync(int id);
@@ -41,7 +41,7 @@ int __cdecl cm_SendAllocClientSpieler(int a0, int a1, short a2, char a3, int a4,
                          char a5, char a6, char *a7, char *a8);
 int __cdecl cm_GetCommandStatus(int i);
 int __cdecl cm_GetCommandResult(int i);
-int __cdecl fcn_004b3d80(int a0, int a1, int a2);
+int __cdecl gm_AllocRandomMissionJob(int a0, int a1, int a2);
 int __cdecl d2_ShowMissionForEntity(int a0);
 int __cdecl cm_RequestMoveCredits(int a0, int a1, char a2, int a3);
 void __cdecl cm_SetGameSpeedSetting(int a0);
@@ -77,7 +77,7 @@ int __cdecl ls_StartNetworkGame(char *path)
     }
     flag = *(int *) &g_77494c & 1;
     d2_ShowNetworkLoadStatus(*(unsigned int *) 0x14ac5f4);
-    if (fcn_00525b40() == 0)
+    if (ls_WaitAndLoadNetSave() == 0)
         return 2;
     GetModuleFileNameA(*(void **) 0x7e1f80, file, 0x104);
     p = strrchr(file, '\\');
@@ -136,7 +136,7 @@ int __cdecl ls_StartNetworkGame(char *path)
     if (*(unsigned char *) &g_6a3440 != 0xff) {
         if (*(unsigned char *) &g_6a3440 != 5)
             *(int *) 0x7e1f60 = (int) timeGetTime();
-        fcn_004b3d80(*(int *) (handle + 4), *(signed char *) &g_6a3440, 1);
+        gm_AllocRandomMissionJob(*(int *) (handle + 4), *(signed char *) &g_6a3440, 1);
     }
     result = fcn_0050b750(*(int *) 0x7747fc == 0 ? 2000 : 500000,
                           *(unsigned char *) &g_773d75);

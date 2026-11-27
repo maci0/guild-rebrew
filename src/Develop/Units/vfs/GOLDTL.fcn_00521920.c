@@ -45,7 +45,7 @@ int __cdecl amt_fio_LoadAemter(void* stream, int version);
 int __cdecl ls_LoadCrimeRecords(void* stream);
 int __cdecl ls_LoadGameMatrices(void* stream);
 int __cdecl ls_LoadStatsAndCrimeGrid(unsigned int stream);
-int __cdecl fcn_00524b40(void* stream);
+int __cdecl ls_ReloadAvatarStatesWrapper(void* stream);
 int __cdecl ls_LoadActionsAndEvents(void* stream);
 int __cdecl ls_LoadCutscenes(void* stream);
 int __cdecl ls_LoadHistoryState(void* stream);
@@ -54,7 +54,7 @@ int __cdecl ls_LoadTabAndWeatherState(void* stream);
 unsigned int __cdecl gm_RebuildLoadedReferences(void);
 int __cdecl d3_SelectSceneContext(int a, int b);
 void __cdecl d3_RebuildWorldScene(void);
-void __cdecl fcn_00514fc0(void);
+void __cdecl d3_RebuildSceneQuadtree(void);
 int __cdecl ls_LoadCharacter(void* stream);
 char* __cdecl gm_LookupEntityRecordById(int handle);
 int __cdecl ls_LoadMissionJobs(void* stream);
@@ -175,7 +175,7 @@ int __cdecl ls_LoadSavegame(char* cpath)
 	if (ls_LoadStatsAndCrimeGrid((unsigned int) stream) == 0) {
 		goto fail;
 	}
-	if (ls_SaveVersion >= 0x1002a && fcn_00524b40(stream) == 0) {
+	if (ls_SaveVersion >= 0x1002a && ls_ReloadAvatarStatesWrapper(stream) == 0) {
 		goto fail;
 	}
 	if (ls_LoadActionsAndEvents(stream) == 0) {
@@ -200,7 +200,7 @@ int __cdecl ls_LoadSavegame(char* cpath)
 	}
 	d3_SelectSceneContext(0, 1);
 	d3_RebuildWorldScene();
-	fcn_00514fc0();
+	d3_RebuildSceneQuadtree();
 	if (ls_LoadCharacter(stream) == 0) {
 		CloseVfsStream(stream);
 		m_FreeTracked(cm_LoadBuf);

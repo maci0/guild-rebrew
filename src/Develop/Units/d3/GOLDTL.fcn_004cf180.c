@@ -19,13 +19,13 @@ int __cdecl d3_CreateExplosionEmitter(int a1, float* pos, int n, float a4, float
                          float a6, float a7, int a8);
 unsigned int __cdecl cut_RandMod(unsigned int n);
 void __cdecl d3_ScheduleActionTimer(char* a1, int a2, int a3);
-int __cdecl fcn_004d4790(char* e);
+int __cdecl cut_HandleUnitDefeat(char* e);
 int __cdecl ch_QueuePlayAnimation(char* e, const char* name, int param);
 char __cdecl d3_DestroyObject(void* object);
 double __cdecl sqrt(double x);
 
 /* ADDRESS: GOLDTL 0x004cf180 */
-int __cdecl fcn_004cf180(void)
+int __cdecl cut_UpdateActiveBombs(void)
 {
     char* r;
     int count;
@@ -98,7 +98,7 @@ int __cdecl fcn_004cf180(void)
                                     d3_ScheduleActionTimer((char*) *q, t, 1);
                                 else
                                     d3_ScheduleActionTimer((char*) *q, t, 2);
-                                if (!fcn_004d4790((char*) e)) {
+                                if (!cut_HandleUnitDefeat((char*) e)) {
                                     ch_QueuePlayAnimation((char*) m, "Explosion_s", 1);
                                 }
                             }

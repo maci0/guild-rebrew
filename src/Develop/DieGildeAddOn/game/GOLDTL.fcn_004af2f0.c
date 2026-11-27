@@ -29,7 +29,7 @@ typedef struct {
 
 extern char g_7f4ca0[];
 
-int __cdecl fcn_004ae0f0(int);
+int __cdecl hst_IsCandidateUnlisted(int);
 unsigned short __cdecl gm_RandomMod(int);
 
 
@@ -373,7 +373,7 @@ int __cdecl hst_HandleRndAmtstraegerin(int mode, int* pairs, int idx, char* text
 		j = gm_RandomMod(0x300);
 		left = 0x300;
 		do {
-			if (((Rec21c*)g_7f4ca0)[j].side == 1 && gm_IsSlotActivePerson((unsigned short) j) != 0 && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0
+			if (((Rec21c*)g_7f4ca0)[j].side == 1 && gm_IsSlotActivePerson((unsigned short) j) != 0 && hst_IsCandidateUnlisted(((Rec21c*)g_7f4ca0)[j].key) != 0
 			    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a && ((Rec21c*)g_7f4ca0)[j].kind != 0x15) {
 				r = &((Rec21c*)g_7f4ca0)[j];
 				break;
@@ -387,7 +387,7 @@ int __cdecl hst_HandleRndAmtstraegerin(int mode, int* pairs, int idx, char* text
 		j = gm_RandomMod(0x300);
 		left = 0x300;
 		do {
-			if (((Rec21c*)g_7f4ca0)[j].side == 1 && gm_IsSlotNpcPerson(j) != 0 && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0
+			if (((Rec21c*)g_7f4ca0)[j].side == 1 && gm_IsSlotNpcPerson(j) != 0 && hst_IsCandidateUnlisted(((Rec21c*)g_7f4ca0)[j].key) != 0
 			    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a && ((Rec21c*)g_7f4ca0)[j].kind != 0x15) {
 				r = &((Rec21c*)g_7f4ca0)[j];
 				break;
@@ -405,10 +405,10 @@ int __cdecl hst_HandleRndAmtstraegerin(int mode, int* pairs, int idx, char* text
 			if (((Rec21c*)g_7f4ca0)[j].side == 1) {
 				if (found == 0 && gm_IsSlotNpcPerson(j) != 0
 				    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a && ((Rec21c*)g_7f4ca0)[j].kind != 0x15) {
-					if (fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0) {
+					if (hst_IsCandidateUnlisted(((Rec21c*)g_7f4ca0)[j].key) != 0) {
 						found = &((Rec21c*)g_7f4ca0)[j];
 					}
-				} else if (gm_IsSlotPlayerPerson(j) != 0 && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0
+				} else if (gm_IsSlotPlayerPerson(j) != 0 && hst_IsCandidateUnlisted(((Rec21c*)g_7f4ca0)[j].key) != 0
 				    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a && ((Rec21c*)g_7f4ca0)[j].kind != 0x15) {
 					r = &((Rec21c*)g_7f4ca0)[j];
 					break;
@@ -491,7 +491,7 @@ int __cdecl hst_HandleRndAmtstraeger(int mode, int* pairs, int idx, char* text, 
 		do {
 			if (((Rec21c*)g_7f4ca0)[j].side == 0 && gm_IsSlotActivePerson((unsigned short) j) != 0
 			    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a
-			        && ((Rec21c*)g_7f4ca0)[j].kind != 0x15 && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0) {
+			        && ((Rec21c*)g_7f4ca0)[j].kind != 0x15 && hst_IsCandidateUnlisted(((Rec21c*)g_7f4ca0)[j].key) != 0) {
 				r = &((Rec21c*)g_7f4ca0)[j];
 				break;
 			}
@@ -506,7 +506,7 @@ int __cdecl hst_HandleRndAmtstraeger(int mode, int* pairs, int idx, char* text, 
 		do {
 			if (((Rec21c*)g_7f4ca0)[j].side == 0 && gm_IsSlotNpcPerson(j) != 0
 			    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a
-			        && ((Rec21c*)g_7f4ca0)[j].kind != 0x15 && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0) {
+			        && ((Rec21c*)g_7f4ca0)[j].kind != 0x15 && hst_IsCandidateUnlisted(((Rec21c*)g_7f4ca0)[j].key) != 0) {
 				r = &((Rec21c*)g_7f4ca0)[j];
 				break;
 			}
@@ -523,12 +523,12 @@ int __cdecl hst_HandleRndAmtstraeger(int mode, int* pairs, int idx, char* text, 
 			if (((Rec21c*)g_7f4ca0)[j].side == 0) {
 				if (found == 0 && gm_IsSlotNpcPerson(j) != 0
 				    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a && ((Rec21c*)g_7f4ca0)[j].kind != 0x15) {
-					if (fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0) {
+					if (hst_IsCandidateUnlisted(((Rec21c*)g_7f4ca0)[j].key) != 0) {
 						found = &((Rec21c*)g_7f4ca0)[j];
 					}
 				} else if (gm_IsSlotPlayerPerson(j) != 0
 				    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a
-				        && ((Rec21c*)g_7f4ca0)[j].kind != 0x15 && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0) {
+				        && ((Rec21c*)g_7f4ca0)[j].kind != 0x15 && hst_IsCandidateUnlisted(((Rec21c*)g_7f4ca0)[j].key) != 0) {
 					r = &((Rec21c*)g_7f4ca0)[j];
 					break;
 				}
@@ -613,7 +613,7 @@ int __cdecl hst_HandleRndAmtsperson(int mode, int* pairs, int idx, char* text, v
 		do {
 			if (gm_IsSlotActivePerson((unsigned short) j) != 0
 			    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a
-			        && ((Rec21c*)g_7f4ca0)[j].kind != 0x15 && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0) {
+			        && ((Rec21c*)g_7f4ca0)[j].kind != 0x15 && hst_IsCandidateUnlisted(((Rec21c*)g_7f4ca0)[j].key) != 0) {
 				r = &((Rec21c*)g_7f4ca0)[j];
 				break;
 			}
@@ -628,7 +628,7 @@ int __cdecl hst_HandleRndAmtsperson(int mode, int* pairs, int idx, char* text, v
 		do {
 			if (gm_IsSlotNpcPerson(j) != 0
 			    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a
-			        && ((Rec21c*)g_7f4ca0)[j].kind != 0x15 && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0) {
+			        && ((Rec21c*)g_7f4ca0)[j].kind != 0x15 && hst_IsCandidateUnlisted(((Rec21c*)g_7f4ca0)[j].key) != 0) {
 				r = &((Rec21c*)g_7f4ca0)[j];
 				break;
 			}
@@ -644,12 +644,12 @@ int __cdecl hst_HandleRndAmtsperson(int mode, int* pairs, int idx, char* text, v
 		do {
 			if (found == 0 && gm_IsSlotNpcPerson(j) != 0
 			    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a && ((Rec21c*)g_7f4ca0)[j].kind != 0x15) {
-				if (fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0) {
+				if (hst_IsCandidateUnlisted(((Rec21c*)g_7f4ca0)[j].key) != 0) {
 					found = &((Rec21c*)g_7f4ca0)[j];
 				}
 			} else if (gm_IsSlotPlayerPerson(j) != 0
 			    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a
-			        && ((Rec21c*)g_7f4ca0)[j].kind != 0x15 && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0) {
+			        && ((Rec21c*)g_7f4ca0)[j].kind != 0x15 && hst_IsCandidateUnlisted(((Rec21c*)g_7f4ca0)[j].key) != 0) {
 				r = &((Rec21c*)g_7f4ca0)[j];
 				break;
 			}
@@ -789,7 +789,7 @@ int __cdecl hst_HandleRndKirchenberuf(int mode, int* pairs, int idx, char* text,
 		left = 0x300;
 		do {
 			if (gm_IsSlotActivePerson((unsigned short) j) != 0
-			    && ((Rec21c*)g_7f4ca0)[j].cls >= 0xd && ((Rec21c*)g_7f4ca0)[j].cls <= 0x12 && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0) {
+			    && ((Rec21c*)g_7f4ca0)[j].cls >= 0xd && ((Rec21c*)g_7f4ca0)[j].cls <= 0x12 && hst_IsCandidateUnlisted(((Rec21c*)g_7f4ca0)[j].key) != 0) {
 				r = &((Rec21c*)g_7f4ca0)[j];
 				break;
 			}
@@ -803,7 +803,7 @@ int __cdecl hst_HandleRndKirchenberuf(int mode, int* pairs, int idx, char* text,
 		left = 0x300;
 		do {
 			if (gm_IsSlotNpcPerson(j) != 0
-			    && ((Rec21c*)g_7f4ca0)[j].cls >= 0xd && ((Rec21c*)g_7f4ca0)[j].cls <= 0x12 && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0) {
+			    && ((Rec21c*)g_7f4ca0)[j].cls >= 0xd && ((Rec21c*)g_7f4ca0)[j].cls <= 0x12 && hst_IsCandidateUnlisted(((Rec21c*)g_7f4ca0)[j].key) != 0) {
 				r = &((Rec21c*)g_7f4ca0)[j];
 				break;
 			}
@@ -819,11 +819,11 @@ int __cdecl hst_HandleRndKirchenberuf(int mode, int* pairs, int idx, char* text,
 		do {
 			if (found == 0 && gm_IsSlotNpcPerson(j) != 0
 			    && ((Rec21c*)g_7f4ca0)[j].cls >= 0xd && ((Rec21c*)g_7f4ca0)[j].cls <= 0x12) {
-				if (fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0) {
+				if (hst_IsCandidateUnlisted(((Rec21c*)g_7f4ca0)[j].key) != 0) {
 					found = &((Rec21c*)g_7f4ca0)[j];
 				}
 			} else if (gm_IsSlotPlayerPerson(j) != 0
-			    && ((Rec21c*)g_7f4ca0)[j].cls >= 0xd && ((Rec21c*)g_7f4ca0)[j].cls <= 0x12 && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0) {
+			    && ((Rec21c*)g_7f4ca0)[j].cls >= 0xd && ((Rec21c*)g_7f4ca0)[j].cls <= 0x12 && hst_IsCandidateUnlisted(((Rec21c*)g_7f4ca0)[j].key) != 0) {
 				r = &((Rec21c*)g_7f4ca0)[j];
 				break;
 			}
@@ -907,7 +907,7 @@ int __cdecl hst_HandleRndSpieler(int mode, int* pairs, int idx, char* text, void
 		i = gm_RandomMod(0x300);
 		left = 0x300;
 		do {
-			if (gm_IsSlotPlayerPerson(i) != 0 && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[i].key) != 0) {
+			if (gm_IsSlotPlayerPerson(i) != 0 && hst_IsCandidateUnlisted(((Rec21c*)g_7f4ca0)[i].key) != 0) {
 				r = &((Rec21c*)g_7f4ca0)[i];
 				break;
 			}

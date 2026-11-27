@@ -25,7 +25,7 @@ extern unsigned char g_773d75;
 
 float __cdecl gm_GetWorkforceOutput(unsigned char* p, int k, int a, int b);
 void* __cdecl ahm_GetWorkshopOwner(unsigned char* e);
-int __cdecl fcn_004ee160(char* e);
+int __cdecl ahm_CalcWorkshopOutputScore(char* e);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl gm_SumQueryEntryValues(int, unsigned char b);
 
@@ -56,7 +56,7 @@ int __cdecl gm_CalcBuildingRoundBalance(unsigned char* bld, int ownerIdx, char* 
 	slot = (int) &((ENTITY_RECORD*) g_7f4ca0)[ownerIdx];
 	if (*row == 0x1e) {
 		if (ahm_GetWorkshopOwner(bld) != 0) {
-			val = fcn_004ee160((char*) bld);
+			val = ahm_CalcWorkshopOutputScore((char*) bld);
 			*(int*) (out + 0x18) = val;
 			total = val;
 		}

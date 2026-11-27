@@ -10,7 +10,7 @@ extern void __cdecl d3_AnimateObjectTransform(int, float*, float*, int, int);
  * horizontal delta by two arccosines; arguments outside [-1,1] clamp to the
  * domain edge and the sign of the delta selects the branch. */
 /* ADDRESS: GOLDTL 0x0052d1f0 */
-void __cdecl fcn_0052d1f0(char* effectNode)
+void __cdecl d3_EmitOrientedNodeEffect(char* effectNode)
 {
 	float base[4];
 	float pos[4];

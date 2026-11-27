@@ -15,7 +15,7 @@ int __cdecl msx_GetStreamStatus(int h);
 int __cdecl msx_SetStreamVolume(int h, int v);
 void __cdecl SetMasterVolume(int vol);
 
-void __cdecl fcn_00420210(void)
+void __cdecl msx_UpdateTracks(void)
 {
 	int i;
 	Chan_14cc460* c;

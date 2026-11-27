@@ -28,7 +28,7 @@ extern char* g_7747b8;
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_UpdateViewportCenter(int);
 void __cdecl d2_PositionFormWindows(int, int);
-void __cdecl fcn_00471d80(int, int);
+void __cdecl d2_CenterForm(int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_InitWindowBounds(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -44,7 +44,7 @@ int __cdecl d2_GetControlValue(int);
 void __cdecl sb_SetMasterVolume(int);
 void __cdecl SetMasterVolume(int);
 int __cdecl sb_PlayVoice(char*, char*, int, int, int, int, int);
-void __cdecl fcn_005e12d0(void);
+void __cdecl io_SaveIniSettings(void);
 void __cdecl msx_ApplyAudioSettings(void);
 void __cdecl d2_DestroyForm(int);
 
@@ -72,7 +72,7 @@ void __cdecl d2_ShowSoundOptions(void)
 	dlg = d2_LoadForm(0, 0, s_6ad2f8);
 	d2_UpdateViewportCenter(wait);
 	d2_PositionFormWindows(dlg, 1);
-	fcn_00471d80(dlg, 2);
+	d2_CenterForm(dlg, 2);
 	d2_SetForm(dlg, 0);
 	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetOverlayAnimation(0, 0);
@@ -133,7 +133,7 @@ void __cdecl d2_ShowSoundOptions(void)
 		g_7766a0[2] = (unsigned char) d2_GetControlValue(s2);
 		g_7766a0[3] = (unsigned char) d2_GetControlValue(s3);
 		g_7766a4[0] = (unsigned char) d2_GetControlValue(s4);
-		fcn_005e12d0();
+		io_SaveIniSettings();
 		msx_ApplyAudioSettings();
 	}
 	d2_DestroyForm(dlg);

@@ -16,7 +16,7 @@ extern char s_6aa544[];
 extern char s_6ab3b0[];
 extern char s_6a956c[];
 
-void __cdecl fcn_005338a0(void);
+void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_ShowLagerOptions(int, int);
@@ -41,7 +41,7 @@ void __cdecl d2_RunRazziaWacheMenu(int building)
 	f = 0;
 	d = 0;
 	e = 0;
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	if (main_RunFrameLoop((void*) d2_RunRazziaWacheMenu, 0x67fff) != 0) {
 		do {
 			if (g_7746d8 & 0x200) {

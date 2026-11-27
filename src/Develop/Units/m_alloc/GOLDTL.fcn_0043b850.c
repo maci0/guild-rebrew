@@ -1,6 +1,6 @@
 
 
-typedef int (__cdecl* fcn_0043b850_f)(char*, int, char*);
+typedef int (__cdecl* SCENE_EVENT_HANDLER)(char*, int, char*);
 
 extern int g_67a590;
 extern int g_67a370;
@@ -13,8 +13,8 @@ char* __cdecl vfs_ReadCString(void* stream, char* text);
 int __cdecl d3_FindSceneEventId(char*);
 char __cdecl d3e_RegisterSceneEvent(char*, int, int, char*);
 
-/* ADDRESS: GOLD 0x0043ea10 */
-void __cdecl fcn_0043b850(void* r)
+/* ADDRESS: GOLDTL 0x0043b850 */
+void __cdecl d3e_ReadSceneEvents(void* r)
 {
 	int n;
 	char val[0x100];
@@ -31,6 +31,6 @@ void __cdecl fcn_0043b850(void* r)
 		vfs_ReadCString(r, name);
 		id = d3_FindSceneEventId(name);
 		vfs_ReadCString(r, val);
-		d3e_RegisterSceneEvent(((char*)g_67a370), id, (*(fcn_0043b850_f*)&g_67a590)(((char*)g_67a370), id, val), val);
+		d3e_RegisterSceneEvent(((char*)g_67a370), id, (*(SCENE_EVENT_HANDLER*)&g_67a590)(((char*)g_67a370), id, val), val);
 	}
 }

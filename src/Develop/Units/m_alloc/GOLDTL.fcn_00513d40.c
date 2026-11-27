@@ -35,7 +35,7 @@ void __cdecl d3_SetObjectRotation(char* o, float* rot);
 void __cdecl fcn_004442be0(char* o);
 
 /* ADDRESS: GOLDTL 0x00513d40 */
-void __cdecl fcn_00513d40(char* name)
+void __cdecl d3_PlaceBuildingProxyBoxes(char* name)
 {
 	char* c;
 	char* next;

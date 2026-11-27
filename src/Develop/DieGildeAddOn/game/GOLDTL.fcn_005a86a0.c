@@ -9,14 +9,14 @@ void __cdecl d3_UpdateBuildingView(void*, int);
 void __cdecl d3_SetupInteriorScene(void*, void*);
 void __cdecl d3_SetNodePosition(void*, void*);
 void __cdecl d3_SetObjectRotation(void*, void*);
-void __cdecl fcn_005338a0(void);
+void __cdecl d2_ClearStatusTextSlots(void);
 void* __cdecl evt_FindScriptById(int);
 void __cdecl evt_RequestScriptExit(void*);
 void __cdecl evt_WaitForScriptExit(int);
 void __cdecl d3_DeinitUniverse(int);
 void* __cdecl fcn_00502cd0(int, int, int, int, int);
-void __cdecl fcn_0058f700(void*);
-void __cdecl fcn_0058fdc0(void*);
+void __cdecl d2_RunDefaultBuildingInterior(void*);
+void __cdecl d2_RunFriedhofKapelleMenu(void*);
 void __cdecl d2_RunUpgradeTechTreeHud(void*);
 void __cdecl d2_RunWorkshopBookHud(void*);
 void __cdecl d2_RunWacheInteriorHud(void*);
@@ -95,7 +95,7 @@ void __cdecl d2_EnterObjektInterior(void* objMessage)
 	*(char*) &g_772d10 = 0;
 	switch (*(unsigned short*)message) {
 	case 0x205:
-		fcn_0058fdc0(*(void**) &g_7746c8);
+		d2_RunFriedhofKapelleMenu(*(void**) &g_7746c8);
 		break;
 	case 0x2c:
 	case 0x109:
@@ -129,13 +129,13 @@ void __cdecl d2_EnterObjektInterior(void* objMessage)
 		d2_RunFortuneTellerHud(*(void**) &g_7746c8);
 		break;
 	default:
-		fcn_0058f700(message);
+		d2_RunDefaultBuildingInterior(message);
 		break;
 	}
 	*(char*) &g_772d10 = 1;
 	sv_ResetSelectionState();
 	sv_ClearObjectSelection();
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	*(void**) &g_7ea360 = 0;
 	if (sub != -1) {
 		t = evt_FindScriptById(sub);

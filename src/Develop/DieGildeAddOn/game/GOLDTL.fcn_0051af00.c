@@ -79,7 +79,7 @@ int __cdecl atoi(char*);
 int __cdecl fcn_0064d41a(char*, const char*, ...);
 int __cdecl fcn_0064d740(char*, char*, int);
 int __cdecl io_CopyTrailingDigits(char*, int, char*);
-int __cdecl fcn_0051e070(void);
+int __cdecl main_GetLanguage(void);
 void __cdecl gm_PackGameTime(void*, void*);
 int __cdecl gm_GetSeasonFromDate(char*, int);
 int __cdecl d2_FormatCurrencyString(int, int, char*);
@@ -236,7 +236,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 				} else {
 					sprintf(text.tmp, g_68b3f8, res, p);
 				}
-				if (fcn_0051e070() == 0 && grammar_state == 2) {
+				if (main_GetLanguage() == 0 && grammar_state == 2) {
 					text.tmp[0] = (char) toupper(text.tmp[0]);
 				}
 			} else if (grammar_state == 3 || grammar_state == 4) {
@@ -251,7 +251,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 				} else {
 					sprintf(text.tmp, g_68b3f8, res, p);
 				}
-				if (fcn_0051e070() == 0 && grammar_state == 4) {
+				if (main_GetLanguage() == 0 && grammar_state == 4) {
 					text.tmp[0] = (char) toupper(text.tmp[0]);
 				}
 			} else if (grammar_state == 5 || grammar_state == 6) {
@@ -266,7 +266,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 				} else {
 					sprintf(text.tmp, g_68b3f8, res, p);
 				}
-				if (fcn_0051e070() == 0 && grammar_state == 6) {
+				if (main_GetLanguage() == 0 && grammar_state == 6) {
 					text.tmp[0] = (char) toupper(text.tmp[0]);
 				}
 			}
@@ -630,7 +630,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 				} else {
 					sprintf(text.tmp, g_68b3f8, res, slot98);
 				}
-				if (fcn_0051e070() == 0 && grammar_state == 2) {
+				if (main_GetLanguage() == 0 && grammar_state == 2) {
 					text.tmp[0] = (char) toupper(text.tmp[0]);
 				}
 			} else if (grammar_state == 3 || grammar_state == 4) {
@@ -641,7 +641,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 				} else {
 					sprintf(text.tmp, g_68b3f8, res, slot98);
 				}
-				if (fcn_0051e070() == 0 && grammar_state == 4) {
+				if (main_GetLanguage() == 0 && grammar_state == 4) {
 					text.tmp[0] = (char) toupper(text.tmp[0]);
 				}
 			} else if (grammar_state == 5 || grammar_state == 6) {
@@ -652,7 +652,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 				} else {
 					sprintf(text.tmp, g_68b3f8, res, slot98);
 				}
-				if (fcn_0051e070() == 0 && grammar_state == 6) {
+				if (main_GetLanguage() == 0 && grammar_state == 6) {
 					text.tmp[0] = (char) toupper(text.tmp[0]);
 				}
 			}

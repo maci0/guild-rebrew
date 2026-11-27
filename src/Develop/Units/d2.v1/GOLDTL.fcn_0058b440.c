@@ -6,7 +6,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl d2_AddWindowTextButton(int, int, int, int, int);
 void __cdecl d2_SetElementWidth(int, int);
 void __cdecl d2_UpdateWindowScroll(int);
-void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
+void __cdecl d2_CreateWindowScrollbar(int, int, int, int, int, int*, int*, int*);
 void __cdecl d2_SetElementFont(int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl d2_SetForm(int, int);
@@ -18,7 +18,7 @@ extern int d2_CurrentWindowId;
    non-empty entries from the supplier record, build one icon plus five price
    gauges per row, then draw the detail text for the selected entry. */
 /* ADDRESS: GOLDTL 0x0058b440 */
-void __cdecl fcn_0058b440(unsigned int a0, unsigned int* a1, int a2, int a3)
+void __cdecl d2_PopulateHireCandidateRows(unsigned int a0, unsigned int* a1, int a2, int a3)
 {
     int* v1;
     char v11[4];
@@ -81,7 +81,7 @@ void __cdecl fcn_0058b440(unsigned int a0, unsigned int* a1, int a2, int a3)
     io_AppendText(0x6811b0);
     d2_SetForm(*v2, 7);
     io_AppendText(0x6811b0);
-    fcn_00533f40(0, 0, v2[6], v2[3],
+    d2_CreateWindowScrollbar(0, 0, v2[6], v2[3],
                  *(unsigned int*) (v2[3] * 0x3cc + 0x1015f50), (int*) v11,
                  (int*) v10, (int*) v9);
     d2_SetForm(*v2, 3);

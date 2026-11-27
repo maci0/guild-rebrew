@@ -33,7 +33,7 @@ void __cdecl rd_object(void*, int, int, int);
 
 
 /* ADDRESS: GOLDTL 0x00446df0 */
-void __cdecl fcn_00446df0(const char* name, void* stream)
+void __cdecl d3_LoadSceneHeaderAndObjects(const char* name, void* stream)
 {
 	void* s;
 	int ver;

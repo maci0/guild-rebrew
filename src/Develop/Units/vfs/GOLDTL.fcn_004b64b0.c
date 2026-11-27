@@ -16,7 +16,7 @@ extern char g_10069a0[];
 unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream);
 
 /* ADDRESS: GOLDTL 0x004b64b0 */
-int __cdecl fcn_004b64b0(char* file)
+int __cdecl ls_SaveMissionJobs(char* file)
 {
 	int i;
 

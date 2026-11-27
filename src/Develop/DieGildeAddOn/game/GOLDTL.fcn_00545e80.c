@@ -24,7 +24,7 @@ struct msg {
 };
 
 #include "Develop/Units/Error/error_message.h"
-int __cdecl fcn_004c5580(struct msg*, int, char*);
+int __cdecl cm_SendRawEntityPacket(struct msg*, int, char*);
 
 int __cdecl he_MessageBoxQuickjump(int id, int arg, char* text1, unsigned char flags, int value, int x, int y, char* name, char* text2)
 {
@@ -53,7 +53,7 @@ int __cdecl he_MessageBoxQuickjump(int id, int arg, char* text1, unsigned char f
 	if (text2 != 0 && *text2 != 0) {
 		memcpy(text + len, text2, strlen(text2) + 1);
 		m.flags |= 0x10;
-		return fcn_004c5580(&m, len + strlen(text2) + 1, text);
+		return cm_SendRawEntityPacket(&m, len + strlen(text2) + 1, text);
 	}
-	return fcn_004c5580(&m, len, text1);
+	return cm_SendRawEntityPacket(&m, len, text1);
 }

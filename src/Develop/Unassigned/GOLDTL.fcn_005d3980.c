@@ -16,7 +16,7 @@ typedef struct {
 
 extern GRAPH_SAMPLE g_99ec20[16];
 
-void __cdecl fcn_00472c30(int, int, int, int, int, int, int);
+void __cdecl d2_DrawLine(int, int, int, int, int, int, int);
 
 #define CLAMP0(v) ((v) > 0.0 ? (v) : 0.0)
 
@@ -39,10 +39,10 @@ void __cdecl d2_DrawYellowHistoryGraph(GRAPH_VALUE cur, int w, int h)
 		previous = (float)(CLAMP0(g_99ec20[i - 1].a));
 		sample = (float)(CLAMP0(g_99ec20[i].a));
 		nx = x + step;
-		fcn_00472c30(x, (int) (base - previous * scale), nx, (int) (base - sample * scale), 0xee, 0xee, 0x10);
+		d2_DrawLine(x, (int) (base - previous * scale), nx, (int) (base - sample * scale), 0xee, 0xee, 0x10);
 		x = nx;
 	}
 	previous = (float)(CLAMP0(g_99ec20[15].a));
 	sample = (float)(CLAMP0(cur.a));
-	fcn_00472c30(step * 15 + 0x2d, (int) (base - previous * scale), step * 16 + 0x2d, (int) (base - sample * scale), 0xee, 0xee, 0x10);
+	d2_DrawLine(step * 15 + 0x2d, (int) (base - previous * scale), step * 16 + 0x2d, (int) (base - sample * scale), 0xee, 0xee, 0x10);
 }

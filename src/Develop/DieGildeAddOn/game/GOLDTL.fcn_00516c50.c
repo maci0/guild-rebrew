@@ -84,6 +84,6 @@ void __cdecl d3_SetupInteriorScene(Player* p, void* unit)
 	}
 	d3_UpdateSceneDetailLevel(g_6b8300, 0);
 	d3_UpdateTerrainSeasonTextures();
-	fcn_00443230(0);
+	d3_PrecacheAllSceneTextures(0);
 	d3_ApplySceneLightingPreset();
 }

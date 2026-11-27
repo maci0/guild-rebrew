@@ -6,7 +6,7 @@ int __cdecl d2_SetElementEnabled();
 float __cdecl gm_CalcEntityFavor(unsigned int, unsigned int, unsigned int);
 int __cdecl io_FormatTextBuffer();
 int __cdecl d2_ShowCenteredText();
-int __cdecl fcn_005cf720();
+int __cdecl gm_MatchesTargetFilter();
 
 extern char * g_1015ea0; extern char * g_772500; extern int d2_CurrentWindowId; extern unsigned short g_774970;
 /* ADDRESS: GOLDTL 0x005c9f10 */
@@ -136,7 +136,7 @@ label_5ca044:
 			if (v3 != 0 && *(char*) &v3[1] == 6 && *(int*) (v15[-6] + 0x210) == *(int*) &v3[2]) {
 				d2_AddElementToWindow((int) *(short*) ((int) g_772500 + 0x1ebd8) + v11, v10, 0x6d3, d2_CurrentWindowId);
 			}
-			if (a2 == 0 || fcn_005cf720(g_774970, *(unsigned short*) v15[-6], a2, 0) != 0) {
+			if (a2 == 0 || gm_MatchesTargetFilter(g_774970, *(unsigned short*) v15[-6], a2, 0) != 0) {
 				((D2_CONTROL_TL*) ((int) g_1015ea0))[v15[-5]].value_05c = 1;
 				((D2_CONTROL_TL*) ((int) g_1015ea0))[v15[-5]].flags_1d0 = 3;
 				*(int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[v15[-5]].associated_object) = v15[-6];

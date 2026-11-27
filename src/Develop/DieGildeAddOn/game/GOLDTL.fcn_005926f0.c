@@ -27,11 +27,11 @@ extern int __cdecl d2_SetBackdropResource(int);
 extern int __cdecl d2_ClearBackdropResource(void);
 extern int __cdecl fcn_004ce080(void);
 extern int __cdecl gm_AreAllMultiplayerReady(void);
-extern void* __cdecl fcn_004ce180(void);
-extern int __cdecl fcn_004ce1a0(void);
+extern void* __cdecl lb_GetPlayerList(void);
+extern int __cdecl d3_GetLocalSceneEntry(void);
 extern void* __cdecl d3_GetSceneState(void);
 extern int __cdecl cm_RequestClearSceneEntries(void);
-extern int __cdecl fcn_004ce210(int);
+extern int __cdecl lb_RequestToggleReady(int);
 extern int __cdecl lb_RequestLeaveLobby(void);
 extern int __cdecl cm_SendChatMessage(int, char*);
 extern int __cdecl cm_SendSyncStamp0x5f(void*);
@@ -46,10 +46,10 @@ extern int __cdecl main_RunFrameLoop(void*, int);
 extern int __cdecl d2_InitNetLobbyButtons(void);
 extern int __cdecl d2_InitNetLobbyScrollbar(void);
 extern int __cdecl d2_DrawCityCoatOfArms(void);
-extern int __cdecl fcn_00593360(void);
+extern int __cdecl d2_DrawNetLobbyPlayerInfo(void);
 extern int __cdecl d3_FlushLoadAndPreloadQueue(void);
 extern int __cdecl d2_PopulateNetLobbyPlayerList(void);
-extern int __cdecl fcn_005936f0(int, int);
+extern int __cdecl d2_RunPlayerEditorDialog(int, int);
 extern int __cdecl d2_ChooseProfession(int);
 extern int __cdecl d2_RefreshNetLobbyChatLog(void);
 extern int __cdecl fcn_0064d41a(char*, char*, int);
@@ -148,7 +148,7 @@ int __cdecl d2_RunNetLobbySetup(void)
 	while (cm_GetCommandStatus(d) == 0)
 		cm_StepCommandQueue();
 	d2_SetBackdropResource(0x7d6);
-	g_779cb8 = (char*)fcn_004ce1a0();
+	g_779cb8 = (char*)d3_GetLocalSceneEntry();
 	if (g_779cb8 == 0) {
 		h = (void*)d2_LoadForm(0, 0, (char*)0x68d714);
 		d2_CenterDialogWindows(h);
@@ -171,7 +171,7 @@ int __cdecl d2_RunNetLobbySetup(void)
 	d2_InitNetLobbyButtons();
 	d2_DrawCityCoatOfArms();
 	d3_FlushLoadAndPreloadQueue();
-	fcn_00593360();
+	d2_DrawNetLobbyPlayerInfo();
 	d2_PopulateNetLobbyPlayerList();
 	fcn_004727a0(g_6a9b9c, 1);
 	h = (void*)d2_GetWindowListItem(g_6a9b9c, 0, 0);
@@ -226,7 +226,7 @@ int __cdecl d2_RunNetLobbySetup(void)
 				goto last;
 			}
 			if (key == *(int*)0x6a9b90) {
-				d = fcn_004ce210(*(int*)(g_779cb8 + 4) == 0);
+				d = lb_RequestToggleReady(*(int*)(g_779cb8 + 4) == 0);
 				while (cm_GetCommandStatus(d) == 0)
 					cm_StepCommandQueue();
 				*(int*)((char*)g_1015ea0 + *(int*)0x6a9b90 * 0x2f4 + 0x38) = *(int*)(g_779cb8 + 4);
@@ -234,12 +234,12 @@ int __cdecl d2_RunNetLobbySetup(void)
 					g_774654 = 1;
 			} else if (key == *(int*)0x6a9b94) {
 				if (*(int*)(g_779cb8 + 4) != 0) {
-					d = fcn_004ce210(0);
+					d = lb_RequestToggleReady(0);
 					while (cm_GetCommandStatus(d) == 0)
 						cm_StepCommandQueue();
 					*(int*)((char*)g_1015ea0 + *(int*)0x6a9b90 * 0x2f4 + 0x38) = *(int*)(g_779cb8 + 4);
 				}
-				if (*(int*)(g_779cb8 + 4) == 0 && fcn_005936f0(0x24087, 1)) {
+				if (*(int*)(g_779cb8 + 4) == 0 && d2_RunPlayerEditorDialog(0x24087, 1)) {
 					strcpy((char*)0x779c72, (char*)0x7e23ea);
 					strcpy((char*)0x779c82, (char*)0x7e240a);
 					*(int*)0x779c6c = *(int*)0x7e23e4 - 0x59a;
@@ -288,8 +288,8 @@ int __cdecl d2_RunNetLobbySetup(void)
 				d = cm_RequestClearSceneEntries();
 				while (cm_GetCommandStatus(d) == 0)
 					cm_StepCommandQueue();
-				g_774a34 = (unsigned*)fcn_004ce180();
-				fcn_00593360();
+				g_774a34 = (unsigned*)lb_GetPlayerList();
+				d2_DrawNetLobbyPlayerInfo();
 				d2_PopulateNetLobbyPlayerList();
 				d2_RefreshNetLobbyChatLog();
 				g_779ce4[1] = 0;

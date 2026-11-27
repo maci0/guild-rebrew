@@ -6,14 +6,14 @@ int __cdecl d2_CreateElement(int x, int y, int a3);
 int __cdecl d2_PositionControl(int x, int y, int win);
 int __cdecl d2_AddElementToWindow(int x, int y, int a3, int win);
 int __cdecl d2_LoadForm(int a0, int a1, char* text);
-void __cdecl fcn_00471d80(int k, int flags);
+void __cdecl d2_CenterForm(int k, int flags);
 void __cdecl d2_SetFormVisibility(int k, int flag);
 int __cdecl d2_SetForm(int k, int i);
 void __cdecl d2_CreateGuiWindow(int k, int a1, int a2, int a3, ...);
 void __cdecl d2_SetValueGaugeLabel(int id, int value);
 void __cdecl d2_SetValueGaugeStepLabels(int slot, int n, ...);
 int __cdecl d2_AddWindowValueGauge(int x, int y, int a3, int a4, int a5, int a6, int a7, int win);
-float __cdecl fcn_005e8860(int a0);
+float __cdecl gm_GetNormalizedWeatherStrength(int a0);
 extern char * g_1015ea0; extern char g_10161bc[]; extern float g_662cf8; extern int g_6b7fac; extern char * g_772500; extern int d2_CurrentWindowId;
 /* ADDRESS: GOLDTL 0x005893d0 */
 void __cdecl d2_CreateCannonControls(int w, int a1)
@@ -44,7 +44,7 @@ void __cdecl d2_CreateCannonControls(int w, int a1)
 	    d2_ScreenHeight
 	    - (int) ((D2_BILD_GROESSE*)g_772500)[id2].hoehe, id2);
 	*(int*) (w + 0xa4) = d2_LoadForm(0, 0, (char*) 0x6a94e8);
-	fcn_00471d80(*(int*) (w + 0xa4), 1);
+	d2_CenterForm(*(int*) (w + 0xa4), 1);
 	d2_SetForm(*(int*) (w + 0xa4), 0);
 	d2_PositionControl(((D2_WIN*)g_1015f40)[d2_CurrentWindowId].left, v - 0x19,
 	    ((D2_WIN*)g_1015f40)[d2_CurrentWindowId].slot);
@@ -77,7 +77,7 @@ void __cdecl d2_CreateCannonControls(int w, int a1)
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) (w + 0xd0)].value_05c) = 1;
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) (w + 0xd0)].flags_1d0) = 3;
 	*(int*) (w + 0xc0) = d2_LoadForm(0, 0, (char*) 0x6a94c8);
-	fcn_00471d80(*(int*) (w + 0xc0), 1);
+	d2_CenterForm(*(int*) (w + 0xc0), 1);
 	d2_SetForm(*(int*) (w + 0xc0), 0);
 	d2_PositionControl(((D2_WIN*)g_1015f40)[d2_CurrentWindowId].left, half - 0x4b,
 	    ((D2_WIN*)g_1015f40)[d2_CurrentWindowId].slot);
@@ -85,12 +85,12 @@ void __cdecl d2_CreateCannonControls(int w, int a1)
 	*(int*) (w + 0xa8) = d2_AddWindowValueGauge(0x96, 0xb, 200, 0, 100, 0x75, 0x4c2,
 	    *(int*) &d2_CurrentWindowId);
 	d2_CreateGuiWindow(*(int*) (w + 0xa8), 0, 100,
-	    (int) (fcn_005e8860(1) * 100.0f));
+	    (int) (gm_GetNormalizedWeatherStrength(1) * 100.0f));
 	d2_SetValueGaugeLabel(*(int*) (w + 0xa8), *(int*) 0x14b5498);
 	*(int*) (w + 0xac) = d2_AddWindowValueGauge(0x96, 0x1f, 200, 0, 100, 0x75, 0x4c2,
 	    *(int*) &d2_CurrentWindowId);
 	d2_CreateGuiWindow(*(int*) (w + 0xac), 0, 100,
-	    (int) (fcn_005e8860(1) * 100.0f));
+	    (int) (gm_GetNormalizedWeatherStrength(1) * 100.0f));
 	d2_SetValueGaugeLabel(*(int*) (w + 0xac), *(int*) 0x14b549c);
 	*(int*) (w + 0xc4) = d2_AddWindowValueGauge(0x96, 0x33, 200, 0, 100, 0x75, 0x4c2,
 	    *(int*) &d2_CurrentWindowId);
@@ -99,7 +99,7 @@ void __cdecl d2_CreateCannonControls(int w, int a1)
 		* 100.0f));
 	d2_SetValueGaugeLabel(*(int*) (w + 0xc4), *(int*) 0x14b54a0);
 	*(int*) (w + 0x74) = d2_LoadForm(0, 0, (char*) 0x6a94a8);
-	fcn_00471d80(*(int*) (w + 0x74), 3);
+	d2_CenterForm(*(int*) (w + 0x74), 3);
 	d2_SetFormVisibility(*(int*) (w + 0x74), 0);
 	*(int*) (w + 0x70) = *(int*) &g_6b7fac;
 }

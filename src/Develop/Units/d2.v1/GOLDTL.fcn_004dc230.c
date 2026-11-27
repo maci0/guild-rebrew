@@ -7,7 +7,7 @@ extern int g_100f1dc;
 extern int d2_CurrentElementId;
 
 int __cdecl d2_LoadForm(int, int, char*);
-void __cdecl fcn_00471d80(int, int);
+void __cdecl d2_CenterForm(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
@@ -19,7 +19,7 @@ void __cdecl d2_DestroyForm(int);
 
 
 /* ADDRESS: GOLDTL 0x004dc230 */
-int __cdecl fcn_004dc230(unsigned short* a1, unsigned short* a2, unsigned short* a3, int* out)
+int __cdecl d2_RunCouncilVoteDialog(unsigned short* a1, unsigned short* a2, unsigned short* a3, int* out)
 {
 	int aux;
 	int h;
@@ -31,7 +31,7 @@ int __cdecl fcn_004dc230(unsigned short* a1, unsigned short* a2, unsigned short*
 
 	*out = 0;
 	h = d2_LoadForm(0, 0, g_68c340);
-	fcn_00471d80(h, 1);
+	d2_CenterForm(h, 1);
 	d2_SetForm(h, 0);
 	t = io_AppendText(0x12c6, *a2, *a1);
 	b0 = d2_GetWindowListItem(h, 0, t);
@@ -41,7 +41,7 @@ int __cdecl fcn_004dc230(unsigned short* a1, unsigned short* a2, unsigned short*
 	d2_UpdateProgressBar(w, 0x5dc, 1);
 	res = ai_CompareOfficeCandidates(a1, a2, a3, &aux);
 	g_100f1dc = -1;
-	while (main_RunFrameLoop(fcn_004dc230, cut_EventLoopFlags) != 0) {
+	while (main_RunFrameLoop(d2_RunCouncilVoteDialog, cut_EventLoopFlags) != 0) {
 		if (d2_UpdateProgressBar(w, 0, 0) == 0) {
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {

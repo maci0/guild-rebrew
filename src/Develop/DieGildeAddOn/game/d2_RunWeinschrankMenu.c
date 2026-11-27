@@ -1,4 +1,4 @@
-void __cdecl fcn_005338a0(void);
+void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(int a, int b);
 int __cdecl RegisterStatusText(char* s, int a, int b);
 void __cdecl d2_RunWeinkellerDialog(void);
@@ -6,7 +6,7 @@ void __cdecl d2_RunWeinkellerDialog(void);
 /* ADDRESS: GOLDTL 0x005a4030 */
 void __cdecl d2_RunWeinschrankMenu(void)
 {
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	while (main_RunFrameLoop(0x5a4030, 0x67fff) != 0) {
 		int v;
 		int cur;

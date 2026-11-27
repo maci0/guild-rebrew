@@ -7,7 +7,7 @@ extern char g_6b5c60[];
 
 int __cdecl cm_RequestSysMessage(int, char*);
 int __cdecl cm_GetCommandStatus(int);
-void __cdecl fcn_00533a40(char*);
+void __cdecl d2_ShowStatusBanner(char*);
 void __cdecl main_RunFrameLoop(int, int);
 
 void __cdecl cm_SaveGameAndWait(int flags, char* name)
@@ -20,8 +20,8 @@ void __cdecl cm_SaveGameAndWait(int flags, char* name)
 	cmd_slot = cm_RequestSysMessage(0xe, buf);
 	flags |= 0x300000;
 	while (cm_GetCommandStatus(cmd_slot) == 0) {
-		fcn_00533a40(name);
+		d2_ShowStatusBanner(name);
 		main_RunFrameLoop(0, flags);
 	}
-	fcn_00533a40(g_6b5c60);
+	d2_ShowStatusBanner(g_6b5c60);
 }

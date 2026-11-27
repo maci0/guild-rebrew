@@ -35,7 +35,7 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetFormWindow(int, int);
-void __cdecl fcn_00533f40(int x, int y, int owner, int other, int arg5, int* id2, int* id1, int* id3);
+void __cdecl d2_CreateWindowScrollbar(int x, int y, int owner, int other, int arg5, int* id2, int* id1, int* id3);
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_AddObjekt(void);
 char* __cdecl gm_FindBuildingOwner(unsigned char*);
@@ -71,7 +71,7 @@ int __cdecl d2_RunMeisterListeDialog(void)
 		g_777d00[k].value = 0;
 	}
 	d2_SetForm(h, 0);
-	fcn_00533f40(0x206, 0x167, d2_CurrentWindowId, d2_GetFormWindow(h, 2), 0x3e, &g_776c90, &g_777ca0, &g_778b00);
+	d2_CreateWindowScrollbar(0x206, 0x167, d2_CurrentWindowId, d2_GetFormWindow(h, 2), 0x3e, &g_776c90, &g_777ca0, &g_778b00);
 	*(int*) (g_1016198 + d2_CurrentWindowId * 0x3cc + 0x160) = -1;
 	*(int*) (g_1016198 + d2_CurrentWindowId * 0x3cc + 0x164) = -1;
 	d2_SetForm(h, 3);

@@ -2,7 +2,7 @@
 #include "Develop/Units/d3/d3_object.h"
 #include "client_placement.h"
 
-char __cdecl fcn_005982d0(char* obj, void* list)
+char __cdecl lc_CollectVegetationObjects(char* obj, void* list)
 {
 	D3_OBJECT* parent;
 

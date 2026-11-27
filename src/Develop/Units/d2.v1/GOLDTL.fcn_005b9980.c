@@ -22,7 +22,7 @@ extern void __cdecl d2_DestroyForm(int a0);
 extern int __cdecl d2_ClearRadioGroup(int a0);
 extern float __cdecl eval_ObjektPreis2Credits(int a0, int a1);
 extern int __cdecl gm_CheckEntityStock(char *a0, int a1, unsigned char a2);
-extern int __cdecl fcn_0051e070(void);
+extern int __cdecl main_GetLanguage(void);
 extern int __cdecl d2_ShowModalMessageBox(char *a0, int a1);
 extern void __cdecl d2_SetControlText(int a0, char *a1);
 extern void __cdecl d2_CenterElement(int a0);
@@ -84,7 +84,7 @@ void __cdecl d2_ShowNewCartDialog(int sourceObj)
                 if (gm_CheckEntityStock((char *)(g_774970 * 0x21c + 0x7f4ca0), priceValue,
                         (priceValue & 0xffffff00) | g_773d75))
                 {
-                    switch (fcn_0051e070())
+                    switch (main_GetLanguage())
                     {
                     case 1:
                         io_FormatTextBuffer(confirmBuf, (char *)0xd9, choiceIndex * 2 + 0xc10, priceValue);

@@ -4,7 +4,7 @@
 
 extern char* g_14a5adc[15];
 
-void __cdecl fcn_0057e880(int, char*, int, int);
+void __cdecl d2_DispatchTutorialInput(int, char*, int, int);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
@@ -53,7 +53,7 @@ unsigned int __cdecl d2_RunProfessionSelectDialog(unsigned short* actor)
     ent = actor;
     if (*(char*) &actor[1] == '\x06') {
     result = 0;
-    fcn_0057e880(9, 0, 0, 0);
+    d2_DispatchTutorialInput(9, 0, 0, 0);
     dialog = d2_LoadForm(0, 0, (char*) 0x6ace10);
     d2_CenterDialogWindows(dialog);
     d2_SetForm(dialog, 0);
@@ -156,7 +156,7 @@ unsigned int __cdecl d2_RunProfessionSelectDialog(unsigned short* actor)
         }
     }
     d2_DestroyForm(dialog);
-    fcn_0057e880(9, 0, 1, 0);
+    d2_DispatchTutorialInput(9, 0, 1, 0);
     return result;
     }
     return 0;

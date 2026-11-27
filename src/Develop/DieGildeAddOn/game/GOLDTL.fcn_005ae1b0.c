@@ -27,7 +27,7 @@ extern char s_6ab214[];
 extern char s_6aa34c[];
 extern char s_6a9924[];
 
-void __cdecl fcn_005338a0(void);
+void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl d3_FindSceneObject(int, int, int, char*);
 void __cdecl d3_SetSubtreeVisible(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -59,7 +59,7 @@ void __cdecl d2_RunRaeuberlagerMenu(unsigned char* building)
 	g = 0;
 	f = 0;
 	e = 0;
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	t = &((Shop*)lpGebaeudePROT)[building[0]];
 	if (t->x247 >= 2) {
 		r = d3_FindSceneObject(0, 0xc0, 0, s_6ab260);

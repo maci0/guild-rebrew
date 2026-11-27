@@ -19,7 +19,7 @@ extern int d2_CurrentElementId;
 extern int g_666018;
 extern int g_66601c;
 
-void __cdecl fcn_005338a0(void);
+void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl d2_LoadForm(int, int, char *);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_InitWindowBounds(int);
@@ -36,7 +36,7 @@ unsigned short *__cdecl d2_OpenTargetPicker(int *, char *, char *, int);
 int __cdecl d2_ShowModalMessageBox(char *, int);
 void __cdecl cm_SendCopyEntityData(char *);
 void __cdecl d2_SetFormVisibility(int, int);
-void __cdecl fcn_0059fa80(D2_RESIDENCE_ENTITY *, char *, char *);
+void __cdecl d2_RunGeliebteDetailDialog(D2_RESIDENCE_ENTITY *, char *, char *);
 int __cdecl main_RunFrameLoop(void *, int);
 void __cdecl d2_DestroyForm(int);
 void __cdecl d3_EndCameraAndUiMode(void);
@@ -67,7 +67,7 @@ void __cdecl d2_ShowGeliebteDialog(char *building)
 	buttons[1] = -1;
 	buttons[2] = -1;
 	buttons[3] = -1;
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	dlg = d2_LoadForm(0, 0, "locations\\wohnsitz\\geliebte");
 	d2_SetForm(dlg, 0);
 	d2_InitWindowBounds(d2_CurrentWindowId);
@@ -151,7 +151,7 @@ void __cdecl d2_ShowGeliebteDialog(char *building)
 						ent = gm_LookupEntityRecordById(ids[i]);
 						act = he_StartHandlungSearch(1, 1, acts[i]);
 						d2_SetFormVisibility(dlg, 0);
-						fcn_0059fa80(&g_7f4ca0[g_774970], ent, act);
+						d2_RunGeliebteDetailDialog(&g_7f4ca0[g_774970], ent, act);
 						d2_SetFormVisibility(dlg, 1);
 						break;
 					}

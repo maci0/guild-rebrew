@@ -11,13 +11,13 @@
 #include "client_types.h"
 extern Pair_99f800 g_99f800[0x800];
 
-int __cdecl fcn_004f58b0(int, int);
+int __cdecl gs_AllocEvidenceSlot(int, int);
 
 int __cdecl cm_ExLinkEvidence(char* cmd, char* response)
 {
 	int index;
 
-	index = fcn_004f58b0(*(int*) (cmd + 0x14), *(int*) (cmd + 0x10));
+	index = gs_AllocEvidenceSlot(*(int*) (cmd + 0x14), *(int*) (cmd + 0x10));
 	if (index > -1) {
 		g_99f800[index].owner = *(int*) (cmd + 0x14);
 		g_99f800[index].key = *(int*) (cmd + 0x10);

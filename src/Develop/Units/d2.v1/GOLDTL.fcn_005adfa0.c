@@ -19,7 +19,7 @@ typedef struct
 extern int g_14abad4;
 
 void __cdecl d2_InitPlayerBar(int, int);
-void __cdecl fcn_005bdc30(int, Req*, int, void*, int);
+void __cdecl d2_RunCityScrollMapDialog(int, Req*, int, void*, int);
 void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl sv_ClearObjectSelection(void);
 void __cdecl d2_OpenTaschendiebstahlDialog(void);
@@ -33,7 +33,7 @@ void __cdecl d2_OpenAngriffDialog(int a)
 	req.kind = 7;
 	req.c = 0x90010;
 	d2_InitPlayerBar(a, 0);
-	fcn_005bdc30(1, &req, g_14abad4, (void*) d2_OpenTaschendiebstahlDialog, 0);
+	d2_RunCityScrollMapDialog(1, &req, g_14abad4, (void*) d2_OpenTaschendiebstahlDialog, 0);
 	d2_RestoreHudAfterDialog();
 	sv_ClearObjectSelection();
 }

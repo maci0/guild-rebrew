@@ -15,7 +15,7 @@ void __cdecl d3_SetNodePosition(char*, float*);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 
 /* ADDRESS: GOLDTL 0x0052b230 */
-int __cdecl fcn_0052b230(void)
+int __cdecl d3_UpdateMouseDragCamera(void)
 {
 	float m[16];
 	float d[4];

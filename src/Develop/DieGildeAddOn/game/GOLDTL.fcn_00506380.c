@@ -3,7 +3,7 @@ extern char* lpObjektePROT;
 extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
-int __cdecl fcn_00507910(unsigned char typ);
+int __cdecl gm_MapBuildingCatToGuildSlot(unsigned char typ);
 int __cdecl gm_CheckStatLevel(int a0, int typ);
 int __cdecl gm_GetBuildingUiFlags(void* geb, void* a1, void* a2);
 int __cdecl gm_MapEntityStatRange(int typ);
@@ -25,7 +25,7 @@ int __cdecl gm_GetEntityUiFlags(int playerIndex, unsigned char* building, unsign
 	if (building != 0) {
 		rec = (unsigned char*) (((unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[
 (unsigned int) *building]));
-		found = gm_CheckStatLevel(playerIndex, fcn_00507910(*rec));
+		found = gm_CheckStatLevel(playerIndex, gm_MapBuildingCatToGuildSlot(*rec));
 		if (*rec == 0x1d)
 			return gm_GetBuildingUiFlags((void*) (((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[playerIndex])), building, object);
 		switch (*rec) {

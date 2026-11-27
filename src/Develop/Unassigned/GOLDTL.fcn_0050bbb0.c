@@ -1,7 +1,7 @@
 extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 /* ADDRESS: GOLDTL 0x0050bbb0 */
-float __cdecl fcn_0050bbb0(int idx)
+float __cdecl gm_CalcLevelProductionBonus(int idx)
 {
 	char* p;
 	float v;

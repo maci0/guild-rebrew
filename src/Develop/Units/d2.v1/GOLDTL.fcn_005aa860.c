@@ -26,7 +26,7 @@ void __cdecl amt_HandleOfficeAction(char*, Req*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
-int __cdecl fcn_005aa860(unsigned short* target)
+int __cdecl d2_RunOfficeDismissalDialog(unsigned short* target)
 {
 	Req s;
 	int r;
@@ -61,7 +61,7 @@ int __cdecl fcn_005aa860(unsigned short* target)
 		} else if (g_100f1dc == 1) {
 			g_774654 = 1;
 		}
-	} while (main_RunFrameLoop((void*) fcn_005aa860, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_RunOfficeDismissalDialog, 0x677c7) != 0);
 	d2_DestroyForm(dlg);
 	return r;
 }

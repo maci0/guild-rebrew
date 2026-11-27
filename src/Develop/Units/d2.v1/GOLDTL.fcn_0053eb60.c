@@ -33,7 +33,7 @@ int __cdecl main_RunFrameLoop(void (__cdecl*)(int), int);
 int __cdecl d2_GetControlValue(int);
 void __cdecl d2_DestroyForm(int);
 
-void __cdecl fcn_0053eb60(int n)
+void __cdecl d2_RunChooseOpponentsDialog(int n)
 {
 	int h;
 	int ids[0x10];
@@ -62,7 +62,7 @@ void __cdecl fcn_0053eb60(int n)
 	}
 	d2_SetForm(h, 2);
 	ok = d2_GetWindowListItem(h, 2, io_AppendText(0x7d));
-	while (main_RunFrameLoop(fcn_0053eb60, 0xc6) != 0) {
+	while (main_RunFrameLoop(d2_RunChooseOpponentsDialog, 0xc6) != 0) {
 		if (g_14ce8e0 != 0 || g_14cf950 == 1 || (g_100f1dc == 2 && d2_CurrentElementId == ok)) {
 			g_774654 = 1;
 		}

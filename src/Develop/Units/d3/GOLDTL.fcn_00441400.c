@@ -1,6 +1,6 @@
 #include "Develop/Units/d8_vesa/d3d_device_view.h"
-typedef long (__stdcall* Transform441400Fn)(D3D_DEVICE_VIEW*, int, float*);
-typedef long (__stdcall* Texture441400Fn)(D3D_DEVICE_VIEW*, int, int);
+typedef long (__stdcall* D3_TERRAIN_SET_TRANSFORM_FN)(D3D_DEVICE_VIEW*, int, float*);
+typedef long (__stdcall* D3_TERRAIN_SET_TEXTURE_FN)(D3D_DEVICE_VIEW*, int, int);
 
 
 
@@ -43,13 +43,13 @@ typedef struct Cell {
 	char pad3[5];
 } Cell;
 
-typedef struct Terrain441400 {
+typedef struct D3_FLOOR_TERRAIN {
 	char pad0[0x30];
 	MObj* tex[8];
 	float pos[3];
 	char pad5c[0x44];
 	Cell cells[8][8];
-} Terrain441400;
+} D3_FLOOR_TERRAIN;
 
 #include "Develop/Units/d3/d3_camera.h"
 
@@ -59,9 +59,9 @@ float* __stdcall fcn_005eb970(float*, float*, float*);
 void __cdecl d3_SetRenderMaterialState(unsigned char, unsigned char, int, unsigned char, unsigned char);
 
 /* ADDRESS: GOLDTL 0x00441400 */
-void __cdecl fcn_00441400(char* o)
+void __cdecl d3_RenderFloorTerrain(char* o)
 {
-	Terrain441400* t;
+	D3_FLOOR_TERRAIN* t;
 	float m[16];
 	Cell* c;
 	MObj* p;
@@ -69,7 +69,7 @@ void __cdecl fcn_00441400(char* o)
 	int a;
 	int b;
 
-	t = (Terrain441400*) o;
+	t = (D3_FLOOR_TERRAIN*) o;
 	if (d3_ActiveCamera == 0) {
 		return;
 	}
@@ -77,11 +77,11 @@ void __cdecl fcn_00441400(char* o)
 	             t->pos[1] - *(float*) (((char*) d3_ActiveCamera) + 0x50),
 	             t->pos[2] - *(float*) (((char*) d3_ActiveCamera) + 0x54));
 	fcn_005eb970(m, m, (float*) (((char*) d3_ActiveCamera) + 0x18c));
-	((Transform441400Fn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetTransform)(((D3D_DEVICE_VIEW*)g_6b5de0), 0x100, m);
+	((D3_TERRAIN_SET_TRANSFORM_FN) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetTransform)(((D3D_DEVICE_VIEW*)g_6b5de0), 0x100, m);
 	d3_SetRenderMaterialState(0xff, 0, 0, 0, 0);
 	for (k = 0; k < 8; k++) {
 		if (t->tex[k] != 0) {
-			((Texture441400Fn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_cc[10])(((D3D_DEVICE_VIEW*)g_6b5de0), 0, *(int*) ((char*) t->tex[k] + 0x50));
+			((D3_TERRAIN_SET_TEXTURE_FN) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_cc[10])(((D3D_DEVICE_VIEW*)g_6b5de0), 0, *(int*) ((char*) t->tex[k] + 0x50));
 			for (a = 0; a < 8; a++) {
 				for (b = 0; b < 8; b++) {
 					c = &t->cells[a][b];
@@ -98,7 +98,7 @@ void __cdecl fcn_00441400(char* o)
 	((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*)g_6b5de0), 0x13, 5);
 	for (k = 0; k < 8; k++) {
 		if (t->tex[k] != 0) {
-			((Texture441400Fn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_cc[10])(((D3D_DEVICE_VIEW*)g_6b5de0), 0, *(int*) ((char*) t->tex[k] + 0x50));
+			((D3_TERRAIN_SET_TEXTURE_FN) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_cc[10])(((D3D_DEVICE_VIEW*)g_6b5de0), 0, *(int*) ((char*) t->tex[k] + 0x50));
 			for (a = 0; a < 8; a++) {
 				for (b = 0; b < 8; b++) {
 					c = &t->cells[a][b];
@@ -114,7 +114,7 @@ void __cdecl fcn_00441400(char* o)
 	((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*)g_6b5de0), 0x14, 2);
 	for (k = 0; k < 8; k++) {
 		if (t->tex[k] != 0) {
-			((Texture441400Fn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_cc[10])(((D3D_DEVICE_VIEW*)g_6b5de0), 0, *(int*) ((char*) t->tex[k] + 0x50));
+			((D3_TERRAIN_SET_TEXTURE_FN) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_cc[10])(((D3D_DEVICE_VIEW*)g_6b5de0), 0, *(int*) ((char*) t->tex[k] + 0x50));
 			for (a = 0; a < 8; a++) {
 				for (b = 0; b < 8; b++) {
 					c = &t->cells[a][b];

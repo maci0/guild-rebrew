@@ -62,8 +62,8 @@ extern unsigned char g_773d75;
 void __cdecl gm_PackGameTime(char*, Stamp*);
 void __cdecl gm_UpdateMarketStockSlots(int);
 void __cdecl cm_SendRandomMarktSlotDelta(int);
-int __cdecl fcn_00502450(int, int);
-int __cdecl fcn_005024e0(int, int);
+int __cdecl gm_CalcTownSlotTargetStock(int, int);
+int __cdecl gm_CalcTownSlotProductionSupply(int, int);
 float __cdecl gm_CalcMarketSlotPrice(int, int);
 
 /* ADDRESS: GOLDTL 0x005020e0 */
@@ -131,10 +131,10 @@ void __cdecl gm_UpdateTownSeasonPrices(int townRow, char* timeSource)
 	for (i = 0; i < 85; i++) {
 		kind = (*(char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[g_85ab80[townRow].slots[i].objekt_id].kind);
 		if (kind != 0x17 && kind != 0x25) {
-			g_85ab80[townRow].slots[i].unk_20 = (float) (((double) fcn_00502450(townRow, i) - g_85ab80[townRow].slots[i].unk_20) * 0.5 + g_85ab80[townRow].slots[i].unk_20);
+			g_85ab80[townRow].slots[i].unk_20 = (float) (((double) gm_CalcTownSlotTargetStock(townRow, i) - g_85ab80[townRow].slots[i].unk_20) * 0.5 + g_85ab80[townRow].slots[i].unk_20);
 		}
 		if (townRow == g_773d75) {
-			g_85ab80[townRow].slots[i].unk_34 = fcn_005024e0(townRow, i);
+			g_85ab80[townRow].slots[i].unk_34 = gm_CalcTownSlotProductionSupply(townRow, i);
 		} else {
 			g_85ab80[townRow].slots[i].unk_34 = g_85ab80[townRow].slots[i].unk_30;
 		}

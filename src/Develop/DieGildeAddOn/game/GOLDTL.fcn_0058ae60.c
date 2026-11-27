@@ -4,7 +4,7 @@ extern int g_14ce8e0;
 #include "client_dialog_state.h"
 extern char* g_7746a0;
 
-void __cdecl fcn_005338a0(void);
+void __cdecl d2_ClearStatusTextSlots(void);
 char* __cdecl RegisterStatusText(char* name, char* path, int arg);
 int __cdecl main_RunFrameLoop(void* p, int mask);
 void __cdecl d2_RunDomizilKabinettDialog(int unused, char* p);
@@ -17,7 +17,7 @@ void __cdecl d2_RunDomizilKanoneMenu(int dlg, char* msg)
 	char* control;
 
 	control = 0;
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	if (!main_RunFrameLoop((void*) d2_RunDomizilKanoneMenu, 0x67fff)) {
 		return;
 	}

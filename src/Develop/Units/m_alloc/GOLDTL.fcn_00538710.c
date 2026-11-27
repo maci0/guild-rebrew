@@ -10,7 +10,7 @@ int sprintf(char*, const char*, ...);
 __declspec(dllimport) int __stdcall CreateDirectoryA(const char*, void*);
 void __cdecl InitializeLogAndErrorHandler(void*, void*, int, int);
 void __cdecl m_init(int);
-void __cdecl fcn_0042dfb0(int);
+void __cdecl tr_AllocTraceBuffer(int);
 void __cdecl vfs_init(char*, int);
 void __cdecl tb_StartTimer(int, int);
 void __cdecl main_ShutdownEngine(void);
@@ -22,7 +22,7 @@ int __cdecl main_InitRuntime(void)
 
 	InitializeLogAndErrorHandler((void*) main_ShutdownEngine, (void*) fcn_00538700, (int) g_774940, 0x10);
 	m_init(0xbb80);
-	fcn_0042dfb0(0x80);
+	tr_AllocTraceBuffer(0x80);
 	sprintf(path, "%sgamedata\\Screenshots", g_6a3448);
 	CreateDirectoryA(path, 0);
 	vfs_init(g_6a3448, 0);

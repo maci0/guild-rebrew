@@ -6,7 +6,7 @@ void __cdecl io_FormatTextBuffer(char*, int, int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 void __cdecl d3snd_QueueSound(int, int, char*, int, int);
 void __cdecl d2_ShowModalMessageBox(char*, int);
-int __cdecl fcn_005bdc30(int, int*, int, int, int);
+int __cdecl d2_RunCityScrollMapDialog(int, int*, int, int, int);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -82,7 +82,7 @@ void __cdecl d2_OpenFriedhofFogDialog(int building)
 	query[3] = 1;
 	query[4] = 6;
 	query[0x13] = 0x727;
-	rec = fcn_005bdc30(1, query, *(int*) 0x14b55f8, 0, 0);
+	rec = d2_RunCityScrollMapDialog(1, query, *(int*) 0x14b55f8, 0, 0);
 	if (!rec) {
 		d3_EndCameraAndUiMode();
 		return;

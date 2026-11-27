@@ -3,7 +3,7 @@
 void __cdecl d3_ReleaseTexture(int);
 void __cdecl m_FreeTracked(void*);
 
-void __cdecl fcn_004162c0(char* p)
+void __cdecl d3_DestroySnowEffect(char* p)
 {
 	if (p == 0) {
 		return;

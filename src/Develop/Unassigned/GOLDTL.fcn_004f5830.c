@@ -4,7 +4,7 @@ int __cdecl cm_GetCommandStatus(int i);
 void __cdecl cm_StepCommandQueue(void);
 
 /* ADDRESS: GOLDTL 0x004f5830 */
-void __cdecl fcn_004f5830(void)
+void __cdecl cm_PruneCompletedStraftaten(void)
 {
 	int cursor;
 	int handle;

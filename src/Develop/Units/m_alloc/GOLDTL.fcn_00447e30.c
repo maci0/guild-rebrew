@@ -64,7 +64,7 @@ void* __cdecl m_alloc(int, char*);
 void __cdecl m_FreeTracked(void*);
 int __cdecl d3_LoadOrReuseTexture(char*, FLOOR_COLOR_BITS, unsigned int, unsigned int);
 int __cdecl fcn_0045ce90(int);
-char* __cdecl fcn_0043fa10(char*);
+char* __cdecl d3_LoadFloorPatch(char*);
 
 /* ADDRESS: GOLDTL 0x00447e30 */
 int __cdecl d3_int_io_LoadFloor(char* stream, unsigned int version)
@@ -208,7 +208,7 @@ int __cdecl d3_int_io_LoadFloor(char* stream, unsigned int version)
 				vfs_ReadCString(stream, skip);
 			}
 		}
-		obj = fcn_0043fa10((char*) &desc);
+		obj = d3_LoadFloorPatch((char*) &desc);
 		if (version >= 0x3a6c000e) {
 			vfs_ReadVec3(stream, tri);
 			if (obj != 0) {

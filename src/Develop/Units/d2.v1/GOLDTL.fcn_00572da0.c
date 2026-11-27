@@ -6,7 +6,7 @@ extern int g_100f1dc;
 void __cdecl d2_CreateActionPopupSlot(char*, int, int, char*, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
-void __cdecl fcn_00545780(char*);
+void __cdecl d2_CloseActionPopup(char*);
 void __cdecl he_FreeAction(char*);
 
 void __cdecl he_RunNeueVorkommenSuchen(char* e)
@@ -28,7 +28,7 @@ void __cdecl he_RunNeueVorkommenSuchen(char* e)
 		/* fall through */
 	case -2:
 	case -1:
-		fcn_00545780(e);
+		d2_CloseActionPopup(e);
 		he_FreeAction(e);
 	}
 }

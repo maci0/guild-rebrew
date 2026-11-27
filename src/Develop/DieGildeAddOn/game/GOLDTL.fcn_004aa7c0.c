@@ -1,5 +1,5 @@
 unsigned short __cdecl gm_RandomMod(unsigned short n);
-int __cdecl fcn_004f6040(int* ids, int* d, unsigned short id);
+int __cdecl gm_CollectFrequentCrimeTargets(int* ids, int* d, unsigned short id);
 char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl he_HasNoActiveAction0x2e(char* a, char* b);
 float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
@@ -19,7 +19,7 @@ int __cdecl ai_SelectDrohenTarget(char* entity, char* res, char* out)
 	if (*(int*) (entity + 0x194) < 2) {
 		return 0;
 	}
-	count = fcn_004f6040(ids, d, *(unsigned short*) entity);
+	count = gm_CollectFrequentCrimeTargets(ids, d, *(unsigned short*) entity);
 	if (!count) {
 		return 0;
 	}

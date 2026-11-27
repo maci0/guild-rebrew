@@ -44,7 +44,7 @@ int __cdecl cm_GetCommandStatus(int handle);
 int __cdecl main_RunFrameLoop(int func, int id);
 
 /* ADDRESS: GOLDTL 0x0059fa80 */
-void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
+void __cdecl d2_RunGeliebteDetailDialog(int a0, unsigned short* a1, int a2)
 {
 	unsigned int v3;
 	unsigned int v4;

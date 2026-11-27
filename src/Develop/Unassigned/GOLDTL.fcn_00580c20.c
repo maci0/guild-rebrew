@@ -7,7 +7,7 @@ extern char* g_774a10;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_774a18;
 
-void __cdecl fcn_004230e0(int);
+void __cdecl sb_ReleaseSampleBank(int);
 void __cdecl d2_FreeTutorialNodes(int);
 void __cdecl d2_DestroyForm(int);
 
@@ -17,7 +17,7 @@ void __cdecl d2_ShutdownTutorial(void)
 
 	for (i = 0; i < 6; i++) {
 		if (g_7749f8[i] != 0) {
-			fcn_004230e0(g_7749f8[i]);
+			sb_ReleaseSampleBank(g_7749f8[i]);
 		}
 	}
 	d2_FreeTutorialNodes((*(int*)&g_774a10));

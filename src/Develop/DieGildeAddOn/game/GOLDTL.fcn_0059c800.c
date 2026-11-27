@@ -7,8 +7,8 @@ extern int g_14ad0f8;
 extern int g_14ad0e8;
 extern int g_7746a0;
 
-void __cdecl fcn_0057e880(int, char*, int, int);
-void __cdecl fcn_005338a0(void);
+void __cdecl d2_DispatchTutorialInput(int, char*, int, int);
+void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
@@ -16,7 +16,7 @@ void __cdecl d3_UpdateBuildingInteriorState(void);
 void __cdecl d2_OpenTransportPanel(char*);
 void __cdecl d2_ShowLagerOptions(char*, int);
 void __cdecl d2_RunMetalProduktionDialog(char*);
-void __cdecl fcn_005c5b10(char*);
+void __cdecl d2_RunGelageDialog(char*);
 void __cdecl d2_RunWorkerTrainingDialog(char*);
 
 void __cdecl d2_RunSchmiedeInteriorHud(char* e)
@@ -34,8 +34,8 @@ void __cdecl d2_RunSchmiedeInteriorHud(char* e)
 	d = 0;
 	f = 0;
 	g = 0;
-	fcn_0057e880(0x1b, e, 0, 0);
-	fcn_005338a0();
+	d2_DispatchTutorialInput(0x1b, e, 0, 0);
+	d2_ClearStatusTextSlots();
 	while (main_RunFrameLoop((void*) d2_RunSchmiedeInteriorHud, 0x67fff) != 0) {
 		if (g_7746d8 & 0x200) {
 			a = RegisterStatusText("contact_PRODUKTION_METALL", g_14ad0f8, 0x13);
@@ -58,11 +58,11 @@ void __cdecl d2_RunSchmiedeInteriorHud(char* e)
 			} else if (g_7746a0 == a) {
 				d2_RunMetalProduktionDialog(e);
 			} else if (g_7746a0 == d) {
-				fcn_005c5b10(e);
+				d2_RunGelageDialog(e);
 			} else if (g_7746a0 == g || g_7746a0 == f) {
 				d2_RunWorkerTrainingDialog(e);
 			}
 		}
 	}
-	fcn_0057e880(0x1c, e, 0, 0);
+	d2_DispatchTutorialInput(0x1c, e, 0, 0);
 }

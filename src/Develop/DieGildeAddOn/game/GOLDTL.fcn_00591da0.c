@@ -21,7 +21,7 @@ extern char s_6a9b30[];
 
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-void __cdecl fcn_00533a40(char*);
+void __cdecl d2_ShowStatusBanner(char*);
 
 void __cdecl d2_SaveBookmarkSlot(int index)
 {
@@ -61,5 +61,5 @@ void __cdecl d2_SaveBookmarkSlot(int index)
 	} else {
 		io_FormatTextBuffer(buf, (int) s_6a9b3c, index + 0x205e, e);
 	}
-	fcn_00533a40(buf);
+	d2_ShowStatusBanner(buf);
 }

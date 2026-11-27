@@ -3,7 +3,7 @@
 int __cdecl cm_RequestSlot170Command(void*);
 
 /* ADDRESS: GOLDTL 0x004f0930 */
-int __cdecl fcn_004f0930(int a1)
+int __cdecl cm_SendSlotReleaseById(int a1)
 {
 	int pair[2];
 

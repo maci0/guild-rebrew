@@ -105,7 +105,7 @@ void __cdecl d3_ObjectNoopStub(char*);
 char __cdecl d3_DestroyObject(char*);
 void __cdecl d3_SetSubtreeColor(char*, unsigned char, unsigned char, unsigned char);
 void __cdecl d3_ChangeObjectTransparency(char*, char*, Key4_5988b0);
-void __cdecl fcn_00533a40(char*);
+void __cdecl d2_ShowStatusBanner(char*);
 void __cdecl ReportClientMessage(char*);
 void __cdecl io_ClearInputButtonFlags(char);
 void __cdecl UpdateSceneLighting(unsigned char);
@@ -114,7 +114,7 @@ char __cdecl d3sm_RaycastScreenPoint(int, int, int, int*, int*);
 char __cdecl d3_GridPointToWorld(char*, int, int, float*);
 void __cdecl d3_AnimateCameraToObject(char*);
 int __cdecl d3_UpdateCameraController(void);
-void* __cdecl fcn_005bdc30(int, char*, int, void*, int);
+void* __cdecl d2_RunCityScrollMapDialog(int, char*, int, void*, int);
 int __cdecl main_RunFrameLoop(int, int);
 
 /* ADDRESS: GOLDTL 0x005988b0 */
@@ -260,14 +260,14 @@ int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 				d3_ComputeObjectYawToTarget(f.fObjektPos, pNaechster);
 				d3_SetObjectRotation(pAktuell, f.fObjektPos);
 				d3_AlignObjectToTerrain(pAktuell, f.iRot, 0);
-				fcn_00533a40((char*) 0x677c94);
+				d2_ShowStatusBanner((char*) 0x677c94);
 				if (f.iRot != 1) {
 					d3_SetSubtreeColor(pAktuell, 0x40, 0xc0, 0x40);
 					f.iRot = 1;
 				}
 			}
 			else {
-				fcn_00533a40((char*) g_14ab2e4);
+				d2_ShowStatusBanner((char*) g_14ab2e4);
 				if (f.iRot != 2) {
 					d3_SetSubtreeColor(pAktuell, 0x40, 0x40, 0xc0);
 					f.iRot = 2;
@@ -296,7 +296,7 @@ int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 				goto platzieren;
 			}
 		}
-		pTemp = (char*) fcn_005bdc30(8, 0, g_14ab2d0, 0, 0);
+		pTemp = (char*) d2_RunCityScrollMapDialog(8, 0, g_14ab2d0, 0, 0);
 		if (pTemp != 0) {
 			d3_AnimateCameraToObject(pTemp);
 			d3_TransformPoint(pTemp, (float*) (pTemp + 0x4c), f.fPos);
@@ -312,14 +312,14 @@ platzieren:
 		pNaechster = (char*) d3_FindNearestSceneObject((float*) (pAktuell + 0x4c), (void**) f.pListe);
 		if (pNaechster == 0) {
 			f.pPrev = 0;
-			fcn_00533a40((char*) g_14ab2e4);
+			d2_ShowStatusBanner((char*) g_14ab2e4);
 			if (f.iRot != 2) {
 				d3_SetSubtreeColor(pAktuell, 0x40, 0x40, 0xc0);
 				f.iRot = 2;
 			}
 		}
 		else if (pNaechster == f.pPrev) {
-			fcn_00533a40((char*) 0x677c94);
+			d2_ShowStatusBanner((char*) 0x677c94);
 			if (f.iRot != 1) {
 				d3_SetSubtreeColor(pAktuell, 0x40, 0xc0, 0x40);
 				f.iRot = 1;

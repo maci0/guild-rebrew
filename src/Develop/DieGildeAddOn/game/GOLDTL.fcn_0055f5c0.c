@@ -38,10 +38,10 @@ void __cdecl cm_RequestRemoveCutsceneParticipant(int, int);
 int __cdecl fcn_00503fe0(int, int, int);
 void __cdecl d2_EnterBuildingObjekt(char*, int, char*);
 void __cdecl io_ClearInputState(void);
-void __cdecl fcn_00545780(char*);
+void __cdecl d2_CloseActionPopup(char*);
 
 /* ADDRESS: GOLDTL 0x0055f590 */
-void __cdecl fcn_0055f590(char* e)
+void __cdecl he_StartEventMessagebox(char* e)
 {
     *(int*) (e + 0x70) = 0;
     *(int*) (e + 0xec) = 0;
@@ -52,7 +52,7 @@ void __cdecl fcn_0055f590(char* e)
 
 /* One stage of the event message-box tick; state lives at +0x70. */
 /* ADDRESS: GOLDTL 0x0055f5c0 */
-void __cdecl fcn_0055f5c0(char* e)
+void __cdecl he_RunEventMessagebox(char* e)
 {
     char text[0x80];
     char* win;
@@ -226,7 +226,7 @@ body1:
                 g_6b5c8c = 1;
                 io_ClearInputState();
             }
-            fcn_00545780(e);
+            d2_CloseActionPopup(e);
             he_FreeAction(e);
 exit_a:
             g_7749e8 = 0;
@@ -265,7 +265,7 @@ exit_clear:
                 *(int*) &g_6b7fc0 = 0;
         }
 exit_b:
-        fcn_00545780(e);
+        d2_CloseActionPopup(e);
         he_FreeAction(e);
         return;
     case -2:

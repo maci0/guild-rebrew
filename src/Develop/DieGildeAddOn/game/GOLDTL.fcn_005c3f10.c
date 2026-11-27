@@ -74,7 +74,7 @@ extern float g_665c0c;
 extern double g_662908;
 
 int __cdecl d2_TutorialAllowsFlag(int a);
-void __cdecl fcn_0057e880(int a, int b, int c, int d);
+void __cdecl d2_DispatchTutorialInput(int a, int b, int c, int d);
 int __cdecl fcn_00504bd0(int a);
 int __cdecl d2_LoadForm(int a, int b, char* name);
 void __cdecl d2_CenterDialogWindows(int a);
@@ -159,7 +159,7 @@ void __cdecl d2_RunGebaeudeOptionenDialog(char* ent)
 		if (d2_TutorialAllowsFlag(0x100) == 0)
 			return;
 		if (*(unsigned short*) (ent + 0x25) == g_774970)
-			fcn_0057e880(0x10, (int) ent, 0, 0);
+			d2_DispatchTutorialInput(0x10, (int) ent, 0, 0);
 	} else {
 		if (d2_TutorialAllowsFlag(0x4000) == 0)
 			return;
@@ -475,5 +475,5 @@ loop_test:
 	}
 	d2_DestroyForm(dlg);
 	if (*(unsigned short*) (ent + 0x25) == g_774970)
-		fcn_0057e880(0x10, (int) ent, 1, 0);
+		d2_DispatchTutorialInput(0x10, (int) ent, 1, 0);
 }

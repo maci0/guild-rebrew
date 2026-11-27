@@ -41,7 +41,7 @@ extern unsigned char g_773d75;
 
 Desc* __cdecl gm_LookupSpecialObject(int);
 double __cdecl gm_RandomFloat01(void);
-void __cdecl fcn_0057e880(int, int, int, int);
+void __cdecl d2_DispatchTutorialInput(int, int, int, int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 
 int __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, void*);
@@ -86,7 +86,7 @@ int __cdecl gm_UseSpecialObject(Ent* ent, Cmd* cmd)
 		result = 1;
 	}
 	if (result != 0) {
-		fcn_0057e880(0x2d, 0, 0, *cmd->rec);
+		d2_DispatchTutorialInput(0x2d, 0, 0, *cmd->rec);
 		if (d->flags != 0) {
 			cm_RequestChangeBits(ent->handle, 0x1ec, 4, d->flags, 0);
 		}

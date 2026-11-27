@@ -19,7 +19,7 @@ typedef struct Sel {
 
 int __cdecl amt_CollectOfficeCandidates(int k, int max, char** out);
 int __cdecl d2_BuildPersonStatusDesc(Sel* s);
-int __cdecl fcn_005cf720(unsigned short a, unsigned short b, void* q, int c);
+int __cdecl gm_MatchesTargetFilter(unsigned short a, unsigned short b, void* q, int c);
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
@@ -62,7 +62,7 @@ unsigned int __cdecl d2_CollectOfficePeers(char* e, unsigned int max, Sel* out, 
 		out[k].who = ids[k];
 		out[k].x2c = 0;
 		d2_BuildPersonStatusDesc(&out[k]);
-		out[k].x30 = fcn_005cf720(*(unsigned short*) e, *(unsigned short*) out[k].who, q, 0);
+		out[k].x30 = gm_MatchesTargetFilter(*(unsigned short*) e, *(unsigned short*) out[k].who, q, 0);
 	}
 	for (j = 0; j < m; j++) {
 		if (k >= max) {
@@ -71,7 +71,7 @@ unsigned int __cdecl d2_CollectOfficePeers(char* e, unsigned int max, Sel* out, 
 		out[k].who = (char*) pl[j];
 		out[k].x2c = 1;
 		d2_BuildPersonStatusDesc(&out[k]);
-		out[k].x30 = fcn_005cf720(*(unsigned short*) e, *(unsigned short*) out[k].who, q, 0);
+		out[k].x30 = gm_MatchesTargetFilter(*(unsigned short*) e, *(unsigned short*) out[k].who, q, 0);
 		k++;
 	}
 	return k;

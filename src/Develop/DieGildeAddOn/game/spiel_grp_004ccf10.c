@@ -12,7 +12,7 @@ typedef struct {
 	int tag;
 	int value;
 	int name;
-} T_4cd090;
+} CM_JOIN_LEAVE_ELECTION_CMD;
 
 extern char* gm_CityEntity;
 
@@ -90,7 +90,7 @@ int __cdecl fcn_004ccf10(int cmd, char* result)
 }
 
 /* ADDRESS: GOLDTL 0x004cd090 */
-int __cdecl fcn_004cd090(T_4cd090* s, char* out)
+int __cdecl fcn_004cd090(CM_JOIN_LEAVE_ELECTION_CMD* s, char* out)
 {
 	int h;
 	int p;

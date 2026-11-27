@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
-int __cdecl fcn_004e4730(char *);
+int __cdecl cut_StartSceneCutscene(char *);
 int __cdecl d3_UpdateSeasonTextures(void);
 int __cdecl d3_UpdateWeatherAndSkyBlend(void);
 void __cdecl d3_ResetSkyDomeNormals(int, int);
@@ -8,9 +8,9 @@ void *__cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl cut_GetBuildingCombatType(void *);
 int __cdecl sb_LoadLocalizedSampleBank(char *, int);
 int __cdecl d3_AcquireModel(char *, char *);
-int __cdecl fcn_0045b700(int, int, int);
+int __cdecl d3sm_CreateMap(int, int, int);
 int __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_004d1cf0(void);
+void __cdecl d3_CollectCombatArenaMarkers(void);
 void __cdecl cm_BeginCommandSync(void);
 void __cdecl cm_SendSellObjekt(int, int, int, int, int, int);
 void __cdecl cm_EndCommandSync(void);
@@ -70,12 +70,12 @@ void __cdecl cut_SetupBattleArena(void *arg)
 	mode = 0xa;
 	if ((o[0x7c] & 1) != 0) {
 		if ((o[0x7c] & 8) != 0)
-			fcn_004e4730("Kampfszenario_STADT.ed3");
+			cut_StartSceneCutscene("Kampfszenario_STADT.ed3");
 		else
-			fcn_004e4730("Kampfszenario_BERGPASS.ed3");
+			cut_StartSceneCutscene("Kampfszenario_BERGPASS.ed3");
 	} else {
 		if ((o[0x7c] & 4) != 0) {
-			fcn_004e4730("Kampfszenario_BERGPASS.ed3");
+			cut_StartSceneCutscene("Kampfszenario_BERGPASS.ed3");
 		} else {
 			ent = (int) gm_StartFilteredEntitySearch(1, 1, *(int *) (o + 0x14));
 			r = gm_CheckEntityType((void *) ent);
@@ -83,33 +83,33 @@ void __cdecl cut_SetupBattleArena(void *arg)
 			if (r != 0) {
 				c = ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[ty].category;
 				if (c == 0x10) {
-					fcn_004e4730("Kampfszenario_RAEUBERLAGER.ed3");
+					cut_StartSceneCutscene("Kampfszenario_RAEUBERLAGER.ed3");
 					mode = 0xf;
 				} else if (c == 0xc)
-					fcn_004e4730("Kampfszenario_STEINBRUCH.ed3");
+					cut_StartSceneCutscene("Kampfszenario_STEINBRUCH.ed3");
 				else if (c == 0xb)
-					fcn_004e4730("Kampfszenario_WALDSTUECK.ed3");
+					cut_StartSceneCutscene("Kampfszenario_WALDSTUECK.ed3");
 				else if (c == 0xd)
-					fcn_004e4730("Kampfszenario_MINE.ed3");
+					cut_StartSceneCutscene("Kampfszenario_MINE.ed3");
 			} else {
 				base = (int) &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[ty];
 				c = ((BUILDING_PROTOTYPE*)base)->category;
 				if (c == 4) {
 					c = ((BUILDING_PROTOTYPE*)base)->level;
 					if (c == 1)
-						fcn_004e4730("Kampfszenario_SCHMUGGLERLOCH.ed3");
+						cut_StartSceneCutscene("Kampfszenario_SCHMUGGLERLOCH.ed3");
 					else if (c == 2)
-						fcn_004e4730("Kampfszenario_UNTERSCHLUPF.ed3");
+						cut_StartSceneCutscene("Kampfszenario_UNTERSCHLUPF.ed3");
 					else if (c == 3)
-						fcn_004e4730("Kampfszenario_DIEBESGILDE.ed3");
+						cut_StartSceneCutscene("Kampfszenario_DIEBESGILDE.ed3");
 				} else if (c == 0x13) {
 					c = ((BUILDING_PROTOTYPE*)base)->level;
 					if (c == 1)
-						fcn_004e4730("Kampfszenario_STADTWACHE_KLEIN.ed3");
+						cut_StartSceneCutscene("Kampfszenario_STADTWACHE_KLEIN.ed3");
 					else if (c == 2)
-						fcn_004e4730("Kampfszenario_STADTWACHE_MITTEL.ed3");
+						cut_StartSceneCutscene("Kampfszenario_STADTWACHE_MITTEL.ed3");
 					else if (c == 3)
-						fcn_004e4730("Kampfszenario_STADTWACHE_GROSS.ed3");
+						cut_StartSceneCutscene("Kampfszenario_STADTWACHE_GROSS.ed3");
 				}
 			}
 		}
@@ -205,7 +205,7 @@ void __cdecl cut_SetupBattleArena(void *arg)
 	}
 	*(int *) 0x772f0c = d3_AcquireModel("ub_STIEFEL", "ub_STIEFEL");
 	if (cur == 0) {
-		cur = fcn_0045b700(*(int *) &g_6b8300, *(int *) (*(int *) &g_67a370 + 0xb4), 2);
+		cur = d3sm_CreateMap(*(int *) &g_6b8300, *(int *) (*(int *) &g_67a370 + 0xb4), 2);
 		*(int *) (*(int *) &g_67a370 + 0xb0) = cur;
 		cur = *(int *) (*(int *) &g_67a370 + 0xb0);
 	}
@@ -213,7 +213,7 @@ void __cdecl cut_SetupBattleArena(void *arg)
 	*(int *) 0x6a2570 = 0x3e19999a;
 	g_6a2574[0] = 0;
 	*(void **) 0x772eb4 = (void *) o;
-	fcn_004d1cf0();
+	d3_CollectCombatArenaMarkers();
 	*(int *) &g_772e9c = gm_LookupEntityRecordById(*(int *) (o + 0x34));
 	*(int *) 0x772e98 = gm_LookupEntityRecordById(*(int *) (o + 0x38));
 	if (*(int *) (*(unsigned short *) &g_774970 * 0x21c + (unsigned long)&g_7f4ca4) == g_68b79c && (o[0x7c] & 1) != 0) {

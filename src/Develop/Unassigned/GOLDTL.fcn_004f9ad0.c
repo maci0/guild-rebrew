@@ -2,7 +2,7 @@ void __cdecl io_FormatTextBuffer(void* buffer, int format, ...);
 void __cdecl gm_HandleWunder(void* rec, void* ctx);
 
 /* ADDRESS: GOLDTL 0x004f9ad0 */
-int __cdecl fcn_004f9ad0(char* rec, int* ctx)
+int __cdecl gm_HandleWunderPrivilege(char* rec, int* ctx)
 {
 	int action;
 

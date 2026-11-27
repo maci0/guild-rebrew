@@ -2,7 +2,7 @@
 
 extern pos14_7f4c00 gm_GameTime;
 
-void __cdecl fcn_00545780(char* a);
+void __cdecl d2_CloseActionPopup(char* a);
 void __cdecl he_FreeAction(char* a);
 int __cdecl d2_CreateActionPopupSlot(char* a, int b, int c, char* d, int e);
 void __cdecl he_ApplyAction0x92Favor(char* a);
@@ -21,7 +21,7 @@ void __cdecl fcn_0057b1f0(char* a)
 	state = *(int*) (a + 0x70);
 	if (state == -2) {
 		if (*(int*) (a + 0x74) != 0)
-			fcn_00545780(a);
+			d2_CloseActionPopup(a);
 		he_FreeAction(a);
 		return;
 	}
@@ -39,7 +39,7 @@ void __cdecl fcn_0057b1f0(char* a)
 			return;
 		if (*(int*) 0x100f1dc == 2) {
 			he_ApplyAction0x92Favor(a);
-			fcn_00545780(a);
+			d2_CloseActionPopup(a);
 			he_FreeAction(a);
 			return;
 		}
@@ -47,7 +47,7 @@ void __cdecl fcn_0057b1f0(char* a)
 			return;
 	activate:
 		he_RemoveAction0x92Favor(a);
-		fcn_00545780(a);
+		d2_CloseActionPopup(a);
 		he_FreeAction(a);
 		return;
 	case 0:

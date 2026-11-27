@@ -9,7 +9,7 @@ extern int g_6b8700;
 
 void __cdecl m_FreeTracked(int);
 
-void __cdecl fcn_00450ad0(void)
+void __cdecl d3_ResetLightBuffers(void)
 {
 	g_6b8708 = 0;
 	g_6b8704 = 0;

@@ -37,7 +37,7 @@ typedef struct {
 /* Rebuilds one object's render state from its definition record. Native
  * extent 1056 bytes. */
 /* ADDRESS: GOLDTL 0x004094c0 */
-unsigned int __cdecl fcn_004094c0(int rec, int gridContext)
+unsigned int __cdecl ch_BuildWalkPath(int rec, int gridContext)
 {
 	char buf[0x60];
 	int v14;

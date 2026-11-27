@@ -15,7 +15,7 @@ int __cdecl gm_GetSeasonFromDate(char*, int);
 int __cdecl d2_FormatCurrencyString(int, int, char*);
 int __cdecl gm_FormatEntityTitleAndName(int, unsigned char, int, char*);
 int __cdecl io_CopyTrailingDigits(char*, int, char*);
-int __cdecl fcn_0051e070(void);
+int __cdecl main_GetLanguage(void);
 char* __cdecl fcn_0064d41a(char*, char*, ...);
 char* __cdecl fcn_0064d530(char*, char*, unsigned);
 void* __cdecl fcn_0064d740(void*, const void*, unsigned);
@@ -205,7 +205,7 @@ fmt:
 				fcn_0064d41a(S.work, (char*)0x68b3f8, (char*)v24,
 					     (char*)v18);
 			}
-			if (fcn_0051e070() == 0 && v10 == 2) {
+			if (main_GetLanguage() == 0 && v10 == 2) {
 				S.work[0] = (char)toupper(S.work[0]);
 			}
 		}
@@ -224,7 +224,7 @@ fmt:
 				fcn_0064d41a(S.work, (char*)0x68b3f8, (char*)v24,
 					     (char*)v18);
 			}
-			if (fcn_0051e070() == 0 && v10 == 4) {
+			if (main_GetLanguage() == 0 && v10 == 4) {
 				S.work[0] = (char)toupper(S.work[0]);
 			}
 		}
@@ -243,7 +243,7 @@ fmt:
 				fcn_0064d41a(S.work, (char*)0x68b3f8, (char*)v24,
 					     (char*)v18);
 			}
-			if (fcn_0051e070() == 0 && v10 == 6) {
+			if (main_GetLanguage() == 0 && v10 == 6) {
 				S.work[0] = (char)toupper(S.work[0]);
 			}
 		}
@@ -725,7 +725,7 @@ fmt:
 					digit, 4);
 				fcn_0064d41a(S.work, (char*)0x68b3f8,
 					     (char*)v24, abuf[0]);
-				if (fcn_0051e070() == 0 && v10 == 2) {
+				if (main_GetLanguage() == 0 && v10 == 2) {
 					S.work[0] = (char)toupper(S.work[0]);
 				}
 			}
@@ -735,7 +735,7 @@ fmt:
 					digit, 4);
 				fcn_0064d41a(S.work, (char*)0x68b3f8,
 					     (char*)v24, abuf[0]);
-				if (fcn_0051e070() == 0 && v10 == 4) {
+				if (main_GetLanguage() == 0 && v10 == 4) {
 					S.work[0] = (char)toupper(S.work[0]);
 				}
 			}
@@ -745,7 +745,7 @@ fmt:
 					digit, 4);
 				fcn_0064d41a(S.work, (char*)0x68b3f8,
 					     (char*)v24, abuf[0]);
-				if (fcn_0051e070() == 0 && v10 == 6) {
+				if (main_GetLanguage() == 0 && v10 == 6) {
 					S.work[0] = (char)toupper(S.work[0]);
 				}
 			}

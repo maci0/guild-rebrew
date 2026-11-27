@@ -5,7 +5,7 @@ int __cdecl d2_ShowAbsetzenDialog(char*, int*);
 
 
 /* ADDRESS: GOLDTL 0x004f8020 */
-int __cdecl fcn_004f8020(char* e, int* s)
+int __cdecl gm_HandleAbsetzenPrivilege(char* e, int* s)
 {
 	int r;
 	char* p;

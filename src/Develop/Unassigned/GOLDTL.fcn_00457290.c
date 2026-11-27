@@ -83,7 +83,7 @@ void __cdecl fcn_0045ce90(D3_SHADOW_MAP_TEX* t);
 void __cdecl d3_TransformPoint(char* object, float* in, float* out);
 void __cdecl d3_TransformDirection(char* node, float* in, float* out);
 int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
-int __cdecl fcn_00456630(void* obj, char b, unsigned int key,
+int __cdecl d3_AcquireCachedShadowTexture(void* obj, char b, unsigned int key,
                          unsigned int stamp, int unused);
 int __cdecl d3_RenderProjectedShadow(char* a0, char* p2, char* p1, char* a2, float* va,
                          float* vb, char* a1, D3_SHADOW_MAP_ITEM* rec, char* a3);
@@ -175,7 +175,7 @@ alloc:
 						lim = *(unsigned int*) 0x10405fc;
 					}
 				}
-				rec->f0 = (D3_SHADOW_MAP_TEX*) fcn_00456630(rec,
+				rec->f0 = (D3_SHADOW_MAP_TEX*) d3_AcquireCachedShadowTexture(rec,
 				    *(char*) 0x1040601, lim, *(unsigned int*) 0x6b8008,
 				    (int) &rec->fc);
 			}

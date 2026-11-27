@@ -10,12 +10,12 @@ extern int g_14cbca0;
 extern int g_6a3760;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
-int __cdecl fcn_004b60c0(void);
-int __cdecl fcn_004b62c0(void);
+int __cdecl d2_DispatchMissionDialog(void);
+int __cdecl d2_DispatchMissionBriefing(void);
 int __cdecl d2_FinishHistoryMissionDialog(void);
 
 /* ADDRESS: GOLDTL 0x004b60c0 */
-int __cdecl fcn_004b60c0(void)
+int __cdecl d2_DispatchMissionDialog(void)
 {
 	if (g_6a3440 == 5)
 		return d2_RunActiveHistoryMissionDialog();
@@ -23,7 +23,7 @@ int __cdecl fcn_004b60c0(void)
 }
 
 /* ADDRESS: GOLDTL 0x004b62c0 */
-int __cdecl fcn_004b62c0(void)
+int __cdecl d2_DispatchMissionBriefing(void)
 {
 	if (g_6a3440 == 5)
 		return d2_WaitHistoryMissionDialog();
@@ -31,12 +31,12 @@ int __cdecl fcn_004b62c0(void)
 }
 
 /* ADDRESS: GOLDTL 0x004b6470 */
-int __cdecl fcn_004b6470(void)
+int __cdecl d2_HandleMissionTurnEnd(void)
 {
 	if (g_14cbca0 != -1) {
 		if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id == g_6a3760)
-			return fcn_004b60c0();
-		return fcn_004b62c0();
+			return d2_DispatchMissionDialog();
+		return d2_DispatchMissionBriefing();
 	}
 	return d2_FinishHistoryMissionDialog();
 }

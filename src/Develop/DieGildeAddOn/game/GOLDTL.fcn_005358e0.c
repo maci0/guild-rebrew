@@ -7,7 +7,7 @@
 
 int __cdecl cm_RequestSysMessage(int, char*);
 int __cdecl cm_GetCommandStatus(int);
-void __cdecl fcn_00533a40(char*);
+void __cdecl d2_ShowStatusBanner(char*);
 void __cdecl main_RunFrameLoop(int, int);
 
 void __cdecl cm_WaitNetworkSyncBanner(char* name)
@@ -19,7 +19,7 @@ void __cdecl cm_WaitNetworkSyncBanner(char* name)
 	strcpy(buf, name);
 	s = cm_RequestSysMessage(0xe, buf);
 	while (cm_GetCommandStatus(s) == 0) {
-		fcn_00533a40(name);
+		d2_ShowStatusBanner(name);
 		main_RunFrameLoop(0, cut_EventLoopFlags | 0x210000);
 	}
 }

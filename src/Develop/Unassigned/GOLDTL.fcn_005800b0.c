@@ -3,7 +3,7 @@
 
 extern int* g_665f08;
 
-void __cdecl fcn_00545780(void*);
+void __cdecl d2_CloseActionPopup(void*);
 
 int __cdecl d2_CleanupTutorialAction(void)
 {
@@ -16,6 +16,6 @@ int __cdecl d2_CleanupTutorialAction(void)
 	if (*(int*) (p + 0x74) == 0) {
 		return -4;
 	}
-	fcn_00545780(p);
+	d2_CloseActionPopup(p);
 	return 0;
 }

@@ -30,7 +30,7 @@ int __cdecl d3_QuantizeImageOctree(void* dst, void* src, int w, int h, int mode,
 #pragma optimize("y", off)
 
 /* ADDRESS: GOLDTL 0x00401650 */
-char __cdecl fcn_00401650(const char* name, char* buf, char* palbuf, int flags)
+char __cdecl vfs_LoadBmpBuffer(const char* name, char* buf, char* palbuf, int flags)
 {
 	BmpInfoHeader bih;
 	char pal[0x300];

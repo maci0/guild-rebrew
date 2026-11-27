@@ -6,7 +6,7 @@ void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(char *, ...);
 void __cdecl d2_CreateButtonRow(int, int, int *, int, ...);
-int __cdecl fcn_00533f40(int, int, int, int, int, int *, int *, int *);
+int __cdecl d2_CreateWindowScrollbar(int, int, int, int, int, int *, int *, int *);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl d2_ShowTxt(int, int, char *, int);
 void __cdecl d2_SetElementFont(int, int);
@@ -30,7 +30,7 @@ void __cdecl d2_ShowPokerHandsDialog(void)
   v3 = (d2_CurrentWindowId);
   v8 = *(int *)((d2_CurrentWindowId) * 0x3cc + 0x1015f4c) + -0xd2;
   d2_SetForm(v2,4);
-  fcn_00533f40(0,0,(d2_CurrentWindowId),v3,0x35,&v7,&v6,&v5);
+  d2_CreateWindowScrollbar(0,0,(d2_CurrentWindowId),v3,0x35,&v7,&v6,&v5);
   d2_SetForm(v2,2);
   io_AppendText((char *)0x4247);
   io_AppendText((char *)0x4248);

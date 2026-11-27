@@ -2,7 +2,7 @@
 
 char __cdecl d3_FormatModelVariantName(int a, int b, int mode, char* key, char* val);
 int __cdecl d3_FindCachedModel(char* s);
-int __cdecl fcn_0044c0e0(char* key, char* val);
+int __cdecl d3_LoadCachedModel(char* key, char* val);
 
 /* ADDRESS: GOLDTL 0x0044c200 */
 int __cdecl d3_LoadModel(int baseName, int altName)
@@ -21,14 +21,14 @@ int __cdecl d3_LoadModel(int baseName, int altName)
 	if (r != 0) {
 		return r;
 	}
-	r = fcn_0044c0e0(key, val);
+	r = d3_LoadCachedModel(key, val);
 	if (d3_FormatModelVariantName(baseName, altName, -1, key, val)) {
-		fcn_0044c0e0(key, val);
+		d3_LoadCachedModel(key, val);
 	}
 	if ((d3_LODMode & 0x7f) == 1) {
 		for (i = 1; i < 3; i++) {
 			if (d3_FormatModelVariantName(baseName, altName, i, key, val)) {
-				fcn_0044c0e0(key, val);
+				d3_LoadCachedModel(key, val);
 			}
 		}
 		return r;

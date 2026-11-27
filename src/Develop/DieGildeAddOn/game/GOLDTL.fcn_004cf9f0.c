@@ -2,7 +2,7 @@
 
 
 /* ADDRESS: GOLDTL 0x004cf9f0 */
-int __cdecl fcn_004cf9f0(char* p)
+int __cdecl d3_GetObjectEntity(char* p)
 {
 	return *(int*) (p + 0x204);
 }
@@ -17,18 +17,18 @@ void* __cdecl gm_GetEquippedCombatGear(char*);
 float __cdecl gm_GetEntityHealthRatio(char*);
 void __cdecl d3_SpawnBlutEffect(int, int, float, float, float, float);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
-int __cdecl fcn_004d4700(void);
+int __cdecl ch_RunDeathFallAction(void);
 char* __cdecl ch_CreateQueuedAction(char*, int (__cdecl*)(void), int, int, int);
 void __cdecl sb_PlayVoice(int, char*, int, int, int, int, int);
 unsigned int __cdecl cut_RandMod(int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl d3_ApplyWorldTransformToObject(char*, char*, char*);
 void __cdecl d3_SetObjectVisible(char*, int);
-void __cdecl fcn_00533a40(char*);
+void __cdecl d2_ShowStatusBanner(char*);
 
 
 /* ADDRESS: GOLDTL 0x004d4790 */
-int __cdecl fcn_004d4790(char* e)
+int __cdecl cut_HandleUnitDefeat(char* e)
 {
 	char buf[0x100];
 	char* p;
@@ -38,7 +38,7 @@ int __cdecl fcn_004d4790(char* e)
 	if (gm_GetEntityHealthRatio(e) < 0.05) {
 		d3_SpawnBlutEffect(*(int*) (*(char**) (e + 0x184) + 0x34), 0x40, 0.25f, 0.1f, 0.14f, 55.0f);
 		ch_CancelActionQueue(*(char**) (e + 0x184));
-		p = ch_CreateQueuedAction(*(char**) (e + 0x184), fcn_004d4700, 0x14, 0x36, 1);
+		p = ch_CreateQueuedAction(*(char**) (e + 0x184), ch_RunDeathFallAction, 0x14, 0x36, 1);
 		strcpy(p + 0xf0, "kampf/todumfallen");
 		e[8] = 0;
 		*(int*) (*(char**) (*(char**) (e + 0x184) + 0x34) + 0x220) = 0;
@@ -55,9 +55,9 @@ int __cdecl fcn_004d4790(char* e)
 			d3_ApplyWorldTransformToObject(q, *(char**) (*(char**) (e + 0x184) + 0x34) + 0x4c, *(char**) (*(char**) (e + 0x184) + 0x34) + 0x18c);
 			d3_SetObjectVisible(q, 1);
 			*(char**) (e + 0x1ac) = 0;
-			*(int*) (fcn_004cf9f0(q) + 0xa) = *g_772e98;
+			*(int*) (d3_GetObjectEntity(q) + 0xa) = *g_772e98;
 		}
-		fcn_00533a40(buf);
+		d2_ShowStatusBanner(buf);
 		return 1;
 	}
 	return 0;
@@ -69,7 +69,7 @@ char __cdecl d3_SetSubtreeVisible(int, unsigned char);
 
 
 /* ADDRESS: GOLDTL 0x004d4ee0 */
-void __cdecl fcn_004d4ee0(char* e)
+void __cdecl cut_CollectGroundItem(char* e)
 {
 	char* q;
 	char* o;
@@ -77,7 +77,7 @@ void __cdecl fcn_004d4ee0(char* e)
 
 	q = *(char**) (e + 0x180);
 	o = *(char**) (e + 0x17c);
-	r = (char*) fcn_004cf9f0(q);
+	r = (char*) d3_GetObjectEntity(q);
 	if (r != 0) {
 		*(int*) (r + 0xa) = *g_772e9c;
 		*(char**) (o + 0x1ac) = q;

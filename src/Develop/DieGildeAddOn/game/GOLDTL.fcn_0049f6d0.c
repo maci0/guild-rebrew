@@ -25,7 +25,7 @@ extern unsigned char* lpGebaeudePROT;
 extern unsigned char* lpGebaeudeINST;
 
 int __cdecl gm_CheckZunftPreismanipulation(char*);
-int __cdecl fcn_00507910(int);
+int __cdecl gm_MapBuildingCatToGuildSlot(int);
 int __cdecl ai_EvalRecipePriceRatios(Calc*);
 unsigned short __cdecl gm_RandomMod(int);
 
@@ -129,7 +129,7 @@ unsigned int __cdecl ai_StartZunftPreismanipulation(int a0, unsigned short* acto
 			bit_lo = 1 << rec->type;
 		if ((bit_lo & 0x744180) == 0 && (bit_hi & 0) == 0)
 			continue;
-		kind = fcn_00507910(rec->type);
+		kind = gm_MapBuildingCatToGuildSlot(rec->type);
 		if (kind == 0 || kind > 7)
 			continue;
 		kind--;

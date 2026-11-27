@@ -2,7 +2,7 @@
    and stores the new current slot. */
 
 int __cdecl main_RunFrameLoop(void*, int);
-int __cdecl fcn_00588200(int, int, int);
+int __cdecl d2_UpdateKanoneDialog(int, int, int);
 void __cdecl d3_NormalizeVector(float*);
 void __cdecl d3_SetNodePosition(char*, int*);
 char __cdecl d3_SetObjectVisible(char*, char);
@@ -22,7 +22,7 @@ void __cdecl d2_SwitchKanoneMode(int obj, int state, int res, int selectedIndex,
 		return;
 	}
 	while (main_RunFrameLoop((void*) d2_SwitchKanoneMode, loopMask) != 0) {
-		fcn_00588200(obj, state, res);
+		d2_UpdateKanoneDialog(obj, state, res);
 		if ((float) (*(unsigned int*) 0x6b7fac - start) >
 		    *(float*) 0x665f3c) {
 			*(int*) 0x774654 = 1;
@@ -57,7 +57,7 @@ void __cdecl d2_SwitchKanoneMode(int obj, int state, int res, int selectedIndex,
 	*(int*) (state + 0xa0) = selectedIndex;
 	start = *(unsigned int*) 0x6b7fac;
 	while (main_RunFrameLoop((void*) d2_SwitchKanoneMode, loopMask) != 0) {
-		fcn_00588200(obj, state, res);
+		d2_UpdateKanoneDialog(obj, state, res);
 		if ((float) (*(unsigned int*) 0x6b7fac - start) >
 		    *(float*) 0x665f3c) {
 			*(int*) 0x774654 = 1;

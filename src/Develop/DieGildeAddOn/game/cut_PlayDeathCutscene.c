@@ -6,7 +6,7 @@
 int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl msx_StartMusicIfAllowed(char* s);
 int __cdecl sb_LoadLocalizedSampleBank(char* s, int a);
-void __cdecl fcn_004e4730(char* s);
+void __cdecl cut_StartSceneCutscene(char* s);
 void __cdecl d3_InitSkyLayer(char* s);
 void __cdecl d3_BlendSceneLightingPreset(int a, int b, float f, int c);
 void __cdecl d3_InterpolateSceneFog(int a, int b, float f);
@@ -31,7 +31,7 @@ void __cdecl cut_WaitForScript(void* h);
 void __cdecl d3_DestroySkyLayer(void);
 void __cdecl cut_CleanupCutscene(void);
 void __cdecl d3snd_StopTrackedVoices(void);
-void __cdecl fcn_004230e0(void* h);
+void __cdecl sb_ReleaseSampleBank(void* h);
 void __cdecl fcn_004e4eb0(void);
 
 /* ADDRESS: GOLDTL 0x004e2b70 */
@@ -74,7 +74,7 @@ void __cdecl cut_PlayDeathCutscene(void* arg)
 	}
 	msx_StartMusicIfAllowed((char*) 0x68bd14);
 	handle = sb_LoadLocalizedSampleBank((char*) 0x68d2d0, 1);
-	fcn_004e4730((char*) 0x68d2c8);
+	cut_StartSceneCutscene((char*) 0x68d2c8);
 	d3_InitSkyLayer((char*) 0x68d2b8);
 	d3_BlendSceneLightingPreset(state, 0, 1.0f, 1);
 	d3_InterpolateSceneFog(0, 0, 0.0f);
@@ -167,7 +167,7 @@ void __cdecl cut_PlayDeathCutscene(void* arg)
 	d3_DestroySkyLayer();
 	cut_CleanupCutscene();
 	d3snd_StopTrackedVoices();
-	fcn_004230e0((void*) handle);
+	sb_ReleaseSampleBank((void*) handle);
 	fcn_004e4eb0();
 	g_772f54 = 0;
 }

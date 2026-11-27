@@ -3,7 +3,7 @@
 void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl fcn_00442e30(void);
 
-void __cdecl fcn_004131c0(void)
+void __cdecl d3_DisposeAllSceneContexts(void)
 {
 	int i;
 

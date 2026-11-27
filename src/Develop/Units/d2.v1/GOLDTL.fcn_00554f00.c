@@ -28,7 +28,7 @@ extern int g_100f1dc;
 int __cdecl gm_CompareGameTime(char*, char*);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl d2_CreateActionPopupSlot(char*, int, int, char*, int);
-void __cdecl fcn_00545780(char*);
+void __cdecl d2_CloseActionPopup(char*);
 void __cdecl he_FreeAction(char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
@@ -39,7 +39,7 @@ void __cdecl d3snd_QueueSound(int, int, char*, int, int);
 void __cdecl io_AppendText(int, ...);
 
 /* ADDRESS: GOLDTL 0x00554f00 */
-void __cdecl fcn_00554f00(char* obj)
+void __cdecl he_RunTitleGrantEvent(char* obj)
 {
 	char* rec;
 	char* h;
@@ -65,7 +65,7 @@ void __cdecl fcn_00554f00(char* obj)
 	st = *(int*) (obj + 0x70);
 	if (st == -2 || st == -1 || *(unsigned short*) rec == 0xffff || p == 0) {
 		if (*(int*) (obj + 0x74) != 0) {
-			fcn_00545780(obj);
+			d2_CloseActionPopup(obj);
 		}
 		he_FreeAction(obj);
 		return;
@@ -82,7 +82,7 @@ void __cdecl fcn_00554f00(char* obj)
 			return;
 		}
 		if (g_100f1dc == 2) {
-			fcn_00545780(obj);
+			d2_CloseActionPopup(obj);
 			he_FreeAction(obj);
 			return;
 		}
@@ -93,7 +93,7 @@ void __cdecl fcn_00554f00(char* obj)
 			return;
 		}
 		g_7749e8 = 0;
-		fcn_00545780(obj);
+		d2_CloseActionPopup(obj);
 		he_FreeAction(obj);
 		return;
 	default: return;

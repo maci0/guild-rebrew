@@ -3,7 +3,7 @@ extern int g_7f4c04;
 void __cdecl gm_AddTime(void *, int, int, int);
 
 /* ADDRESS: GOLDTL 0x0057ba50 */
-void __cdecl fcn_0057ba50(void *self)
+void __cdecl he_InitSpecialOffices(void *self)
 {
     char *rec;
 

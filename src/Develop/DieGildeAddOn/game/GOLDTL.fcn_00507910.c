@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* ADDRESS: GOLDTL 0x00507910 */
-int __cdecl fcn_00507910(int k)
+int __cdecl gm_MapBuildingCatToGuildSlot(int k)
 {
 	switch (k) {
 	case 4:
@@ -51,11 +51,11 @@ float __cdecl gm_GetWorkforceOutput(unsigned char* p, int k, int a, int b);
 /* Lives in this file because it must see fcn_00507910 above it: msvc6 then
  * knows the callee leaves edx alone and keeps k there across the call. */
 /* ADDRESS: GOLDTL 0x005101e0 */
-float __cdecl fcn_005101e0(unsigned char* p, int k, int a, int b)
+float __cdecl gm_GetScaledWorkforceOutput(unsigned char* p, int k, int a, int b)
 {
 	int c;
 
-	c = fcn_00507910(((BUILDING_PROTOTYPE*)lpGebaeudePROT)[k].category);
+	c = gm_MapBuildingCatToGuildSlot(((BUILDING_PROTOTYPE*)lpGebaeudePROT)[k].category);
 	if (c != 10 && c != 11 && c != 12) {
 		return gm_GetWorkforceOutput(p, k, a, b) * 3.0f;
 	}

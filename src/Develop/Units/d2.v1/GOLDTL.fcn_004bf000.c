@@ -9,7 +9,7 @@ int __cdecl fcn_0064d41a(char*, char*, ...);
 
 
 /* ADDRESS: GOLDTL 0x004bf000 */
-int __cdecl fcn_004bf000(unsigned short* a1, int a2, int a3, int col, int x, int y, int layer, int* out)
+int __cdecl d2_CreateRouteWareSlot(unsigned short* a1, int a2, int a3, int col, int x, int y, int layer, int* out)
 {
 	int tbl[3][3] = { { 0x51, 0, 0 }, { 0x30, 0x71, 0 }, { 0x11, 0x52, 0x93 } };
 	int k;

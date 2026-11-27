@@ -38,7 +38,7 @@ extern int d2_CurrentElementId;
 extern int g_14b5650;
 extern int g_14b5654;
 
-void __cdecl fcn_005263d0(int, int, int);
+void __cdecl d2_ShowGreenMessageBox(int, int, int);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -74,7 +74,7 @@ int __cdecl d2_OpenSeanceDialog(int a1, char* s, struct result* out)
 	p = *(struct rec44**) (s + 0x2c + *(int*) (s + 0x88) * 0xc);
 	out->rec = *p;
 	if ((((struct house*)g_7f4ca0)[g_774970].flags & 8) != 0) {
-		fcn_005263d0(g_14b5650, g_14b5654, 0);
+		d2_ShowGreenMessageBox(g_14b5650, g_14b5654, 0);
 		return 0;
 	}
 	h = d2_LoadForm(0, 0, "Locations\\Friedhof\\Seance");

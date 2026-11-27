@@ -28,7 +28,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyScrollPerga(void);
 
 /* ADDRESS: GOLDTL 0x004b3490 */
-void __cdecl fcn_004b3490(void)
+void __cdecl hst_ShowDueTextScroll(void)
 {
 	char text[0x1fb8];
 	char name[0x100];
@@ -169,6 +169,6 @@ void __cdecl fcn_004b3490(void)
 				io_AppendText((int) "$C$Z$[%s$]", name);
 			}
 		}
-	} while (main_RunFrameLoop(fcn_004b3490, 0x66087) != 0);
+	} while (main_RunFrameLoop(hst_ShowDueTextScroll, 0x66087) != 0);
 	d2_DestroyScrollPerga();
 }

@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-int __cdecl fcn_0051e070(void);
+int __cdecl main_GetLanguage(void);
 
 void __cdecl main_FormatGameVersion(char* out)
 {
@@ -27,7 +27,7 @@ void __cdecl main_FormatGameVersion(char* out)
 			break;
 		}
 	}
-	if (fcn_0051e070() == 1) {
+	if (main_GetLanguage() == 1) {
 		sprintf(out, "Europa 1400 - Gold Edition - 2.06");
 	} else {
 		sprintf(out, "Die Gilde - Gold Edition - 2.06");

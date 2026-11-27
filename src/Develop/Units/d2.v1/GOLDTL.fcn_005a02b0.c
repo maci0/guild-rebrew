@@ -30,7 +30,7 @@ void __cdecl io_FormatTextBuffer(char*, int, int);
 int __cdecl d2_ShowModalMessageBox(char*, int);
 int __cdecl d3_EndCameraAndUiMode(void);
 /* ADDRESS: GOLDTL 0x005a02b0 */
-int __cdecl fcn_005a02b0(void)
+int __cdecl d2_RunMeisterpruefungDialog(void)
 {
 	float grade;
 	int info[4];
@@ -94,7 +94,7 @@ int __cdecl fcn_005a02b0(void)
 			d2_SetElementValue(d, 0, 0x64, (int) (grade * 100.0f));
 		}
 	}
-	while (main_RunFrameLoop((void*) fcn_005a02b0, 0x677c7) != 0) {
+	while (main_RunFrameLoop((void*) d2_RunMeisterpruefungDialog, 0x677c7) != 0) {
 		if ((mode = g_100f1dc) != -1 && grade >= 1.0) {
 			if (mode == 2) {
 				if (*(int*) (slot + 0x194) < 4) {

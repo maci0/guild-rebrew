@@ -24,7 +24,7 @@ extern void* g_100f8a0;
 extern TexSlot g_100f860[3];
 extern TexSlot g_100f840;
 
-void __cdecl fcn_00475f80(void* p);
+void __cdecl d2_ReleaseSurface(void* p);
 
 /* ADDRESS: GOLDTL 0x00473ed0 */
 void __cdecl d2_ShutdownOverlayState(void)
@@ -32,18 +32,18 @@ void __cdecl d2_ShutdownOverlayState(void)
 	int i;
 
 	if (g_100f8a0) {
-		fcn_00475f80(g_100f8a0);
+		d2_ReleaseSurface(g_100f8a0);
 		g_100f8a0 = 0;
 	}
 	for (i = 0; i < 3; i++) {
 		if (g_100f860[i].tex) {
-			fcn_00475f80(g_100f860[i].tex);
+			d2_ReleaseSurface(g_100f860[i].tex);
 			g_100f860[i].tex = 0;
 			g_100f860[i].a = -1;
 			g_100f860[i].b = -1;
 		}
 	}
-	fcn_00475f80(g_100f840.tex);
+	d2_ReleaseSurface(g_100f840.tex);
 	g_100f840.a = -1;
 	g_100f840.b = -1;
 	g_100f840.tex = 0;

@@ -15,7 +15,7 @@ void __cdecl he_RunSkillDuelEvent(void);
 void __cdecl he_StartFreeActionStub(void);
 void __cdecl he_StartFest(void);
 void __cdecl he_UpdateFest(void);
-void __cdecl fcn_0054bc40(void);
+void __cdecl he_InitInvitation(void);
 void __cdecl he_RunInvitation(void);
 void __cdecl he_RunAction53(void);
 void __cdecl he_StartCourtship(void);
@@ -28,7 +28,7 @@ void __cdecl he_RunRazzia(void);
 void __cdecl he_StartDuellChallenge(void);
 void __cdecl he_RunDuellChallenge(void);
 void __cdecl he_InitDuellIntro(void);
-void __cdecl fcn_0054f600(void);
+void __cdecl he_RunDuellIntro(void);
 void __cdecl he_RunDuellCutscene(void);
 void __cdecl he_AllocRndGeselle(void);
 void __cdecl he_RunHireJourneymanAction(void);
@@ -48,7 +48,7 @@ void __cdecl he_AllocBuildingDamageEvent(void);
 void __cdecl he_RunBuildingDamageEvent(void);
 void __cdecl he_ScheduleDelayedAction(void);
 void __cdecl he_RunAction0x5a(void);
-void __cdecl fcn_00551210(void);
+void __cdecl he_StartPeriodicStipend(void);
 void __cdecl he_RunPeriodicStipend(void);
 void __cdecl he_RunPeriodicApDrain(void);
 void __cdecl he_InitAction0x5d(void);
@@ -74,7 +74,7 @@ void __cdecl RunSimUnfall(void);
 void __cdecl he_StartAction0x67(void);
 void __cdecl he_RunAction0x67(void);
 void __cdecl he_InitAction0x69(void);
-void __cdecl fcn_00554f00(void);
+void __cdecl he_RunTitleGrantEvent(void);
 void __cdecl he_InitSimulateWirtshaus(void);
 void __cdecl gm_SimulateWirtshaus(void);
 void __cdecl he_StartTalentLevelAction(void);
@@ -95,7 +95,7 @@ void __cdecl he_RunUnkendunk(void);
 void __cdecl he_PickNextSensenmannTarget(void);
 void __cdecl he_InitAction0x79Report(void);
 void __cdecl he_BroadcastLeaderboard(void);
-void __cdecl fcn_005595e0(void);
+void __cdecl he_InitPoliticians(void);
 void __cdecl he_RunPoliticians(void);
 void __cdecl fcn_0055a020(void);
 void __cdecl he_InitOfficeAudit(void);
@@ -114,7 +114,7 @@ void __cdecl he_AllocDailyCouncilEvent(void);
 void __cdecl he_RunDailyCouncilEvent(void);
 void __cdecl he_StartTutorialEvent(void);
 void __cdecl he_UpdateTutorialEvent(void);
-void __cdecl fcn_0055afb0(void);
+void __cdecl he_InitTitleAward(void);
 void __cdecl d2_ShowTitleAward(void);
 
 /* ADDRESS: GOLDTL 0x0055b3e0 */
@@ -150,7 +150,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(55, (void*) he_StartFest, (void*) he_UpdateFest) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(54, (void*) fcn_0054bc40, (void*) he_RunInvitation) != 0) {
+	if (he_RegisterHandler(54, (void*) he_InitInvitation, (void*) he_RunInvitation) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(53, (void*) 0x0054c240, (void*) he_RunAction53) != 0) {
@@ -172,7 +172,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(69, (void*) he_StartDuellChallenge, (void*) he_RunDuellChallenge) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(70, (void*) he_InitDuellIntro, (void*) fcn_0054f600) != 0) {
+	if (he_RegisterHandler(70, (void*) he_InitDuellIntro, (void*) he_RunDuellIntro) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(71, (void*) 0x0054f910, (void*) he_RunDuellCutscene) != 0) {
@@ -211,7 +211,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(90, (void*) he_ScheduleDelayedAction, (void*) he_RunAction0x5a) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(91, (void*) fcn_00551210, (void*) he_RunPeriodicStipend) != 0) {
+	if (he_RegisterHandler(91, (void*) he_StartPeriodicStipend, (void*) he_RunPeriodicStipend) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(92, (void*) 0x5512f0, (void*) he_RunPeriodicApDrain) != 0) {
@@ -260,7 +260,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(104, (void*) he_InitSimulateWirtshaus, (void*) gm_SimulateWirtshaus) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(105, (void*) he_InitAction0x69, (void*) fcn_00554f00) != 0) {
+	if (he_RegisterHandler(105, (void*) he_InitAction0x69, (void*) he_RunTitleGrantEvent) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(106, (void*) he_StartTalentLevelAction, (void*) d2_HandleTalentLevelDialog) != 0) {
@@ -293,7 +293,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(121, (void*) he_InitAction0x79Report, (void*) he_BroadcastLeaderboard) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(122, (void*) fcn_005595e0, (void*) he_RunPoliticians) != 0) {
+	if (he_RegisterHandler(122, (void*) he_InitPoliticians, (void*) he_RunPoliticians) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(123, (void*) fcn_0055a020, (void*) 0x55a030) != 0) {
@@ -323,5 +323,5 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(135, (void*) he_StartTutorialEvent, (void*) he_UpdateTutorialEvent) != 0) {
 		return 1;
 	}
-	return he_RegisterHandler(165, (void*) fcn_0055afb0, (void*) d2_ShowTitleAward) != 0;
+	return he_RegisterHandler(165, (void*) he_InitTitleAward, (void*) d2_ShowTitleAward) != 0;
 }

@@ -32,7 +32,7 @@ int __cdecl cm_StepCommandQueue();
 int __cdecl main_RunFrameLoop();
 int __cdecl he_fn_Handlung();
 int __cdecl he_StartHandlungSearch();
-int __cdecl fcn_0057e880();
+int __cdecl d2_DispatchTutorialInput();
 int __cdecl d2_CanCloseWindowDuringTutorial();
 int __cdecl d2_ResetBuildingUiSlots();
 int __cdecl d2_SyncWareProduktionSlotGrid();
@@ -131,7 +131,7 @@ void __cdecl d2_ShowLagerOptions(unsigned char *a0,int a1)
   v4 = (short *)fcn_00502cd0(v3,2,0,0x2a,6);
   if (((!v4) && (v4 = (short *)fcn_00502cd0(v3,2,0,0x116,6), !v4)) && (v4 = (short *)fcn_00502cd0(*(unsigned int *)&v2[0x5d],2,0,0x2a,6), !v4))
     return;
-  fcn_0057e880(0x1d,v2,0,0);
+  d2_DispatchTutorialInput(0x1d,v2,0,0);
   dialogId = d2_LoadForm(0,0,(char *)0x6ac468);
   d2_CenterDialogWindows(dialogId);
   d2_SetForm(dialogId,3);
@@ -380,7 +380,7 @@ label_5bea6c:
     if (!main_RunFrameLoop(0x5be140,0x657c7)) {
       d3_EndCameraAndUiMode();
       d2_DestroyForm(dialogId);
-      fcn_0057e880(0x1d,v2,1,0);
+      d2_DispatchTutorialInput(0x1d,v2,1,0);
       return;
     }
   } while( 1 );

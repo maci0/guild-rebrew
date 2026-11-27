@@ -50,7 +50,7 @@ int __cdecl cm_SendSellObjekt(int, int, int, int, char, int);
 int __cdecl fcn_0050b750(int, char);
 void __cdecl cm_RequestMoveCredits(int, int, char, int);
 int __cdecl gv_AssignGraveyardField(Player*);
-int __cdecl fcn_004c6090(Player*, int, int, int);
+int __cdecl cm_RequestAssignWorker(Player*, int, int, int);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl cm_StepCommandQueue(void);
 Handle* __cdecl cm_GetCommandResult(int);
@@ -80,12 +80,12 @@ void __cdecl init_SetupBetriebWorkers(Player* p)
 				h = gv_AssignGraveyardField(p);
 			} else {
 				if (((ENTITY_RECORD*)g_7f4ca0)[p->slot].entity_state != 6 && ((ENTITY_RECORD*)g_7f4ca0)[p->slot].entity_state != 7) {
-					fcn_004c6090(p, 0, o->role_230, 0);
+					cm_RequestAssignWorker(p, 0, o->role_230, 0);
 				}
-				h = fcn_004c6090(p, 0, o->role_230, 0);
+				h = cm_RequestAssignWorker(p, 0, o->role_230, 0);
 			}
 		} else {
-			h = fcn_004c6090(p, 0, o->role_230, 0);
+			h = cm_RequestAssignWorker(p, 0, o->role_230, 0);
 		}
 		while (cm_GetCommandStatus(h) == 0) {
 			cm_StepCommandQueue();

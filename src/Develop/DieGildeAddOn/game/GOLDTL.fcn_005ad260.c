@@ -1,4 +1,4 @@
-extern void __cdecl fcn_005338a0(void);
+extern void __cdecl d2_ClearStatusTextSlots(void);
 extern int __cdecl RegisterStatusText(char* name, int a, int b);
 extern int __cdecl main_RunFrameLoop(int fn, int delay);
 extern void __cdecl d2_RunKerkermeisterBribeDialog(char* obj);
@@ -12,7 +12,7 @@ void __cdecl d2_RunKerkermeisterMenu(char* obj)
 	int wait;
 
 	handle = 0;
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	wait = SOUND_FLAG > 0 ? 0x677ff : 0x67fff;
 	if (main_RunFrameLoop(0x5ad260, wait) == 0)
 		return;

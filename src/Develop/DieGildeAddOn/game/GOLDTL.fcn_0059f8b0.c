@@ -11,7 +11,7 @@ extern char g_6aa750[];
 extern char g_6aa73c[];
 extern char g_6aa728[];
 
-void __cdecl fcn_005338a0(void);
+void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_OpenDuelTargetPicker(int);
@@ -25,7 +25,7 @@ void __cdecl d2_RunRhetoricActionsHud(int entity, int mode)
 	int y;
 	int z;
 
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	while (main_RunFrameLoop(d2_RunRhetoricActionsHud, 0x67fff) != 0) {
 		x = RegisterStatusText(g_6aa750, g_14ab07c, 0xc);
 		y = RegisterStatusText(g_6aa73c, g_14ab750, 0xc);

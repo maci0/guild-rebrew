@@ -2,7 +2,7 @@ extern int g_633444;
 extern char* g_889f74;
 
 #pragma pack(1)
-struct ref_f31161 {
+struct SAVED_SCENE_REF {
 	char type;
 	char pad[4];
 	int ref;
@@ -12,7 +12,7 @@ struct ref_f31161 {
 
 #include "client_types.h"
 extern COMMAND_STATUS_SLOT g_fb5760[0x8000];
-#define g_f31161 ((struct ref_f31161 *)((char *)g_fb5760 + 1))
+#define g_f31161 ((struct SAVED_SCENE_REF *)((char *)g_fb5760 + 1))
 
 void __cdecl d3_SelectSceneContext(int, int);
 int __cdecl gm_LookupEntityRecordById(int);
@@ -24,7 +24,7 @@ void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl fcn_0044aa10(int, int);
 
 /* ADDRESS: GOLD 0x00519ad0 */
-void __cdecl fcn_00519ad0(void)
+void __cdecl ls_ResolveSavedSceneRefs(void)
 {
 	int save;
 	int i;
@@ -58,7 +58,7 @@ void __cdecl fcn_00519ad0(void)
 }
 
 /* ADDRESS: GOLD 0x00519b80 */
-int __cdecl fcn_00519b80(int a)
+int __cdecl ls_SaveSceneWithBuildingIds(int a)
 {
 	int save;
 	int i;

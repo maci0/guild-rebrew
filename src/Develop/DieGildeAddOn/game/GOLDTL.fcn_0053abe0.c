@@ -10,7 +10,7 @@ char* __cdecl fcn_00502cd0(int a, int b, int c, int d, ...);
 void __cdecl gm_AssignBuildingOwner(char* e, int a, int b);
 void __cdecl d3_UpdateEntityStageMeshes(char* e, char* q, int a);
 int __cdecl cm_SendSellObjekt(int a, int b, int c, int d, unsigned char k, int n);
-void __cdecl fcn_004c6090(char* e, int a, int b, int c);
+void __cdecl cm_RequestAssignWorker(char* e, int a, int b, int c);
 void __cdecl cm_BeginCommandSync(void);
 void __cdecl cm_EndCommandSync(void);
 char* __cdecl cm_AreQueuedCommandsDone(void);
@@ -42,7 +42,7 @@ void __cdecl gm_InitCivicBuildings(unsigned int ownerSlot)
 		*(short*) (bld + 0x27) = (short) ownerSlot;
 		n = 3;
 		do {
-			fcn_004c6090(bld, 0, 10, 0);
+			cm_RequestAssignWorker(bld, 0, 10, 0);
 			n--;
 		} while (n);
 		slot = fcn_00502cd0(*(int*) (bld + 0x5d), 2, 6, 0, 0x2a);

@@ -1,27 +1,27 @@
 #include <string.h>
 
-typedef struct fcn_004be1f0_node fcn_004be1f0_node;
-struct fcn_004be1f0_node {
+typedef struct RT_POINT_NODE RT_POINT_NODE;
+struct RT_POINT_NODE {
 	int f0;
 	int f4;
 	char pad8[0x30];
-	fcn_004be1f0_node* prev;
-	fcn_004be1f0_node* next;
+	RT_POINT_NODE* prev;
+	RT_POINT_NODE* next;
 };
 // SIZE 0x40
 
 extern char g_6816dc[];
 
-fcn_004be1f0_node* __cdecl m_alloc(int, char*);
+RT_POINT_NODE* __cdecl m_alloc(int, char*);
 
 
 /* ADDRESS: GOLDTL 0x004be1f0 */
-fcn_004be1f0_node* __cdecl fcn_004be1f0(fcn_004be1f0_node* head)
+RT_POINT_NODE* __cdecl rt_AllocRoutePoint(RT_POINT_NODE* head)
 {
 	int n;
-	fcn_004be1f0_node* last;
-	fcn_004be1f0_node* p;
-	fcn_004be1f0_node* q;
+	RT_POINT_NODE* last;
+	RT_POINT_NODE* p;
+	RT_POINT_NODE* q;
 
 	n = 0;
 	last = 0;

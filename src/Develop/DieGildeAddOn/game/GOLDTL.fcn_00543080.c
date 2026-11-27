@@ -7,7 +7,7 @@ int __cdecl d2_RenderAndPresentFrame();
 int __cdecl d2_SetBackdropResource();
 int __cdecl d2_AddElementToWindow();
 int __cdecl d2_LoadForm();
-int __cdecl fcn_00471d80();
+int __cdecl d2_CenterForm();
 int __cdecl d2_DestroyForm();
 int __cdecl d2_GetWindowListItem();
 int __cdecl d2_CreateGuiWindow();
@@ -24,10 +24,10 @@ int __cdecl cut_ResetEventSlots();
 char __cdecl cut_RunPendingCutscenes(int);
 int __cdecl srv_FormatStatEntity();
 int __cdecl amt_UpdateAllOffices();
-int __cdecl fcn_004f5830();
+int __cdecl cm_PruneCompletedStraftaten();
 int __cdecl gm_UpdateAllBuildingLevels();
 int __cdecl gm_PushCityHistorySample();
-int __cdecl fcn_004fb390();
+int __cdecl gm_UpdateEconomyStats();
 int __cdecl gm_GetDisasterState();
 void __cdecl gm_InitDisasterState(int, int, int, float);
 int __cdecl gm_UpdateDisasterState();
@@ -53,7 +53,7 @@ int __cdecl main_PlayOutroMovie();
 int __cdecl he_DispatchFlaggedEvents();
 int __cdecl fcn_0053f100();
 int __cdecl he_TickApEvents();
-int __cdecl fcn_00547770();
+int __cdecl ai_DispatchGuildBuildPlan();
 int __cdecl he_RunDailyActionMaintenance();
 int __cdecl fcn_005490d0();
 int __cdecl io_FormatTextBuffer();
@@ -130,7 +130,7 @@ void __cdecl gm_RunRoundUpdate(void)
 	he_TickApEvents();
 	if (g_6a3420) {
 		tmpVal = d2_LoadForm(0, 0, 0x6a43ac);
-		fcn_00471d80(tmpVal, 3);
+		d2_CenterForm(tmpVal, 3);
 		d2_SetForm(tmpVal, 1);
 		io_AppendText(0x7d);
 		gm_PackGameTime(0x7f4c00, timeBuf);
@@ -159,7 +159,7 @@ void __cdecl gm_RunRoundUpdate(void)
 	gm_UpdateAllTownSeasonPrices();
 	gm_PushCityHistorySample();
 	if ((*(int*) &g_77494c & 8) || g_14cbca0 == -1) {
-		fcn_004f5830();
+		cm_PruneCompletedStraftaten();
 		cm_StepCommandQueue();
 		Sleep(100);
 		entPtr = (char*) 0x7f4ca8;
@@ -196,14 +196,14 @@ void __cdecl gm_RunRoundUpdate(void)
 		ai_RollNpcActionFlags();
 		cm_StepCommandQueue();
 		Sleep(100);
-		fcn_004fb390();
+		gm_UpdateEconomyStats();
 		gm_GetDisasterState(&st);
 		if (st.head == -1) {
 			gm_InitDisasterState(1, 0x3f800000, 0x3f000000, (float)(10.0 - (double)(4 - g_7747b4) * g_662cc0));
 		} else {
 			gm_UpdateDisasterState();
 		}
-		fcn_00547770();
+		ai_DispatchGuildBuildPlan();
 		cm_StepCommandQueue();
 		Sleep(100);
 		ptr = (unsigned int*) &g_7f4ca4;

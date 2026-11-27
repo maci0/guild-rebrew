@@ -1,12 +1,12 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include <string.h>
 
-extern void __cdecl fcn_00443030(void*);
+extern void __cdecl d3_InitSceneLevel(void*);
 extern void __cdecl d3_SetNodePosition(int, void*);
 extern void __cdecl d3_SetObjectRotation(int, void*);
 extern void __cdecl d3_SetActiveCamera(int);
 extern void __cdecl d3sm_Rebuild(int, int);
-extern int __cdecl fcn_0045b700(int, int, int);
+extern int __cdecl d3sm_CreateMap(int, int, int);
 extern void __cdecl d3_TraverseSceneObjects(int, int, int, int);
 extern void __cdecl gv_Free3Fields(int);
 extern int __cdecl d3_SetFog(int, int, int);
@@ -153,7 +153,7 @@ char __cdecl d3_SelectSceneContext(int contextIndex, char a1)
 				*(int*) (g_6b8484 + 0x8c);
 		}
 		if (CTX_TABLE[contextIndex].f80 == 0)
-			fcn_00443030(&CTX_TABLE[contextIndex]);
+			d3_InitSceneLevel(&CTX_TABLE[contextIndex]);
 		d3_ObjectListHead = CTX_TABLE[contextIndex].f80;
 		g_1042538 = CTX_TABLE[contextIndex].f84;
 		d3_SceneRenderListHead = CTX_TABLE[contextIndex].fa4;
@@ -228,7 +228,7 @@ char __cdecl d3_SelectSceneContext(int contextIndex, char a1)
 					d3sm_Rebuild(*(int*) 0x6b89e4, 0);
 				}
 				else {
-					*(int*) 0x6b89e4 = fcn_0045b700(0, -*(int*) 0x6b89b0, 1);
+					*(int*) 0x6b89e4 = d3sm_CreateMap(0, -*(int*) 0x6b89b0, 1);
 					d3_TraverseSceneObjects(g_67a370, 0, 0xc0, 0x456df0);
 				}
 			}

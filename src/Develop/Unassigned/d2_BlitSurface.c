@@ -26,7 +26,7 @@ typedef struct BlitSurf {
 
 int __cdecl d2_LockSurface(BlitSurf* s);
 int __cdecl d2_UnlockSurface(BlitSurf* s);
-int __cdecl fcn_00476120(int x, int y, int w, int h, BlitSurf* src, int sx, int sy, BlitSurf* dst);
+int __cdecl d2_BlitSurfaceCore(int x, int y, int w, int h, BlitSurf* src, int sx, int sy, BlitSurf* dst);
 int __cdecl d2_BlitSurface(int x, int y, int w, int h, BlitSurf* src, int sx, int sy, BlitSurf* dst, int unused);
 
 
@@ -70,7 +70,7 @@ int __cdecl d2_BlitSurface(int x, int y, int w, int h, BlitSurf* src, int sx, in
 	dstLocked = dst->locked;
 	srcLocked = src->locked;
 	if (((dst->a != 0 && src->a != 0) || (dst->b != 0 && src->b != 0)) && dst->flag == 0 && src->flag == 0) {
-		if (fcn_00476120(x, y, w, h, src, sx, sy, dst) == 0)
+		if (d2_BlitSurfaceCore(x, y, w, h, src, sx, sy, dst) == 0)
 			return 0;
 	} else if (d2_LockSurface(dst) != 0 && d2_LockSurface(src) != 0) {
 		sbase = src->pitch * y + (src->bpp >> 3) * x;

@@ -45,7 +45,7 @@ void __cdecl d3_ApplyObjectAnimation(Model*, char*, int);
 void __cdecl d2_HandleBookPageButton(Book*);
 void* __cdecl sb_PlayVoice(char*, const char*, int, int, int, int, int);
 
-int __cdecl fcn_00535270(Book* b, signed char dir)
+int __cdecl d2_TurnBookPages(Book* b, signed char dir)
 {
 	char top[0x40];
 	char bottom[0x40];

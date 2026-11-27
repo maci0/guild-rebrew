@@ -2,7 +2,7 @@ extern int g_100f1dc;
 int __cdecl d2_LoadForm(int, int, char *);
 void __cdecl d2_UpdateViewportCenter(int);
 void __cdecl d2_PositionFormWindows(int, int);
-void __cdecl fcn_00471d80(int, int);
+void __cdecl d2_CenterForm(int, int);
 int __cdecl d2_SetForm(int, int);
 void __cdecl d2_InitWindowBounds(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -16,15 +16,15 @@ void __cdecl d2_SetValueGaugeStepLabels(int, int, ...);
 void __cdecl d2_CreateButtonRow(int, int, int *, int, ...);
 int __cdecl main_RunFrameLoop(void *, int);
 void __cdecl d2_SetFormVisibility(int, int);
-void __cdecl fcn_005e2660(void);
+void __cdecl d2_RunAdvancedGfxOptionsDialog(void);
 int __cdecl d2_GetControlValue(int);
-void __cdecl fcn_005e12d0(void);
+void __cdecl io_SaveIniSettings(void);
 void __cdecl d3_ApplyGraphicsOptions(void);
 void __cdecl io_LoadIniSettings(void);
 void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005e2b60 */
-void __cdecl fcn_005e2b60(void)
+void __cdecl d2_ShowGraphicsOptions(void)
 {
   int v1, selection[3];
   unsigned char v2, v3;
@@ -34,7 +34,7 @@ void __cdecl fcn_005e2b60(void)
   v4 = d2_LoadForm(0,0,(char *)0x6ad2d4);
   d2_UpdateViewportCenter(v14);
   d2_PositionFormWindows(v4,1);
-  fcn_00471d80(v4,2);
+  d2_CenterForm(v4,2);
   d2_SetForm(v4,0);
   d2_InitWindowBounds(*(unsigned int *)0x772514);
   d2_SetOverlayAnimation(0,0);
@@ -90,7 +90,7 @@ void __cdecl fcn_005e2b60(void)
     d2_SetSlotVisibility(v15,0);
   d2_SetForm(v4,3);
   d2_CreateButtonRow(*(unsigned int *)0x772514,0,&selection[0],3,*(unsigned int *)0x14ac5a8,*(unsigned int *)0x14ac5ac,(char *)0x6ad2cc);
-  if (main_RunFrameLoop((void *)fcn_005e2b60,v14)) {
+  if (main_RunFrameLoop((void *)d2_ShowGraphicsOptions,v14)) {
     do {
       if ((*(unsigned int *)0x14ce8e0) || (*(unsigned char *)0x14cf950 == 1))
         *(unsigned int *)0x774654 = 1;
@@ -99,7 +99,7 @@ void __cdecl fcn_005e2b60(void)
           if (*(unsigned int *)0x67d370 != selection[1]) {
             if (*(unsigned int *)0x67d370 == selection[2]) {
               d2_SetFormVisibility(v4,0);
-              fcn_005e2660();
+              d2_RunAdvancedGfxOptionsDialog();
               d2_SetFormVisibility(v4,1);
               d2_SetSlotVisibility(v7,0);
               if (*(unsigned char *)0x774964)
@@ -115,7 +115,7 @@ void __cdecl fcn_005e2b60(void)
           *(unsigned int *)0x774654 = 1;
         }
       }
-    } while (main_RunFrameLoop((void *)fcn_005e2b60,v14));
+    } while (main_RunFrameLoop((void *)d2_ShowGraphicsOptions,v14));
     if (v1) {
       v2 = d2_GetControlValue(v5);
       *(unsigned char *)0x776664 = v2;
@@ -133,7 +133,7 @@ void __cdecl fcn_005e2b60(void)
       *(unsigned char *)0x77666a = v2;
       v3 = d2_GetControlValue(v11);
       *(unsigned char *)0x77666c = 100 - v3;
-      fcn_005e12d0();
+      io_SaveIniSettings();
       d3_ApplyGraphicsOptions();
     }
   }
@@ -141,7 +141,7 @@ void __cdecl fcn_005e2b60(void)
   if ((v14 != (*(unsigned int *)0x77534c & 0xff)) && (v1)) {
     v2 = d2_GetControlValue(v15);
     *(unsigned char *)0x77534c = v2;
-    fcn_005e12d0();
+    io_SaveIniSettings();
     *(unsigned int *)0x774958 = 0;
     *(unsigned int *)0x774954 = 1;
     *(unsigned int *)0x77495c = 1;

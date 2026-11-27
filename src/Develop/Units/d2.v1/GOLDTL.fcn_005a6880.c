@@ -46,7 +46,7 @@ int __cdecl he_fn_Handlung(void);
 void __cdecl ResetDisplayCounters(void);
 int __cdecl d2_PopulateInventoryGrid(int, ListRow*, int, int, char);
 int __cdecl d2_FindSelectedListRow(ListRow*);
-int __cdecl fcn_005a66b0(char*, int, int, unsigned char);
+int __cdecl d2_ConfirmExchangeGoods(char*, int, int, unsigned char);
 void __cdecl d2_ClearSelectedControl(void);
 void __cdecl d2_CreateGuiWindow(int, int, int, int);
 int __cdecl d2_CountActiveListRows(ListRow*);
@@ -158,7 +158,7 @@ void __cdecl d2_RunGeldleiheWechselDialog(char* obj)
 		sel2 = d2_FindSelectedListRow(list1);
 		if (cur == 0 && sel2 != -1 && selected != -1) {
 			ResetDisplayCounters();
-			if (fcn_005a66b0(obj, list2[selected].id, list2[selected].idx,
+			if (d2_ConfirmExchangeGoods(obj, list2[selected].id, list2[selected].idx,
 			             *(unsigned char*)&list1[sel2].idx)) {
 				d2_ClearSelectedControl();
 				for (i = 0; i < 16; i++) {

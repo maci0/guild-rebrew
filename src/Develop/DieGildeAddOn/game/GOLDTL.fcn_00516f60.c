@@ -74,11 +74,11 @@ void __cdecl d3_SetObjectRotation(Camera*, char*);
 int __cdecl d3_GetContextIndex(int);
 void __cdecl fcn_00402aa0(Obj*);
 void __cdecl ch_SetVisible(Obj*, int);
-void __cdecl fcn_004fdcf0(Entity*);
+void __cdecl d3_UpdateEntityTextureVariant(Entity*);
 void __cdecl d3_TraverseSceneObjects(Scene*, int, int, void (__cdecl*)(void));
 void __cdecl d3_ApplyVegetationTextureSet(void);
 void __cdecl d3_ApplySeasonTextureSet(void);
-void __cdecl fcn_00516be0(void);
+void __cdecl d3_SetExteriorLightingDefaults(void);
 void __cdecl d3_UpdateTerrainSeasonTextures(void);
 void __cdecl d3_UpdateSceneDetailLevel(int, int);
 void __cdecl d3_UpdateDaylightPhase(char*);
@@ -110,7 +110,7 @@ void __cdecl d3_ResetWorldSceneState(void)
 				fcn_00402aa0(((Entity*)g_7f4ca0)[i].obj);
 			}
 			ch_SetVisible(((Entity*)g_7f4ca0)[i].obj, 1);
-			fcn_004fdcf0(&((Entity*)g_7f4ca0)[i]);
+			d3_UpdateEntityTextureVariant(&((Entity*)g_7f4ca0)[i]);
 		}
 	}
 	if (mode == 1) {
@@ -124,7 +124,7 @@ void __cdecl d3_ResetWorldSceneState(void)
 	}
 	d3_TraverseSceneObjects((*(Scene**)&g_67a370), 0, 0xe0, d3_ApplyVegetationTextureSet);
 	d3_TraverseSceneObjects((*(Scene**)&g_67a370), 0, 0xc0, d3_ApplySeasonTextureSet);
-	fcn_00516be0();
+	d3_SetExteriorLightingDefaults();
 	if ((*(Scene**)&g_67a370) != 0 && (*(Scene**)&g_67a370)->hook != 0 && (*(Scene**)&g_67a370)->hook->notify != 0) {
 		(*(Scene**)&g_67a370)->hook->notify((*(Scene**)&g_67a370), 4, (*(Scene**)&g_67a370)->hook->arg, 0);
 	}
@@ -135,8 +135,8 @@ void __cdecl d3_ResetWorldSceneState(void)
 	g_67a964 = 1.0f - (unsigned char) g_77666c * 0.01f;
 	d3_UpdateDaylightPhase(&(*(char*)&gm_GameTime));
 	if (g_6b859b != 0) {
-		fcn_00443230(0);
+		d3_PrecacheAllSceneTextures(0);
 	} else {
-		fcn_00443230(1);
+		d3_PrecacheAllSceneTextures(1);
 	}
 }

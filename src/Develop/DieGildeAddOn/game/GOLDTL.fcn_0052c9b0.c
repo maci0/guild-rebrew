@@ -44,7 +44,7 @@ int __cdecl d3_PanCameraFromInput(void);
 void __cdecl d3_UpdateCameraFromMouse(void);
 void __cdecl d3_AdjustCameraHeight(void);
 #include "Develop/DieGildeAddOn/game/spiel.h"
-void __cdecl fcn_004125c0(int a, int b);
+void __cdecl io_SetMouseCursorPos(int a, int b);
 
 int __cdecl d3_UpdateCameraController(void)
 {
@@ -89,7 +89,7 @@ int __cdecl d3_UpdateCameraController(void)
 		d2_MouseRightBoundary = g_1040494 - 8;
 		d2_MouseBottomBoundary = d2_ScreenHeight;
 		g_6772c4 = 1;
-		fcn_004125c0(g_14ce8c0, g_14ce8c0);
+		io_SetMouseCursorPos(g_14ce8c0, g_14ce8c0);
 	}
 	return 0;
 }

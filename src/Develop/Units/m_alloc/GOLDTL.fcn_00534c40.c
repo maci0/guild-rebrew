@@ -12,11 +12,11 @@ extern int __cdecl d2_CreateRenderableForm(int a0, int a1, int a2);
 extern void __cdecl d2_CaptureFormPageTextures(int a0, char *a1, char *a2);
 extern void __cdecl d2_RenderFormToTextures(int a0);
 extern void __cdecl d2_SetGroupVisibility(int a0, int a1);
-extern void __cdecl fcn_00436f70(int a0);
+extern void __cdecl d3_SetFogEnabled(int a0);
 extern void __cdecl sb_PlayVoice(int a0, char *a1, int a2, int a3, int a4, int a5, int a6);
 
 /* ADDRESS: GOLDTL 0x00534c40 */
-int *__cdecl fcn_00534c40(unsigned int a0, int a1, char a2, ...)
+int *__cdecl d2_OpenJournalBook(unsigned int a0, int a1, char a2, ...)
 {
     int *blk;
     int *v3;
@@ -105,7 +105,7 @@ finish:
     if ((unsigned char)(*(int *)&g_6b7ff9) != 0)
     {
         *(char *)((char *)v3 + 0x272) = (*(int *)&g_6b7ff9);
-        fcn_00436f70(0);
+        d3_SetFogEnabled(0);
     }
     sb_PlayVoice(g_7747c4, (char *)0x6a313c, 1, 0x3f, 0x7f, 0, 0);
     return v3;

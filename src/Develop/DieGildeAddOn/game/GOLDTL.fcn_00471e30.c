@@ -2,7 +2,7 @@
 #include "client_data.h"
 
 extern int __cdecl d2_CloseWindow(int a1);
-extern int __cdecl fcn_00475f80(void* o);
+extern int __cdecl d2_ReleaseSurface(void* o);
 
 /* ADDRESS: GOLDTL 0x00471e30 */
 void __cdecl d2_DestroyForm(int dialogIndex)
@@ -28,10 +28,10 @@ void __cdecl d2_DestroyForm(int dialogIndex)
 	slot = (int*) base->h;
 	for (i = 0; i < 2; i++) {
 		if (slot[-2] != 0) {
-			fcn_00475f80((void*) slot[-2]);
+			d2_ReleaseSurface((void*) slot[-2]);
 		}
 		if (slot[0] != 0) {
-			fcn_00475f80((void*) slot[0]);
+			d2_ReleaseSurface((void*) slot[0]);
 		}
 		slot++;
 	}

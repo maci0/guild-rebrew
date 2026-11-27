@@ -3,8 +3,8 @@ extern char g_6a956c[], g_6a9580[], g_6a9924[];
 
 char* __cdecl d3_FindSceneObject(char*, int, char*, char*);
 void __cdecl d3_SetSubtreeVisible(void*, int);
-int __cdecl fcn_0051e070(void);
-void __cdecl fcn_005338a0(void);
+int __cdecl main_GetLanguage(void);
+void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(int, int);
 char* __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_OpenContactEinkaufPanel(char*);
@@ -43,7 +43,7 @@ void __cdecl d2_RunWirtshausTableMenu(char* app)
 		d3_SetSubtreeVisible(obj, 0);
 	}
 
-	if (fcn_0051e070() == 0) {
+	if (main_GetLanguage() == 0) {
 		strcpy(name, "ob_KARTENTISCH_germ");
 		obj = d3_FindSceneObject(0, 0xc0, 0, (char*) 0x6aaa48);
 		if (obj == 0) {
@@ -66,7 +66,7 @@ void __cdecl d2_RunWirtshausTableMenu(char* app)
 	}
 
 ready:
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	if (main_RunFrameLoop(0x5a3820, 0x67fff) == 0) {
 		return;
 	}

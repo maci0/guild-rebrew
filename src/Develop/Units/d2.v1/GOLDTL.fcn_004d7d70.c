@@ -28,11 +28,11 @@ extern unsigned short* g_772f24;
 void __cdecl d3_UpdateCameraAtScreenEdges(void);
 void __cdecl d2_UpdateCombatUnitHud(void);
 void __cdecl cut_UpdateCombatHoverTarget(void);
-void __cdecl fcn_004d0f00(void);
+void __cdecl d2_SelectClickedCombatWorker(void);
 void __cdecl cut_UpdateCombatSelectionBox(char*);
 void __cdecl cut_UpdateCombatEffects(void);
 void __cdecl d2_UpdateEntityOverlays(char*);
-void __cdecl fcn_004cf180(void);
+void __cdecl cut_UpdateActiveBombs(void);
 void __cdecl d3_UpdateMineExplosions(void);
 ent2c* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
 int __cdecl cm_SendUpdateCutsceneEntitySlot(int, ent2c*);
@@ -45,11 +45,11 @@ void __cdecl d2_UpdateCombatFrame(char* rec)
 	d3_UpdateCameraAtScreenEdges();
 	d2_UpdateCombatUnitHud();
 	cut_UpdateCombatHoverTarget();
-	fcn_004d0f00();
+	d2_SelectClickedCombatWorker();
 	cut_UpdateCombatSelectionBox(rec);
 	cut_UpdateCombatEffects();
 	d2_UpdateEntityOverlays(rec);
-	fcn_004cf180();
+	cut_UpdateActiveBombs();
 	d3_UpdateMineExplosions();
 	if (cut_ClockExpired != 0 || g_772ea4 != 0) {
 		g_774654 = 1;

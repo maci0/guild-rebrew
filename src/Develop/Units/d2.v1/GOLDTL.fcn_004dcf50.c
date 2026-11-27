@@ -10,13 +10,13 @@ extern char g_9b156c[];
 
 int __cdecl gm_GetLawEntry(int idx, void* dst);
 void __cdecl d2_SetFormVisibilityIfAllowed(int k, int flag);
-void __cdecl fcn_004e4730(char* scene);
+void __cdecl cut_StartSceneCutscene(char* scene);
 int __cdecl gs_CollectStraftatenByState(int key, int* out);
 char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl evt_StartGfxScript(int a1, int a2);
 void __cdecl cut_WaitForScript(int a1);
-int __cdecl fcn_004e4ae0(char* name, int a2);
-int __cdecl fcn_004e4b20(int a1, int a2, char* name, int mode);
+int __cdecl sb_LoadLocalizedSampleBankIfAllowed(char* name, int a2);
+int __cdecl d3snd_PlaySoundEffectIfAllowed(int a1, int a2, char* name, int mode);
 int __cdecl msx_StartAmbientTrack(char* snd, int flag);
 int __cdecl cut_RandMod(int n);
 void __cdecl msx_StartMusicIfAllowed(char* snd);
@@ -38,7 +38,7 @@ int __cdecl cm_RequestTransferCurrencyNoKill(int a, int b, unsigned char c, int 
 void __cdecl cm_RequestCopyEntityData(int a, int b, int c, int d);
 float __cdecl gm_ApplyEntityHealthDelta(int a, int b);
 int __cdecl gm_HasActiveSpecialObject(int a, int b);
-void __cdecl fcn_004f6810(int a, int b);
+void __cdecl gm_ValidateProzessCharge(int a, int b);
 void __cdecl cut_FormatProzessPunishment(int a, int b, char* s);
 void __cdecl cut_ExecuteProzessPunishment(int a, int b, int c, int d, int e);
 int* __cdecl gm_GetEntityTableEntry(int a);
@@ -146,7 +146,7 @@ int __cdecl cut_RunProzess(int a0)
 	}
 	f = tbl.f[i];
 	d2_SetFormVisibilityIfAllowed(g_68bfc0, 0);
-	fcn_004e4730("Gericht.ed3");
+	cut_StartSceneCutscene("Gericht.ed3");
 	msg.state = 0;
 	msg.f04 = 0.0f;
 	msg.i08 = 0;
@@ -204,7 +204,7 @@ int __cdecl cut_RunProzess(int a0)
 	} else {
 		msx_StartMusicIfAllowed("cd2\\ImKerker.mp3");
 	}
-	h2 = fcn_004e4ae0("ADDON\\PROZESS_NEU.sbf", 0);
+	h2 = sb_LoadLocalizedSampleBankIfAllowed("ADDON\\PROZESS_NEU.sbf", 0);
 	msg.pad[0] = gm_CalcTrialCourtFee((unsigned short*) p34, (unsigned short*) p38);
 	sprintf(str, "%s ", (char*) gm_SelectEntityHeadSet(*(unsigned short*) p3c) + 4);
 	end = str + strlen(str);
@@ -224,7 +224,7 @@ int __cdecl cut_RunProzess(int a0)
 	d2_SetFormVisibilityIfAllowed(g_68bfc0, 1);
 	d2_SetForm(g_68bfc0, 0);
 	io_AppendText(0x1491);
-	hWait = fcn_004e4b20(*(unsigned short*) p3c, h2, "_PROZESS_NEU", 5);
+	hWait = d3snd_PlaySoundEffectIfAllowed(*(unsigned short*) p3c, h2, "_PROZESS_NEU", 5);
 	while (hWait != 0 && sb_CheckVoicePlaying(hWait) != 0) {
 		cut_WaitTicks(1);
 	}
@@ -238,7 +238,7 @@ int __cdecl cut_RunProzess(int a0)
 	d2_SetForm(g_68bfc0, 0);
 	io_AppendText(0x6811b0);
 	io_AppendText(0x1499, *(unsigned short*) p38);
-	hWait = fcn_004e4b20(*(unsigned short*) p34, h2, "_PROZESS_NEU",
+	hWait = d3snd_PlaySoundEffectIfAllowed(*(unsigned short*) p34, h2, "_PROZESS_NEU",
 		*(char*) (p38 + 9) == 1);
 	while (hWait != 0 && sb_CheckVoicePlaying(hWait) != 0) {
 		cut_WaitTicks(1);
@@ -289,7 +289,7 @@ int __cdecl cut_RunProzess(int a0)
 				d2_SetForm(g_68bfc0, 0);
 				io_AppendText(0x68c998);
 				io_AppendText((int) work);
-				hWait = fcn_004e4b20(*(unsigned short*) p34, h2, "_PROZESS_GESETZ",
+				hWait = d3snd_PlaySoundEffectIfAllowed(*(unsigned short*) p34, h2, "_PROZESS_GESETZ",
 					tbl.c[0x1e] & 0xff);
 				while (hWait != 0 && sb_CheckVoicePlaying(hWait) != 0) {
 					cut_WaitTicks(1);
@@ -308,7 +308,7 @@ int __cdecl cut_RunProzess(int a0)
 		char ch;
 
 		ch = *(char*) (p38 + 9);
-		hWait = fcn_004e4b20(*(unsigned short*) p34, h2, "_PROZESS_NEU", (ch != 0) + 2);
+		hWait = d3snd_PlaySoundEffectIfAllowed(*(unsigned short*) p34, h2, "_PROZESS_NEU", (ch != 0) + 2);
 	}
 	while (hWait != 0 && sb_CheckVoicePlaying(hWait) != 0) {
 		cut_WaitTicks(1);
@@ -361,11 +361,11 @@ int __cdecl cut_RunProzess(int a0)
 			fm *= fsum;
 			fm *= g_662b28;
 			msg.f04 = fsum - fm;
-			h = fcn_004e4ae0("PROZESS_3_SCHULDIG.sbf", 0);
+			h = sb_LoadLocalizedSampleBankIfAllowed("PROZESS_3_SCHULDIG.sbf", 0);
 			d3snd_QueueSoundIfAllowed(*(unsigned short*) p38, h, "_PROZESS_3_SCHULDIG", 0, 0);
 			io_AppendText(0x14bd, *(unsigned short*) p38, 0x14be);
 		} else {
-			h = fcn_004e4ae0("PROZESS_3_NICHT_SCHULDIG.sbf", 0);
+			h = sb_LoadLocalizedSampleBankIfAllowed("PROZESS_3_NICHT_SCHULDIG.sbf", 0);
 			msg.i08 = 0;
 			d3snd_QueueSoundIfAllowed(*(unsigned short*) p38, h, "_PROZESS_3_NICHT_SCHULDIG", 0, 0);
 			io_AppendText(0x14bd, *(unsigned short*) p38, 0x14c4);
@@ -412,8 +412,8 @@ int __cdecl cut_RunProzess(int a0)
 		if (st == 1) {
 			rnd = cut_RandMod(6);
 			votes = cut_RandMod(6);
-			msg.hnd[2] = fcn_004e4ae0("PROZESS_4_FOLTER_1.sbf", 0);
-			msg.hnd[5] = fcn_004e4ae0("PROZESS_4_FOLTER_2.sbf", 0);
+			msg.hnd[2] = sb_LoadLocalizedSampleBankIfAllowed("PROZESS_4_FOLTER_1.sbf", 0);
+			msg.hnd[5] = sb_LoadLocalizedSampleBankIfAllowed("PROZESS_4_FOLTER_2.sbf", 0);
 			d3snd_QueueSoundIfAllowed(*(unsigned short*) p34, msg.hnd[2], "_PROZESS_4_FOLTER_1", rnd, 0x32);
 			d3snd_QueueSoundIfAllowed(*(unsigned short*) p34, msg.hnd[5], "_PROZESS_4_FOLTER_2", votes, 0x12c);
 			io_AppendText(0x14d9);
@@ -496,10 +496,10 @@ int __cdecl cut_RunProzess(int a0)
 			msg.pad[4] = gm_CalcTrialTortureRounds(&msg);
 			msg.pad[5] = 0;
 			sprintf(buf, "PROZESS_5_FOLTER2_%s.sbf", folterName[msg.pad[3]]);
-			msg.hnd[4] = fcn_004e4ae0("PROZESS_5_FOLTER2_GESTEHEN.sbf", 0);
-			msg.hnd[3] = fcn_004e4ae0(buf, 0);
-			msg.hnd[1] = fcn_004e4ae0("PROZESS_5_FOLTER2_WEITER.sbf", 0);
-			msg.hnd[0] = fcn_004e4ae0("PROZESS_5_FOLTER2_UNSCHULDSBETEUERUNG.sbf", 0);
+			msg.hnd[4] = sb_LoadLocalizedSampleBankIfAllowed("PROZESS_5_FOLTER2_GESTEHEN.sbf", 0);
+			msg.hnd[3] = sb_LoadLocalizedSampleBankIfAllowed(buf, 0);
+			msg.hnd[1] = sb_LoadLocalizedSampleBankIfAllowed("PROZESS_5_FOLTER2_WEITER.sbf", 0);
+			msg.hnd[0] = sb_LoadLocalizedSampleBankIfAllowed("PROZESS_5_FOLTER2_UNSCHULDSBETEUERUNG.sbf", 0);
 			sprintf(buf, "_PROZESS_5_FOLTER2_%s", folterName[msg.pad[3]]);
 			d2_SetFormVisibilityIfAllowed(g_68bfc0, 1);
 			d2_SetForm(g_68bfc0, 0);
@@ -535,13 +535,13 @@ int __cdecl cut_RunProzess(int a0)
 				sprintf(end, " handwerker_MANN");
 			}
 			msg.hnd[6] = d3_CurrentContextIndex;
-			fcn_004e4730("ob_GEFAENGNIS_FOLTERKAMMER.ed3");
+			cut_StartSceneCutscene("ob_GEFAENGNIS_FOLTERKAMMER.ed3");
 			evt_StartGfxScript((int) "cutscenes\\prozess\\folter-create.esc", (int) str);
 			d2_SetFormVisibilityIfAllowed(g_68bfc0, 1);
 			d2_SetForm(g_68bfc0, 0);
 			io_AppendText(0x6811b0);
 			io_AppendText(0x14e4);
-			hWait = fcn_004e4b20(*(unsigned short*) p3c, h2, "_PROZESS_NEU", 4);
+			hWait = d3snd_PlaySoundEffectIfAllowed(*(unsigned short*) p3c, h2, "_PROZESS_NEU", 4);
 			while (hWait != 0 && sb_CheckVoicePlaying(hWait) != 0) {
 				cut_WaitTicks(1);
 			}
@@ -623,7 +623,7 @@ int __cdecl cut_RunProzess(int a0)
 	d2_SetForm(g_68bfc0, 0);
 	io_AppendText(0x6811b0);
 	if (msg.pad[6] != 0) {
-		h0 = fcn_004e4ae0("PROZESS_6_FOLTERERGEBNIS.sbf", 0);
+		h0 = sb_LoadLocalizedSampleBankIfAllowed("PROZESS_6_FOLTERERGEBNIS.sbf", 0);
 		evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-richter-reden.esc", (int) "");
 		if (didFolter != 0) {
 			d3snd_QueueSoundIfAllowed(*(unsigned short*) p34, h0, "_PROZESS_6_FOLTERERGEBNIS", 0, 0x64);
@@ -635,7 +635,7 @@ int __cdecl cut_RunProzess(int a0)
 		cut_WaitTicks(4);
 	}
 	/* 0x4de7c9 */
-	hAnk = fcn_004e4ae0("PROZESS_6_ANKUENDIGUNG.sbf", 0);
+	hAnk = sb_LoadLocalizedSampleBankIfAllowed("PROZESS_6_ANKUENDIGUNG.sbf", 0);
 	d3snd_QueueSoundIfAllowed(*(unsigned short*) p34, hAnk, "_PROZESS_6_ANKUENDIGUNG", 0, 0);
 	evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-richter-reden.esc", (int) "");
 	d2_SetForm(g_68bfc0, 0);
@@ -660,7 +660,7 @@ int __cdecl cut_RunProzess(int a0)
 			}
 		}
 	}
-	hStrafe = fcn_004e4ae0("PROZESS_6_ABSTIMMUNG_ERGEBNISSE.sbf", 0);
+	hStrafe = sb_LoadLocalizedSampleBankIfAllowed("PROZESS_6_ABSTIMMUNG_ERGEBNISSE.sbf", 0);
 	evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-abstimmen-3.esc", (int) "");
 	d2_SetFormVisibilityIfAllowed(g_68bfc0, 1);
 	d2_SetForm(g_68bfc0, 0);
@@ -708,11 +708,11 @@ int __cdecl cut_RunProzess(int a0)
 	/* 0x4deb1c */
 	cut_UnloadSampleBank(hStrafe);
 	cut_UnloadSampleBank(h0);
-	h14 = fcn_004e4ae0("PROZESS_8.sbf", 0);
+	h14 = sb_LoadLocalizedSampleBankIfAllowed("PROZESS_8.sbf", 0);
 	if ((unsigned int) acc < 2) {
 		/* 0x4deb4a: guilty verdict */
-		hStrafe = fcn_004e4ae0("PROZESS_7_SCHULDIG.sbf", 0);
-		h0 = fcn_004e4ae0("PROZESS_7_STRAFEN.sbf", 0);
+		hStrafe = sb_LoadLocalizedSampleBankIfAllowed("PROZESS_7_SCHULDIG.sbf", 0);
+		h0 = sb_LoadLocalizedSampleBankIfAllowed("PROZESS_7_STRAFEN.sbf", 0);
 		msg.state = 5;
 		evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-abstimmen-3.esc", (int) "");
 		evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-richter-reden.esc", (int) "");
@@ -742,7 +742,7 @@ int __cdecl cut_RunProzess(int a0)
 			((*(char*) (p38 + 9) == 1) & 1), 0x64);
 		d3snd_QueueSoundIfAllowed(*(unsigned short*) p3c, hStrafe, "_PROZESS_7_SCHULDIG", 2, 0xfa);
 		cut_WaitTicks(3);
-		fcn_004f6810((int) p38, st);
+		gm_ValidateProzessCharge((int) p38, st);
 		d2_SetFormVisibilityIfAllowed(g_68bfc0, 1);
 		d2_SetForm(g_68bfc0, 0);
 		cut_FormatProzessPunishment((int) p38, st, buf);
@@ -781,7 +781,7 @@ int __cdecl cut_RunProzess(int a0)
 		cut_WaitTicks(4);
 	} else {
 		/* 0x4dee4f: not guilty verdict */
-		hStrafe = fcn_004e4ae0("PROZESS_7_NICHT_SCHULDIG.sbf", 0);
+		hStrafe = sb_LoadLocalizedSampleBankIfAllowed("PROZESS_7_NICHT_SCHULDIG.sbf", 0);
 		d3snd_QueueSoundIfAllowed(*(unsigned short*) p3c, hStrafe, "_PROZESS_7_NICHT_SCHULDIG",
 			((*(char*) (p38 + 9) == 1) & 1), 0x64);
 		d3snd_QueueSoundIfAllowed(*(unsigned short*) p3c, h14, "_PROZESS_8",

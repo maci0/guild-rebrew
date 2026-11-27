@@ -9,7 +9,7 @@ char* __cdecl fcn_0064d530(char* dst, const char* src, unsigned int n);
 
 
 /* ADDRESS: GOLDTL 0x0042dfb0 */
-int __cdecl fcn_0042dfb0(unsigned short count)
+int __cdecl tr_AllocTraceBuffer(unsigned short count)
 {
 	char tmpl[0x84];
 	int len;

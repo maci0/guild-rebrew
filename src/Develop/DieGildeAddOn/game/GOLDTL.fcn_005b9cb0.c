@@ -15,7 +15,7 @@ extern unsigned char g_773d75;
 
 
 float __cdecl eval_ObjektPreis2Credits(int, char);
-int __cdecl fcn_0051e070(void);
+int __cdecl main_GetLanguage(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl d2_ShowModalMessageBox(char*, int);
 void __cdecl gm_RemoveClientEntityLink(char*);
@@ -36,7 +36,7 @@ void __cdecl d2_SellObjectsDialog(int n, char** items)
 		total = (int)(total + (eval_ObjektPreis2Credits(*(unsigned short*) items[i], items[i][0x12])));
 	}
 	price = (int) (total * 0.4);
-	switch (fcn_0051e070()) {
+	switch (main_GetLanguage()) {
 	case 0:
 		if (n > 1) {
 			io_FormatTextBuffer(buf, 0xdc, price, n, 0xc10);

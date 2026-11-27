@@ -6,7 +6,7 @@ typedef struct G175_REC {
 } G175_REC;
 
 /* ADDRESS: GOLDTL 0x004f14c0 */
-int __cdecl fcn_004f14c0(G175_REC* a, int na, G175_REC* b, int nb)
+int __cdecl gm_CompareRecordArraysMaxSum(G175_REC* a, int na, G175_REC* b, int nb)
 {
 	G175_REC* best_a;
 	G175_REC* best_b;

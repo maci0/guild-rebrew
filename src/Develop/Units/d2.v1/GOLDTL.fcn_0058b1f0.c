@@ -1,6 +1,6 @@
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
+void __cdecl d2_CreateWindowScrollbar(int, int, int, int, int, int*, int*, int*);
 void* __cdecl FindSlotEntryFiltered(int, char*, void*, void*, int);
 char __cdecl gm_GetEntitySlotIndex(int, int*);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
@@ -62,7 +62,7 @@ void __cdecl d2_PopulateBuildingSlotList(char* building, DialogState* st, unsign
 	io_AppendText((int) g_6811b0);
 	{
 		int id2;
-		fcn_00533f40(0, 0, st->owner, st->slot, 0x35, &id2, &id1, (int*) &type);
+		d2_CreateWindowScrollbar(0, 0, st->owner, st->slot, 0x35, &id2, &id1, (int*) &type);
 	}
 
 	item = (SlotItem*) FindSlotEntryFiltered(0, building, 0, 0, st->type);

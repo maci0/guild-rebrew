@@ -10,7 +10,7 @@ int __cdecl sbs_GetFileSize(unsigned int a0);
 #pragma optimize("y", off)
 
 /* ADDRESS: GOLDTL 0x00424270 */
-unsigned int __cdecl fcn_00424270(unsigned int a0, unsigned int sampleName)
+unsigned int __cdecl sbs_AddSampleToSet(unsigned int a0, unsigned int sampleName)
 {
 	char* p;
 	char* v3;

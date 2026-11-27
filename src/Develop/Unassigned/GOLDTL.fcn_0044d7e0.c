@@ -1,6 +1,6 @@
 extern int g_6b86c0;
 
-int __cdecl fcn_0044d770(void* h);
+int __cdecl vfs_ReadStreamToken(void* h);
 int __cdecl FindTableEntryIndex(int a1, int* p, int kind);
 
 /* ADDRESS: GOLDTL 0x0044d7e0 */
@@ -10,7 +10,7 @@ void __cdecl d3_DispatchBinaryChunks(void* stream, int* table, int kind, void* e
 	int idx;
 	int token;
 
-	token = fcn_0044d770(stream);
+	token = vfs_ReadStreamToken(stream);
 	if (token != 0x27) {
 		do {
 			if (token == 0x2f) {
@@ -45,7 +45,7 @@ void __cdecl d3_DispatchBinaryChunks(void* stream, int* table, int kind, void* e
 					}
 				}
 			}
-			token = fcn_0044d770(stream);
+			token = vfs_ReadStreamToken(stream);
 		} while (token != 0x27);
 	}
 	g_6b86c0--;

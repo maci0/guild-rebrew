@@ -21,7 +21,7 @@ typedef struct {
 } Explosion417d00;
 
 
-int* __cdecl fcn_004524e0(int a0, char* a1, Bytes4 a2, float a3, char* a4, void (__cdecl* a5)(void));
+int* __cdecl d3_CreateParticleSystem(int a0, char* a1, Bytes4 a2, float a3, char* a4, void (__cdecl* a5)(void));
 void __cdecl d3_SetEffectPosition(int* a0, float* a1);
 void __cdecl d3_UpdateExplosionParticles(void);
 
@@ -43,7 +43,7 @@ int* __cdecl d3_CreateExplosionEmitter(char* a0, float* pos, int n, float a3, fl
 	memset(&f, 0, sizeof(f));
 	f.c |= 1;
 	f.a = 0xff;
-	s = (Explosion417d00*) fcn_004524e0(n, "Explosion", f, a6, a0, d3_UpdateExplosionParticles);
+	s = (Explosion417d00*) d3_CreateParticleSystem(n, "Explosion", f, a6, a0, d3_UpdateExplosionParticles);
 	if (s != 0) {
 		count = s->count;
 		n6 = count / 6;

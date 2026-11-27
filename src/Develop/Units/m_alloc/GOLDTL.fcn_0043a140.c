@@ -30,7 +30,7 @@ void __cdecl d3_InitSceneObject(Obj* o);
 void __cdecl d3_AddObjectDrawData(Obj* o);
 void __cdecl d3_SetNodePosition(Obj* o, V8* v);
 void __cdecl d3_SetObjectRotation(Obj* o, V6* v);
-void __cdecl fcn_00449f90(Obj* o, int a, int id);
+void __cdecl d3_AttachCachedModelParts(Obj* o, int a, int id);
 
 /* ADDRESS: GOLDTL 0x0043a140 */
 Obj* __cdecl d3_CloneObject(Obj* src)
@@ -153,7 +153,7 @@ Obj* __cdecl d3_CloneObject(Obj* src)
 		*(int*) (o->ext + 0x15f4) = *(int*) (src->ext + 0x15f4);
 		*(int*) (o->ext + 0x15f8) = *(int*) (src->ext + 0x15f8);
 		if (*(unsigned char*) (src->ext + 0x163c) > 0) {
-			fcn_00449f90(o, 0, *(int*) (src->ext + 0x40c));
+			d3_AttachCachedModelParts(o, 0, *(int*) (src->ext + 0x40c));
 		}
 	}
 	{

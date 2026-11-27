@@ -15,15 +15,15 @@ typedef struct {
 	char mode;
 } Img;
 
-Img* __cdecl fcn_00477590(int, int, int, int, int, int, int);
-char* __cdecl fcn_00477e70(int a1, int a2, int a3, int a4, int a5, unsigned char a8, int a7);
+Img* __cdecl shp_GrabBit24(int, int, int, int, int, int, int);
+char* __cdecl shp_EncodeSpriteBlock(int a1, int a2, int a3, int a4, int a5, unsigned char a8, int a7);
 Img* __cdecl d2_GrabBit8(int, int, int, int, int, int, int);
-Img* __cdecl fcn_00477ae0(int, int, int, int, int, int, int);
+Img* __cdecl shp_GrabBit24NoRS(int, int, int, int, int, int, int);
 Img* __cdecl shp_GrabBit16(int, int, int, int, int, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004788b0 */
-Img* __cdecl fcn_004788b0(int a1, int a2, int a3, int a4, Surf* surface, int mode, char alpha)
+Img* __cdecl shp_CreateSpriteFromSurface(int a1, int a2, int a3, int a4, Surf* surface, int mode, char alpha)
 {
 	Img* imageResult;
 	int kind;
@@ -32,11 +32,11 @@ Img* __cdecl fcn_004788b0(int a1, int a2, int a3, int a4, Surf* surface, int mod
 	if (alpha) {
 		switch (surface->bpp) {
 		case 0x18:
-			imageResult = fcn_00477590(a1, a2, a3, a4, surface->x1c, mode, surface->x4);
+			imageResult = shp_GrabBit24(a1, a2, a3, a4, surface->x1c, mode, surface->x4);
 			kind = 2;
 			break;
 		case 0x10:
-			imageResult = fcn_00477e70(a1, a2, a3, a4, surface->x1c, mode, surface->x4);
+			imageResult = shp_EncodeSpriteBlock(a1, a2, a3, a4, surface->x1c, mode, surface->x4);
 			kind = 1;
 			break;
 		case 8:
@@ -49,7 +49,7 @@ Img* __cdecl fcn_004788b0(int a1, int a2, int a3, int a4, Surf* surface, int mod
 	} else {
 		switch (surface->bpp) {
 		case 0x18:
-			imageResult = fcn_00477ae0(a1, a2, a3, a4, surface->x1c, mode, surface->x4);
+			imageResult = shp_GrabBit24NoRS(a1, a2, a3, a4, surface->x1c, mode, surface->x4);
 			kind = 2;
 			break;
 		case 0x10:

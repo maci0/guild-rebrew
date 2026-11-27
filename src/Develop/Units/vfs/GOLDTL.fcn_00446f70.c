@@ -36,14 +36,14 @@ extern char g_1041d80[];
 extern int g_6b8300;
 
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
-void __cdecl fcn_00401360(void*, int);
+void __cdecl vfs_WriteInt(void*, int);
 void __cdecl vfs_WriteCString(void*, int);
 void __cdecl vfs_WriteInt32(void*, float);
 void __cdecl vfs_WriteVec3(void*, Vec3*);
 void __cdecl vfs_WriteByte(void*, char);
 void* __cdecl d3_NextVisibleSceneNode(void*);
-void __cdecl fcn_00446540(void*, void*);
-void __cdecl fcn_004469e0(void*, int);
+void __cdecl d3_WriteSceneNodeTree(void*, void*);
+void __cdecl d3_SaveFloor(void*, int);
 void __cdecl d3_WriteEventTable(void*, int);
 #include "Develop/Units/vfs/vfs.h"
 
@@ -64,20 +64,20 @@ void __cdecl d3_SaveScene(const char* name, void* stream)
 			return;
 		}
 	}
-	fcn_00401360(s, 0x3a6c00bb);
+	vfs_WriteInt(s, 0x3a6c00bb);
 	vfs_WriteCString(s, g_6b8484);
 	vfs_WriteInt32(s, 0.0f);
 	vfs_WriteVec3(s, &g_67bbdc);
 	vfs_WriteVec3(s, &g_6b86c4);
-	fcn_00401360(s, ((Cfg*)g_67a370)->xb4);
-	fcn_00401360(s, d3_FogColor);
+	vfs_WriteInt(s, ((Cfg*)g_67a370)->xb4);
+	vfs_WriteInt(s, d3_FogColor);
 	vfs_WriteInt32(s, g_10425fc);
 	vfs_WriteInt32(s, g_104329c);
 	for (i = 0; i < 7; i++) {
 		vfs_WriteVec3(s, (Vec3*)&((D3_SCENE_SLOT*)g_1041d80)[i].a);
 		vfs_WriteVec3(s, (Vec3*)&((D3_SCENE_SLOT*)g_1041d80)[i].b);
 		for (k = 0; k < 6; k++) {
-			fcn_00401360(s, ((D3_SCENE_SLOT*)g_1041d80)[i].pal[k].color);
+			vfs_WriteInt(s, ((D3_SCENE_SLOT*)g_1041d80)[i].pal[k].color);
 			vfs_WriteInt32(s, ((D3_SCENE_SLOT*)g_1041d80)[i].pal[k].f4);
 			vfs_WriteInt32(s, ((D3_SCENE_SLOT*)g_1041d80)[i].pal[k].f8);
 		}
@@ -86,13 +86,13 @@ void __cdecl d3_SaveScene(const char* name, void* stream)
 	for (p = ((void*)d3_ObjectListHead); p != &(*(char*)d3_SceneObjectSentinel); p = d3_NextVisibleSceneNode(p)) {
 		n++;
 	}
-	fcn_00401360(s, n);
+	vfs_WriteInt(s, n);
 	for (p = ((void*)d3_ObjectListHead); p != &(*(char*)d3_SceneObjectSentinel); p = d3_NextVisibleSceneNode(p)) {
-		fcn_00446540(s, p);
+		d3_WriteSceneNodeTree(s, p);
 	}
 	vfs_WriteByte(s, g_6b8300 != 0);
 	if (g_6b8300 != 0) {
-		fcn_004469e0(s, g_6b8300);
+		d3_SaveFloor(s, g_6b8300);
 	}
 	d3_WriteEventTable(s, ((Cfg*)g_67a370)->x3c8);
 	if (stream == 0) {

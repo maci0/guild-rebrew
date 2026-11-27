@@ -18,7 +18,7 @@ typedef struct
 #pragma pack(pop)
 // SIZE 0x20
 
-int __cdecl fcn_004c6c30(void*);
+int __cdecl gv_EnqueueSlotCommand(void*);
 
 int __cdecl gv_RequestRentGrave(int entity, void* graveyard, int slotType, short duration, int price)
 {
@@ -34,5 +34,5 @@ int __cdecl gv_RequestRentGrave(int entity, void* graveyard, int slotType, short
 	msg.f10 = (char) 0xff;
 	msg.f11 = duration;
 	msg.f13 = price;
-	return fcn_004c6c30(&msg);
+	return gv_EnqueueSlotCommand(&msg);
 }

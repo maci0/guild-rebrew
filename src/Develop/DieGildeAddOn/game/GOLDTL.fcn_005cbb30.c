@@ -27,7 +27,7 @@ char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl d2_BuildPersonStatusDesc(Action2cCandidate* s);
-int __cdecl fcn_005cf720(unsigned short, unsigned short, int, int);
+int __cdecl gm_MatchesTargetFilter(unsigned short, unsigned short, int, int);
 
 int __cdecl d2_CollectAction2cCandidates(unsigned short* who, unsigned int max, Action2cCandidate* out, int kind)
 {
@@ -148,7 +148,7 @@ int __cdecl d2_CollectAction2cCandidates(unsigned short* who, unsigned int max, 
 				o->role = role[i];
 				o->task = *(int*) (t + 4);
 				d2_BuildPersonStatusDesc(o);
-				o->value = fcn_005cf720(*who, *o->house, kind, 0);
+				o->value = gm_MatchesTargetFilter(*who, *o->house, kind, 0);
 				k++;
 				o++;
 			}

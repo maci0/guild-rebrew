@@ -1,6 +1,6 @@
 /* Pattern match of the 32-bit value against the static group tables. */
 /* ADDRESS: GOLDTL 0x004a8070 */
-int __cdecl fcn_004a8070(int value, int* out1, int* out2, int* out3, int* out4)
+int __cdecl gm_EvaluateCardHand(int value, int* out1, int* out2, int* out3, int* out4)
 {
 	int next = 0;
 	int best = -1;

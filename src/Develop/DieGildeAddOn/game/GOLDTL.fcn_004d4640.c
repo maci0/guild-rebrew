@@ -4,7 +4,7 @@ extern int g_772ea4;
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d3_UpdateCameraAtScreenEdges(void);
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
-int __cdecl fcn_004cf180(void);
+int __cdecl cut_UpdateActiveBombs(void);
 int __cdecl d3_UpdateMineExplosions(void);
 void __cdecl cut_UpdateCombatEffects(void);
 
@@ -38,7 +38,7 @@ void __cdecl cut_RunBattleFrameLoop(char* context)
 				}
 			}
 		}
-		if (fcn_004cf180() != 0)
+		if (cut_UpdateActiveBombs() != 0)
 			busy = 1;
 		if (d3_UpdateMineExplosions() != 0)
 			busy = 1;

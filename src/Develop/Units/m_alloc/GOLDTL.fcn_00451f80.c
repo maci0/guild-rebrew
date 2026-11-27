@@ -1,13 +1,13 @@
 
 
-typedef struct Mat_451f80 {
+typedef struct SceneMatrix {
 	float m[16];
-} Mat_451f80;
+} SceneMatrix;
 // SIZE 0x40
 
 #include "Develop/Units/d8_vesa/d3d_device_view.h"
-typedef int (__stdcall* Transform451f80Fn)(D3D_DEVICE_VIEW*, int, void*);
-typedef int (__stdcall* Texture451f80Fn)(D3D_DEVICE_VIEW*, int, int);
+typedef int (__stdcall* SetTransformFn)(D3D_DEVICE_VIEW*, int, void*);
+typedef int (__stdcall* SetTextureFn)(D3D_DEVICE_VIEW*, int, int);
 
 
 
@@ -17,30 +17,30 @@ typedef int (__stdcall* Texture451f80Fn)(D3D_DEVICE_VIEW*, int, int);
 
 
 
-typedef struct Mesh_451f80 Mesh_451f80;
-typedef struct MeshVtbl_451f80 {
+typedef struct D3MeshObject D3MeshObject;
+typedef struct D3MeshObjectVtbl {
 	void* QueryInterface;
 	void* AddRef;
 	void* Release;
-	int (__stdcall* DrawSubset)(Mesh_451f80* self, int i);
-} MeshVtbl_451f80;
-struct Mesh_451f80 {
-	MeshVtbl_451f80* vtbl;
+	int (__stdcall* DrawSubset)(D3MeshObject* self, int i);
+} D3MeshObjectVtbl;
+struct D3MeshObject {
+	D3MeshObjectVtbl* vtbl;
 };
 
-typedef struct Node_451f80 {
+typedef struct AlphaRenderNode {
 	char* e;
 	char* world;
-	Mesh_451f80* mesh;
+	D3MeshObject* mesh;
 	unsigned char* mat;
 	float f10;
 	float f14;
 	int idx;
 	int f1c;
 	int f20;
-	struct Node_451f80* prev;
-	struct Node_451f80* next;
-} Node_451f80;
+	struct AlphaRenderNode* prev;
+	struct AlphaRenderNode* next;
+} AlphaRenderNode;
 // SIZE 0x2c
 
 #include "Develop/Units/d3/d3_camera.h"
@@ -52,23 +52,23 @@ extern int g_1042a08;
 extern float g_1040c80[16];
 extern float g_1040cc0[16];
 
-Mesh_451f80* __cdecl d3_GetObjectMesh(char* o, float* r);
+D3MeshObject* __cdecl d3_GetObjectMesh(char* o, float* r);
 void __cdecl d3_UpdateObjectCameraTransform(char* e, char* cam, int force);
 unsigned char __cdecl d3_TestObjectFrustum(char* e, char* o, char* world);
 void* __cdecl m_PoolAlloc(int* pool, int size, int grow);
 void __stdcall fcn_005eb970(void* out, void* a, void* b);
-void __stdcall fcn_005ec410(Mat_451f80* out, float x, float y, float z);
-void __cdecl d3_SelectActiveObjectLights(float a, float b, char* c, Mat_451f80* d, Mat_451f80* e);
+void __stdcall fcn_005ec410(SceneMatrix* out, float x, float y, float z);
+void __cdecl d3_SelectActiveObjectLights(float a, float b, char* c, SceneMatrix* d, SceneMatrix* e);
 void __cdecl d3_SetRenderMaterialState(unsigned char a, unsigned char b, int c, unsigned char d, unsigned char e);
 
-char __cdecl fcn_00451f80(char* e, void* parent)
+char __cdecl d3_VisitRenderSceneNode(char* e, void* parent)
 {
 	char* o;
 	unsigned char* mat;
-	Node_451f80* node;
-	Node_451f80* prev;
-	Mesh_451f80* mesh;
-	Mat_451f80 t;
+	AlphaRenderNode* node;
+	AlphaRenderNode* prev;
+	D3MeshObject* mesh;
+	SceneMatrix t;
 	float f;
 	float g;
 	int i;
@@ -96,8 +96,8 @@ char __cdecl fcn_00451f80(char* e, void* parent)
 			}
 			for (i = 0; i < *(int*) (detail + 0x1e4); detail = *(char**) (o + 0x318), i++) {
 				mat = (*(unsigned char***) (o + 0x31c))[*(int*) (detail + 0x1e4) + i];
-				if (mesh != *(Mesh_451f80**) (detail + 0x268) && (mat[0x58] < 0xff || (mat[0x5a] & 1))) {
-					node = (Node_451f80*) m_PoolAlloc(&g_6b8064, 0x2c, 0x10);
+				if (mesh != *(D3MeshObject**) (detail + 0x268) && (mat[0x58] < 0xff || (mat[0x5a] & 1))) {
+					node = (AlphaRenderNode*) m_PoolAlloc(&g_6b8064, 0x2c, 0x10);
 					node->e = e;
 					node->world = *(char**) (e + 0x1ec) + 0x15fc;
 					node->mesh = mesh;
@@ -112,16 +112,16 @@ char __cdecl fcn_00451f80(char* e, void* parent)
 						node->next = prev->next;
 						prev = node;
 					} else {
-						node->next = (Node_451f80*) g_6b8068;
+						node->next = (AlphaRenderNode*) g_6b8068;
 						g_6b8068 = (void*) node;
 					}
 				} else {
 					if (!set) {
-						d3_SelectActiveObjectLights(f, g, o + 0x280, (Mat_451f80*) g_1040cc0, (Mat_451f80*) g_1040c80);
-						((Transform451f80Fn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetTransform)((D3D_DEVICE_VIEW*)g_6b5de0, 0x100, *(char**) (e + 0x1ec) + 0x15fc);
+						d3_SelectActiveObjectLights(f, g, o + 0x280, (SceneMatrix*) g_1040cc0, (SceneMatrix*) g_1040c80);
+						((SetTransformFn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetTransform)((D3D_DEVICE_VIEW*)g_6b5de0, 0x100, *(char**) (e + 0x1ec) + 0x15fc);
 						set = 1;
 					}
-					((Texture451f80Fn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_cc[10])((D3D_DEVICE_VIEW*)g_6b5de0, 0, *(int*) (mat + 0x50));
+					((SetTextureFn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_cc[10])((D3D_DEVICE_VIEW*)g_6b5de0, 0, *(int*) (mat + 0x50));
 					d3_SetRenderMaterialState(mat[0x58], ((mat[0x54] & 1) << 1) | (mat[0x5a] & 1), *(int*) (mat + 0x6c), (mat[0x5a] >> 1) & 1, (mat[0x54] >> 3) & 1);
 					mesh->vtbl->DrawSubset(mesh, i);
 				}

@@ -20,7 +20,7 @@ void __cdecl d2_UpdateRadioGroup(int);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl d2_SetFormVisibility(int, int);
 void __cdecl d2_DestroyForm(int);
-int __cdecl fcn_00539490(void);
+int __cdecl d2_StartLocalSessionSetup(void);
 int __cdecl d2_ShowServerBrowser(int);
 int __cdecl d2_ShowNetworkLoadDialog(void);
 
@@ -53,7 +53,7 @@ int __cdecl d2_ShowChooseNetworkDialog(void)
 			if (d2_CurrentElementId == a) {
 				(*(int*)&g_7747b0) = 5;
 				d2_SetFormVisibility(h, 0);
-				if (fcn_00539490() != 0) {
+				if (d2_StartLocalSessionSetup() != 0) {
 					g_774654 = 1;
 					result = 1;
 				}

@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x005650d0 */
-void __cdecl fcn_005650d0(char* action)
+void __cdecl he_InitMeisterpruefungNotice(char* action)
 {
 	action += 0x52;
 	*(int*) action = *(int*) 0x7f4c00;

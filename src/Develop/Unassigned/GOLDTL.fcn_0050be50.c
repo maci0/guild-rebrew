@@ -3,7 +3,7 @@ extern unsigned char* lpGebaeudePROT;
 int __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
 
 /* ADDRESS: GOLDTL 0x0050be50 */
-int __cdecl fcn_0050be50(unsigned char* building, void** out)
+int __cdecl gm_CollectBuildingComponents(unsigned char* building, void** out)
 {
 	unsigned short* slot;
 	unsigned char* base;

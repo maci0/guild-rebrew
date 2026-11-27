@@ -71,15 +71,15 @@ void __cdecl hmt_CreateBinaryFile(void);
 void __cdecl gm_LoadHistoricalTable(void);
 void __cdecl cut_InitCombatActionWeights(void);
 void __cdecl d2_DestroyForm(int);
-unsigned char* __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
+unsigned char* __cdecl d2_StartScreenFade(int, int, int, int, char*, int, int);
 void __cdecl main_RunFrameLoop(int, int);
-void __cdecl fcn_00473150(unsigned char*);
-void __cdecl fcn_00429920(void);
+void __cdecl d2_ReleaseOverlaySprite(unsigned char*);
+void __cdecl evt_AllocScriptEngineBuffers(void);
 void __cdecl evt_RegisterCoreCommands(void);
 void __cdecl evt_RegisterSceneCommands(void);
 void __cdecl ch_RegisterScriptCommands(void);
 void __cdecl evt_RegisterSoundCommands(void);
-void __cdecl fcn_0042a020(void);
+void __cdecl evt_GetLoadAndRunGfxScriptFunc(void);
 void __cdecl gm_ApplyGameSettings(void);
 int __cdecl main_PumpWindowMessages(void);
 #include <windows.h>
@@ -114,7 +114,7 @@ extern int __cdecl main_CheckExistingInstance(void** handle);
 extern int __cdecl main_CreateWindow(HINSTANCE inst, int unused, int windowed);
 extern int __cdecl main_InitRuntime(void);
 extern void __cdecl main_PlayIntroMovies(void);
-extern int __cdecl fcn_00538850(int topmost);
+extern int __cdecl main_CreateGameWindowAndDevice(int topmost);
 extern int __cdecl main_OpenEngine(void);
 extern void __cdecl main_ShutdownEngine(void);
 extern void __cdecl main_ShutdownSubsystems(void);
@@ -200,11 +200,11 @@ int __cdecl main_OpenEngine(void)
 	gm_LoadHistoricalTable();
 	cut_InitCombatActionWeights();
 	d2_DestroyForm(screen);
-	fade = fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, "BLACK", 0x5a, 1);
+	fade = d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, "BLACK", 0x5a, 1);
 	while ((*fade & 4) == 0) {
 		main_RunFrameLoop(0, 0x24087);
 	}
-	fcn_00473150(fade);
+	d2_ReleaseOverlaySprite(fade);
 	n = 0x8c;
 	/*
 	 * The reference zero-fills with the hand-written block-fill prelude no
@@ -228,12 +228,12 @@ int __cdecl main_OpenEngine(void)
 		rep stosb
 	}
 	(*(unsigned char*)&g_774944) = 1;
-	fcn_00429920();
+	evt_AllocScriptEngineBuffers();
 	evt_RegisterCoreCommands();
 	evt_RegisterSceneCommands();
 	ch_RegisterScriptCommands();
 	evt_RegisterSoundCommands();
-	g_67a590 = (int) fcn_0042a020;
+	g_67a590 = (int) evt_GetLoadAndRunGfxScriptFunc;
 	(*(int*)&g_67a0d8) = 0x400000;
 	gm_ApplyGameSettings();
 	main_PumpWindowMessages();

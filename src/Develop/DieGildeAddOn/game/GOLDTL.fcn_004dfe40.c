@@ -12,7 +12,7 @@ double __cdecl gm_GetEntityHealthRatio(char*);
 void __cdecl d3_SpawnBlutEffect(char*, int, float, float, float, float);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 char* __cdecl ch_CreateQueuedAction(char*, void*, int, int, int);
-void __cdecl fcn_004dfd10(char*);
+void __cdecl d3_SpawnBlutlacheEffect(char*);
 
 int __cdecl gm_CheckDuelKnockout(char* e)
 {
@@ -21,7 +21,7 @@ int __cdecl gm_CheckDuelKnockout(char* e)
 	if (gm_GetEntityHealthRatio(e) < 0.2) {
 		d3_SpawnBlutEffect(*(char**) (*(char**) (e + 0x184) + 0x34), 0x40, 0.25f, 0.1f, 0.14f, 55.0f);
 		ch_CancelActionQueue(*(char**) (e + 0x184));
-		o = ch_CreateQueuedAction(*(char**) (e + 0x184), fcn_004dfd10, 0x12, 0x36, 1);
+		o = ch_CreateQueuedAction(*(char**) (e + 0x184), d3_SpawnBlutlacheEffect, 0x12, 0x36, 1);
 		*(blk19*) (o + 0xf0) = g_68cb58;
 		*(int*) (*(char**) (*(char**) (e + 0x184) + 0x34) + 0x220) = 0;
 		g_772f44 = 1;

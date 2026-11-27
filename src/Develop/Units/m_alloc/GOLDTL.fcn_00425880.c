@@ -7,7 +7,7 @@ void __cdecl msx_ReleaseSampleHandle(void* p);
 void __cdecl m_FreeTracked(void* p);
 void __cdecl d3snd_Shutdown(void);
 
-void __cdecl fcn_00425880(void)
+void __cdecl sb_ShutdownAudio(void)
 {
 	sbs_DestroySB();
 	if (g_6b7d80 != 0) {

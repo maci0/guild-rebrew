@@ -8,7 +8,7 @@ extern int g_14b5b94;
 extern int g_14ad0f8;
 extern int g_14b5ab4;
 
-void __cdecl fcn_005338a0(void);
+void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_RunRohstoffsuchenDialog(int);
@@ -37,7 +37,7 @@ void __cdecl d2_RunZigeunerInteriorHud(int a)
 	personal = 0;
 	meister = 0;
 	betteln = 0;
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	while (main_RunFrameLoop(d2_RunZigeunerInteriorHud, 0x67fff) != 0) {
 		if (g_7746d8 & 0x200) {
 			zig = RegisterStatusText("contact_ZUTATEN_SUCHEN_ZIGEUNER", g_14b5b94, 0x16);

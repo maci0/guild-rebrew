@@ -8,7 +8,7 @@ extern char g_6a9b68[];
 extern int g_77250c;
 extern char* g_14b5f14;
 
-void __cdecl fcn_00533a40(char*);
+void __cdecl d2_ShowStatusBanner(char*);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl fcn_0064d41a(char*, const char*, ...);
 void __stdcall fcn_0060fa6b(char*, int, int, int, int);
@@ -17,9 +17,9 @@ void __cdecl d2_SaveScreenshot(void)
 {
 	char buf[0x80];
 
-	fcn_00533a40(g_6b5c60);
+	d2_ShowStatusBanner(g_6b5c60);
 	main_RunFrameLoop(0, main_LoopFlags);
 	fcn_0064d41a(buf, g_6a9b68, g_6a3448, g_774a2c++);
 	fcn_0060fa6b(buf, 0, *(int*) (((char*)g_77250c) + 0x24), 0, 0);
-	fcn_00533a40(g_14b5f14);
+	d2_ShowStatusBanner(g_14b5f14);
 }

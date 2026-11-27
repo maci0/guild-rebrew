@@ -4,7 +4,7 @@ extern char* g_6b7d78;
 extern char g_679010[]; /* %lang */
 extern char g_679018[]; /* sbs_Compile */
 
-int __cdecl fcn_004230e0(char*);
+int __cdecl sb_ReleaseSampleBank(char*);
 char* __cdecl sbs_CalcCompiledSize(void);
 int __cdecl sbs_ExtractBaseName(char*, char*, int);
 int __cdecl sbs_GetAudioFormat(char*);
@@ -37,7 +37,7 @@ int __cdecl sbs_Compile(char* name)
 
 	result = 0;
 	count = 0;
-	fcn_004230e0(0);
+	sb_ReleaseSampleBank(0);
 	if (sbs_BankManager != 0) {
 		n1 = sbs_CountRootSamples();
 		n2 = sbs_CountSets();
@@ -166,7 +166,7 @@ int __cdecl sbs_Compile(char* name)
 				}
 			}
 			if (result == -1) {
-				fcn_004230e0(0);
+				sb_ReleaseSampleBank(0);
 			} else {
 				result = 0;
 			}

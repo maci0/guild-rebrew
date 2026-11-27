@@ -4,7 +4,7 @@
 void __cdecl he_FreeAction(void);
 
 /* ADDRESS: GOLDTL 0x0000572760 */
-void __cdecl fcn_00572760(void)
+void __cdecl he_FreeActionThunk(void)
 {
 	he_FreeAction();
 }

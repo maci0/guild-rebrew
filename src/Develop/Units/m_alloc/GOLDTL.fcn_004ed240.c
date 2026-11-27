@@ -38,7 +38,7 @@ void __cdecl m_FreeTracked(void* p);
 int __cdecl ahm_FindObjektByObName(char* text);
 
 /* ADDRESS: GOLDTL 0x004ed240 */
-unsigned int __cdecl fcn_004ed240(void)
+unsigned int __cdecl ahm_LoadAlchemyDataIni(void)
 {
 	char path[0x104];
 	char app[0x100];

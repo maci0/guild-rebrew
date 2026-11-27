@@ -56,10 +56,10 @@ extern float g_1052bb8;
 extern char g_10432c0[];
 
 void __cdecl d3_InitSceneObject(char* o);
-void __cdecl fcn_00450a30(int nlist, int nactive);
+void __cdecl d3_InitLightBuffers(int nlist, int nactive);
 void __cdecl d3_InitTextures(unsigned int n, int a2);
 void __cdecl d3_ResetRenderStates(int* a);
-void __cdecl fcn_00436f70(char on);
+void __cdecl d3_SetFogEnabled(char on);
 void __cdecl fcn_0043bc00(char a, char b);
 void __cdecl d3_SelectShadowTextureFormat(int, int, int, int, int, int, int);
 void __cdecl InitColorTable(void);
@@ -121,11 +121,11 @@ char __cdecl d3_Init(D3_INIT_CONFIG* cfg)
 	g_1041d08 = 0;
 	if (n > 8)
 		n = 8;
-	fcn_00450a30(0x200, n);
+	d3_InitLightBuffers(0x200, n);
 	g_6b8008 = 0;
 	d3_InitTextures(g_10529e0.a18, g_10529e0.a1c);
 	d3_ResetRenderStates(&g_67a374);
-	fcn_00436f70(1);
+	d3_SetFogEnabled(1);
 	d3_FogColor = 0;
 	g_6b7ff8 = g_10529e0.b34;
 	fcn_0043bc00(g_10529e0.b30, g_10529e0.b28);

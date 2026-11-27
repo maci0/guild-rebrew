@@ -1,7 +1,7 @@
 void __cdecl msx_StartMusicIfAllowed(char*);
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
-void __cdecl fcn_004e4230(void*, int);
-void __cdecl fcn_004e4730(char*);
+void __cdecl cut_SwitchEntityScene(void*, int);
+void __cdecl cut_StartSceneCutscene(char*);
 void __cdecl cut_WaitTicks(int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl cut_FadeToBlack(void);
@@ -26,8 +26,8 @@ extern int g_1040494;
 extern char g_67d67c[];
 
 int __cdecl d2_ClearSurface(int);
-void __cdecl fcn_00473150(unsigned char*);
-void __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
+void __cdecl d2_ReleaseOverlaySprite(unsigned char*);
+void __cdecl d2_StartScreenFade(int, int, int, int, char*, int, int);
 int __cdecl fcn_00502cd0(int, int, int, int);
 int __cdecl fcn_00505370(unsigned char*);
 void __cdecl init_LoadGebaeudeScene(int);
@@ -37,7 +37,7 @@ void __cdecl d3_UpdateBuildingView(unsigned char*, unsigned int);
 void __cdecl d3_InitUniverse(char);
 
 /* ADDRESS: GOLDTL 0x004e4180 */
-void __cdecl fcn_004e4180(char* event)
+void __cdecl he_RunSalonEvent(char* event)
 {
 	int* m;
 	void* dyn;
@@ -49,10 +49,10 @@ void __cdecl fcn_004e4180(char* event)
 	msx_StartMusicIfAllowed(0);
 	gm_ResolveEntityById(&dyn, 0, 0, m[5]);
 	if (dyn != 0) {
-		fcn_004e4230(dyn, 0x17);
+		cut_SwitchEntityScene(dyn, 0x17);
 	} else {
 		fallback = 1;
-		fcn_004e4730("ob_SALON.ed3");
+		cut_StartSceneCutscene("ob_SALON.ed3");
 	}
 	cut_WaitTicks(5);
 	for (i = 0; i < 4; i++) {
@@ -69,7 +69,7 @@ void __cdecl fcn_004e4180(char* event)
 }
 
 /* ADDRESS: GOLDTL 0x004e4230 */
-void __cdecl fcn_004e4230(unsigned char* entity, unsigned int sceneId)
+void __cdecl cut_SwitchEntityScene(unsigned char* entity, unsigned int sceneId)
 {
 	int flags;
 
@@ -82,9 +82,9 @@ void __cdecl fcn_004e4230(unsigned char* entity, unsigned int sceneId)
 			d2_ClearSurface(g_77250c);
 		}
 		if (g_772f50) {
-			fcn_00473150(g_772f50);
+			d2_ReleaseOverlaySprite(g_772f50);
 			g_772f50 = 0;
-			fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, g_67d67c, 0x5a, 0xa);
+			d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, g_67d67c, 0x5a, 0xa);
 		}
 	}
 	else {
@@ -120,9 +120,9 @@ void __cdecl fcn_004e4230(unsigned char* entity, unsigned int sceneId)
 			d2_ClearSurface(g_77250c);
 		}
 		if (g_772f50) {
-			fcn_00473150(g_772f50);
+			d2_ReleaseOverlaySprite(g_772f50);
 			g_772f50 = 0;
-			fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, g_67d67c, 0x5a, 0xa);
+			d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, g_67d67c, 0x5a, 0xa);
 		}
 	}
 }

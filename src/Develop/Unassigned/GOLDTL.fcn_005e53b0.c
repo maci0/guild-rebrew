@@ -33,7 +33,7 @@ extern char *g_772500, *g_1015ea0;
 extern char g_7f4ca0[], g_1015f4c[], g_6811b0[];
 extern char *g_14b59f0, *g_14b59f4;
 
-void __cdecl fcn_005263d0(int, int, int);
+void __cdecl d2_ShowGreenMessageBox(int, int, int);
 int __cdecl d2_LoadForm(int, int, char *);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -79,7 +79,7 @@ void __cdecl d2_RunZigeunerBlutracheDialog(void *arg)
     last = 0;
     house = (char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970];
     if (house[0x1cc] & 8) {
-        fcn_005263d0(g_14b59e8, g_14b59ec, 0);
+        d2_ShowGreenMessageBox(g_14b59e8, g_14b59ec, 0);
         return;
     }
     window = d2_LoadForm(0, 0, "Locations\\zigeuner\\blutrache");

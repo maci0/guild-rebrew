@@ -13,7 +13,7 @@ int __cdecl amt_CollectOfficeCandidates(int, int, void*);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl ai_SelectOfficeCandidate(char*, int, int*, void*);
 int __cdecl d2_LoadForm(int, int, char*);
-void __cdecl fcn_00471d80(int, int);
+void __cdecl d2_CenterForm(int, int);
 void __cdecl d2_SetForm(int, int);
 unsigned int __cdecl io_AppendText();
 int __cdecl d2_GetWindowListItem(int, int, char*);
@@ -60,7 +60,7 @@ int __cdecl cut_ShowSessionDialog(char* a0, int a1, int* entityIds, int* a3)
 	}
 	result = ai_SelectOfficeCandidate(a0, a1, entityIds, &ret);
 	gui = d2_LoadForm(0, 0, (char*) 0x68c340);
-	fcn_00471d80(gui, 1);
+	d2_CenterForm(gui, 1);
 	d2_SetForm(gui, 0);
 	if (n < 2) {
 		io_AppendText(0x12dc, *(unsigned short*) a1, *(unsigned short*) a1,

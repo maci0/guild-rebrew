@@ -26,13 +26,13 @@ extern int g_7746c8;
 
 void __cdecl d3_ClearSceneObjectCache(void);
 void __cdecl d2_SetMouseTooltip(void* p);
-void __cdecl fcn_00533a40(void* p);
+void __cdecl d2_ShowStatusBanner(void* p);
 void __cdecl tb_CloseFunction(void* p);
 void __cdecl evt_CloseAllScripts(void);
 void __cdecl gv_SpawnIfPending(int p);
 void __cdecl d3snd_StopTrackedVoices(void);
 void __cdecl d3snd_StopAllObjectSounds(void);
-void __cdecl fcn_004230e0(int p);
+void __cdecl sb_ReleaseSampleBank(int p);
 void __cdecl hst_ResetHistoryState(void);
 void __cdecl gm_ClearMissionJobs(void);
 void __cdecl he_FreeAllActions(void);
@@ -43,14 +43,14 @@ void __cdecl gm_KillAllSpieler(void);
 void __cdecl gm_ResetAllEntities(void);
 void __cdecl gm_CleanupObjectEntities(void);
 void __cdecl ch_DestroyCharacter(int p);
-void __cdecl fcn_004162c0(int p);
+void __cdecl d3_DestroySnowEffect(int p);
 void __cdecl d3_DestroyRain(int p);
-void __cdecl fcn_004597f0(int a, int b);
-void __cdecl fcn_00459b40(int a);
+void __cdecl d3_RemoveSkyLayer(int a, int b);
+void __cdecl d3_FreeSkyDome(int a);
 void __cdecl d3_DestroySunRayObject(int p);
 void __cdecl d3_ClearAllSceneContexts(void);
-void __cdecl fcn_005c80d0(void);
-void __cdecl fcn_004bbd50(void);
+void __cdecl d2_ClearPreviewTexture(void);
+void __cdecl gm_FreeAmbientAnimalSlots(void);
 void __cdecl cm_InitCommandQueue(void);
 void __cdecl nt_CloseBroadcastSocket(void);
 void __cdecl nt_CloseClientConnection(void);
@@ -66,7 +66,7 @@ void __cdecl gm_ShutdownGameRuntime(void)
 
 	d3_ClearSceneObjectCache();
 	d2_SetMouseTooltip(&g_6b5c60);
-	fcn_00533a40(&g_6b5c60);
+	d2_ShowStatusBanner(&g_6b5c60);
 	d2_SuppressOverlay = 1;
 	tb_CloseFunction(&g_538060);
 	g_772f3c = 0;
@@ -78,17 +78,17 @@ void __cdecl gm_ShutdownGameRuntime(void)
 		d3snd_StopTrackedVoices();
 		d3snd_StopAllObjectSounds();
 		if (g_7747bc != 0) {
-			fcn_004230e0(g_7747bc);
+			sb_ReleaseSampleBank(g_7747bc);
 			g_7747bc = 0;
-			fcn_004230e0(g_7747c0);
+			sb_ReleaseSampleBank(g_7747c0);
 			g_7747c0 = 0;
-			fcn_004230e0(g_7747c4);
+			sb_ReleaseSampleBank(g_7747c4);
 			g_7747c4 = 0;
-			fcn_004230e0(g_7747c8);
+			sb_ReleaseSampleBank(g_7747c8);
 			g_7747c8 = 0;
-			fcn_004230e0(g_7747cc);
+			sb_ReleaseSampleBank(g_7747cc);
 			g_7747cc = 0;
-			fcn_004230e0(g_6b5c2c);
+			sb_ReleaseSampleBank(g_6b5c2c);
 			g_6b5c2c = 0;
 		}
 	}
@@ -107,7 +107,7 @@ void __cdecl gm_ShutdownGameRuntime(void)
 		}
 	}
 	if (g_7e453c != 0) {
-		((int (*)(char)) fcn_004162c0)(g_7e453c);
+		((int (*)(char)) d3_DestroySnowEffect)(g_7e453c);
 		g_7e453c = 0;
 	}
 	if (g_7e4538 != 0) {
@@ -118,12 +118,12 @@ void __cdecl gm_ShutdownGameRuntime(void)
 		int ctx = g_6b89c0;
 		for (entry = (int*) 0x7e4540; (int) entry < 0x7e4558; entry++) {
 			if (*entry != 0) {
-				fcn_004597f0(ctx, *entry);
+				d3_RemoveSkyLayer(ctx, *entry);
 				ctx = g_6b89c0;
 				*entry = 0;
 			}
 		}
-		fcn_00459b40(ctx);
+		d3_FreeSkyDome(ctx);
 		g_6b89c0 = 0;
 	}
 	g_6b8061 = 0;
@@ -133,8 +133,8 @@ void __cdecl gm_ShutdownGameRuntime(void)
 	}
 	d3_ActiveCameraAnimation = 0;
 	d3_ClearAllSceneContexts();
-	fcn_005c80d0();
-	fcn_004bbd50();
+	d2_ClearPreviewTexture();
+	gm_FreeAmbientAnimalSlots();
 	cm_InitCommandQueue();
 	nt_CloseBroadcastSocket();
 	nt_CloseClientConnection();

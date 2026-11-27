@@ -13,7 +13,7 @@ void __cdecl d2_CenterDialogWindows(int a);
 void __cdecl d2_SetForm(int a, int b);
 int __cdecl io_AppendText(int a, ...);
 int __cdecl d2_GetWindowListItem(int a, int b, int c);
-int __cdecl fcn_004b3d80(int a, int b, int c);
+int __cdecl gm_AllocRandomMissionJob(int a, int b, int c);
 int __cdecl cm_RequestSysMessage(int a, void* b);
 int __cdecl cm_GetCommandStatus(int a);
 void __cdecl cm_StepCommandQueue(void);
@@ -21,7 +21,7 @@ int __cdecl main_RunFrameLoop(void* a, int b);
 void __cdecl d2_DestroyForm(int a);
 void __cdecl d2_ShowMissionSpecDialog(int a, int b);
 void __cdecl main_ExitToGameLoop(int a);
-void __cdecl fcn_004230e0(int a);
+void __cdecl sb_ReleaseSampleBank(int a);
 
 /* The dialog message the three choice handlers send. Only three fields are
  * touched here; the native object is 0x7c bytes. */
@@ -78,7 +78,7 @@ void __cdecl d2_RunActiveHistoryMissionDialog(int mode)
 	do {
 		if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == r1) {
-				obj = (int*) fcn_004b3d80(*(int*) (slot + 4), (int) g_6a3440, 1);
+				obj = (int*) gm_AllocRandomMissionJob(*(int*) (slot + 4), (int) g_6a3440, 1);
 				m1.id = *(int*) (slot + 4);
 				m1.vend = 0;
 				changed = 1;
@@ -122,7 +122,7 @@ void __cdecl d2_RunActiveHistoryMissionDialog(int mode)
 		main_ExitToGameLoop(flags);
 	}
 	if (g_7728dc != 0) {
-		fcn_004230e0(g_7728dc);
+		sb_ReleaseSampleBank(g_7728dc);
 	}
 	g_7728dc = 0;
 }

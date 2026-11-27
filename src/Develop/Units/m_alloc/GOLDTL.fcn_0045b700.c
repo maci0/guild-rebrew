@@ -9,7 +9,7 @@ extern char g_67bcf4[];
 void* __cdecl m_alloc(int, void*);
 void __cdecl d3sm_Rebuild(char*, int);
 
-char* __cdecl fcn_0045b700(int a1, int n, int a3)
+char* __cdecl d3sm_CreateMap(int a1, int n, int a3)
 {
 	char* g = 0;
 

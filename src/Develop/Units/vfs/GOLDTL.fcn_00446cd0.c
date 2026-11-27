@@ -3,14 +3,14 @@ typedef struct
 	int k;
 	int a;
 	int b;
-} fcn_00446cd0_Key;
+} D3_CAM_KEY;
 // SIZE 0xc
 #include "Develop/Units/d3/d3_object.h"
 typedef struct
 {
 	int pos[3];
 	int dir[3];
-	fcn_00446cd0_Key keys[6];
+	D3_CAM_KEY keys[6];
 } fcn_00446cd0_Cam;
 // SIZE 0x60
 
@@ -27,7 +27,7 @@ extern char g_1041d80[];
 extern int g_67a370;
 
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
-void __cdecl fcn_00401360(void* s, int v);
+void __cdecl vfs_WriteInt(void* s, int v);
 void __cdecl vfs_WriteInt32(void* s, int v);
 void __cdecl vfs_WriteVec3(void* s, int* v);
 void __cdecl d3_VisitSceneObjects(int list, int a, int kind, void* fn, void* ctx);
@@ -36,7 +36,7 @@ void __cdecl vfs_WriteByte(void* s, int v);
 #include "Develop/Units/vfs/vfs.h"
 
 /* ADDRESS: GOLDTL 0x00446cd0 */
-void __cdecl fcn_00446cd0(char* name, void* stream)
+void __cdecl d3_SaveSceneFile(char* name, void* stream)
 {
 	void* s;
 	int i;
@@ -50,18 +50,18 @@ void __cdecl fcn_00446cd0(char* name, void* stream)
 		}
 	}
 	g_6b86d4++;
-	fcn_00401360(s, 0x3a6c00bb);
+	vfs_WriteInt(s, 0x3a6c00bb);
 	vfs_WriteInt32(s, 0);
 	vfs_WriteVec3(s, ((int*)&g_67bbdc));
 	vfs_WriteVec3(s, ((int*)&g_6b86c4));
-	fcn_00401360(s, d3_FogColor);
+	vfs_WriteInt(s, d3_FogColor);
 	vfs_WriteInt32(s, (*(int*)&g_10425fc));
 	vfs_WriteInt32(s, (*(int*)&g_104329c));
 	for (i = 0; i < 7; i++) {
 		vfs_WriteVec3(s, (int*)&((D3_SCENE_SLOT*)g_1041d80)[i].a);
 		vfs_WriteVec3(s, (int*)&((D3_SCENE_SLOT*)g_1041d80)[i].b);
 		for (j = 0; j < 6; j++) {
-			fcn_00401360(s, ((D3_SCENE_SLOT*)g_1041d80)[i].pal[j].color);
+			vfs_WriteInt(s, ((D3_SCENE_SLOT*)g_1041d80)[i].pal[j].color);
 			vfs_WriteInt32(s, *(int*)&((D3_SCENE_SLOT*)g_1041d80)[i].pal[j].f4);
 			vfs_WriteInt32(s, *(int*)&((D3_SCENE_SLOT*)g_1041d80)[i].pal[j].f8);
 		}

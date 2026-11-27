@@ -3,8 +3,8 @@ extern char g_774944;
 
 
 void __cdecl d2_ShutdownOverlayState(void);
-void __cdecl fcn_005e12d0(void);
-void __cdecl fcn_00465c60(void);
+void __cdecl io_SaveIniSettings(void);
+void __cdecl vfs_ShutdownResources(void);
 void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl d3_FreeRenderVertexBuffers(void);
 void __cdecl d3_Shutdown(void);
@@ -16,8 +16,8 @@ void __cdecl main_ShutdownSubsystems(void)
 	g_774944 = 0;
 	d2_SuppressOverlay = 1;
 	d2_ShutdownOverlayState();
-	fcn_005e12d0();
-	fcn_00465c60();
+	io_SaveIniSettings();
+	vfs_ShutdownResources();
 	d3_SelectSceneContext(0, 1);
 	d3_FreeRenderVertexBuffers();
 	d3_Shutdown();

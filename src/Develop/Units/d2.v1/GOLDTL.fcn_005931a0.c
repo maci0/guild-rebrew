@@ -5,7 +5,7 @@ extern int d2_CurrentWindowId;
 
 
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
+void __cdecl d2_CreateWindowScrollbar(int, int, int, int, int, int*, int*, int*);
 
 void __cdecl d2_InitNetLobbyScrollbar(void)
 {
@@ -18,7 +18,7 @@ void __cdecl d2_InitNetLobbyScrollbar(void)
 		d2_SetForm(g_6a9b9c, 5);
 		s = d2_CurrentWindowId;
 		d2_SetForm(g_6a9b9c, 6);
-		fcn_00533f40(0, 0, d2_CurrentWindowId, s, 0x35, &c, &b, &a);
+		d2_CreateWindowScrollbar(0, 0, d2_CurrentWindowId, s, 0x35, &c, &b, &a);
 	}
 }
 unsigned char _dpad_6a9b9c[6272] = {

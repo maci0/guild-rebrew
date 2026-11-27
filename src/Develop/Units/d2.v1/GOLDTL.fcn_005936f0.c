@@ -49,7 +49,7 @@ void __cdecl d2_UpdateRadioGroup(int);
 int __cdecl d3_GetSceneEntry(int);
 int __cdecl cm_RequestClearSceneEntries(void);
 int __cdecl cm_GetCommandStatus(int);
-int __cdecl fcn_004ce180(void);
+int __cdecl lb_GetPlayerList(void);
 void __cdecl cm_StepCommandQueue(void);
 int __cdecl main_RunFrameLoop(int (__cdecl*)(void), int);
 char* __cdecl itoa(int, char*, int);
@@ -59,7 +59,7 @@ char* __cdecl itoa(int, char*, int);
  * the eight crest buttons and runs the modal edit loop until the dialog
  * closes, then writes the selected name back to the ini file. */
 /* ADDRESS: GOLDTL 0x005936f0 */
-int __cdecl fcn_005936f0(int msg, int param)
+int __cdecl d2_RunPlayerEditorDialog(int msg, int param)
 {
 	char text[0x100];
 	char digit[0x30];
@@ -167,7 +167,7 @@ int __cdecl fcn_005936f0(int msg, int param)
 			while (!cm_GetCommandStatus(p)) {
 				cm_StepCommandQueue();
 			}
-			g_774a34 = (int*) fcn_004ce180();
+			g_774a34 = (int*) lb_GetPlayerList();
 			for (i = 0; i < 8; i++)
 				((D2_CONTROL_TL*)g_1015ea0)[ids[i]].disabled = 0;
 			for (p = 1; p < 9; p++) {

@@ -19,10 +19,10 @@ char* __cdecl gm_LookupEntityRecordById(int);
 #include "client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl cm_RequestChangeAttribute(void);
-int __cdecl fcn_004e4ae0(char*, int);
+int __cdecl sb_LoadLocalizedSampleBankIfAllowed(char*, int);
 void __cdecl msx_StartMusicIfAllowed(char*);
-void __cdecl fcn_004e4730(char*);
-int __cdecl fcn_004e4470(char*);
+void __cdecl cut_StartSceneCutscene(char*);
+int __cdecl cut_PlayEventScript(char*);
 int __cdecl cut_WaitForTimeoutOrInput(int, int, int);
 int __cdecl cut_RandMod(int);
 void __cdecl d3snd_QueueSoundIfAllowed(int, int, char*, int, int);
@@ -100,10 +100,10 @@ void __cdecl cut_PlayBirthCutscene(char* event)
 	}
 	cut_EventLoopFlags = 0x702c6;
 	d2_SuppressOverlay = 1;
-	snd = fcn_004e4ae0("GEBURT.sbf", 0);
+	snd = sb_LoadLocalizedSampleBankIfAllowed("GEBURT.sbf", 0);
 	msx_StartMusicIfAllowed("cd2\\Geburt.mp3");
-	fcn_004e4730("Geburt.ed3");
-	esc = fcn_004e4470("cutscenes\\geburt\\enter_Geburt.esc");
+	cut_StartSceneCutscene("Geburt.ed3");
+	esc = cut_PlayEventScript("cutscenes\\geburt\\enter_Geburt.esc");
 	if (cut_WaitForTimeoutOrInput(0x1964, 0, 0) == 0) {
 		if (parent[9] == 0) {
 			if (child[9] == 0)

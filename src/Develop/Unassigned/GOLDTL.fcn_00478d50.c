@@ -24,7 +24,7 @@ typedef struct Surf16 {
 	unsigned short* bits;
 } Surf16;
 
-void __cdecl fcn_0041bb70(int, unsigned char*, unsigned char*, unsigned char*);
+void __cdecl gfx_UnpackPixelRgb(int, unsigned char*, unsigned char*, unsigned char*);
 short __cdecl d2_PackColorForPixelFormat(int, int, int);
 
 
@@ -53,7 +53,7 @@ void __cdecl d2_DrawGrayscaleRleSprite(int x, int y, Surf16* s, Block* b)
 			px = (unsigned short*) (seg + 1);
 			p += seg->offset >> 1;
 			for (k = 0; k < seg->count; k++) {
-				fcn_0041bb70(*px, &cb, &cg, &cr);
+				gfx_UnpackPixelRgb(*px, &cb, &cg, &cr);
 				v = (int) (((double) cr + (double) cb) * 0.2 + (double) cg * g_664088);
 				*p = d2_PackColorForPixelFormat(v, v, v);
 				px++;

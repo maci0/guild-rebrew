@@ -7,7 +7,7 @@ extern int g_14abb84;
 extern char* txt_TextEntries[];
 extern int g_7746a0;
 
-void __cdecl fcn_005338a0(void);
+void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_RunZunftLevel2Menu(void);
 int __cdecl RegisterStatusText(char*, int, int);
@@ -32,7 +32,7 @@ void __cdecl d2_RunZunftMenu(char* e)
 	} else if (lvl == 0x20) {
 		id = 0x1674;
 	}
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	while (main_RunFrameLoop((void*) d2_RunZunftLevel2Menu, 0x67fff) != 0) {
 		a = RegisterStatusText("ob_ZUNFTKASSE", g_14abb84, 0x16);
 		if (amt_CheckHighOfficeEligibility(((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])) != 0 && id != 0) {

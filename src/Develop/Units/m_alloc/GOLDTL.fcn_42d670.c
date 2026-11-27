@@ -3,14 +3,14 @@ extern int g_149d188[];
 
 
 
-int __cdecl fcn_0042d630(int);
+int __cdecl txt_FindTextBank(int);
 int __cdecl m_FreeTracked(int);
 
 void __cdecl txt_ReleaseTextBank(int bankName)
 {
 	int i;
 	int x;
-	i = fcn_0042d630(bankName);
+	i = txt_FindTextBank(bankName);
 	if (i == -1) {
 		return;
 	}

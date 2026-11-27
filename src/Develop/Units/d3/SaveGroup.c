@@ -10,8 +10,8 @@ extern char s_6790b0[];
 
 void* __cdecl vfs_Tfopen(void*, char*, struct VFS_DIR*);
 int __cdecl CloseVfsStream(void*);
-void __cdecl fcn_00401360(int, int);
-void __cdecl fcn_00446540(int, ITEM_448a00*);
+void __cdecl vfs_WriteInt(int, int);
+void __cdecl d3_WriteSceneNodeTree(int, ITEM_448a00*);
 void __cdecl ReportClientMessage(const char*);
 void __cdecl d3_AttachSceneNode(ITEM_448a00*, ITEM_448a00*);
 void __cdecl d3_UnlinkObject(ITEM_448a00*);
@@ -42,10 +42,10 @@ void __cdecl SaveGroup(void* name, int count, ITEM_448a00** list)
 	}
 	if (kinder == 0) {
 		cont = vfs_Tfopen(name, s_6790b0, g_6b7fdc);
-		fcn_00401360((int) cont, 0x3a6c00bb);
-		fcn_00401360((int) cont, count);
+		vfs_WriteInt((int) cont, 0x3a6c00bb);
+		vfs_WriteInt((int) cont, count);
 		for (i = 0; i < count; i++)
-			fcn_00446540((int) cont, list[i]);
+			d3_WriteSceneNodeTree((int) cont, list[i]);
 		CloseVfsStream(cont);
 		return;
 	}
@@ -54,8 +54,8 @@ void __cdecl SaveGroup(void* name, int count, ITEM_448a00** list)
 		d3_AttachSceneNode((ITEM_448a00*) kinder, list[i]);
 	}
 	cont = vfs_Tfopen(name, s_6790b0, g_6b7fdc);
-	fcn_00401360((int) cont, 0x3a6c00bb);
-	fcn_00401360((int) cont, 1);
-	fcn_00446540((int) cont, list[0]);
+	vfs_WriteInt((int) cont, 0x3a6c00bb);
+	vfs_WriteInt((int) cont, 1);
+	d3_WriteSceneNodeTree((int) cont, list[0]);
 	CloseVfsStream(cont);
 }

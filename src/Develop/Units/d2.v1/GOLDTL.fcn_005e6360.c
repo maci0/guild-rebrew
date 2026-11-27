@@ -12,7 +12,7 @@ extern int g_100f1dc;
 extern int d2_CurrentElementId;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 void __cdecl d3_EndCameraAndUiMode(void);
-void __cdecl fcn_005263d0(int, int, int);
+void __cdecl d2_ShowGreenMessageBox(int, int, int);
 int __cdecl d2_OpenTargetPicker(char*, int, int, void*);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -48,7 +48,7 @@ void __cdecl d2_RunEhrerbietungDialog(char* entity)
         return;
     }
     if (*(unsigned char*) &((ENTITY_RECORD*) g_7f4ca0)[g_774970].entity_flags & 0x20) {
-        fcn_005263d0(*(int*) 0x14b5b3c, *(int*) 0x14b5b40, 0);
+        d2_ShowGreenMessageBox(*(int*) 0x14b5b3c, *(int*) 0x14b5b40, 0);
         return;
     }
     memset(query, 0, sizeof(query));

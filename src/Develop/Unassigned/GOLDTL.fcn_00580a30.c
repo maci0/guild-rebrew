@@ -16,7 +16,7 @@ char* __cdecl d2_InitTutorialMainOutro(void);
 void __cdecl d2_ShutdownTutorial(void);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetFormVisibility(int, int);
-void __cdecl fcn_00471d80(int, int);
+void __cdecl d2_CenterForm(int, int);
 
 int __cdecl d2_StartTutorial(void)
 {
@@ -73,13 +73,13 @@ fail:
 	g_665f08[8] = -1;
 	g_665f08[9] = d2_LoadForm(0, 0, "tutorial\\inline_form");
 	d2_SetFormVisibility(g_665f08[9], 0);
-	fcn_00471d80(g_665f08[9], 3);
+	d2_CenterForm(g_665f08[9], 3);
 	g_665f08[10] = 0;
 	g_665f08[11] = 0;
 	g_665f08[12] = 0;
 	g_665f08[13] = d2_LoadForm(0, 0, "tutorial\\aux_form");
 	d2_SetFormVisibility(g_665f08[13], 0);
-	fcn_00471d80(g_665f08[13], 3);
+	d2_CenterForm(g_665f08[13], 3);
 	g_665f08[15] = 0;
 	g_665f08[16] = 0;
 	g_665f08[22] = 0;

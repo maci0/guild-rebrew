@@ -14,7 +14,7 @@ extern char g_6a92b4[];
 
 int __cdecl io_AppendText(char*, ...);
 
-void __cdecl fcn_00584800(void)
+void __cdecl d2_RenderTutorialDebugInfo(void)
 {
 	if (d2_TutorialActive == 0) {
 		io_AppendText(g_6a935c);

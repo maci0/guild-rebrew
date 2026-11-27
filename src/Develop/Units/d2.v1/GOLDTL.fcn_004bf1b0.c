@@ -36,7 +36,7 @@ int __cdecl gm_GetStorageSlotCapacity(int, int);
 int __cdecl d2_ShowTxt(int, int, char*, int);
 void __cdecl d2_SetElementValue(int, ...);
 int __cdecl main_RunFrameLoop(void*, int);
-int __cdecl fcn_004bf000(unsigned short*, int, int, int, int, int, int, int*);
+int __cdecl d2_CreateRouteWareSlot(unsigned short*, int, int, int, int, int, int, int*);
 void __cdecl d2_DestroyElementTriple(int*);
 void __cdecl d2_ResetElementTriple(char*);
 int __cdecl m_UnlinkAndFreeNode(char*);
@@ -150,7 +150,7 @@ void __cdecl d2_EditRoutePointDialog(int* route_point, int* uiContext)
 		for (i = 0; i < 3; i++) {
 			n = nodeA[i][1];
 			if (n == -1 && route_point[2 + i * 2] != 0) {
-				fcn_004bf000((unsigned short*) rec, (int) item, route_point[2 + i * 2], i, 0, 0, first, &nodeA[i][0]);
+				d2_CreateRouteWareSlot((unsigned short*) rec, (int) item, route_point[2 + i * 2], i, 0, 0, first, &nodeA[i][0]);
 				k = route_point[3 + i * 2];
 				if (k < 1) {
 					k = 1;
@@ -165,7 +165,7 @@ void __cdecl d2_EditRoutePointDialog(int* route_point, int* uiContext)
 		for (i = 0; i < 3; i++) {
 			n = nodeB[i][1];
 			if (n == -1 && route_point[8 + i * 2] != 0) {
-				fcn_004bf000((unsigned short*) rec, (int) item, route_point[8 + i * 2], i, 0, 0x6e, first, &nodeB[i][0]);
+				d2_CreateRouteWareSlot((unsigned short*) rec, (int) item, route_point[8 + i * 2], i, 0, 0x6e, first, &nodeB[i][0]);
 				k = route_point[9 + i * 2];
 				if (k < 1) {
 					k = 1;

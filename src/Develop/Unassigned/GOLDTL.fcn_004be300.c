@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x004be300 */
-int __cdecl fcn_004be300(char* p, char* target)
+int __cdecl d2_FindLinkedRecordIndex(char* p, char* target)
 {
 	int n;
 

@@ -18,7 +18,7 @@ extern unsigned int g_10405fc;
 extern void** g_1040610[];
 
 /* ADDRESS: GOLDTL 0x00456b10 */
-void __cdecl fcn_00456b10(char* s)
+void __cdecl d3_ReleaseMeshSlotTextures(char* s)
 {
 	int* p;
 
@@ -46,7 +46,7 @@ void __cdecl fcn_00456b10(char* s)
 }
 
 /* ADDRESS: GOLDTL 0x00456c10 */
-void __cdecl fcn_00456c10(void)
+void __cdecl d3_ReleaseAllShadowTextures(void)
 {
 	unsigned int i;
 	unsigned int s;

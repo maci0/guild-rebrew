@@ -2,7 +2,7 @@ extern int g_100f1dc;
 int __cdecl d2_LoadForm(int, int, char *);
 void __cdecl d2_UpdateViewportCenter(int);
 void __cdecl d2_PositionFormWindows(int, int);
-void __cdecl fcn_00471d80(int, int);
+void __cdecl d2_CenterForm(int, int);
 int __cdecl d2_SetForm(int, int);
 void __cdecl d2_InitWindowBounds(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -16,16 +16,16 @@ void __cdecl d2_SetValueGaugeStepLabels(int, int, ...);
 void __cdecl d2_CreateButtonRow(int, int, int *, int, ...);
 int __cdecl main_RunFrameLoop(void *, int);
 void __cdecl d2_SetFormVisibility(int, int);
-void __cdecl fcn_005e2660(void);
+void __cdecl d2_RunAdvancedGfxOptionsDialog(void);
 int __cdecl d2_GetControlValue(int);
-void __cdecl fcn_005e12d0(void);
+void __cdecl io_SaveIniSettings(void);
 void __cdecl d3_ApplyGraphicsOptions(void);
 void __cdecl io_LoadIniSettings(void);
 void __cdecl d2_DestroyForm(int);
 
 void __cdecl gm_ApplyGameSettings(void);
 void __cdecl d2_DestroyAllHudPanels(void);
-void __cdecl fcn_00526db0(char *);
+void __cdecl d2_InitHudPanels(char *);
 int __cdecl d2_GetHudThemeResourceId(void);
 void __cdecl d2_EnterMenuScreen(void);
 
@@ -39,7 +39,7 @@ void __cdecl d2_ShowGameOptions(void)
   v3 = d2_LoadForm(0,0,(char *)0x6ad30c);
   d2_UpdateViewportCenter(v16);
   d2_PositionFormWindows(v3,1);
-  fcn_00471d80(v3,2);
+  d2_CenterForm(v3,2);
   d2_SetForm(v3,0);
   d2_InitWindowBounds(*(unsigned int *)0x772514);
   d2_SetOverlayAnimation(0,0);
@@ -135,12 +135,12 @@ void __cdecl d2_ShowGameOptions(void)
         d2_SetFormVisibility(v3,0);
         if (*(unsigned char *)0x774964) {
           d2_DestroyAllHudPanels();
-          fcn_00526db0((char *)d2_GetHudThemeResourceId());
+          d2_InitHudPanels((char *)d2_GetHudThemeResourceId());
           d2_EnterMenuScreen();
           *(unsigned int *)0x774714 = 1;
         }
       }
-      fcn_005e12d0();
+      io_SaveIniSettings();
       gm_ApplyGameSettings();
     }
   }

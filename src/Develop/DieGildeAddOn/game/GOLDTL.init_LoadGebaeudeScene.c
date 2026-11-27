@@ -15,8 +15,8 @@ extern int g_7e2700;
 
 int __cdecl tb_IsCallbackPaused(void*);
 int __cdecl tb_SetCallbackPaused(void*, int);
-unsigned char* __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
-void __cdecl fcn_00473150(unsigned char*);
+unsigned char* __cdecl d2_StartScreenFade(int, int, int, int, char*, int, int);
+void __cdecl d2_ReleaseOverlaySprite(unsigned char*);
 int __cdecl init_GetGebaeudeSceneName(int idx, char* out);
 void __cdecl d3_SelectSceneContext(int a, int b);
 char __cdecl d3_LoadScene(const char* filename, void* stream, int progress);
@@ -67,11 +67,11 @@ void __cdecl init_LoadGebaeudeScene(int prototypeIndex)
 	if (*p == (char) 0xff) {
 		if (g_774964 != 0 && (g_774670 <= 0 || g_7e2700 != 0)) {
 			flags = (main_LoopFlags & 0xfffffff7) | 0x80;
-			mode = fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, "BLACK", 0x32, 1);
+			mode = d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, "BLACK", 0x32, 1);
 			while (!(*mode & 4)) {
 				main_RunFrameLoop(0, flags);
 			}
-			fcn_00473150(mode);
+			d2_ReleaseOverlaySprite(mode);
 			progress = 0x526bf0;
 		}
 		v = d3_FindFreeSceneContext();
@@ -103,11 +103,11 @@ void __cdecl init_LoadGebaeudeScene(int prototypeIndex)
 	}
 	if (g_774964 != 0 && g_774670 <= 0) {
 		flags = (main_LoopFlags & 0xfffffff7) | 0x80;
-		mode = fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, "BLACK", 0x32, 1);
+		mode = d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, "BLACK", 0x32, 1);
 		while (!(*mode & 4)) {
 			main_RunFrameLoop(0, flags);
 		}
-		fcn_00473150(mode);
+		d2_ReleaseOverlaySprite(mode);
 		progress = 0x526bf0;
 	}
 	obj = *p;

@@ -28,7 +28,7 @@ extern IdGroup g_688118[];
 int __cdecl msx_FindActiveGroup(void);
 int __cdecl msx_FindGroupByKey(int);
 int __cdecl gm_GetSeason(int*);
-void __cdecl fcn_004c2100(void);
+void __cdecl msx_StartLocationTrack(void);
 void __cdecl msx_SelectOutdoorTrack(void);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 int __cdecl msx_StopTrack(int, int);
@@ -166,7 +166,7 @@ noptr:
 	g_772e68 = now;
 play:
 	if (g_772e58 != 0) {
-		fcn_004c2100();
+		msx_StartLocationTrack();
 	} else {
 		msx_SelectOutdoorTrack();
 	}

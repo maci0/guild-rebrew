@@ -13,13 +13,13 @@ typedef struct {
 	int n;
 	int* cells;
 	unsigned char* data;
-} Map_531620;
+} SELECTION_SCENE_MAP;
 
 /* SIZE 0x1c */
 typedef struct {
 	int id;
 	char pad4[0x18];
-} Cell_531620;
+} SELECTION_MAP_CELL;
 
 /* SIZE 0x21c */
 typedef struct {
@@ -35,7 +35,7 @@ typedef struct {
 	char pad189[3];
 	int f18c;
 	char pad190[0x8c];
-} Slot_531620;
+} SELECTION_ENTITY_SLOT;
 
 extern int g_67a370;
 extern char* g_7746c4;
@@ -76,10 +76,10 @@ void __cdecl d3_ClearSelectionBox(void);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
 /* ADDRESS: GOLDTL 0x00531620 */
-void __cdecl fcn_00531620(void)
+void __cdecl sv_UpdateObjectSelection(void)
 {
-	Map_531620* map;
-	Slot_531620* s;
+	SELECTION_SCENE_MAP* map;
+	SELECTION_ENTITY_SLOT* s;
 	char* ent;
 	char* p;
 	char* e;
@@ -103,7 +103,7 @@ void __cdecl fcn_00531620(void)
 	ent = 0;
 	a = -1;
 	b = -1;
-	map = *(Map_531620**) ((char*) g_67a370 + 0xb0);
+	map = *(SELECTION_SCENE_MAP**) ((char*) g_67a370 + 0xb0);
 	if (g_7746c4 != 0) {
 		ent = g_7746c4;
 	} else if (g_7746c8 != 0) {
@@ -152,7 +152,7 @@ L6d3:
 	}
 	k = 0;
 	for (idx = 0; idx < 0x300; idx++) {
-		s = &((Slot_531620*) g_7f4ca0)[idx];
+		s = &((SELECTION_ENTITY_SLOT*) g_7f4ca0)[idx];
 		if (s->flag == 0) {
 			continue;
 		}
@@ -192,7 +192,7 @@ L6d3:
 			ix = (int) (u.offs[k][0] * (50.0 / map->sx) + b);
 			iy = (int) (u.offs[k][1] * (50.0 / map->sz) + a);
 			if (ix < dimension && iy < dimension) {
-				cell = ((Cell_531620*) map->cells)[dimension * iy + ix].id;
+				cell = ((SELECTION_MAP_CELL*) map->cells)[dimension * iy + ix].id;
 			}
 			k++;
 			if (k >= 8) {
@@ -280,7 +280,7 @@ La5d:
 	ResetDisplayCounters();
 	c = 0;
 	for (idx = 0; idx < 0x300; idx++) {
-		s = &((Slot_531620*) g_7f4ca0)[idx];
+		s = &((SELECTION_ENTITY_SLOT*) g_7f4ca0)[idx];
 		e = s->owner;
 		if (e != 0) {
 			c = s->flag;

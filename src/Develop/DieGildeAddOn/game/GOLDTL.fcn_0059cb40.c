@@ -9,13 +9,13 @@ extern int g_14ad0f8;
 extern int g_14ad0e8;
 extern int g_7746a0;
 
-void __cdecl fcn_005338a0(void);
+void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl d3_UpdateBuildingInteriorState(void);
 void __cdecl d2_ShowLagerOptions(char*, int);
-void __cdecl fcn_005c5b10(char*);
+void __cdecl d2_RunGelageDialog(char*);
 void __cdecl d2_RunProductionTradeDialog(char*);
 void __cdecl d2_ShowProductionDialog(char*);
 void __cdecl d2_OpenTransportPanel(char*);
@@ -41,7 +41,7 @@ void __cdecl d2_RunSteinbruchInteriorHud(char* e)
 	gelage = 0;
 	sp = 0;
 	zs = 0;
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	while (main_RunFrameLoop((void*) d2_RunSteinbruchInteriorHud, 0x67fff) != 0) {
 		if (g_7746d8 & 0x200) {
 			lager = RegisterStatusText("contact_LAGER", g_14ad0f0, 0xe);
@@ -62,7 +62,7 @@ void __cdecl d2_RunSteinbruchInteriorHud(char* e)
 			if (g_7746a0 == lager) {
 				d2_ShowLagerOptions(e, *(int*) (e + 0x5d));
 			} else if (g_7746a0 == gelage) {
-				fcn_005c5b10(e);
+				d2_RunGelageDialog(e);
 			} else if (g_7746a0 == abbau) {
 				d2_RunProductionTradeDialog(e);
 			} else if (g_7746a0 == suchen) {

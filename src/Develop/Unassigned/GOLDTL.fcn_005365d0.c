@@ -3,7 +3,7 @@ extern int g_77480c;
 
 extern int __cdecl gm_DispatchDebugSubsystemKeys(void);
 extern int __cdecl gm_DispatchDebugActionKeys(void);
-extern int __cdecl fcn_00535ec0(void);
+extern int __cdecl d2_DispatchDebugHotkey(void);
 
 /* Mode byte g_14cf950 selects O/P/R; every other value re-dispatches the
  * cached mode in g_77480c. The cached dispatch is the switch default: that
@@ -17,7 +17,7 @@ int __cdecl gm_DispatchDebugMode(void)
 		return gm_DispatchDebugActionKeys();
 	case 0x50:
 		g_77480c = 2;
-		return fcn_00535ec0();
+		return d2_DispatchDebugHotkey();
 	case 0x52:
 		g_77480c = 0;
 		return gm_DispatchDebugSubsystemKeys();
@@ -29,7 +29,7 @@ int __cdecl gm_DispatchDebugMode(void)
 			return gm_DispatchDebugActionKeys();
 		}
 		if (g_77480c == 2) {
-			return fcn_00535ec0();
+			return d2_DispatchDebugHotkey();
 		}
 		return g_77480c;
 	}

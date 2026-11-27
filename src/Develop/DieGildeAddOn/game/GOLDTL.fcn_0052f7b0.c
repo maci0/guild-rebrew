@@ -20,7 +20,7 @@ int __cdecl d2_SetElementEnabled(int, int);
 int __cdecl gm_GetBuildingTypeCategory(int);
 int __cdecl gm_GetEntityUiFlags(int, unsigned char*, unsigned short*, int);
 int __cdecl d2_TutorialAllowsFlag(int);
-void __cdecl fcn_0057e880(int, int, int, int);
+void __cdecl d2_DispatchTutorialInput(int, int, int, int);
 int __cdecl d2_OpenTargetPicker(char*, int, int, void*);
 int __cdecl d2_RunTradeInventoryPanel(int, int);
 void __cdecl d2_ResetUiInputAndBounds(void);
@@ -28,7 +28,7 @@ void __cdecl d2_RunTechTreeDialog(char*, int);
 void __cdecl d2_RunGebaeudeOptionenDialog(char*);
 void __cdecl d2_ShowGebaeudeOptions(char*);
 int __cdecl fcn_0052f7a0(void);
-void __cdecl fcn_0052ea30(void);
+void __cdecl d2_UpdateSelectionPanel(void);
 void __cdecl d2_DestroySelectionPanel(void);
 void __cdecl d2_OpenTransporterInfoPanel(unsigned short*);
 void __cdecl d2_OpenPersonInfoPanel(char*);
@@ -100,9 +100,9 @@ void __cdecl d2_UpdateSelectionPanels(void)
                     ((SelectProto*)lpGebaeudePROT)[*(u8*)selected].kind == 0x1e) {
                     if (d2_TutorialAllowsFlag(0x400) == 1) {
                         g_7746d8 = gm_GetEntityUiFlags(g_774970, (u8*)selected, 0, 0);
-                        fcn_0057e880(0x12, (int)selected, 0, 0);
+                        d2_DispatchTutorialInput(0x12, (int)selected, 0, 0);
                         d2_RunTradeInventoryPanel((int)selected, 1);
-                        fcn_0057e880(0x12, (int)selected, 1, 0);
+                        d2_DispatchTutorialInput(0x12, (int)selected, 1, 0);
                         g_7e2aa0 = selected;
                         d2_ResetUiInputAndBounds();
                     }
@@ -113,15 +113,15 @@ void __cdecl d2_UpdateSelectionPanels(void)
                 memset(query, 0, sizeof(query));
                 query[1] = 0;
                 query[5] = 4;
-                fcn_0057e880(0xf, 0, 0, 0);
+                d2_DispatchTutorialInput(0xf, 0, 0, 0);
                 d2_OpenTargetPicker((char*)query, (int)g_6b5c60, (int)g_6b5c60,
                     (void*)fcn_0052f7a0);
-                fcn_0057e880(0xf, 0, 1, 0);
+                d2_DispatchTutorialInput(0xf, 0, 1, 0);
             }
         }
     }
 refresh:
-    fcn_0052ea30();
+    d2_UpdateSelectionPanel();
     if (g_7e2aa0 == *(char**)0x774780 &&
         g_7746c8 == *(u8**)0x77477c &&
         g_7746c4 == *(char**)0x774778 &&
@@ -153,7 +153,7 @@ refresh:
         } else {
             d2_OpenPersonInfoPanel((char*)focus);
             *(int*)0x77478c = g_7ea360;
-            fcn_0052ea30();
+            d2_UpdateSelectionPanel();
         }
         goto reload;
     }
@@ -188,12 +188,12 @@ snapshot:
         *(char**)0x774648 = g_7746c0;
         if (item != 0) {
             d2_ShowGebaeudeItemInfoPanel(item);
-            fcn_0052ea30();
+            d2_UpdateSelectionPanel();
             return;
         }
         if (record != 0) {
             d2_ShowGebaeudeItemInfoPanel((unsigned short*)record);
-            fcn_0052ea30();
+            d2_UpdateSelectionPanel();
         }
         return;
     }
@@ -207,5 +207,5 @@ snapshot:
     else if (g_7746c8 != 0)
         pick = (char*)g_7746c8;
     d2_ShowBuildingInfoPanel((u8*)pick);
-    fcn_0052ea30();
+    d2_UpdateSelectionPanel();
 }

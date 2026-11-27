@@ -15,7 +15,7 @@ extern char s_6a956c[];
 extern char s_6aa34c[];
 extern char s_6a9924[];
 
-void __cdecl fcn_005338a0(void);
+void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_ShowLagerOptions(char*, int);
@@ -44,7 +44,7 @@ void __cdecl d2_RunSchneiderMenu(char* obj, int arg)
 	diary = 0;
 	trade = 0;
 	build = 0;
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	while (main_RunFrameLoop(d2_RunSchneiderMenu, 0x67fff)) {
 		if (g_7746d8 & 0x200) {
 			info = RegisterStatusText(s_6ad414, g_14b5be4, 0x13);
@@ -76,5 +76,5 @@ void __cdecl d2_RunSchneiderMenu(char* obj, int arg)
 		}
 		d2_OpenContactEinkaufPanel(obj);
 	}
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 }

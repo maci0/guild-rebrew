@@ -17,9 +17,9 @@ int __cdecl d2_CenterDialogWindows();
 int __cdecl d2_DestroyForm();
 int __cdecl d2_GetWindowListItem();
 int __cdecl d2_SetForm();
-int __cdecl fcn_004730c0();
-int __cdecl fcn_00473150();
-int __cdecl fcn_004e4470();
+int __cdecl d2_StartScreenFade();
+int __cdecl d2_ReleaseOverlaySprite();
+int __cdecl cut_PlayEventScript();
 int __cdecl cut_WaitForScript();
 typedef struct {
 	short w[3];
@@ -112,12 +112,12 @@ int __cdecl d2_RunChooseHistoryMenu(void)
 			d2_SetFormVisibility(dialog, 0);
 			*(int*) &main_LoopFlags = 0x12d6;
 			cut_EventLoopFlags = 0x12d6;
-			cut_WaitForScript(fcn_004e4470(0x6a4040));
+			cut_WaitForScript(cut_PlayEventScript(0x6a4040));
 			v12 = d2_RunChoosePlayerDialog(0xc6, 0);
 			if (v12 == 0) {
 				*(int*) &main_LoopFlags = 0x12d6;
 				cut_EventLoopFlags = 0x12d6;
-				cut_WaitForScript(fcn_004e4470(0x6a4024));
+				cut_WaitForScript(cut_PlayEventScript(0x6a4024));
 			} else {
 				r = d2_RunChooseCharacterIntroDialog(0);
 				if (r == 1) {
@@ -160,18 +160,18 @@ int __cdecl d2_RunChooseHistoryMenu(void)
 	d2_ClearRadioGroup(group);
 	d2_DestroyForm(dialog);
 	if (v12 != 0) {
-		v3 = fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 100, 1);
+		v3 = d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 100, 1);
 		*(int*) &main_LoopFlags = 0x12d6;
 		cut_EventLoopFlags = 0x12d6;
-		cut_WaitForScript(fcn_004e4470(0x6a4060));
+		cut_WaitForScript(cut_PlayEventScript(0x6a4060));
 		if (v3 != 0) {
-			fcn_00473150(v3);
+			d2_ReleaseOverlaySprite(v3);
 			return v12;
 		}
 	} else {
 		*(int*) &main_LoopFlags = 0x12d6;
 		cut_EventLoopFlags = 0x12d6;
-		cut_WaitForScript(fcn_004e4470(0x6a4024));
+		cut_WaitForScript(cut_PlayEventScript(0x6a4024));
 	}
 	return v12;
 }

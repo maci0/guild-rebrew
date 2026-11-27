@@ -6,7 +6,7 @@
 #include "client_scene_resources.h"
 void __cdecl m_FreeTracked(void*);
 
-void __cdecl fcn_0045d7f0(char* owner, char* n)
+void __cdecl d3_UnlinkSkyLayer(char* owner, char* n)
 {
 	char* p;
 

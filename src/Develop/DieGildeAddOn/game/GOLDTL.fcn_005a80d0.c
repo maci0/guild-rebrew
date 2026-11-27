@@ -17,7 +17,7 @@ int __cdecl gm_GetBuildingTypeCategory(int a0);
 void __cdecl d3_SetNodePosition(char* p, int* v);
 void __cdecl d3_SetObjectRotation(int a0, int a1);
 int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
-void __cdecl fcn_0058f700(int a0);
+void __cdecl d2_RunDefaultBuildingInterior(int a0);
 void* __cdecl evt_FindScriptById(int a1);
 void __cdecl evt_RequestScriptExit(void* p);
 void __cdecl evt_WaitForScriptExit(int a0);
@@ -177,7 +177,7 @@ void __cdecl d2_EnterGebaeudeInterior(unsigned char* building)
 		d2_RunZigeunerInteriorHud(*(int*) &g_7746c8);
 		break;
 	default:
-		fcn_0058f700(0);
+		d2_RunDefaultBuildingInterior(0);
 		break;
 	}
 	if (n != -1) {

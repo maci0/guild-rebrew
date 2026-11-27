@@ -34,7 +34,7 @@ void __cdecl d2_SetLabelText(int, char*);
 void __cdecl gm_FormatEntityTitleAndName(int, int, int, char*);
 void __cdecl d2_ClearGauge(Gauge*);
 #include "Develop/Units/d2.v1/d2_gui.h"
-void __cdecl fcn_005b5ce0(char* e, Gauge* g, int a3, int a4)
+void __cdecl d2_PopulateBookActionGauge(char* e, Gauge* g, int a3, int a4)
 {
 	char buf[0x100];
 	char* p;

@@ -5,10 +5,10 @@ void __cdecl d3_DisposeObject(char*);
 char* __cdecl d3_NextVisibleSceneNode(char*);
 
 void __cdecl d3_LoadModel(int, int);
-void __cdecl fcn_00449f90(char*, int, int);
+void __cdecl d3_AttachCachedModelParts(char*, int, int);
 #include "client_scene_loader.h"
 
-char __cdecl fcn_00442d90(char* o, int a2)
+char __cdecl d3_ReplaceObjectModel(char* o, int a2)
 {
 	char* p;
 	char* n;
@@ -28,7 +28,7 @@ char __cdecl fcn_00442d90(char* o, int a2)
 	}
 	d3_CleanupObjectDrawData((D3_OBJECT*) (o));
 	d3_LoadModel(a2, a2);
-	fcn_00449f90(o, 0, a2);
+	d3_AttachCachedModelParts(o, 0, a2);
 	fcn_0045cfa0(0);
 	p = *(char**) (o + 0x1ec);
 	if (p != 0 && *(int*) (p + 0x40c) != 0) {

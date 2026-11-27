@@ -24,12 +24,12 @@ typedef struct S55cc80Packet {
 extern int g_7746d4;
 int __cdecl gm_CompareGameTime(char*, char*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-float __cdecl fcn_005101e0(char*, int, int, int);
+float __cdecl gm_GetScaledWorkforceOutput(char*, int, int, int);
 int __cdecl gm_AccumulateTyped2(char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
 void __cdecl he_FreeAction(char*);
-int __cdecl fcn_004c6090(char*, int, int, int);
+int __cdecl cm_RequestAssignWorker(char*, int, int, int);
 int __cdecl cm_GetCommandStatus(int);
 char* __cdecl cm_GetCommandResult(int);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
@@ -64,7 +64,7 @@ void __cdecl he_RunHireGuardJob(char* self)
 			return;
 		}
 		row = (char*)&((ENTITY_RECORD*)g_7f4ca0)[packet->slot];
-		t = (int)fcn_005101e0(row, packet->idx0, *(unsigned char*)(self + 0xac), -1);
+		t = (int)gm_GetScaledWorkforceOutput(row, packet->idx0, *(unsigned char*)(self + 0xac), -1);
 		proto = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[packet->idx0];
 		src = gm_AccumulateTyped2((char*)&((ENTITY_RECORD*)g_7f4ca0)[packet->slot]);
 		if (t > src) {
@@ -79,7 +79,7 @@ void __cdecl he_RunHireGuardJob(char* self)
 			p = (int*) (self + 0xb0);
 			for (; started < 1; started++, p++) {
 				if (*p > 0) {
-					q = (char*) fcn_004c6090((char*) packet, 1, 0, ((unsigned char*)proto)[0x223 + *(unsigned char*)(self + 0xac)]);
+					q = (char*) cm_RequestAssignWorker((char*) packet, 1, 0, ((unsigned char*)proto)[0x223 + *(unsigned char*)(self + 0xac)]);
 					*(int*) (self + 0xb8) = (int) q;
 					break;
 				}
@@ -121,7 +121,7 @@ void __cdecl he_RunHireGuardJob(char* self)
 				continue;
 			}
 			row = (char*)&((ENTITY_RECORD*)g_7f4ca0)[packet->slot];
-			t = (int)fcn_005101e0(row, packet->idx0, *(unsigned char*)(self + 0xac), -1);
+			t = (int)gm_GetScaledWorkforceOutput(row, packet->idx0, *(unsigned char*)(self + 0xac), -1);
 			((int*) (self + 0xb0))[count] = ((int*) (self + 0xb0))[count] - 1;
 			if (*(unsigned char*) ((unsigned long)&g_7f4ca2 + (*(unsigned short*) (self + 8)) * 0x21c) == 6 || *(unsigned char*) ((unsigned long)&g_7f4ca2 + (*(unsigned short*) (self + 8)) * 0x21c) == 7) {
 				io_FormatTextBuffer(buf, 0x1bb1, t, (unsigned int)answer[0], (char*) packet);

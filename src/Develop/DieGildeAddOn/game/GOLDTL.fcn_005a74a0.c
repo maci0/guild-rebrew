@@ -24,7 +24,7 @@ extern int g_7e2700;
 int __cdecl gm_GetEntityUiFlags(int id, unsigned char* store, int a, int b);
 int __cdecl gm_IsGebaeudeOpen(unsigned char* p, int* lo, int* hi);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-void __cdecl fcn_005263d0(char*, char*, int);
+void __cdecl d2_ShowGreenMessageBox(char*, char*, int);
 
 int __cdecl gm_CanEnterGebaeude(unsigned char* p)
 {
@@ -75,7 +75,7 @@ int __cdecl gm_CanEnterGebaeude(unsigned char* p)
 					io_FormatTextBuffer(line, 0x2058, x, b);
 					strcat(text, line);
 					g_7e2700 = 0;
-					fcn_005263d0(title, text, 4);
+					d2_ShowGreenMessageBox(title, text, 4);
 					return 0;
 				}
 			}

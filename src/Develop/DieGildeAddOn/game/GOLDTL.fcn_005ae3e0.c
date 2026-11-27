@@ -8,7 +8,7 @@ extern int g_14ad168;
 extern int g_7746a0;
 extern char* g_7746cc;
 
-void __cdecl fcn_005338a0(void);
+void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_ShowLagerOptions(char*, int);
@@ -27,7 +27,7 @@ void __cdecl d2_RunWachstubeMenu(char* e)
 	transport = 0;
 	ausruesten = 0;
 	regen = 0;
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	while (main_RunFrameLoop((void*) d2_RunWachstubeMenu, 0x67fff) != 0) {
 		if (g_7746d8 & 0x200) {
 			ausruesten = RegisterStatusText("contact_AUSRUESTEN", g_14ad118, 0xd);

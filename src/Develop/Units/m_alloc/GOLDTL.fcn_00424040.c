@@ -3,7 +3,7 @@
 extern char* sbs_BankManager;
 extern int g_6b7d6c;
 
-int __cdecl fcn_00424130(char* set, char* name);
+int __cdecl sbs_RemoveSetSamples(char* set, char* name);
 void __cdecl m_FreeTracked(void* p);
 
 /* ADDRESS: GOLDTL 0x00424040 */
@@ -16,7 +16,7 @@ int __cdecl sbs_FreeSampleBank(char* name)
 	if (name != 0) {
 		int r;
 
-		r = fcn_00424130(name, 0);
+		r = sbs_RemoveSetSamples(name, 0);
 		if (r != 0) {
 			return r;
 		}

@@ -13,7 +13,7 @@ typedef struct {
 extern Pt5d36_99ec2c g_99ec2c[16];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_00472c30(int, int, int, int, int, int, int);
+void __cdecl d2_DrawLine(int, int, int, int, int, int, int);
 
 int __cdecl d2_DrawHistoryGraph(Arg5d36 s, int w, int h)
 {
@@ -54,9 +54,9 @@ int __cdecl d2_DrawHistoryGraph(Arg5d36 s, int w, int h)
 	x0 = 0x2d;
 	for (i = 0; i < 15; i++) {
 		x1 = x0 + step;
-		fcn_00472c30(x0, (int) (by - g_99ec2c[i].v * sy), x1, (int) (by - g_99ec2c[i + 1].v * sy), 0x33, 0x33, 0x33);
+		d2_DrawLine(x0, (int) (by - g_99ec2c[i].v * sy), x1, (int) (by - g_99ec2c[i + 1].v * sy), 0x33, 0x33, 0x33);
 		x0 = x1;
 	}
-	fcn_00472c30(step * 15 + 0x2d, (int) (by - g_99ec2c[15].v * sy), step * 16 + 0x2d, (int) (by - g_773d4c * sy), 0x33, 0x33, 0x33);
+	d2_DrawLine(step * 15 + 0x2d, (int) (by - g_99ec2c[15].v * sy), step * 16 + 0x2d, (int) (by - g_773d4c * sy), 0x33, 0x33, 0x33);
 	return m;
 }

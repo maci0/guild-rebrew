@@ -22,7 +22,7 @@ char* __cdecl gm_GetEquippedCombatGear(char* x);
 char* __cdecl gm_FindEntityActiveItem(char* a1);
 char* __cdecl gm_FindOrCreateEntitySlot(char* rec, char* e);
 char __cdecl d3sm_SampleHeight(char* map, float* pos, int* col, int* row, float* height);
-void __cdecl fcn_00533a40(char* a);
+void __cdecl d2_ShowStatusBanner(char* a);
 int __cdecl cm_SendUpdateCutsceneEntitySlot(int a1, void* a2);
 
 /* ADDRESS: GOLDTL 0x004d1020 */
@@ -62,7 +62,7 @@ plain:
 	} else if (v == 0x15e || v == 0x160) {
 		rec = gm_FindEntityActiveItem(e);
 		if (rec != 0 && *(int*) (rec + 0x20) <= 0) {
-			fcn_00533a40((char*) g_14a9a04);
+			d2_ShowStatusBanner((char*) g_14a9a04);
 			return -1;
 		}
 		m.f0 = *(int*) (e + 4);
@@ -73,7 +73,7 @@ plain:
 	} else if (v == 0x174) {
 		rec = gm_FindEntityActiveItem(e);
 		if (rec != 0 && *(int*) (rec + 0x20) <= 0) {
-			fcn_00533a40((char*) g_14a9a08);
+			d2_ShowStatusBanner((char*) g_14a9a08);
 fail:
 			return -1;
 		}
@@ -85,7 +85,7 @@ fail:
 	} else if (v == 0x176) {
 		rec = gm_FindEntityActiveItem(e);
 		if (rec != 0 && *(int*) (rec + 0x20) <= 0) {
-			fcn_00533a40((char*) g_14a9a0c);
+			d2_ShowStatusBanner((char*) g_14a9a0c);
 			return -1;
 		}
 		m.f10 = 0;

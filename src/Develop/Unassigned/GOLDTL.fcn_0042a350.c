@@ -2,7 +2,7 @@
 
 
 
-int __cdecl fcn_0042a2d0(int);
+int __cdecl msx_ReleaseWaveDriver(int);
 
 int __cdecl msx_CloseAllWaveDrivers(void)
 {
@@ -11,7 +11,7 @@ int __cdecl msx_CloseAllWaveDrivers(void)
 
 	if (g_6b7f90 != 0) {
 		for (a = (int) msx_WaveDrivers; a < (int) (msx_WaveDrivers + 16); a += 4) {
-			if (*(int*) a != 0 && fcn_0042a2d0(*(int*) a) == -1) {
+			if (*(int*) a != 0 && msx_ReleaseWaveDriver(*(int*) a) == -1) {
 				r = -1;
 			}
 		}

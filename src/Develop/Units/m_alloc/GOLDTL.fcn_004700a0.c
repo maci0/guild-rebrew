@@ -90,14 +90,14 @@ void __cdecl d2_CreateRenderToSurface(void);
 void __cdecl d2_InitQuadVertexBuffer(void);
 int __cdecl d2_SetClipRect(int a0, int a1, int a2, int a3);
 int __cdecl shp_InitRenderState(int a0, int a1);
-int __cdecl fcn_004770a0(void* info, int kind);
+int __cdecl d2_CreateSurface(void* info, int kind);
 void __cdecl d2_GetSurfaceDesc(int win, char* buf);
 int __cdecl d2_LockSurface(int win);
 void __cdecl d2_ClearSurface(int win);
 void __cdecl d2_UnlockSurface(int win);
 void __cdecl d2_WriteSurfacePixel(int x, int y, int r, int g, int b, int win);
 void __cdecl d2_SelectFont(int handle);
-char* __cdecl fcn_0047ce00(char* name, int a1);
+char* __cdecl d3_LoadTextureWithDefaultTint(char* name, int a1);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x004700a0 */
 int __cdecl d2_Open(int a0, int a1, int screenHeight, char* a3, char* a4)
@@ -263,7 +263,7 @@ int __cdecl d2_Open(int a0, int a1, int screenHeight, char* a3, char* a4)
 	*(int*) (info + 4) = g_14ce860;
 	*(int*) (info + 8) = g_14ce864;
 	(*(void (__stdcall**) (void*, int, int, void*)) (*(char**) g_6b5de0 + 0x40))(g_6b5de0, 0, 0, info + 0x24);
-	g_77250c = fcn_004770a0(info, 4);
+	g_77250c = d2_CreateSurface(info, 4);
 	if (!g_77250c) {
 		return 0;
 	}
@@ -278,7 +278,7 @@ int __cdecl d2_Open(int a0, int a1, int screenHeight, char* a3, char* a4)
 	*(int*) (info + 4) = 0x20;
 	*(int*) (info + 8) = 0x20;
 	*(int*) (info + 0x28) = g_67dab8;
-	g_77256c = (D2_SURFACE*) fcn_004770a0(info, 2);
+	g_77256c = (D2_SURFACE*) d2_CreateSurface(info, 2);
 	if (!g_77256c) {
 		return 0;
 	}
@@ -290,7 +290,7 @@ int __cdecl d2_Open(int a0, int a1, int screenHeight, char* a3, char* a4)
 	}
 	d2_UnlockSurface((int) g_77256c);
 	d2_SelectFont(d2_FindResourceByName(s_67d474));
-	g_77253c = fcn_0047ce00(s_67d67c, 0);
+	g_77253c = d3_LoadTextureWithDefaultTint(s_67d67c, 0);
 	if (g_77253c == 0) {
 		ReportClientMessage(s_67d654);
 	}

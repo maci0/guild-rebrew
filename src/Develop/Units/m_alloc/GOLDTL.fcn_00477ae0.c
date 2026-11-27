@@ -12,7 +12,7 @@ void __cdecl d2_WritePixelRgb(char*, char, char, char);
    used bounds, repaint both row markers, copy the bounding rows into the block
    header and return a right-sized copy. */
 /* ADDRESS: GOLDTL 0x00477ae0 */
-unsigned int* __cdecl fcn_00477ae0(int x, int y, int width,
+unsigned int* __cdecl shp_GrabBit24NoRS(int x, int y, int width,
                                    int height, char* pixels, char a5, int stride)
 {
 	unsigned int* v6;

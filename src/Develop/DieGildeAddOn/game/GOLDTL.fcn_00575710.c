@@ -13,7 +13,7 @@ void __cdecl he_StartAbbau(char*);
 void __cdecl he_RunAbbau(char*);
 void __cdecl he_AllocProduktion(char*);
 void __cdecl he_RunProduktion(char*);
-void __cdecl fcn_00572760(char*);
+void __cdecl he_FreeActionThunk(char*);
 void __cdecl fcn_00572770(char*);
 void __cdecl he_StartSuchen(char*);
 void __cdecl he_RunSuchen(char*);
@@ -44,7 +44,7 @@ int __cdecl he_RegisterCoreActionHandlers(void)
 		return 1;
 	}
 	he_RegisterActionMeta(4, g_6a7df8, 1, 0x4ff, 0xac);
-	if (he_RegisterHandler(5, fcn_00572760, fcn_00572770) != 0) {
+	if (he_RegisterHandler(5, he_FreeActionThunk, fcn_00572770) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(8, he_StartSuchen, he_RunSuchen) != 0) {

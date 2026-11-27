@@ -14,7 +14,7 @@ void* __cdecl m_alloc(int size, char* tag);
 void __cdecl m_FreeTracked(void* p);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00415310 */
-int* __cdecl fcn_00415310(int count)
+int* __cdecl d3_CreateRain(int count)
 {
 	int* rain;
 	char* cam;

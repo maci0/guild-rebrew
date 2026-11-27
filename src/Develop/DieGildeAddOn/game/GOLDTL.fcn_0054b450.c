@@ -4,7 +4,7 @@ unsigned short* __cdecl gm_LookupEntityRecordById(int);
 float __cdecl gm_CalcSkillDuelScore(char*, char*, int);
 float __cdecl gm_RandomFloat01(void);
 void __cdecl he_FreeAction(char*);
-void __cdecl fcn_00545780(char*);
+void __cdecl d2_CloseActionPopup(char*);
 int __cdecl d2_CreateActionPopupSlot(char*, int, int, char*, int);
 void __cdecl he_PostEntityMessage(int, int, void*, int, int, void*);
 void __cdecl io_FormatTextBuffer(int, int, ...);
@@ -34,7 +34,7 @@ void __cdecl he_RunSkillDuelEvent(char* a0)
 	if (*(int*) (a + 0x70) == -2 || entityA == 0 || v4 == 0 || entityC == 0) {
 		he_FreeAction(a);
 		if (*(int*) (a + 0x74) != 0)
-			fcn_00545780(a);
+			d2_CloseActionPopup(a);
 		return;
 	}
 	if (*(int*) (a + 0x70) == -1 ||
@@ -57,7 +57,7 @@ void __cdecl he_RunSkillDuelEvent(char* a0)
 		return;
 	case 1:
 		if (gm_CompareGameTime((void*) 0x7f4c00, a0 + 0x52) > 0) {
-			fcn_00545780(a);
+			d2_CloseActionPopup(a);
 			*(int*) (a + 0x70) = 2;
 			return;
 		}
@@ -75,7 +75,7 @@ void __cdecl he_RunSkillDuelEvent(char* a0)
 				cm_RequestCopyEntityData(*(int*) (v4 + 2), *(int*) (entityC + 2), -0xf, 1);
 				cm_RequestCopyEntityData(*(int*) (entityC + 2), *(int*) (v4 + 2), -0xf, 1);
 			}
-			fcn_00545780(a);
+			d2_CloseActionPopup(a);
 			he_FreeAction(a);
 			return;
 		}

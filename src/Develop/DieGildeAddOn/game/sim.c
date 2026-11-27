@@ -96,12 +96,12 @@ int __cdecl gm_IsInRange(int cls);
 int __cdecl gm_GetEntityRelation(int a, int i);
 int __cdecl fcn_0050a7e0(int a, int b, int c, int d, int e, int f, int g, int h);
 int __cdecl init_SpawnBuildingCharacter(int, int, int, int, int);
-int __cdecl fcn_00475830(char* path);
-int __cdecl fcn_00475c10(char* path);
-int __cdecl fcn_004788b0(int a, int b, int c, int d, int h, int e, int f);
+int __cdecl d2_ReadBmp24Dimensions(char* path);
+int __cdecl d2_LoadBmp24Surface(char* path);
+int __cdecl shp_CreateSpriteFromSurface(int a, int b, int c, int d, int h, int e, int f);
 void __cdecl d2_AppendShapeToBank(int o, int x);
 void __cdecl m_FreeTracked(void*);
-void __cdecl fcn_00475f80(int h);
+void __cdecl d2_ReleaseSurface(int h);
 char* __cdecl m_alloc(int size, char* tag);
 float __cdecl fcn_00505e30(int);
 float __cdecl gm_GetEntityHealth(void*);
@@ -849,15 +849,15 @@ void __cdecl sim_LoadBmpShape(char* path)
 	int o;
 	char* d;
 
-	k = fcn_00475830(path);
+	k = d2_ReadBmp24Dimensions(path);
 	if (k == -1) {
 		return;
 	}
-	h = fcn_00475c10(path);
+	h = d2_LoadBmp24Surface(path);
 	if (h == 0) {
 		return;
 	}
-	o = fcn_004788b0(0, 0, k & 0xffff, k >> 16, h, 0, 1);
+	o = shp_CreateSpriteFromSurface(0, 0, k & 0xffff, k >> 16, h, 0, 1);
 	if (o != 0) {
 		d2_AppendShapeToBank(o, g_773d3c);
 		m_FreeTracked((void*) o);
@@ -868,7 +868,7 @@ void __cdecl sim_LoadBmpShape(char* path)
 		}
 		g_773d40++;
 	}
-	fcn_00475f80(h);
+	d2_ReleaseSurface(h);
 }
 #endif
 

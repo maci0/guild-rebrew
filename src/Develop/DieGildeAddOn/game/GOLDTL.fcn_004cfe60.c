@@ -6,7 +6,7 @@ char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 char __cdecl d3sm_SampleHeight(int, int, void*, void*, void*);
 void __cdecl d3_SetObjectColorRgb(int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_00533a40(char*);
+void __cdecl d2_ShowStatusBanner(char*);
 
 /* ADDRESS: GOLDTL 0x004cfe60 */
 void __cdecl d2_ShowCombatSlotStatus(int slotId, char* entity)
@@ -30,7 +30,7 @@ void __cdecl d2_ShowCombatSlotStatus(int slotId, char* entity)
 	switch (*(int*) (rec + 4)) {
 	case 1:
 		io_FormatTextBuffer(buf, 0x1174, *(int*) (gear + 0x54), *(unsigned short*) entity);
-		fcn_00533a40(buf);
+		d2_ShowStatusBanner(buf);
 		return;
 	case 2:
 		opponent = gm_LookupEntityRecordIn32SlotTable(*(int*) (rec + 0x10));
@@ -43,15 +43,15 @@ void __cdecl d2_ShowCombatSlotStatus(int slotId, char* entity)
 			io_FormatTextBuffer(buf, 0x1177, *(int*) (gear + 0x54), *(unsigned short*) entity,
 				*(int*) (oppGear + 0x54), *(unsigned short*) opponent);
 		}
-		fcn_00533a40(buf);
+		d2_ShowStatusBanner(buf);
 		return;
 	case 3:
 		io_FormatTextBuffer(buf, 0x1175, *(int*) (gear + 0x54), *(unsigned short*) entity);
-		fcn_00533a40(buf);
+		d2_ShowStatusBanner(buf);
 		return;
 	case 4:
 		io_FormatTextBuffer(buf, 0x117c, *(int*) (gear + 0x54), *(unsigned short*) entity);
-		fcn_00533a40(buf);
+		d2_ShowStatusBanner(buf);
 		return;
 	}
 }

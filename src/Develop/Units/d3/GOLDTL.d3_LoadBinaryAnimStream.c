@@ -4,7 +4,7 @@ extern void* g_6b7fdc; extern float g_662c6c; extern float g_6628a4;
 
 void* __cdecl vfs_Tfopen(const char*, const char*, void*);
 int __cdecl vfs_ReadData(char*, int, int, void*);
-int __cdecl fcn_0044d770(void*);
+int __cdecl vfs_ReadStreamToken(void*);
 int __cdecl fcn_004011f0(void*, void*);
 int __cdecl vfs_ReadByte(void*, void*);
 void __cdecl vfs_ReadCString(void*, char*);
@@ -67,16 +67,16 @@ char* __cdecl d3_LoadBinaryAnimStream(char* path, char* name, char a2)
 	v31 = (int) stream;
 	if (stream != 0) {
 		vfs_ReadData(v10, 4, 1, stream);
-		if (fcn_0044d770(stream) == 0x30) {
+		if (vfs_ReadStreamToken(stream) == 0x30) {
 			fcn_004011f0(stream, &v11);
-			if (fcn_0044d770(stream) == 1) {
+			if (vfs_ReadStreamToken(stream) == 1) {
 				fcn_004011f0(stream, &v11);
 				if ((unsigned int) v11 > 0xabcd0001) {
 					CloseVfsStream(stream);
 					return 0;
 				}
 			}
-			v3 = fcn_0044d770(stream);
+			v3 = vfs_ReadStreamToken(stream);
 			if (v3 == 0x23) {
 				fcn_004011f0(stream, &frameCount);
 				if (frameCount > 0) {
@@ -90,48 +90,48 @@ char* __cdecl d3_LoadBinaryAnimStream(char* path, char* name, char a2)
 					*(int*) (animation + 0x15c) = (int) m_alloc(frameCount * 0xc0,
 						(char*) 0x67ba2c);
 				}
-				v3 = fcn_0044d770(stream);
+				v3 = vfs_ReadStreamToken(stream);
 			}
 			if (v3 == 0x33) {
 				vfs_ReadByte(stream, &v13);
-				v3 = fcn_0044d770(stream);
+				v3 = vfs_ReadStreamToken(stream);
 			}
 			if (v3 == 0x24) {
 				vfs_ReadByte(stream, &v14);
-				v3 = fcn_0044d770(stream);
+				v3 = vfs_ReadStreamToken(stream);
 			}
 			if (v3 == 0x37) {
 				fcn_004011f0(stream, &v15);
 				if (animation != 0) {
 					*(int*) (animation + 0x144) = v15;
 				}
-				v3 = fcn_0044d770(stream);
+				v3 = vfs_ReadStreamToken(stream);
 			}
 			if (v3 == 0x36) {
 				fcn_004011f0(stream, &v16);
-				v3 = fcn_0044d770(stream);
+				v3 = vfs_ReadStreamToken(stream);
 			}
 			if (v3 == 0x34) {
 				fcn_004011f0(stream, &v17);
-				v3 = fcn_0044d770(stream);
+				v3 = vfs_ReadStreamToken(stream);
 			}
 			if (v3 == 0x35) {
 				fcn_004011f0(stream, &v18);
-				v3 = fcn_0044d770(stream);
+				v3 = vfs_ReadStreamToken(stream);
 			}
 			if (v3 == 0x29) {
 				fcn_004011f0(stream, &v19);
 				if (animation != 0) {
 					*(int*) (animation + 0x150) = v19;
 				}
-				v3 = fcn_0044d770(stream);
+				v3 = vfs_ReadStreamToken(stream);
 			}
 			if (v3 == 0x2a) {
 				fcn_004011f0(stream, &v20);
 				if (animation != 0) {
 					*(int*) (animation + 0x154) = v20;
 				}
-				v3 = fcn_0044d770(stream);
+				v3 = vfs_ReadStreamToken(stream);
 			}
 			if (animation != 0 && *(int*) (animation + 0x150) > *(int*) (animation + 0x154)) {
 				v9 = *(int*) (animation + 0x154);
@@ -148,7 +148,7 @@ char* __cdecl d3_LoadBinaryAnimStream(char* path, char* name, char a2)
 							*(int*) (v11 * 0xc0
 								+ *(int*) (animation + 0x15c)) = v21;
 						}
-						v3 = fcn_0044d770(stream);
+						v3 = vfs_ReadStreamToken(stream);
 					}
 					v22 = 0;
 					if (v13 != 0 && v3 == 0x19) {
@@ -167,7 +167,7 @@ char* __cdecl d3_LoadBinaryAnimStream(char* path, char* name, char a2)
 								*(int*) (animation + 0x140) = v22;
 							}
 						}
-						v3 = fcn_0044d770(stream);
+						v3 = vfs_ReadStreamToken(stream);
 					}
 					if (v3 == 0x21) {
 						if (animation != 0 && v29 == 0) {
@@ -212,17 +212,17 @@ char* __cdecl d3_LoadBinaryAnimStream(char* path, char* name, char a2)
 							} while (v3 < v22);
 						}
 						v29 += v22;
-						v3 = fcn_0044d770(stream);
+						v3 = vfs_ReadStreamToken(stream);
 						if (v3 != 0x28) {
 							ReportClientMessage((char*) 0x67b968);
 						}
 						else {
-							v3 = fcn_0044d770(stream);
+							v3 = vfs_ReadStreamToken(stream);
 						}
 					}
 					if (v14 != 0 && v3 == 0x1a) {
 						fcn_004011f0(stream, &v24);
-						v3 = fcn_0044d770(stream);
+						v3 = vfs_ReadStreamToken(stream);
 						if (v3 == 0x22) {
 							v3 = 0;
 							if (v24 > 0) {
@@ -232,13 +232,13 @@ char* __cdecl d3_LoadBinaryAnimStream(char* path, char* name, char a2)
 									v3++;
 								} while (v3 < v24);
 							}
-							v3 = fcn_0044d770(stream);
+							v3 = vfs_ReadStreamToken(stream);
 						}
 						if (v3 != 0x28) {
 							ReportClientMessage((char*) 0x67b92c);
 						}
 						else {
-							v3 = fcn_0044d770(stream);
+							v3 = vfs_ReadStreamToken(stream);
 						}
 					}
 				}
@@ -253,7 +253,7 @@ char* __cdecl d3_LoadBinaryAnimStream(char* path, char* name, char a2)
 						*(float*) (v11 * 0xc0 + 0x30 + *(int*) (animation + 0x15c)) = v25[1];
 						*(float*) (v11 * 0xc0 + 0x34 + *(int*) (animation + 0x15c)) = v25[2];
 					}
-					v3 = fcn_0044d770(stream);
+					v3 = vfs_ReadStreamToken(stream);
 				}
 				v9 = 0;
 				if (v15 > 0) {
@@ -261,17 +261,17 @@ char* __cdecl d3_LoadBinaryAnimStream(char* path, char* name, char a2)
 					do {
 						if (v3 == 0x38) {
 							vfs_ReadCString(stream, (char*) v29);
-							v3 = fcn_0044d770(stream);
+							v3 = vfs_ReadStreamToken(stream);
 						}
 						if (v3 == 0x39) {
 							vfs_ReadVec3(stream, (void*) (*(int*) (animation + 0x15c)
 								+ 0x54 + (v9 + v11 * 8) * 0x18));
-							v3 = fcn_0044d770(stream);
+							v3 = vfs_ReadStreamToken(stream);
 						}
 						if (v3 == 0x3a) {
 							vfs_ReadVec3(stream, (void*) (*(int*) (animation + 0x15c)
 								+ (v9 + 4 + v11 * 8) * 0x18));
-							v3 = fcn_0044d770(stream);
+							v3 = vfs_ReadStreamToken(stream);
 						}
 						v9++;
 						v29 += 0x40;
@@ -281,7 +281,7 @@ char* __cdecl d3_LoadBinaryAnimStream(char* path, char* name, char a2)
 			if (v3 == 0x32) {
 				vfs_ReadVec3(stream, v23);
 				vfs_ReadVec3(stream, v25);
-				v3 = fcn_0044d770(stream);
+				v3 = vfs_ReadStreamToken(stream);
 			}
 			if (v3 != 0x2f) {
 				ReportClientMessage((char*) 0x67b8e8);

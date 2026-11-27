@@ -5,11 +5,11 @@ typedef struct {
 	char pad55[9];
 	unsigned char f5e;
 	char pad5f[1];
-} Model_4469e0;
+} FLOOR_MODEL_HDR;
 
 // SIZE 0x158
 typedef struct {
-	Model_4469e0* model;
+	FLOOR_MODEL_HDR* model;
 	int pad4;
 	char b8;
 	char b9;
@@ -22,7 +22,7 @@ typedef struct {
 	int v28[4];
 	char pad38[0x154 - 0x38];
 	int f154;
-} Part_4469e0;
+} FLOOR_PART_REC;
 
 extern char g_6b5c60[];
 
@@ -33,28 +33,28 @@ void __cdecl vfs_WriteCString(void* s, void* str);
 void __cdecl vfs_WriteInt32(void* s, int v);
 void __cdecl vfs_WriteVec3(void* s, void* v);
 void __cdecl vfs_WriteVec4(void* s, int* v);
-void __cdecl fcn_00401360(void* s, int v);
+void __cdecl vfs_WriteInt(void* s, int v);
 void __cdecl vfs_WriteArray(void* s, int a, int b, void* data);
 
-#define PART(i) ((*(Part_4469e0**) (o + 0x7da0))[i])
+#define PART(i) ((*(FLOOR_PART_REC**) (o + 0x7da0))[i])
 
 
 /* ADDRESS: GOLDTL 0x004469e0 */
-void __cdecl fcn_004469e0(void* s, char* o)
+void __cdecl d3_SaveFloor(void* s, char* o)
 {
 	void* buf;
 	int i;
 
 	vfs_WriteCString(s, o + 0x7da4);
 	if (o[0x7da4] != 0) {
-		fcn_00401360(s, *(int*) o);
+		vfs_WriteInt(s, *(int*) o);
 		vfs_WriteArray(s, *(int*) o, *(int*) o, *(void**) (o + 0x10));
 		buf = m_alloc(*(int*) o * *(int*) o * 4, "!d3:LOfs");
 		vfs_WriteArray(s, *(int*) o * 4, *(int*) o, buf);
 		m_FreeTracked(buf);
 		vfs_WriteByte(s, *(int*) (o + 0x18) != 0);
 		if (*(int*) (o + 0x18) != 0) {
-			fcn_00401360(s, *(unsigned char*) (o + 0x8035));
+			vfs_WriteInt(s, *(unsigned char*) (o + 0x8035));
 			if (*(unsigned char*) (o + 0x8035) > 0) {
 				vfs_WriteArray(s, *(int*) o, *(int*) o, *(void**) (o + 0x18));
 			}
@@ -79,7 +79,7 @@ void __cdecl fcn_004469e0(void* s, char* o)
 				vfs_WriteInt32(s, PART(i).d);
 				vfs_WriteVec4(s, PART(i).v18);
 				vfs_WriteVec4(s, PART(i).v28);
-				fcn_00401360(s, PART(i).f154);
+				vfs_WriteInt(s, PART(i).f154);
 			}
 		}
 	} else {

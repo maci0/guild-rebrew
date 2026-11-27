@@ -11,7 +11,7 @@ int __cdecl d2_EqualizeWindowButtonWidths(int x, int y, char* text, int win);
 void __cdecl d2_SetElementFont(int element, int value);
 int __cdecl io_AppendText();
 void __cdecl io_FormatTextBuffer(char* buf, char* fmt, ...);
-void __cdecl fcn_00533f40(int x, int y, int owner, int other, int arg5,
+void __cdecl d2_CreateWindowScrollbar(int x, int y, int owner, int other, int arg5,
                            int* id2, int* id1, int* id3);
 void __cdecl d2_DrawSegmentedBar(int x0, int y, int len, int t);
 void __cdecl d2_FormatWorkerFullName(void* a1, void* a2);
@@ -70,7 +70,7 @@ void __cdecl d2_RenderCandidateStatCards(int* ctx)
 	io_AppendText(g_6811b0);
 	d2_SetForm(ctx[0], 5);
 	io_AppendText(g_6811b0);
-	fcn_00533f40(0, 0, ctx[4], ctx[2], *(int*) (ctx[2] * 0x3cc + 0x1015f50),
+	d2_CreateWindowScrollbar(0, 0, ctx[4], ctx[2], *(int*) (ctx[2] * 0x3cc + 0x1015f50),
 	             &v9, &v11, &v10);
 	d2_SetForm(ctx[0], 2);
 	i = 0;

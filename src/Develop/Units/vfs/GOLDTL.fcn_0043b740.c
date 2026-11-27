@@ -7,7 +7,7 @@ typedef struct Event {
 	char name[0x80];
 } Event;
 
-void __cdecl fcn_00401360(int, int);
+void __cdecl vfs_WriteInt(int, int);
 void __cdecl vfs_WriteCString(int, char*);
 char* __cdecl d3_FindEventName(int);
 
@@ -23,7 +23,7 @@ void __cdecl d3_WriteEventTable(int w, Event* ev)
 				n++;
 			}
 		}
-		fcn_00401360(w, n);
+		vfs_WriteInt(w, n);
 		for (i = 0; i < 7; i++) {
 			if (ev[i].id != 0) {
 				vfs_WriteCString(w, d3_FindEventName(i));
@@ -31,6 +31,6 @@ void __cdecl d3_WriteEventTable(int w, Event* ev)
 			}
 		}
 	} else {
-		fcn_00401360(w, 0);
+		vfs_WriteInt(w, 0);
 	}
 }

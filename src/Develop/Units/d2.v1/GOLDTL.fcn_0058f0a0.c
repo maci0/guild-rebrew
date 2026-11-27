@@ -15,12 +15,12 @@ extern int g_14b5730;
 extern int g_14ad100;
 extern int g_14b5734;
 
-void __cdecl fcn_005338a0(void);
+void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl RegisterStatusText(char*, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d3_TriggerFriedhofChatScript(int);
 void __cdecl he_DispatchEntityInteractReturn(int);
-void __cdecl fcn_0058f6a0(int);
+void __cdecl d2_RunAlternLassenDialog(int);
 void __cdecl d2_ShowHauntingDialog(int);
 void __cdecl d2_RunRohstoffsuchenDialog(int);
 void __cdecl d2_StartGrabpflege(int);
@@ -52,7 +52,7 @@ void __cdecl d2_RunFriedhofActions(int arg)
 	graveCareAction = 0;
 	insuranceAction = 0;
 	transportAction = 0;
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	while (main_RunFrameLoop(d2_RunFriedhofActions, 0x67fff) != 0) {
 		d3_TriggerFriedhofChatScript(arg);
 		if ((g_7746d8 & 0x200) != 0) {
@@ -70,7 +70,7 @@ void __cdecl d2_RunFriedhofActions(int arg)
 			if ((g_7746d8 & 0x200) != 0) {
 				he_DispatchEntityInteractReturn(arg);
 				if (g_7746a0 == ageAction) {
-					fcn_0058f6a0(arg);
+					d2_RunAlternLassenDialog(arg);
 				} else if (g_7746a0 == hauntAction) {
 					d2_ShowHauntingDialog(arg);
 				} else if (g_7746a0 == ingredientAction) {
@@ -92,7 +92,7 @@ void __cdecl d2_RunFriedhofActions(int arg)
 			}
 		} else if (g_774800 != 0) {
 			if ((*(unsigned char*)&g_14cf950) == 0x1e) {
-				fcn_0058f6a0(arg);
+				d2_RunAlternLassenDialog(arg);
 			} else if ((*(unsigned char*)&g_14cf950) == 0x2f) {
 				d2_RunDeathPactDialog(arg);
 			} else if ((*(unsigned char*)&g_14cf950) == 0x22) {

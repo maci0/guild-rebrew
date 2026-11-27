@@ -7,7 +7,7 @@ extern int g_772f54;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl cut_RandMod(int);
-void __cdecl fcn_004e4730(char*);
+void __cdecl cut_StartSceneCutscene(char*);
 void __cdecl d3_InitSkyLayer(char*);
 void __cdecl msx_StartMusicIfAllowed(char*);
 void __cdecl d3_CreateSceneRain(int);
@@ -57,7 +57,7 @@ void __cdecl cut_PlayHinrichtung(int eventRecord)
 	s = (unsigned short*) gm_LookupEntityRecordById(*(int*) (eventRecord + 0x40));
 	cut_EventLoopFlags = 0x702c6;
 	d2_SuppressOverlay = 1;
-	fcn_004e4730((char*) 0x68cfb0);
+	cut_StartSceneCutscene((char*) 0x68cfb0);
 	d3_BlendSceneLightingPreset(0, 0, 1.0f, 1);
 	d3_InterpolateSceneFog(0, 0, 0);
 	if (mode == 1) {

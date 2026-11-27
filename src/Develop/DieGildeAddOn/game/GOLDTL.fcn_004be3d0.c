@@ -16,7 +16,7 @@ typedef struct MapPos {
 } MapPos;
 
 char* __cdecl gm_SearchTable67(unsigned int);
-int __cdecl fcn_004be300(char*, char*);
+int __cdecl d2_FindLinkedRecordIndex(char*, char*);
 void __cdecl d3_TransformPoint(char*, float*, float*);
 char __cdecl d3sm_SampleHeight(char*, float*, int*, int*, float*);
 void __cdecl d2_ProjectMapCoordToScreen(char*, int, int);
@@ -56,7 +56,7 @@ int __cdecl d2_AddRoutePointMarker(int* town, char* building, char* routeHead, c
 		return -1;
 	}
 	d2_ProjectMapCoordToScreen((char*) &p, a, b);
-	v = fcn_004be300(routeHead, rec) + 0x7bb;
+	v = d2_FindLinkedRecordIndex(routeHead, rec) + 0x7bb;
 	v = d2_AddElementToWindow((int) p.x - 0x20, (int) p.y - 0x20, v, town[2]);
 	n = g_772900;
 	g_10058a0[n].id = v;

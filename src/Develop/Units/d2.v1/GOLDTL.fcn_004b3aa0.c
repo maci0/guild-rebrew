@@ -9,8 +9,8 @@ extern char g_7728d4;
 __declspec(dllimport) unsigned long __stdcall GetTickCount(void);
 void __cdecl cm_RequestSysMessage(int, int*);
 void __cdecl cm_StepCommandQueue(void);
-void __cdecl fcn_004b3490(void);
-void __cdecl fcn_004b3810(int);
+void __cdecl hst_ShowDueTextScroll(void);
+void __cdecl d2_ShowHistoryScrollDialog(int);
 
 void __cdecl hst_ShowDueHistoryScroll(int mode)
 {
@@ -24,9 +24,9 @@ void __cdecl hst_ShowDueHistoryScroll(int mode)
 		cm_StepCommandQueue();
 	if (g_14cbcb0 == 0 && g_7728d4 != 0) {
 		if (g_7728d4 == 1)
-			fcn_004b3490();
+			hst_ShowDueTextScroll();
 		else if (g_7728d4 == 2)
-			fcn_004b3810(mode);
+			d2_ShowHistoryScrollDialog(mode);
 	}
 }
 unsigned char _dpad_1460af0[1712] = {

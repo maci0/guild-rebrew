@@ -19,7 +19,7 @@ extern char g_5438c0[];
 int __cdecl gm_LookupEntityRecordById(void* p);
 int __cdecl sb_LoadLocalizedSampleBank(char* s, int a);
 void __cdecl msx_StartMusicIfAllowed(char* s);
-void __cdecl fcn_004e4730(char* s);
+void __cdecl cut_StartSceneCutscene(char* s);
 void __cdecl d3_BlendSceneLightingPreset(int a, int b, float f, int c);
 void __cdecl d3_InterpolateSceneFog(int a, int b, float f);
 void __cdecl d3_InitSkyLayer(char* s);
@@ -36,7 +36,7 @@ void __cdecl d3_DestroySkyLayer(void);
 void __cdecl d3_DestroySceneRain(void);
 void __cdecl cut_CleanupCutscene(void);
 void __cdecl d3snd_StopTrackedVoices(void);
-void __cdecl fcn_004230e0(void* h);
+void __cdecl sb_ReleaseSampleBank(void* h);
 void __cdecl fcn_004e4eb0(void);
 void __cdecl main_ExitToFrameHandler(int p);
 void __cdecl gm_LiquidateEntityAssets(void* a, void* b, int c);
@@ -77,7 +77,7 @@ void __cdecl cut_RunPleiteCutscene(void* arg)
 	}
 	handle = sb_LoadLocalizedSampleBank((char*) 0x68d324, 1);
 	msx_StartMusicIfAllowed((char*) 0x68bd2c);
-	fcn_004e4730((char*) 0x68d318);
+	cut_StartSceneCutscene((char*) 0x68d318);
 	d3_BlendSceneLightingPreset(state, 0, 1.0f, 1);
 	d3_InterpolateSceneFog(0, 0, 0.0f);
 	d3_InitSkyLayer((char*) 0x68d308);
@@ -115,7 +115,7 @@ void __cdecl cut_RunPleiteCutscene(void* arg)
 	d3_DestroySceneRain();
 	cut_CleanupCutscene();
 	d3snd_StopTrackedVoices();
-	fcn_004230e0((void*) handle);
+	sb_ReleaseSampleBank((void*) handle);
 	fcn_004e4eb0();
 	flags = g_7747b0;
 	g_772f54 = 0;

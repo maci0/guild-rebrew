@@ -12,7 +12,7 @@ extern int g_77259c;
 
 void __cdecl d2_DestroyElement(int id);
 void __cdecl m_FreeTracked(int p);
-void __cdecl fcn_00475f80(int surf);
+void __cdecl d2_ReleaseSurface(int surf);
 void __cdecl d3_SafeReleaseSceneResource(int tex);
 void __cdecl d2_SubRefcount(int id);
 
@@ -36,13 +36,13 @@ int __cdecl d2_DestroyWindow(int win)
 		w->i[0x28 / 4] = 0;
 	}
 	if (w->i[0x30 / 4] != 0) {
-		fcn_00475f80(w->i[0x30 / 4]);
+		d2_ReleaseSurface(w->i[0x30 / 4]);
 	}
 	if (w->i[0x34 / 4] != 0) {
-		fcn_00475f80(w->i[0x34 / 4]);
+		d2_ReleaseSurface(w->i[0x34 / 4]);
 	}
 	if (w->i[0x38 / 4] != 0) {
-		fcn_00475f80(w->i[0x38 / 4]);
+		d2_ReleaseSurface(w->i[0x38 / 4]);
 	}
 	if (w->i[0x3a0 / 4] != 0) {
 		d3_SafeReleaseSceneResource(w->i[0x3a0 / 4]);

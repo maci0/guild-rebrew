@@ -18,7 +18,7 @@ extern int __cdecl m_is_tracked(void* p);
 extern void __cdecl DumpErrorContext(void);
 
 /* ADDRESS: GOLDTL 0x0042e260 */
-void __cdecl fcn_0042e260(VAL_OBJ* o)
+void __cdecl ch_ValidateActorPtrs(VAL_OBJ* o)
 {
 	void* p;
 

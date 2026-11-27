@@ -79,9 +79,9 @@ extern int d2_ScreenHeight;
 extern int g_1040494;
 
 void __cdecl m_FreeTracked(void* p);
-fcn_0046eda0_Surf* __cdecl fcn_004770a0(fcn_0046eda0_Desc* d, int kind);
+fcn_0046eda0_Surf* __cdecl d2_CreateSurface(fcn_0046eda0_Desc* d, int kind);
 void __cdecl d2_BlitSurfaceToSurface(int a1, int a2, int w, int h, fcn_0046eda0_Surf* src, int a6, int a7, fcn_0046eda0_Surf* dst);
-void __cdecl fcn_00475f80(fcn_0046eda0_Surf* s);
+void __cdecl d2_ReleaseSurface(fcn_0046eda0_Surf* s);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x0046eda0 */
 void __cdecl d2_ResizeWindow(int w, int h, int win)
@@ -123,9 +123,9 @@ void __cdecl d2_ResizeWindow(int w, int h, int win)
 		memset(&d, 0, sizeof(d));
 		d.w = w;
 		d.h = h;
-		s = fcn_004770a0(&d, 0xb);
+		s = d2_CreateSurface(&d, 0xb);
 		d2_BlitSurfaceToSurface(0, 0, p->surf->w, p->surf->h, p->surf, 0, 0, s);
-		fcn_00475f80(p->surf);
+		d2_ReleaseSurface(p->surf);
 		p->surf = s;
 	}
 	p->w += dw;

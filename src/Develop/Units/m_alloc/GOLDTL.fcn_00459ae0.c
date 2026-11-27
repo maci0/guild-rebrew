@@ -5,7 +5,7 @@ void __cdecl d3_CreateSkyDomeBuffers(char* p);
 void __cdecl d3_ResetSkyDomeNormals(char* p, int a);
 
 /* ADDRESS: GOLDTL 0x00459ae0 */
-char* __cdecl fcn_00459ae0(int a, int b, int c)
+char* __cdecl d3_CreateSky(int a, int b, int c)
 {
 	char* p;
 

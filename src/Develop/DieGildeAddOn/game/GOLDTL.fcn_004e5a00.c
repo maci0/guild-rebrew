@@ -9,7 +9,7 @@ extern double dbl_6629c8;
 int __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl d3_ResetActionTimers(void);
 void __cdecl main_RunFrameLoop(int a, int b);
-int __cdecl fcn_004730c0(int a, int b, int c, int d, char* e, int f, int g);
+int __cdecl d2_StartScreenFade(int a, int b, int c, int d, char* e, int f, int g);
 void __cdecl cut_PauseWorldAndCharacters(void);
 void __cdecl tb_OpenFunction(char* a, int b);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
@@ -22,20 +22,20 @@ void __cdecl d3_SetViewport(float a, float b, float c, float d, int e, int f,
     int g, int h, int i);
 void __cdecl d2_UpdateHudVisibility(int a);
 int __cdecl d2_LoadForm(int a, int b, char* c);
-void __cdecl fcn_00471d80(int a, int b);
+void __cdecl d2_CenterForm(int a, int b);
 void __cdecl d2_SetFormVisibility(int a, int b);
 void __cdecl cut_SetRandSeed(int a);
 void __cdecl d2_DestroyForm(int a);
 void __cdecl cut_DestroyAllActiveCharacters(void);
 void __cdecl gm_ResumeGame(void);
 void __cdecl tb_CloseFunction(char* a);
-void __cdecl fcn_00528fd0(void);
+void __cdecl d2_RestoreHudPanels(void);
 void __cdecl d3_SelectSceneContext(int a, int b);
 void __cdecl d3_ResetSkyDomeNormals(int a, int b);
 void __cdecl d3_InterpolateSceneFog(int a, int b, int c);
 void __cdecl d3_UpdateSceneDetailLevel(int a, int b);
-void __cdecl fcn_00443230(int a);
-void __cdecl fcn_00473150(int a);
+void __cdecl d3_PrecacheAllSceneTextures(int a);
+void __cdecl d2_ReleaseOverlaySprite(int a);
 void __cdecl cm_BeginPacketFieldDelta(int a, int b);
 void __cdecl cm_AppendCommandSyncField(int a, int b, char* c, int* d);
 void __cdecl cm_SendSetAttribute(void);
@@ -158,7 +158,7 @@ fill_tail:
     a = *(int*) 0x1040490;
     b = *(int*) 0x1040494;
     flags = (*(int*) 0x7e46ac & ~8) | 0x110080;
-    *(int*) 0x772f50 = fcn_004730c0(0, 0, b, a, (char*) 0x67d67c, 0x5a, 1);
+    *(int*) 0x772f50 = d2_StartScreenFade(0, 0, b, a, (char*) 0x67d67c, 0x5a, 1);
     while ((*(unsigned char*) *(int*) 0x772f50 & 4) == 0)
         main_RunFrameLoop(0, flags);
     s3a40 = *(int*) 0x7e3a40;
@@ -230,7 +230,7 @@ display:
     obj = d2_LoadForm(0, 0, fmt);
     *(int*) (e + 0x2c) = obj;
     *(int*) 0x68bfc0 = obj;
-    fcn_00471d80(obj, 3);
+    d2_CenterForm(obj, 3);
     if (*(int*) 0x772f3c != 0)
         d2_SetFormVisibility(obj, 0);
     cut_SetRandSeed(*(int*) (e + 0x78));
@@ -264,7 +264,7 @@ display:
             *(int*) 0x104048c = g480c;
             if (ready != 0 && !(e[0x26] & 0x40)) {
                 d2_UpdateHudVisibility(1);
-                fcn_00528fd0();
+                d2_RestoreHudPanels();
             }
         }
     }
@@ -285,13 +285,13 @@ tail:
     *(unsigned char*) 0x6b8061 = (unsigned char) saved_6b8061;
     *(int*) 0x675308 = saved_675308;
     d3_UpdateSceneDetailLevel(*(int*) 0x6b8300, 0);
-    fcn_00443230(1);
+    d3_PrecacheAllSceneTextures(1);
     if (*(int*) 0x772f50 != 0) {
-        fcn_00473150(*(int*) 0x772f50);
+        d2_ReleaseOverlaySprite(*(int*) 0x772f50);
         q = *(int*) 0x1040490;
         w = *(int*) 0x1040494;
         *(int*) 0x772f50 = 0;
-        fcn_004730c0(0, 0, w, q, (char*) 0x67d67c, 0x5a, 0xa);
+        d2_StartScreenFade(0, 0, w, q, (char*) 0x67d67c, 0x5a, 0xa);
     }
 post_cleanup:
     cut_ResetEventSlots(event);

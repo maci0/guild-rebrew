@@ -5,7 +5,7 @@ char* __cdecl gm_GetEquippedCombatGear(char*);
 unsigned short* __cdecl gm_FindEntityActiveItem(char*);
 char __cdecl d3sm_SampleHeight(char*, float*, int*, int*, float*);
 unsigned char* __cdecl cut_FindCombatTarget(char*);
-int __cdecl fcn_004d3330(char*, int, int, int, unsigned int*, unsigned int*);
+int __cdecl gm_FindBestCombatCell(char*, int, int, int, unsigned int*, unsigned int*);
 int __cdecl cut_AssignTargetOrder(char*, char*, char*, int, int);
 char* __cdecl d3_FindNearestEnemyWare(char*);
 int __cdecl he_QueueTradeWareCommand(char*, char*, char*);
@@ -36,7 +36,7 @@ void __cdecl cut_AssignCombatUnitOrder(char* rec, char* e)
 			if (*(int*) (obj + 0x58) == 2) {
 				map = *(char**) (g_67a370 + 0xb0);
 				if (d3sm_SampleHeight(map, (float*) (*(char**) (*(char**) (e + 0x184) + 0x34) + 0x4c), (int*) &gridX, (int*) &grid_z, &f4)) {
-					obj = (char*) fcn_004d3330(e, gridX, (int) grid_z, (int) (g_664330 / *(float*) (map + 0x10)), &gridX, &grid_z);
+					obj = (char*) gm_FindBestCombatCell(e, gridX, (int) grid_z, (int) (g_664330 / *(float*) (map + 0x10)), &gridX, &grid_z);
 					if (obj != 0) {
 						cut_AssignTargetOrder(rec, e, 0, gridX, (int) grid_z);
 						return;

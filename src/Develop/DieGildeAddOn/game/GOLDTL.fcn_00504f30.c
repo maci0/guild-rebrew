@@ -15,9 +15,9 @@ typedef struct Loc {
 
 
 int __cdecl gm_GetBuildingTypeCategory(int id);
-int __cdecl fcn_00507910(int kind);
+int __cdecl gm_MapBuildingCatToGuildSlot(int kind);
 int __cdecl gm_CheckStatLevel(int id, int kind);
-int __cdecl fcn_00504ef0(int kind, int* out);
+int __cdecl gm_FindBuildingPrototypesByCategory(int kind, int* out);
 
 /* ADDRESS: GOLDTL 0x00504f30 */
 unsigned int __cdecl gm_CanBuildBuildingType(int buildingType, int playerIndex)
@@ -34,7 +34,7 @@ unsigned int __cdecl gm_CanBuildBuildingType(int buildingType, int playerIndex)
 
 	type = gm_GetBuildingTypeCategory(buildingType);
 	rec = &((Loc*) lpGebaeudePROT)[buildingType];
-	loc = gm_CheckStatLevel(playerIndex, fcn_00507910(rec->kind));
+	loc = gm_CheckStatLevel(playerIndex, gm_MapBuildingCatToGuildSlot(rec->kind));
 	if (playerIndex == 0xffff) {
 		return 0;
 	}
@@ -51,7 +51,7 @@ unsigned int __cdecl gm_CanBuildBuildingType(int buildingType, int playerIndex)
 				return 1;
 			}
 		}
-		n = fcn_00504ef0(rec->kind, arr);
+		n = gm_FindBuildingPrototypesByCategory(rec->kind, arr);
 		for (j = 0; j < n; j++) {
 			rb = (unsigned char*) &((Loc*) lpGebaeudePROT)[arr[j]];
 			for (i = 0; i < 6; i++) {
@@ -89,7 +89,7 @@ unsigned int __cdecl gm_CanBuildBuildingType(int buildingType, int playerIndex)
 					return 1;
 				}
 			}
-			n = fcn_00504ef0(0x13, arr);
+			n = gm_FindBuildingPrototypesByCategory(0x13, arr);
 			for (j = 0; j < n; j++) {
 				rb = (unsigned char*) &((Loc*) lpGebaeudePROT)[arr[j]];
 				for (i = 0; i < 6; i++) {
@@ -145,7 +145,7 @@ unsigned int __cdecl gm_CanBuildBuildingType(int buildingType, int playerIndex)
 				return 1;
 			}
 		}
-		n = fcn_00504ef0(rec->kind, arr);
+		n = gm_FindBuildingPrototypesByCategory(rec->kind, arr);
 		for (j = 0; j < n; j++) {
 			rb = (unsigned char*) &((Loc*) lpGebaeudePROT)[arr[j]];
 			for (i = 0; i < 6; i++) {

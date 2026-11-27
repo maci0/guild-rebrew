@@ -32,9 +32,9 @@ extern int g_14ce728;
 void __cdecl d2_FreeAllSprites(void);
 void __cdecl d2_CloseWindow(int a1);
 void __cdecl d2_DestroyElement(int id);
-void __cdecl fcn_0047b5d0(void* p);
+void __cdecl d2_FreeAnimTrackList(void* p);
 void __cdecl m_FreeTracked(void* p);
-void __cdecl fcn_00475f80(void* o);
+void __cdecl d2_ReleaseSurface(void* o);
 void __cdecl fcn_00477550(void);
 void __cdecl d3_SafeReleaseSceneResource(int a1);
 void __cdecl d2_DestroyQuadVertexBuffer(void);
@@ -43,7 +43,7 @@ void __cdecl d2_ReleaseRenderToSurface(void);
 /* Shuts the resource system down: drops the animation tracks, every entry of
  * the file table, the open archive handles and the tracked allocations. */
 /* ADDRESS: GOLDTL 0x00465c60 */
-void __cdecl fcn_00465c60(void)
+void __cdecl vfs_ShutdownResources(void)
 {
 	int* track;
 
@@ -71,7 +71,7 @@ void __cdecl fcn_00465c60(void)
 		entry = (VfsEntry*) (g_772500 + i * 0x54);
 		if (entry->data != 0 && entry->size != 0) {
 			if (entry->kind < 0x10) {
-				fcn_0047b5d0(entry->data);
+				d2_FreeAnimTrackList(entry->data);
 			} else {
 				m_FreeTracked(entry->data);
 				entry->data = 0;
@@ -84,11 +84,11 @@ void __cdecl fcn_00465c60(void)
 		object = *(void**) (g_77250c + 0x24);
 		g_14ce728 = (*(int (__stdcall**) (void*)) (*(int*) object + 8))(object);
 		*(int*) (g_77250c + 0x24) = 0;
-		fcn_00475f80((void*) g_77250c);
+		d2_ReleaseSurface((void*) g_77250c);
 		g_77250c = 0;
 	}
 	if (g_77256c != 0) {
-		fcn_00475f80(g_77256c);
+		d2_ReleaseSurface(g_77256c);
 		g_77256c = 0;
 	}
 	fcn_00477550();

@@ -78,12 +78,12 @@ void __cdecl vfs_WriteByte(int, unsigned char);
 void __cdecl vfs_WriteCString(int, char*);
 void __cdecl vfs_WriteInt32(int, int);
 void __cdecl vfs_WriteVec3(int, float*);
-void __cdecl fcn_00401360(int, int);
+void __cdecl vfs_WriteInt(int, int);
 void __cdecl ReportClientMessage(const char*);
 void __cdecl d3_WriteEventTable(int, void*);
 
 /* ADDRESS: GOLDTL 0x00446540 */
-void __cdecl fcn_00446540(int stream, Node* n)
+void __cdecl d3_WriteSceneNodeTree(int stream, Node* n)
 {
 	char buf[0x100];
 	char* p;
@@ -104,9 +104,9 @@ void __cdecl fcn_00446540(int stream, Node* n)
 	} else {
 		vfs_WriteCString(stream, n->name);
 	}
-	fcn_00401360(stream, n->i204);
-	fcn_00401360(stream, n->i220);
-	fcn_00401360(stream, kind);
+	vfs_WriteInt(stream, n->i204);
+	vfs_WriteInt(stream, n->i220);
+	vfs_WriteInt(stream, kind);
 	vfs_WriteByte(stream, n->type == 1);
 	switch (kind) {
 	case 1:
@@ -118,9 +118,9 @@ void __cdecl fcn_00446540(int stream, Node* n)
 		vfs_WriteByte(stream, ((unsigned char) n->b216 >> 2) & 1);
 		vfs_WriteByte(stream, ((unsigned char) n->b216 >> 3) & 1);
 		vfs_WriteByte(stream, ((unsigned char) n->b216 >> 4) & 1);
-		fcn_00401360(stream, 0);
+		vfs_WriteInt(stream, 0);
 		if (n->model != 0) {
-			fcn_00401360(stream, n->model->count);
+			vfs_WriteInt(stream, n->model->count);
 			if (n->model->count > 0) {
 				strcpy(buf, n->model->name);
 				p = strrchr(buf, '_');
@@ -129,7 +129,7 @@ void __cdecl fcn_00446540(int stream, Node* n)
 				vfs_WriteCString(stream, buf);
 			}
 		} else {
-			fcn_00401360(stream, 0);
+			vfs_WriteInt(stream, 0);
 		}
 		/* Native flow continues into the 2/3 body: no break in the original. */
 	case 2:
@@ -166,7 +166,7 @@ void __cdecl fcn_00446540(int stream, Node* n)
 		vfs_WriteVec3(stream, &n->pos.x);
 		vfs_WriteVec3(stream, &n->v84.x);
 		vfs_WriteInt32(stream, n->data->i198);
-		fcn_00401360(stream, n->data->i19c);
+		vfs_WriteInt(stream, n->data->i19c);
 		for (i = 0; i < 0x188; i += 0x38) {
 			vfs_WriteInt32(stream, *(int*) ((char*) n->data + i + 0x28));
 			vfs_WriteInt32(stream, *(int*) ((char*) n->data + i + 0x24));
@@ -175,7 +175,7 @@ void __cdecl fcn_00446540(int stream, Node* n)
 			vfs_WriteVec3(stream, (float*) ((char*) n->data + i));
 			vfs_WriteVec3(stream, (float*) ((char*) n->data + i + 0xc));
 			vfs_WriteInt32(stream, *(int*) ((char*) n->data + i + 0x30));
-			fcn_00401360(stream, *(int*) ((char*) n->data + i + 0x34));
+			vfs_WriteInt(stream, *(int*) ((char*) n->data + i + 0x34));
 		}
 		break;
 	default:
@@ -187,7 +187,7 @@ tail:
 		;
 	vfs_WriteByte(stream, p2 != 0);
 	if (p2 != 0)
-		fcn_00446540(stream, p2);
+		d3_WriteSceneNodeTree(stream, p2);
 	for (p2 = n->next; p2 != 0; p2 = p2->next) {
 		if ((p2->flags & 1) == 1)
 			continue;
@@ -196,6 +196,6 @@ tail:
 	}
 	vfs_WriteByte(stream, p2 != 0);
 	if (p2 != 0)
-		fcn_00446540(stream, p2);
+		d3_WriteSceneNodeTree(stream, p2);
 	d3_WriteEventTable(stream, n->event);
 }

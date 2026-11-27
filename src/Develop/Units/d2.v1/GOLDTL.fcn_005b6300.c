@@ -109,9 +109,9 @@ typedef struct {
 	char txt164c[0x400];
 } FRAME;
 
-int __cdecl fcn_00534c40(int, int, int, int, int, int, int);
+int __cdecl d2_OpenJournalBook(int, int, int, int, int, int, int);
 void __cdecl d2_UpdatePagedPanel(int);
-int __cdecl fcn_0057e880(int, int, int, int);
+int __cdecl d2_DispatchTutorialInput(int, int, int, int);
 int __cdecl gm_FormatEntityTitleAndName(int, int, int, void*);
 char* __cdecl gm_FindBuildingOwner(char*);
 int __cdecl d2_GetWindowListItem(int, int, int);
@@ -150,7 +150,7 @@ void __cdecl d2_ClearRadioGroup(int);
 void __cdecl d2_InitWorkerOverlaySlots(char*, char*);
 void __cdecl d2_UpdateGauge(int, int, int);
 void __cdecl d2_ClearGauge(int);
-void __cdecl fcn_005b5ce0(int, int, int, int);
+void __cdecl d2_PopulateBookActionGauge(int, int, int, int);
 void __cdecl fcn_00473a90(int, int);
 int __cdecl main_RunFrameLoop(int, int);
 int __cdecl fcn_004c53b0(void);
@@ -166,7 +166,7 @@ int __cdecl fcn_005462a0(void);
 int __cdecl fcn_00505370(void*);
 char* __cdecl fcn_0064d228(void);
 int __cdecl fcn_0064d228_b(void);
-int __cdecl fcn_00534f30(int);
+int __cdecl d3_CloseBookPagerDialog(int);
 int __cdecl fcn_00532510(void);
 int __cdecl d3_EndCameraAndUiMode(void);
 
@@ -210,13 +210,13 @@ int __cdecl d2_ShowPersonalbuch(unsigned char* a1, int a2, int a3)
 	f.row = tbl + t * 0x24c;
 
 	if (f.row[0] != 4 && f.row[0] != 0x13 && f.row[0] != 0x10) {
-		book = (char*) fcn_00534c40(a2, 0x6a42c8, 4, 0x6ac2ec, 0x6ac300, 0x6ac314, 0x6ac328);
+		book = (char*) d2_OpenJournalBook(a2, 0x6a42c8, 4, 0x6ac2ec, 0x6ac300, 0x6ac314, 0x6ac328);
 	} else {
-		book = (char*) fcn_00534c40(a2, 0x6a42c8, 4, 0x6ac2cc, 0x6ac300, 0x6ac314, 0x6ac328);
+		book = (char*) d2_OpenJournalBook(a2, 0x6a42c8, 4, 0x6ac2cc, 0x6ac300, 0x6ac314, 0x6ac328);
 	}
 	f.book = book;
 	d2_UpdatePagedPanel((int) book);
-	fcn_0057e880(0x21, (int) book, 0, 0);
+	d2_DispatchTutorialInput(0x21, (int) book, 0, 0);
 	gm_FormatEntityTitleAndName(*(unsigned short*) (rec + 0x27), 1, 2, f.txt7a0);
 	gm_FormatEntityTitleAndName(*(unsigned short*) (rec + 0x25), 1, 2, f.txt740);
 	r = gm_FindBuildingOwner(rec);
@@ -372,7 +372,7 @@ L69b6:
 			f.v18 = f.v10;
 			t = (unsigned char) f.sel.a20;
 			if (f.sel.a08 == 0 && t != 2) {
-				e = (char*) fcn_005101e0(
+				e = (char*) gm_GetScaledWorkforceOutput(
 					(char*) ((*(unsigned short*) (a1 + 0x27) * 0x21c) + 0x7f4ca0),
 					*a1, 0, (char*) -1);
 				e = fcn_0064d228();
@@ -545,10 +545,10 @@ L6fa2:
 					continue;
 				d2_UpdateGauge(f.rows[i].a08, (int) &f.rows[i], 0);
 			} else {
-				fcn_005b5ce0((int) a1, 6, (int) &f.rows[i], i);
+				d2_PopulateBookActionGauge((int) a1, 6, (int) &f.rows[i], i);
 			}
 		}
-		fcn_005b5ce0((int) a1, 7, (int) &f.sel, 0);
+		d2_PopulateBookActionGauge((int) a1, 7, (int) &f.sel, 0);
 		if (f.v1c != -1 && f.v18 != -1 && f.rows[f.v18].a08 == 0) {
 			f.v18 = -1;
 			f.v28 = -1;
@@ -575,7 +575,7 @@ L6fa2:
 			f.v34 = -1;
 			f.v18 = k;
 			if (f.rows[k].a08 == 0) {
-				fcn_005101e0(
+				gm_GetScaledWorkforceOutput(
 					(char*) ((*(unsigned short*) (a1 + 0x27) * 0x21c) + 0x7f4ca0),
 					*a1, -1, 1);
 				e = fcn_0064d228();
@@ -622,7 +622,7 @@ L6fa2:
 				fcn_004727a0(G(f.book + 0x228 + i * 4), 2);
 				io_AppendText(0x6811b0);
 			}
-			fcn_0057e880(0x22, 0, 0, 0);
+			d2_DispatchTutorialInput(0x22, 0, 0, 0);
 		} else if (c == f.v1c && f.v18 != -1
 			&& *(signed char*) 0x7747b0 >= 0) {
 			if (d2_ShowModalMessageBox(*(char**) 0x14abbf8, 1) == 0)
@@ -706,7 +706,7 @@ L77de:
 		cm_AppendPacketFieldDelta(4, 1, 0x3d, &f.v3c);
 	}
 	cm_RequestChangeAttribute();
-	fcn_0057e880(0x21, 0, 1, 0);
-	fcn_00534f30((int) f.book);
+	d2_DispatchTutorialInput(0x21, 0, 1, 0);
+	d3_CloseBookPagerDialog((int) f.book);
 	return d3_EndCameraAndUiMode();
 }

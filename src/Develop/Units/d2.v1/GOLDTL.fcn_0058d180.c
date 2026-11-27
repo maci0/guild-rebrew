@@ -45,7 +45,7 @@ extern int g_14b579c;
 extern int g_14b556c;
 
 int __cdecl he_HasActiveGrabpflege(char*, int, int);
-void __cdecl fcn_005263d0(int, int, int);
+void __cdecl d2_ShowGreenMessageBox(int, int, int);
 void __cdecl d2_InitPlayerBar(char*, int);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -76,7 +76,7 @@ int __cdecl d2_ConfirmGrabpflege(char* who, char* request)
 
 	r = 0;
 	if (he_HasActiveGrabpflege(who, *(int*) (request + 4), *(unsigned char*) (request + 8)) != 0) {
-		fcn_005263d0(g_14b5798, g_14b579c, 0);
+		d2_ShowGreenMessageBox(g_14b5798, g_14b579c, 0);
 		return 0;
 	}
 	d2_InitPlayerBar(who, 0);

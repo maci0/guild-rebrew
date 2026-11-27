@@ -6,8 +6,8 @@
 #include <string.h>
 #include <stdio.h>
 
-typedef struct { int left, top, right, bottom; } ShapeRect47acf0;
-typedef struct { int word[6]; } ShapeHeader47acf0;
+typedef struct { int left, top, right, bottom; } SHAPE_PACK_RECT;
+typedef struct { int word[6]; } SHAPE_PACK_HDR;
 
 extern int g_67dab8;
 extern int g_67dabc;
@@ -26,18 +26,18 @@ int __cdecl d2_DrawShapeToArgbSurface(int, int, char*, char*);
 int __cdecl d2_BlitRgb24ShapeToSurface(int, int, char*, char*);
 char* __cdecl d2_AllocShapeBuffer(int, int);
 void __cdecl d2_AppendShapeNode(char*, char*);
-char* __cdecl fcn_004770a0(int*, int);
+char* __cdecl d2_CreateSurface(int*, int);
 int __cdecl d2_LockSurface(char*);
 void __cdecl d2_UnlockSurface(char*);
 void __cdecl d2_UpdateTextureBytes(char*);
-void __cdecl fcn_00475f80(char*);
+void __cdecl d2_ReleaseSurface(char*);
 int __cdecl d2_NextPowerOfTwo(int);
 char* __cdecl d2_GetBankEntry(char*, int);
 long __stdcall fcn_006114ff(int, int, int*, int, int, int*, int, unsigned int);
 
 
 /* ADDRESS: GOLDTL 0x0047acf0 */
-char* __cdecl fcn_0047acf0(char* list)
+char* __cdecl d2_BuildShapeBank(char* list)
 {
 	int hdr[0x17];
 	int sizes[0x20];
@@ -70,7 +70,7 @@ char* __cdecl fcn_0047acf0(char* list)
 	int flag;
 	int sourceCols;
 	int firstShape;
-	ShapeRect47acf0 srcRect, dstRect;
+	SHAPE_PACK_RECT srcRect, dstRect;
 
 	flag = 0;
 	bank = m_alloc(0x20, "plyshpbank");
@@ -154,7 +154,7 @@ char* __cdecl fcn_0047acf0(char* list)
 			if (sz <= (int) *(unsigned short*) (shape + 0xa))
 				hdr[2] = (int) *(unsigned short*) (shape + 0xa);
 			hdr[0xa] = 0x15;
-			base = fcn_004770a0(hdr, 0x20);
+			base = d2_CreateSurface(hdr, 0x20);
 			d2_LockSurface(base);
 			d2_DrawShapeToArgbSurface(0, 0, shape, base);
 			d2_UnlockSurface(base);
@@ -170,7 +170,7 @@ char* __cdecl fcn_0047acf0(char* list)
 						hdr[0xa] = 0x35545844;
 					else
 						hdr[0xa] = g_67dab8;
-					surf = fcn_004770a0(hdr, 0);
+					surf = d2_CreateSurface(hdr, 0);
 					srcRect.top = (j / sourceCols) * sz;
 					srcRect.bottom = srcRect.top + sz;
 					srcRect.left = (j % sourceCols) * sz;
@@ -224,7 +224,7 @@ char* __cdecl fcn_0047acf0(char* list)
 					n++;
 				} while (n < *(int*) (node + 0x2c));
 			}
-			fcn_00475f80(base);
+			d2_ReleaseSurface(base);
 		}
 	}
 	else {
@@ -245,7 +245,7 @@ char* __cdecl fcn_0047acf0(char* list)
 			hdr[0xa] = g_67dab8;
 			hdr[1] = sz;
 			hdr[2] = sz;
-			surf = fcn_004770a0(hdr, 0);
+			surf = d2_CreateSurface(hdr, 0);
 			g_77260c = g_77260c + 1;
 			if (surf == 0) {
 				m_FreeTracked(bank);
@@ -273,7 +273,7 @@ char* __cdecl fcn_0047acf0(char* list)
 						*(unsigned short*) (node + 2) = *(unsigned short*) (shape + 6);
 						*(unsigned short*) (node + 4) = *(unsigned short*) (shape + 8);
 						*(unsigned short*) (node + 6) = *(unsigned short*) (shape + 0xa);
-						*(ShapeHeader47acf0*) (node + 9) = *(ShapeHeader47acf0*) (shape + 0xe);
+						*(SHAPE_PACK_HDR*) (node + 9) = *(SHAPE_PACK_HDR*) (shape + 0xe);
 						*(int*) (*(int*) (node + 0x28)) = (int) surf;
 						uv = *(char**) (node + 0x30);
 						*(float*) uv = (float) y / (float) sz;
@@ -294,7 +294,7 @@ char* __cdecl fcn_0047acf0(char* list)
 					hdr[1] = *(int*) (surf + 4);
 					hdr[2] = *(int*) (surf + 8);
 					hdr[0xa] = 0x35545844;
-					base = fcn_004770a0(hdr, 0);
+					base = d2_CreateSurface(hdr, 0);
 					fcn_006114ff(*(unsigned int*) (base + 0x24), 0, 0, *(unsigned int*) (surf + 0x24), 0, 0, -1, 0xff000000);
 					for (k = firstShape; k < x; k++) {
 						char* sn;
@@ -303,7 +303,7 @@ char* __cdecl fcn_0047acf0(char* list)
 						*(int*) (*(int*) (sn + 0x28)) = (int) base;
 						*(int*) (*(int*) (sn + 0x28) + 0x48) = *(int*) (*(int*) (sn + 0x28) + 0x48) + 1;
 					}
-					fcn_00475f80(surf);
+					d2_ReleaseSurface(surf);
 					d2_UpdateTextureBytes(base);
 					g_772610 = g_772610 + *(int*) (base + 0x4c);
 				}

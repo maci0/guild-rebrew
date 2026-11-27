@@ -10,16 +10,16 @@ typedef struct Seq {
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_004a8770(void);
+void __cdecl gm_CollectCardGameAnte(void);
 void __cdecl gm_DealInitialCards(void);
 void __cdecl gm_EvaluateCardGameBoard(void);
 void __cdecl gm_PickCardGameBet(void);
 void __cdecl ai_EvaluateCardGameFold(void);
 void __cdecl gm_DealFourthCard(void);
-void __cdecl fcn_004a7b40(void);
+void __cdecl gm_CollectCardGameBets(void);
 void __cdecl ai_PlayCardGameTurn(void);
 void __cdecl gm_DealFifthCard(void);
-void __cdecl fcn_004a87b0(void);
+void __cdecl gm_SettleCardGameRound(void);
 
 short __cdecl gm_StepCardGameRound(void)
 {
@@ -28,7 +28,7 @@ short __cdecl gm_StepCardGameRound(void)
 		((Seq*)g_1007cd4)->state = 1;
 		return ((Seq*)g_1007cd4)->xb0 ? 0x10 : 0x21;
 	case 1:
-		fcn_004a8770();
+		gm_CollectCardGameAnte();
 		((Seq*)g_1007cd4)->state++;
 		gm_DealInitialCards();
 		gm_EvaluateCardGameBoard();
@@ -42,7 +42,7 @@ short __cdecl gm_StepCardGameRound(void)
 		ai_EvaluateCardGameFold();
 		((Seq*)g_1007cd4)->state++;
 		gm_DealFourthCard();
-		fcn_004a7b40();
+		gm_CollectCardGameBets();
 		return 0;
 	case 4:
 		((Seq*)g_1007cd4)->state = 5;
@@ -51,7 +51,7 @@ short __cdecl gm_StepCardGameRound(void)
 		return (((Seq*)g_1007cd4)->xb0 ? 0 : 0x20) | 9;
 	case 5:
 		ai_EvaluateCardGameFold();
-		fcn_004a7b40();
+		gm_CollectCardGameBets();
 		((Seq*)g_1007cd4)->state++;
 		return 0x1c;
 	case 6:
@@ -68,12 +68,12 @@ short __cdecl gm_StepCardGameRound(void)
 		return (((Seq*)g_1007cd4)->xb0 ? 0 : 0x20) | 9;
 	case 9:
 		ai_EvaluateCardGameFold();
-		fcn_004a7b40();
+		gm_CollectCardGameBets();
 		((Seq*)g_1007cd4)->state++;
 		return 0;
 	case 10:
 		((Seq*)g_1007cd4)->state = 11;
-		fcn_004a87b0();
+		gm_SettleCardGameRound();
 		return 0x10;
 	}
 	return 0;

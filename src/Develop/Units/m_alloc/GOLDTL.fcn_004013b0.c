@@ -4,7 +4,7 @@ int __cdecl fcn_004011f0(void* stream, void* dst);
 void* __cdecl m_alloc(int, void*);
 int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream);
 
-int __cdecl fcn_004013b0(void* a1, int* outBuffer, void* a3)
+int __cdecl bio_rd_buffer(void* a1, int* outBuffer, void* a3)
 {
 	void* p;
 	void* stream;

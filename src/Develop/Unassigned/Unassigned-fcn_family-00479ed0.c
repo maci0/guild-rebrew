@@ -2,7 +2,7 @@ void __cdecl d2_BlitShape(int, int, int, char*);
 void __cdecl d2_BlitShape(int, int, int, char*);
 
 /* ADDRESS: GOLDTL 0x00479ed0 */
-int __cdecl fcn_00479ed0(int x, int y, int surface, char* h, int idx)
+int __cdecl shp_ShowShapeFromBankRle(int x, int y, int surface, char* h, int idx)
 {
 	char* e;
 	char save;

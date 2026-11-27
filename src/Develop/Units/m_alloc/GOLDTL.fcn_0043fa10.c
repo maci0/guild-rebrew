@@ -8,10 +8,10 @@ extern int g_6b7fdc;
 char* __cdecl m_alloc(int, char*);
 void __cdecl vfs_BuildDirPath(int, int, char*);
 unsigned char __cdecl vfs_ReadBmpInfo(char*, int*, int*, int);
-char __cdecl fcn_00401650(char*, unsigned char*, unsigned char*, int);
+char __cdecl vfs_LoadBmpBuffer(char*, unsigned char*, unsigned char*, int);
 void __cdecl d3_LoadFloorTexture(int*, char*, int);
-void __cdecl fcn_0043f6b0(int*);
-void __cdecl fcn_0043bcf0(int*);
+void __cdecl d3_InitFloorGrid(int*);
+void __cdecl d3_ReleaseRenderDeviceContext(int*);
 int __cdecl sprintf(char*, const char*, ...);
 
 /* Load one terrain patch: derive the two file names under boden/, read the
@@ -46,7 +46,7 @@ static __inline void copy_43fa10(void* dst, const void* src, int size)
 
 #pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x0043fa10 */
-int* __cdecl fcn_0043fa10(char* floorSpec)
+int* __cdecl d3_LoadFloorPatch(char* floorSpec)
 {
 	char path[256];
 	char prefix[256];
@@ -88,7 +88,7 @@ int* __cdecl fcn_0043fa10(char* floorSpec)
 			*v6 = width;
 			dst = m_alloc(width * width, (char*) 0x67a940);
 			v6[4] = (int) dst;
-			fcn_00401650(path, (unsigned char*) dst, 0, 5);
+			vfs_LoadBmpBuffer(path, (unsigned char*) dst, 0, 5);
 		} else {
 			sprintf(msg, "Could not open HeightMap-File %s or HeightMap has wrong size!!!", path);
 		}
@@ -108,7 +108,7 @@ int* __cdecl fcn_0043fa10(char* floorSpec)
 			if (vfs_ReadBmpInfo(path, &width, &height, 0) && width == height && width == *v6) {
 				dst = m_alloc(*v6 * *v6, (char*) 0x67a764);
 				v6[6] = (int) dst;
-				fcn_00401650(path, (unsigned char*) dst, 0, 5);
+				vfs_LoadBmpBuffer(path, (unsigned char*) dst, 0, 5);
 			} else {
 				sprintf(msg, "Could not open WaterMap-File %s or WaterMap has wrong size!!!", path);
 			}
@@ -129,13 +129,13 @@ int* __cdecl fcn_0043fa10(char* floorSpec)
 		if (vfs_ReadBmpInfo(path, &width, &height, 0) && width == height && width == *v6) {
 			dst = m_alloc(*v6 * *v6, (char*) 0x67a87c);
 			v6[5] = (int) dst;
-			fcn_00401650(path, (unsigned char*) dst, 0, 5);
+			vfs_LoadBmpBuffer(path, (unsigned char*) dst, 0, 5);
 		} else {
 			sprintf(msg, "Could not open Texture-Information-File %s or Texture-Information has wrong size!!!", path);
 		}
 	}
 	if (!v6[5] || !v6[4]) {
-		fcn_0043bcf0(v6);
+		d3_ReleaseRenderDeviceContext(v6);
 		return 0;
 	}
 	*(float*) (raw + 0x50) = (float) (-*v6) * *(float*) (floorSpec + 0x90) * g_6628cc;
@@ -190,6 +190,6 @@ int* __cdecl fcn_0043fa10(char* floorSpec)
 			i++;
 		} while (i < *v6 * *v6);
 	}
-	fcn_0043f6b0(v6);
+	d3_InitFloorGrid(v6);
 	return v6;
 }

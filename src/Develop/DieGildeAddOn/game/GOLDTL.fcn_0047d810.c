@@ -38,7 +38,7 @@ extern char g_7f4ca0[];
 int __cdecl ai_IsEntityTurnActive(AI_TURN_ENTITY*);
 AI_TURN_ENTITY* __cdecl ai_UpdateEntityFeud(AI_TURN_ENTITY*);
 void __cdecl ai_BuildActionCandidates(AI_TURN_ENTITY*);
-void __cdecl fcn_004c6090(AI_TURN_BUILDING*, int, int, int);
+void __cdecl cm_RequestAssignWorker(AI_TURN_BUILDING*, int, int, int);
 int __cdecl ai_SelectEntityMethod(int);
 void __cdecl ai_RunSelectedMethod(int);
 int __cdecl gm_GetBuildingTypeCategory(int);
@@ -97,7 +97,7 @@ void __cdecl ai_UpdateEntityTurn(AI_TURN_ENTITY* entity)
 					proto = &((AI_TURN_PROTO*) lpGebaeudePROT)[building->kind];
 					x223 = proto->x223;
 					x230 = proto->x230;
-					fcn_004c6090(building, 1, x230, x223);
+					cm_RequestAssignWorker(building, 1, x230, x223);
 					sprintf(buf, (char*) 0x67db58, *(unsigned short*) &g_7f4c04,
 					 *(int*) 0x7f4c06, (char*) entity + 0x30, building->name);
 				}

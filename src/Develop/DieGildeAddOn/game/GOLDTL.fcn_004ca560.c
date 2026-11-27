@@ -10,7 +10,7 @@ int __cdecl init_EnsureObjektSceneContext(char*);
 int __cdecl init_AllocateGebaeudeSceneSlot(char*);
 int __cdecl gm_CheckEntityType(char*);
 char* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_004fdcf0(char*);
+void __cdecl d3_UpdateEntityTextureVariant(char*);
 char* __cdecl ch_CreateAction(char*, int, ...);
 void __cdecl d3_SelectSceneContext(int, int);
 char* __cdecl d3_FindSceneObject(int, int, int, char*);
@@ -65,7 +65,7 @@ int __cdecl cm_ExChrGotoSceneObject(char* x, char* out)
 		if (k != 0) {
 			t = gm_LookupEntityRecordById(*(int*) (x + 0x10));
 			if (t != 0)
-				fcn_004fdcf0(t);
+				d3_UpdateEntityTextureVariant(t);
 		}
 		ch_CreateAction(o, 0x38, 0);
 		if (k != 0) {

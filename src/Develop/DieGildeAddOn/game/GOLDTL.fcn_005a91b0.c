@@ -8,7 +8,7 @@ extern int g_774800;
 extern char g_14cf950;
 extern int g_7746a0;
 
-void __cdecl fcn_005338a0(void);
+void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl d2_IsTutorialActionAllowed(int);
 int __cdecl RegisterStatusText(char*, int, int);
@@ -23,7 +23,7 @@ void __cdecl d2_RunRathausMenu(void)
 	int tages;
 	int amt;
 
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	while (main_RunFrameLoop((void*) d2_RunRathausMenu, 0x67fff) != 0) {
 		if (d2_IsTutorialActionAllowed(0x200) == 1) {
 			kauf = RegisterStatusText("contact_GEB_KAUFEN", g_14ad250, 0x10);

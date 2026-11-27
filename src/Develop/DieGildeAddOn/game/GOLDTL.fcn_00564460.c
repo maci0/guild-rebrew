@@ -28,7 +28,7 @@ void __cdecl he_MessageBoxQuickjump(int a, int b, char* text, int c, int d, int 
 void __cdecl cm_RequestChangeBits(int a, int b, int c, int d, int e);
 void __cdecl cm_RequestTransferCurrencyNoKill(int a, int b, unsigned char k, int n);
 void __cdecl cm_SendSetGebBesitzer(int a, int b, int c);
-void __cdecl fcn_00545780(char* e);
+void __cdecl d2_CloseActionPopup(char* e);
 
 /* ADDRESS: GOLDTL 0x00564460 */
 void __cdecl he_RunGebaeudeKaufangebot(char* e)
@@ -115,7 +115,7 @@ void __cdecl he_RunGebaeudeKaufangebot(char* e)
 		io_FormatTextBuffer(buf, 0x17ea, *(unsigned short*) (p + 0x27), p);
 		he_MessageBoxQuickjump(*(int*) (q + 2), -1, buf, 0, 0x5ec, *(int*) (p + 1), -1, 0, 0);
 		cm_RequestChangeBits(*(int*) (p + 1), 0x5a, 2, 0, 0x200);
-		fcn_00545780(e);
+		d2_CloseActionPopup(e);
 		he_FreeAction(e);
 		he_FreeAction(e);
 		return;
@@ -140,7 +140,7 @@ void __cdecl he_RunGebaeudeKaufangebot(char* e)
 				cm_SendSetGebBesitzer(*(int*) (p + 1), *(int*) (q + 2), -1);
 			}
 			cm_RequestChangeBits(*(int*) (p + 1), 0x5a, 2, 0, 2);
-			fcn_00545780(e);
+			d2_CloseActionPopup(e);
 			he_FreeAction(e);
 			return;
 		}
@@ -161,6 +161,6 @@ void __cdecl he_RunGebaeudeKaufangebot(char* e)
 	default:
 		return;
 	}
-	fcn_00545780(e);
+	d2_CloseActionPopup(e);
 	he_FreeAction(e);
 }

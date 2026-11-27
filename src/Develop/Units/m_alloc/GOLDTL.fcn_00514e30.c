@@ -3,16 +3,16 @@ extern int g_67a370;
 
 
 void __cdecl d3_TraverseSceneObjects(int, int, int, void (__cdecl*)(void));
-void __cdecl fcn_00514d80(void);
-void __cdecl fcn_00454560(int);
+void __cdecl d3_ReparentFackelLights(void);
+void __cdecl d3_FreeQuadtreeNode(int);
 int __cdecl d3_BuildSceneQuadtree(int, int, int, int);
 #include "client_lighting.h"
 
-void __cdecl fcn_00514e30(void)
+void __cdecl d3_RebuildSceneQuadtreeAndLighting(void)
 {
-	d3_TraverseSceneObjects(g_67a370, 0, 0xc0, fcn_00514d80);
+	d3_TraverseSceneObjects(g_67a370, 0, 0xc0, d3_ReparentFackelLights);
 	if (g_773dd8) {
-		fcn_00454560(g_773dd8);
+		d3_FreeQuadtreeNode(g_773dd8);
 		g_773dd8 = d3_BuildSceneQuadtree(0, 0x40, 8, 7);
 	}
 	UpdateSceneLighting(1);

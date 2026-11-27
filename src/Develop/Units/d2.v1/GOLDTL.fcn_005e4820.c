@@ -18,7 +18,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_UpdateRadioGroup(int);
 void __cdecl d2_SetFormVisibility(int, int);
 void __cdecl d2_ShowGameOptions(void);
-void __cdecl fcn_005e2b60(void);
+void __cdecl d2_ShowGraphicsOptions(void);
 void __cdecl d2_ShowSoundOptions(void);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl d2_DestroyForm(int);
@@ -51,7 +51,7 @@ void __cdecl d2_ShowOptionsMenu(void)
 				d2_SetFormVisibility(h, 1);
 			} else if (d2_CurrentElementId == b2) {
 				d2_SetFormVisibility(h, 0);
-				fcn_005e2b60();
+				d2_ShowGraphicsOptions();
 				d2_SetFormVisibility(h, 1);
 			} else if (d2_CurrentElementId == b3) {
 				d2_SetFormVisibility(h, 0);

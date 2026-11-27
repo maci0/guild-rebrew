@@ -11,7 +11,7 @@ extern int g_7746a0;
 extern char g_14cf950;
 extern int g_774800;
 
-void __cdecl fcn_005338a0(void);
+void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
@@ -31,7 +31,7 @@ void __cdecl d2_RunKircheMenu(char* e, int msg)
 	spende = 0;
 	predigt = 0;
 	weih = 0;
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	while (main_RunFrameLoop((void*) d2_RunKircheMenu, 0x67fff) != 0) {
 		if (g_7746d8 & 0x200) {
 			predigt = RegisterStatusText("contact_PREDIGT", g_14ab954, 0x16);

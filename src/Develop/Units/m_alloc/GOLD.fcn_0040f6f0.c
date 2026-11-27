@@ -12,7 +12,7 @@ typedef struct {
 #include "Develop/Units/m_alloc/m_alloc_checks.h"
 void __cdecl evt_LogScriptError(void*, int, char*);
 
-int __cdecl fcn_0040f6f0(S410600** objectRef, char* flag)
+int __cdecl evt_SetEmitterRebirthFill(S410600** objectRef, char* flag)
 {
 	S410600* p;
 

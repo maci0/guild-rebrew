@@ -16,7 +16,7 @@ void __cdecl d2_SetElementFont(int, int);
 void __cdecl d2_DestroyElement(int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl gm_GetSeason(int*);
-int __cdecl fcn_0051e070(void);
+int __cdecl main_GetLanguage(void);
 #include <stdlib.h>
 extern const double g_6629c8;
 
@@ -262,7 +262,7 @@ void __cdecl d2_RenderProduktionStockRows(int windowId, int formId, int rowCount
 			*(int*)&((D2_CONTROL_TL*)g_1015ea0)[g_row_item(row, key)].value_03c = 1;
 			d2_CurrentWindowId = g_row_last(row);
 			if (g_id_field(row, 0x36) == 1) {
-				switch (fcn_0051e070()) {
+				switch (main_GetLanguage()) {
 				case 0:
 					io_AppendText(0xc1, (unsigned int) g_id_field(row, 0x36),
 					             g_row_type(row) * 2 + 0x9a8);
@@ -273,7 +273,7 @@ void __cdecl d2_RenderProduktionStockRows(int windowId, int formId, int rowCount
 					break;
 				}
 			} else {
-				switch (fcn_0051e070()) {
+				switch (main_GetLanguage()) {
 				case 0:
 					io_AppendText(0xc2, g_row_type(row) * 2 + 0x9a8,
 					             (unsigned int) g_id_field(row, 0x36));
@@ -300,7 +300,7 @@ void __cdecl d2_RenderProduktionStockRows(int windowId, int formId, int rowCount
 			*(int*)&((D2_CONTROL_TL*)g_1015ea0)[g_row_item(row, key)].value_03c = 1;
 			d2_CurrentWindowId = g_row_last(row);
 			if (g_id_field(row, 0x36) == 1) {
-				switch (fcn_0051e070()) {
+				switch (main_GetLanguage()) {
 				case 0:
 					io_AppendText(0xc1, (unsigned int) g_id_field(row, 0x36),
 					             g_row_type(row) * 2 + 0x9a8);
@@ -311,7 +311,7 @@ void __cdecl d2_RenderProduktionStockRows(int windowId, int formId, int rowCount
 					break;
 				}
 			} else {
-				switch (fcn_0051e070()) {
+				switch (main_GetLanguage()) {
 				case 0:
 					io_AppendText(0xc2, g_row_type(row) * 2 + 0x9a8,
 					             (unsigned int) g_id_field(row, 0x36));

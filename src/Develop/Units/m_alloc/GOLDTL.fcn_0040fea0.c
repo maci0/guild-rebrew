@@ -34,7 +34,7 @@ extern int g_662d64;
 extern int g_662d68;
 extern float g_662d70[4];
 
-void __cdecl fcn_00454460(int a, float* b, int c, int d, int tag, float e, EMITTER_CONFIG* buf);
+void __cdecl d3_CreateParticleEmitter(int a, float* b, int c, int d, int tag, float e, EMITTER_CONFIG* buf);
 
 /* The 24-byte fill is the hand-written alignment prelude (lea ecx,[edi+edi*2]
  * / and 3 / sub ebx,ecx / jle / rep stosb / rep stosd / rep stosb). A plain
@@ -90,6 +90,6 @@ void __cdecl CreateEmitter(union word4 u, int* emitterKind, int* count, int* sca
 	u.b[2] = (unsigned char) (((u.b[2] ^ *tagFlag) & 1) ^ u.b[2]);
 	u.b[2] = (unsigned char) (u.b[2] | 2);
 	u.b[0] = *tagLow;
-	fcn_00454460(*emitterKind, g_662d70, *count, *parentNode, u.bits, (float) *scale, &g_14cfb60);
+	d3_CreateParticleEmitter(*emitterKind, g_662d70, *count, *parentNode, u.bits, (float) *scale, &g_14cfb60);
 }
 #pragma optimize("", on)

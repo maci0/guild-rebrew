@@ -11,7 +11,7 @@ void __cdecl d2_InitWindowBounds(int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_PopulateOwnerBuildingList(unsigned short*, int, int*);
 int __cdecl d2_GetFormWindow(int, int);
-void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
+void __cdecl d2_CreateWindowScrollbar(int, int, int, int, int, int*, int*, int*);
 
 /* ADDRESS: GOLDTL 0x005c86b0 */
 int __cdecl d2_CreateGebaeudeListPanel(void)
@@ -32,7 +32,7 @@ int __cdecl d2_CreateGebaeudeListPanel(void)
 	d2_SetForm(h, 2);
 	g_775338 = d2_PopulateOwnerBuildingList(p, 0x80, (int*) 0x778900);
 	d2_SetForm(h, 0);
-	fcn_00533f40(0x206, 0x167, d2_CurrentWindowId,
+	d2_CreateWindowScrollbar(0x206, 0x167, d2_CurrentWindowId,
 				 d2_GetFormWindow(h, 2), 0x40, &c, &b, &a);
 	return h;
 }

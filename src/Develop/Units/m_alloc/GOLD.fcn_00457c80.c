@@ -13,7 +13,7 @@ extern char g_633db4[];
 
 void* __cdecl m_PoolAlloc(void*, int, int);
 
-char __cdecl fcn_00457c80(char* e, char* ctx)
+char __cdecl d3_CollectQuadtreeNode(char* e, char* ctx)
 {
 	char* d;
 	Link* n;

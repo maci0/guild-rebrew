@@ -11,7 +11,7 @@ extern char g_6b89a0[];
 
 void* __cdecl m_PoolAlloc(void*, int, int);
 void __cdecl m_pool_free(void*, void*);
-char __cdecl fcn_004545c0(char*, char*);
+char __cdecl d3_CollectActiveMeshObjects(char*, char*);
 
 char* __cdecl d3_CollectObjectsInBounds(char* src, float* lo, float* hi)
 {
@@ -23,7 +23,7 @@ char* __cdecl d3_CollectObjectsInBounds(char* src, float* lo, float* hi)
 	for (l = *(Link**) (src + 0x3c); l != 0; l = l->next) {
 		d = *(char**) (l->e + 0x1ec);
 		if (*(float*) (d + 0x90) <= hi[0] && *(float*) (d + 0xa0) >= lo[0] && *(float*) (d + 0x98) <= hi[2] && *(float*) (d + 0xa8) >= lo[2]) {
-			fcn_004545c0(l->e, ctx);
+			d3_CollectActiveMeshObjects(l->e, ctx);
 		}
 	}
 	if (*(int*) (ctx + 0x30) == 0) {

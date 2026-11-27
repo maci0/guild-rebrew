@@ -11,7 +11,7 @@ extern char g_1043370[];
 
 
 void __cdecl d3_SelectSceneContext(int, int);
-void __cdecl fcn_00454560(int);
+void __cdecl d3_FreeQuadtreeNode(int);
 void __cdecl fcn_00442e30(void);
 void __cdecl gv_Free3Fields(int);
 
@@ -21,7 +21,7 @@ void __cdecl d3_ClearAllSceneContexts(void)
 
 	d3_SelectSceneContext(0, 0);
 	if (g_773dd8 != 0) {
-		fcn_00454560(g_773dd8);
+		d3_FreeQuadtreeNode(g_773dd8);
 		g_773dd8 = 0;
 	}
 	fcn_00442e30();

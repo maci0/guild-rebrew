@@ -5,7 +5,7 @@ extern char g_6b5c60[];
 char* __cdecl d3_FindSceneObject(char*, int, char*, char*);
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 void __cdecl io_FormatTextBuffer(char*, int, int);
-void __cdecl fcn_00533a40(char*);
+void __cdecl d2_ShowStatusBanner(char*);
 void __cdecl d3_DestroyObject(int);
 void __cdecl d3_TransformPoint(char*, float*, float*);
 char* __cdecl fcn_00442910(int, float*, float*, char*);
@@ -34,7 +34,7 @@ void __cdecl d3_UpdateConquerFlag(int* orderRecord)
 		ent = gm_LookupEntityRecordIn32SlotTable(orderRecord[0]);
 		*(unsigned char*) (*(int*) (ent + 0x184) + 0x8d) |= 4;
 		io_FormatTextBuffer(buf, 0x11b8, *(unsigned short*) ent);
-		fcn_00533a40(buf);
+		d2_ShowStatusBanner(buf);
 	}
 	if (*(char**) (info + 0x204) != ent) {
 		if (*(int*) (info + 0x208) != 0) {

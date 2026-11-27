@@ -71,15 +71,15 @@ void __cdecl hmt_CreateBinaryFile(void);
 void __cdecl gm_LoadHistoricalTable(void);
 void __cdecl cut_InitCombatActionWeights(void);
 void __cdecl d2_DestroyForm(int);
-unsigned char* __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
+unsigned char* __cdecl d2_StartScreenFade(int, int, int, int, char*, int, int);
 void __cdecl main_RunFrameLoop(int, int);
-void __cdecl fcn_00473150(unsigned char*);
-void __cdecl fcn_00429920(void);
+void __cdecl d2_ReleaseOverlaySprite(unsigned char*);
+void __cdecl evt_AllocScriptEngineBuffers(void);
 void __cdecl evt_RegisterCoreCommands(void);
 void __cdecl evt_RegisterSceneCommands(void);
 void __cdecl ch_RegisterScriptCommands(void);
 void __cdecl evt_RegisterSoundCommands(void);
-void __cdecl fcn_0042a020(void);
+void __cdecl evt_GetLoadAndRunGfxScriptFunc(void);
 void __cdecl gm_ApplyGameSettings(void);
 int __cdecl main_PumpWindowMessages(void);
 #include <windows.h>
@@ -114,7 +114,7 @@ extern int __cdecl main_CheckExistingInstance(void** handle);
 extern int __cdecl main_CreateWindow(HINSTANCE inst, int unused, int windowed);
 extern int __cdecl main_InitRuntime(void);
 extern void __cdecl main_PlayIntroMovies(void);
-extern int __cdecl fcn_00538850(int topmost);
+extern int __cdecl main_CreateGameWindowAndDevice(int topmost);
 extern int __cdecl main_OpenEngine(void);
 extern void __cdecl main_ShutdownEngine(void);
 extern void __cdecl main_ShutdownSubsystems(void);
@@ -264,7 +264,7 @@ int __stdcall WinMain(void *instance, void *previous, char *command, int show)
 	}
 	if (*(int*) 0x77492c != 0)
 		main_PlayIntroMovies();
-	if (fcn_00538850(windowed) == 0) {
+	if (main_CreateGameWindowAndDevice(windowed) == 0) {
 		main_ShutdownEngine();
 		return 0;
 	}
@@ -312,7 +312,7 @@ int __stdcall WinMain(void *instance, void *previous, char *command, int show)
 			if (*(int*) 0x77495c != 0) {
 				main_ShutdownSubsystems();
 				main_PumpWindowMessages();
-				if (fcn_00538850(windowed) == 0) {
+				if (main_CreateGameWindowAndDevice(windowed) == 0) {
 					main_ShutdownEngine();
 					return 0;
 				}

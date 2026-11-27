@@ -18,7 +18,7 @@ typedef struct
 #pragma pack(pop)
 // SIZE 0x20
 
-int __cdecl fcn_004c6c30(void*);
+int __cdecl gv_EnqueueSlotCommand(void*);
 
 int __cdecl gv_SendSpawnEntities(int building, int count)
 {
@@ -34,5 +34,5 @@ int __cdecl gv_SendSpawnEntities(int building, int count)
 	msg.f10 = 0;
 	msg.f11 = 0;
 	msg.f13 = count;
-	return fcn_004c6c30(&msg);
+	return gv_EnqueueSlotCommand(&msg);
 }

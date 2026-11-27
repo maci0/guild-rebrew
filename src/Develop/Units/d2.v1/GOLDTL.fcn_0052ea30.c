@@ -47,7 +47,7 @@ void __cdecl d2_DestroyElement(int element);
 int __cdecl d2_GetEntityGearIcons(char* s, int* out);
 float __cdecl gm_GetEntityHealthRatio(char* e);
 int __cdecl d2_ClearWindowChildren(int win, int keep);
-void __cdecl fcn_004bfe00(char* e);
+void __cdecl d2_RunTradeRouteEditor(char* e);
 char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
 char* __cdecl fcn_00502cd0(int a, int b, int c, ...);
 char* __cdecl gm_NextEntityQueryMatch(void);
@@ -55,7 +55,7 @@ int __cdecl gm_GetMsgField(int a, int b);
 int __cdecl fcn_0064d41a(char* buf, char* fmt, ...);
 #include "client_data.h"
 /* ADDRESS: GOLDTL 0x0052ea30 */
-void __cdecl fcn_0052ea30(void)
+void __cdecl d2_UpdateSelectionPanel(void)
 {
 	char name[256];
 	char buf[0x40];
@@ -321,7 +321,7 @@ no_target:
 	}
 	if (g_6a25e8 != -1 && g_100f1dc != -1
 	    && d2_CurrentElementId == g_6a25e8 && (main_LoopFlags & 0x2000)) {
-		fcn_004bfe00((char*) g_7e2a9c);
+		d2_RunTradeRouteEditor((char*) g_7e2a9c);
 	}
 	if (d2_CurrentValueBar != -1) {
 		d2_SetElementValue(d2_CurrentValueBar, 0, 100, *((unsigned char*) g_7e2a9c + 0x12));

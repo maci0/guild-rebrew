@@ -12,7 +12,7 @@ char* __cdecl gm_NextEntityQueryMatch(void);
 char* __cdecl gm_AllocObjekt(int, int, int);
 
 int __cdecl gv_AddCandidateToOfficePool(char*);
-int __cdecl fcn_004f25a0(char*);
+int __cdecl gv_RentGravePlot(char*);
 int __cdecl fcn_004f2880(char*);
 int __cdecl fcn_004f2a80(char*);
 int __cdecl fcn_004f2c00(char*);
@@ -82,7 +82,7 @@ int __cdecl fcn_004cd990(char* input, char* response)
 		r = gv_AddCandidateToOfficePool(p);
 		break;
 	case 1:
-		r = fcn_004f25a0(p);
+		r = gv_RentGravePlot(p);
 		break;
 	case 2:
 		r = fcn_004f2880(p);

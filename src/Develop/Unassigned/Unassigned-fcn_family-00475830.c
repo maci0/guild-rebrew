@@ -30,14 +30,14 @@ typedef struct TexDesc {
 
 extern int g_67d920;
 
-int __cdecl fcn_00475830(const char* name);
-void* __cdecl fcn_004770a0(TexDesc* d, int fmt);
+int __cdecl d2_ReadBmp24Dimensions(const char* name);
+void* __cdecl d2_CreateSurface(TexDesc* d, int fmt);
 void __cdecl d2_LockSurface(void* t);
-void __cdecl fcn_00475a00(const char* name, void* t);
+void __cdecl d2_LoadBmpToSurface(const char* name, void* t);
 void __cdecl d2_UnlockSurface(void* t);
 
 /* ADDRESS: GOLDTL 0x00475830 */
-int __cdecl fcn_00475830(const char* name)
+int __cdecl d2_ReadBmp24Dimensions(const char* name)
 {
 	BmpInfo bi;
 	FILE* f;
@@ -56,7 +56,7 @@ int __cdecl fcn_00475830(const char* name)
 }
 
 /* ADDRESS: GOLDTL 0x00475c10 */
-void* __cdecl fcn_00475c10(const char* name)
+void* __cdecl d2_LoadBmp24Surface(const char* name)
 {
 	TexDesc d;
 	int r;
@@ -65,7 +65,7 @@ void* __cdecl fcn_00475c10(const char* name)
 	void* t;
 
 	memset(&d, 0, sizeof(d));
-	r = fcn_00475830(name);
+	r = d2_ReadBmp24Dimensions(name);
 	if (r < 0) {
 		return 0;
 	}
@@ -78,15 +78,15 @@ void* __cdecl fcn_00475c10(const char* name)
 	d.h = h;
 	d.bpp = 0x18;
 	if (w <= g_67d920 && h <= g_67d920) {
-		t = fcn_004770a0(&d, 2);
+		t = d2_CreateSurface(&d, 2);
 	} else {
-		t = fcn_004770a0(&d, 0x22);
+		t = d2_CreateSurface(&d, 0x22);
 	}
 	if (!t) {
 		return 0;
 	}
 	d2_LockSurface(t);
-	fcn_00475a00(name, t);
+	d2_LoadBmpToSurface(name, t);
 	d2_UnlockSurface(t);
 	return t;
 }

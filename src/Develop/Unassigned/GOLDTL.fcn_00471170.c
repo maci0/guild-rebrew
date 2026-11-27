@@ -44,7 +44,7 @@ extern D2_FORM_RECORD g_1038140[];
 extern int g_14ce86c;
 
 int __cdecl d2_LoadForm(int a, int b, int c);
-int __cdecl fcn_004770a0(D2_FORM_TEX_DESC* d, int flags);
+int __cdecl d2_CreateSurface(D2_FORM_TEX_DESC* d, int flags);
 
 /* ADDRESS: GOLDTL 0x00471170 */
 int __cdecl d2_CreateRenderableForm(int x, int y, int formName)
@@ -72,12 +72,12 @@ int __cdecl d2_CreateRenderableForm(int x, int y, int formName)
 			d.w = 0x100;
 			d.h = 0x100;
 			d.fmt = g_14ce86c;
-			p->surf[i] = fcn_004770a0(&d, 0x10);
+			p->surf[i] = d2_CreateSurface(&d, 0x10);
 			memset(&d, 0, sizeof(d));
 			d.w = 0x100;
 			d.h = 0x100;
 			d.fmt = g_14ce86c;
-			p->back[i] = fcn_004770a0(&d, 0x10);
+			p->back[i] = d2_CreateSurface(&d, 0x10);
 		}
 		return id;
 	}

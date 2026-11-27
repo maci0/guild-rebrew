@@ -7,7 +7,7 @@ void __cdecl d3_UpdateObjectCameraTransform(char* e, char* cam, int f);
 char* __cdecl d3_ComputeNodeBoundsBox(char* e, int h, char* p);
 
 /* ADDRESS: GOLDTL 0x004546e0 */
-char __cdecl fcn_004546e0(char* e, float* lo, float* hi)
+char __cdecl d3_ComputeObjectBounds(char* e, float* lo, float* hi)
 {
 	float* q;
 	int i;

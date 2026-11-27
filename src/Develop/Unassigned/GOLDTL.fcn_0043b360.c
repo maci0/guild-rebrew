@@ -18,7 +18,7 @@ void __cdecl d3_ReleaseTerrainSurfaces(int a);
 void __cdecl d3_ReleaseSkyDomeBuffers(int a);
 void __cdecl d3_ResetSceneAuxSlots(void);
 void __cdecl d3_SelectSceneContext(int a, int b);
-void __cdecl fcn_00456c10(void);
+void __cdecl d3_ReleaseAllShadowTextures(void);
 void __cdecl d3_InvalidateDeviceResources(void);
 void __cdecl d3_ResetGraphicsDevice(void);
 int __cdecl d3_TestCooperativeLevel(void);
@@ -67,7 +67,7 @@ char __cdecl d3_ResetDeviceObjects(void)
 		}
 	}
 	d3_SelectSceneContext(saved, 1);
-	fcn_00456c10();
+	d3_ReleaseAllShadowTextures();
 	d3_InvalidateDeviceResources();
 	d3_ResetGraphicsDevice();
 	if (d3_TestCooperativeLevel() == 0) {

@@ -22,13 +22,13 @@ extern char g_14cf950;
 #include "client_dialog_state.h"
 extern float g_6a24e4;
 
-unsigned char* __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
+unsigned char* __cdecl d2_StartScreenFade(int, int, int, int, char*, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00473150(unsigned char*);
+void __cdecl d2_ReleaseOverlaySprite(unsigned char*);
 void __cdecl d2_ClearScreen(void);
 void __cdecl d2_SetBackdropResource(int);
 int __cdecl d2_CreateWindow(int, int, int, int, int);
-void __cdecl fcn_00471c80(int, unsigned char);
+void __cdecl d2_CenterWindow(int, unsigned char);
 void __cdecl io_AppendText(int, ...);
 void __cdecl d2_CloseWindow(int);
 
@@ -40,16 +40,16 @@ void __cdecl d2_ShowCreditsScreen(void)
 	int i;
 
 	speed = 4;
-	fade = fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, s_67d67c, 0x3c, 1);
+	fade = d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, s_67d67c, 0x3c, 1);
 	while ((*fade & 4) == 0) {
 		main_RunFrameLoop(0, 0x24087);
 	}
-	fcn_00473150(fade);
-	fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, s_67d67c, 0x3c, 10);
+	d2_ReleaseOverlaySprite(fade);
+	d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, s_67d67c, 0x3c, 10);
 	d2_ClearScreen();
 	d2_SetBackdropResource(0x7ad);
 	win = d2_CreateWindow(100, 0, 0x258, d2_ScreenHeight, 0x10);
-	fcn_00471c80(win, 1);
+	d2_CenterWindow(win, 1);
 	io_AppendText(0x2004);
 	*(int*) &(*(D2_WIN**)&g_77255c)->pad3c[0x21c] = -d2_ScreenHeight;
 	i = 0;
@@ -75,7 +75,7 @@ void __cdecl d2_ShowCreditsScreen(void)
 			speed = 1;
 		}
 	}
-	fade = fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, s_67d67c, 0x3c, 1);
+	fade = d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, s_67d67c, 0x3c, 1);
 	while ((*fade & 4) == 0) {
 		main_RunFrameLoop(0, 0x24087);
 		(*(D2_WIN**)&g_77255c) = &((D2_WIN*)g_1015f40)[win];
@@ -93,7 +93,7 @@ void __cdecl d2_ShowCreditsScreen(void)
 	}
 	d2_CloseWindow(win);
 	d2_SetBackdropResource(0x797);
-	fcn_00473150(fade);
-	fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, s_67d67c, 0x3c, 10);
+	d2_ReleaseOverlaySprite(fade);
+	d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, s_67d67c, 0x3c, 10);
 	d2_SuppressOverlay = 0;
 }

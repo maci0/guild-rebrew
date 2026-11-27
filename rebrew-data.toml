@@ -26472,14 +26472,13 @@ built_va = "0x873f74"
 placement_method = "link-symbol"
 measured_at = "2026-11-03T20:26:48+00:00"
 ["GOLDTL.0x00772908"]
-type = "Node_4bf8e0 *"
+type = "ROUTING_NODE *"
 name = "g_772908"
 section = ".bss"
 file = "src/Develop/Units/d2.v1/GOLDTL.fcn_004bf8e0.c"
 note = "Type conflict resolved from source usage evidence: assigned fcn_004be1f0() alloc result; cast (char*) g_772908; pointer proven."
-updated_by = "verify"
-updated_at = "2026-10-27T19:30:02+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-27T13:35:13+00:00"
 
 ["GOLDTL.0x00772908".verification]
 status = "DISPLACED"

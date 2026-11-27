@@ -51,22 +51,22 @@ extern int g_774684;
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 void __cdecl d2_SetClipRect(int, int, int, int);
-int __cdecl fcn_00475290(int, int, int, int, int);
+int __cdecl d2_AllocHudRectSlot(int, int, int, int, int);
 int __cdecl d2_CreateWindow(int, int, int, int, int);
-void __cdecl fcn_00471c80(int, unsigned char);
+void __cdecl d2_CenterWindow(int, unsigned char);
 char* __cdecl d2_LoadObj(char*, int);
-Surface* __cdecl fcn_004770a0(SurfaceDesc*, int);
+Surface* __cdecl d2_CreateSurface(SurfaceDesc*, int);
 int __cdecl d2_LockSurface(Surface*);
 void __cdecl d2_DrawShapeToArgbSurface(int, int, char*, Surface*);
 void __cdecl d2_UnlockSurface(Surface*);
-int __cdecl fcn_0047b640(int, int, int, int, Surface*, int);
-void __cdecl fcn_00475f80(Surface*);
+int __cdecl d2_CreateTiledSurface(int, int, int, int, Surface*, int);
+void __cdecl d2_ReleaseSurface(Surface*);
 void __cdecl m_FreeTracked(char*);
 void __cdecl d2_ClearSurface(Surface*);
 int __cdecl d2_CreateElement(int, int, int);
 void __cdecl d2_SetSlotVisibility(int, int);
 
-void __cdecl fcn_00526db0(char* name)
+void __cdecl d2_InitHudPanels(char* name)
 {
 	SurfaceDesc desc2;
 	SurfaceDesc desc;
@@ -76,9 +76,9 @@ void __cdecl fcn_00526db0(char* name)
 	Surface* s;
 
 	d2_SetClipRect(0, 0, g_1040494, d2_ScreenHeight);
-	g_6a25a8 = fcn_00475290(g_1040494 - 0x50, 0x11, 0x30, 0x30, 0);
+	g_6a25a8 = d2_AllocHudRectSlot(g_1040494 - 0x50, 0x11, 0x30, 0x30, 0);
 	g_6a2598 = d2_CreateWindow(4, 0xa, 0x288, 0x30, 0);
-	fcn_00471c80(g_6a2598, 1);
+	d2_CenterWindow(g_6a2598, 1);
 	data = d2_LoadObj(name, 0);
 	n = sizeof(desc);
 	p = &desc;
@@ -106,16 +106,16 @@ void __cdecl fcn_00526db0(char* name)
 	desc.width = g_14ce860;
 	desc.height = g_14ce864;
 	desc.format = 0x15;
-	s = fcn_004770a0(&desc, 0x20);
+	s = d2_CreateSurface(&desc, 0x20);
 	if (s != 0) {
 		if (d2_LockSurface(s) != 0) {
 			d2_DrawShapeToArgbSurface(0, 0, data + *(int*) (data + 0x45), s);
 			d2_UnlockSurface(s);
 		}
-		g_774674 = fcn_0047b640(s->width - 0x80, 0, 0x80, s->height - 0x80, s, 0);
-		g_774678 = fcn_0047b640(s->width - 0x100, s->height - 0x80, 0x100, 0x80, s, 0);
-		g_77467c = fcn_0047b640(g_6a24d8[g_77534c], 0, 0x288, 0x40, s, 0);
-		fcn_00475f80(s);
+		g_774674 = d2_CreateTiledSurface(s->width - 0x80, 0, 0x80, s->height - 0x80, s, 0);
+		g_774678 = d2_CreateTiledSurface(s->width - 0x100, s->height - 0x80, 0x100, 0x80, s, 0);
+		g_77467c = d2_CreateTiledSurface(g_6a24d8[g_77534c], 0, 0x288, 0x40, s, 0);
+		d2_ReleaseSurface(s);
 	}
 	m_FreeTracked(data);
 	memset(g_7ea380, 0xff, sizeof(g_7ea380));
@@ -128,7 +128,7 @@ void __cdecl fcn_00526db0(char* name)
 	desc2.width = 0x68;
 	desc2.height = 0x6e;
 	desc2.format = 0x15;
-	(*(Surface**)&g_774684) = fcn_004770a0(&desc2, 3);
+	(*(Surface**)&g_774684) = d2_CreateSurface(&desc2, 3);
 	d2_ClearSurface((*(Surface**)&g_774684));
 	g_6a25fc = d2_CreateElement(0x286, 0x23c, 0x544);
 	((D2_CONTROL_TL*)g_1015ea0)[g_6a25fc].value_05c = 1;

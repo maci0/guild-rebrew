@@ -11,7 +11,7 @@ char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 char* __cdecl d3_FindSceneObject(int, int, int, int*);
 char* __cdecl ch_CreateQueuedAction(int, void*, int, int, int);
-void __cdecl fcn_004d4ee0(void);
+void __cdecl cut_CollectGroundItem(void);
 
 /* ADDRESS: GOLD 0x004d7000 */
 void __cdecl gm_StartGroundCollectAction(int* args)
@@ -34,7 +34,7 @@ void __cdecl gm_StartGroundCollectAction(int* args)
 #else
 	*(int*) (*(char**) (p + 0x204) + 0xa) = *s;
 #endif
-	o = ch_CreateQueuedAction(*(int*) (e + 0x184), fcn_004d4ee0, 5, 0x2e, 1);
+	o = ch_CreateQueuedAction(*(int*) (e + 0x184), cut_CollectGroundItem, 5, 0x2e, 1);
 	*(char**) (o + 0x17c) = e;
 	*(char**) (o + 0x180) = p;
 	*(blk24*) (o + 0xf0) = g_68bef4;

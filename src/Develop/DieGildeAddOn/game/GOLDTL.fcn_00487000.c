@@ -27,7 +27,7 @@ extern unsigned char* lpGebaeudePROT;
 int __cdecl gm_RandomMod(int);
 int __cdecl gm_CheckEntityType(unsigned char*);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
-float __cdecl fcn_005101e0(unsigned char*, int, int, int);
+float __cdecl gm_GetScaledWorkforceOutput(unsigned char*, int, int, int);
 void __cdecl cm_SendCopyEntityData(char*);
 
 /* Offers a building slot to the local player: counts the records and work
@@ -121,7 +121,7 @@ void __cdecl ai_ManageMeisterWorkers(char* meister)
 	                                     [*(unsigned char*) (*(char**) (meister + 0x16c))].capacity_232)) {
 		return;
 	}
-	tick = (int) fcn_005101e0((unsigned char*) ((char*) 0x7f4ca0
+	tick = (int) gm_GetScaledWorkforceOutput((unsigned char*) ((char*) 0x7f4ca0
 	                                           + *(unsigned short*) (*(char**) (meister + 0x16c) + 0x27) * 0x21c),
 	                          *(unsigned char*) (*(char**) (meister + 0x16c)), -1, 1);
 	if (n != 0) {

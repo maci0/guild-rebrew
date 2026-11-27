@@ -3,7 +3,7 @@
 extern int g_77261c;
 
 int __cdecl gm_RandomMod(int);
-int __cdecl fcn_005cf720(unsigned short, unsigned short, void*, int);
+int __cdecl gm_MatchesTargetFilter(unsigned short, unsigned short, void*, int);
 float __cdecl gm_CalcEntityFavor(unsigned short, unsigned short, int);
 
 /* ADDRESS: GOLDTL 0x004a55c0 */
@@ -28,7 +28,7 @@ unsigned int __cdecl gm_FindEntityCandidatesInRange(unsigned short* actor, unsig
 	*(int*) ((char*) query + 0x14) = 2; hasFavorRange = 0;
 	if (g_77261c != 0) {
 		query[1] = *queryFlags;
-		if (fcn_005cf720(*actor, *(unsigned short*) g_77261c, query, 0) != 0) {
+		if (gm_MatchesTargetFilter(*actor, *(unsigned short*) g_77261c, query, 0) != 0) {
 			idx = 1;
 			*outIds = *(unsigned short*) g_77261c;
 		}
@@ -57,7 +57,7 @@ unsigned int __cdecl gm_FindEntityCandidatesInRange(unsigned short* actor, unsig
 				break;
 			}
 			id = *actor;
-			if (fcn_005cf720(id, (unsigned short) pos, query, 0) != 0) {
+			if (gm_MatchesTargetFilter(id, (unsigned short) pos, query, 0) != 0) {
 				if (hasFavorRange == 0 ||
 				    (favor = gm_CalcEntityFavor((unsigned short) pos, *actor, 1), !(favor < minimumScore) && !(favor > maximumScore))) {
 					hit = 1;

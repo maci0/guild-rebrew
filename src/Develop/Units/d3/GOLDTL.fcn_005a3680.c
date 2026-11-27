@@ -15,7 +15,7 @@ int __cdecl sprintf(char*, const char*, ...);
 char* __cdecl d3_SpawnCityMarkerObject(char*);
 char* __cdecl RegisterStatusText(char*, char*, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_005338a0(void);
+void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void*, int);
 char* __cdecl d3_FindSceneObjectAtScreenPoint(float, float, int, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -42,7 +42,7 @@ void __cdecl d3_SelectTavernCardTableCity(void)
 		RegisterStatusText(items[i], g_868354[i], 0);
 	}
 	d2_SetOverlayAnimation(0, 0);
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	if (main_RunFrameLoop((void*) d3_SelectTavernCardTableCity, 0x677d7) != 0) {
 		do {
 			(*(char**)&g_7746a0) = 0;
@@ -68,7 +68,7 @@ void __cdecl d3_SelectTavernCardTableCity(void)
 			}
 		} while (main_RunFrameLoop((void*) d3_SelectTavernCardTableCity, 0x677d7) != 0);
 	}
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	for (i = 0; i < 3; i++) {
 		if (items[i] != 0) {
 			d3_DestroyObject((D3_OBJECT*) (items[i]));

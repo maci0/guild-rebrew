@@ -3,7 +3,7 @@ float __cdecl ahm_GetEssenceValue(char*, int);
 char* __cdecl ahm_FindRecipePrototypeByKey(int);
 
 /* ADDRESS: GOLDTL 0x004ee160 */
-int __cdecl fcn_004ee160(char* a0)
+int __cdecl ahm_CalcWorkshopOutputScore(char* a0)
 {
 	char* p;
 	char* e;

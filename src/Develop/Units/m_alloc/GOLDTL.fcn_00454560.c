@@ -4,7 +4,7 @@ extern char g_6b89a0[];
 void __cdecl m_pool_free(int* pool, void* p);
 
 /* ADDRESS: GOLDTL 0x00454560 */
-void __cdecl fcn_00454560(char** n)
+void __cdecl d3_FreeQuadtreeNode(char** n)
 {
 	char* p;
 	char* nx;
@@ -19,7 +19,7 @@ void __cdecl fcn_00454560(char** n)
 		}
 		for (i = 0; i < 4; i++) {
 			if (n[i] != 0) {
-				fcn_00454560((char**) n[i]);
+				d3_FreeQuadtreeNode((char**) n[i]);
 			}
 		}
 		m_pool_free(&(*(int*)g_6b89a0), n);

@@ -21,11 +21,11 @@ extern int g_14cbca0;
 
 int __cdecl he_StartHandlungSearch(int, ...);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
-void __cdecl fcn_00545780(int a);
+void __cdecl d2_CloseActionPopup(int a);
 void __cdecl he_FreeAction(int a);
 int __cdecl gm_CompareGameTime(void* sel, int* out);
 void __cdecl d2_CreateActionPopupSlot(int a, int b, int c, char* caption, int d);
-int __cdecl fcn_0051e070(void);
+int __cdecl main_GetLanguage(void);
 int __cdecl gm_AddTime(int* sel, int a, int b, int c);
 void __cdecl cm_SendSetHE(int a, int b);
 void __cdecl cm_RequestChangeBits(int a, int b, int c, int d, int e);
@@ -45,7 +45,7 @@ void __cdecl he_RunSchutzgeldDialog(int dlg, int a1, int a2)
 	if (*(int*) (dlg + 0x70) == -2 || *(int*) (dlg + 0x70) == -1
 	    || actor == 0 || msg == 0) {
 		if (*(int*) (dlg + 0x74) != 0)
-			fcn_00545780(dlg);
+			d2_CloseActionPopup(dlg);
 		he_FreeAction(dlg);
 	}
 	switch (*(int*) (dlg + 0x70)) {
@@ -61,7 +61,7 @@ void __cdecl he_RunSchutzgeldDialog(int dlg, int a1, int a2)
 
 		n = gm_CompareGameTime(&gm_GameTime, (int*) (dlg + 0x52));
 		if (n > 0) {
-			fcn_00545780(dlg);
+			d2_CloseActionPopup(dlg);
 			he_FreeAction(dlg);
 			return;
 		}
@@ -96,7 +96,7 @@ void __cdecl he_RunSchutzgeldDialog(int dlg, int a1, int a2)
 			*(int*) (actor + 0xb8) = 0;
 			cm_SendSetHE(3, actor);
 		}
-		fcn_00545780(dlg);
+		d2_CloseActionPopup(dlg);
 		he_FreeAction(dlg);
 		return;
 	}
@@ -107,7 +107,7 @@ open:
 		return;
 	}
 	d2_SetForm(*(int*) (*(int*) (dlg + 0x74) + 8), 0);
-	switch (fcn_0051e070()) {
+	switch (main_GetLanguage()) {
 	case 0:
 		io_AppendText((void*) 0x1a8c,
 		    (void*) (unsigned int) *(unsigned short*) (actor + 8),

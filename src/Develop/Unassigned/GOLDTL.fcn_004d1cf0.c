@@ -3,7 +3,7 @@
 void __cdecl d3_VisitSceneObjects(int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004d1cf0 */
-void __cdecl fcn_004d1cf0(void)
+void __cdecl d3_CollectCombatArenaMarkers(void)
 {
 	int handle;
 

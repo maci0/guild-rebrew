@@ -18,7 +18,7 @@ typedef struct
 int __cdecl d2_CheckOwnerBlocked(char*);
 void __cdecl d2_InitPlayerBar(char*, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-void __cdecl fcn_005bdc30(int, Query*, char*, void*, int);
+void __cdecl d2_RunCityScrollMapDialog(int, Query*, char*, void*, int);
 void __cdecl d2_OpenRaubzugDialog(int, char*);
 void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl sv_ClearObjectSelection(void);
@@ -42,7 +42,7 @@ void __cdecl d2_StartRaubzugTargetSelect(char* building)
 	q.x8 = 0xa07443a0;
 	q.xc = 1;
 	io_FormatTextBuffer(buf, 0x1a83);
-	fcn_005bdc30(1, &q, buf, (void*) d2_OpenRaubzugDialog, 0);
+	d2_RunCityScrollMapDialog(1, &q, buf, (void*) d2_OpenRaubzugDialog, 0);
 	d2_RestoreHudAfterDialog();
 	sv_ClearObjectSelection();
 }

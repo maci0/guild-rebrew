@@ -75,7 +75,7 @@ void __cdecl d3d_PrecacheTexture(void* t)
 }
 #endif
 
-void __cdecl fcn_00438780(void)
+void __cdecl d3d_EndScene(void)
 {
     int result;
     void* device;

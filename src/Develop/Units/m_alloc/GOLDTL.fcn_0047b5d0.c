@@ -3,20 +3,20 @@ typedef struct {
 	unsigned short count;
 	char pad6[0x12];
 	void** nodes;
-} fcn_0047b5d0_list;
+} D2_ANIM_TRACK_LIST;
 // SIZE 0x1c
 
-void __cdecl fcn_0047ac60(void*, fcn_0047b5d0_list*);
+void __cdecl d2_ReleaseSurfaceGroup(void*, D2_ANIM_TRACK_LIST*);
 void __cdecl m_FreeTracked(void*);
 
 
 /* ADDRESS: GOLDTL 0x0047b5d0 */
-void __cdecl fcn_0047b5d0(fcn_0047b5d0_list* l)
+void __cdecl d2_FreeAnimTrackList(D2_ANIM_TRACK_LIST* l)
 {
 	int i;
 
 	for (i = 0; i < l->count; i++)
-		fcn_0047ac60(l->nodes[i], l);
+		d2_ReleaseSurfaceGroup(l->nodes[i], l);
 	m_FreeTracked(l->nodes);
 	l->nodes = 0;
 	m_FreeTracked(l);

@@ -21,12 +21,12 @@ extern char* g_7746cc;
 char* __cdecl m_alloc(int, char*);
 void __cdecl m_FreeTracked(void*);
 unsigned int __cdecl vfs_fwrite(void*, int, int, void*);
-void __cdecl fcn_0041bb70(unsigned int, char*, char*, char*);
+void __cdecl gfx_UnpackPixelRgb(unsigned int, char*, char*, char*);
 int __cdecl gm_WalkEntityChain(unsigned short);
 int __cdecl gm_AmountToUnits(int, unsigned char);
 
 /* ADDRESS: GOLDTL 0x0051e490 */
-int __cdecl fcn_0051e490(void* outputStream, int a1)
+int __cdecl ls_WriteSaveHeader(void* outputStream, int a1)
 {
 	char hdr[0x10];
 	char name[0x20];
@@ -176,7 +176,7 @@ fail:
 		p = buf + i * 3 + 1;
 		j = 0xa0;
 		do {
-			fcn_0041bb70((unsigned int) ls_SavePreviewPixels[i], p - 1, p, p + 1);
+			gfx_UnpackPixelRgb((unsigned int) ls_SavePreviewPixels[i], p - 1, p, p + 1);
 			i = i + 1;
 			p = p + 3;
 			j = j - 1;

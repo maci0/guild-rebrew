@@ -8,7 +8,7 @@ extern char g_6aa450[];
 extern char g_6a9924[];
 extern char g_6aa34c[];
 
-void __cdecl fcn_005338a0(void);
+void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_OpenMeisterbriefDialog(int);
@@ -21,7 +21,7 @@ void __cdecl d2_RunGildeInfoHud(int a)
 	int y;
 	int z;
 
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	while (main_RunFrameLoop(d2_RunGildeInfoHud, 0x67fff) != 0) {
 		z = RegisterStatusText(g_6aa450, g_14a7c98, 0xc);
 		x = RegisterStatusText(g_6a9924, g_14a7d28, 0xc);

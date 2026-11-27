@@ -44,7 +44,7 @@ void __cdecl d3_SetRenderMaterialState(unsigned char a, unsigned char b, int c, 
 void __cdecl d3_SelectActiveObjectLights(float a, float b, char* c, void* d, void* e);
 
 /* ADDRESS: GOLDTL 0x004385e0 */
-unsigned char __cdecl fcn_004385e0(int a0)
+unsigned char __cdecl d3_RenderRootSceneObjects(int a0)
 {
 	Obj4385e0* v1;
 	Mesh4385e0* m;

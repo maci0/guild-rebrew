@@ -10,7 +10,7 @@ extern char g_6b89a4[];
 
 void* __cdecl m_PoolAlloc(void*, int, int);
 
-char __cdecl fcn_004545c0(char* e, char* ctx)
+char __cdecl d3_CollectActiveMeshObjects(char* e, char* ctx)
 {
 	char* d;
 	Link* n;

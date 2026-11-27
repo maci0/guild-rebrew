@@ -19,7 +19,7 @@ extern double g_664e60;
 void __cdecl gm_RebuildCrimeGrid(void);
 int __cdecl gm_PosToStatsGrid(char*, int*, int*);
 float __cdecl gm_GetLiteracyRate(void);
-float __cdecl fcn_004fc3a0(int*);
+float __cdecl gm_CalcWeightedLawFactor(int*);
 double __cdecl gm_CalcLaw00And01Factor(int*);
 
 /* ADDRESS: GOLDTL 0x004faed0 */
@@ -157,7 +157,7 @@ void __cdecl gm_CollectOccupancyStats(float* out)
 			rec += 0x18;
 		}
 	}
-	lit = fcn_004fc3a0(buf_a);
+	lit = gm_CalcWeightedLawFactor(buf_a);
 	w = gm_CalcLaw00And01Factor(buf_a);
 	out[2] = (float) ((g_6629c8 - ((double) lit * (double) g_6629c0
 	    + w * g_664e60)) * (double) accum);

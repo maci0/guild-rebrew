@@ -3,7 +3,7 @@
 void __cdecl d3_ReleaseTexture(int);
 void __cdecl m_FreeTracked(void*);
 
-void __cdecl fcn_004597f0(char* owner, char* n)
+void __cdecl d3_RemoveSkyLayer(char* owner, char* n)
 {
 	char* p;
 

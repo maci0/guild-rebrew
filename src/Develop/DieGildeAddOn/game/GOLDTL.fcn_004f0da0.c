@@ -29,7 +29,7 @@ extern Slot170_7731b8 g_7731b8[8];
 extern unsigned char* lpGebaeudePROT;
 
 
-void __cdecl fcn_004f0930(int id);
+void __cdecl cm_SendSlotReleaseById(int id);
 
 void __cdecl gm_PruneInvalidEntitySlots(void)
 {
@@ -40,7 +40,7 @@ void __cdecl gm_PruneInvalidEntitySlots(void)
 		if (((Slot170*)g_7731b8)[i].id != -1) {
 			gm_ResolveEntityById((void**) (&r), 0, 0, ((Slot170*)g_7731b8)[i].id);
 			if ((r == 0 && ((Slot170*)g_7731b8)[i].flags == 0) || (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*r].category != 0x1e && ((Slot170*)g_7731b8)[i].flags == 0)) {
-				fcn_004f0930(((Slot170*)g_7731b8)[i].id);
+				cm_SendSlotReleaseById(((Slot170*)g_7731b8)[i].id);
 			}
 		}
 	}

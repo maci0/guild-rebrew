@@ -7,14 +7,14 @@ extern int d2_CurrentWindowId;
 extern s_1015f4c g_1015f4c[];
 
 int __cdecl d2_LoadForm(int, int, char*);
-void __cdecl fcn_00471d80(int, int);
+void __cdecl d2_CenterForm(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 
 void __cdecl d2_OpenTutorialProgress(void)
 {
 	g_665f08[26] = d2_LoadForm(0, 0, g_6a8364);
-	fcn_00471d80(g_665f08[26], 3);
+	d2_CenterForm(g_665f08[26], 3);
 	d2_SetForm(g_665f08[26], 0);
 	g_665f08[27] = d2_AddWindowValueGauge(((int*)g_1015f4c)[d2_CurrentWindowId * 243] / 2 - 200, 5, 0x190, 0, 0x190, 0x75,
 	    0x42, d2_CurrentWindowId);

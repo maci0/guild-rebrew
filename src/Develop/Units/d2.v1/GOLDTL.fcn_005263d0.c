@@ -49,7 +49,7 @@ void __cdecl d2_BringFormToFront(int);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl d2_DestroyForm(int);
 
-int __cdecl fcn_005263d0(char *title, char *text, unsigned int flags)
+int __cdecl d2_ShowGreenMessageBox(char *title, char *text, unsigned int flags)
 {
 	int mode;
 	int h;
@@ -95,7 +95,7 @@ int __cdecl fcn_005263d0(char *title, char *text, unsigned int flags)
 	if (f80) {
 		id = d2_AddWindowValueGauge(0x1c, ((Screen*)g_77255c)->h - 0x18, ((Screen*)g_77255c)->w - 0x40, 0, 500, 0x83, 0x42, d2_CurrentWindowId);
 	}
-	while (main_RunFrameLoop(fcn_005263d0, mode) != 0) {
+	while (main_RunFrameLoop(d2_ShowGreenMessageBox, mode) != 0) {
 		d2_UpdateRadioGroup(list);
 		if (flags & 0x40) {
 			d2_BringFormToFront(h);

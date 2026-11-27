@@ -9,7 +9,7 @@ extern int g_7e242c;
 
 
 __declspec(dllimport) unsigned int __stdcall timeGetTime(void);
-int __cdecl fcn_004b3db0(int);
+int __cdecl gm_PickRandomMissionEntry(int);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
@@ -24,7 +24,7 @@ int __cdecl d2_RunChooseMissionWarning(void)
 	int h;
 
 	g_7e1f60 = timeGetTime();
-	r = fcn_004b3db0(g_6a3440);
+	r = gm_PickRandomMissionEntry(g_6a3440);
 	if (g_6a375c > 1) {
 		h = d2_LoadForm(0, 0, "Menu\\GET_MISSION_WARNING");
 		d2_CenterDialogWindows(h);

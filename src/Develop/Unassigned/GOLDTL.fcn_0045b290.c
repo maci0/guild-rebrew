@@ -10,7 +10,7 @@ typedef struct {
 
 void __cdecl d3_VisitSceneObjects(int, int, int, void*, void*);
 void __cdecl d3sm_AccumulateObjectBounds(void);
-void __cdecl fcn_0045a9d0(void);
+void __cdecl d3sm_DrawMeshTriangles(void);
 void __cdecl d3sm_BuildFromTerrain(int*, int*);
 void __cdecl d3_RelabelMatchingCells(int*, int, int);
 
@@ -177,7 +177,7 @@ void __cdecl d3sm_Rebuild(int* m, unsigned char* t)
 			rep stosb
 		}
 	}
-	d3_VisitSceneObjects(g_67a370, 0, 0x40, fcn_0045a9d0, m);
+	d3_VisitSceneObjects(g_67a370, 0, 0x40, d3sm_DrawMeshTriangles, m);
 	if (m[9]) {
 		d3_RelabelMatchingCells(m, 0xb, 0xc);
 		for (i = 0; i < m[8]; i++) {

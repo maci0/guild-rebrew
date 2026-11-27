@@ -15,7 +15,7 @@ extern char s_6a5b54[];
 int __cdecl gm_CompareGameTime(void*, void*);
 void __cdecl gm_AddTime(void*, int, int, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-float __cdecl fcn_005101e0(unsigned char*, int, int, int);
+float __cdecl gm_GetScaledWorkforceOutput(unsigned char*, int, int, int);
 int __cdecl gm_AccumulateTyped2(char*);
 int __cdecl gm_GetSeasonTreasury(char*, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -24,7 +24,7 @@ void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 void __cdecl he_FreeAction(void*);
 int __cdecl cm_GetCommandStatus(int);
 char* __cdecl cm_GetCommandResult(int);
-int __cdecl fcn_004c6090(unsigned char*, int, int, int);
+int __cdecl cm_RequestAssignWorker(unsigned char*, int, int, int);
 void __cdecl cm_RequestChrMoveToUniverse(int, int, int, char*);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 char* __cdecl gm_FindBuildingPrimarySlot(char*);
@@ -61,7 +61,7 @@ void __cdecl he_RunHireWorkerJob(char* ctx)
 			break;
 		}
 		ver = *(unsigned char*) rec;
-		ver = (int) fcn_005101e0((unsigned char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (rec + 0x27)]),
+		ver = (int) gm_GetScaledWorkforceOutput((unsigned char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (rec + 0x27)]),
 		    ver, -1, 1);
 		if (ver > gm_AccumulateTyped2((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (rec + 0x27)])) {
 			io_FormatTextBuffer(text, 0x1a40, rec);
@@ -73,7 +73,7 @@ void __cdecl he_RunHireWorkerJob(char* ctx)
 		}
 		for (i = 0; i < 0xc; i++) {
 			if (*(int*) (ctx + 0xb0 + i * 4) > 0) {
-				*(int*) (ctx + 0xe4) = fcn_004c6090((unsigned char*) rec,
+				*(int*) (ctx + 0xe4) = cm_RequestAssignWorker((unsigned char*) rec,
 				    0, *(unsigned char*) (ctx + 0xac), 0);
 				*(pos14_7f4c00*) (ctx + 0x52) = gm_GameTime;
 
@@ -131,7 +131,7 @@ void __cdecl he_RunHireWorkerJob(char* ctx)
 			if (obj == 0 || *(int*) (ctx + 0xb0 + i * 4) <= 0) {
 				continue;
 			}
-			ver = (int) fcn_005101e0((unsigned char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)
+			ver = (int) gm_GetScaledWorkforceOutput((unsigned char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)
 			    [*(unsigned short*) (rec + 0x27)]), *(unsigned char*) rec, -1, 1);
 			*(int*) (ctx + 0xb0 + i * 4) = *(int*) (ctx + 0xb0 + i * 4) - 1;
 			bank = *(unsigned short*) (ctx + 8);

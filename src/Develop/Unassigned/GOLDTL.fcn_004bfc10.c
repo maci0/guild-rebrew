@@ -2,7 +2,7 @@
 
 void __cdecl d2_UpdateRoutePointImage(void*);
 
-void __cdecl fcn_004bfc10(void)
+void __cdecl d2_UpdateAllRoutePointImages(void)
 {
 	int a;
 

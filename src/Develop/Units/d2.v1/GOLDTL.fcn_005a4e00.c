@@ -10,7 +10,7 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_DrawPanelFrame(int, int, int);
 int __cdecl d2_GetFormWindow(int, int);
-void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
+void __cdecl d2_CreateWindowScrollbar(int, int, int, int, int, int*, int*, int*);
 int __cdecl io_AppendText();
 int __cdecl d2_CreateButtonRow(int, int, int*, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -26,7 +26,7 @@ void __cdecl d2_DestroyForm(int);
 void __cdecl d3_EndCameraAndUiMode(void);
 
 /* ADDRESS: GOLDTL 0x005a4e00 */
-void __cdecl fcn_005a4e00(char* building)
+void __cdecl d2_RunKreditGeberDialog(char* building)
 {
 	int items[16][3];
 	int ids[16];
@@ -58,7 +58,7 @@ void __cdecl fcn_005a4e00(char* building)
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
 	d2_DrawPanelFrame(d2_CurrentWindowId, 0x73b, 0x73f);
-	fcn_00533f40(0x206, 0x167, d2_CurrentWindowId, d2_GetFormWindow(h, 2),
+	d2_CreateWindowScrollbar(0x206, 0x167, d2_CurrentWindowId, d2_GetFormWindow(h, 2),
 	    0x78, &v3, &v2, &v1);
 	*(int*) &((D2_WIN*) g_1015f40)[d2_CurrentWindowId].pad3a8[0x0] = 0xe;
 	*(int*) &((D2_WIN*) g_1015f40)[d2_CurrentWindowId].pad3a8[0x4] = 0x18;
@@ -69,7 +69,7 @@ void __cdecl fcn_005a4e00(char* building)
 	d2_SetForm(h, 3);
 	d2_CreateButtonRow(d2_CurrentWindowId, 0, tmp, 1, g_14ab694);
 	close_btn = tmp[0];
-	while (main_RunFrameLoop((void*) fcn_005a4e00, 0x677c7) != 0) {
+	while (main_RunFrameLoop((void*) d2_RunKreditGeberDialog, 0x677c7) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}

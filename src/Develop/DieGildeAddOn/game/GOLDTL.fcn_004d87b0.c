@@ -4,7 +4,7 @@ extern int g_772ea4;
 
 int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl io_FormatTextBuffer(void*, int, int);
-void __cdecl fcn_00533a40(void*);
+void __cdecl d2_ShowStatusBanner(void*);
 
 void __cdecl cut_CancelActorActions(void* request)
 {
@@ -12,5 +12,5 @@ void __cdecl cut_CancelActorActions(void* request)
 
 	g_772ea4 = gm_LookupEntityRecordById(*(int*) request);
 	io_FormatTextBuffer(buf, 0x11b7, *(unsigned short*) g_772ea4);
-	fcn_00533a40(buf);
+	d2_ShowStatusBanner(buf);
 }

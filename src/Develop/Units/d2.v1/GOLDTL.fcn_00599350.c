@@ -48,12 +48,12 @@ extern char* g_14a7898[];
 extern char g_6b5c60[];
 
 int __cdecl d2_TutorialAllowsFlag(int);
-void __cdecl fcn_0057e880(int, int, int, int);
+void __cdecl d2_DispatchTutorialInput(int, int, int, int);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl d2_GetFormWindow(int, int);
-void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
+void __cdecl d2_CreateWindowScrollbar(int, int, int, int, int, int*, int*, int*);
 void __cdecl io_AppendText(int, ...);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl gm_GetBuildingTypeCategory(int);
@@ -109,7 +109,7 @@ void __cdecl d2_ShowBuildingMenu(void)
 	if (!d2_TutorialAllowsFlag(0x40)) {
 		return;
 	}
-	fcn_0057e880(0xe, 0, 0, 0);
+	d2_DispatchTutorialInput(0xe, 0, 0, 0);
 	hwnd = d2_LoadForm(0, 0, (char*) 0x6aa298);
 	d2_CenterDialogWindows(hwnd);
 	d2_SetForm(hwnd, 0);
@@ -118,7 +118,7 @@ void __cdecl d2_ShowBuildingMenu(void)
 	*(int*) (i + 0x10162ec) = 0x18;
 	*(int*) (i + 0x10162f0) = 0x18;
 	*(int*) (i + 0x10162f4) = 0x18;
-	fcn_00533f40(0x20c, 0x168, d2_CurrentWindowId, d2_GetFormWindow(hwnd, 3), 0x5a, &ida, &idc, &idb);
+	d2_CreateWindowScrollbar(0x20c, 0x168, d2_CurrentWindowId, d2_GetFormWindow(hwnd, 3), 0x5a, &ida, &idc, &idb);
 	d2_SetForm(hwnd, 1);
 	io_AppendText(0x17eb);
 	d2_SetForm(hwnd, 2);
@@ -272,5 +272,5 @@ skip_place:
 		d2_DestroyForm(hwnd);
 	}
 	g_7746f8 = 0;
-	fcn_0057e880(0xe, 0, 1, 0);
+	d2_DispatchTutorialInput(0xe, 0, 1, 0);
 }

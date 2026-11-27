@@ -16,7 +16,7 @@ void __cdecl fcn_0045ce90(int h);
  * and cl,2 / xor), which is cl's one-bit bitfield assignment, not a whole-byte
  * xor; keep the bitfield in Tint. */
 /* ADDRESS: GOLDTL 0x0047ce00 */
-int __cdecl fcn_0047ce00(char* name, unsigned char flag)
+int __cdecl d3_LoadTextureWithDefaultTint(char* name, unsigned char flag)
 {
 	Tint tint;
 	int h;

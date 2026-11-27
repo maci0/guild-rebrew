@@ -27,9 +27,9 @@ typedef int (__stdcall* CHECKDSMATCHFN)(void*, unsigned int, unsigned int,
 typedef int (__stdcall* GETCAPSFN)(void*, unsigned int, unsigned int, void*);
 
 extern void* __stdcall Direct3DCreate8(unsigned int version);
-extern void __cdecl fcn_0041a2c0(int index);
+extern void __cdecl d3_RemoveDisplayAdapter(int index);
 extern void* __cdecl m_alloc(unsigned int size, const char* tag);
-extern int __cdecl fcn_0041a8d0(const void* a, const void* b);
+extern int __cdecl d3_CompareDisplayModes(const void* a, const void* b);
 
 #define D3D g_6b5ddc
 #define ADAPTERS ((char*)g_6b5dd0)
@@ -59,7 +59,7 @@ int __cdecl d3_EnumerateDisplayAdapters(unsigned int minWidth, unsigned int minH
 			goto done;
 	}
 	while (ADAPTERCOUNT > 0)
-		fcn_0041a2c0(0);
+		d3_RemoveDisplayAdapter(0);
 	ADAPTERCOUNT = (unsigned int) ((ADAPTERCOUNTFN) VTBL(0x10))((void*) D3D);
 	g_6b5dd0 = (DISPLAY_ADAPTER_INFO*)m_alloc(ADAPTERCOUNT * 0x508, "dd:AdapterInfo");
 	i = 0;
@@ -128,7 +128,7 @@ int __cdecl d3_EnumerateDisplayAdapters(unsigned int minWidth, unsigned int minH
 				}
 			}
 		}
-		qsort((void*) MODES, MODECOUNT, 0x10, fcn_0041a8d0);
+		qsort((void*) MODES, MODECOUNT, 0x10, d3_CompareDisplayModes);
 		i++;
 		offset += 0x508;
 	} while (i < ADAPTERCOUNT);
@@ -137,7 +137,7 @@ int __cdecl d3_EnumerateDisplayAdapters(unsigned int minWidth, unsigned int minH
 		if (!((!windowed
 			|| (*(unsigned int*) (ADAPTERS + offset + 0x438) & 0x80000))
 		    && *(unsigned int*) (ADAPTERS + offset + 0x500) != 0)) {
-			fcn_0041a2c0(i);
+			d3_RemoveDisplayAdapter(i);
 			i--;
 			offset -= 0x508;
 		}

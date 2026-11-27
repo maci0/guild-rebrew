@@ -9,7 +9,7 @@ extern unsigned char g_773d75;
 
 void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
-int* __cdecl fcn_004ac1e0(int);
+int* __cdecl gm_GetBardEventEntry(int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 #include "client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldValue(int, int, short, char*);
@@ -17,7 +17,7 @@ void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004ac320 */
-int __cdecl fcn_004ac320(unsigned short* e)
+int __cdecl gm_CalcBardPoemCost(unsigned short* e)
 {
 	short s;
 	int n;
@@ -31,7 +31,7 @@ int __cdecl fcn_004ac320(unsigned short* e)
 }
 
 /* ADDRESS: GOLDTL 0x004ac410 */
-void __cdecl fcn_004ac410(unsigned char* entity, int a2, int a3)
+void __cdecl gm_ApplyBardPoemEffect(unsigned char* entity, int a2, int a3)
 {
 	int* p;
 	char c;
@@ -40,7 +40,7 @@ void __cdecl fcn_004ac410(unsigned char* entity, int a2, int a3)
 
 	cm_RequestMoveCredits(-1, *(int*) (entity + 4), g_773d75, a2);
 	cm_RequestChangeBits(*(int*) (entity + 4), 0x1c8, 4, 0x20000, 0);
-	p = fcn_004ac1e0(a3);
+	p = gm_GetBardEventEntry(a3);
 	if (p == 0)
 		return;
 	if (p[0] == 0 && *(unsigned short*) (p + 1) <= 4) {

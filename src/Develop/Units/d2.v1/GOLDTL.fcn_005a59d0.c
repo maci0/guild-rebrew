@@ -42,7 +42,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetMouseTooltip(char*);
 int __cdecl io_AppendText(int, ...);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-int __cdecl fcn_00533a40(char*);
+int __cdecl d2_ShowStatusBanner(char*);
 int __cdecl d2_PopulateInventoryGrid(int, void*, int, int, int);
 int __cdecl d2_FindSelectedListRow(void*);
 int __cdecl d2_CountActiveListRows(void*);
@@ -234,7 +234,7 @@ int __cdecl d2_ShowMoneyExchangeDialog(char* a0)
 						while (!cm_GetCommandStatus(v5)) main_RunFrameLoop(0, 0x677c7);
 						d2_PopulateInventoryGrid(*(int*)(g_774970 * 0x21c + 0x7f4e18), globRows, dialogId, 4, 1);
 						d2_PopulateInventoryGrid(*(int*)(a0 + 0x5d), ownRows, dialogId, 5, 1);
-						fcn_00533a40(g_14ab718);
+						d2_ShowStatusBanner(g_14ab718);
 						d2_ClearSelectedControl();
 						for (v15 = 0; v15 < 0x1c0; v15 += 0x1c) {
 							if (*(int*)((char*)ownRows + v15) != -1) d2_SetElementValue(*(int*)((char*)ownRows + v15), 0, 0, 0);
@@ -271,7 +271,7 @@ int __cdecl d2_ShowMoneyExchangeDialog(char* a0)
 						while (!cm_GetCommandStatus(v5)) main_RunFrameLoop(0, 0x677c7);
 						d2_PopulateInventoryGrid(*(int*)(g_774970 * 0x21c + 0x7f4e18), globRows, dialogId, 4, 1);
 						d2_PopulateInventoryGrid(*(int*)(a0 + 0x5d), ownRows, dialogId, 5, 1);
-						fcn_00533a40(g_14ab718);
+						d2_ShowStatusBanner(g_14ab718);
 						d2_ClearSelectedControl();
 						for (v15 = 0; v15 < 0x1c0; v15 += 0x1c) {
 							if (*(int*)((char*)ownRows + v15) != -1) d2_SetElementValue(*(int*)((char*)ownRows + v15), 0, 0, 0);
@@ -279,9 +279,9 @@ int __cdecl d2_ShowMoneyExchangeDialog(char* a0)
 						}
 					} else {
 						io_FormatTextBuffer(buf, 0x18fd, v2 * 2 + 0x9a8);
-						fcn_00533a40(buf);
+						d2_ShowStatusBanner(buf);
 					}
-				} else fcn_00533a40(g_14ab710);
+				} else d2_ShowStatusBanner(g_14ab710);
 			}
 		}
 	} while (main_RunFrameLoop(d2_ShowMoneyExchangeDialog, 0x677c7));

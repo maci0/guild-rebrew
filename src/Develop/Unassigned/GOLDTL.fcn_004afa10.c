@@ -7,7 +7,7 @@ extern char g_7f4ca4[];
 void* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl hst_SplitFormatPrefix(char*, char*, char**, int*);
 int __cdecl atoi(char*);
-int __cdecl fcn_004ae0f0(int);
+int __cdecl hst_IsCandidateUnlisted(int);
 int __cdecl gm_IsSlotActiveBuilding(int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 
@@ -75,7 +75,7 @@ int __cdecl hst_HandleRndNpcEinwohner(int selectionMode, int pairs, int idx, cha
 		i = 0;
 		slotCursor = g_7f4ca4;
 		while ((int) slotCursor < (int) (g_7f4ca4 + 0x65400)) {
-			if (fcn_004ae0f0(*(int*) slotCursor) != 0) {
+			if (hst_IsCandidateUnlisted(*(int*) slotCursor) != 0) {
 				entityRecord = slotCursor - 4;
 				if (flag == 0 || *(unsigned char*) (slotCursor + 5) == wantGender) {
 					if (gm_IsSlotActiveBuilding(i) != 0) {

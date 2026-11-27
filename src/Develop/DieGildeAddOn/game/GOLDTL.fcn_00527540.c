@@ -4,15 +4,15 @@ extern char* lpGebaeudePROT;
 extern char* lpObjektePROT;
 extern int g_1040494;
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
-void __cdecl fcn_00475f80(int);
+void __cdecl d2_ReleaseSurface(int);
 void __cdecl d2_LockSurface(int);
 void __cdecl d2_UnlockSurface(int);
-int __cdecl fcn_00475c10(char*);
+int __cdecl d2_LoadBmp24Surface(char*);
 char* __cdecl fcn_00475000(char*);
 int __cdecl gm_GetBuildingTypeCategory(int);
 int __cdecl fcn_00502cd0(int, int, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);
-int __cdecl fcn_00475c10(char*);
+int __cdecl d2_LoadBmp24Surface(char*);
 int __cdecl d2_CompareRgb(void*, void*);
 void __cdecl d2_ReadSurfacePixel(int, int, int, void*);
 int __cdecl gm_GetWareIconId(void*);
@@ -61,18 +61,18 @@ void __cdecl d2_LoadBuildingGroundplan(void)
 	v8 = *(int*) 0x7746c4 ? (unsigned char*) *(int*) 0x7746c4 : (unsigned char*) *(int*) 0x7746c8;
 	v20 = v8;
 	if (*(int*) 0x774680) {
-		fcn_00475f80(*(int*) 0x774680);
+		d2_ReleaseSurface(*(int*) 0x774680);
 		*(int*) 0x774680 = 0;
 	}
 	if (*(int*) 0x774684) {
-		fcn_00475f80(*(int*) 0x774684);
+		d2_ReleaseSurface(*(int*) 0x774684);
 		*(int*) 0x774684 = 0;
 	}
 	q = (char*) (((char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned int) *v8]));
 	p = q + 1;
 	r = q;
 	sprintf(buf, "%sbmp\\groundplans\\riss_%s.bmp", prefix, p);
-	*(int*) 0x774680 = fcn_00475c10(buf);
+	*(int*) 0x774680 = d2_LoadBmp24Surface(buf);
 	if (*(int*) 0x774680)
 		goto have_image;
 	v3 = gm_GetBuildingTypeCategory(*v8);
@@ -85,7 +85,7 @@ void __cdecl d2_LoadBuildingGroundplan(void)
 			sprintf(buf, "%sbmp\\groundplans\\riss_tinkturei.bmp", prefix);
 		else {
 			sprintf(buf, "%sbmp\\groundplans\\riss_%s.bmp", prefix, p);
-			*(int*) 0x774680 = fcn_00475c10(buf);
+			*(int*) 0x774680 = d2_LoadBmp24Surface(buf);
 			if (*(int*) 0x774680)
 				goto have_image;
 			sprintf(buf, "%sbmp\\groundplans\\riss_handwerksbetrieb.bmp", prefix);
@@ -110,7 +110,7 @@ void __cdecl d2_LoadBuildingGroundplan(void)
 			sprintf(buf, "%sbmp\\groundplans\\riss_stadtwache.bmp", prefix);
 		else {
 			sprintf(buf, "%sbmp\\groundplans\\riss_%s.bmp", prefix, p);
-			v3 = fcn_00475c10(buf);
+			v3 = d2_LoadBmp24Surface(buf);
 			*(int*) 0x774680 = v3;
 			if (v3)
 				goto have_image;
@@ -120,21 +120,21 @@ void __cdecl d2_LoadBuildingGroundplan(void)
 have_image:
 	v3 = *(int*) 0x774680;
 	if (!v3) {
-		v3 = fcn_00475c10(buf);
+		v3 = d2_LoadBmp24Surface(buf);
 		*(int*) 0x774680 = v3;
 		if (!v3)
 			return;
 	}
 	d2_LockSurface(v3);
-	*(int*) 0x774684 = fcn_00475c10(buf);
+	*(int*) 0x774684 = d2_LoadBmp24Surface(buf);
 	if (*(int*) 0x774680) {
-		fcn_00475f80(*(int*) 0x774680);
+		d2_ReleaseSurface(*(int*) 0x774680);
 		*(int*) 0x774680 = 0;
 	}
 	q = strrchr(buf, '.');
 	*q = 0;
 	strcat(buf, "_C.bmp");
-	*(int*) 0x774680 = fcn_00475c10(buf);
+	*(int*) 0x774680 = d2_LoadBmp24Surface(buf);
 	v22 = 0;
 	d2_LockSurface(*(int*) 0x774680);
 	v12 = *(int*) 0x774680;

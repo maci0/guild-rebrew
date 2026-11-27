@@ -18,7 +18,7 @@ typedef struct Query {
 extern char* g_77261c;
 extern unsigned int g_7728bc;
 
-int __cdecl fcn_005cf720(unsigned short, unsigned short, Query*, int);
+int __cdecl gm_MatchesTargetFilter(unsigned short, unsigned short, Query*, int);
 ENTITY_CANDIDATE* __cdecl gm_StepEntityCandidateRing(void);
 
 /* ADDRESS: GOLDTL 0x004a5340 */
@@ -44,7 +44,7 @@ int __cdecl ai_SelectRankedCandidates(unsigned short* e, unsigned int n, unsigne
 	if (g_77261c != 0 && !(q.flags & 0x10000000)) {
 		q.x40 = 0;
 		q.flags = *ids;
-		if (fcn_005cf720(*e, *((unsigned short*) g_77261c), &q, 0) != 0) {
+		if (gm_MatchesTargetFilter(*e, *((unsigned short*) g_77261c), &q, 0) != 0) {
 			*out = *((unsigned short*) g_77261c);
 			k = 1;
 		}
@@ -64,7 +64,7 @@ int __cdecl ai_SelectRankedCandidates(unsigned short* e, unsigned int n, unsigne
 				return 0;
 			}
 			if (!(t->score < lo) && !(t->score > hi)
-			    && fcn_005cf720(*e, *(unsigned short*)t->entity, &q, 0) != 0) {
+			    && gm_MatchesTargetFilter(*e, *(unsigned short*)t->entity, &q, 0) != 0) {
 				out[k] = *(unsigned short*)t->entity;
 				found = 1;
 			}

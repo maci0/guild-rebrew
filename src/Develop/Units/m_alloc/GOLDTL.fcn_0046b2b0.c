@@ -8,7 +8,7 @@ extern UI_FIELD* tp_d2_SelectedControl;
 extern UI_FIELD g_102d140[];
 
 void __cdecl m_FreeTracked(void* p);
-void __cdecl fcn_00475f80(void* surf);
+void __cdecl d2_ReleaseSurface(void* surf);
 void __cdecl d2_ClearAnimationSlot(int h);
 int __cdecl d2_DestroyWindow(int win);
 void __cdecl d2_SubRefcount(int i);
@@ -64,7 +64,7 @@ void __cdecl d2_DestroyElement(int id)
 		break;
 	case 0x47:
 		if ((*(D2_CONTROL_TL*) e).payload.fields.value_08c != 0) {
-			fcn_00475f80((void*) (*(D2_CONTROL_TL*) e).payload.fields.value_08c);
+			d2_ReleaseSurface((void*) (*(D2_CONTROL_TL*) e).payload.fields.value_08c);
 		}
 		break;
 	default:

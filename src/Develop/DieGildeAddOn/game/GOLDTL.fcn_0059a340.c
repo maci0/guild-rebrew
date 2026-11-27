@@ -44,7 +44,7 @@ void __cdecl d2_ChooseWappen(void);
 void* __cdecl gm_StartFilteredEntitySearch(int, int, ...);
 void* __cdecl gm_FindNextFilteredEntity(void);
 void __cdecl d3_SnapCameraToEntity(int a0);
-void __cdecl fcn_004c39b0(void);
+void __cdecl snd_PlayMarketAmbient(void);
 void __cdecl tb_SetCallbackPaused(int a1, int a2);
 int __cdecl main_RunFrameLoop(int a1, int a2);
 void __cdecl lc_PlayerInJail(void);
@@ -62,11 +62,11 @@ void __cdecl d2_EnterGebaeudeInterior(int a0);
 int __cdecl gm_IsWarehouse(void* a0);
 void __cdecl gm_RunGebaeudeVisit(int a, int b);
 void __cdecl d2_HandleMarketSquareObjects(int a0);
-void __cdecl fcn_004c3a10(void);
+void __cdecl snd_StopMarketAmbient(void);
 void __cdecl d2_SetMouseTooltip(char* a);
-void __cdecl fcn_00533a40(char* a);
+void __cdecl d2_ShowStatusBanner(char* a);
 void __cdecl sv_ResetSelectionState(void);
-void __cdecl fcn_004125c0(int x, int y);
+void __cdecl io_SetMouseCursorPos(int x, int y);
 
 /* ADDRESS: GOLDTL 0x0059a340 */
 void __cdecl d2_RunWorldHudLoop(void)
@@ -126,7 +126,7 @@ void __cdecl d2_RunWorldHudLoop(void)
 			v8 = (int) gm_FindNextFilteredEntity();
 		}
 	}
-	fcn_004c39b0();
+	snd_PlayMarketAmbient();
 	state = 0;
 	tb_SetCallbackPaused(0x538060, 0);
 	v9 = main_RunFrameLoop(0x59a340, 0x67fff);
@@ -242,14 +242,14 @@ label_59a83a:
 	}
 	g_772d10 = 0;
 	g_774964 = 0;
-	fcn_004c3a10();
+	snd_StopMarketAmbient();
 	d2_SetMouseTooltip(g_6b5c60);
-	fcn_00533a40(g_6b5c60);
+	d2_ShowStatusBanner(g_6b5c60);
 	sv_ResetSelectionState();
 	g_7725c4 = 0;
 	d2_SuppressOverlay = 0;
 	g_6772c4 = 1;
-	fcn_004125c0(d2_MouseX, d2_MouseY);
+	io_SetMouseCursorPos(d2_MouseX, d2_MouseY);
 	d2_MouseRightBoundary = savedRight;
 	d2_MouseBottomBoundary = savedBottom;
 	g_6b5c80 = v5;

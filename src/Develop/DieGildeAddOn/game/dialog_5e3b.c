@@ -3,12 +3,12 @@ extern int d2_ScreenHeight;
 extern int g_1040494;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-unsigned char* __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
+unsigned char* __cdecl d2_StartScreenFade(int, int, int, int, char*, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00533cf0(int);
+void __cdecl d2_MarkDialogFormControls(int);
 void __cdecl d2_ClearScreen(void);
 void __cdecl d2_SetBackdropResource(int);
-void __cdecl fcn_00473150(unsigned char*);
+void __cdecl d2_ReleaseOverlaySprite(unsigned char*);
 void __cdecl d2_UpdateHudVisibility(int);
 #include <string.h>
 
@@ -23,7 +23,7 @@ extern int g_14ac608;
 extern char g_773de8;
 extern char g_6b5c60[];
 
-void __cdecl fcn_00533a40(char*);
+void __cdecl d2_ShowStatusBanner(char*);
 int __cdecl ls_CanSaveGame(void);
 int __cdecl cm_RequestSysMessage(int, void*);
 int __cdecl cm_GetCommandStatus(int);
@@ -39,7 +39,7 @@ void __cdecl d2_EnterMenuScreen(void)
 	unsigned char* p;
 
 	flags = (main_LoopFlags & ~0x2000) | 0x100000;
-	p = fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, g_67d67c, 0x1e, 1);
+	p = d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, g_67d67c, 0x1e, 1);
 	while (!(*p & 4)) {
 		main_RunFrameLoop(0, flags);
 	}
@@ -48,12 +48,12 @@ void __cdecl d2_EnterMenuScreen(void)
 	g_1040484 = 0;
 	g_104048c = d2_ScreenHeight;
 	main_LoopFlags = 0x24087;
-	fcn_00533cf0(1);
+	d2_MarkDialogFormControls(1);
 	d2_ClearScreen();
 	d2_SetBackdropResource(0x794);
-	fcn_00473150(p);
+	d2_ReleaseOverlaySprite(p);
 	d2_UpdateHudVisibility(0);
-	fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, g_67d67c, 0x32, 0xa);
+	d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, g_67d67c, 0x32, 0xa);
 }
 
 /* ADDRESS: GOLD 0x005d7580 */
@@ -65,11 +65,11 @@ void __cdecl ls_QuickSave(void)
 
 	if (g_7747b0 & 4) {
 		if (!(g_7747b0 & 0x10)) {
-			fcn_00533a40((char*) g_14ac608);
+			d2_ShowStatusBanner((char*) g_14ac608);
 			return;
 		}
 		if (ls_CanSaveGame() == 0) {
-			fcn_00533a40((char*) (*(int*)&g_14ac604));
+			d2_ShowStatusBanner((char*) (*(int*)&g_14ac604));
 			return;
 		}
 		memset(&s, 0, sizeof(s));
@@ -80,11 +80,11 @@ void __cdecl ls_QuickSave(void)
 			cm_StepCommandQueue();
 		}
 	} else if (!(g_7747b0 & 0x80)) {
-		fcn_00533a40("Quicksave");
+		d2_ShowStatusBanner("Quicksave");
 		main_RunFrameLoop(0, 0x657c7);
 		ls_CaptureSavePreview();
 		g_773de8 = 1;
 		ls_SaveGame("Gamedata\\Saves\\Quicksave.SAV", "Quicksave", 1);
-		fcn_00533a40(g_6b5c60);
+		d2_ShowStatusBanner(g_6b5c60);
 	}
 }

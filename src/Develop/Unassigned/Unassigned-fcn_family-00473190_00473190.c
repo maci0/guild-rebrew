@@ -16,11 +16,11 @@ struct Fade {
 };
 
 void __cdecl d2_DrawTexturedQuad(int, int, int, int, int, float);
-void __cdecl fcn_00473150(Fade*);
-void __cdecl fcn_00473190(int, int);
+void __cdecl d2_ReleaseOverlaySprite(Fade*);
+void __cdecl d2_UpdateScreenFade(int, int);
 
 /* ADDRESS: GOLDTL 0x00473190 */
-void __cdecl fcn_00473190(Fade* t)
+void __cdecl d2_UpdateScreenFade(Fade* t)
 {
 	float elapsed;
 	float v;
@@ -43,7 +43,7 @@ void __cdecl fcn_00473190(Fade* t)
 		d2_DrawTexturedQuad(t->x44, t->x48, t->x4c, t->x50, t->link->x50, v);
 	}
 	if ((t->flags & 4) && (t->flags & 8)) {
-		fcn_00473150(t);
+		d2_ReleaseOverlaySprite(t);
 		return;
 	}
 	if (((t->flags & 1) && v == 1.0f) || ((t->flags & 2) && v == 0.0f)) {
@@ -53,7 +53,7 @@ void __cdecl fcn_00473190(Fade* t)
 }
 
 /* ADDRESS: GOLDTL 0x004732c0 */
-void __cdecl fcn_004732c0(void)
+void __cdecl d2_UpdateAllScreenFades(void)
 {
 	int a;
 	int v;
@@ -61,7 +61,7 @@ void __cdecl fcn_004732c0(void)
 	for (a = 0x1015ec0; a < 0x1015f40; a += 4) {
 		v = *(int*) a;
 		if (v != 0) {
-			fcn_00473190(v, *(int*) &g_77250c);
+			d2_UpdateScreenFade(v, *(int*) &g_77250c);
 		}
 	}
 }

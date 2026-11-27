@@ -1,10 +1,10 @@
 
 
-void __cdecl fcn_004fb4e0(void*);
+void __cdecl gm_UpdateCityEconomyStats(void*);
 
 int __cdecl cm_ExUpdateCityEconomy(char* p, char* out)
 {
-	fcn_004fb4e0(p + 0x10);
+	gm_UpdateCityEconomyStats(p + 0x10);
 	if (out != 0) {
 		out[0] = 1;
 		out[1] = 0;

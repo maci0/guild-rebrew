@@ -21,7 +21,7 @@ void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 int __cdecl sb_FindBankByName(char*);
 void __cdecl d3snd_QueueSound(int, int, char*, int, int);
-void __cdecl fcn_00545780(int);
+void __cdecl d2_CloseActionPopup(int);
 
 /* ADDRESS: GOLDTL 0x00565350 */
 void __cdecl he_RunMeisterpruefungPassed(int action)
@@ -125,7 +125,7 @@ void __cdecl he_RunMeisterpruefungPassed(int action)
 		break;
 	case 0xfffffffe:
 	case 0xffffffff:
-		fcn_00545780(action);
+		d2_CloseActionPopup(action);
 		he_FreeAction((char*) action);
 		return;
 	default:
@@ -149,12 +149,12 @@ void __cdecl he_RunMeisterpruefungPassed(int action)
 			return;
 	} else {
 		if (g_100f1dc == 2) {
-			fcn_00545780(action);
+			d2_CloseActionPopup(action);
 			he_FreeAction((char*) action);
 			return;
 		}
 		if (g_100f1dc == 1) {
-			fcn_00545780(action);
+			d2_CloseActionPopup(action);
 			he_FreeAction((char*) action);
 			g_7749e8 = 0;
 			return;
@@ -162,7 +162,7 @@ void __cdecl he_RunMeisterpruefungPassed(int action)
 	}
 	if (!g_7749e8)
 		return;
-	fcn_00545780(action);
+	d2_CloseActionPopup(action);
 	he_FreeAction((char*) action);
 	g_7749e8 = 0;
 }

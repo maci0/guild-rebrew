@@ -19,7 +19,7 @@ void __cdecl d3_SetObjectVisible(char* object, int flag);
 void __cdecl d3_NormalizeVector(float* vector);
 void __cdecl d3_AnimateObjectTransform(char* camera, float* position, char* view, int limit, int mode);
 int __cdecl main_RunFrameLoop(int a, int b);
-void __cdecl fcn_0058f700(int flag);
+void __cdecl d2_RunDefaultBuildingInterior(int flag);
 void __cdecl d3_AnimateCameraToStoredTransform(void);
 
 struct CAMERA_SAVE {
@@ -30,7 +30,7 @@ struct CAMERA_SAVE {
 };
 
 /* ADDRESS: GOLDTL 0x005a8c30 */
-void __cdecl fcn_005a8c30(char* object)
+void __cdecl d3_FocusObjectAndRunInterior(char* object)
 {
 	struct CAMERA_SAVE v;
 	char* camera;
@@ -71,7 +71,7 @@ void __cdecl fcn_005a8c30(char* object)
 	d3_CameraTargetRotation = *(float*) (camera + 0x84);
 	g_7e3a54 = *(float*) (camera + 0x88);
 	g_7e3a58 = *(float*) (camera + 0x8c);
-	fcn_0058f700(0);
+	d2_RunDefaultBuildingInterior(0);
 	g_7e3a40 = v.saveA[0];
 	g_7e3a44 = v.saveA[1];
 	g_7e3a48 = v.saveA[2];

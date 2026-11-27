@@ -25,12 +25,12 @@ void __cdecl cm_SendSetGebBesitzer(int, int, int);
 void __cdecl cm_SendCopyEntityData(void*);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
-void __cdecl fcn_004c6090(char*, int, int, int);
+void __cdecl cm_RequestAssignWorker(char*, int, int, int);
 void __cdecl gv_UpdateGraveyardPlots(char*);
 void __cdecl gm_AdjustGebaeudeCondition(char*, int);
 unsigned char* __cdecl gm_FindBuildingOwner(unsigned char*);
 unsigned char* __cdecl ahm_GetWorkshopOwner(unsigned char*);
-int __cdecl fcn_004ee160(char*);
+int __cdecl ahm_CalcWorkshopOutputScore(char*);
 int __cdecl gm_AccumulateTyped2(char*);
 int __cdecl gm_SearchTable67(int);
 int __cdecl fcn_0050c4e0(unsigned char*);
@@ -120,7 +120,7 @@ void __cdecl gm_UpdateOwnerBuildings(unsigned int arg)
 						obj = gm_FindBuildingOwner(rec);
 						if (obj == 0) {
 							count++;
-							fcn_004c6090((char*) rec, 1, 0, *(unsigned char*) (def + 0x223));
+							cm_RequestAssignWorker((char*) rec, 1, 0, *(unsigned char*) (def + 0x223));
 						}
 						else if ((*(unsigned char*) (obj + 0x1b4) & 1) == 0) {
 							buf4[0] = *(int*) (obj + 0x1b4) | 1;
@@ -231,7 +231,7 @@ void __cdecl gm_UpdateOwnerBuildings(unsigned int arg)
 			if (*(((unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*p])) == 0x1e) {
 				r = (unsigned char*) ahm_GetWorkshopOwner(p);
 				if (r != 0) {
-					v = fcn_004ee160((char*) p);
+					v = ahm_CalcWorkshopOutputScore((char*) p);
 					cm_RequestTransferCurrencyNoKill(*(int*) (r + 4), *(int*) (tile + 4), g_773d75, v);
 					count++;
 				}

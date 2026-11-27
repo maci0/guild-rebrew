@@ -36,9 +36,9 @@ typedef struct Desc {
 } Desc;
 // SIZE 0x5c
 
-char* __cdecl fcn_004770a0(Desc* d, int kind);
-int __cdecl fcn_00476120(int x, int y, int w, int h, void* a, int sx, int sy, void* b);
-void __cdecl fcn_00475f80(char* img);
+char* __cdecl d2_CreateSurface(Desc* d, int kind);
+int __cdecl d2_BlitSurfaceCore(int x, int y, int w, int h, void* a, int sx, int sy, void* b);
+void __cdecl d2_ReleaseSurface(char* img);
 void __cdecl d2_LockSurface(Target* t);
 void __cdecl d2_UnlockSurface(Target* t);
 
@@ -89,11 +89,11 @@ int __cdecl d2_BlitSurfaceToTexture(int x, int y, int w, int h, Target* t, int s
 		memset(&d, 0, sizeof(d));
 		d.one = 1;
 		d.src = src;
-		img = fcn_004770a0(&d, 4);
-		if (fcn_00476120(x, y, w, h, t, sx, sy, img) == 0) {
+		img = d2_CreateSurface(&d, 4);
+		if (d2_BlitSurfaceCore(x, y, w, h, t, sx, sy, img) == 0) {
 			return 0;
 		}
-		fcn_00475f80(img);
+		d2_ReleaseSurface(img);
 	}
 	if (locked != 0) {
 		d2_LockSurface(t);

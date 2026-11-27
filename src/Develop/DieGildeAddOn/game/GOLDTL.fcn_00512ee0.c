@@ -82,9 +82,9 @@ int __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl cm_SendCopyEntityData(Msg *);
 int __cdecl cm_SendSetGebBesitzer(int, int, int);
 void __cdecl cm_RequestSetWohnsitz(int, int);
-int __cdecl fcn_004c6090(unsigned char *, int, int, int);
+int __cdecl cm_RequestAssignWorker(unsigned char *, int, int, int);
 int __cdecl cm_RequestCreateGeb(int, int, char *, float *);
-void __cdecl fcn_004fb390(void);
+void __cdecl gm_UpdateEconomyStats(void);
 int __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_StartFilteredEntitySearch(int, ...);
 int __cdecl gm_FindNearestEligibleEntity(unsigned char *, int);
@@ -268,9 +268,9 @@ void __cdecl gm_InitStartingEntitiesAndRelations(void)
 		o = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char *)e];
 		cm_SendSetGebBesitzer(*(int *)(e + 1), *(int *)(gm_CityEntity + 4),
 				*(int *)(gm_CityEntity + 4));
-		fcn_004c6090((unsigned char *)e, 1, o->role_230, o->worker_kind[0]);
-		fcn_004c6090((unsigned char *)e, 0, o->role_22f, 0);
-		fcn_004c6090((unsigned char *)e, 0, o->role_22f, 0);
+		cm_RequestAssignWorker((unsigned char *)e, 1, o->role_230, o->worker_kind[0]);
+		cm_RequestAssignWorker((unsigned char *)e, 0, o->role_22f, 0);
+		cm_RequestAssignWorker((unsigned char *)e, 0, o->role_22f, 0);
 		cm_SendSellObjekt(*(int *)(e + 1), -1, 0x135, 1, g_773d75, 0);
 		counts[k]++;
 	}
@@ -279,14 +279,14 @@ void __cdecl gm_InitStartingEntitiesAndRelations(void)
 	e = (char *)gm_StartFilteredEntitySearch(2, 4, 0xffff, 5, 0x10);
 	if (e) {
 		o = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char *)e];
-		h = fcn_004c6090((unsigned char *)e, 2, o->role_230, 0x2d);
+		h = cm_RequestAssignWorker((unsigned char *)e, 2, o->role_230, 0x2d);
 		while (cm_GetCommandStatus(h) == 0) {
 			cm_StepCommandQueue();
 		}
 		h = *(int *)(cm_GetCommandResult(h) + 4);
 		cm_SendSetGebBesitzer(*(int *)(e + 1), h, h);
-		fcn_004c6090((unsigned char *)e, 0, o->role_22f, 0);
-		fcn_004c6090((unsigned char *)e, 0, o->role_230, 0);
+		cm_RequestAssignWorker((unsigned char *)e, 0, o->role_22f, 0);
+		cm_RequestAssignWorker((unsigned char *)e, 0, o->role_230, 0);
 		cm_SendSellObjekt(*(int *)(e + 1), -1, 0x135, 1, g_773d75, 0);
 		counts[0x10]++;
 	}
@@ -309,7 +309,7 @@ void __cdecl gm_InitStartingEntitiesAndRelations(void)
 					break;
 				}
 			}
-			h = fcn_004c6090((unsigned char *)p, 2, o->role_230, slot);
+			h = cm_RequestAssignWorker((unsigned char *)p, 2, o->role_230, slot);
 			while (cm_GetCommandStatus(h) == 0) {
 				cm_StepCommandQueue();
 			}
@@ -324,10 +324,10 @@ void __cdecl gm_InitStartingEntitiesAndRelations(void)
 			kind = o->category;
 			if (kind != 9 && kind != 5) {
 				if (kind != 4 && kind != 0x10 && kind != 0x13) {
-					fcn_004c6090((unsigned char *)p, 0, o->role_22f, 0);
+					cm_RequestAssignWorker((unsigned char *)p, 0, o->role_22f, 0);
 				} else {
-					fcn_004c6090((unsigned char *)p, 0, o->role_22f, 0);
-					fcn_004c6090((unsigned char *)p, 0, o->role_230, 0);
+					cm_RequestAssignWorker((unsigned char *)p, 0, o->role_22f, 0);
+					cm_RequestAssignWorker((unsigned char *)p, 0, o->role_230, 0);
 				}
 			}
 			cm_SendSellObjekt(p->id, -1, 0x135, 1, g_773d75, 0);
@@ -401,13 +401,13 @@ handles_done:
 					if (g_6a3424) {
 						if (kind != 9 && kind != 5) {
 							if (kind != 4 && kind != 0x10 && kind != 0x13) {
-								fcn_004c6090((unsigned char *)p, 0, o->role_22f, 0);
+								cm_RequestAssignWorker((unsigned char *)p, 0, o->role_22f, 0);
 							} else {
-								fcn_004c6090((unsigned char *)p, 0, o->role_22f, 0);
-								fcn_004c6090((unsigned char *)p, 0, o->role_230, 0);
+								cm_RequestAssignWorker((unsigned char *)p, 0, o->role_22f, 0);
+								cm_RequestAssignWorker((unsigned char *)p, 0, o->role_230, 0);
 							}
 						}
-						fcn_004c6090((unsigned char *)p, 1, o->role_230, o->worker_kind[0]);
+						cm_RequestAssignWorker((unsigned char *)p, 1, o->role_230, o->worker_kind[0]);
 						cm_SendSellObjekt(p->id, -1, 0x135, 1, g_773d75, 0);
 						init_Betrieb((unsigned char *)p);
 					}
@@ -426,7 +426,7 @@ handles_done:
 		cm_ExecCommand();
 	}
 	amt_InitOfficeHolders(0);
-	fcn_004fb390();
+	gm_UpdateEconomyStats();
 	e = (char *)gm_StartFilteredEntitySearch(1, 6);
 	while (e) {
 		if (*(short *)(e + 0x25) == -1 && *e != 'E' && *e != 'D' && *e != 'F') {

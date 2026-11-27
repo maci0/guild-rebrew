@@ -11,7 +11,7 @@ extern float g_665e40;
 extern char g_6a33b4[];
 
 int __cdecl d2_TutorialAllowsFlag(int);
-void __cdecl fcn_0057e880(int, int, int, int);
+void __cdecl d2_DispatchTutorialInput(int, int, int, int);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl io_AppendText(int);
@@ -28,7 +28,7 @@ void __cdecl main_RunAdvanceGameDialog(void)
 	saved = g_7766a8;
 	flags = main_LoopFlags;
 	if (d2_TutorialAllowsFlag(8) != 0) {
-		fcn_0057e880(0xb, 0, 0, 0);
+		d2_DispatchTutorialInput(0xb, 0, 0, 0);
 		flags = (flags & 0xffffc3e7) | 0xc0;
 		g_774660 = 1;
 		g_7766a8 = 0x2ee;
@@ -45,6 +45,6 @@ void __cdecl main_RunAdvanceGameDialog(void)
 		g_774660 = 0;
 		g_675308 = (float) (saved * g_665e40 + 0.25);
 		d2_DestroyForm(h);
-		fcn_0057e880(0xb, 0, 1, 0);
+		d2_DispatchTutorialInput(0xb, 0, 1, 0);
 	}
 }

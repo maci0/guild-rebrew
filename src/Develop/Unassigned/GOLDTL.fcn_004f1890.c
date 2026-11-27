@@ -2,7 +2,7 @@
 
 extern int g_6652f8[];
 
-int __cdecl fcn_004f1890(int* needle, int* list)
+int __cdecl gm_MatchSlotEntryId(int* needle, int* list)
 {
 	int n;
 	int i;

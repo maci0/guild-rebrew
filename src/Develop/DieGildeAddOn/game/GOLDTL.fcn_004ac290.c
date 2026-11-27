@@ -1,4 +1,4 @@
-char* __cdecl fcn_004ac1e0(int);
+char* __cdecl gm_GetBardEventEntry(int);
 unsigned short __cdecl gm_RandomMod(int);
 
 
@@ -9,7 +9,7 @@ unsigned short __cdecl gm_PickRandomGedichtVariant(int id)
 	char* p;
 
 	variantId = 0x1e2b;
-	p = fcn_004ac1e0(id);
+	p = gm_GetBardEventEntry(id);
 	if (p != 0) {
 		if (*(int*) (p + 8) == 0)
 			variantId = gm_RandomMod(10);

@@ -12,7 +12,7 @@ void __cdecl d3_TransformPoint(char*, float*, float*);
 int __cdecl d3sm_SampleHeight(float*, float*, int*, int*, float*);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl d2_ProjectMapCoordToScreen(char*, int, int);
-void __cdecl fcn_005b00d0(int, int);
+void __cdecl d2_FormatPriceText(int, int);
 void __cdecl d2_PositionControl(int, int, int);
 int __cdecl gm_IsActionAllowedForEntity(unsigned short*, int*, unsigned char*);
 char* __cdecl d3_FindSceneObject(int, int, int, char*);
@@ -170,7 +170,7 @@ void __cdecl d2_BuildCityScrollMap(char* town)
 						*next++ = copied;
 					} while (copied != 0);
 				} else {
-					fcn_005b00d0((int) obj,
+					d2_FormatPriceText((int) obj,
 					             (int) ((char*) &((D2_CONTROL_TL*) g_1015ea0)[slot->handle] + 0xcc));
 				}
 				kind = *(unsigned short*) (obj + 0x27);
@@ -231,7 +231,7 @@ void __cdecl d2_BuildCityScrollMap(char* town)
 						*next++ = copied;
 					} while (copied != 0);
 				} else {
-					fcn_005b00d0((int) slot->ent,
+					d2_FormatPriceText((int) slot->ent,
 					             (int) ((char*) &((D2_CONTROL_TL*) g_1015ea0)[slot->handle] + 0xcc));
 				}
 				slot->x = bld_x - ((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].width / 2;

@@ -10,7 +10,7 @@ typedef struct {
 } Bytes4;
 
 int __cdecl fcn_0064d3f8(void);
-int* __cdecl fcn_004524e0(int n, const char* name, Bytes4 f, int a, int b, void (__cdecl* cb)(void));
+int* __cdecl d3_CreateParticleSystem(int n, const char* name, Bytes4 f, int a, int b, void (__cdecl* cb)(void));
 void __cdecl d3_SetEffectPosition(int* s, float* pos);
 void __cdecl d3_UpdateSmokeParticles(void);
 extern volatile int g_6b7fac;
@@ -33,7 +33,7 @@ int* __cdecl d3_CreateSmokeEmitter(int a1, float* pos, int n, int a4, int a5, in
     memset(&f, 0, sizeof(f));
     f.a = 0x7f;
     f.c |= 2;
-    s = fcn_004524e0(n, "Rauch", f, a4, a1, d3_UpdateSmokeParticles);
+    s = d3_CreateParticleSystem(n, "Rauch", f, a4, a1, d3_UpdateSmokeParticles);
     if (s != 0) {
         k = g_6b7fac;
         mask = color.d;

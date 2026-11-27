@@ -22,7 +22,7 @@ extern unsigned char* g_7746c8;
 extern char* g_7746c4;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
-unsigned char* __cdecl fcn_005bdc30(int, Query*, int, int, int);
+unsigned char* __cdecl d2_RunCityScrollMapDialog(int, Query*, int, int, int);
 int __cdecl gm_CheckEntityType(unsigned char*);
 void __cdecl d2_EnterBuildingObjekt(unsigned char*, int, char*);
 unsigned char __cdecl gm_GetEntityUiFlags(int, unsigned char*, int, int);
@@ -45,7 +45,7 @@ void __cdecl d2_HandleEntityChooser(void)
 	q.x10 = 0;
 	q.x8 = 0;
 	q.x4c = 0x71f;
-	e = fcn_005bdc30(1, &q, 0, 0, 0);
+	e = d2_RunCityScrollMapDialog(1, &q, 0, 0, 0);
 	if (e == 0 || g_7746f4 != 0) {
 		return;
 	}

@@ -11,7 +11,7 @@ void __cdecl he_PostEntityMessage(int, int, char*, int, int, void*);
 void __cdecl gm_AddTime(char*, int, int, int);
 int __cdecl gm_PickRandomGedicht(short);
 unsigned short __cdecl gm_PickRandomGedichtVariant(int);
-char* __cdecl fcn_004ac1e0(short);
+char* __cdecl gm_GetBardEventEntry(short);
 char* __cdecl evt_FindScriptById(int);
 char* __cdecl evt_LoadGfxScript(char*);
 void __cdecl evt_CallScriptFunction(char*, int, int);
@@ -88,7 +88,7 @@ void __cdecl he_RunBardeEvent(char* obj)
 		if (*(unsigned short*) (obj + 0x56) < 0x14) {
 			if (e == 0 || *(int*) e != 0x68427244) {
 				*(int*) (obj + 0xb4) = -1;
-				x = fcn_004ac1e0(*(unsigned short*) (obj + 0xac));
+				x = gm_GetBardEventEntry(*(unsigned short*) (obj + 0xac));
 				sprintf(buf, (char*) 0x67d444, *(int*) (x + 8));
 				t = *(int*) 0x6b8010;
 				d3_SelectSceneContext(0, 1);

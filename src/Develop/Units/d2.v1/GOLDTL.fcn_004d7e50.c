@@ -2,7 +2,7 @@
  * their screen offsets. */
 
 int __cdecl d2_LoadForm(int, int, int);
-void __cdecl fcn_00471d80(int, int);
+void __cdecl d2_CenterForm(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl d2_AddWindowTextButton(int, int, int, unsigned int, unsigned int);
 void __cdecl d2_CenterElement(int);
@@ -19,7 +19,7 @@ void __cdecl d2_InitCombatHud(void)
 
 	dialog = d2_LoadForm(0, 0, 0x68bed0);
 	*(unsigned int*) 0x772f14 = dialog;
-	fcn_00471d80(dialog, 3);
+	d2_CenterForm(dialog, 3);
 	d2_SetForm(dialog, 0);
 	*(unsigned int*) 0x68b7a8 = d2_AddWindowTextButton(0x10, 0xc, 0xbf,
 	                                         *(unsigned int*) 0x14a9a14,

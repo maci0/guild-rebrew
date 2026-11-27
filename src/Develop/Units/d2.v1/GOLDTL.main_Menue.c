@@ -31,26 +31,26 @@ struct Handler {
 	int unused;
 };
 
-void __cdecl fcn_00412630(void);
-char *__cdecl fcn_004730c0(int, int, int, int, char *, int, int);
+void __cdecl io_PopQueuedInputState(void);
+char *__cdecl d2_StartScreenFade(int, int, int, int, char *, int, int);
 int __cdecl main_PumpWindowMessages(void);
 int __cdecl main_RunFrameLoop(int, int);
 void __cdecl d3_SelectSceneContext(int, int);
 int __cdecl fcn_00442e30(void);
-int __cdecl fcn_0051e070(void);
+int __cdecl main_GetLanguage(void);
 #include "client_scene_loader.h"
 void __cdecl ReportClientMessage(char *);
 void __cdecl d3_SetViewport(float, float, int, int, int, int, int, int, int);
 void __cdecl d2_ClearScreen(void);
 int __cdecl d2_SetBackdropResource(int);
 int __cdecl d2_LoadForm(int, int, char *);
-int __cdecl fcn_00471d80(int, int);
+int __cdecl d2_CenterForm(int, int);
 int __cdecl d2_SetForm(int, int);
-int __cdecl fcn_0053a3a0(int, int, int);
+int __cdecl d2_AddMainMenuButton(int, int, int);
 int __cdecl d2_CreateRadioGroup(int, int, int, int, int, int, int, int, int, int);
 int __cdecl fcn_0064d3f8(void);
 int __cdecl msx_StartTrack(char *, int);
-void __cdecl fcn_00473150(int);
+void __cdecl d2_ReleaseOverlaySprite(int);
 void __cdecl msx_SetFadeDuration(int);
 void __cdecl evt_ResetCurrentContextId(void);
 int __cdecl d2_UpdateRadioGroup(int);
@@ -63,7 +63,7 @@ void __cdecl msx_StartTrackInternal(int, int);
 void __cdecl d2_ShowAmountDialog(void);
 void __cdecl d2_ShowGameOptions(void);
 void __cdecl d2_ShowSoundOptions(void);
-void __cdecl fcn_005e2b60(void);
+void __cdecl d2_ShowGraphicsOptions(void);
 int __cdecl d2_ShowLoadGameMenu(void);
 int __cdecl d2_ShowChooseNetworkDialog(void);
 int __cdecl d2_ChooseTutorial(void);
@@ -103,17 +103,17 @@ void __cdecl main_Menue(void)
 	b[5] = -1;
 	b[0] = -1;
 	main_PumpWindowMessages();
-	fcn_00412630();
+	io_PopQueuedInputState();
 	*(unsigned char*) &g_14cf950 = 0;
 	evt_ResetCurrentContextId();
-	v4 = fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, (char *)0x67d67c, 0, 1);
+	v4 = d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, (char *)0x67d67c, 0, 1);
 	while ((*(unsigned char *)v4 & 4) == 0) {
 		main_RunFrameLoop(0, 0x24087);
 	}
 	d2_SuppressOverlay = 1;
 	d3_SelectSceneContext(0, 0);
 	fcn_00442e30();
-	if (fcn_0051e070() != 0) {
+	if (main_GetLanguage() != 0) {
 		v14 = "scenes/*ChooseCity_Europa.ed3";
 	} else {
 		v14 = "scenes/*ChooseCity.ed3";
@@ -155,24 +155,24 @@ void __cdecl main_Menue(void)
 	d2_SetBackdropResource(0x797);
 	v29 = 0;
 	v15 = d2_LoadForm(0, 0, (char *)0x6a3b60);
-	fcn_00471d80(v15, 3);
+	d2_CenterForm(v15, 3);
 	d2_SetForm(v15, 0);
 	v5 = d2_CurrentWindowId;
-	b[4] = fcn_0053a3a0(0, *(int *)0x14ac4ac, v5);
-	b[7] = fcn_0053a3a0(1, *(int *)0x14ac490, v5);
-	b[10] = fcn_0053a3a0(2, *(int *)0x14b4f84, v5);
-	b[3] = fcn_0053a3a0(3, *(int *)0x14ac4b0, v5);
-	b[8] = fcn_0053a3a0(4, g_14ac498, v5);
-	b[11] = fcn_0053a3a0(7, *(int *)0x14ac4b4, v5);
-	b[6] = fcn_0053a3a0(8, *(int *)0x14ac4b8, v5);
+	b[4] = d2_AddMainMenuButton(0, *(int *)0x14ac4ac, v5);
+	b[7] = d2_AddMainMenuButton(1, *(int *)0x14ac490, v5);
+	b[10] = d2_AddMainMenuButton(2, *(int *)0x14b4f84, v5);
+	b[3] = d2_AddMainMenuButton(3, *(int *)0x14ac4b0, v5);
+	b[8] = d2_AddMainMenuButton(4, g_14ac498, v5);
+	b[11] = d2_AddMainMenuButton(7, *(int *)0x14ac4b4, v5);
+	b[6] = d2_AddMainMenuButton(8, *(int *)0x14ac4b8, v5);
 	if (*(int *)0x774814 == 0) {
-		b[9] = fcn_0053a3a0(5, g_14ac49c, v5);
-		b[1] = fcn_0053a3a0(6, g_14ac4a0, v5);
+		b[9] = d2_AddMainMenuButton(5, g_14ac49c, v5);
+		b[1] = d2_AddMainMenuButton(6, g_14ac4a0, v5);
 		v28 = d2_CreateRadioGroup(9, b[4], b[7], b[10], b[3], b[8], b[9], b[1], b[11], b[6]);
 	} else {
-		b[2] = fcn_0053a3a0(4, (int)(char *)0x6a3b48, v5);
-		b[5] = fcn_0053a3a0(5, (int)(char *)0x6a3b30, v5);
-		b[0] = fcn_0053a3a0(6, (int)(char *)0x6a3b20, v5);
+		b[2] = d2_AddMainMenuButton(4, (int)(char *)0x6a3b48, v5);
+		b[5] = d2_AddMainMenuButton(5, (int)(char *)0x6a3b30, v5);
+		b[0] = d2_AddMainMenuButton(6, (int)(char *)0x6a3b20, v5);
 		v28 = d2_CreateRadioGroup(9, b[4], b[7], b[10], b[3], b[8], b[2], b[5], b[11], b[6]);
 	}
 	if (msx_MusicEnabled != 0) {
@@ -188,8 +188,8 @@ void __cdecl main_Menue(void)
 			break;
 		}
 	}
-	fcn_00473150((int)v4);
-	fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, (char *)0x67d67c, 0x5a, 10);
+	d2_ReleaseOverlaySprite((int)v4);
+	d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, (char *)0x67d67c, 0x5a, 10);
 	*(unsigned char*) &g_14cf950 = 0;
 	msx_SetFadeDuration(2000);
 	read_profile = GetPrivateProfileStringA;
@@ -256,7 +256,7 @@ label_53a8e3:
 				}
 			} else if (d2_CurrentElementId == b[9]) {
 				d2_SetSlotVisibility(v5, 0);
-				fcn_005e2b60();
+				d2_ShowGraphicsOptions();
 				d2_SetSlotVisibility(v5, 1);
 				v29 = 1;
 				if (*(int *)0x77495c != 0) {

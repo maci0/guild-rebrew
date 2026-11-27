@@ -20,7 +20,7 @@ typedef unsigned short u2;
 typedef unsigned char u8;
 typedef unsigned int u4;
 
-typedef struct { u8 kind; u8 unknown01[0x246]; u8 level; u8 unknown248[5]; } Building547770;
+typedef struct { u8 kind; u8 unknown01[0x246]; u8 level; u8 unknown248[5]; } BuildingProtoEntry;
 extern u8* lpGebaeudePROT;
 extern char* lpGebaeudeINST;
 extern char* gm_CityEntity;
@@ -54,7 +54,7 @@ int __cdecl gm_ReplenishAiBuildingFunds();
     wp = (u2*) gm_CityEntity;                                                   \
     for (m = 0; m < 0x100; m++, rp += REC_SIZE) {                            \
         if (*rp != 0) {                                                      \
-            q = (u8*) &((Building547770*) tb)[*rp];                                 \
+            q = (u8*) &((BuildingProtoEntry*) tb)[*rp];                                 \
             if (*q == (T)) {                                                 \
                 w = *(u2 *)(rp + 0x27);                                      \
                 if ((w == 0xffff) || (w == *wp)) {                           \
@@ -65,7 +65,7 @@ int __cdecl gm_ReplenishAiBuildingFunds();
     }
 
 /* ADDRESS: GOLDTL 0x00547770 */
-void __cdecl fcn_00547770(void)
+void __cdecl ai_DispatchGuildBuildPlan(void)
 {
     int cnt2[33];
     int cnt[33];
@@ -110,7 +110,7 @@ void __cdecl fcn_00547770(void)
     rp = (u8*) lpGebaeudeINST;
     for (j = 0; j < 0x100; j++, rp += REC_SIZE) {
         if (*rp != 0) {
-            q = (u8*) &((Building547770*) lpGebaeudePROT)[*rp];
+            q = (u8*) &((BuildingProtoEntry*) lpGebaeudePROT)[*rp];
             t = *q;
             if (t < 0x21) {
                 cnt[t]++;
@@ -189,7 +189,7 @@ void __cdecl fcn_00547770(void)
                         return;
                     }
                     e2 = gm_CalculateGebaeudeValue(rp, 0x64) * 2;
-                    lvl = gm_GetRangeStatId(0xb, (u32)((Building547770*) q)->level * 2 - 1);
+                    lvl = gm_GetRangeStatId(0xb, (u32)((BuildingProtoEntry*) q)->level * 2 - 1);
                 }
             } else if (sel == 2) {
                 if (cnt[19] < 3) {
@@ -201,7 +201,7 @@ void __cdecl fcn_00547770(void)
                         return;
                     }
                     e2 = gm_CalculateGebaeudeValue(rp, 0x64) * 2;
-                    lvl = gm_GetRangeStatId(0xa, (u32)((Building547770*) q)->level * 2 - 1);
+                    lvl = gm_GetRangeStatId(0xa, (u32)((BuildingProtoEntry*) q)->level * 2 - 1);
                 }
             } else {
                 e2 = gm_GetTypeProductValue(0x27) * 2;
@@ -301,7 +301,7 @@ void __cdecl fcn_00547770(void)
                         return;
                     }
                     e2 = gm_CalculateGebaeudeValue(rp, 0x64) * 2;
-                    lvl = gm_GetRangeStatId(1, (u32)((Building547770*) q)->level * 2 - 1);
+                    lvl = gm_GetRangeStatId(1, (u32)((BuildingProtoEntry*) q)->level * 2 - 1);
                 }
             } else if (j == 1) {
                 if (cnt[21] < 3) {
@@ -313,7 +313,7 @@ void __cdecl fcn_00547770(void)
                         return;
                     }
                     e2 = gm_CalculateGebaeudeValue(rp, 0x64) * 2;
-                    lvl = gm_GetRangeStatId(3, (u32)((Building547770*) q)->level * 2 - 1);
+                    lvl = gm_GetRangeStatId(3, (u32)((BuildingProtoEntry*) q)->level * 2 - 1);
                 }
             } else if (j == 2) {
                 if (cnt[20] < 3) {
@@ -325,7 +325,7 @@ void __cdecl fcn_00547770(void)
                         return;
                     }
                     e2 = gm_CalculateGebaeudeValue(rp, 0x64) * 2;
-                    lvl = gm_GetRangeStatId(2, (u32)((Building547770*) q)->level * 2 - 1);
+                    lvl = gm_GetRangeStatId(2, (u32)((BuildingProtoEntry*) q)->level * 2 - 1);
                 }
             } else {
                 if (cnt[14] < 3) {
@@ -337,7 +337,7 @@ void __cdecl fcn_00547770(void)
                         return;
                     }
                     e2 = gm_CalculateGebaeudeValue(rp, 0x64) * 2;
-                    lvl = gm_GetRangeStatId(5, (u32)((Building547770*) q)->level * 2 - 1);
+                    lvl = gm_GetRangeStatId(5, (u32)((BuildingProtoEntry*) q)->level * 2 - 1);
                 }
             }
             u = cm_RequestAllocSpieler(4, -1, -1, fcn_0042e410(4) + 0xf, -1, lvl, 0,
@@ -411,7 +411,7 @@ void __cdecl fcn_00547770(void)
                         return;
                     }
                     e2 = gm_CalculateGebaeudeValue(rp, 0x64) * 2;
-                    lvl = gm_GetRangeStatId(6, (u32)((Building547770*) q)->level * 2 - 1);
+                    lvl = gm_GetRangeStatId(6, (u32)((BuildingProtoEntry*) q)->level * 2 - 1);
                 }
             } else {
                 if (cnt[22] < 3) {
@@ -423,7 +423,7 @@ void __cdecl fcn_00547770(void)
                         return;
                     }
                     e2 = gm_CalculateGebaeudeValue(rp, 0x64) * 2;
-                    lvl = gm_GetRangeStatId(4, (u32)((Building547770*) q)->level * 2 - 1);
+                    lvl = gm_GetRangeStatId(4, (u32)((BuildingProtoEntry*) q)->level * 2 - 1);
                 }
             }
             u = cm_RequestAllocSpieler(4, -1, -1, fcn_0042e410(4) + 0xf, -1, lvl, 0,
@@ -504,7 +504,7 @@ void __cdecl fcn_00547770(void)
                         return;
                     }
                     e2 = gm_CalculateGebaeudeValue(rp, 0x64) * 2;
-                    lvl = gm_GetRangeStatId(8, (u32)((Building547770*) q)->level * 2 - 1);
+                    lvl = gm_GetRangeStatId(8, (u32)((BuildingProtoEntry*) q)->level * 2 - 1);
                 }
             } else if (j == 1) {
                 if (n7a < n7b) {
@@ -515,7 +515,7 @@ void __cdecl fcn_00547770(void)
                 FIND_REC(7);
                 if (m < 0x100) {
                     e2 = gm_CalculateGebaeudeValue(rp, 0x64) * 2;
-                    lvl = gm_GetRangeStatId(7, (u32)((Building547770*) q)->level * 2 - 1);
+                    lvl = gm_GetRangeStatId(7, (u32)((BuildingProtoEntry*) q)->level * 2 - 1);
                 } else if (cnt[7] < 2) {
                     e2 = gm_GetTypeProductValue(0x14) * 2;
                     lvl = gm_GetRangeStatId(7, 1);
@@ -533,7 +533,7 @@ void __cdecl fcn_00547770(void)
                         return;
                     }
                     e2 = gm_CalculateGebaeudeValue(rp, 0x64) * 2;
-                    lvl = gm_GetRangeStatId(9, (u32)((Building547770*) q)->level * 2 - 1);
+                    lvl = gm_GetRangeStatId(9, (u32)((BuildingProtoEntry*) q)->level * 2 - 1);
                 }
             }
             u = cm_RequestAllocSpieler(4, -1, -1, fcn_0042e410(4) + 0xf, -1, lvl, 0,
@@ -620,7 +620,7 @@ void __cdecl fcn_00547770(void)
                         return;
                     }
                     e2 = gm_CalculateGebaeudeValue(rp, 0x64) * 2;
-                    lvl = gm_GetRangeStatId(0xf, (u32)((Building547770*) q)->level * 2 - 1);
+                    lvl = gm_GetRangeStatId(0xf, (u32)((BuildingProtoEntry*) q)->level * 2 - 1);
                 }
             } else if (j == 1) {
                 if (cnt[31] < 3) {
@@ -632,7 +632,7 @@ void __cdecl fcn_00547770(void)
                         return;
                     }
                     e2 = gm_CalculateGebaeudeValue(rp, 0x64) * 2;
-                    lvl = gm_GetRangeStatId(0xe, (u32)((Building547770*) q)->level * 2 - 1);
+                    lvl = gm_GetRangeStatId(0xe, (u32)((BuildingProtoEntry*) q)->level * 2 - 1);
                 }
             } else {
                 if (cnt[29] < 3) {
@@ -644,7 +644,7 @@ void __cdecl fcn_00547770(void)
                         return;
                     }
                     e2 = gm_CalculateGebaeudeValue(rp, 0x64) * 2;
-                    lvl = gm_GetRangeStatId(0xd, (u32)((Building547770*) q)->level * 2 - 1);
+                    lvl = gm_GetRangeStatId(0xd, (u32)((BuildingProtoEntry*) q)->level * 2 - 1);
                 }
             }
             u = cm_RequestAllocSpieler(4, -1, -1, fcn_0042e410(4) + 0xf, -1, lvl, 0, v);

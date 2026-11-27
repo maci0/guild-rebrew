@@ -18,7 +18,7 @@ extern char g_6811b0[];
 extern char g_6a7f1c[];
 
 char* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_00545780(char*);
+void __cdecl d2_CloseActionPopup(char*);
 void __cdecl he_FreeAction(char*);
 int __cdecl gm_CompareGameTime(pos14_7f4c00*, char*);
 void __cdecl he_DeclineDeathPactPayment(char*, struct house*);
@@ -41,7 +41,7 @@ void __cdecl he_HandleDeathPactPrompt(char* u)
 	}
 	if (*(int*) (u + 0x70) == -2) {
 		if (*(char**) (u + 0x74) != 0) {
-			fcn_00545780(u);
+			d2_CloseActionPopup(u);
 		}
 		he_FreeAction(u);
 		return;
@@ -65,7 +65,7 @@ void __cdecl he_HandleDeathPactPrompt(char* u)
 	case 1:
 		if (gm_CompareGameTime(&gm_GameTime, u + 0x52) > 0) {
 			he_DeclineDeathPactPayment(p, &((struct house*)g_7f4ca0)[g_774970]);
-			fcn_00545780(u);
+			d2_CloseActionPopup(u);
 			he_FreeAction(u);
 			break;
 		}
@@ -78,13 +78,13 @@ void __cdecl he_HandleDeathPactPrompt(char* u)
 		}
 		if (g_100f1dc == 2) {
 			he_AcceptDeathPactPayment(p, &((struct house*)g_7f4ca0)[g_774970]);
-			fcn_00545780(u);
+			d2_CloseActionPopup(u);
 			he_FreeAction(u);
 			return;
 		}
 		if (g_100f1dc == 1) {
 			he_DeclineDeathPactPayment(p, &((struct house*)g_7f4ca0)[g_774970]);
-			fcn_00545780(u);
+			d2_CloseActionPopup(u);
 			he_FreeAction(u);
 		}
 		break;

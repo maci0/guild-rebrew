@@ -10,7 +10,7 @@ extern char* g_6b7e88;
 extern char g_678e2c[];
 extern char g_678df0[];
 extern char g_14cbae0[];
-int __cdecl fcn_0042a120(int* h, int a, int b, int c);
+int __cdecl msx_OpenDigOutput(int* h, int a, int b, int c);
 char* __cdecl m_alloc(int size, char* tag);
 int __cdecl msx_AllocateSampleHandle(int h, char* slot);
 long __cdecl fcn_0064e561(long* t);
@@ -28,7 +28,7 @@ int __cdecl sb_Init(int id, int count, int a, int b, int c)
 		goto fail;
 	}
 	g_14cbbe4 = g_14cbc20;
-	if (fcn_0042a120(&g_6b7d7c, a, b, c) != 0) {
+	if (msx_OpenDigOutput(&g_6b7d7c, a, b, c) != 0) {
 		goto fail;
 	}
 	g_6b7d70 = id;

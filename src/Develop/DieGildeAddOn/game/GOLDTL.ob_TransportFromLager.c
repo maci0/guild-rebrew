@@ -25,11 +25,11 @@ float __cdecl gm_GetSeasonPrice(int id, unsigned char a);
 int __cdecl gm_CheckEntityStock(void*, int, int);
 int __cdecl fcn_0050b750(int, int);
 int __cdecl d2_DispatchTutorialEvent(int, int, int, int);
-void __cdecl fcn_0057e880(int, int, int, int);
+void __cdecl d2_DispatchTutorialInput(int, int, int, int);
 int __cdecl cm_SendSellObjekt(int, int, int, int, int, int);
 void __cdecl d2_SetElementValue(int, ...);
 void __cdecl io_FormatTextBuffer(char*, int, int);
-void __cdecl fcn_00533a40(char*);
+void __cdecl d2_ShowStatusBanner(char*);
 void __cdecl sb_PlayVoice(int, char*, int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x005ba0e0 */
@@ -100,31 +100,31 @@ int __cdecl ob_TransportFromLager(int a0, char* a1, char* a2, int a3, int a4,
 							if (!d2_DispatchTutorialEvent(0x29, (int)a2, 0, *stockSlot)) {
 								goto next;
 							}
-							fcn_0057e880(0x29, (int)a2, 0, *stockSlot);
+							d2_DispatchTutorialInput(0x29, (int)a2, 0, *stockSlot);
 						} else {
 							if (!d2_DispatchTutorialEvent(0x27, (int)a2, 0, *stockSlot)) {
 								goto next;
 							}
-							fcn_0057e880(0x27, (int)a2, 0, *stockSlot);
+							d2_DispatchTutorialInput(0x27, (int)a2, 0, *stockSlot);
 						}
 					} else if (a7 & 1) {
 						if (a4) {
 							if (!d2_DispatchTutorialEvent(0x2a, (int)a2, 0, *stockSlot)) {
 								goto next;
 							}
-							fcn_0057e880(0x2a, (int)a2, 0, *stockSlot);
+							d2_DispatchTutorialInput(0x2a, (int)a2, 0, *stockSlot);
 						} else {
 							if (!d2_DispatchTutorialEvent(0x25, (int)a2, 0, *stockSlot)) {
 								goto next;
 							}
-							fcn_0057e880(0x25, (int)a2, 0, *stockSlot);
+							d2_DispatchTutorialInput(0x25, (int)a2, 0, *stockSlot);
 						}
 					}
 					cm_SendSellObjekt(a0, *(int*)(a1 + 2), *stockSlot, count, a6,
 					             (int)(unitPrice / a5));
 					if (unitPrice != g_6628a8 && a5 != dbl_1_0) {
 						io_FormatTextBuffer(buf, 0xec, (int)(prod * a5 - prod));
-						fcn_00533a40(buf);
+						d2_ShowStatusBanner(buf);
 						sb_PlayVoice(0, (char*)0x68aed0, 1, 0x3f, 0x7f, 0, 0);
 					}
 					d2_SetElementValue(stockSlot[4], 0, stockSlot[0xc],
@@ -164,31 +164,31 @@ next:
 							if (!d2_DispatchTutorialEvent(0x29, (int)a2, 0, *stockSlot)) {
 								goto next2;
 							}
-							fcn_0057e880(0x29, (int)a2, 0, *stockSlot);
+							d2_DispatchTutorialInput(0x29, (int)a2, 0, *stockSlot);
 						} else {
 							if (!d2_DispatchTutorialEvent(0x27, (int)a2, 0, *stockSlot)) {
 								goto next2;
 							}
-							fcn_0057e880(0x27, (int)a2, 0, *stockSlot);
+							d2_DispatchTutorialInput(0x27, (int)a2, 0, *stockSlot);
 						}
 					} else if (a7 & 1) {
 						if (a4) {
 							if (!d2_DispatchTutorialEvent(0x2a, (int)a2, 0, *stockSlot)) {
 								goto next2;
 							}
-							fcn_0057e880(0x2a, (int)a2, 0, *stockSlot);
+							d2_DispatchTutorialInput(0x2a, (int)a2, 0, *stockSlot);
 						} else {
 							if (!d2_DispatchTutorialEvent(0x25, (int)a2, 0, *stockSlot)) {
 								goto next2;
 							}
-							fcn_0057e880(0x25, (int)a2, 0, *stockSlot);
+							d2_DispatchTutorialInput(0x25, (int)a2, 0, *stockSlot);
 						}
 					}
 					cm_SendSellObjekt(a0, *(int*)(a1 + 2), *stockSlot, count, a6,
 					             (int)(unitPrice / a5));
 					if (unitPrice != g_6628a8 && a5 != dbl_1_0) {
 						io_FormatTextBuffer(buf, 0xec, (int)(prod * a5 - prod));
-						fcn_00533a40(buf);
+						d2_ShowStatusBanner(buf);
 						sb_PlayVoice(0, (char*)0x68aed0, 1, 0x3f, 0x7f, 0, 0);
 					}
 					d2_SetElementValue(stockSlot[4], 0, stockSlot[0xc],

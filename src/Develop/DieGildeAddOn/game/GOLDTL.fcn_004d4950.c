@@ -14,12 +14,12 @@ unsigned int __cdecl cut_RandMod(unsigned int);
 void __cdecl d3_ScheduleActionTimer(char*, int, int);
 int __cdecl d3snd_QueueSound(int, int, char*, int, int);
 void* __cdecl sb_PlayVoice(char*, char*, int, int, int, int, int);
-int __cdecl fcn_004d4790(char*);
+int __cdecl cut_HandleUnitDefeat(char*);
 int* __cdecl d3_SpawnBlutEffect(int, int, int, int, int, int);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 char* __cdecl ch_NewAnimationAction(int, char*, int, float);
 int __cdecl io_FormatTextBuffer(void*, ...);
-void __cdecl fcn_00533a40(char*);
+void __cdecl d2_ShowStatusBanner(char*);
 
 /* Message-dialog handler: look up the topic text and the current page, pick
    the reply text by message kind, then lay out the portrait, the speaker and
@@ -112,7 +112,7 @@ void __cdecl gm_ResolveDuelHit(int ctx)
         sb_PlayVoice(0, (char*) 0x68be40, 1, 0x3f, 0x7f, 0, 0);
     }
 draw:
-    if (fcn_004d4790((char*) v4)) {
+    if (cut_HandleUnitDefeat((char*) v4)) {
         return;
     }
     if (v22) {
@@ -127,7 +127,7 @@ draw:
         if (*v7 == 0x16e) {
             *(char*) ((char*) v4 + 8) = 4;
             io_FormatTextBuffer(message, 0x1188, *(unsigned int*) (v9 + 0x54), *v4);
-            fcn_00533a40(message);
+            d2_ShowStatusBanner(message);
             return;
         }
     } else {

@@ -23,7 +23,7 @@ void __cdecl hst_SplitFormatPrefix(char*, char*, int*, int*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 int __cdecl atoi(char*);
 #include "Develop/DieGildeAddOn/game/spiel.h"
-int __cdecl fcn_004ae0f0(int);
+int __cdecl hst_IsCandidateUnlisted(int);
 unsigned short __cdecl gm_RandomMod(int);
 
 int __cdecl gm_IsSlotActivePerson(unsigned short entityId);
@@ -102,7 +102,7 @@ int __cdecl hst_HandleRndHandelsherr(int mode, int* pairs, int idx, char* text, 
 		    && (((Rec21c*)g_7f4ca0)[i].cls < 0x34 || ((Rec21c*)g_7f4ca0)[i].cls > 0x39)
 		    && gm_IsSlotActivePerson((unsigned short) i) != 0) {
 			v = gm_WalkEntityChain((unsigned short) i);
-			if (v > score[4] && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[i].key) != 0) {
+			if (v > score[4] && hst_IsCandidateUnlisted(((Rec21c*)g_7f4ca0)[i].key) != 0) {
 				score[4] = v;
 				found |= 1;
 				ids[4] = ((Rec21c*)g_7f4ca0)[i].id;

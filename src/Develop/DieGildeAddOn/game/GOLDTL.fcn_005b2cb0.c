@@ -2,7 +2,7 @@ extern char g_774a80[];
 extern char g_6ab49c[];
 
 
-int  __cdecl fcn_0051e070(void);
+int  __cdecl main_GetLanguage(void);
 void __cdecl io_FormatTextBuffer(void*, int, int, int, int, int, int);
 void __cdecl he_PostEntityMessage(int, int, void*, int, int, void*);
 
@@ -12,7 +12,7 @@ void __cdecl he_NotifyFriedhofEvent08(void* entity, void* otherEntity, int targe
 
 	t = *(char*) ((char*) entity + 2);
 	if (t == 6 || t == 7) {
-		switch (fcn_0051e070()) {
+		switch (main_GetLanguage()) {
 		case 0:
 		case 2:
 			io_FormatTextBuffer(g_774a80, 0x414e, *(unsigned short*) otherEntity, targetPtr,

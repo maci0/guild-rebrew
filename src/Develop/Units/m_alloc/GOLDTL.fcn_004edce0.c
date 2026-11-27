@@ -9,7 +9,7 @@ extern ALCHEMY_RECIPE_PROTOTYPE* g_772fe4;
 
 void __cdecl m_FreeTracked(int);
 
-void __cdecl fcn_004edce0(void)
+void __cdecl ahm_FreeAlchemyPrototypes(void)
 {
 	if (g_772fdc != 0) {
 		m_FreeTracked((int) g_772fdc);

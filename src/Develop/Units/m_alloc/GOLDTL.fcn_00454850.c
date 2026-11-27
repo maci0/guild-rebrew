@@ -2,9 +2,9 @@
  * node into four quadrants until either the size limit or the recursion depth
  * limit is reached.  Leaves that survive one level are collapsed. */
 
-char __cdecl fcn_004546e0(char* e, float* lo, float* hi);
+char __cdecl d3_ComputeObjectBounds(char* e, float* lo, float* hi);
 char* __cdecl d3_CollectObjectsInBounds(char* src, float* lo, float* hi);
-void __cdecl fcn_00454560(char** n);
+void __cdecl d3_FreeQuadtreeNode(char** n);
 
 /* ADDRESS: GOLDTL 0x00454850 */
 void __cdecl d3_SplitQuadtreeNode(unsigned int* node, unsigned int splitLimit, unsigned int depth, unsigned int maxDepth)
@@ -27,7 +27,7 @@ void __cdecl d3_SplitQuadtreeNode(unsigned int* node, unsigned int splitLimit, u
 		*((float*) (node + 10)) = -1.0e10f;
 		if (depth <= 1) {
 			for (p = (unsigned int*) node[0xf]; p != 0; p = (unsigned int*) p[1]) {
-				if (fcn_004546e0((char*) *p, lo, hi)) {
+				if (d3_ComputeObjectBounds((char*) *p, lo, hi)) {
 					*((float*) (node + 4)) = (*((float*) (node + 4)) < lo[0])
 						? *((float*) (node + 4)) : lo[0];
 					*((float*) (node + 5)) = (*((float*) (node + 5)) < lo[1])
@@ -99,7 +99,7 @@ void __cdecl d3_SplitQuadtreeNode(unsigned int* node, unsigned int splitLimit, u
 			v = node[i];
 			if (v != 0) {
 				if (ok != 0) {
-					fcn_00454560((char**) v);
+					d3_FreeQuadtreeNode((char**) v);
 					node[i] = 0;
 				} else {
 					d3_SplitQuadtreeNode((unsigned int*) v, splitLimit, depth + 1, maxDepth);

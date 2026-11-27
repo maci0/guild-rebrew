@@ -20,7 +20,7 @@ struct msg {
 };
 
 char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_004c5580(struct msg*, int, char*);
+int __cdecl cm_SendRawEntityPacket(struct msg*, int, char*);
 
 int __cdecl he_PostEntityMessage(int id, int arg, char* text1, unsigned char flags, int value, char* text2)
 {
@@ -44,9 +44,9 @@ int __cdecl he_PostEntityMessage(int id, int arg, char* text1, unsigned char fla
 		if (text2 != 0 && *text2 != 0) {
 			memcpy(text + len, text2, strlen(text2) + 1);
 			m.flags = flags | 0x10;
-			result = fcn_004c5580(&m, len + strlen(text2) + 1, text);
+			result = cm_SendRawEntityPacket(&m, len + strlen(text2) + 1, text);
 		} else {
-			result = fcn_004c5580(&m, len, text1);
+			result = cm_SendRawEntityPacket(&m, len, text1);
 		}
 		return result;
 	}

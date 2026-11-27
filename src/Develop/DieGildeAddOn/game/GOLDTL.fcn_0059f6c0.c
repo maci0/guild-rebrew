@@ -28,11 +28,11 @@ extern char s_6aa700[];
 extern char s_6aa6e4[];
 extern char s_6aa6d0[];
 
-void __cdecl fcn_005338a0(void);
+void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_005bdc30(int, Req*, char*, void*, int);
+void __cdecl d2_RunCityScrollMapDialog(int, Req*, char*, void*, int);
 int __cdecl d2_OpenTargetPicker(Req*, char*, int, void*);
 void __cdecl d3_EndCameraAndUiMode(void);
 void __cdecl d2_RunTalenteDialog(int, int, int);
@@ -50,7 +50,7 @@ void __cdecl d2_RunSabotageActionsHud(int entity, int mode)
 	int c;
 	int d;
 
-	fcn_005338a0();
+	d2_ClearStatusTextSlots();
 	if (main_RunFrameLoop((void*) d2_RunSabotageActionsHud, 0x67fff) != 0) {
 		do {
 			a = RegisterStatusText(s_6aa714, g_14aaf18, 0x17);
@@ -90,7 +90,7 @@ void __cdecl d2_RunSabotageActionsHud(int entity, int mode)
 					req.d = 3;
 					req.id = 0x727;
 					io_FormatTextBuffer(text, 0x16ff);
-					fcn_005bdc30(1, &req, text, (void*) d2_RunSabotageDialog, 0);
+					d2_RunCityScrollMapDialog(1, &req, text, (void*) d2_RunSabotageDialog, 0);
 				}
 				else if (g_7746a0 == b) {
 					Req req;

@@ -11,7 +11,7 @@ int __cdecl gm_AccumulateTyped2(char*);
 void __cdecl d2_ClampAmountToRange(int, int, int, int*);
 int __cdecl gm_AmountToUnits(int, unsigned char);
 int __cdecl d2_LoadForm(int, int, char*);
-void __cdecl fcn_00471d80(int, int);
+void __cdecl d2_CenterForm(int, int);
 void __cdecl d2_SetForm(int, int);
 char* __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, char*);
@@ -25,7 +25,7 @@ void __cdecl d2_DestroyForm(int);
 
 
 /* ADDRESS: GOLDTL 0x004e3de0 */
-void __cdecl fcn_004e3de0(char* a, int* b)
+void __cdecl cut_RunAuctionBidDialog(char* a, int* b)
 {
 	int i;
 	int val;
@@ -62,7 +62,7 @@ void __cdecl fcn_004e3de0(char* a, int* b)
 	if (cap < val)
 		return;
 	dlg = d2_LoadForm(0, 0, "cutscenes\\pacht");
-	fcn_00471d80(dlg, 3);
+	d2_CenterForm(dlg, 3);
 	g_100f1dc = -1;
 	d2_SetForm(dlg, 0);
 	t = io_AppendText(0x1aa6, g_773d75);
@@ -72,7 +72,7 @@ void __cdecl fcn_004e3de0(char* a, int* b)
 	bar = d2_AddWindowValueGauge((*(int*) (g_77255c + 0xc) - 0x12c) / 2 - 8, 8, 0x12c, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
 	d2_UpdateProgressBar(bar, 0x5dc, 1);
 	g_100f1dc = -1;
-	while (main_RunFrameLoop(fcn_004e3de0, cut_EventLoopFlags) != 0) {
+	while (main_RunFrameLoop(cut_RunAuctionBidDialog, cut_EventLoopFlags) != 0) {
 		if (d2_UpdateProgressBar(bar, 0, 0) == 0) {
 			g_774654 = 1;
 		} else {

@@ -21,7 +21,7 @@ int __cdecl d2_CheckOwnerBlocked(unsigned char*);
 void __cdecl d2_InitPlayerBar(unsigned char*, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl d2_ShowThievesGuildSpyDialog(void);
-void __cdecl fcn_005bdc30(int, Req*, char*, void*, int);
+void __cdecl d2_RunCityScrollMapDialog(int, Req*, char*, void*, int);
 void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl sv_ClearObjectSelection(void);
 
@@ -46,7 +46,7 @@ void __cdecl d2_StartThievesGuildSpyPicker(unsigned char* building)
 				req.d = 1;
 			}
 			io_FormatTextBuffer(text, 0x19f6);
-			fcn_005bdc30(1, &req, text, d2_ShowThievesGuildSpyDialog, 0);
+			d2_RunCityScrollMapDialog(1, &req, text, d2_ShowThievesGuildSpyDialog, 0);
 			d2_RestoreHudAfterDialog();
 			sv_ClearObjectSelection();
 		}

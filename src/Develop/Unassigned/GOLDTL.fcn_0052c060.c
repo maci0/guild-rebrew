@@ -87,7 +87,7 @@ extern float g_773e14;
 extern float g_773e18;
 extern float g_773e1c;
 
-void __cdecl fcn_004125c0(int, int);
+void __cdecl io_SetMouseCursorPos(int, int);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 void __cdecl d3_SetNodePosition(void*, void*);
 void __cdecl d3_SetObjectRotation(void*, void*);
@@ -179,7 +179,7 @@ L4:
 		d2_MouseTopBoundary = g_77464c;
 		g_6772c4 = 1;
 		g_774774 = 0;
-		fcn_004125c0(g_774754, g_774758);
+		io_SetMouseCursorPos(g_774754, g_774758);
 		g_774754 = 0;
 		g_774758 = 0;
 		return 0;

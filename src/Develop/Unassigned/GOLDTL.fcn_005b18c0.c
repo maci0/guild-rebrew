@@ -3,7 +3,7 @@
 void __cdecl d2_DestroyForm(int);
 void __cdecl d2_DestroyElement(int);
 
-void __cdecl fcn_005b18c0(int* obj)
+void __cdecl d2_DestroyMapDialog(int* obj)
 {
 	int i;
 

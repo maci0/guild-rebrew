@@ -29,7 +29,7 @@ float* __stdcall fcn_005eb970(float*, float*, float*);
 void __cdecl d3_UpdateAnimatedFloorMaterials(int, int, int);
 void __cdecl d3_RenderFloorCellWater(char*, Cell*);
 
-void __cdecl fcn_00440f70(char* o, char flag)
+void __cdecl d3_RenderWaterFloorCells(char* o, char flag)
 {
 	float m[16];
 	Cell (*cells)[8];

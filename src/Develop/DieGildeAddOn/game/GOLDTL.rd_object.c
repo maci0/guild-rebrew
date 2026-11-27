@@ -17,7 +17,7 @@ void __cdecl d3_AddObjectDrawData(char* object);
 void __cdecl d3_ReadObjectEvents(void* stream, char* object);
 char __cdecl d3_SetObjectVisible(char* object, char on);
 int __cdecl d3_GetSceneVersionSlotCount(unsigned int version);
-void __cdecl fcn_00449f90(char* object, void* part, char* name);
+void __cdecl d3_AttachCachedModelParts(char* object, void* part, char* name);
 int __cdecl d3_LoadModel(char* a, char* b);
 void __cdecl fcn_0045ce90(void* resource);
 void __cdecl m_FreeTracked(void* ptr);
@@ -161,7 +161,7 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 				if (type > 0) {
 					vfs_ReadCString(stream, name);
 					if (d3_LoadModel(name, name) != 0) {
-						fcn_00449f90(object, 0, name);
+						d3_AttachCachedModelParts(object, 0, name);
 					} else {
 						sprintf(tmp, "Missing LOD for Object \"%s\": [\"%s.bgf\"].", object, name);
 						g_6b85a4 = 1;
@@ -174,21 +174,21 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 				for (i = 0; i < type; i++) {
 					vfs_ReadCString(stream, name);
 					d3_LoadModel(name, name);
-					fcn_00449f90(object, RD_DRAW(object) + i * 0x4a4 + 0xf4, name);
+					d3_AttachCachedModelParts(object, RD_DRAW(object) + i * 0x4a4 + 0xf4, name);
 				}
 				if (version >= 0x3a6c00a3u) {
 					vfs_ReadByte(stream, &b);
 					if (b != 0) {
 						vfs_ReadCString(stream, name);
 						d3_LoadModel(name, name);
-						fcn_00449f90(object, RD_DRAW(object) + 0xee0, name);
+						d3_AttachCachedModelParts(object, RD_DRAW(object) + 0xee0, name);
 					}
 				} else {
 					if (*(char**) (RD_DRAW(object) + 0x40c) != 0) {
 						strcpy(name, *(char**) (RD_DRAW(object) + 0x40c));
 						strcat(name, "_s");
 						if (d3_LoadModel(name, name) != 0) {
-							fcn_00449f90(object, RD_DRAW(object) + 0xee0, name);
+							d3_AttachCachedModelParts(object, RD_DRAW(object) + 0xee0, name);
 						}
 					}
 				}

@@ -5,7 +5,7 @@ extern unsigned short g_774970;
 
 int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl amt_FindOfficeSlotsByKind(int, int, void *);
-int __cdecl fcn_004e4ae0(char *, int);
+int __cdecl sb_LoadLocalizedSampleBankIfAllowed(char *, int);
 int __cdecl msx_StartMusicIfAllowed(int);
 void __cdecl cut_WaitSeconds(int, ...);
 int __cdecl cm_WaitNetworkSyncBanner(int);
@@ -14,8 +14,8 @@ int __cdecl amt_ResolveOfficeApplications(int, int, void *);
 
 int __cdecl d2_LoadForm(char *, int, int);
 void __cdecl d2_SetFormVisibility(int, int);
-void __cdecl fcn_00471d80(int, int);
-void __cdecl fcn_004e4730(char *);
+void __cdecl d2_CenterForm(int, int);
+void __cdecl cut_StartSceneCutscene(char *);
 int __cdecl msx_StartAmbientTrack(char *, int);
 int __cdecl gm_SelectEntityHeadSet(int);
 int __cdecl fcn_0064d41a(char *, char *, ...);
@@ -41,14 +41,14 @@ int __cdecl cut_FadeToBlack(void);
 int __cdecl cut_WaitForScriptExit(int);
 void __cdecl cut_CleanupCutscene(void);
 void __cdecl d2_DestroyForm(int);
-void __cdecl fcn_004da4d0(int, void *);
+void __cdecl d2_AddCouncilSeatMarker(int, void *);
 
 
 int __cdecl amt_SyncAllOfficeSlots(void);
 int __cdecl cut_UnloadSampleBank(int);
 void __cdecl msx_StopAmbientTrack(int);
 int __cdecl fcn_004e4eb0(void);
-void __cdecl fcn_0057e880(int, int, int, int);
+void __cdecl d2_DispatchTutorialInput(int, int, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004da690 */
@@ -150,8 +150,8 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
 
     memcpy(a0c, a0, 0x114);
     s2C = 0;
-    s34 = fcn_004e4ae0((char *)0x68c214, 0);
-    s38 = fcn_004e4ae0((char *)0x68c204, 0);
+    s34 = sb_LoadLocalizedSampleBankIfAllowed((char *)0x68c214, 0);
+    s38 = sb_LoadLocalizedSampleBankIfAllowed((char *)0x68c204, 0);
     msx_StartMusicIfAllowed(0);
 
     n = 0;
@@ -257,7 +257,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
     cm_WaitNetworkSyncBanner(0x6b5c60);
     s14 = d2_LoadForm((char *)0x68c1ec, 0, 0);
     d2_SetFormVisibility(s14, 0);
-    fcn_00471d80(s14, 3);
+    d2_CenterForm(s14, 3);
     s1C = 0;
     if (s28 > 0) {
         for (n = 0; n < s28; n++) {
@@ -267,7 +267,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
     }
     s3C = 0;
     if (s1C != 0) {
-        fcn_004e4730(sitzung[s30]);
+        cut_StartSceneCutscene(sitzung[s30]);
         if (s2C == 0)
             s2C = msx_StartAmbientTrack((char *)0x68c1d0, 0x40);
         for (i = 0; i < s44; i++) {
@@ -309,9 +309,9 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                     i += 1;
                 }
                 s5C = d2_LoadForm((char *)0x68c124, 0, 0);
-                fcn_00471d80(s5C, 3);
+                d2_CenterForm(s5C, 3);
                 s60 = d2_LoadForm((char *)0x68c104, 0, 0);
-                fcn_00471d80(s60, 3);
+                d2_CenterForm(s60, 3);
                 s10 = gm_LookupEntityRecordById(*(int *)s00);
                 s18 = gm_LookupEntityRecordById(*(int *)(s00 + 0x10));
                 fcn_004727a0(s60, 1);
@@ -503,7 +503,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
         }
     }
     if (s1C != 0 && s3C == 0) {
-            fcn_004e4730(sitzung[s30]);
+            cut_StartSceneCutscene(sitzung[s30]);
             if (s2C == 0)
                 s2C = msx_StartAmbientTrack((char *)0x68c1d0, 0x40);
             for (i = 0; i < s44; i++) {
@@ -547,9 +547,9 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                     i += 1;
                 }
                 s14 = d2_LoadForm((char *)0x68c124, 0, 0);
-                fcn_00471d80(s14, 3);
+                d2_CenterForm(s14, 3);
                 s50 = d2_LoadForm((char *)0x68c058, 0, 0);
-                fcn_00471d80(s50, 2);
+                d2_CenterForm(s50, 2);
                 fcn_004727a0(s50, 0);
                 {
                 int *lane;
@@ -695,7 +695,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                                         pq = (int *)((char *)&mid + 0xcc + jc * 0x38);
                                         *(int *)(*(int *)0x1015ea0 + *pq * 0x2f4 + 0x3c) = 1;
                                         fcn_004727a0(s50, jc + 1);
-                                        fcn_004da4d0(jc + 1,
+                                        d2_AddCouncilSeatMarker(jc + 1,
                                                      (void *)((char *)&mid + 0xc8 + jc * 0x38));
                                         fcn_004727a0(s14, 0);
                                         io_AppendText((char *)0x12df,
@@ -822,7 +822,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
         msx_StopAmbientTrack(s2C);
     fcn_004e4eb0();
     memcpy(a0, a0c, 0x114);
-    fcn_0057e880(0x30, 0, 0, 0);
+    d2_DispatchTutorialInput(0x30, 0, 0, 0);
 
 
 

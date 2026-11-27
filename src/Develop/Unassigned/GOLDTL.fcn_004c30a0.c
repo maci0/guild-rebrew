@@ -3,7 +3,7 @@ extern float g_681750;
 
 int* __cdecl d3snd_PrepareVoiceSample(int, int, int, int);
 int __cdecl sb_SetVoiceVolume(int*, int);
-void __cdecl fcn_004c0a80(int*, int);
+void __cdecl d3snd_TrackQueuedVoice(int*, int);
 
 
 /* ADDRESS: GOLDTL 0x004c30a0 */
@@ -16,7 +16,7 @@ int* __cdecl d3snd_QueueSound(int code, int arg2, int text, int variation, int d
 	p = d3snd_PrepareVoiceSample(code, arg2, text, variation);
 	if (p != 0) {
 		sb_SetVoiceVolume(p, (int) (g_681750 * 127.0f));
-		fcn_004c0a80(p, delay);
+		d3snd_TrackQueuedVoice(p, delay);
 	}
 	return p;
 }

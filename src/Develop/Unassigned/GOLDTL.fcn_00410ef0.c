@@ -1,9 +1,9 @@
 
 
-int __cdecl fcn_004230e0(int);
+int __cdecl sb_ReleaseSampleBank(int);
 
 int __cdecl KillSampleBank(int* p)
 {
-	fcn_004230e0(*p);
+	sb_ReleaseSampleBank(*p);
 	return 0;
 }

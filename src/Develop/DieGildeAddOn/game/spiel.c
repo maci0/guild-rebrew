@@ -3494,7 +3494,7 @@ void __cdecl gm_UpdateResidenceOwnerDecor(Estate*);
 Figure* __cdecl gm_FindBuildingOwner(Estate*);
 int __cdecl d3_GetContextIndex(int);
 void __cdecl fcn_00402aa0(Model*);
-void __cdecl fcn_0052dd80(Estate*);
+void __cdecl d3_DestroyEntityWimpelNodes(Estate*);
 void __cdecl d3_CreateEntityFlagPennant(Estate*);
 
 /* ADDRESS: GOLDTL 0x005059b0 */
@@ -3572,14 +3572,14 @@ void __cdecl gm_AssignBuildingOwner(Estate* building, unsigned short owner, int 
 	if (slot_ent != ((Entity*)gm_CityEntity) && building->placed != 0 && (slot_ent->type == 6 || slot_ent->type == 7 || slot_ent->type == 5)) {
 		saved = d3_CurrentContextIndex;
 		d3_SelectSceneContext(0, 1);
-		fcn_0052dd80(building);
+		d3_DestroyEntityWimpelNodes(building);
 		d3_CreateEntityFlagPennant(building);
 		d3_SelectSceneContext(saved, 1);
 		return;
 	}
 	saved = d3_CurrentContextIndex;
 	d3_SelectSceneContext(0, 1);
-	fcn_0052dd80(building);
+	d3_DestroyEntityWimpelNodes(building);
 	d3_SelectSceneContext(saved, 1);
 }
 #endif

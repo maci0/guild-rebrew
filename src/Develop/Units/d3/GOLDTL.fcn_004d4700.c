@@ -10,7 +10,7 @@ int __cdecl fcn_00442910(int, char*, float*, char*);
 int __cdecl d3_ApplyObjectAnimation(int, char*, int);
 
 /* ADDRESS: GOLDTL 0x004d4700 */
-int __cdecl fcn_004d4700(char* e)
+int __cdecl ch_RunDeathFallAction(char* e)
 {
 	float rot[3];
 	int h;

@@ -42,7 +42,7 @@ extern int d2_CurrentElementId;
 extern int g_14ce8e0;
 
 int __cdecl d2_TutorialAllowsFlag(int);
-void __cdecl fcn_0057e880(int, int, int, int);
+void __cdecl d2_DispatchTutorialInput(int, int, int, int);
 char* __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -90,7 +90,7 @@ void __cdecl d2_ShowPrivilegien(void)
 	if (!d2_TutorialAllowsFlag(2)) {
 		return;
 	}
-	fcn_0057e880(8, 0, 0, 0);
+	d2_DispatchTutorialInput(8, 0, 0, 0);
 	for (i = 0; i < 0x88; i++) {
 		((int*) &q)[i] = 0;
 	}
@@ -229,5 +229,5 @@ void __cdecl d2_ShowPrivilegien(void)
 		}
 	} while (main_RunFrameLoop((void*) d2_ShowPrivilegien, 0x657c7) != 0);
 	d2_DestroyForm((int) dlg);
-	fcn_0057e880(8, 0, 1, 0);
+	d2_DispatchTutorialInput(8, 0, 1, 0);
 }

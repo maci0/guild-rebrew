@@ -13,7 +13,7 @@ typedef struct {
 #include "Develop/Units/m_alloc/m_alloc_checks.h"
 void __cdecl fcn_004273d0(char* g, int h, const char* msg);
 
-int __cdecl fcn_0040f5d0(char** a, int* s, unsigned char* k, unsigned char* b5, unsigned char* b6, unsigned char* b7, unsigned char* c0)
+int __cdecl evt_SetEmitterFlags(char** a, int* s, unsigned char* k, unsigned char* b5, unsigned char* b6, unsigned char* b7, unsigned char* c0)
 {
 	char* e;
 

@@ -60,7 +60,7 @@ void* __cdecl m_alloc(int size, char* tag);
 void __cdecl m_FreeTracked(void* p);
 
 /* ADDRESS: GOLDTL 0x00416300 */
-void __cdecl fcn_00416300(Snow* r, int n, ...)
+void __cdecl d3_SetSnowEffectOptions(Snow* r, int n, ...)
 {
 	Flake* d;
 	Flake* buf;

@@ -5,7 +5,7 @@ extern Entry2c* g_67fbb0;
 extern Entry2c* g_67fbb4;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-int __cdecl fcn_004acc00(int*);
+int __cdecl ai_LoadHistoricalDfn(int*);
 
 extern int g_67fbac;
 
@@ -19,7 +19,7 @@ int __cdecl gm_LoadHistoricalTable(void)
 	g_7728c4 = -1;
 	g_7728cc = -1;
 	g_7728d0 = -1;
-	r = fcn_004acc00(&g_67fba8);
+	r = ai_LoadHistoricalDfn(&g_67fba8);
 	if (r == 0) {
 		g_7728c4 = g_67fbb0->key;
 		g_7728cc = g_67fbb4->key;
