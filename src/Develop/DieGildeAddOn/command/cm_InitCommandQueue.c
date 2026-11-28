@@ -18,7 +18,7 @@ struct CMD_STATUS_SLOT_VIEW {
 
 extern char g_9bade0[];
 #include "Develop/client_types.h"
-extern COMMAND_STATUS_SLOT g_fb5760[0x8000];
+extern COMMAND_STATUS_SLOT cm_CommandStatusQueue[0x8000];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_1005780;
 
@@ -45,7 +45,7 @@ void __cdecl cm_InitCommandQueue(void)
 	g_1005768 = 0;
 	g_1005760 = 0;
 	for (i = 0; i < 0x8000; i++) {
-		((struct CMD_STATUS_SLOT_VIEW*)g_fb5760)[i].owner = -1;
-		((struct CMD_STATUS_SLOT_VIEW*)g_fb5760)[i].free = 1;
+		((struct CMD_STATUS_SLOT_VIEW*)cm_CommandStatusQueue)[i].owner = -1;
+		((struct CMD_STATUS_SLOT_VIEW*)cm_CommandStatusQueue)[i].free = 1;
 	}
 }

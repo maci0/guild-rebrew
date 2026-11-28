@@ -14,8 +14,8 @@ typedef struct Tex {
 	char pad5d[0x13];
 } Tex;
 
-extern char* g_104049c;
-extern unsigned int g_10404a0;
+extern char* d3_TextureBank;
+extern unsigned int d3_TextureBankCount;
 
 void __cdecl d3_ReleaseTexture(Tex*);
 
@@ -33,9 +33,9 @@ void* __cdecl d3_DetachAndReleaseTexture(Tex* t, char all)
 		r = t->handle;
 		t->handle = 0;
 		if (t->id != -1 && t->x5c > 0 && all != 0) {
-			for (i = 0; i < g_10404a0; i++) {
-				if (((Tex*)g_104049c)[i].refs > 0 && ((Tex*)g_104049c)[i].id == t->id) {
-					d3_DetachAndReleaseTexture(&((Tex*)g_104049c)[i], 0);
+			for (i = 0; i < d3_TextureBankCount; i++) {
+				if (((Tex*)d3_TextureBank)[i].refs > 0 && ((Tex*)d3_TextureBank)[i].id == t->id) {
+					d3_DetachAndReleaseTexture(&((Tex*)d3_TextureBank)[i], 0);
 				}
 			}
 		}

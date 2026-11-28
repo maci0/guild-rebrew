@@ -11,7 +11,7 @@ int __cdecl evt_ImportCommand(const char*, void*, int, int, ...);
 /* ADDRESS: GOLDTL 0x0040cae0 */
 int __cdecl WalkToDummy(char** character, char** dummy)
 {
-    if (g_6b7ebc != 0 && *(void**) (g_6b7ebc + 0x44) == (void*) WalkToDummy) {
+    if (evt_WaitingScriptTask != 0 && *(void**) (evt_WaitingScriptTask + 0x44) == (void*) WalkToDummy) {
         if (*(void**) (*character + 0x128) != 0) {
             *(void**) (evt_CurrentScript + 0xc60) = (void*) WalkToDummy;
             return 0;

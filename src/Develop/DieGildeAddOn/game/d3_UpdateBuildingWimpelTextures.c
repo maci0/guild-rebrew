@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_67a370;
+extern int d3_ActiveScene;
 
 // SIZE 0x21c
 struct s_7f4ca0 {
@@ -35,11 +35,11 @@ void __cdecl d3_UpdateBuildingWimpelTextures(int idx)
 	int n;
 
 	save = d3_CurrentContextIndex;
-	r = ((struct s_7f4ca0*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx]);
+	r = ((struct s_7f4ca0*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[idx]);
 	d3_SelectSceneContext(0, 1);
 	for (e = gm_StartFilteredEntitySearch(1, 4, idx); e != 0; e = gm_FindNextFilteredEntity()) {
 		if (*(char**) (e + 0x61) != 0) {
-			d3_VisitSceneObjects(g_67a370, *(char**) (e + 0x61), 0x340, (void*) d3_ApplyWimpelTextureCallback, e);
+			d3_VisitSceneObjects(d3_ActiveScene, *(char**) (e + 0x61), 0x340, (void*) d3_ApplyWimpelTextureCallback, e);
 		}
 	}
 	for (e = fcn_00502cd0(0, 3, 7, 3, idx, 4, 0x1d); e != 0; e = gm_NextEntityQueryMatch()) {

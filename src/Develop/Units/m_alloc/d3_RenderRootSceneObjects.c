@@ -1,7 +1,7 @@
 /* Builds one renderable particle per visible entity slot: allocates the
  * pool record, fills its transform and colour fields and links it into the
  * active list, or re-submits an already lit slot through the device. */
-extern int d3_RenderedVertexCount, g_1042a08; extern void* g_6b8068;
+extern int d3_RenderedVertexCount, d3_RenderedFaceCount; extern void* g_6b8068;
 typedef struct {
 	char pad0[0x1dc];
 	float f1dc;
@@ -123,6 +123,6 @@ unsigned char __cdecl d3_RenderRootSceneObjects(int a0)
 tail:
 	d3_RenderedVertexCount += v1->f310;
 	(*(int*) 0x6b8054)++;
-	g_1042a08 += v1->f314;
+	d3_RenderedFaceCount += v1->f314;
 	return 1;
 }

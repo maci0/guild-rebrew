@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern char g_6b5c60;
+extern char str_empty;
 
 typedef struct D3_ANIM_LIST_ENTRY {
 	char name[0x58];
@@ -38,7 +38,7 @@ char __cdecl d3_StartChildAnimByName(D3_ANIM_OBJ* o, char* name)
 	int i;
 
 	if (o != 0 && name != 0 && o->parent != 0 && o->ov != 0) {
-		o->ov->name[0] = g_6b5c60;
+		o->ov->name[0] = str_empty;
 		p = o->parent;
 		if (p->ov != 0) {
 			l = p->ov->list;

@@ -11,8 +11,8 @@ void __cdecl d3_ReleaseSceneResourceRef(SCENE_RESOURCE* p)
     if (!p || p->level <= 0)
         return;
     if (*(int*) ((char*) p + 0x70) > 0 && p->byte71 == 0) {
-        q = g_104049c;
-        for (i = 0; i < g_10404a0; ++i, ++q) {
+        q = d3_TextureBank;
+        for (i = 0; i < d3_TextureBankCount; ++i, ++q) {
             if (q->level > 0 && q->id == p->id && q->byte71 > 0)
                 d3_ReleaseSceneResourceRef(q);
         }
@@ -25,14 +25,14 @@ void __cdecl d3_ReleaseSceneResourceRef(SCENE_RESOURCE* p)
         p->com64 = 0;
         p->tracked = 0;
     } else {
-        index = p - g_104049c;
-        q = g_104049c;
-        for (i = 0; i < g_10404a0; ++i, ++q) {
+        index = p - d3_TextureBank;
+        q = d3_TextureBank;
+        for (i = 0; i < d3_TextureBankCount; ++i, ++q) {
             if (q->level > 0 && (q->flags & 2) && q->alias == index) {
                 q->flags &= ~2;
                 q->alias = p->alias;
-                replacement = q - g_104049c;
-                for (j = i + 1, ++q; j < g_10404a0; ++j, ++q) {
+                replacement = q - d3_TextureBank;
+                for (j = i + 1, ++q; j < d3_TextureBankCount; ++j, ++q) {
                     if (q->level > 0 && (q->flags & 2) && q->alias == index) {
                         q->alias = replacement;
                     }
@@ -40,7 +40,7 @@ void __cdecl d3_ReleaseSceneResourceRef(SCENE_RESOURCE* p)
                 break;
             }
         }
-        if (i == g_10404a0)
+        if (i == d3_TextureBankCount)
             d3_ReleaseSceneResourceData(p);
     }
     p->level = 0;

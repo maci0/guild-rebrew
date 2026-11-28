@@ -27,7 +27,7 @@ struct stack_4291c0 {
 };
 
 extern int g_6b7ec4;
-extern char* g_6b7eb8;
+extern char* evt_MemberScopeScript;
 
 void __cdecl evt_ReadToken(int lex, struct tok_4291c0* t);
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
@@ -62,7 +62,7 @@ int __cdecl evt_ExecuteStatements(char* g)
 	do {
 		evt_ReadToken(*(int*) (g + 0x118), &t);
 		if (t.type == 1) {
-			(*(int*)&g_6b7eb8) = 0;
+			(*(int*)&evt_MemberScopeScript) = 0;
 			if (t.u.num == 9) {
 				s = *(struct stack_4291c0**) (g + 0xc28);
 				if (s->count > 0) {
@@ -79,7 +79,7 @@ int __cdecl evt_ExecuteStatements(char* g)
 				return 0;
 			}
 		} else if (t.type == 10) {
-			(*(int*)&g_6b7eb8) = 0;
+			(*(int*)&evt_MemberScopeScript) = 0;
 			switch (t.u.num) {
 			case 1:
 				evt_ParseWhile();
@@ -120,7 +120,7 @@ int __cdecl evt_ExecuteStatements(char* g)
 		} else if (t.type == 8) {
 			evt_ParseSymbolDeclaration(g, t.u.num);
 		} else if (t.type == 11) {
-			(*(int*)&g_6b7eb8) = t.u.num;
+			(*(int*)&evt_MemberScopeScript) = t.u.num;
 			(*(int*) (g + 0x118))++;
 		} else if (t.type != 12) {
 			sprintf(msg, "Unknown symbol : '%s'", t.u.text);

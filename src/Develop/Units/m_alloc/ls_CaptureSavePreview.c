@@ -32,7 +32,7 @@ typedef struct {
 extern int d2_ScreenHeight;
 extern int g_1040494;
 extern int g_14ce86c;
-extern int g_77250c;
+extern int d2_ScreenSurface;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 Tex* __cdecl d2_CreateSurface(TexDesc*, int);
@@ -71,7 +71,7 @@ void __cdecl ls_CaptureSavePreview(void)
 	dst.right = 0xa0;
 	dst.top = 0;
 	dst.bottom = 0x78;
-	d2_BlitSurfaceToSurface(0, 0, g_1040494, d2_ScreenHeight, g_77250c, 0, 0, big);
+	d2_BlitSurfaceToSurface(0, 0, g_1040494, d2_ScreenHeight, d2_ScreenSurface, 0, 0, big);
 	fcn_006114ff(small->surf, 0, &dst, big->surf, 0, &src, 4, 0xff000000);
 	d2_LockSurface(small);
 	k = 0;

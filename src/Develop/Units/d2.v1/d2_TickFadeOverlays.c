@@ -7,7 +7,7 @@ void __cdecl d2_TickFadeOverlays(void)
     int f;
 
     /* Native comparison treats the cursor addresses as signed 32-bit values. */
-    for (p = g_1015ec0; (int)p < (int)(g_1015ec0 + 32); p++) {
+    for (p = d2_OverlaySprites; (int)p < (int)(d2_OverlaySprites + 32); p++) {
         n = *p;
         if (n != 0) {
             f = *(int*) n;

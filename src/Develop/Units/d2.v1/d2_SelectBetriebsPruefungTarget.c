@@ -48,12 +48,12 @@ extern pos14_7f4c00 gm_GameTime;
 extern int g_14abc98;
 extern int g_14b5290;
 extern int g_14abcf0;
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern char* g_7746c4;
-extern char* g_7746cc;
+extern char* d2_VisitedBuilding;
+extern char* sv_SelectedBuilding;
 extern char s_6ab348[];
 
 int __cdecl d2_ShowModalMessageBox(int, int);
@@ -82,7 +82,7 @@ int __cdecl d2_SelectBetriebsPruefungTarget(int unused, char* e)
 		return 0;
 	}
 	for (i = 0; i < 768; i++) {
-		if ((*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].selected) != 0) {
+		if ((*(unsigned char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].selected) != 0) {
 			break;
 		}
 	}
@@ -101,22 +101,22 @@ int __cdecl d2_SelectBetriebsPruefungTarget(int unused, char* e)
 	s = io_AppendText(0x1a73, e);
 	btn1 = d2_GetWindowListItem(dlg, 1, s);
 	btn2 = d2_GetWindowListItem(dlg, 1, s + 1);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == btn1) {
 				memset(&pkt, 0, sizeof(pkt));
 				pkt.type = 0x64;
-				pkt.x8 = (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id);
-				pkt.xc = *(int*) (g_7746c4 + 1);
+				pkt.x8 = (*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id);
+				pkt.xc = *(int*) (d2_VisitedBuilding + 1);
 				pkt.name = (*(pos14_7f4c00*)&gm_GameTime);
 				pkt.x36 = 1;
 				pkt.x5c = *(int*) (e + 1);
-				pkt.x60 = *(int*) (g_7746c4 + 1);
-				pkt.x64 = *(int*) (g_7746cc + 2);
+				pkt.x60 = *(int*) (d2_VisitedBuilding + 1);
+				pkt.x64 = *(int*) (sv_SelectedBuilding + 2);
 				for (i = 0; i < 32; i++) {
 					if (((Player**)ch_ContextCharacters)[i] != 0 && ((Player**)ch_ContextCharacters)[i]->x188 != 0) {
 						pkt.x58 = ((Player**)ch_ContextCharacters)[i]->x4;
@@ -134,10 +134,10 @@ int __cdecl d2_SelectBetriebsPruefungTarget(int unused, char* e)
 				if (n > 1) {
 					d2_ShowModalMessageBox(g_14abcf0, 4);
 				}
-				g_774654 = 2;
+				d2_DialogCloseRequested = 2;
 			}
 			else if (d2_CurrentElementId == btn2) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	} while (main_RunFrameLoop((void*) d2_SelectBetriebsPruefungTarget, 0x677c7) != 0);

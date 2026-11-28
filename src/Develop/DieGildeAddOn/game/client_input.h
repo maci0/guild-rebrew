@@ -41,17 +41,17 @@ typedef struct INPUT_SYSTEM_VTABLE {
 struct INPUT_DEVICE { INPUT_DEVICE_VTABLE* vtbl; };
 struct INPUT_SYSTEM { INPUT_SYSTEM_VTABLE* vtbl; };
 
-extern HWND g_14ce89c;
-extern HWND g_14ce89c;
-extern HANDLE g_14cf94c;
-extern HANDLE g_14cf94c;
+extern HWND io_InputHwnd;
+extern HWND io_InputHwnd;
+extern HANDLE io_MouseEventHandle;
+extern HANDLE io_MouseEventHandle;
 
-extern INPUT_DEVICE* g_14ce8a0;
-extern INPUT_DEVICE* g_14ce8a0;
-extern INPUT_DEVICE* g_14ce90c;
-extern INPUT_DEVICE* g_14ce90c;
-extern INPUT_SYSTEM* g_14cf954;
-extern INPUT_SYSTEM* g_14cf954;
+extern INPUT_DEVICE* io_MouseDevice;
+extern INPUT_DEVICE* io_MouseDevice;
+extern INPUT_DEVICE* io_KeyboardDevice;
+extern INPUT_DEVICE* io_KeyboardDevice;
+extern INPUT_SYSTEM* io_DirectInput;
+extern INPUT_SYSTEM* io_DirectInput;
 
 int __cdecl io_AcquireKeyboard(int acquire);
 int __cdecl io_AcquireMouse(int acquire);

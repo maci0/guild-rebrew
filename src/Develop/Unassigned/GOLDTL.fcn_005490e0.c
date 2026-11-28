@@ -1,7 +1,7 @@
 
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_7f4ca4[];
+extern char gm_EntityIdField[];
 
 void __cdecl cm_SendCopyEntityData(char*);
 
@@ -12,6 +12,6 @@ void __cdecl fcn_005490e0(void)
 	msg[4] = 0x3a;
 	*(int*) (msg + 0xc) = -1;
 	msg[0x36] = 1;
-	*(int*) (msg + 8) = *(int*) (g_7f4ca4 + g_774970 * 0x21c);
+	*(int*) (msg + 8) = *(int*) (gm_EntityIdField + gm_LocalPlayerSlot * 0x21c);
 	cm_SendCopyEntityData(msg);
 }

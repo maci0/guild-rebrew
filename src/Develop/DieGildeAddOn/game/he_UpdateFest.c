@@ -77,7 +77,7 @@ typedef struct {
 
 extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-extern char g_6b5c60[];
+extern char str_empty[];
 
 
 Group* __cdecl fcn_00502cd0(int, int, int, int);
@@ -148,7 +148,7 @@ void __cdecl he_UpdateFest(Order* o)
 			rep stosb
 		}
 		n = 0;
-		party.ent = ((Entity*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[o->ent]);
+		party.ent = ((Entity*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[o->ent]);
 		if (g != 0) {
 			first = g->a;
 			party.b = g->b;
@@ -181,7 +181,7 @@ void __cdecl he_UpdateFest(Order* o)
 				io_FormatTextBuffer(line, 0x1788, party.members[i].ent->slot, k);
 				strcat(msg, line);
 			}
-			he_PostEntityMessage(party.ent->id, -1, msg, 0x20, 0x5fd, g_6b5c60);
+			he_PostEntityMessage(party.ent->id, -1, msg, 0x20, 0x5fd, str_empty);
 		}
 		o->stamp = (*(pos14_7f4c00*)&gm_GameTime);
 		cm_SendSetHE(-1, o);

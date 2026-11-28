@@ -1,6 +1,6 @@
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_77261c;
+extern int ai_FeudTargetEntity;
 
 int __cdecl gm_RandomMod(int);
 int __cdecl gm_MatchesTargetFilter(unsigned short, unsigned short, void*, int);
@@ -26,11 +26,11 @@ unsigned int __cdecl gm_FindEntityCandidatesInRange(unsigned short* actor, unsig
 	memset(query, 0, 0x50);
 	memset((char*) query + 0x1c, 0xff, 0x20);
 	*(int*) ((char*) query + 0x14) = 2; hasFavorRange = 0;
-	if (g_77261c != 0) {
+	if (ai_FeudTargetEntity != 0) {
 		query[1] = *queryFlags;
-		if (gm_MatchesTargetFilter(*actor, *(unsigned short*) g_77261c, query, 0) != 0) {
+		if (gm_MatchesTargetFilter(*actor, *(unsigned short*) ai_FeudTargetEntity, query, 0) != 0) {
 			idx = 1;
-			*outIds = *(unsigned short*) g_77261c;
+			*outIds = *(unsigned short*) ai_FeudTargetEntity;
 		}
 	}
 	if ((minimumScore > 0.0 || maximumScore < 100.0) && minimumScore < maximumScore) {

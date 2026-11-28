@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 int __cdecl gm_CheckEntityAgeLimit(unsigned short id);
 #include "Develop/DieGildeAddOn/game/spiel.h"
@@ -18,22 +18,22 @@ int __cdecl gm_CalcEntityTaxSlots(unsigned short id, int* out, int flag)
 
 	offset = id * 0x21c;
 	memset(out, 0, 0xe * sizeof(int));
-	if (*(unsigned short*) (g_7f4ca0 + offset) == 0xffff) {
+	if (*(unsigned short*) (gm_EntitySlotTable + offset) == 0xffff) {
 		return 0;
 	}
-	if (*(unsigned char*) (g_7f4ca0 + offset + 8) == 0) {
+	if (*(unsigned char*) (gm_EntitySlotTable + offset + 8) == 0) {
 		return 0;
 	}
 	if (gm_CheckEntityAgeLimit(id) != 0) {
 		return 0;
 	}
-	if (amt_CheckZunftTaxLaw(gm_MapEntityStatRange(*(unsigned char*) (g_7f4ca0 + offset + 0x164))) != 0) {
+	if (amt_CheckZunftTaxLaw(gm_MapEntityStatRange(*(unsigned char*) (gm_EntitySlotTable + offset + 0x164))) != 0) {
 		gm_ApplySteuerLaw0aToSlots(id, out, flag);
 	} else {
 		gm_CollectCityTaxOffers(id, out, flag);
 	}
 	gm_ApplyLaw0x0bTaxSlot(id, out, flag);
-	if (*(int*) (g_7f4ca0 + offset + 0x1a8) > 0) {
+	if (*(int*) (gm_EntitySlotTable + offset + 0x1a8) > 0) {
 		gm_CalcLaw0x0dTaxSlot(id, out, flag);
 	}
 	gm_CalcLaw0x0cTaxSlot(id, out, flag);

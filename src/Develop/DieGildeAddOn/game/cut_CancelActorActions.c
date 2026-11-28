@@ -1,4 +1,4 @@
-extern int g_772ea4;
+extern int cut_CombatCancelledEntity;
 
 
 
@@ -10,7 +10,7 @@ void __cdecl cut_CancelActorActions(void* request)
 {
 	char buf[0x100];
 
-	g_772ea4 = gm_LookupEntityRecordById(*(int*) request);
-	io_FormatTextBuffer(buf, 0x11b7, *(unsigned short*) g_772ea4);
+	cut_CombatCancelledEntity = gm_LookupEntityRecordById(*(int*) request);
+	io_FormatTextBuffer(buf, 0x11b7, *(unsigned short*) cut_CombatCancelledEntity);
 	d2_ShowStatusBanner(buf);
 }

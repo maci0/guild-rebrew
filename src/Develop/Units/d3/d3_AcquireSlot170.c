@@ -5,7 +5,7 @@
 typedef Slot170_7731b8 Slot170;
 // SIZE 0x170
 
-extern Slot170_7731b8 g_7731b8[8];
+extern Slot170_7731b8 gm_CannonTowers[8];
 
 int __cdecl d3_AcquireSlot170(int id)
 {
@@ -16,7 +16,7 @@ int __cdecl d3_AcquireSlot170(int id)
 	free = -1;
 	if (id != -1) {
 		for (i = 0; i < 8; i++) {
-			v = g_7731b8[i].id;
+			v = gm_CannonTowers[i].id;
 			if (v == -1) {
 				if (free == -1) {
 					free = i;
@@ -26,7 +26,7 @@ int __cdecl d3_AcquireSlot170(int id)
 			}
 		}
 		if (free >= -1) {
-			g_7731b8[free].id = id;
+			gm_CannonTowers[free].id = id;
 			return 1;
 		}
 	}

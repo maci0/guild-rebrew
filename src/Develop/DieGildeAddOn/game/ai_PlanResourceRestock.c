@@ -7,8 +7,8 @@ typedef struct Ware {
 } Ware;
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern unsigned char g_773d75;
-extern char* g_773d78;
+extern unsigned char gm_ActiveTownIndex;
+extern char* gm_MarketEntity;
 
 int __cdecl gm_GetStorageSlotCapacity(char* pkt, int item_id);
 int __cdecl gm_GetMsgField(char* pkt, Ware* q);
@@ -27,22 +27,23 @@ void __cdecl ai_PlanResourceRestock(int building, char* pkt)
 	int i;
 
 	for (i = 0; i < ai_ResourceCount; i++) {
-		if ((g_100b0c0[i].flags & 0x20) == 0 && (g_100b0c0[i].flags & 0x200) == 0 && g_100b0c0[i].allocated == 0 && g_100b0c0[i].stock < gm_GetStorageSlotCapacity(pkt, g_100b0c0[i].goods_id) / 4) {
-			ratio = gm_GetSeasonPrice(g_100b0c0[i].goods_id, g_773d75) / eval_ObjektPreis2Credits(g_100b0c0[i].goods_id, 100);
+		if ((ai_ResourceRequests[i].flags & 0x20) == 0 && (ai_ResourceRequests[i].flags & 0x200) == 0 && ai_ResourceRequests[i].allocated == 0 &&
+			ai_ResourceRequests[i].stock < gm_GetStorageSlotCapacity(pkt, ai_ResourceRequests[i].goods_id) / 4) {
+			ratio = gm_GetSeasonPrice(ai_ResourceRequests[i].goods_id, gm_ActiveTownIndex) / eval_ObjektPreis2Credits(ai_ResourceRequests[i].goods_id, 100);
 			if (ratio < 0.8f) {
-				g_100b0c0[i].supplier = 0;
-				want = (int) ((1.0f - ratio) * g_100b0c0[i].capacity);
-				g_100b0c0[i].requested = want;
-				if (want >= g_100b0c0[i].capacity) {
-					want = g_100b0c0[i].capacity;
+				ai_ResourceRequests[i].supplier = 0;
+				want = (int) ((1.0f - ratio) * ai_ResourceRequests[i].capacity);
+				ai_ResourceRequests[i].requested = want;
+				if (want >= ai_ResourceRequests[i].capacity) {
+					want = ai_ResourceRequests[i].capacity;
 				}
-				g_100b0c0[i].requested = want;
-				town = gm_FindCityItemHolder(g_100b0c0[i].goods_id);
+				ai_ResourceRequests[i].requested = want;
+				town = gm_FindCityItemHolder(ai_ResourceRequests[i].goods_id);
 				if (town != 0) {
-					w = fcn_00502cd0(*(int*) (town + 0x14), 1, 0, g_100b0c0[i].goods_id);
+					w = fcn_00502cd0(*(int*) (town + 0x14), 1, 0, ai_ResourceRequests[i].goods_id);
 					if (w != 0) {
 						if (gm_GetMsgField(town, w) - (int) ((unsigned int) (gm_GetStorageSlotCapacity(town, w->id) * w->unit) >> 2) >= 5) {
-							g_100b0c0[i].supplier = g_773d78;
+							ai_ResourceRequests[i].supplier = gm_MarketEntity;
 						}
 					}
 				}

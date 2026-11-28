@@ -13,7 +13,7 @@ void __cdecl d2_FitWindowHeightToContents(int win)
 	int y;
 	
 
-	p = &((D2_WIN*)g_1015f40)[win];
+	p = &((D2_WIN*)d2_Windows)[win];
 	if (p->active == 0) {
 		return;
 	}
@@ -24,7 +24,7 @@ void __cdecl d2_FitWindowHeightToContents(int win)
 	}
 	n = p->count;
 	if (n > 0) {
-		e = (char*) g_1015ea0 + 0x14;
+		e = (char*) d2_Controls + 0x14;
 		y = p->top;
 		while (n > 0) {
 			if (*(int*) (e + 8) + *(int*) e > y + v) {

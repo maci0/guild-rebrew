@@ -20,11 +20,11 @@ typedef struct Text {
 // SIZE 0x74
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern unsigned char g_773d75;
-extern char g_868060[];
+extern unsigned char gm_ActiveTownIndex;
+extern char gm_TownTable[];
 extern int g_67fca4;
 extern int g_67fcb0;
-extern char g_7728d4;
+extern char hst_HistoryTextActive;
 
 int __cdecl sprintf(char* buf, const char* fmt, ...);
 int __cdecl txt_FindTextBank(const char* name);
@@ -39,17 +39,17 @@ void __cdecl hst_LoadHistoryText(void)
 	int j;
 
 	for (i = 0; i < 4; i++) {
-		((Slot*)g_1007bc0)[i].x0 = 0;
+		((Slot*)hst_HistoryGroups)[i].x0 = 0;
 		for (j = 0; j < 4; j++) {
-			((Slot*)g_1007bc0)[i].p[j].a = -1;
-			((Slot*)g_1007bc0)[i].p[j].b = 0xffff;
+			((Slot*)hst_HistoryGroups)[i].p[j].a = -1;
+			((Slot*)hst_HistoryGroups)[i].p[j].b = 0xffff;
 		}
 	}
 	hst_HistoryTextBase = -1;
 	g_67fca4 = -1;
-	sprintf(buf, "historie\\text_H_%s", ((char(*)[0x2f4])g_868060)[g_773d75]);
+	sprintf(buf, "historie\\text_H_%s", ((char(*)[0x2f4])gm_TownTable)[gm_ActiveTownIndex]);
 	if (((Text*)txt_TextBanks)[txt_FindTextBank(buf)].x68 == 0 && txt_ReloadTextFile(buf) == 0) {
-		g_7728d4 = 0;
+		hst_HistoryTextActive = 0;
 		return;
 	}
 	i = txt_FindTextBank(buf);

@@ -1,6 +1,6 @@
 #include "Develop/client_types.h"
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
-extern unsigned char g_7747b0;
+extern unsigned char gm_ClientModeFlags;
 extern unsigned char* lpGebaeudePROT;
 extern float g_696540[4];
 extern float g_696550[4];
@@ -53,7 +53,7 @@ int __cdecl gm_CalcElapsedWorkMinutes(Time* start, Time* end, char* building)
 	idx = gm_GetSeason((int*) start);
 	f1 = g_696540[idx];
 	f2 = g_696550[idx];
-	if ((g_7747b0 & 0x80) != 0) {
+	if ((gm_ClientModeFlags & 0x80) != 0) {
 		return gm_GetElapsedMinutes((TimeKey*) start, (TimeKey*) end);
 	}
 	if (building != 0) {

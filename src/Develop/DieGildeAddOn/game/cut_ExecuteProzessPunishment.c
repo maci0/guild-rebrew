@@ -5,14 +5,14 @@
 
 
 
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int gm_RichterKatholisch;
 extern int gm_RichterEvangelisch;
 extern float g_6652c8;
-extern char g_7f4ca4[];
+extern char gm_EntityIdField[];
 
 int __cdecl gm_WalkEntityChain(unsigned short);
 int __cdecl gm_RandomMod(int);
@@ -45,9 +45,9 @@ void __cdecl cut_ExecuteProzessPunishment(unsigned short* entity, int action)
 		msg[4] = 0x5c;
 		msg[0x36] = 1;
 		*(int*) (msg + 0x28) = gm_GameTime.a;
-		*(int*) (msg + 0x2c) = g_7f4c04;
-		*(int*) (msg + 0x30) = g_7f4c08;
-		*(unsigned short*) (msg + 0x34) = g_7f4c0c;
+		*(int*) (msg + 0x2c) = gm_GameTimeHour;
+		*(int*) (msg + 0x30) = gm_GameTimeSliceDword;
+		*(unsigned short*) (msg + 0x34) = gm_GameTimeTailWord;
 		gm_AddTime((GAME_TIMESTAMP*) (msg + 0x28), 1, 0, 0);
 		*(int*) (msg + 8) = *(int*) (entity + 2);
 		*(int*) (msg + 0xc) = -1;
@@ -59,9 +59,9 @@ void __cdecl cut_ExecuteProzessPunishment(unsigned short* entity, int action)
 		msg[4] = 0x5b;
 		msg[0x36] = 1;
 		*(int*) (msg + 0x28) = gm_GameTime.a;
-		*(int*) (msg + 0x2c) = g_7f4c04;
-		*(int*) (msg + 0x30) = g_7f4c08;
-		*(unsigned short*) (msg + 0x34) = g_7f4c0c;
+		*(int*) (msg + 0x2c) = gm_GameTimeHour;
+		*(int*) (msg + 0x30) = gm_GameTimeSliceDword;
+		*(unsigned short*) (msg + 0x34) = gm_GameTimeTailWord;
 		gm_AddTime((GAME_TIMESTAMP*) (msg + 0x28), 1, 0, 0);
 		*(int*) (msg + 8) = *(int*) (entity + 2);
 		*(int*) (msg + 0xc) = -1;
@@ -73,9 +73,9 @@ void __cdecl cut_ExecuteProzessPunishment(unsigned short* entity, int action)
 		msg[4] = 0x5c;
 		msg[0x36] = 1;
 		*(int*) (msg + 0x28) = gm_GameTime.a;
-		*(int*) (msg + 0x2c) = g_7f4c04;
-		*(int*) (msg + 0x30) = g_7f4c08;
-		*(unsigned short*) (msg + 0x34) = g_7f4c0c;
+		*(int*) (msg + 0x2c) = gm_GameTimeHour;
+		*(int*) (msg + 0x30) = gm_GameTimeSliceDword;
+		*(unsigned short*) (msg + 0x34) = gm_GameTimeTailWord;
 		gm_AddTime((GAME_TIMESTAMP*) (msg + 0x28), 1, 0, 0);
 		*(int*) (msg + 8) = *(int*) (entity + 2);
 		*(int*) (msg + 0xc) = -1;
@@ -87,9 +87,9 @@ void __cdecl cut_ExecuteProzessPunishment(unsigned short* entity, int action)
 		msg[4] = 0x5b;
 		msg[0x36] = 1;
 		*(int*) (msg + 0x28) = gm_GameTime.a;
-		*(int*) (msg + 0x2c) = g_7f4c04;
-		*(int*) (msg + 0x30) = g_7f4c08;
-		*(unsigned short*) (msg + 0x34) = g_7f4c0c;
+		*(int*) (msg + 0x2c) = gm_GameTimeHour;
+		*(int*) (msg + 0x30) = gm_GameTimeSliceDword;
+		*(unsigned short*) (msg + 0x34) = gm_GameTimeTailWord;
 		gm_AddTime((GAME_TIMESTAMP*) (msg + 0x28), 1, 0, 0);
 		*(int*) (msg + 8) = *(int*) (entity + 2);
 		*(int*) (msg + 0xc) = -1;
@@ -132,12 +132,12 @@ void __cdecl cut_ExecuteProzessPunishment(unsigned short* entity, int action)
 			}
 		}
 		*(char*) (pkt + 0x30) = (char) n;
-		*(int*) (pkt + 0x0c) = *(int*) (g_7f4ca4 + (unsigned int) g_774970 * 0x21c);
+		*(int*) (pkt + 0x0c) = *(int*) (gm_EntityIdField + (unsigned int) gm_LocalPlayerSlot * 0x21c);
 		*(int*) (pkt + 0x14) = -1;
 		*(int*) (pkt + 0x18) = gm_GameTime.a;
-		*(int*) (pkt + 0x1c) = g_7f4c04;
-		*(int*) (pkt + 0x20) = g_7f4c08;
-		*(unsigned short*) (pkt + 0x24) = g_7f4c0c;
+		*(int*) (pkt + 0x1c) = gm_GameTimeHour;
+		*(int*) (pkt + 0x20) = gm_GameTimeSliceDword;
+		*(unsigned short*) (pkt + 0x24) = gm_GameTimeTailWord;
 		gm_AddTime((GAME_TIMESTAMP*) (pkt + 0x18), 0x18, 0, 0);
 		/* packed packet fields: 2-byte hour override, then 4 zeroed bytes */
 		*(unsigned short*) (pkt + 0x1c) = 10;

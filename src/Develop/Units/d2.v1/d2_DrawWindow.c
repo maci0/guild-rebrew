@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/client_data.h"
 extern int g_772554;
-extern char* g_1015ea0;
-extern char* g_772500;
+extern char* d2_Controls;
+extern char* d2_FileObjTable;
 extern int d2_ScreenHeight;
 extern int g_1040494;
 extern int g_67d3a0;
@@ -43,7 +43,7 @@ void __cdecl d2_DrawWindow(int windowIndex, int a1)
 	int surf;
 	char buf[32];
 
-	b = (char*) &g_1015f40[windowIndex];
+	b = (char*) &d2_Windows[windowIndex];
 	if (!*(int*) (b + 0x290)) {
 		return;
 	}
@@ -54,9 +54,9 @@ void __cdecl d2_DrawWindow(int windowIndex, int a1)
 		i = 0;
 		do {
 			id = *(int*) (*(int*) (b + 0x28) + i * 4);
-			if (*(int*) (g_1015ea0 + 0x20 + id * 0x2f4) == 0x40) {
-				rec = *(int*) (g_1015ea0 + id * 0x2f4 + 0x88);
-				if (*(unsigned int*) ((char*) &g_1015f40[rec] + 0x14) & 0x4000) {
+			if (*(int*) (d2_Controls + 0x20 + id * 0x2f4) == 0x40) {
+				rec = *(int*) (d2_Controls + id * 0x2f4 + 0x88);
+				if (*(unsigned int*) ((char*) &d2_Windows[rec] + 0x14) & 0x4000) {
 					d2_RenderMarkupText(0, rec);
 				}
 			}
@@ -82,16 +82,16 @@ void __cdecl d2_DrawWindow(int windowIndex, int a1)
 
 	if (*(int*) (b + 0x3b8) != -1 || *(int*) (b + 0x3bc) != -1) {
 		rec = *(int*) (b + 0x3bc);
-		x = *(int*) (g_1015ea0 + 0x1f0 + rec * 0x2f4) * 0x3cc;
+		x = *(int*) (d2_Controls + 0x1f0 + rec * 0x2f4) * 0x3cc;
 		if (rec != -1) {
-			d2_SetElementEnabled(rec, *(int*) ((char*) g_1015f40 + x + 0x274) + *(int*) ((char*) g_1015f40 + x + 0x10) <= *(int*) ((char*) g_1015f40 + x + 0x254));
-			d2_SetElementEnabled(rec, *(int*) ((char*) g_1015f40 + x + 0x260) + *(int*) ((char*) g_1015f40 + x + 0x258) + *(int*) ((char*) g_1015f40 + x + 0x10) < *(int*) ((char*) g_1015f40 + x + 0x254));
+			d2_SetElementEnabled(rec, *(int*) ((char*) d2_Windows + x + 0x274) + *(int*) ((char*) d2_Windows + x + 0x10) <= *(int*) ((char*) d2_Windows + x + 0x254));
+			d2_SetElementEnabled(rec, *(int*) ((char*) d2_Windows + x + 0x260) + *(int*) ((char*) d2_Windows + x + 0x258) + *(int*) ((char*) d2_Windows + x + 0x10) < *(int*) ((char*) d2_Windows + x + 0x254));
 		}
 		if (*(int*) (b + 0x3b8) != -1) {
-			d2_SetElementEnabled(*(int*) (b + 0x3b8), *(int*) ((char*) g_1015f40 + x + 0x258) != 0);
+			d2_SetElementEnabled(*(int*) (b + 0x3b8), *(int*) ((char*) d2_Windows + x + 0x258) != 0);
 		}
 		if (*(int*) (b + 0x3c0) != -1) {
-			itoa((int) ((double) *(int*) ((char*) g_1015f40 + x + 0x254) / (double) *(int*) ((char*) g_1015f40 + x + 0x274) + 0.5f), buf, 10);
+			itoa((int) ((double) *(int*) ((char*) d2_Windows + x + 0x254) / (double) *(int*) ((char*) d2_Windows + x + 0x274) + 0.5f), buf, 10);
 			d2_SetLabelText(*(unsigned int*) (b + 0x3c0), buf);
 		}
 	}
@@ -115,14 +115,14 @@ void __cdecl d2_DrawWindow(int windowIndex, int a1)
 		h = *(int*) (b + 0x10);
 		w = *(int*) (b + 0xc);
 		if (rec != g_67d3a0 && rec != g_67d3a4) {
-			horiz = *(short*) (g_772500 + 0x50 + rec * 0x54);
-			cornerHeight = *(short*) (g_772500 + 0x52 + rec * 0x54);
+			horiz = *(short*) (d2_FileObjTable + 0x50 + rec * 0x54);
+			cornerHeight = *(short*) (d2_FileObjTable + 0x52 + rec * 0x54);
 			d2_DrawSpriteFromSet(*(int*) (b + 4), *(int*) (b + 8), a1, surf, 0);
 			d2_DrawSpriteFromSet(*(int*) (b + 4) - horiz + w, *(int*) (b + 8), a1, surf, 1);
 			d2_DrawSpriteFromSet(*(int*) (b + 4), *(int*) (b + 8) - cornerHeight + h, a1, surf, 2);
 			d2_DrawSpriteFromSet(*(int*) (b + 4) - horiz + w, *(int*) (b + 8) - cornerHeight + h, a1, surf, 3);
-			step = *(short*) (g_772500 + 0x1a0 + *(int*) (b + 0x288) * 0x54);
-			h = *(short*) (g_772500 + 0x1a2 + *(int*) (b + 0x288) * 0x54);
+			step = *(short*) (d2_FileObjTable + 0x1a0 + *(int*) (b + 0x288) * 0x54);
+			h = *(short*) (d2_FileObjTable + 0x1a2 + *(int*) (b + 0x288) * 0x54);
 			count = (*(int*) (b + 0xc) - horiz * 2) / step;
 			off = 0;
 			i = 0;
@@ -134,8 +134,8 @@ void __cdecl d2_DrawWindow(int windowIndex, int a1)
 					i++;
 				} while (i < count);
 			}
-			step = *(short*) (g_772500 + 0x398 + *(int*) (b + 0x288) * 0x54);
-			vert = *(short*) (g_772500 + 0x39a + *(int*) (b + 0x288) * 0x54);
+			step = *(short*) (d2_FileObjTable + 0x398 + *(int*) (b + 0x288) * 0x54);
+			vert = *(short*) (d2_FileObjTable + 0x39a + *(int*) (b + 0x288) * 0x54);
 			count = (*(int*) (b + 0x10) - cornerHeight * 2) / vert;
 			i = 0;
 			if (count >= 1) {

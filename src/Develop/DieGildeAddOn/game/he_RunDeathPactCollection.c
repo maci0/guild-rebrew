@@ -1,4 +1,4 @@
-extern char g_773d75;
+extern char gm_ActiveTownIndex;
 
 char* __cdecl gm_LookupEntityRecordById(int a1);
 int __cdecl gm_GetSeasonTreasury(char* entity, char season);
@@ -25,9 +25,9 @@ void __cdecl he_RunDeathPactCollection(char* action)
 	}
 	entity = gm_LookupEntityRecordById(*(int*) (action + 0xc));
 	if (entity != 0) {
-		count = gm_GetSeasonTreasury(entity, g_773d75);
+		count = gm_GetSeasonTreasury(entity, gm_ActiveTownIndex);
 		if (count > *(int*) (action + 0xac)) {
-			cm_RequestMoveCredits(-1, *(int*) (entity + 4), g_773d75, *(int*) (action + 0xac));
+			cm_RequestMoveCredits(-1, *(int*) (entity + 4), gm_ActiveTownIndex, *(int*) (action + 0xac));
 			he_FreeAction(action);
 			return;
 		}

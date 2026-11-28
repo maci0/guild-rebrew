@@ -18,8 +18,8 @@ extern int g_1040494;
 extern unsigned g_1052be4;
 extern unsigned g_1052bec;
 extern int g_77251c;
-extern int g_772524;
-extern int g_772540;
+extern int d2_CurrentFontBank;
+extern int d2_ZOrderStack;
 extern int g_772548;
 extern int d2_ResourceOffset;
 extern int g_772570;
@@ -28,7 +28,7 @@ extern int g_7725a0;
 extern int g_7725a4;
 extern void* g_7725a8;
 extern int tp_d2_SelectedControl;
-extern float g_6628a8;
+extern float flt_0_0;
 extern double g_6629c8;
 extern float g_67d3c0[];
 
@@ -117,14 +117,14 @@ void __cdecl d2_RenderAllElements(int clearAll)
 	}
 	if ((*(int *)&g_7725a8)) {
 		d2_SetClipRect(0, 0, g_1040494, d2_ScreenHeight);
-		d2_DrawSpriteFromSet(0, 0, g_77250c, (char*) (*(int *)&g_7725a8), 0);
+		d2_DrawSpriteFromSet(0, 0, d2_ScreenSurface, (char*) (*(int *)&g_7725a8), 0);
 	}
-	if (!*(char**) g_772540)
+	if (!*(char**) d2_ZOrderStack)
 		goto label_46aadd;
 	while (1) {
 		if (i >= 0x3fe)
 			goto label_46aadd;
-		ent = *(char**) ((char*) g_772540 + i * 4);
+		ent = *(char**) ((char*) d2_ZOrderStack + i * 4);
 		if ((!((D2_CONTROL_TL*) ent)->value_050 || !*(int*) (((D2_CONTROL_TL*) ent)->value_050 + 0x198))
 		    && ((D2_CONTROL_TL*) ent)->value_004 && !((D2_CONTROL_TL*) ent)->value_048) {
 			dx = ((D2_CONTROL_TL*) ent)->x;
@@ -136,7 +136,7 @@ void __cdecl d2_RenderAllElements(int clearAll)
 			child = *(char**) &((D2_CONTROL_TL*) ent)->parent;
 			if (child) {
 				do {
-					e2 = (char*) ((char*) &((D2_CONTROL_TL*) g_1015ea0)[*(int*) (child + 0x27c)]);
+					e2 = (char*) ((char*) &((D2_CONTROL_TL*) d2_Controls)[*(int*) (child + 0x27c)]);
 					if (left < (*(D2_CONTROL_TL*) e2).clip_left)
 						left = (*(D2_CONTROL_TL*) e2).clip_left;
 					if ((*(D2_CONTROL_TL*) e2).clip_right < right)
@@ -160,10 +160,10 @@ void __cdecl d2_RenderAllElements(int clearAll)
 				if (((D2_CONTROL_TL*) ent)->value_1e4 != -1) {
 					font = (char*) d2_GetResourceData(((D2_CONTROL_TL*) ent)->value_1e4);
 					d2_DrawSpriteFromSet(((D2_CONTROL_TL*) ent)->value_1e8 + dx, ((D2_CONTROL_TL*) ent)->value_1ec + dy,
-					             g_77250c, font, d2_ResourceOffset);
+					             d2_ScreenSurface, font, d2_ResourceOffset);
 				}
 				if (((D2_CONTROL_TL*) ent)->flags_1d0 & 2) {
-					if ((char*) ((char*) &((D2_CONTROL_TL*) g_1015ea0)[d2_CurrentElementId]) == ent || !((D2_CONTROL_TL*) ent)->value_038) {
+					if ((char*) ((char*) &((D2_CONTROL_TL*) d2_Controls)[d2_CurrentElementId]) == ent || !((D2_CONTROL_TL*) ent)->value_038) {
 						if (!((D2_CONTROL_TL*) ent)->disabled) {
 							if (((D2_CONTROL_TL*) ent)->flags_1d0 & 1)
 								((D2_CONTROL_TL*) ent)->value_03c = 1;
@@ -178,32 +178,32 @@ void __cdecl d2_RenderAllElements(int clearAll)
 				if (v != 0 && v != 1 && v != -1) {
 					f = g_67d3c0[v];
 					if (((D2_CONTROL_TL*) ent)->value_03c)
-						d2_DrawScaledSpriteQuad(dx, dy, g_77250c, ((D2_CONTROL_TL*) ent)->data, 0, f, 1);
+						d2_DrawScaledSpriteQuad(dx, dy, d2_ScreenSurface, ((D2_CONTROL_TL*) ent)->data, 0, f, 1);
 					else
-						d2_DrawScaledSpriteQuad(dx, dy, g_77250c, ((D2_CONTROL_TL*) ent)->data, 0, f, 0);
+						d2_DrawScaledSpriteQuad(dx, dy, d2_ScreenSurface, ((D2_CONTROL_TL*) ent)->data, 0, f, 0);
 				}
 				else {
 					if (!((D2_CONTROL_TL*) ent)->value_068)
-						d2_DrawSpriteFromSet(dx, dy, g_77250c, *(char**) &((D2_CONTROL_TL*) ent)->data, 0);
+						d2_DrawSpriteFromSet(dx, dy, d2_ScreenSurface, *(char**) &((D2_CONTROL_TL*) ent)->data, 0);
 					if (((D2_CONTROL_TL*) ent)->value_03c)
-						d2_DrawHighlightSprite(dx, dy, g_77250c, *(char**) &((D2_CONTROL_TL*) ent)->data, 0);
+						d2_DrawHighlightSprite(dx, dy, d2_ScreenSurface, *(char**) &((D2_CONTROL_TL*) ent)->data, 0);
 					else if (((D2_CONTROL_TL*) ent)->value_068)
-						d2_DrawSpriteFromSet(dx, dy, g_77250c, *(char**) &((D2_CONTROL_TL*) ent)->data, 0);
+						d2_DrawSpriteFromSet(dx, dy, d2_ScreenSurface, *(char**) &((D2_CONTROL_TL*) ent)->data, 0);
 					else if (((D2_CONTROL_TL*) ent)->value_060)
-						d2_DrawDimmedSpriteFrame(dx, dy, g_77250c, *(char**) &((D2_CONTROL_TL*) ent)->data, 0);
+						d2_DrawDimmedSpriteFrame(dx, dy, d2_ScreenSurface, *(char**) &((D2_CONTROL_TL*) ent)->data, 0);
 				}
 				break;
 			case 4:
-				d2_DrawAnimationSlot(((D2_CONTROL_TL*) ent)->value_088, g_77250c);
+				d2_DrawAnimationSlot(((D2_CONTROL_TL*) ent)->value_088, d2_ScreenSurface);
 				break;
 			case 5:
 			case 8:
 				if (((D2_CONTROL_TL*) ent)->value_1e4 != -1) {
 					font = (char*) d2_GetResourceData(((D2_CONTROL_TL*) ent)->value_1e4);
 					d2_DrawSpriteFromSet(((D2_CONTROL_TL*) ent)->value_1e8 + dx, ((D2_CONTROL_TL*) ent)->value_1ec + dy,
-					             g_77250c, font, d2_ResourceOffset);
+					             d2_ScreenSurface, font, d2_ResourceOffset);
 				}
-				if ((char*) ((char*) &((D2_CONTROL_TL*) g_1015ea0)[d2_CurrentElementId]) != ent && ((D2_CONTROL_TL*) ent)->value_038) {
+				if ((char*) ((char*) &((D2_CONTROL_TL*) d2_Controls)[d2_CurrentElementId]) != ent && ((D2_CONTROL_TL*) ent)->value_038) {
 					if (((D2_CONTROL_TL*) ent)->flags_1d0 & 1)
 						((D2_CONTROL_TL*) ent)->value_03c = 0;
 				}
@@ -213,28 +213,28 @@ void __cdecl d2_RenderAllElements(int clearAll)
 				if (v != 0 && v != 1 && v != -1) {
 					f = g_67d3c0[v];
 					if (((D2_CONTROL_TL*) ent)->value_03c)
-						d2_DrawScaledSpriteQuad(dx, dy, g_77250c, ((D2_CONTROL_TL*) ent)->data, ((D2_CONTROL_TL*) ent)->value_088, f, 1);
+						d2_DrawScaledSpriteQuad(dx, dy, d2_ScreenSurface, ((D2_CONTROL_TL*) ent)->data, ((D2_CONTROL_TL*) ent)->value_088, f, 1);
 					else
-						d2_DrawScaledSpriteQuad(dx, dy, g_77250c, ((D2_CONTROL_TL*) ent)->data, ((D2_CONTROL_TL*) ent)->value_088, f, 0);
+						d2_DrawScaledSpriteQuad(dx, dy, d2_ScreenSurface, ((D2_CONTROL_TL*) ent)->data, ((D2_CONTROL_TL*) ent)->value_088, f, 0);
 					goto label_46a7ab;
 				}
 				if (((D2_CONTROL_TL*) ent)->value_03c)
-					d2_DrawHighlightSprite(dx, dy, g_77250c, *(char**) &((D2_CONTROL_TL*) ent)->data, ((D2_CONTROL_TL*) ent)->value_088);
+					d2_DrawHighlightSprite(dx, dy, d2_ScreenSurface, *(char**) &((D2_CONTROL_TL*) ent)->data, ((D2_CONTROL_TL*) ent)->value_088);
 				else if (((D2_CONTROL_TL*) ent)->value_060) {
-					if (((D2_CONTROL_TL*) ent)->value_1f4.real == g_6628a8)
-						d2_DrawDimmedSpriteFrame(dx, dy, g_77250c, *(char**) &((D2_CONTROL_TL*) ent)->data, ((D2_CONTROL_TL*) ent)->value_088);
+					if (((D2_CONTROL_TL*) ent)->value_1f4.real == flt_0_0)
+						d2_DrawDimmedSpriteFrame(dx, dy, d2_ScreenSurface, *(char**) &((D2_CONTROL_TL*) ent)->data, ((D2_CONTROL_TL*) ent)->value_088);
 					else
-						d2_DrawSpriteFromSet(dx, dy, g_77250c, *(char**) &((D2_CONTROL_TL*) ent)->data, ((D2_CONTROL_TL*) ent)->value_088);
+						d2_DrawSpriteFromSet(dx, dy, d2_ScreenSurface, *(char**) &((D2_CONTROL_TL*) ent)->data, ((D2_CONTROL_TL*) ent)->value_088);
 				}
 				else
-					d2_DrawSpriteFromSet(dx, dy, g_77250c, *(char**) &((D2_CONTROL_TL*) ent)->data, ((D2_CONTROL_TL*) ent)->value_088);
+					d2_DrawSpriteFromSet(dx, dy, d2_ScreenSurface, *(char**) &((D2_CONTROL_TL*) ent)->data, ((D2_CONTROL_TL*) ent)->value_088);
 label_46a7ab:
-				if (((D2_CONTROL_TL*) ent)->value_1f4.real != g_6628a8) {
-					y2 = (int) ((g_6628a0 - ((D2_CONTROL_TL*) ent)->value_1f4.real) * (float) ((D2_CONTROL_TL*) ent)->height) + dy;
+				if (((D2_CONTROL_TL*) ent)->value_1f4.real != flt_0_0) {
+					y2 = (int) ((flt_1_0 - ((D2_CONTROL_TL*) ent)->value_1f4.real) * (float) ((D2_CONTROL_TL*) ent)->height) + dy;
 					if (bottom < y2)
 						y2 = bottom;
 					d2_SetClipRect(left, top, right, y2);
-					d2_DrawDimmedSpriteFrame(dx, dy, g_77250c, *(char**) &((D2_CONTROL_TL*) ent)->data, ((D2_CONTROL_TL*) ent)->value_088);
+					d2_DrawDimmedSpriteFrame(dx, dy, d2_ScreenSurface, *(char**) &((D2_CONTROL_TL*) ent)->data, ((D2_CONTROL_TL*) ent)->value_088);
 					d2_SetClipRect(left, top, right, bottom);
 					if (d2_CurrentElementId != ((D2_CONTROL_TL*) ent)->value_000) {
 						f = ((D2_CONTROL_TL*) ent)->value_1f4.real;
@@ -244,7 +244,7 @@ label_46a7ab:
 						d2_SelectFont(d2_DefaultFont + 1);
 						d2_DrawWordWrappedText(dx, dy + ((D2_CONTROL_TL*) ent)->height - 0xf,
 						             *(unsigned short*) (*(char**) &((D2_CONTROL_TL*) ent)->data + 6),
-						             ((D2_CONTROL_TL*) ent)->height, g_77250c, u.buf, 0x28);
+						             ((D2_CONTROL_TL*) ent)->height, d2_ScreenSurface, u.buf, 0x28);
 					}
 				}
 				if (*(char*) (ent + 0x8c)) {
@@ -273,10 +273,10 @@ label_46a7ab:
 					else
 						v = dy - 1;
 					d2_DrawWordWrappedText(t, v, ((D2_CONTROL_TL*) ent)->width, ((D2_CONTROL_TL*) ent)->height,
-					             g_77250c, ent + 0x8c, flags);
+					             d2_ScreenSurface, ent + 0x8c, flags);
 				}
 				if (*(char*) (ent + 0xcc)) {
-					if ((char*) ((char*) &((D2_CONTROL_TL*) g_1015ea0)[d2_CurrentElementId]) == ent && !tp_d2_SelectedControl
+					if ((char*) ((char*) &((D2_CONTROL_TL*) d2_Controls)[d2_CurrentElementId]) == ent && !tp_d2_SelectedControl
 					    && !(((D2_CONTROL_TL*) ent)->flags_1d0 & 0x40) && !((D2_CONTROL_TL*) ent)->disabled) {
 						g_7725a4 = (int) ent;
 						g_7725a0 = *(int*) &((D2_CONTROL_TL*) ent)->parent;
@@ -284,15 +284,15 @@ label_46a7ab:
 				}
 				break;
 			case 9:
-				d2_DrawTextButton(((D2_CONTROL_TL*) ent)->value_000, g_77250c);
+				d2_DrawTextButton(((D2_CONTROL_TL*) ent)->value_000, d2_ScreenSurface);
 				break;
 			case 0x40:
 				if (((D2_CONTROL_TL*) ent)->mode <= 0)
 					break;
-				d2_DrawWindow(((D2_CONTROL_TL*) ent)->value_088, g_77250c);
+				d2_DrawWindow(((D2_CONTROL_TL*) ent)->value_088, d2_ScreenSurface);
 				break;
 			case 0x41:
-				d2_DrawField(((D2_CONTROL_TL*) ent)->value_088, g_77250c);
+				d2_DrawField(((D2_CONTROL_TL*) ent)->value_088, d2_ScreenSurface);
 				break;
 			case 0x43:
 				if (((D2_CONTROL_TL*) ent)->mode <= 0)
@@ -300,7 +300,7 @@ label_46a7ab:
 				if (((D2_CONTROL_TL*) ent)->value_078)
 					break;
 				if (((D2_CONTROL_TL*) ent)->flags_1d0 & 2) {
-					if ((char*) ((char*) &((D2_CONTROL_TL*) g_1015ea0)[d2_CurrentElementId]) == ent || ((D2_CONTROL_TL*) ent)->value_038) {
+					if ((char*) ((char*) &((D2_CONTROL_TL*) d2_Controls)[d2_CurrentElementId]) == ent || ((D2_CONTROL_TL*) ent)->value_038) {
 						if (((D2_CONTROL_TL*) ent)->flags_1d0 & 1)
 							((D2_CONTROL_TL*) ent)->value_03c = 1;
 					}
@@ -322,7 +322,7 @@ label_46a7ab:
 				if (((D2_CONTROL_TL*) ent)->value_054)
 					flags |= 4;
 				d2_DrawWordWrappedText(dx, dy, ((D2_CONTROL_TL*) ent)->width, ((D2_CONTROL_TL*) ent)->height,
-				             g_77250c, (char*) ((D2_CONTROL_TL*) ent)->value_088, flags);
+				             d2_ScreenSurface, (char*) ((D2_CONTROL_TL*) ent)->value_088, flags);
 				((D2_CONTROL_TL*) ent)->height = g_772548;
 				d2_SelectFont(d2_CurrentFont);
 				break;
@@ -331,21 +331,21 @@ label_46a7ab:
 					child = *(char**) &((D2_CONTROL_TL*) ent)->parent;
 					d2_SetSurfaceClipRect(((D2_CONTROL_TL*) ent)->clip_left, ((D2_CONTROL_TL*) ent)->clip_top,
 					             *(int*) (child + 0xc), *(int*) (child + 0x10),
-					             (char*) g_77250c);
+					             (char*) d2_ScreenSurface);
 				}
-				d2_DrawValueGauge(((D2_CONTROL_TL*) ent)->value_000, g_77250c);
-				d2_SetSurfaceClipRect(0, 0, g_1040494, d2_ScreenHeight, (char*) g_77250c);
+				d2_DrawValueGauge(((D2_CONTROL_TL*) ent)->value_000, d2_ScreenSurface);
+				d2_SetSurfaceClipRect(0, 0, g_1040494, d2_ScreenHeight, (char*) d2_ScreenSurface);
 				break;
 			case 0x47:
 				((D2_CONTROL_TL*) ent)->clip_top = top;
 				((D2_CONTROL_TL*) ent)->clip_bottom = bottom;
-				d2_DrawBitmapElement(((D2_CONTROL_TL*) ent)->value_000, g_77250c);
+				d2_DrawBitmapElement(((D2_CONTROL_TL*) ent)->value_000, d2_ScreenSurface);
 				break;
 			}
 		}
 		d2_SetClipRect(0, 0, g_1040494, d2_ScreenHeight);
 		i++;
-		if (!*(char**) ((char*) g_772540 + i * 4))
+		if (!*(char**) ((char*) d2_ZOrderStack + i * 4))
 			break;
 	}
 label_46aadd:
@@ -357,12 +357,12 @@ label_46aadd:
 	}
 	if (tp_d2_SelectedControl && *(signed char*) (tp_d2_SelectedControl + 0x28) < 0 && *(int*) (tp_d2_SelectedControl + 0x12c) != -1
 	    && *(int*) (tp_d2_SelectedControl + 0x1c) < *(int*) (tp_d2_SelectedControl + 0x18) && g_14ce8d4)
-		d2_DrawFieldSliderPopup((char*) tp_d2_SelectedControl, g_77250c);
+		d2_DrawFieldSliderPopup((char*) tp_d2_SelectedControl, d2_ScreenSurface);
 	d2_SetClipRect(0, 0, g_1040494, d2_ScreenHeight);
 	d2_DrawMouseCursor(g_772570, g_772574);
 	d2_FlushQueuedQuads(0, 0, 0);
 	d2_UpdateAllScreenFades();
-	g_772524 = (int) d2_GetResourceData(d2_FindResourceByName((char*) 0x67d474));
+	d2_CurrentFontBank = (int) d2_GetResourceData(d2_FindResourceByName((char*) 0x67d474));
 	d2_FontHeight = 0x18;
 	g_77251c++;
 }

@@ -26,9 +26,9 @@ typedef struct
 
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 #include "Develop/client_types.h"
-extern Win_1015f40 g_1015f40[0x60];
+extern Win_1015f40 d2_Windows[0x60];
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char s_6aade4[];
@@ -73,7 +73,7 @@ void __cdecl d2_OpenRathausGebInfo(void)
 	d2_SetForm(dlg, 0);
 	d2_AddWindowScrollButtons(-1, -1, d2_CurrentWindowId, w, 0x767);
 	d2_SetOverlayAnimation(0, 0);
-	*(int*) &((D2_WIN*)g_1015f40)[w].pad3c[0x238] = 0x5a;
+	*(int*) &((D2_WIN*)d2_Windows)[w].pad3c[0x238] = 0x5a;
 	do {
 		if (flag != 0) {
 			d2_SetForm(dlg, 1);
@@ -104,14 +104,14 @@ void __cdecl d2_OpenRathausGebInfo(void)
 				break;
 			}
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 			d3_EndCameraAndUiMode();
 		}
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			for (i = 0; i < n; i++) {
-				if (d2_CurrentElementId == rows[i].btn && *(unsigned short*) (rows[i].obj + 0x27) != g_774970 &&
-				    gm_CheckEntityStock(((Player*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), *(int*) (rows[i].rel + 0xb0), (*(char*)&g_773d75)) != 0) {
+				if (d2_CurrentElementId == rows[i].btn && *(unsigned short*) (rows[i].obj + 0x27) != gm_LocalPlayerSlot &&
+				    gm_CheckEntityStock(((Player*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot]), *(int*) (rows[i].rel + 0xb0), (*(char*)&gm_ActiveTownIndex)) != 0) {
 					d2_EnterBuildingObjekt(rows[i].obj, -1, s_6b5c60);
 				}
 			}

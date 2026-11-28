@@ -1,7 +1,7 @@
 #include <string.h>
 
 extern char* d3_ActiveCamera;
-extern int g_67a370;
+extern int d3_ActiveScene;
 
 typedef struct {
 	float mn[4];
@@ -51,7 +51,7 @@ void __cdecl d3sm_Rebuild(int* m, unsigned char* t)
 	box.mx[0] = -1e10f;
 	box.mx[1] = -1e10f;
 	box.mx[2] = -1e10f;
-	d3_VisitSceneObjects(g_67a370, 0, 0x40, d3sm_AccumulateObjectBounds, &box);
+	d3_VisitSceneObjects(d3_ActiveScene, 0, 0x40, d3sm_AccumulateObjectBounds, &box);
 	cells = (int*) m[9];
 	if (cells) {
 		fn = m[8] * m[8] * 0x1c;
@@ -177,7 +177,7 @@ void __cdecl d3sm_Rebuild(int* m, unsigned char* t)
 			rep stosb
 		}
 	}
-	d3_VisitSceneObjects(g_67a370, 0, 0x40, d3sm_DrawMeshTriangles, m);
+	d3_VisitSceneObjects(d3_ActiveScene, 0, 0x40, d3sm_DrawMeshTriangles, m);
 	if (m[9]) {
 		d3_RelabelMatchingCells(m, 0xb, 0xc);
 		for (i = 0; i < m[8]; i++) {

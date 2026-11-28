@@ -2,7 +2,7 @@ extern char s_67a1ec[];
 extern char s_67a218[];
 extern char s_67a238[];
 extern char s_67a260[];
-extern float g_6628a0;
+extern float flt_1_0;
 extern double g_662c70;
 
 void* __cdecl m_alloc(unsigned int size, const char* tag);
@@ -100,9 +100,9 @@ void __cdecl d3_CalculateAnimNormals(char* anim, char* mesh)
 				}
 			}
 			d3_NormalizeVector(sum);
-			sum[0] += g_6628a0;
-			sum[1] += g_6628a0;
-			sum[2] += g_6628a0;
+			sum[0] += flt_1_0;
+			sum[1] += flt_1_0;
+			sum[2] += flt_1_0;
 			*(char*) (*(int*) (frame + 0xb8) + j * 3 + 0) = (char) (sum[0] * g_662c70);
 			*(char*) (*(int*) (frame + 0xb8) + j * 3 + 1) = (char) (sum[1] * g_662c70);
 			*(char*) (*(int*) (frame + 0xb8) + j * 3 + 2) = (char) (sum[2] * g_662c70);

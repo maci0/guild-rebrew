@@ -24,10 +24,10 @@ typedef struct {
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char* g_7746a4;
+extern char* d2_HoveredSceneObject;
 extern int g_14abd04;
 extern int d2_CurrentElementId;
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char s_6aa4b8[];
 
@@ -77,7 +77,7 @@ int __cdecl d2_RunRaeuberlagerTargetDialog(int unusedFlags, char* object)
 		event = he_fn_Handlung();
 	}
 	for (i = 0; i < 0x300; i++) {
-		if ((char)((ENTITY_RECORD*)g_7f4ca0)[i].unk_17c[12] != 0) {
+		if ((char)((ENTITY_RECORD*)gm_EntitySlotTable)[i].unk_17c[12] != 0) {
 			break;
 		}
 	}
@@ -97,34 +97,34 @@ int __cdecl d2_RunRaeuberlagerTargetDialog(int unusedFlags, char* object)
 	text = io_AppendText(0x1a8b, object);
 	item1 = d2_GetWindowListItem(dlg, 1, text);
 	item2 = d2_GetWindowListItem(dlg, 1, text + 1);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc == -1) {
+		if (d2_DialogButtonAction == -1) {
 			continue;
 		}
 		if (d2_CurrentElementId == item1) {
 			d3snd_PlayWorkerOrderVoice();
 			message.b4 = 0x62;
-			slot = g_774970;
-			message.f8 = ((ENTITY_RECORD*)g_7f4ca0)[slot].entity_id;
-			if (g_7746c4 != 0) {
-				message.fc = *(int*) (g_7746c4 + 1);
+			slot = gm_LocalPlayerSlot;
+			message.f8 = ((ENTITY_RECORD*)gm_EntitySlotTable)[slot].entity_id;
+			if (d2_VisitedBuilding != 0) {
+				message.fc = *(int*) (d2_VisitedBuilding + 1);
 			} else {
-				message.fc = *(int*) (g_7746c8 + 1);
+				message.fc = *(int*) (d2_InteriorBuilding + 1);
 			}
 			message.pos28 = gm_GameTime;
 			message.b36 = 2;
 			message.f5c = *(int*) (object + 1);
-			if (g_7746c4 != 0) {
-				message.f68 = *(int*) (g_7746c4 + 1);
+			if (d2_VisitedBuilding != 0) {
+				message.f68 = *(int*) (d2_VisitedBuilding + 1);
 			} else {
-				message.f68 = *(int*) (g_7746c8 + 1);
+				message.f68 = *(int*) (d2_InteriorBuilding + 1);
 			}
-			if (g_7746cc != 0) {
-				message.f6c = *(int*) (g_7746cc + 2);
+			if (sv_SelectedBuilding != 0) {
+				message.f6c = *(int*) (sv_SelectedBuilding + 2);
 			} else {
 				message.f6c = -1;
 			}
@@ -135,10 +135,10 @@ int __cdecl d2_RunRaeuberlagerTargetDialog(int unusedFlags, char* object)
 				}
 			}
 			cm_SendCopyEntityData(&message);
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 			sv_ClearObjectSelection();
 		} else if (d2_CurrentElementId == item2) {
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop((void*) d2_RunRaeuberlagerTargetDialog, 0x677c7) != 0);
 	d2_DestroyForm(dlg);

@@ -15,18 +15,18 @@ typedef struct {
     int v[6];
 } Chunk24;
 
-extern int g_772f3c;
+extern int cut_SkipMode;
 extern unsigned char g_772f58;
 extern unsigned char g_772f59;
-extern unsigned char g_772f5a;
-extern unsigned char g_772f5b;
-extern unsigned char g_772f5c;
-extern unsigned char g_772f5d;
+extern unsigned char cut_DuelAccuracyBoostA;
+extern unsigned char cut_DuelAccuracyBoostB;
+extern unsigned char cut_DuelDamageReductionA;
+extern unsigned char cut_DuelDamageReductionB;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_68bfc0;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_9afde0;
-extern int g_9afde4;
+extern int cut_DuelFighterB;
 
 unsigned short __cdecl gm_RandomMod(int a);
 char* __cdecl gm_LookupEntityRecordById(int id);
@@ -118,7 +118,7 @@ void __cdecl cut_MainDuell(char* a0)
     e2 = gm_LookupEntityRecordById(*(int*) (a0 + 0x38));
     if (e1 == 0 || e2 == 0)
         goto fail;
-    if (g_772f3c != 0) {
+    if (cut_SkipMode != 0) {
         cut_HandleDuellOfficeLoss(a0);
         return;
     }
@@ -152,7 +152,7 @@ void __cdecl cut_MainDuell(char* a0)
     e2 = gm_LookupEntityRecordById(*(int*) (a0 + 0x38));
     sB = *(Snap*) e1;
     sA = *(Snap*) e2;
-    g_9afde4 = (int) &sB;
+    cut_DuelFighterB = (int) &sB;
     g_9afde0 = (int) &sA;
     g_772f58 = 0;
     g_772f59 = 0;
@@ -239,10 +239,10 @@ void __cdecl cut_MainDuell(char* a0)
             break;
         cut_RunTurnRound((unsigned int*) a0, (int) a0);
         e = (char*) gm_FindPlayerById(sA.idx);
-        g_772f5a = 0;
-        g_772f5b = 0;
-        g_772f5c = 0;
-        g_772f5d = 0;
+        cut_DuelAccuracyBoostA = 0;
+        cut_DuelAccuracyBoostB = 0;
+        cut_DuelDamageReductionA = 0;
+        cut_DuelDamageReductionB = 0;
         if (*(unsigned char*) (e + 0x94) == 2 || *(unsigned char*) (e + 0x94) == 3) {
             cut_PlayDuelIntroMove((char*) &sA, (char*) &sB, (char*) 0x68ccc4);
             cut_PlayDuelIntroMove((char*) &sB, (char*) &sA, (char*) 0x68ccc8);
@@ -250,7 +250,7 @@ void __cdecl cut_MainDuell(char* a0)
             cut_PlayDuelIntroMove((char*) &sB, (char*) &sA, (char*) 0x68ccc8);
             cut_PlayDuelIntroMove((char*) &sA, (char*) &sB, (char*) 0x68ccc4);
         }
-        if ((g_772f5a != 0 || g_772f5c != 0) && (g_772f5b != 0 || g_772f5d != 0)) {
+        if ((cut_DuelAccuracyBoostA != 0 || cut_DuelDamageReductionA != 0) && (cut_DuelAccuracyBoostB != 0 || cut_DuelDamageReductionB != 0)) {
             t = cut_RandMod(9);
             d2_SetForm(g_68bfc0, 0);
             io_AppendText(t + 0x1113);
@@ -322,7 +322,7 @@ void __cdecl cut_MainDuell(char* a0)
             io_AppendText(0x1123 + *(unsigned char*) (p + 9), *(unsigned short*) p);
             d3snd_PlaySoundEffect(-8, 0, (int) 0x68cc9c, *(unsigned char*) (p + 9) + 1);
             if (srv_GetEntityOfficeSlot(p, outR, outS) != 0) {
-                if (*(int*) (a0 + 0xc) == *(int*) (0x7f4ca4 + (g_774970 & 0xffff) * 0x21c)) {
+                if (*(int*) (a0 + 0xc) == *(int*) (0x7f4ca4 + (gm_LocalPlayerSlot & 0xffff) * 0x21c)) {
                     amt_SendOfficeCommand(outS[0], 0, 0, 4, 0xff);
                     q = (char*) 0x7f4ca2;
                     do {
@@ -343,7 +343,7 @@ void __cdecl cut_MainDuell(char* a0)
     }
 
     cut_WaitTicks(5);
-    if (*(int*) (0x7f4ca4 + (g_774970 & 0xffff) * 0x21c) == *(int*) (a0 + 0xc)) {
+    if (*(int*) (0x7f4ca4 + (gm_LocalPlayerSlot & 0xffff) * 0x21c) == *(int*) (a0 + 0xc)) {
         cm_RequestCopyEntityData(sB.idx, sA.idx, 0xf, 1);
         cm_RequestCopyEntityData(sA.idx, sB.idx, 0xf, 1);
     }

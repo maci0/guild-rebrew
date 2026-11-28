@@ -28,7 +28,7 @@ int __cdecl gm_MapEntityStatRange(int);
 int __cdecl gm_GetRangeStatId(int, int);
 int __cdecl gm_ConvertUnitsToAmount(int, int);
 void __cdecl amt_SpawnHistoricalOfficeHolders(void);
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 /* ADDRESS: GOLDTL 0x00511c60 */
 int __cdecl amt_InitOfficeHolders(void)
 {
@@ -182,7 +182,7 @@ int __cdecl amt_InitOfficeHolders(void)
 						 -0.5f),
 				   *(unsigned char *) 0x773d75);
 		p = (char *) v26[i];
-		cm_RequestMoveCredits(*(int *) (p + 4), -1, g_773d75,
+		cm_RequestMoveCredits(*(int *) (p + 4), -1, gm_ActiveTownIndex,
 			     v49);
 		cm_BeginPacketFieldDelta(p, *(int *) (p + 4));
 		cm_AppendPacketFieldDelta(1, 1, 0xd, &v36);
@@ -283,7 +283,7 @@ int __cdecl amt_InitOfficeHolders(void)
 			p = cm_GetCommandResult(k);
 			k = gm_RandomMod(0x400);
 			cm_RequestMoveCredits(*(int *) (p + 4), -1,
-				     g_773d75,
+				     gm_ActiveTownIndex,
 				     ((k & 0xffff) + 0x200) << 5);
 			cm_BeginPacketFieldDelta(p, *(int *) (p + 4));
 			cm_AppendPacketFieldDelta(1, 1, 0xd, &v38);
@@ -315,7 +315,7 @@ int __cdecl amt_InitOfficeHolders(void)
 		}
 		p = cm_GetCommandResult(k);
 		k = gm_RandomMod(0x400);
-		cm_RequestMoveCredits(*(int *) (p + 4), -1, g_773d75,
+		cm_RequestMoveCredits(*(int *) (p + 4), -1, gm_ActiveTownIndex,
 			     ((k & 0xffff) + 0x200) << 5);
 		cm_BeginPacketFieldDelta(p, *(int *) (p + 4));
 		cm_AppendPacketFieldDelta(1, 1, 0xd, &v36);
@@ -331,7 +331,7 @@ int __cdecl amt_InitOfficeHolders(void)
 		}
 		p = cm_GetCommandResult(k);
 		k = gm_RandomMod(0x400);
-		cm_RequestMoveCredits(*(int *) (p + 4), -1, g_773d75,
+		cm_RequestMoveCredits(*(int *) (p + 4), -1, gm_ActiveTownIndex,
 			     ((k & 0xffff) + 0x200) << 5);
 		cm_BeginPacketFieldDelta(p, *(int *) (p + 4));
 		cm_AppendPacketFieldDelta(1, 1, 0xd, &v36);

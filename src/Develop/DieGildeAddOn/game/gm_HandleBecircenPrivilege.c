@@ -1,4 +1,4 @@
-extern char g_679060[];
+extern char str_fmt_s[];
 
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl gm_HandleBecircen(char*, int*);

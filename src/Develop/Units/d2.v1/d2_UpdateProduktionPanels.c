@@ -16,10 +16,10 @@ typedef struct
 	char pad50[0x58 - 0x50];
 } Panel;
 
-extern char g_779160[];
-extern char* g_7746c4;
-extern unsigned char* g_7746c8;
-extern char* g_1015ea0;
+extern char d2_ProductionPanels[];
+extern char* d2_VisitedBuilding;
+extern unsigned char* d2_InteriorBuilding;
+extern char* d2_Controls;
 extern char* lpObjektePROT;
 extern int d2_CurrentWindowId;
 extern char gm_GameTime[];
@@ -56,37 +56,37 @@ void __cdecl d2_UpdateProduktionPanels(int formIdArg, int formTabArg, int panelC
 	/* List record buffer: fcn_0050cce0 fills 0xb8 bytes. Only the count at
 	 * +4, the item ids at +0x48 and the values at +0x68 are read here. */
 	obj = 0;
-	if (g_7746c4 != 0) {
-		obj = (unsigned char*) g_7746c4;
-	} else if (g_7746c8 != 0) {
-		obj = g_7746c8;
+	if (d2_VisitedBuilding != 0) {
+		obj = (unsigned char*) d2_VisitedBuilding;
+	} else if (d2_InteriorBuilding != 0) {
+		obj = d2_InteriorBuilding;
 	}
 	d2_SetForm(formIdArg, 0);
 	d2_SetForm(formIdArg, formTabArg);
 	gm_CollectBuildingStock((char*) obj, stock, 1);
 
 	for (i = 0; i < panelCountArg; i++) {
-		p = (Panel*) (g_779160 + i * 0x58);
+		p = (Panel*) (d2_ProductionPanels + i * 0x58);
 		if (p->c[1] < 0) {
 			w = d2_CreateChildWindow(p->x24, p->x28, 0xcd, 0x57, 0x10, d2_CurrentWindowId);
 			p->c[1] = w;
 			*(int*) (0x10161cc + w * 0x3cc) = 0x54;
 			d2_AddElementToWindow(0, 0, 0x749, w);
 			if (i == 0) {
-				((Panel*) g_779160)->c[2] = d2_AddElementToWindow(0xd, 5, 0x74a, ((Panel*) g_779160)->c[1]);
+				((Panel*) d2_ProductionPanels)->c[2] = d2_AddElementToWindow(0xd, 5, 0x74a, ((Panel*) d2_ProductionPanels)->c[1]);
 			} else {
 				p->c[2] = d2_AddElementToWindow(0xd, 5, p->x0 + 0xdf, p->c[1]);
 			}
-			((D2_CONTROL_TL*) (g_1015ea0))[p->c[2]].value_05c = 1;
-			((D2_CONTROL_TL*) (g_1015ea0))[p->c[2]].value_1e8 = -1;
-			((D2_CONTROL_TL*) (g_1015ea0))[p->c[2]].value_1ec = -1;
+			((D2_CONTROL_TL*) (d2_Controls))[p->c[2]].value_05c = 1;
+			((D2_CONTROL_TL*) (d2_Controls))[p->c[2]].value_1e8 = -1;
+			((D2_CONTROL_TL*) (d2_Controls))[p->c[2]].value_1ec = -1;
 			for (y = 0x11, k = 0; y < 0xd5; y += 0x31, k++) {
 				if (p->a[k] != 0) {
 					w = d2_AddWindowImage(y, 0x3a, p->a[k] + 0xdf, p->c[1], -2);
 					p->d[k] = w;
-					((D2_CONTROL_TL*) (g_1015ea0))[w].value_05c = 1;
-					((D2_CONTROL_TL*) (g_1015ea0))[w].value_1e8 = -1;
-					((D2_CONTROL_TL*) (g_1015ea0))[w].value_1ec = -1;
+					((D2_CONTROL_TL*) (d2_Controls))[w].value_05c = 1;
+					((D2_CONTROL_TL*) (d2_Controls))[w].value_1e8 = -1;
+					((D2_CONTROL_TL*) (d2_Controls))[w].value_1ec = -1;
 				}
 			}
 			w = d2_CreateChildWindow(0x43, 4, 0x88, 0x32, 0x10, p->c[1]);
@@ -107,19 +107,19 @@ void __cdecl d2_UpdateProduktionPanels(int formIdArg, int formTabArg, int panelC
 			}
 			if (n >= stock[1]) {
 				status = 2;
-				((D2_CONTROL_TL*) (g_1015ea0))[p->d[k]].value_1e4 = 0x74f;
+				((D2_CONTROL_TL*) (d2_Controls))[p->d[k]].value_1e4 = 0x74f;
 			} else {
 				if (!((int) *(unsigned short*) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[p->x0]) + off) <= *(int*) ((unsigned char*) stock + 0x68 + n * 4))) {
-					((D2_CONTROL_TL*) (g_1015ea0))[p->d[k]].value_1e4 = 0x74e;
+					((D2_CONTROL_TL*) (d2_Controls))[p->d[k]].value_1e4 = 0x74e;
 					if (status <= 1) {
 						status = 1;
 					}
 				} else {
-					((D2_CONTROL_TL*) (g_1015ea0))[p->d[k]].value_1e4 = 0x74d;
+					((D2_CONTROL_TL*) (d2_Controls))[p->d[k]].value_1e4 = 0x74d;
 				}
 			}
 		}
-		((D2_CONTROL_TL*) (g_1015ea0))[p->c[2]].value_1e4 = status + 0x750;
+		((D2_CONTROL_TL*) (d2_Controls))[p->c[2]].value_1e4 = status + 0x750;
 
 		span = 0;
 		if (i == 0) {
@@ -137,14 +137,14 @@ void __cdecl d2_UpdateProduktionPanels(int formIdArg, int formTabArg, int panelC
 			span = *(int*) ((char*) row + 0x18) + *(int*) ((char*) row + 0x14);
 			t1 = gm_GetElapsedMinutes((void*) ((char*) row + 0x44), (void*) ((char*) row + 0x52));
 			t2 = gm_GetElapsedMinutes((void*) ((char*) row + 0x44), (void*) gm_GameTime);
-			((D2_CONTROL_TL*) (g_1015ea0))[p->c[2]].value_1f4.real = (float) t2 / (float) t1;
+			((D2_CONTROL_TL*) (d2_Controls))[p->c[2]].value_1f4.real = (float) t2 / (float) t1;
 		} else {
 			if (p->c[3] != -1) {
 				d2_DestroyElement(p->c[3]);
 				p->c[3] = -1;
 			}
 			if (p->c[2] != -1) {
-				((D2_CONTROL_TL*) (g_1015ea0))[p->c[2]].value_1f4.real = 0.0f;
+				((D2_CONTROL_TL*) (d2_Controls))[p->c[2]].value_1f4.real = 0.0f;
 			}
 		}
 
@@ -163,7 +163,7 @@ void __cdecl d2_UpdateProduktionPanels(int formIdArg, int formTabArg, int panelC
 	 * 0x779160, so the index bound is 16. */
 	if (i < 0x10) {
 		for (k = i; k < 0x10; k++) {
-			p = (Panel*) (g_779160 + k * 0x58);
+			p = (Panel*) (d2_ProductionPanels + k * 0x58);
 			if (p->c[1] >= 0) {
 				p->c[0] = -1;
 				d2_DestroyElement(p->c[1]);

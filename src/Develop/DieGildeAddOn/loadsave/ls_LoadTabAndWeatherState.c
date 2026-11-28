@@ -11,7 +11,7 @@ struct s_7e43a8 {
 };
 
 #include "Develop/client_types.h"
-extern Tabs_7e43a8 g_7e43a8;
+extern Tabs_7e43a8 gm_HourlyWeatherSlots;
 
 
 
@@ -24,20 +24,20 @@ int __cdecl ls_LoadTabAndWeatherState(void* x)
 {
 	int i;
 
-	if (ls_ReadVfsDataChecked(&(*(struct s_7e43a8*)&g_7e43a8).e, 4, 1, x) == 0) {
+	if (ls_ReadVfsDataChecked(&(*(struct s_7e43a8*)&gm_HourlyWeatherSlots).e, 4, 1, x) == 0) {
 		return 0;
 	}
 	for (i = 0; i < 24; i++) {
-		if (ls_ReadVfsDataChecked(&(*(struct s_7e43a8*)&g_7e43a8).a[i], 4, 1, x) == 0) {
+		if (ls_ReadVfsDataChecked(&(*(struct s_7e43a8*)&gm_HourlyWeatherSlots).a[i], 4, 1, x) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(&(*(struct s_7e43a8*)&g_7e43a8).b[i], 4, 1, x) == 0) {
+		if (ls_ReadVfsDataChecked(&(*(struct s_7e43a8*)&gm_HourlyWeatherSlots).b[i], 4, 1, x) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(&(*(struct s_7e43a8*)&g_7e43a8).c[i], 4, 1, x) == 0) {
+		if (ls_ReadVfsDataChecked(&(*(struct s_7e43a8*)&gm_HourlyWeatherSlots).c[i], 4, 1, x) == 0) {
 			return 0;
 		}
-		if (ls_ReadVfsDataChecked(&(*(struct s_7e43a8*)&g_7e43a8).d[i], 4, 1, x) == 0) {
+		if (ls_ReadVfsDataChecked(&(*(struct s_7e43a8*)&gm_HourlyWeatherSlots).d[i], 4, 1, x) == 0) {
 			return 0;
 		}
 	}

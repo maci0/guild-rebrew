@@ -15,7 +15,7 @@ typedef struct F8 {
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 
-extern __int64 g_666018;
+extern __int64 gm_TargetPersonTypeMask;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -45,7 +45,7 @@ void __cdecl he_AllocPruegelAction(char* action)
 		target = gm_StartFilteredEntitySearch(1, 4, *(unsigned short*) actor);
 	}
 	if (target == 0) {
-		if (ai_FindEntityInFavorRange(((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (action + 8)]), 6, (*(F8*)&g_666018), 0, 100.0f, &found) != 0) {
+		if (ai_FindEntityInFavorRange(((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[*(unsigned short*) (action + 8)]), 6, (*(F8*)&gm_TargetPersonTypeMask), 0, 100.0f, &found) != 0) {
 			target = gm_StartFilteredEntitySearch(1, 1, found);
 		}
 	}

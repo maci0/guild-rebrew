@@ -20,13 +20,13 @@ int __cdecl gm_ValidateProzessCharge(char*, unsigned int);
 void __cdecl d2_SetElementEnabled(int, int);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern char* g_77255c;
+extern char* d2_CurrentWindow;
 #ifdef REBREW_GOLD
 #define cut_SECOND_CHOICE 0
-#define cut_WINDOW_WIDTH (*(short*) (g_77255c + 8))
+#define cut_WINDOW_WIDTH (*(short*) (d2_CurrentWindow + 8))
 #else
 #define cut_SECOND_CHOICE 2
-#define cut_WINDOW_WIDTH (*(int*) (g_77255c + 12))
+#define cut_WINDOW_WIDTH (*(int*) (d2_CurrentWindow + 12))
 #endif
 
 /* Inferred name and source home; the native registry selects this two-argument callback. */
@@ -62,19 +62,19 @@ void __cdecl cut_PromptProzessChoice(char* participant, int* action)
         d2_CenterForm(dialog, 3);
         d2_SetForm(dialog, 0);
         io_AppendText(0x14bc, *(unsigned short*) own);
-        g_100f1dc = -1;
+        d2_DialogButtonAction = -1;
         *(int*) (participant + 0x94) = 0;
         timer = d2_AddWindowValueGauge((cut_WINDOW_WIDTH - 300) / 2 - 8,
             8, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
         d2_UpdateProgressBar(timer, 1500, 1);
         while (main_RunFrameLoop((void*) cut_PromptProzessChoice, cut_EventLoopFlags)) {
             if (!d2_UpdateProgressBar(timer, 0, 0)) {
-                g_774654 = 1;
-            } else if (g_100f1dc != -1) {
-                g_774654 = 1;
-                if (g_100f1dc == 1) {
+                d2_DialogCloseRequested = 1;
+            } else if (d2_DialogButtonAction != -1) {
+                d2_DialogCloseRequested = 1;
+                if (d2_DialogButtonAction == 1) {
                     *(int*) (participant + 0x94) = 0;
-                } else if (g_100f1dc == cut_SECOND_CHOICE) {
+                } else if (d2_DialogButtonAction == cut_SECOND_CHOICE) {
                     *(int*) (participant + 0x94) = 1;
                 }
             }
@@ -87,19 +87,19 @@ void __cdecl cut_PromptProzessChoice(char* participant, int* action)
         d2_CenterForm(dialog, 3);
         d2_SetForm(dialog, 0);
         io_AppendText(0x14cb, *(unsigned short*) own, *(unsigned short*) other);
-        g_100f1dc = -1;
+        d2_DialogButtonAction = -1;
         *(int*) (participant + 0x94) = 0;
         timer = d2_AddWindowValueGauge((cut_WINDOW_WIDTH - 300) / 2 - 8,
             8, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
         d2_UpdateProgressBar(timer, 1500, 1);
         while (main_RunFrameLoop((void*) cut_PromptProzessChoice, cut_EventLoopFlags)) {
             if (!d2_UpdateProgressBar(timer, 0, 0)) {
-                g_774654 = 1;
-            } else if (g_100f1dc != -1) {
-                g_774654 = 1;
-                if (g_100f1dc == 1) {
+                d2_DialogCloseRequested = 1;
+            } else if (d2_DialogButtonAction != -1) {
+                d2_DialogCloseRequested = 1;
+                if (d2_DialogButtonAction == 1) {
                     *(int*) (participant + 0x94) = 0;
-                } else if (g_100f1dc == cut_SECOND_CHOICE) {
+                } else if (d2_DialogButtonAction == cut_SECOND_CHOICE) {
                     *(int*) (participant + 0x94) = 1;
                 }
             }
@@ -120,19 +120,19 @@ void __cdecl cut_PromptProzessChoice(char* participant, int* action)
             buttons[i] = d2_GetWindowListItem(dialog, 0, io_AppendText(0x14dc,
                 choice * 2 + 0xb20, rates[choice] * value));
         }
-        g_100f1dc = -1;
+        d2_DialogButtonAction = -1;
         *(int*) (participant + 0x94) = order[cut_RandMod(3)];
         timer = d2_AddWindowValueGauge((cut_WINDOW_WIDTH - 300) / 2 - 8,
             8, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
         d2_UpdateProgressBar(timer, 1500, 1);
         while (main_RunFrameLoop((void*) cut_PromptProzessChoice, cut_EventLoopFlags)) {
             if (!d2_UpdateProgressBar(timer, 0, 0)) {
-                g_774654 = 1;
-            } else if (g_100f1dc != -1) {
+                d2_DialogCloseRequested = 1;
+            } else if (d2_DialogButtonAction != -1) {
                 for (i = 0; i < 3; i++) {
                     if (d2_CurrentElementId == buttons[i]) {
                         *(int*) (participant + 0x94) = order[i];
-                        g_774654 = 1;
+                        d2_DialogCloseRequested = 1;
                         break;
                     }
                 }
@@ -146,19 +146,19 @@ void __cdecl cut_PromptProzessChoice(char* participant, int* action)
         d2_CenterForm(dialog, 3);
         d2_SetForm(dialog, 0);
         io_AppendText(0x14e3, *(unsigned short*) own, *(unsigned short*) other, *(unsigned short*) other);
-        g_100f1dc = -1;
+        d2_DialogButtonAction = -1;
         *(int*) (participant + 0x94) = 0;
         timer = d2_AddWindowValueGauge((cut_WINDOW_WIDTH - 300) / 2 - 8,
             8, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
         d2_UpdateProgressBar(timer, 1500, 1);
         while (main_RunFrameLoop((void*) cut_PromptProzessChoice, cut_EventLoopFlags)) {
             if (!d2_UpdateProgressBar(timer, 0, 0)) {
-                g_774654 = 1;
-            } else if (g_100f1dc != -1) {
-                g_774654 = 1;
-                if (g_100f1dc == 1) {
+                d2_DialogCloseRequested = 1;
+            } else if (d2_DialogButtonAction != -1) {
+                d2_DialogCloseRequested = 1;
+                if (d2_DialogButtonAction == 1) {
                     *(int*) (participant + 0x94) = 0;
-                } else if (g_100f1dc == cut_SECOND_CHOICE) {
+                } else if (d2_DialogButtonAction == cut_SECOND_CHOICE) {
                     *(int*) (participant + 0x94) = 1;
                     cm_RequestCopyEntityData(*(int*) (own + 4), *(int*) (other + 4), 0x23, 1);
                 }
@@ -172,19 +172,19 @@ void __cdecl cut_PromptProzessChoice(char* participant, int* action)
         d2_CenterForm(dialog, 3);
         d2_SetForm(dialog, 0);
         io_AppendText(0x1512, *(unsigned short*) own);
-        g_100f1dc = -1;
+        d2_DialogButtonAction = -1;
         *(int*) (participant + 0x94) = 0;
         timer = d2_AddWindowValueGauge((cut_WINDOW_WIDTH - 300) / 2 - 8,
             8, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
         d2_UpdateProgressBar(timer, 1500, 1);
         while (main_RunFrameLoop((void*) cut_PromptProzessChoice, cut_EventLoopFlags)) {
             if (!d2_UpdateProgressBar(timer, 0, 0)) {
-                g_774654 = 1;
-            } else if (g_100f1dc != -1) {
-                g_774654 = 1;
-                if (g_100f1dc == 1) {
+                d2_DialogCloseRequested = 1;
+            } else if (d2_DialogButtonAction != -1) {
+                d2_DialogCloseRequested = 1;
+                if (d2_DialogButtonAction == 1) {
                     *(int*) (participant + 0x94) = 1;
-                } else if (g_100f1dc == cut_SECOND_CHOICE) {
+                } else if (d2_DialogButtonAction == cut_SECOND_CHOICE) {
                     *(int*) (participant + 0x94) = 0;
                 }
             }
@@ -200,19 +200,19 @@ void __cdecl cut_PromptProzessChoice(char* participant, int* action)
         io_AppendText(0x1529, *(unsigned short*) own);
         io_AppendText(0x152a);
         io_AppendText(0x152b);
-        g_100f1dc = -1;
+        d2_DialogButtonAction = -1;
         *(int*) (participant + 0x94) = 1;
         timer = d2_AddWindowValueGauge((cut_WINDOW_WIDTH - 300) / 2 - 8,
             8, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
         d2_UpdateProgressBar(timer, 1500, 1);
         while (main_RunFrameLoop((void*) cut_PromptProzessChoice, cut_EventLoopFlags)) {
             if (!d2_UpdateProgressBar(timer, 0, 0)) {
-                g_774654 = 1;
-            } else if (g_100f1dc != -1) {
-                g_774654 = 1;
-                if (g_100f1dc == 1) {
+                d2_DialogCloseRequested = 1;
+            } else if (d2_DialogButtonAction != -1) {
+                d2_DialogCloseRequested = 1;
+                if (d2_DialogButtonAction == 1) {
                     *(int*) (participant + 0x94) = 1;
-                } else if (g_100f1dc == cut_SECOND_CHOICE) {
+                } else if (d2_DialogButtonAction == cut_SECOND_CHOICE) {
                     *(int*) (participant + 0x94) = 0;
                 }
             }
@@ -245,15 +245,15 @@ void __cdecl cut_PromptProzessChoice(char* participant, int* action)
         } else {
             *(int*) (participant + 0x94) = base;
         }
-        g_100f1dc = -1;
+        d2_DialogButtonAction = -1;
         timer = d2_AddWindowValueGauge((cut_WINDOW_WIDTH - 300) / 2 - 8,
             8, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
         d2_UpdateProgressBar(timer, 1500, 1);
         while (main_RunFrameLoop((void*) cut_PromptProzessChoice, cut_EventLoopFlags)) {
             if (!d2_UpdateProgressBar(timer, 0, 0)) {
-                g_774654 = 1;
-            } else if (g_100f1dc != -1) {
-                g_774654 = 1;
+                d2_DialogCloseRequested = 1;
+            } else if (d2_DialogButtonAction != -1) {
+                d2_DialogCloseRequested = 1;
                 if (d2_CurrentElementId == available[0]) {
                     *(int*) (participant + 0x94) = base;
                 } else if (d2_CurrentElementId == available[1]) {

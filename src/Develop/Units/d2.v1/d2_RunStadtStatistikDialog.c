@@ -13,20 +13,20 @@ typedef struct Ent {
 } Ent;
 // SIZE 0x2f4
 
-extern char* g_1015ea0;
+extern char* d2_Controls;
 #include "Develop/Units/d2.v1/d2_win.h"
-extern char g_1015f40[];
+extern char d2_Windows[];
 extern int d2_CurrentWindowId;
-extern unsigned char g_773d75;
-extern float g_773d4c;
+extern unsigned char gm_ActiveTownIndex;
+extern float gm_CityPopulation;
 extern unsigned short g_775340;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern int g_14ce8e0;
-extern int g_100f1dc;
+extern int io_RightButtonReleased;
+extern int d2_DialogButtonAction;
 extern double dbl_1_0;
 extern double g_662cc0;
 extern float g_662a98;
-extern float g_662cf8;
+extern float flt_100_0;
 extern double g_662c38;
 
 int __cdecl d2_TutorialAllowsFlag(int a);
@@ -91,10 +91,10 @@ void __cdecl d2_RunStadtStatistikDialog(void)
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
-	io_AppendText(0x1f0e, (int) g_773d75 * 0x2f4 + 0x868080, 0x7f4c00);
+	io_AppendText(0x1f0e, (int) gm_ActiveTownIndex * 0x2f4 + 0x868080, 0x7f4c00);
 	gm_GetCityStatsSummary(&gfx);
 	d2_SetForm(dlg, 2);
-	io_AppendText(0x1f14, (int) g_773d4c);
+	io_AppendText(0x1f14, (int) gm_CityPopulation);
 	n = (int) ((gfx.f[9] + dbl_1_0) * g_662cc0);
 	if (n > 4) {
 		n = 4;
@@ -120,21 +120,21 @@ void __cdecl d2_RunStadtStatistikDialog(void)
 		items[row] = n;
 		io_FormatTextBuffer(buf, row + 0x1f25);
 		d2_EqualizeWindowButtonWidths(0x19, i, buf, d2_CurrentWindowId);
-		((D2_CONTROL_TL*) g_1015ea0)[n].value_05c = 1;
-		((D2_CONTROL_TL*) g_1015ea0)[n].value_058 = 1;
+		((D2_CONTROL_TL*) d2_Controls)[n].value_05c = 1;
+		((D2_CONTROL_TL*) d2_Controls)[n].value_058 = 1;
 		d2_CreateGuiWindow(n, mask);
 		*(char*) &r = cp[-1];
 		*(char*) &g = cp[0];
 		*(char*) &b = cp[1];
 		for (j = i + 5; j < i + 15; j++) {
-			d2_DrawLine(((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width - 1, j,
-				((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width - 0xb, j, r, g, b);
+			d2_DrawLine(((D2_WIN*)d2_Windows)[d2_CurrentWindowId].width - 1, j,
+				((D2_WIN*)d2_Windows)[d2_CurrentWindowId].width - 0xb, j, r, g, b);
 		}
 		row++;
 		cp += 3;
 	}
-	g_100f1dc = -1; for (;;) {
-		if (g_100f1dc != -1) {
+	d2_DialogButtonAction = -1; for (;;) {
+		if (d2_DialogButtonAction != -1) {
 			g_775340 = 0;
 			for (i = 0; i < 5; i++) {
 				g_775340 |= d2_GetControlValue(items[i]) ? (1 << i) : 0;
@@ -142,8 +142,8 @@ void __cdecl d2_RunStadtStatistikDialog(void)
 			d2_SetForm(dlg, 3);
 			d2_DrawCityHistoryCharts(g_775340, gfx, d2_CurrentWindowId);
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 		if (!main_RunFrameLoop(d2_RunStadtStatistikDialog, 0x657c7)) {
 			break;

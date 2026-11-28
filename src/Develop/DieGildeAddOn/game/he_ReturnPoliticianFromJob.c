@@ -20,7 +20,7 @@ struct obj {
 	int shown;
 };
 
-extern unsigned short g_7f4c04;
+extern unsigned short gm_GameTimeHour;
 
 struct obj* __cdecl gm_LookupEntityRecordById(int);
 
@@ -54,7 +54,7 @@ int __cdecl he_ReturnPoliticianFromJob(struct slot* s)
 			s->fb = 0;
 			return 0;
 		}
-		if (gm_IsEntityAtBuilding(o, r) == 0 && g_7f4c04 < 0x16) {
+		if (gm_IsEntityAtBuilding(o, r) == 0 && gm_GameTimeHour < 0x16) {
 			return 2;
 		}
 		if (o->shown != 0) {

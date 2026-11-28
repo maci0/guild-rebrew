@@ -16,12 +16,12 @@ typedef struct
 } Req;
 // SIZE 0x50
 
-extern int g_7746a0;
+extern int sv_ClickedObjekt;
 extern int g_14aaf18;
 extern int g_14aaf38;
 extern int g_14ad2c0;
 extern int g_14ab04c;
-extern __int64 g_666018;
+extern __int64 gm_TargetPersonTypeMask;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char s_6aa714[];
 extern char s_6aa700[];
@@ -57,8 +57,8 @@ void __cdecl d2_RunSabotageActionsHud(int entity, int mode)
 			b = RegisterStatusText(s_6aa700, g_14aaf38, 0xd);
 			c = RegisterStatusText(s_6aa6e4, g_14ad2c0, 0xc);
 			d = RegisterStatusText(s_6aa6d0, g_14ab04c, 0x10);
-			if (g_7746a0 != 0) {
-				if (g_7746a0 == a) {
+			if (sv_ClickedObjekt != 0) {
+				if (sv_ClickedObjekt == a) {
 					Req req;
 					char text[0x80];
 					int n;
@@ -92,24 +92,24 @@ void __cdecl d2_RunSabotageActionsHud(int entity, int mode)
 					io_FormatTextBuffer(text, 0x16ff);
 					d2_RunCityScrollMapDialog(1, &req, text, (void*) d2_RunSabotageDialog, 0);
 				}
-				else if (g_7746a0 == b) {
+				else if (sv_ClickedObjekt == b) {
 					Req req;
 					char text[0x40];
 
 					memset(&req, 0, sizeof(req));
 					req.size = 0x400;
 					req.kind = 6;
-					req.c = (*(int*)&g_666018);
+					req.c = (*(int*)&gm_TargetPersonTypeMask);
 					req.d = g_66601c;
 					req.id = 0x727;
 					io_FormatTextBuffer(text, 0x1707);
 					d2_OpenTargetPicker(&req, text, 0, (void*) d2_RunBeatupDialog);
 					d3_EndCameraAndUiMode();
 				}
-				else if (g_7746a0 == c) {
+				else if (sv_ClickedObjekt == c) {
 					d2_RunTalenteDialog(entity, mode, 2);
 				}
-				else if (g_7746a0 == d) {
+				else if (sv_ClickedObjekt == d) {
 					d2_OpenPaymentTargetPicker(entity);
 				}
 			}

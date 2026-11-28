@@ -6,9 +6,9 @@
 #include "Develop/DieGildeAddOn/game/client_method_registry.h"
 #pragma function(memcpy)
 
-extern char g_1008420[];
-extern char g_6b5c60[];
-extern AM_METHOD g_1008540[];
+extern char am_MethodIniPath[];
+extern char str_empty[];
+extern AM_METHOD am_Methods[];
 int __cdecl amt_GetDesireByName(char* name);
 /* ADDRESS: GOLDTL 0x00494ed0 */
 int __cdecl am_RegisterMethod(AM_METHOD* d, char* ini)
@@ -23,17 +23,17 @@ int __cdecl am_RegisterMethod(AM_METHOD* d, char* ini)
    name=d->name;
    for(i=0;i<4;i++) {
     sprintf(key,"ShortDesire%li",i+1);
-    if(GetPrivateProfileStringA(name,key,g_6b5c60,value,128,g_1008420)) {
+    if(GetPrivateProfileStringA(name,key,str_empty,value,128,am_MethodIniPath)) {
      d->effects[i].type=amt_GetDesireByName(value);
      sprintf(key,"ShortChange%li",i+1);
-     GetPrivateProfileStringA(name,key,g_6b5c60,value,128,g_1008420);
+     GetPrivateProfileStringA(name,key,str_empty,value,128,am_MethodIniPath);
      d->effects[i].value=(float)atof(value);
     } else {d->effects[i].type=0xff;d->effects[i].value=0;}
     sprintf(key,"LongDesire%li",i+1);
-    if(GetPrivateProfileStringA(name,key,g_6b5c60,value,128,g_1008420)) {
+    if(GetPrivateProfileStringA(name,key,str_empty,value,128,am_MethodIniPath)) {
      d->other_effects[i].type=amt_GetDesireByName(value);
      sprintf(key,"LongChange%li",i+1);
-     GetPrivateProfileStringA(name,key,g_6b5c60,value,128,g_1008420);
+     GetPrivateProfileStringA(name,key,str_empty,value,128,am_MethodIniPath);
      d->other_effects[i].value=(float)atof(value);
     } else {d->other_effects[i].type=0xff;d->other_effects[i].value=0;}
    }
@@ -54,7 +54,7 @@ int __cdecl am_RegisterMethod(AM_METHOD* d, char* ini)
     d->saved_effects[i].type=0xff;d->saved_effects[i].value=0;
    }
   }
-  g_1008540[d->type]=*d;
+  am_Methods[d->type]=*d;
  }
  return 1;
 }

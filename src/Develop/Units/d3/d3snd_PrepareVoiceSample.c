@@ -10,9 +10,9 @@ typedef struct {
 	char pad[0x21c - 10];
 } VOICE_ENTITY_RECORD;
 
-extern VOICE_ENTITY_RECORD g_7f4ca0[];
-extern int g_774934;
-extern char g_6b5c60;
+extern VOICE_ENTITY_RECORD gm_EntitySlotTable[];
+extern int d3snd_SoundEnabled;
+extern char str_empty;
 extern char g_68a4cc[]; /* "_HS" */
 extern char g_68a4d0[]; /* "_M3" */
 extern char g_68a4d4[]; /* "_M2" */
@@ -38,7 +38,7 @@ int __cdecl d3snd_PrepareVoiceSample(int code, int bank, char* text, int variati
 	char buf[0x104];
 	int res;
 
-	if (g_774934 == 0) {
+	if (d3snd_SoundEnabled == 0) {
 		return 0;
 	}
 	if (code != -7) {
@@ -56,7 +56,7 @@ int __cdecl d3snd_PrepareVoiceSample(int code, int bank, char* text, int variati
 			} else if (code == -6) {
 				memcpy(num, g_68a4cc, 4);
 			} else if (code == -8) {
-				num[0] = g_6b5c60;
+				num[0] = str_empty;
 			}
 
 
@@ -67,10 +67,10 @@ int __cdecl d3snd_PrepareVoiceSample(int code, int bank, char* text, int variati
 
 
 		} else {
-			if (g_7f4ca0[code].type == 1) {
-				sprintf(num, g_68a4ec, (g_7f4ca0[code].value & 1) + 1);
-			} else if (g_7f4ca0[code].type == 0) {
-				sprintf(num, g_68a4e4, g_7f4ca0[code].value % 3 + 1);
+			if (gm_EntitySlotTable[code].type == 1) {
+				sprintf(num, g_68a4ec, (gm_EntitySlotTable[code].value & 1) + 1);
+			} else if (gm_EntitySlotTable[code].type == 0) {
+				sprintf(num, g_68a4e4, gm_EntitySlotTable[code].value % 3 + 1);
 			}
 
 

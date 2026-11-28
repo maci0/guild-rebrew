@@ -1,6 +1,6 @@
 #ifndef GAME_PLAYER_H
 #define GAME_PLAYER_H
 
-extern unsigned short g_774970;
+extern unsigned short gm_LocalPlayerSlot;
 
 #endif

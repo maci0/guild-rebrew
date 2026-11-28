@@ -1,7 +1,7 @@
 
 
 
-extern int g_772f3c;
+extern int cut_SkipMode;
 
 char* __cdecl evt_LoadGfxScript(int);
 void __cdecl evt_RunScriptLine(char*, int);
@@ -10,7 +10,7 @@ int __cdecl evt_StartGfxScript(int scriptPath, int args)
 {
 	char* p;
 
-	if (g_772f3c == 0) {
+	if (cut_SkipMode == 0) {
 		p = evt_LoadGfxScript(scriptPath);
 		if (p != 0) {
 			evt_RunScriptLine(p, args);

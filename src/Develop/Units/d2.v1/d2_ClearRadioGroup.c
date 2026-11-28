@@ -1,5 +1,5 @@
-extern char g_102cbc0[];
-extern char g_102cbc0[];
+extern char d2_RadioGroups[];
+extern char d2_RadioGroups[];
 
 
 
@@ -9,6 +9,6 @@ extern char g_102cbc0[];
 
 void __cdecl d2_ClearRadioGroup(int i)
 {
-	memset((void*) (g_102cbc0 + i * 140), 0, 0x8c);
+	memset((void*) (d2_RadioGroups + i * 140), 0, 0x8c);
 }
 unsigned char _dpad_10161d0[92656];

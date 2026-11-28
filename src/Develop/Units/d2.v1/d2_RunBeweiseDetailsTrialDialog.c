@@ -13,12 +13,12 @@ typedef struct {
 } D2_TRIAL_CRIME_KIND;
 
 #include "Develop/client_types.h"
-extern Rec2d_9a3800 g_9a3800[512];
+extern Rec2d_9a3800 cm_CrimeRecords[512];
 #include "Develop/Units/d2.v1/crime_description.h"
 extern char g_6ac4c8[];
 extern int d2_CurrentWindowId;
-extern int g_100f1dc;
-extern int g_14ce8e0;
+extern int d2_DialogButtonAction;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int d2_CurrentElementId;
 
@@ -65,7 +65,7 @@ int __cdecl d2_RunBeweiseDetailsTrialDialog(unsigned short* entity, unsigned sho
 		return 0x60;
 	}
 	for (i = 0; i < n; i++) {
-		rows[i] = g_9a3800[list[i]];
+		rows[i] = cm_CrimeRecords[list[i]];
 		flag |= (rows[i].x25 == 1);
 	}
 	if (entity == other) {
@@ -101,15 +101,15 @@ int __cdecl d2_RunBeweiseDetailsTrialDialog(unsigned short* entity, unsigned sho
 			d2_SetElementEnabled(sel, 0);
 		}
 	}
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == sel) {
 				gs_StartCourtTrial(entity, other, n, 0);
-				g_774654 = 3;
+				d2_DialogCloseRequested = 3;
 			}
 		}
 	} while (main_RunFrameLoop(d2_RunBeweiseDetailsTrialDialog, 0x657c7) != 0);

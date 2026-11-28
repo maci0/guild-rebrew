@@ -1,5 +1,5 @@
 int __cdecl FindStraftatIndexById(int);
-extern char g_7f4ca4[];
+extern char gm_EntityIdField[];
 
 /* ADDRESS: GOLD 0x004f3c50 */
 int __cdecl gm_CollectTopStraftaten(int* ids, int* counts, int id)
@@ -28,7 +28,7 @@ int __cdecl gm_CollectTopStraftaten(int* ids, int* counts, int id)
 		list[i] = -1;
 	}
 	w = list;
-	key = *(int*) (g_7f4ca4 + (unsigned short) id * 0x21c);
+	key = *(int*) (gm_EntityIdField + (unsigned short) id * 0x21c);
 	for (e = (int*) 0x91b6e4; (int) e < 0x91f6e4; e += 2) {
 		if (e[-1] == key) {
 			k = FindStraftatIndexById(e[0]);

@@ -20,9 +20,9 @@ extern int g_68a9dc;
 extern char g_9bade0[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_1005780;
-extern COMMAND_STATUS_SLOT g_fb5760[0x8000];
+extern COMMAND_STATUS_SLOT cm_CommandStatusQueue[0x8000];
 extern char* g_14cbca4;
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 extern unsigned int g_aecde4;
 
 void __cdecl cm_SendCommandQueueInit(void);
@@ -51,12 +51,12 @@ void __cdecl cm_ResetCommandQueue(void)
 	g_1005768 = 0;
 	g_1005760 = 0;
 	for (i = 0; i < 0x8000; i++) {
-		g_fb5760[i].f2 = -1;
-		g_fb5760[i].f0 = 1;
+		cm_CommandStatusQueue[i].f2 = -1;
+		cm_CommandStatusQueue[i].f0 = 1;
 	}
 	g_14cbca4 = &g_1005780;
 	cm_SendCommandQueueInit();
 	if (cm_RecvSceneInitPacket() != 0)
 		nt_CloseClientConnection();
-	(*(int *)&g_aecde4) = g_6b7fac;
+	(*(int *)&g_aecde4) = gm_GameTicks;
 }

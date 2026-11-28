@@ -1,5 +1,5 @@
-extern char g_10069a0[];
-extern char g_10069a0[];
+extern char gm_MissionJobs[];
+extern char gm_MissionJobs[];
 
 
 /* fcn_004b3b60: zero 0x1200 bytes at g_10069a0; return 1. */
@@ -9,6 +9,6 @@ extern char g_10069a0[];
 
 int __cdecl gm_ClearMissionJobs(void)
 {
-	memset(g_10069a0, 0, 0x1200);
+	memset(gm_MissionJobs, 0, 0x1200);
 	return 1;
 }

@@ -15,8 +15,8 @@ void __cdecl cut_RunCombatFlightOutro(void)
 {
 	char* p;
 
-	if (g_772efc != 0) {
-		msx_StopAmbientTrack(g_772efc);
+	if (tp_cut_CombatAmbientTrack != 0) {
+		msx_StopAmbientTrack(tp_cut_CombatAmbientTrack);
 	}
 	main_LoopFlags = 0x7d6c6;
 	d2_SuppressOverlay = 1;

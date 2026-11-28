@@ -53,8 +53,8 @@ extern char g_6a2e94[];
 extern char g_6a2ea8[];
 extern int d2_CurrentWindowId;
 #include "Develop/client_types.h"
-extern Win_1015f40 g_1015f40[0x60];
-extern char* g_1015ea0;
+extern Win_1015f40 d2_Windows[0x60];
+extern char* d2_Controls;
 extern Row g_7e30c0[32];
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
@@ -81,14 +81,14 @@ void __cdecl d2_InitPlayerBar(int unused, char arg)
 		owner = d2_CurrentWindowId;
 		d2_SetForm(g_6a25b4, 2);
 		id = d2_GetWindowListItem(g_6a25b4, 2, 0);
-		((D2_CONTROL_TL*) g_1015ea0)[id].flags_1d0 = 3;
-		*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8[0x10] = id;
-		((D2_CONTROL_TL*) g_1015ea0)[id].value_1f0 = owner;
+		((D2_CONTROL_TL*) d2_Controls)[id].flags_1d0 = 3;
+		*(int*) &((D2_WIN*)d2_Windows)[d2_CurrentWindowId].pad3a8[0x10] = id;
+		((D2_CONTROL_TL*) d2_Controls)[id].value_1f0 = owner;
 		id = d2_GetWindowListItem(g_6a25b4, 2, 1);
-		((D2_CONTROL_TL*) g_1015ea0)[id].flags_1d0 = 3;
-		*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8[0x14] = id;
-		((D2_CONTROL_TL*) g_1015ea0)[id].value_1f0 = owner;
-		*(int*) &((D2_WIN*)g_1015f40)[owner].pad3c[0x238] = 0x4e;
+		((D2_CONTROL_TL*) d2_Controls)[id].flags_1d0 = 3;
+		*(int*) &((D2_WIN*)d2_Windows)[d2_CurrentWindowId].pad3a8[0x14] = id;
+		((D2_CONTROL_TL*) d2_Controls)[id].value_1f0 = owner;
+		*(int*) &((D2_WIN*)d2_Windows)[owner].pad3c[0x238] = 0x4e;
 		if (g_6a25b4 != -1) {
 			if (g_6a25b8 != -1) {
 				d2_SetFormVisibility(g_6a25b8, 0);
@@ -105,11 +105,11 @@ void __cdecl d2_InitPlayerBar(int unused, char arg)
 			}
 			d2_SetForm(g_6a25b4, 2);
 			id = d2_AddWindowImage(0x11, 4, 0x51d, d2_CurrentWindowId, -2);
-			((D2_CONTROL_TL*) g_1015ea0)[id].value_05c = 1;
-			((D2_CONTROL_TL*) g_1015ea0)[id].flags_1d0 = 3;
+			((D2_CONTROL_TL*) d2_Controls)[id].value_05c = 1;
+			((D2_CONTROL_TL*) d2_Controls)[id].flags_1d0 = 3;
 			for (i = 0; i < 768; i++) {
-				if ((*(char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].selected) != 0 && (*(char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].stat_category) != 0) {
-					(*(char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].selected) = 0;
+				if ((*(char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].selected) != 0 && (*(char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].stat_category) != 0) {
+					(*(char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].selected) = 0;
 				}
 			}
 		}

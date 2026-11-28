@@ -9,7 +9,7 @@ typedef struct Cmd {
 
 extern unsigned char* g_entity_ptr;
 extern unsigned char* lpGebaeudePROT;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern int g_666028;
 extern int g_66602c;
 
@@ -79,7 +79,7 @@ int __cdecl ai_StartWohnsitzBauen(int a0, short* entity, int a2, Cmd* request, C
 
 				/* scan address and money value share one stack slot in the
 				 * native body; every hit path returns before the scan resumes */
-				p = gm_GetSeasonTreasury(entity, g_773d75);
+				p = gm_GetSeasonTreasury(entity, gm_ActiveTownIndex);
 				p = (int) ((float) p * 0.66f);
 				out.kind = 0;
 				out.f1 = 0;

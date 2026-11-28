@@ -10,11 +10,11 @@
 
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern unsigned char g_773d75;
-extern char* g_7746cc;
+extern unsigned char gm_ActiveTownIndex;
+extern char* sv_SelectedBuilding;
 extern int d2_CurrentWindowId;
-extern int g_100f1dc;
-extern int g_14ce8e0;
+extern int d2_DialogButtonAction;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char s_6aa830[];
 
@@ -46,33 +46,33 @@ void __cdecl d2_RunWeinkellerDialog(void)
 	int v;
 
 	dlg = d2_LoadForm(0, 0, s_6aa830);
-	have = gm_AccumulateTyped2(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]));
-	stock = gm_SumContainerCredits(*(int*) (g_7746cc + 0x14));
+	have = gm_AccumulateTyped2(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot]));
+	stock = gm_SumContainerCredits(*(int*) (sv_SelectedBuilding + 0x14));
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);
 	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1a4c);
 	d2_SetForm(dlg, 2);
-	sl = d2_GetWindowListItem(dlg, 2, io_AppendText(0x1a4d, g_773d75));
-	max = gm_AmountToUnits(stock, g_773d75) + gm_AmountToUnits(have, g_773d75) > gm_AmountToUnits(stock, g_773d75) ?
-	      gm_AmountToUnits(stock, g_773d75) + gm_AmountToUnits(have, g_773d75) : gm_AmountToUnits(stock, g_773d75);
-	d2_SetElementValue(sl, 0, max, gm_AmountToUnits(stock, g_773d75));
+	sl = d2_GetWindowListItem(dlg, 2, io_AppendText(0x1a4d, gm_ActiveTownIndex));
+	max = gm_AmountToUnits(stock, gm_ActiveTownIndex) + gm_AmountToUnits(have, gm_ActiveTownIndex) > gm_AmountToUnits(stock, gm_ActiveTownIndex) ?
+	      gm_AmountToUnits(stock, gm_ActiveTownIndex) + gm_AmountToUnits(have, gm_ActiveTownIndex) : gm_AmountToUnits(stock, gm_ActiveTownIndex);
+	d2_SetElementValue(sl, 0, max, gm_AmountToUnits(stock, gm_ActiveTownIndex));
 	d2_SetOverlayAnimation(0, 0);
 	if (main_RunFrameLoop((void*) d2_RunWeinkellerDialog, 0x677c7) != 0) {
 		do {
-			if (g_14ce8e0 != 0 || g_100f1dc == 1) {
-				g_774654 = 1;
+			if (io_RightButtonReleased != 0 || d2_DialogButtonAction == 1) {
+				d2_DialogCloseRequested = 1;
 			}
-			if (g_100f1dc == 2) {
-				v = gm_ConvertUnitsToAmount(d2_GetControlValue(sl), g_773d75);
+			if (d2_DialogButtonAction == 2) {
+				v = gm_ConvertUnitsToAmount(d2_GetControlValue(sl), gm_ActiveTownIndex);
 				if (stock < v) {
-					cm_RequestMoveCredits(*(int*) (g_7746cc + 2), ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, g_773d75, v - stock);
+					cm_RequestMoveCredits(*(int*) (sv_SelectedBuilding + 2), ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id, gm_ActiveTownIndex, v - stock);
 				}
 				else {
-					cm_RequestMoveCredits(((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, *(int*) (g_7746cc + 2), g_773d75, stock - v);
+					cm_RequestMoveCredits(((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id, *(int*) (sv_SelectedBuilding + 2), gm_ActiveTownIndex, stock - v);
 				}
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		} while (main_RunFrameLoop((void*) d2_RunWeinkellerDialog, 0x677c7) != 0);
 	}

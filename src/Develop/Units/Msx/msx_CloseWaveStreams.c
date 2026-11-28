@@ -11,9 +11,9 @@ int __cdecl msx_CloseWaveStreams(int *o)
 	int i;
 	int v;
 
-	if (g_6b7f90 != 0 && (idx = msx_FindWaveDriverIndex(o)) >= 0) {
+	if (msx_Initialized != 0 && (idx = msx_FindWaveDriverIndex(o)) >= 0) {
 		for (i = 0; i < o[6]; i++) {
-			v = ((int *) g_6b7f50[idx])[i];
+			v = ((int *) msx_StreamHandles[idx])[i];
 			if (v != 0 && msx_CloseStream(v) != 0) {
 				r = -1;
 			}

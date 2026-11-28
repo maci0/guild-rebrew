@@ -1,7 +1,7 @@
 
 
 
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
@@ -15,12 +15,12 @@ int __cdecl d2_RunSeanceMenu(int entity, char* s, int resultOut)
 	int i;
 
 	r = 0;
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		else if (g_100f1dc != -1) {
+		else if (d2_DialogButtonAction != -1) {
 			for (i = 0; i < 8; i++) {
 				if (d2_CurrentElementId == *(int*) (s + 0x28 + i * 0xc)) {
 					*(int*) (s + 0x88) = i;
@@ -32,7 +32,7 @@ int __cdecl d2_RunSeanceMenu(int entity, char* s, int resultOut)
 			}
 			if (r != 0) {
 				r = 1;
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	} while (main_RunFrameLoop(d2_RunSeanceMenu, 0x677c7) != 0);

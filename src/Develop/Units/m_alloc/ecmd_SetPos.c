@@ -1,5 +1,5 @@
 extern char* evt_CurrentScript;
-extern char g_676724[];
+extern char str_ecmd_SetPos_Could_not_find[];
 
 
 
@@ -15,6 +15,6 @@ int __cdecl ecmd_SetPos(char** objectRef, int* posX, int* posY, int* posZ)
 		d3_SetNodePosition(*objectRef, *objectRef + 0x4c);
 		return 0;
 	}
-		evt_LogScriptError(evt_CurrentScript, *(int*) ((char*) evt_CurrentScript + 0x118), g_676724);
+		evt_LogScriptError(evt_CurrentScript, *(int*) ((char*) evt_CurrentScript + 0x118), str_ecmd_SetPos_Could_not_find);
 	return 0;
 }

@@ -1,9 +1,9 @@
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/client_data.h"
 
-extern char* g_772500;
+extern char* d2_FileObjTable;
 extern int d2_CurrentWindowId;
-extern char* g_77255c;
+extern char* d2_CurrentWindow;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int d2_CurrentElementId;
@@ -11,12 +11,12 @@ extern int d2_CurrentElementId;
 
 
 
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern int g_14abc88;
 extern int g_14abc90;
 extern int g_14abc94;
-extern int g_14ce8e0;
-extern int g_666018;
+extern int io_RightButtonReleased;
+extern int gm_TargetPersonTypeMask;
 extern int g_66601c;
 
 int __cdecl d2_LoadForm(int a, int b, const char* name);
@@ -80,13 +80,13 @@ void __cdecl d2_RunGeliebteDetailDialog(int a0, unsigned short* a1, int a2)
 	id_a = pair[0];
 	id_b = pair[1];
 	d2_SetForm(dialog, 2);
-	*(int*) (cmd + 0x10) = (*(int*) (g_77255c + 0xc) - (int) *(short*) (g_772500 + 0x1ebd8)) / 2;
+	*(int*) (cmd + 0x10) = (*(int*) (d2_CurrentWindow + 0xc) - (int) *(short*) (d2_FileObjTable + 0x1ebd8)) / 2;
 	*(int*) (cmd + 0x14) = 0x19;
 	*(unsigned int*) cmd = (unsigned int) v6;
 	*(unsigned int*) (cmd + 0x30) = 0;
 	d2_BuildPersonStatusDesc(cmd);
 	d2_DrawPersonCard(*(int*) (cmd + 0x10), *(int*) (cmd + 0x14), d2_CurrentWindowId, 0x54, cmd, 1);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	for (;;) {
 		v5 = gm_LookupEntityRecordById(v3) && he_StartHandlungSearch(1, 1, v4);
 		if (v5 && *(int*) (v7 + 0xbc) < gm_GameTime.a) {
@@ -94,10 +94,10 @@ void __cdecl d2_RunGeliebteDetailDialog(int a0, unsigned short* a1, int a2)
 		} else {
 			d2_SetElementEnabled(id_b, 0);
 		}
-		if (!g_14ce8e0 && v5) {
-			if (g_100f1dc != -1) {
+		if (!io_RightButtonReleased && v5) {
+			if (d2_DialogButtonAction != -1) {
 				if (d2_CurrentElementId == id_a) {
-					if (!*(char*) ((unsigned int) g_774970 * 0x21c + 0x7f4ca9)) {
+					if (!*(char*) ((unsigned int) gm_LocalPlayerSlot * 0x21c + 0x7f4ca9)) {
 						io_FormatTextBuffer(text, 0x1a57, *v6);
 					} else {
 						io_FormatTextBuffer(text, 0x1a58, *v6);
@@ -112,13 +112,13 @@ void __cdecl d2_RunGeliebteDetailDialog(int a0, unsigned short* a1, int a2)
 						while (v9 != -1 && !cm_GetCommandStatus(v9)) {
 							main_RunFrameLoop(0, 0x20007);
 						}
-						g_774654 = 1;
+						d2_DialogCloseRequested = 1;
 					}
 			} else if (d2_CurrentElementId == id_b) {
 					memset(flags, 0, sizeof(flags));
 					flags[1] = 0x20400;
 					flags[4] = 6;
-					flags[2] = g_666018;
+					flags[2] = gm_TargetPersonTypeMask;
 					flags[3] = g_66601c;
 					io_FormatTextBuffer(cmd, 0x1a53);
 					io_FormatTextBuffer(buf, 0x1a54);
@@ -127,7 +127,7 @@ void __cdecl d2_RunGeliebteDetailDialog(int a0, unsigned short* a1, int a2)
 					if (v10 != 0) {
 						io_FormatTextBuffer(title, 0x1a5b, 2, *v6,
 							*v10);
-						if (d2_ShowModalMessageBox(title, 1) && (v11 = g_774970,
+						if (d2_ShowModalMessageBox(title, 1) && (v11 = gm_LocalPlayerSlot,
 							d2_CheckActionBlocker((char*) (v11 * 0x21c + 0x7f4ca0), 2))) {
 							*(int*) (v7 + 0xbc) = gm_GameTime.a;
 							cm_SendSetHE(3, v7);
@@ -135,13 +135,13 @@ void __cdecl d2_RunGeliebteDetailDialog(int a0, unsigned short* a1, int a2)
 								0xfffffffe);
 							cm_RequestCopyEntityData(*(unsigned int*) &v10[2],
 								*(unsigned int*) &v6[2], 0xffffffdf, 1);
-							g_774654 = 1;
+							d2_DialogCloseRequested = 1;
 						}
 					}
 				}
 			}
 		} else {
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 		}
 		if (!main_RunFrameLoop(0x59fa80, 0x677c7)) {
 			d2_DestroyForm(dialog);

@@ -6,7 +6,7 @@ int __cdecl msx_ResumeSample(int a)
 {
     int r = 0;
 
-    if (g_6b7f90 != 0) {
+    if (msx_Initialized != 0) {
         if (msx_FindSampleHandleIndex(a) >= 0) {
             (*(void (__stdcall **)(int)) 0x6623cc)(a);
         } else {

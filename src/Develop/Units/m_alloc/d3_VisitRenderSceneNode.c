@@ -48,7 +48,7 @@ typedef struct AlphaRenderNode {
 extern int g_6b8064;
 extern void* g_6b8068;
 extern int d3_RenderedVertexCount;
-extern int g_1042a08;
+extern int d3_RenderedFaceCount;
 extern float g_1040c80[16];
 extern float g_1040cc0[16];
 
@@ -129,6 +129,6 @@ char __cdecl d3_VisitRenderSceneNode(char* e, void* parent)
 		}
 	}
 	d3_RenderedVertexCount += *(int*) (o + 0x310);
-	g_1042a08 += *(int*) (o + 0x314);
+	d3_RenderedFaceCount += *(int*) (o + 0x314);
 	return 1;
 }

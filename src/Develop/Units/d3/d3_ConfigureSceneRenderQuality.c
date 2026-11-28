@@ -18,7 +18,7 @@ extern int d3_CurrentContextIndex;
 extern Slot_1043340 g_1043340[64];
 extern unsigned int g_10405fc;
 extern unsigned int g_104061c;
-extern Flags g_1052bd0;
+extern Flags d3_RenderQualityFlags;
 extern unsigned char g_6b7ff8;
 
 void __cdecl d3_SelectSceneContext(int, int);
@@ -45,7 +45,7 @@ void __cdecl d3_ConfigureSceneRenderQuality(unsigned char a1, int a2, unsigned c
 	d3_SelectSceneContext(save, 1);
 	t = g_10405fc;
 	d3_ReleaseAllShadowTextures();
-	g_1052bd0.on = a4 > 0;
+	d3_RenderQualityFlags.on = a4 > 0;
 	g_104061c = t < a4 ? t : a4;
 	d3_AllocShadowTextures();
 	fcn_0043bbf0(a1);

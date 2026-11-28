@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 extern void* ch_CharacterSlots[];
-extern float g_6628a8;
+extern float flt_0_0;
 extern float g_6628b0;
 
 int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
@@ -81,14 +81,14 @@ next:
 		direction[1] = *(float*) (*(char**) (e + 0x34) + 0x50) - *(float*) (s + 0x50);
 		direction[2] = *(float*) (*(char**) (e + 0x34) + 0x54) - *(float*) (s + 0x54);
 		dist = (float) sqrt(direction[0] * direction[0] + direction[1] * direction[1] + direction[2] * direction[2]);
-		if (dist == g_6628a8) {
+		if (dist == flt_0_0) {
 			direction[0] = (float) (rand() % 2 - 1);
 			direction[1] = (float) (rand() % 2 - 1);
 			direction[2] = (float) (rand() % 2 - 1);
 			dist = (float) sqrt(direction[0] * direction[0] + direction[1] * direction[1] + direction[2] * direction[2]);
 		}
 		t = (limit - (dist + dist)) / limit;
-		if (g_6628a8 > t) {
+		if (flt_0_0 > t) {
 			t = 0.0f;
 		}
 		direction[0] = -direction[0];

@@ -193,7 +193,7 @@ short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, cha
             }
         }
     }
-    if (g_774800) {
+    if (gm_AllEntitiesControllable) {
         D(slot, 0x194) = 0xa;
         D(slot, 0x190) = 0xa;
     }

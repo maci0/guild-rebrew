@@ -4,10 +4,10 @@
 #include "Develop/client_types.h"
 #include "Develop/Units/Msx/id_group.h"
 
-extern volatile int g_6b7fac;
-extern char g_774964;
+extern volatile int gm_GameTicks;
+extern char gm_InWorldHud;
 extern float g_6819b0;
-extern float g_6628a8;
+extern float flt_0_0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_664ea4;
 extern int g_772e64;
@@ -18,12 +18,12 @@ extern char* g_772e58;
 extern int g_689d20;
 extern char g_772a10[];
 extern char g_772d58[];
-extern char* g_7746c4;
-extern char* g_7746c8;
-extern char* g_7746cc;
+extern char* d2_VisitedBuilding;
+extern char* d2_InteriorBuilding;
+extern char* sv_SelectedBuilding;
 extern unsigned char* lpGebaeudePROT;
 extern pos14_7f4c00 gm_GameTime;
-extern IdGroup g_688118[];
+extern IdGroup msx_LocationTrackGroups[];
 
 int __cdecl msx_FindActiveGroup(void);
 int __cdecl msx_FindGroupByKey(int);
@@ -51,11 +51,11 @@ void __cdecl msx_StopOutdoorTrackOnSeason(void)
 	char* cc;
 	Chan_14cc460* p;
 
-	now = (g_6b7fac + g_6b7fac * 2) * 4 + g_6b7fac;
-	if (g_774964 == 0) {
+	now = (gm_GameTicks + gm_GameTicks * 2) * 4 + gm_GameTicks;
+	if (gm_InWorldHud == 0) {
 		return;
 	}
-	if (!(g_6819b0 > g_6628a8)) {
+	if (!(g_6819b0 > flt_0_0)) {
 		return;
 	}
 	if (g_772e64 != gm_GetSeason((int*) &gm_GameTime)) {
@@ -106,17 +106,17 @@ void __cdecl msx_StopOutdoorTrackOnSeason(void)
 		strcpy(g_772d58, (char*) tp_msx_CurrentTrack);
 		tp_msx_CurrentTrack = 0;
 		g_689d20 = now;
-		g_772e60 = (int) ((g_6628a0 - g_6819b0) * g_664ea4);
+		g_772e60 = (int) ((flt_1_0 - g_6819b0) * g_664ea4);
 		fcn_0064d41a(g_772a10, (char*) 0x68a3cc, now, g_772e60);
 		return;
 	}
 	goto noptr;
 check:
-	cc = g_7746cc;
-	if ((unsigned int) (now - g_772e68) > 0x9c40 && tp_msx_CurrentTrack != g_772d24) {
-		if ((g_7746c4 != 0 && g_772e58 != g_7746c4) ||
-		    (g_7746c8 != 0 && g_772e58 != g_7746c8) ||
-		    (g_7746c4 == 0 && g_7746c8 == 0 && g_772e58 != 0)) {
+	cc = sv_SelectedBuilding;
+	if ((unsigned int) (now - g_772e68) > 0x9c40 && tp_msx_CurrentTrack != tp_msx_MusicTrack) {
+		if ((d2_VisitedBuilding != 0 && g_772e58 != d2_VisitedBuilding) ||
+		    (d2_InteriorBuilding != 0 && g_772e58 != d2_InteriorBuilding) ||
+		    (d2_VisitedBuilding == 0 && d2_InteriorBuilding == 0 && g_772e58 != 0)) {
 			goto restart;
 		}
 	}
@@ -131,19 +131,19 @@ check:
 	}
 restart:
 	slot = msx_FindActiveGroup();
-	g_772e58 = g_7746c4 != 0 ? g_7746c4 : g_7746c8;
+	g_772e58 = d2_VisitedBuilding != 0 ? d2_VisitedBuilding : d2_InteriorBuilding;
 	g_772e5c = cc;
-	thr = g_688118[slot].score;
+	thr = msx_LocationTrackGroups[slot].score;
 	roll = gm_RandomMod(0x80);
 	if ((int) roll < thr) {
 		kind = g_772e58 != 0 ? ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[(unsigned char)*g_772e58].category : 0x2694;
-		for (j = 0; g_688118[slot].ids[j] != 0; j++) {
-			if (g_688118[slot].ids[j] == kind) {
+		for (j = 0; msx_LocationTrackGroups[slot].ids[j] != 0; j++) {
+			if (msx_LocationTrackGroups[slot].ids[j] == kind) {
 				break;
 			}
 		}
-		if (g_688118[slot].ids[j] == 0) {
-			fcn_0064d41a(g_772a10, (char*) 0x68a388, g_688118[slot].name, thr);
+		if (msx_LocationTrackGroups[slot].ids[j] == 0) {
+			fcn_0064d41a(g_772a10, (char*) 0x68a388, msx_LocationTrackGroups[slot].name, thr);
 			g_772e68 = now;
 			goto play;
 		}
@@ -157,10 +157,10 @@ noptr:
 			return;
 		}
 	}
-	cc = g_7746c4;
+	cc = d2_VisitedBuilding;
 	g_689d20 = 0;
 	if (cc == 0) {
-		cc = g_7746c8;
+		cc = d2_InteriorBuilding;
 	}
 	g_772e58 = cc;
 	g_772e68 = now;

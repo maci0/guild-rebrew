@@ -6,8 +6,8 @@
 extern pos14_7f4c00 gm_GameTime;
 
 extern int d2_CurrentWindowId;
-extern int g_774654;
-extern char* g_77255c;
+extern int d2_DialogCloseRequested;
+extern char* d2_CurrentWindow;
 
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
@@ -44,15 +44,15 @@ int __cdecl d2_RunMeisterpruefungDialog(void)
 	int base;
 	int r;
 
-	slot = ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) g_774970]);
+	slot = ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned int) gm_LocalPlayerSlot]);
 	n = gm_GetOppositeStatIndex(*(unsigned char*) (slot + 0x164)) + 1;
 	h = d2_LoadForm(0, 0, (char*) 0x6aa80c);
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
 	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_ResetUiInputAndBounds();
-	grade = gm_CalcActionCompletionTime(g_774970, info);
-	r = (int) he_StartHandlungSearch(2, 2, g_774970, 0, 0x26);
+	grade = gm_CalcActionCompletionTime(gm_LocalPlayerSlot, info);
+	r = (int) he_StartHandlungSearch(2, 2, gm_LocalPlayerSlot, 0, 0x26);
 	if (r == 0 && grade >= 1.0 && n <= 6) {
 		base = *(char*) (slot + 9) != 0 ? 0x18f : 0x130;
 		gm_MapEntityStatRange(*(unsigned char*) (slot + 0x164));
@@ -88,14 +88,14 @@ int __cdecl d2_RunMeisterpruefungDialog(void)
 			d2_SetForm(h, 1); io_AppendText(0x15bb); d2_SetForm(h, 2);
 			io_AppendText(0x15bc, *(unsigned short*) slot, info);
 			d = d2_AddWindowValueGauge(0x1c,
-			    *(int*) (g_77255c + 0x10) - 0x3c,
-			    *(int*) (g_77255c + 0xc) - 0x40, 0, 0x64, 0x83,
+			    *(int*) (d2_CurrentWindow + 0x10) - 0x3c,
+			    *(int*) (d2_CurrentWindow + 0xc) - 0x40, 0, 0x64, 0x83,
 			    0x42, d2_CurrentWindowId);
 			d2_SetElementValue(d, 0, 0x64, (int) (grade * 100.0f));
 		}
 	}
 	while (main_RunFrameLoop((void*) d2_RunMeisterpruefungDialog, 0x677c7) != 0) {
-		if ((mode = g_100f1dc) != -1 && grade >= 1.0) {
+		if ((mode = d2_DialogButtonAction) != -1 && grade >= 1.0) {
 			if (mode == 2) {
 				if (*(int*) (slot + 0x194) < 4) {
 					io_FormatTextBuffer(text, 0x74, 4);
@@ -112,15 +112,15 @@ int __cdecl d2_RunMeisterpruefungDialog(void)
 					*(pos14_7f4c00*) (msg + 0x28) = gm_GameTime;
 					gm_AddTime(msg + 0x28, 2, 0, 0);
 					cm_SendCopyEntityData(msg);
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				}
 			}
 			else if (mode == 1) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 	}
 	d2_DestroyForm(h);

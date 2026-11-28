@@ -20,7 +20,7 @@ int __cdecl hst_IsCandidateUnlisted(int id)
 
 	for (j = 0; j < 4; j++) {
 		for (i = 0; i < 8; i++) {
-			if (((HST_GROUP_SLOT_DESC*)g_1007bc0)[j].e[i].id == id)
+			if (((HST_GROUP_SLOT_DESC*)hst_HistoryGroups)[j].e[i].id == id)
 				return 0;
 		}
 	}

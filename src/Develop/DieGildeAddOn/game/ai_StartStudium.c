@@ -25,7 +25,7 @@ typedef struct Rec6 {
 
 #define MAXV(a, b) (((a) > (b)) ? (a) : (b))
 
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 unsigned char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl gm_IsNpcEntityState(unsigned char* p);
@@ -94,7 +94,7 @@ int __cdecl ai_StartStudium(int a1, char* actor, int a3, Blk24* o1, Blk24* o2)
 			}
 		}
 	}
-	if (gm_GetSeasonTreasury(actor, g_773d75) < sh[k].amount * 10) {
+	if (gm_GetSeasonTreasury(actor, gm_ActiveTownIndex) < sh[k].amount * 10) {
 		return 0;
 	}
 	o1->kind = 7;

@@ -13,7 +13,7 @@
 
 
 
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_GetEntityRelation(int, int);
@@ -70,8 +70,8 @@ void __cdecl he_RunFriedhofStealAction(char* e)
 		if (n != 0) {
 			sel = list[gm_RandomMod(n)];
 			if (sel != 0) {
-				gm_GetSeasonPrice(*(unsigned short*) sel, g_773d75);
-				cm_SendSellObjekt(-1, *(int*) (r + 2), *(unsigned short*) sel, 1, g_773d75, 0);
+				gm_GetSeasonPrice(*(unsigned short*) sel, gm_ActiveTownIndex);
+				cm_SendSellObjekt(-1, *(int*) (r + 2), *(unsigned short*) sel, 1, gm_ActiveTownIndex, 0);
 				switch (main_GetLanguage()) {
 				case 0:
 				case 2:
@@ -81,7 +81,7 @@ void __cdecl he_RunFriedhofStealAction(char* e)
 					io_FormatTextBuffer(buf, 0x414b, 0x229, *(unsigned short*) sel * 2 + 0x9a8, *(int*) (o + 0x16c));
 					break;
 				}
-				he_MessageBoxQuickjump(((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 8)].entity_id, -1, buf, 0, 0x5f2, *(int*) (p + 1),
+				he_MessageBoxQuickjump(((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (e + 8)].entity_id, -1, buf, 0, 0x5f2, *(int*) (p + 1),
 				    *(int*) (q + 2), 0, "_NACHRICHTEN_FRIEDHOF_06");
 			}
 		}

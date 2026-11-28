@@ -3,7 +3,7 @@
 extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-extern char g_6a9694[];
+extern char str_CZ_s[];
 
 int __cdecl gm_GetLawEntry(int, int*);
 void __cdecl d2_SetForm(int, int);
@@ -25,9 +25,9 @@ void __cdecl d2_DrawLawCandidateStatus(int* o)
 		}
 		if (o[4] <= 4) {
 			d2_SetForm(o[0], o[2]);
-			io_AppendText(g_6a9694, o[4] + 0x16b7);
+			io_AppendText(str_CZ_s, o[4] + 0x16b7);
 			d2_SetForm(o[0], o[3]);
-			d2_DrawSkillBar(0, 6, (char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], o[4], 0x4df);
+			d2_DrawSkillBar(0, 6, (char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot], o[4], 0x4df);
 		}
 	}
 }

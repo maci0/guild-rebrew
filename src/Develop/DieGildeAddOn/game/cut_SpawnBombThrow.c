@@ -40,7 +40,7 @@ typedef struct {
 	int map;
 } Game4cf450;
 
-extern int g_67a370;
+extern int d3_ActiveScene;
 extern Slot4cf450 g_9b9ec0[32];
 
 char* __cdecl d3_CreateSceneModelObject(int parent, float* pos, float* dir, char* name);
@@ -63,7 +63,7 @@ Slot4cf450* __cdecl cut_SpawnBombThrow(float* pos, int x, int y)
 	d[0] = 0.0f;
 	d[1] = 0.0f;
 	d[2] = 0.0f;
-	map = ((Game4cf450*)g_67a370)->map;
+	map = ((Game4cf450*)d3_ActiveScene)->map;
 	for (i = 0; i < 32; i++) {
 		if (g_9b9ec0[i].obj == 0) {
 			goto found;

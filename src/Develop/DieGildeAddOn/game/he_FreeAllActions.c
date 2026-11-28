@@ -11,8 +11,8 @@ void __cdecl he_FreeAllActions(void)
 	int i;
 
 	for (i = 0; i <= he_LastEventSlot && i < 0x400; i++) {
-		if (g_77e980[i].kind != 0) {
-			he_FreeAction((char*) &g_77e980[i]);
+		if (he_ActionSlots[i].kind != 0) {
+			he_FreeAction((char*) &he_ActionSlots[i]);
 		}
 	}
 }

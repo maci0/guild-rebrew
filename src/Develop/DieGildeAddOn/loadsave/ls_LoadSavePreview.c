@@ -3,7 +3,7 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 typedef struct VFS_DIR VFS_DIR;
-extern VFS_DIR* g_6b7fdc;
+extern VFS_DIR* vfs_RootDir;
 extern char g_6a23b0[];
 
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
@@ -22,7 +22,7 @@ void __cdecl ls_LoadSavePreview(char* name)
 	int y;
 
 	n = 0;
-	fh = vfs_Tfopen(name, g_6750e8, g_6b7fdc);
+	fh = vfs_Tfopen(name, g_6750e8, vfs_RootDir);
 	if (fh != 0) {
 		buf = m_alloc(0xe100, g_6a23b0);
 		ls_ReadVfsDataChecked(buf, 0xe100, 1, fh);

@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 void* __cdecl gm_LookupEntityRecordById(int);
 int  __cdecl gm_FindEntityCandidatesInRange(void*, int, int*, float, float, unsigned short*);
 unsigned short __cdecl gm_RandomMod(int);
@@ -26,7 +26,7 @@ int __cdecl gm_HandleEntityMsg17(void* request)
 	if (gm_FindEntityCandidatesInRange(p, 1, &d2, 33.0f, 100.0f, &w1) == 0) {
 		return 0x400;
 	}
-	e = (void*) ((int) ((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[w1]));
+	e = (void*) ((int) ((char *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[w1]));
 	n = 2 * gm_RandomMod(7) + 6;
 	cm_RequestCopyEntityData(*(int*) ((char*) p + 4), *(int*) ((char*) e + 4), n, 1);
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7,

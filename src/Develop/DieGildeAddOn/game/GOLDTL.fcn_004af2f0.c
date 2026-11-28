@@ -2,7 +2,7 @@
 
 
 /* Owned (both targets) by src/GOLDTL.fcn_005b24b0.c. */
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 void* __cdecl gm_LookupEntityRecordById(int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
@@ -27,7 +27,7 @@ typedef struct {
 	char pad3[0xb2];
 } Rec21c;
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 int __cdecl hst_IsCandidateUnlisted(int);
 unsigned short __cdecl gm_RandomMod(int);
@@ -44,9 +44,9 @@ int __cdecl gm_IsSlotActivePerson(unsigned short slot)
 	int o;
 
 	o = (slot & 0xffff) * 540;
-	if (*(unsigned short*) ((char*) g_7f4ca0 + o) != 0xffff
-	    && *((unsigned char*) g_7f4ca0 + 8 + o) > 0
-	    && *((unsigned char*) g_7f4ca0 + 2 + o) < 0xa) {
+	if (*(unsigned short*) ((char*) gm_EntitySlotTable + o) != 0xffff
+	    && *((unsigned char*) gm_EntitySlotTable + 8 + o) > 0
+	    && *((unsigned char*) gm_EntitySlotTable + 2 + o) < 0xa) {
 		return 1;
 	}
 	return 0;
@@ -61,14 +61,14 @@ int __cdecl gm_IsSlotNpcPerson(int slot)
 	unsigned char f;
 
 	slot &= 0xffff;
-	if (*(unsigned short*) ((int) g_7f4ca0 + slot * 540) == 0xffff) {
+	if (*(unsigned short*) ((int) gm_EntitySlotTable + slot * 540) == 0xffff) {
 		return 0;
 	}
-	c = *(unsigned char*) ((int) g_7f4ca0 + 8 + slot * 540);
+	c = *(unsigned char*) ((int) gm_EntitySlotTable + 8 + slot * 540);
 	if (c <= 0) {
 		return 0;
 	}
-	f = *(unsigned char*) ((int) g_7f4ca0 + 2 + slot * 540);
+	f = *(unsigned char*) ((int) gm_EntitySlotTable + 2 + slot * 540);
 	if (f < 0xa && f != 6 && f != 7) {
 		return 1;
 	}
@@ -84,10 +84,10 @@ int __cdecl gm_IsSlotPlayerPerson(int slot)
 	unsigned char f;
 
 	slot &= 0xffff;
-	if (*(unsigned short*) ((int) g_7f4ca0 + slot * 540) != 0xffff) {
-		c = *(unsigned char*) ((int) g_7f4ca0 + 8 + slot * 540);
+	if (*(unsigned short*) ((int) gm_EntitySlotTable + slot * 540) != 0xffff) {
+		c = *(unsigned char*) ((int) gm_EntitySlotTable + 8 + slot * 540);
 		if (c > 0) {
-			f = *(unsigned char*) ((int) g_7f4ca0 + 2 + slot * 540);
+			f = *(unsigned char*) ((int) gm_EntitySlotTable + 2 + slot * 540);
 			if (f == 6 || f == 7) {
 				return 1;
 			}
@@ -118,11 +118,11 @@ int __cdecl hst_HandleBuergermeister(int mode, int* pairs, int idx, char* text, 
 			if (i >= 768) {
 				return 0;
 			}
-			if (gm_IsSlotActivePerson((unsigned short) i) != 0 && ((Rec21c*)g_7f4ca0)[i].kind == 0xf) {
+			if (gm_IsSlotActivePerson((unsigned short) i) != 0 && ((Rec21c*)gm_EntitySlotTable)[i].kind == 0xf) {
 				break;
 			}
 		}
-		r = &((Rec21c*)g_7f4ca0)[i];
+		r = &((Rec21c*)gm_EntitySlotTable)[i];
 		if (mode == 0) {
 			pairs[idx * 2 + 1] = r->key;
 		}
@@ -177,11 +177,11 @@ int __cdecl hst_HandleBischof(int mode, int* pairs, int idx, char* text, void* o
 			if (i >= 768) {
 				return 0;
 			}
-			if ((gm_IsSlotActivePerson((unsigned short) i) != 0 && ((Rec21c*)g_7f4ca0)[i].kind == 0x1a) || ((Rec21c*)g_7f4ca0)[i].kind == 0x15) {
+			if ((gm_IsSlotActivePerson((unsigned short) i) != 0 && ((Rec21c*)gm_EntitySlotTable)[i].kind == 0x1a) || ((Rec21c*)gm_EntitySlotTable)[i].kind == 0x15) {
 				break;
 			}
 		}
-		r = &((Rec21c*)g_7f4ca0)[i];
+		r = &((Rec21c*)gm_EntitySlotTable)[i];
 		if (mode == 0) {
 			pairs[idx * 2 + 1] = r->key;
 		}
@@ -268,8 +268,8 @@ int __cdecl hst_HandleRndGildenmeister(int mode, int* pairs, int idx, char* text
 		j = gm_RandomMod(0x300);
 		left = 0x300;
 		do {
-			if (gm_IsSlotActivePerson((unsigned short) j) != 0 && ((Rec21c*)g_7f4ca0)[j].grade >= 0x1e && ((Rec21c*)g_7f4ca0)[j].grade <= 0x21) {
-				r = &((Rec21c*)g_7f4ca0)[j];
+			if (gm_IsSlotActivePerson((unsigned short) j) != 0 && ((Rec21c*)gm_EntitySlotTable)[j].grade >= 0x1e && ((Rec21c*)gm_EntitySlotTable)[j].grade <= 0x21) {
+				r = &((Rec21c*)gm_EntitySlotTable)[j];
 				break;
 			}
 			left--;
@@ -280,8 +280,8 @@ int __cdecl hst_HandleRndGildenmeister(int mode, int* pairs, int idx, char* text
 		j = gm_RandomMod(0x300);
 		left = 0x300;
 		do {
-			if (gm_IsSlotNpcPerson(j) != 0 && ((Rec21c*)g_7f4ca0)[j].grade >= 0x1e && ((Rec21c*)g_7f4ca0)[j].grade <= 0x21) {
-				r = &((Rec21c*)g_7f4ca0)[j];
+			if (gm_IsSlotNpcPerson(j) != 0 && ((Rec21c*)gm_EntitySlotTable)[j].grade >= 0x1e && ((Rec21c*)gm_EntitySlotTable)[j].grade <= 0x21) {
+				r = &((Rec21c*)gm_EntitySlotTable)[j];
 				break;
 			}
 			left--;
@@ -293,10 +293,10 @@ int __cdecl hst_HandleRndGildenmeister(int mode, int* pairs, int idx, char* text
 		j = gm_RandomMod(0x300);
 		left = 0x300;
 		do {
-			if (found == 0 && gm_IsSlotNpcPerson(j) != 0 && ((Rec21c*)g_7f4ca0)[j].grade >= 0x1e && ((Rec21c*)g_7f4ca0)[j].grade <= 0x21) {
-				found = &((Rec21c*)g_7f4ca0)[j];
-			} else if (gm_IsSlotPlayerPerson(j) != 0 && ((Rec21c*)g_7f4ca0)[j].grade >= 0x1e && ((Rec21c*)g_7f4ca0)[j].grade <= 0x21) {
-				r = &((Rec21c*)g_7f4ca0)[j];
+			if (found == 0 && gm_IsSlotNpcPerson(j) != 0 && ((Rec21c*)gm_EntitySlotTable)[j].grade >= 0x1e && ((Rec21c*)gm_EntitySlotTable)[j].grade <= 0x21) {
+				found = &((Rec21c*)gm_EntitySlotTable)[j];
+			} else if (gm_IsSlotPlayerPerson(j) != 0 && ((Rec21c*)gm_EntitySlotTable)[j].grade >= 0x1e && ((Rec21c*)gm_EntitySlotTable)[j].grade <= 0x21) {
+				r = &((Rec21c*)gm_EntitySlotTable)[j];
 				break;
 			}
 			left--;
@@ -373,9 +373,9 @@ int __cdecl hst_HandleRndAmtstraegerin(int mode, int* pairs, int idx, char* text
 		j = gm_RandomMod(0x300);
 		left = 0x300;
 		do {
-			if (((Rec21c*)g_7f4ca0)[j].side == 1 && gm_IsSlotActivePerson((unsigned short) j) != 0 && hst_IsCandidateUnlisted(((Rec21c*)g_7f4ca0)[j].key) != 0
-			    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a && ((Rec21c*)g_7f4ca0)[j].kind != 0x15) {
-				r = &((Rec21c*)g_7f4ca0)[j];
+			if (((Rec21c*)gm_EntitySlotTable)[j].side == 1 && gm_IsSlotActivePerson((unsigned short) j) != 0 && hst_IsCandidateUnlisted(((Rec21c*)gm_EntitySlotTable)[j].key) != 0
+			    && ((Rec21c*)gm_EntitySlotTable)[j].kind > 0 && ((Rec21c*)gm_EntitySlotTable)[j].kind != 0xf && ((Rec21c*)gm_EntitySlotTable)[j].kind != 0x1a && ((Rec21c*)gm_EntitySlotTable)[j].kind != 0x15) {
+				r = &((Rec21c*)gm_EntitySlotTable)[j];
 				break;
 			}
 			next = (j + 1) % 0x300;
@@ -387,9 +387,9 @@ int __cdecl hst_HandleRndAmtstraegerin(int mode, int* pairs, int idx, char* text
 		j = gm_RandomMod(0x300);
 		left = 0x300;
 		do {
-			if (((Rec21c*)g_7f4ca0)[j].side == 1 && gm_IsSlotNpcPerson(j) != 0 && hst_IsCandidateUnlisted(((Rec21c*)g_7f4ca0)[j].key) != 0
-			    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a && ((Rec21c*)g_7f4ca0)[j].kind != 0x15) {
-				r = &((Rec21c*)g_7f4ca0)[j];
+			if (((Rec21c*)gm_EntitySlotTable)[j].side == 1 && gm_IsSlotNpcPerson(j) != 0 && hst_IsCandidateUnlisted(((Rec21c*)gm_EntitySlotTable)[j].key) != 0
+			    && ((Rec21c*)gm_EntitySlotTable)[j].kind > 0 && ((Rec21c*)gm_EntitySlotTable)[j].kind != 0xf && ((Rec21c*)gm_EntitySlotTable)[j].kind != 0x1a && ((Rec21c*)gm_EntitySlotTable)[j].kind != 0x15) {
+				r = &((Rec21c*)gm_EntitySlotTable)[j];
 				break;
 			}
 			next = (j + 1) % 0x300;
@@ -402,15 +402,17 @@ int __cdecl hst_HandleRndAmtstraegerin(int mode, int* pairs, int idx, char* text
 		j = gm_RandomMod(0x300);
 		left = 0x300;
 		do {
-			if (((Rec21c*)g_7f4ca0)[j].side == 1) {
+			if (((Rec21c*)gm_EntitySlotTable)[j].side == 1) {
 				if (found == 0 && gm_IsSlotNpcPerson(j) != 0
-				    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a && ((Rec21c*)g_7f4ca0)[j].kind != 0x15) {
-					if (hst_IsCandidateUnlisted(((Rec21c*)g_7f4ca0)[j].key) != 0) {
-						found = &((Rec21c*)g_7f4ca0)[j];
+				    && ((Rec21c*)gm_EntitySlotTable)[j].kind > 0 && ((Rec21c*)gm_EntitySlotTable)[j].kind != 0xf && ((Rec21c*)gm_EntitySlotTable)[j].kind != 0x1a &&
+				    	((Rec21c*)gm_EntitySlotTable)[j].kind != 0x15) {
+					if (hst_IsCandidateUnlisted(((Rec21c*)gm_EntitySlotTable)[j].key) != 0) {
+						found = &((Rec21c*)gm_EntitySlotTable)[j];
 					}
-				} else if (gm_IsSlotPlayerPerson(j) != 0 && hst_IsCandidateUnlisted(((Rec21c*)g_7f4ca0)[j].key) != 0
-				    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a && ((Rec21c*)g_7f4ca0)[j].kind != 0x15) {
-					r = &((Rec21c*)g_7f4ca0)[j];
+				} else if (gm_IsSlotPlayerPerson(j) != 0 && hst_IsCandidateUnlisted(((Rec21c*)gm_EntitySlotTable)[j].key) != 0
+				    && ((Rec21c*)gm_EntitySlotTable)[j].kind > 0 && ((Rec21c*)gm_EntitySlotTable)[j].kind != 0xf && ((Rec21c*)gm_EntitySlotTable)[j].kind != 0x1a &&
+				    	((Rec21c*)gm_EntitySlotTable)[j].kind != 0x15) {
+					r = &((Rec21c*)gm_EntitySlotTable)[j];
 					break;
 				}
 			}
@@ -489,10 +491,10 @@ int __cdecl hst_HandleRndAmtstraeger(int mode, int* pairs, int idx, char* text, 
 		j = gm_RandomMod(0x300);
 		left = 0x300;
 		do {
-			if (((Rec21c*)g_7f4ca0)[j].side == 0 && gm_IsSlotActivePerson((unsigned short) j) != 0
-			    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a
-			        && ((Rec21c*)g_7f4ca0)[j].kind != 0x15 && hst_IsCandidateUnlisted(((Rec21c*)g_7f4ca0)[j].key) != 0) {
-				r = &((Rec21c*)g_7f4ca0)[j];
+			if (((Rec21c*)gm_EntitySlotTable)[j].side == 0 && gm_IsSlotActivePerson((unsigned short) j) != 0
+			    && ((Rec21c*)gm_EntitySlotTable)[j].kind > 0 && ((Rec21c*)gm_EntitySlotTable)[j].kind != 0xf && ((Rec21c*)gm_EntitySlotTable)[j].kind != 0x1a
+			        && ((Rec21c*)gm_EntitySlotTable)[j].kind != 0x15 && hst_IsCandidateUnlisted(((Rec21c*)gm_EntitySlotTable)[j].key) != 0) {
+				r = &((Rec21c*)gm_EntitySlotTable)[j];
 				break;
 			}
 			next = (j + 1) % 0x300;
@@ -504,10 +506,10 @@ int __cdecl hst_HandleRndAmtstraeger(int mode, int* pairs, int idx, char* text, 
 		j = gm_RandomMod(0x300);
 		left = 0x300;
 		do {
-			if (((Rec21c*)g_7f4ca0)[j].side == 0 && gm_IsSlotNpcPerson(j) != 0
-			    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a
-			        && ((Rec21c*)g_7f4ca0)[j].kind != 0x15 && hst_IsCandidateUnlisted(((Rec21c*)g_7f4ca0)[j].key) != 0) {
-				r = &((Rec21c*)g_7f4ca0)[j];
+			if (((Rec21c*)gm_EntitySlotTable)[j].side == 0 && gm_IsSlotNpcPerson(j) != 0
+			    && ((Rec21c*)gm_EntitySlotTable)[j].kind > 0 && ((Rec21c*)gm_EntitySlotTable)[j].kind != 0xf && ((Rec21c*)gm_EntitySlotTable)[j].kind != 0x1a
+			        && ((Rec21c*)gm_EntitySlotTable)[j].kind != 0x15 && hst_IsCandidateUnlisted(((Rec21c*)gm_EntitySlotTable)[j].key) != 0) {
+				r = &((Rec21c*)gm_EntitySlotTable)[j];
 				break;
 			}
 			next = (j + 1) % 0x300;
@@ -520,16 +522,17 @@ int __cdecl hst_HandleRndAmtstraeger(int mode, int* pairs, int idx, char* text, 
 		j = gm_RandomMod(0x300);
 		left = 0x300;
 		do {
-			if (((Rec21c*)g_7f4ca0)[j].side == 0) {
+			if (((Rec21c*)gm_EntitySlotTable)[j].side == 0) {
 				if (found == 0 && gm_IsSlotNpcPerson(j) != 0
-				    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a && ((Rec21c*)g_7f4ca0)[j].kind != 0x15) {
-					if (hst_IsCandidateUnlisted(((Rec21c*)g_7f4ca0)[j].key) != 0) {
-						found = &((Rec21c*)g_7f4ca0)[j];
+				    && ((Rec21c*)gm_EntitySlotTable)[j].kind > 0 && ((Rec21c*)gm_EntitySlotTable)[j].kind != 0xf && ((Rec21c*)gm_EntitySlotTable)[j].kind != 0x1a &&
+				    	((Rec21c*)gm_EntitySlotTable)[j].kind != 0x15) {
+					if (hst_IsCandidateUnlisted(((Rec21c*)gm_EntitySlotTable)[j].key) != 0) {
+						found = &((Rec21c*)gm_EntitySlotTable)[j];
 					}
 				} else if (gm_IsSlotPlayerPerson(j) != 0
-				    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a
-				        && ((Rec21c*)g_7f4ca0)[j].kind != 0x15 && hst_IsCandidateUnlisted(((Rec21c*)g_7f4ca0)[j].key) != 0) {
-					r = &((Rec21c*)g_7f4ca0)[j];
+				    && ((Rec21c*)gm_EntitySlotTable)[j].kind > 0 && ((Rec21c*)gm_EntitySlotTable)[j].kind != 0xf && ((Rec21c*)gm_EntitySlotTable)[j].kind != 0x1a
+				        && ((Rec21c*)gm_EntitySlotTable)[j].kind != 0x15 && hst_IsCandidateUnlisted(((Rec21c*)gm_EntitySlotTable)[j].key) != 0) {
+					r = &((Rec21c*)gm_EntitySlotTable)[j];
 					break;
 				}
 			}
@@ -612,9 +615,9 @@ int __cdecl hst_HandleRndAmtsperson(int mode, int* pairs, int idx, char* text, v
 		left = 0x300;
 		do {
 			if (gm_IsSlotActivePerson((unsigned short) j) != 0
-			    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a
-			        && ((Rec21c*)g_7f4ca0)[j].kind != 0x15 && hst_IsCandidateUnlisted(((Rec21c*)g_7f4ca0)[j].key) != 0) {
-				r = &((Rec21c*)g_7f4ca0)[j];
+			    && ((Rec21c*)gm_EntitySlotTable)[j].kind > 0 && ((Rec21c*)gm_EntitySlotTable)[j].kind != 0xf && ((Rec21c*)gm_EntitySlotTable)[j].kind != 0x1a
+			        && ((Rec21c*)gm_EntitySlotTable)[j].kind != 0x15 && hst_IsCandidateUnlisted(((Rec21c*)gm_EntitySlotTable)[j].key) != 0) {
+				r = &((Rec21c*)gm_EntitySlotTable)[j];
 				break;
 			}
 			next = (j + 1) % 0x300;
@@ -627,9 +630,9 @@ int __cdecl hst_HandleRndAmtsperson(int mode, int* pairs, int idx, char* text, v
 		left = 0x300;
 		do {
 			if (gm_IsSlotNpcPerson(j) != 0
-			    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a
-			        && ((Rec21c*)g_7f4ca0)[j].kind != 0x15 && hst_IsCandidateUnlisted(((Rec21c*)g_7f4ca0)[j].key) != 0) {
-				r = &((Rec21c*)g_7f4ca0)[j];
+			    && ((Rec21c*)gm_EntitySlotTable)[j].kind > 0 && ((Rec21c*)gm_EntitySlotTable)[j].kind != 0xf && ((Rec21c*)gm_EntitySlotTable)[j].kind != 0x1a
+			        && ((Rec21c*)gm_EntitySlotTable)[j].kind != 0x15 && hst_IsCandidateUnlisted(((Rec21c*)gm_EntitySlotTable)[j].key) != 0) {
+				r = &((Rec21c*)gm_EntitySlotTable)[j];
 				break;
 			}
 			next = (j + 1) % 0x300;
@@ -643,14 +646,14 @@ int __cdecl hst_HandleRndAmtsperson(int mode, int* pairs, int idx, char* text, v
 		left = 0x300;
 		do {
 			if (found == 0 && gm_IsSlotNpcPerson(j) != 0
-			    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a && ((Rec21c*)g_7f4ca0)[j].kind != 0x15) {
-				if (hst_IsCandidateUnlisted(((Rec21c*)g_7f4ca0)[j].key) != 0) {
-					found = &((Rec21c*)g_7f4ca0)[j];
+			    && ((Rec21c*)gm_EntitySlotTable)[j].kind > 0 && ((Rec21c*)gm_EntitySlotTable)[j].kind != 0xf && ((Rec21c*)gm_EntitySlotTable)[j].kind != 0x1a && ((Rec21c*)gm_EntitySlotTable)[j].kind != 0x15) {
+				if (hst_IsCandidateUnlisted(((Rec21c*)gm_EntitySlotTable)[j].key) != 0) {
+					found = &((Rec21c*)gm_EntitySlotTable)[j];
 				}
 			} else if (gm_IsSlotPlayerPerson(j) != 0
-			    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a
-			        && ((Rec21c*)g_7f4ca0)[j].kind != 0x15 && hst_IsCandidateUnlisted(((Rec21c*)g_7f4ca0)[j].key) != 0) {
-				r = &((Rec21c*)g_7f4ca0)[j];
+			    && ((Rec21c*)gm_EntitySlotTable)[j].kind > 0 && ((Rec21c*)gm_EntitySlotTable)[j].kind != 0xf && ((Rec21c*)gm_EntitySlotTable)[j].kind != 0x1a
+			        && ((Rec21c*)gm_EntitySlotTable)[j].kind != 0x15 && hst_IsCandidateUnlisted(((Rec21c*)gm_EntitySlotTable)[j].key) != 0) {
+				r = &((Rec21c*)gm_EntitySlotTable)[j];
 				break;
 			}
 			next = (j + 1) % 0x300;
@@ -728,8 +731,8 @@ int __cdecl hst_HandleGeld(int mode, int pairs, int idx, char* text, int out)
 	n = atoi(text + n);
 	io_FormatTextBuffer((void*) out, (int) buf,
 	    gm_AmountToUnits((int) (((float) n * 0.01f) * (float) r),
-	    g_773d75),
-	    g_773d75);
+	    gm_ActiveTownIndex),
+	    gm_ActiveTownIndex);
 	return 1;
 }
 
@@ -789,8 +792,8 @@ int __cdecl hst_HandleRndKirchenberuf(int mode, int* pairs, int idx, char* text,
 		left = 0x300;
 		do {
 			if (gm_IsSlotActivePerson((unsigned short) j) != 0
-			    && ((Rec21c*)g_7f4ca0)[j].cls >= 0xd && ((Rec21c*)g_7f4ca0)[j].cls <= 0x12 && hst_IsCandidateUnlisted(((Rec21c*)g_7f4ca0)[j].key) != 0) {
-				r = &((Rec21c*)g_7f4ca0)[j];
+			    && ((Rec21c*)gm_EntitySlotTable)[j].cls >= 0xd && ((Rec21c*)gm_EntitySlotTable)[j].cls <= 0x12 && hst_IsCandidateUnlisted(((Rec21c*)gm_EntitySlotTable)[j].key) != 0) {
+				r = &((Rec21c*)gm_EntitySlotTable)[j];
 				break;
 			}
 			next = (j + 1) % 0x300;
@@ -803,8 +806,8 @@ int __cdecl hst_HandleRndKirchenberuf(int mode, int* pairs, int idx, char* text,
 		left = 0x300;
 		do {
 			if (gm_IsSlotNpcPerson(j) != 0
-			    && ((Rec21c*)g_7f4ca0)[j].cls >= 0xd && ((Rec21c*)g_7f4ca0)[j].cls <= 0x12 && hst_IsCandidateUnlisted(((Rec21c*)g_7f4ca0)[j].key) != 0) {
-				r = &((Rec21c*)g_7f4ca0)[j];
+			    && ((Rec21c*)gm_EntitySlotTable)[j].cls >= 0xd && ((Rec21c*)gm_EntitySlotTable)[j].cls <= 0x12 && hst_IsCandidateUnlisted(((Rec21c*)gm_EntitySlotTable)[j].key) != 0) {
+				r = &((Rec21c*)gm_EntitySlotTable)[j];
 				break;
 			}
 			next = (j + 1) % 0x300;
@@ -818,13 +821,13 @@ int __cdecl hst_HandleRndKirchenberuf(int mode, int* pairs, int idx, char* text,
 		left = 0x300;
 		do {
 			if (found == 0 && gm_IsSlotNpcPerson(j) != 0
-			    && ((Rec21c*)g_7f4ca0)[j].cls >= 0xd && ((Rec21c*)g_7f4ca0)[j].cls <= 0x12) {
-				if (hst_IsCandidateUnlisted(((Rec21c*)g_7f4ca0)[j].key) != 0) {
-					found = &((Rec21c*)g_7f4ca0)[j];
+			    && ((Rec21c*)gm_EntitySlotTable)[j].cls >= 0xd && ((Rec21c*)gm_EntitySlotTable)[j].cls <= 0x12) {
+				if (hst_IsCandidateUnlisted(((Rec21c*)gm_EntitySlotTable)[j].key) != 0) {
+					found = &((Rec21c*)gm_EntitySlotTable)[j];
 				}
 			} else if (gm_IsSlotPlayerPerson(j) != 0
-			    && ((Rec21c*)g_7f4ca0)[j].cls >= 0xd && ((Rec21c*)g_7f4ca0)[j].cls <= 0x12 && hst_IsCandidateUnlisted(((Rec21c*)g_7f4ca0)[j].key) != 0) {
-				r = &((Rec21c*)g_7f4ca0)[j];
+			    && ((Rec21c*)gm_EntitySlotTable)[j].cls >= 0xd && ((Rec21c*)gm_EntitySlotTable)[j].cls <= 0x12 && hst_IsCandidateUnlisted(((Rec21c*)gm_EntitySlotTable)[j].key) != 0) {
+				r = &((Rec21c*)gm_EntitySlotTable)[j];
 				break;
 			}
 			next = (j + 1) % 0x300;
@@ -907,8 +910,8 @@ int __cdecl hst_HandleRndSpieler(int mode, int* pairs, int idx, char* text, void
 		i = gm_RandomMod(0x300);
 		left = 0x300;
 		do {
-			if (gm_IsSlotPlayerPerson(i) != 0 && hst_IsCandidateUnlisted(((Rec21c*)g_7f4ca0)[i].key) != 0) {
-				r = &((Rec21c*)g_7f4ca0)[i];
+			if (gm_IsSlotPlayerPerson(i) != 0 && hst_IsCandidateUnlisted(((Rec21c*)gm_EntitySlotTable)[i].key) != 0) {
+				r = &((Rec21c*)gm_EntitySlotTable)[i];
 				break;
 			}
 			next = (i + step) % 0x300;
@@ -1012,7 +1015,7 @@ int __cdecl hst_HandleStrafeHinrichtung(int* pairs, int idx, char* text)
 
 		msg.kind = 5;
 		msg.target = -1;
-		msg.owner = ((Rec21c*)g_7f4ca0)[g_774970].key;
+		msg.owner = ((Rec21c*)gm_EntitySlotTable)[gm_LocalPlayerSlot].key;
 		msg.flags = 0;
 		msg.code = (unsigned char) codes[i];
 		msg.one = 1;
@@ -1022,12 +1025,12 @@ int __cdecl hst_HandleStrafeHinrichtung(int* pairs, int idx, char* text)
 		list[0] = key;
 		list[3] = *(int*) (gm_RichterEvangelisch + 4);
 		for (j = 0; j < 0x300; j++) {
-			if (((Rec21c*)g_7f4ca0)[j].key != key && gm_IsSlotNpcPerson(j) != 0) {
-				if (((Rec21c*)g_7f4ca0)[j].kind != 0) {
-					list[1] = ((Rec21c*)g_7f4ca0)[j].key;
+			if (((Rec21c*)gm_EntitySlotTable)[j].key != key && gm_IsSlotNpcPerson(j) != 0) {
+				if (((Rec21c*)gm_EntitySlotTable)[j].kind != 0) {
+					list[1] = ((Rec21c*)gm_EntitySlotTable)[j].key;
 				}
 			} else if (n < 16 && gm_IsSlotPlayerPerson(j) != 0) {
-				list[n] = ((Rec21c*)g_7f4ca0)[j].key;
+				list[n] = ((Rec21c*)gm_EntitySlotTable)[j].key;
 				n++;
 			}
 		}

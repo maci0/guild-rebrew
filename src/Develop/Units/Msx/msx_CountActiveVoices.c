@@ -2,7 +2,7 @@
 
 typedef SOUND_VOICE Voice;
 
-extern char* g_6b7e88;
+extern char* sb_Voices;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 int __cdecl msx_GetSampleStatus(int h);
 
@@ -13,15 +13,15 @@ int __cdecl msx_CountActiveVoices(void)
 	int i;
 
 	count = 0;
-	if (g_6b7e88 != 0) {
-		for (i = 0; i < g_6b7e8c; i++) {
-			if (((Voice*) g_6b7e88)[i].sample != 0) {
-				if (msx_GetSampleStatus(((Voice*) g_6b7e88)[i].h) == 4) {
+	if (sb_Voices != 0) {
+		for (i = 0; i < sb_VoiceCount; i++) {
+			if (((Voice*) sb_Voices)[i].sample != 0) {
+				if (msx_GetSampleStatus(((Voice*) sb_Voices)[i].h) == 4) {
 					count++;
-				} else if (((Voice*) g_6b7e88)[i].f18 != 0 && ((Voice*) g_6b7e88)[i].loop != 1 &&
-				    (((Voice*) g_6b7e88)[i].flags & 0xe) == 0) {
+				} else if (((Voice*) sb_Voices)[i].f18 != 0 && ((Voice*) sb_Voices)[i].loop != 1 &&
+				    (((Voice*) sb_Voices)[i].flags & 0xe) == 0) {
 					count++;
-				} else if ((((Voice*) g_6b7e88)[i].flags & 0x10) != 0) {
+				} else if ((((Voice*) sb_Voices)[i].flags & 0x10) != 0) {
 					count++;
 				}
 			}

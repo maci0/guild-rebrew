@@ -7,14 +7,14 @@ typedef struct
 // SIZE 0x21c
 
 extern int main_LoopFlags;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_7f4ca0[];
-extern int g_100f1dc;
+extern char gm_EntitySlotTable[];
+extern int d2_DialogButtonAction;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern char g_14cf950;
+extern char io_LastKeyScancode;
 extern int g_14abbf4;
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 extern char s_68d704[];
 
 int __cdecl gm_CheckEntityStock(Player*, int, char);
@@ -39,12 +39,12 @@ int __cdecl d2_PromptSoeldnerAmountDialog(void)
 
 	r = 0;
 	timer = main_LoopFlags;
-	if (gm_CheckEntityStock(((Player *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]), 0x140, (*(char*)&g_773d75)) == 0) {
+	if (gm_CheckEntityStock(((Player *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[gm_LocalPlayerSlot]), 0x140, (*(char*)&gm_ActiveTownIndex)) == 0) {
 		return 0;
 	}
 	dlg = d2_LoadForm(0, 0, s_68d704);
-	ctl = d2_GetWindowListItem(dlg, 0, io_AppendText(0x1a34, (unsigned char) (*(char*)&g_773d75)));
-	v = gm_AccumulateTyped2(((Player *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]));
+	ctl = d2_GetWindowListItem(dlg, 0, io_AppendText(0x1a34, (unsigned char) (*(char*)&gm_ActiveTownIndex)));
+	v = gm_AccumulateTyped2(((Player *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[gm_LocalPlayerSlot]));
 	if (v >= 0x12c0) {
 		v = 0x12c0;
 	}
@@ -52,19 +52,19 @@ int __cdecl d2_PromptSoeldnerAmountDialog(void)
 	d2_CenterDialogWindows(dlg);
 	if (main_RunFrameLoop((void*) d2_PromptSoeldnerAmountDialog, timer) != 0) {
 		do {
-			if (g_100f1dc != 2) {
-				if (g_100f1dc == 1 || g_14cf950 == 1) {
-					g_774654 = 1;
+			if (d2_DialogButtonAction != 2) {
+				if (d2_DialogButtonAction == 1 || io_LastKeyScancode == 1) {
+					d2_DialogCloseRequested = 1;
 					r = 0;
 				}
 			}
 			else {
 				d2_ShowModalMessageBox(g_14abbf4, 4);
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 				r = d2_GetControlValue(ctl);
 			}
-			if (g_14ce8e0 != 0) {
-				g_774654 = 1;
+			if (io_RightButtonReleased != 0) {
+				d2_DialogCloseRequested = 1;
 			}
 		} while (main_RunFrameLoop((void*) d2_PromptSoeldnerAmountDialog, timer) != 0);
 	}

@@ -1,6 +1,6 @@
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern int g_14ce8e0, g_100f1dc, d2_CurrentElementId;
-extern char g_14cf950;
+extern int io_RightButtonReleased, d2_DialogButtonAction, d2_CurrentElementId;
+extern char io_LastKeyScancode;
 extern int g_6a81dc[5];
 #include "Develop/Units/d2.v1/d2_gui.h"
 char* __cdecl d2_LoadForm(int, int, char*);
@@ -38,9 +38,9 @@ int __cdecl d2_ChooseTutorial(void)
 		item = d2_GetWindowListItem(menu, 2, item);
 		ids[i] = (int) item;
 		index = (int) item;
-		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[index].value_058) = 1;
-		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[index].value_038) = g_6a81dc[i];
-		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[index].flags_1d0) &= -3;
+		(*(int*)&((D2_CONTROL_TL*)d2_Controls)[index].value_058) = 1;
+		(*(int*)&((D2_CONTROL_TL*)d2_Controls)[index].value_038) = g_6a81dc[i];
+		(*(int*)&((D2_CONTROL_TL*)d2_Controls)[index].flags_1d0) &= -3;
 	}
 	item = io_AppendText((char*) 0x681140, 0x3f20);
 	result = (int) d2_GetWindowListItem(menu, 2, item);
@@ -55,7 +55,7 @@ int __cdecl d2_ChooseTutorial(void)
 				index = ids[k];
 				index = index * 0x40 - index;
 				index = index * 0xc;
-				if (*(int*)&((D2_CONTROL_TL*)(g_1015ea0 + index))->value_038 != 0) {
+				if (*(int*)&((D2_CONTROL_TL*)(d2_Controls + index))->value_038 != 0) {
 					d2_SetElementEnabled((char*) result, 1);
 					break;
 				}
@@ -64,20 +64,20 @@ int __cdecl d2_ChooseTutorial(void)
 			if (n == 5) {
 				d2_SetElementEnabled((char*) result, 0);
 			}
-			if (g_14ce8e0 != 0 || g_14cf950 == 1 || g_100f1dc == 1) {
-				g_774654 = 1;
+			if (io_RightButtonReleased != 0 || io_LastKeyScancode == 1 || d2_DialogButtonAction == 1) {
+				d2_DialogCloseRequested = 1;
 			}
-			if (g_100f1dc != -1) {
+			if (d2_DialogButtonAction != -1) {
 				if (d2_CurrentElementId == result2) {
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				} else if (d2_CurrentElementId == result) {
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 					n = 0;
 					for (k = 0; k < 5; k++) {
 						index = ids[k];
 						index = index * 0x40 - index;
 						index = index * 0xc;
-						if (*(int*)&((D2_CONTROL_TL*)(g_1015ea0 + index))->value_038 != 0) {
+						if (*(int*)&((D2_CONTROL_TL*)(d2_Controls + index))->value_038 != 0) {
 							n++;
 							g_6a81dc[k] = 1;
 						} else {

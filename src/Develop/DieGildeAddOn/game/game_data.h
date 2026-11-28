@@ -48,102 +48,102 @@ extern float g_const_2_2;
 /* ADDRESS: SERVER 0x10025fb4 */
 extern float g_const_1_5;
 
-extern short g_14ce8c0;
+extern short io_ActiveCursorX;
 
-extern short g_14ce8c2;
+extern short io_ActiveCursorY;
 
-extern char g_14cf736;
+extern char io_RightShiftKeyDown;
 
-extern int g_67a370;
+extern int d3_ActiveScene;
 
-extern short g_7725c4;
+extern short d2_CursorStateId;
 
-extern unsigned short * g_772f24;
+extern unsigned short * cut_ActivePlayerEntity;
 
-extern char * g_7746a4;
+extern char * d2_HoveredSceneObject;
 
-extern char * g_7746b4;
+extern char * sv_HoveredCharacter;
 
 extern char * ch_ContextCharacters[32];
 
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 
-extern double g_662aa0;
+extern double dbl_10;
 
 extern int d3_CurrentContextIndex;
 
-extern int g_77250c;
+extern int d2_ScreenSurface;
 
-extern unsigned char g_772d10;
+extern unsigned char d3snd_AmbientEnabled;
 
-extern unsigned char g_7747b0;
+extern unsigned char gm_ClientModeFlags;
 
-extern int g_7747b4;
+extern int gm_DifficultyLevel;
 
-extern int g_77494c;
+extern int nt_NetSyncFlags;
 
-extern unsigned short g_774970;
+extern unsigned short gm_LocalPlayerSlot;
 
 extern int main_LoopFlags;
 
-extern signed char g_7f3b00[];
+extern signed char d3_BuildingCategorySceneIndices[];
 
-extern char g_7f4ca4[];
+extern char gm_EntityIdField[];
 
 extern unsigned char * lpGebaeudePROT;
 
-extern const float g_662d70[4];
+extern const float d3_ZeroVec4[4];
 
-extern int g_6791c8;
+extern int evt_ActiveContextId;
 
 extern int evt_LastGfxScriptId;
 
 extern char * d3_ActiveCamera;
 
-extern char * g_7746c4;
+extern char * d2_VisitedBuilding;
 
-extern char * g_7746cc;
+extern char * sv_SelectedBuilding;
 
-extern int g_7e2700;
+extern int d2_InsideBuildingActive;
 
-extern float g_7e3a40[3];
+extern float d3_SavedCameraPos[3];
 
-extern float g_7e3a44;
+extern float d3_SavedCameraPosY;
 
-extern float g_7e3a48;
+extern float d3_SavedCameraPosZ;
 
 extern float d3_CameraTargetRotation[3];
 
-extern float g_7e3a54;
+extern float d3_CameraTargetRotY;
 
-extern float g_7e3a58;
+extern float d3_CameraTargetRotZ;
 
-extern int g_7ea360;
+extern int d2_SelectedPerson;
 
 extern char init_SceneContextIndices[];
 
-extern int g_6b8300;
+extern int d3_CurrentFloor;
 
-extern unsigned char * g_7746c8;
+extern unsigned char * d2_InteriorBuilding;
 
-extern float g_14ce880[3];
+extern float d3_CameraTargetPos[3];
 
 extern int d3_ActiveCameraAnimation;
 
 extern int d2_CurrentWindowId;
 
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
-extern int g_14cf900[];
+extern int io_PolledCursorState[];
 
-extern short g_14cf902;
+extern short io_PolledCursorY;
 
 #if !defined(REBREW_SERVER)
 /* Client globals declared with one type in every user; no storage here. */
 extern char g_1007ba0[];
-extern char g_1007bc0[];
+extern char hst_HistoryGroups[];
 extern char g_1040640[];
 extern char d3_SceneObjectSentinel[];
 extern char g_1042d00[];
@@ -154,27 +154,27 @@ extern char g_14cf7c8;
 extern char g_14cf7cb;
 extern char g_14cf7cd;
 extern char g_14cf7d0;
-extern char g_662d18[];
+extern char str_space[];
 extern char g_6750e8[];
-extern char g_679060[];
+extern char str_fmt_s[];
 extern char g_6790b0[];
 extern char g_67d444[];
 extern char g_67d67c[];
 extern char g_67e968[];
-extern char g_6811b0[];
+extern char str_dollar_C[];
 extern char g_68a9cc[];
 extern char g_68b0d8[];
 extern char g_68b3f8[];
-extern char g_6a9694[];
-extern char g_774a80[];
+extern char str_CZ_s[];
+extern char io_MessageFormatBuf[];
 extern char g_7e1ae0[];
 extern char g_7e1d00[];
 extern char g_7e2000[];
 extern char g_7e21a0[];
-extern char g_85ab90[];
+extern char gm_MarketStockTable[];
 extern char g_8680b4[];
 extern char cut_Cutscenes[];
-extern char g_9b0e20[];
+extern char cut_ParticipantSlots[];
 extern char* g_1007cd4;
 extern char* g_1040958;
 extern char* d3_SceneRenderListHead;
@@ -186,7 +186,7 @@ extern char* g_14a5dbc[];
 extern char* gm_FemaleNames[];
 extern char* g_5fb5b0;
 extern char* sbs_BankManager;
-extern char* g_6b7e94;
+extern char* evt_ScriptSlots;
 extern char* g_6b7fd0;
 extern char* g_772d34;
 extern char* g_772eb4;
@@ -196,11 +196,11 @@ extern char* cm_CommandQueueHead;
 extern double g_6628f0;
 extern double g_662908;
 extern double g_6629f8;
-extern double g_662a48;
+extern double dbl_2_0;
 extern double g_662ad8;
-extern double g_662b20;
+extern double dbl_0_4;
 extern double g_662c38;
-extern double g_6640e8;
+extern double dbl_0_01;
 extern float d3_ProjectionScaleY;
 extern float d3_ViewportCenterX;
 extern float g_1052bc8;
@@ -220,7 +220,7 @@ extern float g_662a98;
 extern float g_662acc;
 extern float g_662c30;
 extern float g_662c98;
-extern float g_662d34;
+extern float flt_0_6;
 extern float g_662da8;
 extern float g_66414c;
 extern float g_664154;
@@ -228,12 +228,12 @@ extern float g_664168;
 extern float d2_UiScale;
 extern float g_6a2558;
 extern float g_6a2560;
-extern float g_773d4c;
+extern float gm_CityPopulation;
 extern float d3_CameraHeightFraction;
 extern int g_1005760;
 extern int g_1005768;
 extern int ai_ResourceCount;
-extern int g_100b0ac;
+extern int ai_ProductionGoodsCount;
 extern int g_100dc34;
 extern int g_100dc38;
 extern int d2_MouseX;
@@ -253,7 +253,7 @@ extern int g_1042570;
 extern int g_1042574;
 extern int d3_ViewportRight;
 extern int d3_ViewportBottom;
-extern int g_1042a08;
+extern int d3_RenderedFaceCount;
 extern int d3_RenderedVertexCount;
 extern int g_1052de0;
 extern int g_11bb000[];
@@ -264,13 +264,13 @@ extern int g_14abc30;
 extern int g_14abc98;
 extern int g_14ad0f0;
 extern int g_14ad100;
-extern int g_14cbca0;
-extern int g_14cbcb0;
+extern int nt_ClientSocket;
+extern int nt_ConnectionClosed;
 extern int g_14ce8cc;
 extern int g_14ce8d0;
 extern int g_14ce8d4;
 extern int g_14ce8d8;
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 extern int g_14ce8e4;
 extern int g_14ce8e8;
 extern int gm_RandomSearchSteps[];
@@ -294,7 +294,7 @@ extern int hst_HistoryTextBase;
 extern int g_67fca8;
 extern int g_67fcac;
 extern int g_67fcb4;
-extern int g_6816d8;
+extern int d2_RouteRadioGroupId;
 extern int g_68b79c;
 extern int cut_EventLoopFlags;
 extern int gm_NextEntityId;
@@ -325,8 +325,8 @@ extern int d2_MouseTopBoundary;
 extern int d3_CameraAnimating;
 extern int g_6b7d6c;
 extern int MemUsed;
-extern int g_6b7e8c;
-extern int g_6b7f90;
+extern int sb_VoiceCount;
+extern int msx_Initialized;
 extern int txt_EntryCount;
 extern int g_6b8008;
 extern int g_6b8058;
@@ -347,7 +347,7 @@ extern int g_7728d0;
 extern int g_772f08;
 extern int g_772f10;
 extern int g_772f44;
-extern int g_772f54;
+extern int cut_StartTick;
 extern int ahm_PlayerPrototypeCount;
 extern int cm_LastCrimeId;
 extern int g_773d40;
@@ -363,7 +363,7 @@ extern int g_7746f8;
 extern int g_7747c4;
 extern int g_7747c8;
 extern int msx_MusicEnabled;
-extern int g_774934;
+extern int d3snd_SoundEnabled;
 extern int g_774954;
 extern int he_LastEventSlot;
 extern int d2_TutorialActive;
@@ -373,10 +373,10 @@ extern int g_77e8a0;
 extern int main_Instance;
 extern int d3_SelectionBoxActive;
 extern int g_85ab60;
-extern int g_9badd0;
+extern int lb_LocalClientId;
 extern int* msx_WaveDrivers[16];
-extern int* g_6b7f10[16];
-extern int* g_6b7f50[16];
+extern int* msx_SampleHandles[16];
+extern int* msx_StreamHandles[16];
 extern int* cut_ActiveCutscene;
 extern signed char g_772510;
 extern unsigned char* g_7e3f30;
@@ -387,32 +387,32 @@ extern void* ch_CharacterSlots[];
 
 #endif
 #if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
-extern char * g_1015ea0;
-extern char g_10161bc[];
-extern char g_10161d0[];
-extern char g_102cbc0[];
+extern char * d2_Controls;
+extern char d2_WindowElementIdView[];
+extern char d2_WindowActiveView[];
+extern char d2_RadioGroups[];
 extern char * txt_TextEntries[];
-extern int g_14ce920[];
-extern short g_14ce922;
-extern char g_14cf950;
-extern float g_6628a0;
-extern float g_662910;
-extern signed char g_6a3440;
-extern unsigned char g_6a375c;
-extern volatile int g_6b7fac;
-extern char * g_772500;
+extern int io_ActiveInputState[];
+extern short io_MouseY;
+extern char io_LastKeyScancode;
+extern float flt_1_0;
+extern float flt_0_01;
+extern signed char gm_SelectedMissionIndex;
+extern unsigned char gm_PlayerCount;
+extern volatile int gm_GameTicks;
+extern char * d2_FileObjTable;
 extern int tp_d2_SelectedControl;
-extern unsigned short * g_772e9c;
-extern int g_772ea4;
-extern int g_772ea8;
-extern int g_772eac;
-extern int g_772ec4;
-extern int g_772f3c;
+extern unsigned short * cut_CombatDefenderEntity;
+extern int cut_CombatCancelledEntity;
+extern int cut_CombatResolved;
+extern int cut_PlunderedAmount;
+extern int cut_BombSampleBank;
+extern int cut_SkipMode;
 extern char * sv_HoveredObjekt;
-extern int g_774800;
-extern char g_774964;
-extern unsigned short g_7f4c04;
-extern char g_9ba1c0[];
+extern int gm_AllEntitiesControllable;
+extern char gm_InWorldHud;
+extern unsigned short gm_GameTimeHour;
+extern char d3_ActiveBombs[];
 extern unsigned char * lpGebaeudeINST;
 extern unsigned short * lpObjekteINST;
 extern char * lpObjektePROT;

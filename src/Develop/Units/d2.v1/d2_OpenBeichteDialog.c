@@ -13,9 +13,9 @@
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int d2_CurrentWindowId;
 extern int g_14ab930;
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char s_6ab060[];
 
@@ -56,7 +56,7 @@ void __cdecl d2_OpenBeichteDialog(unsigned char* e)
 	if (*(unsigned short*) (e + 0x27) == 0xffff) {
 		return;
 	}
-	amt = gm_CountStraftatenForEntity(((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id);
+	amt = gm_CountStraftatenForEntity(((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id);
 	dlg = d2_LoadForm(0, 0, s_6ab060);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);
@@ -74,28 +74,29 @@ void __cdecl d2_OpenBeichteDialog(unsigned char* e)
 	else {
 		io_AppendText(0x1980);
 	}
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc != -1 && flag != 0) {
+		if (d2_DialogButtonAction != -1 && flag != 0) {
 			if (d2_CurrentElementId == btnA) {
-				me = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]);
+				me = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot]);
 				v = d2_GetControlValue(btnB);
 				if (d2_CheckActionBlocker(me, v) != 0) {
 					gm_ModifyHealth(me->entity_id, -v);
-					if (*(unsigned short*) (e + 0x27) != 0xffff && *(unsigned short*) (e + 0x27) != g_774970) {
-						gm_ModifyHealth(((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].entity_id, 1);
-						he_NotifyConfession(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 0x27)]), e);
+					if (*(unsigned short*) (e + 0x27) != 0xffff && *(unsigned short*) (e + 0x27) != gm_LocalPlayerSlot) {
+						gm_ModifyHealth(((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (e + 0x27)].entity_id, 1);
+						he_NotifyConfession(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot]),
+							((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (e + 0x27)]), e);
 					}
 					gs_ClearTargetStraftaten(me->entity_id, v / 2);
 					d2_ShowModalMessageBox(g_14ab930, 0);
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				}
 			}
 			else if (d2_CurrentElementId == btnC) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	} while (main_RunFrameLoop((void*) d2_OpenBeichteDialog, 0x677c7) != 0);

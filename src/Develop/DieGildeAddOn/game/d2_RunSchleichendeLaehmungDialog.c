@@ -19,13 +19,13 @@ typedef struct F8 {
 } F8;
 // SIZE 0x8
 
-extern KABINETT_ENTITY_SLOT g_7f4ca0[];
+extern KABINETT_ENTITY_SLOT gm_EntitySlotTable[];
 extern pos14_7f4c00 gm_GameTime;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern float g_6628ac;
 extern int d2_CurrentWindowId;
-extern int g_100f1dc;
-extern int g_14ce8e0;
+extern int d2_DialogButtonAction;
+extern int io_RightButtonReleased;
 extern int d2_CurrentElementId;
 
 int __cdecl gm_WalkEntityChain(unsigned short);
@@ -70,7 +70,7 @@ void __cdecl d2_RunSchleichendeLaehmungDialog(char *gebaeude)
     char *rec;
     F8 f;
 
-    base = gm_WalkEntityChain(g_774970);
+    base = gm_WalkEntityChain(gm_LocalPlayerSlot);
     memset(query, 0, sizeof(query));
     memset(query + 7, 0xff, 8 * sizeof(int));
     query[0] = 1;
@@ -98,23 +98,23 @@ void __cdecl d2_RunSchleichendeLaehmungDialog(char *gebaeude)
     h2 = io_AppendText(0x402f);
     h1 = d2_GetWindowListItem(dlg, 2, h2);
     h2 = d2_GetWindowListItem(dlg, 2, h2 + 1);
-    g_100f1dc = -1;
+    d2_DialogButtonAction = -1;
     do {
-        if (g_14ce8e0 != 0) {
-            g_774654 = 1;
-        } else if (g_100f1dc != -1) {
+        if (io_RightButtonReleased != 0) {
+            d2_DialogCloseRequested = 1;
+        } else if (d2_DialogButtonAction != -1) {
             if (d2_CurrentElementId == h1) {
-                if (gm_CheckEntityStock(&g_7f4ca0[g_774970], price, g_773d75) != 0
-                    && d2_CheckActionBlocker(&g_7f4ca0[g_774970], 0x10) == 1
+                if (gm_CheckEntityStock(&gm_EntitySlotTable[gm_LocalPlayerSlot], price, gm_ActiveTownIndex) != 0
+                    && d2_CheckActionBlocker(&gm_EntitySlotTable[gm_LocalPlayerSlot], 0x10) == 1
                     && he_HasNoActiveAssassinAction(gebaeude) != 0) {
-                    rec = gm_GetEntityTableEntry(&g_7f4ca0[g_774970]);
+                    rec = gm_GetEntityTableEntry(&gm_EntitySlotTable[gm_LocalPlayerSlot]);
                     if (rec != 0)
                         *(int *) (rec + 0x28) += price;
-                    cm_RequestTransferCurrencyNoKill(-1, g_7f4ca0[g_774970].f4, g_773d75, price);
-                    gm_ModifyHealth(g_7f4ca0[g_774970].f4, -0x10);
+                    cm_RequestTransferCurrencyNoKill(-1, gm_EntitySlotTable[gm_LocalPlayerSlot].f4, gm_ActiveTownIndex, price);
+                    gm_ModifyHealth(gm_EntitySlotTable[gm_LocalPlayerSlot].f4, -0x10);
                     memset(msg, 0, sizeof(msg));
                     msg[4] = (char) 0x99;
-                    *(int *) (msg + 8) = g_7f4ca0[*(unsigned short *) (gebaeude + 0x27)].f4;
+                    *(int *) (msg + 8) = gm_EntitySlotTable[*(unsigned short *) (gebaeude + 0x27)].f4;
                     *(int *) (msg + 0xc) = *(int *) (gebaeude + 1);
                     *(int *) (msg + 0x28) = gm_GameTime.a;
                     *(int *) (msg + 0x2c) = gm_GameTime.b;
@@ -134,17 +134,17 @@ void __cdecl d2_RunSchleichendeLaehmungDialog(char *gebaeude)
                         tmp = -1;
                         f.mask = 0x7b4c4a0;
                         f.b = 0;
-                        ai_FindEntityInFavorRange(&g_7f4ca0[g_774970], 0, f, 0, 100.0f, &tmp);
+                        ai_FindEntityInFavorRange(&gm_EntitySlotTable[gm_LocalPlayerSlot], 0, f, 0, 100.0f, &tmp);
                         *(int *) (msg + 0x58) = tmp;
                     }
                     tmp = cm_SendCopyEntityData(msg);
                     while (tmp != -1 && cm_GetCommandStatus(tmp) == 0)
                         main_RunFrameLoop(0, 0x20007);
                     d3snd_PlaySoundEffect(-7, 0, "KOMMENTARE", -1);
-                    g_774654 = 1;
+                    d2_DialogCloseRequested = 1;
                 }
             } else if (d2_CurrentElementId == h2) {
-                g_774654 = 1;
+                d2_DialogCloseRequested = 1;
             }
         }
     } while (main_RunFrameLoop((void *) d2_RunSchleichendeLaehmungDialog, 0x677c7) != 0);

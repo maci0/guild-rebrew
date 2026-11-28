@@ -1,7 +1,7 @@
 
 
 
-extern int g_7746a0;
+extern int sv_ClickedObjekt;
 extern int g_14ad188;
 extern int g_14ad1a8;
 extern char g_6aa5f0[];
@@ -24,11 +24,11 @@ void __cdecl d2_RunKontorTradeHud(int a)
 		x = RegisterStatusText(g_6aa5f0, g_14ad188, 0x10);
 		y = RegisterStatusText(g_6aa5e8, g_14ad1a8, 0x10);
 		d3_UpdateBuildingInteriorState();
-		if (g_7746a0 != 0) {
-			if (g_7746a0 == x) {
+		if (sv_ClickedObjekt != 0) {
+			if (sv_ClickedObjekt == x) {
 				d2_OpenShopTradePanel(a);
 			}
-			else if (g_7746a0 == y) {
+			else if (sv_ClickedObjekt == y) {
 				d2_OpenLagerTradeMode2(a);
 			}
 		}

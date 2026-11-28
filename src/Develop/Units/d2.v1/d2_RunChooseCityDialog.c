@@ -2,21 +2,21 @@
 extern char* d3_ActiveCamera;
 extern int d2_ScreenHeight;
 extern int g_1040494;
-extern int g_10432a4;
-extern int g_10421a0;
-extern int g_10529c8;
-extern short g_14ce8c0;
-extern short g_14ce8c2;
+extern int d3_ProjectionDist;
+extern int d3_ViewportZFar;
+extern int d3_ViewportZNear;
+extern short io_ActiveCursorX;
+extern short io_ActiveCursorY;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char g_14cf950;
+extern char io_LastKeyScancode;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern char* g_7746a0;
-extern char* g_7746a4;
-extern int g_100f1dc;
+extern char* sv_ClickedObjekt;
+extern char* d2_HoveredSceneObject;
+extern int d2_DialogButtonAction;
 extern char* txt_TextEntries[];
 extern int main_LoopFlags;
-extern unsigned char g_6a375c;
-extern int g_6b7fdc;
+extern unsigned char gm_PlayerCount;
+extern int vfs_RootDir;
 extern int g_14b5e50;
 extern int g_14b5e54;
 extern int d2_CurrentWindowId;
@@ -110,7 +110,7 @@ int __cdecl d2_RunChooseCityDialog(int unused, int network)
 		count = vfs_ListFilesByExtension((char*) 0x6a3778, (char*) 0x6a41b0, data.names);
 	}
 	for (i = 0; i < count; i++) {
-		h = vfs_Tfopen(data.names[i].path, (char*) 0x6750e8, g_6b7fdc);
+		h = vfs_Tfopen(data.names[i].path, (char*) 0x6750e8, vfs_RootDir);
 		if (h == 0) {
 			return 0;
 		}
@@ -119,7 +119,7 @@ int __cdecl d2_RunChooseCityDialog(int unused, int network)
 			return 0;
 		}
 		CloseVfsStream(h);
-		data.values[i] = (signed char) data.hdr[0x30] - (*(int*) &g_6a375c & 0xff);
+		data.values[i] = (signed char) data.hdr[0x30] - (*(int*) &gm_PlayerCount & 0xff);
 		city = d3_SpawnCityMapMarker(data.hdr + 5);
 		data.cities[i] = city;
 		if (city != 0) {
@@ -160,7 +160,7 @@ int __cdecl d2_RunChooseCityDialog(int unused, int network)
 	d2_PositionFormWindows(win1, 1);
 	d2_SetForm(win1, 0);
 	io_AppendText(0x1abb);
-	d3_SetViewport((float) g_1040494, (float) d2_ScreenHeight, 0.0f, 0.0f, g_10529c8, g_10421a0, g_10432a4, g_1040494, d2_ScreenHeight);
+	d3_SetViewport((float) g_1040494, (float) d2_ScreenHeight, 0.0f, 0.0f, d3_ViewportZNear, d3_ViewportZFar, d3_ProjectionDist, g_1040494, d2_ScreenHeight);
 	win2 = d2_LoadForm(0, 0, (char*) 0x6a4194);
 	d2_CenterForm(win2, 3);
 	d2_PositionFormWindows(win2, 1);
@@ -169,16 +169,16 @@ int __cdecl d2_RunChooseCityDialog(int unused, int network)
 	ok_id = tmp_ids[0];
 	info_id = tmp_ids[1];
 	while (main_RunFrameLoop((void*) d2_RunChooseCityDialog, 0x10d6) != 0) {
-		g_7746a0 = 0;
-		image = d3_FindSceneObjectAtScreenPoint((float) g_14ce8c0, (float) g_14ce8c2, 0x60, 1);
-		g_7746a4 = image;
+		sv_ClickedObjekt = 0;
+		image = d3_FindSceneObjectAtScreenPoint((float) io_ActiveCursorX, (float) io_ActiveCursorY, 0x60, 1);
+		d2_HoveredSceneObject = image;
 		if (g_14ce8cc != 0) {
-			g_7746a0 = image;
-		} else if (g_14ce8e0 != 0 || g_14cf950 == 1) {
-			g_774654 = 1;
+			sv_ClickedObjekt = image;
+		} else if (io_RightButtonReleased != 0 || io_LastKeyScancode == 1) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_7746a0 != 0 && fcn_0064f170(g_7746a0, (char*) 0x6a418c, 6) == 0) {
-			sel = g_7746a0;
+		if (sv_ClickedObjekt != 0 && fcn_0064f170(sv_ClickedObjekt, (char*) 0x6a418c, 6) == 0) {
+			sel = sv_ClickedObjekt;
 		}
 		if (sel != prev) {
 			pos[0] = 0.0f;
@@ -216,14 +216,14 @@ int __cdecl d2_RunChooseCityDialog(int unused, int network)
 			}
 			prev = sel;
 		}
-		if (g_100f1dc == 2) {
+		if (d2_DialogButtonAction == 2) {
 			if (d2_CurrentElementId == info_id) {
 				d2_SetFormVisibility(win2, 0);
 				d2_SetFormVisibility(win1, 0);
 				d2_RunChooseOpponentsDialog(highlight);
 				d2_SetFormVisibility(win2, 1);
 				d2_SetFormVisibility(win1, 1);
-				if (g_100f1dc != 2) {
+				if (d2_DialogButtonAction != 2) {
 					goto not_checked;
 				}
 			}
@@ -232,18 +232,18 @@ int __cdecl d2_RunChooseCityDialog(int unused, int network)
 			}
 		}
 not_checked:
-		if (g_14cf950 != 0x1c) {
+		if (io_LastKeyScancode != 0x1c) {
 			continue;
 		}
 accepted:
 		d2_SetFormVisibility(win2, 0);
 		d2_SetFormVisibility(win1, 0);
 		if (network != 0) {
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 			result = 1;
 		} else {
 			if (d2_RunChooseIntroMenu() != 0 && d2_RunChooseHistoryDialog() != 0) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 				result = 1;
 				d2_SetFormVisibility(win2, 1);
 			}

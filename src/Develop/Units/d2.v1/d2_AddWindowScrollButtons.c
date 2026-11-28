@@ -14,7 +14,7 @@ typedef struct
 
 extern GOLD_GUI_WINDOW g_00f8f120[]; /* 0x00f8f120 */
 extern GuiEnt* g_00f8f080; /* 0x00f8f080 */
-extern Win_1015f40 g_1015f40[0x60];
+extern Win_1015f40 d2_Windows[0x60];
 
 int __cdecl d2_AddElementToWindow(int x, int y, int id, int win);
 
@@ -48,18 +48,18 @@ void __cdecl d2_AddWindowScrollButtons(int x, int y, int win, int target, int id
 
 	wo = win * sizeof(D2_WIN);
 	if (x == -1 && y == -1) {
-		x = ((D2_WIN*)((char*)g_1015f40 + wo))->width - 0x20;
-		y = ((D2_WIN*)((char*)g_1015f40 + wo))->height - 0x20;
+		x = ((D2_WIN*)((char*)d2_Windows + wo))->width - 0x20;
+		y = ((D2_WIN*)((char*)d2_Windows + wo))->height - 0x20;
 	}
 	sy = (short) y;
-	*(int*) &((D2_WIN*)((char*)g_1015f40 + wo))->pad3a8[0x14] = d2_AddElementToWindow((short) x, sy, id, win);
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) &((D2_WIN*)((char*)g_1015f40 + wo))->pad3a8[0x14]].value_1f0) = target;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) &((D2_WIN*)((char*)g_1015f40 + wo))->pad3a8[0x14]].flags_1d0) = 3;
+	*(int*) &((D2_WIN*)((char*)d2_Windows + wo))->pad3a8[0x14] = d2_AddElementToWindow((short) x, sy, id, win);
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[*(int*) &((D2_WIN*)((char*)d2_Windows + wo))->pad3a8[0x14]].value_1f0) = target;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[*(int*) &((D2_WIN*)((char*)d2_Windows + wo))->pad3a8[0x14]].flags_1d0) = 3;
 	x -= 0x20;
-	*(int*) &((D2_WIN*)((char*)g_1015f40 + wo))->pad3a8[0x10] = d2_AddElementToWindow((short) x, sy, id + 1, win);
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) &((D2_WIN*)((char*)g_1015f40 + wo))->pad3a8[0x10]].value_1f0) = target;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) &((D2_WIN*)((char*)g_1015f40 + wo))->pad3a8[0x10]].flags_1d0) = 3;
-	*(int*) &((D2_WIN*)((char*)g_1015f40 + wo))->pad3c[0x21c] = 0;
-	*(int*) &((D2_WIN*) g_1015f40)[target].pad3c[0x238] = 0x30;
+	*(int*) &((D2_WIN*)((char*)d2_Windows + wo))->pad3a8[0x10] = d2_AddElementToWindow((short) x, sy, id + 1, win);
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[*(int*) &((D2_WIN*)((char*)d2_Windows + wo))->pad3a8[0x10]].value_1f0) = target;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[*(int*) &((D2_WIN*)((char*)d2_Windows + wo))->pad3a8[0x10]].flags_1d0) = 3;
+	*(int*) &((D2_WIN*)((char*)d2_Windows + wo))->pad3c[0x21c] = 0;
+	*(int*) &((D2_WIN*) d2_Windows)[target].pad3c[0x238] = 0x30;
 }
 #endif

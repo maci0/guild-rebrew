@@ -22,11 +22,11 @@ typedef struct Handler {
 /* SIZE 8 */
 
 extern unsigned char* lpGebaeudePROT;
-extern char g_868060[];
-extern Slot21c g_7f4ca0[];
-extern int g_7e35c0[][2];
+extern char gm_TownTable[];
+extern Slot21c gm_EntitySlotTable[];
+extern int main_FrameHandlerStack[][2];
 extern int g_774650;
-extern char* g_7746c8;
+extern char* d2_InteriorBuilding;
 extern int d3_CurrentContextIndex;
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -80,18 +80,18 @@ void __cdecl he_StepTransportCarrier(char* e)
 	} else if (ch_IsEntityNearBuildingDoor(r, c)) {
 		*(int*) (e + 0xec) = cm_RequestMoveObjekt(*(int*) (c + 1), *(int*) (s44 + 1), *(int*) (r + 2));
 		if (*(unsigned char*) c == 0x47) {
-			io_FormatTextBuffer(msg, 0x1c3b, 1, 0x1c39, g_868060 + *(int*) (c + 0x65) * 0x2f4);
-			if ((g_7e35c0[g_774650][0] != 0x5ba910 || g_7746c8 != c) &&
+			io_FormatTextBuffer(msg, 0x1c3b, 1, 0x1c39, gm_TownTable + *(int*) (c + 0x65) * 0x2f4);
+			if ((main_FrameHandlerStack[g_774650][0] != 0x5ba910 || d2_InteriorBuilding != c) &&
 			    !(r[0x20] & 1) && e[0xf2] == 0) {
-				he_MessageBoxQuickjump(g_7f4ca0[*(unsigned short*) (e + 8)].id, *(int*) (r + 2), msg, 0,
+				he_MessageBoxQuickjump(gm_EntitySlotTable[*(unsigned short*) (e + 8)].id, *(int*) (r + 2), msg, 0,
 				    0x609, *(int*) (c + 1), -1, 0, "_NACHRICHTEN_HS_60");
 			}
 		} else if (*(unsigned char*) b == 0x47) {
-			io_FormatTextBuffer(msg, 0x1c3d, 1, 0x1c39, g_868060 + *(int*) (b + 0x65) * 0x2f4,
+			io_FormatTextBuffer(msg, 0x1c3d, 1, 0x1c39, gm_TownTable + *(int*) (b + 0x65) * 0x2f4,
 			    *(unsigned short*) (c + 0x27), c);
-			if ((g_7e35c0[g_774650][0] != 0x5ba910 || g_7746c8 != c) &&
+			if ((main_FrameHandlerStack[g_774650][0] != 0x5ba910 || d2_InteriorBuilding != c) &&
 			    !(r[0x20] & 1) && e[0xf2] == 0) {
-				he_MessageBoxQuickjump(g_7f4ca0[*(unsigned short*) (e + 8)].id, *(int*) (r + 2), msg, 0,
+				he_MessageBoxQuickjump(gm_EntitySlotTable[*(unsigned short*) (e + 8)].id, *(int*) (r + 2), msg, 0,
 				    0x609, *(int*) (c + 1), -1, 0, "_NACHRICHTEN_HS_59");
 			}
 		} else {
@@ -116,13 +116,13 @@ void __cdecl he_StepTransportCarrier(char* e)
 					io_FormatTextBuffer(msg, 0x1c44, c);
 				}
 			}
-			if ((g_7e35c0[g_774650][0] != 0x5ba910 || g_7746c8 != c) &&
+			if ((main_FrameHandlerStack[g_774650][0] != 0x5ba910 || d2_InteriorBuilding != c) &&
 			    !(r[0x20] & 1) && e[0xf2] == 0) {
 				if (text[0] != 0) {
-					he_MessageBoxQuickjump(g_7f4ca0[*(unsigned short*) (e + 8)].id, *(int*) (r + 2),
+					he_MessageBoxQuickjump(gm_EntitySlotTable[*(unsigned short*) (e + 8)].id, *(int*) (r + 2),
 					    msg, 0, code, *(int*) (c + 1), -1, 0, text);
 				} else {
-					he_MessageBoxQuickjump(g_7f4ca0[*(unsigned short*) (e + 8)].id, *(int*) (r + 2),
+					he_MessageBoxQuickjump(gm_EntitySlotTable[*(unsigned short*) (e + 8)].id, *(int*) (r + 2),
 					    msg, 0, code, *(int*) (c + 1), -1, 0, 0);
 				}
 			}

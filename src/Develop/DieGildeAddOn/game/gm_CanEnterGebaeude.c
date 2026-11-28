@@ -12,13 +12,13 @@ typedef struct {
 	char pad1b2[0x6a];
 } House5a74;
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern unsigned char g_7747b0;
+extern unsigned char gm_ClientModeFlags;
 extern char* g_14ad474;
-extern unsigned short g_7f4c04;
-extern int g_7e2700;
+extern unsigned short gm_GameTimeHour;
+extern int d2_InsideBuildingActive;
 
 
 int __cdecl gm_GetEntityUiFlags(int id, unsigned char* store, int a, int b);
@@ -41,22 +41,22 @@ int __cdecl gm_CanEnterGebaeude(unsigned char* p)
 
 	tbl = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[p[0]];
 	kind = gm_GetBuildingTypeCategory(p[0]);
-	r = gm_GetEntityUiFlags(g_774970, p, 0, 0);
+	r = gm_GetEntityUiFlags(gm_LocalPlayerSlot, p, 0, 0);
 	if ((*(unsigned short*) (p + 0x5a) & 0x400) != 0) {
 		return 0;
 	}
-	if (((*(signed char*)&g_7747b0) & 0x80) == 0) {
-		x = ((House5a74*)g_7f4ca0)[g_774970].f1b1;
+	if (((*(signed char*)&gm_ClientModeFlags) & 0x80) == 0) {
+		x = ((House5a74*)gm_EntitySlotTable)[gm_LocalPlayerSlot].f1b1;
 		if (!(x > 0 && ((((BUILDING_PROTOTYPE*)tbl)->category) == 6 || (((BUILDING_PROTOTYPE*)tbl)->category) == 4)) && (r & 0x200) == 0) {
 			own = *(unsigned short*) (p + 0x27);
-			if (own != g_774970) {
+			if (own != gm_LocalPlayerSlot) {
 				if ((r & 1) == 0) {
 					return 0;
 				}
 				if (gm_IsGebaeudeOpen(p, (int*) &a, &b) == 0) {
 					strcpy(title, g_14ad474);
 					x = a;
-					if (((*(int*)&g_7f4c04) & 0xffff) < x) {
+					if (((*(int*)&gm_GameTimeHour) & 0xffff) < x) {
 						if (kind == 3 || kind == 5) {
 							io_FormatTextBuffer(text, 0x2059, p);
 						}
@@ -74,7 +74,7 @@ int __cdecl gm_CanEnterGebaeude(unsigned char* p)
 					}
 					io_FormatTextBuffer(line, 0x2058, x, b);
 					strcat(text, line);
-					g_7e2700 = 0;
+					d2_InsideBuildingActive = 0;
 					d2_ShowGreenMessageBox(title, text, 4);
 					return 0;
 				}

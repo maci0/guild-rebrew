@@ -2,7 +2,7 @@
 
 
 void __cdecl gm_RunDuelChallengeAction(void*, void*);
-extern char g_679060[];
+extern char str_fmt_s[];
 void __cdecl io_FormatTextBuffer(void*, int, int);
 
 int __cdecl gm_HandleDuelChallengeCommand(void* entity, void* params)

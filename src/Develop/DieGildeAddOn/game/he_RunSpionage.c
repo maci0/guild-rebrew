@@ -5,10 +5,10 @@
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 #include "Develop/client_types.h"
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #include "game_data.h"
 typedef struct SpyProto { unsigned char kind; unsigned char rest[0x24c]; } SpyProto;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern pos14_7f4c00 gm_GameTime;
 extern char s_6a6578[];
 extern char s_67ed14[];
@@ -69,14 +69,14 @@ void __cdecl he_RunSpionage(char* ctx)
 		}
 		ent = cm_GetCommandResult(*(int*) (ctx + 0xd8));
 		if (ent != 0) {
-			house = gm_GetEntityTableEntry(g_7f4ca0
+			house = gm_GetEntityTableEntry(gm_EntitySlotTable
 			    + *(unsigned short*) (ctx + 8) * 0x21c);
 			if (house != 0) {
 				*(int*) (house + 0x28) += *(int*) (ctx + 0xe4);
 			}
 			*(int*) (ctx + 0xd8) = *(int*) (ent + 4);
-			cm_RequestTransferCurrencyNoKill(-1, *(int*) (g_7f4ca0
-			    + *(unsigned short*) (ctx + 8) * 0x21c + 4), g_773d75, *(int*) (ctx + 0xe4));
+			cm_RequestTransferCurrencyNoKill(-1, *(int*) (gm_EntitySlotTable
+			    + *(unsigned short*) (ctx + 8) * 0x21c + 4), gm_ActiveTownIndex, *(int*) (ctx + 0xe4));
 			he_AssignActionSlot(0, 0, *(unsigned short*) ent, ctx);
 			*(pos14_7f4c00*)(ctx + 0x52) = gm_GameTime;
 			*(int*) (ctx + 0x84) = cm_SendSetHE(1, ctx);
@@ -182,7 +182,7 @@ void __cdecl he_RunSpionage(char* ctx)
 			rec = gm_LookupEntityRecordById(*(int*) (ctx + 0xc4));
 			if (rec != 0) {
 				io_FormatTextBuffer(text, 0x1734, *(unsigned short*) rec);
-				he_PostEntityMessage(*(int*) (g_7f4ca0
+				he_PostEntityMessage(*(int*) (gm_EntitySlotTable
 				    + *(unsigned short*) (ctx + 8) * 0x21c + 4),
 				    -1, text, 0, 0x5fa, 0);
 			}

@@ -15,7 +15,7 @@ void __cdecl d3_UpdateFloorLighting(int);
 /* ADDRESS: GOLDTL 0x00450a00 */
 void __cdecl UpdateSceneLighting(unsigned char flag)
 {
-    g_6b86d4++;
+    d3_SceneRenderLock++;
 #if defined(REBREW_GOLD)
     LightingUpdateCount++;
     if (flag == 0) {
@@ -23,19 +23,19 @@ void __cdecl UpdateSceneLighting(unsigned char flag)
             goto update_terrain;
         }
     } else if (flag > 1) {
-        d3_VisitSceneNodes((char*)g_67a370, 0, 0x40, d3_UpdateObjectLighting);
+        d3_VisitSceneNodes((char*)d3_ActiveScene, 0, 0x40, d3_UpdateObjectLighting);
         goto update_terrain;
     }
-    d3_VisitSceneObjectsUntilStopped((char*)g_67a370, 0, 2, d3_FreeObjectLightNodes, 0);
+    d3_VisitSceneObjectsUntilStopped((char*)d3_ActiveScene, 0, 2, d3_FreeObjectLightNodes, 0);
     d3_LightingUpdatePending = 1;
 update_terrain:
 #endif
-    if (g_6b8300 != 0) {
+    if (d3_CurrentFloor != 0) {
 #if defined(REBREW_GOLD)
-        fcn_00441860(g_6b8300);
+        fcn_00441860(d3_CurrentFloor);
 #else
-        d3_UpdateFloorLighting(g_6b8300);
+        d3_UpdateFloorLighting(d3_CurrentFloor);
 #endif
     }
-    g_6b86d4--;
+    d3_SceneRenderLock--;
 }

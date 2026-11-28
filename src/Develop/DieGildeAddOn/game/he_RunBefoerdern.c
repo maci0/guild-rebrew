@@ -1,7 +1,7 @@
 #include <string.h>
 
 extern int d3_CurrentContextIndex;
-extern char g_6b5c60[];
+extern char str_empty[];
 
 int __cdecl cm_GetCommandStatus(int);
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -100,7 +100,7 @@ void __cdecl he_RunBefoerdern(char* action)
 		}
 		v15 = d3_CurrentContextIndex;
 		v7 = d3_GetContextIndex(*(unsigned int*) (v6 + 0x88));
-		name[0] = g_6b5c60[0];
+		name[0] = str_empty[0];
 		memset(name + 1, 0, 0x7f);
 		d3_SelectSceneContext(v7, 1);
 		v6 = *(int*) (ent + 0x184);

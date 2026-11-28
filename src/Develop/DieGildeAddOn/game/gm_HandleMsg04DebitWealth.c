@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl gm_LookupEntityRecordById(int);
@@ -30,7 +30,7 @@ int __cdecl gm_HandleMsg04DebitWealth(int* request)
 	d = (double) v + 1.0;
 	v = (int) ((double) fcn_0050dac0(*(short*) ent) * d * 0.01);
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7, v);
-	cm_RequestTransferCurrencyNoKill(*request, -1, g_773d75, v);
+	cm_RequestTransferCurrencyNoKill(*request, -1, gm_ActiveTownIndex, v);
 	he_PostEntityMessage(1[ent], ent[1], buf, 0x100 < strlen(buf), 0x603, 0);
 	return 0;
 }

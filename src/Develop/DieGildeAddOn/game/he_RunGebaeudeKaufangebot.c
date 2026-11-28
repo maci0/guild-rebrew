@@ -5,12 +5,12 @@ typedef struct Gfx {
 // SIZE 0x28
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern char* lpGebaeudePROT;
-extern unsigned char g_773d75;
-extern int g_100f1dc;
+extern unsigned char gm_ActiveTownIndex;
+extern int d2_DialogButtonAction;
 extern int g_100f884;
 extern int gm_GameTime;
-extern double g_662a08;
-extern float g_662910;
+extern double dbl_1_5;
+extern float flt_0_01;
 
 char* __cdecl gm_LookupEntityRecordById(int id);
 char* __cdecl gm_SearchTable67(int id);
@@ -97,12 +97,12 @@ void __cdecl he_RunGebaeudeKaufangebot(char* e)
 				f = 1.6f;
 			}
 		}
-		if ((double)n * ((double)f * (g_662a08 - (double)gm_CalcEntityFavor(*q, *(unsigned short*) (p + 0x25), 1) * g_662910)) < (double) *(int*) (e + 0xb0)) {
+		if ((double)n * ((double)f * (dbl_1_5 - (double)gm_CalcEntityFavor(*q, *(unsigned short*) (p + 0x25), 1) * flt_0_01)) < (double) *(int*) (e + 0xb0)) {
 			io_FormatTextBuffer(buf, 0x17e9, *(unsigned short*) (p + 0x27), p);
 			he_MessageBoxQuickjump(*(int*) (q + 2), -1, buf, 0, 0x5ec, *(int*) (p + 1), -1, 0, 0);
 			cm_RequestChangeBits(*(int*) (p + 1), 0x5a, 2, 2, 0x200);
 			cm_RequestTransferCurrencyNoKill(*(int*) (*(unsigned short*) (p + 0x25) * 0x21c + 0x7f4ca4),
-				*(int*) (q + 2), g_773d75, *(int*) (e + 0xb0));
+				*(int*) (q + 2), gm_ActiveTownIndex, *(int*) (e + 0xb0));
 			if (*(short*) (p + 0x27) == *(short*) (p + 0x25)) {
 				cm_SendSetGebBesitzer(*(int*) (p + 1), *(int*) (q + 2), *(int*) (q + 2));
 			} else {
@@ -123,17 +123,17 @@ void __cdecl he_RunGebaeudeKaufangebot(char* e)
 		if (g_100f884 != *(int*) (*(char**) (e + 0x74) + 8)) {
 			return;
 		}
-		if (g_100f1dc == -1) {
+		if (d2_DialogButtonAction == -1) {
 			return;
 		}
 		q = (unsigned short*) gm_LookupEntityRecordById(*(int*) (e + 0xb4));
 		p = (unsigned char*) gm_SearchTable67(*(int*) (e + 0xac));
-		if (g_100f1dc == 2) {
+		if (d2_DialogButtonAction == 2) {
 			io_FormatTextBuffer(buf, 0x17e9, *(unsigned short*) (p + 0x27), p);
 			he_MessageBoxQuickjump(*(int*) (q + 2), -1, buf, 0, 0x5ec, *(int*) (p + 1), -1, 0, 0);
 			cm_RequestChangeBits(*(int*) (p + 1), 0x5a, 2, 2, 0x200);
 			cm_RequestTransferCurrencyNoKill(*(int*) (*(unsigned short*) (p + 0x25) * 0x21c + 0x7f4ca4),
-				*(int*) (q + 2), g_773d75, *(int*) (e + 0xb0));
+				*(int*) (q + 2), gm_ActiveTownIndex, *(int*) (e + 0xb0));
 			if (*(short*) (p + 0x27) == *(short*) (p + 0x25)) {
 				cm_SendSetGebBesitzer(*(int*) (p + 1), *(int*) (q + 2), *(int*) (q + 2));
 			} else {
@@ -144,7 +144,7 @@ void __cdecl he_RunGebaeudeKaufangebot(char* e)
 			he_FreeAction(e);
 			return;
 		}
-		if (g_100f1dc != 1) {
+		if (d2_DialogButtonAction != 1) {
 			return;
 		}
 		io_FormatTextBuffer(buf, 0x17ea, *(unsigned short*) (p + 0x27), p);

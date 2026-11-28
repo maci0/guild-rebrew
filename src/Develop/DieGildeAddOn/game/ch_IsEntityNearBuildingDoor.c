@@ -1,5 +1,5 @@
 extern unsigned char* lpGebaeudePROT;
-extern char g_10432c0[];
+extern char d3_Universes[];
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
@@ -24,7 +24,7 @@ int __cdecl ch_IsEntityNearBuildingDoor(char* actor, unsigned char* building)
 		if (fig == 0) {
 			return 0;
 		}
-		if (*(char**) (fig + 0x88) == g_10432c0) {
+		if (*(char**) (fig + 0x88) == d3_Universes) {
 			door = d3_FindSceneObject(*(char**) (building + 0x61), 0x100, 0, "dummy_TUER");
 			if (door != 0) {
 				d3_TransformPoint(door, door + 0x4c, pos);

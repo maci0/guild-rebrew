@@ -1,9 +1,9 @@
 extern char g_7e5fc0[];
 extern int main_LoopFlags;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_77250c;
+extern int d2_ScreenSurface;
 extern int g_6a251c;
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 
 
 
@@ -24,8 +24,8 @@ void __cdecl d2_DrawStatusBannerText(void)
 			x = d2_CenterX - 0x12c;
 			y = (int) (d2_UiScale * 575.0f);
 		}
-		d2_DrawWordWrappedText(x, y, 0x258, 0x18, g_77250c, g_7e5fc0, 0x28);
-		if ((*(unsigned int*)&g_6b7fac) >= (unsigned int)(g_6a251c + 0x15e)) {
+		d2_DrawWordWrappedText(x, y, 0x258, 0x18, d2_ScreenSurface, g_7e5fc0, 0x28);
+		if ((*(unsigned int*)&gm_GameTicks) >= (unsigned int)(g_6a251c + 0x15e)) {
 			g_7e5fc0[0] = 0;
 		}
 	}

@@ -36,10 +36,10 @@ void __cdecl d2_DrawTextButton(int slotIndex, int surface)
 	unsigned char color;
 	int i;
 
-	glyphBase = 0; color = 8; slot = (char*)&((D2_CONTROL_TL*)g_1015ea0)[slotIndex];
+	glyphBase = 0; color = 8; slot = (char*)&((D2_CONTROL_TL*)d2_Controls)[slotIndex];
 	flags = *(int*) &((D2_CONTROL_TL*)slot)->flags_1d0;
 	if ((flags & 2) && tp_d2_SelectedControl == 0) {
-		if (!(((char*)&((D2_CONTROL_TL*)g_1015ea0)[d2_CurrentElementId] != slot) && *(int*) &((D2_CONTROL_TL*)slot)->value_038 == 0)
+		if (!(((char*)&((D2_CONTROL_TL*)d2_Controls)[d2_CurrentElementId] != slot) && *(int*) &((D2_CONTROL_TL*)slot)->value_038 == 0)
 		    && *(int*) &((D2_CONTROL_TL*)slot)->disabled == 0) {
 			if (flags & 1) {
 				*(int*) &((D2_CONTROL_TL*)slot)->value_03c = 1;

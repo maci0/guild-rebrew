@@ -3,7 +3,7 @@
 
 extern char* gm_CityEntity;
 extern float g_662914;
-extern float g_6628a8;
+extern float flt_0_0;
 
 float __cdecl gv_CalcDecayReduction(char* o);
 void __cdecl cm_RequestChangeFloat(int id, int kind, float v);
@@ -22,7 +22,7 @@ int __cdecl gv_DecayGravediggerHealth(char* entity)
 		decay = *(float*) (entity + 0x14) - gv_CalcDecayReduction(graveyard) * g_662914;
 		remaining = *(float*) (entity + 0x1c) - decay;
 		cm_RequestChangeFloat(*(int*) (entity + 4), 0x1c, -decay);
-		if (!(remaining <= g_6628a8)) {
+		if (!(remaining <= flt_0_0)) {
 			return 0;
 		}
 	} else {

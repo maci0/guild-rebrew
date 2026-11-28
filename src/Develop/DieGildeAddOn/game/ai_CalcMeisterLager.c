@@ -39,7 +39,7 @@ extern int g_100b0f4;
 extern float g_100b0e0;
 extern int g_100d10c;
 extern float g_100d0f4;
-extern LightState g_100dc20;
+extern LightState ai_MeisterDebugState;
 
 char *__cdecl fcn_00502cd0(int, int, int, int, int, ...);
 void __cdecl gm_TryAutoUpgradeBuildingSlots(char *, char *, int);
@@ -115,7 +115,7 @@ void __cdecl ai_CalcMeisterLager(char *meister)
 		}
 		f = f * 0.5f + 0.25f;
 		if (ai_ResourceCount != 0) {
-			if (g_100b0ac != 0) {
+			if (ai_ProductionGoodsCount != 0) {
 				if (g_100b0f4 * g_100b0e0 * f > (1.0f - f) * g_100d10c * g_100d0f4) {
 					ai_MeisterTradeFernEinkauf(meister, warehouse);
 				} else {
@@ -124,13 +124,13 @@ void __cdecl ai_CalcMeisterLager(char *meister)
 			} else {
 				ai_MeisterTradeFernEinkauf(meister, warehouse);
 			}
-		} else if (g_100b0ac != 0) {
+		} else if (ai_ProductionGoodsCount != 0) {
 			ai_RebalanceCityStock(meister, warehouse);
 		}
-		if (g_100dc20.owner == *(char **) (meister + 0x16c)) {
-			for (i = 0; g_100dc20.count < 4 && i < ai_ResourceCount; i++) {
-				g_100dc20.lights[g_100dc20.count] = g_100b0c0[i];
-				g_100dc20.count++;
+		if (ai_MeisterDebugState.owner == *(char **) (meister + 0x16c)) {
+			for (i = 0; ai_MeisterDebugState.count < 4 && i < ai_ResourceCount; i++) {
+				ai_MeisterDebugState.lights[ai_MeisterDebugState.count] = ai_ResourceRequests[i];
+				ai_MeisterDebugState.count++;
 			}
 		}
 	} else {

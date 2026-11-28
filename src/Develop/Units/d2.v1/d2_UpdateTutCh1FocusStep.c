@@ -9,40 +9,40 @@ struct fsm {
 	int since;
 };
 
-extern int* g_665f08;
-extern volatile int g_6b7fac;
+extern int* d2_TutorialState;
+extern volatile int gm_GameTicks;
 
 int __cdecl d2_UpdateTutCh1FocusStep(int* ev)
 {
 	char* p;
 
 	if (ev[0] == 10) {
-		if (ev[2] == 0 && (*(struct fsm**)&g_665f08)->next == 4) {
-			(*(struct fsm**)&g_665f08)->state = 9;
-			(*(struct fsm**)&g_665f08)->next = 9;
-			(*(struct fsm**)&g_665f08)->since = g_6b7fac;
+		if (ev[2] == 0 && (*(struct fsm**)&d2_TutorialState)->next == 4) {
+			(*(struct fsm**)&d2_TutorialState)->state = 9;
+			(*(struct fsm**)&d2_TutorialState)->next = 9;
+			(*(struct fsm**)&d2_TutorialState)->since = gm_GameTicks;
 			return 1;
 		}
 		if (ev[2] == 1) {
-			if ((*(struct fsm**)&g_665f08)->next == 9) {
-				(*(struct fsm**)&g_665f08)->state = 4;
-				(*(struct fsm**)&g_665f08)->next = 4;
-				(*(struct fsm**)&g_665f08)->since = g_6b7fac;
+			if ((*(struct fsm**)&d2_TutorialState)->next == 9) {
+				(*(struct fsm**)&d2_TutorialState)->state = 4;
+				(*(struct fsm**)&d2_TutorialState)->next = 4;
+				(*(struct fsm**)&d2_TutorialState)->since = gm_GameTicks;
 				return 1;
 			}
-			if ((*(struct fsm**)&g_665f08)->next == 10) {
-				(*(struct fsm**)&g_665f08)->state = 0xb;
-				(*(struct fsm**)&g_665f08)->next = 0xb;
-				(*(struct fsm**)&g_665f08)->since = g_6b7fac;
+			if ((*(struct fsm**)&d2_TutorialState)->next == 10) {
+				(*(struct fsm**)&d2_TutorialState)->state = 0xb;
+				(*(struct fsm**)&d2_TutorialState)->next = 0xb;
+				(*(struct fsm**)&d2_TutorialState)->since = gm_GameTicks;
 				return 1;
 			}
 		}
 	} else if (ev[0] == 7) {
 		p = (char*) ev[1];
-		if (p != 0 && (*(struct fsm**)&g_665f08)->next == 9 && p[2] == 5) {
-			(*(struct fsm**)&g_665f08)->state = 10;
-			(*(struct fsm**)&g_665f08)->next = 10;
-			(*(struct fsm**)&g_665f08)->since = g_6b7fac;
+		if (p != 0 && (*(struct fsm**)&d2_TutorialState)->next == 9 && p[2] == 5) {
+			(*(struct fsm**)&d2_TutorialState)->state = 10;
+			(*(struct fsm**)&d2_TutorialState)->next = 10;
+			(*(struct fsm**)&d2_TutorialState)->since = gm_GameTicks;
 			return 1;
 		}
 	}

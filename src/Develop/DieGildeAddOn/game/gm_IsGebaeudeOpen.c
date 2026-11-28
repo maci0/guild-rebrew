@@ -11,7 +11,7 @@ typedef struct {
 
 extern Range g_6aa0b0[];
 extern unsigned char* lpGebaeudePROT;
-extern unsigned short g_7f4c04;
+extern unsigned short gm_GameTimeHour;
 
 int __cdecl gm_IsGebaeudeOpen(unsigned char* p, int* lo, int* hi)
 {
@@ -27,8 +27,8 @@ int __cdecl gm_IsGebaeudeOpen(unsigned char* p, int* lo, int* hi)
 			if (hi != 0) {
 				*hi = g_6aa0b0[i].hi;
 			}
-			if (g_7f4c04 >= (unsigned short) g_6aa0b0[i].lo &&
-			    g_7f4c04 < (unsigned short) g_6aa0b0[i].hi) {
+			if (gm_GameTimeHour >= (unsigned short) g_6aa0b0[i].lo &&
+			    gm_GameTimeHour < (unsigned short) g_6aa0b0[i].hi) {
 				return 1;
 			}
 			return 0;

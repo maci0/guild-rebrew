@@ -41,29 +41,29 @@ int __cdecl d2_RunCardGameDialog(void)
     unsigned short flags;
 
     previous = -1;
-    entry = (char *)gm_GetEntityTableEntry(g_7f4ca0 + g_774970 * 0x21c);
+    entry = (char *)gm_GetEntityTableEntry(gm_EntitySlotTable + gm_LocalPlayerSlot * 0x21c);
     if (!entry) return 0;
-    money = gm_AmountToUnits(gm_WalkEntityChain(g_774970), g_773d75);
+    money = gm_AmountToUnits(gm_WalkEntityChain(gm_LocalPlayerSlot), gm_ActiveTownIndex);
     if (gm_RandomFloat01() < *(float *)(entry + 0x60) && W(0x7f4c04) > 11 && money >= 10000) {
     *(float *)(entry + 0x60) = *(float *)(entry + 0x60) * F(0x664178) - g_662a3c;
     B(0x14cf71e) = 0;
     if (!d2_OpenPokerDialog()) return 0;
-    if (!gm_InitCardGame(g_7f4ca0 + g_774970 * 0x21c, (void *)0x7765a0)) {
+    if (!gm_InitCardGame(gm_EntitySlotTable + gm_LocalPlayerSlot * 0x21c, (void *)0x7765a0)) {
         d2_DestroyCardGameForm();
         return 0;
     }
     flags = gm_StepCardGameRound();
-    g_100f1dc = -1;
+    d2_DialogButtonAction = -1;
     do {
-        if (g_14ce8e0) g_774654 = 1;
+        if (io_RightButtonReleased) d2_DialogCloseRequested = 1;
         d2_SetElementEnabled(D(0x6ad56c), flags & 1);
         d2_SetElementEnabled(D(0x6ad570), flags & 8);
         d2_SetElementEnabled(D(0x6ad578), flags & 0x10);
         d2_UpdateCardGameBetGauge((flags & 1) && (flags & 0x20));
-        if (g_100f1dc != -1) {
+        if (d2_DialogButtonAction != -1) {
             if (D(0x6ad570) == D(0x67d370)) {
                 io_FormatTextBuffer(prompt, 0x4263);
-                if (d2_ShowModalMessageBox(prompt, 0x101)) g_774654 = 1;
+                if (d2_ShowModalMessageBox(prompt, 0x101)) d2_DialogCloseRequested = 1;
             }
             if (D(0x6ad57c) == D(0x67d370)) {
                 d2_SetFormVisibility(D(0x6ad568), 0);
@@ -80,9 +80,9 @@ int __cdecl d2_RunCardGameDialog(void)
             d2_SetForm(D(0x6ad568), 4);
             if (!D(0x776650)) {
                 strcpy(text, (char *)D(0x14b5c60)); io_AppendText(text);
-                if (g_100f1dc != -1 && D(0x6ad56c) == D(0x67d370)) {
+                if (d2_DialogButtonAction != -1 && D(0x6ad56c) == D(0x67d370)) {
                     choice = d2_GetControlValue(D(0x6ad580));
-                    D(0x77664c) = gm_ConvertUnitsToAmount(choice, g_773d75);
+                    D(0x77664c) = gm_ConvertUnitsToAmount(choice, gm_ActiveTownIndex);
                     flags = gm_StepCardGameRound();
                 }
             } else {
@@ -90,7 +90,7 @@ int __cdecl d2_RunCardGameDialog(void)
                 sprintf(text, (char *)D(0x14b5c5c), choice + 0x30, choice + 0x40);
                 io_AppendText(text);
                 io_FormatTextBuffer(text, 0x4251, D(0x776644)); io_AppendText(text);
-                if (g_100f1dc != -1 && D(0x6ad578) == D(0x67d370)) flags = gm_StepCardGameRound();
+                if (d2_DialogButtonAction != -1 && D(0x6ad578) == D(0x67d370)) flags = gm_StepCardGameRound();
             }
             break;
         case 2:
@@ -106,17 +106,17 @@ int __cdecl d2_RunCardGameDialog(void)
             flags = gm_StepCardGameRound();
             break;
         case 3:
-            if (g_100f1dc != -1) {
+            if (d2_DialogButtonAction != -1) {
                 if (D(0x6ad56c) == D(0x67d370)) {
                     if (!D(0x776650)) {
                         choice = d2_GetControlValue(D(0x6ad580));
-                        D(0x77664c) = gm_ConvertUnitsToAmount(choice, g_773d75);
+                        D(0x77664c) = gm_ConvertUnitsToAmount(choice, gm_ActiveTownIndex);
                     }
                     flags = gm_StepCardGameRound();
                     d2_LayoutCardGameRow(0, 4, (void *)0x7765ac);
                     d2_LayoutCardGameRow(1, 4, (void *)0x7765e0);
                     d2_LayoutCardGameRow(2, 4, (void *)0x776614);
-                } else if (D(0x6ad570) == D(0x67d370)) g_774654 = 1;
+                } else if (D(0x6ad570) == D(0x67d370)) d2_DialogCloseRequested = 1;
             }
             break;
         case 4:
@@ -135,17 +135,17 @@ int __cdecl d2_RunCardGameDialog(void)
             flags = gm_StepCardGameRound();
             break;
         case 5:
-            if (g_100f1dc != -1) {
+            if (d2_DialogButtonAction != -1) {
                 if (D(0x6ad56c) == D(0x67d370)) {
                     if (!D(0x776650)) {
                         choice = d2_GetControlValue(D(0x6ad580));
-                        D(0x77664c) = gm_ConvertUnitsToAmount(choice, g_773d75);
+                        D(0x77664c) = gm_ConvertUnitsToAmount(choice, gm_ActiveTownIndex);
                     }
                     flags = gm_StepCardGameRound();
                     d2_LayoutCardGameRow(0, 4, (void *)0x7765ac);
                     d2_LayoutCardGameRow(1, 4, (void *)0x7765e0);
                     d2_LayoutCardGameRow(2, 4, (void *)0x776614);
-                } else if (D(0x6ad570) == D(0x67d370)) g_774654 = 1;
+                } else if (D(0x6ad570) == D(0x67d370)) d2_DialogCloseRequested = 1;
             }
             break;
         case 6:
@@ -160,7 +160,7 @@ int __cdecl d2_RunCardGameDialog(void)
             D(D(0x1015ea0) + 0x1d0 + D(0x6ad588) * 0x2f4) = 3;
             D(D(0x1015ea0) + 0x5c + D(0x6ad58c) * 0x2f4) = 1;
             D(D(0x1015ea0) + 0x1d0 + D(0x6ad58c) * 0x2f4) = 3;
-            if (g_100f1dc != -1) {
+            if (d2_DialogButtonAction != -1) {
                 int clk = D(0x67d370);
                 if (D(0x6ad588) == clk) {
                     control = D(0x1015ea0) + 0x38 + D(0x6ad588) * 0x2f4;
@@ -190,7 +190,7 @@ int __cdecl d2_RunCardGameDialog(void)
                     d2_LayoutCardGameRow(0, 4, (void *)0x7765ac);
                     d2_LayoutCardGameRow(1, 4, (void *)0x7765e0);
                     d2_LayoutCardGameRow(2, 4, (void *)0x776614);
-                } else if (D(0x6ad570) == clk) g_774654 = 1;
+                } else if (D(0x6ad570) == clk) d2_DialogCloseRequested = 1;
             }
             break;
         case 7:
@@ -210,7 +210,7 @@ int __cdecl d2_RunCardGameDialog(void)
             if (D(0x776630) != -1) sprintf(text, (char *)D(0x14b5c90), D(0x77660c) + 0x30, D(0x77660c) + 0x40);
             else sprintf(text, (char *)D(0x14b5c94), D(0x77660c) + 0x30, D(0x77660c) + 0x40);
             io_AppendText(text);
-            if (g_100f1dc != -1 && D(0x6ad578) == D(0x67d370)) flags = gm_StepCardGameRound();
+            if (d2_DialogButtonAction != -1 && D(0x6ad578) == D(0x67d370)) flags = gm_StepCardGameRound();
             break;
         case 8:
             d2_SetForm(D(0x6ad568), 4);
@@ -225,17 +225,17 @@ int __cdecl d2_RunCardGameDialog(void)
             flags = gm_StepCardGameRound();
             break;
         case 9:
-            if (g_100f1dc != -1) {
+            if (d2_DialogButtonAction != -1) {
                 if (D(0x6ad56c) == D(0x67d370)) {
                     if (!D(0x776650)) {
                         choice = d2_GetControlValue(D(0x6ad580));
-                        D(0x77664c) = gm_ConvertUnitsToAmount(choice, g_773d75);
+                        D(0x77664c) = gm_ConvertUnitsToAmount(choice, gm_ActiveTownIndex);
                     }
                     flags = gm_StepCardGameRound();
                     d2_LayoutCardGameRow(0, 5, (void *)0x7765ac);
                     d2_LayoutCardGameRow(1, 5, (void *)0x7765e0);
                     d2_LayoutCardGameRow(2, 5, (void *)0x776614);
-                } else if (D(0x6ad570) == D(0x67d370)) g_774654 = 1;
+                } else if (D(0x6ad570) == D(0x67d370)) d2_DialogCloseRequested = 1;
             }
             break;
         case 10:
@@ -251,7 +251,7 @@ int __cdecl d2_RunCardGameDialog(void)
             io_AppendText(text);
             break;
         case 11:
-            if (g_100f1dc != -1 && D(0x6ad578) == D(0x67d370)) g_774654 = 1;
+            if (d2_DialogButtonAction != -1 && D(0x6ad578) == D(0x67d370)) d2_DialogCloseRequested = 1;
             break;
         }
     } while (main_RunFrameLoop((void *)d2_RunCardGameDialog, 0x777c7));
@@ -264,7 +264,7 @@ int __cdecl d2_RunCardGameDialog(void)
     io_FormatTextBuffer(text, 0x4239, 0x4238);
     io_AppendText(text);
     while (main_RunFrameLoop((void *)d2_RunCardGameDialog, 0x777c7)) {
-        if (g_14ce8e0 || B(0x14cf701)) g_774654 = 1;
+        if (io_RightButtonReleased || B(0x14cf701)) d2_DialogCloseRequested = 1;
     }
     d2_DestroyForm(dialog);
     return 0;

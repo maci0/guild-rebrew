@@ -78,9 +78,9 @@ void __cdecl d3_UpdateSnowFlakes(Ctx_416540* self, float dt)
 	t0 = self->u * (*(float*) (d3_ActiveCamera + 0x18c + 0 * 4)) + self->v * (*(float*) (d3_ActiveCamera + 0x18c + 8 * 4)) + (*(float*) (d3_ActiveCamera + 0x18c + 4 * 4)) * 0.0f;
 	t1 = self->u * (*(float*) (d3_ActiveCamera + 0x18c + 1 * 4)) + self->v * (*(float*) (d3_ActiveCamera + 0x18c + 9 * 4)) + (*(float*) (d3_ActiveCamera + 0x18c + 5 * 4)) * 0.0f;
 	t2 = self->u * (*(float*) (d3_ActiveCamera + 0x18c + 2 * 4)) + self->v * (*(float*) (d3_ActiveCamera + 0x18c + 10 * 4)) + (*(float*) (d3_ActiveCamera + 0x18c + 6 * 4)) * 0.0f;
-	u0 = ((*(float*) (d3_ActiveCamera + 0x18c + 0 * 4)) + (*(float*) (d3_ActiveCamera + 0x18c + 8 * 4))) * 0.0f - (*(float*) (d3_ActiveCamera + 0x18c + 4 * 4)) * g_6628a0;
-	u1 = ((*(float*) (d3_ActiveCamera + 0x18c + 1 * 4)) + (*(float*) (d3_ActiveCamera + 0x18c + 9 * 4))) * 0.0f - (*(float*) (d3_ActiveCamera + 0x18c + 5 * 4)) * g_6628a0;
-	u2 = ((*(float*) (d3_ActiveCamera + 0x18c + 2 * 4)) + (*(float*) (d3_ActiveCamera + 0x18c + 10 * 4))) * 0.0f - (*(float*) (d3_ActiveCamera + 0x18c + 6 * 4)) * g_6628a0;
+	u0 = ((*(float*) (d3_ActiveCamera + 0x18c + 0 * 4)) + (*(float*) (d3_ActiveCamera + 0x18c + 8 * 4))) * 0.0f - (*(float*) (d3_ActiveCamera + 0x18c + 4 * 4)) * flt_1_0;
+	u1 = ((*(float*) (d3_ActiveCamera + 0x18c + 1 * 4)) + (*(float*) (d3_ActiveCamera + 0x18c + 9 * 4))) * 0.0f - (*(float*) (d3_ActiveCamera + 0x18c + 5 * 4)) * flt_1_0;
+	u2 = ((*(float*) (d3_ActiveCamera + 0x18c + 2 * 4)) + (*(float*) (d3_ActiveCamera + 0x18c + 10 * 4))) * 0.0f - (*(float*) (d3_ActiveCamera + 0x18c + 6 * 4)) * flt_1_0;
 	hw = (float) ((d3_ViewportRight - g_1042570) >> 1);
 	hh = (float) ((d3_ViewportBottom - g_1042574) >> 1);
 	half = (hw > hh) ? hw : hh;

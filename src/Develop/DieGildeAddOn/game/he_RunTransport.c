@@ -10,18 +10,18 @@ typedef struct Slot21c {
 /* SIZE 0x21c */
 
 extern pos14_7f4c00 gm_GameTime;
-extern Slot21c g_7f4ca0[];
+extern Slot21c gm_EntitySlotTable[];
 extern int g_7747cc;
-extern char *g_7746c4;
-extern char *g_7746c8;
-extern unsigned char g_773d75;
+extern char *d2_VisitedBuilding;
+extern char *d2_InteriorBuilding;
+extern unsigned char gm_ActiveTownIndex;
 extern unsigned short *gm_CityEntity;
-extern int *g_7e453c;
-extern int *g_7e4538;
-extern float g_662cf8;
+extern int *d3_SnowEffect;
+extern int *d3_RainEffect;
+extern float flt_100_0;
 extern float g_662938;
 extern float g_6640cc;
-extern double g_6640e8;
+extern double dbl_0_01;
 extern char g_6a63ec[];
 extern char g_6a63dc[];
 
@@ -135,7 +135,7 @@ void __cdecl he_RunTransport(char *e)
 			gm_ResolveEntityById(0, &q, 0, *(int *)(e + 0xac));
 			if ((unsigned short)gm_RandomMod(0x1e) > *(unsigned char *)(q + 0x12)) {
 				io_FormatTextBuffer(buf, 0x1c46, *(unsigned short *)q * 2 + 0x9a8);
-				he_PostEntityMessage(g_7f4ca0[(unsigned short)*(unsigned short *)(e + 8)].id, -1, buf, 0, 0x5ec, 0);
+				he_PostEntityMessage(gm_EntitySlotTable[(unsigned short)*(unsigned short *)(e + 8)].id, -1, buf, 0, 0x5ec, 0);
 				cm_SendKillTransporter(*(int *)(q + 2));
 				*(int *)(e + 0x84) = cm_SendSetHE(-1, e);
 				return;
@@ -151,20 +151,21 @@ void __cdecl he_RunTransport(char *e)
 		gm_ResolveEntityById(0, &q, 0, *(int *)(e + 0xac));
 		r = gm_SearchTable67(*(int *)(q + 0x1c));
 		if (r != 0) {
-			f = (float)gm_GetBuildingTechEffect(r, 2, 1) + g_662cf8;
+			f = (float)gm_GetBuildingTechEffect(r, 2, 1) + flt_100_0;
 		}
-		if (g_7e453c != 0 && *g_7e453c > 0x64) {
+		if (d3_SnowEffect != 0 && *d3_SnowEffect > 0x64) {
 			f = f - g_662938;
 		} else {
-			if (g_7e4538 != 0 && *g_7e4538 > 200) {
+			if (d3_RainEffect != 0 && *d3_RainEffect > 200) {
 				f = f - g_6640cc;
 			}
 		}
 		n = (unsigned short)gm_RandomMod(0x69);
 		if (n > (f * 0.01) * *(unsigned char *)(q + 0x12)) {
-			if ((g_7f4ca0[(unsigned short)*(unsigned short *)(e + 8)].kind == 6 || g_7f4ca0[(unsigned short)*(unsigned short *)(e + 8)].kind == 7) && (*(unsigned char *)(q + 0x20) & 1) == 0) {
+			if ((gm_EntitySlotTable[(unsigned short)*(unsigned short *)(e + 8)].kind == 6 || gm_EntitySlotTable[(unsigned short)*(unsigned short *)(e + 8)].kind == 7) &&
+				(*(unsigned char *)(q + 0x20) & 1) == 0) {
 				io_FormatTextBuffer(buf, 0x1c45);
-				he_PostEntityMessage(g_7f4ca0[(unsigned short)*(unsigned short *)(e + 8)].id, -1, buf, 0, 0x608, 0);
+				he_PostEntityMessage(gm_EntitySlotTable[(unsigned short)*(unsigned short *)(e + 8)].id, -1, buf, 0, 0x608, 0);
 			}
 			gm_ChangeObjektZustand(*(char **)(q + 2), -0xa);
 			*(char *)(e + 0xf1) = 2;
@@ -185,7 +186,7 @@ void __cdecl he_RunTransport(char *e)
 			r = (char *)gm_StartFilteredEntitySearch(1, 1, *(int *)(e + 0xb4));
 			v = *(int *)(r + 1);
 			cm_RequestSysMessage(4, &v);
-			if (g_7746c4 == r || g_7746c8 == r) {
+			if (d2_VisitedBuilding == r || d2_InteriorBuilding == r) {
 				sb_PlayVoice(g_7747cc, g_6a63dc, 1, 0x3f, 0x7f, 0, 0);
 			}
 			*(int *)(e + 0x84) = cm_SendSetHE(3, e);
@@ -206,7 +207,7 @@ void __cdecl he_RunTransport(char *e)
 			break;
 		}
 		r = (char *)gm_StartFilteredEntitySearch(1, 1, *(int *)(e + 0xb4));
-		c = g_773d75;
+		c = gm_ActiveTownIndex;
 		if (*r == 'G') {
 			c = *(unsigned char *)(r + 0x65);
 		}
@@ -226,7 +227,7 @@ void __cdecl he_RunTransport(char *e)
 			goto ret_minus1;
 		}
 		if (gm_IsGebaeudeOpen(q, 0, 0) != 0) {
-			c = g_773d75;
+			c = gm_ActiveTownIndex;
 			if (*q == 'G') {
 				c = *(unsigned char *)(q + 0x65);
 			}

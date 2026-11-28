@@ -22,8 +22,8 @@ typedef struct {
 	char pad8[0x21c - 8];
 } Obj;
 
-extern Rec2d_9a3800 g_9a3800[512];
-extern Pair_99f800 g_99f800[0x800];
+extern Rec2d_9a3800 cm_CrimeRecords[512];
+extern Pair_99f800 cm_CrimeEvidenceLinks[0x800];
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
 char* __cdecl gm_LookupEntityRecordById(int id);
@@ -49,9 +49,10 @@ int __cdecl gs_ClearStraftatenByIds(int target, int count, int* ids)
 	m = 0;
 	if (p != 0) {
 		for (k = 0; k < 768 && m < 8; k++) {
-			if ((((ENTITY_RECORD_VIEW*)g_7f4ca0)[k].entity_type == 6 || ((ENTITY_RECORD_VIEW*)g_7f4ca0)[k].entity_type == 7) && ((ENTITY_RECORD_VIEW*)g_7f4ca0)[k].entity_id != target) {
+			if ((((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[k].entity_type == 6 || ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[k].entity_type == 7) &&
+				((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[k].entity_id != target) {
 				flag[m] = 0;
-				who[m] = (char*) ((Obj*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[k]);
+				who[m] = (char*) ((Obj*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[k]);
 				m++;
 			}
 		}
@@ -60,7 +61,7 @@ int __cdecl gs_ClearStraftatenByIds(int target, int count, int* ids)
 		id = ids[i];
 		found = 0;
 		for (j = 0; j < 512; j++) {
-			if (((Order*)g_9a3800)[j].id == id) {
+			if (((Order*)cm_CrimeRecords)[j].id == id) {
 				found = 1;
 				break;
 			}
@@ -68,7 +69,7 @@ int __cdecl gs_ClearStraftatenByIds(int target, int count, int* ids)
 		if (found) {
 			for (k = 0; k < 2048; k++) {
 				for (r = 0; r < m; r++) {
-					if (g_99f800[k].owner == *(int*) (who[r] + 4) && g_99f800[k].key == id) {
+					if (cm_CrimeEvidenceLinks[k].owner == *(int*) (who[r] + 4) && cm_CrimeEvidenceLinks[k].key == id) {
 						flag[r] = 1;
 					}
 				}

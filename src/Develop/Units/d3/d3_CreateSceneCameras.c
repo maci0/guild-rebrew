@@ -1,7 +1,7 @@
 extern int g_6b8484;
-extern char* g_6b8478;
-extern char* g_6b847c;
-extern char* g_6b8480;
+extern char* d3_TopViewCamera;
+extern char* d3_FrontViewCamera;
+extern char* d3_SideViewCamera;
 extern char g_6b8004;
 extern char s_67a9ac[];
 extern char s_67a9c4[];
@@ -21,20 +21,20 @@ void __cdecl d3_CreateSceneCameras(void)
 	d3_SetObjectEulerRotation((*(char**)&g_6b8484), 0.0f, 0.0f, 0.0f);
 	d3_RegisterSceneObjectTl((*(char**)&g_6b8484));
 	if (g_6b8004 != 0) {
-		g_6b8478 = d3_SpawnObject(3, s_67a9c4);
-		d3_SetNodePositionXYZ(g_6b8478, 0.0f, 256.0f, 0.0f);
-		d3_SetObjectEulerRotation(g_6b8478, -1.5707964f, 0.0f, 0.0f);
-		d3_RegisterSceneObjectTl(g_6b8478);
-		g_6b8478[0x214] &= 0x7f;
-		g_6b847c = d3_SpawnObject(3, s_67a9bc);
-		d3_SetNodePositionXYZ(g_6b847c, 0.0f, 0.0f, -256.0f);
-		d3_SetObjectEulerRotation(g_6b847c, 0.0f, 0.0f, 0.0f);
-		d3_RegisterSceneObjectTl(g_6b847c);
-		g_6b847c[0x214] &= 0x7f;
-		g_6b8480 = d3_SpawnObject(3, s_67a9b4);
-		d3_SetNodePositionXYZ(g_6b8480, 256.0f, 0.0f, 0.0f);
-		d3_SetObjectEulerRotation(g_6b8480, 0.0f, 1.5707964f, 0.0f);
-		d3_RegisterSceneObjectTl(g_6b8480);
-		g_6b8480[0x214] &= 0x7f;
+		d3_TopViewCamera = d3_SpawnObject(3, s_67a9c4);
+		d3_SetNodePositionXYZ(d3_TopViewCamera, 0.0f, 256.0f, 0.0f);
+		d3_SetObjectEulerRotation(d3_TopViewCamera, -1.5707964f, 0.0f, 0.0f);
+		d3_RegisterSceneObjectTl(d3_TopViewCamera);
+		d3_TopViewCamera[0x214] &= 0x7f;
+		d3_FrontViewCamera = d3_SpawnObject(3, s_67a9bc);
+		d3_SetNodePositionXYZ(d3_FrontViewCamera, 0.0f, 0.0f, -256.0f);
+		d3_SetObjectEulerRotation(d3_FrontViewCamera, 0.0f, 0.0f, 0.0f);
+		d3_RegisterSceneObjectTl(d3_FrontViewCamera);
+		d3_FrontViewCamera[0x214] &= 0x7f;
+		d3_SideViewCamera = d3_SpawnObject(3, s_67a9b4);
+		d3_SetNodePositionXYZ(d3_SideViewCamera, 256.0f, 0.0f, 0.0f);
+		d3_SetObjectEulerRotation(d3_SideViewCamera, 0.0f, 1.5707964f, 0.0f);
+		d3_RegisterSceneObjectTl(d3_SideViewCamera);
+		d3_SideViewCamera[0x214] &= 0x7f;
 	}
 }

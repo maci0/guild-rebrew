@@ -1,7 +1,7 @@
 
 
 
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 void* __cdecl gm_LookupEntityRecordById(int);
 unsigned short __cdecl gm_RandomMod(int);
@@ -27,7 +27,7 @@ int __cdecl gm_HandleMsg0aGrantBonus(void* request)
 	n = (int) (((double) gm_WalkEntityChain(*(unsigned short*) p) * d) *
 	    0.0125);
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7, n);
-	cm_RequestTransferCurrencyNoKill(*(int*) request, -1, (*(char*)&g_773d75), n);
+	cm_RequestTransferCurrencyNoKill(*(int*) request, -1, (*(char*)&gm_ActiveTownIndex), n);
 	he_PostEntityMessage(*(int*) ((char*) p + 4), *(int*) ((char*) p + 4), buf,
 	    (unsigned) strlen(buf) > 0x100, 0x603, 0);
 	return 0;

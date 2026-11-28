@@ -11,7 +11,7 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_664158;
-extern int g_773d48;
+extern int gm_QueuedCommandCount;
 extern float g_696444[];
 
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -64,7 +64,7 @@ void __cdecl gm_UpdateEntityPregnancy(char* entity)
 	ent = gm_LookupEntityRecordById(*(unsigned int*) (entity + 0x5c));
 	if (*(float*) (entity + 0x7c) > 1.0f) {
 		cm_RequestChangeFloat(*(unsigned int*) (entity + 4), 0x7c, gm_RandomFloat01() * -0.5f - *(float*) (entity + 0x7c));
-		g_773d48++;
+		gm_QueuedCommandCount++;
 		if (ent == 0) {
 			return;
 		}
@@ -151,7 +151,7 @@ void __cdecl gm_UpdateEntityPregnancy(char* entity)
 			cm_AppendPacketFieldDelta(1, 1, 2, &mode);
 			cm_RequestChangeAttribute();
 			cm_EnqueueStagedPacket(pkt);
-			g_773d48++;
+			gm_QueuedCommandCount++;
 			return;
 		}
 	}
@@ -191,7 +191,7 @@ void __cdecl gm_UpdateEntityPregnancy(char* entity)
 		}
 		f = (gm_RandomFloat01() + 1.0f) * g_696444[count];
 		cm_RequestChangeFloat(*(unsigned int*) (entity + 4), 0x7c, f);
-		g_773d48++;
+		gm_QueuedCommandCount++;
 		return;
 	}
 }

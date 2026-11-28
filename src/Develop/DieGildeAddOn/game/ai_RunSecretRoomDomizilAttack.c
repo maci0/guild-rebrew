@@ -3,10 +3,10 @@
 
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern unsigned short g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
-extern unsigned char g_773d75;
+extern unsigned short gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
+extern unsigned char gm_ActiveTownIndex;
 
 char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
@@ -32,16 +32,16 @@ int __cdecl ai_RunSecretRoomDomizilAttack(char* actor, char* ctx, char* entry)
 	if (p == 0) {
 		return 0;
 	}
-	cm_RequestTransferCurrencyNoKill(-1, *(int*) (actor + 4), (*(char*)&g_773d75), *(int*) (entry + 8));
+	cm_RequestTransferCurrencyNoKill(-1, *(int*) (actor + 4), (*(char*)&gm_ActiveTownIndex), *(int*) (entry + 8));
 	gm_ModifyHealth(*(int*) (actor + 4), -16);
 	memset(msg, 0, sizeof(msg));
 	msg[4] = (char) 0x99;
 	*(int*) (msg + 8) = *(int*) (actor + 4);
 	*(int*) (msg + 0xc) = *(int*) (ctx + 0xc);
 	*(int*) (msg + 0x28) = (*(int*)&gm_GameTime);
-	*(int*) (msg + 0x2c) = (*(int*)&g_7f4c04);
-	*(int*) (msg + 0x30) = g_7f4c08;
-	*(short*) (msg + 0x34) = g_7f4c0c;
+	*(int*) (msg + 0x2c) = (*(int*)&gm_GameTimeHour);
+	*(int*) (msg + 0x30) = gm_GameTimeSliceDword;
+	*(short*) (msg + 0x34) = gm_GameTimeTailWord;
 	msg[0x36] = 2;
 	*(int*) (msg + 0x60) = *(int*) (p + 4);
 	*(int*) (msg + 0x64) = -1;

@@ -1,5 +1,5 @@
-extern char g_774a80[];
-extern char g_6ab558[];
+extern char io_MessageFormatBuf[];
+extern char he_DomizilNotifyKey[];
 
 
 
@@ -12,9 +12,9 @@ void __cdecl he_NotifyAlchemistDiscovery(void* entity, void* actor, void* buildi
 
 	kind = *(char*) ((char*) entity + 2);
 	if (kind == 6 || kind == 7) {
-		io_FormatTextBuffer(g_774a80, 0x407c, (char*) actor + 0x30, (char*) actor + 0x40, building,
+		io_FormatTextBuffer(io_MessageFormatBuf, 0x407c, (char*) actor + 0x30, (char*) actor + 0x40, building,
 		    2 * *(unsigned short*) record + 0x9a8);
-		he_MessageBoxQuickjump(*(int*) ((char*) entity + 4), -1, g_774a80, 1, 0x5ec,
-		    *(int*) ((char*) building + 1), *(int*) ((char*) record + 2), 0, g_6ab558);
+		he_MessageBoxQuickjump(*(int*) ((char*) entity + 4), -1, io_MessageFormatBuf, 1, 0x5ec,
+		    *(int*) ((char*) building + 1), *(int*) ((char*) record + 2), 0, he_DomizilNotifyKey);
 	}
 }

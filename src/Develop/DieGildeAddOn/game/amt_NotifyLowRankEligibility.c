@@ -1,5 +1,5 @@
-char g_68deb8[] = "%s$A";
-extern char g_68deb8[];
+char str_fmt_s_dollar_A[] = "%s$A";
+extern char str_fmt_s_dollar_A[];
 
 
 
@@ -27,7 +27,7 @@ void __cdecl amt_NotifyLowRankEligibility(void* entity)
 	io_FormatTextBuffer(buf, 0x13ac);
 	if (n > 0) {
 		for (i = 0; i < n; i++) {
-			io_FormatTextBuffer(buf + strlen(buf), (int) g_68deb8,
+			io_FormatTextBuffer(buf + strlen(buf), (int) str_fmt_s_dollar_A,
 			    *(int*) (items + i * 0xc) + 0x253);
 		}
 	}

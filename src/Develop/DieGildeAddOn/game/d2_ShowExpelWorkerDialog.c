@@ -21,11 +21,11 @@ typedef struct {
 
 
 
-extern const int g_666018;
+extern const int gm_TargetPersonTypeMask;
 extern int g_66601c;
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 
 
 extern char* __cdecl gm_LookupEntityRecordById(int);
@@ -93,8 +93,8 @@ unsigned int __cdecl d2_ShowExpelWorkerDialog(char* entity, int* action)
 			goto fail60;
 		cm_RequestModifyHealth(*(int*) (entity + 4), -5);
 		cm_RequestChangeBits(*(int*) (other + 4), 0x1c8, 4, 0x80, 0);
-		if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (rec + 0x27)].entity_type == 6 ||
-		    ((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (rec + 0x27)].entity_type == 7) {
+		if (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (rec + 0x27)].entity_type == 6 ||
+		    ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (rec + 0x27)].entity_type == 7) {
 			io_FormatTextBuffer(text, 0x1ddf, *(unsigned short*) entity, rec, *(unsigned short*) ent);
 			he_PostEntityMessage(*(unsigned short*) (rec + 0x27), *(unsigned short*) (rec + 0x27),
 				text, 0, 0x5fb, (char*) 0x6a59fc);
@@ -119,7 +119,7 @@ unsigned int __cdecl d2_ShowExpelWorkerDialog(char* entity, int* action)
 	ret = 0;
 	found.size = 0x410;
 	found.kind = 6;
-	found.cd_lo = g_666018;
+	found.cd_lo = gm_TargetPersonTypeMask;
 	found.cd_hi = g_66601c;
 	found.a = 0;
 	io_FormatTextBuffer(name, 0x9b);
@@ -128,7 +128,7 @@ unsigned int __cdecl d2_ShowExpelWorkerDialog(char* entity, int* action)
 		return 0;
 	if (*(unsigned short*) (rec + 0x27) == 0xffff)
 		return 0;
-	state_ptr = (char*) ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (rec + 0x27)]);
+	state_ptr = (char*) ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (rec + 0x27)]);
 	j = d2_LoadForm(0, 0, (char*) 0x6acd8c);
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(j);
@@ -136,9 +136,9 @@ unsigned int __cdecl d2_ShowExpelWorkerDialog(char* entity, int* action)
 	i = io_AppendText(0x1ddd, 5, *(unsigned short*) state_ptr, rec);
 	kid = d2_GetWindowListItem(j, 1, i);
 	i = d2_GetWindowListItem(j, 1, i + 1);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == kid) {
 				if (d2_CheckActionBlocker(entity, 5) != 0) {
 					cm_RequestModifyHealth(*(int*) (entity + 4), -5);
@@ -152,10 +152,10 @@ unsigned int __cdecl d2_ShowExpelWorkerDialog(char* entity, int* action)
 					ent = 0;
 					count = 0x300;
 					do {
-						if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[r].entity_index != 0xffff &&
-						    (*(char**)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[r].ptr_16c) == rec &&
-						    ((ENTITY_RECORD_VIEW*)g_7f4ca0)[r].entity_type == 0) {
-							ent = (char*) ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[r]);
+						if (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[r].entity_index != 0xffff &&
+						    (*(char**)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[r].ptr_16c) == rec &&
+						    ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[r].entity_type == 0) {
+							ent = (char*) ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[r]);
 							break;
 						}
 						count -= 1;
@@ -173,14 +173,14 @@ unsigned int __cdecl d2_ShowExpelWorkerDialog(char* entity, int* action)
 						cm_RequestKillSpieler(*(int*) (ent + 4), 1);
 					}
 					ret = 0x81;
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				}
 			} else if (d2_CurrentElementId == i) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
-		if (g_14ce8e0 != 0)
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0)
+			d2_DialogCloseRequested = 1;
 	} while (main_RunFrameLoop((int) d2_ShowExpelWorkerDialog, 0x657c7) != 0);
 	d2_DestroyForm(j);
 	return ret;

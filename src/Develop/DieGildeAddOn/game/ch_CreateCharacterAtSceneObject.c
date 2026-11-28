@@ -21,7 +21,7 @@ typedef struct Figure {
 	unsigned char state;
 } Figure;
 
-extern float g_662d40[3];
+extern float d3_UnitAxisVectors[3];
 extern int g_14abee0[];
 
 char* __cdecl d3_FindSceneObject(char*, int, char*, char*);
@@ -54,8 +54,8 @@ Figure* __cdecl ch_CreateCharacterAtSceneObject(char* res, char* kind, int anim)
 		pos[0] = 0.0f;
 		pos[1] = 0.0f;
 		pos[2] = 0.0f;
-		d3_TransformDirection(h, ((char*)g_662d40), at);
-		pos[1] = d3_SignedPlanarAngle(((char*)g_662d40), at);
+		d3_TransformDirection(h, ((char*)d3_UnitAxisVectors), at);
+		pos[1] = d3_SignedPlanarAngle(((char*)d3_UnitAxisVectors), at);
 		d3_SetObjectRotation(f->model, pos);
 		ch_PlaceOnGround(f, 0);
 		f->model->owner = f;

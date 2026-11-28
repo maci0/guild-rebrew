@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern void* g_6b7fdc; extern float g_662c6c; extern float g_6628a4;
+extern void* vfs_RootDir; extern float g_662c6c; extern float g_6628a4;
 
 void* __cdecl vfs_Tfopen(const char*, const char*, void*);
 int __cdecl vfs_ReadData(char*, int, int, void*);
@@ -63,7 +63,7 @@ char* __cdecl d3_LoadBinaryAnimStream(char* path, char* name, char a2)
 	v14 = 0;
 	v13 = 1;
 	animation = 0;
-	stream = (char*) vfs_Tfopen(path, (char*) 0x6750e8, g_6b7fdc);
+	stream = (char*) vfs_Tfopen(path, (char*) 0x6750e8, vfs_RootDir);
 	v31 = (int) stream;
 	if (stream != 0) {
 		vfs_ReadData(v10, 4, 1, stream);

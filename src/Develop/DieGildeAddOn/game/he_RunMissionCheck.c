@@ -26,8 +26,8 @@ struct req {
 	char pad4[0x78];
 };
 
-extern signed char g_6a3440;
-extern char g_10069a0[];
+extern signed char gm_SelectedMissionIndex;
+extern char gm_MissionJobs[];
 
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
@@ -45,12 +45,12 @@ void __cdecl he_RunMissionCheck(char* u)
 	int i;
 	int r;
 
-	if ((*(char*)&g_6a3440) <= -1) {
+	if ((*(char*)&gm_SelectedMissionIndex) <= -1) {
 		he_FreeAction(u);
 		return;
 	}
 	for (i = 0; i < 128; i++) {
-		if (((rec24*)g_10069a0)[i].f0 != 0 && ((rec24*)g_10069a0)[i].f4 == ((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id) {
+		if (((rec24*)gm_MissionJobs)[i].f0 != 0 && ((rec24*)gm_MissionJobs)[i].f4 == ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (u + 8)].entity_id) {
 			break;
 		}
 	}
@@ -60,8 +60,8 @@ void __cdecl he_RunMissionCheck(char* u)
 	}
 	switch (*(int*) (u + 0x70)) {
 	case 0:
-		if (((rec24*)g_10069a0)[i].f20 == 0 && (unsigned short) gm_GameTime.b < 0x16 && gm_CheckMissionCondition(&((rec24*)g_10069a0)[i]) != 0) {
-			((rec24*)g_10069a0)[i].f20 = 1;
+		if (((rec24*)gm_MissionJobs)[i].f20 == 0 && (unsigned short) gm_GameTime.b < 0x16 && gm_CheckMissionCondition(&((rec24*)gm_MissionJobs)[i]) != 0) {
+			((rec24*)gm_MissionJobs)[i].f20 = 1;
 			gm_AddTime((pos14_7f4c00*) (u + 0x52), 0, 1, 0);
 			*(int*) (u + 0x70) = 1;
 			return;
@@ -70,8 +70,8 @@ void __cdecl he_RunMissionCheck(char* u)
 		return;
 	case 1:
 		gm_AddTime((pos14_7f4c00*) (u + 0x52), 0, 1, 0);
-		if (((rec24*)g_10069a0)[i].f20 == 1 && (unsigned short) gm_GameTime.b < 0x16 && g_6a3760 == -1) {
-			q.who = ((rec24*)g_10069a0)[i].f4;
+		if (((rec24*)gm_MissionJobs)[i].f20 == 1 && (unsigned short) gm_GameTime.b < 0x16 && g_6a3760 == -1) {
+			q.who = ((rec24*)gm_MissionJobs)[i].f4;
 			*(int*) (u + 0xac) = cm_RequestSysMessage(8, &q);
 			*(int*) (u + 0x70) = 2;
 			return;

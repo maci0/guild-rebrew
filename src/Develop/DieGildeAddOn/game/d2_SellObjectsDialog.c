@@ -10,7 +10,7 @@
 
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
 
@@ -58,6 +58,6 @@ void __cdecl d2_SellObjectsDialog(int n, char** items)
 		for (i = 0; i < n; i++) {
 			gm_RemoveClientEntityLink(items[i]);
 		}
-		cm_RequestMoveCredits(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])->entity_id, -1, (*(char*)&g_773d75), price);
+		cm_RequestMoveCredits(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[gm_LocalPlayerSlot])->entity_id, -1, (*(char*)&gm_ActiveTownIndex), price);
 	}
 }

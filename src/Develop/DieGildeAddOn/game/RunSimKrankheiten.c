@@ -23,10 +23,10 @@ typedef struct {
 } Player;
 
 extern pos14_7f4c00 gm_GameTime;
-extern Player g_7f4ca0[];
+extern Player gm_EntitySlotTable[];
 extern unsigned char* lpGebaeudePROT;
-extern char g_6b5c60[];
-extern float g_662cf8;
+extern char str_empty[];
+extern float flt_100_0;
 extern float g_665370;
 extern float g_66430c;
 extern float g_6628ac;
@@ -99,10 +99,10 @@ void __cdecl RunSimKrankheiten(char* s)
 	idx = *(int*) (s + 0xac);
 	count = 12;
 	do {
-		p = &g_7f4ca0[idx];
+		p = &gm_EntitySlotTable[idx];
 		if (he_IsEntityEligibleForIllness((unsigned short*) p) != 0) {
-			f = gm_RandomFloat01() * g_662cf8;
-			home = g_7f4ca0[idx].home;
+			f = gm_RandomFloat01() * flt_100_0;
+			home = gm_EntitySlotTable[idx].home;
 			y = 0.0f;
 			x = 0.0f;
 			if (home != 0) {
@@ -117,15 +117,15 @@ void __cdecl RunSimKrankheiten(char* s)
 			m = gm_HasActiveSpecialObject((char*) p, 0x2b3) != 0 ? y * 0.75f : y;
 			if (f < m - x) {
 				if (gm_ApplyRandomDisease((char*) p, &r, &g) != 0) {
-					home2 = g_7f4ca0[idx].home2;
+					home2 = gm_EntitySlotTable[idx].home2;
 					if (home2 != 0 && *(unsigned short*) (home2 + 0x27) != 0xffff
-					    && (q = (unsigned char*) &g_7f4ca0[*(unsigned short*) (home2 + 0x27)]) != 0) {
+					    && (q = (unsigned char*) &gm_EntitySlotTable[*(unsigned short*) (home2 + 0x27)]) != 0) {
 						he_ResolveAccidentOutcome(s, (char*) p, (char*) q, home2, r, g);
 					} else {
 						if (g < gm_GetEntityHealth((char*) p)
-						    && (g_7f4ca0[idx].type == 6 || g_7f4ca0[idx].type == 7)) {
+						    && (gm_EntitySlotTable[idx].type == 6 || gm_EntitySlotTable[idx].type == 7)) {
 							io_FormatTextBuffer(buf, (char*) 0x163c, (char*) (r + 0x1632));
-							he_PostEntityMessage(g_7f4ca0[idx].handle, -1, buf, 0, 0x5f7, g_6b5c60);
+							he_PostEntityMessage(gm_EntitySlotTable[idx].handle, -1, buf, 0, 0x5f7, str_empty);
 						}
 					}
 				}

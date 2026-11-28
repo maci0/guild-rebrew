@@ -3,7 +3,7 @@
 #pragma optimize("y", off)
 #include <stdlib.h>
 #include <string.h>
-extern char g_14ce820[]; extern void * g_6b5de0;
+extern char d3d_PresentParams[]; extern void * g_6b5de0;
 typedef int (__cdecl *INDEXFN)(int count, int ptr);
 typedef int (__stdcall *VTBLFN)(void *self, int a, int b, int c, int d,
 	void *rec, int *out);
@@ -76,7 +76,7 @@ char __cdecl d3_CreateGraphicsDevice(int hwnd, INDEXFN indexCallback, unsigned c
 	pos[2] = entry[2];
 	pos[3] = entry[3];
 	*(int *) 0x14ce828 = pos[3];
-	*(int *) &g_14ce820 = pos[0];
+	*(int *) &d3d_PresentParams = pos[0];
 	*(int *) 0x14ce824 = pos[1];
 	*(int *) 0x14ce844 = pos[2];
 	*(int *) 0x14ce840 = pos[2] != 0;
@@ -95,26 +95,26 @@ char __cdecl d3_CreateGraphicsDevice(int hwnd, INDEXFN indexCallback, unsigned c
 	if (ok) {
 		(*(VTBLFN *) (*(int *) (*(int *) 0x6b5ddc) + 0x3c))(
 			(void *) *(int *) 0x6b5ddc, slot, 1, hwnd, 0x50,
-			(void *) &g_14ce820, (int *) &g_6b5de0);
+			(void *) &d3d_PresentParams, (int *) &g_6b5de0);
 		if (*(int *) &g_6b5de0)
 			goto success;
 		if (triple_buffer) {
 			(*(VTBLFN *) (*(int *) (*(int *) 0x6b5ddc) + 0x3c))(
 				(void *) *(int *) 0x6b5ddc, slot, 1, hwnd, 0x50,
-				(void *) &g_14ce820, (int *) &g_6b5de0);
+				(void *) &d3d_PresentParams, (int *) &g_6b5de0);
 			if (*(int *) &g_6b5de0)
 				goto success;
 		}
 		*(int *) 0x14ce82c = triple_buffer + 1;
 		(*(VTBLFN *) (*(int *) (*(int *) 0x6b5ddc) + 0x3c))(
 			(void *) *(int *) 0x6b5ddc, slot, 1, hwnd, 0x40,
-			(void *) &g_14ce820, (int *) &g_6b5de0);
+			(void *) &d3d_PresentParams, (int *) &g_6b5de0);
 		if (*(int *) &g_6b5de0)
 			goto success;
 		if (triple_buffer) {
 			(*(VTBLFN *) (*(int *) (*(int *) 0x6b5ddc) + 0x3c))(
 				(void *) *(int *) 0x6b5ddc, slot, 1, hwnd, 0x40,
-				(void *) &g_14ce820, (int *) &g_6b5de0);
+				(void *) &d3d_PresentParams, (int *) &g_6b5de0);
 			if (*(int *) &g_6b5de0)
 				goto success;
 		}
@@ -122,14 +122,14 @@ char __cdecl d3_CreateGraphicsDevice(int hwnd, INDEXFN indexCallback, unsigned c
 	*(int *) 0x14ce82c = triple_buffer + 1;
 	(*(VTBLFN *) (*(int *) (*(int *) 0x6b5ddc) + 0x3c))(
 		(void *) *(int *) 0x6b5ddc, slot, 1, hwnd, 0x20,
-		(void *) &g_14ce820, (int *) &g_6b5de0);
+		(void *) &d3d_PresentParams, (int *) &g_6b5de0);
 	if (*(int *) &g_6b5de0)
 		goto success;
 	if (!triple_buffer)
 		goto done;
 	(*(VTBLFN *) (*(int *) (*(int *) 0x6b5ddc) + 0x3c))(
 		(void *) *(int *) 0x6b5ddc, slot, 1, hwnd, 0x20,
-		(void *) &g_14ce820, (int *) &g_6b5de0);
+		(void *) &d3d_PresentParams, (int *) &g_6b5de0);
 	if (!*(int *) &g_6b5de0)
 		goto done;
 success:

@@ -13,8 +13,8 @@
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int d2_CurrentWindowId;
-extern int g_100f1dc;
-extern int g_14ce8e0;
+extern int d2_DialogButtonAction;
+extern int io_RightButtonReleased;
 extern int d2_CurrentElementId;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
@@ -59,13 +59,13 @@ void __cdecl d2_RunDomizilKabinettDialog(int unused, char* p)
 	ok = d2_GetWindowListItem(h, 2, s);
 	cancel = d2_GetWindowListItem(h, 2, s + 1);
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
-		} else if (g_100f1dc != -1) {
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
+		} else if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == ok) {
-				if (d2_CheckActionBlocker(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), b) == 1) {
+				if (d2_CheckActionBlocker(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot]), b) == 1) {
 					v = 0;
-					gm_ModifyHealth(((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, -b);
+					gm_ModifyHealth(((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id, -b);
 					cm_BeginPacketFieldDelta(p, *(int*) (p + 2));
 					cm_AppendPacketFieldDelta(4, 1, 0x1c, &v);
 					cm_AppendPacketFieldDelta(4, 1, 0x20, &v);
@@ -73,10 +73,10 @@ void __cdecl d2_RunDomizilKabinettDialog(int unused, char* p)
 					while (id != -1 && cm_GetCommandStatus(id) == 0) {
 						main_RunFrameLoop(0, 0x20007);
 					}
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				}
 			} else if (d2_CurrentElementId == cancel) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	} while (main_RunFrameLoop(d2_RunDomizilKabinettDialog, 0x677c7) != 0);

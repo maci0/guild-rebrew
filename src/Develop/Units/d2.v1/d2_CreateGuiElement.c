@@ -1,6 +1,6 @@
 #include "Develop/Units/d2.v1/gold_gui.h"
 extern GuiEnt* g_00f8f080;
-extern char* g_772500; extern int d2_ResourceOffset;
+extern char* d2_FileObjTable; extern int d2_ResourceOffset;
 int __cdecl d2_AllocGuiElement(void);
 void __cdecl d2_ResolveResourceData(int, void**, int*);
 void __cdecl d2_AddRefcount(int);
@@ -26,7 +26,7 @@ int __cdecl d2_CreateGuiElement(int x, int y, int type)
 	d2_ResolveResourceData(type, &data, &type);
 	s->data = data;
 	s->f08 = type;
-	s->kind = *(int*) (g_772500 + type * 0x54 + 0x3c);
+	s->kind = *(int*) (d2_FileObjTable + type * 0x54 + 0x3c);
 	s->x = (short) x;
 	s->y = (short) y;
 	s->f1e = *(short*) 0x6f0458;

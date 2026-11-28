@@ -17,23 +17,23 @@ typedef struct {
 	char pad10[0x3cc - 0x10];
 } Screen;
 
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 extern int d2_CurrentWindowId;
-extern char* g_77255c;
-extern int g_100f1dc;
-extern int g_14ce8e0;
+extern char* d2_CurrentWindow;
+extern int d2_DialogButtonAction;
+extern int io_RightButtonReleased;
 extern int d2_CurrentElementId;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int g_14b546c;
 extern int g_14b5470;
 extern int g_14b59e0;
 extern char* lpObjektePROT;
-extern float g_662cf8;
+extern float flt_100_0;
 extern float g_66413c;
 
 #include "Develop/client_types.h"
 #include "Develop/Units/d2.v1/d2_window_view.h"
-extern List8c_102cbc8 g_102cbc8[];
+extern List8c_102cbc8 d2_RadioGroupItems[];
 
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -96,8 +96,8 @@ void __cdecl fcn_00585030(int alchemyObjectArg)
 	data = ahm_GetWorkshopOwner((unsigned char*) alchemyObjectArg);
 	records = *(int**) (e + 0x65);
 	prev = he_GetActionProgress(e, &owner, &frac, 0);
-	stamp = g_6b7fac;
-	g_100f1dc = -1;
+	stamp = gm_GameTicks;
+	d2_DialogButtonAction = -1;
 	win = d2_LoadForm(0, 0, "Locations\\Domizil\\Alchemistry2");
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(win);
@@ -111,8 +111,8 @@ void __cdecl fcn_00585030(int alchemyObjectArg)
 		d2_SetForm(win, 2);
 		io_AppendText(0x4051, 0x182);
 		do {
-			if (g_14ce8e0 != 0) {
-				g_774654 = 1;
+			if (io_RightButtonReleased != 0) {
+				d2_DialogCloseRequested = 1;
 			}
 		} while (main_RunFrameLoop((void*) fcn_00585030, 0x677c7) != 0);
 		d2_DestroyForm(win);
@@ -136,12 +136,12 @@ void __cdecl fcn_00585030(int alchemyObjectArg)
 		y = (count / 2) * 0x50 + 10;
 		item = d2_AddElementToWindow(x, y, src[0] + 0xdf, wnd);
 		*ids = item;
-		((D2_CONTROL_TL*) g_1015ea0)[item].value_05c = 1;
-		*(int*) (&((D2_CONTROL_TL*) g_1015ea0)[item].associated_object) = (int) ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[src[0]]);
+		((D2_CONTROL_TL*) d2_Controls)[item].value_05c = 1;
+		*(int*) (&((D2_CONTROL_TL*) d2_Controls)[item].associated_object) = (int) ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[src[0]]);
 		d2_AddToRadioGroup(list, item);
 		io_FormatTextBuffer(buf, (char*) 0x679060, src[0] * 2 + 0x9a8);
 		item = d2_ShowTxt(x + 0x3c, y + 5, buf, wnd);
-		((D2_CONTROL_TL*) g_1015ea0)[item].width = ((D2_WIN*)g_1015f40)[wnd].width / 2 - 10;
+		((D2_CONTROL_TL*) d2_Controls)[item].width = ((D2_WIN*)d2_Windows)[wnd].width / 2 - 10;
 		d2_SetElementFont(item, 0x54);
 		d2_DrawSegmentedBar(x + 0x3c, y + 0x19, (int) (*(float*) (src + 1) * g_66413c), 0x4df);
 		count++;
@@ -152,7 +152,7 @@ void __cdecl fcn_00585030(int alchemyObjectArg)
 		d2_SetForm(win, 4);
 		io_AppendText(0x6811b0);
 		if (sel != 0) {
-			dlg = d2_AddWindowValueGauge((((Screen*) g_77255c)->xc - 0x12c) / 2, 0x12, 0x12c, 0, 0x64, 0x75, 0x42, d2_CurrentWindowId);
+			dlg = d2_AddWindowValueGauge((((Screen*) d2_CurrentWindow)->xc - 0x12c) / 2, 0x12, 0x12c, 0, 0x64, 0x75, 0x42, d2_CurrentWindowId);
 			if (sel == 1) {
 				io_FormatTextBuffer(buf, (char*) 0x404b);
 			} else if (sel == 2) {
@@ -161,17 +161,17 @@ void __cdecl fcn_00585030(int alchemyObjectArg)
 				io_FormatTextBuffer(buf, (char*) 0x404d, owner + 0x4172);
 			}
 			item = d2_ShowTxt(0, 0, buf, d2_CurrentWindowId);
-			((D2_CONTROL_TL*) g_1015ea0)[item].width = ((Screen*) g_77255c)->xc;
-			((D2_CONTROL_TL*) g_1015ea0)[item].value_06c = 1;
+			((D2_CONTROL_TL*) d2_Controls)[item].width = ((Screen*) d2_CurrentWindow)->xc;
+			((D2_CONTROL_TL*) d2_Controls)[item].value_06c = 1;
 			d2_SetElementFont(item, 0x54);
-			d2_SetElementValue(dlg, 0, 0x64, (int) (frac * g_662cf8));
+			d2_SetElementValue(dlg, 0, 0x64, (int) (frac * flt_100_0));
 		}
-		d2_SetElementEnabled(btn1, g_102cbc8[list].n != -1 && count != 0 && sel == 0);
+		d2_SetElementEnabled(btn1, d2_RadioGroupItems[list].n != -1 && count != 0 && sel == 0);
 		d2_SetElementEnabled(btn0, sel == 0);
-		if (sel != prev || g_6b7fac > (unsigned int) (stamp + 0x32)) {
-			stamp = g_6b7fac;
+		if (sel != prev || gm_GameTicks > (unsigned int) (stamp + 0x32)) {
+			stamp = gm_GameTicks;
 			prev = sel;
-			owner = g_102cbc8[list].n;
+			owner = d2_RadioGroupItems[list].n;
 			d2_ClearRadioGroup(list);
 			d2_SetForm(win, 2);
 			io_AppendText(0x6811b0);
@@ -187,26 +187,26 @@ void __cdecl fcn_00585030(int alchemyObjectArg)
 				y = (count / 2) * 0x50 + 10;
 				item = d2_AddElementToWindow(x, y, src[0] + 0xdf, wnd);
 				*ids = item;
-				((D2_CONTROL_TL*) g_1015ea0)[item].value_05c = 1;
-				*(int*) (&((D2_CONTROL_TL*) g_1015ea0)[item].associated_object) = (int) ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[src[0]]);
+				((D2_CONTROL_TL*) d2_Controls)[item].value_05c = 1;
+				*(int*) (&((D2_CONTROL_TL*) d2_Controls)[item].associated_object) = (int) ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[src[0]]);
 				d2_AddToRadioGroup(list, item);
 				io_FormatTextBuffer(buf2, (char*) 0x679060, src[0] * 2 + 0x9a8);
 				item = d2_ShowTxt(x + 0x3c, y + 5, buf2, wnd);
-				((D2_CONTROL_TL*) g_1015ea0)[item].width = ((D2_WIN*)g_1015f40)[wnd].width / 2 - 10;
+				((D2_CONTROL_TL*) d2_Controls)[item].width = ((D2_WIN*)d2_Windows)[wnd].width / 2 - 10;
 				d2_SetElementFont(item, 0x54);
 				d2_DrawSegmentedBar(x + 0x3c, y + 0x19, (int) (*(float*) (src + 1) * g_66413c), 0x4df);
 				count++;
 				ids++;
 			}
-			g_102cbc8[list].n = owner;
+			d2_RadioGroupItems[list].n = owner;
 			d2_UpdateRadioGroup(list);
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
-		} else if (g_100f1dc != -1) {
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
+		} else if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == btn1) {
 				for (i = 0; i < 6; i++) {
-					if (g_102cbc8[list].n != i) {
+					if (d2_RadioGroupItems[list].n != i) {
 						continue;
 					}
 					if (ahm_PickRandomUnknownRecipe((int) data) != 0) {

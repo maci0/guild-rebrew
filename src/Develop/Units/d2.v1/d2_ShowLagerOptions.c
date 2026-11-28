@@ -1,5 +1,5 @@
-extern unsigned short g_774970;
-extern unsigned char g_773d75;
+extern unsigned short gm_LocalPlayerSlot;
+extern unsigned char gm_ActiveTownIndex;
 /* Reconstructed from native disassembly; stack slots bound to the native frame offsets. */
 
 #include <math.h>
@@ -194,17 +194,17 @@ label_5be43c:
         if (v6)
           v8 += *(int *)(v6 + 0xb4);
         v9 = d2_RunRoomSlotDialog(v4,v2,v15,v8);
-        gm_SumQueryEntryValues(*(unsigned int *)((unsigned int)g_774970 * 0x21c + 0x7f4e18),g_773d75);
+        gm_SumQueryEntryValues(*(unsigned int *)((unsigned int)gm_LocalPlayerSlot * 0x21c + 0x7f4e18),gm_ActiveTownIndex);
         if (v9 != 1) { // branch-flip
-          if ((v9 == 2) && (v11 = g_773d75, v15 = (unsigned int)g_774970, gm_CheckEntityStock(v15 * 0x21c + 0x7f4ca0,8000,v11))) {
-            v11 = cm_RequestMoveCredits(0xffffffff,*(unsigned int *)((unsigned int)g_774970 * 0x21c + 0x7f4ca4),g_773d75,8000);
+          if ((v9 == 2) && (v11 = gm_ActiveTownIndex, v15 = (unsigned int)gm_LocalPlayerSlot, gm_CheckEntityStock(v15 * 0x21c + 0x7f4ca0,8000,v11))) {
+            v11 = cm_RequestMoveCredits(0xffffffff,*(unsigned int *)((unsigned int)gm_LocalPlayerSlot * 0x21c + 0x7f4ca4),gm_ActiveTownIndex,8000);
             v12 = cm_GetCommandStatus(v11);
             while (!v12) {
               cm_StepCommandQueue();
               v12 = cm_GetCommandStatus(v11);
             }
             if (cm_GetCommandStatus(v11) == 1) {
-              v12 = fcn_00509570((unsigned int)g_774970 * 0x21c + 0x7f4ca0);
+              v12 = fcn_00509570((unsigned int)gm_LocalPlayerSlot * 0x21c + 0x7f4ca0);
               if (v12)
                 *(int *)(v12 + 0x50) = *(int *)(v12 + 0x50) + 8000;
               if (!v6) {
@@ -236,16 +236,16 @@ label_5be43c:
           }
         }
         else {
-          v10 = gm_CheckEntityStock((unsigned int)g_774970 * 0x21c + 0x7f4ca0,8000,g_773d75);
+          v10 = gm_CheckEntityStock((unsigned int)gm_LocalPlayerSlot * 0x21c + 0x7f4ca0,8000,gm_ActiveTownIndex);
           if (v10) {
-            v11 = cm_RequestMoveCredits(0xffffffff,*(unsigned int *)((unsigned int)g_774970 * 0x21c + 0x7f4ca4),g_773d75,8000);
+            v11 = cm_RequestMoveCredits(0xffffffff,*(unsigned int *)((unsigned int)gm_LocalPlayerSlot * 0x21c + 0x7f4ca4),gm_ActiveTownIndex,8000);
             v12 = cm_GetCommandStatus(v11);
             while (!v12) {
               cm_StepCommandQueue();
               v12 = cm_GetCommandStatus(v11);
             }
             if (cm_GetCommandStatus(v11) == 1) {
-              v12 = fcn_00509570((unsigned int)g_774970 * 0x21c + 0x7f4ca0);
+              v12 = fcn_00509570((unsigned int)gm_LocalPlayerSlot * 0x21c + 0x7f4ca0);
               if (v12)
                 *(int *)(v12 + 0x50) = *(int *)(v12 + 0x50) + 8000;
               if (v3) // branch-flip
@@ -279,19 +279,19 @@ label_5be970:
           }
         }
       } else { // branch-flip
-        if ((((*(int *)0x67d370) == v28) && (0 <= (*(signed char *)0x7747b0))) && (v11 = g_773d75,
-             v15 = (unsigned int)g_774970, gm_CheckEntityStock(v15 * 0x21c + 0x7f4ca0,0x3200,v11))) {
+        if ((((*(int *)0x67d370) == v28) && (0 <= (*(signed char *)0x7747b0))) && (v11 = gm_ActiveTownIndex,
+             v15 = (unsigned int)gm_LocalPlayerSlot, gm_CheckEntityStock(v15 * 0x21c + 0x7f4ca0,0x3200,v11))) {
           io_FormatTextBuffer(v26,0x113,0x3200);
           v13 = d2_ShowModalMessageBox(v26,0x101);
           if (v13) {
-            v11 = cm_RequestMoveCredits(0xffffffff,*(unsigned int *)((unsigned int)g_774970 * 0x21c + 0x7f4ca4),g_773d75,0x3200);
+            v11 = cm_RequestMoveCredits(0xffffffff,*(unsigned int *)((unsigned int)gm_LocalPlayerSlot * 0x21c + 0x7f4ca4),gm_ActiveTownIndex,0x3200);
             v12 = cm_GetCommandStatus(v11);
             while (!v12) {
               cm_StepCommandQueue();
               v12 = cm_GetCommandStatus(v11);
             }
             if (cm_GetCommandStatus(v11) == 1) {
-              v12 = fcn_00509570((unsigned int)g_774970 * 0x21c + 0x7f4ca0);
+              v12 = fcn_00509570((unsigned int)gm_LocalPlayerSlot * 0x21c + 0x7f4ca0);
               if (v12)
                 *(int *)(v12 + 0x50) = *(int *)(v12 + 0x50) + 0x3200;
               if (!v7) {

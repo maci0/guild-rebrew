@@ -8,7 +8,7 @@ struct log_428230 {
 };
 
 extern int g_6b7eb0;
-extern void* g_14cb8f0;
+extern void* evt_ScriptErrorLog;
 
 int __cdecl evt_ParseScript(char*);
 void __cdecl evt_FreeScript(char*);
@@ -41,8 +41,8 @@ int __cdecl evt_RunScript(char* script)
 	*(int*) (script + 0xc84) = 0;
 	*(char**) (script + 0xc28) = script + 0x128;
 	sprintf(msg, "Run script: %s", script);
-	strncpy(((struct log_428230*)g_14cb8f0)[g_6b7eb0].text, msg, 0x7f);
-	((struct log_428230*)g_14cb8f0)[g_6b7eb0].shown = 0;
+	strncpy(((struct log_428230*)evt_ScriptErrorLog)[g_6b7eb0].text, msg, 0x7f);
+	((struct log_428230*)evt_ScriptErrorLog)[g_6b7eb0].shown = 0;
 	g_6b7eb0++;
 	if (g_6b7eb0 > 0x1e) {
 		g_6b7eb0 = 0;

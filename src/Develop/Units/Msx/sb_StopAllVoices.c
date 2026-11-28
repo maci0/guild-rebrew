@@ -16,12 +16,12 @@ typedef struct {
 	int f2c;
 } Voice;
 
-extern int g_6b7d7c;
-extern char* g_6b7e88;
+extern int sb_WaveDriver;
+extern char* sb_Voices;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_6b7e90;
 extern int g_678dec;
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 int __cdecl msx_GetSampleStatus(int h);
 void __cdecl sb_StopVoice(Voice* v, int a);
 
@@ -31,23 +31,23 @@ void __cdecl sb_StopAllVoices(int fade)
 	int t;
 	Voice* v;
 
-	if (g_6b7d7c == 0) {
+	if (sb_WaveDriver == 0) {
 		return;
 	}
 	if (fade == 0) {
-		for (i = 0; i < g_6b7e8c; i++) {
-			v = &((Voice*)g_6b7e88)[i];
+		for (i = 0; i < sb_VoiceCount; i++) {
+			v = &((Voice*)sb_Voices)[i];
 			if (v->sample != 0 && msx_GetSampleStatus(v->h) == 4) {
 				sb_StopVoice(v, 0);
 			}
 		}
 		return;
 	}
-	t = g_6b7fac * 8 + g_6b7fac * 4 + g_6b7fac;
+	t = gm_GameTicks * 8 + gm_GameTicks * 4 + gm_GameTicks;
 	g_678dec = fade;
 	g_6b7e90 = 1;
-	for (i = 0; i < g_6b7e8c; i++) {
-		v = &((Voice*)g_6b7e88)[i];
+	for (i = 0; i < sb_VoiceCount; i++) {
+		v = &((Voice*)sb_Voices)[i];
 		if (v->sample != 0 && msx_GetSampleStatus(v->h) == 4) {
 			v->time = t;
 		}

@@ -6,7 +6,7 @@ typedef struct D2_STACK_ELEMENT_SLOT {
 	char pad0[0x2f4];
 } D2_STACK_ELEMENT_SLOT;
 
-extern void** g_772540;
+extern void** d2_ZOrderStack;
 
 #if defined(REBREW_GOLD)
 
@@ -49,16 +49,16 @@ void __cdecl d2_ReorderControlStack(int slot)
 
 	free = -1;
 	i = 0x3ff;
-	s = (D2_STACK_ELEMENT_SLOT*)&((D2_CONTROL_TL*)g_1015ea0)[slot];
+	s = (D2_STACK_ELEMENT_SLOT*)&((D2_CONTROL_TL*)d2_Controls)[slot];
 	do {
-		if (((D2_STACK_ELEMENT_SLOT**)g_772540)[i] == s) {
+		if (((D2_STACK_ELEMENT_SLOT**)d2_ZOrderStack)[i] == s) {
 			if (free != -1) {
-				((D2_STACK_ELEMENT_SLOT**)g_772540)[free] = ((D2_STACK_ELEMENT_SLOT**)g_772540)[i];
-				memmove(&((D2_STACK_ELEMENT_SLOT**)g_772540)[i], &((D2_STACK_ELEMENT_SLOT**)g_772540)[i + 1], 0xff8 - i * 4);
+				((D2_STACK_ELEMENT_SLOT**)d2_ZOrderStack)[free] = ((D2_STACK_ELEMENT_SLOT**)d2_ZOrderStack)[i];
+				memmove(&((D2_STACK_ELEMENT_SLOT**)d2_ZOrderStack)[i], &((D2_STACK_ELEMENT_SLOT**)d2_ZOrderStack)[i + 1], 0xff8 - i * 4);
 			}
 			return;
 		}
-		if (((D2_STACK_ELEMENT_SLOT**)g_772540)[i] != 0 && free == -1) {
+		if (((D2_STACK_ELEMENT_SLOT**)d2_ZOrderStack)[i] != 0 && free == -1) {
 			free = i + 1;
 		}
 		i--;

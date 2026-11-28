@@ -7,9 +7,9 @@ extern int g_1041d68;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_14ce860;
 extern int g_14ce864;
-extern short g_14ce8c0;
-extern short g_14ce8c2;
-extern char g_14cf72a;
+extern short io_ActiveCursorX;
+extern short io_ActiveCursorY;
+extern char io_ShiftKeyDown;
 extern char g_14cf71d;
 extern char g_67ab48;
 extern char g_67ab49;
@@ -18,11 +18,11 @@ extern int g_6b85b0;
 extern int g_6b85b4;
 extern int g_6b85b8;
 extern int g_6b85bc;
-extern int g_6b8478;
-extern int g_6b847c;
-extern int g_6b8480;
+extern int d3_TopViewCamera;
+extern int d3_FrontViewCamera;
+extern int d3_SideViewCamera;
 extern int g_6b8484;
-extern float g_6628a8;
+extern float flt_0_0;
 
 int __cdecl d3_SelectDebugLightAxis(int a);
 int __cdecl d3_StepObjectBasisTransform(int self, float* dir, float* view, int pos,
@@ -37,11 +37,11 @@ int __cdecl d3_SelectDebugLightAxis(int a1)
 {
 	switch (a1) {
 	case 1:
-		return g_6b8478;
+		return d3_TopViewCamera;
 	case 2:
-		return g_6b847c;
+		return d3_FrontViewCamera;
 	case 3:
-		return g_6b8480;
+		return d3_SideViewCamera;
 	}
 	return g_6b8484;
 }
@@ -77,11 +77,11 @@ int __cdecl d3_HandleDebugObjectInput(void)
 	if (h == 0)
 		return 0;
 	handle = d3_SelectDebugLightAxis(g_1041d68);
-	ang = g_6628a8;
-	mx = g_14ce8c0;
+	ang = flt_0_0;
+	mx = io_ActiveCursorX;
 	ht = g_14ce864;
 	w = g_14ce860;
-	my = g_14ce8c2;
+	my = io_ActiveCursorY;
 	p28[0] = 0.0f;
 	p28[1] = 0.0f;
 	p28[2] = 0.0f;
@@ -97,8 +97,8 @@ int __cdecl d3_HandleDebugObjectInput(void)
 			g_6b85b8 = 1;
 			g_6b85b4 = (int) my;
 		}
-		else if (*(int*) (h + 0x218) != 0 && h != g_6b8478
-			&& h != g_6b847c && h != g_6b8480) {
+		else if (*(int*) (h + 0x218) != 0 && h != d3_TopViewCamera
+			&& h != d3_FrontViewCamera && h != d3_SideViewCamera) {
 			if (g_67ab48 != 0) {
 				changed = 1;
 				dx = (int) mx - g_6b85b0;
@@ -158,18 +158,18 @@ check:
 		goto out;
 body:
 	if (h == g_6b8484) {
-		if (g_14cf72a == 0 && g_14cf71d == 0) {
+		if (io_ShiftKeyDown == 0 && g_14cf71d == 0) {
 			p28[1] = ang;
 			p28[0] = f14;
 			goto both;
 		}
 		p28[2] = ang;
-		if (g_14cf72a == 0 && g_14cf71d == 0)
+		if (io_ShiftKeyDown == 0 && g_14cf71d == 0)
 			goto both;
 		p34[2] = f04;
 		goto call;
 	}
-	if (g_14cf72a != 0) {
+	if (io_ShiftKeyDown != 0) {
 		p28[1] = ang;
 		p34[2] = f04;
 		goto call;
@@ -189,8 +189,8 @@ call:
 	changed = (char) (ok >> 1);
 	if (dirty != 0)
 		d3_SetNodePosition(g_1041d0c, p44);
-	if (changed != 0 && g_1041d0c != g_6b8478
-		&& g_1041d0c != g_6b847c && g_1041d0c != g_6b8480)
+	if (changed != 0 && g_1041d0c != d3_TopViewCamera
+		&& g_1041d0c != d3_FrontViewCamera && g_1041d0c != d3_SideViewCamera)
 		d3_SetObjectRotation(g_1041d0c, a18);
 out:
 	if (g_6b85b8 != 0 && g_14ce8cc != 0) {
@@ -198,7 +198,7 @@ out:
 		UpdateSceneLighting(1);
 		dirty = 1;
 	}
-	if (g_6b85bc != 0 && g_14ce8e0 != 0) {
+	if (g_6b85bc != 0 && io_RightButtonReleased != 0) {
 		g_6b85bc = 0;
 		UpdateSceneLighting(1);
 		dirty = 1;

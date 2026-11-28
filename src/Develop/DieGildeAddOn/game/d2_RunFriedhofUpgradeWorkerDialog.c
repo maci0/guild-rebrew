@@ -15,10 +15,10 @@
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 
-extern int g_774800;
+extern int gm_AllEntitiesControllable;
 extern int d2_CurrentWindowId;
-extern int g_100f1dc;
-extern int g_14ce8e0;
+extern int d2_DialogButtonAction;
+extern int io_RightButtonReleased;
 extern int d2_CurrentElementId;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int g_14b556c;
@@ -63,7 +63,7 @@ void __cdecl d2_RunFriedhofUpgradeWorkerDialog(char* who)
 	if (d2_CheckOwnerBlocked(who) != 0) {
 		return;
 	}
-	if (g_774800 == 0 && st != 2) {
+	if (gm_AllEntitiesControllable == 0 && st != 2) {
 		io_FormatTextBuffer(buf, 0x413b);
 		d2_ShowModalMessageBox((int) buf, 4);
 		d3_EndCameraAndUiMode();
@@ -89,12 +89,12 @@ void __cdecl d2_RunFriedhofUpgradeWorkerDialog(char* who)
 	b4 = d2_GetWindowListItem(h, 3, s + 2);
 	d2_InitPlayerBar(who, 0);
 	while (main_RunFrameLoop(d2_RunFriedhofUpgradeWorkerDialog, 0x677c7) != 0) {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 		for (i = 0; i < 768; i++) {
-			if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].selected != 0) {
-				hh = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]);
+			if (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].selected != 0) {
+				hh = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i]);
 				break;
 			}
 		}
@@ -115,7 +115,7 @@ void __cdecl d2_RunFriedhofUpgradeWorkerDialog(char* who)
 				d2_SetElementEnabled(b4, 1);
 			}
 		}
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == b1) {
 				k = 1;
 			} else if (d2_CurrentElementId == b2) {
@@ -128,7 +128,7 @@ void __cdecl d2_RunFriedhofUpgradeWorkerDialog(char* who)
 			if (hh == 0) {
 				d2_ShowModalMessageBox(g_14b556c, 0);
 			} else if (d2_SendFriedhofUpgradeWorkerCmd(who, hh, k) != 0) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	}

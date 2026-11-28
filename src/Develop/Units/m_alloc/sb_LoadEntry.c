@@ -5,8 +5,8 @@
 extern int g_0063319c;
 extern int g_006333cc;
 extern int g_6b7d70;
-extern int g_6b7d7c;
-extern volatile int g_6b7fac;
+extern int sb_WaveDriver;
+extern volatile int gm_GameTicks;
 extern int __cdecl sb_EnsureSampleMemory(int need);
 
 typedef struct {
@@ -138,7 +138,7 @@ int __cdecl sb_LoadEntry(char *a0, SB_LOAD *loadState)
     unsigned int mem_second;
 
     rc = 0;
-    if (g_6b7d7c == 0)
+    if (sb_WaveDriver == 0)
         return 0;
     if (loadState->block != 0 || a0 == 0)
         return -1;
@@ -179,9 +179,9 @@ int __cdecl sb_LoadEntry(char *a0, SB_LOAD *loadState)
             fclose(f);
             return -1;
         }
-        mem_first = g_6b7fac;
-        mem_second = g_6b7fac;
-        loadState->mem = (mem_first * 2 + mem_second) * 4 + g_6b7fac;
+        mem_first = gm_GameTicks;
+        mem_second = gm_GameTicks;
+        loadState->mem = (mem_first * 2 + mem_second) * 4 + gm_GameTicks;
         MemUsed += count + 0xc;
         loadState->block = blk;
         fclose(f);
@@ -225,9 +225,9 @@ int __cdecl sb_LoadEntry(char *a0, SB_LOAD *loadState)
         sum += *(int *)(*(char **)((char *)blk + 4) + i * 0xc + 4);
     }
     MemUsed += size + 0xc;
-    mem_first = g_6b7fac;
-    mem_second = g_6b7fac;
-    loadState->mem = (mem_first * 2 + mem_second) * 4 + g_6b7fac;
+    mem_first = gm_GameTicks;
+    mem_second = gm_GameTicks;
+    loadState->mem = (mem_first * 2 + mem_second) * 4 + gm_GameTicks;
     sprintf((char *)0x14cbae0, (char *)0x678e38, loadState->name, MemUsed);
     loadState->block = blk;
     fclose(f);

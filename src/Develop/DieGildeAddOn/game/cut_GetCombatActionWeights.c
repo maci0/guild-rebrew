@@ -1,9 +1,9 @@
 #include <string.h>
 extern char* g_772eb4;
-extern int g_772e9c;
+extern int cut_CombatDefenderEntity;
 extern int g_772e98;
 extern int g_772f08;
-extern int g_9b9e40[];
+extern int d3_CombatFlagObjects[];
 extern int g_9b43e0[];
 
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
@@ -27,15 +27,15 @@ int __cdecl cut_GetCombatActionWeights(int id)
 
 	flags = *(unsigned char*) (g_772eb4 + 0x7c);
 	mode = 6;
-	if ((flags & 1) != 0 && g_772e9c == id) {
+	if ((flags & 1) != 0 && cut_CombatDefenderEntity == id) {
 		mode = 0;
 	} else if ((flags & 1) != 0 && g_772e98 == id) {
 		mode = 1;
-	} else if ((flags & 2) != 0 && g_772e9c == id) {
+	} else if ((flags & 2) != 0 && cut_CombatDefenderEntity == id) {
 		mode = 2;
 	} else if ((flags & 2) != 0 && g_772e98 == id) {
 		mode = 3;
-	} else if ((flags & 4) != 0 && g_772e9c == id) {
+	} else if ((flags & 4) != 0 && cut_CombatDefenderEntity == id) {
 		mode = 4;
 	} else if ((flags & 4) != 0 && g_772e98 == id) {
 		mode = 5;
@@ -62,16 +62,16 @@ int __cdecl cut_GetCombatActionWeights(int id)
 	}
 	cnt = 0;
 	for (i = 0; i < g_772f08; i++) {
-		if (strstr((char*) *(int*) ((char*) g_9b9e40 + i * 4), "sp_CONQUER")) {
-			ent = *(int*) ((char*) g_9b9e40 + i * 4);
+		if (strstr((char*) *(int*) ((char*) d3_CombatFlagObjects + i * 4), "sp_CONQUER")) {
+			ent = *(int*) ((char*) d3_CombatFlagObjects + i * 4);
 			d3_TransformPoint((char*) ent, (char*) (ent + 0x4c), pos);
-			ent = *(int*) (*(int*) ((char*) g_9b9e40 + i * 4) + 0x204);
-			if (ent != 0 && *(int*) (ent + 0x16c) == g_772e9c) {
+			ent = *(int*) (*(int*) ((char*) d3_CombatFlagObjects + i * 4) + 0x204);
+			if (ent != 0 && *(int*) (ent + 0x16c) == cut_CombatDefenderEntity) {
 				cnt++;
 			}
 		}
 	}
-	if (id == g_772e9c) {
+	if (id == cut_CombatDefenderEntity) {
 		ratio = sum_hi / sum_lo;
 	} else {
 		ratio = sum_lo / sum_hi;

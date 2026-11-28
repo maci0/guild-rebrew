@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_HasActiveSpecialObject(void*, int);
@@ -25,7 +25,7 @@ int __cdecl gm_HandleMsg14FineEntity(int* request)
 		return 0x400;
 	fineAmount = (int) ((gm_RandomMod(3) + 1.0) * gm_WalkEntityChain(*entity) * 0.01);
 	io_FormatTextBuffer(buf, *(unsigned short*) (request + 1) + 0x12e7, gm_RandomMod(0xf) + 2, fineAmount);
-	cm_RequestTransferCurrencyNoKill(-1, request[0], g_773d75, fineAmount);
+	cm_RequestTransferCurrencyNoKill(-1, request[0], gm_ActiveTownIndex, fineAmount);
 	he_PostEntityMessage(*(int*) (entity + 2), *(int*) (entity + 2), buf, strlen(buf) > 0x100, 0x603, 0);
 	return 0;
 }

@@ -12,8 +12,8 @@ typedef struct {
 extern char g_6a1ea4[];
 extern char g_6a1e8c[];
 extern char* g_14ac600;
-extern unsigned char g_6a375c;
-extern int g_77494c;
+extern unsigned char gm_PlayerCount;
+extern int nt_NetSyncFlags;
 extern char* g_14ac5f0;
 extern char* g_14ac5fc;
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -35,25 +35,25 @@ int __cdecl ls_LoadNetworkGame(char* name)
 	char text[512];
 
 	sprintf(path, g_6a1ea4, name);
-	sprintf(text, g_14ac600, g_6a375c);
+	sprintf(text, g_14ac600, gm_PlayerCount);
 	d2_ShowNetworkLoadStatus(text);
-	g_77494c = 0;
+	nt_NetSyncFlags = 0;
 	do {
 		main_PumpWindowMessages();
 		cm_StepCommandQueue();
-	} while (g_77494c == 0);
-	if (g_77494c & 1) {
+	} while (nt_NetSyncFlags == 0);
+	if (nt_NetSyncFlags & 1) {
 		sprintf(save, g_6a1e8c, name);
 		d2_ShowNetworkLoadStatus(g_14ac5f0);
 		if (ls_SendGame(save) == 0) {
 			return 1;
 		}
-		if (g_77494c & 1) {
-			msg.who = g_6a375c;
+		if (nt_NetSyncFlags & 1) {
+			msg.who = gm_PlayerCount;
 			cm_RequestSysMessage(6, &msg);
 		}
 	}
-	while (!(g_77494c & 4)) {
+	while (!(nt_NetSyncFlags & 4)) {
 		main_PumpWindowMessages();
 		cm_StepCommandQueue();
 	}

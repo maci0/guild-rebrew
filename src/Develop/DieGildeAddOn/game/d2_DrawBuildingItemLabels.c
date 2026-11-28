@@ -33,8 +33,8 @@ typedef struct {
 	int pad4;
 } WareName;
 
-extern char* g_7746cc;
-extern unsigned char* g_7746c8;
+extern char* sv_SelectedBuilding;
+extern unsigned char* d2_InteriorBuilding;
 extern char* lpObjektePROT;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_14a79c0[];
@@ -53,17 +53,17 @@ void __cdecl d2_DrawBuildingItemLabels(void)
 	Estate* e;
 	OBJECT_PROTOTYPE* w;
 
-	if (((Estate*)g_7746cc) != 0) {
-		home = ((Estate*)g_7746cc)->home;
+	if (((Estate*)sv_SelectedBuilding) != 0) {
+		home = ((Estate*)sv_SelectedBuilding)->home;
 	} else {
-		if (((Player*)g_7746c8) == 0) {
+		if (((Player*)d2_InteriorBuilding) == 0) {
 			return;
 		}
-		e = fcn_00502cd0(((Player*)g_7746c8)->home, 1, 0, 0xfd);
+		e = fcn_00502cd0(((Player*)d2_InteriorBuilding)->home, 1, 0, 0xfd);
 		if (e != 0) {
 			home = e->home;
 		} else {
-			home = ((Player*)g_7746c8)->home;
+			home = ((Player*)d2_InteriorBuilding)->home;
 		}
 	}
 	d2_SelectFont(0x54);
@@ -71,20 +71,20 @@ void __cdecl d2_DrawBuildingItemLabels(void)
 		w = &((OBJECT_PROTOTYPE*)lpObjektePROT)[u->slot];
 		if (u->model != 0 && w->kind != 6 && w->kind != 2
 			&& d3_GetObjectScreenRect(u->model, r)) {
-			d2_DrawWordWrappedText((r[2] - r[0]) / 2 + r[0] - 0x50, r[1], 0xa0, 0x60, g_77250c,
+			d2_DrawWordWrappedText((r[2] - r[0]) / 2 + r[0] - 0x50, r[1], 0xa0, 0x60, d2_ScreenSurface,
 				((WareName*)g_14a79c0)[u->slot].name, 0x28);
 		}
 	}
-	if (((Estate*)g_7746cc) != 0) {
-		home = ((Estate*)g_7746cc)->home;
-	} else if (((Player*)g_7746c8) != 0) {
-		home = ((Player*)g_7746c8)->home;
+	if (((Estate*)sv_SelectedBuilding) != 0) {
+		home = ((Estate*)sv_SelectedBuilding)->home;
+	} else if (((Player*)d2_InteriorBuilding) != 0) {
+		home = ((Player*)d2_InteriorBuilding)->home;
 	}
 	for (u = fcn_00502cd0(home, 2, 5, 6); u != 0; u = gm_NextEntityQueryMatch()) {
 		w = &((OBJECT_PROTOTYPE*)lpObjektePROT)[u->slot];
 		if (u->model != 0 && (w->kind == 6 || w->kind == 2)
 			&& d3_GetObjectScreenRect(u->model, r)) {
-			d2_DrawWordWrappedText((r[2] - r[0]) / 2 + r[0] - 0x50, r[1], 0xa0, 0x60, g_77250c,
+			d2_DrawWordWrappedText((r[2] - r[0]) / 2 + r[0] - 0x50, r[1], 0xa0, 0x60, d2_ScreenSurface,
 				((WareName*)g_14a79c0)[u->slot].name, 0x28);
 		}
 	}

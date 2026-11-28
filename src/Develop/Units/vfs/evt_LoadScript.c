@@ -28,11 +28,11 @@ typedef struct {
 } Script;
 // SIZE 0xc98
 
-extern struct VFS_DIR* g_6b7fdc;
+extern struct VFS_DIR* vfs_RootDir;
 extern int g_14cb430;
 extern int g_14c93a0[0x800];
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_6791c8;
+extern int evt_ActiveContextId;
 extern int g_6791cc;
 extern char g_6790c8[];
 
@@ -55,14 +55,14 @@ Script *__cdecl evt_LoadScript(char *name)
 	int len;
 	int i;
 
-	f = vfs_Tfopen(name, "rb", g_6b7fdc);
+	f = vfs_Tfopen(name, "rb", vfs_RootDir);
 	if (f == 0) {
 		fcn_0064d41a(msg, "evt_LoadScript: Could not open t_vfs_file: %s!", name);
 		ReportClientMessage(msg);
 		return 0;
 	}
 	for (i = 0; i < 0x80; i++) {
-		if (((Script*)g_6b7e94)[i].name[0] == 0) {
+		if (((Script*)evt_ScriptSlots)[i].name[0] == 0) {
 			break;
 		}
 	}
@@ -72,7 +72,7 @@ Script *__cdecl evt_LoadScript(char *name)
 		return 0;
 	}
 	g_14cb430 = i;
-	sc = &((Script*)g_6b7e94)[i];
+	sc = &((Script*)evt_ScriptSlots)[i];
 	tmp = m_alloc(0xfa01, "ect_LoadScript:tmp");
 	out = m_alloc(0xfa01, "ect_LoadScript:output");
 	memset(out, 0, 0xfa01);
@@ -103,7 +103,7 @@ Script *__cdecl evt_LoadScript(char *name)
 	}
 	sc->sp = sc->stack = m_alloc(0x400, "evt:stack");
 	sc->fc90 = d3_CurrentContextIndex;
-	sc->f104 = g_6791c8;
+	sc->f104 = evt_ActiveContextId;
 	sc->fc60 = 0;
 	sc->fc5c = 0;
 	sc->id = g_6791cc;

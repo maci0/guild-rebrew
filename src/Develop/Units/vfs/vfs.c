@@ -1,8 +1,8 @@
 #ifndef REBREW_SERVER
-#define g_vfs_root g_6b7fdc
-#define g_vfs_item_pool g_6b7fe0
-#define g_vfs_case_sensitive g_6b7fe8
-#define g_stream_pool g_6b7fe4
+#define g_vfs_root vfs_RootDir
+#define g_vfs_item_pool vfs_ItemPool
+#define g_vfs_case_sensitive vfs_CaseSensitive
+#define g_stream_pool vfs_StreamPool
 #define vfs_OpenStreamCount g_6b7fec
 #endif
 #include "vfs.h"
@@ -1281,7 +1281,7 @@ void __cdecl vfs_ScanArchive(char* path, VFS_DIR* parent, unsigned int archive)
 
 /* Frees dir, its siblings and their subtrees with their files and pending items. */
 #ifndef REBREW_SERVER
-extern char g_6b7fe0[];
+extern char vfs_ItemPool[];
 #endif
 void __cdecl vfs_FreeDirs(VFS_DIR* n)
 {
@@ -1681,7 +1681,7 @@ void* __cdecl vfs_Tfopen(char* path, char* mode, struct VFS_DIR* root)
 						if (unzOpenCurrentFile(zip) != 0)
 							goto close_zip;
 allocate_member:
-						stream = (char*) m_PoolAlloc(g_6b7fe4, 0x140, 0x10);
+						stream = (char*) m_PoolAlloc(vfs_StreamPool, 0x140, 0x10);
 						((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->b2 = 1;
 						((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->b4 = 1;
 						*(char**) (stream + 0x100) = zip;
@@ -1722,7 +1722,7 @@ not_found:
 		}
 		if (h == 0)
 			goto not_found;
-		stream = (char*) m_PoolAlloc(g_6b7fe4, 0x140, 0x10);
+		stream = (char*) m_PoolAlloc(vfs_StreamPool, 0x140, 0x10);
 		*(void**) (stream + 0x100) = h;
 		((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->b4 = 0;
 opened:
@@ -1764,7 +1764,7 @@ opened:
 			}
 			if (h == 0)
 				return stream;
-			stream = (char*) m_PoolAlloc(g_6b7fe4, 0x140, 0x10);
+			stream = (char*) m_PoolAlloc(vfs_StreamPool, 0x140, 0x10);
 			*(void**) (stream + 0x100) = h;
 			strcpy(stream, path);
 			((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->read = 0;
@@ -2684,7 +2684,7 @@ void* __cdecl vfs_OpenStream(unsigned char* buf, unsigned int size, char* mode_f
 			break;
 		}
 	}
-	stream = (char*) m_PoolAlloc(g_6b7fe4, 0x140, 0x10);
+	stream = (char*) m_PoolAlloc(vfs_StreamPool, 0x140, 0x10);
 	*(unsigned char*) (stream + 0x13c) = (unsigned char) ((*(unsigned char*) (stream + 0x13c) & 0xeb) | 0x22);
 	if (*(unsigned char*) &mode14 != 0) {
 		if (mode13 != 0) {
@@ -2754,7 +2754,7 @@ finalize:
 done:
 	return result;
 cleanup:
-	m_pool_free(g_6b7fe4, stream);
+	m_pool_free(vfs_StreamPool, stream);
 	return 0;
 }
 #endif
@@ -2835,10 +2835,10 @@ int __cdecl vfs_init(char* name, char flag)
  * The SERVER link discards this body. */
 /* Existing client storage and native callees; these declarations allocate nothing. */
 #ifndef REBREW_SERVER
-extern VFS_DIR* g_6b7fdc;
+extern VFS_DIR* vfs_RootDir;
 extern int g_6b7fec;
-extern char g_6b7fe4[];
-extern char g_6b7fe8;
+extern char vfs_StreamPool[];
+extern char vfs_CaseSensitive;
 #include "Develop/Units/Error/error_message.h"
 #define ReportMessage ReportClientMessage
 #endif

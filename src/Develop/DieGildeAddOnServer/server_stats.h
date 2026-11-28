@@ -9,7 +9,7 @@ void __cdecl srv_FormatStatAemter(unsigned char* entity, char* out);
 void __cdecl srv_FormatStatDumpBegin(void);
 void __cdecl srv_FormatStatDumpEnd(void);
 
-extern char g_68d780[][24];
+extern char srv_EntityKindNames[][24];
 extern char* g_14a6544[];
 extern char* g_14a6538[];
 extern char* g_14a5770[];

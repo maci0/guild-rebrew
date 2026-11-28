@@ -73,7 +73,7 @@ void __cdecl he_StartAction0x90(char* u)
 	if (*(int*) (u + 0xb0) > 2) {
 		*(int*) (u + 0xb0) = 2;
 	}
-	gm_ModifyHealth(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id, -((*(int*) (u + 0xb4) + 2) * (*(int*) (u + 0xb0) + 2)));
+	gm_ModifyHealth(((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (u + 8)].entity_id, -((*(int*) (u + 0xb4) + 2) * (*(int*) (u + 0xb0) + 2)));
 	gm_AddTime((pos14_7f4c00*) (u + 0x52), 0, 5, 0);
 	cm_SendSetHE(0, u);
 }

@@ -13,7 +13,7 @@ typedef struct {
 /* Declarations only; the table's storage owner remains unresolved. */
 /* ADDRESS: GOLDTL 0x01052c60 */
 /* ADDRESS: GOLD 0x00fe7aa0 */
-extern TIMER_CALLBACK_SLOT g_1052c60[32];
+extern TIMER_CALLBACK_SLOT tb_TimerCallbacks[32];
 
 int __cdecl tb_OpenFunction(TIMER_CALLBACK callback, unsigned int period);
 int __cdecl tb_CloseFunction(TIMER_CALLBACK callback);

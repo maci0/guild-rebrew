@@ -2,7 +2,7 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int gm_GameTime;
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl gm_GetElapsedMinutes(void*, void*);
@@ -54,8 +54,8 @@ void __cdecl he_RunGebaeudeReparieren(int a)
 		io_FormatTextBuffer(buf, 0x17cb, (int) (unsigned char) r[0] * 0xe + 0x48e);
 		if (*(unsigned short*) (a + 8) != 0xffff) {
 			ofs = *(unsigned short*) (a + 8) * 0x21c;
-			if (*(char*) (g_7f4ca0 + ofs + 2) == 6 || *(char*) (g_7f4ca0 + ofs + 2) == 7) {
-				he_MessageBoxQuickjump(*(int*) (g_7f4ca0 + ofs + 4), -1, buf, 0, id, *(int*) (r + 1), -1, 0, (void*) 0x6a65b8);
+			if (*(char*) (gm_EntitySlotTable + ofs + 2) == 6 || *(char*) (gm_EntitySlotTable + ofs + 2) == 7) {
+				he_MessageBoxQuickjump(*(int*) (gm_EntitySlotTable + ofs + 4), -1, buf, 0, id, *(int*) (r + 1), -1, 0, (void*) 0x6a65b8);
 			}
 		}
 		*(int*) (a + 0x70) = -1;

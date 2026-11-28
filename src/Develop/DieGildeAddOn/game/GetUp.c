@@ -1,14 +1,14 @@
 #include "Develop/DieGildeAddOn/game/ch_script.h"
 
 
-extern char* g_6b7ebc;
+extern char* evt_WaitingScriptTask;
 extern char* evt_CurrentScript;
 char* __cdecl ch_QueueStandUpAnimation(char* e, int v);
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
 int __cdecl GetUp(char** a, int* v)
 {
-	if (g_6b7ebc != 0 && *(void**) (g_6b7ebc + 0x44) == (void*) GetUp) {
+	if (evt_WaitingScriptTask != 0 && *(void**) (evt_WaitingScriptTask + 0x44) == (void*) GetUp) {
 		if (*(int*) (*a + 0x128) != 0) {
 			*(void**) (evt_CurrentScript + 0xc60) = (void*) GetUp;
 		}

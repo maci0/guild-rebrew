@@ -13,7 +13,7 @@ typedef struct Sprite {
 // SIZE 0x64
 
 #include "Develop/Units/d2.v1/client_sprites.h"
-extern volatile int g_6b7fb8;
+extern volatile int tb_TimerTicks;
 extern char s_67d8b0[];
 
 void* __cdecl m_alloc(int size, const char* tag);
@@ -28,7 +28,7 @@ Sprite* __cdecl d2_CreateOverlaySprite(int x, int y, int w, int h, int textureNa
 	Sprite* p;
 
 	for (i = 0; i < 0x20; i++) {
-		if (((Sprite**)g_1015ec0)[i] == 0) {
+		if (((Sprite**)d2_OverlaySprites)[i] == 0) {
 			break;
 		}
 	}
@@ -43,8 +43,8 @@ Sprite* __cdecl d2_CreateOverlaySprite(int x, int y, int w, int h, int textureNa
 	p->a7 = flags;
 	p->a6 = duration;
 	p->tex = d3_CreateSceneResource(textureName, 1);
-	p->t0 = g_6b7fb8;
-	p->t1 = g_6b7fb8;
-	((Sprite**)g_1015ec0)[i] = p;
+	p->t0 = tb_TimerTicks;
+	p->t1 = tb_TimerTicks;
+	((Sprite**)d2_OverlaySprites)[i] = p;
 	return p;
 }

@@ -26,13 +26,13 @@ extern D2_GELD_INFO_TAB g_776aa0[16];
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_6ac820[];
-extern char g_6811b0[];
+extern char str_dollar_C[];
 extern int d2_CurrentWindowId;
-extern char* g_772500;
-extern char* g_77255c;
+extern char* d2_FileObjTable;
+extern char* d2_CurrentWindow;
 #include "Develop/client_types.h"
 #include "Develop/Units/d2.v1/d2_win.h"
-extern Win_1015f40 g_1015f40[0x60];
+extern Win_1015f40 d2_Windows[0x60];
 
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
@@ -86,7 +86,7 @@ int __cdecl d2_RunGeldInfoDialog(void)
 	d2_SetForm(h, 5);
 	io_AppendText(0x1f40);
 	d2_SetForm(h, 1);
-	d2_PopulateInventoryGrid((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].object_list), g_776aa0, h, 1, 0);
+	d2_PopulateInventoryGrid((*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].object_list), g_776aa0, h, 1, 0);
 	for (k = 0; k < 9; k++) {
 		if (lines[k].bar != -1) {
 			d2_CloseWindow(lines[k].bar);
@@ -96,24 +96,24 @@ int __cdecl d2_RunGeldInfoDialog(void)
 			lines[k].e = 0;
 		}
 	}
-	he_GetActiveKrediteByBorrower(g_774970, 0, list);
-	n = he_GetActiveKrediteByBorrower(g_774970, 0, list);
+	he_GetActiveKrediteByBorrower(gm_LocalPlayerSlot, 0, list);
+	n = he_GetActiveKrediteByBorrower(gm_LocalPlayerSlot, 0, list);
 	d2_SetForm(h, 3);
-	io_AppendText((int) g_6811b0);
+	io_AppendText((int) str_dollar_C);
 	if (n >= 9) {
 		io_AppendText(0x18cb);
 	}
-	cy = *(short*) (g_772500 + 0x269d8);
+	cy = *(short*) (d2_FileObjTable + 0x269d8);
 	d2_SetForm(h, 0);
 	d2_CreateWindowScrollbar(0x215, 0x16b, d2_CurrentWindowId, d2_GetFormWindow(h, 3), 0x6a, &id2, &id1, &id3);
 	for (i = 0; i < n; i++) {
 		d2_SetForm(h, 3);
-		lines[i].btn = d2_AddElementToWindow((*(int*) (g_77255c + 0xc) - cy) >> 1, i * 0x6a, 0x75a, d2_CurrentWindowId);
-		lines[i].bar = d2_CreateChildWindow((*(int*) (g_77255c + 0xc) - cy) >> 1, i * 0x6a + 4, cy, 0x62, 0x10, d2_CurrentWindowId);
+		lines[i].btn = d2_AddElementToWindow((*(int*) (d2_CurrentWindow + 0xc) - cy) >> 1, i * 0x6a, 0x75a, d2_CurrentWindowId);
+		lines[i].bar = d2_CreateChildWindow((*(int*) (d2_CurrentWindow + 0xc) - cy) >> 1, i * 0x6a + 4, cy, 0x62, 0x10, d2_CurrentWindowId);
 		lines[i].e = list[i];
 		/* both fields through one symbol: c2 chains the two stores, which issues the bar store first */
-		*(int*) &((D2_WIN*)g_1015f40)[lines[i].bar].pad280[12] = 0x56;
-		*(int*) &((D2_WIN*)g_1015f40)[lines[i].bar].pad14[4] = 0x10;
+		*(int*) &((D2_WIN*)d2_Windows)[lines[i].bar].pad280[12] = 0x56;
+		*(int*) &((D2_WIN*)d2_Windows)[lines[i].bar].pad14[4] = 0x10;
 		r = gm_SearchTable67(*(int*) (lines[i].e + 0xac));
 		if (r != 0) {
 			io_AppendText(0x1f41, r, *(int*) (lines[i].e + 0xb4), *(int*) (lines[i].e + 0xc0), lines[i].e + 0xc4);

@@ -58,9 +58,9 @@ int __cdecl d3_ComputeTriangleHeightRange(void* obj, void* a, void* b, void* c, 
 	p2 = (float*) d;
 	p3 = (float*) e;
 
-	sx = g_6628a0 / map->cell_x;
+	sx = flt_1_0 / map->cell_x;
 	ax = (int) ((p1[0] - map->base_x) * sx);
-	sy = g_6628a0 / map->cell_z;
+	sy = flt_1_0 / map->cell_z;
 	ay = (int) ((p1[2] - map->base_z) * sy);
 	bx = (int) ((p2[0] - map->base_x) * sx);
 	by = (int) ((p2[2] - map->base_z) * sy);

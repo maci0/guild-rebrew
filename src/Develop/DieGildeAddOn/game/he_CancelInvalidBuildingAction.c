@@ -34,8 +34,8 @@ void __cdecl he_CancelInvalidBuildingAction(struct unit* u)
 	if (u->house == 0xffff) {
 		return;
 	}
-	if ((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[u->house].entity_id) == u->owner && (*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[u->house].entity_type) != 0xf) {
-		if ((*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[u->house].health) > 0) {
+	if ((*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[u->house].entity_id) == u->owner && (*(unsigned char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[u->house].entity_type) != 0xf) {
+		if ((*(unsigned char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[u->house].health) > 0) {
 			return;
 		}
 		switch (u->kind) {

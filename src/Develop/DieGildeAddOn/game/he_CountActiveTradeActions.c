@@ -1,5 +1,5 @@
-extern unsigned char g_6a375c;
-extern int g_772620;
+extern unsigned char gm_PlayerCount;
+extern int ai_DispatchedTradeCount;
 
 char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
@@ -16,5 +16,5 @@ int __cdecl he_CountActiveTradeActions(void)
 		if (p[0xf1] == 0)
 			n++;
 	}
-	return g_6a375c * g_772620 + n;
+	return gm_PlayerCount * ai_DispatchedTradeCount + n;
 }

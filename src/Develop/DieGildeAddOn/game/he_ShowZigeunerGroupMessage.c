@@ -22,15 +22,15 @@ void __cdecl he_ShowZigeunerGroupMessage(unsigned short* senderEntity, int n, ch
 	if (n < 1 || n >= 4) {
 		return;
 	}
-	io_FormatTextBuffer(g_774a80, 0x41bf, *senderEntity);
+	io_FormatTextBuffer(io_MessageFormatBuf, 0x41bf, *senderEntity);
 	for (i = 0; i < n; i++) {
 		e = arr[i];
 		if (e[2] == 6 || e[2] == 7) {
-			he_PostEntityMessage(*(int*) (e + 4), -1, g_774a80, 1, 0x5fb, (void*) 0x6ab480);
+			he_PostEntityMessage(*(int*) (e + 4), -1, io_MessageFormatBuf, 1, 0x5fb, (void*) 0x6ab480);
 		}
 	}
 	e = g_14b5a08;
-	offset = (unsigned long) g_774a80 - (unsigned long) e;
+	offset = (unsigned long) io_MessageFormatBuf - (unsigned long) e;
 	do {
 		ch = *e;
 		*(char*) ((unsigned long) e + offset) = ch;
@@ -43,7 +43,7 @@ void __cdecl he_ShowZigeunerGroupMessage(unsigned short* senderEntity, int n, ch
 				break;
 			}
 			io_FormatTextBuffer(buf, 0x41bb, *(unsigned short*) arr[i]);
-			strcat(g_774a80, buf);
+			strcat(io_MessageFormatBuf, buf);
 		}
 		found = 0;
 		for (; i < 4; i++) {
@@ -51,10 +51,10 @@ void __cdecl he_ShowZigeunerGroupMessage(unsigned short* senderEntity, int n, ch
 				break;
 			}
 			io_FormatTextBuffer(buf, 0x41bc, *(unsigned short*) arr[i]);
-			strcat(g_774a80, buf);
+			strcat(io_MessageFormatBuf, buf);
 			found = 1;
 		}
-		strcat(g_774a80, g_14b5a18);
+		strcat(io_MessageFormatBuf, g_14b5a18);
 	}
 	else {
 		for (i = 0; i < 4; i++) {
@@ -62,9 +62,9 @@ void __cdecl he_ShowZigeunerGroupMessage(unsigned short* senderEntity, int n, ch
 				break;
 			}
 			io_FormatTextBuffer(buf, 0x41bb, *(unsigned short*) arr[i]);
-			strcat(g_774a80, buf);
+			strcat(io_MessageFormatBuf, buf);
 		}
-		strcat(g_774a80, g_14b5a14);
+		strcat(io_MessageFormatBuf, g_14b5a14);
 	}
-	he_PostEntityMessage(*(int*) (senderEntity + 2), -1, g_774a80, 1, 0x5fb, (void*) 0x6ab464);
+	he_PostEntityMessage(*(int*) (senderEntity + 2), -1, io_MessageFormatBuf, 1, 0x5fb, (void*) 0x6ab464);
 }

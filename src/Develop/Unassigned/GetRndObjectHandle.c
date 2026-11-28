@@ -11,7 +11,7 @@ typedef struct {
 	char name[0x40];
 } Query;
 
-extern int g_67a370;
+extern int d3_ActiveScene;
 void __cdecl d3_VisitSceneObjects(int a, int b, int c, void (__cdecl* cb)(void), Query* q);
 void __cdecl d3_CollectMatchingSubObjects(void);
 
@@ -21,7 +21,7 @@ int __cdecl GetRndObjectHandle(char** name)
 
 	memset(&q, 0, sizeof(q));
 	strcpy(q.name, *name);
-	d3_VisitSceneObjects(g_67a370, 0, 0x140, d3_CollectMatchingSubObjects, &q);
+	d3_VisitSceneObjects(d3_ActiveScene, 0, 0x140, d3_CollectMatchingSubObjects, &q);
 	if (q.count == 0) {
 		return 0;
 	}

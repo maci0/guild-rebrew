@@ -6,10 +6,10 @@ typedef struct {
 	char pad[0x214];
 } Slot5c06;
 
-extern Slot5c06 g_7f4ca0[];
+extern Slot5c06 gm_EntitySlotTable[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern int g_100f1dc;
-extern int g_14ce8e0;
+extern int d2_DialogButtonAction;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int d2_CurrentElementId;
 extern char g_6ac494[];
@@ -53,23 +53,23 @@ int __cdecl d2_RunStraftatAccuseDialog(unsigned short* entityRecord)
 		goto none;
 	if (*entityRecord == 0xffff)
 		goto none;
-	if (*entityRecord == g_774970)
+	if (*entityRecord == gm_LocalPlayerSlot)
 		goto none;
-	if (!d2_CheckActionBlocker(&g_7f4ca0[g_774970], 2))
+	if (!d2_CheckActionBlocker(&gm_EntitySlotTable[gm_LocalPlayerSlot], 2))
 		return 0;
-	if (!he_HasNoActiveAction0x88(entityRecord, &g_7f4ca0[g_774970])) {
+	if (!he_HasNoActiveAction0x88(entityRecord, &gm_EntitySlotTable[gm_LocalPlayerSlot])) {
 		io_FormatTextBuffer(text, 0x409f, *entityRecord);
 		d2_ShowModalMessageBox(text, 0);
 		return 0;
 	}
-	me = &g_7f4ca0[g_774970];
-	r = CountMatchingStraftatEntries(*(int*) (entityRecord + 2), g_774970);
+	me = &gm_EntitySlotTable[gm_LocalPlayerSlot];
+	r = CountMatchingStraftatEntries(*(int*) (entityRecord + 2), gm_LocalPlayerSlot);
 	if (r <= 0) {
 		io_FormatTextBuffer(text, 0x1756, *entityRecord);
 		d2_ShowModalMessageBox(text, 0);
 		return 0;
 	}
-	if (!d2_CheckActionBlocker(&g_7f4ca0[g_774970], 2))
+	if (!d2_CheckActionBlocker(&gm_EntitySlotTable[gm_LocalPlayerSlot], 2))
 		return 0;
 	dlg = d2_LoadForm(0, 0, g_6ac494);
 	d2_CenterDialogWindows(dlg);
@@ -86,11 +86,11 @@ int __cdecl d2_RunStraftatAccuseDialog(unsigned short* entityRecord)
 	ids[4] = 4;
 	ids[5] = 0x13;
 	d2_DrawLawCandidateStatus(ids);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
-		} else if (g_100f1dc != -1) {
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
+		} else if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == h1) {
 				cm_RequestModifyHealth(me->f4, -2);
 				f = gm_CalcSkillDuelScore(me, entityRecord, 4);
@@ -107,10 +107,10 @@ int __cdecl d2_RunStraftatAccuseDialog(unsigned short* entityRecord)
 					io_FormatTextBuffer(text, 0x175c, *entityRecord, *entityRecord);
 				}
 				d2_ShowModalMessageBox(text, 0);
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 				result = 1;
 			} else if (d2_CurrentElementId == h2) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	} while (main_RunFrameLoop((void*) d2_RunStraftatAccuseDialog, 0x677c7) != 0);

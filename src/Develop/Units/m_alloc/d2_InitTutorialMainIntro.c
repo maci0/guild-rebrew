@@ -1,7 +1,7 @@
 
 
 
-extern int g_7749f8[];
+extern int d2_TutorialSampleBanks[];
 
 int* __cdecl m_alloc(int size, char* tag);
 void __cdecl d2_FreeTutorialNodes(int);
@@ -58,7 +58,7 @@ int* __cdecl d2_InitTutorialMainIntro(void)
 	intro[0x1a] = 0;
 	intro[0x1b] = 0;
 	intro[0x1c] = 0;
-	(*(int*)g_7749f8) = sb_LoadLocalizedSampleBank("TUTORIAL_INTRO_OUTRO.sbf", 0);
+	(*(int*)d2_TutorialSampleBanks) = sb_LoadLocalizedSampleBank("TUTORIAL_INTRO_OUTRO.sbf", 0);
 	return intro;
 }
 #pragma optimize("", on)

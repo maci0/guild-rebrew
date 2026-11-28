@@ -3,7 +3,7 @@
 
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 
 char* __cdecl gm_GetGuildHall(int k);
@@ -19,7 +19,7 @@ void* __cdecl gm_FindBuildingTreasury(unsigned char* e)
 	r = 0;
 	t = gm_GetBuildingTypeCategory(e[0]);
 	if (t == 5) {
-		c = ((unsigned char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])[0x169];
+		c = ((unsigned char *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[gm_LocalPlayerSlot])[0x169];
 		if (c == 0x1e) {
 			o = gm_GetGuildHall(2);
 		} else if (c == 0x1f) {

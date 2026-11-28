@@ -1,15 +1,15 @@
-extern int g_772ea8;
-extern int g_772ea8;
-extern int g_772eac;
-extern int g_772eac;
+extern int cut_CombatResolved;
+extern int cut_CombatResolved;
+extern int cut_PlunderedAmount;
+extern int cut_PlunderedAmount;
 
 /* ADDRESS: GOLD 0x004d6930 */
 /* ADDRESS: GOLDTL 0x004d7d30 */
 void __cdecl cut_ResolveSimpleCombat(char* p)
 {
-	if (g_772ea8 != 0) {
+	if (cut_CombatResolved != 0) {
 		*(int*) (p + 0x354) = 0;
-		*(int*) (p + 0x358) = g_772eac;
+		*(int*) (p + 0x358) = cut_PlunderedAmount;
 		return;
 	}
 	*(int*) (p + 0x354) = 1;

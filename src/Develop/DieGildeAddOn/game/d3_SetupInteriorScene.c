@@ -26,8 +26,8 @@ typedef struct {
 
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern int g_67a370;
-extern int g_6b8300;
+extern int d3_ActiveScene;
+extern int d3_CurrentFloor;
 
 void* __cdecl fcn_00502cd0(int, int, int, ...);
 Contact* __cdecl d3_FindSceneObject(int, int, int, char*);
@@ -67,22 +67,22 @@ void __cdecl d3_SetupInteriorScene(Player* p, void* unit)
 		c = d3_FindSceneObject(0, 0xa0, 0, "contact_EINKAUF_STEIN");
 	}
 	if (c != 0) {
-		if (p->slot == g_774970) {
+		if (p->slot == gm_LocalPlayerSlot) {
 			d3_SetObjectVisible(c, 0);
 		} else {
 			d3_SetObjectVisible(c, 1);
 			evt_StartShopIntroScript(p, unit);
 		}
 		c->shown = 1;
-	} else if (o->kind == 5 && p->slot != g_774970) {
+	} else if (o->kind == 5 && p->slot != gm_LocalPlayerSlot) {
 		evt_StartShopIntroScript(p, unit);
 	}
-	d3_TraverseSceneObjects(g_67a370, 0, 0x20, d3snd_PlayNamedSceneSound);
+	d3_TraverseSceneObjects(d3_ActiveScene, 0, 0x20, d3snd_PlayNamedSceneSound);
 	d3snd_PlayBuildingAmbient(p);
 	if (gm_CheckEntityType(p) == 0) {
-		d3_VisitSceneObjects(g_67a370, 0, 0xc0, d3_ApplyBuildingTextureSet, p);
+		d3_VisitSceneObjects(d3_ActiveScene, 0, 0xc0, d3_ApplyBuildingTextureSet, p);
 	}
-	d3_UpdateSceneDetailLevel(g_6b8300, 0);
+	d3_UpdateSceneDetailLevel(d3_CurrentFloor, 0);
 	d3_UpdateTerrainSeasonTextures();
 	d3_PrecacheAllSceneTextures(0);
 	d3_ApplySceneLightingPreset();

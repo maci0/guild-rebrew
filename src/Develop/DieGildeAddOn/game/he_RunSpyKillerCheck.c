@@ -1,6 +1,6 @@
 #include <math.h>
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl cm_SendCancelCharacterActions(int a1);

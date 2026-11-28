@@ -63,8 +63,8 @@ int __cdecl d3_AlignObjectToTerrain(char* self, int arg1, int arg2)
 	if (d3_ComputeObjectFootprintCorners(self, box.level, box.pt[0], box.pt[1], box.pt[2], box.pt[3]) != 0) {
 		goto fail;
 	}
-	if (g_6b8300 != 0) {
-		if (d3_ComputeQuadHeightRange((char*) g_6b8300, &box.loAligned, &box.hiAligned, box.pt[0], box.pt[1], box.pt[2], box.pt[3]) != 0) {
+	if (d3_CurrentFloor != 0) {
+		if (d3_ComputeQuadHeightRange((char*) d3_CurrentFloor, &box.loAligned, &box.hiAligned, box.pt[0], box.pt[1], box.pt[2], box.pt[3]) != 0) {
 			goto fail;
 		}
 		if (arg1 != 0) {
@@ -94,7 +94,7 @@ int __cdecl d3_AlignObjectToTerrain(char* self, int arg1, int arg2)
 		}
 		node = *(char**) (node + 0x1f4);
 	} while (node != 0);
-	if (ok != 0 && g_6b8300 == 0) {
+	if (ok != 0 && d3_CurrentFloor == 0) {
 		goto fail;
 	}
 pick:

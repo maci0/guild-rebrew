@@ -1,5 +1,5 @@
 #include "Develop/client_types.h"
-extern char* g_1015ea0;
+extern char* d2_Controls;
 extern int g_6a4768;
 extern int g_77e8a0;
 extern int d2_CurrentWindowId;
@@ -46,7 +46,7 @@ allocate_slot:
 	*(int*) ((char*) *(int*) (e + 0x74)) = (int) e;
 	*(int*) ((char*) *(int*) (e + 0x74) + 4) = d2_AddElementToWindow(i << 5, 0, a5, d2_CurrentWindowId);
 	v = *(int*) ((char*) *(int*) (e + 0x74) + 4);
-	((D2_CONTROL_TL*) (g_1015ea0))[v].value_058 = 1;
+	((D2_CONTROL_TL*) (d2_Controls))[v].value_058 = 1;
 	*(int*) ((char*) *(int*) (e + 0x74) + 8) = d2_LoadForm(a2, a3, a4);
 	d2_CenterForm(*(int*) ((char*) *(int*) (e + 0x74) + 8), 3);
 	d2_SetFormVisibility(*(int*) ((char*) *(int*) (e + 0x74) + 8), 0);

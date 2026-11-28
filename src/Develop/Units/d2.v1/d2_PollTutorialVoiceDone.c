@@ -1,11 +1,11 @@
 
 
 
-extern int* g_665f08;
-extern unsigned char** g_7749e4;
-extern int g_100f1dc;
+extern int* d2_TutorialState;
+extern unsigned char** tp_d2_ActiveHudSlot;
+extern int d2_DialogButtonAction;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char g_14cf950;
+extern char io_LastKeyScancode;
 
 int __cdecl sb_CheckVoicePlaying(int);
 void __cdecl sb_StopVoice(int, int);
@@ -15,32 +15,32 @@ int __cdecl d2_PollTutorialVoiceDone(void)
 	int o;
 	unsigned char* p;
 
-	o = g_665f08[7];
+	o = d2_TutorialState[7];
 	if (o == 0) {
 		return -4;
 	}
 	if (*(int*) (o + 0x74) == 0) {
 		return -4;
 	}
-	p = *g_7749e4;
+	p = *tp_d2_ActiveHudSlot;
 	if (p != 0 && *p == 0x87) {
-		if (g_100f1dc != -1) {
-			if (d2_CurrentElementId == g_665f08[8]) {
-				if (g_665f08[5] != 0) {
-					if (sb_CheckVoicePlaying(g_665f08[5]) != 0) {
-						sb_StopVoice(g_665f08[5], 0);
+		if (d2_DialogButtonAction != -1) {
+			if (d2_CurrentElementId == d2_TutorialState[8]) {
+				if (d2_TutorialState[5] != 0) {
+					if (sb_CheckVoicePlaying(d2_TutorialState[5]) != 0) {
+						sb_StopVoice(d2_TutorialState[5], 0);
 					}
-					g_665f08[5] = 0;
+					d2_TutorialState[5] = 0;
 				}
 				return 1;
 			}
 		}
-		else if (g_14cf950 == 0x1c) {
-			if (g_665f08[5] != 0) {
-				if (sb_CheckVoicePlaying(g_665f08[5]) != 0) {
-					sb_StopVoice(g_665f08[5], 0);
+		else if (io_LastKeyScancode == 0x1c) {
+			if (d2_TutorialState[5] != 0) {
+				if (sb_CheckVoicePlaying(d2_TutorialState[5]) != 0) {
+					sb_StopVoice(d2_TutorialState[5], 0);
 				}
-				g_665f08[5] = 0;
+				d2_TutorialState[5] = 0;
 			}
 			return 1;
 		}

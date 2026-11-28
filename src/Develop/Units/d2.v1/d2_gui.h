@@ -133,12 +133,12 @@ typedef struct D2_GUI_ITEM {
     int bild_offset;
     char pad8c[0x2f4 - 0x8c];
 } D2_GUI_ITEM;
-extern char* g_1015ea0;
+extern char* d2_Controls;
 extern int d2_ScreenHeight;
 extern int g_1040494;
 #endif
 
-extern char* g_772500;
+extern char* d2_FileObjTable;
 extern int d2_ResourceOffset;
 
 /* Inferred argument-slot view; complete backing allocation and owner unknown. */

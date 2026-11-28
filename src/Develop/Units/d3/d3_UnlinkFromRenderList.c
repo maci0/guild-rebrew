@@ -2,7 +2,7 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_1040960[];
-extern int g_67a370;
+extern int d3_ActiveScene;
 
 void __cdecl d3_UnlinkFromRenderList(char* node)
 {
@@ -23,7 +23,7 @@ void __cdecl d3_UnlinkFromRenderList(char* node)
 	} else {
 		*(char**) (*(char**) (node + 0x314) + 0x318) = *(char**) (node + 0x318);
 	}
-	if (owner == ((char*)g_67a370)) {
+	if (owner == ((char*)d3_ActiveScene)) {
 		d3_SceneRenderListHead = *(char**) (owner + 0xa4);
 		g_1040958 = *(char**) (owner + 0xa8);
 	}

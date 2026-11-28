@@ -1,6 +1,6 @@
 #include <string.h>
 #include "Develop/client_types.h"
-extern Rec24_99f5a0 g_99f5a0;
+extern Rec24_99f5a0 gm_DisasterState;
 extern char* gm_CityEntity;
 
 #pragma pack(push, 2)
@@ -20,9 +20,9 @@ void __cdecl cm_SendCopyEntityData(void* msg);
 int __cdecl cm_SendRandomEventState(void* msg);
 
 extern int gm_GameTime;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
 
 #pragma optimize("y", off)
 
@@ -37,7 +37,7 @@ void __cdecl gm_UpdateDisasterState(void)
 	int nextPhase;
 	float f;
 
-	if (g_99f5a0.head != 1) {
+	if (gm_DisasterState.head != 1) {
 		return;
 	}
 	memcpy(st, (void*) 0x99f5a0, sizeof(st));
@@ -126,17 +126,17 @@ void __cdecl gm_UpdateDisasterState(void)
 		*(int*) (ev + 8) = *(int*) (gm_CityEntity + 4);
 		*(int*) (ev + 0xc) = -1;
 		*(int*) (ev + 0x28) = gm_GameTime;
-		*(int*) (ev + 0x2c) = g_7f4c04;
-		*(int*) (ev + 0x30) = g_7f4c08;
-		*(unsigned short*) (ev + 0x34) = g_7f4c0c;
+		*(int*) (ev + 0x2c) = gm_GameTimeHour;
+		*(int*) (ev + 0x30) = gm_GameTimeSliceDword;
+		*(unsigned short*) (ev + 0x34) = gm_GameTimeTailWord;
 		ev[0x36] = 2;
 		*(int*) (ev + 0x58) = (gm_RandomMod(3) & 0xffff) * 3;
 		*(int*) (ev + 0x28) = gm_GameTime;
-		*(int*) (ev + 0x2c) = g_7f4c04;
-		*(int*) (ev + 0x30) = g_7f4c08;
-		*(unsigned short*) (ev + 0x34) = g_7f4c0c;
+		*(int*) (ev + 0x2c) = gm_GameTimeHour;
+		*(int*) (ev + 0x30) = gm_GameTimeSliceDword;
+		*(unsigned short*) (ev + 0x34) = gm_GameTimeTailWord;
 		((Time14*) (ev + 0x28))->min = 0;
-		if ((unsigned short) g_7f4c04 < 0x17 && (unsigned short) g_7f4c04 >= 7) {
+		if ((unsigned short) gm_GameTimeHour < 0x17 && (unsigned short) gm_GameTimeHour >= 7) {
 			gm_AddTime((Time14*) (ev + 0x28), gm_RandomMod(4) & 0xffff, (gm_RandomMod(2) & 0xffff) * 30, 0);
 		} else {
 			gm_AddTime((Time14*) (ev + 0x28), (gm_RandomMod(4) & 0xffff) + 7, (gm_RandomMod(2) & 0xffff) * 30, 0);
@@ -147,13 +147,13 @@ void __cdecl gm_UpdateDisasterState(void)
 		*(int*) (ev + 0xc) = -1;
 		*(int*) (ev + 0x58) = -1;
 		*(int*) (ev + 0x28) = gm_GameTime;
-		*(int*) (ev + 0x2c) = g_7f4c04;
-		*(int*) (ev + 0x30) = g_7f4c08;
-		*(unsigned short*) (ev + 0x34) = g_7f4c0c;
+		*(int*) (ev + 0x2c) = gm_GameTimeHour;
+		*(int*) (ev + 0x30) = gm_GameTimeSliceDword;
+		*(unsigned short*) (ev + 0x34) = gm_GameTimeTailWord;
 		ev[0x36] = 1;
 		*(int*) (ev + 0x74) = 1000;
 		((Time14*) (ev + 0x28))->min = 0;
-		if ((unsigned short) g_7f4c04 >= 0x17) {
+		if ((unsigned short) gm_GameTimeHour >= 0x17) {
 			gm_AddTime((Time14*) (ev + 0x28), (gm_RandomMod(4) & 0xffff) + 7, (gm_RandomMod(2) & 0xffff) * 30, 0);
 		} else {
 			gm_AddTime((Time14*) (ev + 0x28), gm_RandomMod(4) & 0xffff, (gm_RandomMod(2) & 0xffff) * 30, 0);
@@ -164,13 +164,13 @@ state3:
 		*(int*) (ev + 8) = *(int*) (gm_CityEntity + 4);
 		*(int*) (ev + 0x28) = gm_GameTime;
 		*(int*) (ev + 0xc) = -1;
-		*(int*) (ev + 0x2c) = g_7f4c04;
-		*(int*) (ev + 0x30) = g_7f4c08;
-		*(unsigned short*) (ev + 0x34) = g_7f4c0c;
+		*(int*) (ev + 0x2c) = gm_GameTimeHour;
+		*(int*) (ev + 0x30) = gm_GameTimeSliceDword;
+		*(unsigned short*) (ev + 0x34) = gm_GameTimeTailWord;
 		ev[0x36] = 2;
 		*(int*) (ev + 0x58) = -1;
 		*(int*) (ev + 0x74) = 1000;
-		if ((unsigned short) g_7f4c04 >= 0x17) {
+		if ((unsigned short) gm_GameTimeHour >= 0x17) {
 			gm_AddTime((Time14*) (ev + 0x28), (gm_RandomMod(4) & 0xffff) + 7, (gm_RandomMod(2) & 0xffff) * 30, 0);
 		} else {
 			gm_AddTime((Time14*) (ev + 0x28), gm_RandomMod(4) & 0xffff, (gm_RandomMod(2) & 0xffff) * 30, 0);

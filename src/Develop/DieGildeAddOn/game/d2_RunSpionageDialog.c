@@ -2,13 +2,13 @@
 #include "Develop/DieGildeAddOn/game/client_data.h"
 #include "Develop/Units/d2.v1/d2_window_view.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int d2_CurrentWindowId;
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
 extern int g_14b5e04;
 extern int g_14b5e08;
@@ -65,7 +65,7 @@ int __cdecl d2_RunSpionageDialog(char* rec)
 	float f2;
 
 	ret = 0; tries = 0;
-	q = he_StartHandlungSearch(2, 2, g_774970, 0, 0x18);
+	q = he_StartHandlungSearch(2, 2, gm_LocalPlayerSlot, 0, 0x18);
 	if (q != 0) {
 		for (;;) {
 			if (*(int*) (q + 0xc4) == *(int*) (rec + 4)) {
@@ -95,8 +95,8 @@ int __cdecl d2_RunSpionageDialog(char* rec)
 	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetForm((int) h, 2);
 	row = d2_EqualizeWindowButtonWidths(0, 3, g_14b5e18, d2_CurrentWindowId);
-	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[row].value_06c)) = 1;
-	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[row].width)) = ((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width;
+	*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[row].value_06c)) = 1;
+	*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[row].width)) = ((D2_WIN*)d2_Windows)[d2_CurrentWindowId].width;
 	d2_SetElementFont(row, 0x54);
 	row2 = d2_AddWindowValueGauge(0x57, 0x14, 0xc8, 0, 0x64, 0x7b, 0x82, d2_CurrentWindowId);
 	d2_CreateGuiWindow(row2, 0, 2, 0, 1);
@@ -104,12 +104,12 @@ int __cdecl d2_RunSpionageDialog(char* rec)
 	d2_SetForm((int) h, 3);
 	d2_CreateButtonRow(d2_CurrentWindowId, 0, sel, 2, g_14b5e04, g_14b5e08);
 	while (main_RunFrameLoop((void*) d2_RunSpionageDialog, 0x677c7) != 0) {
-		if (g_14ce8e0 != 0 || *(unsigned short*) rec == 0xffff) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0 || *(unsigned short*) rec == 0xffff) {
+			d2_DialogCloseRequested = 1;
 		} else {
 			v = d2_GetControlValue(row2);
 			f = (float) v * 0.33f + 1.0f;
-			w1 = gm_WalkEntityChain(*(unsigned short*) (((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970])));
+			w1 = gm_WalkEntityChain(*(unsigned short*) (((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot])));
 			f2 = (float) w1 * 0.005f;
 			w2 = gm_WalkEntityChain(*(unsigned short*) rec);
 			n = (int) ((float) w2 * 0.005f + f2);
@@ -117,15 +117,15 @@ int __cdecl d2_RunSpionageDialog(char* rec)
 			d2_SetForm((int) h, 1);
 			io_AppendText((int) 0x6811b0);
 			io_AppendText(0x42b8, n, *(unsigned short*) rec);
-			if (g_100f1dc != -1) {
+			if (d2_DialogButtonAction != -1) {
 				if (d2_CurrentElementId == sel[0]
-					&& gm_CheckEntityStock(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), n, g_773d75) != 0) {
+					&& gm_CheckEntityStock(((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot]), n, gm_ActiveTownIndex) != 0) {
 					pkt[4] = 0x18;
-					*(int*) (pkt + 8) = *(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id;
+					*(int*) (pkt + 8) = *(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id;
 					*(int*) (pkt + 0xc) = -1;
 					pkt[0x36] = 2;
 					*(int*) (pkt + 0x70) = *(int*) (rec + 4);
-					ea = *(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].ptr_170;
+					ea = *(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].ptr_170;
 					*(int*) (pkt + 0x58) = ea != 0 ? *(int*) (ea + 1) : -1;
 					*(int*) (pkt + 0x90) = n;
 					cm_SendLogAction("spionage");
@@ -134,10 +134,10 @@ int __cdecl d2_RunSpionageDialog(char* rec)
 					cm_SendTraceEnd("spionage");
 					io_FormatTextBuffer(buf, 0x42bf, *(unsigned short*) rec);
 					d2_ShowModalMessageBox(buf, 0x100);
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 					ret = 1;
 				} else if (d2_CurrentElementId == sel[1]) {
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				}
 			}
 		}

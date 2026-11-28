@@ -24,7 +24,7 @@ typedef struct {
 	char pad11[7];
 } Info;
 
-extern __int64 g_666018;
+extern __int64 gm_TargetPersonTypeMask;
 extern char s_6accdc[];
 
 int __cdecl amt_GetRoleTemplate(int, Info*);
@@ -94,7 +94,7 @@ int __cdecl d2_ShowAbsetzenDialog(unsigned char* e, int* o)
 	req.kind = 6;
 	req.f14 = 3;
 	req.size = 0x400;
-	req.cd = g_666018;
+	req.cd = gm_TargetPersonTypeMask;
 	io_FormatTextBuffer(text1, 0x1d98);
 	io_FormatTextBuffer(text2, 0x1d99);
 	g = d2_RunOfficeListDialog(info.f4, &req, text1, text2, 0);

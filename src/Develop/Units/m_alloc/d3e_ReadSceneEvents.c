@@ -3,9 +3,9 @@
 typedef int (__cdecl* SCENE_EVENT_HANDLER)(char*, int, char*);
 
 extern int g_67a590;
-extern int g_67a370;
+extern int d3_ActiveScene;
 #ifdef REBREW_GOLD
-int __cdecl fcn_004011d0(void* stream, void* dst);
+int __cdecl vfs_ReadDword(void* stream, void* dst);
 #else
 int __cdecl fcn_004011f0(void* stream, void* dst);
 #endif
@@ -23,7 +23,7 @@ void __cdecl d3e_ReadSceneEvents(void* r)
 	int id;
 
 #ifdef REBREW_GOLD
-	fcn_004011d0(r, &n);
+	vfs_ReadDword(r, &n);
 #else
 	fcn_004011f0(r, &n);
 #endif
@@ -31,6 +31,6 @@ void __cdecl d3e_ReadSceneEvents(void* r)
 		vfs_ReadCString(r, name);
 		id = d3_FindSceneEventId(name);
 		vfs_ReadCString(r, val);
-		d3e_RegisterSceneEvent(((char*)g_67a370), id, (*(SCENE_EVENT_HANDLER*)&g_67a590)(((char*)g_67a370), id, val), val);
+		d3e_RegisterSceneEvent(((char*)d3_ActiveScene), id, (*(SCENE_EVENT_HANDLER*)&g_67a590)(((char*)d3_ActiveScene), id, val), val);
 	}
 }

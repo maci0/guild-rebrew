@@ -1,11 +1,11 @@
 #include <string.h>
 #include "Develop/client_types.h"
-extern pos14_7f4c00 gm_GameTime; extern char g_7f4ca4[];
-extern int g_100f1dc, d2_CurrentElementId, g_14ce8e0, g_774654;
+extern pos14_7f4c00 gm_GameTime; extern char gm_EntityIdField[];
+extern int d2_DialogButtonAction, d2_CurrentElementId, io_RightButtonReleased, d2_DialogCloseRequested;
 
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern int d2_CurrentWindowId;
-extern s_1015f4c g_1015f4c[];
+extern s_1015f4c d2_WindowMetricsView[];
 extern int g_14a79c0[];
 
 typedef struct D2_HANDEL_SUCHEN_REQ {
@@ -107,14 +107,14 @@ void __cdecl d2_RunHandelSuchenDialog(int gebaeude, int a1)
 	d2_ResetBuildingUiSlots();
 	d2_CenterDialogWindows(total);
 	d2_SetForm(total, 2);
-	y = -0x80 + *(int*) ((char*) g_1015f4c + d2_CurrentWindowId * 0x3cc) / 2;
+	y = -0x80 + *(int*) ((char*) d2_WindowMetricsView + d2_CurrentWindowId * 0x3cc) / 2;
 	for (x = 0x19, cnt = 0; x < 0x109; x += 0x50, cnt++) {
 		h = d2_AddElementToWindow(y, x, (int) ids[cnt] + 0xdf, d2_CurrentWindowId);
-		*(unsigned int*)&((D2_CONTROL_TL*)g_1015ea0)[h].value_05c = 1;
-		*(unsigned int*)&((D2_CONTROL_TL*)g_1015ea0)[h].flags_1d0 = 3;
-		*(unsigned int*)&((D2_CONTROL_TL*)g_1015ea0)[h].value_1dc = 100;
-		*(unsigned int*)&((D2_CONTROL_TL*)g_1015ea0)[h].value_1e0 = 0x10;
-		*(unsigned int*)&((D2_CONTROL_TL*)g_1015ea0)[h].font = 0x54;
+		*(unsigned int*)&((D2_CONTROL_TL*)d2_Controls)[h].value_05c = 1;
+		*(unsigned int*)&((D2_CONTROL_TL*)d2_Controls)[h].flags_1d0 = 3;
+		*(unsigned int*)&((D2_CONTROL_TL*)d2_Controls)[h].value_1dc = 100;
+		*(unsigned int*)&((D2_CONTROL_TL*)d2_Controls)[h].value_1e0 = 0x10;
+		*(unsigned int*)&((D2_CONTROL_TL*)d2_Controls)[h].font = 0x54;
 		d2_SetControlText(h, g_14a79c0[(int) ids[cnt] * 2]);
 		handles[cnt] = h;
 		d2_SetElementEnabled(h, 1);
@@ -156,7 +156,7 @@ void __cdecl d2_RunHandelSuchenDialog(int gebaeude, int a1)
 			}
 			d2_SetControlText(handles[i], text);
 		}
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			for (sel = 0; sel < 3; sel++) {
 				if (handles[sel] == d2_CurrentElementId)
 					goto found;
@@ -168,14 +168,14 @@ void __cdecl d2_RunHandelSuchenDialog(int gebaeude, int a1)
 				req.kind = 0x15;
 				req.f36 = 1;
 				req.f08 = *(int*) (*(unsigned short*) (gebaeude + 0x27) * 0x21c
-					+ g_7f4ca4);
+					+ gm_EntityIdField);
 				req.f0c = *(int*) (gebaeude + 1);
 				*(pos14_7f4c00*)&req.f28 = gm_GameTime;
 
 				req.f5a = (unsigned short) ids[sel];
 				req.f60 = *(int*) (a1 + 2);
 				cnt = 0;
-				p = g_7f4ca4;
+				p = gm_EntityIdField;
 				do {
 					if (cnt >= 6)
 						break;
@@ -204,8 +204,8 @@ void __cdecl d2_RunHandelSuchenDialog(int gebaeude, int a1)
 			}
 		skip_req: ;
 		}
-		else if (g_14ce8e0 != 0)
-			g_774654 = 1;
+		else if (io_RightButtonReleased != 0)
+			d2_DialogCloseRequested = 1;
 		sel = main_RunFrameLoop(0x59ecc0, 0x677c7);
 	}
 	sv_ClearObjectSelection();

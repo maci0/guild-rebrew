@@ -25,7 +25,7 @@ typedef long (__stdcall* D3_CREATE_IB_FN)(D3D_DEVICE_VIEW*, unsigned int, unsign
 
 
 
-extern unsigned long g_14ce728;
+extern unsigned long d3_LastReleaseRefCount;
 
 void __cdecl d3_CreateSkyDomeBuffers(IUnk** o)
 {
@@ -35,13 +35,13 @@ void __cdecl d3_CreateSkyDomeBuffers(IUnk** o)
 		return;
 	}
 	if (o[0] != 0) {
-		g_14ce728 = o[0]->v->Release(o[0]);
+		d3_LastReleaseRefCount = o[0]->v->Release(o[0]);
 		o[0] = 0;
 	}
 	((D3_CREATE_VB_FN) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_00[23])(((D3D_DEVICE_VIEW*)g_6b5de0), 0x600, 0x228, 0x1c4, 0, o);
 	ib = &o[1];
 	if (*ib != 0) {
-		g_14ce728 = (*ib)->v->Release(*ib);
+		d3_LastReleaseRefCount = (*ib)->v->Release(*ib);
 		*ib = 0;
 	}
 	((D3_CREATE_IB_FN) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_00[24])(((D3D_DEVICE_VIEW*)g_6b5de0), 0x1a4, 0x228, 0x65, 0, ib);

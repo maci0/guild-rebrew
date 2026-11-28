@@ -33,8 +33,8 @@ typedef struct {
 extern int d3_CameraAnimating;
 extern int g_14ce8e8;
 extern int g_774774;
-extern short g_14ce8c0;
-extern short g_14ce8c2;
+extern short io_ActiveCursorX;
+extern short io_ActiveCursorY;
 extern int g_6b5c80;
 extern int d2_MouseTopBoundary;
 extern int d2_MouseRightBoundary;
@@ -49,8 +49,8 @@ extern int g_773df0;
 extern int g_773e34;
 extern int g_77464c;
 extern int d3_ActiveCamera;
-extern short g_14cf900;
-extern short g_14cf902;
+extern short io_PolledCursorState;
+extern short io_PolledCursorY;
 extern int g_14ce8d0;
 extern int g_14ce900;
 extern int g_14ce904;
@@ -69,8 +69,8 @@ extern float g_6a2558;
 extern float g_6a255c;
 extern float g_6a2560;
 extern float g_6a2564;
-extern float g_662d40[3];
-extern float g_6628a8;
+extern float d3_UnitAxisVectors[3];
+extern float flt_0_0;
 extern float g_662a3c;
 extern float g_662a98;
 extern float g_66430c;
@@ -80,9 +80,9 @@ extern double g_6629c8;
 extern float g_665e00;
 extern float g_665e04;
 extern float g_665e10;
-extern char* g_67a370;
-extern char g_7f4ca0[];
-extern unsigned short g_774970;
+extern char* d3_ActiveScene;
+extern char gm_EntitySlotTable[];
+extern unsigned short gm_LocalPlayerSlot;
 extern float g_773e14;
 extern float g_773e18;
 extern float g_773e1c;
@@ -120,13 +120,13 @@ int __cdecl d3_UpdateCameraFromMouse(void)
 		return 0;
 	}
 	cam = (View*) d3_ActiveCamera;
-	s902 = g_14cf902;
+	s902 = io_PolledCursorY;
 	if (g_14ce8e8 != 0) {
 		if (g_774774 == 0) {
-			g_774754 = (int) g_14ce8c0;
-			g_774758 = (int) g_14ce8c2;
-			g_773e38 = (int) g_14ce8c0;
-			g_773df8 = (int) g_14ce8c2;
+			g_774754 = (int) io_ActiveCursorX;
+			g_774758 = (int) io_ActiveCursorY;
+			g_773e38 = (int) io_ActiveCursorX;
+			g_773df8 = (int) io_ActiveCursorY;
 			g_774774 = 1;
 			g_6772c4 = 0;
 			g_773e00 = d2_MouseRightBoundary;
@@ -144,7 +144,7 @@ int __cdecl d3_UpdateCameraFromMouse(void)
 		if (g_77475c == 0) {
 			g_77475c = 1;
 			g_774764 = d3_CameraHeightFraction;
-			g_774644 = (int) g_14cf900;
+			g_774644 = (int) io_PolledCursorState;
 			g_773e3c = (int) s902;
 			g_774768 = g_774694;
 			g_774770 = cam->pos.y - ((g_6a2560 - g_6a2558) * g_774764 + g_6a255c);
@@ -165,7 +165,7 @@ L4:
 		d2_MouseRightBoundary = 0x7d00;
 		d2_MouseBottomBoundary = 0x7d00;
 		g_774764 = g_774764 + n * 0.004;
-		g_773e38 = (int) g_14cf900;
+		g_773e38 = (int) io_PolledCursorState;
 		g_6b5c80 = -0x7d00;
 		d2_MouseTopBoundary = -0x7d00;
 	}
@@ -213,12 +213,12 @@ main:
 	rot.y = cam->rot.y;
 	rot.z = cam->rot.z;
 	rot.x = (g_6a2564 - g_6a255c) * g_774694 + g_6a255c;
-	rot.y = g_77476c - ((int) g_14cf900 - g_774644) * g_665e00;
+	rot.y = g_77476c - ((int) io_PolledCursorState - g_774644) * g_665e00;
 	if (CompareVector3WithinTolerance((float*) &cam->pos, (float*) &pos, 0.1f) == 0
 	    || CompareVector3WithinTolerance((float*) &cam->rot, (float*) &rot, 0.001f) == 0) {
 		d3_SetNodePosition((void*) d3_ActiveCamera, &pos);
 		d3_SetObjectRotation((void*) d3_ActiveCamera, &rot);
-		ent = fcn_00509570(((Entity *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]));
+		ent = fcn_00509570(((Entity *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[gm_LocalPlayerSlot]));
 		if (ent != 0) {
 			*(float*) (ent + 0x88) = g_774694;
 			*(int*) (ent + 0x8c) = *(int*) &((View*) d3_ActiveCamera)->pos.x;
@@ -249,7 +249,7 @@ afterFirst:
 		d3_CameraHeightFraction = (float) 0.0;
 	}
 	d3_SetCameraHeightFraction(d3_CameraHeightFraction);
-	ent = fcn_00509570(((Entity *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]));
+	ent = fcn_00509570(((Entity *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[gm_LocalPlayerSlot]));
 	if (ent != 0) {
 		*(float*) (ent + 0x88) = g_774694;
 		*(int*) (ent + 0x8c) = *(int*) &((View*) d3_ActiveCamera)->pos.x;
@@ -273,17 +273,17 @@ predict:
 	D3DXMatrixTranspose(mat, cam->mat);
 	q.y = 0.0f;
 	t = (float) g_7766b4 * g_665df8;
-	d.x = (float) ((int) g_14cf900 - g_773e38) * t;
-	d.y = -((float) ((int) g_14cf902 - g_773df8)) * t;
-	q.x = mat[8] * g_662d40[2] + mat[4] * g_662d40[1] + mat[0] * g_662d40[0];
-	q.z = mat[10] * g_662d40[2] + mat[6] * g_662d40[1] + mat[2] * g_662d40[0];
+	d.x = (float) ((int) io_PolledCursorState - g_773e38) * t;
+	d.y = -((float) ((int) io_PolledCursorY - g_773df8)) * t;
+	q.x = mat[8] * d3_UnitAxisVectors[2] + mat[4] * d3_UnitAxisVectors[1] + mat[0] * d3_UnitAxisVectors[0];
+	q.z = mat[10] * d3_UnitAxisVectors[2] + mat[6] * d3_UnitAxisVectors[1] + mat[2] * d3_UnitAxisVectors[0];
 	if ((float) sqrt((double) (q.x * q.x + q.z * q.z)) < 0.1f) {
 		v.y = d.y;
 		v.z = 0.0f;
 		q.x = mat[0] * d.x + mat[4] * d.y + mat[8] * 0.0f;
 		q.z = mat[2] * d.x + mat[6] * d.y + mat[10] * 0.0f;
 	} else {
-		ang = -d3_WrapYawDelta(g_662d40, &q.x);
+		ang = -d3_WrapYawDelta(d3_UnitAxisVectors, &q.x);
 		v.y = 0.0f;
 		v.z = d.y;
 		q.x = d.x * (float) cos(ang) + d.y * (float) sin(ang);
@@ -295,8 +295,8 @@ predict:
 	v.y = cam->pos.y;
 	v.z = cam->pos.z + q.z;
 	if (CompareVector3WithinTolerance(&g_773e14, (float*) &v, 0.1f) == 0) {
-		if (*(int*) (g_67a370 + 0xb0) != 0) {
-			ent = *(char**) (g_67a370 + 0xb0);
+		if (*(int*) (d3_ActiveScene + 0xb0) != 0) {
+			ent = *(char**) (d3_ActiveScene + 0xb0);
 			t = *(float*) ent + *(float*) (ent + 0x10) * g_66430c;
 			if (v.x < t) {
 				v.x = t;
@@ -317,7 +317,7 @@ predict:
 			}
 		}
 		d3_SetNodePosition((void*) d3_ActiveCamera, &v);
-		ent = fcn_00509570(((Entity *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]));
+		ent = fcn_00509570(((Entity *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[gm_LocalPlayerSlot]));
 		if (ent != 0) {
 			*(int*) (ent + 0x8c) = *(int*) &((View*) d3_ActiveCamera)->pos.x;
 			*(int*) (ent + 0x90) = *(int*) &((View*) d3_ActiveCamera)->pos.y;
@@ -330,8 +330,8 @@ predict:
 	g_773e14 = v.x;
 	g_773e18 = v.y;
 	g_773e1c = v.z;
-	g_773e38 = (int) g_14cf900;
-	g_773df8 = (int) g_14cf902;
+	g_773e38 = (int) io_PolledCursorState;
+	g_773df8 = (int) io_PolledCursorY;
 	g_774760 = 1;
 tail:
 	ret = g_774760 - g_14ce900 + g_14ce904 + g_77475c;

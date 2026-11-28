@@ -14,10 +14,10 @@ typedef struct {
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern void* g_6b7e9c;
-extern void* g_14cb8e0;
+extern void* evt_GlobalVariables;
 extern void* g_6b7ea0;
 extern void* g_6b7ea4;
-extern void* g_14cb8f0;
+extern void* evt_ScriptErrorLog;
 void __cdecl evt_FreeScript(Ctx* c);
 void __cdecl m_FreeTracked(void* p);
 
@@ -26,16 +26,16 @@ void __cdecl evt_ShutdownScripts(void)
 	int i;
 
 	for (i = 0; i < 0x80; i++) {
-		if ((*(Ctx**)&g_6b7e94)[i].used != 0) {
-			evt_FreeScript(&(*(Ctx**)&g_6b7e94)[i]);
+		if ((*(Ctx**)&evt_ScriptSlots)[i].used != 0) {
+			evt_FreeScript(&(*(Ctx**)&evt_ScriptSlots)[i]);
 		}
 	}
 	for (i = 0; i < 0x100; i++) {
 		(*(Var**)&g_6b7e9c)[i].name[0] = 0;
 	}
-	if (g_14cb8e0 != 0) {
-		m_FreeTracked(g_14cb8e0);
-		g_14cb8e0 = 0;
+	if (evt_GlobalVariables != 0) {
+		m_FreeTracked(evt_GlobalVariables);
+		evt_GlobalVariables = 0;
 	}
 	if ((*(Var**)&g_6b7e9c) != 0) {
 		m_FreeTracked((*(Var**)&g_6b7e9c));
@@ -49,12 +49,12 @@ void __cdecl evt_ShutdownScripts(void)
 		m_FreeTracked(g_6b7ea4);
 		g_6b7ea4 = 0;
 	}
-	if (g_14cb8f0 != 0) {
-		m_FreeTracked(g_14cb8f0);
-		g_14cb8f0 = 0;
+	if (evt_ScriptErrorLog != 0) {
+		m_FreeTracked(evt_ScriptErrorLog);
+		evt_ScriptErrorLog = 0;
 	}
-	if ((*(Ctx**)&g_6b7e94) != 0) {
-		m_FreeTracked((*(Ctx**)&g_6b7e94));
-		(*(Ctx**)&g_6b7e94) = 0;
+	if ((*(Ctx**)&evt_ScriptSlots) != 0) {
+		m_FreeTracked((*(Ctx**)&evt_ScriptSlots));
+		(*(Ctx**)&evt_ScriptSlots) = 0;
 	}
 }

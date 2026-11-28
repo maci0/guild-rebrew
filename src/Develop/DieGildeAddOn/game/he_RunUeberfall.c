@@ -187,7 +187,7 @@ label_56b858:
 				if (*(char*) (ent + 0xf0) == 0 &&
 				    *(unsigned short*) (ent + 8) != *(unsigned short*) (obj + 8) &&
 				    (prev == -1 ||
-				     prev == *(int*) ((unsigned int) *(unsigned short*) (ent + 8) * 0x21c + (unsigned long)&g_7f4ca4))) {
+				     prev == *(int*) ((unsigned int) *(unsigned short*) (ent + 8) * 0x21c + (unsigned long)&gm_EntityIdField))) {
 					cur = gm_FindRecordById(*(int*) (ent + 0xac));
 					if (cur == 0)
 						goto next;
@@ -237,7 +237,7 @@ label_56b858:
 						goto next;
 				accept:
 					sel[count] = ent;
-					prev = *(int*) ((unsigned int) *(unsigned short*) (ent + 8) * 0x21c + (unsigned long)&g_7f4ca4);
+					prev = *(int*) ((unsigned int) *(unsigned short*) (ent + 8) * 0x21c + (unsigned long)&gm_EntityIdField);
 					*(char*) (ent + 0xf0) = 1;
 					list[count] = fcn_00502cd0(0, 2, 7, 1, *(int*) (ent + 0xac));
 					count++;
@@ -249,7 +249,7 @@ label_56b858:
 		limit = 0x50;
 		if (list[3] != 0)
 			limit -= 0x32;
-		if (*(int*) &g_774800)
+		if (*(int*) &gm_AllEntitiesControllable)
 			limit = 0;
 		d3_SelectSceneContext(saved, 1);
 		if (door != 0 && cut_FindCutscene(3, -1) == 0 &&
@@ -259,12 +259,12 @@ label_56b858:
 				memset(buf.msg, 0, sizeof(buf.msg));
 				buf.msg[8] = 3;
 				buf.msg[0x26] = 0xa2;
-				*(int*) (buf.msg + 0xc) = *(int*) ((unsigned int) *(unsigned short*) &g_774970 * 0x21c + (unsigned long)&g_7f4ca4);
+				*(int*) (buf.msg + 0xc) = *(int*) ((unsigned int) *(unsigned short*) &gm_LocalPlayerSlot * 0x21c + (unsigned long)&gm_EntityIdField);
 				*(int*) (buf.msg + 0x14) = -1;
 				buf.msg[0x30] = 2;
 				buf.msg[0x7c] = 1;
 				*(int*) (buf.msg + 0x38) = prev;
-				*(int*) (buf.msg + 0x34) = *(int*) ((unsigned int) *(unsigned short*) (slot + 0x27) * 0x21c + (unsigned long)&g_7f4ca4);
+				*(int*) (buf.msg + 0x34) = *(int*) ((unsigned int) *(unsigned short*) (slot + 0x27) * 0x21c + (unsigned long)&gm_EntityIdField);
 				if (door != 0 && strstr(door, (char*) 0x6a1d10) != 0)
 					buf.msg[0x7c] |= 8;
 				for (i = 0; i < 0x10; i++) {

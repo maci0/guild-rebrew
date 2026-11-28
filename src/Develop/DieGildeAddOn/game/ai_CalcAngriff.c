@@ -13,8 +13,8 @@ extern pos14_7f4c00 gm_GameTime;
 extern char* g_entity_type_table;
 extern unsigned char* g_entity_ptr;
 extern char* gm_CityEntity;
-extern char g_7f4ca0[];
-extern char g_7f4ca4[];
+extern char gm_EntitySlotTable[];
+extern char gm_EntityIdField[];
 
 int __cdecl gm_RandomMod(unsigned short);
 char* __cdecl gm_SearchTable67(int);
@@ -160,7 +160,7 @@ int __cdecl ai_CalcAngriff(char* attackerRec, int a2)
 		sprintf(buf, "ai_CalcAngriff(): Meister %s greift an '%s' ", attackerName, cand + 5);
 		memset(msg, 0, sizeof(msg));
 		msg[4] = 0x49;
-		*(int*) (msg + 8) = *(int*) (g_7f4ca4 + *(unsigned short*) (*(char**) (attackerRec + 0x16c) + 0x27) * 0x21c);
+		*(int*) (msg + 8) = *(int*) (gm_EntityIdField + *(unsigned short*) (*(char**) (attackerRec + 0x16c) + 0x27) * 0x21c);
 		*(int*) (msg + 0xc) = *(int*) (*(char**) (attackerRec + 0x16c) + 1);
 		*(int*) (msg + 0x28) = *(int*) &gm_GameTime;
 		*(int*) (msg + 0x2c) = gm_GameTime.b;
@@ -175,7 +175,7 @@ int __cdecl ai_CalcAngriff(char* attackerRec, int a2)
 		}
 		i = 0;
 		if (n > 0) {
-			rec = g_7f4ca0 + 0x165;
+			rec = gm_EntitySlotTable + 0x165;
 			do {
 				if ((int) rec >= 0x85a205) {
 					break;
@@ -218,7 +218,7 @@ int __cdecl ai_CalcAngriff(char* attackerRec, int a2)
 	sprintf(buf, "ai_CalcAngriff(): Meister %s spioniert bei '%s'", attackerName, cand + 5);
 	memset(msg, 0, sizeof(msg));
 	msg[4] = 0x40;
-	*(int*) (msg + 8) = *(int*) (g_7f4ca4 + *(unsigned short*) (*(char**) (attackerRec + 0x16c) + 0x27) * 0x21c);
+	*(int*) (msg + 8) = *(int*) (gm_EntityIdField + *(unsigned short*) (*(char**) (attackerRec + 0x16c) + 0x27) * 0x21c);
 	*(int*) (msg + 0xc) = *(int*) (*(char**) (attackerRec + 0x16c) + 1);
 	*(int*) (msg + 0x28) = *(int*) &gm_GameTime;
 	*(int*) (msg + 0x2c) = gm_GameTime.b;
@@ -233,7 +233,7 @@ int __cdecl ai_CalcAngriff(char* attackerRec, int a2)
 	}
 	i = 0;
 	if (n > 0) {
-		rec = g_7f4ca0 + 0x165;
+		rec = gm_EntitySlotTable + 0x165;
 		do {
 			if ((int) rec >= 0x85a205) {
 				break;

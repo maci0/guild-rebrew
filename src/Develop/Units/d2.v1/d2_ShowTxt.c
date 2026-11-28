@@ -74,7 +74,7 @@ typedef D2_CONTROL_TL D2_TEXT_ENTRY;
 typedef int D2_TEXT_COORD;
 
 #include "Develop/client_types.h"
-extern Win_1015f40 g_1015f40[0x60];
+extern Win_1015f40 d2_Windows[0x60];
 extern int d2_DefaultFont;
 extern char g_67d5bc[];
 extern char s_67d420[];
@@ -83,8 +83,8 @@ int __cdecl d2_AllocateElement(void);
 int __cdecl d2_MeasureTextWidth(char* text, int font);
 void __cdecl d2_InsertControlAfterWindow(int slot, D2_TEXT_WINDOW* parent);
 
-#define d2_TEXT_WINDOWS ((D2_TEXT_WINDOW*)g_1015f40)
-#define d2_TEXT_ENTRIES ((D2_TEXT_ENTRY*)g_1015ea0)
+#define d2_TEXT_WINDOWS ((D2_TEXT_WINDOW*)d2_Windows)
+#define d2_TEXT_ENTRIES ((D2_TEXT_ENTRY*)d2_Controls)
 #define d2_TEXT_ERROR s_67d420
 #define d2_TEXT_DEFAULT_FONT d2_DefaultFont
 #define d2_TEXT_TAG g_67d5bc

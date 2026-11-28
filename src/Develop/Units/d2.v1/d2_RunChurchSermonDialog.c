@@ -1,6 +1,6 @@
-extern int g_774654;
+extern int d2_DialogCloseRequested;
 extern int d2_CurrentElementId;
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 #include <string.h>
 
 #include "Develop/client_types.h"
@@ -46,15 +46,15 @@ typedef struct SERMON_TARGET_SEL {
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char* gm_CityEntity;
 extern int d2_CurrentWindowId;
-extern char* g_772500;
-extern char* g_77255c;
+extern char* d2_FileObjTable;
+extern char* d2_CurrentWindow;
 extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-extern char g_7f4ca4[];
-char g_6811b0[] = "$C";
-extern volatile int g_6b7fac;
-extern int g_100f1dc;
-extern int g_666018;
+extern char gm_EntityIdField[];
+char str_dollar_C[] = "$C";
+extern volatile int gm_GameTicks;
+extern int d2_DialogButtonAction;
+extern int gm_TargetPersonTypeMask;
 extern int g_66601c;
 
 unsigned short* __cdecl fcn_00502cd0(int container, int count, int arg, int arg2);
@@ -126,7 +126,7 @@ void __cdecl d2_RunChurchSermonDialog(char* building)
 	if (*(unsigned short*) (building + 0x27) == 0xffff) {
 		return;
 	}
-	if (*(unsigned short*) (building + 0x27) != g_774970) {
+	if (*(unsigned short*) (building + 0x27) != gm_LocalPlayerSlot) {
 		return;
 	}
 	obj = (char*) fcn_00502cd0(*(int*) (building + 0x5d), 1, 0, 0x1b5);
@@ -175,14 +175,14 @@ void __cdecl d2_RunChurchSermonDialog(char* building)
 	d2_SetForm(dlg, 0);
 	d2_InitWindowBounds(d2_CurrentWindowId);
 	flag = 1;
-	g_100f1dc = -1;
-	prev = g_6b7fac;
+	d2_DialogButtonAction = -1;
+	prev = gm_GameTicks;
 	do {
-		if ((unsigned int) (g_6b7fac - prev) > 0x64 && state != 3) {
+		if ((unsigned int) (gm_GameTicks - prev) > 0x64 && state != 3) {
 			flag = 1;
-			prev = g_6b7fac;
+			prev = gm_GameTicks;
 			obj = (char*) fcn_00502cd0(*(int*) (building + 0x5d), 1, 0, 0x1b5);
-			if (obj == 0 || *(unsigned short*) (building + 0x27) != g_774970) {
+			if (obj == 0 || *(unsigned short*) (building + 0x27) != gm_LocalPlayerSlot) {
 				state = 3;
 				flag = 0;
 				goto post;
@@ -206,21 +206,21 @@ void __cdecl d2_RunChurchSermonDialog(char* building)
 		btnCancel = -1;
 		if (state == 0) {
 			d2_SetForm(dlg, 1);
-			io_AppendText((int) g_6811b0);
+			io_AppendText((int) str_dollar_C);
 			io_AppendText(0x19a5, 1, unit + 0x52);
 			d2_SetForm(dlg, 2);
-			io_AppendText((int) g_6811b0);
+			io_AppendText((int) str_dollar_C);
 			i = io_AppendText(0x19a6);
 			btnState0 = d2_GetWindowListItem(dlg, 2, i);
 			btnCancel = d2_GetWindowListItem(dlg, 2, i + 1);
 		} else if (state == 1) {
 			d2_SetForm(dlg, 1);
 			d2_ClearWindowChildren(d2_CurrentWindowId, 1);
-			io_AppendText((int) g_6811b0);
+			io_AppendText((int) str_dollar_C);
 			io_AppendText(0x19a0, unit + 0x52);
 			d2_SetForm(dlg, 2);
 			d2_ClearWindowChildren(d2_CurrentWindowId, 1);
-			io_AppendText((int) g_6811b0);
+			io_AppendText((int) str_dollar_C);
 			i = io_AppendText(0x19a1);
 			btnState1 = d2_GetWindowListItem(dlg, 2, i);
 			btnCancel = d2_GetWindowListItem(dlg, 2, i + 1);
@@ -232,18 +232,18 @@ void __cdecl d2_RunChurchSermonDialog(char* building)
 		} else if (state == 2) {
 			d2_SetForm(dlg, 1);
 			d2_ClearWindowChildren(d2_CurrentWindowId, 1);
-			io_AppendText((int) g_6811b0);
+			io_AppendText((int) str_dollar_C);
 			io_AppendText(0x198e, unit + 0x52, *(char*) (obj + 0x1c) + 0x1990,
 			    *(char*) (obj + 0x1d) + 0x1998, *(unsigned short*) info);
 			sel.e = info;
-			sel.x = *(int*) (g_77255c + 0xc) / 2 - *(short*) (g_772500 + 0x1ebd8) / 2;
+			sel.x = *(int*) (d2_CurrentWindow + 0xc) / 2 - *(short*) (d2_FileObjTable + 0x1ebd8) / 2;
 			sel.y = 0xc3;
 			sel.f30 = 1;
 			d2_BuildPersonStatusDesc(&sel);
 			d2_DrawPersonCard(sel.x, sel.y, d2_CurrentWindowId, 0x54, &sel, 1);
 			d2_SetForm(dlg, 2);
 			d2_ClearWindowChildren(d2_CurrentWindowId, 1);
-			io_AppendText((int) g_6811b0);
+			io_AppendText((int) str_dollar_C);
 			i = io_AppendText(0x198f);
 			btnState2 = d2_GetWindowListItem(dlg, 2, i);
 			btnCancel = d2_GetWindowListItem(dlg, 2, i + 1);
@@ -255,13 +255,13 @@ void __cdecl d2_RunChurchSermonDialog(char* building)
 		}
 		flag = 0;
 	post:
-		if (g_14ce8e0 != 0 || state == 3) {
-			g_774654 = 1;
-		} else if (g_100f1dc != -1) {
+		if (io_RightButtonReleased != 0 || state == 3) {
+			d2_DialogCloseRequested = 1;
+		} else if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == btnState0) {
-				if (d2_CheckActionBlocker((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 1) != 0) {
+				if (d2_CheckActionBlocker((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot], 1) != 0) {
 					v12 = 1;
-					gm_ModifyHealth(((ENTITY_RECORD*)(g_7f4ca4 - 4))[g_774970].entity_id, -1);
+					gm_ModifyHealth(((ENTITY_RECORD*)(gm_EntityIdField - 4))[gm_LocalPlayerSlot].entity_id, -1);
 					cm_BeginPacketFieldDelta(obj, *(int*) (obj + 2));
 					cm_AppendPacketFieldDelta(1, 1, 0x22, &v12);
 					rc = cm_RequestChangeAttribute();
@@ -275,7 +275,7 @@ void __cdecl d2_RunChurchSermonDialog(char* building)
 				memset(pkt2, 0, 0x50);
 				*(int*) (pkt2 + 4) = 0x400;
 				*(int*) (pkt2 + 0x10) = 6;
-				*(int*) (pkt2 + 8) = g_666018;
+				*(int*) (pkt2 + 8) = gm_TargetPersonTypeMask;
 				*(int*) (pkt2 + 0xc) = g_66601c;
 				io_FormatTextBuffer(text, 0x19a2);
 				info = d2_OpenTargetPicker(pkt2, text, 0, 0);
@@ -319,7 +319,7 @@ void __cdecl d2_RunChurchSermonDialog(char* building)
 					main_RunFrameLoop((void*) 0, 0x677c7);
 				}
 			} else if (d2_CurrentElementId == btnCancel) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	} while (main_RunFrameLoop((void*) d2_RunChurchSermonDialog, 0x677c7) != 0);

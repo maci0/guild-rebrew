@@ -1,4 +1,4 @@
-extern char* g_6b8300;
+extern char* d3_CurrentFloor;
 extern char gm_GameTime[];
 
 int __cdecl gm_GetSeason(char*);
@@ -23,14 +23,14 @@ void __cdecl d3_UpdateTerrainSeasonTextures(void)
 	char byte;
 
 	mode = gm_GetSeason(gm_GameTime);
-	if (g_6b8300 == 0) {
+	if (d3_CurrentFloor == 0) {
 		return;
 	}
 	if (mode == 3) {
 		found = 0;
 		for (off = 0; !found && off < 0x200; off += 0x40) {
-			if (g_6b8300[off + 0x7e24] != 0 &&
-			    strstr(&g_6b8300[off + 0x7e24], "_SNOW") != 0) {
+			if (d3_CurrentFloor[off + 0x7e24] != 0 &&
+			    strstr(&d3_CurrentFloor[off + 0x7e24], "_SNOW") != 0) {
 				found = 1;
 			}
 		}
@@ -38,7 +38,7 @@ void __cdecl d3_UpdateTerrainSeasonTextures(void)
 			return;
 		}
 		for (off = 0, i = 0; off < 0x200; off += 0x40, i++) {
-			p = &g_6b8300[off + 0x7e24];
+			p = &d3_CurrentFloor[off + 0x7e24];
 			if (*p == 0) {
 				continue;
 			}
@@ -61,9 +61,9 @@ void __cdecl d3_UpdateTerrainSeasonTextures(void)
 			}
 			sprintf(name, "%s_SNOW", buf);
 			if (d3_ResolveTexturePath(name) != 0) {
-				d3_ReloadFloorTextureSlot(g_6b8300, name, i);
+				d3_ReloadFloorTextureSlot(d3_CurrentFloor, name, i);
 			} else {
-				d3_ReloadFloorTextureSlot(g_6b8300, buf, i);
+				d3_ReloadFloorTextureSlot(d3_CurrentFloor, buf, i);
 			}
 		}
 		return;
@@ -71,8 +71,8 @@ void __cdecl d3_UpdateTerrainSeasonTextures(void)
 	if (mode == 2) {
 		found = 0;
 		for (off = 0; !found && off < 0x200; off += 0x40) {
-			if (g_6b8300[off + 0x7e24] != 0 &&
-			    strstr(&g_6b8300[off + 0x7e24], "_HERBST") != 0) {
+			if (d3_CurrentFloor[off + 0x7e24] != 0 &&
+			    strstr(&d3_CurrentFloor[off + 0x7e24], "_HERBST") != 0) {
 				found = 1;
 			}
 		}
@@ -80,7 +80,7 @@ void __cdecl d3_UpdateTerrainSeasonTextures(void)
 			return;
 		}
 		for (off = 0, i = 0; off < 0x200; off += 0x40, i++) {
-			p = &g_6b8300[off + 0x7e24];
+			p = &d3_CurrentFloor[off + 0x7e24];
 			if (*p == 0) {
 				continue;
 			}
@@ -103,9 +103,9 @@ void __cdecl d3_UpdateTerrainSeasonTextures(void)
 			}
 			sprintf(name, "%s_HERBST", buf);
 			if (d3_ResolveTexturePath(name) != 0) {
-				d3_ReloadFloorTextureSlot(g_6b8300, name, i);
+				d3_ReloadFloorTextureSlot(d3_CurrentFloor, name, i);
 			} else {
-				d3_ReloadFloorTextureSlot(g_6b8300, buf, i);
+				d3_ReloadFloorTextureSlot(d3_CurrentFloor, buf, i);
 			}
 		}
 		return;
@@ -113,8 +113,8 @@ void __cdecl d3_UpdateTerrainSeasonTextures(void)
 	if (mode == 0) {
 		found = 0;
 		for (off = 0; !found && off < 0x200; off += 0x40) {
-			if (g_6b8300[off + 0x7e24] != 0 &&
-			    strstr(&g_6b8300[off + 0x7e24], "_FRUEHLING") != 0) {
+			if (d3_CurrentFloor[off + 0x7e24] != 0 &&
+			    strstr(&d3_CurrentFloor[off + 0x7e24], "_FRUEHLING") != 0) {
 				found = 1;
 			}
 		}
@@ -122,7 +122,7 @@ void __cdecl d3_UpdateTerrainSeasonTextures(void)
 			return;
 		}
 		for (off = 0, i = 0; off < 0x200; off += 0x40, i++) {
-			p = &g_6b8300[off + 0x7e24];
+			p = &d3_CurrentFloor[off + 0x7e24];
 			if (*p == 0) {
 				continue;
 			}
@@ -145,9 +145,9 @@ void __cdecl d3_UpdateTerrainSeasonTextures(void)
 			}
 			sprintf(name, "%s_FRUEHLING", buf);
 			if (d3_ResolveTexturePath(name) != 0) {
-				d3_ReloadFloorTextureSlot(g_6b8300, name, i);
+				d3_ReloadFloorTextureSlot(d3_CurrentFloor, name, i);
 			} else {
-				d3_ReloadFloorTextureSlot(g_6b8300, buf, i);
+				d3_ReloadFloorTextureSlot(d3_CurrentFloor, buf, i);
 			}
 		}
 		return;
@@ -155,10 +155,10 @@ void __cdecl d3_UpdateTerrainSeasonTextures(void)
 	if (mode == 1) {
 		found = 0;
 		for (off = 0; !found && off < 0x200; off += 0x40) {
-			if (g_6b8300[off + 0x7e24] != 0 &&
-			    (strstr(&g_6b8300[off + 0x7e24], "_FRUEHLING") != 0 ||
-			     strstr(&g_6b8300[off + 0x7e24], "_HERBST") != 0 ||
-			     strstr(&g_6b8300[off + 0x7e24], "_SNOW") != 0)) {
+			if (d3_CurrentFloor[off + 0x7e24] != 0 &&
+			    (strstr(&d3_CurrentFloor[off + 0x7e24], "_FRUEHLING") != 0 ||
+			     strstr(&d3_CurrentFloor[off + 0x7e24], "_HERBST") != 0 ||
+			     strstr(&d3_CurrentFloor[off + 0x7e24], "_SNOW") != 0)) {
 				found = 1;
 			}
 		}
@@ -166,7 +166,7 @@ void __cdecl d3_UpdateTerrainSeasonTextures(void)
 			return;
 		}
 		for (off = 0, i = 0; off < 0x200; off += 0x40, i++) {
-			p = &g_6b8300[off + 0x7e24];
+			p = &d3_CurrentFloor[off + 0x7e24];
 			if (*p == 0) {
 				continue;
 			}
@@ -187,7 +187,7 @@ void __cdecl d3_UpdateTerrainSeasonTextures(void)
 			if (q != 0) {
 				*q = 0;
 				if (d3_ResolveTexturePath(buf) != 0) {
-					d3_ReloadFloorTextureSlot(g_6b8300, buf, i);
+					d3_ReloadFloorTextureSlot(d3_CurrentFloor, buf, i);
 				}
 			}
 		}

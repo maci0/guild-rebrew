@@ -10,9 +10,9 @@ typedef struct {
 extern int g_6a25b8;
 extern int g_6a2be0;
 extern int g_6a25fc;
-extern int g_6a2598;
+extern int d2_HudTopBarWindowId;
 #include "Develop/client_types.h"
-extern Win_1015f40 g_1015f40[0x60];
+extern Win_1015f40 d2_Windows[0x60];
 extern int g_7ea380[15];
 extern int g_6a2578;
 extern int g_6a257c;
@@ -78,8 +78,8 @@ void __cdecl d2_UpdateHudVisibility(int show)
 	if (g_6a25a4 != -1) {
 		d2_SetSlotVisibility(g_6a25a4, show);
 	}
-	if (g_6a2598 != -1) {
-		d2_SetSlotVisibility(((Slot*)g_1015f40)[g_6a2598].panel, show);
+	if (d2_HudTopBarWindowId != -1) {
+		d2_SetSlotVisibility(((Slot*)d2_Windows)[d2_HudTopBarWindowId].panel, show);
 	}
 	for (i = 0; i < 15; i++) {
 		if (g_7ea380[i] != -1) {

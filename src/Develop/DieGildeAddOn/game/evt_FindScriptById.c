@@ -11,7 +11,7 @@ void* __cdecl evt_FindScriptById(int recordId)
 	if (recordId == -1) {
 		return 0;
 	}
-	base = g_6b7e94;
+	base = evt_ScriptSlots;
 	for (i = 0, p = base + 0x100; i < 0x80; i++, p += 0xc98) {
 		if (*(int*) p == recordId) {
 			return (void*) ((int) base + i * 3224);

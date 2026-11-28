@@ -2,7 +2,7 @@
 #include "Develop/client_types.h"
 
 extern GRAPH_SAMPLE g_99ec20[16];
-extern CRIME_GRID_CELL g_99ef80[9][8];
+extern CRIME_GRID_CELL gm_CrimeGrid[9][8];
 
 /* ADDRESS: GOLDTL 0x005246e0 */
 unsigned int __cdecl ls_LoadStatsAndCrimeGrid(unsigned int stream)
@@ -88,13 +88,13 @@ unsigned int __cdecl ls_LoadStatsAndCrimeGrid(unsigned int stream)
 		return 0;
 	for (i = 0; i < 8; i++) {
 		for (j = 0; j < 8; j++) {
-			if (!ls_ReadVfsDataChecked(&g_99ef80[i][j].demand, 2, 1, (void*) stream))
+			if (!ls_ReadVfsDataChecked(&gm_CrimeGrid[i][j].demand, 2, 1, (void*) stream))
 				return 0;
-			if (!ls_ReadVfsDataChecked(&g_99ef80[i][j].supply, 2, 1, (void*) stream))
+			if (!ls_ReadVfsDataChecked(&gm_CrimeGrid[i][j].supply, 2, 1, (void*) stream))
 				return 0;
-			if (!ls_ReadVfsDataChecked(&g_99ef80[i][j].pad4[0], 1, 1, (void*) stream))
+			if (!ls_ReadVfsDataChecked(&gm_CrimeGrid[i][j].pad4[0], 1, 1, (void*) stream))
 				return 0;
-			if (!ls_ReadVfsDataChecked(&g_99ef80[i][j].pad4[4], 4, 1, (void*) stream))
+			if (!ls_ReadVfsDataChecked(&gm_CrimeGrid[i][j].pad4[4], 4, 1, (void*) stream))
 				return 0;
 		}
 	}

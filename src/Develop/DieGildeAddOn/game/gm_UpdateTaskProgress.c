@@ -16,8 +16,8 @@
  * case-4 p->c0c == 1 CompareVector argument and the two case-2 sites below),
  * so the compiler cannot share those tails either.
  */
-extern int g_772ea4;		/* 0x00772ea4 */
-extern int g_67a370, g_68b79c, g_772f24; extern double g_6640e8, g_664128; extern float g_664144;
+extern int cut_CombatCancelledEntity;		/* 0x00772ea4 */
+extern int d3_ActiveScene, g_68b79c, cut_ActivePlayerEntity; extern double dbl_0_01, g_664128; extern float g_664144;
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 int __cdecl cm_GetCommandStatus(int);
 int __cdecl cm_SendCutCommand55(void*, int, void*);
@@ -100,9 +100,9 @@ void __cdecl gm_UpdateTaskProgress(char* context)
 	int n;
 
 	v68 = 0;
-	base = (char*)*(int*)(g_67a370 + 0xb0);
+	base = (char*)*(int*)(d3_ActiveScene + 0xb0);
 	for (i = 0; i < 0x10; i++) {
-		if (g_772ea4)
+		if (cut_CombatCancelledEntity)
 			return;
 		p = (TaskRec*)(context + 0x94) + i;
 		if (p)
@@ -259,7 +259,7 @@ void __cdecl gm_UpdateTaskProgress(char* context)
 					if (v24 && *(int*)(obj + 0x16c)
 					    && gm_HasActiveSpecialObject((void*)*(int*)(obj + 0x16c), 0x2b9))
 						p->f24 = (int)(p->f24 * g_664144);
-					if (*(int*)(g_772f24 + 4) == g_68b79c
+					if (*(int*)(cut_ActivePlayerEntity + 4) == g_68b79c
 					    && *(int*)(ent + 0x58) == 0 && tgt) {
 						n = *((unsigned char*)*(int*)0x772eb4 + 0x30);
 						v80 = 0;

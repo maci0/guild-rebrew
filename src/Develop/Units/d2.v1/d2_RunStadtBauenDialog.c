@@ -19,18 +19,18 @@ extern int gm_GameTime;
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int d2_CurrentWindowId;
-extern int g_100f1dc;
-extern int g_14ce8e0;
+extern int d2_DialogButtonAction;
+extern int io_RightButtonReleased;
 extern int g_7746f8;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern char* g_1015ea0;
+extern char* d2_Controls;
 extern int g_10162e8;
 extern int g_10162ec;
 extern int g_10162f0;
 extern int g_10162f4;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern int g_68a2a8;
-extern int g_6b5c60;
+extern int str_empty;
 extern int d2_CurrentElementId;
 
 
@@ -106,54 +106,54 @@ void __cdecl d2_RunStadtBauenDialog(void)
 			row += 0x50;
 			ofs = 0;
 		}
-		cost = gm_CalcBuildingCost((int)&((ENTITY_RECORD*)g_7f4ca0)[
-		    (unsigned short)g_774970], cat);
+		cost = gm_CalcBuildingCost((int)&((ENTITY_RECORD*)gm_EntitySlotTable)[
+		    (unsigned short)gm_LocalPlayerSlot], cat);
 		last = rec->kind;
 		raw = d2_AddElementToWindow(ofs + 0x30, row - 0x30, cat + 0x427,
 		    d2_CurrentWindowId);
 		/* raw is the control index. */
-		((D2_CONTROL_TL*)g_1015ea0)[raw].value_05c = 1;
-		((D2_CONTROL_TL*)g_1015ea0)[raw].flags_1d0 = 3;
+		((D2_CONTROL_TL*)d2_Controls)[raw].value_05c = 1;
+		((D2_CONTROL_TL*)d2_Controls)[raw].flags_1d0 = 3;
 		src = *(char**) (cat * 0x38 + 0x14a6558);
-		dst = (char*) ((char*) &((D2_CONTROL_TL*)g_1015ea0)[raw] + 0xcc);
+		dst = (char*) ((char*) &((D2_CONTROL_TL*)d2_Controls)[raw] + 0xcc);
 		do {
 			c = *src++;
 			*dst++ = c;
 		} while (c != 0);
-		((D2_CONTROL_TL*)g_1015ea0)[raw].value_1cc = 0x54;
-		d2_FormatCurrencyString(cost, g_773d75, key);
+		((D2_CONTROL_TL*)d2_Controls)[raw].value_1cc = 0x54;
+		d2_FormatCurrencyString(cost, gm_ActiveTownIndex, key);
 		ent = d2_EqualizeWindowButtonWidths(ofs + 2, row, 0x6b5c60, d2_CurrentWindowId);
 		d2_SetElementFont(ent, 0x54);
 		d2_SetLabelText(ent, key);
 		ofs += 0x60;
-		((D2_CONTROL_TL*) (g_1015ea0))[ent].width = 0x8c;
-		((D2_CONTROL_TL*) (g_1015ea0))[ent].value_06c = 1;
+		((D2_CONTROL_TL*) (d2_Controls))[ent].width = 0x8c;
+		((D2_CONTROL_TL*) (d2_Controls))[ent].value_06c = 1;
 	}
 	for (;;) {
-		if (g_100f1dc >= 0x427 && g_100f1dc <= 0x47f) {
-			i = g_100f1dc - 0x427;
+		if (d2_DialogButtonAction >= 0x427 && d2_DialogButtonAction <= 0x47f) {
+			i = d2_DialogButtonAction - 0x427;
 			if (selected != -1) {
-				((D2_CONTROL_TL*) (g_1015ea0))[selected].value_038 = 0;
-				((D2_CONTROL_TL*) (g_1015ea0))[selected].value_03c = 0;
+				((D2_CONTROL_TL*) (d2_Controls))[selected].value_038 = 0;
+				((D2_CONTROL_TL*) (d2_Controls))[selected].value_03c = 0;
 			}
 			selected = d2_CurrentElementId;
 			ent = d2_CheckFundsAndNotify(query, *(int*) (query + 0x14),
-			    gm_CalcBuildingCost((int)((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]), i), g_773d75);
+			    gm_CalcBuildingCost((int)((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot]), i), gm_ActiveTownIndex);
 			if (ent != 0) {
 				d2_SetFormVisibility(dlg, 0);
 				ent = lc_GebaeudeAusrichten(i, name);
 				if (ent != 0) {
 					msg.kind = 0x0d;
 					msg.mode = 2;
-					msg.actor = *(int*)((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970] + 4);
+					msg.actor = *(int*)((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot] + 4);
 					msg.target = msg.actor;
 					msg.pos.a = gm_GameTime;
-					msg.pos.b = g_7f4c04;
-					msg.pos.c = g_7f4c08;
-					msg.pos.d = g_7f4c0c;
+					msg.pos.b = gm_GameTimeHour;
+					msg.pos.c = gm_GameTimeSliceDword;
+					msg.pos.d = gm_GameTimeTailWord;
 					msg.owner = *(int*)(gm_CityEntity + 4);
 					msg.category = i;
-					msg.cost = gm_CalcBuildingCost((int)((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]), i);
+					msg.cost = gm_CalcBuildingCost((int)((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot]), i);
 					d3_TransformPoint(ent, ent + 0x4c, msg.location);
 					d3_ComputeObjectYawToTarget(msg.rotation, ent);
 					{
@@ -164,21 +164,21 @@ void __cdecl d2_RunStadtBauenDialog(void)
 						} while (c != 0);
 					}
 					cm_SendCopyEntityData(&msg);
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				} else {
 					d2_SetFormVisibility(dlg, 1);
 				}
 			}
 		}
-		if (g_100f1dc == 3) {
+		if (d2_DialogButtonAction == 3) {
 			d2_SetForm(dlg, 3);
 			d2_ScrollWindow(0, -0x46, d2_CurrentWindowId);
-		} else if (g_100f1dc == 4) {
+		} else if (d2_DialogButtonAction == 4) {
 			d2_SetForm(dlg, 3);
 			d2_ScrollWindow(0, 0x46, d2_CurrentWindowId);
 		}
-		if (g_14ce8e0 != 0)
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0)
+			d2_DialogCloseRequested = 1;
 		if (main_RunFrameLoop(0x599b00, 0x657c7) == 0) {
 			if (dlg != -1)
 				d2_DestroyForm(dlg);

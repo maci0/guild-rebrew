@@ -6,7 +6,7 @@ typedef struct F8 {
 } F8;
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl gm_HasActiveSpecialObject(char* h, int n);
@@ -47,7 +47,7 @@ int __cdecl gm_HandleMsg11GrantBonus(int* request)
 	r = (int) ((double) gm_WalkEntityChain(*(unsigned short*) h) * d * 0.01);
 	w = *(unsigned short*) ((char*) request + 4);
 	io_FormatTextBuffer(buf, w + 0x12e7, y, r);
-	cm_RequestTransferCurrencyNoKill(-1, *request, g_773d75, r);
+	cm_RequestTransferCurrencyNoKill(-1, *request, gm_ActiveTownIndex, r);
 	e = (char*) *(int*) (h + 4);
 	he_PostEntityMessage((int) e, (int) e, buf, strlen(buf) > 0x100, 0x603, 0);
 	return 0;

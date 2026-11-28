@@ -1,6 +1,6 @@
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-extern char g_7f4ca0[]; extern unsigned char g_773d75;
+extern char gm_EntitySlotTable[]; extern unsigned char gm_ActiveTownIndex;
 
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -59,7 +59,7 @@ int __cdecl gm_DamageRandomBuilding(int* noticeRequest)
 		}
 
 		stride = step * (int)sizeof(ENTITY_RECORD);
-		for (rp = &((ENTITY_RECORD*)g_7f4ca0)[i].entity_state; i < end;
+		for (rp = &((ENTITY_RECORD*)gm_EntitySlotTable)[i].entity_state; i < end;
 		    i += step, rp += stride) {
 			if (rp[0] == 6 || rp[0] == 7 || rp[0] >= 0xa)
 				continue;
@@ -74,7 +74,7 @@ int __cdecl gm_DamageRandomBuilding(int* noticeRequest)
 		if (chosen == 0 || found == 0)
 			return 0x400;
 		cm_SendSellObjekt(*(int*) (chosen + 1), -1, gm_RandomMod(2) + 0x134, 1,
-		    g_773d75, 0);
+		    gm_ActiveTownIndex, 0);
 		io_FormatTextBuffer(buf, *(unsigned short*) (noticeRequest + 1) + 0x12e7,
 		    *(unsigned short*) found);
 		he_MessageBoxQuickjump(*(int*) (entity + 2), *(int*) (entity + 2), buf,

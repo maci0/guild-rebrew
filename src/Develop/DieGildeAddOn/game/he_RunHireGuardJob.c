@@ -63,13 +63,13 @@ void __cdecl he_RunHireGuardJob(char* self)
 			he_FreeAction(self);
 			return;
 		}
-		row = (char*)&((ENTITY_RECORD*)g_7f4ca0)[packet->slot];
+		row = (char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[packet->slot];
 		t = (int)gm_GetScaledWorkforceOutput(row, packet->idx0, *(unsigned char*)(self + 0xac), -1);
 		proto = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[packet->idx0];
-		src = gm_AccumulateTyped2((char*)&((ENTITY_RECORD*)g_7f4ca0)[packet->slot]);
+		src = gm_AccumulateTyped2((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[packet->slot]);
 		if (t > src) {
 			io_FormatTextBuffer(buf, 0x1a41, (char*) packet);
-			he_MessageBoxQuickjump(*(int*) ((unsigned long)&g_7f4ca4 + packet->slot * 0x21c), *(int*) (self + 0x10), buf, 0, 0x5f2, packet->handle, *(int*) (self + 0xb4), 0, 0);
+			he_MessageBoxQuickjump(*(int*) ((unsigned long)&gm_EntityIdField + packet->slot * 0x21c), *(int*) (self + 0x10), buf, 0, 0x5f2, packet->handle, *(int*) (self + 0xb4), 0, 0);
 			he_FreeAction(self);
 			return;
 		}
@@ -100,7 +100,7 @@ void __cdecl he_RunHireGuardJob(char* self)
 		}
 		answer = (unsigned short*) cm_GetCommandResult(*(int*) (self + 0xb8));
 		if (answer == 0) {
-			he_PostEntityMessage(*(int*) ((unsigned long)&g_7f4ca4 + (*(unsigned short*) (self + 8)) * 0x21c), -1, (char*) 0x6a628c, 0, 0x5f8, 0);
+			he_PostEntityMessage(*(int*) ((unsigned long)&gm_EntityIdField + (*(unsigned short*) (self + 8)) * 0x21c), -1, (char*) 0x6a628c, 0, 0x5f8, 0);
 			he_FreeAction(self);
 			return;
 		}
@@ -120,14 +120,15 @@ void __cdecl he_RunHireGuardJob(char* self)
 			if (((int*) (self + 0xb0))[count] <= 0) {
 				continue;
 			}
-			row = (char*)&((ENTITY_RECORD*)g_7f4ca0)[packet->slot];
+			row = (char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[packet->slot];
 			t = (int)gm_GetScaledWorkforceOutput(row, packet->idx0, *(unsigned char*)(self + 0xac), -1);
 			((int*) (self + 0xb0))[count] = ((int*) (self + 0xb0))[count] - 1;
-			if (*(unsigned char*) ((unsigned long)&g_7f4ca2 + (*(unsigned short*) (self + 8)) * 0x21c) == 6 || *(unsigned char*) ((unsigned long)&g_7f4ca2 + (*(unsigned short*) (self + 8)) * 0x21c) == 7) {
+			if (*(unsigned char*) ((unsigned long)&gm_SlotTableKindView + (*(unsigned short*) (self + 8)) * 0x21c) == 6 ||
+				*(unsigned char*) ((unsigned long)&gm_SlotTableKindView + (*(unsigned short*) (self + 8)) * 0x21c) == 7) {
 				io_FormatTextBuffer(buf, 0x1bb1, t, (unsigned int)answer[0], (char*) packet);
-				he_MessageBoxQuickjump(*(int*)((unsigned long)&g_7f4ca4+(*(unsigned short*)(self+8)) * 0x21c), packet->handle, buf, 0, 0x5f2, packet->handle, *(int*)(self+0xb4), 0, 0x6a6278);
+				he_MessageBoxQuickjump(*(int*)((unsigned long)&gm_EntityIdField+(*(unsigned short*)(self+8)) * 0x21c), packet->handle, buf, 0, 0x5f2, packet->handle, *(int*)(self+0xb4), 0, 0x6a6278);
 			}
-			cm_RequestTransferCurrencyNoKill(*(int*) (answer + 2), *(int*) ((unsigned long)&g_7f4ca4 + (*(unsigned short*) (self + 8)) * 0x21c), *(unsigned char*) &g_773d75, t);
+			cm_RequestTransferCurrencyNoKill(*(int*) (answer + 2), *(int*) ((unsigned long)&gm_EntityIdField + (*(unsigned short*) (self + 8)) * 0x21c), *(unsigned char*) &gm_ActiveTownIndex, t);
 			break;
 		}
 		t = *(int*) (self + 0xb4);

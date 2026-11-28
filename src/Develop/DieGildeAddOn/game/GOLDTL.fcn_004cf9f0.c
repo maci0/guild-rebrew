@@ -63,7 +63,7 @@ int __cdecl cut_HandleUnitDefeat(char* e)
 	return 0;
 }
 
-extern unsigned short* g_772e9c;
+extern unsigned short* cut_CombatDefenderEntity;
 
 char __cdecl d3_SetSubtreeVisible(int, unsigned char);
 
@@ -79,7 +79,7 @@ void __cdecl cut_CollectGroundItem(char* e)
 	o = *(char**) (e + 0x17c);
 	r = (char*) d3_GetObjectEntity(q);
 	if (r != 0) {
-		*(int*) (r + 0xa) = *g_772e9c;
+		*(int*) (r + 0xa) = *cut_CombatDefenderEntity;
 		*(char**) (o + 0x1ac) = q;
 	}
 	d3_SetSubtreeVisible((int) q, 0);

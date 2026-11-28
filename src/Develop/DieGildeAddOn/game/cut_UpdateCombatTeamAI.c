@@ -1,4 +1,4 @@
-extern char* g_772eb4; extern int g_772f2c; extern unsigned short* g_772e9c; extern int g_67a370;
+extern char* g_772eb4; extern int g_772f2c; extern unsigned short* cut_CombatDefenderEntity; extern int d3_ActiveScene;
 char* __cdecl fcn_004cef30(int id);
 unsigned short __cdecl fcn_0042e410(int code);
 char* __cdecl gm_FindOrCreateEntitySlot(int a, char* s);
@@ -37,7 +37,7 @@ int __cdecl cut_UpdateCombatTeamAI(int ctx, int teamPtr)
 		return level;
 	}
 	list = g_772eb4;
-	if (teamPtr == (int) g_772e9c) {
+	if (teamPtr == (int) cut_CombatDefenderEntity) {
 		base = list + 0xc0;
 	} else {
 		base = list + 0x80;
@@ -62,7 +62,7 @@ int __cdecl cut_UpdateCombatTeamAI(int ctx, int teamPtr)
 			}
 		}
 	}
-	if (teamPtr == (int) g_772e9c) {
+	if (teamPtr == (int) cut_CombatDefenderEntity) {
 		ratio = (double) countC0 / (double) count80;
 	} else {
 		ratio = (double) count80 / (double) countC0;
@@ -110,7 +110,7 @@ int __cdecl cut_UpdateCombatTeamAI(int ctx, int teamPtr)
 			targetPtr = (char*) d3_FindNearestEscapeNode(s);
 			d3_TransformPoint(targetPtr, targetPtr + 0x4c, point);
 			map_x = ctx;
-			status = d3sm_SampleHeight(*(int*) (g_67a370 + 0xb0),
+			status = d3sm_SampleHeight(*(int*) (d3_ActiveScene + 0xb0),
 			    point, &map_x, &countC0, &height);
 			if (status != 0) {
 				continue;

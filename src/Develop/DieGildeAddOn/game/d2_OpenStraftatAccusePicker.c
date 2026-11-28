@@ -14,7 +14,7 @@ typedef struct {
 } Desc;
 
 extern int g_14ab080;
-extern __int64 g_666018;
+extern __int64 gm_TargetPersonTypeMask;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl d2_OpenTargetPicker(Desc*, int, int, void*);
@@ -26,7 +26,7 @@ void __cdecl d2_OpenStraftatAccusePicker(void)
 
 	memset(&d, 0, sizeof(d));
 	d.flags = 0x400;
-	d.w = (*(int*)&g_666018);
+	d.w = (*(int*)&gm_TargetPersonTypeMask);
 	d.caps = 6;
 	d.h = g_66601c;
 	d2_OpenTargetPicker(&d, g_14ab080, 0, d2_RunStraftatAccuseDialog);

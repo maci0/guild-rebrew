@@ -1,8 +1,8 @@
 extern int d2_CurrentWindowId;
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
-extern int g_14ce8e0;
-extern int g_774654;
+extern int io_RightButtonReleased;
+extern int d2_DialogCloseRequested;
 int __cdecl gm_WalkEntityChain(unsigned short);
 int __cdecl gm_AccumulateTyped2(int);
 int __cdecl d2_LoadForm(int, int, int);
@@ -73,7 +73,7 @@ int __cdecl d2_ShowWealthOverviewDialog(unsigned short *subjectRecord)
     d2_CreateWindowScrollbar(0x206, 0x167, d2_CurrentWindowId, r);
     d2_CenterDialogWindows(dialogWindow);
 
-    g_100f1dc = -1;
+    d2_DialogButtonAction = -1;
     d2_CurrentElementId = -1;
 
     while (1)
@@ -117,7 +117,7 @@ int __cdecl d2_ShowWealthOverviewDialog(unsigned short *subjectRecord)
 
         }
         edi = activeTab;
-        if (g_100f1dc != -1)
+        if (d2_DialogButtonAction != -1)
         {
             int eax = d2_CurrentElementId;
             if (eax == q1)
@@ -138,8 +138,8 @@ int __cdecl d2_ShowWealthOverviewDialog(unsigned short *subjectRecord)
             }
         }
 
-        if (g_14ce8e0 != 0)
-            g_774654 = 1;
+        if (io_RightButtonReleased != 0)
+            d2_DialogCloseRequested = 1;
 
         if (main_RunFrameLoop(0x5a6e90, 0x677c7) != 0)
             continue;

@@ -41,7 +41,7 @@ struct sym_428800 {
 };
 
 extern char* evt_CurrentScript;
-extern char* g_6b7eb8;
+extern char* evt_MemberScopeScript;
 extern char g_14cb440[];
 
 int __cdecl evt_EvaluateExpression(char* pEnd);
@@ -96,7 +96,7 @@ int __cdecl evt_EvaluateExpression(char* pEnd)
 			evt_ReadToken(*(char**) (evt_CurrentScript + 0x118), &t);
 			level = 0;
 			if (t.type == 1) {
-				*(char**) &g_6b7eb8 = 0;
+				*(char**) &evt_MemberScopeScript = 0;
 				level = t.u.num;
 			} else if (t.type == 4) {
 				n = evt_ExecuteCommand(t.u.sym);
@@ -145,7 +145,7 @@ int __cdecl evt_EvaluateExpression(char* pEnd)
 				evt_RequestScriptExit(evt_CurrentScript);
 				return 0;
 			} else if (t.type == 0xb) {
-				*(char**) &g_6b7eb8 = (char*) t.u.num;
+				*(char**) &evt_MemberScopeScript = (char*) t.u.num;
 				level = 2;
 				op = 2;
 				(*(char**) (evt_CurrentScript + 0x118))++;
@@ -217,6 +217,6 @@ int __cdecl evt_EvaluateExpression(char* pEnd)
 			}
 		}
 	}
-	*(char**) &g_6b7eb8 = 0;
+	*(char**) &evt_MemberScopeScript = 0;
 	return value;
 }

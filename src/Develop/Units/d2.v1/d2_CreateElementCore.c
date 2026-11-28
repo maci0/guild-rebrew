@@ -24,14 +24,14 @@ int __cdecl d2_CreateElementCore(unsigned int x, int y, int resourceId)
 	}
 	idx = d2_AllocateElement();
 
-	slot = (char*) &((D2_CONTROL_TL*)g_1015ea0)[idx];
+	slot = (char*) &((D2_CONTROL_TL*)d2_Controls)[idx];
 	if (idx >= 0x400) {
 		return -1;
 	}
 	d2_ResolveResourceEntry(resourceId, &v4, &n);
 	*(int*) &((D2_CONTROL_TL*)slot)->data = v4;
 	*(int*) &((D2_CONTROL_TL*)slot)->value_008 = n;
-	*(int*) &((D2_CONTROL_TL*)slot)->kind = *(int*) (*(int*) &g_772500 + 0x3c + n * 0x54);
+	*(int*) &((D2_CONTROL_TL*)slot)->kind = *(int*) (*(int*) &d2_FileObjTable + 0x3c + n * 0x54);
 	*(int*) &((D2_CONTROL_TL*)slot)->x = x;
 	*(int*) &((D2_CONTROL_TL*)slot)->y = y;
 	*(int*) &((D2_CONTROL_TL*)slot)->clip_left = d2_ClipLeft;
@@ -50,35 +50,35 @@ int __cdecl d2_CreateElementCore(unsigned int x, int y, int resourceId)
 	*(int*) &((D2_CONTROL_TL*)slot)->value_1ec = 0;
 	switch (kind) {
 	case 1:
-		tp = (char*) *(int*) &((D2_CONTROL_TL*)g_1015ea0)[idx].data;
+		tp = (char*) *(int*) &((D2_CONTROL_TL*)d2_Controls)[idx].data;
 		*(int*) &((D2_CONTROL_TL*)slot)->width = *(unsigned short*) (tp + 6);
 		*(int*) &((D2_CONTROL_TL*)slot)->height = *(unsigned short*) (tp + 8);
 		return idx;
 	case 4:
-		*(int*) &((D2_CONTROL_TL*)g_1015ea0)[idx].value_088 = d2_AllocAnimationSlot(x, y, *(int*) &((D2_CONTROL_TL*)g_1015ea0)[idx].data, 0);
-		tp = (char*) *(int*) &((D2_CONTROL_TL*)g_1015ea0)[idx].data;
-		*(int*) &((D2_CONTROL_TL*)g_1015ea0)[idx].width = *(unsigned short*) (tp + 6);
-		*(int*) &((D2_CONTROL_TL*)g_1015ea0)[idx].height = *(unsigned short*) (tp + 8);
+		*(int*) &((D2_CONTROL_TL*)d2_Controls)[idx].value_088 = d2_AllocAnimationSlot(x, y, *(int*) &((D2_CONTROL_TL*)d2_Controls)[idx].data, 0);
+		tp = (char*) *(int*) &((D2_CONTROL_TL*)d2_Controls)[idx].data;
+		*(int*) &((D2_CONTROL_TL*)d2_Controls)[idx].width = *(unsigned short*) (tp + 6);
+		*(int*) &((D2_CONTROL_TL*)d2_Controls)[idx].height = *(unsigned short*) (tp + 8);
 		return idx;
 	case 17:
-		tp = (char*) *(int*) &((D2_CONTROL_TL*)g_1015ea0)[idx].data;
-		*(int*) &((D2_CONTROL_TL*)g_1015ea0)[idx].width = *(short*) (tp + 0xc);
-		*(int*) &((D2_CONTROL_TL*)g_1015ea0)[idx].height = *(short*) (tp + 0xe);
-		*(int*) &((D2_CONTROL_TL*)g_1015ea0)[idx].value_088 = 2;
+		tp = (char*) *(int*) &((D2_CONTROL_TL*)d2_Controls)[idx].data;
+		*(int*) &((D2_CONTROL_TL*)d2_Controls)[idx].width = *(short*) (tp + 0xc);
+		*(int*) &((D2_CONTROL_TL*)d2_Controls)[idx].height = *(short*) (tp + 0xe);
+		*(int*) &((D2_CONTROL_TL*)d2_Controls)[idx].value_088 = 2;
 		return idx;
 	case 5:
 	case 8:
 		*(int*) &((D2_CONTROL_TL*)slot)->value_088 = d2_ResourceOffset;
-		tp = (char*) *(int*) &((D2_CONTROL_TL*)g_1015ea0)[idx].data;
-		r = d2_GetBankEntry((int) tp, *(int*) &((D2_CONTROL_TL*)g_1015ea0)[idx].value_088);
+		tp = (char*) *(int*) &((D2_CONTROL_TL*)d2_Controls)[idx].data;
+		r = d2_GetBankEntry((int) tp, *(int*) &((D2_CONTROL_TL*)d2_Controls)[idx].value_088);
 		*(int*) &((D2_CONTROL_TL*)slot)->width = *(unsigned short*) (r + 2);
 		*(int*) &((D2_CONTROL_TL*)slot)->height = *(unsigned short*) (r + 6);
 		*(int*) &((D2_CONTROL_TL*)slot)->value_1dc = -1;
 		*(int*) &((D2_CONTROL_TL*)slot)->value_1e0 = -1;
 		*(int*) &((D2_CONTROL_TL*)slot)->value_1d4 = *(unsigned short*) (tp + 6);
 		*(int*) &((D2_CONTROL_TL*)slot)->value_1d8 = *(unsigned short*) (tp + 8);
-		*(char*) &((D2_CONTROL_TL*)g_1015ea0)[idx].value_07c = 8;
-		*(char*) &((D2_CONTROL_TL*)g_1015ea0)[idx].value_07d = 8;
+		*(char*) &((D2_CONTROL_TL*)d2_Controls)[idx].value_07c = 8;
+		*(char*) &((D2_CONTROL_TL*)d2_Controls)[idx].value_07d = 8;
 		return idx;
 	}
 	return idx;

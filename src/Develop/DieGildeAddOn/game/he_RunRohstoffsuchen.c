@@ -4,15 +4,15 @@
 
 extern float g_665ef8;
 extern int gm_GameTime;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
 extern char* lpGebaeudePROT;
 typedef struct BuildingRow5797 {
 	unsigned char kind;
 	char fields[0x24c];
 } BuildingRow5797;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 extern int __cdecl gm_GetSeason(int* p);
 extern void __cdecl gm_AddTime(void* clock, int a, int b, int c);
@@ -59,7 +59,7 @@ void __cdecl he_RunRohstoffsuchen(char* event)
 	param = 0;
 	mode = 0;
 	valid = 0;
-	value = (int) (g_7f4c04 & 0xffff);
+	value = (int) (gm_GameTimeHour & 0xffff);
 	if ((*(float*) (handle * 4 + 0x696550) <= (float) value
 			|| (float) value < *(float*) (handle * 4 + 0x696540))
 		&& *(int*) (event + 0x70) != -1 && *(int*) (event + 0x70) != -2) {
@@ -113,13 +113,13 @@ void __cdecl he_RunRohstoffsuchen(char* event)
 		}
 		*(int*) (event + 0xb4) = *(int*) (event + 0xb4) - value;
 		*(int*) (event + 0xb8) = gm_GameTime;
-		*(int*) (event + 0xbc) = g_7f4c04;
-		*(int*) (event + 0xc0) = g_7f4c08;
-		*(short*) (event + 0xc4) = g_7f4c0c;
+		*(int*) (event + 0xbc) = gm_GameTimeHour;
+		*(int*) (event + 0xc0) = gm_GameTimeSliceDword;
+		*(short*) (event + 0xc4) = gm_GameTimeTailWord;
 		*(int*) (event + 0x52) = gm_GameTime;
-		*(int*) (event + 0x56) = g_7f4c04;
-		*(int*) (event + 0x5a) = g_7f4c08;
-		*(short*) (event + 0x5e) = g_7f4c0c;
+		*(int*) (event + 0x56) = gm_GameTimeHour;
+		*(int*) (event + 0x5a) = gm_GameTimeSliceDword;
+		*(short*) (event + 0x5e) = gm_GameTimeTailWord;
 		gm_AddTime(event + 0x52, 0, 5, 0);
 		if (*(int*) (event + 0xb4) <= -1)
 			*(unsigned int*) (event + 0x70) = 0xffffffff;
@@ -137,7 +137,7 @@ void __cdecl he_RunRohstoffsuchen(char* event)
 		valid = gm_eval_SlotVoll((int) param, *(unsigned short*) (event + 0xac), valid);
 		if (valid != 0) {
 			cm_SendSellObjekt(*(int*) (param + 2), -1, *(unsigned short*) (event + 0xac),
-				valid, (char) g_773d75, 0);
+				valid, (char) gm_ActiveTownIndex, 0);
 			if (((char)((BUILDING_PROTOTYPE*)row)->category) != 0x1f) {
 				io_FormatTextBuffer(text, 0x412c, 0x4128, 0x228, (void*) search);
 				strcpy(name, "_NACHRICHTEN_FRIEDHOF_01");

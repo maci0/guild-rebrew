@@ -1,18 +1,18 @@
 #include <string.h>
 
 extern int d2_CurrentWindowId;
-extern char g_779160[];
-extern char* g_1015ea0;
-extern int g_100f1dc;
+extern char d2_ProductionPanels[];
+extern char* d2_Controls;
+extern int d2_DialogButtonAction;
 extern int g_100f884;
 extern int d2_CurrentElementId;
-extern int g_7746cc;
+extern int sv_SelectedBuilding;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 extern int gm_GameTime;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl d2_CheckOwnerBlocked(int);
 int __cdecl d2_LoadForm(int, int, char*);
@@ -107,7 +107,7 @@ int __cdecl d2_RunProductionTradeDialog(char* building)
 	*(int*) (m + 0x10162f4) = 0xe;
 	d2_DrawPanelFrame(k, 0x70b, 0x742);
 	d2_CreateWindowScrollbar(0x270, 0x15e, d2_CurrentWindowId, d2_GetFormWindow(h, 2, 0x78, &v16, &v15, &item));
-	*(unsigned int*) &((D2_CONTROL_TL*) g_1015ea0)[item].font = 0x54;
+	*(unsigned int*) &((D2_CONTROL_TL*) d2_Controls)[item].font = 0x54;
 	do {
 		d2_SetForm(h, 2);
 		t = fcn_00502cd0(*(unsigned int*) (building + 0x5d), 2, 6, 0, 0xff);
@@ -119,7 +119,7 @@ int __cdecl d2_RunProductionTradeDialog(char* building)
 		r = fcn_00502cd0(*(unsigned int*) (building + 0x5d), 2, 6, 0, 0x2a);
 		if (!r)
 			return 0;
-		if ((g_100f1dc != -1) && (g_100f884 == h)) {
+		if ((d2_DialogButtonAction != -1) && (g_100f884 == h)) {
 			any = 0;
 			p = (int*) 0x7e30e0;
 			do {
@@ -133,14 +133,14 @@ int __cdecl d2_RunProductionTradeDialog(char* building)
 			} while (!any);
 			if (count > 0) {
 				for (k = 0; k < count; k++) {
-					if (d2_CurrentElementId == *(int*) (g_779160 + 0x34 + k * 0x58)) {
+					if (d2_CurrentElementId == *(int*) (d2_ProductionPanels + 0x34 + k * 0x58)) {
 						if (!any) {
 							p = (int*) 0x7e30d0;
 							do {
 								if (*p == 0xffff)
 									break;
 								row = *(char**) &((ENTITY_RECORD_VIEW*) 0x7f4ca0)[*p].ptr_17c;
-								if (row && (*row == 3) && (*(int*) (row + 0x10) == *(int*) (building + 1)) && (*(unsigned short*) (row + 0xac) == *(unsigned int*) (g_779160 + k * 0x58)))
+								if (row && (*row == 3) && (*(int*) (row + 0x10) == *(int*) (building + 1)) && (*(unsigned short*) (row + 0xac) == *(unsigned int*) (d2_ProductionPanels + k * 0x58)))
 									*(char*) &((ENTITY_RECORD_VIEW*) 0x7f4ca0)[*p].selected = 1;
 								p += 10;
 							} while ((int) p < 0x7e35d0);
@@ -148,7 +148,7 @@ int __cdecl d2_RunProductionTradeDialog(char* building)
 							d3snd_PlayWorkerOrderVoice();
 							found = he_StartHandlungSearch(2, 0, 3, 3, *(unsigned int*) (building + 1));
 							while (found) {
-								if (*(unsigned short*) (found + 0xac) == *(unsigned int*) (g_779160 + k * 0x58))
+								if (*(unsigned short*) (found + 0xac) == *(unsigned int*) (d2_ProductionPanels + k * 0x58))
 									goto located;
 								found = he_fn_Handlung();
 							}
@@ -160,10 +160,10 @@ int __cdecl d2_RunProductionTradeDialog(char* building)
 							req.f8 = *(unsigned int*) &((ENTITY_RECORD*) 0x7f4ca0)[*(unsigned short*) (building + 0x27)].entity_id;
 							req.f12 = *(unsigned int*) (building + 1);
 							req.c28 = gm_GameTime;
-							req.c2c = g_7f4c04;
-							req.c30 = g_7f4c08;
-							req.c34 = g_7f4c0c;
-							req.id = *(unsigned short*) (g_779160 + k * 0x58);
+							req.c2c = gm_GameTimeHour;
+							req.c30 = gm_GameTimeSliceDword;
+							req.c34 = gm_GameTimeTailWord;
+							req.id = *(unsigned short*) (d2_ProductionPanels + k * 0x58);
 							req.f68 = req.f12;
 							req.f70 = *(unsigned int*) (r + 2);
 							req.f6c = *(unsigned int*) (q + 2);
@@ -177,7 +177,7 @@ located:
 								if (*p == 0xffff)
 									break;
 								if (p[4]) {
-									he_AssignActionSlot(building, g_7746cc, *p, found);
+									he_AssignActionSlot(building, sv_SelectedBuilding, *p, found);
 									*(char*) &((ENTITY_RECORD_VIEW*) 0x7f4ca0)[*p].selected = 0;
 								}
 								p += 10;
@@ -189,7 +189,7 @@ located:
 				}
 			}
 		}
-		if (g_14ce8e0) {
+		if (io_RightButtonReleased) {
 			any = 0;
 			p = (int*) 0x7e30e0;
 			do {
@@ -210,7 +210,7 @@ located:
 					p += 10;
 				} while ((int) p < 0x7e35d0);
 			} else {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 				d3_EndCameraAndUiMode();
 			}
 		}

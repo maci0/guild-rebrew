@@ -22,8 +22,8 @@ void __cdecl cut_RunCombatTickLoop(int dur)
 			cut_UpdateCombatHoverTarget();
 			cut_UpdateActiveBombs();
 			d3_UpdateMineExplosions();
-			if (g_14ce8e0 != 0 || cut_CurrentTick >= start + dur)
-				g_774654 = 1;
+			if (io_RightButtonReleased != 0 || cut_CurrentTick >= start + dur)
+				d2_DialogCloseRequested = 1;
 			cut_UpdateCombatEffects();
 		} while (main_RunFrameLoop(cut_RunCombatTickLoop, 0x7d6c6) != 0);
 	}

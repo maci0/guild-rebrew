@@ -8,7 +8,7 @@ int __cdecl gm_CalcBribeOrPriceScore(char* a1, int a2, int a3, int a4, int* out)
 int __cdecl gm_GetEntitySlotIndex(int a, int* b);
 int __cdecl fcn_0042e410(int a);
 extern unsigned char* lpGebaeudePROT;
-extern unsigned char* lpGebaeudeINST; extern unsigned char g_773d75; extern float g_664160;
+extern unsigned char* lpGebaeudeINST; extern unsigned char gm_ActiveTownIndex; extern float g_664160;
 /* ADDRESS: GOLDTL 0x0048fe70 */
 int __cdecl ai_StartHandleGrave(int unused0, char* actorEntity, int busy, int* out1, int* out2, int* out3)
 {
@@ -87,7 +87,7 @@ int __cdecl ai_StartHandleGrave(int unused0, char* actorEntity, int busy, int* o
 		} while (grade > *graveSlot);
 		if (targetSlot != 0) {
 			out = gv_CalcGraveUpgradePrice((int) actorEntity, *graveSlot, *targetSlot, &busy);
-			treasury = gm_GetSeasonTreasury((int) actorEntity, g_773d75);
+			treasury = gm_GetSeasonTreasury((int) actorEntity, gm_ActiveTownIndex);
 			if ((int) ((float) treasury * g_664160) <= out) {
 				return 0;
 			}
@@ -106,7 +106,7 @@ int __cdecl ai_StartHandleGrave(int unused0, char* actorEntity, int busy, int* o
 		if (targetSlot != 0) {
 			int price, dummy;
 			price = gm_CalcBribeOrPriceScore((int) actorEntity, 0xff, *targetSlot, 1, &dummy);
-			treasury = gm_GetSeasonTreasury((int) actorEntity, g_773d75);
+			treasury = gm_GetSeasonTreasury((int) actorEntity, gm_ActiveTownIndex);
 			if ((int) ((float) treasury * g_664160) < price) {
 				return 0;
 			}

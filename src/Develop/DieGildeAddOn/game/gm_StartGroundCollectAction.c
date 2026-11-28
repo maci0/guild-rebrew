@@ -5,7 +5,7 @@ typedef struct {
 } blk24;
 // SIZE 0x24
 
-extern blk24 g_68bef4;
+extern blk24 ch_PickupAnimName;
 
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
@@ -37,5 +37,5 @@ void __cdecl gm_StartGroundCollectAction(int* args)
 	o = ch_CreateQueuedAction(*(int*) (e + 0x184), cut_CollectGroundItem, 5, 0x2e, 1);
 	*(char**) (o + 0x17c) = e;
 	*(char**) (o + 0x180) = p;
-	*(blk24*) (o + 0xf0) = g_68bef4;
+	*(blk24*) (o + 0xf0) = ch_PickupAnimName;
 }

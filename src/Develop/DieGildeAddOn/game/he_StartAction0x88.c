@@ -36,7 +36,7 @@ void __cdecl he_StartAction0x88(char* u)
 		if (o != u && *(unsigned short*) (o + 8) == *(unsigned short*) (u + 8) && *(int*) (o + 0xb0) == *(int*) (u + 0xb0)) {
 			*(int*) (u + 0x84) = cm_SendSetHE(-1, u);
 			io_FormatTextBuffer(text, 0x4096, *(int*) (u + 0xb0));
-			he_PostEntityMessage(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (u + 8)])->entity_id, -1, text, 0, 0x5fa, 0);
+			he_PostEntityMessage(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[*(unsigned short*) (u + 8)])->entity_id, -1, text, 0, 0x5fa, 0);
 			return;
 		}
 	}
@@ -47,5 +47,5 @@ void __cdecl he_StartAction0x88(char* u)
 		return;
 	}
 	*(int*) (u + 0x84) = cm_SendSetHE(0, u);
-	gm_ModifyHealth(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (u + 8)])->entity_id, -*(int*) (u + 0xb8));
+	gm_ModifyHealth(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[*(unsigned short*) (u + 8)])->entity_id, -*(int*) (u + 0xb8));
 }

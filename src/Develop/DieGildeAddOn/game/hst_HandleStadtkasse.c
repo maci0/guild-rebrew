@@ -5,7 +5,7 @@ extern char* lpObjektePROT;
 extern char* lpObjektePROT;
 
 /* Owned (both targets) by src/GOLDTL.fcn_005b24b0.c. */
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 /* Callees of this translation unit; see src/GOLDTL.fcn_004af2f0.c, the
  * sibling in the same address family. */
@@ -85,8 +85,8 @@ int __cdecl hst_HandleStadtkasse(int unused1, int unused2, int unused3, char* to
 		n = atoi(token_text + n);
 		io_FormatTextBuffer((void*) text_out, (int) buf,
 		    gm_AmountToUnits((int) (((float) n * 0.01f) * (float) v),
-		    g_773d75),
-		    g_773d75);
+		    gm_ActiveTownIndex),
+		    gm_ActiveTownIndex);
 	}
 	return 1;
 }

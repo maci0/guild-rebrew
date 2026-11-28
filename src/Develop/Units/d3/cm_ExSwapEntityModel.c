@@ -2,7 +2,7 @@
 #include <string.h>
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char g_6b5c60[];
+extern char str_empty[];
 
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl d3_GetContextIndex(int);
@@ -63,7 +63,7 @@ int __cdecl cm_ExSwapEntityModel(char* cmd, char* result)
 				p[-1] = 0;
 				strcpy(*(char**) (o + 0x184) + 0x170, buf);
 			} else {
-				*(*(char**) (o + 0x184) + 0x130) = g_6b5c60[0];
+				*(*(char**) (o + 0x184) + 0x130) = str_empty[0];
 			}
 		}
 		d3_SelectSceneContext(saved, 1);

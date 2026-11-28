@@ -12,8 +12,8 @@ typedef struct {
 	Cell* cells;
 } Grid;
 
-extern char g_1043370[];
-extern int g_67a370;
+extern char tp_ch_PathGrid[];
+extern int d3_ActiveScene;
 extern int g_675320;
 extern int g_675324;
 extern int g_6b5c4c;
@@ -31,8 +31,8 @@ int __cdecl ch_MarkGridDiamond(int a, int b, int id, int value, int radius)
 	int dy;
 	int w;
 
-	g = ((Grid**) g_1043370)[(id & 0xff) * 247];
-	if (g != ((Grid**) g_1043370)[0] && g != *(Grid**) (g_67a370 + 0xb0)) {
+	g = ((Grid**) tp_ch_PathGrid)[(id & 0xff) * 247];
+	if (g != ((Grid**) tp_ch_PathGrid)[0] && g != *(Grid**) (d3_ActiveScene + 0xb0)) {
 		return 0;
 	}
 	if (g == 0) {

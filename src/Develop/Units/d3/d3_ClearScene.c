@@ -1,6 +1,6 @@
-extern char g_fc2700[];
-extern char* g_fc28f4;
-extern int g_6b8300;
+extern char d3_SceneRootSentinel[];
+extern char* d3_SceneRootSentinelTail;
+extern int d3_CurrentFloor;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 void __cdecl d3_DisposeObject(void*);
 void __cdecl d3_DestroyEffect(void*);
@@ -17,13 +17,13 @@ void __cdecl d3_ClearScene(void)
 	int copyCount;
 	int offset;
 
-	while (*(void**) 0xfc52f0 != (void*) g_fc2700)
+	while (*(void**) 0xfc52f0 != (void*) d3_SceneRootSentinel)
 		d3_DisposeObject(*(void**) 0xfc52f0);
 	while (*(void**) 0xfb98f4 != (void*) 0xfb9280)
 		d3_DestroyEffect(*(void**) 0xfb98f4);
-	if (g_6b8300 != 0) {
-		d3_DestroyFloor((void*) g_6b8300);
-		g_6b8300 = 0;
+	if (d3_CurrentFloor != 0) {
+		d3_DestroyFloor((void*) d3_CurrentFloor);
+		d3_CurrentFloor = 0;
 	}
 	if (*(void**) 0x633dd4 != 0) {
 		d3_DestroySky(*(void**) 0x633dd4);
@@ -33,8 +33,8 @@ void __cdecl d3_ClearScene(void)
 		m_FreeTracked(*(void**) (g_5fb5b0 + 0x3c8));
 		*(void**) (g_5fb5b0 + 0x3c8) = 0;
 	}
-	*(void**) 0xfc52f0 = (void*) g_fc2700;
-	g_fc28f4 = (char*) 0xfc5100;
+	*(void**) 0xfc52f0 = (void*) d3_SceneRootSentinel;
+	d3_SceneRootSentinelTail = (char*) 0xfc5100;
 	*(int*) 0x633b1c = 0;
 	*(int*) 0x633b20 = 0;
 	*(int*) 0x633b24 = 0;

@@ -1,7 +1,8 @@
 typedef unsigned char u8;
-extern int g_100f1dc, g_1040480, g_1040484, g_1040488, g_104048c, d2_ScreenHeight, g_1040494, g_14ce8e0,
-	d2_CurrentElementId, g_6a3764, g_6a3768, g_6a376c, g_6a3770, g_6b7fac, d3_CurrentContextIndex, d3_ActiveCamera, g_6b89c0, g_77250c, g_774654, g_7e2700, main_LoopFlags;
-extern int g_9a9200[8]; extern char g_77dda0[]; extern char* g_6b8300; extern char g_100f8c0[];
+extern int d2_DialogButtonAction, g_1040480, g_1040484, g_1040488, g_104048c, d2_ScreenHeight, g_1040494, io_RightButtonReleased,
+	d2_CurrentElementId, g_6a3764, g_6a3768, g_6a376c, g_6a3770, gm_GameTicks, d3_CurrentContextIndex, d3_ActiveCamera, g_6b89c0, d2_ScreenSurface, d2_DialogCloseRequested,
+		d2_InsideBuildingActive, main_LoopFlags;
+extern int g_9a9200[8]; extern char d2_KanoneHitTable[]; extern char* d3_CurrentFloor; extern char d2_HoverTextBuffer[];
 #include "Develop/Units/d2.v1/d2_gui.h"
 void* __cdecl memset(void*, int, unsigned int);
 int __cdecl gm_LookupSlot170ByKey(int);
@@ -77,7 +78,7 @@ void __cdecl d2_RunKanoneUI(char* obj)
     *(u8*) 0x14cf72f = 0;
     memset(S, 0, sizeof(S));
     flags |= 0x80;
-    *(int*) ((char*) S + 0x68) = g_6b7fac;
+    *(int*) ((char*) S + 0x68) = gm_GameTicks;
     if (*(int*) (obj + 0x61) == 0)
         return;
 
@@ -112,13 +113,13 @@ void __cdecl d2_RunKanoneUI(char* obj)
     sv_ClearObjectSelection();
     ResetDisplayCounters();
     d2_ResetUiInputAndBounds();
-    g_7e2700 = 0;
-    g_100f8c0[0] = 0;
+    d2_InsideBuildingActive = 0;
+    d2_HoverTextBuffer[0] = 0;
     sp = (char*) d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0x5a, 1);
     while (!(*(u8*) sp & 4))
         main_RunFrameLoop(0, flags | 0x100);
 
-    j = (int)g_1015ea0;
+    j = (int)d2_Controls;
     count = 0;
     for (tbl = 0x10382e0; tbl < 0x1040620; tbl += 0x2bc) {
         if (*(int*) (tbl - 0x10) == 0)
@@ -135,7 +136,7 @@ void __cdecl d2_RunKanoneUI(char* obj)
             *(int*) (j + i + 0x48) = 1;
             idx[count] = (short) id;
             count++;
-            j = (int)g_1015ea0;
+            j = (int)d2_Controls;
         }
     }
 
@@ -194,9 +195,9 @@ void __cdecl d2_RunKanoneUI(char* obj)
     *(u8*) (*(char**) ((char*) S + 0x9c) + 0x216) = (u8) (((u8) (*(char**) ((char*) S + 0x9c))[0x216] & 0xfd) | 1);
     *(u8*) (*(char**) ((char*) S + 0x9c) + 0x216) |= 0x10;
     *(u8*) (*(char**) ((char*) S + 0x9c) + 0x214) &= 0x7f;
-    d2_ClearSurface((void*) g_77250c);
+    d2_ClearSurface((void*) d2_ScreenSurface);
     main_RunFrameLoop(0, 0x86);
-    d2_ClearSurface((void*) g_77250c);
+    d2_ClearSurface((void*) d2_ScreenSurface);
     d2_ReleaseOverlaySprite(sp);
 
     sp = (char*) d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0x5a, 0xa);
@@ -209,28 +210,28 @@ void __cdecl d2_RunKanoneUI(char* obj)
     d3_SetObjectVisible(*(char**) ((char*) S + 0x8c + *(int*) ((char*) S + 0xa0) * 4), 1);
     d3_SetSubtreeVisible(*(int*) (obj + 0x61), 0);
     he_SetGfxInfoEnabledByKey(*(int*) (obj + 0x61), 0);
-    g_100f1dc = -1;
+    d2_DialogButtonAction = -1;
     d3_UpdateCannonAimMatrices((char*) S);
-    *(int*)(g_77dda0 + 0x70) = -1;
-    *(int*)(g_77dda0 + 0x38) = -1;
-    *(int*)(g_77dda0 + 0x0) = -1;
+    *(int*)(d2_KanoneHitTable + 0x70) = -1;
+    *(int*)(d2_KanoneHitTable + 0x38) = -1;
+    *(int*)(d2_KanoneHitTable + 0x0) = -1;
     while (main_RunFrameLoop((int)d2_RunKanoneUI, 0x2656c7)) {
         d2_UpdateHudVisibility(0);
-        *(unsigned int*) ((char*) S + 0x6c) = (unsigned int)g_6b7fac;
-        elapsedTicks = (unsigned int)g_6b7fac - *(unsigned int*) ((char*) S + 0x68);
+        *(unsigned int*) ((char*) S + 0x6c) = (unsigned int)gm_GameTicks;
+        elapsedTicks = (unsigned int)gm_GameTicks - *(unsigned int*) ((char*) S + 0x68);
         dt = (float) (unsigned int) elapsedTicks * 0.013513514f;
         if (*(int*) (res + 4) == 0
-            && (g_14ce8e0 != 0
-                || (g_100f1dc != -1
+            && (io_RightButtonReleased != 0
+                || (d2_DialogButtonAction != -1
                     && d2_CurrentElementId == *(int*) ((char*) S + 0xbc)))) {
-            g_774654 = 1;
+            d2_DialogCloseRequested = 1;
         } else {
             d2_UpdateKanoneCamera((char*) S, dt);
             d3_UpdateCannonAimCamera((char*) S);
             d2_UpdateKanoneDialog(obj, (char*) S, res);
             d2_UpdateDealSummaryLog((char*) S);
             if (*(int*) (res + 4) == 0) {
-                if (g_100f1dc != -1) {
+                if (d2_DialogButtonAction != -1) {
                     if (d2_CurrentElementId == *(int*) ((char*) S + 0xc8))
                         d2_SwitchKanoneMode((int) obj, (int) S, (int) res, 0, 0x2656c7);
                     else if (d2_CurrentElementId == *(int*) ((char*) S + 0xcc))
@@ -240,9 +241,9 @@ void __cdecl d2_RunKanoneUI(char* obj)
                 }
                 if (*(int*) (res + 4) == 0 && d2_CheckKanoneFireInput((char*) S)) {
                     d2_FireKanone(S, obj);
-                    *(int*)(g_77dda0 + 0x70) = -1;
-                    *(int*)(g_77dda0 + 0x38) = -1;
-                    *(int*)(g_77dda0 + 0x0) = -1;
+                    *(int*)(d2_KanoneHitTable + 0x70) = -1;
+                    *(int*)(d2_KanoneHitTable + 0x38) = -1;
+                    *(int*)(d2_KanoneHitTable + 0x0) = -1;
                 }
             }
         }
@@ -271,7 +272,7 @@ void __cdecl d2_RunKanoneUI(char* obj)
     d3_SetSubtreeVisible(*(int*) (obj + 0x61), 1);
     he_SetGfxInfoEnabledByKey(*(int*) (obj + 0x61), 1);
     for (i = 0; i < count; i++)
-        ((D2_CONTROL_TL*)g_1015ea0)[idx[i]].value_048 = 0;
+        ((D2_CONTROL_TL*)d2_Controls)[idx[i]].value_048 = 0;
     d3_SetViewport((float) (g_6a376c - g_6a3764),
                  (float) (g_6a3770 - g_6a3768),
                  (float) g_6a3764, (float) g_6a3768,
@@ -288,7 +289,7 @@ void __cdecl d2_RunKanoneUI(char* obj)
         d3_ResetSkyDomeNormals((char*) g_6b89c0, 1);
     d3_SetNodePosition((char*) d3_ActiveCamera, p);
     d3_SetObjectRotation((char*) d3_ActiveCamera, v);
-    d3_UpdateSceneDetailLevel(g_6b8300, 0);
+    d3_UpdateSceneDetailLevel(d3_CurrentFloor, 0);
     d3_PrecacheAllSceneTextures(1);
     d2_ReleaseOverlaySprite(sp);
     d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0x5a, 0xa);

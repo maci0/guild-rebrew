@@ -5,10 +5,10 @@
 #include "Develop/client_types.h"
 typedef Slot_779d00 Slot;
 
-extern Slot_779d00 g_779d00[];
-extern char g_14cf950;
-extern char g_14cf72a[];
-extern char g_6b5c60[];
+extern Slot_779d00 main_CameraBookmarks[];
+extern char io_LastKeyScancode;
+extern char io_ShiftKeyDown[];
+extern char str_empty[];
 
 void __cdecl d2_PruneBookmarkSlots(void);
 int __cdecl gm_SearchTable67(int);
@@ -21,18 +21,18 @@ void __cdecl d2_FocusBookmarkSlot(void)
 	int x;
 	char* r;
 
-	if (g_14cf950 != 0 && (*(char*)g_14cf72a) == 0) {
+	if (io_LastKeyScancode != 0 && (*(char*)io_ShiftKeyDown) == 0) {
 		for (i = 0; i < 11; i++) {
-			if ((char) g_779d00[i].a == g_14cf950 && (*(char*)g_14cf72a) == 0) {
+			if ((char) main_CameraBookmarks[i].a == io_LastKeyScancode && (*(char*)io_ShiftKeyDown) == 0) {
 				d2_PruneBookmarkSlots();
-				if (g_779d00[i].b != -1) {
-					x = gm_SearchTable67(g_779d00[i].b);
-					r = gm_FindRecordById(g_779d00[i].c);
+				if (main_CameraBookmarks[i].b != -1) {
+					x = gm_SearchTable67(main_CameraBookmarks[i].b);
+					r = gm_FindRecordById(main_CameraBookmarks[i].c);
 					if (r != 0) {
-						d2_EnterBuildingObjekt(x, *(int*) (r + 2), g_6b5c60);
+						d2_EnterBuildingObjekt(x, *(int*) (r + 2), str_empty);
 						return;
 					}
-					d2_EnterBuildingObjekt(x, -1, g_6b5c60);
+					d2_EnterBuildingObjekt(x, -1, str_empty);
 					return;
 				}
 			}

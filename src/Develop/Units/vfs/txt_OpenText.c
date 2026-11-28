@@ -22,7 +22,7 @@ extern int g_14b7320[];
 extern int g_14b731c[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char g_14a0b20[];
-extern char g_6b5c60[];
+extern char str_empty[];
 extern int g_6b7f9c;
 #include "GOLDTL.txt_OpenText_gconf.h"
 extern int g_6b7fa4;
@@ -242,7 +242,7 @@ pass1_done:
 		do {
 			memset(line, 0, 0xc8);
 			fgets(line, 0xc8, fp);
-			if (strcmp(line, g_6b5c60) == 0) {
+			if (strcmp(line, str_empty) == 0) {
 				break;
 			}
 			lineNo++;

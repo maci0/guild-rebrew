@@ -1,5 +1,5 @@
 /* ADDRESS: GOLD 0x0053f100 */
-void __cdecl fcn_0053f100(void)
+void __cdecl he_TickEventDeals(void)
 {
 	int p;
 

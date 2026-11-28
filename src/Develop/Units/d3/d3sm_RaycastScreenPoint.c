@@ -2,8 +2,8 @@
 
 extern char* d3_ActiveCamera;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern float g_10432a4;
-extern float g_6628a8;
+extern float d3_ProjectionDist;
+extern float flt_0_0;
 extern double g_662e68;
 
 float* __stdcall D3DXMatrixTranspose(float* out, const float* in);
@@ -35,7 +35,7 @@ char __cdecl d3sm_RaycastScreenPoint(char* e, int gx, int gy, int* ox, int* oy)
 	o[0] = o[0] / *(float*) (e + 0x10);
 	o[1] = o[1] / *(float*) (e + 0x14);
 	o[2] = o[2] / *(float*) (e + 0x18);
-	u = ((float) gx - d3_ViewportCenterX) / g_10432a4;
+	u = ((float) gx - d3_ViewportCenterX) / d3_ProjectionDist;
 	v = ((float) gy - g_1052bc8) / d3_ProjectionScaleY;
 	D3DXMatrixTranspose(m, (float*) (d3_ActiveCamera + 0x18c));
 	px = m[4] * v + m[0] * u + m[8];
@@ -47,7 +47,7 @@ char __cdecl d3sm_RaycastScreenPoint(char* e, int gx, int gy, int* ox, int* oy)
 	if (fabs(px) < g_662e68 && fabs(pz) < g_662e68) {
 		ix = (int) o[0];
 		iz = (int) o[2];
-		if (py > g_6628a8) {
+		if (py > flt_0_0) {
 			if ((float) *(unsigned char*) (*(int*) (e + 0x28) + *(int*) (e + 0x20) * iz + ix) < o[1]) {
 				return 0;
 			}
@@ -56,11 +56,11 @@ char __cdecl d3sm_RaycastScreenPoint(char* e, int gx, int gy, int* ox, int* oy)
 		*oy = iz;
 		return 1;
 	}
-	t = g_6628a0 / (fabs(px) > fabs(pz) ? fabs(px) : fabs(pz));
+	t = flt_1_0 / (fabs(px) > fabs(pz) ? fabs(px) : fabs(pz));
 	px = px * t;
 	py = py * t;
 	pz = pz * t;
-	if (!(o[0] >= g_6628a8)) {
+	if (!(o[0] >= flt_0_0)) {
 		return 0;
 	}
 	iw = *(int*) (e + 0x20);
@@ -69,7 +69,7 @@ char __cdecl d3sm_RaycastScreenPoint(char* e, int gx, int gy, int* ox, int* oy)
 		if (!(o[0] < lim)) {
 			return 0;
 		}
-		if (!(o[2] >= g_6628a8)) {
+		if (!(o[2] >= flt_0_0)) {
 			return 0;
 		}
 		if (!(o[2] < lim)) {
@@ -83,6 +83,6 @@ char __cdecl d3sm_RaycastScreenPoint(char* e, int gx, int gy, int* ox, int* oy)
 		o[0] = o[0] + px;
 		o[1] = o[1] + py;
 		o[2] = o[2] + pz;
-	} while (o[0] >= g_6628a8);
+	} while (o[0] >= flt_0_0);
 	return 0;
 }

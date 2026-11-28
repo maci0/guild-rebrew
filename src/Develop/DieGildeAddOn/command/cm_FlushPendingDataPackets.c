@@ -28,7 +28,7 @@ typedef COMMAND_STATUS_SLOT cell10;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_aed330;
 extern CLIENT_QUEUED_PACKET g_aed740[0x8000];
-extern COMMAND_STATUS_SLOT g_fb5760[0x8000];
+extern COMMAND_STATUS_SLOT cm_CommandStatusQueue[0x8000];
 
 int __cdecl ahm_GetCommandPayloadSize(unsigned char*);
 
@@ -44,7 +44,7 @@ int __cdecl cm_FlushPendingDataPackets(void)
 
 	if (g_aed330 == 0)
 		return 0;
-	if (g_14cbcb0 != 0)
+	if (nt_ConnectionClosed != 0)
 		return 0;
 	prev = 0;
 	n = g_1005768;
@@ -66,8 +66,8 @@ int __cdecl cm_FlushPendingDataPackets(void)
 		if (prev != 0)
 			prev->nextseq = g_1005768;
 		prev = p;
-		g_fb5760[seq].f0 = 0;
-		g_fb5760[seq].f2 = seq;
+		cm_CommandStatusQueue[seq].f0 = 0;
+		cm_CommandStatusQueue[seq].f2 = seq;
 		last = (*(CLIENT_QUEUED_PACKET**) &g_1005760);
 		if (last != 0) {
 			while (last->next != 0)

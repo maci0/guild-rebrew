@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern int g_14b55a4;
+extern int d2_AlternLassenTitleTextId;
 extern int dword_100f1dc;
 extern int dword_14ce8e0;
 extern int dword_67d370;
@@ -74,7 +74,7 @@ void __cdecl d2_RunAlternLassenDialog(const unsigned char* entity)
     query[0] = 1;
     query[1] = 0x400;
     query[4] = 6;
-    hdl = (struct hand_s*) sub_5cd440((char*) query, g_14b55a4, 0, 0);
+    hdl = (struct hand_s*) sub_5cd440((char*) query, d2_AlternLassenTitleTextId, 0, 0);
     if (hdl == 0) {
         sub_532ef0();
         return;

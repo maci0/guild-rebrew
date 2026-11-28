@@ -1,5 +1,5 @@
-extern char g_7f4ca0[];
-extern char g_868080[];
+extern char gm_EntitySlotTable[];
+extern char gm_CityDisplayNames[];
 extern char gm_GameTime[];
 extern char g_6a5e78[];
 extern char g_6a5e60[];
@@ -18,12 +18,12 @@ extern char g_6a5ce8[];
 extern char g_6a5ccc[];
 extern char g_67d908[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_774964;
+extern char gm_InWorldHud;
 extern char g_7749e8;
-extern int g_7749e4;
-extern unsigned char g_773d75;
+extern int tp_d2_ActiveHudSlot;
+extern unsigned char gm_ActiveTownIndex;
 extern int g_100f884;
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 int __cdecl gm_CompareGameTime(char*, char*);
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -50,11 +50,11 @@ void __cdecl he_RunTitleGrantEvent(char* obj)
 	int st;
 	unsigned char c;
 
-	rec = ((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (obj + 8)]);
-	if (g_774970 != *(unsigned short*) (obj + 8)) {
+	rec = ((char *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[*(unsigned short*) (obj + 8)]);
+	if (gm_LocalPlayerSlot != *(unsigned short*) (obj + 8)) {
 		return;
 	}
-	if (g_774964 == 0) {
+	if (gm_InWorldHud == 0) {
 		return;
 	}
 	name = obj + 0x52;
@@ -81,7 +81,7 @@ void __cdecl he_RunTitleGrantEvent(char* obj)
 		if (g_100f884 != *(int*) (h + 8) && g_7749e8 == 0) {
 			return;
 		}
-		if (g_100f1dc == 2) {
+		if (d2_DialogButtonAction == 2) {
 			d2_CloseActionPopup(obj);
 			he_FreeAction(obj);
 			return;
@@ -89,7 +89,7 @@ void __cdecl he_RunTitleGrantEvent(char* obj)
 		if (g_7749e8 == 0) {
 			return;
 		}
-		if (g_7749e4 != (int) h) {
+		if (tp_d2_ActiveHudSlot != (int) h) {
 			return;
 		}
 		g_7749e8 = 0;
@@ -125,9 +125,9 @@ state_zero:
 	} else if (c == 7) {
 		io_AppendText(0x429f, name);
 	} else if (c == 2) {
-		io_AppendText(0x1618, g_868080 + g_773d75 * 0x2f4, name, *(unsigned short*) p, ((*(char*) (p + 9) != 0) ? 0xa : 0) + 0x116);
+		io_AppendText(0x1618, gm_CityDisplayNames + gm_ActiveTownIndex * 0x2f4, name, *(unsigned short*) p, ((*(char*) (p + 9) != 0) ? 0xa : 0) + 0x116);
 	} else {
-		io_AppendText(0x1617, g_868080 + g_773d75 * 0x2f4, name, *(unsigned short*) p, (int) c + ((*(char*) (p + 9) != 0) ? 0x11e : 0x114));
+		io_AppendText(0x1617, gm_CityDisplayNames + gm_ActiveTownIndex * 0x2f4, name, *(unsigned short*) p, (int) c + ((*(char*) (p + 9) != 0) ? 0x11e : 0x114));
 	}
 	c = *(unsigned char*) (obj + 0xac);
 	if (c == 2) {

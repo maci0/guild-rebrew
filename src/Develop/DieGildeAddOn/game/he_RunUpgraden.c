@@ -20,9 +20,9 @@ struct house {
 
 
 extern pos14_7f4c00 gm_GameTime;
-extern struct house g_7f4ca0[];
+extern struct house gm_EntitySlotTable[];
 #include "Develop/DieGildeAddOn/command/client_packet_builder.h"
-extern char g_6b5c60[];
+extern char str_empty[];
 
 char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl gm_CompareGameTime(pos14_7f4c00*, pos14_7f4c00*);
@@ -71,7 +71,7 @@ void __cdecl he_RunUpgraden(char* e)
 				add = (unsigned char) (252.0f - *p);
 			}
 			cm_BeginPacketFieldDelta(who, *(int*) (who + 4));
-			cm_AppendPacketFieldValue(1, 1, (short) (who - g_aed32c + *(int*) (e + 0xb0) + 0x80), &add);
+			cm_AppendPacketFieldValue(1, 1, (short) (who - cm_PacketDeltaBase + *(int*) (e + 0xb0) + 0x80), &add);
 			cm_RequestChangeAttribute();
 			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			*(pos14_7f4c00*) (e + 0x60) = gm_GameTime;
@@ -91,8 +91,8 @@ void __cdecl he_RunUpgraden(char* e)
 			}
 			if (s != 0) {
 				io_FormatTextBuffer(buf, 0x1bc8, *(unsigned short*) who, q);
-				he_MessageBoxQuickjump(g_7f4ca0[*(unsigned short*) (e + 8)].handle, *(int*) (e + 0x10), buf, 0, 0x5f2,
-				    *(int*) (q + 1), *(int*) (s + 2), g_6b5c60, "_NACHRICHTEN_HS_81");
+				he_MessageBoxQuickjump(gm_EntitySlotTable[*(unsigned short*) (e + 8)].handle, *(int*) (e + 0x10), buf, 0, 0x5f2,
+				    *(int*) (q + 1), *(int*) (s + 2), str_empty, "_NACHRICHTEN_HS_81");
 			}
 		}
 		he_AssignActionSlot(q, 0, *(unsigned short*) who, 0);

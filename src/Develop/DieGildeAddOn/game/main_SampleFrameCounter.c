@@ -1,5 +1,5 @@
-extern int g_6a24e8;
-extern float g_6a24e4;
+extern int main_FrameCounter;
+extern float main_FrameRate;
 
 
 /* ADDRESS: GOLDTL 0x00525e90 */
@@ -7,7 +7,7 @@ void __cdecl main_SampleFrameCounter(void)
 {
 	float f;
 
-	f = (float) g_6a24e8;
-	g_6a24e8 = 0;
-	g_6a24e4 = f;
+	f = (float) main_FrameCounter;
+	main_FrameCounter = 0;
+	main_FrameRate = f;
 }

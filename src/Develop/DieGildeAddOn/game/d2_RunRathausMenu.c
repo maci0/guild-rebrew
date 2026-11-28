@@ -4,9 +4,9 @@
 extern int g_14ad250;
 extern int g_14ad260;
 extern int g_14a5550;
-extern int g_774800;
-extern char g_14cf950;
-extern int g_7746a0;
+extern int gm_AllEntitiesControllable;
+extern char io_LastKeyScancode;
+extern int sv_ClickedObjekt;
 
 void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -40,15 +40,15 @@ void __cdecl d2_RunRathausMenu(void)
 		} else {
 			amt = 0;
 		}
-		if (g_774800 != 0 && g_14cf950 == 0x14) {
+		if (gm_AllEntitiesControllable != 0 && io_LastKeyScancode == 0x14) {
 			d2_ShowTaxStatistics();
 		}
-		if (g_7746a0 != 0) {
-			if (g_7746a0 == kauf) {
+		if (sv_ClickedObjekt != 0) {
+			if (sv_ClickedObjekt == kauf) {
 				d2_OpenRathausGebInfo();
-			} else if (g_7746a0 == tages) {
+			} else if (sv_ClickedObjekt == tages) {
 				d2_OpenTagesordnungDialog();
-			} else if (g_7746a0 == amt) {
+			} else if (sv_ClickedObjekt == amt) {
 				d2_RunAmtCandidatesMenu();
 			}
 		}

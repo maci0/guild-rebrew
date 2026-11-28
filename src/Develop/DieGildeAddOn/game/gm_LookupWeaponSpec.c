@@ -1,4 +1,4 @@
-extern char g_68b400[];
+extern char gm_WeaponSpecs[];
 
 /* ADDRESS: GOLD 0x004cd9d0 */
 /* ADDRESS: GOLDTL 0x004ce590 */
@@ -7,9 +7,9 @@ int __cdecl gm_LookupWeaponSpec(int value)
 	int index;
 	int cursor;
 
-	for (index = 0, cursor = (int) g_68b400; cursor < (int) g_68b400 + 0x398; cursor += 0x5c, index++) {
+	for (index = 0, cursor = (int) gm_WeaponSpecs; cursor < (int) gm_WeaponSpecs + 0x398; cursor += 0x5c, index++) {
 		if (*(int*) cursor == value) {
-			return (int) ((int) g_68b400 + index * 92);
+			return (int) ((int) gm_WeaponSpecs + index * 92);
 		}
 	}
 	return 0;

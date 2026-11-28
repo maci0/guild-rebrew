@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_664330;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 int __cdecl gm_SumQueryEntryValues(int, unsigned char);
 
@@ -47,7 +47,7 @@ int __cdecl gm_CanFireCannonShot(char* obj, int a1, int a2, int a3, int* out1, i
 	if (*(int*) (obj + 0x194) < *out1) {
 		goto fail_0;
 	}
-	if (gm_SumQueryEntryValues(*(int*) (obj + 0x178), g_773d75) < *out2) {
+	if (gm_SumQueryEntryValues(*(int*) (obj + 0x178), gm_ActiveTownIndex) < *out2) {
 		goto fail_0;
 	}
 	return 1;

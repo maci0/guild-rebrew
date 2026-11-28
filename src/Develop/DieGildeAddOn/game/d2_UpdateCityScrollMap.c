@@ -1,6 +1,6 @@
 extern int g_100f888;
 #include "Develop/Units/d2.v1/d2_gui.h"
-extern char g_1043370[];
+extern char tp_ch_PathGrid[];
 extern int g_14ce8e8;
 extern char g_14cf7c8;
 extern char g_14cf7cb;
@@ -10,13 +10,13 @@ extern int d2_CurrentElementId;
 extern int g_6a99e8;
 extern int g_6ab3dc;
 extern float g_6ab3e0;
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 extern int d2_CurrentWindowId;
-extern char* g_77255c;
-extern unsigned char g_773d75;
+extern char* d2_CurrentWindow;
+extern unsigned char gm_ActiveTownIndex;
 extern int g_778d20;
 extern int g_778d24;
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 int __cdecl d2_UpdateWindowDrag(char*);
 int __cdecl d2_ScrollMapViewport(char*);
@@ -53,21 +53,21 @@ void __cdecl d2_UpdateCityScrollMap(int* state)
 	unsigned short w;
 	unsigned char kind;
 
-	view = *(char**) g_1043370;
-	ox = *(int*) (g_773d75 * 0x2f4 + 0x86834c);
-	oy = *(int*) (g_773d75 * 0x2f4 + 0x868350);
+	view = *(char**) tp_ch_PathGrid;
+	ox = *(int*) (gm_ActiveTownIndex * 0x2f4 + 0x86834c);
+	oy = *(int*) (gm_ActiveTownIndex * 0x2f4 + 0x868350);
 	d2_CurrentWindowId = state[2];
-	g_77255c = (char*) (state[2] * 0x3cc + 0x1015f40);
-	t = g_77255c;
+	d2_CurrentWindow = (char*) (state[2] * 0x3cc + 0x1015f40);
+	t = d2_CurrentWindow;
 	if (g_6ab3dc) {
 		state[0x9e7] = 0;
 		state[0x9e7] = d2_UpdateWindowDrag((char*) (state[2] * 0x3cc + 0x1015f40));
 		state[0x9e7] |= d2_ScrollMapViewport((char*) (state[2] * 0x3cc + 0x1015f40));
 		if (state[0x9e7] != 0) {
-			state[0x9e8] = g_6b7fac;
+			state[0x9e8] = gm_GameTicks;
 		}
 	}
-	if (g_100f888 != -1 && (unsigned int) g_6b7fac > (unsigned int) (state[0x9e8] + 0x4b)
+	if (g_100f888 != -1 && (unsigned int) gm_GameTicks > (unsigned int) (state[0x9e8] + 0x4b)
 	    && g_14ce8e8 && g_6a99e8 == -1 && state[0x9e9] > 0) {
 		n = 0;
 		p = (char*) (state + 0x38);
@@ -134,17 +134,17 @@ void __cdecl d2_UpdateCityScrollMap(int* state)
 				}
 				kind = *(unsigned char*) (w * 0x21c + 0x7f4ca2);
 				if (kind == 6 || kind == 7 || kind == 5) {
-					n = d2_CreateElement(*(int*) (g_77255c + 4) + sx, *(int*) (g_77255c + 8) + sy,
+					n = d2_CreateElement(*(int*) (d2_CurrentWindow + 4) + sx, *(int*) (d2_CurrentWindow + 8) + sy,
 					    *(int*) (w * 0x21c + 0x7f4cf4) - 0x53);
 					*slot = n;
 					if (n == -1) {
 						goto next;
 					}
-					*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].clip_left)) = *(int*) (g_77255c + 4);
-					*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].clip_right)) = *(int*) (g_77255c + 0xc) + *(int*) (g_77255c + 4);
-					*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].clip_top)) = *(int*) (g_77255c + 8);
-					*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].clip_bottom)) = *(int*) (g_77255c + 0x10) + *(int*) (g_77255c + 8);
-					*(char**) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].value_050)) = (char*) (state[0] * 700 + 0x1038140);
+					*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[*slot].clip_left)) = *(int*) (d2_CurrentWindow + 4);
+					*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[*slot].clip_right)) = *(int*) (d2_CurrentWindow + 0xc) + *(int*) (d2_CurrentWindow + 4);
+					*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[*slot].clip_top)) = *(int*) (d2_CurrentWindow + 8);
+					*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[*slot].clip_bottom)) = *(int*) (d2_CurrentWindow + 0x10) + *(int*) (d2_CurrentWindow + 8);
+					*(char**) (((char*)&((D2_CONTROL_TL*)d2_Controls)[*slot].value_050)) = (char*) (state[0] * 700 + 0x1038140);
 					goto check;
 				}
 				goto check;
@@ -158,29 +158,29 @@ void __cdecl d2_UpdateCityScrollMap(int* state)
 				if (kind != 6 && kind != 7 && kind != 5) {
 					goto check;
 				}
-				n = d2_CreateElement(*(int*) (g_77255c + 4) + sx, *(int*) (g_77255c + 8) + sy,
+				n = d2_CreateElement(*(int*) (d2_CurrentWindow + 4) + sx, *(int*) (d2_CurrentWindow + 8) + sy,
 				    *(int*) (p + 0x54) - 0x53);
 				*slot = n;
 				if (n == -1) {
 					goto next;
 				}
-				*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].clip_left)) = *(int*) (g_77255c + 4);
-				*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].clip_right)) = *(int*) (g_77255c + 0xc) + *(int*) (g_77255c + 4);
-				*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].clip_top)) = *(int*) (g_77255c + 8);
-				*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].clip_bottom)) = *(int*) (g_77255c + 0x10) + *(int*) (g_77255c + 8);
-				*(char**) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].value_050)) = (char*) (state[0] * 700 + 0x1038140);
+				*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[*slot].clip_left)) = *(int*) (d2_CurrentWindow + 4);
+				*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[*slot].clip_right)) = *(int*) (d2_CurrentWindow + 0xc) + *(int*) (d2_CurrentWindow + 4);
+				*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[*slot].clip_top)) = *(int*) (d2_CurrentWindow + 8);
+				*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[*slot].clip_bottom)) = *(int*) (d2_CurrentWindow + 0x10) + *(int*) (d2_CurrentWindow + 8);
+				*(char**) (((char*)&((D2_CONTROL_TL*)d2_Controls)[*slot].value_050)) = (char*) (state[0] * 700 + 0x1038140);
 			}
 		} else {
 			e = *(char**) (obj + 0x34);
 			if (*(int*) (e + 0x218) == 1 && *(int*) (obj + 0x124) == 0) {
 				goto check;
 			}
-			d2_PositionControl(*(int*) (g_77255c + 4) - *(int*) (g_77255c + 0x268) + sx,
-			    *(int*) (g_77255c + 8) - *(int*) (t + 0x258) + sy, *slot);
-			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].clip_left)) = *(int*) (g_77255c + 4);
-			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].clip_right)) = *(int*) (g_77255c + 0xc) + *(int*) (g_77255c + 4);
-			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].clip_top)) = *(int*) (g_77255c + 8);
-			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].clip_bottom)) = *(int*) (g_77255c + 0x10) + *(int*) (g_77255c + 8);
+			d2_PositionControl(*(int*) (d2_CurrentWindow + 4) - *(int*) (d2_CurrentWindow + 0x268) + sx,
+			    *(int*) (d2_CurrentWindow + 8) - *(int*) (t + 0x258) + sy, *slot);
+			*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[*slot].clip_left)) = *(int*) (d2_CurrentWindow + 4);
+			*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[*slot].clip_right)) = *(int*) (d2_CurrentWindow + 0xc) + *(int*) (d2_CurrentWindow + 4);
+			*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[*slot].clip_top)) = *(int*) (d2_CurrentWindow + 8);
+			*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[*slot].clip_bottom)) = *(int*) (d2_CurrentWindow + 0x10) + *(int*) (d2_CurrentWindow + 8);
 		}
 
 check:

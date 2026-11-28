@@ -3,7 +3,7 @@
 #include <string.h>
 
 extern char* g_14a9a28;
-extern char g_6b5c60[];
+extern char str_empty[];
 
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl cm_RequestKillSpieler(int, int);
@@ -11,7 +11,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_SendCmdMessage(char*, char*, char*, char*);
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char g_14cf950;
+extern char io_LastKeyScancode;
 extern int tp_d2_SelectedControl;
 extern int g_7747f0;
 
@@ -69,7 +69,7 @@ int __cdecl gm_NotifyGeburt(char* event)
 	if (parent[2] == 6 || parent[2] == 7) {
 		io_FormatTextBuffer(buf, 0x11c1);
 		strcat(buf, g_14a9a28);
-		he_SendCmdMessage(parent, event, buf, g_6b5c60);
+		he_SendCmdMessage(parent, event, buf, str_empty);
 	}
 	return 1;
 }
@@ -133,7 +133,7 @@ void __cdecl cut_PlayBirthCutscene(char* event)
 	d2_SetBildArgument(w, 0xf);
 	d2_SelectControl(w);
 	for (;;) {
-		if (g_14cf950 == 0x1c || tp_d2_SelectedControl == 0) {
+		if (io_LastKeyScancode == 0x1c || tp_d2_SelectedControl == 0) {
 			strcpy(buf, d2_GetControlValue(w));
 			if (buf[0] != 0)
 				break;
@@ -151,7 +151,7 @@ void __cdecl cut_PlayBirthCutscene(char* event)
 	cut_WaitForScript(esc);
 	d3snd_StopTrackedVoices();
 	cut_UnloadSampleBank(snd);
-	g_772f54 = 0;
+	cut_StartTick = 0;
 	cut_CleanupCutscene();
 	msx_RestoreMusicIfAllowed();
 	d2_SuppressOverlay = 0;

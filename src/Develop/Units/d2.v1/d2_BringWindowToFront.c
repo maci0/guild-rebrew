@@ -15,8 +15,8 @@ typedef struct
 
 extern GOLD_GUI_WINDOW g_00f8f120[];
 extern GuiEnt** g_006ed964;
-extern Win_1015f40 g_1015f40[0x60];
-extern void** g_772540;
+extern Win_1015f40 d2_Windows[0x60];
+extern void** d2_ZOrderStack;
 
 void __cdecl d2_ReorderControlStack(int id);
 
@@ -72,13 +72,13 @@ void __cdecl d2_BringWindowToFront(int win)
 
 	first = -1;
 	last = -1;
-	w = &((D2_WIN*)g_1015f40)[win];
+	w = &((D2_WIN*)d2_Windows)[win];
 	for (i = 0x3ff; i >= 0; i--) {
-		if (((D2_ZORDER_ELEMENT**)g_772540)[i] != 0 && ((D2_ZORDER_ELEMENT**)g_772540)[i]->id == w->slot) {
+		if (((D2_ZORDER_ELEMENT**)d2_ZOrderStack)[i] != 0 && ((D2_ZORDER_ELEMENT**)d2_ZOrderStack)[i]->id == w->slot) {
 			last = i;
 			break;
 		}
-		if (((D2_ZORDER_ELEMENT**)g_772540)[i] != 0 && ((D2_ZORDER_ELEMENT**)g_772540)[i]->parent == w && first == -1) {
+		if (((D2_ZORDER_ELEMENT**)d2_ZOrderStack)[i] != 0 && ((D2_ZORDER_ELEMENT**)d2_ZOrderStack)[i]->parent == w && first == -1) {
 			first = i;
 		}
 	}
@@ -86,14 +86,14 @@ void __cdecl d2_BringWindowToFront(int win)
 		first = last;
 	}
 	n = (first - last) * 4 + 4;
-	memcpy(tmp, &((D2_ZORDER_ELEMENT**)g_772540)[last], n);
-	memmove(&((D2_ZORDER_ELEMENT**)g_772540)[last], &((D2_ZORDER_ELEMENT**)g_772540)[first + 1], 0xff8 - first * 4);
+	memcpy(tmp, &((D2_ZORDER_ELEMENT**)d2_ZOrderStack)[last], n);
+	memmove(&((D2_ZORDER_ELEMENT**)d2_ZOrderStack)[last], &((D2_ZORDER_ELEMENT**)d2_ZOrderStack)[first + 1], 0xff8 - first * 4);
 	for (i = 0x3ff; i >= 0; i--) {
-		if (((D2_ZORDER_ELEMENT**)g_772540)[i] != 0) {
+		if (((D2_ZORDER_ELEMENT**)d2_ZOrderStack)[i] != 0) {
 			break;
 		}
 	}
-	memcpy(&((D2_ZORDER_ELEMENT**)g_772540)[i + 1], tmp, n);
+	memcpy(&((D2_ZORDER_ELEMENT**)d2_ZOrderStack)[i + 1], tmp, n);
 	for (i = 0; i < w->count; i++) {
 		d2_ReorderControlStack(w->children[i]);
 	}

@@ -1,5 +1,5 @@
 #include "Develop/client_types.h"
-extern Rec24_99f5a0 g_99f5a0;
+extern Rec24_99f5a0 gm_DisasterState;
 
 void __cdecl cm_SendRandomEventState(void* msg);
 
@@ -19,7 +19,7 @@ void __cdecl gm_InitDisasterState(int enabled, int scaleA, int scaleB, int durat
 		/* block-copy prelude, see docs/codegen-walls.md section 6b */
 		__asm {
 			mov edi, p
-			mov esi, offset g_99f5a0
+			mov esi, offset gm_DisasterState
 			mov ebx, len
 			lea ecx, [edi+edi*2]
 			and ecx, 3
@@ -62,7 +62,7 @@ void __cdecl gm_EnableDisasterState(void)
 		/* block-copy prelude, see docs/codegen-walls.md section 6b */
 		__asm {
 			mov edi, p
-			mov esi, offset g_99f5a0
+			mov esi, offset gm_DisasterState
 			mov ebx, len
 			lea ecx, [edi+edi*2]
 			and ecx, 3
@@ -97,7 +97,7 @@ void __cdecl gm_DisableDisasterState(void)
 		/* block-copy prelude, see docs/codegen-walls.md section 6b */
 		__asm {
 			mov edi, p
-			mov esi, offset g_99f5a0
+			mov esi, offset gm_DisasterState
 			mov ebx, len
 			lea ecx, [edi+edi*2]
 			and ecx, 3
@@ -125,17 +125,17 @@ int __cdecl gm_DispatchDisasterCommand(unsigned int* msg)
 
 	switch (msg[9]) {
 	case 0x656e626c:
-		g_99f5a0.head = 1;
+		gm_DisasterState.head = 1;
 		break;
 	case 0x6473626c:
-		g_99f5a0.head = 0;
+		gm_DisasterState.head = 0;
 		break;
 	case 0x696e6974:
 	case 0x73657420:
 		len = 0x24;
 		/* block-copy prelude, see docs/codegen-walls.md section 6b */
 		__asm {
-			mov edi, offset g_99f5a0
+			mov edi, offset gm_DisasterState
 			mov esi, msg
 			mov ebx, len
 			lea ecx, [edi+edi*2]

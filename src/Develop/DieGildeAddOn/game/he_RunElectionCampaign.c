@@ -11,10 +11,10 @@
 
 
 extern pos14_7f4c00 gm_GameTime;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
-extern char g_7f4ca0[];
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
+extern char gm_EntitySlotTable[];
 extern int gm_CityEntity;
 extern char g_6a5998[];
 
@@ -68,7 +68,7 @@ void __cdecl he_RunElectionCampaign(char* action)
         return;
     }
     if (*(unsigned short*) (action + 0x27) != 0xffff) {
-        rec = ((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (action + 0x27)]);
+        rec = ((char *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[*(unsigned short*) (action + 0x27)]);
         if (rec != 0 && rec != (char*) gm_CityEntity && *(char*)&((ENTITY_RECORD_VIEW*)rec)->health != 0 && *(char*)&((ENTITY_RECORD_VIEW*)rec)->entity_type != 0xf) {
             if (*(int*) (o + 0xc0) == 1) {
                 gm_HandleAllianceCommand(0x6e657720, action, sel, -1);

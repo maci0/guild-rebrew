@@ -72,8 +72,8 @@ void __cdecl io_PollKeyboardInput(void)
 	}
 }
 #else
-extern volatile int g_6b7fb8;
-extern char g_14cf950;
+extern volatile int tb_TimerTicks;
+extern char io_LastKeyScancode;
 
 typedef struct DevData DevData;
 
@@ -105,10 +105,10 @@ void __cdecl io_PollKeyboardInput(void)
 	unsigned char key;
 	int stamp;
 
-	g_14cf950 = 0;
+	io_LastKeyScancode = 0;
 	one = 1;
 	do {
-		dev = g_14ce90c;
+		dev = io_KeyboardDevice;
 		n = (unsigned int) one;
 		hr = dev->vtbl->GetDeviceData(dev, 0x14, (LPDIDEVICEOBJECTDATA) &ev, (LPDWORD) &n, 0);
 		if (hr < 0) {
@@ -120,7 +120,7 @@ void __cdecl io_PollKeyboardInput(void)
 		if (ev.data & 0x80) {
 			if (*(int*) 0x6b5c90 == 0) {
 				ofs = ev.ofs;
-				g_14cf950 = (char) ofs;
+				io_LastKeyScancode = (char) ofs;
 				((unsigned char*) 0x14cf700)[(unsigned char) ofs] = (unsigned char) one;
 			}
 		} else if (*(int*) 0x6b5c90 == 0) {
@@ -129,10 +129,10 @@ void __cdecl io_PollKeyboardInput(void)
 			((unsigned char*) 0x14cf960)[ofs] = (unsigned char) one;
 		}
 	} while (hr >= 0);
-	cur = (unsigned char) g_14cf950;
+	cur = (unsigned char) io_LastKeyScancode;
 	if (cur != 0) {
 		key = cur;
-		stamp = g_6b7fb8;
+		stamp = tb_TimerTicks;
 		*(unsigned char*) 0x6b5cb0 = key;
 		stamp = stamp + 9;
 		*(int*) 0x6b5c68 = stamp;
@@ -141,9 +141,9 @@ void __cdecl io_PollKeyboardInput(void)
 		key = *(unsigned char*) 0x6b5cb0;
 	}
 	if (key != 0) {
-		if (cur == 0 && ((unsigned char*) 0x14cf700)[*(int*) 0x6b5cb0 & 0xff] != 0 && (unsigned int) g_6b7fb8 > (unsigned int) stamp + 5) {
-			g_14cf950 = key;
-			*(int*) 0x6b5c68 = g_6b7fb8;
+		if (cur == 0 && ((unsigned char*) 0x14cf700)[*(int*) 0x6b5cb0 & 0xff] != 0 && (unsigned int) tb_TimerTicks > (unsigned int) stamp + 5) {
+			io_LastKeyScancode = key;
+			*(int*) 0x6b5c68 = tb_TimerTicks;
 		}
 		if (((unsigned char*) 0x14cf700)[*(int*) 0x6b5cb0 & 0xff] == 0) {
 			*(unsigned char*) 0x6b5cb0 = 0;

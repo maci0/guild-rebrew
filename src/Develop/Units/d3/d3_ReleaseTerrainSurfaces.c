@@ -29,7 +29,7 @@ typedef struct Cell {
 	char pad2[0x3b];
 } Cell;
 
-extern unsigned long g_14ce728;
+extern unsigned long d3_LastReleaseRefCount;
 
 void __cdecl d3_ReleaseTerrainSurfaces(char* o)
 {
@@ -42,16 +42,16 @@ void __cdecl d3_ReleaseTerrainSurfaces(char* o)
 	for (a = 0; a < 8; a++) {
 		for (b = 0; b < 8; b++) {
 			if (cells[a][b].on != 0 && cells[a][b].main != 0) {
-				g_14ce728 = cells[a][b].main->v->Release(cells[a][b].main);
+				d3_LastReleaseRefCount = cells[a][b].main->v->Release(cells[a][b].main);
 				cells[a][b].main = 0;
 			}
 			for (c = 0; c < 8; c++) {
 				if (cells[a][b].sub[c].a != 0) {
-					g_14ce728 = cells[a][b].sub[c].a->v->Release(cells[a][b].sub[c].a);
+					d3_LastReleaseRefCount = cells[a][b].sub[c].a->v->Release(cells[a][b].sub[c].a);
 					cells[a][b].sub[c].a = 0;
 				}
 				if (cells[a][b].sub[c].b != 0) {
-					g_14ce728 = cells[a][b].sub[c].b->v->Release(cells[a][b].sub[c].b);
+					d3_LastReleaseRefCount = cells[a][b].sub[c].b->v->Release(cells[a][b].sub[c].b);
 					cells[a][b].sub[c].b = 0;
 				}
 			}

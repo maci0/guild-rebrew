@@ -14,7 +14,7 @@ typedef struct Ent {
 } Ent;
 // SIZE 0x21c
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 int __cdecl gm_RandomMod(int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
@@ -38,9 +38,9 @@ int __cdecl gm_ObjBefriendThreeRivals(Ent* ent, int* arg)
 	r = gm_RandomMod(0x300) & 0xffff;
 	n = 0x300;
 	while (n != 0) {
-		if (r != ent->id && ((Ent*)g_7f4ca0)[r].id != 0xffff && ((Ent*)g_7f4ca0)[r].kind < 10 &&
-		    ((Ent*)g_7f4ca0)[r].side != ent->side && ((Ent*)g_7f4ca0)[r].ready != 0) {
-			picks[0] = &((Ent*)g_7f4ca0)[r];
+		if (r != ent->id && ((Ent*)gm_EntitySlotTable)[r].id != 0xffff && ((Ent*)gm_EntitySlotTable)[r].kind < 10 &&
+		    ((Ent*)gm_EntitySlotTable)[r].side != ent->side && ((Ent*)gm_EntitySlotTable)[r].ready != 0) {
+			picks[0] = &((Ent*)gm_EntitySlotTable)[r];
 			break;
 		}
 		n--;
@@ -49,9 +49,9 @@ int __cdecl gm_ObjBefriendThreeRivals(Ent* ent, int* arg)
 	r = gm_RandomMod(0x300) & 0xffff;
 	m = 0x300;
 	while (m != 0) {
-		if (r != ent->id && r != picks[0]->id && ((Ent*)g_7f4ca0)[r].id != 0xffff &&
-		    ((Ent*)g_7f4ca0)[r].kind < 10 && ((Ent*)g_7f4ca0)[r].side != ent->side) {
-			picks[1] = &((Ent*)g_7f4ca0)[r];
+		if (r != ent->id && r != picks[0]->id && ((Ent*)gm_EntitySlotTable)[r].id != 0xffff &&
+		    ((Ent*)gm_EntitySlotTable)[r].kind < 10 && ((Ent*)gm_EntitySlotTable)[r].side != ent->side) {
+			picks[1] = &((Ent*)gm_EntitySlotTable)[r];
 			break;
 		}
 		m--;
@@ -60,9 +60,9 @@ int __cdecl gm_ObjBefriendThreeRivals(Ent* ent, int* arg)
 	r = gm_RandomMod(0x300) & 0xffff;
 	m = 0x300;
 	while (m != 0) {
-		if (r != ent->id && r != picks[0]->id && r != picks[1]->id && ((Ent*)g_7f4ca0)[r].id != 0xffff &&
-		    ((Ent*)g_7f4ca0)[r].kind < 10 && ((Ent*)g_7f4ca0)[r].side != ent->side) {
-			picks[2] = &((Ent*)g_7f4ca0)[r];
+		if (r != ent->id && r != picks[0]->id && r != picks[1]->id && ((Ent*)gm_EntitySlotTable)[r].id != 0xffff &&
+		    ((Ent*)gm_EntitySlotTable)[r].kind < 10 && ((Ent*)gm_EntitySlotTable)[r].side != ent->side) {
+			picks[2] = &((Ent*)gm_EntitySlotTable)[r];
 			break;
 		}
 		m--;

@@ -6,7 +6,7 @@
 #define MINV(a, b) ((b) < (a) ? (b) : (a))
 
 #include "Develop/Units/d3/d3_camera.h"
-extern float g_662d40[3];
+extern float d3_UnitAxisVectors[3];
 extern float g_6a2558;
 extern float g_6a2560;
 extern float d3_CameraHeightFraction;
@@ -44,9 +44,9 @@ void __cdecl d3_AnimateCameraToObject(char* entity)
 
 	d3_GetObjectVerticalBounds(entity, &lo, &hi);
 	D3DXMatrixTranspose(m, (float*) ((char*) d3_ActiveCamera + 0x18c));
-	offsetX = g_662d40[0] * -600.0f;
-	offsetY = g_662d40[1] * -600.0f;
-	offsetZ = g_662d40[2] * -600.0f;
+	offsetX = d3_UnitAxisVectors[0] * -600.0f;
+	offsetY = d3_UnitAxisVectors[1] * -600.0f;
+	offsetZ = d3_UnitAxisVectors[2] * -600.0f;
 	r[0] = m[8] * offsetZ + m[4] * offsetY + m[0] * offsetX;
 	r[1] = m[9] * offsetZ + m[5] * offsetY + m[1] * offsetX;
 	r[2] = m[10] * offsetZ + m[6] * offsetY + m[2] * offsetX;

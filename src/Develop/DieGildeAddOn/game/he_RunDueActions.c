@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern void (__cdecl* g_7dc440[])(unsigned char*);
+extern void (__cdecl* he_EventDispatchHandlers[])(unsigned char*);
 
 #include "Develop/DieGildeAddOn/game/he_action.h"
 
@@ -27,11 +27,11 @@ void __cdecl he_RunDueActions(void)
 
 	d3_PruneEventGfxSlots();
 	for (i = 0; i <= he_LastEventSlot && i < 1024; i++) {
-		if (g_77e980[i].kind != 0 && (g_77e980[i].flags & 0x18) == 0) {
-			he_CreateEventGfxInfo(&g_77e980[i]);
-			if (gm_CompareGameTime(((char*)&gm_GameTime), g_77e980[i].unk_52) > 0 && g_77e980[i].kind < 0xa7) {
-				he_CancelInvalidBuildingAction(&g_77e980[i]);
-				g_7dc440[g_77e980[i].kind](&g_77e980[i].kind);
+		if (he_ActionSlots[i].kind != 0 && (he_ActionSlots[i].flags & 0x18) == 0) {
+			he_CreateEventGfxInfo(&he_ActionSlots[i]);
+			if (gm_CompareGameTime(((char*)&gm_GameTime), he_ActionSlots[i].unk_52) > 0 && he_ActionSlots[i].kind < 0xa7) {
+				he_CancelInvalidBuildingAction(&he_ActionSlots[i]);
+				he_EventDispatchHandlers[he_ActionSlots[i].kind](&he_ActionSlots[i].kind);
 			}
 		}
 	}

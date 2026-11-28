@@ -1,4 +1,4 @@
-extern char g_773dd4;
+extern char d3_CurrentSeason;
 
 
 
@@ -11,9 +11,9 @@ char __cdecl d3_ApplySeasonTextureSet(char* obj)
 	s = *(int*) (obj + 0x220);
 	if (s != 2 && s != 4) {
 		if (s == 3) {
-			SelectTextureSet(obj, *(int*) (obj + 0x1ec) + 0xf4, g_773dd4, 1);
+			SelectTextureSet(obj, *(int*) (obj + 0x1ec) + 0xf4, d3_CurrentSeason, 1);
 		} else {
-			SelectTextureSet(obj, *(int*) (obj + 0x1ec) + 0xf4, g_773dd4, 1);
+			SelectTextureSet(obj, *(int*) (obj + 0x1ec) + 0xf4, d3_CurrentSeason, 1);
 		}
 	}
 	return 1;

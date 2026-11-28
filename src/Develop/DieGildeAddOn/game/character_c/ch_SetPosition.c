@@ -36,14 +36,14 @@ float __cdecl d3_ComputeYawToTarget(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
 char __cdecl d3sm_SampleHeight(char*, float*, int*, int*, float*);
 void __cdecl d3_GetFloorHeight(char*, float*, int, int*, int*, float*);
-extern float g_6628a8;
+extern float flt_0_0;
 #include "../../../Units/d3/d3_animation.h"
 
 extern int ch_LowPolyMode;
 #include "../../../Units/d3/d3_camera.h"
 extern int g_67530c;
 extern int g_675310;
-extern char g_10432c0[];
+extern char d3_Universes[];
 
 char __cdecl d3_SetObjectVisible(char*, char);
 
@@ -53,7 +53,7 @@ void __cdecl vfs_ToSlashes(char*);
 int __cdecl d3_RemoveObjectAnim(char*);
 
 
-extern char g_6b5c60[];
+extern char str_empty[];
 D3_OBJECT* __cdecl d3_CreateSceneModelObject(D3_OBJECT*, float*, float*, char*);
 void __cdecl d3_InvalidateSubTreeFlags(char*, int);
 void __cdecl ch_PreloadCharacterMotions(char*, int, ...);

@@ -23,7 +23,7 @@ typedef struct Tag {
 // SIZE 0xc
 
 extern char* g_7725c0;
-extern short g_7725c4;
+extern short d2_CursorStateId;
 extern void* g_100f8a0;
 extern TexSlot g_100f860[3];
 extern TexSlot g_100f840;
@@ -39,7 +39,7 @@ void __cdecl d2_InitOverlayState(void)
 	int i;
 
 	(*(void**)&g_7725c0) = 0;
-	g_7725c4 = 0;
+	d2_CursorStateId = 0;
 	memset(&d, 0, sizeof(d));
 	d.w = 0x40;
 	d.h = 0x40;

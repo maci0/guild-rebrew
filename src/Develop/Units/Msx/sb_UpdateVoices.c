@@ -1,10 +1,10 @@
-extern int g_6b7d7c;
-extern int g_6b7e8c;
-extern int g_6b7e88;
+extern int sb_WaveDriver;
+extern int sb_VoiceCount;
+extern int sb_Voices;
 extern int g_6b7e90;
 extern int g_678de8;
 extern int g_678dec;
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 
 extern int __cdecl msx_GetSampleStatus(int a0);
 extern void __cdecl msx_SetSampleVolume(int a0, int a1);
@@ -37,19 +37,19 @@ void __cdecl sb_UpdateVoices(void)
     unsigned int value;
     int dt;
 
-    if (g_6b7d7c == 0)
+    if (sb_WaveDriver == 0)
         return;
     if (g_6b7e90 == 0)
     {
         if (g_678de8 == 0)
             return;
-        now = g_6b7fac * 8 + g_6b7fac * 4 + g_6b7fac;
+        now = gm_GameTicks * 8 + gm_GameTicks * 4 + gm_GameTicks;
         i = 0;
-        if (g_6b7e8c <= 0)
+        if (sb_VoiceCount <= 0)
             return;
         do
         {
-            p = (PART *)(g_6b7e88 + i * 0x30);
+            p = (PART *)(sb_Voices + i * 0x30);
             if (p->ptr04 != 0)
             {
                 if (p->flags14 & 0x10)
@@ -90,7 +90,7 @@ void __cdecl sb_UpdateVoices(void)
                     if (p->stamp1c != 0)
                     {
                         if ((unsigned int)(p->stamp1c + p->limit18) <
-                            (unsigned int)(g_6b7fac * 8 + g_6b7fac * 4 + g_6b7fac))
+                            (unsigned int)(gm_GameTicks * 8 + gm_GameTicks * 4 + gm_GameTicks))
                         {
                             if (p->count0c != 0)
                                 p->count0c--;
@@ -98,7 +98,7 @@ void __cdecl sb_UpdateVoices(void)
                         }
                     }
                     else
-                        p->stamp1c = g_6b7fac * 8 + g_6b7fac * 4 + g_6b7fac;
+                        p->stamp1c = gm_GameTicks * 8 + gm_GameTicks * 4 + gm_GameTicks;
                 }
                 else if (p->callback != 0)
                 {
@@ -107,22 +107,22 @@ void __cdecl sb_UpdateVoices(void)
                 }
             }
             i++;
-        } while (i < g_6b7e8c);
+        } while (i < sb_VoiceCount);
     }
     else
     {
-        now = g_6b7fac * 8 + g_6b7fac * 4 + g_6b7fac;
+        now = gm_GameTicks * 8 + gm_GameTicks * 4 + gm_GameTicks;
         i = 0;
         value = 1;
-        if (g_6b7e8c > 0)
+        if (sb_VoiceCount > 0)
         {
             do
             {
-                p = (PART *)(g_6b7e88 + i * 0x30);
+                p = (PART *)(sb_Voices + i * 0x30);
                 if (p->ptr04 != 0 && msx_GetSampleStatus(p->obj) == 4)
                 {
                     value = 0;
-                    now = g_6b7fac * 8 + g_6b7fac * 4 + g_6b7fac;
+                    now = gm_GameTicks * 8 + gm_GameTicks * 4 + gm_GameTicks;
                     dt = now - p->start10;
                     if ((unsigned int)dt < (unsigned int)g_678dec)
                         msx_SetSampleVolume(p->obj,
@@ -131,7 +131,7 @@ void __cdecl sb_UpdateVoices(void)
                         sb_StopVoice(p, 0);
                 }
                 i++;
-            } while (i < g_6b7e8c);
+            } while (i < sb_VoiceCount);
         }
         g_6b7e90 = value == 0 ? 1 : 0;
     }

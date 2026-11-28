@@ -12,7 +12,7 @@ typedef struct {
 
 int __cdecl ai_SelectBestMethod(int, int, int, Out495a80*, Out495a80*);
 int __cdecl gm_CheckPrivilege(int, char*, int*);
-int __cdecl fcn_004f97a0(int); /* 0x4fbd20, metadata name is stale */
+int __cdecl gm_GetCitySkillAverage(int); /* 0x4fbd20, metadata name is stale */
 int __cdecl fcn_00502cd0(int, int, int, int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 unsigned short __cdecl gm_RandomMod(int);
@@ -102,7 +102,7 @@ int __cdecl ai_StartBildung(int unused, char* actorEntity, int mode, char* out1,
 		}
 		buf[0] = 1;
 		used[i] = 1;
-		action.count[i] = fcn_004f97a0(i) & 0xff;
+		action.count[i] = gm_GetCitySkillAverage(i) & 0xff;
 		if (action.count[i] == 0) {
 			action.count[i] = 0xfc;
 		}

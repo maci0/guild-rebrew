@@ -1,4 +1,4 @@
-extern float g_662d34;
+extern float flt_0_6;
 extern float g_6628d8;
 extern float g_6628cc;
 

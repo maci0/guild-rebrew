@@ -1,7 +1,7 @@
 extern int d2_CurrentWindowId;
-extern unsigned int g_7746d8;
-extern unsigned char g_773d75;
-extern char* g_1015ea0;
+extern unsigned int d2_SelectedEntityUiFlags;
+extern unsigned char gm_ActiveTownIndex;
+extern char* d2_Controls;
 extern char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* Private layout views inferred from native accesses; they allocate no
@@ -35,8 +35,8 @@ typedef struct {
 
 
 /* g_1038144 is the page index table; g_1015f40 the window pool. */
-extern int g_1038144[];
-extern char g_1015f40[];
+extern int d2_FormPageWindows[];
+extern char d2_Windows[];
 extern int g_14a79c0[];
 extern char* g_14b52c0;
 
@@ -70,7 +70,7 @@ void __cdecl d2_UpdateProduktionSlotTile(int dialog, int form, PRODUKTION_SLOT_R
 	int n;
 
 	d2_SetForm(dialog, form);
-	w = &((D2_WIN*) g_1015f40)[g_1038144[dialog * 175 + form]];
+	w = &((D2_WIN*) d2_Windows)[d2_FormPageWindows[dialog * 175 + form]];
 	if (r->id != 0) {
 		if (r->title == -1) {
 			r->title = d2_AddWindowValueGauge(r->x + 6, r->y, 0x30, 0, 100, 0x6a, 0x3d, d2_CurrentWindowId);
@@ -78,14 +78,14 @@ void __cdecl d2_UpdateProduktionSlotTile(int dialog, int form, PRODUKTION_SLOT_R
 		if (r->icon == -1) {
 			if (makeIcon) {
 				v = 0x8a;
-				if (g_7746d8 & 0x200) {
+				if (d2_SelectedEntityUiFlags & 0x200) {
 					v = 0xca;
 				}
 				r->icon = d2_AddWindowField(r->x + 0xf, r->y + 6, r->id + 0xdf, v, d2_CurrentWindowId);
 				d2_SetElementFont(r->icon, 0x54);
 			} else {
 				r->icon = d2_AddElementToWindow(r->x + 0xf, r->y + 6, r->id + 0xdf, d2_CurrentWindowId);
-				((D2_CONTROL_TL*) (g_1015ea0))[r->icon].value_05c = 1;
+				((D2_CONTROL_TL*) (d2_Controls))[r->icon].value_05c = 1;
 			}
 		}
 		if (r->icon2 == -1) {
@@ -99,35 +99,35 @@ void __cdecl d2_UpdateProduktionSlotTile(int dialog, int form, PRODUKTION_SLOT_R
 			if (*p == 0x47) {
 				f = gm_GetSeasonPrice(r->id, p[0x65]);
 			} else if (*((char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*p]) == '\n') {
-				f = gm_GetSeasonPrice(r->id, g_773d75) * 1.1;
+				f = gm_GetSeasonPrice(r->id, gm_ActiveTownIndex) * 1.1;
 			} else {
-				f = gm_GetSeasonPrice(r->id, g_773d75) * *(float*) (p + 0x49);
+				f = gm_GetSeasonPrice(r->id, gm_ActiveTownIndex) * *(float*) (p + 0x49);
 			}
-			d2_FormatCurrencyString((int) f, g_773d75, text);
+			d2_FormatCurrencyString((int) f, gm_ActiveTownIndex, text);
 			if (r->text1 == -1) {
 				r->text1 = d2_ShowTxt(r->x + 0x10, r->y + 0x40, text, d2_CurrentWindowId);
 			} else {
 				d2_SetLabelText(r->text1, text);
 			}
-			((D2_CONTROL_TL*) (g_1015ea0))[r->text1].width = 0x2d;
-			((D2_CONTROL_TL*) (g_1015ea0))[r->text1].font = 0x54;
-			((D2_CONTROL_TL*) (g_1015ea0))[r->text1].value_070 = 1;
+			((D2_CONTROL_TL*) (d2_Controls))[r->text1].width = 0x2d;
+			((D2_CONTROL_TL*) (d2_Controls))[r->text1].font = 0x54;
+			((D2_CONTROL_TL*) (d2_Controls))[r->text1].value_070 = 1;
 		}
 		if (flags & 1) {
 			if (*p == 0x47) {
 				f = gm_GetSeasonPrice(r->id, p[0x65]);
 			} else {
-				f = gm_GetSeasonPrice(r->id, g_773d75) * 0.9;
+				f = gm_GetSeasonPrice(r->id, gm_ActiveTownIndex) * 0.9;
 			}
-			d2_FormatCurrencyString((int) f, g_773d75, text);
+			d2_FormatCurrencyString((int) f, gm_ActiveTownIndex, text);
 			if (r->text2 == -1) {
 				r->text2 = d2_ShowTxt(r->x + 0x10, r->y + 0x49, text, d2_CurrentWindowId);
 			} else {
 				d2_SetLabelText(r->text2, text);
 			}
-			((D2_CONTROL_TL*) (g_1015ea0))[r->text2].width = 0x2d;
-			((D2_CONTROL_TL*) (g_1015ea0))[r->text2].font = 0x54;
-			((D2_CONTROL_TL*) (g_1015ea0))[r->text2].value_070 = 1;
+			((D2_CONTROL_TL*) (d2_Controls))[r->text2].width = 0x2d;
+			((D2_CONTROL_TL*) (d2_Controls))[r->text2].font = 0x54;
+			((D2_CONTROL_TL*) (d2_Controls))[r->text2].value_070 = 1;
 		}
 		obj = (char*) he_StartHandlungSearch(2, 0, 4, 3, *(unsigned int*) (p + 1));
 		while (obj != 0) {
@@ -147,14 +147,14 @@ void __cdecl d2_UpdateProduktionSlotTile(int dialog, int form, PRODUKTION_SLOT_R
 		}
 		if (obj != 0 && (*(int*) (obj + 0x14) != 0 || *(int*) (obj + 0x18) != 0)) {
 			if (*obj == 4) {
-				((D2_CONTROL_TL*) (g_1015ea0))[r->icon].value_1f4.real =
+				((D2_CONTROL_TL*) (d2_Controls))[r->icon].value_1f4.real =
 					1.0 - *(float*) (obj + 0xb4) / *(float*) (obj + 0xb8);
 			} else if (*obj == 3) {
-				((D2_CONTROL_TL*) (g_1015ea0))[r->icon].value_1f4.real =
+				((D2_CONTROL_TL*) (d2_Controls))[r->icon].value_1f4.real =
 					1.0 - *(int*) (obj + 0xb0) / *(float*) (obj + 0xb4);
 			}
 		} else if (r->icon != -1) {
-			((D2_CONTROL_TL*) (g_1015ea0))[r->icon].value_1f4.bits = 0;
+			((D2_CONTROL_TL*) (d2_Controls))[r->icon].value_1f4.bits = 0;
 		}
 		if (makeIcon) {
 			v = d2_GetControlValue(r->icon);
@@ -162,15 +162,15 @@ void __cdecl d2_UpdateProduktionSlotTile(int dialog, int form, PRODUKTION_SLOT_R
 				v = r->f30;
 			}
 			n = r->f30;
-			if (!(g_7746d8 & 0x200)) {
+			if (!(d2_SelectedEntityUiFlags & 0x200)) {
 				n -= r->f2c;
 			}
 			n = n < 0 ? 0 : n;
 			d2_SetElementValue(r->icon, 0, n, v);
 			if (r->f30) {
-				((D2_CONTROL_TL*) (g_1015ea0))[r->icon].value_060 = 0;
+				((D2_CONTROL_TL*) (d2_Controls))[r->icon].value_060 = 0;
 			} else {
-				((D2_CONTROL_TL*) (g_1015ea0))[r->icon].value_060 = 1;
+				((D2_CONTROL_TL*) (d2_Controls))[r->icon].value_060 = 1;
 			}
 			v = d2_GetControlValue(r->icon);
 			if (v < 0) {
@@ -179,16 +179,16 @@ void __cdecl d2_UpdateProduktionSlotTile(int dialog, int form, PRODUKTION_SLOT_R
 			d2_SetElementValue(r->title, 0, r->f34, r->f30 - v, r->f2c);
 		} else {
 			if (r->f30) {
-				((D2_CONTROL_TL*) (g_1015ea0))[r->icon].value_060 = 0;
+				((D2_CONTROL_TL*) (d2_Controls))[r->icon].value_060 = 0;
 			} else {
-				((D2_CONTROL_TL*) (g_1015ea0))[r->icon].value_060 = 1;
+				((D2_CONTROL_TL*) (d2_Controls))[r->icon].value_060 = 1;
 			}
 			d2_SetElementValue(r->title, 0, r->f34, r->f30, r->f2c);
 		}
-		((D2_CONTROL_TL*) (g_1015ea0))[r->icon].flags_1d0 = 0x22;
-		((D2_CONTROL_TL*) (g_1015ea0))[r->icon].value_1dc = 4;
-		((D2_CONTROL_TL*) (g_1015ea0))[r->icon].value_1e0 = 0;
-		sprintf((char*) &((D2_CONTROL_TL*) g_1015ea0)[r->icon] + 0xcc, "%s~ %li %s",
+		((D2_CONTROL_TL*) (d2_Controls))[r->icon].flags_1d0 = 0x22;
+		((D2_CONTROL_TL*) (d2_Controls))[r->icon].value_1dc = 4;
+		((D2_CONTROL_TL*) (d2_Controls))[r->icon].value_1e0 = 0;
+		sprintf((char*) &((D2_CONTROL_TL*) d2_Controls)[r->icon] + 0xcc, "%s~ %li %s",
 				((unsigned int*) g_14a79c0)[r->id * 2], r->f30, g_14b52c0);
 		if (r->icon >= 0) {
 			d2_PositionControl(w->left + r->x + 0xf, w->top + r->y + 6, r->icon);
@@ -207,7 +207,7 @@ void __cdecl d2_UpdateProduktionSlotTile(int dialog, int form, PRODUKTION_SLOT_R
 		}
 		if (r->obj >= 0) {
 			d2_PositionControl(w->left + r->x + 0xf, w->top + r->y + 6,
-					*(int*) (g_1015f40 + r->obj * 0x3cc + 0x27c));
+					*(int*) (d2_Windows + r->obj * 0x3cc + 0x27c));
 		}
 		return;
 	}

@@ -13,12 +13,12 @@ typedef struct Obj2f4 {
 } Obj2f4;
 // SIZE 0x2f4
 
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 extern char g_77534d;
 extern int main_LoopFlags;
-extern char* g_77255c;
+extern char* d2_CurrentWindow;
 #include "Develop/Units/d2.v1/d2_gui.h"
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char s_68d760[];
@@ -49,7 +49,7 @@ int __cdecl d2_ConfirmTextIdMessageBox(int arg, unsigned int flags)
 	int i;
 	int id;
 
-	start = g_6b7fac;
+	start = gm_GameTicks;
 	result = 0;
 	if (g_77534d) {
 		return 0;
@@ -74,9 +74,9 @@ int __cdecl d2_ConfirmTextIdMessageBox(int arg, unsigned int flags)
 	d2_CenterDialogWindows(h);
 	g_77534d = 1;
 	ctx = d2_CreateRadioGroup(0);
-	for (i = 0; i < ((IdList*)g_77255c)->count; i++) {
-		id = ((IdList*)g_77255c)->ids[i];
-		if (((D2_CONTROL_TL*)g_1015ea0)[id].kind != 0x40) {
+	for (i = 0; i < ((IdList*)d2_CurrentWindow)->count; i++) {
+		id = ((IdList*)d2_CurrentWindow)->ids[i];
+		if (((D2_CONTROL_TL*)d2_Controls)[id].kind != 0x40) {
 			d2_AddToRadioGroup(ctx, id);
 		}
 	}
@@ -85,20 +85,20 @@ int __cdecl d2_ConfirmTextIdMessageBox(int arg, unsigned int flags)
 		if (flags & 0x40) {
 			d2_BringFormToFront(h);
 		}
-		if (g_100f1dc != 2) {
-			if (g_100f1dc == 1) {
-				g_774654 = 1;
+		if (d2_DialogButtonAction != 2) {
+			if (d2_DialogButtonAction == 1) {
+				d2_DialogCloseRequested = 1;
 				result = 0;
 			}
 		} else {
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 			result = 1;
 		}
-		if (g_14ce8e0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased) {
+			d2_DialogCloseRequested = 1;
 		}
-		if ((flags & 4) && (unsigned int) g_6b7fac > (unsigned int) (start + 500)) {
-			g_774654 = 1;
+		if ((flags & 4) && (unsigned int) gm_GameTicks > (unsigned int) (start + 500)) {
+			d2_DialogCloseRequested = 1;
 		}
 	}
 	g_77534d = 0;

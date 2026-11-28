@@ -12,16 +12,16 @@ typedef struct {
 	char pad3[0x17c];
 } T40c300;
 
-extern char* g_6b5c20;
+extern char* tp_ch_ActionQueue;
 
 void __cdecl ch_ClearSceneActionFinishCallbacks(int key)
 {
 	int i;
 
 	for (i = 0; i < 2000; i++) {
-		if (((T40c300*)g_6b5c20)[i].on != 0 && ((T40c300*)g_6b5c20)[i].a != 0 && ((T40c300*)g_6b5c20)[i].owner != 0
-		    && *(int*) (((T40c300*)g_6b5c20)[i].owner + 0x88) == key && ((T40c300*)g_6b5c20)[i].b != 0) {
-			((T40c300*)g_6b5c20)[i].b = 0;
+		if (((T40c300*)tp_ch_ActionQueue)[i].on != 0 && ((T40c300*)tp_ch_ActionQueue)[i].a != 0 && ((T40c300*)tp_ch_ActionQueue)[i].owner != 0
+		    && *(int*) (((T40c300*)tp_ch_ActionQueue)[i].owner + 0x88) == key && ((T40c300*)tp_ch_ActionQueue)[i].b != 0) {
+			((T40c300*)tp_ch_ActionQueue)[i].b = 0;
 		}
 	}
 }

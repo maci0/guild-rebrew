@@ -29,10 +29,10 @@ extern int g_7e4308;
 extern int g_7e430c;
 extern int g_7e4310;
 extern char* ch_ContextCharacters[32];
-extern short g_14ce8c0;
-extern short g_14ce8c2;
+extern short io_ActiveCursorX;
+extern short io_ActiveCursorY;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern int g_67a370;
+extern int d3_ActiveScene;
 #include "Develop/Units/d3/d3_camera.h"
 extern float g_1052c00[16];
 
@@ -63,8 +63,8 @@ void __cdecl d3_UpdateSelectionBoxCharacters(void)
 	if (d3_SelectionBoxActive == 0) {
 		return;
 	}
-	g_7e430c = MINV(MAXV(g_1042570, g_14ce8c0), d3_ViewportRight - 1);
-	g_7e4310 = MINV(MAXV(g_1042574, g_14ce8c2), d3_ViewportBottom - 1);
+	g_7e430c = MINV(MAXV(g_1042570, io_ActiveCursorX), d3_ViewportRight - 1);
+	g_7e4310 = MINV(MAXV(g_1042574, io_ActiveCursorY), d3_ViewportBottom - 1);
 	x0 = MINV(g_7e4304, g_7e430c);
 	y0 = MINV(g_7e4308, g_7e4310);
 	x1 = MAXV(g_7e4304, g_7e430c);
@@ -74,13 +74,13 @@ void __cdecl d3_UpdateSelectionBoxCharacters(void)
 		if (obj == 0 || obj[8] == 0) {
 			continue;
 		}
-		i = gm_GetEntityControlMask(g_774970, obj);
+		i = gm_GetEntityControlMask(gm_LocalPlayerSlot, obj);
 		obj[0x188] = 0;
 		if ((i & 0x800) == 0) {
 			continue;
 		}
 		p = *(char**) (obj + 0x184);
-		if (p == 0 || *(int*) (p + 0x88) != g_67a370) {
+		if (p == 0 || *(int*) (p + 0x88) != d3_ActiveScene) {
 			continue;
 		}
 		e = *(char**) (p + 0x34);

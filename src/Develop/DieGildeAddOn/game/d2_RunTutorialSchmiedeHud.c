@@ -1,10 +1,10 @@
 
 
 
-extern int g_7746d8;
+extern int d2_SelectedEntityUiFlags;
 extern int g_14ad268;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_7746a0;
+extern int sv_ClickedObjekt;
 
 void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -32,7 +32,7 @@ void __cdecl d2_RunTutorialSchmiedeHud(char* e)
 	personal = 0;
 	d2_ClearStatusTextSlots();
 	while (main_RunFrameLoop((void*) d2_RunTutorialSchmiedeHud, 0x67fff) != 0) {
-		if (g_7746d8 & 0x200) {
+		if (d2_SelectedEntityUiFlags & 0x200) {
 			if (d2_IsTutorialActionAllowed(0x20) == 1) {
 				prod = RegisterStatusText("contact_PRODUKTION_SCHMIEDEN", g_14ad268, 0x13);
 			} else {
@@ -44,7 +44,7 @@ void __cdecl d2_RunTutorialSchmiedeHud(char* e)
 				meister = 0;
 			}
 		}
-		if (g_7746d8 & 0x400) {
+		if (d2_SelectedEntityUiFlags & 0x400) {
 			if (d2_IsTutorialActionAllowed(0x10) == 1) {
 				lager = RegisterStatusText("contact_LAGER", g_14ad0f0, 0xe);
 			} else {
@@ -61,16 +61,16 @@ void __cdecl d2_RunTutorialSchmiedeHud(char* e)
 				personal = 0;
 			}
 		}
-		if (g_7746a0 != 0) {
-			if (g_7746a0 == lager) {
+		if (sv_ClickedObjekt != 0) {
+			if (sv_ClickedObjekt == lager) {
 				d2_ShowLagerOptions(e, *(int*) (e + 0x5d));
-			} else if (g_7746a0 == prod) {
+			} else if (sv_ClickedObjekt == prod) {
 				d2_RunProduktionDialog(e);
-			} else if (g_7746a0 == transport) {
+			} else if (sv_ClickedObjekt == transport) {
 				d2_OpenTransportPanel(e);
-			} else if (g_7746a0 == personal) {
+			} else if (sv_ClickedObjekt == personal) {
 				d2_ShowPersonalbuch(e, "ob_PERSONALBUCH");
-			} else if (g_7746a0 == meister) {
+			} else if (sv_ClickedObjekt == meister) {
 				d2_OpenMeisterbriefDialog(e);
 			}
 		}

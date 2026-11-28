@@ -35,7 +35,7 @@ typedef struct Slot {
 
 // SIZE 0x3cc
 
-extern char* g_1015ea0;
+extern char* d2_Controls;
 #include "Develop/client_types.h"
 
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -46,10 +46,10 @@ void __cdecl d2_SetSlotVisibility(int slot, int flag)
 	D2_WIN* w;
 	int i;
 
-	s = (Slot*) &((D2_CONTROL_TL*) g_1015ea0)[slot];
+	s = (Slot*) &((D2_CONTROL_TL*) d2_Controls)[slot];
 	((D2_CONTROL_TL*) s)->value_048 = (flag == 0);
 	if (((D2_CONTROL_TL*) s)->kind == 0x40) {
-		w = &((D2_WIN*)g_1015f40)[((D2_CONTROL_TL*) s)->value_088];
+		w = &((D2_WIN*)d2_Windows)[((D2_CONTROL_TL*) s)->value_088];
 		for (i = 0; i < w->count; i++) {
 			d2_SetSlotVisibility(w->children[i], flag);
 		}

@@ -30,15 +30,15 @@ typedef struct {
 	House* house;
 } Slot;
 
-extern char g_7f4ca0[];
-extern char* g_1015ea0;
+extern char gm_EntitySlotTable[];
+extern char* d2_Controls;
 extern char s_6acc18[];
 extern char s_6acc08[];
 extern char s_6a9680[];
 extern char s_67d444[];
 extern int d2_CurrentWindowId;
-extern int g_100f1dc;
-extern int g_14ce8e0;
+extern int d2_DialogButtonAction;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
 void __cdecl gm_RankPlayers(int*, Entry*);
@@ -97,23 +97,23 @@ void __cdecl d2_RunPlayerRankingDialog(void)
 	for (i = 0; i < count; i++) {
 		fl = (int) (list[i].f1c * 100.0f);
 		h = d2_AddElementToWindow(0x28, (count <= 4 ? 0x50 : 0x3a) * i + (count <= 4 ? 0x14 : 2),
-			((House*)g_7f4ca0)[list[i].id].f54, d2_CurrentWindowId);
-		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[h].value_05c) = 1;
-		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[h].flags_1d0) = 3;
-		(*(House**)&((D2_CONTROL_TL*)g_1015ea0)[h].associated_object) = &((House*)g_7f4ca0)[list[i].id];
+			((House*)gm_EntitySlotTable)[list[i].id].f54, d2_CurrentWindowId);
+		(*(int*)&((D2_CONTROL_TL*)d2_Controls)[h].value_05c) = 1;
+		(*(int*)&((D2_CONTROL_TL*)d2_Controls)[h].flags_1d0) = 3;
+		(*(House**)&((D2_CONTROL_TL*)d2_Controls)[h].associated_object) = &((House*)gm_EntitySlotTable)[list[i].id];
 		sprintf(text, s_6a9680, list[i].id);
 		d2_ShowCenteredText(text, 0x36, (count <= 4 ? 0x50 : 0x3a) * i + (count <= 4 ? 0x14 : 2) + 0x22, 0x12c, 0x56);
-		v = MIN(MAX(((House*)g_7f4ca0)[list[i].id].f54 - 0x59a, 0), 7);
+		v = MIN(MAX(((House*)gm_EntitySlotTable)[list[i].id].f54 - 0x59a, 0), 7);
 		h = d2_AddWindowValueGauge(0x5a, (count <= 4 ? 0x50 : 0x3a) * i + (count <= 4 ? 0x14 : 2) + 7, 0x12c, 0, 0x64,
 			cols[v], 0x42, d2_CurrentWindowId);
 		d2_SetElementValue(h, 0, 0x64, fl);
 		sprintf(text, s_67d444, list[i].f20);
 		d2_ShowCenteredText(text, 0x1f4, (count <= 4 ? 0x50 : 0x3a) * i + (count <= 4 ? 0x14 : 2), 0xc8, 0x55);
 	}
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop((void*) d2_RunPlayerRankingDialog, 0x657c7) != 0);
 	d2_DestroyForm(dlg);

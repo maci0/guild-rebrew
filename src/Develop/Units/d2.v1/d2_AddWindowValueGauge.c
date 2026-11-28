@@ -6,7 +6,7 @@
 // SIZE 0x3cc
 
 #include "Develop/client_types.h"
-extern Win_1015f40 g_1015f40[0x60];
+extern Win_1015f40 d2_Windows[0x60];
 extern char s_67d420[];
 
 #include "Develop/Units/Error/error_message.h"
@@ -22,7 +22,7 @@ int __cdecl d2_AddWindowValueGauge(int x, int y, int barLength, int value, int m
 	if (win < 0 || win > 0x60) {
 		return -1;
 	}
-	window = &((D2_WIN*)g_1015f40)[win];
+	window = &((D2_WIN*)d2_Windows)[win];
 	if (window->active == 0) {
 		return -1;
 	}

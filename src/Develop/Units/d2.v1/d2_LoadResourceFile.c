@@ -18,7 +18,7 @@ typedef struct VfsEntry {
 } VfsEntry;
 // SIZE 0x54
 
-extern char* g_772500;
+extern char* d2_FileObjTable;
 extern int g_772504;
 extern int g_67d8c8;
 
@@ -45,36 +45,36 @@ int __cdecl d2_LoadResourceFile(char* path, char* name)
 	fseek(f, 0, 0);
 	fread(buf, size, 1, f);
 	save = index = g_772504;
-	((VfsEntry*) g_772500)[index].kind = d2_GetResourceKind(buf) & 0xff;
-	i = ((VfsEntry*) g_772500)[index].kind;
+	((VfsEntry*) d2_FileObjTable)[index].kind = d2_GetResourceKind(buf) & 0xff;
+	i = ((VfsEntry*) d2_FileObjTable)[index].kind;
 	if (i == 1 || i == 5 || i == 4 || i == 8) {
 		char* p;
 		p = (char*) d2_GetBankEntry(buf, 0);
-		((VfsEntry*) g_772500)[index].w50 = *(short*) (p + 2);
-		((VfsEntry*) g_772500)[index].w52 = *(short*) (p + 6);
-		((VfsEntry*) g_772500)[index].parent = index;
+		((VfsEntry*) d2_FileObjTable)[index].w50 = *(short*) (p + 2);
+		((VfsEntry*) d2_FileObjTable)[index].w52 = *(short*) (p + 6);
+		((VfsEntry*) d2_FileObjTable)[index].parent = index;
 	}
 	if (i == 0x11) {
-		((VfsEntry*) g_772500)[index].w50 = *(short*) (buf + 0xc);
-		((VfsEntry*) g_772500)[index].w52 = *(short*) (buf + 0xe);
+		((VfsEntry*) d2_FileObjTable)[index].w50 = *(short*) (buf + 0xc);
+		((VfsEntry*) d2_FileObjTable)[index].w52 = *(short*) (buf + 0xe);
 	}
-	((VfsEntry*) g_772500)[index].size = size;
-	strcpy(((VfsEntry*) g_772500)[index].name, name);
-	((VfsEntry*) g_772500)[index].flags |= 1;
-	((VfsEntry*) g_772500)[index].flags &= 0xfd;
-	i = ((VfsEntry*) g_772500)[index].kind;
+	((VfsEntry*) d2_FileObjTable)[index].size = size;
+	strcpy(((VfsEntry*) d2_FileObjTable)[index].name, name);
+	((VfsEntry*) d2_FileObjTable)[index].flags |= 1;
+	((VfsEntry*) d2_FileObjTable)[index].flags &= 0xfd;
+	i = ((VfsEntry*) d2_FileObjTable)[index].kind;
 	if (i == 5 || i == 8) {
 		for (i = 0; i < (int) *(unsigned short*) (buf + 4) - 1; ) {
 			char* p;
 			index++;
 			i++;
-			((VfsEntry*) g_772500)[index].offset = 0;
-			*(int*) ((VfsEntry*) g_772500)[index].name = g_67d8c8;
+			((VfsEntry*) d2_FileObjTable)[index].offset = 0;
+			*(int*) ((VfsEntry*) d2_FileObjTable)[index].name = g_67d8c8;
 			p = (char*) d2_GetBankEntry(buf, i);
-			((VfsEntry*) g_772500)[index].w50 = *(short*) (p + 2);
-			((VfsEntry*) g_772500)[index].w52 = *(short*) (p + 6);
-			((VfsEntry*) g_772500)[index].kind = ((VfsEntry*) g_772500)[save].kind;
-			((VfsEntry*) g_772500)[index].parent = save;
+			((VfsEntry*) d2_FileObjTable)[index].w50 = *(short*) (p + 2);
+			((VfsEntry*) d2_FileObjTable)[index].w52 = *(short*) (p + 6);
+			((VfsEntry*) d2_FileObjTable)[index].kind = ((VfsEntry*) d2_FileObjTable)[save].kind;
+			((VfsEntry*) d2_FileObjTable)[index].parent = save;
 		}
 	}
 	free(buf);

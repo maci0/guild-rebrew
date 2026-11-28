@@ -76,17 +76,17 @@ float __cdecl gm_GetEntityMaxHealth(ENTITY_HEALTH_VIEW* bar)
 	return bar->hi;
 }
 
-extern float g_6628a8;
+extern float flt_0_0;
 
 
 /* ADDRESS: GOLDTL 0x004ff040 */
 float __cdecl gm_GetEntityHealthRatio(ENTITY_HEALTH_VIEW* bar)
 {
 	if (bar->id == 0xffff) {
-		return g_6628a8;
+		return flt_0_0;
 	}
 	if (bar->active == 0) {
-		return g_6628a8;
+		return flt_0_0;
 	}
 	return gm_GetEntityHealth((ENTITY_HEALTH_OBJ*) bar) / gm_GetEntityMaxHealth(bar);
 }
@@ -104,9 +104,9 @@ float __cdecl gm_CalcEntityHealthScore(unsigned short id)
 	float a;
 	float b;
 
-	p = (ENTITY_HEALTH_VIEW*) (((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id]));
+	p = (ENTITY_HEALTH_VIEW*) (((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id]));
 	if (p->active == 1 || p->active == 0) {
-		return g_6628a8;
+		return flt_0_0;
 	}
 	v = gm_GetEntityMaxHealth(p);
 	a = (float)(gm_GetEntityHealth((ENTITY_HEALTH_OBJ*) p) / v * 0.8);

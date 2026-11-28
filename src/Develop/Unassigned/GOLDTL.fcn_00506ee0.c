@@ -7,7 +7,7 @@ typedef struct {
 } ENTITY_KIND_SLOT_VIEW;
 // SIZE 0x21c
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 /* ADDRESS: GOLDTL 0x00506ee0 */
 int __cdecl fcn_00506ee0(unsigned short id, int n, ...)
@@ -18,7 +18,7 @@ int __cdecl fcn_00506ee0(unsigned short id, int n, ...)
 	int i;
 
 	r = 0;
-	rec = ((ENTITY_KIND_SLOT_VIEW*)g_7f4ca0)[id];
+	rec = ((ENTITY_KIND_SLOT_VIEW*)gm_EntitySlotTable)[id];
 	if (n <= -1) {
 		return r;
 	}

@@ -13,7 +13,7 @@ typedef struct {
 	int free;
 } Counts57ceb0;
 
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 char* __cdecl gm_LookupEntityRecordById(int a1);
 int __cdecl gm_ResolveEntityById(void** out, void** a2, void** a3, int a4);
@@ -70,19 +70,19 @@ void __cdecl he_AwardEvent0a1Yield(char* entity)
 				if (item != 0) {
 					if (*(int*) (item + 0xe) < 3) {
 						handles[queued++] = id;
-						cm_SendSellObjekt(*(int*) (ownerRec + 4), -1, (short) id, 1, g_773d75, 0);
+						cm_SendSellObjekt(*(int*) (ownerRec + 4), -1, (short) id, 1, gm_ActiveTownIndex, 0);
 						goto next;
 					}
-					*(int*) (entity + 0xac) += (int) gm_GetSeasonPrice(id, g_773d75);
+					*(int*) (entity + 0xac) += (int) gm_GetSeasonPrice(id, gm_ActiveTownIndex);
 					goto next;
 				}
 				if (counts.total < 6) {
 					counts.total++;
 					handles[queued++] = id;
-					cm_SendSellObjekt(*(int*) (ownerRec + 4), -1, (short) id, 1, g_773d75, 0);
+					cm_SendSellObjekt(*(int*) (ownerRec + 4), -1, (short) id, 1, gm_ActiveTownIndex, 0);
 					goto next;
 				}
-				*(int*) (entity + 0xac) += (int) gm_GetSeasonPrice(id, g_773d75);
+				*(int*) (entity + 0xac) += (int) gm_GetSeasonPrice(id, gm_ActiveTownIndex);
 			}
 next:
 			p++;
@@ -97,7 +97,7 @@ next:
 	else {
 		io_FormatTextBuffer(msg, 0x41f1, *(unsigned int*) (entity + 0xac));
 	}
-	cm_RequestTransferCurrencyNoKill(*(int*) (ownerRec + 4), -1, g_773d75, *(unsigned int*) (entity + 0xac));
+	cm_RequestTransferCurrencyNoKill(*(int*) (ownerRec + 4), -1, gm_ActiveTownIndex, *(unsigned int*) (entity + 0xac));
 	io_FormatTextBuffer(buf, 0x41f0, resolvedTarget, msg);
 	he_PostEntityMessage(*(int*) (ownerRec + 4), -1, buf, 0, 0x5ff, 0);
 }

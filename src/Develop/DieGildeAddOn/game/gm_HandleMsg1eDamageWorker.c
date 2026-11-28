@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_HasActiveSpecialObject(void*, int);
@@ -50,7 +50,7 @@ int __cdecl gm_HandleMsg1eDamageWorker(int* request)
 	for (i = 0; i < 768; i++) {
 		if (m >= 6)
 			break;
-		rec = ((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[i]);
+		rec = ((char *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[i]);
 		if (*(unsigned char*)&((ENTITY_RECORD_VIEW*)rec)->entity_type != 0xffff && *(char**) (rec + 0x16c) == chosen
 		    && (*(char*)&((ENTITY_RECORD_VIEW*)rec)->active) != 0)
 			ents[m++] = rec;

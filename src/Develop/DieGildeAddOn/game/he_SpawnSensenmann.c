@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern float g_662d40[3];
-extern volatile int g_6b7fac;
+extern float d3_UnitAxisVectors[3];
+extern volatile int gm_GameTicks;
 
 extern int __cdecl gm_ResolveEntityById(void **a0, int a1, int a2, int a3);
 extern void __cdecl d3_SelectSceneContext(int a0, int a1);
@@ -68,7 +68,7 @@ int __cdecl he_SpawnSensenmann(int action)
             dir.x = pos.x - cur.x;
             dir.y = pos.y - cur.y;
             dir.z = pos.z - cur.z;
-            rot.y = d3_WrapYawDelta(g_662d40, &dir.x);
+            rot.y = d3_WrapYawDelta(d3_UnitAxisVectors, &dir.x);
         }
         else
         {
@@ -101,7 +101,7 @@ int __cdecl he_SpawnSensenmann(int action)
         *(unsigned char *)(*(int *)(v3 + 0xc8) + 0x216) = *(unsigned char *)(*(int *)(v3 + 0xc8) + 0x216) | 3;
         *(unsigned char *)(*(int *)(v3 + 0xc8) + 0x217) = *(unsigned char *)(*(int *)(v3 + 0xc8) + 0x217) & 0xfe;
         d3_ApplyObjectAnimation(*(int *)(v3 + 0xc8), (char *)0x6a5fb4, 1);
-        *(int *)(v3 + 0xec) = g_6b7fac;
+        *(int *)(v3 + 0xec) = gm_GameTicks;
         d3_SelectSceneContext(savedContext, 1);
         return 1;
     }

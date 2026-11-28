@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char g_10432c0[];
+extern char d3_Universes[];
 
 /* ADDRESS: GOLDTL 0x00402ba0 */
 int __cdecl ch_CountCharacters(int contextIndexArg, int includeTypeOne)
@@ -14,7 +14,7 @@ int __cdecl ch_CountCharacters(int contextIndexArg, int includeTypeOne)
 		e = *p;
 		if (e != 0) {
 			if (contextIndexArg == -1 ||
-			    *(int*) ((char*) e + 0x88) == (int) (g_10432c0 + contextIndexArg * 0x3dc)) {
+			    *(int*) ((char*) e + 0x88) == (int) (d3_Universes + contextIndexArg * 0x3dc)) {
 				if (includeTypeOne != 0 ||
 				    *(int*) (*(int*) ((char*) e + 0x34) + 0x218) != 1) {
 					count++;

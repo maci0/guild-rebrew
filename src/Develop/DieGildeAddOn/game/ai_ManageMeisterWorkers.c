@@ -18,10 +18,10 @@ typedef struct Ent {
 // SIZE 0x21c
 
 extern pos14_7f4c00 gm_GameTime;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
-extern char g_7f4ca4[];
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
+extern char gm_EntityIdField[];
 extern unsigned char* lpGebaeudePROT;
 
 int __cdecl gm_RandomMod(int);
@@ -47,7 +47,7 @@ void __cdecl ai_ManageMeisterWorkers(char* meister)
 	int tick;
 	int i;
 
-	if ((*(short*) &g_7f4c04) != 7 && (*(short*) &g_7f4c04) != 0xc && (*(short*) &g_7f4c04) != 0x12) {
+	if ((*(short*) &gm_GameTimeHour) != 7 && (*(short*) &gm_GameTimeHour) != 0xc && (*(short*) &gm_GameTimeHour) != 0x12) {
 		*(unsigned int*) (meister + 0x1b4) &= 0xffffffbf;
 		return;
 	}
@@ -81,14 +81,14 @@ void __cdecl ai_ManageMeisterWorkers(char* meister)
 		}
 		memset(msg, 0, sizeof(msg));
 		msg[4] = 0x32;
-		*(int*) (msg + 8) = *(int*) (g_7f4ca4
+		*(int*) (msg + 8) = *(int*) (gm_EntityIdField
 		                           + *(unsigned short*) (*(char**) (meister + 0x16c) + 0x27) * 0x21c);
 		*(int*) (msg + 0xc) = *(int*) (*(char**) (meister + 0x16c) + 1);
 		*(int*) (msg + 0x28) = gm_GameTime.a;
-		*(int*) (msg + 0x2c) = g_7f4c04;
-		*(int*) (msg + 0x30) = g_7f4c08;
+		*(int*) (msg + 0x2c) = gm_GameTimeHour;
+		*(int*) (msg + 0x30) = gm_GameTimeSliceDword;
 		msg[0x36] = 2;
-		*(short*) (msg + 0x34) = g_7f4c0c;
+		*(short*) (msg + 0x34) = gm_GameTimeTailWord;
 		*(int*) (msg + 0x58) = *(int*) (rec + 4);
 		cm_SendCopyEntityData(msg);
 	}
@@ -140,14 +140,14 @@ void __cdecl ai_ManageMeisterWorkers(char* meister)
 	}
 	memset(msg, 0, sizeof(msg));
 	msg[4] = 6;
-	*(int*) (msg + 8) = *(int*) (g_7f4ca4
+	*(int*) (msg + 8) = *(int*) (gm_EntityIdField
 	                           + *(unsigned short*) (*(char**) (meister + 0x16c) + 0x27) * 0x21c);
 	*(int*) (msg + 0xc) = *(int*) (*(char**) (meister + 0x16c) + 1);
 	*(int*) (msg + 0x28) = gm_GameTime.a;
-	*(int*) (msg + 0x2c) = g_7f4c04;
+	*(int*) (msg + 0x2c) = gm_GameTimeHour;
 	msg[0x36] = 1;
-	*(int*) (msg + 0x30) = g_7f4c08;
-	*(short*) (msg + 0x34) = g_7f4c0c;
+	*(int*) (msg + 0x30) = gm_GameTimeSliceDword;
+	*(short*) (msg + 0x34) = gm_GameTimeTailWord;
 	*(int*) (msg + 0x5c) = 1;
 	gm_CheckEntityType((unsigned char*) *(char**) (meister + 0x16c));
 	*(int*) (msg + 0x8c) = -1;

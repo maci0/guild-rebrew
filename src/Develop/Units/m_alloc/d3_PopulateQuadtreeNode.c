@@ -1,4 +1,4 @@
-extern int g_67a370;
+extern int d3_ActiveScene;
 
 void __cdecl d3_FreeQuadtreeNode(int* n);
 char __cdecl d3_CollectActiveMeshObjects(void* p, int* n);
@@ -14,7 +14,7 @@ void __cdecl d3_PopulateQuadtreeNode(int a1, int* n)
 		for (i = 0; i < 4; i++) {
 			d3_FreeQuadtreeNode((int*) n[i]);
 		}
-		d3_VisitSceneObjects(g_67a370, a1, n[0x11] | 0x200, d3_CollectActiveMeshObjects, n);
+		d3_VisitSceneObjects(d3_ActiveScene, a1, n[0x11] | 0x200, d3_CollectActiveMeshObjects, n);
 		d3_SplitQuadtreeNode(n, n[0xd], 1, n[0xe]);
 	}
 }

@@ -4,23 +4,23 @@
 extern char g_7e22c0[];      /* ini file path */
 extern char g_7e23ea[];      /* first name buffer (0x20) */
 extern char g_7e240a[];      /* family name buffer (0x20) */
-extern char g_14cf950;       /* last pressed key */
+extern char io_LastKeyScancode;       /* last pressed key */
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_100f1dc;        /* focused element id */
+extern int d2_DialogButtonAction;        /* focused element id */
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern int* g_774a34;        /* entity list head */
-extern int* g_779cb8;        /* rejected entity */
-extern int* g_779ce4;
-extern char* g_100f1e4;      /* element of the current player */
-extern int g_102cbc8[];
+extern int* lb_LobbyPlayerList;        /* entity list head */
+extern int* d2_LobbyLocalPlayerEntry;        /* rejected entity */
+extern int* tp_d3_SceneState;
+extern char* tp_d2_HoveredControl;      /* element of the current player */
+extern int d2_RadioGroupItems[];
 extern int g_102cbcc[];
-extern char g_1015f4c[];
+extern char d2_WindowMetricsView[];
 extern char g_7e23e0[];
 extern unsigned char g_7e23e1; extern unsigned char g_7e23e2;
 extern int g_7e23e4;
 extern char g_7e23e8;
 extern char g_7e23e9;
-extern signed char g_6a3440;
+extern signed char gm_SelectedMissionIndex;
 extern int g_14abe74;
 extern int g_14abe78;
 extern int g_14abe80;
@@ -114,15 +114,15 @@ int __cdecl d2_RunPlayerEditorDialog(int msg, int param)
 	faith0 = out[0];
 	d2_SetForm(h, 5);
 	io_AppendText(0x1adb);
-	cols = (*(int*) (d2_CurrentWindowId * 0x3cc + (int) g_1015f4c) - 0x20) / 0x30;
+	cols = (*(int*) (d2_CurrentWindowId * 0x3cc + (int) d2_WindowMetricsView) - 0x20) / 0x30;
 	group = d2_CreateRadioGroup(0);
 	for (i = 0; i < 8; i++) {
 		ids[i] = d2_AddElementToWindow((i % cols) * 0x30 + 0x50, (i / cols) * 0x30 + 0x20, i + 0x59a, d2_CurrentWindowId);
-		((D2_CONTROL_TL*)g_1015ea0)[ids[i]].value_058 = 1;
-		((D2_CONTROL_TL*)g_1015ea0)[ids[i]].value_038 = 0;
-		((D2_CONTROL_TL*)g_1015ea0)[ids[i]].value_03c = 0;
-		((D2_CONTROL_TL*)g_1015ea0)[ids[i]].value_060 = 1;
-		((D2_CONTROL_TL*)g_1015ea0)[ids[i]].flags_1d0 = 3;
+		((D2_CONTROL_TL*)d2_Controls)[ids[i]].value_058 = 1;
+		((D2_CONTROL_TL*)d2_Controls)[ids[i]].value_038 = 0;
+		((D2_CONTROL_TL*)d2_Controls)[ids[i]].value_03c = 0;
+		((D2_CONTROL_TL*)d2_Controls)[ids[i]].value_060 = 1;
+		((D2_CONTROL_TL*)d2_Controls)[ids[i]].flags_1d0 = 3;
 		d2_AddToRadioGroup(group, ids[i]);
 	}
 	d2_SetForm(h, 6);
@@ -130,7 +130,7 @@ int __cdecl d2_RunPlayerEditorDialog(int msg, int param)
 	d2_SetElementValue(first, g_7e23ea);
 	d2_SetElementValue(second, g_7e240a);
 	for (i = 0; i < 8; i++) {
-		if (((D2_CONTROL_TL*)g_1015ea0)[ids[i]].value_008 == g_7e23e4) {
+		if (((D2_CONTROL_TL*)d2_Controls)[ids[i]].value_008 == g_7e23e4) {
 			d2_SelectRadioGroup(group, i);
 			break;
 		}
@@ -142,50 +142,50 @@ int __cdecl d2_RunPlayerEditorDialog(int msg, int param)
 	w24 = d2_CreateRadioGroup(2, faith0, faith1);
 	d2_SelectRadioGroup(w24, g_7e23e9 & 0xff);
 	d2_ResetSelectionAndInput();
-	g_14cf950 = 0;
+	io_LastKeyScancode = 0;
 	for (i = 0; i < 8; i++)
-		((D2_CONTROL_TL*)g_1015ea0)[ids[i]].disabled = 0;
+		((D2_CONTROL_TL*)d2_Controls)[ids[i]].disabled = 0;
 	for (p = 1; p < 9; p++) {
-		ent = (int*) g_774a34[p];
+		ent = (int*) lb_LobbyPlayerList[p];
 		if (ent != 0) {
 			n = d3_GetSceneEntry((int) ent);
 			if (n != 0) {
-				if (*(int*) n != 0 && (int*) n != g_779cb8) {
-					((D2_CONTROL_TL*)g_1015ea0)[ids[*(int*) (n + 0xc)]].disabled = 1;
-					if (((D2_CONTROL_TL*)g_1015ea0)[ids[*(int*) (n + 0xc)]].value_038 != 0) {
-						((D2_CONTROL_TL*)g_1015ea0)[ids[*(int*) (n + 0xc)]].value_038 = 0;
-						((D2_CONTROL_TL*)g_1015ea0)[ids[g_779cb8[3]]].value_038 = 1;
+				if (*(int*) n != 0 && (int*) n != d2_LobbyLocalPlayerEntry) {
+					((D2_CONTROL_TL*)d2_Controls)[ids[*(int*) (n + 0xc)]].disabled = 1;
+					if (((D2_CONTROL_TL*)d2_Controls)[ids[*(int*) (n + 0xc)]].value_038 != 0) {
+						((D2_CONTROL_TL*)d2_Controls)[ids[*(int*) (n + 0xc)]].value_038 = 0;
+						((D2_CONTROL_TL*)d2_Controls)[ids[d2_LobbyLocalPlayerEntry[3]]].value_038 = 1;
 					}
 				}
 			}
 		}
 	}
 	for (;;) {
-		if (g_779ce4[1] != 0) {
-			g_779ce4[1] = 0;
+		if (tp_d3_SceneState[1] != 0) {
+			tp_d3_SceneState[1] = 0;
 			p = cm_RequestClearSceneEntries();
 			while (!cm_GetCommandStatus(p)) {
 				cm_StepCommandQueue();
 			}
-			g_774a34 = (int*) lb_GetPlayerList();
+			lb_LobbyPlayerList = (int*) lb_GetPlayerList();
 			for (i = 0; i < 8; i++)
-				((D2_CONTROL_TL*)g_1015ea0)[ids[i]].disabled = 0;
+				((D2_CONTROL_TL*)d2_Controls)[ids[i]].disabled = 0;
 			for (p = 1; p < 9; p++) {
-				ent = (int*) g_774a34[p];
+				ent = (int*) lb_LobbyPlayerList[p];
 				if (ent != 0) {
 					n = d3_GetSceneEntry((int) ent);
 					if (n != 0) {
-						if (*(int*) n != 0 && (int*) n != g_779cb8) {
-							((D2_CONTROL_TL*)g_1015ea0)[ids[*(int*) (n + 0xc)]].disabled = 1;
-							((D2_CONTROL_TL*)g_1015ea0)[ids[*(int*) (n + 0xc)]].value_038 = 0;
+						if (*(int*) n != 0 && (int*) n != d2_LobbyLocalPlayerEntry) {
+							((D2_CONTROL_TL*)d2_Controls)[ids[*(int*) (n + 0xc)]].disabled = 1;
+							((D2_CONTROL_TL*)d2_Controls)[ids[*(int*) (n + 0xc)]].value_038 = 0;
 						}
 					}
 				}
 			}
 		}
-		if (g_14ce8e0 != 0 || (g_100f1dc != -1 && d2_CurrentElementId == elem6) || g_14cf950 == 1) {
+		if (io_RightButtonReleased != 0 || (d2_DialogButtonAction != -1 && d2_CurrentElementId == elem6) || io_LastKeyScancode == 1) {
 			if (sel == 0) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			} else {
 				sel = sel - 1;
 				redraw = 1;
@@ -206,26 +206,26 @@ int __cdecl d2_RunPlayerEditorDialog(int msg, int param)
 			redraw = 0;
 		}
 		if (sel == 0) {
-			if (g_14cf950 == 0x1c) {
+			if (io_LastKeyScancode == 0x1c) {
 				s = d2_GetControlValue(first);
 				strcpy(g_7e23ea, s);
 				sel = 1;
 				redraw = 1;
-				g_14cf950 = 0;
+				io_LastKeyScancode = 0;
 			}
 		}
 		else if (sel == 1) {
-			if (g_14cf950 == 0x1c) {
+			if (io_LastKeyScancode == 0x1c) {
 				s = d2_GetControlValue(second);
 				strcpy(g_7e240a, s);
 				sel = 2;
 				redraw = 1;
-				g_14cf950 = 0;
+				io_LastKeyScancode = 0;
 			}
 		}
 		else if (sel == 2) {
 			d2_UpdateRadioGroup(w8);
-			if (g_100f1dc != -1) {
+			if (d2_DialogButtonAction != -1) {
 				if (d2_CurrentElementId == sex0) {
 					g_7e23e8 = 0;
 					sel = 3;
@@ -240,7 +240,7 @@ int __cdecl d2_RunPlayerEditorDialog(int msg, int param)
 		}
 		else if (sel == 3) {
 			d2_UpdateRadioGroup(w24);
-			if (g_100f1dc != -1) {
+			if (d2_DialogButtonAction != -1) {
 				if (d2_CurrentElementId == faith0) {
 					g_7e23e9 = 1;
 					sel = 4;
@@ -255,16 +255,16 @@ int __cdecl d2_RunPlayerEditorDialog(int msg, int param)
 		}
 		else if (sel == 4) {
 			d2_UpdateRadioGroup(group);
-			if (g_14cf950 == 0x1c) {
+			if (io_LastKeyScancode == 0x1c) {
 				sel = 5;
 				redraw = 1;
 			}
-			if (g_100f1dc >= 0x59a && g_100f1dc < 0x5a2) {
+			if (d2_DialogButtonAction >= 0x59a && d2_DialogButtonAction < 0x5a2) {
 				for (i = 0; i < 8; i++) {
-					if ((char*)&((D2_CONTROL_TL*)g_1015ea0)[ids[i]] != g_100f1e4) {
-						((D2_CONTROL_TL*)g_1015ea0)[ids[i]].value_038 = 0;
-						((D2_CONTROL_TL*)g_1015ea0)[ids[i]].value_03c = 0;
-						((D2_CONTROL_TL*)g_1015ea0)[ids[i]].value_060 = 1;
+					if ((char*)&((D2_CONTROL_TL*)d2_Controls)[ids[i]] != tp_d2_HoveredControl) {
+						((D2_CONTROL_TL*)d2_Controls)[ids[i]].value_038 = 0;
+						((D2_CONTROL_TL*)d2_Controls)[ids[i]].value_03c = 0;
+						((D2_CONTROL_TL*)d2_Controls)[ids[i]].value_060 = 1;
 					}
 				}
 				sel = sel + 1;
@@ -274,15 +274,15 @@ int __cdecl d2_RunPlayerEditorDialog(int msg, int param)
 			g_7e23e0[0] = 0;
 			(*(char *)&g_7e23e1) = 0;
 			(*(char *)&g_7e23e2) = 0x12;
-			g_7e23e4 = ((D2_CONTROL_TL*)g_1015ea0)[g_102cbcc[group * 35 + g_102cbc8[group * 35]]].value_008;
-			if (g_6a3440 == -1) {
+			g_7e23e4 = ((D2_CONTROL_TL*)d2_Controls)[g_102cbcc[group * 35 + d2_RadioGroupItems[group * 35]]].value_008;
+			if (gm_SelectedMissionIndex == -1) {
 				result = 1;
 			}
 			else {
 				(void) *(volatile int*) &param;
 				result = 1;
 			}
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 		}
 		if (main_RunFrameLoop((int (__cdecl*)(void)) 0x53d490, msg) == 0) {
 			d2_ClearRadioGroup(w8);

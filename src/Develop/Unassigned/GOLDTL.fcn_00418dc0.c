@@ -20,7 +20,7 @@ SOUND_SOURCE* __cdecl d3snd_AttachSoundSource(char* voice, char* objekt, int vol
         if (source != 0 && *(char**)(voice + 4) != 0) {
             d3snd_SetVoiceFlag0x10((int*)voice, 1);
             strncpy(source->name, *(char**)(voice + 4) + 4, 50);
-            scaled = range * g_662b40;
+            scaled = range * dbl_0_0254;
             source->objekt = objekt;
             *(SOUND_SOURCE**)(objekt + sound_objekt_link_offset) = source;
             source->voice = voice;

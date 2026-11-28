@@ -42,8 +42,8 @@ typedef struct {
 // SIZE 0x54
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern Seq* g_665f08;
-extern volatile unsigned int g_6b7fac;
+extern Seq* d2_TutorialState;
+extern volatile unsigned int gm_GameTicks;
 
 void __cdecl d2_HideTutorialPrompt(void);
 void __cdecl d2_UpdateTutorialArrow(int);
@@ -52,108 +52,108 @@ void __cdecl d2_DispatchTutorialInput(int a, int b, int c, int d)
 {
 	Msg m;
 
-	if (d2_TutorialActive == 0 || g_665f08->cfg == 0) {
+	if (d2_TutorialActive == 0 || d2_TutorialState->cfg == 0) {
 		return;
 	}
 	m.a = a;
 	m.b = b;
 	m.c = c;
 	m.d = d;
-	if (g_665f08->cfg->kind != 2) {
-		if (g_665f08->want != 4 && g_665f08->want != 0xa) {
+	if (d2_TutorialState->cfg->kind != 2) {
+		if (d2_TutorialState->want != 4 && d2_TutorialState->want != 0xa) {
 			return;
 		}
-		if (g_665f08->cfg->cb != 0) {
-			g_665f08->cfg->cb(&m);
-			g_665f08->ticks++;
+		if (d2_TutorialState->cfg->cb != 0) {
+			d2_TutorialState->cfg->cb(&m);
+			d2_TutorialState->ticks++;
 			return;
 		}
-		if (g_665f08->cfg->key == 3) {
-			if (g_6b7fac > g_665f08->cfg->wait + g_665f08->since) {
-				g_665f08->state = g_665f08->cfg->next;
-				g_665f08->want = g_665f08->cfg->next;
-				g_665f08->since = g_6b7fac;
-				g_665f08->done = 1;
+		if (d2_TutorialState->cfg->key == 3) {
+			if (gm_GameTicks > d2_TutorialState->cfg->wait + d2_TutorialState->since) {
+				d2_TutorialState->state = d2_TutorialState->cfg->next;
+				d2_TutorialState->want = d2_TutorialState->cfg->next;
+				d2_TutorialState->since = gm_GameTicks;
+				d2_TutorialState->done = 1;
 			}
 			return;
 		}
-		if (g_665f08->cfg->key != a) {
+		if (d2_TutorialState->cfg->key != a) {
 			goto tick;
 		}
 		if (c == 0) {
-			g_665f08->state = g_665f08->cfg->next;
+			d2_TutorialState->state = d2_TutorialState->cfg->next;
 		} else {
-			g_665f08->state = 0xb;
+			d2_TutorialState->state = 0xb;
 		}
-		g_665f08->want = g_665f08->state;
-		g_665f08->since = g_6b7fac;
+		d2_TutorialState->want = d2_TutorialState->state;
+		d2_TutorialState->since = gm_GameTicks;
 		goto tick;
 	}
-	if (g_665f08->want != 4 && g_665f08->want != 9 && g_665f08->want != 0xa) {
+	if (d2_TutorialState->want != 4 && d2_TutorialState->want != 9 && d2_TutorialState->want != 0xa) {
 		return;
 	}
-	if (g_665f08->cfg->cb != 0) {
-		g_665f08->cfg->cb(&m);
+	if (d2_TutorialState->cfg->cb != 0) {
+		d2_TutorialState->cfg->cb(&m);
 		return;
 	}
-	if (g_665f08->mode == 1) {
+	if (d2_TutorialState->mode == 1) {
 		if (c == 0) {
-			if (g_665f08->cfg->key == a) {
-				g_665f08->want = 5;
-				g_665f08->since = g_6b7fac;
+			if (d2_TutorialState->cfg->key == a) {
+				d2_TutorialState->want = 5;
+				d2_TutorialState->since = gm_GameTicks;
 				if (b != 0) {
-					g_665f08->arg = b;
+					d2_TutorialState->arg = b;
 				}
 			}
-		} else if (c == 1 && g_665f08->cfg->key == a) {
-			g_665f08->want = 4;
-			g_665f08->since = g_6b7fac;
-			g_665f08->busy = 0;
+		} else if (c == 1 && d2_TutorialState->cfg->key == a) {
+			d2_TutorialState->want = 4;
+			d2_TutorialState->since = gm_GameTicks;
+			d2_TutorialState->busy = 0;
 			d2_HideTutorialPrompt();
 			d2_UpdateTutorialArrow(2);
 		}
-		g_665f08->state = g_665f08->want;
-		g_665f08->ticks++;
+		d2_TutorialState->state = d2_TutorialState->want;
+		d2_TutorialState->ticks++;
 		return;
 	}
-	if (g_665f08->mode != 3) {
+	if (d2_TutorialState->mode != 3) {
 		goto tick;
 	}
-	if (g_665f08->want == 9) {
-		if (g_665f08->cfg->alt_key != 0 && g_665f08->cfg->alt_key == a) {
-			g_665f08->state = 0xa;
-			g_665f08->want = 0xa;
-			g_665f08->since = g_6b7fac;
-			g_665f08->ticks++;
+	if (d2_TutorialState->want == 9) {
+		if (d2_TutorialState->cfg->alt_key != 0 && d2_TutorialState->cfg->alt_key == a) {
+			d2_TutorialState->state = 0xa;
+			d2_TutorialState->want = 0xa;
+			d2_TutorialState->since = gm_GameTicks;
+			d2_TutorialState->ticks++;
 			return;
 		}
-		if (g_665f08->cfg->key != a || c != 1) {
+		if (d2_TutorialState->cfg->key != a || c != 1) {
 			goto tick;
 		}
-		g_665f08->state = 4;
-		g_665f08->want = 4;
-		g_665f08->since = g_6b7fac;
-		g_665f08->busy = 0;
+		d2_TutorialState->state = 4;
+		d2_TutorialState->want = 4;
+		d2_TutorialState->since = gm_GameTicks;
+		d2_TutorialState->busy = 0;
 		d2_HideTutorialPrompt();
 		d2_UpdateTutorialArrow(2);
-		g_665f08->ticks++;
+		d2_TutorialState->ticks++;
 		return;
 	}
-	if (g_665f08->want == 0xa) {
-		if (g_665f08->cfg->key != a || c != 1) {
+	if (d2_TutorialState->want == 0xa) {
+		if (d2_TutorialState->cfg->key != a || c != 1) {
 			goto tick;
 		}
-		g_665f08->state = 0xb;
-		g_665f08->want = 0xb;
-		g_665f08->since = g_6b7fac;
+		d2_TutorialState->state = 0xb;
+		d2_TutorialState->want = 0xb;
+		d2_TutorialState->since = gm_GameTicks;
 	} else {
-		if (g_665f08->want != 4 || g_665f08->cfg->key != a || c != 0) {
+		if (d2_TutorialState->want != 4 || d2_TutorialState->cfg->key != a || c != 0) {
 			goto tick;
 		}
-		g_665f08->state = 9;
-		g_665f08->want = 9;
-		g_665f08->since = g_6b7fac;
+		d2_TutorialState->state = 9;
+		d2_TutorialState->want = 9;
+		d2_TutorialState->since = gm_GameTicks;
 	}
 tick:
-	g_665f08->ticks++;
+	d2_TutorialState->ticks++;
 }

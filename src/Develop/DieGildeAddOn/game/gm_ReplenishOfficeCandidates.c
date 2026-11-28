@@ -17,7 +17,7 @@
 extern int g_664e1c[3];
 extern int g_664e28[3];
 extern int g_6653bc;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 void __cdecl gm_RandomizeIntArray(int, int *);
 int __cdecl _ftol(void);
@@ -80,7 +80,7 @@ void __cdecl gm_ReplenishOfficeCandidates(void)
 	kinds[1] = 21;
 	kinds[2] = 27;
 	for (i = 0; i < 768; i++) {
-		p = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]);
+		p = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i]);
 		if (p->unk_00d >= 7 &&
 		    (p->entity_state == 6 || p->entity_state == 7 || p->entity_state == 5 || p->entity_state == 4 ||
 			p->entity_state == 3 || p->entity_state == 2)) {
@@ -117,7 +117,7 @@ void __cdecl gm_ReplenishOfficeCandidates(void)
 			v = (int) (g_6653bc * ((gm_RandomFloat01() + 1.0f) * 0.5f));
 			kind = kinds[j];
 			candidate = cm_GetCommandResult(h);
-			cm_RequestMoveCredits(*(int *) (candidate + 4), -1, g_773d75, v);
+			cm_RequestMoveCredits(*(int *) (candidate + 4), -1, gm_ActiveTownIndex, v);
 			cm_BeginPacketFieldDelta(candidate, *(int *) (candidate + 4));
 			cm_AppendPacketFieldDelta(1, 1, 0xd, &seven);
 			cm_AppendPacketFieldDelta(1, 1, 0x167, &kind);

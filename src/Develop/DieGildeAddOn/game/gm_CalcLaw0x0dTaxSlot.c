@@ -25,8 +25,8 @@ typedef struct {
 	char pad1ac[0x21c - 0x1ac];
 } Obj;
 
-extern char g_7f4ca0[];
-extern unsigned char g_773d75;
+extern char gm_EntitySlotTable[];
+extern unsigned char gm_ActiveTownIndex;
 extern int g_99f768;
 
 void __cdecl gm_GetLawEntry(int kind, Offer* o);
@@ -57,7 +57,7 @@ int __cdecl gm_CalcLaw0x0dTaxSlot(unsigned short id, Slots* s, unsigned char fla
 	if (i >= 6) {
 		return 0;
 	}
-	n = ((Obj*)g_7f4ca0)[id].count;
+	n = ((Obj*)gm_EntitySlotTable)[id].count;
 	f = n * (amt * 0.01f);
 	if (!(f > 0.0f)) {
 		f = 0.0f;
@@ -70,13 +70,13 @@ int __cdecl gm_CalcLaw0x0dTaxSlot(unsigned short id, Slots* s, unsigned char fla
 		if (flags & 1) {
 			p = gm_GetGuildHall(1);
 			p = fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x115);
-			if (gm_AccumulateTyped2(&((Obj*)g_7f4ca0)[id]) >= v) {
-				cm_RequestTransferCurrencyNoKill(*(int*) (p + 2), ((Obj*)g_7f4ca0)[id].owner, (*(char*)&g_773d75), v);
+			if (gm_AccumulateTyped2(&((Obj*)gm_EntitySlotTable)[id]) >= v) {
+				cm_RequestTransferCurrencyNoKill(*(int*) (p + 2), ((Obj*)gm_EntitySlotTable)[id].owner, (*(char*)&gm_ActiveTownIndex), v);
 			}
 		}
 		if (flags & 2) {
 			g_99f768 += v;
-			((Obj*)g_7f4ca0)[id].count = 0;
+			((Obj*)gm_EntitySlotTable)[id].count = 0;
 		}
 	}
 	return 1;

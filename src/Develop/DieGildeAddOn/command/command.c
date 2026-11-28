@@ -1592,7 +1592,7 @@ int __cdecl cm_ChkJoinLeaveElection(int* cmd)
 		if (query_result == 0) return 1;
 		slot_index = *(unsigned short *) (query_result + 0x27);
 		if (slot_index != 0xffff) {
-			rec = (char *) (((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[slot_index]));
+			rec = (char *) (((char *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[slot_index]));
 			if (rec == 0) goto cler_query;
 			if (rec == (char *) ((unsigned short*) (*(unsigned int*)&gm_CityEntity))) goto cler_query;
 			if (*(unsigned char *) (rec + 8) == 0) goto cler_query;
@@ -2419,8 +2419,8 @@ LAB_1000e0e7:
 	}
 	return 0;
 #else
-	extern unsigned char g_773d75;
-	extern short g_774970;
+	extern unsigned char gm_ActiveTownIndex;
+	extern short gm_LocalPlayerSlot;
 	extern char cm_LastObjectId[];
 	extern int __cdecl io_FormatTextBuffer();
 	extern void __cdecl d2_ShowStatusBanner();
@@ -2598,13 +2598,13 @@ LAB_1000e0e7:
 	if (*(int*)(cmd + 0x23) != 0) {
 		if (dest_dynamic_entity == (short*)0 && resolved_dynamic != (short*)0 &&
 			*resolved_dynamic == 0x1dd) {
-			capacity_check = gm_FindSlotById((uint)g_773d75, (uint)*(ushort*)(cmd + 0x18));
+			capacity_check = gm_FindSlotById((uint)gm_ActiveTownIndex, (uint)*(ushort*)(cmd + 0x18));
 			if (capacity_check != (char*)0) {
 				*(int*)(capacity_check + 0x18) = *(int*)(capacity_check + 0x18) + *(int*)(cmd + 0x1f);
 			}
 		}
 		if (source_dynamic_entity != (short*)0 && *source_dynamic_entity == 0x1dd) {
-			capacity_check = gm_FindSlotById((uint)g_773d75, (uint)*(ushort*)(cmd + 0x18));
+			capacity_check = gm_FindSlotById((uint)gm_ActiveTownIndex, (uint)*(ushort*)(cmd + 0x18));
 			if (capacity_check != (char*)0) {
 				*(int*)(capacity_check + 0x1c) = *(int*)(capacity_check + 0x1c) + *(int*)(cmd + 0x1f);
 			}
@@ -2707,7 +2707,7 @@ LAB_1000e0e7:
 		(*source_dynamic_entity == 0x2a || *source_dynamic_entity == 0x116) &&
 		source_owner_entity != (short*)0 &&
 		*(int*)(cmd + 0x23) != 0 &&
-		*source_owner_entity == g_774970) {
+		*source_owner_entity == gm_LocalPlayerSlot) {
 		source_existing_entity = gm_SearchTable67(*(int*)(source_dynamic_entity + 3));
 		if (source_existing_entity != (void*)0) {
 			io_FormatTextBuffer(log_buffer, 0x7c,
@@ -3946,9 +3946,9 @@ int __cdecl cm_ExSysMessage(char* pkt, char* out)
 	case 2:
 		*(int*) 0xfb5744 = 1;
 		if (*(int*) (buf + 0x11) != 0)
-			g_77494c = (g_77494c & 0xffffffef) | 8;
+			nt_NetSyncFlags = (nt_NetSyncFlags & 0xffffffef) | 8;
 		else
-			g_77494c = (g_77494c & 0xfffffff7) | 0x10;
+			nt_NetSyncFlags = (nt_NetSyncFlags & 0xfffffff7) | 0x10;
 		break;
 	case 3:
 		v = tb_IsCallbackPaused((void*) gm_AdvanceGameClock);
@@ -4161,7 +4161,7 @@ int __cdecl cm_ExAddStraftat(char* src, char* out)
 	int idx;
 	unsigned short slot;
 
-	if (g_14cbca0 != -1) {
+	if (nt_ClientSocket != -1) {
 		cm_LastCrimeId = *(int*) (src + 0x10);
 	} else {
 		cm_LastCrimeId = cm_LastCrimeId + 1;
@@ -4172,7 +4172,7 @@ int __cdecl cm_ExAddStraftat(char* src, char* out)
 		if (ent != 0 && *(char*) ((char*) ent + 2) == 6) {
 			gm_IncrementMissionActionCount((char*) ent, 0x17);
 		}
-		rec = &g_9a3800[idx];
+		rec = &cm_CrimeRecords[idx];
 		memcpy(rec, src + 0x10, 0x2d);
 		rec->id = cm_LastCrimeId;
 		sprintf(msg, "cm_ExAddStraftat(): Executed---- st_id = %i, taeter = %i, opfer = %i",
@@ -4205,11 +4205,11 @@ int __cdecl cm_ExAddStraftat(char* src, char* out)
 		}
 		for (ent = (Straftat*) he_StartHandlungSearch(1, 0, 0x18); ent != 0;
 			ent = (Straftat*) he_fn_Handlung()) {
-			if (*(int*) ((char*) ent + 0xc4) != g_9a3800[idx].target_id) {
+			if (*(int*) ((char*) ent + 0xc4) != cm_CrimeRecords[idx].target_id) {
 				continue;
 			}
 			slot = *(unsigned short*) ((char*) ent + 8);
-			if (gs_AddBeweis(rec->id, *(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[slot].entity_id) == 0) {
+			if (gs_AddBeweis(rec->id, *(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[slot].entity_id) == 0) {
 				break;
 			}
 			if (out != 0) {
@@ -4218,7 +4218,7 @@ int __cdecl cm_ExAddStraftat(char* src, char* out)
 				px = (char*) gm_LookupEntityRecordById(*(int*) ((char*) ent + 0xc4));
 				if (px != 0) {
 					slot = *(unsigned short*) ((char*) ent + 8);
-					he_NotifyCrimeRecorded(px, ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[slot]));
+					he_NotifyCrimeRecorded(px, ((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[slot]));
 				}
 			}
 		}
@@ -4252,30 +4252,30 @@ int __cdecl cm_ExAllocCutscene(int cmd, char* result)
 }
 #endif
 #if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
-extern unsigned char g_aed340[];
-extern unsigned char g_7747b0;
-extern char g_7f4ca4[];
-extern int g_14cbca0;
-int g_699368 = 1;
+extern unsigned char cm_IncomingPacketData[];
+extern unsigned char gm_ClientModeFlags;
+extern char gm_EntityIdField[];
+extern int nt_ClientSocket;
+int cut_NextCutsceneId = 1;
 char* __cdecl cut_AllocCutscene(void* src);
 
 /* ADDRESS: GOLDTL 0x004c9e20 */
 int __cdecl cm_ExAllocCutscene(int* obj, char* result)
 {
-    extern unsigned short g_774970;
+    extern unsigned short gm_LocalPlayerSlot;
     unsigned int payload[69];
     char* entry;
     int ret;
     int idx;
 
     ret = 0;
-    memcpy(payload, g_aed340, sizeof(payload));
-    if (g_14cbca0 != -1)
-        g_699368 = *(int*) ((char*) obj + 0x10);
+    memcpy(payload, cm_IncomingPacketData, sizeof(payload));
+    if (nt_ClientSocket != -1)
+        cut_NextCutsceneId = *(int*) ((char*) obj + 0x10);
     entry = cut_AllocCutscene(payload);
     if (entry == 0)
         goto null_entry;
-    if (g_7747b0 & 4)
+    if (gm_ClientModeFlags & 4)
         *(unsigned char*) (entry + 0x26) |= 0x80;
     *(int*) (entry + 0x78) = *(int*) ((char*) obj + 0x14);
     if (result != 0) {
@@ -4285,13 +4285,13 @@ int __cdecl cm_ExAllocCutscene(int* obj, char* result)
     }
 post_alloc:
     if (*(unsigned char*) (entry + 8) == 5) {
-        idx = (unsigned short) g_774970;
-        if (*(int*) (g_7f4ca4 + idx * 0x21c) != *(int*) (entry + 0x34)) {
-            if (!(g_7747b0 & 4))
+        idx = (unsigned short) gm_LocalPlayerSlot;
+        if (*(int*) (gm_EntityIdField + idx * 0x21c) != *(int*) (entry + 0x34)) {
+            if (!(gm_ClientModeFlags & 4))
                 *(unsigned char*) (entry + 0x26) &= 0x7f;
         }
     }
-    g_699368++;
+    cut_NextCutsceneId++;
     return ret;
 null_entry:
     ret = 1;
@@ -4489,7 +4489,7 @@ int __cdecl cm_ExAllocThemaPredigt(char* x, char* out)
 	char* obj;
 	char* dst;
 
-	if (g_14cbca0 != -1)
+	if (nt_ClientSocket != -1)
 		gm_NextEntityId = *(int*) (x + 0x10);
 	*(int*) (x + 0x14) = cm_ResolveSpecialEntityId(x, *(int*) (x + 0x14));
 	obj = gm_AllocObjekt(*(int*) (x + 0x14), 0x1b5, 1);
@@ -4733,7 +4733,7 @@ int __cdecl cm_ExSetGebUpgrade(int cmd, char* result)
 
 #ifndef REBREW_SERVER
 extern int d3_CurrentContextIndex;
-extern char* g_7e2aa0;
+extern char* d2_SelectedBuilding;
 extern int g_773dd8;
 void __cdecl sv_ResetSelectionState(void);
 unsigned short* __cdecl fcn_00502cd0(int, int, ...);
@@ -4774,7 +4774,7 @@ int __cdecl cm_ExDestroyBuilding(int cmd, char* result)
 	}
 
 #ifndef REBREW_SERVER
-	if ((char*) building == g_7e2aa0) {
+	if ((char*) building == d2_SelectedBuilding) {
 		sv_ResetSelectionState();
 	}
 #endif
@@ -5093,7 +5093,7 @@ int __cdecl cm_ExCreateGeb(int cmd, char* result)
 }
 #endif
 #if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
-extern void* g_6b7fdc;
+extern void* vfs_RootDir;
 int __cdecl vfs_ResolvePath(char* path, int a, int b, char* out);
 int __cdecl d3_LoadObjectFile(char* path, int a, int b);
 void __cdecl d3_SetNodePosition(int h, void* p);
@@ -5133,7 +5133,7 @@ int __cdecl cm_ExCreateGeb(char* request, char* out)
 	model = (unsigned char*) gm_LookupEntityRecordById(*(int*) (request + 0x10));
 	if (model == 0)
 		return 1;
-	if (g_14cbca0 != -1)
+	if (nt_ClientSocket != -1)
 		gm_NextEntityId = *(int*) (request + 0x14);
 	geb = (unsigned char*) gm_AllocGebaeude(*(char*) (request + 0x18),
 	                                        *(unsigned short*) model);
@@ -5151,7 +5151,7 @@ int __cdecl cm_ExCreateGeb(char* request, char* out)
 			        (char) (i + '@'));
 		else
 			sprintf(path, "%sgebaeude/*%s.ogr", (char*) 0x7e1ae0, name);
-		if (vfs_ResolvePath(path, (int) g_6b7fdc, (int) g_6b7fdc, found) != 0)
+		if (vfs_ResolvePath(path, (int) vfs_RootDir, (int) vfs_RootDir, found) != 0)
 			goto load;
 	}
 	goto done;
@@ -5178,7 +5178,7 @@ load:
 	sprintf(name, "cm_ExCreateGeb(): bauplatze name:%s", tmp);
 	if (lc_GetGebaeudeBauplatz(shortname, geb) != 0) {
 		memset(&list, 0, sizeof list);
-		d3_VisitSceneObjects(g_67a370, *(int*)(shortname + 0x50), 0x2c0, (int) lc_CollectVegetationObjects, &list);
+		d3_VisitSceneObjects(d3_ActiveScene, *(int*)(shortname + 0x50), 0x2c0, (int) lc_CollectVegetationObjects, &list);
 		for (i = 0; i < list.count; i++) {
 			if (g_773dd8 != 0)
 				d3_RemoveSubTreeFromCellTree(list.items[i], (int*) g_773dd8);
@@ -5734,7 +5734,7 @@ int __cdecl cm_DispatchMoveSlot(void* cmd, char* result_buf)
 /* Execution handler: allocates a graveyard worker entity by
  * delegating to gv_ExAllocGraveyardWorker. */
 
-extern int g_14cbca0;
+extern int nt_ClientSocket;
 extern int gm_NextEntityId;
 
 #if defined(REBREW_SERVER)
@@ -5763,7 +5763,7 @@ int __cdecl cm_ExAllocGraveyardWorker(int cmd, char* result)
 		result[1] = 0;
 		*(int*) (result + 6) = 0;
 	}
-	if (g_14cbca0 != -1) {
+	if (nt_ClientSocket != -1) {
 		gm_NextEntityId = *(int*) (cmd + 0x14);
 	}
 	else {
@@ -5812,7 +5812,7 @@ int __cdecl cm_ExAllocAlchemist(int cmd, char* result)
 		result[1] = 0;
 		*(int*) (result + 6) = 0;
 	}
-	if (g_14cbca0 != -1) {
+	if (nt_ClientSocket != -1) {
 		gm_NextEntityId = *(int*) (cmd + 0x14);
 	}
 	else {

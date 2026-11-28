@@ -12,13 +12,13 @@ typedef struct {
 } GUI_ENTRY;
 /* SIZE 0x20 */
 
-extern GUI_ENTRY g_9b4840[6];
-extern char g_10161bc[];
+extern GUI_ENTRY d2_CombatUnitCards[6];
+extern char d2_WindowElementIdView[];
 #include "Develop/Units/d2.v1/d2_gui.h"
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
 extern int d2_CurrentWindowId;
-extern char g_6b5c60[];
+extern char str_empty[];
 extern double g_662c38;
 extern char g_67d444[];
 
@@ -43,11 +43,11 @@ void __cdecl d2_UpdateCombatUnitHud(void)
 	char* v;
 	int* r;
 
-	if (g_100f1dc != -1) {
-		q = g_9b4840;
+	if (d2_DialogButtonAction != -1) {
+		q = d2_CombatUnitCards;
 		do {
 			if (q->win != -1 && d2_CurrentElementId == q->icon) {
-				if (*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[q->icon].value_038)) != 0) {
+				if (*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[q->icon].value_038)) != 0) {
 					*(char*) ((int) q->unit + 0x188) = 1;
 				} else {
 					*(char*) ((int) q->unit + 0x188) = 0;
@@ -58,13 +58,13 @@ void __cdecl d2_UpdateCombatUnitHud(void)
 	}
 	ResetDisplayCounters();
 	*(int*) 0x772eb8 = 0;
-	q = g_9b4840;
+	q = d2_CombatUnitCards;
 	do {
 		if (q->win != -1) {
 			v = q->unit;
 			if (*(int*) (*(int*) (*(int*) (v + 0x184) + 0x34) + 0x218) == 1) {
-				d2_SetSlotVisibility(*(int*) (g_10161bc + q->win * 0x3cc), 0);
-				d2_SetSlotVisibility(*(int*) (g_10161bc + q->frame * 0x3cc), 0);
+				d2_SetSlotVisibility(*(int*) (d2_WindowElementIdView + q->win * 0x3cc), 0);
+				d2_SetSlotVisibility(*(int*) (d2_WindowElementIdView + q->frame * 0x3cc), 0);
 			} else {
 				if (*(char*) (v + 0x188) != 0) {
 					d2_AddDisplayCounter(*(int*) (v + 0x18c), 1);
@@ -79,7 +79,7 @@ void __cdecl d2_UpdateCombatUnitHud(void)
 				r = (int*) gm_GetUnitWeaponSpec(q->unit);
 				if (r != 0 && *r != 0) {
 					if (q->name != -1) {
-						if (*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[q->name].value_008)) != *r + 0xdf) {
+						if (*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[q->name].value_008)) != *r + 0xdf) {
 							if (q->name != -1) {
 								d2_DestroyElement(q->name);
 							}
@@ -101,7 +101,7 @@ relabel:
 							}
 						}
 						if (q->label != -1) {
-							d2_SetLabelText(q->label, g_6b5c60);
+							d2_SetLabelText(q->label, str_empty);
 						}
 					}
 				}

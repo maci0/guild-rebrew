@@ -50,8 +50,8 @@ typedef struct
 } D2_BG_WINDOW;
 
 
-extern char* g_77253c;
-extern char* g_772500;
+extern char* d2_BlackTexture;
+extern char* d2_FileObjTable;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void* __cdecl d2_QueueTexturedQuad(int x, int y, int w, int h, int a5, void* r);
@@ -82,7 +82,7 @@ void __cdecl d2_DrawWindowBackground(D2_BG_WINDOW* w, int dst)
 	int rows;
 
 	if (w->flags & 0x400) {
-		p = d2_QueueTexturedQuad(w->x, w->y, w->w, w->h, (int) g_77256c->surface, 0);
+		p = d2_QueueTexturedQuad(w->x, w->y, w->w, w->h, (int) d2_WhiteSurface->surface, 0);
 		if (p != 0)
 			d2_SetQuadVertexColor(p, 0, 0, 0);
 	}
@@ -91,7 +91,7 @@ void __cdecl d2_DrawWindowBackground(D2_BG_WINDOW* w, int dst)
 	cw = w->w - w->mr - w->ml;
 	ch = w->h - w->mb - w->mt;
 	if (w->flags & 1)
-		d2_DrawTexturedQuad(x0, y0, cw, ch, ((D2_BG_PALETTE*)g_77253c)->color, w->alpha);
+		d2_DrawTexturedQuad(x0, y0, cw, ch, ((D2_BG_PALETTE*)d2_BlackTexture)->color, w->alpha);
 	else if (w->pal != 0)
 		d2_DrawTexturedQuad(x0, y0, cw, ch, w->pal->color, w->alpha);
 	else if (w->img != 0)
@@ -102,7 +102,7 @@ void __cdecl d2_DrawWindowBackground(D2_BG_WINDOW* w, int dst)
 		clipRight = d2_ClipRight;
 		clipBottom = d2_ClipBottom;
 		d2_SetClipRect(w->x, w->y, w->w + w->x, w->h + w->y);
-		d = &((D2_BG_TEX_DEF*)g_772500)[w->tex];
+		d = &((D2_BG_TEX_DEF*)d2_FileObjTable)[w->tex];
 		if (w->sy >= 0)
 			oy = w->y - w->sy % d->h;
 		else

@@ -3,7 +3,7 @@
 #pragma intrinsic(memcpy)
 
 extern char* cm_CommandQueueHead;
-extern unsigned char g_aed340[];
+extern unsigned char cm_IncomingPacketData[];
 
 /* ADDRESS: GOLDTL 0x004c4250 */
 int __cdecl cm_ReassembleQueuedCommand(char* obj)
@@ -26,7 +26,7 @@ int __cdecl cm_ReassembleQueuedCommand(char* obj)
 	}
 	*(int*) (obj + 0xc) = 0;
 	*(int*) 0x1005764 = *(unsigned short*) (e + 0x10);
-	memcpy(g_aed340, e + 0x12, 0x7e);
+	memcpy(cm_IncomingPacketData, e + 0x12, 0x7e);
 	*(char*) e = 0;
 	i = 0x7e;
 	prev = e;
@@ -42,7 +42,7 @@ int __cdecl cm_ReassembleQueuedCommand(char* obj)
 				return 0;
 			}
 		}
-		memcpy(g_aed340 + i, e + 0x10, 0x80);
+		memcpy(cm_IncomingPacketData + i, e + 0x10, 0x80);
 		*(int*) (prev + 0xc) = 0;
 		*(char*) e = 0;
 		i += 0x80;

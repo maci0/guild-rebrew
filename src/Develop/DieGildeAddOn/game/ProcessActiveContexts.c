@@ -34,7 +34,7 @@ void __cdecl ProcessActiveContexts(void)
 	int i;
 	unsigned char* e;
 	for (i = 0; i < 0x64c00; i += 0xc98) {
-		e = ((unsigned char*)g_6b7e94) + i;
+		e = ((unsigned char*)evt_ScriptSlots) + i;
 		if (e[0x124] & 1) {
 			(*(unsigned char**)&evt_CurrentScript) = e;
 			evt_RunGfxScript(e);

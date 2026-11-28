@@ -35,7 +35,7 @@ int __cdecl d2_CreateGebaeudeTooltip(int i)
 	if (rec[0] != 10) {
 		d2_SetForm(0, 3);
 		io_AppendText(0x2a, roman[(unsigned char) rec[0x247]]);
-		io_AppendText(0x28, gm_CalcBuildingCost(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), i));
+		io_AppendText(0x28, gm_CalcBuildingCost(((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot]), i));
 		io_AppendText(0x29, *(int*) (rec + 0x243));
 	}
 	return dlg;

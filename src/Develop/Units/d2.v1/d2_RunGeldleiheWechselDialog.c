@@ -11,21 +11,21 @@ typedef struct {
 } ListRow;
 /* SIZE 0x1c */
 
-extern char g_868060[];
+extern char gm_TownTable[];
 extern char g_6aac84[];
-extern char* g_1015ea0;
+extern char* d2_Controls;
 extern int g_10162e8;
 extern int g_10162ec;
 extern int g_10162f0;
 extern int g_10162f4;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern char* g_77255c;
+extern char* d2_CurrentWindow;
 extern int d2_CurrentWindowId;
 extern int g_14ab738;
 extern int g_14b5278;
-extern char g_6b5c60[];
+extern char str_empty[];
 
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
@@ -88,8 +88,8 @@ void __cdecl d2_RunGeldleiheWechselDialog(char* obj)
 		list1[i].id = 0;
 	}
 	for (i = 0; i < 4; i++) {
-		if (g_868060[i * 0x2f4] != 0) {
-			list1[i].id = *(unsigned short*) (g_868060 + i * 0x2f4 + 0x54);
+		if (gm_TownTable[i * 0x2f4] != 0) {
+			list1[i].id = *(unsigned short*) (gm_TownTable + i * 0x2f4 + 0x54);
 			*(unsigned char*)&list1[i].idx = (unsigned char)i;
 		}
 	}
@@ -103,18 +103,18 @@ void __cdecl d2_RunGeldleiheWechselDialog(char* obj)
 	w0 = d2_GetWindowListItem(h, 0, 0);
 	w4 = d2_GetWindowListItem(h, 0, 4);
 	d2_SetForm(h, 0);
-	cx = ((D2_CONTROL_TL*) (g_1015ea0))[w1].x - *(int*) (g_77255c + 4) + 2;
-	cy = ((D2_CONTROL_TL*) (g_1015ea0))[w1].height -
-	     *(int*) (g_77255c + 8) + ((D2_CONTROL_TL*) (g_1015ea0))[w1].y +
+	cx = ((D2_CONTROL_TL*) (d2_Controls))[w1].x - *(int*) (d2_CurrentWindow + 4) + 2;
+	cy = ((D2_CONTROL_TL*) (d2_Controls))[w1].height -
+	     *(int*) (d2_CurrentWindow + 8) + ((D2_CONTROL_TL*) (d2_Controls))[w1].y +
 	     2;
-	cb = d2_EqualizeWindowButtonWidths(cx, cy, g_6b5c60, d2_CurrentWindowId);
-	cx = ((D2_CONTROL_TL*) (g_1015ea0))[w2].x - *(int*) (g_77255c + 4) + 2;
-	cy = ((D2_CONTROL_TL*) (g_1015ea0))[w2].height -
-	     *(int*) (g_77255c + 8) + ((D2_CONTROL_TL*) (g_1015ea0))[w2].y +
+	cb = d2_EqualizeWindowButtonWidths(cx, cy, str_empty, d2_CurrentWindowId);
+	cx = ((D2_CONTROL_TL*) (d2_Controls))[w2].x - *(int*) (d2_CurrentWindow + 4) + 2;
+	cy = ((D2_CONTROL_TL*) (d2_Controls))[w2].height -
+	     *(int*) (d2_CurrentWindow + 8) + ((D2_CONTROL_TL*) (d2_Controls))[w2].y +
 	     2;
-	label2 = d2_EqualizeWindowButtonWidths(cx, cy, g_6b5c60, d2_CurrentWindowId);
-	((D2_CONTROL_TL*) (g_1015ea0))[cb].font = 0x54;
-	((D2_CONTROL_TL*) (g_1015ea0))[label2].font = 0x54;
+	label2 = d2_EqualizeWindowButtonWidths(cx, cy, str_empty, d2_CurrentWindowId);
+	((D2_CONTROL_TL*) (d2_Controls))[cb].font = 0x54;
+	((D2_CONTROL_TL*) (d2_Controls))[label2].font = 0x54;
 	d2_SetForm(h, 0);
 	i = d2_CurrentWindowId;
 	*(int*) (0x10162e8 + i * 0x3cc) = 0xe;
@@ -148,9 +148,9 @@ void __cdecl d2_RunGeldleiheWechselDialog(char* obj)
 		if (cur == 0)
 			io_AppendText(0x1903);
 		else
-			io_AppendText(0x1901, g_868060 + (unsigned char) ((char*) cur)[0xb0] * 0x2f4);
-		if (g_14ce8e0 != 0)
-			g_774654 = 1;
+			io_AppendText(0x1901, gm_TownTable + (unsigned char) ((char*) cur)[0xb0] * 0x2f4);
+		if (io_RightButtonReleased != 0)
+			d2_DialogCloseRequested = 1;
 		ResetDisplayCounters();
 		if (cur == 0) {
 			selected = d2_PopulateInventoryGrid(*(int*) (obj + 0x5d), list2, h, 5, 1);
@@ -196,7 +196,7 @@ void __cdecl d2_RunGeldleiheWechselDialog(char* obj)
 			fcn_00657a73(sel2, text, 0xa);
 			d2_SetLabelText(label2, text);
 		}
-		if (g_100f1dc == 3 || g_100f1dc == 4) {
+		if (d2_DialogButtonAction == 3 || d2_DialogButtonAction == 4) {
 			cur = d2_CurrentElementId;
 			if (cur == w2) {
 				d2_SetForm(h, 4);
@@ -212,7 +212,7 @@ void __cdecl d2_RunGeldleiheWechselDialog(char* obj)
 				d2_ScrollWindow(0, 0x4c, d2_CurrentWindowId);
 			}
 		}
-		if (g_100f1dc == 2) {
+		if (d2_DialogButtonAction == 2) {
 			cur = d2_CurrentElementId;
 			if (cur == buttons[0])
 				d2_RunWechselGebuehrenDialog(obj);

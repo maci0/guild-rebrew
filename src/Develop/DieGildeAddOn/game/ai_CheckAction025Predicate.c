@@ -23,7 +23,7 @@ int __cdecl ai_CheckAction025Predicate(int unused1, int actor, int unused3, int 
 		return 0;
 	}
 	out[0] = 7;
-	*(int*) (out + 4) = ((ENTITY_RECORD*)g_7f4ca0)[ids[0]].entity_id;
-	*(int*) (out + 8) = ((ENTITY_RECORD*)g_7f4ca0)[ids[1]].entity_id;
+	*(int*) (out + 4) = ((ENTITY_RECORD*)gm_EntitySlotTable)[ids[0]].entity_id;
+	*(int*) (out + 8) = ((ENTITY_RECORD*)gm_EntitySlotTable)[ids[1]].entity_id;
 	return 1;
 }

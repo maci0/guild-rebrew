@@ -2,7 +2,7 @@
 
 #include "Develop/Units/Error/error_message.h"
 
-extern HE_AP_EVENT g_7dcae0[256];
+extern HE_AP_EVENT he_ApEvents[256];
 
 
 
@@ -15,7 +15,7 @@ HE_AP_EVENT* __cdecl he_RegisterApEvent(int a, char* name, int b, int c)
 	HE_AP_EVENT* r;
 
 	for (i = 0; i < 256; i++) {
-		if (g_7dcae0[i].value_08 == 0 && g_7dcae0[i].value_0c == 0 && g_7dcae0[i].name[0] == 0) {
+		if (he_ApEvents[i].value_08 == 0 && he_ApEvents[i].value_0c == 0 && he_ApEvents[i].name[0] == 0) {
 			break;
 		}
 	}
@@ -23,7 +23,7 @@ HE_AP_EVENT* __cdecl he_RegisterApEvent(int a, char* name, int b, int c)
 		ReportClientMessage("he_RegisterApEvent(): Too many ApEvents...");
 		return 0;
 	}
-	r = &g_7dcae0[i];
+	r = &he_ApEvents[i];
 	r->subject_id = a;
 	r->value_08 = b;
 	r->value_0c = c;

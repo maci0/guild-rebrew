@@ -31,7 +31,7 @@ typedef struct
 // SIZE 0x38
 
 #include "Develop/client_types.h"
-extern Slot170_7731b8 g_7731b8[8];
+extern Slot170_7731b8 gm_CannonTowers[8];
 extern Set g_772ff8[8];
 
 Slot170* __cdecl gm_FindSlot170Entry(int id);
@@ -53,6 +53,6 @@ void __cdecl gm_SetSlotCallback(int id, void* fn, void* ctx)
 		slot->ctx = ctx;
 	} else {
 		slot->fn = (void*) gm_NotifyDomizilCallback;
-		slot->ctx = &g_772ff8[slot - ((Slot170*)g_7731b8)];
+		slot->ctx = &g_772ff8[slot - ((Slot170*)gm_CannonTowers)];
 	}
 }

@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern char g_67e330[];
 
 short* __cdecl gm_GetEntityTableEntry(char* entity);
@@ -23,7 +23,7 @@ int __cdecl ai_RunRepairBuilding(char* entity, char* repairReq, char* treasuryRe
     *(int*) (msg + 0x58) = *(int*) (repairReq + 4);
     *(int*) (msg + 0x5c) = *(int*) (repairReq + 0x10);
     cm_SendLogAction(g_67e330);
-    cm_RequestMoveCredits(-1, *(int*) (treasuryReq + 4), (char) g_773d75,
+    cm_RequestMoveCredits(-1, *(int*) (treasuryReq + 4), (char) gm_ActiveTownIndex,
         (int) (*(float*) (repairReq + 0x14)));
     cm_SendCopyEntityData(msg);
     cm_SendTraceEnd(g_67e330);

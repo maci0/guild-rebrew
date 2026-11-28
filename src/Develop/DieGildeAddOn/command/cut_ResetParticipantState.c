@@ -25,8 +25,8 @@ void __cdecl cut_ResetParticipantState(unsigned char* s, int id)
 	int h;
 
 	for (i = 0; i < s[0x30]; i++) {
-		if (((rec35c*)g_9b0e20)[i].f10 == id) {
-			copy = ((rec35c*)g_9b0e20)[i];
+		if (((rec35c*)cut_ParticipantSlots)[i].f10 == id) {
+			copy = ((rec35c*)cut_ParticipantSlots)[i];
 			copy.f8 = 0;
 			copy.f4 = 1;
 			copy.f0 = 1;

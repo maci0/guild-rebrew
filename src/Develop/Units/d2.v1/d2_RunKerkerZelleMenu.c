@@ -8,7 +8,7 @@ extern void __cdecl sub_5ae960(long);
 extern void __cdecl sub_5aeab0(long);
 extern void __cdecl sub_5aee90(long);
 extern void __cdecl sub_4030e0(void *);
-extern int d3_CurrentContextIndex, g_7746a0, g_7746d8;
+extern int d3_CurrentContextIndex, sv_ClickedObjekt, d2_SelectedEntityUiFlags;
 /* ADDRESS: GOLDTL 0x005af140 */
 void __cdecl d2_RunKerkerZelleMenu(void *a0, void *a1)
 {
@@ -46,7 +46,7 @@ void __cdecl d2_RunKerkerZelleMenu(void *a0, void *a1)
 
     sub_5338a0();
     while (sub_5373e0(0x5af140, 0x67fff)) {
-        if (g_7746d8 & 0x200) {
+        if (d2_SelectedEntityUiFlags & 0x200) {
             edi = sub_5338d0(0x6ab334, *(long *)0x14ab9fc, 0x16);
             ebx = sub_5338d0(0x6ab320, *(long *)0x14aba2c, 0x16);
         }
@@ -59,7 +59,7 @@ void __cdecl d2_RunKerkerZelleMenu(void *a0, void *a1)
                 }
             }
         }
-        cur = g_7746a0;
+        cur = sv_ClickedObjekt;
         if (cur != 0) {
             if (cur == (long)edi)
                 sub_5ae960(made);

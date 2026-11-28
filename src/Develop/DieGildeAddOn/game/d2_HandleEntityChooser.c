@@ -15,11 +15,11 @@ typedef struct
 } Query;
 // SIZE 0x50
 
-extern char g_14cf950;
+extern char io_LastKeyScancode;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_7746f4;
-extern unsigned char* g_7746c8;
-extern char* g_7746c4;
+extern unsigned char* d2_InteriorBuilding;
+extern char* d2_VisitedBuilding;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
 unsigned char* __cdecl d2_RunCityScrollMapDialog(int, Query*, int, int, int);
@@ -33,7 +33,7 @@ void __cdecl d2_HandleEntityChooser(void)
 	Query q;
 	unsigned char* e;
 
-	if (g_14cf950 != 0x32) {
+	if (io_LastKeyScancode != 0x32) {
 		if (g_14ce8d8 == 0) {
 			return;
 		}
@@ -49,7 +49,7 @@ void __cdecl d2_HandleEntityChooser(void)
 	if (e == 0 || g_7746f4 != 0) {
 		return;
 	}
-	if ((*(int*)&g_7746c8) != 0) {
+	if ((*(int*)&d2_InteriorBuilding) != 0) {
 		if (gm_CheckEntityType(e) && *e == 0x47) {
 			d2_EnterBuildingObjekt(e, 0xfd, "");
 			return;
@@ -58,12 +58,12 @@ void __cdecl d2_HandleEntityChooser(void)
 		return;
 	}
 	if (gm_CheckEntityType(e) && *e == 0x47) {
-		if (gm_GetEntityUiFlags(g_774970, e, 0, 0) & 1) {
+		if (gm_GetEntityUiFlags(gm_LocalPlayerSlot, e, 0, 0) & 1) {
 			d2_EnterBuildingObjekt(e, 0xfd, "");
 		}
 		return;
 	}
-	if ((*(int*)&g_7746c8) == 0 && (*(int*)&g_7746c4) == 0) {
+	if ((*(int*)&d2_InteriorBuilding) == 0 && (*(int*)&d2_VisitedBuilding) == 0) {
 		d3_FocusCameraOnEntity(e);
 		return;
 	}

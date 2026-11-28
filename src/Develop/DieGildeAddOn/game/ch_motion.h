@@ -7,12 +7,12 @@ void __cdecl ch_PreloadModelMotions(char* model, int n, ...);
 void __cdecl ch_FinishAni(char* obj);
 
 /* Provisional game views; extern declarations allocate no storage. */
-extern const float g_662d70[4];
-extern unsigned char g_6752a4;
-extern int g_67a370;
-extern char* g_6b7ebc;
+extern const float d3_ZeroVec4[4];
+extern unsigned char ch_DefaultMirrorFlag;
+extern int d3_ActiveScene;
+extern char* evt_WaitingScriptTask;
 extern char* evt_CurrentScript;
-extern int g_6791c8;
+extern int evt_ActiveContextId;
 
 void __cdecl ch_SetPosition(char* obj, float* position, int flag);
 void __cdecl ch_UpdatePendingPositions(void);

@@ -1,5 +1,5 @@
 void __cdecl gm_PostPeriodicCityReport(void);
-extern float g_773d4c, g_773d50;
+extern float gm_CityPopulation, gm_TargetCityPopulation;
 /* ADDRESS: GOLDTL 0x004fb4e0 */
 void __cdecl gm_UpdateCityEconomyStats(char* a)
 {
@@ -31,8 +31,8 @@ void __cdecl gm_UpdateCityEconomyStats(char* a)
 	*(int*) 0x99f594 = *(int*) (a + 0x30);
 	*(int*) 0x99f598 = *(int*) (a + 0x34);
 	*(unsigned short*) 0x99f59c = *(unsigned short*) (a + 0x38);
-	g_773d4c = f18;
-	g_773d50 = f14;
+	gm_CityPopulation = f18;
+	gm_TargetCityPopulation = f14;
 
 	acc[0] = 0;
 	acc[1] = 0;

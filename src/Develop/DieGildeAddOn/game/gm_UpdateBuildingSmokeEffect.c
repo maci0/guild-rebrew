@@ -1,5 +1,5 @@
 extern int gm_GameTime;
-extern int g_7f4c04;
+extern int gm_GameTimeHour;
 extern int lpGebaeudePROT;
 extern int d3_CurrentContextIndex;
 extern unsigned char g_slot_table[2];
@@ -48,7 +48,7 @@ void __cdecl gm_UpdateBuildingSmokeEffect(char* buildingRecord)
 			if (*(int*) (buildingRecord + 0x95) != -1) {
 				return;
 			}
-			ft = (float) (g_7f4c04 & 0xffff);
+			ft = (float) (gm_GameTimeHour & 0xffff);
 			if (!(ft >= g_696540[sel])) {
 				return;
 			}

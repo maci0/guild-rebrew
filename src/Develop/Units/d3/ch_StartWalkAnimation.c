@@ -16,7 +16,7 @@ struct anim_409ae0 {
 	unsigned char stop : 1;
 };
 
-extern char g_6b5c28;
+extern char ch_SceneDebugSwitch;
 
 void __cdecl d3_RemoveObjectAnimation(char*, char*);
 #include "Develop/Units/d3/d3_animation.h"
@@ -56,7 +56,7 @@ int __cdecl ch_StartWalkAnimation(char* ev, char* step)
 		*(struct anim_409ae0**) (obj + 0x70) = ch_AttachAni(obj, "bewegung/gehen", 1);
 	}
 	if (*(struct anim_409ae0**) (obj + 0x70) == 0) {
-		if (g_6b5c28 != 0) {
+		if (ch_SceneDebugSwitch != 0) {
 			(*(char**) (ev + 0x14))[0x8c] |= 8;
 		}
 		if (*(void**) (ev + 0xf4) != 0) {

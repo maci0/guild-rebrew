@@ -1,6 +1,6 @@
 extern unsigned char g_slot_table[];
 int __cdecl gm_BroadcastEconomyReport(void);
-extern float g_773d4c, g_773d50;
+extern float gm_CityPopulation, gm_TargetCityPopulation;
 /* ADDRESS: GOLD 0x004f9020 */
 int __cdecl gm_UnpackEconomyStats(char* src)
 {
@@ -30,8 +30,8 @@ int __cdecl gm_UnpackEconomyStats(char* src)
     *(int*) 0x91b474 = *(int*) (src + 0x4);
     *(int*) 0x91b478 = *(int*) (src + 0x8);
     *(unsigned short*) 0x91b47c = *(unsigned short*) (src + 0xc);
-    g_773d4c = b;
-    g_773d50 = a;
+    gm_CityPopulation = b;
+    gm_TargetCityPopulation = a;
     for (e = g_slot_table + 2;
          (int) e < (int) g_slot_table + 0x65402; e += 0x21c) {
         if (*(unsigned short*) (e - 2) != 0xffff && e[0] < 10 && e[6] > 0) {

@@ -8,7 +8,7 @@
 
 extern HEAD_SET g_690648[];
 extern HEAD_SET g_690f98[];
-extern HEAD_SET g_6918e8[];
+extern HEAD_SET gm_MaleHeadSets[];
 
 
 unsigned short __cdecl gm_RandomMod(unsigned short n);
@@ -21,9 +21,9 @@ HEAD_SET* __cdecl gm_PickRandomWorkerHeadSet(void)
 	case 1:
 		return &g_690f98[gm_RandomMod(5)];
 	case 2:
-		return &g_6918e8[gm_RandomMod(0x46)];
+		return &gm_MaleHeadSets[gm_RandomMod(0x46)];
 	case 3:
-		return &g_693228[gm_RandomMod(0x46)];
+		return &gm_FemaleHeadSets[gm_RandomMod(0x46)];
 	}
 	return 0;
 }

@@ -1,6 +1,6 @@
 #include <math.h>
 
-extern int g_104049c;
+extern int d3_TextureBank;
 extern int g_662ea8[];
 extern double g_662958;
 extern double g_662cd8;
@@ -9,7 +9,7 @@ extern double g_662cc8;
 extern double g_662cc0;
 extern double g_662cb8;
 extern double g_662cb0;
-extern double g_662ad0;
+extern double dbl_4_0;
 
 int __cdecl d3_FindTextureVariant(int, int);
 
@@ -33,7 +33,7 @@ void __cdecl d3_UpdateAnimatedFloorMaterials(unsigned int time, unsigned int cou
 		if (e != 0) {
 			if (*(unsigned char*) (e + 0x5c) > 0 && (*(unsigned char*) (e + 0x5e) & 0xf) > 0) {
 				*(int*) (matList + 4) = d3_FindTextureVariant(
-				    (int) (e - (char*) g_104049c) / 0x70,
+				    (int) (e - (char*) d3_TextureBank) / 0x70,
 				    (time / g_662ea8[*(unsigned char*) (e + 0x5e) & 0xf]) % *(unsigned char*) (e + 0x5c));
 			}
 		}

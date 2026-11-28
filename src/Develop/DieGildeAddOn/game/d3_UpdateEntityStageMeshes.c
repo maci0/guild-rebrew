@@ -17,9 +17,9 @@ typedef struct {
 	int count;
 } Hits;
 
-extern char* g_7746cc;
+extern char* sv_SelectedBuilding;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-extern int g_67a370;
+extern int d3_ActiveScene;
 extern float g_664168;
 extern float g_6628cc;
 
@@ -35,16 +35,16 @@ void __cdecl d3_UpdateEntityStageMeshes(int unused, int who, int id)
 	int i;
 	int k;
 
-	if ((*(int*)&g_7746cc) == who) {
+	if ((*(int*)&sv_SelectedBuilding) == who) {
 		for (i = 0; i < 5; i++) {
-			t = (int) (((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].levels[i] * g_664168 - g_6628cc) + i * 6 + 0x17f;
-			if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].levels[i] == 0) {
+			t = (int) (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id].levels[i] * g_664168 - g_6628cc) + i * 6 + 0x17f;
+			if (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id].levels[i] == 0) {
 				t = 0;
 			}
 			want[i] = t;
 		}
 		memset(&hits, 0, sizeof(hits));
-		d3_VisitSceneObjects(g_67a370, 0, 0xc0, d3_CollectEntityStageMeshNode, &hits);
+		d3_VisitSceneObjects(d3_ActiveScene, 0, 0xc0, d3_CollectEntityStageMeshNode, &hits);
 		for (k = 0; k < hits.count; k++) {
 			d3_SetSubtreeVisible(hits.ids[k], 0);
 			for (i = 0; i < 5; i++) {

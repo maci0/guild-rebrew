@@ -34,8 +34,8 @@ typedef struct Msg {
 #include "Develop/client_types.h"
 
 extern pos14_7f4c00 gm_GameTime;
-extern char g_7f4ca4[];
-extern char* g_77261c;
+extern char gm_EntityIdField[];
+extern char* ai_FeudTargetEntity;
 
 unsigned short __cdecl gm_RandomMod(int n);
 void __cdecl gm_CheckEntityObjectSlots(char* e, int n, Slot* slots, Counts* cnt);
@@ -124,7 +124,7 @@ int __cdecl ai_StartAlchemistryItems(int kind, char* e, int busy, Msg* a, Msg* b
 			mask = 0xf00500;
 			if (ai_SelectRankedCandidates(e, 1, &mask, 0, (float) gm_RandomMod(0x20) + 10.0f, &picked)) {
 				b->type = 7;
-				b->a = *(int*) (g_7f4ca4 + (picked & 0xffff) * 0x21c);
+				b->a = *(int*) (gm_EntityIdField + (picked & 0xffff) * 0x21c);
 				b->b = -1;
 				b->d = 0x48;
 				return 0x48;
@@ -136,8 +136,8 @@ int __cdecl ai_StartAlchemistryItems(int kind, char* e, int busy, Msg* a, Msg* b
 				f.mask = 0xa0744380;
 				f.b = 1;
 				out = -1;
-				if (g_77261c != 0) {
-					ai_FindEntityInFavorRange(g_77261c, 4, f, 0, 100.0f, &out);
+				if (ai_FeudTargetEntity != 0) {
+					ai_FindEntityInFavorRange(ai_FeudTargetEntity, 4, f, 0, 100.0f, &out);
 				}
 				if (out != -1 || ai_FindEntityInFavorRange(e, 6, f, 0, (float) gm_RandomMod(0x20) + 16.0f, &out)) {
 					b->type = 4;

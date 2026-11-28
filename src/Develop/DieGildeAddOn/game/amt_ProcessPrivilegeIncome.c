@@ -36,7 +36,7 @@ typedef struct PRIVILEGE_INCOME_INFO {
 
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 extern float g_665264[];
-extern int g_773d48;
+extern int gm_QueuedCommandCount;
 
 int __cdecl amt_GetRoleTemplate(int idx, Rec18* out);
 int __cdecl gm_GetLawEntry(int idx, void* dst);
@@ -58,30 +58,32 @@ int __cdecl amt_ProcessPrivilegeIncome(unsigned short id, int pay, PRIVILEGE_INC
 	int amount;
 
 	r = 0;
-	out->a = (((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].class_166);
-	out->b = (((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].grade);
-	if ((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].flags_1cc) & 0x1000) {
+	out->a = (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id].class_166);
+	out->b = (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id].grade);
+	if ((*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id].flags_1cc) & 0x1000) {
 		c = 0x26;
-	} else if ((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].flags_1cc) & 0x2000) {
+	} else if ((*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id].flags_1cc) & 0x2000) {
 		c = 0x27;
-	} else if ((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].flags_1cc) & 0x800) {
+	} else if ((*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id].flags_1cc) & 0x800) {
 		c = 0x25;
-	} else if ((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].flags_1cc) & 0x400) {
+	} else if ((*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id].flags_1cc) & 0x400) {
 		c = 0x24;
 	} else {
-		c = ((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].flags_1cc) & 0x200) ? 0x23 : 0;
+		c = ((*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id].flags_1cc) & 0x200) ? 0x23 : 0;
 	}
 	out->c = c;
 	out->va = 0;
 	out->vb = 0;
 	out->vc = 0;
-	if ((((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_index) != 0xffff && (((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_type) < 0xa && (((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].health) > 0
-	    && ((((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].class_166) != 0 || (((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].grade) != 0 || ((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].flags_1cc) & 0xe00) != 0)) {
+	if ((((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id].entity_index) != 0xffff && (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id].entity_type) < 0xa &&
+		(((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id].health) > 0
+	    && ((((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id].class_166) != 0 || (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id].grade) != 0 ||
+	    	((*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id].flags_1cc) & 0xe00) != 0)) {
 		gm_GetLawEntry(0xf, info);
 		mult = g_665264[info[6]];
-		amt_GetRoleTemplate((((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].grade), &q);
+		amt_GetRoleTemplate((((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id].grade), &q);
 		out->vb = (int) ((q.xc << 5) * mult);
-		amt_GetRoleTemplate((((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].class_166), &q);
+		amt_GetRoleTemplate((((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id].class_166), &q);
 		out->va = (int) ((q.xc << 5) * mult);
 		amt_GetRoleTemplate(out->c, &q);
 		out->vc = (int) ((q.xc << 5) * mult);
@@ -95,22 +97,22 @@ int __cdecl amt_ProcessPrivilegeIncome(unsigned short id, int pay, PRIVILEGE_INC
 				return 0;
 			}
 			if (out->va != 0) {
-				cm_RequestTransferCurrencyNoKill((((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id), -1, 0, out->va);
-				g_773d48++;
+				cm_RequestTransferCurrencyNoKill((((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id].entity_id), -1, 0, out->va);
+				gm_QueuedCommandCount++;
 			}
 			if (out->vb != 0) {
-				cm_RequestTransferCurrencyNoKill((((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id), -1, 0, out->vb);
-				g_773d48++;
+				cm_RequestTransferCurrencyNoKill((((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id].entity_id), -1, 0, out->vb);
+				gm_QueuedCommandCount++;
 			}
 			if (out->vc != 0) {
-				cm_RequestTransferCurrencyNoKill((((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id), -1, 0, out->vc);
-				g_773d48++;
+				cm_RequestTransferCurrencyNoKill((((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id].entity_id), -1, 0, out->vc);
+				gm_QueuedCommandCount++;
 			}
-			if ((((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_type) == 3) {
+			if ((((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id].entity_type) == 3) {
 				amount = (gm_RandomMod((unsigned short) (q.x8 + 2)) + q.x8) * 6400;
-				cm_RequestTransferCurrencyNoKill((((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id), -1, 0, amount);
-				cm_RequestModifyHealth((((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id), q.x8);
-				g_773d48 += 2;
+				cm_RequestTransferCurrencyNoKill((((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id].entity_id), -1, 0, amount);
+				cm_RequestModifyHealth((((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id].entity_id), q.x8);
+				gm_QueuedCommandCount += 2;
 			}
 		}
 	}

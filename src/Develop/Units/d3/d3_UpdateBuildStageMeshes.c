@@ -53,7 +53,7 @@ void __cdecl d3_UpdateBuildStageMeshes(int action)
 	if (cur == -1 && obj != 0) {
 		list.handle = obj;
 		list.count = 0;
-		d3_VisitSceneObjects(g_67a370, obj, 0x2c0, (int) d3_CollectObjectCallback,
+		d3_VisitSceneObjects(d3_ActiveScene, obj, 0x2c0, (int) d3_CollectObjectCallback,
 		             &list);
 		idx = 0;
 		while (idx < list.count) {
@@ -81,7 +81,7 @@ next_mark:
 	}
 	list.handle = obj;
 	list.count = 0;
-	d3_VisitSceneObjects(g_67a370, obj, 0x2c0, (int) d3_CollectObjectCallback, &list);
+	d3_VisitSceneObjects(d3_ActiveScene, obj, 0x2c0, (int) d3_CollectObjectCallback, &list);
 	idx = 0;
 	while (idx < list.count) {
 		int item;

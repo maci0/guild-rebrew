@@ -3,7 +3,7 @@
 
 #include <string.h>
 
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_IsSlotActivePerson(unsigned short);
@@ -25,7 +25,7 @@ int __cdecl hst_CmdInventarPlus(char* tbl, int idx, char* arg)
 			fcn_0064fcaf(s + 1);
 			r = gm_FindObjektPrototypeByName(s);
 			if (r != 0) {
-				cm_SendSellObjekt(*(int*) (e + 4), -1, r, 1, g_773d75, 0);
+				cm_SendSellObjekt(*(int*) (e + 4), -1, r, 1, gm_ActiveTownIndex, 0);
 				return 1;
 			}
 		}

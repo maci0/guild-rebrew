@@ -51,13 +51,13 @@ typedef struct {
 extern CARD_ROW_WIN g_6ad584[];
 extern CARD_PLAYER_SLOT g_7765a0[];
 #include "Develop/client_types.h"
-extern Win_1015f40 g_1015f40[0x60];
-extern char* g_1015ea0;
-extern char* g_772500;
-extern char g_7f4ca0[];
+extern Win_1015f40 d2_Windows[0x60];
+extern char* d2_Controls;
+extern char* d2_FileObjTable;
+extern char gm_EntitySlotTable[];
 extern char* txt_TextEntries[];
 extern int d2_CurrentWindowId;
-extern unsigned short g_774970;
+extern unsigned short gm_LocalPlayerSlot;
 extern short g_776658;
 extern int g_664454;
 
@@ -83,33 +83,33 @@ void __cdecl d2_LayoutCardGameRow(int row, int count, int* list)
 
 	d2_CurrentWindowId = g_6ad584[row].win;
 	io_AppendText((int) "$C");
-	w = ((D2_CARD_WIN*)g_1015f40)[d2_CurrentWindowId].w;
-	h = ((D2_CARD_WIN*)g_1015f40)[d2_CurrentWindowId].h;
+	w = ((D2_CARD_WIN*)d2_Windows)[d2_CurrentWindowId].w;
+	h = ((D2_CARD_WIN*)d2_Windows)[d2_CurrentWindowId].h;
 	x = (w - 0xc4) / 2;
 	info = g_7765a0[row].info;
 	sprintf(buf, "%s %s %s", txt_TextEntries[(info[9] ? 0x11e : 0x114) + info[0xd]], info + 0x30, info + 0x40);
 	c = d2_ShowTxt(0, 5, buf, g_6ad584[row].win);
-	((D2_CARD_CTL*)g_1015ea0)[c].w = w;
-	((D2_CARD_CTL*)g_1015ea0)[c].x6c = 1;
+	((D2_CARD_CTL*)d2_Controls)[c].w = w;
+	((D2_CARD_CTL*)d2_Controls)[c].x6c = 1;
 	d2_SetElementFont(c, 0x54);
 	if (row != 0) {
 		icon = g_7765a0[row].icon;
 		y = h / 2;
-		d2_AddElementToWindow(x - 0x37, y - ((D2_CARD_GFX*)g_772500)[icon].w / 2, icon, g_6ad584[row].win);
+		d2_AddElementToWindow(x - 0x37, y - ((D2_CARD_GFX*)d2_FileObjTable)[icon].w / 2, icon, g_6ad584[row].win);
 	} else {
-		icon = ((CARD_PLAYER_ENT*)g_7f4ca0)[g_774970].icon;
+		icon = ((CARD_PLAYER_ENT*)gm_EntitySlotTable)[gm_LocalPlayerSlot].icon;
 		y = h / 2;
-		d2_AddElementToWindow(x - 0x37, y - ((D2_CARD_GFX*)g_772500)[icon].w / 2, icon, g_6ad584[row].win);
+		d2_AddElementToWindow(x - 0x37, y - ((D2_CARD_GFX*)d2_FileObjTable)[icon].w / 2, icon, g_6ad584[row].win);
 	}
 	for (i = 0; i < count; i++, x += 0x20) {
 		if (g_7765a0[row].fixed >= 0) {
-			g_6ad584[row].items[i] = d2_AddElementToWindow(x, y - ((D2_CARD_GFX*)g_772500)[g_664454 + 0x775].w / 2, g_664454 + 0x775, g_6ad584[row].win);
+			g_6ad584[row].items[i] = d2_AddElementToWindow(x, y - ((D2_CARD_GFX*)d2_FileObjTable)[g_664454 + 0x775].w / 2, g_664454 + 0x775, g_6ad584[row].win);
 		} else if (row != 0 && i < 2 && g_776658 == 4) {
-			g_6ad584[row].items[i] = d2_AddElementToWindow(x, y - ((D2_CARD_GFX*)g_772500)[g_664454 + 0x775].w / 2, g_664454 + 0x775, g_6ad584[row].win);
+			g_6ad584[row].items[i] = d2_AddElementToWindow(x, y - ((D2_CARD_GFX*)d2_FileObjTable)[g_664454 + 0x775].w / 2, g_664454 + 0x775, g_6ad584[row].win);
 		} else {
-			g_6ad584[row].items[i] = d2_AddElementToWindow(x, y - ((D2_CARD_GFX*)g_772500)[list[i] + 0x775].w / 2, list[i] + 0x775, g_6ad584[row].win);
+			g_6ad584[row].items[i] = d2_AddElementToWindow(x, y - ((D2_CARD_GFX*)d2_FileObjTable)[list[i] + 0x775].w / 2, list[i] + 0x775, g_6ad584[row].win);
 			if (row == 0 && i < 2) {
-				((D2_CARD_CTL*)g_1015ea0)[g_6ad584[0].items[i]].x60 = 1;
+				((D2_CARD_CTL*)d2_Controls)[g_6ad584[0].items[i]].x60 = 1;
 			}
 		}
 	}

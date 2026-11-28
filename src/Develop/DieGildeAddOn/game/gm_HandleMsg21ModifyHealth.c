@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 char* __cdecl gm_LookupEntityRecordById(int id);
 unsigned short __cdecl fcn_0042e410(int a);
@@ -21,7 +21,7 @@ int __cdecl gm_HandleMsg21ModifyHealth(int* request)
 		return 1;
 	}
 	io_FormatTextBuffer(buf, 0x12e7 + *(unsigned short*) ((char*) request + 4),
-		gm_ConvertUnitsToAmount(1, g_773d75),
+		gm_ConvertUnitsToAmount(1, gm_ActiveTownIndex),
 		n = (unsigned short) fcn_0042e410(3) + 3);
 	he_PostEntityMessage(*(int*) (p + 4), *(int*) (p + 4), buf,
 		strlen(buf) > 0x100, 0x603, 0);

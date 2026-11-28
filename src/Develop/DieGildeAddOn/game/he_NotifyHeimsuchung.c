@@ -1,4 +1,4 @@
-extern char g_774a80[];
+extern char io_MessageFormatBuf[];
 extern char g_6ab4b8[];
 
 
@@ -13,13 +13,13 @@ void __cdecl he_NotifyHeimsuchung(void* subject, void* recipient, void* target)
 	switch (main_GetLanguage()) {
 	case 0:
 	case 2:
-		io_FormatTextBuffer(g_774a80, 0x409b, gm_RandomMod(3) + 0x409c,
+		io_FormatTextBuffer(io_MessageFormatBuf, 0x409b, gm_RandomMod(3) + 0x409c,
 		    *(unsigned short*) subject, target, *(unsigned short*) subject);
 		break;
 	case 1:
-		io_FormatTextBuffer(g_774a80, 0x409b, gm_RandomMod(3) + 0x409c,
+		io_FormatTextBuffer(io_MessageFormatBuf, 0x409b, gm_RandomMod(3) + 0x409c,
 		    *(unsigned short*) subject, (void*) *(unsigned short*) subject, (int) target);
 		break;
 	}
-	he_PostEntityMessage(*(int*) ((char*) recipient + 4), -1, g_774a80, 1, 0x5fb, g_6ab4b8);
+	he_PostEntityMessage(*(int*) ((char*) recipient + 4), -1, io_MessageFormatBuf, 1, 0x5fb, g_6ab4b8);
 }

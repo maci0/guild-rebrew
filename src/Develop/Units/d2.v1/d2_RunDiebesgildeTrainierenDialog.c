@@ -5,9 +5,9 @@
 // SIZE 0x40
 
  
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
@@ -33,22 +33,22 @@ void __cdecl d2_RunDiebesgildeTrainierenDialog(int a1)
 	d2_SetOverlayAnimation(0, 0);
 	do {
 		d2_UpdateTrainingRows(dlg, 2);
-		if (g_14ce8e0 != 0) {
+		if (io_RightButtonReleased != 0) {
 			if (CountDisplayCounters() == 0) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			} else {
 				for (i = 0; i < 32; i++) {
-					if (g_7774a0[i].row_element != -1 && d2_GetControlValue(g_7774a0[i].row_element) != 0) {
-						d2_SetElementValue(g_7774a0[i].row_element, 0);
+					if (d2_TrainingRows[i].row_element != -1 && d2_GetControlValue(d2_TrainingRows[i].row_element) != 0) {
+						d2_SetElementValue(d2_TrainingRows[i].row_element, 0);
 					}
 				}
 				ResetDisplayCounters();
 			}
 		}
-		if (g_100f1dc != -1 && g_100f1dc == 0x113) {
+		if (d2_DialogButtonAction != -1 && d2_DialogButtonAction == 0x113) {
 			for (i = 0; i < 32; i++) {
-				if (g_7774a0[i].row_element != -1 && d2_GetControlValue(g_7774a0[i].row_element) != 0) {
-					d2_SetElementValue(g_7774a0[i].row_element, 0);
+				if (d2_TrainingRows[i].row_element != -1 && d2_GetControlValue(d2_TrainingRows[i].row_element) != 0) {
+					d2_SetElementValue(d2_TrainingRows[i].row_element, 0);
 				}
 			}
 			ResetDisplayCounters();

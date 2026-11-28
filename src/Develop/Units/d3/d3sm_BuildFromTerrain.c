@@ -49,7 +49,7 @@ void __cdecl d3sm_BuildFromTerrain(int* text, int* fmt)
 
 	width = text[0];
 	count = fmt[8];
-	ratio = g_6628a0 / *(float*) (fmt + 5);
+	ratio = flt_1_0 / *(float*) (fmt + 5);
 	lines = count / width;
 	if (lines == 0) {
 		q = width / count;

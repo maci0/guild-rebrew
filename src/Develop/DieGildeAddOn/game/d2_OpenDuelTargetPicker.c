@@ -1,4 +1,4 @@
-extern __int64 g_666018;
+extern __int64 gm_TargetPersonTypeMask;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_5c0d90[];
 
@@ -20,7 +20,7 @@ void __cdecl d2_OpenDuelTargetPicker(int enabled)
 	memset(buf, 0, 0x50);
 	*(int*) (buf + 4) = 0x400;
 	*(int*) (buf + 0x10) = 6;
-	*(int*) (buf + 8) = (*(int*)&g_666018);
+	*(int*) (buf + 8) = (*(int*)&gm_TargetPersonTypeMask);
 	*(int*) (buf + 0xc) = g_66601c;
 	io_FormatTextBuffer(buf + 0x50, 0x190d);
 	d2_OpenTargetPicker(buf, buf + 0x50, 0, (int) g_5c0d90);

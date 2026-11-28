@@ -6,9 +6,9 @@ extern char* g_7f3b24;
 extern char* g_7f3ee0;
 extern char* lpObjektePROT;
 extern unsigned char* lpGebaeudePROT;
-extern unsigned char* g_7746c8;
+extern unsigned char* d2_InteriorBuilding;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern unsigned char g_773dd4;
+extern unsigned char d3_CurrentSeason;
 
 extern void* __cdecl fcn_00502cd0(int list, int a, int b, ...);
 extern void* __cdecl gm_NextEntityQueryMatch(void);
@@ -17,7 +17,7 @@ extern int __cdecl gm_FindObjektPrototypeByName(char* key);
 extern int __cdecl gm_GetEntityUiFlags(int a, void* table, void* record, int mode);
 extern void __cdecl d3_SetSubtreeVisible(char* record, int mode);
 extern char __cdecl d3_ComputeObjectBoundingSphere(char* record, char* scene, float* out, float* value);
-extern double g_662a08;
+extern double dbl_1_5;
 extern void* __cdecl evt_LoadGfxScript(char* name);
 extern int __cdecl evt_CallScriptFunction(char* handle, int a, ...);
 extern void __cdecl SelectTextureSet(char* record, int target, char mode, int flag);
@@ -153,8 +153,8 @@ label_59eb:
 			if (slot != 0) {
 				d3_SetSubtreeVisible(record, 1);
 				*(char**) (record + 0x204) = slot;
-				if ((*entry == 6 || *entry == 2) && g_7746c8 != 0) {
-					if (gm_GetEntityUiFlags(g_774970, g_7f3ee0, slot, 0) & 0x4000) {
+				if ((*entry == 6 || *entry == 2) && d2_InteriorBuilding != 0) {
+					if (gm_GetEntityUiFlags(gm_LocalPlayerSlot, g_7f3ee0, slot, 0) & 0x4000) {
 						*(unsigned int*) (record + 0x224) = 1;
 						*(char**) (slot + 0x18) = record;
 						goto label_5aab;
@@ -180,7 +180,7 @@ label_5aab:
 				char* handle;
 
 				if (d3_ComputeObjectBoundingSphere(record, d3_ActiveCamera, buf, &value)) {
-					scaled = (int) (value * g_662a08);
+					scaled = (int) (value * dbl_1_5);
 					handle = (char*) evt_LoadGfxScript((char*) 0x6a1f3c);
 					if (handle != 0)
 						evt_CallScriptFunction(handle, 6, (int) buf[0], (int) buf[1],
@@ -208,10 +208,10 @@ label_5aab:
 	} else if (strncmp(record, (char*) 0x68d6fc, 4) == 0
 			|| strncmp(record, (char*) 0x68d6f8, 3) == 0) {
 		if (*(int*) (record + 0x1cc) != 0) {
-			SelectTextureSet(record, *(int*) (record + 0x1cc), (char) g_773dd4, 1);
+			SelectTextureSet(record, *(int*) (record + 0x1cc), (char) d3_CurrentSeason, 1);
 			return;
 		}
 		SelectTextureSet(record, *(int*) (record + 0x1ec) + 0xf4,
-			(char) g_773dd4, 1);
+			(char) d3_CurrentSeason, 1);
 	}
 }

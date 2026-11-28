@@ -17,11 +17,11 @@ typedef struct {
 #include "Develop/DieGildeAddOn/game/cutscene_clock.h"
 extern int g_68bfbc;
 extern int g_68b7a4;
-extern int g_772ea4;
-extern int g_100f1dc;
+extern int cut_CombatCancelledEntity;
+extern int d2_DialogButtonAction;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_68b7a8;
-extern unsigned short* g_772f24;
+extern unsigned short* cut_ActivePlayerEntity;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -51,14 +51,14 @@ void __cdecl d2_UpdateCombatFrame(char* rec)
 	d2_UpdateEntityOverlays(rec);
 	cut_UpdateActiveBombs();
 	d3_UpdateMineExplosions();
-	if (cut_ClockExpired != 0 || g_772ea4 != 0) {
-		g_774654 = 1;
+	if (cut_ClockExpired != 0 || cut_CombatCancelledEntity != 0) {
+		d2_DialogCloseRequested = 1;
 		return;
 	}
-	if (g_100f1dc == -1 || d2_CurrentElementId != g_68b7a8)
+	if (d2_DialogButtonAction == -1 || d2_CurrentElementId != g_68b7a8)
 		return;
-	l = *gm_FindOrCreateEntitySlot(rec, ((char*)g_772f24));
-	l.id = *(int*) (((char*)g_772f24) + 4);
+	l = *gm_FindOrCreateEntitySlot(rec, ((char*)cut_ActivePlayerEntity));
+	l.id = *(int*) (((char*)cut_ActivePlayerEntity) + 4);
 	l.f4 = 5;
 	cm_SendUpdateCutsceneEntitySlot(*(int*) (rec + 0x10), &l);
 }

@@ -1,7 +1,7 @@
 
 
 
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char g_6ac9b4[];
@@ -25,10 +25,10 @@ void __cdecl d2_ShowAmtInfo(int k)
 	d2_SetForm(h, 1);
 	io_AppendText((char*) (k * 2 + 0x134b));
 	io_AppendText((char*) (k * 2 + 0x134c));
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop(d2_ShowAmtInfo, 0x657c7) != 0);
 	d2_DestroyForm(h);

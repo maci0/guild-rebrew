@@ -15,8 +15,8 @@ typedef struct
 typedef Tex_102d278 D2_WIN_FIELD_TEX;
 // SIZE 0x160
 
-extern Win_1015f40 g_1015f40[0x60];
-extern char* g_1015ea0;
+extern Win_1015f40 d2_Windows[0x60];
+extern char* d2_Controls;
 extern Tex_102d278 g_102d278[];
 extern char s_67d420[];
 
@@ -30,7 +30,7 @@ int __cdecl d2_AddWindowField(int x, int y, int def, int flags, int win)
 	D2_WIN* w;
 	int id;
 
-	w = &((D2_WIN*)g_1015f40)[win];
+	w = &((D2_WIN*)d2_Windows)[win];
 	if (w->active == 0) {
 		return -1;
 	}
@@ -40,9 +40,9 @@ int __cdecl d2_AddWindowField(int x, int y, int def, int flags, int win)
 	}
 	id = d2_CreateField(w->left + x, w->top - (*(int*) &w->pad3c[0x21c]) + y, def, flags);
 	d2_InsertControlAfterWindow(id, w);
-	*(int*) (&((D2_CONTROL_TL*) g_1015ea0)[id].parent) = (int) w;
-	((D2_CONTROL_TL*) g_1015ea0)[id].value_050 = ((D2_CONTROL_TL*) g_1015ea0)[w->slot].value_050;
-	g_102d278[((D2_CONTROL_TL*) g_1015ea0)[id].value_088].i[0] = (*(int*) &w->pad280[12]);
+	*(int*) (&((D2_CONTROL_TL*) d2_Controls)[id].parent) = (int) w;
+	((D2_CONTROL_TL*) d2_Controls)[id].value_050 = ((D2_CONTROL_TL*) d2_Controls)[w->slot].value_050;
+	g_102d278[((D2_CONTROL_TL*) d2_Controls)[id].value_088].i[0] = (*(int*) &w->pad280[12]);
 	w->children[w->count] = id;
 	w->count++;
 	if (y > (*(int*) &w->pad3c[0x218])) {

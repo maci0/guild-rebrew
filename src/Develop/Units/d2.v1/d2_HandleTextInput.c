@@ -26,13 +26,13 @@ typedef struct ComboList {
 	int count;		/* +0x2c */
 } ComboList;
 
-extern short g_14ce8c2;
-extern unsigned char g_14cf950;
-extern unsigned char g_14cf736;
-extern unsigned char g_14cf72a;
+extern short io_ActiveCursorY;
+extern unsigned char io_LastKeyScancode;
+extern unsigned char io_RightShiftKeyDown;
+extern unsigned char io_ShiftKeyDown;
 extern int tp_d2_SelectedControl;
 extern int g_7725e4;
-extern char* g_1015ea0;
+extern char* d2_Controls;
 extern int g_67d8ec;
 extern int g_67d3b0;
 extern int d2_MouseBottomBoundary;
@@ -55,11 +55,11 @@ void __cdecl d2_HandleTextInput(void)
 {
 	int saved;
 
-	saved = g_14ce8c2;
-	if (g_14cf950 == 0) {
+	saved = io_ActiveCursorY;
+	if (io_LastKeyScancode == 0) {
 		return;
 	}
-	switch (g_14cf950) {
+	switch (io_LastKeyScancode) {
 	case 14:
 		{
 			int len;
@@ -68,11 +68,11 @@ void __cdecl d2_HandleTextInput(void)
 			if (len > 0) {
 				((char*) (*(Combo**) &tp_d2_SelectedControl))[len + 0x2b] = 0;
 			}
-			g_14cf950 = 0;
+			io_LastKeyScancode = 0;
 			goto common_tail;
 		}
 	case 28:
-		((D2_CONTROL_TL*) g_1015ea0)[(*(Combo**) &tp_d2_SelectedControl)->sel].value_03c = 0;
+		((D2_CONTROL_TL*) d2_Controls)[(*(Combo**) &tp_d2_SelectedControl)->sel].value_03c = 0;
 		(*(Combo**) &tp_d2_SelectedControl) = 0;
 		g_7725e4 = 0;
 		if (g_67d8ec != -1) {
@@ -110,14 +110,14 @@ common_tail:
 		ComboList* list;
 		int i;
 
-		list = (ComboList*) *(int*) (&((D2_CONTROL_TL*) g_1015ea0)[(*(Combo**) &tp_d2_SelectedControl)->sel].parent);
-		if (g_14cf736 == 0 && g_14cf72a == 0) {
+		list = (ComboList*) *(int*) (&((D2_CONTROL_TL*) d2_Controls)[(*(Combo**) &tp_d2_SelectedControl)->sel].parent);
+		if (io_RightShiftKeyDown == 0 && io_ShiftKeyDown == 0) {
 			if (g_100f1cc >= list->count - 1) {
 				g_100f1cc = -1;
 			}
 			for (i = g_100f1cc + 1; i < list->count; i++) {
-				if (((D2_CONTROL_TL*) g_1015ea0)[list->items[i]].kind == 0x41 &&
-				    ((D2_CONTROL_TL*) g_1015ea0)[list->items[i]].value_048 == 0) {
+				if (((D2_CONTROL_TL*) d2_Controls)[list->items[i]].kind == 0x41 &&
+				    ((D2_CONTROL_TL*) d2_Controls)[list->items[i]].value_048 == 0) {
 					goto found15;
 				}
 			}
@@ -126,8 +126,8 @@ common_tail:
 				g_100f1cc = list->count;
 			}
 			for (i = g_100f1cc - 1; i >= 0; i--) {
-				if (((D2_CONTROL_TL*) g_1015ea0)[list->items[i]].kind == 0x41 &&
-				    ((D2_CONTROL_TL*) g_1015ea0)[list->items[i]].value_048 == 0) {
+				if (((D2_CONTROL_TL*) d2_Controls)[list->items[i]].kind == 0x41 &&
+				    ((D2_CONTROL_TL*) d2_Controls)[list->items[i]].value_048 == 0) {
 					goto found15;
 				}
 			}
@@ -135,9 +135,9 @@ common_tail:
 		goto tail15;
 found15:
 		g_100f1cc = i;
-		((D2_CONTROL_TL*) g_1015ea0)[(*(Combo**) &tp_d2_SelectedControl)->sel].value_03c = 0;
-		(*(Combo**) &tp_d2_SelectedControl) = (Combo*) *(int*) (&((D2_CONTROL_TL*) g_1015ea0)[list->items[i]].data);
-		((D2_CONTROL_TL*) g_1015ea0)[(*(Combo**) &tp_d2_SelectedControl)->sel].value_03c = 1;
+		((D2_CONTROL_TL*) d2_Controls)[(*(Combo**) &tp_d2_SelectedControl)->sel].value_03c = 0;
+		(*(Combo**) &tp_d2_SelectedControl) = (Combo*) *(int*) (&((D2_CONTROL_TL*) d2_Controls)[list->items[i]].data);
+		((D2_CONTROL_TL*) d2_Controls)[(*(Combo**) &tp_d2_SelectedControl)->sel].value_03c = 1;
 		g_100f1d4 = d2_MouseBottomBoundary - saved;
 		g_100f940 = (*(Combo**) &tp_d2_SelectedControl)->text_len;
 		g_100f950 = 0;
@@ -155,14 +155,14 @@ tail15:
 				d2_PositionControl(g_100f898, g_100f89c - 7, g_67d8ec);
 			}
 		}
-		g_14cf950 = 0;
+		io_LastKeyScancode = 0;
 		}
 		goto common_tail;
 	default:
 		{
 		int len;
 		if ((*(Combo**) &tp_d2_SelectedControl)->flags & 2) {
-			if (g_14cf950 >= 2 && g_14cf950 <= 0xb && g_14cf736 == 0 && g_14cf72a == 0) {
+			if (io_LastKeyScancode >= 2 && io_LastKeyScancode <= 0xb && io_RightShiftKeyDown == 0 && io_ShiftKeyDown == 0) {
 				_itoa((*(Combo**) &tp_d2_SelectedControl)->text_len, (*(Combo**) &tp_d2_SelectedControl)->text, 10);
 			} else {
 				goto common_tail;
@@ -171,15 +171,15 @@ tail15:
 		len = strlen((*(Combo**) &tp_d2_SelectedControl)->text);
 		if (len < (((*(Combo**) &tp_d2_SelectedControl)->flags & 1) ? (*(Combo**) &tp_d2_SelectedControl)->max_len : (unsigned char) (*(Combo**) &tp_d2_SelectedControl)->f24)) {
 			if ((*(Combo**) &tp_d2_SelectedControl)->scroll == 0 || g_100f898 <= (*(Combo**) &tp_d2_SelectedControl)->f4 + (*(Combo**) &tp_d2_SelectedControl)->scroll) {
-				if (g_14cf736 == 0 && g_14cf72a == 0) {
-					(*(Combo**) &tp_d2_SelectedControl)->text[len] = io_TranslateKeyCode(0, 0, 0, g_14cf950);
+				if (io_RightShiftKeyDown == 0 && io_ShiftKeyDown == 0) {
+					(*(Combo**) &tp_d2_SelectedControl)->text[len] = io_TranslateKeyCode(0, 0, 0, io_LastKeyScancode);
 				} else {
-					(*(Combo**) &tp_d2_SelectedControl)->text[len] = io_TranslateKeyCode(1, 0, 0, g_14cf950);
+					(*(Combo**) &tp_d2_SelectedControl)->text[len] = io_TranslateKeyCode(1, 0, 0, io_LastKeyScancode);
 				}
 				(*(Combo**) &tp_d2_SelectedControl)->text[len + 1] = 0;
 			}
 		}
-		g_14cf950 = 0;
+		io_LastKeyScancode = 0;
 		}
 		goto common_tail;
 	}

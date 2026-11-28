@@ -4,13 +4,13 @@
 
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern char g_7f4ca0[];
-extern unsigned char g_773d75;
+extern char gm_EntitySlotTable[];
+extern unsigned char gm_ActiveTownIndex;
 extern char g_6a58ec[];
 extern char g_6a6ddc[];
 extern char g_6a6dcc[];
 extern char g_6a6d78[];
-extern char g_6b5c60[];
+extern char str_empty[];
 extern char s_6a6dc4[];
 extern char s_6a6a60[];
 extern char s_6a6a40[];
@@ -137,7 +137,7 @@ void __cdecl he_RunRaubzug(char* actionRecord)
 		if (rec1 == 0) {
 			goto label_1bc;
 		}
-		row = (int) ((int)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) *(unsigned short*) (rec1 + 0x27)]);
+		row = (int) ((int)&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned short) *(unsigned short*) (rec1 + 0x27)]);
 		req[0] = rec1;
 		req[1] = 0x451c4000;
 		req[2] = (int) actionRecord;
@@ -145,7 +145,7 @@ void __cdecl he_RunRaubzug(char* actionRecord)
 		if (he_DetectNearbyPatrolAction(req) != 0) {
 			h = req[3];
 			*(int*) (actionRecord + 0xb4) = gm_TryRecordCrime(0x17, 1,
-			    *(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) *(unsigned short*) (actionRecord + 8)] + 4),
+			    *(int*) ((char *)&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned short) *(unsigned short*) (actionRecord + 8)] + 4),
 			    *(int*) (row + 4), *(int*) (rec1 + 1));
 			*(int*) (actionRecord + 0xb8) = *(int*) (h + 4);
 			*(int*) (actionRecord + 0xbc) = *(int*) (h + 0xb0);
@@ -206,15 +206,15 @@ label_1bc:
 		}
 		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (actionRecord + 0xac));
 		if (rec1 != 0) {
-			val = (int) gm_LookupEntityRecordById(*(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) *(unsigned short*) (actionRecord + 8)] + 4));
-			row = (int) ((int)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) *(unsigned short*) (q + 8)]);
+			val = (int) gm_LookupEntityRecordById(*(int*) ((char *)&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned short) *(unsigned short*) (actionRecord + 8)] + 4));
+			row = (int) ((int)&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned short) *(unsigned short*) (q + 8)]);
 			if (row != 0 && val != 0) {
-				ent = gm_ConvertUnitsToAmount(gm_RandomMod(200) + 0x226, g_773d75);
+				ent = gm_ConvertUnitsToAmount(gm_RandomMod(200) + 0x226, gm_ActiveTownIndex);
 				io_FormatTextBuffer(buf, 0x19ea, rec1, ent, *(unsigned short*) row);
 				he_PostEntityMessage(*(int*) (val + 4), *(int*) (val + 4), buf, 1, 0x5f0, s_6a6a60);
 				io_FormatTextBuffer(buf, 0x19eb, rec1, ent);
 				he_PostEntityMessage(*(int*) (row + 4), *(int*) (row + 4), buf, 1, 0x5f0, (char*) 0x6a6a4c);
-				cm_RequestTransferCurrencyNoKill(*(int*) (row + 4), *(int*) (val + 4), g_773d75, ent);
+				cm_RequestTransferCurrencyNoKill(*(int*) (row + 4), *(int*) (val + 4), gm_ActiveTownIndex, ent);
 			}
 			q = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (actionRecord + 0xbc));
 			if (q != 0) {
@@ -246,12 +246,12 @@ label_1bc:
 		return;
 	case 5:
 		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (actionRecord + 0xac));
-		ent = (int) gm_LookupEntityRecordById(*(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) *(unsigned short*) (actionRecord + 8)] + 4));
+		ent = (int) gm_LookupEntityRecordById(*(int*) ((char *)&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned short) *(unsigned short*) (actionRecord + 8)] + 4));
 		if (rec1 == 0 || ent == 0) {
 			*(int*) (actionRecord + 0x70) = 0xfffffffe;
 			return;
 		}
-		row = (int) ((int)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) *(unsigned short*) (rec1 + 0x27)]);
+		row = (int) ((int)&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned short) *(unsigned short*) (rec1 + 0x27)]);
 		h = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (actionRecord + 0xb0));
 		if (h != 0) {
 			q = (int) gm_SetupEntityQuery((char*) h);
@@ -272,7 +272,7 @@ label_1bc:
 			} while (cnt != 0);
 			val = 1;
 			gm_TryRecordCrime(0x17, 1,
-			    *(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) *(unsigned short*) (actionRecord + 8)] + 4),
+			    *(int*) ((char *)&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned short) *(unsigned short*) (actionRecord + 8)] + 4),
 			    *(int*) (row + 4), *(int*) (h + 1));
 		} else {
 			val = 0;
@@ -280,7 +280,7 @@ label_1bc:
 		if (he_HasNoActiveAction0x62((char*) row) == 0 || val == 0) {
 			goto label_fa92;
 		}
-		msg[0] = g_6b5c60[0];
+		msg[0] = str_empty[0];
 		memset(msg + 1, 0, 0x3ff);
 		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (actionRecord + 0xac));
 		h = (int) fcn_00502cd0(*(int*) (rec1 + 0x5d), 2, 6, 0, 0x2a);
@@ -288,7 +288,7 @@ label_1bc:
 		val = (int) (*(int*) req * 0.35);
 		io_FormatTextBuffer(str, 0x68bea4, val);
 		strcat(msg, str);
-		cm_RequestMoveCredits(*(int*) (ent + 4), *(int*) (row + 4), g_773d75, val);
+		cm_RequestMoveCredits(*(int*) (ent + 4), *(int*) (row + 4), gm_ActiveTownIndex, val);
 		cm_BeginPacketFieldDelta(rec1, *(int*) (rec1 + 1));
 		cm_AppendPacketFieldValue(4, 1, 0x69, &val);
 		cm_RequestChangeAttribute();
@@ -304,8 +304,8 @@ label_1bc:
 						}
 						fcn_0064d41a(str, s_68be9c, cnt, *(int*) (*(unsigned short*) q * 8 + 0x14a79c0));
 						strcat(msg, str);
-						cm_SendSellObjekt(*(int*) (i + 2), *(int*) (h + 2), *(unsigned short*) q, cnt, g_773d75, 0);
-						val = (int) ((double) gm_GetSeasonPrice(*(unsigned short*) q, g_773d75) * cnt + val);
+						cm_SendSellObjekt(*(int*) (i + 2), *(int*) (h + 2), *(unsigned short*) q, cnt, gm_ActiveTownIndex, 0);
+						val = (int) ((double) gm_GetSeasonPrice(*(unsigned short*) q, gm_ActiveTownIndex) * cnt + val);
 					}
 					q = (int) gm_NextEntityQueryMatch();
 				}
@@ -320,11 +320,11 @@ label_1bc:
 		if (*(char*) (ent + 2) == 6 || *(char*) (ent + 2) == 7) {
 			io_FormatTextBuffer(buf, 0x1a85, *(unsigned short*) row, rec1);
 			strcat(msg, buf);
-			he_MessageBoxQuickjump(*(int*) (ent + 4), *(int*) (ent + 4), msg, 1, 0x5f0, *(int*) (rec1 + 1), -1, 0, g_6b5c60);
+			he_MessageBoxQuickjump(*(int*) (ent + 4), *(int*) (ent + 4), msg, 1, 0x5f0, *(int*) (rec1 + 1), -1, 0, str_empty);
 		}
 		if (*(char*) (row + 2) == 6 || *(char*) (row + 2) == 7) {
 			io_FormatTextBuffer(buf, 0x1a86, rec1, val);
-			he_MessageBoxQuickjump(*(int*) (row + 4), *(int*) (row + 4), buf, 0, 0x5f0, *(int*) (rec1 + 1), -1, 0, g_6b5c60);
+			he_MessageBoxQuickjump(*(int*) (row + 4), *(int*) (row + 4), buf, 0, 0x5f0, *(int*) (rec1 + 1), -1, 0, str_empty);
 			he_FreeAction(actionRecord);
 			return;
 		}
@@ -336,7 +336,7 @@ label_fa92:
 		}
 		if (*(char*) (ent + 2) == 6 || *(char*) (ent + 2) == 7) {
 			io_FormatTextBuffer(buf, 0x19e7, *(unsigned short*) row, rec1, 0x19c1);
-			he_MessageBoxQuickjump(*(int*) (ent + 4), *(int*) (ent + 4), buf, 1, 0x5f0, *(int*) (rec1 + 1), -1, 0, g_6b5c60);
+			he_MessageBoxQuickjump(*(int*) (ent + 4), *(int*) (ent + 4), buf, 1, 0x5f0, *(int*) (rec1 + 1), -1, 0, str_empty);
 		}
 		if (*(char*) (row + 2) == 6 || *(char*) (row + 2) == 7) {
 			io_FormatTextBuffer(buf, 0x19e9, rec1);

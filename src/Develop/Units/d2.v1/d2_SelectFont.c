@@ -12,8 +12,8 @@ typedef struct VfsEntry {
 } VfsEntry;
 // SIZE 0x54
 
-extern char* g_772500;
-extern char* g_772524;
+extern char* d2_FileObjTable;
+extern char* d2_CurrentFontBank;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_67d384;
 
@@ -22,12 +22,12 @@ char* __cdecl d2_GetResourceData(int idx);
 /* ADDRESS: GOLDTL 0x00472880 */
 char* __cdecl d2_SelectFont(int idx)
 {
-	if (((VfsEntry*)g_772500)[idx].kind != 7) {
+	if (((VfsEntry*)d2_FileObjTable)[idx].kind != 7) {
 		return 0;
 	}
-	g_772524 = d2_GetResourceData(idx);
+	d2_CurrentFontBank = d2_GetResourceData(idx);
 	d2_CurrentFont = idx;
-	d2_FontHeight = *(unsigned short*) (g_772524 + 8);
+	d2_FontHeight = *(unsigned short*) (d2_CurrentFontBank + 8);
 	if (idx == d2_DefaultFont) {
 		g_67d380 = 8;
 	} else {
@@ -37,5 +37,5 @@ char* __cdecl d2_SelectFont(int idx)
 		}
 	}
 	g_67d384 = 2;
-	return g_772524;
+	return d2_CurrentFontBank;
 }

@@ -12,7 +12,7 @@
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern char* gm_CityEntity;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_6652c8;
@@ -43,7 +43,7 @@ void __cdecl he_RunMeisterpruefungPrompt(char* u)
 				d2_CreateActionPopupSlot(u, 0, 0, g_6a5a10, 0x5ec);
 			}
 			d2_SetForm(*(int*) (*(char**) (u + 0x74) + 8), 0);
-			io_AppendText((int) g_6811b0);
+			io_AppendText((int) str_dollar_C);
 			io_AppendText(0x10b1, *(unsigned short*) (u + 8), v);
 			*(int*) (u + 0x70) = 1;
 			break;
@@ -52,18 +52,18 @@ void __cdecl he_RunMeisterpruefungPrompt(char* u)
 				*(int*) (u + 0x70) = 0;
 				return;
 			}
-			if (g_100f884 != *(int*) (*(char**) (u + 0x74) + 8) || g_100f1dc == -1) {
+			if (g_100f884 != *(int*) (*(char**) (u + 0x74) + 8) || d2_DialogButtonAction == -1) {
 				return;
 			}
-			if (g_100f1dc == 2) {
-				cm_RequestMoveCredits(*(int*) (gm_CityEntity + 4), ((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id, g_773d75,
+			if (d2_DialogButtonAction == 2) {
+				cm_RequestMoveCredits(*(int*) (gm_CityEntity + 4), ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (u + 8)].entity_id, gm_ActiveTownIndex,
 				    (int) (gm_WalkEntityChain(*(unsigned short*) (u + 8)) * g_6652c8));
 				gm_AdjustOfficeHoldersFavor(*(unsigned short*) (u + 8), 8);
 				d2_CloseActionPopup(u);
 				he_FreeAction(u);
 				return;
 			}
-			if (g_100f1dc == 1) {
+			if (d2_DialogButtonAction == 1) {
 				gm_AdjustOfficeHoldersFavor(*(unsigned short*) (u + 8), -6);
 				d2_CloseActionPopup(u);
 				he_FreeAction(u);

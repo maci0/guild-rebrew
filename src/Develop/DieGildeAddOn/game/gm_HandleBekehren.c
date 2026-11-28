@@ -14,9 +14,9 @@ typedef struct {
 	char pad85[0x197];
 } House;
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 extern float g_662964;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern char s_6acdcc[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
@@ -60,13 +60,13 @@ int __cdecl gm_HandleBekehren(House* e)
 		if (gm_AccumulateTyped2(e) < money) {
 			return 0x20;
 		}
-		cm_RequestMoveCredits(-1, e->f4, g_773d75, money);
+		cm_RequestMoveCredits(-1, e->f4, gm_ActiveTownIndex, money);
 		cm_RequestModifyHealth(e->f4, -6);
 		for (i = 0; i < 768; i++) {
-			if (((House*)g_7f4ca0)[i].id != 0xffff && ((House*)g_7f4ca0)[i].b2 < 10 && ((House*)g_7f4ca0)[i].b2 != 6 && ((House*)g_7f4ca0)[i].b2 != 7 &&
-				((House*)g_7f4ca0)[i].bc != e->bc) {
-				if ((unsigned char) rank > gm_RandomMod(0x7e) + ((House*)g_7f4ca0)[i].b84) {
-					cm_BeginPacketFieldDelta((char*) &((House*)g_7f4ca0)[i], ((House*)g_7f4ca0)[i].f4);
+			if (((House*)gm_EntitySlotTable)[i].id != 0xffff && ((House*)gm_EntitySlotTable)[i].b2 < 10 && ((House*)gm_EntitySlotTable)[i].b2 != 6 && ((House*)gm_EntitySlotTable)[i].b2 != 7 &&
+				((House*)gm_EntitySlotTable)[i].bc != e->bc) {
+				if ((unsigned char) rank > gm_RandomMod(0x7e) + ((House*)gm_EntitySlotTable)[i].b84) {
+					cm_BeginPacketFieldDelta((char*) &((House*)gm_EntitySlotTable)[i], ((House*)gm_EntitySlotTable)[i].f4);
 					cm_AppendPacketFieldDelta(1, 1, 0xc, &who);
 					cm_RequestChangeAttribute();
 				}
@@ -95,18 +95,18 @@ int __cdecl gm_HandleBekehren(House* e)
 		id = io_AppendText(0x1de1, 6, money);
 		ok = d2_GetWindowListItem(dlg, 1, id);
 		cancel = d2_GetWindowListItem(dlg, 1, id + 1);
-		g_100f1dc = -1;
+		d2_DialogButtonAction = -1;
 		do {
-			if (g_100f1dc != -1) {
+			if (d2_DialogButtonAction != -1) {
 				if (d2_CurrentElementId == ok) {
 					n = 0;
 					rank = e->b84;
 					who = e->bc;
-					if (d2_CheckActionBlocker(e, 6) && gm_CheckEntityStock(e, money, g_773d75)) {
-						cm_RequestMoveCredits(-1, e->f4, g_773d75, money);
+					if (d2_CheckActionBlocker(e, 6) && gm_CheckEntityStock(e, money, gm_ActiveTownIndex)) {
+						cm_RequestMoveCredits(-1, e->f4, gm_ActiveTownIndex, money);
 						cm_RequestModifyHealth(e->f4, -6);
 						for (i = 0; i < 768; i++) {
-							h = &((House*)g_7f4ca0)[i];
+							h = &((House*)gm_EntitySlotTable)[i];
 							/* the redundant b2 test keeps the loop pointer on b2, as in the original */
 							if (h->id != 0xffff && h->b2 < 10 && h->b2 <= 10 && h->bc != e->bc) {
 								if (rank > gm_RandomMod(0x7e) + h->b84) {
@@ -120,14 +120,14 @@ int __cdecl gm_HandleBekehren(House* e)
 						io_FormatTextBuffer(text, 0x1de2, n);
 						d2_ShowModalMessageBox(text, 0);
 						result = 1;
-						g_774654 = 1;
+						d2_DialogCloseRequested = 1;
 					}
 				} else if (d2_CurrentElementId == cancel) {
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				}
 			}
-			if (g_14ce8e0 != 0) {
-				g_774654 = 1;
+			if (io_RightButtonReleased != 0) {
+				d2_DialogCloseRequested = 1;
 			}
 		} while (main_RunFrameLoop((void*) gm_HandleBekehren, 0x657c7) != 0);
 		d2_DestroyForm(dlg);

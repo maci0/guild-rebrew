@@ -28,11 +28,11 @@ typedef struct {
 	int total164;
 } BankHeader;
 
-extern int g_6b7d7c;
+extern int sb_WaveDriver;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern Bank* g_6b7d78;
+extern Bank* sb_BankListHead;
 extern char g_6b7d88[];
-extern char g_14cb980[];
+extern char sb_NullSampleBank[];
 extern char g_14cbae0[];
 
 Bank* __cdecl sb_FindBankByPath(const char* name);
@@ -52,8 +52,8 @@ Bank* __cdecl sb_LoadSampleBank(char* name, int init)
 	char msg[0x200];
 	int i;
 
-	if (g_6b7d7c == 0) {
-		return (Bank*) g_14cb980;
+	if (sb_WaveDriver == 0) {
+		return (Bank*) sb_NullSampleBank;
 	}
 	bank = sb_FindBankByPath(name);
 	if (bank == 0) {
@@ -74,7 +74,7 @@ Bank* __cdecl sb_LoadSampleBank(char* name, int init)
 						if (tail != 0) {
 							tail->next = bank;
 						} else {
-							g_6b7d78 = bank;
+							sb_BankListHead = bank;
 						}
 						MemUsed = MemUsed + hdr.count * 0x40 + 0x144;
 						sprintf(g_14cbae0, "Samplebank %s loaded. MemUsed is now %d bytes.", name, MemUsed);

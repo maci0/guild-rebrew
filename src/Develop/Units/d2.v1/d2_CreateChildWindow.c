@@ -17,7 +17,7 @@ typedef struct
 
 extern GOLD_GUI_WINDOW g_00f8f120[];
 extern GuiEnt* g_00f8f080;
-extern Win_1015f40 g_1015f40[0x60];
+extern Win_1015f40 d2_Windows[0x60];
 
 int __cdecl d2_CreateGuiWindow(int x, int y, int width, int height, unsigned int flags);
 void __cdecl d2_ReorderControlInWindow(int, GuiWin*);
@@ -59,21 +59,21 @@ int __cdecl d2_CreateChildWindow(int x, int y, int cx, int cy, int flags, int wi
 	D2_CHILD_WIN* w;
 	int id;
 
-	w = &((D2_CHILD_WIN*)g_1015f40)[win];
+	w = &((D2_CHILD_WIN*)d2_Windows)[win];
 	if (w->i[0x290 / 4] == 0) {
 		return -1;
 	}
 	id = d2_CreateWindow(w->i[0x4 / 4] - w->i[0x268 / 4] + x, w->i[0x8 / 4] - w->i[0x258 / 4] + y, cx, cy, flags);
-	((int*) w->i[0x28 / 4])[w->i[0x2c / 4]] = ((D2_CHILD_WIN*)g_1015f40)[id].i[0x27c / 4];
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[((D2_CHILD_WIN*)g_1015f40)[id].i[0x27c / 4]].parent) = (int) w;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[((D2_CHILD_WIN*)g_1015f40)[id].i[0x27c / 4]].clip_top) = w->i[0x8 / 4] + y;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[((D2_CHILD_WIN*)g_1015f40)[id].i[0x27c / 4]].clip_bottom) = w->i[0x8 / 4] + y + cy;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[((D2_CHILD_WIN*)g_1015f40)[id].i[0x27c / 4]].clip_left) = w->i[0x4 / 4] + x;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[((D2_CHILD_WIN*)g_1015f40)[id].i[0x27c / 4]].clip_right) = w->i[0x4 / 4] + x + cx;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[((D2_CHILD_WIN*)g_1015f40)[id].i[0x27c / 4]].value_050) = (*(int*)&((D2_CONTROL_TL*)g_1015ea0)[w->i[0x27c / 4]].value_050);
+	((int*) w->i[0x28 / 4])[w->i[0x2c / 4]] = ((D2_CHILD_WIN*)d2_Windows)[id].i[0x27c / 4];
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[((D2_CHILD_WIN*)d2_Windows)[id].i[0x27c / 4]].parent) = (int) w;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[((D2_CHILD_WIN*)d2_Windows)[id].i[0x27c / 4]].clip_top) = w->i[0x8 / 4] + y;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[((D2_CHILD_WIN*)d2_Windows)[id].i[0x27c / 4]].clip_bottom) = w->i[0x8 / 4] + y + cy;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[((D2_CHILD_WIN*)d2_Windows)[id].i[0x27c / 4]].clip_left) = w->i[0x4 / 4] + x;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[((D2_CHILD_WIN*)d2_Windows)[id].i[0x27c / 4]].clip_right) = w->i[0x4 / 4] + x + cx;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[((D2_CHILD_WIN*)d2_Windows)[id].i[0x27c / 4]].value_050) = (*(int*)&((D2_CONTROL_TL*)d2_Controls)[w->i[0x27c / 4]].value_050);
 	w->i[0x2c / 4]++;
-	if (y + ((D2_CHILD_WIN*)g_1015f40)[id].i[0x10 / 4] > w->i[0x254 / 4]) {
-		w->i[0x254 / 4] = y + ((D2_CHILD_WIN*)g_1015f40)[id].i[0x10 / 4];
+	if (y + ((D2_CHILD_WIN*)d2_Windows)[id].i[0x10 / 4] > w->i[0x254 / 4]) {
+		w->i[0x254 / 4] = y + ((D2_CHILD_WIN*)d2_Windows)[id].i[0x10 / 4];
 	}
 	return id;
 }

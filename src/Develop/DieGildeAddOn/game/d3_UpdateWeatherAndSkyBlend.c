@@ -4,14 +4,14 @@
  * two host objects 0x7e453c/0x7e4538, then selects a sky texture class by the
  * slot limit and pushes the blended positions to the scene object 0x6b89c0. */
 
-extern int g_7f4c04;
+extern int gm_GameTimeHour;
 extern int g_7e4534;
-extern int g_7e4538;
-extern int g_7e453c;
-extern int g_7e43a8[0x18];
+extern int d3_RainEffect;
+extern int d3_SnowEffect;
+extern int gm_HourlyWeatherSlots[0x18];
 extern float g_7e4470[];
 extern float g_7e44d0[];
-extern unsigned char* g_7e4540;
+extern unsigned char* d3_SkyLayers;
 extern unsigned char* g_7e4544;
 extern unsigned char* g_7e4548;
 extern int g_6b89c0;
@@ -34,36 +34,36 @@ void __cdecl d3_UpdateWeatherAndSkyBlend(void)
 	int i;
 	char* name;
 
-	g_7e4534 = g_7f4c04 & 0xffff;
-	if (g_7e453c != 0) {
-		d3_SetSnowEffectOptions(g_7e453c, 1, 1, g_7e43a8[g_7e4534], 1000);
+	g_7e4534 = gm_GameTimeHour & 0xffff;
+	if (d3_SnowEffect != 0) {
+		d3_SetSnowEffectOptions(d3_SnowEffect, 1, 1, gm_HourlyWeatherSlots[g_7e4534], 1000);
 	}
-	if (g_7e4538 != 0) {
-		if (g_7e453c != 0) {
-			if (g_7e43a8[g_7e4534] & 1) {
-				d3_SetRainEffectOptions(g_7e4538, 1, 1, g_7e43a8[g_7e4534] / 5, 1000);
+	if (d3_RainEffect != 0) {
+		if (d3_SnowEffect != 0) {
+			if (gm_HourlyWeatherSlots[g_7e4534] & 1) {
+				d3_SetRainEffectOptions(d3_RainEffect, 1, 1, gm_HourlyWeatherSlots[g_7e4534] / 5, 1000);
 			} else {
-				d3_SetRainEffectOptions(g_7e4538, 1, 1, 0, 1000);
+				d3_SetRainEffectOptions(d3_RainEffect, 1, 1, 0, 1000);
 			}
 		} else {
-			d3_SetRainEffectOptions(g_7e4538, 1, 1, g_7e43a8[g_7e4534], 1000);
+			d3_SetRainEffectOptions(d3_RainEffect, 1, 1, gm_HourlyWeatherSlots[g_7e4534], 1000);
 		}
 	}
 	f1 = g_7e4470[g_7e4534];
 	f2 = g_7e44d0[g_7e4534];
-	lim = g_7e43a8[(g_7e4534 + 0x17) % 0x18];
-	if (lim <= g_7e43a8[g_7e4534]) {
-		lim = g_7e43a8[g_7e4534];
+	lim = gm_HourlyWeatherSlots[(g_7e4534 + 0x17) % 0x18];
+	if (lim <= gm_HourlyWeatherSlots[g_7e4534]) {
+		lim = gm_HourlyWeatherSlots[g_7e4534];
 	}
-	if (lim <= g_7e43a8[(g_7e4534 + 1) % 0x18]) {
-		lim = g_7e43a8[(g_7e4534 + 1) % 0x18];
+	if (lim <= gm_HourlyWeatherSlots[(g_7e4534 + 1) % 0x18]) {
+		lim = gm_HourlyWeatherSlots[(g_7e4534 + 1) % 0x18];
 	}
-	if (g_7e453c != 0) {
-		d3_SetSnowEffectOptions(g_7e453c, 1, 2, (int) ((double) -f1 * (double) lim * 2.0),
+	if (d3_SnowEffect != 0) {
+		d3_SetSnowEffectOptions(d3_SnowEffect, 1, 2, (int) ((double) -f1 * (double) lim * 2.0),
 		             (int) ((double) -f2 * (double) lim * 2.0), 1000);
 	}
-	if (g_7e4538 != 0) {
-		d3_SetRainEffectOptions(g_7e4538, 1, 2, (int) ((double) -f1 * (double) lim * 0.5),
+	if (d3_RainEffect != 0) {
+		d3_SetRainEffectOptions(d3_RainEffect, 1, 2, (int) ((double) -f1 * (double) lim * 0.5),
 		             (int) ((double) -f2 * (double) lim * 0.5), 1000);
 	}
 	if (g_6b89c0 == 0) {
@@ -100,30 +100,30 @@ void __cdecl d3_UpdateWeatherAndSkyBlend(void)
 	if (g_7e4544[0x2a] == 0xff) {
 		if (lim < 0x32) {
 			i = (int) (unsigned int) gm_RandomMod(4);
-			if (fcn_0065f220(*(char**) (g_7e4540 + 0x1c), (char*) (0x6a2600 + i * 0x4c)) == 0) {
+			if (fcn_0065f220(*(char**) (d3_SkyLayers + 0x1c), (char*) (0x6a2600 + i * 0x4c)) == 0) {
 				i++;
 			}
 			name = (char*) (0x6a2600 + i * 0x4c);
 		} else if (lim < 0x96) {
 			i = (int) (unsigned int) gm_RandomMod(3);
-			if (fcn_0065f220(*(char**) (g_7e4540 + 0x1c), (char*) (0x6a2730 + i * 0x4c)) == 0) {
+			if (fcn_0065f220(*(char**) (d3_SkyLayers + 0x1c), (char*) (0x6a2730 + i * 0x4c)) == 0) {
 				i++;
 			}
 			name = (char*) (0x6a2730 + i * 0x4c);
 		} else {
 			i = (int) (unsigned int) gm_RandomMod(2);
-			if (fcn_0065f220(*(char**) (g_7e4540 + 0x1c), (char*) (0x6a2818 + i * 0x4c)) == 0) {
+			if (fcn_0065f220(*(char**) (d3_SkyLayers + 0x1c), (char*) (0x6a2818 + i * 0x4c)) == 0) {
 				i++;
 			}
 			name = (char*) (0x6a2818 + i * 0x4c);
 		}
-		d3_SetSkyLayerTexture(g_7e4540, name);
-		*(int*) g_7e4540 = *(int*) (name + 0x40);
-		((int*) g_7e4540)[6] = *(int*) (name + 0x44);
-		((int*) g_7e4540)[5] = *(int*) (name + 0x48);
+		d3_SetSkyLayerTexture(d3_SkyLayers, name);
+		*(int*) d3_SkyLayers = *(int*) (name + 0x40);
+		((int*) d3_SkyLayers)[6] = *(int*) (name + 0x44);
+		((int*) d3_SkyLayers)[5] = *(int*) (name + 0x48);
 		d3_SetSkyLayerTransition((void*) g_6b89c0, g_7e4544, 0, 1500.0f);
 	}
-	d3_SetSkyLayerScrollSpeed((void*) g_6b89c0, g_7e4540, (float) (f * 0.75));
+	d3_SetSkyLayerScrollSpeed((void*) g_6b89c0, d3_SkyLayers, (float) (f * 0.75));
 	d3_SetSkyLayerScrollSpeed((void*) g_6b89c0, g_7e4544, f);
 	if (lim == 0) {
 		d3_SetSkyLayerTransition((void*) g_6b89c0, g_7e4548, 0, 2500.0f);

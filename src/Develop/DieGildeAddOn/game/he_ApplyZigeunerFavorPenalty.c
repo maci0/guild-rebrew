@@ -46,8 +46,9 @@ void __cdecl he_ApplyZigeunerFavorPenalty(ENTITY_RECORD* a, ENTITY_RECORD* b)
 	} else {
 		d = -20 - gm_RandomMod(0x10);
 		for (i = 0; i < 768; i++) {
-			if (i != b->entity_index && (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 6 || ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 7 || ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 5)) {
-				cm_RequestCopyEntityData(b->entity_id, ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id, d, 1);
+			if (i != b->entity_index && (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_type == 6 || ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_type == 7 ||
+				((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_type == 5)) {
+				cm_RequestCopyEntityData(b->entity_id, ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_id, d, 1);
 			}
 		}
 	}

@@ -34,10 +34,10 @@ extern char s_6acf98[];
 extern char s_6acf90[];
 extern int d2_CurrentWindowId;
 extern char* g_14ac654;
-extern char* g_1015ea0;
-extern char* g_77255c;
-extern int g_100f1dc;
-extern int g_14ce8e0;
+extern char* d2_Controls;
+extern char* d2_CurrentWindow;
+extern int d2_DialogButtonAction;
+extern int io_RightButtonReleased;
 extern int g_14ce8d8;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int d2_CurrentElementId;
@@ -98,24 +98,24 @@ int __cdecl d2_OpenFileSelector(int wait, int mode, int title, int a4, int a5, c
 	d2_SetForm(dlg, 1);
 	for (i = 0; i < count; i++) {
 		recs[i].id = d2_ShowTxt(0, (short) (i * 24), recs[i].name, d2_CurrentWindowId);
-		((D2_CONTROL_TL*) g_1015ea0)[recs[i].id].value_05c = 1;
-		((D2_CONTROL_TL*) g_1015ea0)[recs[i].id].value_06c = 1;
-		((D2_CONTROL_TL*) g_1015ea0)[recs[i].id].width = ((Win*)g_77255c)->fc;
-		((D2_CONTROL_TL*) g_1015ea0)[recs[i].id].flags_1d0 = 3;
+		((D2_CONTROL_TL*) d2_Controls)[recs[i].id].value_05c = 1;
+		((D2_CONTROL_TL*) d2_Controls)[recs[i].id].value_06c = 1;
+		((D2_CONTROL_TL*) d2_Controls)[recs[i].id].width = ((Win*)d2_CurrentWindow)->fc;
+		((D2_CONTROL_TL*) d2_Controls)[recs[i].id].flags_1d0 = 3;
 	}
 	_itoa(count, buf, 10);
 	d2_SetLabelText(field, buf);
 	d2_SetElementFont(field, 0x54);
 	while (main_RunFrameLoop((void*) d2_OpenFileSelector, wait) != 0) {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 		if (g_14ce8d8 != 0) {
 			for (i = 0; i < count; i++) {
 				if (d2_CurrentElementId == recs[i].id) {
 					if (flag) {
 						sprintf(out, s_6acf90, a4, recs[i].name, a5);
-						g_774654 = 1;
+						d2_DialogCloseRequested = 1;
 						result = 1;
 					} else {
 						d2_SetElementValue(list, recs[i].name);
@@ -124,11 +124,11 @@ int __cdecl d2_OpenFileSelector(int wait, int mode, int title, int a4, int a5, c
 				}
 			}
 		}
-		if (g_100f1dc != -1 && d2_CurrentElementId == ok) {
+		if (d2_DialogButtonAction != -1 && d2_CurrentElementId == ok) {
 			if (!flag) {
 				sprintf(out, s_6acf90, a4, d2_GetControlValue(list), a5);
 			}
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 			result = 1;
 		}
 	}

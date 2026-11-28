@@ -1,8 +1,8 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int main_LoopFlags;
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern signed char g_6a3440;
+extern signed char gm_SelectedMissionIndex;
 
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
@@ -73,31 +73,31 @@ int __cdecl d2_RunChooseHistoryLevelDialog(int n)
 	if (main_RunFrameLoop(d2_RunChooseMissionDialog, main_LoopFlags) != 0) {
 		do {
 			d2_UpdateRadioGroup(list);
-			if (g_100f1dc == 2) {
+			if (d2_DialogButtonAction == 2) {
 				if (d2_CurrentElementId == b6) {
-					g_6a3440 = -1;
+					gm_SelectedMissionIndex = -1;
 					r = 0xff;
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				} else if (d2_CurrentElementId == b0) {
-					g_6a3440 = -1;
+					gm_SelectedMissionIndex = -1;
 					r = 0;
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				} else {
 					if (d2_CurrentElementId == b1) {
-						g_6a3440 = 0;
+						gm_SelectedMissionIndex = 0;
 					} else if (d2_CurrentElementId == b2) {
-						g_6a3440 = 1;
+						gm_SelectedMissionIndex = 1;
 					} else if (d2_CurrentElementId == b3) {
-						g_6a3440 = 2;
+						gm_SelectedMissionIndex = 2;
 					} else if (d2_CurrentElementId == b4) {
-						g_6a3440 = 3;
+						gm_SelectedMissionIndex = 3;
 					} else if (d2_CurrentElementId == b5) {
-						g_6a3440 = 4;
+						gm_SelectedMissionIndex = 4;
 					}
 					d2_SelectRadioGroup(list, 0);
-					r = d2_ChooseMission(g_6a3440);
+					r = d2_ChooseMission(gm_SelectedMissionIndex);
 					if (r != 0 && r != 0xff) {
-						g_774654 = 1;
+						d2_DialogCloseRequested = 1;
 					}
 				}
 			}

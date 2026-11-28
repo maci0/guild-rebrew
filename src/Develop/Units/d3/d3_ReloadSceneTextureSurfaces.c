@@ -13,8 +13,8 @@ typedef struct D3_TEX_RELOAD_REC {
 // SIZE 0x70
 
 
-extern char* g_104049c;
-extern unsigned int g_10404a0;
+extern char* d3_TextureBank;
+extern unsigned int d3_TextureBankCount;
 extern int g_6b8af0;
 
 void __cdecl d3_LoadTextureSurfaceTl(D3_TEX_RELOAD_REC* r);
@@ -29,15 +29,15 @@ void __cdecl d3_ReloadSceneTextureSurfaces(SCENE_PROGRESS cb)
 	total = 0;
 	if (cb != 0) {
 		total = 0;
-		for (i = 0; i < g_10404a0; i++) {
-			if (((D3_TEX_RELOAD_REC*)g_104049c)[i].level > 0 && (((D3_TEX_RELOAD_REC*)g_104049c)[i].flags & 2) == 0) {
+		for (i = 0; i < d3_TextureBankCount; i++) {
+			if (((D3_TEX_RELOAD_REC*)d3_TextureBank)[i].level > 0 && (((D3_TEX_RELOAD_REC*)d3_TextureBank)[i].flags & 2) == 0) {
 				total++;
 			}
 		}
 	}
 	done = 0;
-	r = ((D3_TEX_RELOAD_REC*)g_104049c);
-	for (i = 0; i < g_10404a0; i++, r++) {
+	r = ((D3_TEX_RELOAD_REC*)d3_TextureBank);
+	for (i = 0; i < d3_TextureBankCount; i++, r++) {
 		if (r->level > 0 && (r->flags & 2) == 0) {
 			d3_LoadTextureSurfaceTl(r);
 			if (cb != 0) {

@@ -28,17 +28,17 @@ typedef struct {
 
 extern int main_LoopFlags;
 extern Peer g_7f3ac0[8];
-extern unsigned char g_7747b0;
+extern unsigned char gm_ClientModeFlags;
 extern char* g_14ac60c;
-extern unsigned char g_6a375c;
+extern unsigned char gm_PlayerCount;
 
 extern char g_7e2480[];
 extern int cm_SaveRequestSlot;
-extern char g_773de8;
+extern char ls_SaveSlotIndex;
 typedef struct VFS_DIR VFS_DIR;
-extern VFS_DIR* g_6b7fdc;
+extern VFS_DIR* vfs_RootDir;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_6b5c60[];
+extern char str_empty[];
 
 void __cdecl cm_SaveGameAndWait(int, char*);
 void __cdecl ls_LoadSavePreview(char*);
@@ -67,35 +67,35 @@ void __cdecl ls_SaveNetworkGame(char* name, char* title)
 	for (i = 0; i < 8; i++) {
 		g_7f3ac0[i].id = -1;
 	}
-	if (g_7747b0 & 4) {
+	if (gm_ClientModeFlags & 4) {
 		cm_SaveGameAndWait(main_LoopFlags, g_14ac60c);
-		g_6a375c = 0;
+		gm_PlayerCount = 0;
 		for (i = 0; i < 768; i++) {
-			if (((ENTITY_RECORD*)g_7f4ca0)[i].entity_index != 0xffff && (((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 6 || ((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 7)) {
-				g_6a375c++;
+			if (((ENTITY_RECORD*)gm_EntitySlotTable)[i].entity_index != 0xffff && (((ENTITY_RECORD*)gm_EntitySlotTable)[i].entity_state == 6 || ((ENTITY_RECORD*)gm_EntitySlotTable)[i].entity_state == 7)) {
+				gm_PlayerCount++;
 			}
 		}
 		strcpy(g_7e2480, title);
-		g_773de8 = (*(char *)&cm_SaveRequestSlot);
+		ls_SaveSlotIndex = (*(char *)&cm_SaveRequestSlot);
 		ls_LoadSavePreview("Gamedata/cities/standard.scr");
 		sprintf(path, "Gamedata\\network\\%s.SAV", name);
-		f = vfs_Tfopen(path, "wb", g_6b7fdc);
+		f = vfs_Tfopen(path, "wb", vfs_RootDir);
 		if (f != 0) {
 			ls_WriteSaveHeader(f, 5);
 			CloseVfsStream(f);
 		}
-		f = vfs_Tfopen(path, "rb", g_6b7fdc);
+		f = vfs_Tfopen(path, "rb", vfs_RootDir);
 		if (f != 0) {
 			ls_LoadSavegameHeader(f, hdr);
 			crc = vfs_CalcCrc32((unsigned char*) hdr, 0x78);
 			CloseVfsStream(f);
 		}
 		memset(&m, 0, sizeof(m));
-		m.handle = ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id;
+		m.handle = ((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id;
 		m.crc = crc;
 		cm_RequestSysMessage(0x10, &m);
 		n = 0;
-		while (n < g_6a375c) {
+		while (n < gm_PlayerCount) {
 			n = 0;
 			for (i = 0; i < 8; i++) {
 				if (g_7f3ac0[i].id != -1) {
@@ -109,6 +109,6 @@ void __cdecl ls_SaveNetworkGame(char* name, char* title)
 		ls_SaveGame(path, title, 6);
 		sprintf(path, "Gamedata\\network\\%s.SAV", name);
 		ls_SaveGame(path, title, 5);
-		d2_ShowStatusBanner(g_6b5c60);
+		d2_ShowStatusBanner(str_empty);
 	}
 }

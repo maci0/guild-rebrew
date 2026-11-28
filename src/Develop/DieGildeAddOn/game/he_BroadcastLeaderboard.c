@@ -5,9 +5,9 @@
 #include <string.h>
 #include "Develop/client_types.h"
 
-extern unsigned char g_773d75;
-extern char g_868080[];
-extern char g_7f4ca0[];
+extern unsigned char gm_ActiveTownIndex;
+extern char gm_CityDisplayNames[];
+extern char gm_EntitySlotTable[];
 extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl gm_AddTime(char*, int, int, int);
@@ -53,7 +53,7 @@ void __cdecl he_BroadcastLeaderboard(char* o)
 			fcn_0064d530(h + 6 + i * 0x18, text, 0x18);
 			h[6 + i * 0x18 + 0x17] = 0;
 		}
-		strcpy(h + 0x7e, g_868080 + g_773d75 * 0x2f4);
+		strcpy(h + 0x7e, gm_CityDisplayNames + gm_ActiveTownIndex * 0x2f4);
 		strcpy(h + 0x9e, "Verm\xf6gen");
 		strcpy(h + 0xb6, "Gewinnpunkte");
 		h[0xce] = (char) n;
@@ -62,9 +62,9 @@ void __cdecl he_BroadcastLeaderboard(char* o)
 			*(unsigned short*) (g + 0) = 1;
 			*(unsigned short*) (g + 2) = 2;
 			*(unsigned short*) (g + 4) = 0xb9;
-			e = ((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) rows[i]]);
+			e = ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) rows[i]]);
 			*(int*) (g + 6) = *(int*) (e + 4);
-			*(int*) (g + 0xa) = gm_AmountToUnits(*(int*) (rows[i] + 4), g_773d75);
+			*(int*) (g + 0xa) = gm_AmountToUnits(*(int*) (rows[i] + 4), gm_ActiveTownIndex);
 			*(int*) (g + 0xe) = *(int*) (rows[i] + 0x20);
 			g[0x12] = (char) n;
 			if (e[2] == 6 || e[2] == 7)

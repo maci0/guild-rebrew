@@ -72,7 +72,7 @@ typedef struct {
 
 extern void* g_6b5de0;
 extern VBuf *g_6b5cb4;
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 
 void __cdecl d3_UpdateRain(Lines *, float);
 void __cdecl d3_BeginScenePass(int, int, int);
@@ -99,27 +99,27 @@ void __cdecl d3_RenderRainLines(Lines *l)
 		return;
 	}
 	if (l->t0 != l->t1) {
-		if ((unsigned int) g_6b7fac >= l->t1) {
+		if ((unsigned int) gm_GameTicks >= l->t1) {
 			l->count = l->count1;
 		} else {
 			span = l->t1 - l->t0;
-			rem = l->t1 - (unsigned int) g_6b7fac;
+			rem = l->t1 - (unsigned int) gm_GameTicks;
 			l->count = (span - rem) * l->count1 / span + l->count0 * rem / span;
 		}
 	}
 	if (l->u0 != l->u1) {
-		if ((unsigned int) g_6b7fac >= l->u1) {
+		if ((unsigned int) gm_GameTicks >= l->u1) {
 			l->a = l->a1;
 			l->b = l->b1;
 		} else {
 			span = l->u1 - l->u0;
-			rem = l->u1 - (unsigned int) g_6b7fac;
+			rem = l->u1 - (unsigned int) gm_GameTicks;
 			l->a = rem * l->a0 / span + (span - rem) * l->a1 / span;
 			l->b = rem * l->b0 / span + (span - rem) * l->b1 / span;
 		}
 	}
-	dt = ((unsigned int) g_6b7fac - l->last) * 0.1f;
-	l->last = (unsigned int) g_6b7fac;
+	dt = ((unsigned int) gm_GameTicks - l->last) * 0.1f;
+	l->last = (unsigned int) gm_GameTicks;
 	if (l->count == 0) {
 		return;
 	}

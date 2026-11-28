@@ -1,14 +1,14 @@
-extern int g_675170;
+extern int nt_BroadcastSocket;
 
-extern int (__stdcall *g_66234c)(int);
+extern int (__stdcall *imp_closesocket)(int);
 
 void __cdecl nt_CloseBroadcastSocket(void)
 {
 	int h;
 
-	h = g_675170;
+	h = nt_BroadcastSocket;
 	if (h != -1) {
-		g_66234c(h);
-		g_675170 = -1;
+		imp_closesocket(h);
+		nt_BroadcastSocket = -1;
 	}
 }

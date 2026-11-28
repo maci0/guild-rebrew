@@ -1,4 +1,4 @@
-extern int g_6b86c0;
+extern int d3_BinaryChunkDepth;
 
 int __cdecl vfs_ReadStreamToken(void* h);
 int __cdecl FindTableEntryIndex(int a1, int* p, int kind);
@@ -37,7 +37,7 @@ void __cdecl d3_DispatchBinaryChunks(void* stream, int* table, int kind, void* e
 					int r2;
 
 					r2 = rec[2];
-					g_6b86c0++;
+					d3_BinaryChunkDepth++;
 					if (r2 == 0) {
 						d3_DispatchBinaryChunks(stream, table, kind, extra);
 					} else {
@@ -48,5 +48,5 @@ void __cdecl d3_DispatchBinaryChunks(void* stream, int* table, int kind, void* e
 			token = vfs_ReadStreamToken(stream);
 		} while (token != 0x27);
 	}
-	g_6b86c0--;
+	d3_BinaryChunkDepth--;
 }

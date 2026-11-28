@@ -1,5 +1,5 @@
-extern char *g_772500;
-extern unsigned short g_774970;
+extern char *d2_FileObjTable;
+extern unsigned short gm_LocalPlayerSlot;
 /* Council session controller, native frame layout by slot. */
 #include <stddef.h>
 
@@ -197,7 +197,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
 
     cm_WaitNetworkSyncBanner(0x6b5c60);
     if (amt_GetOfficeGroupHumanFlags(s20) == 0) {
-        unsigned short v = g_774970;
+        unsigned short v = gm_LocalPlayerSlot;
         if (*(int *)((char *)a0 + 0xc) == *(int *)(0x7f4ca4 + (unsigned int)v * 0x21c)) {
             amt_ResolveOfficeApplications(s20, s28, (char *)&mid[0x38]);
         }
@@ -335,7 +335,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                 d2_ClearWindowChildren(*(int *)0x772514, 1);
                 if (k > 0) {
                     int *lane;
-                    s08 = (0x320 - *(short *)(g_772500 + 0x1ebd8) * k) / (k + 1);
+                    s08 = (0x320 - *(short *)(d2_FileObjTable + 0x1ebd8) * k) / (k + 1);
                     i = 0;
                     n = 0;
                     acc = s08;
@@ -346,7 +346,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                             lane[5] = 0;
                             lane[12] = 0;
                             d2_BuildPersonStatusDesc((char *)lane);
-                            d2_DrawPersonCard(*(short *)(g_772500 + 0x1ebd8) * i + acc, 0,
+                            d2_DrawPersonCard(*(short *)(d2_FileObjTable + 0x1ebd8) * i + acc, 0,
                                          *(int *)0x772514, 0x54, lane, 0);
                             acc += s08;
                             i += 1;
@@ -426,7 +426,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                                   *(unsigned short *)s10);
                     cut_WaitSeconds(0xfa0);
                     if (a0[3] == *(int *)(0x7f4ca4 +
-                                          (unsigned int)g_774970 * 0x21c)) {
+                                          (unsigned int)gm_LocalPlayerSlot * 0x21c)) {
                         int s70;
                         jc = 0x9b0e30;
                         n = s0C;
@@ -454,7 +454,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                                   *(unsigned short *)s10, *(unsigned short *)s10);
                     cut_WaitSeconds(0xfa0);
                     if (a0[3] == *(int *)(0x7f4ca4 +
-                                          (unsigned int)g_774970 * 0x21c)) {
+                                          (unsigned int)gm_LocalPlayerSlot * 0x21c)) {
                         if (s0C > 0) {
                             n = s0C;
                             jc = 0x9b0e30;
@@ -568,7 +568,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                         lane[11] = 0;
                         lane[12] = 0;
                         d2_BuildPersonStatusDesc((char *)lane);
-                        d2_DrawPersonCard((0xa0 - *(short *)(g_772500 + 0x1ebd8)) / 2,
+                        d2_DrawPersonCard((0xa0 - *(short *)(d2_FileObjTable + 0x1ebd8)) / 2,
                                      0, *(int *)0x772514, 0x54,
                                      lane, 1);
                         blkA.s98[i] = *(int *)(s80 + 4);
@@ -607,7 +607,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                     fcn_004727a0(s38, 0);
                     d2_ClearWindowChildren(*(int *)0x772514, 1);
                     if (rs20 > 0) {
-                        s08 = (0x320 - *(short *)(g_772500 + 0x1ebd8) * rs20) / (rs20 + 1);
+                        s08 = (0x320 - *(short *)(d2_FileObjTable + 0x1ebd8) * rs20) / (rs20 + 1);
                         if (s0C > 0) {
                             i = 0;
                             acc = s08;
@@ -617,7 +617,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                                     *(int *)((char *)&mid + 0x3bc + i * 0x38) = 0;
                                     *(int *)((char *)&mid + 0x3d8 + i * 0x38) = 0;
                                     d2_BuildPersonStatusDesc((char *)&mid + 0x3a8 + i * 0x38);
-                                    d2_DrawPersonCard(*(short *)(g_772500 + 0x1ebd8) * i + acc,
+                                    d2_DrawPersonCard(*(short *)(d2_FileObjTable + 0x1ebd8) * i + acc,
                                                  0, *(int *)0x772514, 0x54,
                                                  (int *)((char *)&mid + 0x3a8 + i * 0x38), 0);
                                     acc += s08;
@@ -636,7 +636,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                     io_AppendText((char *)0x12e0, *(unsigned short *)blkA.sel[0],
                                   *(unsigned char *)s00 + 0x253);
                     cut_WaitSeconds(0xfa0);
-                    if (a0[3] == *(int *)(0x7f4ca4 + (unsigned int)g_774970 * 0x21c)) {
+                    if (a0[3] == *(int *)(0x7f4ca4 + (unsigned int)gm_LocalPlayerSlot * 0x21c)) {
                         s5C = amt_SendOfficeCommand(*(unsigned char *)(s00 - 8), 0, (unsigned char *)blkA.sel[0], numSel, 0xff);
                         if (cm_GetCommandStatus(s5C) == 0) {
                             do {
@@ -659,7 +659,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                     io_AppendText((char *)0x12e2, *(unsigned short *)s58);
                     cut_WaitSeconds(0xfa0);
                     if (a0[3] == *(int *)(0x7f4ca4 +
-                                          (unsigned int)g_774970 * 0x21c)) {
+                                          (unsigned int)gm_LocalPlayerSlot * 0x21c)) {
                         s70 = amt_SendOfficeCommand(*(unsigned char *)(s00 - 8), 0, (unsigned char *)s58, 1, 0xff);
                         if (cm_GetCommandStatus(s70) == 0) {
                             do {
@@ -743,7 +743,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                                           *(unsigned char *)s00 + 0x253);
                             cut_WaitSeconds(0xfa0);
                             if (a0[3] == *(int *)(0x7f4ca4 +
-                                                  (unsigned int)g_774970 * 0x21c)) {
+                                                  (unsigned int)gm_LocalPlayerSlot * 0x21c)) {
                                 s78 = amt_SendOfficeCommand(*(unsigned char *)(s00 - 8), 0,
                                                    (unsigned char *)blkA.sel[s6C], 1, 0xff);
                                 if (cm_GetCommandStatus(s78) == 0) {
@@ -778,7 +778,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                                           *(unsigned short *)blkA.sel[s6C]);
                             cut_WaitSeconds(0xfa0);
                             if (a0[3] == *(int *)(0x7f4ca4 +
-                                                  (unsigned int)g_774970 * 0x21c)) {
+                                                  (unsigned int)gm_LocalPlayerSlot * 0x21c)) {
                                 s78 = amt_SendOfficeCommand(*(unsigned char *)(s00 - 8), 0,
                                                    (unsigned char *)blkA.sel[s6C], 1, 0xff);
                                 if (cm_GetCommandStatus(s78) == 0) {
@@ -814,7 +814,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
     s30 += 1;
     } while (s30 < 6);
     /* native 0x4dc199..0x4dc221: epilogue */
-    if (a0[3] == *(int *)(0x7f4ca4 + (unsigned int)g_774970 * 0x21c))
+    if (a0[3] == *(int *)(0x7f4ca4 + (unsigned int)gm_LocalPlayerSlot * 0x21c))
         amt_SyncAllOfficeSlots();
     cut_UnloadSampleBank(s34);
     cut_UnloadSampleBank(s38);

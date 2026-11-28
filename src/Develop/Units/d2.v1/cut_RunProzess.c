@@ -1,10 +1,10 @@
-extern int g_772f3c;
+extern int cut_SkipMode;
 extern int g_68bfc0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern float g_662b28;
 #include "Develop/DieGildeAddOn/game/client_straftat.h"
-extern char g_9b0eb4[];
+extern char cut_TrialVerdicts[];
 extern char g_9b1210[];
 extern char g_9b156c[];
 
@@ -196,7 +196,7 @@ int __cdecl cut_RunProzess(int a0)
 			return;
 		}
 	}
-	if (g_772f3c == 0) {
+	if (cut_SkipMode == 0) {
 		msg.hnd[7] = msx_StartAmbientTrack("Athmos\\Athmo_sitzung.mp3", 0x40);
 	}
 	if (cut_RandMod(2) != 0) {
@@ -253,7 +253,7 @@ int __cdecl cut_RunProzess(int a0)
 		}
 		cnt = 0;
 		for (i = 0; i < n; i++) {
-			sel[i] = g_9a3800[list[i]].id;
+			sel[i] = cm_CrimeRecords[list[i]].id;
 			cnt++;
 		}
 		for (; cnt < 0x20; cnt++) {
@@ -264,13 +264,13 @@ int __cdecl cut_RunProzess(int a0)
 				if (flags[i] == -1) {
 					continue;
 				}
-				memcpy(rec.c, &g_9a3800[list[i]], 45);
+				memcpy(rec.c, &cm_CrimeRecords[list[i]], 45);
 				flags[i] = 1;
 				for (j = i + 1; j < n; j++) {
 					if (flags[j] == -1) {
 						continue;
 					}
-					memcpy(tbl.c, &g_9a3800[list[j]], 45);
+					memcpy(tbl.c, &cm_CrimeRecords[list[j]], 45);
 					if (rec.c[0x1c] == tbl.c[0x1c]) {
 						flags[j] = -1;
 						flags[i] += 1;
@@ -280,7 +280,7 @@ int __cdecl cut_RunProzess(int a0)
 		}
 		fsum = 0.0f;
 		for (j = 0; j < n; j++) {
-			memcpy(rec.c, &g_9a3800[list[j]], 45);
+			memcpy(rec.c, &cm_CrimeRecords[list[j]], 45);
 			gm_GetLawEntry(rec.c[0x1c] & 0xff, tbl.i);
 			if (flags[j] != -1) {
 				fsum += (float) tbl.i[3] * f;
@@ -324,7 +324,7 @@ int __cdecl cut_RunProzess(int a0)
 
 		cut_RunTurnRound((unsigned int*) a0, (int) &msg);
 		id = *(int*) (a0 + 0xc);
-		idx = g_774970;
+		idx = gm_LocalPlayerSlot;
 		if (id == *(int*) (0x7f4ca4 + idx * 540)) {
 			gs_ClearStraftatenByIds(*(int*) (p38 + 4), cnt, sel);
 		}
@@ -346,7 +346,7 @@ int __cdecl cut_RunProzess(int a0)
 				idx++;
 			} while (idx < cnt2);
 		}
-		v1 = *(int*) (g_9b0eb4 + idx * 0x35c);
+		v1 = *(int*) (cut_TrialVerdicts + idx * 0x35c);
 		v2 = *(int*) (0x9b0eb8 + idx * 0x35c);
 		msg.f0c = *(float*) &v2;
 		d2_SetFormVisibilityIfAllowed(g_68bfc0, 1);
@@ -405,7 +405,7 @@ int __cdecl cut_RunProzess(int a0)
 				}
 			}
 		}
-		st = *(int*) (g_9b0eb4 + i * 0x35c);
+		st = *(int*) (cut_TrialVerdicts + i * 0x35c);
 		d2_SetFormVisibilityIfAllowed(g_68bfc0, 1);
 		d2_SetForm(g_68bfc0, 0);
 		io_AppendText(0x6811b0);
@@ -448,7 +448,7 @@ int __cdecl cut_RunProzess(int a0)
 			tbl.i[5] = 0x1506;
 			tbl.i[6] = 0x150b;
 
-			eIdx = g_774970;
+			eIdx = gm_LocalPlayerSlot;
 			if (*(int*) (a0 + 0xc) == *(int*) (0x7f4ca4 + eIdx * 540)) {
 				div3 = msg.pad[1] / 3;
 				cm_RequestTransferCurrencyNoKill(*(int*) (p3c + 4), *(int*) (p34 + 4),
@@ -483,7 +483,7 @@ int __cdecl cut_RunProzess(int a0)
 			}
 			cut_WaitForScript(h);
 			h = evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-klaeger.esc", (int) "1");
-			st = *(int*) (g_9b0eb4 + i * 0x35c) & 0xf;
+			st = *(int*) (cut_TrialVerdicts + i * 0x35c) & 0xf;
 			if (st < 6) {
 				if (st > 0) {
 					msg.pad[3] = st;
@@ -526,7 +526,7 @@ int __cdecl cut_RunProzess(int a0)
 					}
 				}
 			}
-			msg.pad[5] = *(int*) (g_9b0eb4 + i * 0x35c);
+			msg.pad[5] = *(int*) (cut_TrialVerdicts + i * 0x35c);
 			end = str + strlen(str);
 			nam = (char*) gm_SelectEntityHeadSet(*(unsigned short*) pent);
 			if (nam != 0) {
@@ -611,7 +611,7 @@ int __cdecl cut_RunProzess(int a0)
 		if (h != 0) {
 			cut_WaitForScript(h);
 		}
-		if (g_772f3c == 0 && msg.hnd[6] != -1) {
+		if (cut_SkipMode == 0 && msg.hnd[6] != -1) {
 			d3_SelectSceneContext(msg.hnd[6], 0);
 		}
 	}
@@ -667,8 +667,8 @@ int __cdecl cut_RunProzess(int a0)
 	io_AppendText(0x6811b0);
 	io_AppendText(0x1528, *(unsigned short*) p3c);
 	cut_WaitTicks(2);
-	acc = *(int*) (g_9b0eb4 + i * 0x35c);
-	votes = cut_RandMod(3) + *(int*) (g_9b0eb4 + i * 0x35c) * 3;
+	acc = *(int*) (cut_TrialVerdicts + i * 0x35c);
+	votes = cut_RandMod(3) + *(int*) (cut_TrialVerdicts + i * 0x35c) * 3;
 	d3snd_QueueSoundIfAllowed(*(unsigned short*) p3c, hStrafe, "_PROZESS_6_ABSTIMMUNG_ERGEBNISSE", votes, 0x64);
 	io_AppendText(acc + 0x152c);
 	cut_WaitTicks(2);
@@ -729,7 +729,7 @@ int __cdecl cut_RunProzess(int a0)
 				i++;
 			} while (i < cnt);
 		}
-		st = *(int*) (g_9b0eb4 + i * 0x35c);
+		st = *(int*) (cut_TrialVerdicts + i * 0x35c);
 		if ((unsigned int) st >= 4 && *(char*) (p34 + 2) == 6 && *(char*) (p38 + 0x166) != 0) {
 			gm_IncrementMissionActionCount((int) p34, 0x13);
 		}
@@ -760,12 +760,12 @@ int __cdecl cut_RunProzess(int a0)
 		d3snd_QueueSoundIfAllowed(*(unsigned short*) p3c, h0, "_PROZESS_7_STRAFEN", st, 0x64);
 		d3snd_QueueSoundIfAllowed(*(unsigned short*) p3c, h14, "_PROZESS_8",
 			((*(char*) (p38 + 9) == 1) & 1), 0xc8);
-		eIdx = g_774970;
+		eIdx = gm_LocalPlayerSlot;
 		if (*(int*) (a0 + 0xc) == *(int*) (0x7f4ca4 + eIdx * 540)) {
 			cut_ExecuteProzessPunishment((int) p38, st, (int) p3c, (int) p40, (int) p44);
 		}
 		io_AppendText(0x1531);
-		eIdx = g_774970;
+		eIdx = gm_LocalPlayerSlot;
 		if (*(int*) (a0 + 0xc) == *(int*) (0x7f4ca4 + eIdx * 540)) {
 			div3 = msg.pad[0] / 3;
 			cm_RequestTransferCurrencyNoKill(*(int*) (p3c + 4), *(int*) (p38 + 4),
@@ -795,7 +795,7 @@ int __cdecl cut_RunProzess(int a0)
 		io_AppendText(0x6811b0);
 		io_AppendText(0x1557, msg.pad[0], *(unsigned short*) p34);
 		cut_WaitTicks(4);
-		eIdx = g_774970;
+		eIdx = gm_LocalPlayerSlot;
 		if (*(int*) (a0 + 0xc) == *(int*) (0x7f4ca4 + eIdx * 540)) {
 			div3 = msg.pad[0] / 3;
 			cm_RequestTransferCurrencyNoKill(*(int*) (p3c + 4), *(int*) (p34 + 4),
@@ -807,7 +807,7 @@ int __cdecl cut_RunProzess(int a0)
 		}
 	}
 	/* 0x4defad */
-	eIdx = g_774970;
+	eIdx = gm_LocalPlayerSlot;
 	if (*(int*) (a0 + 0xc) == *(int*) (0x7f4ca4 + eIdx * 540)) {
 		if (msg.pad[6] != 0 && *(float*) &msg.pad[8] < 0.0f) {
 			gm_ApplyEntityHealthDelta(*(unsigned short*) p38, (int) *(float*) &msg.pad[8]);

@@ -70,7 +70,7 @@ void __cdecl d3_EvalAnimSlotPosition(Cam* cam, PathState* ps, int segmentIndex, 
             return;
         }
         if (currentSegment < segmentIndex) {
-            t = g_6628a0 - (float) currentOffset / (float) currentLength;
+            t = flt_1_0 - (float) currentOffset / (float) currentLength;
             d[0] = segs[currentSegment + 1].sx - cur->sx;
             d[1] = segs[currentSegment + 1].sy - cur->sy;
             d[2] = segs[currentSegment + 1].sz - cur->sz;

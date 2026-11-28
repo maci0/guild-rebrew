@@ -38,7 +38,7 @@ typedef struct GOLDTL_EntType5c30 {
 
 
 extern unsigned char* lpGebaeudePROT;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern pos14_7f4c00 gm_GameTime;
@@ -83,15 +83,15 @@ void __cdecl d2_RunBuildingUpgradeDialog(unsigned char* buildingEntry)
 		return;
 	}
 	kind = gm_GetBuildingTypeCategory(*(unsigned char*) buildingEntry);
-	if (g_774800 == 0) {
+	if (gm_AllEntitiesControllable == 0) {
 		if (kind == 1 || kind == 4 || kind == 8) {
-			if (gm_CanBuildBuildingType(*(unsigned char*) buildingEntry + 1, g_774970) != 1) {
+			if (gm_CanBuildBuildingType(*(unsigned char*) buildingEntry + 1, gm_LocalPlayerSlot) != 1) {
 				io_FormatTextBuffer(buf, 0x17d6);
 				d2_ShowModalMessageBox(buf, 0);
 				return;
 			}
 		} else {
-			if (gm_CanBuildBuildingType(*(unsigned char*) buildingEntry + 1, g_774970) != 1) {
+			if (gm_CanBuildBuildingType(*(unsigned char*) buildingEntry + 1, gm_LocalPlayerSlot) != 1) {
 				io_FormatTextBuffer(buf, 0x17d9);
 				d2_ShowModalMessageBox(buf, 0);
 				return;
@@ -120,8 +120,8 @@ void __cdecl d2_RunBuildingUpgradeDialog(unsigned char* buildingEntry)
 		if (d2_ShowModalMessageBox(buf, 0x11) == 0) {
 			return;
 		}
-		if (gm_CheckEntityStock(&((ENTITY_RECORD*) g_7f4ca0)[g_774970], quotedCost,
-		                 (char) g_773d75) == 0) {
+		if (gm_CheckEntityStock(&((ENTITY_RECORD*) gm_EntitySlotTable)[gm_LocalPlayerSlot], quotedCost,
+		                 (char) gm_ActiveTownIndex) == 0) {
 			return;
 		}
 		m = gm_SearchTable67(id);
@@ -133,7 +133,7 @@ void __cdecl d2_RunBuildingUpgradeDialog(unsigned char* buildingEntry)
 		}
 		memset(&msg, 0, sizeof msg);
 		msg.f4 = 0x1e;
-		msg.f8 = ((ENTITY_RECORD*) g_7f4ca0)[g_774970].entity_id;
+		msg.f8 = ((ENTITY_RECORD*) gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id;
 		msg.fc = *(int*) (buildingEntry + 1);
 		msg.f36 = 1;
 		msg.f28 = gm_GameTime.a;
@@ -142,8 +142,8 @@ void __cdecl d2_RunBuildingUpgradeDialog(unsigned char* buildingEntry)
 		msg.f34 = gm_GameTime.d;
 		msg.f58 = msg.fc;
 		cm_SendLogAction(g_67e968);
-		cm_RequestMoveCredits(-1, ((ENTITY_RECORD*) g_7f4ca0)[g_774970].entity_id,
-		             (char) g_773d75, quotedCost);
+		cm_RequestMoveCredits(-1, ((ENTITY_RECORD*) gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id,
+		             (char) gm_ActiveTownIndex, quotedCost);
 		cm_SendCopyEntityData((char*) &msg);
 		cm_SendTraceEnd(g_67e968);
 		io_FormatTextBuffer(text, 0x17da, *(unsigned char*) buildingEntry * 14 + 0x49c);
@@ -165,7 +165,7 @@ void __cdecl d2_RunBuildingUpgradeDialog(unsigned char* buildingEntry)
 			return;
 		}
 	}
-	if (d2_CheckFundsAndNotify(m, *(int*) (m + 0x14), quotedCost, (char) g_773d75) == 0) {
+	if (d2_CheckFundsAndNotify(m, *(int*) (m + 0x14), quotedCost, (char) gm_ActiveTownIndex) == 0) {
 		return;
 	}
 	memset(&msg, 0, sizeof msg);
@@ -174,12 +174,12 @@ void __cdecl d2_RunBuildingUpgradeDialog(unsigned char* buildingEntry)
 	msg.f34 = gm_GameTime.d;
 	msg.f36 = 1;
 	msg.fc = *(int*) (buildingEntry + 1);
-	msg.f8 = ((ENTITY_RECORD*) g_7f4ca0)[g_774970].entity_id;
+	msg.f8 = ((ENTITY_RECORD*) gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id;
 	msg.f30 = gm_GameTime.c;
 	msg.f2c = gm_GameTime.b;
 	msg.f28 = gm_GameTime.a;
 	cm_SendLogAction(g_67e968);
-	cm_RequestMoveCredits(-1, *(int*) (m + 2), (char) g_773d75, quotedCost);
+	cm_RequestMoveCredits(-1, *(int*) (m + 2), (char) gm_ActiveTownIndex, quotedCost);
 	cm_SendCopyEntityData((char*) &msg);
 	cm_SendTraceEnd(g_67e968);
 }

@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_67a370;
-extern int g_6b8300;
-extern char g_10432c0[];
+extern int d3_ActiveScene;
+extern int d3_CurrentFloor;
+extern char d3_Universes[];
 int __cdecl d3_GetContextIndex(char* p);
 void __cdecl d3_SelectSceneContext(int a, int b);
 void __cdecl d3_InitUniverse(int flags);
@@ -31,7 +31,7 @@ int __cdecl d3sm_GetObjectSuperMap(char* obj)
 	supermap = *(int*) (scene + 0xb0);
 	if (supermap == 0) {
 		ctx_flags = g_6b8058;
-		if (scene != (*(char**)&g_67a370)) {
+		if (scene != (*(char**)&d3_ActiveScene)) {
 			ctx_flags = *(int*) (scene + 0x3d8);
 		}
 		if (*(scene + 0x3d5) == 0 && ctx_flags != 0) {
@@ -40,10 +40,10 @@ int __cdecl d3sm_GetObjectSuperMap(char* obj)
 			d3_InitUniverse(flags);
 		}
 		*(int*) (*(char**) (obj + 0x88) + 0xb0) =
-			d3sm_CreateMap(g_6b8300, *(int*) (*(char**) (obj + 0x88) + 0xb4), 2);
+			d3sm_CreateMap(d3_CurrentFloor, *(int*) (*(char**) (obj + 0x88) + 0xb4), 2);
 		scene = *(char**) (obj + 0x88);
 		supermap = *(int*) (scene + 0xb0);
-		if (scene != g_10432c0 && (*(char**)&g_67a370) == scene && supermap != 0) {
+		if (scene != d3_Universes && (*(char**)&d3_ActiveScene) == scene && supermap != 0) {
 			ch_BackupGrid(supermap);
 		}
 		if (flags != 0) {
@@ -68,7 +68,7 @@ int __cdecl d3sm_GetSceneSuperMap(char* scene)
 	supermap = *(int*) (scene + 0xb0);
 	if (supermap == 0) {
 		ctx_flags = g_6b8058;
-		if (scene != (*(char**)&g_67a370)) {
+		if (scene != (*(char**)&d3_ActiveScene)) {
 			ctx_flags = *(int*) (scene + 0x3d8);
 		}
 		if (*(scene + 0x3d5) == 0 && ctx_flags != 0) {
@@ -76,9 +76,9 @@ int __cdecl d3sm_GetSceneSuperMap(char* scene)
 			flags = ctx_flags & ~2;
 			d3_InitUniverse(flags);
 		}
-		supermap = d3sm_CreateMap(g_6b8300, *(int*) (scene + 0xb4), 2);
+		supermap = d3sm_CreateMap(d3_CurrentFloor, *(int*) (scene + 0xb4), 2);
 		*(int*) (scene + 0xb0) = supermap;
-		if (scene != g_10432c0 && (*(char**)&g_67a370) == scene && supermap != 0) {
+		if (scene != d3_Universes && (*(char**)&d3_ActiveScene) == scene && supermap != 0) {
 			ch_BackupGrid(supermap);
 		}
 		if (flags != 0) {

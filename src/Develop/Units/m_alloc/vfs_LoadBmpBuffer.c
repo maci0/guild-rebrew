@@ -18,7 +18,7 @@ typedef struct {
 	unsigned int biClrImportant;
 } BmpInfoHeader;
 
-extern VFS_DIR* g_6b7fdc;
+extern VFS_DIR* vfs_RootDir;
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, VFS_DIR* root);
 void __cdecl vfs_fseek(void* f, int off, int whence);
 int __cdecl vfs_ReadData(char* buf, int size, int count, void* f);
@@ -55,7 +55,7 @@ char __cdecl vfs_LoadBmpBuffer(const char* name, char* buf, char* palbuf, int fl
 
 	pixels = 0;
 	pal2 = 0;
-	f = vfs_Tfopen(name, "rb", g_6b7fdc);
+	f = vfs_Tfopen(name, "rb", vfs_RootDir);
 	if (f == 0) {
 		goto bad_ret;
 	}

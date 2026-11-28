@@ -27,9 +27,9 @@ int __cdecl d2_CreateRouteWareSlot(unsigned short* a1, int a2, int a3, int col, 
 	out[0] = -1;
 	out[1] = id;
 	out[2] = r;
-	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].flags_1d0)) = 0x22;
-	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_1dc)) = 4;
-	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_1e0)) = 0xf;
-	fcn_0064d41a(((char*)&((D2_CONTROL_TL*)g_1015ea0)[id] + 0x0cc), "%s", ((char**)g_14a79c0)[a3 * 2]);
+	*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[id].flags_1d0)) = 0x22;
+	*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[id].value_1dc)) = 4;
+	*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[id].value_1e0)) = 0xf;
+	fcn_0064d41a(((char*)&((D2_CONTROL_TL*)d2_Controls)[id] + 0x0cc), "%s", ((char**)g_14a79c0)[a3 * 2]);
 	return id;
 }

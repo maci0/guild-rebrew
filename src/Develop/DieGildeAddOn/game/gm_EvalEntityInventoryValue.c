@@ -2,7 +2,7 @@
 
 
 extern unsigned char* lpGebaeudePROT;
-extern float g_6628a8;
+extern float flt_0_0;
 extern float g_665bf4;
 extern float g_665bf0;
 extern float g_6652c8;
@@ -24,7 +24,7 @@ int __cdecl gm_EvalEntityInventoryValue(unsigned char* o, int* out)
 	int c;
 
 	rec = &((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*o];
-	v = g_6628a8;
+	v = flt_0_0;
 	if (*(unsigned short*) (o + 0x27) != 0xffff) {
 		v = (float) gm_WalkEntityChain(*(unsigned short*) (o + 0x27));
 		if (g_665bf4 < v) {
@@ -36,8 +36,8 @@ int __cdecl gm_EvalEntityInventoryValue(unsigned char* o, int* out)
 	} else {
 		v *= g_6652c8;
 	}
-	if (g_6628a8 > v) {
-		v = g_6628a8;
+	if (flt_0_0 > v) {
+		v = flt_0_0;
 	}
 	out[0] = (int) v;
 	sum = 0;

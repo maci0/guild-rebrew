@@ -1,7 +1,7 @@
 void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(int);
 void __cdecl d2_SetFormVisibility(int, int);
-extern int* g_665f08; extern char d2_TutorialActive[];
+extern int* d2_TutorialState; extern char d2_TutorialActive[];
 
 void __cdecl d2_DestroyForm(int);
 int __cdecl d2_StartTutorial();
@@ -19,10 +19,10 @@ void __cdecl d2_CloseTutorialProgress(void)
 {
 	int dialog;
 
-	dialog = *(int*) (((char*) g_665f08) + 0x68);
+	dialog = *(int*) (((char*) d2_TutorialState) + 0x68);
 	if (dialog != -1) {
 		d2_DestroyForm(dialog);
-		*(int*) (((char*) g_665f08) + 0x68) = -1;
+		*(int*) (((char*) d2_TutorialState) + 0x68) = -1;
 	}
 }
 

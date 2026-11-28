@@ -5,11 +5,11 @@ typedef struct {
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_68bfc0;
-extern char* g_9afde4;
-extern char g_772f5a;
-extern char g_772f5b;
-extern char g_772f5c;
-extern char g_772f5d;
+extern char* cut_DuelFighterB;
+extern char cut_DuelAccuracyBoostA;
+extern char cut_DuelAccuracyBoostB;
+extern char cut_DuelDamageReductionA;
+extern char cut_DuelDamageReductionB;
 extern DuelActionAnim g_68cc34;
 
 unsigned char* __cdecl gm_FindPlayerById(int);
@@ -61,10 +61,10 @@ void __cdecl cut_PlayDuelIntroMove(char* e, char* foe)
 				} else {
 					io_AppendText(0x10f7, *(unsigned short*) e);
 				}
-				if (e == g_9afde4) {
-					g_772f5c = 1;
+				if (e == cut_DuelFighterB) {
+					cut_DuelDamageReductionA = 1;
 				} else {
-					g_772f5d = 1;
+					cut_DuelDamageReductionB = 1;
 				}
 			} else {
 				if (e[2] == 6 || e[2] == 7) {
@@ -94,10 +94,10 @@ void __cdecl cut_PlayDuelIntroMove(char* e, char* foe)
 				} else {
 					io_AppendText(0x10f3, *(unsigned short*) foe);
 				}
-				if (e == g_9afde4) {
-					g_772f5a = 1;
+				if (e == cut_DuelFighterB) {
+					cut_DuelAccuracyBoostA = 1;
 				} else {
-					g_772f5b = 1;
+					cut_DuelAccuracyBoostB = 1;
 				}
 			} else {
 				d2_SetForm(g_68bfc0, 0);

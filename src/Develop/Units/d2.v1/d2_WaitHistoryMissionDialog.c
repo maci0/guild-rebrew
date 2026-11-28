@@ -1,10 +1,10 @@
-extern int g_10069a0;
+extern int gm_MissionJobs;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_7f4ca0[];
-extern int g_100f1dc;
+extern char gm_EntitySlotTable[];
+extern int d2_DialogButtonAction;
 extern int g_6a3760;
 extern int g_774954;
-extern char g_6a3440;
+extern char gm_SelectedMissionIndex;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
 int __cdecl gm_LookupMissionSpec(int);
@@ -30,8 +30,8 @@ void __cdecl d2_WaitHistoryMissionDialog(int flags)
 	int r;
 
 	r = 0;
-	tab = (unsigned short*) (0x7f4ca0 + (unsigned int) g_774970 * 0x21c);
-	tag = gm_LookupMissionSpec(g_10069a0);
+	tab = (unsigned short*) (0x7f4ca0 + (unsigned int) gm_LocalPlayerSlot * 0x21c);
+	tag = gm_LookupMissionSpec(gm_MissionJobs);
 	obj = d2_LoadForm(0, 0, (char*) 0x681130);
 	d2_CenterDialogWindows(obj);
 	d2_SetForm(obj, 0);
@@ -39,15 +39,15 @@ void __cdecl d2_WaitHistoryMissionDialog(int flags)
 	d2_RunMissionBriefingDialog(tag, v);
 	d2_SetForm(obj, 1);
 	io_AppendText(0x1b95, *tab);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	for (;;) {
 		if (g_6a3760 == -1) {
 			if (g_774954 != 0) {
 				r = 3;
 			} else {
-				r = (g_6a3440 != 5) + 1;
+				r = (gm_SelectedMissionIndex != 5) + 1;
 			}
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 		}
 		if (!main_RunFrameLoop((int) d2_WaitHistoryMissionDialog, v | 0x80)) {
 			break;
@@ -55,7 +55,7 @@ void __cdecl d2_WaitHistoryMissionDialog(int flags)
 	}
 	d2_DestroyForm(obj);
 	if (r == 1) {
-		d2_ShowMissionSpecDialog(g_10069a0, v);
+		d2_ShowMissionSpecDialog(gm_MissionJobs, v);
 		return;
 	}
 	if (r == 2) {

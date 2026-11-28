@@ -1,12 +1,12 @@
 
 
 
-extern int g_7746d8;
+extern int d2_SelectedEntityUiFlags;
 extern int g_14ad118;
 extern int g_14ad168;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_7746a0;
-extern char* g_7746cc;
+extern int sv_ClickedObjekt;
+extern char* sv_SelectedBuilding;
 
 void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -29,22 +29,22 @@ void __cdecl d2_RunWachstubeMenu(char* e)
 	regen = 0;
 	d2_ClearStatusTextSlots();
 	while (main_RunFrameLoop((void*) d2_RunWachstubeMenu, 0x67fff) != 0) {
-		if (g_7746d8 & 0x200) {
+		if (d2_SelectedEntityUiFlags & 0x200) {
 			ausruesten = RegisterStatusText("contact_AUSRUESTEN", g_14ad118, 0xd);
 			regen = RegisterStatusText("contact_REGENERATION", g_14ad168, 0x17);
 		}
-		if (g_7746d8 & 0x400) {
+		if (d2_SelectedEntityUiFlags & 0x400) {
 			lager = RegisterStatusText("contact_LAGER", g_14ad0f0, 0xe);
 			transport = RegisterStatusText("contact_TRANSPORT", g_14ad100, 0x15);
 		}
-		if (g_7746a0 != 0) {
-			if (g_7746a0 == lager) {
-				d2_ShowLagerOptions(e, *(int*) (g_7746cc + 0x14));
-			} else if (g_7746a0 == transport) {
+		if (sv_ClickedObjekt != 0) {
+			if (sv_ClickedObjekt == lager) {
+				d2_ShowLagerOptions(e, *(int*) (sv_SelectedBuilding + 0x14));
+			} else if (sv_ClickedObjekt == transport) {
 				d2_OpenTransportPanel(e);
-			} else if (g_7746a0 == ausruesten) {
+			} else if (sv_ClickedObjekt == ausruesten) {
 				d2_RunEquipmentDialog(e);
-			} else if (g_7746a0 == regen) {
+			} else if (sv_ClickedObjekt == regen) {
 				d2_RunWorkerTrainingDialog(e);
 			}
 		}

@@ -23,13 +23,13 @@ int __cdecl gm_CheckEntityStock(char*, int, char);
 int __cdecl d2_ShowModalMessageBox(char*, int);
 int __cdecl d2_RunWerbungSelectDialog(char*, int*);
 
-extern float g_6628a8;
+extern float flt_0_0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern pos14_7f4c00 gm_GameTime;
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 /* ADDRESS: GOLDTL 0x005d3120 */
 int __cdecl d2_RunCourtshipDialog(int entity, int* request)
@@ -129,19 +129,19 @@ int __cdecl d2_RunCourtshipDialog(int entity, int* request)
 		                      (char*) io_AppendText(0x1cf7, lv[5] + 0x1d11, lv[2]));
 		ids[3] = d2_GetWindowListItem((char*) h, 1, (char*) io_AppendText(0x1cf8));
 	}
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc != -1 && mode == 4) {
+		if (d2_DialogButtonAction != -1 && mode == 4) {
 			for (i = 0; i < 4; i++) {
 				if (d2_CurrentElementId == ids[i]) {
 					break;
 				}
 			}
 			if (i < 3) {
-				if (gm_CheckEntityStock(g_7f4ca0 + g_774970 * 540, lv[i], g_773d75) != 0) {
+				if (gm_CheckEntityStock(gm_EntitySlotTable + gm_LocalPlayerSlot * 540, lv[i], gm_ActiveTownIndex) != 0) {
 					n = 0;
 					p = gm_LookupEntityRecordById(id);
 					q = lv[i];
@@ -150,8 +150,8 @@ int __cdecl d2_RunCourtshipDialog(int entity, int* request)
 						float f;
 
 						f = (float) d * (1.0f / 9.0f);
-						if (!(f > g_6628a8)) {
-							f = g_6628a8;
+						if (!(f > flt_0_0)) {
+							f = flt_0_0;
 						}
 						v = (int) (f * g_6628b0 + g_6628cc);
 					}
@@ -179,10 +179,10 @@ int __cdecl d2_RunCourtshipDialog(int entity, int* request)
 					}
 					*(char*) (e + 0xba) = 0;
 					*(int*) (e + 0x84) = cm_SendSetHE(0, (unsigned char*) e);
-					cm_RequestMoveCredits(-1, *(int*) (entity + 4), g_773d75, q);
+					cm_RequestMoveCredits(-1, *(int*) (entity + 4), gm_ActiveTownIndex, q);
 					d2_ShowModalMessageBox(buf2, 0);
 					mode = mode;
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				}
 			} else if (i == 3) {
 				p = gm_LookupEntityRecordById(id);
@@ -190,7 +190,7 @@ int __cdecl d2_RunCourtshipDialog(int entity, int* request)
 				*(char*) (e + 0xba) = 0;
 				*(int*) (e + 0x84) = cm_SendSetHE(0, (unsigned char*) e);
 				d2_ShowModalMessageBox(buf3, 0);
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	} while (main_RunFrameLoop((void*) d2_RunCourtshipDialog, 0x657c7) != 0);

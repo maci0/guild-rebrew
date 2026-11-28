@@ -7,9 +7,9 @@ extern int g_14ab018;
 extern int g_14aaf00;
 extern int g_14ad2f0;
 extern int g_14b5e70;
-extern int g_7746a0;
+extern int sv_ClickedObjekt;
 extern int g_774808;
-extern char g_14cf950;
+extern char io_LastKeyScancode;
 
 #ifdef REBREW_GOLD
 #define fcn_005c0020 fcn_005b46e0
@@ -55,21 +55,21 @@ void __cdecl d2_RunCharacterActionsHud(char* e, int mode)
 			meister = 0;
 			spionage = 0;
 		}
-		if (g_7746a0 != 0) {
-			if (g_7746a0 == verhandeln) {
+		if (sv_ClickedObjekt != 0) {
+			if (sv_ClickedObjekt == verhandeln) {
 				d2_RunTalenteDialog(e, mode, 0);
-			} else if (g_7746a0 == handwerk) {
+			} else if (sv_ClickedObjekt == handwerk) {
 				d2_RunTalenteDialog(e, mode, 1);
-			} else if (g_7746a0 == beweis) {
+			} else if (sv_ClickedObjekt == beweis) {
 				fcn_005c0020(e);
-			} else if (g_7746a0 == spionage) {
+			} else if (sv_ClickedObjekt == spionage) {
 				d2_RunMeisterpruefungDialog(e);
-			} else if (g_7746a0 == meister) {
+			} else if (sv_ClickedObjekt == meister) {
 				d2_OpenSpionageTargetPicker(e);
-			} else if (g_7746a0 == suicide) {
+			} else if (sv_ClickedObjekt == suicide) {
 				d2_ShowWeinkellerDialog(e);
 			}
-		} else if (g_774808 != 0 && g_14cf950 == 0x2d) {
+		} else if (g_774808 != 0 && io_LastKeyScancode == 0x2d) {
 			d2_ShowGeliebteDialog(e);
 		}
 	}

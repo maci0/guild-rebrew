@@ -1,4 +1,4 @@
-extern volatile int g_6b7fb8; extern char g_77250c[];
+extern volatile int tb_TimerTicks; extern char d2_ScreenSurface[];
 
 typedef struct Fade Fade;
 
@@ -25,8 +25,8 @@ void __cdecl d2_UpdateScreenFade(Fade* t)
 	float elapsed;
 	float v;
 
-	elapsed = (float) (((unsigned int)g_6b7fb8) - t->start);
-	if (((unsigned int)g_6b7fb8) - t->last > 3) {
+	elapsed = (float) (((unsigned int)tb_TimerTicks) - t->start);
+	if (((unsigned int)tb_TimerTicks) - t->last > 3) {
 		elapsed = (float) (int) (t->last + 3) - (int) t->start;
 	}
 	if (t->flags & 1) {
@@ -49,7 +49,7 @@ void __cdecl d2_UpdateScreenFade(Fade* t)
 	if (((t->flags & 1) && v == 1.0f) || ((t->flags & 2) && v == 0.0f)) {
 		t->flags |= 4;
 	}
-	t->last = ((unsigned int)g_6b7fb8);
+	t->last = ((unsigned int)tb_TimerTicks);
 }
 
 /* ADDRESS: GOLDTL 0x004732c0 */
@@ -61,7 +61,7 @@ void __cdecl d2_UpdateAllScreenFades(void)
 	for (a = 0x1015ec0; a < 0x1015f40; a += 4) {
 		v = *(int*) a;
 		if (v != 0) {
-			d2_UpdateScreenFade(v, *(int*) &g_77250c);
+			d2_UpdateScreenFade(v, *(int*) &d2_ScreenSurface);
 		}
 	}
 }

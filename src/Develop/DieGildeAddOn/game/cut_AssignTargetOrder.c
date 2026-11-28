@@ -13,7 +13,7 @@ typedef struct {
 	char pad[0xf];
 } Msg2c;
 
-extern int g_67a370;
+extern int d3_ActiveScene;
 extern int g_14a9a04;
 extern int g_14a9a08;
 extern int g_14a9a0c;
@@ -37,7 +37,7 @@ int __cdecl cut_AssignTargetOrder(char* context, char* e, char* obj, int col, in
 	int v;
 	float height;
 
-	kind = *(int*) (g_67a370 + 0xb0);
+	kind = *(int*) (d3_ActiveScene + 0xb0);
 	if (e == 0) goto fail;
 	x = gm_GetEquippedCombatGear(e);
 	if (obj == 0) goto fail;

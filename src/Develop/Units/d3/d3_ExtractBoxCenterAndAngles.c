@@ -1,4 +1,4 @@
-extern float g_6628a8;
+extern float flt_0_0;
 
 void __cdecl d3_NormalizeVector(float* v);
 void __cdecl d3_MatrixToEulerAngles(float* m, float* e);
@@ -109,9 +109,9 @@ void __cdecl d3_ExtractBoxCenterAndAngles(float* corners, float* centerOut, floa
 
     d3_MatrixToEulerAngles(basis, anglesOut);
 
-    c[0] = g_6628a8;
-    c[1] = g_6628a8;
-    c[2] = g_6628a8;
+    c[0] = flt_0_0;
+    c[1] = flt_0_0;
+    c[2] = flt_0_0;
     for (i = 0; i < 8; i++) {
         c[0] += corners[i * 4];
         c[1] += corners[i * 4 + 1];

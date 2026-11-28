@@ -5,9 +5,9 @@ extern int g_1040488;
 extern int g_104048c;
 extern int d2_ScreenHeight;
 extern int g_1040494;
-extern int g_10421a0;
-extern int g_10432a4;
-extern int g_10529c8;
+extern int d3_ViewportZFar;
+extern int d3_ProjectionDist;
+extern int d3_ViewportZNear;
 extern int g_14ac498;
 extern int g_14ac49c;
 extern int g_14ac4a0;
@@ -15,7 +15,7 @@ extern int g_14ce8d8;
 extern int d2_CurrentElementId;
 extern int d2_SuppressOverlay;
 extern int g_774650;
-extern int g_774654;
+extern int d2_DialogCloseRequested;
 extern int g_774658;
 extern int msx_MusicEnabled;
 extern int g_774954;
@@ -104,7 +104,7 @@ void __cdecl main_Menue(void)
 	b[0] = -1;
 	main_PumpWindowMessages();
 	io_PopQueuedInputState();
-	*(unsigned char*) &g_14cf950 = 0;
+	*(unsigned char*) &io_LastKeyScancode = 0;
 	evt_ResetCurrentContextId();
 	v4 = d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, (char *)0x67d67c, 0, 1);
 	while ((*(unsigned char *)v4 & 4) == 0) {
@@ -125,9 +125,9 @@ void __cdecl main_Menue(void)
 	if (!d3_LoadScene((char *)0x6a3b98, 0, 0)) {
 		ReportClientMessage((char *)0x6a3b70);
 	}
-	d3_SetViewport((float)g_1040494, (float)d2_ScreenHeight, 0, 0, g_10529c8, g_10421a0, g_10432a4, g_1040494, d2_ScreenHeight);
+	d3_SetViewport((float)g_1040494, (float)d2_ScreenHeight, 0, 0, d3_ViewportZNear, d3_ViewportZFar, d3_ProjectionDist, g_1040494, d2_ScreenHeight);
 	g_774658 = g_774650 + 1;
-	*(int*) &g_7747b0 = 0;
+	*(int*) &gm_ClientModeFlags = 0;
 	v28 = 0x8c;
 	__asm {
 		mov edi, offset g_7e23e0
@@ -190,7 +190,7 @@ void __cdecl main_Menue(void)
 	}
 	d2_ReleaseOverlaySprite((int)v4);
 	d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, (char *)0x67d67c, 0x5a, 10);
-	*(unsigned char*) &g_14cf950 = 0;
+	*(unsigned char*) &io_LastKeyScancode = 0;
 	msx_SetFadeDuration(2000);
 	read_profile = GetPrivateProfileStringA;
 	do {
@@ -205,8 +205,8 @@ void __cdecl main_Menue(void)
 				d2_ClearBackdropResource();
 				gm_ResetHistoricalCursors();
 				if (d2_StartSinglePlayerChooseCity()) {
-					*(int*) &g_7747b0 |= 1;
-					g_774654 = 1;
+					*(int*) &gm_ClientModeFlags |= 1;
+					d2_DialogCloseRequested = 1;
 				} else {
 					goto label_53a8e3;
 				}
@@ -214,12 +214,12 @@ void __cdecl main_Menue(void)
 				d2_SetSlotVisibility(v5, 0);
 				if (d2_ChooseTutorial()) {
 					d2_InitDefaultMenueProfile();
-					*(unsigned char*) &g_6a375c = 1;
+					*(unsigned char*) &gm_PlayerCount = 1;
 					*(int*) g_7e1d00 = *(int *)0x6a3ad0;
 					*(int *)0x7e1d04 = *(int *)0x6a3ad4;
 					*(char *)0x7e1d08 = *(char *)0x6a3ad8;
-					*(int*) &g_7747b0 = 0x89;
-					g_774654 = 1;
+					*(int*) &gm_ClientModeFlags = 0x89;
+					d2_DialogCloseRequested = 1;
 				} else {
 label_53a8e3:
 					d2_SetSlotVisibility(v5, 1);
@@ -243,16 +243,16 @@ label_53a8e3:
 			} else if (d2_CurrentElementId == b[7]) {
 				d2_SetSlotVisibility(v5, 0);
 				if (d2_ShowLoadGameMenu()) {
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				}
 				d2_SetSlotVisibility(v5, 1);
 			} else if (d2_CurrentElementId == b[3]) {
 				d2_SetSlotVisibility(v5, 0);
 				if (d2_ShowChooseNetworkDialog()) {
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				} else {
 					d2_SetSlotVisibility(v5, 1);
-					*(int*) &g_7747b0 = 0;
+					*(int*) &gm_ClientModeFlags = 0;
 				}
 			} else if (d2_CurrentElementId == b[9]) {
 				d2_SetSlotVisibility(v5, 0);
@@ -260,7 +260,7 @@ label_53a8e3:
 				d2_SetSlotVisibility(v5, 1);
 				v29 = 1;
 				if (*(int *)0x77495c != 0) {
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				}
 			} else if (d2_CurrentElementId == b[1]) {
 				d2_SetSlotVisibility(v5, 0);
@@ -273,7 +273,7 @@ label_53a8e3:
 			} else if (d2_CurrentElementId == b[6]) {
 				g_774954 = 1;
 				g_77496c = 1;
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			} else if (d2_CurrentElementId == b[0]) {
 				d2_ShowAmountDialog();
 			} else if (d2_CurrentElementId == b[11]) {
@@ -290,9 +290,9 @@ label_53a8e3:
 				}
 			}
 		}
-		if (*(unsigned char*) &g_14cf950 == 1) {
+		if (*(unsigned char*) &io_LastKeyScancode == 1) {
 			g_77496c = 1;
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop((int)(void *)0x53a400, 0x24087) != 0);
 	d2_ClearRadioGroup(v28);

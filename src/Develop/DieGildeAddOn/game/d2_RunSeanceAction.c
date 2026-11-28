@@ -32,7 +32,7 @@ typedef struct {
 extern unsigned char g_slot_table[2];
 extern int g_14b5650;
 extern int g_14b5674;
-extern int g_665f78[];
+extern int he_GraveSlotTextIds[];
 
 void* __cdecl FindSlotEntryFiltered(int, char*, unsigned char*, void*, int);
 int __cdecl gm_GetEntitySlotIndex(int, void*);
@@ -58,13 +58,13 @@ void __cdecl d2_RunSeanceAction(char* e)
 	int r;
 	unsigned char v;
 
-	rec = FindSlotEntryFiltered((int) (g_slot_table + g_774970 * 0x21c), e, 0, (void*) 0x4f1820, 0xff);
+	rec = FindSlotEntryFiltered((int) (g_slot_table + gm_LocalPlayerSlot * 0x21c), e, 0, (void*) 0x4f1820, 0xff);
 	if (rec != 0) {
 		dlg.rec = (char*) rec;
 		dlg.rec_id = *(int*) rec;
 		v = (unsigned char) gm_GetEntitySlotIndex(*(int*) (e + 0x65), rec);
 		dlg.rec_state = v;
-		io_FormatTextBuffer(text, 0x4107, g_665f78[*(int*) rec]);
+		io_FormatTextBuffer(text, 0x4107, he_GraveSlotTextIds[*(int*) rec]);
 		if (!d2_CreateRentAGraveDialog((int*) &dlg, g_14b5650)) {
 			d3_EndCameraAndUiMode();
 			return;
@@ -72,9 +72,9 @@ void __cdecl d2_RunSeanceAction(char* e)
 		r = d2_RunSeanceMenu((int) e, (char*) &dlg, (int) &result);
 		d2_DestroyForm(dlg.dlg);
 		if (r != 0) {
-			cm_RequestChangeBits(*(int*) (g_slot_table + g_774970 * 0x21c + 4), 0x1cc, 4, 0x800000, 0);
+			cm_RequestChangeBits(*(int*) (g_slot_table + gm_LocalPlayerSlot * 0x21c + 4), 0x1cc, 4, 0x800000, 0);
 			if (result.cost != 0) {
-				gm_ModifyHealth(*(int*) (g_slot_table + g_774970 * 0x21c + 4), -result.cost);
+				gm_ModifyHealth(*(int*) (g_slot_table + gm_LocalPlayerSlot * 0x21c + 4), -result.cost);
 			}
 			switch (result.kind) {
 			case 1:

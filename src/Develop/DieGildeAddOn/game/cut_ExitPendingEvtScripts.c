@@ -22,7 +22,7 @@ int __cdecl cut_ExitPendingEvtScripts(void)
 	Obj* o;
 
 	for (i = 0; i < 128; i++) {
-		o = &((Obj*)g_6b7e94)[i];
+		o = &((Obj*)evt_ScriptSlots)[i];
 		if (o->id != -1 && (o->flags & 1) != 0 && o->state == -2) {
 			evt_RequestScriptExit(o);
 		}

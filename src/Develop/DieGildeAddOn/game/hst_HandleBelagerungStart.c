@@ -10,7 +10,7 @@
 
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern char g_7f4ca4[];
+extern char gm_EntityIdField[];
 
 void __cdecl cm_SendCopyEntityData(void*);
 
@@ -26,7 +26,7 @@ int __cdecl hst_HandleBelagerungStart(void)
 	*(short*) (m + 0x2c) = 8;
 	*(int*) (m + 0x2e) = 0;
 	m[0x36] = 1;
-	for (p = g_7f4ca4; (int) p < (int) (g_7f4ca4 + 0x65400); p += 0x21c) {
+	for (p = gm_EntityIdField; (int) p < (int) (gm_EntityIdField + 0x65400); p += 0x21c) {
 		if (p[-2] == 6 || p[-2] == 7) {
 			*(int*) (m + 8) = *(int*) p;
 			*(int*) (m + 0x58) = *(int*) p;

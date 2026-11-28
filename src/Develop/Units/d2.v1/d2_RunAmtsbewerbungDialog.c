@@ -22,14 +22,14 @@ typedef struct {
 #define HOUSES 768
 
 
-extern char* g_772500;
-extern char* g_77255c;
+extern char* d2_FileObjTable;
+extern char* d2_CurrentWindow;
 extern int d2_CurrentWindowId;
 extern int g_14abb40;
 extern int g_14abb44;
 extern int g_14abb48;
-extern int g_100f1dc;
-extern int g_14ce8e0;
+extern int d2_DialogButtonAction;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int d2_CurrentElementId;
 extern char g_6aae98[];
@@ -81,10 +81,10 @@ int __cdecl d2_RunAmtsbewerbungDialog(char* who, int id)
 	hb = -1;
 	hc = -1;
 	prev = -1;
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
 		if (amt_FindOfficeSlotByType(id, info) == 0) {
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 		}
 		else {
 			n = 0;
@@ -92,8 +92,8 @@ int __cdecl d2_RunAmtsbewerbungDialog(char* who, int id)
 				if (n >= 4) {
 					break;
 				}
-				if (((ENTITY_RECORD*)g_7f4ca0)[j].entity_index != 0xffff && ((ENTITY_RECORD*)g_7f4ca0)[j].unk_165[3] == id) {
-					houses[n] = &((ENTITY_RECORD*)g_7f4ca0)[j];
+				if (((ENTITY_RECORD*)gm_EntitySlotTable)[j].entity_index != 0xffff && ((ENTITY_RECORD*)gm_EntitySlotTable)[j].unk_165[3] == id) {
+					houses[n] = &((ENTITY_RECORD*)gm_EntitySlotTable)[j];
 					n++;
 				}
 			}
@@ -118,10 +118,10 @@ int __cdecl d2_RunAmtsbewerbungDialog(char* who, int id)
 					io_AppendText(0x1a0c);
 				}
 				else {
-					w = (((int*)g_77255c)[3] - *(short*) (g_772500 + 0x1ebd8) * 2) / 3;
-					off = (((int*)g_77255c)[3] - *(short*) (g_772500 + 0x1ebd8) * 2) % 3 / 2;
+					w = (((int*)d2_CurrentWindow)[3] - *(short*) (d2_FileObjTable + 0x1ebd8) * 2) / 3;
+					off = (((int*)d2_CurrentWindow)[3] - *(short*) (d2_FileObjTable + 0x1ebd8) * 2) % 3 / 2;
 					for (i = 0; i < n; i++) {
-						items[i].x = off + (*(short*) (g_772500 + 0x1ebd8) + 10) * (i % 2) + (i % 2 + 1) * w - 10;
+						items[i].x = off + (*(short*) (d2_FileObjTable + 0x1ebd8) + 10) * (i % 2) + (i % 2 + 1) * w - 10;
 						items[i].f30 = 0;
 						items[i].y = i / 2 * 0x41 * 2 + 0x28;
 						items[i].house = houses[i];
@@ -137,10 +137,10 @@ int __cdecl d2_RunAmtsbewerbungDialog(char* who, int id)
 				}
 			}
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		else if (g_100f1dc != -1) {
+		else if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == ha) {
 				r = amt_ApplyForOffice(who, id);
 				if (r != -1) {
@@ -169,7 +169,7 @@ int __cdecl d2_RunAmtsbewerbungDialog(char* who, int id)
 		d2_DestroyForm(d);
 	}
 	if (res != 0) {
-		g_774654 = 1;
+		d2_DialogCloseRequested = 1;
 		d2_DispatchTutorialInput(0x2f, 0, 1, id);
 	}
 	return res;

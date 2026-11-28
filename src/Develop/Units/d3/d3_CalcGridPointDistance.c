@@ -2,7 +2,7 @@
 
 #include <math.h>
 
-extern int g_67a370;
+extern int d3_ActiveScene;
 
 void __cdecl d3_GridPointToWorld(int, int, int, float*);
 
@@ -15,7 +15,7 @@ float __cdecl d3_CalcGridPointDistance(int a, int b, int c, int d)
 	float dz;
 	int h;
 
-	h = *(int*) (((char*)g_67a370) + 0xb0);
+	h = *(int*) (((char*)d3_ActiveScene) + 0xb0);
 	d3_GridPointToWorld(h, a, b, pointA);
 	d3_GridPointToWorld(h, c, d, pointB);
 	dx = pointA[0] - pointB[0];

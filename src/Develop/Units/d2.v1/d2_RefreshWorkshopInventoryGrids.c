@@ -49,7 +49,7 @@ void __cdecl d2_RefreshWorkshopInventoryGrids(int dialog, int form, int a2, unsi
 		}
 		v[-1] = *v;
 		if (*v > 1) {
-			tbl = g_772500;
+			tbl = d2_FileObjTable;
 			v[-3] = (v1 - *(short*) (tbl + 0x261a4 + *v * 0x54)) >> 1;
 			v[-2] = (*(short*) (tbl + 0x2624e) + 0x16) * i;
 		}
@@ -65,7 +65,7 @@ void __cdecl d2_RefreshWorkshopInventoryGrids(int dialog, int form, int a2, unsi
 		}
 		v[-1] = *v;
 		if (*v >= 2) {
-			tbl = g_772500;
+			tbl = d2_FileObjTable;
 			v[-3] = (v1 - *(short*) (tbl + 0x261a4 + *v * 0x54)) >> 1;
 			v[-2] = (*(short*) (tbl + 0x2624e) + 0x16) * i + 0xb6;
 		}
@@ -77,10 +77,10 @@ void __cdecl d2_RefreshWorkshopInventoryGrids(int dialog, int form, int a2, unsi
 
 	for (v = (int*) 0x778d50; (int) v < 0x778da0; v += 5) {
 		if (v[-2] > 1) {
-			((D2_CONTROL_TL*) (g_1015ea0))[*v].value_048 = 0;
+			((D2_CONTROL_TL*) (d2_Controls))[*v].value_048 = 0;
 			d2_PositionControl(v[-4] + p[1], v[-3] + p[2], *v);
 		} else {
-			((D2_CONTROL_TL*) (g_1015ea0))[*v].value_048 = 1;
+			((D2_CONTROL_TL*) (d2_Controls))[*v].value_048 = 1;
 		}
 	}
 
@@ -109,10 +109,10 @@ void __cdecl d2_RefreshWorkshopInventoryGrids(int dialog, int form, int a2, unsi
 		}
 		v[-1] = *v;
 		if (*v >= 2) {
-			((D2_CONTROL_TL*) (g_1015ea0))[v[1]].value_048 = 0;
+			((D2_CONTROL_TL*) (d2_Controls))[v[1]].value_048 = 0;
 			d2_PositionControl(v[-3] + p[1], v[-2] + p[2], v[1]);
 		} else {
-			((D2_CONTROL_TL*) (g_1015ea0))[v[1]].value_048 = 1;
+			((D2_CONTROL_TL*) (d2_Controls))[v[1]].value_048 = 1;
 		}
 	}
 

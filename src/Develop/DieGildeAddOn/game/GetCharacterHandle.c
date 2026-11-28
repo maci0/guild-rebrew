@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/ch_script.h"
-extern char g_675f80[];
+extern char str_GetCharacterHandle_not_found[];
 
 
 
@@ -15,7 +15,7 @@ int __cdecl GetCharacterHandle(int* id)
 
 	r = ch_FindCharacterByName(*id);
 	if (r == 0) {
-		fcn_0064d41a(buf, g_675f80, *id);
+		fcn_0064d41a(buf, str_GetCharacterHandle_not_found, *id);
 		evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), buf);
 	}
 	return r;

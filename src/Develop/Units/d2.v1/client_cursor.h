@@ -13,9 +13,9 @@ extern short CursorX2;
 /* ADDRESS: GOLD 0x014673e2 */
 extern short CursorY2;
 /* ADDRESS: GOLD 0x01467380 */
-extern short g_01467380;
+extern short io_CursorXGold;
 /* ADDRESS: GOLD 0x01467382 */
-extern short g_01467382;
+extern short io_CursorYGold;
 
 void __cdecl fcn_004113f0(int x, int y);
 

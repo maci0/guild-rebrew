@@ -1,7 +1,7 @@
 
 
 
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl cm_FlushCommandQueue(void);
@@ -12,8 +12,8 @@ char* __cdecl cm_WaitForQueuedCommand(char kind, int timeout)
 	unsigned int end;
 	char* p;
 
-	end = (unsigned int)g_6b7fac + timeout;
-	while ((unsigned int)g_6b7fac < end) {
+	end = (unsigned int)gm_GameTicks + timeout;
+	while ((unsigned int)gm_GameTicks < end) {
 		cm_FlushCommandQueue();
 		cm_PollCommandQueue();
 		for (p = cm_CommandQueueHead; p != 0; p = *(char**) (p + 0x95)) {

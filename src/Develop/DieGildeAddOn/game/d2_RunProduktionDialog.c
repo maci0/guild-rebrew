@@ -1,4 +1,4 @@
-extern int g_100f1dc, g_14ce8e0, d2_CurrentElementId;
+extern int d2_DialogButtonAction, io_RightButtonReleased, d2_CurrentElementId;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 /* Runs the town trade/settlement dialog: opens the window, collects the shop
    list, draws the goods rows and processes input until the player closes it. */
@@ -116,7 +116,7 @@ unsigned int __cdecl d2_RunProduktionDialog(unsigned char* building)
 	d2_DrawPanelFrame(d2_CurrentWindowId, id, 0x742);
 	d2_CreateWindowScrollbar(0x270, 0x15e, d2_CurrentWindowId,
 	             d2_GetFormWindow(window, 2), 0x78, &rect2, &rect1, &listControl);
-	*(unsigned int*) ((int) g_1015ea0 + 0x84 + listControl * 0x2f4) = 0x54;
+	*(unsigned int*) ((int) d2_Controls + 0x84 + listControl * 0x2f4) = 0x54;
 	d2_SetOverlayAnimation(0, 0);
 	while (1) {
 		int any;
@@ -131,7 +131,7 @@ unsigned int __cdecl d2_RunProduktionDialog(unsigned char* building)
 		if (!entry) {
 			return 0;
 		}
-		if (g_100f1dc != -1 && g_100f884 == window) {
+		if (d2_DialogButtonAction != -1 && g_100f884 == window) {
 			any = 0;
 			r = (int*) 0x7e30e0;
 			do {
@@ -234,7 +234,7 @@ unsigned int __cdecl d2_RunProduktionDialog(unsigned char* building)
 										if (*(unsigned short*) (p + 0x27) != 0xffff) {
 											v33 = *(unsigned int*) (*(unsigned short*) (p + 0x27) * 0x21c + 0x7f4ca4);
 										} else {
-											v33 = *(unsigned int*) (g_774970 * 0x21c + 0x7f4ca4);
+											v33 = *(unsigned int*) (gm_LocalPlayerSlot * 0x21c + 0x7f4ca4);
 										}
 										v34 = *(unsigned int*) (p + 1);
 										*(char*) (tmpl + 0x04) = 4;
@@ -287,7 +287,7 @@ found_row:
 				} while (rowsLeft);
 			}
 		}
-		if (g_14ce8e0) {
+		if (io_RightButtonReleased) {
 			any = 0;
 			r = (int*) 0x7e30e0;
 			do {
@@ -301,7 +301,7 @@ found_row:
 			} while (!any);
 			if (!any) {
 				if (d2_CanCloseWindowDuringTutorial() == 1) {
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 					d3_EndCameraAndUiMode();
 				}
 				goto after_input;
@@ -411,8 +411,8 @@ after_input:
 			fcn_00657a73(count, list, 10);
 			d2_SetLabelText(listControl, list);
 			window = saved;
-			*(unsigned int*) ((int) g_1015ea0 + 0x6c + listControl * 0x2f4) = 1;
-			*(unsigned int*) ((int) g_1015ea0 + 0x18 + listControl * 0x2f4) = 0x30;
+			*(unsigned int*) ((int) d2_Controls + 0x6c + listControl * 0x2f4) = 1;
+			*(unsigned int*) ((int) d2_Controls + 0x18 + listControl * 0x2f4) = 0x30;
 			d2_RenderProduktionStockRows(saved, 2, count, entry, 0);
 			if (idx) {
 				d2_SetForm(saved, 2);

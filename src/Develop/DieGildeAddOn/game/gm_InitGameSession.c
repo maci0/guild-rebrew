@@ -15,15 +15,15 @@ extern int g_7747c0;
 extern int g_7747cc;
 extern int g_6b5c2c;
 extern int g_774978;
-extern char* g_7e2aa0;
-extern char* g_7746cc;
-extern char* g_7746c4;
-extern unsigned char* g_7746c8;
+extern char* d2_SelectedBuilding;
+extern char* sv_SelectedBuilding;
+extern char* d2_VisitedBuilding;
+extern unsigned char* d2_InteriorBuilding;
 
 void __cdecl he_InitEventSystem(void);
 void __cdecl gm_AdvanceGameClock(void);
 #include "Develop/DieGildeAddOn/game/client_timer.h"
-void __cdecl fcn_0053f100(void);
+void __cdecl he_TickEventDeals(void);
 void __cdecl cm_InitCrimeRecords(void);
 void __cdecl gm_ResetCityStats(void);
 int __cdecl d3_AcquireModel(char*, char*);
@@ -51,11 +51,11 @@ void __cdecl gm_InitGameSession(void)
 	(*(int*)g_68a9cc) = 2;
 	tb_OpenFunction(gm_AdvanceGameClock, 0x47);
 	tb_SetCallbackPaused(gm_AdvanceGameClock, 1);
-	fcn_0053f100();
+	he_TickEventDeals();
 	cm_InitCrimeRecords();
 	gm_ResetCityStats();
 	g_7749cc = d3_AcquireModel("Buch", "Buch");
-	if (g_774934 != 0) {
+	if (d3snd_SoundEnabled != 0) {
 		g_7747bc = sb_LoadSampleBank("natur\\regen.sbf", 0);
 		g_7e2470 = sb_LoadSampleBank("natur\\wind.sbf", 0);
 		g_7747c0 = sb_LoadSampleBank("natur\\blitzunddonner.sbf", 0);
@@ -69,10 +69,10 @@ void __cdecl gm_InitGameSession(void)
 	d3_ClearSceneObjectCache();
 	d2_ClearStatusTextSlots();
 	g_774978 = 0;
-	(*(int*)&g_7e2aa0) = 0;
-	(*(int*)&g_7746cc) = 0;
-	(*(int*)&g_7746c4) = 0;
-	(*(int*)&g_7746c8) = 0;
+	(*(int*)&d2_SelectedBuilding) = 0;
+	(*(int*)&sv_SelectedBuilding) = 0;
+	(*(int*)&d2_VisitedBuilding) = 0;
+	(*(int*)&d2_InteriorBuilding) = 0;
 	fcn_005c80c0();
 	gm_AllocAmbientAnimals();
 	ch_ResetGridAndUniverseCache();

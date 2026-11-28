@@ -4,6 +4,6 @@
 #include "Develop/client_types.h"
 #include "Develop/Units/d2.v1/d2_win.h"
 
-extern Win_1015f40 g_1015f40[0x60];
+extern Win_1015f40 d2_Windows[0x60];
 
 #endif

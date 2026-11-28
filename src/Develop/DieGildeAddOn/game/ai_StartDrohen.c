@@ -64,7 +64,7 @@ retry:
 	if (ai_SelectDrohenTarget(p, v7, v8) == 0) {
 		return 0;
 	}
-	v9 = gm_CalcSkillDuelScore(p, ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[v8[4]]), 4);
+	v9 = gm_CalcSkillDuelScore(p, ((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[v8[4]]), 4);
 	if (gm_RandomFloat01() + v9 >= 1.0f) {
 		method = 0x28;
 		goto copy_result;

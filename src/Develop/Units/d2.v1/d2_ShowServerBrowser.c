@@ -4,21 +4,21 @@
  * compatible host (name, map, players, ping) and drive the modal dialog.
  */
 
-extern int g_100f1dc;           /* 0x0100f1dc */
-extern char* g_1015ea0;         /* 0x01015ea0 */
+extern int d2_DialogButtonAction;           /* 0x0100f1dc */
+extern char* d2_Controls;         /* 0x01015ea0 */
 extern int g_14ac5e4;           /* 0x014ac5e4 */
 extern int g_14ac614;           /* 0x014ac614 */
 extern int g_14ac618;           /* 0x014ac618 */
 extern int g_14ac61c;           /* 0x014ac61c */
-extern int g_14ce8e0;           /* 0x014ce8e0 */
-extern char g_14cf950;          /* 0x014cf950 */
+extern int io_RightButtonReleased;           /* 0x014ce8e0 */
+extern char io_LastKeyScancode;          /* 0x014cf950 */
 extern int d2_CurrentElementId;            /* 0x0067d370 */
-extern volatile unsigned int g_6b7fac;            /* 0x006b7fac */
-extern int g_6b7fdc;            /* 0x006b7fdc */
+extern volatile unsigned int gm_GameTicks;            /* 0x006b7fac */
+extern int vfs_RootDir;            /* 0x006b7fdc */
 extern int d2_CurrentWindowId;            /* 0x00772514 */
 extern int d2_SuppressOverlay;            /* 0x007725c8 */
 #include "Develop/Units/d2.v1/client_dialog_state.h"            /* 0x00774654 */
-extern unsigned char g_7747b0;  /* 0x007747b0 */
+extern unsigned char gm_ClientModeFlags;  /* 0x007747b0 */
 extern int g_9badc0;            /* 0x009badc0 */
 extern int g_9badc4;            /* 0x009badc4 */
 extern int g_9badc8;            /* 0x009badc8 */
@@ -110,7 +110,7 @@ unsigned int __cdecl d2_ShowServerBrowser(int a0)
 
 	v38 = 0;
 	v4 = 1;
-	v36 = g_6b7fac;
+	v36 = gm_GameTicks;
 	group = -1;
 	dialog = d2_LoadForm(0, 0, s_6a3a6c);
 	d2_PositionFormWindows(dialog, 1);
@@ -124,7 +124,7 @@ unsigned int __cdecl d2_ShowServerBrowser(int a0)
 	d2_SetElementEnabled(buttons[0], 0);
 	if (main_RunFrameLoop(0x539930, 0x24087) != 0) {
 		do {
-			if (g_6b7fac > v36 + 0x5dc || v4 != 0) {
+			if (gm_GameTicks > v36 + 0x5dc || v4 != 0) {
 				int v6;
 				v4 = 1;
 				d2_SuppressOverlay = 1;
@@ -162,7 +162,7 @@ unsigned int __cdecl d2_ShowServerBrowser(int a0)
 						} else {
 							v13 = (int*) ((int) ((int*) ((char*) hosts + 0x5a)) + v32);
 							sprintf(path, s_6a3a54, &((unsigned char*) hosts + 0x36)[v32 + 4]);
-							v32 = vfs_Tfopen(path, 0x6750e8, g_6b7fdc);
+							v32 = vfs_Tfopen(path, 0x6750e8, vfs_RootDir);
 							if (v32 != 0) {
 								v4 = 1;
 								fcn_00521eb0(v32, header1);
@@ -199,12 +199,12 @@ label_539ba4:
 							d2_SetForm(dialog, 2);
 							v32 = d2_AddElementToWindow(8, v34, v32, d2_CurrentWindowId);
 							*v31 = v32;
-							*(int*) (v32 * 0x2f4 + 0x5c + (int) g_1015ea0) = 1;
+							*(int*) (v32 * 0x2f4 + 0x5c + (int) d2_Controls) = 1;
 							if (*(int*) ((int) ((int*) ((char*) hosts + 0x7c)) + v34) == 0x3f
 									&& ((unsigned char*) hosts + 0x36)[v34] <= ((unsigned char*) hosts + 0x36)[v34 + 1]) {
 								d2_SetElementEnabled(v32, 0);
 							}
-							*(int*) (v32 * 0x2f4 + 0x1d0 + (int) g_1015ea0) = 3;
+							*(int*) (v32 * 0x2f4 + 0x1d0 + (int) d2_Controls) = 3;
 							d2_AddToRadioGroup(group, v32);
 							v32 = d2_CreateChildWindow(0x88, v35, 400, 0x78, 0x10, d2_CurrentWindowId);
 							v31[1] = v32;
@@ -226,12 +226,12 @@ label_539d27:
 					} while (v36 != 0);
 				}
 				v4 = 0;
-				v36 = g_6b7fac;
+				v36 = gm_GameTicks;
 			}
-			if (g_14ce8e0 != 0 || g_14cf950 == 1) {
-				g_774654 = 1;
+			if (io_RightButtonReleased != 0 || io_LastKeyScancode == 1) {
+				d2_DialogCloseRequested = 1;
 			}
-			if (g_100f1dc != -1) {
+			if (d2_DialogButtonAction != -1) {
 				if (d2_CurrentElementId == buttons[0]) {
 					v32 = *(int*) (group * 0x8c + 0x102cbc8);
 					if (v32 != -1) {
@@ -244,7 +244,7 @@ label_539d27:
 							v7 = &v7[1];
 						} while (v2 != 0);
 						WritePrivateProfileStringA(s_6a1e4c, s_6a3a4c, (char*) 0x7e2000, g_7e22c0);
-						g_774654 = 1;
+						d2_DialogCloseRequested = 1;
 						v38 = 1;
 						memcpy((void*) 0x9baa60, v8, 0x80);
 
@@ -283,7 +283,7 @@ label_539d27:
 								v10[v32 + 0x7e254a] = v3;
 								v10 = &v10[1];
 							} while (v3 != 0);
-							*(int*) &g_7747b0 |= 0x40;
+							*(int*) &gm_ClientModeFlags |= 0x40;
 							sprintf(savePath, s_6a3a54, g_7e21a0);
 							memset(header2, 0, sizeof(header2));
 
@@ -293,7 +293,7 @@ label_539d27:
 
 
 
-							v32 = vfs_Tfopen(savePath, 0x6750e8, g_6b7fdc);
+							v32 = vfs_Tfopen(savePath, 0x6750e8, vfs_RootDir);
 							if (v32 != 0) {
 								fcn_00521eb0(v32, (char*) ((int*) header2));
 								CloseVfsStream(v32);
@@ -332,7 +332,7 @@ label_539d27:
 				} else if (d2_CurrentElementId == buttons[2]) {
 					d2_SetFormVisibility(dialog, 0);
 					if (d2_PromptNetworkHost() != 0) {
-						g_774654 = 1;
+						d2_DialogCloseRequested = 1;
 						v38 = 1;
 					}
 					d2_SetFormVisibility(dialog, 1);

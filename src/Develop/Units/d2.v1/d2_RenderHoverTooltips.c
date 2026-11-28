@@ -1,7 +1,7 @@
 
-extern volatile int g_6b7fac;
-extern int g_67a370;
-extern int g_77250c;
+extern volatile int gm_GameTicks;
+extern int d3_ActiveScene;
+extern int d2_ScreenSurface;
 extern char* txt_TextEntries[];
 
 // SIZE 0x10c
@@ -32,7 +32,7 @@ void __cdecl d2_RenderHoverTooltips(void)
 	for (q = &g_7e6060[0].o; (int) q < (int) &g_7e6060[64].o;
 		q = (char**) ((char*) q + sizeof(struct s_7e6060))) {
 		if (*q != 0
-			&& (unsigned int) g_6b7fac > (unsigned int) (((int*) q)[-1] + 0x12c)) {
+			&& (unsigned int) gm_GameTicks > (unsigned int) (((int*) q)[-1] + 0x12c)) {
 			*q = 0;
 		}
 	}
@@ -44,7 +44,7 @@ void __cdecl d2_RenderHoverTooltips(void)
 			continue;
 		}
 		m = *(char**) (e + 0x34);
-		if (*(int*) (m + 0x20c) != g_67a370) {
+		if (*(int*) (m + 0x20c) != d3_ActiveScene) {
 			continue;
 		}
 		if (*(int*) (m + 0x218) != 1) {
@@ -67,6 +67,6 @@ void __cdecl d2_RenderHoverTooltips(void)
 			name = txt_TextEntries[((int*) s)[-2]];
 		}
 		d2_DrawWordWrappedText(x, y, 0xa0, 0x60,
-			g_77250c, name, 0x28);
+			d2_ScreenSurface, name, 0x28);
 	}
 }

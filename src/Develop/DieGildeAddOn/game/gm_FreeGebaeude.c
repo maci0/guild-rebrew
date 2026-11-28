@@ -28,7 +28,7 @@ int __cdecl gm_FreeGebaeude(unsigned char* o)
 	if (*o == 0) {
 		return -2;
 	}
-	if (*(unsigned short*) (o + 0x27) != 0xffff && (*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (o + 0x27)].entity_type) == 6) {
+	if (*(unsigned short*) (o + 0x27) != 0xffff && (*(unsigned char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (o + 0x27)].entity_type) == 6) {
 		hp_RemoveProdEntry(*(int*) (o + 1));
 	}
 	switch (*o) {
@@ -53,11 +53,11 @@ int __cdecl gm_FreeGebaeude(unsigned char* o)
 		break;
 	}
 	for (i = 0; i < 768; i++) {
-		if ((*(unsigned char**)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].ptr_170) == o) {
-			(*(unsigned char**)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].ptr_170) = 0;
+		if ((*(unsigned char**)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].ptr_170) == o) {
+			(*(unsigned char**)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].ptr_170) = 0;
 		}
-		if ((*(unsigned char**)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].ptr_16c) == o) {
-			(*(unsigned char**)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].ptr_16c) = 0;
+		if ((*(unsigned char**)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].ptr_16c) == o) {
+			(*(unsigned char**)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].ptr_16c) = 0;
 		}
 	}
 	if (*(char**) (o + 0x5d) != 0) {

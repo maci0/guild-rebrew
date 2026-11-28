@@ -1,4 +1,4 @@
-extern char* g_6b7ebc;
+extern char* evt_WaitingScriptTask;
 extern char* evt_CurrentScript;
 extern int d3_CameraAnimating;
 extern int d3_ActiveCameraAnimation;
@@ -11,7 +11,7 @@ void __cdecl d3_StartCameraFlight(int, int, int, int, int, int, int, int);
 /* ADDRESS: GOLDTL 0x0040f720 */
 int __cdecl NewCameraFlight(int* a1, int* a2, int* a3, int* a4, int* a5, int* a6, int* a7)
 {
-	if (g_6b7ebc != 0 && *(int (__cdecl**)()) (g_6b7ebc + 0x44) == (int (__cdecl*)()) NewCameraFlight) {
+	if (evt_WaitingScriptTask != 0 && *(int (__cdecl**)()) (evt_WaitingScriptTask + 0x44) == (int (__cdecl*)()) NewCameraFlight) {
 		if (d3_CameraAnimating == 0 && d3_ActiveCameraAnimation == 0) {
 			return 0;
 		}

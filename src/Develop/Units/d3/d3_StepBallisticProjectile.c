@@ -10,7 +10,7 @@ typedef struct Sefde0Entry {
 extern float g_6ad620;
 extern float g_6660e8;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_1043370;
+extern int tp_ch_PathGrid;
 
 char __cdecl d3sm_SampleHeight(int, float*, int*, int*, float*);
 int __cdecl d3_TraceTerrainSegment(int, float*, float*, int, int, int*, int*);
@@ -38,13 +38,13 @@ int __cdecl d3_StepBallisticProjectile(Sefde0Entry *entry)
 	int map;
 
 	obj = (char *)entry;
-	map = g_1043370;
+	map = tp_ch_PathGrid;
 	step = *(float *)0x6660ec * g_6660e8;
 	inv = *(float *)0x6660ec / *(float*) (obj + 0x54);
 	if (*(int*) (obj + 0x5c) != 1) {
 		return 0;
 	}
-	remain = g_6b7fac - *(int*) (obj + 0x60);
+	remain = gm_GameTicks - *(int*) (obj + 0x60);
 	if (d3sm_SampleHeight(map, (float*) (obj + 0x30), &ox, &oy, &h) == 0) {
 		*(int*) (obj + 0x5c) = 3;
 		*(int*) (obj + 0x58) = 0;

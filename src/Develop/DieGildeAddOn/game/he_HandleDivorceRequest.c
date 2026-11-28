@@ -11,7 +11,7 @@
 
 
 
-extern char g_679060[];
+extern char str_fmt_s[];
 
 unsigned char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl d2_RunDivorceAction(unsigned char* entity, int* request);
@@ -30,7 +30,8 @@ int __cdecl he_HandleDivorceRequest(unsigned char* entity, int* request)
 		return 1;
 	}
 	for (i = 0; i < 768; i++) {
-		if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_index != 0xffff && (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].class_166 != 0x12 || ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].class_166 <= 0x15)) {
+		if (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_index != 0xffff && (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].class_166 != 0x12 ||
+			((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].class_166 <= 0x15)) {
 			break;
 		}
 	}

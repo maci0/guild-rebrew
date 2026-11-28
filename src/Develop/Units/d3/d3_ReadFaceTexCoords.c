@@ -8,7 +8,7 @@ typedef struct Face {
 	int rest[5];
 } Face;
 
-int __cdecl fcn_004011d0(void* stream, void* dst);
+int __cdecl vfs_ReadDword(void* stream, void* dst);
 
 void __cdecl d3_ReadFaceTexCoords(void* r, char* o)
 {
@@ -16,12 +16,12 @@ void __cdecl d3_ReadFaceTexCoords(void* r, char* o)
 	int i;
 
 	for (i = 0; i < 3; i++) {
-		fcn_004011d0(r, &(*(Face**) (o + 0x20))[*(int*) (o + 0x18)].uv[i][0]);
+		vfs_ReadDword(r, &(*(Face**) (o + 0x20))[*(int*) (o + 0x18)].uv[i][0]);
 	}
 	for (i = 0; i < 3; i++) {
-		fcn_004011d0(r, &(*(Face**) (o + 0x20))[*(int*) (o + 0x18)].uv[i][1]);
+		vfs_ReadDword(r, &(*(Face**) (o + 0x20))[*(int*) (o + 0x18)].uv[i][1]);
 	}
 	for (i = 0; i < 3; i++) {
-		fcn_004011d0(r, &t);
+		vfs_ReadDword(r, &t);
 	}
 }

@@ -72,7 +72,7 @@ void __cdecl he_RunHeimsuchung(char* obj)
 			h = (int) gm_LookupEntityRecordById(*(int*) (obj + 0xb0));
 			if (h != 0) {
 				gm_AddTime(obj + 0x52, 0x18, 0, 0);
-				he_NotifyHeimsuchung(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (obj + 8)]),
+				he_NotifyHeimsuchung(((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (obj + 8)]),
 					(char*) h, obj + 0x52);
 			}
 			*(int*) (obj + 0x84) = cm_SendSetHE(3, obj);

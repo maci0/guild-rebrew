@@ -1,4 +1,4 @@
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 
 /* ADDRESS: GOLDTL 0x0057f130 */
 int __cdecl d2_CheckTutCh2Step3Done(int* msg)
@@ -10,7 +10,7 @@ int __cdecl d2_CheckTutCh2Step3Done(int* msg)
 		if (e != 0 && *e == 0x10e) {
 			(*(int**) 0x665f08)[0] = 0xb;
 			(*(int**) 0x665f08)[1] = 0xb;
-			(*(int**) 0x665f08)[3] = g_6b7fac;
+			(*(int**) 0x665f08)[3] = gm_GameTicks;
 			return 1;
 		}
 	}

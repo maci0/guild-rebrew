@@ -15,7 +15,7 @@ float __cdecl d3_SampleAverageTerrainHeight(float* pos)
 	int off;
 
 	acc = 0.0f;
-	world = (char*) g_67a370;
+	world = (char*) d3_ActiveScene;
 	if (world != 0) {
 		map = *(char**) (world + 0xb0);
 		if (map != 0) {

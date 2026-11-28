@@ -9,25 +9,25 @@ extern int g_6a25c4[4];
 extern int g_6a25d4;
 extern int g_6a25d8;
 extern int g_6a25e8;
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
 extern int main_LoopFlags;
 extern int g_7746f0;
 extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern unsigned char* g_7e2aa0;
-extern int* g_7e2a9c;
-extern int g_7ea360;
+extern unsigned char* d2_SelectedBuilding;
+extern int* d2_SelectedItem;
+extern int d2_SelectedPerson;
 extern char* lpObjektePROT;
-extern char g_868060[];
-extern Win_1015f40 g_1015f40[0x60];
+extern char gm_TownTable[];
+extern Win_1015f40 d2_Windows[0x60];
 
-extern float g_6628a8;
+extern float flt_0_0;
 
-extern double g_6640e8;
+extern double dbl_0_01;
 extern double g_662c38;
 
-extern char g_6811b0[];
+extern char str_dollar_C[];
 extern char g_6a2f24[];
 extern char g_6a2f30[];
 extern char g_6a2fec[];
@@ -78,68 +78,68 @@ void __cdecl d2_UpdateSelectionPanel(void)
 	if (g_6a25b8 == -1) {
 		return;
 	}
-	if (g_7e2aa0 == 0 || d2_CurrentValueBar == -1 || g_6a25bc == -1) {
+	if (d2_SelectedBuilding == 0 || d2_CurrentValueBar == -1 || g_6a25bc == -1) {
 		goto no_header;
 	}
-	pct = gm_GetEntityMood(g_7e2aa0);
+	pct = gm_GetEntityMood(d2_SelectedBuilding);
 	d2_SetForm(g_6a25b8, 1);
-	io_AppendText(g_6811b0);
-	if (*g_7e2aa0 != 0x47) {
-		io_FormatEntityNameMarkup(*(unsigned short*) (g_7e2aa0 + 0x27), 2, 1, name);
-		if (g_7e2aa0[5] != 0) {
-			io_AppendText(g_6a2f30, name, *g_7e2aa0 * 0xe + 0x48e, g_7e2aa0 + 5);
+	io_AppendText(str_dollar_C);
+	if (*d2_SelectedBuilding != 0x47) {
+		io_FormatEntityNameMarkup(*(unsigned short*) (d2_SelectedBuilding + 0x27), 2, 1, name);
+		if (d2_SelectedBuilding[5] != 0) {
+			io_AppendText(g_6a2f30, name, *d2_SelectedBuilding * 0xe + 0x48e, d2_SelectedBuilding + 5);
 			goto header_done;
 		}
-		io_AppendText(g_6a2f24, name, *g_7e2aa0 * 0xe + 0x48e);
+		io_AppendText(g_6a2f24, name, *d2_SelectedBuilding * 0xe + 0x48e);
 	} else {
-		io_AppendText(g_6a2f24, (char*) 0x870, g_868060 + *(int*) (g_7e2aa0 + 0x65) * 0x2f4);
+		io_AppendText(g_6a2f24, (char*) 0x870, gm_TownTable + *(int*) (d2_SelectedBuilding + 0x65) * 0x2f4);
 	}
 header_done:
 	d2_SetElementValue(d2_CurrentValueBar, 0, 100, pct);
-	flags = *(unsigned short*) (g_7e2aa0 + 0x5a);
+	flags = *(unsigned short*) (d2_SelectedBuilding + 0x5a);
 	if (flags & 4) {
-		e = he_StartHandlungSearch(2, 0, 0x1c, 3, *(int*) (g_7e2aa0 + 1));
+		e = he_StartHandlungSearch(2, 0, 0x1c, 3, *(int*) (d2_SelectedBuilding + 1));
 		if (e == 0) {
 			return;
 		}
 		ratio = (float) gm_GetElapsedMinutes(e + 0x44, e + 0xb8);
 		ratio = (float) gm_GetElapsedMinutes(e + 0x44, (char*) &gm_GameTime) / ratio;
-		((D2_CONTROL_TL*) (g_1015ea0))[g_6a25bc].value_1f4.real = ratio;
+		((D2_CONTROL_TL*) (d2_Controls))[g_6a25bc].value_1f4.real = ratio;
 		if (g_6a25c4[0] == -1) {
 			d2_SetForm(g_6a25b8, 0);
-			g_6a25c4[0] = d2_AddElementToWindow(((((D2_WIN*) g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1) + 0x2f, 0x4c, 0x4ff, d2_CurrentWindowId);
+			g_6a25c4[0] = d2_AddElementToWindow(((((D2_WIN*) d2_Windows)[d2_CurrentWindowId].width - 0x30) >> 1) + 0x2f, 0x4c, 0x4ff, d2_CurrentWindowId);
 		}
 		return;
 	}
 	if (flags & 1) {
-		e = he_StartHandlungSearch(2, 0, 0xd, 3, *(int*) (g_7e2aa0 + 1));
+		e = he_StartHandlungSearch(2, 0, 0xd, 3, *(int*) (d2_SelectedBuilding + 1));
 		ratio = 0.05f;
 		if (e != 0) {
 			if (*(int*) (e + 0x70) >= 4) {
 				ratio = (float) *(int*) (e + 0xc8) / (float) *(int*) (e + 0xc4);
 			}
 			if (ratio < 0.01) {
-				ratio = (float) g_6640e8;
+				ratio = (float) dbl_0_01;
 			}
 			if (g_6a25c4[0] == -1) {
 				d2_SetForm(g_6a25b8, 0);
-				g_6a25c4[0] = d2_AddElementToWindow(((((D2_WIN*) g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1) + 0x2f, 0x4c, 0x4ff, d2_CurrentWindowId);
+				g_6a25c4[0] = d2_AddElementToWindow(((((D2_WIN*) d2_Windows)[d2_CurrentWindowId].width - 0x30) >> 1) + 0x2f, 0x4c, 0x4ff, d2_CurrentWindowId);
 			}
 		}
-		((D2_CONTROL_TL*) (g_1015ea0))[g_6a25bc].value_1f4.real = ratio;
+		((D2_CONTROL_TL*) (d2_Controls))[g_6a25bc].value_1f4.real = ratio;
 		return;
 	}
 	if (flags & 0x40) {
-		e = he_StartHandlungSearch(2, 0, 0x1e, 3, *(int*) (g_7e2aa0 + 1));
+		e = he_StartHandlungSearch(2, 0, 0x1e, 3, *(int*) (d2_SelectedBuilding + 1));
 		if (e == 0) {
 			return;
 		}
 		ratio = (float) gm_GetElapsedMinutes(e + 0x44, e + 0x52);
 		ratio = (float) gm_GetElapsedMinutes(e + 0x44, (char*) &gm_GameTime) / ratio;
-		((D2_CONTROL_TL*) (g_1015ea0))[g_6a25bc].value_1f4.real = ratio;
+		((D2_CONTROL_TL*) (d2_Controls))[g_6a25bc].value_1f4.real = ratio;
 		if (g_6a25c4[0] == -1) {
 			d2_SetForm(g_6a25b8, 0);
-			g_6a25c4[0] = d2_AddElementToWindow(((((D2_WIN*) g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1) + 0x2f, 0x4c, 0x4ff, d2_CurrentWindowId);
+			g_6a25c4[0] = d2_AddElementToWindow(((((D2_WIN*) d2_Windows)[d2_CurrentWindowId].width - 0x30) >> 1) + 0x2f, 0x4c, 0x4ff, d2_CurrentWindowId);
 		}
 		return;
 	}
@@ -150,24 +150,24 @@ header_done:
 		}
 		return;
 	}
-	e = he_StartHandlungSearch(2, 0, 0x1f, 3, *(int*) (g_7e2aa0 + 1));
+	e = he_StartHandlungSearch(2, 0, 0x1f, 3, *(int*) (d2_SelectedBuilding + 1));
 	if (e == 0) {
 		return;
 	}
 	ratio = (float) gm_GetElapsedMinutes(e + 0x44, e + 0x52);
 	ratio = (float) gm_GetElapsedMinutes(e + 0x44, (char*) &gm_GameTime) / ratio;
-	((D2_CONTROL_TL*) (g_1015ea0))[g_6a25bc].value_1f4.real = ratio;
+	((D2_CONTROL_TL*) (d2_Controls))[g_6a25bc].value_1f4.real = ratio;
 	if (g_6a25c4[0] == -1) {
 		d2_SetForm(g_6a25b8, 0);
-		g_6a25c4[0] = d2_AddElementToWindow(((((D2_WIN*) g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1) + 0x2f, 0x4c, 0x4ff, d2_CurrentWindowId);
+		g_6a25c4[0] = d2_AddElementToWindow(((((D2_WIN*) d2_Windows)[d2_CurrentWindowId].width - 0x30) >> 1) + 0x2f, 0x4c, 0x4ff, d2_CurrentWindowId);
 	}
 	return;
 
 no_header:
-	if (g_7ea360 == 0) {
+	if (d2_SelectedPerson == 0) {
 		goto no_target;
 	}
-	s = (char*) g_7ea360;
+	s = (char*) d2_SelectedPerson;
 	if (g_7746f0 < 2) {
 		d2_SetForm(g_6a25b8, 1);
 		pct = (int) (gm_GetEntityHealthRatio(s) * g_662c38);
@@ -177,7 +177,7 @@ no_header:
 	if (*(int*) (s + 0x16c) == 0) {
 		goto drop_elements;
 	}
-	if (*(unsigned short*) (*(int*) (s + 0x16c) + 0x27) != g_774970) {
+	if (*(unsigned short*) (*(int*) (s + 0x16c) + 0x27) != gm_LocalPlayerSlot) {
 		goto drop_elements;
 	}
 	if (g_7746f0 >= 2) {
@@ -190,7 +190,7 @@ no_header:
 		}
 	}
 	d2_SetForm(g_6a25b8, 0);
-	x = (((D2_WIN*) g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1;
+	x = (((D2_WIN*) d2_Windows)[d2_CurrentWindowId].width - 0x30) >> 1;
 	n = d2_GetEntityGearIcons(s, kinds);
 	if (n > 0) {
 		y = 0x38;
@@ -206,7 +206,7 @@ no_header:
 	p = *(char**) (s + 0x17c);
 	if (p == 0) {
 		if (g_6a25d8 != -1) {
-			((D2_CONTROL_TL*) (g_1015ea0))[g_6a25d8].value_1f4.bits = 0;
+			((D2_CONTROL_TL*) (d2_Controls))[g_6a25d8].value_1f4.bits = 0;
 		}
 		return;
 	}
@@ -294,7 +294,7 @@ no_header:
 		}
 		break;
 	}
-	((D2_CONTROL_TL*) (g_1015ea0))[g_6a25d8].value_1f4.real = ratio;
+	((D2_CONTROL_TL*) (d2_Controls))[g_6a25d8].value_1f4.real = ratio;
 	return;
 
 drop_elements:
@@ -307,7 +307,7 @@ drop_elements:
 	return;
 
 no_target:
-	if (g_6a25d4 == -1 || g_7e2a9c == 0) {
+	if (g_6a25d4 == -1 || d2_SelectedItem == 0) {
 		goto drop_elements;
 	}
 	for (i = 0; i < 4; i++) {
@@ -316,15 +316,15 @@ no_target:
 			g_6a25c4[i] = -1;
 		}
 	}
-	if (g_7e2a9c == 0 || (*(char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*(unsigned short*) g_7e2a9c].kind) != 0x1d) {
+	if (d2_SelectedItem == 0 || (*(char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*(unsigned short*) d2_SelectedItem].kind) != 0x1d) {
 		return;
 	}
-	if (g_6a25e8 != -1 && g_100f1dc != -1
+	if (g_6a25e8 != -1 && d2_DialogButtonAction != -1
 	    && d2_CurrentElementId == g_6a25e8 && (main_LoopFlags & 0x2000)) {
-		d2_RunTradeRouteEditor((char*) g_7e2a9c);
+		d2_RunTradeRouteEditor((char*) d2_SelectedItem);
 	}
 	if (d2_CurrentValueBar != -1) {
-		d2_SetElementValue(d2_CurrentValueBar, 0, 100, *((unsigned char*) g_7e2a9c + 0x12));
+		d2_SetElementValue(d2_CurrentValueBar, 0, 100, *((unsigned char*) d2_SelectedItem + 0x12));
 	}
 	d2_SetForm(g_6a25b8, 2);
 	for (i = 0; i < 4; i++) {
@@ -334,14 +334,14 @@ no_target:
 		}
 	}
 	d2_ClearWindowChildren(d2_CurrentWindowId, 1);
-	e = *(char**) ((char*) g_7e2a9c + 0x24);
+	e = *(char**) ((char*) d2_SelectedItem + 0x24);
 	if (e != 0) {
 		s = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xb4));
 		if (s != 0) {
 			io_AppendText(g_6a2fe4, (unsigned char) *s * 0xe + 0x48e);
 		}
 	}
-	e = fcn_00502cd0(*(int*) ((char*) g_7e2a9c + 0x14), 1, 0, 0x1dd);
+	e = fcn_00502cd0(*(int*) ((char*) d2_SelectedItem + 0x14), 1, 0, 0x1dd);
 	if (e == 0) {
 		return;
 	}
@@ -354,9 +354,9 @@ no_target:
 		g_6a25c4[k] = d2_AddWindowImage(i, 0x28, *(unsigned short*) s + 0xdf, d2_CurrentWindowId, -2);
 		fcn_0064d41a(buf, "%i", gm_GetMsgField((int) e, (int) s));
 		n = d2_ShowTxt(i - 2, 0x1c, buf, d2_CurrentWindowId);
-		((D2_CONTROL_TL*) (g_1015ea0))[n].value_05c = 1;
-		((D2_CONTROL_TL*) (g_1015ea0))[n].value_06c = 1;
-		((D2_CONTROL_TL*) (g_1015ea0))[n].width = 0x20;
+		((D2_CONTROL_TL*) (d2_Controls))[n].value_05c = 1;
+		((D2_CONTROL_TL*) (d2_Controls))[n].value_06c = 1;
+		((D2_CONTROL_TL*) (d2_Controls))[n].width = 0x20;
 		s = gm_NextEntityQueryMatch();
 		k++;
 		if (s == 0) {

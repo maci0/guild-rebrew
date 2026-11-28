@@ -3,10 +3,10 @@
 
 
 extern char g_868354[][0x2f4];
-extern int g_7746a0;
-extern char* g_7746a4;
-extern short g_14ce8c0;
-extern short g_14ce8c2;
+extern int sv_ClickedObjekt;
+extern char* d2_HoveredSceneObject;
+extern short io_ActiveCursorX;
+extern short io_ActiveCursorY;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char s_6a41a4[];
@@ -45,15 +45,15 @@ void __cdecl d3_SelectTavernCardTableCity(void)
 	d2_ClearStatusTextSlots();
 	if (main_RunFrameLoop((void*) d3_SelectTavernCardTableCity, 0x677d7) != 0) {
 		do {
-			(*(char**)&g_7746a0) = 0;
+			(*(char**)&sv_ClickedObjekt) = 0;
 			for (i = 0; i < 3; i++) {
 				RegisterStatusText(items[i], g_868354[i], 0);
 			}
-			g_7746a4 = d3_FindSceneObjectAtScreenPoint((float) g_14ce8c0, (float) g_14ce8c2, 0x60, 1);
-			if (g_14ce8cc != 0 && g_7746a4 != 0) {
-				(*(char**)&g_7746a0) = g_7746a4;
+			d2_HoveredSceneObject = d3_FindSceneObjectAtScreenPoint((float) io_ActiveCursorX, (float) io_ActiveCursorY, 0x60, 1);
+			if (g_14ce8cc != 0 && d2_HoveredSceneObject != 0) {
+				(*(char**)&sv_ClickedObjekt) = d2_HoveredSceneObject;
 				for (i = 0; i < 3; i++) {
-					if ((*(char**)&g_7746a0) == items[i]) {
+					if ((*(char**)&sv_ClickedObjekt) == items[i]) {
 						for (city = gm_StartFilteredEntitySearch(1, 0, 0x47); city != 0; city = gm_FindNextFilteredEntity()) {
 							if (*(int*) (city + 0x65) == i + 1) {
 								d2_ShowCityTradeInfoDialog(city, 1);
@@ -63,8 +63,8 @@ void __cdecl d3_SelectTavernCardTableCity(void)
 					}
 				}
 			}
-			else if (g_14ce8e0 != 0) {
-				g_774654 = 1;
+			else if (io_RightButtonReleased != 0) {
+				d2_DialogCloseRequested = 1;
 			}
 		} while (main_RunFrameLoop((void*) d3_SelectTavernCardTableCity, 0x677d7) != 0);
 	}

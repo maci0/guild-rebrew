@@ -12,13 +12,13 @@ typedef struct CUTSCENE_ENTITY_SLOT {
     char pad8[0x24];
 } CUTSCENE_ENTITY_SLOT; /* SIZE 0x2c */
 
-extern int g_772ea4;               /* 0x772ea4 */
+extern int cut_CombatCancelledEntity;               /* 0x772ea4 */
 extern unsigned short* g_772e98;   /* 0x772e98, entity pointer */
-extern unsigned short* g_772e9c;   /* 0x772e9c, entity pointer */
+extern unsigned short* cut_CombatDefenderEntity;   /* 0x772e9c, entity pointer */
 extern char* g_772eb4;             /* 0x772eb4, player table */
 extern int g_772f08;               /* 0x772f08, object count */
-extern char* g_9b9e40[];           /* 0x9b9e40, object pointer table */
-extern char g_9b0e20[];            /* 0x9b0e20, 0x35c-byte player records */
+extern char* d3_CombatFlagObjects[];           /* 0x9b9e40, object pointer table */
+extern char cut_ParticipantSlots[];            /* 0x9b0e20, 0x35c-byte player records */
 
 int __cdecl gm_LookupEntityRecordIn32SlotTable(int search_id);
 void* __cdecl gm_FindOrCreateEntitySlot(void* rec, char* entity);
@@ -45,8 +45,8 @@ char* __cdecl cut_ResolveCombatWinner(COMBAT_WORLD* world)
     result = 0;
     countC = 0;
     countB = 0;
-    if (g_772ea4 != 0) {
-        return (char*) g_772ea4;
+    if (cut_CombatCancelledEntity != 0) {
+        return (char*) cut_CombatCancelledEntity;
     }
 
     countA = 0;
@@ -72,7 +72,7 @@ char* __cdecl cut_ResolveCombatWinner(COMBAT_WORLD* world)
     }
 
     if (nB <= 0) {
-        result = (char*) g_772e9c;
+        result = (char*) cut_CombatDefenderEntity;
     } else if (countA <= 0) {
         result = (char*) g_772e98;
     }
@@ -80,13 +80,13 @@ char* __cdecl cut_ResolveCombatWinner(COMBAT_WORLD* world)
     i = 0;
     if (g_772f08 > 0) {
         do {
-            if (strstr(g_9b9e40[i], "sp_CONQUER") != 0) {
-                d3_TransformPoint(g_9b9e40[i],
-                             (float*) (g_9b9e40[i] + 0x4c), out);
+            if (strstr(d3_CombatFlagObjects[i], "sp_CONQUER") != 0) {
+                d3_TransformPoint(d3_CombatFlagObjects[i],
+                             (float*) (d3_CombatFlagObjects[i] + 0x4c), out);
                 countB++;
-                rec = *(char**) (g_9b9e40[i] + 0x204);
+                rec = *(char**) (d3_CombatFlagObjects[i] + 0x204);
                 if (rec != 0 &&
-                    *(int*) (rec + 0x16c) == *(int*) &g_772e9c) {
+                    *(int*) (rec + 0x16c) == *(int*) &cut_CombatDefenderEntity) {
                     countC++;
                 }
             }
@@ -111,12 +111,12 @@ char* __cdecl cut_ResolveCombatWinner(COMBAT_WORLD* world)
                 p++;
             } while (i < n);
         }
-        src = (CUTSCENE_ENTITY_SLOT*) gm_FindOrCreateEntitySlot(g_9b0e20 + i * 0x35c,
+        src = (CUTSCENE_ENTITY_SLOT*) gm_FindOrCreateEntitySlot(cut_ParticipantSlots + i * 0x35c,
                                                 result);
         slot = *src;
         slot.id = *(int*) (result + 4);
         slot.f4 = 5;
-        cm_SendUpdateCutsceneEntitySlot(*(int*) (g_9b0e20 + i * 0x35c + 0x10), &slot);
+        cm_SendUpdateCutsceneEntitySlot(*(int*) (cut_ParticipantSlots + i * 0x35c + 0x10), &slot);
     }
     return result;
 }

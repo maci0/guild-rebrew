@@ -1,6 +1,6 @@
 typedef int (__stdcall* g_662450_f)(int);
-extern g_662450_f g_662450;
-extern g_662450_f g_662450;
+extern g_662450_f imp_AIL_sample_status;
+extern g_662450_f imp_AIL_sample_status;
 
 
 
@@ -12,8 +12,8 @@ int __cdecl msx_GetSampleStatus(int sampleHandle)
 {
 	int r = -1;
 
-	if (g_6b7f90 != 0 && msx_FindSampleHandleIndex(sampleHandle) >= 0) {
-		r = g_662450(sampleHandle);
+	if (msx_Initialized != 0 && msx_FindSampleHandleIndex(sampleHandle) >= 0) {
+		r = imp_AIL_sample_status(sampleHandle);
 	}
 	return r;
 }

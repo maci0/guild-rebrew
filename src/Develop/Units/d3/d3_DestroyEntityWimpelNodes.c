@@ -1,5 +1,5 @@
 #include "Develop/Units/d3/d3_object.h"
-extern int g_67a370;
+extern int d3_ActiveScene;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 // SIZE 0x84
@@ -39,10 +39,10 @@ void __cdecl d3_DestroyEntityWimpelNodes(char* e)
 		if ((o[OBJ_SND_FLAG_OFF] & 1) == 0) {
 			saved = *(int*) (o + OBJ_SND_STATE_OFF);
 			*(int*) (o + OBJ_SND_STATE_OFF) = 0;
-			d3_VisitSceneObjects(g_67a370, *(char**) (e + 0x61), 0x40, (void*) d3_CollectWimpelNodes, &l);
+			d3_VisitSceneObjects(d3_ActiveScene, *(char**) (e + 0x61), 0x40, (void*) d3_CollectWimpelNodes, &l);
 			*(int*) (*(char**) (e + 0x61) + OBJ_SND_STATE_OFF) = saved;
 		} else {
-			d3_VisitSceneObjects(g_67a370, o, 0x40, (void*) d3_CollectWimpelNodes, &l);
+			d3_VisitSceneObjects(d3_ActiveScene, o, 0x40, (void*) d3_CollectWimpelNodes, &l);
 		}
 		for (i = 0; i < l.n; i++) {
 			if (g_773dd8 != 0) {

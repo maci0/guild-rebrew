@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/event_deal.h"
 
-extern HE_AP_EVENT g_7dcae0[256];
+extern HE_AP_EVENT he_ApEvents[256];
 extern Rec7dc6e0 g_7dc6e0[64];
 
 
@@ -54,8 +54,8 @@ int __cdecl he_InitEventSystem(void)
 	if (he_RegisterAction0xa2Handler() != 0) {
 		return 1;
 	}
-	memset(g_7d2020, 0, sizeof(g_7d2020));
-	memset(g_7dcae0, 0, sizeof(g_7dcae0));
+	memset(he_EventDeals, 0, sizeof(he_EventDeals));
+	memset(he_ApEvents, 0, sizeof(he_ApEvents));
 	memset(g_7dc6e0, 0, sizeof(g_7dc6e0));
 	return 0;
 }

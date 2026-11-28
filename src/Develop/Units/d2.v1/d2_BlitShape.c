@@ -18,10 +18,10 @@ typedef struct {
 	int bits;
 } Surf;
 
-extern int g_100ef80;
+extern int shp_SuppressDraw;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_67d96c;
-extern int g_100f1bc;
+extern int d2_RenderSurfaceWidth;
+extern int shp_ShapeBlendMode;
 
 void __cdecl d2_StoreShapeSize(int, int, Surf*, Spr*);
 void __cdecl d2_ClearLastSpriteSize(int, int, int, Spr*);
@@ -37,17 +37,17 @@ int __cdecl d2_BlitShape(int x, int y, Surf* s, Spr* spr)
 	int right;
 	int h;
 
-	if (g_100ef80 == 0) {
+	if (shp_SuppressDraw == 0) {
 		if (spr->x26 != -1) {
 			h = spr->h;
 			if (x <= d2_ClipRight) {
 				if (h + x >= d2_ClipLeft) {
 					right = h + x;
-					saved = g_67d96c;
-					g_67d96c = s->x10;
+					saved = d2_RenderSurfaceWidth;
+					d2_RenderSurfaceWidth = s->x10;
 					switch (spr->kind) {
 					case 0:
-						if (g_100f1bc == 0) {
+						if (shp_ShapeBlendMode == 0) {
 							d2_ClearDrawnShapeSize(x, y, s->bits, spr);
 						} else {
 							d2_ClearDrawnSpriteSize(x, y, s->bits, spr);
@@ -65,7 +65,7 @@ int __cdecl d2_BlitShape(int x, int y, Surf* s, Spr* spr)
 					case 2:
 						return 1;
 					}
-					g_67d96c = saved;
+					d2_RenderSurfaceWidth = saved;
 				}
 			}
 		} else {

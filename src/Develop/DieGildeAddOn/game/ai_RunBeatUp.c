@@ -2,7 +2,7 @@
 #include "Develop/DieGildeAddOn/game/client_method_registry.h"
 #pragma intrinsic(memset)
 
-extern AM_METHOD g_1008540[];
+extern AM_METHOD am_Methods[];
 
 int __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl gm_SelectRandomEntityCandidate(int e);
@@ -32,14 +32,14 @@ int __cdecl ai_RunBeatUp(int actor, char* request)
     *(int*) (buf + 0x84) = paramVal;
     *(int*) (buf + 0x60) = *(int*) (targetEntity + 4);
     *(int*) (buf + 0x58) = gm_SelectRandomEntityCandidate(targetEntity);
-    g_1008540[0x18].saved_effects[0].value =
-        g_1008540[0x18].effects[0].value * *(float*) (request + 0x14);
-    g_1008540[0x18].saved_effects[1].value =
-        g_1008540[0x18].effects[1].value * *(float*) (request + 0x14);
-    g_1008540[0x18].saved_effects[2].value =
-        g_1008540[0x18].effects[2].value * *(float*) (request + 0x14);
-    g_1008540[0x18].saved_effects[3].value =
-        g_1008540[0x18].effects[3].value * *(float*) (request + 0x14);
+    am_Methods[0x18].saved_effects[0].value =
+        am_Methods[0x18].effects[0].value * *(float*) (request + 0x14);
+    am_Methods[0x18].saved_effects[1].value =
+        am_Methods[0x18].effects[1].value * *(float*) (request + 0x14);
+    am_Methods[0x18].saved_effects[2].value =
+        am_Methods[0x18].effects[2].value * *(float*) (request + 0x14);
+    am_Methods[0x18].saved_effects[3].value =
+        am_Methods[0x18].effects[3].value * *(float*) (request + 0x14);
     cm_SendLogAction("pruegel");
     cm_SendCopyEntityData(buf);
     cm_SendTraceEnd("pruegel");

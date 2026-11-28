@@ -34,16 +34,16 @@ typedef struct Player {
 	int handle;
 } Player;
 
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern int g_14ce8e0;
-extern unsigned char g_7747b0;
+extern int io_RightButtonReleased;
+extern unsigned char gm_ClientModeFlags;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #include "Develop/client_types.h"
 extern D2_ITEM_BUTTON g_776c60[6];
-extern char* g_775318;
-extern unsigned char g_773d75;
+extern char* d2_InventoryPanelEntity;
+extern unsigned char gm_ActiveTownIndex;
 
 Rec* __cdecl gm_LookupSpecialObjectRecord(int key, int* out);
 int __cdecl d2_LoadForm(int, int, char*);
@@ -81,30 +81,30 @@ int __cdecl d2_ConfirmUseObjekt(unsigned short* item)
 		dlg = d2_LoadForm(0, 0, "panel\\useobj");
 		d2_CenterDialogWindows(dlg);
 		d2_SetForm(dlg, 1);
-		if ((rec->mask & ((Ent *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])->mask) == 0 && gm_LookupSpecialObject(id = *item) != 0) {
+		if ((rec->mask & ((Ent *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[gm_LocalPlayerSlot])->mask) == 0 && gm_LookupSpecialObject(id = *item) != 0) {
 			io_AppendText(0xfe3, id * 2 + 0x9a8, rec->price, id * 2 + 0x9a8);
 		} else {
 			io_AppendText(0xfe4, *item * 2 + 0x9a8);
 		}
 		d2_SetOverlayAnimation(0, 0);
 		d2_ResetUiInputAndBounds();
-		g_100f1dc = -1;
+		d2_DialogButtonAction = -1;
 		do {
-			if (g_14ce8e0 != 0) {
-				g_774654 = 1;
+			if (io_RightButtonReleased != 0) {
+				d2_DialogCloseRequested = 1;
 				buy = 0;
 			}
-			if (g_100f1dc != -1) {
-				if (g_100f1dc == 2) {
+			if (d2_DialogButtonAction != -1) {
+				if (d2_DialogButtonAction == 2) {
 					buy = 1;
-					g_774654 = 1;
-				} else if (g_100f1dc == 1 && ((*(char*)&g_7747b0) & 0x80) == 0) {
+					d2_DialogCloseRequested = 1;
+				} else if (d2_DialogButtonAction == 1 && ((*(char*)&gm_ClientModeFlags) & 0x80) == 0) {
 					io_FormatTextBuffer(text, 0xfe6, *item * 2 + 0x9a8, *item * 2 + 0x9a8);
 					d2_SetFormVisibility(dlg, 0);
 					if (d2_ShowModalMessageBox(text, 1) != 0) {
 						for (i = 0; i < 6; i++) {
 							if (((Btn*)g_776c60)[i].item != 0 && (id = d2_GetControlValue(((Btn*)g_776c60)[i].btn)) != 0) {
-								cm_SendSellObjekt(-1, ((Player*)g_775318)->handle, *((Btn*)g_776c60)[i].item, id, g_773d75, 0);
+								cm_SendSellObjekt(-1, ((Player*)d2_InventoryPanelEntity)->handle, *((Btn*)g_776c60)[i].item, id, gm_ActiveTownIndex, 0);
 								d2_SetElementValue(((Btn*)g_776c60)[i].btn, 0, 0x3e7, 0);
 							}
 						}
@@ -112,7 +112,7 @@ int __cdecl d2_ConfirmUseObjekt(unsigned short* item)
 					}
 					d2_SetFormVisibility(dlg, 1);
 					buy = 0;
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				}
 			}
 		} while (main_RunFrameLoop(d2_ConfirmUseObjekt, 0x677c7) != 0);
@@ -125,7 +125,7 @@ int __cdecl d2_ConfirmUseObjekt(unsigned short* item)
 		r.arg = -1;
 		r.dir = 0;
 		r.pad = 0;
-		gm_UseSpecialObject(((Ent *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]), &r);
+		gm_UseSpecialObject(((Ent *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[gm_LocalPlayerSlot]), &r);
 	}
 	return r.dir;
 }

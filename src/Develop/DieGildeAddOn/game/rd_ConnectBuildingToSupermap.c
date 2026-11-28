@@ -12,7 +12,7 @@ extern unsigned char g_1005910[];
 extern unsigned char g_1006114[];
 extern int g_1043698;
 extern int g_773ddc;
-extern int g_67a370;
+extern int d3_ActiveScene;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char s_681664[];
 extern char s_681658[];
@@ -106,7 +106,7 @@ int __cdecl rd_ConnectBuildingToSupermap(int sceneObjectArg, int typeIdArg)
 	pos[2] = 0.0f;
 	d3_TransformToObjectSpace((char*) sceneObjectArg, pos, (float*)(ctx + 0x40));
 	*(int*) (ctx + 0x50) = 0;
-	d3_VisitSceneObjects((char*) g_67a370, 0, 0x180, d3_MatchObjectByNameAndPos, ctx);
+	d3_VisitSceneObjects((char*) d3_ActiveScene, 0, 0x180, d3_MatchObjectByNameAndPos, ctx);
 	if (*(int*) (ctx + 0x50) == 0) {
 		gv_Free3Fields(g_1005904);
 		return 0;

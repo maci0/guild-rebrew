@@ -18,7 +18,7 @@ typedef struct {
 // SIZE 0xc
 
 #include "Develop/client_types.h"
-extern Slot_779d00 g_779d00[];
+extern Slot_779d00 main_CameraBookmarks[];
 
 
 /* ADDRESS: GOLDTL 0x00591c40 */
@@ -26,12 +26,12 @@ void __cdecl d2_ResetBookmarkSlots(void)
 {
 	int i;
 
-	memset(((Ent591c*)g_779d00), 0, sizeof(Ent591c[11]));
+	memset(((Ent591c*)main_CameraBookmarks), 0, sizeof(Ent591c[11]));
 	for (i = 0; i < 11; i++) {
-		((Ent591c*)g_779d00)[i].c = (char) (i + 0x3b);
+		((Ent591c*)main_CameraBookmarks)[i].c = (char) (i + 0x3b);
 		if (i == 10) {
-			((Ent591c*)g_779d00)[10].c = 0x57;
+			((Ent591c*)main_CameraBookmarks)[10].c = 0x57;
 		}
-		d2_ClearBookmarkSlot((char*) &((Ent591c*)g_779d00)[i]);
+		d2_ClearBookmarkSlot((char*) &((Ent591c*)main_CameraBookmarks)[i]);
 	}
 }

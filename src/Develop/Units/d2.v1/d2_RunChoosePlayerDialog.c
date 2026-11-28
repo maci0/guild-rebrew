@@ -2,15 +2,15 @@
 #include <stdlib.h>
 #include <string.h>
 #include "Develop/Units/d2.v1/d2_gui.h"
-extern int g_100f1dc;
-extern int g_100f1e4;
+extern int d2_DialogButtonAction;
+extern int tp_d2_HoveredControl;
 extern int g_14abe74;
 extern int g_14abe78;
 extern int g_14abe80;
 extern int g_14abe84;
-extern char* g_1015ea0;
+extern char* d2_Controls;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char g_14cf950;
+extern char io_LastKeyScancode;
 extern int d2_CurrentWindowId;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char g_7e22c0[];
@@ -121,11 +121,11 @@ int __cdecl d2_RunChoosePlayerDialog(int a0, int a1)
 		id = d2_AddElementToWindow((i % rows) * 0x30 + 0x50,
 		    (i / rows) * 0x30 + 0x20, i + 0x59a, d2_CurrentWindowId);
 		sel[i] = id;
-		((D2_CONTROL_TL*)g_1015ea0)[id].value_058 = 1;
-		((D2_CONTROL_TL*)g_1015ea0)[id].value_038 = 0;
-		((D2_CONTROL_TL*)g_1015ea0)[id].value_03c = 0;
-		((D2_CONTROL_TL*)g_1015ea0)[id].value_060 = 1;
-		((D2_CONTROL_TL*)g_1015ea0)[id].flags_1d0 = 3;
+		((D2_CONTROL_TL*)d2_Controls)[id].value_058 = 1;
+		((D2_CONTROL_TL*)d2_Controls)[id].value_038 = 0;
+		((D2_CONTROL_TL*)d2_Controls)[id].value_03c = 0;
+		((D2_CONTROL_TL*)d2_Controls)[id].value_060 = 1;
+		((D2_CONTROL_TL*)d2_Controls)[id].flags_1d0 = 3;
 		d2_AddToRadioGroup(list, id);
 	}
 	d2_SetForm(dlg, 6);
@@ -133,7 +133,7 @@ int __cdecl d2_RunChoosePlayerDialog(int a0, int a1)
 	d2_CreateGuiWindow(firstNameField, g_7e23ea);
 	d2_CreateGuiWindow(surnameField, g_7e240a);
 	for (j = 0; j < 8; j++) {
-		if (((D2_CONTROL_TL*)g_1015ea0)[sel[j]].value_008 == g_7e23e4) {
+		if (((D2_CONTROL_TL*)d2_Controls)[sel[j]].value_008 == g_7e23e4) {
 			d2_SelectRadioGroup(list, j);
 			break;
 		}
@@ -145,13 +145,13 @@ int __cdecl d2_RunChoosePlayerDialog(int a0, int a1)
 	list2 = d2_CreateRadioGroup(2, s2a, s2b);
 	d2_SelectRadioGroup(list2, (unsigned char) g_7e23e9);
 	d2_ResetSelectionAndInput();
-	g_14cf950 = 0;
+	io_LastKeyScancode = 0;
 	for (;;) {
-		if (g_14ce8e0 != 0
-		    || (g_100f1dc != -1 && d2_CurrentElementId == v27)
-		    || g_14cf950 == 1) {
+		if (io_RightButtonReleased != 0
+		    || (d2_DialogButtonAction != -1 && d2_CurrentElementId == v27)
+		    || io_LastKeyScancode == 1) {
 			if (v9 == 0 && a1 == 0) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 				goto check_redraw;
 			}
 			v9--;
@@ -173,22 +173,22 @@ int __cdecl d2_RunChoosePlayerDialog(int a0, int a1)
 		redraw = 0;
 	state_machine:
 		if (v9 == 0) {
-			if (g_14cf950 == 0x1c) {
+			if (io_LastKeyScancode == 0x1c) {
 				strcpy(g_7e23ea, d2_GetControlValue(firstNameField));
 				v9 = 1;
 				redraw = 1;
-				g_14cf950 = 0;
+				io_LastKeyScancode = 0;
 			}
 		} else if (v9 == 1) {
-			if (g_14cf950 == 0x1c) {
+			if (io_LastKeyScancode == 0x1c) {
 				strcpy(g_7e240a, d2_GetControlValue(surnameField));
 				v9 = 2;
 				redraw = 1;
-				g_14cf950 = 0;
+				io_LastKeyScancode = 0;
 			}
 		} else if (v9 == 2) {
 			d2_UpdateRadioGroup(list1);
-			if (g_100f1dc != -1) {
+			if (d2_DialogButtonAction != -1) {
 				if (d2_CurrentElementId == (int) s1a) {
 					g_7e23e8 = 0;
 					v9 = 3;
@@ -201,7 +201,7 @@ int __cdecl d2_RunChoosePlayerDialog(int a0, int a1)
 			}
 		} else if (v9 == 3) {
 			d2_UpdateRadioGroup(list2);
-			if (g_100f1dc != -1) {
+			if (d2_DialogButtonAction != -1) {
 				if (d2_CurrentElementId == (int) s2b) {
 					g_7e23e9 = 1;
 					v9 = 4;
@@ -214,17 +214,17 @@ int __cdecl d2_RunChoosePlayerDialog(int a0, int a1)
 			}
 		} else if (v9 == 4) {
 			d2_UpdateRadioGroup(list);
-			if (g_14cf950 == 0x1c) {
+			if (io_LastKeyScancode == 0x1c) {
 				v9 = 5;
 				redraw = 1;
 			}
-			if (0x59a <= g_100f1dc && g_100f1dc <= 0x5a1) {
+			if (0x59a <= d2_DialogButtonAction && d2_DialogButtonAction <= 0x5a1) {
 				for (j = 0; j < 8; j++) {
 					n = sel[j];
-					if ((char*)&((D2_CONTROL_TL*)g_1015ea0)[n] != (char*) g_100f1e4) {
-						((D2_CONTROL_TL*)g_1015ea0)[n].value_038 = 0;
-						((D2_CONTROL_TL*)g_1015ea0)[n].value_03c = 0;
-						((D2_CONTROL_TL*)g_1015ea0)[n].value_060 = 1;
+					if ((char*)&((D2_CONTROL_TL*)d2_Controls)[n] != (char*) tp_d2_HoveredControl) {
+						((D2_CONTROL_TL*)d2_Controls)[n].value_038 = 0;
+						((D2_CONTROL_TL*)d2_Controls)[n].value_03c = 0;
+						((D2_CONTROL_TL*)d2_Controls)[n].value_060 = 1;
 					}
 				}
 				v9++;
@@ -233,14 +233,14 @@ int __cdecl d2_RunChoosePlayerDialog(int a0, int a1)
 			g_7e23e0[0] = 0;
 			g_7e23e1 = 0;
 			g_7e23e2 = 0x12;
-			g_7e23e4 = ((D2_CONTROL_TL*)g_1015ea0)[
+			g_7e23e4 = ((D2_CONTROL_TL*)d2_Controls)[
 			     *(int*) (((list * 8 - list) * 5
 					   + *(int*) (list * 0x8c + 0x102cbc8)) * 4
 				       + 0x102cbcc)
 				]
 			    .value_008;
 			result = 1;
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 		}
 		if (main_RunFrameLoop((int (__cdecl*)(void)) d2_RunChoosePlayerDialog, a0) != 0) {
 			continue;

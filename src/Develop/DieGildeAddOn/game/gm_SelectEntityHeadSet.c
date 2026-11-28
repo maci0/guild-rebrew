@@ -4,7 +4,7 @@
 
 
 
-extern HEAD_SET g_6918e8[];
+extern HEAD_SET gm_MaleHeadSets[];
 
 
 int __cdecl gm_RandomMod(unsigned short n);
@@ -61,7 +61,7 @@ HEAD_SET* __cdecl gm_SelectEntityHeadSet(unsigned int entityIndex)
 				headSet = (HEAD_SET*) 0x693228;
 			}
 		} else {
-			headSet = g_6918e8;
+			headSet = gm_MaleHeadSets;
 		}
 		headEntry = (int*) headSet;
 		do {

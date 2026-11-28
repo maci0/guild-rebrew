@@ -24,7 +24,7 @@ struct good {
 
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 extern unsigned char* lpGebaeudePROT;
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -52,15 +52,15 @@ void __cdecl he_UpdateGebAbreissen(char* e)
 			return;
 		}
 		for (i = 0; i < 768; i++) {
-			if (((struct house*)g_7f4ca0)[i].owner == (char*) t) {
-				if (((struct house*)g_7f4ca0)[i].busy != 0) {
-					cm_RequestCancelEntityEvent(((struct house*)g_7f4ca0)[i].handle);
+			if (((struct house*)gm_EntitySlotTable)[i].owner == (char*) t) {
+				if (((struct house*)gm_EntitySlotTable)[i].busy != 0) {
+					cm_RequestCancelEntityEvent(((struct house*)gm_EntitySlotTable)[i].handle);
 				}
-				if (gm_FindFallbackPublicBuilding(&((struct house*)g_7f4ca0)[i], &a, &b) != 0) {
+				if (gm_FindFallbackPublicBuilding(&((struct house*)gm_EntitySlotTable)[i], &a, &b) != 0) {
 					if (b != -1) {
-						ch_StartMovement(((struct house*)g_7f4ca0)[i].handle, a, b, 0, 0, "GebAbreissen");
+						ch_StartMovement(((struct house*)gm_EntitySlotTable)[i].handle, a, b, 0, 0, "GebAbreissen");
 					} else {
-						ch_StartMovement(((struct house*)g_7f4ca0)[i].handle, a, -1, 0, 1, "GebAbreissen");
+						ch_StartMovement(((struct house*)gm_EntitySlotTable)[i].handle, a, -1, 0, 1, "GebAbreissen");
 					}
 				}
 			}
@@ -73,9 +73,9 @@ void __cdecl he_UpdateGebAbreissen(char* e)
 		t = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xac));
 		if (t != 0 && ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*t].category != 0xf) {
 			for (i = 0; i < 768; i++) {
-				if ((((struct house*)g_7f4ca0)[i].type == 6 || ((struct house*)g_7f4ca0)[i].type == 7) && ((struct house*)g_7f4ca0)[i].id != *(unsigned short*) (t + 0x27)) {
+				if ((((struct house*)gm_EntitySlotTable)[i].type == 6 || ((struct house*)gm_EntitySlotTable)[i].type == 7) && ((struct house*)gm_EntitySlotTable)[i].id != *(unsigned short*) (t + 0x27)) {
 					io_FormatTextBuffer(buf, 0x1c52, *(unsigned short*) (t + 0x27), t);
-					he_PostEntityMessage(((struct house*)g_7f4ca0)[i].handle, -1, buf, 0, 0x5ed, "_NACHRICHTEN_HS_67");
+					he_PostEntityMessage(((struct house*)gm_EntitySlotTable)[i].handle, -1, buf, 0, 0x5ed, "_NACHRICHTEN_HS_67");
 				}
 			}
 			cm_RequestDestroyBuilding(*(int*) (t + 1));

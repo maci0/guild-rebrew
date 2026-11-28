@@ -9,7 +9,7 @@ struct query_40f400 {
 	char flag;
 };
 
-extern int g_67a370;
+extern int d3_ActiveScene;
 
 int __cdecl d3_RemoveAnimationIfNameContains();
 void __cdecl d3_VisitSceneObjects(char*, int, int, int (__cdecl*)(), struct query_40f400*);
@@ -27,7 +27,7 @@ int __cdecl DetachAnimFromAll(char** args)
 	q.count = 0;
 	q.result = 0;
 	if (q.name[0] != 0) {
-		d3_VisitSceneObjects(((char*)g_67a370), 0, 0xc0, d3_RemoveAnimationIfNameContains, &q);
+		d3_VisitSceneObjects(((char*)d3_ActiveScene), 0, 0xc0, d3_RemoveAnimationIfNameContains, &q);
 	}
 	return 0;
 }

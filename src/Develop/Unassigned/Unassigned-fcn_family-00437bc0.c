@@ -6,13 +6,13 @@ double __cdecl cos(double);
 
 extern float g_1052bbc;
 extern float g_1052bb4;
-extern float g_10432a4;
+extern float d3_ProjectionDist;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_1042ce8;
 extern float g_1042fa4;
-extern float g_10529c8;
-extern float g_10421a0;
-extern float g_6628a8;
+extern float d3_ViewportZNear;
+extern float d3_ViewportZFar;
+extern float flt_0_0;
 extern float g_1042fc8[24];
 extern float g_10425a0[19];
 
@@ -48,7 +48,7 @@ void __cdecl d3_UpdateViewFrustum(void)
 	float a[3];
 	float m[16];
 
-	angle_x = atan2(g_1052bbc, g_10432a4);
+	angle_x = atan2(g_1052bbc, d3_ProjectionDist);
 	g_1042ce8 = angle_x;
 	s = sin(angle_x);
 	c = cos(angle_x);
@@ -76,23 +76,23 @@ void __cdecl d3_UpdateViewFrustum(void)
 	a[1] = -angle_x;
 	a[2] = 0.0f;
 	d3_BuildEulerRotationMatrix(a, m);
-	g_10425a0[0] = (m[0] + m[4]) * g_6628a8 + m[8];
-	g_10425a0[1] = (m[1] + m[5]) * g_6628a8 + m[9];
-	g_10425a0[2] = (m[2] + m[6]) * g_6628a8 + m[10];
+	g_10425a0[0] = (m[0] + m[4]) * flt_0_0 + m[8];
+	g_10425a0[1] = (m[1] + m[5]) * flt_0_0 + m[9];
+	g_10425a0[2] = (m[2] + m[6]) * flt_0_0 + m[10];
 	a[0] = -angle_y;
 	a[1] = angle_x;
 	a[2] = 0.0f;
 	d3_BuildEulerRotationMatrix(a, m);
-	g_10425a0[4] = (m[0] + m[4]) * g_6628a8 + m[8];
-	g_10425a0[5] = (m[1] + m[5]) * g_6628a8 + m[9];
-	g_10425a0[6] = (m[2] + m[6]) * g_6628a8 + m[10];
+	g_10425a0[4] = (m[0] + m[4]) * flt_0_0 + m[8];
+	g_10425a0[5] = (m[1] + m[5]) * flt_0_0 + m[9];
+	g_10425a0[6] = (m[2] + m[6]) * flt_0_0 + m[10];
 	a[0] = angle_y;
 	a[1] = -angle_x;
 	a[2] = 0.0f;
 	d3_BuildEulerRotationMatrix(a, m);
-	g_10425a0[8] = (m[0] + m[4]) * g_6628a8 + m[8];
-	g_10425a0[9] = (m[1] + m[5]) * g_6628a8 + m[9];
-	g_10425a0[10] = (m[2] + m[6]) * g_6628a8 + m[10];
+	g_10425a0[8] = (m[0] + m[4]) * flt_0_0 + m[8];
+	g_10425a0[9] = (m[1] + m[5]) * flt_0_0 + m[9];
+	g_10425a0[10] = (m[2] + m[6]) * flt_0_0 + m[10];
 	a[0] = angle_y;
 	a[1] = angle_x;
 	a[2] = 0.0f;
@@ -103,14 +103,14 @@ void __cdecl d3_UpdateViewFrustum(void)
 	g_1042fc8[16] = 0.0f;
 	g_1042fc8[17] = 0.0f;
 	g_1042fc8[18] = 1.0f;
-	g_1042fc8[19] = g_10529c8;
+	g_1042fc8[19] = d3_ViewportZNear;
 	g_1042fc8[20] = 0.0f;
-	g_10425a0[12] = (m[0] + m[4]) * g_6628a8 + m[8];
-	g_10425a0[13] = (m[1] + m[5]) * g_6628a8 + m[9];
-	g_10425a0[14] = (m[2] + m[6]) * g_6628a8 + m[10];
+	g_10425a0[12] = (m[0] + m[4]) * flt_0_0 + m[8];
+	g_10425a0[13] = (m[1] + m[5]) * flt_0_0 + m[9];
+	g_10425a0[14] = (m[2] + m[6]) * flt_0_0 + m[10];
 	g_1042fc8[21] = 0.0f;
 	g_1042fc8[22] = -1.0f;
-	g_1042fc8[23] = -g_10421a0;
+	g_1042fc8[23] = -d3_ViewportZFar;
 }
 
 /* Tests the eight corner rays against the four side planes and the near/far
@@ -139,8 +139,8 @@ unsigned char __cdecl d3_TestBoxAgainstFrustum(float* p, float* pmin, float* pma
 			+ g_1042fc8[10] * q[0] < g_1042fc8[11]);
 		f.s.b3 = (g_1042fc8[12] * q[-2] + g_1042fc8[13] * q[-1]
 			+ g_1042fc8[14] * q[0] < g_1042fc8[15]);
-		f.s.b4 = (q[0] < g_10529c8);
-		f.s.b5 = (q[0] > g_10421a0);
+		f.s.b4 = (q[0] < d3_ViewportZNear);
+		f.s.b5 = (q[0] > d3_ViewportZFar);
 		flags.b |= f.b;
 		common.b &= f.b;
 		q += 0x14;

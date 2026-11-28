@@ -1,6 +1,6 @@
-extern unsigned char g_773d75;
-extern int g_100f1dc;
-extern char* g_77255c;
+extern unsigned char gm_ActiveTownIndex;
+extern int d2_DialogButtonAction;
+extern char* d2_CurrentWindow;
 extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
@@ -57,31 +57,31 @@ void __cdecl cut_RunAuctionBidDialog(char* a, int* b)
 		return;
 	cap = gm_AccumulateTyped2(o);
 	d2_ClampAmountToRange(val, cap, 0x20, &max);
-	lo = gm_AmountToUnits(val, g_773d75);
-	hi = gm_AmountToUnits(max, g_773d75);
+	lo = gm_AmountToUnits(val, gm_ActiveTownIndex);
+	hi = gm_AmountToUnits(max, gm_ActiveTownIndex);
 	if (cap < val)
 		return;
 	dlg = d2_LoadForm(0, 0, "cutscenes\\pacht");
 	d2_CenterForm(dlg, 3);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	d2_SetForm(dlg, 0);
-	t = io_AppendText(0x1aa6, g_773d75);
+	t = io_AppendText(0x1aa6, gm_ActiveTownIndex);
 	io_AppendText(0x1aa7);
 	w = d2_GetWindowListItem(dlg, 0, t);
 	d2_SetElementValue(w, lo, hi, lo);
-	bar = d2_AddWindowValueGauge((*(int*) (g_77255c + 0xc) - 0x12c) / 2 - 8, 8, 0x12c, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
+	bar = d2_AddWindowValueGauge((*(int*) (d2_CurrentWindow + 0xc) - 0x12c) / 2 - 8, 8, 0x12c, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
 	d2_UpdateProgressBar(bar, 0x5dc, 1);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	while (main_RunFrameLoop(cut_RunAuctionBidDialog, cut_EventLoopFlags) != 0) {
 		if (d2_UpdateProgressBar(bar, 0, 0) == 0) {
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 		} else {
-			x = g_100f1dc;
+			x = d2_DialogButtonAction;
 			if (x != -1) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 				if (x != 1 && x == 2) {
 					*(int*) (a + 0x98) = 1;
-					*(int*) (a + 0x94) = gm_ConvertUnitsToAmount(d2_GetControlValue(w), g_773d75);
+					*(int*) (a + 0x94) = gm_ConvertUnitsToAmount(d2_GetControlValue(w), gm_ActiveTownIndex);
 				}
 			}
 		}

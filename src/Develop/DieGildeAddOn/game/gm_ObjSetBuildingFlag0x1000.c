@@ -15,7 +15,7 @@ typedef struct {
 	int id;
 } Req;
 
-extern char g_6b5c60[];
+extern char str_empty[];
 
 char* __cdecl d2_RunCityScrollMapDialog(int, Req*, char*, int, int);
 char* __cdecl gm_SearchTable67(int);
@@ -33,7 +33,7 @@ int __cdecl gm_ObjSetBuildingFlag0x1000(char* e, char* context)
 		req.c = 0xa0747980;
 		req.d = 1;
 		req.a = 0;
-		entry = d2_RunCityScrollMapDialog(1, &req, g_6b5c60, 0, 0);
+		entry = d2_RunCityScrollMapDialog(1, &req, str_empty, 0, 0);
 		if (entry == 0) {
 			return 0;
 		}

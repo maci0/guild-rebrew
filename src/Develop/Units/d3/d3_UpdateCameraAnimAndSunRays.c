@@ -3,8 +3,8 @@
 extern int d3_ActiveCameraAnimation;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d3/d3_camera.h"
-extern char* g_6b5cf8;
-extern int g_67a370;
+extern char* SonnenstrahlenObjekt;
+extern int d3_ActiveScene;
 #ifdef REBREW_GOLD
 #define OBJ_SND_OFF 0x208
 #else
@@ -25,7 +25,7 @@ void __cdecl d3_UpdateCameraAnimAndSunRays(void)
 			(*(char**)&d3_ActiveCameraAnimation) = 0;
 		}
 	}
-	if (g_6b5cf8 != 0 && g_67a370 == *(int*) (g_6b5cf8 + OBJ_SND_OFF)) {
-		d3_UpdateSunRays(g_6b5cf8);
+	if (SonnenstrahlenObjekt != 0 && d3_ActiveScene == *(int*) (SonnenstrahlenObjekt + OBJ_SND_OFF)) {
+		d3_UpdateSunRays(SonnenstrahlenObjekt);
 	}
 }

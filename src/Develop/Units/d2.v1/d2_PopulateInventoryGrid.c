@@ -36,10 +36,10 @@ typedef struct {
 } Name;
 // SIZE 0x8
 
-extern char* g_1015ea0;
-extern char* g_77255c;
+extern char* d2_Controls;
+extern char* d2_CurrentWindow;
 extern int d2_CurrentWindowId;
-extern char g_6b5c60[];
+extern char str_empty[];
 extern int g_14a79c0[];
 extern char g_6aac70[];
 
@@ -88,15 +88,15 @@ int __cdecl d2_PopulateInventoryGrid(int list, Row* rows, int a3, int a4, char s
 					r = &rows[j];
 					r->key = key;
 					d2_SetForm(a3, a4);
-					r->icon = d2_AddWindowField((((Screen*)g_77255c)->w - 0x30) >> 1, j * 76, r->key + 0xdf, 0x82, d2_CurrentWindowId);
-					(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[r->icon].value_054) = 1;
-					r->label = d2_ShowTxt((((Screen*)g_77255c)->w - 0xbe) >> 1, j * 76 + 0x2e, g_6b5c60, d2_CurrentWindowId);
+					r->icon = d2_AddWindowField((((Screen*)d2_CurrentWindow)->w - 0x30) >> 1, j * 76, r->key + 0xdf, 0x82, d2_CurrentWindowId);
+					(*(int*)&((D2_CONTROL_TL*)d2_Controls)[r->icon].value_054) = 1;
+					r->label = d2_ShowTxt((((Screen*)d2_CurrentWindow)->w - 0xbe) >> 1, j * 76 + 0x2e, str_empty, d2_CurrentWindowId);
 					d2_SetElementFont(r->icon, 0x54);
 					d2_SetElementFont(r->label, 0x54);
-					(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[r->label].value_06c) = 1;
-					(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[r->label].width) = 0xbe;
+					(*(int*)&((D2_CONTROL_TL*)d2_Controls)[r->label].value_06c) = 1;
+					(*(int*)&((D2_CONTROL_TL*)d2_Controls)[r->label].width) = 0xbe;
 					if (sel) {
-						(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[r->icon].disabled) = 1;
+						(*(int*)&((D2_CONTROL_TL*)d2_Controls)[r->icon].disabled) = 1;
 					}
 					break;
 				}
@@ -125,7 +125,7 @@ int __cdecl d2_PopulateInventoryGrid(int list, Row* rows, int a3, int a4, char s
 			d2_SetElementValue(r->icon, 0, amount, ent);
 			io_FormatTextBuffer(buf, (int) g_6aac70, amount, g_14a79c0[r->key * 2]);
 			d2_SetLabelText(r->label, buf);
-			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[r->label].width) = 0xbe;
+			(*(int*)&((D2_CONTROL_TL*)d2_Controls)[r->label].width) = 0xbe;
 			r->count = amount;
 		} else {
 			d2_DestroyElement(r->label);

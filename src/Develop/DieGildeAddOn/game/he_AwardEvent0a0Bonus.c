@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern unsigned char g_773d75;
-extern char g_7f4ca0[];
+extern unsigned char gm_ActiveTownIndex;
+extern char gm_EntitySlotTable[];
 
 int __cdecl gm_ResolveEntityById(char**, int, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -70,7 +70,7 @@ void __cdecl he_AwardEvent0a0Bonus(char* action)
 		count = gm_RandomMod(8) + 0xa;
 	}
 	count <<= 5;
-	for (p = g_7f4ca0; (int) p < (int) (g_7f4ca0 + 0x65400); p += 0x21c) {
+	for (p = gm_EntitySlotTable; (int) p < (int) (gm_EntitySlotTable + 0x65400); p += 0x21c) {
 		if (*(unsigned short*) p != 0xffff && p != (char*) ent
 			&& *(unsigned char*) (p + 2) < 0xa) {
 			if (radius < gm_CalcEntityFavor(*ent, *(unsigned short*) p, 1)) {
@@ -82,5 +82,5 @@ void __cdecl he_AwardEvent0a0Bonus(char* action)
 	bonus = found * count;
 	io_FormatTextBuffer(buf, 0x41fa, handle, found, bonus);
 	he_PostEntityMessage(*(int*) (ent + 2), -1, buf, 1, 0x5fa, 0);
-	cm_RequestTransferCurrencyNoKill(*(int*) (ent + 2), -1, g_773d75, bonus);
+	cm_RequestTransferCurrencyNoKill(*(int*) (ent + 2), -1, gm_ActiveTownIndex, bonus);
 }

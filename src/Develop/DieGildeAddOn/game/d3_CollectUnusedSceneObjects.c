@@ -4,7 +4,7 @@ extern int g_6f2688;
 extern char** g_6f5308;
 extern int g_774a40;
 extern char** g_779148;
-extern int g_67a370;
+extern int d3_ActiveScene;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl d3_VisitSceneObjectsUntilStopped(int, int, int, void*, int);
@@ -89,7 +89,7 @@ void __cdecl d3_CollectUnusedSceneObjects(int a1, char** list)
 
 	g_774a40 = 0;
 	g_779148 = list;
-	d3_VisitSceneObjects(g_67a370, 0, 0x180, (void*) d3_CollectPrefixSceneObjects, a1);
+	d3_VisitSceneObjects(d3_ActiveScene, 0, 0x180, (void*) d3_CollectPrefixSceneObjects, a1);
 	for (i = 0; i < g_774a40; i++) {
 		e = g_779148[i];
 		if (e == 0) {

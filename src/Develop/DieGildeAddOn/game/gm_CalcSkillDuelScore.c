@@ -13,6 +13,6 @@ float __cdecl gm_CalcSkillDuelScore(char* attacker, char* defender, int skillId)
 
 	atkSkill = gm_GetEntitySkill(attacker, skillId);
 	defSkill = gm_GetEntitySkill(defender, skillId);
-	diff = (atkSkill - defSkill * defSkill) * g_662d34 + 0.4f;
-	return (diff + ((atkSkill * atkSkill - defSkill) * 0.4f + g_662d34)) * g_6628cc;
+	diff = (atkSkill - defSkill * defSkill) * flt_0_6 + 0.4f;
+	return (diff + ((atkSkill * atkSkill - defSkill) * 0.4f + flt_0_6)) * g_6628cc;
 }

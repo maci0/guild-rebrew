@@ -1,7 +1,7 @@
 
 
 
-extern char g_7f4ca4[];
+extern char gm_EntityIdField[];
 #include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 
 int* __cdecl cut_FindLowestIdFlaggedCutscene(void);
@@ -18,20 +18,20 @@ char __cdecl cut_RunPendingCutscenes(int idx)
 	int saved;
 
 	ok = 0;
-	saved = *(int*) (g_7f4ca4 + idx * 0x21c + 0x208);
+	saved = *(int*) (gm_EntityIdField + idx * 0x21c + 0x208);
 	p = cut_FindLowestIdFlaggedCutscene();
 	while (p != 0) {
-		if (cut_IsParticipant(*(int*) (g_7f4ca4 + idx * 0x21c), (unsigned char*) p) != 0) {
-			*(int*) (g_7f4ca4 + idx * 0x21c + 0x208) = *p;
+		if (cut_IsParticipant(*(int*) (gm_EntityIdField + idx * 0x21c), (unsigned char*) p) != 0) {
+			*(int*) (gm_EntityIdField + idx * 0x21c + 0x208) = *p;
 			cut_ExecuteCutscene(p);
-			*(int*) (g_7f4ca4 + idx * 0x21c + 0x208) = -1;
+			*(int*) (gm_EntityIdField + idx * 0x21c + 0x208) = -1;
 			ok = 1;
 		}
 		cut_FreeCutscene(*p);
 		p = cut_FindLowestIdFlaggedCutscene();
 	}
-	cm_BeginPacketFieldDelta(g_7f4ca4 + idx * 0x21c - 4, *(int*) (g_7f4ca4 + idx * 0x21c));
-	cm_AppendCommandSyncField(4, 1, (short) (g_7f4ca4 + idx * 0x21c + 0x208 - g_aed32c), &saved);
+	cm_BeginPacketFieldDelta(gm_EntityIdField + idx * 0x21c - 4, *(int*) (gm_EntityIdField + idx * 0x21c));
+	cm_AppendCommandSyncField(4, 1, (short) (gm_EntityIdField + idx * 0x21c + 0x208 - cm_PacketDeltaBase), &saved);
 	cm_SendSetAttribute();
 	return ok;
 }

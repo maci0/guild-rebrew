@@ -4,8 +4,8 @@
 extern char* g_774a68;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_6ab3e0;
-extern char* g_1043370;
-extern char* g_77255c;
+extern char* tp_ch_PathGrid;
+extern char* d2_CurrentWindow;
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 void __cdecl d3_TransformPoint(char*, float*, float*);
@@ -32,8 +32,8 @@ typedef struct ScrollSlot {
 #define g_town_dir(t) (*(int*) ((t) + 8))
 #define g_town_count(t) (*(int*) ((t) + 0x27a4))
 #define g_cur_dir d2_CurrentWindowId
-#define g_cur_building g_77255c
-#define g_entity_type(t) ((unsigned char*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[(t)]))
+#define g_cur_building d2_CurrentWindow
+#define g_entity_type(t) ((unsigned char*) ((char *)&((ENTITY_RECORD*)gm_EntitySlotTable)[(t)]))
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005b0230 */
 void __cdecl d2_BuildCityScrollMap(char* town)
@@ -66,8 +66,8 @@ void __cdecl d2_BuildCityScrollMap(char* town)
 	unsigned char copied;
 	ScrollSlot* candidate;
 
-	tex = (int) g_1043370;
-	idx = g_773d75 * 0x2f4;
+	tex = (int) tp_ch_PathGrid;
+	idx = gm_ActiveTownIndex * 0x2f4;
 	base_x = *(int*) (idx + 0x86834c);
 	base_y = *(int*) (idx + 0x868350);
 
@@ -102,7 +102,7 @@ void __cdecl d2_BuildCityScrollMap(char* town)
 	}
 	g_town_count(town) = 0;
 
-	p = (char*) gm_StartFilteredEntitySearch(2, 5, 9, 4, g_774970);
+	p = (char*) gm_StartFilteredEntitySearch(2, 5, 9, 4, gm_LocalPlayerSlot);
 	ent = gm_StartFilteredEntitySearch(1, 6);
 	count = 0;
 	slot = (ScrollSlot*) (town + 0xdc);
@@ -138,7 +138,7 @@ void __cdecl d2_BuildCityScrollMap(char* town)
 				d2_ProjectMapCoordToScreen((char*) slot, base_x, base_y);
 			} else {
 				g_cur_dir = g_town_dir(town);
-				g_cur_building = (char*) &g_1015f40[g_cur_dir];
+				g_cur_building = (char*) &d2_Windows[g_cur_dir];
 				if (*obj == 'G') {
 					bld_x = (int) ((float) *(int*) (tex + 0x20)
 					               * (float) offs[2 * (unsigned char) obj[0x34]] * g_6ab3e0 * 0.48f
@@ -155,30 +155,30 @@ void __cdecl d2_BuildCityScrollMap(char* town)
 					               + (float) *(int*) (tex + 0x20) * g_6ab3e0 * 0.5f);
 				}
 				slot->handle = d2_AddElementToWindow(bld_x, bld_y, *obj + 0x47f, dir);
-				((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].value_05c = 1;
-				((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].flags_1d0 = 0x43;
-				((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].value_1cc = 0x56;
-				slot->x = bld_x - ((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].width / 2;
-				slot->y = bld_y - ((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].height / 2;
+				((D2_CONTROL_TL*) (d2_Controls))[slot->handle].value_05c = 1;
+				((D2_CONTROL_TL*) (d2_Controls))[slot->handle].flags_1d0 = 0x43;
+				((D2_CONTROL_TL*) (d2_Controls))[slot->handle].value_1cc = 0x56;
+				slot->x = bld_x - ((D2_CONTROL_TL*) (d2_Controls))[slot->handle].width / 2;
+				slot->y = bld_y - ((D2_CONTROL_TL*) (d2_Controls))[slot->handle].height / 2;
 				d2_PositionControl(*(int*) (g_cur_building + 4) + bld_x,
 				             *(int*) (g_cur_building + 8) + bld_y, slot->handle);
 				if (*obj == 'G') {
 					p = (char*) (*(int*) (obj + 0x65) * 0x2f4 + 0x868060);
-					next = (unsigned char*) ((char*) &((D2_CONTROL_TL*) (g_1015ea0))[slot->handle] + 0xcc);
+					next = (unsigned char*) ((char*) &((D2_CONTROL_TL*) (d2_Controls))[slot->handle] + 0xcc);
 					do {
 						copied = *p++;
 						*next++ = copied;
 					} while (copied != 0);
 				} else {
 					d2_FormatPriceText((int) obj,
-					             (int) ((char*) &((D2_CONTROL_TL*) g_1015ea0)[slot->handle] + 0xcc));
+					             (int) ((char*) &((D2_CONTROL_TL*) d2_Controls)[slot->handle] + 0xcc));
 				}
 				kind = *(unsigned short*) (obj + 0x27);
 				if (kind != 0xffff) {
-					kind_type = g_7f4ca2[kind].kind;
+					kind_type = gm_SlotTableKindView[kind].kind;
 					if (kind_type == 5 || kind_type == 6 || kind_type == 7) {
 						d2_AddElementToWindow(bld_x - 8, bld_y - 8,
-						             *(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[kind] + 0x54),
+						             *(int*) ((char *)&((ENTITY_RECORD*)gm_EntitySlotTable)[kind] + 0x54),
 						             g_cur_dir);
 					}
 				}
@@ -204,7 +204,7 @@ void __cdecl d2_BuildCityScrollMap(char* town)
 
 	dir = g_town_dir(town);
 	g_cur_dir = dir;
-	g_cur_building = (char*) &g_1015f40[dir];
+	g_cur_building = (char*) &d2_Windows[dir];
 	for (i = 0; i < 0x10; i++) {
 		*(int*) (town + 0x26dc + i * 4) = -1;
 	}
@@ -218,30 +218,30 @@ void __cdecl d2_BuildCityScrollMap(char* town)
 				bld_y = (int) slot->fy;
 				slot->handle = d2_AddElementToWindow(bld_x, bld_y,
 				                      (unsigned char) *slot->ent + 0x47f, g_cur_dir);
-				((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].value_05c = 1;
-				((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].value_1dc = -1;
-				((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].value_1e0 = -1;
-				((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].flags_1d0 = 0x43;
-				((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].value_1cc = 0x56;
+				((D2_CONTROL_TL*) (d2_Controls))[slot->handle].value_05c = 1;
+				((D2_CONTROL_TL*) (d2_Controls))[slot->handle].value_1dc = -1;
+				((D2_CONTROL_TL*) (d2_Controls))[slot->handle].value_1e0 = -1;
+				((D2_CONTROL_TL*) (d2_Controls))[slot->handle].flags_1d0 = 0x43;
+				((D2_CONTROL_TL*) (d2_Controls))[slot->handle].value_1cc = 0x56;
 				if (*slot->ent == 'G') {
 					p = (char*) (*(int*) (slot->ent + 0x65) * 0x2f4 + 0x868060);
-					next = (unsigned char*) ((char*) &((D2_CONTROL_TL*) (g_1015ea0))[slot->handle] + 0xcc);
+					next = (unsigned char*) ((char*) &((D2_CONTROL_TL*) (d2_Controls))[slot->handle] + 0xcc);
 					do {
 						copied = *p++;
 						*next++ = copied;
 					} while (copied != 0);
 				} else {
 					d2_FormatPriceText((int) slot->ent,
-					             (int) ((char*) &((D2_CONTROL_TL*) g_1015ea0)[slot->handle] + 0xcc));
+					             (int) ((char*) &((D2_CONTROL_TL*) d2_Controls)[slot->handle] + 0xcc));
 				}
-				slot->x = bld_x - ((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].width / 2;
-				slot->y = bld_y - ((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].height / 2;
+				slot->x = bld_x - ((D2_CONTROL_TL*) (d2_Controls))[slot->handle].width / 2;
+				slot->y = bld_y - ((D2_CONTROL_TL*) (d2_Controls))[slot->handle].height / 2;
 				d2_PositionControl(*(int*) (g_cur_building + 4) + bld_x,
 				             *(int*) (g_cur_building + 8) + bld_y, slot->handle);
-				if (!gm_IsActionAllowedForEntity((unsigned short*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]),
+				if (!gm_IsActionAllowedForEntity((unsigned short*) ((char *)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot]),
 				                  (int*) (town + 0xc), (unsigned char*) slot->ent)) {
-					((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].value_05c = 0;
-					((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].flags_1d0 = 0;
+					((D2_CONTROL_TL*) (d2_Controls))[slot->handle].value_05c = 0;
+					((D2_CONTROL_TL*) (d2_Controls))[slot->handle].flags_1d0 = 0;
 				}
 			}
 			i++;
@@ -256,10 +256,10 @@ void __cdecl d2_BuildCityScrollMap(char* town)
 			if (slot->handle != -1) {
 				kind = *(unsigned short*) (slot->ent + 0x27);
 				if (kind != 0xffff) {
-					kind_type = g_7f4ca2[kind].kind;
+					kind_type = gm_SlotTableKindView[kind].kind;
 					if (kind_type == 5 || kind_type == 6 || kind_type == 7) {
 						d2_AddElementToWindow(slot->x - 8, slot->y - 8,
-						             *(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[kind] + 0x54),
+						             *(int*) ((char *)&((ENTITY_RECORD*)gm_EntitySlotTable)[kind] + 0x54),
 						             g_cur_dir);
 					}
 				}
@@ -273,7 +273,7 @@ void __cdecl d2_BuildCityScrollMap(char* town)
 		mode = d3_CurrentContextIndex;
 		d3_SelectSceneContext(0, 1);
 		g_cur_dir = g_town_dir(town);
-		g_cur_building = (char*) &g_1015f40[g_town_dir(town)];
+		g_cur_building = (char*) &d2_Windows[g_town_dir(town)];
 		p = (char*) 0x6a4770;
 		while (p < (char*) 0x6a4870) {
 			obj = d3_FindSceneObject(0, 0x100, 0, p);
@@ -286,10 +286,10 @@ void __cdecl d2_BuildCityScrollMap(char* town)
 				bld_x = (int) tmp.fx;
 				bld_y = (int) tmp.fy;
 				handle = d2_AddElementToWindow(bld_x, bld_y, 0x550, g_cur_dir);
-				((D2_CONTROL_TL*) (g_1015ea0))[handle].value_05c = 1;
-				((D2_CONTROL_TL*) (g_1015ea0))[handle].flags_1d0 = 0x43;
-				((D2_CONTROL_TL*) (g_1015ea0))[handle].value_1cc = 0x56;
-				*(int*) (&((D2_CONTROL_TL*) (g_1015ea0))[handle].associated_object) = (int) obj;
+				((D2_CONTROL_TL*) (d2_Controls))[handle].value_05c = 1;
+				((D2_CONTROL_TL*) (d2_Controls))[handle].flags_1d0 = 0x43;
+				((D2_CONTROL_TL*) (d2_Controls))[handle].value_1cc = 0x56;
+				*(int*) (&((D2_CONTROL_TL*) (d2_Controls))[handle].associated_object) = (int) obj;
 				*tab = handle;
 				tab++;
 			}
@@ -313,17 +313,17 @@ void __cdecl d2_BuildCityScrollMap(char* town)
 				bld_x = (int) tmp.fx;
 				bld_y = (int) tmp.fy;
 				*tab = d2_AddElementToWindow(bld_x, bld_y, 0x54f, g_cur_dir);
-				((D2_CONTROL_TL*) (g_1015ea0))[*tab].value_05c = 1;
-				((D2_CONTROL_TL*) (g_1015ea0))[*tab].flags_1d0 = 0x43;
+				((D2_CONTROL_TL*) (d2_Controls))[*tab].value_05c = 1;
+				((D2_CONTROL_TL*) (d2_Controls))[*tab].flags_1d0 = 0x43;
 			}
 			tab++;
 		}
 	}
 
-	if ((int) g_7746c4) {
-		handle = *(int*) ((int) g_7746c4 + 0x61);
-	} else if ((int) g_7746c8) {
-		handle = *(int*) ((int) g_7746c8 + 0x61);
+	if ((int) d2_VisitedBuilding) {
+		handle = *(int*) ((int) d2_VisitedBuilding + 0x61);
+	} else if ((int) d2_InteriorBuilding) {
+		handle = *(int*) ((int) d2_InteriorBuilding + 0x61);
 	} else {
 		if ((int) d3_ActiveCamera == 0) {
 			return;
@@ -340,7 +340,7 @@ void __cdecl d2_BuildCityScrollMap(char* town)
 	tmp.y = bld_y;
 	d2_ProjectMapCoordToScreen((char*) &tmp, base_x, base_y);
 	g_cur_dir = g_town_dir(town);
-	g_cur_building = (char*) &g_1015f40[g_town_dir(town)];
+	g_cur_building = (char*) &d2_Windows[g_town_dir(town)];
 	bld_x = (int) tmp.fx - *(int*) (g_cur_building + 0xc) / 2;
 	bld_y = (int) tmp.fy - *(int*) (g_cur_building + 0x10) / 2;
 	if (bld_x < 0) {

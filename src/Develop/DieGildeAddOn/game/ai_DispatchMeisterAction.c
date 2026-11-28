@@ -3,10 +3,10 @@
 #include "Develop/client_types.h"
 
 extern pos14_7f4c00 gm_GameTime;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
-extern char g_7f4ca4[];
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
+extern char gm_EntityIdField[];
 
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
@@ -72,13 +72,13 @@ void __cdecl ai_DispatchMeisterAction(int* actionCtx)
 			}
 			memset(m, 0, sizeof(m));
 			m[4] = (char) actionCtx[0];
-			*(int*) (m + 8) = *(int*) (g_7f4ca4 +
+			*(int*) (m + 8) = *(int*) (gm_EntityIdField +
 			                           *(unsigned short*) (*(int*) (actionCtx[1] + 0x16c) + 0x27) * 0x21c);
 			*(int*) (m + 0xc) = *(int*) (*(int*) (actionCtx[1] + 0x16c) + 1);
 			*(int*) (m + 0x28) = *(int*) &gm_GameTime;
-			*(int*) (m + 0x2c) = g_7f4c04;
-			*(int*) (m + 0x30) = g_7f4c08;
-			*(short*) (m + 0x34) = g_7f4c0c;
+			*(int*) (m + 0x2c) = gm_GameTimeHour;
+			*(int*) (m + 0x30) = gm_GameTimeSliceDword;
+			*(short*) (m + 0x34) = gm_GameTimeTailWord;
 			*(int*) (m + 0x10) = 1;
 			*(int*) (m + 0x14) = 0;
 			m[0x36] = 1;
@@ -99,15 +99,15 @@ void __cdecl ai_DispatchMeisterAction(int* actionCtx)
 		}
 		memset(m, 0, sizeof(m));
 		m[4] = (char) actionCtx[0];
-		*(int*) (m + 8) = *(int*) (g_7f4ca4 +
+		*(int*) (m + 8) = *(int*) (gm_EntityIdField +
 		                           *(unsigned short*) (*(int*) (actionCtx[1] + 0x16c) + 0x27) * 0x21c);
 		*(int*) (m + 0xc) = *(int*) (*(int*) (actionCtx[1] + 0x16c) + 1);
 		*(int*) (m + 0x10) = 0;
 		*(int*) (m + 0x14) = 0;
 		*(int*) (m + 0x28) = *(int*) &gm_GameTime;
-		*(int*) (m + 0x2c) = g_7f4c04;
-		*(int*) (m + 0x30) = g_7f4c08;
-		*(short*) (m + 0x34) = g_7f4c0c;
+		*(int*) (m + 0x2c) = gm_GameTimeHour;
+		*(int*) (m + 0x30) = gm_GameTimeSliceDword;
+		*(short*) (m + 0x34) = gm_GameTimeTailWord;
 		m[0x36] = 1;
 		*(short*) (m + 0x5a) = *(short*) actionCtx[2];
 		*(int*) (m + 0x5c) =
@@ -149,15 +149,15 @@ void __cdecl ai_DispatchMeisterAction(int* actionCtx)
 		                   0xdd);
 		memset(m, 0, sizeof(m));
 		m[4] = (char) actionCtx[0];
-		*(int*) (m + 8) = *(int*) (g_7f4ca4 +
+		*(int*) (m + 8) = *(int*) (gm_EntityIdField +
 		                           *(unsigned short*) (*(int*) (actionCtx[1] + 0x16c) + 0x27) * 0x21c);
 		*(int*) (m + 0xc) = *(int*) (*(int*) (actionCtx[1] + 0x16c) + 1);
 		*(int*) (m + 0x10) = 0;
 		*(int*) (m + 0x14) = 0;
 		*(int*) (m + 0x28) = *(int*) &gm_GameTime;
-		*(int*) (m + 0x2c) = g_7f4c04;
-		*(int*) (m + 0x30) = g_7f4c08;
-		*(short*) (m + 0x34) = g_7f4c0c;
+		*(int*) (m + 0x2c) = gm_GameTimeHour;
+		*(int*) (m + 0x30) = gm_GameTimeSliceDword;
+		*(short*) (m + 0x34) = gm_GameTimeTailWord;
 		m[0x36] = 1;
 		*(short*) (m + 0x5a) = *(short*) actionCtx[2];
 		if (rec != 0) {
@@ -206,15 +206,15 @@ void __cdecl ai_DispatchMeisterAction(int* actionCtx)
 		}
 		memset(m, 0, sizeof(m));
 		m[4] = (char) actionCtx[0];
-		*(int*) (m + 8) = *(int*) (g_7f4ca4 +
+		*(int*) (m + 8) = *(int*) (gm_EntityIdField +
 		                           *(unsigned short*) (*(int*) (actionCtx[1] + 0x16c) + 0x27) * 0x21c);
 		*(int*) (m + 0xc) = *(int*) (*(int*) (actionCtx[1] + 0x16c) + 1);
 		*(int*) (m + 0x10) = 0;
 		*(int*) (m + 0x14) = 0;
 		*(int*) (m + 0x28) = *(int*) &gm_GameTime;
-		*(int*) (m + 0x2c) = g_7f4c04;
-		*(int*) (m + 0x30) = g_7f4c08;
-		*(short*) (m + 0x34) = g_7f4c0c;
+		*(int*) (m + 0x2c) = gm_GameTimeHour;
+		*(int*) (m + 0x30) = gm_GameTimeSliceDword;
+		*(short*) (m + 0x34) = gm_GameTimeTailWord;
 		m[0x36] = 1;
 		*(short*) (m + 0x58) = *(short*) actionCtx[2];
 		for (e = (char*) 0x7f4e05;
@@ -263,15 +263,15 @@ void __cdecl ai_DispatchMeisterAction(int* actionCtx)
 	if (rec == 0) {
 		memset(m, 0, sizeof(m));
 		m[4] = (char) actionCtx[0];
-		*(int*) (m + 8) = *(int*) (g_7f4ca4 +
+		*(int*) (m + 8) = *(int*) (gm_EntityIdField +
 		                           *(unsigned short*) (*(int*) (actionCtx[1] + 0x16c) + 0x27) * 0x21c);
 		*(int*) (m + 0xc) = *(int*) (*(int*) (actionCtx[1] + 0x16c) + 1);
 		*(int*) (m + 0x28) = *(int*) &gm_GameTime;
-		*(int*) (m + 0x2c) = g_7f4c04;
-		*(int*) (m + 0x30) = g_7f4c08;
+		*(int*) (m + 0x2c) = gm_GameTimeHour;
+		*(int*) (m + 0x30) = gm_GameTimeSliceDword;
 		*(int*) (m + 0x10) = 0;
 		*(int*) (m + 0x14) = 0;
-		*(short*) (m + 0x34) = g_7f4c0c;
+		*(short*) (m + 0x34) = gm_GameTimeTailWord;
 		m[0x36] = 1;
 		if (actionCtx[0] == 4) {
 			*(short*) (m + 0x58) = *(short*) actionCtx[2];

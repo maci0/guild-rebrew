@@ -22,7 +22,7 @@ int __cdecl nt_Recv(void)
 	int err;
 	int (__stdcall* receive)(unsigned int, char*, int, int);
 
-	if (g_14cbca0 == -1) {
+	if (nt_ClientSocket == -1) {
 		return 1;
 	}
 	if (g_14cbca4 == 0) {
@@ -30,7 +30,7 @@ int __cdecl nt_Recv(void)
 	}
 	receive = g_662384;
 	if (g_14cbcac < 3) {
-		n = receive(g_14cbca0, g_14cbca4 + (g_14cbcac & 0xffff),
+		n = receive(nt_ClientSocket, g_14cbca4 + (g_14cbcac & 0xffff),
 		             3 - (g_14cbcac & 0xffff), 0);
 		if (n == 0) {
 			goto fail;
@@ -44,7 +44,7 @@ int __cdecl nt_Recv(void)
 			return 0;
 		}
 	}
-	n = receive(g_14cbca0, g_14cbca4 + (g_14cbcac & 0xffff),
+	n = receive(nt_ClientSocket, g_14cbca4 + (g_14cbcac & 0xffff),
 	             *(unsigned short*) (g_14cbca4 + 1) - (g_14cbcac & 0xffff), 0);
 	if (n == 0) {
 		nt_CloseClientConnection();

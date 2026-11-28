@@ -1,5 +1,5 @@
-extern char g_77dda0[];
-extern char g_77dda0[];
+extern char d2_KanoneHitTable[];
+extern char d2_KanoneHitTable[];
 
 
 
@@ -24,7 +24,7 @@ void __cdecl d2_ResetKanoneHitTable(void)
 	int i;
 	int j;
 
-	base = (KANONE_HIT_GROUP*) g_77dda0;
+	base = (KANONE_HIT_GROUP*) d2_KanoneHitTable;
 	for (i = 0; i < 3; i++) {
 		base[i].head0 = -1;
 		for (j = 0; j < 3; j++) {

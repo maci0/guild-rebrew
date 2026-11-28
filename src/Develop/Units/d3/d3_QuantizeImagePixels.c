@@ -3,7 +3,7 @@
 #include "octree.h"
 
 extern COLOR_OCTREE_NODE* g_6b6f20[6];
-extern unsigned char g_6b6008[3][0x100];
+extern unsigned char d3_OctreePalette[3][0x100];
 extern unsigned short g_6b5e08[256];
 extern unsigned short g_6b6b18[256];
 extern unsigned short g_6b6d20[256];
@@ -115,9 +115,9 @@ unsigned int __cdecl d3_QuantizeImagePixels(unsigned char* input, char* output, 
 				down -= 3;
 				*output = *(unsigned char*)&cache[key];
 				index = cache[key];
-				dr = (error + 256)[r - g_6b6008[0][index]];
-				dg = (error + 256)[g - g_6b6008[1][index]];
-				db = (error + 256)[bl - g_6b6008[2][index]];
+				dr = (error + 256)[r - d3_OctreePalette[0][index]];
+				dg = (error + 256)[g - d3_OctreePalette[1][index]];
+				db = (error + 256)[bl - d3_OctreePalette[2][index]];
 				down[0] = (short)dr;
 				down[6] += (short)(dr * 3);
 				down[3] += (short)(dr * 5);

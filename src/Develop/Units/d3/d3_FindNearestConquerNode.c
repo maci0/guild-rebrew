@@ -1,9 +1,9 @@
 #include <math.h>
 
-extern int g_67a370;
+extern int d3_ActiveScene;
 extern int g_772f10;
 extern char* g_9b46c0[];
-extern double g_662aa0;
+extern double dbl_10;
 extern double g_6628d0;
 extern double g_664f08;
 
@@ -29,7 +29,7 @@ char* __cdecl d3_FindNearestConquerNode(char* e)
     best = 1000000.0f;
     res = 0; i = 0;
     g_772f10 = 0;
-    d3_VisitSceneObjects(((char*) g_67a370), 0, 0x40, d3_CollectConquerNode, e);
+    d3_VisitSceneObjects(((char*) d3_ActiveScene), 0, 0x40, d3_CollectConquerNode, e);
     c = *(char**) (*(char**) (e + 0x184) + 0x34);
     d3_TransformPoint(c, c + 0x4c, pos);
     for (; i < g_772f10; i++) {

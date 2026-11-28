@@ -1,11 +1,11 @@
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 extern char* gm_CityEntity;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern int gm_GameTime;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
  
 extern float g_662c30;
 extern float g_66417c;
@@ -32,7 +32,7 @@ extern int __cdecl cm_RequestCopyEntityData(unsigned int a, unsigned int b, int 
 extern void __cdecl he_NotifyContractBatch(int slot, int record, int count, int total);
 extern void __cdecl he_NotifyContractDefault(int slot, int record);
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 extern int __cdecl gm_IsSlotEntryValid();
 extern int __cdecl cm_SendCopyEntityData(void* msg);
 
@@ -64,7 +64,7 @@ void __cdecl gv_UpdateGraveyardPlots(char* entity)
 	handle = -1;
 	if (*(unsigned short*) (entity + 0x27) != 0xffff
 	    && *(unsigned short*) (entity + 0x27) != *(unsigned short*) gm_CityEntity) {
-		home = ((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (entity + 0x27)]);
+		home = ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (entity + 0x27)]);
 	}
 	entry = (int*) FindSlotEntryFiltered(0, entity, 0, (void*) gm_IsSlotEntryValid, 0xff);
 	if (entry != 0) {
@@ -131,7 +131,7 @@ void __cdecl gv_UpdateGraveyardPlots(char* entity)
 				handle = gv_SendExtendProductionTime((int) slot, (int) entity, entry[0],
 					gm_GetEntitySlotIndex((char*) *(int*) (entity + 0x65), entry), 10, 0);
 			} else if (*(char*) (slot + 2) != 6 && *(char*) (slot + 2) != 7) {
-				value = gm_GetSeasonTreasury(slot, (char) g_773d75);
+				value = gm_GetSeasonTreasury(slot, (char) gm_ActiveTownIndex);
 				if ((int) (value * g_66417c) > result) {
 					handle = gv_SendExtendProductionTime((int) slot, (int) entity, entry[0],
 						gm_GetEntitySlotIndex((char*) *(int*) (entity + 0x65), entry), 10, result);
@@ -146,12 +146,12 @@ void __cdecl gv_UpdateGraveyardPlots(char* entity)
 				memset(block, 0, sizeof(block));
 				*(int*) ((char*) block + 8) = *(int*) (slot + 4);
 				*(int*) ((char*) block + 0x28) = gm_GameTime;
-				*(int*) ((char*) block + 0x30) = g_7f4c08;
+				*(int*) ((char*) block + 0x30) = gm_GameTimeSliceDword;
 				*(int*) ((char*) block + 0xc) = *(int*) (entity + 1);
-				*(int*) ((char*) block + 0x2c) = g_7f4c04;
+				*(int*) ((char*) block + 0x2c) = gm_GameTimeHour;
 				*(int*) ((char*) block + 0x58) = *(int*) (entity + 1);
 				*(unsigned char*) ((char*) block + 4) = 0x92;
-				*(unsigned short*) ((char*) block + 0x34) = (unsigned short) g_7f4c0c;
+				*(unsigned short*) ((char*) block + 0x34) = (unsigned short) gm_GameTimeTailWord;
 				*(unsigned char*) ((char*) block + 0x36) = 9;
 				*(int*) ((char*) block + 0x5c) = entry[0];
 				*(char*) ((char*) block + 0x60) = (char) gm_GetEntitySlotIndex((char*) *(int*) (entity + 0x65), entry);

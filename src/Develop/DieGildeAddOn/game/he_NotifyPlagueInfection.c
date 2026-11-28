@@ -18,7 +18,7 @@ void __cdecl he_NotifyPlagueInfection(void* recipient)
 	t = *(char*) ((char*) recipient + 2);
 	if (t == 6 || t == 7) {
 		fcn_0064d41a(buf, g_6ab430, id + 3);
-		io_FormatTextBuffer(g_774a80, id + 0x20ca);
-		he_PostEntityMessage(*(int*) ((char*) recipient + 4), -1, g_774a80, 0, 0x600, buf);
+		io_FormatTextBuffer(io_MessageFormatBuf, id + 0x20ca);
+		he_PostEntityMessage(*(int*) ((char*) recipient + 4), -1, io_MessageFormatBuf, 0, 0x600, buf);
 	}
 }

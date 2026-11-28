@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/ch_script.h"
 #include <string.h>
 
-extern char* g_6b7ebc;
+extern char* evt_WaitingScriptTask;
 extern char* evt_CurrentScript;
 
 #include "Develop/Units/Msx/client_sound.h"
@@ -10,7 +10,7 @@ void __cdecl evt_LogScriptError(char*, int, const char*);
 int __cdecl evt_LoadGfxScript(const char* name);
 int __cdecl evt_RunScript(char* script);
 
-extern int g_6791c8;
+extern int evt_ActiveContextId;
 
 void __cdecl ch_RunAnimationScript();
 char* __cdecl ch_CreateQueuedAction(char*, void (__cdecl*)(), unsigned char, int, ...);
@@ -28,7 +28,7 @@ int __cdecl PlayCharacterAniSound(char** ch, char** ani, int* kind, unsigned cha
 {
 	char* task;
 
-	if (g_6b7ebc != 0 && *(int (__cdecl**)()) (g_6b7ebc + 0x44) == (int (__cdecl*)()) PlayCharacterAniSound) {
+	if (evt_WaitingScriptTask != 0 && *(int (__cdecl**)()) (evt_WaitingScriptTask + 0x44) == (int (__cdecl*)()) PlayCharacterAniSound) {
 		if (*(int*) (*ch + 0x128) != 0) {
 			*(int (__cdecl**)()) (evt_CurrentScript + 0xc60) = (int (__cdecl*)()) PlayCharacterAniSound;
 		}
@@ -70,7 +70,7 @@ int __cdecl PlayCharacterAniScript(char** ch, char** script, int* kind, unsigned
 {
 	char* task;
 
-	if (g_6b7ebc != 0 && *(int (__cdecl**)()) (g_6b7ebc + 0x44) == (int (__cdecl*)()) PlayCharacterAniScript) {
+	if (evt_WaitingScriptTask != 0 && *(int (__cdecl**)()) (evt_WaitingScriptTask + 0x44) == (int (__cdecl*)()) PlayCharacterAniScript) {
 		if (*(int*) (*ch + 0x128) != 0) {
 			*(int (__cdecl**)()) (evt_CurrentScript + 0xc60) = (int (__cdecl*)()) PlayCharacterAniScript;
 		}
@@ -88,7 +88,7 @@ int __cdecl PlayCharacterAniScript(char** ch, char** script, int* kind, unsigned
 		}
 		strncpy(task + 0xf0, *script, 0x3f);
 		strncpy(task + 0x90, *func, 0x5f);
-		*(int*) (task + 0x17c) = g_6791c8;
+		*(int*) (task + 0x17c) = evt_ActiveContextId;
 	}
 	if (*(int*) (evt_CurrentScript + 0xc84) == 1) {
 		*(int (__cdecl**)()) (evt_CurrentScript + 0xc60) = (int (__cdecl*)()) PlayCharacterAniScript;
@@ -103,7 +103,7 @@ int __cdecl PlayCharacterAniScriptInt(char** ch, char** script, int* kind, unsig
 {
 	char* task;
 
-	if (g_6b7ebc != 0 && *(int (__cdecl**)()) (g_6b7ebc + 0x44) == (int (__cdecl*)()) PlayCharacterAniScriptInt) {
+	if (evt_WaitingScriptTask != 0 && *(int (__cdecl**)()) (evt_WaitingScriptTask + 0x44) == (int (__cdecl*)()) PlayCharacterAniScriptInt) {
 		if (*(int*) (*ch + 0x128) != 0) {
 			*(int (__cdecl**)()) (evt_CurrentScript + 0xc60) = (int (__cdecl*)()) PlayCharacterAniScriptInt;
 		}
@@ -121,7 +121,7 @@ int __cdecl PlayCharacterAniScriptInt(char** ch, char** script, int* kind, unsig
 		}
 		strncpy(task + 0xf0, *script, 0x3f);
 		strncpy(task + 0x90, *func, 0x5f);
-		*(int*) (task + 0x17c) = g_6791c8;
+		*(int*) (task + 0x17c) = evt_ActiveContextId;
 		*(int*) (task + 0x180) = *param;
 	}
 	if (*(int*) (evt_CurrentScript + 0xc84) == 1) {

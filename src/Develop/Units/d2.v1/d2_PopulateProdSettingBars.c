@@ -30,7 +30,7 @@ typedef struct
 // SIZE 0x41
 
 extern int d2_CurrentWindowId;
-extern char* g_1015ea0;
+extern char* d2_Controls;
 extern char* lpObjektePROT;
 
 void __cdecl d2_SetForm(int, int);
@@ -53,11 +53,11 @@ void __cdecl d2_PopulateProdSettingBars(int dlg, Entry* list, int* bars, int* ic
 	for (i = 0; i < 7; i++) {
 		if (list[i].id != 0) {
 			h = d2_AddElementToWindow(0xf, i * 0x30, list[i].id + 0xdf, d2_CurrentWindowId);
-			((D2_CONTROL_TL*) g_1015ea0)[h].flags_1d0 = 3;
-			((D2_CONTROL_TL*) g_1015ea0)[h].associated_object = (char *)&((OBJECT_PROTOTYPE*)lpObjektePROT)[list[i].id].kind;
+			((D2_CONTROL_TL*) d2_Controls)[h].flags_1d0 = 3;
+			((D2_CONTROL_TL*) d2_Controls)[h].associated_object = (char *)&((OBJECT_PROTOTYPE*)lpObjektePROT)[list[i].id].kind;
 			d2_SetElementEnabled(h, 1);
-			((D2_CONTROL_TL*) g_1015ea0)[h].value_05c = 1;
-			((D2_CONTROL_TL*) g_1015ea0)[h].value_038 = list[i].b5 == 0;
+			((D2_CONTROL_TL*) d2_Controls)[h].value_05c = 1;
+			((D2_CONTROL_TL*) d2_Controls)[h].value_038 = list[i].b5 == 0;
 			icons[i] = h;
 			bars[i] = d2_AddWindowValueGauge(0x64, i * 0x30 + 0xc, 0xc8, 0, 0x64, 0x7b, 0x802, d2_CurrentWindowId);
 			d2_SetElementValue(bars[i], 0, 0x64, list[i].b4);

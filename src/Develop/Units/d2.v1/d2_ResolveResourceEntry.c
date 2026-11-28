@@ -12,7 +12,7 @@ typedef struct VfsEntry {
 } VfsEntry;
 // SIZE 0x54
 
-extern char* g_772500;
+extern char* d2_FileObjTable;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int d2_ResourceOffset;
 
@@ -24,20 +24,20 @@ int __cdecl d2_ResolveResourceEntry(int idx, void** out, int* out_idx)
 	int j;
 
 	d2_ResourceOffset = 0;
-	if (((VfsEntry*)g_772500)[idx].flags & 2) {
+	if (((VfsEntry*)d2_FileObjTable)[idx].flags & 2) {
 		idx += g_772510;
 	}
 	j = idx;
-	if ((((VfsEntry*)g_772500)[idx].kind == 5 || ((VfsEntry*)g_772500)[idx].kind == 8) && ((VfsEntry*)g_772500)[idx].offset == 0) {
-		if (((VfsEntry*)g_772500)[((VfsEntry*)g_772500)[idx].link].data == 0) {
-			d2_Show(((VfsEntry*)g_772500)[idx].link, 0);
+	if ((((VfsEntry*)d2_FileObjTable)[idx].kind == 5 || ((VfsEntry*)d2_FileObjTable)[idx].kind == 8) && ((VfsEntry*)d2_FileObjTable)[idx].offset == 0) {
+		if (((VfsEntry*)d2_FileObjTable)[((VfsEntry*)d2_FileObjTable)[idx].link].data == 0) {
+			d2_Show(((VfsEntry*)d2_FileObjTable)[idx].link, 0);
 		}
-		j = ((VfsEntry*)g_772500)[idx].link;
+		j = ((VfsEntry*)d2_FileObjTable)[idx].link;
 		d2_ResourceOffset = idx - j;
-	} else if (((VfsEntry*)g_772500)[idx].data == 0) {
+	} else if (((VfsEntry*)d2_FileObjTable)[idx].data == 0) {
 		d2_Show(idx, 0);
 	}
-	*out = ((VfsEntry*)g_772500)[j].data;
+	*out = ((VfsEntry*)d2_FileObjTable)[j].data;
 	*out_idx = idx;
 	return 1;
 }

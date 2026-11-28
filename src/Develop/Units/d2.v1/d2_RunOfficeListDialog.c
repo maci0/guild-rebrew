@@ -18,11 +18,11 @@ extern int d2_CurrentWindowId;
 extern int d2_CurrentElementId;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern int g_14ce8d8;
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 extern int g_14ce8e8;
-extern float g_662cf8;
+extern float flt_100_0;
 extern float g_664e88;
 extern float g_6660d4;
 
@@ -131,11 +131,11 @@ char* __cdecl d2_RunOfficeListDialog(int officeKind, int arg1, int titleId, int 
 					continue;
 				rec[i].text2 = 0;
 				rec[i].text1 = *(unsigned char*) (ent + 0xc) != 0 ? 0x6c9 : 0x6ca;
-				if ((*(unsigned char*) (g_774970 * 0x21c + 0x7f4ca9) != *(unsigned char*) (ent + 9))
+				if ((*(unsigned char*) (gm_LocalPlayerSlot * 0x21c + 0x7f4ca9) != *(unsigned char*) (ent + 9))
 				    && (*(unsigned int*) (ent + 0x1c8) & 0x800000)) {
 					j = 0;
 					for (j = he_StartHandlungSearch(1, 0, 0x6f); j; j = he_fn_Handlung()) {
-						if ((*(int*) (j + 0xac) == *(int*) (g_774970 * 0x21c + 0x7f4ca4))
+						if ((*(int*) (j + 0xac) == *(int*) (gm_LocalPlayerSlot * 0x21c + 0x7f4ca4))
 						    && (*(int*) (ent + 4) == *(int*) (j + 0xb0))) {
 							rec[i].text2 = 0x6cc;
 							break;
@@ -143,11 +143,11 @@ char* __cdecl d2_RunOfficeListDialog(int officeKind, int arg1, int titleId, int 
 					}
 				}
 				rec[i].text3 = 0;
-				if (CountMatchingStraftatEntries(*(int*) (ent + 4), g_774970) > 0) {
+				if (CountMatchingStraftatEntries(*(int*) (ent + 4), gm_LocalPlayerSlot) > 0) {
 					rec[i].text3 = 0x6cd;
 				} else {
 					for (j = he_StartHandlungSearch(1, 0, 0x18); j; j = he_fn_Handlung()) {
-						if ((*(unsigned short*) (j + 8) == g_774970) && (*(int*) (ent + 4) == *(int*) (j + 0xc4))) {
+						if ((*(unsigned short*) (j + 8) == gm_LocalPlayerSlot) && (*(int*) (ent + 4) == *(int*) (j + 0xc4))) {
 							rec[i].text3 = 0x6ce;
 							break;
 						}
@@ -155,7 +155,7 @@ char* __cdecl d2_RunOfficeListDialog(int officeKind, int arg1, int titleId, int 
 				}
 				rec[i].text4 = 0;
 				for (j = he_StartHandlungSearch(1, 0, 0x45); j; j = he_fn_Handlung()) {
-					if ((*(int*) (j + 0xac) == *(int*) (g_774970 * 0x21c + 0x7f4ca4))
+					if ((*(int*) (j + 0xac) == *(int*) (gm_LocalPlayerSlot * 0x21c + 0x7f4ca4))
 					    && (*(int*) (ent + 4) == *(int*) (j + 0xb0))) {
 						rec[i].text4 = 0x6cb;
 						break;
@@ -163,7 +163,7 @@ char* __cdecl d2_RunOfficeListDialog(int officeKind, int arg1, int titleId, int 
 				}
 				if (!rec[i].text4) {
 					f = gm_GetEntityHealth(ent);
-					if (f < g_662cf8)
+					if (f < flt_100_0)
 						rec[i].text4 = 0x6d2;
 					else if (f < g_664e88)
 						rec[i].text4 = 0x6d1;
@@ -175,14 +175,14 @@ char* __cdecl d2_RunOfficeListDialog(int officeKind, int arg1, int titleId, int 
 			}
 			if (officeKind && (officeKind != 7))
 				d2_DrawOfficeCandidateGrid(d2_CurrentWindowId, officeKind, arg1, count, (int) rec,
-				    p ? p : (short*) (g_774970 * 0x21c + 0x7f4ca0));
+				    p ? p : (short*) (gm_LocalPlayerSlot * 0x21c + 0x7f4ca0));
 			else
 				d2_DrawPersonCardGrid(d2_CurrentWindowId, officeKind, arg1, count, (int) rec,
-				    (int) (p ? p : (short*) (g_774970 * 0x21c + 0x7f4ca0)));
+				    (int) (p ? p : (short*) (gm_LocalPlayerSlot * 0x21c + 0x7f4ca0)));
 			again = 0;
 		}
-		if (g_14ce8e0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased) {
+			d2_DialogCloseRequested = 1;
 			goto loopend;
 		}
 		if (!(g_14ce8e8)) {
@@ -219,7 +219,7 @@ char* __cdecl d2_RunOfficeListDialog(int officeKind, int arg1, int titleId, int 
 			}
 		}
 select:
-		if (g_14ce8d8 && (g_100f1dc != -1)) {
+		if (g_14ce8d8 && (d2_DialogButtonAction != -1)) {
 			res = 0;
 			if (count > 0) {
 				j = 0;
@@ -238,7 +238,7 @@ select:
 						res = cb(ent, 0) ? ent : 0;
 						d2_SetFormVisibility(dlg, 1);
 					} else {
-						g_774654 = 1;
+						d2_DialogCloseRequested = 1;
 						res = ent;
 					}
 				}
@@ -252,7 +252,7 @@ loopend:
 		}
 	}
 fail:
-	g_774654 = 1;
+	d2_DialogCloseRequested = 1;
 	main_RunFrameLoop((int) d2_RunOfficeListDialog, 0x657c7);
 	d2_DestroyForm(dlg);
 	return 0;

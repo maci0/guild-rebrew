@@ -1,10 +1,10 @@
 
 
 
-extern int g_7746d8;
+extern int d2_SelectedEntityUiFlags;
 extern int g_14ad1d8;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_7746a0;
+extern int sv_ClickedObjekt;
 
 void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -32,23 +32,23 @@ void __cdecl d2_RunSchreibstubeMenu(char* e)
 	d2_ClearStatusTextSlots();
 	while (main_RunFrameLoop((void*) d2_RunSchreibstubeMenu, 0x67fff) != 0) {
 		d2_OpenContactEinkaufPanel(e);
-		if (g_7746d8 & 0x200) {
+		if (d2_SelectedEntityUiFlags & 0x200) {
 			prod = RegisterStatusText("contact_PRODUKTION_SCHREIBEN", g_14ad1d8, 0x13);
 			lager = RegisterStatusText("contact_LAGER", g_14ad0f0, 0xe);
 			transport = RegisterStatusText("contact_TRANSPORT", g_14ad100, 0x15);
 			personal = RegisterStatusText("ob_PERSONALBUCH", g_14a7b50, 0xc);
 			meister = RegisterStatusText("ob_MEISTERBRIEF", g_14a7d28, 0xc);
 		}
-		if (g_7746a0 != 0 && (g_7746d8 & 0x200)) {
-			if (g_7746a0 == personal) {
+		if (sv_ClickedObjekt != 0 && (d2_SelectedEntityUiFlags & 0x200)) {
+			if (sv_ClickedObjekt == personal) {
 				d2_ShowPersonalbuch(e, "ob_PERSONALBUCH");
-			} else if (g_7746a0 == lager) {
+			} else if (sv_ClickedObjekt == lager) {
 				d2_ShowLagerOptions(e, *(int*) (e + 0x5d));
-			} else if (g_7746a0 == prod) {
+			} else if (sv_ClickedObjekt == prod) {
 				d2_RunProduktionDialog(e);
-			} else if (g_7746a0 == transport) {
+			} else if (sv_ClickedObjekt == transport) {
 				d2_OpenTransportPanel(e);
-			} else if (g_7746a0 == meister) {
+			} else if (sv_ClickedObjekt == meister) {
 				d2_OpenMeisterbriefDialog(e);
 			}
 		}

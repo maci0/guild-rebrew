@@ -1,7 +1,7 @@
 
 
 
-int __cdecl fcn_004011d0(void* stream, void* dst);
+int __cdecl vfs_ReadDword(void* stream, void* dst);
 
 void __cdecl d3_SkipVector3(void* r)
 {
@@ -9,6 +9,6 @@ void __cdecl d3_SkipVector3(void* r)
 	int i;
 
 	for (i = 0; i < 3; i++) {
-		fcn_004011d0(r, &t);
+		vfs_ReadDword(r, &t);
 	}
 }

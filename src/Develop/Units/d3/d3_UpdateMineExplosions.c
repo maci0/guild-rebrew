@@ -8,10 +8,10 @@ typedef struct {
 	int z;
 } D3_MINE_SLOT;
 
-extern int g_67a370;
-extern int g_6b8300;
-extern int g_772e9c;
-extern int g_772ec4;
+extern int d3_ActiveScene;
+extern int d3_CurrentFloor;
+extern int cut_CombatDefenderEntity;
+extern int cut_BombSampleBank;
 
 int __cdecl gm_LookupWeaponSpec(int a1);
 int __cdecl d3_CreateSmokeEmitter(int a1, float* v, int n, float f1, float f2,
@@ -51,7 +51,7 @@ int __cdecl d3_UpdateMineExplosions(void)
 	float v7[4];
 	unsigned char color[4];
 
-	world = *(int*) (((char*) g_67a370) + 0xb0);
+	world = *(int*) (((char*) d3_ActiveScene) + 0xb0);
 	count = 0;
 	obj = gm_LookupWeaponSpec(0x176);
 	p = (D3_MINE_SLOT*) 0x9b9ec0;
@@ -82,15 +82,15 @@ int __cdecl d3_UpdateMineExplosions(void)
 				    4.0f, 7.0f, 8.0f, *(int*) color);
 				d3_CreateExplosionEmitter(0, position, 0x1e, 70.0f, 50.0f, 20.0f, 60.0f,
 				    0x3c);
-				map = g_6b8300;
+				map = d3_CurrentFloor;
 				n = p->x + p->z * *(int*) map;
 				if (*(unsigned char*) (n + *(int*) (map + 0x14)) != 0) {
 					*(unsigned char*) (n + *(int*) (map + 0x10)) += 0xfb;
-					*(unsigned char*) (p->z * *(int*) g_6b8300 + *(int*) (g_6b8300 + 0x14) + p->x) = 0;
-					d3_BuildFloorGeometry(g_6b8300);
-					d3_UpdateFloorLighting(g_6b8300);
+					*(unsigned char*) (p->z * *(int*) d3_CurrentFloor + *(int*) (d3_CurrentFloor + 0x14) + p->x) = 0;
+					d3_BuildFloorGeometry(d3_CurrentFloor);
+					d3_UpdateFloorLighting(d3_CurrentFloor);
 				}
-				sb_PlayVoice((char*) g_772ec4, "Explosion_s", 1, 0x3f,
+				sb_PlayVoice((char*) cut_BombSampleBank, "Explosion_s", 1, 0x3f,
 				    0x7f, 0, 0);
 				q = (int*) 0x7e4260;
 				do {
@@ -108,7 +108,7 @@ int __cdecl d3_UpdateMineExplosions(void)
 								dmg = (int) ((double) (unsigned int) (n + (unsigned char) ((char*) obj)[5]) * (*(float*) (e + 0x1c) * 0.01));
 								dmg2 = (int) ((double) dmg * (1.0 - d * 0.01f));
 								*(int*) (*(char**) q + 0x24) -= dmg2;
-								if (*(int*) (*(char**) q + 0x16c) == g_772e9c) {
+								if (*(int*) (*(char**) q + 0x16c) == cut_CombatDefenderEntity) {
 									d3_ScheduleActionTimer(*q, dmg2, 1);
 								} else {
 									d3_ScheduleActionTimer(*q, dmg2, 2);

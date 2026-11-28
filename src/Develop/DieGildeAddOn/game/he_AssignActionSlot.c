@@ -2,9 +2,9 @@
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 #include "Develop/client_types.h"
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 extern pos14_7f4c00 gm_GameTime;
-extern unsigned short g_7f4c04;
+extern unsigned short gm_GameTimeHour;
 extern char* g_entity_type_table;
 extern float g_696540[];
 extern float g_696550[];
@@ -73,8 +73,8 @@ void __cdecl he_AssignActionSlot(unsigned char* activeRec, char* sceneObj, unsig
 	if ((int) index >= 0x300) {
 		return;
 	}
-	slot = (ACTION_SLOT_VIEW*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[index]));
-	old = *(unsigned char**) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[index]) + 0x17c);
+	slot = (ACTION_SLOT_VIEW*) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[index]));
+	old = *(unsigned char**) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[index]) + 0x17c);
 	if (newShown == old) {
 		return;
 	}
@@ -89,7 +89,7 @@ void __cdecl he_AssignActionSlot(unsigned char* activeRec, char* sceneObj, unsig
 			contextIdx = init_AllocateGebaeudeSceneSlot(activeRec);
 		}
 		cls = gm_GetSeason((int*) &gm_GameTime);
-		tick = g_7f4c04 & 0xffff;
+		tick = gm_GameTimeHour & 0xffff;
 		if ((((float) (int) tick < g_696550[cls] && g_696540[cls] <= (float) (int) tick)
 		     || rec->type == 4 || rec->type == 0x13 || rec->type == 0x1d)
 		    && contextIdx >= 0 && slot->owner != 0

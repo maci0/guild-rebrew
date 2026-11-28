@@ -15,7 +15,7 @@ typedef struct F8 {
 } F8;
 // SIZE 0x8
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 unsigned short __cdecl gm_RandomMod(int n);
@@ -50,7 +50,7 @@ int __cdecl ai_FindGraveyardTargets(char* e, char* q, Blk24* b1, Blk24* b2)
 	t = 0xf00500;
 	if (ai_SelectRankedCandidates(e, 1, &t, 0, gm_RandomMod(0x20) + 32.0f, &idx) == 0)
 		return 0;
-	p = ((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[idx]);
+	p = ((char *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[idx]);
 	v = *(int*)&((ENTITY_RECORD_VIEW*)p)->ptr_170;
 	if (v != 0) {
 		b2->b = *(int*) (v + 1);

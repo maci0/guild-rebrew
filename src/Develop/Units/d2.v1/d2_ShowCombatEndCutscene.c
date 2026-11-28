@@ -1,21 +1,21 @@
 #include <stdio.h>
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
-extern char g_6b5c60[];
-extern char g_7f4ca4[];
-extern char g_7f4ca0[];
+extern char str_empty[];
+extern char gm_EntityIdField[];
+extern char gm_EntitySlotTable[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_68b79c;
 extern char* g_772e98;
-extern char* g_772e9c;
-extern char* g_772ea4;
-extern int g_14ce8e0;
-extern int g_100f1dc;
+extern char* cut_CombatDefenderEntity;
+extern char* cut_CombatCancelledEntity;
+extern int io_RightButtonReleased;
+extern int d2_DialogButtonAction;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern unsigned char* lpGebaeudePROT;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern int d2_CurrentWindowId;
-extern int g_aed32c;
+extern int cm_PacketDeltaBase;
 extern char* g_14a79c0[];
 typedef struct { unsigned char kind; unsigned char unknown01[0x24c]; } COMBAT_BUILDING_STUB;
 
@@ -101,8 +101,8 @@ int __cdecl d2_ShowCombatEndCutscene(char* ctx)
 	self = ctx;
 	mode = 0;
 	rec = 0;
-	d2_SetMouseTooltip(g_6b5c60);
-	d2_ShowStatusBanner(g_6b5c60);
+	d2_SetMouseTooltip(str_empty);
+	d2_ShowStatusBanner(str_empty);
 	if (*(int*) (self + 0x10c) != -1) {
 		ent = gm_StartFilteredEntitySearch(1, 1, *(int*) (self + 0x10c));
 		rec = fcn_00502cd0(*(int*) (ent + 0x5d), 2, 6, 0, 0x116);
@@ -110,7 +110,7 @@ int __cdecl d2_ShowCombatEndCutscene(char* ctx)
 			rec = fcn_00502cd0(*(int*) (ent + 0x5d), 2, 6, 0, 0x2a);
 		}
 	}
-	if (g_68b79c == *(int*) (g_7f4ca4 + g_774970 * 0x21c)) {
+	if (g_68b79c == *(int*) (gm_EntityIdField + gm_LocalPlayerSlot * 0x21c)) {
 		for (id = (int*) (self + 0x80), n = 16; n != 0; n--, id++) {
 			if (*id != -1) {
 				ent = gm_LookupEntityRecordById(*id);
@@ -128,7 +128,7 @@ int __cdecl d2_ShowCombatEndCutscene(char* ctx)
 			}
 		}
 	}
-	if (g_772ea4 == 0) {
+	if (cut_CombatCancelledEntity == 0) {
 		tally = 0;
 		for (id = (int*) (self + 0x80), n = 16; n != 0; n--, id++) {
 			if (*id != -1) {
@@ -153,13 +153,13 @@ int __cdecl d2_ShowCombatEndCutscene(char* ctx)
 		}
 		p = g_772e98;
 		if (n > tally) {
-			p = g_772e9c;
+			p = cut_CombatDefenderEntity;
 		}
 		side = p;
 	} else {
 		side = g_772e98;
-		if (g_772ea4 != g_772e9c) {
-			side = g_772e9c;
+		if (cut_CombatCancelledEntity != cut_CombatDefenderEntity) {
+			side = cut_CombatDefenderEntity;
 		}
 	}
 	screen = d2_LoadForm(0, 0, "cutscenes\\combat_end");
@@ -167,19 +167,19 @@ int __cdecl d2_ShowCombatEndCutscene(char* ctx)
 	d2_SetForm(screen, 2);
 	io_AppendText(0x7d);
 	d2_SetForm(screen, 1);
-	if (*(int*) (g_7f4ca4 + g_774970 * 0x21c) == *(int*) (side + 4)) {
+	if (*(int*) (gm_EntityIdField + gm_LocalPlayerSlot * 0x21c) == *(int*) (side + 4)) {
 		if (side == g_772e98) {
 			if (self[0x7c] & 1) {
-				io_AppendText(0x1189, *(unsigned short*) g_772e98, *(unsigned short*) g_772e9c);
+				io_AppendText(0x1189, *(unsigned short*) g_772e98, *(unsigned short*) cut_CombatDefenderEntity);
 				io_AppendText(0x118a);
 			} else {
-				io_AppendText(0x1189, *(unsigned short*) g_772e98, *(unsigned short*) g_772e9c);
+				io_AppendText(0x1189, *(unsigned short*) g_772e98, *(unsigned short*) cut_CombatDefenderEntity);
 			}
 		} else {
-			io_AppendText(0x118e, *(unsigned short*) g_772e9c, *(unsigned short*) g_772e98);
+			io_AppendText(0x118e, *(unsigned short*) cut_CombatDefenderEntity, *(unsigned short*) g_772e98);
 		}
-	} else if (side == g_772e9c) {
-		io_AppendText(0x118c, *(unsigned short*) g_772e98, *(unsigned short*) g_772e9c);
+	} else if (side == cut_CombatDefenderEntity) {
+		io_AppendText(0x118c, *(unsigned short*) g_772e98, *(unsigned short*) cut_CombatDefenderEntity);
 		if (self[0x7c] & 1) {
 			ent = fcn_00502cd0(0, 2, 7, 1, *(int*) (self + 0x100));
 			if (*(int*) (ent + 0x24) != 0 && gm_SearchTable67(*(int*) (*(int*) (ent + 0x24) + 0xb4)) != 0) {
@@ -187,11 +187,11 @@ int __cdecl d2_ShowCombatEndCutscene(char* ctx)
 			}
 		}
 	} else {
-		io_AppendText(0x118f, *(unsigned short*) g_772e9c, *(unsigned short*) g_772e98);
+		io_AppendText(0x118f, *(unsigned short*) cut_CombatDefenderEntity, *(unsigned short*) g_772e98);
 	}
 	while (main_RunFrameLoop(d2_ShowCombatEndCutscene, 0x7d6c6) != 0) {
-		if (g_14ce8e0 != 0 || g_100f1dc == 2) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0 || d2_DialogButtonAction == 2) {
+			d2_DialogCloseRequested = 1;
 		}
 	}
 	d2_SetForm(screen, 1);
@@ -206,7 +206,7 @@ int __cdecl d2_ShowCombatEndCutscene(char* ctx)
 	} else if (kind == 4) {
 		mode = 2;
 	}
-	io_AppendText(0x1193, *(unsigned short*) g_772e9c, mode + 0x1125);
+	io_AppendText(0x1193, *(unsigned short*) cut_CombatDefenderEntity, mode + 0x1125);
 	d2_DrawCombatParticipants(self + 0xc0, 0, 0x64);
 	ent = gm_StartFilteredEntitySearch(1, 1, *(int*) (self + 0x14));
 	if (ent == 0) {
@@ -225,8 +225,8 @@ int __cdecl d2_ShowCombatEndCutscene(char* ctx)
 	io_AppendText(0x1193, *(unsigned short*) g_772e98, mode + 0x1125);
 	d2_DrawCombatParticipants(self + 0x80, 0, 0x12c);
 	while (main_RunFrameLoop(d2_ShowCombatEndCutscene, 0x7d6c6) != 0) {
-		if (g_14ce8e0 != 0 || g_100f1dc == 2) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0 || d2_DialogButtonAction == 2) {
+			d2_DialogCloseRequested = 1;
 		}
 	}
 	d2_SetForm(screen, 1);
@@ -234,11 +234,11 @@ int __cdecl d2_ShowCombatEndCutscene(char* ctx)
 	io_AppendText(0x1197);
 	flags = (unsigned char) self[0x7c];
 	if (flags & 1) {
-		if (*(unsigned short*) g_772e98 == g_774970) {
+		if (*(unsigned short*) g_772e98 == gm_LocalPlayerSlot) {
 			d2_DrawPartyStoreItems(0x24, 0x32, 2);
-		} else if (*(unsigned short*) g_772e9c == g_774970) {
-			pay = d2_DrawPartyStoreItems(0x24, 0x32, side == g_772e9c ? 0 : 1);
-			cur = gm_GetEntityTableEntry(g_772e9c);
+		} else if (*(unsigned short*) cut_CombatDefenderEntity == gm_LocalPlayerSlot) {
+			pay = d2_DrawPartyStoreItems(0x24, 0x32, side == cut_CombatDefenderEntity ? 0 : 1);
+			cur = gm_GetEntityTableEntry(cut_CombatDefenderEntity);
 			if (cur != 0) {
 				*(int*) (cur + 0x1c) += pay;
 			}
@@ -255,29 +255,29 @@ int __cdecl d2_ShowCombatEndCutscene(char* ctx)
 			cur = fcn_00502cd0(*(int*) (cur + 0x14), 1, 0, 0x1dd);
 			cur = fcn_00502cd0(*(int*) (cur + 0x14), 1, 5);
 			while (cur != 0) {
-				if (side == g_772e9c) {
-					*(int*) (cur + 0xa) = *(unsigned short*) g_772e9c;
+				if (side == cut_CombatDefenderEntity) {
+					*(int*) (cur + 0xa) = *(unsigned short*) cut_CombatDefenderEntity;
 				}
-				if (*(int*) (cur + 0xa) == *(unsigned short*) g_772e9c && rec != 0) {
-					if (g_68b79c == *(int*) (g_7f4ca4 + g_774970 * 0x21c)) {
+				if (*(int*) (cur + 0xa) == *(unsigned short*) cut_CombatDefenderEntity && rec != 0) {
+					if (g_68b79c == *(int*) (gm_EntityIdField + gm_LocalPlayerSlot * 0x21c)) {
 						fcn_0050d490(cur);
 						cm_SendSellObjekt(*(int*) (rec + 2), *(int*) (cur + 6), *(unsigned short*) cur,
-							*(int*) (cur + 0xe), g_773d75, 0);
+							*(int*) (cur + 0xe), gm_ActiveTownIndex, 0);
 					}
-					gm_GetSeasonPrice(*(unsigned short*) cur, g_773d75);
+					gm_GetSeasonPrice(*(unsigned short*) cur, gm_ActiveTownIndex);
 				}
 				cur = gm_NextEntityQueryMatch();
 			}
 		}
 sync:
 		while (main_RunFrameLoop(d2_ShowCombatEndCutscene, 0x7d6c6) != 0) {
-			if (g_14ce8e0 != 0 || g_100f1dc == 2) {
-				g_774654 = 1;
+			if (io_RightButtonReleased != 0 || d2_DialogButtonAction == 2) {
+				d2_DialogCloseRequested = 1;
 			}
 		}
-	} else if ((flags & 2) && side == g_772e9c && *(unsigned short*) side == g_774970) {
+	} else if ((flags & 2) && side == cut_CombatDefenderEntity && *(unsigned short*) side == gm_LocalPlayerSlot) {
 		ent = gm_StartFilteredEntitySearch(1, 1, *(int*) (self + 0x14));
-		io_FormatTextBuffer(msg, 0x119f, ent, *(unsigned short*) g_772e9c, ent);
+		io_FormatTextBuffer(msg, 0x119f, ent, *(unsigned short*) cut_CombatDefenderEntity, ent);
 		kind = (unsigned char) *ent;
 		if (kind != 0x1e && kind != 0x20 && kind != 0x1f) {
 			io_FormatTextBuffer(cat, 0x11a0, (int) kind * 14 + 0x48e);
@@ -296,15 +296,15 @@ sync:
 		if (choice == 1) {
 			kind = ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned char) *ent].category;
 			if (kind == 4 || kind == 0x10) {
-				gm_IncrementMissionActionCount(g_772e9c, 0x1c);
+				gm_IncrementMissionActionCount(cut_CombatDefenderEntity, 0x1c);
 			}
-			cm_SendSetGebBesitzer(*(int*) (ent + 1), *(int*) (g_772e9c + 4), *(int*) (g_772e9c + 4));
-			io_FormatTextBuffer(msg, 0x11a4, *(unsigned short*) g_772e9c, ent);
+			cm_SendSetGebBesitzer(*(int*) (ent + 1), *(int*) (cut_CombatDefenderEntity + 4), *(int*) (cut_CombatDefenderEntity + 4));
+			io_FormatTextBuffer(msg, 0x11a4, *(unsigned short*) cut_CombatDefenderEntity, ent);
 			d2_ShowMessageBox(msg, 0);
 		} else if (choice == 2) {
-			buf[0] = g_6b5c60[0];
+			buf[0] = str_empty[0];
 			memset(buf + 1, 0, 0x3ff);
-			io_FormatTextBuffer(buf, 0x11a5, *(unsigned short*) g_772e9c, ent);
+			io_FormatTextBuffer(buf, 0x11a5, *(unsigned short*) cut_CombatDefenderEntity, ent);
 			d2_ShowMessageBox(buf, 0);
 			cur = fcn_00502cd0(*(int*) (ent + 0x5d), 2, 6, 0, 0x2a);
 			if (cur == 0) {
@@ -322,7 +322,7 @@ sync:
 			sum = (int) (((double) qlo * 0.001 + 0.07) * pay);
 			io_FormatTextBuffer(buf, (int) "$Z%T$A", sum);
 			*(int*) &mode = sum;
-			cm_RequestMoveCredits(*(int*) (g_772e9c + 4), *(int*) (g_772e98 + 4), g_773d75, sum);
+			cm_RequestMoveCredits(*(int*) (cut_CombatDefenderEntity + 4), *(int*) (g_772e98 + 4), gm_ActiveTownIndex, sum);
 			if (cur != 0 && rec != 0) {
 				ent = fcn_00502cd0(*(int*) (cur + 0x14), 1, 5);
 				while (ent != 0) {
@@ -334,33 +334,33 @@ sync:
 					}
 					sprintf(small, "%i %s$A", n, g_14a79c0[*(unsigned short*) ent * 2]);
 					strcat(buf, small);
-					if (g_68b79c == *(int*) (g_7f4ca4 + g_774970 * 0x21c)) {
-						cm_SendSellObjekt(*(int*) (rec + 2), *(int*) (cur + 2), *(unsigned short*) ent, n, g_773d75, 0);
+					if (g_68b79c == *(int*) (gm_EntityIdField + gm_LocalPlayerSlot * 0x21c)) {
+						cm_SendSellObjekt(*(int*) (rec + 2), *(int*) (cur + 2), *(unsigned short*) ent, n, gm_ActiveTownIndex, 0);
 					}
-					sum = (int) (gm_GetSeasonPrice(*(unsigned short*) ent, g_773d75) * (double) n + (double) sum);
+					sum = (int) (gm_GetSeasonPrice(*(unsigned short*) ent, gm_ActiveTownIndex) * (double) n + (double) sum);
 					ent = gm_NextEntityQueryMatch();
 				}
 			}
 			goto settle;
 		} else if (choice == 3) {
 reduce:
-			buf[0] = g_6b5c60[0];
+			buf[0] = str_empty[0];
 			memset(buf + 1, 0, 0x3ff);
-			io_FormatTextBuffer(buf, 0x11a6, *(unsigned short*) g_772e9c, ent);
+			io_FormatTextBuffer(buf, 0x11a6, *(unsigned short*) cut_CombatDefenderEntity, ent);
 			d2_ShowMessageBox(buf, 0);
-			if (g_68b79c == *(int*) (g_7f4ca4 + g_774970 * 0x21c)) {
+			if (g_68b79c == *(int*) (gm_EntityIdField + gm_LocalPlayerSlot * 0x21c)) {
 				gm_AdjustGebaeudeCondition(ent, 0x14 - cut_RandMod(0x14));
 			}
 		} else if (choice == 0) {
-			io_FormatTextBuffer(msg, 0x11a7, *(unsigned short*) g_772e9c, *(unsigned short*) g_772e9c);
+			io_FormatTextBuffer(msg, 0x11a7, *(unsigned short*) cut_CombatDefenderEntity, *(unsigned short*) cut_CombatDefenderEntity);
 			d2_ShowMessageBox(msg, 0);
-			for (row = g_7f4ca0 + 0x164; row < g_7f4ca0 + 0x65564; row += 0x21c) {
+			for (row = gm_EntitySlotTable + 0x164; row < gm_EntitySlotTable + 0x65564; row += 0x21c) {
 				if (*(unsigned short*) (row - 0x164) == 0xffff || *(unsigned char*) (row - 0x15c) == 0) {
 					continue;
 				}
 				i = gm_MapEntityStatRange(*(unsigned char*) row);
 				if (i == 0xa || i == 0xb || i == 0xc) {
-					cm_RequestCopyEntityData(*(int*) (g_772e9c + 4), *(int*) (row - 0x160), 6, 1);
+					cm_RequestCopyEntityData(*(int*) (cut_CombatDefenderEntity + 4), *(int*) (row - 0x160), 6, 1);
 				}
 			}
 		}
@@ -382,12 +382,12 @@ reduce:
 				if (cur[8] == 0) {
 					bonus = (int) (*(unsigned char*) (cur + 0x83) * (1.0f / 42.0f) + 1.0f);
 					d2_AddElementToWindow(col + 6, line + 6, 0x3b, d2_CurrentWindowId);
-					bonus = gm_ConvertUnitsToAmount(bonus * 40, g_773d75);
+					bonus = gm_ConvertUnitsToAmount(bonus * 40, gm_ActiveTownIndex);
 				}
-				if (side == g_772e9c && cur[8] != 0) {
+				if (side == cut_CombatDefenderEntity && cur[8] != 0) {
 					cm_BeginPacketFieldDelta(cur, *(int*) (cur + 4));
 					pay = 0;
-					cm_AppendCommandSyncField(4, 1, (int) cur - g_aed32c + 0x16c, &pay);
+					cm_AppendCommandSyncField(4, 1, (int) cur - cm_PacketDeltaBase + 0x16c, &pay);
 					cm_RequestChangeAttribute();
 				}
 				io_FormatTextBuffer(small, (int) "%T", bonus);
@@ -397,8 +397,8 @@ reduce:
 				sum += bonus;
 			}
 			if (sum != 0) {
-				cm_RequestMoveCredits(*(int*) (g_772e9c + 4), -1, g_773d75, sum);
-			} else if (*(unsigned short*) g_772e9c == g_774970) {
+				cm_RequestMoveCredits(*(int*) (cut_CombatDefenderEntity + 4), -1, gm_ActiveTownIndex, sum);
+			} else if (*(unsigned short*) cut_CombatDefenderEntity == gm_LocalPlayerSlot) {
 				io_AppendText(0x11b6);
 			}
 			if (*(int*) (self + 0x10c) != -1) {
@@ -407,16 +407,16 @@ reduce:
 			}
 			goto sync;
 		}
-	} else if (self[0x7c] != 0 && side == g_772e9c && g_772e9c[2] != 6 && g_772e9c[2] != 7) {
+	} else if (self[0x7c] != 0 && side == cut_CombatDefenderEntity && cut_CombatDefenderEntity[2] != 6 && cut_CombatDefenderEntity[2] != 7) {
 		i = gm_MapBuildingCatToGuildSlot((unsigned char) *ent);
-		if (gm_CheckStatLevel(*(unsigned short*) g_772e9c, i) == 0 || *ent == 0xd || *ent == 0xc || *ent == 0xb) {
+		if (gm_CheckStatLevel(*(unsigned short*) cut_CombatDefenderEntity, i) == 0 || *ent == 0xd || *ent == 0xc || *ent == 0xb) {
 			mask = 0xffff;
 			choice = (gm_RandomMod(3) & mask) + 1;
 			if (choice != 0) {
 				if (choice == 2) {
-					buf[0] = g_6b5c60[0];
+					buf[0] = str_empty[0];
 					memset(buf + 1, 0, 0x3ff);
-					io_FormatTextBuffer(buf, 0x11a5, *(unsigned short*) g_772e9c, ent);
+					io_FormatTextBuffer(buf, 0x11a5, *(unsigned short*) cut_CombatDefenderEntity, ent);
 					d2_ShowMessageBox(buf, 0);
 					cur = fcn_00502cd0(*(int*) (ent + 0x5d), 2, 6, 0, 0x2a);
 					if (cur == 0) {
@@ -433,7 +433,7 @@ reduce:
 					}
 					sum = (int) (((double) flo * 0.001 + 0.07) * pay);
 					io_FormatTextBuffer(buf, (int) "$Z%T$A", sum);
-					cm_RequestMoveCredits(*(int*) (g_772e9c + 4), *(int*) (g_772e98 + 4), g_773d75, sum);
+					cm_RequestMoveCredits(*(int*) (cut_CombatDefenderEntity + 4), *(int*) (g_772e98 + 4), gm_ActiveTownIndex, sum);
 					if (cur != 0 && rec != 0) {
 						p = fcn_00502cd0(*(int*) (cur + 0x14), 1, 5);
 						while (p != 0) {
@@ -445,10 +445,10 @@ reduce:
 							}
 							sprintf(small, "%i %s$A", n, g_14a79c0[*(unsigned short*) p * 2]);
 							strcat(buf, small);
-							if (g_68b79c == *(int*) (g_7f4ca4 + g_774970 * 0x21c)) {
-								cm_SendSellObjekt(*(int*) (rec + 2), *(int*) (cur + 2), *(unsigned short*) p, n, g_773d75, 0);
+							if (g_68b79c == *(int*) (gm_EntityIdField + gm_LocalPlayerSlot * 0x21c)) {
+								cm_SendSellObjekt(*(int*) (rec + 2), *(int*) (cur + 2), *(unsigned short*) p, n, gm_ActiveTownIndex, 0);
 							}
-							sum = (int) (gm_GetSeasonPrice(*(unsigned short*) p, g_773d75) * (double) n + (double) sum);
+							sum = (int) (gm_GetSeasonPrice(*(unsigned short*) p, gm_ActiveTownIndex) * (double) n + (double) sum);
 							p = gm_NextEntityQueryMatch();
 						}
 					}
@@ -456,21 +456,21 @@ reduce:
 				} else if (choice == 3) {
 					goto reduce;
 				} else if (choice == 1) {
-					io_FormatTextBuffer(cat, 0x11a7, *(unsigned short*) g_772e9c, *(unsigned short*) g_772e9c);
+					io_FormatTextBuffer(cat, 0x11a7, *(unsigned short*) cut_CombatDefenderEntity, *(unsigned short*) cut_CombatDefenderEntity);
 					d2_ShowMessageBox(cat, 0);
-					for (row = g_7f4ca0 + 0x164; row < g_7f4ca0 + 0x65564; row += 0x21c) {
+					for (row = gm_EntitySlotTable + 0x164; row < gm_EntitySlotTable + 0x65564; row += 0x21c) {
 						if (*(unsigned short*) (row - 0x164) == 0xffff || *(unsigned char*) (row - 0x15c) == 0) {
 							continue;
 						}
 						i = gm_MapEntityStatRange(*(unsigned char*) row);
 						if (i == 0xa || i == 0xb || i == 0xc) {
-							cm_RequestCopyEntityData(*(int*) (g_772e9c + 4), *(int*) (row - 0x160), 6, 1);
+							cm_RequestCopyEntityData(*(int*) (cut_CombatDefenderEntity + 4), *(int*) (row - 0x160), 6, 1);
 						}
 					}
 				}
 			}
 		} else {
-			io_FormatTextBuffer(cat, 0x11a4, *(unsigned short*) g_772e9c, ent);
+			io_FormatTextBuffer(cat, 0x11a4, *(unsigned short*) cut_CombatDefenderEntity, ent);
 			d2_ShowMessageBox(cat, 0);
 		}
 	}
@@ -478,7 +478,7 @@ reduce:
 settle:
 	d2_SetForm(screen, 1);
 	io_AppendText((int) buf);
-	cur = gm_GetEntityTableEntry(g_772e9c);
+	cur = gm_GetEntityTableEntry(cut_CombatDefenderEntity);
 	if (cur != 0) {
 		*(int*) (cur + 0x1c) += sum;
 	}

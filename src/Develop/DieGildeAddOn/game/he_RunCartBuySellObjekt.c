@@ -3,12 +3,12 @@
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 #include "Develop/client_types.h"
 
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern char* gm_CityEntity;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "game_data.h"
 typedef struct StateProto { unsigned char kind; unsigned char rest[0x24c]; } StateProto;
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 typedef struct Msg55c270 {
@@ -74,7 +74,7 @@ void __cdecl he_RunCartBuySellObjekt(char* o)
 			}
 			h = fcn_00502cd0(*(int*) (e + 0x5d), 1, 1, *(int*) (o + 0xb0));
 			*(int*) (o + 0xb4) = cm_SendSellObjekt(*(int*) (o + 0xb0), -1,
-				*(unsigned short*) (o + 0xac), 1, *(char*) &g_773d75, 0);
+				*(unsigned short*) (o + 0xac), 1, *(char*) &gm_ActiveTownIndex, 0);
 			(*(int*) (o + 0x70))++;
 		}
 		break;
@@ -124,7 +124,7 @@ void __cdecl he_RunCartBuySellObjekt(char* o)
 			msg.x58 = *(int*) (e + 1);
 			cm_SendCopyEntityData((char*) &msg);
 		}
-		if (*(char*) &((ENTITY_RECORD_VIEW*) g_7f4ca0)[*(unsigned short*) (e + 0x27)].entity_type == 6) {
+		if (*(char*) &((ENTITY_RECORD_VIEW*) gm_EntitySlotTable)[*(unsigned short*) (e + 0x27)].entity_type == 6) {
 			char tmp[0x80];
 			char name[0x80];
 

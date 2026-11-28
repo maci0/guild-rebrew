@@ -31,9 +31,9 @@ void __cdecl gm_GetEntityDate(char* entity, PACKED_TIME509050* out)
 	unsigned int seed;
 	int year;
 
-	time.b = g_7f4c04;
-	time.c = g_7f4c08;
-	time.d = g_7f4c0c;
+	time.b = gm_GameTimeHour;
+	time.c = gm_GameTimeSliceDword;
+	time.d = gm_GameTimeTailWord;
 	year = *(int*) &gm_GameTime;
 	if (entity[8] == 0) {
 		year = *(short*) (entity + 0x28);

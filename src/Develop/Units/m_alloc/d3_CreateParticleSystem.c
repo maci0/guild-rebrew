@@ -1,7 +1,7 @@
-extern int g_104049c;
+extern int d3_TextureBank;
 extern char* g_1040958;
-extern int g_67a370;
-extern volatile int g_6b7fac;
+extern int d3_ActiveScene;
+extern volatile int gm_GameTicks;
 extern char g_1040640[];
 int __cdecl d3_LoadOrReuseTexture(char* name, int flags, int a3, int a4);
 void __cdecl d3_LoadTextureSurfaceTl(int h);
@@ -23,7 +23,7 @@ char* __cdecl d3_CreateParticleSystem(unsigned int entryCount, char* assetName, 
 			d3_LoadTextureSurfaceTl(assetHandle);
 			s = m_alloc(0x31c, (char*) 0x67bc8c);
 			*(int*) (s + 0xdc) = assetHandle;
-			i = (assetHandle - g_104049c) / 0x70;
+			i = (assetHandle - d3_TextureBank) / 0x70;
 			*(int*) (s + 0xd8) = entryCount;
 			*(float*) (s + 0xe4) = a3;
 			*(int*) (s + 0xe0) = i;
@@ -41,7 +41,7 @@ char* __cdecl d3_CreateParticleSystem(unsigned int entryCount, char* assetName, 
 			*(int*) (s + 0x1c) = 0;
 			*(int*) (s + 0x24) = 0;
 			*(int*) (s + 0x20) = 0;
-			stamp = g_6b7fac;
+			stamp = gm_GameTicks;
 			for (i = 0; i < *(int*) (s + 0xd8); i++) {
 		
 				*(int*) (*(char**) (s + 0x28) + i * 0x54 + 0x38) = 0;
@@ -59,7 +59,7 @@ char* __cdecl d3_CreateParticleSystem(unsigned int entryCount, char* assetName, 
 			*(unsigned char*) (s + 0x2ff) |= 2;
 			d3_InitSceneObject(s + 0xe8);
 			*(int*) (s + 0x2e4) = a4;
-			*(int*) (s + 0x2f4) = g_67a370;
+			*(int*) (s + 0x2f4) = d3_ActiveScene;
 			*(char**) (s + 0x318) = g_1040958;
 			*(char**) (s + 0x314) = g_1040640;
 			*(char**) (g_1040958 + 0x314) = s;

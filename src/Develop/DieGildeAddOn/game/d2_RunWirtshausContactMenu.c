@@ -31,11 +31,11 @@ typedef struct Msg5a2db0 {
 extern char* g_14ab4ec;
 extern char* g_14ab54c;
 extern char* g_14ab5cc;
-extern char* g_7746a0;
+extern char* sv_ClickedObjekt;
 extern int g_774808;
-extern char g_14cf950;
+extern char io_LastKeyScancode;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_7f4ca4[];
+extern char gm_EntityIdField[];
 extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl d2_ClearStatusTextSlots(void);
@@ -66,17 +66,17 @@ void __cdecl d2_RunWirtshausContactMenu(char* target, char* actor)
 		p1 = RegisterStatusText("contact_WUERFELSPIEL", g_14ab4ec, 0x16);
 		p2 = RegisterStatusText("contact_STAMMTISCH", g_14ab54c, 0x16);
 		p3 = RegisterStatusText("ob_DUNKLE_ECKE", g_14ab5cc, 0x16);
-		if (g_7746a0) {
-			if (g_7746a0 == p1) {
+		if (sv_ClickedObjekt) {
+			if (sv_ClickedObjekt == p1) {
 				d2_ShowWirtshausDialog(target);
-			} else if (g_7746a0 == p2) {
+			} else if (sv_ClickedObjekt == p2) {
 				d2_OpenStammtischDialog(target, actor);
-			} else if (g_7746a0 == p3) {
+			} else if (sv_ClickedObjekt == p3) {
 				d2_OpenDunkleEcke(target, actor);
 			}
 		}
 		if (g_774808) {
-			if (g_14cf950 == 0x12) {
+			if (io_LastKeyScancode == 0x12) {
 				{
 					void* fill_dst;
 					int fill_len;
@@ -101,14 +101,14 @@ void __cdecl d2_RunWirtshausContactMenu(char* target, char* actor)
 					}
 				}
 				m.type = 0x74;
-				m.seed = *(int*) (g_7f4ca4 + g_774970 * 0x21c);
+				m.seed = *(int*) (gm_EntityIdField + gm_LocalPlayerSlot * 0x21c);
 				m.id = -1;
 				m.pos = *(pos14_7f4c00*) &gm_GameTime;
 				m.flag = 2;
 				m.target = *(int*) (target + 1);
 				m.from = *(int*) (actor + 2);
 				cm_SendCopyEntityData(&m);
-			} else if (g_14cf950 == 0x17) {
+			} else if (io_LastKeyScancode == 0x17) {
 				d2_OpenDunkleEcke(target, actor);
 			}
 		}

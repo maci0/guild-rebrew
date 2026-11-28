@@ -13,12 +13,12 @@ char* __cdecl fcn_0064d530(char* dest, char* src, int count);
 void __cdecl fcn_004011f0(void* a0, void* a1);
 void __cdecl vfs_ReadCString(void* a0, char* a1);
 void __cdecl vfs_ReadByte(void* a0, void* a1);
-void __cdecl fcn_004011d0(void* a0, void* a1);
+void __cdecl vfs_ReadDword(void* a0, void* a1);
 void __cdecl vfs_ReadVec3(void* a0, void* a1);
 void* __cdecl d3_LoadOrReuseTexture(void* a0, Col44f250 a1, unsigned int a2, unsigned int a3);
 void __cdecl CloseVfsStream(void* a0);
 
-extern char* g_104049c;
+extern char* d3_TextureBank;
 
 /* ADDRESS: GOLDTL 0x0044f250 */
 int __cdecl d3_LoadFastChunk(unsigned int a0, unsigned int a1, int a2, int a3, int a4)
@@ -70,7 +70,7 @@ int __cdecl d3_LoadFastChunk(unsigned int a0, unsigned int a1, int a2, int a3, i
 				} while (v28 < *(int*)(chunk + 0x44) + 8);
 			}
 		}
-		fcn_004011d0(inputStream, chunk + 0x1d4);
+		vfs_ReadDword(inputStream, chunk + 0x1d4);
 		v11 = *(int*)(chunk + 0x4c);
 		*(unsigned int*)(chunk + 0x48) = (unsigned int)m_alloc(v11 * 0x38, "d3_io_fl:LoadFastChunk(poi)");
 		v11 = 0;
@@ -171,7 +171,7 @@ int __cdecl d3_LoadFastChunk(unsigned int a0, unsigned int a1, int a2, int a3, i
 					} while (*(d - 1) != 0);
 				}
 				if (v6 != 0) {
-					v25 = (int)(v6 - g_104049c) / 0x70;
+					v25 = (int)(v6 - d3_TextureBank) / 0x70;
 				} else {
 					v25 = -1;
 				}

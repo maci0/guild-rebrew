@@ -1,4 +1,4 @@
-extern int g_6b7d7c;
+extern int sb_WaveDriver;
 
 
 
@@ -8,7 +8,7 @@ int __cdecl sb_SetVoicePan(int* voice, int pan)
 {
 	int r;
 
-	r = g_6b7d7c;
+	r = sb_WaveDriver;
 	if (r != 0) {
 		if (voice != 0) {
 			if (pan >= 0 && pan <= 0x7f) {

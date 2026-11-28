@@ -10,7 +10,7 @@ typedef struct
 } Ent21c;
 // SIZE 0x21c
 
-extern int g_67a370;
+extern int d3_ActiveScene;
 extern int g_9b4a40[];
 extern char* ch_ContextCharacters[32];
 
@@ -20,7 +20,7 @@ void __cdecl cut_RefreshCombatContextCharacters(void)
 	int n;
 	int i;
 
-	self = g_67a370;
+	self = d3_ActiveScene;
 	memset(((Ent21c**)ch_ContextCharacters), 0, sizeof(Ent21c*[32]));
 	n = 0;
 	for (i = 0; i < 32; i++) {

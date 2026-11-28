@@ -1,6 +1,6 @@
-extern float g_6b5df8[3];
-extern float g_6777b0[3];
-extern float g_6777bc[3];
+extern float d3_GammaBrightness[3];
+extern float d3_GammaContrast[3];
+extern float d3_GammaExponent[3];
 
 void __cdecl d3_ApplyGammaRamp(void);
 
@@ -10,9 +10,9 @@ void __cdecl d3_SetGammaParams(float* brightness, float* contrast, float* gamma)
 	int i;
 
 	for (i = 0; i < 3; i++) {
-		g_6b5df8[i] = brightness[i];
-		g_6777b0[i] = contrast[i];
-		g_6777bc[i] = gamma[i];
+		d3_GammaBrightness[i] = brightness[i];
+		d3_GammaContrast[i] = contrast[i];
+		d3_GammaExponent[i] = gamma[i];
 	}
 	d3_ApplyGammaRamp();
 }

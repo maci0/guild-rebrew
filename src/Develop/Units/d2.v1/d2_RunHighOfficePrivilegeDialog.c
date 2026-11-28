@@ -39,16 +39,16 @@ void __cdecl d2_RunHighOfficePrivilegeDialog(void)
 	int r;
 	char lvl;
 
-	r = amt_CheckHighOfficeEligibility((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]);
+	r = amt_CheckHighOfficeEligibility((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot]);
 	if (r != 1) {
 		if (r == -1) {
 			d2_ShowModalMessageBox(g_14aad38, 0);
 			return;
 		}
-		d2_CheckActionBlocker((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 8);
+		d2_CheckActionBlocker((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot], 8);
 		return;
 	}
-	lvl = ((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_165[4];
+	lvl = ((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot].unk_165[4];
 	if (lvl == 0x1e) {
 		memset(&q, 0, sizeof(q));
 		q.x4 = 0xc00;

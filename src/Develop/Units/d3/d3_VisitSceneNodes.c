@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_fc52f0, g_fc28f4, g_fb98f4, g_fb9598;
+extern int g_fc52f0, d3_SceneRootSentinelTail, g_fb98f4, g_fb9598;
 char __cdecl d3_MatchObjectTypeMask(int, unsigned int);
 
 /* ADDRESS: GOLD 0x00438e60 */
@@ -27,7 +27,7 @@ char __cdecl d3_VisitSceneNodes(char* scene, char* node, unsigned int flags, voi
     } else {
         if (scene == g_5fb5b0) {
             *(int*) (scene + 0x80) = g_fc52f0;
-            *(int*) (scene + 0x84) = g_fc28f4;
+            *(int*) (scene + 0x84) = d3_SceneRootSentinelTail;
             *(int*) (scene + 0xa4) = g_fb98f4;
             *(int*) (scene + 0xa8) = g_fb9598;
         }

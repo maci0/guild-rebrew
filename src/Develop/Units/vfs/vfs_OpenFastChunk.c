@@ -1,6 +1,6 @@
 
 
-extern struct VFS_DIR* g_6b7fdc;
+extern struct VFS_DIR* vfs_RootDir;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
@@ -18,7 +18,7 @@ void* __cdecl vfs_OpenFastChunk(char* name)
 	int t;
 	void* h;
 
-	h = vfs_Tfopen(name, g_6750e8, g_6b7fdc);
+	h = vfs_Tfopen(name, g_6750e8, vfs_RootDir);
 	if (h == 0) {
 		return 0;
 	}

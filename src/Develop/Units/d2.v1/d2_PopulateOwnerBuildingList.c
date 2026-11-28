@@ -14,7 +14,7 @@ typedef struct
 } Slot;
 // SIZE 0x2f4
 
-extern char* g_1015ea0;
+extern char* d2_Controls;
 extern int d2_CurrentWindowId;
 extern char s_6ac948[];
 extern char s_68be7c[];
@@ -56,9 +56,9 @@ int __cdecl d2_PopulateOwnerBuildingList(unsigned short* who, int n, int* arr)
 		io_FormatTextBuffer(buf, s_68be7c, v);
 		d2_ShowTxt(0x80, y + 0x1b, buf, d2_CurrentWindowId);
 		if (flag == 1 && cnt < n) {
-			((D2_CONTROL_TL*) g_1015ea0)[h].value_05c = 1;
-			((D2_CONTROL_TL*) g_1015ea0)[h].flags_1d0 = 3;
-			((D2_CONTROL_TL*) g_1015ea0)[h].associated_object = e;
+			((D2_CONTROL_TL*) d2_Controls)[h].value_05c = 1;
+			((D2_CONTROL_TL*) d2_Controls)[h].flags_1d0 = 3;
+			((D2_CONTROL_TL*) d2_Controls)[h].associated_object = e;
 			arr[cnt] = h;
 		}
 		cnt++;

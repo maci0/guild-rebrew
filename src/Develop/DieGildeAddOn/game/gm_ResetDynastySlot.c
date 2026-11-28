@@ -31,7 +31,7 @@ struct building {
 	char pad31[0xe3];
 };
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #include "Develop/client_types.h"
 #include "Develop/DieGildeAddOn/game/he_action.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -72,7 +72,7 @@ void __cdecl gm_ResetDynastySlot(int idx)
 	keep[2] = 0;
 	found = 0xffff;
 	for (i = 0; i < 768; i++) {
-		if (((struct house*)g_7f4ca0)[i].type == 6 && ((struct house*)g_7f4ca0)[i].active != 0) {
+		if (((struct house*)gm_EntitySlotTable)[i].type == 6 && ((struct house*)gm_EntitySlotTable)[i].active != 0) {
 			found = i;
 			break;
 		}
@@ -81,10 +81,10 @@ void __cdecl gm_ResetDynastySlot(int idx)
 		g_774954 = 1;
 		return;
 	}
-	if (((struct house*)g_7f4ca0)[idx].type == 6 && ((struct house*)g_7f4ca0)[idx].active == 0) {
-		h = &((struct house*)g_7f4ca0)[idx];
+	if (((struct house*)gm_EntitySlotTable)[idx].type == 6 && ((struct house*)gm_EntitySlotTable)[idx].active == 0) {
+		h = &((struct house*)gm_EntitySlotTable)[idx];
 		for (j = 0; j < 1024; j++) {
-			u = &g_77e980[j];
+			u = &he_ActionSlots[j];
 			if (u->kind != 0 && u->house == idx) {
 				for (i = 0; kill[i] != 0; i++) {
 					if (kill[i] == u->kind) {

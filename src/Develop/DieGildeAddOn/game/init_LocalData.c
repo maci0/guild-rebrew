@@ -16,8 +16,8 @@ typedef struct {
 } Variant;
 
 
-extern char g_868060[];
-extern unsigned char g_7747b0;
+extern char gm_TownTable[];
+extern unsigned char gm_ClientModeFlags;
 extern char* gm_RichterKatholisch;
 extern char* gm_RichterEvangelisch;
 extern char* g_773db4[];
@@ -36,10 +36,10 @@ void __cdecl init_LocalData(void)
 	int n;
 
 	d3_SelectSceneContext(0, 0);
-	if ((g_7747b0 & 0x40) == 0) {
+	if ((gm_ClientModeFlags & 0x40) == 0) {
 		gm_UpdateAllTownSeasonPrices();
 		for (i = 0; i < 4; i++) {
-			if (((Variant*)g_868060)[i].name[0] == 0) {
+			if (((Variant*)gm_TownTable)[i].name[0] == 0) {
 				break;
 			}
 			gm_InitTownGoodsTable(i);
@@ -50,20 +50,20 @@ void __cdecl init_LocalData(void)
 		if (n == 0) {
 			break;
 		}
-		if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 0xc) {
-			if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].side == 0) {
-				(*(ENTITY_RECORD**)&gm_RichterKatholisch) = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]);
+		if (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_type == 0xc) {
+			if (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].side == 0) {
+				(*(ENTITY_RECORD**)&gm_RichterKatholisch) = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i]);
 				n--;
-			} else if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].side == 1) {
-				(*(ENTITY_RECORD**)&gm_RichterEvangelisch) = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]);
+			} else if (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].side == 1) {
+				(*(ENTITY_RECORD**)&gm_RichterEvangelisch) = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i]);
 				n--;
 			}
 		}
 	}
 	p = ((ENTITY_RECORD**)g_773db4);
 	for (i = 0; i < 768; i++) {
-		if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 0xb) {
-			*p++ = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]);
+		if (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_type == 0xb) {
+			*p++ = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i]);
 		}
 	}
 	if ((*(ENTITY_RECORD**)&gm_RichterKatholisch) == 0) {
@@ -72,7 +72,7 @@ void __cdecl init_LocalData(void)
 	if ((*(ENTITY_RECORD**)&gm_RichterEvangelisch) == 0) {
 		ReportClientMessage("init_LocalData(): gm_RichterEvangelisch==NULL");
 	}
-	if ((g_7747b0 & 0x44) == 0) {
+	if ((gm_ClientModeFlags & 0x44) == 0) {
 		init_AssignBuildingNames();
 	}
 	gm_ResetWarehouseStock();

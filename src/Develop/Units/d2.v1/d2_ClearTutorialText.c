@@ -2,7 +2,7 @@
 
 
 
-extern int* g_665f08;
+extern int* d2_TutorialState;
 
 void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(void*);
@@ -11,7 +11,7 @@ int __cdecl d2_ClearTutorialText(void)
 {
 	char* p;
 
-	p = *(char**) ((int) g_665f08 + 0x1c);
+	p = *(char**) ((int) d2_TutorialState + 0x1c);
 	if (p == 0) {
 		return -4;
 	}
@@ -20,8 +20,8 @@ int __cdecl d2_ClearTutorialText(void)
 		return -4;
 	}
 	d2_SetForm(*(int*) (p + 8), 1);
-	io_AppendText((void*) g_6811b0);
-	d2_SetForm(*(int*) (*(int*) (*(int*) ((int) g_665f08 + 0x1c) + 0x74) + 8), 2);
-	io_AppendText((void*) g_6811b0);
+	io_AppendText((void*) str_dollar_C);
+	d2_SetForm(*(int*) (*(int*) (*(int*) ((int) d2_TutorialState + 0x1c) + 0x74) + 8), 2);
+	io_AppendText((void*) str_dollar_C);
 	return 0;
 }

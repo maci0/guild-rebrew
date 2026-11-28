@@ -37,7 +37,7 @@ typedef struct {
 extern int d2_ScreenHeight;
 extern int g_1040494;
 extern int g_6a25a8;
-extern int g_6a2598;
+extern int d2_HudTopBarWindowId;
 extern int g_14ce860;
 extern int g_14ce864;
 extern int g_774674;
@@ -47,7 +47,7 @@ extern unsigned char g_77534c;
 extern int g_6a24d8[];
 extern int g_7ea380[15];
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_774684;
+extern int tp_d2_GroundplanSurface;
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 void __cdecl d2_SetClipRect(int, int, int, int);
@@ -77,8 +77,8 @@ void __cdecl d2_InitHudPanels(char* name)
 
 	d2_SetClipRect(0, 0, g_1040494, d2_ScreenHeight);
 	g_6a25a8 = d2_AllocHudRectSlot(g_1040494 - 0x50, 0x11, 0x30, 0x30, 0);
-	g_6a2598 = d2_CreateWindow(4, 0xa, 0x288, 0x30, 0);
-	d2_CenterWindow(g_6a2598, 1);
+	d2_HudTopBarWindowId = d2_CreateWindow(4, 0xa, 0x288, 0x30, 0);
+	d2_CenterWindow(d2_HudTopBarWindowId, 1);
 	data = d2_LoadObj(name, 0);
 	n = sizeof(desc);
 	p = &desc;
@@ -128,9 +128,9 @@ void __cdecl d2_InitHudPanels(char* name)
 	desc2.width = 0x68;
 	desc2.height = 0x6e;
 	desc2.format = 0x15;
-	(*(Surface**)&g_774684) = d2_CreateSurface(&desc2, 3);
-	d2_ClearSurface((*(Surface**)&g_774684));
+	(*(Surface**)&tp_d2_GroundplanSurface) = d2_CreateSurface(&desc2, 3);
+	d2_ClearSurface((*(Surface**)&tp_d2_GroundplanSurface));
 	g_6a25fc = d2_CreateElement(0x286, 0x23c, 0x544);
-	((D2_CONTROL_TL*)g_1015ea0)[g_6a25fc].value_05c = 1;
+	((D2_CONTROL_TL*)d2_Controls)[g_6a25fc].value_05c = 1;
 	d2_SetSlotVisibility(g_6a25fc, 0);
 }

@@ -24,7 +24,7 @@ struct path_421350 {
 };
 /* Path start offset vector, 0x6b5c38..0x6b5c44. */
 float g_6b5c38[3];
-extern char g_6b5c28;
+extern char ch_SceneDebugSwitch;
 /* Path scratch header at 0x14d0c20..0x14d0c2c. */
 struct path_421350 g_14d0c20;
 
@@ -77,7 +77,7 @@ unsigned int __cdecl ch_BuildWalkPath(int rec, int gridContext)
 		r = d3sm_SampleHeight(gridContext, *(int*) (*(int*) (rec + 0x14) + 0x34) + 0x4c,
 		    &v15, &v14, &cell.flags);
 		if (r == 0) {
-			if (g_6b5c28 != 0)
+			if (ch_SceneDebugSwitch != 0)
 				*(unsigned char*) (*(int*) (rec + 0x14) + 0x8c) |= 8;
 			if (*(int*) (rec + 0xf4) != 0) {
 				m_FreeTracked((void*) *(int*) (rec + 0xf4));
@@ -114,7 +114,7 @@ unsigned int __cdecl ch_BuildWalkPath(int rec, int gridContext)
 		if (FindPath((void*) &g_14d0c20, gridContext, v15, v14, cell.z, cell.x,
 		    *(unsigned char*) (obj + 0x240)) == -1) {
 			*(char*) (*(int*) (rec + 0x14) + 0x110) = 0;
-			if (g_6b5c28 != 0)
+			if (ch_SceneDebugSwitch != 0)
 				*(unsigned char*) (*(int*) (rec + 0x14) + 0x8c) |= 8;
 			if (*(int*) (rec + 0xf4) != 0) {
 				m_FreeTracked((void*) *(int*) (rec + 0xf4));

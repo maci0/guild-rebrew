@@ -14,11 +14,11 @@ typedef struct {
 	char pad70[0x2f4 - 0x70];
 } Ctl;
 
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 extern int d2_CurrentWindowId;
-extern char* g_77255c;
-extern int g_100f1dc;
-extern int g_14ce8e0;
+extern char* d2_CurrentWindow;
+extern int d2_DialogButtonAction;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int d2_CurrentElementId;
 
@@ -27,7 +27,7 @@ extern char* g_14b58ec;
 extern char* g_14b58f0;
 extern char* g_14b58f4;
 extern char* g_14b5f04;
-char g_679060[] = "%s";
+char str_fmt_s[] = "%s";
 extern char g_68b3f8[];
 extern char g_6a93c0[];
 
@@ -84,8 +84,8 @@ void __cdecl d2_RunAlchemistryWorkshopDialog(char* e)
 	data = ahm_GetWorkshopOwner((unsigned char*) e);
 	src = *(int**) (e + 0x65);
 	prev = he_GetActionProgress(e, &owner, &frac, 0);
-	stamp = g_6b7fac;
-	g_100f1dc = -1;
+	stamp = gm_GameTicks;
+	d2_DialogButtonAction = -1;
 	memset(ids, -1, 0x24);
 	ids[0] = d2_LoadForm(0, 0, g_6a93c0);
 	d2_SetOverlayAnimation(0, 0);
@@ -100,57 +100,57 @@ void __cdecl d2_RunAlchemistryWorkshopDialog(char* e)
 		d2_SetForm(ids[0], 2);
 		io_AppendText(0x4051, 0x182);
 		do {
-			if (g_14ce8e0 != 0) {
-				g_774654 = 1;
+			if (io_RightButtonReleased != 0) {
+				d2_DialogCloseRequested = 1;
 			}
 		} while (main_RunFrameLoop((void*) fcn_00585030, 0x677c7) != 0);
 		d2_DestroyForm(ids[0]);
 		return;
 	}
 	d2_SetForm(ids[0], 2);
-	d2_AddElementToWindow(((Screen*) g_77255c)->xc / 2 - 0x18, 0x1e, 0x6c7, ids[1]);
-	d2_AddElementToWindow(((Screen*) g_77255c)->xc / 2 - 0x16, 0x20, *(int*) (data + 0x18c), ids[1]);
-	ids[2] = d2_AddWindowValueGauge((((Screen*) g_77255c)->xc - 0x32) / 2, 0x55, 0x32, 0, 0x64, 0x75, 0x42, d2_CurrentWindowId);
+	d2_AddElementToWindow(((Screen*) d2_CurrentWindow)->xc / 2 - 0x18, 0x1e, 0x6c7, ids[1]);
+	d2_AddElementToWindow(((Screen*) d2_CurrentWindow)->xc / 2 - 0x16, 0x20, *(int*) (data + 0x18c), ids[1]);
+	ids[2] = d2_AddWindowValueGauge((((Screen*) d2_CurrentWindow)->xc - 0x32) / 2, 0x55, 0x32, 0, 0x64, 0x75, 0x42, d2_CurrentWindowId);
 	d2_SetElementValue(ids[2], 0, 0x64, (int) (*(float*) (src + 1) * 100.0f));
 	io_FormatTextBuffer(buf, g_68b3f8, data + 0x30, data + 0x40);
 	item = d2_ShowTxt(0, 0, buf, ids[1]);
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[item].width) = ((D2_WIN*)g_1015f40)[ids[1]].width;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[item].value_06c) = 1;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[item].width) = ((D2_WIN*)d2_Windows)[ids[1]].width;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[item].value_06c) = 1;
 	d2_SetElementFont(item, 0x53);
 	io_FormatTextBuffer(buf, (char*) 0x403f, *(unsigned short*) (data + 0xa));
 	item = d2_ShowTxt(0x12c, 0x64, buf, ids[1]);
 	d2_SetElementFont(item, 0x53);
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[item].value_06c) = 1;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[item].width) = 0xc8;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[item].value_06c) = 1;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[item].width) = 0xc8;
 	io_FormatTextBuffer(buf, (char*) 0x4040, ahm_CalcWorkshopOutputScore(e));
 	item = d2_ShowTxt(0x12c, 0x82, buf, ids[1]);
 	d2_SetElementFont(item, 0x53);
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[item].value_06c) = 1;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[item].width) = 0xc8;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[item].value_06c) = 1;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[item].width) = 0xc8;
 	io_FormatTextBuffer(buf, "%s", g_14b58e8);
 	ids[4] = d2_AddWindowTextButton(0x14a, 0xbe, 0xc5, g_14b5f04, ids[1]);
-	d2_SetElementWidth(ids[4], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
+	d2_SetElementWidth(ids[4], ((D2_WIN*)d2_Windows)[ids[1]].width / 3 - 0x14);
 	d2_SetElementFont(ids[4], 0x54);
 	io_FormatTextBuffer(buf, "%s", g_14b58e8);
 	ids[5] = d2_AddWindowTextButton(10, 0x64, 0xc5, buf, ids[1]);
-	d2_SetElementWidth(ids[5], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
+	d2_SetElementWidth(ids[5], ((D2_WIN*)d2_Windows)[ids[1]].width / 3 - 0x14);
 	d2_SetElementFont(ids[5], 0x54);
-	d2_DrawSegmentedBar(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0x68, *((unsigned char*) src + 8), 0x4df);
+	d2_DrawSegmentedBar(((D2_WIN*)d2_Windows)[ids[1]].width / 3 + 0xa, 0x68, *((unsigned char*) src + 8), 0x4df);
 	io_FormatTextBuffer(buf, "%s", g_14b58ec);
 	ids[6] = d2_AddWindowTextButton(10, 0x82, 0xc5, buf, ids[1]);
-	d2_SetElementWidth(ids[6], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
+	d2_SetElementWidth(ids[6], ((D2_WIN*)d2_Windows)[ids[1]].width / 3 - 0x14);
 	d2_SetElementFont(ids[6], 0x54);
-	d2_DrawSegmentedBar(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0x86, *((unsigned char*) src + 9), 0x4df);
+	d2_DrawSegmentedBar(((D2_WIN*)d2_Windows)[ids[1]].width / 3 + 0xa, 0x86, *((unsigned char*) src + 9), 0x4df);
 	io_FormatTextBuffer(buf, "%s", g_14b58f0);
 	ids[7] = d2_AddWindowTextButton(10, 0xa0, 0xc5, buf, ids[1]);
-	d2_SetElementWidth(ids[7], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
+	d2_SetElementWidth(ids[7], ((D2_WIN*)d2_Windows)[ids[1]].width / 3 - 0x14);
 	d2_SetElementFont(ids[7], 0x54);
-	d2_DrawSegmentedBar(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0xa4, *((unsigned char*) src + 10), 0x4df);
+	d2_DrawSegmentedBar(((D2_WIN*)d2_Windows)[ids[1]].width / 3 + 0xa, 0xa4, *((unsigned char*) src + 10), 0x4df);
 	io_FormatTextBuffer(buf, "%s", g_14b58f4);
 	ids[8] = d2_AddWindowTextButton(10, 0xbe, 0xc5, buf, ids[1]);
-	d2_SetElementWidth(ids[8], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
+	d2_SetElementWidth(ids[8], ((D2_WIN*)d2_Windows)[ids[1]].width / 3 - 0x14);
 	d2_SetElementFont(ids[8], 0x54);
-	d2_DrawSegmentedBar(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0xc2, *((unsigned char*) src + 11), 0x4df);
+	d2_DrawSegmentedBar(((D2_WIN*)d2_Windows)[ids[1]].width / 3 + 0xa, 0xc2, *((unsigned char*) src + 11), 0x4df);
 	d2_SetForm(ids[0], 3);
 	ids[3] = d2_GetWindowListItem(ids[0], 3, io_AppendText(0x4049));
 	do {
@@ -158,7 +158,7 @@ void __cdecl d2_RunAlchemistryWorkshopDialog(char* e)
 		d2_SetForm(ids[0], 4);
 		io_AppendText(0x6811b0);
 		if (sel != 0) {
-			ids[9] = d2_AddWindowValueGauge((((Screen*) g_77255c)->xc - 0x12c) / 2, 0x12, 0x12c, 0, 0x64, 0x75, 0x42, d2_CurrentWindowId);
+			ids[9] = d2_AddWindowValueGauge((((Screen*) d2_CurrentWindow)->xc - 0x12c) / 2, 0x12, 0x12c, 0, 0x64, 0x75, 0x42, d2_CurrentWindowId);
 			if (sel == 1) {
 				io_FormatTextBuffer(text, (char*) 0x404b);
 			} else if (sel == 2) {
@@ -167,68 +167,68 @@ void __cdecl d2_RunAlchemistryWorkshopDialog(char* e)
 				io_FormatTextBuffer(text, (char*) 0x404d, owner + 0x4172);
 			}
 			item = d2_ShowTxt(0, 0, text, d2_CurrentWindowId);
-			((D2_CONTROL_TL*) (g_1015ea0 + item * sizeof(D2_CONTROL_TL)))->width = ((Screen*) g_77255c)->xc;
-			((D2_CONTROL_TL*) (g_1015ea0 + item * sizeof(D2_CONTROL_TL)))->value_06c = 1;
+			((D2_CONTROL_TL*) (d2_Controls + item * sizeof(D2_CONTROL_TL)))->width = ((Screen*) d2_CurrentWindow)->xc;
+			((D2_CONTROL_TL*) (d2_Controls + item * sizeof(D2_CONTROL_TL)))->value_06c = 1;
 			d2_SetElementFont(item, 0x54);
 			d2_SetElementValue(ids[9], 0, 0x64, (int) (frac * 100.0f));
 		}
-		if (sel != prev || g_6b7fac > (unsigned int) (stamp + 0x32)) {
+		if (sel != prev || gm_GameTicks > (unsigned int) (stamp + 0x32)) {
 			data = ahm_GetWorkshopOwner((unsigned char*) e);
 			if (data == 0) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 				main_RunFrameLoop((void*) d2_RunAlchemistryWorkshopDialog, 0x20007);
 				d2_DestroyForm(ids[0]);
 				return;
 			}
 			d2_SetForm(ids[0], 2);
 			io_AppendText(0x6811b0);
-			d2_AddElementToWindow(((Screen*) g_77255c)->xc / 2 - 0x18, 0x1e, 0x6c7, ids[1]);
-			d2_AddElementToWindow(((Screen*) g_77255c)->xc / 2 - 0x16, 0x20, *(int*) (data + 0x18c), ids[1]);
-			ids[2] = d2_AddWindowValueGauge((((Screen*) g_77255c)->xc - 0x32) / 2, 0x55, 0x32, 0, 0x64, 0x75, 0x42, d2_CurrentWindowId);
+			d2_AddElementToWindow(((Screen*) d2_CurrentWindow)->xc / 2 - 0x18, 0x1e, 0x6c7, ids[1]);
+			d2_AddElementToWindow(((Screen*) d2_CurrentWindow)->xc / 2 - 0x16, 0x20, *(int*) (data + 0x18c), ids[1]);
+			ids[2] = d2_AddWindowValueGauge((((Screen*) d2_CurrentWindow)->xc - 0x32) / 2, 0x55, 0x32, 0, 0x64, 0x75, 0x42, d2_CurrentWindowId);
 			d2_SetElementValue(ids[2], 0, 0x64, (int) (*(float*) (src + 1) * 100.0f));
 			io_FormatTextBuffer(buf, g_68b3f8, data + 0x30, data + 0x40);
 			ids[9] = d2_ShowTxt(0, 0, buf, ids[1]);
-			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[ids[9]].width) = ((D2_WIN*)g_1015f40)[ids[1]].width;
-			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[ids[9]].value_06c) = 1;
+			(*(int*)&((D2_CONTROL_TL*)d2_Controls)[ids[9]].width) = ((D2_WIN*)d2_Windows)[ids[1]].width;
+			(*(int*)&((D2_CONTROL_TL*)d2_Controls)[ids[9]].value_06c) = 1;
 			d2_SetElementFont(ids[9], 0x53);
 			io_FormatTextBuffer(buf, (char*) 0x403f, *(unsigned short*) (data + 0xa));
 			item = d2_ShowTxt(0x12c, 0x64, buf, ids[1]);
 			d2_SetElementFont(item, 0x53);
-			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[item].value_06c) = 1;
-			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[item].width) = 0xc8;
+			(*(int*)&((D2_CONTROL_TL*)d2_Controls)[item].value_06c) = 1;
+			(*(int*)&((D2_CONTROL_TL*)d2_Controls)[item].width) = 0xc8;
 			io_FormatTextBuffer(buf, (char*) 0x4040, ahm_CalcWorkshopOutputScore(e));
 			item = d2_ShowTxt(0x12c, 0x82, buf, ids[1]);
 			d2_SetElementFont(item, 0x53);
-			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[item].value_06c) = 1;
-			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[item].width) = 0xc8;
+			(*(int*)&((D2_CONTROL_TL*)d2_Controls)[item].value_06c) = 1;
+			(*(int*)&((D2_CONTROL_TL*)d2_Controls)[item].width) = 0xc8;
 			io_FormatTextBuffer(buf, "%s", g_14b58e8);
 			ids[4] = d2_AddWindowTextButton(0x14a, 0xbe, 0xc5, g_14b5f04, ids[1]);
-			d2_SetElementWidth(ids[4], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
+			d2_SetElementWidth(ids[4], ((D2_WIN*)d2_Windows)[ids[1]].width / 3 - 0x14);
 			d2_SetElementFont(ids[4], 0x54);
 			io_FormatTextBuffer(buf, "%s", g_14b58e8);
 			ids[5] = d2_AddWindowTextButton(10, 0x64, 0xc5, buf, ids[1]);
-			d2_SetElementWidth(ids[5], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
+			d2_SetElementWidth(ids[5], ((D2_WIN*)d2_Windows)[ids[1]].width / 3 - 0x14);
 			d2_SetElementFont(ids[5], 0x54);
-			d2_DrawSegmentedBar(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0x68, *((unsigned char*) src + 8), 0x4df);
+			d2_DrawSegmentedBar(((D2_WIN*)d2_Windows)[ids[1]].width / 3 + 0xa, 0x68, *((unsigned char*) src + 8), 0x4df);
 			io_FormatTextBuffer(buf, "%s", g_14b58ec);
 			ids[6] = d2_AddWindowTextButton(10, 0x82, 0xc5, buf, ids[1]);
-			d2_SetElementWidth(ids[6], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
+			d2_SetElementWidth(ids[6], ((D2_WIN*)d2_Windows)[ids[1]].width / 3 - 0x14);
 			d2_SetElementFont(ids[6], 0x54);
-			d2_DrawSegmentedBar(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0x86, *((unsigned char*) src + 9), 0x4df);
+			d2_DrawSegmentedBar(((D2_WIN*)d2_Windows)[ids[1]].width / 3 + 0xa, 0x86, *((unsigned char*) src + 9), 0x4df);
 			io_FormatTextBuffer(buf, "%s", g_14b58f0);
 			ids[7] = d2_AddWindowTextButton(10, 0xa0, 0xc5, buf, ids[1]);
-			d2_SetElementWidth(ids[7], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
+			d2_SetElementWidth(ids[7], ((D2_WIN*)d2_Windows)[ids[1]].width / 3 - 0x14);
 			d2_SetElementFont(ids[7], 0x54);
-			d2_DrawSegmentedBar(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0xa4, *((unsigned char*) src + 10), 0x4df);
+			d2_DrawSegmentedBar(((D2_WIN*)d2_Windows)[ids[1]].width / 3 + 0xa, 0xa4, *((unsigned char*) src + 10), 0x4df);
 			io_FormatTextBuffer(buf, "%s", g_14b58f4);
 			ids[8] = d2_AddWindowTextButton(10, 0xbe, 0xc5, buf, ids[1]);
-			d2_SetElementWidth(ids[8], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
+			d2_SetElementWidth(ids[8], ((D2_WIN*)d2_Windows)[ids[1]].width / 3 - 0x14);
 			d2_SetElementFont(ids[8], 0x54);
-			d2_DrawSegmentedBar(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0xc2, *((unsigned char*) src + 11), 0x4df);
+			d2_DrawSegmentedBar(((D2_WIN*)d2_Windows)[ids[1]].width / 3 + 0xa, 0xc2, *((unsigned char*) src + 11), 0x4df);
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
-		} else if (g_100f1dc != -1) {
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
+		} else if (d2_DialogButtonAction != -1) {
 			for (i = 0, p = &ids[5]; i < 4; i++, p++) {
 				if (*p == d2_CurrentElementId) {
 					d2_SetFormVisibility(ids[0], 0);
@@ -244,7 +244,7 @@ void __cdecl d2_RunAlchemistryWorkshopDialog(char* e)
 			} else if (d2_CurrentElementId == ids[3]) {
 				d2_SetFormVisibility(ids[0], 0);
 				if (d2_ConfirmFireAlchemist(e, src) != 0) {
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				}
 				d2_SetFormVisibility(ids[0], 1);
 			}

@@ -7,7 +7,7 @@ typedef struct ClipRect {
 // SIZE 0x10
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern ClipRect* g_77257c[2];
+extern ClipRect* d2_DirtyRectBuffers[2];
 extern int g_77258c[2];
 
 /* ADDRESS: GOLDTL 0x004660f0 */
@@ -29,10 +29,10 @@ void __cdecl d2_AddClippedDirtyRect(int x, int y, int w, int h)
 	}
 	for (i = 0; i < 2; i++) {
 		n = g_77258c[i];
-		g_77257c[i][n].x = x;
-		g_77257c[i][n].y = y;
-		g_77257c[i][n].w = w;
-		g_77257c[i][n].h = h;
+		d2_DirtyRectBuffers[i][n].x = x;
+		d2_DirtyRectBuffers[i][n].y = y;
+		d2_DirtyRectBuffers[i][n].w = w;
+		d2_DirtyRectBuffers[i][n].h = h;
 		g_77258c[i]++;
 	}
 }

@@ -16,7 +16,7 @@ typedef struct {
 } Book;
 // SIZE 0x230
 
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
@@ -92,9 +92,9 @@ void __cdecl d2_RunGesetzbuchDialog(int cmd)
 	io_AppendText(0x1a38, 1);
 	d2_SetForm(w->right, 3);
 	io_AppendText(0x1a38, 2);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			sel = -1;
 			for (i = 0; i < 12; i++) {
 				if (items[i] == d2_CurrentElementId) {
@@ -121,8 +121,8 @@ void __cdecl d2_RunGesetzbuchDialog(int cmd)
 			}
 		}
 		d2_UpdatePagedPanel(w);
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop(d2_RunGesetzbuchDialog, 0x677c7) != 0);
 	d3_CloseBookPagerDialog(w);

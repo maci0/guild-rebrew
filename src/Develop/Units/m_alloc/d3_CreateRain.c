@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 extern char* d3_ActiveCamera;
 
 void* __cdecl m_alloc(int size, const char* tag);
@@ -30,11 +30,11 @@ int* __cdecl d3_CreateRain(int count)
 	info[8] = 0;
 	info[9] = 0x3f800000;
 	info[10] = 0;
-	info[11] = g_6b7fac;
-	info[12] = g_6b7fac;
-	info[13] = g_6b7fac;
-	info[14] = g_6b7fac;
-	info[15] = g_6b7fac;
+	info[11] = gm_GameTicks;
+	info[12] = gm_GameTicks;
+	info[13] = gm_GameTicks;
+	info[14] = gm_GameTicks;
+	info[15] = gm_GameTicks;
 	if (d3_ActiveCamera != 0) {
 		info[16] = *(int*) (d3_ActiveCamera + 0x84);
 		info[17] = *(int*) (d3_ActiveCamera + 0x88);

@@ -64,8 +64,8 @@ void __cdecl he_AllocProduktion(char* e)
 	*(int*) (e + 0xc4) = -1;
 	*(int*) (e + 0xc8) = 0;
 	for (i = 0; i < 768; i++) {
-		if ((*(char**)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].ptr_17c) == e) {
-			he_AssignActionSlot(r, 0, (*(unsigned short*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_index), e);
+		if ((*(char**)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].ptr_17c) == e) {
+			he_AssignActionSlot(r, 0, (*(unsigned short*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_index), e);
 		}
 	}
 	*(float*) (e + 0xcc) = (gm_CalcAvgEntityFavor(*(unsigned short*) (e + 8), 8, e + 0x8c) - 0.5) * 0.25;

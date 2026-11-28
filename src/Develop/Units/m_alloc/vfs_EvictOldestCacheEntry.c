@@ -11,10 +11,10 @@ typedef struct VfsEntry {
 } VfsEntry;
 // SIZE 0x54
 
-extern char* g_772500;
+extern char* d2_FileObjTable;
 extern int g_772504;
 extern int g_772508;
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 
 void __cdecl d2_FreeAnimTrackList(void* p);
 void __cdecl m_FreeTracked(void* p);
@@ -27,24 +27,24 @@ int __cdecl vfs_EvictOldestCacheEntry(void)
 	int stamp;
 
 	best = -1;
-	stamp = g_6b7fac;
+	stamp = gm_GameTicks;
 	for (i = 1; i < g_772504; i++) {
-		if (((VfsEntry*)g_772500)[i].stamp < stamp && ((VfsEntry*)g_772500)[i].refs <= 0 && !(((VfsEntry*)g_772500)[i].flags & 1)
-		    && ((VfsEntry*)g_772500)[i].data != 0 && ((VfsEntry*)g_772500)[i].size != 0) {
-			stamp = ((VfsEntry*)g_772500)[i].stamp;
+		if (((VfsEntry*)d2_FileObjTable)[i].stamp < stamp && ((VfsEntry*)d2_FileObjTable)[i].refs <= 0 && !(((VfsEntry*)d2_FileObjTable)[i].flags & 1)
+		    && ((VfsEntry*)d2_FileObjTable)[i].data != 0 && ((VfsEntry*)d2_FileObjTable)[i].size != 0) {
+			stamp = ((VfsEntry*)d2_FileObjTable)[i].stamp;
 			best = i;
 		}
 	}
 	if (best == -1) {
 		return 0;
 	}
-	if (((VfsEntry*)g_772500)[best].kind < 0x10) {
-		d2_FreeAnimTrackList(((VfsEntry*)g_772500)[best].data);
+	if (((VfsEntry*)d2_FileObjTable)[best].kind < 0x10) {
+		d2_FreeAnimTrackList(((VfsEntry*)d2_FileObjTable)[best].data);
 	} else {
-		m_FreeTracked(((VfsEntry*)g_772500)[best].data);
-		((VfsEntry*)g_772500)[best].data = 0;
+		m_FreeTracked(((VfsEntry*)d2_FileObjTable)[best].data);
+		((VfsEntry*)d2_FileObjTable)[best].data = 0;
 	}
-	((VfsEntry*)g_772500)[best].data = 0;
-	g_772508 -= ((VfsEntry*)g_772500)[best].size;
+	((VfsEntry*)d2_FileObjTable)[best].data = 0;
+	g_772508 -= ((VfsEntry*)d2_FileObjTable)[best].size;
 	return 1;
 }

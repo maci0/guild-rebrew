@@ -1,5 +1,5 @@
-extern int g_100f1dc;
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
+extern int d2_DialogButtonAction;
 
 
 
@@ -10,7 +10,7 @@ void __cdecl d2_HandleBookPageButton(void)
 {
 	int v;
 
-	v = *(int*) ((char*)&g_100f1dc);
+	v = *(int*) ((char*)&d2_DialogButtonAction);
 	if (v == 0x767) {
 		d2_TurnBookPagesForward();
 	} else if (v == 0x768) {

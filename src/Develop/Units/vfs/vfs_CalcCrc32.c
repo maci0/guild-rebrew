@@ -1,5 +1,5 @@
-extern unsigned int g_6624a0[];
-extern unsigned int g_6624a0[];
+extern unsigned int vfs_Crc32Table[];
+extern unsigned int vfs_Crc32Table[];
 
 // Client twin of GOLD's fcn_00401000 (0x401000, 52 B): same crc32 over a
 // 256-entry table, but the client's table sits at 0x6624a0 (GOLD's at
@@ -14,7 +14,7 @@ unsigned int __cdecl vfs_CalcCrc32(unsigned char* buf, unsigned int n)
 
 	crc = 0xffffffffu;
 	while (n > 0) {
-		crc = g_6624a0[(crc & 0xff) ^ *buf] ^ (crc >> 8);
+		crc = vfs_Crc32Table[(crc & 0xff) ^ *buf] ^ (crc >> 8);
 		buf++;
 		n--;
 	}

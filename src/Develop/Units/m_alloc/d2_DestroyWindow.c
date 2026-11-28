@@ -7,7 +7,7 @@ typedef struct
 // SIZE 0x3cc
 
 #include "Develop/client_types.h"
-extern Win_1015f40 g_1015f40[0x60];
+extern Win_1015f40 d2_Windows[0x60];
 extern int g_77259c;
 
 void __cdecl d2_DestroyElement(int id);
@@ -24,7 +24,7 @@ int __cdecl d2_DestroyWindow(int win)
 	if (win > 0x60) {
 		return 0;
 	}
-	w = &((fcn_0046f390_Win*)g_1015f40)[win];
+	w = &((fcn_0046f390_Win*)d2_Windows)[win];
 	if (w->i[0x290 / 4] == 0) {
 		return 0;
 	}

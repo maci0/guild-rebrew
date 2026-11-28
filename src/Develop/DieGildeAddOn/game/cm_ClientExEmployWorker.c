@@ -36,7 +36,7 @@ int __cdecl cm_ClientExEmployWorker(int cmd, char* result)
 	char worker_type;
 
 	workplace_entity = (ushort*) 0;
-	if (g_14cbca0 != -1)
+	if (nt_ClientSocket != -1)
 		gm_NextEntityId = *(int*) (cmd + 0x1f);
 	else
 		*(int*) (cmd + 0x23) = rand();

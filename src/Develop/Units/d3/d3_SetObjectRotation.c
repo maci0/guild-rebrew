@@ -1,7 +1,7 @@
 
 
 
-extern int g_67a370;
+extern int d3_ActiveScene;
 #include "Develop/Units/d3/d3_camera.h"
 
 void __cdecl d3_InvalidateSubTreeFlags(char*, int);
@@ -22,7 +22,7 @@ void __cdecl d3_SetObjectRotation(char* o, int* v)
 	*(int*) (o + 0x8c) = v[2];
 	if (*(int*) (o + 0x218) != 3) {
 		d3_BuildEulerRotationMatrix(p, o + 0x18c);
-		d3_TraverseSceneObjects(g_67a370, o, 0xc0, d3_ClearAuxSlotState);
+		d3_TraverseSceneObjects(d3_ActiveScene, o, 0xc0, d3_ClearAuxSlotState);
 		return;
 	}
 	if (o == ((char*)d3_ActiveCamera)) {

@@ -1,4 +1,4 @@
-extern int g_6b7d7c;
+extern int sb_WaveDriver;
 
 // SIZE 0x30
 typedef struct {
@@ -8,8 +8,8 @@ typedef struct {
 } VOICE_ENTRY;
 
 #include "Develop/client_types.h"
-extern SOUND_VOICE g_14cbbe0;
-extern char* g_6b7e88;
+extern SOUND_VOICE sb_DummyVoice;
+extern char* sb_Voices;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 
@@ -22,12 +22,12 @@ VOICE_ENTRY* __cdecl sb_FindVoiceBySample(int key, int* idx)
 	int i;
 	int count;
 
-	if (g_6b7d7c == 0) {
-		return &(*(VOICE_ENTRY*)&g_14cbbe0);
+	if (sb_WaveDriver == 0) {
+		return &(*(VOICE_ENTRY*)&sb_DummyVoice);
 	}
-	voices = ((VOICE_ENTRY*)g_6b7e88);
+	voices = ((VOICE_ENTRY*)sb_Voices);
 	if (voices != 0) {
-		count = g_6b7e8c;
+		count = sb_VoiceCount;
 		for (i = *idx; i < count; i++) {
 			if (voices[i].key == key) {
 				*idx = i;

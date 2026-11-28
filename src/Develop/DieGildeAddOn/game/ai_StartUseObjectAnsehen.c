@@ -40,7 +40,7 @@ typedef struct Rec18 {
 	char pad9[0xf];
 } Rec18;
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 int __cdecl gm_RandomMod(unsigned short n);
 void __cdecl gm_CheckEntityObjectSlots(char* e, int n, Slot* slots, Counts* cnt);
@@ -150,7 +150,7 @@ pick_used:
 			return 0;
 		}
 		b.type = 7;
-		b.a = ((Ent*) g_7f4ca0)[picked].x4;
+		b.a = ((Ent*) gm_EntitySlotTable)[picked].x4;
 		b.b = -1;
 	} else if (i == 10) {
 		int mask;
@@ -160,7 +160,7 @@ pick_used:
 			return 0;
 		}
 		b.type = 7;
-		b.a = ((Ent*) g_7f4ca0)[picked].x4;
+		b.a = ((Ent*) gm_EntitySlotTable)[picked].x4;
 		b.b = -1;
 	} else if (i == 8) {
 		r = ai_SelectBestMethod(k, ((Ent*) entity)->id, 3, &a, &b);

@@ -53,7 +53,7 @@ typedef int (__stdcall* Draw47c9c0Fn)(D3D_DEVICE_VIEW*, int, int, int);
 
 
 extern int d2_DrawDepthIndex;
-extern int g_772614;
+extern int tp_d2_QuadVertexBuffer;
 
 
 int __cdecl d2_BuildQuadVertices(int, int, int, int, Quad*);
@@ -81,12 +81,12 @@ void __cdecl d2_DrawTexturedQuad(int a1, int a2, int a3, int a4, int tex, float 
 	{
 		void* ptr;
 
-		if (((VB*)g_772614)->vtbl->Lock(((VB*)g_772614), 0, 0x18, &ptr, 0x2000) < 0) {
+		if (((VB*)tp_d2_QuadVertexBuffer)->vtbl->Lock(((VB*)tp_d2_QuadVertexBuffer), 0, 0x18, &ptr, 0x2000) < 0) {
 			return;
 		}
 		*(Verts*) ptr = quad.vs;
 	}
-	((VB*)g_772614)->vtbl->Unlock(((VB*)g_772614));
+	((VB*)tp_d2_QuadVertexBuffer)->vtbl->Unlock(((VB*)tp_d2_QuadVertexBuffer));
 	d2_BindQuadVertexBuffer();
 	d3_SetRenderMaterialState(0xfe, 0, 0, 1, 1);
 	((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*)g_6b5de0), 7, 0);

@@ -7,7 +7,7 @@ struct D2_RES_BOUNDS {
 	short y;
 };
 
-extern char* g_772500;
+extern char* d2_FileObjTable;
 
 // SIZE 0x3cc
 struct s_1015f4c {
@@ -24,7 +24,7 @@ struct s_1015f4c {
 };
 
 #include "Develop/client_types.h"
-extern s_1015f4c g_1015f4c[];
+extern s_1015f4c d2_WindowMetricsView[];
 
 
 /* ADDRESS: GOLDTL 0x005340f0 */
@@ -32,13 +32,13 @@ void __cdecl d2_InitWindowBounds(int i)
 {
 	struct D2_RES_BOUNDS* p;
 
-	if (((struct s_1015f4c*)g_1015f4c)[i].idx != -1) {
-		p = &((struct D2_RES_BOUNDS*)g_772500)[((struct s_1015f4c*)g_1015f4c)[i].idx];
-		((struct s_1015f4c*)g_1015f4c)[i].x = p->x;
-		((struct s_1015f4c*)g_1015f4c)[i].y = p->y;
-		((struct s_1015f4c*)g_1015f4c)[i].w = 0x18;
-		((struct s_1015f4c*)g_1015f4c)[i].h = 0x18;
-		((struct s_1015f4c*)g_1015f4c)[i].c = 0x1b;
-		((struct s_1015f4c*)g_1015f4c)[i].d = 0xb;
+	if (((struct s_1015f4c*)d2_WindowMetricsView)[i].idx != -1) {
+		p = &((struct D2_RES_BOUNDS*)d2_FileObjTable)[((struct s_1015f4c*)d2_WindowMetricsView)[i].idx];
+		((struct s_1015f4c*)d2_WindowMetricsView)[i].x = p->x;
+		((struct s_1015f4c*)d2_WindowMetricsView)[i].y = p->y;
+		((struct s_1015f4c*)d2_WindowMetricsView)[i].w = 0x18;
+		((struct s_1015f4c*)d2_WindowMetricsView)[i].h = 0x18;
+		((struct s_1015f4c*)d2_WindowMetricsView)[i].c = 0x1b;
+		((struct s_1015f4c*)d2_WindowMetricsView)[i].d = 0xb;
 	}
 }

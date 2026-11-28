@@ -29,10 +29,10 @@ struct EMITTER_CONFIG {
 };
 
 extern EMITTER_CONFIG g_14cfb60;
-extern int g_662d60;
-extern int g_662d64;
-extern int g_662d68;
-extern float g_662d70[4];
+extern int d3_BasisUpX;
+extern int d3_BasisUpY;
+extern int d3_BasisUpZ;
+extern float d3_ZeroVec4[4];
 
 void __cdecl d3_CreateParticleEmitter(int a, float* b, int c, int d, int tag, float e, EMITTER_CONFIG* buf);
 
@@ -72,9 +72,9 @@ void __cdecl CreateEmitter(union word4 u, int* emitterKind, int* count, int* sca
 	g_14cfb60.f10 = 10.0f;
 	g_14cfb60.f50 = 50.0f;
 	g_14cfb60.f30 = 30.0f;
-	g_14cfb60.v60 = g_662d60;
-	g_14cfb60.v64 = g_662d64;
-	g_14cfb60.v68 = g_662d68;
+	g_14cfb60.v60 = d3_BasisUpX;
+	g_14cfb60.v64 = d3_BasisUpY;
+	g_14cfb60.v68 = d3_BasisUpZ;
 	g_14cfb60.one = 1.0f;
 	g_14cfb60.f255 = 255.0f;
 	g_14cfb60.n14 = 0x14;
@@ -90,6 +90,6 @@ void __cdecl CreateEmitter(union word4 u, int* emitterKind, int* count, int* sca
 	u.b[2] = (unsigned char) (((u.b[2] ^ *tagFlag) & 1) ^ u.b[2]);
 	u.b[2] = (unsigned char) (u.b[2] | 2);
 	u.b[0] = *tagLow;
-	d3_CreateParticleEmitter(*emitterKind, g_662d70, *count, *parentNode, u.bits, (float) *scale, &g_14cfb60);
+	d3_CreateParticleEmitter(*emitterKind, d3_ZeroVec4, *count, *parentNode, u.bits, (float) *scale, &g_14cfb60);
 }
 #pragma optimize("", on)

@@ -1,5 +1,5 @@
-char g_67b624[] = "d3_io_a:AGIPointBuffer";
-extern char g_67b624[];
+char str_d3_io_a_AGIPointBuffer[] = "d3_io_a:AGIPointBuffer";
+extern char str_d3_io_a_AGIPointBuffer[];
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
@@ -18,6 +18,6 @@ void __cdecl d3_InitAGIPointBuffer(int unused, char* s)
 	if (n > 0 && *(void**) (s + 0x30) == 0) {
 		*(int*) (s + 0x28) = 0;
 		*(int*) (s + 0x2c) = 0;
-		*(void**) (s + 0x30) = m_alloc(0x60000, g_67b624);
+		*(void**) (s + 0x30) = m_alloc(0x60000, str_d3_io_a_AGIPointBuffer);
 	}
 }

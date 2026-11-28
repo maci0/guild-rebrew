@@ -1,5 +1,5 @@
-extern char* g_104049c;
-extern unsigned int g_10404a0;
+extern char* d3_TextureBank;
+extern unsigned int d3_TextureBankCount;
 extern int g_10405cc;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_67bd2c;
@@ -13,14 +13,14 @@ void __cdecl d3_ReleaseAllRenderTextures(void)
 	unsigned int i;
 	char* p;
 
-	p = g_104049c;
-	for (i = 0; i < g_10404a0; i++, p += 0x70) {
+	p = d3_TextureBank;
+	for (i = 0; i < d3_TextureBankCount; i++, p += 0x70) {
 		while (*(int*) (p + 0x40) > 0) {
 			d3_ReleaseTexture(p);
 		}
 	}
-	m_FreeTracked(g_104049c);
-	g_104049c = 0;
+	m_FreeTracked(d3_TextureBank);
+	d3_TextureBank = 0;
 	g_10405cc = 0;
 	g_10405c4 = 0;
 	g_67bd2c = 0;

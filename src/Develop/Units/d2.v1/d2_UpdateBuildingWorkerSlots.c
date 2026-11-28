@@ -4,7 +4,7 @@
 extern unsigned char* g_entity_type_table;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int d2_CurrentWindowId;
-extern char g_6b5c60[]; extern int g_6a25b4; extern char g_774724;
+extern char str_empty[]; extern int g_6a25b4; extern char g_774724;
 
 void d2_DestroyElement(int id);
 int d2_CreateChildWindow(int x, int y, int cx, int cy, int a5, int win);
@@ -127,14 +127,14 @@ void __cdecl d2_UpdateBuildingWorkerSlots(char* building)
 				*(unsigned int*) (v6 + 0x7e30c4) = v4;
 				v16 = d2_AddElementToWindow(8, v5 + 0x11, v16, d2_CurrentWindowId);
 				*(unsigned int*) (v6 + 0x7e30c0) = v16;
-				v15 = d2_ShowTxt(0, v5 + 4, g_6b5c60, d2_CurrentWindowId);
+				v15 = d2_ShowTxt(0, v5 + 4, str_empty, d2_CurrentWindowId);
 				*(int*) (v6 + 0x7e30d4) = v15;
-				*(unsigned int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[v15].value_06c)) = 1;
-				*(unsigned int*) (&((D2_CONTROL_TL*)g_1015ea0)
+				*(unsigned int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[v15].value_06c)) = 1;
+				*(unsigned int*) (&((D2_CONTROL_TL*)d2_Controls)
 					[*(int*) (v6 + 0x7e30d4)].width) = 0x5f;
-				*(unsigned int*) (&((D2_CONTROL_TL*)g_1015ea0)
+				*(unsigned int*) (&((D2_CONTROL_TL*)d2_Controls)
 					[*(int*) (v6 + 0x7e30c0)].value_058) = 1;
-				*(char**) (&((D2_CONTROL_TL*)g_1015ea0)
+				*(char**) (&((D2_CONTROL_TL*)d2_Controls)
 					[*(int*) (v6 + 0x7e30c0)].associated_object) = &v11[-0x165];
 				if (*(int*) (v6 + 0x7e30d8) != -1) {
 					d2_CloseWindow(*(int*) (v6 + 0x7e30d8));
@@ -173,7 +173,7 @@ label_529c64:
 					goto label_529d30;
 				}
 				if (d2_CurrentElementId == v13[-4]) {
-					if (*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[v13[-4]].value_038))) {
+					if (*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[v13[-4]].value_038))) {
 						*(char*) (v3 * 0x21c + 0x7f4e28) = 1;
 						d3snd_PlayObjectClickSound((char*) (v3 * 0x21c + 0x7f4ca0));
 					}
@@ -205,7 +205,7 @@ label_529d30:
 				if (!(*(char*) (v13[2] * 0x21c + 0x7f4e28))) {
 					d2_SetElementValue(v13[-2], 0);
 				} else {
-					d2_AddDisplayCounter(*(unsigned int*) (&((D2_CONTROL_TL*)g_1015ea0)
+					d2_AddDisplayCounter(*(unsigned int*) (&((D2_CONTROL_TL*)d2_Controls)
 						[v13[-2]].value_008), 1);
 					d2_SetElementValue(v13[-2], 1);
 				}
@@ -225,7 +225,7 @@ label_529d30:
 					sprintf(v9, "%s %i%%",
 						(char*) (v13[2] * 0x21c + 0x7f4cd0), v16);
 					d2_SetLabelText(v13[3], v9);
-					*(unsigned int*) (&((D2_CONTROL_TL*)g_1015ea0)
+					*(unsigned int*) (&((D2_CONTROL_TL*)d2_Controls)
 						[v13[3]].width) = 0x5f;
 				}
 				v5 = d2_GetEntityGearIcons((char*) (v13[2] * 0x21c + 0x7f4ca0),
@@ -249,7 +249,7 @@ label_529d30:
 							}
 						}
 						else {
-							if (v6 == *(int*) (&((D2_CONTROL_TL*)g_1015ea0)
+							if (v6 == *(int*) (&((D2_CONTROL_TL*)d2_Controls)
 								[v5].value_008)) {
 								goto label_529f4c;
 							}
@@ -270,7 +270,7 @@ label_529f4c:
 					if (v15 != -1) {
 						v6 = v13[1];
 						if (v6 != -1) {
-							if (v15 == *(int*) (&((D2_CONTROL_TL*)g_1015ea0)
+							if (v15 == *(int*) (&((D2_CONTROL_TL*)d2_Controls)
 								[v6].value_008)) {
 								goto label_529fe5;
 							}
@@ -309,8 +309,8 @@ label_529fe5:
 				v7 = (unsigned int) (*(char*) (*v13 * 0x21c
 					+ 0x7f4e28) != '\0');
 				v13[4] = v7;
-				*(unsigned int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[v13[-4]].value_038)) = v7;
-				*(unsigned int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[v13[-4]].value_03c)) = v7;
+				*(unsigned int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[v13[-4]].value_038)) = v7;
+				*(unsigned int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[v13[-4]].value_03c)) = v7;
 			}
 			v13 = &v13[10];
 		} while ((int) v13 < 0x7e35d0);

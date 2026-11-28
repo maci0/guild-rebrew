@@ -5,18 +5,18 @@ extern pos14_7f4c00 gm_GameTime;
 extern unsigned char* lpGebaeudePROT;
 extern char* g_7f3b24;
 extern char* g_7f3ee0;
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 extern char s_6a1fdc[];
-extern char* g_7746c4;
-extern char* g_7746c8;
-extern char* g_7746cc;
-extern char g_776664;
-extern char g_773dd4;
+extern char* d2_VisitedBuilding;
+extern char* d2_InteriorBuilding;
+extern char* sv_SelectedBuilding;
+extern char d3_GfxDetails;
+extern char d3_CurrentSeason;
 extern char g_6b8061;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_6791c8;
+extern int evt_ActiveContextId;
 extern int g_6b86d8;
-extern int g_67a370;
+extern int d3_ActiveScene;
 extern float g_67a964;
 
 int __cdecl gm_GetSeason(char*);
@@ -64,52 +64,52 @@ void __cdecl d3_UpdateBuildingView(unsigned char* building, int queryId)
 		g_7f3b24 = (char*) entity;
 		d3_SetInteriorLightingDefaults();
 	} else {
-		type = g_7f3b00[((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*building].category];
+		type = d3_BuildingCategorySceneIndices[((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*building].category];
 		g_7f3b24 = 0;
 		d3_SetExteriorLightingDefaults();
 	}
 	if (d3_CurrentContextIndex != type
-	    || (g_7746c4 != 0 && (unsigned char*) g_7746c4 != building)
-	    || (g_7746c8 != 0 && (unsigned char*) g_7746c8 != building)) {
+	    || (d2_VisitedBuilding != 0 && (unsigned char*) d2_VisitedBuilding != building)
+	    || (d2_InteriorBuilding != 0 && (unsigned char*) d2_InteriorBuilding != building)) {
 		return;
 	}
 	obj = (unsigned char*) d3_FindSceneObject(0, 0x180, 0, s_6a1fdc);
 	if (obj != 0) {
-		if (!g_776664) {
+		if (!d3_GfxDetails) {
 			d3_SetSubtreeVisible((int) obj, 0);
 		} else {
 			d3_SetSubtreeVisible((int) obj, 1);
 		}
 	}
 	g_67530c = *(int*) (building + 1);
-	if (g_7746cc != 0) {
-		g_6791c8 = *(int*) (g_7746cc + 2);
+	if (sv_SelectedBuilding != 0) {
+		evt_ActiveContextId = *(int*) (sv_SelectedBuilding + 2);
 	} else {
-		g_6791c8 = *(int*) (building + 1);
+		evt_ActiveContextId = *(int*) (building + 1);
 	}
 	if (mode == 1) {
-		g_773dd4 = 1;
+		d3_CurrentSeason = 1;
 	} else if (mode == 0) {
-		g_773dd4 = 0;
+		d3_CurrentSeason = 0;
 	} else if (mode == 2) {
-		g_773dd4 = 2;
+		d3_CurrentSeason = 2;
 	} else if (mode == 3) {
-		g_773dd4 = 3;
+		d3_CurrentSeason = 3;
 	}
 	g_6b8061 = 0;
 	g_67a964 = 1.0f;
 	g_6b86d8 = 0x800;
 	if (gm_CheckEntityType((char*) building)) {
-		d3_TraverseSceneObjects(g_67a370, 0, 0xc0, d3_ApplyVegetationTextureSet);
-		d3_TraverseSceneObjects(g_67a370, 0, 0xc0, d3_ApplySeasonTextureSet);
+		d3_TraverseSceneObjects(d3_ActiveScene, 0, 0xc0, d3_ApplyVegetationTextureSet);
+		d3_TraverseSceneObjects(d3_ActiveScene, 0, 0xc0, d3_ApplySeasonTextureSet);
 	}
 	if (*building == 0x1e && queryId == 0xfd) {
 		d3_ShowPflanzenMapEntries(*(int*) (building + 0x71));
 	}
 	g_7f3ee0 = (char*) building;
 	ch_CollectContextCharacters((char*) building);
-	d3_TraverseSceneObjects(g_67a370, 0, 0x1e0, d3_UpdateBuildingSlotVisibility);
-	d3_TraverseSceneObjects(g_67a370, 0, 0x20, d3_InitGateNodeFlags);
+	d3_TraverseSceneObjects(d3_ActiveScene, 0, 0x1e0, d3_UpdateBuildingSlotVisibility);
+	d3_TraverseSceneObjects(d3_ActiveScene, 0, 0x20, d3_InitGateNodeFlags);
 	gm_UpdateResidenceOwnerDecor((char*) building);
 	i = 0;
 	if (rec->category == 0x16) {
@@ -131,7 +131,7 @@ void __cdecl d3_UpdateBuildingView(unsigned char* building, int queryId)
 		}
 		p++;
 	} while ((int) p < 0x14d0c20);
-	p = (unsigned char**) (g_7f4ca0 + 0x184);
+	p = (unsigned char**) (gm_EntitySlotTable + 0x184);
 	do {
 		obj = *p;
 		if (obj != 0 && d3_GetContextIndex(*(int*) (obj + 0x88)) == type) {
@@ -153,11 +153,11 @@ void __cdecl d3_UpdateBuildingView(unsigned char* building, int queryId)
 	p = (unsigned char**) fcn_00502cd0(0, 2, 7, 4, 0x1d);
 	while (p != 0) {
 		obj = (unsigned char*) *(void**) ((char*) p + 0x3b);
-		if (*(int*) (obj + 0x88) == g_67a370 && *(int*) (obj + 0x2c) == *(int*) (building + 1)) {
+		if (*(int*) (obj + 0x88) == d3_ActiveScene && *(int*) (obj + 0x2c) == *(int*) (building + 1)) {
 			ch_SetVisible((char*) obj, 1);
 			ch_PlaceOnGround((char*) obj, 0);
 			ch_UpdateAttachedModelPosition((char*) obj, 1);
-		} else if (*(int*) (obj + 0x88) == g_67a370) {
+		} else if (*(int*) (obj + 0x88) == d3_ActiveScene) {
 			ch_SetVisible((char*) obj, 0);
 		}
 		p = (unsigned char**) gm_NextEntityQueryMatch();

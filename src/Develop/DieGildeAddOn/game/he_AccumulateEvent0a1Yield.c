@@ -3,7 +3,7 @@
 
 
 extern float g_6652c4;
-extern float g_6628a0;
+extern float flt_1_0;
 extern double g_665f00;
 extern double g_664f08;
 

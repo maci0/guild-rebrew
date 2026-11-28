@@ -210,8 +210,8 @@ typedef struct {
 
 extern int g_774818;
 extern char g_6a3550[];
-extern Page_1038144 g_1038144[];
-extern Win_1015f40 g_1015f40[0x60];
+extern Page_1038144 d2_FormPageWindows[];
+extern Win_1015f40 d2_Windows[0x60];
 extern int d2_ScreenHeight;
 extern int g_1040494;
 extern char g_7e25a0[];
@@ -279,10 +279,10 @@ int __cdecl main_OpenEngine(void)
 	txt_ResetHistoryTextBanks();
 	d2_ClearScreen();
 	screen = d2_LoadForm(0, 0, "Misc\\Loading_main");
-	d2_PositionWindow(((Screen*)g_1038144)[screen].image, 3);
-	d2_PositionControl(0, d2_ScreenHeight - ((D2_WIN*)g_1015f40)[((Screen*)g_1038144)[screen].window].height - 0x30,
-		((D2_WIN*)g_1015f40)[((Screen*)g_1038144)[screen].window].slot);
-	d2_PositionWindow(((Screen*)g_1038144)[screen].window, 1);
+	d2_PositionWindow(((Screen*)d2_FormPageWindows)[screen].image, 3);
+	d2_PositionControl(0, d2_ScreenHeight - ((D2_WIN*)d2_Windows)[((Screen*)d2_FormPageWindows)[screen].window].height - 0x30,
+		((D2_WIN*)d2_Windows)[((Screen*)d2_FormPageWindows)[screen].window].slot);
+	d2_PositionWindow(((Screen*)d2_FormPageWindows)[screen].window, 1);
 	io_AppendText(0x73, g_7e25a0);
 	nt_ConnectTcp(0, 0);
 	cm_ResetCommandQueue();
@@ -299,10 +299,10 @@ int __cdecl main_OpenEngine(void)
 	eval_ObjektPreis2Credits(0x1d9, 100);
 	eval_ObjektPreis2Credits(0x1d6, 100);
 	eval_ObjektPreis2Credits(0x1d8, 100);
-	if (g_774934 != 0) {
+	if (d3snd_SoundEnabled != 0) {
 		msx_InitAIL();
 		if (sb_Init(10000000, 0x30, 2, 0x10, 44100) != 0) {
-			g_774934 = 0;
+			d3snd_SoundEnabled = 0;
 			msx_MusicEnabled = 0;
 		}
 		d3snd_InitSources(0x40);

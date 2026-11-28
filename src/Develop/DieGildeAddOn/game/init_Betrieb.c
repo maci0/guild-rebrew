@@ -1,6 +1,6 @@
 extern char* g_entity_type_table; /* 0x868050 */
 extern char* g_item_def_table;    /* 0x99ec10 */
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 #pragma pack(push, 1)
 typedef struct init_Betrieb_Item {
@@ -92,7 +92,7 @@ void __cdecl init_Betrieb(unsigned char* building)
                     limit = gm_GetStorageSlotCapacity(obj, item->child[i]);
                 }
                 cm_SendSellObjekt(*(int*)(obj + 2), -1, item->child[i], limit,
-                             g_773d75, 0);
+                             gm_ActiveTownIndex, 0);
             }
             i++;
         } while (i < 4);

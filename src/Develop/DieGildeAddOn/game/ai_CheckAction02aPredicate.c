@@ -32,8 +32,8 @@ int __cdecl ai_CheckAction02aPredicate(char* unused1, char* e, char* ctx, char* 
 	d2 = gm_CalcEntityFavor(idx[1], idx[0], 1);
 	if (!(d1 > g_6629e8) || !(d2 > g_6629e8)) {
 		out[0] = 7;
-		*(int*) (out + 4) = ((ENTITY_RECORD*)g_7f4ca0)[idx[0]].entity_id;
-		*(int*) (out + 8) = ((ENTITY_RECORD*)g_7f4ca0)[idx[1]].entity_id;
+		*(int*) (out + 4) = ((ENTITY_RECORD*)gm_EntitySlotTable)[idx[0]].entity_id;
+		*(int*) (out + 8) = ((ENTITY_RECORD*)gm_EntitySlotTable)[idx[1]].entity_id;
 		return 1;
 	}
 	return 0;

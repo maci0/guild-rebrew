@@ -18,7 +18,7 @@ typedef struct
 } Set;
 // SIZE 0x38
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int kind);
@@ -36,7 +36,7 @@ int __cdecl gm_NotifyDomizilCallback(Set* p)
 			r = gm_StartFilteredEntitySearch(1, 1, p->recs[i].id);
 			mode = 0;
 			if (r != 0 && *(unsigned short*) (r + 0x27) != 0xffff) {
-				e = ((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (r + 0x27)]);
+				e = ((char *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[*(unsigned short*) (r + 0x27)]);
 				if (p->recs[i].kind == 1) {
 					mode = 2;
 					if (!(p->recs[i].f > 25.0f)) {

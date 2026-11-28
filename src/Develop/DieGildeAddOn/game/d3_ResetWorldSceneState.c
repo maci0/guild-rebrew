@@ -53,16 +53,16 @@ typedef struct {
 
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d3/d3_camera.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_773dd4;
-extern int g_67a370;
-extern int g_6b8300;
+extern char d3_CurrentSeason;
+extern int d3_ActiveScene;
+extern int d3_CurrentFloor;
 extern int g_77666c;
 extern char g_6b8061;
-extern int g_6791c8;
+extern int evt_ActiveContextId;
 extern float g_67a964;
 extern char g_6b859b;
 
@@ -94,7 +94,7 @@ void __cdecl d3_ResetWorldSceneState(void)
 	if (d3_CurrentContextIndex != 0) {
 		return;
 	}
-	view = (View*) gm_GetEntityTableEntry((char*) (&((Entity*)g_7f4ca0)[g_774970]));
+	view = (View*) gm_GetEntityTableEntry((char*) (&((Entity*)gm_EntitySlotTable)[gm_LocalPlayerSlot]));
 	if (view != 0 && view->zoom != -1.0f) {
 		d3_SetNodePosition(((Camera*)d3_ActiveCamera), view->pos);
 		d3_SetCameraHeightFraction(view->zoom);
@@ -104,34 +104,34 @@ void __cdecl d3_ResetWorldSceneState(void)
 		d3_SetCameraHeightFraction(0.33f);
 	}
 	for (i = 0; i < 768; i++) {
-		if (((Entity*)g_7f4ca0)[i].obj != 0 && d3_GetContextIndex(((Entity*)g_7f4ca0)[i].obj->model) == 0 && ((Entity*)g_7f4ca0)[i].obj->owner == -1) {
-			if (((Entity*)g_7f4ca0)[i].obj->body->visible == 0
-				|| (((Entity*)g_7f4ca0)[i].obj->rider != 0 && ((Entity*)g_7f4ca0)[i].obj->rider->visible == 0)) {
-				ch_EnsureCharacterMeshes(((Entity*)g_7f4ca0)[i].obj);
+		if (((Entity*)gm_EntitySlotTable)[i].obj != 0 && d3_GetContextIndex(((Entity*)gm_EntitySlotTable)[i].obj->model) == 0 && ((Entity*)gm_EntitySlotTable)[i].obj->owner == -1) {
+			if (((Entity*)gm_EntitySlotTable)[i].obj->body->visible == 0
+				|| (((Entity*)gm_EntitySlotTable)[i].obj->rider != 0 && ((Entity*)gm_EntitySlotTable)[i].obj->rider->visible == 0)) {
+				ch_EnsureCharacterMeshes(((Entity*)gm_EntitySlotTable)[i].obj);
 			}
-			ch_SetVisible(((Entity*)g_7f4ca0)[i].obj, 1);
-			d3_UpdateEntityTextureVariant(&((Entity*)g_7f4ca0)[i]);
+			ch_SetVisible(((Entity*)gm_EntitySlotTable)[i].obj, 1);
+			d3_UpdateEntityTextureVariant(&((Entity*)gm_EntitySlotTable)[i]);
 		}
 	}
 	if (mode == 1) {
-		g_773dd4 = 1;
+		d3_CurrentSeason = 1;
 	} else if (mode == 0) {
-		g_773dd4 = 0;
+		d3_CurrentSeason = 0;
 	} else if (mode == 2) {
-		g_773dd4 = 2;
+		d3_CurrentSeason = 2;
 	} else if (mode == 3) {
-		g_773dd4 = 3;
+		d3_CurrentSeason = 3;
 	}
-	d3_TraverseSceneObjects((*(Scene**)&g_67a370), 0, 0xe0, d3_ApplyVegetationTextureSet);
-	d3_TraverseSceneObjects((*(Scene**)&g_67a370), 0, 0xc0, d3_ApplySeasonTextureSet);
+	d3_TraverseSceneObjects((*(Scene**)&d3_ActiveScene), 0, 0xe0, d3_ApplyVegetationTextureSet);
+	d3_TraverseSceneObjects((*(Scene**)&d3_ActiveScene), 0, 0xc0, d3_ApplySeasonTextureSet);
 	d3_SetExteriorLightingDefaults();
-	if ((*(Scene**)&g_67a370) != 0 && (*(Scene**)&g_67a370)->hook != 0 && (*(Scene**)&g_67a370)->hook->notify != 0) {
-		(*(Scene**)&g_67a370)->hook->notify((*(Scene**)&g_67a370), 4, (*(Scene**)&g_67a370)->hook->arg, 0);
+	if ((*(Scene**)&d3_ActiveScene) != 0 && (*(Scene**)&d3_ActiveScene)->hook != 0 && (*(Scene**)&d3_ActiveScene)->hook->notify != 0) {
+		(*(Scene**)&d3_ActiveScene)->hook->notify((*(Scene**)&d3_ActiveScene), 4, (*(Scene**)&d3_ActiveScene)->hook->arg, 0);
 	}
 	d3_UpdateTerrainSeasonTextures();
-	d3_UpdateSceneDetailLevel(g_6b8300, 0);
+	d3_UpdateSceneDetailLevel(d3_CurrentFloor, 0);
 	g_6b8061 = 1;
-	g_6791c8 = 0;
+	evt_ActiveContextId = 0;
 	g_67a964 = 1.0f - (unsigned char) g_77666c * 0.01f;
 	d3_UpdateDaylightPhase(&(*(char*)&gm_GameTime));
 	if (g_6b859b != 0) {

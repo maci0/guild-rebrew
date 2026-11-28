@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 
 
@@ -31,7 +31,7 @@ int __cdecl gm_ApplyEntityPercentDebit(void* request)
 	amount = (int) (((double) n * pct) * 0.01);
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7,
 	    (gm_RandomMod(6) & 0xffff) + 3, amount);
-	cm_RequestTransferCurrencyNoKill(*(int*) request, -1, g_773d75, amount);
+	cm_RequestTransferCurrencyNoKill(*(int*) request, -1, gm_ActiveTownIndex, amount);
 	len = strlen(buf);
 	he_PostEntityMessage(*(int*) ((char*) entity + 4), *(int*) ((char*) entity + 4), buf,
 	    0x100 < len, 0x603, 0);

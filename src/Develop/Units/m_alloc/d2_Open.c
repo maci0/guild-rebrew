@@ -2,13 +2,13 @@
 #include <string.h>
 
 extern int g_1015ce0;
-extern void** g_772540;
-extern char* g_1015ea0;
-extern char* g_772500;
-extern char* g_77257c;
-extern char* g_772580;
-extern char* g_772584;
-extern char* g_772588;
+extern void** d2_ZOrderStack;
+extern char* d2_Controls;
+extern char* d2_FileObjTable;
+extern char* d2_DirtyRectBuffers;
+extern char* d2_RedrawInfo1;
+extern char* d2_RedrawInfo2;
+extern char* d2_DirtyRects;
 extern unsigned int g_14ce798;
 extern unsigned int g_14ce79c;
 extern int g_67dac0;
@@ -17,31 +17,31 @@ extern int g_14ce77c;
 extern signed char g_67d91c;
 extern signed char g_67d91d;
 extern int g_67d920;
-extern char g_1015f40[];
-extern char* g_1015ec0[];
+extern char d2_Windows[];
+extern char* d2_OverlaySprites[];
 extern int g_1040480;
 extern int g_1040484;
 extern int g_1040488;
 extern int g_104048c;
 extern int g_1040494;
 extern int d2_ScreenHeight;
-extern int g_1038140[];
-extern char g_102cbc0[];
+extern int d2_Forms[];
+extern char d2_RadioGroups[];
 extern FILE* g_772564;
 extern char g_102d040[];
 extern char g_1015da0[];
 extern int g_772504;
 extern int g_7725b0;
-extern char* g_7725ac;
+extern char* d2_ExcludedShapeNames;
 extern float d2_UiScale;
 extern signed char g_772510;
 extern int d2_CenterX;
 extern int d2_DialogCenterY;
-extern int g_77250c;
+extern int d2_ScreenSurface;
 extern void* g_6b5de0;
 extern int g_67dab8;
 #include "Develop/Units/d2.v1/d2_surface.h"
-extern char* g_77253c;
+extern char* d2_BlackTexture;
 extern int g_67d390;
 extern int g_67d394;
 extern int d2_DefaultFont;
@@ -114,13 +114,13 @@ int __cdecl d2_Open(int a0, int a1, int screenHeight, char* a3, char* a4)
 	int j;
 
 	g_1015ce0 = 0;
-	g_772540 = (void**) m_alloc(0x1000, s_67d768);
-	g_1015ea0 = (char*) m_alloc(0xbd000, s_67d760);
-	g_772500 = (char*) m_alloc(0x2a000, s_67d754);
-	g_77257c = (char*) m_alloc(0x4000, s_67d740);
-	g_772580 = (char*) m_alloc(0x4000, s_67d72c);
-	g_772584 = (char*) m_alloc(0x4000, s_67d718);
-	g_772588 = (char*) m_alloc(0x5000, s_67d700);
+	d2_ZOrderStack = (void**) m_alloc(0x1000, s_67d768);
+	d2_Controls = (char*) m_alloc(0xbd000, s_67d760);
+	d2_FileObjTable = (char*) m_alloc(0x2a000, s_67d754);
+	d2_DirtyRectBuffers = (char*) m_alloc(0x4000, s_67d740);
+	d2_RedrawInfo1 = (char*) m_alloc(0x4000, s_67d72c);
+	d2_RedrawInfo2 = (char*) m_alloc(0x4000, s_67d718);
+	d2_DirtyRects = (char*) m_alloc(0x5000, s_67d700);
 	g_67dac0 = g_14ce798;
 	if (!(g_14ce798 < g_14ce79c)) {
 		g_67dac0 = g_14ce79c;
@@ -134,20 +134,20 @@ int __cdecl d2_Open(int a0, int a1, int screenHeight, char* a3, char* a4)
 	}
 	d2_CreateRenderToSurface();
 	d2_InitQuadVertexBuffer();
-	memset(g_1015f40, 0, 0x16c80);
-	*(int*) g_1015ea0 = 0;
-	*(int*) g_772500 = 0;
-	*(int*) g_772540 = 0;
+	memset(d2_Windows, 0, 0x16c80);
+	*(int*) d2_Controls = 0;
+	*(int*) d2_FileObjTable = 0;
+	*(int*) d2_ZOrderStack = 0;
 	memset(&g_1040480, 0, 0x10);
-	memset(g_1015ec0, 0, 0x80);
+	memset(d2_OverlaySprites, 0, 0x80);
 	for (i = 0; i < 0x30; i++) {
 		*(int*) (0x1038140 + i * 0x2bc) = i;
 	}
 	for (i = 0; i < 0x60; i++) {
-		*(int*) (g_1015f40 + i * 0x3cc) = i;
+		*(int*) (d2_Windows + i * 0x3cc) = i;
 	}
 	for (i = 0; i < 0x400; i++) {
-		*(int*) ((char*) &((D2_CONTROL_TL*) g_1015ea0)[i]) = i;
+		*(int*) ((char*) &((D2_CONTROL_TL*) d2_Controls)[i]) = i;
 	}
 	if (g_772564) {
 		return 0;
@@ -181,7 +181,7 @@ int __cdecl d2_Open(int a0, int a1, int screenHeight, char* a3, char* a4)
 		return 0;
 	}
 	for (i = 0; i < g_772504; i++) {
-		fread(g_772500 + i * 0x54, 0x54, 1, g_772564);
+		fread(d2_FileObjTable + i * 0x54, 0x54, 1, g_772564);
 	}
 	fclose(g_772564);
 	sprintf(path, s_67d690, a3);
@@ -207,7 +207,7 @@ int __cdecl d2_Open(int a0, int a1, int screenHeight, char* a3, char* a4)
 				g_7725b0++;
 			}
 		} while (!(*(unsigned char*) ((char*) g_772564 + 0xc) & 0x10));
-		g_7725ac = m_alloc(g_7725b0 * 0x30, s_67d684);
+		d2_ExcludedShapeNames = m_alloc(g_7725b0 * 0x30, s_67d684);
 		fseek(g_772564, 0, 0);
 		g_7725b0 = 0;
 		do {
@@ -226,7 +226,7 @@ int __cdecl d2_Open(int a0, int a1, int screenHeight, char* a3, char* a4)
 					p++;
 				} while (c);
 				p = name;
-				q = g_7725ac + g_7725b0 * 0x30;
+				q = d2_ExcludedShapeNames + g_7725b0 * 0x30;
 				g_7725b0++;
 				do {
 					c = *p++;
@@ -238,7 +238,7 @@ int __cdecl d2_Open(int a0, int a1, int screenHeight, char* a3, char* a4)
 	}
 	shp_InitRenderState(0, 1);
 	for (i = 0; i < g_772504; i++) {
-		if ((*(unsigned char*) (g_772500 + i * 0x54 + 0x44) & 1) && *(int*) (g_772500 + i * 0x54 + 0x38)) {
+		if ((*(unsigned char*) (d2_FileObjTable + i * 0x54 + 0x44) & 1) && *(int*) (d2_FileObjTable + i * 0x54 + 0x38)) {
 			d2_Show(i, 0);
 		}
 	}
@@ -259,18 +259,18 @@ int __cdecl d2_Open(int a0, int a1, int screenHeight, char* a3, char* a4)
 	for (i = 0; i < 0x17; i++) {
 		((int*) info)[i] = 0;
 	}
-	g_77250c = 0;
+	d2_ScreenSurface = 0;
 	*(int*) (info + 4) = g_14ce860;
 	*(int*) (info + 8) = g_14ce864;
 	(*(void (__stdcall**) (void*, int, int, void*)) (*(char**) g_6b5de0 + 0x40))(g_6b5de0, 0, 0, info + 0x24);
-	g_77250c = d2_CreateSurface(info, 4);
-	if (!g_77250c) {
+	d2_ScreenSurface = d2_CreateSurface(info, 4);
+	if (!d2_ScreenSurface) {
 		return 0;
 	}
-	d2_GetSurfaceDesc(g_77250c, info + 0x5c);
-	if (d2_LockSurface(g_77250c)) {
-		d2_ClearSurface(g_77250c);
-		d2_UnlockSurface(g_77250c);
+	d2_GetSurfaceDesc(d2_ScreenSurface, info + 0x5c);
+	if (d2_LockSurface(d2_ScreenSurface)) {
+		d2_ClearSurface(d2_ScreenSurface);
+		d2_UnlockSurface(d2_ScreenSurface);
 	}
 	for (i = 0; i < 0x17; i++) {
 		((int*) info)[i] = 0;
@@ -278,20 +278,20 @@ int __cdecl d2_Open(int a0, int a1, int screenHeight, char* a3, char* a4)
 	*(int*) (info + 4) = 0x20;
 	*(int*) (info + 8) = 0x20;
 	*(int*) (info + 0x28) = g_67dab8;
-	g_77256c = (D2_SURFACE*) d2_CreateSurface(info, 2);
-	if (!g_77256c) {
+	d2_WhiteSurface = (D2_SURFACE*) d2_CreateSurface(info, 2);
+	if (!d2_WhiteSurface) {
 		return 0;
 	}
-	d2_LockSurface((int) g_77256c);
+	d2_LockSurface((int) d2_WhiteSurface);
 	for (i = 0; i < 0x20; i++) {
 		for (j = 0; j < 0x20; j++) {
-			d2_WriteSurfacePixel(j, i, 0xff, 0xff, 0xff, (int) g_77256c);
+			d2_WriteSurfacePixel(j, i, 0xff, 0xff, 0xff, (int) d2_WhiteSurface);
 		}
 	}
-	d2_UnlockSurface((int) g_77256c);
+	d2_UnlockSurface((int) d2_WhiteSurface);
 	d2_SelectFont(d2_FindResourceByName(s_67d474));
-	g_77253c = d3_LoadTextureWithDefaultTint(s_67d67c, 0);
-	if (g_77253c == 0) {
+	d2_BlackTexture = d3_LoadTextureWithDefaultTint(s_67d67c, 0);
+	if (d2_BlackTexture == 0) {
 		ReportClientMessage(s_67d654);
 	}
 	g_67d390 = d2_FindResourceByName(s_67d648);

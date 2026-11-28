@@ -1,5 +1,5 @@
 #include "Develop/Units/d3/d3_object.h"
-extern int g_67a370;
+extern int d3_ActiveScene;
 
 
 
@@ -32,7 +32,7 @@ void __cdecl d3_ReparentFackelLights(int x)
 	int i;
 
 	l.n = 0;
-	d3_VisitSceneObjects(g_67a370, x, 0x2c0, (void*) d3_CollectFackelObjects, &l);
+	d3_VisitSceneObjects(d3_ActiveScene, x, 0x2c0, (void*) d3_CollectFackelObjects, &l);
 	for (i = 0; i < l.n; i++) {
 		for (o = *(char**) (l.a[i] + OFF_LIST_NEXT); o != 0; o = next) {
 			next = *(char**) (o + OFF_OBJ_NEXT);

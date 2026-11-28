@@ -9,8 +9,8 @@ typedef struct Tex {
 	char pad[0x24];
 } Tex;
 
-extern char* g_104049c;
-extern unsigned int g_10404a0;
+extern char* d3_TextureBank;
+extern unsigned int d3_TextureBankCount;
 
 void __cdecl d3_AddRefTexture(Tex* t, char all)
 {
@@ -21,8 +21,8 @@ void __cdecl d3_AddRefTexture(Tex* t, char all)
 		return;
 	}
 	if (all != 0 && *(int*) ((char*) t + 0x5c) > 0 && ((char*) t)[0x5d] == 0 && t->id != -1) {
-		list = ((Tex*)g_104049c);
-		for (i = 0; i < g_10404a0; i++) {
+		list = ((Tex*)d3_TextureBank);
+		for (i = 0; i < d3_TextureBankCount; i++) {
 			if (list[i].refs > 0 && list[i].id == t->id) {
 				list[i].refs++;
 			}

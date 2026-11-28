@@ -1,8 +1,8 @@
 #include <string.h>
 #include "Develop/client_types.h"
 
-extern char* g_1015ea0;
-extern void** g_772540;
+extern char* d2_Controls;
+extern void** d2_ZOrderStack;
 extern int g_772528;
 extern UI_FIELD* tp_d2_SelectedControl;
 extern UI_FIELD g_102d140[];
@@ -28,7 +28,7 @@ void __cdecl d2_DestroyElement(int id)
 	int i;
 	int state;
 
-	e = (char*) &((D2_CONTROL_TL*) g_1015ea0)[id];
+	e = (char*) &((D2_CONTROL_TL*) d2_Controls)[id];
 	if ((*(D2_CONTROL_TL*) e).value_004 == 0) {
 		return;
 	}
@@ -92,11 +92,11 @@ void __cdecl d2_DestroyElement(int id)
 		d2_AddDirtyRect((*(D2_CONTROL_TL*) e).x, (*(D2_CONTROL_TL*) e).y, (*(D2_CONTROL_TL*) e).width, (*(D2_CONTROL_TL*) e).height, list);
 	}
 	for (i = 0; i < 0x3ff; i++) {
-		if (g_772540[i] == (void*) e) {
+		if (d2_ZOrderStack[i] == (void*) e) {
 			if (i == 0x3ff) {
-				g_772540[0x3ff] = 0;
+				d2_ZOrderStack[0x3ff] = 0;
 			} else {
-				fcn_0064d740(&g_772540[i], &g_772540[i + 1], (0x3fe - i) * 4);
+				fcn_0064d740(&d2_ZOrderStack[i], &d2_ZOrderStack[i + 1], (0x3fe - i) * 4);
 			}
 			break;
 		}
@@ -104,6 +104,6 @@ void __cdecl d2_DestroyElement(int id)
 	if (id == g_772528) {
 		g_772528 = id - 1;
 	}
-	memset((char*) &((D2_CONTROL_TL*) g_1015ea0)[id], 0, 0x2f4);
-	*(int*) ((char*) &((D2_CONTROL_TL*) g_1015ea0)[id]) = id;
+	memset((char*) &((D2_CONTROL_TL*) d2_Controls)[id], 0, 0x2f4);
+	*(int*) ((char*) &((D2_CONTROL_TL*) d2_Controls)[id]) = id;
 }

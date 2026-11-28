@@ -1,6 +1,6 @@
 #include <string.h>
 extern int d2_CurrentWindowId;
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 /* Personnel/mercenary book controller. Native extent 0x005b6300..0x005b787b
  * (5499 bytes, chkstk frame 0x1a4c, no frame pointer).
  *
@@ -359,7 +359,7 @@ L6993:
 		d2_ClearGauge((int) &f.sel);
 		f.v1c = -1;
 L69b6:
-		if (g_100f1dc == -1)
+		if (d2_DialogButtonAction == -1)
 			goto L6fa2;
 		if (G(0x67d370) == f.sel.a0c && f.sel.a0c != -1) {
 			for (i = 0; i < 3; i++) {
@@ -386,7 +386,7 @@ L69b6:
 					io_AppendText(0x1a21, *(unsigned short*) f.sel.a08));
 			}
 		}
-		if (g_100f1dc == -1)
+		if (d2_DialogButtonAction == -1)
 			goto L6fa2;
 		if (G(0x67d370) == f.v58 && f.v38 != 0
 			&& *(signed char*) 0x7747b0 >= 0) {
@@ -427,7 +427,7 @@ L69b6:
 			cm_RequestMoveCredits(G(0x7f4ca4 + trec), -1, *(char*) 0x773d75, gm_ConvertUnitsToAmount((int) e, *(char*) 0x773d75));
 		}
 L6cb7:
-		if (g_100f1dc == -1)
+		if (d2_DialogButtonAction == -1)
 			goto L6fa2;
 		c = G(0x67d370);
 		if (c == f.v48 && f.v48 != -1
@@ -560,7 +560,7 @@ L6fa2:
 				io_AppendText(0x6811b0);
 			}
 		}
-		if (g_100f1dc == -1)
+		if (d2_DialogButtonAction == -1)
 			goto L77c4;
 		for (k = 0; k < 0xc; k++) {
 			if (G(0x67d370) != f.rows[k].a0c)

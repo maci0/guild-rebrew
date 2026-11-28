@@ -31,20 +31,20 @@ typedef struct {
 } Cfg;
 
 extern char g_1043060;
-extern int g_6b8300;
-extern int g_67a370;
-extern VECTOR3 g_6b86c4;
-VECTOR3 g_67bbdc = { 200.0f };
+extern int d3_CurrentFloor;
+extern int d3_ActiveScene;
+extern VECTOR3 d3_SceneLightingVec;
+VECTOR3 d3_SceneAmbientColor = { 200.0f };
 extern Pal_1041d20 g_1041d20[6];
 extern char g_1041d80[];
 extern int g_6b8484;
-extern char* g_6b8480;
-extern char* g_6b847c;
-extern char* g_6b8478;
+extern char* d3_SideViewCamera;
+extern char* d3_FrontViewCamera;
+extern char* d3_TopViewCamera;
 extern int g_67a37c;
 extern int g_67a380;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char g_10432c0[];
+extern char d3_Universes[];
 
 void __cdecl d3_DisposeObject(void*);
 void __cdecl d3_FreeMeshObject(void*);
@@ -67,26 +67,26 @@ void __cdecl d3_ClearSceneState(void)
 	while (((void*)d3_SceneRenderListHead) != &(*(char*)g_1040640)) {
 		d3_FreeMeshObject(((void*)d3_SceneRenderListHead));
 	}
-	if (g_6b8300 != 0) {
-		d3_ReleaseRenderDeviceContext(g_6b8300);
-		g_6b8300 = 0;
+	if (d3_CurrentFloor != 0) {
+		d3_ReleaseRenderDeviceContext(d3_CurrentFloor);
+		d3_CurrentFloor = 0;
 	}
 	if (g_6b89c0 != 0) {
 		d3_FreeSkyDome(g_6b89c0);
 		g_6b89c0 = 0;
 	}
-	if (((Cfg*)g_67a370)->x3c8 != 0) {
-		m_FreeTracked(((Cfg*)g_67a370)->x3c8);
-		((Cfg*)g_67a370)->x3c8 = 0;
+	if (((Cfg*)d3_ActiveScene)->x3c8 != 0) {
+		m_FreeTracked(((Cfg*)d3_ActiveScene)->x3c8);
+		((Cfg*)d3_ActiveScene)->x3c8 = 0;
 	}
 	(*(void**)&d3_ObjectListHead) = &(*(char*)d3_SceneObjectSentinel);
 	(*(void**)&g_1042538) = &g_1043060;
-	g_6b86c4.x = 0.0f;
-	g_6b86c4.y = 0.0f;
-	g_6b86c4.z = 0.0f;
-	g_67bbdc.x = 200.0f;
-	g_67bbdc.y = 200.0f;
-	g_67bbdc.z = 200.0f;
+	d3_SceneLightingVec.x = 0.0f;
+	d3_SceneLightingVec.y = 0.0f;
+	d3_SceneLightingVec.z = 0.0f;
+	d3_SceneAmbientColor.x = 200.0f;
+	d3_SceneAmbientColor.y = 200.0f;
+	d3_SceneAmbientColor.z = 200.0f;
 	for (i = 0; i < 6; i++) {
 		g_1041d20[i].color = 0;
 		g_1041d20[i].f8 = 0.0f;
@@ -94,12 +94,12 @@ void __cdecl d3_ClearSceneState(void)
 	}
 	n = 0x48;
 	for (i = 0; i < 7; i++) {
-		((D3_SCENE_SLOT*)g_1041d80)[i].a.x = g_67bbdc.x;
-		((D3_SCENE_SLOT*)g_1041d80)[i].a.y = g_67bbdc.y;
-		((D3_SCENE_SLOT*)g_1041d80)[i].a.z = g_67bbdc.z;
-		((D3_SCENE_SLOT*)g_1041d80)[i].b.x = g_6b86c4.x;
-		((D3_SCENE_SLOT*)g_1041d80)[i].b.y = g_6b86c4.y;
-		((D3_SCENE_SLOT*)g_1041d80)[i].b.z = g_6b86c4.z;
+		((D3_SCENE_SLOT*)g_1041d80)[i].a.x = d3_SceneAmbientColor.x;
+		((D3_SCENE_SLOT*)g_1041d80)[i].a.y = d3_SceneAmbientColor.y;
+		((D3_SCENE_SLOT*)g_1041d80)[i].a.z = d3_SceneAmbientColor.z;
+		((D3_SCENE_SLOT*)g_1041d80)[i].b.x = d3_SceneLightingVec.x;
+		((D3_SCENE_SLOT*)g_1041d80)[i].b.y = d3_SceneLightingVec.y;
+		((D3_SCENE_SLOT*)g_1041d80)[i].b.z = d3_SceneLightingVec.z;
 		d = (char*) ((D3_SCENE_SLOT*)g_1041d80)[i].pal;
 		/*
 		 * TODO: replace this inline-asm copy with proper C once a spelling is
@@ -125,18 +125,18 @@ void __cdecl d3_ClearSceneState(void)
 		}
 	}
 	g_6b8484 = 0;
-	(*(int*)&g_6b8480) = 0;
-	(*(int*)&g_6b847c) = 0;
-	(*(int*)&g_6b8478) = 0;
+	(*(int*)&d3_SideViewCamera) = 0;
+	(*(int*)&d3_FrontViewCamera) = 0;
+	(*(int*)&d3_TopViewCamera) = 0;
 	d3_CreateSceneCameras();
 	g_6b8058 = 0;
 	g_67a37c = 4;
 	g_67a380 = 0xf;
-	((Level*)g_10432c0)[d3_CurrentContextIndex].x84 = 0;
-	((Level*)g_10432c0)[d3_CurrentContextIndex].x80 = 0;
-	((Level*)g_10432c0)[d3_CurrentContextIndex].b3d5 = 0;
-	((Level*)g_10432c0)[d3_CurrentContextIndex].b3d4 = 0;
-	((Level*)g_10432c0)[d3_CurrentContextIndex].b0 = 0;
+	((Level*)d3_Universes)[d3_CurrentContextIndex].x84 = 0;
+	((Level*)d3_Universes)[d3_CurrentContextIndex].x80 = 0;
+	((Level*)d3_Universes)[d3_CurrentContextIndex].b3d5 = 0;
+	((Level*)d3_Universes)[d3_CurrentContextIndex].b3d4 = 0;
+	((Level*)d3_Universes)[d3_CurrentContextIndex].b0 = 0;
 }
 unsigned char _dpad_67b63c[1440] = {
     0x64, 0x33, 0x5f, 0x69, 0x6f, 0x5f, 0x61, 0x3a, 0x41, 0x47, 0x49, 0x50, 0x6f, 0x6c, 0x79, 0x42,

@@ -1,7 +1,7 @@
 #include <string.h>
 
 struct VFS_DIR;
-extern struct VFS_DIR* g_6b7fdc;
+extern struct VFS_DIR* vfs_RootDir;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 extern int __cdecl CloseVfsStream(void* stream);
@@ -46,7 +46,7 @@ found:
 	if (count >= 0x80)
 		return 0;
 	fcn_0064d41a(path, "textbin_%s\\%s.res", "german", name);
-	stream = vfs_Tfopen(path, "rb", g_6b7fdc);
+	stream = vfs_Tfopen(path, "rb", vfs_RootDir);
 	if (!stream) {
 		fcn_0064d41a(msg, "Could not open textfile:%s", path);
 		ReportClientMessage(msg);

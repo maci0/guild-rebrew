@@ -1,4 +1,4 @@
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl gm_AmountToUnits(int, char);
@@ -12,5 +12,5 @@ int __cdecl ai_ExceedsEntityGoldThreshold(int id, char* thr)
 	p = (char*) gm_GetEntityTableEntry((char*) (id));
 	if (p == 0)
 		return 0;
-	return gm_AmountToUnits(*(int*) (p + 0x38), (*(char*)&g_773d75)) > *(int*) (thr + 0x14);
+	return gm_AmountToUnits(*(int*) (p + 0x38), (*(char*)&gm_ActiveTownIndex)) > *(int*) (thr + 0x14);
 }

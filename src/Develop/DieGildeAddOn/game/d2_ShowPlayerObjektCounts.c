@@ -20,7 +20,7 @@ typedef struct
 
 #include "Develop/client_types.h"
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char s_6811b0[];
@@ -47,22 +47,22 @@ void __cdecl d2_ShowPlayerObjektCounts(void)
 	int n;
 
 	w = d2_CreateWindow(0x20, 0x60, 0x280, 0x190, 0x414);
-	d2_SetElementFont(((D2_WIN*)g_1015f40)[w].slot, 0x54);
+	d2_SetElementFont(((D2_WIN*)d2_Windows)[w].slot, 0x54);
 	if (main_RunFrameLoop((void*) d2_ShowPlayerObjektCounts, 0x657c7) != 0) {
-		win = &((D2_WIN*)g_1015f40)[w];
+		win = &((D2_WIN*)d2_Windows)[w];
 		do {
-			if (g_14ce8e0 != 0) {
-				g_774654 = 1;
+			if (io_RightButtonReleased != 0) {
+				d2_DialogCloseRequested = 1;
 			}
 			d2_CurrentWindowId = w;
 			io_AppendText(s_6811b0);
 			for (i = 0; i < 768; i++) {
-				if (((Player*)g_7f4ca0)[i].x0 != 0xffff) {
+				if (((Player*)gm_EntitySlotTable)[i].x0 != 0xffff) {
 					n = 0;
-					for (e = fcn_00502cd0(((Player*)g_7f4ca0)[i].x178, 1, 5); e != 0; e = gm_NextEntityQueryMatch()) {
+					for (e = fcn_00502cd0(((Player*)gm_EntitySlotTable)[i].x178, 1, 5); e != 0; e = gm_NextEntityQueryMatch()) {
 						if (gm_LookupSpecialObject(*(unsigned short*) e) != 0 && *(int*) (e + 0x21) != 0) {
 							if (n == 0) {
-								io_AppendText(s_6ab848, ((Player*)g_7f4ca0)[i].name);
+								io_AppendText(s_6ab848, ((Player*)gm_EntitySlotTable)[i].name);
 								io_AppendText(s_6ab834);
 							}
 							n++;

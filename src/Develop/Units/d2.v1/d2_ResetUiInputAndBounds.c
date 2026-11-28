@@ -1,5 +1,5 @@
 #include "Develop/client_types.h"
-extern char g_6b5c60[];
+extern char str_empty[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_1040494;
 extern int d2_ScreenHeight;
@@ -16,8 +16,8 @@ void __cdecl d2_ResetUiInputAndBounds(void)
 	d2_SetOverlayAnimation(0, 0);
 	ResetDisplayCounters();
 	io_ClearInputState();
-	d2_ShowStatusBanner(g_6b5c60);
-	d2_SetMouseTooltip(g_6b5c60);
+	d2_ShowStatusBanner(str_empty);
+	d2_SetMouseTooltip(str_empty);
 	g_6772c4 = 1;
 	g_6b5c80 = 0;
 	d2_MouseTopBoundary = 0;

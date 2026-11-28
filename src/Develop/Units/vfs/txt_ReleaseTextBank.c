@@ -1,5 +1,5 @@
-extern int g_149d188[];
-extern int g_149d188[];
+extern int txt_TextBankBuffers[];
+extern int txt_TextBankBuffers[];
 
 
 
@@ -14,9 +14,9 @@ void __cdecl txt_ReleaseTextBank(int bankName)
 	if (i == -1) {
 		return;
 	}
-	x = g_149d188[i * 29];
+	x = txt_TextBankBuffers[i * 29];
 	m_FreeTracked(x);
-	g_149d188[i * 29] = 0;
+	txt_TextBankBuffers[i * 29] = 0;
 }
 #if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_1052c50[4498744];

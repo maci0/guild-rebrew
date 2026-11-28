@@ -18,8 +18,8 @@ typedef struct Tex {
 } Tex;
 
 extern unsigned char g_6b7ff8;
-extern char* g_104049c;
-extern unsigned int g_10404a0;
+extern char* d3_TextureBank;
+extern unsigned int d3_TextureBankCount;
 extern int g_67bd2c;
 
 int __cdecl d3_ResolveTexturePath(char* name);
@@ -36,7 +36,7 @@ void __cdecl d3_LoadTextureSurfaceTl(Tex* texture)
 
 	if (texture != 0 && texture->refs > 0) {
 		if (texture->flags & 2) {
-			texture = (Tex*) g_104049c + texture->parent;
+			texture = (Tex*) d3_TextureBank + texture->parent;
 		}
 		saved = g_6b7ff8;
 		if (texture->x50 == 0 && texture->parent != 0 && texture->name[0] != '*') {
@@ -51,8 +51,8 @@ void __cdecl d3_LoadTextureSurfaceTl(Tex* texture)
 		d3_SyncClonedTextureHandles(texture);
 		g_6b7ff8 = saved;
 		if (texture->x5c > 1 && texture->x5d == 0) {
-			p = (Tex*) g_104049c;
-			for (i = 0; i < g_10404a0; i++, p++) {
+			p = (Tex*) d3_TextureBank;
+			for (i = 0; i < d3_TextureBankCount; i++, p++) {
 				if (p->refs > 0 && p->id == texture->id && p->x5d > 0) {
 					d3_LoadTextureSurfaceTl(p);
 				}

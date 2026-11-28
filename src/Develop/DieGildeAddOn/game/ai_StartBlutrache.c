@@ -68,7 +68,7 @@ unsigned int __cdecl ai_StartBlutrache(unsigned int a0, unsigned short* entity, 
 			if (ai_SelectRankedCandidates((int*) entity, 1, (int*) &v4, 0,
 			                 (float) (gm_RandomMod(0x20) & 0xffff) + 25.0f,
 			                 (unsigned short*) &v8) != 0) {
-				a2 = (int) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[v8 & 0xffff]));
+				a2 = (int) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[v8 & 0xffff]));
 				v5 = amt_GetRoleLevel(*(unsigned char*) (a2 + 0x166)) / 3 + 2;
 				if (v5 + 2 <= *(int*) ((char*) entity + 0x194) &&
 				    (a0 = ai_CollectEligibleEntities((int*) entity, 4, (int) v4, 25.0f,
@@ -78,12 +78,12 @@ unsigned int __cdecl ai_StartBlutrache(unsigned int a0, unsigned short* entity, 
 					if ((int) a0 > 0) {
 						do {
 							v1 = *(unsigned char*) (
-							    ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int)v9[v7]]) + 0x166);
+							    ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned int)v9[v7]]) + 0x166);
 							v1 = amt_GetRoleLevel((unsigned char) v1) / 3 +
 							     2 + v5;
 							if (v1 >= *(int*) ((char*) entity + 0x194)) {
 								v5 = v1;
-								v10[v6] = (int) ((char*)&((ENTITY_RECORD*)g_7f4ca0)
+								v10[v6] = (int) ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)
 								                 [(unsigned int)v9[v7]]);
 								v6 += 1;
 							}

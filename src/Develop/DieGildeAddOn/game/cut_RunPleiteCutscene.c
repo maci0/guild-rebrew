@@ -13,7 +13,7 @@ typedef struct {
 
 extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern unsigned char g_7747b0;
+extern unsigned char gm_ClientModeFlags;
 extern char g_5438c0[];
 
 int __cdecl gm_LookupEntityRecordById(void* p);
@@ -100,7 +100,7 @@ void __cdecl cut_RunPleiteCutscene(void* arg)
 			}
 		}
 	}
-	flags = g_7747b0;
+	flags = gm_ClientModeFlags;
 	d2_SuppressOverlay = 0;
 	if ((flags & 4) != 0) {
 		io_FormatTextBuffer(f.msg, 0x3fda, *(unsigned short*) obj);
@@ -117,8 +117,8 @@ void __cdecl cut_RunPleiteCutscene(void* arg)
 	d3snd_StopTrackedVoices();
 	sb_ReleaseSampleBank((void*) handle);
 	fcn_004e4eb0();
-	flags = g_7747b0;
-	g_772f54 = 0;
+	flags = gm_ClientModeFlags;
+	cut_StartTick = 0;
 	if ((flags & 8) != 0) {
 		*(char*) ((char*) obj + 8) = 0;
 		g_774954 = 1;

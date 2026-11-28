@@ -3,8 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-extern int g_100ef80;
-extern int g_67d96c;
+extern int shp_SuppressDraw;
+extern int d2_RenderSurfaceWidth;
 extern short g_7725f0;
 extern short g_7725f2;
 extern char g_67da68[];
@@ -29,9 +29,9 @@ int __cdecl shp_ShowScaledShapeFromBank(int x, int y, char* surface, char* bank,
 		return 0;
 	}
 	entry = bank + *(int*) (bank + shapeIndex * 4 + 0x45);
-	if (g_100ef80 == 0) {
-		save = g_67d96c;
-		g_67d96c = *(int*) (surface + 0x10);
+	if (shp_SuppressDraw == 0) {
+		save = d2_RenderSurfaceWidth;
+		d2_RenderSurfaceWidth = *(int*) (surface + 0x10);
 		switch (*(unsigned char*) (entry + 0xc)) {
 		case 0:
 			return 0;
@@ -47,7 +47,7 @@ int __cdecl shp_ShowScaledShapeFromBank(int x, int y, char* surface, char* bank,
 		case 2:
 			return result;
 		}
-		g_67d96c = save;
+		d2_RenderSurfaceWidth = save;
 	}
 	absScale = abs(scale);
 	g_7725f0 = *(unsigned short*) (entry + 6) / absScale;

@@ -1,8 +1,8 @@
 #include <string.h>
 #include "Develop/client_types.h"
 #include "Develop/DieGildeAddOn/game/client_actions.h"
-extern int g_100f1dc;
-extern int g_14ce8e0;
+extern int d2_DialogButtonAction;
+extern int io_RightButtonReleased;
 extern int d2_CurrentElementId;
 extern int d2_CurrentWindowId;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
@@ -150,9 +150,9 @@ int __cdecl d2_RunErpressungDialog(unsigned char* p, int* q)
 		io_AppendText(0x1d50);
 	}
 	result = 0x20;
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			for (i = 0, rp = (int*) recs; i < cnt; i++, rp += 0xe) {
 				if (d2_CurrentElementId == rp[1]) {
 					if (d2_CheckActionBlocker(p, 2) != 0) {
@@ -164,7 +164,7 @@ int __cdecl d2_RunErpressungDialog(unsigned char* p, int* q)
 						} else {
 							obj = gm_LookupEntityRecordById(ids[i]);
 							if (gm_HandleErpressung(p, (unsigned char*) obj) != 0) {
-								g_774654 = 1;
+								d2_DialogCloseRequested = 1;
 							}
 							result = 0x92;
 						}
@@ -173,8 +173,8 @@ int __cdecl d2_RunErpressungDialog(unsigned char* p, int* q)
 				}
 			}
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop((void*) d2_RunErpressungDialog, 0x657c7) != 0);
 	d2_DestroyForm(dlg);

@@ -2,8 +2,8 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int main_LoopFlags;
-extern char* g_7e2704;
-extern char* g_7e2708;
+extern char* d2_EnteredBuildingEntity;
+extern char* d2_EnteredBuildingObjekt;
 extern char g_7e2714[];
 extern char* lpGebaeudePROT;
 
@@ -13,12 +13,12 @@ typedef struct {
 	char rest[0x24c];
 } BUILDING_PROTO_VIEW;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char* g_7746c4;
-extern char* g_7746c8;
-extern char* g_7746cc;
+extern char* d2_VisitedBuilding;
+extern char* d2_InteriorBuilding;
+extern char* sv_SelectedBuilding;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern char g_7f4e51[];
-extern char g_7f4ca4[];
+extern char gm_EntityBlockedField[];
+extern char gm_EntityIdField[];
 extern char g_1043690[];
 
 char* __cdecl fcn_00502cd0(int a0, int a1, int a2, int a3);
@@ -38,70 +38,70 @@ void __cdecl d2_EnterBuildingObjekt(char* buildingRecord, int objektId, char* en
 	int n;
 
 	hit = 0;
-	if (g_7e2700 != 0) {
+	if (d2_InsideBuildingActive != 0) {
 		return;
 	}
 	if ((main_LoopFlags & 0x10000) != 0) {
 		return;
 	}
-	if (g_774970 != 0xffff && g_7f4e51[(int) g_774970 * 540] != 0) {
+	if (gm_LocalPlayerSlot != 0xffff && gm_EntityBlockedField[(int) gm_LocalPlayerSlot * 540] != 0) {
 		row = &((BUILDING_PROTO_VIEW*) lpGebaeudePROT)[(unsigned char) *buildingRecord];
-		if (row->type != 6 && (row->type != 4 || *(int*) (buildingRecord + 0x65) != *(int*) (g_7f4ca4 + (int) g_774970 * 540))) {
+		if (row->type != 6 && (row->type != 4 || *(int*) (buildingRecord + 0x65) != *(int*) (gm_EntityIdField + (int) gm_LocalPlayerSlot * 540))) {
 			return;
 		}
 	}
-	if (g_7746c4 != 0) {
-		hit = g_7746c4;
-	} else if (g_7746c8 != 0) {
-		hit = g_7746c8;
+	if (d2_VisitedBuilding != 0) {
+		hit = d2_VisitedBuilding;
+	} else if (d2_InteriorBuilding != 0) {
+		hit = d2_InteriorBuilding;
 	}
-	g_7e2704 = buildingRecord;
-	g_7e2708 = fcn_00502cd0(*(int*) (buildingRecord + 0x5d), 1, 1, objektId);
+	d2_EnteredBuildingEntity = buildingRecord;
+	d2_EnteredBuildingObjekt = fcn_00502cd0(*(int*) (buildingRecord + 0x5d), 1, 1, objektId);
 	if (*buildingRecord == 0x47) {
-		g_7e2708 = fcn_00502cd0(*(int*) (buildingRecord + 0x5d), 1, 0, 0xfd);
+		d2_EnteredBuildingObjekt = fcn_00502cd0(*(int*) (buildingRecord + 0x5d), 1, 0, 0xfd);
 	}
 	strcpy(g_7e2714, entryText);
-	g_7e2700 = 1;
-	if (g_7e2708 != 0 && *(unsigned short*) g_7e2708 != 0) {
-		if (g_7e2708 != g_7746cc) {
+	d2_InsideBuildingActive = 1;
+	if (d2_EnteredBuildingObjekt != 0 && *(unsigned short*) d2_EnteredBuildingObjekt != 0) {
+		if (d2_EnteredBuildingObjekt != sv_SelectedBuilding) {
 			if (buildingRecord == hit) {
 				if (gm_CheckEntityType(hit) != 0) {
-					*(unsigned short*) (buildingRecord + 0x29) = *(unsigned short*) g_7e2708;
-					if (g_7746cc != 0) {
-						g_774654 = g_774650 - g_774658 + 1;
+					*(unsigned short*) (buildingRecord + 0x29) = *(unsigned short*) d2_EnteredBuildingObjekt;
+					if (sv_SelectedBuilding != 0) {
+						d2_DialogCloseRequested = g_774650 - g_774658 + 1;
 						return;
 					}
-					g_774654 = g_774650 - g_774658;
+					d2_DialogCloseRequested = g_774650 - g_774658;
 					return;
 				}
 			}
-			*(unsigned short*) (buildingRecord + 0x29) = *(unsigned short*) g_7e2708;
-			old = g_7746cc;
+			*(unsigned short*) (buildingRecord + 0x29) = *(unsigned short*) d2_EnteredBuildingObjekt;
+			old = sv_SelectedBuilding;
 			saved = g_774670;
 			if (gm_CheckEntityType(buildingRecord) == 0 && gm_IsWarehouse(buildingRecord) == 0) {
-				g_7746cc = g_7e2708;
-				g_7e2700 = 0;
+				sv_SelectedBuilding = d2_EnteredBuildingObjekt;
+				d2_InsideBuildingActive = 0;
 				g_774670 = 0;
-				n = init_EnsureObjektSceneContext(g_7e2708);
+				n = init_EnsureObjektSceneContext(d2_EnteredBuildingObjekt);
 				if (g_1043690[n * 988 + 5] != 0) {
-					init_LoadObjektScene(*(unsigned short*) g_7e2708);
+					init_LoadObjektScene(*(unsigned short*) d2_EnteredBuildingObjekt);
 				}
-				g_7746cc = old;
-				g_7e2700 = 1;
+				sv_SelectedBuilding = old;
+				d2_InsideBuildingActive = 1;
 				g_774670 = saved;
 			}
 			main_ExitToFrameHandler((void*) 0x59a340);
 			return;
 		}
 		if (g_774650 > g_774658) {
-			g_774654 = g_774650 - g_774658;
+			d2_DialogCloseRequested = g_774650 - g_774658;
 			return;
 		}
-		g_7e2700 = 0;
+		d2_InsideBuildingActive = 0;
 		return;
 	}
-	if (hit == buildingRecord && g_7746c8 == 0) {
-		g_7e2700 = 0;
+	if (hit == buildingRecord && d2_InteriorBuilding == 0) {
+		d2_InsideBuildingActive = 0;
 		return;
 	}
 	main_ExitToFrameHandler((void*) 0x59a340);

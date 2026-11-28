@@ -2,10 +2,10 @@
 
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char* g_7746c4;
-extern unsigned char* g_7746c8;
+extern char* d2_VisitedBuilding;
+extern unsigned char* d2_InteriorBuilding;
 extern char g_675908[];
-extern char g_68149c[];
+extern char str_dummy_TUER[];
 extern char g_6753fc[];
 
 char* __cdecl gm_LookupEntityRecordById(int id);
@@ -64,7 +64,7 @@ char* __cdecl init_SpawnBuildingCharacter(int id, int type, int sub, int x, int 
 			ch_SpawnEntityCharacter(o, h, x, y, 0, g_675908);
 		}
 	} else {
-		ch_SpawnEntityCharacter(o, h, 0, 0, *(int*) (b + 0x61), g_68149c);
+		ch_SpawnEntityCharacter(o, h, 0, 0, *(int*) (b + 0x61), str_dummy_TUER);
 	}
 	if (*(char**) (o + 0x184) != 0) {
 		ch_PreloadCharacterMotions(*(char**) (o + 0x184), 1, g_6753fc);
@@ -75,7 +75,7 @@ char* __cdecl init_SpawnBuildingCharacter(int id, int type, int sub, int x, int 
 	}
 	*(int*) (*(char**) (o + 0x184) + 0x2c) = type;
 	*(int*) (*(char**) (o + 0x184) + 0x30) = sub;
-	if ((g_7746c4 != 0 && g_7746c4 != b) || ((*(char**)&g_7746c8) != 0 && (*(char**)&g_7746c8) != b)) {
+	if ((d2_VisitedBuilding != 0 && d2_VisitedBuilding != b) || ((*(char**)&d2_InteriorBuilding) != 0 && (*(char**)&d2_InteriorBuilding) != b)) {
 		ch_SetVisible(*(char**) (o + 0x184), 0);
 	}
 	return *(char**) (o + 0x184);

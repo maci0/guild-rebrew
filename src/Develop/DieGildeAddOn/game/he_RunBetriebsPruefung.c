@@ -13,7 +13,7 @@ typedef struct Rec {
 
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 extern int gm_GameTime;
-extern float g_662cf8;
+extern float flt_100_0;
 
 extern float g_665bf0;
 extern double g_6628f0;
@@ -75,7 +75,7 @@ void __cdecl he_RunBetriebsPruefung(char* event)
 			*(int*) (event + 0x70) = 1;
 			return;
 		}
-		f = (g_662cf8 - (float) gm_GetEntityMood(e)) * 0.01f;
+		f = (flt_100_0 - (float) gm_GetEntityMood(e)) * 0.01f;
 		found = 0;
 		for (q = fcn_00502cd0(0, 2, 7, 4, 0x1d); q != 0; q = gm_NextEntityQueryMatch()) {
 			if (*(int*) (q + 0x1c) == *(int*) (e + 1)
@@ -86,28 +86,28 @@ void __cdecl he_RunBetriebsPruefung(char* event)
 		}
 		if (!(f > 0.2) && found == 0) {
 			io_FormatTextBuffer(buf, 0x1a76, *(unsigned short*) (e + 0x27), e);
-			a = (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (event + 8)].entity_id);
+			a = (*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (event + 8)].entity_id);
 			he_PostEntityMessage(a, a, buf, 0, 0x5f0, "_NACHRICHTEN_HS_88");
 			io_FormatTextBuffer(buf, 0x1a78, *(unsigned short*) (event + 8), e);
-			b = (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].entity_id);
+			b = (*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (e + 0x27)].entity_id);
 			he_MessageBoxQuickjump(b, b, buf, 0, 0x5f0, *(int*) (e + 1), -1, 0,
 				"_NACHRICHTEN_HS_86");
 			*(int*) (event + 0x70) = 2;
 			return;
 		}
 		x = (int) (gm_CalculateGebaeudeValue(e, 100) * f * 0.07f);
-		cm_RequestTransferCurrencyNoKill((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (event + 8)].entity_id),
-			(*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].entity_id), 0, x);
-		type = (*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (event + 8)].entity_type);
+		cm_RequestTransferCurrencyNoKill((*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (event + 8)].entity_id),
+			(*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (e + 0x27)].entity_id), 0, x);
+		type = (*(unsigned char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (event + 8)].entity_type);
 		if (type == 6 || type == 7) {
 			io_FormatTextBuffer(buf, 0x1a75, x, *(unsigned short*) (e + 0x27), e);
-			a = (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (event + 8)].entity_id);
+			a = (*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (event + 8)].entity_id);
 			he_PostEntityMessage(a, a, buf, 0, 0x5f0, "_NACHRICHTEN_HS_87");
 		}
-		type = (*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].entity_type);
+		type = (*(unsigned char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (e + 0x27)].entity_type);
 		if (type == 6 || type == 7) {
 			io_FormatTextBuffer(buf, 0x1a77, *(unsigned short*) (event + 8), e, x);
-			b = (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].entity_id);
+			b = (*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (e + 0x27)].entity_id);
 			he_MessageBoxQuickjump(b, b, buf, 0, 0x5f0, *(int*) (e + 1), -1, 0,
 				"_NACHRICHTEN_HS_86");
 		}

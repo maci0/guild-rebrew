@@ -11,7 +11,7 @@ typedef struct {
 	int id;
 } Entity;
 
-extern float g_6628a8;
+extern float flt_0_0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_665bf0;
 extern double g_664f18;
@@ -31,7 +31,7 @@ int __cdecl gm_CheckAndCollectEntityDebt(Entity* e, int extra)
 	int got;
 
 	v = (float) (gm_AccumulateTyped2(e) + extra);
-	if (v > g_6628a8) {
+	if (v > flt_0_0) {
 		return 0;
 	}
 	d = -v;

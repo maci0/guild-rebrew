@@ -1,25 +1,25 @@
 #include <string.h>
 
-extern char* g_7746a4;
-extern unsigned short g_7725c4;
+extern char* d2_HoveredSceneObject;
+extern unsigned short d2_CursorStateId;
 extern int g_6a2bf0;
 extern int g_6a2bf4;
 #include "Develop/Units/d2.v1/d2_gui.h"
-extern short g_14ce8c0;
-extern short g_14ce8c2;
+extern short io_ActiveCursorX;
+extern short io_ActiveCursorY;
 extern int g_14a79c0[];
 extern char g_14a6558[];
-extern char g_100f8c0[];
+extern char d2_HoverTextBuffer[];
 extern int g_67d8cc;
 extern char* g_773dfc;
 extern char* sv_HoveredObjekt;
-extern char* g_7746b0;
-extern char* g_7746b4;
-extern char* g_7746c8;
-extern char* g_7746c4;
-extern char* g_7746cc;
-extern unsigned short* g_7746bc;
-extern char* g_7e2aa0;
+extern char* sv_HoveredBuilding;
+extern char* sv_HoveredCharacter;
+extern char* d2_InteriorBuilding;
+extern char* d2_VisitedBuilding;
+extern char* sv_SelectedBuilding;
+extern unsigned short* sv_HoveredInteriorItem;
+extern char* d2_SelectedBuilding;
 extern int main_LoopFlags;
 extern int g_7725bc;
 extern int g_7746dc;
@@ -61,18 +61,18 @@ void __cdecl sv_UpdateSceneHover(void)
 	char c;
 	int limit;
 
-	g_7746a4 = 0;
-	if (g_7725c4 >= 1 && g_7725c4 <= 8) {
-		g_7746a4 = 0;
+	d2_HoveredSceneObject = 0;
+	if (d2_CursorStateId >= 1 && d2_CursorStateId <= 8) {
+		d2_HoveredSceneObject = 0;
 		return;
 	}
-	g_6a2bf0 = g_14ce8c0;
-	g_6a2bf4 = g_14ce8c2;
+	g_6a2bf0 = io_ActiveCursorX;
+	g_6a2bf4 = io_ActiveCursorY;
 	if (g_6a2bf0 <= g_6a3764 || g_6a376c <= g_6a2bf0 || g_6a2bf4 <= g_6a3768 || (g_6a3770 <= g_6a2bf4 || d2_HoveredWindow != -1) || g_67d8d4 != -1
-	    || ((g_7746a4 = d3_FindSceneObjectAtScreenPoint((float) g_6a2bf0,
-	    (float) g_6a2bf4, 0x20, 1)) == 0 && (g_7746a4 = d3_FindSceneObjectAtScreenPoint((float) g_14ce8c0, (float) g_14ce8c2, 0x40, 1)) == 0)) {
-		if (d2_CurrentElementId == -1 || !(*(unsigned char*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[d2_CurrentElementId].flags_1d0)) & 0x40)) {
-			g_100f8c0[0] = 0;
+	    || ((d2_HoveredSceneObject = d3_FindSceneObjectAtScreenPoint((float) g_6a2bf0,
+	    (float) g_6a2bf4, 0x20, 1)) == 0 && (d2_HoveredSceneObject = d3_FindSceneObjectAtScreenPoint((float) io_ActiveCursorX, (float) io_ActiveCursorY, 0x40, 1)) == 0)) {
+		if (d2_CurrentElementId == -1 || !(*(unsigned char*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[d2_CurrentElementId].flags_1d0)) & 0x40)) {
+			d2_HoverTextBuffer[0] = 0;
 		}
 		if (g_67d8cc != -1) {
 			d2_ClearAnimationSlot(g_67d8cc);
@@ -81,9 +81,9 @@ void __cdecl sv_UpdateSceneHover(void)
 		}
 		g_773dfc = 0;
 		sv_HoveredObjekt = 0;
-		g_7746b0 = 0;
-		g_7746b4 = 0;
-		g_7725c4 = 0;
+		sv_HoveredBuilding = 0;
+		sv_HoveredCharacter = 0;
+		d2_CursorStateId = 0;
 		return;
 	}
 	if (!(main_LoopFlags & 0x10)) {
@@ -92,7 +92,7 @@ void __cdecl sv_UpdateSceneHover(void)
 	if (g_7725bc) {
 		return;
 	}
-	if (!g_7746a4) {
+	if (!d2_HoveredSceneObject) {
 		return;
 	}
 	if (d2_HoveredWindow != -1) {
@@ -106,76 +106,76 @@ void __cdecl sv_UpdateSceneHover(void)
 	g_7746e4 = 0;
 	g_7746e0 = 0;
 	g_7746e8 = 0;
-	g_7725c4 = 0;
+	d2_CursorStateId = 0;
 	sv_HoveredObjekt = 0;
-	g_7746b0 = 0;
-	g_7746b4 = 0;
-	g_7746bc = 0;
-	cur = g_7746a4;
+	sv_HoveredBuilding = 0;
+	sv_HoveredCharacter = 0;
+	sv_HoveredInteriorItem = 0;
+	cur = d2_HoveredSceneObject;
 	c = cur[0x4b];
 	if (c == 1) {
 		sv_HoveredObjekt = *(char**) (cur + 0x204);
-		if (g_7746c8) {
-			target = g_7746c8;
+		if (d2_InteriorBuilding) {
+			target = d2_InteriorBuilding;
 		} else {
 			target = 0;
 		}
-		g_7746dc = gm_GetEntityUiFlags((int) g_774970, target, (unsigned short*) sv_HoveredObjekt, 0);
+		g_7746dc = gm_GetEntityUiFlags((int) gm_LocalPlayerSlot, target, (unsigned short*) sv_HoveredObjekt, 0);
 		if (sv_HoveredObjekt) {
 			v = (unsigned int) *(unsigned short*) sv_HoveredObjekt;
 			c = g_item_def_table[v * 0x41];
 			if (!((c != 6 && c != 2) || !(g_7746dc & 0x4000))) {
-				fcn_0064d41a(g_100f8c0, s_68b3f8, g_14a79c0[v * 2], *(char**) 0x14a552c);
-				g_7725c4 = 0xb;
+				fcn_0064d41a(d2_HoverTextBuffer, s_68b3f8, g_14a79c0[v * 2], *(char**) 0x14a552c);
+				d2_CursorStateId = 0xb;
 			} else {
-				fcn_0064d41a(g_100f8c0, (char*) 0x679060, g_14a79c0[v * 2]);
-				g_7725c4 = 0x16;
+				fcn_0064d41a(d2_HoverTextBuffer, (char*) 0x679060, g_14a79c0[v * 2]);
+				d2_CursorStateId = 0x16;
 			}
 		}
 		g_7746e4 = g_7746dc;
-		target = g_7746b0;
+		target = sv_HoveredBuilding;
 	} else if (c == 2) {
-		g_7746b0 = *(char**) (cur + 0x204);
-		g_7746dc = gm_GetEntityUiFlags((int) g_774970, g_7746b0, 0, 0);
-		if (g_7746b0 && !(g_7746b0[0x5a] & 1)) {
-			if (g_7746b0[5]) {
-				fcn_0064d41a(g_100f8c0, s_6a2308, *(unsigned int*) ((unsigned int) *(unsigned char*) g_7746b0 * 0x38 + (int) g_14a6558), g_7746b0 + 5);
+		sv_HoveredBuilding = *(char**) (cur + 0x204);
+		g_7746dc = gm_GetEntityUiFlags((int) gm_LocalPlayerSlot, sv_HoveredBuilding, 0, 0);
+		if (sv_HoveredBuilding && !(sv_HoveredBuilding[0x5a] & 1)) {
+			if (sv_HoveredBuilding[5]) {
+				fcn_0064d41a(d2_HoverTextBuffer, s_6a2308, *(unsigned int*) ((unsigned int) *(unsigned char*) sv_HoveredBuilding * 0x38 + (int) g_14a6558), sv_HoveredBuilding + 5);
 				g_7746e0 = g_7746dc;
-				target = g_7746b0;
+				target = sv_HoveredBuilding;
 			} else {
-				field = *(char**) ((unsigned int) *(unsigned char*) g_7746b0 * 0x38 + (int) g_14a6558);
-				strcpy(g_100f8c0, field);
-				target = g_7746b0;
+				field = *(char**) ((unsigned int) *(unsigned char*) sv_HoveredBuilding * 0x38 + (int) g_14a6558);
+				strcpy(d2_HoverTextBuffer, field);
+				target = sv_HoveredBuilding;
 				g_7746e0 = g_7746dc;
 			}
 		} else {
-			target = g_7746b0;
+			target = sv_HoveredBuilding;
 			g_7746e0 = g_7746dc;
 		}
 	} else if (c == 3) {
-		g_7746b4 = *(char**) (cur + 0x204);
-		g_7746dc = gm_GetEntityUiFlags((int) g_774970, 0, 0, (int) g_7746b4);
-		if (g_7746b4 && (gm_FormatEntityTitleAndName(*(unsigned short*) g_7746b4, 1, 4, g_100f8c0),
-		    *(char*) ((int) g_7746b4 + 0x165) == 0x1c) && ((*(unsigned char*) (g_7746b4 + 0x1b4) & 1) && ((g_7746dc & 0x800) &&
+		sv_HoveredCharacter = *(char**) (cur + 0x204);
+		g_7746dc = gm_GetEntityUiFlags((int) gm_LocalPlayerSlot, 0, 0, (int) sv_HoveredCharacter);
+		if (sv_HoveredCharacter && (gm_FormatEntityTitleAndName(*(unsigned short*) sv_HoveredCharacter, 1, 4, d2_HoverTextBuffer),
+		    *(char*) ((int) sv_HoveredCharacter + 0x165) == 0x1c) && ((*(unsigned char*) (sv_HoveredCharacter + 0x1b4) & 1) && ((g_7746dc & 0x800) &&
 		    d3_CurrentContextIndex))) {
-			io_FormatTextBuffer(g_100f8c0, 0x414c, *(unsigned short*) g_7746b4);
-			g_7725c4 = 0x2e;
+			io_FormatTextBuffer(d2_HoverTextBuffer, 0x414c, *(unsigned short*) sv_HoveredCharacter);
+			d2_CursorStateId = 0x2e;
 		}
 		g_7746e8 = g_7746dc;
-		target = g_7746b0;
+		target = sv_HoveredBuilding;
 	} else {
-		g_100f8c0[0] = 0;
-		target = g_7746b0;
+		d2_HoverTextBuffer[0] = 0;
+		target = sv_HoveredBuilding;
 	}
-	if (g_7e2aa0 && target == g_7e2aa0 && (g_7746e0 & 1) && !(target[0x5a] & 1)) {
-		g_7725c4 = 0xb;
+	if (d2_SelectedBuilding && target == d2_SelectedBuilding && (g_7746e0 & 1) && !(target[0x5a] & 1)) {
+		d2_CursorStateId = 0xb;
 	}
-	target = g_7746c8;
-	if ((g_7746c8 || (target = g_7746c4, g_7746c4)) && cur) {
+	target = d2_InteriorBuilding;
+	if ((d2_InteriorBuilding || (target = d2_VisitedBuilding, d2_VisitedBuilding)) && cur) {
 		if (!fcn_0064f170(cur, s_6a300c, 0xd)) {
-			field = g_7746a4 + 0x10;
+			field = d2_HoveredSceneObject + 0x10;
 			strcpy(key, field);
-			if (g_7746c8) {
+			if (d2_InteriorBuilding) {
 				v = *(unsigned int*) (target + 0x5d);
 				n = 6;
 			} else {
@@ -186,48 +186,48 @@ void __cdecl sv_UpdateSceneHover(void)
 			while (rec) {
 				name = g_item_def_table + *(unsigned short*) rec * 0x41;
 				if (!fcn_0065f220(key, name + 1)) {
-					g_7746bc = rec;
+					sv_HoveredInteriorItem = rec;
 					break;
 				}
 				rec = gm_NextEntityQueryMatch();
 			}
 			if (rec == 0) {
-				if (g_7746c8) {
+				if (d2_InteriorBuilding) {
 					rec = (unsigned short*) fcn_00502cd0(*(unsigned int*) (target + 0x5d), 1, 0, 0xfd);
-					g_7746bc = rec;
+					sv_HoveredInteriorItem = rec;
 				} else {
-					rec = g_7746bc;
+					rec = sv_HoveredInteriorItem;
 				}
 			}
 			if (rec) {
-				g_7746dc = gm_GetEntityUiFlags((int) g_774970, target, rec, 0);
+				g_7746dc = gm_GetEntityUiFlags((int) gm_LocalPlayerSlot, target, rec, 0);
 				if (g_7746dc & 1) {
-					g_7725c4 = 0xb;
-					if (*g_7746bc == 0xfd) {
+					d2_CursorStateId = 0xb;
+					if (*sv_HoveredInteriorItem == 0xfd) {
 						text = *(char**) 0x14a5530;
-						if (g_7746cc) {
-							v = g_14a79c0[*(unsigned short*) g_7746cc * 2];
+						if (sv_SelectedBuilding) {
+							v = g_14a79c0[*(unsigned short*) sv_SelectedBuilding * 2];
 						} else {
 							v = *(unsigned int*) ((unsigned int) *(unsigned char*) target * 0x38 + (int) g_14a6558);
 						}
 					} else {
-						v = g_14a79c0[*g_7746bc * 2];
+						v = g_14a79c0[*sv_HoveredInteriorItem * 2];
 						text = *(char**) 0x14a552c;
 					}
-					fcn_0064d41a(g_100f8c0, s_68b3f8, v, text);
+					fcn_0064d41a(d2_HoverTextBuffer, s_68b3f8, v, text);
 				} else {
-					g_7746bc = 0;
+					sv_HoveredInteriorItem = 0;
 				}
 			}
 		}
-		cur = g_7746a4;
+		cur = d2_HoveredSceneObject;
 	}
 	if (memcmp(cur, s_6a3004, 8) == 0 && (target = *(char**) (cur + 0x204)) != 0) {
 		if (g_7746dc & 1) {
-			g_7725c4 = 0xb;
+			d2_CursorStateId = 0xb;
 			if (target[5]) {
-				fcn_0064d41a(g_100f8c0, s_6a2ff8, *(unsigned int*) ((unsigned int) *(unsigned char*) target * 0x38 + (int) g_14a6558), target + 5, *(char**) 0x14a552c);
-				cur = g_7746a4;
+				fcn_0064d41a(d2_HoverTextBuffer, s_6a2ff8, *(unsigned int*) ((unsigned int) *(unsigned char*) target * 0x38 + (int) g_14a6558), target + 5, *(char**) 0x14a552c);
+				cur = d2_HoveredSceneObject;
 				goto done;
 			}
 			v = *(unsigned int*) ((unsigned int) *(unsigned char*) target * 0x38 + (int) g_14a6558);
@@ -237,35 +237,35 @@ void __cdecl sv_UpdateSceneHover(void)
 			text = target + 5;
 			if (!target[5]) {
 				field = *(char**) ((unsigned int) *(unsigned char*) target * 0x38 + (int) g_14a6558);
-				name = g_100f8c0;
+				name = d2_HoverTextBuffer;
 				do {
 					c = *field;
 					field++;
 					*name = c;
 					name++;
 				} while (c);
-				cur = g_7746a4;
+				cur = d2_HoveredSceneObject;
 				goto done;
 			}
 			v = *(unsigned int*) ((unsigned int) *(unsigned char*) target * 0x38 + (int) g_14a6558);
 			name = s_6a2308;
 		}
-		fcn_0064d41a(g_100f8c0, name, v, text);
-		cur = g_7746a4;
+		fcn_0064d41a(d2_HoverTextBuffer, name, v, text);
+		cur = d2_HoveredSceneObject;
 	} else {
 		field = (char*) 0x7e46c0;
 		limit = 0x20;
 		do {
 			if (*(char**) field == cur) {
 				name = field + 0x48;
-				text = g_100f8c0;
+				text = d2_HoverTextBuffer;
 				do {
 					c = *name;
 					name++;
 					*text = c;
 					text++;
 				} while (c);
-				g_7725c4 = *(unsigned short*) (field + 0x44);
+				d2_CursorStateId = *(unsigned short*) (field + 0x44);
 			}
 			field += 0xc8;
 			limit--;
@@ -278,7 +278,7 @@ done:
 	}
 	d2_ClearAnimationSlot(g_67d8cc);
 	g_67d8cc = -1;
-	g_773dfc = g_7746a4;
+	g_773dfc = d2_HoveredSceneObject;
 	g_774798 = 0;
 	return;
 }

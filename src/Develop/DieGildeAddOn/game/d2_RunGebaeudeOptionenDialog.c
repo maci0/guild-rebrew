@@ -52,23 +52,23 @@ typedef struct {
 } Msg;
 
 extern unsigned char* lpGebaeudePROT;
-extern char g_7f4ca0[];
-extern unsigned short g_774970;
-extern int g_774654;
+extern char gm_EntitySlotTable[];
+extern unsigned short gm_LocalPlayerSlot;
+extern int d2_DialogCloseRequested;
 extern int d2_CurrentElementId;
-extern signed char g_7747b0;
-extern unsigned char g_773d75;
+extern signed char gm_ClientModeFlags;
+extern unsigned char gm_ActiveTownIndex;
 extern int g_14ab294;
-extern int g_774800;
-extern int g_14ce8e0;
-extern int g_100f1dc;
+extern int gm_AllEntitiesControllable;
+extern int io_RightButtonReleased;
+extern int d2_DialogButtonAction;
 extern int tp_d2_SelectedControl;
 extern int gm_CityEntity;
-extern int g_aed32c;
+extern int cm_PacketDeltaBase;
 extern int gm_GameTime;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
 extern float g_662a3c;
 extern float g_665c0c;
 extern double g_662908;
@@ -155,10 +155,10 @@ void __cdecl d2_RunGebaeudeOptionenDialog(char* ent)
 	v.id = *(int*) (ent + 1);
 	if ((*(unsigned short*) (ent + 0x5a) & 0x400) != 0)
 		return;
-	if (*(unsigned short*) (ent + 0x25) == g_774970) {
+	if (*(unsigned short*) (ent + 0x25) == gm_LocalPlayerSlot) {
 		if (d2_TutorialAllowsFlag(0x100) == 0)
 			return;
-		if (*(unsigned short*) (ent + 0x25) == g_774970)
+		if (*(unsigned short*) (ent + 0x25) == gm_LocalPlayerSlot)
 			d2_DispatchTutorialInput(0x10, (int) ent, 0, 0);
 	} else {
 		if (d2_TutorialAllowsFlag(0x4000) == 0)
@@ -169,9 +169,9 @@ void __cdecl d2_RunGebaeudeOptionenDialog(char* ent)
 	d2_CenterDialogWindows(dlg);
 	fcn_00473a90(0, 0);
 	v.ptr = gm_CalculateGebaeudeValue(ent, ent[0x5c]);
-	gm_CanBuildBuildingType((unsigned char) ent[0], g_774970);
+	gm_CanBuildBuildingType((unsigned char) ent[0], gm_LocalPlayerSlot);
 	if ((*(unsigned char*) (ent + 0x5a) & 2) != 0
-	    && *(unsigned short*) (ent + 0x25) != g_774970) {
+	    && *(unsigned short*) (ent + 0x25) != gm_LocalPlayerSlot) {
 		v.other = he_StartHandlungSearch(1, 0, 0x1b);
 		while (v.other != 0
 		    && *(int*) (ent + 1) != *(int*) (v.other + 0xac))
@@ -180,10 +180,10 @@ void __cdecl d2_RunGebaeudeOptionenDialog(char* ent)
 	do {
 		if ((*(unsigned char*) (ent + 0x5b) & 4) != 0
 		    || gm_SearchTable67(v.id) == 0)
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 		if (*(unsigned short*) (ent + 0x5a) != v.prev)
 			changed = 1;
-		if (*(unsigned short*) (ent + 0x27) == g_774970) {
+		if (*(unsigned short*) (ent + 0x27) == gm_LocalPlayerSlot) {
 			h = he_StartHandlungSearch(1, 0, 0x4f);
 			while (h != 0
 			    && *(int*) (h + 0xac) != *(int*) (ent + 1))
@@ -210,13 +210,13 @@ void __cdecl d2_RunGebaeudeOptionenDialog(char* ent)
 			v.h58 = -1;
 			fcn_004727a0(dlg, 1);
 			v.len = gm_GetEntityMood(ent);
-			if (*(unsigned short*) (ent + 0x27) == g_774970) {
-				if (*(unsigned short*) (ent + 0x25) == g_774970)
+			if (*(unsigned short*) (ent + 0x27) == gm_LocalPlayerSlot) {
+				if (*(unsigned short*) (ent + 0x25) == gm_LocalPlayerSlot)
 					goto build_other;
-				if (*(unsigned short*) (ent + 0x27) != g_774970)
+				if (*(unsigned short*) (ent + 0x27) != gm_LocalPlayerSlot)
 					goto after_build;
 			} else if (*(unsigned short*) (ent + 0x25)
-			    == g_774970) {
+			    == gm_LocalPlayerSlot) {
 				goto build_other;
 			}
 			n2 = (int) ((double) v.len * g_662a3c
@@ -245,7 +245,7 @@ build_other:
 			fcn_00519190(
 			    (v.rec[0] == 0x21) ? 0x17f9 : 0x179e,
 			    (int) ent, n2 + 0x17b1, n2 + 0x17bb, v.ptr);
-			if (*(unsigned short*) (ent + 0x25) == g_774970) {
+			if (*(unsigned short*) (ent + 0x25) == gm_LocalPlayerSlot) {
 				if (v.rec[0] == 0x21)
 					v.h38 = d2_GetWindowListItem(dlg, 1,
 					    fcn_00519190(0x17fc, ent + 5));
@@ -289,17 +289,17 @@ build_other:
 			if (v.hover != 0)
 				v.h58 = d2_GetWindowListItem(dlg, 1,
 				    fcn_00519190(0x17b0));
-			if (*(unsigned short*) (ent + 0x27) == g_774970) {
+			if (*(unsigned short*) (ent + 0x27) == gm_LocalPlayerSlot) {
 				fcn_004727a0(dlg, 1);
 				if (v.rec[0] == 2
-				    && *(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int)g_774970]
+				    && *(int*) ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned int)gm_LocalPlayerSlot]
 
 					+ 0x170) != (int) ent)
 					v.h4c = d2_GetWindowListItem(dlg, 1,
 					    fcn_00519190(0x17a9));
 			}
 after_build:
-			if (g_774800 != 0)
+			if (gm_AllEntitiesControllable != 0)
 				v.h5c = d2_GetWindowListItem(dlg, 1,
 				    fcn_00519190(0x1ba7));
 			changed = 0;
@@ -316,9 +316,9 @@ after_build:
 			else
 				d2_SetElementEnabled(v.h18, 1);
 		}
-		if (g_14ce8e0 != 0 && tp_d2_SelectedControl == 0)
-			g_774654 = 1;
-		if (g_100f1dc == -1)
+		if (io_RightButtonReleased != 0 && tp_d2_SelectedControl == 0)
+			d2_DialogCloseRequested = 1;
+		if (d2_DialogButtonAction == -1)
 			goto loop_test;
 		if (d2_CurrentElementId == v.h34) {
 			d2_SetFormVisibility(dlg, 0);
@@ -326,27 +326,27 @@ after_build:
 			d2_SetFormVisibility(dlg, 1);
 			goto loop_test;
 		}
-		if (d2_CurrentElementId == v.h1c && g_7747b0 >= 0) {
+		if (d2_CurrentElementId == v.h1c && gm_ClientModeFlags >= 0) {
 			d2_SetFormVisibility(dlg, 0);
 			d2_ShowSellGebaeudeDialog((int) ent);
 			goto tail_on;
 		}
-		if (d2_CurrentElementId == v.h3c && g_7747b0 >= 0) {
+		if (d2_CurrentElementId == v.h3c && gm_ClientModeFlags >= 0) {
 			d2_SetFormVisibility(dlg, 0);
 			d2_ShowRenovationDialog((int) ent);
 			goto tail_on;
 		}
-		if (d2_CurrentElementId == v.h20 && g_7747b0 >= 0) {
+		if (d2_CurrentElementId == v.h20 && gm_ClientModeFlags >= 0) {
 			d2_SetFormVisibility(dlg, 0);
 			d2_RunSellGebaeudeDialog((int) ent);
 			goto tail_on;
 		}
-		if (d2_CurrentElementId == v.h44 && g_7747b0 >= 0) {
+		if (d2_CurrentElementId == v.h44 && gm_ClientModeFlags >= 0) {
 			d2_SetFormVisibility(dlg, 0);
 			d2_ShowGebaeudeSaleDialog((int) ent);
 			goto tail_on;
 		}
-		if (d2_CurrentElementId == v.h28 && g_7747b0 >= 0) {
+		if (d2_CurrentElementId == v.h28 && gm_ClientModeFlags >= 0) {
 			d2_SetFormVisibility(dlg, 0);
 			d2_RunRoomUpgradeDialog((int) ent);
 			goto tail_on;
@@ -354,46 +354,46 @@ after_build:
 		if (d2_CurrentElementId == v.h4c) {
 			d2_SetFormVisibility(dlg, 0);
 			cm_RequestSetWohnsitz(
-			    *(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int)g_774970]
+			    *(int*) ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned int)gm_LocalPlayerSlot]
  + 4),
 			    *(int*) (ent + 1));
 			d2_SetFormVisibility(dlg, 1);
 			goto tail_changed;
 		}
-		if (d2_CurrentElementId == v.h18 && g_7747b0 >= 0) {
+		if (d2_CurrentElementId == v.h18 && gm_ClientModeFlags >= 0) {
 			d2_SetFormVisibility(dlg, 0);
 			d2_RunBuildingUpgradeDialog((int) ent);
 			goto tail_on;
 		}
-		if (d2_CurrentElementId == v.h30 && g_7747b0 >= 0) {
+		if (d2_CurrentElementId == v.h30 && gm_ClientModeFlags >= 0) {
 			io_FormatTextBuffer(text1, 0x17c7, (int) ent);
 			d2_SetFormVisibility(dlg, 0);
 			if (d2_ShowModalMessageBox(text1, 1) != 0) {
 				memset(&st, 0, sizeof(st));
 				st.f04 = 0x20;
-				st.f08 = *(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int)g_774970]
+				st.f08 = *(int*) ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned int)gm_LocalPlayerSlot]
  + 4);
 				st.f0c = *(int*) (ent + 1);
 				st.f28 = gm_GameTime;
-				st.f2c = g_7f4c04;
-				st.f30 = g_7f4c08;
-				st.f34 = g_7f4c0c;
+				st.f2c = gm_GameTimeHour;
+				st.f30 = gm_GameTimeSliceDword;
+				st.f34 = gm_GameTimeTailWord;
 				st.f36 = 1;
 				st.f58 = *(int*) (ent + 1);
 				cm_SendCopyEntityData(&st);
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 			d2_SetFormVisibility(dlg, 1);
 			goto tail_changed;
 		}
-		if (d2_CurrentElementId == v.h54 && g_7747b0 >= 0) {
+		if (d2_CurrentElementId == v.h54 && gm_ClientModeFlags >= 0) {
 			if (gm_CanBuildBuildingType((unsigned char) ent[0],
-				g_774970) != 1) {
+				gm_LocalPlayerSlot) != 1) {
 				d2_ShowModalMessageBox((char*) g_14ab294, 0);
 				goto loop_test;
 			}
 			d2_SetFormVisibility(dlg, 0);
-			if (fcn_0050d2a0((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int)g_774970]
+			if (fcn_0050d2a0((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned int)gm_LocalPlayerSlot]
 )
 			    > *(int*) (v.other + 0xb0)) {
 				io_FormatTextBuffer(text2, 0x17db,
@@ -402,7 +402,7 @@ after_build:
 				    *(int*) (v.other + 0xb0));
 				if (d2_ShowModalMessageBox(text2, 1) != 0) {
 					gm_BuyBuilding(*(int*) (ent + 1),
-					    *(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int)g_774970]
+					    *(int*) ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned int)gm_LocalPlayerSlot]
 
  + 4),
 					    *(int*) (v.other + 0xb0),
@@ -419,9 +419,9 @@ after_build:
 		}
 		if (d2_CurrentElementId == v.h5c) {
 			cm_SendSetGebBesitzer(*(int*) (ent + 1),
-			    *(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int)g_774970]
+			    *(int*) ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned int)gm_LocalPlayerSlot]
  + 4),
-			    *(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int)g_774970]
+			    *(int*) ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned int)gm_LocalPlayerSlot]
  + 4));
 			goto tail_changed;
 		}
@@ -433,17 +433,17 @@ after_build:
 			io_FormatTextBuffer(text3, 0x17e3, (int) ent,
 			    (int) ent, v.len);
 			if (d2_ShowModalMessageBox(text3, 1) != 0) {
-				cm_RequestMoveCredits(*(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int)g_774970]
+				cm_RequestMoveCredits(*(int*) ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned int)gm_LocalPlayerSlot]
 
-					+ 4), -1, g_773d75, v.len);
+					+ 4), -1, gm_ActiveTownIndex, v.len);
 				cm_SendSetGebBesitzer(*(int*) (ent + 1),
 				    *(int*) (gm_CityEntity + 4),
 				    *(int*) (gm_CityEntity + 4));
 				cm_BeginPacketFieldDelta(ent, *(int*) (ent + 1));
 				cm_AppendCommandSyncField(4, 1,
-				    (int) ent - g_aed32c + 0x65, &v.len);
+				    (int) ent - cm_PacketDeltaBase + 0x65, &v.len);
 				cm_RequestChangeAttribute();
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 			d2_SetFormVisibility(dlg, 1);
 			goto tail_changed;
@@ -474,6 +474,6 @@ loop_test:
 		cm_SendSetAttribute();
 	}
 	d2_DestroyForm(dlg);
-	if (*(unsigned short*) (ent + 0x25) == g_774970)
+	if (*(unsigned short*) (ent + 0x25) == gm_LocalPlayerSlot)
 		d2_DispatchTutorialInput(0x10, (int) ent, 1, 0);
 }

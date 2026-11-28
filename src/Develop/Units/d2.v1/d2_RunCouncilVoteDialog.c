@@ -1,8 +1,8 @@
 extern char g_68c340[];
-extern char* g_77255c;
+extern char* d2_CurrentWindow;
 extern int d2_CurrentWindowId;
 extern int cut_EventLoopFlags;
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int d2_CurrentElementId;
 
@@ -37,16 +37,16 @@ int __cdecl d2_RunCouncilVoteDialog(unsigned short* a1, unsigned short* a2, unsi
 	b0 = d2_GetWindowListItem(h, 0, t);
 	d2_GetWindowListItem(h, 0, t + 1);
 	b2 = d2_GetWindowListItem(h, 0, t + 2);
-	w = d2_AddWindowValueGauge((*(int*) (g_77255c + 0xc) - 300) / 2 - 8, 8, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
+	w = d2_AddWindowValueGauge((*(int*) (d2_CurrentWindow + 0xc) - 300) / 2 - 8, 8, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
 	d2_UpdateProgressBar(w, 0x5dc, 1);
 	res = ai_CompareOfficeCandidates(a1, a2, a3, &aux);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	while (main_RunFrameLoop(d2_RunCouncilVoteDialog, cut_EventLoopFlags) != 0) {
 		if (d2_UpdateProgressBar(w, 0, 0) == 0) {
-			g_774654 = 1;
-		} else if (g_100f1dc != -1) {
+			d2_DialogCloseRequested = 1;
+		} else if (d2_DialogButtonAction != -1) {
 			res = 0;
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 			if (d2_CurrentElementId != b0)
 				res = (d2_CurrentElementId != b2) + 1;
 		}

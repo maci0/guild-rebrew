@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl atoi(char*);
@@ -42,8 +42,8 @@ int __cdecl hst_HandleAnsehenBeiAmtstraegern(int* record, int index, char* text)
 	}
 	for (i = 0; i < 768; i++) {
 		if (gm_IsSlotActivePerson(i) != 0
-		    && (g_7f4ca0[i * 540 + 0x166] != 0 || g_7f4ca0[i * 540 + 0x169] != 0))
-			cm_RequestCopyEntityData(*(int*) (e + 4), *(int*) (g_7f4ca0 + i * 540 + 4), n, 1);
+		    && (gm_EntitySlotTable[i * 540 + 0x166] != 0 || gm_EntitySlotTable[i * 540 + 0x169] != 0))
+			cm_RequestCopyEntityData(*(int*) (e + 4), *(int*) (gm_EntitySlotTable + i * 540 + 4), n, 1);
 	}
 	return 1;
 }

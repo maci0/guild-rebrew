@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
 #include <string.h>
 
-extern char g_868060[];
+extern char gm_TownTable[];
 
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl he_StartHandlungSearch(int, int, int);
@@ -55,9 +55,9 @@ int __cdecl gm_PostRepairBuildingMessage(int* a1)
 	gm_ResolveEntityById((void**) (&x2), 0, 0, *(int*) (s + 0xb0));
 	gm_ResolveEntityById((void**) (&x1), 0, 0, *(int*) (s + 0xb4));
 	if (*x2 == 'G')
-		io_FormatTextBuffer(buf, *(unsigned short*) (a1 + 1) + 0x12e7, g_868060 + *(int*) (x2 + 0x65) * 756, g_868060, cnt, g_868060);
+		io_FormatTextBuffer(buf, *(unsigned short*) (a1 + 1) + 0x12e7, gm_TownTable + *(int*) (x2 + 0x65) * 756, gm_TownTable, cnt, gm_TownTable);
 	else
-		io_FormatTextBuffer(buf, *(unsigned short*) (a1 + 1) + 0x12e7, g_868060, g_868060 + *(int*) (x1 + 0x65) * 756, cnt, g_868060 + *(int*) (x1 + 0x65) * 756);
+		io_FormatTextBuffer(buf, *(unsigned short*) (a1 + 1) + 0x12e7, gm_TownTable, gm_TownTable + *(int*) (x1 + 0x65) * 756, cnt, gm_TownTable + *(int*) (x1 + 0x65) * 756);
 	he_PostEntityMessage(*(int*) (e + 2), *(int*) (e + 2), buf, strlen(buf) > 0x100, 0x5ef, 0);
 	return 0;
 }

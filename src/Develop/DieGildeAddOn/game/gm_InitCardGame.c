@@ -45,7 +45,7 @@ typedef struct {
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern Card_1007ce0 g_1007ce0[24];
 extern Player g_1007e60[2];
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern char* g_14a62d8[];
 
 unsigned short __cdecl gm_RandomMod(int n);
@@ -71,9 +71,9 @@ int __cdecl gm_InitCardGame(char* owner, Game* game)
 	g_1007cd4 = (char*) game;
 	memset(game, 0, sizeof(Game));
 	((Game*) g_1007cd4)->owner = owner;
-	money = gm_AmountToUnits(gm_SumQueryEntryValues(*(int*) (owner + 0x178), g_773d75), g_773d75);
+	money = gm_AmountToUnits(gm_SumQueryEntryValues(*(int*) (owner + 0x178), gm_ActiveTownIndex), gm_ActiveTownIndex);
 	d = MAXV(10000.0, money);
-	((Game*) g_1007cd4)->pot = gm_ConvertUnitsToAmount((int) (d / (log10(d) + 1.0) * 0.1f), g_773d75);
+	((Game*) g_1007cd4)->pot = gm_ConvertUnitsToAmount((int) (d / (log10(d) + 1.0) * 0.1f), gm_ActiveTownIndex);
 	((Game*) g_1007cd4)->limit = ((Game*) g_1007cd4)->pot / (gm_RandomMod(3) + 7);
 	((Game*) g_1007cd4)->stake = ((Game*) g_1007cd4)->limit;
 	((Game*) g_1007cd4)->fb8 = 4;

@@ -111,7 +111,7 @@ void __cdecl he_RunBardeEvent(char* obj)
 		}
 		*(int*) (obj + 0x70) = 2;
 		if (*(int*) (obj + 0x88) != 0 &&
-		    (*(int*) (g_774970 * 0x21c + 0x7f4e68) & 0x20000) != 0) {
+		    (*(int*) (gm_LocalPlayerSlot * 0x21c + 0x7f4e68) & 0x20000) != 0) {
 			d3_FreeEventGfxSlot(*(int*) (obj + 0x88));
 			*(int*) (obj + 0x88) = 0;
 		}

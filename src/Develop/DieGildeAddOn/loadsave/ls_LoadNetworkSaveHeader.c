@@ -21,7 +21,7 @@ struct netslot {
 	int x;
 };
 
-extern struct netinfo g_7e2520;
+extern struct netinfo nt_LocalSessionInfo;
 extern struct netslot g_9baa70;
 
 extern char g_7e21a0[];
@@ -30,10 +30,10 @@ extern char g_6a1ea4[];
 extern char g_6a3a1c[];
 extern char g_9bada0[];
 extern char g_9badb0[];
-extern int g_6b7fdc;
-extern int g_7747b0;
-extern unsigned char g_6a375c;
-extern short g_7e2510;
+extern int vfs_RootDir;
+extern int gm_ClientModeFlags;
+extern unsigned char gm_PlayerCount;
+extern short nt_ServerPort;
 extern int g_9baadc;
 extern int g_9badc0;
 extern int g_9badc4;
@@ -56,31 +56,31 @@ int __cdecl ls_LoadNetworkSaveHeader(void)
 
 	if (d2_RunLoadNetworkGameDialog()) {
 		sprintf(path, g_6a1ea4, g_7e21a0);
-		f = vfs_Tfopen(path, (char*) 0x6750e8, (struct VFS_DIR*) g_6b7fdc);
+		f = vfs_Tfopen(path, (char*) 0x6750e8, (struct VFS_DIR*) vfs_RootDir);
 		if (f != 0) {
 			ls_LoadSavegameHeader(f, hdr);
-			g_6a375c = hdr[0x31];
+			gm_PlayerCount = hdr[0x31];
 			memcpy(g_7e2000, g_6a3a1c, 10);
-			g_7e2520.mode = g_6a375c;
-			g_7747b0 |= 0x50;
-			g_7e2520.size = 0x6a;
-			g_7e2520.a = 1;
-			g_7e2520.b = 4;
-			g_7e2520.port = g_7e2510;
+			nt_LocalSessionInfo.mode = gm_PlayerCount;
+			gm_ClientModeFlags |= 0x50;
+			nt_LocalSessionInfo.size = 0x6a;
+			nt_LocalSessionInfo.a = 1;
+			nt_LocalSessionInfo.b = 4;
+			nt_LocalSessionInfo.port = nt_ServerPort;
 			i = 0;
 			do {
 				c = hdr[5 + i];
-				g_7e2520.name[i] = c;
+				nt_LocalSessionInfo.name[i] = c;
 				i++;
 			} while (c != 0);
 			i = 0;
 			do {
 				c = g_7e21a0[i];
-				g_7e2520.rest[i] = c;
+				nt_LocalSessionInfo.rest[i] = c;
 				i++;
 			} while (c != 0);
-			memcpy(g_7e2520.rest + 0x20, hdr + 0x78, 0x20);
-			g_9baa70.info = g_7e2520;
+			memcpy(nt_LocalSessionInfo.rest + 0x20, hdr + 0x78, 0x20);
+			g_9baa70.info = nt_LocalSessionInfo;
 			memset(g_9bada0, 0, 0x30);
 			g_9baadc = 0x7f;
 			g_9badc0 = *(int*) (hdr + 0x60) & 0xff;

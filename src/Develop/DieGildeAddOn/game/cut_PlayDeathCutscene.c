@@ -92,7 +92,7 @@ void __cdecl cut_PlayDeathCutscene(void* arg)
 			start = *(int*) 0x6b7fac;
 			while (*(volatile unsigned int*) 0x6b7fac < (unsigned int) (start + 0x339) && state == 0) {
 				main_RunFrameLoop(0, cut_EventLoopFlags);
-				if (g_14ce8e0 != 0) {
+				if (io_RightButtonReleased != 0) {
 					state = 1;
 				}
 				if ((float) (unsigned int) (*(int*) 0x6b7fac - start) * (1.0f / 825.0f) < 1.0f) {
@@ -145,7 +145,7 @@ void __cdecl cut_PlayDeathCutscene(void* arg)
 			cm_RequestChangeAttribute();
 			cm_RequestChangeBits(*(int*) ((char*) obj + 4), 0x1cc, 4, 2, 0);
 			*(char*) ((char*) obj + 8) = 100;
-		} else if ((g_7747b0 & 8) != 0) {
+		} else if ((gm_ClientModeFlags & 8) != 0) {
 			*(char*) ((char*) obj + 8) = 0;
 			idxval = yslot;
 			g_774954 = 1;
@@ -169,5 +169,5 @@ void __cdecl cut_PlayDeathCutscene(void* arg)
 	d3snd_StopTrackedVoices();
 	sb_ReleaseSampleBank((void*) handle);
 	fcn_004e4eb0();
-	g_772f54 = 0;
+	cut_StartTick = 0;
 }

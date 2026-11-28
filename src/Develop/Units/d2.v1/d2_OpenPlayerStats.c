@@ -13,7 +13,7 @@
 extern int g_777ca0;
 extern int g_776c90;
 extern int g_775338;
-extern int g_774654;
+extern int d2_DialogCloseRequested;
 int __cdecl d2_TutorialAllowsFlag(int); void __cdecl d2_DispatchTutorialInput(int, int, int, int);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
@@ -79,16 +79,16 @@ void __cdecl d2_OpenPlayerStats(void)
 	v4 = d2_RunMeisterListeDialog();
 	idx = d2_CreateRadioGroup(3, out[0], out[1], out[2]);
 	ofs = idx * 0x8c;
-	*(int*) (ofs + (unsigned long)&g_102cbc0) = *(int*) (ofs + (unsigned long)&g_102cbc0) | 1;
+	*(int*) (ofs + (unsigned long)&d2_RadioGroups) = *(int*) (ofs + (unsigned long)&d2_RadioGroups) | 1;
 	d2_SelectRadioGroup(idx, *(int*) 0x77533c);
 	if (v4 == -1) {
 		d2_SetElementEnabled(out[2], 0);
 	}
 	for (;;) {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		state = *(int*) (ofs + (unsigned long)&g_102cbc8);
+		state = *(int*) (ofs + (unsigned long)&d2_RadioGroupItems);
 		if (state == 0) {
 			d2_SetFormVisibility(firstWindow, 1);
 			d2_SetFormVisibility(v3, 0);
@@ -104,13 +104,13 @@ void __cdecl d2_OpenPlayerStats(void)
 		}
 		if (firstWindow != -1) {
 			d2_SetForm(firstWindow, 1);
-			d2_PopulateInventoryGrid(*(int*) (0x7f4e18 + (*(unsigned short*) &g_774970) * 0x21c), (char*) 0x776aa0, firstWindow, 1, 0);
+			d2_PopulateInventoryGrid(*(int*) (0x7f4e18 + (*(unsigned short*) &gm_LocalPlayerSlot) * 0x21c), (char*) 0x776aa0, firstWindow, 1, 0);
 		}
-		if (v3 != -1 && *(int*) &g_100f1dc != -1) {
+		if (v3 != -1 && *(int*) &d2_DialogButtonAction != -1) {
 			for (i = 0; i < g_775338; i++) {
 				if (d2_CurrentElementId == *(int*) (0x778900 + i * 4)) {
 					d2_SetGroupVisibility(save, 0);
-					d2_ShowBuildingStatsDetail(*(int*) (&((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[d2_CurrentElementId].associated_object));
+					d2_ShowBuildingStatsDetail(*(int*) (&((D2_CONTROL_TL*) (*(int*) &d2_Controls))[d2_CurrentElementId].associated_object));
 					d2_SetGroupVisibility(save, 1);
 					break;
 				}
@@ -118,7 +118,7 @@ void __cdecl d2_OpenPlayerStats(void)
 		}
 		if (v4 != -1) {
 			d2_SetForm(v4, 0);
-			if (*(int*) &g_100f1dc != -1) {
+			if (*(int*) &d2_DialogButtonAction != -1) {
 				t1 = d2_GetFormWindow(v4, 3);
 				t2 = d2_GetFormWindow(v4, 2);
 				if (d2_CurrentElementId == g_776c90) {
@@ -136,16 +136,16 @@ void __cdecl d2_OpenPlayerStats(void)
 					cur = d2_GetControlValue(h);
 					if (*(int*) (i - 4) != cur) {
 						n = gm_ConvertUnitsToAmount(d2_GetControlValue(*(int*) (i - 0x10)),
-							g_773d75);
+							gm_ActiveTownIndex);
 						obj = *(int*) i;
 						cm_BeginPacketFieldDelta(obj, *(int*) (obj + 1));
-						delta = *(unsigned short*) i - *(unsigned short*) &g_aed32c + 0x39;
+						delta = *(unsigned short*) i - *(unsigned short*) &cm_PacketDeltaBase + 0x39;
 						cm_AppendPacketFieldDelta(4, 1, (unsigned short) delta, &n);
 						cm_RequestChangeAttribute();
 						q = gm_FindBuildingOwner(*(int*) i);
 						n = n - *(int*) (*(int*) i + 0x39);
 						cm_BeginPacketFieldDelta(q, *(int*) (q + 4));
-						cm_AppendPacketFieldValue(4, 1, (q - *(int*) &g_aed32c) + 0x1b8, &n);
+						cm_AppendPacketFieldValue(4, 1, (q - *(int*) &cm_PacketDeltaBase) + 0x1b8, &n);
 						cm_RequestChangeAttribute();
 						*(int*) (i - 4) = d2_GetControlValue(*(int*) (i - 0x10));
 					}
@@ -156,7 +156,7 @@ void __cdecl d2_OpenPlayerStats(void)
 		if (main_RunFrameLoop((int) d2_OpenPlayerStats, 0x657c7) != 0) {
 			continue;
 		}
-		*(int*) 0x77533c = *(int*) (ofs + (unsigned long)&g_102cbc8);
+		*(int*) 0x77533c = *(int*) (ofs + (unsigned long)&d2_RadioGroupItems);
 		d2_ClearRadioGroup(idx);
 		d2_DestroyForm(save);
 		if (firstWindow != -1) {

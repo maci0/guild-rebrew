@@ -1,13 +1,13 @@
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 extern int gm_GameTime;
-extern int g_7f4c04;
+extern int gm_GameTimeHour;
 extern int g_7f4c06;
-extern int g_7f4c08;
-extern short g_7f4c0c;
-extern char g_7f4ca2[];
-extern char g_7f4ca4[];
-extern unsigned char g_773d75;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
+extern char gm_SlotTableKindView[];
+extern char gm_EntityIdField[];
+extern unsigned char gm_ActiveTownIndex;
 extern char* lpGebaeudePROT;
 extern unsigned short* lpObjekteINST;
 extern char* lpObjektePROT;
@@ -45,13 +45,13 @@ void __cdecl ai_MeisterCollectTrans(char* e)
 	unsigned short v3;
 	int flags;
 
-	if (((unsigned short) g_7f4c04 % 2) != 0) {
+	if (((unsigned short) gm_GameTimeHour % 2) != 0) {
 		flags = *(int*) (e + 0x1b4);
 		if (flags & 0x80) {
 			return;
 		}
 		*(int*) (e + 0x1b4) = flags | 0x80;
-		sprintf(buf, (char*) 0x67e488, *(unsigned short*) &g_7f4c04,
+		sprintf(buf, (char*) 0x67e488, *(unsigned short*) &gm_GameTimeHour,
 		        g_7f4c06);
 		count = 0;
 		n136 = 0;
@@ -93,13 +93,13 @@ void __cdecl ai_MeisterCollectTrans(char* e)
 					if (found != *(char**) (e + 0x16c)) {
 						memset(pkt, 0, 0xf8);
 						pkt[4] = 0xf;
-						type = *(int*) (g_7f4ca4 +
+						type = *(int*) (gm_EntityIdField +
 						                *(unsigned short*) (*(char**) (e + 0x16c) + 0x27) * 0x21c);
 						pkt[0x36] = 2;
 						*(int*) (pkt + 0x28) = gm_GameTime;
-						*(int*) (pkt + 0x2c) = g_7f4c04;
-						*(int*) (pkt + 0x30) = g_7f4c08;
-						*(unsigned short*) (pkt + 0x34) = g_7f4c0c;
+						*(int*) (pkt + 0x2c) = gm_GameTimeHour;
+						*(int*) (pkt + 0x30) = gm_GameTimeSliceDword;
+						*(unsigned short*) (pkt + 0x34) = gm_GameTimeTailWord;
 						*(int*) (pkt + 0x08) = type;
 						*(int*) (pkt + 0x0c) = -1;
 						*(int*) (pkt + 0x58) = *(int*) (slot + 2);
@@ -120,10 +120,10 @@ next:
 		if (row->category == 9) {
 			if (count - n136 == 0) {
 				t = (int) eval_ObjektPreis2Credits(0x134, 100);
-				cm_RequestMoveCredits(-1, *(int*) (g_7f4ca4 +
+				cm_RequestMoveCredits(-1, *(int*) (gm_EntityIdField +
 				                         *(unsigned short*) (*(char**) (e + 0x16c) + 0x27) * 0x21c),
-				             (char) g_773d75, t);
-				cm_SendSellObjekt(*(int*) (*(char**) (e + 0x16c) + 1), -1, 0x134, 1, (char) g_773d75, 0);
+				             (char) gm_ActiveTownIndex, t);
+				cm_SendSellObjekt(*(int*) (*(char**) (e + 0x16c) + 1), -1, 0x134, 1, (char) gm_ActiveTownIndex, 0);
 				sprintf(buf, (char*) 0x67e3fc, *(char**) (e + 0x16c) + 5);
 				return;
 			}
@@ -142,11 +142,11 @@ next:
 					return;
 				}
 				t = (int) eval_ObjektPreis2Credits(0x136, 100);
-				cm_RequestMoveCredits(-1, *(int*) (g_7f4ca4 +
+				cm_RequestMoveCredits(-1, *(int*) (gm_EntityIdField +
 				                         *(unsigned short*) (*(char**) (e + 0x16c) + 0x27) * 0x21c),
-				             (char) g_773d75, t);
-				cm_SendSellObjekt(*(int*) (*(char**) (e + 0x16c) + 1), -1, 0x136, 1, (char) g_773d75, 0);
-				sprintf(buf, (char*) 0x67e3a8, *(unsigned short*) &g_7f4c04,
+				             (char) gm_ActiveTownIndex, t);
+				cm_SendSellObjekt(*(int*) (*(char**) (e + 0x16c) + 1), -1, 0x136, 1, (char) gm_ActiveTownIndex, 0);
+				sprintf(buf, (char*) 0x67e3a8, *(unsigned short*) &gm_GameTimeHour,
 				        g_7f4c06, *(char**) (e + 0x16c) + 5);
 				*(int*) (e + 0x1c8) |= 8;
 				return;
@@ -166,33 +166,33 @@ next:
 					return;
 				}
 				t = (int) eval_ObjektPreis2Credits(id, 100);
-				cm_RequestMoveCredits(-1, *(int*) (g_7f4ca4 +
+				cm_RequestMoveCredits(-1, *(int*) (gm_EntityIdField +
 				                         *(unsigned short*) (*(char**) (e + 0x16c) + 0x27) * 0x21c),
-				             (char) g_773d75, t);
-				cm_SendSellObjekt(*(int*) (*(char**) (e + 0x16c) + 1), -1, id, 1, (char) g_773d75, 0);
-				sprintf(buf, (char*) 0x67e3a8, *(unsigned short*) &g_7f4c04,
+				             (char) gm_ActiveTownIndex, t);
+				cm_SendSellObjekt(*(int*) (*(char**) (e + 0x16c) + 1), -1, id, 1, (char) gm_ActiveTownIndex, 0);
+				sprintf(buf, (char*) 0x67e3a8, *(unsigned short*) &gm_GameTimeHour,
 				        g_7f4c06, *(char**) (e + 0x16c) + 5);
 				*(int*) (e + 0x1c8) |= 8;
 				return;
 			}
 		}
 		if (count == 0) {
-			if (*(char*) (g_7f4ca2 + *(unsigned short*) (*(char**) (e + 0x16c) + 0x27) * 0x21c) == 6
-			    || *(char*) (g_7f4ca2 + *(unsigned short*) (*(char**) (e + 0x16c) + 0x27) * 0x21c) == 7) {
+			if (*(char*) (gm_SlotTableKindView + *(unsigned short*) (*(char**) (e + 0x16c) + 0x27) * 0x21c) == 6
+			    || *(char*) (gm_SlotTableKindView + *(unsigned short*) (*(char**) (e + 0x16c) + 0x27) * 0x21c) == 7) {
 				if (!(*(int*) (e + 0x1b4) & 4)) {
 					return;
 				}
 			}
 			t = (int) eval_ObjektPreis2Credits(0x134, 100);
-			cm_RequestMoveCredits(-1, *(int*) (g_7f4ca4 +
+			cm_RequestMoveCredits(-1, *(int*) (gm_EntityIdField +
 			                         *(unsigned short*) (*(char**) (e + 0x16c) + 0x27) * 0x21c),
-			             (char) g_773d75, t);
-			cm_SendSellObjekt(*(int*) (*(char**) (e + 0x16c) + 1), -1, 0x134, 1, (char) g_773d75, 0);
+			             (char) gm_ActiveTownIndex, t);
+			cm_SendSellObjekt(*(int*) (*(char**) (e + 0x16c) + 1), -1, 0x134, 1, (char) gm_ActiveTownIndex, 0);
 			sprintf(buf, (char*) 0x67e3fc, *(char**) (e + 0x16c) + 5);
 			return;
 		}
-		if (*(char*) (g_7f4ca2 + *(unsigned short*) (*(char**) (e + 0x16c) + 0x27) * 0x21c) == 6
-		    || *(char*) (g_7f4ca2 + *(unsigned short*) (*(char**) (e + 0x16c) + 0x27) * 0x21c) == 7) {
+		if (*(char*) (gm_SlotTableKindView + *(unsigned short*) (*(char**) (e + 0x16c) + 0x27) * 0x21c) == 6
+		    || *(char*) (gm_SlotTableKindView + *(unsigned short*) (*(char**) (e + 0x16c) + 0x27) * 0x21c) == 7) {
 			if (!(*(int*) (e + 0x1b4) & 4)) {
 				return;
 			}
@@ -211,10 +211,10 @@ next:
 			return;
 		}
 		t = (int) eval_ObjektPreis2Credits(0x135, 100);
-		cm_RequestMoveCredits(-1, *(int*) (g_7f4ca4 + *(unsigned short*) (*(char**) (e + 0x16c) + 0x27) * 0x21c),
-		             (char) g_773d75, t);
-		cm_SendSellObjekt(*(int*) (*(char**) (e + 0x16c) + 1), -1, 0x135, 1, (char) g_773d75, 0);
-		sprintf(buf, (char*) 0x67e3a8, *(unsigned short*) &g_7f4c04,
+		cm_RequestMoveCredits(-1, *(int*) (gm_EntityIdField + *(unsigned short*) (*(char**) (e + 0x16c) + 0x27) * 0x21c),
+		             (char) gm_ActiveTownIndex, t);
+		cm_SendSellObjekt(*(int*) (*(char**) (e + 0x16c) + 1), -1, 0x135, 1, (char) gm_ActiveTownIndex, 0);
+		sprintf(buf, (char*) 0x67e3a8, *(unsigned short*) &gm_GameTimeHour,
 		        g_7f4c06, *(char**) (e + 0x16c) + 5);
 		*(int*) (e + 0x1c8) |= 8;
 	} else {

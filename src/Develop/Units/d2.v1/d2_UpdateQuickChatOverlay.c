@@ -4,12 +4,12 @@ typedef struct Handler {
 } Handler;
 /* SIZE 8 */
 
-extern Handler g_7e35c0[];
+extern Handler main_FrameHandlerStack[];
 extern int g_774650;
-extern volatile unsigned int g_6b7fac;
-int g_6a2c1c = 0xffffffff;
+extern volatile unsigned int gm_GameTicks;
+int d2_QuickChatLastTick = 0xffffffff;
 extern int g_6a2c20;
-extern char g_6811b0[];
+extern char str_dollar_C[];
 extern char g_7e3a60[];
 
 void __cdecl d2_RunChatConsole(void);
@@ -22,9 +22,9 @@ int __cdecl io_AppendText(int, ...);
 /* ADDRESS: GOLDTL 0x00536b10 */
 void __cdecl d2_UpdateQuickChatOverlay(void)
 {
-	if (g_7e35c0[g_774650].fn != d2_RunChatConsole &&
-	    g_6a2c1c > g_6b7fac - 0x23a &&
-	    g_6a2c1c != -1) {
+	if (main_FrameHandlerStack[g_774650].fn != d2_RunChatConsole &&
+	    d2_QuickChatLastTick > gm_GameTicks - 0x23a &&
+	    d2_QuickChatLastTick != -1) {
 		if (g_6a2c20 == -1) {
 			g_6a2c20 = d2_LoadForm(0, 0, "misc\\quickchat");
 			d2_CenterForm(g_6a2c20, 3);
@@ -33,7 +33,7 @@ void __cdecl d2_UpdateQuickChatOverlay(void)
 			}
 		}
 		d2_SetForm(g_6a2c20, 0);
-		io_AppendText((int) g_6811b0);
+		io_AppendText((int) str_dollar_C);
 		io_AppendText((int) g_7e3a60);
 		return;
 	}

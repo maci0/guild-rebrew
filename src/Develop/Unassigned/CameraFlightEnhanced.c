@@ -1,7 +1,7 @@
 
 
 
-extern char* g_6b7ebc;
+extern char* evt_WaitingScriptTask;
 extern char* evt_CurrentScript;
 extern int d3_CameraAnimating;
 extern int d3_ActiveCameraAnimation;
@@ -10,7 +10,7 @@ void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
 int __cdecl CameraFlightEnhanced(int* a1, int* a2, int* a3, int* a4, int* a5, int* a6, int* a7)
 {
-	if (g_6b7ebc != 0 && *(void**) (g_6b7ebc + 0x44) == (void*) CameraFlightEnhanced) {
+	if (evt_WaitingScriptTask != 0 && *(void**) (evt_WaitingScriptTask + 0x44) == (void*) CameraFlightEnhanced) {
 		if (d3_CameraAnimating == 0 && d3_ActiveCameraAnimation == 0) {
 			return 0;
 		}

@@ -2,16 +2,16 @@
 #include <stdio.h>
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern int d3_CurrentContextIndex;
-extern unsigned char g_7747b0;
+extern unsigned char gm_ClientModeFlags;
 extern unsigned char* lpGebaeudePROT;
-extern char g_774964;
+extern char gm_InWorldHud;
 extern int g_774670;
 extern int main_LoopFlags;
 extern int g_1040494;
 extern int d2_ScreenHeight;
-extern int g_67a370;
-extern char* g_6b8300;
-extern int g_7e2700;
+extern int d3_ActiveScene;
+extern char* d3_CurrentFloor;
+extern int d2_InsideBuildingActive;
 
 int __cdecl tb_IsCallbackPaused(void*);
 int __cdecl tb_SetCallbackPaused(void*, int);
@@ -59,13 +59,13 @@ void __cdecl init_LoadGebaeudeScene(int prototypeIndex)
 	saved = d3_CurrentContextIndex;
 	progress = 0;
 	restore = 0;
-	if ((g_7747b0 & 8) != 0 && !tb_IsCallbackPaused((void*) 0x538060)) {
+	if ((gm_ClientModeFlags & 8) != 0 && !tb_IsCallbackPaused((void*) 0x538060)) {
 		tb_SetCallbackPaused((void*) 0x538060, 1);
 		restore = 1;
 	}
 	p = (char*) (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[prototypeIndex].category + 0x7f3b00);
 	if (*p == (char) 0xff) {
-		if (g_774964 != 0 && (g_774670 <= 0 || g_7e2700 != 0)) {
+		if (gm_InWorldHud != 0 && (g_774670 <= 0 || d2_InsideBuildingActive != 0)) {
 			flags = (main_LoopFlags & 0xfffffff7) | 0x80;
 			mode = d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, "BLACK", 0x32, 1);
 			while (!(*mode & 4)) {
@@ -88,12 +88,12 @@ void __cdecl init_LoadGebaeudeScene(int prototypeIndex)
 			goto done;
 		}
 		d3_SelectSceneContext(v, 0);
-		if (g_6b8300 != 0) {
-			d3_UpdateSceneDetailLevel(g_6b8300, 1);
+		if (d3_CurrentFloor != 0) {
+			d3_UpdateSceneDetailLevel(d3_CurrentFloor, 1);
 		}
 		d3_SelectSceneContext(d3_CurrentContextIndex, 0);
-		d3_TraverseSceneObjects((char*) g_67a370, 0, 0x160, (void (__cdecl*)(char*)) 0x5105a0);
-		d3_TraverseSceneObjects((char*) g_67a370, 0, 6, (void (__cdecl*)(char*)) 0x510bd0);
+		d3_TraverseSceneObjects((char*) d3_ActiveScene, 0, 0x160, (void (__cdecl*)(char*)) 0x5105a0);
+		d3_TraverseSceneObjects((char*) d3_ActiveScene, 0, 6, (void (__cdecl*)(char*)) 0x510bd0);
 		*p = (char) v;
 		d3_SelectSceneContext(saved, 0);
 		goto done;
@@ -101,7 +101,7 @@ void __cdecl init_LoadGebaeudeScene(int prototypeIndex)
 	if (!*(char*) (*p * 0x3dc + 0x1043695)) {
 		goto done;
 	}
-	if (g_774964 != 0 && g_774670 <= 0) {
+	if (gm_InWorldHud != 0 && g_774670 <= 0) {
 		flags = (main_LoopFlags & 0xfffffff7) | 0x80;
 		mode = d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, "BLACK", 0x32, 1);
 		while (!(*mode & 4)) {
@@ -119,16 +119,16 @@ void __cdecl init_LoadGebaeudeScene(int prototypeIndex)
 		d3_SelectSceneContext(saved, 0);
 		goto done;
 	}
-	if (g_6b8300 != 0) {
-		d3_UpdateSceneDetailLevel(g_6b8300, 1);
+	if (d3_CurrentFloor != 0) {
+		d3_UpdateSceneDetailLevel(d3_CurrentFloor, 1);
 	}
 	d3_SelectSceneContext(d3_CurrentContextIndex, 0);
-	gv_Free3Fields(*(int*) (g_67a370 + 0xb0));
-	*(int*) (g_67a370 + 0xb0) = 0;
-	d3sm_GetSceneSuperMap((char*) g_67a370);
-	d3sm_Rebuild(*(int*) (g_67a370 + 0xb0), (int) g_6b8300);
-	d3_TraverseSceneObjects((char*) g_67a370, 0, 0x160, (void (__cdecl*)(char*)) 0x5105a0);
-	d3_TraverseSceneObjects((char*) g_67a370, 0, 6, (void (__cdecl*)(char*)) 0x510bd0);
+	gv_Free3Fields(*(int*) (d3_ActiveScene + 0xb0));
+	*(int*) (d3_ActiveScene + 0xb0) = 0;
+	d3sm_GetSceneSuperMap((char*) d3_ActiveScene);
+	d3sm_Rebuild(*(int*) (d3_ActiveScene + 0xb0), (int) d3_CurrentFloor);
+	d3_TraverseSceneObjects((char*) d3_ActiveScene, 0, 0x160, (void (__cdecl*)(char*)) 0x5105a0);
+	d3_TraverseSceneObjects((char*) d3_ActiveScene, 0, 6, (void (__cdecl*)(char*)) 0x510bd0);
 	for (v = 0x14d0020; v < 0x14d0c20; v += 4) {
 		char* e = *(char**) v;
 
@@ -151,7 +151,7 @@ void __cdecl init_LoadGebaeudeScene(int prototypeIndex)
 	*(char*) (*p * 0x3dc + 0x1043695) = 0;
 	d3_SelectSceneContext(saved, 0);
 done:
-	if ((g_7747b0 & 8) != 0 && restore != 0) {
+	if ((gm_ClientModeFlags & 8) != 0 && restore != 0) {
 		tb_SetCallbackPaused((void*) 0x538060, 0);
 	}
 }

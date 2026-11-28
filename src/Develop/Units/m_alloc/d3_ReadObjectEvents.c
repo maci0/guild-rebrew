@@ -5,7 +5,7 @@ typedef int (__cdecl* fcn_0043b7b0_f)(char*, int, char*);
 extern int g_67a590;
 
 #ifdef REBREW_GOLD
-int __cdecl fcn_004011d0(void* a, void* b);
+int __cdecl vfs_ReadDword(void* a, void* b);
 #else
 int __cdecl fcn_004011f0(void* stream, void* dst);
 #endif
@@ -23,7 +23,7 @@ void __cdecl d3_ReadObjectEvents(void* r, char* o)
 	int id;
 
 #ifdef REBREW_GOLD
-	fcn_004011d0(r, &n);
+	vfs_ReadDword(r, &n);
 #else
 	fcn_004011f0(r, &n);
 #endif

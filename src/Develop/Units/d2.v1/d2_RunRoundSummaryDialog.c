@@ -1,27 +1,27 @@
 #include <string.h>
 
-extern int g_774970;
+extern int gm_LocalPlayerSlot;
 extern int g_774968;
 extern int g_774978;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern int g_7e2700;
+extern int d2_InsideBuildingActive;
 extern int main_LoopFlags;
 extern int g_6a3420;
 extern int d3_ActiveCamera;
 extern int d2_CurrentWindowId;
-extern int g_77250c;
-extern int g_77255c;
+extern int d2_ScreenSurface;
+extern int d2_CurrentWindow;
 extern int g_1040480;
 extern int g_1040484;
 extern int g_1040488;
 extern int g_104048c;
 extern int d2_ScreenHeight;
 extern int g_1040494;
-extern int g_100f1dc;
-extern char g_14cf950;
+extern int d2_DialogButtonAction;
+extern char io_LastKeyScancode;
 extern char gm_GameTime[];
-extern char g_7f4ca0[];
-extern double g_6640e8;
+extern char gm_EntitySlotTable[];
+extern double dbl_0_01;
 
 int __cdecl io_AppendText(int, ...);
 char* __cdecl d2_StartScreenFade(int, int, int, int, char*, int, int);
@@ -94,7 +94,7 @@ void __cdecl d2_RunRoundSummaryDialog(void)
 	f1e8 = 0;
 	g1f4 = 0;
 	e1ec = 0;
-	*(int*) (char*) &g_7e2700 = 0;
+	*(int*) (char*) &d2_InsideBuildingActive = 0;
 	if (g_6a3420 != 0) {
 		win = (unsigned char*) d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, "BLACK", 0x1e, 1);
 		while ((*win & 4) == 0) {
@@ -103,8 +103,8 @@ void __cdecl d2_RunRoundSummaryDialog(void)
 		g1f4 = (int) win;
 	}
 
-	sel = (int) fcn_00509570((((unsigned short)g_774970) & 0xffff) * 0x21c + (int) (char*) g_7f4ca0);
-	k = (((unsigned short)g_774970) & 0xffff) * 0x21c;
+	sel = (int) fcn_00509570((((unsigned short)gm_LocalPlayerSlot) & 0xffff) * 0x21c + (int) (char*) gm_EntitySlotTable);
+	k = (((unsigned short)gm_LocalPlayerSlot) & 0xffff) * 0x21c;
 	*(int*) (sel + 0x3c) += *(int*) (k + 0x7f4e44) + *(int*) (k + 0x7f4e40);
 	d3_SetNodePosition((char*) d3_ActiveCamera, (int*) (sel + 0x8c));
 	d3_SetObjectRotation((char*) d3_ActiveCamera, (int*) (sel + 0x9c));
@@ -127,13 +127,13 @@ void __cdecl d2_RunRoundSummaryDialog(void)
 	gm_PackGameTime((void*) (char*) gm_GameTime, stamp);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x2007);
-	k = (((unsigned short)g_774970) & 0xffff) * 0x21c;
+	k = (((unsigned short)gm_LocalPlayerSlot) & 0xffff) * 0x21c;
 	runningTotal = *(int*) (k + 0x7f4e3c);
 	c1fc = runningTotal - *(int*) (k + 0x7f4e38);
 	if (runningTotal != 0) {
 		io_AppendText(0x2008, runningTotal);
 	}
-	runningTotal = *(int*) ((((unsigned short)g_774970) & 0xffff) * 0x21c + 0x7f4e38);
+	runningTotal = *(int*) ((((unsigned short)gm_LocalPlayerSlot) & 0xffff) * 0x21c + 0x7f4e38);
 	if (runningTotal != 0) {
 		io_AppendText(0x2009, runningTotal);
 	}
@@ -199,17 +199,17 @@ void __cdecl d2_RunRoundSummaryDialog(void)
 		io_AppendText(0x204c, runningTotal);
 	}
 	d2_SetForm(dlg, 3);
-	*(int*) ((char*) g_77255c + 0x28c) = 0x55;
+	*(int*) ((char*) d2_CurrentWindow + 0x28c) = 0x55;
 	io_AppendText(0x2005);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x68112c);
 	ent = (char*) fcn_00503fe0(1, 6);
 	while (ent != 0) {
-		if (*(short*) (ent + 0x27) == (short) (((unsigned short)g_774970) & 0xffff) ||
-		    *(short*) (ent + 0x25) == (short) (((unsigned short)g_774970) & 0xffff)) {
+		if (*(short*) (ent + 0x27) == (short) (((unsigned short)gm_LocalPlayerSlot) & 0xffff) ||
+		    *(short*) (ent + 0x25) == (short) (((unsigned short)gm_LocalPlayerSlot) & 0xffff)) {
 			b = *(unsigned char*) ent;
 			kind = fcn_00504bd0((int) b);
-			n = gm_CalcBuildingRoundBalance(ent, (int) (((unsigned short)g_774970) & 0xffff), info);
+			n = gm_CalcBuildingRoundBalance(ent, (int) (((unsigned short)gm_LocalPlayerSlot) & 0xffff), info);
 			if (n != 0 || (kind != 5 && kind != 6)) {
 				c1fc += *(int*) ((char*) info + 0x44);
 				e1ec += *(int*) ((char*) info + 0xc);
@@ -219,7 +219,7 @@ void __cdecl d2_RunRoundSummaryDialog(void)
 		}
 		ent = (char*) fcn_00503e80();
 	}
-	n = he_GetActiveKrediteByLender(((unsigned short)g_774970) & 0xffff, 0, 0xffff, v1d0);
+	n = he_GetActiveKrediteByLender(((unsigned short)gm_LocalPlayerSlot) & 0xffff, 0, 0xffff, v1d0);
 	i = 0; k = 0;
 	if (n > 0) {
 		do {
@@ -234,23 +234,23 @@ void __cdecl d2_RunRoundSummaryDialog(void)
 			io_AppendText(0x2048, k);
 		}
 	}
-	k = (((unsigned short)g_774970) & 0xffff) * 0x21c;
+	k = (((unsigned short)gm_LocalPlayerSlot) & 0xffff) * 0x21c;
 	if (*(char*) (k + 0x7f4e06) != 0 || *(char*) (k + 0x7f4e09) != 0) {
-		amt_ProcessPrivilegeIncome(((unsigned short)g_774970), 0, v1d0);
-		k = (((unsigned short)g_774970) & 0xffff) * 0x21c;
+		amt_ProcessPrivilegeIncome(((unsigned short)gm_LocalPlayerSlot), 0, v1d0);
+		k = (((unsigned short)gm_LocalPlayerSlot) & 0xffff) * 0x21c;
 		h1f0 = (-(*(char*) (k + 0x7f4ca9) != 0) & 0x28) + 0x253;
 		b = *(unsigned char*) (k + 0x7f4e06);
 		if (b != 0) {
 			io_AppendText(0x2049, (int) b + h1f0, v1d0[1]);
 		}
-		b = *(unsigned char*) ((((unsigned short)g_774970) & 0xffff) * 0x21c + 0x7f4e09);
+		b = *(unsigned char*) ((((unsigned short)gm_LocalPlayerSlot) & 0xffff) * 0x21c + 0x7f4e09);
 		if (b != 0) {
 			io_AppendText(0x2049, (int) b + h1f0, v1d0[2]);
 		}
 		d1f8 += v1d0[1] + v1d0[2];
 		c1fc += v1d0[1] + v1d0[2];
 	}
-	n = gm_CalcEntityTaxSlots(((unsigned short)g_774970), (int*)&revenue, 0);
+	n = gm_CalcEntityTaxSlots(((unsigned short)gm_LocalPlayerSlot), (int*)&revenue, 0);
 	if (n != 0) {
 		i = 0;
 		do {
@@ -270,7 +270,7 @@ void __cdecl d2_RunRoundSummaryDialog(void)
 	if (e1ec != 0) {
 		io_AppendText(0x204a, e1ec);
 	}
-	n = he_GetActiveKrediteByBorrower(((unsigned short)g_774970) & 0xffff, 0, v1d0);
+	n = he_GetActiveKrediteByBorrower(((unsigned short)gm_LocalPlayerSlot) & 0xffff, 0, v1d0);
 	runningTotal = 0;
 	i = 0;
 	if (n > 0) {
@@ -293,10 +293,10 @@ void __cdecl d2_RunRoundSummaryDialog(void)
 	} else if (c1fc < 0) {
 		io_AppendText(0x204e, c1fc);
 	}
-	n = fcn_0050d2a0((((unsigned short)g_774970) & 0xffff) * 0x21c + (int) (char*) g_7f4ca0);
+	n = fcn_0050d2a0((((unsigned short)gm_LocalPlayerSlot) & 0xffff) * 0x21c + (int) (char*) gm_EntitySlotTable);
 	io_AppendText(0x2029, ((n - f1e8) - e1ec) - runningTotal);
 	d2_ToggleActionPopupBar(0xffff);
-	d2_ClearSurface(g_77250c);
+	d2_ClearSurface(d2_ScreenSurface);
 	d2_SetBackdropResource(0x79d);
 	g_774978 = 1;
 	g_1040488 = 0;
@@ -313,8 +313,8 @@ void __cdecl d2_RunRoundSummaryDialog(void)
 	i = main_RunFrameLoop((int) d2_RunRoundSummaryDialog, 0x24087);
 	while (i != 0) {
 		d2_UpdateScrollPerga();
-		if (g_100f1dc == 2 || g_14cf950 == 0x1c) {
-			g_774654 = 1;
+		if (d2_DialogButtonAction == 2 || io_LastKeyScancode == 0x1c) {
+			d2_DialogCloseRequested = 1;
 		}
 		i = main_RunFrameLoop((int) d2_RunRoundSummaryDialog, 0x24087);
 	}
@@ -340,7 +340,7 @@ fold:
 		d2_ReleaseOverlaySprite((unsigned char*) g1f4);
 		g1f4 = 0;
 	}
-	n = gm_CheckAndCollectEntityDebt((char*) ((((unsigned short)g_774970) & 0xffff) * 0x21c + (int) (char*) g_7f4ca0),
+	n = gm_CheckAndCollectEntityDebt((char*) ((((unsigned short)gm_LocalPlayerSlot) & 0xffff) * 0x21c + (int) (char*) gm_EntitySlotTable),
 		-(f1e8 + e1ec + runningTotal));
 	if (n != 0) {
 		memset(panel, 0, 0x114);
@@ -348,14 +348,14 @@ fold:
 		*(unsigned char*) (panel + 0x26) = 0x60;
 		*(int*) (panel + 0x14) = -1;
 		*(unsigned char*) (panel + 0x30) = 1;
-		*(int*) (panel + 0xc) = *(int*) ((((unsigned short)g_774970) & 0xffff) * 0x21c + 0x7f4ca4);
+		*(int*) (panel + 0xc) = *(int*) ((((unsigned short)gm_LocalPlayerSlot) & 0xffff) * 0x21c + 0x7f4ca4);
 		*(int*) (panel + 0x34) = *(int*) (panel + 0xc);
 		if (g1f4 != 0) {
 			d2_ReleaseOverlaySprite((unsigned char*) g1f4);
 		}
 		cut_ExecuteCutscene(panel);
 		if (g_774968 != 0) {
-			gm_ResetDynastySlot(((unsigned short)g_774970) & 0xffff);
+			gm_ResetDynastySlot(((unsigned short)gm_LocalPlayerSlot) & 0xffff);
 		}
 		g_774968 = 0;
 	}

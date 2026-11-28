@@ -15,7 +15,7 @@ typedef struct {
 } Offer;
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 unsigned short __cdecl gm_RandomMod(int n);
 float __cdecl eval_ObjektPreis2Credits(int id, int pct);
@@ -33,7 +33,7 @@ void __cdecl cm_SendRandomMarktSlotDelta(void)
 	}
 	for (n = gm_RandomMod(2); n > 0; n--) {
 		r = gm_RandomMod(0x54);
-		row = (Offer*)&((MARKET_STOCK_SLOT*)(g_85ab90 + g_773d75 * 0x2a90))[r];
+		row = (Offer*)&((MARKET_STOCK_SLOT*)(gm_MarketStockTable + gm_ActiveTownIndex * 0x2a90))[r];
 		if (((MARKET_STOCK_SLOT*)row)->objekt_id != 0 && ((MARKET_STOCK_SLOT*)row)->active != 0) {
 			copy = *row;
 			if (gm_RandomMod(1) != 0) {
@@ -43,7 +43,7 @@ void __cdecl cm_SendRandomMarktSlotDelta(void)
 				copy.price = copy.base * 0.5;
 				copy.value = (float)(eval_ObjektPreis2Credits(((MARKET_STOCK_SLOT*)row)->objekt_id, 100) * 0.5);
 			}
-			cm_SendMarktSlotDelta(&copy, g_773d75);
+			cm_SendMarktSlotDelta(&copy, gm_ActiveTownIndex);
 		}
 	}
 }

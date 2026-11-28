@@ -11,7 +11,7 @@ int __cdecl cm_EnqueueCommand(char*);
 
 int __cdecl cm_PollCommandQueue(void)
 {
-	if (g_14cbca0 == -1) {
+	if (nt_ClientSocket == -1) {
 		return 0;
 	}
 	if (g_14cbca4 != 0) {

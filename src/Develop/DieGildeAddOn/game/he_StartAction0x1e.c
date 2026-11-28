@@ -12,7 +12,7 @@ struct good {
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern unsigned char* lpGebaeudePROT;
-extern int g_774800;
+extern int gm_AllEntitiesControllable;
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
@@ -32,7 +32,7 @@ void __cdecl he_StartAction0x1e(char* e)
 		he_FreeAction(e);
 		return;
 	}
-	if (g_774800 == 0) {
+	if (gm_AllEntitiesControllable == 0) {
 		g = (char*) &((struct good*)lpGebaeudePROT)[*t];
 		d = (*(int*) (g + 0x490) - *(int*) (g + 0x243)) * 24;
 		if (d <= 0) {

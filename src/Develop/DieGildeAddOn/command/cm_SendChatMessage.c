@@ -30,7 +30,7 @@ int __cdecl cm_SendChatMessage(int channel, char* text)
 	msg9c m;
 
 	memset(&m.f10, 0, 0x80);
-	info.g = g_9badd0;
+	info.g = lb_LocalClientId;
 	m.kind = 0x5f;
 	info.a = channel;
 	fcn_0064d530(info.name, text, 0x3f);

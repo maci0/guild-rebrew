@@ -4,14 +4,14 @@
 extern char* lpObjektePROT;
 #include "Develop/client_types.h"
 #include "Develop/Units/d2.v1/d2_win.h"
-extern D2_FORM_RECORD g_1038140[];
-extern Win_1015f40 g_1015f40[0x60];
+extern D2_FORM_RECORD d2_Forms[];
+extern Win_1015f40 d2_Windows[0x60];
 extern int g_1040494;
 extern int d2_CurrentWindowId;
-extern int g_7747b4;
-extern char* g_7746c4;
-extern unsigned char* g_7746c8;
-extern char* g_7e2aa0;
+extern int gm_DifficultyLevel;
+extern char* d2_VisitedBuilding;
+extern unsigned char* d2_InteriorBuilding;
+extern char* d2_SelectedBuilding;
 extern unsigned char* lpGebaeudePROT;
 
 int __cdecl d2_LoadForm(int, int, char*);
@@ -39,7 +39,7 @@ int __cdecl d2_OpenObjektUpgradeTooltip(int id)
 	}
 	dlg = d2_LoadForm(0, 0, "ToolTip\\ToolTip_Objekte_Upgrades");
 	d2_CenterDialogWindows(dlg);
-	p = &((D2_WIN*)g_1015f40)[*(int*) (((char*)g_1038140) + dlg * 700 + 4)];
+	p = &((D2_WIN*)d2_Windows)[*(int*) (((char*)d2_Forms) + dlg * 700 + 4)];
 	if (p->left + p->width > g_1040494 - 16) {
 		d2_PositionControl(g_1040494 - p->width - 16, p->top, p->slot);
 	}
@@ -53,16 +53,16 @@ int __cdecl d2_OpenObjektUpgradeTooltip(int id)
 	if (rec[0x40] != 0) {
 		io_AppendText(0x21, (unsigned char) rec[0x40]);
 	} else {
-		f = (float)(g_7747b4 * 0.25 + 0.5);
+		f = (float)(gm_DifficultyLevel * 0.25 + 0.5);
 		io_AppendText(0x23, (int) (eval_ObjektPreis2Credits(id, 100) * f));
 	}
 	io_AppendText(0x20, *(int*) (rec + 0x22));
-	sel = ((unsigned char*)g_7746c4);
+	sel = ((unsigned char*)d2_VisitedBuilding);
 	if (sel == 0) {
-		sel = g_7746c8;
+		sel = d2_InteriorBuilding;
 	}
 	if (sel == 0) {
-		sel = ((unsigned char*)g_7e2aa0);
+		sel = ((unsigned char*)d2_SelectedBuilding);
 	}
 	if (sel != 0 && rec[0] != 2 && rec[0] != 6) {
 		r = (char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*sel];

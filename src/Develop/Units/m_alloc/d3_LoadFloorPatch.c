@@ -1,9 +1,9 @@
 #include <string.h>
 
-extern char g_6b5c60[];
+extern char str_empty[];
 extern int g_1041d08;
 extern float g_6628cc;
-extern int g_6b7fdc;
+extern int vfs_RootDir;
 
 char* __cdecl m_alloc(int, char*);
 void __cdecl vfs_BuildDirPath(int, int, char*);
@@ -79,7 +79,7 @@ int* __cdecl d3_LoadFloorPatch(char* floorSpec)
 		v6[4] = (int) dst;
 		copy_43fa10(dst, *(void**) (floorSpec + 0x40), *v6 * *v6);
 	} else {
-		vfs_BuildDirPath(g_1041d08, g_6b7fdc, path);
+		vfs_BuildDirPath(g_1041d08, vfs_RootDir, path);
 		strcat(path, "boden/");
 		{ int j = 0; do { prefix[j] = path[j]; } while (path[j++]); }
 		strcat(path, floorSpec);
@@ -158,7 +158,7 @@ int* __cdecl d3_LoadFloorPatch(char* floorSpec)
 	name = floorSpec + 0xa4;
 	i = 8;
 	do {
-		*slot = g_6b5c60[0];
+		*slot = str_empty[0];
 		if (name && *name) {
 			d3_LoadFloorTexture(v6, name, -1);
 		}

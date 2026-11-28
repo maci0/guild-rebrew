@@ -1,6 +1,6 @@
 #include <string.h>
 #include "Develop/DieGildeAddOn/command/client_packet_queue.h"
-extern unsigned char g_7747b0;
+extern unsigned char gm_ClientModeFlags;
 void __cdecl ReportClientMessage(const char* message);
 
 /* Inferred distinct client handler name; native diagnostic text is retained. */
@@ -11,13 +11,13 @@ int __cdecl cm_ExCreateCutsceneEntry(char* command, char* result)
     char* entry;
 
     (void) command;
-    memcpy(payload, g_aed340, sizeof(payload));
+    memcpy(payload, cm_IncomingPacketData, sizeof(payload));
     entry = cut_AllocCutscene(payload);
     if (entry == 0) {
         ReportClientMessage("cm_ExAllocCutscene(): Cutscene-Queue is full!");
         return 1;
     }
-    if (g_7747b0 & 4)
+    if (gm_ClientModeFlags & 4)
         entry[0x26] |= 0x80;
     if (result != 0) {
         result[0] = 1;

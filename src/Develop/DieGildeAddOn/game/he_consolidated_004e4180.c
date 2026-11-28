@@ -9,17 +9,17 @@ void __cdecl cut_CleanupCutscene(void);
 void __cdecl msx_RestoreMusicIfAllowed(void);
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 #include "Develop/DieGildeAddOn/game/event_callbacks.h"
-extern int g_772f3c;
-extern unsigned char* g_7746c4;
-extern unsigned char* g_7746c8;
+extern int cut_SkipMode;
+extern unsigned char* d2_VisitedBuilding;
+extern unsigned char* d2_InteriorBuilding;
 extern int* cut_ActiveCutscene;
-extern int g_77250c;
+extern int d2_ScreenSurface;
 extern unsigned char* g_772f50;
 extern unsigned char* lpGebaeudePROT;
 extern int g_6b8058;
 extern int g_772f48;
 extern char init_SceneContextIndices[];
-extern signed char g_7f3b00[];
+extern signed char d3_BuildingCategorySceneIndices[];
 extern char g_1043695[];
 extern int d2_ScreenHeight;
 extern int g_1040494;
@@ -73,13 +73,13 @@ void __cdecl cut_SwitchEntityScene(unsigned char* entity, unsigned int sceneId)
 {
 	int flags;
 
-	if (g_772f3c) {
+	if (cut_SkipMode) {
 		return;
 	}
-	if ((g_7746c4 == entity && *(unsigned short*) (entity + 0x29) == sceneId) ||
-	    (g_7746c8 == entity && *(unsigned short*) (entity + 0x29) == sceneId)) {
+	if ((d2_VisitedBuilding == entity && *(unsigned short*) (entity + 0x29) == sceneId) ||
+	    (d2_InteriorBuilding == entity && *(unsigned short*) (entity + 0x29) == sceneId)) {
 		if (*((unsigned char*) cut_ActiveCutscene + 0x26) & 0x20) {
-			d2_ClearSurface(g_77250c);
+			d2_ClearSurface(d2_ScreenSurface);
 		}
 		if (g_772f50) {
 			d2_ReleaseOverlaySprite(g_772f50);
@@ -100,12 +100,12 @@ void __cdecl cut_SwitchEntityScene(unsigned char* entity, unsigned int sceneId)
 				}
 			}
 			else {
-				if (g_7f3b00[((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*entity].category]) {
-					if (g_7f3b00[((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*entity].category] == -1 ||
-					    g_1043695[g_7f3b00[((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*entity].category] * 0x3dc]) {
+				if (d3_BuildingCategorySceneIndices[((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*entity].category]) {
+					if (d3_BuildingCategorySceneIndices[((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*entity].category] == -1 ||
+					    g_1043695[d3_BuildingCategorySceneIndices[((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*entity].category] * 0x3dc]) {
 						init_LoadGebaeudeScene(((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*entity].category);
 					}
-					d3_SelectSceneContext(g_7f3b00[((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*entity].category], 0);
+					d3_SelectSceneContext(d3_BuildingCategorySceneIndices[((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*entity].category], 0);
 					d3_UpdateBuildingView(entity, 0xfd);
 				}
 			}
@@ -117,7 +117,7 @@ void __cdecl cut_SwitchEntityScene(unsigned char* entity, unsigned int sceneId)
 			g_772f48 &= 0xfffffffd;
 		}
 		if (*((unsigned char*) cut_ActiveCutscene + 0x26) & 0x20) {
-			d2_ClearSurface(g_77250c);
+			d2_ClearSurface(d2_ScreenSurface);
 		}
 		if (g_772f50) {
 			d2_ReleaseOverlaySprite(g_772f50);

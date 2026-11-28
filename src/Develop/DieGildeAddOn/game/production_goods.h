@@ -24,6 +24,6 @@ typedef struct {
 } PRODUCTION_GOODS_RECORD;
 /* SIZE 0x58 */
 
-extern PRODUCTION_GOODS_RECORD g_100d0c0[];
+extern PRODUCTION_GOODS_RECORD ai_ProductionGoodsPlans[];
 
 #endif

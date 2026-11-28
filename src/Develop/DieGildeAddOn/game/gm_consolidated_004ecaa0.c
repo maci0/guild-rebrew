@@ -14,12 +14,12 @@ void __cdecl ahm_ShufflePlayerPrototypes(void);
 #include "Develop/DieGildeAddOn/game/alchemy_player_prototype.h"
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern ALCHEMY_PLAYER_PROTOTYPE* g_772fdc;
+extern ALCHEMY_PLAYER_PROTOTYPE* ahm_PlayerPrototypes;
 
 unsigned short __cdecl gm_RandomMod(unsigned short n);
 
 extern int g_772fe0;
-extern ALCHEMY_RECIPE_PROTOTYPE* g_772fe4;
+extern ALCHEMY_RECIPE_PROTOTYPE* ahm_RecipePrototypes;
 
 unsigned short __cdecl gm_RandomMod(unsigned short n);
 int __cdecl ahm_HasRecipeSlotCapacity(int p);
@@ -58,9 +58,9 @@ void __cdecl ahm_ShufflePlayerPrototypes(void)
 		a = gm_RandomMod((unsigned short) ahm_PlayerPrototypeCount);
 		b = gm_RandomMod((unsigned short) ahm_PlayerPrototypeCount);
 		if (a != b) {
-			tmp = g_772fdc[a];
-			g_772fdc[a] = g_772fdc[b];
-			g_772fdc[b] = tmp;
+			tmp = ahm_PlayerPrototypes[a];
+			ahm_PlayerPrototypes[a] = ahm_PlayerPrototypes[b];
+			ahm_PlayerPrototypes[b] = tmp;
 		}
 	}
 }
@@ -81,8 +81,8 @@ ALCHEMY_RECIPE_PROTOTYPE* __cdecl ahm_PickRandomUnknownRecipe(int player)
 		idx = gm_RandomMod((unsigned short) g_772fe0);
 		n = g_772fe0;
 		while (n != 0) {
-			if (!ahm_FindRecipeSlot(player, g_772fe4[idx].key)) {
-				return &g_772fe4[idx];
+			if (!ahm_FindRecipeSlot(player, ahm_RecipePrototypes[idx].key)) {
+				return &ahm_RecipePrototypes[idx];
 			}
 			n--;
 			idx = (idx + step) % g_772fe0;

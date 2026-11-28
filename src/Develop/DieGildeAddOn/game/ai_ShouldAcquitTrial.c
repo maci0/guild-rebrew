@@ -1,7 +1,7 @@
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern float g_6628a8;
+extern float flt_0_0;
 
 char* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl gm_CalcEntityFavor(int a, int b, int c);

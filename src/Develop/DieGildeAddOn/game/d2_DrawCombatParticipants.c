@@ -4,10 +4,10 @@ typedef struct {
 } Screen;
 // SIZE 0x10
 
-extern char* g_77255c;
+extern char* d2_CurrentWindow;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char* g_1015ea0;
-extern char g_6b5c60[];
+extern char* d2_Controls;
+extern char str_empty[];
 
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
@@ -40,7 +40,7 @@ void __cdecl d2_DrawCombatParticipants(char* ids, int originX, int originY)
 	for (i = 0; i < 0x10; i++)
 		if (*(int*) (ids + i * 4) != -1)
 			total++;
-	div = (((Screen*) g_77255c)->f_c - 0x30) / (total + 1);
+	div = (((Screen*) d2_CurrentWindow)->f_c - 0x30) / (total + 1);
 	for (i = 0; i < 0x10; i++) {
 		id = *(int*) (ids + i * 4);
 		if (id == -1)
@@ -52,10 +52,10 @@ void __cdecl d2_DrawCombatParticipants(char* ids, int originX, int originY)
 		d2_AddElementToWindow(x - 4, y, *(int*) (rec + 0x18c), d2_CurrentWindowId);
 		f = (float) gm_GetScaledEntitySkill(rec, 3);
 		d2_DrawSegmentedBar(x, y + 0x3c, (int) f, 0x4eb);
-		h = d2_ShowTxt(x - 0x24, y - 0x11, g_6b5c60, d2_CurrentWindowId);
-		((D2_CONTROL_TL*) (g_1015ea0))[h].width = 0x78;
-		((D2_CONTROL_TL*) (g_1015ea0))[h].value_06c = 1;
-		((D2_CONTROL_TL*) (g_1015ea0))[h].font = 0x56;
+		h = d2_ShowTxt(x - 0x24, y - 0x11, str_empty, d2_CurrentWindowId);
+		((D2_CONTROL_TL*) (d2_Controls))[h].width = 0x78;
+		((D2_CONTROL_TL*) (d2_Controls))[h].value_06c = 1;
+		((D2_CONTROL_TL*) (d2_Controls))[h].font = 0x56;
 		io_FormatTextBuffer(buf, "%1N1 %i%", *(unsigned short*) rec,
 			     (int) (gm_GetEntityHealthRatio(rec) * 100.0));
 		d2_SetLabelText(h, buf);

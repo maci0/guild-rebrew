@@ -28,19 +28,19 @@ typedef struct Chat {
 	char text[0x60];
 } Chat;
 
-extern char g_7f4ca0[];
-extern char* g_1015ea0;
+extern char gm_EntitySlotTable[];
+extern char* d2_Controls;
 extern unsigned char g_6a2c14[8];
-extern int g_6a2c1c;
+extern int d2_QuickChatLastTick;
 extern int d2_CurrentWindowId;
 extern int g_14ac628;
-extern int g_14ce8e0;
-extern char g_14cf950;
+extern int io_RightButtonReleased;
+extern char io_LastKeyScancode;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_6b5c60[];
+extern char str_empty[];
 extern char g_7e3a60[];
 
 int __cdecl d2_LoadForm(int, int, char*);
@@ -77,16 +77,16 @@ void __cdecl d2_RunChatConsole(void)
 	ids[5] = -1;
 	ids[6] = -1;
 	ids[7] = -1;
-	g_6a2c1c = 0;
+	d2_QuickChatLastTick = 0;
 	dlg = d2_LoadForm(0, 0, "misc\\chatconsole");
 	d2_CenterForm(dlg, 3);
 	d2_SetForm(dlg, 3);
 	n = 0;
 	for (i = 0; i < 768; i++) {
-		if (((House*) g_7f4ca0)[i].kind == 7) {
-			ids[n] = d2_AddElementToWindow(n * 0x30 + 0x64, 4, ((House*) g_7f4ca0)[i].f54, d2_CurrentWindowId);
-			((Ctl*) g_1015ea0)[ids[n]].f58 = 1;
-			((Ctl*) g_1015ea0)[ids[n]].house = &((House*) g_7f4ca0)[i];
+		if (((House*) gm_EntitySlotTable)[i].kind == 7) {
+			ids[n] = d2_AddElementToWindow(n * 0x30 + 0x64, 4, ((House*) gm_EntitySlotTable)[i].f54, d2_CurrentWindowId);
+			((Ctl*) d2_Controls)[ids[n]].f58 = 1;
+			((Ctl*) d2_Controls)[ids[n]].house = &((House*) gm_EntitySlotTable)[i];
 			d2_SetElementValue(ids[n], g_6a2c14[n]);
 			n++;
 		}
@@ -94,28 +94,28 @@ void __cdecl d2_RunChatConsole(void)
 	win = d2_AddWindowTextButton(0, 0, 0xc5, g_14ac628, d2_CurrentWindowId);
 	d2_SetElementFont(win, 0x54);
 	d2_SetForm(dlg, 2);
-	edit = d2_GetWindowListItem(dlg, 2, io_AppendText(0x1cc3, g_6b5c60));
+	edit = d2_GetWindowListItem(dlg, 2, io_AppendText(0x1cc3, str_empty));
 	d2_SetBildArgument(edit, 0x60);
 	while (main_RunFrameLoop(d2_RunChatConsole, 0x657c7)) {
 		d2_SetForm(dlg, 1);
 		io_AppendText((int) "$C");
 		io_AppendText((int) g_7e3a60);
-		if (g_14ce8e0 != 0 || g_14cf950 == 1) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0 || io_LastKeyScancode == 1) {
+			d2_DialogCloseRequested = 1;
 		}
 		d2_SelectControl(edit);
-		if ((g_100f1dc != -1 || g_14cf950 == 0x1c) && (d2_CurrentElementId == win || g_14cf950 == 0x1c)) {
+		if ((d2_DialogButtonAction != -1 || io_LastKeyScancode == 0x1c) && (d2_CurrentElementId == win || io_LastKeyScancode == 0x1c)) {
 			for (i = 0; i < 8; i++) {
 				if (ids[i] != -1 && d2_GetControlValue(ids[i]) != 0) {
-					chat.names[i] = ((Ctl*) g_1015ea0)[ids[i]].house->f4;
+					chat.names[i] = ((Ctl*) d2_Controls)[ids[i]].house->f4;
 				}
 			}
-			sprintf(chat.text, "$%iFF ", ((House*) g_7f4ca0)[g_774970].f54 - 0x59a);
+			sprintf(chat.text, "$%iFF ", ((House*) gm_EntitySlotTable)[gm_LocalPlayerSlot].f54 - 0x59a);
 			strcat(chat.text, d2_GetControlValue(edit));
 			strcat(chat.text, "$A");
-			d2_SetElementValue(edit, g_6b5c60);
+			d2_SetElementValue(edit, str_empty);
 			cm_RequestSendChat(&chat);
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 		}
 	}
 	for (i = 0; i < 8; i++) {
@@ -124,5 +124,5 @@ void __cdecl d2_RunChatConsole(void)
 		}
 	}
 	d2_DestroyForm(dlg);
-	g_14cf950 = 0;
+	io_LastKeyScancode = 0;
 }

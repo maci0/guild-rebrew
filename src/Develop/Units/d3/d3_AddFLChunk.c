@@ -1,7 +1,7 @@
 #include <math.h>
 #include <string.h>
 
-extern void* g_6b7fdc;
+extern void* vfs_RootDir;
 
 void* __cdecl vfs_Tfopen(char*, char*, void*);
 void __cdecl d3_LoadFlInfoChunks(void*, void*);
@@ -160,7 +160,7 @@ void __cdecl d3_AddFLChunk(char* name, char flag)
         add ecx, ebx
         rep stosb
     }
-	stream = vfs_Tfopen(name, "rb", g_6b7fdc);
+	stream = vfs_Tfopen(name, "rb", vfs_RootDir);
 	if (stream == 0) {
 		return;
 	}
@@ -381,7 +381,7 @@ void __cdecl d3_AddFLChunk(char* name, char flag)
 	buf = (char*) m_alloc(len, "d3_io_fl:NotMyChunkBufferStart");
 	vfs_ReadData(buf, len, 1, stream);
 	CloseVfsStream(stream);
-	stream = vfs_Tfopen(pfad, "wb", g_6b7fdc);
+	stream = vfs_Tfopen(pfad, "wb", vfs_RootDir);
 	vfs_fwrite(buf, len, 1, stream);
 	m_FreeTracked(buf);
 	vfs_WriteByte(stream, 0x2d);

@@ -1,7 +1,7 @@
 
 
 
-extern int g_7746a0;
+extern int sv_ClickedObjekt;
 extern int g_14a7c98;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_6aa450[];
@@ -26,14 +26,14 @@ void __cdecl d2_RunGildeInfoHud(int a)
 		z = RegisterStatusText(g_6aa450, g_14a7c98, 0xc);
 		x = RegisterStatusText(g_6a9924, g_14a7d28, 0xc);
 		y = RegisterStatusText(g_6aa34c, g_14a7b50, 0xc);
-		if (g_7746a0 != 0) {
-			if (g_7746a0 == x) {
+		if (sv_ClickedObjekt != 0) {
+			if (sv_ClickedObjekt == x) {
 				d2_OpenMeisterbriefDialog(a);
 			}
-			else if (g_7746a0 == y) {
+			else if (sv_ClickedObjekt == y) {
 				d2_ShowPersonalbuch(a, g_6aa34c);
 			}
-			else if (g_7746a0 == z) {
+			else if (sv_ClickedObjekt == z) {
 				d2_RunDiebesgildeInfoDialog(a);
 			}
 		}

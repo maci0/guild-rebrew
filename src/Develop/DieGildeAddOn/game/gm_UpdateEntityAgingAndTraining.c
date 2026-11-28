@@ -59,24 +59,26 @@ void __cdecl gm_UpdateEntityAgingAndTraining(int index)
 	int step;
 	int busy;
 
-	if ((((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].entity_type) != 6 && (((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].entity_type) != 7 && (((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].entity_type) < 10) {
+	if ((((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[index].entity_type) != 6 && (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[index].entity_type) != 7 &&
+		(((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[index].entity_type) < 10) {
 		int one;
 
-		e = ((Entity*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[index]);
+		e = ((Entity*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[index]);
 		one = 1;
-		if ((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].ptr_16c) != 0 || (((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].entity_type) == 5 || (((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].entity_type) == 1
-			|| (((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].entity_type) == 2 || (((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].entity_type) == 4) {
+		if ((*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[index].ptr_16c) != 0 || (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[index].entity_type) == 5 ||
+			(((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[index].entity_type) == 1
+			|| (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[index].entity_type) == 2 || (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[index].entity_type) == 4) {
 			cm_BeginPacketFieldDelta((char*) e, e->id);
 			cm_AppendPacketFieldValue(4, 1, 0x174, &one);
 			cm_RequestChangeAttribute();
 		}
-		if ((((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].stat_category) != 0) {
-			step = gm_GetOppositeStatIndex((((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].stat_category));
+		if ((((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[index].stat_category) != 0) {
+			step = gm_GetOppositeStatIndex((((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[index].stat_category));
 			busy = he_StartHandlungSearch(2, 2, e->slot, 0, 0x24);
 			e->busy++;
 			grade = gm_CalcActionCompletionTime(index, info);
 			e->busy--;
-			if (busy == 0 && step != 0 && step < 6 && grade >= 1.0 && (((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].value_194) >= 0) {
+			if (busy == 0 && step != 0 && step < 6 && grade >= 1.0 && (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[index].value_194) >= 0) {
 				memset(&msg, 0, sizeof(msg));
 				msg.x64 = 0;
 				msg.x5c = 0;
@@ -91,10 +93,10 @@ void __cdecl gm_UpdateEntityAgingAndTraining(int index)
 				gm_ModifyHealth(e->id, -4);
 			}
 		}
-	} else if ((((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].entity_type) == 6 || (((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].entity_type) == 7) {
+	} else if ((((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[index].entity_type) == 6 || (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[index].entity_type) == 7) {
 		int flag;
 
-		e = ((Entity*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[index]);
+		e = ((Entity*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[index]);
 		flag = 1;
 		cm_BeginPacketFieldDelta((char*) e, e->id);
 		cm_AppendPacketFieldValue(4, 1, 0x174, &flag);

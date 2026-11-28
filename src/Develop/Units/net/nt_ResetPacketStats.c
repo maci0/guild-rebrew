@@ -7,9 +7,9 @@
 
 void __cdecl nt_ResetPacketStats(void)
 {
-	memset(g_14cbcc0, 0, sizeof(g_14cbcc0));
+	memset(nt_PacketStats, 0, sizeof(nt_PacketStats));
 	nt_ReceivedPacketCount = 0;
 	nt_ReceivedBytes = 0;
-	g_6b7d60 = 0;
-	g_6b7d5c = 0;
+	nt_SentPacketCount = 0;
+	nt_SentBytes = 0;
 }

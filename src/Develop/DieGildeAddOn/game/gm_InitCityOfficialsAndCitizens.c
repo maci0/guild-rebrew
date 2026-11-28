@@ -17,7 +17,7 @@ typedef struct {
 } Figure;
 
 
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern char* gm_RichterKatholisch;
 extern char* gm_RichterEvangelisch;
 #include "Develop/DieGildeAddOn/command/client_packet_builder.h"
@@ -51,9 +51,9 @@ void __cdecl gm_InitCityOfficialsAndCitizens(void)
 
 	fcn_0064d3f8();
 	for (i = 0; i < 16; i++) {
-		if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_index != 0xffff && ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type < 5) {
-			money = gm_ConvertUnitsToAmount(gm_RandomMod(0x122) + 10, (*(char*)&g_773d75));
-			cm_BeginPacketFieldDelta((char*) ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]), ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id);
+		if (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_index != 0xffff && ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_type < 5) {
+			money = gm_ConvertUnitsToAmount(gm_RandomMod(0x122) + 10, (*(char*)&gm_ActiveTownIndex));
+			cm_BeginPacketFieldDelta((char*) ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i]), ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_id);
 			cm_AppendPacketFieldValue(4, 1, 0x1ac, &money);
 			cm_RequestChangeAttribute();
 		}
@@ -72,11 +72,11 @@ void __cdecl gm_InitCityOfficialsAndCitizens(void)
 	cm_BeginCommandSync();
 	flag = 0;
 	cm_BeginPacketFieldDelta(gm_RichterKatholisch, ((Figure*) gm_RichterKatholisch)->owner);
-	cm_AppendPacketFieldDelta(1, 1, gm_RichterKatholisch - g_aed32c + 0xc, &flag);
+	cm_AppendPacketFieldDelta(1, 1, gm_RichterKatholisch - cm_PacketDeltaBase + 0xc, &flag);
 	cm_RequestChangeAttribute();
 	flag = 1;
 	cm_BeginPacketFieldDelta(gm_RichterEvangelisch, ((Figure*) gm_RichterEvangelisch)->owner);
-	cm_AppendPacketFieldDelta(1, 1, gm_RichterEvangelisch - g_aed32c + 0xc, &flag);
+	cm_AppendPacketFieldDelta(1, 1, gm_RichterEvangelisch - cm_PacketDeltaBase + 0xc, &flag);
 	cm_RequestChangeAttribute();
 	cm_EndCommandSync();
 	while (cm_AreQueuedCommandsDone() == 0) {
@@ -95,7 +95,7 @@ void __cdecl gm_InitCityOfficialsAndCitizens(void)
 	cm_BeginCommandSync();
 	for (i = 0; i < 8; i++) {
 		figures[i] = cm_RequestAllocSpieler(0xb, -1, -1, gm_RandomMod(8) + 0x10, -1, 0, 0x13, 0);
-		cm_SendSellObjekt(-2, -1, 0x154, 1, (*(char*)&g_773d75), 0);
+		cm_SendSellObjekt(-2, -1, 0x154, 1, (*(char*)&gm_ActiveTownIndex), 0);
 	}
 	cm_EndCommandSync();
 	while (cm_AreQueuedCommandsDone() == 0) {

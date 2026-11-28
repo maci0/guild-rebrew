@@ -15,17 +15,17 @@ typedef D2_ITEM_BUTTON Btn;
 
 // SIZE 0x3cc
 
-extern int g_6abb00;
+extern int d2_InventoryPanelWindowId;
 extern int d2_ScreenHeight;
 extern int g_1040494;
-extern Win_1015f40 g_1015f40[0x60];
+extern Win_1015f40 d2_Windows[0x60];
 extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern D2_ITEM_BUTTON g_776c60[6];
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
 extern int g_14a92bc;
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char s_6ac77c[];
 
@@ -53,7 +53,7 @@ void __cdecl d2_ShowInventoryDialog(void)
 	int dlg;
 	int i;
 
-	if (g_6abb00 != -1) {
+	if (d2_InventoryPanelWindowId != -1) {
 		return;
 	}
 	if (d2_TutorialAllowsFlag(0x1000) == 0) {
@@ -62,17 +62,17 @@ void __cdecl d2_ShowInventoryDialog(void)
 	d2_DispatchTutorialInput(0x14, 0, 0, 0);
 	dlg = d2_LoadForm(g_1040494 - 0x158, d2_ScreenHeight - 0x108, s_6ac77c);
 	d2_SetForm(dlg, 0);
-	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8[0] = 0x18;
-	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8[4] = 0x18;
-	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8[8] = 0x18;
-	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8[12] = 0x18;
+	*(int*) &((D2_WIN*)d2_Windows)[d2_CurrentWindowId].pad3a8[0] = 0x18;
+	*(int*) &((D2_WIN*)d2_Windows)[d2_CurrentWindowId].pad3a8[4] = 0x18;
+	*(int*) &((D2_WIN*)d2_Windows)[d2_CurrentWindowId].pad3a8[8] = 0x18;
+	*(int*) &((D2_WIN*)d2_Windows)[d2_CurrentWindowId].pad3a8[12] = 0x18;
 	d2_SetForm(dlg, 0);
 	d2_SetOverlayAnimation(0, 0);
-	d2_OpenEntityQuickSlots(d2_CurrentWindowId, 0, 0, g_774970, 0x1f3b);
+	d2_OpenEntityQuickSlots(d2_CurrentWindowId, 0, 0, gm_LocalPlayerSlot, 0x1f3b);
 	if (main_RunFrameLoop((void*) d2_ShowInventoryDialog, 0x657c7) != 0) {
 		do {
 			d2_UpdateActiveItemSlots();
-			if (g_100f1dc != -1 || CountDisplayCounters() != 0) {
+			if (d2_DialogButtonAction != -1 || CountDisplayCounters() != 0) {
 				for (i = 0; i < 6; i++) {
 					if (g_776c60[i].item != 0 && d2_CurrentElementId == g_776c60[i].btn) {
 						if (gm_LookupSpecialObject(*(unsigned short*) g_776c60[i].item) != 0) {
@@ -88,7 +88,7 @@ void __cdecl d2_ShowInventoryDialog(void)
 					}
 				}
 			}
-			if (g_14ce8e0 != 0) {
+			if (io_RightButtonReleased != 0) {
 				if (CountDisplayCounters() != 0) {
 					for (i = 0; i < 6; i++) {
 						if (g_776c60[i].item != 0 && d2_GetControlValue(g_776c60[i].btn) != 0) {
@@ -98,7 +98,7 @@ void __cdecl d2_ShowInventoryDialog(void)
 					ResetDisplayCounters();
 				}
 				else {
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				}
 			}
 		} while (main_RunFrameLoop((void*) d2_ShowInventoryDialog, 0x657c7) != 0);

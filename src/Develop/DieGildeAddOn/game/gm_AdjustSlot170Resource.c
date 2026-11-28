@@ -5,7 +5,7 @@ typedef struct {
 	int d[0x1a];
 } SLOT170_ACTION_BLK;
 
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 
 char* __cdecl gm_FindSlot170Entry(int a1);
 
@@ -36,7 +36,7 @@ int __cdecl gm_AdjustSlot170Resource(int* a, int flag)
 				e = p + i * 0x68;
 				*(SLOT170_ACTION_BLK*) (e + 0x18) = blk;
 				*(int*) (p + 4) |= 2;
-				*(int*) (e + 0x78) = *(int*) ((char*)&g_6b7fac);
+				*(int*) (e + 0x78) = *(int*) ((char*)&gm_GameTicks);
 				*(int*) (e + 0x74) = 1;
 				*(int*) (e + 0x7c) = 0;
 				if (flag != 0) {

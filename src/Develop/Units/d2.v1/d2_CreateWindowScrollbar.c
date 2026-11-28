@@ -32,9 +32,9 @@ typedef struct {
 } Ent;
 
 #include "Develop/client_types.h"
-extern Win_1015f40 g_1015f40[0x60];
-extern char* g_1015ea0;
-extern char g_6b5c60[];
+extern Win_1015f40 d2_Windows[0x60];
+extern char* d2_Controls;
+extern char str_empty[];
 
 int __cdecl d2_AddElementToWindow(int x, int y, int kind, int owner);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -43,22 +43,22 @@ int __cdecl d2_CreateWindowScrollbar(int x, int y, int owner, int other, int arg
 {
 	D2_WIN* s;
 
-	s = &((D2_WIN*)g_1015f40)[other];
+	s = &((D2_WIN*)d2_Windows)[other];
 	*id1 = d2_AddElementToWindow(x, y, 3, owner);
-	*(int*) &((D2_WIN*)g_1015f40)[owner].pad3a8[0x10] = *id1;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*id1].value_05c) = 1;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*id1].flags_1d0) = 3;
+	*(int*) &((D2_WIN*)d2_Windows)[owner].pad3a8[0x10] = *id1;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[*id1].value_05c) = 1;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[*id1].flags_1d0) = 3;
 	*id2 = d2_AddElementToWindow(x, y + 0x2a, 4, owner);
-	*(int*) &((D2_WIN*)g_1015f40)[owner].pad3a8[0x14] = *id2;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*id2].value_05c) = 1;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*id2].flags_1d0) = 3;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*id2].value_1f0) = other;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*id1].value_1f0) = other;
-	*id3 = d2_ShowTxt(x - 0x13, y + 0x19, g_6b5c60, owner);
-	*(int*) &((D2_WIN*)g_1015f40)[owner].pad3a8[0x18] = *id3;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*id3].font) = 0x54;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*id3].value_06c) = 1;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*id3].width) = 0x30;
+	*(int*) &((D2_WIN*)d2_Windows)[owner].pad3a8[0x14] = *id2;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[*id2].value_05c) = 1;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[*id2].flags_1d0) = 3;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[*id2].value_1f0) = other;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[*id1].value_1f0) = other;
+	*id3 = d2_ShowTxt(x - 0x13, y + 0x19, str_empty, owner);
+	*(int*) &((D2_WIN*)d2_Windows)[owner].pad3a8[0x18] = *id3;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[*id3].font) = 0x54;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[*id3].value_06c) = 1;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[*id3].width) = 0x30;
 	*(int*) &s->pad3c[0x21c] = 0;
 	*(int*) &s->pad3c[0x238] = arg5;
 	return 1;

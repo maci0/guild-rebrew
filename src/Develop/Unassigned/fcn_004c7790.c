@@ -1,7 +1,7 @@
-extern int g_14cbca0;
+extern int nt_ClientSocket;
 extern int gm_NextEntityId;
 extern int cm_LastEntityId;
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 int __cdecl fcn_0064d3f8(void);
 void __cdecl fcn_0042e4c0(int a0);
@@ -17,7 +17,7 @@ int __cdecl fcn_004c7790(void* packet, char* reply)
 	int r;
 	int arg;
 
-	if (g_14cbca0 != -1) {
+	if (nt_ClientSocket != -1) {
 		gm_NextEntityId = *(int*) ((char*) packet + 0x10);
 	} else {
 		*(int*) ((char*) packet + 0x26) = fcn_0064d3f8();
@@ -45,11 +45,11 @@ int __cdecl fcn_004c7790(void* packet, char* reply)
 	if (r == 0xffff)
 		return 1;
 	r = r * 540;
-	cm_LastEntityId = *(int*) (g_7f4ca0 + r + 4);
+	cm_LastEntityId = *(int*) (gm_EntitySlotTable + r + 4);
 	if (reply != 0) {
 		reply[0] = 1;
 		reply[1] = 1;
-		*(char**) (reply + 6) = g_7f4ca0 + r;
+		*(char**) (reply + 6) = gm_EntitySlotTable + r;
 	}
 	return 0;
 }

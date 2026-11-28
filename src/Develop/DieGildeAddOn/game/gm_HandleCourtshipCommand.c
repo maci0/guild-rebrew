@@ -23,7 +23,7 @@ int __cdecl gm_HandleCourtshipCommand(int entity, int* command)
 			r = d2_RunCourtshipDialog(entity, command) | 2;
 		} else if (*command == 1 && *(char*) (entity + 2) == 6) {
 			for (e = he_StartHandlungSearch(1, 0, 0x41); e != 0; e = he_fn_Handlung()) {
-				if (*(int*) (e + 0xac) == *(int*) (g_774970 * 0x21c + 0x7f4ca4)) {
+				if (*(int*) (e + 0xac) == *(int*) (gm_LocalPlayerSlot * 0x21c + 0x7f4ca4)) {
 					p = gm_LookupEntityRecordById(*(int*) (e + 0xb0));
 					io_FormatTextBuffer((char*) command + 0x14, 0x1ce2, *(unsigned short*) p);
 					return r;

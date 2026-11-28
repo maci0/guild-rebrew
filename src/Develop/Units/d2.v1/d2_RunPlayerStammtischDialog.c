@@ -1,11 +1,11 @@
 extern int d2_CurrentWindowId;
-extern char* g_772500;
-extern char* g_77255c;
+extern char* d2_FileObjTable;
+extern char* d2_CurrentWindow;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char g_6b5c60[];
+extern char str_empty[];
 
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
@@ -78,7 +78,7 @@ void __cdecl d2_RunPlayerStammtischDialog(int building, int table)
 				p[0] = (int) ent;
 				n++;
 				p += 0xe;
-				if (*(int*) (ent + 2) == *(int*) (g_774970 * 0x21c + 0x7f4ca4)) {
+				if (*(int*) (ent + 2) == *(int*) (gm_LocalPlayerSlot * 0x21c + 0x7f4ca4)) {
 					state = 1;
 				}
 			}
@@ -98,7 +98,7 @@ void __cdecl d2_RunPlayerStammtischDialog(int building, int table)
 						i = 0;
 						p = (int*) (next + 0x1c);
 						do {
-							if (*p == *(int*) (g_774970 * 0x21c + 0x7f4ca4)) {
+							if (*p == *(int*) (gm_LocalPlayerSlot * 0x21c + 0x7f4ca4)) {
 								state = 4;
 								break;
 							}
@@ -120,11 +120,11 @@ void __cdecl d2_RunPlayerStammtischDialog(int building, int table)
 			if (n == 0) {
 				io_AppendText((char*) 0x188e);
 			} else {
-				x0 = *(int*) (g_77255c + 0xc) + *(short*) (g_772500 + 0x1ebd8) * -2;
+				x0 = *(int*) (d2_CurrentWindow + 0xc) + *(short*) (d2_FileObjTable + 0x1ebd8) * -2;
 				p = sel[0];
 				for (i = 0; i < n; i++) {
 					p[0xc] = 1;
-					p[4] = (i % 2 + 1) * (x0 / 3) + -10 + (x0 % 3) / 2 + (*(short*) (g_772500 + 0x1ebd8) + 10) * (i % 2);
+					p[4] = (i % 2 + 1) * (x0 / 3) + -10 + (x0 % 3) / 2 + (*(short*) (d2_FileObjTable + 0x1ebd8) + 10) * (i % 2);
 					p[5] = (i / 2) * 0x82 + 100;
 					d2_BuildPersonStatusDesc(p);
 					d2_DrawPersonCard(p[4], p[5], d2_CurrentWindowId, 0x54, p, 1);
@@ -133,7 +133,7 @@ void __cdecl d2_RunPlayerStammtischDialog(int building, int table)
 			}
 			d2_SetForm(win, 2);
 			d2_ClearWindowChildren(d2_CurrentWindowId, 1);
-			io_AppendText(g_6811b0);
+			io_AppendText(str_dollar_C);
 			btn = -1;
 			if (state == 2) {
 				io_AppendText((char*) 0x1892);
@@ -145,15 +145,15 @@ void __cdecl d2_RunPlayerStammtischDialog(int building, int table)
 				btn = d2_GetWindowListItem(win, 2, io_AppendText((char*) 0x1890));
 			}
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
-		} else if (g_100f1dc != -1 && d2_CurrentElementId == btn && state == 3) {
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
+		} else if (d2_DialogButtonAction != -1 && d2_CurrentElementId == btn && state == 3) {
 			char buf[0x200] = "";
 
-			if (g_100f1dc == 2) {
+			if (d2_DialogButtonAction == 2) {
 				join[0] = 0x6a6f696e;
 				join[2] = *(int*) (building + 1);
-				join[1] = *(int*) (g_774970 * 0x21c + 0x7f4ca4);
+				join[1] = *(int*) (gm_LocalPlayerSlot * 0x21c + 0x7f4ca4);
 				cm_SendLogAction("stammtisch join H-Plr");
 				next = cm_RequestJoinLeaveElection(join);
 				cm_SendTraceEnd("stammtisch join H-Plr");

@@ -1,7 +1,7 @@
 
 
 
-extern char g_7f4ca4[];
+extern char gm_EntityIdField[];
 
 
 void* __cdecl gm_GetGuildHall(int);
@@ -29,8 +29,8 @@ int __cdecl hst_HandleVermoegenSteuer(int sel, int id, char* arg)
 	scale = (float) atoi(arg + 1) * 0.01f;
 	for (i = 0; i < 0x300; i++) {
 		if (gm_IsSlotActivePerson(i) != 0) {
-			cm_RequestTransferCurrencyNoKill(*(int*) (obj + 2), *(int*) (g_7f4ca4 + i * 0x21c), 0,
-			    (int) ((float) gm_WalkEntityChain(*(unsigned short*) (g_7f4ca4 + i * 0x21c - 4)) * scale));
+			cm_RequestTransferCurrencyNoKill(*(int*) (obj + 2), *(int*) (gm_EntityIdField + i * 0x21c), 0,
+			    (int) ((float) gm_WalkEntityChain(*(unsigned short*) (gm_EntityIdField + i * 0x21c - 4)) * scale));
 		}
 	}
 	return 1;

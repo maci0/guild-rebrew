@@ -19,17 +19,17 @@ typedef struct {
 	char pad60[0x98];           /* 0x60 */
 } BLUTRACHE_PACKET_F8;                 /* SIZE 0xf8 */
 
-extern char g_6811b0[];
+extern char str_dollar_C[];
 extern int d2_CurrentWindowId;
-extern unsigned short g_774970;
-extern unsigned char g_773d75;
+extern unsigned short gm_LocalPlayerSlot;
+extern unsigned char gm_ActiveTownIndex;
 extern pos14_7f4c00 gm_GameTime;
-extern char g_7f4ca0[];
-extern char g_7f4ca4[];
-extern int g_100f1dc;
-extern int g_14ce8e0;
-extern int g_774654;
-extern int g_666018, g_66601c;
+extern char gm_EntitySlotTable[];
+extern char gm_EntityIdField[];
+extern int d2_DialogButtonAction;
+extern int io_RightButtonReleased;
+extern int d2_DialogCloseRequested;
+extern int gm_TargetPersonTypeMask, g_66601c;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 int __cdecl d3snd_PlaySoundEffect(int, int, char*, int);
 void __cdecl d2_ShowGreenMessageBox(int, int, int);
@@ -70,14 +70,14 @@ void __cdecl d2_RunBlutracheDialog(char* entity)
 	int max_val;
 	int val;
 
-	if (*(unsigned char*) &((ENTITY_RECORD*) g_7f4ca0)[g_774970].entity_flags & 0x10) {
+	if (*(unsigned char*) &((ENTITY_RECORD*) gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_flags & 0x10) {
 		d3snd_PlaySoundEffect(-7, 0, (char*) 0x6ad46c, -1);
 		d2_ShowGreenMessageBox(*(int*) 0x14b5a24, *(int*) 0x14b5a28, 0);
 		return;
 	}
 	memset(query, 0, sizeof(query));
 	memset(query + 7, -1, 8 * sizeof(int));
-	query[2] = g_666018;
+	query[2] = gm_TargetPersonTypeMask;
 	query[3] = g_66601c;
 	query[0] = 1;
 	query[1] = 0x400;
@@ -109,28 +109,28 @@ void __cdecl d2_RunBlutracheDialog(char* entity)
 		d2_SetElementValue(control, 0, max_val, val, 1);
 		io_FormatTextBuffer(text, val + 0x41d0, *(unsigned short*) target);
 		d2_SetForm(dialog, 1);
-		io_AppendText((int) g_6811b0);
+		io_AppendText((int) str_dollar_C);
 		io_AppendText(0x41d6, 0x41c1, val + 0x41c4, text);
-		if (g_774970 != *(unsigned short*) (entity + 0x27)) {
+		if (gm_LocalPlayerSlot != *(unsigned short*) (entity + 0x27)) {
 			io_AppendText(0x41d7, (val > 1 ? val : 1) * 32000);
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
-		} else if (g_100f1dc != -1) {
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
+		} else if (d2_DialogButtonAction != -1) {
 			int clicked = *(int*) 0x67d370;
 			if (clicked == ids[0]) {
-				if (gm_CheckEntityStock((char*) &((ENTITY_RECORD*) g_7f4ca0)[g_774970], val, g_773d75) != 0) {
-					cm_RequestChangeBits(((ENTITY_RECORD*) g_7f4ca0)[g_774970].entity_id, 0x1cc, 4, 0x10, 0);
-					if (g_774970 != *(unsigned short*) (entity + 0x27)) {
-						cm_RequestTransferCurrencyNoKill(-1, ((ENTITY_RECORD*) g_7f4ca0)[g_774970].entity_id,
-						             g_773d75, (val > 1 ? val : 1) * 32000);
+				if (gm_CheckEntityStock((char*) &((ENTITY_RECORD*) gm_EntitySlotTable)[gm_LocalPlayerSlot], val, gm_ActiveTownIndex) != 0) {
+					cm_RequestChangeBits(((ENTITY_RECORD*) gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id, 0x1cc, 4, 0x10, 0);
+					if (gm_LocalPlayerSlot != *(unsigned short*) (entity + 0x27)) {
+						cm_RequestTransferCurrencyNoKill(-1, ((ENTITY_RECORD*) gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id,
+						             gm_ActiveTownIndex, (val > 1 ? val : 1) * 32000);
 					}
 					memset(&pkt, 0, sizeof(pkt));
 					pkt.b4 = 0x9d;
 					pkt.fc = -1;
 					pkt.b36 = 2;
 					pkt.val = val;
-					pkt.f8 = ((ENTITY_RECORD*) g_7f4ca0)[g_774970].entity_id;
+					pkt.f8 = ((ENTITY_RECORD*) gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id;
 					pkt.pos = gm_GameTime;
 					pkt.target_id = *(int*) (target + 4);
 					cm_SendCopyEntityData(&pkt);
@@ -138,10 +138,10 @@ void __cdecl d2_RunBlutracheDialog(char* entity)
 					fcn_0064d41a(buf, (char*) 0x6ad454, val);
 					d3snd_PlaySoundEffect(-7, 0, buf, -1);
 					d2_ShowModalMessageBox(text, 0);
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				}
 			} else if (clicked == ids[1]) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	} while (main_RunFrameLoop((void*) d2_RunBlutracheDialog, 0x677c7) != 0);

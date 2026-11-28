@@ -22,7 +22,7 @@ typedef struct Pos_554b90 {
 } Pos_554b90;
 #pragma pack(pop)
 
-extern House_554b90 g_7f4ca0[768];
+extern House_554b90 gm_EntitySlotTable[768];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern Pos_554b90 gm_GameTime;
 
@@ -64,7 +64,7 @@ void __cdecl he_RunAction0x67(char* e)
 			return;
 		}
 		io_FormatTextBuffer(buf, 0x11be, r, *(int*) (e + 0xb0));
-		for (i = 0; i < 768; i++) { h = &g_7f4ca0[i];
+		for (i = 0; i < 768; i++) { h = &gm_EntitySlotTable[i];
 
 			if ((h->type == 6 || h->type == 7) && h->level > 0) {
 				he_PostEntityMessage(h->handle, h->handle, buf, 0, 0x601, 0);
@@ -80,7 +80,7 @@ void __cdecl he_RunAction0x67(char* e)
 		memset(vals, 0, sizeof(vals));
 		memset(msg, 0, sizeof(msg));
 		L.n = 0;
-		for (i = 0; i < 768; i++) { h = &g_7f4ca0[i];
+		for (i = 0; i < 768; i++) { h = &gm_EntitySlotTable[i];
 
 			if (L.n >= 8) {
 				break;
@@ -90,7 +90,7 @@ void __cdecl he_RunAction0x67(char* e)
 				L.n++;
 			}
 		}
-		for (h = g_7f4ca0; (int) h < (int) (g_7f4ca0 + 768); h++) {
+		for (h = gm_EntitySlotTable; (int) h < (int) (gm_EntitySlotTable + 768); h++) {
 			if (h->level > 0 && h->busy == 0 && (h->type == 5 || h->type == 3 || h->type == 4)) {
 				v = gm_AccumulateTyped2(h);
 				if (v >= *(int*) (e + 0xb0)) {
@@ -130,7 +130,7 @@ put:
 			msg[0x26] = 0x22;
 			*(int*) (msg + 0x14) = -1;
 			msg[0x30] = (char) L.n;
-			*(int*) (msg + 0xc) = g_7f4ca0[g_774970].handle;
+			*(int*) (msg + 0xc) = gm_EntitySlotTable[gm_LocalPlayerSlot].handle;
 			*(int*) (msg + 0x7c) = *(int*) (e + 0xac);
 			*(int*) (msg + 0x80) = *(int*) (e + 0xb0);
 			*(int*) (msg + 0x84) = 0;

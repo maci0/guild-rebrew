@@ -1,4 +1,4 @@
-extern int g_67a370;
+extern int d3_ActiveScene;
 
 char __cdecl d3sm_SampleHeight(char*, float*, int*, int*, float*);
 unsigned short __cdecl gm_RandomMod(int);
@@ -17,7 +17,7 @@ int __cdecl ch_SelectNearbyPosition(float* pos, int marker)
 	int x;
 	int y;
 
-	map = *(char**) (((char*)g_67a370) + 0xb0);
+	map = *(char**) (((char*)d3_ActiveScene) + 0xb0);
 	if (map == 0) {
 		return 0;
 	}

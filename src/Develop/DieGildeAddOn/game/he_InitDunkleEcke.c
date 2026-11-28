@@ -53,7 +53,7 @@ void __cdecl he_InitDunkleEcke(char* u)
 				int t = gm_GameTime.a;
 
 				cm_BeginPacketFieldDelta(q, *(int*) (q + 2));
-				cm_AppendPacketFieldDelta(4, 1, q - g_aed32c + 0x28, &t);
+				cm_AppendPacketFieldDelta(4, 1, q - cm_PacketDeltaBase + 0x28, &t);
 				cm_RequestChangeAttribute();
 				cm_SendLogAction(g_67ec2c);
 				*(int*) (u + 0xac) = cm_SendAllocCharacter(0xe, *(int*) (o + 1), -1, 0, 0, 0, "DunkleEcke");

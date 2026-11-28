@@ -1,5 +1,5 @@
-extern char g_774a80[];
-extern char g_6b5c60[];
+extern char io_MessageFormatBuf[];
+extern char str_empty[];
 
 
 int  __cdecl main_GetLanguage(void);
@@ -15,14 +15,14 @@ void __cdecl he_NotifyFriedhofEvent0x414f(void* entity, void* otherEntity, int t
 		switch (main_GetLanguage()) {
 		case 0:
 		case 2:
-			io_FormatTextBuffer(g_774a80, 0x414f, *(unsigned short*) otherEntity, targetPtr,
+			io_FormatTextBuffer(io_MessageFormatBuf, 0x414f, *(unsigned short*) otherEntity, targetPtr,
 			    *(int*) (0x665f78 + actionKind * 4), amount, bonus);
 			break;
 		case 1:
-			io_FormatTextBuffer(g_774a80, 0x414f, *(unsigned short*) otherEntity,
+			io_FormatTextBuffer(io_MessageFormatBuf, 0x414f, *(unsigned short*) otherEntity,
 			    *(int*) (0x665f78 + actionKind * 4), targetPtr, amount, bonus);
 			break;
 		}
-		he_PostEntityMessage(*(int*) ((char*) entity + 4), -1, g_774a80, 0, 0x5fc, g_6b5c60);
+		he_PostEntityMessage(*(int*) ((char*) entity + 4), -1, io_MessageFormatBuf, 0, 0x5fc, str_empty);
 	}
 }

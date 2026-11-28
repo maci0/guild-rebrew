@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern char g_6b5c60[];
+extern char str_empty[];
 
 void* __cdecl m_alloc(int size, char* tag);
 void __cdecl d3_LoadFloorTexture(int* obj, char* name, int flag);
@@ -66,7 +66,7 @@ int* __cdecl d3_CreateFloor(int gridSize, char* a1, char* a2, char** a3, float a
 	*(float*) (obj + 0x1e) = -a4;
 	p = (char*) obj + 0x7e24;
 	for (i = 0; i < 8; i++) {
-		*p = g_6b5c60[0];
+		*p = str_empty[0];
 		if (a3[i] != 0 && a3[i][0] != 0) {
 			d3_LoadFloorTexture(obj, a3[i], -1);
 		}

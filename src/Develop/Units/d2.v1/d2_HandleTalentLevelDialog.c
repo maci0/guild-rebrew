@@ -15,12 +15,12 @@ typedef struct {
 } Panel;
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_774964;
+extern char gm_InWorldHud;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 extern int g_100f884;
 extern char g_7749e8;
-extern int g_7749e4;
-extern int g_100f1dc;
+extern int tp_d2_ActiveHudSlot;
+extern int d2_DialogButtonAction;
 
 int __cdecl gm_CompareGameTime(char* name, char* list);
 void __cdecl d2_CloseActionPopup(Panel* p);
@@ -39,11 +39,11 @@ void __cdecl d2_HandleTalentLevelDialog(Panel* p)
 	int v;
 
 	id = (int) p->id;
-	rec = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id]);
-	if (g_774970 != p->id) {
+	rec = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id]);
+	if (gm_LocalPlayerSlot != p->id) {
 		return;
 	}
-	if (g_774964 == 0) {
+	if (gm_InWorldHud == 0) {
 		return;
 	}
 	if (gm_CompareGameTime(p->name, (char*) 0x7f4c00) == 1) {
@@ -67,10 +67,10 @@ void __cdecl d2_HandleTalentLevelDialog(Panel* p)
 		p->state = 0;
 		return;
 	}
-	if ((g_100f884 != *(int*) (p->handle + 8) && g_7749e8 == 0) && g_100f1dc == -1) {
+	if ((g_100f884 != *(int*) (p->handle + 8) && g_7749e8 == 0) && d2_DialogButtonAction == -1) {
 		return;
 	}
-	if (g_100f1dc == 2) {
+	if (d2_DialogButtonAction == 2) {
 		d2_CloseActionPopup(p);
 		he_FreeAction(p);
 		return;
@@ -78,7 +78,7 @@ void __cdecl d2_HandleTalentLevelDialog(Panel* p)
 	if (g_7749e8 == 0) {
 		return;
 	}
-	if (g_7749e4 != (int) p->handle) {
+	if (tp_d2_ActiveHudSlot != (int) p->handle) {
 		return;
 	}
 	g_7749e8 = 0;

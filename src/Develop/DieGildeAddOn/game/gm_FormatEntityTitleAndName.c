@@ -1,8 +1,8 @@
-extern char g_6b5c60[];
+extern char str_empty[];
 extern char* txt_TextEntries[];
 extern char* g_14a5770[];
-extern char* g_14abc28;
-extern unsigned char g_773d75;
+extern char* txt_NoEntityName;
+extern unsigned char gm_ActiveTownIndex;
 extern char* gm_CityEntity;
 
 #include <string.h>
@@ -22,14 +22,14 @@ int __cdecl gm_FormatEntityTitleAndName(int entityIndex, unsigned char a2, int a
 	unsigned char loc[0x21c];
 	char* p;
 	int i;
-	b1[0] = g_6b5c60[0];
+	b1[0] = str_empty[0];
 	memset(&b1[1], 0, 255);
-	b3[0] = g_6b5c60[0];
+	b3[0] = str_empty[0];
 	memset(&b3[1], 0, 255);
-	b2[0] = g_6b5c60[0];
+	b2[0] = str_empty[0];
 	memset(&b2[1], 0, 255);
 	if (entityIndex < 0 || entityIndex == 0xffff) {
-		strcpy(nameOut, g_14abc28);
+		strcpy(nameOut, txt_NoEntityName);
 		return 0;
 	}
 	if (entityIndex != 0xfffe) {
@@ -40,7 +40,7 @@ int __cdecl gm_FormatEntityTitleAndName(int entityIndex, unsigned char a2, int a
 		strcpy((char*) p + 0x30, g_14a5770[2]);
 	}
 	if (p == (char*) gm_CityEntity) {
-		strcpy(nameOut, (char*) 0x868060 + g_773d75 * 0x2f4);
+		strcpy(nameOut, (char*) 0x868060 + gm_ActiveTownIndex * 0x2f4);
 		if (a2 != 2) {
 			return 1;
 		}

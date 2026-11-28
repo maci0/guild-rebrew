@@ -9,14 +9,14 @@ typedef struct {
 	unsigned char x;
 } V43a3f0;
 
-extern char* g_772f24;
+extern char* cut_ActivePlayerEntity;
 extern int g_68b79c;
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 extern char* ch_ContextCharacters[32];
 extern float g_6628a4;
 
-extern float g_662cf8;
-extern double g_6640e8;
+extern float flt_100_0;
+extern double dbl_0_01;
 extern double g_664ee8;
 extern double g_662ad8;
 
@@ -58,8 +58,8 @@ void __cdecl cut_UpdateCombatEffects(void)
 	int found;
 	int t;
 
-	if (*(int*) (g_772f24 + 4) == g_68b79c) {
-		if ((unsigned int) g_6b7fac % 350 == 0) {
+	if (*(int*) (cut_ActivePlayerEntity + 4) == g_68b79c) {
+		if ((unsigned int) gm_GameTicks % 350 == 0) {
 			for (p = ch_ContextCharacters; (int) p < (int) &ch_ContextCharacters[32]; p++) {
 				e = *p;
 				if (e == 0) {
@@ -91,8 +91,8 @@ void __cdecl cut_UpdateCombatEffects(void)
 		s = gm_GetEquippedCombatGear(e);
 		if (s != 0 && *(int*) s == 0x172) {
 			t = 0;
-			if (g_772f24 != 0) {
-				t = gm_GetEntityControlMask((int) *(unsigned short*) g_772f24, e);
+			if (cut_ActivePlayerEntity != 0) {
+				t = gm_GetEntityControlMask((int) *(unsigned short*) cut_ActivePlayerEntity, e);
 			}
 			o = *(char**) (e + 0x184);
 			if (t & 0x800) {

@@ -1,8 +1,8 @@
 
 
 
-extern int g_7746d8;
-extern int g_7746a0;
+extern int d2_SelectedEntityUiFlags;
+extern int sv_ClickedObjekt;
 extern int g_14ad118;
 extern int g_14ad110;
 extern int g_14ad108;
@@ -71,7 +71,7 @@ void __cdecl d2_RunRaeuberInteriorHud(char* e)
 	d2_ClearStatusTextSlots();
 	if (main_RunFrameLoop((void*) d2_RunRaeuberInteriorHud, 0x67fff) != 0) {
 		do {
-			if (g_7746d8 & 0x200) {
+			if (d2_SelectedEntityUiFlags & 0x200) {
 				a = RegisterStatusText(s_6aa5ac, g_14ad118, 0xd);
 				b = RegisterStatusText(s_6aa594, g_14ad110, 0x15);
 				c = RegisterStatusText(s_6aa584, g_14ad108, 0x17);
@@ -86,41 +86,41 @@ void __cdecl d2_RunRaeuberInteriorHud(char* e)
 				m = RegisterStatusText(s_6aa52c, g_14abd28, 0x17);
 				g = RegisterStatusText(s_6aa514, g_14ad168, 0x17);
 			}
-			if (g_7746d8 & 0x400) {
+			if (d2_SelectedEntityUiFlags & 0x400) {
 				h = RegisterStatusText(s_6a9580, g_14ad0f0, 0xe);
 				i = RegisterStatusText(s_6aa3d0, g_14ad0e8, 0xe);
 				j = RegisterStatusText(s_6aa508, g_14ad100, 0x15);
 			}
 			d3_UpdateBuildingInteriorState();
-			if (g_7746a0 != 0) {
-				if (g_7746a0 == h) {
+			if (sv_ClickedObjekt != 0) {
+				if (sv_ClickedObjekt == h) {
 					d2_ShowLagerOptions(e, *(int*) (e + 0x5d));
 				}
-				else if (g_7746a0 == i) {
+				else if (sv_ClickedObjekt == i) {
 					d2_RunGelageDialog(e);
 				}
-				else if (g_7746a0 == j) {
+				else if (sv_ClickedObjekt == j) {
 					d2_OpenTransportPanel(e);
 				}
-				else if (g_7746a0 == a) {
+				else if (sv_ClickedObjekt == a) {
 					d2_RunEquipmentDialog(e);
 				}
-				else if (g_7746a0 == f || g_7746a0 == d || g_7746a0 == g) {
+				else if (sv_ClickedObjekt == f || sv_ClickedObjekt == d || sv_ClickedObjekt == g) {
 					d2_RunWorkerTrainingDialog(e);
 				}
-				else if (g_7746a0 == b) {
+				else if (sv_ClickedObjekt == b) {
 					d2_OpenUeberfallDialog(e);
 				}
-				else if (g_7746a0 == c) {
+				else if (sv_ClickedObjekt == c) {
 					d2_SelectPickpocketTarget(e);
 				}
-				else if (g_7746a0 == k) {
+				else if (sv_ClickedObjekt == k) {
 					d2_SelectSchutzgeldTarget(e);
 				}
-				else if (g_7746a0 == l) {
+				else if (sv_ClickedObjekt == l) {
 					d2_SelectBriberyTarget(e);
 				}
-				else if (g_7746a0 == m) {
+				else if (sv_ClickedObjekt == m) {
 					d2_StartRaubzugTargetSelect(e);
 				}
 			}

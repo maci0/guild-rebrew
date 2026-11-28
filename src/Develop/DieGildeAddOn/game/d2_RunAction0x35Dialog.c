@@ -16,9 +16,9 @@
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern unsigned short g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
+extern unsigned short gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
 extern char g_6ac494[];
 
 int __cdecl he_CountEntityActions(void*, unsigned short*, int*);
@@ -53,15 +53,15 @@ int __cdecl d2_RunAction0x35Dialog(unsigned short* obj)
 	if (*obj == 0xffff) {
 		return 0;
 	}
-	if (*obj == g_774970) {
+	if (*obj == gm_LocalPlayerSlot) {
 		return 0;
 	}
-	if (he_CountEntityActions(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), obj, &cnt) == 0) {
+	if (he_CountEntityActions(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot]), obj, &cnt) == 0) {
 		io_FormatTextBuffer(text, 0x190f, *obj);
 		d2_ShowModalMessageBox(text, 0);
 		return 0;
 	}
-	if (he_HasNoActiveAction0x88(obj, ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970])) == 0) {
+	if (he_HasNoActiveAction0x88(obj, ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot])) == 0) {
 		io_FormatTextBuffer(text, 0x409f, *obj);
 		d2_ShowModalMessageBox(text, 0);
 		return 0;
@@ -71,7 +71,7 @@ int __cdecl d2_RunAction0x35Dialog(unsigned short* obj)
 		d2_ShowModalMessageBox(text, 0);
 		return 0;
 	}
-	if (d2_CheckActionBlocker(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), 1) == 0) {
+	if (d2_CheckActionBlocker(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot]), 1) == 0) {
 		return 0;
 	}
 	d = d2_LoadForm(0, 0, g_6ac494);
@@ -87,32 +87,32 @@ int __cdecl d2_RunAction0x35Dialog(unsigned short* obj)
 	arr[2] = 3;
 	arr[5] = 3;
 	d2_DrawLawCandidateStatus(arr);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc != -1) {
-			if (g_100f1dc == 2) {
+		if (d2_DialogButtonAction != -1) {
+			if (d2_DialogButtonAction == 2) {
 				char ev[0xf8];
 
 				gm_StartFilteredEntitySearch(1, 5, 0xa);
 				ev[4] = 0x35;
 				ev[0x36] = 2;
-				*(int*) (ev + 8) = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id;
-				*(int*) (ev + 0xc) = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id;
+				*(int*) (ev + 8) = ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id;
+				*(int*) (ev + 0xc) = ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id;
 				*(int*) (ev + 0x58) = (*(int*)&gm_GameTime);
-				*(int*) (ev + 0x5c) = (*(int*)&g_7f4c04);
-				*(int*) (ev + 0x60) = g_7f4c08;
-				*(short*) (ev + 0x64) = g_7f4c0c;
+				*(int*) (ev + 0x5c) = (*(int*)&gm_GameTimeHour);
+				*(int*) (ev + 0x60) = gm_GameTimeSliceDword;
+				*(short*) (ev + 0x64) = gm_GameTimeTailWord;
 				ev[0x6d] = (char) gm_RandomMod(0x1d);
 				*(int*) (ev + 0x68) = *(int*) (obj + 2);
 				cm_SendCopyEntityData(ev);
 				res = 1;
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
-			else if (g_100f1dc == 1) {
-				g_774654 = 1;
+			else if (d2_DialogButtonAction == 1) {
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	} while (main_RunFrameLoop((void*) d2_RunAction0x35Dialog, 0x677c7) != 0);

@@ -6,7 +6,7 @@ extern int g_99f724;
 extern int g_99f768;
 extern int g_99f7ac;
 extern int g_99f7f0;
-extern int g_773d48;
+extern int gm_QueuedCommandCount;
 extern unsigned char* lpGebaeudePROT;
 extern char* lpGebaeudeINST;
 
@@ -36,7 +36,7 @@ void __cdecl gm_AdvanceRoundCounters(int flag)
 	g_99f768 = 0;
 	g_99f7ac = 0;
 	g_99f7f0 = 0;
-	g_773d48 = 0;
+	gm_QueuedCommandCount = 0;
 	i = 0;
 	p = (char*) 0x7f4e38;
 	{
@@ -44,9 +44,9 @@ void __cdecl gm_AdvanceRoundCounters(int flag)
 
 		do {
 			gm_CalcEntityTaxSlots((unsigned short) i, out, flag); *(int*) (p + 4) = 0; *(int*) p = 0;
-			if (g_773d48 > 0x40) {
+			if (gm_QueuedCommandCount > 0x40) {
 				cm_StepCommandQueue();
-				g_773d48 = 0;
+				gm_QueuedCommandCount = 0;
 			}
 
 

@@ -1,7 +1,7 @@
 #include <string.h>
-extern int* g_6b89e8;
-extern int g_6b89c4[8];
-extern char g_662dc8[15][9];
+extern int* d3_CachedTerrainMap;
+extern int d3_TerrainLayerSurfaceTypes[8];
+extern char d3_TerrainSurfaceNames[15][9];
 
 
 int __cdecl d3sm_GetCellMaterial(int x, int y, int* img)
@@ -14,19 +14,19 @@ int __cdecl d3sm_GetCellMaterial(int x, int y, int* img)
 	if ((((unsigned char*) img[5])[off] & 0x80) != 0) {
 		return 0;
 	}
-	if (g_6b89e8 != img) {
+	if (d3_CachedTerrainMap != img) {
 		for (k = 0; k < 8; k++) {
-			g_6b89c4[k] = 1;
+			d3_TerrainLayerSurfaceTypes[k] = 1;
 			if (((char*) img)[0x7e24 + k * 0x40] != 0) {
 				for (i = 0; i < 15; i++) {
-					if (strstr(_strupr((char*) img + 0x7e24 + k * 0x40), g_662dc8[i]) != 0) {
-						g_6b89c4[k] = i;
+					if (strstr(_strupr((char*) img + 0x7e24 + k * 0x40), d3_TerrainSurfaceNames[i]) != 0) {
+						d3_TerrainLayerSurfaceTypes[k] = i;
 						break;
 					}
 				}
 			}
 		}
-		g_6b89e8 = img;
+		d3_CachedTerrainMap = img;
 	}
-	return g_6b89c4[((unsigned char*) img[5])[off]];
+	return d3_TerrainLayerSurfaceTypes[((unsigned char*) img[5])[off]];
 }

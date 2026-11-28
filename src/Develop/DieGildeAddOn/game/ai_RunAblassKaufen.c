@@ -5,8 +5,8 @@
 
 #pragma intrinsic(log10)
 
-extern char g_7f4ca0[];
-extern char g_773d75;
+extern char gm_EntitySlotTable[];
+extern char gm_ActiveTownIndex;
 extern float g_1009b6c;
 extern float g_1009b74;
 extern float g_1009b7c;
@@ -52,14 +52,14 @@ int __cdecl ai_RunAblassKaufen(int entityArg, char* purchaseReq, char* commandAr
 		cm_BeginPacketFieldDelta(entityArg, *(int*) (entityArg + 4));
 		cm_AppendPacketFieldValue(4, 1, 0x1ac, purchaseReq + 0x10);
 		cm_RequestChangeAttribute();
-		cm_RequestTransferCurrencyNoKill(-1, *(int*) (entityArg + 4), g_773d75,
+		cm_RequestTransferCurrencyNoKill(-1, *(int*) (entityArg + 4), gm_ActiveTownIndex,
 		    *(int*) (purchaseReq + 0x10));
-		cm_RequestTransferCurrencyNoKill(*(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (rec + 0x27)]
+		cm_RequestTransferCurrencyNoKill(*(int*) ((char *)&((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (rec + 0x27)]
 			+ 4),
-		    -1, g_773d75, computedAmount);
+		    -1, gm_ActiveTownIndex, computedAmount);
 		gs_ClearTargetStraftaten(*(int*) (entityArg + 4), (int) *(float*) (purchaseReq + 0x14));
 		he_NotifyAblassPurchase(entityArg,
-		    (char *)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (rec + 0x27)],
+		    (char *)&((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (rec + 0x27)],
 		    rec, computedAmount, *(int*) (purchaseReq + 0x10));
 		g_1009b8c = g_1009b6c * *(float*) (purchaseReq + 0x14);
 		g_1009b94 = g_1009b74 * *(float*) (purchaseReq + 0x14);
@@ -69,10 +69,10 @@ int __cdecl ai_RunAblassKaufen(int entityArg, char* purchaseReq, char* commandAr
 	if (cmd == 0x0f && itemMatch != 0) {
 		gs_ClearTargetStraftaten(*(int*) (entityArg + 4), (int) *(float*) (purchaseReq + 0x14));
 		gm_ModifyHealth(*(int*) (entityArg + 4), -*(int*) (purchaseReq + 0x10));
-		gm_ModifyHealth(*(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (rec + 0x27)]
+		gm_ModifyHealth(*(int*) ((char *)&((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (rec + 0x27)]
 			+ 4), 1);
 		he_NotifyConfession(entityArg,
-		    (char *)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (rec + 0x27)], rec);
+		    (char *)&((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (rec + 0x27)], rec);
 		return 0x26;
 	}
 	return 0;

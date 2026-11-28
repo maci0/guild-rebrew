@@ -5,8 +5,8 @@
 #include "Develop/client_types.h"
 typedef SOUND_VOICE Voice;
 
-extern int g_6b7d7c;
-extern SOUND_VOICE g_14cbbe0;
+extern int sb_WaveDriver;
+extern SOUND_VOICE sb_DummyVoice;
 Voice* __cdecl sb_AllocVoice(void);
 char* __cdecl sb_FindSampleByName(char* bank, const char* name);
 char* __cdecl sb_FindSampleBank(char* sample);
@@ -18,8 +18,8 @@ Voice* __cdecl sb_PlayPrioritizedVoice(char* bank, const char* name, int prio, i
 	Voice* v;
 	char* s;
 
-	if (g_6b7d7c == 0) {
-		return &g_14cbbe0;
+	if (sb_WaveDriver == 0) {
+		return &sb_DummyVoice;
 	}
 	v = sb_AllocVoice();
 	if (v != 0) {

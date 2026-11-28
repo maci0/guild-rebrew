@@ -1,5 +1,5 @@
-extern int g_67a370;
-extern volatile int g_6b7fac;
+extern int d3_ActiveScene;
+extern volatile int gm_GameTicks;
 
 // SIZE 0x10c
 struct s_7e6060 {
@@ -27,7 +27,7 @@ void __cdecl d2_SetHoverTooltip(char* obj, int text_id, char* name)
 	if (obj == 0) {
 		return;
 	}
-	if (*(char**) (obj + 0x88) != ((char*)g_67a370)) {
+	if (*(char**) (obj + 0x88) != ((char*)d3_ActiveScene)) {
 		return;
 	}
 	for (i = 0; i < 64; i++) {
@@ -43,7 +43,7 @@ void __cdecl d2_SetHoverTooltip(char* obj, int text_id, char* name)
 	if (k >= 64) {
 		int now;
 
-		now = g_6b7fac;
+		now = gm_GameTicks;
 		k = -1;
 		for (i = 0; i < 64; i++) {
 			if (g_7e6060[i].t < now) {
@@ -55,7 +55,7 @@ void __cdecl d2_SetHoverTooltip(char* obj, int text_id, char* name)
 		}
 	}
 	slot = &g_7e6060[k];
-	slot->t = g_6b7fac;
+	slot->t = gm_GameTicks;
 	slot->o = obj;
 	slot->a = text_id;
 	*(void**) (obj + 0x228) = (void*) d2_ClearHoverTooltipSlot;

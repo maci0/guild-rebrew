@@ -32,11 +32,11 @@ typedef struct Req {
 
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_10069a0[];
+extern char gm_MissionJobs[];
 extern int d2_CurrentElementId;
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern signed char g_6a3440;
+extern signed char gm_SelectedMissionIndex;
 
 Spec* __cdecl gm_LookupMissionSpec(int op);
 void __cdecl d2_RunMissionBriefingDialog(Spec* s, int flags);
@@ -78,12 +78,12 @@ void __cdecl d2_RunMissionDialog(int flags)
 	s = 0;
 	done = 0;
 	cancel = 0;
-	ent = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]);
+	ent = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot]);
 	for (i = 0; i < 128; i++) {
-		if (((Job*)g_10069a0)[i].op != 0 && ((Job*)g_10069a0)[i].id == ent->entity_id) {
-			s = gm_LookupMissionSpec(((Job*)g_10069a0)[i].op);
+		if (((Job*)gm_MissionJobs)[i].op != 0 && ((Job*)gm_MissionJobs)[i].id == ent->entity_id) {
+			s = gm_LookupMissionSpec(((Job*)gm_MissionJobs)[i].op);
 			level = s->level + 1;
-			memset(&((Job*)g_10069a0)[i], 0, sizeof(Job));
+			memset(&((Job*)gm_MissionJobs)[i], 0, sizeof(Job));
 			break;
 		}
 	}
@@ -98,24 +98,24 @@ void __cdecl d2_RunMissionDialog(int flags)
 	}
 	b_back = d2_GetWindowListItem(dlg, 1, io_AppendText(0x1b96, 0x1b99));
 	b_quit = d2_GetWindowListItem(dlg, 1, io_AppendText(0x1b96, 0x1b9a));
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	mode = flags | 0x80;
 	do {
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == b_ok) {
 				done = 1;
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			} else if (d2_CurrentElementId == b_back) {
-				g_6a3440 = -1;
+				gm_SelectedMissionIndex = -1;
 				m1.id = ent->entity_id;
 				m1.x10 = 0;
 				h = cm_RequestSysMessage(10, &m1);
 				while (cm_GetCommandStatus(h) == 0) {
 					cm_StepCommandQueue();
 				}
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			} else if (d2_CurrentElementId == b_quit) {
-				g_6a3440 = -1;
+				gm_SelectedMissionIndex = -1;
 				m2.id = ent->entity_id;
 				cancel = 1;
 				m2.x10 = 1;
@@ -123,7 +123,7 @@ void __cdecl d2_RunMissionDialog(int flags)
 				while (cm_GetCommandStatus(h) == 0) {
 					cm_StepCommandQueue();
 				}
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	} while (main_RunFrameLoop(d2_RunMissionDialog, mode) != 0);

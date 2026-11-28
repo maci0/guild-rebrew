@@ -28,12 +28,12 @@ void __cdecl d3_RenderScene(unsigned int pass, int overlay)
     unsigned char c633450;
     float distance;
     float density;
-    if (g_6b86d4 < 0)
-        g_6b86d4 = 0;
-    if (!*(unsigned char*) 0x633451 || g_6b86d4 || !d3_ActiveCamera)
+    if (d3_SceneRenderLock < 0)
+        d3_SceneRenderLock = 0;
+    if (!*(unsigned char*) 0x633451 || d3_SceneRenderLock || !d3_ActiveCamera)
         return;
     c633450 = *(unsigned char*) 0x633450;
-    g_6b86d4 = 1;
+    d3_SceneRenderLock = 1;
     if (c633450)
         d3_ClearViewport((void*) 0xfc2930);
     else
@@ -47,10 +47,10 @@ void __cdecl d3_RenderScene(unsigned int pass, int overlay)
     *(int*) (*(char**) (object + 0x1ec) + 0x100) = 0;
     object = *(char**) 0x633448;
     *(int*) (*(char**) (object + 0x1ec) + 0xfc) = 0;
-    if ((void*) g_6b8300) {
+    if ((void*) d3_CurrentFloor) {
         if (*(unsigned char*) 0x6334a4 && *(unsigned char*) 0x6334a5) {
             object = d3_ActiveCamera;
-            distance = d3_CalcFloorFogDistance((void*) g_6b8300, object + 0x4c, object + 0x18c);
+            distance = d3_CalcFloorFogDistance((void*) d3_CurrentFloor, object + 0x4c, object + 0x18c);
             if (distance < *(float*) 0xfc5340) {
                 density = (1.0f - (*(float*) 0xfc5340 - distance) / *(float*) 0xfc5340)
                     * *(float*) 0xfc29bc;
@@ -58,7 +58,7 @@ void __cdecl d3_RenderScene(unsigned int pass, int overlay)
             } else
                 d3_SetFogRange(*(float*) 0xfc29bc, *(float*) 0xfc5340);
         }
-        d3_RenderFloor((void*) g_6b8300, overlay);
+        d3_RenderFloor((void*) d3_CurrentFloor, overlay);
     }
     *(int*) 0x63344c = 0;
     d3_CollectFlaggedObjects();
@@ -93,7 +93,7 @@ void __cdecl d3_RenderScene(unsigned int pass, int overlay)
     d3_FlushRenderQueues();
     *(int*) 0x63347c = *(int*) 0xfe75b4;
     *(int*) 0x633480 = *(int*) 0xfc2dc0;
-    --g_6b86d4;
+    --d3_SceneRenderLock;
 }
 #else
 int __cdecl m_pool_clear();
@@ -141,10 +141,10 @@ struct D3_SCENE_MESH {
 extern void* g_6b5de0;
 extern char g_6b8018, g_6b8060, g_6b8061;
 extern float g_104329c, g_10425fc, g_10432a0, g_662c94;
-extern int g_6b89c0, g_6b8050, g_1042a08, g_10432a8, g_1042a04, g_6b8034;
+extern int g_6b89c0, g_6b8050, d3_RenderedFaceCount, d3_FrameFaceCount, d3_FrameVertexCount, g_6b8034;
 extern void* g_6b8068;
 extern char* g_6b86ec;
-extern char g_1052bd0[1];
+extern char d3_RenderQualityFlags[1];
 extern unsigned char g_6b7ffe;
 #define DEV_43ad20 ((D3_SCENE_DEVICE*) g_6b5de0)
 
@@ -158,14 +158,14 @@ void __cdecl d3_RenderScene(char a0, int a1)
 	float fogDistance;
 	int drawFlags;
 
-	v3 = g_6b86d4;
-	if (g_6b86d4 < 0) {
+	v3 = d3_SceneRenderLock;
+	if (d3_SceneRenderLock < 0) {
 		v3 = 0;
-		g_6b86d4 = 0;
+		d3_SceneRenderLock = 0;
 	}
 	if (g_6b8018 && !v3 && *(int*) 0x6b8014) {
 		v10 = 3;
-		g_6b86d4 = 1;
+		d3_SceneRenderLock = 1;
 		DEV_43ad20->vtbl->Clear(DEV_43ad20, 1, (void*) 0x1042570, 3, *(int*) 0x6b805c, 1.0f, 0);
 		*(int*) 0x1043294 = 0;
 		*(int*) 0x10432a0 = 0x501502f9;
@@ -173,11 +173,11 @@ void __cdecl d3_RenderScene(char a0, int a1)
 			d3_UpdateFloorVisibility(*(int*) 0x6b8300);
 		}
 		*(int*) 0x1043028 = 0;
-		d3_CollectSceneLights(*(int*) 0x6b8014, ((unsigned char) g_1052bd0[0] & 0x1c) != 0);
+		d3_CollectSceneLights(*(int*) 0x6b8014, ((unsigned char) d3_RenderQualityFlags[0] & 0x1c) != 0);
 		if (a0) {
 			d3_UpdateSceneLightFlickers();
 		}
-		if ((unsigned char) g_1052bd0[0] & 0x1c) {
+		if ((unsigned char) d3_RenderQualityFlags[0] & 0x1c) {
 			d3_BuildSceneShadows();
 		}
 		if (*(int*) 0x6b8300) {
@@ -234,7 +234,7 @@ void __cdecl d3_RenderScene(char a0, int a1)
 		}
 		DEV_43ad20->vtbl->SetRenderState(DEV_43ad20, 0x16, (g_6b7ffe == 0) * 2 + 1);
 		DEV_43ad20->vtbl->SetRenderState(DEV_43ad20, 0x89, 0);
-		if ((unsigned char) g_1052bd0[0] & 0x1c) {
+		if ((unsigned char) d3_RenderQualityFlags[0] & 0x1c) {
 			d3_RenderShadowPatches(*(int*) 0x6b8014);
 		}
 		if (*(int*) 0x6b8300) {
@@ -248,11 +248,11 @@ void __cdecl d3_RenderScene(char a0, int a1)
 			*(int*) 0x10432a0 = 0;
 		}
 		*(int*) 0x6b8044 = *(int*) 0x1052bac;
-		*(int*) 0x6b802c = g_1042a08;
+		*(int*) 0x6b802c = d3_RenderedFaceCount;
 		*(int*) 0x6b803c = *(int*) 0x1042a00;
-		*(int*) 0x6b8030 = g_10432a8;
-		g_6b86d4 -= 1;
-		*(int*) 0x6b8040 = g_1042a04;
+		*(int*) 0x6b8030 = d3_FrameFaceCount;
+		d3_SceneRenderLock -= 1;
+		*(int*) 0x6b8040 = d3_FrameVertexCount;
 		g_6b8034 = 0;
 		*(int*) 0x6b8038 = *(int*) 0x1052bb0;
 	}

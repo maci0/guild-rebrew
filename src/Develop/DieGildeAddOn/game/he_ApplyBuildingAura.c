@@ -42,7 +42,7 @@ extern unsigned char* lpGebaeudeINST;
 extern unsigned char* lpGebaeudePROT;
 extern char* gm_CityEntity;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-extern char g_6b5c60[];
+extern char str_empty[];
 
 int __cdecl he_InflictAffliction(Unit57aa*, float, int, int*);
 void __cdecl he_ResolveAccidentOutcome(int, Unit57aa*, Unit57aa*, Bld57aa*, int, int);
@@ -129,12 +129,12 @@ void __cdecl he_ApplyBuildingAura(Bld57aa* self, int mode, int who, int side)
 		dv.x = p.x - q.x;
 		dv.y = p.y - q.y;
 		dv.z = p.z - q.z;
-		house = ((Unit57aa*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[b->owner]);
+		house = ((Unit57aa*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[b->owner]);
 		if ((d = v3len(&dv)) > range) {
 			continue;
 		}
 		for (j = 0; j < 768; j++) {
-			u = ((Unit57aa*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[j]);
+			u = ((Unit57aa*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[j]);
 			if (u->id == 0xffff || u->type >= 10 || (u->owner & 3) != side) {
 				continue;
 			}
@@ -155,7 +155,7 @@ void __cdecl he_ApplyBuildingAura(Bld57aa* self, int mode, int who, int side)
 				he_ResolveAccidentOutcome(0, u, house, b, v, tmp);
 			} else if (role == 1 && (u->type == 6 || u->type == 7)) {
 				io_FormatTextBuffer(buf, 0x163c, v + 0x1632);
-				he_PostEntityMessage(u->owner, -1, buf, 0, 0x5f7, g_6b5c60);
+				he_PostEntityMessage(u->owner, -1, buf, 0, 0x5f7, str_empty);
 			}
 		}
 	}

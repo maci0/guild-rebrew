@@ -109,7 +109,7 @@ void __cdecl cut_RunCombatCutscene(COMBAT_CUTSCENE_DLG* p)
 	if (gm_StartFilteredEntitySearch(1, 1, p->owner) == 0 || flag == 2 || changed == 0) {
 		return;
 	}
-	if (*(int*) &g_772f3c == 0) {
+	if (*(int*) &cut_SkipMode == 0) {
 		*(int*) 0x68bfbc = 0xc8;
 		*(int*) 0x68b79c = p->rec;
 		cut_SetupBattleArena(p);
@@ -122,18 +122,18 @@ void __cdecl cut_RunCombatCutscene(COMBAT_CUTSCENE_DLG* p)
 		} else {
 			d3_UpdateDaylightPhase((void*) &gm_GameTime);
 		}
-		*(int*) &g_772ea4 = 0;
-		*(int*) &g_772ea8 = 0;
-		*(int*) &g_772eac = 0;
+		*(int*) &cut_CombatCancelledEntity = 0;
+		*(int*) &cut_CombatResolved = 0;
+		*(int*) &cut_PlunderedAmount = 0;
 		cut_RunCombatStartDialog(p);
 		cut_SetRandSeed(saved);
 		cut_RefreshCombatContextCharacters();
 		cut_RefreshCombatContextCharacters();
 		cut_RunTurnRound(p, 0);
-		if (*(int*) &g_772ea4 == 0 && *(int*) &g_772ea8 == 0) {
+		if (*(int*) &cut_CombatCancelledEntity == 0 && *(int*) &cut_CombatResolved == 0) {
 			cut_RunTurnRound(p, 0);
 		}
-		if (*(int*) &g_772ea8 == 0) {
+		if (*(int*) &cut_CombatResolved == 0) {
 			for (t = 0x9b4908; t < 0x9b4a48; t += 0x14) {
 				if (*(int*) t != -1) {
 					d2_DestroyElement(*(int*) t);
@@ -144,17 +144,17 @@ void __cdecl cut_RunCombatCutscene(COMBAT_CUTSCENE_DLG* p)
 			}
 			d2_ShowCombatEndCutscene(p);
 			cut_RunCombatFlightOutro(p);
-		} else if (*(int*) &g_772eac != 0 && *(char*) (*(int*) &g_772e9c + 2) == 6) {
+		} else if (*(int*) &cut_PlunderedAmount != 0 && *(char*) (*(int*) &cut_CombatDefenderEntity + 2) == 6) {
 			v = 0;
 			w = gm_StartFilteredEntitySearch(1, 1, *(int*) (*(int*) 0x772eb4 + 0x10c));
 			if (w != 0) {
 				v = fcn_00502cd0(*(int*) (w + 0x5d), 2, 6, 0, 0x116);
 			}
-			if (*(int*) &g_772eac > 0) {
+			if (*(int*) &cut_PlunderedAmount > 0) {
 				if (v == 0) {
-					io_FormatTextBuffer(buf, 0x1144, *(int*) &g_772eac);
+					io_FormatTextBuffer(buf, 0x1144, *(int*) &cut_PlunderedAmount);
 				} else {
-					io_FormatTextBuffer(buf, 0x1145, *(int*) &g_772eac);
+					io_FormatTextBuffer(buf, 0x1145, *(int*) &cut_PlunderedAmount);
 				}
 			} else {
 				io_FormatTextBuffer(buf, 0x1146);
@@ -166,7 +166,7 @@ void __cdecl cut_RunCombatCutscene(COMBAT_CUTSCENE_DLG* p)
 	}
 	changed = 0;
 	saved = 0;
-	*(int*) &g_772e9c = (int) gm_LookupEntityRecordById(p->first);
+	*(int*) &cut_CombatDefenderEntity = (int) gm_LookupEntityRecordById(p->first);
 	*(int*) 0x772e98 = (int) gm_LookupEntityRecordById(p->second);
 	for (i = 0; i < 0x10; i++) {
 		if (p->list_a[i] != -1) {
@@ -189,7 +189,7 @@ void __cdecl cut_RunCombatCutscene(COMBAT_CUTSCENE_DLG* p)
 	v = gm_RandomMod(0x1e) + saved;
 	w = gm_RandomMod(0x1e) + changed;
 	if (v > w) {
-		changed = *(int*) &g_772e9c;
+		changed = *(int*) &cut_CombatDefenderEntity;
 	} else {
 		changed = *(int*) 0x772e98;
 	}
@@ -204,10 +204,10 @@ void __cdecl cut_RunCombatCutscene(COMBAT_CUTSCENE_DLG* p)
 		}
 	}
 	if (p->flags & 2) {
-		if (changed == *(int*) &g_772e9c) {
+		if (changed == *(int*) &cut_CombatDefenderEntity) {
 			v = gm_StartFilteredEntitySearch(1, 1, p->owner);
 			w = gm_StartFilteredEntitySearch(1, 1, p->actor);
-			gm_TransferAndSellAssets(w, v, *(int*) &g_772e9c, *(int*) 0x772e98);
+			gm_TransferAndSellAssets(w, v, *(int*) &cut_CombatDefenderEntity, *(int*) 0x772e98);
 		}
 		return;
 	}
@@ -217,8 +217,8 @@ void __cdecl cut_RunCombatCutscene(COMBAT_CUTSCENE_DLG* p)
 	if (!(p->flags & 1)) {
 		return;
 	}
-	if (changed == *(int*) &g_772e9c) {
+	if (changed == *(int*) &cut_CombatDefenderEntity) {
 		v = gm_StartFilteredEntitySearch(1, 1, p->owner);
-		cut_PlunderBuildingCarts(p, v, *(int*) &g_772e9c, *(int*) 0x772e98, 100.0f);
+		cut_PlunderBuildingCarts(p, v, *(int*) &cut_CombatDefenderEntity, *(int*) 0x772e98, 100.0f);
 	}
 }

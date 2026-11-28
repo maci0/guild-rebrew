@@ -1,9 +1,9 @@
 #include <string.h>
 #include <stdio.h>
 
-extern int g_6b7fdc;
+extern int vfs_RootDir;
 extern int d2_CurrentWindowId;
-extern char *g_1015ea0, *g_77255c;
+extern char *d2_Controls, *d2_CurrentWindow;
 int __cdecl vfs_ListFilesByExtension(char *, char *, void *);
 int __cdecl vfs_Tfopen(char *, char *, int);
 int __cdecl ls_LoadSavegameHeader(int, char *);
@@ -35,7 +35,7 @@ void __cdecl d2_PopulateSaveSlotList(int a, int b, void *items, void *records, c
     if (count > 16) count = 16;
     rec = (char *)records;
     for (i = 0; i < count; i++, rec += 0x210) {
-        file = vfs_Tfopen(rec + 0x109, (char *)0x6750e8, g_6b7fdc);
+        file = vfs_Tfopen(rec + 0x109, (char *)0x6750e8, vfs_RootDir);
         if (!file) continue;
         if (!ls_LoadSavegameHeader(file, header) || (header[4] & 2)) {
             CloseVfsStream(file);
@@ -46,7 +46,7 @@ void __cdecl d2_PopulateSaveSlotList(int a, int b, void *items, void *records, c
         if (index == -1) continue;
         d2_SetForm(a, b);
         row = (char *)items + index * 0x220;
-        y = *(short *)((int)g_77255c + 0xc);
+        y = *(short *)((int)d2_CurrentWindow + 0xc);
         element = d2_CreateChildWindow(0, (short)(index * 130), (short)(y - 16), 0x82, 16, d2_CurrentWindowId);
         *(int *)(row + 8) = element;
         *(int *)(element * 0x3cc + 0x10161cc) = 0x54;
@@ -67,10 +67,10 @@ void __cdecl d2_PopulateSaveSlotList(int a, int b, void *items, void *records, c
             }
             d2_AddWindowBitmapElement(0, 0, 160, 120, pixels, d2_CurrentWindowId);
         }
-        *(int *)(g_1015ea0 + *(int *)(row + 4) * 0x2f4 + 0x5c) = 1;
-        *(int *)(g_1015ea0 + *(int *)(row + 4) * 0x2f4 + 0x18) = *(int *)((int)g_77255c + 0xc) - 0xa0;
-        *(int *)(g_1015ea0 + *(int *)(row + 4) * 0x2f4 + 0x1d0) = 3;
-        d2_CreateChildWindow(0xa4, 0x12, (short)(*(short *)((int)g_77255c + 0xc) - 0xb0), 0x6e, 16, d2_CurrentWindowId);
+        *(int *)(d2_Controls + *(int *)(row + 4) * 0x2f4 + 0x5c) = 1;
+        *(int *)(d2_Controls + *(int *)(row + 4) * 0x2f4 + 0x18) = *(int *)((int)d2_CurrentWindow + 0xc) - 0xa0;
+        *(int *)(d2_Controls + *(int *)(row + 4) * 0x2f4 + 0x1d0) = 3;
+        d2_CreateChildWindow(0xa4, 0x12, (short)(*(short *)((int)d2_CurrentWindow + 0xc) - 0xb0), 0x6e, 16, d2_CurrentWindowId);
         *(int *)(d2_CurrentWindowId * 0x3cc + 0x10161cc) = 0x54;
         *(int *)(d2_CurrentWindowId * 0x3cc + 0x1015f60) = 0;
         sprintf(text, (char *)0x699a68, *(int *)(header + 0x68), 0x11);
@@ -92,7 +92,7 @@ void __cdecl d2_PopulateSaveSlotList(int a, int b, void *items, void *records, c
         d2_SetForm(a, b);
         row = (char *)items + index * 0x220;
         row[0xc] = 0;
-        y = *(short *)((int)g_77255c + 0xc);
+        y = *(short *)((int)d2_CurrentWindow + 0xc);
         element = d2_CreateChildWindow(0, (short)(index * 130), (short)(y - 16), 0x78, 16, d2_CurrentWindowId);
         *(int *)(row + 8) = element;
         *(int *)(element * 0x3cc + 0x10161cc) = 0x54;
@@ -101,10 +101,10 @@ void __cdecl d2_PopulateSaveSlotList(int a, int b, void *items, void *records, c
         d2_SetElementFont(element, 0x53);
         d2_AddWindowBitmapElement(0, 0, 160, 120, (void *)0x7ea3c0, d2_CurrentWindowId);
         d2_AddElementToWindow(0x3c, 0x20, 0x4fb, d2_CurrentWindowId);
-        *(int *)(g_1015ea0 + *(int *)(row + 4) * 0x2f4 + 0x5c) = 1;
-        *(int *)(g_1015ea0 + *(int *)(row + 4) * 0x2f4 + 0x18) = *(int *)((int)g_77255c + 0xc) - 0xa0;
-        *(int *)(g_1015ea0 + *(int *)(row + 4) * 0x2f4 + 0x1d0) = 3;
-        d2_CreateChildWindow(0xa4, 0x18, (short)(*(short *)((int)g_77255c + 0xc) - 0xb0), 0x60, 16, d2_CurrentWindowId);
+        *(int *)(d2_Controls + *(int *)(row + 4) * 0x2f4 + 0x5c) = 1;
+        *(int *)(d2_Controls + *(int *)(row + 4) * 0x2f4 + 0x18) = *(int *)((int)d2_CurrentWindow + 0xc) - 0xa0;
+        *(int *)(d2_Controls + *(int *)(row + 4) * 0x2f4 + 0x1d0) = 3;
+        d2_CreateChildWindow(0xa4, 0x18, (short)(*(short *)((int)d2_CurrentWindow + 0xc) - 0xb0), 0x60, 16, d2_CurrentWindowId);
         *(int *)(d2_CurrentWindowId * 0x3cc + 0x10161cc) = 0x54;
         io_AppendText(0x1cc7);
     }

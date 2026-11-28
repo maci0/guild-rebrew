@@ -1,8 +1,8 @@
 #include "Develop/client_types.h"
 
 extern pos14_7f4c00 gm_GameTime;
-extern char* g_aed32c;
-extern char g_7f4ca4[];
+extern char* cm_PacketDeltaBase;
+extern char gm_EntityIdField[];
 
 int __cdecl gm_CompareGameTime(void*, char*);
 void __cdecl gm_AddTime(void*, int, int, int);
@@ -52,7 +52,7 @@ void __cdecl he_RunLagerErweitern(char* action)
 	gm_ResolveEntityById(0, (void**) v5, 0, *(unsigned int*) (action + 0xac));
 	if (v5[0]) {
 		cm_BeginPacketFieldDelta((char*) v5[0], *(int*) ((char*) v5[0] + 2));
-		cm_AppendPacketFieldValue(4, 1, (v5[0] - (int) g_aed32c) + 0xe, &v5[1]);
+		cm_AppendPacketFieldValue(4, 1, (v5[0] - (int) cm_PacketDeltaBase) + 0xe, &v5[1]);
 		cm_RequestChangeAttribute();
 		if (--*(int*) (action + 0xb0) <= 0) {
 		msg = 0x606;
@@ -67,10 +67,10 @@ void __cdecl he_RunLagerErweitern(char* action)
 
 			if (cat) {
 				categoryId = *(int*) ((char*) cat + 2); entityId = *(int*) ((char*) ent + 1);
-				px = *(int*) (g_7f4ca4 + (*(unsigned short*) (action + 8)) * 0x21c);
+				px = *(int*) (gm_EntityIdField + (*(unsigned short*) (action + 8)) * 0x21c);
 				he_MessageBoxQuickjump(px, -1, buf, 0, msg, entityId, categoryId, 0, 0);
 			} else { entityId = *(int*) ((char*) ent + 1);
-				px = *(int*) (g_7f4ca4 + (*(unsigned short*) (action + 8)) * 0x21c);
+				px = *(int*) (gm_EntityIdField + (*(unsigned short*) (action + 8)) * 0x21c);
 				he_MessageBoxQuickjump(px, -1, buf, 0, msg, entityId, -1, 0, 0);
 			}
 		}

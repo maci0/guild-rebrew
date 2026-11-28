@@ -36,11 +36,11 @@ float __cdecl d3_ComputeYawToTarget(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
 char __cdecl d3sm_SampleHeight(char*, float*, int*, int*, float*);
 void __cdecl d3_GetFloorHeight(char*, float*, int, int*, int*, float*);
-extern float g_6628a8;
+extern float flt_0_0;
 #include "Develop/Units/d3/d3_animation.h"
 
 #include "Develop/Units/d3/d3_camera.h"
-extern char g_10432c0[];
+extern char d3_Universes[];
 
 char __cdecl d3_SetObjectVisible(char*, char);
 
@@ -53,7 +53,7 @@ int __cdecl d3_RemoveObjectAnim(char*);
 
 
 
-extern char g_6b5c60[];
+extern char str_empty[];
 D3_OBJECT* __cdecl d3_CreateSceneModelObject(D3_OBJECT*, float*, float*, char*);
 void __cdecl d3_InvalidateSubTreeFlags(char*, int);
 void __cdecl ch_PreloadCharacterMotions(char*, int, ...);
@@ -74,21 +74,21 @@ void __cdecl d3_PreloadLowPolyAnims(char*, int, ...);
 #endif
 
 
-extern char* g_6b5c20;
+extern char* tp_ch_ActionQueue;
 
 CH_QUEUE_SLOT* __cdecl ch_GetFreeQueueEntry(void)
 {
 	int i;
 
 	for (i = 0; i < 2000;) {
-		if (((CH_QUEUE_SLOT*)g_6b5c20)[i++].belegt == 0) {
+		if (((CH_QUEUE_SLOT*)tp_ch_ActionQueue)[i++].belegt == 0) {
 			break;
 		}
 	}
 	if (i >= 2000) {
 		return 0;
 	}
-	return &((CH_QUEUE_SLOT*)g_6b5c20)[i - 1];
+	return &((CH_QUEUE_SLOT*)tp_ch_ActionQueue)[i - 1];
 }
 
 
@@ -206,13 +206,13 @@ char* __cdecl ch_InsertAction(char* object, char* position, int kind, ...)
         if ((x = *(int*) (action + 0x30)) < 0 || x > 256 ||
             (y = *(int*) (action + 0x34)) < 0 || y > 256 ||
             (universe = *(int*) (action + 0x38)) < 0 || universe > 64 ||
-            g_10432c0[universe * ch_UNIVERSE_STRIDE + 0x3d5] != 0) {
+            d3_Universes[universe * ch_UNIVERSE_STRIDE + 0x3d5] != 0) {
             ch_RemoveQueueEntry(action);
             return 0;
         }
         if (*(int*) (*(char**) (object + 0x88) + 0xb0) != 0 &&
-            (x > *(int*) (g_10432c0 + universe * ch_UNIVERSE_STRIDE + 0xb4) ||
-             y > *(int*) (g_10432c0 + universe * ch_UNIVERSE_STRIDE + 0xb4))) {
+            (x > *(int*) (d3_Universes + universe * ch_UNIVERSE_STRIDE + 0xb4) ||
+             y > *(int*) (d3_Universes + universe * ch_UNIVERSE_STRIDE + 0xb4))) {
             ch_RemoveQueueEntry(position);
             return 0;
         }

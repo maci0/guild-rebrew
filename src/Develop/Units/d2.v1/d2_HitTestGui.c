@@ -40,10 +40,10 @@ typedef struct Slot {
 
 // SIZE 0x3cc
 
-extern char* g_1015ea0;
+extern char* d2_Controls;
 #include "Develop/client_types.h"
-extern Win_1015f40 g_1015f40[0x60];
-extern void** g_772540;
+extern Win_1015f40 d2_Windows[0x60];
+extern void** d2_ZOrderStack;
 extern int g_67d38c;
 extern int g_67d388;
 extern int g_67d374;
@@ -71,13 +71,13 @@ int __cdecl d2_HitTestGui(int x, int y)
 	g_67d374 = -1;
 	for (i = 0x3ff; i >= 0; i--) {
 		hidden = 0;
-		s = ((Slot**)g_772540)[i];
+		s = ((Slot**)d2_ZOrderStack)[i];
 		if (s) {
 			if (s->owner) {
 				hidden = *(int*) (s->owner + 0x198);
 			}
 			if (x >= s->x && x <= s->x + s->w && y >= s->y && y <= s->y + s->h && !hidden
-				&& y >= s->top && y <= s->bottom && !s->hidden4c && !s->hidden48 && ((Slot*)g_1015ea0)[s->id].type == 0x40 && *(int*) &((D2_WIN*)g_1015f40)[s->result].pad3c[0x238]) {
+				&& y >= s->top && y <= s->bottom && !s->hidden4c && !s->hidden48 && ((Slot*)d2_Controls)[s->id].type == 0x40 && *(int*) &((D2_WIN*)d2_Windows)[s->result].pad3c[0x238]) {
 				g_67d38c = s->result;
 				break;
 			}
@@ -85,7 +85,7 @@ int __cdecl d2_HitTestGui(int x, int y)
 	}
 	for (i = 0x3ff; i >= 0; i--) {
 		hidden = 0;
-		s = ((Slot**)g_772540)[i];
+		s = ((Slot**)d2_ZOrderStack)[i];
 		if (s) {
 			if (s->owner) {
 				hidden = *(int*) (s->owner + 0x198);
@@ -93,7 +93,7 @@ int __cdecl d2_HitTestGui(int x, int y)
 			if (x >= s->x && x <= s->x + s->w && y >= s->y && y <= s->y + s->h && !hidden) {
 				lk = s->link;
 				if (lk) {
-					w = &((Slot*)g_1015ea0)[lk[0x27c / 4]];
+					w = &((Slot*)d2_Controls)[lk[0x27c / 4]];
 					left = lk[1] > w->left ? lk[1] : w->left;
 					right = lk[1] + lk[3] < w->right ? lk[1] + lk[3] : w->right;
 					top = lk[2] > w->top ? lk[2] : w->top;

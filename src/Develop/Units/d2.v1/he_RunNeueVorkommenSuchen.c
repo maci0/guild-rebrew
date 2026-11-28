@@ -1,7 +1,7 @@
 
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 
 void __cdecl d2_CreateActionPopupSlot(char*, int, int, char*, int);
 void __cdecl d2_SetForm(int, int);
@@ -22,7 +22,7 @@ void __cdecl he_RunNeueVorkommenSuchen(char* e)
 		*(int*) (e + 0x70) = *(int*) (e + 0x70) + 1;
 		return;
 	case 1:
-		if (g_100f884 != *(int*) (*(char**) (e + 0x74) + 8) || g_100f1dc == -1 || g_100f1dc != 2) {
+		if (g_100f884 != *(int*) (*(char**) (e + 0x74) + 8) || d2_DialogButtonAction == -1 || d2_DialogButtonAction != 2) {
 			return;
 		}
 		/* fall through */

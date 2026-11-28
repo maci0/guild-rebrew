@@ -21,11 +21,11 @@ typedef struct F8 {
 	int b;
 } F8;
 
-extern int g_7e4538;
-extern int g_7e453c;
-extern unsigned short g_7f4c04;
+extern int d3_RainEffect;
+extern int d3_SnowEffect;
+extern unsigned short gm_GameTimeHour;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 extern unsigned char* lpGebaeudeINST;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
@@ -49,30 +49,30 @@ int __cdecl he_TryDispatchNpcAction(char* s, int n, int m)
 	tgt = -1;
 	flt[0] = 0x20a0;
 	flt[1] = 0x402c20;
-	if (n + (g_7e453c != 0) + (g_7e4538 != 0 ? 2 : 0) * 2 >= 10) {
+	if (n + (d3_SnowEffect != 0) + (d3_RainEffect != 0 ? 2 : 0) * 2 >= 10) {
 		goto fail;
 	}
 	if (s[9] != 0) {
 		goto fail;
 	}
-	if (g_7f4c04 < 11) {
+	if (gm_GameTimeHour < 11) {
 		goto fail;
 	}
 	if ((float) (n - m) / (n + 1) < 0.66f) {
 		flt[0] = 0x402c20;
 		flt[1] = 0x20a0;
 	}
-	if (gm_FindEntityCandidatesInRange(&((struct house*)g_7f4ca0)[g_774970], 1, &flt[0], 0.0f, 100.0f, (unsigned short*) &x) == 0
-	    && gm_FindEntityCandidatesInRange(&((struct house*)g_7f4ca0)[g_774970], 1, &flt[1], 0.0f, 100.0f, (unsigned short*) &x) == 0) {
+	if (gm_FindEntityCandidatesInRange(&((struct house*)gm_EntitySlotTable)[gm_LocalPlayerSlot], 1, &flt[0], 0.0f, 100.0f, (unsigned short*) &x) == 0
+	    && gm_FindEntityCandidatesInRange(&((struct house*)gm_EntitySlotTable)[gm_LocalPlayerSlot], 1, &flt[1], 0.0f, 100.0f, (unsigned short*) &x) == 0) {
 		goto fail;
 	}
 	f.mask = 0xa7f4c3a0;
-	h = &((struct house*)g_7f4ca0)[(unsigned short) x];
+	h = &((struct house*)gm_EntitySlotTable)[(unsigned short) x];
 	f.b = 1;
 	if (h->who != 0) {
 		tgt = *(int*) (h->who + 1);
 	} else {
-		if (ai_FindEntityInFavorRange(&((struct house*)g_7f4ca0)[g_774970], 0, f, 0, 100.0f, &tgt) == 0) {
+		if (ai_FindEntityInFavorRange(&((struct house*)gm_EntitySlotTable)[gm_LocalPlayerSlot], 0, f, 0, 100.0f, &tgt) == 0) {
 			goto fail;
 		}
 	}

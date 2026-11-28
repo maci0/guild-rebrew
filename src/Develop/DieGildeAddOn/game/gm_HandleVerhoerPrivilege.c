@@ -1,7 +1,7 @@
 
 
 
-extern char g_679060[];
+extern char str_fmt_s[];
 
 int __cdecl d2_OpenVerhoerDialog(void*, void*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);

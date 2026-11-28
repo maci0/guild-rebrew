@@ -62,7 +62,7 @@ void __cdecl he_RunInvitation(char* action)
 			he_FreeAction(action);
 			return;
 		}
-		v7 = (unsigned short*) ((unsigned int) *(unsigned short*) (v10 + 0x27) * 0x21c + (unsigned long) &g_7f4ca0);
+		v7 = (unsigned short*) ((unsigned int) *(unsigned short*) (v10 + 0x27) * 0x21c + (unsigned long) &gm_EntitySlotTable);
 		if (v7 == 0) {
 			if (*(int*) (action + 0x74))
 				d2_CloseActionPopup(action);
@@ -77,7 +77,7 @@ void __cdecl he_RunInvitation(char* action)
 			he_FreeAction(action);
 			return;
 		}
-		v7 = (unsigned short*) ((unsigned int) *(unsigned short*) (v15 + 8) * 0x21c + (unsigned long) &g_7f4ca0);
+		v7 = (unsigned short*) ((unsigned int) *(unsigned short*) (v15 + 8) * 0x21c + (unsigned long) &gm_EntitySlotTable);
 		if (v7 == 0) {
 			if (*(int*) (action + 0x74))
 				d2_CloseActionPopup(action);
@@ -88,8 +88,8 @@ void __cdecl he_RunInvitation(char* action)
 		he_FreeAction(action);
 		return;
 	}
-	v3 = (unsigned short*) ((unsigned int) *(unsigned short*) (action + 8) * 0x21c + (unsigned long) &g_7f4ca0);
-	v4 = *(char*) ((unsigned int) *(unsigned short*) (action + 8) * 0x21c + (unsigned long) &g_7f4ca2);
+	v3 = (unsigned short*) ((unsigned int) *(unsigned short*) (action + 8) * 0x21c + (unsigned long) &gm_EntitySlotTable);
+	v4 = *(char*) ((unsigned int) *(unsigned short*) (action + 8) * 0x21c + (unsigned long) &gm_SlotTableKindView);
 	if (v4 != 6 && v4 != 7)
 		*(int*) (action + 0x70) = 2;
 	switch (*(int*) (action + 0x70)) {
@@ -153,9 +153,9 @@ void __cdecl he_RunInvitation(char* action)
 		if (g_100f884 != *(int*) (*(int*) (action + 0x74) + 8))
 			return;
 		v11 = -1;
-		if (*(int*) &g_100f1dc == -1)
+		if (*(int*) &d2_DialogButtonAction == -1)
 			return;
-		if (*(int*) &g_100f1dc == 2) {
+		if (*(int*) &d2_DialogButtonAction == 2) {
 			v16 = *(int*) (v3 + 2);
 			if (*(int*) (action + 0xbc) == 0) {
 				for (idx = 0; idx < 4; idx++) {
@@ -172,7 +172,7 @@ void __cdecl he_RunInvitation(char* action)
 				io_FormatTextBuffer(text, 0x1785, *v3);
 				he_PostEntityMessage(*(int*) (v7 + 2), -1, text, 0, 0x5ec, 0);
 			}
-		} else if (*(int*) &g_100f1dc == 1) {
+		} else if (*(int*) &d2_DialogButtonAction == 1) {
 			v16 = *(int*) (v3 + 2);
 			if (*(int*) (action + 0xbc) == 0) {
 				for (idx = 0; idx < 4; idx++) {

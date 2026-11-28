@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/ch_script.h"
 
 
-extern char* g_6b7ebc;
+extern char* evt_WaitingScriptTask;
 extern char* evt_CurrentScript;
 int __cdecl d3_FindSceneObject(int a, int b, char* c, int d);
 int __cdecl ch_QueueDropObjectLeft(char* e, char* name, char* name2, int param);
@@ -16,7 +16,7 @@ int __cdecl DropObjectLeft(char** a, char** name, int* param, char** name2)
 	if (*name2 != 0 && !d3_FindSceneObject(0, 0x40, *name2, 0)) {
 		return 1;
 	}
-	if (g_6b7ebc != 0 && *(void**) (g_6b7ebc + 0x44) == (void*) DropObjectLeft) {
+	if (evt_WaitingScriptTask != 0 && *(void**) (evt_WaitingScriptTask + 0x44) == (void*) DropObjectLeft) {
 		if (*(int*) (*a + 0x128) != 0) {
 			*(void**) (evt_CurrentScript + 0xc60) = (void*) DropObjectLeft;
 		}

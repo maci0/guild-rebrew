@@ -1,5 +1,5 @@
 /* Owned (both targets) by src/GOLDTL.fcn_004cef70.c. */
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 #include <string.h>
 
@@ -33,7 +33,7 @@ int __cdecl gm_HandleMsg1bDropFavor(void* request)
 	if (gm_FindEntityCandidatesInRange(entity, 1, &mask, 0.0f, 100.0f, &index) == 0) {
 		return 0x400;
 	}
-	target = (void*) (g_7f4ca0 + 540 * index);
+	target = (void*) (gm_EntitySlotTable + 540 * index);
 	if (target == 0) {
 		return 0x400;
 	}

@@ -28,5 +28,5 @@ void __cdecl gm_PushCityHistorySample(void)
 	((CITY_HISTORY_SAMPLE*)g_99ec20)[15].b = g_99f5e8;
 	((CITY_HISTORY_SAMPLE*)g_99ec20)[15].c = g_99f5ec;
 	((CITY_HISTORY_SAMPLE*)g_99ec20)[15].d = g_99f604;
-	((CITY_HISTORY_SAMPLE*)g_99ec20)[15].e = (int) g_773d4c;
+	((CITY_HISTORY_SAMPLE*)g_99ec20)[15].e = (int) gm_CityPopulation;
 }

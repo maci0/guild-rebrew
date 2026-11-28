@@ -1,10 +1,10 @@
 #include "Develop/DieGildeAddOn/game/event_callbacks.h"
-char g_68cfc0[] = "_PA_WERBUNG_EVENT_NACHRICHT_HOCHZEIT_M1_00";
-extern char g_68cfc0[];
-char g_68cfec[] = "_PA_WERBUNG_EVENT_ZUSAGE_M1_00";
-extern char g_68cfec[];
+char str_PA_WERBUNG_EVENT_NACHRICHT_HOCHZEIT_M1_00[] = "_PA_WERBUNG_EVENT_NACHRICHT_HOCHZEIT_M1_00";
+extern char str_PA_WERBUNG_EVENT_NACHRICHT_HOCHZEIT_M1_00[];
+char str_PA_WERBUNG_EVENT_ZUSAGE_M1_00[] = "_PA_WERBUNG_EVENT_ZUSAGE_M1_00";
+extern char str_PA_WERBUNG_EVENT_ZUSAGE_M1_00[];
 /* Owned (both targets) by src/GOLDTL.fcn_00549330.c. */
-extern char g_7f4ca4[];
+extern char gm_EntityIdField[];
 
 
 
@@ -28,16 +28,16 @@ int __cdecl gm_NotifyHochzeit(char* event)
 		if (e2 != 0 && *(char*) ((char*) e1 + 9) != *(char*) ((char*) e2 + 9)) {
 			if (*(char*) ((char*) e1 + 2) == 6 || *(char*) ((char*) e1 + 2) == 7) {
 				io_FormatTextBuffer(buf, 0x11c3, *(unsigned short*) e2);
-				he_SendCmdMessage(e1, event, buf, g_68cfec);
+				he_SendCmdMessage(e1, event, buf, str_PA_WERBUNG_EVENT_ZUSAGE_M1_00);
 			}
 			if (*(char*) ((char*) e1 + 2) == 6 || *(char*) ((char*) e1 + 2) == 7 ||
 			    *(char*) ((char*) e1 + 2) == 5) {
 				io_FormatTextBuffer(buf, 0x11c4, *(unsigned short*) e1, *(unsigned short*) e2);
-				for (p = g_7f4ca4; (int) p < (int) (g_7f4ca4 + 0x65400); p += 0x21c) {
+				for (p = gm_EntityIdField; (int) p < (int) (gm_EntityIdField + 0x65400); p += 0x21c) {
 					if ((*(char*) (p - 2) == 6 || *(char*) (p - 2) == 7) &&
 					    *(int*) p != *(int*) ((char*) e1 + 4) &&
 					    *(int*) p != *(int*) ((char*) e2 + 4)) {
-						he_PostEntityMessage(*(int*) p, -1, buf, 0, 0x5fe, g_68cfc0);
+						he_PostEntityMessage(*(int*) p, -1, buf, 0, 0x5fe, str_PA_WERBUNG_EVENT_NACHRICHT_HOCHZEIT_M1_00);
 					}
 				}
 			}

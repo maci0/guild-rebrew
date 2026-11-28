@@ -1,4 +1,4 @@
-extern int g_7746a0;
+extern int sv_ClickedObjekt;
 extern int g_14ab9d0;
 extern char g_6ab158[];
 
@@ -7,11 +7,11 @@ int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_RunKerkerplanDialog(int);
 extern int main_LoopFlags;
-extern volatile int g_6b7fc0;
-extern char g_774964;
-extern char g_14cf950;
+extern volatile int tb_TimerPaused;
+extern char gm_InWorldHud;
+extern char io_LastKeyScancode;
 extern char g_6a2e68[];
-extern char g_6b5c60[];
+extern char str_empty[];
 
 void __cdecl d2_ShowStatusBanner(char*);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -25,7 +25,7 @@ void __cdecl d2_RunKerkerplanHotspot(int a)
 	d2_ClearStatusTextSlots();
 	while (main_RunFrameLoop(d2_RunKerkerplanHotspot, 0x67fff) != 0) {
 		x = RegisterStatusText(g_6ab158, g_14ab9d0, 0x16);
-		if (g_7746a0 != 0 && g_7746a0 == x) {
+		if (sv_ClickedObjekt != 0 && sv_ClickedObjekt == x) {
 			d2_RunKerkerplanDialog(a);
 		}
 	}
@@ -39,15 +39,15 @@ void __cdecl d2_PauseGameLoop(void)
 	int flags;
 
 	flags = (main_LoopFlags & ~0x2000) | 0x100000;
-	g_6b7fc0 = 1;
+	tb_TimerPaused = 1;
 	d2_ShowStatusBanner(g_6a2e68);
-	(*(unsigned char*)&g_774964) = 0;
+	(*(unsigned char*)&gm_InWorldHud) = 0;
 	while (main_RunFrameLoop(0, flags) != 0) {
-		if (g_14cf950 == 0x39) {
+		if (io_LastKeyScancode == 0x39) {
 			break;
 		}
 	}
-	d2_ShowStatusBanner(g_6b5c60);
-	g_6b7fc0 = 0;
-	(*(unsigned char*)&g_774964) = 1;
+	d2_ShowStatusBanner(str_empty);
+	tb_TimerPaused = 0;
+	(*(unsigned char*)&gm_InWorldHud) = 1;
 }

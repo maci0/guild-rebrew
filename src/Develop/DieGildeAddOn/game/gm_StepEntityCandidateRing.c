@@ -5,7 +5,7 @@ typedef struct {
 	int step;
 } fcn_004a34d0_ring;
 
-extern unsigned int g_7728bc;
+extern unsigned int gm_EntityCandidateCount;
 extern fcn_004a34d0_ring* g_664448;
 
 
@@ -16,7 +16,7 @@ ENTITY_CANDIDATE* __cdecl gm_StepEntityCandidateRing(void)
 	fcn_004a34d0_ring* r;
 	ENTITY_CANDIDATE* cur;
 
-	n = g_7728bc;
+	n = gm_EntityCandidateCount;
 	r = g_664448;
 	cur = r->cur;
 	if (n == 0)

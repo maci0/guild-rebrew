@@ -8,7 +8,7 @@ typedef struct Vec3 {
 
 extern float g_fc5348;
 extern float g_fc2944;
-extern float g_10432a4, d3_ProjectionScaleY, d3_ViewportCenterX, g_1052bc8;
+extern float d3_ProjectionDist, d3_ProjectionScaleY, d3_ViewportCenterX, g_1052bc8;
 extern int g_1042570, g_1042574, d3_ViewportRight, d3_ViewportBottom;
 
 void __cdecl d3_TransformPointToView(char* object, char* camera, float* position, float* out);
@@ -128,9 +128,9 @@ char __cdecl d3_GetObjectScreenRect(char* obj, int* rc)
 	if (*(int*) (obj + 0x218) == 0) {
 		d3_TransformPointToRef(obj, d3_ActiveCamera, (Vec3*) (obj + 0x4c), (Vec3*) p);
 		t = 1.0f / p[2];
-		sx = p[0] * g_10432a4 * t + d3_ViewportCenterX;
+		sx = p[0] * d3_ProjectionDist * t + d3_ViewportCenterX;
 		sy = p[1] * d3_ProjectionScaleY * t + g_1052bc8;
-		d = *(float*) (obj + 0x68) * g_10432a4 * 0.5f * t;
+		d = *(float*) (obj + 0x68) * d3_ProjectionDist * 0.5f * t;
 		rc[0] = (int) (sx - d);
 		rc[2] = (int) (sx + d);
 		rc[1] = (int) (sy - d);
@@ -162,7 +162,7 @@ char __cdecl d3_GetObjectScreenRect(char* obj, int* rc)
 	i = 8;
 	do {
 		t = 1.0f / rec[1];
-		ix = (int) (g_10432a4 * rec[-1] * t + d3_ViewportCenterX);
+		ix = (int) (d3_ProjectionDist * rec[-1] * t + d3_ViewportCenterX);
 		rc[0] = rc[0] < ix ? rc[0] : ix;
 		rc[2] = rc[2] > ix ? rc[2] : ix;
 		iy = (int) (d3_ProjectionScaleY * rec[0] * t + g_1052bc8);

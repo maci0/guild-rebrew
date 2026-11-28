@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 int __cdecl gm_FindSlot170Entry(int);
 void __cdecl gm_TryRecordCrime(int, int, int, int, int);
@@ -37,7 +37,7 @@ int __cdecl gm_SendCannonVolleys(char* building, char* payer, unsigned int* firs
 		if (firstPayload != 0) {
 			gm_TryRecordCrime(8, 1, *(int*) (payer + 4), -1, -1);
 			gm_ModifyHealth(*(int*) (payer + 4), -hpDelta);
-			cm_RequestTransferCurrencyNoKill(-1, *(int*) (payer + 4), (char) g_773d75, goldCost);
+			cm_RequestTransferCurrencyNoKill(-1, *(int*) (payer + 4), (char) gm_ActiveTownIndex, goldCost);
 			pkt[0] = *(unsigned int*) (building + 1);
 			pkt[1] = prio;
 			pkt[2] = need_start;
@@ -49,7 +49,7 @@ int __cdecl gm_SendCannonVolleys(char* building, char* payer, unsigned int* firs
 		if (secondPayload != 0) {
 			if (ok != 0) {
 				gm_ModifyHealth(*(int*) (payer + 4), -hpDelta);
-				cm_RequestTransferCurrencyNoKill(-1, *(int*) (payer + 4), (char) g_773d75, goldCost);
+				cm_RequestTransferCurrencyNoKill(-1, *(int*) (payer + 4), (char) gm_ActiveTownIndex, goldCost);
 				ok = 0;
 			}
 			pkt[0] = *(unsigned int*) (building + 1);
@@ -62,7 +62,7 @@ int __cdecl gm_SendCannonVolleys(char* building, char* payer, unsigned int* firs
 		if (thirdPayload != 0) {
 			if (ok != 0) {
 				gm_ModifyHealth(*(int*) (payer + 4), -hpDelta);
-				cm_RequestTransferCurrencyNoKill(-1, *(int*) (payer + 4), (char) g_773d75, goldCost);
+				cm_RequestTransferCurrencyNoKill(-1, *(int*) (payer + 4), (char) gm_ActiveTownIndex, goldCost);
 			}
 			pkt[0] = *(unsigned int*) (building + 1);
 			pkt[1] = prio;

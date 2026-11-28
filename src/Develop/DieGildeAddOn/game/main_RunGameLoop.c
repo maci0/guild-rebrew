@@ -12,7 +12,7 @@ __declspec(dllimport) void* __stdcall LoadLibraryA(const char*);
 __declspec(dllimport) void* __stdcall GetProcAddress(void*, const char*);
 __declspec(dllimport) int __stdcall FreeLibrary(void*);
 
-extern unsigned char g_7747b0;		/* 0x007747b0 */
+extern unsigned char gm_ClientModeFlags;		/* 0x007747b0 */
 extern int g_7e2500;			/* 0x007e2500 */
 extern int main_LoopFlags;			/* 0x007e46ac */
 extern char* g_14ac5cc;			/* 0x014ac5cc */
@@ -22,11 +22,11 @@ extern int g_14a54d4;			/* 0x014a54d4 */
 extern int g_14a54d0;			/* 0x014a54d0 */
 extern char* g_14ac630;			/* 0x014ac630 */
 extern int g_7747e0;			/* 0x007747e0 */
-extern int g_14cbca0;			/* 0x014cbca0 */
+extern int nt_ClientSocket;			/* 0x014cbca0 */
 extern unsigned char g_77670a;		/* 0x0077670a */
-extern int g_7747b4;			/* 0x007747b4 */
+extern int gm_DifficultyLevel;			/* 0x007747b4 */
 extern int g_7e4314;			/* 0x007e4314 */
-extern int g_7e2510;			/* 0x007e2510 */
+extern int nt_ServerPort;			/* 0x007e2510 */
 extern int d2_SuppressOverlay;			/* 0x007725c8 */
 extern int g_774958;			/* 0x00774958 */
 extern int g_774954;			/* 0x00774954 */
@@ -34,9 +34,9 @@ extern int g_77497c;			/* 0x0077497c */
 extern int g_774950;			/* 0x00774950 */
 extern unsigned int main_PlayerTurnIndex;
 #include "Develop/DieGildeAddOn/game/game_player.h"		/* 0x00774970 */
-extern unsigned char g_77494c;		/* 0x0077494c */
-extern unsigned char g_773de8;		/* 0x00773de8 */
-extern unsigned char g_773d75;		/* 0x00773d75 */
+extern unsigned char nt_NetSyncFlags;		/* 0x0077494c */
+extern unsigned char ls_SaveSlotIndex;		/* 0x00773de8 */
+extern unsigned char gm_ActiveTownIndex;		/* 0x00773d75 */
 extern int g_6a342c;			/* 0x006a342c */
 extern int g_6a3764;			/* 0x006a3764 */
 extern int g_6a3768;			/* 0x006a3768 */
@@ -44,9 +44,9 @@ extern int g_6a376c;			/* 0x006a376c */
 extern int g_6a3770;			/* 0x006a3770 */
 extern int d2_ScreenHeight;			/* 0x01040490 */
 extern int g_1040494;			/* 0x01040494 */
-extern int g_10432a4;			/* 0x010432a4 */
-extern int g_10421a0;			/* 0x010421a0 */
-extern int g_10529c8;			/* 0x010529c8 */
+extern int d3_ProjectionDist;			/* 0x010432a4 */
+extern int d3_ViewportZFar;			/* 0x010421a0 */
+extern int d3_ViewportZNear;			/* 0x010529c8 */
 extern int g_7747f8;			/* 0x007747f8 */
 extern int g_7747fc;			/* 0x007747fc */
 extern int g_7f3a30;			/* 0x007f3a30 */
@@ -60,7 +60,7 @@ extern int g_7e1d40;			/* 0x007e1d40 */
 extern char g_7e1be0[];			/* 0x007e1be0 */
 extern char g_68d714[];			/* 0x0068d714 */
 extern char g_6a44f4[];			/* 0x006a44f4 */
-extern char g_7e2520[];			/* 0x007e2520 */
+extern char nt_LocalSessionInfo[];			/* 0x007e2520 */
 extern char g_6a3778[];			/* 0x006a3778 */
 extern char g_6a44e8[];			/* 0x006a44e8 */
 extern char g_7e1d00[];			/* 0x007e1d00 */
@@ -73,7 +73,7 @@ extern char g_67d940[];			/* 0x0067d940 */
 extern char g_6a4498[];			/* 0x006a4498 */
 extern char g_6a4470[];			/* 0x006a4470 */
 extern char g_6a448c[];			/* 0x006a448c */
-extern char g_6b5c60[];			/* 0x006b5c60 */
+extern char str_empty[];			/* 0x006b5c60 */
 extern char g_6a4420[];			/* 0x006a4420 */
 extern char g_6a43d0[];			/* 0x006a43d0 */
 extern char g_7e254a[];			/* 0x007e254a */
@@ -200,14 +200,14 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 	void* base;
 	void* proc;
 
-	if ((g_7747b0 & 1) && (skipBuildingInit == 0)) {
+	if ((gm_ClientModeFlags & 1) && (skipBuildingInit == 0)) {
 		srv_InitBuildingTypeTable();
 	}
 	g_7e2500 = 0;
-	if (g_7747b0 & 4) {
+	if (gm_ClientModeFlags & 4) {
 		h = -1;
 		hst_SetHistoryScrollModeFlag(0);
-		if (g_7747b0 & 0x10) {
+		if (gm_ClientModeFlags & 0x10) {
 			if (fcn_005435d0() != 1) {
 				int r;
 
@@ -247,7 +247,7 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 				g_774954 = 1;
 				return;
 			}
-			if (((int (__cdecl*) (int)) proc)((int) g_7e2520) == 0) {
+			if (((int (__cdecl*) (int)) proc)((int) nt_LocalSessionInfo) == 0) {
 				FreeLibrary((void*) g_7e2500);
 				g_7e2500 = 0;
 				main_LoopFlags = 0x66087;
@@ -261,7 +261,7 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 			nt_InitBroadcastSocket(0x3039);
 			g_77497c = 1;
 		}
-		nt_ConnectTcp((int) g_7e2000, g_7e2510);
+		nt_ConnectTcp((int) g_7e2000, nt_ServerPort);
 		d2_DestroyForm(h);
 	} else {
 		nt_ConnectTcp(0, 0);
@@ -283,7 +283,7 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 		}
 	}
 	cm_ResetCommandQueue();
-	if (g_7747b0 & 0x44) {
+	if (gm_ClientModeFlags & 0x44) {
 		d2_SuppressOverlay = 0;
 		if (d2_RunNetLobbySetup() != 0) {
 			if (g_7e2500 != 0) {
@@ -299,7 +299,7 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 	d2_SuppressOverlay = 1;
 	d2_ShowLoadingScreen();
 	d2_SetForm(g_7e1d40, 1);
-	if (g_7747b0 & 4) {
+	if (gm_ClientModeFlags & 4) {
 		n = g_14ac5d4;
 	} else {
 		n = g_14a54d4;
@@ -308,51 +308,51 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 	main_PumpWindowMessages();
 	d2_SetProgressPercent(g_14a54d0, 5);
 	gm_InitGameSession();
-	if ((g_7747b0 & 1) && (g_7747e0 != 0)) {
+	if ((gm_ClientModeFlags & 1) && (g_7747e0 != 0)) {
 		gm_CreateSetupFamily();
 	}
 	d2_SetProgressPercent(0, 10);
-	if (g_7747b0 & 0x41) {
-		if (!(g_7747b0 & 4)) {
+	if (gm_ClientModeFlags & 0x41) {
+		if (!(gm_ClientModeFlags & 4)) {
 			fcn_0064d41a(name, g_6a44e8, g_6a3778, g_7e1d00);
 			if (ls_LoadSavegame(name, 2) == 0) {
 				main_ShutdownEngine();
 				return;
 			}
 			gm_CreateSetupFamily();
-			gm_InitCityAndTradeState(g_773d75);
+			gm_InitCityAndTradeState(gm_ActiveTownIndex);
 			init_LocalData();
-			gm_RestockTownMarket(g_773d75);
+			gm_RestockTownMarket(gm_ActiveTownIndex);
 			d2_SetProgressPercent(0, 100);
 			d2_SetProgressPercent(0, 100);
 			if (g_7747f8 != 0) {
 				gm_InitStartingBuildingsAndWorkers();
 			}
 		} else {
-			if (g_14cbca0 == -1) {
+			if (nt_ClientSocket == -1) {
 				d2_ShowModalMessageBox(g_14ac5d0, 0);
 				gm_ShutdownGameRuntime();
 				main_FadeOutToBlack();
 				return;
 			}
-			if (g_7747b0 & 0x40) {
+			if (gm_ClientModeFlags & 0x40) {
 				ls_LoadNetworkGame(g_7e254a);
 			} else {
 				ls_StartNetworkGame(g_7e21a0);
 			}
-			g_7747b4 = 2;
+			gm_DifficultyLevel = 2;
 		}
-	} else if (g_7747b0 & 0x40) {
-		g_7747b4 = 2;
-		if (g_14cbca0 == -1) {
+	} else if (gm_ClientModeFlags & 0x40) {
+		gm_DifficultyLevel = 2;
+		if (nt_ClientSocket == -1) {
 			d2_ShowModalMessageBox(g_14ac5d0, 0);
 			gm_ShutdownGameRuntime();
 			main_FadeOutToBlack();
 			return;
 		}
 		ls_LoadNetworkGame(g_7e21a0);
-	} else if (g_7747b0 & 2) {
-		g_7747b4 = g_77670a;
+	} else if (gm_ClientModeFlags & 2) {
+		gm_DifficultyLevel = g_77670a;
 		if (ls_LoadSavegame(g_7e21a0, 1) == 0) {
 			main_LoopFlags = 0x46086;
 			d2_ShowModalMessageBox(g_14ac630, 0);
@@ -365,8 +365,8 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 		g_7e4314 = gm_QuerySeason(gm_GameTime);
 	}
 	init_AllocateKind0bSceneSlot();
-	if (g_7747b0 & 1) {
-		if (!(g_7747b0 & 4)) {
+	if (gm_ClientModeFlags & 1) {
+		if (!(gm_ClientModeFlags & 4)) {
 			r3.x = 0;
 			sim_SetSyncParams(&r3, 6, 0, 0);
 			x = cm_RequestSysMessage(3, &r3);
@@ -376,19 +376,19 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 			if (g_7747fc != 0) {
 				n = 750000;
 			} else {
-				n = (5 - g_7747b4) * 250;
+				n = (5 - gm_DifficultyLevel) * 250;
 			}
 			p = 0x7f4ca2;
 			do {
 				if ((*(char*) (p + 6) != 0) &&
 				    ((*(char*) p == 6) || (*(char*) p == 7))) {
-					c = gm_ConvertUnitsToAmount(n, g_773d75);
-					cm_RequestMoveCredits(*(int*) (p + 2), -1, g_773d75, c);
+					c = gm_ConvertUnitsToAmount(n, gm_ActiveTownIndex);
+					cm_RequestMoveCredits(*(int*) (p + 2), -1, gm_ActiveTownIndex, c);
 				}
 				p += 0x21c;
 			} while (p < 0x85a0a2);
 		}
-		if (g_7747b0 & 1) {
+		if (gm_ClientModeFlags & 1) {
 			hst_LoadHistoryText();
 		}
 	}
@@ -399,7 +399,7 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 	d2_SuppressOverlay = 0;
 	d2_InitHudPanels(d2_GetHudThemeResourceId());
 	d3_SelectSceneContext(0, 0);
-	if ((g_7747b0 & 1) && (!(g_7747b0 & 0x40))) {
+	if ((gm_ClientModeFlags & 1) && (!(gm_ClientModeFlags & 0x40))) {
 		d3_RebuildWorldScene();
 		d3_RebuildSceneQuadtree();
 		d2_InitDefaultBookmarks();
@@ -407,9 +407,9 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 	gm_ApplyGameSettings();
 	d3_SetViewport((float) (g_6a376c - g_6a3764),
 	    (float) (g_6a3770 - g_6a3768), (float) g_6a3764,
-	    (float) g_6a3768, g_10529c8, g_10421a0, g_10432a4,
+	    (float) g_6a3768, d3_ViewportZNear, d3_ViewportZFar, d3_ProjectionDist,
 	    g_1040494, d2_ScreenHeight);
-	if (g_7747b0 & 2) {
+	if (gm_ClientModeFlags & 2) {
 		gm_UpdateWeatherAndSky(gm_GameTime, 0);
 		if (g_7f3a30 != -1) {
 			base = (void*) gm_SearchTable67(g_7f3a30);
@@ -422,26 +422,26 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 				init_LoadGebaeudeScene(*(unsigned char*) base);
 				c = -1;
 			}
-			d2_EnterBuildingObjekt(base, c, g_6b5c60);
+			d2_EnterBuildingObjekt(base, c, str_empty);
 		}
 	}
 	for (;;) {
-		if ((g_774970 >= 0x300) || (g_774954 != 0)) {
+		if ((gm_LocalPlayerSlot >= 0x300) || (g_774954 != 0)) {
 			break;
 		}
-		if (*(char*) ((g_774970 & 0xffff) * 0x21c + 0x7f4ca2) == 6) {
+		if (*(char*) ((gm_LocalPlayerSlot & 0xffff) * 0x21c + 0x7f4ca2) == 6) {
 			break;
 		}
-		g_774970++;
+		gm_LocalPlayerSlot++;
 	}
-	if (g_7747b0 & 0x80) {
+	if (gm_ClientModeFlags & 0x80) {
 		d2_StartTutorial();
 		memset(buf, 0, 0xf8);
 		buf[4] = 0x87;
 		*(int*) (buf + 0xc) = -1;
 		buf[0x36] = 9;
 		*(int*) (buf + 8) =
-		    *(int*) ((g_774970 & 0xffff) * 0x21c + 0x7f4ca4);
+		    *(int*) ((gm_LocalPlayerSlot & 0xffff) * 0x21c + 0x7f4ca4);
 		cm_SendCopyEntityData(buf);
 	}
 	for (;;) {
@@ -452,13 +452,13 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 			break;
 		}
 		(*(int *)&main_PlayerTurnIndex) = 0;
-		if (!(g_7747b0 & 0x42)) {
-			g_774970 = 0;
+		if (!(gm_ClientModeFlags & 0x42)) {
+			gm_LocalPlayerSlot = 0;
 			(*(int *)&main_PlayerTurnIndex) = 0;
 			main_RundenBeginn();
 		} else {
 			c = 0;
-			count = g_774970;
+			count = gm_LocalPlayerSlot;
 			if (count != 0) {
 				p = 0x7f4ca2;
 				do {
@@ -472,19 +472,19 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 			}
 		}
 		for (;;) {
-			if ((g_774970 >= 0x300) || (g_774954 != 0)) {
+			if ((gm_LocalPlayerSlot >= 0x300) || (g_774954 != 0)) {
 				break;
 			}
-			if (*(char*) ((g_774970 & 0xffff) * 0x21c +
+			if (*(char*) ((gm_LocalPlayerSlot & 0xffff) * 0x21c +
 			    0x7f4ca2) == 6) {
 				break;
 			}
-			g_774970++;
+			gm_LocalPlayerSlot++;
 		}
-		if (*(char*) ((g_774970 & 0xffff) * 0x21c + 0x7f4ca2) != 6) {
+		if (*(char*) ((gm_LocalPlayerSlot & 0xffff) * 0x21c + 0x7f4ca2) != 6) {
 			goto l_gate;
 		}
-		if (!(g_7747b0 & 0x46)) {
+		if (!(gm_ClientModeFlags & 0x46)) {
 			r3.x = *(int*) 0x7f4c00;
 			r3.y = *(int*) 0x7f4c04;
 			r3.w = *(int*) 0x7f4c08;
@@ -495,22 +495,22 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 				cm_StepCommandQueue();
 			}
 		}
-		if (!(g_7747b0 & 0x42)) {
+		if (!(gm_ClientModeFlags & 0x42)) {
 			gm_BeginPlayerTurn();
 		} else {
 			d3_ResetWorldSceneState();
 			d2_RestoreHudPanels();
-			if (g_7747b0 & 4) {
+			if (gm_ClientModeFlags & 4) {
 				cm_RequestSysMessage(1, 0);
-				if (g_7747b0 & 4) {
+				if (gm_ClientModeFlags & 4) {
 					sv_WaitForNetworkSync(0x67fff);
 				}
 			}
 		}
-		if (!(g_7747b0 & 2)) {
+		if (!(gm_ClientModeFlags & 2)) {
 			cm_BeginCommandSync();
-			if ((g_7747b0 & 8) ||
-			    ((g_14cbca0 != -1) && (g_77494c & 8))) {
+			if ((gm_ClientModeFlags & 8) ||
+			    ((nt_ClientSocket != -1) && (nt_NetSyncFlags & 8))) {
 				fcn_005490e0();
 				he_RestartAction03b();
 				he_RestartAction0xa6();
@@ -521,10 +521,10 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 				cm_StepCommandQueue();
 			}
 		}
-		if ((!(g_7747b0 & 0x42)) && (g_6a342c != 0) &&
-		    (g_774954 == 0) && (!(g_7747b0 & 0x80))) {
-			g_773de8 = 0;
-			if (!(g_7747b0 & 4)) {
+		if ((!(gm_ClientModeFlags & 0x42)) && (g_6a342c != 0) &&
+		    (g_774954 == 0) && (!(gm_ClientModeFlags & 0x80))) {
+			ls_SaveSlotIndex = 0;
+			if (!(gm_ClientModeFlags & 4)) {
 				fcn_0064d41a(name, g_6a44c8, g_6a3448);
 				fp = (void*) fcn_0064e2f9(name, g_6750e8);
 				if (fp != 0) {
@@ -549,7 +549,7 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 				ls_LoadSavePreview(name);
 				ls_SaveGame(g_6a4470, g_6a448c, 1);
 			} else {
-				if (g_7747b0 & 0x10) {
+				if (gm_ClientModeFlags & 0x10) {
 					memset(buf, 0, 0x7c);
 					*(int*) (buf + 4) = *(int*) g_6a33dc;
 					buf[0] = 0;
@@ -562,7 +562,7 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 				}
 			}
 		}
-		d2_ToggleActionPopupBar(g_774970 & 0xffff);
+		d2_ToggleActionPopupBar(gm_LocalPlayerSlot & 0xffff);
 		g_fb5744 = 0;
 		g_774960 = 0;
 		d2_RunWorldHudLoop();
@@ -570,7 +570,7 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 			goto l_inc;
 		}
 		tb_SetCallbackPaused((void*) 0x538060, 1);
-		if (!(g_7747b0 & 8)) {
+		if (!(gm_ClientModeFlags & 8)) {
 			r2.x = *(int*) 0x7f4c00;
 			r2.y = *(int*) 0x7f4c04;
 			r2.w = *(int*) 0x7f4c08;
@@ -590,7 +590,7 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 		if (g_774958 != 0) {
 			goto l_inc;
 		}
-		g_7747b0 &= 0xbd;
+		gm_ClientModeFlags &= 0xbd;
 		(*(int *)&main_PlayerTurnIndex) += 1;
 		goto l_gate;
 l_inc:
@@ -599,7 +599,7 @@ l_gate:
 		if (g_774954 != 0) {
 			goto l_step;
 		}
-		if (g_14cbca0 == -1) {
+		if (nt_ClientSocket == -1) {
 			tb_SetCallbackPaused((void*) 0x538060, 1);
 			r1.x = *(int*) 0x7f4c00;
 			r1.y = *(int*) 0x7f4c04;
@@ -617,7 +617,7 @@ l_gate:
 			cm_RequestUpdateGameTime(&r1);
 			tb_SetCallbackPaused((void*) 0x538060, 0);
 		}
-		if (((g_77494c & 8) != 0) || (g_14cbca0 == -1)) {
+		if (((nt_NetSyncFlags & 8) != 0) || (nt_ClientSocket == -1)) {
 			if (amt_ProcessOfficeElections() != 0) {
 				memset(msg, 0, 0x114);
 				c = 0;
@@ -650,7 +650,7 @@ l_gate:
 				amt_SyncAllOfficeSlots();
 			}
 		}
-		if (g_7747b0 & 4) {
+		if (gm_ClientModeFlags & 4) {
 			sv_WaitForNetworkSync(0x24087);
 		}
 		gm_RunRoundUpdate();
@@ -661,17 +661,17 @@ l_step:
 		}
 		break;
 	}
-	if (g_7747b0 & 4) {
+	if (gm_ClientModeFlags & 4) {
 		if (g_68a9dc != -1) {
 			if (g_68a9dc !=
-			    *(int*) ((g_774970 & 0xffff) * 0x21c + 0x7f4ca4)) {
+			    *(int*) ((gm_LocalPlayerSlot & 0xffff) * 0x21c + 0x7f4ca4)) {
 				d2_ShowModalMessageBox(g_6a4420, 0);
 			}
 		} else {
 			d2_ShowModalMessageBox(g_6a43d0, 0);
 		}
 	}
-	if (g_7747b0 & 0x80) {
+	if (gm_ClientModeFlags & 0x80) {
 		d2_ShutdownTutorial();
 	}
 	gm_ShutdownGameRuntime();

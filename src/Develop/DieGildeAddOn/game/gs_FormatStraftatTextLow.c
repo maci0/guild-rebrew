@@ -1,5 +1,5 @@
-char g_69037c[] = "Hm, das ist doch nicht verboten";
-extern char g_69037c[];
+char str_Hm_das_ist_doch_nicht_verboten[] = "Hm, das ist doch nicht verboten";
+extern char str_Hm_das_ist_doch_nicht_verboten[];
 
 
 
@@ -47,7 +47,7 @@ int __cdecl gs_FormatStraftatTextLow(void* dst, GS_STRAFTAT_REC rec, int count)
 		io_FormatTextBuffer(dst, fmtOffset + 0x1428, (char*) &rec + 4);
 		break;
 	default:
-		memcpy(dst, g_69037c, 0x20);
+		memcpy(dst, str_Hm_das_ist_doch_nicht_verboten, 0x20);
 		result = 0;
 		break;
 	}

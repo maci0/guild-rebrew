@@ -18,8 +18,8 @@ typedef struct {
 	char pad4[0x14];
 } Info;
 
-extern __int64 g_666018;
-extern unsigned short g_7f4c04;
+extern __int64 gm_TargetPersonTypeMask;
+extern unsigned short gm_GameTimeHour;
 extern char* g_14acb58;
 extern int g_14ac6a0;
 extern char s_6acd74[];
@@ -78,7 +78,7 @@ int __cdecl gm_HandleVerhoer(unsigned char* e, unsigned char* action)
 		if (!amt_FindOfficeSlotByType(o[0x166], &info)) {
 			return 0x40;
 		}
-		amt_SendOfficeCommand(info.f0, 0, 0, g_7f4c04 > 0xd ? 0xff : 3, 0xff);
+		amt_SendOfficeCommand(info.f0, 0, 0, gm_GameTimeHour > 0xd ? 0xff : 3, 0xff);
 		gm_ModifyHealth(*(int*) (e + 4), -8);
 		cm_RequestChangeBits(*(int*) (e + 4), 0x1cc, 4, 0x40000, 0);
 		if (o[2] == 6 || o[2] == 7) {
@@ -95,7 +95,7 @@ int __cdecl gm_HandleVerhoer(unsigned char* e, unsigned char* action)
 	}
 	req.size = 0xc00;
 	req.kind = 6;
-	req.cd = g_666018;
+	req.cd = gm_TargetPersonTypeMask;
 	o = d2_OpenTargetPicker(&req, g_14acb58, 0, 0);
 	if (o == 0) {
 		return 2;
@@ -110,28 +110,28 @@ int __cdecl gm_HandleVerhoer(unsigned char* e, unsigned char* action)
 	id = io_AppendText(0x1e0f, *(unsigned short*) o);
 	ok = d2_GetWindowListItem(dlg, 1, id);
 	cancel = d2_GetWindowListItem(dlg, 1, id + 1);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == ok && d2_CheckActionBlocker(e, 8)) {
-				amt_SendOfficeCommand(info.f0, 0, 0, g_7f4c04 > 0xd ? 0xff : 3, 0xff);
+				amt_SendOfficeCommand(info.f0, 0, 0, gm_GameTimeHour > 0xd ? 0xff : 3, 0xff);
 				gm_ModifyHealth(*(int*) (e + 4), -8);
 				h = cm_RequestChangeBits(*(int*) (e + 4), 0x1cc, 4, 0x40000, 0);
 				while (h != -1 && cm_GetCommandStatus(h) == 0) {
 					cm_StepCommandQueue();
 				}
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 				result = 0x91;
 				if (o[2] == 6 || o[2] == 7) {
 					io_FormatTextBuffer(text, 0x1e10, *(unsigned short*) e, o[9] == 0 ? 0x253 : o[0x166] + 0x27b);
 					he_PostEntityMessage(*(int*) (o + 4), -1, text, 0, 0x5fb, 0);
 				}
 			} else if (d2_CurrentElementId == cancel) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop((void*) gm_HandleVerhoer, 0x657c7) != 0);
 	d2_DestroyForm(dlg);

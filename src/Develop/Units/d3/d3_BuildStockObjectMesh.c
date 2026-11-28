@@ -12,7 +12,7 @@ long __stdcall D3DXWeldVertices(void* mesh, void* eps, int* adj_in, int* adj_out
 void* __cdecl fcn_0041db70(int size, char* tag);
 void __cdecl fcn_0041ddd0(void* p);
 extern int g_6b5de0;
-extern int g_14ce728;
+extern int d3_LastReleaseRefCount;
 
 typedef long(__stdcall* LockFn)(void*, int, void*);
 typedef long(__stdcall* UnlockFn)(void*);
@@ -103,6 +103,6 @@ int __cdecl d3_BuildStockObjectMesh(char* o)
     buf = 0;
     ((long(__stdcall*) (void*, int, int, int, int*)) (*mesh)[0x28 / 4])(
         mesh, 0x660, 0x112, g_6b5de0, &r);
-    g_14ce728 = ((UnlockFn) (*mesh)[8 / 4])(mesh);
+    d3_LastReleaseRefCount = ((UnlockFn) (*mesh)[8 / 4])(mesh);
     return r;
 }

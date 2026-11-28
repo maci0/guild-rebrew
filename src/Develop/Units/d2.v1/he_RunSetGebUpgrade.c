@@ -38,7 +38,8 @@ void __cdecl he_RunSetGebUpgrade(char* action)
 			rec = (char*) (0x7f4ca0 + (unsigned short) (*(unsigned short*) (action + 8)) * 0x21c);
 			if (*(unsigned char*) (rec + 2) == 6) {
 				io_FormatTextBuffer(buf, 0x17e7, ent);
-				fcn_00545e80(((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (action + 8)].entity_id, ((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (action + 8)].entity_id, buf, 0, mode,
+				fcn_00545e80(((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (action + 8)].entity_id, ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (action + 8)].entity_id,
+					buf, 0, mode,
 					*(int*) (ent + 1), -1, 0, 0x6a65e0);
 			}
 			if (*(unsigned char*) (rec + 2) == 5 || *(unsigned char*) (rec + 2) == 6) {

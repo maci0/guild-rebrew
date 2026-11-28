@@ -26,8 +26,8 @@ extern short g_00fb9070; /* 0x00fb9070 */
 extern short g_00fb9072; /* 0x00fb9072 */
 extern short g_005fe73c; /* 0x005fe73c */
 
-extern char* g_1015ea0;
-extern char* g_772500;
+extern char* d2_Controls;
+extern char* d2_FileObjTable;
 extern int d2_ScreenHeight;
 extern int g_1040494;
 extern int d2_DefaultFont;
@@ -69,19 +69,19 @@ int __cdecl d2_CreateTextButton(int x, int y, int resourceId, int text)
 	int idx;
 
 	idx = d2_AllocateElement();
-	((D2_TEXT_BTN_ENT*)g_1015ea0)[idx].i[0x20 / 4] = 9;
-	((D2_TEXT_BTN_ENT*)g_1015ea0)[idx].i[0x5c / 4] = 1;
-	((D2_TEXT_BTN_ENT*)g_1015ea0)[idx].i[0x1d0 / 4] = 3;
-	((D2_TEXT_BTN_ENT*)g_1015ea0)[idx].i[0x10 / 4] = x;
-	((D2_TEXT_BTN_ENT*)g_1015ea0)[idx].i[0x1c / 4] = ((D2_TEXT_BTN_DEF*)g_772500)[resourceId].f52;
-	((D2_TEXT_BTN_ENT*)g_1015ea0)[idx].i[0x14 / 4] = y;
-	((D2_TEXT_BTN_ENT*)g_1015ea0)[idx].i[0x8 / 4] = resourceId;
-	((D2_TEXT_BTN_ENT*)g_1015ea0)[idx].i[0x30 / 4] = 0;
-	((D2_TEXT_BTN_ENT*)g_1015ea0)[idx].i[0x34 / 4] = d2_ScreenHeight;
-	((D2_TEXT_BTN_ENT*)g_1015ea0)[idx].i[0x28 / 4] = 0;
-	((D2_TEXT_BTN_ENT*)g_1015ea0)[idx].i[0x2c / 4] = g_1040494;
-	((D2_TEXT_BTN_ENT*)g_1015ea0)[idx].i[0x84 / 4] = d2_DefaultFont;
-	((D2_TEXT_BTN_ENT*)g_1015ea0)[idx].i[0xc / 4] = d2_GetResourceData(resourceId);
+	((D2_TEXT_BTN_ENT*)d2_Controls)[idx].i[0x20 / 4] = 9;
+	((D2_TEXT_BTN_ENT*)d2_Controls)[idx].i[0x5c / 4] = 1;
+	((D2_TEXT_BTN_ENT*)d2_Controls)[idx].i[0x1d0 / 4] = 3;
+	((D2_TEXT_BTN_ENT*)d2_Controls)[idx].i[0x10 / 4] = x;
+	((D2_TEXT_BTN_ENT*)d2_Controls)[idx].i[0x1c / 4] = ((D2_TEXT_BTN_DEF*)d2_FileObjTable)[resourceId].f52;
+	((D2_TEXT_BTN_ENT*)d2_Controls)[idx].i[0x14 / 4] = y;
+	((D2_TEXT_BTN_ENT*)d2_Controls)[idx].i[0x8 / 4] = resourceId;
+	((D2_TEXT_BTN_ENT*)d2_Controls)[idx].i[0x30 / 4] = 0;
+	((D2_TEXT_BTN_ENT*)d2_Controls)[idx].i[0x34 / 4] = d2_ScreenHeight;
+	((D2_TEXT_BTN_ENT*)d2_Controls)[idx].i[0x28 / 4] = 0;
+	((D2_TEXT_BTN_ENT*)d2_Controls)[idx].i[0x2c / 4] = g_1040494;
+	((D2_TEXT_BTN_ENT*)d2_Controls)[idx].i[0x84 / 4] = d2_DefaultFont;
+	((D2_TEXT_BTN_ENT*)d2_Controls)[idx].i[0xc / 4] = d2_GetResourceData(resourceId);
 	d2_SetControlText(idx, text);
 	d2_AddRefcount(resourceId);
 	return idx;

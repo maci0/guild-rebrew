@@ -1,8 +1,8 @@
 
 
 
-extern int g_7746d8;
-extern int g_7746a0;
+extern int d2_SelectedEntityUiFlags;
+extern int sv_ClickedObjekt;
 extern int g_14abcbc;
 extern int g_14abcd8;
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -40,7 +40,7 @@ void __cdecl d2_RunZollamtMenu(char* building)
 	d2_ClearStatusTextSlots();
 	if (main_RunFrameLoop((void*) d2_RunZollamtMenu, 0x67fff) != 0) {
 		do {
-			if (g_7746d8 & 0x200) {
+			if (d2_SelectedEntityUiFlags & 0x200) {
 				a = RegisterStatusText(s_6ab3a0, g_14abcbc, 0x16);
 				b = RegisterStatusText(s_6ab394, g_14abcd8, 0x16);
 				c = RegisterStatusText(s_6aa34c, g_14a7b50, 0xc);
@@ -52,20 +52,20 @@ void __cdecl d2_RunZollamtMenu(char* building)
 					e = RegisterStatusText(s_6ab368, g_14abce4, 0x16);
 				}
 			}
-			if ((g_7746d8 & 0x200) && g_7746a0 != 0) {
-				if (g_7746a0 == c) {
+			if ((d2_SelectedEntityUiFlags & 0x200) && sv_ClickedObjekt != 0) {
+				if (sv_ClickedObjekt == c) {
 					d2_ShowPersonalbuch(building, s_6aa34c);
 				}
-				else if (g_7746a0 == a) {
+				else if (sv_ClickedObjekt == a) {
 					d2_ShowProductionSelection(building);
 				}
-				else if (g_7746a0 == b) {
+				else if (sv_ClickedObjekt == b) {
 					d2_SelectPatrolTarget(building);
 				}
-				else if (g_7746a0 == e) {
+				else if (sv_ClickedObjekt == e) {
 					d2_StartZollkasseTargetSelect(building);
 				}
-				else if (g_7746a0 == d) {
+				else if (sv_ClickedObjekt == d) {
 					d2_OpenMeisterbriefDialog(building);
 				}
 			}

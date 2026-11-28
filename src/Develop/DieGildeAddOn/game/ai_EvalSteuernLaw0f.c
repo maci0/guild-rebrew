@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 int __cdecl gm_GetLawEntry(int idx, void* dst);
 float __cdecl gm_GetBuildingLevelRatio(void);
@@ -28,7 +28,7 @@ int __cdecl ai_EvalSteuernLaw0f(char* entity, char* unused, int* out)
 	gm_GetBuildingLevelRatio();
 	p = gm_GetGuildHall(1);
 	p = fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x115);
-	v = gm_SumQueryEntryValues(*(int*) (p + 0x14), (*(char*)&g_773d75));
+	v = gm_SumQueryEntryValues(*(int*) (p + 0x14), (*(char*)&gm_ActiveTownIndex));
 	t = amt_CalcTotalOfficeSalaries();
 	if (v < t * 3) {
 		lvl = 4;

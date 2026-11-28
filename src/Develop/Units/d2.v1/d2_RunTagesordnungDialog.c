@@ -1,5 +1,5 @@
 extern int d2_CurrentWindowId;
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 int __cdecl amt_FindOfficeSlotsByKind(int, int, char*);
 int __cdecl d2_LoadForm(int, int, char*);
@@ -79,7 +79,7 @@ void __cdecl d2_RunTagesordnungDialog(int a0, int a1, int level)
 				any |= 1;
 				io_AppendText(0x13a1, *(unsigned char*) (rec + j * 0x18 + 8) + 0x253);
 				k = 0;
-				h = (unsigned short*) g_7f4ca0;
+				h = (unsigned short*) gm_EntitySlotTable;
 				do {
 					if (k >= 4) {
 						break;
@@ -113,7 +113,7 @@ void __cdecl d2_RunTagesordnungDialog(int a0, int a1, int level)
 			}
 		}
 		i = 0;
-		h = (unsigned short*) g_7f4ca0;
+		h = (unsigned short*) gm_EntitySlotTable;
 		do {
 			if ((int) h >= 0x85a0a0) {
 				break;

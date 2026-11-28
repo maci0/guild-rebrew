@@ -79,5 +79,5 @@ typedef struct MARKET_STOCK_TABLE {
 /* // SIZE 0x2a90 */
 
 /* First-slot interior view of g_85ab80; not an allocation. */
-extern char g_85ab90[];
+extern char gm_MarketStockTable[];
 #endif

@@ -44,12 +44,12 @@ typedef struct {
 } D2_MARKUP_GLYPH;
 #pragma pack(pop)
 
-extern char* g_772524;
-extern char* g_1015ea0;
+extern char* d2_CurrentFontBank;
+extern char* d2_Controls;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_67d384;
 extern int g_772554;
-extern D2_WIN g_1015f40[0x60];
+extern D2_WIN d2_Windows[0x60];
 
 int __cdecl d2_GetResourceData(int);
 int __cdecl d2_SetTextColor(int, int, int);
@@ -85,7 +85,7 @@ void __cdecl d2_RenderMarkupLine(int unused, int y, int surf, int win, int flag,
 	int (*draw)(int, int, int, char*, int);
 	char c;
 
-	w = &g_1015f40[win];
+	w = &d2_Windows[win];
 	savedFlags = (*(int*) &w->pad14[0]);
 	lastc = 0;
 	sum = 0;
@@ -107,7 +107,7 @@ void __cdecl d2_RenderMarkupLine(int unused, int y, int surf, int win, int flag,
 	base = (((*(int*) &w->pad14[0]) & 8) >> 3) + (((*(int*) &w->pad14[0]) & 0x20) ? 2 : 0);
 	if (base < w->count) {
 		for (k = base; k < w->count; k++) {
-			tile = &((D2_MARKUP_TILE*) g_1015ea0)[w->children[k]];
+			tile = &((D2_MARKUP_TILE*) d2_Controls)[w->children[k]];
 			if (tile->skip78 == 0 && tile->y14 < y + d2_FontHeight
 			    && y < tile->y14 + tile->h1c && newflags != 0x40) {
 				sum += 6 + tile->w18 + g_67d384;
@@ -167,7 +167,7 @@ void __cdecl d2_RenderMarkupLine(int unused, int y, int surf, int win, int flag,
 		if (flag == 0) {
 			if (base < w->count) {
 				for (k = base; k < w->count; k++) {
-					tile = &((D2_MARKUP_TILE*) g_1015ea0)[w->children[k]];
+					tile = &((D2_MARKUP_TILE*) d2_Controls)[w->children[k]];
 					if (tile->skip78 == 0) {
 						while (tile->x10 < rec->f108 + x
 						       && x < tile->x10 + tile->w18 + 6
@@ -187,11 +187,11 @@ void __cdecl d2_RenderMarkupLine(int unused, int y, int surf, int win, int flag,
 							c = rec->text[j];
 							lastc = (unsigned char) c;
 							if (c != '~') {
-								glyph = (D2_MARKUP_GLYPH*) d2_GetBankEntry(g_772524, (unsigned char) c);
+								glyph = (D2_MARKUP_GLYPH*) d2_GetBankEntry(d2_CurrentFontBank, (unsigned char) c);
 								if (j != 0) {
 									x -= glyph->w;
 								}
-								if (d2_DrawHighlightSprite(x, y, surf, g_772524, (unsigned char) c)) {
+								if (d2_DrawHighlightSprite(x, y, surf, d2_CurrentFontBank, (unsigned char) c)) {
 									x += glyph->adv + g_67d384;
 								}
 							}
@@ -208,11 +208,11 @@ void __cdecl d2_RenderMarkupLine(int unused, int y, int surf, int win, int flag,
 							c = rec->text[j];
 							lastc = (unsigned char) c;
 							if (c != '~') {
-								glyph = (D2_MARKUP_GLYPH*) d2_GetBankEntry(g_772524, (unsigned char) c);
+								glyph = (D2_MARKUP_GLYPH*) d2_GetBankEntry(d2_CurrentFontBank, (unsigned char) c);
 								if (j != 0) {
 									x -= glyph->w;
 								}
-								if (draw(x, y, surf, g_772524, (unsigned char) c)) {
+								if (draw(x, y, surf, d2_CurrentFontBank, (unsigned char) c)) {
 									x += glyph->adv + g_67d384;
 									*(int*) 0x772608 = *(int*) 0x772608 - 1;
 								}

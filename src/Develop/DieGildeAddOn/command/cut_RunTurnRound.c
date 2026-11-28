@@ -29,21 +29,21 @@ typedef struct {
 } cmd_entry;
 /* SIZE 0x14 */
 
-extern unsigned char g_7747b0;   /* 0x007747b0 */
+extern unsigned char gm_ClientModeFlags;   /* 0x007747b0 */
 extern int cut_EventLoopFlags;             /* 0x0068bfb8 */
 extern int g_68bfbc;             /* 0x0068bfbc */
-extern int g_6b5c60;             /* 0x006b5c60 */
-extern int g_772f24;             /* 0x00772f24 */
+extern int str_empty;             /* 0x006b5c60 */
+extern int cut_ActivePlayerEntity;             /* 0x00772f24 */
 extern int g_772f28;             /* 0x00772f28 */
 extern int g_772f2c;             /* 0x00772f2c */
 extern int cut_CurrentTick;             /* 0x00772f30 */
 extern int cut_ClockDeadline;             /* 0x00772f34 */
 extern int cut_ClockExpired;             /* 0x00772f38 */
-extern int g_772f3c;             /* 0x00772f3c */
+extern int cut_SkipMode;             /* 0x00772f3c */
 extern int g_14ac5e8;            /* 0x014ac5e8 */
 extern int g_14ac5ec;            /* 0x014ac5ec */
 
-extern char g_9b0e20[];          /* 0x009b0e20 */
+extern char cut_ParticipantSlots[];          /* 0x009b0e20 */
 extern cmd_entry g_9b0844[];     /* 0x009b0844 */
 
 extern char s_68d580[]; /* "cut_type:%i" */
@@ -89,9 +89,9 @@ void __cdecl cut_RunTurnRound(unsigned char* cutscene, int id)
 
 	saved = cut_GetRandSeed();
 	cut_ResetEventSlots(cutscene);
-	if (g_7747b0 & 4) {
-		if (*(int*) (cutscene + 0xc) == *(int*) ((unsigned int) g_774970 * 0x21c + 0x7f4ca4)) {
-			if (g_772f3c != 0) {
+	if (gm_ClientModeFlags & 4) {
+		if (*(int*) (cutscene + 0xc) == *(int*) ((unsigned int) gm_LocalPlayerSlot * 0x21c + 0x7f4ca4)) {
+			if (cut_SkipMode != 0) {
 				goto label_4e526f;
 			}
 			memset(&msg, 0, sizeof(msg));
@@ -100,24 +100,24 @@ void __cdecl cut_RunTurnRound(unsigned char* cutscene, int id)
 			cm_RequestSysMessage(0x11, &msg);
 		}
 label_4e526f:
-		if (g_772f3c == 0) {
+		if (cut_SkipMode == 0) {
 			cm_WaitNetworkSyncBanner(g_14ac5e8);
 		}
 	}
-	d2_ShowStatusBanner((int) &g_6b5c60);
-	if (g_7747b0 & 8) {
+	d2_ShowStatusBanner((int) &str_empty);
+	if (gm_ClientModeFlags & 8) {
 		for (i = 0; i < (int) cutscene[0x30]; i++) {
 			g_772f28 = i;
 			if (*(int*) (cutscene + 0x34 + i * 4) == -1) {
 				continue;
 			}
-			g_772f24 = gm_LookupEntityRecordById(*(int*) (cutscene + 0x34 + i * 4));
-			if (g_772f24 == 0) {
+			cut_ActivePlayerEntity = gm_LookupEntityRecordById(*(int*) (cutscene + 0x34 + i * 4));
+			if (cut_ActivePlayerEntity == 0) {
 				*(int*) (cutscene + 0x34 + i * 4) = -1;
 				continue;
 			}
-			rec = &((rec35c*) g_9b0e20)[i];
-			if (*(unsigned char*) (g_772f24 + 2) == 6) {
+			rec = &((rec35c*) cut_ParticipantSlots)[i];
+			if (*(unsigned char*) (cut_ActivePlayerEntity + 2) == 6) {
 				cut_ClockDeadline = g_68bfbc + cut_CurrentTick;
 				cut_ClockExpired = 0;
 				((cmd_entry*) g_9b0844)[cutscene[8]].f0(rec, id);
@@ -128,12 +128,12 @@ label_4e526f:
 			io_AppendText((int) ((char*) rec + 0x14));
 			io_AppendText((int) s_68b300);
 		}
-	} else if (g_7747b0 & 4) {
-		g_772f24 = (unsigned int) g_774970 * 0x21c + 0x7f4ca0;
+	} else if (gm_ClientModeFlags & 4) {
+		cut_ActivePlayerEntity = (unsigned int) gm_LocalPlayerSlot * 0x21c + 0x7f4ca0;
 		kind = *(unsigned char*) ((unsigned int) cutscene[8] * 0x14 + 0x9b084c);
 		if (kind == 1) {
-			if (*(int*) (cutscene + 0xc) == *(int*) ((unsigned int) g_774970 * 0x21c + 0x7f4ca4)) {
-				rec = (rec35c*) g_9b0e20;
+			if (*(int*) (cutscene + 0xc) == *(int*) ((unsigned int) gm_LocalPlayerSlot * 0x21c + 0x7f4ca4)) {
+				rec = (rec35c*) cut_ParticipantSlots;
 				ids = (int*) (cutscene + 0x34);
 				for (i = 0; i < (int) cutscene[0x30]; i++, ids++) {
 					ent = gm_LookupEntityRecordById(*ids);
@@ -142,7 +142,7 @@ label_4e526f:
 							&& *(unsigned char*) (ent + 2) != 7
 							&& rec->f8 == 0) {
 						c1 = *rec;
-						g_772f24 = ent;
+						cut_ActivePlayerEntity = ent;
 						if (((cmd_entry*) g_9b0844)[cutscene[8]].f4 != 0) {
 							((cmd_entry*) g_9b0844)[cutscene[8]].f4(&c1, id);
 						}
@@ -159,18 +159,18 @@ label_4e526f:
 					rec++;
 				}
 			}
-			g_772f24 = (unsigned int) g_774970 * 0x21c + 0x7f4ca0;
-			ent = *(int*) (g_772f24 + 4);
+			cut_ActivePlayerEntity = (unsigned int) gm_LocalPlayerSlot * 0x21c + 0x7f4ca0;
+			ent = *(int*) (cut_ActivePlayerEntity + 4);
 			for (i = 0; i < (int) cutscene[0x30]; i++) {
 				if (*(int*) (cutscene + 0x34 + i * 4) == ent) {
-					c1 = ((rec35c*) g_9b0e20)[i];
+					c1 = ((rec35c*) cut_ParticipantSlots)[i];
 					cut_ClockDeadline = g_68bfbc + cut_CurrentTick;
 					cut_ClockExpired = 0;
 					((cmd_entry*) g_9b0844)[cutscene[8]].f0(&c1, id);
 					c1.f8 = 1;
 					c1.fc = 0;
 					cm_StageRawPacketPayload(0x35c, &c1);
-					h = cm_RequestSendCutInfo(*(int*) (g_772f24 + 4), *(int*) cutscene);
+					h = cm_RequestSendCutInfo(*(int*) (cut_ActivePlayerEntity + 4), *(int*) cutscene);
 					while (cm_GetCommandStatus(h) == 0) {
 						cm_StepCommandQueue();
 					}
@@ -186,7 +186,7 @@ label_4e526f:
 			pos = -1;
 			found = -1;
 			for (i = 0; i < (int) cutscene[0x30]; i++) {
-				if (*(int*) (cutscene + 0x34 + i * 4) == *(int*) ((unsigned int) g_774970 * 0x21c + 0x7f4ca4)) {
+				if (*(int*) (cutscene + 0x34 + i * 4) == *(int*) ((unsigned int) gm_LocalPlayerSlot * 0x21c + 0x7f4ca4)) {
 					pos = i;
 					if (pos != -1) {
 						found = cut_FindPrevActiveSlot(cutscene, pos);
@@ -198,11 +198,11 @@ label_4e526f:
 				d2_AppendPendingPlayerNames(cutscene);
 				main_RunFrameLoop(0, cut_EventLoopFlags | 0x8000);
 				if (pos != -1
-						&& (pos == 0 || ((rec35c*) g_9b0e20)[found].f8 == 1)
-						&& ((rec35c*) g_9b0e20)[pos].f8 == 0) {
+						&& (pos == 0 || ((rec35c*) cut_ParticipantSlots)[found].f8 == 1)
+						&& ((rec35c*) cut_ParticipantSlots)[pos].f8 == 0) {
 					g_772f28 = pos;
-					c1 = ((rec35c*) g_9b0e20)[pos];
-					g_772f24 = gm_LookupEntityRecordById(*(int*) (cutscene + 0x34 + pos * 4));
+					c1 = ((rec35c*) cut_ParticipantSlots)[pos];
+					cut_ActivePlayerEntity = gm_LookupEntityRecordById(*(int*) (cutscene + 0x34 + pos * 4));
 					d2_AppendPendingPlayerNames(cutscene);
 					cut_ClockDeadline = g_68bfbc + cut_CurrentTick;
 					cut_ClockExpired = 0;
@@ -210,24 +210,24 @@ label_4e526f:
 					c1.f8 = 1;
 					c1.fc = 0;
 					cm_StageRawPacketPayload(0x35c, &c1);
-					h = cm_RequestSendCutInfo(*(int*) (g_772f24 + 4), *(int*) cutscene);
+					h = cm_RequestSendCutInfo(*(int*) (cut_ActivePlayerEntity + 4), *(int*) cutscene);
 					while (cm_GetCommandStatus(h) == 0) {
 						cm_StepCommandQueue();
 					}
 					d2_AppendPendingPlayerNames(cutscene);
 					main_RunFrameLoop(0, cut_EventLoopFlags | 0x8000);
 				}
-				if (*(int*) (cutscene + 0xc) == *(int*) ((unsigned int) g_774970 * 0x21c + 0x7f4ca4)) {
+				if (*(int*) (cutscene + 0xc) == *(int*) ((unsigned int) gm_LocalPlayerSlot * 0x21c + 0x7f4ca4)) {
 					for (i = 0; i < (int) cutscene[0x30]; i++) {
 						ent = gm_LookupEntityRecordById(*(int*) (cutscene + 0x34 + i * 4));
 						if (ent != 0
 								&& *(unsigned char*) (ent + 2) != 6
 								&& *(unsigned char*) (ent + 2) != 7
-								&& (i == 0 || ((rec35c*) g_9b0e20)[cut_FindPrevActiveSlot(cutscene, i)].f8 == 1)
-								&& ((rec35c*) g_9b0e20)[i].f8 == 0) {
+								&& (i == 0 || ((rec35c*) cut_ParticipantSlots)[cut_FindPrevActiveSlot(cutscene, i)].f8 == 1)
+								&& ((rec35c*) cut_ParticipantSlots)[i].f8 == 0) {
 							g_772f28 = i;
-							c2 = ((rec35c*) g_9b0e20)[i];
-							g_772f24 = ent;
+							c2 = ((rec35c*) cut_ParticipantSlots)[i];
+							cut_ActivePlayerEntity = ent;
 							if (((cmd_entry*) g_9b0844)[cutscene[8]].f4 != 0) {
 								((cmd_entry*) g_9b0844)[cutscene[8]].f4(&c2, id);
 							}

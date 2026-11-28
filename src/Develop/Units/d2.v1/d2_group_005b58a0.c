@@ -28,8 +28,8 @@ typedef struct
 
 extern int d2_CurrentWindowId;
 extern int g_772534;
-extern char* g_1015ea0;
-extern char* g_14abc28;
+extern char* d2_Controls;
+extern char* txt_NoEntityName;
 
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -63,7 +63,7 @@ typedef struct
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_68c1c8[];
-extern char g_679060[];
+extern char str_fmt_s[];
 
 void __cdecl d2_SetForm(int, int);
 int __cdecl d2_AddElementToWindow(int x, int y, int a3, int win);
@@ -80,13 +80,13 @@ void __cdecl d2_CreateGauge(int x, int y, Gauge* s)
 	int i;
 
 	s->icon = d2_AddElementToWindow(x, y, 0x5db, d2_CurrentWindowId);
-	((D2_CONTROL_TL*) g_1015ea0)[s->icon].value_05c = 1;
-	s->label = d2_ShowTxt(x - 0x36, y - 0x11, g_14abc28, d2_CurrentWindowId);
-	((D2_CONTROL_TL*) g_1015ea0)[s->label].width = 0xa0;
-	((D2_CONTROL_TL*) g_1015ea0)[s->label].value_06c = 1;
+	((D2_CONTROL_TL*) d2_Controls)[s->icon].value_05c = 1;
+	s->label = d2_ShowTxt(x - 0x36, y - 0x11, txt_NoEntityName, d2_CurrentWindowId);
+	((D2_CONTROL_TL*) d2_Controls)[s->label].width = 0xa0;
+	((D2_CONTROL_TL*) d2_Controls)[s->label].value_06c = 1;
 	s->value = d2_ShowTxt(x - 0x36, y + 0x44, "", d2_CurrentWindowId);
-	((D2_CONTROL_TL*) g_1015ea0)[s->value].width = 0xa0;
-	((D2_CONTROL_TL*) g_1015ea0)[s->value].value_06c = 1;
+	((D2_CONTROL_TL*) d2_Controls)[s->value].width = 0xa0;
+	((D2_CONTROL_TL*) d2_Controls)[s->value].value_06c = 1;
 	s->x1c = -1;
 	s->x10 = -1;
 	s->x8 = 0;
@@ -111,33 +111,33 @@ void __cdecl d2_UpdateGauge(unsigned char* e, fcn_005b59c0_Gauge* g, int full)
 	g->x1c = d2_AddElementToWindow(g->x + 2, g->y, *(int*) (e + 0x18c), d2_CurrentWindowId);
 	gm_FormatEntityTitleAndName(*(unsigned short*) e, 1, 1, buf);
 	d2_SetLabelText(g->label, buf);
-	((D2_CONTROL_TL*) g_1015ea0)[g->label].value_06c = 1;
-	((D2_CONTROL_TL*) g_1015ea0)[g->label].width = 0xa0;
+	((D2_CONTROL_TL*) d2_Controls)[g->label].value_06c = 1;
+	((D2_CONTROL_TL*) d2_Controls)[g->label].width = 0xa0;
 	g->bar = d2_AddWindowValueGauge(g->x - 8, g->y + 0x32, 0x40, 0, 0x64, 0x75, 0x42, d2_CurrentWindowId);
-	((D2_CONTROL_TL*) g_1015ea0)[g->bar].disabled = 1;
+	((D2_CONTROL_TL*) d2_Controls)[g->bar].disabled = 1;
 	g->state = 1;
-	((D2_CONTROL_TL*) g_1015ea0)[g->icon].associated_object = (char*) e;
+	((D2_CONTROL_TL*) d2_Controls)[g->icon].associated_object = (char*) e;
 	if (*(int*) (e + 0x174) != 0 && e[0x164] == 0) {
 		if (g->obj[0x165] == rec->role_230)
 			io_FormatTextBuffer(buf, g_68c1c8, *(int*) (e + 0x174), 0x1a39);
 		else if (g->obj[0x165] == rec->role_22f)
 			io_FormatTextBuffer(buf, g_68c1c8, *(int*) (e + 0x174), 0x1a3a);
 		d2_SetLabelText(g->value, buf);
-		((D2_CONTROL_TL*) g_1015ea0)[g->value].value_06c = 1;
-		((D2_CONTROL_TL*) g_1015ea0)[g->value].width = 0xa0;
+		((D2_CONTROL_TL*) d2_Controls)[g->value].value_06c = 1;
+		((D2_CONTROL_TL*) d2_Controls)[g->value].width = 0xa0;
 	} else if (e[0x164] == 0) {
 		if (g->obj[0x165] == rec->role_230)
 			io_FormatTextBuffer(buf, "%s", 0x1a3b);
 		else if (g->obj[0x165] == rec->role_22f)
 			io_FormatTextBuffer(buf, "%s", 0x1a3c);
 		d2_SetLabelText(g->value, buf);
-		((D2_CONTROL_TL*) g_1015ea0)[g->value].value_06c = 1;
-		((D2_CONTROL_TL*) g_1015ea0)[g->value].width = 0xa0;
+		((D2_CONTROL_TL*) d2_Controls)[g->value].value_06c = 1;
+		((D2_CONTROL_TL*) d2_Controls)[g->value].width = 0xa0;
 	}
 	if (full != 0) {
 		d2_DrawSegmentedBar(g->x, g->y + 0x64, e[0x83], 0x4df);
 		d2_DrawSegmentedBar(g->x, g->y + 0x74, e[0x82], 0x4df);
 	}
 	if (g->bar != -1)
-		d2_SetElementValue(g->bar, 0, 0x64, (int) ((float) ((gm_GetEntityRelation(g_774970, *(unsigned short*) g->obj) + 128.0) * 100.0) / 255.0));
+		d2_SetElementValue(g->bar, 0, 0x64, (int) ((float) ((gm_GetEntityRelation(gm_LocalPlayerSlot, *(unsigned short*) g->obj) + 128.0) * 100.0) / 255.0));
 }

@@ -7,7 +7,7 @@ struct s_7f4ca0 {
 	char pad2[0x219];
 };
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 extern char* gm_CityEntity;
 
 
@@ -31,7 +31,7 @@ void __cdecl d3_RefreshBuildingPennants(void)
 	d3_SelectSceneContext(0, 1);
 	for (e = gm_StartFilteredEntitySearch(1, 6); e != 0; e = gm_FindNextFilteredEntity()) {
 		if (*(unsigned short*) (e + 0x27) != 0xffff) {
-			r = ((struct s_7f4ca0 *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (e + 0x27)]);
+			r = ((struct s_7f4ca0 *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[*(unsigned short*) (e + 0x27)]);
 		}
 		if (r != 0 && r != ((struct s_7f4ca0*)gm_CityEntity) && (r->kind == 6 || r->kind == 7 || r->kind == 5) &&
 		    (e[0x5a] & 1) == 0) {

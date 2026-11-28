@@ -62,7 +62,7 @@ void __cdecl he_RunLevelTraining(char* t)
 	*(int*) (t + 0x84) = -1;
 	switch (*(int*) (t + 0x70)) {
 	case 1:
-		e = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (t + 8)]);
+		e = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[*(unsigned short*) (t + 8)]);
 		gm_GetJobTrainingAttributes(gm_MapEntityStatRange(*(unsigned char*) (t + 0xb0)), &a, &b);
 		cm_BeginPacketFieldDelta((char*) e, e->entity_id);
 		c = gm_RandomMod(0x10) + 0x10;
@@ -84,7 +84,7 @@ void __cdecl he_RunLevelTraining(char* t)
 		cm_SendSetHE(-1, t);
 		return;
 	case 0:
-		e = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (t + 8)]);
+		e = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[*(unsigned short*) (t + 8)]);
 		p = gm_LookupEntityRecordById(*(int*) (t + 0xac));
 		if (p == 0) {
 			*(pos14_7f4c00*) (t + 0x52) = (*(pos14_7f4c00*)&gm_GameTime);

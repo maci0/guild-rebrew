@@ -29,7 +29,7 @@ void __cdecl he_RunChildBirth(char* action)
 	float threshold; int rec_id;
 
 	v20 = -1;
-	entry = ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (action + 8)]);
+	entry = ((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (action + 8)]);
 	rec = gm_LookupEntityRecordById(*(int*) (entry + 0x5c));
 	if (rec == 0 || rec[8] == 0 || entry[8] == 0)
 		goto tail;
@@ -45,14 +45,14 @@ void __cdecl he_RunChildBirth(char* action)
 				*(int*) (msg + 0xc) = *(int*) (entry + 4);
 				*(int*) (msg + 0x34) = *(int*) (entry + 4);
 				*(int*) (msg + 0x18) = gm_GameTime;
-				*(int*) (msg + 0x1c) = g_7f4c04;
+				*(int*) (msg + 0x1c) = gm_GameTimeHour;
 				*(int*) (msg + 0x38) = rec_id;
 				msg[8] = 7;
 				msg[0x26] = 0x20;
 				*(int*) (msg + 0x14) = -1;
 				msg[0x30] = 2;
-				*(int*) (msg + 0x20) = g_7f4c08;
-				*(short*) (msg + 0x24) = g_7f4c0c;
+				*(int*) (msg + 0x20) = gm_GameTimeSliceDword;
+				*(short*) (msg + 0x24) = gm_GameTimeTailWord;
 				gm_AddTime(msg + 0x18, 0, 0x1e, 0);
 				cm_EnqueueStagedPacket(msg);
 			}

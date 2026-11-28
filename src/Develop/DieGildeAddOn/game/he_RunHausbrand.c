@@ -1,15 +1,15 @@
 #include "Develop/client_types.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern volatile int g_6b7fb8;
+extern volatile int tb_TimerTicks;
 extern int d3_CurrentContextIndex;
-extern int g_7e4538;
+extern int d3_RainEffect;
 extern int gm_GameTime;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
-extern char g_7f4ca4[];
-extern char g_6b5c60[];
-extern char g_68149c[];
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
+extern char gm_EntityIdField[];
+extern char str_empty[];
+extern char str_dummy_TUER[];
 extern char g_6a2edc[];
 extern char g_6a2f08[];
 extern char g_6a6b50[];
@@ -101,14 +101,14 @@ void __cdecl he_RunHausbrand(char *action)
 						r = sb_PrepareVoice(0, g_6a6b38);
 						if (r != 0)
 							d3snd_PlayObjectSound((int)r, *(int *)(e + 0x61), 0x6b, 2200.0f);
-						if (*(unsigned short *)(e + 0x27) == g_774970) {
+						if (*(unsigned short *)(e + 0x27) == gm_LocalPlayerSlot) {
 							d3snd_QueueSound(-8, 0, g_6a6b28, 0, 100);
 							if (*(char *)(action + 0x104)) {
 								io_FormatTextBuffer(text, 0x42d6, e);
 								he_MessageBoxQuickjump(
-									*(int *)(g_7f4ca4 + (unsigned short)g_774970 * 0x21c),
+									*(int *)(gm_EntityIdField + (unsigned short)gm_LocalPlayerSlot * 0x21c),
 									-1, text, 0, 0x5ed, *(int *)(e + 1), -1, 0,
-									g_6b5c60);
+									str_empty);
 							}
 						}
 					}
@@ -164,7 +164,7 @@ inc_step:
 			i = 0;
 			n = (int)gm_FindNearestBuildingByKind(e, 3);
 			if (n != 0) {
-				h = g_7f4ca4 + 0x180;
+				h = gm_EntityIdField + 0x180;
 				q = (int *)(action + 0xb8);
 				do {
 					if (*(char *)(h - 0x17c) != 0 &&
@@ -204,25 +204,25 @@ inc_step:
 				p = (int *)(action + 0x60);
 				tmp = (float)gm_CalcWorkMinutesBetween(p, (int *)0x7f4c00) * (1.0f / 6.0f);
 				n = (int)(tmp + tmp);
-				if (g_7e4538 != 0) {
-					dtmp = *(int *)g_7e4538 * 0.002;
+				if (d3_RainEffect != 0) {
+					dtmp = *(int *)d3_RainEffect * 0.002;
 					f = 1.0 + dtmp * 0.7;
 				}
 				*(int *)(action + 0xb0) =
 					(int)((float)*(int *)(action + 0xb0) - n * f);
 				gm_AdjustGebaeudeCondition(e, -n);
-				if (*(unsigned short *)(e + 0x27) == g_774970 &&
-				    *(unsigned int *)(action + 0xfc) + 0x20d < (unsigned int)g_6b7fb8) {
+				if (*(unsigned short *)(e + 0x27) == gm_LocalPlayerSlot &&
+				    *(unsigned int *)(action + 0xfc) + 0x20d < (unsigned int)tb_TimerTicks) {
 					d = *(char *)(e + 0x5c) - n;
 					if (d <= 0) {
 						d3snd_QueueSound(-8, 0, g_6a6ad0, 2, 100);
-						*(int *)(action + 0xfc) = g_6b7fb8;
+						*(int *)(action + 0xfc) = tb_TimerTicks;
 					} else if (d <= 0xa) {
 						d3snd_QueueSound(-8, 0, g_6a6ad0, 1, 100);
-						*(int *)(action + 0xfc) = g_6b7fb8;
+						*(int *)(action + 0xfc) = tb_TimerTicks;
 					} else if (d <= 0x19) {
 						d3snd_QueueSound(-8, 0, g_6a6ad0, 0, 100);
-						*(int *)(action + 0xfc) = g_6b7fb8;
+						*(int *)(action + 0xfc) = tb_TimerTicks;
 					}
 				}
 				*(pos14_7f4c00*) (action + 0x52) = *(pos14_7f4c00*) &gm_GameTime;
@@ -253,7 +253,7 @@ inc_step:
 						    *(int *)(m + 0x2c) == -1 &&
 						    *(int *)(m + 0x128) == 0 &&
 						    (m = d3_FindSceneObject((char *)*(int *)(e + 0x61), 0x100, 0,
-								      g_68149c)) != 0) {
+								      str_dummy_TUER)) != 0) {
 							d3_TransformPoint(m, m + 0x4c, pos);
 							if (!(CompareVector3WithinTolerance(
 								    (float *)(*(int *)(*(int *)(r + 0x184) + 0x34) + 0x4c),

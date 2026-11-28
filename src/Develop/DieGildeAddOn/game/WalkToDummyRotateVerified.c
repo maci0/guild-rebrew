@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/ch_script.h"
 
 
-extern char* g_6b7ebc;
+extern char* evt_WaitingScriptTask;
 extern char* evt_CurrentScript;
 
 void __cdecl ch_QueueWalkToDummyRotate(char* a, char* b);
@@ -9,7 +9,7 @@ void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
 int __cdecl WalkToDummyRotateVerified(char** a, char** b, int* c)
 {
-	if (g_6b7ebc != 0 && *(void**) (g_6b7ebc + 0x44) == (void*) WalkToDummyRotateVerified) {
+	if (evt_WaitingScriptTask != 0 && *(void**) (evt_WaitingScriptTask + 0x44) == (void*) WalkToDummyRotateVerified) {
 		if (*(int*) (*a + 0x128) != 0) {
 			*(void**) (evt_CurrentScript + 0xc60) = (void*) WalkToDummyRotateVerified;
 		}

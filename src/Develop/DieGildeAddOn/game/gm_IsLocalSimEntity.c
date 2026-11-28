@@ -1,12 +1,12 @@
-extern unsigned char g_6a375c;
+extern unsigned char gm_PlayerCount;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern unsigned int g_14cbcb4;
+extern unsigned int nt_LocalShardIndex;
 
 
 /* ADDRESS: GOLDTL 0x0047dca0 */
 int __cdecl gm_IsLocalSimEntity(char* entity)
 {
-	if ((g_14cbca0 == -1 || entity[2] == 6 || *(unsigned int*) (entity + 4) % g_6a375c == g_14cbcb4) &&
+	if ((nt_ClientSocket == -1 || entity[2] == 6 || *(unsigned int*) (entity + 4) % gm_PlayerCount == nt_LocalShardIndex) &&
 	    (*(int*) (entity + 0x1cc) & 0x3000) == 0)
 		return 1;
 	return 0;

@@ -9,7 +9,7 @@ typedef struct
 } S0c;
 // SIZE 0xc
 
-extern float g_6628a8;
+extern float flt_0_0;
 
 int __cdecl gm_GetKindRecord(int k, S0c* s);
 unsigned short __cdecl gm_RandomMod(unsigned short n);
@@ -27,14 +27,14 @@ float __cdecl gm_ApplyPlagueInfection(char* p)
 
 	flags = *(int*) (p + 0x2c);
 	if (flags & 0xf) {
-		return g_6628a8;
+		return flt_0_0;
 	}
 	if (!gm_GetKindRecord(1, &s)) {
-		return g_6628a8;
+		return flt_0_0;
 	}
 	r = gm_RandomMod((unsigned short) s.c);
 	if (r == 0) {
-		return g_6628a8;
+		return flt_0_0;
 	}
 	nf = ((r ^ flags) & 0xf) ^ flags;
 	cm_BeginPacketFieldDelta(p, *(int*) (p + 4));

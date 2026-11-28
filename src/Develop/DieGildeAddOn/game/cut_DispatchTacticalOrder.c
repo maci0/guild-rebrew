@@ -1,12 +1,12 @@
 #include <string.h>
 
 extern int g_14ce8cc;
-extern int g_7746a0;
-extern char g_14cf736;
-extern int g_67a370;
+extern int sv_ClickedObjekt;
+extern char io_RightShiftKeyDown;
+extern int d3_ActiveScene;
 extern char* g_14a9a10;
-extern short g_14ce8c0;
-extern short g_14ce8c2;
+extern short io_ActiveCursorX;
+extern short io_ActiveCursorY;
 
 typedef struct {
 	int id;
@@ -42,35 +42,35 @@ char __cdecl cut_DispatchTacticalOrder(char* context, char* targetEntity)
 
 	r = 0;
 	if (g_14ce8cc) {
-		if (g_7746a0) {
-			if (*(int*) ((char*) g_7746a0 + 0x220) == 2) {
-				obj = *(int*) ((char*) g_7746a0 + 0x204);
-				if (gm_EntitiesDifferByOwnerPtr(targetEntity, obj) != 0 || g_14cf736 != 0) {
+		if (sv_ClickedObjekt) {
+			if (*(int*) ((char*) sv_ClickedObjekt + 0x220) == 2) {
+				obj = *(int*) ((char*) sv_ClickedObjekt + 0x204);
+				if (gm_EntitiesDifferByOwnerPtr(targetEntity, obj) != 0 || io_RightShiftKeyDown != 0) {
 					if (cut_AssignTargetOrder(context, targetEntity, (char*) obj, 0, 0) != -1) {
 						r = 1;
 						goto end;
 					}
 				}
 			} else {
-				if (strcmp((char*) g_7746a0, "sp_ESCAPE") == 0) {
-					gm_IssueEscapeOrder(context, targetEntity, (char*) g_7746a0);
+				if (strcmp((char*) sv_ClickedObjekt, "sp_ESCAPE") == 0) {
+					gm_IssueEscapeOrder(context, targetEntity, (char*) sv_ClickedObjekt);
 					r = 1;
 					goto end;
 				}
-				if (strncmp((char*) g_7746a0, "sp_CONQUER", 10) == 0) {
-					cut_AssignConquerTarget(context, targetEntity, (char*) g_7746a0);
+				if (strncmp((char*) sv_ClickedObjekt, "sp_CONQUER", 10) == 0) {
+					cut_AssignConquerTarget(context, targetEntity, (char*) sv_ClickedObjekt);
 					r = 1;
 					goto end;
 				}
-				if (strncmp((char*) g_7746a0, "WARE", 4) == 0) {
-					he_QueueTradeWareCommand(context, targetEntity, (char*) g_7746a0);
+				if (strncmp((char*) sv_ClickedObjekt, "WARE", 4) == 0) {
+					he_QueueTradeWareCommand(context, targetEntity, (char*) sv_ClickedObjekt);
 					r = 1;
 					goto end;
 				}
 			}
 		} else {
-			obj = *(int*) (g_67a370 + 0xb0); if (d3sm_RaycastScreenPoint(obj, g_14ce8c0 + 0x1a,
-					 g_14ce8c2 + 0x1a, &v13, &v12) != 0) {
+			obj = *(int*) (d3_ActiveScene + 0xb0); if (d3sm_RaycastScreenPoint(obj, io_ActiveCursorX + 0x1a,
+					 io_ActiveCursorY + 0x1a, &v13, &v12) != 0) {
 				e = gm_FindOrCreateEntitySlot(context, targetEntity);
 				e->fc = 0;
 				l = *e;

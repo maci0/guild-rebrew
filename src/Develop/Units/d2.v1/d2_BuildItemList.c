@@ -32,10 +32,10 @@ typedef struct
 } Screen;
 
 extern int d2_CurrentWindowId;
-extern char* g_77255c;
+extern char* d2_CurrentWindow;
 extern char* g_f8f080;
 extern int g_14a79c0[];
-extern char g_868060[];
+extern char gm_TownTable[];
 
 void __cdecl d2_SetForm(int, int);
 int __cdecl d2_AddWindowField(int, int, int, int, int);
@@ -56,21 +56,21 @@ void __cdecl d2_BuildItemList(Row* rows, int form_id, int sub_form, int mode)
 		}
 		d2_SetForm(form_id, sub_form);
 		if (mode != 0) {
-			rows[i].icon = d2_AddWindowField((((Screen*)g_77255c)->width - 0x30) >> 1, i * 0x4c, rows[i].id + 0xdf, 0x82, d2_CurrentWindowId);
+			rows[i].icon = d2_AddWindowField((((Screen*)d2_CurrentWindow)->width - 0x30) >> 1, i * 0x4c, rows[i].id + 0xdf, 0x82, d2_CurrentWindowId);
 		} else {
-			rows[i].icon = d2_AddElementToWindow((((Screen*)g_77255c)->width - 0x30) >> 1, i * 0x4c, rows[i].id + 0xdf, d2_CurrentWindowId);
+			rows[i].icon = d2_AddElementToWindow((((Screen*)d2_CurrentWindow)->width - 0x30) >> 1, i * 0x4c, rows[i].id + 0xdf, d2_CurrentWindowId);
 			((Ctl*)g_f8f080)[rows[i].icon].x4c = 1;
 		}
 		((Ctl*)g_f8f080)[rows[i].icon].x44 = 1;
-		rows[i].name = d2_ShowTxt((((Screen*)g_77255c)->width - 0xbe) >> 1, i * 0x4c + 0x30, "", d2_CurrentWindowId);
+		rows[i].name = d2_ShowTxt((((Screen*)d2_CurrentWindow)->width - 0xbe) >> 1, i * 0x4c + 0x30, "", d2_CurrentWindowId);
 		io_FormatTextBuffer(buf, "%S", g_14a79c0[rows[i].id * 2]);
 		d2_SetLabelText(rows[i].name, buf);
 		d2_AssignElementFont(rows[i].icon, 0x54);
 		d2_AssignElementFont(rows[i].name, 0x54);
 		((Ctl*)g_f8f080)[rows[i].name].x5c = 1;
 		((Ctl*)g_f8f080)[rows[i].name].x14 = 0xbe;
-		rows[i].info = d2_ShowTxt((((Screen*)g_77255c)->width - 0xbe) >> 1, i * 0x4c + 0x3f, "", d2_CurrentWindowId);
-		io_FormatTextBuffer(buf, "%s", g_868060 + rows[i].owner * 0x2f4);
+		rows[i].info = d2_ShowTxt((((Screen*)d2_CurrentWindow)->width - 0xbe) >> 1, i * 0x4c + 0x3f, "", d2_CurrentWindowId);
+		io_FormatTextBuffer(buf, "%s", gm_TownTable + rows[i].owner * 0x2f4);
 		d2_SetLabelText(rows[i].info, buf);
 		d2_AssignElementFont(rows[i].info, 0x54);
 		((Ctl*)g_f8f080)[rows[i].info].x5c = 1;

@@ -1,9 +1,9 @@
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-extern int g_7f4c08;
+extern int gm_GameTimeSliceDword;
 extern int gm_GameTime;
-extern short g_7f4c0c;
+extern short gm_GameTimeTailWord;
 
 typedef struct BuildingRow552 {
 	unsigned char kind;
@@ -78,9 +78,9 @@ void __cdecl he_RunTaschendieb(int event)
 		} while (v14 == 0);
 		*(int*) (event + 0x70) = 0x1e0 < v4;
 		*(int*) (event + 0x52) = gm_GameTime;
-		*(int*) (event + 0x56) = *(int*) &g_7f4c04;
-		*(int*) (event + 0x5a) = g_7f4c08;
-		*(unsigned short*) (event + 0x5e) = g_7f4c0c;
+		*(int*) (event + 0x56) = *(int*) &gm_GameTimeHour;
+		*(int*) (event + 0x5a) = gm_GameTimeSliceDword;
+		*(unsigned short*) (event + 0x5e) = gm_GameTimeTailWord;
 		gm_AddTime((int*) (event + 0x52), 0, 6, 0);
 		*(unsigned char*) (event + 0xd2) =
 		    (unsigned char) (*(unsigned char*) (event + 0xd2) % 6);
@@ -121,11 +121,11 @@ void __cdecl he_RunTaschendieb(int event)
 					v16 += 1;
 					v17 -= 1;
 				} while (v17);
-				v5 = gm_ConvertUnitsToAmount(v15, g_773d75);
+				v5 = gm_ConvertUnitsToAmount(v15, gm_ActiveTownIndex);
 				v6 = gm_GetBuildingTechEffect(v4, 1, 1);
 				v5 = (int) (((float) v6 * 0.01f + 1.0f) * v5);
 				cm_RequestTransferCurrencyNoKill(*(int*) (v18 + 4), -1,
-				    g_773d75, v5);
+				    gm_ActiveTownIndex, v5);
 				*(int*) (v4 + 0x4d) = *(int*) (v4 + 0x4d) + v5;
 				if (*(char*) (v18 + 2) == 6) {
 					v6 = gm_GetEntityTableEntry(v18);
@@ -161,7 +161,7 @@ void __cdecl he_RunTaschendieb(int event)
 			    + 1.0f);
 			v9 = (gm_RandomMod((unsigned short) ((v6 + 1) * v6))
 			    & 0xffff) + v6 * 2;
-			v5 = gm_ConvertUnitsToAmount(v9 * 2, g_773d75);
+			v5 = gm_ConvertUnitsToAmount(v9 * 2, gm_ActiveTownIndex);
 			if (*(char*) (event + 0xd8) != 0) {
 				v4 = 0;
 				v6 = 0x20;
@@ -188,7 +188,7 @@ void __cdecl he_RunTaschendieb(int event)
 					v2 = *(unsigned char*) (v14 + 0x41);
 					if (v1 - v2 <= (gm_RandomMod(0x7e) & 0xffff)) {
 						cm_RequestTransferCurrencyNoKill(-1, *(int*) (v4 + 4),
-						    g_773d75, v5);
+						    gm_ActiveTownIndex, v5);
 						if (*(char*) (v4 + 2) == 6
 						    || *(char*) (v4 + 2) == 7) {
 							io_FormatTextBuffer(v12, 0x19f2, v5);

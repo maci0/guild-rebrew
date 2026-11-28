@@ -60,7 +60,7 @@ int __cdecl ai_StartBetriebBauen(int target_action, short *ent, int mode, Cmd *o
 	} else if (mode == 1 && out1->kind != 5) {
 		return 0;
 	}
-	v = gm_GetSeasonTreasury(ent, g_773d75);
+	v = gm_GetSeasonTreasury(ent, gm_ActiveTownIndex);
 	ratio = (int) ((float) v * 0.660000026f);
 	o1.kind = 0;
 	o1.f1 = 0;

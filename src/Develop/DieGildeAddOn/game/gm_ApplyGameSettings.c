@@ -1,7 +1,7 @@
 
 
 
-extern unsigned char g_7747b0;
+extern unsigned char gm_ClientModeFlags;
 extern int g_6b5c94;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_7766a8;
@@ -14,7 +14,7 @@ void __cdecl io_SetMouseSensitivity(int);
 void __cdecl gm_ApplyGameSettings(void)
 {
 	g_6b5c94 = 0;
-	if (g_7747b0 & 4) {
+	if (gm_ClientModeFlags & 4) {
 		g_675308 = (float) (((*(unsigned int*)g_68a9cc) * 0.25 + 0.5) * 0.8);
 	}
 	else {

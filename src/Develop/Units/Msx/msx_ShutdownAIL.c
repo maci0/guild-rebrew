@@ -11,12 +11,12 @@ int __cdecl msx_ShutdownAIL(void)
 {
 	int r = 0;
 
-	if (g_6b7f90 != 0) {
+	if (msx_Initialized != 0) {
 		msx_CloseAllStreams();
 		msx_ReleaseAllWaveSamples();
 		msx_CloseAllWaveDrivers();
 		AIL_shutdown();
-		g_6b7f90 = r;
+		msx_Initialized = r;
 	} else {
 		r = -1;
 	}

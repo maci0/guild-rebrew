@@ -1,8 +1,8 @@
 /* Owned (GOLDTL) by src/GOLDTL.fcn_004da4d0.c. */
 extern int d2_CurrentWindowId;
-extern int g_772f1c;
-extern int g_772f18;
-extern int g_772f20;
+extern int d2_VoteRow0Count;
+extern int d2_VoteRow1Count;
+extern int d2_VoteRow2Count;
 
 void __cdecl d2_ClearWindowChildren(int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
@@ -35,24 +35,24 @@ void __cdecl d2_UpdateVoteTallyIcons(int a1, int reset, int row)
 		io_FormatTextBuffer(buf, 0x12d5);
 		h = d2_ShowTxt(0, 0x2f, buf, d2_CurrentWindowId);
 		d2_SetElementFont(h, 0x54);
-		g_772f1c = 0;
-		g_772f18 = 0;
-		g_772f20 = 0;
+		d2_VoteRow0Count = 0;
+		d2_VoteRow1Count = 0;
+		d2_VoteRow2Count = 0;
 		return;
 	}
 	if (row == 0) {
-		d2_AddElementToWindow((short) ((g_772f1c * 5 + 40) * 2), 0x20, 0x4df, d2_CurrentWindowId);
-		g_772f1c++;
+		d2_AddElementToWindow((short) ((d2_VoteRow0Count * 5 + 40) * 2), 0x20, 0x4df, d2_CurrentWindowId);
+		d2_VoteRow0Count++;
 		return;
 	}
 	if (row == 1) {
-		d2_AddElementToWindow((short) ((g_772f18 * 5 + 40) * 2), 0x3e, 0x4df, d2_CurrentWindowId);
-		g_772f18++;
+		d2_AddElementToWindow((short) ((d2_VoteRow1Count * 5 + 40) * 2), 0x3e, 0x4df, d2_CurrentWindowId);
+		d2_VoteRow1Count++;
 		return;
 	}
 	if (row == 2) {
-		d2_AddElementToWindow((short) ((g_772f20 * 5 + 40) * 2), 0x2f, 0x4df, d2_CurrentWindowId);
-		g_772f20++;
+		d2_AddElementToWindow((short) ((d2_VoteRow2Count * 5 + 40) * 2), 0x2f, 0x4df, d2_CurrentWindowId);
+		d2_VoteRow2Count++;
 	}
 }
 unsigned char _dpad_772ec4[84];

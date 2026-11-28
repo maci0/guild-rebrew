@@ -26,8 +26,8 @@ unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 #if defined(REBREW_GOLD)
 extern unsigned char* lpGebaeudeINST;
 #endif
-extern char g_7f4caa[];
-extern char g_7f4cc0[];
+extern char gm_EntityAgeField[];
+extern char gm_EntityAgeLimitField[];
 extern int g_773d64;
 extern int g_773d3c;
 extern char g_67bd30[];
@@ -41,7 +41,7 @@ extern int g_99f624[9];
 extern float g_99f644;
 extern float g_99f648[8];
 extern float g_99f668[8];
-extern float g_662cf8;
+extern float flt_100_0;
 
 typedef struct { int word[2]; } QUERY_LIMIT;
 
@@ -288,16 +288,16 @@ unsigned short __cdecl sim_FindAndMatchParents(unsigned int param)
 		rnd = gm_RandomMod(i);
 		parentA = rnd;
 		off = SIM_ENT_OFF(rnd);
-		if (*(unsigned short*) &((unsigned char*)g_7f4ca0)[off] == 0xffff) {
+		if (*(unsigned short*) &((unsigned char*)gm_EntitySlotTable)[off] == 0xffff) {
 			i = i * 3 / 4;
 			continue;
 		}
-		f1 = (float) *(unsigned short*) &((unsigned char*)g_7f4ca0)[off + 0xa];
-		if (((unsigned char*)g_7f4ca0)[off + 0x2] < 6 && !(f1 < *(float*) &((unsigned char*)g_7f4ca0)[off + 0x20]) &&
-		    ((unsigned char*)g_7f4ca0)[off + 0x8] != 0) {
+		f1 = (float) *(unsigned short*) &((unsigned char*)gm_EntitySlotTable)[off + 0xa];
+		if (((unsigned char*)gm_EntitySlotTable)[off + 0x2] < 6 && !(f1 < *(float*) &((unsigned char*)gm_EntitySlotTable)[off + 0x20]) &&
+		    ((unsigned char*)gm_EntitySlotTable)[off + 0x8] != 0) {
 			count = 0;
 			for (k = 0; k < 5; k++) {
-				if (((int*) &((unsigned char*)g_7f4ca0)[off + 0x68])[k] != -1) {
+				if (((int*) &((unsigned char*)gm_EntitySlotTable)[off + 0x68])[k] != -1) {
 					count++;
 				}
 			}
@@ -317,16 +317,16 @@ done1:
 		rnd = gm_RandomMod(i);
 		parentB = rnd;
 		off = SIM_ENT_OFF(rnd);
-		if (*(unsigned short*) &((unsigned char*)g_7f4ca0)[off] == 0xffff) {
+		if (*(unsigned short*) &((unsigned char*)gm_EntitySlotTable)[off] == 0xffff) {
 			i = i * 3 / 4;
 			continue;
 		}
-		f2 = (float) *(unsigned short*) &((unsigned char*)g_7f4ca0)[off + 0xa];
-		if (((unsigned char*)g_7f4ca0)[off + 0x2] < 6 && !(f2 < *(float*) &((unsigned char*)g_7f4ca0)[off + 0x20]) &&
-		    ((unsigned char*)g_7f4ca0)[off + 0x8] != 0) {
+		f2 = (float) *(unsigned short*) &((unsigned char*)gm_EntitySlotTable)[off + 0xa];
+		if (((unsigned char*)gm_EntitySlotTable)[off + 0x2] < 6 && !(f2 < *(float*) &((unsigned char*)gm_EntitySlotTable)[off + 0x20]) &&
+		    ((unsigned char*)gm_EntitySlotTable)[off + 0x8] != 0) {
 			count = 0;
 			for (k = 0; k < 5; k++) {
-				if (((int*) &((unsigned char*)g_7f4ca0)[off + 0x68])[k] != -1) {
+				if (((int*) &((unsigned char*)gm_EntitySlotTable)[off + 0x68])[k] != -1) {
 					count++;
 				}
 			}
@@ -344,8 +344,8 @@ done2:
 
 	return (unsigned short) fcn_0050a7e0(
 		0,
-		*(int*) &((unsigned char*)g_7f4ca0)[SIM_ENT_OFF(parentA) + 0x4],
-		*(int*) &((unsigned char*)g_7f4ca0)[SIM_ENT_OFF(parentB) + 0x4],
+		*(int*) &((unsigned char*)gm_EntitySlotTable)[SIM_ENT_OFF(parentA) + 0x4],
+		*(int*) &((unsigned char*)gm_EntitySlotTable)[SIM_ENT_OFF(parentB) + 0x4],
 		(int) param,
 		0, 0, 0, 2);
 }
@@ -370,9 +370,9 @@ int __cdecl gm_CheckEntityAgeLimit(int index)
 	int v;
 
 	slot = (unsigned int) index & 0xffff;
-	w = *(unsigned short*) (g_7f4caa + slot * 540);
+	w = *(unsigned short*) (gm_EntityAgeField + slot * 540);
 	v = w;
-	return v < *(float*) (g_7f4cc0 + slot * 540);
+	return v < *(float*) (gm_EntityAgeLimitField + slot * 540);
 }
 #endif
 
@@ -521,11 +521,11 @@ Obj* __cdecl gm_FindAndReserveEntity(char* who, int kind, int group)
 
 	if (kind != 0) {
 		for (i = 0; i < 768; i++) {
-			if (((Obj*)g_7f4ca0)[i].id != 0xffff && !(((Obj*)g_7f4ca0)[i].flags & 0x2000) && ((Obj*)g_7f4ca0)[i].type <= 1 &&
-			    (((Obj*)g_7f4ca0)[i].kind == kind || ((Obj*)g_7f4ca0)[i].kind == 0) && ((Obj*)g_7f4ca0)[i].home == 0 &&
-			    (float) ((Obj*)g_7f4ca0)[i].age >= ((Obj*)g_7f4ca0)[i].years && ((Obj*)g_7f4ca0)[i].group == group) {
+			if (((Obj*)gm_EntitySlotTable)[i].id != 0xffff && !(((Obj*)gm_EntitySlotTable)[i].flags & 0x2000) && ((Obj*)gm_EntitySlotTable)[i].type <= 1 &&
+			    (((Obj*)gm_EntitySlotTable)[i].kind == kind || ((Obj*)gm_EntitySlotTable)[i].kind == 0) && ((Obj*)gm_EntitySlotTable)[i].home == 0 &&
+			    (float) ((Obj*)gm_EntitySlotTable)[i].age >= ((Obj*)gm_EntitySlotTable)[i].years && ((Obj*)gm_EntitySlotTable)[i].group == group) {
 				c = gm_EntityClassCheck(kind);
-				if ((c == 2 || ((Obj*)g_7f4ca0)[i].cls == c) &&
+				if ((c == 2 || ((Obj*)gm_EntitySlotTable)[i].cls == c) &&
 				    (*(unsigned short*) (who + 0x27) == 0xffff ||
 				     gm_GetEntityRelation(*(unsigned short*) (who + 0x27), i) > -30)) {
 					goto found;
@@ -539,16 +539,16 @@ Obj* __cdecl gm_FindAndReserveEntity(char* who, int kind, int group)
 	}
 	c = gm_IsInRange((unsigned char) group);
 	for (i = 0; i < 768; i++) {
-		if (((Obj*)g_7f4ca0)[i].id != 0xffff && !(((Obj*)g_7f4ca0)[i].flags & 0x2000) && ((Obj*)g_7f4ca0)[i].type <= 1 &&
-		    ((Obj*)g_7f4ca0)[i].group == group && ((Obj*)g_7f4ca0)[i].home == 0 && (c == 2 || ((Obj*)g_7f4ca0)[i].cls == c) &&
+		if (((Obj*)gm_EntitySlotTable)[i].id != 0xffff && !(((Obj*)gm_EntitySlotTable)[i].flags & 0x2000) && ((Obj*)gm_EntitySlotTable)[i].type <= 1 &&
+		    ((Obj*)gm_EntitySlotTable)[i].group == group && ((Obj*)gm_EntitySlotTable)[i].home == 0 && (c == 2 || ((Obj*)gm_EntitySlotTable)[i].cls == c) &&
 		    (*(unsigned short*) (who + 0x27) == 0xffff || gm_GetEntityRelation(*(unsigned short*) (who + 0x27), i) > -30)) {
 			goto found;
 		}
 	}
 	return 0;
 found:
-	((Obj*)g_7f4ca0)[i].flags |= 0x2000;
-	return &((Obj*)g_7f4ca0)[i];
+	((Obj*)gm_EntitySlotTable)[i].flags |= 0x2000;
+	return &((Obj*)gm_EntitySlotTable)[i];
 }
 #endif
 
@@ -722,8 +722,8 @@ char* __cdecl sim_CreateCitizenClient(unsigned char flags, int a2, int a3, int a
 	if (flags & 1) {
 		i = sim_FindAndMatchParents(a3) & 0xffff;
 		if (i != 0xffff && (flags & 2)) {
-			*(char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].active = (char) a5;
-			*(char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].stat_category = (char) a4;
+			*(char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].active = (char) a5;
+			*(char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].stat_category = (char) a4;
 		}
 	} else {
 		i = fcn_0050a7e0(a2, -1, -1, a3, 0, a4 & 0xff, a5 & 0xff, 2)
@@ -732,7 +732,7 @@ char* __cdecl sim_CreateCitizenClient(unsigned char flags, int a2, int a3, int a
 	if (i == 0xffff) {
 		return 0;
 	}
-	rec = ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]);
+	rec = ((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i]);
 	if (!(flags & 4)) {
 		return rec;
 	}
@@ -939,7 +939,7 @@ void __cdecl gm_CollectPopulationStats(void)
 	int i;
 	int idx;
 
-	p = g_7f4ca0;
+	p = gm_EntitySlotTable;
 	memset(g_99f620, 0, 0x68);
 	i = 0;
 	do {
@@ -958,10 +958,10 @@ void __cdecl gm_CollectPopulationStats(void)
 		i++;
 	} while ((int) p < 0x85a0a0);
 	for (p = g_99f620 + 0x48; (int) p < (int) (g_99f620 + 0x68); p += 4) {
-		*(float*) (p - 0x20) = (*(float*) (p - 0x20) / *(float*) p) * g_662cf8;
+		*(float*) (p - 0x20) = (*(float*) (p - 0x20) / *(float*) p) * flt_100_0;
 		*(float*) p = *(float*) p / (float) *(int*) (p - 0x44);
 	}
-	g_99f644 = (g_99f644 / (float) *(int*) &g_99f620[0]) * g_662cf8;
+	g_99f644 = (g_99f644 / (float) *(int*) &g_99f620[0]) * flt_100_0;
 }
 #endif
 

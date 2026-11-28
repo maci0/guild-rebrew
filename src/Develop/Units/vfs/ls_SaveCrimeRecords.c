@@ -25,8 +25,8 @@ typedef Slot_68ff80 Slot;
 
 extern Slot_68ff80 g_68ff80[29];
 extern int cm_LastCrimeId;
-extern Rec2d_9a3800 g_9a3800[512];
-extern Pair_99f800 g_99f800[0x800];
+extern Rec2d_9a3800 cm_CrimeRecords[512];
+extern Pair_99f800 cm_CrimeEvidenceLinks[0x800];
 
 int __cdecl vfs_fwrite(void *, int, int, int);
 
@@ -55,12 +55,12 @@ int __cdecl ls_SaveCrimeRecords(int fp)
 		return 0;
 	}
 	for (i = 0; i < 512; i++) {
-		if (((Order*)g_9a3800)[i].id != -1) {
+		if (((Order*)cm_CrimeRecords)[i].id != -1) {
 			n1++;
 		}
 	}
 	for (i = 0; i < 0x800; i++) {
-		if (g_99f800[i].owner != -1 && g_99f800[i].key != -1) {
+		if (cm_CrimeEvidenceLinks[i].owner != -1 && cm_CrimeEvidenceLinks[i].key != -1) {
 			n2++;
 		}
 	}
@@ -71,42 +71,42 @@ int __cdecl ls_SaveCrimeRecords(int fp)
 		return 0;
 	}
 	for (i = 0; i < 512; i++) {
-		if (((Order*)g_9a3800)[i].id != -1) {
-			if (vfs_fwrite(&((Order*)g_9a3800)[i].id, 4, 1, fp) == -1) {
+		if (((Order*)cm_CrimeRecords)[i].id != -1) {
+			if (vfs_fwrite(&((Order*)cm_CrimeRecords)[i].id, 4, 1, fp) == -1) {
 				return 0;
 			}
-			if (vfs_fwrite(((Order*)g_9a3800)[i].name, 0xe, 1, fp) == -1) {
+			if (vfs_fwrite(((Order*)cm_CrimeRecords)[i].name, 0xe, 1, fp) == -1) {
 				return 0;
 			}
-			if (vfs_fwrite(&((Order*)g_9a3800)[i].f12, 4, 1, fp) == -1) {
+			if (vfs_fwrite(&((Order*)cm_CrimeRecords)[i].f12, 4, 1, fp) == -1) {
 				return 0;
 			}
-			if (vfs_fwrite(&((Order*)g_9a3800)[i].target, 4, 1, fp) == -1) {
+			if (vfs_fwrite(&((Order*)cm_CrimeRecords)[i].target, 4, 1, fp) == -1) {
 				return 0;
 			}
-			if (vfs_fwrite(&((Order*)g_9a3800)[i].count, 2, 1, fp) == -1) {
+			if (vfs_fwrite(&((Order*)cm_CrimeRecords)[i].count, 2, 1, fp) == -1) {
 				return 0;
 			}
-			if (vfs_fwrite(&((Order*)g_9a3800)[i].kind, 1, 1, fp) == -1) {
+			if (vfs_fwrite(&((Order*)cm_CrimeRecords)[i].kind, 1, 1, fp) == -1) {
 				return 0;
 			}
-			if (vfs_fwrite(&((Order*)g_9a3800)[i].f1d, 4, 1, fp) == -1) {
+			if (vfs_fwrite(&((Order*)cm_CrimeRecords)[i].f1d, 4, 1, fp) == -1) {
 				return 0;
 			}
-			if (vfs_fwrite(&((Order*)g_9a3800)[i].arg, 4, 1, fp) == -1) {
+			if (vfs_fwrite(&((Order*)cm_CrimeRecords)[i].arg, 4, 1, fp) == -1) {
 				return 0;
 			}
-			if (vfs_fwrite(&((Order*)g_9a3800)[i].state, 4, 1, fp) == -1) {
+			if (vfs_fwrite(&((Order*)cm_CrimeRecords)[i].state, 4, 1, fp) == -1) {
 				return 0;
 			}
 		}
 	}
 	for (i = 0; i < 0x800; i++) {
-		if (g_99f800[i].owner != -1 && g_99f800[i].key != -1) {
-			if (vfs_fwrite(&g_99f800[i].owner, 4, 1, fp) == -1) {
+		if (cm_CrimeEvidenceLinks[i].owner != -1 && cm_CrimeEvidenceLinks[i].key != -1) {
+			if (vfs_fwrite(&cm_CrimeEvidenceLinks[i].owner, 4, 1, fp) == -1) {
 				return 0;
 			}
-			if (vfs_fwrite(&g_99f800[i].key, 4, 1, fp) == -1) {
+			if (vfs_fwrite(&cm_CrimeEvidenceLinks[i].key, 4, 1, fp) == -1) {
 				return 0;
 			}
 		}

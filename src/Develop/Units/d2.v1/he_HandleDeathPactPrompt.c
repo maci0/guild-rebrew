@@ -9,12 +9,12 @@ struct house {
 
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_100f884;
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern char g_6a5a10[];
-extern char g_6811b0[];
+extern char str_dollar_C[];
 extern char g_6a7f1c[];
 
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -36,7 +36,7 @@ void __cdecl he_HandleDeathPactPrompt(char* u)
 
 	p = u + 0xac;
 	h = gm_LookupEntityRecordById(*(int*) (u + 0xac));
-	if (h == 0 || (((struct house*)g_7f4ca0)[*(unsigned short*) (u + 8)].flags & 1) != 0) {
+	if (h == 0 || (((struct house*)gm_EntitySlotTable)[*(unsigned short*) (u + 8)].flags & 1) != 0) {
 		*(int*) (u + 0x70) = -2;
 	}
 	if (*(int*) (u + 0x70) == -2) {
@@ -57,14 +57,14 @@ void __cdecl he_HandleDeathPactPrompt(char* u)
 		}
 		d2_CenterDialogWindows(*(int*) (*(char**) (u + 0x74) + 8));
 		d2_SetForm(*(int*) (*(char**) (u + 0x74) + 8), 0);
-		io_AppendText((int) g_6811b0);
+		io_AppendText((int) str_dollar_C);
 		io_AppendText(0x40fd, *(unsigned short*) h, *(int*) (u + 0xb8));
 		d3snd_QueueSound(-7, 0, g_6a7f1c, -1, 0);
 		*(int*) (u + 0x70) = 1;
 		break;
 	case 1:
 		if (gm_CompareGameTime(&gm_GameTime, u + 0x52) > 0) {
-			he_DeclineDeathPactPayment(p, &((struct house*)g_7f4ca0)[g_774970]);
+			he_DeclineDeathPactPayment(p, &((struct house*)gm_EntitySlotTable)[gm_LocalPlayerSlot]);
 			d2_CloseActionPopup(u);
 			he_FreeAction(u);
 			break;
@@ -73,17 +73,17 @@ void __cdecl he_HandleDeathPactPrompt(char* u)
 			*(int*) (u + 0x70) = 0;
 			return;
 		}
-		if (g_100f884 != *(int*) (*(char**) (u + 0x74) + 8) || g_100f1dc == -1) {
+		if (g_100f884 != *(int*) (*(char**) (u + 0x74) + 8) || d2_DialogButtonAction == -1) {
 			return;
 		}
-		if (g_100f1dc == 2) {
-			he_AcceptDeathPactPayment(p, &((struct house*)g_7f4ca0)[g_774970]);
+		if (d2_DialogButtonAction == 2) {
+			he_AcceptDeathPactPayment(p, &((struct house*)gm_EntitySlotTable)[gm_LocalPlayerSlot]);
 			d2_CloseActionPopup(u);
 			he_FreeAction(u);
 			return;
 		}
-		if (g_100f1dc == 1) {
-			he_DeclineDeathPactPayment(p, &((struct house*)g_7f4ca0)[g_774970]);
+		if (d2_DialogButtonAction == 1) {
+			he_DeclineDeathPactPayment(p, &((struct house*)gm_EntitySlotTable)[gm_LocalPlayerSlot]);
 			d2_CloseActionPopup(u);
 			he_FreeAction(u);
 		}

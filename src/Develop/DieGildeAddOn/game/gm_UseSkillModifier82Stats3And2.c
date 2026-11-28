@@ -32,7 +32,7 @@ struct msg {
 	char pad68[0x90];
 };
 
-extern __int64 g_666018;
+extern __int64 gm_TargetPersonTypeMask;
 
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl cm_SendCopyEntityData(struct msg*);
@@ -58,7 +58,7 @@ int __cdecl gm_UseSkillModifier82Stats3And2(unsigned char* obj, int* request)
 		req.a = 0;
 		req.size = 0x400;
 		req.kind = 6;
-		req.cd = g_666018;
+		req.cd = gm_TargetPersonTypeMask;
 		e = d2_OpenTargetPicker(&req, text, 0, 0);
 		if (e != 0) {
 			struct msg m;

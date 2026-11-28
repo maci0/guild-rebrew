@@ -1,14 +1,14 @@
 
 
 
-extern float g_6628a8;
+extern float flt_0_0;
 
 int __cdecl gm_CalcEscortCost(int v, int mode)
 {
 	int r;
 
 	r = 0;
-	if (v > g_6628a8) {
+	if (v > flt_0_0) {
 		if (v < 32000) {
 			v = 32000;
 		} else if (v > 256000) {

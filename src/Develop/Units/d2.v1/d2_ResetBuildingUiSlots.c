@@ -32,7 +32,7 @@ typedef Slot_778da0 Slot;
 
 extern Pair g_778d48[4];
 extern Pair g_779128[2];
-extern Panel g_779160[16];
+extern Panel d2_ProductionPanels[16];
 extern int g_7798a0;
 extern Slot g_7798c0[16];
 extern Slot_778da0 g_778da0[16];
@@ -52,21 +52,21 @@ void __cdecl d2_ResetBuildingUiSlots(void)
 		g_779128[i].x8 = -1;
 	}
 	for (i = 0; i < 16; i++) {
-		g_779160[i].x0 = 0;
+		d2_ProductionPanels[i].x0 = 0;
 		for (j = 0; j < 4; j++) {
-			g_779160[i].a[j] = 0;
-			g_779160[i].b[j] = -1;
+			d2_ProductionPanels[i].a[j] = 0;
+			d2_ProductionPanels[i].b[j] = -1;
 		}
-		g_779160[i].x24 = 16;
-		g_779160[i].x28 = i * 120 + 8;
-		g_779160[i].c[0] = -1;
-		g_779160[i].c[1] = -1;
-		g_779160[i].c[2] = -1;
-		g_779160[i].c[3] = -1;
+		d2_ProductionPanels[i].x24 = 16;
+		d2_ProductionPanels[i].x28 = i * 120 + 8;
+		d2_ProductionPanels[i].c[0] = -1;
+		d2_ProductionPanels[i].c[1] = -1;
+		d2_ProductionPanels[i].c[2] = -1;
+		d2_ProductionPanels[i].c[3] = -1;
 		for (j = 0; j < 4; j++) {
-			g_779160[i].d[j] = -1;
+			d2_ProductionPanels[i].d[j] = -1;
 		}
-		g_779160[i].x4c = -1;
+		d2_ProductionPanels[i].x4c = -1;
 	}
 	g_7798a0 = 0;
 	for (i = 0; i < 16; i++) {

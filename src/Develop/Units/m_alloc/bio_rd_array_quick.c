@@ -1,6 +1,6 @@
 /* Gold and GoldTL bodies differ; each edition compiles its own. */
 #if defined(REBREW_GOLD)
-int __cdecl fcn_004011d0(void* stream, void* dst);
+int __cdecl vfs_ReadDword(void* stream, void* dst);
 int __cdecl vfs_fseek(char* f, int off, int whence);
 #include "Develop/Units/Error/error_message.h"
 void* __cdecl m_alloc(unsigned int size, const char* tag);
@@ -13,8 +13,8 @@ int __cdecl bio_rd_array_quick(void* f, int count, void** out)
 	int n;
 
 	stream = f;
-	fcn_004011d0(stream, &f);
-	fcn_004011d0(stream, &n);
+	vfs_ReadDword(stream, &f);
+	vfs_ReadDword(stream, &n);
 	if (n != count) {
 		vfs_fseek(stream, n * *(int*)&f, 1);
 		*out = 0;

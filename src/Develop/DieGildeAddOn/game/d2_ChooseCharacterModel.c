@@ -3,8 +3,8 @@
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_14ce8e0, d2_CurrentElementId, g_7e2468;
-extern char g_6b5c60[], g_7e23e8;
+extern int io_RightButtonReleased, d2_CurrentElementId, g_7e2468;
+extern char str_empty[], g_7e23e8;
 void __cdecl ch_SetVisible(void* obj, int value);
 void __cdecl ch_SetToDummy(void* obj, void* dev);
 void __cdecl ch_DestroyCharacter(void* obj);
@@ -61,18 +61,18 @@ unsigned int __cdecl d2_ChooseCharacterModel(int jobCode)
 
 	id1 = d2_CreateElement((int) (d2_UiScale * 150.0f + d2_UiScale * 330.0f),
 		(int) (d2_UiScale * 370.0f), 0x1a);
-	((D2_CONTROL_TL*) ((char*) g_1015ea0))[id1].value_05c = 1;
-	((D2_CONTROL_TL*) ((char*) g_1015ea0))[id1].flags_1d0 = 3;
+	((D2_CONTROL_TL*) ((char*) d2_Controls))[id1].value_05c = 1;
+	((D2_CONTROL_TL*) ((char*) d2_Controls))[id1].flags_1d0 = 3;
 
 	id2 = d2_CreateElement((int) (d2_UiScale * 330.0f),
 		(int) (d2_UiScale * 370.0f), 0x1b);
-	((D2_CONTROL_TL*) ((char*) g_1015ea0))[id2].value_05c = 1;
-	((D2_CONTROL_TL*) ((char*) g_1015ea0))[id2].flags_1d0 = 3;
+	((D2_CONTROL_TL*) ((char*) d2_Controls))[id2].value_05c = 1;
+	((D2_CONTROL_TL*) ((char*) d2_Controls))[id2].flags_1d0 = 3;
 
 	id3 = d2_CreateElement((int) (d2_UiScale * 70.0f + d2_UiScale * 330.0f),
 		(int) (d2_UiScale * 45.0f + d2_UiScale * 370.0f), 0x51b);
-	((D2_CONTROL_TL*) ((char*) g_1015ea0))[id3].value_05c = 1;
-	((D2_CONTROL_TL*) ((char*) g_1015ea0))[id3].flags_1d0 = 3;
+	((D2_CONTROL_TL*) ((char*) d2_Controls))[id3].value_05c = 1;
+	((D2_CONTROL_TL*) ((char*) d2_Controls))[id3].flags_1d0 = 3;
 
 	count = 0;
 	if (maenner[0][0] != 0) {
@@ -96,17 +96,17 @@ unsigned int __cdecl d2_ChooseCharacterModel(int jobCode)
 
 
 	while (main_RunFrameLoop(0x53b6b0, 0x12d6)) {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 			selected = 0;
 		}
-		if (g_14cf950 != 'N'
-			&& (g_100f1dc == -1 || d2_CurrentElementId != id1)) {
-			if (g_14cf950 != 'J'
-				&& (g_100f1dc == -1 || d2_CurrentElementId != id2)) {
-				if (g_14cf950 == 0x1c
-					|| (g_100f1dc != -1 && d2_CurrentElementId == id3)) {
-					g_774654 = 1;
+		if (io_LastKeyScancode != 'N'
+			&& (d2_DialogButtonAction == -1 || d2_CurrentElementId != id1)) {
+			if (io_LastKeyScancode != 'J'
+				&& (d2_DialogButtonAction == -1 || d2_CurrentElementId != id2)) {
+				if (io_LastKeyScancode == 0x1c
+					|| (d2_DialogButtonAction != -1 && d2_CurrentElementId == id3)) {
+					d2_DialogCloseRequested = 1;
 					selected = 1;
 				}
 			} else {
@@ -125,7 +125,7 @@ unsigned int __cdecl d2_ChooseCharacterModel(int jobCode)
 					(int) pos[0],
 					(int) pos[1] + 0x14,
 					(int) pos[2],
-					0x28, 0x5a, g_6b5c60);
+					0x28, 0x5a, str_empty);
 			}
 			if (obj != 0) {
 				ch_CreateAction(obj, 0x38, 0);

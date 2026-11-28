@@ -15,7 +15,7 @@ void __cdecl he_StartSellGebaeudeObjekt(char* action)
 
 	*(pos14_7f4c00*) (action + 0x52) = gm_GameTime;
 	*(pos14_7f4c00*) (action + 0x44) = gm_GameTime;
-	if (g_774800 != 0) {
+	if (gm_AllEntitiesControllable != 0) {
 		gm_AddTime((pos14_7f4c00*) (action + 0x52), 0, 0, 1);
 	} else {
 		gm_AddTime((pos14_7f4c00*) (action + 0x52), 5, 0, 0);

@@ -1,10 +1,10 @@
 #include <string.h>
 
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern float g_66433c;
 extern float g_664160;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_77261c;
+extern int ai_FeudTargetEntity;
 
 int __cdecl gm_GetSeasonTreasury(char*, char);
 int __cdecl gm_WalkEntityChain(unsigned short);
@@ -45,7 +45,7 @@ int __cdecl ai_StartBeatUp(int unused0, char* e, int busy, AI_BEATUP_MSG* out1, 
 	float v;
 	char kind;
 
-	va = gm_GetSeasonTreasury(e, g_773d75);
+	va = gm_GetSeasonTreasury(e, gm_ActiveTownIndex);
 	if (busy != 0) {
 		goto fail;
 	}
@@ -99,7 +99,7 @@ fail:
 main:
 	gm_GetLawEntry(0x15, rec);
 	if (*(int*) (rec + 0x18) != 0) {
-		if (gm_RandomMod(3) == 0 && g_77261c == 0) {
+		if (gm_RandomMod(3) == 0 && ai_FeudTargetEntity == 0) {
 			goto fail;
 		}
 	}

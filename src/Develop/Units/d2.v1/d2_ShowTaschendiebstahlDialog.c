@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/client_data.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_100f1dc, g_14abaac, g_14ce8e0;
+extern int d2_DialogButtonAction, g_14abaac, io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 int __cdecl d2_CheckOwnerBlocked(char* obj);
@@ -42,18 +42,18 @@ int __cdecl d2_ShowTaschendiebstahlDialog(char* obj)
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x19f0);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	ids = (int*) (packet + 0x38); for (i = 0; i < 6; i++) {
 		ids[i] = -1;
 	}
 	n = 0;
 	do {
 		d2_UpdateBuildingWorkerSlots(obj);
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc != -1) {
-			if (g_100f1dc == 2) {
+		if (d2_DialogButtonAction != -1) {
+			if (d2_DialogButtonAction == 2) {
 				for (e = (char*) ch_ContextCharacters; (int) e < (int) (ch_ContextCharacters + 32) && n < 6; e += 4) {
 					char* p;
 
@@ -66,23 +66,23 @@ int __cdecl d2_ShowTaschendiebstahlDialog(char* obj)
 				if (n != 0) {
 					idx = *(unsigned short*) (obj + 0x27);
 					*(char*) (packet + 4) = 0x61;
-					*(int*) (packet + 8) = *(int*) (((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[idx]) + 4);
+					*(int*) (packet + 8) = *(int*) (((char *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[idx]) + 4);
 					*(int*) (packet + 0xc) = *(int*) (obj + 1);
 					*(int*) (packet + 0x28) = gm_GameTime.a;
 					*(int*) (packet + 0x2c) = gm_GameTime.b;
 					*(int*) (packet + 0x30) = gm_GameTime.c;
 					*(unsigned short*) (packet + 0x34) = gm_GameTime.d;
 					*(char*) (packet + 0x36) = 1;
-					*(int*) (packet + 0x80) = *(int*) (((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[idx]) + 4);
+					*(int*) (packet + 0x80) = *(int*) (((char *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[idx]) + 4);
 					cm_SendCopyEntityData((int) packet);
 					d3snd_PlayWorkerOrderVoice();
 					sv_ClearObjectSelection();
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				} else {
 					d2_ShowModalMessageBox(g_14abaac, 0);
 				}
-			} else if (g_100f1dc == 1) {
-				g_774654 = 1;
+			} else if (d2_DialogButtonAction == 1) {
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	} while (main_RunFrameLoop(0x5ae000, 0x677c7) != 0);

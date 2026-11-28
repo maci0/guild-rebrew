@@ -1,4 +1,4 @@
-extern int g_67a370;
+extern int d3_ActiveScene;
 
 char __cdecl d3_SetSubObjectVisibleCallback(void* p, int arg);
 void __cdecl d3_VisitSceneObjects(int list, int a, int mask, char(__cdecl* fn)(void*, int), int arg);
@@ -7,7 +7,7 @@ void __cdecl d3_VisitSceneObjects(int list, int a, int mask, char(__cdecl* fn)(v
 char __cdecl d3_SetSubtreeVisible(int a, unsigned char b)
 {
 	if (a != 0) {
-		d3_VisitSceneObjects(g_67a370, a, 0x3ff, d3_SetSubObjectVisibleCallback, b);
+		d3_VisitSceneObjects(d3_ActiveScene, a, 0x3ff, d3_SetSubObjectVisibleCallback, b);
 		return 1;
 	}
 	return 0;

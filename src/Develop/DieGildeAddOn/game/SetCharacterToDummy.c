@@ -3,7 +3,7 @@
 
 
 
-extern float g_662d40[3];
+extern float d3_UnitAxisVectors[3];
 extern char* evt_CurrentScript;
 void __cdecl d3_TransformPoint(char* src, char* pos, float* out);
 void __cdecl d3_TransformDirection(char* src, float* v, float* out);
@@ -26,8 +26,8 @@ int __cdecl SetCharacterToDummy(char** a, char** b)
 	v[0] = 0.0f;
 	v[1] = 0.0f;
 	v[2] = 0.0f;
-	d3_TransformDirection(*b, g_662d40, c);
-	v[1] = d3_SignedPlanarAngle(g_662d40, c);
+	d3_TransformDirection(*b, d3_UnitAxisVectors, c);
+	v[1] = d3_SignedPlanarAngle(d3_UnitAxisVectors, c);
 	d3_SetObjectRotation(*(char**) (*a + 0x34), v);
 	return 0;
 }

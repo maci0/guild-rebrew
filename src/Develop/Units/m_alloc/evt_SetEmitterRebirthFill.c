@@ -1,5 +1,5 @@
 extern char* evt_CurrentScript;
-extern char g_676c24[];
+extern char str_SetEmitterRebirthFill_invalid_handle[];
 
 
 // SIZE 0xcd
@@ -18,7 +18,7 @@ int __cdecl evt_SetEmitterRebirthFill(S410600** objectRef, char* flag)
 
 	p = *objectRef;
 	if (m_is_tracked(p) == 0) {
-		evt_LogScriptError(evt_CurrentScript, *(int*) ((char*) evt_CurrentScript + 0x118), g_676c24);
+		evt_LogScriptError(evt_CurrentScript, *(int*) ((char*) evt_CurrentScript + 0x118), str_SetEmitterRebirthFill_invalid_handle);
 		return 0;
 	}
 	p->b6 = *flag;

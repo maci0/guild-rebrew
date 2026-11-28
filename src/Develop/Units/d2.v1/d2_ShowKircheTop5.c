@@ -20,13 +20,13 @@ typedef struct
 } Player;
 // SIZE 0x21c
 
-extern char g_7f4ca0[];
-extern char* g_77255c;
-extern char* g_772500;
+extern char gm_EntitySlotTable[];
+extern char* d2_CurrentWindow;
+extern char* d2_FileObjTable;
 extern char* g_14a6554;
 extern int d2_CurrentWindowId;
-extern int g_100f1dc;
-extern int g_14ce8e0;
+extern int d2_DialogButtonAction;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char s_6ab048[];
 
@@ -67,7 +67,7 @@ void __cdecl d2_ShowKircheTop5(void)
 	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetOverlayAnimation(0, 0);
 	dirty = 1;
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
 		gm_GetKircheTop5(a, b);
 		for (i = 0; i < 5; i++) {
@@ -78,15 +78,15 @@ void __cdecl d2_ShowKircheTop5(void)
 			pb[i] = b[i];
 			items[i].x0 = 0;
 			if (a[i] != 0xffff) {
-				items[i].x0 = &((Player*)g_7f4ca0)[a[i]];
+				items[i].x0 = &((Player*)gm_EntitySlotTable)[a[i]];
 			}
 		}
 		if (dirty != 0) {
 			d2_SetForm(dlg, 1);
 			d2_ClearWindowChildren(d2_CurrentWindowId, 1);
 			io_AppendText(0x196b);
-			half = *(int*) (g_77255c + 0xc) / 2;
-			x = half - *(short*) (g_772500 + 0x1ebd8) - 0x87;
+			half = *(int*) (d2_CurrentWindow + 0xc) / 2;
+			x = half - *(short*) (d2_FileObjTable + 0x1ebd8) - 0x87;
 			left = half - 0x64;
 			for (i = 0; i < 5; i++) {
 				items[i].x14 = i * 0x4c + 0x2c;
@@ -101,14 +101,14 @@ void __cdecl d2_ShowKircheTop5(void)
 				else {
 					strcpy(buf, g_14a6554);
 				}
-				d2_ShowWrappedText(buf, left, i * 0x4c + 0x34, *(int*) (g_77255c + 0xc) - left + 0x14, 0x53);
+				d2_ShowWrappedText(buf, left, i * 0x4c + 0x34, *(int*) (d2_CurrentWindow + 0xc) - left + 0x14, 0x53);
 				io_FormatTextBuffer(buf, 0x196e, b[i]);
-				d2_ShowWrappedText(buf, left, i * 0x4c + 0x4d, *(int*) (g_77255c + 0xc) - left + 0x14, 0x53);
+				d2_ShowWrappedText(buf, left, i * 0x4c + 0x4d, *(int*) (d2_CurrentWindow + 0xc) - left + 0x14, 0x53);
 			}
 			dirty = 0;
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop((void*) d2_ShowKircheTop5, 0x677c7) != 0);
 	d3_EndCameraAndUiMode();

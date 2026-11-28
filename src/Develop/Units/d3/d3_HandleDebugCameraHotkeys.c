@@ -1,6 +1,6 @@
 #include <string.h>
 #include "Develop/Units/d3/d3_camera.h"
-extern char g_14cf950; extern unsigned char g_1040600; extern char* d3_ObjectListHead;
+extern char io_LastKeyScancode; extern unsigned char g_1040600; extern char* d3_ObjectListHead;
 int __cdecl d3_ResetRenderStates(void *flags);
 int __cdecl d3_SetFogEnabled(int enable);
 void *__cdecl d3_NextVisibleSceneNode(void *node);
@@ -16,7 +16,7 @@ char __cdecl d3_HandleDebugCameraHotkeys(void)
 	void* dst;
 	int count;
 
-	if (g_14cf950 != *(char *) 0x6b85a5) {
+	if (io_LastKeyScancode != *(char *) 0x6b85a5) {
 		count = 8;
 		dst = flags;
 		__asm {
@@ -36,8 +36,8 @@ char __cdecl d3_HandleDebugCameraHotkeys(void)
 			add ecx, ebx
 			rep movsb
 		}
-		*(char *) 0x6b85a5 = g_14cf950;
-		switch ((unsigned char) g_14cf950) {
+		*(char *) 0x6b85a5 = io_LastKeyScancode;
+		switch ((unsigned char) io_LastKeyScancode) {
 		case 0x30:
 			value = flags[0];
 			flags[0] = value ^

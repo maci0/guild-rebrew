@@ -21,7 +21,7 @@ int __cdecl cut_AreAllPlayersDone(unsigned char* cutscene)
 
 	r = 1;
 	for (i = 0; i < cutscene[0x30]; i++) {
-		if (((Player35c*)g_9b0e20)[i].used != 0 && ((Player35c*)g_9b0e20)[i].x8 == 0 && ((Player35c*)g_9b0e20)[i].x10 != -1) {
+		if (((Player35c*)cut_ParticipantSlots)[i].used != 0 && ((Player35c*)cut_ParticipantSlots)[i].x8 == 0 && ((Player35c*)cut_ParticipantSlots)[i].x10 != -1) {
 			r = 0;
 			break;
 		}

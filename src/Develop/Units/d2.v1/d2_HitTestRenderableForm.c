@@ -1,5 +1,5 @@
 #include <string.h>
-extern int g_102d028, g_102d02c, g_67d388, d2_CurrentElementId; extern char* g_1015ea0;
+extern int g_102d028, g_102d02c, g_67d388, d2_CurrentElementId; extern char* d2_Controls;
 char* __cdecl d3_FindTextureByName(char*); char __cdecl d3_PickObjectSurfaceUV(float, float, int, char*, float*, float*);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x0046acf0 */
@@ -79,7 +79,7 @@ found:
 		list = *(int**) (t + 0x28);
 		{
 			for (j = 0; j < cnt; j++) {
-				obj = (char*) &((D2_CONTROL_TL*) g_1015ea0)[list[j]];
+				obj = (char*) &((D2_CONTROL_TL*) d2_Controls)[list[j]];
 				if (px < *(int*) (obj + 0x10)) {
 					continue;
 				}

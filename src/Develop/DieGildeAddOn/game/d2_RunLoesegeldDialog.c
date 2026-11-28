@@ -3,13 +3,13 @@
    0x3d, fills the payment packet and runs the modal button loop until the
    player answers. */
 
-extern char* g_aed32c;
+extern char* cm_PacketDeltaBase;
 extern int g_14aba40;
 extern int g_14aba48;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern double g_6640f8;
+extern double dbl_0_75;
 extern double g_665fc0;
 extern char g_6ab2e0[];
 
@@ -97,9 +97,9 @@ void __cdecl d2_RunLoesegeldDialog(char* rec)
 	}
 	v = gm_WalkEntityChain(*(unsigned short*) ent);
 	prob = (double) v;
-	if (((double) gm_RandomFloat01() * 0.5 + g_6640f8) * g_665fc0
+	if (((double) gm_RandomFloat01() * 0.5 + dbl_0_75) * g_665fc0
 	    < prob) {
-		prob = ((double) gm_RandomFloat01() * 0.5 + g_6640f8) * g_665fc0;
+		prob = ((double) gm_RandomFloat01() * 0.5 + dbl_0_75) * g_665fc0;
 	}
 	cnt = (int) prob;
 	cnt = (int) ((double) cnt * (double) weight);
@@ -113,12 +113,12 @@ void __cdecl d2_RunLoesegeldDialog(char* rec)
 	b1 = d2_GetWindowListItem((int) ctx, 1, v);
 	b2 = d2_GetWindowListItem((int) ctx, 1, v + 1);
 	b3 = d2_GetWindowListItem((int) ctx, 1, v + 2);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	for (;;) {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == b1) {
 				int entityId = *(int*) (ent + 4);
 				*(unsigned char*) (pkt + 4) = 0x3e;
@@ -126,27 +126,27 @@ void __cdecl d2_RunLoesegeldDialog(char* rec)
 				*(int*) (pkt + 0xc) = *(int*) (rec + 1);
 				*(unsigned char*) (pkt + 0x36) = 9;
 				*(int*) (pkt + 0x58) = entityId;
-				*(int*) (pkt + 0x60) = *(int*) (g_7f4ca4 + g_774970 * 0x21c);
+				*(int*) (pkt + 0x60) = *(int*) (gm_EntityIdField + gm_LocalPlayerSlot * 0x21c);
 				*(int*) (pkt + 0x64) = cnt;
 				cm_SendCopyEntityData(pkt);
 				io_FormatTextBuffer(note, 0x19c5, cnt, *(unsigned short*) ent);
 				d2_ShowModalMessageBox(note, 0);
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			} else if (d2_CurrentElementId == b2) {
 				flags = -1;
 				cm_BeginPacketFieldDelta(rec, *(int*) (rec + 1));
-				cm_AppendPacketFieldDelta(4, 1, (int) (rec - g_aed32c) + 0x65,
+				cm_AppendPacketFieldDelta(4, 1, (int) (rec - cm_PacketDeltaBase) + 0x65,
 				    &flags);
 				cm_RequestChangeAttribute();
 				cm_SendBlockCharacter(*(int*) (ent + 4),
 				    -(int) *(unsigned char*) (ent + 0x1b1), 0);
 				io_FormatTextBuffer(line, 0x19c6, *(unsigned short*) ent);
 				d2_ShowModalMessageBox(line, 0);
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			} else if (d2_CurrentElementId == b3) {
 				io_FormatTextBuffer(text, 0x19c7, *(unsigned short*) ent);
 				d2_ShowModalMessageBox(text, 0);
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
 		if (main_RunFrameLoop((void*) d2_RunLoesegeldDialog, 0x677c7) == 0) {

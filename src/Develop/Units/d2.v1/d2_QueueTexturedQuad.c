@@ -92,7 +92,7 @@ RENDER_QUAD* __cdecl d2_QueueTexturedQuad(int x, int y, int w, int h, int tex, R
 	if (ch + y > d2_ClipBottom) {
 		ch = d2_ClipBottom - y;
 	}
-	quad = &g_1552020[quadIndex];
+	quad = &d2_QueuedQuads[quadIndex];
 	if (d2_BuildQuadVertices(x, y, cw, ch, quad) == 0) {
 		return 0;
 	}

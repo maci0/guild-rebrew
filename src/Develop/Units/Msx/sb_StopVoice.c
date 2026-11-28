@@ -1,16 +1,16 @@
-extern int g_6b7d7c;
+extern int sb_WaveDriver;
 
 
 
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 int __cdecl msx_EndSample(int);
 
 void __cdecl sb_StopVoice(int* p, int fade)
 {
-	if (g_6b7d7c != 0 && p != 0) {
+	if (sb_WaveDriver != 0 && p != 0) {
 		if (fade != 0) {
 			p[5] |= 2;
-			p[4] = (g_6b7fac * 2 + g_6b7fac) * 4 + g_6b7fac;
+			p[4] = (gm_GameTicks * 2 + gm_GameTicks) * 4 + gm_GameTicks;
 			return;
 		}
 		msx_EndSample(p[0]);

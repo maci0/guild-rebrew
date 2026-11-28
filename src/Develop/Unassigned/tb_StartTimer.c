@@ -2,22 +2,22 @@ typedef unsigned int (__stdcall* g_662324_f)(void*, unsigned int);
 typedef unsigned int (__stdcall* g_662320_f)(unsigned int);
 typedef int (__stdcall* g_66231c_f)(unsigned int, unsigned int, void*, unsigned long, unsigned int);
 typedef unsigned int (__stdcall* g_662318_f)(void);
-extern unsigned int g_1052c48[2];
-extern unsigned int g_1052c48[2];
-extern unsigned int g_1052c50;
-extern unsigned int g_1052c50;
-extern volatile int g_6b7fc4;
-extern volatile int g_6b7fc4;
-extern int g_6b7fa8;
-extern int g_6b7fa8;
-extern g_662324_f g_662324;
-extern g_662324_f g_662324;
-extern g_662320_f g_662320;
-extern g_662320_f g_662320;
-extern g_66231c_f g_66231c;
-extern g_66231c_f g_66231c;
-extern g_662318_f g_662318;
-extern g_662318_f g_662318;
+extern unsigned int tb_TimeCaps[2];
+extern unsigned int tb_TimeCaps[2];
+extern unsigned int tb_TimerDelay;
+extern unsigned int tb_TimerDelay;
+extern volatile int tb_TimerOneshot;
+extern volatile int tb_TimerOneshot;
+extern int tb_TimerId;
+extern int tb_TimerId;
+extern g_662324_f imp_timeGetDevCaps;
+extern g_662324_f imp_timeGetDevCaps;
+extern g_662320_f imp_timeBeginPeriod;
+extern g_662320_f imp_timeBeginPeriod;
+extern g_66231c_f imp_timeSetEvent;
+extern g_66231c_f imp_timeSetEvent;
+extern g_662318_f imp_timeGetTime;
+extern g_662318_f imp_timeGetTime;
 
 
 
@@ -26,22 +26,22 @@ void __cdecl fcn_0064d3eb(unsigned int);
 
 int __cdecl tb_StartTimer(unsigned int delay, int oneshot)
 {
-	g_662324(g_1052c48, 8);
-	g_662320(g_1052c48[0] + 5);
-	if (delay < g_1052c48[0]) {
+	imp_timeGetDevCaps(tb_TimeCaps, 8);
+	imp_timeBeginPeriod(tb_TimeCaps[0] + 5);
+	if (delay < tb_TimeCaps[0]) {
 		return 0;
 	}
-	g_1052c50 = delay;
-	g_6b7fc4 = oneshot;
+	tb_TimerDelay = delay;
+	tb_TimerOneshot = oneshot;
 	if (oneshot) {
-		g_6b7fa8 = g_66231c(delay, g_1052c48[0] + 5, tb_TimerCallback, 0, 0);
+		tb_TimerId = imp_timeSetEvent(delay, tb_TimeCaps[0] + 5, tb_TimerCallback, 0, 0);
 	} else {
-		g_6b7fa8 = g_66231c(delay, g_1052c48[0] + 5, tb_TimerCallback, 0, 1);
+		tb_TimerId = imp_timeSetEvent(delay, tb_TimeCaps[0] + 5, tb_TimerCallback, 0, 1);
 	}
-	if (g_6b7fa8 == 0) {
+	if (tb_TimerId == 0) {
 		return 0;
 	}
-	fcn_0064d3eb(g_662318());
+	fcn_0064d3eb(imp_timeGetTime());
 	return 1;
 }
 unsigned char _dpad_1052bd0[120];

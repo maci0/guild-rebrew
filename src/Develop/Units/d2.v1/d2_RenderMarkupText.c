@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <string.h>
-#define g_1015ea0 d2_gui_legacy_pointer_declaration
+#define d2_Controls d2_gui_legacy_pointer_declaration
 #define d2_GetResourceData d2_gui_legacy_resource_declaration
-#define g_772500 d2_gui_legacy_772500_declaration
+#define d2_FileObjTable d2_gui_legacy_772500_declaration
 #include "Develop/Units/d2.v1/d2_gui.h"
-#undef g_1015ea0
+#undef d2_Controls
 #undef d2_GetResourceData
-#undef g_772500
-extern int g_1015ea0; extern int d2_FontHeight; extern int g_102d020; extern int g_102d024; extern int d2_ScreenHeight; extern int g_1040494; extern int d2_CurrentFont;
+#undef d2_FileObjTable
+extern int d2_Controls; extern int d2_FontHeight; extern int g_102d020; extern int g_102d024; extern int d2_ScreenHeight; extern int g_1040494; extern int d2_CurrentFont;
 extern int g_67d380;
 extern int g_67d390;
 extern int d2_DefaultFont;
@@ -17,8 +17,8 @@ extern int d2_ClipRight;
 extern int d2_ClipBottom;
 extern int g_6b23a4;
 extern int g_6b25b0;
-extern int g_772500;
-extern char* g_772524;
+extern int d2_FileObjTable;
+extern char* d2_CurrentFontBank;
 extern int g_772530;
 extern int g_772554;
 extern int g_7725b4;
@@ -127,7 +127,7 @@ void __cdecl d2_RenderMarkupText(int a0, int a1)
 	sv68 = d2_ClipLeft;
 	g_102d024 = v38 - *(int*) (slot + 0x258);
 	sv70 = d2_ClipBottom;
-	d2_FontHeight = *(unsigned short*) (g_772524 + 8);
+	d2_FontHeight = *(unsigned short*) (d2_CurrentFontBank + 8);
 	g_102d020 = xr;
 	g_772530 = 0;
 	i = 0;
@@ -252,16 +252,16 @@ void __cdecl d2_RenderMarkupText(int a0, int a1)
 							}
 						}
 						if (*(char*) (p + 1) == 'n') {
-							((D2_CONTROL_TL*)g_1015ea0)[img].flags_1d0 |= 0x10;
+							((D2_CONTROL_TL*)d2_Controls)[img].flags_1d0 |= 0x10;
 						}
 						*(int*) (slot + nImg * 4 + 0x294) = -1;
-						tmp = ((D2_CONTROL_TL*)g_1015ea0)[img].width;
+						tmp = ((D2_CONTROL_TL*)d2_Controls)[img].width;
 						*(int*) (slot + nImg * 4 + 0x294) = img;
 						g_102d020 += tmp;
-						len = ((D2_CONTROL_TL*)g_1015ea0)[img].height;
+						len = ((D2_CONTROL_TL*)d2_Controls)[img].height;
 						extra = len + 7;
 					} else {
-						extra = ((D2_CONTROL_TL*)g_1015ea0)[img].height + 7;
+						extra = ((D2_CONTROL_TL*)d2_Controls)[img].height + 7;
 					}
 					i += 2;
 					nImg += 1;
@@ -278,7 +278,7 @@ void __cdecl d2_RenderMarkupText(int a0, int a1)
 				if ((img == 2) || (img == g_67d3a8) || (img == g_67d3a8 + 1)) {
 					len += 2;
 				}
-				d = *(short*) (g_772500 + img * 84 + 0x50);
+				d = *(short*) (d2_FileObjTable + img * 84 + 0x50);
 				if (d + g_102d020 > yr) {
 					len += d2_FontHeight;
 					e = (char*) xr;
@@ -297,20 +297,20 @@ void __cdecl d2_RenderMarkupText(int a0, int a1)
 				    (short) ((short) e - *(short*) (slot + 4)), img, a1);
 				if (img == -1) {
 					*(int*) (slot + nImg * 4 + 0x294) = -1;
-					g_102d020 += ((D2_CONTROL_TL*)g_1015ea0)[img].width;
+					g_102d020 += ((D2_CONTROL_TL*)d2_Controls)[img].width;
 					i += 2;
 					nImg += 1;
 					continue;
 				}
 				if (*(char*) (p + 1) == 'c') {
-					((D2_CONTROL_TL*)g_1015ea0)[img].value_05c = 0;
-					((D2_CONTROL_TL*)g_1015ea0)[img].value_058 = 1;
+					((D2_CONTROL_TL*)d2_Controls)[img].value_05c = 0;
+					((D2_CONTROL_TL*)d2_Controls)[img].value_058 = 1;
 				} else if (*(char*) (p + 1) == 'i') {
-					((D2_CONTROL_TL*)g_1015ea0)[img].value_05c = 0;
-					((D2_CONTROL_TL*)g_1015ea0)[img].value_058 = 0;
+					((D2_CONTROL_TL*)d2_Controls)[img].value_05c = 0;
+					((D2_CONTROL_TL*)d2_Controls)[img].value_058 = 0;
 				} else if (*(char*) (p + 1) == 'b') {
-					((D2_CONTROL_TL*)g_1015ea0)[img].value_05c = 1;
-					((D2_CONTROL_TL*)g_1015ea0)[img].value_058 = 0;
+					((D2_CONTROL_TL*)d2_Controls)[img].value_05c = 1;
+					((D2_CONTROL_TL*)d2_Controls)[img].value_058 = 0;
 				} else if ((*(char*) (p + 1) == 't') || (*(char*) (p + 1) == 'a') ||
 				    (*(char*) (p + 1) == 'n')) {
 					if (*(char*) (p + 2) == '[') {
@@ -338,9 +338,9 @@ void __cdecl d2_RenderMarkupText(int a0, int a1)
 							add ecx, ebx
 							rep stosb
 						}
-						((D2_CONTROL_TL*)g_1015ea0)[img].value_05c = 1;
-						((D2_CONTROL_TL*)g_1015ea0)[img].font = *(int*) (slot + 0x28c);
-						((D2_CONTROL_TL*)g_1015ea0)[img].flags_1d0 = 3;
+						((D2_CONTROL_TL*)d2_Controls)[img].value_05c = 1;
+						((D2_CONTROL_TL*)d2_Controls)[img].font = *(int*) (slot + 0x28c);
+						((D2_CONTROL_TL*)d2_Controls)[img].flags_1d0 = 3;
 						e = strchr(s, ']');
 						if (!e) {
 							sprintf(bufs.sp, (char*) 0x67d540);
@@ -356,7 +356,7 @@ void __cdecl d2_RenderMarkupText(int a0, int a1)
 					}
 				}
 				*(int*) (slot + nImg * 4 + 0x294) = -1;
-				g_102d020 += ((D2_CONTROL_TL*)g_1015ea0)[img].width;
+				g_102d020 += ((D2_CONTROL_TL*)d2_Controls)[img].width;
 				i += 2;
 				nImg += 1;
 				continue;
@@ -382,7 +382,7 @@ void __cdecl d2_RenderMarkupText(int a0, int a1)
 					img = d2_AddWindowInputIcon(g_102d020 - *(int*) (slot + 4),
 					    g_102d024 - *(int*) (slot + 8), 0x10, d2_FontHeight, 0x82, a1);
 					*(int*) (slot + nImg * 4 + 0x294) =
-					    ((D2_CONTROL_TL*)g_1015ea0)[img].value_088;
+					    ((D2_CONTROL_TL*)d2_Controls)[img].value_088;
 					g_102d020 += *(int*) (img * 0x160 + 0x102d150) + 6;
 					nImg += 1;
 					continue;
@@ -394,8 +394,8 @@ void __cdecl d2_RenderMarkupText(int a0, int a1)
 				}
 				img = d2_AddWindowInputIcon(g_102d020 - *(int*) (slot + 4),
 				    g_102d024 - *(int*) (slot + 8), 8, d2_FontHeight, 0x10, a1);
-				((D2_CONTROL_TL*)g_1015ea0)[img].value_078 = 1;
-				tmp = ((D2_CONTROL_TL*)g_1015ea0)[img].value_088;
+				((D2_CONTROL_TL*)d2_Controls)[img].value_078 = 1;
+				tmp = ((D2_CONTROL_TL*)d2_Controls)[img].value_088;
 				*(int*) (tmp * 0x160 + 0x102d288) = *(int*) (slot + nImg * 4 + 0x294);
 				*(int*) (tmp * 0x160 + 0x102d290) = nImg;
 				len = *(int*) (slot + nImg * 4 + 0x298);
@@ -419,8 +419,8 @@ void __cdecl d2_RenderMarkupText(int a0, int a1)
 				}
 				img = d2_AddWindowText((short) ((short) g_102d024 - *(short*) (slot + 8)),
 				    (short) ((short) g_102d020 - *(short*) (slot + 4)), img, a1);
-				((D2_CONTROL_TL*)g_1015ea0)[img].value_078 = 1;
-				((D2_CONTROL_TL*)g_1015ea0)[img].payload.fields.value_08c = *(int*) (slot + 0x3c) + i;
+				((D2_CONTROL_TL*)d2_Controls)[img].value_078 = 1;
+				((D2_CONTROL_TL*)d2_Controls)[img].payload.fields.value_08c = *(int*) (slot + 0x3c) + i;
 				d2_SetEditControlText(img, *(int*) (slot + nImg * 4 + 0x294));
 				*(int*) (slot + nImg * 4 + 0x294) = -1;
 				textLen = (int) strlen(*(char**) (slot + 0x3c));
@@ -452,7 +452,7 @@ void __cdecl d2_RenderMarkupText(int a0, int a1)
 				}
 				img = d2_AddWindowInputIcon(g_102d020 - *(int*) (slot + 4),
 				    g_102d024 - *(int*) (slot + 8), 0, d2_FontHeight, 1, a1);
-				tmp = ((D2_CONTROL_TL*)g_1015ea0)[img].value_088;
+				tmp = ((D2_CONTROL_TL*)d2_Controls)[img].value_088;
 				len = *(int*) (slot + nImg * 4 + 0x294);
 				s = (char*) (tmp * 0x160 + 0x102d16c);
 				if (len > 0x4800) {
@@ -463,7 +463,7 @@ void __cdecl d2_RenderMarkupText(int a0, int a1)
 				*(int*) (tmp * 0x160 + 0x102d150) =
 				    d2_MeasureTextWidth(s, *(int*) (tmp * 0x160 + 0x102d278));
 				len = *(int*) (tmp * 0x160 + 0x102d274);
-				((D2_CONTROL_TL*)g_1015ea0)[len].width =
+				((D2_CONTROL_TL*)d2_Controls)[len].width =
 				    *(int*) (tmp * 0x160 + 0x102d150);
 				*(int*) (slot + nImg * 4 + 0x294) = -1;
 				i += 1;
@@ -522,7 +522,7 @@ void __cdecl d2_RenderMarkupText(int a0, int a1)
 				len = (d2_CurrentFont - d2_DefaultFont) + g_67d3b4 * 2;
 				tmp += 1;
 				len = len * 21;
-				*(int*) (span + 0x1011ae8) = *(short*) (g_772500 + len * 4 + 0x50);
+				*(int*) (span + 0x1011ae8) = *(short*) (d2_FileObjTable + len * 4 + 0x50);
 				i += 1;
 				g_772530 = tmp;
 				continue;
@@ -714,7 +714,7 @@ void __cdecl d2_RenderMarkupText(int a0, int a1)
 			while (tmp < *(int*) (slot + 0x2c)) {
 				e = (char*) (*(int*) (slot + 0x28) + tmp * 4);
 				img = *(int*) (e);
-				p = (char*)&((D2_CONTROL_TL*)g_1015ea0)[img];
+				p = (char*)&((D2_CONTROL_TL*)d2_Controls)[img];
 				while (!*(int*) (p + 0x78)) {
 					if (span + g_102d020 <= *(int*) (p + 0x10)) {
 						break;
@@ -764,7 +764,7 @@ void __cdecl d2_RenderMarkupText(int a0, int a1)
 	if (*(int*) (slot + 0x14) & 0x4000) {
 		if (d2_ScreenHeight < (int) ((d2_FontHeight - 8) + g_102d024)) {
 			tmp = *(int*) (slot + 0x27c);
-			p = *(char**)&((D2_CONTROL_TL*)g_1015ea0)[tmp].parent;
+			p = *(char**)&((D2_CONTROL_TL*)d2_Controls)[tmp].parent;
 			if (p) {
 				tmp = *(int*) (p + 0x27c);
 				len = ((*(int*) (p + 8) - d2_FontHeight) - g_102d024) + 8 + d2_ScreenHeight;

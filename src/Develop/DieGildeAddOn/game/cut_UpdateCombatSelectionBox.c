@@ -4,10 +4,10 @@ extern int g_14ce8e4;
 extern int g_6772c4;
 extern int d2_CurrentElementId;
 extern int g_14ce8cc;
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 extern char* ch_ContextCharacters[32];
-extern unsigned short* g_772f24;
-extern unsigned short* g_772e9c;
+extern unsigned short* cut_ActivePlayerEntity;
+extern unsigned short* cut_CombatDefenderEntity;
 extern int g_772ee4;
 extern int g_772ee8;
 extern char g_68b844[];
@@ -44,7 +44,7 @@ void __cdecl cut_UpdateCombatSelectionBox(int a0)
 					continue;
 				if (*(char*) (o + 0x188) == 0)
 					continue;
-				if ((gm_GetEntityControlMask(*g_772f24, o) & 0x800) == 0)
+				if ((gm_GetEntityControlMask(*cut_ActivePlayerEntity, o) & 0x800) == 0)
 					continue;
 				if (*(int*) (o + 0x184) == 0)
 					continue;
@@ -52,7 +52,7 @@ void __cdecl cut_UpdateCombatSelectionBox(int a0)
 					continue;
 				if (!cut_DispatchTacticalOrder(a0, o))
 					continue;
-				if (g_772f24 == g_772e9c)
+				if (cut_ActivePlayerEntity == cut_CombatDefenderEntity)
 					d3snd_PlaySoundEffect(*(unsigned short*) o, g_772ee4, (int) g_68b844, -1);
 				else
 					d3snd_PlaySoundEffect(*(unsigned short*) o, g_772ee8, (int) g_68b844, -1);
@@ -75,6 +75,6 @@ void __cdecl cut_UpdateCombatSelectionBox(int a0)
 				d3_SetObjectGreyTint((int) p, 0);
 		}
 	}
-	if (g_14ce8e0 != 0)
+	if (io_RightButtonReleased != 0)
 		cut_ClearStatusOverlaySlots();
 }

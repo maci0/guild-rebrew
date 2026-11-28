@@ -30,7 +30,7 @@ extern __declspec(dllimport) long __stdcall CoCreateInstance(void*, void*, unsig
 extern short g_14cc5b8;
 extern int g_14cc5bc;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char g_6b5c60[];
+extern char str_empty[];
 
 LRESULT CALLBACK VideoWindowProc(HWND, UINT, WPARAM, LPARAM);
 char* __cdecl AllocVideoListNode(void);
@@ -80,11 +80,11 @@ int __cdecl OpenMovieWindow(char* name, void* hwnd, void* inst, int x, int y, in
 			g_14cc5b8 = RegisterClassExA(&wc);
 		}
 		if (flags & 0x80) {
-			hwnd = CreateWindowExA(8, "MOVIEWNDCLASS", (char*) g_6b5c60, 0x86000000,
+			hwnd = CreateWindowExA(8, "MOVIEWNDCLASS", (char*) str_empty, 0x86000000,
 			    0, 0, GetSystemMetrics(0), GetSystemMetrics(1), 0, 0, inst, 0);
 			ShowCursor(0);
 		} else {
-			hwnd = CreateWindowExA(8, "MOVIEWNDCLASS", (char*) g_6b5c60, 0xcf0000,
+			hwnd = CreateWindowExA(8, "MOVIEWNDCLASS", (char*) str_empty, 0xcf0000,
 			    0x80000000, 0x80000000, 0x80000000, 0x80000000, 0, 0, inst, 0);
 		}
 		flags |= 0x100;

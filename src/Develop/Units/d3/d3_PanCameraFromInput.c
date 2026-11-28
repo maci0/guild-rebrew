@@ -1,16 +1,16 @@
-extern const float g_662d40[3];
-extern unsigned short g_7725c4;
-extern short g_14ce8c2;
-extern short g_14ce8c0;
-extern int g_7746c8;
-extern int g_7746c4;
+extern const float d3_UnitAxisVectors[3];
+extern unsigned short d2_CursorStateId;
+extern short io_ActiveCursorY;
+extern short io_ActiveCursorX;
+extern int d2_InteriorBuilding;
+extern int d2_VisitedBuilding;
 extern int d3_ActiveCamera;
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 extern int d3_ActiveCameraAnimation;
 extern int d3_CameraAnimating;
 extern int d2_MouseTopBoundary;
 extern int g_6b5c80;
-extern int g_67a370;
+extern int d3_ActiveScene;
 extern int d2_MouseBottomBoundary;
 extern int d2_MouseRightBoundary;
 extern float d3_CameraHeightFraction;
@@ -40,17 +40,17 @@ int __cdecl d3_PanCameraFromInput(void)
 	float d[4];
 	float mat[16];
 
-	mode = g_7725c4;
+	mode = d2_CursorStateId;
 	skipx = 0;
 	ret = 0;
 	if (mode >= 1 && mode <= 8) {
-		g_7725c4 = 0;
+		d2_CursorStateId = 0;
 	}
 	if (d3_ActiveCameraAnimation != 0 || d3_CameraAnimating != 0) {
 		return 0;
 	}
 	if (*(int*) 0x774750 != 0) {
-		f = (double) (unsigned int) (g_6b7fac - *(int*) 0x774750) * 0.4;
+		f = (double) (unsigned int) (gm_GameTicks - *(int*) 0x774750) * 0.4;
 	} else {
 		f = 1.0f;
 	}
@@ -58,9 +58,9 @@ int __cdecl d3_PanCameraFromInput(void)
 		f = 4.0;
 	}
 	step = (float) (f * 5.0);
-	pos = g_14ce8c0;
-	*(int*) 0x774750 = g_6b7fac;
-	typ = g_14ce8c2;
+	pos = io_ActiveCursorX;
+	*(int*) 0x774750 = gm_GameTicks;
+	typ = io_ActiveCursorY;
 	if ((typ == d2_MouseTopBoundary
 	    && pos < g_6b5c80 + 0x40)
 	    || (typ < d2_MouseTopBoundary + 0x40
@@ -77,7 +77,7 @@ int __cdecl d3_PanCameraFromInput(void)
 		if (*(float*) 0x774744 > -50.0) {
 			*(float*) 0x774744 = *(float*) 0x774744 - step;
 		}
-		g_7725c4 = 5;
+		d2_CursorStateId = 5;
 		goto done;
 	}
 	if ((typ == d2_MouseTopBoundary
@@ -96,7 +96,7 @@ int __cdecl d3_PanCameraFromInput(void)
 		if (*(float*) 0x774744 < 50.0) {
 			*(float*) 0x774744 = *(float*) 0x774744 + step;
 		}
-		g_7725c4 = 6;
+		d2_CursorStateId = 6;
 		goto done;
 	}
 	if ((typ == d2_MouseBottomBoundary
@@ -115,7 +115,7 @@ int __cdecl d3_PanCameraFromInput(void)
 		if (*(float*) 0x774744 < 50.0) {
 			*(float*) 0x774744 = *(float*) 0x774744 + step;
 		}
-		g_7725c4 = 8;
+		d2_CursorStateId = 8;
 		goto done;
 	}
 	if ((typ == d2_MouseBottomBoundary
@@ -134,7 +134,7 @@ int __cdecl d3_PanCameraFromInput(void)
 		if (*(float*) 0x774744 > -50.0) {
 			*(float*) 0x774744 = *(float*) 0x774744 - step;
 		}
-		g_7725c4 = 7;
+		d2_CursorStateId = 7;
 		goto done;
 	}
 	if (pos == g_6b5c80 || g_14cf7cb != 0) {
@@ -144,7 +144,7 @@ int __cdecl d3_PanCameraFromInput(void)
 		if (*(float*) 0x774744 > -50.0) {
 			*(float*) 0x774744 = *(float*) 0x774744 - step;
 		}
-		g_7725c4 = 4;
+		d2_CursorStateId = 4;
 		goto xdamp;
 	}
 	if (pos == d2_MouseRightBoundary || g_14cf7cd != 0) {
@@ -154,7 +154,7 @@ int __cdecl d3_PanCameraFromInput(void)
 		if (*(float*) 0x774744 < 50.0) {
 			*(float*) 0x774744 = *(float*) 0x774744 + step;
 		}
-		g_7725c4 = 3;
+		d2_CursorStateId = 3;
 		goto xdamp;
 	}
 	if (typ == d2_MouseBottomBoundary || g_14cf7d0 != 0) {
@@ -165,7 +165,7 @@ int __cdecl d3_PanCameraFromInput(void)
 			*(float*) 0x77474c = *(float*) 0x77474c - step;
 		}
 		skipx = 1;
-		g_7725c4 = 1;
+		d2_CursorStateId = 1;
 	} else if (typ == d2_MouseTopBoundary || g_14cf7c8 != 0) {
 		if (*(float*) 0x77474c == 0.0f) {
 			*(float*) 0x77474c = 10.0f;
@@ -174,7 +174,7 @@ int __cdecl d3_PanCameraFromInput(void)
 			*(float*) 0x77474c = *(float*) 0x77474c + step;
 		}
 		skipx = 1;
-		g_7725c4 = 2;
+		d2_CursorStateId = 2;
 	}
 	if (*(float*) 0x774744 > 0.0f) {
 		*(float*) 0x774744 = *(float*) 0x774744 - step;
@@ -209,9 +209,9 @@ done:
 	if (*(float*) 0x774744 == 0.0f && *(float*) 0x77474c == 0.0f) {
 		goto end;
 	}
-	if (g_7746c8 != 0) {
+	if (d2_InteriorBuilding != 0) {
 		f = f * 0.5;
-	} else if (g_7746c4 != 0) {
+	} else if (d2_VisitedBuilding != 0) {
 		f = f * 0.25;
 	}
 	step = (float) (*(float*) 0x6a2570 * f
@@ -219,19 +219,19 @@ done:
 	D3DXMatrixTranspose(mat, (float*) ((char*) d3_ActiveCamera + 0x18c));
 	d[0] = *(float*) 0x774744 * step * 1.1;
 	d[1] = *(float*) 0x77474c * step * 1.1;
-	q[0] = mat[8] * g_662d40[2]
-	    + mat[4] * g_662d40[1]
-	    + mat[0] * g_662d40[0];
-	q[2] = mat[10] * g_662d40[2]
-	    + mat[6] * g_662d40[1]
-	    + mat[2] * g_662d40[0];
+	q[0] = mat[8] * d3_UnitAxisVectors[2]
+	    + mat[4] * d3_UnitAxisVectors[1]
+	    + mat[0] * d3_UnitAxisVectors[0];
+	q[2] = mat[10] * d3_UnitAxisVectors[2]
+	    + mat[6] * d3_UnitAxisVectors[1]
+	    + mat[2] * d3_UnitAxisVectors[0];
 	if (sqrt((double) (q[0] * q[0] + q[2] * q[2])) < 0.1f) {
 		v[1] = d[1];
 		v[2] = 0.0f;
 		q[0] = mat[0] * d[0] + mat[4] * v[1] + mat[8] * v[2];
 		q[2] = mat[2] * d[0] + mat[6] * v[1] + mat[10] * v[2];
 	} else {
-		step = d3_WrapYawDelta((int) g_662d40, (int) &q[0]);
+		step = d3_WrapYawDelta((int) d3_UnitAxisVectors, (int) &q[0]);
 		v[1] = 0.0f;
 		v[2] = d[1];
 		q[0] = d[0] * cos(-step) + d[1] * sin(-step);
@@ -246,7 +246,7 @@ done:
 		float t;
 		int n;
 
-		obj = (char*) g_67a370;
+		obj = (char*) d3_ActiveScene;
 		if (*(int*) (obj + 0xb0) != 0) {
 			obj = (char*) *(int*) (obj + 0xb0);
 			t = *(float*) obj + *(float*) (obj + 0x10) * 20.0f;

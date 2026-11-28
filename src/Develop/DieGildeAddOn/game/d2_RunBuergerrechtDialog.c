@@ -23,9 +23,9 @@ typedef struct {
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
 extern pos14_7f4c00 gm_GameTime;
-extern unsigned char g_773d75;
-extern trade_868080 g_868080[];
-extern unsigned char g_6a375c;
+extern unsigned char gm_ActiveTownIndex;
+extern trade_868080 gm_CityDisplayNames[];
+extern unsigned char gm_PlayerCount;
 extern char g_6aae78[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
@@ -61,7 +61,7 @@ void __cdecl d2_RunBuergerrechtDialog(char* p)
 	int i;
 	pos14_7f4c00 st;
 
-	ent = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]);
+	ent = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot]);
 	n = gm_AccumulateTyped2(ent);
 	q = fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x115);
 	ok = 0;
@@ -77,14 +77,14 @@ void __cdecl d2_RunBuergerrechtDialog(char* p)
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 1);
-	io_AppendText(0x19fe, ent->entity_index, 0x3e80, &((Row5a92*)g_868080)[g_773d75]);
-	g_100f1dc = -1;
+	io_AppendText(0x19fe, ent->entity_index, 0x3e80, &((Row5a92*)gm_CityDisplayNames)[gm_ActiveTownIndex]);
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc != -1) {
-			if (g_100f1dc == 2 && gm_CheckEntityStock(ent, 0x3e80, g_773d75) != 0) {
+		if (d2_DialogButtonAction != -1) {
+			if (d2_DialogButtonAction == 2 && gm_CheckEntityStock(ent, 0x3e80, gm_ActiveTownIndex) != 0) {
 				char msg[0xf8];
 				char text[0x200];
 
@@ -127,8 +127,9 @@ void __cdecl d2_RunBuergerrechtDialog(char* p)
 				msg[0x58] = 2;
 				*(int*) (msg + 0x5c) = ent->entity_id;
 				cm_SendCopyEntityData(msg);
-				for (i = 0; i < 768 && n < g_6a375c; i++) {
-					if ((((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 6 || ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 7) && ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]) != ent) {
+				for (i = 0; i < 768 && n < gm_PlayerCount; i++) {
+					if ((((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_type == 6 || ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_type == 7) &&
+						((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i]) != ent) {
 						{
 							char* fdest;
 							int flen;
@@ -153,7 +154,7 @@ void __cdecl d2_RunBuergerrechtDialog(char* p)
 								rep stosb
 							}
 						}
-						*(int*) (msg + 8) = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id;
+						*(int*) (msg + 8) = ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_id;
 						msg[4] = 0x69;
 						*(int*) (msg + 0xc) = -1;
 						msg[0x36] = 9;
@@ -171,7 +172,7 @@ void __cdecl d2_RunBuergerrechtDialog(char* p)
 				ok = 1;
 				d2_ShowModalMessageBox(text, 0);
 			}
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop(d2_RunBuergerrechtDialog, 0x677c7) != 0);
 	d2_DestroyForm(h);

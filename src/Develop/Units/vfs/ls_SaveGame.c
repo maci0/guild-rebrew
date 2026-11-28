@@ -1,7 +1,7 @@
 #include <string.h>
 
 struct VFS_DIR;
-extern struct VFS_DIR* g_6b7fdc;
+extern struct VFS_DIR* vfs_RootDir;
 extern int __cdecl CloseVfsStream(void* stream);
 
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
@@ -38,7 +38,7 @@ int __cdecl ls_SaveGame(char* name, char* slot, int flags)
 {
 	void* stream;
 
-	stream = vfs_Tfopen(name, "wb", g_6b7fdc);
+	stream = vfs_Tfopen(name, "wb", vfs_RootDir);
 	if (stream == 0)
 		return 0;
 	strcpy((char*) 0x7e2480, slot);

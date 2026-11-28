@@ -49,12 +49,12 @@ void __cdecl he_RunPruegel(int eventCursor)
 		}
 		v7 = cm_GetCommandResult(*(int*) (eventBase + 0xcc));
 		if (v7 != 0) {
-			v4 = gm_GetEntityTableEntry(*(unsigned short*) (eventBase + 8) * 0x21c + (int) &g_7f4ca0);
+			v4 = gm_GetEntityTableEntry(*(unsigned short*) (eventBase + 8) * 0x21c + (int) &gm_EntitySlotTable);
 			if (v4 != 0) {
 				*(int*) (v4 + 0x28) = *(int*) (v4 + 0x28) + *(int*) (eventBase + 0xd8);
 			}
 			*(int*) (eventBase + 0xc8) = *(int*) (v7 + 4);
-			cm_RequestTransferCurrencyNoKill(-1, *(int*) (*(unsigned short*) (eventBase + 8) * 0x21c + (unsigned long)&g_7f4ca4), *(unsigned char*) &g_773d75, *(int*) (eventBase + 0xd8));
+			cm_RequestTransferCurrencyNoKill(-1, *(int*) (*(unsigned short*) (eventBase + 8) * 0x21c + (unsigned long)&gm_EntityIdField), *(unsigned char*) &gm_ActiveTownIndex, *(int*) (eventBase + 0xd8));
 			he_AssignActionSlot(0, 0, *(unsigned short*) v7, eventBase);
 			*(int*) (eventBase + 0x70) = *(int*) (eventBase + 0x70) + 1;
 			*(int*) (eventBase + 0xcc) = -1;
@@ -96,7 +96,7 @@ void __cdecl he_RunPruegel(int eventCursor)
 			v10[2] = eventBase;
 			v10[3] = 0;
 			if (he_DetectNearbyPatrolAction(v10) != 0) {
-				*(int*) (eventBase + 0xcc) = gm_TryRecordCrime(0x15, 1, *(int*) (*(unsigned short*) (eventBase + 8) * 0x21c + (unsigned long)&g_7f4ca4), *(int*) (v4 + 4), *(int*) (v6 + 1));
+				*(int*) (eventBase + 0xcc) = gm_TryRecordCrime(0x15, 1, *(int*) (*(unsigned short*) (eventBase + 8) * 0x21c + (unsigned long)&gm_EntityIdField), *(int*) (v4 + 4), *(int*) (v6 + 1));
 				eventCursor += 0x52;
 				*(int*) (eventCursor + 0x1e) = 8;
 				*(int*) (eventCursor + 0x82) = *(int*) (v10[3] + 4);
@@ -149,7 +149,7 @@ label_562e74:
 		if (0 <= gm_CompareGameTime((int*) (eventBase + 0x52), (int) &gm_GameTime)) {
 			return;
 		}
-		ep = (char*) (*(unsigned short*) (eventBase + 8) * 0x21c + (unsigned long)&g_7f4ca0);
+		ep = (char*) (*(unsigned short*) (eventBase + 8) * 0x21c + (unsigned long)&gm_EntitySlotTable);
 		v7 = gm_LookupEntityRecordById(*(int*) (eventBase + 0xb4));
 		if (v7 == 0) {
 			*(int*) (eventBase + 0x70) = -1;
@@ -201,7 +201,7 @@ label_562e74:
 					he_PostEntityMessage(*(int*) (ep + 4), -1, buf, 0, 0x5fa, 0);
 				}
 			}
-			gm_TryRecordCrime(0x15, 1, *(int*) (*(unsigned short*) (eventBase + 8) * 0x21c + (unsigned long)&g_7f4ca4), *(int*) (eventBase + 0xb4), *(int*) (eventBase + 0xac));
+			gm_TryRecordCrime(0x15, 1, *(int*) (*(unsigned short*) (eventBase + 8) * 0x21c + (unsigned long)&gm_EntityIdField), *(int*) (eventBase + 0xb4), *(int*) (eventBase + 0xac));
 			targetType = *(char*) (v7 + 2);
 			if (targetType != 6 && targetType != 7) {
 				cm_RequestCopyEntityData(*(int*) (ep + 4), *(int*) (v7 + 4), -0x19, 1);

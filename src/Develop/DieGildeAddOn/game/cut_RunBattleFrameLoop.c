@@ -1,4 +1,4 @@
-extern int g_772ea4;
+extern int cut_CombatCancelledEntity;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
 int __cdecl main_RunFrameLoop(void*, int);
@@ -24,7 +24,7 @@ void __cdecl cut_RunBattleFrameLoop(char* context)
 	int busy;
 	int i;
 
-	while (g_772ea4 == 0 && main_RunFrameLoop(cut_RunBattleFrameLoop, 0x7d6c6) != 0) {
+	while (cut_CombatCancelledEntity == 0 && main_RunFrameLoop(cut_RunBattleFrameLoop, 0x7d6c6) != 0) {
 		d3_UpdateCameraAtScreenEdges();
 		busy = 0;
 		for (i = 0; i < 16; i++) {
@@ -44,6 +44,6 @@ void __cdecl cut_RunBattleFrameLoop(char* context)
 			busy = 1;
 		cut_UpdateCombatEffects();
 		if (busy == 0)
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 	}
 }

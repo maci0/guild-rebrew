@@ -35,11 +35,11 @@ void* __cdecl memset(void*, int, unsigned int);
 
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char* g_7746c4;
+extern char* d2_VisitedBuilding;
 extern int g_14abc98;
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char s_6ab348[];
 
@@ -75,7 +75,7 @@ int __cdecl d2_RunStadtwacheDispatchDialog(int unused, char* param)
 		return 0;
 	}
 	for (i = 0; i < 768; i++) {
-		if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].selected != 0)
+		if (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].selected != 0)
 			break;
 	}
 	if (i >= 768) {
@@ -89,12 +89,12 @@ int __cdecl d2_RunStadtwacheDispatchDialog(int unused, char* param)
 	btn = io_AppendText(0x1a6d, param);
 	btn1 = d2_GetWindowListItem(dlg, 1, btn);
 	btn2 = d2_GetWindowListItem(dlg, 1, btn + 1);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == btn1) {
 				n = 0;
 				memset(pkt.ids, 0xff, sizeof(pkt.ids));
@@ -102,23 +102,23 @@ int __cdecl d2_RunStadtwacheDispatchDialog(int unused, char* param)
 					if (n >= 6) {
 						break;
 					}
-					if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].selected != 0) {
-						pkt.ids[n] = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id;
+					if (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].selected != 0) {
+						pkt.ids[n] = ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_id;
 						n++;
 					}
 				}
 				if (n != 0) {
 					count = 0;
 					pkt.type = 0x44;
-					pkt.x8 = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id;
+					pkt.x8 = ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id;
 					pkt.x36 = 2;
 					pkt.x58 = *(int*) (param + 1);
-					pkt.x5c = *(int*) (g_7746c4 + 1);
+					pkt.x5c = *(int*) (d2_VisitedBuilding + 1);
 					cm_SendCopyEntityData(&pkt);
 					cm_ExProdObjekt();
 					flag = 1;
 					for (i = 0; i < 768; i++) {
-						if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].selected != 0)
+						if (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].selected != 0)
 							count++;
 					}
 					if (count > 6) {
@@ -126,10 +126,10 @@ int __cdecl d2_RunStadtwacheDispatchDialog(int unused, char* param)
 						d2_ShowModalMessageBox(buf, 0);
 					}
 				}
-				g_774654 = 2;
+				d2_DialogCloseRequested = 2;
 			}
 			else if (d2_CurrentElementId == btn2) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	} while (main_RunFrameLoop((void*) d2_RunStadtwacheDispatchDialog, 0x677c7) != 0);

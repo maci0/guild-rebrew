@@ -4,7 +4,7 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl d2_RenderDialogIconsAndText(int);
 void __cdecl d2_RenderDiceRollIcons(int, unsigned char*);
 void __cdecl d2_RenderPlayerDiceIcons(int, unsigned char*);
-extern volatile int g_6b7fac; extern unsigned short g_774970; extern char g_7f4ca4[];
+extern volatile int gm_GameTicks; extern unsigned short gm_LocalPlayerSlot; extern char gm_EntityIdField[];
 /* ADDRESS: GOLDTL 0x005a0cd0 */
 void __cdecl d2_ShowWirtshausDiceStep(unsigned char* a0, unsigned char* a1, int mode, int windowId, int formId, int duration, int a6)
 {
@@ -18,46 +18,46 @@ void __cdecl d2_ShowWirtshausDiceStep(unsigned char* a0, unsigned char* a1, int 
 		switch (mode) {
 		case 1:
 			io_FormatTextBuffer(buf, 0x1883, *(int*) a1 + 0x30);
-			start = g_6b7fac;
-			last = g_6b7fac;
-			while (start + duration > g_6b7fac) {
+			start = gm_GameTicks;
+			last = gm_GameTicks;
+			while (start + duration > gm_GameTicks) {
 				main_RunFrameLoop(0, 0x777c7);
-				if (!*(char*) ((char*) &g_7f4ca4 + (*(unsigned short*) &g_774970) * 0x21c + 4)) {
+				if (!*(char*) ((char*) &gm_EntityIdField + (*(unsigned short*) &gm_LocalPlayerSlot) * 0x21c + 4)) {
 					break;
 				}
-				if (last + step < g_6b7fac) {
+				if (last + step < gm_GameTicks) {
 					d2_SetForm(windowId, formId);
 					d2_RenderDialogIconsAndText((int) buf);
 					step += step / 2;
-					last = g_6b7fac;
+					last = gm_GameTicks;
 				}
 			}
 			break;
 		case 2:
 			io_FormatTextBuffer(buf, 0x1884, *(int*) a1 + 0x30, *(int*) (a0 + 4));
-			start = g_6b7fac;
-			last = g_6b7fac;
-			while (start + duration > g_6b7fac) {
+			start = gm_GameTicks;
+			last = gm_GameTicks;
+			while (start + duration > gm_GameTicks) {
 				main_RunFrameLoop(0, 0x777c7);
-				if (!*(char*) ((char*) &g_7f4ca4 + (*(unsigned short*) &g_774970) * 0x21c + 4)) {
+				if (!*(char*) ((char*) &gm_EntityIdField + (*(unsigned short*) &gm_LocalPlayerSlot) * 0x21c + 4)) {
 					break;
 				}
-				if (last + step < g_6b7fac) {
+				if (last + step < gm_GameTicks) {
 					d2_SetForm(windowId, formId);
 					d2_RenderDiceRollIcons((int) buf, a1);
 					step += step / 2;
-					last = g_6b7fac;
+					last = gm_GameTicks;
 				}
 			}
 			break;
 		case 3:
 			io_FormatTextBuffer(buf, 0x1885, *(int*) a1 + 0x30, *(int*) (a0 + 4));
-			start = g_6b7fac;
-			last = g_6b7fac;
+			start = gm_GameTicks;
+			last = gm_GameTicks;
 			d2_SetForm(windowId, formId);
 			d2_RenderPlayerDiceIcons((int) buf, a1);
-			while (start + duration > g_6b7fac) {
-				if (!*(char*) ((char*) &g_7f4ca4 + (*(unsigned short*) &g_774970) * 0x21c + 4)) {
+			while (start + duration > gm_GameTicks) {
+				if (!*(char*) ((char*) &gm_EntityIdField + (*(unsigned short*) &gm_LocalPlayerSlot) * 0x21c + 4)) {
 					break;
 				}
 				main_RunFrameLoop(0, 0x777c7);
@@ -65,12 +65,12 @@ void __cdecl d2_ShowWirtshausDiceStep(unsigned char* a0, unsigned char* a1, int 
 			break;
 		case 4:
 			io_FormatTextBuffer(buf, 0x1886, *(int*) a1 + 0x30, *(int*) (a0 + 4));
-			start = g_6b7fac;
-			last = g_6b7fac;
+			start = gm_GameTicks;
+			last = gm_GameTicks;
 			d2_SetForm(windowId, formId);
 			d2_RenderPlayerDiceIcons((int) buf, a1);
-			while (start + duration > g_6b7fac) {
-				if (!*(char*) ((char*) &g_7f4ca4 + (*(unsigned short*) &g_774970) * 0x21c + 4)) {
+			while (start + duration > gm_GameTicks) {
+				if (!*(char*) ((char*) &gm_EntityIdField + (*(unsigned short*) &gm_LocalPlayerSlot) * 0x21c + 4)) {
 					break;
 				}
 				main_RunFrameLoop(0, 0x777c7);
@@ -93,12 +93,12 @@ void __cdecl d2_ShowWirtshausDiceStep(unsigned char* a0, unsigned char* a1, int 
 			io_FormatTextBuffer(buf, 0x1886, *(int*) a1 + 0x30, *(int*) (a0 + 4));
 			break;
 		}
-		start = g_6b7fac;
-		last = g_6b7fac;
+		start = gm_GameTicks;
+		last = gm_GameTicks;
 		d2_SetForm(windowId, formId);
 		d2_RenderPlayerDiceIcons((int) buf, a1);
-		while (start + duration > g_6b7fac) {
-			if (!(*(char*) ((char*) &g_7f4ca4 + (*(unsigned short*) &g_774970) * 0x21c + 4))) {
+		while (start + duration > gm_GameTicks) {
+			if (!(*(char*) ((char*) &gm_EntityIdField + (*(unsigned short*) &gm_LocalPlayerSlot) * 0x21c + 4))) {
 				break;
 			}
 			main_RunFrameLoop(0, 0x777c7);

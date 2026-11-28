@@ -30,8 +30,8 @@ typedef struct Tex {
 // SIZE 0x14
 
 extern char s_67da68[];
-extern int g_100ef80;
-extern int g_67d96c;
+extern int shp_SuppressDraw;
+extern int d2_RenderSurfaceWidth;
 
 void __cdecl d2_DrawGrayscaleRleSprite(int x, int y, Tex* t, char* sh);
 
@@ -50,9 +50,9 @@ int __cdecl d2_DrawGrayscaleShapeFrame(int x, int y, Tex* tex, Bank* bank, int i
 		return 0;
 	}
 	shape = (char*) bank + *(unsigned int*) ((char*) bank + 0x45 + idx * 4);
-	if (g_100ef80 == 0) {
-		saved = g_67d96c;
-		g_67d96c = tex->pw;
+	if (shp_SuppressDraw == 0) {
+		saved = d2_RenderSurfaceWidth;
+		d2_RenderSurfaceWidth = tex->pw;
 		switch (((Shape*) shape)->type) {
 		case 0:
 			return 0;
@@ -62,7 +62,7 @@ int __cdecl d2_DrawGrayscaleShapeFrame(int x, int y, Tex* tex, Bank* bank, int i
 		case 2:
 			break;
 		default:
-			g_67d96c = saved;
+			d2_RenderSurfaceWidth = saved;
 			break;
 		}
 	}

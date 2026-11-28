@@ -56,10 +56,10 @@ int __cdecl gm_ObjHalveWorkerLevel(char* cmd, char* arg)
 		ok = 1;
 	}
 	for (i = 0; i < 768; i++) {
-		if ((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].ptr_16c) == obj) {
-			val = (*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].level_1c5) % 2 + (*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].level_1c5) / 2;
-			cm_BeginPacketFieldDelta((char*) ((Ent*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]), (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id));
-			cm_AppendPacketFieldDelta(1, 1, (unsigned short) ((char*) &(*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].level_1c5) - g_aed32c), &val);
+		if ((*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].ptr_16c) == obj) {
+			val = (*(unsigned char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].level_1c5) % 2 + (*(unsigned char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].level_1c5) / 2;
+			cm_BeginPacketFieldDelta((char*) ((Ent*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i]), (*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_id));
+			cm_AppendPacketFieldDelta(1, 1, (unsigned short) ((char*) &(*(unsigned char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].level_1c5) - cm_PacketDeltaBase), &val);
 			cm_RequestChangeAttribute();
 		}
 	}

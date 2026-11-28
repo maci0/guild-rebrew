@@ -21,8 +21,8 @@ extern unsigned char g_77534c;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_6a3550[];
 #include "Develop/client_types.h"
-extern Page_1038144 g_1038144[];
-extern Win_1015f40 g_1015f40[0x60];
+extern Page_1038144 d2_FormPageWindows[];
+extern Win_1015f40 d2_Windows[0x60];
 extern int d2_ScreenHeight;
 extern int g_1040494;
 extern char g_7e25a0[];

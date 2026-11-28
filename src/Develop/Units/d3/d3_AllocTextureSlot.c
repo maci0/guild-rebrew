@@ -50,8 +50,8 @@ typedef struct Tex {
 	char pad[0x2c];
 } Tex;
 
-extern char* g_104049c;
-extern unsigned int g_10404a0;
+extern char* d3_TextureBank;
+extern unsigned int d3_TextureBankCount;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 /* ADDRESS: GOLDTL 0x0045c290 */
@@ -60,17 +60,17 @@ Tex* __cdecl d3_AllocTextureSlot(Col c, int* out)
 	Tex* t;
 	int i;
 
-	if ((*(unsigned int*)&g_10405c4) == g_10404a0) {
+	if ((*(unsigned int*)&g_10405c4) == d3_TextureBankCount) {
 		if (out != 0) {
 			*out = -1;
 		}
 		return 0;
 	}
 	if (c.a >= 0xff && !c.c0) {
-		for (i = 0, t = ((Tex*)g_104049c); t->refs > 0; i++, t++) {
+		for (i = 0, t = ((Tex*)d3_TextureBank); t->refs > 0; i++, t++) {
 		}
 	} else {
-		for (i = g_10404a0 - 1, t = &((Tex*)g_104049c)[i]; t->refs > 0; i--, t--) {
+		for (i = d3_TextureBankCount - 1, t = &((Tex*)d3_TextureBank)[i]; t->refs > 0; i--, t--) {
 		}
 	}
 	if (out != 0) {

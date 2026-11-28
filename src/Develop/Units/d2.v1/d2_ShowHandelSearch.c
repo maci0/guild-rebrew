@@ -1,15 +1,15 @@
 #include <string.h>
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern char* g_entity_type_table;
-extern char* g_1015ea0;
+extern char* d2_Controls;
 extern int d2_CurrentWindowId;
 extern int d2_CurrentElementId;
-extern int g_100f1dc;
-extern int g_14ce8e0;
+extern int d2_DialogButtonAction;
+extern int io_RightButtonReleased;
 extern int gm_GameTime;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 int __cdecl fcn_00502cd0(int a, int b, ...);
 int __cdecl d2_CheckOwnerBlocked(void* obj);
@@ -114,11 +114,11 @@ void __cdecl d2_ShowHandelSearch(unsigned char* targetBuilding, unsigned char* a
 		x = 0x19;
 		for (i = 0; i < count; i++) {
 			h = d2_AddElementToWindow(y, x, ids[i] + 0xdf, d2_CurrentWindowId);
-			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[h]) + 0x5c) = 1;
-			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[h]) + 0x1d0) = 3;
-			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[h]) + 0x1dc) = 100;
-			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[h]) + 0x1e0) = 0x10;
-			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[h]) + 0x84) = 0x54;
+			*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[h]) + 0x5c) = 1;
+			*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[h]) + 0x1d0) = 3;
+			*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[h]) + 0x1dc) = 100;
+			*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[h]) + 0x1e0) = 0x10;
+			*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[h]) + 0x84) = 0x54;
 			d2_SetControlText(h, (char*) *(int*) (ids[i] * 8 + 0x14a79c0));
 			handles[i] = h;
 			d2_SetElementEnabled(h, 1);
@@ -156,7 +156,7 @@ void __cdecl d2_ShowHandelSearch(unsigned char* targetBuilding, unsigned char* a
 				d2_SetControlText(handles[i], buf);
 			}
 		}
-		if (g_100f1dc != -1 && count > 0) {
+		if (d2_DialogButtonAction != -1 && count > 0) {
 			for (i = 0; i < count; i++) {
 				if (handles[i] == d2_CurrentElementId) {
 					memset(pkt, 0, sizeof(pkt));
@@ -165,10 +165,10 @@ void __cdecl d2_ShowHandelSearch(unsigned char* targetBuilding, unsigned char* a
 					*(int*) (pkt + 8) = *(int*)&((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*) (targetBuilding + 0x27)].entity_id;
 					*(int*) (pkt + 0x28) = gm_GameTime;
 					*(int*) (pkt + 0xc) = *(int*) (targetBuilding + 1);
-					*(int*) (pkt + 0x30) = g_7f4c08;
-					*(int*) (pkt + 0x2c) = g_7f4c04;
+					*(int*) (pkt + 0x30) = gm_GameTimeSliceDword;
+					*(int*) (pkt + 0x2c) = gm_GameTimeHour;
 					*(unsigned short*) (pkt + 0x5a) = (unsigned short) ids[i];
-					*(short*) (pkt + 0x34) = g_7f4c0c;
+					*(short*) (pkt + 0x34) = gm_GameTimeTailWord;
 					*(int*) (pkt + 0x5c) = *(int*) (a1 + 2);
 					j = 0;
 					p = 0x7f4ca4;
@@ -202,7 +202,7 @@ void __cdecl d2_ShowHandelSearch(unsigned char* targetBuilding, unsigned char* a
 					break;
 				}
 			}
-		} else if (g_14ce8e0 != 0) {
+		} else if (io_RightButtonReleased != 0) {
 			*(int*) 0x774654 = 1;
 		}
 	}

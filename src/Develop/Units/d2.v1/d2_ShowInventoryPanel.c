@@ -7,16 +7,16 @@ typedef D2_ITEM_BUTTON Btn;
 #include "Develop/Units/d2.v1/gold_window.h"
 // SIZE 0x3c4
 
-extern int g_6abb00;
+extern int d2_InventoryPanelWindowId;
 extern short g_fb9070;
 extern short g_fb9072;
 extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern D2_ITEM_BUTTON g_776c60[6];
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
 extern int g_14a92bc;
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char s_6ac77c[];
 
@@ -44,7 +44,7 @@ void __cdecl d2_ShowInventoryPanel(void)
 	int dlg;
 	int i;
 
-	if (g_6abb00 != -1) {
+	if (d2_InventoryPanelWindowId != -1) {
 		return;
 	}
 	if (d2_TutorialAllowsFlag(0x1000) == 0) {
@@ -59,11 +59,11 @@ void __cdecl d2_ShowInventoryPanel(void)
 	g_f8f120[d2_CurrentWindowId].margin[3] = 0x18;
 	d2_SetForm(dlg, 0);
 	d2_SetOverlayAnimation(0, 0);
-	d2_OpenEntityQuickSlots(d2_CurrentWindowId, 0, 0, g_774970, 0x1f3b);
+	d2_OpenEntityQuickSlots(d2_CurrentWindowId, 0, 0, gm_LocalPlayerSlot, 0x1f3b);
 	if (main_RunFrameLoop((void*) d2_ShowInventoryPanel, 0x657c7) != 0) {
 		do {
 			d2_UpdateActiveItemSlots();
-			if (g_100f1dc != -1 || CountDisplayCounters() != 0) {
+			if (d2_DialogButtonAction != -1 || CountDisplayCounters() != 0) {
 				for (i = 0; i < 6; i++) {
 					if (g_776c60[i].item != 0 && d2_CurrentElementId == g_776c60[i].btn) {
 						if (gm_LookupSpecialObject(*(unsigned short*) g_776c60[i].item) != 0) {
@@ -79,7 +79,7 @@ void __cdecl d2_ShowInventoryPanel(void)
 					}
 				}
 			}
-			if (g_14ce8e0 != 0) {
+			if (io_RightButtonReleased != 0) {
 				if (CountDisplayCounters() != 0) {
 					for (i = 0; i < 6; i++) {
 						if (g_776c60[i].item != 0 && d2_GetControlValue(g_776c60[i].btn) != 0) {
@@ -89,7 +89,7 @@ void __cdecl d2_ShowInventoryPanel(void)
 					ResetDisplayCounters();
 				}
 				else {
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				}
 			}
 		} while (main_RunFrameLoop((void*) d2_ShowInventoryPanel, 0x657c7) != 0);

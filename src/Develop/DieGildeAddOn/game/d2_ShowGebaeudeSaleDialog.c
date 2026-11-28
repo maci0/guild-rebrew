@@ -38,19 +38,19 @@ void __cdecl d2_ShowGebaeudeSaleDialog(char* e)
 	do {
 		r = (int) gm_SearchTable67(id);
 		if ((*(unsigned short*) (e + 0x5a) & 0x0400) || r == 0) {
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc == 2) {
+		if (d2_DialogButtonAction == 2) {
 			if (d2_CurrentElementId == saved) {
 				cm_RequestChangeBits(*(int*) (e + 1), 0x5a, 2, 0, 2);
 				he_FreeAction(u);
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
-		} else if (g_100f1dc == 1) {
-			g_774654 = 1;
+		} else if (d2_DialogButtonAction == 1) {
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop((void*) d2_ShowGebaeudeSaleDialog, 0x677c7) != 0);
 	d2_DestroyForm(win);

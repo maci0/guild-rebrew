@@ -26,9 +26,9 @@ void __cdecl FreeVideoListNode(Node* node)
 		}
 	} else if (node->prev != 0) {
 		node->prev->next = 0;
-		g_6b6f84 = node->prev;
+		tp_VideoListHead = node->prev;
 	} else {
-		g_6b6f84 = 0;
+		tp_VideoListHead = 0;
 	}
 	free(node);
 }

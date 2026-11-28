@@ -26,7 +26,7 @@ typedef struct {
 } Obj;
 
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-extern int g_773d48;
+extern int gm_QueuedCommandCount;
 extern int g_99f724;
 
 void __cdecl gm_GetLawEntry(int kind, Offer* o);
@@ -52,7 +52,7 @@ int __cdecl gm_ApplySteuerLaw0aToSlots(unsigned short id, Slots* slots, unsigned
 	if (i >= 6) {
 		return 0;
 	}
-	wealth = (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].value_19c);
+	wealth = (*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id].value_19c);
 	calc_amount = wealth * (offer.amount * 0.01f);
 	if (!(calc_amount > 0.0f)) {
 		calc_amount = 0.0f;
@@ -65,8 +65,8 @@ int __cdecl gm_ApplySteuerLaw0aToSlots(unsigned short id, Slots* slots, unsigned
 		if (flags & 1) {
 			treasury = gm_GetGuildHall(1);
 			treasury = fcn_00502cd0(*(int*) (treasury + 0x5d), 2, 6, 0, 0x115);
-			cm_RequestTransferCurrencyNoKill(*(int*) (treasury + 2), (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id), 0, tax_amount);
-			g_773d48++;
+			cm_RequestTransferCurrencyNoKill(*(int*) (treasury + 2), (*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id].entity_id), 0, tax_amount);
+			gm_QueuedCommandCount++;
 		}
 		if (flags & 2) {
 			g_99f724 += tax_amount;

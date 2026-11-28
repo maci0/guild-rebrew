@@ -1,10 +1,10 @@
 
 
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 
 void __cdecl d3_StartAnimWeightBlend(char* o, float a, float b, unsigned int t0, unsigned int t1)
 {
-	unsigned int now = (*(unsigned int*)&g_6b7fac);
+	unsigned int now = (*(unsigned int*)&gm_GameTicks);
 	float f;
 
 	if (o == 0 || *(int*) (o + 0x68) == 0 || t0 > t1) {

@@ -11,7 +11,7 @@
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 #include <stdio.h>
 #include <string.h>
-extern int gm_GameTime, g_7f4c04, g_7f4c08, g_772620; extern short g_7f4c0c;
+extern int gm_GameTime, gm_GameTimeHour, gm_GameTimeSliceDword, ai_DispatchedTradeCount; extern short gm_GameTimeTailWord;
 /* Request message, 0xf8 bytes. */
 typedef struct {
 	int f00;			/* +0x00 */
@@ -98,11 +98,11 @@ typedef struct {
 	char* xb4;
 } Stock;
 
-extern unsigned char g_773d75; extern int ai_ResourceCount, g_100b0ac;
+extern unsigned char gm_ActiveTownIndex; extern int ai_ResourceCount, ai_ProductionGoodsCount;
 extern unsigned char* lpGebaeudePROT;
 typedef struct BuildingRow489a70 { unsigned char kind; char fields[0x24c]; } BuildingRow489a70;
-extern char* g_773d78;
-extern float g_6628a0;
+extern char* gm_MarketEntity;
+extern float flt_1_0;
 extern float g_664144;
 extern char* g_100e748; extern char* lpObjektePROT;
 
@@ -185,10 +185,10 @@ int __cdecl ai_MeisterTrade(char* o, char* bld)
 	}
 
 	/* 0x00b0-0x00c0: building busy flag; the pricing pass runs once */
-	if ((g_7f4c04 & 0xffff) % 2) {
+	if ((gm_GameTimeHour & 0xffff) % 2) {
 		if ((*(int*) (o + 0x1b4) & 0x200) == 0) {
 			/* 0x00c0-0x0198: sell town stock on a good price */
-			for (i = 0; i < g_100b0ac; i++) {
+			for (i = 0; i < ai_ProductionGoodsCount; i++) {
 				t = (Town*) 0x100d0c0 + i;
 				if ((t->flags54 & 6) != 0) {
 					continue;
@@ -202,7 +202,7 @@ int __cdecl ai_MeisterTrade(char* o, char* bld)
 				    0x21c) == 6) {
 					fr = hp_GetProdSellPriceFactor(tp);
 					if (fr <= gm_GetSeasonPrice(t->id,
-					    g_773d75) /
+					    gm_ActiveTownIndex) /
 					    eval_ObjektPreis2Credits(t->id, 100)) {
 						t->qty44 = t->qty3c;
 						if (o == g_100e748) {
@@ -215,8 +215,8 @@ int __cdecl ai_MeisterTrade(char* o, char* bld)
 					}
 				} else {
 					fr = eval_ObjektPreis2Credits(t->id, 100) /
-					    gm_GetSeasonPrice(t->id, g_773d75);
-					if (fr < g_6628a0
+					    gm_GetSeasonPrice(t->id, gm_ActiveTownIndex);
+					if (fr < flt_1_0
 					    && fr <= gm_RandomFloat01() *
 					    g_664144 + 0.25) {
 						t->qty44 = t->qty3c;
@@ -255,12 +255,12 @@ int __cdecl ai_MeisterTrade(char* o, char* bld)
 				goto dump_stock;
 			}
 			i = 0;
-			for (; tmp < 0x7d00 && i < g_100b0ac; i++) {
+			for (; tmp < 0x7d00 && i < ai_ProductionGoodsCount; i++) {
 				t = (Town*) 0x100d0c0 + i;
 				if ((t->flags54 & 6) != 0) {
 					continue;
 				}
-				price = (int) gm_GetSeasonPrice(t->id, g_773d75);
+				price = (int) gm_GetSeasonPrice(t->id, gm_ActiveTownIndex);
 				slot = price;
 				j = 0x7d00 / price;
 				if (j < 1) {
@@ -278,7 +278,7 @@ int __cdecl ai_MeisterTrade(char* o, char* bld)
 
 dump_stock:
 			/* 0x02a5-0x0334: dump full town stock */
-			for (i = 0; i < g_100b0ac; i++) {
+			for (i = 0; i < ai_ProductionGoodsCount; i++) {
 				t = (Town*) 0x100d0c0 + i;
 				if ((t->flags54 & 6) != 0) {
 					continue;
@@ -336,7 +336,7 @@ dump_stock:
 	type = ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned char) *tp].category;
 	if (type == 0xd || type == 0xb || type == 0xc) {
 		/* 0x0420-0x04b7: drop town requests already being handled */
-		for (i = 0; i < g_100b0ac; i++) {
+		for (i = 0; i < ai_ProductionGoodsCount; i++) {
 			t = (Town*) 0x100d0c0 + i;
 			if ((t->flags54 & 6) != 0) {
 				continue;
@@ -378,9 +378,9 @@ next_request:
 		v.m.state = *(int*) (0x7f4ca4 + slot * 0x21c);
 		v.m.f0c = *(int*) (tp + 1);
 		v.m.p28 = gm_GameTime;
-		v.m.p2c = g_7f4c04;
-		v.m.p30 = g_7f4c08;
-		v.m.p34 = g_7f4c0c;
+		v.m.p2c = gm_GameTimeHour;
+		v.m.p30 = gm_GameTimeSliceDword;
+		v.m.p34 = gm_GameTimeTailWord;
 		v.m.flag2 = 1;
 		gm_AddTime(&v.m.p28, 0, 0, 0xa);
 		v.m.f58 = *(int*) (r + 2);
@@ -457,9 +457,9 @@ next_request:
 			if (tmp != 0) {
 				sprintf(v.line, (char*) 0x67e358,
 				    *(int*) (bld + 2), *(int*) (q + 2), id,
-				    tmp, g_773d75, 0);
+				    tmp, gm_ActiveTownIndex, 0);
 				cm_SendSellObjekt(*(int*) (bld + 2),
-				    *(int*) (q + 2), id, tmp, g_773d75, 0);
+				    *(int*) (q + 2), id, tmp, gm_ActiveTownIndex, 0);
 			}
 			v.s2.vals[i] -= tmp;
 			if (v.s2.vals[i] == 0) {
@@ -486,9 +486,9 @@ next_request:
 			}
 			sprintf(v.line, (char*) 0x67e358,
 			    *(int*) (bld + 2), *(int*) (q + 2), id, tmp,
-			    g_773d75, 0);
+			    gm_ActiveTownIndex, 0);
 			cm_SendSellObjekt(*(int*) (bld + 2), *(int*) (q + 2), id,
-			    tmp, g_773d75, 0);
+			    tmp, gm_ActiveTownIndex, 0);
 			v.s2.vals[i] -= tmp;
 			if (v.s2.vals[i] == 0) {
 				v.s2.ids[i] = 0;
@@ -513,14 +513,14 @@ next_request:
 			    *(char**) (o + 0x16c) + 5,
 			    v.s1.vals[j],
 			    ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[id]) + 1);
-			price = (int) gm_GetSeasonPrice(id, g_773d75);
+			price = (int) gm_GetSeasonPrice(id, gm_ActiveTownIndex);
 			sprintf(v.line, (char*) 0x67e358, -1,
 			    *(int*) (bld + 2), id, v.s1.vals[j],
-			    g_773d75, (double) price);
-			tmp = (int) gm_GetSeasonPrice(id, g_773d75);
+			    gm_ActiveTownIndex, (double) price);
+			tmp = (int) gm_GetSeasonPrice(id, gm_ActiveTownIndex);
 			cm_SendSellObjekt(-1, *(int*) (bld + 2), id,
-			    v.s1.vals[j], g_773d75, tmp);
-			price = (int) gm_GetSeasonPrice(id, g_773d75) +
+			    v.s1.vals[j], gm_ActiveTownIndex, tmp);
+			price = (int) gm_GetSeasonPrice(id, gm_ActiveTownIndex) +
 			    *(int*) (o + 0x1b8);
 			*(int*) (o + 0x1b8) = price;
 			v.s1.ids[j] = 0;
@@ -531,9 +531,9 @@ next_request:
 			}
 			sprintf(v.line, (char*) 0x67e358,
 			    *(int*) (bld + 2), *(int*) (q + 2), id, tmp,
-			    g_773d75, 0);
+			    gm_ActiveTownIndex, 0);
 			cm_SendSellObjekt(*(int*) (bld + 2), *(int*) (q + 2), id,
-			    tmp, g_773d75, 0);
+			    tmp, gm_ActiveTownIndex, 0);
 			v.s2.vals[i] -= tmp;
 			if (v.s2.vals[i] == 0) {
 				v.s2.ids[i] = 0;
@@ -548,14 +548,14 @@ no_market:
 			sprintf(v.line, (char*) 0x67e540,
 			    *(char**) (o + 0x16c) + 5, v.s2.vals[i],
 			    ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[id]) + 1);
-			price = (int) gm_GetSeasonPrice(id, g_773d75);
+			price = (int) gm_GetSeasonPrice(id, gm_ActiveTownIndex);
 			sprintf(v.line, (char*) 0x67e358, -1,
-			    *(int*) (bld + 2), id, v.s2.vals[i], g_773d75,
+			    *(int*) (bld + 2), id, v.s2.vals[i], gm_ActiveTownIndex,
 			    (double) price);
-			tmp = (int) gm_GetSeasonPrice(id, g_773d75);
+			tmp = (int) gm_GetSeasonPrice(id, gm_ActiveTownIndex);
 			cm_SendSellObjekt(-1, *(int*) (bld + 2), id,
-			    v.s2.vals[i], g_773d75, tmp);
-			price = (int) gm_GetSeasonPrice(id, g_773d75) +
+			    v.s2.vals[i], gm_ActiveTownIndex, tmp);
+			price = (int) gm_GetSeasonPrice(id, gm_ActiveTownIndex) +
 			    *(int*) (o + 0x1b8);
 			*(int*) (o + 0x1b8) = price;
 			v.s2.ids[i] = 0;
@@ -573,7 +573,7 @@ next_auto:
 		}
 		found = 0;
 		t = (Town*) 0x100d0c0;
-		for (j = 0; j < g_100b0ac; j++, t++) {
+		for (j = 0; j < ai_ProductionGoodsCount; j++, t++) {
 			if (t->id == id) {
 				found = 1;
 				break;
@@ -603,11 +603,11 @@ next_auto:
 				break;
 			}
 			sprintf(v.line, (char*) 0x67e358, *(int*) (bld + 2),
-			    *(int*) (q + 2), id, tmp, g_773d75, 0);
+			    *(int*) (q + 2), id, tmp, gm_ActiveTownIndex, 0);
 			cm_SendSellObjekt(*(int*) (bld + 2), *(int*) (q + 2), id,
-			    tmp, g_773d75, 0);
+			    tmp, gm_ActiveTownIndex, 0);
 			v.m.ids[cnt] = id;
-			v.m.slots[cnt] = *(int*) (g_773d78 + 1);
+			v.m.slots[cnt] = *(int*) (gm_MarketEntity + 1);
 			cnt++;
 			v.s1.vals[i] -= tmp;
 			v.s2.ids[j] = id;
@@ -631,7 +631,7 @@ next_auto:
 			}
 			found = 0;
 			t = (Town*) 0x100d0c0;
-			for (j = 0; j < g_100b0ac && found == 0; j++, t++) {
+			for (j = 0; j < ai_ProductionGoodsCount && found == 0; j++, t++) {
 				if (t->id == (unsigned short) id) {
 					found = 1;
 				}
@@ -663,11 +663,11 @@ next_auto:
 				}
 				sprintf(v.line, (char*) 0x67e358,
 				    *(int*) (bld + 2), *(int*) (q + 2), id,
-				    tmp, g_773d75, 0);
+				    tmp, gm_ActiveTownIndex, 0);
 				cm_SendSellObjekt(*(int*) (bld + 2),
-				    *(int*) (q + 2), id, tmp, g_773d75, 0);
+				    *(int*) (q + 2), id, tmp, gm_ActiveTownIndex, 0);
 				v.m.ids[cnt] = id;
-				v.m.slots[cnt] = *(int*) (g_773d78 + 1);
+				v.m.slots[cnt] = *(int*) (gm_MarketEntity + 1);
 				cnt++;
 				v.s3.vals[i] -= tmp;
 				v.s2.ids[j] = id;
@@ -685,7 +685,7 @@ next_auto:
 
 	/* 0x0d30-0x0f60: sell collected stock, town first */
 	if (cnt < 3) {
-		for (i = 0; i < g_100b0ac && cnt < 3; i++) {
+		for (i = 0; i < ai_ProductionGoodsCount && cnt < 3; i++) {
 			t = (Town*) 0x100d0c0 + i;
 			if (t->qty44 == 0) {
 				continue;
@@ -704,11 +704,11 @@ next_auto:
 				}
 				sprintf(v.line, (char*) 0x67e358,
 				    *(int*) (bld + 2), *(int*) (q + 2),
-				    t->id, tmp, g_773d75, 0);
+				    t->id, tmp, gm_ActiveTownIndex, 0);
 				cm_SendSellObjekt(*(int*) (bld + 2),
-				    *(int*) (q + 2), t->id, tmp, g_773d75, 0);
+				    *(int*) (q + 2), t->id, tmp, gm_ActiveTownIndex, 0);
 				v.m.ids[cnt] = t->id;
-				v.m.slots[cnt] = *(int*) (g_773d78 + 1);
+				v.m.slots[cnt] = *(int*) (gm_MarketEntity + 1);
 				cnt++;
 				t->qty44 -= tmp;
 				v.s2.ids[j] = t->id;
@@ -730,14 +730,14 @@ next_auto:
 				    (char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[
 				    pr->id] + 1);
 				price = (int) gm_GetSeasonPrice(pr->id,
-				    g_773d75);
+				    gm_ActiveTownIndex);
 				sprintf(v.line, (char*) 0x67e358, -1,
 				    *(int*) (bld + 2), pr->id, pr->qty18,
-				    g_773d75, (double) price);
+				    gm_ActiveTownIndex, (double) price);
 				tmp = (int) gm_GetSeasonPrice(pr->id,
-				    g_773d75);
+				    gm_ActiveTownIndex);
 				cm_SendSellObjekt(-1, *(int*) (bld + 2),
-				    pr->id, pr->qty18, g_773d75, tmp);
+				    pr->id, pr->qty18, gm_ActiveTownIndex, tmp);
 				pr->qty18 = 0;
 				continue;
 			}
@@ -756,12 +756,12 @@ next_auto:
 				}
 				sprintf(v.line, (char*) 0x67e358,
 				    *(int*) (bld + 2), *(int*) (q + 2),
-				    pr->id, tmp, g_773d75, 0);
+				    pr->id, tmp, gm_ActiveTownIndex, 0);
 				cm_SendSellObjekt(*(int*) (bld + 2),
 				    *(int*) (q + 2), pr->id, tmp,
-				    g_773d75, 0);
+				    gm_ActiveTownIndex, 0);
 				v.m.ids[cnt] = pr->id;
-				v.m.slots[cnt] = *(int*) (g_773d78 + 1);
+				v.m.slots[cnt] = *(int*) (gm_MarketEntity + 1);
 				cnt++;
 				pr->qty18 -= tmp;
 				v.s2.ids[j] = pr->id;
@@ -836,16 +836,16 @@ next_auto:
 			    *(unsigned short*) (tpx + 0x27) * 0x21c + 4);
 			v.m.f0c = *(int*) (tpx + 1);
 			v.m.p28 = gm_GameTime;
-			v.m.p2c = g_7f4c04;
-			v.m.p30 = g_7f4c08;
-			v.m.p34 = g_7f4c0c;
+			v.m.p2c = gm_GameTimeHour;
+			v.m.p30 = gm_GameTimeSliceDword;
+			v.m.p34 = gm_GameTimeTailWord;
 			v.m.flag2 = 1;
 			v.m.f58 = *(int*) (r + 2);
 			v.m.f5c = s;
 			v.m.f60 = *(int*) (o + 4);
 			if (*(int*) 0x100b0a4 == 0) {
 				cm_SendCopyEntityData((int) &v.m);
-				g_772620 = g_772620 + 1;
+				ai_DispatchedTradeCount = ai_DispatchedTradeCount + 1;
 			}
 		}
 	}

@@ -7,7 +7,7 @@
 
 #include "Develop/DieGildeAddOn/game/client_straftat.h"
 extern int gm_RandomSearchSteps[];
-extern char* g_aed32c;
+extern char* cm_PacketDeltaBase;
 typedef struct BuildingRow557460 { unsigned char kind; char fields[0x24c]; } BuildingRow557460;
 
 int __cdecl cm_GetCommandStatus(int h);
@@ -143,7 +143,7 @@ void __cdecl he_RunDunkleEcke(char* dlg)
 			return;
 		}
 		*(int*) (dlg + 0xbc) = *(int*) (dlg + 0xbc) - 1;
-		f = gm_GetEntitySkill(g_7f4ca0
+		f = gm_GetEntitySkill(gm_EntitySlotTable
 		    + *(unsigned short*) (hit + 0x27) * 0x21c, 2);
 		if (*(int*) (dlg + 0xc0) < 1) {
 			*(int*) (dlg + 0xc0) = *(int*) (dlg + 0xc0) + 1;
@@ -220,9 +220,9 @@ void __cdecl he_RunDunkleEcke(char* dlg)
 				if (i >= *(int*) (dlg + 0xc0)) {
 					break;
 				}
-				rec = (char*) &g_9a3800[idx];
+				rec = (char*) &cm_CrimeRecords[idx];
 				if (*(int*) rec != -1 && *(int*) (rec + 0x25) == 1
-				    && *(int*) (rec + 0x16) != *(int*) (g_7f4ca0
+				    && *(int*) (rec + 0x16) != *(int*) (gm_EntitySlotTable
 				    + *(unsigned short*) (hit + 0x27) * 0x21c + 4)
 				    && gm_CompareGameTime(dlg + 0x44, rec + 4) != 1) {
 					found[i] = *(int*) rec;
@@ -234,7 +234,7 @@ void __cdecl he_RunDunkleEcke(char* dlg)
 			*(int*) (dlg + 0xc0) = i;
 			j = 0;
 			while (j < i) {
-				cm_RequestLinkEvidence(found[j], *(int*) (g_7f4ca0
+				cm_RequestLinkEvidence(found[j], *(int*) (gm_EntitySlotTable
 				    + *(unsigned short*) (hit + 0x27) * 0x21c + 4));
 				j++;
 			}
@@ -243,7 +243,7 @@ void __cdecl he_RunDunkleEcke(char* dlg)
 				cm_BeginPacketFieldDelta(rec, *(int*) (rec + 2));
 				j = 0;
 				while (j < 3) {
-					off = (unsigned int) (rec + 0x1c + j * 4 - g_aed32c);
+					off = (unsigned int) (rec + 0x1c + j * 4 - cm_PacketDeltaBase);
 					cm_AppendPacketFieldDelta(4, 1, (int) off, &found[j]);
 					j++;
 				}
@@ -253,7 +253,7 @@ void __cdecl he_RunDunkleEcke(char* dlg)
 		io_FormatTextBuffer(text,
 		    *(int*) (dlg + 0xc0) != 0 ? 0x18a9 : 0x18aa);
 		((void (__cdecl*) (int, int, char*, int, int, int, int, int, char*))
-		    fcn_00545e80)(*(int*) (g_7f4ca0
+		    fcn_00545e80)(*(int*) (gm_EntitySlotTable
 		    + *(unsigned short*) (hit + 0x27) * 0x21c + 4), -1, text, 0,
 		    0x5ec, *(int*) (hit + 1), *(int*) (dlg + 0xb4), 0,
 		    (char*) 0x6b5c60);
@@ -282,7 +282,7 @@ fail:
 		*(int*) (dlg + 0xc0) = 0;
 		k = 3;
 		do {
-			f = gm_GetEntitySkill(g_7f4ca0
+			f = gm_GetEntitySkill(gm_EntitySlotTable
 			    + *(unsigned short*) (hit + 0x27) * 0x21c, 2);
 			*(int*) (dlg + 0xc0) = *(int*) (dlg + 0xc0)
 			    + (fcn_0042e450() * 0.66f < f);
@@ -300,9 +300,9 @@ fail:
 				if (i >= *(int*) (dlg + 0xc0)) {
 					break;
 				}
-				rec = (char*) &g_9a3800[idx];
+				rec = (char*) &cm_CrimeRecords[idx];
 				if (*(int*) rec != -1 && *(int*) (rec + 0x25) == 1
-				    && *(int*) (rec + 0x16) != *(int*) (g_7f4ca0
+				    && *(int*) (rec + 0x16) != *(int*) (gm_EntitySlotTable
 				    + *(unsigned short*) (hit + 0x27) * 0x21c + 4)
 				    && gm_CompareGameTime(dlg + 0x44, rec + 4) != 1) {
 					found[i] = *(int*) rec;
@@ -314,7 +314,7 @@ fail:
 			*(int*) (dlg + 0xc0) = i;
 			j = 0;
 			while (j < i) {
-				cm_RequestLinkEvidence(found[j], *(int*) (g_7f4ca0
+				cm_RequestLinkEvidence(found[j], *(int*) (gm_EntitySlotTable
 				    + *(unsigned short*) (hit + 0x27) * 0x21c + 4));
 				j++;
 			}
@@ -323,7 +323,7 @@ fail:
 				cm_BeginPacketFieldDelta(rec, *(int*) (rec + 2));
 				j = 0;
 				while (j < 3) {
-					cm_AppendPacketFieldDelta(4, 1, (int) (rec + 0x1c + j * 4 - g_aed32c),
+					cm_AppendPacketFieldDelta(4, 1, (int) (rec + 0x1c + j * 4 - cm_PacketDeltaBase),
 					    &found[j]);
 					j++;
 				}
@@ -333,7 +333,7 @@ fail:
 		io_FormatTextBuffer(text,
 		    *(int*) (dlg + 0xc0) != 0 ? 0x18a9 : 0x18aa);
 		((void (__cdecl*) (int, int, char*, int, int, int, int, int, char*))
-		    fcn_00545e80)(*(int*) (g_7f4ca0
+		    fcn_00545e80)(*(int*) (gm_EntitySlotTable
 		    + *(unsigned short*) (hit + 0x27) * 0x21c + 4), -1, text, 0,
 		    0x5ec, *(int*) (hit + 1), *(int*) (dlg + 0xb4), 0,
 		    (char*) 0x6b5c60);

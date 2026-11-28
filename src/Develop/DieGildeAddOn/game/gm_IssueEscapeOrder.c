@@ -14,7 +14,7 @@ typedef struct {
 } ent2c;
 // SIZE 0x2c
 
-extern int g_67a370;
+extern int d3_ActiveScene;
 
 void __cdecl d3_TransformPoint(char*, char*, float*);
 char __cdecl d3sm_SampleHeight(int, float*, int*, int*, int*);
@@ -31,7 +31,7 @@ int __cdecl gm_IssueEscapeOrder(char* rec, char* e, char* obj)
 	int y;
 	int z;
 
-	h = *(int*) (((char*)g_67a370) + 0xb0);
+	h = *(int*) (((char*)d3_ActiveScene) + 0xb0);
 	if (obj == 0 || e == 0 || rec == 0)
 		return -1;
 	d3_TransformPoint(obj, obj + 0x4c, v);

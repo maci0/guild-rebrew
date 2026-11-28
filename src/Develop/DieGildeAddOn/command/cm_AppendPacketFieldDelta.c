@@ -29,7 +29,7 @@ int __cdecl cm_AppendPacketFieldDelta(unsigned char size, unsigned char count, u
 	*p++ = count;
 	*(unsigned short*) p = off;
 	p += 2;
-	base = g_aed32c + off;
+	base = cm_PacketDeltaBase + off;
 	switch (size) {
 	case 1:
 		for (i = 0; i < count; i++)

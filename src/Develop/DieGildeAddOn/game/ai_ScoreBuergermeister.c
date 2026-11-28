@@ -1,4 +1,4 @@
-extern double g_662a48;
+extern double dbl_2_0;
 extern double g_664360;
 extern float g_6628b0;
 

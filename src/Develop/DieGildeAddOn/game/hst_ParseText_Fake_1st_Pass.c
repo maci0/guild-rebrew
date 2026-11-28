@@ -3,7 +3,7 @@
 extern int g_1052de0;
 extern char* txt_TextEntries[];
 int hst_HistoryTextBase = 0xffffffff;
-extern char g_679060[]; /* %s */
+extern char str_fmt_s[]; /* %s */
 extern char g_6808b0[]; /* hst_ParseText_Fake_1st_Pass() failed: Syntax Error in Label %i */
 extern char g_6808f0[]; /* hst_ParseText_Fake_1st_Pass() failed: Label %i is too long */
 

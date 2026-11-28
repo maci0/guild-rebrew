@@ -3,23 +3,23 @@
 #include "Develop/client_types.h"
 #include "Develop/DieGildeAddOn/game/g_7f4ca2.h"
 
-extern unsigned short g_774970;
-extern unsigned char g_774964;
-extern char* g_7746c4;
-extern char* g_7746c8;
-extern char* g_7746cc;
-extern int g_7749e4;
+extern unsigned short gm_LocalPlayerSlot;
+extern unsigned char gm_InWorldHud;
+extern char* d2_VisitedBuilding;
+extern char* d2_InteriorBuilding;
+extern char* sv_SelectedBuilding;
+extern int tp_d2_ActiveHudSlot;
 extern char g_7749e8;
-extern unsigned char g_7747b0;
+extern unsigned char gm_ClientModeFlags;
 extern char* g_7747b8;
 extern int g_100f884;
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern int g_14ce8d8;
 extern int g_6b5c8c;
-extern volatile int g_6b7fc0;
+extern volatile int tb_TimerPaused;
 extern pos14_7f4c00 gm_GameTime;
-extern Slot7f4ca2 g_7f4ca2[768];
-extern int g_7f4ca4;
+extern Slot7f4ca2 gm_SlotTableKindView[768];
+extern int gm_EntityIdField;
 
 int __cdecl gm_CompareGameTime(void*, void*);
 int __cdecl d2_CreateActionPopupSlot(char*, int, int, char*, int);
@@ -45,7 +45,7 @@ void __cdecl he_StartEventMessagebox(char* e)
 {
     *(int*) (e + 0x70) = 0;
     *(int*) (e + 0xec) = 0;
-    if (g_7f4ca2[*(unsigned short*) (e + 8)].kind == 6)
+    if (gm_SlotTableKindView[*(unsigned short*) (e + 8)].kind == 6)
         return;
     he_FreeAction(e);
 }
@@ -60,9 +60,9 @@ void __cdecl he_RunEventMessagebox(char* e)
     char* str;
     int state;
 
-    if (g_774970 != *(unsigned short*) (e + 8))
+    if (gm_LocalPlayerSlot != *(unsigned short*) (e + 8))
         return;
-    if (!g_774964)
+    if (!gm_InWorldHud)
         return;
 
     switch (*(int*) (e + 0x70)) {
@@ -77,13 +77,13 @@ void __cdecl he_RunEventMessagebox(char* e)
                 he_FreeAction(e);
                 return;
             }
-            if (g_7746c4 != 0)
-                win = g_7746c4;
-            else if (g_7746c8 != 0)
-                win = g_7746c8;
+            if (d2_VisitedBuilding != 0)
+                win = d2_VisitedBuilding;
+            else if (d2_InteriorBuilding != 0)
+                win = d2_InteriorBuilding;
             fcn_004727a0(*(int*) (*(int*) (e + 0x74) + 8), 1);
             if (win != 0 && *(int*) (win + 1) == *(int*) (e + 0xb0) && *(unsigned char*) (e + 0xbc) == 0
-                && ((g_7746cc != 0 && *(int*) (g_7746cc + 2) == *(int*) (e + 0xb4)) || *(int*) (e + 0xb4) == -1)) {
+                && ((sv_SelectedBuilding != 0 && *(int*) (sv_SelectedBuilding + 2) == *(int*) (e + 0xb4)) || *(int*) (e + 0xb4) == -1)) {
                 fcn_00519190(0x1ba2);
             } else {
                 fcn_00519190(0x1ba1);
@@ -119,7 +119,7 @@ done:
         d2_CenterDialogWindows(*(int*) (*(int*) (e + 0x74) + 8));
         fcn_004727a0(*(int*) (*(int*) (e + 0x74) + 8), 0);
         fcn_00519190(0x679060, *(int*) (e + 0x7c));
-        if (g_774964 != 2)
+        if (gm_InWorldHud != 2)
             sb_PlayVoice((int) g_7747b8, "NeueMessage_s_01", 1, 0x3f, 0x7f, 0, 0);
         if (*(unsigned char*) (e + 0xf0) & 8)
             d2_HighlightSelectedControl(*(int*) (e + 0x74));
@@ -163,10 +163,10 @@ done:
                     *(int*) (rec + 4) = 1;
                 goto exit_b;
             }
-            if (g_7747b0 & 8) {
-                cut_RemoveParticipant(*(int*) (e + 0xb8), *(int*) (g_774970 * 0x21c + (unsigned long)&g_7f4ca4));
-            } else if (g_7747b0 & 4) {
-                cm_RequestRemoveCutsceneParticipant(*(int*) (e + 0xb8), *(int*) (g_774970 * 0x21c + (unsigned long)&g_7f4ca4));
+            if (gm_ClientModeFlags & 8) {
+                cut_RemoveParticipant(*(int*) (e + 0xb8), *(int*) (gm_LocalPlayerSlot * 0x21c + (unsigned long)&gm_EntityIdField));
+            } else if (gm_ClientModeFlags & 4) {
+                cm_RequestRemoveCutsceneParticipant(*(int*) (e + 0xb8), *(int*) (gm_LocalPlayerSlot * 0x21c + (unsigned long)&gm_EntityIdField));
             }
             *(int*) (e + 0x70) = state;
             goto tail;
@@ -179,18 +179,18 @@ tail:
         if (g_100f884 != *(int*) (*(int*) (e + 0x74) + 8)) {
             if (!g_7749e8)
                 return;
-            if (g_7749e4 != *(int*) (e + 0x74))
+            if (tp_d2_ActiveHudSlot != *(int*) (e + 0x74))
                 return;
         }
-        if (g_100f1dc == -1) {
+        if (d2_DialogButtonAction == -1) {
             if (!g_7749e8)
                 return;
-            if (g_7749e4 != *(int*) (e + 0x74))
+            if (tp_d2_ActiveHudSlot != *(int*) (e + 0x74))
                 return;
             goto test_dl;
         }
-        if (g_100f1dc != 2) {
-            if (g_100f1dc == 1)
+        if (d2_DialogButtonAction != 2) {
+            if (d2_DialogButtonAction == 1)
                 goto body1;
 test_dl:
             if (!g_7749e8)
@@ -206,10 +206,10 @@ body1:
                                   && *(int*) (e + 0xb0) != -1
                                   && (*(unsigned char*) (rec + 0x26) & 0x10)))
                                 *(int*) (rec + 4) = 1;
-                        } else if (g_7747b0 & 8) {
-                            cut_RemoveParticipant(*(int*) (e + 0xb8), *(int*) (g_774970 * 0x21c + (unsigned long)&g_7f4ca4));
-                        } else if (g_7747b0 & 4) {
-                            cm_RequestRemoveCutsceneParticipant(*(int*) (e + 0xb8), *(int*) (g_774970 * 0x21c + (unsigned long)&g_7f4ca4));
+                        } else if (gm_ClientModeFlags & 8) {
+                            cut_RemoveParticipant(*(int*) (e + 0xb8), *(int*) (gm_LocalPlayerSlot * 0x21c + (unsigned long)&gm_EntityIdField));
+                        } else if (gm_ClientModeFlags & 4) {
+                            cm_RequestRemoveCutsceneParticipant(*(int*) (e + 0xb8), *(int*) (gm_LocalPlayerSlot * 0x21c + (unsigned long)&gm_EntityIdField));
                         }
                     }
                 }
@@ -218,8 +218,8 @@ body1:
                     *(int*) (e + 0xec) = 0;
                 }
                 if (flags & 0x40) {
-                    if (!(*(unsigned char*) &g_7747b0 & 4))
-                        *(int*) &g_6b7fc0 = 0;
+                    if (!(*(unsigned char*) &gm_ClientModeFlags & 4))
+                        *(int*) &tb_TimerPaused = 0;
                 }
             }
             if (g_14ce8d8 != 0) {
@@ -250,8 +250,8 @@ exit_a:
                 *(int*) (e + 0xec) = 0;
             }
             if (*(unsigned char*) (e + 0xf0) & 0x40) {
-                if (!(*(unsigned char*) &g_7747b0 & 4))
-                    *(int*) &g_6b7fc0 = 0;
+                if (!(*(unsigned char*) &gm_ClientModeFlags & 4))
+                    *(int*) &tb_TimerPaused = 0;
             }
             if (g_14ce8d8 != 0) {
                 g_6b5c8c = 1;
@@ -261,8 +261,8 @@ exit_a:
         }
 exit_clear:
         if (*(unsigned char*) (e + 0xf0) & 0x40) {
-            if (!(*(unsigned char*) &g_7747b0 & 4))
-                *(int*) &g_6b7fc0 = 0;
+            if (!(*(unsigned char*) &gm_ClientModeFlags & 4))
+                *(int*) &tb_TimerPaused = 0;
         }
 exit_b:
         d2_CloseActionPopup(e);

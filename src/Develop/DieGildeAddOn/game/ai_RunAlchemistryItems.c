@@ -9,7 +9,7 @@ typedef struct Req {
 
 extern float g_100af14;
 extern float g_100af34;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 char* __cdecl fcn_00502cd0(int a, int b, int c, ...);
 float* __cdecl gm_LookupSpecialObject(int id);
@@ -28,7 +28,7 @@ int __cdecl ai_RunAlchemistryItems(char* e, char* p, char* q)
 
 	if (*p == 2) {
 		if (*(int*) (p + 0x10) == 1) {
-			cm_SendSellObjekt(*(int*) (e + 4), -1, *(int*) (p + 4), 1, g_773d75, 0);
+			cm_SendSellObjekt(*(int*) (e + 4), -1, *(int*) (p + 4), 1, gm_ActiveTownIndex, 0);
 			cm_RequestChangeBits(*(int*) (e + 4), 0x1cc, 4, 0x40000000, 0);
 			return 0x48;
 		}
@@ -47,7 +47,7 @@ int __cdecl ai_RunAlchemistryItems(char* e, char* p, char* q)
 		if (t == 0 || *(int*) (t + 0xe) <= 1) {
 			return 0;
 		}
-		cm_SendSellObjekt(*(int*) (e + 4), *(int*) (s + 2), *(int*) (p + 4), 1, g_773d75, 0);
+		cm_SendSellObjekt(*(int*) (e + 4), *(int*) (s + 2), *(int*) (p + 4), 1, gm_ActiveTownIndex, 0);
 		return 0x48;
 	}
 	if (*p != 1) {

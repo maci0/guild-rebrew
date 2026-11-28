@@ -17,7 +17,7 @@ int __cdecl AttachAnim(char** character, char** animation, int* kind)
 	char copied;
 
 	object = *character;
-	if (g_6b7ebc != 0 && *(void**) (g_6b7ebc + 0x44) == (void*) AttachAnim) {
+	if (evt_WaitingScriptTask != 0 && *(void**) (evt_WaitingScriptTask + 0x44) == (void*) AttachAnim) {
 		draw = *(char**) (object + 0x1ec);
 		i = 0;
 		slot = (char**) (draw + 0x484);

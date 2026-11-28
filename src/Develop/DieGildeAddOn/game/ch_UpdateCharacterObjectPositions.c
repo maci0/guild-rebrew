@@ -13,7 +13,7 @@ void __cdecl ch_UpdateCharacterObjectPositions(void)
 	do {
 		e = *p;
 		if (e != 0 && (*(unsigned char*) ((char*) e + 0x8c) & 1) != 0 &&
-		    *(int*) ((char*) e + 0x88) == g_67a370) {
+		    *(int*) ((char*) e + 0x88) == d3_ActiveScene) {
 			d3_SetObjectPosition(*(int*) ((char*) e + 0x34), (char*) e + 0x54);
 		}
 		p++;

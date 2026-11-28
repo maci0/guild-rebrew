@@ -71,7 +71,7 @@ typedef struct {
 } TexDesc;
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_772614;
+extern int tp_d2_QuadVertexBuffer;
 
 
 int __cdecl d2_BuildQuadVertices(int, int, int, int, Quad*);
@@ -99,7 +99,7 @@ void __cdecl d2_DrawSurfaceQuad(int x, int y, int w, int h, Tex* tex, float alph
 		q.vs.v[i].z = 1.0f - t;
 		q.vs.v[i].w = t + 0.01f;
 	}
-	vt = ((VB*) g_772614)->vtbl;
+	vt = ((VB*) tp_d2_QuadVertexBuffer)->vtbl;
 	q.vs.v[0].u = 0.0f;
 	q.vs.v[0].v = 0.0f;
 	q.vs.v[1].u = (float) w / desc.width;
@@ -112,11 +112,11 @@ void __cdecl d2_DrawSurfaceQuad(int x, int y, int w, int h, Tex* tex, float alph
 	q.vs.v[4].v = (float) h / desc.height;
 	q.vs.v[5].u = 0.0f;
 	q.vs.v[5].v = (float) h / desc.height;
-	if (vt->Lock(((VB*) g_772614), 0, 0x18, &ptr, 0x2000) < 0) {
+	if (vt->Lock(((VB*) tp_d2_QuadVertexBuffer), 0, 0x18, &ptr, 0x2000) < 0) {
 		return;
 	}
 	*(Verts*) ptr = q.vs;
-	((VB*) g_772614)->vtbl->Unlock(((VB*) g_772614));
+	((VB*) tp_d2_QuadVertexBuffer)->vtbl->Unlock(((VB*) tp_d2_QuadVertexBuffer));
 	d2_BindQuadVertexBuffer();
 	((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*)g_6b5de0), 7, 0);
 	((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*)g_6b5de0), 0x88, 0);

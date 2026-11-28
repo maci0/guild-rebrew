@@ -21,8 +21,8 @@ int __cdecl gm_GetBuildingTypeCategory(int);
 
 /* Inferred 32-slot entity lookup. */
 #ifdef REBREW_GOLD
-extern char g_930600[];
-#define gm_SMALL_ENTITY_BASE ((int)g_930600)
+extern char gm_SmallEntityTable[];
+#define gm_SMALL_ENTITY_BASE ((int)gm_SmallEntityTable)
 #else
 #define gm_SMALL_ENTITY_BASE 0x9b4a40
 #endif

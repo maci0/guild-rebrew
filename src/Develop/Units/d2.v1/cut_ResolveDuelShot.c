@@ -1,15 +1,15 @@
 extern int g_68bfc0;
-extern char* g_9afde4;
+extern char* cut_DuelFighterB;
 extern int g_9afde0;
-extern char g_772f5a;
-extern char g_772f5b;
-extern char g_772f5c;
-extern char g_772f5d;
+extern char cut_DuelAccuracyBoostA;
+extern char cut_DuelAccuracyBoostB;
+extern char cut_DuelDamageReductionA;
+extern char cut_DuelDamageReductionB;
 extern unsigned char g_772f58;
 extern unsigned char g_772f59;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern double g_664108;
-extern double g_662a08;
+extern double dbl_1_5;
 extern double g_664180;
 
 void __cdecl d2_SetForm(int, int);
@@ -46,14 +46,14 @@ void __cdecl cut_ResolveDuelShot(char* task)
 	gm_GetEntitySkill(foe, 3);
 	a = a * g_664108;
 	if (gm_HasActiveSpecialObject(e, 0x16f) != 0) {
-		a = a * g_662a08;
+		a = a * dbl_1_5;
 	}
-	if ((e == g_9afde4 && g_772f5b) || (e == (*(char * *)&g_9afde0) && g_772f5a)) {
+	if ((e == cut_DuelFighterB && cut_DuelAccuracyBoostB) || (e == (*(char * *)&g_9afde0) && cut_DuelAccuracyBoostA)) {
 		a = a * g_664180;
 	}
 	if (cut_RandFloat() < a) {
 		hit = 1;
-		if ((e == g_9afde4 && g_772f5d) || (e == (*(char * *)&g_9afde0) && g_772f5c)) {
+		if ((e == cut_DuelFighterB && cut_DuelDamageReductionB) || (e == (*(char * *)&g_9afde0) && cut_DuelDamageReductionA)) {
 			n = cut_RandMod(0xf) + 5;
 		} else {
 			n = cut_RandMod(0x1e) + 0xf;
@@ -61,7 +61,7 @@ void __cdecl cut_ResolveDuelShot(char* task)
 		if (gm_HasActiveSpecialObject(foe, 0x2b5) != 0) {
 			n = (int) ((float) n * g_662a6c);
 		}
-		if (foe == g_9afde4) {
+		if (foe == cut_DuelFighterB) {
 			g_772f58 = g_772f58 + n;
 		} else {
 			g_772f59 = g_772f59 + n;

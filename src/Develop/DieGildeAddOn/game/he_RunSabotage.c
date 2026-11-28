@@ -1,10 +1,10 @@
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern int d3_CurrentContextIndex;
 extern int gm_GameTime;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
-extern float g_6628a0;
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
+extern float flt_1_0;
 extern float g_664154;
 
 
@@ -13,7 +13,7 @@ extern int lpGebaeudePROT;
 extern char g_6a6560[];
 extern char g_6a654c[];
 extern char g_6a6538[];
-extern char g_68bef4[];
+extern char ch_PickupAnimName[];
 extern char g_677640[];
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 int __cdecl cm_GetCommandStatus(int);
@@ -87,7 +87,7 @@ void __cdecl he_RunSabotage(void *action)
 					*(int *)(e + 0x28) = *(int *)(e + 0x28) + *(int *)(p + 0xd0);
 				*(int *)(p + 0xc4) = *(int *)(hand + 4);
 				he_AssignActionSlot(0, 0, *(unsigned short *)hand, p);
-				cm_RequestTransferCurrencyNoKill(-1, *(int *)((unsigned char*)&((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*)(p + 8)] + 4), g_773d75, *(int *)(p + 0xd0));
+				cm_RequestTransferCurrencyNoKill(-1, *(int *)((unsigned char*)&((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*)(p + 8)] + 4), gm_ActiveTownIndex, *(int *)(p + 0xd0));
 				*(int *)(p + 0xc8) = -1;
 				*(int *)(p + 0x70) = *(int *)(p + 0x70) + 1;
 				return;
@@ -150,7 +150,7 @@ void __cdecl he_RunSabotage(void *action)
 				*(MSGCOLOR *)q = *(MSGCOLOR *)&gm_GameTime;
 				return;
 			}
-			cm_RequestPlayAnimation(*(int *)(p + 0xc4), g_68bef4, 1);
+			cm_RequestPlayAnimation(*(int *)(p + 0xc4), ch_PickupAnimName, 1);
 			ch_StartMovement(*(int *)(p + 0xc4), *(int *)(p + 0x10), -1, 0, 1, g_6a6560);
 			*(int *)(p + 0x70) = *(int *)(p + 0x70) + 1;
 			return;
@@ -328,9 +328,9 @@ void __cdecl he_RunSabotage(void *action)
 				*(int *)(msg + 8) = *(int *)((unsigned char*)&((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*)(p + 8)] + 4);
 				*(int *)(msg + 0xc) = -1;
 				*(int *)(msg + 0x28) = gm_GameTime;
-				*(int *)(msg + 0x2c) = g_7f4c04;
-				*(int *)(msg + 0x30) = g_7f4c08;
-				*(unsigned short *)(msg + 0x34) = g_7f4c0c;
+				*(int *)(msg + 0x2c) = gm_GameTimeHour;
+				*(int *)(msg + 0x30) = gm_GameTimeSliceDword;
+				*(unsigned short *)(msg + 0x34) = gm_GameTimeTailWord;
 				*(unsigned char *)(msg + 0x36) = 2;
 				*(int *)(msg + 0x58) = *(int *)(r + 1);
 				*(unsigned char *)(msg + 0xb0) = 0;

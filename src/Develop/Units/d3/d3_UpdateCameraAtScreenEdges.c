@@ -5,15 +5,15 @@ extern int d2_MouseTopBoundary;
 extern int d3_CameraHorizontalIndex;
 extern int d3_CameraVerticalStep;
 extern int g_774734;
-extern short g_14ce8c0;
-extern short g_14ce8c2;
+extern short io_ActiveCursorX;
+extern short io_ActiveCursorY;
 extern char* d3_ActiveCamera;
-extern int g_7e3a40;
-extern int g_7e3a44;
-extern int g_7e3a48;
+extern int d3_SavedCameraPos;
+extern int d3_SavedCameraPosY;
+extern int d3_SavedCameraPosZ;
 extern int d3_CameraTargetRotation;
-extern int g_7e3a54;
-extern int g_7e3a58;
+extern int d3_CameraTargetRotY;
+extern int d3_CameraTargetRotZ;
 extern int d3_CameraAnimating;
 extern int d3_ActiveCameraAnimation;
 extern int g_6a256c;
@@ -44,29 +44,29 @@ void __cdecl d3_UpdateCameraAtScreenEdges(void)
 	ref[3] = 0.0f;
 
 	if (g_774734) {
-		if ((short) g_14ce8c0 < minx) {
+		if ((short) io_ActiveCursorX < minx) {
 			return;
 		}
-		if ((short) g_14ce8c0 > maxx) {
+		if ((short) io_ActiveCursorX > maxx) {
 			return;
 		}
-		if ((short) g_14ce8c2 < miny) {
+		if ((short) io_ActiveCursorY < miny) {
 			return;
 		}
-		if ((short) g_14ce8c2 > maxy) {
+		if ((short) io_ActiveCursorY > maxy) {
 			return;
 		}
 		g_774734 = 0;
 		return;
 	}
 
-	if ((short) g_14ce8c2 > miny && (short) g_14ce8c2 < maxy) {
-		if ((short) g_14ce8c0 < minx) {
+	if ((short) io_ActiveCursorY > miny && (short) io_ActiveCursorY < maxy) {
+		if ((short) io_ActiveCursorX < minx) {
 			if (d3_CameraHorizontalIndex <= -1) {
 				return;
 			}
 			d3_CameraHorizontalIndex--;
-		} else if ((short) g_14ce8c0 > maxx) {
+		} else if ((short) io_ActiveCursorX > maxx) {
 			if (d3_CameraHorizontalIndex >= 1) {
 				return;
 			}
@@ -106,13 +106,13 @@ void __cdecl d3_UpdateCameraAtScreenEdges(void)
 		}
 	} else {
 		idx = d3_CameraVerticalStep;
-		if ((short) g_14ce8c2 < miny) {
+		if ((short) io_ActiveCursorY < miny) {
 			if (idx <= -1) {
 				return;
 			}
 			idx--;
 			d3_CameraVerticalStep = idx;
-		} else if ((short) g_14ce8c2 > maxy) {
+		} else if ((short) io_ActiveCursorY > maxy) {
 			if (idx >= 1) {
 				return;
 			}
@@ -150,12 +150,12 @@ void __cdecl d3_UpdateCameraAtScreenEdges(void)
 		}
 	}
 
-	g_7e3a40 = cur[0];
-	g_7e3a44 = cur[1];
-	g_7e3a48 = cur[2];
+	d3_SavedCameraPos = cur[0];
+	d3_SavedCameraPosY = cur[1];
+	d3_SavedCameraPosZ = cur[2];
 	d3_CameraTargetRotation = next[0];
-	g_7e3a54 = next[1];
-	g_7e3a58 = next[2];
+	d3_CameraTargetRotY = next[1];
+	d3_CameraTargetRotZ = next[2];
 	d3_FreeObjectAnimation(d3_ActiveCamera);
 	d3_CameraAnimating = 0;
 	d3_ActiveCameraAnimation = 0;

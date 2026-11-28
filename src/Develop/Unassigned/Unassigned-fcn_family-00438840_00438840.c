@@ -4,11 +4,11 @@ extern float g_1042588;
 extern float g_104328c;
 extern char g_6b8060;
 extern float g_10529d0;
-extern float g_10421a0;
+extern float d3_ViewportZFar;
 extern float g_1042a24;
 extern float g_1042a28;
-extern float g_10432a4;
-extern float g_10529c8;
+extern float d3_ProjectionDist;
+extern float d3_ViewportZNear;
 extern float g_1043288;
 extern float g_10529c4;
 extern float g_10529d4;
@@ -50,11 +50,11 @@ void __cdecl d3_SetFogRange(float a, float b)
 	if (g_6b8060 != 0) {
 		lim = g_10529d0;
 	} else {
-		g_10529d0 = g_10421a0;
-		lim = g_10421a0;
+		g_10529d0 = d3_ViewportZFar;
+		lim = d3_ViewportZFar;
 	}
 	if (b < lim) {
-		d3_SetViewport(g_10529d8, g_10529d4, g_10529c4, g_1043288, g_10529c8, b, g_10432a4, g_1042a28, g_1042a24);
+		d3_SetViewport(g_10529d8, g_10529d4, g_10529c4, g_1043288, d3_ViewportZNear, b, d3_ProjectionDist, g_1042a28, g_1042a24);
 	}
 	d3_InvalidateSceneRenderCache(0);
 }
@@ -74,7 +74,7 @@ void __cdecl d3_SetFog(float fog_start, float fog_end, int fog_color)
 	} else {
 		on = 0;
 		if (g_6b8060 != 0) {
-			d3_SetViewport(g_10529d8, g_10529d4, g_10529c4, g_1043288, g_10529c8, g_10529d0, g_10432a4, g_1042a28, g_1042a24);
+			d3_SetViewport(g_10529d8, g_10529d4, g_10529c4, g_1043288, d3_ViewportZNear, g_10529d0, d3_ProjectionDist, g_1042a28, g_1042a24);
 		}
 		g_10425fc = fog_start;
 		g_104329c = fog_end;

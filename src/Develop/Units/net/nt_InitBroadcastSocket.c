@@ -1,8 +1,8 @@
 #include "g_1552000.h"
-extern int g_675170;
+extern int nt_BroadcastSocket;
 
 extern struct sin_402220 g_1552010;
-extern struct sin_402220 g_1552000;
+extern struct sin_402220 nt_BroadcastAddr;
 
 __declspec(dllimport) int __stdcall WSAStartup(unsigned short, void*);
 __declspec(dllimport) int __stdcall socket(int, int, int);
@@ -25,26 +25,26 @@ void __cdecl nt_InitBroadcastSocket(unsigned short port)
 	char wsa[0x190];
 
 	one = 1;
-	if (g_675170 != -1) {
+	if (nt_BroadcastSocket != -1) {
 		return;
 	}
 	WSAStartup(2, wsa);
-	g_675170 = socket(2, 2, 0);
-	if (g_675170 == -1) {
+	nt_BroadcastSocket = socket(2, 2, 0);
+	if (nt_BroadcastSocket == -1) {
 		GetLastError();
 		if (FormatMessageA(0x1300, 0, GetLastError(), 0x400, (char*) &msg, 0, 0) == 0) {
 			LocalFree(msg);
 		}
 		return;
 	}
-	setsockopt(g_675170, 0xffff, 0x20, (const char*) &one, 4);
+	setsockopt(nt_BroadcastSocket, 0xffff, 0x20, (const char*) &one, 4);
 	g_1552010.family = 2;
 	g_1552010.addr = htonl(0);
 	g_1552010.port = htons(0);
-	bind(g_675170, &g_1552010, 0x10);
-	g_1552000.family = 2;
-	g_1552000.addr = htonl(0xffffffff);
-	g_1552000.port = htons(port);
+	bind(nt_BroadcastSocket, &g_1552010, 0x10);
+	nt_BroadcastAddr.family = 2;
+	nt_BroadcastAddr.addr = htonl(0xffffffff);
+	nt_BroadcastAddr.port = htons(port);
 }
 #if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_14eaae0[423232];

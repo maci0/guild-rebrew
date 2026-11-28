@@ -26,7 +26,7 @@ typedef struct {
 
 
 
-extern __int64 g_666018;
+extern __int64 gm_TargetPersonTypeMask;
 extern char* g_14a5590;
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -58,7 +58,7 @@ int __cdecl gm_ObjDisruptTargetRivals(ENTITY_RECORD* obj, int* arg)
 		req.f14 = 3;
 		req.size = 0x400;
 		req.kind = 6;
-		req.cd = g_666018;
+		req.cd = gm_TargetPersonTypeMask;
 		e = (ENTITY_RECORD*) d2_OpenTargetPicker(&req, g_14a5590, 0, 0);
 		if (e == 0) {
 			return 0;
@@ -73,10 +73,11 @@ int __cdecl gm_ObjDisruptTargetRivals(ENTITY_RECORD* obj, int* arg)
 	step = gm_RandomSearchSteps[gm_RandomMod(0x10)];
 	n = 3;
 	do {
-		if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[start].entity_index != 0xffff && ((ENTITY_RECORD_VIEW*)g_7f4ca0)[start].class_166 && ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[start]) != obj &&
-			((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[start]) != e) {
+		if (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[start].entity_index != 0xffff && ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[start].class_166 &&
+			((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[start]) != obj &&
+			((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[start]) != e) {
 			n--;
-			picks[n] = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[start]);
+			picks[n] = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[start]);
 		}
 		start = (start + step) % 0x300;
 	} while (n != 0);

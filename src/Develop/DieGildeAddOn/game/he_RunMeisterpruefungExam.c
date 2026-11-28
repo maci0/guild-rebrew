@@ -31,7 +31,7 @@ struct msg {
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern char* gm_CityEntity;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl gm_CompareGameTime(pos14_7f4c00*, pos14_7f4c00*);
@@ -87,25 +87,25 @@ void __cdecl he_RunMeisterpruefungExam(char* u)
 			*(int*) (u + 0x70) = 0;
 			return;
 		}
-		if (g_100f884 != *(int*) (*(char**) (u + 0x74) + 8) || g_100f1dc == -1) {
+		if (g_100f884 != *(int*) (*(char**) (u + 0x74) + 8) || d2_DialogButtonAction == -1) {
 			return;
 		}
-		if (g_100f1dc == 2) {
+		if (d2_DialogButtonAction == 2) {
 			memset(&m, 0, sizeof(m));
 			v = *(int*) (u + 0xb0);
-			cm_RequestTransferCurrencyNoKill(((ENTITY_RECORD*)gm_CityEntity)->entity_id, ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id, g_773d75, v);
+			cm_RequestTransferCurrencyNoKill(((ENTITY_RECORD*)gm_CityEntity)->entity_id, ((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (u + 8)].entity_id, gm_ActiveTownIndex, v);
 			m.kind = 0x56;
 			m.target = -1;
 			m.code = 0x11;
 			m.who = 4;
 			m.other = v;
-			m.owner = ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id;
+			m.owner = ((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (u + 8)].entity_id;
 			cm_SendCopyEntityData(&m);
 			d2_CloseActionPopup(u);
 			he_FreeAction(u);
 			return;
 		}
-		if (g_100f1dc == 1) {
+		if (d2_DialogButtonAction == 1) {
 			d2_CloseActionPopup(u);
 			he_FreeAction(u);
 			return;

@@ -83,7 +83,7 @@ void __cdecl d2_ShowCabinetSpyDialog(char* building)
 	int target;
 	float f;
 
-	act.count = gm_WalkEntityChain(*(unsigned short*) &g_774970);
+	act.count = gm_WalkEntityChain(*(unsigned short*) &gm_LocalPlayerSlot);
 	f = (float) act.count;
 	act.amt[0] = (int) (f * 0.01f);
 	act.amt[1] = (int) (f * 0.015f);
@@ -95,9 +95,9 @@ void __cdecl d2_ShowCabinetSpyDialog(char* building)
 	d2_InitWindowBounds(*(int*) &d2_CurrentWindowId);
 	d2_SetForm(dlg, 2);
 	i = d2_EqualizeWindowButtonWidths(0, 3, *(int*) 0x14b53a0, *(int*) &d2_CurrentWindowId);
-	((D2_CONTROL_TL*)g_1015ea0)[i].value_06c = 1;
-	((D2_CONTROL_TL*)g_1015ea0)[i].width =
-	    *(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&g_1015f4c);
+	((D2_CONTROL_TL*)d2_Controls)[i].value_06c = 1;
+	((D2_CONTROL_TL*)d2_Controls)[i].width =
+	    *(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&d2_WindowMetricsView);
 	d2_SetElementFont(i, 0x54);
 	lst = d2_AddWindowValueGauge(0x57, 0x14, 200, 0, 100, 0x7b, 2,
 	                   *(int*) &d2_CurrentWindowId);
@@ -109,7 +109,7 @@ void __cdecl d2_ShowCabinetSpyDialog(char* building)
 	btn = io_AppendText(0x4024);
 	act.no = d2_GetWindowListItem(dlg, 3, btn);
 	act.yes = d2_GetWindowListItem(dlg, 3, btn + 1);
-	*(int*) &g_100f1dc = -1;
+	*(int*) &d2_DialogButtonAction = -1;
 	do {
 		j = d2_GetControlValue(lst);
 		d2_SetForm(dlg, 1);
@@ -119,16 +119,16 @@ void __cdecl d2_ShowCabinetSpyDialog(char* building)
 		io_AppendText(0x401f, amt);
 		if (*(int*) 0x14ce8e0) {
 			*(int*) 0x774654 = 1;
-		} else if (*(int*) &g_100f1dc != -1) {
+		} else if (*(int*) &d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == act.no) {
 				if (gm_CheckEntityStock(
-				        (char*) (unsigned long)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*)&g_774970]
+				        (char*) (unsigned long)&((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*)&gm_LocalPlayerSlot]
 
 ,
-				        amt, *(char*) &g_773d75) &&
+				        amt, *(char*) &gm_ActiveTownIndex) &&
 				    he_HasNoActiveAssassinAction(building)) {
 					p = gm_GetEntityTableEntry(
-					    (char*) (unsigned long)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*)&g_774970]
+					    (char*) (unsigned long)&((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*)&gm_LocalPlayerSlot]
 
 
 );
@@ -136,11 +136,11 @@ void __cdecl d2_ShowCabinetSpyDialog(char* building)
 						*(int*) (p + 0x28) += amt;
 					cm_RequestTransferCurrencyNoKill(
 					    -1,
-					    ((ENTITY_RECORD*)((char*)&g_7f4ca4 - 4))[*(unsigned short*)&g_774970].entity_id
+					    ((ENTITY_RECORD*)((char*)&gm_EntityIdField - 4))[*(unsigned short*)&gm_LocalPlayerSlot].entity_id
 
 
 ,
-					    *(char*) &g_773d75, amt);
+					    *(char*) &gm_ActiveTownIndex, amt);
 					memset(&m, 0, sizeof(m));
 					m.kind = 0x99;
 					m.code = 2;
@@ -149,13 +149,13 @@ void __cdecl d2_ShowCabinetSpyDialog(char* building)
 					m.f68 = 3;
 					m.f6c = j;
 					act.count = -1;
-					m.owner = ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (building + 0x27)].entity_id;
+					m.owner = ((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (building + 0x27)].entity_id;
 					target = *(int*) (building + 1);
 					m.when = gm_GameTime;
 					m.target = target;
 					m.f5c = target;
 					ai_FindEntityInFavorRange(
-					    (unsigned short*) (unsigned long)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*)&g_774970]
+					    (unsigned short*) (unsigned long)&((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*)&gm_LocalPlayerSlot]
 
 
 ,

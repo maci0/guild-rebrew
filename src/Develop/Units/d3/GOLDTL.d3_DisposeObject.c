@@ -4,8 +4,8 @@
 typedef void (__cdecl* dispose_fn_4398d0)(char* obj);
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_67a370;
-extern char g_10432c0[];
+extern int d3_ActiveScene;
+extern char d3_Universes[];
 
 void __cdecl d3_SelectSceneContext(int a, int b);
 void __cdecl m_FreeTracked(void* p);
@@ -35,9 +35,9 @@ void __cdecl d3_DisposeObject(char* obj)
 	saved = d3_CurrentContextIndex;
 	u = *(char**) (obj + 0x20c);
 	idx = -1;
-	if (((char*)g_67a370) != u) {
+	if (((char*)d3_ActiveScene) != u) {
 		sprintf(msg, "d3_DisposeObject(): invalid universe by object %s", obj);
-		idx = (unsigned int) (u - g_10432c0) / 0x3dc;
+		idx = (unsigned int) (u - d3_Universes) / 0x3dc;
 		d3_SelectSceneContext(idx, 1);
 	}
 	if (*(dispose_fn_4398d0**) (obj + 0x1ec) != 0 && **(dispose_fn_4398d0**) (obj + 0x1ec) != 0) {

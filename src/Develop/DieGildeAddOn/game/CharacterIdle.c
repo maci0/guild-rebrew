@@ -1,8 +1,8 @@
 #include "Develop/DieGildeAddOn/game/ch_script.h"
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
 
-char g_6761a4[] = "CharacterIdle(): Invalid character";
-extern char g_6761a4[];
+char str_CharacterIdle_Invalid_character[] = "CharacterIdle(): Invalid character";
+extern char str_CharacterIdle_Invalid_character[];
 
 void __cdecl evt_LogScriptError(void*, int, void*);
 
@@ -12,7 +12,7 @@ int __cdecl CharacterIdle(int** charakter_argument)
 
 	if (*charakter_argument == 0) {
 		g = *(void**) ((char*)&evt_CurrentScript);
-		evt_LogScriptError(g, *(int*) ((char*) g + 0x118), (void*) g_6761a4);
+		evt_LogScriptError(g, *(int*) ((char*) g + 0x118), (void*) str_CharacterIdle_Invalid_character);
 		return 0;
 	}
 	return *((int*) *charakter_argument + 0x128 / 4) == 0;

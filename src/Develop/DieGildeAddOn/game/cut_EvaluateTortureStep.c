@@ -1,6 +1,6 @@
 
 
-extern double g_6640f8;
+extern double dbl_0_75;
 
 char* __cdecl gm_LookupTortureRecord(int);
 float __cdecl cut_RandFloat(void);
@@ -37,7 +37,7 @@ int __cdecl cut_EvaluateTortureStep(char* e)
 		if (t >= limit) {
 			sum = sum + delta;
 			if (cut_RandMod(4) != 0) {
-				sum = sum * g_6640f8;
+				sum = sum * dbl_0_75;
 			}
 			*(int*) (e + 0x48) = 1;
 			goto done;

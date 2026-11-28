@@ -3,7 +3,7 @@
 
 #include "Develop/DieGildeAddOn/loadsave/g_774a78.h"
 
-extern struct Node* g_774a78;
+extern struct Node* hp_ProdEntryList;
 extern char s_6ab408[];
 
 void __cdecl ls_FreeList774a78(void);
@@ -50,12 +50,12 @@ int __cdecl ls_LoadList774a78(void* fh)
 			rep stosb
 		}
 		*(int*) p = -1;
-		if (g_774a78 != 0) {
-			*(char**) (p + 0x48) = (char*) g_774a78;
+		if (hp_ProdEntryList != 0) {
+			*(char**) (p + 0x48) = (char*) hp_ProdEntryList;
 		}
-		g_774a78 = (Node*) p;
+		hp_ProdEntryList = (Node*) p;
 	}
-	for (e = (char*) g_774a78; e != 0; e = *(char**) (e + 0x48)) {
+	for (e = (char*) hp_ProdEntryList; e != 0; e = *(char**) (e + 0x48)) {
 		if (ls_ReadVfsDataChecked(e, 4, 1, fh) == 0) {
 			goto fail;
 		}

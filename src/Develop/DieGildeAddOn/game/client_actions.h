@@ -1,10 +1,10 @@
 #ifndef CLIENT_ACTIONS_H
 #define CLIENT_ACTIONS_H
 
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
-extern unsigned char g_773d75;
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
+extern unsigned char gm_ActiveTownIndex;
 extern char* gm_CityEntity;
 
 char* __cdecl gm_FindPublicTreasury(int modus);

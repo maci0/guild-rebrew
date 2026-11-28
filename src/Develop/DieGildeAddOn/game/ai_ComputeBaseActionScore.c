@@ -29,7 +29,7 @@ typedef struct Actor {
 	unsigned char flags;
 } Actor;
 
-extern AM_METHOD g_1008540[];
+extern AM_METHOD am_Methods[];
 
 /* ADDRESS: GOLDTL 0x004a4410 */
 int __cdecl ai_ComputeBaseActionScore(float* s1, float* s2, int idx, Actor* e)
@@ -42,7 +42,7 @@ int __cdecl ai_ComputeBaseActionScore(float* s1, float* s2, int idx, Actor* e)
 
 	*s1 = 0;
 	*s2 = 0;
-	t = &g_1008540[idx];
+	t = &am_Methods[idx];
 	if (t->flags & e->flags) {
 		k1 = 40.0f;
 		k2 = 50.0f;

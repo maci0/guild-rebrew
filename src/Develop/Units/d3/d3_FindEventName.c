@@ -1,5 +1,5 @@
 #include "scene_event_entry.h"
-SCENE_EVENT_ENTRY g_67a470[8] = {
+SCENE_EVENT_ENTRY d3_SceneEvents[8] = {
     { "NONE", 0 },
     { "TEST", 1 },
     { "ZOOM_IN_OBJECT", 2 },
@@ -9,7 +9,7 @@ SCENE_EVENT_ENTRY g_67a470[8] = {
     { "SCENE_EXIT", 5 },
     { "SCENE_SUPERVISOR", 6 },
 };
-extern SCENE_EVENT_ENTRY g_67a470[8];
+extern SCENE_EVENT_ENTRY d3_SceneEvents[8];
 
 /* ADDRESS: GOLD 0x0043e710 */
 /* ADDRESS: GOLDTL 0x0043b550 */
@@ -20,11 +20,11 @@ char* __cdecl d3_FindEventName(int eventId)
 
 	i = 0;
 	for (off = 0; off < 0x120; off += 0x24, i++) {
-		if (eventId == *(int*) ((char*) g_67a470 + 0x20 + off)) {
-			return (char*) g_67a470 + i * 0x24;
+		if (eventId == *(int*) ((char*) d3_SceneEvents + 0x20 + off)) {
+			return (char*) d3_SceneEvents + i * 0x24;
 		}
 	}
-	return (char*) g_67a470 + 0x124;
+	return (char*) d3_SceneEvents + 0x124;
 }
 unsigned char _dpad_67a594[8] = {
     0x4e, 0x4f, 0x4e, 0x45, 0x00, 0x00, 0x00, 0x00

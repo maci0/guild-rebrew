@@ -27,12 +27,12 @@ typedef struct {
 	char p6c[0x8c];
 } Msg;
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern unsigned short g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
+extern unsigned short gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
 
 int __cdecl he_GetActionProgress(char*, int*, int*, int);
 void __cdecl cm_SendCopyEntityData(Msg*);
@@ -48,12 +48,12 @@ int __cdecl d2_SendAlchemyResearch(char* e, int* list)
 	}
 	memset(&msg, 0, sizeof(msg));
 	msg.kind = 0x95;
-	msg.owner = *(int*) (g_7f4ca0 + *(unsigned short*) (e + 0x27) * 540 + 4);
+	msg.owner = *(int*) (gm_EntitySlotTable + *(unsigned short*) (e + 0x27) * 540 + 4);
 	msg.entity = *(int*) (e + 1);
 	msg.timestamp.a = (*(int*)&gm_GameTime);
-	msg.timestamp.b = (*(int*)&g_7f4c04);
-	msg.timestamp.c = g_7f4c08;
-	msg.timestamp.d = g_7f4c0c;
+	msg.timestamp.b = (*(int*)&gm_GameTimeHour);
+	msg.timestamp.c = gm_GameTimeSliceDword;
+	msg.timestamp.d = gm_GameTimeTailWord;
 	msg.flag = 1;
 	msg.v58 = *list;
 	msg.v64 = *list;

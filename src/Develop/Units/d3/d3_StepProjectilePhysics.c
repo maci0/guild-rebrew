@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_1043370;
-extern float g_662cf8;
+extern int tp_ch_PathGrid;
+extern float flt_100_0;
 char __cdecl d3sm_SampleHeight(int, float *, int *, int *, float *);
 int __cdecl d3_TraceTerrainSegment(int, float *, float *, int, int, int *, int *);
 
@@ -11,39 +11,39 @@ int __cdecl d3_StepProjectilePhysics(char *obj)
     float inv, fx, fy, fz;
     int map, remain, n, x, y, nx, ny, hit;
     gravity = *(float *)0x6660ec * *(float *)0x6660e8;
-    map = g_1043370;
+    map = tp_ch_PathGrid;
     if (*(int *)(obj + 0x5c) != 1) return 0;
-    remain = g_6b7fac - *(int *)(obj + 0x60);
+    remain = gm_GameTicks - *(int *)(obj + 0x60);
     if (!d3sm_SampleHeight(map, (float *)(obj + 0x30), &x, &y, &height)) {
         *(int *)(obj + 0x5c) = 3;
         *(int *)(obj + 0x58) = 0;
         return 0;
     }
-    fx = (((*(float *)(obj + 0x40) > *(float *)0x6628a8) ? g_6628a0 : *(float *)0x662a94) *
+    fx = (((*(float *)(obj + 0x40) > *(float *)0x6628a8) ? flt_1_0 : *(float *)0x662a94) *
          (*(float *)(obj + 0x50) * *(float *)(obj + 0x40) * *(float *)(obj + 0x40))) *
          *(float *)0x6ad620 * *(float *)0x6660f8 * g_6628cc;
-    fy = (((*(float *)(obj + 0x44) > *(float *)0x6628a8) ? g_6628a0 : *(float *)0x662a94) *
+    fy = (((*(float *)(obj + 0x44) > *(float *)0x6628a8) ? flt_1_0 : *(float *)0x662a94) *
          (*(float *)(obj + 0x44) * *(float *)(obj + 0x44) * *(float *)(obj + 0x50))) *
          *(float *)0x6ad620 * *(float *)0x6660f8 * g_6628cc;
-    fz = (((*(float *)(obj + 0x48) > *(float *)0x6628a8) ? g_6628a0 : *(float *)0x662a94) *
+    fz = (((*(float *)(obj + 0x48) > *(float *)0x6628a8) ? flt_1_0 : *(float *)0x662a94) *
          (*(float *)(obj + 0x50) * *(float *)(obj + 0x48) * *(float *)(obj + 0x48))) *
          *(float *)0x6ad620 * *(float *)0x6660f8 * g_6628cc;
-    inv = g_6628a0 / *(float *)(obj + 0x54);
+    inv = flt_1_0 / *(float *)(obj + 0x54);
     initial[0] = inv * fx * *(float *)0x6660ec;
     initial[1] = inv * fy * *(float *)0x6660ec;
     initial[2] = inv * fz * *(float *)0x6660ec;
     n = 0;
     while (n < remain) {
-        fx = (((*(float *)(obj + 0x10) > *(float *)0x6628a8) ? g_6628a0 : *(float *)0x662a94) *
+        fx = (((*(float *)(obj + 0x10) > *(float *)0x6628a8) ? flt_1_0 : *(float *)0x662a94) *
              (*(float *)(obj + 0x10) * *(float *)(obj + 0x10) * *(float *)(obj + 0x50))) *
              *(float *)0x6ad620 * *(float *)0x6660f8 * g_6628cc;
-        fy = (((*(float *)(obj + 0x14) > *(float *)0x6628a8) ? g_6628a0 : *(float *)0x662a94) *
+        fy = (((*(float *)(obj + 0x14) > *(float *)0x6628a8) ? flt_1_0 : *(float *)0x662a94) *
              (*(float *)(obj + 0x50) * *(float *)(obj + 0x14) * *(float *)(obj + 0x14))) *
              *(float *)0x6ad620 * *(float *)0x6660f8 * g_6628cc;
-        fz = (((*(float *)(obj + 0x18) > *(float *)0x6628a8) ? g_6628a0 : *(float *)0x662a94) *
+        fz = (((*(float *)(obj + 0x18) > *(float *)0x6628a8) ? flt_1_0 : *(float *)0x662a94) *
              (*(float *)(obj + 0x50) * *(float *)(obj + 0x18) * *(float *)(obj + 0x18))) *
              *(float *)0x6ad620 * *(float *)0x6660f8 * g_6628cc;
-        inv = g_6628a0 / *(float *)(obj + 0x54);
+        inv = flt_1_0 / *(float *)(obj + 0x54);
         step[0] = inv * fx * *(float *)0x6660ec;
         step[1] = inv * fy * *(float *)0x6660ec;
         step[2] = inv * fz * *(float *)0x6660ec;
@@ -64,7 +64,7 @@ int __cdecl d3_StepProjectilePhysics(char *obj)
             *(float *)(obj + 0x58) = (((*(float *)(obj + 0x18) * *(float *)(obj + 0x18) +
                 *(float *)(obj + 0x14) * *(float *)(obj + 0x14)) +
                 *(float *)(obj + 0x10) * *(float *)(obj + 0x10)) * g_6628cc +
-                g_662cf8) * *(float *)(obj + 0x54);
+                flt_100_0) * *(float *)(obj + 0x54);
             return 0;
         }
         *(float *)(obj + 0x30) = next[0];

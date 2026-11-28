@@ -1,5 +1,5 @@
-int g_6a9b9c = 0xffffffff;
-extern int g_6a9b9c;
+int d2_NetLobbyForm = 0xffffffff;
+extern int d2_NetLobbyForm;
 extern int d2_CurrentWindowId;
 
 
@@ -14,10 +14,10 @@ void __cdecl d2_InitNetLobbyScrollbar(void)
 	int c;
 	int s;
 
-	if (g_6a9b9c != -1) {
-		d2_SetForm(g_6a9b9c, 5);
+	if (d2_NetLobbyForm != -1) {
+		d2_SetForm(d2_NetLobbyForm, 5);
 		s = d2_CurrentWindowId;
-		d2_SetForm(g_6a9b9c, 6);
+		d2_SetForm(d2_NetLobbyForm, 6);
 		d2_CreateWindowScrollbar(0, 0, d2_CurrentWindowId, s, 0x35, &c, &b, &a);
 	}
 }

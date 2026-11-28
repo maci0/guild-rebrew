@@ -14,8 +14,8 @@ struct unk_436ff0 {
 	struct unkvtbl_436ff0* vtbl;
 };
 
-extern unsigned long g_14ce728;
-extern struct VFS_DIR* g_6b7fdc;
+extern unsigned long d3_LastReleaseRefCount;
+extern struct VFS_DIR* vfs_RootDir;
 extern unsigned char g_6b7ff8;
 extern void* g_6b5de0;
 
@@ -41,12 +41,12 @@ void __cdecl d3_LoadTextureFromFile(char* name, int format, struct unk_436ff0** 
 	char msg[0x100];
 
 	if (*tex != 0) {
-		g_14ce728 = (*tex)->vtbl->Release(*tex);
+		d3_LastReleaseRefCount = (*tex)->vtbl->Release(*tex);
 		*tex = 0;
 	}
 	size = width * height * 4 + 0x1036;
 	buf = m_alloc(size, "d3d:LoadTexture");
-	f = vfs_Tfopen(name, "rb", g_6b7fdc);
+	f = vfs_Tfopen(name, "rb", vfs_RootDir);
 	if (f != 0) {
 		read = vfs_ReadData(buf, size, 1, f);
 		if (read >= size) {

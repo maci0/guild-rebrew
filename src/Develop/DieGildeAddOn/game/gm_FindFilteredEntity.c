@@ -13,7 +13,7 @@ typedef struct Query {
 } Query;
 // SIZE 0x50
 
-extern char *g_77261c;
+extern char *ai_FeudTargetEntity;
 extern int gm_RandomSearchSteps[];
 
 int __cdecl gm_MatchesTargetFilter(unsigned short, unsigned short, Query *, int);
@@ -42,11 +42,11 @@ unsigned int __cdecl gm_FindFilteredEntity(unsigned short *entity, int filterFla
 	}
 	memcpy(q.name, excludeIds, len);
 	q.kind = 2;
-	if (g_77261c != 0) {
+	if (ai_FeudTargetEntity != 0) {
 		q.x40 = 0;
 		q.flags = filterFlags;
-		if (gm_MatchesTargetFilter(*entity, *((unsigned short *) g_77261c), &q, 0) != 0) {
-			*out = *((unsigned short *) g_77261c);
+		if (gm_MatchesTargetFilter(*entity, *((unsigned short *) ai_FeudTargetEntity), &q, 0) != 0) {
+			*out = *((unsigned short *) ai_FeudTargetEntity);
 			return 1;
 		}
 	}

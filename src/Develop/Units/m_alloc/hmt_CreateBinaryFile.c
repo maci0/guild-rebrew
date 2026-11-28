@@ -4,7 +4,7 @@
 
 #include "Develop/Units/m_alloc/m_alloc.h"
 
-extern char g_6b5c60[];
+extern char str_empty[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 typedef struct HistRec {
@@ -45,12 +45,12 @@ unsigned int __cdecl hmt_CreateBinaryFile(void)
 	p = strrchr(path, '\\');
 	p[1] = 0;
 	strcat(path, "historical.ini");
-	GetPrivateProfileStringA("main", "kcnt", g_6b5c60, buf, 0x100, path);
+	GetPrivateProfileStringA("main", "kcnt", str_empty, buf, 0x100, path);
 	hist.n1 = atoi(buf);
 	if (hist.n1 <= 0) {
 		return 0xffffffff;
 	}
-	GetPrivateProfileStringA("main", "pcnt", g_6b5c60, buf, 0x100, path);
+	GetPrivateProfileStringA("main", "pcnt", str_empty, buf, 0x100, path);
 	hist.n0 = atoi(buf);
 	if (hist.n0 <= 0) {
 		return 0xffffffff;
@@ -72,9 +72,9 @@ unsigned int __cdecl hmt_CreateBinaryFile(void)
 		sprintf(key, "k_%i", i);
 		GetPrivateProfileStringA(key, "begin", "-1", buf, 0x100, path);
 		hist.r1[i].begin = atoi(buf);
-		GetPrivateProfileStringA(key, "nname", g_6b5c60, buf, 0x100, path);
+		GetPrivateProfileStringA(key, "nname", str_empty, buf, 0x100, path);
 		strncpy(hist.r1[i].nname, buf, 0xf);
-		GetPrivateProfileStringA(key, "vname", g_6b5c60, buf, 0x100, path);
+		GetPrivateProfileStringA(key, "vname", str_empty, buf, 0x100, path);
 		strncpy(hist.r1[i].vname, buf, 0xf);
 		GetPrivateProfileStringA(key, "end", "-1", buf, 0x100, path);
 		hist.r1[i].end = atoi(buf);
@@ -85,9 +85,9 @@ unsigned int __cdecl hmt_CreateBinaryFile(void)
 		sprintf(key, "p_%i", i);
 		GetPrivateProfileStringA(key, "begin", "-1", buf, 0x100, path);
 		hist.r0[i].begin = atoi(buf);
-		GetPrivateProfileStringA(key, "nname", g_6b5c60, buf, 0x100, path);
+		GetPrivateProfileStringA(key, "nname", str_empty, buf, 0x100, path);
 		strncpy(hist.r0[i].nname, buf, 0xf);
-		GetPrivateProfileStringA(key, "vname", g_6b5c60, buf, 0x100, path);
+		GetPrivateProfileStringA(key, "vname", str_empty, buf, 0x100, path);
 		strncpy(hist.r0[i].vname, buf, 0xf);
 		GetPrivateProfileStringA(key, "end", "-1", buf, 0x100, path);
 		hist.r0[i].end = atoi(buf);

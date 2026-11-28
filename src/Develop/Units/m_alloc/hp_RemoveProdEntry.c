@@ -5,7 +5,7 @@
 
 void __cdecl m_FreeTracked(void*);
 
-extern struct Node* g_774a78;
+extern struct Node* hp_ProdEntryList;
 
 int __cdecl hp_RemoveProdEntry(int id)
 {
@@ -13,7 +13,7 @@ int __cdecl hp_RemoveProdEntry(int id)
 	Node* node;
 
 	prev = 0;
-	for (node = g_774a78; node != 0; node = node->next) {
+	for (node = hp_ProdEntryList; node != 0; node = node->next) {
 		if (node->id == id) {
 			break;
 		}
@@ -25,7 +25,7 @@ int __cdecl hp_RemoveProdEntry(int id)
 	if (prev != 0) {
 		prev->next = node->next;
 	} else {
-		g_774a78 = node->next;
+		hp_ProdEntryList = node->next;
 	}
 	m_FreeTracked(node);
 	return 0;

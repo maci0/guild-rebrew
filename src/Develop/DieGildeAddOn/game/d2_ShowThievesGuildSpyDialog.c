@@ -36,14 +36,14 @@ typedef struct ObjMsg {
 } ObjMsg;
 /* SIZE 0x138 */
 
-extern unsigned char* g_7746c4;
-extern unsigned char* g_7746c8;
+extern unsigned char* d2_VisitedBuilding;
+extern unsigned char* d2_InteriorBuilding;
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern Ent g_7f4ca0[];
-extern int g_100f1dc;
+extern Ent gm_EntitySlotTable[];
+extern int d2_DialogButtonAction;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 extern int d2_CurrentElementId;
 extern int g_14abc98;
 extern char s_6ab1b8[];
@@ -96,12 +96,12 @@ int __cdecl d2_ShowThievesGuildSpyDialog(void* a0, char* obj)
 		} else {
 			rec = 0;
 			n = 0;
-			if (g_7746c4) {
-				rec = g_7746c4;
-			} else if (g_7746c8) {
-				rec = g_7746c8;
+			if (d2_VisitedBuilding) {
+				rec = d2_VisitedBuilding;
+			} else if (d2_InteriorBuilding) {
+				rec = d2_InteriorBuilding;
 			}
-			typerec = &((TypeRec*) lpGebaeudePROT)[g_7746c4[0]];
+			typerec = &((TypeRec*) lpGebaeudePROT)[d2_VisitedBuilding[0]];
 			if (rec) {
 				item = fcn_00502cd0(*((int*) (rec + 0x5d)), 1, 0, 0xca);
 				while (item) {
@@ -112,7 +112,7 @@ int __cdecl d2_ShowThievesGuildSpyDialog(void* a0, char* obj)
 					item = fcn_00502850();
 				}
 			}
-			for (item = he_StartHandlungSearch(2, 2, g_774970, 0, 0x40); item; item = he_fn_Handlung()) {
+			for (item = he_StartHandlungSearch(2, 2, gm_LocalPlayerSlot, 0, 0x40); item; item = he_fn_Handlung()) {
 				for (k = 0; k < n; k++) {
 					if (*((int*) (item + 0xac)) == *((int*) (msg.objs[k] + 0x2a))) {
 						break;
@@ -124,10 +124,10 @@ int __cdecl d2_ShowThievesGuildSpyDialog(void* a0, char* obj)
 			}
 			n = n + cnt;
 			if (n >= (int) (typerec->maxcount * 2)) {
-				io_FormatTextBuffer(buf_a, 0x19fa, n, g_7746c4);
+				io_FormatTextBuffer(buf_a, 0x19fa, n, d2_VisitedBuilding);
 				d2_ShowModalMessageBox(buf_a, 0);
 			} else {
-				ent = &g_7f4ca0[*(unsigned short*) (obj + 0x27)];
+				ent = &gm_EntitySlotTable[*(unsigned short*) (obj + 0x27)];
 				dlg = d2_LoadForm(0, 0, s_6ab1b8);
 				d2_CenterDialogWindows((int) dlg);
 				d2_SetOverlayAnimation(0, 0);
@@ -135,12 +135,12 @@ int __cdecl d2_ShowThievesGuildSpyDialog(void* a0, char* obj)
 				r1 = io_AppendText(0x19f7, (int) ent->id, obj);
 				cnt = d2_GetWindowListItem((int) dlg, 1, r1);
 				r1 = d2_GetWindowListItem((int) dlg, 1, r1 + 1);
-				g_100f1dc = -1;
+				d2_DialogButtonAction = -1;
 				do {
-					if (g_14ce8e0) {
-						g_774654 = 1;
+					if (io_RightButtonReleased) {
+						d2_DialogCloseRequested = 1;
 					}
-					if (g_100f1dc != -1) {
+					if (d2_DialogButtonAction != -1) {
 						if (d2_CurrentElementId == cnt) {
 							for (i = 0; i < 8; i = i + 1) {
 								msg.ids[i] = -1;
@@ -148,9 +148,9 @@ int __cdecl d2_ShowThievesGuildSpyDialog(void* a0, char* obj)
 							msg.type = 0x40;
 							msg.flag = 1;
 							msg.owner = *((int*) (obj + 1));
-							msg.value = g_7f4ca0[g_774970].field4;
-							msg.owner2 = *((int*) (g_7746c4 + 1));
-							t = (char*) &g_7f4ca0[0].field4;
+							msg.value = gm_EntitySlotTable[gm_LocalPlayerSlot].field4;
+							msg.owner2 = *((int*) (d2_VisitedBuilding + 1));
+							t = (char*) &gm_EntitySlotTable[0].field4;
 							i = 0;
 							do {
 								if (i >= 8) {
@@ -161,18 +161,18 @@ int __cdecl d2_ShowThievesGuildSpyDialog(void* a0, char* obj)
 									i = i + 1;
 								}
 								t = t + 0x21c;
-							} while ((int) t < (int) &g_7f4ca0[768].field4);
+							} while ((int) t < (int) &gm_EntitySlotTable[768].field4);
 							if (i) {
 								cm_SendCopyEntityData(&msg);
 								ret = 1;
 								d3snd_PlayWorkerOrderVoice();
-								g_774654 = 1;
+								d2_DialogCloseRequested = 1;
 							} else {
 								d2_ShowModalMessageBox((char*) g_14abc98, 0);
-								g_774654 = 1;
+								d2_DialogCloseRequested = 1;
 							}
 						} else if (d2_CurrentElementId == r1) {
-							g_774654 = 1;
+							d2_DialogCloseRequested = 1;
 						}
 					}
 				} while (main_RunFrameLoop(d2_ShowThievesGuildSpyDialog, 0x677c7));

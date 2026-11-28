@@ -1,7 +1,7 @@
 
 
 
-extern float g_664164;
+extern float flt_6;
 
 int __cdecl ahm_CheckFlag(void*);
 int __cdecl ahm_CountActiveSlots(char*);
@@ -15,5 +15,5 @@ int __cdecl ahm_HasRecipeSlotCapacity(char* entity)
 		return 0;
 	}
 	count = ahm_CountActiveSlots(entity);
-	return (int) (ahm_GetEssenceValue(entity, 2) * g_664164) > count;
+	return (int) (ahm_GetEssenceValue(entity, 2) * flt_6) > count;
 }

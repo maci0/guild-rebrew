@@ -30,9 +30,9 @@ typedef struct {
 
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern unsigned short g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
+extern unsigned short gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
 
 void __cdecl cm_SendCopyEntityData(MsgF8* m);
 void __cdecl gm_ModifyHealth(int id, int v);
@@ -68,9 +68,9 @@ int __cdecl ai_DispatchDunkleEcke(char* actor, char* target, char* secondary)
 	m.from = *(int*) (actor + 4);
 	m.to = *(int*) (target + 4);
 	m.stamp.a = (*(int*)&gm_GameTime);
-	m.stamp.b = (*(int*)&g_7f4c04);
-	m.stamp.c = g_7f4c08;
-	m.stamp.d = g_7f4c0c;
+	m.stamp.b = (*(int*)&gm_GameTimeHour);
+	m.stamp.c = gm_GameTimeSliceDword;
+	m.stamp.d = gm_GameTimeTailWord;
 	m.to2 = *(int*) (target + 4);
 	m.with = *(int*) (secondary + 4);
 	cm_SendCopyEntityData(&m);

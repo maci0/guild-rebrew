@@ -14,7 +14,7 @@ void __cdecl d2_OpenDunkleEcke(char* building, char* context)
 
 	entry = fcn_00502cd0(*(int*) (context + 0x14), 1, 0, 0x12c);
 	if (entry != 0) {
-		if (*(unsigned short*) (building + 0x27) == g_774970) {
+		if (*(unsigned short*) (building + 0x27) == gm_LocalPlayerSlot) {
 			d2_RunDunkleEckeOwnerDialog(building, context, entry);
 		}
 		else {

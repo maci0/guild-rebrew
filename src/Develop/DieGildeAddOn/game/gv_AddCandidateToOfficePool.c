@@ -4,7 +4,7 @@ extern char* lpGebaeudePROT;
 extern char* gm_CityEntity;
 extern int g_6652f8[];
 extern int gm_GameTime;
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 void __cdecl gm_ResolveEntityById(void**, void**, void**, int);
 int __cdecl gv_CheckSlotActive(int, int);
@@ -34,7 +34,7 @@ int __cdecl gv_AddCandidateToOfficePool(int e)
 
 	gm_ResolveEntityById((void**) &p, 0, 0, *(int*) (e + 8));
 	if (p == 0 || *(unsigned short*) (p + 0x27) == 0xffff
-		|| ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (p + 0x27)]) == gm_CityEntity) {
+		|| ((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (p + 0x27)]) == gm_CityEntity) {
 		return -1;
 	}
 	kind = *(unsigned char*) p;

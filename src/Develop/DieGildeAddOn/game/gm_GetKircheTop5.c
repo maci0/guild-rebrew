@@ -25,17 +25,18 @@ void __cdecl gm_GetKircheTop5(int* ids, int* vals)
 		vals[i] = 0;
 	}
 	for (i = 0; i < 768; i++) {
-		if ((((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id) != -1 && (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type) < 10 && (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].value_1ac) > vals[4]) {
-			vals[4] = (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].value_1ac);
-			ids[4] = (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_index);
+		if ((((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_id) != -1 && (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_type) < 10 &&
+			(((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].value_1ac) > vals[4]) {
+			vals[4] = (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].value_1ac);
+			ids[4] = (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_index);
 			for (j = 3; j > -1; j--) {
-				if ((((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].value_1ac) <= vals[j] || (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type) >= 10) {
+				if ((((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].value_1ac) <= vals[j] || (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_type) >= 10) {
 					break;
 				}
 				vals[j + 1] = vals[j];
 				ids[j + 1] = ids[j];
-				vals[j] = (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].value_1ac);
-				ids[j] = (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_index);
+				vals[j] = (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].value_1ac);
+				ids[j] = (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_index);
 			}
 		}
 	}

@@ -12,7 +12,7 @@
 
 #include "Develop/client_types.h"
 
-extern int g_67a370;
+extern int d3_ActiveScene;
 extern int g_775280;
 extern char* g_778b20[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -47,15 +47,15 @@ void __cdecl d2_ShowSmapDiagnostics(void)
 	D2_WIN* win;
 
 	w = d2_CreateWindow(0x20, 0x60, 0x280, 0x190, 0x414);
-	d2_SetElementFont(((D2_WIN*)g_1015f40)[w].slot, 0x54);
+	d2_SetElementFont(((D2_WIN*)d2_Windows)[w].slot, 0x54);
 	g_775280 = 0;
-	d3_VisitSceneObjects(((char*)g_67a370), 0, 0x100, (void*) d2_CollectDebugObject, 0);
+	d3_VisitSceneObjects(((char*)d3_ActiveScene), 0, 0x100, (void*) d2_CollectDebugObject, 0);
 	io_AppendText(s_6ab5f8);
 	io_AppendText(s_6ab5cc);
 	for (i = 0; i < g_775280; i++) {
 		memset(buf, 0, sizeof(buf));
 		d2_CurrentWindowId = w;
-		map = *(char**) (((char*)g_67a370) + 0xb0);
+		map = *(char**) (((char*)d3_ActiveScene) + 0xb0);
 		e = g_778b20[i];
 		d3_TransformPoint(e, e + 0x4c, v);
 		if (map != 0 && d3sm_SampleHeight(map, v, &x, &y, &z)) {
@@ -70,10 +70,10 @@ void __cdecl d2_ShowSmapDiagnostics(void)
 		io_AppendText(s_6ab588, g_778b20[i], buf);
 	}
 	if (main_RunFrameLoop((void*) d2_ShowSmapDiagnostics, 0x657c7) != 0) {
-		win = &((D2_WIN*)g_1015f40)[w];
+		win = &((D2_WIN*)d2_Windows)[w];
 		do {
-			if (g_14ce8e0 != 0) {
-				g_774654 = 1;
+			if (io_RightButtonReleased != 0) {
+				d2_DialogCloseRequested = 1;
 			}
 			d2_UpdateWindowDrag((char*)win);
 		} while (main_RunFrameLoop((void*) d2_ShowSmapDiagnostics, 0x657c7) != 0);

@@ -45,7 +45,7 @@ int __cdecl d2_UpdateSelectedControl(void)
 		}
 	}
 	p = *(unsigned int **) &tp_d2_SelectedControl;
-	v7 = (short) *(short *) &g_14ce8c2;
+	v7 = (short) *(short *) &io_ActiveCursorY;
 	if (!g_14ce8d0) {
 		g_7725e4 = 0;
 	}
@@ -55,7 +55,7 @@ int __cdecl d2_UpdateSelectedControl(void)
 		p = *(unsigned int **) &tp_d2_SelectedControl;
 	}
 	if (d2_CurrentElementId != -1) {
-		v8 = (int)&((D2_CONTROL_TL*) *(int *)&g_1015ea0)[d2_CurrentElementId];
+		v8 = (int)&((D2_CONTROL_TL*) *(int *)&d2_Controls)[d2_CurrentElementId];
 		if (*(int *) (v8 + 0x20) == 0x41) {
 			candidateControl = *(unsigned int **) (v8 + 0xc);
 			if (d2_CurrentElementId == (int) candidateControl[0x4d]) {
@@ -66,10 +66,10 @@ int __cdecl d2_UpdateSelectedControl(void)
 					goto label_474afe;
 				}
 				if (p != 0) {
-					((D2_CONTROL_TL*) *(int *)&g_1015ea0)[p[0x4d]].value_03c = 0;
+					((D2_CONTROL_TL*) *(int *)&d2_Controls)[p[0x4d]].value_03c = 0;
 				}
-				((D2_CONTROL_TL*) *(int *)&g_1015ea0)[candidateControl[0x4d]].value_03c = 1;
-				v8 = *(int *)&((D2_CONTROL_TL*) *(int *)&g_1015ea0)[candidateControl[0x4d]].parent;
+				((D2_CONTROL_TL*) *(int *)&d2_Controls)[candidateControl[0x4d]].value_03c = 1;
+				v8 = *(int *)&((D2_CONTROL_TL*) *(int *)&d2_Controls)[candidateControl[0x4d]].parent;
 				g_100f940 = candidateControl[0x4b];
 				g_100f950 = 0;
 				g_100f1d4 = d2_MouseBottomBoundary - v7;
@@ -134,7 +134,7 @@ label_474b14:
 		}
 	}
 label_474b96:
-	if (g_14ce8e0) {
+	if (io_RightButtonReleased) {
 		if (p == 0) {
 			goto label_474ca4;
 		}
@@ -142,7 +142,7 @@ label_474b96:
 			io_ClearInputButtonFlags(0x10);
 			p = *(unsigned int **) &tp_d2_SelectedControl;
 		}
-		((D2_CONTROL_TL*) *(int *)&g_1015ea0)[p[0x4d]].value_03c = 0;
+		((D2_CONTROL_TL*) *(int *)&d2_Controls)[p[0x4d]].value_03c = 0;
 		*(unsigned int **) &tp_d2_SelectedControl = 0;
 		g_7725e4 = 0;
 		if (g_67d8ec == -1) {
@@ -176,7 +176,7 @@ label_474b96:
 label_474ca4:
 	d2_HandleSliderInput();
 	if (d2_CurrentElementId != -1) {
-		v7 = (int)&((D2_CONTROL_TL*) *(int *)&g_1015ea0)[d2_CurrentElementId];
+		v7 = (int)&((D2_CONTROL_TL*) *(int *)&d2_Controls)[d2_CurrentElementId];
 		if (*(unsigned char *) (v7 + 0x1d0) & 0x40) {
 			d2_SetMouseTooltip((void *) (v7 + 0xcc));
 		}

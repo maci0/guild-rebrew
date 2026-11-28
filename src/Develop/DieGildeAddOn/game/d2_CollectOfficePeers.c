@@ -48,9 +48,9 @@ unsigned int __cdecl d2_CollectOfficePeers(char* e, unsigned int max, Sel* out, 
 		if (m >= 3) {
 			break;
 		}
-		if (((ENTITY_RECORD*)g_7f4ca0)[i].entity_index != 0xffff && ((ENTITY_RECORD*)g_7f4ca0)[i].entity_index != *(unsigned short*) e &&
-		    ((ENTITY_RECORD*)g_7f4ca0)[i].unk_165[3] == *(unsigned char*) (e + 0x168)) {
-			pl[m] = &((ENTITY_RECORD*)g_7f4ca0)[i];
+		if (((ENTITY_RECORD*)gm_EntitySlotTable)[i].entity_index != 0xffff && ((ENTITY_RECORD*)gm_EntitySlotTable)[i].entity_index != *(unsigned short*) e &&
+		    ((ENTITY_RECORD*)gm_EntitySlotTable)[i].unk_165[3] == *(unsigned char*) (e + 0x168)) {
+			pl[m] = &((ENTITY_RECORD*)gm_EntitySlotTable)[i];
 			m++;
 		}
 	}

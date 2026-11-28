@@ -3,7 +3,7 @@
 
 #include <string.h>
 
-extern char g_679060[];
+extern char str_fmt_s[];
 
 void __cdecl io_FormatTextBuffer(void* p, ...);
 void __cdecl d2_ShowPrivilegMessage(char* text, int a, int b);

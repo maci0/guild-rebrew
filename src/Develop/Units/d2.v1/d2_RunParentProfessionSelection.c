@@ -13,13 +13,13 @@
 #include "Develop/Units/d3/client_lighting.h"
 
 extern int evt_LastGfxScriptId;
-extern int g_67a370;
+extern int d3_ActiveScene;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int d3_ActiveCameraAnimation;
 extern int d2_ScreenHeight;
 extern int g_1040494;
-extern int g_774654;
-extern int g_7746a0;
+extern int d2_DialogCloseRequested;
+extern int sv_ClickedObjekt;
 extern char g_7e23e3;
 
 typedef struct {
@@ -106,7 +106,7 @@ int __cdecl d2_RunParentProfessionSelection(void)
 	d3_ClearSceneObjectCache();
 	d2_ClearStatusTextSlots();
 	d3_SelectSceneContext(1, 0);
-	base = g_67a370;
+	base = d3_ActiveScene;
 	if (base != 0) {
 		sub = *(int *) (base + 0x3c8);
 		if (sub != 0) {
@@ -116,8 +116,8 @@ int __cdecl d2_RunParentProfessionSelection(void)
 		}
 	}
 	oldSound = evt_LastGfxScriptId;
-	if (g_6b8300 != 0) {
-		base = g_6b8300;
+	if (d3_CurrentFloor != 0) {
+		base = d3_CurrentFloor;
 		*(unsigned char *) (base + 0x8036) =
 		    (unsigned char) ((*(unsigned char *) (base + 0x8036) & 0xeb) | 8);
 	}
@@ -165,10 +165,10 @@ int __cdecl d2_RunParentProfessionSelection(void)
 				}
 				flag = 0;
 			}
-			if (g_14ce8e0 != 0)
-				g_774654 = 1;
-			if (g_7746a0 != 0) {
-				obj2 = (Figure *) *(int *) (g_7746a0 + 0x204);
+			if (io_RightButtonReleased != 0)
+				d2_DialogCloseRequested = 1;
+			if (sv_ClickedObjekt != 0) {
+				obj2 = (Figure *) *(int *) (sv_ClickedObjekt + 0x204);
 				if (obj2 != 0) {
 					if (obj2->slot == -1) {
 						mode = 0;
@@ -216,13 +216,13 @@ slot_found:
 				if (d2_RunChooseTalentDialog()) {
 					if (d2_ShowChooseProfessionDialog(0xc6) &&
 					    d2_ChooseCharacterModel((unsigned char) g_7e23e3)) {
-						g_774654 = 1;
+						d2_DialogCloseRequested = 1;
 						ret = 1;
 					} else if (!ret) {
 						d2_SetFormVisibility(obj, 1);
 					}
 				} else {
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 					ret = 0;
 					d2_SetFormVisibility(obj, 1);
 				}
@@ -261,12 +261,12 @@ slot_found:
 			evt_RequestScriptExit(found);
 		evt_WaitForScriptExit(oldSound);
 	}
-	if (*(int *) (g_67a370 + 0xb0) != 0) {
-		gv_Free3Fields((void *) *(int *) (g_67a370 + 0xb0));
-		*(int *) (g_67a370 + 0xb0) = 0;
+	if (*(int *) (d3_ActiveScene + 0xb0) != 0) {
+		gv_Free3Fields((void *) *(int *) (d3_ActiveScene + 0xb0));
+		*(int *) (d3_ActiveScene + 0xb0) = 0;
 	}
 	d3_DestroySkyLayer();
-	base = g_67a370;
+	base = d3_ActiveScene;
 	if (base != 0) {
 		sub = *(int *) (base + 0x3c8);
 		if (sub != 0) {

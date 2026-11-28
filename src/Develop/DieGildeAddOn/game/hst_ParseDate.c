@@ -2,8 +2,8 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char* txt_TextEntries[];
-extern unsigned char g_773d75;
-extern char g_868080[];
+extern unsigned char gm_ActiveTownIndex;
+extern char gm_CityDisplayNames[];
 
 int __cdecl sprintf(char*, const char*, ...);
 int __cdecl io_FormatTextBuffer(char*, char*, ...);
@@ -160,13 +160,13 @@ int __cdecl hst_ParseDate(int key, int flags, int* out, char* text)
 		} else if ((flags & 2) != 0) {
 			switch (mode) {
 			case 2:
-				io_FormatTextBuffer(text, (char*) 0x680b7c, g_868080 + g_773d75 * 0x2f4, c);
+				io_FormatTextBuffer(text, (char*) 0x680b7c, gm_CityDisplayNames + gm_ActiveTownIndex * 0x2f4, c);
 				break;
 			case 1:
-				io_FormatTextBuffer(text, (char*) 0x680b70, g_868080 + g_773d75 * 0x2f4, b + 0x4f, c);
+				io_FormatTextBuffer(text, (char*) 0x680b70, gm_CityDisplayNames + gm_ActiveTownIndex * 0x2f4, b + 0x4f, c);
 				break;
 			case 0:
-				io_FormatTextBuffer(text, (char*) 0x680b60, g_868080 + g_773d75 * 0x2f4, a, b + 0x4f, c);
+				io_FormatTextBuffer(text, (char*) 0x680b60, gm_CityDisplayNames + gm_ActiveTownIndex * 0x2f4, a, b + 0x4f, c);
 				break;
 			}
 		}

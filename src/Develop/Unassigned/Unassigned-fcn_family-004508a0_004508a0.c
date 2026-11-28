@@ -20,9 +20,9 @@ typedef struct D3_FLICKER_OBJ {
 	char pad6c[0x1e8 - 0x6c];
 	D3_FLICKER_ANIM* anim;
 } D3_FLICKER_OBJ;
-extern char* g_6b86e8;
-extern int g_6b8708;
-extern int g_6b8704;
+extern char* d3_SceneLightListHead;
+extern int d3_LightSortCount;
+extern int d3_MaxLightListCount;
 
 void __cdecl d3_UpdateLightFlicker(char* p);
 
@@ -73,7 +73,7 @@ void __cdecl d3_UpdateSceneLightFlickers(void)
 {
 	char* p;
 
-	for (p = g_6b86e8; p != 0 && g_6b8708 < g_6b8704; p = *(char**) (p + 0x1f0)) {
+	for (p = d3_SceneLightListHead; p != 0 && d3_LightSortCount < d3_MaxLightListCount; p = *(char**) (p + 0x1f0)) {
 		if (*(int*) (p + 0x218) == 6) {
 			d3_UpdateLightFlicker(p);
 		}

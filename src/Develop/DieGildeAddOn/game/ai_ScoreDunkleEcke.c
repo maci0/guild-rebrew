@@ -6,7 +6,7 @@ typedef struct Blk24 {
 } Blk24;
 // SIZE 0x18
 
-extern unsigned short g_7f4c04;
+extern unsigned short gm_GameTimeHour;
 
 int __cdecl gm_CheckStatLevel(int, int);
 int __cdecl gm_GetOppositeStatIndex(int job);
@@ -37,7 +37,7 @@ int __cdecl ai_ScoreDunkleEcke(float* o1, float* o2, int a3, unsigned short* e, 
 		}
 		return 0;
 	}
-	if (g_7f4c04 < 0x14) {
+	if (gm_GameTimeHour < 0x14) {
 		return 0;
 	}
 	return ai_ComputeBaseActionScore(o1, o2, a3, e, 0, firstResult, secondResult);

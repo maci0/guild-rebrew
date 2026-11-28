@@ -49,8 +49,8 @@ int __cdecl gm_BoostRandomBuildingLevel(int* request)
 		return 0x400;
 	chosen = ents[gm_RandomMod(n)];
 	for (i = 0; i < 768; i++) {
-		if ((*(char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type) == 1 && (*(char**)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].ptr_16c) == chosen) {
-			rec = (char*) ((Ent*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]);
+		if ((*(char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_type) == 1 && (*(char**)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].ptr_16c) == chosen) {
+			rec = (char*) ((Ent*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i]);
 			break;
 		}
 	}

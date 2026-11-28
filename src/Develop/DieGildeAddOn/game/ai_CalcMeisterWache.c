@@ -1,9 +1,9 @@
 #include <string.h>
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_100dc20;
+extern int ai_MeisterDebugState;
 extern int g_100dc24;
-extern int g_7747b4;
+extern int gm_DifficultyLevel;
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 void *__cdecl fcn_00502cd0(int, int, int, int, int);
@@ -54,7 +54,7 @@ void __cdecl ai_CalcMeisterWache(char *meister)
 
 	res = fcn_00502cd0(*(int *) (*(int *) (meister + 0x16c) + 0x5d), 2, 6, 0, 0x2a);
 	if (res != 0) {
-		g_100b0ac = 0;
+		ai_ProductionGoodsCount = 0;
 		ai_ResourceCount = 0;
 		ai_CollectGoodsResources(meister, res);
 		ai_PlanMeisterSupplies(meister, res, *(int *) (*(int *) (meister + 0x16c) + 0x39));
@@ -106,7 +106,7 @@ void __cdecl ai_CalcMeisterWache(char *meister)
 			count++;
 		}
 	}
-	if (g_100dc20 == *(int *) (meister + 0x16c)) {
+	if (ai_MeisterDebugState == *(int *) (meister + 0x16c)) {
 		g_100dc34 = count;
 		if (*(int *) (meister + 0x1c0) != -1) {
 			g_100dc24 = (int) gm_SearchTable67(*(int *) (meister + 0x1c0));
@@ -129,7 +129,7 @@ void __cdecl ai_CalcMeisterWache(char *meister)
 		}
 	} else {
 		if (gm_RandomFloat01() > 0.85) {
-			if (count >= 3 && gm_GameTime.a >= 7 - g_7747b4) {
+			if (count >= 3 && gm_GameTime.a >= 7 - gm_DifficultyLevel) {
 				cand = ai_CalcAngriff(meister, count);
 				if (cand != 0) {
 					goto umland;

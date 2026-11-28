@@ -2,11 +2,11 @@
 
 struct VFS_DIR;
 
-extern struct VFS_DIR* g_6b7fdc;
+extern struct VFS_DIR* vfs_RootDir;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern ALCHEMY_PLAYER_PROTOTYPE* g_772fdc;
+extern ALCHEMY_PLAYER_PROTOTYPE* ahm_PlayerPrototypes;
 extern int g_772fe0;
-extern ALCHEMY_RECIPE_PROTOTYPE* g_772fe4;
+extern ALCHEMY_RECIPE_PROTOTYPE* ahm_RecipePrototypes;
 
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
 unsigned int __cdecl vfs_ReadData(char* buf, unsigned int size, unsigned int count, void* f);
@@ -25,7 +25,7 @@ int __cdecl ahm_LoadAlchemyData(void)
 	int i;
 	int off;
 
-	f = vfs_Tfopen("/gamedata/ai/alchemy.dfn", "rb", g_6b7fdc);
+	f = vfs_Tfopen("/gamedata/ai/alchemy.dfn", "rb", vfs_RootDir);
 	if (f == 0) {
 		goto done;
 	}
@@ -41,32 +41,32 @@ int __cdecl ahm_LoadAlchemyData(void)
 	if (ahm_PlayerPrototypeCount < 1 || ahm_PlayerPrototypeCount > 100) {
 		goto fail;
 	}
-	if (g_772fdc != 0) {
-		m_FreeTracked(g_772fdc);
-		g_772fdc = 0;
+	if (ahm_PlayerPrototypes != 0) {
+		m_FreeTracked(ahm_PlayerPrototypes);
+		ahm_PlayerPrototypes = 0;
 	}
-	g_772fdc = (ALCHEMY_PLAYER_PROTOTYPE*) m_alloc(ahm_PlayerPrototypeCount * 12, "ahm_AllocPlayerPrototypes");
-	if (g_772fdc == 0) {
+	ahm_PlayerPrototypes = (ALCHEMY_PLAYER_PROTOTYPE*) m_alloc(ahm_PlayerPrototypeCount * 12, "ahm_AllocPlayerPrototypes");
+	if (ahm_PlayerPrototypes == 0) {
 		goto fail;
 	}
 	for (i = 0; i < ahm_PlayerPrototypeCount; i++) {
 		off = i * 12;
-		if (vfs_ReadData((char*) g_772fdc + off, 1, 1, f) <= 0) {
+		if (vfs_ReadData((char*) ahm_PlayerPrototypes + off, 1, 1, f) <= 0) {
 			goto fail;
 		}
-		if (vfs_ReadData((char*) g_772fdc + off + 1, 1, 1, f) <= 0) {
+		if (vfs_ReadData((char*) ahm_PlayerPrototypes + off + 1, 1, 1, f) <= 0) {
 			goto fail;
 		}
-		if (vfs_ReadData((char*) g_772fdc + off + 2, 1, 1, f) <= 0) {
+		if (vfs_ReadData((char*) ahm_PlayerPrototypes + off + 2, 1, 1, f) <= 0) {
 			goto fail;
 		}
-		if (vfs_ReadData((char*) g_772fdc + off + 3, 1, 1, f) <= 0) {
+		if (vfs_ReadData((char*) ahm_PlayerPrototypes + off + 3, 1, 1, f) <= 0) {
 			goto fail;
 		}
-		if (vfs_ReadData((char*) g_772fdc + off + 4, 1, 1, f) <= 0) {
+		if (vfs_ReadData((char*) ahm_PlayerPrototypes + off + 4, 1, 1, f) <= 0) {
 			goto fail;
 		}
-		if (vfs_ReadData((char*) g_772fdc + off + 8, 4, 1, f) <= 0) {
+		if (vfs_ReadData((char*) ahm_PlayerPrototypes + off + 8, 4, 1, f) <= 0) {
 			goto fail;
 		}
 	}
@@ -76,23 +76,23 @@ int __cdecl ahm_LoadAlchemyData(void)
 	if (g_772fe0 < 1 || g_772fe0 > 100) {
 		goto fail;
 	}
-	if (g_772fe4 != 0) {
-		m_FreeTracked(g_772fe4);
-		g_772fe4 = 0;
+	if (ahm_RecipePrototypes != 0) {
+		m_FreeTracked(ahm_RecipePrototypes);
+		ahm_RecipePrototypes = 0;
 	}
-	g_772fe4 = (ALCHEMY_RECIPE_PROTOTYPE*) m_alloc(g_772fe0 * 12, "ahm_AllocRecipePrototypes");
-	if (g_772fe4 == 0) {
+	ahm_RecipePrototypes = (ALCHEMY_RECIPE_PROTOTYPE*) m_alloc(g_772fe0 * 12, "ahm_AllocRecipePrototypes");
+	if (ahm_RecipePrototypes == 0) {
 		goto fail;
 	}
 	for (i = 0; i < g_772fe0; i++) {
 		off = i * 12;
-		if (vfs_ReadData((char*) g_772fe4 + off, 4, 1, f) <= 0) {
+		if (vfs_ReadData((char*) ahm_RecipePrototypes + off, 4, 1, f) <= 0) {
 			goto fail;
 		}
-		if (vfs_ReadData((char*) g_772fe4 + off + 4, 4, 1, f) <= 0) {
+		if (vfs_ReadData((char*) ahm_RecipePrototypes + off + 4, 4, 1, f) <= 0) {
 			goto fail;
 		}
-		if (vfs_ReadData((char*) g_772fe4 + off + 8, 4, 1, f) <= 0) {
+		if (vfs_ReadData((char*) ahm_RecipePrototypes + off + 8, 4, 1, f) <= 0) {
 			goto fail;
 		}
 	}
@@ -102,13 +102,13 @@ int __cdecl ahm_LoadAlchemyData(void)
 fail:
 	CloseVfsStream(f);
 done:
-	if (g_772fdc != 0) {
-		m_FreeTracked(g_772fdc);
-		g_772fdc = 0;
+	if (ahm_PlayerPrototypes != 0) {
+		m_FreeTracked(ahm_PlayerPrototypes);
+		ahm_PlayerPrototypes = 0;
 	}
-	if (g_772fe4 != 0) {
-		m_FreeTracked(g_772fe4);
-		g_772fe4 = 0;
+	if (ahm_RecipePrototypes != 0) {
+		m_FreeTracked(ahm_RecipePrototypes);
+		ahm_RecipePrototypes = 0;
 	}
 	g_772fe0 = 0;
 	ahm_PlayerPrototypeCount = 0;

@@ -4,7 +4,7 @@
 #include <string.h>
 
 extern char* g_6b5de0;
-extern int g_14ce728;
+extern int d3_LastReleaseRefCount;
 
 void __cdecl d3_UpdateFloorLighting(char* a0);
 long __stdcall D3DXCreateMeshFVF(int a0, int a1, int a2, int a3, char* a4, char* a5);
@@ -41,7 +41,7 @@ void __cdecl d3_RebuildFloorMeshes(char* terrainObject)
 			do {
 				n = *(int*) q;
 				if (n != 0) {
-					g_14ce728 = (*(int (__stdcall**)(int))
+					d3_LastReleaseRefCount = (*(int (__stdcall**)(int))
 					    (*(int*) n + 8))(n);
 					*(int*) q = 0;
 				}
@@ -86,7 +86,7 @@ void __cdecl d3_RebuildFloorMeshes(char* terrainObject)
 				}
 				srf2 = q + 4;
 				if (*(int*) srf2 != 0) {
-					g_14ce728 = (*(int (__stdcall**)(int))
+					d3_LastReleaseRefCount = (*(int (__stdcall**)(int))
 					    (*(int*) *(int*) srf2 + 8))
 					    (*(int*) srf2);
 					*(int*) srf2 = 0;

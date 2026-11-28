@@ -25,7 +25,7 @@ typedef struct Rec {
 #include "Develop/DieGildeAddOn/game/goods_plan.h"
 
 extern char* lpObjektePROT;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 float __cdecl gm_GetSeasonPrice(int id, unsigned char k);
 float __cdecl gm_CalcGoodBaseValue(int id);
@@ -40,12 +40,12 @@ void __cdecl ai_CalcProductionGoodProfit(PRODUCTION_GOODS_RECORD* good)
 		good->sum = 0;
 		for (i = 0; i < 4; i++) {
 			if (good->building_indices[i] >= 0) {
-				ingredient = &g_100b0c0[good->building_indices[i]];
+				ingredient = &ai_ResourceRequests[good->building_indices[i]];
 				if (!(ingredient->price > -10000000000.0)) {
 					if (ingredient->parent_index != -1) {
-						ingredient->price = (float)(gm_GetSeasonPrice(ingredient->goods_id, g_773d75) * 0.9);
+						ingredient->price = (float)(gm_GetSeasonPrice(ingredient->goods_id, gm_ActiveTownIndex) * 0.9);
 					} else {
-						ingredient->price = gm_GetSeasonPrice(ingredient->goods_id, g_773d75);
+						ingredient->price = gm_GetSeasonPrice(ingredient->goods_id, gm_ActiveTownIndex);
 					}
 				}
 				good->sum += ((OBJECT_PROTOTYPE*)lpObjektePROT)[good->goods_id].ingredient_amounts[i] * ingredient->price;
@@ -54,7 +54,7 @@ void __cdecl ai_CalcProductionGoodProfit(PRODUCTION_GOODS_RECORD* good)
 		good->sum = good->sum / ((OBJECT_PROTOTYPE*)lpObjektePROT)[good->goods_id].value_036;
 		good->base = gm_CalcGoodBaseValue(good->goods_id);
 		good->value = good->base + good->sum;
-		good->price = gm_GetSeasonPrice(good->goods_id, g_773d75);
+		good->price = gm_GetSeasonPrice(good->goods_id, gm_ActiveTownIndex);
 		good->slope = (good->price - good->value) / ((OBJECT_PROTOTYPE*)lpObjektePROT)[good->goods_id].value_022;
 	}
 }

@@ -23,7 +23,7 @@ typedef struct AI_LEVEL_TRAINING_MSG {
 } AI_LEVEL_TRAINING_MSG;                /* SIZE 0xf8 */
 
 extern float g_664150;
-extern char g_7f4ca2[1];
+extern char gm_SlotTableKindView[1];
 
 void* __cdecl gm_LookupEntityRecordById(unsigned int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
@@ -77,7 +77,7 @@ void __cdecl ai_ScheduleLevelTraining(void)
 		add ecx, ebx
 		rep stosb
 	}
-	rec = (unsigned char*) g_7f4ca2;
+	rec = (unsigned char*) gm_SlotTableKindView;
 	slot = flags;
 	do {
 		if (!*slot) {

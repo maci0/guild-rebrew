@@ -23,7 +23,7 @@
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 #include "Develop/client_types.h"
 #include "he_tables.h"
-extern HE_AP_EVENT g_7dcae0[256];	/* 0x007dcae0 */
+extern HE_AP_EVENT he_ApEvents[256];	/* 0x007dcae0 */
 
 #pragma pack(2)
 typedef struct {
@@ -56,21 +56,21 @@ typedef struct {
 	char pad60[0x1c];
 } Ev;					/* 0x7c */
 
-extern int g_774970;			/* 0x00774970 */
-extern unsigned char g_7747b0;		/* 0x007747b0 */
+extern int gm_LocalPlayerSlot;			/* 0x00774970 */
+extern unsigned char gm_ClientModeFlags;		/* 0x007747b0 */
 extern int g_774950;			/* 0x00774950 */
 extern int g_774978;			/* 0x00774978 */
 extern int g_7747f0;			/* 0x007747f0 */
 extern unsigned char g_77670b;		/* 0x0077670b */
-extern signed char g_6a3440;		/* 0x006a3440 */
+extern signed char gm_SelectedMissionIndex;		/* 0x006a3440 */
 extern int g_6a3420;			/* 0x006a3420 */
 extern int g_6a25b8;			/* 0x006a25b8 */
 extern int d2_CurrentWindowId;			/* 0x00772514 */
-extern unsigned char g_773d75;		/* 0x00773d75 */
+extern unsigned char gm_ActiveTownIndex;		/* 0x00773d75 */
 extern int g_7e4314;			/* 0x007e4314 */
 extern int g_1007cd0;			/* 0x01007cd0 */
 extern pos14_7f4c00 gm_GameTime;		/* 0x007f4c00 */
-extern char g_7f4ca0[];			/* slot table, stride 0x21c */
+extern char gm_EntitySlotTable[];			/* slot table, stride 0x21c */
 extern unsigned char* lpGebaeudePROT;		/* entity type table */
 extern float g_696540[];
 extern float g_696550[];
@@ -90,8 +90,8 @@ extern int g_6a3770;
 extern int g_6a42f8;
 extern int g_6a42fc;
 extern int g_6a4300;
-extern int g_100f1dc;
-extern unsigned char g_14cf950[];
+extern int d2_DialogButtonAction;
+extern unsigned char io_LastKeyScancode[];
 
 int __cdecl fcn_00509570(void*);
 int __cdecl gm_GetSeason(int*);
@@ -151,7 +151,7 @@ char* __cdecl ch_CreateAction(void*, int, ...);
 void __cdecl amt_NotifyLowRankEligibility(void*);
 void __cdecl fcn_004c2d90(float, int);
 
-#define SLOTPTR(k) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[(k)])
+#define SLOTPTR(k) ((char *)&((ENTITY_RECORD*)gm_EntitySlotTable)[(k)])
 #define SLOT4(k) (*(int *) (SLOTPTR(k) + 4))
 #define ENTTYPE(t) (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(t)].category)
 #define ENTCLASS(t) (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(t)].level)
@@ -176,14 +176,14 @@ void __cdecl gm_BeginPlayerTurn(void)
 	int n;
 	int w;
 
-	v5 = (unsigned char*) fcn_00509570(SLOTPTR(g_774970 & 0xffff));
+	v5 = (unsigned char*) fcn_00509570(SLOTPTR(gm_LocalPlayerSlot & 0xffff));
 	hp = 0;
 	gm_GetSeason((int*) &gm_GameTime);
 	pos.clock.a = gm_GameTime.a;
 	pos.clock.b = gm_GameTime.b;
 	pos.clock.c = gm_GameTime.c;
 	pos.clock.d = gm_GameTime.d;
-	if ((g_7747b0 & 4) && (g_774950 > 1)) {
+	if ((gm_ClientModeFlags & 4) && (g_774950 > 1)) {
 		pos.clock.a++;
 	}
 	season = gm_QuerySeason((pos14_7f4c00*) &pos);
@@ -207,11 +207,11 @@ void __cdecl gm_BeginPlayerTurn(void)
 			d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0x32, 0xa);
 		}
 	}
-	if (g_7747b0 & 4) {
+	if (gm_ClientModeFlags & 4) {
 		sv_WaitForNetworkSync(0x24087);
 	}
 
-	gm_BuildDealSummary(g_774970 & 0xffff, arr);
+	gm_BuildDealSummary(gm_LocalPlayerSlot & 0xffff, arr);
 	gm_UpdateDaylightSchedule((pos14_7f4c00*) &pos);
 	g_7e4314 = gm_QuerySeason((pos14_7f4c00*) &pos);
 	gm_FindRichestEntity(&pos.out, &i);
@@ -224,10 +224,10 @@ void __cdecl gm_BeginPlayerTurn(void)
 	}
 	tb_SetCallbackPaused(0x538060, 1);
 
-	if ((g_7747b0 & 0x80) == 0) {
+	if ((gm_ClientModeFlags & 0x80) == 0) {
 		if (he_StartHandlungSearch(1, 0, 0x66) == 0) {
 			memset(evs, 0, sizeof(evs));
-			evs[0].ent = SLOT4(g_774970 & 0xffff);
+			evs[0].ent = SLOT4(gm_LocalPlayerSlot & 0xffff);
 			evs[0].year = gm_GameTime.a;
 			evs[0].id = 0x66;
 			evs[0].kind = -1;
@@ -239,7 +239,7 @@ void __cdecl gm_BeginPlayerTurn(void)
 		}
 		if (he_StartHandlungSearch(1, 0, 0x70) == 0) {
 			memset(evs, 0, sizeof(evs));
-			evs[0].ent = SLOT4(g_774970 & 0xffff);
+			evs[0].ent = SLOT4(gm_LocalPlayerSlot & 0xffff);
 			evs[0].year = gm_GameTime.a;
 			evs[0].id = 0x70;
 			evs[0].kind = -1;
@@ -251,7 +251,7 @@ void __cdecl gm_BeginPlayerTurn(void)
 		}
 		if (he_StartHandlungSearch(1, 0, 0x68) == 0) {
 			memset(evs, 0, sizeof(evs));
-			evs[0].ent = SLOT4(g_774970 & 0xffff);
+			evs[0].ent = SLOT4(gm_LocalPlayerSlot & 0xffff);
 			evs[0].year = gm_GameTime.a;
 			evs[0].id = 0x68;
 			evs[0].kind = -1;
@@ -265,7 +265,7 @@ void __cdecl gm_BeginPlayerTurn(void)
 	if (g_7747f0 != 0) {
 		if (he_StartHandlungSearch(1, 0, 0x85) == 0) {
 			memset(evs, 0, sizeof(evs));
-			evs[0].ent = SLOT4(g_774970 & 0xffff);
+			evs[0].ent = SLOT4(gm_LocalPlayerSlot & 0xffff);
 			evs[0].year = gm_GameTime.a;
 			evs[0].id = 0x85;
 			evs[0].kind = -1;
@@ -278,7 +278,7 @@ void __cdecl gm_BeginPlayerTurn(void)
 	}
 	if (he_StartHandlungSearch(1, 0, 0x7c) == 0) {
 		memset(evs, 0, sizeof(evs));
-		evs[0].ent = SLOT4(g_774970 & 0xffff);
+		evs[0].ent = SLOT4(gm_LocalPlayerSlot & 0xffff);
 		evs[0].year = gm_GameTime.a;
 		evs[0].id = 0x7c;
 		evs[0].kind = -1;
@@ -290,7 +290,7 @@ void __cdecl gm_BeginPlayerTurn(void)
 	}
 	if (he_StartHandlungSearch(1, 0, 0x93) == 0) {
 		memset(evs, 0, sizeof(evs));
-		evs[0].ent = SLOT4(g_774970 & 0xffff);
+		evs[0].ent = SLOT4(gm_LocalPlayerSlot & 0xffff);
 		evs[0].year = gm_GameTime.a;
 		evs[0].id = 0x93;
 		evs[0].kind = -1;
@@ -302,7 +302,7 @@ void __cdecl gm_BeginPlayerTurn(void)
 	}
 	if (he_StartHandlungSearch(1, 0, 0x84) == 0 && g_77670b != 0) {
 		memset(evs, 0, sizeof(evs));
-		evs[0].ent = SLOT4(g_774970 & 0xffff);
+		evs[0].ent = SLOT4(gm_LocalPlayerSlot & 0xffff);
 		evs[0].year = gm_GameTime.a;
 		evs[0].id = 0x84;
 		evs[0].kind = -1;
@@ -327,34 +327,34 @@ void __cdecl gm_BeginPlayerTurn(void)
 		fcn_00519190(0x2051, &pos, (int) g_696540[season],
 			     (int) g_696550[season] % 12);
 		fcn_00519190(0x1ef9);
-		fcn_00519190(0x1eff, *(int*) (SLOTPTR(g_774970 & 0xffff) + 0x190));
+		fcn_00519190(0x1eff, *(int*) (SLOTPTR(gm_LocalPlayerSlot & 0xffff) + 0x190));
 		i = 0;
 		while (i < 0x100) {
-			if ((g_7dcae0[i].value_08 != 0
-			     || g_7dcae0[i].value_0c != 0
-			     || g_7dcae0[i].name[0] != 0)
-			    && g_7dcae0[i].subject_id == (g_774970 & 0xffff)) {
-				if (g_7dcae0[i].value_08 != 0) {
-					if (g_7dcae0[i].value_08 >= 0) {
+			if ((he_ApEvents[i].value_08 != 0
+			     || he_ApEvents[i].value_0c != 0
+			     || he_ApEvents[i].name[0] != 0)
+			    && he_ApEvents[i].subject_id == (gm_LocalPlayerSlot & 0xffff)) {
+				if (he_ApEvents[i].value_08 != 0) {
+					if (he_ApEvents[i].value_08 >= 0) {
 						fcn_00519190(0x1efc,
-							     g_7dcae0[i].name,
-							     g_7dcae0[i].value_08);
+							     he_ApEvents[i].name,
+							     he_ApEvents[i].value_08);
 					} else {
 						fcn_00519190(0x1efb,
-							     g_7dcae0[i].name,
-							     g_7dcae0[i].value_08);
+							     he_ApEvents[i].name,
+							     he_ApEvents[i].value_08);
 					}
-				} else if (g_7dcae0[i].value_0c > 0) {
+				} else if (he_ApEvents[i].value_0c > 0) {
 					fcn_00519190(0x1efe,
-						     g_7dcae0[i].name,
-						     g_7dcae0[i].value_0c);
-				} else if (g_7dcae0[i].value_0c < 0) {
+						     he_ApEvents[i].name,
+						     he_ApEvents[i].value_0c);
+				} else if (he_ApEvents[i].value_0c < 0) {
 					fcn_00519190(0x1efd,
-						     g_7dcae0[i].name,
-						     g_7dcae0[i].value_0c);
+						     he_ApEvents[i].name,
+						     he_ApEvents[i].value_0c);
 				} else {
 					fcn_00519190(0x1efb,
-						     g_7dcae0[i].name);
+						     he_ApEvents[i].name);
 				}
 			}
 			i++;
@@ -365,9 +365,9 @@ void __cdecl gm_BeginPlayerTurn(void)
 			}
 			fcn_00519190(0x1efd, arr[4 + i * 5] + 0x253, *(int*) (arr + 5 + i * 5));
 		}
-		fcn_00519190(0x1efa, *(int*) (SLOTPTR(g_774970 & 0xffff) + 0x194));
+		fcn_00519190(0x1efa, *(int*) (SLOTPTR(gm_LocalPlayerSlot & 0xffff) + 0x194));
 		while (main_RunFrameLoop(0x540020, 0x24087) != 0) {
-			if (g_100f1dc == 2 || g_14cf950[0] == 0x1c) {
+			if (d2_DialogButtonAction == 2 || io_LastKeyScancode[0] == 0x1c) {
 				*(int*) 0x774654 = 1;
 			}
 		}
@@ -378,11 +378,11 @@ void __cdecl gm_BeginPlayerTurn(void)
 		d2_DestroyScrollPerga();
 		d2_ClearBackdropResource();
 	}
-	cm_RequestTransferCurrencyNoKill(-1, SLOT4(g_774970 & 0xffff), g_773d75,
-		     -he_SumEventCostsForSubject(g_774970 & 0xffff));
-	gm_SendRandomTurnEvents(3, SLOT4(g_774970 & 0xffff));
+	cm_RequestTransferCurrencyNoKill(-1, SLOT4(gm_LocalPlayerSlot & 0xffff), gm_ActiveTownIndex,
+		     -he_SumEventCostsForSubject(gm_LocalPlayerSlot & 0xffff));
+	gm_SendRandomTurnEvents(3, SLOT4(gm_LocalPlayerSlot & 0xffff));
 	cm_RequestSysMessage(1, 0);
-	if (g_7747b0 & 4) {
+	if (gm_ClientModeFlags & 4) {
 		sv_WaitForNetworkSync(0x24087);
 	}
 	g_1040488 = g_6a376c;
@@ -401,12 +401,12 @@ void __cdecl gm_BeginPlayerTurn(void)
 	if (g_6a25b8 != -1) {
 		d2_SetFormVisibility(g_6a25b8, 1);
 	}
-	if (g_6a3440 != 5 && g_6a3440 > -1) {
-		if (he_StartHandlungSearch(2, 0, 0x4c, 2, g_774970 & 0xffff) == 0) {
+	if (gm_SelectedMissionIndex != 5 && gm_SelectedMissionIndex > -1) {
+		if (he_StartHandlungSearch(2, 0, 0x4c, 2, gm_LocalPlayerSlot & 0xffff) == 0) {
 			memset(evs, 0, sizeof(evs));
 			evs[0].id = 0x4c;
-			evs[0].ent = SLOT4(g_774970 & 0xffff);
-			evs[0].kind = SLOT4(g_774970 & 0xffff);
+			evs[0].ent = SLOT4(gm_LocalPlayerSlot & 0xffff);
+			evs[0].kind = SLOT4(gm_LocalPlayerSlot & 0xffff);
 			evs[0].f10 = 0;
 			evs[0].f14 = 0;
 			evs[0].year = gm_GameTime.a;
@@ -418,7 +418,7 @@ void __cdecl gm_BeginPlayerTurn(void)
 		}
 	}
 
-	if (g_7747b0 & 8) {
+	if (gm_ClientModeFlags & 8) {
 		char* p;
 
 		p = (char*) fcn_00503fe0(1, 0, 0x44);
@@ -487,7 +487,7 @@ void __cdecl gm_BeginPlayerTurn(void)
 							evs[0].ent = SLOT4(i);
 							evs[0].f58 = *(int*) ((char*) obj + 1);
 							cm_SendLogAction(0x67e330);
-							cm_RequestMoveCredits(-1, SLOT4(i), g_773d75,
+							cm_RequestMoveCredits(-1, SLOT4(i), gm_ActiveTownIndex,
 								     (int) (*(float*) &agebits));
 							cm_SendCopyEntityData(&evs[0]);
 							cm_SendTraceEnd(0x67e330);
@@ -595,13 +595,13 @@ next2:
 				}
 			}
 		}
-		if ((g_7747b0 & 8) && *(char**) (SLOTPTR(i) + 0x184) != 0
+		if ((gm_ClientModeFlags & 8) && *(char**) (SLOTPTR(i) + 0x184) != 0
 		    && *(unsigned char*) (SLOTPTR(i) + 2) == 0x0d && *(int*) (SLOTPTR(i) + 0x17c) == 0) {
 			cm_RequestKillSpieler(*(int*) (SLOTPTR(i) + 4), 1);
 		}
 	}
 
 	g_1007cd0 = 1;
-	amt_NotifyLowRankEligibility(SLOTPTR(g_774970 & 0xffff));
+	amt_NotifyLowRankEligibility(SLOTPTR(gm_LocalPlayerSlot & 0xffff));
 	fcn_004c2d90(1.0f, 0x7d0);
 }

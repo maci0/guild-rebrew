@@ -5,10 +5,10 @@
 
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern unsigned short g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
-extern unsigned char g_773d75;
+extern unsigned short gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
+extern unsigned char gm_ActiveTownIndex;
 extern float g_66414c;
 extern char g_67e968[];
 
@@ -30,12 +30,12 @@ int __cdecl ai_RunSculpture(char* a1, char* a2, char* a3)
 		*(int*) (msg + 0xc) = *(int*) (a3 + 4);
 		msg[0x36] = 1;
 		*(int*) (msg + 0x28) = (*(int*)&gm_GameTime);
-		*(int*) (msg + 0x2c) = (*(int*)&g_7f4c04);
-		*(int*) (msg + 0x30) = g_7f4c08;
-		*(short*) (msg + 0x34) = g_7f4c0c;
+		*(int*) (msg + 0x2c) = (*(int*)&gm_GameTimeHour);
+		*(int*) (msg + 0x30) = gm_GameTimeSliceDword;
+		*(short*) (msg + 0x34) = gm_GameTimeTailWord;
 		*(int*) (msg + 0x58) = *(int*) (a3 + 4);
 		cm_SendLogAction(g_67e968);
-		cm_RequestMoveCredits(-1, *(int*) (a1 + 4), (*(char*)&g_773d75), (int) (gm_GetTypeProductValue(*(int*) (a2 + 4)) * 0.3f));
+		cm_RequestMoveCredits(-1, *(int*) (a1 + 4), (*(char*)&gm_ActiveTownIndex), (int) (gm_GetTypeProductValue(*(int*) (a2 + 4)) * 0.3f));
 		cm_SendCopyEntityData(msg);
 		cm_SendTraceEnd(g_67e968);
 		return 0x43;

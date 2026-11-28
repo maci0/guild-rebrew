@@ -4,7 +4,7 @@ void __cdecl d2_ClearOverlaySprites(void)
 {
     char** p;
     /* Native comparison treats the cursor addresses as signed 32-bit values. */
-    for (p = g_1015ec0; (int)p < (int)(g_1015ec0 + 32); p++) {
+    for (p = d2_OverlaySprites; (int)p < (int)(d2_OverlaySprites + 32); p++) {
         if (*p != 0) {
             d2_FreeOverlaySprite(*p);
             *p = 0;

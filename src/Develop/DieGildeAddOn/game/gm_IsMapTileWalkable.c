@@ -1,7 +1,7 @@
 
 
 
-extern int g_67a370;
+extern int d3_ActiveScene;
 
 int __cdecl gm_IsMapTileWalkable(int x, int y)
 {
@@ -9,7 +9,7 @@ int __cdecl gm_IsMapTileWalkable(int x, int y)
 	int n;
 	int v;
 
-	m = *(char**) (((char*)g_67a370) + 0xb0);
+	m = *(char**) (((char*)d3_ActiveScene) + 0xb0);
 	n = *(int*) (m + 0x20);
 	if (x > n || x < 0 || y < 0 || y > n) {
 		return 0;

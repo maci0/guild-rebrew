@@ -27,9 +27,9 @@ typedef struct {
 
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern unsigned short g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
+extern unsigned short gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
 
 void __cdecl cm_SendCopyEntityData(Msg*);
 
@@ -42,9 +42,9 @@ void __cdecl amt_SendAction0x45(char* owner, char* target, int mode)
 	msg.owner = *(int*) (owner + 4);
 	msg.entity = -1;
 	msg.timestamp.a = (*(int*)&gm_GameTime);
-	msg.timestamp.b = (*(int*)&g_7f4c04);
-	msg.timestamp.c = g_7f4c08;
-	msg.timestamp.d = g_7f4c0c;
+	msg.timestamp.b = (*(int*)&gm_GameTimeHour);
+	msg.timestamp.c = gm_GameTimeSliceDword;
+	msg.timestamp.d = gm_GameTimeTailWord;
 	msg.flag = 2;
 	msg.v58 = *(int*) (owner + 4);
 	msg.v5c = *(int*) (target + 4);

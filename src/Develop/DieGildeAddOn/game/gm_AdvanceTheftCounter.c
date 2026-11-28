@@ -2,7 +2,7 @@
 
 #include "Develop/client_types.h"
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 extern pos14_7f4c00 gm_GameTime;
 extern int d3_CurrentContextIndex;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
@@ -19,7 +19,7 @@ extern void __cdecl cm_SendCopyEntityData(void*);
 extern unsigned short __cdecl gm_RandomMod(int);
 extern void __cdecl gm_AddTime(void*, int, int, int);
 extern char s_6903e8[];
-extern unsigned char g_6a375c;
+extern unsigned char gm_PlayerCount;
 
 #pragma optimize("y", off)
 
@@ -39,7 +39,7 @@ void __cdecl gm_AdvanceTheftCounter(unsigned int entityIndex)
 	int v;
 	int limit;
 
-	slot = (char*) &((ENTITY_RECORD*) g_7f4ca0)[entityIndex & 0xffff];
+	slot = (char*) &((ENTITY_RECORD*) gm_EntitySlotTable)[entityIndex & 0xffff];
 	if (*(unsigned short*) slot == 0xffff) {
 		return;
 	}
@@ -127,7 +127,7 @@ void __cdecl gm_AdvanceTheftCounter(unsigned int entityIndex)
 		other = (char*) 0x7f4ca2;
 		v = 0;
 		do {
-			if (v >= g_6a375c) {
+			if (v >= gm_PlayerCount) {
 				return;
 			}
 			if ((*other == 6 || *other == 7) && other - 2 != slot) {

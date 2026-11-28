@@ -27,6 +27,6 @@ typedef struct HE_ACTION {
 	char unk_ac[0xa0];
 } HE_ACTION;
 
-extern HE_ACTION g_77e980[1024];
+extern HE_ACTION he_ActionSlots[1024];
 
 #endif

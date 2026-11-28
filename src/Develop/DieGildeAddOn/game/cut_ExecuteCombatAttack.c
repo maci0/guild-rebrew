@@ -18,11 +18,11 @@ typedef struct {
 	unsigned int p28;
 } Ev_4d89c0;
 
-extern int g_67a370;
+extern int d3_ActiveScene;
 extern char* g_772eb4;
-extern int g_772f24;
+extern int cut_ActivePlayerEntity;
 extern int g_68b79c;
-extern double g_6640e8;
+extern double dbl_0_01;
 extern float g_664144;
 
 int __cdecl gm_RandomMod(int);
@@ -55,7 +55,7 @@ unsigned int __cdecl cut_ExecuteCombatAttack(int ctx, unsigned int actorArg, int
 	int i;
 	char v2;
 
-	v7 = *(unsigned int*) (g_67a370 + 0xb0);
+	v7 = *(unsigned int*) (d3_ActiveScene + 0xb0);
 	memset(&ev, 0, sizeof(ev));
 	ev.ent = *(unsigned int*) (actorArg + 4);
 	v2 = *(char*) (actorArg + 0x1c4);
@@ -103,7 +103,7 @@ unsigned int __cdecl cut_ExecuteCombatAttack(int ctx, unsigned int actorArg, int
 		ev.amount = (int) (ev.amount * g_664144);
 	ev.done = 1;
 	ev.hit = hit;
-	if (*(int*) (g_772f24 + 4) == g_68b79c && p[0x16] == 0) {
+	if (*(int*) (cut_ActivePlayerEntity + 4) == g_68b79c && p[0x16] == 0) {
 		v9 = 0;
 		for (i = 0; i < *(unsigned char*) (g_772eb4 + 0x30); i++) {
 			if (*(int*) (g_772eb4 + 0x34 + i * 4) != -1 && ctx != 0x9b0e20 + i * 0x35c) {

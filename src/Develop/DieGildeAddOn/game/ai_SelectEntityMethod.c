@@ -9,7 +9,7 @@ typedef struct {
 	unsigned int flags : 8;
 } AI_METHOD_PLAN;
 
-extern char g_1008540[];
+extern char am_Methods[];
 extern unsigned char g_slot_table[2];
 
 /* ADDRESS: GOLDTL 0x00495180 */
@@ -46,7 +46,7 @@ int __cdecl ai_SelectEntityMethod(int entityId)
 	*(unsigned char*) bestYx = 0;
 	*(unsigned char*) bestYy = 0;
 	i = 0;
-	plan = (AI_METHOD_PLAN*) g_1008540;
+	plan = (AI_METHOD_PLAN*) am_Methods;
 	do {
 		if (plan->kind == 0) {
 			continue;

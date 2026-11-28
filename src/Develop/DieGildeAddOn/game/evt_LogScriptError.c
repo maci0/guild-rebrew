@@ -9,7 +9,7 @@ struct log_425bf0 {
 
 #include "client_script_runtime.h"
 extern int g_6b7eb0;
-extern void* g_14cb8f0;
+extern void* evt_ScriptErrorLog;
 
 
 /* Reports a script error: logs the message with its source line. */
@@ -38,8 +38,8 @@ void __cdecl evt_LogScriptError(char* s, unsigned int pos, const char* msg)
 		}
 		sprintf(buf, "%s", msg);
 	log:
-		strncpy(((struct log_425bf0*)g_14cb8f0)[g_6b7eb0].text, buf, 0x7f);
-		((struct log_425bf0*)g_14cb8f0)[g_6b7eb0].line = line;
+		strncpy(((struct log_425bf0*)evt_ScriptErrorLog)[g_6b7eb0].text, buf, 0x7f);
+		((struct log_425bf0*)evt_ScriptErrorLog)[g_6b7eb0].line = line;
 		g_6b7eb0++;
 		if (g_6b7eb0 > 0x1e) {
 			g_6b7eb0 = 0;
@@ -47,8 +47,8 @@ void __cdecl evt_LogScriptError(char* s, unsigned int pos, const char* msg)
 		sprintf(buf, "\"%s\" %s in Line: %i", evt_CurrentScript, msg, line);
 	} else {
 		sprintf(buf, "%s", msg);
-		strncpy(((struct log_425bf0*)g_14cb8f0)[g_6b7eb0].text, buf, 0x7f);
-		((struct log_425bf0*)g_14cb8f0)[g_6b7eb0].line = 0;
+		strncpy(((struct log_425bf0*)evt_ScriptErrorLog)[g_6b7eb0].text, buf, 0x7f);
+		((struct log_425bf0*)evt_ScriptErrorLog)[g_6b7eb0].line = 0;
 		g_6b7eb0++;
 		if (g_6b7eb0 > 0x1e) {
 			g_6b7eb0 = 0;

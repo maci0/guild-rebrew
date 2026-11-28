@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/loadsave/g_774a78.h"
 
-extern struct Node* g_774a78;
+extern struct Node* hp_ProdEntryList;
 extern char s_6ab3f4[];
 
 char* __cdecl hp_LookupProdEntry(char*);
@@ -17,7 +17,7 @@ char* __cdecl hp_FindProdSetting(int id)
 {
 	char* p;
 
-	p = (char*) g_774a78;
+	p = (char*) hp_ProdEntryList;
 	while (p != 0) {
 		if (*(int*) p == id) {
 			return p + 0xc;
@@ -35,7 +35,7 @@ char* __cdecl hp_AddProdSetting(char* a)
 	char* p;
 	char* r;
 
-	if (g_774a78 == 0) {
+	if (hp_ProdEntryList == 0) {
 		if (hp_LookupProdEntry(a) == 0) {
 			return 0;
 		}
@@ -65,7 +65,7 @@ char* __cdecl hp_AddProdSetting(char* a)
 			*(int*) (p + 4) = fcn_0064d3f8();
 			*(float*) (p + 0x44) = 1.0f;
 			hp_UpdateProdSetting(a, p);
-			g_774a78 = (Node*) p;
+			hp_ProdEntryList = (Node*) p;
 			return p + 0xc;
 		}
 	}
@@ -106,8 +106,8 @@ char* __cdecl hp_AddProdSetting(char* a)
 			*(int*) (p + 4) = fcn_0064d3f8();
 			*(float*) (p + 0x44) = 1.0f;
 			hp_UpdateProdSetting(a, p);
-			*(char**) (p + 0x48) = (char*) g_774a78;
-			g_774a78 = (Node*) p;
+			*(char**) (p + 0x48) = (char*) hp_ProdEntryList;
+			hp_ProdEntryList = (Node*) p;
 			return p + 0xc;
 		}
 	}

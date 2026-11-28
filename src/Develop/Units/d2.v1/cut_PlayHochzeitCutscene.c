@@ -1,7 +1,7 @@
 #include <stdio.h>
 extern int cut_EventLoopFlags, d2_SuppressOverlay;
-extern char g_6b5c60[];
-extern char g_6811b0[];
+extern char str_empty[];
+extern char str_dollar_C[];
 
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl gm_IncrementMissionActionCount(char*, int);
@@ -74,8 +74,8 @@ void __cdecl cut_PlayHochzeitCutscene(int event)
 	d2_CenterForm(scene[1], 3);
 	d2_SetFormVisibility(scene[1], 0);
 	scene[0] = evt_StartGfxScript("cutscenes\\hochzeit\\hochzeit-create.esc", text);
-	scene[0] = evt_StartGfxScript("cutscenes\\hochzeit\\hochzeit-intro.esc", g_6b5c60);
-	scene[0] = evt_StartGfxScript("cutscenes\\hochzeit\\hochzeit-reden1.esc", g_6b5c60);
+	scene[0] = evt_StartGfxScript("cutscenes\\hochzeit\\hochzeit-intro.esc", str_empty);
+	scene[0] = evt_StartGfxScript("cutscenes\\hochzeit\\hochzeit-reden1.esc", str_empty);
 	if (cut_WaitForTimeoutOrInput(0x5dc, (int) cut_ReleaseSceneContexts, scene)) {
 		return;
 	}
@@ -94,7 +94,7 @@ void __cdecl cut_PlayHochzeitCutscene(int event)
 		return;
 	}
 	d2_SetForm(scene[1], 0);
-	io_AppendText(g_6811b0);
+	io_AppendText(str_dollar_C);
 	d2_SetFormVisibility(scene[1], 0);
 	value = cut_WaitForScriptOrInput(scene[0], (void*) cut_ReleaseSceneContexts, scene);
 	if (value != 0) {
@@ -103,7 +103,7 @@ void __cdecl cut_PlayHochzeitCutscene(int event)
 	if (cut_WaitForTimeoutOrInput(1000, (int) cut_ReleaseSceneContexts, scene)) {
 		return;
 	}
-	scene[0] = evt_StartGfxScript("cutscenes\\hochzeit\\hochzeit-reden2.esc", g_6b5c60);
+	scene[0] = evt_StartGfxScript("cutscenes\\hochzeit\\hochzeit-reden2.esc", str_empty);
 	d2_SetForm(scene[1], 0);
 	d2_SetFormVisibility(scene[1], 1);
 	io_AppendText((char*) 0x1aac, *entity1, *entity2);
@@ -119,7 +119,7 @@ void __cdecl cut_PlayHochzeitCutscene(int event)
 		return;
 	}
 	d2_SetForm(scene[1], 0);
-	io_AppendText(g_6811b0);
+	io_AppendText(str_dollar_C);
 	d2_SetFormVisibility(scene[1], 0);
 	if (cut_WaitForTimeoutOrInput(500, (int) cut_ReleaseSceneContexts, scene)) {
 		return;
@@ -142,10 +142,10 @@ void __cdecl cut_PlayHochzeitCutscene(int event)
 	if (value != 0) {
 		return;
 	}
-	scene[0] = evt_StartGfxScript("cutscenes\\hochzeit\\hochzeit-reden3.esc", g_6b5c60);
+	scene[0] = evt_StartGfxScript("cutscenes\\hochzeit\\hochzeit-reden3.esc", str_empty);
 	d2_SetFormVisibility(scene[1], 0);
 	d2_SetForm(scene[1], 0);
-	io_AppendText(g_6811b0);
+	io_AppendText(str_dollar_C);
 	if (cut_WaitForTimeoutOrInput(0x5dc, (int) cut_ReleaseSceneContexts, scene)) {
 		return;
 	}
@@ -165,7 +165,7 @@ void __cdecl cut_PlayHochzeitCutscene(int event)
 	}
 	d2_SetFormVisibility(scene[1], 0);
 	d2_SetForm(scene[1], 0);
-	io_AppendText(g_6811b0);
+	io_AppendText(str_dollar_C);
 	if (cut_WaitForTimeoutOrInput(500, (int) cut_ReleaseSceneContexts, scene)) {
 		return;
 	}
@@ -187,7 +187,7 @@ void __cdecl cut_PlayHochzeitCutscene(int event)
 	if (value != 0) {
 		return;
 	}
-	scene[0] = evt_StartGfxScript("cutscenes\\hochzeit\\hochzeit-reden4.esc", g_6b5c60);
+	scene[0] = evt_StartGfxScript("cutscenes\\hochzeit\\hochzeit-reden4.esc", str_empty);
 	d2_SetForm(scene[1], 0);
 	io_AppendText((char*) 0x1aad);
 	scene[3] = d3snd_PlaySoundEffectIfAllowed(0xfffffff9, scene[2], "_HOCHZEIT_NEU_MAIN_04", 0);
@@ -203,7 +203,7 @@ void __cdecl cut_PlayHochzeitCutscene(int event)
 	}
 	d2_SetFormVisibility(scene[1], 0);
 	d2_SetForm(scene[1], 0);
-	io_AppendText(g_6811b0);
+	io_AppendText(str_dollar_C);
 	if (cut_WaitForScriptOrInput(scene[0], (void*) cut_ReleaseSceneContexts, scene)) {
 		return;
 	}

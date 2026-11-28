@@ -22,15 +22,15 @@ Node* __cdecl AllocVideoListNode(void)
 	node = (Node*) malloc(0x148);
 	if (node != 0) {
 		memset(node, 0, 0x148);
-		if (g_6b6f84 != 0) {
-			cursor = g_6b6f84;
+		if (tp_VideoListHead != 0) {
+			cursor = tp_VideoListHead;
 			while (cursor->prev != 0) {
 				cursor = cursor->prev;
 			}
 			cursor->prev = node;
 			node->next = cursor;
 		} else {
-			g_6b6f84 = node;
+			tp_VideoListHead = node;
 		}
 	}
 	return node;

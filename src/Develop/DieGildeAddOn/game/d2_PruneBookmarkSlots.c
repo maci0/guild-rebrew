@@ -5,7 +5,7 @@
 #include "Develop/client_types.h"
 typedef Slot_779d00 Slot;
 
-extern Slot_779d00 g_779d00[];
+extern Slot_779d00 main_CameraBookmarks[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
 int __cdecl gm_SearchTable67(int);
@@ -20,18 +20,18 @@ void __cdecl d2_PruneBookmarkSlots(void)
 	int r;
 
 	for (i = 0; i < 11; i++) {
-		if (g_779d00[i].b != -1) {
-			x = gm_SearchTable67(g_779d00[i].b);
+		if (main_CameraBookmarks[i].b != -1) {
+			x = gm_SearchTable67(main_CameraBookmarks[i].b);
 			if (x == 0) {
-				d2_ClearBookmarkSlot(&g_779d00[i]);
+				d2_ClearBookmarkSlot(&main_CameraBookmarks[i]);
 			}
 			else {
-				r = gm_FindRecordById(g_779d00[i].c);
-				if (r == 0 && g_779d00[i].c != -1) {
-					d2_ClearBookmarkSlot(&g_779d00[i]);
+				r = gm_FindRecordById(main_CameraBookmarks[i].c);
+				if (r == 0 && main_CameraBookmarks[i].c != -1) {
+					d2_ClearBookmarkSlot(&main_CameraBookmarks[i]);
 				}
-				else if (!(gm_GetEntityUiFlags(g_774970, x, r, 0) & 1)) {
-					d2_ClearBookmarkSlot(&g_779d00[i]);
+				else if (!(gm_GetEntityUiFlags(gm_LocalPlayerSlot, x, r, 0) & 1)) {
+					d2_ClearBookmarkSlot(&main_CameraBookmarks[i]);
 				}
 			}
 		}

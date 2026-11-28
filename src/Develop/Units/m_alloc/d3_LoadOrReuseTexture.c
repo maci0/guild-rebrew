@@ -2,8 +2,8 @@
 
 #pragma optimize("y", off)
 
-extern char* g_104049c;
-extern unsigned int g_10404a0;
+extern char* d3_TextureBank;
+extern unsigned int d3_TextureBankCount;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 /* SIZE 0x70 */
@@ -87,9 +87,9 @@ Tex* __cdecl d3_LoadOrReuseTexture(char* name, Col c, unsigned int flags, unsign
 	c22 = (unsigned char) flags & 1;
 	found = (Tex*) d3_FindTextureByName(name);
 	if (found != 0) {
-		index = found - (Tex*) g_104049c;
+		index = found - (Tex*) d3_TextureBank;
 		p = found;
-		while (index < g_10404a0) {
+		while (index < d3_TextureBankCount) {
 			if (p->refs > 0) {
 				if (strcmp(name, p->name) == 0
 				    && *(unsigned int*) &p->id == *(unsigned int*) &c
@@ -137,7 +137,7 @@ Tex* __cdecl d3_LoadOrReuseTexture(char* name, Col c, unsigned int flags, unsign
 				if (found->b1) {
 					t->idx44 = found->idx44;
 				} else {
-					t->idx44 = (int) (found - (Tex*) g_104049c);
+					t->idx44 = (int) (found - (Tex*) d3_TextureBank);
 				}
 				*(unsigned int*) &t->id = *(unsigned int*) &c;
 				t->pattern6c = ((unsigned int) (c.b) << 8 | c.b) << 8 | c.b;

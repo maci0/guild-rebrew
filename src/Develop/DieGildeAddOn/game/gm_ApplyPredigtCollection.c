@@ -30,8 +30,8 @@ typedef struct
 	char* who;
 } PREDIGT_RESULT;
 
-extern PREDIGT_ENTITY g_7f4ca0[];
-extern char g_773d75;
+extern PREDIGT_ENTITY gm_EntitySlotTable[];
+extern char gm_ActiveTownIndex;
 
 void __cdecl gm_FindRichestEntity(int* a, int* b);
 float __cdecl gm_GetEntitySkill(PREDIGT_ENTITY* e, int k);
@@ -67,12 +67,12 @@ int __cdecl gm_ApplyPredigtCollection(char* building, PREDIGT_RESULT* out)
 	gm_FindRichestEntity((int*) &mult, &base);
 	if (*(unsigned short*) (building + 0x27) == 0xffff)
 		return 0;
-	me = &g_7f4ca0[*(unsigned short*) (building + 0x27)];
+	me = &gm_EntitySlotTable[*(unsigned short*) (building + 0x27)];
 	gm_GetEntitySkill(me, 4);
 	gm_GetLawEntry(2, &st);
 	mult = gm_GetBuildingTechEffect(building, 9, 1) * 0.0125f + 1.0f;
 	for (i = 0; i < 768; i++) {
-		ent = &g_7f4ca0[i];
+		ent = &gm_EntitySlotTable[i];
 		if (ent->id == 0xffff || ent->kind == 6 || ent->kind == 7 || ent->kind == 8 || ent->kind >= 10)
 			continue;
 		if (ent->h == me->h)
@@ -95,7 +95,7 @@ int __cdecl gm_ApplyPredigtCollection(char* building, PREDIGT_RESULT* out)
 		fb = (float) base;
 		amt = (int) ((MAX(gm_WalkEntityChain(ent->id) / fb * 160.0f, 0.0f) + 160.0f) * v);
 		total += amt;
-		cm_RequestTransferCurrencyNoKill(-1, ent->h, g_773d75, amt);
+		cm_RequestTransferCurrencyNoKill(-1, ent->h, gm_ActiveTownIndex, amt);
 		count++;
 		if (ent->mood < 0.95f && ent->mood > 0.05f)
 			cm_RequestChangeFloat(ent->h, 0x1d0, sign);

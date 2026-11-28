@@ -1,6 +1,6 @@
 int __cdecl d2_GetBankEntry(int, int);
 
-extern char* g_1015ea0;
+extern char* d2_Controls;
 
 typedef struct
 {
@@ -29,17 +29,17 @@ int __cdecl d2_ComputeSliderThumbPos(int idx, int* out1, int* out2)
 	int v;
 	int r;
 
-	e = *(int*) (&((D2_CONTROL_TL*) g_1015ea0)[idx].data);
+	e = *(int*) (&((D2_CONTROL_TL*) d2_Controls)[idx].data);
 	lo = (char*) d2_GetBankEntry(e, 0);
 	d2_GetBankEntry(e, 1);
 	hi = (char*) d2_GetBankEntry(e, 3);
-	d = ((D2_CONTROL_TL*) g_1015ea0)[idx].payload.fields.value_094 - ((D2_CONTROL_TL*) g_1015ea0)[idx].payload.fields.value_090;
-	q = ((D2_CONTROL_TL*) g_1015ea0)[idx].payload.fields.value_08c - ((D2_CONTROL_TL*) g_1015ea0)[idx].payload.fields.value_090;
-	v = (int) ((float) ((D2_CONTROL_TL*) g_1015ea0)[idx].payload.fields.value_09c / d * q);
+	d = ((D2_CONTROL_TL*) d2_Controls)[idx].payload.fields.value_094 - ((D2_CONTROL_TL*) d2_Controls)[idx].payload.fields.value_090;
+	q = ((D2_CONTROL_TL*) d2_Controls)[idx].payload.fields.value_08c - ((D2_CONTROL_TL*) d2_Controls)[idx].payload.fields.value_090;
+	v = (int) ((float) ((D2_CONTROL_TL*) d2_Controls)[idx].payload.fields.value_09c / d * q);
 	r = v - (((unsigned short) *(short*) (hi + 2)) >> 1)
 	    + (unsigned short) *(short*) (lo + 2)
-	    + ((D2_CONTROL_TL*) g_1015ea0)[idx].x;
+	    + ((D2_CONTROL_TL*) d2_Controls)[idx].x;
 	*out1 = r;
-	*out2 = ((D2_CONTROL_TL*) g_1015ea0)[idx].y;
+	*out2 = ((D2_CONTROL_TL*) d2_Controls)[idx].y;
 	return 1;
 }

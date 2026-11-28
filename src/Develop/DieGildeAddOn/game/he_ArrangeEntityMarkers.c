@@ -2,7 +2,7 @@
 #include "he_tables.h"
 
 extern Rec7dc6e0 g_7dc6e0[64];
-extern float g_6628c8;
+extern float d3_TwoPi;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl d3_TransformPoint(char*, float*, float*);
@@ -43,7 +43,7 @@ void __cdecl he_ArrangeEntityMarkers(char* entity)
 	for (i = 0; i < count; i++) {
 		slot = list[i];
 		d3_GetObjectVerticalBounds((char*) slot->d, &lo, &hi);
-		angle = (float) i * g_6628c8 / (float) count;
+		angle = (float) i * d3_TwoPi / (float) count;
 		out[0] = (float) sin(angle) * t + pos[0];
 		out[1] = (hi - lo) * 0.5 + pos[1];
 		out[2] = (float) cos(angle) * t + pos[2];

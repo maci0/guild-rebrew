@@ -7,7 +7,7 @@ typedef struct {
 	char name[0x2f4];
 } Dyn;
 
-extern char g_868060[];
+extern char gm_TownTable[];
 extern pos14_7f4c00 gm_GameTime;
 
 char *__cdecl gm_LookupEntityRecordById(int);
@@ -88,12 +88,12 @@ int __cdecl gm_SabotageHandlungShipment(int *msg)
 	if (b != 0 && a != 0) {
 		if (*b == 0x47) {
 			io_FormatTextBuffer(buf, *(unsigned short *) (msg + 1) + 0x12e7,
-			             ((Dyn *) g_868060)[*(int *) (b + 0x65)].name,
-			             ((Dyn *) g_868060)[0].name, total);
+			             ((Dyn *) gm_TownTable)[*(int *) (b + 0x65)].name,
+			             ((Dyn *) gm_TownTable)[0].name, total);
 		} else {
 			io_FormatTextBuffer(buf, *(unsigned short *) (msg + 1) + 0x12e7,
-			             ((Dyn *) g_868060)[0].name,
-			             ((Dyn *) g_868060)[*(int *) (a + 0x65)].name, total);
+			             ((Dyn *) gm_TownTable)[0].name,
+			             ((Dyn *) gm_TownTable)[*(int *) (a + 0x65)].name, total);
 		}
 		he_PostEntityMessage(*(int *) (victim + 4), *(int *) (victim + 4), buf, strlen(buf) > 0x100, 0x5ef, 0);
 	}

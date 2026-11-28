@@ -19,7 +19,7 @@ typedef struct Table {
 	Rec* second;
 } Table;
 
-extern struct VFS_DIR* g_6b7fdc;
+extern struct VFS_DIR* vfs_RootDir;
 extern char g_67fbe8[];
 
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
@@ -39,7 +39,7 @@ int __cdecl ai_LoadHistoricalDfn(Table* t)
 	int i;
 
 	magic = HISTORICAL_MAGIC;
-	f = vfs_Tfopen("/gamedata/ai/historical.dfn", "rb", g_6b7fdc);
+	f = vfs_Tfopen("/gamedata/ai/historical.dfn", "rb", vfs_RootDir);
 	if (f == 0) {
 		goto fail;
 	}

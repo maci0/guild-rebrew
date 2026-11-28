@@ -1,5 +1,5 @@
 extern void* g_6b5de0;
-extern char g_14ce820[];
+extern char d3d_PresentParams[];
 
 
 typedef struct
@@ -15,7 +15,7 @@ char __cdecl d3_ResetGraphicsDevice(void)
 
 	hr = 0x80004005;
 	if (((int*)g_6b5de0) != 0) {
-		hr = (*(D3_DEVICE_RESET_VTBL**) ((int*)g_6b5de0))->fn(((int*)g_6b5de0), g_14ce820);
+		hr = (*(D3_DEVICE_RESET_VTBL**) ((int*)g_6b5de0))->fn(((int*)g_6b5de0), d3d_PresentParams);
 	}
 	return hr == 0;
 }

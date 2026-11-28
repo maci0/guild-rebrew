@@ -10,8 +10,8 @@ typedef struct {
 } rec24;
 // SIZE 0x24
 
-extern signed char g_6a3440;
-extern char g_10069a0[];
+extern signed char gm_SelectedMissionIndex;
+extern char gm_MissionJobs[];
 
 unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream);
 
@@ -22,20 +22,20 @@ int __cdecl ls_SaveMissionJobs(char* file)
 
 	if (!file)
 		return 0;
-	if (vfs_fwrite(&g_6a3440, 1, 1, file) == -1)
+	if (vfs_fwrite(&gm_SelectedMissionIndex, 1, 1, file) == -1)
 		return 0;
 	for (i = 0; i < 128; i++) {
-		if (vfs_fwrite(&((rec24*)g_10069a0)[i].f0, 4, 1, file) == -1)
+		if (vfs_fwrite(&((rec24*)gm_MissionJobs)[i].f0, 4, 1, file) == -1)
 			return 0;
-		if (vfs_fwrite(&((rec24*)g_10069a0)[i].f4, 4, 1, file) == -1)
+		if (vfs_fwrite(&((rec24*)gm_MissionJobs)[i].f4, 4, 1, file) == -1)
 			return 0;
-		if (vfs_fwrite(((rec24*)g_10069a0)[i].st, 0xe, 1, file) == -1)
+		if (vfs_fwrite(((rec24*)gm_MissionJobs)[i].st, 0xe, 1, file) == -1)
 			return 0;
-		if (vfs_fwrite(&((rec24*)g_10069a0)[i].f18, 4, 1, file) == -1)
+		if (vfs_fwrite(&((rec24*)gm_MissionJobs)[i].f18, 4, 1, file) == -1)
 			return 0;
-		if (vfs_fwrite(&((rec24*)g_10069a0)[i].f1c, 4, 1, file) == -1)
+		if (vfs_fwrite(&((rec24*)gm_MissionJobs)[i].f1c, 4, 1, file) == -1)
 			return 0;
-		if (vfs_fwrite(&((rec24*)g_10069a0)[i].f20, 1, 1, file) == -1)
+		if (vfs_fwrite(&((rec24*)gm_MissionJobs)[i].f20, 1, 1, file) == -1)
 			return 0;
 	}
 	return 1;

@@ -25,7 +25,7 @@ typedef struct
 } D3_SCENE_MOVE_CTX;
 // SIZE 0x8
 
-extern int g_67a370;
+extern int d3_ActiveScene;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_1043060;
 
@@ -45,7 +45,7 @@ char __cdecl d3_MoveObjectToScene(D3_SCENE_OBJ* o, D3_SCENE_CTX* from, D3_SCENE_
 	if (from == to) {
 		return 1;
 	}
-	if (from == ((D3_SCENE_CTX*)g_67a370)) {
+	if (from == ((D3_SCENE_CTX*)d3_ActiveScene)) {
 		from->head = (*(D3_SCENE_OBJ**)&d3_ObjectListHead);
 		from->tail = (*(D3_SCENE_OBJ**)&g_1042538);
 		from->fa4 = (*(void**)&d3_SceneRenderListHead);
@@ -69,7 +69,7 @@ char __cdecl d3_MoveObjectToScene(D3_SCENE_OBJ* o, D3_SCENE_CTX* from, D3_SCENE_
 	} else {
 		o->next->prev = o->prev;
 	}
-	if (from == ((D3_SCENE_CTX*)g_67a370)) {
+	if (from == ((D3_SCENE_CTX*)d3_ActiveScene)) {
 		(*(D3_SCENE_OBJ**)&d3_ObjectListHead) = from->head;
 		(*(D3_SCENE_OBJ**)&g_1042538) = from->tail;
 		(*(void**)&d3_SceneRenderListHead) = from->fa4;
@@ -78,7 +78,7 @@ char __cdecl d3_MoveObjectToScene(D3_SCENE_OBJ* o, D3_SCENE_CTX* from, D3_SCENE_
 	ctx.from = from;
 	ctx.to = to;
 	d3_VisitSceneObjects(from, o, 0x3ff, (void*) d3_TransferObjectSceneCallback, &ctx);
-	if (to == ((D3_SCENE_CTX*)g_67a370)) {
+	if (to == ((D3_SCENE_CTX*)d3_ActiveScene)) {
 		to->head = (*(D3_SCENE_OBJ**)&d3_ObjectListHead);
 		to->tail = (*(D3_SCENE_OBJ**)&g_1042538);
 		to->fa4 = (*(void**)&d3_SceneRenderListHead);
@@ -91,7 +91,7 @@ char __cdecl d3_MoveObjectToScene(D3_SCENE_OBJ* o, D3_SCENE_CTX* from, D3_SCENE_
 	p->next = o;
 	o->prev = p;
 	to->tail = o;
-	if (to == ((D3_SCENE_CTX*)g_67a370)) {
+	if (to == ((D3_SCENE_CTX*)d3_ActiveScene)) {
 		(*(D3_SCENE_OBJ**)&d3_ObjectListHead) = to->head;
 		(*(D3_SCENE_OBJ**)&g_1042538) = to->tail;
 		(*(void**)&d3_SceneRenderListHead) = to->fa4;

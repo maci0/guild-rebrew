@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-extern int g_773d48;
-extern unsigned char g_773d75;
+extern int gm_QueuedCommandCount;
+extern unsigned char gm_ActiveTownIndex;
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 char* __cdecl gm_FindPublicTreasury(int a);
@@ -27,15 +27,15 @@ void __cdecl gm_UpdateBuildingSubsidies(void)
 
 	handle = (int) gm_FindPublicTreasury(1);
 	gm_GetLawEntry(5, buf);
-	r = 0xe - *(int*) (buf + 0x18); n = gm_ConvertUnitsToAmount(r, g_773d75);
+	r = 0xe - *(int*) (buf + 0x18); n = gm_ConvertUnitsToAmount(r, gm_ActiveTownIndex);
 	i = 0;
-	g_773d48 = 0;
+	gm_QueuedCommandCount = 0;
 	q = (char*) 0x7f4e10;
 	do {
 		rec = q - 0x170;
-		if (g_773d48 > 0x40) {
+		if (gm_QueuedCommandCount > 0x40) {
 			cm_StepCommandQueue();
-			g_773d48 = 0;
+			gm_QueuedCommandCount = 0;
 		}
 		if (*(unsigned short*) rec != 0xffff && *(unsigned char*) (rec + 8) != 0 && *(unsigned char*) (rec + 2) == 0 && *(int*) (rec + 0x170) != 0) {
 			e = (char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*) *(int*) (rec + 0x170)];
@@ -54,17 +54,17 @@ void __cdecl gm_UpdateBuildingSubsidies(void)
 				if (obj != 0) {
 					cm_RequestCopyEntityData(((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*) (obj + 0x27)].entity_id,
 					    *(int*) (rec + 4), -0xa, 1);
-					g_773d48++;
+					gm_QueuedCommandCount++;
 				}
 			}
 			if (*e == 1) {
 				cm_RequestTransferCurrencyNoKill(*(int*) (handle + 2), *(int*) (rec + 4), 0, n);
 			inc:
-				g_773d48++;
+				gm_QueuedCommandCount++;
 			}
 		}
 		q += sizeof(ENTITY_RECORD);
 		i++;
 	} while ((int) q < 0x85a210);
-	g_773d48 = 0;
+	gm_QueuedCommandCount = 0;
 }

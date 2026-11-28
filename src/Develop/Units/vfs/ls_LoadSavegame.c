@@ -8,11 +8,11 @@
 extern char* cm_LoadBuf;
 extern int ls_SaveVersion;
 extern int gm_NextEntityId;
-extern int g_699368;
+extern int cut_NextCutsceneId;
 extern int g_7749d0;
 extern pos14_7f4c00 gm_GameTime;
-extern pos14_7f4c00 g_7e1f70;
-extern unsigned char g_773d75;
+extern pos14_7f4c00 gm_SyncGameTime;
+extern unsigned char gm_ActiveTownIndex;
 extern char* gm_CityEntity;
 extern int g_773d68;
 extern int g_773d6c;
@@ -22,14 +22,14 @@ extern int cm_LastCrimeId;
 extern int g_100dc00;
 extern char* gm_RichterKatholisch;
 extern char* gm_RichterEvangelisch;
-extern int g_7747b4;
-extern int g_6b8300;
+extern int gm_DifficultyLevel;
+extern int d3_CurrentFloor;
 extern char g_7e2480[];
 extern char g_7f3a5c[];
 extern char g_7f39c0[];
 
 #include "Develop/Units/vfs/vfs.h"
-extern struct VFS_DIR* g_6b7fdc;
+extern struct VFS_DIR* vfs_RootDir;
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 
 void* __cdecl vfs_Tfopen(const char* cpath, const char* cmode, struct VFS_DIR* root);
@@ -73,7 +73,7 @@ int __cdecl ls_LoadSavegame(char* cpath)
 	void* stream;
 	int version;
 
-	stream = vfs_Tfopen(cpath, (char*) 0x6750e8, g_6b7fdc);
+	stream = vfs_Tfopen(cpath, (char*) 0x6750e8, vfs_RootDir);
 	if (stream == 0) {
 		goto ret0;
 	}
@@ -102,7 +102,7 @@ int __cdecl ls_LoadSavegame(char* cpath)
 	if (ls_ReadVfsDataChecked(&gm_GameTime, 0xe, 1, stream) == 0) {
 		goto fail;
 	}
-	if (ls_ReadVfsDataChecked(&g_773d75, 1, 1, stream) == 0) {
+	if (ls_ReadVfsDataChecked(&gm_ActiveTownIndex, 1, 1, stream) == 0) {
 		goto fail;
 	}
 	if (ls_ReadVfsDataChecked(&gm_CityEntity, 4, 1, stream) == 0) {
@@ -121,12 +121,12 @@ int __cdecl ls_LoadSavegame(char* cpath)
 		ls_ReadVfsDataChecked(&g_773d7c, 4, 1, stream);
 	}
 	ls_ReadVfsDataChecked(&g_100dc00, 0x18, 1, stream);
-	g_7e1f70 = gm_GameTime;
+	gm_SyncGameTime = gm_GameTime;
 	if (!(g_7f39c0[4] & 2)) {
-		g_7747b4 = *(int*) 0x7f3a58;
+		gm_DifficultyLevel = *(int*) 0x7f3a58;
 	}
 	if (ls_SaveVersion >= 0x10030) {
-		ls_ReadVfsDataChecked(&g_699368, 4, 1, stream);
+		ls_ReadVfsDataChecked(&cut_NextCutsceneId, 4, 1, stream);
 	}
 	if (ls_SaveVersion >= 0x1003d) {
 		ls_ReadVfsDataChecked(&cm_LastCrimeId, 4, 1, stream);
@@ -249,7 +249,7 @@ int __cdecl ls_LoadSavegame(char* cpath)
 	d3_RefreshBuildingPennants();
 	d3_RebuildWorldScene();
 	d3_ResetWorldSceneState();
-	d3_UpdateSceneDetailLevel(g_6b8300, 1);
+	d3_UpdateSceneDetailLevel(d3_CurrentFloor, 1);
 	strcpy(g_7e2480, g_7f3a5c);
 	return 1;
 

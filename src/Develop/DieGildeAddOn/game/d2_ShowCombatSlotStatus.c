@@ -1,4 +1,4 @@
-extern char* g_67a370;
+extern char* d3_ActiveScene;
 
 char* __cdecl gm_FindOrCreateEntitySlot(int, char*);
 char* __cdecl gm_GetEquippedCombatGear(char*);
@@ -21,7 +21,7 @@ void __cdecl d2_ShowCombatSlotStatus(int slotId, char* entity)
 	int row;
 	int height;
 
-	top = *(int*) (g_67a370 + 0xb0);
+	top = *(int*) (d3_ActiveScene + 0xb0);
 	rec = gm_FindOrCreateEntitySlot(slotId, entity);
 	gear = gm_GetEquippedCombatGear(entity);
 	if (rec == 0) {

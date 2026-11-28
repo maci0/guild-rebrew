@@ -8,10 +8,10 @@
 extern char* g_item_def_table; /* 0x0099ec10 */
 extern int g_1040494;          /* 0x01040494 */
 extern int d2_CurrentWindowId;           /* 0x00772514 */
-extern unsigned char g_773d75; /* 0x00773d75 */
-extern int g_7746c4;           /* 0x007746c4 */
-extern int g_7746c8;           /* 0x007746c8 */
-extern int g_7e2aa0;           /* 0x007e2aa0 */
+extern unsigned char gm_ActiveTownIndex; /* 0x00773d75 */
+extern int d2_VisitedBuilding;           /* 0x007746c4 */
+extern int d2_InteriorBuilding;           /* 0x007746c8 */
+extern int d2_SelectedBuilding;           /* 0x007e2aa0 */
 
 extern char s_6811b0[]; /* "$C" */
 extern char s_6a9a28[]; /* "%s$N" */
@@ -59,12 +59,12 @@ int __cdecl d2_ShowObjectTooltip(int itemId)
 		win = d2_LoadForm(0, 0, s_6a9a38);
 	}
 	d2_CenterDialogWindows(win);
-	n = g_1038144[win].i[0];
-	val = ((D2_WIN*) g_1015f40)[n].width;
-	if (((D2_WIN*) g_1015f40)[n].left + val > g_1040494 - 0x10) {
+	n = d2_FormPageWindows[win].i[0];
+	val = ((D2_WIN*) d2_Windows)[n].width;
+	if (((D2_WIN*) d2_Windows)[n].left + val > g_1040494 - 0x10) {
 		d2_PositionControl(g_1040494 - 0x10 - val,
-				((D2_WIN*) g_1015f40)[n].top,
-				((D2_WIN*) g_1015f40)[n].slot);
+				((D2_WIN*) d2_Windows)[n].top,
+				((D2_WIN*) d2_Windows)[n].slot);
 	}
 	d2_SetForm(0, 2);
 	d2_AddElementToWindow(0, 0, itemId + 0xdf, d2_CurrentWindowId);
@@ -75,14 +75,14 @@ int __cdecl d2_ShowObjectTooltip(int itemId)
 	if (def[0x40] != 0) {
 		io_AppendText(0x21, (unsigned char) def[0x40]);
 	} else {
-		io_AppendText(0x1f, (int) gm_GetSeasonPrice(itemId, g_773d75),
+		io_AppendText(0x1f, (int) gm_GetSeasonPrice(itemId, gm_ActiveTownIndex),
 				(int) eval_ObjektPreis2Credits(itemId, 100));
 	}
-	ent = (int*) g_7746c4;
+	ent = (int*) d2_VisitedBuilding;
 	if (ent == 0) {
-		ent = (int*) g_7746c8;
+		ent = (int*) d2_InteriorBuilding;
 		if (ent == 0) {
-			ent = (int*) g_7e2aa0;
+			ent = (int*) d2_SelectedBuilding;
 		}
 	}
 	d2_SetForm(win, 4);

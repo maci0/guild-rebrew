@@ -1,6 +1,6 @@
 #include "Develop/client_types.h"
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 extern pos14_7f4c00 gm_GameTime;
 
 int __cdecl ai_CollectMatchingBuildings(char*, int, int, int, int, int, int, int*);
@@ -21,7 +21,7 @@ void __cdecl he_StartDeathPact(char* action)
 	if ((*(unsigned char*) (action + 0x78) & flag) != 0) {
 		return;
 	}
-	rec = ((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (action + 8)]);
+	rec = ((char *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[*(unsigned short*) (action + 8)]);
 	n = ai_CollectMatchingBuildings(rec,
 	    5, flag, zero, zero, zero, 5, (int*) (action + 0xb4));
 	if (n == 0) {

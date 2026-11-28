@@ -29,17 +29,17 @@ typedef struct Slot {
 } Slot;
 // SIZE 0x2f4
 
-extern char g_7f4ca0[];
-extern char* g_1015ea0;
-extern char g_6811b0[];
+extern char gm_EntitySlotTable[];
+extern char* d2_Controls;
+extern char str_dollar_C[];
 extern char g_68b300[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 extern int d2_CurrentWindowId;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 
 int __cdecl d2_TutorialAllowsFlag(int);
 void __cdecl d2_DispatchTutorialInput(int, int, int, int);
@@ -83,7 +83,7 @@ void __cdecl d2_ShowPrivilegien(void)
 	sel = -1;
 	mode = 2;
 	ptr = 0;
-	if (((House*) g_7f4ca0)[g_774970].f1b1 != 0) {
+	if (((House*) gm_EntitySlotTable)[gm_LocalPlayerSlot].f1b1 != 0) {
 		d2_ShowPrivilegMessage(*(char**)0x14ac69c, 0, 0x657c7);
 		return;
 	}
@@ -102,17 +102,17 @@ void __cdecl d2_ShowPrivilegien(void)
 	for (i = 0; i < 0x3a; i++) {
 		state[i] = 1;
 	}
-	now = g_6b7fac;
-	g_100f1dc = -1;
+	now = gm_GameTicks;
+	d2_DialogButtonAction = -1;
 	do {
 		count = 0;
-		if (now <= (unsigned) g_6b7fac || changed) {
-			now = (unsigned)g_6b7fac + 500;
+		if (now <= (unsigned) gm_GameTicks || changed) {
+			now = (unsigned)gm_GameTicks + 500;
 			prev = ptr;
-			if (((((House*) g_7f4ca0)[g_774970].f1c8) & 0x100) != 0 || ptr != 0) {
+			if (((((House*) gm_EntitySlotTable)[gm_LocalPlayerSlot].f1c8) & 0x100) != 0 || ptr != 0) {
 				e = he_StartHandlungSearch(1, 0, 0x45);
 				while (e != 0) {
-					if (*(int*) (e + 0xac) == ((House*) g_7f4ca0)[g_774970].f4) {
+					if (*(int*) (e + 0xac) == ((House*) gm_EntitySlotTable)[gm_LocalPlayerSlot].f4) {
 						ptr = gm_LookupEntityRecordById(*(int*) (e + 0xb0));
 						goto have;
 					}
@@ -132,7 +132,7 @@ void __cdecl d2_ShowPrivilegien(void)
 				q.kind = 2;
 			}
 			for (i = 0; i < 0x3a; i++) {
-				r = gm_CheckPrivilege(i, (char*) &((House*) g_7f4ca0)[g_774970], &q);
+				r = gm_CheckPrivilege(i, (char*) &((House*) gm_EntitySlotTable)[gm_LocalPlayerSlot], &q);
 				if (r != state[i]) {
 					changed = 1;
 				}
@@ -141,7 +141,7 @@ void __cdecl d2_ShowPrivilegien(void)
 			if (changed) {
 				changed = 0;
 				d2_SetForm((int) dlg, 2);
-				io_AppendText((int) g_6811b0);
+				io_AppendText((int) str_dollar_C);
 				sel = -1;
 				*(int*) (d2_CurrentWindowId * 0x3cc + 0x1016194) = 0;
 				*(int*) (d2_CurrentWindowId * 0x3cc + 0x1016198) = 0;
@@ -170,7 +170,7 @@ void __cdecl d2_ShowPrivilegien(void)
 				q.kind = mode == 2 ? 1 : 2;
 				for (i = 0; i < 0x3a; i++) {
 					keys[i] = -1;
-					r = gm_CheckPrivilege(i, (char*) &((House*) g_7f4ca0)[g_774970], &q);
+					r = gm_CheckPrivilege(i, (char*) &((House*) gm_EntitySlotTable)[gm_LocalPlayerSlot], &q);
 					state[i] = r;
 					if (r == mode) {
 						if (count) {
@@ -186,8 +186,8 @@ void __cdecl d2_ShowPrivilegien(void)
 						h = d2_GetWindowListItem((int) dlg, 2,
 							io_AppendText((int) fmt, q.name));
 						keys[i] = -1;
-						((D2_CONTROL_TL*) g_1015ea0)[h].disabled = 1;
-						((D2_CONTROL_TL*) g_1015ea0)[h].value_060 = 1;
+						((D2_CONTROL_TL*) d2_Controls)[h].disabled = 1;
+						((D2_CONTROL_TL*) d2_Controls)[h].value_060 = 1;
 						count++;
 					}
 				}
@@ -195,15 +195,15 @@ void __cdecl d2_ShowPrivilegien(void)
 					d2_SetForm((int) dlg, 2);
 					win = d2_CurrentWindowId;
 					d2_SetForm((int) dlg, 4);
-					io_AppendText((int) g_6811b0);
+					io_AppendText((int) str_dollar_C);
 					d2_AddWindowScrollButtons(-1, -1, d2_CurrentWindowId, win, 0x767);
 				} else {
 					d2_SetForm((int) dlg, 4);
-					io_AppendText((int) g_6811b0);
+					io_AppendText((int) str_dollar_C);
 				}
 			}
 		}
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == sel) {
 				changed = 1;
 				mode = (mode == 2) ? 10 : 2;
@@ -212,7 +212,7 @@ void __cdecl d2_ShowPrivilegien(void)
 					if (d2_CurrentElementId == keys[i]) {
 						d2_SetFormVisibility((int) dlg, 0);
 						q.kind = mode == 2 ? 3 : 4;
-						r = gm_CheckPrivilege(i, (char*) &((House*) g_7f4ca0)[g_774970], &q);
+						r = gm_CheckPrivilege(i, (char*) &((House*) gm_EntitySlotTable)[gm_LocalPlayerSlot], &q);
 						if (r & 0x80) {
 							changed = 1;
 							state[i] = r & 0xa;
@@ -224,8 +224,8 @@ void __cdecl d2_ShowPrivilegien(void)
 				}
 			}
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop((void*) d2_ShowPrivilegien, 0x657c7) != 0);
 	d2_DestroyForm((int) dlg);

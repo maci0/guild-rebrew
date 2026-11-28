@@ -83,54 +83,54 @@ void __cdecl ai_CollectBuildingGoodsPlan(char* entity, char* prod, char* craft)
 	unsigned short id;
 	unsigned char kind;
 
-	g_100b0ac = 0;
+	ai_ProductionGoodsCount = 0;
 	goodsSlot = fcn_00502cd0(*(int*) (prod + 0x14), 1, 5);
 	while (goodsSlot != 0) {
-		if (*(int*) (goodsSlot + 0xe)  > 1 && g_100b0ac < 0x20) {
-			g_100d0c0[g_100b0ac].goods_id = *(unsigned short*) goodsSlot;
+		if (*(int*) (goodsSlot + 0xe)  > 1 && ai_ProductionGoodsCount < 0x20) {
+			ai_ProductionGoodsPlans[ai_ProductionGoodsCount].goods_id = *(unsigned short*) goodsSlot;
 			for (j = 0; j < 4; j++) {
-				g_100d0c0[g_100b0ac].building_indices[j] = -1;
+				ai_ProductionGoodsPlans[ai_ProductionGoodsCount].building_indices[j] = -1;
 			}
-			g_100d0c0[g_100b0ac].min_1 = 0;
-			g_100d0c0[g_100b0ac].min_2 = 0;
-			g_100d0c0[g_100b0ac].value = -1.0e10f;
-			g_100d0c0[g_100b0ac].amount = 0;
-			g_100d0c0[g_100b0ac].unk_3c = 0;
-			g_100d0c0[g_100b0ac].unk_40 = 0;
-			g_100d0c0[g_100b0ac].unk_44 = 0;
-			g_100d0c0[g_100b0ac].unk_48 = 0x21;
-			g_100d0c0[g_100b0ac].flags = 0;
-			g_100b0ac++;
+			ai_ProductionGoodsPlans[ai_ProductionGoodsCount].min_1 = 0;
+			ai_ProductionGoodsPlans[ai_ProductionGoodsCount].min_2 = 0;
+			ai_ProductionGoodsPlans[ai_ProductionGoodsCount].value = -1.0e10f;
+			ai_ProductionGoodsPlans[ai_ProductionGoodsCount].amount = 0;
+			ai_ProductionGoodsPlans[ai_ProductionGoodsCount].unk_3c = 0;
+			ai_ProductionGoodsPlans[ai_ProductionGoodsCount].unk_40 = 0;
+			ai_ProductionGoodsPlans[ai_ProductionGoodsCount].unk_44 = 0;
+			ai_ProductionGoodsPlans[ai_ProductionGoodsCount].unk_48 = 0x21;
+			ai_ProductionGoodsPlans[ai_ProductionGoodsCount].flags = 0;
+			ai_ProductionGoodsCount++;
 		}
 		goodsSlot = gm_NextEntityQueryMatch();
 	}
 
 	ai_ResourceCount = 0;
-	for (i = 0; i < g_100b0ac; i++) {
+	for (i = 0; i < ai_ProductionGoodsCount; i++) {
 		for (j = 0; j < 4; j++) {
-			if (((OBJECT_PROTOTYPE *)lpObjektePROT)[g_100d0c0[i].goods_id].ingredient_ids[j] != 0) {
+			if (((OBJECT_PROTOTYPE *)lpObjektePROT)[ai_ProductionGoodsPlans[i].goods_id].ingredient_ids[j] != 0) {
 				for (k = 0; k < ai_ResourceCount; k++) {
-					if (g_100b0c0[k].goods_id == ((OBJECT_PROTOTYPE *)lpObjektePROT)[g_100d0c0[i].goods_id].ingredient_ids[j]) {
-						g_100d0c0[i].building_indices[j] = k;
+					if (ai_ResourceRequests[k].goods_id == ((OBJECT_PROTOTYPE *)lpObjektePROT)[ai_ProductionGoodsPlans[i].goods_id].ingredient_ids[j]) {
+						ai_ProductionGoodsPlans[i].building_indices[j] = k;
 						break;
 					}
 				}
-				if (g_100d0c0[i].building_indices[j] == -1) {
+				if (ai_ProductionGoodsPlans[i].building_indices[j] == -1) {
 					if (ai_ResourceCount >= 0x80) {
 						return;
 					}
-					g_100b0c0[ai_ResourceCount].goods_id = ((OBJECT_PROTOTYPE *)lpObjektePROT)[g_100d0c0[i].goods_id].ingredient_ids[j];
-					g_100b0c0[ai_ResourceCount].parent_index = -1;
-					g_100b0c0[ai_ResourceCount].supplier = 0;
-					g_100b0c0[ai_ResourceCount].unk_10 = 0;
-					g_100b0c0[ai_ResourceCount].requested = 0;
-					g_100b0c0[ai_ResourceCount].unk_18 = 0;
-					g_100b0c0[ai_ResourceCount].price = -1.0e10f;
-					g_100b0c0[ai_ResourceCount].allocated = 0;
-					g_100b0c0[ai_ResourceCount].stock = 0;
-					g_100b0c0[ai_ResourceCount].state_30 = 0x21;
-					g_100b0c0[ai_ResourceCount].flags = 0;
-					g_100d0c0[i].building_indices[j] = ai_ResourceCount;
+					ai_ResourceRequests[ai_ResourceCount].goods_id = ((OBJECT_PROTOTYPE *)lpObjektePROT)[ai_ProductionGoodsPlans[i].goods_id].ingredient_ids[j];
+					ai_ResourceRequests[ai_ResourceCount].parent_index = -1;
+					ai_ResourceRequests[ai_ResourceCount].supplier = 0;
+					ai_ResourceRequests[ai_ResourceCount].unk_10 = 0;
+					ai_ResourceRequests[ai_ResourceCount].requested = 0;
+					ai_ResourceRequests[ai_ResourceCount].unk_18 = 0;
+					ai_ResourceRequests[ai_ResourceCount].price = -1.0e10f;
+					ai_ResourceRequests[ai_ResourceCount].allocated = 0;
+					ai_ResourceRequests[ai_ResourceCount].stock = 0;
+					ai_ResourceRequests[ai_ResourceCount].state_30 = 0x21;
+					ai_ResourceRequests[ai_ResourceCount].flags = 0;
+					ai_ProductionGoodsPlans[i].building_indices[j] = ai_ResourceCount;
 					ai_ResourceCount++;
 				}
 			}
@@ -140,57 +140,57 @@ void __cdecl ai_CollectBuildingGoodsPlan(char* entity, char* prod, char* craft)
 	kind = ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) *(char**) (entity + 0x16c)].category;
 	if (kind == 0xe || kind == 8 || kind == 0x20) {
 		for (i = 0; i < ai_ResourceCount; i++) {
-			if (g_100b0c0[i].goods_id == 0x1c7 || g_100b0c0[i].goods_id == 0x1c4 ||
-			    g_100b0c0[i].goods_id == 0x1c5 || g_100b0c0[i].goods_id == 0x1c6 ||
-			    g_100b0c0[i].goods_id == 0x2af || g_100b0c0[i].goods_id == 0x2b0) {
-				g_100b0c0[i].flags |= 0x24;
-				for (k = 0; k < g_100b0ac; k++) {
-					if (g_100d0c0[k].goods_id == g_100b0c0[i].goods_id) {
-						g_100d0c0[k].flags |= 0x24;
+			if (ai_ResourceRequests[i].goods_id == 0x1c7 || ai_ResourceRequests[i].goods_id == 0x1c4 ||
+			    ai_ResourceRequests[i].goods_id == 0x1c5 || ai_ResourceRequests[i].goods_id == 0x1c6 ||
+			    ai_ResourceRequests[i].goods_id == 0x2af || ai_ResourceRequests[i].goods_id == 0x2b0) {
+				ai_ResourceRequests[i].flags |= 0x24;
+				for (k = 0; k < ai_ProductionGoodsCount; k++) {
+					if (ai_ProductionGoodsPlans[k].goods_id == ai_ResourceRequests[i].goods_id) {
+						ai_ProductionGoodsPlans[k].flags |= 0x24;
 						break;
 					}
 				}
-				if (k >= g_100b0ac) {
-					g_100d0c0[g_100b0ac].goods_id = g_100b0c0[i].goods_id;
+				if (k >= ai_ProductionGoodsCount) {
+					ai_ProductionGoodsPlans[ai_ProductionGoodsCount].goods_id = ai_ResourceRequests[i].goods_id;
 					for (j = 0; j < 4; j++) {
-						g_100d0c0[g_100b0ac].building_indices[j] = -1;
+						ai_ProductionGoodsPlans[ai_ProductionGoodsCount].building_indices[j] = -1;
 					}
-					g_100d0c0[g_100b0ac].min_1 = 0;
-					g_100d0c0[g_100b0ac].min_2 = 0;
-					g_100d0c0[g_100b0ac].value = -1.0e10f;
-					g_100d0c0[g_100b0ac].amount = 0;
-					g_100d0c0[g_100b0ac].unk_3c = 0;
-					g_100d0c0[g_100b0ac].unk_40 = 0;
-					g_100d0c0[g_100b0ac].unk_44 = 0;
-					g_100d0c0[g_100b0ac].unk_48 = 0x21;
-					g_100d0c0[g_100b0ac].flags = 0x24;
-					g_100b0ac = g_100b0ac + 1;
+					ai_ProductionGoodsPlans[ai_ProductionGoodsCount].min_1 = 0;
+					ai_ProductionGoodsPlans[ai_ProductionGoodsCount].min_2 = 0;
+					ai_ProductionGoodsPlans[ai_ProductionGoodsCount].value = -1.0e10f;
+					ai_ProductionGoodsPlans[ai_ProductionGoodsCount].amount = 0;
+					ai_ProductionGoodsPlans[ai_ProductionGoodsCount].unk_3c = 0;
+					ai_ProductionGoodsPlans[ai_ProductionGoodsCount].unk_40 = 0;
+					ai_ProductionGoodsPlans[ai_ProductionGoodsCount].unk_44 = 0;
+					ai_ProductionGoodsPlans[ai_ProductionGoodsCount].unk_48 = 0x21;
+					ai_ProductionGoodsPlans[ai_ProductionGoodsCount].flags = 0x24;
+					ai_ProductionGoodsCount = ai_ProductionGoodsCount + 1;
 				}
 			}
-			if (g_100b0c0[i].goods_id == 0x1c1 || g_100b0c0[i].goods_id == 0x1c2 ||
-			           g_100b0c0[i].goods_id == 0x1c3) {
-				g_100b0c0[i].flags |= 0x204;
-				for (k = 0; k < g_100b0ac; k++) {
-					if (g_100d0c0[k].goods_id == g_100b0c0[i].goods_id) {
-						g_100d0c0[k].flags |= 0x204;
+			if (ai_ResourceRequests[i].goods_id == 0x1c1 || ai_ResourceRequests[i].goods_id == 0x1c2 ||
+			           ai_ResourceRequests[i].goods_id == 0x1c3) {
+				ai_ResourceRequests[i].flags |= 0x204;
+				for (k = 0; k < ai_ProductionGoodsCount; k++) {
+					if (ai_ProductionGoodsPlans[k].goods_id == ai_ResourceRequests[i].goods_id) {
+						ai_ProductionGoodsPlans[k].flags |= 0x204;
 						break;
 					}
 				}
-				if (k >= g_100b0ac) {
-					g_100d0c0[g_100b0ac].goods_id = g_100b0c0[i].goods_id;
+				if (k >= ai_ProductionGoodsCount) {
+					ai_ProductionGoodsPlans[ai_ProductionGoodsCount].goods_id = ai_ResourceRequests[i].goods_id;
 					for (j = 0; j < 4; j++) {
-						g_100d0c0[g_100b0ac].building_indices[j] = -1;
+						ai_ProductionGoodsPlans[ai_ProductionGoodsCount].building_indices[j] = -1;
 					}
-					g_100d0c0[g_100b0ac].min_1 = 0;
-					g_100d0c0[g_100b0ac].min_2 = 0;
-					g_100d0c0[g_100b0ac].value = -1.0e10f;
-					g_100d0c0[g_100b0ac].amount = 0;
-					g_100d0c0[g_100b0ac].unk_3c = 0;
-					g_100d0c0[g_100b0ac].unk_40 = 0;
-					g_100d0c0[g_100b0ac].unk_44 = 0;
-					g_100d0c0[g_100b0ac].unk_48 = 0x21;
-					g_100d0c0[g_100b0ac].flags = 0x204;
-					g_100b0ac = g_100b0ac + 1;
+					ai_ProductionGoodsPlans[ai_ProductionGoodsCount].min_1 = 0;
+					ai_ProductionGoodsPlans[ai_ProductionGoodsCount].min_2 = 0;
+					ai_ProductionGoodsPlans[ai_ProductionGoodsCount].value = -1.0e10f;
+					ai_ProductionGoodsPlans[ai_ProductionGoodsCount].amount = 0;
+					ai_ProductionGoodsPlans[ai_ProductionGoodsCount].unk_3c = 0;
+					ai_ProductionGoodsPlans[ai_ProductionGoodsCount].unk_40 = 0;
+					ai_ProductionGoodsPlans[ai_ProductionGoodsCount].unk_44 = 0;
+					ai_ProductionGoodsPlans[ai_ProductionGoodsCount].unk_48 = 0x21;
+					ai_ProductionGoodsPlans[ai_ProductionGoodsCount].flags = 0x204;
+					ai_ProductionGoodsCount = ai_ProductionGoodsCount + 1;
 				}
 			}
 		}
@@ -199,67 +199,67 @@ void __cdecl ai_CollectBuildingGoodsPlan(char* entity, char* prod, char* craft)
 	kind = ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) *(char**) (entity + 0x16c)].category;
 	if (kind == 0x1d || kind == 0x1f) {
 		for (i = 0; i < ai_ResourceCount; i++) {
-			if (g_100b0c0[i].goods_id == 0x225 || g_100b0c0[i].goods_id == 0x226 || g_100b0c0[i].goods_id == 0x227 ||
-			    g_100b0c0[i].goods_id == 0x293 || g_100b0c0[i].goods_id == 0x294 || g_100b0c0[i].goods_id == 0x295) {
-				g_100b0c0[i].flags |= 0x404;
-				for (k = 0; k < g_100b0ac; k++) {
-					if (g_100d0c0[k].goods_id == g_100b0c0[i].goods_id) {
-						g_100d0c0[k].flags |= 0x404;
+			if (ai_ResourceRequests[i].goods_id == 0x225 || ai_ResourceRequests[i].goods_id == 0x226 || ai_ResourceRequests[i].goods_id == 0x227 ||
+			    ai_ResourceRequests[i].goods_id == 0x293 || ai_ResourceRequests[i].goods_id == 0x294 || ai_ResourceRequests[i].goods_id == 0x295) {
+				ai_ResourceRequests[i].flags |= 0x404;
+				for (k = 0; k < ai_ProductionGoodsCount; k++) {
+					if (ai_ProductionGoodsPlans[k].goods_id == ai_ResourceRequests[i].goods_id) {
+						ai_ProductionGoodsPlans[k].flags |= 0x404;
 						break;
 					}
 				}
-				if (k >= g_100b0ac) {
-					g_100d0c0[g_100b0ac].goods_id = g_100b0c0[i].goods_id;
+				if (k >= ai_ProductionGoodsCount) {
+					ai_ProductionGoodsPlans[ai_ProductionGoodsCount].goods_id = ai_ResourceRequests[i].goods_id;
 					for (j = 0; j < 4; j++) {
-						g_100d0c0[g_100b0ac].building_indices[j] = -1;
+						ai_ProductionGoodsPlans[ai_ProductionGoodsCount].building_indices[j] = -1;
 					}
-					g_100d0c0[g_100b0ac].min_1 = 0;
-					g_100d0c0[g_100b0ac].min_2 = 0;
-					g_100d0c0[g_100b0ac].value = -1.0e10f;
-					g_100d0c0[g_100b0ac].amount = 0;
-					g_100d0c0[g_100b0ac].unk_3c = 0;
-					g_100d0c0[g_100b0ac].unk_40 = 0;
-					g_100d0c0[g_100b0ac].unk_44 = 0;
-					g_100d0c0[g_100b0ac].unk_48 = 0x21;
-					g_100d0c0[g_100b0ac].flags = 0x404;
-					g_100b0ac = g_100b0ac + 1;
+					ai_ProductionGoodsPlans[ai_ProductionGoodsCount].min_1 = 0;
+					ai_ProductionGoodsPlans[ai_ProductionGoodsCount].min_2 = 0;
+					ai_ProductionGoodsPlans[ai_ProductionGoodsCount].value = -1.0e10f;
+					ai_ProductionGoodsPlans[ai_ProductionGoodsCount].amount = 0;
+					ai_ProductionGoodsPlans[ai_ProductionGoodsCount].unk_3c = 0;
+					ai_ProductionGoodsPlans[ai_ProductionGoodsCount].unk_40 = 0;
+					ai_ProductionGoodsPlans[ai_ProductionGoodsCount].unk_44 = 0;
+					ai_ProductionGoodsPlans[ai_ProductionGoodsCount].unk_48 = 0x21;
+					ai_ProductionGoodsPlans[ai_ProductionGoodsCount].flags = 0x404;
+					ai_ProductionGoodsCount = ai_ProductionGoodsCount + 1;
 				}
 			}
 		}
 	}
 
 	for (i = 0; i < ai_ResourceCount; i++) {
-		for (k = 0; k < g_100b0ac; k++) {
-			if (g_100b0c0[i].goods_id == g_100d0c0[k].goods_id) {
-				g_100b0c0[i].parent_index = k;
+		for (k = 0; k < ai_ProductionGoodsCount; k++) {
+			if (ai_ResourceRequests[i].goods_id == ai_ProductionGoodsPlans[k].goods_id) {
+				ai_ResourceRequests[i].parent_index = k;
 				break;
 			}
 		}
 	}
 
-	for (i = 0; i < g_100b0ac; i++) {
-		goodsSlot = fcn_00502cd0(*(int*) (craft + 0x14), 1, 0, g_100d0c0[i].goods_id);
+	for (i = 0; i < ai_ProductionGoodsCount; i++) {
+		goodsSlot = fcn_00502cd0(*(int*) (craft + 0x14), 1, 0, ai_ProductionGoodsPlans[i].goods_id);
 		if (goodsSlot == 0) {
-			g_100d0c0[i].unk_3c = 0;
+			ai_ProductionGoodsPlans[i].unk_3c = 0;
 		} else {
-			g_100d0c0[i].unk_3c = gm_GetMsgField(craft, goodsSlot);
+			ai_ProductionGoodsPlans[i].unk_3c = gm_GetMsgField(craft, goodsSlot);
 		}
-		g_100d0c0[i].unk_40 =
-		    gm_eval_SlotVoll(craft, g_100d0c0[i].goods_id, 0xf4240);
+		ai_ProductionGoodsPlans[i].unk_40 =
+		    gm_eval_SlotVoll(craft, ai_ProductionGoodsPlans[i].goods_id, 0xf4240);
 	}
 
 	for (i = 0; i < ai_ResourceCount; i++) {
-		goodsSlot = fcn_00502cd0(*(int*) (craft + 0x14), 1, 0, g_100b0c0[i].goods_id);
+		goodsSlot = fcn_00502cd0(*(int*) (craft + 0x14), 1, 0, ai_ResourceRequests[i].goods_id);
 		if (goodsSlot == 0) {
-			g_100b0c0[i].stock = 0;
+			ai_ResourceRequests[i].stock = 0;
 		} else {
-			g_100b0c0[i].stock = gm_GetMsgField(craft, goodsSlot);
-			if (g_100b0c0[i].stock == 0) {
-				cm_RequestClearLagerslot(*(int*) (craft + 2), g_100b0c0[i].goods_id);
+			ai_ResourceRequests[i].stock = gm_GetMsgField(craft, goodsSlot);
+			if (ai_ResourceRequests[i].stock == 0) {
+				cm_RequestClearLagerslot(*(int*) (craft + 2), ai_ResourceRequests[i].goods_id);
 			}
 		}
-		g_100b0c0[i].capacity =
-		    gm_eval_SlotVoll(craft, g_100b0c0[i].goods_id, 0xf4240);
+		ai_ResourceRequests[i].capacity =
+		    gm_eval_SlotVoll(craft, ai_ResourceRequests[i].goods_id, 0xf4240);
 	}
 
 	for (action = he_StartHandlungSearch(2, 0, 0xb, 3,
@@ -285,27 +285,27 @@ void __cdecl ai_CollectBuildingGoodsPlan(char* entity, char* prod, char* craft)
 			if (found != 0) {
 				continue;
 			}
-			for (j = 0; j < g_100b0ac; j++) {
-				if (id == g_100d0c0[j].goods_id) {
-					g_100d0c0[j].amount += st.x68[i];
+			for (j = 0; j < ai_ProductionGoodsCount; j++) {
+				if (id == ai_ProductionGoodsPlans[j].goods_id) {
+					ai_ProductionGoodsPlans[j].amount += st.x68[i];
 				}
 			}
 			for (j = 0; j < ai_ResourceCount; j++) {
-				if (id == g_100b0c0[j].goods_id) {
-					g_100b0c0[j].allocated += st.x68[i];
+				if (id == ai_ResourceRequests[j].goods_id) {
+					ai_ResourceRequests[j].allocated += st.x68[i];
 				}
 			}
 		}
 		for (j = 0; j < 3; j++) {
 			if (((unsigned short*) (action + 0xd6))[j] != 0) {
-				for (i = 0; i < g_100b0ac; i++) {
-					if (((unsigned short*) (action + 0xd6))[j] == g_100d0c0[i].goods_id) {
-						g_100d0c0[i].amount += ((int*) (action + 0xdc))[j];
+				for (i = 0; i < ai_ProductionGoodsCount; i++) {
+					if (((unsigned short*) (action + 0xd6))[j] == ai_ProductionGoodsPlans[i].goods_id) {
+						ai_ProductionGoodsPlans[i].amount += ((int*) (action + 0xdc))[j];
 					}
 				}
 				for (i = 0; i < ai_ResourceCount; i++) {
-					if (((unsigned short*) (action + 0xd6))[j] == g_100b0c0[i].goods_id) {
-						g_100b0c0[i].allocated += ((int*) (action + 0xdc))[j];
+					if (((unsigned short*) (action + 0xd6))[j] == ai_ResourceRequests[i].goods_id) {
+						ai_ResourceRequests[i].allocated += ((int*) (action + 0xdc))[j];
 					}
 				}
 			}
@@ -319,14 +319,14 @@ void __cdecl ai_CollectBuildingGoodsPlan(char* entity, char* prod, char* craft)
 		     action != 0;
 		     action = he_fn_Handlung()) {
 			for (i = 0; i < ai_ResourceCount; i++) {
-				if (g_100b0c0[i].goods_id !=
+				if (ai_ResourceRequests[i].goods_id !=
 				    (int) *(unsigned short*) (action + 0xae)) {
 					continue;
 				}
-				g_100b0c0[i].allocated =
+				ai_ResourceRequests[i].allocated =
 				    (int) (((float) gm_GetBuildingTechEffect(*(char**) (entity + 0x16c), 0xb, 1) * 0.01f + 1.0f) *
 				               g_664124 +
-				           (float) g_100b0c0[i].allocated);
+				           (float) ai_ResourceRequests[i].allocated);
 			}
 		}
 	}
@@ -338,14 +338,14 @@ void __cdecl ai_CollectBuildingGoodsPlan(char* entity, char* prod, char* craft)
 		     action != 0;
 		     action = he_fn_Handlung()) {
 			for (i = 0; i < ai_ResourceCount; i++) {
-				if (g_100b0c0[i].goods_id !=
+				if (ai_ResourceRequests[i].goods_id !=
 				    (int) *(unsigned short*) (action + 0xae)) {
 					continue;
 				}
-				g_100b0c0[i].allocated =
+				ai_ResourceRequests[i].allocated =
 				    (int) (((float) gm_GetBuildingTechEffect(*(char**) (entity + 0x16c), 0xb, 1) * 0.01f + 1.0f) *
 				               g_664124 +
-				           (float) g_100b0c0[i].allocated);
+				           (float) ai_ResourceRequests[i].allocated);
 			}
 		}
 	}
@@ -357,46 +357,46 @@ void __cdecl ai_CollectBuildingGoodsPlan(char* entity, char* prod, char* craft)
 		     action != 0;
 		     action = he_fn_Handlung()) {
 			for (i = 0; i < ai_ResourceCount; i++) {
-				if (g_100b0c0[i].goods_id !=
+				if (ai_ResourceRequests[i].goods_id !=
 				    (int) *(unsigned short*) (action + 0xac)) {
 					continue;
 				}
-				g_100b0c0[i].allocated =
+				ai_ResourceRequests[i].allocated =
 				    (int) (((float) gm_GetBuildingTechEffect(*(char**) (entity + 0x16c), 0xb, 1) * 0.01f + 1.0f) *
 				               g_664124 +
-				           (float) g_100b0c0[i].allocated);
+				           (float) ai_ResourceRequests[i].allocated);
 			}
 		}
 	}
 
-	for (i = 0; i < g_100b0ac; i++) {
-		ai_CalcProductionGoodProfit(&g_100d0c0[i]);
+	for (i = 0; i < ai_ProductionGoodsCount; i++) {
+		ai_CalcProductionGoodProfit(&ai_ProductionGoodsPlans[i]);
 	}
 
-	for (i = 0; i < g_100b0ac; i++) {
-		for (j = i; j < g_100b0ac; j++) {
-			if (g_100d0c0[i].slope < g_100d0c0[j].slope) {
-				tmp = g_100d0c0[i];
-				g_100d0c0[i] = g_100d0c0[j];
-				g_100d0c0[j] = tmp;
+	for (i = 0; i < ai_ProductionGoodsCount; i++) {
+		for (j = i; j < ai_ProductionGoodsCount; j++) {
+			if (ai_ProductionGoodsPlans[i].slope < ai_ProductionGoodsPlans[j].slope) {
+				tmp = ai_ProductionGoodsPlans[i];
+				ai_ProductionGoodsPlans[i] = ai_ProductionGoodsPlans[j];
+				ai_ProductionGoodsPlans[j] = tmp;
 			}
 		}
 	}
 
 	for (i = 0; i < ai_ResourceCount; i++) {
-		if (g_100b0c0[i].parent_index != -1) {
-			for (j = 0; j < g_100b0ac; j++) {
-				if (g_100b0c0[i].goods_id == g_100d0c0[j].goods_id) {
-					g_100b0c0[i].flags |= 0x40;
-					g_100d0c0[j].flags |= 0x40;
-					g_100b0c0[i].parent_index = j;
+		if (ai_ResourceRequests[i].parent_index != -1) {
+			for (j = 0; j < ai_ProductionGoodsCount; j++) {
+				if (ai_ResourceRequests[i].goods_id == ai_ProductionGoodsPlans[j].goods_id) {
+					ai_ResourceRequests[i].flags |= 0x40;
+					ai_ProductionGoodsPlans[j].flags |= 0x40;
+					ai_ResourceRequests[i].parent_index = j;
 				}
 			}
 		}
 	}
 
-	for (i = 0; i < g_100b0ac; i++) {
-		g_100d0c0[i].unk_48 = i;
+	for (i = 0; i < ai_ProductionGoodsCount; i++) {
+		ai_ProductionGoodsPlans[i].unk_48 = i;
 	}
 }
 unsigned char _dpad_100af80[320];

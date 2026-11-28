@@ -1,10 +1,10 @@
 #include <string.h>
 
 extern int gm_GameTime;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
-extern int g_666018;
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
+extern int gm_TargetPersonTypeMask;
 extern int g_66601c;
 
 int __cdecl gm_LookupEntityRecordById(unsigned int);
@@ -43,12 +43,12 @@ int __cdecl gm_RunDuelChallengeAction(char* actor, char* request)
 		*(int*) (rec + 0xc) = *(int*) (actor + 4);
 		*(int*) (rec + 0x58) = *(int*) (actor + 4);
 		*(int*) (rec + 0x28) = gm_GameTime;
-		*(int*) (rec + 0x30) = g_7f4c08;
-		*(int*) (rec + 0x2c) = g_7f4c04;
+		*(int*) (rec + 0x30) = gm_GameTimeSliceDword;
+		*(int*) (rec + 0x2c) = gm_GameTimeHour;
 		*(unsigned short*) (rec + 0x60) = id;
 		*(char*) (rec + 4) = 0x47;
 		*(char*) (rec + 0x36) = 2;
-		*(unsigned short*) (rec + 0x34) = g_7f4c0c;
+		*(unsigned short*) (rec + 0x34) = gm_GameTimeTailWord;
 		*(unsigned short*) (rec + 0x62) = owner;
 		*(int*) (rec + 0x5c) = *(int*) (found + 4);
 		cm_SendCopyEntityData(rec);
@@ -57,7 +57,7 @@ int __cdecl gm_RunDuelChallengeAction(char* actor, char* request)
 	}
 	memset(init, 0, sizeof(init));
 	init[1] = 0x400;
-	init[2] = g_666018;
+	init[2] = gm_TargetPersonTypeMask;
 	init[3] = g_66601c;
 	init[4] = 6;
 	io_FormatTextBuffer(name, 0x1d66);

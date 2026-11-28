@@ -2027,7 +2027,7 @@ int __cdecl ls_LoadEntities(void* ctx)
 #if defined(REBREW_SERVER)
 	if (ls_ReadVfsDataChecked(&id, 2, 1, ctx) == 0) {
 #else
-	if (ls_ReadVfsDataChecked(&g_774970, 2, 1, ctx) == 0) {
+	if (ls_ReadVfsDataChecked(&gm_LocalPlayerSlot, 2, 1, ctx) == 0) {
 #endif
 		return 0;
 	}

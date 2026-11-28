@@ -14,8 +14,8 @@ T426d00* __cdecl evt_FindScriptByName(char* name)
 	int i;
 
 	for (i = 0; i < 0x80; i++) {
-		if (fcn_0065f220(((T426d00*)g_6b7e94)[i].name, name) == 0) {
-			return &((T426d00*)g_6b7e94)[i];
+		if (fcn_0065f220(((T426d00*)evt_ScriptSlots)[i].name, name) == 0) {
+			return &((T426d00*)evt_ScriptSlots)[i];
 		}
 	}
 	return 0;

@@ -43,7 +43,7 @@ typedef struct {
 
 extern unsigned char* lpGebaeudePROT;
 
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 
 int __cdecl cm_SendSellObjekt(int, int, int, int, char, int);
@@ -69,17 +69,17 @@ void __cdecl init_SetupBetriebWorkers(Player* p)
 	gm_GetBuildingTypeCategory(p->office);
 	o = &((BUILDING_PROTOTYPE *)lpGebaeudePROT)[p->office];
 	if (o->category == 9) {
-		cm_SendSellObjekt(p->id, -1, 0x136, 1, (*(char*)&g_773d75), 0);
-		cm_RequestMoveCredits(((ENTITY_RECORD*)g_7f4ca0)[p->slot].entity_id, -1, (*(char*)&g_773d75), gm_ConvertUnitsToAmount(0x1f4, (*(char*)&g_773d75)));
+		cm_SendSellObjekt(p->id, -1, 0x136, 1, (*(char*)&gm_ActiveTownIndex), 0);
+		cm_RequestMoveCredits(((ENTITY_RECORD*)gm_EntitySlotTable)[p->slot].entity_id, -1, (*(char*)&gm_ActiveTownIndex), gm_ConvertUnitsToAmount(0x1f4, (*(char*)&gm_ActiveTownIndex)));
 	} else if (o->category != 4 && o->category != 0x10 && o->category != 0x13) {
-		cm_SendSellObjekt(p->id, -1, 0x134, 1, (*(char*)&g_773d75), 0);
+		cm_SendSellObjekt(p->id, -1, 0x134, 1, (*(char*)&gm_ActiveTownIndex), 0);
 	}
 	if (o->category != 9) {
 		if (o->category == 4 || o->category == 0x10 || o->category == 0x13 || o->category == 0x1d) {
 			if (o->category == 0x1d) {
 				h = gv_AssignGraveyardField(p);
 			} else {
-				if (((ENTITY_RECORD*)g_7f4ca0)[p->slot].entity_state != 6 && ((ENTITY_RECORD*)g_7f4ca0)[p->slot].entity_state != 7) {
+				if (((ENTITY_RECORD*)gm_EntitySlotTable)[p->slot].entity_state != 6 && ((ENTITY_RECORD*)gm_EntitySlotTable)[p->slot].entity_state != 7) {
 					cm_RequestAssignWorker(p, 0, o->role_230, 0);
 				}
 				h = cm_RequestAssignWorker(p, 0, o->role_230, 0);

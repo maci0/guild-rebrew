@@ -11,19 +11,19 @@ typedef struct {
 	int f194;
 } House;
 extern char* lpObjektePROT;
-extern char* g_7746c4;
-extern int g_7746c8;
+extern char* d2_VisitedBuilding;
+extern int d2_InteriorBuilding;
 extern int g_7746f8;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern int g_7747b4;
+extern int gm_DifficultyLevel;
 extern int g_85ab60;
-extern int g_14ce8e0;
-extern int g_100f1dc;
+extern int io_RightButtonReleased;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
 extern char* gm_CityEntity;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 extern char g_7f3f24[];
 extern char* g_14a5398;
 extern char s_6aa330[];
@@ -84,12 +84,12 @@ void __cdecl d2_RunTechTreeDialog(char* a0, int a1)
 	char* p;
 	int s;
 
-	if (a0 == g_7746c4) {
+	if (a0 == d2_VisitedBuilding) {
 		if (!d2_TutorialAllowsFlag(0x200))
 			return;
 		d2_DispatchTutorialInput(0x11, (int) a0, 0, a1);
 	}
-	house = (char *)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) g_774970];
+	house = (char *)&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned int) gm_LocalPlayerSlot];
 	q = fcn_00502cd0(*(int*) (a0 + 0x5d), 1, 0, a1);
 	if (!q) {
 		q = fcn_00502cd0(*(int*) (a0 + 0x5d), 1, 4, 2);
@@ -106,18 +106,18 @@ void __cdecl d2_RunTechTreeDialog(char* a0, int a1)
 	h = d2_GetWindowListItem(h, 4, io_AppendText(0x17e2));
 	gm_CollectGebaeudeUpgrades(a0);
 	while (main_RunFrameLoop((void*) d2_RunTechTreeDialog, 0x657c7)) {
-		if (g_14ce8e0)
-			g_774654 = 1;
-		if (g_100f1dc != -1 && d2_CurrentElementId == h)
+		if (io_RightButtonReleased)
+			d2_DialogCloseRequested = 1;
+		if (d2_DialogButtonAction != -1 && d2_CurrentElementId == h)
 			d2_ShowTechTreeEffects(a0);
-		if (g_100f1dc >= 0xdf && g_100f1dc <= 0x3bb) {
+		if (d2_DialogButtonAction >= 0xdf && d2_DialogButtonAction <= 0x3bb) {
 			for (i = 0; i < g_85ab60; i++) {
 				p = &g_7f3f24[i * 0x34];
 				if (*(int*) p != -1 && d2_CurrentElementId == *(int*) p)
 					break;
 			}
 			if (i < g_85ab60) {
-				sel = g_100f1dc - 0xdf;
+				sel = d2_DialogButtonAction - 0xdf;
 				memset(msg, 0, sizeof msg);
 				if (!d2_DispatchTutorialEvent(0x2b, (int) a0, 0, sel)) continue; {
 					node = (char *)&((OBJECT_PROTOTYPE*)lpObjektePROT)[sel];
@@ -133,12 +133,12 @@ void __cdecl d2_RunTechTreeDialog(char* a0, int a1)
 							*(int*) (msg + 0x58) = *(int*) (a0 + 1);
 							*(int*) (msg + 0x60) = sel;
 							*(pos14_7f4c00*) (msg + 0x28) = gm_GameTime;
-							*(int*) (msg + 8) = *(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) *(unsigned short*) (a0 + 0x25)] + 4);
+							*(int*) (msg + 8) = *(int*) ((char *)&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned int) *(unsigned short*) (a0 + 0x25)] + 4);
 							*(int*) (msg + 0x5c) = *(int*) (msg + 8);
 						} else {
 							*(int*) (msg + 0x0c) = *(int*) (a0 + 1);
 							*(unsigned char*) (msg + 4) = 2;
-							*(int*) (msg + 8) = *(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) *(unsigned short*) (a0 + 0x25)] + 4);
+							*(int*) (msg + 8) = *(int*) ((char *)&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned int) *(unsigned short*) (a0 + 0x25)] + 4);
 							*(pos14_7f4c00*) (msg + 0x28) = gm_GameTime;
 							*(short*) (msg + 0x58) = (short) sel;
 							*(int*) (msg + 0x5c) = *(int*) ((char*) q + 2);
@@ -146,16 +146,16 @@ void __cdecl d2_RunTechTreeDialog(char* a0, int a1)
 						req = *(unsigned char*) (node + 0x40);
 						if (req == 0) {
 							ok = 0;
-							f = (float) (g_7747b4 * 0.25 + 0.5);
+							f = (float) (gm_DifficultyLevel * 0.25 + 0.5);
 							n = (int) eval_ObjektPreis2Credits(sel, 100);
 							amount = (int) (n * f);
 							if (*(unsigned short*) (a0 + 0x27) != *(unsigned short*) gm_CityEntity) {
-								if (gm_CheckEntityStock((char *)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) g_774970], amount, (char) g_773d75))
+								if (gm_CheckEntityStock((char *)&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned int) gm_LocalPlayerSlot], amount, (char) gm_ActiveTownIndex))
 									ok = 1;
 								io_FormatTextBuffer(buf, 0x1a, amount, a0, sel * 2 + 0x9a8);
 							} else {
 								p = gm_FindBuildingTreasury(a0);
-								if (d2_CheckFundsAndNotify(p, *(int*) (p + 0x14), amount, (char) g_773d75))
+								if (d2_CheckFundsAndNotify(p, *(int*) (p + 0x14), amount, (char) gm_ActiveTownIndex))
 									ok = 1;
 								io_FormatTextBuffer(buf, 0x1c, amount, a0, sel * 2 + 0x9a8);
 							}
@@ -165,14 +165,14 @@ void __cdecl d2_RunTechTreeDialog(char* a0, int a1)
 								d2_DispatchTutorialInput(0x2b, (int) a0, 0, sel);
 								cm_SendLogAction(s_6aa328);
 								if (*(unsigned short*) (a0 + 0x27) != *(unsigned short*) gm_CityEntity) {
-									cm_RequestMoveCredits(-1, *(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) *(unsigned short*) (a0 + 0x27)] + 4), (char) g_773d75, amount);
-									p = gm_GetEntityTableEntry((char *)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) g_774970]);
+									cm_RequestMoveCredits(-1, *(int*) ((char *)&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned int) *(unsigned short*) (a0 + 0x27)] + 4), (char) gm_ActiveTownIndex, amount);
+									p = gm_GetEntityTableEntry((char *)&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned int) gm_LocalPlayerSlot]);
 									if (p)
 										*(int*) (p + 0x40) += amount;
 								} else {
 									p = gm_FindBuildingTreasury(a0);
 									if (p)
-										cm_RequestTransferCurrencyNoKill(-1, *(int*) (p + 2), (char) g_773d75, amount);
+										cm_RequestTransferCurrencyNoKill(-1, *(int*) (p + 2), (char) gm_ActiveTownIndex, amount);
 								}
 								s = cm_SendCopyEntityData(msg);
 								cm_SendTraceEnd(s_6aa328);
@@ -194,7 +194,7 @@ void __cdecl d2_RunTechTreeDialog(char* a0, int a1)
 							}
 						}
 					} else {
-						if (q && (((*(unsigned short*) q == 0) == 0xfd) || g_7746c8)) {
+						if (q && (((*(unsigned short*) q == 0) == 0xfd) || d2_InteriorBuilding)) {
 							p = node + 1;
 							{
 								char* d = name;
@@ -223,6 +223,6 @@ tail:
 	}
 	d2_CloseDependencyDiagram();
 	g_7746f8 = 0;
-	if (a0 == g_7746c4)
+	if (a0 == d2_VisitedBuilding)
 		d2_DispatchTutorialInput(0x11, (int) a0, 1, a1);
 }

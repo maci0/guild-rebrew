@@ -47,7 +47,7 @@ int __cdecl gm_HandleMsg1fDrainHealth(int* request)
 	found = -1;
 	chosen = ents[gm_RandomMod(n)];
 	for (i = 0; i < 768; i++) {
-		rec = ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]);
+		rec = ((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i]);
 		if (*(unsigned char*) (rec + 2) != 0xffff && *(char**) (rec + 0x16c) == chosen
 		    && rec[0x165] != 0)
 			found = i;

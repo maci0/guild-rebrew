@@ -1,8 +1,8 @@
 #include <math.h>
 
-extern int g_1043370;
+extern int tp_ch_PathGrid;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 extern float g_662920;
 extern float g_665ea0;
 extern double g_665ea8;
@@ -45,7 +45,7 @@ int __cdecl he_StepSensenmannMove(char* action)
 					level = *(int*) (rec + 0x1cc);
 					if (level != 0 && *(int*) (level + 0x318) != 0) {
 						if (*(int*) (*(int*) (action + 0xc8) + 0x1d0) != 0) {
-							*(int*) (action + 0xec) = g_6b7fac;
+							*(int*) (action + 0xec) = gm_GameTicks;
 							d3_SelectSceneContext(saved, 1);
 							return 1;
 						}
@@ -56,7 +56,7 @@ int __cdecl he_StepSensenmannMove(char* action)
 						dir[1] = 0.0f;
 						dir[2] = pos1[2] - pos2[2];
 						len = (float) sqrt((double) (dir[0] * dir[0] + dir[2] * dir[2]));
-						d3sm_SampleHeight(g_1043370, pos1, keys, (int*) flag, &scale);
+						d3sm_SampleHeight(tp_ch_PathGrid, pos1, keys, (int*) flag, &scale);
 						pos1[1] = scale + 80.0f;
 						dir[0] = pos1[0] - pos2[0];
 						dir[1] = pos1[1] - pos2[1];
@@ -68,11 +68,11 @@ int __cdecl he_StepSensenmannMove(char* action)
 						}
 						keys[0] = *(int*) (action + 0xec);
 						keys[1] = 0;
-						scale = (float) (unsigned int) g_6b7fac - (float) keys[0];
-						level = g_1043370;
+						scale = (float) (unsigned int) gm_GameTicks - (float) keys[0];
+						level = tp_ch_PathGrid;
 						ret = 1;
 						keys[2] = gm_GetGameSpeedSetting();
-						*(int*) (action + 0xec) = g_6b7fac;
+						*(int*) (action + 0xec) = gm_GameTicks;
 						scale = ((float) (unsigned int) keys[2] * 0.25f + 0.5f) * scale;
 						d3_NormalizeVector(dir);
 						dir[0] = scale * dir[0];

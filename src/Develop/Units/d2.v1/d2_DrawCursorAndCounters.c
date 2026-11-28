@@ -32,12 +32,12 @@ typedef struct {
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_67d8cc;
-extern short g_7725c4;
+extern short d2_CursorStateId;
 extern char* g_7725c0;
 #include "Develop/client_types.h"
 extern Anim_100e7a0 g_100e7a0[0x30];
 
-extern char* g_772500;
+extern char* d2_FileObjTable;
 extern int g_67d3ac;
 extern int d2_ResourceOffset;
 extern char* g_14a567c;
@@ -78,7 +78,7 @@ void __cdecl d2_DrawCursorAndCounters(Ctx* c, int x, int y)
 	y1 = d2_ClipBottom;
 	d2_SetClipRect(0, 0, c->w, c->h);
 	if (g_67d8cc == -1) {
-		d2_DrawSpriteFromSet(x, y, c, (*(int*)&g_7725c0), (*(int*)&g_7725c4) & 0xffff);
+		d2_DrawSpriteFromSet(x, y, c, (*(int*)&g_7725c0), (*(int*)&d2_CursorStateId) & 0xffff);
 	} else {
 		((Slot*)g_100e7a0)[g_67d8cc].x = (short) x;
 		((Slot*)g_100e7a0)[g_67d8cc].y = (short) y;
@@ -90,7 +90,7 @@ void __cdecl d2_DrawCursorAndCounters(Ctx* c, int x, int y)
 	for (i = 0; i < 6; i++) {
 		p = &((Item*)d2_DisplayCounters)[i];
 		if (p->id != -1) {
-			px = x + ((Cls*)g_772500)[g_67d3ac].x50 + k % 3 * 0x1a;
+			px = x + ((Cls*)d2_FileObjTable)[g_67d3ac].x50 + k % 3 * 0x1a;
 			py = (d2_FontHeight + 0x1a) * (k / 3) + y;
 			h = d2_GetResourceData(p->id);
 			if (d2_DrawScaledSpriteQuad(px, py, c, h, d2_ResourceOffset, 0.5f, 0)) {

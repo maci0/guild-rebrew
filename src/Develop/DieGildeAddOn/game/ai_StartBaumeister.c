@@ -14,7 +14,7 @@ typedef struct Blk24 {
 #include "Develop/client_types.h"
 
 extern pos14_7f4c00 gm_GameTime;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern unsigned char* lpGebaeudeINST;
 extern unsigned char* lpGebaeudePROT;
 
@@ -50,7 +50,7 @@ int __cdecl ai_StartBaumeister(char* a1, char* e, int a3, Blk24* o1, Blk24* o2)
 		return 0;
 	}
 	a1 = fcn_00502cd0(*(int*) (q + 0x5d), 2, 6, 0, 0x115);
-	val = gm_SumQueryEntryValues(*(int*) (a1 + 0x14), g_773d75);
+	val = gm_SumQueryEntryValues(*(int*) (a1 + 0x14), gm_ActiveTownIndex);
 	if (val < (gm_RandomMod(3000) + 1000) * 32) {
 		return 0;
 	}

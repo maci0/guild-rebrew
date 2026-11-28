@@ -20,8 +20,8 @@ extern char g_6a2f40[];
 extern char g_6a2f64[];
 extern char g_6a2f24[];
 extern char g_6a2f5c[];
-extern char* g_7746c4;
-extern unsigned char* g_7746c8;
+extern char* d2_VisitedBuilding;
+extern unsigned char* d2_InteriorBuilding;
 extern int d2_CurrentWindowId;
 #include "Develop/client_types.h"
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
@@ -62,8 +62,8 @@ void __cdecl d2_ShowGebaeudeItemInfoPanel(unsigned short* item)
 	}
 	g_6a25b8 = d2_LoadForm(g_1040494 - 0x68, 0x106, g_6a2f40);
 	d2_SetForm(g_6a25b8, 1);
-	if (((unsigned char*)g_7746c4) != 0 || g_7746c8 != 0) {
-		store = ((unsigned char*)g_7746c4) != 0 ? ((unsigned char*)g_7746c4) : g_7746c8;
+	if (((unsigned char*)d2_VisitedBuilding) != 0 || d2_InteriorBuilding != 0) {
+		store = ((unsigned char*)d2_VisitedBuilding) != 0 ? ((unsigned char*)d2_VisitedBuilding) : d2_InteriorBuilding;
 	}
 	if (store != 0) {
 		if (store[5] != 0) {
@@ -75,13 +75,13 @@ void __cdecl d2_ShowGebaeudeItemInfoPanel(unsigned short* item)
 		io_AppendText(g_6a2f5c, *item * 2 + 0x9a8);
 	}
 	d2_SetForm(g_6a25b8, 0);
-	id = d2_AddElementToWindow(((((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1) - 1, 0x48, *item + 0xdf, d2_CurrentWindowId);
-	((D2_CONTROL_TL*)g_1015ea0)[id].value_05c = 1;
+	id = d2_AddElementToWindow(((((D2_WIN*)d2_Windows)[d2_CurrentWindowId].width - 0x30) >> 1) - 1, 0x48, *item + 0xdf, d2_CurrentWindowId);
+	((D2_CONTROL_TL*)d2_Controls)[id].value_05c = 1;
 	rec = (char*) &((OBJECT_PROTOTYPE*) lpObjektePROT)[*item];
 	if (store != 0 && (*rec == 2 || *rec == 6)) {
 		parent = gm_ResolveParentEntity(item);
-		fl = gm_GetEntityUiFlags(g_774970, store, 0, 0);
-		if (*parent != g_774970 && !(fl & 0x10)) {
+		fl = gm_GetEntityUiFlags(gm_LocalPlayerSlot, store, 0, 0);
+		if (*parent != gm_LocalPlayerSlot && !(fl & 0x10)) {
 			g_6a25e0 = d2_CreateWindowTextButton(0, 0xa6, g_14ad0dc);
 		} else {
 			if (gm_CollectBuildingSubObjects(store, item, 0)) {

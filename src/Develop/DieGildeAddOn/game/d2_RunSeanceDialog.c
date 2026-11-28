@@ -12,7 +12,7 @@
 
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
@@ -51,7 +51,7 @@ void __cdecl d2_RunSeanceDialog(char* e, char* res)
 
 	d3snd_SelectVoiceCode(*(int*) (res + 0x14), *(int*) (res + 0x4c));
 	m = d2_RunSeance(e, res);
-	p = gm_FindMostWantedCrimeTarget(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), 4, list, &cnt);
+	p = gm_FindMostWantedCrimeTarget(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot]), 4, list, &cnt);
 	b = p == 0;
 	f = gv_CalcSeanceBonus(e);
 	if (gm_RandomFloat01() + f - 0.1f < 1.0f) {
@@ -62,19 +62,19 @@ void __cdecl d2_RunSeanceDialog(char* e, char* res)
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
 	d2_InitWindowBounds(d2_CurrentWindowId);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	d2_SetForm(h, 1);
 	t = d3snd_SelectVoiceCode(*(int*) (res + 0x14), *(int*) (res + 0x4c));
 	if (b == 0) {
 		for (i = 0; i < cnt; i++) {
-			cm_RequestLinkEvidence(list[i], ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id);
+			cm_RequestLinkEvidence(list[i], ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id);
 		}
-		gm_IncreaseEntityStat(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), 1);
+		gm_IncreaseEntityStat(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot]), 1);
 		io_AppendText(0x40ef, 0x40cc, *p);
 		d3snd_QueueSound(t, 0, "GEIST_KOMMT", gm_RandomMod(8), 0xfa);
 	} else if (b == 1) {
 		v = (gm_RandomMod(0x200) + 0x200) << 5;
-		cm_RequestMoveCredits(((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, -1, g_773d75, v);
+		cm_RequestMoveCredits(((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id, -1, gm_ActiveTownIndex, v);
 		io_AppendText(0x40f0, 0x40cc, v);
 		d3snd_QueueSound(t, 0, "GEIST_KOMMT", gm_RandomMod(8), 0xfa);
 	} else {
@@ -82,8 +82,8 @@ void __cdecl d2_RunSeanceDialog(char* e, char* res)
 		d3snd_QueueSound(t, 0, "GEIST_KOMMT_NICHT", gm_RandomMod(8), 0xfa);
 	}
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop(d2_RunSeanceDialog, 0x777c7) != 0);
 	d2_DestroyForm(h);

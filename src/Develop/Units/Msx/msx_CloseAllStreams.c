@@ -10,11 +10,11 @@ int __cdecl msx_CloseAllStreams(void)
 	int i;
 	int j;
 
-	if (g_6b7f90 != 0) {
+	if (msx_Initialized != 0) {
 		for (i = 0; i < 0x10; i++) {
 			if (msx_WaveDrivers[i] != 0) {
 				for (j = 0; j < msx_WaveDrivers[i][6]; j++) {
-					if (g_6b7f50[i][j] != 0 && msx_CloseStream(g_6b7f50[i][j]) != 0) {
+					if (msx_StreamHandles[i][j] != 0 && msx_CloseStream(msx_StreamHandles[i][j]) != 0) {
 						r = -1;
 					}
 				}

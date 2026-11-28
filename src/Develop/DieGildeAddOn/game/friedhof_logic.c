@@ -1236,7 +1236,7 @@ int __cdecl gv_ReplaceProductionWorker(void* a)
 }
 #endif
 #if !defined(REBREW_SERVER)
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 /* ADDRESS: GOLDTL 0x004f2a80 */
 /* ADDRESS: GOLD 0x004f0970 */
@@ -1257,7 +1257,7 @@ int __cdecl gv_ReplaceProductionWorker(void* a)
 	gm_ResolveEntityById(&rec, 0, 0, *(int*) ((char*) a + 8));
 	if (rec == 0 ||
 	    *(unsigned short*) ((char*) rec + 0x27) == limit ||
-	    g_7f4ca0 + (unsigned int) (*(unsigned short*) ((char*) rec + 0x27) & limit) * 540 ==
+	    gm_EntitySlotTable + (unsigned int) (*(unsigned short*) ((char*) rec + 0x27) & limit) * 540 ==
 	        g_entity_table_end)
 		return -1;
 	type = *(unsigned char*) rec;
@@ -1357,7 +1357,7 @@ int __cdecl gv_ActivateSection(void* cmd)
 #endif
 #if !defined(REBREW_SERVER)
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 /* ADDRESS: GOLDTL 0x004f2c00 */
 /* ADDRESS: GOLD 0x004f0af0 */
@@ -1374,7 +1374,7 @@ int __cdecl gv_ActivateSection(void* cmd)
 	if (entity) {
 		grave_id = *(unsigned short*) ((char*) entity + 0x27);
 		if (grave_id != 0xffff) {
-			if (((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[grave_id]) != (char*) g_entity_table_end) {
+			if (((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[grave_id]) != (char*) g_entity_table_end) {
 				field_id = *(unsigned char*) entity;
 				if (((unsigned char*)g_entity_type_table)[field_id + field_id * 588] != 0x1d) {
 					return -2;
@@ -1545,11 +1545,11 @@ int __cdecl gv_ValidateEntityAction(void* cmd)
 
 extern char* gm_CityEntity;
 extern char* g_entity_type_table;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern unsigned char g_slot_table[2];
 extern int g_current_year;
 extern int gm_NextEntityId;
-extern int g_14cbca0;
+extern int nt_ClientSocket;
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 int __cdecl gv_CheckSlotActive(void* slot, int type);
 void* __cdecl gv_GetSlotEntry(void* worker, int worktype, unsigned char job);
@@ -1770,17 +1770,17 @@ done:
 	*(unsigned short*) ((char*) found2 + 0xa) = (unsigned short) (g_current_year + 0xa);
 	*(unsigned char*) ((char*) found2 + 0xc) = 0xff;
 	*(unsigned short*) ((char*) found + 0xa) = 0xff;
-	if (g_14cbca0 != -1)
+	if (nt_ClientSocket != -1)
 		gm_NextEntityId = *(int*) ((char*) cmd + 0x15);
 
 	count = *(int*) ((char*) cmd + 0x11);
 	if (count > 0) {
 		gm_SubObjectNoKill(*(int*) ((char*) entity + 4),
-		             *(unsigned short*) ((unsigned char) g_773d75 * 756 + 0x8680b4),
+		             *(unsigned short*) ((unsigned char) gm_ActiveTownIndex * 756 + 0x8680b4),
 		             count);
 		gm_AddObjekt(*(int*) ((char*) g_slot_table + 4 +
 		                     *(unsigned short*) ((char*) rec2 + 0x27) * 540),
-		             *(unsigned short*) ((unsigned char) g_773d75 * 756 + 0x8680b4),
+		             *(unsigned short*) ((unsigned char) gm_ActiveTownIndex * 756 + 0x8680b4),
 		             (int) ((float) *(int*) ((char*) cmd + 0x11) *
 		                    *(float*) (0x6652d8 + *(int*) ((char*) cmd + 0xd) * 4)));
 	}

@@ -29,7 +29,7 @@ typedef struct Ent {
 } Ent;
 // SIZE 0x21c
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char* lpGebaeudePROT;
 extern char* gm_RichterKatholisch;
@@ -65,7 +65,7 @@ int __cdecl gs_StartCourtTrial(Ent* ent, Ent* other, int count, int flag)
 	}
 
 	msg.src = ent->handle;
-	msg.dst = ((Ent*)g_7f4ca0)[g_774970].handle;
+	msg.dst = ((Ent*)gm_EntitySlotTable)[gm_LocalPlayerSlot].handle;
 	msg.owner = ent->handle;
 	msg.type = 0x2c;
 	msg.b36 = 2;
@@ -77,9 +77,9 @@ int __cdecl gs_StartCourtTrial(Ent* ent, Ent* other, int count, int flag)
 	msg.who[3] = -1;
 	if (flag == 0) {
 		for (i = 0; i < 768; i++) {
-			if (((Ent*)g_7f4ca0)[i].rank == 13) {
-				msg.who[0] = ((Ent*)g_7f4ca0)[i].handle;
-				ids[1] = ((Ent*)g_7f4ca0)[i].id;
+			if (((Ent*)gm_EntitySlotTable)[i].rank == 13) {
+				msg.who[0] = ((Ent*)gm_EntitySlotTable)[i].handle;
+				ids[1] = ((Ent*)gm_EntitySlotTable)[i].id;
 				break;
 			}
 		}
@@ -98,11 +98,11 @@ int __cdecl gs_StartCourtTrial(Ent* ent, Ent* other, int count, int flag)
 	}
 	if (other->rank != 0x11 && ent->rank != 0x11) {
 		for (i = 0; i < 768; i++) {
-			if (((Ent*)g_7f4ca0)[i].rank == 0x11) {
+			if (((Ent*)gm_EntitySlotTable)[i].rank == 0x11) {
 				if (count > 2) {
-					msg.who[3] = ((Ent*)g_7f4ca0)[i].handle;
+					msg.who[3] = ((Ent*)gm_EntitySlotTable)[i].handle;
 				}
-				ids[2] = ((Ent*)g_7f4ca0)[i].id;
+				ids[2] = ((Ent*)gm_EntitySlotTable)[i].id;
 				break;
 			}
 		}
@@ -115,11 +115,11 @@ int __cdecl gs_StartCourtTrial(Ent* ent, Ent* other, int count, int flag)
 	} else {
 		ids[3] = (unsigned short) out;
 	}
-	msg.who[1] = ((Ent*)g_7f4ca0)[out & 0xffff].handle;
+	msg.who[1] = ((Ent*)gm_EntitySlotTable)[out & 0xffff].handle;
 	if (!gm_FindFilteredEntity(ent, 0xc00, 4, ids, 0, 100.0f, &out)) {
 		return 0x40;
 	}
-	msg.who[2] = ((Ent*)g_7f4ca0)[out & 0xffff].handle;
+	msg.who[2] = ((Ent*)gm_EntitySlotTable)[out & 0xffff].handle;
 	cm_SendCopyEntityData(&msg);
 	return 0x10;
 }

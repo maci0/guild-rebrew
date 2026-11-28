@@ -1,4 +1,4 @@
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 
 
@@ -13,5 +13,5 @@ void __cdecl gm_CreditCityTreasury(int amount)
 
 	e = gm_GetGuildHall(1);
 	r = fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0x115);
-	cm_RequestTransferCurrencyNoKill(-1, *(int*) (r + 2), (*(char*)&g_773d75), amount);
+	cm_RequestTransferCurrencyNoKill(-1, *(int*) (r + 2), (*(char*)&gm_ActiveTownIndex), amount);
 }

@@ -2,8 +2,8 @@ extern float g_6ad620;
 extern float g_6660f0;
 extern float g_6660e8;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_1043370;
-extern volatile int g_6b7fac;
+extern int tp_ch_PathGrid;
+extern volatile int gm_GameTicks;
 
 char __cdecl d3sm_SampleHeight(int, float*, int*, int*, float*);
 int __cdecl d3_TraceTerrainSegment(int, float*, float*, int, int, int*, int*);
@@ -37,13 +37,13 @@ int __cdecl d3_StepProjectileHeun(char* obj)
 	int ny;
 	int map;
 
-	map = g_1043370;
+	map = tp_ch_PathGrid;
 	step = g_6660f0 * g_6660e8;
 	inv = g_6660f0 / *(float*) (obj + 0x54);
 	if (*(int*) (obj + 0x5c) != 1) {
 		return 0;
 	}
-	remain = g_6b7fac - *(int*) (obj + 0x60);
+	remain = gm_GameTicks - *(int*) (obj + 0x60);
 	if (d3sm_SampleHeight(map, (float*) (obj + 0x30), &ox, &oy, &h) == 0) {
 		*(int*) (obj + 0x5c) = 3;
 		*(int*) (obj + 0x58) = 0;

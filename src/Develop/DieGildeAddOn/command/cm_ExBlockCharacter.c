@@ -5,7 +5,7 @@
 #define MAX(a, b) ((a) < (b) ? (b) : (a))
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_774964;
+extern char gm_InWorldHud;
 
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl main_ExitToFrameHandler(void*);
@@ -28,7 +28,7 @@ int __cdecl cm_ExBlockCharacter(char* x, char* out)
 	v = e[0x1b1] + *(int*) (x + 0x14);
 	e[0x1b1] = MIN(MAX(v, 0), 0xff);
 	e[0x1b1] = MAX(0, e[0x1b1]);
-	if (*(unsigned short*) e == g_774970 && g_774964 != 0 && e[0x1b1] > 0)
+	if (*(unsigned short*) e == gm_LocalPlayerSlot && gm_InWorldHud != 0 && e[0x1b1] > 0)
 		main_ExitToFrameHandler(d2_RunWorldHudLoop);
 	amt_ReleaseEntityOffices(e, *(int*) (x + 0x18));
 	if (out != 0)

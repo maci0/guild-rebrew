@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/g_7f4ca2.h"
 
-extern Slot7f4ca2 g_7f4ca2[768];
+extern Slot7f4ca2 gm_SlotTableKindView[768];
 
 char* __cdecl gm_StartFilteredEntitySearch(int arg_count, ...);
 char* __cdecl gm_AddObjekt(void);
@@ -20,7 +20,7 @@ int __cdecl gm_CountPlayerBuildingsByCategory(int category)
 		ownerSlot = *(unsigned short*) (building + 0x27);
 		if (ownerSlot == 0xffff)
 			return -1;
-		kind = g_7f4ca2[ownerSlot].kind;
+		kind = gm_SlotTableKindView[ownerSlot].kind;
 		if (kind != 6 && kind != 7)
 			return -1;
 		count++;

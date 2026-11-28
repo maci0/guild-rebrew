@@ -1,6 +1,6 @@
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char* g_77255c;
+extern char* d2_CurrentWindow;
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl d2_PositionControl(int, int, int);
 
@@ -106,10 +106,10 @@ int __cdecl d2_LayoutEntityList(unsigned char* entity)
 		owner = p[0];
 		rec1 = p[1];
 		if (owner != -1) {
-			gbase = (int*) g_77255c;
-			obj_tbl = (int*) g_1015ea0;
+			gbase = (int*) d2_CurrentWindow;
+			obj_tbl = (int*) d2_Controls;
 			d2_PositionControl(*(int*)&((D2_CONTROL_TL*)obj_tbl)[owner].x, *(int*) ((char*) gbase + 8) + off, owner);
-			gbase = (int*) g_77255c; obj_tbl = (int*) g_1015ea0; rec1 = p[1];
+			gbase = (int*) d2_CurrentWindow; obj_tbl = (int*) d2_Controls; rec1 = p[1];
 			d2_PositionControl(*(int*)&((D2_CONTROL_TL*)obj_tbl)[rec1].x, *(int*) ((char*) gbase + 8) + off + 0x30, rec1);
 			off += 0x4c;
 		}

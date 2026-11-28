@@ -33,10 +33,10 @@ typedef struct
 } Screen;
 
 extern int d2_CurrentWindowId;
-extern char* g_77255c;
-extern char* g_1015ea0;
+extern char* d2_CurrentWindow;
+extern char* d2_Controls;
 extern int g_14a79c0[];
-extern char g_868060[];
+extern char gm_TownTable[];
 
 void __cdecl d2_SetForm(int, int);
 int __cdecl d2_AddWindowField(int, int, int, int, int);
@@ -57,24 +57,24 @@ void __cdecl d2_PopulateGeldleiheRows(Row* rows, int window, int form, int a4)
 		}
 		d2_SetForm(window, form);
 		if (a4 != 0) {
-			rows[i].icon = d2_AddWindowField((((Screen*)g_77255c)->width - 0x30) >> 1, i * 0x4c, rows[i].id + 0xdf, 0x82, d2_CurrentWindowId);
+			rows[i].icon = d2_AddWindowField((((Screen*)d2_CurrentWindow)->width - 0x30) >> 1, i * 0x4c, rows[i].id + 0xdf, 0x82, d2_CurrentWindowId);
 		} else {
-			rows[i].icon = d2_AddElementToWindow((((Screen*)g_77255c)->width - 0x30) >> 1, i * 0x4c, rows[i].id + 0xdf, d2_CurrentWindowId);
-			((D2_CONTROL_TL*) g_1015ea0)[rows[i].icon].value_05c = 1;
+			rows[i].icon = d2_AddElementToWindow((((Screen*)d2_CurrentWindow)->width - 0x30) >> 1, i * 0x4c, rows[i].id + 0xdf, d2_CurrentWindowId);
+			((D2_CONTROL_TL*) d2_Controls)[rows[i].icon].value_05c = 1;
 		}
-		((D2_CONTROL_TL*) g_1015ea0)[rows[i].icon].value_054 = 1;
-		rows[i].name = d2_ShowTxt((((Screen*)g_77255c)->width - 0xbe) >> 1, i * 0x4c + 0x30, "", d2_CurrentWindowId);
+		((D2_CONTROL_TL*) d2_Controls)[rows[i].icon].value_054 = 1;
+		rows[i].name = d2_ShowTxt((((Screen*)d2_CurrentWindow)->width - 0xbe) >> 1, i * 0x4c + 0x30, "", d2_CurrentWindowId);
 		io_FormatTextBuffer(buf, "%S", g_14a79c0[rows[i].id * 2]);
 		d2_SetLabelText(rows[i].name, buf);
 		d2_SetElementFont(rows[i].icon, 0x54);
 		d2_SetElementFont(rows[i].name, 0x54);
-		((D2_CONTROL_TL*) g_1015ea0)[rows[i].name].value_06c = 1;
-		((D2_CONTROL_TL*) g_1015ea0)[rows[i].name].width = 0xbe;
-		rows[i].info = d2_ShowTxt((((Screen*)g_77255c)->width - 0xbe) >> 1, i * 0x4c + 0x3f, "", d2_CurrentWindowId);
-		io_FormatTextBuffer(buf, "%s", g_868060 + rows[i].owner * 0x2f4);
+		((D2_CONTROL_TL*) d2_Controls)[rows[i].name].value_06c = 1;
+		((D2_CONTROL_TL*) d2_Controls)[rows[i].name].width = 0xbe;
+		rows[i].info = d2_ShowTxt((((Screen*)d2_CurrentWindow)->width - 0xbe) >> 1, i * 0x4c + 0x3f, "", d2_CurrentWindowId);
+		io_FormatTextBuffer(buf, "%s", gm_TownTable + rows[i].owner * 0x2f4);
 		d2_SetLabelText(rows[i].info, buf);
 		d2_SetElementFont(rows[i].info, 0x54);
-		((D2_CONTROL_TL*) g_1015ea0)[rows[i].info].value_06c = 1;
-		((D2_CONTROL_TL*) g_1015ea0)[rows[i].info].width = 0xbe;
+		((D2_CONTROL_TL*) d2_Controls)[rows[i].info].value_06c = 1;
+		((D2_CONTROL_TL*) d2_Controls)[rows[i].info].width = 0xbe;
 	}
 }

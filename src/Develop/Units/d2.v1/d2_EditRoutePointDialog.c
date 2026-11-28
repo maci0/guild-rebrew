@@ -1,21 +1,21 @@
-extern char* g_1015ea0;
+extern char* d2_Controls;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 typedef struct TradeProto { unsigned char kind; unsigned char rest[0x24c]; } TradeProto;
 extern int d2_CurrentWindowId;
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
-extern int g_772908;
+extern int d2_ActiveRouteListHead;
 extern int g_772900;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern int g_6816d8;
-extern int g_14ce8e0;
+extern int d2_RouteRadioGroupId;
+extern int io_RightButtonReleased;
 extern int g_14b5e9c;
 extern int g_14b5ea4;
 extern char* g_14b5e88;
 extern char* g_14b5e8c;
 extern char s_68170c[];
 extern char s_681718[];
-extern int g_10058a0[];
+extern int d2_RadioSlots[];
 
 void* __cdecl gm_SearchTable67(int);
 char* __cdecl gm_FindRecordById(int);
@@ -110,12 +110,12 @@ void __cdecl d2_EditRoutePointDialog(int* route_point, int* uiContext)
 	}
 	d2_AddElementToWindow(0x6e, 0x1a, *(unsigned short*) rec + 0x4ae, first);
 	i = d2_ShowTxt(0x6e, 2, g_14b5e88, first);
-	((D2_CONTROL_TL*) (g_1015ea0))[i].value_06c = 1;
-	((D2_CONTROL_TL*) (g_1015ea0))[i].width = 0xcd;
+	((D2_CONTROL_TL*) (d2_Controls))[i].value_06c = 1;
+	((D2_CONTROL_TL*) (d2_Controls))[i].width = 0xcd;
 	d2_AddElementToWindow(0x6e, 0x88, *(unsigned short*) rec + 0x4ae, first);
 	i = d2_ShowTxt(0x6e, 0x70, g_14b5e8c, first);
-	((D2_CONTROL_TL*) (g_1015ea0))[i].value_06c = 1;
-	((D2_CONTROL_TL*) (g_1015ea0))[i].width = 0xcd;
+	((D2_CONTROL_TL*) (d2_Controls))[i].value_06c = 1;
+	((D2_CONTROL_TL*) (d2_Controls))[i].width = 0xcd;
 	if (n > 0) {
 		icons[3] = 0x51;
 		icons[4] = 0;
@@ -129,19 +129,19 @@ void __cdecl d2_EditRoutePointDialog(int* route_point, int* uiContext)
 		for (i = 0; i < n; i++) {
 			k = icons[3 + i + (*(unsigned short*) rec - 0x134) * 3] + 0x6e;
 			icons[i] = d2_AddElementToWindow(k, 0x22, 0x525, first);
-			((D2_CONTROL_TL*) (g_1015ea0))[icons[i]].value_05c = 1;
-			((D2_CONTROL_TL*) (g_1015ea0))[icons[i]].flags_1d0 = 3;
+			((D2_CONTROL_TL*) (d2_Controls))[icons[i]].value_05c = 1;
+			((D2_CONTROL_TL*) (d2_Controls))[icons[i]].flags_1d0 = 3;
 			labels[i] = d2_AddElementToWindow(k, 0x90, 0x525, first);
-			((D2_CONTROL_TL*) (g_1015ea0))[labels[i]].value_05c = 1;
-			((D2_CONTROL_TL*) (g_1015ea0))[labels[i]].flags_1d0 = 3;
+			((D2_CONTROL_TL*) (d2_Controls))[labels[i]].value_05c = 1;
+			((D2_CONTROL_TL*) (d2_Controls))[labels[i]].flags_1d0 = 3;
 		}
 	}
 	while (main_RunFrameLoop(d2_EditRoutePointDialog, 0x657c7) != 0) {
-		if (g_14ce8e0 != 0 || (g_100f1dc != -1 && d2_CurrentElementId == selA)) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0 || (d2_DialogButtonAction != -1 && d2_CurrentElementId == selA)) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_772908 != 0 && selB != -1
-			&& rt_CountRoutePoints((char*) g_772908) <= 1) {
+		if (d2_ActiveRouteListHead != 0 && selB != -1
+			&& rt_CountRoutePoints((char*) d2_ActiveRouteListHead) <= 1) {
 			d2_SetElementEnabled(selB, 0);
 		}
 		else {
@@ -177,7 +177,7 @@ void __cdecl d2_EditRoutePointDialog(int* route_point, int* uiContext)
 				d2_SetElementValue(nodeB[i][2], 0, value, d2_GetControlValue(n));
 			}
 		}
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			for (i = 0; i < 3; i++) {
 				if (icons[i] != -1 && icons[i] == d2_CurrentElementId) {
 					cur = &route_point[2 + i * 2];
@@ -208,7 +208,7 @@ void __cdecl d2_EditRoutePointDialog(int* route_point, int* uiContext)
 					}
 				}
 				else {
-					*cur = d2_RunChooseRoutingGoodDialog(rec, (int) g_772908);
+					*cur = d2_RunChooseRoutingGoodDialog(rec, (int) d2_ActiveRouteListHead);
 				}
 				d2_SetGroupVisibility(h, 1);
 				cur = 0;
@@ -220,24 +220,24 @@ void __cdecl d2_EditRoutePointDialog(int* route_point, int* uiContext)
 				}
 				d2_ResetRouteRadioGroup();
 				d2_BuildRadioGroupFromSlots();
-				if (route_point == (int*) g_772908) {
-					g_772908 = route_point[0xf];
+				if (route_point == (int*) d2_ActiveRouteListHead) {
+					d2_ActiveRouteListHead = route_point[0xf];
 				}
 				m_UnlinkAndFreeNode((char*) route_point);
 				for (i = 0; i < 8; i++) {
-					if (g_10058a0[i * 2] != -1) {
+					if (d2_RadioSlots[i * 2] != -1) {
 						d2_ClearRoutePointSlot(i);
 					}
 				}
 				g_772900 = 0;
 				d2_ResetRouteRadioGroup();
-				route_point = (int*) g_772908;
+				route_point = (int*) d2_ActiveRouteListHead;
 				while (route_point != 0) {
-					d2_AddRoutePointMarker(uiContext, rec, g_772908, (int) route_point);
+					d2_AddRoutePointMarker(uiContext, rec, d2_ActiveRouteListHead, (int) route_point);
 					route_point = (int*) route_point[0xf];
 				}
-				d2_SelectRadioGroup(g_6816d8, 0);
-				g_774654 = 1;
+				d2_SelectRadioGroup(d2_RouteRadioGroupId, 0);
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	}

@@ -26,11 +26,11 @@ typedef struct {
 
 
 extern int g_7f4c10;
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 extern int g_7f3ee8;
 extern Item g_1038150[];
 #include "Develop/client_types.h"
-extern Win_1015f40 g_1015f40[0x60];
+extern Win_1015f40 d2_Windows[0x60];
 extern char g_699a9c[];
 extern int g_85ab60;
 
@@ -52,8 +52,8 @@ int __cdecl d2_OpenDependencyDiagram(int arg, unsigned char* a, unsigned short* 
 
 	g_7f4c10 = d2_LoadForm(0, 0, arg);
 	d2_CenterDialogWindows(g_7f4c10);
-	g_7f3ee8 = g_6b7fac;
-	s = &((Slot*)g_1015f40)[g_1038150[g_7f4c10].owner];
+	g_7f3ee8 = gm_GameTicks;
+	s = &((Slot*)d2_Windows)[g_1038150[g_7f4c10].owner];
 	d2_SetForm(0, 1);
 	if (*b == 0xfd) {
 		io_AppendText(g_699a9c, 0x19, *a * 14 + 0x48e);
@@ -68,12 +68,14 @@ int __cdecl d2_OpenDependencyDiagram(int arg, unsigned char* a, unsigned short* 
 	d2_UpdateDependencyDiagram(a, b);
 	for (i = 0; i < g_85ab60; i++) {
 		for (j = 0; j < i; j++) {
-			if (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[j].item_id == ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].parent_a) {
-				d2_DrawDependencyLine(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[j].x + 0x18, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[j].y + 0x30, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x + 0x18,
-					     ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].y + 0x18);
-			} else if (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[j].item_id == ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].parent_b) {
-				d2_DrawDependencyLine(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[j].x + 0x18, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[j].y + 0x30, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x + 0x18,
-					     ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].y + 0x18);
+			if (((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[j].item_id == ((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].parent_a) {
+				d2_DrawDependencyLine(((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[j].x + 0x18, ((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[j].y + 0x30,
+					((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].x + 0x18,
+					     ((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].y + 0x18);
+			} else if (((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[j].item_id == ((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].parent_b) {
+				d2_DrawDependencyLine(((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[j].x + 0x18, ((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[j].y + 0x30,
+					((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].x + 0x18,
+					     ((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].y + 0x18);
 			}
 		}
 	}

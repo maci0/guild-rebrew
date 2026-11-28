@@ -6,8 +6,8 @@
 extern unsigned char* lpGebaeudeINST;
 extern unsigned char* lpGebaeudePROT;
 extern unsigned short* gm_CityEntity;
-extern unsigned char g_773d75;
-extern char g_7f4ca0[];
+extern unsigned char gm_ActiveTownIndex;
+extern char gm_EntitySlotTable[];
 extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
@@ -102,15 +102,15 @@ void __cdecl gm_UpdateOwnerBuildings(unsigned int arg)
 					zero = 0;
 					cm_BeginPacketFieldDelta((char*) rec, *(int*) (rec + 1));
 					for (i = 0; i < 3; i++) {
-						cm_AppendCommandSyncField(4, 1, (int) (rec - g_aed32c) + 0x71 + i * 12, &zero);
+						cm_AppendCommandSyncField(4, 1, (int) (rec - cm_PacketDeltaBase) + 0x71 + i * 12, &zero);
 					}
 					cm_SendSetAttribute();
 					count++;
 					off = (arg & 0xffff);
-					v = *(unsigned char*)&((ENTITY_RECORD*)g_7f4ca0)[off].entity_state;
+					v = *(unsigned char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[off].entity_state;
 					if (v != 6 && v != 7) {
-						if (gm_AccumulateTyped2((char*)&((ENTITY_RECORD*)g_7f4ca0)[off]) < 160000) {
-							cm_RequestMoveCredits(*(int*)&((ENTITY_RECORD*)g_7f4ca0)[off].entity_id, -1, (char) g_773d75, *(unsigned char*) (def + 0x247) * 16000);
+						if (gm_AccumulateTyped2((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[off]) < 160000) {
+							cm_RequestMoveCredits(*(int*)&((ENTITY_RECORD*)gm_EntitySlotTable)[off].entity_id, -1, (char) gm_ActiveTownIndex, *(unsigned char*) (def + 0x247) * 16000);
 							count++;
 						}
 					}
@@ -128,7 +128,7 @@ void __cdecl gm_UpdateOwnerBuildings(unsigned int arg)
 							buf4[2] = *(int*) (obj + 0x1bc);
 							buf4[3] = *(int*) (obj + 0x1c0);
 							cm_BeginPacketFieldDelta((char*) obj, *(int*) (obj + 4));
-							cm_AppendPacketFieldDelta(4, 1, (int) (obj - g_aed32c) + 0x1b4, buf4);
+							cm_AppendPacketFieldDelta(4, 1, (int) (obj - cm_PacketDeltaBase) + 0x1b4, buf4);
 							cm_RequestChangeAttribute();
 						}
 					}
@@ -151,7 +151,7 @@ void __cdecl gm_UpdateOwnerBuildings(unsigned int arg)
 								cv = 0;
 							}
 							cm_BeginPacketFieldDelta((char*) obj, *(int*) (obj + 2));
-							cm_AppendPacketFieldDelta(1, 1, (int) (obj - g_aed32c) + 0x37, &cv);
+							cm_AppendPacketFieldDelta(1, 1, (int) (obj - cm_PacketDeltaBase) + 0x37, &cv);
 							cm_RequestChangeAttribute();
 						}
 						else {
@@ -176,8 +176,8 @@ void __cdecl gm_UpdateOwnerBuildings(unsigned int arg)
 				cm_SendCopyEntityData((msg + 0xf8));
 			}
 			off = (arg & 0xffff);
-			v = *(unsigned char*)&((ENTITY_RECORD*)g_7f4ca0)[off].entity_state;
-			if (v == 0xd || v == 0 || *(int*)&((ENTITY_RECORD*)g_7f4ca0)[off].entity_id == -1) {
+			v = *(unsigned char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[off].entity_state;
+			if (v == 0xd || v == 0 || *(int*)&((ENTITY_RECORD*)gm_EntitySlotTable)[off].entity_id == -1) {
 				cm_SendSetGebBesitzer(*(int*) (rec + 1), *(int*) (gm_CityEntity + 2), *(int*) (gm_CityEntity + 2));
 				count++;
 				v = *def;
@@ -191,7 +191,7 @@ void __cdecl gm_UpdateOwnerBuildings(unsigned int arg)
 					cm_SendCopyEntityData(msg);
 					count++;
 					for (i = 0; i < 768; i++) {
-						slot = ((char*)&((ENTITY_RECORD*)g_7f4ca0)[i]);
+						slot = ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[i]);
 						if (*(unsigned char**) (slot + 0x16c) == rec) {
 							memset(msg, 0, 0xf8);
 							msg[4] = 0x31;
@@ -220,19 +220,19 @@ void __cdecl gm_UpdateOwnerBuildings(unsigned int arg)
 
 	idx = arg & 0xffff;
 	off = idx;
-	v = gm_GetItemGuild(*(unsigned char*)&((ENTITY_RECORD*)g_7f4ca0)[off].unk_164);
+	v = gm_GetItemGuild(*(unsigned char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[off].unk_164);
 	if (v >= 2 && v <= 5) {
 		gm_HasGuildHall(v);
 	}
 	p = (unsigned char*) gm_StartFilteredEntitySearch(1, 6);
 	while (p != 0) {
 		if (*(unsigned short*) (p + 0x27) == (unsigned short) arg) {
-			tile = ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(*(unsigned short*) (p + 0x27))]);
+			tile = ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[(*(unsigned short*) (p + 0x27))]);
 			if (*(((unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*p])) == 0x1e) {
 				r = (unsigned char*) ahm_GetWorkshopOwner(p);
 				if (r != 0) {
 					v = ahm_CalcWorkshopOutputScore((char*) p);
-					cm_RequestTransferCurrencyNoKill(*(int*) (r + 4), *(int*) (tile + 4), g_773d75, v);
+					cm_RequestTransferCurrencyNoKill(*(int*) (r + 4), *(int*) (tile + 4), gm_ActiveTownIndex, v);
 					count++;
 				}
 			else {
@@ -246,7 +246,7 @@ void __cdecl gm_UpdateOwnerBuildings(unsigned int arg)
 								continue;
 							}
 							delta = 0;
-							tile2 = ((char*)&((ENTITY_RECORD*)g_7f4ca0)[id2]);
+							tile2 = ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[id2]);
 							r = (unsigned char*) *(int*) (tile2 + 0x184);
 							if (r == 0) {
 								if (*(int*) (tile2 + 0x170) != 0) {
@@ -268,7 +268,7 @@ void __cdecl gm_UpdateOwnerBuildings(unsigned int arg)
 								r[0x8c] &= 0xfb;
 							}
 							if (*(unsigned char*) (tile2 + 2) != 0x14) {
-								cm_RequestTransferCurrencyNoKill(*(int*) (tile2 + 4), *(int*) (tile + 4), g_773d75, v);
+								cm_RequestTransferCurrencyNoKill(*(int*) (tile2 + 4), *(int*) (tile + 4), gm_ActiveTownIndex, v);
 							}
 							count++;
 							if (*(int*) (p + 0x3d) < 100 && gm_GetEntityRelation(idx, *(unsigned short*) tile2) > -120) {
@@ -313,7 +313,7 @@ void __cdecl gm_UpdateOwnerBuildings(unsigned int arg)
 									if (gm_RandomMod(100) > 0x32) {
 										memset((msg + 0x1f0), 0, 0xf8);
 										*(int*) ((msg + 0x1f0) + 0xc) = *(int*) (p + 1);
-										*(int*) ((msg + 0x1f0) + 8) = *(int*)&((ENTITY_RECORD*)g_7f4ca0)[off].entity_id;
+										*(int*) ((msg + 0x1f0) + 8) = *(int*)&((ENTITY_RECORD*)gm_EntitySlotTable)[off].entity_id;
 										*(pos14_7f4c00*) ((msg + 0x1f0) + 0x28) = gm_GameTime;
 										(msg + 0x1f0)[4] = 0x33;
 										(msg + 0x1f0)[0x36] = 1;
@@ -324,7 +324,7 @@ void __cdecl gm_UpdateOwnerBuildings(unsigned int arg)
 									}
 									else {
 										memset((msg + 0xf8), 0, 0xf8);
-										*(int*) ((msg + 0xf8) + 8) = *(int*)&((ENTITY_RECORD*)g_7f4ca0)[off].entity_id;
+										*(int*) ((msg + 0xf8) + 8) = *(int*)&((ENTITY_RECORD*)gm_EntitySlotTable)[off].entity_id;
 										*(int*) ((msg + 0xf8) + 0xc) = *(int*) (p + 1);
 										*(pos14_7f4c00*) ((msg + 0xf8) + 0x28) = gm_GameTime;
 										(msg + 0xf8)[4] = 0x34;
@@ -341,12 +341,12 @@ void __cdecl gm_UpdateOwnerBuildings(unsigned int arg)
 									b1 = *(unsigned char*) (tile2 + 0x82);
 									cv = (char) (int) ((double) b1 * 0.9 + 0.5);
 									if (b1 > 42.0f) {
-										cm_AppendPacketFieldDelta(1, 1, (int) (tile2 - g_aed32c) + 0x82, &cv);
+										cm_AppendPacketFieldDelta(1, 1, (int) (tile2 - cm_PacketDeltaBase) + 0x82, &cv);
 									}
 									b1 = *(unsigned char*) (tile2 + 0x83);
 									cv = (char) (int) ((double) b1 * 0.9 + 0.5);
 									if (b1 > 42.0f) {
-										cm_AppendPacketFieldDelta(1, 1, (int) (tile2 - g_aed32c) + 0x83, &cv);
+										cm_AppendPacketFieldDelta(1, 1, (int) (tile2 - cm_PacketDeltaBase) + 0x83, &cv);
 									}
 									cm_RequestChangeAttribute();
 									count++;
@@ -359,8 +359,8 @@ void __cdecl gm_UpdateOwnerBuildings(unsigned int arg)
 						v = (int) (((double) *(int*) (p + 0x3d) * 0.01) * f);
 						id2 = ((int*) msg)[0x19 + j];
 						if (id2 != 0xffff) {
-							tile2 = ((char*)&((ENTITY_RECORD*)g_7f4ca0)[id2]);
-							cm_RequestTransferCurrencyNoKill(*(int*) (tile2 + 4), *(int*) (tile + 4), g_773d75, v);
+							tile2 = ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[id2]);
+							cm_RequestTransferCurrencyNoKill(*(int*) (tile2 + 4), *(int*) (tile + 4), gm_ActiveTownIndex, v);
 							cm_BeginPacketFieldDelta((char*) tile2, *(int*) (tile2 + 4));
 							cm_AppendPacketFieldDelta(4, 1, 0x19c, &v);
 							cm_RequestChangeAttribute();
@@ -385,20 +385,20 @@ void __cdecl gm_UpdateOwnerBuildings(unsigned int arg)
 			if (out[12]) {
 				r = (unsigned char*) fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0xe8);
 				if (r != 0) {
-					v = gm_SumQueryEntryValues(*(int*) (r + 0x14), (char) g_773d75);
+					v = gm_SumQueryEntryValues(*(int*) (r + 0x14), (char) gm_ActiveTownIndex);
 					if (v > 0) {
 						count++;
-						cm_RequestMoveCredits(*(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[(*(unsigned short*) (p + 0x27))]) + 4), *(int*) (r + 2), (char) g_773d75, v);
+						cm_RequestMoveCredits(*(int*) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[(*(unsigned short*) (p + 0x27))]) + 4), *(int*) (r + 2), (char) gm_ActiveTownIndex, v);
 					}
 				}
 			}
 			if (out[15]) {
 				r = (unsigned char*) fcn_00502cd0(*(int*) (p + 0x5d), 1, 0, 0xf0);
 				if (r != 0) {
-					v = gm_SumQueryEntryValues(*(int*) (r + 0x14), (char) g_773d75);
+					v = gm_SumQueryEntryValues(*(int*) (r + 0x14), (char) gm_ActiveTownIndex);
 					if (v > 0) {
 						count++;
-						cm_RequestMoveCredits(*(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[(*(unsigned short*) (p + 0x27))]) + 4), *(int*) (r + 2), (char) g_773d75, v);
+						cm_RequestMoveCredits(*(int*) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[(*(unsigned short*) (p + 0x27))]) + 4), *(int*) (r + 2), (char) gm_ActiveTownIndex, v);
 					}
 				}
 			}

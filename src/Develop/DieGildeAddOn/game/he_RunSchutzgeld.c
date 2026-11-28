@@ -16,7 +16,7 @@ typedef struct Msg553490 {
 } Msg553490;
 
 extern pos14_7f4c00 gm_GameTime;
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #include "Develop/DieGildeAddOn/game/client_data.h"
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -96,7 +96,7 @@ void __cdecl he_RunSchutzgeld(char* self)
 		}
 		*(int*) (self + 0xb4) = (int) (gm_CalculateGebaeudeValue(p, 100) * *(float*) 0x665e98);
 		slotofs = *(unsigned short*) (p + 0x27) * 0x21c;
-		kind = *(unsigned char*) (slotofs + (unsigned long)&g_7f4ca2);
+		kind = *(unsigned char*) (slotofs + (unsigned long)&gm_SlotTableKindView);
 		if (kind != 6 && kind != 7) {
 			*(pos14_7f4c00*) (self + 0x52) = (*(pos14_7f4c00*) &gm_GameTime);
 			gm_AddTime((pos14_7f4c00*) (self + 0x52), 0, (gm_RandomMod(0x10) & 0xffff) + 2, 0);
@@ -118,7 +118,7 @@ void __cdecl he_RunSchutzgeld(char* self)
 		}
 		memset(&msg, 0, sizeof(msg));
 		msg.id = *(int*) (p + 1);
-		msg.seed = *(int*) (slotofs + (unsigned long)&g_7f4ca4);
+		msg.seed = *(int*) (slotofs + (unsigned long)&gm_EntityIdField);
 		msg.value = *(int*) (self + 4);
 		msg.pos = (*(pos14_7f4c00*) &gm_GameTime);
 		msg.type = 0x63;
@@ -134,8 +134,8 @@ void __cdecl he_RunSchutzgeld(char* self)
 		if (*(int*) (self + 0xb8) == 1) {
 			cm_RequestChangeBits(*(int*) (p + 1), 0x5a, 2, 0x100, 0);
 			cm_RequestTransferCurrencyNoKill(
-				*(int*) (*(unsigned short*) (self + 8) * 0x21c + (unsigned long)&g_7f4ca4),
-				*(int*) (*(unsigned short*) (p + 0x27) * 0x21c + (unsigned long)&g_7f4ca4),
+				*(int*) (*(unsigned short*) (self + 8) * 0x21c + (unsigned long)&gm_EntityIdField),
+				*(int*) (*(unsigned short*) (p + 0x27) * 0x21c + (unsigned long)&gm_EntityIdField),
 				0, *(int*) (self + 0xb4));
 			if (*(int*) (self + 0xbc) != -1) {
 				q = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (self + 0xbc));
@@ -147,7 +147,7 @@ void __cdecl he_RunSchutzgeld(char* self)
 			*(int*) (self + 0x70) = step;
 			*(int*) (self + 0x84) = cm_SendSetHE(step, self);
 			io_FormatTextBuffer(buf, 0x1a8d, *(unsigned short*) (p + 0x27), p, *(int*) (self + 0xb4));
-			i = *(int*) (*(unsigned short*) (self + 8) * 0x21c + (unsigned long)&g_7f4ca4);
+			i = *(int*) (*(unsigned short*) (self + 8) * 0x21c + (unsigned long)&gm_EntityIdField);
 			he_PostEntityMessage(i, i, buf, 0, 0x5f3, (char*) 0x6a5c10);
 			return;
 		}
@@ -157,7 +157,7 @@ void __cdecl he_RunSchutzgeld(char* self)
 			*(int*) (self + 0x70) = step;
 			*(int*) (self + 0x84) = cm_SendSetHE(step, self);
 			io_FormatTextBuffer(buf, 0x1a8f, *(unsigned short*) (p + 0x27), p);
-			i = *(int*) (*(unsigned short*) (self + 8) * 0x21c + (unsigned long)&g_7f4ca4);
+			i = *(int*) (*(unsigned short*) (self + 8) * 0x21c + (unsigned long)&gm_EntityIdField);
 			he_PostEntityMessage(i, i, buf, 0, 0x5f3, (char*) 0x6a5bfc);
 			return;
 		} else {
@@ -166,16 +166,16 @@ void __cdecl he_RunSchutzgeld(char* self)
 			*(int*) (self + 0x70) = step;
 			*(int*) (self + 0x84) = cm_SendSetHE(step, self);
 			io_FormatTextBuffer(buf, 0x1a8e, *(unsigned short*) (p + 0x27), p);
-			i = *(int*) (*(unsigned short*) (self + 8) * 0x21c + (unsigned long)&g_7f4ca4);
+			i = *(int*) (*(unsigned short*) (self + 8) * 0x21c + (unsigned long)&gm_EntityIdField);
 			he_PostEntityMessage(i, i, buf, 0, 0x5f3, (char*) 0x6a5bfc);
 			return;
 		}
 	case 4:
 		if (*(int*) (self + 0xb8) == 1) {
 			io_FormatTextBuffer(buf, 0x1a90, p);
-			i = *(int*) (*(unsigned short*) (self + 8) * 0x21c + (unsigned long)&g_7f4ca4);
+			i = *(int*) (*(unsigned short*) (self + 8) * 0x21c + (unsigned long)&gm_EntityIdField);
 			he_PostEntityMessage(i, i, buf, 0, 0x5f3, 0);
-			i = *(int*) (*(unsigned short*) (p + 0x27) * 0x21c + (unsigned long)&g_7f4ca4);
+			i = *(int*) (*(unsigned short*) (p + 0x27) * 0x21c + (unsigned long)&gm_EntityIdField);
 			he_PostEntityMessage(i, i, buf, 0, 0x5f3, 0);
 		}
 		he_AssignActionSlot(p, 0, *(unsigned short*) ent, 0);

@@ -4,7 +4,7 @@ typedef struct F8 {
 } F8;
 // SIZE 0x8
 
-extern char* g_77261c;
+extern char* ai_FeudTargetEntity;
 
 int __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
 int __cdecl he_StartHandlungSearch(int a, int b, int c, int d, int e);
@@ -35,7 +35,7 @@ int __cdecl ai_PlanGraveyardAction0x90(char* actor, char* building, char* req, c
 	found = -1;
 	f.mask = 0xa07c43b4;
 	f.b = 1;
-	if (g_77261c == 0 || (ai_FindEntityInFavorRange(g_77261c, 4, f, 0, 100.0f, &found), found == -1)) {
+	if (ai_FeudTargetEntity == 0 || (ai_FindEntityInFavorRange(ai_FeudTargetEntity, 4, f, 0, 100.0f, &found), found == -1)) {
 		if (!ai_FindEntityInFavorRange(actor, 6, f, 0, (float) gm_RandomMod(0x20) + 19.0f, &found)) {
 			return 0;
 		}

@@ -24,7 +24,7 @@ typedef struct
 
 extern int g_14b5bc0;
 extern char* g_14b5bc8;
-extern char g_6b5c60[];
+extern char str_empty[];
 
 void __cdecl d2_ShowModalMessageBox(int, int);
 int __cdecl d2_CheckActionBlocker(ENTITY_RECORD*, int);
@@ -41,11 +41,11 @@ void __cdecl d2_SelectPlauschTarget(void)
 	Req* p;
 	int n;
 
-	if ((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].flags_1cc) & 0x20000) {
+	if ((*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].flags_1cc) & 0x20000) {
 		d2_ShowModalMessageBox(g_14b5bc0, 4);
 		return;
 	}
-	if (d2_CheckActionBlocker(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), 1)) {
+	if (d2_CheckActionBlocker(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot]), 1)) {
 		n = 0x50;
 		p = &req;
 		__asm {
@@ -68,7 +68,7 @@ void __cdecl d2_SelectPlauschTarget(void)
 		req.a = 1;
 		req.size = 0x400;
 		req.kind = 6;
-		d2_OpenTargetPicker(&req, g_14b5bc8, g_6b5c60, d2_ShowSchneidereiPlauschDialog);
+		d2_OpenTargetPicker(&req, g_14b5bc8, str_empty, d2_ShowSchneidereiPlauschDialog);
 	}
 	d3_EndCameraAndUiMode();
 }

@@ -1,6 +1,6 @@
 extern int g_0063319c;
-extern int* g_6b7d78;
-extern char g_14cb980[];
+extern int* sb_BankListHead;
+extern char sb_NullSampleBank[];
 #include <stdio.h>
 #include <string.h>
 char* __cdecl sb_FindBankByPath(char*);
@@ -18,7 +18,7 @@ char* __cdecl sb_LoadSampleBankFromFile(char* name, int load)
     FILE* file;
     int i;
     char c;
-    if (!g_0063319c) return g_14cb980;
+    if (!g_0063319c) return sb_NullSampleBank;
     bank = sb_FindBankByPath(name);
     if (bank == 0) {
         i = 0;
@@ -44,7 +44,7 @@ char* __cdecl sb_LoadSampleBankFromFile(char* name, int load)
                     } else {
                         tail = sb_GetLastBank();
                         if (tail) *(char**) (tail + 0x13c) = bank;
-                        else g_6b7d78 = (int*) bank;
+                        else sb_BankListHead = (int*) bank;
                         *(int*) 0x633194 += 0x144 + *(int*) (header + 0x134) * 0x40;
                         sprintf((char*) 0x1460920, "Samplebank %s loaded. MemUsed is now %d bytes.", name, *(int*) 0x633194);
                         *(int*) (bank + 0x140) = 1;

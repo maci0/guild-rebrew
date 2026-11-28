@@ -2,7 +2,7 @@
 
 /* Character task fields used by this body. */
 extern int ch_UpdateTime;    /* game tick counter */
-extern char g_6b5c28;   /* scene debug switch */
+extern char ch_SceneDebugSwitch;   /* scene debug switch */
 extern int d3_CurrentContextIndex;    /* scripted-motion mode */
 
 /* Shared float pool reached through raw .rdata addresses. */
@@ -66,7 +66,7 @@ void __cdecl ch_WalkOnPath(char* obj)
 		}
 		*(char**) (inst + 0x70) = 0;
 		ch_AdjustHeightToGround(obj);
-		if (g_6b5c28 != 0) {
+		if (ch_SceneDebugSwitch != 0) {
 			*(char*) (*(char**) (obj + 0x14) + 0x8c) |= 8;
 		}
 		if (*(int*) (obj + 0xf4) != 0) {
@@ -136,7 +136,7 @@ void __cdecl ch_WalkOnPath(char* obj)
 		}
 		if (*(int*) (obj + 0x104) == 0) {
 			if (*(char**) (inst + 0x70) == 0) {
-				if (g_6b5c28 != 0) {
+				if (ch_SceneDebugSwitch != 0) {
 					*(char*) (*(char**) (obj + 0x14) + 0x8c) |= 8;
 				}
 				if (*(int*) (obj + 0xf4) != 0) {
@@ -166,7 +166,7 @@ void __cdecl ch_WalkOnPath(char* obj)
 			anim = *(char**) (inst + 0x70);
 			if (anim != 0 && (anim[0x74] & 8) != 0) {
 				ch_FinishAni(inst);
-				if (g_6b5c28 != 0) {
+				if (ch_SceneDebugSwitch != 0) {
 					*(unsigned short*) (*(char**) (obj + 0x14) + 0x8c) |= 8;
 				}
 				*(unsigned int*) (obj + 0x160) |= 0x80;
@@ -211,7 +211,7 @@ void __cdecl ch_WalkOnPath(char* obj)
 		                          g_6629b0;
 	}
 }
-char g_6b5c28 = 0;
+char ch_SceneDebugSwitch = 0;
 unsigned char _dpad_6b5c28[148] = {
     0x00,
     0x00,

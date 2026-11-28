@@ -45,7 +45,7 @@ int __cdecl ai_CanProduceGood(char* bld, int* goodsPlan, int directOnly)
 		if (*p < 0) {
 			goto next;
 		}
-		seg = &g_100b0c0[*p];
+		seg = &ai_ResourceRequests[*p];
 		word = ((OBJECT_PROTOTYPE*) lpObjektePROT)[goodsPlan[0]].ingredient_amounts[ingredient];
 		if (seg->stock < word) {
 			if (directOnly != 0) {
@@ -61,7 +61,7 @@ int __cdecl ai_CanProduceGood(char* bld, int* goodsPlan, int directOnly)
 			    && seg->goods_id != 0x1c1 && seg->goods_id != 0x1c2
 			    && seg->goods_id != 0x1c3) {
 				if (seg->parent_index != -1) {
-					if (!ai_CanProduceGood(bld, (int*) &g_100d0c0[seg->parent_index], 0)) {
+					if (!ai_CanProduceGood(bld, (int*) &ai_ProductionGoodsPlans[seg->parent_index], 0)) {
 						return 0;
 					}
 				} else {

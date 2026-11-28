@@ -11,7 +11,7 @@ typedef struct Ent {
 } Ent;
 // SIZE 0x21c
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 unsigned short __cdecl gm_RandomMod(int n);
 
@@ -27,13 +27,13 @@ Ent* __cdecl ai_PickIdleGraveyardWorker(int owner)
 		if (n >= 8) {
 			break;
 		}
-		if (((Ent*)g_7f4ca0)[i].id != 0xffff && ((Ent*)g_7f4ca0)[i].kind == 0x14 && ((Ent*)g_7f4ca0)[i].owner == owner && ((Ent*)g_7f4ca0)[i].age > 0
-		    && ((Ent*)g_7f4ca0)[i].task != 0x88 && ((Ent*)g_7f4ca0)[i].task != 0x90 && ((Ent*)g_7f4ca0)[i].task != 0x89 && ((Ent*)g_7f4ca0)[i].task != 0x8a) {
+		if (((Ent*)gm_EntitySlotTable)[i].id != 0xffff && ((Ent*)gm_EntitySlotTable)[i].kind == 0x14 && ((Ent*)gm_EntitySlotTable)[i].owner == owner && ((Ent*)gm_EntitySlotTable)[i].age > 0
+		    && ((Ent*)gm_EntitySlotTable)[i].task != 0x88 && ((Ent*)gm_EntitySlotTable)[i].task != 0x90 && ((Ent*)gm_EntitySlotTable)[i].task != 0x89 && ((Ent*)gm_EntitySlotTable)[i].task != 0x8a) {
 			list[n++] = i;
 		}
 	}
 	if (n < 2) {
 		return 0;
 	}
-	return &((Ent*)g_7f4ca0)[list[gm_RandomMod(n)]];
+	return &((Ent*)gm_EntitySlotTable)[list[gm_RandomMod(n)]];
 }

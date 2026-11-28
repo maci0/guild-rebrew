@@ -25,12 +25,12 @@ int __cdecl gm_CalcTownSlotTargetStock(int a, int b)
 		return 0;
 	}
 	if (a == 0) {
-		return (int) (g_773d4c * g_85ab80[0].slots[b].unk_08 * g_665b80 + 0.5);
+		return (int) (gm_CityPopulation * g_85ab80[0].slots[b].unk_08 * g_665b80 + 0.5);
 	}
 	return (int) (g_85ab80[a].unk_00 * g_85ab80[a].slots[b].unk_08 * g_665b78);
 }
 
-extern float g_6628a8;
+extern float flt_0_0;
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned char* __cdecl gm_FindNextFilteredEntity(void);
@@ -56,7 +56,7 @@ int __cdecl gm_CalcTownSlotProductionSupply(int a, int b)
 		}
 	}
 	sum = (int) (sum * 0.5);
-	if (*(float*) (c + 0x24) != g_6628a8) {
+	if (*(float*) (c + 0x24) != flt_0_0) {
 		sum = (int) (*(float*) (c + 0x24) / *(float*) (c + 0x20) * sum);
 	}
 	return sum;

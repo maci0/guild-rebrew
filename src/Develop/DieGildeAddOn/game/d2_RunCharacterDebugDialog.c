@@ -51,10 +51,10 @@ void __cdecl d2_RunCharacterDebugDialog(char* e)
 	hChild = d2_GetWindowListItem(dialog, 0, io_AppendText("%it[Get Child]$A"));
 	d2_CenterDialogWindows(dialog);
 	while (main_RunFrameLoop((void*) d2_RunCharacterDebugDialog, flags) != 0) {
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == hKill) {
 				gm_ApplyEntityHealthDelta(*(unsigned short*) e, -2000);
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			} else if (d2_CurrentElementId == hShow) {
 				d2_SetFormVisibility(dialog, 0);
 				d2_SetFormVisibility(dialog, 1);
@@ -102,8 +102,8 @@ void __cdecl d2_RunCharacterDebugDialog(char* e)
 				d2_SetFormVisibility(dialog, 1);
 			}
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 	}
 	d2_DestroyForm(dialog);

@@ -24,25 +24,25 @@ extern int g_6a2be4;
 extern int g_1040494;
 extern char* lpGebaeudePROT;
 extern char* lpObjektePROT;
-extern unsigned char g_773d75;
-extern char g_868060[];
-extern char* g_7746cc;
-extern char* g_7746c4;
-extern char* g_7746c8;
+extern unsigned char gm_ActiveTownIndex;
+extern char gm_TownTable[];
+extern char* sv_SelectedBuilding;
+extern char* d2_VisitedBuilding;
+extern char* d2_InteriorBuilding;
 extern char* g_774718;
 extern char* g_77471c;
 extern int g_774714;
-extern char* g_774684;
-extern char* g_774680;
+extern char* tp_d2_GroundplanSurface;
+extern char* d2_GroundplanMaskSurface;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern unsigned char g_7f4e51[];
+extern unsigned char gm_EntityBlockedField[];
 extern int g_14ce8d8;
-extern int g_77250c;
+extern int d2_ScreenSurface;
 extern int d2_ResourceOffset;
-extern short g_14ce8c0;
-extern short g_14ce8c2;
+extern short io_ActiveCursorX;
+extern short io_ActiveCursorY;
 extern int g_7ea380[15];
-extern char g_6b5c60[];
+extern char str_empty[];
 
 extern char* g_14a79c0[];
 
@@ -89,10 +89,10 @@ void __cdecl d2_UpdateBuildingGroundplan(unsigned int inputFlags)
 	char* d;
 	char c;
 
-	if (d3_CurrentContextIndex != g_6a2be4 || g_7746cc != g_77471c
-		|| g_7746c4 != g_774718 || g_774714 != 0) {
-		g_774718 = g_7746c4;
-		g_77471c = g_7746cc;
+	if (d3_CurrentContextIndex != g_6a2be4 || sv_SelectedBuilding != g_77471c
+		|| d2_VisitedBuilding != g_774718 || g_774714 != 0) {
+		g_774718 = d2_VisitedBuilding;
+		g_77471c = sv_SelectedBuilding;
 		p = (char*)g_7ea380;
 		do {
 			if (*(int*) p != -1) {
@@ -101,12 +101,12 @@ void __cdecl d2_UpdateBuildingGroundplan(unsigned int inputFlags)
 			}
 			p += 4;
 		} while ((int) p < (int)(g_7ea380 + 15));
-		if (g_7746c4 || g_7746c8)
+		if (d2_VisitedBuilding || d2_InteriorBuilding)
 			d2_LoadBuildingGroundplan();
 		g_6a2be4 = d3_CurrentContextIndex;
 	}
-	if (!g_7746c4 && !g_7746c8) {
-		s = g_868060 + (unsigned int) g_773d75 * 0x2f4;
+	if (!d2_VisitedBuilding && !d2_InteriorBuilding) {
+		s = gm_TownTable + (unsigned int) gm_ActiveTownIndex * 0x2f4;
 		d = name;
 		do {
 			c = *s;
@@ -120,24 +120,24 @@ void __cdecl d2_UpdateBuildingGroundplan(unsigned int inputFlags)
 		if (v6 == -1)
 			v6 = d2_FindResourceByName("_STADTWAPPEN_BERLIN");
 		v7 = (int) d2_GetResourceData(v6);
-		d2_DrawSpriteFromSet(g_1040494 - 0x6e, 0x5b, g_77250c,
+		d2_DrawSpriteFromSet(g_1040494 - 0x6e, 0x5b, d2_ScreenSurface,
 			(D2_SPRITE_SET*) v7, d2_ResourceOffset + 1);
 	} else {
-		if (g_774684) {
+		if (tp_d2_GroundplanSurface) {
 			r.left = 0;
 			r.top = 0;
-			r.right = *(int*) (g_774684 + 0x54);
-			r.bottom = *(int*) (g_774684 + 0x58);
+			r.right = *(int*) (tp_d2_GroundplanSurface + 0x54);
+			r.bottom = *(int*) (tp_d2_GroundplanSurface + 0x58);
 			d2_QueueTexturedQuad(g_1040494 - 0x6e, 0x5b, 0x68, 0x6e,
-				*(int*) (g_774684 + 0x20), &r);
+				*(int*) (tp_d2_GroundplanSurface + 0x20), &r);
 		}
 		if (inputFlags & 0x2000) {
-			x = (g_14ce8c0 - g_1040494) + 0x72;
-			y = g_14ce8c2 - 0x59;
-			if (g_774680 && x >= 0 && x < *(int*) (g_774680 + 4)
-				&& y >= 0 && y < *(int*) (g_774680 + 8)) {
-				d2_LockSurface(g_774680);
-				d2_ReadSurfacePixel(x, y, g_774680, (unsigned char*) key);
+			x = (io_ActiveCursorX - g_1040494) + 0x72;
+			y = io_ActiveCursorY - 0x59;
+			if (d2_GroundplanMaskSurface && x >= 0 && x < *(int*) (d2_GroundplanMaskSurface + 4)
+				&& y >= 0 && y < *(int*) (d2_GroundplanMaskSurface + 8)) {
+				d2_LockSurface(d2_GroundplanMaskSurface);
+				d2_ReadSurfacePixel(x, y, d2_GroundplanMaskSurface, (unsigned char*) key);
 				v6 = 0;
 				q = (char*) 0x6a24ec;
 				do {
@@ -146,14 +146,14 @@ void __cdecl d2_UpdateBuildingGroundplan(unsigned int inputFlags)
 					q += 3;
 					v6++;
 				} while ((int) q < 0x6a2519);
-				d2_UnlockSurface(g_774680);
+				d2_UnlockSurface(d2_GroundplanMaskSurface);
 				if (v6 < 0xf) {
-					if (g_7746c4) {
-						BUILDING_PROTOTYPE* bp = &((BUILDING_PROTOTYPE*) lpGebaeudePROT)[(unsigned char) *g_7746c4];
+					if (d2_VisitedBuilding) {
+						BUILDING_PROTOTYPE* bp = &((BUILDING_PROTOTYPE*) lpGebaeudePROT)[(unsigned char) *d2_VisitedBuilding];
 						v8 = 0;
 						v9 = 0;
 						if (bp->category == 2) {
-							v8 = fcn_00502cd0(*(int*) (g_7746c4 + 0x5d),
+							v8 = fcn_00502cd0(*(int*) (d2_VisitedBuilding + 0x5d),
 								1, 4, 2);
 							while (v8) {
 								if (*v8 != 0xfd) {
@@ -172,7 +172,7 @@ void __cdecl d2_UpdateBuildingGroundplan(unsigned int inputFlags)
 										&& id != 0xfd) {
 										if (v9 == v6) {
 											v8 = fcn_00502cd0(
-												*(int*) (g_7746c4 + 0x5d),
+												*(int*) (d2_VisitedBuilding + 0x5d),
 												1, 0, id);
 											break;
 										}
@@ -184,12 +184,12 @@ void __cdecl d2_UpdateBuildingGroundplan(unsigned int inputFlags)
 						if (g_14ce8d8) {
 							if (!v8)
 								goto label_527db2;
-							if (*v8 != *(unsigned short*) g_7746cc
-								&& d2_DispatchTutorialEvent(0x19, (int) g_7746c4, 0,
+							if (*v8 != *(unsigned short*) sv_SelectedBuilding
+								&& d2_DispatchTutorialEvent(0x19, (int) d2_VisitedBuilding, 0,
 									(int) *v8) == 1
-								&& g_7f4e51[g_774970 * 0x21c] <= 0) {
-								if (gm_GetEntityUiFlags(g_774970,
-									(int) g_7746c4, v8, 0) & 0x4000)
+								&& gm_EntityBlockedField[gm_LocalPlayerSlot * 0x21c] <= 0) {
+								if (gm_GetEntityUiFlags(gm_LocalPlayerSlot,
+									(int) d2_VisitedBuilding, v8, 0) & 0x4000)
 									gm_ChangeBuildingRoom(-1, (int) *v8);
 								goto label_527db2;
 							}
@@ -198,8 +198,8 @@ void __cdecl d2_UpdateBuildingGroundplan(unsigned int inputFlags)
 							d2_SetMouseTooltip(g_14a79c0[(unsigned short) *v8 * 2]);
 					}
 label_527db2:
-					if (g_7746c8) {
-						BUILDING_PROTOTYPE* bp = &((BUILDING_PROTOTYPE*) lpGebaeudePROT)[(unsigned char) *g_7746c8];
+					if (d2_InteriorBuilding) {
+						BUILDING_PROTOTYPE* bp = &((BUILDING_PROTOTYPE*) lpGebaeudePROT)[(unsigned char) *d2_InteriorBuilding];
 						v8 = 0;
 						v9 = 0;
 						for (v7 = 0; v7 < 0x40; v7++) {
@@ -210,7 +210,7 @@ label_527db2:
 									&& id != 0xfd) {
 									if (v9 == v6) {
 										v8 = fcn_00502cd0(
-											*(int*) (g_7746c8 + 0x5d),
+											*(int*) (d2_InteriorBuilding + 0x5d),
 											1, 0, id);
 										break;
 									}
@@ -221,15 +221,15 @@ label_527db2:
 						if (g_14ce8d8) {
 							if (!v8)
 								goto done;
-							if ((!g_7746cc || (*v8 != *(unsigned short*) g_7746cc
-								&& d2_DispatchTutorialEvent(0x19, (int) g_7746c8, 0,
+							if ((!sv_SelectedBuilding || (*v8 != *(unsigned short*) sv_SelectedBuilding
+								&& d2_DispatchTutorialEvent(0x19, (int) d2_InteriorBuilding, 0,
 									(int) *v8) == 1))
-								&& g_7f4e51[g_774970 * 0x21c] <= 0) {
-								if (!(gm_GetEntityUiFlags(g_774970,
-									(int) g_7746c8, v8, 0) & 0x4000))
+								&& gm_EntityBlockedField[gm_LocalPlayerSlot * 0x21c] <= 0) {
+								if (!(gm_GetEntityUiFlags(gm_LocalPlayerSlot,
+									(int) d2_InteriorBuilding, v8, 0) & 0x4000))
 									goto done;
-								d2_EnterBuildingObjekt((int) g_7746c8,
-									*(int*) ((char*) v8 + 2), (int) g_6b5c60);
+								d2_EnterBuildingObjekt((int) d2_InteriorBuilding,
+									*(int*) ((char*) v8 + 2), (int) str_empty);
 								goto done;
 							}
 						}

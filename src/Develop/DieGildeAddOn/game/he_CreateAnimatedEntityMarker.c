@@ -30,7 +30,7 @@ typedef struct {
 	char pad20[0x38];
 } FRAME546590;
 
-extern float g_662d70[4];
+extern float d3_ZeroVec4[4];
 
 void __cdecl d3_TransformPoint(char* object, float* in, float* out);
 int __cdecl d3_GetObjectVerticalBounds(char* e, float* lo, float* hi);
@@ -54,7 +54,7 @@ char* __cdecl he_CreateAnimatedEntityMarker(char* effectState, char* name, char*
 	d3_TransformPoint(entity, (float*) (entity + 0x4c), pos);
 	d3_GetObjectVerticalBounds(entity, &lo, &hi);
 	pos[1] = hi;
-	obj = d3_CreateSceneModelObject(0, pos, g_662d70, name);
+	obj = d3_CreateSceneModelObject(0, pos, d3_ZeroVec4, name);
 	*(char**) (effectState + 0xc) = obj;
 	*(char**) (effectState + 8) = entity;
 	if (obj != 0) {

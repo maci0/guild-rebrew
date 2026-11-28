@@ -14,11 +14,11 @@
 
 
 extern unsigned char* lpGebaeudePROT;
-extern char g_868060[];
+extern char gm_TownTable[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern unsigned char g_773d75;
-extern int g_100f1dc;
-extern int g_14ce8e0;
+extern unsigned char gm_ActiveTownIndex;
+extern int d2_DialogButtonAction;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int d2_CurrentElementId;
 extern char g_6aae08[];
@@ -61,18 +61,18 @@ void __cdecl d2_RunGildenkasseDialog(unsigned char* p)
 	b = 0;
 	tbl = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[p[0]];
 	obj = fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x142);
-	n = gm_SumQueryEntryValues(*(int*) (obj + 0x14), g_773d75);
-	acc = gm_AccumulateTyped2(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]));
-	if ((((BUILDING_PROTOTYPE*)tbl)->category) == 0x17 && ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].grade == 0x1e) {
+	n = gm_SumQueryEntryValues(*(int*) (obj + 0x14), gm_ActiveTownIndex);
+	acc = gm_AccumulateTyped2(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot]));
+	if ((((BUILDING_PROTOTYPE*)tbl)->category) == 0x17 && ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].grade == 0x1e) {
 		ok = 1;
 	}
-	else if ((((BUILDING_PROTOTYPE*)tbl)->category) == 0x18 && ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].grade == 0x1f) {
+	else if ((((BUILDING_PROTOTYPE*)tbl)->category) == 0x18 && ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].grade == 0x1f) {
 		ok = 1;
 	}
-	else if ((((BUILDING_PROTOTYPE*)tbl)->category) == 0x19 && ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].grade == 0x20) {
+	else if ((((BUILDING_PROTOTYPE*)tbl)->category) == 0x19 && ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].grade == 0x20) {
 		ok = 1;
 	}
-	else if ((((BUILDING_PROTOTYPE*)tbl)->category) == 0x1a && ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].grade == 0x21) {
+	else if ((((BUILDING_PROTOTYPE*)tbl)->category) == 0x1a && ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].grade == 0x21) {
 		ok = 1;
 	}
 	else {
@@ -86,28 +86,28 @@ void __cdecl d2_RunGildenkasseDialog(unsigned char* p)
 	if (ok != 0) {
 		int col;
 
-		b = io_AppendText(0x1a1b, *(unsigned short*) (((char(*)[0x2f4])g_868060)[g_773d75] + 0x54) * 2 + 0x9a8);
+		b = io_AppendText(0x1a1b, *(unsigned short*) (((char(*)[0x2f4])gm_TownTable)[gm_ActiveTownIndex] + 0x54) * 2 + 0x9a8);
 		d2_ClampAmountToRange(0x640, acc, 0x20, &col);
-		d2_SetElementValue(d2_GetWindowListItem(d, 1, b), gm_AmountToUnits(0x640, g_773d75), gm_AmountToUnits(col, g_773d75), gm_AmountToUnits(0x640, g_773d75));
+		d2_SetElementValue(d2_GetWindowListItem(d, 1, b), gm_AmountToUnits(0x640, gm_ActiveTownIndex), gm_AmountToUnits(col, gm_ActiveTownIndex), gm_AmountToUnits(0x640, gm_ActiveTownIndex));
 		h1 = d2_GetWindowListItem(d, 1, b + 1);
 		h2 = d2_GetWindowListItem(d, 1, b + 2);
 	}
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	while (main_RunFrameLoop(d2_RunGildenkasseDialog, 0x677c7) != 0) {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (ok != 0 && g_100f1dc != -1) {
+		if (ok != 0 && d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == h1) {
 				v = d2_GetControlValue(d2_GetWindowListItem(d, 1, b));
-				v = gm_ConvertUnitsToAmount(v, g_773d75);
-				if (gm_CheckEntityStock(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), v, g_773d75) != 0) {
-					cm_RequestMoveCredits(*(int*) (obj + 2), ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, g_773d75, v);
-					g_774654 = 1;
+				v = gm_ConvertUnitsToAmount(v, gm_ActiveTownIndex);
+				if (gm_CheckEntityStock(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot]), v, gm_ActiveTownIndex) != 0) {
+					cm_RequestMoveCredits(*(int*) (obj + 2), ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id, gm_ActiveTownIndex, v);
+					d2_DialogCloseRequested = 1;
 				}
 			}
 			else if (d2_CurrentElementId == h2) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	}

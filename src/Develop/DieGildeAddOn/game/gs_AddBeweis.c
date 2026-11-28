@@ -9,7 +9,7 @@
 // SIZE 0x8
 
 #include "Develop/client_types.h"
-extern Pair_99f800 g_99f800[0x800];
+extern Pair_99f800 cm_CrimeEvidenceLinks[0x800];
 extern char g_6903a8[];
 
 int __cdecl gs_AllocEvidenceSlot(int b, int a);
@@ -22,8 +22,8 @@ int __cdecl gs_AddBeweis(int a, int b)
 
 	k = gs_AllocEvidenceSlot(b, a);
 	if (k > -1) {
-		g_99f800[k].owner = b;
-		g_99f800[k].key = a;
+		cm_CrimeEvidenceLinks[k].owner = b;
+		cm_CrimeEvidenceLinks[k].key = a;
 		sprintf(buf, g_6903a8, b, a, k);
 		return 1;
 	}

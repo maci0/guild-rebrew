@@ -8,7 +8,7 @@ struct IUnk {
 	IUnkVtbl* v;
 };
 
-extern unsigned long g_14ce728;
+extern unsigned long d3_LastReleaseRefCount;
 
 void __cdecl d3_ReleaseTexture(int);
 typedef int(__stdcall* Fn1)(void* self);
@@ -34,11 +34,11 @@ void __cdecl d3_ReleaseMeshSlotTextures(char* s)
 		*(int**) (s + 0xc) = 0;
 	}
 	if (*(IUnk**) (s + 0x80) != 0) {
-		g_14ce728 = (*(IUnk**) (s + 0x80))->v->Release(*(IUnk**) (s + 0x80));
+		d3_LastReleaseRefCount = (*(IUnk**) (s + 0x80))->v->Release(*(IUnk**) (s + 0x80));
 		*(IUnk**) (s + 0x80) = 0;
 	}
 	if (*(IUnk**) (s + 0x84) != 0) {
-		g_14ce728 = (*(IUnk**) (s + 0x84))->v->Release(*(IUnk**) (s + 0x84));
+		d3_LastReleaseRefCount = (*(IUnk**) (s + 0x84))->v->Release(*(IUnk**) (s + 0x84));
 		*(IUnk**) (s + 0x84) = 0;
 	}
 	*(int*) (s + 0x8c) = 0;
@@ -53,7 +53,7 @@ void __cdecl d3_ReleaseAllShadowTextures(void)
 
 	for (i = 0, s = g_104061c; s <= g_10405fc && i <= 2; i++, s += s) {
 		if (g_1040610[i] != 0) {
-			(*(int*)&g_14ce728) = ((Fn1) ((void**) *g_1040610[i])[2])(g_1040610[i]);
+			(*(int*)&d3_LastReleaseRefCount) = ((Fn1) ((void**) *g_1040610[i])[2])(g_1040610[i]);
 			g_1040610[i] = 0;
 		}
 	}

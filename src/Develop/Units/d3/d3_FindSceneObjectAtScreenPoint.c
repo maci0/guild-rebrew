@@ -18,7 +18,7 @@ typedef struct Ctx {
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d3/d3_camera.h"
-extern int g_67a370;
+extern int d3_ActiveScene;
 
 void __cdecl d3_VisitSceneObjects(int, int, int, void*, void*);
 char __cdecl d3_PickClosestObjectCallback(char*, char*);
@@ -39,7 +39,7 @@ char* __cdecl d3_FindSceneObjectAtScreenPoint(float a, float b, int flags, int m
 	ctx.cam = d3_ActiveCamera;
 	ctx.mask = mask;
 	ctx.y = g_1052bc8 - b;
-	d3_VisitSceneObjects(g_67a370, 0, flags, d3_PickClosestObjectCallback, &ctx);
+	d3_VisitSceneObjects(d3_ActiveScene, 0, flags, d3_PickClosestObjectCallback, &ctx);
 	for (i = 0; i < 9; i++) {
 		if (ctx.hits[i].e != 0 && ctx.hits[i].d < best) {
 			r = ctx.hits[i].e;

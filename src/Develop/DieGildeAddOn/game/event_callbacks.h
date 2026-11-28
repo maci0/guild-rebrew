@@ -44,6 +44,6 @@ int __cdecl cut_BroadcastCutsceneNotice(char* event);
 /* Declaration only: complete allocation extent and storage owner remain unresolved. */
 /* ADDRESS: GOLDTL 0x009b0840 */
 /* ADDRESS: GOLD 0x0092c500 */
-extern char g_9b0840[];
+extern char he_EventCallbacks[];
 
 #endif

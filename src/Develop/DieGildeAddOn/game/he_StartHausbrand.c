@@ -9,9 +9,9 @@
 
 
 
-extern float g_6628a0;
-extern float g_6628a8;
-extern double g_662a08;
+extern float flt_1_0;
+extern float flt_0_0;
+extern double dbl_1_5;
 
 void* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned char* __cdecl gm_FindNearestBuildingByKind(unsigned char*, int);
@@ -60,10 +60,10 @@ void __cdecl he_StartHausbrand(char* obj)
 			+ (posA[1] - posB[1]) * (posA[1] - posB[1])
 			+ (posA[0] - posB[0]) * (posA[0] - posB[0]))) * 0.001;
 	} else {
-		d = g_6628a0;
+		d = flt_1_0;
 	}
-	if (d > g_662a08) {
-		d = g_662a08;
+	if (d > dbl_1_5) {
+		d = dbl_1_5;
 	}
 	d *= *(int*) (obj + 0xb0);
 	*(int*) (obj + 0x84) = -1;

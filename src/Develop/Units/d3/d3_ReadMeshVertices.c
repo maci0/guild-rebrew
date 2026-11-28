@@ -9,16 +9,16 @@ typedef struct Vert {
 	float rest[3];
 } Vert;
 
-int __cdecl fcn_004011d0(void* stream, void* dst);
+int __cdecl vfs_ReadDword(void* stream, void* dst);
 
 void __cdecl d3_ReadMeshVertices(void* r, char* o)
 {
 	int i;
 
 	for (i = 0; i < *(int*) (o + 0x24); i++) {
-		fcn_004011d0(r, &(*(Vert**) (o + 0x30))[*(int*) (o + 0x28)].x);
-		fcn_004011d0(r, &(*(Vert**) (o + 0x30))[*(int*) (o + 0x28)].y);
-		fcn_004011d0(r, &(*(Vert**) (o + 0x30))[*(int*) (o + 0x28)].z);
+		vfs_ReadDword(r, &(*(Vert**) (o + 0x30))[*(int*) (o + 0x28)].x);
+		vfs_ReadDword(r, &(*(Vert**) (o + 0x30))[*(int*) (o + 0x28)].y);
+		vfs_ReadDword(r, &(*(Vert**) (o + 0x30))[*(int*) (o + 0x28)].z);
 		(*(int*) (o + 0x28))++;
 	}
 }

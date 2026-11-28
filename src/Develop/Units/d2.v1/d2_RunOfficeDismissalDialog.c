@@ -10,10 +10,10 @@ typedef struct
 
 extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_7f4ca0[];
-extern int g_14ce8e0;
+extern char gm_EntitySlotTable[];
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern char s_6aaf90[];
 
 int __cdecl d2_LoadForm(int, int, char*);
@@ -42,24 +42,24 @@ int __cdecl d2_RunOfficeDismissalDialog(unsigned short* target)
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x167c);
 	d2_SetForm(dlg, 2);
-	if (g_7f4ca0[g_774970 * 540 + 9] == 0) {
-		v = (unsigned char) g_7f4ca0[g_774970 * 540 + 0x169] + 0x253;
+	if (gm_EntitySlotTable[gm_LocalPlayerSlot * 540 + 9] == 0) {
+		v = (unsigned char) gm_EntitySlotTable[gm_LocalPlayerSlot * 540 + 0x169] + 0x253;
 	} else {
-		v = (unsigned char) g_7f4ca0[g_774970 * 540 + 0x169] + 0x27b;
+		v = (unsigned char) gm_EntitySlotTable[gm_LocalPlayerSlot * 540 + 0x169] + 0x27b;
 	}
 	io_AppendText(0x167f, v, 8, *target);
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc == 2) {
+		if (d2_DialogButtonAction == 2) {
 			s.x4 = *(int*) (target + 2);
 			s.x0 = 1;
-			amt_HandleOfficeAction(g_7f4ca0 + g_774970 * 540, &s);
-			g_774654 = 3;
+			amt_HandleOfficeAction(gm_EntitySlotTable + gm_LocalPlayerSlot * 540, &s);
+			d2_DialogCloseRequested = 3;
 			r = 1;
-		} else if (g_100f1dc == 1) {
-			g_774654 = 1;
+		} else if (d2_DialogButtonAction == 1) {
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop((void*) d2_RunOfficeDismissalDialog, 0x677c7) != 0);
 	d2_DestroyForm(dlg);

@@ -21,16 +21,16 @@ void __cdecl he_RunNightWatchmanAnnouncements(char* action)
 	idx = gm_GetSeason((char*) &gm_GameTime);
 	switch (*(int*) (action + 0x70)) {
 	case 0:
-		w = *(int*) &g_7f4c04 & 0xffff;
+		w = *(int*) &gm_GameTimeHour & 0xffff;
 
 		if (!((float) w >= *(float*) (idx * 4 + 0x696540)) || !((float) w < *(float*) (idx * 4 + 0x696540) + 1.0f)) {
 			*(pos14_7f4c00*) (action + 0x52) = gm_GameTime;
 			goto sync_time;
 		}
-		if (*(char*) &g_774964)
+		if (*(char*) &gm_InWorldHud)
 			d3snd_QueueSound(-7, 0, (char*) 0x6a6d50, -1, 0xfa);
-		if (*(char*) 0x7766b9 != 0 && *(char*) &g_774964 != 0 &&
-		    (gm_RandomMod(10) & 0xffff) > 7 && *(char*) &g_774964 != 0) {
+		if (*(char*) 0x7766b9 != 0 && *(char*) &gm_InWorldHud != 0 &&
+		    (gm_RandomMod(10) & 0xffff) > 7 && *(char*) &gm_InWorldHud != 0) {
 			d3snd_QueueSound(*(int*) (action + 0xac), 0, (char*) 0x6a6d30, -1, 0xfa);
 			if (*(float*) (idx * 4 + 0x696540) == 7.0f) {
 				d3snd_QueueSound(*(int*) (action + 0xac), 0, (char*) 0x6a6d10, -1, 0xfa);
@@ -51,16 +51,16 @@ void __cdecl he_RunNightWatchmanAnnouncements(char* action)
 		*(int*) (action + 0x70) += 1;
 		return;
 	case 1:
-		w = *(int*) &g_7f4c04 & 0xffff;
+		w = *(int*) &gm_GameTimeHour & 0xffff;
 
 		if (!((float) w >= *(float*) (idx * 4 + 0x696550)) || !((float) w < *(float*) (idx * 4 + 0x696550) + 1.0f)) {
 			*(pos14_7f4c00*) (action + 0x52) = gm_GameTime;
 			goto sync_time;
 		}
-		if (*(char*) &g_774964)
+		if (*(char*) &gm_InWorldHud)
 			d3snd_QueueSound(-7, 0, (char*) 0x6a6d50, -1, 0xfa);
-		if (*(char*) 0x7766b9 != 0 && *(char*) &g_774964 != 0 &&
-		    (gm_RandomMod(10) & 0xffff) > 7 && *(char*) &g_774964 != 0) {
+		if (*(char*) 0x7766b9 != 0 && *(char*) &gm_InWorldHud != 0 &&
+		    (gm_RandomMod(10) & 0xffff) > 7 && *(char*) &gm_InWorldHud != 0) {
 			d3snd_QueueSound(*(int*) (action + 0xac), 0, (char*) 0x6a6d30, -1, 0xfa);
 			if (*(float*) (idx * 4 + 0x696550) == 19.0f) {
 				d3snd_QueueSound(*(int*) (action + 0xac), 0, (char*) 0x6a6c6c, -1, 0xfa);
@@ -81,12 +81,12 @@ void __cdecl he_RunNightWatchmanAnnouncements(char* action)
 		*(int*) (action + 0x70) += 1;
 		return;
 	case 2:
-		if (*(unsigned short*) &g_7f4c04 < 0x16 || *(int*) 0x7f4c06 < 0x1e ||
+		if (*(unsigned short*) &gm_GameTimeHour < 0x16 || *(int*) 0x7f4c06 < 0x1e ||
 		    *(int*) 0x7f4c06 >= 0x32) {
 			*(pos14_7f4c00*) (action + 0x52) = gm_GameTime;
 			goto sync_time;
 		}
-		if (*(char*) &g_774964) {
+		if (*(char*) &gm_InWorldHud) {
 			d3snd_QueueSound(-7, 0, (char*) 0x6a6d50, -1, 0xfa);
 			if (*(char*) 0x7766b9 != 0 && (gm_RandomMod(10) & 0xffff) > 7)
 				d3snd_QueueSound(*(int*) (action + 0xac), 0, (char*) 0x6a6bcc, -1, 0xfa);

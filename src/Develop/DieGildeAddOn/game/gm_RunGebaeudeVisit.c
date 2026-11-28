@@ -1,4 +1,4 @@
-extern int g_774654;
+extern int d2_DialogCloseRequested;
 typedef unsigned char u8;
 typedef unsigned short u16;
 
@@ -73,7 +73,7 @@ void __cdecl d2_RunSchneiderMenu(int, void*);
 void __cdecl d2_RunDomizilKabinettMenu(int, void*);
 void __cdecl d2_RunDomizilKanoneMenu(int, void*);
 extern unsigned int g_6a2520;
-extern char g_6752a8[];
+extern char ch_StepSampleName[];
 char* __cdecl strcpy(char*, const char*);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x005a76b0 */
@@ -89,7 +89,7 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
 
     r = -1;
     if (gm_CanEnterGebaeude(o) == 0) {
-        *(int*) &g_7e2700 = 0;
+        *(int*) &d2_InsideBuildingActive = 0;
         return 0;
     }
     d2_ResetUiInputAndBounds();
@@ -100,19 +100,19 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
     x = *(int*) &d3_CurrentContextIndex;
     *(int*) 0x7746d0 = 0;
     *(u16*) (o + 0x29) = (u16) p2;
-    *(int*) &saved.pos[0] = *(int*) &g_7e3a40;
-    *(int*) &saved.pos[1] = *(int*) &g_7e3a44;
-    *(int*) &saved.pos[2] = *(int*) &g_7e3a48;
+    *(int*) &saved.pos[0] = *(int*) &d3_SavedCameraPos;
+    *(int*) &saved.pos[1] = *(int*) &d3_SavedCameraPosY;
+    *(int*) &saved.pos[2] = *(int*) &d3_SavedCameraPosZ;
     *(int*) &saved.rot[0] = *(int*) &d3_CameraTargetRotation;
-    *(int*) &saved.rot[1] = *(int*) &g_7e3a54;
-    *(int*) &saved.rot[2] = *(int*) &g_7e3a58;
+    *(int*) &saved.rot[1] = *(int*) &d3_CameraTargetRotY;
+    *(int*) &saved.rot[2] = *(int*) &d3_CameraTargetRotZ;
     if (p2 == 0)
-        *(int*) &g_7746c4 = 0;
-    if (*(u16*) (o + 0x27) == *(u16*) &g_774970)
+        *(int*) &d2_VisitedBuilding = 0;
+    if (*(u16*) (o + 0x27) == *(u16*) &gm_LocalPlayerSlot)
         sb_PlayVoice(g_7747c8, (void*) 0x6aadc8, 1, 0x3f, 0x7f, 0, 0);
     else
         sb_PlayVoice(g_7747c8, (void*) 0x6aadac, 1, 0x3f, 0x7f, 0, 0);
-    strcpy(g_6752a8, "normal_s");
+    strcpy(ch_StepSampleName, "normal_s");
 
     fcn_00502cd0(*(int*) (o + 0x5d), 1, 0, (int) *(u16*) (o + 0x29));
     sb_LoadBuildingVoiceBanks(o);
@@ -133,24 +133,24 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
                 }
                 if (*(int*) &d3_CurrentContextIndex != 0)
                     d3_DeinitUniverse(3);
-                *(int*) &g_7746c4 = (int) o;
-                *(int*) &g_7746cc = (int) msg;
-                *(int*) &g_6791c8 = *(int*) (msg + 2);
+                *(int*) &d2_VisitedBuilding = (int) o;
+                *(int*) &sv_SelectedBuilding = (int) msg;
+                *(int*) &evt_ActiveContextId = *(int*) (msg + 2);
                 g_67530c = *(int*) (o + 1);
                 g_675310 = *(int*) (msg + 2);
                 *(u16*) (o + 0x29) = *(u16*) msg;
                 d3_SelectSceneContext((int) (signed char) ((u8*) &init_SceneContextIndices)[*(u16*) msg], 0);
                 d3_InitUniverse(3);
-                d3_TraverseSceneObjects((void*) *(int*) &g_67a370, 0, 0xe0, (void*) 0x456df0);
+                d3_TraverseSceneObjects((void*) *(int*) &d3_ActiveScene, 0, 0xe0, (void*) 0x456df0);
                 ch_PreloadBuildingMotions(o);
-                t = *(int*) &g_7746c4;
+                t = *(int*) &d2_VisitedBuilding;
                 d3_UpdateBuildingView((char*) t, (int) *(u16*) (t + 0x29));
-                d3_SetupInteriorScene((char*) *(int*) &g_7746c4, (char*) *(int*) &g_7746cc);
+                d3_SetupInteriorScene((char*) *(int*) &d2_VisitedBuilding, (char*) *(int*) &sv_SelectedBuilding);
                 t = *(int*) &d3_ActiveCamera;
                 d3_SetNodePosition((void*) t, (char*) t + 0x5c);
                 t = *(int*) &d3_ActiveCamera;
                 d3_SetObjectRotation((void*) t, (char*) t + 0x90);
-                t = *(int*) &g_67a370;
+                t = *(int*) &d3_ActiveScene;
                 if (t != 0) {
                     i = *(int*) (t + 0x3c8);
                     if (i != 0) {
@@ -160,13 +160,13 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
                     }
                 }
                 r = *(int*) &evt_LastGfxScriptId;
-                if (*(u16*) (o + 0x27) != *(u16*) &g_774970) {
+                if (*(u16*) (o + 0x27) != *(u16*) &gm_LocalPlayerSlot) {
                     i = fcn_00504bd0((int) *(u8*) o);
                     if (i == 1 || i == 8) {
                         if (CompareVector3WithinTolerance((char*) *(void**) &d3_ActiveCamera + 0x114,
-                                         (void*) &g_662d70, 0.1f) == 0) {
+                                         (void*) &d3_ZeroVec4, 0.1f) == 0) {
                             if (CompareVector3WithinTolerance((char*) *(void**) &d3_ActiveCamera + 0x120,
-                                             (void*) &g_662d70, 0.1f) == 0) {
+                                             (void*) &d3_ZeroVec4, 0.1f) == 0) {
                                 t = *(int*) &d3_ActiveCamera;
                                 d3_SetNodePosition((void*) t, (char*) t + 0x114);
                                 t = *(int*) &d3_ActiveCamera;
@@ -176,143 +176,143 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
                     }
                 }
                 t = *(int*) &d3_ActiveCamera;
-                *(int*) &g_7e3a40 = *(int*) (t + 0x4c);
-                *(int*) &g_7e3a44 = *(int*) (t + 0x50);
-                *(int*) &g_7e3a48 = *(int*) (t + 0x54);
+                *(int*) &d3_SavedCameraPos = *(int*) (t + 0x4c);
+                *(int*) &d3_SavedCameraPosY = *(int*) (t + 0x50);
+                *(int*) &d3_SavedCameraPosZ = *(int*) (t + 0x54);
                 *(int*) &d3_CameraTargetRotation = *(int*) (t + 0x84);
-                *(int*) &g_7e3a54 = *(int*) (t + 0x88);
-                *(int*) &g_7e3a58 = *(int*) (t + 0x8c);
+                *(int*) &d3_CameraTargetRotY = *(int*) (t + 0x88);
+                *(int*) &d3_CameraTargetRotZ = *(int*) (t + 0x8c);
                 d3_CameraHorizontalIndex = 0;
                 d3_CameraVerticalStep = 0;
             }
             d2_DispatchTutorialInput(0x19, msg, 0, 0);
             switch (*(u16*) msg) {
     case 0x13:
-        d2_RunCharacterActionsHud(*(int*)&g_7746c4, msg);
+        d2_RunCharacterActionsHud(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0x14:
-        d2_RunSabotageActionsHud(*(int*)&g_7746c4, msg);
+        d2_RunSabotageActionsHud(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0x16:
-        d2_RunWeinschrankMenu(*(int*)&g_7746c4, msg);
+        d2_RunWeinschrankMenu(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0x15:
-        d2_RunRhetoricActionsHud(*(int*)&g_7746c4, msg);
+        d2_RunRhetoricActionsHud(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0x17:
-        d2_RunSocialActionsHud(*(int*)&g_7746c4, msg);
+        d2_RunSocialActionsHud(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0x18:
-        d2_RunGeliebteHud(*(int*)&g_7746c4, msg);
+        d2_RunGeliebteHud(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0x1f:
-        d2_RunWirtshausTableMenu(*(int*)&g_7746c4, msg);
+        d2_RunWirtshausTableMenu(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0x74:
-        d2_RunTutorialSchmiedeHud(*(int*)&g_7746c4, msg);
+        d2_RunTutorialSchmiedeHud(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0x85:
-        d2_RunTischlereiInteriorHud(*(int*)&g_7746c4, msg);
+        d2_RunTischlereiInteriorHud(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0xcf:
-        d2_RunMixingProductionMenu(*(int*)&g_7746c4, msg);
+        d2_RunMixingProductionMenu(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0xd6:
-        d2_RunIdleBuildingInterior0xd6(*(int*)&g_7746c4, msg);
+        d2_RunIdleBuildingInterior0xd6(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0xdd:
-        d2_RunAlchemistCreatureHud(*(int*)&g_7746c4, msg);
+        d2_RunAlchemistCreatureHud(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0x9b:
-        d2_RunSteinmetzMenu(*(int*)&g_7746c4, msg);
+        d2_RunSteinmetzMenu(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0xa5:
-        d2_RunBankContactMenu(*(int*)&g_7746c4, msg);
+        d2_RunBankContactMenu(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0xe5:
     case 0xe6:
-        d2_RunKircheMenu(*(int*)&g_7746c4, msg);
+        d2_RunKircheMenu(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0xf0:
-        d2_RunKircheAltarMenu(*(int*)&g_7746c4, msg);
+        d2_RunKircheAltarMenu(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0xb7:
-        d2_RunKerkerplanHotspot(*(int*)&g_7746c4, msg);
+        d2_RunKerkerplanHotspot(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0xba:
-        d2_RunKerkermeisterMenu(*(int*)&g_7746c4, msg);
+        d2_RunKerkermeisterMenu(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0xbb:
-        d2_RunIdleBuildingInterior0xbb(*(int*)&g_7746c4, msg);
+        d2_RunIdleBuildingInterior0xbb(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0x54:
-        d2_RunRaeuberlagerMenu(*(int*)&g_7746c4, msg);
+        d2_RunRaeuberlagerMenu(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0x4d:
-        d2_RunIdleBuildingInterior0x4d(*(int*)&g_7746c4, msg);
+        d2_RunIdleBuildingInterior0x4d(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0x5c:
-        d2_RunWachstubeMenu(*(int*)&g_7746c4, msg);
+        d2_RunWachstubeMenu(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0x60:
-        d2_RunWachstubeRegenMenu(*(int*)&g_7746c4, msg);
+        d2_RunWachstubeRegenMenu(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0x65:
-        d2_RunKerkerZelleMenu(*(int*)&g_7746c4, msg);
+        d2_RunKerkerZelleMenu(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0xf2:
-        d2_RunBeichtstuhlMenu(*(int*)&g_7746c4, msg);
+        d2_RunBeichtstuhlMenu(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0x118:
-        d2_RunParfumerieProductionMenu(*(int*)&g_7746c4, msg);
+        d2_RunParfumerieProductionMenu(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0x120:
-        d2_RunWirtshausContactMenu(*(int*)&g_7746c4, msg);
+        d2_RunWirtshausContactMenu(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0x12e:
-        d2_RunBrauenMenu(*(int*)&g_7746c4, msg);
+        d2_RunBrauenMenu(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0x10e:
-        d2_RunRathausMenu(*(int*)&g_7746c4, msg);
+        d2_RunRathausMenu(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0x110:
-        d2_RunRathausCouncilMenu(*(int*)&g_7746c4, msg);
+        d2_RunRathausCouncilMenu(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0x114:
-        d2_RunStadtkasseMenu(*(int*)&g_7746c4, msg);
+        d2_RunStadtkasseMenu(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0x137:
-        d2_RunZunftLevel2Menu(*(int*)&g_7746c4, msg);
+        d2_RunZunftLevel2Menu(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0xf7:
-        d2_RunSchreibstubeMenu(*(int*)&g_7746c4, msg);
+        d2_RunSchreibstubeMenu(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0x138:
-        d2_RunZunftPreismanipMenu(*(int*)&g_7746c4, msg);
+        d2_RunZunftPreismanipMenu(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0x139:
-        d2_RunZunftMenu(*(int*)&g_7746c4, msg);
+        d2_RunZunftMenu(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0x145:
-        d2_RunWachhofRegenMenu(*(int*)&g_7746c4, msg);
+        d2_RunWachhofRegenMenu(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0x146:
-        d2_RunZollamtMenu(*(int*)&g_7746c4, msg);
+        d2_RunZollamtMenu(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0x14c:
-        d2_RunRazziaWacheMenu(*(int*)&g_7746c4, msg);
+        d2_RunRazziaWacheMenu(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0x24b:
-        d2_RunAlchemistMenu(*(int*)&g_7746c4, msg);
+        d2_RunAlchemistMenu(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0x29e:
-        d2_RunSchneiderMenu(*(int*)&g_7746c4, msg);
+        d2_RunSchneiderMenu(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0x266:
-        d2_RunDomizilKabinettMenu(*(int*)&g_7746c4, msg);
+        d2_RunDomizilKabinettMenu(*(int*)&d2_VisitedBuilding, msg);
         break;
     case 0x256:
-        d2_RunDomizilKanoneMenu(*(int*)&g_7746c4, msg);
+        d2_RunDomizilKanoneMenu(*(int*)&d2_VisitedBuilding, msg);
         break;
             default:
                 fcn_00597fd0(msg);
@@ -327,7 +327,7 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
                     evt_WaitForScriptExit(*(int*) (msg + 0x100));
                 }
             }
-            t = *(int*) &g_67a370;
+            t = *(int*) &d3_ActiveScene;
             if (t != 0) {
                 i = *(int*) (t + 0x3c8);
                 if (i != 0) {
@@ -342,8 +342,8 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
                 evt_WaitForScriptExit(i);
             d3_CleanupBuildingScene(o);
             g_774670 = 1;
-            if (*(int*) &g_7746c4 == 0) {
-                g_774654 = 1;
+            if (*(int*) &d2_VisitedBuilding == 0) {
+                d2_DialogCloseRequested = 1;
                 d3_DeinitUniverse(3);
             }
         }
@@ -351,20 +351,20 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
 
     sv_ResetSelectionState();
     fcn_005305a0();
-    *(int*) &g_7ea360 = 0;
+    *(int*) &d2_SelectedPerson = 0;
     d3snd_FreeObjectSoundBanks();
     d3_SelectSceneContext(x, 0);
-    *(int*) &g_6791c8 = 0;
+    *(int*) &evt_ActiveContextId = 0;
     g_67530c = -1;
     g_675310 = -1;
-    *(int*) &g_7746c4 = 0;
-    *(int*) &g_7746cc = 0;
+    *(int*) &d2_VisitedBuilding = 0;
+    *(int*) &sv_SelectedBuilding = 0;
     d3_ResetWorldSceneState();
-    *(int*) &g_7e3a40 = *(int*) &saved.pos[0];
-    *(int*) &g_7e3a44 = *(int*) &saved.pos[1];
-    *(int*) &g_7e3a48 = *(int*) &saved.pos[2];
+    *(int*) &d3_SavedCameraPos = *(int*) &saved.pos[0];
+    *(int*) &d3_SavedCameraPosY = *(int*) &saved.pos[1];
+    *(int*) &d3_SavedCameraPosZ = *(int*) &saved.pos[2];
     *(int*) &d3_CameraTargetRotation = *(int*) &saved.rot[0];
-    *(int*) &g_7e3a54 = *(int*) &saved.rot[1];
-    *(int*) &g_7e3a58 = *(int*) &saved.rot[2];
+    *(int*) &d3_CameraTargetRotY = *(int*) &saved.rot[1];
+    *(int*) &d3_CameraTargetRotZ = *(int*) &saved.rot[2];
     return sb_PlayVoice(g_7747c8, (void*) 0x6aad8c, 1, 0x3f, 0x7f, 0, 0);
 }

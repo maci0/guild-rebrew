@@ -1,8 +1,8 @@
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/client_placement.h"
 
-extern int g_67a370;
-extern int g_776664;
+extern int d3_ActiveScene;
+extern int d3_GfxDetails;
 
 #ifdef REBREW_GOLD
 char __cdecl d3_VisitSceneObjectsUntilStopped(char*, char*, unsigned int, char (__cdecl*)(char*, void*), void*);
@@ -23,10 +23,10 @@ void __cdecl lc_SetVegetationVisible(char* node, int flag)
 	char* object;
 
 	memset(&list, 0, sizeof(list));
-	lc_WalkScene((char*) g_67a370, node, 0x2c0, lc_Collect, &list);
+	lc_WalkScene((char*) d3_ActiveScene, node, 0x2c0, lc_Collect, &list);
 	for (i = 0; i < list.count; i++) {
 		object = list.objects[i];
-		if (flag != 0 && (i < (g_776664 & 0xff) || (char) g_776664 == 2)) {
+		if (flag != 0 && (i < (d3_GfxDetails & 0xff) || (char) d3_GfxDetails == 2)) {
 			d3_SetSubtreeVisible((int) object, 1);
 		}
 		else {

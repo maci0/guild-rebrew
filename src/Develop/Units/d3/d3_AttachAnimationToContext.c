@@ -2,7 +2,7 @@
 #include "Develop/Units/d3/client_lighting.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 
 void __cdecl d3_CalculateAnimNormals(char* anim, char* mesh);
 int __cdecl d3_StepAnimFrame(D3_ANIMATION_OPTIONS flags, int v, int lo, int hi, int max);
@@ -40,11 +40,11 @@ char* __cdecl d3_AttachAnimationToContext(char* context, char* name, D3_ANIMATIO
 		if (object != 0) {
 			if (*(int*) (object + 0x140) == *(int*) (context + 0x310)) {
 				if (slot < 3) {
-					g_6b86d4++;
+					d3_SceneRenderLock++;
 					entry = context + 0x328 + slot * 0x7c;
 					table = *(int*) (context + 0x320);
 					base = (char*) table;
-					*(int*) (table + 0x40) = g_6b7fac;
+					*(int*) (table + 0x40) = gm_GameTicks;
 					*(char*) (context + 0x4a0) = 1;
 					*(char**) (entry + 0x68) = object;
 					*(float*) (entry + 0x60) = 1.0f;
@@ -102,7 +102,7 @@ char* __cdecl d3_AttachAnimationToContext(char* context, char* name, D3_ANIMATIO
 
 					d3_BindAnimTrackNodes(base);
 					d3_UpdateObjectAnimPose((int) base);
-					g_6b86d4--;
+					d3_SceneRenderLock--;
 					return entry;
 				}
 			}

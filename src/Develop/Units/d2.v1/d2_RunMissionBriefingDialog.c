@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 
 extern void __cdecl d3snd_StopTrackedVoices(void);
 extern void *__cdecl d2_LoadForm(int a, int b, const char *name);
@@ -39,7 +39,7 @@ void __cdecl d2_RunMissionBriefingDialog(int mission, unsigned loopFlags)
 		if (sb_CheckVoicePlaying(node)) {
 			do {
 				main_RunFrameLoop(0, b);
-				if (g_100f1dc != -1 && d2_CurrentElementId == tab) {
+				if (d2_DialogButtonAction != -1 && d2_CurrentElementId == tab) {
 					if (sb_CheckVoicePlaying(node)) {
 						sb_StopVoice(node, 1);
 					}
@@ -48,14 +48,14 @@ void __cdecl d2_RunMissionBriefingDialog(int mission, unsigned loopFlags)
 			} while (sb_CheckVoicePlaying(node));
 		}
 	} else {
-		i = g_6b7fac + 0xfa;
-		if (i > g_6b7fac) {
+		i = gm_GameTicks + 0xfa;
+		if (i > gm_GameTicks) {
 			do {
 				main_RunFrameLoop(0, b);
-				if (g_100f1dc != -1 && d2_CurrentElementId == tab) {
+				if (d2_DialogButtonAction != -1 && d2_CurrentElementId == tab) {
 					break;
 				}
-			} while (i > g_6b7fac);
+			} while (i > gm_GameTicks);
 		}
 	}
 	d2_SetForm(obj, 1);
@@ -66,7 +66,7 @@ void __cdecl d2_RunMissionBriefingDialog(int mission, unsigned loopFlags)
 		if (sb_CheckVoicePlaying(node)) {
 			do {
 				main_RunFrameLoop(0, b);
-				if (g_100f1dc != -1 && d2_CurrentElementId == tab) {
+				if (d2_DialogButtonAction != -1 && d2_CurrentElementId == tab) {
 					if (sb_CheckVoicePlaying(node)) {
 						sb_StopVoice(node, 1);
 					}
@@ -75,14 +75,14 @@ void __cdecl d2_RunMissionBriefingDialog(int mission, unsigned loopFlags)
 			} while (sb_CheckVoicePlaying(node));
 		}
 	} else {
-		i = g_6b7fac + 0xfa;
-		if (i > g_6b7fac) {
+		i = gm_GameTicks + 0xfa;
+		if (i > gm_GameTicks) {
 			do {
 				main_RunFrameLoop(0, b);
-				if (g_100f1dc != -1 && d2_CurrentElementId == tab) {
+				if (d2_DialogButtonAction != -1 && d2_CurrentElementId == tab) {
 					break;
 				}
-			} while (i > g_6b7fac);
+			} while (i > gm_GameTicks);
 		}
 	}
 	d2_SetForm(obj, 1);
@@ -93,7 +93,7 @@ void __cdecl d2_RunMissionBriefingDialog(int mission, unsigned loopFlags)
 		if (sb_CheckVoicePlaying(node)) {
 			do {
 				main_RunFrameLoop(0, b);
-				if (g_100f1dc != -1 && d2_CurrentElementId == tab) {
+				if (d2_DialogButtonAction != -1 && d2_CurrentElementId == tab) {
 					if (sb_CheckVoicePlaying(node)) {
 						sb_StopVoice(node, 1);
 					}
@@ -102,14 +102,14 @@ void __cdecl d2_RunMissionBriefingDialog(int mission, unsigned loopFlags)
 			} while (sb_CheckVoicePlaying(node));
 		}
 	} else {
-		i = g_6b7fac + 0xfa;
-		if (i > g_6b7fac) {
+		i = gm_GameTicks + 0xfa;
+		if (i > gm_GameTicks) {
 			do {
 				main_RunFrameLoop(0, b);
-				if (g_100f1dc != -1 && d2_CurrentElementId == tab) {
+				if (d2_DialogButtonAction != -1 && d2_CurrentElementId == tab) {
 					break;
 				}
-			} while (i > g_6b7fac);
+			} while (i > gm_GameTicks);
 		}
 	}
 	d2_SetForm(obj, 1);
@@ -121,7 +121,7 @@ void __cdecl d2_RunMissionBriefingDialog(int mission, unsigned loopFlags)
 		sprintf(buf, (const char *) 0x681180, *(unsigned *) (mission + 0x10));
 		node = d3snd_PlaySoundEffect(-7, 0, buf, -1);
 		if (sb_CheckVoicePlaying(node)) {
-			while (main_RunFrameLoop(0, b), g_100f1dc == -1 || d2_CurrentElementId != tab) {
+			while (main_RunFrameLoop(0, b), d2_DialogButtonAction == -1 || d2_CurrentElementId != tab) {
 				if (!sb_CheckVoicePlaying(node)) {
 					d2_DestroyForm(obj);
 					return;
@@ -132,14 +132,14 @@ void __cdecl d2_RunMissionBriefingDialog(int mission, unsigned loopFlags)
 			}
 		}
 	} else {
-		i = g_6b7fac + 0xfa;
-		if (i > g_6b7fac) {
+		i = gm_GameTicks + 0xfa;
+		if (i > gm_GameTicks) {
 			do {
 				main_RunFrameLoop(0, b);
-				if (g_100f1dc != -1 && d2_CurrentElementId == tab) {
+				if (d2_DialogButtonAction != -1 && d2_CurrentElementId == tab) {
 					break;
 				}
-			} while (i > g_6b7fac);
+			} while (i > gm_GameTicks);
 		}
 	}
 	d2_DestroyForm(obj);

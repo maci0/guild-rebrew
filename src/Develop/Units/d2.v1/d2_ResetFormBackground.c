@@ -1,5 +1,5 @@
 #include "Develop/client_types.h"
-extern D2_FORM_RECORD g_1038140[];
+extern D2_FORM_RECORD d2_Forms[];
 
 void __cdecl d2_BlitBufferToSurface(int a, int b, int c, int d, int e, int f, int g, int h);
 
@@ -10,7 +10,7 @@ void __cdecl d2_ResetFormBackground(int form_idx)
 	char** pp;
 	int j;
 
-	base = ((char*)g_1038140) + form_idx * 0x2bc;
+	base = ((char*)d2_Forms) + form_idx * 0x2bc;
 	pp = (char**) (base + 0x1ac);
 	for (j = 2; j != 0; j--) {
 		d2_BlitBufferToSurface(0, 0, *(int*) (*pp + 4), *(int*) (*pp + 8), *(int*) (*pp + 0x20), 0, 0, *(int*) ((char*) pp - 8));

@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 #include "game_data.h"
 extern int g_699b10;
-extern void* g_6b7fdc;
+extern void* vfs_RootDir;
 extern char g_6790c8[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
@@ -69,7 +69,7 @@ fmt:
 			fcn_0064d41a(path, (char*) 0x6a1f54, g_6790c8, v3, v3);
 		}
 	}
-	r = vfs_LookupPath(path, (int) g_6b7fdc, (char*) &zv[1]);
+	r = vfs_LookupPath(path, (int) vfs_RootDir, (char*) &zv[1]);
 	if (!r) {
 		return;
 	}

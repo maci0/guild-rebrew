@@ -39,7 +39,7 @@ typedef struct {
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern unsigned char g_6a375c;
+extern unsigned char gm_PlayerCount;
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl fcn_00502cd0(int, ...);
@@ -82,10 +82,10 @@ int __cdecl ai_RunBuergerrecht(char* entity)
 	if (entity[2] == 5) {
 		i = 0;
 		for (slotIdx = 0; slotIdx < 768; slotIdx++) {
-			if (i >= g_6a375c) {
+			if (i >= gm_PlayerCount) {
 				break;
 			}
-			if ((*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[slotIdx].entity_type) == 6 || (*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[slotIdx].entity_type) == 7) {
+			if ((*(unsigned char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[slotIdx].entity_type) == 6 || (*(unsigned char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[slotIdx].entity_type) == 7) {
 				{
 					int dst;
 					int n;
@@ -110,7 +110,7 @@ int __cdecl ai_RunBuergerrecht(char* entity)
 					rep stosb
 					}
 				}
-				m.owner = (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[slotIdx].entity_id);
+				m.owner = (*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[slotIdx].entity_id);
 				m.kind = 0x69;
 				m.target = -1;
 				m.code = 9;

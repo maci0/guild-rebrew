@@ -12,7 +12,7 @@ struct D3_MESH_COM_IFACE {
 	struct D3_MESH_COM_VTBL* vtbl;
 };
 
-extern unsigned long g_14ce728;
+extern unsigned long d3_LastReleaseRefCount;
 
 void __cdecl m_FreeTracked(void*);
 void __cdecl d3_ReleaseTexture(char*);
@@ -44,7 +44,7 @@ void __cdecl d3_ReleaseAGFMesh(char* e)
 	*(int*) (e + 0x284) = 0;
 	p = *(char**) (e + 0x264);
 	if (p != 0) {
-		g_14ce728 = (*(struct D3_MESH_COM_IFACE**) &p)->vtbl->Release((struct D3_MESH_COM_IFACE*) p);
+		d3_LastReleaseRefCount = (*(struct D3_MESH_COM_IFACE**) &p)->vtbl->Release((struct D3_MESH_COM_IFACE*) p);
 		*(int*) (e + 0x264) = 0;
 	}
 	m_FreeTracked(*(void**) (e + 0x27c));
@@ -58,7 +58,7 @@ void __cdecl d3_ReleaseAGFMesh(char* e)
 	if ((*(unsigned char*) (e + 0x2a1) & 2) != 0) {
 		p = *(char**) (e + 0x268);
 		if (p != 0) {
-			g_14ce728 = (*(struct D3_MESH_COM_IFACE**) &p)->vtbl->Release((struct D3_MESH_COM_IFACE*) p);
+			d3_LastReleaseRefCount = (*(struct D3_MESH_COM_IFACE**) &p)->vtbl->Release((struct D3_MESH_COM_IFACE*) p);
 			*(int*) (e + 0x268) = 0;
 		}
 		m_FreeTracked(*(void**) (e + 0x294));

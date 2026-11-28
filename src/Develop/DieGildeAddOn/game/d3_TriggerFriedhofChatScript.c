@@ -2,10 +2,10 @@
 
 
 extern unsigned int g_6a9654;
-extern volatile int g_6b7fac;
-extern int g_774800;
+extern volatile int gm_GameTicks;
+extern int gm_AllEntitiesControllable;
 extern float g_664090;
-extern int g_67a370;
+extern int d3_ActiveScene;
 extern char* ch_ContextCharacters[32];
 extern char s_6a99c4[];
 
@@ -31,17 +31,17 @@ void __cdecl d3_TriggerFriedhofChatScript(void)
 	n = 0;
 	vb = -1;
 	va = 0;
-	if ((unsigned int) g_6b7fac < g_6a9654 + 4500) {
+	if ((unsigned int) gm_GameTicks < g_6a9654 + 4500) {
 		return;
 	}
-	g_6a9654 = (unsigned int) g_6b7fac;
-	if (g_774800 == 0 && (float) gm_RandomFloat01() < g_664090) {
+	g_6a9654 = (unsigned int) gm_GameTicks;
+	if (gm_AllEntitiesControllable == 0 && (float) gm_RandomFloat01() < g_664090) {
 		return;
 	}
 	for (i = 0; i < 32; i++) {
 		e = ch_ContextCharacters[i];
 		if (e != 0 && e[2] == 0x14 && *(char**) (e + 0x184) != 0
-		    && *(int*) (*(char**) (e + 0x184) + 0x88) == g_67a370) {
+		    && *(int*) (*(char**) (e + 0x184) + 0x88) == d3_ActiveScene) {
 			list[n++] = e;
 		}
 	}

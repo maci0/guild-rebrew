@@ -41,7 +41,7 @@ void __cdecl ai_StartGrabpflege(char* obj)
 		return;
 	}
 	found = 0;
-	p = (ENTITY_RECORD*) g_7f4ca0;
+	p = (ENTITY_RECORD*) gm_EntitySlotTable;
 	do {
 		if ((int) &p->unk_17c >= 0x85a21c) {
 			break;

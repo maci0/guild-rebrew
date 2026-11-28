@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern volatile int g_6b7fc0;
+extern volatile int tb_TimerPaused;
 
 // SIZE 0x40
 struct cb_57eba0 {
@@ -13,7 +13,7 @@ struct host_57eba0 {
 	struct cb_57eba0* cb;
 };
 
-extern int* g_665f08;
+extern int* d2_TutorialState;
 
 
 /* ADDRESS: GOLDTL 0x0057eba0 */
@@ -24,18 +24,18 @@ int __cdecl d2_DispatchTutorialEvent(int a, int b, int c, int d)
 	if (d2_TutorialActive == 0) {
 		return 1;
 	}
-	if (((struct host_57eba0*)g_665f08)->cb == 0) {
+	if (((struct host_57eba0*)d2_TutorialState)->cb == 0) {
 		return 1;
 	}
-	if (g_6b7fc0 != 0) {
+	if (tb_TimerPaused != 0) {
 		return 0;
 	}
-	if (((struct host_57eba0*)g_665f08)->cb->fn == 0) {
+	if (((struct host_57eba0*)d2_TutorialState)->cb->fn == 0) {
 		return 1;
 	}
 	buf[0] = a;
 	buf[1] = b;
 	buf[2] = c;
 	buf[3] = d;
-	return ((struct host_57eba0*)g_665f08)->cb->fn(buf);
+	return ((struct host_57eba0*)d2_TutorialState)->cb->fn(buf);
 }

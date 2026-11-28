@@ -16,7 +16,7 @@ typedef struct {
 	char pad2[0x21c - 0x178];
 } Ent;
 
-extern Ent g_7f4ca0[];
+extern Ent gm_EntitySlotTable[];
 
 int __cdecl gm_GetOppositeStatIndex(int stat);
 int __cdecl gm_MapEntityStatRange(int stat);
@@ -37,22 +37,22 @@ float __cdecl gm_CalcActionCompletionTime(int idx, GAME_TIMESTAMP* out)
 	float f;
 	float num;
 
-	r = gm_GetOppositeStatIndex(g_7f4ca0[idx].stat);
+	r = gm_GetOppositeStatIndex(gm_EntitySlotTable[idx].stat);
 	if (r == 0 || r >= 6)
 		return 0.0f;
-	k = gm_MapEntityStatRange(g_7f4ca0[idx].stat);
+	k = gm_MapEntityStatRange(gm_EntitySlotTable[idx].stat);
 	if (k == 0xb)
-		v = gm_GetEntitySkill(&g_7f4ca0[idx], 2);
+		v = gm_GetEntitySkill(&gm_EntitySlotTable[idx], 2);
 	else if (k == 0xc)
-		v = gm_GetEntitySkill(&g_7f4ca0[idx], 3);
+		v = gm_GetEntitySkill(&gm_EntitySlotTable[idx], 3);
 	else if (k == 0xa)
-		v = gm_GetEntitySkill(&g_7f4ca0[idx], 3);
+		v = gm_GetEntitySkill(&gm_EntitySlotTable[idx], 3);
 	else if (k == 8)
-		v = gm_GetEntitySkill(&g_7f4ca0[idx], 0);
+		v = gm_GetEntitySkill(&gm_EntitySlotTable[idx], 0);
 	else if (k == 9)
-		v = gm_GetEntitySkill(&g_7f4ca0[idx], 4);
+		v = gm_GetEntitySkill(&gm_EntitySlotTable[idx], 4);
 	else
-		v = gm_GetEntitySkill(&g_7f4ca0[idx], 1);
+		v = gm_GetEntitySkill(&gm_EntitySlotTable[idx], 1);
 	if (!(v > 0.25f))
 		v = 0.25f;
 	num = (float) r * 16.0f + 72.0f;
@@ -73,7 +73,7 @@ float __cdecl gm_CalcActionCompletionTime(int idx, GAME_TIMESTAMP* out)
 		} else if ((float) a.hour < 7.0f) {
 			a.hour += 6;
 		}
-		d = g_7f4ca0[idx].day;
+		d = gm_EntitySlotTable[idx].day;
 		h = (unsigned short) gm_GameTime.b;
 		b.unit_0 = d;
 		b.hour = h;

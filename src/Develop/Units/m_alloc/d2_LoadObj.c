@@ -13,7 +13,7 @@ typedef struct VfsEntry {
 } VfsEntry;
 // SIZE 0x54
 
-extern char* g_772500;
+extern char* d2_FileObjTable;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern FILE* g_772564;
 extern char g_102d040[];
@@ -27,10 +27,10 @@ char* __cdecl d2_LoadObj(int idx, const char* path)
 {
 	char* buf;
 
-	if (((VfsEntry*)g_772500)[idx].flags & 2) {
+	if (((VfsEntry*)d2_FileObjTable)[idx].flags & 2) {
 		idx += g_772510;
 	}
-	buf = m_alloc(((VfsEntry*)g_772500)[idx].size, s_67d410);
+	buf = m_alloc(((VfsEntry*)d2_FileObjTable)[idx].size, s_67d410);
 	if (path) {
 		g_772564 = fopen(path, s_6750e8);
 	} else {
@@ -39,8 +39,8 @@ char* __cdecl d2_LoadObj(int idx, const char* path)
 	if (g_772564 == 0) {
 		return 0;
 	}
-	fseek(g_772564, ((VfsEntry*)g_772500)[idx].offset, SEEK_SET);
-	fread(buf, ((VfsEntry*)g_772500)[idx].size, 1, g_772564);
+	fseek(g_772564, ((VfsEntry*)d2_FileObjTable)[idx].offset, SEEK_SET);
+	fread(buf, ((VfsEntry*)d2_FileObjTable)[idx].size, 1, g_772564);
 	fclose(g_772564);
 	return buf;
 }

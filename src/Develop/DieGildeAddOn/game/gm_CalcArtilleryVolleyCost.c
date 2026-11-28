@@ -1,4 +1,4 @@
-extern float g_6628a8;
+extern float flt_0_0;
 extern float g_6628bc;
 extern float g_6628cc;
 extern float g_662da8;
@@ -42,7 +42,7 @@ float __cdecl gm_CalcArtilleryVolleyCost(int level, int percent, int count)
 		count = 3;
 	}
 	step = k * percent_term * g_662b28 + g_662a3c;
-	sum = g_6628a8;
+	sum = flt_0_0;
 	while (count-- > 0) {
 		sum += step;
 		step *= 0.5f;

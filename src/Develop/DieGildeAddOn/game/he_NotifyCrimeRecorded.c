@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
-char g_6ab41c[] = "_NACHRICHTEN_HS_46";
+char str_NACHRICHTEN_HS_46[] = "_NACHRICHTEN_HS_46";
 
 
 
@@ -12,8 +12,8 @@ void __cdecl he_NotifyCrimeRecorded(void* offender, void* recipient)
 
 	t = *(char*) ((char*) recipient + 2);
 	if (t == 6 || t == 7) {
-		io_FormatTextBuffer(g_774a80, 0x20c6, *(unsigned short*) offender);
-		he_PostEntityMessage(*(int*) ((char*) recipient + 4), -1, g_774a80, 0, 0x5fa, g_6ab41c);
+		io_FormatTextBuffer(io_MessageFormatBuf, 0x20c6, *(unsigned short*) offender);
+		he_PostEntityMessage(*(int*) ((char*) recipient + 4), -1, io_MessageFormatBuf, 0, 0x5fa, str_NACHRICHTEN_HS_46);
 	}
 }
 unsigned char _dpad_6ab41c[184] = {

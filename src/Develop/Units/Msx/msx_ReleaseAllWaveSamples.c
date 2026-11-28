@@ -10,11 +10,11 @@ int __cdecl msx_ReleaseAllWaveSamples(void)
 	int i;
 	int j;
 
-	if (g_6b7f90 != 0) {
+	if (msx_Initialized != 0) {
 		for (i = 0; i < 0x10; i++) {
 			if (msx_WaveDrivers[i] != 0) {
 				for (j = 0; j < msx_WaveDrivers[i][6]; j++) {
-					if (g_6b7f10[i][j] != 0 && msx_ReleaseSampleHandle(g_6b7f10[i][j]) == -1) {
+					if (msx_SampleHandles[i][j] != 0 && msx_ReleaseSampleHandle(msx_SampleHandles[i][j]) == -1) {
 						r = -1;
 					}
 				}

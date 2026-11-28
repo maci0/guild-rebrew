@@ -1,6 +1,6 @@
 #include "g_680bd0.h"
 
-extern Entry680bd0 g_680bd0[48];
+extern Entry680bd0 gm_MissionSpecs[48];
 
 int __cdecl gm_CountMissionEntriesByKey(int);
 int __cdecl gm_MissionRandomMod(int);
@@ -18,10 +18,10 @@ int __cdecl gm_PickRandomMissionEntry(int key)
 	if (n > 0) {
 		pick = gm_MissionRandomMod(n);
 		for (i = 0, seen = 0; i < 48; i++) {
-			if (g_680bd0[i].key == key)
+			if (gm_MissionSpecs[i].key == key)
 				seen++;
 			if (seen > pick)
-				return g_680bd0[i].f0;
+				return gm_MissionSpecs[i].f0;
 		}
 	}
 	return 0xff;

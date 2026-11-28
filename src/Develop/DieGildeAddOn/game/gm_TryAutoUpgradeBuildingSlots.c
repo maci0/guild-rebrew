@@ -17,14 +17,14 @@ typedef struct Race {
 	char pad242[0x24d - 0x242];
 } Race;
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern unsigned short g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
-extern unsigned char g_773d75;
+extern unsigned short gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
+extern unsigned char gm_ActiveTownIndex;
 extern char g_67e33c[];
 
 unsigned short __cdecl gm_RandomMod(int n);
@@ -79,12 +79,12 @@ void __cdecl gm_TryAutoUpgradeBuildingSlots(char* building, char* owner, int cha
 	}
 	memset(msg, 0, sizeof(msg));
 	msg[4] = 0x12;
-	*(int*) (msg + 8) = ((Ent*)g_7f4ca0)[*(unsigned short*) (h + 0x27)].handle;
+	*(int*) (msg + 8) = ((Ent*)gm_EntitySlotTable)[*(unsigned short*) (h + 0x27)].handle;
 	*(int*) (msg + 0xc) = *(int*) (h + 1);
 	*(int*) (msg + 0x28) = (*(int*)&gm_GameTime);
-	*(int*) (msg + 0x2c) = (*(int*)&g_7f4c04);
-	*(int*) (msg + 0x30) = g_7f4c08;
-	*(short*) (msg + 0x34) = g_7f4c0c;
+	*(int*) (msg + 0x2c) = (*(int*)&gm_GameTimeHour);
+	*(int*) (msg + 0x30) = gm_GameTimeSliceDword;
+	*(short*) (msg + 0x34) = gm_GameTimeTailWord;
 	msg[0x36] = 1;
 	*(int*) (msg + 0x64) = 1;
 	*(int*) (msg + 0x58) = *(int*) (building + 2);
@@ -93,7 +93,7 @@ void __cdecl gm_TryAutoUpgradeBuildingSlots(char* building, char* owner, int cha
 	n = *(int*) (msg + 0x5c) + *(int*) (msg + 0x60);
 	cm_SendLogAction(g_67e33c);
 	cm_SendCopyEntityData(msg);
-	cm_RequestMoveCredits(-1, ((Ent*)g_7f4ca0)[*(unsigned short*) (*(char**) (owner + 0x16c) + 0x27)].handle, (*(char*)&g_773d75), 0x1f40);
+	cm_RequestMoveCredits(-1, ((Ent*)gm_EntitySlotTable)[*(unsigned short*) (*(char**) (owner + 0x16c) + 0x27)].handle, (*(char*)&gm_ActiveTownIndex), 0x1f40);
 	switch (main_GetLanguage()) {
 	case 0:
 		if (n == 1) {
@@ -113,7 +113,7 @@ void __cdecl gm_TryAutoUpgradeBuildingSlots(char* building, char* owner, int cha
 		break;
 	}
 	h = *(char**) (owner + 0x16c);
-	he_MessageBoxQuickjump(((Ent*)g_7f4ca0)[*(unsigned short*) (h + 0x27)].handle, ((Ent*)g_7f4ca0)[*(unsigned short*) (h + 0x27)].handle, buf, 0, 0x60b, *(int*) (h + 1), -1, 0, 0);
+	he_MessageBoxQuickjump(((Ent*)gm_EntitySlotTable)[*(unsigned short*) (h + 0x27)].handle, ((Ent*)gm_EntitySlotTable)[*(unsigned short*) (h + 0x27)].handle, buf, 0, 0x60b, *(int*) (h + 1), -1, 0, 0);
 	*(int*) (owner + 0x1b8) -= n * 8000;
 	cm_SendTraceEnd(g_67e33c);
 	*(int*) (owner + 0x1c8) |= 8;

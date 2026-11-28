@@ -22,11 +22,11 @@ void __cdecl he_PostEntityMessage(int, int, int, int, int, char *);
 
 extern int gm_CityEntity;
 extern int gm_GameTime;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
-extern unsigned char g_773d75;
-extern int g_aed32c;
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
+extern unsigned char gm_ActiveTownIndex;
+extern int cm_PacketDeltaBase;
 
 /* ADDRESS: GOLDTL 0x005099e0 */
 void __cdecl gm_TransferEntityBuildings(void *fromEntity, void *toEntity)
@@ -83,12 +83,12 @@ void __cdecl gm_TransferEntityBuildings(void *fromEntity, void *toEntity)
 						memset(pkt, 0, 0xf8);
 						pkt[4] = 0x31;
 						*(int *) (pkt + 8) = *(int *) ((char *) gm_CityEntity + 4);
-						*(int *) (pkt + 0x2c) = g_7f4c04;
+						*(int *) (pkt + 0x2c) = gm_GameTimeHour;
 						*(int *) (pkt + 0xc) = *(int *) ((char *) ent + 1);
 						*(int *) (pkt + 0x28) = gm_GameTime;
 						pkt[0x36] = 1;
-						*(int *) (pkt + 0x30) = g_7f4c08;
-						*(unsigned short *) (pkt + 0x34) = g_7f4c0c;
+						*(int *) (pkt + 0x30) = gm_GameTimeSliceDword;
+						*(unsigned short *) (pkt + 0x34) = gm_GameTimeTailWord;
 						*(int *) (pkt + 0x58) = recipient;
 						cm_SendCopyEntityData(pkt);
 					}
@@ -103,14 +103,14 @@ void __cdecl gm_TransferEntityBuildings(void *fromEntity, void *toEntity)
 	if (toEntity != (void *) gm_CityEntity) {
 		val = gm_SumTreasury(fromEntity);
 		i = 4 + (*((unsigned char *) fromEntity + 2) == 5);
-		cm_RequestMoveCredits(*(int *) ((char *) toEntity + 4), -1, g_773d75, val);
+		cm_RequestMoveCredits(*(int *) ((char *) toEntity + 4), -1, gm_ActiveTownIndex, val);
 		type = gm_WalkEntityChain(*(unsigned short *) fromEntity);
 		cm_BeginPacketFieldDelta(toEntity, *(int *) ((char *) toEntity + 4));
-		cm_AppendPacketFieldValue(4, 1, (int) toEntity - g_aed32c + 0x1a8, &type);
+		cm_AppendPacketFieldValue(4, 1, (int) toEntity - cm_PacketDeltaBase + 0x1a8, &type);
 		if (flag != 0
 			&& (*((unsigned char *) toEntity + 2) == 3 || *((unsigned char *) toEntity + 2) == 8
 				|| *((unsigned char *) toEntity + 2) == 9)) {
-			cm_AppendPacketFieldDelta(1, 1, (int) toEntity - g_aed32c + 2, &i);
+			cm_AppendPacketFieldDelta(1, 1, (int) toEntity - cm_PacketDeltaBase + 2, &i);
 		}
 		cm_RequestChangeAttribute();
 	}

@@ -2,7 +2,7 @@
 
 #include "Develop/Units/d3/d3_camera.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern float g_10432a4;
+extern float d3_ProjectionDist;
 float* __stdcall D3DXMatrixTranspose(float* out, const float* in);
 void __cdecl d3_NormalizeVector(float* v);
 
@@ -17,7 +17,7 @@ void __cdecl d3_ScreenRayToHeight(float x, float y, float y0, float y1, float* o
 	D3DXMatrixTranspose(m, (float*) (((char*)d3_ActiveCamera) + 0x18c));
 	v[0] = x - d3_ViewportCenterX;
 	v[1] = -(y - g_1052bc8);
-	v[2] = g_10432a4;
+	v[2] = d3_ProjectionDist;
 	d3_NormalizeVector(v);
 	dx = m[8] * v[2] + m[4] * v[1] + m[0] * v[0];
 	dy = m[9] * v[2] + m[5] * v[1] + m[1] * v[0];

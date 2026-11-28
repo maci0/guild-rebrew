@@ -21,7 +21,7 @@ typedef struct Pair {
 } Pair;
 // SIZE 0x8
 
-extern int g_776664;
+extern int d3_GfxDetails;
 extern unsigned char g_776665;
 extern unsigned char g_776666;
 extern unsigned char g_776667;
@@ -35,16 +35,16 @@ extern float g_776680[3];
 extern float g_77668c;
 extern float g_776690[3];
 extern float g_77669c;
-extern unsigned char g_6752a4;
+extern unsigned char ch_DefaultMirrorFlag;
 extern int g_104336c;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char* g_7746c4;
-extern unsigned char* g_7746c8;
+extern char* d2_VisitedBuilding;
+extern unsigned char* d2_InteriorBuilding;
 extern float g_67a964;
-extern char g_10432c0[];
+extern char d3_Universes[];
 extern Pair g_6a2528[];
 extern Pair g_6a2540[];
-extern char g_774964;
+extern char gm_InWorldHud;
 extern float g_774694;
 extern unsigned char g_6b8304;
 
@@ -75,14 +75,14 @@ void __cdecl d3_ApplyGraphicsOptions(void)
 	hi = 0;
 	if (g_776667 == 0) {
 		hi = g_776667;
-		g_6752a4 = 1;
+		ch_DefaultMirrorFlag = 1;
 		width = 0x20;
 	} else if (g_776667 == 1) {
-		g_6752a4 = g_776667;
+		ch_DefaultMirrorFlag = g_776667;
 		width = 0x20;
 		hi = 1;
 	} else if (g_776667 == 2) {
-		g_6752a4 = 0;
+		ch_DefaultMirrorFlag = 0;
 		width = 0x40;
 		hi = 1;
 	}
@@ -100,18 +100,18 @@ void __cdecl d3_ApplyGraphicsOptions(void)
 		d3_SelectSceneContext(saved, 0);
 	}
 	d3_ConfigureSceneRenderQuality(g_776668, 0, 2 - g_776665, hi * width, 0);
-	if ((*(int*)&g_7746c4) == 0 && (*(int*)&g_7746c8) == 0) {
+	if ((*(int*)&d2_VisitedBuilding) == 0 && (*(int*)&d2_InteriorBuilding) == 0) {
 		g_67a964 = (float) (1.0 - (g_77666c & 0xff) * 0.01);
 	}
 	for (i = 0; i < 768; i++) {
-		if (((Node**)ch_CharacterSlots)[i] != 0 && ((Node**)ch_CharacterSlots)[i]->owner == &(*(char*)g_10432c0)) {
-			((Node**)ch_CharacterSlots)[i]->flags->mirror = g_6752a4;
+		if (((Node**)ch_CharacterSlots)[i] != 0 && ((Node**)ch_CharacterSlots)[i]->owner == &(*(char*)d3_Universes)) {
+			((Node**)ch_CharacterSlots)[i]->flags->mirror = ch_DefaultMirrorFlag;
 		}
 	}
 	ch_SetLowPolyMode(g_77666b);
 	(*(Pair*)&g_6a2558) = g_6a2528[g_776669];
 	(*(Pair*)&g_6a2560) = g_6a2540[g_776669];
-	if ((*(unsigned char*)&g_774964)) {
+	if ((*(unsigned char*)&gm_InWorldHud)) {
 		d3_SetCameraHeightFraction((*(int*)&g_774694));
 	}
 	if (g_6b8304 != g_776668) {
@@ -120,7 +120,7 @@ void __cdecl d3_ApplyGraphicsOptions(void)
 	saved = d3_CurrentContextIndex;
 	d3_SelectSceneContext(0, 1);
 	d3_ReleaseUnusedSceneObjects();
-	if ((*(unsigned char*)&g_776664) == 0) {
+	if ((*(unsigned char*)&d3_GfxDetails) == 0) {
 		d3_SetHighlightMode(0);
 	} else {
 		d3_SetHighlightMode(1);

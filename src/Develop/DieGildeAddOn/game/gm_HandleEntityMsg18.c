@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern unsigned char g_773d75; extern double g_662a48; extern double g_6640e8; extern void* __cdecl gm_LookupEntityRecordById(unsigned int);
+extern unsigned char gm_ActiveTownIndex; extern double dbl_2_0; extern double dbl_0_01; extern void* __cdecl gm_LookupEntityRecordById(unsigned int);
 extern int __cdecl gm_HasActiveSpecialObject(void*, int);
 extern void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 extern void* __cdecl gm_FindNextFilteredEntity(void);
@@ -67,12 +67,12 @@ int __cdecl gm_HandleEntityMsg18(unsigned int* request)
 		}
 	}
 	v = gm_RandomMod(4);
-	d = (double) v + g_662a48;
+	d = (double) v + dbl_2_0;
 	n = (int) (((double) gm_WalkEntityChain(*ent) * d) *
-	    g_6640e8);
+	    dbl_0_01);
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7, n);
 	he_PostEntityMessage(*(int*) ((char*) ent + 4), *(int*) ((char*) ent + 4), buf,
 	    (unsigned) strlen(buf) > 0x100, 0x603, 0);
-	cm_RequestTransferCurrencyNoKill(-1, *(int*) request, (char) g_773d75, n);
+	cm_RequestTransferCurrencyNoKill(-1, *(int*) request, (char) gm_ActiveTownIndex, n);
 	return 0;
 }

@@ -1,8 +1,8 @@
 
 
 
-extern int g_7746d8;
-extern int g_7746a0;
+extern int d2_SelectedEntityUiFlags;
+extern int sv_ClickedObjekt;
 extern int g_14a5548;
 extern int g_14ad118;
 extern char g_6aa370[];
@@ -23,15 +23,15 @@ void __cdecl d2_RunWacheInteriorHud(int a)
 	y = 0;
 	d2_ClearStatusTextSlots();
 	while (main_RunFrameLoop(d2_RunWacheInteriorHud, 0x67fff) != 0) {
-		if (g_7746d8 & 0x200) {
+		if (d2_SelectedEntityUiFlags & 0x200) {
 			x = RegisterStatusText(g_6aa370, g_14a5548, 0xc);
 			y = RegisterStatusText(g_6aa35c, g_14ad118, 0xd);
 		}
-		if (g_7746a0 != 0) {
-			if (g_7746a0 == x) {
+		if (sv_ClickedObjekt != 0) {
+			if (sv_ClickedObjekt == x) {
 				d2_RunSoeldnerbuchDialog(a, g_6aa370);
 			}
-			else if (g_7746a0 == y) {
+			else if (sv_ClickedObjekt == y) {
 				d2_RunEquipmentDialog(a);
 			}
 		}

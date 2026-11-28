@@ -2,11 +2,11 @@
 #include "Develop/client_types.h"
 
 extern pos14_7f4c00 gm_GameTime;
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern double g_6629c8;
 extern double g_6653f8;
-extern char* g_aed32c;
+extern char* cm_PacketDeltaBase;
 
 int __cdecl gm_RandomMod(unsigned short);
 float __cdecl gm_RandomFloat01(void);
@@ -159,7 +159,7 @@ void __cdecl he_RunEntfuehren(char* action)
 		countf = (float) cnt;
 		t = gm_GetBuildingTechEffect((unsigned char*) ent, 0xf, 1);
 		if ((float) ((((float) t * 0.01f + g_6629c8) *
-		              (countf * 0.1f + g_6628a0) *
+		              (countf * 0.1f + flt_1_0) *
 		              (total / countf)) /
 		             (float) *(unsigned char*) (obj + 0x83)) >
 		    (gm_RandomFloat01() + g_6628cc)) {
@@ -210,7 +210,7 @@ void __cdecl he_RunEntfuehren(char* action)
 				}
 			}
 			cm_BeginPacketFieldDelta(ent, *(int*) (ent + 1));
-			cm_AppendPacketFieldDelta(4, 1, (unsigned short) (ent - g_aed32c + 0x65), obj + 4);
+			cm_AppendPacketFieldDelta(4, 1, (unsigned short) (ent - cm_PacketDeltaBase + 0x65), obj + 4);
 			cm_RequestChangeAttribute();
 			cm_SendBlockCharacter(*(int*) (obj + 4), 5, 0);
 			{

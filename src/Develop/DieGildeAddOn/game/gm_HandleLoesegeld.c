@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_aed32c;
-extern unsigned char g_773d75;
+extern int cm_PacketDeltaBase;
+extern unsigned char gm_ActiveTownIndex;
 
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_CompareGameTime(void*, void*);
@@ -56,9 +56,9 @@ void __cdecl gm_HandleLoesegeld(char* action)
 		case 1:
 			if (g_100f884 != *(int*) (*(int*) (action + 0x74) + 8))
 				return;
-			if (g_100f1dc == -1)
+			if (d2_DialogButtonAction == -1)
 				return;
-			if (g_100f1dc == 2) {
+			if (d2_DialogButtonAction == 2) {
 				v[2] = -1;
 				pkt = gm_StartFilteredEntitySearch(1, 1, *(int*) (action + 0x10));
 				io_FormatTextBuffer(buf, 0x19d4, *(unsigned short*) v3,
@@ -68,13 +68,13 @@ void __cdecl gm_HandleLoesegeld(char* action)
 				if (pkt != 0) {
 					cm_BeginPacketFieldDelta((char*) pkt, *(int*) (pkt + 1));
 					cm_AppendPacketFieldDelta(4, 1,
-					    (pkt - g_aed32c) + 0x65, (void*) &v[2]);
+					    (pkt - cm_PacketDeltaBase) + 0x65, (void*) &v[2]);
 					cm_RequestChangeAttribute();
 				}
 				cm_SendBlockCharacter(*(int*) ((char*) v3 + 4),
 				    -(int) *(unsigned char*) ((char*) v3 + 0x1b1), 0);
 				cm_RequestTransferCurrencyNoKill(*(int*) ((char*) v4 + 4), *(int*) ((char*) v3 + 4),
-				    (char) g_773d75, *(int*) (action + 0xb4));
+				    (char) gm_ActiveTownIndex, *(int*) (action + 0xb4));
 				if (*(int*) ((char*) v3 + 0x184) != 0
 				    && he_GetEntityHomeTarget(v3, &v[1], &v[0], 0) != 0)
 					ch_StartMovement(*(int*) ((char*) v3 + 4), v[1], v[0], 0, 0,
@@ -91,7 +91,7 @@ void __cdecl gm_HandleLoesegeld(char* action)
 				*(int*) (action + 0x70) = 3;
 				goto done_case1;
 			}
-			if (g_100f1dc == 1) {
+			if (d2_DialogButtonAction == 1) {
 				pkt = gm_StartFilteredEntitySearch(1, 1, *(int*) (action + 0x10));
 				if (pkt == 0)
 					break;
@@ -114,12 +114,12 @@ done_case1:
 				he_PostEntityMessage(*(int*) ((char*) v4 + 4), *(int*) (action + 0x10),
 				    buf, 0, 0x5fa, 0);
 				cm_BeginPacketFieldDelta((char*) pkt, *(int*) (pkt + 1));
-				cm_AppendPacketFieldDelta(4, 1, (pkt - g_aed32c) + 0x65, (void*) &v[1]);
+				cm_AppendPacketFieldDelta(4, 1, (pkt - cm_PacketDeltaBase) + 0x65, (void*) &v[1]);
 				cm_RequestChangeAttribute();
 				cm_SendBlockCharacter(*(int*) ((char*) v3 + 4),
 				    -(int) *(unsigned char*) ((char*) v3 + 0x1b1), 0);
 				cm_RequestTransferCurrencyNoKill(*(int*) ((char*) v4 + 4), *(int*) ((char*) v3 + 4),
-				    (char) g_773d75, *(int*) (action + 0xb4));
+				    (char) gm_ActiveTownIndex, *(int*) (action + 0xb4));
 				if (*(int*) ((char*) v3 + 0x184) != 0
 				    && he_GetEntityHomeTarget(v3, &v[2], &v[0], 0) != 0)
 					ch_StartMovement(*(int*) ((char*) v3 + 4), v[2], v[0], 0, 0,

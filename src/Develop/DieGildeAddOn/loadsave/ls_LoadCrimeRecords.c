@@ -34,8 +34,8 @@ typedef struct
 #include "Develop/client_types.h"
 extern Slot_68ff80 g_68ff80[29];
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern Rec2d_9a3800 g_9a3800[512];
-extern Pair_99f800 g_99f800[0x800];
+extern Rec2d_9a3800 cm_CrimeRecords[512];
+extern Pair_99f800 cm_CrimeEvidenceLinks[0x800];
 
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 
@@ -68,37 +68,37 @@ int __cdecl ls_LoadCrimeRecords(void* f)
 			return 0;
 	}
 	for (i = 0; (unsigned int)i < n1; i++) {
-		if (ls_ReadVfsDataChecked(&((CRIME_RECORD*)g_9a3800)[i].id, 4, 1, f) == 0)
+		if (ls_ReadVfsDataChecked(&((CRIME_RECORD*)cm_CrimeRecords)[i].id, 4, 1, f) == 0)
 			return 0;
-		if (ls_ReadVfsDataChecked(((CRIME_RECORD*)g_9a3800)[i].name, 0xe, 1, f) == 0)
+		if (ls_ReadVfsDataChecked(((CRIME_RECORD*)cm_CrimeRecords)[i].name, 0xe, 1, f) == 0)
 			return 0;
-		if (ls_ReadVfsDataChecked(&((CRIME_RECORD*)g_9a3800)[i].a, 4, 1, f) == 0)
+		if (ls_ReadVfsDataChecked(&((CRIME_RECORD*)cm_CrimeRecords)[i].a, 4, 1, f) == 0)
 			return 0;
-		if (ls_ReadVfsDataChecked(&((CRIME_RECORD*)g_9a3800)[i].b, 4, 1, f) == 0)
+		if (ls_ReadVfsDataChecked(&((CRIME_RECORD*)cm_CrimeRecords)[i].b, 4, 1, f) == 0)
 			return 0;
-		if (ls_ReadVfsDataChecked(&((CRIME_RECORD*)g_9a3800)[i].c, 2, 1, f) == 0)
+		if (ls_ReadVfsDataChecked(&((CRIME_RECORD*)cm_CrimeRecords)[i].c, 2, 1, f) == 0)
 			return 0;
-		if (ls_ReadVfsDataChecked(&((CRIME_RECORD*)g_9a3800)[i].d, 1, 1, f) == 0)
+		if (ls_ReadVfsDataChecked(&((CRIME_RECORD*)cm_CrimeRecords)[i].d, 1, 1, f) == 0)
 			return 0;
-		if (ls_ReadVfsDataChecked(&((CRIME_RECORD*)g_9a3800)[i].e, 4, 1, f) == 0)
+		if (ls_ReadVfsDataChecked(&((CRIME_RECORD*)cm_CrimeRecords)[i].e, 4, 1, f) == 0)
 			return 0;
-		if (ls_ReadVfsDataChecked(&((CRIME_RECORD*)g_9a3800)[i].f, 4, 1, f) == 0)
+		if (ls_ReadVfsDataChecked(&((CRIME_RECORD*)cm_CrimeRecords)[i].f, 4, 1, f) == 0)
 			return 0;
-		if (ls_ReadVfsDataChecked(&((CRIME_RECORD*)g_9a3800)[i].g, 4, 1, f) == 0)
+		if (ls_ReadVfsDataChecked(&((CRIME_RECORD*)cm_CrimeRecords)[i].g, 4, 1, f) == 0)
 			return 0;
 	}
 	for (; i < 0x200; i++) {
-		((CRIME_RECORD*)g_9a3800)[i].id = -1;
-		((CRIME_RECORD*)g_9a3800)[i].a = -1;
-		((CRIME_RECORD*)g_9a3800)[i].b = -1;
-		((CRIME_RECORD*)g_9a3800)[i].c = 0;
-		((CRIME_RECORD*)g_9a3800)[i].g = 0;
+		((CRIME_RECORD*)cm_CrimeRecords)[i].id = -1;
+		((CRIME_RECORD*)cm_CrimeRecords)[i].a = -1;
+		((CRIME_RECORD*)cm_CrimeRecords)[i].b = -1;
+		((CRIME_RECORD*)cm_CrimeRecords)[i].c = 0;
+		((CRIME_RECORD*)cm_CrimeRecords)[i].g = 0;
 	}
-	memset(((CRIME_PAIR*)g_99f800), 0xff, 0x800 * sizeof(CRIME_PAIR));
+	memset(((CRIME_PAIR*)cm_CrimeEvidenceLinks), 0xff, 0x800 * sizeof(CRIME_PAIR));
 	for (i = 0; (unsigned int)i < n2; i++) {
-		if (ls_ReadVfsDataChecked(&((CRIME_PAIR*)g_99f800)[i].a, 4, 1, f) == 0)
+		if (ls_ReadVfsDataChecked(&((CRIME_PAIR*)cm_CrimeEvidenceLinks)[i].a, 4, 1, f) == 0)
 			return 0;
-		if (ls_ReadVfsDataChecked(&((CRIME_PAIR*)g_99f800)[i].b, 4, 1, f) == 0)
+		if (ls_ReadVfsDataChecked(&((CRIME_PAIR*)cm_CrimeEvidenceLinks)[i].b, 4, 1, f) == 0)
 			return 0;
 	}
 	return 1;

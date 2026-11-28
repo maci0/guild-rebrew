@@ -25,7 +25,7 @@ typedef struct
 // SIZE 0x170
 
 #include "Develop/client_types.h"
-extern Slot170_7731b8 g_7731b8[8];
+extern Slot170_7731b8 gm_CannonTowers[8];
 extern unsigned char* lpGebaeudePROT;
 
 
@@ -37,10 +37,10 @@ void __cdecl gm_PruneInvalidEntitySlots(void)
 	unsigned char* r;
 
 	for (i = 0; i < 8; i++) {
-		if (((Slot170*)g_7731b8)[i].id != -1) {
-			gm_ResolveEntityById((void**) (&r), 0, 0, ((Slot170*)g_7731b8)[i].id);
-			if ((r == 0 && ((Slot170*)g_7731b8)[i].flags == 0) || (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*r].category != 0x1e && ((Slot170*)g_7731b8)[i].flags == 0)) {
-				cm_SendSlotReleaseById(((Slot170*)g_7731b8)[i].id);
+		if (((Slot170*)gm_CannonTowers)[i].id != -1) {
+			gm_ResolveEntityById((void**) (&r), 0, 0, ((Slot170*)gm_CannonTowers)[i].id);
+			if ((r == 0 && ((Slot170*)gm_CannonTowers)[i].flags == 0) || (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*r].category != 0x1e && ((Slot170*)gm_CannonTowers)[i].flags == 0)) {
+				cm_SendSlotReleaseById(((Slot170*)gm_CannonTowers)[i].id);
 			}
 		}
 	}

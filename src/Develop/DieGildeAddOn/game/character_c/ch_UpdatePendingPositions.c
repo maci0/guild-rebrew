@@ -36,11 +36,11 @@ float __cdecl d3_ComputeYawToTarget(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
 char __cdecl d3sm_SampleHeight(char*, float*, int*, int*, float*);
 void __cdecl d3_GetFloorHeight(char*, float*, int, int*, int*, float*);
-extern float g_6628a8;
+extern float flt_0_0;
 #include "../../../Units/d3/d3_animation.h"
 
 #include "../../../Units/d3/d3_camera.h"
-extern char g_10432c0[];
+extern char d3_Universes[];
 
 char __cdecl d3_SetObjectVisible(char*, char);
 
@@ -51,7 +51,7 @@ int __cdecl d3_RemoveObjectAnim(char*);
 
 
 
-extern char g_6b5c60[];
+extern char str_empty[];
 D3_OBJECT* __cdecl d3_CreateSceneModelObject(D3_OBJECT*, float*, float*, char*);
 void __cdecl d3_InvalidateSubTreeFlags(char*, int);
 void __cdecl ch_PreloadCharacterMotions(char*, int, ...);
@@ -80,7 +80,7 @@ void __cdecl ch_UpdatePendingPositions(void)
 	do {
 		obj = *p;
 		if (obj != 0 && (obj[0x8c] & 1) != 0
-		    && *(int*) (obj + 0x88) == g_67a370) {
+		    && *(int*) (obj + 0x88) == d3_ActiveScene) {
 			value = *(float*) (*(char**) (obj + 0x34) + 0x4c);
 			position[0] = value + *(float*) (obj + 0x54);
 			value = *(float*) (*(char**) (obj + 0x34) + 0x50);

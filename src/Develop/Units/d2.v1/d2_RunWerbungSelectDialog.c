@@ -12,14 +12,14 @@ typedef struct
 } Item;
 /* SIZE 0x38 */
 
-extern char* g_772500;
-extern char* g_77255c;
+extern char* d2_FileObjTable;
+extern char* d2_CurrentWindow;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int d2_CurrentWindowId;
 extern int d2_CurrentElementId;
-extern int g_100f1dc;
-extern int g_14ce8e0;
+extern int d2_DialogButtonAction;
+extern int io_RightButtonReleased;
 extern int g_14ce8d8;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
@@ -59,32 +59,32 @@ int __cdecl d2_RunWerbungSelectDialog(char* a0)
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1ce3);
 	d2_SetForm(dlg, 2);
-	w = (((int*) g_77255c)[3] - *(short*) (g_772500 + 0x1ebd8) * 3) / 4;
-	off = (((int*) g_77255c)[3] - *(short*) (g_772500 + 0x1ebd8) * 3) % 4 / 2;
+	w = (((int*) d2_CurrentWindow)[3] - *(short*) (d2_FileObjTable + 0x1ebd8) * 3) / 4;
+	off = (((int*) d2_CurrentWindow)[3] - *(short*) (d2_FileObjTable + 0x1ebd8) * 3) % 4 / 2;
 	for (i = 0; i < count; i++) {
-		items[i].x = off + (*(short*) (g_772500 + 0x1ebd8) + 10) * (i % 3) + (i % 3 + 1) * w - 10;
+		items[i].x = off + (*(short*) (d2_FileObjTable + 0x1ebd8) + 10) * (i % 3) + (i % 3 + 1) * w - 10;
 		items[i].y = i / 3 * 0x41 * 2 + 5;
 		items[i].e = gm_LookupEntityRecordById(ids[i]);
 		items[i].flag = 1;
 		d2_BuildPersonStatusDesc(&items[i]);
-		items[i].val = gm_CalcWerbungSteps(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])->entity_id, *(int*) (items[i].e + 4));
+		items[i].val = gm_CalcWerbungSteps(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[gm_LocalPlayerSlot])->entity_id, *(int*) (items[i].e + 4));
 		io_FormatTextBuffer(buf, 0x1ce4, items[i].val);
 		d2_DrawPersonCard(items[i].x, items[i].y, d2_CurrentWindowId, 0x56, &items[i], 1);
-		d2_ShowCenteredText((int) buf, items[i].x + *(short*) (g_772500 + 0x1ebd8) / 2,
-		             *(short*) (g_772500 + 0x1ebda) + items[i].y + 0x2b, 0xca, 0x56);
+		d2_ShowCenteredText((int) buf, items[i].x + *(short*) (d2_FileObjTable + 0x1ebd8) / 2,
+		             *(short*) (d2_FileObjTable + 0x1ebda) + items[i].y + 0x2b, 0xca, 0x56);
 	}
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		else if (g_100f1dc != -1 && g_14ce8d8 != 0) {
+		else if (d2_DialogButtonAction != -1 && g_14ce8d8 != 0) {
 			for (i = 0; i < count; i++) {
 				if (items[i].btn == d2_CurrentElementId) {
 					d2_SetGroupVisibility(dlg, 0);
 					if (d2_RunWerbungDialog((unsigned short*) items[i].e) != 0) {
 						res = 0x92;
-						g_774654 = 1;
+						d2_DialogCloseRequested = 1;
 						break;
 					}
 					d2_SetGroupVisibility(dlg, 1);

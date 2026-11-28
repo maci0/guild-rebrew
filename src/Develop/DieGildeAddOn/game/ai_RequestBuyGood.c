@@ -50,7 +50,7 @@ int __cdecl ai_RequestBuyGood(char* actor, char* good, char* target)
 	cm_SendLogAction(s_67fb68);
 	cm_RequestElectionOrTrade(&msg);
 	cm_RequestLinkEvidence(*(int*) (good + 4), *(int*) (actor + 4));
-	cm_RequestTransferCurrencyNoKill(((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (found + 0x27)].entity_id,
+	cm_RequestTransferCurrencyNoKill(((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (found + 0x27)].entity_id,
 	    *(int*) (actor + 4), 0, *(int*) (good + 0x10));
 	cm_SendTraceEnd(s_67fb68);
 	return 1;

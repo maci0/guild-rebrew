@@ -1,5 +1,5 @@
 /* Owned (both targets) by src/GOLDTL.fcn_005b24b0.c. */
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 #include <string.h>
 
@@ -36,6 +36,6 @@ int __cdecl gm_HandleMsgGrantPercentWealth(void* record)
 	len = strlen(buf);
 	he_PostEntityMessage(*(int*) ((char*) p + 4), *(int*) ((char*) p + 4), buf,
 	    0x100 < len, 0x603, 0);
-	cm_RequestTransferCurrencyNoKill(-1, *(int*) record, g_773d75, r);
+	cm_RequestTransferCurrencyNoKill(-1, *(int*) record, gm_ActiveTownIndex, r);
 	return 0;
 }

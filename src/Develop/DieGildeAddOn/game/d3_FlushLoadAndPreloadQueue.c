@@ -1,7 +1,7 @@
 
 
 
-extern int* g_774a34;
+extern int* lb_LobbyPlayerList;
 
 int __cdecl cm_RequestClearSceneEntries(void);
 int __cdecl cm_GetCommandStatus(int);
@@ -19,11 +19,11 @@ void __cdecl d3_FlushLoadAndPreloadQueue(void)
 	while (cm_GetCommandStatus(h) == 0) {
 		cm_StepCommandQueue();
 	}
-	g_774a34 = lb_GetPlayerList();
+	lb_LobbyPlayerList = lb_GetPlayerList();
 	r = -1;
 	for (i = 1; i < 9; i++) {
-		if (g_774a34[i] != 0) {
-			r = cm_RequestPreloadSceneEntry(g_774a34[i]);
+		if (lb_LobbyPlayerList[i] != 0) {
+			r = cm_RequestPreloadSceneEntry(lb_LobbyPlayerList[i]);
 		}
 	}
 	if (r != -1) {

@@ -1,12 +1,12 @@
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned int g_775344;
 extern int d2_CurrentWindowId;
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 extern int g_14ce8e8;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern volatile unsigned int g_6b7fac;
+extern volatile unsigned int gm_GameTicks;
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
@@ -67,7 +67,7 @@ int __cdecl d2_ShowTabbedSelectionDialog(void* ent, char* name, int tab, int cal
 	int win;
 
 	sel = 0;
-	time0 = g_6b7fac;
+	time0 = gm_GameTicks;
 	d2_ClearTabGroups();
 	if (tab > -1 && tab < 8) {
 		g_775344 = tab;
@@ -77,7 +77,7 @@ int __cdecl d2_ShowTabbedSelectionDialog(void* ent, char* name, int tab, int cal
 	}
 	for (i = 0; i < 8; i++) {
 		g_6ac8a8[i].count = g_6ac8a8[i].create(
-				(char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 0, rows, ent);
+				(char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot], 0, rows, ent);
 	}
 	if (g_6ac8a8[g_775344].count == 0) {
 		g_775344 = 8;
@@ -95,13 +95,13 @@ int __cdecl d2_ShowTabbedSelectionDialog(void* ent, char* name, int tab, int cal
 	d2_SetForm(h, 1);
 	io_AppendText(name);
 	d2_SetForm(h, 4);
-	rem = ((D2_WIN*)g_1015f40)[d2_CurrentWindowId].height - 0x107;
+	rem = ((D2_WIN*)d2_Windows)[d2_CurrentWindowId].height - 0x107;
 	step = rem / 7;
 	rem = rem % 7;
 	y = 0;
 	for (i = 0; i < 8;) {
 		g_6ac8a8[i].element = d2_AddWindowTextButton(
-				(((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width - 0xb9) / 2, y, 0xbf,
+				(((D2_WIN*)d2_Windows)[d2_CurrentWindowId].width - 0xb9) / 2, y, 0xbf,
 				*(int*) (0x14aad40 + g_6ac8a8[i].bild * 4), d2_CurrentWindowId);
 		d2_SetElementWidth(g_6ac8a8[i].element, 0xb9);
 		i++;
@@ -110,12 +110,12 @@ int __cdecl d2_ShowTabbedSelectionDialog(void* ent, char* name, int tab, int cal
 	if (g_775344 < 8) {
 		d2_SetForm(h, 2);
 		g_6ac8a8[g_775344].count = g_6ac8a8[g_775344].create(
-				(char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 0x10, rows, ent);
+				(char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot], 0x10, rows, ent);
 		g_6ac8a8[g_775344].present(h, 2, 3, g_6ac8a8[g_775344].count, rows);
 	}
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	state = 3;
-	cur = (char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970];
+	cur = (char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot];
 	do {
 		if (state == 3) {
 			old = -1;
@@ -126,7 +126,7 @@ int __cdecl d2_ShowTabbedSelectionDialog(void* ent, char* name, int tab, int cal
 			}
 			for (i = 0; i < 8; i++) {
 				g_6ac8a8[i].count = g_6ac8a8[i].create(
-						(char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 0, rows, ent);
+						(char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot], 0, rows, ent);
 			}
 			if (g_6ac8a8[g_775344].count == 0) {
 				g_775344 = 8;
@@ -139,12 +139,12 @@ int __cdecl d2_ShowTabbedSelectionDialog(void* ent, char* name, int tab, int cal
 			}
 			for (i = 0; i < 8; i++) {
 				d2_SetElementEnabled(g_6ac8a8[i].element, g_6ac8a8[i].count > 0);
-				*(int*) ((char*)&((D2_CONTROL_TL*)g_1015ea0)[g_6ac8a8[i].element] + 0x38) =
+				*(int*) ((char*)&((D2_CONTROL_TL*)d2_Controls)[g_6ac8a8[i].element] + 0x38) =
 						i == g_775344;
 			}
 			if (g_775344 < 8) {
 				n = g_6ac8a8[g_775344].create(
-						(char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 0x10, rows, ent);
+						(char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot], 0x10, rows, ent);
 				g_6ac8a8[g_775344].count = n;
 				if (n != old) {
 					g_6ac8a8[g_775344].present(h, 2, 3, n, rows);
@@ -154,18 +154,18 @@ int __cdecl d2_ShowTabbedSelectionDialog(void* ent, char* name, int tab, int cal
 				d2_UpdateMatchAttitudeBars(cur, g_6ac8a8[g_775344].count, rows);
 			} else {
 				d2_ClearAndScrollSubform(h, 2, 3);
-				cur = (char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970];
+				cur = (char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot];
 			}
 		} else if (state == 1) {
 			i = g_6ac8a8[sel].create(
-					(char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 0, 0, ent);
+					(char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot], 0, 0, ent);
 			g_6ac8a8[sel].count = i;
 			if (i != 0) {
-				*(int*) ((char*)&((D2_CONTROL_TL*)g_1015ea0)[g_6ac8a8[g_775344].element] + 0x38) = 0;
+				*(int*) ((char*)&((D2_CONTROL_TL*)d2_Controls)[g_6ac8a8[g_775344].element] + 0x38) = 0;
 				g_775344 = sel;
-				*(int*) ((char*)&((D2_CONTROL_TL*)g_1015ea0)[g_6ac8a8[sel].element] + 0x38) = 1;
+				*(int*) ((char*)&((D2_CONTROL_TL*)d2_Controls)[g_6ac8a8[sel].element] + 0x38) = 1;
 				n = g_6ac8a8[g_775344].create(
-						(char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 0x10, rows, ent);
+						(char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot], 0x10, rows, ent);
 				g_6ac8a8[g_775344].count = n;
 				g_6ac8a8[g_775344].present(h, 2, 3, n, rows);
 			} else {
@@ -178,10 +178,10 @@ int __cdecl d2_ShowTabbedSelectionDialog(void* ent, char* name, int tab, int cal
 		}
 		result = 0;
 		state = 0;
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		} else if (g_14ce8e8 != 0) {
-			if (cur == (void*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970])) {
+			if (cur == (void*) ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot])) {
 				result = 0;
 				cur = 0;
 				for (i = 0; i < g_6ac8a8[g_775344].count; i++) {
@@ -200,16 +200,16 @@ int __cdecl d2_ShowTabbedSelectionDialog(void* ent, char* name, int tab, int cal
 			}
 			goto hit;
 		} else {
-			if (cur != (void*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970])) {
+			if (cur != (void*) ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot])) {
 				state = 4;
-				cur = (char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970];
+				cur = (char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot];
 			} else {
 				goto hit;
 			}
 		}
 		goto after;
 	hit:
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			for (i = 0; i < 8; i++) {
 				if (g_6ac8a8[i].element == d2_CurrentElementId) {
 					state = 1;
@@ -223,7 +223,7 @@ int __cdecl d2_ShowTabbedSelectionDialog(void* ent, char* name, int tab, int cal
 					sel = i;
 					if (callback == 0) {
 						result = (int) rows[i].ent;
-						g_774654 = 1;
+						d2_DialogCloseRequested = 1;
 					} else {
 						d2_SetFormVisibility(h, 0);
 						if (((int (__cdecl*) (void*, int)) callback)(
@@ -236,10 +236,10 @@ int __cdecl d2_ShowTabbedSelectionDialog(void* ent, char* name, int tab, int cal
 					}
 				}
 			}
-		} else if (time0 <= g_6b7fac &&
-				*(int*) &((D2_WIN*)g_1015f40)[win].pad3c[0x224] == 0) {
+		} else if (time0 <= gm_GameTicks &&
+				*(int*) &((D2_WIN*)d2_Windows)[win].pad3c[0x224] == 0) {
 			state = 3;
-			time0 = g_6b7fac + 0xd8;
+			time0 = gm_GameTicks + 0xd8;
 		}
 	after:
 		if (main_RunFrameLoop((void*) d2_ShowTabbedSelectionDialog, 0x657c7) == 0) {

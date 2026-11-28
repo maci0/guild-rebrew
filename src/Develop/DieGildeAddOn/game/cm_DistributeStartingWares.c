@@ -10,7 +10,7 @@ typedef struct {
 } Figure;
 
 extern int g_7e1fa0[];
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern int g_7747f8;
 #include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 
@@ -70,9 +70,9 @@ void __cdecl cm_DistributeStartingWares(int count, int size, int* faces)
 			start = (step + start) % size;
 		}
 		ids[i] = cm_RequestAllocSpieler(5, -1, -1, 0x10, -1, face, 0, 2);
-		cm_RequestMoveCredits(-2, -1, (*(char*)&g_773d75), gm_ConvertUnitsToAmount(price[g_7e1fa0[i]], (*(char*)&g_773d75)));
+		cm_RequestMoveCredits(-2, -1, (*(char*)&gm_ActiveTownIndex), gm_ConvertUnitsToAmount(price[g_7e1fa0[i]], (*(char*)&gm_ActiveTownIndex)));
 		if (g_7747f8 != 0) {
-			cm_RequestMoveCredits(-2, -1, (*(char*)&g_773d75), gm_ConvertUnitsToAmount(gm_RandomMod(5000) + 5000, (*(char*)&g_773d75)));
+			cm_RequestMoveCredits(-2, -1, (*(char*)&gm_ActiveTownIndex), gm_ConvertUnitsToAmount(gm_RandomMod(5000) + 5000, (*(char*)&gm_ActiveTownIndex)));
 		}
 	}
 	cm_EndCommandSync();
@@ -92,7 +92,7 @@ void __cdecl cm_DistributeStartingWares(int count, int size, int* faces)
 				v = (float) (p->skills[j] + bonus[g_7e1fa0[i]]);
 				n = (int) (252.0f < v ? 252.0f : v);
 				b = n < 0 ? 0 : n;
-				cm_AppendCommandSyncField(1, 1, (short) (&p->skills[j] - g_aed32c), &b);
+				cm_AppendCommandSyncField(1, 1, (short) (&p->skills[j] - cm_PacketDeltaBase), &b);
 			}
 			cm_SendSetAttribute();
 		}

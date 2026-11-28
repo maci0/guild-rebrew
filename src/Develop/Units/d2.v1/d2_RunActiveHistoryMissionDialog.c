@@ -1,8 +1,8 @@
-extern int g_10069a0[9];
+extern int gm_MissionJobs[9];
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
-extern char g_6a3440;
+extern char gm_SelectedMissionIndex;
 extern int g_7728dc;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
@@ -59,10 +59,10 @@ void __cdecl d2_RunActiveHistoryMissionDialog(int mode)
 	changed = 0;
 	arena_done = 0;
 	obj = 0;
-	slot = (char*) (0x7f4ca0 + (int) g_774970 * 0x21c);
-	h = gm_LookupMissionSpec(g_10069a0[0]);
+	slot = (char*) (0x7f4ca0 + (int) gm_LocalPlayerSlot * 0x21c);
+	h = gm_LookupMissionSpec(gm_MissionJobs[0]);
 	for (i = 0; i < 9; i++) {
-		g_10069a0[i] = 0;
+		gm_MissionJobs[i] = 0;
 	}
 	flags = (mode & ~9) | 0x100;
 	d2_RunMissionBriefingDialog(h, flags);
@@ -74,11 +74,11 @@ void __cdecl d2_RunActiveHistoryMissionDialog(int mode)
 	r2 = d2_GetWindowListItem(dlg, 1, io_AppendText(0x1b96, 0x1b99));
 	r3 = d2_GetWindowListItem(dlg, 1, io_AppendText(0x1b96, 0x1b9a));
 
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == r1) {
-				obj = (int*) gm_AllocRandomMissionJob(*(int*) (slot + 4), (int) g_6a3440, 1);
+				obj = (int*) gm_AllocRandomMissionJob(*(int*) (slot + 4), (int) gm_SelectedMissionIndex, 1);
 				m1.id = *(int*) (slot + 4);
 				m1.vend = 0;
 				changed = 1;
@@ -87,22 +87,22 @@ void __cdecl d2_RunActiveHistoryMissionDialog(int mode)
 				while (cm_GetCommandStatus(q) == 0) {
 					cm_StepCommandQueue();
 				}
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 			else if (d2_CurrentElementId == r2) {
 				m2.id = *(int*) (slot + 4);
-				g_6a3440 = -1;
+				gm_SelectedMissionIndex = -1;
 				m2.vend = 0;
 				m2.vunk = 0;
 				q = cm_RequestSysMessage(10, &m2);
 				while (cm_GetCommandStatus(q) == 0) {
 					cm_StepCommandQueue();
 				}
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 			else if (d2_CurrentElementId == r3) {
 				m3.id = *(int*) (slot + 4);
-				g_6a3440 = -1;
+				gm_SelectedMissionIndex = -1;
 				arena_done = 1;
 				m3.vend = 1;
 				m3.vunk = 0;
@@ -110,7 +110,7 @@ void __cdecl d2_RunActiveHistoryMissionDialog(int mode)
 				while (cm_GetCommandStatus(q) == 0) {
 					cm_StepCommandQueue();
 				}
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	} while (main_RunFrameLoop((void*) d2_RunActiveHistoryMissionDialog, flags | 0x80) != 0);

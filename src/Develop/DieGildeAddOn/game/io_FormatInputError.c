@@ -1,4 +1,4 @@
-extern char g_6772c8[];
+extern char str_Error_hex[];
 
 
 
@@ -13,5 +13,5 @@ void __cdecl io_FormatInputError(int unused, int hr, char* fmt, ...)
 	va_start(va, fmt);
 	s = buf;
 	s += wsprintfA(s, fmt, va);
-	wsprintfA(s, g_6772c8, hr);
+	wsprintfA(s, str_Error_hex, hr);
 }

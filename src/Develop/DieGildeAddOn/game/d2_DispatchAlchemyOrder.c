@@ -20,8 +20,8 @@ int __cdecl d2_DispatchAlchemyOrder(int building, char* order, int cost)
     int r;
 
     h = ahm_GetWorkshopOwner(building);
-    if (gm_CheckEntityStock((void*) (540 * g_774970 + 0x7f4ca0), cost,
-                     g_773d75) != 0) {
+    if (gm_CheckEntityStock((void*) (540 * gm_LocalPlayerSlot + 0x7f4ca0), cost,
+                     gm_ActiveTownIndex) != 0) {
         if (h != 0) {
             d2_ShowModalMessageBox((void*) *(int*) 0x14b5440, 0x100);
         } else {
@@ -38,8 +38,8 @@ int __cdecl d2_DispatchAlchemyOrder(int building, char* order, int cost)
                 }
                 if (cm_GetCommandStatus(r) == 1) {
                     ahm_ClearDrawSlot((int) order);
-                    cm_RequestMoveCredits(-1, *(int*) (0x7f4ca4 + 540 * g_774970),
-                                 g_773d75, cost);
+                    cm_RequestMoveCredits(-1, *(int*) (0x7f4ca4 + 540 * gm_LocalPlayerSlot),
+                                 gm_ActiveTownIndex, cost);
                     return 1;
                 }
             }

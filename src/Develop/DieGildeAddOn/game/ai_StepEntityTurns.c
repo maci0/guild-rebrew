@@ -25,13 +25,13 @@ typedef struct
 
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern GAME_TIMESTAMP g_100dc04;
+extern GAME_TIMESTAMP ai_LastTurnTimestamp;
 extern int g_100dc00;
-extern int g_100dc14;
-extern int g_7747b4;
-float g_67db50 = 1.0f;
-float g_67db54 = 0.5f;
-extern unsigned char g_7747b0;
+extern int ai_TurnCarryAccumulator;
+extern int gm_DifficultyLevel;
+float ai_DifficultyFactor = 1.0f;
+float ai_DifficultyRate = 0.5f;
+extern unsigned char gm_ClientModeFlags;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
 int __cdecl gm_GetElapsedMinutes(GAME_TIMESTAMP* a, GAME_TIMESTAMP* b);
@@ -56,35 +56,35 @@ void __cdecl ai_StepEntityTurns(void)
 	int idx;
 
 	now = (*(GAME_TIMESTAMP*)&gm_GameTime);
-	d = gm_GetElapsedMinutes(&g_100dc04, &now);
+	d = gm_GetElapsedMinutes(&ai_LastTurnTimestamp, &now);
 	f = d * 12.8f;
 	n = (int) f;
-	g_67db50 = (float) g_7747b4;
-	g_67db54 = g_7747b4 * 0.0625f + 0.5f;
+	ai_DifficultyFactor = (float) gm_DifficultyLevel;
+	ai_DifficultyRate = gm_DifficultyLevel * 0.0625f + 0.5f;
 	if (d <= 0 || (*(GAME_TIMESTAMP*)&gm_GameTime).hour > 0x16 || (*(GAME_TIMESTAMP*)&gm_GameTime).hour < 6)
 		return;
-	if (g_100dc04.unit_0 < now.unit_0) {
-		g_100dc04 = now;
+	if (ai_LastTurnTimestamp.unit_0 < now.unit_0) {
+		ai_LastTurnTimestamp = now;
 		return;
 	}
 	if (d > 0x3c) {
-		g_100dc04.hour++;
+		ai_LastTurnTimestamp.hour++;
 		n = 0x300;
 	} else {
-		g_100dc04 = now;
-		(*(float *)&g_100dc14) += f - n;
-		if ((*(float *)&g_100dc14) >= 1.0f) {
-			(*(float *)&g_100dc14) -= 1.0f;
+		ai_LastTurnTimestamp = now;
+		(*(float *)&ai_TurnCarryAccumulator) += f - n;
+		if ((*(float *)&ai_TurnCarryAccumulator) >= 1.0f) {
+			(*(float *)&ai_TurnCarryAccumulator) -= 1.0f;
 			n++;
 		}
 	}
 	fcn_0064d41a(buf, "Player count: %i, Starting with: %i Count: %i Deltatime: %i", n, g_100dc00, n, d);
 	idx = g_100dc00;
 	for (k = n; k != 0; k--) {
-		if ((*(unsigned short*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx].entity_index) != 0xffff) {
-			e = ((AI_STEP_ENTITY*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx]);
+		if ((*(unsigned short*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[idx].entity_index) != 0xffff) {
+			e = ((AI_STEP_ENTITY*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[idx]);
 			ai_RepairMeisterObjects(e);
-			if ((*(GAME_TIMESTAMP*)&gm_GameTime).hour > 6 && (*(GAME_TIMESTAMP*)&gm_GameTime).hour < 0x16 && (g_7747b0 & 0x80) == 0 && (e->kind == 5
+			if ((*(GAME_TIMESTAMP*)&gm_GameTime).hour > 6 && (*(GAME_TIMESTAMP*)&gm_GameTime).hour < 0x16 && (gm_ClientModeFlags & 0x80) == 0 && (e->kind == 5
 			    || ((e->id ^ (*(GAME_TIMESTAMP*)&gm_GameTime).hour) & 1) == 0))
 				ai_UpdateEntityTurn(e);
 			if ((gm_IsLocalSimEntity(e) != 0 && e->gold != 0) || (e->flags & 0x3000)) {
@@ -101,10 +101,10 @@ void __cdecl ai_StepEntityTurns(void)
 	g_100dc00 = idx;
 	if (g_100dc00 == 0x300) {
 		g_100dc00 = 0;
-		g_100dc04.hour++;
-		g_100dc04.minute = 0;
-		g_100dc04.second = 0;
-		(*(float *)&g_100dc14) = 0;
+		ai_LastTurnTimestamp.hour++;
+		ai_LastTurnTimestamp.minute = 0;
+		ai_LastTurnTimestamp.second = 0;
+		(*(float *)&ai_TurnCarryAccumulator) = 0;
 	}
 	fcn_0064d41a(buf, "Next Player: %i", g_100dc00);
 }

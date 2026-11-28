@@ -15,13 +15,13 @@ typedef struct Screen {
 } Screen;
 /* SIZE 0x30 */
 
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 extern char g_77470e;
 extern int main_LoopFlags;
 extern int d2_CurrentWindowId;
-extern Screen* g_77255c;
-extern char* g_1015ea0;
-extern int g_100f1dc;
+extern Screen* d2_CurrentWindow;
+extern char* d2_Controls;
+extern int d2_DialogButtonAction;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
@@ -55,7 +55,7 @@ int __cdecl d2_RunMessageBox(int parent, int flags)
 	int i;
 	int id;
 
-	saved = g_6b7fac;
+	saved = gm_GameTicks;
 	h = -1;
 	n = 0;
 	if (g_77470e != 0) {
@@ -78,40 +78,40 @@ int __cdecl d2_RunMessageBox(int parent, int flags)
 	d2_CenterDialogWindows(dlg);
 	g_77470e = 1;
 	list = d2_CreateRadioGroup(0);
-	for (i = 0; i < g_77255c->count; i++) {
-		id = g_77255c->ids[i];
-		if (*(int*) (g_1015ea0 + id * 756 + 0x20) != 0x40) {
+	for (i = 0; i < d2_CurrentWindow->count; i++) {
+		id = d2_CurrentWindow->ids[i];
+		if (*(int*) (d2_Controls + id * 756 + 0x20) != 0x40) {
 			d2_AddToRadioGroup(list, id);
 		}
 	}
 	d2_SelectRadioGroup(list, 0);
 	d2_SetForm(dlg, 0);
 	if (flags & 0x80) {
-		h = d2_AddWindowValueGauge(0x1c, g_77255c->x10 - 0x20, g_77255c->xc - 0x40, 0, 0x1f4, 0x83, 0x42, d2_CurrentWindowId);
+		h = d2_AddWindowValueGauge(0x1c, d2_CurrentWindow->x10 - 0x20, d2_CurrentWindow->xc - 0x40, 0, 0x1f4, 0x83, 0x42, d2_CurrentWindowId);
 	}
 	while (main_RunFrameLoop((void*) d2_RunMessageBox, style) != 0) {
 		d2_UpdateRadioGroup(list);
 		if (flags & 0x40) {
 			d2_BringFormToFront(dlg);
 		}
-		if (g_100f1dc != 2) {
-			if (g_100f1dc == 1) {
-				g_774654 = 1;
+		if (d2_DialogButtonAction != 2) {
+			if (d2_DialogButtonAction == 1) {
+				d2_DialogCloseRequested = 1;
 				n = 0;
 			}
 		} else {
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 			n = 1;
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 		if ((flags & 0x80) && h != -1) {
-			d2_SetElementValue(h, 0, 0x1f4, g_6b7fac - saved);
+			d2_SetElementValue(h, 0, 0x1f4, gm_GameTicks - saved);
 		}
 		if (flags & 4) {
-			if ((unsigned int) g_6b7fac > saved + 0x1f4u) {
-				g_774654 = 1;
+			if ((unsigned int) gm_GameTicks > saved + 0x1f4u) {
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	}

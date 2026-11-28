@@ -2,10 +2,10 @@
 
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern unsigned short g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
-extern unsigned char g_773d75;
+extern unsigned short gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
+extern unsigned char gm_ActiveTownIndex;
 
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
@@ -17,15 +17,15 @@ int __cdecl ai_RunVerfluchen(char* actor, char* action)
 	char msg[0xf8];
 
 	cm_RequestChangeBits(*(int*) (actor + 4), 0x1cc, 4, 0x10, 0);
-	cm_RequestTransferCurrencyNoKill(-1, *(int*) (actor + 4), (*(char*)&g_773d75), -*(int*) (action + 0x10));
+	cm_RequestTransferCurrencyNoKill(-1, *(int*) (actor + 4), (*(char*)&gm_ActiveTownIndex), -*(int*) (action + 0x10));
 	memset(msg, 0, sizeof(msg));
 	msg[4] = (char) 0x9d;
 	*(int*) (msg + 8) = *(int*) (actor + 4);
 	*(int*) (msg + 0xc) = -1;
 	*(int*) (msg + 0x28) = (*(int*)&gm_GameTime);
-	*(int*) (msg + 0x2c) = (*(int*)&g_7f4c04);
-	*(int*) (msg + 0x30) = g_7f4c08;
-	*(short*) (msg + 0x34) = g_7f4c0c;
+	*(int*) (msg + 0x2c) = (*(int*)&gm_GameTimeHour);
+	*(int*) (msg + 0x30) = gm_GameTimeSliceDword;
+	*(short*) (msg + 0x34) = gm_GameTimeTailWord;
 	msg[0x36] = 2;
 	*(int*) (msg + 0x58) = *(int*) (action + 0xc);
 	*(int*) (msg + 0x5c) = *(int*) (action + 4);

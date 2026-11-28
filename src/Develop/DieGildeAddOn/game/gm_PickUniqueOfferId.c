@@ -1,6 +1,6 @@
 #include "offer.h"
 
-extern Offer g_6abb08[];
+extern Offer gm_SpecialObjectOffers[];
 extern int g_6ac240;
 
 unsigned short __cdecl gm_RandomMod(unsigned short);
@@ -15,7 +15,7 @@ unsigned short __cdecl gm_PickUniqueOfferId(int count, unsigned short* ids)
 
 	idx = gm_RandomMod(g_6ac240);
 	for (tries = g_6ac240; tries != 0; tries--) {
-		o = &g_6abb08[idx];
+		o = &gm_SpecialObjectOffers[idx];
 		i = 0;
 		while (i < count && ids[i] != o->id) {
 			i++;

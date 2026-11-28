@@ -6,7 +6,7 @@ char* __cdecl FindVideoById(int id)
     char* node;
     char* result;
 
-    node = (char*) g_6b6f84;
+    node = (char*) tp_VideoListHead;
     result = 0;
     if (node != 0) {
         do {

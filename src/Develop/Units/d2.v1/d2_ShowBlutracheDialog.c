@@ -57,17 +57,17 @@ typedef struct {
 extern char s_6ad434[];
 extern char s_6811b0[];
 extern int d2_CurrentWindowId;
-extern char* g_77255c;
-extern volatile int g_6b7fac;
+extern char* d2_CurrentWindow;
+extern volatile int gm_GameTicks;
 extern int g_14b5af8;
 extern int g_14b5afc;
 extern pos14_7f4c00 gm_GameTime;
-extern char g_7f4ca0[];
-extern int g_14ce8e0;
-extern int g_100f1dc;
+extern char gm_EntitySlotTable[];
+extern int io_RightButtonReleased;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
-extern float g_6628a0;
-extern float g_662cf8;
+extern float flt_1_0;
+extern float flt_100_0;
 
 void __cdecl gm_AddTime(void*, int, int, int);
 int __cdecl fcn_0042e410(int);
@@ -120,7 +120,7 @@ void __cdecl d2_ShowBlutracheDialog(char* participant)
 	d2_SetForm(dlg, 0);
 	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetForm(dlg, stage);
-	timer1 = d2_AddWindowValueGauge((*(int*) (g_77255c + 0xc) - 300) / 2, 10, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
+	timer1 = d2_AddWindowValueGauge((*(int*) (d2_CurrentWindow + 0xc) - 300) / 2, 10, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
 	d2_SetElementValue(timer1, 0, 100, 0);
 	d2_SetForm(dlg, 2);
 	timer2 = d2_AddWindowValueGauge(0x57, 7, 200, 0, 100, 0x7b, 2, d2_CurrentWindowId);
@@ -130,8 +130,8 @@ void __cdecl d2_ShowBlutracheDialog(char* participant)
 	d2_CreateButtonRow(d2_CurrentWindowId, 0, ids, stage, g_14b5af8, g_14b5afc);
 
 	for (;;) {
-		if ((unsigned int) g_6b7fac > last + 0x8c || d2_GetControlValue(timer2) != idx) {
-			last = g_6b7fac;
+		if ((unsigned int) gm_GameTicks > last + 0x8c || d2_GetControlValue(timer2) != idx) {
+			last = gm_GameTicks;
 			entity = (char*) he_HasActiveAction0xa0(participant);
 			if (entity != 0) {
 				st = *(GAME_TIMESTAMP*) (entity + 0x52);
@@ -174,26 +174,26 @@ void __cdecl d2_ShowBlutracheDialog(char* participant)
 			d2_SetSlotVisibility(timer1, entity != 0);
 			d2_SetSlotVisibility(timer2, entity == 0);
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		else if (g_100f1dc != -1) {
+		else if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == ids[0]) {
-				if (d2_CheckActionBlocker(((House*) g_7f4ca0) + g_774970, stage) == 1) {
-					gm_ModifyHealth(((House*) g_7f4ca0)[g_774970].f4, -stage);
+				if (d2_CheckActionBlocker(((House*) gm_EntitySlotTable) + gm_LocalPlayerSlot, stage) == 1) {
+					gm_ModifyHealth(((House*) gm_EntitySlotTable)[gm_LocalPlayerSlot].f4, -stage);
 					memset(&msg, 0, sizeof(msg));
 					msg.b4 = 0xa0;
 					msg.b36 = 2;
-					msg.f8 = ((House*) g_7f4ca0)[g_774970].f4;
+					msg.f8 = ((House*) gm_EntitySlotTable)[gm_LocalPlayerSlot].f4;
 					msg.fc = *(int*) (participant + 1);
 					msg.pos = gm_GameTime;
 					msg.sel = idx;
 					cm_SendCopyEntityData(&msg);
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				}
 			}
 			else if (d2_CurrentElementId == ids[1]) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
 		if (main_RunFrameLoop((void*) d2_ShowBlutracheDialog, 0x677c7) == 0) {

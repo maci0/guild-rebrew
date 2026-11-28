@@ -7,15 +7,15 @@ int __cdecl tb_OpenFunction(TIMER_CALLBACK a, unsigned int b)
 	int i;
 
 	i = 0;
-	while (g_1052c60[i++].funktion != 0 && i < 32) {
+	while (tb_TimerCallbacks[i++].funktion != 0 && i < 32) {
 	}
 	if (i > 32) {
 		ReportClientMessage(g_679e00);
 		return 0;
 	}
 	i--;
-	g_1052c60[i].funktion = a;
-	g_1052c60[i].periode = b;
-	g_1052c60[i].pausiert = 0;
+	tb_TimerCallbacks[i].funktion = a;
+	tb_TimerCallbacks[i].periode = b;
+	tb_TimerCallbacks[i].pausiert = 0;
 	return 1;
 }

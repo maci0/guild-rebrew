@@ -41,19 +41,19 @@ void __cdecl d2_UpdateKanoneDialog(char* obj, char* panel, char* a2)
 	d2_CreateGuiWindow(*(int*) (panel + 0xb0), 0, max, level);
 	d2_SetElementEnabled(*(int*) (panel + 0xcc), 1 <= *(int*) (panel + 0xdc));
 	d2_SetElementEnabled(*(int*) (panel + 0xd0), 2 <= *(int*) (panel + 0xdc));
-	((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[*(int*) (panel + 0xc8)].value_03c =
+	((D2_CONTROL_TL*) (*(int*) &d2_Controls))[*(int*) (panel + 0xc8)].value_03c =
 	    *(int*) (panel + 0xa0) == 0;
-	((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[*(int*) (panel + 0xcc)].value_03c =
+	((D2_CONTROL_TL*) (*(int*) &d2_Controls))[*(int*) (panel + 0xcc)].value_03c =
 	    *(int*) (panel + 0xa0) == 1;
-	((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[*(int*) (panel + 0xd0)].value_03c =
+	((D2_CONTROL_TL*) (*(int*) &d2_Controls))[*(int*) (panel + 0xd0)].value_03c =
 	    *(int*) (panel + 0xa0) == 2;
-	((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[*(int*) (panel + 0xc8)].value_038 =
+	((D2_CONTROL_TL*) (*(int*) &d2_Controls))[*(int*) (panel + 0xc8)].value_038 =
 	    *(int*) (panel + 0xa0) == 0;
-	((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[*(int*) (panel + 0xcc)].value_038 =
+	((D2_CONTROL_TL*) (*(int*) &d2_Controls))[*(int*) (panel + 0xcc)].value_038 =
 	    *(int*) (panel + 0xa0) == 1;
-	((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[*(int*) (panel + 0xd0)].value_038 =
+	((D2_CONTROL_TL*) (*(int*) &d2_Controls))[*(int*) (panel + 0xd0)].value_038 =
 	    *(int*) (panel + 0xa0) == 2;
-	rec = gm_CanFireCannonShot((char*) (*(unsigned short*) &g_774970 * 0x21c + (unsigned long)&g_7f4ca0), level,
+	rec = gm_CanFireCannonShot((char*) (*(unsigned short*) &gm_LocalPlayerSlot * 0x21c + (unsigned long)&gm_EntitySlotTable), level,
 	                   percent, *(int*) (panel + 0xa0) + 1, (int*) &v1, (int*) &v2);
 	show = *(float*) (panel + 0x20) <= 0.01f && rec != 0 &&
 	       *(float*) (a2 + 8 + *(int*) (panel + 0xa0) * 4) >= f &&
@@ -68,31 +68,31 @@ void __cdecl d2_UpdateKanoneDialog(char* obj, char* panel, char* a2)
 	d2_SetForm(*(int*) (panel + 0xc0), 2);
 	io_AppendText(0x6811b0);
 	rec = d2_EqualizeWindowButtonWidths(0, 0xf, *(char**) 0x14b54c0, *(int*) &d2_CurrentWindowId);
-	((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[rec].value_06c = 1;
-	((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[rec].width =
-	    *(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&g_1015f4c) / 2;
+	((D2_CONTROL_TL*) (*(int*) &d2_Controls))[rec].value_06c = 1;
+	((D2_CONTROL_TL*) (*(int*) &d2_Controls))[rec].width =
+	    *(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&d2_WindowMetricsView) / 2;
 	d2_SetElementFont(rec, 0x54);
 	io_FormatTextBuffer(text, (char*) 0x6a9480, v2, v1);
 	rec = d2_EqualizeWindowButtonWidths(0, 0x23, text, *(int*) &d2_CurrentWindowId);
-	((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[rec].value_06c = 1;
-	((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[rec].width =
-	    *(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&g_1015f4c) / 2;
+	((D2_CONTROL_TL*) (*(int*) &d2_Controls))[rec].value_06c = 1;
+	((D2_CONTROL_TL*) (*(int*) &d2_Controls))[rec].width =
+	    *(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&d2_WindowMetricsView) / 2;
 	d2_SetElementFont(rec, 0x54);
-	rec = d2_EqualizeWindowButtonWidths(*(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&g_1015f4c) / 2,
+	rec = d2_EqualizeWindowButtonWidths(*(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&d2_WindowMetricsView) / 2,
 	                   0xf, *(char**) 0x14b54c4, *(int*) &d2_CurrentWindowId);
-	((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[rec].value_06c = 1;
-	((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[rec].width =
-	    *(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&g_1015f4c) / 2;
+	((D2_CONTROL_TL*) (*(int*) &d2_Controls))[rec].value_06c = 1;
+	((D2_CONTROL_TL*) (*(int*) &d2_Controls))[rec].width =
+	    *(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&d2_WindowMetricsView) / 2;
 	d2_SetElementFont(rec, 0x54);
 	io_FormatTextBuffer(text, (char*) 0x6a9480,
-	             gm_GetSeasonTreasury((char*) (*(unsigned short*) &g_774970 * 0x21c + (unsigned long)&g_7f4ca0),
-	                          *(unsigned char*) &g_773d75),
-	             *(int*) (*(unsigned short*) &g_774970 * 0x21c + (unsigned long)&g_7f4ca0 + 0x194));
-	rec = d2_EqualizeWindowButtonWidths(*(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&g_1015f4c) / 2,
+	             gm_GetSeasonTreasury((char*) (*(unsigned short*) &gm_LocalPlayerSlot * 0x21c + (unsigned long)&gm_EntitySlotTable),
+	                          *(unsigned char*) &gm_ActiveTownIndex),
+	             *(int*) (*(unsigned short*) &gm_LocalPlayerSlot * 0x21c + (unsigned long)&gm_EntitySlotTable + 0x194));
+	rec = d2_EqualizeWindowButtonWidths(*(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&d2_WindowMetricsView) / 2,
 	                   0x23, text, *(int*) &d2_CurrentWindowId);
-	((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[rec].value_06c = 1;
-	((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[rec].width =
-	    *(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&g_1015f4c) / 2;
+	((D2_CONTROL_TL*) (*(int*) &d2_Controls))[rec].value_06c = 1;
+	((D2_CONTROL_TL*) (*(int*) &d2_Controls))[rec].width =
+	    *(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&d2_WindowMetricsView) / 2;
 	d2_SetElementFont(rec, 0x54);
 	*(int*) 0x9a9214 = level;
 	*(int*) 0x9a9218 = percent;

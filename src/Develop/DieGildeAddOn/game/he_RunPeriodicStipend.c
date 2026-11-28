@@ -1,8 +1,8 @@
 #include "Develop/client_types.h"
 
 extern pos14_7f4c00 gm_GameTime;
-extern int g_7f4ca4[];
-extern unsigned char g_773d75;
+extern int gm_EntityIdField[];
+extern unsigned char gm_ActiveTownIndex;
 
 void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
 void __cdecl gm_AddTime(void*, int, int, int);
@@ -13,7 +13,7 @@ void __cdecl he_RunPeriodicStipend(char* u)
 {
 	switch (*(int*) (u + 0x70)) {
 	case 0:
-		cm_RequestMoveCredits(-1, g_7f4ca4[*(unsigned short*) (u + 8) * 135], g_773d75,
+		cm_RequestMoveCredits(-1, gm_EntityIdField[*(unsigned short*) (u + 8) * 135], gm_ActiveTownIndex,
 		    *(int*) (u + 0xac));
 		if (--*(int*) (u + 0xb0) == 0) {
 			he_FreeAction(u);

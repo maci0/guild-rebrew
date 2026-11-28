@@ -12,7 +12,7 @@ extern D2_ACTION_POPUP_SLOT g_77e8c0[16];
 
 // SIZE 0x3cc
 
-extern s_1015f4c g_1015f4c[];
+extern s_1015f4c d2_WindowMetricsView[];
 
 
 
@@ -31,7 +31,7 @@ void __cdecl d2_ToggleActionPopupBar(int a)
 			}
 		}
 		d2_SetForm(g_77e8a0, 0);
-		d2_PositionControl(g_1040494 - 0x7d, d2_ScreenHeight - 0x21, g_1015f4c[d2_CurrentWindowId].f270);
+		d2_PositionControl(g_1040494 - 0x7d, d2_ScreenHeight - 0x21, d2_WindowMetricsView[d2_CurrentWindowId].f270);
 		d2_SetFormVisibility(g_77e8a0, 0);
 	}
 	if (a != 0xffff) {

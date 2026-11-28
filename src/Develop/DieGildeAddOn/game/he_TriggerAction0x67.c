@@ -30,7 +30,7 @@ extern char* gm_CityEntity;
 
 extern float g_6629c0;
 extern float g_6628cc;
-extern float g_6628a0;
+extern float flt_1_0;
 
 unsigned short __cdecl gm_RandomMod(int);
 void* __cdecl he_StartHandlungSearch(int, ...);

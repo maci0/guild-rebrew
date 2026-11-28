@@ -29,7 +29,7 @@ typedef struct {
 } Req;
 
 extern pos14_7f4c00 gm_GameTime;
-extern __int64 g_666018;
+extern __int64 gm_TargetPersonTypeMask;
 
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl cm_RequestModifyHealth(int, int);
@@ -72,7 +72,7 @@ int __cdecl gm_RunIntimidationAction(unsigned char* obj, char* request)
 	memset(&req, 0, sizeof(req));
 	req.size = 0x400;
 	req.kind = 6;
-	req.cd = g_666018;
+	req.cd = gm_TargetPersonTypeMask;
 	io_FormatTextBuffer(text, 0x1d61);
 	if (d2_OpenTargetPicker(&req, text, 0, d2_ShowIntimidationDialog)) {
 		result = 1;

@@ -33,7 +33,7 @@ void __cdecl d3_DrawObjectShadowPatches(char* o)
 			((D3_SHADOW_TEXTURE_FN) ((void**)((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl)[0xf4 / 4])(((D3D_DEVICE_VIEW*)g_6b5de0), 0, *(void**) (*(char**) e + 0x50));
 			((D3_SHADOW_DRAW_FN) ((void**)((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl)[0x11c / 4])(((D3D_DEVICE_VIEW*)g_6b5de0), 4, 0, *(unsigned int*) (e + 0x94), 0, *(unsigned int*) (e + 0x90));
 			d3_RenderedVertexCount += *(int*) (e + 0x94);
-			g_1042a08 += *(int*) (e + 0x90);
+			d3_RenderedFaceCount += *(int*) (e + 0x90);
 		}
 	}
 }

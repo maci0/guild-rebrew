@@ -1,6 +1,6 @@
 #include <string.h>
 extern int g_772d18;
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 extern int g_772d2c;
 extern unsigned int g_772d38;
 
@@ -31,7 +31,7 @@ void __cdecl d3snd_UpdateVoiceQueue(void)
 
 	if (g_772d18 != 0)
 		return;
-	now = g_6b7fac + (g_6b7fac + g_6b7fac * 2) * 4;
+	now = gm_GameTicks + (gm_GameTicks + gm_GameTicks * 2) * 4;
 	cur = (*(struct D3SND_VOICE_NODE**)&g_772d34);
 	if (cur == 0)
 		return;

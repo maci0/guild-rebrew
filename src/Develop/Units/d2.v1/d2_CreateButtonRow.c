@@ -3,8 +3,8 @@
 #include "Develop/client_types.h"
 #include "Develop/Units/d2.v1/d2_win.h"
 
-extern Win_1015f40 g_1015f40[0x60];
-extern char* g_1015ea0;
+extern Win_1015f40 d2_Windows[0x60];
+extern char* d2_Controls;
 
 int __cdecl d2_MeasureTextWidth(char* s, int font);
 int __cdecl d2_AddWindowTextButton(int a1, int a2, int a3, int a4, int i);
@@ -23,7 +23,7 @@ void __cdecl d2_CreateButtonRow(int windowId, int y, int* outIds, int labelCount
 	int step;
 	int start;
 
-	winp = &((D2_WIN*) g_1015f40)[windowId];
+	winp = &((D2_WIN*) d2_Windows)[windowId];
 	maxw = 0;
 	va_start(ap, labelCount);
 	for (i = 0; i < labelCount; i++) {
@@ -49,7 +49,7 @@ void __cdecl d2_CreateButtonRow(int windowId, int y, int* outIds, int labelCount
 	for (i = 0; i < labelCount; i++) {
 		w = d2_AddWindowTextButton(start + step * i - maxw / 2, y, 0xbf, (int) buf[i], windowId);
 		outIds[i] = w;
-		*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[w].font)) = 0x53;
+		*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[w].font)) = 0x53;
 		d2_SetElementWidth(w, maxw);
 	}
 }

@@ -15,12 +15,12 @@ typedef struct
 } D2_POPUP_ELEMENT;
 // SIZE 0x2f4
 
-extern char* g_1015ea0;
+extern char* d2_Controls;
 extern int g_67d394;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int d2_ScreenHeight;
 extern int g_1040494;
-extern short g_14ce8c2;
+extern short io_ActiveCursorY;
 extern int g_102d028;
 extern int g_102d02c;
 
@@ -44,7 +44,7 @@ void __cdecl d2_DrawFieldSliderPopup(char* f, int surf)
 	int y;
 	char buf[24];
 
-	e = &((D2_POPUP_ELEMENT*)g_1015ea0)[*(int*) (f + 0x134)];
+	e = &((D2_POPUP_ELEMENT*)d2_Controls)[*(int*) (f + 0x134)];
 	font = d2_GetResourceData(g_67d394);
 	g0 = d2_GetBankEntry(font, 0);
 	g1 = d2_GetBankEntry(font, 1);
@@ -56,7 +56,7 @@ void __cdecl d2_DrawFieldSliderPopup(char* f, int surf)
 	d2_DrawSpriteFromSet(x, y, surf, font, 0);
 	d2_DrawSpriteFromSet(x, g0->h + y + 0x64, surf, font, 1);
 	d2_DrawSpriteFromSet(x, g0->h + y, surf, font, 2);
-	y = g_14ce8c2 - g3->h / 2;
+	y = io_ActiveCursorY - g3->h / 2;
 	x += g0->w / 2 - g3->w / 2;
 	d2_DrawSpriteFromSet(x, y, surf, font, 3);
 	g_102d028 = x;

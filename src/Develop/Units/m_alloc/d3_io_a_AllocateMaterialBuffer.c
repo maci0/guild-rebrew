@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
-char g_67b608[] = "d3_io_a:AGIMaterialBuffer";
-extern char g_67b608[];
+char str_d3_io_a_AGIMaterialBuffer[] = "d3_io_a:AGIMaterialBuffer";
+extern char str_d3_io_a_AGIMaterialBuffer[];
 
 char* __cdecl fcn_0064f026(char* s, const char* delim);
 int __cdecl atoi(const char* s);
@@ -16,7 +16,7 @@ void __cdecl d3_io_a_AllocateMaterialBuffer(int unused, char* s)
 	*(int*) (s + 0xc) = n;
 	*(int*) (s + 8) = 0;
 	if (n > 0) {
-		*(void**) (s + 0x10) = m_alloc(n * 0xe0, g_67b608);
+		*(void**) (s + 0x10) = m_alloc(n * 0xe0, str_d3_io_a_AGIMaterialBuffer);
 	}
 }
 /* Layout scaffolding: shifts the next source object to its reference

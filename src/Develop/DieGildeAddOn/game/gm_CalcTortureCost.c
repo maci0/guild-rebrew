@@ -1,6 +1,6 @@
 #include "g_664260.h"
 
-extern Mult664260 g_664260[7];
+extern Mult664260 gm_TortureMultipliers[7];
 
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
@@ -12,8 +12,8 @@ int __cdecl gm_CalcTortureCost(unsigned short* entityA, unsigned short* entityB,
 
 	baseCost = (int) ((gm_WalkEntityChain(*entityA) + gm_WalkEntityChain(*entityB)) * 0.0005f);
 	for (i = 0; i < 7; i++) {
-		if (g_664260[i].key == key) {
-			return g_664260[i].mult * baseCost;
+		if (gm_TortureMultipliers[i].key == key) {
+			return gm_TortureMultipliers[i].mult * baseCost;
 		}
 	}
 	return baseCost * 10;

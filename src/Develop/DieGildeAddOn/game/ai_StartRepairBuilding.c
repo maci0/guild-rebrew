@@ -1,6 +1,6 @@
 extern unsigned char* lpGebaeudeINST;
 extern unsigned char* lpGebaeudePROT;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl gm_GetSeasonTreasury(char*, unsigned char);
@@ -33,7 +33,7 @@ int __cdecl ai_StartRepairBuilding(int unused, char* e, int unused2, char* out, 
 			p += 0xa9;
 		}
 		if (best != 0) {
-			f = gm_GetSeasonTreasury(e, g_773d75) * 0.95f;
+			f = gm_GetSeasonTreasury(e, gm_ActiveTownIndex) * 0.95f;
 			kind = minv < 50 ? 50 : 30;
 			amt = (float)(gm_CalcBuildingRepairCost(best, kind));
 			if (amt != 0.0f && !(amt > f)) {

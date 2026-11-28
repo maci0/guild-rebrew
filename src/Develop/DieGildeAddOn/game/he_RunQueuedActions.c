@@ -3,7 +3,7 @@
 
 extern int g_7749d8;
 extern unsigned char* g_7d1980[];
-extern void (__cdecl* g_7dc440[])(unsigned char*);
+extern void (__cdecl* he_EventDispatchHandlers[])(unsigned char*);
 
 void __cdecl he_CancelInvalidBuildingAction(unsigned char*);
 
@@ -16,7 +16,7 @@ void __cdecl he_RunQueuedActions(void)
 		action = g_7d1980[i];
 		if (action != 0 && *action < 0xa7) {
 			he_CancelInvalidBuildingAction(action);
-			g_7dc440[*action](action);
+			he_EventDispatchHandlers[*action](action);
 		}
 	}
 }

@@ -1,6 +1,6 @@
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 extern int g_14b5280;
-extern int g_aed32c;
+extern int cm_PacketDeltaBase;
 extern float flt_665ecc;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -52,7 +52,7 @@ void __cdecl he_RunEntfuehrungHostage(char* eventTrack)
 			*(int*) (eventTrack + 0x70) = -1;
 			return;
 		}
-		p = (char*) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (rec + 0x27)];
+		p = (char*) &((ENTITY_RECORD*) gm_EntitySlotTable)[*(unsigned short*) (rec + 0x27)];
 		if (*(int*) (rec + 0x65) == -1) {
 			*(int*) (rec + 0x65) = *(int*) (e + 4);
 		}
@@ -68,7 +68,7 @@ void __cdecl he_RunEntfuehrungHostage(char* eventTrack)
 					}
 				}
 				cm_BeginPacketFieldDelta(rec, *(int*) (rec + 1));
-				cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((int) rec - g_aed32c + 0x65),
+				cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((int) rec - cm_PacketDeltaBase + 0x65),
 				             (char*) &idx);
 				cm_RequestChangeAttribute();
 			}
@@ -107,7 +107,7 @@ void __cdecl he_RunEntfuehrungHostage(char* eventTrack)
 		*(unsigned char*) (b.msg + 0x36) = 9;
 		*(int*) (b.msg + 0x58) = eid;
 		*(int*) (b.msg + 0x60) = award;
-		*(int*) (b.msg + 0x5c) = ((ENTITY_RECORD*) g_7f4ca0)[
+		*(int*) (b.msg + 0x5c) = ((ENTITY_RECORD*) gm_EntitySlotTable)[
 		                                  *(unsigned short*) (eventTrack + 8)].entity_id;
 		cm_SendCopyEntityData((int) b.msg);
 	} else {

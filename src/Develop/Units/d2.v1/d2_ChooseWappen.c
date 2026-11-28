@@ -22,10 +22,10 @@ typedef struct {
 #define DISTRICT0 0x59a
 
 extern D2_RADIO_GROUP g_102cbc4[8];
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int d2_CurrentWindowId;
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 #include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 extern char g_6ac80c[];
@@ -80,8 +80,8 @@ void __cdecl d2_ChooseWappen(void)
 	}
 	for (i = 0; i < 8; i++) {
 		for (j = 0; j < HOUSES; j++) {
-			if (((House5c80*)g_7f4ca0)[j].id != 0xffff && ((House5c80*)g_7f4ca0)[j].district == DISTRICT0 - i && ((House5c80*)g_7f4ca0)[j].id != g_774970
-				&& (((House5c80*)g_7f4ca0)[j].type == 6 || ((House5c80*)g_7f4ca0)[j].type == 7 || ((House5c80*)g_7f4ca0)[j].type == 5)) {
+			if (((House5c80*)gm_EntitySlotTable)[j].id != 0xffff && ((House5c80*)gm_EntitySlotTable)[j].district == DISTRICT0 - i && ((House5c80*)gm_EntitySlotTable)[j].id != gm_LocalPlayerSlot
+				&& (((House5c80*)gm_EntitySlotTable)[j].type == 6 || ((House5c80*)gm_EntitySlotTable)[j].type == 7 || ((House5c80*)gm_EntitySlotTable)[j].type == 5)) {
 				d2_SetElementEnabled(btn[i], 0);
 			}
 		}
@@ -95,8 +95,8 @@ void __cdecl d2_ChooseWappen(void)
 			b = btn[i];
 			d2_SetElementEnabled(b, 1);
 			for (j = 0; j < HOUSES; j++) {
-				if (((House5c80*)g_7f4ca0)[j].id != 0xffff && ((House5c80*)g_7f4ca0)[j].district == i + DISTRICT0 && ((House5c80*)g_7f4ca0)[j].id != g_774970
-					&& (((House5c80*)g_7f4ca0)[j].type == 6 || ((House5c80*)g_7f4ca0)[j].type == 7 || ((House5c80*)g_7f4ca0)[j].type == 5)) {
+				if (((House5c80*)gm_EntitySlotTable)[j].id != 0xffff && ((House5c80*)gm_EntitySlotTable)[j].district == i + DISTRICT0 && ((House5c80*)gm_EntitySlotTable)[j].id != gm_LocalPlayerSlot
+					&& (((House5c80*)gm_EntitySlotTable)[j].type == 6 || ((House5c80*)gm_EntitySlotTable)[j].type == 7 || ((House5c80*)gm_EntitySlotTable)[j].type == 5)) {
 					d2_SetElementEnabled(b, 0);
 				}
 			}
@@ -107,28 +107,29 @@ void __cdecl d2_ChooseWappen(void)
 		else {
 			d2_SetElementEnabled(back, 0);
 		}
-		if (g_100f1dc == 2 && g_102cbc4[grp].sel != -1) {
-			me_h = &((House5c80*)g_7f4ca0)[g_774970];
+		if (d2_DialogButtonAction == 2 && g_102cbc4[grp].sel != -1) {
+			me_h = &((House5c80*)gm_EntitySlotTable)[gm_LocalPlayerSlot];
 			district = g_102cbc4[grp].sel + DISTRICT0;
 			found = 0;
 			cm_BeginPacketFieldDelta((char*) me_h, me_h->handle);
-			cm_AppendCommandSyncField(4, 1, (char*) me_h - g_aed32c + 0x54, (char*) &district);
+			cm_AppendCommandSyncField(4, 1, (char*) me_h - cm_PacketDeltaBase + 0x54, (char*) &district);
 			r = cm_SendSetAttribute();
 			while (cm_GetCommandStatus(r) == 0) {
 				cm_StepCommandQueue();
 			}
 			for (i = 8; i != 0; i--) {
 				for (j = 0; j < HOUSES; j++) {
-					if (((House5c80*)g_7f4ca0)[j].id != 0xffff && ((House5c80*)g_7f4ca0)[j].district == g_102cbc4[grp].sel + DISTRICT0 && ((House5c80*)g_7f4ca0)[j].id != g_774970
-						&& (((House5c80*)g_7f4ca0)[j].type == 6 || ((House5c80*)g_7f4ca0)[j].type == 7 || ((House5c80*)g_7f4ca0)[j].type == 5)) {
+					if (((House5c80*)gm_EntitySlotTable)[j].id != 0xffff && ((House5c80*)gm_EntitySlotTable)[j].district == g_102cbc4[grp].sel + DISTRICT0 &&
+						((House5c80*)gm_EntitySlotTable)[j].id != gm_LocalPlayerSlot
+						&& (((House5c80*)gm_EntitySlotTable)[j].type == 6 || ((House5c80*)gm_EntitySlotTable)[j].type == 7 || ((House5c80*)gm_EntitySlotTable)[j].type == 5)) {
 						found = 1;
 					}
 				}
 			}
 			if (found == 0) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 				memset(ev, 0, sizeof(ev));
-				ev[0] = g_774970;
+				ev[0] = gm_LocalPlayerSlot;
 				cm_RequestSysMessage(0xd, ev);
 			}
 		}

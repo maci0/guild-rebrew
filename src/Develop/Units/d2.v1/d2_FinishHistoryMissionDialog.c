@@ -32,8 +32,8 @@ typedef struct Req {
 
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_10069a0[];
-extern signed char g_6a3440;
+extern char gm_MissionJobs[];
+extern signed char gm_SelectedMissionIndex;
 
 Spec* __cdecl gm_LookupMissionSpec(int op);
 void __cdecl d2_RunMissionBriefingDialog(Spec* s, int flags);
@@ -58,12 +58,12 @@ void __cdecl d2_FinishHistoryMissionDialog(int flags)
 
 	s = 0;
 	level = -1;
-	ent = &((ENTITY_RECORD*)g_7f4ca0)[g_774970];
+	ent = &((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot];
 	for (i = 0; i < 128; i++) {
-		if (((Job*)g_10069a0)[i].op != 0 && ((Job*)g_10069a0)[i].id == ent->entity_id) {
-			s = gm_LookupMissionSpec(((Job*)g_10069a0)[i].op);
+		if (((Job*)gm_MissionJobs)[i].op != 0 && ((Job*)gm_MissionJobs)[i].id == ent->entity_id) {
+			s = gm_LookupMissionSpec(((Job*)gm_MissionJobs)[i].op);
 			level = s->level + 1;
-			memset(&((Job*)g_10069a0)[i], 0, sizeof(Job));
+			memset(&((Job*)gm_MissionJobs)[i], 0, sizeof(Job));
 			break;
 		}
 	}
@@ -72,7 +72,7 @@ void __cdecl d2_FinishHistoryMissionDialog(int flags)
 	main_PlayOutroMovie();
 	r = d2_RunChooseHistoryLevelDialog(level);
 	if (r == 0) {
-		g_6a3440 = -1;
+		gm_SelectedMissionIndex = -1;
 		m.id = ent->entity_id;
 		m.x10 = 0;
 		h = cm_RequestSysMessage(10, &m);
@@ -80,7 +80,7 @@ void __cdecl d2_FinishHistoryMissionDialog(int flags)
 			cm_StepCommandQueue();
 		}
 	} else if (r == 0xff) {
-		g_6a3440 = -1;
+		gm_SelectedMissionIndex = -1;
 		m.id = ent->entity_id;
 		m.x10 = 1;
 		h = cm_RequestSysMessage(10, &m);

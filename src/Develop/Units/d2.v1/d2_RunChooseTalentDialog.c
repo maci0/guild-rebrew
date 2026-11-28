@@ -1,12 +1,12 @@
 #include <string.h>
 
 extern int d2_CurrentWindowId;
-extern char* g_77255c;
-extern char* g_1015ea0;
-extern int g_100f1dc;
+extern char* d2_CurrentWindow;
+extern char* d2_Controls;
+extern int d2_DialogButtonAction;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char g_14cf950;
+extern char io_LastKeyScancode;
 
 extern char s_6a3bd4[];
 extern char s_6a3bcc[];
@@ -60,8 +60,8 @@ int __cdecl d2_RunChooseTalentDialog(void)
 	io_AppendText(0x1ae2);
 	if (main_RunFrameLoop((void*) d2_RunChooseTalentDialog, 0x12d6) != 0) {
 		do {
-			if (g_14ce8e0 != 0)
-				g_774654 = 1;
+			if (io_RightButtonReleased != 0)
+				d2_DialogCloseRequested = 1;
 			if (v_first != 0) {
 				d2_SetForm(dlg, 1);
 				io_AppendText((int) s_6a3bcc);
@@ -70,14 +70,14 @@ int __cdecl d2_RunChooseTalentDialog(void)
 				for (; i < 5; i++, y += 0x25) {
 					io_AppendText((int) s_6a3bc4, i + 0x16b7);
 					d2_DrawSegmentedBar(0xd2, y, st[6 + i], 0x4d9);
-					id = d2_AddElementToWindow(*(int*) (g_77255c + 0xc) - 0x2c, y, 0x519, d2_CurrentWindowId);
+					id = d2_AddElementToWindow(*(int*) (d2_CurrentWindow + 0xc) - 0x2c, y, 0x519, d2_CurrentWindowId);
 					ids[2 * i] = id;
-					((D2_CONTROL_TL*) (g_1015ea0))[id].value_05c = 1;
-					((D2_CONTROL_TL*) (g_1015ea0))[id].flags_1d0 = 3;
-					id = d2_AddElementToWindow(*(int*) (g_77255c + 0xc) - 0x18, y, 0x51a, d2_CurrentWindowId);
+					((D2_CONTROL_TL*) (d2_Controls))[id].value_05c = 1;
+					((D2_CONTROL_TL*) (d2_Controls))[id].flags_1d0 = 3;
+					id = d2_AddElementToWindow(*(int*) (d2_CurrentWindow + 0xc) - 0x18, y, 0x51a, d2_CurrentWindowId);
 					ids[2 * i + 1] = id;
-					((D2_CONTROL_TL*) (g_1015ea0))[id].value_05c = 1;
-					((D2_CONTROL_TL*) (g_1015ea0))[id].flags_1d0 = 3;
+					((D2_CONTROL_TL*) (d2_Controls))[id].value_05c = 1;
+					((D2_CONTROL_TL*) (d2_Controls))[id].flags_1d0 = 3;
 				}
 				io_AppendText(0x1ae3);
 				d2_DrawSegmentedBar(0xd2, 0xec, v_len, 0x4d9);
@@ -85,21 +85,21 @@ int __cdecl d2_RunChooseTalentDialog(void)
 				for (i = 0; i < 5; i++) {
 					if (st[6 + i] > ((int*)0x7e1fd8)[i]) {
 						id = ids[2 * i];
-						((D2_CONTROL_TL*) (g_1015ea0))[id].disabled = 0;
-						((D2_CONTROL_TL*) (g_1015ea0))[id].value_060 = 0;
+						((D2_CONTROL_TL*) (d2_Controls))[id].disabled = 0;
+						((D2_CONTROL_TL*) (d2_Controls))[id].value_060 = 0;
 					} else {
 						id = ids[2 * i];
-						((D2_CONTROL_TL*) (g_1015ea0))[id].disabled = 1;
-						((D2_CONTROL_TL*) (g_1015ea0))[id].value_060 = 1;
+						((D2_CONTROL_TL*) (d2_Controls))[id].disabled = 1;
+						((D2_CONTROL_TL*) (d2_Controls))[id].value_060 = 1;
 					}
 					if (v_len > 0 && st[6 + i] < 126.0f) {
 						id = ids[2 * i + 1];
-						((D2_CONTROL_TL*) (g_1015ea0))[id].disabled = 0;
-						((D2_CONTROL_TL*) (g_1015ea0))[id].value_060 = 0;
+						((D2_CONTROL_TL*) (d2_Controls))[id].disabled = 0;
+						((D2_CONTROL_TL*) (d2_Controls))[id].value_060 = 0;
 					} else {
 						id = ids[2 * i + 1];
-						((D2_CONTROL_TL*) (g_1015ea0))[id].disabled = 1;
-						((D2_CONTROL_TL*) (g_1015ea0))[id].value_060 = 1;
+						((D2_CONTROL_TL*) (d2_Controls))[id].disabled = 1;
+						((D2_CONTROL_TL*) (d2_Controls))[id].value_060 = 1;
 					}
 				}
 				v_first = 0;
@@ -108,8 +108,8 @@ int __cdecl d2_RunChooseTalentDialog(void)
 				d2_SetElementEnabled(v_id, 0);
 			else
 				d2_SetElementEnabled(v_id, 1);
-			if (g_100f1dc != -1) {
-				if (g_100f1dc == 2 || g_14cf950 == 0x1c) {
+			if (d2_DialogButtonAction != -1) {
+				if (d2_DialogButtonAction == 2 || io_LastKeyScancode == 0x1c) {
 					v_ret = 1;
 					for (i = 0; i < 5; i++)
 						((char*) 0x7e2430)[i] = (char) st[6 + i];
@@ -148,12 +148,12 @@ int __cdecl d2_RunChooseTalentDialog(void)
 						break;
 					}
 					memcpy((void*) 0x7e1fc0, st, 44);
-					g_774654 = 1;
-				} else if (g_100f1dc == 1) {
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
+				} else if (d2_DialogButtonAction == 1) {
+					d2_DialogCloseRequested = 1;
 					continue;
 				}
-				if (g_100f1dc == 0x519 || g_100f1dc == 0x51a) {
+				if (d2_DialogButtonAction == 0x519 || d2_DialogButtonAction == 0x51a) {
 					v_first = 1;
 					for (j = 0; j < 0xc; j++) {
 						if (d2_CurrentElementId != ids[j])

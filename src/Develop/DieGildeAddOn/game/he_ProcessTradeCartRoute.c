@@ -4,8 +4,8 @@
 #include "Develop/DieGildeAddOn/game/client_actions.h"
 
 extern int gm_GameTime;
-extern unsigned char g_773d75;
-extern int g_aed32c;
+extern unsigned char gm_ActiveTownIndex;
+extern int cm_PacketDeltaBase;
 extern float g_665ee8;
 
 extern char* __cdecl gm_ResolveParentEntity(void* record);
@@ -74,11 +74,11 @@ void __cdecl he_ProcessTradeCartRoute(int action, char* rec)
 		job.f08 = eid;
 		job.f0c = eid;
 		job.timestamp.a = gm_GameTime;
-		job.timestamp.b = g_7f4c04;
+		job.timestamp.b = gm_GameTimeHour;
 		job.f04 = 0x10;
 		job.e36 = 1;
-		job.timestamp.c = g_7f4c08;
-		job.timestamp.d = g_7f4c0c;
+		job.timestamp.c = gm_GameTimeSliceDword;
+		job.timestamp.d = gm_GameTimeTailWord;
 		gm_AddTime(&job.timestamp, 0, 0, 10);
 		job.f58 = *(unsigned int*) (rec + 2);
 		job.f64 = 5;
@@ -86,7 +86,7 @@ void __cdecl he_ProcessTradeCartRoute(int action, char* rec)
 		job.f5c = 100 - (unsigned char) rec[0x12];
 		price = eval_ObjektPreis2Credits(*(unsigned short*) rec, 100) * g_665ee8;
 		value = (int) (price * (float) (100 - (unsigned char) rec[0x12]));
-		cm_RequestMoveCredits(-1, *(unsigned int*) (entity + 4), (char) g_773d75, value);
+		cm_RequestMoveCredits(-1, *(unsigned int*) (entity + 4), (char) gm_ActiveTownIndex, value);
 		cm_SendCopyEntityData((int) &job);
 		return;
 	}
@@ -117,7 +117,7 @@ void __cdecl he_ProcessTradeCartRoute(int action, char* rec)
 			if (next_idx >= next)
 				next_idx = 0;
 			cm_BeginPacketFieldDelta(rec, *(unsigned int*) (rec + 2));
-			cm_AppendCommandSyncField(4, 1, (int) (rec + 0x2d) - g_aed32c, &next_idx);
+			cm_AppendCommandSyncField(4, 1, (int) (rec + 0x2d) - cm_PacketDeltaBase, &next_idx);
 			*(unsigned int*) (action + 0x84) = cm_SendSetAttribute();
 			return;
 		}
@@ -129,9 +129,9 @@ void __cdecl he_ProcessTradeCartRoute(int action, char* rec)
 			job.f04 = 0x0f;
 			job.f0c = -1;
 			job.timestamp.a = gm_GameTime;
-			job.timestamp.b = g_7f4c04;
-			job.timestamp.c = g_7f4c08;
-			job.timestamp.d = g_7f4c0c;
+			job.timestamp.b = gm_GameTimeHour;
+			job.timestamp.c = gm_GameTimeSliceDword;
+			job.timestamp.d = gm_GameTimeTailWord;
 			job.e36 = 2;
 			job.f58 = *(unsigned int*) (rec + 2);
 			job.f5c = *(unsigned int*) (found + 1);

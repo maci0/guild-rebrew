@@ -25,7 +25,7 @@ typedef struct {
 } FLOOR_PART_REC;
 
 extern char g_631090[];
-extern char g_6b5c60[];
+extern char str_empty[];
 
 void* __cdecl m_alloc(int size, const char* tag);
 void __cdecl m_FreeTracked(void* p);
@@ -162,7 +162,7 @@ void __cdecl d3_SaveFloor(void* s, char* o)
 					vfs_WriteByte(s, PART(i).model->f5e & 0xf);
 					vfs_WriteByte(s, PART(i).model->f54 & 1);
 				} else {
-					vfs_WriteCString(s, g_6b5c60);
+					vfs_WriteCString(s, str_empty);
 					vfs_WriteByte(s, 0);
 					vfs_WriteByte(s, 0);
 					vfs_WriteByte(s, 0);

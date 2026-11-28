@@ -11,7 +11,7 @@ typedef struct Slot {
 } Slot;
 
 #if defined(REBREW_GOLD)
-extern int g_6b7fac;
+extern int gm_GameTicks;
 
 /* ADDRESS: GOLD 0x00435870 */
 void __cdecl d3_SetObjectAnimationActive(char* obj, char* name, unsigned char bit)
@@ -22,7 +22,7 @@ void __cdecl d3_SetObjectAnimationActive(char* obj, char* name, unsigned char bi
 	if (obj == 0) {
 		return;
 	}
-	*(int*) (*(int*) (obj + 0x18) + 0x40) = g_6b7fac;
+	*(int*) (*(int*) (obj + 0x18) + 0x40) = gm_GameTicks;
 	rec = obj + 0x90;
 	n = 3;
 	do {
@@ -34,7 +34,7 @@ void __cdecl d3_SetObjectAnimationActive(char* obj, char* name, unsigned char bi
 	} while (n != 0);
 }
 #else
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 
 /* ADDRESS: GOLDTL 0x00435630 */
 void __cdecl d3_SetObjectAnimationActive(char* obj, char* name, unsigned char bit)
@@ -47,7 +47,7 @@ void __cdecl d3_SetObjectAnimationActive(char* obj, char* name, unsigned char bi
 		return;
 	}
 	clock_base = *(char**) (obj + 0x320);
-	*(int*) (clock_base + 0x40) = g_6b7fac;
+	*(int*) (clock_base + 0x40) = gm_GameTicks;
 	slots = (Slot*) (obj + 0x390);
 	for (i = 0; i < 3; i++) {
 		if (slots[i].name != 0 && strcmp(name, slots[i].name) == 0) {

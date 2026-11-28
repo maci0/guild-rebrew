@@ -2,7 +2,7 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_aecde0;
-extern COMMAND_STATUS_SLOT g_fb5760[0x8000];
+extern COMMAND_STATUS_SLOT cm_CommandStatusQueue[0x8000];
 
 int __cdecl sprintf(char*, const char*, ...);
 void __cdecl cm_RecycleCommandQueueNode(char*);
@@ -28,10 +28,10 @@ int __cdecl cm_ExecCommand(void)
 	char buf3[256];
 
 	node = cm_CommandQueueHead;
-	if (g_14cbcb0) {
+	if (nt_ConnectionClosed) {
 		while (node) {
 			if (*(int*) (node + 4) != -1) {
-				cell = &g_fb5760[*(int*) (node + 4) & 0x7fff];
+				cell = &cm_CommandStatusQueue[*(int*) (node + 4) & 0x7fff];
 				cell->f0 = 2;
 				cell->f1 = 0;
 				cell->f6 = 0;
@@ -86,7 +86,7 @@ int __cdecl cm_ExecCommand(void)
 						cell = 0;
 					} else {
 						lastreq = *(int*) 0xaed31c;
-						cell = &g_fb5760[*(int*) (node + 4) & 0x7fff];
+						cell = &cm_CommandStatusQueue[*(int*) (node + 4) & 0x7fff];
 						cell->f0 = 2;
 						cell->f1 = 0;
 						cell->f6 = 0;

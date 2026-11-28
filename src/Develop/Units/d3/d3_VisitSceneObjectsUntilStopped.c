@@ -1,9 +1,9 @@
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
 extern int g_fc52f0;
-extern int g_fc28f4;
+extern int d3_SceneRootSentinelTail;
 extern int g_fb98f4;
 extern int g_fb9598;
-extern int g_fc2700;
+extern int d3_SceneRootSentinel;
 
 char __cdecl d3_MatchObjectTypeMask(int type, unsigned int flags);
 
@@ -41,13 +41,13 @@ char __cdecl d3_VisitSceneObjectsUntilStopped(char* scene, char* node, unsigned 
 			}
 		} while (!(node[0x210] & 1));
 	} else {
-		if (scene == (char*) g_67a370) {
+		if (scene == (char*) d3_ActiveScene) {
 			*(int*) (scene + 0x80) = g_fc52f0;
-			*(int*) (scene + 0x84) = g_fc28f4;
+			*(int*) (scene + 0x84) = d3_SceneRootSentinelTail;
 			*(int*) (scene + 0xa4) = g_fb98f4;
 			*(int*) (scene + 0xa8) = g_fb9598;
 		}
-		for (n = *(char**) (scene + 0x80); n != 0 && n != (char*) &g_fc2700;
+		for (n = *(char**) (scene + 0x80); n != 0 && n != (char*) &d3_SceneRootSentinel;
 			n = *(char**) (n + 0x1f0)) {
 			if (!d3_VisitSceneObjectsUntilStopped(scene, n, flags, callback, context)) {
 				return 0;

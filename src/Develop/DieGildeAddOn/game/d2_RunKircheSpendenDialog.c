@@ -1,9 +1,9 @@
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char g_7f4ca0[];
-extern char g_7f4ca4[];
-extern int g_774654;
+extern char gm_EntitySlotTable[];
+extern char gm_EntityIdField[];
+extern int d2_DialogCloseRequested;
 extern char g_67728c[];
 
 typedef struct {
@@ -68,18 +68,18 @@ void __cdecl d2_RunKircheSpendenDialog(char* gebaeude)
 	if (*(unsigned short*) (gebaeude + 0x27) == 0xffff) {
 		return;
 	}
-	if (*(unsigned short*) (gebaeude + 0x27) == g_774970) {
+	if (*(unsigned short*) (gebaeude + 0x27) == gm_LocalPlayerSlot) {
 		return;
 	}
 	h = fcn_00502cd0(*(int*) (gebaeude + 0x5d), 2, 6, 0, 0xe8);
 	if (h == 0) {
 		return;
 	}
-	m = gm_WalkEntityChain(g_774970) > 1 ? gm_WalkEntityChain(g_774970) : 1;
+	m = gm_WalkEntityChain(gm_LocalPlayerSlot) > 1 ? gm_WalkEntityChain(gm_LocalPlayerSlot) : 1;
 	n = gm_WalkEntityChain(*(unsigned short*) (gebaeude + 0x27)) > 1
 		? gm_WalkEntityChain(*(unsigned short*) (gebaeude + 0x27)) : 1;
 	cnt = (int) ((total = (float) (m + n)) * 0.01f);
-	v = gm_AccumulateTyped2((char*) (g_774970 * 0x21c + (int) g_7f4ca0));
+	v = gm_AccumulateTyped2((char*) (gm_LocalPlayerSlot * 0x21c + (int) gm_EntitySlotTable));
 	if (v >= cnt) {
 		ok = 1;
 	}
@@ -91,62 +91,62 @@ void __cdecl d2_RunKircheSpendenDialog(char* gebaeude)
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1986);
 	if (!ok) {
-		io_AppendText(0x1987, g_774970,
-			*(unsigned short*) (g_8680b4 + (unsigned char) g_773d75 * 0x2f4) * 2 + 0x9a8);
+		io_AppendText(0x1987, gm_LocalPlayerSlot,
+			*(unsigned short*) (g_8680b4 + (unsigned char) gm_ActiveTownIndex * 0x2f4) * 2 + 0x9a8);
 	} else {
-		c = io_AppendText(0x1988, g_774970, *(unsigned short*) (gebaeude + 0x27), 0x48c,
-			*(unsigned short*) (g_8680b4 + (unsigned char) g_773d75 * 0x2f4) * 2 + 0x9a8);
+		c = io_AppendText(0x1988, gm_LocalPlayerSlot, *(unsigned short*) (gebaeude + 0x27), 0x48c,
+			*(unsigned short*) (g_8680b4 + (unsigned char) gm_ActiveTownIndex * 0x2f4) * 2 + 0x9a8);
 		d2_ClampAmountToRange(cnt, v, 0x20, &b);
 		c = d2_GetWindowListItem(dlg, 1, c);
-		d2_CreateGuiWindow(c, gm_AmountToUnits(cnt, g_773d75), gm_AmountToUnits(b, g_773d75),
-			gm_AmountToUnits(cnt, g_773d75));
+		d2_CreateGuiWindow(c, gm_AmountToUnits(cnt, gm_ActiveTownIndex), gm_AmountToUnits(b, gm_ActiveTownIndex),
+			gm_AmountToUnits(cnt, gm_ActiveTownIndex));
 		d2_SetForm(dlg, 2);
 		n = io_AppendText(0x1989);
 		a = d2_GetWindowListItem(dlg, 2, n);
 		b = d2_GetWindowListItem(dlg, 2, n + 1);
 	}
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == a) {
 				d = d2_GetControlValue(c);
-				d = gm_ConvertUnitsToAmount(d, g_773d75);
-				if (gm_CheckEntityStock((char*) (g_774970 * 0x21c + (int) g_7f4ca0), d,
-					g_773d75) != 0) {
-					cm_RequestMoveCredits(*(int*) (h + 2), *(int*) (g_774970 * 0x21c + (int) g_7f4ca4),
-						g_773d75, d);
+				d = gm_ConvertUnitsToAmount(d, gm_ActiveTownIndex);
+				if (gm_CheckEntityStock((char*) (gm_LocalPlayerSlot * 0x21c + (int) gm_EntitySlotTable), d,
+					gm_ActiveTownIndex) != 0) {
+					cm_RequestMoveCredits(*(int*) (h + 2), *(int*) (gm_LocalPlayerSlot * 0x21c + (int) gm_EntityIdField),
+						gm_ActiveTownIndex, d);
 					frac = (float) (d * 255) / total;
-					cm_RequestCopyEntityData(*(int*) (g_774970 * 0x21c + (int) g_7f4ca4),
-						*(int*) (*(unsigned short*) (gebaeude + 0x27) * 0x21c + (int) g_7f4ca4), (int) frac, 1);
+					cm_RequestCopyEntityData(*(int*) (gm_LocalPlayerSlot * 0x21c + (int) gm_EntityIdField),
+						*(int*) (*(unsigned short*) (gebaeude + 0x27) * 0x21c + (int) gm_EntityIdField), (int) frac, 1);
 					scale = frac * 0.2f;
 					for (i = 0; i < 0x300; i++) {
 						Entry5aa* ent;
-						if (i == g_774970) {
+						if (i == gm_LocalPlayerSlot) {
 							continue;
 						}
-						ent = (Entry5aa*) g_7f4ca4;
+						ent = (Entry5aa*) gm_EntityIdField;
 						d = ent[i].d;
 						if (d == -1) {
 							continue;
 						}
 						off = *(unsigned short*) (gebaeude + 0x27) * 0x21c;
-						if (d == *(int*) (g_7f4ca4 + off)) {
+						if (d == *(int*) (gm_EntityIdField + off)) {
 							continue;
 						}
-						if (*(unsigned char*) (g_7f4ca4 + off + 8) != ent[i].f8) {
+						if (*(unsigned char*) (gm_EntityIdField + off + 8) != ent[i].f8) {
 							continue;
 						}
-						cm_RequestCopyEntityData(*(int*) (g_7f4ca4 + g_774970 * 0x21c), d, (int) scale, 1);
+						cm_RequestCopyEntityData(*(int*) (gm_EntityIdField + gm_LocalPlayerSlot * 0x21c), d, (int) scale, 1);
 					}
 					io_FormatTextBuffer(buf, g_67728c, 0x1986, 0x198a);
 					d2_ShowModalMessageBox(buf, 0);
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				}
 			} else if (d2_CurrentElementId == b) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	} while (main_RunFrameLoop((void*) d2_RunKircheSpendenDialog, 0x677c7) != 0);

@@ -3,8 +3,8 @@ extern char g_681140[];
 extern int d2_CurrentWindowId;
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char g_14cf950;
-extern int g_100f1dc;
+extern char io_LastKeyScancode;
+extern int d2_DialogButtonAction;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int main_LoopFlags;
 
@@ -15,7 +15,7 @@ struct list_4b3fe0 {
 // SIZE 0x8c
 
 #include "Develop/client_types.h"
-extern List8c_102cbc8 g_102cbc8[];
+extern List8c_102cbc8 d2_RadioGroupItems[];
 
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
@@ -57,19 +57,19 @@ int __cdecl d2_ChooseMission(int missionKey)
 	lst = d2_CreateRadioGroup(0);
 	for (it = gm_FindNextMissionSpec(missionKey, 0); it != 0; it = gm_FindNextMissionSpec(missionKey, it)) {
 		k = d2_GetWindowListItem(h, 2, io_AppendText((int) g_681140, it[2]));
-		*(int**) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[k].associated_object)) = it;
+		*(int**) (((char*)&((D2_CONTROL_TL*)d2_Controls)[k].associated_object)) = it;
 		d2_AddToRadioGroup(lst, k);
 	}
 	while (main_RunFrameLoop(d2_ChooseMission, 0x1c6) != 0) {
 		d2_UpdateRadioGroup(lst);
-		if (g_14ce8e0 != 0 || g_14cf950 == 1 || g_100f1dc == 1)
-			g_774654 = 1;
-		if (g_100f1dc != -1 && ((struct list_4b3fe0*)g_102cbc8)[lst].sel != -1
-		    && d2_CurrentElementId == ((struct list_4b3fe0*)g_102cbc8)[lst].items[((struct list_4b3fe0*)g_102cbc8)[lst].sel]) {
-			e = *(int**) (&((D2_CONTROL_TL*)g_1015ea0)[((struct list_4b3fe0*)g_102cbc8)[lst].items[((struct list_4b3fe0*)g_102cbc8)[lst].sel]].associated_object);
+		if (io_RightButtonReleased != 0 || io_LastKeyScancode == 1 || d2_DialogButtonAction == 1)
+			d2_DialogCloseRequested = 1;
+		if (d2_DialogButtonAction != -1 && ((struct list_4b3fe0*)d2_RadioGroupItems)[lst].sel != -1
+		    && d2_CurrentElementId == ((struct list_4b3fe0*)d2_RadioGroupItems)[lst].items[((struct list_4b3fe0*)d2_RadioGroupItems)[lst].sel]) {
+			e = *(int**) (&((D2_CONTROL_TL*)d2_Controls)[((struct list_4b3fe0*)d2_RadioGroupItems)[lst].items[((struct list_4b3fe0*)d2_RadioGroupItems)[lst].sel]].associated_object);
 			if (d2_ShowMissionBriefingDialog(*e, main_LoopFlags) != 0) {
 				result = *e;
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	}

@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl gm_LookupEntityRecordById(int);
@@ -59,7 +59,7 @@ int __cdecl gm_HandleMsg02PayOfficeHolder(int* request)
 			if (*s != 3 && *s != 4) {
 				continue;
 			}
-			hit = (unsigned short*) (g_7f4ca0 + j * 0x21c);
+			hit = (unsigned short*) (gm_EntitySlotTable + j * 0x21c);
 			break;
 		}
 		if (hit != 0) {
@@ -75,7 +75,7 @@ found:
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7,
 	    *(unsigned short*) hit, *(unsigned short*) ent,
 	    *(unsigned char*) (msg + 8 + i * 0x18) + 0x253, v);
-	cm_RequestTransferCurrencyNoKill(*request, *(int*) ((char*) hit + 4), g_773d75, v);
+	cm_RequestTransferCurrencyNoKill(*request, *(int*) ((char*) hit + 4), gm_ActiveTownIndex, v);
 	he_PostEntityMessage(*((int*) ent + 1), *((int*) ent + 1), buf,
 	    0x100 < strlen(buf), 0x603, 0);
 	return 0;

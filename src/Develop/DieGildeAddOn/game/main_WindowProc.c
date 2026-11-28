@@ -6,8 +6,8 @@
 
 extern int g_77493c;
 extern char g_774944;
-extern int g_77250c;
-extern volatile int g_6b7fc0;
+extern int d2_ScreenSurface;
+extern volatile int tb_TimerPaused;
 
 int __cdecl d3_TestCooperativeLevel(void);
 void __cdecl d3_ReleaseRenderVertexBuffers(void);
@@ -49,8 +49,8 @@ LRESULT CALLBACK main_WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 		return 0;
 	case WM_GETMINMAXINFO_VALUE:
 		ValidateRect(hWnd, 0);
-		if (g_77250c)
-			d2_ClearSurface(g_77250c);
+		if (d2_ScreenSurface)
+			d2_ClearSurface(d2_ScreenSurface);
 		return 1;
 	case WM_ACTIVATEAPP:
 		/* The two guard exits share one `return 0` epilogue in the target
@@ -86,7 +86,7 @@ LRESULT CALLBACK main_WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 			d3_AcquireBackBuffer();
 			d3_CreateRenderVertexBuffers();
 		resume:
-			g_6b7fc0 = 0;
+			tb_TimerPaused = 0;
 			msx_ReacquireAllWaveDrivers((int) hWnd, WM_PRIVATE_7E7);
 			io_AcquireKeyboard(1);
 			io_AcquireMouse(1);
@@ -102,7 +102,7 @@ LRESULT CALLBACK main_WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 			io_AcquireKeyboard(0);
 			io_AcquireMouse(0);
 			msx_ReleaseAllDrivers();
-			g_6b7fc0 = 1;
+			tb_TimerPaused = 1;
 		}
 		/* HWND_BOTTOM (1), not HWND_TOP: the reference pushes the live
 		 * `mov esi,1` value from the flag stores. */

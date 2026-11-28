@@ -10,7 +10,7 @@ typedef struct GV_BUILDING_CAP_VIEW {
 // SIZE 0x24d
 
 extern unsigned char* lpGebaeudePROT;
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 /* ADDRESS: GOLDTL 0x004f3e60 */
 int __cdecl gv_CanHireGraveyardWorker(unsigned char* building, int* count)
@@ -29,7 +29,7 @@ int __cdecl gv_CanHireGraveyardWorker(unsigned char* building, int* count)
 	}
 	cap = proto->b232 + proto->b231;
 	workerCount = 0;
-	for (entryPtr = (int) (g_7f4ca0 + 0x16c); entryPtr < (int) (g_7f4ca0 + 0x16c + 0x65400); entryPtr += 0x21c) {
+	for (entryPtr = (int) (gm_EntitySlotTable + 0x16c); entryPtr < (int) (gm_EntitySlotTable + 0x16c + 0x65400); entryPtr += 0x21c) {
 		if (*(unsigned short*) (entryPtr - 0x16c) != 0xffff && *(char*) (entryPtr - 0x16a) == 0x14 && *(unsigned char**) entryPtr == building) {
 			workerCount++;
 		}

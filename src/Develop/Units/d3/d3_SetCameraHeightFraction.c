@@ -29,12 +29,12 @@ typedef struct {
 extern float g_774694;
 extern float g_6a255c;
 extern float g_6a2564;
-extern float g_7e3a40[3];
-extern float g_7e3a44;
-extern float g_7e3a48;
+extern float d3_SavedCameraPos[3];
+extern float d3_SavedCameraPosY;
+extern float d3_SavedCameraPosZ;
 extern float d3_CameraTargetRotation[3];
-extern float g_7e3a54;
-extern float g_7e3a58;
+extern float d3_CameraTargetRotY;
+extern float d3_CameraTargetRotZ;
 
 float __cdecl d3_SampleAverageTerrainHeight(Vec3* p);
 void __cdecl d3_SetNodePosition(View* v, Vec4* p);
@@ -61,10 +61,10 @@ void __cdecl d3_SetCameraHeightFraction(float t)
 		r.x = (g_6a2564 - g_6a255c) * g_774694 + g_6a255c;
 		d3_SetObjectRotation(((View*)d3_ActiveCamera), &r);
 		(*(float*)d3_CameraTargetRotation) = ((View*)d3_ActiveCamera)->rot.x;
-		g_7e3a54 = ((View*)d3_ActiveCamera)->rot.y;
-		g_7e3a58 = ((View*)d3_ActiveCamera)->rot.z;
-		(*(float*)g_7e3a40) = ((View*)d3_ActiveCamera)->pos.x;
-		g_7e3a44 = ((View*)d3_ActiveCamera)->pos.y;
-		g_7e3a48 = ((View*)d3_ActiveCamera)->pos.z;
+		d3_CameraTargetRotY = ((View*)d3_ActiveCamera)->rot.y;
+		d3_CameraTargetRotZ = ((View*)d3_ActiveCamera)->rot.z;
+		(*(float*)d3_SavedCameraPos) = ((View*)d3_ActiveCamera)->pos.x;
+		d3_SavedCameraPosY = ((View*)d3_ActiveCamera)->pos.y;
+		d3_SavedCameraPosZ = ((View*)d3_ActiveCamera)->pos.z;
 	}
 }

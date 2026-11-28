@@ -5,9 +5,9 @@
 #include "Develop/client_types.h"
 typedef SOUND_VOICE Voice;
 
-extern int g_6b7d7c;
-extern SOUND_VOICE g_14cbbe0;
-extern char* g_6b7e88;
+extern int sb_WaveDriver;
+extern SOUND_VOICE sb_DummyVoice;
+extern char* sb_Voices;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 int __cdecl msx_GetSampleStatus(int h);
 void __cdecl msx_InitSample(int h);
@@ -18,21 +18,21 @@ Voice* __cdecl sb_AllocVoice(void)
 	int i;
 
 	best = 0;
-	if (g_6b7d7c == 0) {
-		return &g_14cbbe0;
+	if (sb_WaveDriver == 0) {
+		return &sb_DummyVoice;
 	}
-	if (((Voice*)g_6b7e88) != 0) {
-		for (i = 0; i < g_6b7e8c; i++) {
-			if (msx_GetSampleStatus(((Voice*)g_6b7e88)[i].h) != 4 && (((Voice*)g_6b7e88)[i].flags & 0x10) == 0) {
-				best = &((Voice*)g_6b7e88)[i++];
+	if (((Voice*)sb_Voices) != 0) {
+		for (i = 0; i < sb_VoiceCount; i++) {
+			if (msx_GetSampleStatus(((Voice*)sb_Voices)[i].h) != 4 && (((Voice*)sb_Voices)[i].flags & 0x10) == 0) {
+				best = &((Voice*)sb_Voices)[i++];
 				break;
 			}
 		}
 		if (best != 0) {
-			for (; i < g_6b7e8c; i++) {
-				if (((Voice*)g_6b7e88)[i].prio < best->prio && msx_GetSampleStatus(((Voice*)g_6b7e88)[i].h) != 4 &&
-				    (((Voice*)g_6b7e88)[i].flags & 0x10) == 0) {
-					best = &((Voice*)g_6b7e88)[i];
+			for (; i < sb_VoiceCount; i++) {
+				if (((Voice*)sb_Voices)[i].prio < best->prio && msx_GetSampleStatus(((Voice*)sb_Voices)[i].h) != 4 &&
+				    (((Voice*)sb_Voices)[i].flags & 0x10) == 0) {
+					best = &((Voice*)sb_Voices)[i];
 				}
 			}
 			msx_InitSample(best->h);

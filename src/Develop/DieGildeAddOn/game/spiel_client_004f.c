@@ -1,12 +1,12 @@
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 #include "Develop/DieGildeAddOn/game/spiel.h"
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 extern char* gm_CityEntity;
 extern unsigned char* lpGebaeudePROT;
 extern int g_6652f8[];
 extern float g_6652d8[];
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
@@ -38,7 +38,7 @@ int __cdecl gv_RentGravePlot(char* req)
 
 	gm_ResolveEntityById((void**) (&entity1), 0, 0, *(int*) (req + 8));
 	if (entity1 == 0 || *(unsigned short*) ((char*) entity1 + 0x27) == 0xffff ||
-	    (char *)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) ((char*) entity1 + 0x27)] == gm_CityEntity) {
+	    (char *)&((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) ((char*) entity1 + 0x27)] == gm_CityEntity) {
 		return -1;
 	}
 	type = *(unsigned char*) entity1;
@@ -71,14 +71,14 @@ int __cdecl gv_RentGravePlot(char* req)
 		*(int*) (*(char**) (slot + 0x10) + j * 0x44) = -1;
 	}
 	if (*(int*) (req + 0x13) > 0) {
-		gm_SubObjectNoKill(*(int*) ((char*) entity2 + 4), (unsigned short) ((int*)g_8680b4)[g_773d75 * 189],
+		gm_SubObjectNoKill(*(int*) ((char*) entity2 + 4), (unsigned short) ((int*)g_8680b4)[gm_ActiveTownIndex * 189],
 			*(int*) (req + 0x13));
-		gm_AddObjekt(*(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) ((char*) entity1 + 0x27)] + 4),
-			(unsigned short) ((int*)g_8680b4)[g_773d75 * 189],
+		gm_AddObjekt(*(int*) ((char *)&((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) ((char*) entity1 + 0x27)] + 4),
+			(unsigned short) ((int*)g_8680b4)[gm_ActiveTownIndex * 189],
 			(int) (*(int*) (req + 0x13) * g_6652d8[*(int*) (req + 0xc)]));
 		off = *(unsigned short*) ((char*) entity1 + 0x27) * (int)sizeof(ENTITY_RECORD);
-		player = g_7f4ca0 + off;
-		if ((char*) entity2 != player && g_7f4ca0[off + 2] == 6) {
+		player = gm_EntitySlotTable + off;
+		if ((char*) entity2 != player && gm_EntitySlotTable[off + 2] == 6) {
 			he_NotifyFriedhofEvent08(player, entity2, entity1, *(int*) (req + 0xc), *(int*) (req + 0x13),
 				(int) (*(int*) (req + 0x13) * g_6652d8[*(int*) (req + 0xc)]));
 		}
@@ -94,9 +94,9 @@ int __cdecl gm_CalcScaledWealthValue(unsigned short* e)
 	double x;
 	int pr;
 
-	pr = gm_AmountToUnits(gm_WalkEntityChain(*e), g_773d75);
+	pr = gm_AmountToUnits(gm_WalkEntityChain(*e), gm_ActiveTownIndex);
 	x = pr;
 	x = MAXV(MINV(100000.0, x), 10000.0);
 	x = x / (log10(x) + 1.0) * 0.1f;
-	return gm_ConvertUnitsToAmount((int) x, g_773d75);
+	return gm_ConvertUnitsToAmount((int) x, gm_ActiveTownIndex);
 }

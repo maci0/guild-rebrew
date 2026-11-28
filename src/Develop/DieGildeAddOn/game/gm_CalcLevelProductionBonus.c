@@ -1,4 +1,4 @@
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 /* ADDRESS: GOLDTL 0x0050bbb0 */
 float __cdecl gm_CalcLevelProductionBonus(int idx)
@@ -6,7 +6,7 @@ float __cdecl gm_CalcLevelProductionBonus(int idx)
 	char* p;
 	float v;
 
-	p = ((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[idx]);
+	p = ((char *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[idx]);
 	if (p == 0) {
 		return 1.0f;
 	}

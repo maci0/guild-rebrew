@@ -1485,8 +1485,8 @@ char* __cdecl gm_FindSlotById(int arg1, int arg2)
 	int i;
 
 	for (i = 0; i < 0x55; i++) {
-		if (((MARKET_STOCK_SLOT*)(g_85ab90 + arg1 * 0x2a90))[i].objekt_id == arg2) {
-			return (char*)&((MARKET_STOCK_SLOT*)(g_85ab90 + arg1 * 0x2a90))[i];
+		if (((MARKET_STOCK_SLOT*)(gm_MarketStockTable + arg1 * 0x2a90))[i].objekt_id == arg2) {
+			return (char*)&((MARKET_STOCK_SLOT*)(gm_MarketStockTable + arg1 * 0x2a90))[i];
 		}
 	}
 	return 0;
@@ -3533,26 +3533,26 @@ void __cdecl gm_AssignBuildingOwner(Estate* building, unsigned short owner, int 
 		return;
 	}
 	if (building->slot != slot) {
-		if (building->slot != 0xffff && ((Entity*)g_7f4ca0)[building->slot].type == 6) {
+		if (building->slot != 0xffff && ((Entity*)gm_EntitySlotTable)[building->slot].type == 6) {
 			hp_RemoveProdEntry(building->key);
 		}
-		if (((Entity*)g_7f4ca0)[slot].type == 6) {
+		if (((Entity*)gm_EntitySlotTable)[slot].type == 6) {
 			hp_AddProdSetting(building);
 		}
 	}
-	if (building->slot != 0xffff && ((Entity*)g_7f4ca0)[building->slot].best == building) {
-		((Entity*)g_7f4ca0)[building->slot].best = 0;
+	if (building->slot != 0xffff && ((Entity*)gm_EntitySlotTable)[building->slot].best == building) {
+		((Entity*)gm_EntitySlotTable)[building->slot].best = 0;
 	}
 	building->slot = slot;
 	if (((char)(((BUILDING_PROTOTYPE*)rec)->category)) == 2) {
 		gm_UpdateResidenceOwnerDecor(building);
 		if (((char)(((BUILDING_PROTOTYPE*)rec)->category)) == 2) {
-			if (((Entity*)g_7f4ca0)[building->slot].best == 0 || ((Entity*)g_7f4ca0)[building->slot].best->type <= building->type) {
-				((Entity*)g_7f4ca0)[building->slot].best = building;
+			if (((Entity*)gm_EntitySlotTable)[building->slot].best == 0 || ((Entity*)gm_EntitySlotTable)[building->slot].best->type <= building->type) {
+				((Entity*)gm_EntitySlotTable)[building->slot].best = building;
 			}
 		}
 	}
-	if (((Entity*)g_7f4ca0)[slot].type == 6 || ((Entity*)g_7f4ca0)[slot].type == 7) {
+	if (((Entity*)gm_EntitySlotTable)[slot].type == 6 || ((Entity*)gm_EntitySlotTable)[slot].type == 7) {
 		fig = gm_FindBuildingOwner(building);
 		if (fig != 0) {
 			fig->busy = 0;
@@ -3565,14 +3565,15 @@ void __cdecl gm_AssignBuildingOwner(Estate* building, unsigned short owner, int 
 	obj = ((Obj*)lpObjekteINST);
 	for (i = 0x5008; i != 0; i--) {
 		if (obj->kind != 0 && (*(char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[obj->kind].kind) == 0x1d && obj->key == building->key) {
-			obj->id = ((Entity*)g_7f4ca0)[slot].id;
+			obj->id = ((Entity*)gm_EntitySlotTable)[slot].id;
 			if (obj->link != 0) {
-				obj->link->id = ((Entity*)g_7f4ca0)[slot].id;
+				obj->link->id = ((Entity*)gm_EntitySlotTable)[slot].id;
 			}
 			saved = d3_CurrentContextIndex;
 			model = obj->model;
-			if (((Entity*)g_7f4ca0)[slot].scene != 0 && (((Entity*)g_7f4ca0)[slot].type == 5 || ((Entity*)g_7f4ca0)[slot].type == 6 || ((Entity*)g_7f4ca0)[slot].type == 7)) {
-				sc = ((Entity*)g_7f4ca0)[slot].scene - 0x599;
+			if (((Entity*)gm_EntitySlotTable)[slot].scene != 0 && (((Entity*)gm_EntitySlotTable)[slot].type == 5 || ((Entity*)gm_EntitySlotTable)[slot].type == 6 ||
+				((Entity*)gm_EntitySlotTable)[slot].type == 7)) {
+				sc = ((Entity*)gm_EntitySlotTable)[slot].scene - 0x599;
 			} else {
 				sc = 0;
 			}
@@ -3585,7 +3586,7 @@ void __cdecl gm_AssignBuildingOwner(Estate* building, unsigned short owner, int 
 		}
 		obj++;
 	}
-	slot_ent = &((Entity*)g_7f4ca0)[slot];
+	slot_ent = &((Entity*)gm_EntitySlotTable)[slot];
 	if (slot_ent != ((Entity*)gm_CityEntity) && building->placed != 0 && (slot_ent->type == 6 || slot_ent->type == 7 || slot_ent->type == 5)) {
 		saved = d3_CurrentContextIndex;
 		d3_SelectSceneContext(0, 1);
@@ -4979,7 +4980,7 @@ int __cdecl gm_LookupEntityRecordById(int search_id)
 }
 #endif
 #if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
-extern char g_7f4ca4[];
+extern char gm_EntityIdField[];
 
 /* ADDRESS: GOLDTL 0x00508e40 */
 int __cdecl gm_LookupEntityRecordById(int id)
@@ -4987,9 +4988,9 @@ int __cdecl gm_LookupEntityRecordById(int id)
 	int i;
 	int a;
 
-	for (i = 0, a = (int) g_7f4ca4; a < (int) (g_7f4ca4 + 0x65400); a += 0x21c, i++) {
+	for (i = 0, a = (int) gm_EntityIdField; a < (int) (gm_EntityIdField + 0x65400); a += 0x21c, i++) {
 		if (*(unsigned short*) (a - 4) != 0xffff && *(int*) a == id) {
-			return (int) ((int) (g_7f4ca4 - 4) + i * 540);
+			return (int) ((int) (gm_EntityIdField - 4) + i * 540);
 		}
 	}
 	return 0;

@@ -1,11 +1,11 @@
-extern signed char g_6a3440;
+extern signed char gm_SelectedMissionIndex;
 
 int __cdecl d2_RunActiveHistoryMissionDialog(void);
 int __cdecl d2_RunMissionDialog(void);
 
 int __cdecl d2_WaitHistoryMissionDialog(void);
 int __cdecl d2_ShowMissionDialog(void);
-extern int g_14cbca0;
+extern int nt_ClientSocket;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_6a3760;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
@@ -17,7 +17,7 @@ int __cdecl d2_FinishHistoryMissionDialog(void);
 /* ADDRESS: GOLDTL 0x004b60c0 */
 int __cdecl d2_DispatchMissionDialog(void)
 {
-	if (g_6a3440 == 5)
+	if (gm_SelectedMissionIndex == 5)
 		return d2_RunActiveHistoryMissionDialog();
 	return d2_RunMissionDialog();
 }
@@ -25,7 +25,7 @@ int __cdecl d2_DispatchMissionDialog(void)
 /* ADDRESS: GOLDTL 0x004b62c0 */
 int __cdecl d2_DispatchMissionBriefing(void)
 {
-	if (g_6a3440 == 5)
+	if (gm_SelectedMissionIndex == 5)
 		return d2_WaitHistoryMissionDialog();
 	return d2_ShowMissionDialog();
 }
@@ -33,8 +33,8 @@ int __cdecl d2_DispatchMissionBriefing(void)
 /* ADDRESS: GOLDTL 0x004b6470 */
 int __cdecl d2_HandleMissionTurnEnd(void)
 {
-	if (g_14cbca0 != -1) {
-		if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id == g_6a3760)
+	if (nt_ClientSocket != -1) {
+		if (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id == g_6a3760)
 			return d2_DispatchMissionDialog();
 		return d2_DispatchMissionBriefing();
 	}

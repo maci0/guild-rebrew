@@ -1,6 +1,6 @@
-extern int* g_6b7d78;
-extern int g_6b7d7c;
-extern char g_14cb980[];
+extern int* sb_BankListHead;
+extern int sb_WaveDriver;
+extern char sb_NullSampleBank[];
 
 /* ADDRESS: GOLD 0x00426630 */
 /* ADDRESS: GOLDTL 0x00422aa0 */
@@ -8,9 +8,9 @@ char* __cdecl sb_GetLastBank(void)
 {
 	char* p;
 
-	p = ((char*)g_6b7d78);
-	if (g_6b7d7c == 0) {
-		return g_14cb980;
+	p = ((char*)sb_BankListHead);
+	if (sb_WaveDriver == 0) {
+		return sb_NullSampleBank;
 	}
 	if (p != 0) {
 		while (*(char**) (p + 0x13c) != 0) {

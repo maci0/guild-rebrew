@@ -22,8 +22,8 @@ typedef struct {
 	char pada[0x212];
 } House;
 
-extern __int64 g_666018;
-extern char g_7f4ca0[];
+extern __int64 gm_TargetPersonTypeMask;
+extern char gm_EntitySlotTable[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -50,8 +50,8 @@ int __cdecl gm_ObjGrantAffinity25(unsigned char* obj, int* arg)
 		result = 1;
 		req.kind = 6;
 		req.a = 1;
-		req.size = (((House*)g_7f4ca0)[g_774970].b9 ? 1 : 2) | 0x400;
-		req.cd = g_666018;
+		req.size = (((House*)gm_EntitySlotTable)[gm_LocalPlayerSlot].b9 ? 1 : 2) | 0x400;
+		req.cd = gm_TargetPersonTypeMask;
 		e = d2_OpenTargetPicker(&req, text, 0, 0);
 		if (e == 0) {
 			return 0;

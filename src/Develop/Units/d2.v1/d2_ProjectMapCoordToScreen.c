@@ -1,6 +1,6 @@
 #include <math.h>
 
-extern char g_1043370[];
+extern char tp_ch_PathGrid[];
 extern int g_778d20;
 extern int g_778d24;
 extern float g_6ab3e0;
@@ -14,7 +14,7 @@ void __cdecl d2_ProjectMapCoordToScreen(char* obj, int offsetX, int offsetY)
 	float v;
 	float w;
 
-	t = (double) *(int*) (*(char**) g_1043370 + 0x20) * 0.5;
+	t = (double) *(int*) (*(char**) tp_ch_PathGrid + 0x20) * 0.5;
 	a = (float) ((*(int*) (obj + 8) - t) * g_6ab3e0);
 	b = (float) ((*(int*) (obj + 0xc) - t) * g_6ab3e0);
 	v = fabs(a) / ((float) g_778d24 * 0.5f);

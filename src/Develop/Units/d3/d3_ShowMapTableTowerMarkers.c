@@ -9,7 +9,7 @@ typedef struct {
 } MAP_TABLE_MARKER;
 // SIZE 0x2f4
 
-extern char g_868060[];
+extern char gm_TownTable[];
 extern char g_6a40d0[];
 extern char g_6a40b0[];
 extern char g_6a40a0[];
@@ -56,8 +56,8 @@ void __cdecl d3_ShowMapTableTowerMarkers(void)
 		pos[0] = *(float*) (a + 0x4c);
 		pos[1] = *(float*) (a + 0x50);
 		z = *(float*) (a + 0x54);
-		pos[0] += ((MAP_TABLE_MARKER*)g_868060)[i].a * g_66418c * dx;
-		pos[2] = ((MAP_TABLE_MARKER*)g_868060)[i].b * g_665e64 * dz + z;
+		pos[0] += ((MAP_TABLE_MARKER*)gm_TownTable)[i].a * g_66418c * dx;
+		pos[2] = ((MAP_TABLE_MARKER*)gm_TownTable)[i].b * g_665e64 * dz + z;
 		o = d3_CreateSceneModelObject(0, pos, a + 0x84, g_6a40a0);
 		o[0x215] |= 1;
 		o[0x216] = (o[0x216] & ~2) | 1;
@@ -65,8 +65,8 @@ void __cdecl d3_ShowMapTableTowerMarkers(void)
 		d3_ApplyObjectAnimation(o, g_6a4080, 1);
 	}
 	while (main_RunFrameLoop(d3_ShowMapTableTowerMarkers, 0x67fff) != 0) {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 	}
 	for (i = 0; i < 4; i++) {

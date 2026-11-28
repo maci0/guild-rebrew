@@ -12,7 +12,7 @@ typedef struct
 } Sel;
 // SIZE 0x2c
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #ifdef REBREW_GOLD
 #define SND_TABLE_ADDR 0x770b80
 #define SND_INDEX_ADDR 0x6f25b8
@@ -22,7 +22,7 @@ extern char g_7f4ca0[];
 #endif
 #define SND_INDEX (*(unsigned short*) SND_INDEX_ADDR)
 #define SND_TABLE ((char*) SND_TABLE_ADDR)
-extern float g_662cf8;
+extern float flt_100_0;
 extern float g_664e88;
 extern float g_6660d4;
 
@@ -73,7 +73,7 @@ int __cdecl d2_BuildPersonStatusDesc(Sel* s)
 	}
 	if (s->x28 == 0) {
 		v = gm_GetEntityHealth(s->e);
-		if (v < g_662cf8) {
+		if (v < flt_100_0) {
 			s->x28 = 0x6d2;
 			return 1;
 		}

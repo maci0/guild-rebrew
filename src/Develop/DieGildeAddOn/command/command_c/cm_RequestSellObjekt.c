@@ -21,7 +21,7 @@ struct good {
 
 
 extern unsigned char* lpGebaeudePROT;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_AddObjekt(void);
@@ -83,15 +83,15 @@ void __cdecl cm_RequestSellObjekt(char* e)
 								v = 1;
 							}
 							fcn_0064d41a(dbg, "cm_RequestSellObjekt(%i, %i, %i, %i, %i, %i)", -1, *(int*) (r + 2),
-							    *(unsigned short*) q, v, g_773d75, 0);
-							cm_SendSellObjekt(-1, *(int*) (r + 2), *(unsigned short*) q, v, g_773d75, 0);
-							amt = (int) (gm_GetSeasonPrice(*(unsigned short*) q, g_773d75) * v + amt);
+							    *(unsigned short*) q, v, gm_ActiveTownIndex, 0);
+							cm_SendSellObjekt(-1, *(int*) (r + 2), *(unsigned short*) q, v, gm_ActiveTownIndex, 0);
+							amt = (int) (gm_GetSeasonPrice(*(unsigned short*) q, gm_ActiveTownIndex) * v + amt);
 						}
 					}
 				}
-				if (((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (e + 8)].entity_state == 6 && amt != 0) {
+				if (((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (e + 8)].entity_state == 6 && amt != 0) {
 					io_FormatTextBuffer(msg, 0x10b7, sel, amt);
-					he_MessageBoxQuickjump(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (e + 8)].entity_id, ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (e + 8)].entity_id,
+					he_MessageBoxQuickjump(((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (e + 8)].entity_id, ((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (e + 8)].entity_id,
 					    msg, 0, 0x5ec, *(int*) (sel + 1), -1, 0, 0);
 				}
 			}

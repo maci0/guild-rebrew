@@ -14,19 +14,19 @@ typedef struct S00469900 {
 } S00469900;
 // SIZE 0x54
 
-extern char* g_772500;
-extern volatile int g_6b7fac;
+extern char* d2_FileObjTable;
+extern volatile int gm_GameTicks;
 
 void __cdecl d2_AddRefcount(int i)
 {
 	S00469900* e;
 	int kind;
 
-	kind = ((S00469900*)g_772500)[i].f3c;
-	e = &((S00469900*)g_772500)[i];
+	kind = ((S00469900*)d2_FileObjTable)[i].f3c;
+	e = &((S00469900*)d2_FileObjTable)[i];
 	if ((kind == 5 || kind == 8) && e->f30 == 0) {
 		i = e->f4c;
 	}
-	((S00469900*)g_772500)[i].f40++;
-	((S00469900*)g_772500)[i].f48 = g_6b7fac;
+	((S00469900*)d2_FileObjTable)[i].f40++;
+	((S00469900*)d2_FileObjTable)[i].f48 = gm_GameTicks;
 }

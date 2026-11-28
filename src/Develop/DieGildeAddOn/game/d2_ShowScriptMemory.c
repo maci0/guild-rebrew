@@ -38,11 +38,11 @@ void __cdecl d2_ShowScriptMemory(void)
 	char* e;
 
 	h = d2_CreateWindow(0x20, 0x60, 0x280, 0x190, 0x414);
-	d2_SetElementFont(((D2_WIN*)g_1015f40)[h].slot, 0x54);
+	d2_SetElementFont(((D2_WIN*)d2_Windows)[h].slot, 0x54);
 	while (main_RunFrameLoop((void*) d2_ShowScriptMemory, 0x657c7) != 0) {
-		w = &((D2_WIN*)g_1015f40)[h];
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		w = &((D2_WIN*)d2_Windows)[h];
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 		d2_CurrentWindowId = h;
 		io_AppendText((int) "$C");
@@ -51,7 +51,7 @@ void __cdecl d2_ShowScriptMemory(void)
 		io_AppendText((int) s_6ab63c);
 		total = 0;
 		for (i = 0; i < 128; i++) {
-			e = g_6b7e94 + i * 0xc98;
+			e = evt_ScriptSlots + i * 0xc98;
 			if ((e[0] != 0 && *(int*) (e + 0x100) != -1) || (e[0x124] & 1)) {
 				sprintf(buf, s_6ab624, *(int*) (e + 0x100), e, *(int*) (e + 0x110), *(int*) (e + 0x114), evt_CalcScriptMemSize(e));
 				io_AppendText((int) buf);

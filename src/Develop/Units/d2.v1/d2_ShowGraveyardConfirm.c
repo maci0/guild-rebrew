@@ -2,7 +2,7 @@
 
 
 extern int d2_CurrentWindowId;
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
@@ -37,17 +37,17 @@ int __cdecl d2_ShowGraveyardConfirm(int building, int itemId, unsigned char slot
 	id = io_AppendText(0x4111);
 	ok = d2_GetWindowListItem(dlg, 2, id);
 	cancel = d2_GetWindowListItem(dlg, 2, id + 1);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
-		} else if (g_100f1dc != -1) {
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
+		} else if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == ok) {
 				gv_SendSetGraveOwner(0, building, itemId, slotIndex);
 				r = 1;
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			} else if (d2_CurrentElementId == cancel) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	} while (main_RunFrameLoop((void*) d2_ShowGraveyardConfirm, 0x677c7) != 0);

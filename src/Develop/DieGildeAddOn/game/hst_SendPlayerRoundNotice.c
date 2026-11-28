@@ -15,7 +15,7 @@
 // SIZE 0xe
 
 extern pos14_7f4c00 gm_GameTime;
-extern short g_7f4c0c;
+extern short gm_GameTimeTailWord;
 
 int __cdecl gm_IsSlotPlayerPerson(int);
 void __cdecl cm_SendCopyEntityData(void*);

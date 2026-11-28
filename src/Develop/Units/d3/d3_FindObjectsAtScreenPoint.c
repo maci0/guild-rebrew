@@ -17,7 +17,7 @@ typedef struct Ctx {
 
 extern Ctx g_6b8318;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_67a370;
+extern int d3_ActiveScene;
 
 void __cdecl d3_VisitSceneObjects(int, int, int, void*, void*);
 char __cdecl d3_PickClosestObjectCallback(char*, char*);
@@ -34,6 +34,6 @@ Ctx* __cdecl d3_FindObjectsAtScreenPoint(float a, float b, int flags, int mask, 
 	g_6b8318.mask = mask;
 	g_6b8318.x = d3_ViewportCenterX - a;
 	g_6b8318.y = g_1052bc8 - b;
-	d3_VisitSceneObjects(g_67a370, 0, flags, d3_PickClosestObjectCallback, &g_6b8318);
+	d3_VisitSceneObjects(d3_ActiveScene, 0, flags, d3_PickClosestObjectCallback, &g_6b8318);
 	return &g_6b8318;
 }

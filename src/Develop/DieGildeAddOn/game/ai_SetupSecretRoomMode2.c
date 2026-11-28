@@ -33,7 +33,7 @@ int __cdecl ai_SetupSecretRoomMode2(char* actor, char* thresholdOut, char* resul
 		if (ai_SelectRankedCandidates(actor, 1, &mask, 0, gm_RandomMod(0x20) + 32.0f, &idx) == 0) {
 			return 0;
 		}
-		target = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[(unsigned short) idx]);
+		target = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[(unsigned short) idx]);
 	}
 	n = amt_GetRoleLevel(target->unk_165[1]) / 3 + 2;
 	thr[0] = (int) (float) n;

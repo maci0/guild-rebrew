@@ -1,7 +1,7 @@
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char* g_entity_ptr;
-extern char* g_773d78;
+extern char* gm_MarketEntity;
 int __cdecl fcn_00502cd0(int, ...);
 int __cdecl gm_FindCityItemHolder(int);
 int __cdecl gm_GetStorageSlotCapacity(int, int);
@@ -40,7 +40,7 @@ int __cdecl gm_CollectItemSuppliers(int itemId)
 			*(int*) (count + 0x868c40) = 0;
 			*(int*) (count + 0x868c48) = 0;
 			*(int*) (count + 0x868c54) = 0;
-			if (p == g_773d78) {
+			if (p == gm_MarketEntity) {
 				v6 = gm_FindCityItemHolder(itemId);
 				if (v6) {
 					v7 = fcn_00502cd0(*(int*) (v6 + 0x14), 1, 0, v5);

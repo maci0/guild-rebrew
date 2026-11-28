@@ -1,7 +1,7 @@
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern double g_662a20;
 extern double g_664f18;
-extern double g_6640e8;
+extern double dbl_0_01;
 
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl gm_AccumulateTyped2(char* entity);
@@ -30,7 +30,7 @@ int __cdecl gm_TransferAndSellAssets(char* bld1, char* bld2, char* entity, char*
 		v = 0x9c400;
 	}
 	v = (int) (((double) cut_RandMod(0x32) * g_662a20 + g_664f18) * v);
-	cm_RequestMoveCredits(*(int*) (entity + 4), *(int*) (otherEntity + 4), g_773d75, v);
+	cm_RequestMoveCredits(*(int*) (entity + 4), *(int*) (otherEntity + 4), gm_ActiveTownIndex, v);
 	if (p2 != 0 && p1 != 0) {
 		match = fcn_00502cd0(*(int*) (p2 + 0x14), 1, 5);
 		while (match != 0) {
@@ -38,8 +38,8 @@ int __cdecl gm_TransferAndSellAssets(char* bld1, char* bld2, char* entity, char*
 			if (delay < 1) {
 				delay = 1;
 			}
-			cm_SendSellObjekt(*(int*) (p1 + 2), *(int*) (p2 + 2), (unsigned int) (unsigned short) *(short*) match, delay, g_773d75, 0);
-			v = (int) (gm_GetSeasonPrice(*(unsigned short*) match, g_773d75) * delay + v);
+			cm_SendSellObjekt(*(int*) (p1 + 2), *(int*) (p2 + 2), (unsigned int) (unsigned short) *(short*) match, delay, gm_ActiveTownIndex, 0);
+			v = (int) (gm_GetSeasonPrice(*(unsigned short*) match, gm_ActiveTownIndex) * delay + v);
 			match = gm_NextEntityQueryMatch();
 		}
 	}

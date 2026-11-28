@@ -22,9 +22,9 @@ typedef struct F8 {
 } F8;
 /* SIZE 0x8 */
 
-extern unsigned char g_773d75;
-extern char* g_77261c;
-extern char g_7f4ca0[];
+extern unsigned char gm_ActiveTownIndex;
+extern char* ai_FeudTargetEntity;
+extern char gm_EntitySlotTable[];
 
 int __cdecl gm_GetSeasonTreasury(char* e, unsigned char flag);
 int __cdecl ai_SelectBestMethod(int kind, int id, int n, Msg* b1, Msg* b2);
@@ -58,7 +58,7 @@ int __cdecl ai_StartSabotieren(int who, char* entity, int busy, Msg* out1, Msg* 
 	F8 ff;
 	int r;
 
-	v8 = gm_GetSeasonTreasury(entity, g_773d75);
+	v8 = gm_GetSeasonTreasury(entity, gm_ActiveTownIndex);
 	if (busy != 0) {
 		return 0;
 	}
@@ -96,25 +96,25 @@ int __cdecl ai_StartSabotieren(int who, char* entity, int busy, Msg* out1, Msg* 
 		return r;
 	}
 	gm_GetLawEntry(0x18, &st);
-	if (st.v[6] != 0 && gm_RandomMod(4) == 0 && g_77261c == 0) {
+	if (st.v[6] != 0 && gm_RandomMod(4) == 0 && ai_FeudTargetEntity == 0) {
 		return 0;
 	}
 	if (out1->kind == 0) {
 		ff.mask = 0x344015;
 		ff.b = 1;
 		id = -1;
-		if (g_77261c != 0) {
-			ai_FindEntityInFavorRange(g_77261c, 4, ff, 0, 100.0f, &id);
+		if (ai_FeudTargetEntity != 0) {
+			ai_FindEntityInFavorRange(ai_FeudTargetEntity, 4, ff, 0, 100.0f, &id);
 		}
 		if (id != -1 || ai_FindEntityInFavorRange(entity, 6, ff, 0, (float)gm_RandomMod(0x20) + 19.0f, &id) != 0) {
 			gm_ResolveEntityById(&targetRec, 0, 0, id);
 			if (targetRec != 0) {
 				if (*(unsigned short*)(targetRec + 0x27) != 0xffff) {
-					if (he_HasNoActiveAction0x88(g_7f4ca0 + *(unsigned short*)(targetRec + 0x27) * 0x21c, entity) != 0) {
+					if (he_HasNoActiveAction0x88(gm_EntitySlotTable + *(unsigned short*)(targetRec + 0x27) * 0x21c, entity) != 0) {
 						memset(buf, 0, 0x220);
 						buf[0] = 1;
 						v4 = (int)((float)gm_CalculateGebaeudeValue((int*)targetRec, 100) * 0.05f + (float)gm_WalkEntityChain(*(unsigned short*)entity) * 0.02f);
-						owner = g_7f4ca0 + *(unsigned short*)(targetRec + 0x27) * 0x21c;
+						owner = gm_EntitySlotTable + *(unsigned short*)(targetRec + 0x27) * 0x21c;
 						if ((gm_CheckPrivilege(0x1b, entity, buf) & 2) != 0) {
 							v4 = v4 / 2;
 						}
@@ -134,10 +134,10 @@ int __cdecl ai_StartSabotieren(int who, char* entity, int busy, Msg* out1, Msg* 
 								}
 								return r;
 							}
-							if (he_HasNoActiveEvent04b(g_7f4ca0 + *(unsigned short*)(targetRec + 0x27) * 0x21c, entity) != 0) {
-								if (he_HasNoActiveAction0x2e(g_7f4ca0 + *(unsigned short*)(targetRec + 0x27) * 0x21c, entity) != 0) {
+							if (he_HasNoActiveEvent04b(gm_EntitySlotTable + *(unsigned short*)(targetRec + 0x27) * 0x21c, entity) != 0) {
+								if (he_HasNoActiveAction0x2e(gm_EntitySlotTable + *(unsigned short*)(targetRec + 0x27) * 0x21c, entity) != 0) {
 									if (he_HasNoActiveAction0x62((int*)targetRec) != 0) {
-										if (he_HasNoActiveAction0x88(g_7f4ca0 + *(unsigned short*)(targetRec + 0x27) * 0x21c, entity) != 0) {
+										if (he_HasNoActiveAction0x88(gm_EntitySlotTable + *(unsigned short*)(targetRec + 0x27) * 0x21c, entity) != 0) {
 											out1->kind = 4;
 											out1->a = *(int*)(targetRec + 1);
 											out1->d = v4;

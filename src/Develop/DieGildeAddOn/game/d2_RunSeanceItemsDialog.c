@@ -29,7 +29,7 @@ struct level {
 
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
@@ -85,7 +85,7 @@ void __cdecl d2_RunSeanceItemsDialog(char* e, char* res)
 	list[12].id = 0x2c0;
 	list[13].id = 0x2be;
 	list[14].id = 0x2b9;
-	gm_CheckEntityObjectSlots(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), 0xf, list, &lv);
+	gm_CheckEntityObjectSlots(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot]), 0xf, list, &lv);
 	if ((lv.n == 6 && lv.x == 0) || lv.total == 0xf) {
 		mode = 1;
 	} else {
@@ -105,16 +105,16 @@ void __cdecl d2_RunSeanceItemsDialog(char* e, char* res)
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
 	d2_InitWindowBounds(d2_CurrentWindowId);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	d2_SetForm(h, 1);
 	if (mode == 0) {
-		cm_SendSellObjekt(((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, -1, id, 1, g_773d75, 0);
-		gm_IncreaseEntityStat(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), 2);
+		cm_SendSellObjekt(((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id, -1, id, 1, gm_ActiveTownIndex, 0);
+		gm_IncreaseEntityStat(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot]), 2);
 		io_AppendText(0x40f2, 0x40cc, id * 2 + 0x9a8);
 		d3snd_PlaySoundEffect(t, 0, "GEIST_KOMMT", gm_RandomMod(8));
 	} else if (mode == 1) {
 		v = (gm_RandomMod(0x400) + 1000) << 5;
-		cm_RequestMoveCredits(((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, -1, g_773d75, v);
+		cm_RequestMoveCredits(((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id, -1, gm_ActiveTownIndex, v);
 		io_AppendText(0x40f3, 0x40cc, v);
 		d3snd_PlaySoundEffect(t, 0, "GEIST_KOMMT", gm_RandomMod(8));
 	} else {
@@ -122,8 +122,8 @@ void __cdecl d2_RunSeanceItemsDialog(char* e, char* res)
 		d3snd_PlaySoundEffect(t, 0, "GEIST_KOMMT_NICHT", gm_RandomMod(8));
 	}
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop(d2_RunSeanceItemsDialog, 0x777c7) != 0);
 	d2_DestroyForm(h);

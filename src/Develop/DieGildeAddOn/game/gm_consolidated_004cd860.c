@@ -2,7 +2,7 @@ typedef struct {
 	short v[7];
 } stamp14;
 
-extern int g_14cbca0;
+extern int nt_ClientSocket;
 extern int gm_NextEntityId;
 extern char cm_LastObjectId[];
 
@@ -27,7 +27,7 @@ int __cdecl fcn_004cd860(char* input, char* response)
 	char* e2;
 	char* q;
 
-	if (g_14cbca0 != -1)
+	if (nt_ClientSocket != -1)
 		gm_NextEntityId = *(int*) (input + 0x10);
 	if (response != 0) {
 		response[0] = 2;

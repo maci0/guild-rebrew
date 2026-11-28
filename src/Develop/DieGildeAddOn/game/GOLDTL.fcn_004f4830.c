@@ -1,5 +1,5 @@
-extern char g_68ff68[];
-extern char g_68ff68[];
+extern char gm_LawEntries[];
+extern char gm_LawEntries[];
 
 
 
@@ -13,7 +13,7 @@ int __cdecl gm_GetLawEntry(int idx, void* dst)
 	if (idx >= 0x1d) {
 		return 0;
 	}
-	memcpy(dst, (void*) (g_68ff68 + idx * 36), 36);
+	memcpy(dst, (void*) (gm_LawEntries + idx * 36), 36);
 	return 1;
 }
 
@@ -35,8 +35,8 @@ int __cdecl gm_ApplyLawChange(char* msg)
 	if (gm_GetLawEntry(*(unsigned char*) (msg + 4), rec) == 0) {
 		return 0;
 	}
-	*(int*) (g_68ff68 + *(unsigned char*) (msg + 4) * 36 + 0x18) = *(int*) (msg + 5);
-	if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id != *(int*) msg) {
+	*(int*) (gm_LawEntries + *(unsigned char*) (msg + 4) * 36 + 0x18) = *(int*) (msg + 5);
+	if (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id != *(int*) msg) {
 		entity = gm_LookupEntityRecordById(*(int*) msg);
 		if (entity != 0) {
 			gm_FormatLawName(buf, *(unsigned char*) (msg + 4));

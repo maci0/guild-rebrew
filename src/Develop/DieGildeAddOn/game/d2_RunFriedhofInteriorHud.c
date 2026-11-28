@@ -1,8 +1,8 @@
 
 
 
-extern int g_7746d8;
-extern int g_7746a0;
+extern int d2_SelectedEntityUiFlags;
+extern int sv_ClickedObjekt;
 extern int g_14b57fc;
 extern int g_14b55f0;
 extern char g_6a99a8[];
@@ -23,15 +23,15 @@ void __cdecl d2_RunFriedhofInteriorHud(int a)
 	y = 0;
 	d2_ClearStatusTextSlots();
 	while (main_RunFrameLoop(d2_RunFriedhofInteriorHud, 0x67fff) != 0) {
-		if (g_7746d8 & 0x200) {
+		if (d2_SelectedEntityUiFlags & 0x200) {
 			x = RegisterStatusText(g_6a99a8, g_14b57fc, 0x28);
 			y = RegisterStatusText(g_6a998c, g_14b55f0, 0x13);
 		}
-		if (g_7746a0 != 0) {
-			if (g_7746a0 == x) {
+		if (sv_ClickedObjekt != 0) {
+			if (sv_ClickedObjekt == x) {
 				d2_RunFriedhofUpgradeWorkerDialog(a);
 			}
-			else if (g_7746a0 == y) {
+			else if (sv_ClickedObjekt == y) {
 				d2_OpenFriedhofFogDialog(a);
 			}
 		}

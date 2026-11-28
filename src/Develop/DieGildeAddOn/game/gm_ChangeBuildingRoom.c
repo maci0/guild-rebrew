@@ -1,11 +1,11 @@
 
 
 
-extern char* g_7746c4;
+extern char* d2_VisitedBuilding;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 #include "Develop/Units/d3/d3_camera.h"
-extern float g_7e3a40[3];
+extern float d3_SavedCameraPos[3];
 extern float d3_CameraTargetRotation[3];
 extern char g_6a30d4[];
 
@@ -21,7 +21,7 @@ void __cdecl gm_ChangeBuildingRoom(int n, short v)
 	int i;
 
 	if (n != -1) {
-		r = fcn_00502cd0(*(int*) (g_7746c4 + 0x5d), 1, 4, 2);
+		r = fcn_00502cd0(*(int*) (d2_VisitedBuilding + 0x5d), 1, 4, 2);
 		if (r == 0) {
 			return;
 		}
@@ -31,13 +31,13 @@ void __cdecl gm_ChangeBuildingRoom(int n, short v)
 				return;
 			}
 		}
-		*(short*) (g_7746c4 + 0x29) = *r;
+		*(short*) (d2_VisitedBuilding + 0x29) = *r;
 	}
 	else {
-		*(short*) (g_7746c4 + 0x29) = v;
+		*(short*) (d2_VisitedBuilding + 0x29) = v;
 	}
-	g_774654 = g_774650 - g_774658 + 1;
-	d3_SetNodePosition(d3_ActiveCamera, ((char*)g_7e3a40));
+	d2_DialogCloseRequested = g_774650 - g_774658 + 1;
+	d3_SetNodePosition(d3_ActiveCamera, ((char*)d3_SavedCameraPos));
 	d3_SetObjectRotation(d3_ActiveCamera, ((char*)d3_CameraTargetRotation));
 	d3_CameraHorizontalIndex = 0;
 	d3_CameraVerticalStep = 0;

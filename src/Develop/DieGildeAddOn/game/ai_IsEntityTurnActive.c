@@ -1,6 +1,6 @@
-extern unsigned char g_6a375c;
+extern unsigned char gm_PlayerCount;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern unsigned int g_14cbcb4;
+extern unsigned int nt_LocalShardIndex;
 extern unsigned int main_PlayerTurnIndex;
 
 int __cdecl fcn_0047d220(char* a);
@@ -19,15 +19,15 @@ int __cdecl ai_IsEntityTurnActive(char* entity)
 	if (fcn_0047d220(entity) == 0) {
 		return 0;
 	}
-	if (g_6a375c != 0) {
-		turn_slice = g_14cbca0;
+	if (gm_PlayerCount != 0) {
+		turn_slice = nt_ClientSocket;
 		seed = *(unsigned int*) (entity + 4);
 		if (turn_slice != -1) {
-			if (seed % g_6a375c != g_14cbcb4) {
+			if (seed % gm_PlayerCount != nt_LocalShardIndex) {
 				return 0;
 			}
 		} else {
-			if (seed % g_6a375c != main_PlayerTurnIndex) {
+			if (seed % gm_PlayerCount != main_PlayerTurnIndex) {
 				return 0;
 			}
 		}

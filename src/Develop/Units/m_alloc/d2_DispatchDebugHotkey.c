@@ -1,18 +1,18 @@
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 #include "Develop/client_types.h"
 
-extern unsigned char g_14cf950;
-extern char g_6b5c60[];
-extern char* g_7e2aa0;
-extern char* g_7ea360;
-extern char g_7f4ca0[];
-extern unsigned char g_7f4e51[];
+extern unsigned char io_LastKeyScancode;
+extern char str_empty[];
+extern char* d2_SelectedBuilding;
+extern char* d2_SelectedPerson;
+extern char gm_EntitySlotTable[];
+extern unsigned char gm_EntityBlockedField[];
 extern pos14_7f4c00 gm_GameTime;
 extern int g_774664;
-extern char* g_7746c4;
-extern unsigned char* g_7746c8;
-extern char* g_7746cc;
-extern int g_7747b0;
+extern char* d2_VisitedBuilding;
+extern unsigned char* d2_InteriorBuilding;
+extern char* sv_SelectedBuilding;
+extern int gm_ClientModeFlags;
 extern int g_774804;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
@@ -43,7 +43,7 @@ void __cdecl d2_DispatchDebugHotkey(void)
 	char seat_buf[0xf8];
 	char act_buf[0xf8];
 
-	switch (g_14cf950) {
+	switch (io_LastKeyScancode) {
 	case 0x20: {
 		unsigned short slot_id;
 		int slot_val;
@@ -59,16 +59,16 @@ void __cdecl d2_DispatchDebugHotkey(void)
 		slot_buf[0x26] = 0x22;
 		*(int*) (slot_buf + 0x14) = -1;
 		slot_buf[0x30] = 2;
-		slot_val = *(int*) (g_774970 * 0x21c + 0x7f4ca4);
+		slot_val = *(int*) (gm_LocalPlayerSlot * 0x21c + 0x7f4ca4);
 		*(int*) (slot_buf + 0x0c) = slot_val;
 		*(int*) (slot_buf + 0x34) = slot_val;
 		l2 = (int*) (slot_buf + 0x34);
 		n = 1;
 		for (i = 0; i < 768 && n < 2; i++) {
-			p = g_7f4ca0 + i * 0x21c;
+			p = gm_EntitySlotTable + i * 0x21c;
 			slot_id = *(unsigned short*) p;
 			if (slot_id != 0xffff && *(unsigned char*) (p + 0x166) != 0
-			    && g_774970 != slot_id) {
+			    && gm_LocalPlayerSlot != slot_id) {
 				l2[n] = *(int*) (p + 4);
 				n++;
 			}
@@ -80,20 +80,20 @@ void __cdecl d2_DispatchDebugHotkey(void)
 		return;
 	}
 	case 0x19:
-		cm_RequestSetEntityLevel(*(int*) (g_774970 * 0x21c + 0x7f4ca4), 1);
+		cm_RequestSetEntityLevel(*(int*) (gm_LocalPlayerSlot * 0x21c + 0x7f4ca4), 1);
 		return;
 	case 0x22: {
 		char* m;
 
-		if (g_7ea360 == 0) {
+		if (d2_SelectedPerson == 0) {
 			return;
 		}
-		m_FreeTracked(*(void**) (g_7ea360 + 0x184));
-		*(int*) (g_7ea360 + 0x184) = 0;
+		m_FreeTracked(*(void**) (d2_SelectedPerson + 0x184));
+		*(int*) (d2_SelectedPerson + 0x184) = 0;
 		return;
 	}
 	case 0x24:
-		g_7f4e51[g_774970 * 0x21c] = 2;
+		gm_EntityBlockedField[gm_LocalPlayerSlot * 0x21c] = 2;
 		return;
 	case 0x16: {
 		int i;
@@ -105,20 +105,20 @@ void __cdecl d2_DispatchDebugHotkey(void)
 	case 0x30: {
 		int slot_val;
 
-		if (g_7e2aa0 == 0) {
+		if (d2_SelectedBuilding == 0) {
 			return;
 		}
 		act_buf[4] = 0x47;
 		*(int*) (act_buf + 0x0c) = -1;
 		act_buf[0x36] = 2;
-		slot_val = *(int*) (g_774970 * 0x21c + 0x7f4ca4);
+		slot_val = *(int*) (gm_LocalPlayerSlot * 0x21c + 0x7f4ca4);
 		*(pos14_7f4c00*) (act_buf + 0x28) = gm_GameTime;
 		*(int*) (act_buf + 8) = slot_val;
 		*(int*) (act_buf + 0x5c) = slot_val;
 		*(unsigned short*) (act_buf + 0x62) = 0x1d76;
 		*(unsigned short*) (act_buf + 0x60) = 0x1d6d;
 		*(int*) (act_buf + 0x58) = *(int*)
-		    (*(unsigned short*) (g_7e2aa0 + 0x27) * 0x21c + 0x7f4ca4);
+		    (*(unsigned short*) (d2_SelectedBuilding + 0x27) * 0x21c + 0x7f4ca4);
 		cm_SendCopyEntityData(act_buf);
 		return;
 	}
@@ -126,11 +126,11 @@ void __cdecl d2_DispatchDebugHotkey(void)
 		int slot_off;
 		int n;
 
-		slot_off = g_774970 * 0x21c;
+		slot_off = gm_LocalPlayerSlot * 0x21c;
 		if (*(int*) (slot_off + 0x7f4cfc) != -1) {
 			return;
 		}
-		for (n = g_774970 + 1; n < 0xff; n++) {
+		for (n = gm_LocalPlayerSlot + 1; n < 0xff; n++) {
 			if (*(unsigned char*) (n * 0x21c + 0x7f4ca9) == 1
 			    && *(unsigned char*) (n * 0x21c + 0x7f4ca2) != 0x0a
 			    && *(int*) (n * 0x21c + 0x7f4cfc) == -1) {
@@ -153,17 +153,17 @@ void __cdecl d2_DispatchDebugHotkey(void)
 		int n;
 		int e;
 
-		if (g_7746c8 == 0 && g_7746c4 == 0) {
+		if (d2_InteriorBuilding == 0 && d2_VisitedBuilding == 0) {
 			return;
 		}
 		e = 0;
-		if (g_7746c8 != 0) {
-			e = (int) g_7746c8;
-		} else if (g_7746c4 != 0) {
-			e = (int) g_7746c4;
+		if (d2_InteriorBuilding != 0) {
+			e = (int) d2_InteriorBuilding;
+		} else if (d2_VisitedBuilding != 0) {
+			e = (int) d2_VisitedBuilding;
 		}
-		n = cm_SendAllocCharacter(0, *(int*) (e + 1), *(int*) (g_7746cc + 2), 0, 4, 0,
-		    g_6b5c60);
+		n = cm_SendAllocCharacter(0, *(int*) (e + 1), *(int*) (sv_SelectedBuilding + 2), 0, 4, 0,
+		    str_empty);
 		if (cm_GetCommandStatus(n) == 0) {
 			do {
 				cm_StepCommandQueue();
@@ -182,7 +182,7 @@ void __cdecl d2_DispatchDebugHotkey(void)
 	case 0x25: {
 		int i;
 
-		if (g_7ea360 == 0) {
+		if (d2_SelectedPerson == 0) {
 			return;
 		}
 		for (i = 0; i < 0x3e; i++) {
@@ -191,17 +191,17 @@ void __cdecl d2_DispatchDebugHotkey(void)
 		seat_buf[4] = 0x72;
 		*(int*) (seat_buf + 0x0c) = -1;
 		seat_buf[0x36] = 2;
-		*(int*) (seat_buf + 8) = *(int*) (g_774970 * 0x21c + 0x7f4ca4);
+		*(int*) (seat_buf + 8) = *(int*) (gm_LocalPlayerSlot * 0x21c + 0x7f4ca4);
 		*(pos14_7f4c00*) (seat_buf + 0x28) = gm_GameTime;
-		*(int*) (seat_buf + 0x5c) = *(int*) (g_7ea360 + 4);
+		*(int*) (seat_buf + 0x5c) = *(int*) (d2_SelectedPerson + 4);
 		cm_SendCopyEntityData(seat_buf);
 		return;
 	}
 	case 0x26:
-		if (g_7e2aa0 == 0) {
+		if (d2_SelectedBuilding == 0) {
 			return;
 		}
-		d3_DestroyObject(*(int*) (g_7e2aa0 + 0x61));
+		d3_DestroyObject(*(int*) (d2_SelectedBuilding + 0x61));
 		return;
 	case 0x2e: {
 		unsigned char seat_id;
@@ -216,7 +216,7 @@ void __cdecl d2_DispatchDebugHotkey(void)
 		for (i = 0; i < 0x45; i++) {
 			((int*) slot_buf)[i] = 0;
 		}
-		slot_off = g_774970 * 0x21c;
+		slot_off = gm_LocalPlayerSlot * 0x21c;
 		seat_id = *(unsigned char*) (slot_off + 0x7f4ca9);
 		for (n = 1; n < 768; n++) {
 			if (*(unsigned char*) (n * 0x21c + 0x7f4ca9) != seat_id) {
@@ -239,25 +239,25 @@ void __cdecl d2_DispatchDebugHotkey(void)
 	case 0x1e: {
 		char* m;
 
-		*(unsigned char*) (g_774970 * 0x21c + 0x7f4e06) =
-		    *(unsigned char*) (g_774970 * 0x21c + 0x7f4e06) == 0 ? 0x0f : 0;
-		if (g_7ea360 == 0) {
+		*(unsigned char*) (gm_LocalPlayerSlot * 0x21c + 0x7f4e06) =
+		    *(unsigned char*) (gm_LocalPlayerSlot * 0x21c + 0x7f4e06) == 0 ? 0x0f : 0;
+		if (d2_SelectedPerson == 0) {
 			return;
 		}
-		ch_CancelActionQueue(*(char**) (g_7ea360 + 0x184));
-		m = *(char**) (g_7ea360 + 0x184);
+		ch_CancelActionQueue(*(char**) (d2_SelectedPerson + 0x184));
+		m = *(char**) (d2_SelectedPerson + 0x184);
 		if (*(unsigned char*) (m + 0x8c) & 0x10) {
 			ch_QueueStandUpAnimation(m, "sitzend/aufstehen");
 			return;
 		}
 		CreateAnimationEvent(m, "sitzend/hinsetzen");
-		ch_QueuePlayAnimation(*(char**) (g_7ea360 + 0x184), "sitzend/sitz_schreiben", 6);
+		ch_QueuePlayAnimation(*(char**) (d2_SelectedPerson + 0x184), "sitzend/sitz_schreiben", 6);
 		return;
 	}
 	case 0x1f: {
 		int i;
 
-		if ((g_7747b0 & 4) == 0) {
+		if ((gm_ClientModeFlags & 4) == 0) {
 			return;
 		}
 		for (i = 0; i < 0x1f; i++) {

@@ -32,11 +32,11 @@ typedef struct {
 } Device;
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_67a370;
+extern int d3_ActiveScene;
 extern char* gm_CityEntity;
-extern unsigned char g_773d75;
-extern char g_868060[];
-extern int g_6b8300;
+extern unsigned char gm_ActiveTownIndex;
+extern char gm_TownTable[];
+extern int d3_CurrentFloor;
 
 void __cdecl gm_LoadCityIniData(char*, int);
 void __cdecl d3_SelectSceneContext(int, int);
@@ -96,9 +96,9 @@ int __cdecl gm_LoadCityMap(char* map)
 	if (folder != 0) {
 		d3_DestroyObject((D3_OBJECT*) (folder));
 	}
-	d3_TraverseSceneObjects(g_67a370, 0, 0x140, gm_BindBuildingSceneObjects);
-	d3_TraverseSceneObjects(g_67a370, 0, 0x40, d3_ResolveSceneObjectProtoId);
-	d3_TraverseSceneObjects(g_67a370, 0, 0x20, d3_InheritSceneNodeData);
+	d3_TraverseSceneObjects(d3_ActiveScene, 0, 0x140, gm_BindBuildingSceneObjects);
+	d3_TraverseSceneObjects(d3_ActiveScene, 0, 0x40, d3_ResolveSceneObjectProtoId);
+	d3_TraverseSceneObjects(d3_ActiveScene, 0, 0x20, d3_InheritSceneNodeData);
 	d3_PlaceBuildingProxyBoxes("bk_BRUNNEN");
 	d3_PlaceBuildingProxyBoxes("bk_GEFAENGNIS");
 	d3_PlaceBuildingProxyBoxes("bk_HANDWERK");
@@ -128,7 +128,7 @@ int __cdecl gm_LoadCityMap(char* map)
 	cm_BeginCommandSync();
 	(*(Figure**)&gm_CityEntity) = cm_GetCommandResult(h);
 	strcpy((*(Figure**)&gm_CityEntity)->name, "STADT");
-	cm_RequestMoveCredits((*(Figure**)&gm_CityEntity)->id, -1, (*(char*)&g_773d75), 200000000);
+	cm_RequestMoveCredits((*(Figure**)&gm_CityEntity)->id, -1, (*(char*)&gm_ActiveTownIndex), 200000000);
 	while (cm_AreQueuedCommandsDone() == 0) {
 		cm_FlushCommandQueue();
 		cm_PollCommandQueue();
@@ -136,7 +136,7 @@ int __cdecl gm_LoadCityMap(char* map)
 	}
 	cm_EndCommandSync();
 	for (i = 1; i < 4; i++) {
-		if (((Variant*)g_868060)[i].used != 0) {
+		if (((Variant*)gm_TownTable)[i].used != 0) {
 			cm_RequestMoveCredits((*(Figure**)&gm_CityEntity)->id, -1, (char) i, 200000000);
 		}
 	}
@@ -152,25 +152,25 @@ int __cdecl gm_LoadCityMap(char* map)
 	}
 	gm_UpdateAllTownSeasonPrices();
 	for (i = 0; i < 4; i++) {
-		if (((Variant*)g_868060)[i].name[0] == 0) {
+		if (((Variant*)gm_TownTable)[i].name[0] == 0) {
 			break;
 		}
 		gm_InitTownGoodsTable(i);
 	}
 	cm_BeginCommandSync();
-	gm_UpdateMarketStockSlots((unsigned char) (*(char*)&g_773d75));
+	gm_UpdateMarketStockSlots((unsigned char) (*(char*)&gm_ActiveTownIndex));
 	cm_EndCommandSync();
 	while (cm_AreQueuedCommandsDone() == 0) {
 		cm_StepCommandQueue();
 	}
 	d3_SelectSceneContext(1, 0);
 	d3_SelectSceneContext(0, 0);
-	if (((Device*)g_6b8300)->kind == 0x80) {
-		((Scene*) g_67a370)->view = d3sm_CreateMap(((Device*)g_6b8300), 0x100, 2);
-	} else if (((Device*)g_6b8300)->kind == 0x40) {
-		((Scene*) g_67a370)->view = d3sm_CreateMap(((Device*)g_6b8300), 0x80, 2);
+	if (((Device*)d3_CurrentFloor)->kind == 0x80) {
+		((Scene*) d3_ActiveScene)->view = d3sm_CreateMap(((Device*)d3_CurrentFloor), 0x100, 2);
+	} else if (((Device*)d3_CurrentFloor)->kind == 0x40) {
+		((Scene*) d3_ActiveScene)->view = d3sm_CreateMap(((Device*)d3_CurrentFloor), 0x80, 2);
 	} else {
-		((Scene*) g_67a370)->view = d3sm_CreateMap(((Device*)g_6b8300), 0x100, 2);
+		((Scene*) d3_ActiveScene)->view = d3sm_CreateMap(((Device*)d3_CurrentFloor), 0x100, 2);
 	}
 	return 0;
 }

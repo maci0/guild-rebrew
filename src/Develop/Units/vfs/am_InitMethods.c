@@ -25,9 +25,9 @@ typedef struct AM_METHOD_DATA {
 	int flags;
 } AM_METHOD_DATA;
 
-extern VFS_DIR* g_6b7fdc;
-extern char g_1008420[];
-extern AM_METHOD_DATA g_1008540[];
+extern VFS_DIR* vfs_RootDir;
+extern char am_MethodIniPath[];
+extern AM_METHOD_DATA am_Methods[];
 extern char* g_77481c;
 extern int main_Instance;
 
@@ -52,13 +52,13 @@ int __cdecl am_InitMethods(void)
 	unsigned int n;
 
 	count = 0x49;
-	memset(g_1008540, 0, sizeof(AM_METHOD_DATA) * 0x49);
+	memset(am_Methods, 0, sizeof(AM_METHOD_DATA) * 0x49);
 	sig = 0x6144466e;
 	if (g_77481c != 0) {
 		nmeth = 0x49;
-		GetModuleFileNameA((HMODULE) main_Instance, g_1008420, 0x104);
-		strrchr(g_1008420, '\\')[1] = 0;
-		strcat(g_1008420, "ai_method_addon.ini");
+		GetModuleFileNameA((HMODULE) main_Instance, am_MethodIniPath, 0x104);
+		strrchr(am_MethodIniPath, '\\')[1] = 0;
+		strcat(am_MethodIniPath, "ai_method_addon.ini");
 		if (am_RegisterGameMethods(g_77481c) == 0) {
 			goto bad;
 		}
@@ -71,7 +71,7 @@ int __cdecl am_InitMethods(void)
 		if (ai_RegisterSocialMethods(g_77481c) == 0) {
 			goto bad;
 		}
-		f = vfs_Tfopen("/gamedata/ai/ai_data_2.dfn", "wb", g_6b7fdc);
+		f = vfs_Tfopen("/gamedata/ai/ai_data_2.dfn", "wb", vfs_RootDir);
 		if (f == 0) {
 			goto bad;
 		}
@@ -80,75 +80,75 @@ int __cdecl am_InitMethods(void)
 			goto bad;
 		}
 		for (i = 0; i < 0x49; i++) {
-			if (vfs_fwrite(&g_1008540[i].type, 1, 1, f) <= 0) {
+			if (vfs_fwrite(&am_Methods[i].type, 1, 1, f) <= 0) {
 				CloseVfsStream(f);
 				goto bad;
 			}
-			if (vfs_fwrite(g_1008540[i].name, 0x20, 1, f) <= 0) {
+			if (vfs_fwrite(am_Methods[i].name, 0x20, 1, f) <= 0) {
 				CloseVfsStream(f);
 				goto bad;
 			}
-			if (vfs_fwrite(&g_1008540[i].effects.e[0].type, 1, 1, f) <= 0) {
+			if (vfs_fwrite(&am_Methods[i].effects.e[0].type, 1, 1, f) <= 0) {
 				CloseVfsStream(f);
 				goto bad;
 			}
-			if (vfs_fwrite(&g_1008540[i].effects.e[0].value, 4, 1, f) <= 0) {
+			if (vfs_fwrite(&am_Methods[i].effects.e[0].value, 4, 1, f) <= 0) {
 				CloseVfsStream(f);
 				goto bad;
 			}
-			if (vfs_fwrite(&g_1008540[i].effects.e[1].type, 1, 1, f) <= 0) {
+			if (vfs_fwrite(&am_Methods[i].effects.e[1].type, 1, 1, f) <= 0) {
 				CloseVfsStream(f);
 				goto bad;
 			}
-			if (vfs_fwrite(&g_1008540[i].effects.e[1].value, 4, 1, f) <= 0) {
+			if (vfs_fwrite(&am_Methods[i].effects.e[1].value, 4, 1, f) <= 0) {
 				CloseVfsStream(f);
 				goto bad;
 			}
-			if (vfs_fwrite(&g_1008540[i].effects.e[2].type, 1, 1, f) <= 0) {
+			if (vfs_fwrite(&am_Methods[i].effects.e[2].type, 1, 1, f) <= 0) {
 				CloseVfsStream(f);
 				goto bad;
 			}
-			if (vfs_fwrite(&g_1008540[i].effects.e[2].value, 4, 1, f) <= 0) {
+			if (vfs_fwrite(&am_Methods[i].effects.e[2].value, 4, 1, f) <= 0) {
 				CloseVfsStream(f);
 				goto bad;
 			}
-			if (vfs_fwrite(&g_1008540[i].effects.e[3].type, 1, 1, f) <= 0) {
+			if (vfs_fwrite(&am_Methods[i].effects.e[3].type, 1, 1, f) <= 0) {
 				CloseVfsStream(f);
 				goto bad;
 			}
-			if (vfs_fwrite(&g_1008540[i].effects.e[3].value, 4, 1, f) <= 0) {
+			if (vfs_fwrite(&am_Methods[i].effects.e[3].value, 4, 1, f) <= 0) {
 				CloseVfsStream(f);
 				goto bad;
 			}
-			if (vfs_fwrite(&g_1008540[i].other.e[0].type, 1, 1, f) <= 0) {
+			if (vfs_fwrite(&am_Methods[i].other.e[0].type, 1, 1, f) <= 0) {
 				CloseVfsStream(f);
 				goto bad;
 			}
-			if (vfs_fwrite(&g_1008540[i].other.e[0].value, 4, 1, f) <= 0) {
+			if (vfs_fwrite(&am_Methods[i].other.e[0].value, 4, 1, f) <= 0) {
 				CloseVfsStream(f);
 				goto bad;
 			}
-			if (vfs_fwrite(&g_1008540[i].other.e[1].type, 1, 1, f) <= 0) {
+			if (vfs_fwrite(&am_Methods[i].other.e[1].type, 1, 1, f) <= 0) {
 				CloseVfsStream(f);
 				goto bad;
 			}
-			if (vfs_fwrite(&g_1008540[i].other.e[1].value, 4, 1, f) <= 0) {
+			if (vfs_fwrite(&am_Methods[i].other.e[1].value, 4, 1, f) <= 0) {
 				CloseVfsStream(f);
 				goto bad;
 			}
-			if (vfs_fwrite(&g_1008540[i].other.e[2].type, 1, 1, f) <= 0) {
+			if (vfs_fwrite(&am_Methods[i].other.e[2].type, 1, 1, f) <= 0) {
 				CloseVfsStream(f);
 				goto bad;
 			}
-			if (vfs_fwrite(&g_1008540[i].other.e[2].value, 4, 1, f) <= 0) {
+			if (vfs_fwrite(&am_Methods[i].other.e[2].value, 4, 1, f) <= 0) {
 				CloseVfsStream(f);
 				goto bad;
 			}
-			if (vfs_fwrite(&g_1008540[i].other.e[3].type, 1, 1, f) <= 0) {
+			if (vfs_fwrite(&am_Methods[i].other.e[3].type, 1, 1, f) <= 0) {
 				CloseVfsStream(f);
 				goto bad;
 			}
-			if (vfs_fwrite(&g_1008540[i].other.e[3].value, 4, 1, f) <= 0) {
+			if (vfs_fwrite(&am_Methods[i].other.e[3].value, 4, 1, f) <= 0) {
 				CloseVfsStream(f);
 				goto bad;
 			}
@@ -156,7 +156,7 @@ int __cdecl am_InitMethods(void)
 		CloseVfsStream(f);
 		return 1;
 	}
-	f = vfs_Tfopen("/gamedata/ai/ai_data_2.dfn", "rb", g_6b7fdc);
+	f = vfs_Tfopen("/gamedata/ai/ai_data_2.dfn", "rb", vfs_RootDir);
 	if (f == 0) {
 		goto bad;
 	}
@@ -262,11 +262,11 @@ int __cdecl am_InitMethods(void)
 		}
 		memcpy(&tmp.saved, &tmp.effects, 0x20);
 		if (tmp.type < 0x49) {
-			g_1008540[tmp.type].type = tmp.type;
-			strcpy(g_1008540[tmp.type].name, tmp.name);
-			g_1008540[tmp.type].effects = tmp.effects;
-			g_1008540[tmp.type].other = tmp.other;
-			g_1008540[tmp.type].saved = tmp.saved;
+			am_Methods[tmp.type].type = tmp.type;
+			strcpy(am_Methods[tmp.type].name, tmp.name);
+			am_Methods[tmp.type].effects = tmp.effects;
+			am_Methods[tmp.type].other = tmp.other;
+			am_Methods[tmp.type].saved = tmp.saved;
 		}
 	}
 	CloseVfsStream(f);

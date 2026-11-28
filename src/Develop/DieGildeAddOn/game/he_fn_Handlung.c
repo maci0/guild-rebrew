@@ -1,7 +1,7 @@
 #include "Develop/client_types.h"
 
 #include "Develop/DieGildeAddOn/game/he_action.h"
-extern HE_ACTION* g_7dc420;
+extern HE_ACTION* he_HandlungSearchCursor;
 extern char g_7749dc;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char g_6a4758[4];
@@ -27,9 +27,9 @@ HE_ACTION* __cdecl he_fn_Handlung(void)
 	if (he_LastEventSlot < 0 || he_LastEventSlot >= 0x400) {
 		ReportClientMessage((const char*) 0x6a5784);
 	} else {
-		base = &g_77e980[he_LastEventSlot];
+		base = &he_ActionSlots[he_LastEventSlot];
 	}
-	e = g_7dc420;
+	e = he_HandlungSearchCursor;
 	if (e == 0 || e == base || (unsigned int) e > (unsigned int) base) {
 		return 0;
 	}
@@ -37,7 +37,7 @@ HE_ACTION* __cdecl he_fn_Handlung(void)
 		g_7749dc = 0;
 	} else {
 		e++;
-		g_7dc420 = e;
+		he_HandlungSearchCursor = e;
 	}
 	kind = g_6a4758[0];
 	id = g_6a475c;
@@ -79,11 +79,11 @@ nomatch:
 next:
 		if ((unsigned int) e >= (unsigned int) base) {
 			e = 0;
-			g_7dc420 = e;
+			he_HandlungSearchCursor = e;
 			break;
 		}
 		e++;
-		g_7dc420 = e;
+		he_HandlungSearchCursor = e;
 	}
 	return e;
 }

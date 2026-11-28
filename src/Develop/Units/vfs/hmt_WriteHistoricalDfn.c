@@ -1,5 +1,5 @@
 typedef struct VFS_DIR VFS_DIR;
-extern VFS_DIR* g_6b7fdc;
+extern VFS_DIR* vfs_RootDir;
 
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
 unsigned int __cdecl vfs_fwrite(void*, int, int, void*);
@@ -32,7 +32,7 @@ int __cdecl hmt_WriteHistoricalDfn(struct hist_4ac9c0* h)
 	int i;
 
 	magic = 0x68466153;
-	f = vfs_Tfopen("/gamedata/ai/historical.dfn", "wb", g_6b7fdc);
+	f = vfs_Tfopen("/gamedata/ai/historical.dfn", "wb", vfs_RootDir);
 	if (f == 0)
 		goto out;
 	if (vfs_fwrite(&magic, 4, 1, f) <= 0)

@@ -71,7 +71,7 @@ extern char g_6a2318[];
 extern char g_6a2348[];
 extern char g_6a2354[];
 extern char g_699a68[];
-extern char g_773d75[];
+extern char gm_ActiveTownIndex[];
 
 int __cdecl io_SelectDelimitedString(char*, int, int);
 int __cdecl fcn_0064d530(char*, const char*, unsigned int);
@@ -391,7 +391,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 			}
 			cursor += 4;
 			res = *(int*) (cursor - 4);
-			d2_FormatCurrencyString(res, g_773d75[0], text.tmp);
+			d2_FormatCurrencyString(res, gm_ActiveTownIndex[0], text.tmp);
 			cp_src = text.tmp;
 			cp_n = (int) strlen(cp_src);
 			cp_dst = text.buf + i - 1;

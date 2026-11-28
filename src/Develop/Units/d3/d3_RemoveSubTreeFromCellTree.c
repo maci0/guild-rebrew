@@ -1,7 +1,7 @@
 
 
 
-extern int g_67a370;
+extern int d3_ActiveScene;
 
 void __cdecl d3_VisitSceneObjects(int, int, int, int, int);
 char __cdecl d3_RemoveObjectFromCellTree(char*, char*);
@@ -14,5 +14,5 @@ void __cdecl d3_RemoveSubTreeFromCellTree(int node, int* cellTree)
 	if (node == 0) {
 		return;
 	}
-	d3_VisitSceneObjects(g_67a370, node, cellTree[0x44 / 4] | 0x280, (int) d3_RemoveObjectFromCellTree, (int) cellTree);
+	d3_VisitSceneObjects(d3_ActiveScene, node, cellTree[0x44 / 4] | 0x280, (int) d3_RemoveObjectFromCellTree, (int) cellTree);
 }

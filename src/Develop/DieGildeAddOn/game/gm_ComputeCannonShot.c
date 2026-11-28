@@ -21,7 +21,7 @@ extern float g_772880;
 extern float g_772884;
 extern float g_772888;
 extern float g_6660f4;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 int __cdecl gm_LookupSlot170ByKey(int);
 int __cdecl gm_GetCannonShotEndpoints(char*, void*, int, void*);
@@ -37,7 +37,7 @@ int __cdecl gm_CanFireCannonShot(int, int, int, int, void*, void*);
 int __cdecl gm_SumQueryEntryValues(int, unsigned char);
 int __cdecl gm_RandomMod(int);
 
-extern float g_662cf8;
+extern float flt_100_0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 /* ADDRESS: GOLDTL 0x004a6210 */
@@ -94,7 +94,7 @@ int __cdecl gm_ComputeCannonShot(char* actor, char* building, int targetEnt)
 	spread = gm_CalcArtilleryVolleyCost(col, state, row + 1);
 	if (spread > *(float*) (p + 2 + row)) return 0;
 	if (gm_CanFireCannonShot((int) actor, col, state, row + 1, &res.amount, &res.cost) == 0) return 0;
-	value.cash = gm_SumQueryEntryValues(*(int*) (actor + 0x178), g_773d75);
+	value.cash = gm_SumQueryEntryValues(*(int*) (actor + 0x178), gm_ActiveTownIndex);
 	if ((int) (value.cash * 0.25f) < res.cost) return 0;
 	g_772850 = origin[0];
 	g_772854 = origin[1];

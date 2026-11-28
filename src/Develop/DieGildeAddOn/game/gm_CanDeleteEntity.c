@@ -16,7 +16,7 @@ typedef struct
 } Ent21c;
 // SIZE 0x21c
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 extern int gm_EntityCount;
 
 #pragma pack(push, 1)
@@ -33,7 +33,7 @@ typedef struct
 #pragma pack(pop)
 
 #include "Develop/client_types.h"
-extern Rec2d_9a3800 g_9a3800[512];
+extern Rec2d_9a3800 cm_CrimeRecords[512];
 
 int __cdecl gm_CanDeleteEntity(unsigned char* p)
 {
@@ -50,15 +50,15 @@ int __cdecl gm_CanDeleteEntity(unsigned char* p)
 	for (i = 0; i < 768; i++) {
 		found = 0;
 		cnt = 0;
-		if (((Ent21c*)g_7f4ca0)[i].x4 != id && (((Ent21c*)g_7f4ca0)[i].x2 == 6 || ((Ent21c*)g_7f4ca0)[i].x2 == 7)) {
-			if (((Ent21c*)g_7f4ca0)[i].x5c == id || ((Ent21c*)g_7f4ca0)[i].x60 == id || ((Ent21c*)g_7f4ca0)[i].x64 == id) {
+		if (((Ent21c*)gm_EntitySlotTable)[i].x4 != id && (((Ent21c*)gm_EntitySlotTable)[i].x2 == 6 || ((Ent21c*)gm_EntitySlotTable)[i].x2 == 7)) {
+			if (((Ent21c*)gm_EntitySlotTable)[i].x5c == id || ((Ent21c*)gm_EntitySlotTable)[i].x60 == id || ((Ent21c*)gm_EntitySlotTable)[i].x64 == id) {
 				return 0;
 			}
 			for (j = 0; j < 5; j++) {
-				if (((Ent21c*)g_7f4ca0)[i].x68[j] == id) {
+				if (((Ent21c*)gm_EntitySlotTable)[i].x68[j] == id) {
 					found |= 1;
 					cnt++;
-				} else if (((Ent21c*)g_7f4ca0)[i].x68[j] != -1) {
+				} else if (((Ent21c*)gm_EntitySlotTable)[i].x68[j] != -1) {
 					cnt++;
 				}
 			}
@@ -71,7 +71,7 @@ int __cdecl gm_CanDeleteEntity(unsigned char* p)
 		return 1;
 	}
 	for (i = 0; i < 512; i++) {
-		if (((Rec2d*)g_9a3800)[i].x12 == id && ((Rec2d*)g_9a3800)[i].x25 != 0) {
+		if (((Rec2d*)cm_CrimeRecords)[i].x12 == id && ((Rec2d*)cm_CrimeRecords)[i].x25 != 0) {
 			return 0;
 		}
 	}

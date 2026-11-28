@@ -41,7 +41,7 @@ int __cdecl ai_StartSculpture(int action, char* ent, char* opt, char* out1, char
 						*(int*) (rec1.v + 2) = 1;
 						need = (int) ((float) gm_GetTypeProductValue(c + 1) * 0.3f);
 						if (ai_PrepareBuildSite(action, e, 0, (char*) rec2.v, (char*) rec1.v, 0) != 0) {
-							have = (int) ((float) gm_SumQueryEntryValues(*(int*) (e + 0x178), (char) g_773d75) * 0.5f);
+							have = (int) ((float) gm_SumQueryEntryValues(*(int*) (e + 0x178), (char) gm_ActiveTownIndex) * 0.5f);
 							if (have < need) {
 								d = need - have;
 								if ((float) d / (float) need < 0.25f) {
@@ -62,7 +62,7 @@ int __cdecl ai_StartSculpture(int action, char* ent, char* opt, char* out1, char
 					*(int*) (rec1.v + 2) = 1;
 					if (ai_PrepareBuildSite(action, e, 0, (char*) rec1.v, (char*) rec2.v, 1) != 0) {
 						need = gm_CalcBuildingCost(e, *(int*) (rec1.v + 1));
-						have = (int) ((float) gm_SumQueryEntryValues(*(int*) (e + 0x178), (char) g_773d75) * 0.5f);
+						have = (int) ((float) gm_SumQueryEntryValues(*(int*) (e + 0x178), (char) gm_ActiveTownIndex) * 0.5f);
 						if (have < need) {
 							d = need - have;
 							if ((float) d / (float) need < 0.25f) {

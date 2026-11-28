@@ -4,7 +4,7 @@
 extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_6a5a10[];
-extern char g_6b5c60[];
+extern char str_empty[];
 
 int __cdecl gm_CompareGameTime(pos14_7f4c00*, char*);
 int __cdecl d2_CreateActionPopupSlot(char*, int, int, char*, int);
@@ -63,19 +63,19 @@ void __cdecl he_RunMeisterpruefungNotice(char* u)
 		(*(int*) (u + 0x70))++;
 		break;
 	case 1:
-		if (g_100f884 != *(int*) (*(char**) (u + 0x74) + 8) || g_100f1dc == -1) {
+		if (g_100f884 != *(int*) (*(char**) (u + 0x74) + 8) || d2_DialogButtonAction == -1) {
 			break;
 		}
-		if (g_100f1dc == 2) {
+		if (d2_DialogButtonAction == 2) {
 			h = gm_LookupEntityRecordById(*(int*) (u + 0xac));
 			if (*(char**) (h + 0x170) != 0) {
 				q = fcn_00502cd0(*(int*) (*(char**) (h + 0x170) + 0x5d), 2, 0, 0x13, 6);
-				d2_EnterBuildingObjekt(*(char**) (h + 0x170), *(int*) (q + 2), g_6b5c60);
+				d2_EnterBuildingObjekt(*(char**) (h + 0x170), *(int*) (q + 2), str_empty);
 			}
 			d2_CloseActionPopup(u);
 			he_FreeAction(u);
 			return;
-		} else if (g_100f1dc != 1) {
+		} else if (d2_DialogButtonAction != 1) {
 			break;
 		}
 	case -2:

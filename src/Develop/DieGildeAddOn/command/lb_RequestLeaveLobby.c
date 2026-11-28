@@ -13,6 +13,6 @@ void __cdecl lb_RequestLeaveLobby(int unused)
 	memset(buf + 0x10, 0, 0x80);
 	buf[0] = 0x5f;
 	*(int*) (buf + 0x10) = 3;
-	*(int*) (buf + 0x14) = g_9badd0;
+	*(int*) (buf + 0x14) = lb_LocalClientId;
 	cm_EnqueueClientPacket(buf);
 }

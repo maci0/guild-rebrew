@@ -4,8 +4,8 @@
 extern int d3_CameraHorizontalIndex;
 extern int d3_CameraVerticalStep;
 extern char* d3_ActiveCamera;
-extern float g_662d70[4];
-extern int g_77250c;
+extern float d3_ZeroVec4[4];
+extern int d2_ScreenSurface;
 extern int d2_ScreenHeight;
 extern int g_1040494;
 extern float d2_UiScale;
@@ -118,50 +118,50 @@ void __cdecl d2_DrawCameraPanArrows(void)
     res = (int) d2_GetResourceData(0x52c);
     if (d3_CameraHorizontalIndex == -1) {
         right = 1;
-        if (CompareVector3WithinTolerance((float*) (d3_ActiveCamera + 0xfc), g_662d70, 0.2f) == 0)
+        if (CompareVector3WithinTolerance((float*) (d3_ActiveCamera + 0xfc), d3_ZeroVec4, 0.2f) == 0)
             right = 2;
     } else if (d3_CameraHorizontalIndex == 1) {
         left = 1;
-        if (CompareVector3WithinTolerance((float*) (d3_ActiveCamera + 0xe4), g_662d70, 0.2f) == 0)
+        if (CompareVector3WithinTolerance((float*) (d3_ActiveCamera + 0xe4), d3_ZeroVec4, 0.2f) == 0)
             left = 2;
     } else if (d3_CameraHorizontalIndex == 0) {
-        if (CompareVector3WithinTolerance((float*) (d3_ActiveCamera + 0xe4), g_662d70, 0.2f) == 0)
+        if (CompareVector3WithinTolerance((float*) (d3_ActiveCamera + 0xe4), d3_ZeroVec4, 0.2f) == 0)
             left = 1;
-        if (CompareVector3WithinTolerance((float*) (d3_ActiveCamera + 0xfc), g_662d70, 0.2f) == 0)
+        if (CompareVector3WithinTolerance((float*) (d3_ActiveCamera + 0xfc), d3_ZeroVec4, 0.2f) == 0)
             right = 1;
     }
     if (d3_CameraVerticalStep == -1) {
         up = 1;
-        if (CompareVector3WithinTolerance((float*) (d3_ActiveCamera + 0xb4), g_662d70, 0.2f) == 0)
+        if (CompareVector3WithinTolerance((float*) (d3_ActiveCamera + 0xb4), d3_ZeroVec4, 0.2f) == 0)
             up = 2;
     } else if (d3_CameraVerticalStep == 1) {
         down = 1;
-        if (CompareVector3WithinTolerance((float*) (d3_ActiveCamera + 0xcc), g_662d70, 0.2f) == 0)
+        if (CompareVector3WithinTolerance((float*) (d3_ActiveCamera + 0xcc), d3_ZeroVec4, 0.2f) == 0)
             down = 2;
     } else if (d3_CameraVerticalStep == 0) {
-        if (CompareVector3WithinTolerance((float*) (d3_ActiveCamera + 0xb4), g_662d70, 0.2f) == 0)
+        if (CompareVector3WithinTolerance((float*) (d3_ActiveCamera + 0xb4), d3_ZeroVec4, 0.2f) == 0)
             up = 1;
-        if (CompareVector3WithinTolerance((float*) (d3_ActiveCamera + 0xcc), g_662d70, 0.2f) == 0)
+        if (CompareVector3WithinTolerance((float*) (d3_ActiveCamera + 0xcc), d3_ZeroVec4, 0.2f) == 0)
             down = 1;
     }
-    d2_SetClipRect(0, 0, *(int*) (g_77250c + 4), *(int*) (g_77250c + 8));
+    d2_SetClipRect(0, 0, *(int*) (d2_ScreenSurface + 4), *(int*) (d2_ScreenSurface + 8));
     if (up == 2)
         d2_DrawSpriteFromSet(g_1040494 / 2 - 0x14, (int) (d2_UiScale * *(float*) 0x664ef0 - g_66293c),
-                     g_77250c, res, 0);
+                     d2_ScreenSurface, res, 0);
     else if (up == 1)
         d2_DrawSpriteFromSet(g_1040494 / 2 - 0x14, (int) (d2_UiScale * *(float*) 0x664ef0 - g_66293c),
-                     g_77250c, res, 1);
+                     d2_ScreenSurface, res, 1);
     if (left == 2)
-        d2_DrawSpriteFromSet(8, d2_ScreenHeight / 2 + 0x14, g_77250c, res, 2);
+        d2_DrawSpriteFromSet(8, d2_ScreenHeight / 2 + 0x14, d2_ScreenSurface, res, 2);
     else if (left == 1)
-        d2_DrawSpriteFromSet(8, d2_ScreenHeight / 2 + 0x14, g_77250c, res, 3);
+        d2_DrawSpriteFromSet(8, d2_ScreenHeight / 2 + 0x14, d2_ScreenSurface, res, 3);
     if (right == 2)
-        d2_DrawSpriteFromSet(g_1040494 - 0x28, d2_ScreenHeight / 2 + 0x14, g_77250c, res, 4);
+        d2_DrawSpriteFromSet(g_1040494 - 0x28, d2_ScreenHeight / 2 + 0x14, d2_ScreenSurface, res, 4);
     else if (right == 1)
-        d2_DrawSpriteFromSet(g_1040494 - 0x28, d2_ScreenHeight / 2 + 0x14, g_77250c, res, 5);
+        d2_DrawSpriteFromSet(g_1040494 - 0x28, d2_ScreenHeight / 2 + 0x14, d2_ScreenSurface, res, 5);
     if (down == 2)
-        d2_DrawSpriteFromSet(g_1040494 / 2 - 0x14, (int) (d2_UiScale * g_66291c), g_77250c, res, 6);
+        d2_DrawSpriteFromSet(g_1040494 / 2 - 0x14, (int) (d2_UiScale * g_66291c), d2_ScreenSurface, res, 6);
     else if (down == 1)
-        d2_DrawSpriteFromSet(g_1040494 / 2 - 0x14, (int) (d2_UiScale * g_66291c), g_77250c, res, 7);
+        d2_DrawSpriteFromSet(g_1040494 / 2 - 0x14, (int) (d2_UiScale * g_66291c), d2_ScreenSurface, res, 7);
 }
 #endif

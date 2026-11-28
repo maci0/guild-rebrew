@@ -1,4 +1,4 @@
-extern char g_774a80[];
+extern char io_MessageFormatBuf[];
 extern char g_6ab540[];
 
 
@@ -12,9 +12,9 @@ void __cdecl he_NotifyDomizil01(void* recipient, void* subject, void* targetObj,
 
 	t = *(char*) ((char*) recipient + 2);
 	if (t == 6 || t == 7) {
-		io_FormatTextBuffer(g_774a80, 0x4077, (char*) subject + 0x30, (char*) subject + 0x40,
+		io_FormatTextBuffer(io_MessageFormatBuf, 0x4077, (char*) subject + 0x30, (char*) subject + 0x40,
 		    2 * recipeId + 0x9a8);
-		he_MessageBoxQuickjump(*(int*) ((char*) recipient + 4), -1, g_774a80, 0, 0x5ec,
+		he_MessageBoxQuickjump(*(int*) ((char*) recipient + 4), -1, io_MessageFormatBuf, 0, 0x5ec,
 		    *(int*) ((char*) *(int*) ((char*) subject + 0x16c) + 1),
 		    *(int*) ((char*) targetObj + 2), 0, g_6ab540);
 	}

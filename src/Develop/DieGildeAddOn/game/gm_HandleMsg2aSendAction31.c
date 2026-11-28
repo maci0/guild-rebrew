@@ -39,9 +39,9 @@ typedef struct Packet {
 
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern unsigned short g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
+extern unsigned short gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_HasActiveSpecialObject(void*, int);
@@ -100,8 +100,8 @@ int __cdecl gm_HandleMsg2aSendAction31(Req* r)
 		if (playerCount >= 6) {
 			break;
 		}
-		if (((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 0 && ((ENTITY_RECORD*)g_7f4ca0)[i].unk_16c == building && ((ENTITY_RECORD*)g_7f4ca0)[i].unk_165[0] != 0) {
-			list[playerCount] = (char*) &((ENTITY_RECORD*)g_7f4ca0)[i];
+		if (((ENTITY_RECORD*)gm_EntitySlotTable)[i].entity_state == 0 && ((ENTITY_RECORD*)gm_EntitySlotTable)[i].unk_16c == building && ((ENTITY_RECORD*)gm_EntitySlotTable)[i].unk_165[0] != 0) {
+			list[playerCount] = (char*) &((ENTITY_RECORD*)gm_EntitySlotTable)[i];
 			playerCount++;
 		}
 	}
@@ -125,11 +125,11 @@ int __cdecl gm_HandleMsg2aSendAction31(Req* r)
 		msg.x8 = *(int*) (o + 4);
 		msg.xc = *(int*) (building + 1);
 		msg.x28 = (*(int*)&gm_GameTime);
-		msg.x2c = (*(int*)&g_7f4c04);
-		msg.x30 = g_7f4c08;
+		msg.x2c = (*(int*)&gm_GameTimeHour);
+		msg.x30 = gm_GameTimeSliceDword;
 		msg.type = 0x31;
 		msg.x36 = 1;
-		msg.x34 = g_7f4c0c;
+		msg.x34 = gm_GameTimeTailWord;
 		msg.x58 = *(int*) (player + 4);
 		cm_SendCopyEntityData(&msg);
 	}

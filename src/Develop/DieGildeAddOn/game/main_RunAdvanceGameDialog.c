@@ -4,7 +4,7 @@ extern int g_7766a8;
 extern int main_LoopFlags;
 extern char g_774660;
 extern float g_675308;
-extern char g_14cf950;
+extern char io_LastKeyScancode;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern float g_665e40;
@@ -37,8 +37,8 @@ void __cdecl main_RunAdvanceGameDialog(void)
 		d2_CenterDialogWindows(h);
 		io_AppendText(0x82);
 		while (main_RunFrameLoop(main_RunAdvanceGameDialog, flags) != 0) {
-			if (g_14cf950 != 0 || g_14ce8cc != 0 || g_14ce8e0 != 0) {
-				g_774654 = 1;
+			if (io_LastKeyScancode != 0 || g_14ce8cc != 0 || io_RightButtonReleased != 0) {
+				d2_DialogCloseRequested = 1;
 			}
 		}
 		g_7766a8 = saved;

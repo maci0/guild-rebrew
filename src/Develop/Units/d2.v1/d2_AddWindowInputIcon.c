@@ -18,8 +18,8 @@ typedef struct
 // SIZE 0x160
 
 #include "Develop/client_types.h"
-extern Win_1015f40 g_1015f40[0x60];
-extern char* g_1015ea0;
+extern Win_1015f40 d2_Windows[0x60];
+extern char* d2_Controls;
 extern Tex_102d278 g_102d278[];
 extern char s_67d420[];
 
@@ -33,7 +33,7 @@ int __cdecl d2_AddWindowInputIcon(int x, int y, int width, int height, int flags
 	D2_WIN* par;
 	int id;
 
-	par = &((D2_WIN*)g_1015f40)[win];
+	par = &((D2_WIN*)d2_Windows)[win];
 	if (par->active == 0) {
 		return -1;
 	}
@@ -43,14 +43,14 @@ int __cdecl d2_AddWindowInputIcon(int x, int y, int width, int height, int flags
 	}
 	id = d2_OpenInputIcon(par->left + x, par->top - (*(int*) &par->pad3c[0x21c]) + y, width, height, flags);
 	d2_InsertControlAfterWindow(id, par);
-	*(int*) (&((D2_CONTROL_TL*) g_1015ea0)[id].parent) = (int) par;
-	((D2_CONTROL_TL*) g_1015ea0)[id].value_050 = ((D2_CONTROL_TL*) g_1015ea0)[par->slot].value_050;
-	((D2_CONTROL_TL*) g_1015ea0)[id].clip_top = par->top;
-	((D2_CONTROL_TL*) g_1015ea0)[id].clip_bottom = par->height + par->top;
-	((D2_CONTROL_TL*) g_1015ea0)[id].clip_left = par->left;
-	((D2_CONTROL_TL*) g_1015ea0)[id].clip_right = par->width + par->left;
-	((D2_INPUT_ICON_TEX*)g_102d278)[((D2_CONTROL_TL*) g_1015ea0)[id].value_088].i[0] = (*(int*) &par->pad280[12]);
-	((D2_INPUT_ICON_TEX*)g_102d278)[((D2_CONTROL_TL*) g_1015ea0)[id].value_088].i[0x24 / 4] = par->width - ((D2_CONTROL_TL*) g_1015ea0)[id].x - (*(int*) &par->pad14[8]) + par->left;
+	*(int*) (&((D2_CONTROL_TL*) d2_Controls)[id].parent) = (int) par;
+	((D2_CONTROL_TL*) d2_Controls)[id].value_050 = ((D2_CONTROL_TL*) d2_Controls)[par->slot].value_050;
+	((D2_CONTROL_TL*) d2_Controls)[id].clip_top = par->top;
+	((D2_CONTROL_TL*) d2_Controls)[id].clip_bottom = par->height + par->top;
+	((D2_CONTROL_TL*) d2_Controls)[id].clip_left = par->left;
+	((D2_CONTROL_TL*) d2_Controls)[id].clip_right = par->width + par->left;
+	((D2_INPUT_ICON_TEX*)g_102d278)[((D2_CONTROL_TL*) d2_Controls)[id].value_088].i[0] = (*(int*) &par->pad280[12]);
+	((D2_INPUT_ICON_TEX*)g_102d278)[((D2_CONTROL_TL*) d2_Controls)[id].value_088].i[0x24 / 4] = par->width - ((D2_CONTROL_TL*) d2_Controls)[id].x - (*(int*) &par->pad14[8]) + par->left;
 	par->children[par->count] = id;
 	par->count++;
 	return id;

@@ -111,7 +111,7 @@ int __cdecl d2_FireKanone(Emitter* emitter, char* building)
 	ez = 0;
 	slot0 = d2_GetControlValue(emitter->slot0);
 	slot1 = d2_GetControlValue(emitter->slot1);
-	if (!gm_CanFireCannonShot((char*) (g_slot_table + (unsigned int) g_774970 * 0x21c),
+	if (!gm_CanFireCannonShot((char*) (g_slot_table + (unsigned int) gm_LocalPlayerSlot * 0x21c),
 			slot0, slot1, emitter->mode + 1, &o1, &o2)) {
 		return 0;
 	}
@@ -132,7 +132,7 @@ int __cdecl d2_FireKanone(Emitter* emitter, char* building)
 		d3_PerturbParticleVelocity((float*) &p0, spread, &emitter->dir2, spread, &emitter->dir3,
 			scale);
 		h = gm_SendCannonVolleys(building,
-			(char*) (g_slot_table + (unsigned int) g_774970 * 0x21c),
+			(char*) (g_slot_table + (unsigned int) gm_LocalPlayerSlot * 0x21c),
 			(unsigned int*) &p0, 0, 0,
 			gm_CalcArtilleryVolleyCost(slot0, slot1, 1), o1, (unsigned int) o2);
 		sel = 1;
@@ -153,7 +153,7 @@ int __cdecl d2_FireKanone(Emitter* emitter, char* building)
 		d3_PerturbParticleVelocity((float*) &p0, spread, &emitter->dir2, spread, &emitter->dir3,
 			scale);
 		h = gm_SendCannonVolleys(building,
-			(char*) (g_slot_table + (unsigned int) g_774970 * 0x21c),
+			(char*) (g_slot_table + (unsigned int) gm_LocalPlayerSlot * 0x21c),
 			(unsigned int*) &p1, (unsigned int*) &p0, 0,
 			gm_CalcArtilleryVolleyCost(slot0, slot1, 1), o1, (unsigned int) o2);
 		sel = 2;
@@ -189,7 +189,7 @@ int __cdecl d2_FireKanone(Emitter* emitter, char* building)
 		d3_PerturbParticleVelocity((float*) &p1, spread, &emitter->dir2, spread, &emitter->dir3,
 			scale);
 		h = gm_SendCannonVolleys(building,
-			(char*) (g_slot_table + (unsigned int) g_774970 * 0x21c),
+			(char*) (g_slot_table + (unsigned int) gm_LocalPlayerSlot * 0x21c),
 			(unsigned int*) &p2, (unsigned int*) &p0, (unsigned int*) &p1,
 			gm_CalcArtilleryVolleyCost(slot0, slot1, 1), o1, (unsigned int) o2);
 		sel = 3;

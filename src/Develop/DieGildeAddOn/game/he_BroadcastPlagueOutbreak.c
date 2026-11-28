@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_6ab430[];
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 
 
@@ -17,10 +17,10 @@ void __cdecl he_BroadcastPlagueOutbreak(void)
 
 	id = gm_RandomMod(3);
 	fcn_0064d41a(buf, g_6ab430, id);
-	io_FormatTextBuffer(g_774a80, id + 0x20c7);
-	for (p = (int) g_7f4ca0 + 2; p < (int) g_7f4ca0 + 0x65402; p += 0x21c) {
+	io_FormatTextBuffer(io_MessageFormatBuf, id + 0x20c7);
+	for (p = (int) gm_EntitySlotTable + 2; p < (int) gm_EntitySlotTable + 0x65402; p += 0x21c) {
 		if (*(char*) p == 6 || *(char*) p == 7) {
-			he_PostEntityMessage(*(int*) (p + 2), -1, g_774a80, 0, 0x600, buf);
+			he_PostEntityMessage(*(int*) (p + 2), -1, io_MessageFormatBuf, 0, 0x600, buf);
 		}
 	}
 }

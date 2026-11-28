@@ -2,7 +2,7 @@
 
 
 extern unsigned char* lpGebaeudePROT;
-extern char* g_7746cc;
+extern char* sv_SelectedBuilding;
 
 int __cdecl d2_CheckTutCh2RathausGate(int* msg)
 {
@@ -13,7 +13,7 @@ int __cdecl d2_CheckTutCh2RathausGate(int* msg)
 		return 0;
 	}
 	if (msg[0] == 0x1a && msg[1] != 0) {
-		if (((char)(((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*) msg[1]].category)) == 0xf && *((short*)g_7746cc) == 0x10e) {
+		if (((char)(((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*) msg[1]].category)) == 0xf && *((short*)sv_SelectedBuilding) == 0x10e) {
 			return 0;
 		}
 		return 1;

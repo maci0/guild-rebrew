@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-extern int g_67a370;
+extern int d3_ActiveScene;
 
 int __cdecl gm_IsMapTileWalkable(int x, int y);
 
@@ -17,7 +17,7 @@ int __cdecl gm_FindNearestWalkableTile(int x, int y, int *out_x, int *out_y)
 	int col_hi;
 	int col;
 
-	m = *(char **) (((char *) g_67a370) + 0xb0);
+	m = *(char **) (((char *) d3_ActiveScene) + 0xb0);
 	radius = 0;
 	y_cur = y;
 	max = *(int *) (m + 0x20);

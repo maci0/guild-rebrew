@@ -6,9 +6,9 @@ int __cdecl tb_IsCallbackPaused(TIMER_CALLBACK cb)
 	TIMER_CALLBACK_SLOT* a;
 
 	/* Native uses a signed address comparison; the cursor stays a pointer. */
-	for (i = 0, a = g_1052c60; (int) a < (int) (g_1052c60 + 32); a++, i++) {
+	for (i = 0, a = tb_TimerCallbacks; (int) a < (int) (tb_TimerCallbacks + 32); a++, i++) {
 		if (a->funktion == cb) {
-			return g_1052c60[i].pausiert != 0;
+			return tb_TimerCallbacks[i].pausiert != 0;
 		}
 	}
 	return 0;

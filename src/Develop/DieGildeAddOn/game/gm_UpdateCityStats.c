@@ -12,10 +12,10 @@ typedef struct
 } Blob14;
 #pragma pack(pop)
 
-extern Blob14 g_99f590;
+extern Blob14 gm_LastCityPopTime;
 extern pos14_7f4c00 gm_GameTime;
-extern char g_99f5e0[];
-extern float g_773d4c, g_773d50, g_773d54, g_99ec14, g_6628cc;
+extern char gm_CityStatsBuffer[];
+extern float gm_CityPopulation, gm_TargetCityPopulation, g_773d54, g_99ec14, g_6628cc;
 
 #pragma intrinsic(memcpy)
 
@@ -29,17 +29,17 @@ int __cdecl gm_UpdateCityStats(void)
 	double d;
 
 	v = gm_GetCityStatsSummary((char*) buf);
-	if (g_773d4c == 0.0f) {
-		memcpy(g_99f5e0, buf, 40);
+	if (gm_CityPopulation == 0.0f) {
+		memcpy(gm_CityStatsBuffer, buf, 40);
 		d = ((double) v + 1.0) * g_773d54;
-		g_773d50 = (float) d;
-		g_773d4c = (float) (d * 0.95);
+		gm_TargetCityPopulation = (float) d;
+		gm_CityPopulation = (float) (d * 0.95);
 	} else {
-		memcpy(g_99f5e0, buf, 40);
+		memcpy(gm_CityStatsBuffer, buf, 40);
 		d = ((double) v + 1.0) * g_773d54;
-		g_773d50 = (float) ((d - g_773d50) * g_6628cc + g_773d50);
+		gm_TargetCityPopulation = (float) ((d - gm_TargetCityPopulation) * g_6628cc + gm_TargetCityPopulation);
 	}
-	g_99ec14 = (float) ((g_773d50 - g_773d4c) * 0.0007336182331406322);
-	g_99f590 = *(Blob14*) &gm_GameTime;
-	return (int) g_773d50;
+	g_99ec14 = (float) ((gm_TargetCityPopulation - gm_CityPopulation) * 0.0007336182331406322);
+	gm_LastCityPopTime = *(Blob14*) &gm_GameTime;
+	return (int) gm_TargetCityPopulation;
 }

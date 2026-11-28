@@ -34,28 +34,28 @@ void __cdecl ai_CancelBlockedActions(char* e, int k)
 	for (q = he_StartHandlungSearch(2, 0, k, 3, *(int*) (*(char**) (e + 0x16c) + 1)); q != 0; q = he_fn_Handlung()) {
 		found = 0;
 		if (k == 4) {
-			for (i = 0; i < g_100b0ac; i++) {
-				if (g_100d0c0[i].goods_id == *(unsigned short*) (q + 0xac) && !(g_100d0c0[i].flags & 8)) {
+			for (i = 0; i < ai_ProductionGoodsCount; i++) {
+				if (ai_ProductionGoodsPlans[i].goods_id == *(unsigned short*) (q + 0xac) && !(ai_ProductionGoodsPlans[i].flags & 8)) {
 					found = 1;
 				}
 			}
 		} else if (k == 8) {
-			for (i = 0; i < g_100b0ac; i++) {
-				if (g_100d0c0[i].goods_id == *(unsigned short*) (q + 0xac) && !(g_100d0c0[i].flags & 0x10)) {
+			for (i = 0; i < ai_ProductionGoodsCount; i++) {
+				if (ai_ProductionGoodsPlans[i].goods_id == *(unsigned short*) (q + 0xac) && !(ai_ProductionGoodsPlans[i].flags & 0x10)) {
 					found = 1;
 				}
 			}
 		} else if (k == 3) {
-			for (i = 0; i < g_100b0ac; i++) {
-				if (g_100d0c0[i].goods_id == *(unsigned short*) (q + 0xac) && !(g_100d0c0[i].flags & 8)) {
+			for (i = 0; i < ai_ProductionGoodsCount; i++) {
+				if (ai_ProductionGoodsPlans[i].goods_id == *(unsigned short*) (q + 0xac) && !(ai_ProductionGoodsPlans[i].flags & 8)) {
 					found = 1;
 				}
 			}
 		}
 		if (found) {
 			for (i = 0; i < 768; i++) {
-				if ((*(unsigned short*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_index) != 0xffff && (*(char**)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].ptr_17c) == q) {
-					he_AssignActionSlot(*(char**) (e + 0x16c), 0, (*(unsigned short*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_index), 0);
+				if ((*(unsigned short*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_index) != 0xffff && (*(char**)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].ptr_17c) == q) {
+					he_AssignActionSlot(*(char**) (e + 0x16c), 0, (*(unsigned short*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_index), 0);
 				}
 			}
 		}

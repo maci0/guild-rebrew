@@ -30,17 +30,17 @@ struct line {
 
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern unsigned char g_773d75;
-extern int g_100f1dc;
-extern int g_14ce8e0;
+extern unsigned char gm_ActiveTownIndex;
+extern int d2_DialogButtonAction;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int d2_CurrentElementId;
 extern int g_14ab670;
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern unsigned short g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
+extern unsigned short gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
 extern char g_6aaba0[];
 
 void __cdecl gm_GenerateLoanOffers(char*, ENTITY_RECORD*, int, struct want*);
@@ -69,7 +69,7 @@ void __cdecl d2_ChooseNewLoan(char* p)
 	int j;
 
 	memset(list, 0, sizeof(list));
-	gm_GenerateLoanOffers(p, &((ENTITY_RECORD*)g_7f4ca0)[g_774970], 3, src);
+	gm_GenerateLoanOffers(p, &((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot], 3, src);
 	j = 0;
 	for (i = 0; i < 3; i++) {
 		if (src[i].n > 0) {
@@ -94,10 +94,10 @@ void __cdecl d2_ChooseNewLoan(char* p)
 	io_AppendText(0x18d3);
 	d2_SetOverlayAnimation(0, 0);
 	while (main_RunFrameLoop(d2_ChooseNewLoan, 0x677c7) != 0) {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc == 2) {
+		if (d2_DialogButtonAction == 2) {
 			for (i = 0; i < 3; i++) {
 				if (list[i].n != 0 && d2_CurrentElementId == list[i].handle) {
 					goto found;
@@ -107,19 +107,19 @@ void __cdecl d2_ChooseNewLoan(char* p)
 found:
 			memset(ev, 0, sizeof(ev));
 			ev[4] = 0x23;
-			*(int*) (ev + 8) = ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (p + 0x27)].entity_id;
+			*(int*) (ev + 8) = ((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (p + 0x27)].entity_id;
 			*(int*) (ev + 0xc) = *(int*) (p + 1);
 			*(int*) (ev + 0x28) = (*(int*)&gm_GameTime);
-			*(int*) (ev + 0x2c) = (*(int*)&g_7f4c04);
-			*(int*) (ev + 0x30) = g_7f4c08;
-			*(short*) (ev + 0x34) = g_7f4c0c;
+			*(int*) (ev + 0x2c) = (*(int*)&gm_GameTimeHour);
+			*(int*) (ev + 0x30) = gm_GameTimeSliceDword;
+			*(short*) (ev + 0x34) = gm_GameTimeTailWord;
 			ev[0x36] = 0x12;
 			*(int*) (ev + 0x58) = *(int*) (p + 1);
-			*(int*) (ev + 0x5c) = ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id;
+			*(int*) (ev + 0x5c) = ((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id;
 			*(int*) (ev + 0x60) = list[i].n;
 			*(int*) (ev + 0x64) = list[i].x;
 			*(int*) (ev + 0x6c) = list[i].y;
-			cm_RequestTransferCurrencyNoKill(((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id, *(int*) (p + 1), g_773d75, list[i].n);
+			cm_RequestTransferCurrencyNoKill(((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id, *(int*) (p + 1), gm_ActiveTownIndex, list[i].n);
 			r = cm_SendCopyEntityData(ev);
 			while (cm_GetCommandStatus(r) == 0) {
 				main_RunFrameLoop(0, 0x677c7);
@@ -128,10 +128,10 @@ found:
 			d2_ShowModalMessageBox(g_14ab670, 4);
 			d2_SetGroupVisibility(h, 1);
 			*(int*) (p + list[i].slot * 0xc + 0x71) = -1;
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 		}
-		else if (g_100f1dc == 1) {
-			g_774654 = 1;
+		else if (d2_DialogButtonAction == 1) {
+			d2_DialogCloseRequested = 1;
 		}
 	}
 	d2_DestroyForm(h);

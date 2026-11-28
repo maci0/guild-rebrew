@@ -24,7 +24,7 @@ int __cdecl lb_RequestToggleReady(int a1)
 	msg9c m;
 
 	memset(&m.f10, 0, 0x80);
-	info.g = g_9badd0;
+	info.g = lb_LocalClientId;
 	m.kind = 0x5f;
 	m.f10 = 1;
 	info.a = a1;

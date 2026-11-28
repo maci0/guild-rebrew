@@ -1,4 +1,4 @@
-extern int g_67a370;
+extern int d3_ActiveScene;
 
 // SIZE 0x84
 struct list_55d630 {
@@ -24,10 +24,10 @@ char* __cdecl he_PickRandomSceneObject(char* o)
 	if (o != 0 && (o[0x214] & 1) == 0) {
 		saved = *(int*) (o + 0x1f4);
 		*(int*) (o + 0x1f4) = 0;
-		d3_VisitSceneObjects(g_67a370, o, 0x100, (void*) he_CollectTransporterDummies, &l);
+		d3_VisitSceneObjects(d3_ActiveScene, o, 0x100, (void*) he_CollectTransporterDummies, &l);
 		*(int*) (o + 0x1f4) = saved;
 	} else {
-		d3_VisitSceneObjects(g_67a370, o, 0x100, (void*) he_CollectTransporterDummies, &l);
+		d3_VisitSceneObjects(d3_ActiveScene, o, 0x100, (void*) he_CollectTransporterDummies, &l);
 	}
 	if (l.n == 0) {
 		return 0;

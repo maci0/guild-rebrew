@@ -25,8 +25,8 @@ typedef struct Slot {
 } Slot;
 // SIZE 0x2f4
 
-extern char* g_1015ea0;
-extern void** g_772540;
+extern char* d2_Controls;
+extern void** d2_ZOrderStack;
 extern char s_67d59c[];
 
 #include "Develop/Units/Error/error_message.h"
@@ -38,26 +38,26 @@ void __cdecl d2_InsertControlAfterWindow(int slot, char* parent)
 	Slot* p;
 
 	for (i = 0; i < 0x3ff; i++) {
-		if (((Slot**)g_772540)[i] == (Slot*) &((D2_CONTROL_TL*) g_1015ea0)[slot]) {
+		if (((Slot**)d2_ZOrderStack)[i] == (Slot*) &((D2_CONTROL_TL*) d2_Controls)[slot]) {
 			if (i == 0x3ff) {
-				((Slot**)g_772540)[0x3ff] = 0;
+				((Slot**)d2_ZOrderStack)[0x3ff] = 0;
 			} else if (i < 0x3ff) {
-				memmove(&((Slot**)g_772540)[i], &((Slot**)g_772540)[i + 1], 0xff8 - i * 4);
+				memmove(&((Slot**)d2_ZOrderStack)[i], &((Slot**)d2_ZOrderStack)[i + 1], 0xff8 - i * 4);
 			}
 			break;
 		}
 	}
 	for (i = 0x3ff; i >= 0; i--) {
-		p = ((Slot**)g_772540)[i];
+		p = ((Slot**)d2_ZOrderStack)[i];
 		if (p && ((p->link == parent && p->type != 0x40) || p->id == *(int*) (parent + 0x27c))) {
 			break;
 		}
 	}
 	if (i >= 0) {
 		if (i < 0x3ff) {
-			memmove(&((Slot**)g_772540)[i + 2], &((Slot**)g_772540)[i + 1], 0xff8 - i * 4);
+			memmove(&((Slot**)d2_ZOrderStack)[i + 2], &((Slot**)d2_ZOrderStack)[i + 1], 0xff8 - i * 4);
 		}
-		((Slot**)g_772540)[i + 1] = (Slot*) &((D2_CONTROL_TL*) g_1015ea0)[slot];
+		((Slot**)d2_ZOrderStack)[i + 1] = (Slot*) &((D2_CONTROL_TL*) d2_Controls)[slot];
 	} else {
 		ReportClientMessage(s_67d59c);
 	}

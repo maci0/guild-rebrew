@@ -16,9 +16,9 @@ extern char s_6ad3c4[];
 extern char s_681140[];
 extern char s_6ad3bc[];
 extern char s_6ad3a8[];
-extern char* g_7746c4;
-extern int g_14ce8e0;
-extern int g_100f1dc;
+extern char* d2_VisitedBuilding;
+extern int io_RightButtonReleased;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
@@ -53,11 +53,11 @@ void __cdecl d2_ShowSchneidereiPlauschDialog(ENTITY_RECORD* other)
 	int max;
 	int i;
 
-	me = &((ENTITY_RECORD*)g_7f4ca0)[g_774970];
+	me = &((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot];
 	dlg = d2_LoadForm(0, 0, s_6ad3c4);
-	found = gm_FindMostWantedCrimeTarget(&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 4, list, &count);
-	if ((*(int*)&g_7746c4)) {
-		max = gm_GetBuildingTechEffect((*(int*)&g_7746c4), 0x24, 1);
+	found = gm_FindMostWantedCrimeTarget(&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot], 4, list, &count);
+	if ((*(int*)&d2_VisitedBuilding)) {
+		max = gm_GetBuildingTechEffect((*(int*)&d2_VisitedBuilding), 0x24, 1);
 	} else {
 		max = 1;
 	}
@@ -77,27 +77,27 @@ void __cdecl d2_ShowSchneidereiPlauschDialog(ENTITY_RECORD* other)
 		d2_SetElementEnabled(yes, 0);
 	}
 	while (main_RunFrameLoop(d2_ShowSchneidereiPlauschDialog, 0x67fff)) {
-		if (g_14ce8e0 || g_100f1dc == 1) {
-			g_774654 = 1;
+		if (io_RightButtonReleased || d2_DialogButtonAction == 1) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc != -1 && d2_CurrentElementId == yes) {
+		if (d2_DialogButtonAction != -1 && d2_CurrentElementId == yes) {
 			if (found) {
 				for (i = 0; i < count; i++) {
-					cm_RequestLinkEvidence(list[i], ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id);
+					cm_RequestLinkEvidence(list[i], ((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id);
 				}
-				cm_RequestModifyHealth(((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id, -1);
+				cm_RequestModifyHealth(((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id, -1);
 				cm_RequestModifyHealth(other->entity_id, -1);
 				cm_RequestChangeBits(me->entity_id, 0x1cc, 4, 0x20000, 0);
 				io_FormatTextBuffer(text, 0x422f, other->entity_index);
-				he_PostEntityMessage(((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id, -1, text, 0, 0x5ec, 0);
+				he_PostEntityMessage(((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id, -1, text, 0, 0x5ec, 0);
 				if (other->entity_state == 6 || other->entity_state == 7) {
-					io_FormatTextBuffer(text, 0x4230, g_774970, 1);
+					io_FormatTextBuffer(text, 0x4230, gm_LocalPlayerSlot, 1);
 					he_PostEntityMessage(other->entity_id, -1, text, 0, 0x5ec, s_6ad3a8);
 				}
-				g_774654 = 3;
+				d2_DialogCloseRequested = 3;
 			} else {
 				cm_RequestModifyHealth(other->entity_id, -1);
-				g_774654 = 3;
+				d2_DialogCloseRequested = 3;
 			}
 		}
 	}

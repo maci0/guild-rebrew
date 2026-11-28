@@ -1,4 +1,4 @@
-extern int g_6b7fdc;
+extern int vfs_RootDir;
 extern char g_6b85c0[];
 
 char* __cdecl d3_AppendVfsAssetPath(char*, char*);
@@ -21,7 +21,7 @@ void __cdecl d3_LoadTextureSet(char* name, char** tex, int* width, int* height)
 	if (name != 0) {
 		f = d3_AppendVfsAssetPath(name, ".TXS");
 		if (f != 0) {
-			f = vfs_Tfopen(f, "rb", g_6b7fdc);
+			f = vfs_Tfopen(f, "rb", vfs_RootDir);
 			if (f != 0) {
 				fcn_004011f0(f, &w);
 				if (w == 0x23f209ae) {

@@ -30,8 +30,8 @@ typedef struct F8 {
 } F8;
 // SIZE 0x8
 
-extern char* g_77261c;
-extern char g_7f4ca4[];
+extern char* ai_FeudTargetEntity;
+extern char gm_EntityIdField[];
 
 int __cdecl gm_RandomMod(int n);
 void __cdecl gm_CheckEntityObjectSlots(char* e, int n, Slot* slots, Counts* cnt);
@@ -138,8 +138,8 @@ occupied:
 		f.mask = 0xa07c4390;
 		f.b = 1;
 		found = -1;
-		if (g_77261c == 0 ||
-			(ai_FindEntityInFavorRange(g_77261c, 4, f, 0, 100.0f, &found), found == -1)) {
+		if (ai_FeudTargetEntity == 0 ||
+			(ai_FindEntityInFavorRange(ai_FeudTargetEntity, 4, f, 0, 100.0f, &found), found == -1)) {
 			if (ai_FindEntityInFavorRange(e, 6, f, 0, (float) (gm_RandomMod(0x40) & 0xffff), &found) == 0) {
 				return 0;
 			}
@@ -154,8 +154,8 @@ occupied:
 	case 0x169:
 	case 0x16d:
 		b.type = 7;
-		b.a = *(int*) (g_7f4ca4 + (ids[0] & 0xffff) * 540);
-		b.b = *(int*) (g_7f4ca4 + (ids[1] & 0xffff) * 540);
+		b.a = *(int*) (gm_EntityIdField + (ids[0] & 0xffff) * 540);
+		b.b = *(int*) (gm_EntityIdField + (ids[1] & 0xffff) * 540);
 		break;
 	case 0x16a:
 	case 0x17b:
@@ -166,12 +166,12 @@ occupied:
 	case 0x29a:
 	case 0x29c:
 		b.type = 7;
-		b.a = *(int*) (g_7f4ca4 + (ids[0] & 0xffff) * 540);
+		b.a = *(int*) (gm_EntityIdField + (ids[0] & 0xffff) * 540);
 		b.b = -1;
 		break;
 	case 0x177:
 		b.type = 4;
-		b.a = *(int*) (*(char**) (g_7f4ca4 + (ids[0] & 0xffff) * 540 + 0x16c) + 1);
+		b.a = *(int*) (*(char**) (gm_EntityIdField + (ids[0] & 0xffff) * 540 + 0x16c) + 1);
 		b.b = -1;
 		break;
 	case 0x178:

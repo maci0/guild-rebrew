@@ -7,5 +7,5 @@ int __cdecl gm_GetEntityRelation(int row, int column)
 	if (row == column) {
 		return 0x7f;
 	}
-	return (signed char) *(char*) (((char*)g_869480) + row * 768 + column);
+	return (signed char) *(char*) (((char*)gm_EntityRelationMatrix) + row * 768 + column);
 }

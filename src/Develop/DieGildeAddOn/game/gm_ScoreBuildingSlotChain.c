@@ -2,7 +2,7 @@
 extern int __cdecl fcn_00502cd0(int handle, ...);
 extern int __cdecl gm_MatchCraftedItemKind(void* link);
 extern void* __cdecl gm_NextEntityQueryMatch(void);
-extern float g_662cf8;
+extern float flt_100_0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* Scores an entity's slot chain: matching slot types 2 and 6, plus links of the
  * queried chain that repeat with the same type, scaled by g_662cf8. */
@@ -75,5 +75,5 @@ int __cdecl gm_ScoreBuildingSlotChain(unsigned char* building)
 	ratio = (double) chain_count;
 	numerator = (double) match_count;
 	ratio = numerator / ratio;
-	return (int) (ratio * g_662cf8);
+	return (int) (ratio * flt_100_0);
 }

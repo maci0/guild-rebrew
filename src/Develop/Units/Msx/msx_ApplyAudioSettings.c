@@ -6,7 +6,7 @@
 #define BLUE(c) ((unsigned char) ((c) >> 16))
 #define ALPHA(c) ((unsigned char) ((c) >> 24))
 
-extern unsigned char g_7766a0[4];
+extern unsigned char msx_AudioVolumeSettings[4];
 extern unsigned char g_7766a4[4];
 extern float g_681750;
 extern float g_6819b0;
@@ -19,10 +19,10 @@ void __cdecl msx_ApplyAudioSettings(void)
 {
 	float s;
 
-	s = RED((*(unsigned long*)g_7766a0)) * (1.0f / 127.0f);
-	sb_SetMasterVolume((int) (GREEN((*(unsigned long*)g_7766a0)) * s));
-	SetMasterVolume((int) (BLUE((*(unsigned long*)g_7766a0)) * s));
-	fcn_004c3140((int) (GREEN((*(unsigned long*)g_7766a0)) * s));
-	g_681750 = ALPHA((*(unsigned long*)g_7766a0)) * (1.0f / 127.0f);
+	s = RED((*(unsigned long*)msx_AudioVolumeSettings)) * (1.0f / 127.0f);
+	sb_SetMasterVolume((int) (GREEN((*(unsigned long*)msx_AudioVolumeSettings)) * s));
+	SetMasterVolume((int) (BLUE((*(unsigned long*)msx_AudioVolumeSettings)) * s));
+	fcn_004c3140((int) (GREEN((*(unsigned long*)msx_AudioVolumeSettings)) * s));
+	g_681750 = ALPHA((*(unsigned long*)msx_AudioVolumeSettings)) * (1.0f / 127.0f);
 	g_6819b0 = RED((*(unsigned long*)g_7766a4)) * 0.25f;
 }

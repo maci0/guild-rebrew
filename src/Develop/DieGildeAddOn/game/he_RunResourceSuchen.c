@@ -1,6 +1,6 @@
 extern char* lpObjektePROT;
-extern char g_7f4ca0[];
-extern unsigned char g_773d75;
+extern char gm_EntitySlotTable[];
+extern unsigned char gm_ActiveTownIndex;
 extern unsigned short g_7f3ee4;
 extern int g_90d520[];
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
@@ -58,7 +58,7 @@ void __cdecl he_RunResourceSuchen(char* obj)
 			}
 			if (ent != 0) {
 				cm_SendSellObjekt(*(int*) (ref2 + 2), -1, *(unsigned short*) ent,
-					1, g_773d75, 0);
+					1, gm_ActiveTownIndex, 0);
 				gm_CollectTradeItemsByKind(ref1);
 				for (count = 0; count < (int) g_7f3ee4; count++) {
 					n = g_90d520[count];
@@ -73,7 +73,7 @@ void __cdecl he_RunResourceSuchen(char* obj)
 						if (off >= 4) {
 							if (more) {
 								cm_SendSellObjekt(*(int*) (ref2 + 2), -1,
-									g_90d520[count], 3, g_773d75, 0);
+									g_90d520[count], 3, gm_ActiveTownIndex, 0);
 							}
 							break;
 						}
@@ -93,11 +93,11 @@ void __cdecl he_RunResourceSuchen(char* obj)
 					((OBJECT_PROTOTYPE *)rec)->value_036 * 0x1e) *
 					(*(int*) (obj + 0x18) + *(int*) (obj + 0x14));
 				cm_SendSellObjekt(*(int*) (obj + 0xb4), -1, *(unsigned short*) ent,
-					total, g_773d75, 0);
+					total, gm_ActiveTownIndex, 0);
 				io_FormatTextBuffer(msg, 0x1bb8, *(unsigned short*) ent * 2 + 0x9a8,
 					ref1, total);
 				he_MessageBoxQuickjump(
-					*(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) ((char*) ref1 + 0x27)]) + 4),
+					*(int*) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) ((char*) ref1 + 0x27)]) + 4),
 					-1, msg, 0, 0x5f1, *(int*) ((char*) ref1 + 1), -1, 0,
 					"_NACHRICHTEN_HS_08");
 			}

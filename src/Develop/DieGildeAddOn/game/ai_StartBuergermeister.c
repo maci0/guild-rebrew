@@ -1,7 +1,7 @@
 #include <string.h>
 extern unsigned char* lpGebaeudePROT;
 extern unsigned char* lpGebaeudeINST;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern double g_664360;
 extern float g_664198;
@@ -46,7 +46,7 @@ int __cdecl ai_StartBuergermeister(int a0, unsigned short* a1, int a2,
 		return 0;
 	}
 	r = fcn_00502cd0(*(int*) (r + 0x5d), 2, 6, 0, 0x115);
-	a0 = gm_SumQueryEntryValues(*(int*) (r + 0x14), g_773d75);
+	a0 = gm_SumQueryEntryValues(*(int*) (r + 0x14), gm_ActiveTownIndex);
 	gm_GetCityStatsSummary((char*) buf);
 	prot = lpGebaeudePROT;
 	e = lpGebaeudeINST;
@@ -80,7 +80,7 @@ int __cdecl ai_StartBuergermeister(int a0, unsigned short* a1, int a2,
 		e += 0xa9;
 		a2 -= 1;
 	} while (a2 != 0);
-	if ((*(float*) ((char*) a1 + 0x100) - g_662a48) * g_664360 < buf[3]) {
+	if ((*(float*) ((char*) a1 + 0x100) - dbl_2_0) * g_664360 < buf[3]) {
 		if (vals[0] != 0 && ptrs[0] != 0) {
 			*(unsigned char*) a3 = 4;
 			a3[1] = 2;

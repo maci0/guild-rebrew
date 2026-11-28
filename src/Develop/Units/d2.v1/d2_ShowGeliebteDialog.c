@@ -11,12 +11,12 @@ typedef struct {
 	char pa[0x21c - 0xa];
 } D2_RESIDENCE_ENTITY;
 
-extern D2_RESIDENCE_ENTITY g_7f4ca0[];
+extern D2_RESIDENCE_ENTITY gm_EntitySlotTable[];
 extern int d2_CurrentWindowId;
-extern int g_100f1dc;
-extern int g_14ce8e0;
+extern int d2_DialogButtonAction;
+extern int io_RightButtonReleased;
 extern int d2_CurrentElementId;
-extern int g_666018;
+extern int gm_TargetPersonTypeMask;
 extern int g_66601c;
 
 void __cdecl d2_ClearStatusTextSlots(void);
@@ -74,12 +74,12 @@ void __cdecl d2_ShowGeliebteDialog(char *building)
 	d2_CenterDialogWindows(dlg);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 2);
-	if (g_7f4ca0[g_774970].b9 == 0) {
+	if (gm_EntitySlotTable[gm_LocalPlayerSlot].b9 == 0) {
 		item = d2_GetWindowListItem(dlg, 2, io_AppendText(0x1a50));
 	} else {
 		item = d2_GetWindowListItem(dlg, 2, io_AppendText(0x1a51));
 	}
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
 		memset(ids, 0xff, sizeof(ids));
 		acts[0] = -1;
@@ -88,7 +88,7 @@ void __cdecl d2_ShowGeliebteDialog(char *building)
 		acts[3] = -1;
 		n = 0;
 		for (ent = he_StartHandlungSearch(1, 0, 0x6f); ent != 0 && n < 4; ent = he_fn_Handlung()) {
-			if (*(int *) (ent + 0xac) == g_7f4ca0[g_774970].f4) {
+			if (*(int *) (ent + 0xac) == gm_EntitySlotTable[gm_LocalPlayerSlot].f4) {
 				acts[n] = *(int *) (ent + 4);
 				if (*(int *) (ent + 0x70) == 0) {
 					avail[n] = 1;
@@ -116,20 +116,20 @@ void __cdecl d2_ShowGeliebteDialog(char *building)
 		} else {
 			d2_SetElementEnabled(item, 1);
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
-		} else if (g_100f1dc != -1) {
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
+		} else if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == item) {
 				memset(box, 0, sizeof(box));
 				box[4] = 6;
-				box[1] = (g_7f4ca0[g_774970].b9 != 0) ? 0x20409 : 0x2040a;
-				box[2] = g_666018;
+				box[1] = (gm_EntitySlotTable[gm_LocalPlayerSlot].b9 != 0) ? 0x20409 : 0x2040a;
+				box[2] = gm_TargetPersonTypeMask;
 				box[3] = g_66601c;
 				io_FormatTextBuffer(text_a, 0x1a53);
 				io_FormatTextBuffer(text_b, 0x1a54);
 				sel = d2_OpenTargetPicker(box, text_a, text_b, 0);
 				if (sel != 0) {
-					if (g_7f4ca0[g_774970].b9 == 0) {
+					if (gm_EntitySlotTable[gm_LocalPlayerSlot].b9 == 0) {
 						io_FormatTextBuffer(text_c, 0x1a55, *sel);
 					} else {
 						io_FormatTextBuffer(text_c, 0x1a56, *sel);
@@ -138,10 +138,10 @@ void __cdecl d2_ShowGeliebteDialog(char *building)
 						memset(msg, 0, sizeof(msg));
 						msg[4] = 0x6f;
 						msg[0x36] = 2;
-						*(int *) (msg + 8) = g_7f4ca0[g_774970].f4;
+						*(int *) (msg + 8) = gm_EntitySlotTable[gm_LocalPlayerSlot].f4;
 						*(int *) (msg + 0xc) = *(int *) (building + 1);
 						*(int *) (msg + 0x5c) = *(int *) (sel + 2);
-						*(int *) (msg + 0x58) = g_7f4ca0[g_774970].f4;
+						*(int *) (msg + 0x58) = gm_EntitySlotTable[gm_LocalPlayerSlot].f4;
 						cm_SendCopyEntityData(msg);
 					}
 				}
@@ -151,7 +151,7 @@ void __cdecl d2_ShowGeliebteDialog(char *building)
 						ent = gm_LookupEntityRecordById(ids[i]);
 						act = he_StartHandlungSearch(1, 1, acts[i]);
 						d2_SetFormVisibility(dlg, 0);
-						d2_RunGeliebteDetailDialog(&g_7f4ca0[g_774970], ent, act);
+						d2_RunGeliebteDetailDialog(&gm_EntitySlotTable[gm_LocalPlayerSlot], ent, act);
 						d2_SetFormVisibility(dlg, 1);
 						break;
 					}

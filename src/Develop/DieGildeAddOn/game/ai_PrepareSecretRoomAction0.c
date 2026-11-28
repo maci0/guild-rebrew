@@ -10,7 +10,7 @@
 
 
 
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 unsigned short __cdecl gm_RandomMod(int n);
@@ -33,8 +33,8 @@ int __cdecl ai_PrepareSecretRoomAction0(char* actor, char* action_out, char* tar
 	if (ai_SelectRankedCandidates(actor, 1, &mask, 0, gm_RandomMod(0x20) + 25.0f, &idx) == 0) {
 		return 0;
 	}
-	t = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[(unsigned short) idx]);
-	have = (int) (gm_SumQueryEntryValues(*(int*) (actor + 0x178), (*(char*)&g_773d75)) * 0.25f);
+	t = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[(unsigned short) idx]);
+	have = (int) (gm_SumQueryEntryValues(*(int*) (actor + 0x178), (*(char*)&gm_ActiveTownIndex)) * 0.25f);
 	need = gm_WalkEntityChain(*(unsigned short*) actor);
 	need = (int) ((gm_WalkEntityChain(t->entity_index) + need) * 0.02f);
 	if (have < need) {

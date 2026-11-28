@@ -1,5 +1,5 @@
-extern int g_699368;
-extern int g_699368;
+extern int cut_NextCutsceneId;
+extern int cut_NextCutsceneId;
 
 
 
@@ -18,7 +18,7 @@ char* __cdecl cut_AllocCutscene(void* src)
 	p = cut_FindFreeCutscene();
 	if (p != 0) {
 		memcpy(p, src, 0x114);
-		*(int*) p = g_699368;
+		*(int*) p = cut_NextCutsceneId;
 		if (*(char*) (p + 0x31) == 0) {
 			*(char*) (p + 0x31) = 8;
 		}

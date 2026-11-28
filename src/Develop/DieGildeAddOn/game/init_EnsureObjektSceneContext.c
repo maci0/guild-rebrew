@@ -12,8 +12,8 @@ typedef struct D3_UNIVERSE_VIEW {
 #endif
 } D3_UNIVERSE_VIEW;
 
-extern char* g_7746cc;
-extern char g_10432c0[];
+extern char* sv_SelectedBuilding;
+extern char d3_Universes[];
 #ifdef REBREW_GOLD
 #define fcn_00413160 fcn_00411bb0
 #define init_LoadObjektScene fcn_0050d7f0
@@ -27,7 +27,7 @@ int __cdecl init_EnsureObjektSceneContext(char* object)
     int index;
 
     if (((signed char*) init_SceneContextIndices)[*(unsigned short*) object] == -1) {
-        if (object == g_7746cc) {
+        if (object == sv_SelectedBuilding) {
             init_LoadObjektScene(*(unsigned short*) object);
         } else {
             index = d3_FindFreeSceneContext();
@@ -35,8 +35,8 @@ int __cdecl init_EnsureObjektSceneContext(char* object)
                 return index;
             }
             ((signed char*) init_SceneContextIndices)[*(unsigned short*) object] = (signed char) index;
-            ((D3_UNIVERSE_VIEW*) g_10432c0)[index].verwendet = 1;
-            strcpy((char*) &((D3_UNIVERSE_VIEW*) g_10432c0)[index],
+            ((D3_UNIVERSE_VIEW*) d3_Universes)[index].verwendet = 1;
+            strcpy((char*) &((D3_UNIVERSE_VIEW*) d3_Universes)[index],
                 g_item_def_table + *(unsigned short*) object * 0x41 + 1);
         }
     }

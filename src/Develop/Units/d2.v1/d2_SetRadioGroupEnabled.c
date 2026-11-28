@@ -8,6 +8,6 @@ void __cdecl d2_SetRadioGroupEnabled(int g, int flag)
 	int j;
 
 	for (j = 0; j < *(int*) (((char*)g_102cbc4) + g * 0x8c); j++) {
-		*(int*)&((D2_CONTROL_TL*)g_1015ea0)[((int*) (((char*)g_102cbc4) + g * 0x8c + 8))[j]].disabled = flag == 0;
+		*(int*)&((D2_CONTROL_TL*)d2_Controls)[((int*) (((char*)g_102cbc4) + g * 0x8c + 8))[j]].disabled = flag == 0;
 	}
 }

@@ -2,7 +2,7 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/DieGildeAddOn/game/season_slots.h"
-extern char g_868060[];
+extern char gm_TownTable[];
 extern char* txt_TextEntries[];
 
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
@@ -89,8 +89,8 @@ int __cdecl fcn_00524040(void* stream)
 		}
 	}
 
-	ptr2 = (int)(g_868060 + 0x48);
-	while (ptr2 < (int)(g_868060 + 0xc18)) {
+	ptr2 = (int)(gm_TownTable + 0x48);
+	while (ptr2 < (int)(gm_TownTable + 0xc18)) {
 		char* q;
 		char* b;
 		char* inner;
@@ -233,7 +233,7 @@ int __cdecl fcn_00524040(void* stream)
 		ptr2 += 0x2f4;
 	}
 
-	sprintf(buf, "_STADTAUSWAHL_%s_INFO+0", g_868060);
+	sprintf(buf, "_STADTAUSWAHL_%s_INFO+0", gm_TownTable);
 	_strupr(buf);
 	ptr = txt_FindEntryIndex(buf);
 	if (ptr != -1) {
@@ -241,7 +241,7 @@ int __cdecl fcn_00524040(void* stream)
 		char* s;
 		char c;
 
-		delta = (int)(g_868060 + 0x20);
+		delta = (int)(gm_TownTable + 0x20);
 		s = txt_TextEntries[ptr];
 		delta = delta - (int)s;
 		do {
@@ -255,7 +255,7 @@ int __cdecl fcn_00524040(void* stream)
 		char* s;
 		char* d;
 
-		s = g_868060;
+		s = gm_TownTable;
 		d = s + 0x20;
 		strcpy(d, s);
 	}

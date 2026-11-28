@@ -1,7 +1,7 @@
 
 
 
-extern int* g_665f08;
+extern int* d2_TutorialState;
 extern char g_6a8354[];
 extern char g_6a2f5c[];
 extern int d2_CurrentWindowId;
@@ -19,7 +19,7 @@ int __cdecl d2_OpenTutorialMainDialog(void)
 	int o;
 	int v;
 
-	o = g_665f08[7];
+	o = d2_TutorialState[7];
 	if (o == 0) {
 		return -4;
 	}
@@ -27,15 +27,15 @@ int __cdecl d2_OpenTutorialMainDialog(void)
 		return -4;
 	}
 	d2_CreateActionPopupSlot(o, 0, 0, g_6a8354, 0x5ec);
-	v = *(int*) (g_665f08[7] + 0x74);
+	v = *(int*) (d2_TutorialState[7] + 0x74);
 	if (v == 0) {
 		return -1;
 	}
 	d2_CenterForm(*(int*) (v + 8), 3);
-	d2_CenterDialogWindows(*(int*) (*(int*) (g_665f08[7] + 0x74) + 8));
-	d2_SetForm(*(int*) (*(int*) (g_665f08[7] + 0x74) + 8), 0);
+	d2_CenterDialogWindows(*(int*) (*(int*) (d2_TutorialState[7] + 0x74) + 8));
+	d2_SetForm(*(int*) (*(int*) (d2_TutorialState[7] + 0x74) + 8), 0);
 	d2_InitWindowBounds(d2_CurrentWindowId);
-	d2_SetForm(*(int*) (*(int*) (g_665f08[7] + 0x74) + 8), 3);
-	g_665f08[8] = d2_GetWindowListItem(*(int*) (*(int*) (g_665f08[7] + 0x74) + 8), 3, io_AppendText(g_6a2f5c, 0x7d));
+	d2_SetForm(*(int*) (*(int*) (d2_TutorialState[7] + 0x74) + 8), 3);
+	d2_TutorialState[8] = d2_GetWindowListItem(*(int*) (*(int*) (d2_TutorialState[7] + 0x74) + 8), 3, io_AppendText(g_6a2f5c, 0x7d));
 	return 0;
 }

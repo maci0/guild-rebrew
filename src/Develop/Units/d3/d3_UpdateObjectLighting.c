@@ -1,6 +1,6 @@
 #include "Develop/Units/d3/client_lighting.h"
 
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 
 typedef struct D3_OBJECT_LIGHT_QUERY {
 	char* ref;
@@ -48,7 +48,7 @@ char __cdecl d3_UpdateObjectLighting(char* o)
 	}
 	color.u = 0;
 	color.b[0] = 0xff;
-	g_6b86d4++;
+	d3_SceneRenderLock++;
 	d3_UpdateObjectLodAndLighting(o);
 	*(int*) 0x633b18 = 0;
 	p = *(char**) mesh;
@@ -115,8 +115,8 @@ char __cdecl d3_UpdateObjectLighting(char* o)
 	d3_VisitSceneObjectsUntilStopped(*(char**) (o + 0x208), 0, 4, d3_UpdateChildObjectLightCallback, o);
 	*(int*) 0x633b18 = 0;
 	o[0x210] |= 4;
-	*(int*) (o + 0x44) = g_6b7fac;
+	*(int*) (o + 0x44) = gm_GameTicks;
 	*(int*) (*(char**) (o + 0x1ec) + 0x95c) = LightingUpdateCount;
-	g_6b86d4--;
+	d3_SceneRenderLock--;
 	return 1;
 }

@@ -5,7 +5,7 @@
 #include <string.h>
 #include <stdio.h>
 extern float g_100b0e0;
-extern int g_100b0f4, g_100e74c, ai_ResourceCount, g_100b0ac;
+extern int g_100b0f4, g_100e74c, ai_ResourceCount, ai_ProductionGoodsCount;
 extern char* g_100dbc0[];
 typedef struct {
 	int x0;
@@ -47,12 +47,12 @@ typedef struct {
 	char pad9e[0xf8 - 0x9e];
 } Msg; /* 0xf8 */
 extern int lpObjektePROT;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern int gm_GameTime;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
-extern int g_772620;
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
+extern int ai_DispatchedTradeCount;
 
 int __cdecl gm_CollectBuildingStock(char*, void*, int);
 int __cdecl gm_CalcEntityInventoryStats(char*, Stats*);
@@ -104,9 +104,9 @@ int __cdecl ai_MeisterTradeFernEinkauf(char* meister, char* warehouse)
 			    + *(unsigned short*) (*(int*) (meister + 0x16c) + 0x27) * 0x21c);
 			m.f0c = *(int*) (*(int*) (meister + 0x16c) + 1);
 			m.p28 = gm_GameTime;
-			m.p2c = g_7f4c04;
-			m.p30 = g_7f4c08;
-			m.p34 = g_7f4c0c;
+			m.p2c = gm_GameTimeHour;
+			m.p30 = gm_GameTimeSliceDword;
+			m.p34 = gm_GameTimeTailWord;
 			m.flag2 = 1;
 			gm_AddTime(&m.p28, 0, 0, 10);
 			m.f58 = *(int*) (ent + 2);
@@ -147,14 +147,14 @@ int __cdecl ai_MeisterTradeFernEinkauf(char* meister, char* warehouse)
 				}
 				sprintf(line, (char*) 0x67e8c0, *(int*) (meister + 0x16c) + 5,
 				    st.x68[i], st.x48[i] * 0x41 + 1 + lpObjektePROT);
-				tmp = (int) gm_GetSeasonPrice((int) st.x48[i], g_773d75);
+				tmp = (int) gm_GetSeasonPrice((int) st.x48[i], gm_ActiveTownIndex);
 				sprintf(line, (char*) 0x67e358, -1, *(int*) (cargo + 2),
-				    (int) st.x48[i], st.x68[i], g_773d75, (double) tmp);
+				    (int) st.x48[i], st.x68[i], gm_ActiveTownIndex, (double) tmp);
 				cm_SendSellObjekt(-1, *(int*) (cargo + 2), (short) st.x48[i],
-				    st.x68[i], (char) g_773d75,
-				    (int) gm_GetSeasonPrice((int) st.x48[i], g_773d75));
+				    st.x68[i], (char) gm_ActiveTownIndex,
+				    (int) gm_GetSeasonPrice((int) st.x48[i], gm_ActiveTownIndex));
 				*(int*) (meister + 0x1b8) = (int) (gm_GetSeasonPrice((int) st.x48[i],
-				    g_773d75) + *(int*) (meister + 0x1b8));
+				    gm_ActiveTownIndex) + *(int*) (meister + 0x1b8));
 				st.x48[i] = 0;
 				st.x68[i] = 0;
 			}
@@ -218,14 +218,14 @@ int __cdecl ai_MeisterTradeFernEinkauf(char* meister, char* warehouse)
 					    -1, (char) currency, i);
 					cm_RequestMoveCredits(-1, *(int*) (0x7f4ca4
 					    + *(unsigned short*) (*(int*) (meister + 0x16c) + 0x27) * 0x21c),
-					    (char) g_773d75, (int) ((double) i * 1.03));
+					    (char) gm_ActiveTownIndex, (int) ((double) i * 1.03));
 					cm_SendTraceEnd((char*) 0x67e8b0);
 				} else if (sums[currency] * 2 < tmp) {
 					i = tmp - sums[currency] * 9 / 8;
 					cm_SendLogAction((char*) 0x67e8b0);
 					cm_RequestMoveCredits(*(int*) (0x7f4ca4
 					    + *(unsigned short*) (*(int*) (meister + 0x16c) + 0x27) * 0x21c),
-					    -1, (char) g_773d75, i);
+					    -1, (char) gm_ActiveTownIndex, i);
 					cm_RequestMoveCredits(-1, *(int*) (0x7f4ca4
 					    + *(unsigned short*) (*(int*) (meister + 0x16c) + 0x27) * 0x21c),
 					    (char) currency, (int) ((double) i * 1.03));
@@ -236,7 +236,7 @@ int __cdecl ai_MeisterTradeFernEinkauf(char* meister, char* warehouse)
 		i = 0;
 		if (k < 3) {
 			n = k;
-			for (; i < g_100b0ac; i++) {
+			for (; i < ai_ProductionGoodsCount; i++) {
 				if (!(*(float*) (0x100d0c0 + i * 0x58 + 0x34) <= 0.0f)) {
 					break;
 				}
@@ -259,12 +259,12 @@ int __cdecl ai_MeisterTradeFernEinkauf(char* meister, char* warehouse)
 					    *(int*) (warehouse + 2), *(int*) (0x100d0c0 + i * 0x58),
 					    *(int*) (0x100d0c0 + i * 0x58 + 0x4c) > tmp
 					    ? tmp : *(int*) (0x100d0c0 + i * 0x58 + 0x4c),
-					    g_773d75, 0);
+					    gm_ActiveTownIndex, 0);
 					cm_SendSellObjekt(*(int*) (cargo + 2), *(int*) (warehouse + 2),
 					    *(short*) (0x100d0c0 + i * 0x58),
 					    *(int*) (0x100d0c0 + i * 0x58 + 0x4c) > tmp
 					    ? tmp : *(int*) (0x100d0c0 + i * 0x58 + 0x4c),
-					    (char) g_773d75, 0);
+					    (char) gm_ActiveTownIndex, 0);
 					m.ids[n] = *(unsigned short*) (0x100d0c0 + i * 0x58);
 					m.slots[n] = *(int*) (*(int*) (0x100d0c0 + i * 0x58 + 0x14) + 1);
 					n++;
@@ -285,16 +285,16 @@ int __cdecl ai_MeisterTradeFernEinkauf(char* meister, char* warehouse)
 		    + *(unsigned short*) (*(int*) (meister + 0x16c) + 0x27) * 0x21c);
 		m.f0c = *(int*) (*(int*) (meister + 0x16c) + 1);
 		m.p28 = gm_GameTime;
-		m.p2c = g_7f4c04;
-		m.p30 = g_7f4c08;
-		m.p34 = g_7f4c0c;
+		m.p2c = gm_GameTimeHour;
+		m.p30 = gm_GameTimeSliceDword;
+		m.p34 = gm_GameTimeTailWord;
 		m.flag2 = 1;
 		m.f58 = *(int*) (ent + 2);
 		m.f5c = tmp;
 		m.f60 = *(int*) (meister + 4);
 		if (*(int*) 0x100b0a4 == 0) {
 			cm_SendCopyEntityData(&m);
-			g_772620++;
+			ai_DispatchedTradeCount++;
 		}
 	}
 	return 1;

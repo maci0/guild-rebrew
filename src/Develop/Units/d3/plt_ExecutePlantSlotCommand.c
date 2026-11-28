@@ -2,7 +2,7 @@
 extern int g_7728f8;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char* lpGebaeudePROT;
-extern signed char g_7f3b00[];
+extern signed char d3_BuildingCategorySceneIndices[];
 
 #include "Develop/DieGildeAddOn/auxillary/plant.h"
 int __cdecl plt_CheckZoneAvailability(void*, unsigned int, unsigned int, unsigned int);
@@ -29,7 +29,7 @@ int __cdecl plt_ExecutePlantSlotCommand(int cmd, char* result)
 	found = (char*) 0x0;
 	needs_create = 0;
 
-	if (g_14cbca0 != -1)
+	if (nt_ClientSocket != -1)
 		g_7728f8 = *(int*) (cmd + 0x10);
 	entity = gm_StartFilteredEntitySearch(1, 1, *(int*) (cmd + 0x14));
 	if (entity != (void*) 0x0) {
@@ -62,7 +62,7 @@ int __cdecl plt_ExecutePlantSlotCommand(int cmd, char* result)
 				*(unsigned char*) (cmd + 0x19)
 			);
 			if (found != (char*) 0x0 && *(int*) (found + 0x10) == *(int*) (cmd + 0x1d)) {
-				d3_SelectSceneContext(g_7f3b00[lpGebaeudePROT[*(unsigned char*) entity + *(unsigned char*) entity * 0x24c]], 1);
+				d3_SelectSceneContext(d3_BuildingCategorySceneIndices[lpGebaeudePROT[*(unsigned char*) entity + *(unsigned char*) entity * 0x24c]], 1);
 				d3_DestroyObject((D3_OBJECT*) (*(void**) (found + 0x14)));
 				*(void**) (found + 0x14) = 0;
 				init_SetPflanzenMap(found, 0);
@@ -79,7 +79,7 @@ int __cdecl plt_ExecutePlantSlotCommand(int cmd, char* result)
 		}
 
 		if (needs_create != 0) {
-			d3_SelectSceneContext(g_7f3b00[lpGebaeudePROT[*(unsigned char*) entity + *(unsigned char*) entity * 0x24c]], 1);
+			d3_SelectSceneContext(d3_BuildingCategorySceneIndices[lpGebaeudePROT[*(unsigned char*) entity + *(unsigned char*) entity * 0x24c]], 1);
 			found = plt_SetPlantMapSlot(
 				*(void**) ((char*) entity + 0x71),
 				*(unsigned char*) (cmd + 0x18),

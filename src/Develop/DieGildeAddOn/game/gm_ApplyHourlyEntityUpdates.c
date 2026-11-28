@@ -18,7 +18,7 @@ struct s_7f4ca0 {
 	char pad5[0x6a];
 };
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 
 
@@ -37,7 +37,7 @@ void __cdecl gm_ApplyHourlyEntityUpdates(void)
 	char flag_val;
 
 	i = 0;
-	for (cursor = &((struct s_7f4ca0*)g_7f4ca0)[0].kind; (int) cursor < (int) &((struct s_7f4ca0*)g_7f4ca0)[768].kind; cursor += sizeof(struct s_7f4ca0)) {
+	for (cursor = &((struct s_7f4ca0*)gm_EntitySlotTable)[0].kind; (int) cursor < (int) &((struct s_7f4ca0*)gm_EntitySlotTable)[768].kind; cursor += sizeof(struct s_7f4ca0)) {
 		rec = (struct s_7f4ca0*) (cursor - 2);
 		if (rec->id != 0xffff) {
 			if (rec->b164 != 0 || rec->b165 != 0) {
@@ -49,7 +49,7 @@ void __cdecl gm_ApplyHourlyEntityUpdates(void)
 			if (rec->b1b1 > 0) {
 				flag_val = -1;
 				cm_BeginPacketFieldDelta((char*) rec, rec->f4);
-				cm_AppendPacketFieldValue(1, 1, cursor - g_aed32c + 0x1af, &flag_val);
+				cm_AppendPacketFieldValue(1, 1, cursor - cm_PacketDeltaBase + 0x1af, &flag_val);
 				cm_RequestChangeAttribute();
 			}
 		}

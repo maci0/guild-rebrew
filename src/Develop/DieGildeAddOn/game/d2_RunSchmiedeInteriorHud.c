@@ -1,11 +1,11 @@
 
 
 
-extern int g_7746d8;
+extern int d2_SelectedEntityUiFlags;
 extern int g_14ad0f8;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_14ad0e8;
-extern int g_7746a0;
+extern int sv_ClickedObjekt;
 
 void __cdecl d2_DispatchTutorialInput(int, char*, int, int);
 void __cdecl d2_ClearStatusTextSlots(void);
@@ -37,7 +37,7 @@ void __cdecl d2_RunSchmiedeInteriorHud(char* e)
 	d2_DispatchTutorialInput(0x1b, e, 0, 0);
 	d2_ClearStatusTextSlots();
 	while (main_RunFrameLoop((void*) d2_RunSchmiedeInteriorHud, 0x67fff) != 0) {
-		if (g_7746d8 & 0x200) {
+		if (d2_SelectedEntityUiFlags & 0x200) {
 			a = RegisterStatusText("contact_PRODUKTION_METALL", g_14ad0f8, 0x13);
 			b = RegisterStatusText("contact_TRANSPORT", g_14ad100, 0x15);
 			c = RegisterStatusText("contact_LAGER", g_14ad0f0, 0xe);
@@ -50,16 +50,16 @@ void __cdecl d2_RunSchmiedeInteriorHud(char* e)
 			}
 		}
 		d3_UpdateBuildingInteriorState();
-		if (g_7746a0 != 0) {
-			if (g_7746a0 == b) {
+		if (sv_ClickedObjekt != 0) {
+			if (sv_ClickedObjekt == b) {
 				d2_OpenTransportPanel(e);
-			} else if (g_7746a0 == c) {
+			} else if (sv_ClickedObjekt == c) {
 				d2_ShowLagerOptions(e, 0);
-			} else if (g_7746a0 == a) {
+			} else if (sv_ClickedObjekt == a) {
 				d2_RunMetalProduktionDialog(e);
-			} else if (g_7746a0 == d) {
+			} else if (sv_ClickedObjekt == d) {
 				d2_RunGelageDialog(e);
-			} else if (g_7746a0 == g || g_7746a0 == f) {
+			} else if (sv_ClickedObjekt == g || sv_ClickedObjekt == f) {
 				d2_RunWorkerTrainingDialog(e);
 			}
 		}

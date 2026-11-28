@@ -39,7 +39,7 @@ extern int g_7725d8;
 extern int g_100f1c0;
 extern int g_100f1c4;
 #include "Develop/client_types.h"
-extern Win_1015f40 g_1015f40[0x60];
+extern Win_1015f40 d2_Windows[0x60];
 extern int tp_d2_SelectedControl;
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern int g_67d38c;
@@ -94,26 +94,26 @@ done:
 		sel = d2_CurrentFont;
 	}
 	for (i = 0; i < 0x60; i++) {
-		if ((((Win*)g_1015f40)[i].style & 0x200) != 0 && ((Win*)g_1015f40)[i].tip_on == 1 && ((Win*)g_1015f40)[i].tip != 0) {
-			d2_SelectFont(((Win*)g_1015f40)[i].tip);
+		if ((((Win*)d2_Windows)[i].style & 0x200) != 0 && ((Win*)d2_Windows)[i].tip_on == 1 && ((Win*)d2_Windows)[i].tip != 0) {
+			d2_SelectFont(((Win*)d2_Windows)[i].tip);
 		}
 	}
-	if (d2_HoveredWindow != -1 && (w = &((Win*)g_1015f40)[d2_HoveredWindow]) != 0 && g_14ce8d0 != 0 && w->up_btn != -1 && w->down_btn != -1 && tp_d2_SelectedControl == 0) {
+	if (d2_HoveredWindow != -1 && (w = &((Win*)d2_Windows)[d2_HoveredWindow]) != 0 && g_14ce8d0 != 0 && w->up_btn != -1 && w->down_btn != -1 && tp_d2_SelectedControl == 0) {
 		if (d2_CurrentElementId == w->up_btn) {
-			w = &((Win*)g_1015f40)[(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[w->up_btn].value_1f0)];
+			w = &((Win*)d2_Windows)[(*(int*)&((D2_CONTROL_TL*)d2_Controls)[w->up_btn].value_1f0)];
 			if (w->scroll == w->scroll_max || w->scroll == 0) {
 				d = w->step;
 				d2_ScrollWindow(0, d, w->id);
 			}
 		} else if (d2_CurrentElementId == w->down_btn) {
-			w = &((Win*)g_1015f40)[(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[w->down_btn].value_1f0)];
+			w = &((Win*)d2_Windows)[(*(int*)&((D2_CONTROL_TL*)d2_Controls)[w->down_btn].value_1f0)];
 			if (w->scroll == w->scroll_max || w->scroll == 0) {
 				d = -w->step;
 				d2_ScrollWindow(0, d, w->id);
 			}
 		}
 	}
-	if (g_67d38c != -1 && (w = &((Win*)g_1015f40)[g_67d38c]) != 0 && g_14ce904 - g_14ce900 != 0 && (d = w->step) != 0 && tp_d2_SelectedControl == 0) {
+	if (g_67d38c != -1 && (w = &((Win*)d2_Windows)[g_67d38c]) != 0 && g_14ce904 - g_14ce900 != 0 && (d = w->step) != 0 && tp_d2_SelectedControl == 0) {
 		if (g_14ce904 != 0) {
 			d2_ScrollWindow(0, -d, w->id);
 		} else if (g_14ce900 != 0) {

@@ -4,7 +4,7 @@
 void __cdecl gm_FindRichestEntity(short* a, int* b);
 int __cdecl gm_AccumulateTyped2(unsigned short* e);
 #include "Develop/DieGildeAddOn/game/spiel.h"
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
 void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
@@ -38,7 +38,7 @@ void __cdecl gm_ApplyBardPoemEffect(unsigned char* entity, int a2, int a3)
 	int i;
 	char* rec;
 
-	cm_RequestMoveCredits(-1, *(int*) (entity + 4), g_773d75, a2);
+	cm_RequestMoveCredits(-1, *(int*) (entity + 4), gm_ActiveTownIndex, a2);
 	cm_RequestChangeBits(*(int*) (entity + 4), 0x1c8, 4, 0x20000, 0);
 	p = gm_GetBardEventEntry(a3);
 	if (p == 0)
@@ -53,7 +53,7 @@ void __cdecl gm_ApplyBardPoemEffect(unsigned char* entity, int a2, int a3)
 	}
 	if (p[0] == 1) {
 		for (i = 0; i < 768; i++) {
-			rec = ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]);
+			rec = ((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i]);
 			if (*(int*) (rec + 4) != *(int*) (entity + 4)
 			    && gm_MapEntityStatRange(*(unsigned char*) (rec + 0x164)) == *(unsigned short*) (p + 1))
 				cm_RequestCopyEntityData(*(int*) (entity + 4), *(int*) (rec + 4), gm_RandomMod(4) + 3, 0);

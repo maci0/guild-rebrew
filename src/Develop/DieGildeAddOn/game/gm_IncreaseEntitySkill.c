@@ -3,9 +3,9 @@
 
 extern float g_66413c;
 extern float g_66416c;
-extern float g_662d34;
+extern float flt_0_6;
 extern float g_6629d0;
-extern float g_6628a0;
+extern float flt_1_0;
 extern float g_665368;
 
 float __cdecl gm_RandomFloat01(void);

@@ -1,5 +1,5 @@
-extern char* g_1015ea0; /* 0x1015ea0, GUI pool, stride 0x2f4 */
-extern char* g_773d78;  /* 0x773d78 */
+extern char* d2_Controls; /* 0x1015ea0, GUI pool, stride 0x2f4 */
+extern char* gm_MarketEntity;  /* 0x773d78 */
 extern int g_14abc14;
 extern int d2_CurrentWindowId;    /* 0x772514 */
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -70,7 +70,7 @@ void __cdecl d2_InitWorkerOverlaySlots(int windowContext, char* entityName)
         } else {
             name = gm_EntityAccumulate(v);
             if (*name == 'D') {
-                name = g_773d78;
+                name = gm_MarketEntity;
             }
             io_FormatTextBuffer(buf, 0x1a3e, name);
         }
@@ -80,12 +80,12 @@ void __cdecl d2_InitWorkerOverlaySlots(int windowContext, char* entityName)
         if (entityName != name) {
             v = d2_AddElementToWindow(0, x, 5, d2_CurrentWindowId);
             *(int*) (i * 4 + 0x777cd0) = v;
-            *(unsigned int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[v].value_05c)) = 1;
-            *(char**) (&((D2_CONTROL_TL*)g_1015ea0)
+            *(unsigned int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[v].value_05c)) = 1;
+            *(char**) (&((D2_CONTROL_TL*)d2_Controls)
                        [*(int*) (i * 4 + 0x777cd0)].associated_object) = name;
             d2_SetElementFont(*(int*) (i * 4 + 0x777cd0), 0x56);
             d2_SetControlText(*(int*) (i * 4 + 0x777cd0), g_14abc14);
-            *(unsigned int*) (&((D2_CONTROL_TL*)g_1015ea0)
+            *(unsigned int*) (&((D2_CONTROL_TL*)d2_Controls)
                               [*(int*) (i * 4 + 0x777cd0)].flags_1d0) = 3;
         }
         i++;

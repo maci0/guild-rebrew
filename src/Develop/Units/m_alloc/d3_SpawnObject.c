@@ -1,7 +1,7 @@
 extern char s_67a3a0[];
 extern char s_67a384[];
 extern char g_6b8004;
-extern int g_67a370;
+extern int d3_ActiveScene;
 
 char* __cdecl m_alloc(int size, char* tag);
 void __cdecl d3_InitSceneObject(char* o);
@@ -49,6 +49,6 @@ char* __cdecl d3_SpawnObject(int kind, char* name)
 	}
 	*(int*) (o + 0x21c) = *(int*) (o + 0x218);
 	fcn_0064d530(o, name, 0x40);
-	*(int*) (o + 0x20c) = g_67a370;
+	*(int*) (o + 0x20c) = d3_ActiveScene;
 	return o;
 }

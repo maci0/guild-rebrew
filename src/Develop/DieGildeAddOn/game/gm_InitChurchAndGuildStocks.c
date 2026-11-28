@@ -2,7 +2,7 @@
 
 #include <string.h>
 
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_AddObjekt(void);
@@ -63,11 +63,11 @@ void __cdecl gm_InitChurchAndGuildStocks(void)
 					continue;
 				}
 				if (*s == 0x1e) {
-					cm_SendSellObjekt(*(int*) (a + 2), -1, ids[i], 2, (*(char*)&g_773d75), 0);
+					cm_SendSellObjekt(*(int*) (a + 2), -1, ids[i], 2, (*(char*)&gm_ActiveTownIndex), 0);
 				} else {
-					cm_SendSellObjekt(*(int*) (a + 2), -1, ids[i], 2 - (i != 0), (*(char*)&g_773d75), 0);
+					cm_SendSellObjekt(*(int*) (a + 2), -1, ids[i], 2 - (i != 0), (*(char*)&gm_ActiveTownIndex), 0);
 					if (i == 0) {
-						cm_SendSellObjekt(*(int*) (b + 2), -1, ids[0], gm_RandomMod(0x14) + 0x14, (*(char*)&g_773d75), 0);
+						cm_SendSellObjekt(*(int*) (b + 2), -1, ids[0], gm_RandomMod(0x14) + 0x14, (*(char*)&gm_ActiveTownIndex), 0);
 					}
 				}
 				switch (ids[i]) {
@@ -101,7 +101,7 @@ void __cdecl gm_InitChurchAndGuildStocks(void)
 				default:
 					continue;
 				}
-				cm_SendSellObjekt(*(int*) (a + 2), -1, v, 2 - (i != 0), (*(char*)&g_773d75), 0);
+				cm_SendSellObjekt(*(int*) (a + 2), -1, v, 2 - (i != 0), (*(char*)&gm_ActiveTownIndex), 0);
 			}
 		}
 	} while ((kind = *++p) != 0);

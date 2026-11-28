@@ -3,7 +3,7 @@
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/client_data.h"
 extern unsigned char* lpGebaeudePROT;
-extern int g_6b7fdc;
+extern int vfs_RootDir;
 
 
 
@@ -82,7 +82,7 @@ int __cdecl amt_ExecGebaeudeBauen(int a0, char* a1, char* a2)
 		else {
 			sprintf(path, (char*) 0x67f0ac, (char*) 0x7e1ae0, buildingName);
 		}
-		v6 = vfs_ResolvePath(path, g_6b7fdc, g_6b7fdc, resolvedPath);
+		v6 = vfs_ResolvePath(path, vfs_RootDir, vfs_RootDir, resolvedPath);
 		if (v6) {
 			break;
 		}

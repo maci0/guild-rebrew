@@ -28,7 +28,7 @@ int __cdecl cm_ExSetEntityRoute(char* command, unsigned char* response, unsigned
 		*(int*) ((char*) p + 0x29) = 0;
 	}
 	n = *(int*) (command + 0x14);
-	memcpy(buf, g_aed340, n * 64);
+	memcpy(buf, cm_IncomingPacketData, n * 64);
 	node = buf;
 
 	for (i = 0; i < n; i++) {

@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-extern int g_67a370;
+extern int d3_ActiveScene;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 float __cdecl gm_ScorePositionBalance(char* self, int x, int z, float range);
@@ -20,7 +20,7 @@ int __cdecl gm_FindBestCombatCell(char* self, int centerCol, int centerRow, int 
 	int row_hi;
 	int cell;
 
-	map = *(char**) (((char*) g_67a370) + 0xb0);
+	map = *(char**) (((char*) d3_ActiveScene) + 0xb0);
 	i = 0;
 	best = 0.0f;
 	for (; i < searchRadius; i++) {

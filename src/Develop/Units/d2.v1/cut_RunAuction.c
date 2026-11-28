@@ -6,11 +6,11 @@
  * count), bidder ids at +0x34, +0x7c and +0x80 the auctioneer data. */
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern int g_772f3c;
+extern int cut_SkipMode;
 extern char* gm_CityEntity;
 extern unsigned char* lpGebaeudePROT;
 typedef struct { unsigned char kind; unsigned char unknown01[0x24c]; } Building4e33a0;
-extern unsigned short g_774970;
+extern unsigned short gm_LocalPlayerSlot;
 
 void* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
 int __cdecl fcn_0064d41a(char* buf, char* fmt, ...);
@@ -198,7 +198,7 @@ void __cdecl cut_RunAuction(int* arg)
 	fcn_0064d41a(temp, (char*) 0x68d3a0, name);
 	d3snd_QueueSoundIfAllowed(result, bank_intro, temp, cut_RandMod(3), 500);
 	dlg = (int) d2_LoadForm(0, 0, "cutscenes\\pacht_main");
-	if (g_772f3c != 0)
+	if (cut_SkipMode != 0)
 		d2_SetFormVisibility(dlg, 0);
 	d2_CenterForm(dlg, 3);
 	d2_SetForm(dlg, 0);
@@ -262,7 +262,7 @@ void __cdecl cut_RunAuction(int* arg)
 		    200);
 		d2_SetForm(dlg, 0);
 		io_AppendText((void*) 0x1aa5, (void*) building);
-		if (arg[3] == *(int*) (&((ENTITY_RECORD*)g_7f4ca0)[(unsigned short)g_774970]
+		if (arg[3] == *(int*) (&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned short)gm_LocalPlayerSlot]
 		    .entity_id)) {
 			cm_SendSetGebBesitzer(*(int*) ((char*) building + 1),
 			    *(int*) (gm_CityEntity + 4),
@@ -275,12 +275,12 @@ void __cdecl cut_RunAuction(int* arg)
 		io_AppendText((void*) 0x1aa4,
 		    (void*) (*(unsigned short*) (char*) bidders[besti]),
 		    (void*) price);
-		if (arg[3] == *(int*) (&((ENTITY_RECORD*)g_7f4ca0)[(unsigned short)g_774970]
+		if (arg[3] == *(int*) (&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned short)gm_LocalPlayerSlot]
 		    .entity_id)) {
 						found = 0;
 			for (j = 0; j < 0x300; j++) {
-				if (((char*)&((ENTITY_RECORD*)g_7f4ca0)[j])[0x166] == 0x0b) {
-					found = (int) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[j]));
+				if (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[j])[0x166] == 0x0b) {
+					found = (int) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[j]));
 					break;
 				}
 			}

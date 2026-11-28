@@ -61,10 +61,10 @@ int __cdecl amt_IsNextRoleStep(unsigned char* entity, int role);
 #endif
 
 #if !defined(REBREW_SERVER)
-extern Rec18_68da68 g_68da68[];
+extern Rec18_68da68 amt_OfficeRoleTemplates[];
 extern char g_68de84[];
-extern char g_6b5c60[];
-extern float g_6628a8;
+extern char str_empty[];
+extern float flt_0_0;
 extern char* gm_CityEntity;
 
 typedef struct {
@@ -190,9 +190,9 @@ typedef struct {
 #if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
 extern int g_9a9620[10];
 extern Rec18_68da68 g_9a9228[];
-extern int g_6b7fdc;
-extern int g_7f4c08;
-extern short g_7f4c0c;
+extern int vfs_RootDir;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
 extern char g_67f0ac[];
 extern char g_68de2c[];
 
@@ -557,7 +557,7 @@ found2:
 	if (((OFFICE_SLOT_VIEW*) amt_OfficeSlots)[i].tag != ((OFFICE_SLOT_VIEW*) amt_OfficeSlots)[j].tag) {
 		goto fail;
 	}
-	rec = ((OFFICE_ROLE_VIEW*) g_68da68)[((OFFICE_SLOT_VIEW*) amt_OfficeSlots)[i].tag];
+	rec = ((OFFICE_ROLE_VIEW*) amt_OfficeRoleTemplates)[((OFFICE_SLOT_VIEW*) amt_OfficeSlots)[i].tag];
 	if (rec.f0 != c) {
 		goto fail;
 	}
@@ -1008,8 +1008,8 @@ int __cdecl amt_ApplyOfficeAssignment(char* requestData)
 					k++;
 				} while ((int) ip < (int) 0x9a94f4);
 			}
-			if (*(unsigned char*) ((char*)g_68da68 + ((OFFICE_ASSIGN_SLOT*) amt_OfficeSlots)[i].f08 * 0x18 + 8) >=
-			    *(unsigned char*) ((char*)g_68da68 + *(unsigned char*) (ent + 0x166) * 0x18 + 8))
+			if (*(unsigned char*) ((char*)amt_OfficeRoleTemplates + ((OFFICE_ASSIGN_SLOT*) amt_OfficeSlots)[i].f08 * 0x18 + 8) >=
+			    *(unsigned char*) ((char*)amt_OfficeRoleTemplates + *(unsigned char*) (ent + 0x166) * 0x18 + 8))
 				*(unsigned char*) (ent + 0x167) = ((OFFICE_ASSIGN_SLOT*) amt_OfficeSlots)[i].f08;
 			bit = ((OFFICE_ASSIGN_SLOT*) amt_OfficeSlots)[i].f08;
 			*(unsigned char*) (ent + 0x166) = bit;
@@ -1022,7 +1022,7 @@ int __cdecl amt_ApplyOfficeAssignment(char* requestData)
 			} else if (((OFFICE_ASSIGN_SLOT*) amt_OfficeSlots)[i].f08 == 0x1b) {
 				*(int*) (ent + 0x1cc) |= 0x100;
 			}
-			if (*(int*) ((char*)g_68da68 + ((OFFICE_ASSIGN_SLOT*) amt_OfficeSlots)[i].f08 * 0x18 + 0x10) != 0) {
+			if (*(int*) ((char*)amt_OfficeRoleTemplates + ((OFFICE_ASSIGN_SLOT*) amt_OfficeSlots)[i].f08 * 0x18 + 0x10) != 0) {
 				k = 0;
 				p = (unsigned char*) 0x9a9228;
 				do {
@@ -1075,7 +1075,7 @@ int __cdecl amt_ApplyOfficeAssignment(char* requestData)
 	if (*(unsigned char*) (requestData + 5) == 3)
 		((OFFICE_ASSIGN_SLOT*) amt_OfficeSlots)[i].f0c = 0;
 	if (setter != 0 && ent != 0 &&
-	    *(int*) ((unsigned long)&g_7f4ca4 + *(unsigned short*) &g_774970 * 0x21c) == *(int*) (ent + 4))
+	    *(int*) ((unsigned long)&gm_EntityIdField + *(unsigned short*) &gm_LocalPlayerSlot * 0x21c) == *(int*) (ent + 4))
 		he_NotifyOfficeAction(setter, ent);
 	return 1;
 }
@@ -1341,7 +1341,7 @@ int __cdecl amt_ClearEntityOffices(char* obj)
 	int ret;
 	unsigned short w;
 
-	w = g_7f4c04;
+	w = gm_GameTimeHour;
 	ret = 0;
 	a = 0x9a9234;
 	do {
@@ -1392,7 +1392,7 @@ void __cdecl amt_ReleaseEntityOffices(char* obj, int flag)
 	int v;
 	unsigned short w;
 
-	w = g_7f4c04;
+	w = gm_GameTimeHour;
 	a = BASE_A;
 	do {
 		v = *(int*) (obj + 4);
@@ -1534,7 +1534,7 @@ int __cdecl amt_GetOfficeGroup(int index)
     if (index >= 0x28) {
         return 0;
     }
-    return ((int (*)[6]) g_68da68)[index][1];
+    return ((int (*)[6]) amt_OfficeRoleTemplates)[index][1];
 }
 #endif
 
@@ -1645,7 +1645,7 @@ int __cdecl amt_FindOfficeSlotsByKind(int kind, int max, OFFICE_SLOT* out)
 		return 0;
 	n = 0;
 	for (i = start - 1; i >= 0 && n < max; i--) {
-		if (((OFFICE_ROLE_TEMPLATE*)g_68da68)[((OFFICE_SLOT*)amt_OfficeSlots)[i].mamt].f4 == kind)
+		if (((OFFICE_ROLE_TEMPLATE*)amt_OfficeRoleTemplates)[((OFFICE_SLOT*)amt_OfficeSlots)[i].mamt].f4 == kind)
 			out[n++] = ((OFFICE_SLOT*)amt_OfficeSlots)[i];
 	}
 	return n;
@@ -1701,7 +1701,7 @@ int __cdecl amt_CollectOfficeSlotsByGroup(int group, int max, OFFICE_SLOT* out)
 		return 0;
 	n = 0;
 	for (i = start - 1; i >= 0 && n < max; i--) {
-		if (((OFFICE_ROLE_TEMPLATE*)g_68da68)[((OFFICE_SLOT*)amt_OfficeSlots)[i].mamt].f4 == group &&
+		if (((OFFICE_ROLE_TEMPLATE*)amt_OfficeRoleTemplates)[((OFFICE_SLOT*)amt_OfficeSlots)[i].mamt].f4 == group &&
 		    gm_LookupEntityRecordById(((OFFICE_SLOT*)amt_OfficeSlots)[i].mplayerid) != 0)
 			out[n++] = ((OFFICE_SLOT*)amt_OfficeSlots)[i];
 	}
@@ -1744,7 +1744,7 @@ int __cdecl amt_CollectOfficeGroup7(int all, int max, Rec18_68da68* out)
 		if (n >= max) {
 			break;
 		}
-		if (g_68da68[amt_OfficeSlots[i].type].x4 == 7 && (all != 0 || amt_OfficeSlots[i].x4 != -1)) {
+		if (amt_OfficeRoleTemplates[amt_OfficeSlots[i].type].x4 == 7 && (all != 0 || amt_OfficeSlots[i].x4 != -1)) {
 			*out = amt_OfficeSlots[i];
 			n++;
 			out++;
@@ -1880,17 +1880,17 @@ int __cdecl amt_SelectOfficeCandidates(char* who, int n, OFFICE_PICK* picks)
 			continue;
 		better = 0;
 		for (j = n - 1; j >= 0; j--) {
-			if (picks[j].rank < ((Tmpl_4e8d10*)g_68da68)[t].rank)
+			if (picks[j].rank < ((Tmpl_4e8d10*)amt_OfficeRoleTemplates)[t].rank)
 				continue;
-			if (picks[j].rank != ((Tmpl_4e8d10*)g_68da68)[t].rank || !(picks[j].score <= score)) {
+			if (picks[j].rank != ((Tmpl_4e8d10*)amt_OfficeRoleTemplates)[t].rank || !(picks[j].score <= score)) {
 				better = 1;
 				break;
 			}
 		}
 		if (j == -1) {
 			j = 0;
-			if (picks[0].rank < ((Tmpl_4e8d10*)g_68da68)[t].rank ||
-			    (picks[0].rank == ((Tmpl_4e8d10*)g_68da68)[t].rank && picks[0].score <= score))
+			if (picks[0].rank < ((Tmpl_4e8d10*)amt_OfficeRoleTemplates)[t].rank ||
+			    (picks[0].rank == ((Tmpl_4e8d10*)amt_OfficeRoleTemplates)[t].rank && picks[0].score <= score))
 				better = 1;
 		}
 		if (better) {
@@ -1900,7 +1900,7 @@ int __cdecl amt_SelectOfficeCandidates(char* who, int n, OFFICE_PICK* picks)
 				picks[k].score = picks[k - 1].score;
 				picks[k].type = picks[k - 1].type;
 			}
-			picks[j].rank = ((Tmpl_4e8d10*)g_68da68)[((Slot_4e8d10*)amt_OfficeSlots)[i].type].rank;
+			picks[j].rank = ((Tmpl_4e8d10*)amt_OfficeRoleTemplates)[((Slot_4e8d10*)amt_OfficeSlots)[i].type].rank;
 			picks[j].score = score;
 			picks[j].type = ((Slot_4e8d10*)amt_OfficeSlots)[i].type;
 		}
@@ -2052,17 +2052,17 @@ int __cdecl amt_RankAvailableOffices(char* who, int n, OFFICE_PICK* picks, int* 
 			continue;
 		better = 0;
 		for (j = n - 1; j >= 0; j--) {
-			if (picks[j].rank < ((Tmpl_4e8d10*)g_68da68)[t].rank)
+			if (picks[j].rank < ((Tmpl_4e8d10*)amt_OfficeRoleTemplates)[t].rank)
 				continue;
-			if (picks[j].rank != ((Tmpl_4e8d10*)g_68da68)[t].rank || !(picks[j].score <= score)) {
+			if (picks[j].rank != ((Tmpl_4e8d10*)amt_OfficeRoleTemplates)[t].rank || !(picks[j].score <= score)) {
 				better = 1;
 				break;
 			}
 		}
 		if (j == -1) {
 			j = 0;
-			if (picks[0].rank < ((Tmpl_4e8d10*)g_68da68)[t].rank ||
-			    (picks[0].rank == ((Tmpl_4e8d10*)g_68da68)[t].rank && picks[0].score <= score))
+			if (picks[0].rank < ((Tmpl_4e8d10*)amt_OfficeRoleTemplates)[t].rank ||
+			    (picks[0].rank == ((Tmpl_4e8d10*)amt_OfficeRoleTemplates)[t].rank && picks[0].score <= score))
 				better = 1;
 		}
 		if (better) {
@@ -2072,7 +2072,7 @@ int __cdecl amt_RankAvailableOffices(char* who, int n, OFFICE_PICK* picks, int* 
 				picks[k].score = picks[k - 1].score;
 				picks[k].type = picks[k - 1].type;
 			}
-			picks[j].rank = ((Tmpl_4e8d10*)g_68da68)[((Slot_4e8d10*)amt_OfficeSlots)[i].type].rank;
+			picks[j].rank = ((Tmpl_4e8d10*)amt_OfficeRoleTemplates)[((Slot_4e8d10*)amt_OfficeSlots)[i].type].rank;
 			picks[j].score = score;
 			picks[j].type = ((Slot_4e8d10*)amt_OfficeSlots)[i].type;
 		}
@@ -2600,7 +2600,7 @@ int __cdecl amt_PurchaseOfficeApplication(unsigned char* entity, int office_id)
 		return 0;
 	}
 	lo = info.cost_lo;
-	cm_RequestTransferCurrencyNoKill(*(int*) (entity + 4), -1, g_773d75,
+	cm_RequestTransferCurrencyNoKill(*(int*) (entity + 4), -1, gm_ActiveTownIndex,
 	    (unsigned short) gm_RandomMod((unsigned short) (info.cost_hi - lo + 1)) + lo);
 	rnd = (unsigned short) gm_RandomMod((unsigned short) (info.b - info.a + 1)) + info.a;
 	cm_BeginPacketFieldDelta(entity, *(int*) (entity + 4));
@@ -2622,7 +2622,7 @@ int* __cdecl amt_CountRolesByLevel(void)
 	unsigned char state;
 
 	memset(g_9a9620, 0, sizeof(g_9a9620));
-	for (p = (int) (g_7f4ca0 + 0x167); p < (int) (g_7f4ca0 + 0x167 + 0x65400); p += 0x21c) {
+	for (p = (int) (gm_EntitySlotTable + 0x167); p < (int) (gm_EntitySlotTable + 0x167 + 0x65400); p += 0x21c) {
 		state = *(unsigned char*) (p - 0x165);
 		if (state >= 2 && state <= 7) {
 			if (*(unsigned char*) p == 0) {
@@ -2941,8 +2941,8 @@ int __cdecl amt_ProcessOfficeElections(void)
 					}
 				} else if (recs[j].status == 3 && recs[j].pcount > 0) {
 					m = recs[j].mamt;
-					for (h = (char*) g_7f4ca2;
-						(int) h < (int) (g_7f4ca2 + 768);
+					for (h = (char*) gm_SlotTableKindView;
+						(int) h < (int) (gm_SlotTableKindView + 768);
 						h += 0x21c) {
 						if (*(unsigned char*) (h + 0x166) == m) {
 							flags[i] |= 1;
@@ -3191,7 +3191,7 @@ void __cdecl amt_SyncAllOfficeSlots(void)
 			}
 		}
 	}
-	for (p = g_7f4ca0 + 0x168; (int) p < (int) (g_7f4ca0 + 0x168 + 0x65400); p += 0x21c) {
+	for (p = gm_EntitySlotTable + 0x168; (int) p < (int) (gm_EntitySlotTable + 0x168 + 0x65400); p += 0x21c) {
 		if (*(unsigned char*) p != 0) {
 			int v = 0;
 			cm_BeginPacketFieldDelta(p - 0x168, *(int*) (p - 0x164));
@@ -3238,7 +3238,7 @@ int __cdecl amt_HasOccupiedOfficeType7(void)
 		if (n == 0) {
 			break;
 		}
-		if (g_68da68[amt_OfficeSlots[i].type].x4 == 7) {
+		if (amt_OfficeRoleTemplates[amt_OfficeSlots[i].type].x4 == 7) {
 			if (amt_OfficeSlots[i].x4 != -1) {
 				if (gm_LookupEntityRecordById(amt_OfficeSlots[i].x4) != 0) {
 					return 1;
@@ -3264,10 +3264,10 @@ void __cdecl amt_NotifyOfficeAppointed(unsigned char* e, int k)
 		return;
 	io_FormatTextBuffer(buf, 0x1c19, *(unsigned short*) e, 0x1c1b, (e[9] != 0 ? 0x27b : 0x253) + k);
 	for (i = 0; i < 0x300; i++) {
-		if (g_7f4ca4[i * 0x21c - 2] == 6)
-			he_PostEntityMessage(*(int*) (g_7f4ca4 + i * 0x21c), -1, buf, 0, 0x5fd, g_6b5c60);
-		else if (g_7f4ca4[i * 0x21c - 2] == 7)
-			he_PostEntityMessage(*(int*) (g_7f4ca4 + i * 0x21c), -1, buf, 0, 0x5fe, g_6b5c60);
+		if (gm_EntityIdField[i * 0x21c - 2] == 6)
+			he_PostEntityMessage(*(int*) (gm_EntityIdField + i * 0x21c), -1, buf, 0, 0x5fd, str_empty);
+		else if (gm_EntityIdField[i * 0x21c - 2] == 7)
+			he_PostEntityMessage(*(int*) (gm_EntityIdField + i * 0x21c), -1, buf, 0, 0x5fe, str_empty);
 	}
 }
 #endif
@@ -3288,15 +3288,15 @@ void __cdecl amt_NotifyOfficeLost(void* entity, char* role)
 	if (kind == 6 || kind == 7 || kind == 5) {
 		io_FormatTextBuffer(buf, 0x1c21, *(unsigned short*) entity,
 		    role + (*(char*) ((char*) entity + 9) ? 0x27b : 0x253));
-		slot = g_7f4ca4;
+		slot = gm_EntityIdField;
 		do {
 			if (*(char*) (slot - 2) == 6) {
-				he_PostEntityMessage(*(int*) slot, -1, buf, 0, 0x5fd, g_6b5c60);
+				he_PostEntityMessage(*(int*) slot, -1, buf, 0, 0x5fd, str_empty);
 			} else if (*(char*) (slot - 2) == 7) {
-				he_PostEntityMessage(*(int*) slot, -1, buf, 0, 0x5fe, g_6b5c60);
+				he_PostEntityMessage(*(int*) slot, -1, buf, 0, 0x5fe, str_empty);
 			}
 			slot += 0x21c;
-		} while ((int) slot < (int) (g_7f4ca4 + 0x65400));
+		} while ((int) slot < (int) (gm_EntityIdField + 0x65400));
 	}
 }
 #endif
@@ -3338,7 +3338,7 @@ void __cdecl amt_FillOffice0x1c0x1dFromRichest(void)
 			owner_id = *(unsigned short*) (ent + 0x27);
 			if (owner_id != 0xffff && owner_id != *(unsigned short*) gm_CityEntity && (*(unsigned char*) (ent + 0x5a) & 1) == 0) {
 				found++;
-				rec = (char*) (((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[owner_id]));
+				rec = (char*) (((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[owner_id]));
 				t = *(unsigned char*) (rec + 0x164);
 				if (t >= 1 && t <= 6) {
 					for (i = 0; i < 0x10; i++) {
@@ -3364,7 +3364,7 @@ void __cdecl amt_FillOffice0x1c0x1dFromRichest(void)
 			owner_id = *(unsigned short*) (ent + 0x27);
 			if (owner_id != 0xffff && owner_id != *(unsigned short*) gm_CityEntity && (*(unsigned char*) (ent + 0x5a) & 1) == 0) {
 				found++;
-				rec = (char*) (((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[owner_id]));
+				rec = (char*) (((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[owner_id]));
 				t = *(unsigned char*) (rec + 0x164);
 				if (t >= 0x28 && t <= 0x2d) {
 					for (i = 0; i < 0x10; i++) {
@@ -3489,7 +3489,7 @@ void __cdecl amt_FillOffice0x22FromRichest(void)
 	for (e = gm_StartFilteredEntitySearch(1, 5, 7); e != 0 && k < 16; e = gm_FindNextFilteredEntity()) {
 		if (*(unsigned short*) (e + 0x27) != 0xffff && !(e[0x5a] & 1)) {
 			total++;
-			o = &((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (e + 0x27)];
+			o = &((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (e + 0x27)];
 			if (o->unk_164 >= 0xd && o->unk_164 <= 0x12) {
 				for (j = 0; j < 16; j++) {
 					if (list[j] == o) {
@@ -3669,9 +3669,9 @@ void __cdecl amt_calc_zuenfte(unsigned int kind)
 				*(int*) (req + 0x08) = *(int*) (gm_CityEntity + 4);
 				*(int*) (req + 0x0c) = -1;
 				*(int*) (req + 0x28) = gm_GameTime.a;
-				*(int*) (req + 0x2c) = (*(int*) &g_7f4c04);
-				*(int*) (req + 0x30) = g_7f4c08;
-				*(unsigned short*) (req + 0x34) = g_7f4c0c;
+				*(int*) (req + 0x2c) = (*(int*) &gm_GameTimeHour);
+				*(int*) (req + 0x30) = gm_GameTimeSliceDword;
+				*(unsigned short*) (req + 0x34) = gm_GameTimeTailWord;
 				req[0x36] = 2;
 				*(int*) (req + 0x58) = *(int*) (gm_CityEntity + 4);
 				*(int*) (req + 0x5c) = row;
@@ -4191,25 +4191,25 @@ found:
 	}
 	t = gm_GetEntitySkill(self, 2);
 	if (packet[2] == 1) {
-		scale = (float) (gm_RandomFloat01() + g_6628a0) * t * 0.4f + *(float*) 0x664198;
+		scale = (float) (gm_RandomFloat01() + flt_1_0) * t * 0.4f + *(float*) 0x664198;
 	} else {
 		scale = *(double*) 0x6629c8 -
-			((float) (gm_RandomFloat01() + g_6628a0) * t * 0.3f + *(double*) 0x6628f0);
+			((float) (gm_RandomFloat01() + flt_1_0) * t * 0.3f + *(double*) 0x6628f0);
 	}
 
-	e = gm_FindSlotById(g_773d75, v20);
+	e = gm_FindSlotById(gm_ActiveTownIndex, v20);
 	if (e != 0) {
 		ent = *e;
 		ent.f24 = ent.f20 * scale;
-		ent.f38 = gm_CalcMarketSlotPriceByObjektId(g_773d75, v20);
-		cm_SendMarktSlotDelta(&ent, g_773d75);
+		ent.f38 = gm_CalcMarketSlotPriceByObjektId(gm_ActiveTownIndex, v20);
+		cm_SendMarktSlotDelta(&ent, gm_ActiveTownIndex);
 		packet[3] = v20;
-		e = gm_FindSlotById(g_773d75, secondId);
+		e = gm_FindSlotById(gm_ActiveTownIndex, secondId);
 		if (e != 0) {
 			ent = *e;
 			ent.f24 = ent.f20 * scale;
-			ent.f38 = gm_CalcMarketSlotPriceByObjektId(g_773d75, secondId);
-			cm_SendMarktSlotDelta(&ent, g_773d75);
+			ent.f38 = gm_CalcMarketSlotPriceByObjektId(gm_ActiveTownIndex, secondId);
+			cm_SendMarktSlotDelta(&ent, gm_ActiveTownIndex);
 			packet[4] = secondId;
 		}
 		cm_RequestChangeBits(*(int*) (self + 4), 0x1c8, 4, 0x4000000, 0);
@@ -4257,32 +4257,33 @@ int __cdecl gm_ExecZunftAufruhr(char* e, int* msg)
 	}
 	f = gm_GetEntitySkill(e, 4);
 	amount = (int) (((gm_RandomFloat01() + 1.0f) * f * 15.0f + 5.0) * 2.55f);
-	cm_RequestTransferCurrencyNoKill(-1, *(int*) (e + 4), (*(char*)&g_773d75), msg[2]);
+	cm_RequestTransferCurrencyNoKill(-1, *(int*) (e + 4), (*(char*)&gm_ActiveTownIndex), msg[2]);
 	for (i = 0, cnt = 0; i < 0x300; i++) {
-		if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_index != 0xffff && (*(char**)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].ptr_16c) == h && *(unsigned short*) (h + 0x27) != i) {
-			cm_RequestCopyEntityData(((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (h + 0x27)].entity_id, ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id, -amount, 1);
+		if (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_index != 0xffff && (*(char**)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].ptr_16c) == h && *(unsigned short*) (h + 0x27) != i) {
+			cm_RequestCopyEntityData(((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (h + 0x27)].entity_id, ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_id, -amount, 1);
 			cnt++;
 		}
 	}
 	if (cnt != 0) {
 		amount = (int) ((float) msg[2] / cnt) + 0x20;
 		for (i = 0; i < 0x300; i++) {
-			if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_index != 0xffff && (*(char**)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].ptr_16c) == h && *(unsigned short*) (h + 0x27) != i) {
-				cm_RequestTransferCurrencyNoKill(((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id, -1, (*(char*)&g_773d75), amount);
+			if (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_index != 0xffff && (*(char**)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].ptr_16c) == h && *(unsigned short*) (h + 0x27) != i) {
+				cm_RequestTransferCurrencyNoKill(((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_id, -1, (*(char*)&gm_ActiveTownIndex), amount);
 			}
 		}
 	}
 	gm_ModifyHealth(*(int*) (e + 4), -5);
 	cm_RequestChangeBits(*(int*) (e + 4), 0x1c8, 4, 0x8000000, 0);
-	if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (h + 0x27)].entity_type == 7 || ((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (h + 0x27)].entity_type == 6) {
+	if (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (h + 0x27)].entity_type == 7 || ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (h + 0x27)].entity_type == 6) {
 		io_FormatTextBuffer(buf, 0x1663, h);
-		he_MessageBoxQuickjump(((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (h + 0x27)].entity_id, -1, buf, 0, 0x5fb, *(int*) (h + 1), -1, 0, "");
+		he_MessageBoxQuickjump(((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (h + 0x27)].entity_id, -1, buf, 0, 0x5fb, *(int*) (h + 1), -1, 0, "");
 	}
 	io_FormatTextBuffer(buf, 0x1662, *(unsigned short*) (h + 0x27), h);
 	for (i = 0; i < 0x300; i++) {
-		if ((((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 7 || ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 6) && *(int*) (e + 4) != ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id
-		    && ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id != ((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (h + 0x27)].entity_id) {
-			he_PostEntityMessage(((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id, -1, buf, 0, 0x5fd, "");
+		if ((((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_type == 7 || ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_type == 6) &&
+			*(int*) (e + 4) != ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_id
+		    && ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_id != ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (h + 0x27)].entity_id) {
+			he_PostEntityMessage(((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_id, -1, buf, 0, 0x5fd, "");
 		}
 	}
 	if (e[2] == 6) {
@@ -4337,15 +4338,15 @@ unsigned int __cdecl amt_HandleOfficeAction(char* e, unsigned int* target)
 		if (f > 0.3f) {
 			if (7 == h[2] || 6 == h[2]) {
 				io_FormatTextBuffer(buf, 0x1684);
-				he_PostEntityMessage(*(int*) (h + 4), -1, buf, 0, 0x5fb, g_6b5c60);
+				he_PostEntityMessage(*(int*) (h + 4), -1, buf, 0, 0x5fb, str_empty);
 			}
 			io_FormatTextBuffer(buf, 0x1682, *(unsigned short*) h, *(unsigned short*) h);
-			p = g_7f4ca4;
+			p = gm_EntityIdField;
 			do {
 				if ((7 == p[-2] || 6 == p[-2]) && *(int*) p != *(int*) (h + 4) && *(int*) p != *(int*) (e + 4))
-					he_PostEntityMessage(*(int*) p, -1, buf, 0, 0x5fe, g_6b5c60);
+					he_PostEntityMessage(*(int*) p, -1, buf, 0, 0x5fe, str_empty);
 				p += 0x21c;
-			} while ((int) p < (int) (g_7f4ca4 + 0x65400));
+			} while ((int) p < (int) (gm_EntityIdField + 0x65400));
 			if (e[2] == 6) {
 				io_FormatTextBuffer(buf, 0x1680, *(unsigned short*) h, *(unsigned short*) h);
 				d2_ShowModalMessageBox(buf, 0);
@@ -4353,15 +4354,15 @@ unsigned int __cdecl amt_HandleOfficeAction(char* e, unsigned int* target)
 		} else {
 			if (7 == h[2] || 6 == h[2]) {
 				io_FormatTextBuffer(buf, 0x1685);
-				he_PostEntityMessage(*(int*) (h + 4), -1, buf, 0, 0x5fb, g_6b5c60);
+				he_PostEntityMessage(*(int*) (h + 4), -1, buf, 0, 0x5fb, str_empty);
 			}
 			io_FormatTextBuffer(buf, 0x1683, *(unsigned short*) h, *(unsigned short*) h);
-			p = g_7f4ca4;
+			p = gm_EntityIdField;
 			do {
 				if ((7 == p[-2] || 6 == p[-2]) && *(int*) p != *(int*) (h + 4) && *(int*) p != *(int*) (e + 4))
-					he_PostEntityMessage(*(int*) p, -1, buf, 0, 0x5fe, g_6b5c60);
+					he_PostEntityMessage(*(int*) p, -1, buf, 0, 0x5fe, str_empty);
 				p += 0x21c;
-			} while ((int) p < (int) (g_7f4ca4 + 0x65400));
+			} while ((int) p < (int) (gm_EntityIdField + 0x65400));
 			if (e[2] == 6) {
 				io_FormatTextBuffer(buf, 0x1681, *(unsigned short*) h, *(unsigned short*) h);
 				d2_ShowModalMessageBox(buf, 0);
@@ -4392,24 +4393,24 @@ unsigned int __cdecl amt_HandleOfficeAction(char* e, unsigned int* target)
 		cm_RequestChangeBits(*(int*) (e + 4), 0x1c8, 4, 0x10000000, 0);
 		if (f > 0.3f) {
 			io_FormatTextBuffer(buf, 0x167a, target[1] + 0x1663);
-			p = g_7f4ca4;
+			p = gm_EntityIdField;
 			do {
 				if ((7 == p[-2] || 6 == p[-2]) && *(int*) p != *(int*) (e + 4))
-					he_PostEntityMessage(*(int*) p, -1, buf, 0, 0x5fd, g_6b5c60);
+					he_PostEntityMessage(*(int*) p, -1, buf, 0, 0x5fd, str_empty);
 				p += 0x21c;
-			} while ((int) p < (int) (g_7f4ca4 + 0x65400));
+			} while ((int) p < (int) (gm_EntityIdField + 0x65400));
 			if (e[2] == 6) {
 				io_FormatTextBuffer(buf, 0x1678, target[1] + 0x1663);
 				d2_ShowModalMessageBox(buf, 0);
 			}
 		} else {
 			io_FormatTextBuffer(buf, 0x167b, target[1] + 0x1663);
-			p = g_7f4ca4;
+			p = gm_EntityIdField;
 			do {
 				if ((7 == p[-2] || 6 == p[-2]) && *(int*) p != *(int*) (e + 4))
-					he_PostEntityMessage(*(int*) p, -1, buf, 0, 0x5fe, g_6b5c60);
+					he_PostEntityMessage(*(int*) p, -1, buf, 0, 0x5fe, str_empty);
 				p += 0x21c;
-			} while ((int) p < (int) (g_7f4ca4 + 0x65400));
+			} while ((int) p < (int) (gm_EntityIdField + 0x65400));
 			if (e[2] == 6) {
 				io_FormatTextBuffer(buf, 0x1679, target[1] + 0x1663);
 				d2_ShowModalMessageBox(buf, 0);
@@ -4445,20 +4446,20 @@ unsigned int __cdecl amt_HandleOfficeAction(char* e, unsigned int* target)
 		if (f > 0.3f) {
 			io_FormatTextBuffer(buf, 0x1672, target[1] + 0x1663);
 			io_FormatTextBuffer(buf2, 0x1670, target[1] + 0x1663);
-			p = g_7f4ca4;
+			p = gm_EntityIdField;
 			do {
 				if ((7 == p[-2] || 6 == p[-2]) && *(int*) p != *(int*) (e + 4)) {
 					for (k = 0; k < n; k++) {
 						if (arr[k].mplayerid == *(int*) p) {
-							he_PostEntityMessage(*(int*) p, -1, buf, 0, 0x5fb, g_6b5c60);
+							he_PostEntityMessage(*(int*) p, -1, buf, 0, 0x5fb, str_empty);
 							goto next_p1;
 						}
 					}
-					he_PostEntityMessage(*(int*) p, -1, buf2, 0, 0x5fe, g_6b5c60);
+					he_PostEntityMessage(*(int*) p, -1, buf2, 0, 0x5fe, str_empty);
 				}
 			next_p1:
 				p += 0x21c;
-			} while ((int) p < (int) (g_7f4ca4 + 0x65400));
+			} while ((int) p < (int) (gm_EntityIdField + 0x65400));
 			if (e[2] == 6) {
 				io_FormatTextBuffer(buf, 0x166e, target[1] + 0x1663);
 				d2_ShowModalMessageBox(buf, 0);
@@ -4467,20 +4468,20 @@ unsigned int __cdecl amt_HandleOfficeAction(char* e, unsigned int* target)
 		} else {
 			io_FormatTextBuffer(buf, 0x1673, target[1] + 0x1663);
 			io_FormatTextBuffer(buf2, 0x1671, target[1] + 0x1663);
-			p = g_7f4ca4;
+			p = gm_EntityIdField;
 			do {
 				if ((7 == p[-2] || 6 == p[-2]) && *(int*) p != *(int*) (e + 4)) {
 					for (k = 0; k < n; k++) {
 						if (arr[k].mplayerid == *(int*) p) {
-							he_PostEntityMessage(*(int*) p, -1, buf, 0, 0x5fb, g_6b5c60);
+							he_PostEntityMessage(*(int*) p, -1, buf, 0, 0x5fb, str_empty);
 							goto next_p2;
 						}
 					}
-					he_PostEntityMessage(*(int*) p, -1, buf2, 0, 0x5fe, g_6b5c60);
+					he_PostEntityMessage(*(int*) p, -1, buf2, 0, 0x5fe, str_empty);
 				}
 			next_p2:
 				p += 0x21c;
-			} while ((int) p < (int) (g_7f4ca4 + 0x65400));
+			} while ((int) p < (int) (gm_EntityIdField + 0x65400));
 			if (e[2] == 6) {
 				io_FormatTextBuffer(buf, 0x166f, target[1] + 0x1663);
 				d2_ShowModalMessageBox(buf, 0);
@@ -4526,7 +4527,7 @@ float __cdecl amt_GetOfficeAffinityScore(unsigned short* p, int kind)
 
 	sum = 0;
 	if (kind < 1 || kind > 7) {
-		return g_6628a8;
+		return flt_0_0;
 	}
 	n = amt_FindOfficeSlotsByKind(kind, 6, recs);
 	count = 0;

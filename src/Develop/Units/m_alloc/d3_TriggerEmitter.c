@@ -1,5 +1,5 @@
 extern char* evt_CurrentScript;
-extern char g_676cf8[];
+extern char str_TriggerEmitter_invalid_handle[];
 
 
 #include "Develop/Units/m_alloc/m_alloc_checks.h"
@@ -11,7 +11,7 @@ int __cdecl d3_TriggerEmitter(char** objectRef)
 
 	p = *objectRef;
 	if (m_is_tracked(p) == 0) {
-		evt_LogScriptError(evt_CurrentScript, *(int*) ((char*) evt_CurrentScript + 0x118), g_676cf8);
+		evt_LogScriptError(evt_CurrentScript, *(int*) ((char*) evt_CurrentScript + 0x118), str_TriggerEmitter_invalid_handle);
 		return 0;
 	}
 	p[0xcd] |= 2;

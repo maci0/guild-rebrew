@@ -1,5 +1,5 @@
 extern int gm_GameTime;
-extern char g_773d75;
+extern char gm_ActiveTownIndex;
 
 int __cdecl gm_MapEntityStatRange(int);
 void __cdecl gm_GetLawEntry(int, int*);
@@ -41,7 +41,7 @@ int __cdecl ai_EvaluateLaw0x09(char* entity, int unused, int* outResult)
 		}
 		guildItem = gm_GetGuildHall(1);
 		guildItem = fcn_00502cd0(*(int*) ((char*) guildItem + 0x5d), 2, 6, 0, 0x115);
-		treasuryStock = gm_SumQueryEntryValues(*(int*) ((char*) guildItem + 0x14), g_773d75);
+		treasuryStock = gm_SumQueryEntryValues(*(int*) ((char*) guildItem + 0x14), gm_ActiveTownIndex);
 		if (treasuryStock < 3 * (int) ((float) amt_CalcTotalOfficeSalaries() * 0.25f)) {
 			targetVal = targetVal + 1 + (gm_RandomMod(3) & 0xffff);
 		}

@@ -1,7 +1,7 @@
 #include <windows.h>
 
 typedef struct VFS_DIR VFS_DIR;
-extern VFS_DIR* g_6b7fdc;
+extern VFS_DIR* vfs_RootDir;
 #include "Develop/Units/vfs/vfs.h"
 unsigned int __cdecl vfs_fwrite(void* data, int size, int count, char* stream);
 
@@ -70,7 +70,7 @@ char __cdecl SaveBMP24(char* path, int width, int height, unsigned char* pixels)
 	info.bmiHeader.biWidth = width;
 	info.bmiHeader.biHeight = height;
 	info.bmiHeader.biBitCount = 24;
-	stream = vfs_Tfopen(path, "wbn", g_6b7fdc);
+	stream = vfs_Tfopen(path, "wbn", vfs_RootDir);
 	if (stream != 0) {
 		row = (unsigned char*) m_alloc(width * 3, "!bmp:SaveBMP24(temp_row)");
 		vfs_fwrite(&header, sizeof(header), 1, stream);

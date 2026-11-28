@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern char g_868060[];
+extern char gm_TownTable[];
 
 void* __cdecl gm_LookupEntityRecordById(int);
 
@@ -75,12 +75,12 @@ int __cdecl gm_HandleMsg24PostHandlungNews(char* request)
 	if (*(char*) o1 == 0x47) {
 		k = *(int*) (o1 + 0x65);
 		io_FormatTextBuffer(buf, *(unsigned short*) (request + 4) + 0x12e7,
-		             g_868060 + ((k << 6) - k) * 3 * 4, g_868060, g_868060);
+		             gm_TownTable + ((k << 6) - k) * 3 * 4, gm_TownTable, gm_TownTable);
 
 	} else {
 		k = *(int*) (o2 + 0x65);
-		io_FormatTextBuffer(buf, *(unsigned short*) (request + 4) + 0x12e7, g_868060,
-		             g_868060 + ((k << 6) - k) * 3 * 4, g_868060 + ((k << 6) - k) * 3 * 4);
+		io_FormatTextBuffer(buf, *(unsigned short*) (request + 4) + 0x12e7, gm_TownTable,
+		             gm_TownTable + ((k << 6) - k) * 3 * 4, gm_TownTable + ((k << 6) - k) * 3 * 4);
 	}
 	len = (int) strlen(buf);
 	he_PostEntityMessage(*(int*) (e + 4), *(int*) (e + 4), buf, (unsigned int) len > 0x100 ? 1 : 0, 0x5ef, 0);

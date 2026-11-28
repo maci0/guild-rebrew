@@ -3,7 +3,7 @@
 
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern float g_6628a8;
+extern float flt_0_0;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl ahm_FindRecipePrototypeByKey(int);
@@ -24,7 +24,7 @@ void __cdecl he_StartAhmRefineRecipe(char* u)
 		p = ahm_FindRecipePrototypeByKey(*(int*) (u + 0xb0));
 		if (p != 0) {
 			*(float*) (u + 0xb4) = ahm_CalcResearchStep(h, p, (int*) (u + 0xbc));
-			if (!(*(float*) (u + 0xb4) <= g_6628a8)) {
+			if (!(*(float*) (u + 0xb4) <= flt_0_0)) {
 				*(int*) (u + 0xb8) = *(int*) (u + 0xbc);
 				*(pos14_7f4c00*) (u + 0xc0) = gm_GameTime;
 				*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;

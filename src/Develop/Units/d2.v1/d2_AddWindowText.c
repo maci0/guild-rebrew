@@ -14,7 +14,7 @@ typedef struct
 // SIZE 0x2f4
 
 #include "Develop/client_types.h"
-extern Win_1015f40 g_1015f40[0x60];
+extern Win_1015f40 d2_Windows[0x60];
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int d2_ScreenHeight;
@@ -32,7 +32,7 @@ int __cdecl d2_AddWindowText(int x, int y, char* text, int win)
 	D2_WIN* w;
 	int id;
 
-	w = &((D2_WIN*)g_1015f40)[win];
+	w = &((D2_WIN*)d2_Windows)[win];
 	if (w->active == 0) {
 		return -1;
 	}
@@ -41,25 +41,25 @@ int __cdecl d2_AddWindowText(int x, int y, char* text, int win)
 		return -1;
 	}
 	id = d2_AllocateElement();
-	strcpy(((char*)&((D2_CONTROL_TL*)g_1015ea0)[id] + 0x90), text);
+	strcpy(((char*)&((D2_CONTROL_TL*)d2_Controls)[id] + 0x90), text);
 	if ((*(int*) &w->pad280[12]) != 0) {
-		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].font) = (*(int*) &w->pad280[12]);
+		(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].font) = (*(int*) &w->pad280[12]);
 	} else {
-		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].font) = d2_DefaultFont;
+		(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].font) = d2_DefaultFont;
 	}
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].kind) = 0x46;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].x) = w->left + x;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].y) = w->top - (*(int*) &w->pad3c[0x21c]) + y;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].width) = d2_MeasureTextWidth(text, (*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].font)) + 0x60;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].height) = d2_FontHeight;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].mode) = 2;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].parent) = (int) w;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].data) = (int) w;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_top) = 0;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_bottom) = d2_ScreenHeight;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_left) = 0;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_right) = g_1040494;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_050) = (*(int*)&((D2_CONTROL_TL*)g_1015ea0)[w->slot].value_050);
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].kind) = 0x46;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].x) = w->left + x;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].y) = w->top - (*(int*) &w->pad3c[0x21c]) + y;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].width) = d2_MeasureTextWidth(text, (*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].font)) + 0x60;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].height) = d2_FontHeight;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].mode) = 2;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].parent) = (int) w;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].data) = (int) w;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].clip_top) = 0;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].clip_bottom) = d2_ScreenHeight;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].clip_left) = 0;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].clip_right) = g_1040494;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].value_050) = (*(int*)&((D2_CONTROL_TL*)d2_Controls)[w->slot].value_050);
 	d2_InsertControlAfterWindow(id, w);
 	w->children[w->count] = id;
 	w->count++;

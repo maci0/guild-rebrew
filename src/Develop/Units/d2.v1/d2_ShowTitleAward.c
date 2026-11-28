@@ -1,13 +1,13 @@
 #include <string.h>
 #pragma intrinsic(strcpy)
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-extern char g_7f4ca0[];
-extern char g_774964;
+extern char gm_EntitySlotTable[];
+extern char gm_InWorldHud;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern int g_100f884;
 extern char g_7749e8;
-extern int g_7749e4;
+extern int tp_d2_ActiveHudSlot;
 
 int __cdecl d2_CreateActionPopupSlot(char*, short, short, char*, int);
 void __cdecl d2_CloseActionPopup(char*);
@@ -32,10 +32,10 @@ void __cdecl d2_ShowTitleAward(char* o)
 	int end;
 	int id;
 
-	slot = (short*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*)(o + 8)]);
-	if (g_774970 != *(unsigned short*) (o + 8))
+	slot = (short*) ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*)(o + 8)]);
+	if (gm_LocalPlayerSlot != *(unsigned short*) (o + 8))
 		return;
-	if (g_774964 == 0)
+	if (gm_InWorldHud == 0)
 		return;
 	if (gm_CompareGameTime(o + 0x52, (void*) 0x7f4c00) == 1)
 		return;
@@ -57,14 +57,14 @@ void __cdecl d2_ShowTitleAward(char* o)
 		}
 		if (g_100f884 != *(int*) (id + 8) && g_7749e8 == 0)
 			return;
-		if (g_100f1dc == 2) {
+		if (d2_DialogButtonAction == 2) {
 			d2_CloseActionPopup(o);
 			he_FreeAction(o);
 			return;
 		}
 		if (g_7749e8 == 0)
 			return;
-		if (g_7749e4 != id)
+		if (tp_d2_ActiveHudSlot != id)
 			return;
 		g_7749e8 = 0;
 		d2_CloseActionPopup(o);

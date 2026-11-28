@@ -1,4 +1,4 @@
-extern void* g_6b7fdc;
+extern void* vfs_RootDir;
 extern unsigned char g_6b85a4;
 
 void* __cdecl vfs_Tfopen(const char*, const char*, void*);
@@ -23,7 +23,7 @@ int __cdecl d3_LoadObjectFile(char* path, void* stream, char* parent)
 	if (stream != 0) {
 		s = stream;
 	} else {
-		s = vfs_Tfopen(path, (char*) 0x6750e8, g_6b7fdc);
+		s = vfs_Tfopen(path, (char*) 0x6750e8, vfs_RootDir);
 	}
 	if (s != 0) {
 		fcn_004011f0(s, &magic);

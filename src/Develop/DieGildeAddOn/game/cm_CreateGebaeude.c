@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char cm_LastBuildingId[];
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 // SIZE 0x30
 typedef struct {
@@ -19,7 +19,7 @@ int __cdecl cm_CreateGebaeude(int cmd, char* result)
 	int field_id;
 	int i;
 
-	if (g_14cbca0 != -1)
+	if (nt_ClientSocket != -1)
 		gm_NextEntityId = *(int*) (cmd + 0x10);
 	if (*(int*) (cmd + 0x16) == -1) {
 		i = 0xffff;
@@ -29,8 +29,8 @@ int __cdecl cm_CreateGebaeude(int cmd, char* result)
 		*(int*) (cmd + 0x16) = field_id;
 		i = 0;
 		while ((unsigned short) i < 0x300) {
-			if (*(unsigned short*) ((unsigned char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int)(unsigned short)i]) != (unsigned short) 0xffff &&
-				*(int*) ((unsigned char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int)(unsigned short)i] + 4) == field_id) {
+			if (*(unsigned short*) ((unsigned char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned int)(unsigned short)i]) != (unsigned short) 0xffff &&
+				*(int*) ((unsigned char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned int)(unsigned short)i] + 4) == field_id) {
 				break;
 			}
 			i = i + 1;

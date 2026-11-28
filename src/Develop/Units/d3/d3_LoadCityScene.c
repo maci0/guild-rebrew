@@ -1,4 +1,4 @@
-extern int g_67a370;
+extern int d3_ActiveScene;
 
 
 int __cdecl sprintf(char*, const char*, ...);
@@ -14,6 +14,6 @@ char __cdecl d3_LoadCityScene(const char* name)
 	if (!d3_LoadScene(path, 0, 0)) {
 		return 0;
 	}
-	d3_TraverseSceneObjects(g_67a370, 0, 6, d3_InitBuildingSceneAnimRates);
+	d3_TraverseSceneObjects(d3_ActiveScene, 0, 6, d3_InitBuildingSceneAnimRates);
 	return 1;
 }

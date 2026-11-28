@@ -30,11 +30,11 @@ typedef struct
 
 extern unsigned char* lpGebaeudePROT;
 extern char* gm_CityEntity;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern int g_666028;
 extern int g_66602c;
-extern int g_aed32c;
-extern char g_7f4ca4[];
+extern int cm_PacketDeltaBase;
+extern char gm_EntityIdField[];
 extern char s_6999a8[];
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
@@ -134,7 +134,7 @@ void __cdecl gm_LiquidateEntityAssets(unsigned short* subjectRecord, char* repor
 			pkt.x36 = 2;
 			pkt.x5c = gm_CalculateGebaeudeValue((int) cur, (int) (char) cur[0x5c]);
 			cm_SendCopyEntityData(&pkt);
-			q = (char*) g_7f4ca4;
+			q = (char*) gm_EntityIdField;
 			do {
 				if (*(unsigned char**) (q + 0x168) == cur && *(int*) q != *(int*) (subjectRecord + 2)) {
 					memset(&pkt, 0, sizeof(pkt));
@@ -153,13 +153,13 @@ void __cdecl gm_LiquidateEntityAssets(unsigned short* subjectRecord, char* repor
 		p = gm_FindNextFilteredEntity();
 	}
 	r = gm_SumTreasury(subjectRecord);
-	cm_RequestMoveCredits(*(int*) (sp + 4), -1, g_773d75, r);
+	cm_RequestMoveCredits(*(int*) (sp + 4), -1, gm_ActiveTownIndex, r);
 	p = (unsigned char*) fcn_00502cd0(*(int*) (subjectRecord + 0xbc), 1, 5);
 	while (p != 0) {
 		cm_SendRemoveLinkedObject(*(int*) (subjectRecord + 2), -1, *(int*) (p + 2));
 		p = gm_NextEntityQueryMatch();
 	}
-	cm_RequestMoveCredits(*(int*) (subjectRecord + 2), -1, g_773d75, gm_ConvertUnitsToAmount(0x5dc, g_773d75));
+	cm_RequestMoveCredits(*(int*) (subjectRecord + 2), -1, gm_ActiveTownIndex, gm_ConvertUnitsToAmount(0x5dc, gm_ActiveTownIndex));
 	if (resetAttributes != 0) {
 		i = 100;
 		ui_f08 = 0x10;
@@ -176,26 +176,26 @@ void __cdecl gm_LiquidateEntityAssets(unsigned short* subjectRecord, char* repor
 		ui_f30 = 0;
 		ui_pos = (unsigned char) i;
 		cm_BeginPacketFieldDelta((char*) subjectRecord, *(int*) (subjectRecord + 2));
-		cm_AppendPacketFieldDelta(1, 1, (unsigned short) ((int) subjectRecord + (8 - g_aed32c)), (char*) &ui_pos);
-		cm_AppendPacketFieldDelta(2, 1, (unsigned short) ((int) subjectRecord + (10 - g_aed32c)), (char*) &ui_f08);
-		cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((int) subjectRecord + (0x194 - g_aed32c)), (char*) &ui_f14);
-		cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((int) subjectRecord + (0x198 - g_aed32c)), (char*) &ui_f30);
-		cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((int) subjectRecord + (0x19c - g_aed32c)), (char*) &ui_f30);
-		cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((int) subjectRecord + (0x1a0 - g_aed32c)), (char*) &ui_f30);
-		cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((int) subjectRecord + (0x1a4 - g_aed32c)), (char*) &ui_f30);
-		cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((int) subjectRecord + (0x1a8 - g_aed32c)), (char*) &ui_f30);
-		cm_AppendPacketFieldDelta(1, 1, (unsigned short) ((int) subjectRecord + (0x1b0 - g_aed32c)), (char*) &ui_b0b);
-		cm_AppendPacketFieldDelta(1, 1, (unsigned short) ((int) subjectRecord + (0x1b1 - g_aed32c)), (char*) &ui_b0a);
+		cm_AppendPacketFieldDelta(1, 1, (unsigned short) ((int) subjectRecord + (8 - cm_PacketDeltaBase)), (char*) &ui_pos);
+		cm_AppendPacketFieldDelta(2, 1, (unsigned short) ((int) subjectRecord + (10 - cm_PacketDeltaBase)), (char*) &ui_f08);
+		cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((int) subjectRecord + (0x194 - cm_PacketDeltaBase)), (char*) &ui_f14);
+		cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((int) subjectRecord + (0x198 - cm_PacketDeltaBase)), (char*) &ui_f30);
+		cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((int) subjectRecord + (0x19c - cm_PacketDeltaBase)), (char*) &ui_f30);
+		cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((int) subjectRecord + (0x1a0 - cm_PacketDeltaBase)), (char*) &ui_f30);
+		cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((int) subjectRecord + (0x1a4 - cm_PacketDeltaBase)), (char*) &ui_f30);
+		cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((int) subjectRecord + (0x1a8 - cm_PacketDeltaBase)), (char*) &ui_f30);
+		cm_AppendPacketFieldDelta(1, 1, (unsigned short) ((int) subjectRecord + (0x1b0 - cm_PacketDeltaBase)), (char*) &ui_b0b);
+		cm_AppendPacketFieldDelta(1, 1, (unsigned short) ((int) subjectRecord + (0x1b1 - cm_PacketDeltaBase)), (char*) &ui_b0a);
 		cm_RequestChangeBits(*(int*) (subjectRecord + 2), 0x1c8, 4, 0x800000, 0);
 		cm_RequestChangeAttribute();
 		cm_BeginPacketFieldDelta((char*) subjectRecord, *(int*) (subjectRecord + 2));
 		for (i = 0; i < 8; i++) {
-			cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((i * 4 + 0x5c - g_aed32c) + (int) subjectRecord), (char*) &ui_f0c);
+			cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((i * 4 + 0x5c - cm_PacketDeltaBase) + (int) subjectRecord), (char*) &ui_f0c);
 		}
-		cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((int) subjectRecord + (0x24 - g_aed32c)), (char*) &ui_f30);
+		cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((int) subjectRecord + (0x24 - cm_PacketDeltaBase)), (char*) &ui_f30);
 		ui_f0c = 0;
-		cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((int) subjectRecord + (0x2c - g_aed32c)), (char*) &ui_f0c);
-		cm_AppendPacketFieldDelta(2, 1, (unsigned short) ((int) subjectRecord + (0x28 - g_aed32c)), (char*) &ui_f30);
+		cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((int) subjectRecord + (0x2c - cm_PacketDeltaBase)), (char*) &ui_f0c);
+		cm_AppendPacketFieldDelta(2, 1, (unsigned short) ((int) subjectRecord + (0x28 - cm_PacketDeltaBase)), (char*) &ui_f30);
 		cm_RequestChangeAttribute();
 		cm_RequestChangeFloat(*(int*) (subjectRecord + 2), 0x7c, -*(float*) (subjectRecord + 0x3e));
 		h = gm_RandomQuadratic();
@@ -206,11 +206,11 @@ void __cdecl gm_LiquidateEntityAssets(unsigned short* subjectRecord, char* repor
 		cm_BeginPacketFieldDelta((char*) subjectRecord, *(int*) (subjectRecord + 2));
 		for (i = 0; i < 5; i++) {
 			ui_b34 = 0;
-			cm_AppendCommandSyncField(1, 1, (i - g_aed32c) + 0x80 + (int) subjectRecord, (char*) &ui_b34);
+			cm_AppendCommandSyncField(1, 1, (i - cm_PacketDeltaBase) + 0x80 + (int) subjectRecord, (char*) &ui_b34);
 		}
 		r = cm_SendSetAttribute();
 	}
-	io_FormatTextBuffer(reportText, 0x1c4f, *subjectRecord, gm_ConvertUnitsToAmount(0x5dc, g_773d75));
+	io_FormatTextBuffer(reportText, 0x1c4f, *subjectRecord, gm_ConvertUnitsToAmount(0x5dc, gm_ActiveTownIndex));
 	if (prev != 0) {
 		io_FormatTextBuffer(buf, s_6999a8, prev);
 		strcat(reportText, buf);

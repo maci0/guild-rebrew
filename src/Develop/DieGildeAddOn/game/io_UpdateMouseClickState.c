@@ -1,5 +1,5 @@
 #include <string.h>
-extern volatile int g_6b7fb8;
+extern volatile int tb_TimerTicks;
 extern int g_6b5c8c;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* Watch the cursor and the two button click latches, then publish the new
@@ -15,18 +15,18 @@ void __cdecl io_UpdateMouseClickState(void)
 	int timedout;
 	int* probe;
 
-	t = g_6b7fb8;
+	t = tb_TimerTicks;
 	if (*(int*) 0x6b5c90) {
 		return;
 	}
 	pressed = *(int*) 0x6b5c98;
 	other = *(int*) 0x6b5ca4;
 	if (pressed != 0) {
-		if (t - 0xf < pressed || (int) *(short*) &g_14ce920 < other - 3 ||
-		    (int) *(short*) &g_14ce920 > other + 3 ||
-		    (int) *(short*) &g_14ce922 > *(int*) 0x6b5ca8 + 3 ||
-		    (int) *(short*) &g_14ce922 < *(int*) 0x6b5ca8 - 3) {
-			g_14ce920[5] = 1;
+		if (t - 0xf < pressed || (int) *(short*) &io_ActiveInputState < other - 3 ||
+		    (int) *(short*) &io_ActiveInputState > other + 3 ||
+		    (int) *(short*) &io_MouseY > *(int*) 0x6b5ca8 + 3 ||
+		    (int) *(short*) &io_MouseY < *(int*) 0x6b5ca8 - 3) {
+			io_ActiveInputState[5] = 1;
 			*(int*) 0x6b5c98 = 0;
 			pressed = 0;
 			*(int*) 0x6b5cac = -1;
@@ -36,15 +36,15 @@ void __cdecl io_UpdateMouseClickState(void)
 	}
 	armed = *(int*) 0x6b5cac;
 after_check:
-	if (g_14ce920[3] && g_6b5c8c) {
+	if (io_ActiveInputState[3] && g_6b5c8c) {
 		*(int*) 0x6b5c98 = 0;
 		g_6b5c8c = 0;
-		g_14ce920[4] = 0;
+		io_ActiveInputState[4] = 0;
 		goto label_411cbe;
 	}
-	if (g_14ce920[4] && !pressed) {
-		other = (int) *(short*) &g_14ce920;
-		*(int*) 0x6b5ca8 = (int) *(short*) &g_14ce922;
+	if (io_ActiveInputState[4] && !pressed) {
+		other = (int) *(short*) &io_ActiveInputState;
+		*(int*) 0x6b5ca8 = (int) *(short*) &io_MouseY;
 		*(int*) 0x6b5c98 = t;
 		*(int*) 0x6b5ca4 = other;
 	}
@@ -53,48 +53,49 @@ after_check:
 		*(int*) 0x6b5c98 = 0;
 		*(int*) 0x6b5cac = -1;
 	}
-	if (g_14ce920[3]) {
+	if (io_ActiveInputState[3]) {
 		if (armed == -1 || 0x28 <= t - armed) {
 			*(int*) 0x6b5c98 = 0;
 			*(int*) 0x6b5cac = t;
-			if (g_14ce920[5]) {
+			if (io_ActiveInputState[5]) {
 label_411cbe:
-				g_14ce920[3] = 0;
+				io_ActiveInputState[3] = 0;
 				*(int*) 0x6b5cac = -1;
 label_411cca:
 				*(int*) 0x6b5c98 = 0;
-				g_14ce920[5] = 0;
+				io_ActiveInputState[5] = 0;
 			} else {
 				goto label_411cca;
 			}
 		} else {
-			g_14ce920[7] = 1;
-			g_14ce920[3] = 0;
+			io_ActiveInputState[7] = 1;
+			io_ActiveInputState[3] = 0;
 			*(int*) 0x6b5cac = -1;
 			*(int*) 0x6b5c98 = 0;
 		}
 	}
 	armed = *(int*) 0x6b5c9c;
-	pressed = g_14ce920[10];
-	if (g_14ce920[9]) {
+	pressed = io_ActiveInputState[10];
+	if (io_ActiveInputState[9]) {
 		if (!*(int*) 0x6b5c9c) {
-			other = (int) *(short*) &g_14ce920;
-			*(int*) 0x6b5ca8 = (int) *(short*) &g_14ce922;
+			other = (int) *(short*) &io_ActiveInputState;
+			*(int*) 0x6b5ca8 = (int) *(short*) &io_MouseY;
 			*(int*) 0x6b5c9c = t;
 			armed = t;
 			*(int*) 0x6b5ca4 = other;
 			goto label_411d04;
 		}
 label_411d08:
-		if (!g_14ce920[10] && g_14ce920[9]) {
+		if (!io_ActiveInputState[10] && io_ActiveInputState[9]) {
 			if (t - armed > 0xf) {
 				pressed = 1;
 				*(int*) 0x6b5c9c = 0;
-				g_14ce920[10] = 1;
+				io_ActiveInputState[10] = 1;
 			}
-			if ((int) *(short*) &g_14ce920 < other - 3 || (int) *(short*) &g_14ce920 > other + 3 || (int) *(short*) &g_14ce922 > *(int*) 0x6b5ca8 + 3 || (int) *(short*) &g_14ce922 < *(int*) 0x6b5ca8 - 3) {
+			if ((int) *(short*) &io_ActiveInputState < other - 3 || (int) *(short*) &io_ActiveInputState > other + 3 || (int) *(short*) &io_MouseY > *(int*) 0x6b5ca8 + 3 ||
+				(int) *(short*) &io_MouseY < *(int*) 0x6b5ca8 - 3) {
 				*(int*) 0x6b5c9c = 0;
-				g_14ce920[10] = 1;
+				io_ActiveInputState[10] = 1;
 				pressed = 1;
 			}
 		}
@@ -104,24 +105,24 @@ label_411d04:
 			goto label_411d08;
 		}
 	}
-	armed = g_14ce920[8];
-	if (g_14ce920[8]) {
+	armed = io_ActiveInputState[8];
+	if (io_ActiveInputState[8]) {
 		if (pressed) {
 			armed = 0;
 			pressed = 0;
-			g_14ce920[8] = 0;
-			g_14ce920[10] = 0;
-			g_14ce920[4] = 0;
-			g_14ce920[5] = 0;
+			io_ActiveInputState[8] = 0;
+			io_ActiveInputState[10] = 0;
+			io_ActiveInputState[4] = 0;
+			io_ActiveInputState[5] = 0;
 		}
 		*(int*) 0x6b5c9c = 0;
 	}
 	state = *(int*) 0x6b5ca0;
-	timedout = g_14ce920[14];
-	if (g_14ce920[13]) {
+	timedout = io_ActiveInputState[14];
+	if (io_ActiveInputState[13]) {
 		if (!*(int*) 0x6b5ca0) {
-			other = (int) *(short*) &g_14ce920;
-			*(int*) 0x6b5ca8 = (int) *(short*) &g_14ce922;
+			other = (int) *(short*) &io_ActiveInputState;
+			*(int*) 0x6b5ca8 = (int) *(short*) &io_MouseY;
 			*(int*) 0x6b5ca0 = t;
 			state = t;
 			*(int*) 0x6b5ca4 = other;
@@ -133,30 +134,33 @@ label_411ddd:
 			goto label_411e58;
 		}
 	}
-	if (!g_14ce920[14] && g_14ce920[13]) {
+	if (!io_ActiveInputState[14] && io_ActiveInputState[13]) {
 		if (t - state > 0xf) {
 			timedout = 1;
 			*(int*) 0x6b5ca0 = 0;
-			g_14ce920[14] = 1;
+			io_ActiveInputState[14] = 1;
 		}
-		if ((int) *(short*) &g_14ce920 < other - 3 || (int) *(short*) &g_14ce920 > other + 3 || (int) *(short*) &g_14ce922 > *(int*) 0x6b5ca8 + 3 || (int) *(short*) &g_14ce922 < *(int*) 0x6b5ca8 - 3) {
+		if ((int) *(short*) &io_ActiveInputState < other - 3 || (int) *(short*) &io_ActiveInputState > other + 3 || (int) *(short*) &io_MouseY > *(int*) 0x6b5ca8 + 3 ||
+			(int) *(short*) &io_MouseY < *(int*) 0x6b5ca8 - 3) {
 			*(int*) 0x6b5ca0 = 0;
-			g_14ce920[14] = 1;
+			io_ActiveInputState[14] = 1;
 			timedout = 1;
 		}
 	}
 label_411e58:
-	if (g_14ce920[12]) {
-		g_14ce920[12] = 0;
+	if (io_ActiveInputState[12]) {
+		io_ActiveInputState[12] = 0;
 		if (timedout) {
 			timedout = 0;
-			g_14ce920[14] = 0;
+			io_ActiveInputState[14] = 0;
 		}
 		*(int*) 0x6b5ca0 = 0;
 	}
-	if ((g_14ce920[3] != g_14cf900[3] || g_14ce920[4] != g_14cf900[4] || g_14ce920[5] != g_14cf900[5] || g_14ce920[7] != g_14cf900[7] ||
-	    armed != g_14cf900[8] || g_14ce920[9] != g_14cf900[9] || pressed != g_14cf900[10] || g_14cf900[12] || g_14ce920[13] != g_14cf900[13] ||
-	    timedout != g_14cf900[14] || g_14ce920[17] != g_14cf900[17] || g_14ce920[16] != g_14cf900[16]) && !*(int*) 0x14cf2fc) {
+	if ((io_ActiveInputState[3] != io_PolledCursorState[3] || io_ActiveInputState[4] != io_PolledCursorState[4] || io_ActiveInputState[5] != io_PolledCursorState[5] ||
+		io_ActiveInputState[7] != io_PolledCursorState[7] ||
+	    armed != io_PolledCursorState[8] || io_ActiveInputState[9] != io_PolledCursorState[9] || pressed != io_PolledCursorState[10] || io_PolledCursorState[12] ||
+	    	io_ActiveInputState[13] != io_PolledCursorState[13] ||
+	    timedout != io_PolledCursorState[14] || io_ActiveInputState[17] != io_PolledCursorState[17] || io_ActiveInputState[16] != io_PolledCursorState[16]) && !*(int*) 0x14cf2fc) {
 		probe = (int*) 0x14cf2fc;
 		armed = 0x1f;
 		do {
@@ -170,9 +174,9 @@ label_411e58:
 		if (armed < 0x1f) {
 label_411f42:
 			armed += 1;
-			memcpy((void*) (armed * 0x4c + 0x14ce980), (void*) &g_14ce920, 0x4c);
+			memcpy((void*) (armed * 0x4c + 0x14ce980), (void*) &io_ActiveInputState, 0x4c);
 			*(unsigned int*) (armed * 0x4c + 0x14ce9c8) = 1;
 		}
 	}
-	memcpy((void*) &g_14cf900, (void*) &g_14ce920, 0x4c);
+	memcpy((void*) &io_PolledCursorState, (void*) &io_ActiveInputState, 0x4c);
 }

@@ -4,12 +4,12 @@
 #include <string.h>
 
 extern char* cm_LoadBuf;
-extern unsigned int g_1005820;
+extern unsigned int cm_LoadBufOffset;
 
 int __cdecl cm_AppendLoadChunk(char* src, char* out)
 {
-	memcpy(cm_LoadBuf + g_1005820, src + 0x10, 0x80);
-	g_1005820 += 0x80;
+	memcpy(cm_LoadBuf + cm_LoadBufOffset, src + 0x10, 0x80);
+	cm_LoadBufOffset += 0x80;
 	if (out != 0) {
 		*out = 1;
 	}

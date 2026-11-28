@@ -1,7 +1,7 @@
 
 
 
-extern int g_14cbcc0[][4];
+extern int nt_PacketStats[][4];
 
 void __cdecl nt_RecordPacketStats(unsigned char* p, unsigned int n, char flag)
 {
@@ -9,7 +9,7 @@ void __cdecl nt_RecordPacketStats(unsigned char* p, unsigned int n, char flag)
 
 	if (p != 0 && n > *p && *p < 0x6a) {
 		k = flag ? 0 : 2;
-		g_14cbcc0[*p][k]++;
-		g_14cbcc0[*p][k + 1] += n;
+		nt_PacketStats[*p][k]++;
+		nt_PacketStats[*p][k + 1] += n;
 	}
 }

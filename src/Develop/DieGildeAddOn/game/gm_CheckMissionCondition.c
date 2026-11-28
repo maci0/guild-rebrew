@@ -12,9 +12,9 @@ typedef struct Spec {
 } Spec;
 // SIZE 0x18
 
-extern char g_774964;
+extern char gm_InWorldHud;
 extern int g_7728d8;
-extern signed char g_6a3440;
+extern signed char gm_SelectedMissionIndex;
 
 Spec* __cdecl gm_LookupMissionSpec(int op);
 char* __cdecl gm_LookupEntityRecordById(int id);
@@ -50,10 +50,10 @@ int __cdecl gm_CheckMissionCondition(Cmd* c)
 	char* t;
 
 	s = gm_LookupMissionSpec(c->op);
-	if (g_774964 == 0 || s == 0) {
+	if (gm_InWorldHud == 0 || s == 0) {
 		return 0;
 	}
-	if (g_7728d8 == 1 && g_6a3440 >= 0 && g_6a3440 <= 5) {
+	if (g_7728d8 == 1 && gm_SelectedMissionIndex >= 0 && gm_SelectedMissionIndex <= 5) {
 		g_7728d8 = 0;
 		return 1;
 	}

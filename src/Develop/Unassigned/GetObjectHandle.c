@@ -1,4 +1,4 @@
-extern char g_676694[];
+extern char str_GetObjectHandle_not_found[];
 
 
 
@@ -14,7 +14,7 @@ int __cdecl GetObjectHandle(int* id)
 
 	r = d3_FindSceneObject(0, 0x140, 0, *id);
 	if (r == 0) {
-		fcn_0064d41a(buf, g_676694, *id);
+		fcn_0064d41a(buf, str_GetObjectHandle_not_found, *id);
 		evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), buf);
 		return 0;
 	}

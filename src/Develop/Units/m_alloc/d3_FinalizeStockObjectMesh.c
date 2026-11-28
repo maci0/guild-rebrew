@@ -65,7 +65,7 @@ typedef struct {
 	char pad2a2[2];
 } StockObjectData;
 
-extern char* g_104049c;
+extern char* d3_TextureBank;
 
 void __cdecl d3_RecalculateObjectBounds(StockObjectData* m);
 void __cdecl d3_RecalculateMeshNormals(StockObjectData* m);
@@ -99,7 +99,7 @@ void __cdecl d3_FinalizeStockObjectMesh(StockObjectData* m, char normals)
 	}
 	m->flags &= ~4;
 	for (i = 0; i < m->nfaces; i++) {
-		if (m->faces[i].mat >= 0 && (((StockMaterial*)g_104049c)[m->faces[i].mat].flags & 0x10)) {
+		if (m->faces[i].mat >= 0 && (((StockMaterial*)d3_TextureBank)[m->faces[i].mat].flags & 0x10)) {
 			for (k = 0; k < 3; k++) {
 				pts[k].x = m->verts[m->faces[i].idx[k]].pos.x;
 				pts[k].y = m->verts[m->faces[i].idx[k]].pos.y;
@@ -115,7 +115,7 @@ void __cdecl d3_FinalizeStockObjectMesh(StockObjectData* m, char normals)
 	for (i = 0; i < m->ntex; i++) {
 		for (j = 0; j < m->nfaces; j++) {
 			if (m->faces[j].tex == i && m->faces[j].mat >= 0) {
-				m->texmat[i] = &((StockMaterial*)g_104049c)[m->faces[j].mat];
+				m->texmat[i] = &((StockMaterial*)d3_TextureBank)[m->faces[j].mat];
 				break;
 			}
 		}

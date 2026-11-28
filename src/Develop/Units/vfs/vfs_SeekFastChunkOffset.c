@@ -1,4 +1,4 @@
-extern int g_6b7fdc;
+extern int vfs_RootDir;
 void* __cdecl vfs_Tfopen(const char*, const char*, void*);
 int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream);
 long __cdecl fcn_00430c50(char* a);
@@ -15,7 +15,7 @@ int __cdecl vfs_SeekFastChunkOffset(char* a1)
 	int result;
 	int marker;
 
-	stream = vfs_Tfopen(a1, (char*) 0x6750e8, *(void**) &g_6b7fdc);
+	stream = vfs_Tfopen(a1, (char*) 0x6750e8, *(void**) &vfs_RootDir);
 	if (stream == 0)
 		return -1;
 	vfs_ReadData((char*) &local[1], 4, 1, stream);

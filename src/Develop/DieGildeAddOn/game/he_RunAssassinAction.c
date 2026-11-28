@@ -47,7 +47,7 @@ void __cdecl he_RunAssassinAction(char* e)
 		return;
 	}
 	*(int*) (e + 0x84) = -1;
-	h = ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 8)]);
+	h = ((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (e + 8)]);
 	switch (*(int*) (e + 0x70)) {
 	case 0:
 		if (cm_GetCommandStatus(*(int*) (e + 0xcc)) != 1) {
@@ -243,7 +243,7 @@ state_minus:
 			cm_RequestKillSpieler(*(int*) (e + 0xb8), 1);
 		}
 		if (*(int*) (e + 0x70) == -1) {
-			he_PostEntityMessage(((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 8)].entity_id, -1, g_14b5304, 1, 0x5fa, (char*) 0x6a7e24);
+			he_PostEntityMessage(((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (e + 8)].entity_id, -1, g_14b5304, 1, 0x5fa, (char*) 0x6a7e24);
 		}
 	}
 	he_FreeAction(e);

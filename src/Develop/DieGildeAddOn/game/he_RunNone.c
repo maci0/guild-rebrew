@@ -1,5 +1,5 @@
-extern char g_6a5708[];
-extern char g_7f4cd0[];
+extern char str_he_RunNone_invalid[];
+extern char gm_EntityNameField[];
 
 
 void __cdecl fcn_0064d41a(void*, void*, int, void*);
@@ -10,5 +10,5 @@ void __cdecl he_RunNone(void* event)
 	unsigned int idx;
 
 	idx = *(unsigned short*) ((char*) event + 8);
-	fcn_0064d41a(buf, g_6a5708, *(unsigned char*) event, g_7f4cd0 + idx * 0x21c);
+	fcn_0064d41a(buf, str_he_RunNone_invalid, *(unsigned char*) event, gm_EntityNameField + idx * 0x21c);
 }

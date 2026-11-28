@@ -7,8 +7,8 @@
 #include "Develop/client_types.h"
 typedef SOUND_VOICE Voice;
 
-extern int g_6b7d7c;
-extern SOUND_VOICE g_14cbbe0;
+extern int sb_WaveDriver;
+extern SOUND_VOICE sb_DummyVoice;
 Voice* __cdecl sb_AllocVoice(void);
 char* __cdecl sb_FindSampleByName(int a, int b);
 void __cdecl msx_SetSampleVolume(int h, int v);
@@ -19,7 +19,7 @@ Voice* __cdecl sb_PrepareVoice(int bank, int name)
 {
 	Voice* v;
 
-	if (g_6b7d7c != 0) {
+	if (sb_WaveDriver != 0) {
 		v = sb_AllocVoice();
 		if (v != 0) {
 			v->sample = sb_FindSampleByName(bank, name);
@@ -37,7 +37,7 @@ Voice* __cdecl sb_PrepareVoice(int bank, int name)
 		}
 		return v;
 	}
-	return &g_14cbbe0;
+	return &sb_DummyVoice;
 }
 unsigned char _dpad_14607c0[608] = {
     0x00,

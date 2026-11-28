@@ -8,10 +8,10 @@ struct D3_FLOOR_HEADER {
 	unsigned char mode : 3;
 };
 
-extern int g_6b8300;
-extern char g_1043370[];
+extern int d3_CurrentFloor;
+extern char tp_ch_PathGrid[];
 extern char g_699b08;
-extern int g_67a370;
+extern int d3_ActiveScene;
 
 
 
@@ -33,20 +33,20 @@ int __cdecl d3_LoadSceneAndTerrain(void* stream)
 	d3_LoadScene(0, stream, d2_UpdateSceneLoadProgress);
 	d3_SelectSceneContext(1, 0);
 	d3_SelectSceneContext(0, 0);
-	if (((struct D3_FLOOR_HEADER*)g_6b8300)->kind == 0x80) {
-		(*(int*)g_1043370) = d3sm_CreateMap(((struct D3_FLOOR_HEADER*)g_6b8300), 0x100, 2);
-	} else if (((struct D3_FLOOR_HEADER*)g_6b8300)->kind == 0x40) {
-		(*(int*)g_1043370) = d3sm_CreateMap(((struct D3_FLOOR_HEADER*)g_6b8300), 0x80, 2);
+	if (((struct D3_FLOOR_HEADER*)d3_CurrentFloor)->kind == 0x80) {
+		(*(int*)tp_ch_PathGrid) = d3sm_CreateMap(((struct D3_FLOOR_HEADER*)d3_CurrentFloor), 0x100, 2);
+	} else if (((struct D3_FLOOR_HEADER*)d3_CurrentFloor)->kind == 0x40) {
+		(*(int*)tp_ch_PathGrid) = d3sm_CreateMap(((struct D3_FLOOR_HEADER*)d3_CurrentFloor), 0x80, 2);
 	} else {
-		(*(int*)g_1043370) = d3sm_CreateMap(((struct D3_FLOOR_HEADER*)g_6b8300), 0x100, 2);
+		(*(int*)tp_ch_PathGrid) = d3sm_CreateMap(((struct D3_FLOOR_HEADER*)d3_CurrentFloor), 0x100, 2);
 	}
 	save = d3_CurrentContextIndex;
 	d3_SelectSceneContext(0, 0);
-	if (((struct D3_FLOOR_HEADER*)g_6b8300) != 0) {
-		((struct D3_FLOOR_HEADER*)g_6b8300)->mode = g_699b08;
+	if (((struct D3_FLOOR_HEADER*)d3_CurrentFloor) != 0) {
+		((struct D3_FLOOR_HEADER*)d3_CurrentFloor)->mode = g_699b08;
 	}
-	d3_TraverseSceneObjects(g_67a370, 0, 0x1c0, (void*) d3_BindBuildingSceneObjects);
-	d3_TraverseSceneObjects(g_67a370, 0, 0xc0, (void*) d3_ClearSceneObjectActiveFlag);
+	d3_TraverseSceneObjects(d3_ActiveScene, 0, 0x1c0, (void*) d3_BindBuildingSceneObjects);
+	d3_TraverseSceneObjects(d3_ActiveScene, 0, 0xc0, (void*) d3_ClearSceneObjectActiveFlag);
 	d3_SelectSceneContext(save, 0);
 	return 1;
 }

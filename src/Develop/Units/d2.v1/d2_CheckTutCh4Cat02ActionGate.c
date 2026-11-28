@@ -7,7 +7,7 @@ extern unsigned char* lpGebaeudePROT;
 int __cdecl d2_CheckTutCh4Cat02ActionGate(int* m)
 {
 	if (m[0] == 0x2b && m[1] != 0 && ((char)(((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*) m[1]].category)) == 2 &&
-	    *(short*) (m[1] + 0x27) == (*(short*)&g_774970) &&
+	    *(short*) (m[1] + 0x27) == (*(short*)&gm_LocalPlayerSlot) &&
 	    (m[3] == 5 || m[3] == 2 || m[3] == 0xd || m[3] == 8)) {
 		return 1;
 	}

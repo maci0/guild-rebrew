@@ -16,7 +16,7 @@ typedef struct {
 	char pad3[0xb2];
 } Rec21c;
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 Rec21c* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl hst_SplitFormatPrefix(char*, char*, int*, int*);
@@ -96,16 +96,16 @@ int __cdecl hst_HandleRndHandelsherr(int mode, int* pairs, int idx, char* text, 
 		goto send;
 	}
 	for (i = 0; i < 768; i++) {
-		if (((Rec21c*)g_7f4ca0)[i].cls >= 0x13 && ((Rec21c*)g_7f4ca0)[i].cls <= 0x45
-		    && (((Rec21c*)g_7f4ca0)[i].cls < 0x1f || ((Rec21c*)g_7f4ca0)[i].cls > 0x21)
-		    && (((Rec21c*)g_7f4ca0)[i].cls < 0x28 || ((Rec21c*)g_7f4ca0)[i].cls > 0x2d)
-		    && (((Rec21c*)g_7f4ca0)[i].cls < 0x34 || ((Rec21c*)g_7f4ca0)[i].cls > 0x39)
+		if (((Rec21c*)gm_EntitySlotTable)[i].cls >= 0x13 && ((Rec21c*)gm_EntitySlotTable)[i].cls <= 0x45
+		    && (((Rec21c*)gm_EntitySlotTable)[i].cls < 0x1f || ((Rec21c*)gm_EntitySlotTable)[i].cls > 0x21)
+		    && (((Rec21c*)gm_EntitySlotTable)[i].cls < 0x28 || ((Rec21c*)gm_EntitySlotTable)[i].cls > 0x2d)
+		    && (((Rec21c*)gm_EntitySlotTable)[i].cls < 0x34 || ((Rec21c*)gm_EntitySlotTable)[i].cls > 0x39)
 		    && gm_IsSlotActivePerson((unsigned short) i) != 0) {
 			v = gm_WalkEntityChain((unsigned short) i);
-			if (v > score[4] && hst_IsCandidateUnlisted(((Rec21c*)g_7f4ca0)[i].key) != 0) {
+			if (v > score[4] && hst_IsCandidateUnlisted(((Rec21c*)gm_EntitySlotTable)[i].key) != 0) {
 				score[4] = v;
 				found |= 1;
-				ids[4] = ((Rec21c*)g_7f4ca0)[i].id;
+				ids[4] = ((Rec21c*)gm_EntitySlotTable)[i].id;
 				for (k = 3; k >= 0; k--) {
 					if (score[k + 1] > score[k]) {
 						t = score[k];
@@ -122,7 +122,7 @@ int __cdecl hst_HandleRndHandelsherr(int mode, int* pairs, int idx, char* text, 
 	if (found == 0) {
 		return 0;
 	}
-	r = &((Rec21c*)g_7f4ca0)[ids[(unsigned short) gm_RandomMod(5)]];
+	r = &((Rec21c*)gm_EntitySlotTable)[ids[(unsigned short) gm_RandomMod(5)]];
 	if (mode == 0) {
 		pairs[idx * 2 + 1] = r->key;
 	}

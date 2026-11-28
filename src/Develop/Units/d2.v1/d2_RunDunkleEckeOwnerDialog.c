@@ -33,18 +33,18 @@ typedef struct Rec {
 /* SIZE 0xf8 */
 
 extern int d2_CurrentWindowId;
-extern char* g_772500;
-extern char* g_77255c;
+extern char* d2_FileObjTable;
+extern char* d2_CurrentWindow;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int d2_CurrentElementId;
 extern int gm_GameTime;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
-extern int g_14ce8e0;
-extern int g_100f1dc;
-extern char g_7f4ca4[];
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
+extern int io_RightButtonReleased;
+extern int d2_DialogButtonAction;
+extern char gm_EntityIdField[];
 
 int __cdecl d2_LoadForm(int a, int b, char* name);
 void __cdecl d2_CenterDialogWindows(int h);
@@ -128,8 +128,8 @@ void __cdecl d2_RunDunkleEckeOwnerDialog(char* building, char* context, char* en
 			d2_SetForm(h, 1);
 			d2_ClearWindowChildren(d2_CurrentWindowId, 1);
 			io_AppendText(0x18a3);
-			x = *(int*) (g_77255c + 0xc) / 2;
-			y = (x - *(short*) (g_772500 + 0x1ebd8)) - 0x28;
+			x = *(int*) (d2_CurrentWindow + 0xc) / 2;
+			y = (x - *(short*) (d2_FileObjTable + 0x1ebd8)) - 0x28;
 			for (j = 0, line = 0x46; line < 0x181; j++, line += 0x69) {
 				sel[j].x10 = y;
 				sel[j].x14 = line - 0x1e;
@@ -161,7 +161,7 @@ void __cdecl d2_RunDunkleEckeOwnerDialog(char* building, char* context, char* en
 				y = rc;
 			}
 		}
-		if (g_100f1dc != -1 && d2_CurrentElementId == y) {
+		if (d2_DialogButtonAction != -1 && d2_CurrentElementId == y) {
 			int fillCount;
 			fillDst = (char*) &rec;
 			fillCount = sizeof(rec);
@@ -184,18 +184,18 @@ void __cdecl d2_RunDunkleEckeOwnerDialog(char* building, char* context, char* en
 			}
 			rec.kind = 0x74;
 			rec.x36 = 2;
-			rec.x8 = *(int*) (g_7f4ca4 + (*(unsigned short*) &g_774970) * 540);
+			rec.x8 = *(int*) (gm_EntityIdField + (*(unsigned short*) &gm_LocalPlayerSlot) * 540);
 			rec.xc = *(int*) (building + 1);
 			rec.x28 = gm_GameTime;
-			rec.x2c = g_7f4c04;
-			rec.x30 = g_7f4c08;
-			rec.x34 = g_7f4c0c;
+			rec.x2c = gm_GameTimeHour;
+			rec.x30 = gm_GameTimeSliceDword;
+			rec.x34 = gm_GameTimeTailWord;
 			rec.x5c = *(int*) (building + 1);
 			rec.x60 = *(int*) (context + 2);
 			cm_SendCopyEntityData(&rec);
-			g_774654 = 1;
-		} else if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
+		} else if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop(d2_RunDunkleEckeOwnerDialog, 0x677c7) != 0);
 	d2_DestroyForm(h);

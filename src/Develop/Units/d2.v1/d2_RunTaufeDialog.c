@@ -1,11 +1,11 @@
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern int d2_CurrentWindowId;
 extern int gm_GameTime;
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
 
 /* Entity slot, stride 0x21c. */
@@ -58,15 +58,15 @@ void __cdecl d2_RunTaufeDialog(char* e, int unused)
 	int secondButton;
 	int i;
 
-	p = &((struct house*) g_7f4ca0)[g_774970];
-	t = (int) (gm_WalkEntityChain(g_774970) * 0.01f);
+	p = &((struct house*) gm_EntitySlotTable)[gm_LocalPlayerSlot];
+	t = (int) (gm_WalkEntityChain(gm_LocalPlayerSlot) * 0.01f);
 	if (e == 0) {
 		return;
 	}
 	if (*(unsigned short*) (e + 0x27) == 0xffff) {
 		return;
 	}
-	if (*(unsigned short*) (e + 0x27) == g_774970) {
+	if (*(unsigned short*) (e + 0x27) == gm_LocalPlayerSlot) {
 		d = t * 15;
 		dlg = d2_LoadForm(0, 0, "Locations\\Kirche\\Taufe");
 		d2_SetOverlayAnimation(0, 0);
@@ -79,21 +79,21 @@ void __cdecl d2_RunTaufeDialog(char* e, int unused)
 		s = io_AppendText(0x1977);
 		firstButton = d2_GetWindowListItem((int) dlg, 2, s);
 		secondButton = d2_GetWindowListItem((int) dlg, 2, s + 1);
-		g_100f1dc = -1;
+		d2_DialogButtonAction = -1;
 		do {
-			if (g_14ce8e0 != 0) {
-				g_774654 = 1;
+			if (io_RightButtonReleased != 0) {
+				d2_DialogCloseRequested = 1;
 			}
-			if (g_100f1dc != -1) {
+			if (d2_DialogButtonAction != -1) {
 				if (d2_CurrentElementId == firstButton) {
-					if (gm_CheckEntityStock(&((struct house*) g_7f4ca0)[g_774970], d, (char) g_773d75) != 0) {
+					if (gm_CheckEntityStock(&((struct house*) gm_EntitySlotTable)[gm_LocalPlayerSlot], d, (char) gm_ActiveTownIndex) != 0) {
 						x = 1 - p->state;
 						cm_RequestTransferCurrencyNoKill(-1, p->handle, 0, d);
 						cm_BeginPacketFieldDelta((char*) p, p->handle);
 						cm_AppendPacketFieldDelta(1, 1, 0xc, &x);
 						cm_RequestChangeAttribute();
 						for (i = 3; i <= 7; i++) {
-							h = (char*) ((struct house*) g_7f4ca0)[g_774970].ref_table[i];
+							h = (char*) ((struct house*) gm_EntitySlotTable)[gm_LocalPlayerSlot].ref_table[i];
 							if (h != (char*) -1) {
 								h = (char*) gm_LookupEntityRecordById((int) h);
 								if (h != 0) {
@@ -111,16 +111,16 @@ void __cdecl d2_RunTaufeDialog(char* e, int unused)
 						}
 						io_FormatTextBuffer(buf, 0x1979, 2 * (0x75 <= gm_GameTime) + 0x197a + x);
 						d2_ShowModalMessageBox(buf, 0);
-						g_774654 = 1;
+						d2_DialogCloseRequested = 1;
 					}
 				} else if (d2_CurrentElementId == secondButton) {
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				}
 			}
 		} while (main_RunFrameLoop((void*) d2_RunTaufeDialog, 0x677c7) != 0);
 		d2_DestroyForm((int) dlg);
 	} else {
-		q = &((struct house*) g_7f4ca0)[*(unsigned short*) (e + 0x27)];
+		q = &((struct house*) gm_EntitySlotTable)[*(unsigned short*) (e + 0x27)];
 		if (q == 0) {
 			return;
 		}
@@ -140,14 +140,14 @@ void __cdecl d2_RunTaufeDialog(char* e, int unused)
 		s = io_AppendText(0x1972);
 		firstButton = d2_GetWindowListItem((int) dlg, 2, s);
 		secondButton = d2_GetWindowListItem((int) dlg, 2, s + 1);
-		g_100f1dc = -1;
+		d2_DialogButtonAction = -1;
 		do {
-			if (g_14ce8e0 != 0) {
-				g_774654 = 1;
+			if (io_RightButtonReleased != 0) {
+				d2_DialogCloseRequested = 1;
 			}
-			if (g_100f1dc != -1) {
+			if (d2_DialogButtonAction != -1) {
 				if (d2_CurrentElementId == firstButton) {
-					if (gm_CheckEntityStock(&((struct house*) g_7f4ca0)[g_774970], t, (char) g_773d75) != 0) {
+					if (gm_CheckEntityStock(&((struct house*) gm_EntitySlotTable)[gm_LocalPlayerSlot], t, (char) gm_ActiveTownIndex) != 0) {
 						x = q->state;
 						cm_RequestTransferCurrencyNoKill(q->handle, p->handle, 0, t);
 						cm_BeginPacketFieldDelta((char*) p, p->handle);
@@ -159,10 +159,10 @@ void __cdecl d2_RunTaufeDialog(char* e, int unused)
 						}
 						io_FormatTextBuffer(buf, 0x1973, 2 * (0x75 <= gm_GameTime) + 0x197a + q->state);
 						d2_ShowModalMessageBox(buf, 0);
-						g_774654 = 1;
+						d2_DialogCloseRequested = 1;
 					}
 				} else if (d2_CurrentElementId == secondButton) {
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				}
 			}
 		} while (main_RunFrameLoop((void*) d2_RunTaufeDialog, 0x677c7) != 0);

@@ -11,8 +11,8 @@ extern char g_6b8018;
 #include "Develop/client_types.h"
 extern Slot_1043340 g_1043340[64];
 extern int g_6b8484;
-extern int g_6b8300;
-extern int g_67a370;
+extern int d3_CurrentFloor;
+extern int d3_ActiveScene;
 extern int g_6b8064;
 
 void __cdecl d3_SelectSceneContext(int a, int b);
@@ -52,17 +52,17 @@ void __cdecl d3_Shutdown(void)
 			while (d3_SceneRenderListHead != g_1040640) {
 				d3_FreeMeshObject(d3_SceneRenderListHead);
 			}
-			if (g_6b8300 != 0) {
-				d3_ReleaseRenderDeviceContext(g_6b8300);
-				g_6b8300 = 0;
+			if (d3_CurrentFloor != 0) {
+				d3_ReleaseRenderDeviceContext(d3_CurrentFloor);
+				d3_CurrentFloor = 0;
 			}
 			if (g_6b89c0 != 0) {
 				d3_FreeSkyDome(g_6b89c0);
 				g_6b89c0 = 0;
 			}
-			if (*(void**) (((char*)g_67a370) + 0x3c8) != 0) {
-				m_FreeTracked(*(void**) (((char*)g_67a370) + 0x3c8));
-				*(void**) (((char*)g_67a370) + 0x3c8) = 0;
+			if (*(void**) (((char*)d3_ActiveScene) + 0x3c8) != 0) {
+				m_FreeTracked(*(void**) (((char*)d3_ActiveScene) + 0x3c8));
+				*(void**) (((char*)d3_ActiveScene) + 0x3c8) = 0;
 			}
 		}
 	}
@@ -72,18 +72,18 @@ void __cdecl d3_Shutdown(void)
 	while (d3_ObjectListHead != d3_SceneObjectSentinel) {
 		d3_DisposeObject(d3_ObjectListHead);
 	}
-	if (g_6b8300 != 0) {
-		d3_ReleaseRenderDeviceContext(g_6b8300);
-		g_6b8300 = 0;
+	if (d3_CurrentFloor != 0) {
+		d3_ReleaseRenderDeviceContext(d3_CurrentFloor);
+		d3_CurrentFloor = 0;
 	}
 	if (g_6b89c0 != 0) {
 		d3_FreeSkyDome(g_6b89c0);
 		g_6b89c0 = 0;
 	}
 	d3_ReleaseRenderVertexBuffer();
-	if (*(void**) (((char*)g_67a370) + 0x3c8) != 0) {
-		m_FreeTracked(*(void**) (((char*)g_67a370) + 0x3c8));
-		*(void**) (((char*)g_67a370) + 0x3c8) = 0;
+	if (*(void**) (((char*)d3_ActiveScene) + 0x3c8) != 0) {
+		m_FreeTracked(*(void**) (((char*)d3_ActiveScene) + 0x3c8));
+		*(void**) (((char*)d3_ActiveScene) + 0x3c8) = 0;
 	}
 	while (g_1042c38 != g_1042d00) {
 		(*(node_fn_439490*) (g_1042c38 + 0x1ec))(g_1042c38);

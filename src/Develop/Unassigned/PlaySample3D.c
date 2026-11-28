@@ -2,7 +2,7 @@
 
 
 extern char* evt_CurrentScript;
-extern int g_6791c8;
+extern int evt_ActiveContextId;
 int __cdecl sb_PrepareVoice(int a, int b);
 int __cdecl sb_StartVoice(int o, int a, int b);
 void __cdecl sb_SetVoiceLoopCount(int o, int v);
@@ -12,7 +12,7 @@ int __cdecl PlaySample3D(int* a, int* b, int* c, int* d)
 {
 	int o;
 
-	if (*(int*) (evt_CurrentScript + 0x104) != g_6791c8) {
+	if (*(int*) (evt_CurrentScript + 0x104) != evt_ActiveContextId) {
 		return 0;
 	}
 	o = sb_PrepareVoice(0, *c);

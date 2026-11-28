@@ -1,5 +1,5 @@
 extern float g_6628d8;
-extern float g_662d70;
+extern float d3_ZeroVec4;
 extern float g_662d74;
 extern float g_662d78;
 
@@ -51,9 +51,9 @@ void __cdecl ch_StepToTargetPosition(unsigned char* e)
 		return;
 	}
 	e[0x110] = 0;
-	*(float*) (e + 0x114) = g_662d70;
+	*(float*) (e + 0x114) = d3_ZeroVec4;
 	*(float*) (e + 0x118) = g_662d74;
 	*(float*) (e + 0x11c) = g_662d78;
-	d3_SetObjectPosition(*(char**) (e + 0x34), &g_662d70);
+	d3_SetObjectPosition(*(char**) (e + 0x34), &d3_ZeroVec4);
 	d3_SetNodePosition(*(char**) (e + 0x34), v);
 }

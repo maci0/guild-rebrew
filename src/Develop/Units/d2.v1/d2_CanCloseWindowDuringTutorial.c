@@ -1,7 +1,7 @@
 
 
 
-extern int* g_665f08;
+extern int* d2_TutorialState;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl d2_CanCloseWindowDuringTutorial(void)
@@ -11,7 +11,7 @@ int __cdecl d2_CanCloseWindowDuringTutorial(void)
 	if (*(int*) ((char*)&d2_TutorialActive) == 0) {
 		return 1;
 	}
-	p = g_665f08;
+	p = d2_TutorialState;
 	if (*(int*) ((char*) p + 0x3c) == 2 || *p == 5) {
 		return 0;
 	}

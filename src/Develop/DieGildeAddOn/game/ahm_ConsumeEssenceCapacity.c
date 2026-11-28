@@ -1,8 +1,8 @@
 
 
 
-extern float g_6628a8;
-extern float g_6628a0;
+extern float flt_0_0;
+extern float flt_1_0;
 extern float g_665284;
 
 float __cdecl ahm_GetEssenceValue(int entityId, int which);
@@ -15,10 +15,10 @@ float __cdecl ahm_ConsumeEssenceCapacity(int entityId, int which, int* cap)
 	int m;
 
 	v = ahm_GetEssenceValue(entityId, which);
-	if (v < g_6628a8 || v >= g_6628a0) {
-		return g_6628a8;
+	if (v < flt_0_0 || v >= flt_1_0) {
+		return flt_0_0;
 	}
-	d = g_6628a0 - v;
+	d = flt_1_0 - v;
 	n = (int) (g_665284 * d);
 	m = *cap < n ? *cap : n;
 	*cap = m;

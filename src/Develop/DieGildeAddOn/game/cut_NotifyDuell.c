@@ -26,7 +26,7 @@ typedef struct Cmd {
 extern char* g_14a9a54;
 extern char* g_14a9a58;
 extern char* g_14a9a5c;
-extern char g_6b5c60[];
+extern char str_empty[];
 
 Ent* __cdecl gm_LookupEntityRecordById(int);
 float __cdecl gm_GetEntityHealthRatio(Ent*);
@@ -54,35 +54,35 @@ int __cdecl cut_NotifyDuell(char* event)
 	}
 	if (b->busy != 0 || a->busy != 0) {
 		if (b->kind == 6 || b->kind == 7) {
-			he_PostEntityMessage((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[b->id].entity_id), -1, g_14a9a5c, 0, 0x5ec, 0);
+			he_PostEntityMessage((*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[b->id].entity_id), -1, g_14a9a5c, 0, 0x5ec, 0);
 		}
 		if (a->kind == 6 || a->kind == 7) {
-			he_PostEntityMessage((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[a->id].entity_id), -1, g_14a9a5c, 0, 0x5ec, 0);
+			he_PostEntityMessage((*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[a->id].entity_id), -1, g_14a9a5c, 0, 0x5ec, 0);
 		}
 		return 0;
 	}
 	if (gm_GetEntityHealthRatio(a) <= 0.0f) {
 		if (b->kind == 6 || b->kind == 7) {
-			he_PostEntityMessage((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[b->id].entity_id), -1, g_14a9a58, 0, 0x5ec, 0);
+			he_PostEntityMessage((*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[b->id].entity_id), -1, g_14a9a58, 0, 0x5ec, 0);
 		}
 		return 0;
 	}
 	if (gm_GetEntityHealthRatio(b) <= 0.0f) {
 		if (a->kind == 6 || a->kind == 7) {
-			he_PostEntityMessage((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[a->id].entity_id), -1, g_14a9a58, 0, 0x5ec, 0);
+			he_PostEntityMessage((*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[a->id].entity_id), -1, g_14a9a58, 0, 0x5ec, 0);
 		}
 		return 0;
 	}
 	if (a->kind == 6 || a->kind == 7) {
 		io_FormatTextBuffer(buf, 0x11ca, b->id);
 		strcat(buf, g_14a9a54);
-		he_SendCmdMessage(a, cmd, buf, &(*(char*)g_6b5c60));
+		he_SendCmdMessage(a, cmd, buf, &(*(char*)str_empty));
 		result = 1;
 	}
 	if (b->kind == 6 || b->kind == 7) {
 		io_FormatTextBuffer(buf, 0x11ca, a->id);
 		strcat(buf, g_14a9a54);
-		he_SendCmdMessage(b, cmd, buf, &(*(char*)g_6b5c60));
+		he_SendCmdMessage(b, cmd, buf, &(*(char*)str_empty));
 		result = 1;
 	}
 	if (result != 0) {

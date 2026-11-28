@@ -6,14 +6,14 @@
 #include "Develop/Units/d3/d3_camera.h"
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
-extern float g_662d40[3];
+extern float d3_UnitAxisVectors[3];
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern float g_7e3a40[3];
+extern float d3_SavedCameraPos[3];
 extern float d3_CameraTargetRotation[3];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-extern char* g_7e2aa0;
-extern char* g_7746c0;
+extern char* d2_SelectedBuilding;
+extern char* d3_FocusedEntityObject;
 
 typedef struct {
 	char pad0[0x8c];
@@ -67,9 +67,9 @@ void __cdecl d3_FocusCameraOnEntity(Ent* entity)
 	obj = entity->obj;
 	d3_GetObjectVerticalBounds(obj, &lo, &hi);
 	D3DXMatrixTranspose(m, (float*) ((char*) d3_ActiveCamera + 0x18c));
-	a = g_662d40[0] * -600.0f;
-	b = g_662d40[1] * -600.0f;
-	c = g_662d40[2] * -600.0f;
+	a = d3_UnitAxisVectors[0] * -600.0f;
+	b = d3_UnitAxisVectors[1] * -600.0f;
+	c = d3_UnitAxisVectors[2] * -600.0f;
 	off[0] = m[8] * c + m[4] * b + m[0] * a;
 	off[1] = m[9] * c + m[5] * b + m[1] * a;
 	off[2] = m[10] * c + m[6] * b + m[2] * a;
@@ -103,10 +103,10 @@ void __cdecl d3_FocusCameraOnEntity(Ent* entity)
 	d3_CameraTargetRotation[0] = rot[0];
 	d3_CameraTargetRotation[1] = rot[1];
 	d3_CameraTargetRotation[2] = rot[2];
-	g_7e3a40[0] = q[0];
-	g_7e3a40[1] = q[1];
-	g_7e3a40[2] = q[2];
-	save = (Save*) gm_GetEntityTableEntry((char*) (((House*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970])));
+	d3_SavedCameraPos[0] = q[0];
+	d3_SavedCameraPos[1] = q[1];
+	d3_SavedCameraPos[2] = q[2];
+	save = (Save*) gm_GetEntityTableEntry((char*) (((House*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot])));
 	if (save != 0) {
 		*(int*) &save->pos[0] = *(int*) &q[0];
 		*(int*) &save->pos[1] = *(int*) &q[1];
@@ -115,6 +115,6 @@ void __cdecl d3_FocusCameraOnEntity(Ent* entity)
 		*(int*) &save->rot[1] = *(int*) &rot[1];
 		*(int*) &save->rot[2] = *(int*) &rot[2];
 	}
-	g_7e2aa0 = (char*) entity;
-	g_7746c0 = entity->obj;
+	d2_SelectedBuilding = (char*) entity;
+	d3_FocusedEntityObject = entity->obj;
 }

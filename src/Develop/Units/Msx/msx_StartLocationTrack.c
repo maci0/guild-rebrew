@@ -14,13 +14,13 @@ typedef struct MSX_LOCATION_TRACK_MAP {
 #include "Develop/client_types.h"
 #include "Develop/Units/Msx/id_group.h"
 
-extern char* g_7746c4;
-extern unsigned char* g_7746c8;
-extern char* g_7746cc;
+extern char* d2_VisitedBuilding;
+extern unsigned char* d2_InteriorBuilding;
+extern char* sv_SelectedBuilding;
 extern unsigned char* lpGebaeudePROT;
 extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern IdGroup g_688118[];
+extern IdGroup msx_LocationTrackGroups[];
 extern MSX_LOCATION_TRACK_MAP g_6819b8[];
 extern char g_772c10[];
 extern char s_68a14c[];
@@ -49,9 +49,9 @@ void __cdecl msx_StartLocationTrack(void)
 	int k;
 	Chan_14cc460* track;
 
-	e = (unsigned char*) g_7746c4;
+	e = (unsigned char*) d2_VisitedBuilding;
 	if (e == 0) {
-		e = g_7746c8;
+		e = d2_InteriorBuilding;
 		if (e == 0) {
 			return;
 		}
@@ -61,36 +61,36 @@ void __cdecl msx_StartLocationTrack(void)
 	cls = gm_GetSeason((int*) &gm_GameTime);
 	i = msx_FindActiveGroup();
 	if (i >= 0) {
-		g_688118[i].active = j;
-		if (g_688118[i].ids[0] != 0x2694) {
-			for (; g_688118[i].ids[j] != 0; j++) {
-				if (gm_StartFilteredEntitySearch(2, 4, g_774970, 5, g_688118[i].ids[j]) != 0) {
-					g_688118[i].score -= 0x1e;
+		msx_LocationTrackGroups[i].active = j;
+		if (msx_LocationTrackGroups[i].ids[0] != 0x2694) {
+			for (; msx_LocationTrackGroups[i].ids[j] != 0; j++) {
+				if (gm_StartFilteredEntitySearch(2, 4, gm_LocalPlayerSlot, 5, msx_LocationTrackGroups[i].ids[j]) != 0) {
+					msx_LocationTrackGroups[i].score -= 0x1e;
 					break;
 				}
 			}
-			if (g_688118[i].ids[j] == 0) {
-				g_688118[i].score -= 0x14;
+			if (msx_LocationTrackGroups[i].ids[j] == 0) {
+				msx_LocationTrackGroups[i].score -= 0x14;
 			}
 		} else {
-			g_688118[i].score -= 0x1e;
+			msx_LocationTrackGroups[i].score -= 0x1e;
 		}
 	}
 	n = msx_FindGroupByKey(kind);
 	if (n < 0) {
 		return;
 	}
-	name = g_688118[n].name;
+	name = msx_LocationTrackGroups[n].name;
 	if (strlen(name) != 0) {
-		g_688118[n].active = 1;
-		for (j = 0; g_688118[n].ids[j] != 0; j++) {
-			if (gm_StartFilteredEntitySearch(2, 4, g_774970, 5, g_688118[n].ids[j]) != 0) {
-				g_688118[n].score += 0x1e;
+		msx_LocationTrackGroups[n].active = 1;
+		for (j = 0; msx_LocationTrackGroups[n].ids[j] != 0; j++) {
+			if (gm_StartFilteredEntitySearch(2, 4, gm_LocalPlayerSlot, 5, msx_LocationTrackGroups[n].ids[j]) != 0) {
+				msx_LocationTrackGroups[n].score += 0x1e;
 				break;
 			}
 		}
-		if (g_688118[n].ids[j] == 0) {
-			g_688118[n].score += 0x14;
+		if (msx_LocationTrackGroups[n].ids[j] == 0) {
+			msx_LocationTrackGroups[n].score += 0x14;
 		}
 		track = msx_StartTrack(name, 0);
 		tp_msx_CurrentTrack = g_772d20 = track;
@@ -102,7 +102,7 @@ void __cdecl msx_StartLocationTrack(void)
 	}
 	for (k = 0; g_6819b8[k].kind != 0; k++) {
 		p = &g_6819b8[k];
-		if (p->kind == kind && (p->owner == 0 || p->owner == *(unsigned short*) g_7746cc) && (cls == p->cls || p->cls == -1)) {
+		if (p->kind == kind && (p->owner == 0 || p->owner == *(unsigned short*) sv_SelectedBuilding) && (cls == p->cls || p->cls == -1)) {
 			for (c = 0; c < 6; c++) {
 				if (p->names[c][0] == 0) {
 					break;
@@ -113,15 +113,15 @@ void __cdecl msx_StartLocationTrack(void)
 				return;
 			}
 			strcpy(name, s);
-			g_688118[n].active = 1;
-			for (j = 0; g_688118[n].ids[j] != 0; j++) {
-				if (gm_StartFilteredEntitySearch(2, 4, g_774970, 5, g_688118[n].ids[j]) != 0) {
-					g_688118[n].score += 0x1e;
+			msx_LocationTrackGroups[n].active = 1;
+			for (j = 0; msx_LocationTrackGroups[n].ids[j] != 0; j++) {
+				if (gm_StartFilteredEntitySearch(2, 4, gm_LocalPlayerSlot, 5, msx_LocationTrackGroups[n].ids[j]) != 0) {
+					msx_LocationTrackGroups[n].score += 0x1e;
 					break;
 				}
 			}
-			if (g_688118[n].ids[j] == 0) {
-				g_688118[n].score += 0x14;
+			if (msx_LocationTrackGroups[n].ids[j] == 0) {
+				msx_LocationTrackGroups[n].score += 0x14;
 			}
 			track = msx_StartTrack(name, 0);
 			tp_msx_CurrentTrack = g_772d20 = track;

@@ -1,7 +1,7 @@
 
 
 
-extern float g_6628a0;
+extern float flt_1_0;
 
 #include "Develop/DieGildeAddOn/game/alchemistry_logic.h"
 int __cdecl ahm_CheckFlag(void*);

@@ -22,7 +22,7 @@ int __cdecl d2_CreateGebaeudeListPanel(void)
 	int h;
 	unsigned short* p;
 
-	p = (unsigned short*) &((EntityStruct*) g_slot_table)[g_774970];
+	p = (unsigned short*) &((EntityStruct*) g_slot_table)[gm_LocalPlayerSlot];
 	h = d2_LoadForm(0, 0, (char*) 0x6ac834);
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);

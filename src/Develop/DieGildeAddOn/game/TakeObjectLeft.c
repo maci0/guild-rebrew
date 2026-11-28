@@ -1,14 +1,14 @@
 #include "Develop/DieGildeAddOn/game/ch_script.h"
 
 
-extern char* g_6b7ebc;
+extern char* evt_WaitingScriptTask;
 extern char* evt_CurrentScript;
 int __cdecl ch_QueueTakeObjectLeft(char* e, char* name, char* src, int param);
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
 int __cdecl TakeObjectLeft(char** a, char** name, int* param, char** src)
 {
-	if (g_6b7ebc != 0 && *(void**) (g_6b7ebc + 0x44) == (void*) TakeObjectLeft) {
+	if (evt_WaitingScriptTask != 0 && *(void**) (evt_WaitingScriptTask + 0x44) == (void*) TakeObjectLeft) {
 		if (*(int*) (*a + 0x128) != 0) {
 			*(void**) (evt_CurrentScript + 0xc60) = (void*) TakeObjectLeft;
 		}

@@ -1,10 +1,10 @@
 #include <math.h>
 
-extern float g_662d60;
-extern float g_662d64;
-extern float g_662d68;
+extern float d3_BasisUpX;
+extern float d3_BasisUpY;
+extern float d3_BasisUpZ;
 extern float g_662ce8;
-extern float g_662d40[3];
+extern float d3_UnitAxisVectors[3];
 
 void __cdecl d3_NormalizeVector(float*);
 
@@ -17,11 +17,11 @@ void __cdecl d3_BuildBasisMatrixFromDir(float* dir, float angle, float* mat)
 	float t;
 	float dotOffset;
 
-	v[2] = g_662d68;
+	v[2] = d3_BasisUpZ;
 	s = (float) sin(angle);
 	c = (float) cos(angle);
-	v[0] = g_662d60 * c - g_662d64 * s;
-	v[1] = g_662d60 * s + g_662d64 * c;
+	v[0] = d3_BasisUpX * c - d3_BasisUpY * s;
+	v[1] = d3_BasisUpX * s + d3_BasisUpY * c;
 	mat[8] = dir[0];
 	mat[9] = dir[1];
 	mat[10] = dir[2];
@@ -32,14 +32,14 @@ void __cdecl d3_BuildBasisMatrixFromDir(float* dir, float angle, float* mat)
 	mat[6] = dotOffset * mat[10] + v[2];
 	if ((float) sqrt(mat[6] * mat[6] + mat[4] * mat[4] + mat[5] * mat[5]) < g_662ce8) {
 		t = -mat[9];
-		mat[4] = t * mat[8] + g_662d60;
-		mat[5] = t * mat[9] + g_662d64;
-		mat[6] = t * mat[10] + g_662d68;
+		mat[4] = t * mat[8] + d3_BasisUpX;
+		mat[5] = t * mat[9] + d3_BasisUpY;
+		mat[6] = t * mat[10] + d3_BasisUpZ;
 		if ((float) sqrt(mat[6] * mat[6] + mat[4] * mat[4] + mat[5] * mat[5]) < g_662ce8) {
 			t = -mat[10];
-			mat[4] = t * mat[8] + g_662d40[0];
-			mat[5] = t * mat[9] + g_662d40[1];
-			mat[6] = t * mat[10] + g_662d40[2];
+			mat[4] = t * mat[8] + d3_UnitAxisVectors[0];
+			mat[5] = t * mat[9] + d3_UnitAxisVectors[1];
+			mat[6] = t * mat[10] + d3_UnitAxisVectors[2];
 			if ((float) sqrt(mat[6] * mat[6] + mat[4] * mat[4] + mat[5] * mat[5]) < g_662ce8) {
 				mat[0xe] = 0.0f;
 				mat[0xd] = 0.0f;

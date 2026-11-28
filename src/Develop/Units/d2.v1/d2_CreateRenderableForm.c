@@ -42,8 +42,8 @@ typedef struct
 
 /* Gold window table 0xf8f120; the Gold record is 0x3c4 bytes, not the shared
  * Win_1015f40 size, so rows are addressed with the native stride. */
-extern Win_1015f40 g_1015f40[0x60];
-extern D2_FORM_RECORD g_1038140[];
+extern Win_1015f40 d2_Windows[0x60];
+extern D2_FORM_RECORD d2_Forms[];
 extern int g_14ce86c;
 
 int __cdecl d2_LoadForm(int, int, char*);
@@ -67,14 +67,14 @@ int __cdecl d2_CreateRenderableForm(int x, int y, char* formName)
 	if (r != 0) {
 		rec = (char*) 0xfb1020 + r * 0x2ac;
 		for (i = 0; i < *(int*) (rec + 0x184); i++) {
-			w = &((GOLD_GUI_WINDOW*) g_1015f40)[((int*) (rec + 4))[i]];
+			w = &((GOLD_GUI_WINDOW*) d2_Windows)[((int*) (rec + 4))[i]];
 			*(int*) ((char*) &g_00f8f080[w->id] + 0x38) = 1;
 			for (j = 0; j < w->count; j++) {
 				*(int*) ((char*) &g_00f8f080[w->list[j]] + 0x38) = 1;
 			}
 		}
 		*(int*) (rec + 0x198) = 1;
-		w = &((GOLD_GUI_WINDOW*) g_1015f40)[*(int*) (rec + 4)];
+		w = &((GOLD_GUI_WINDOW*) d2_Windows)[*(int*) (rec + 4)];
 		memset(buf, 0, sizeof(buf));
 		buf[1] = w->width;
 		buf[2] = w->height;
@@ -100,12 +100,12 @@ int __cdecl d2_CreateRenderableForm(int x, int y, char* formName)
 
 	id = d2_LoadForm(x, y, formName);
 	if (id != 0) {
-		p = &((D2_FORM_PAGE*)g_1038140)[id];
+		p = &((D2_FORM_PAGE*)d2_Forms)[id];
 		for (i = 0; i < p->count; i++) {
-			w = &((D2_FORM_WIN*)g_1015f40)[p->wins[i]];
-			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[w->i[0x27c / 4]].value_048) = 1;
+			w = &((D2_FORM_WIN*)d2_Windows)[p->wins[i]];
+			(*(int*)&((D2_CONTROL_TL*)d2_Controls)[w->i[0x27c / 4]].value_048) = 1;
 			for (j = 0; j < w->i[0x2c / 4]; j++) {
-				(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[((int*) w->i[0x28 / 4])[j]].value_048) = 1;
+				(*(int*)&((D2_CONTROL_TL*)d2_Controls)[((int*) w->i[0x28 / 4])[j]].value_048) = 1;
 			}
 		}
 		p->ready = 1;

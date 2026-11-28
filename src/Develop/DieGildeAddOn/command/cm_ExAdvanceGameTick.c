@@ -18,8 +18,8 @@ extern pos14_7f4c00 gm_GameTime;
 extern int g_6a3438;
 extern int g_6a3434;
 extern int g_6a3430;
-extern int g_772620;
-extern LightState g_100dc20;
+extern int ai_DispatchedTradeCount;
+extern LightState ai_MeisterDebugState;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
 int __cdecl gm_CompareGameTime(GAME_TIMESTAMP*, GAME_TIMESTAMP*);
@@ -47,12 +47,12 @@ int __cdecl cm_ExAdvanceGameTick(char* x, char* out)
 		}
 		if (g_6a3430 != 0)
 			ai_UpdateAllEntityDrives();
-		memset(&g_100dc20, 0, 0xb00);
+		memset(&ai_MeisterDebugState, 0, 0xb00);
 		if (g_6a3430 != 0) {
-			g_772620 = 0;
+			ai_DispatchedTradeCount = 0;
 			for (i = 0; i < 0x300; i++) {
-				if (*(unsigned short*) (((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i])) != 0xffff)
-					ai_EvaluateMeister(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]));
+				if (*(unsigned short*) (((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i])) != 0xffff)
+					ai_EvaluateMeister(((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i]));
 			}
 			ai_StepEntityTurns();
 		}

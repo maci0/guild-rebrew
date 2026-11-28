@@ -42,8 +42,8 @@ extern int g_6b5c88;
 
 
 
-extern int g_14ce920[];
-extern short g_14ce922;
+extern int io_ActiveInputState[];
+extern short io_MouseY;
 extern short g_14ce924;
 extern char g_66cdb0[];
 extern char g_66cc50[];
@@ -77,8 +77,8 @@ int __cdecl io_InitDirectInputMouse(HWND hwnd, HINSTANCE hinst, int flags)
 
 	g_14ce8a4 = hinst;
 	g_6b5c88 = flags;
-	g_14ce89c = hwnd;
-	hr = DirectInput8Create(hinst, 0x800, g_66cdb0, (void**) &g_14cf954, 0);
+	io_InputHwnd = hwnd;
+	hr = DirectInput8Create(hinst, 0x800, g_66cdb0, (void**) &io_DirectInput, 0);
 	if (hr < 0) {
 		if (hr == 0x80070481) {
 			io_FormatInputError(0, hr, g_67747c);
@@ -97,20 +97,20 @@ int __cdecl io_InitDirectInputMouse(HWND hwnd, HINSTANCE hinst, int flags)
 		}
 		return 0;
 	}
-	hr = g_14cf954->vtbl->CreateDevice(g_14cf954, g_66cc50, &g_14ce8a0, 0);
+	hr = io_DirectInput->vtbl->CreateDevice(io_DirectInput, g_66cc50, &io_MouseDevice, 0);
 	if (hr < 0) {
 		io_FormatInputError(0, hr, g_677404);
 		return 0;
 	}
-	hr = g_14ce8a0->vtbl->SetDataFormat(g_14ce8a0, g_6711b4);
+	hr = io_MouseDevice->vtbl->SetDataFormat(io_MouseDevice, g_6711b4);
 	if (hr < 0) {
 		io_FormatInputError(0, hr, g_6773e0);
 		return 0;
 	}
 	if (flags & 2) {
-		hr = g_14ce8a0->vtbl->SetCooperativeLevel(g_14ce8a0, hwnd, 0xa);
+		hr = io_MouseDevice->vtbl->SetCooperativeLevel(io_MouseDevice, hwnd, 0xa);
 	} else {
-		hr = g_14ce8a0->vtbl->SetCooperativeLevel(g_14ce8a0, hwnd, 5);
+		hr = io_MouseDevice->vtbl->SetCooperativeLevel(io_MouseDevice, hwnd, 5);
 	}
 	if (hr != 0) {
 		if (hr == 0x80070057) {
@@ -121,7 +121,7 @@ int __cdecl io_InitDirectInputMouse(HWND hwnd, HINSTANCE hinst, int flags)
 			io_FormatInputError(0, hr, g_677354);
 		}
 	}
-	hr = g_14ce8a0->vtbl->SetEventNotification(g_14ce8a0, 0);
+	hr = io_MouseDevice->vtbl->SetEventNotification(io_MouseDevice, 0);
 	if (hr != 0) {
 		io_FormatInputError(0, hr, g_677334);
 		return 0;
@@ -131,29 +131,29 @@ int __cdecl io_InitDirectInputMouse(HWND hwnd, HINSTANCE hinst, int flags)
 	dipdw.dwObj = 0;
 	dipdw.dwHow = 0;
 	dipdw.dwData = 0x80;
-	hr = g_14ce8a0->vtbl->SetProperty(g_14ce8a0, (const void*) 1, &dipdw);
+	hr = io_MouseDevice->vtbl->SetProperty(io_MouseDevice, (const void*) 1, &dipdw);
 	if (hr < 0) {
 		io_FormatInputError(0, hr, g_677318);
 		return 0;
 	}
 	io_AcquireKeyboard(1);
-	*(short*) g_14ce920 = 200;
-	g_14ce922 = 200;
+	*(short*) io_ActiveInputState = 200;
+	io_MouseY = 200;
 	g_14ce924 = 0;
-	hr = g_14cf954->vtbl->CreateDevice(g_14cf954, g_66cc40, &g_14ce90c, 0);
+	hr = io_DirectInput->vtbl->CreateDevice(io_DirectInput, g_66cc40, &io_KeyboardDevice, 0);
 	if (hr < 0) {
 		io_FormatInputError(0, hr, g_6772f8);
 		return 0;
 	}
-	hr = g_14ce90c->vtbl->SetDataFormat(g_14ce90c, g_670fac);
+	hr = io_KeyboardDevice->vtbl->SetDataFormat(io_KeyboardDevice, g_670fac);
 	if (hr < 0) {
 		io_FormatInputError(0, hr, g_6772d8);
 		return 0;
 	}
 	if (flags & 1) {
-		hr = g_14ce90c->vtbl->SetCooperativeLevel(g_14ce90c, hwnd, 0x15);
+		hr = io_KeyboardDevice->vtbl->SetCooperativeLevel(io_KeyboardDevice, hwnd, 0x15);
 	} else {
-		hr = g_14ce90c->vtbl->SetCooperativeLevel(g_14ce90c, hwnd, 0xa);
+		hr = io_KeyboardDevice->vtbl->SetCooperativeLevel(io_KeyboardDevice, hwnd, 0xa);
 	}
 	if (hr != 0) {
 		return 0;
@@ -163,7 +163,7 @@ int __cdecl io_InitDirectInputMouse(HWND hwnd, HINSTANCE hinst, int flags)
 	dipdw.dwObj = 0;
 	dipdw.dwHow = 0;
 	dipdw.dwData = 0x80;
-	if (g_14ce90c->vtbl->SetProperty(g_14ce90c, (const void*) 1, &dipdw) < 0) {
+	if (io_KeyboardDevice->vtbl->SetProperty(io_KeyboardDevice, (const void*) 1, &dipdw) < 0) {
 		return 0;
 	}
 	io_AcquireMouse(1);

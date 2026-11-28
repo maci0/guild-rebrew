@@ -5,7 +5,7 @@ typedef struct {
 
 struct VFS_DIR;
 
-extern struct VFS_DIR* g_6b7fdc;
+extern struct VFS_DIR* vfs_RootDir;
 extern char s_6790b0[];
 
 void* __cdecl vfs_Tfopen(void*, char*, struct VFS_DIR*);
@@ -41,7 +41,7 @@ void __cdecl SaveGroup(void* name, int count, ITEM_448a00** list)
 		}
 	}
 	if (kinder == 0) {
-		cont = vfs_Tfopen(name, s_6790b0, g_6b7fdc);
+		cont = vfs_Tfopen(name, s_6790b0, vfs_RootDir);
 		vfs_WriteInt((int) cont, 0x3a6c00bb);
 		vfs_WriteInt((int) cont, count);
 		for (i = 0; i < count; i++)
@@ -53,7 +53,7 @@ void __cdecl SaveGroup(void* name, int count, ITEM_448a00** list)
 		d3_UnlinkObject(list[i]);
 		d3_AttachSceneNode((ITEM_448a00*) kinder, list[i]);
 	}
-	cont = vfs_Tfopen(name, s_6790b0, g_6b7fdc);
+	cont = vfs_Tfopen(name, s_6790b0, vfs_RootDir);
 	vfs_WriteInt((int) cont, 0x3a6c00bb);
 	vfs_WriteInt((int) cont, 1);
 	d3_WriteSceneNodeTree((int) cont, list[0]);

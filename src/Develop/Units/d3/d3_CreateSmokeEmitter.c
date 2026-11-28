@@ -13,7 +13,7 @@ int __cdecl fcn_0064d3f8(void);
 int* __cdecl d3_CreateParticleSystem(int n, const char* name, Bytes4 f, int a, int b, void (__cdecl* cb)(void));
 void __cdecl d3_SetEffectPosition(int* s, float* pos);
 void __cdecl d3_UpdateSmokeParticles(void);
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 /* ADDRESS: GOLDTL 0x00418000 */
@@ -35,7 +35,7 @@ int* __cdecl d3_CreateSmokeEmitter(int a1, float* pos, int n, int a4, int a5, in
     f.c |= 2;
     s = d3_CreateParticleSystem(n, "Rauch", f, a4, a1, d3_UpdateSmokeParticles);
     if (s != 0) {
-        k = g_6b7fac;
+        k = gm_GameTicks;
         mask = color.d;
         d3_SetEffectPosition(s, pos);
         s[0] = v2;

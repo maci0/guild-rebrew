@@ -1,10 +1,10 @@
-extern int g_67a370;
+extern int d3_ActiveScene;
 extern char d3_SceneObjectSentinel[];
-extern unsigned int g_1052c50;
-extern volatile int g_6b7fac;
+extern unsigned int tb_TimerDelay;
+extern volatile int gm_GameTicks;
 extern int d3_CurrentContextIndex;
 extern int d3_ActiveCamera;
-extern int g_6b86d4;
+extern int d3_SceneRenderLock;
 extern char g_6b8018;
 
 void __cdecl d3_UpdateTextureScrollOffsets(unsigned int now);
@@ -24,13 +24,13 @@ typedef struct {
 /* ADDRESS: GOLDTL 0x0043b170 */
 void __cdecl d3_UpdateScene(unsigned int flags, char force, unsigned int mode, char deep)
 {
-	if (g_6b86d4 < 0) {
-		g_6b86d4 = 0;
+	if (d3_SceneRenderLock < 0) {
+		d3_SceneRenderLock = 0;
 	}
-	if (!g_6b8018 || g_6b86d4 != 0 || !d3_ActiveCamera) {
+	if (!g_6b8018 || d3_SceneRenderLock != 0 || !d3_ActiveCamera) {
 		return;
 	}
-	g_6b86d4 = 1;
+	d3_SceneRenderLock = 1;
 	if (force) {
 		unsigned int now;
 		unsigned int elapsed;
@@ -41,10 +41,10 @@ void __cdecl d3_UpdateScene(unsigned int flags, char force, unsigned int mode, c
 		D3_SCENE_CTX_ENTRY* entry;
 		char* node;
 
-		now = g_6b7fac;
+		now = gm_GameTicks;
 		d3_UpdateTextureScrollOffsets(now);
 		fl = flags | 0x181;
-		d3_VisitSceneObjects((char*) g_67a370, 0, fl, d3_UpdateSceneObjectAnimCallback, (void*) now);
+		d3_VisitSceneObjects((char*) d3_ActiveScene, 0, fl, d3_UpdateSceneObjectAnimCallback, (void*) now);
 		if (deep) {
 			i = 0;
 			entry = (D3_SCENE_CTX_ENTRY*) 0x1043340;
@@ -53,7 +53,7 @@ void __cdecl d3_UpdateScene(unsigned int flags, char force, unsigned int mode, c
 					node = entry->node;
 					if (node != 0 && node != d3_SceneObjectSentinel) {
 						do {
-							d3_VisitSceneObjects((char*) g_67a370, node, fl, d3_UpdateSceneObjectAnimCallback, (void*) (now | 0x80000000));
+							d3_VisitSceneObjects((char*) d3_ActiveScene, node, fl, d3_UpdateSceneObjectAnimCallback, (void*) (now | 0x80000000));
 							node = *(char**) (node + 0x1f4);
 						} while (node != d3_SceneObjectSentinel);
 					}
@@ -62,7 +62,7 @@ void __cdecl d3_UpdateScene(unsigned int flags, char force, unsigned int mode, c
 				entry++;
 			} while ((int) entry < (int) 0x1052a40);
 		}
-		scale = g_1052c50;
+		scale = tb_TimerDelay;
 		elapsed = now - *(unsigned int*) 0x6b806c;
 		frames = ++*(unsigned int*) 0x6b8070;
 		if (elapsed > 60 && elapsed > 0) {
@@ -79,5 +79,5 @@ void __cdecl d3_UpdateScene(unsigned int flags, char force, unsigned int mode, c
 		}
 	}
 	d3_IncrementScenePass(mode);
-	g_6b86d4--;
+	d3_SceneRenderLock--;
 }

@@ -1,9 +1,9 @@
 
 
-unsigned char g_6a375c = 1;
+unsigned char gm_PlayerCount = 1;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern char g_6a3a04[];
 extern char g_6a2300[];
 
@@ -30,28 +30,28 @@ int __cdecl d2_ChoosePlayerCount(void)
 	h = d2_LoadForm(0, 0, g_6a3a04);
 	d2_CenterDialogWindows(h);
 	d = d2_GetWindowListItem(h, 0, 0);
-	mode = *(unsigned char*) &(*(int*)&g_6a375c);
-	*(unsigned char*) &(*(int*)&g_6a375c) = 2;
+	mode = *(unsigned char*) &(*(int*)&gm_PlayerCount);
+	*(unsigned char*) &(*(int*)&gm_PlayerCount) = 2;
 	if (mode >= 2) {
-		*(unsigned char*) &(*(int*)&g_6a375c) = mode;
+		*(unsigned char*) &(*(int*)&gm_PlayerCount) = mode;
 	}
-	d2_SetElementValue(d, 2, 8, (unsigned char) (*(int*)&g_6a375c));
+	d2_SetElementValue(d, 2, 8, (unsigned char) (*(int*)&gm_PlayerCount));
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(h, 1);
 	io_AppendText(0x1ab5);
 	d2_SetForm(h, 2);
 	io_AppendText((int) g_6a2300, 0x7d, 0x7e);
 	while (main_RunFrameLoop(d2_ChoosePlayerCount, 0x24087) != 0) {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc == 1) {
-			g_774654 = 1;
-		} else if (g_100f1dc == 2) {
-			*(unsigned char*) &(*(int*)&g_6a375c) = d2_GetControlValue(d);
+		if (d2_DialogButtonAction == 1) {
+			d2_DialogCloseRequested = 1;
+		} else if (d2_DialogButtonAction == 2) {
+			*(unsigned char*) &(*(int*)&gm_PlayerCount) = d2_GetControlValue(d);
 			d2_SetFormVisibility(h, 0);
 			result = 1;
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 		}
 	}
 	if (h != -1) {

@@ -11,15 +11,15 @@ typedef struct {
 
 
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-extern char g_7f4ca4[];
-extern char g_7f4ca2[];
+extern char gm_EntityIdField[];
+extern char gm_SlotTableKindView[];
 extern pos14_7f4c00 gm_GameTime;
 extern unsigned char* lpGebaeudePROT;
 extern unsigned char* lpGebaeudeINST;
 extern char* gm_CityEntity;
-extern int g_7747b4;
+extern int gm_DifficultyLevel;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_100dc20;
+extern int ai_MeisterDebugState;
 extern int g_100dc24;
 
 unsigned short __cdecl gm_RandomMod(int);
@@ -80,7 +80,7 @@ void __cdecl ai_CalcMeisterRaeuber(char* meister)
 
 	res = fcn_00502cd0(*(int*) (*(char**) (meister + 0x16c) + 0x5d), 2, 6, 0, 0x116);
 	if (res != 0) {
-		g_100b0ac = 0;
+		ai_ProductionGoodsCount = 0;
 		ai_ResourceCount = 0;
 		ai_CollectGoodsResources(meister, res);
 		ai_PlanMeisterSupplies(meister, res, *(int*) (*(char**) (meister + 0x16c) + 0x39));
@@ -101,7 +101,7 @@ void __cdecl ai_CalcMeisterRaeuber(char* meister)
 		*(int*) (meister + 0x1b4) |= 0x20;
 		hits = 0;
 		freehits = 0;
-		for (p = g_7f4ca0; (int) p < 0x85a0a0; p += sizeof(ENTITY_RECORD)) {
+		for (p = gm_EntitySlotTable; (int) p < 0x85a0a0; p += sizeof(ENTITY_RECORD)) {
 			if (*(unsigned char*) (p + 8) == 0) {
 				continue;
 			}
@@ -128,7 +128,7 @@ void __cdecl ai_CalcMeisterRaeuber(char* meister)
 				freehits++;
 			}
 		}
-		if (g_100dc20 == *(int*) (meister + 0x16c)) {
+		if (ai_MeisterDebugState == *(int*) (meister + 0x16c)) {
 			g_100dc34 = freehits;
 			if (*(int*) (meister + 0x1c0) != -1) {
 				g_100dc24 = gm_AccumulateTyped2((char*) *(int*) (meister + 0x1c0));
@@ -143,10 +143,10 @@ void __cdecl ai_CalcMeisterRaeuber(char* meister)
 			return;
 		}
 		bld = *(char**) (meister + 0x16c);
-		kind = ((ENTITY_RECORD*)(g_7f4ca2 - 2))[*(unsigned short*)(bld + 0x27)].entity_state;
+		kind = ((ENTITY_RECORD*)(gm_SlotTableKindView - 2))[*(unsigned short*)(bld + 0x27)].entity_state;
 		if (kind != 6 && kind != 7) {
 			if (gm_RandomFloat01() > 0.85) {
-				if (freehits >= 3 && *(int*) &gm_GameTime >= 7 - g_7747b4) {
+				if (freehits >= 3 && *(int*) &gm_GameTime >= 7 - gm_DifficultyLevel) {
 					goto attack;
 				}
 			}
@@ -217,8 +217,8 @@ attack:
 				if (cand == 0) {
 					best = w;
 				} else {
-					v = (float) gm_AccumulateTyped2((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (p + 0x27)]) * w;
-					if ((float) gm_AccumulateTyped2((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (cand + 0x27)]) * best < v) {
+					v = (float) gm_AccumulateTyped2((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (p + 0x27)]) * w;
+					if ((float) gm_AccumulateTyped2((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (cand + 0x27)]) * best < v) {
 						best = w;
 					} else {
 						continue;
@@ -232,7 +232,7 @@ attack:
 			msg[4] = 0x62;
 			bld = *(char**) (meister + 0x16c);
 			idx = *(unsigned short*) (bld + 0x27);
-			*(int*) (msg + 8) = ((ENTITY_RECORD*)(g_7f4ca4 - 4))[idx].entity_id;
+			*(int*) (msg + 8) = ((ENTITY_RECORD*)(gm_EntityIdField - 4))[idx].entity_id;
 			*(int*) (msg + 0xc) = *(int*) (bld + 1);
 			*(int*) (msg + 0x28) = *(int*) &gm_GameTime;
 			*(int*) (msg + 0x2c) = gm_GameTime.b;
@@ -248,7 +248,7 @@ attack:
 				return;
 			}
 			*(int*) (msg + 0x6c) = *(int*) (query + 2);
-			for (p = g_7f4ca0 + 0x165; (int) p < 0x85a205; p += sizeof(ENTITY_RECORD)) {
+			for (p = gm_EntitySlotTable + 0x165; (int) p < 0x85a205; p += sizeof(ENTITY_RECORD)) {
 				if (*(short*) (p - 0x165) != -1 && *(int*) (p + 7) == *(int*) (meister + 0x16c) && *(unsigned char*) p != 0 && *(int*) (p + 0x17) == 0 && *(int*) (p + 0x1f) != 0 &&
 				    *(int*) (*(int*) (p + 0x1f) + 0x2c) == *(int*) (*(int*) (p + 7) + 1)) {
 					*(int*) (msg + 0x58) = *(int*) (p - 0x161);
@@ -273,7 +273,7 @@ send48:
 		msg[4] = 0x48;
 		bld = *(char**) (meister + 0x16c);
 		idx = *(unsigned short*) (bld + 0x27);
-		*(int*) (msg + 8) = ((ENTITY_RECORD*)(g_7f4ca4 - 4))[idx].entity_id;
+		*(int*) (msg + 8) = ((ENTITY_RECORD*)(gm_EntityIdField - 4))[idx].entity_id;
 		*(int*) (msg + 0xc) = *(int*) (bld + 1);
 		*(int*) (msg + 0x28) = *(int*) &gm_GameTime;
 		*(int*) (msg + 0x2c) = gm_GameTime.b;
@@ -289,7 +289,7 @@ send48:
 		scanned = 0;
 		found = 0;
 		if (limit > 0) {
-			p = g_7f4ca0 + 0x165;
+			p = gm_EntitySlotTable + 0x165;
 			do {
 				if (scanned >= 4) {
 					break;

@@ -16,7 +16,7 @@ void __cdecl d2_SetValueGaugeStepLabels(int slot, int n, ...)
 	int i;
 	va_list ap;
 
-	p = (Slot*)&((D2_CONTROL_TL*)g_1015ea0)[slot];
+	p = (Slot*)&((D2_CONTROL_TL*)d2_Controls)[slot];
 	*((char*)((D2_CONTROL_TL*)p) + 0xe8) = 0;
 	va_start(ap, n);
 	for (i = 0; i < n; i++) {

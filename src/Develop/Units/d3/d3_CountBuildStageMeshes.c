@@ -14,7 +14,7 @@ struct list {
 };
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_67a370;
+extern int d3_ActiveScene;
 
 void __cdecl d3_SelectSceneContext(int, int);
 int __cdecl d3_FindSceneObject(int, int, int, char*);
@@ -40,7 +40,7 @@ int __cdecl d3_CountBuildStageMeshes(char* action)
 	sprintf(buf, "he_%i", *(int*) (action + 4));
 	l.handle = d3_FindSceneObject(0, 0x1c0, 0, buf);
 	l.count = 0;
-	d3_VisitSceneObjects(g_67a370, l.handle, 0x2c0, d3_CollectObjectCallback, &l);
+	d3_VisitSceneObjects(d3_ActiveScene, l.handle, 0x2c0, d3_CollectObjectCallback, &l);
 	for (i = 1; i < l.count; i++) {
 		n = 0;
 		*(int*) (l.e[i] + 0x224) = 0;

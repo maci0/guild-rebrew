@@ -5,8 +5,8 @@ typedef struct Slots {
 // SIZE 0xb8
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern unsigned char* lpGebaeudePROT;
-extern char g_868060[];
-extern unsigned char g_773d75;
+extern char gm_TownTable[];
+extern unsigned char gm_ActiveTownIndex;
 
 int* __cdecl gm_GetChainNodeAtIndex(int, int);
 char* __cdecl gm_ResolveParentEntity(char*);
@@ -84,16 +84,16 @@ void __cdecl he_BuyTransportCargoAtStop(char* e, char who)
 		m = gm_eval_SlotVoll(b.obj, p[0], n);
 		if (*(short*) (q + 0x27) != *(short*) par) {
 			if (t->category == 10) {
-				val = (int) (gm_GetSeasonPrice(*(unsigned short*) o, g_773d75) * 1.1f);
+				val = (int) (gm_GetSeasonPrice(*(unsigned short*) o, gm_ActiveTownIndex) * 1.1f);
 			} else if (t->category == 0x1c) {
 				val = (int) (gm_GetSeasonPrice(*(unsigned short*) o, q[0x65]) * 1.1f);
 			} else {
-				val = (int) (gm_GetSeasonPrice(*(unsigned short*) o, g_773d75) * *(float*) (q + 0x49));
+				val = (int) (gm_GetSeasonPrice(*(unsigned short*) o, gm_ActiveTownIndex) * *(float*) (q + 0x49));
 			}
 		}
 		if (m > 0) {
 			if (gm_GetSeasonTreasury(par, who) < m * val) {
-				txt_GetCitySelectInfo(g_868060 + who * 756, name);
+				txt_GetCitySelectInfo(gm_TownTable + who * 756, name);
 				io_FormatTextBuffer(text, 0x42f0, name, 0xc14, name, who);
 				he_PostEntityMessage(*(int*) (par + 4), -1, text, 0, 0x5ef, "");
 			}

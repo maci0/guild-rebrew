@@ -14,7 +14,7 @@ typedef struct {
 } ent2c;
 // SIZE 0x2c
 
-extern int g_67a370;
+extern int d3_ActiveScene;
 
 char __cdecl d3sm_SampleHeight(int, float*, int*, int*, int*);
 int __cdecl gm_FindBestBalancedTile(char*, int, int, int, int*, int*);
@@ -30,7 +30,7 @@ int __cdecl cut_AssignGuardOrder(char* rec, char* e)
 	int c;
 	int h;
 
-	h = *(int*) (((char*)g_67a370) + 0xb0);
+	h = *(int*) (((char*)d3_ActiveScene) + 0xb0);
 	if (d3sm_SampleHeight(h, (float*) (*(char**) (*(char**) (e + 0x184) + 0x34) + 0x4c), &c, &a, &b) != 0 &&
 	    gm_FindBestBalancedTile(e, c, a, 8, &c, &a) != 0) {
 		r = gm_FindOrCreateEntitySlot(rec, e);

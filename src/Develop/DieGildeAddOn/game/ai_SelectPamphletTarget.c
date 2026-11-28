@@ -30,10 +30,10 @@ int __cdecl ai_SelectPamphletTarget(char* actor, char* unused, char* out)
 	if (ai_SelectRankedCandidates(actor, 1, &mask, 0, gm_RandomMod(0x40), &idx) == 0) {
 		return 0;
 	}
-	if (he_CountEntityActions(actor, ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[(unsigned short) idx]), &cnt) == 0) {
+	if (he_CountEntityActions(actor, ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[(unsigned short) idx]), &cnt) == 0) {
 		return 0;
 	}
-	if (he_HasNoActiveAction0x88(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[(unsigned short) idx]), actor) == 0) {
+	if (he_HasNoActiveAction0x88(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[(unsigned short) idx]), actor) == 0) {
 		return 0;
 	}
 	if (cnt > 3) {
@@ -43,6 +43,6 @@ int __cdecl ai_SelectPamphletTarget(char* actor, char* unused, char* out)
 		return 0;
 	}
 	out[0] = 7;
-	*(int*) (out + 4) = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[(unsigned short) idx].entity_id;
+	*(int*) (out + 4) = ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[(unsigned short) idx].entity_id;
 	return 1;
 }

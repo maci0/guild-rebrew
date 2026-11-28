@@ -15,13 +15,13 @@ extern int g_14aba98;          /* 0x014aba98 */
 extern int g_14aba9c;          /* 0x014aba9c */
 extern int g_14abaa0;          /* 0x014abaa0 */
 extern int g_14ce8cc;          /* 0x014ce8cc */
-extern int g_14ce8e0;          /* 0x014ce8e0 */
+extern int io_RightButtonReleased;          /* 0x014ce8e0 */
 extern int d2_HoveredWindow;          /* 0x0100f894 */
-extern int g_100f1dc;          /* 0x0100f1dc */
-extern char* g_1015ea0;          /* 0x01015ea0 */
+extern int d2_DialogButtonAction;          /* 0x0100f1dc */
+extern char* d2_Controls;          /* 0x01015ea0 */
 extern int d2_CurrentElementId;           /* 0x0067d370 */
 extern int d2_CurrentWindowId;           /* 0x00772514 */
-extern unsigned char g_773d75; /* 0x00773d75 */
+extern unsigned char gm_ActiveTownIndex; /* 0x00773d75 */
 #include "Develop/Units/d2.v1/client_dialog_state.h"           /* 0x00774654 */
 extern int g_775334;           /* 0x00775334 */
 extern int main_LoopFlags;           /* 0x007e46ac */
@@ -124,7 +124,7 @@ int __cdecl d2_RunEquipmentDialog(int objectArg)
 	d2_DrawPanelFrame(d2_CurrentWindowId, 0x72f, 0);
 	d2_CreateWindowScrollbar(0x270, 0x15c, d2_CurrentWindowId,
 			d2_GetFormWindow(win, 2, 0x78, v10, v9buf, &v8));
-	((D2_CONTROL_TL*) (g_1015ea0))[v8].font = 0x54;
+	((D2_CONTROL_TL*) (d2_Controls))[v8].font = 0x54;
 	def = g_item_def_table + (unsigned int) *p * 0x41;
 	v16 = win * 0xaf;
 label_5c7466:
@@ -138,12 +138,12 @@ label_5c7466:
 		v15 = d2_SyncProduktionSlotGrid(objectArg, (int) p);
 		d2_DrawProduktionSlotGrid(win, 1, 1, v7, (int) p);
 	}
-	if (g_100f1dc != -1 && v15 != 0) {
+	if (d2_DialogButtonAction != -1 && v15 != 0) {
 		v7 = 0;
-		p4 = (int*) ((int) g_7774a0 + 0x8);
+		p4 = (int*) ((int) d2_TrainingRows + 0x8);
 		for (;;) {
 			if (p4[-2] != 0 && *p4 == d2_CurrentElementId) {
-				selected = g_7774a0[v7].entity;
+				selected = d2_TrainingRows[v7].entity;
 				if (selected != 0) {
 					cm_BeginCommandSync();
 					d2_ClearSelectedControl();
@@ -176,7 +176,7 @@ label_5c752a:
 				v5 = gm_CheckBuildingCategoryForItem(selected, v13);
 				if (v5 != 0) {
 					cm_SendSellObjekt(*(int*) (selected + 4), *(int*) &p[1], v13, 1,
-							g_773d75, 0);
+							gm_ActiveTownIndex, 0);
 					v5 = d2_GetControlValue(*(int*) (v7 + ((int) g_778da0 + 0x10)));
 					d2_CreateGuiWindow(*(int*) (v7 + ((int) g_778da0 + 0x10)), 0,
 							*(int*) (v7 + ((int) g_778da0 + 0x30)), v5 - 1, 0);
@@ -208,7 +208,7 @@ label_5c7572:
 				v5 = gm_CheckBuildingCategoryForItem(selected, v13);
 				if (v5 != 0) {
 					cm_SendSellObjekt(*(int*) (selected + 4), *(int*) &p[1], v13, 1,
-							g_773d75, 0);
+							gm_ActiveTownIndex, 0);
 					v5 = d2_GetControlValue(*(int*) (v7 + ((int) g_7796e0 + 0x10)));
 					d2_CreateGuiWindow(*(int*) (v7 + ((int) g_7796e0 + 0x10)), 0,
 							*(int*) (v7 + ((int) g_7796e0 + 0x30)), v5 - 1, 0);
@@ -233,9 +233,9 @@ label_5c7572:
 	ch_UpdateHeldObjectAttachment(selected);
 label_5c76eb:
 	v7 = d2_UpdateTrainingRows(win, 2);
-	if (d2_HoveredWindow == g_1038140[win].wins[1] && v7 != 0 && g_14ce8cc != 0) {
+	if (d2_HoveredWindow == d2_Forms[win].wins[1] && v7 != 0 && g_14ce8cc != 0) {
 		cm_BeginCommandSync();
-		p4 = (int*) ((int) g_7774a0 + 0x0);
+		p4 = (int*) ((int) d2_TrainingRows + 0x0);
 		do {
 			if (*p4 != 0) {
 				int* q;
@@ -246,7 +246,7 @@ label_5c76eb:
 					if (*q != -1 && d2_GetControlValue(*q) != 0) {
 						cm_SendSellObjekt(*(int*) &p[1], *(int*) (*p4 + 4),
 								q[1], 1,
-								g_773d75,
+								gm_ActiveTownIndex,
 								0);
 					}
 					q += 2;
@@ -254,26 +254,26 @@ label_5c76eb:
 				} while (n != 0);
 			}
 			p4 += 0x10;
-		} while ((int) p4 < ((int) g_7774a0 + 0x800));
+		} while ((int) p4 < ((int) d2_TrainingRows + 0x800));
 		cm_EndCommandSync();
 		v7 = cm_AreQueuedCommandsDone();
 		while (v7 == 0) {
 			cm_StepCommandQueue();
 			v7 = cm_AreQueuedCommandsDone();
 		}
-		p4 = (int*) ((int) g_7774a0 + 0x0);
+		p4 = (int*) ((int) d2_TrainingRows + 0x0);
 		do {
 			if (*p4 != 0) {
 				ch_UpdateHeldObjectAttachment(*p4);
 			}
 			p4 += 0x10;
-		} while ((int) p4 < ((int) g_7774a0 + 0x800));
+		} while ((int) p4 < ((int) d2_TrainingRows + 0x800));
 	}
 	__itoa(g_775334, v11, 10);
 	d2_SetLabelText(v8, v11);
-	if (g_14ce8e0 != 0) {
+	if (io_RightButtonReleased != 0) {
 		if (CountDisplayCounters() == 0) {
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 		} else {
 			int* q;
 			ResetDisplayCounters();
@@ -293,7 +293,7 @@ label_5c76eb:
 				}
 				q += 0xe;
 			} while ((int) q < ((int) g_7796e0 + 0x1d0));
-			p4 = (int*) ((int) g_7774a0 + 0x10);
+			p4 = (int*) ((int) d2_TrainingRows + 0x10);
 			do {
 				if (p4[-4] != 0) {
 					int* q2;

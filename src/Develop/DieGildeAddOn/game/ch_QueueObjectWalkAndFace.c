@@ -1,4 +1,4 @@
-extern float g_662d40[3];
+extern float d3_UnitAxisVectors[3];
 
 
 char* __cdecl fcn_00402140(char* p);
@@ -22,8 +22,8 @@ void __cdecl ch_QueueObjectWalkAndFace(char* owner, char* e)
 
 	g = fcn_00402140(owner);
 	d3_TransformPoint(e, e + 0x4c, a);
-	d3_TransformDirection(e, g_662d40, b);
-	ang = d3_SignedPlanarAngle(g_662d40, b);
+	d3_TransformDirection(e, d3_UnitAxisVectors, b);
+	ang = d3_SignedPlanarAngle(d3_UnitAxisVectors, b);
 	if (d3_SampleHeightmap(g, a, &x, &y, &z)) {
 		r = ch_CreateAction(owner, 0x2d, x, y, d3_GetSceneContextIndex(*(char**) (e + 0x208)));
 		*(int*) (r + 0x160) |= 0x10;

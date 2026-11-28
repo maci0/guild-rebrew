@@ -28,7 +28,7 @@ typedef struct {
 
 
 
-extern char g_1008540[];
+extern char am_Methods[];
 
 int __cdecl ai_IsMethodActive(int);
 void __cdecl ai_PushActiveMethod(int);
@@ -59,7 +59,7 @@ int __cdecl ai_SelectBestMethod(int who, int idx, int arg, Pos *out1, Pos *out2)
 	res2 = 0;
 	primaryFirst.valid = 0;
 	secondaryFirst.valid = 0;
-	me = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx]);
+	me = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[idx]);
 	primarySecond.valid = 0;
 	secondarySecond.valid = 0;
 	if (ai_IsMethodActive(who) != 0) {
@@ -69,7 +69,7 @@ int __cdecl ai_SelectBestMethod(int who, int idx, int arg, Pos *out1, Pos *out2)
 		me->unk_218 = 1;
 	}
 	for (i = 0; i < 73; i++) {
-		pl = &((AM_METHOD*)g_1008540)[i];
+		pl = &((AM_METHOD*)am_Methods)[i];
 		if (pl->type == 0 || pl->type == me->unk_132 || ai_IsMethodActive(pl->type) != 0) {
 			continue;
 		}

@@ -1,6 +1,6 @@
 extern unsigned char g_slot_table[2];
-extern unsigned char g_773d75;
-extern int g_aed32c;
+extern unsigned char gm_ActiveTownIndex;
+extern int cm_PacketDeltaBase;
 
 int __cdecl gm_RandomMod(int);
 int __cdecl gm_IsEntityOrphaned(unsigned char*);
@@ -81,11 +81,11 @@ void __cdecl gm_MaintainNpcPopulation(void)
 			syncVal = 3;
 			initFlag = 2;
 			cm_BeginPacketFieldDelta(e, *(int*) (e + 4));
-			cm_AppendCommandSyncField(1, 1, (short) ((int) s - g_aed32c), &syncVal);
+			cm_AppendCommandSyncField(1, 1, (short) ((int) s - cm_PacketDeltaBase), &syncVal);
 			if (s[0xb] < 2)
-				cm_AppendCommandSyncField(1, 1, (short) ((int) s - g_aed32c + 0xb), &initFlag);
+				cm_AppendCommandSyncField(1, 1, (short) ((int) s - cm_PacketDeltaBase + 0xb), &initFlag);
 			cm_SendSetAttribute();
-			cm_RequestTransferCurrencyNoKill(*(int*) (e + 4), -1, g_773d75,
+			cm_RequestTransferCurrencyNoKill(*(int*) (e + 4), -1, gm_ActiveTownIndex,
 				((gm_RandomMod(0x800) & 0xffff) + 0x800) * initFlag * 0x20);
 			count++;
 			continue;
@@ -107,7 +107,7 @@ void __cdecl gm_MaintainNpcPopulation(void)
 			count++;
 			handle = (int) cm_GetCommandResult(handle);
 			val = ((gm_RandomMod(0x2000) & 0xffff) + 10000) * 0x40;
-			cm_RequestTransferCurrencyNoKill(*(int*) (handle + 4), -1, g_773d75, val);
+			cm_RequestTransferCurrencyNoKill(*(int*) (handle + 4), -1, gm_ActiveTownIndex, val);
 		}
 	}
 	if ((float) active <= 652.8f) {
@@ -131,10 +131,10 @@ void __cdecl gm_MaintainNpcPopulation(void)
 				syncVal = (gm_RandomMod(0xc) & 0xffff) + 10;
 				handle = (int) cm_GetCommandResult(handle);
 				passes = gm_RandomMod(0x400);
-				cm_RequestTransferCurrencyNoKill(*(int*) (handle + 4), -1, g_773d75,
+				cm_RequestTransferCurrencyNoKill(*(int*) (handle + 4), -1, gm_ActiveTownIndex,
 					((passes & 0xffff) + 0x400) * 0x40);
 				cm_BeginPacketFieldDelta(handle, *(int*) (handle + 4));
-				cm_AppendCommandSyncField(1, 1, (short) (handle - g_aed32c + 0x167), &syncVal);
+				cm_AppendCommandSyncField(1, 1, (short) (handle - cm_PacketDeltaBase + 0x167), &syncVal);
 				cm_SendSetAttribute();
 			}
 			val--;

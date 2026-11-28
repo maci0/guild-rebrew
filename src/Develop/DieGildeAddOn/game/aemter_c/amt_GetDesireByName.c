@@ -3,11 +3,11 @@
 
 extern int g_6798d4;
 extern unsigned char* lpGebaeudePROT;
-extern int g_6b7fdc;
+extern int vfs_RootDir;
 extern int gm_GameTime;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
 extern int d2_CurrentWindowId;
 
 int __cdecl vfs_ResolvePath(char* a, int b, int c, char* out);

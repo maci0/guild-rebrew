@@ -9,8 +9,8 @@ struct IRes {
 	IResVtbl* v;
 };
 
-extern unsigned long g_14ce728;
-extern int g_6b8300;
+extern unsigned long d3_LastReleaseRefCount;
+extern int d3_CurrentFloor;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl d3_ReleaseVertexBufferPtr(void);
@@ -42,12 +42,12 @@ char __cdecl d3_ResetDeviceObjects(void)
 	d3_ReleaseVertexBufferPtr();
 	for (o = g_1042c38; o != g_1042d00; o = *(char**) (o + 0x1f8)) {
 		if (*(IRes**) (o + 0x268) != 0) {
-			g_14ce728 = (*(IRes**) (o + 0x268))->v->Release(*(IRes**) (o + 0x268));
+			d3_LastReleaseRefCount = (*(IRes**) (o + 0x268))->v->Release(*(IRes**) (o + 0x268));
 			*(IRes**) (o + 0x268) = 0;
 		}
 	}
-	if (g_6b8300 != 0) {
-		d3_ReleaseTerrainSurfaces(g_6b8300);
+	if (d3_CurrentFloor != 0) {
+		d3_ReleaseTerrainSurfaces(d3_CurrentFloor);
 	}
 	if (g_6b89c0 != 0) {
 		d3_ReleaseSkyDomeBuffers(g_6b89c0);
@@ -57,8 +57,8 @@ char __cdecl d3_ResetDeviceObjects(void)
 	for (i = 0; i < 0x40; i++) {
 		if (i != saved) {
 			d3_SelectSceneContext(i, 1);
-			if (g_6b8300 != 0) {
-				d3_ReleaseTerrainSurfaces(g_6b8300);
+			if (d3_CurrentFloor != 0) {
+				d3_ReleaseTerrainSurfaces(d3_CurrentFloor);
 			}
 			if (g_6b89c0 != 0) {
 				d3_ReleaseSkyDomeBuffers(g_6b89c0);
@@ -74,8 +74,8 @@ char __cdecl d3_ResetDeviceObjects(void)
 		d3_RestoreDeviceResources();
 		d3_ResetRenderStates(0);
 		d3_AllocRenderVertexBuffer();
-		if (g_6b8300 != 0) {
-			d3_RebuildFloorMeshes(g_6b8300);
+		if (d3_CurrentFloor != 0) {
+			d3_RebuildFloorMeshes(d3_CurrentFloor);
 		}
 		if (g_6b89c0 != 0) {
 			d3_CreateSkyDomeBuffers(g_6b89c0);
@@ -84,8 +84,8 @@ char __cdecl d3_ResetDeviceObjects(void)
 		for (i = 0; i < 0x40; i++) {
 			if (i != saved) {
 				d3_SelectSceneContext(i, 1);
-				if (g_6b8300 != 0) {
-					d3_RebuildFloorMeshes(g_6b8300);
+				if (d3_CurrentFloor != 0) {
+					d3_RebuildFloorMeshes(d3_CurrentFloor);
 					UpdateSceneLighting(1);
 				}
 				if (g_6b89c0 != 0) {

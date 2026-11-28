@@ -1,18 +1,18 @@
-extern int g_6a2bfc;
-extern int g_6a2c00;
+extern int d2_ScrollPergaTopElem;
+extern int d2_ScrollPergaBottomElem;
 extern int d2_CurrentWindowId;
 
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
-extern int g_6a2bf8;
-extern char* g_77255c;
-extern char* g_1015ea0;
+extern int d2_ScrollPergaForm;
+extern char* d2_CurrentWindow;
+extern char* d2_Controls;
 
 void __cdecl d2_SetForm(int, int);
 
-int g_6a2bf8 = 0xffffffff;
+int d2_ScrollPergaForm = 0xffffffff;
 
 unsigned char _dpad_6a25b0[4] = {
     0x01, 0x00, 0x00, 0x00
@@ -138,18 +138,18 @@ unsigned char _dpad_6a2be8[4] = {
 /* ADDRESS: GOLDTL 0x00535570 */
 int __cdecl d2_CreateScrollPerga(void)
 {
-	if (g_6a2bf8 != -1) {
+	if (d2_ScrollPergaForm != -1) {
 		return -1;
 	}
-	g_6a2bf8 = d2_LoadForm(0, 0, "misc\\scroll_perga");
-	d2_CenterDialogWindows(g_6a2bf8);
-	if (g_6a2bf8 == -1) {
-		return g_6a2bf8;
+	d2_ScrollPergaForm = d2_LoadForm(0, 0, "misc\\scroll_perga");
+	d2_CenterDialogWindows(d2_ScrollPergaForm);
+	if (d2_ScrollPergaForm == -1) {
+		return d2_ScrollPergaForm;
 	}
-	d2_SetForm(g_6a2bf8, 0);
-	g_6a2bfc = d2_AddElementToWindow(0, 0, 0x6e0, d2_CurrentWindowId);
-	g_6a2c00 = d2_AddElementToWindow(0, 0x1d1, 0x6e0, d2_CurrentWindowId);
-	return g_6a2bf8;
+	d2_SetForm(d2_ScrollPergaForm, 0);
+	d2_ScrollPergaTopElem = d2_AddElementToWindow(0, 0, 0x6e0, d2_CurrentWindowId);
+	d2_ScrollPergaBottomElem = d2_AddElementToWindow(0, 0x1d1, 0x6e0, d2_CurrentWindowId);
+	return d2_ScrollPergaForm;
 }
 
 /* ADDRESS: GOLDTL 0x00535630 */
@@ -157,13 +157,13 @@ void __cdecl d2_UpdateScrollPerga(void)
 {
 	int v;
 
-	if (g_6a2bf8 != -1) {
-		d2_SetForm(g_6a2bf8, 1);
-		v = *(int*) (g_77255c + 0x258) / 6 % 12;
+	if (d2_ScrollPergaForm != -1) {
+		d2_SetForm(d2_ScrollPergaForm, 1);
+		v = *(int*) (d2_CurrentWindow + 0x258) / 6 % 12;
 		if (v < 0) {
 			v = 0;
 		}
-		((D2_CONTROL_TL*) (g_1015ea0))[g_6a2bfc].value_088 = v;
-		((D2_CONTROL_TL*) (g_1015ea0))[g_6a2c00].value_088 = v;
+		((D2_CONTROL_TL*) (d2_Controls))[d2_ScrollPergaTopElem].value_088 = v;
+		((D2_CONTROL_TL*) (d2_Controls))[d2_ScrollPergaBottomElem].value_088 = v;
 	}
 }

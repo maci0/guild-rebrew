@@ -113,8 +113,8 @@ void __cdecl he_RunPlagueSpread(Order_551f90* o)
 			m[0x36] = 9;
 			*(pos14_7f4c00*) (m + 0x28) = (*(pos14_7f4c00*)&gm_GameTime);
 			for (i = 0; i < 0x300; i++) {
-				if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 6 || ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 7) {
-					*(int*) (m + 8) = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id;
+				if (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_type == 6 || ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_type == 7) {
+					*(int*) (m + 8) = ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_id;
 					cm_SendCopyEntityData(m);
 				}
 			}

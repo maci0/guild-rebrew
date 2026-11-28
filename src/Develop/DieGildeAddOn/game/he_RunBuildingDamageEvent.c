@@ -44,9 +44,9 @@ void __cdecl he_RunBuildingDamageEvent(char* u)
 			if (e != 0) {
 				gm_AdjustGebaeudeCondition(e, -0x32);
 			}
-			if (((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_state == 6) {
+			if (((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (u + 8)].entity_state == 6) {
 				io_FormatTextBuffer(text, 0x10b8, e);
-				he_MessageBoxQuickjump(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id, ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id, text, 0,
+				he_MessageBoxQuickjump(((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (u + 8)].entity_id, ((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (u + 8)].entity_id, text, 0,
 				    0x5ec, *(int*) (e + 1), -1, 0, 0);
 			}
 		}

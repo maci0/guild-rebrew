@@ -48,7 +48,7 @@ int __cdecl ai_PlanHauchDesVerfalls(char* e, char* q, Blk24* b1, Blk24* b2)
 	t = 0xf00500;
 	if (ai_SelectRankedCandidates(e, 1, &t, 0, gm_RandomMod(0x20) + 32.0f, &idx) == 0)
 		return 0;
-	p = ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx]);
+	p = ((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[idx]);
 	b2->c = *(int*) (p + 4);
 	b2->a = h[1];
 	b2->d = 4;
@@ -69,7 +69,7 @@ int __cdecl ai_PlanHauchDesVerfalls(char* e, char* q, Blk24* b1, Blk24* b2)
 		f.mask = 0x7b4c4a0;
 		f.b = 0;
 		out = -1;
-		ai_FindEntityInFavorRange(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), 0, f, 0, 100.0f, &out);
+		ai_FindEntityInFavorRange(((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot]), 0, f, 0, 100.0f, &out);
 		if (out == -1)
 			return 0;
 		b2->b = out;

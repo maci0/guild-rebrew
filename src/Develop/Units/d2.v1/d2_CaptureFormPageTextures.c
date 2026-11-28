@@ -15,7 +15,7 @@ typedef struct Obj {
 } Obj;
 /* SIZE 0x2bc */
 
-extern D2_FORM_RECORD g_1038140[];
+extern D2_FORM_RECORD d2_Forms[];
 extern int g_14ce86c;
 
 char* __cdecl d3_FindTextureByName(char* name);
@@ -36,7 +36,7 @@ void __cdecl d2_CaptureFormPageTextures(int slot, char* upperName, char* lowerNa
 	char* upperTex;
 	char* lowerTex;
 
-	form = &((Obj*)g_1038140)[slot];
+	form = &((Obj*)d2_Forms)[slot];
 	upperTex = 0;
 	if (upperName) {
 		strcpy(form->name1, upperName);

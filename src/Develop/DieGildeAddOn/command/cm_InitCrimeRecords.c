@@ -15,8 +15,8 @@ typedef struct
 // SIZE 0x8
 
 extern int cm_LastCrimeId;
-extern Rec2d_9a3800 g_9a3800[512];
-extern Pair_99f800 g_99f800[0x800];
+extern Rec2d_9a3800 cm_CrimeRecords[512];
+extern Pair_99f800 cm_CrimeEvidenceLinks[0x800];
 
 void __cdecl cm_InitCrimeRecords(void)
 {
@@ -24,13 +24,13 @@ void __cdecl cm_InitCrimeRecords(void)
 
 	cm_LastCrimeId = 0;
 	for (i = 0; i < 512; i++) {
-		g_9a3800[i].x16 = -1;
-		g_9a3800[i].x12 = -1;
-		g_9a3800[i].id = -1;
-		g_9a3800[i].x25 = 0;
+		cm_CrimeRecords[i].x16 = -1;
+		cm_CrimeRecords[i].x12 = -1;
+		cm_CrimeRecords[i].id = -1;
+		cm_CrimeRecords[i].x25 = 0;
 	}
 	for (i = 0; i < 0x800; i++) {
-		((Pair*)g_99f800)[i].a = -1;
-		((Pair*)g_99f800)[i].b = -1;
+		((Pair*)cm_CrimeEvidenceLinks)[i].a = -1;
+		((Pair*)cm_CrimeEvidenceLinks)[i].b = -1;
 	}
 }

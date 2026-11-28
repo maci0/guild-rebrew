@@ -1,9 +1,9 @@
 typedef unsigned char u8;
 typedef unsigned short u16;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char g_6b5c60[];
+extern char str_empty[];
 extern char g_6a80c0[];
 
 int __cdecl cm_GetCommandStatus(int);
@@ -47,11 +47,11 @@ void __cdecl he_UpdateEvent0a0(char* p)
         gm_AddTime(p + 0x52, 2, 0, 0);
         if (wnd != 0) {
             w = *(unsigned short*) (s + 0x27);
-            tbl = ((char*)&((ENTITY_RECORD*)g_7f4ca0)[w]);
+            tbl = ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[w]);
             io_FormatTextBuffer(buf, 0x4205, s);
             he_MessageBoxQuickjump(*(int*) (tbl + 4), *(int*) (tbl + 4), buf, 0, 0x5fc,
-                         *(int*) (s + 1), *(int*) (wnd + 2), g_6b5c60,
-                         g_6b5c60);
+                         *(int*) (s + 1), *(int*) (wnd + 2), str_empty,
+                         str_empty);
             gfx = d3_CurrentContextIndex;
             r = init_EnsureObjektSceneContext((int) wnd);
             d3_SelectSceneContext(r, 1);

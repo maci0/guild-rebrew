@@ -20,9 +20,9 @@ typedef struct {
 	unsigned char* data;
 } Map5b4f;
 
-extern int g_67a370;
+extern int d3_ActiveScene;
 extern int main_LoopFlags;
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char g_6abad8[];
@@ -86,7 +86,7 @@ void __cdecl d2_RunSceneChecker(void)
 	h6 = d2_GetWindowListItem(d, 0, io_AppendText(g_6aba5c, 2));
 	h7 = d2_GetWindowListItem(d, 0, io_AppendText(g_6aba48, 2));
 	while (main_RunFrameLoop(d2_RunSceneChecker, t) != 0) {
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == h1) {
 				d2_ShowSmapDiagnostics();
 			}
@@ -116,7 +116,7 @@ void __cdecl d2_RunSceneChecker(void)
 			}
 		}
 		d2_SetForm(d, 1);
-		m = *(Map5b4f**) (((char*)g_67a370) + 0xb0);
+		m = *(Map5b4f**) (((char*)d3_ActiveScene) + 0xb0);
 		if (m != 0 && frame % 128 == 0) {
 			for (i = 0; i < 256; i++) {
 				pal[i].r = (unsigned char) i;
@@ -164,8 +164,8 @@ void __cdecl d2_RunSceneChecker(void)
 			}
 		}
 		frame++;
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 	}
 	d2_DestroyForm(d);

@@ -10,18 +10,18 @@
 
 
 extern pos14_7f4c00 gm_GameTime;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 #include "Develop/DieGildeAddOn/game/entity.h"
 extern char* gm_CityEntity;
-extern int g_14ce8e0;
-extern int g_774654;
-extern int g_100f1dc;
+extern int io_RightButtonReleased;
+extern int d2_DialogCloseRequested;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
 extern int g_774954;
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
@@ -63,10 +63,10 @@ void __cdecl d2_RunTheatreCutscenePicker(void)
 	item[3] = d2_GetWindowListItem(item[7], 0, io_AppendText("%ia[Sturm]$N"));
 	item[5] = d2_GetWindowListItem(item[7], 0, io_AppendText("%ia[Duell]$N"));
 	while (main_RunFrameLoop(0x5b3b60, 0x657c7)) {
-		if (g_14ce8e0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			memset(m, 0, sizeof(m));
 			k = d2_CurrentElementId;
 			if (k == item[9]) {
@@ -74,15 +74,15 @@ void __cdecl d2_RunTheatreCutscenePicker(void)
 				*(char*) (m + 0x26) = 0x20;
 				*(int*) (m + 0x14) = -1;
 				*(char*) (m + 0x30) = 2;
-				*(int*) (m + 0x34) = ((EntityStruct*) g_7f4ca0)[5].entity_id;
-				*(int*) (m + 0xc) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
-				*(int*) (m + 0x38) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
+				*(int*) (m + 0x34) = ((EntityStruct*) gm_EntitySlotTable)[5].entity_id;
+				*(int*) (m + 0xc) = ((EntityStruct*) gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id;
+				*(int*) (m + 0x38) = ((EntityStruct*) gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id;
 				*(char*) (m + 0x7c) = (char) gm_RandomMod(5);
 				i = 0;
 				p = 0x7f4e06;
 				while (p < 0x85a206) {
 					if (*(char*) p == 0xd) {
-						*(int*) (m + 0x3c) = ((EntityStruct*) g_7f4ca0)[i].entity_id;
+						*(int*) (m + 0x3c) = ((EntityStruct*) gm_EntitySlotTable)[i].entity_id;
 						break;
 					}
 					p += 0x21c;
@@ -92,7 +92,7 @@ void __cdecl d2_RunTheatreCutscenePicker(void)
 				p = 0x7f4e06;
 				while (p < 0x85a206) {
 					if (*(char*) p == 0xf) {
-						*(int*) (m + 0x40) = ((EntityStruct*) g_7f4ca0)[i].entity_id;
+						*(int*) (m + 0x40) = ((EntityStruct*) gm_EntitySlotTable)[i].entity_id;
 						break;
 					}
 					p += 0x21c;
@@ -102,7 +102,7 @@ void __cdecl d2_RunTheatreCutscenePicker(void)
 				p = 0x7f4e06;
 				while (p < 0x85a206) {
 					if (*(char*) p == 0xe) {
-						*(int*) (m + 0x44) = ((EntityStruct*) g_7f4ca0)[i].entity_id;
+						*(int*) (m + 0x44) = ((EntityStruct*) gm_EntitySlotTable)[i].entity_id;
 						break;
 					}
 					p += 0x21c;
@@ -117,23 +117,23 @@ void __cdecl d2_RunTheatreCutscenePicker(void)
 				*(char*) (m + 0x26) = 0x20;
 				*(int*) (m + 0x14) = *(int*) (r + 1);
 				*(char*) (m + 0x30) = 2;
-				*(int*) (m + 0xc) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
-				*(int*) (m + 0x34) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
-				*(int*) (m + 0x38) = *(int*) ((char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 0x658);
+				*(int*) (m + 0xc) = ((EntityStruct*) gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id;
+				*(int*) (m + 0x34) = ((EntityStruct*) gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id;
+				*(int*) (m + 0x38) = *(int*) ((char*) ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot]) + 0x658);
 				cut_ExecuteCutscene(m);
 			} else if (k == item[8]) {
 				*(char*) (m + 8) = 9;
 				*(char*) (m + 0x26) = 0x20;
 				*(int*) (m + 0x14) = -1;
 				*(char*) (m + 0x30) = 1;
-				*(int*) (m + 0xc) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
-				*(int*) (m + 0x34) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
+				*(int*) (m + 0xc) = ((EntityStruct*) gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id;
+				*(int*) (m + 0x34) = ((EntityStruct*) gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id;
 				cut_ExecuteCutscene(m);
 			} else if (k == item[4]) {
 				*(char*) (m + 8) = 8;
 				*(char*) (m + 0x30) = 1;
-				*(int*) (m + 0xc) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
-				*(int*) (m + 0x34) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
+				*(int*) (m + 0xc) = ((EntityStruct*) gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id;
+				*(int*) (m + 0x34) = ((EntityStruct*) gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id;
 				*(char*) (m + 0x26) = 0x20;
 				*(int*) (m + 0x14) = -1;
 				cut_ExecuteCutscene(m);
@@ -142,9 +142,9 @@ void __cdecl d2_RunTheatreCutscenePicker(void)
 				memset(m, 0, sizeof(m));
 				*(char*) (m + 8) = 7;
 				*(char*) (m + 0x30) = 2;
-				*(int*) (m + 0xc) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
-				*(int*) (m + 0x34) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
-				*(int*) (m + 0x38) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
+				*(int*) (m + 0xc) = ((EntityStruct*) gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id;
+				*(int*) (m + 0x34) = ((EntityStruct*) gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id;
+				*(int*) (m + 0x38) = ((EntityStruct*) gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id;
 				*(pos14_7f4c00*) &m[0x18] = *(pos14_7f4c00*) &gm_GameTime;
 				*(char*) (m + 0x26) = 0x20;
 				*(int*) (m + 0x14) = -1;
@@ -170,7 +170,7 @@ void __cdecl d2_RunTheatreCutscenePicker(void)
 					*(int*) (m + 0x14) = -1;
 					*(char*) (m + 0x30) = (char) i;
 					*(int*) (m + 0x80) = 0x3e80;
-					*(int*) (m + 0xc) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
+					*(int*) (m + 0xc) = ((EntityStruct*) gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id;
 					*(int*) (m + 0x7c) = *(int*) (r + 1);
 					*(pos14_7f4c00*) &m[0x18] = *(pos14_7f4c00*) &gm_GameTime;
 					gm_AddTime(m + 0x18, 0, 0x1e, 0);
@@ -182,14 +182,14 @@ void __cdecl d2_RunTheatreCutscenePicker(void)
 				*(int*) (msg + 8) = *(int*) (gm_CityEntity + 4);
 				*(int*) (msg + 0xc) = -1;
 				*(int*) (msg + 0x28) = gm_GameTime.a;
-				*(int*) (msg + 0x2c) = g_7f4c04;
-				*(int*) (msg + 0x30) = g_7f4c08;
-				*(unsigned short*) (msg + 0x34) = g_7f4c0c;
+				*(int*) (msg + 0x2c) = gm_GameTimeHour;
+				*(int*) (msg + 0x30) = gm_GameTimeSliceDword;
+				*(unsigned short*) (msg + 0x34) = gm_GameTimeTailWord;
 				*(char*) (msg + 0x36) = 2;
 				i = gm_RandomMod(3) & 0xffff;
-				*(int*) (msg + 0x30) = g_7f4c08;
+				*(int*) (msg + 0x30) = gm_GameTimeSliceDword;
 				*(int*) (msg + 0x58) = i * 3;
-				*(int*) (msg + 0x2c) = g_7f4c04;
+				*(int*) (msg + 0x2c) = gm_GameTimeHour;
 				*(int*) (msg + 0x2e) = 0;
 				goto weather_send;
 			} else if (k == item[1]) {
@@ -197,14 +197,14 @@ void __cdecl d2_RunTheatreCutscenePicker(void)
 				*(int*) (msg + 8) = *(int*) (gm_CityEntity + 4);
 				*(int*) (msg + 0xc) = -1;
 				*(int*) (msg + 0x28) = gm_GameTime.a;
-				*(int*) (msg + 0x2c) = g_7f4c04;
-				*(int*) (msg + 0x30) = g_7f4c08;
-				*(unsigned short*) (msg + 0x34) = g_7f4c0c;
+				*(int*) (msg + 0x2c) = gm_GameTimeHour;
+				*(int*) (msg + 0x30) = gm_GameTimeSliceDword;
+				*(unsigned short*) (msg + 0x34) = gm_GameTimeTailWord;
 				*(char*) (msg + 0x36) = 1;
 				*(int*) (msg + 0x58) = -1;
 				*(int*) (msg + 0x9c) = 0x7d0;
 				*(int*) (msg + 0x2e) = 0;
-				if ((unsigned short) g_7f4c04 >= 0x17) {
+				if ((unsigned short) gm_GameTimeHour >= 0x17) {
 					gm_AddTime(msg + 0x28, (gm_RandomMod(4) & 0xffff) + 7, (gm_RandomMod(2) & 0xffff) * 30, 0);
 				} else {
 					gm_AddTime(msg + 0x28, gm_RandomMod(4) & 0xffff, (gm_RandomMod(2) & 0xffff) * 30, 0);
@@ -214,15 +214,15 @@ void __cdecl d2_RunTheatreCutscenePicker(void)
 				*(char*) (msg + 4) = 0x50;
 				*(int*) (msg + 8) = *(int*) (gm_CityEntity + 4);
 				*(int*) (msg + 0xc) = -1;
-				*(int*) (msg + 0x2c) = g_7f4c04;
-				*(int*) (msg + 0x30) = g_7f4c08;
+				*(int*) (msg + 0x2c) = gm_GameTimeHour;
+				*(int*) (msg + 0x30) = gm_GameTimeSliceDword;
 				*(char*) (msg + 0x36) = 2;
 				*(int*) (msg + 0x58) = -1;
 				*(int*) (msg + 0x9c) = 0x3e8;
 weather_send:
 				*(int*) (msg + 0x28) = gm_GameTime.a;
-				*(unsigned short*) (msg + 0x34) = g_7f4c0c;
-				if ((unsigned short) g_7f4c04 >= 0x17) {
+				*(unsigned short*) (msg + 0x34) = gm_GameTimeTailWord;
+				if ((unsigned short) gm_GameTimeHour >= 0x17) {
 					gm_AddTime(msg + 0x28, (gm_RandomMod(4) & 0xffff) + 7, (gm_RandomMod(2) & 0xffff) * 30, 0);
 				} else {
 					gm_AddTime(msg + 0x28, gm_RandomMod(4) & 0xffff, (gm_RandomMod(2) & 0xffff) * 30, 0);
@@ -234,8 +234,8 @@ weather_send:
 				*(char*) (m + 0x26) = 0x22;
 				*(int*) (m + 0x14) = -1;
 				*(char*) (m + 0x30) = 2;
-				*(int*) (m + 0xc) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
-				*(int*) (m + 0x34) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
+				*(int*) (m + 0xc) = ((EntityStruct*) gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id;
+				*(int*) (m + 0x34) = ((EntityStruct*) gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id;
 				k = 1;
 				p = 0x7f4ca0;
 				while (p < 0x85a0a0) {
@@ -243,7 +243,7 @@ weather_send:
 						break;
 					}
 					if (*(unsigned short*) p != 0xffff && *(char*) (p + 0x166) != 0
-					    && g_774970 != *(unsigned short*) p) {
+					    && gm_LocalPlayerSlot != *(unsigned short*) p) {
 						*(int*) (m + 0x34 + k * 4) = *(int*) (p + 4);
 						k++;
 					}
@@ -253,7 +253,7 @@ weather_send:
 				*(pos14_7f4c00*) &m[0x18] = *(pos14_7f4c00*) &gm_GameTime;
 				gm_AddTime(m + 0x18, 0, 0x1e, 0);
 				cm_EnqueueStagedPacket(m);
-				g_774654 = 2;
+				d2_DialogCloseRequested = 2;
 			}
 		}
 	}

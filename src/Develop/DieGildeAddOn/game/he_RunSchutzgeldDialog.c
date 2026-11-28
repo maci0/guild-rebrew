@@ -14,10 +14,10 @@ typedef struct {
 } Pos14;
 #pragma pack(pop)
 
-extern short g_7f4c0c;
+extern short gm_GameTimeTailWord;
 extern int g_100f884;
-extern int g_100f1dc;
-extern int g_14cbca0;
+extern int d2_DialogButtonAction;
+extern int nt_ClientSocket;
 
 int __cdecl he_StartHandlungSearch(int, ...);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -67,14 +67,14 @@ void __cdecl he_RunSchutzgeldDialog(int dlg, int a1, int a2)
 		}
 		if (g_100f884 != *(int*) (*(int*) (dlg + 0x74) + 8))
 			return;
-		if (g_100f1dc == -1)
+		if (d2_DialogButtonAction == -1)
 			return;
 		t = *(Pos14*) &gm_GameTime;
-		if (g_14cbca0 == -1) {
+		if (nt_ClientSocket == -1) {
 			t.b0 = 6;
 			t.b1c0 = 0;
 		}
-		if (g_100f1dc == 2) {
+		if (d2_DialogButtonAction == 2) {
 			*(int*) (dlg + 0x70) = 3;
 			*(Pos14*) (actor + 0x52) = t;
 			*(int*) (actor + 0xb8) = 1;
@@ -90,7 +90,7 @@ void __cdecl he_RunSchutzgeldDialog(int dlg, int a1, int a2)
 				*(int*) (msg + 0x4d) = *(int*) (msg + 0x4d)
 				    + *(int*) (actor + 0xb4);
 			}
-		} else if (g_100f1dc == 1) {
+		} else if (d2_DialogButtonAction == 1) {
 			*(int*) (dlg + 0x70) = 3;
 			*(Pos14*) (actor + 0x52) = t;
 			*(int*) (actor + 0xb8) = 0;

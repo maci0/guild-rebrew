@@ -27,13 +27,13 @@ int __cdecl gm_ParsePlagueCommand(int a1, int a2, char* s)
 	w = *(int*) (gm_CityEntity + 4);
 	*(char*) (buf + 4) = 0x59;
 	*(int*) (buf + 0x58) = v;
-	*(int*) (buf + 0x2c) = g_7f4c04;
+	*(int*) (buf + 0x2c) = gm_GameTimeHour;
 	*(int*) (buf + 8) = w;
 	*(int*) (buf + 0x28) = gm_GameTime.a;
 	*(int*) (buf + 0x0c) = -1;
 	*(unsigned char*) (buf + 0x36) = 2;
-	*(int*) (buf + 0x30) = g_7f4c08;
-	*(unsigned short*) (buf + 0x34) = (unsigned short) g_7f4c0c;
+	*(int*) (buf + 0x30) = gm_GameTimeSliceDword;
+	*(unsigned short*) (buf + 0x34) = (unsigned short) gm_GameTimeTailWord;
 	*(unsigned short*) (buf + 0x2c) = 0xb;
 	cm_SendCopyEntityData(buf);
 	return 1;

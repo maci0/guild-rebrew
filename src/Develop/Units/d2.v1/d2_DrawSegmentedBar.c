@@ -1,4 +1,4 @@
-extern char* g_772500;
+extern char* d2_FileObjTable;
 extern int d2_CurrentWindowId;
 
 
@@ -12,7 +12,7 @@ void __cdecl d2_DrawSegmentedBar(int x0, int y, int len, int t)
 	int rem;
 	int i;
 
-	w = *(short*) (g_772500 + t * 0x54 + 0x50) + 2;
+	w = *(short*) (d2_FileObjTable + t * 0x54 + 0x50) + 2;
 	n = (int) (len * 0.04761905f);
 	rem = n % 2;
 	n /= 2;

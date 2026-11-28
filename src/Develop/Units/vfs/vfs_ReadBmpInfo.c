@@ -19,7 +19,7 @@ typedef struct {
 } BmpInfoHeader;
 
 typedef struct VFS_DIR VFS_DIR;
-extern VFS_DIR* g_6b7fdc;
+extern VFS_DIR* vfs_RootDir;
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
 void __cdecl vfs_fseek(void* f, int off, int whence);
 int __cdecl vfs_ReadData(char* buf, int size, int count, char* f);
@@ -32,7 +32,7 @@ char __cdecl vfs_ReadBmpInfo(const char* name, int* width, int* height, int* bpp
 	void* f;
 
 	result = 0;
-	f = vfs_Tfopen(name, "rb", g_6b7fdc);
+	f = vfs_Tfopen(name, "rb", vfs_RootDir);
 	if (f != 0) {
 		vfs_fseek(f, 0xe, 0);
 		vfs_ReadData((char*)&bih, 1, 0x28, f);

@@ -18,7 +18,7 @@ typedef struct HitObj {
 /* SIZE 0x8c */
 
 extern int g_67d388;
-extern HitObj** g_772540;
+extern HitObj** d2_ZOrderStack;
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 /* ADDRESS: GOLDTL 0x0046ac40 */
@@ -31,7 +31,7 @@ int __cdecl d2_HitTestWindow(int x, int y)
 	g_67d388 = -1;
 	for (n = 0x3ff; n >= 0; n--) {
 		hit = 0;
-		o = g_772540[n];
+		o = d2_ZOrderStack[n];
 		if (o == 0) {
 			continue;
 		}
@@ -53,7 +53,7 @@ int __cdecl d2_HitTestWindow(int x, int y)
 		if (o->f4c != 0 || o->f48 != 0) {
 			continue;
 		}
-		if (*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[o->f0].kind)) != 0x40) {
+		if (*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[o->f0].kind)) != 0x40) {
 			continue;
 		}
 		g_67d388 = o->f88;

@@ -1,5 +1,5 @@
 extern int gm_GameTime;
-extern char g_773d75;
+extern char gm_ActiveTownIndex;
 extern float g_664188, g_664160, g_66417c, g_664178;
 extern double g_664180;
 
@@ -55,7 +55,7 @@ int __cdecl ai_EvaluateLaw0x0a(char* actor, int unused, int* outValue)
 			}
 			owner = gm_GetGuildHall(1);
 			p = fcn_00502cd0(*(int*) ((char*) owner + 0x5d), 2, 6, 0, 0x115);
-			cur = gm_SumQueryEntryValues(*(int*) ((char*) p + 0x14), g_773d75);
+			cur = gm_SumQueryEntryValues(*(int*) ((char*) p + 0x14), gm_ActiveTownIndex);
 			if (cur < amt_CalcTotalOfficeSalaries() * 3) {
 				r = r + 1 + (gm_RandomMod(3) & 0xffff);
 			}

@@ -21,8 +21,8 @@ struct msg {
 
 extern pos14_7f4c00 gm_GameTime;
 extern char s_6acc74[];
-extern int g_100f1dc;
-extern int g_14ce8e0;
+extern int d2_DialogButtonAction;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
 int __cdecl gs_CollectEvidenceForTarget(int, char*, unsigned short);
@@ -70,11 +70,11 @@ int __cdecl gm_HandleErpressung(unsigned char* e, unsigned char* o)
 	io_AppendText(0x1d57, *(unsigned short*) o, *(unsigned short*) o, *(unsigned short*) o,
 		*(unsigned short*) o, 2);
 	io_AppendText(0x1d58);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	result = 0;
 	do {
-		if (g_100f1dc != -1) {
-			if (g_100f1dc == 2) {
+		if (d2_DialogButtonAction != -1) {
+			if (d2_DialogButtonAction == 2) {
 				if (chance >= gm_RandomMod(8)) {
 					pos = gm_GameTime;
 					gm_AddTime(&pos, 0x60, 0, 0);
@@ -99,22 +99,22 @@ int __cdecl gm_HandleErpressung(unsigned char* e, unsigned char* o)
 						d2_ShowModalMessageBox(text, 0);
 					}
 					result = 1;
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				} else {
 					cm_RequestCopyEntityData(*(int*) (e + 4), *(int*) (o + 4), -0x1a, 1);
 					cm_RequestModifyHealth(*(int*) (e + 4), -2);
 					io_FormatTextBuffer(text, 0x1d59, *(unsigned short*) o);
 					d2_ShowModalMessageBox(text, 0);
 					result = 0;
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				}
-			} else if (g_100f1dc == 1) {
+			} else if (d2_DialogButtonAction == 1) {
 				result = 0;
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop((void*) gm_HandleErpressung, 0x657c7) != 0);
 	d2_DestroyForm(dlg);

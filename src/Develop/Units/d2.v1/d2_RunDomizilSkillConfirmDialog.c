@@ -34,8 +34,8 @@ struct msg {
 
 extern pos14_7f4c00 gm_GameTime;
 extern int d2_CurrentWindowId;
-extern int g_100f1dc;
-extern int g_14ce8e0;
+extern int d2_DialogButtonAction;
+extern int io_RightButtonReleased;
 extern int d2_CurrentElementId;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
@@ -86,25 +86,25 @@ int __cdecl d2_RunDomizilSkillConfirmDialog(char* entity, int* who, int kind)
 	yes = d2_GetWindowListItem(dlg, 2, item_idx);
 	no = d2_GetWindowListItem(dlg, 2, item_idx + 1);
 	d2_SetElementEnabled(yes, ok);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
-		} else if (g_100f1dc != -1) {
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
+		} else if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == yes) {
 				memset(&msg, 0, sizeof(msg));
 				msg.kind = 0x97;
 				msg.code = 1;
-				msg.owner = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (entity + 0x27)].entity_id;
+				msg.owner = ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (entity + 0x27)].entity_id;
 				msg.target = *(int*) (entity + 1);
 				msg.when = gm_GameTime;
 				msg.who = *who;
 				msg.delay = gm_RandomMod(0x5a0) + 1000;
 				msg.other = kind;
 				cm_SendCopyEntityData(&msg);
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			} else if (d2_CurrentElementId == no) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	} while (main_RunFrameLoop(d2_RunDomizilSkillConfirmDialog, 0x677c7) != 0);

@@ -20,7 +20,7 @@ void __cdecl ai_SendAction0x8f(char* e)
 	int cnt;
 
 	cnt = 1;
-	rec = (ENTITY_RECORD*) g_7f4ca0;
+	rec = (ENTITY_RECORD*) gm_EntitySlotTable;
 	do {
 		if (rec->entity_index != 0xffff
 		    && *(int*) &rec->unk_16c == *(int*) (e + 0x16c)

@@ -1,7 +1,7 @@
 
 
-extern short g_14ce8c0;
-extern short g_14ce8c2;
+extern short io_ActiveCursorX;
+extern short io_ActiveCursorY;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_774a58;
 extern int g_774a4c;
@@ -16,14 +16,14 @@ int __cdecl d2_ScrollMapViewport(char* w)
 	x = *(int*) (w + 0x268);
 	g_774a58 = x;
 	y = *(int*) (w + 0x258);
-	if (g_14ce8c0 <= g_6b5c80) {
+	if (io_ActiveCursorX <= g_6b5c80) {
 		x -= 10;
-	} else if (g_14ce8c0 >= d2_MouseRightBoundary) {
+	} else if (io_ActiveCursorX >= d2_MouseRightBoundary) {
 		x += 10;
 	}
-	if (g_14ce8c2 <= d2_MouseTopBoundary) {
+	if (io_ActiveCursorY <= d2_MouseTopBoundary) {
 		y -= 10;
-	} else if (g_14ce8c2 >= d2_MouseBottomBoundary) {
+	} else if (io_ActiveCursorY >= d2_MouseBottomBoundary) {
 		y += 10;
 	}
 	if (g_14cf7c8 != 0) {

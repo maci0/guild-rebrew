@@ -14,20 +14,20 @@
 
 extern unsigned char g_slot_table[2];
 
-extern unsigned short g_774970;
+extern unsigned short gm_LocalPlayerSlot;
 extern int d2_ScreenHeight;
 extern int g_1040494;
 extern int g_774674;
 extern int g_774678;
 extern int g_77467c;
-extern int g_77250c;
+extern int d2_ScreenSurface;
 extern int g_14ce860;
 extern int g_14ce864;
 extern unsigned char g_77534c;
 extern unsigned char g_77670c;
-extern unsigned char g_773d75;
-extern char g_6b5c60[];
-extern char* g_1015ea0;
+extern unsigned char gm_ActiveTownIndex;
+extern char str_empty[];
+extern char* d2_Controls;
 extern int g_6a2578;
 extern int g_6a257c;
 extern int g_6a2580;
@@ -36,7 +36,7 @@ extern int g_6a2588;
 extern int g_6a258c;
 extern int g_6a2590;
 extern int g_6a2594;
-extern int g_6a2598;
+extern int d2_HudTopBarWindowId;
 extern int g_6a25a0;
 extern int g_6a25a4;
 extern int g_6a25a8;
@@ -45,14 +45,14 @@ extern int g_6a25fc;
 extern int g_6a2be8;
 extern int g_6a4768;
 extern int g_6a476c;
-extern unsigned char* g_7746c8;
-extern int g_7746c4;
+extern unsigned char* d2_InteriorBuilding;
+extern int d2_VisitedBuilding;
 extern int g_7746f8;
 extern int g_774698;
 extern int g_774720;
 extern int g_67d8d4;
 extern int d2_CurrentElementId;
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentWindowId;
 extern int g_772544;
 extern int g_77e8a0;
@@ -88,7 +88,7 @@ int __cdecl d2_SetForm(int, int);
 void __cdecl fcn_0066080a(char*);
 
 /* Element record field: 0x2f4-byte stride behind the g_1015ea0 pointer. */
-#define ELEM(i) ((char*) &((D2_CONTROL_TL*) g_1015ea0)[(i)])
+#define ELEM(i) ((char*) &((D2_CONTROL_TL*) d2_Controls)[(i)])
 #define EFIELD(i, off) (*(int*) (ELEM(i) + (off)))
 
 /*
@@ -115,19 +115,19 @@ void __cdecl d2_RefreshTownView(unsigned char a0, int a1)
 	int val;
 	int si;
 
-	if (g_slot_table[2 + g_774970 * 0x21c] != 6) {
+	if (g_slot_table[2 + gm_LocalPlayerSlot * 0x21c] != 6) {
 		return;
 	}
 	d2_SetClipRect(0, 0, g_1040494, d2_ScreenHeight);
 	if (g_774674) {
-		d2_DrawSprite(g_14ce860 - 0x80, 0, g_77250c, g_774674);
+		d2_DrawSprite(g_14ce860 - 0x80, 0, d2_ScreenSurface, g_774674);
 	}
 	if (g_774678) {
-		d2_DrawSprite(g_14ce860 - 0x100, g_14ce864 - 0x80, g_77250c,
+		d2_DrawSprite(g_14ce860 - 0x100, g_14ce864 - 0x80, d2_ScreenSurface,
 			     g_774678);
 	}
 	if (g_77467c) {
-		d2_DrawSprite(*(int*) (0x6a24d8 + g_77534c * 4), 0, g_77250c,
+		d2_DrawSprite(*(int*) (0x6a24d8 + g_77534c * 4), 0, d2_ScreenSurface,
 			     g_77467c);
 	}
 
@@ -175,52 +175,52 @@ void __cdecl d2_RefreshTownView(unsigned char a0, int a1)
 
 		g_6a2578 = d2_AddElementToWindow(
 			0x10, 8, *(int*) (g_slot_table + 0x54
-					  + g_774970 * 0x21c), g_6a2598);
-		((D2_CONTROL_TL*) g_1015ea0)[g_6a2578].flags_1d0 = 0x43;
-		((D2_CONTROL_TL*) g_1015ea0)[g_6a2578].value_05c = 1;
+					  + gm_LocalPlayerSlot * 0x21c), d2_HudTopBarWindowId);
+		((D2_CONTROL_TL*) d2_Controls)[g_6a2578].flags_1d0 = 0x43;
+		((D2_CONTROL_TL*) d2_Controls)[g_6a2578].value_05c = 1;
 
-		g_6a257c = d2_AddElementToWindow(0x23a, 0xd, 0x522, g_6a2598);
-		((D2_CONTROL_TL*) g_1015ea0)[g_6a257c].flags_1d0 = 0x43;
-		((D2_CONTROL_TL*) g_1015ea0)[g_6a257c].value_05c = 1;
+		g_6a257c = d2_AddElementToWindow(0x23a, 0xd, 0x522, d2_HudTopBarWindowId);
+		((D2_CONTROL_TL*) d2_Controls)[g_6a257c].flags_1d0 = 0x43;
+		((D2_CONTROL_TL*) d2_Controls)[g_6a257c].value_05c = 1;
 
-		g_6a25a0 = d2_ShowTxt(0x39, 0xd, g_6b5c60, g_6a2598);
-		((D2_CONTROL_TL*) g_1015ea0)[g_6a25a0].flags_1d0 = 0x43;
-		((D2_CONTROL_TL*) g_1015ea0)[g_6a25a0].value_05c = 1;
-		((D2_CONTROL_TL*) g_1015ea0)[g_6a25a0].font = 0x55;
+		g_6a25a0 = d2_ShowTxt(0x39, 0xd, str_empty, d2_HudTopBarWindowId);
+		((D2_CONTROL_TL*) d2_Controls)[g_6a25a0].flags_1d0 = 0x43;
+		((D2_CONTROL_TL*) d2_Controls)[g_6a25a0].value_05c = 1;
+		((D2_CONTROL_TL*) d2_Controls)[g_6a25a0].font = 0x55;
 
 		g_6a2588 = d2_CreateElement((short) (g_1040494 - 0x8d),
 					(short) (d2_ScreenHeight - 0x73), 0x583);
-		((D2_CONTROL_TL*) g_1015ea0)[g_6a2588].flags_1d0 = 0x43;
-		((D2_CONTROL_TL*) g_1015ea0)[g_6a2588].value_05c = 1;
+		((D2_CONTROL_TL*) d2_Controls)[g_6a2588].flags_1d0 = 0x43;
+		((D2_CONTROL_TL*) d2_Controls)[g_6a2588].value_05c = 1;
 
 		g_6a258c = d2_CreateElement((short) (g_1040494 - 0x57),
 					(short) (d2_ScreenHeight - 0x4f), 0x7d9);
-		((D2_CONTROL_TL*) g_1015ea0)[g_6a258c].flags_1d0 = three;
-		((D2_CONTROL_TL*) g_1015ea0)[g_6a258c].value_05c = 1;
+		((D2_CONTROL_TL*) d2_Controls)[g_6a258c].flags_1d0 = three;
+		((D2_CONTROL_TL*) d2_Controls)[g_6a258c].value_05c = 1;
 
 		g_6a2584 = d2_CreateElement((short) (g_1040494 - 0x2a),
 					(short) (d2_ScreenHeight - 0x66), 0x584);
-		((D2_CONTROL_TL*) g_1015ea0)[g_6a2584].flags_1d0 = 0x43;
-		((D2_CONTROL_TL*) g_1015ea0)[g_6a2584].value_05c = 1;
+		((D2_CONTROL_TL*) d2_Controls)[g_6a2584].flags_1d0 = 0x43;
+		((D2_CONTROL_TL*) d2_Controls)[g_6a2584].value_05c = 1;
 
 		g_6a2590 = d2_CreateElement((short) (g_1040494 - 0x4a), 0xd6,
 					0x585);
-		((D2_CONTROL_TL*) g_1015ea0)[g_6a2590].flags_1d0 = 0x43;
-		((D2_CONTROL_TL*) g_1015ea0)[g_6a2590].value_05c = 1;
+		((D2_CONTROL_TL*) d2_Controls)[g_6a2590].flags_1d0 = 0x43;
+		((D2_CONTROL_TL*) d2_Controls)[g_6a2590].value_05c = 1;
 
 		g_6a2594 = d2_CreateElement((short) (g_1040494 - 0x48), 0xd7,
 					0x551);
-		((D2_CONTROL_TL*) g_1015ea0)[g_6a2594].flags_1d0 = 0x43;
-		((D2_CONTROL_TL*) g_1015ea0)[g_6a2594].value_05c = 1;
-		((D2_CONTROL_TL*) g_1015ea0)[g_6a2594].kind = 8;
+		((D2_CONTROL_TL*) d2_Controls)[g_6a2594].flags_1d0 = 0x43;
+		((D2_CONTROL_TL*) d2_Controls)[g_6a2594].value_05c = 1;
+		((D2_CONTROL_TL*) d2_Controls)[g_6a2594].kind = 8;
 
 		g_6a25a4 = d2_CreateShowTxtElement((short) (g_1040494 - 0x6a),
 					(short) (d2_ScreenHeight - 0x7e),
-					g_6b5c60);
-		((D2_CONTROL_TL*) g_1015ea0)[g_6a25a4].value_06c = 1;
-		((D2_CONTROL_TL*) g_1015ea0)[g_6a25a4].font = 0x54;
-		((D2_CONTROL_TL*) g_1015ea0)[g_6a25a4].width = 0x6b;
-		((D2_CONTROL_TL*) g_1015ea0)[g_6a25a4].height = 0x20;
+					str_empty);
+		((D2_CONTROL_TL*) d2_Controls)[g_6a25a4].value_06c = 1;
+		((D2_CONTROL_TL*) d2_Controls)[g_6a25a4].font = 0x54;
+		((D2_CONTROL_TL*) d2_Controls)[g_6a25a4].width = 0x6b;
+		((D2_CONTROL_TL*) d2_Controls)[g_6a25a4].height = 0x20;
 	} else if (g_77670c) {
 		if (g_6a2578 != -1) {
 			strcpy(ELEM(g_6a2578) + 0xcc, *(char**) 0x14ad034);
@@ -242,22 +242,22 @@ void __cdecl d2_RefreshTownView(unsigned char a0, int a1)
 		}
 	} else {
 		if (g_6a2578 != -1) {
-			*(ELEM(g_6a2578) + 0xcc) = *g_6b5c60;
+			*(ELEM(g_6a2578) + 0xcc) = *str_empty;
 		}
 		if (g_6a257c != -1) {
-			*(ELEM(g_6a257c) + 0xcc) = *g_6b5c60;
+			*(ELEM(g_6a257c) + 0xcc) = *str_empty;
 		}
 		if (g_6a25a0 != -1) {
-			*(ELEM(g_6a25a0) + 0xcc) = *g_6b5c60;
+			*(ELEM(g_6a25a0) + 0xcc) = *str_empty;
 		}
 		if (g_6a2588 != -1) {
-			*(ELEM(g_6a2588) + 0xcc) = *g_6b5c60;
+			*(ELEM(g_6a2588) + 0xcc) = *str_empty;
 		}
 		if (g_6a2584 != -1) {
-			*(ELEM(g_6a2584) + 0xcc) = *g_6b5c60;
+			*(ELEM(g_6a2584) + 0xcc) = *str_empty;
 		}
 		if (g_6a2594 != -1) {
-			*(ELEM(g_6a2594) + 0xcc) = *g_6b5c60;
+			*(ELEM(g_6a2594) + 0xcc) = *str_empty;
 		}
 	}
 
@@ -270,25 +270,25 @@ void __cdecl d2_RefreshTownView(unsigned char a0, int a1)
 				 + gm_GetSeasonFromDate((char*) &fr.pos,
 						*(short*) ((char*) &fr.pos + 2))
 					 * 4));
-		d2_DrawDefaultFontText(*(int*) (0x1015f44 + g_6a2598 * 0x3cc) + 0x181,
-			     0x17, g_77250c, fr.text, 0);
+		d2_DrawDefaultFontText(*(int*) (0x1015f44 + d2_HudTopBarWindowId * 0x3cc) + 0x181,
+			     0x17, d2_ScreenSurface, fr.text, 0);
 	} else {
 		sprintf(fr.text, (char*) 0x6a2e5c,
 			*(int*) (0x14a5450
 				 + gm_GetSeasonFromDate((char*) &fr.pos,
 						*(short*) ((char*) &fr.pos + 2))
 					 * 4));
-		d2_DrawDefaultFontText(*(int*) (0x1015f44 + g_6a2598 * 0x3cc) + 0x195,
-			     0x17, g_77250c, fr.text, 0);
+		d2_DrawDefaultFontText(*(int*) (0x1015f44 + d2_HudTopBarWindowId * 0x3cc) + 0x195,
+			     0x17, d2_ScreenSurface, fr.text, 0);
 	}
 
 	fr.tmp = *(int*) 0x7f4c06 % 0x3c;
-	d2_DrawSpriteFromSet(g_1040494 - 0x50, 0x11, g_77250c,
+	d2_DrawSpriteFromSet(g_1040494 - 0x50, 0x11, d2_ScreenSurface,
 		     d2_GetResourceData(0x581),
 		     (int) (fr.tmp * *(double*) 0x664108));
 
 	fr.tmp = (*(int*) 0x7f4c04 & 0xffff) * 0x3c + *(int*) 0x7f4c06;
-	d2_DrawSpriteFromSet(g_1040494 - 0x50, 0x11, g_77250c,
+	d2_DrawSpriteFromSet(g_1040494 - 0x50, 0x11, d2_ScreenSurface,
 		     d2_GetResourceData(0x582),
 		     (int) (fr.tmp * *(double*) 0x662ad0
 			    * *(double*) 0x665dd0) % 0x30);
@@ -297,16 +297,16 @@ void __cdecl d2_RefreshTownView(unsigned char a0, int a1)
 		sprintf(fr.text, (char*) 0x6a2e50, *(int*) 0x7f4c04 & 0xffff,
 			*(int*) 0x7f4c06);
 		d2_SelectFont(0x54);
-		d2_DrawWordWrappedText(g_1040494 - 0x50, 2, 0x2e, 0x14, g_77250c,
+		d2_DrawWordWrappedText(g_1040494 - 0x50, 2, 0x2e, 0x14, d2_ScreenSurface,
 			     fr.text, 0x28);
 		d2_SelectFont(0x55);
 	}
 
-	if (g_7746c8 == 0 && g_7746c4 == 0 && g_6a2594 != -1) {
+	if (d2_InteriorBuilding == 0 && d2_VisitedBuilding == 0 && g_6a2594 != -1) {
 		if (g_6a2590 != -1) {
 			d2_SetSlotVisibility(g_6a2590, 0);
 			d2_SetSlotVisibility(g_6a2594, 1);
-			((D2_CONTROL_TL*) g_1015ea0)[g_6a2594].value_088 =
+			((D2_CONTROL_TL*) d2_Controls)[g_6a2594].value_088 =
 				(int) (fmod((double) *(float*) (d3_ActiveCamera + 0x88),
 					    *(double*) 0x662958)
 				       * *(float*) 0x665dc8
@@ -324,27 +324,27 @@ hidden:
 	d2_SelectFont(0x55);
 
 	if (g_6a25a0 != -1) {
-		gm_FormatEntityTitleAndName(g_774970, 1, 2, fr.name);
+		gm_FormatEntityTitleAndName(gm_LocalPlayerSlot, 1, 2, fr.name);
 		strcpy(fr.text, fr.name);
 		d2_SetLabelText(g_6a25a0, fr.text);
 	}
 	sprintf(fr.text, (char*) 0x67d444,
-		*(int*) (0x7f4e34 + g_774970 * 0x21c));
-	d2_DrawDefaultFontText(*(int*) (0x1015f44 + g_6a2598 * 0x3cc) + 0x23a, 0x17,
-		     g_77250c, fr.text, 0);
+		*(int*) (0x7f4e34 + gm_LocalPlayerSlot * 0x21c));
+	d2_DrawDefaultFontText(*(int*) (0x1015f44 + d2_HudTopBarWindowId * 0x3cc) + 0x23a, 0x17,
+		     d2_ScreenSurface, fr.text, 0);
 	if (g_6a257c != -1) {
-		d2_PositionControl(*(int*) (0x1015f44 + g_6a2598 * 0x3cc)
+		d2_PositionControl(*(int*) (0x1015f44 + d2_HudTopBarWindowId * 0x3cc)
 			     + g_772544 + 0x23d, 0x18, g_6a257c);
 	}
 
-	if (g_7746c4 != 0 || g_7746c8 != 0) {
+	if (d2_VisitedBuilding != 0 || d2_InteriorBuilding != 0) {
 		if (g_6a2580 != -1) {
 			d2_DestroyElement(g_6a2580);
 			g_6a2580 = -1;
 		}
 	} else {
 		if (g_6a2580 == -1) {
-			strcpy(fr.name, (char*) (0x868060 + g_773d75 * 0x2f4));
+			strcpy(fr.name, (char*) (0x868060 + gm_ActiveTownIndex * 0x2f4));
 			fcn_0066080a(fr.name);
 			sprintf(fr.buf, (char*) 0x6a2e38, fr.name);
 			id = d2_FindResourceByName(fr.buf);
@@ -355,8 +355,8 @@ hidden:
 				g_6a2580 = d2_CreateElement(
 					(short) (g_1040494 - 0x6e), 0x5b, 0x5b1);
 			}
-			((D2_CONTROL_TL*) g_1015ea0)[g_6a2580].flags_1d0 = 0x43;
-			((D2_CONTROL_TL*) g_1015ea0)[g_6a2580].value_05c = 1;
+			((D2_CONTROL_TL*) d2_Controls)[g_6a2580].flags_1d0 = 0x43;
+			((D2_CONTROL_TL*) d2_Controls)[g_6a2580].value_05c = 1;
 		}
 		if (g_77670c) {
 			if (g_6a2580 != -1) {
@@ -364,28 +364,28 @@ hidden:
 				       *(char**) 0x14ad03c);
 			}
 		} else if (g_6a2580 != -1) {
-			*(ELEM(g_6a2580) + 0xcc) = *g_6b5c60;
+			*(ELEM(g_6a2580) + 0xcc) = *str_empty;
 		}
 		d2_SelectFont(0x56);
-		strcpy(fr.name, (char*) (0x868080 + g_773d75 * 0x2f4));
-		d2_DrawWordWrappedText(g_1040494 - 0x70, 0x5d, 0x68, 0x14, g_77250c,
+		strcpy(fr.name, (char*) (0x868080 + gm_ActiveTownIndex * 0x2f4));
+		d2_DrawWordWrappedText(g_1040494 - 0x70, 0x5d, 0x68, 0x14, d2_ScreenSurface,
 			     fr.name, 8);
 	}
 	d2_SelectFont(0x54);
 
 	if (g_7746f8 == 0) {
-		if (g_7746c8 != 0 && *g_7746c8 == 'G') {
-			si = *(int*) (g_7746c8 + 0x65);
+		if (d2_InteriorBuilding != 0 && *d2_InteriorBuilding == 'G') {
+			si = *(int*) (d2_InteriorBuilding + 0x65);
 		} else {
-			si = g_773d75;
+			si = gm_ActiveTownIndex;
 		}
 		val = gm_QueryEntitySum(
-			      *(int*) (0x7f4e18 + g_774970 * 0x21c), si)
+			      *(int*) (0x7f4e18 + gm_LocalPlayerSlot * 0x21c), si)
 			+ g_774698;
 	} else {
 		val = gm_SumContainerCredits(*(int*) (gm_FindPublicTreasury(g_7746f8) + 0x14))
 			+ g_774698;
-		si = g_773d75;
+		si = gm_ActiveTownIndex;
 	}
 	if (g_6a25a4 != -1) {
 		if (val != 0) {
@@ -400,17 +400,17 @@ hidden:
 	}
 
 	if (g_6a2578 != -1) {
-		if (((D2_CONTROL_TL*) g_1015ea0)[g_6a2578].value_008
-		    != *(int*) (g_slot_table + 0x54 + g_774970 * 0x21c)) {
+		if (((D2_CONTROL_TL*) d2_Controls)[g_6a2578].value_008
+		    != *(int*) (g_slot_table + 0x54 + gm_LocalPlayerSlot * 0x21c)) {
 			d2_DestroyElement(g_6a2578);
 			g_6a2578 = -1;
 			g_6a2578 = d2_AddElementToWindow(
 				0x10, 8,
 				*(int*) (g_slot_table + 0x54
-					 + g_774970 * 0x21c),
-				g_6a2598);
-			((D2_CONTROL_TL*) g_1015ea0)[g_6a2578].flags_1d0 = three;
-			((D2_CONTROL_TL*) g_1015ea0)[g_6a2578].value_05c = 1;
+					 + gm_LocalPlayerSlot * 0x21c),
+				d2_HudTopBarWindowId);
+			((D2_CONTROL_TL*) d2_Controls)[g_6a2578].flags_1d0 = three;
+			((D2_CONTROL_TL*) d2_Controls)[g_6a2578].value_05c = 1;
 		}
 	}
 	if (g_6a476c < 0) {
@@ -424,12 +424,12 @@ hidden:
 		g_774720 = 0;
 		val = 0;
 	}
-	if (g_100f1dc != -1 && d2_CurrentElementId == g_6a25fc) {
+	if (d2_DialogButtonAction != -1 && d2_CurrentElementId == g_6a25fc) {
 		val = (val == 0);
 		g_774720 = val;
 	}
 	if (g_6a2be8 == g_6a4768
-	    && (g_100f1dc == -1 || d2_CurrentElementId != g_6a25fc)) {
+	    && (d2_DialogButtonAction == -1 || d2_CurrentElementId != g_6a25fc)) {
 		goto stored;
 	}
 	if (val) {
@@ -451,7 +451,7 @@ stored:
 	if (g_774720) {
 		d2_SetClipRect(0, 0, g_1040494 - 0x8c, d2_ScreenHeight);
 		d2_DrawSpriteFromSet(g_1040494 - g_6a4768 * 0x20 - 0x37,
-			     d2_ScreenHeight - 0x37, g_77250c,
+			     d2_ScreenHeight - 0x37, d2_ScreenSurface,
 			     d2_GetResourceData(g_6a25ac + 3), 0);
 		d2_SetClipRect(0, 0, g_1040494, d2_ScreenHeight);
 	}

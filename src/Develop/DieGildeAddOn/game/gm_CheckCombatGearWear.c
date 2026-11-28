@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 /* Owned (both targets) by src/GOLDTL.fcn_004cef70.c. */
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl gm_RemoveSpecialTableItems(void*);
@@ -37,13 +37,13 @@ char __cdecl gm_CheckCombatGearWear(char* entity)
 		c = -c0;
 		gm_RemoveSpecialTableItems(entity);
 		cm_BeginPacketFieldDelta(entity, *(int*) (entity + 4));
-		cm_AppendPacketFieldValue(1, 1, entity - g_aed32c + 0x1c5, &c);
+		cm_AppendPacketFieldValue(1, 1, entity - cm_PacketDeltaBase + 0x1c5, &c);
 		cm_RequestChangeAttribute();
 		e = *(void**) (entity + 0x16c);
 		if (e != 0) {
 			idx = *(unsigned short*) ((char*) e + 0x27);
 			if (idx != 0xffff) {
-				p = ((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[idx]);
+				p = ((char *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[idx]);
 				if (*(char*)&((ENTITY_RECORD_VIEW*)p)->entity_type == 6 || *(char*)&((ENTITY_RECORD_VIEW*)p)->entity_type == 7) {
 					q = gm_GetEquippedCombatGear(entity);
 					r = *(int*) q;
@@ -58,7 +58,7 @@ char __cdecl gm_CheckCombatGearWear(char* entity)
 		return 1;
 	}
 	cm_BeginPacketFieldDelta(entity, *(int*) (entity + 4));
-	cm_AppendPacketFieldValue(1, 1, entity - g_aed32c + 0x1c5, &c);
+	cm_AppendPacketFieldValue(1, 1, entity - cm_PacketDeltaBase + 0x1c5, &c);
 	cm_RequestChangeAttribute();
 	cm_RequestChangeBits(*(int*) (entity + 4), 0x1c8, 4, 0, 0x20000000);
 	return 0;

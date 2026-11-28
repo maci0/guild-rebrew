@@ -1,6 +1,6 @@
 void __cdecl main_SampleFrameCounter(void);
-extern char g_7e2760[];
-extern char g_9ba1c0[];
+extern char sv_EntityGreyTintFlags[];
+extern char d3_ActiveBombs[];
 
 
 #include <string.h>
@@ -10,6 +10,6 @@ extern char g_9ba1c0[];
 void __cdecl main_InitFrameProfile(void)
 {
 	tb_OpenFunction(main_SampleFrameCounter, 0x47);
-	memset(g_7e2760, 0, 0x300);
-	memset(g_9ba1c0, 0, 0x100);
+	memset(sv_EntityGreyTintFlags, 0, 0x300);
+	memset(d3_ActiveBombs, 0, 0x100);
 }

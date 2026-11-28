@@ -51,7 +51,7 @@ int __cdecl gm_UpdateOwnerBuildings();
 int __cdecl fcn_005435d0();
 int __cdecl main_PlayOutroMovie();
 int __cdecl he_DispatchFlaggedEvents();
-int __cdecl fcn_0053f100();
+int __cdecl he_TickEventDeals();
 int __cdecl he_TickApEvents();
 int __cdecl ai_DispatchGuildBuildPlan();
 int __cdecl he_RunDailyActionMaintenance();
@@ -65,7 +65,7 @@ int __cdecl gm_RandomMod(int);
 #include "Develop/client_types.h"
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 typedef struct ResetProto { unsigned char kind; unsigned char rest[0x24c]; } ResetProto;
-extern int g_6a3420; extern int g_774954; extern char g_774965; extern int g_14cbca0; extern int d2_SuppressOverlay; extern double g_662cc0;
+extern int g_6a3420; extern int g_774954; extern char g_774965; extern int nt_ClientSocket; extern int d2_SuppressOverlay; extern double g_662cc0;
 extern int g_1040480; extern int g_1040484; extern int g_1040488; extern int g_104048c; extern int d2_ScreenHeight; extern int g_1040494;
 /* ADDRESS: GOLDTL 0x00543080 */
 void __cdecl gm_RunRoundUpdate(void)
@@ -83,21 +83,21 @@ void __cdecl gm_RunRoundUpdate(void)
 	BUILDING_PROTOTYPE* proto;
 
 	tmpIdx = -1;
-	savedSpeed = *(unsigned char*) &g_772d10;
+	savedSpeed = *(unsigned char*) &d3snd_AmbientEnabled;
 	gm_UpdateBuildingGridStats();
 	loopStat = 0;
 	do {
-		srv_FormatStatEntity(&((ENTITY_RECORD*) g_7f4ca0)[loopStat]);
-		*(unsigned int*) &((ENTITY_RECORD*) g_7f4ca0)[loopStat].unk_198[0x30] &= 0xe0874703;
-		((ENTITY_RECORD*) g_7f4ca0)[loopStat].entity_flags &= 0x3d31ffc7;
-		if (((ENTITY_RECORD*) g_7f4ca0)[loopStat].entity_state == 6) {
+		srv_FormatStatEntity(&((ENTITY_RECORD*) gm_EntitySlotTable)[loopStat]);
+		*(unsigned int*) &((ENTITY_RECORD*) gm_EntitySlotTable)[loopStat].unk_198[0x30] &= 0xe0874703;
+		((ENTITY_RECORD*) gm_EntitySlotTable)[loopStat].entity_flags &= 0x3d31ffc7;
+		if (((ENTITY_RECORD*) gm_EntitySlotTable)[loopStat].entity_state == 6) {
 			tmpIdx = loopStat;
 		}
 		loopStat += 1;
 	} while (loopStat < 768);
-	*(short*) &g_774970 = (short) tmpIdx;
+	*(short*) &gm_LocalPlayerSlot = (short) tmpIdx;
 	he_DispatchFlaggedEvents();
-	if (!(g_7747b0 & 4) && (unsigned short) gm_RandomMod(10) > 6) {
+	if (!(gm_ClientModeFlags & 4) && (unsigned short) gm_RandomMod(10) > 6) {
 		loopStat = fcn_005435d0();
 		while (loopStat != 1) {
 			d2_SuppressOverlay = 0;
@@ -114,7 +114,7 @@ void __cdecl gm_RunRoundUpdate(void)
 		}
 	}
 	*(int*) &main_LoopFlags = 0x24087;
-	if (g_7747b0 & 4) {
+	if (gm_ClientModeFlags & 4) {
 		sv_WaitForNetworkSync(0x24087);
 	}
 	cut_ResetEventSlots(0);
@@ -123,10 +123,10 @@ void __cdecl gm_RunRoundUpdate(void)
 		g_1040480 = g_1040494;
 		g_1040484 = 0;
 		g_104048c = d2_ScreenHeight;
-		d2_ClearSurface(*(int*) &g_77250c);
+		d2_ClearSurface(*(int*) &d2_ScreenSurface);
 		d2_SetBackdropResource(0x79d);
 	}
-	fcn_0053f100();
+	he_TickEventDeals();
 	he_TickApEvents();
 	if (g_6a3420) {
 		tmpVal = d2_LoadForm(0, 0, 0x6a43ac);
@@ -144,7 +144,7 @@ void __cdecl gm_RunRoundUpdate(void)
 			tmpIdx = init_AllocateGebaeudeSceneSlot(bldPtr);
 			if (tmpIdx != -1) {
 				tmpVal = d3_CurrentContextIndex;
-				d3_SelectSceneContext((int) *(char*) (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*bldPtr].category + (unsigned long)&g_7f3b00), 1);
+				d3_SelectSceneContext((int) *(char*) (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*bldPtr].category + (unsigned long)&d3_BuildingCategorySceneIndices), 1);
 				d3_InitUniverse(3);
 				plt_UpdatePlantStages(*(unsigned int*) &bldPtr[0x71]);
 				d3_DeinitUniverse(3);
@@ -158,7 +158,7 @@ void __cdecl gm_RunRoundUpdate(void)
 	tmpIdx = 0;
 	gm_UpdateAllTownSeasonPrices();
 	gm_PushCityHistorySample();
-	if ((*(int*) &g_77494c & 8) || g_14cbca0 == -1) {
+	if ((*(int*) &nt_NetSyncFlags & 8) || nt_ClientSocket == -1) {
 		cm_PruneCompletedStraftaten();
 		cm_StepCommandQueue();
 		Sleep(100);
@@ -199,14 +199,14 @@ void __cdecl gm_RunRoundUpdate(void)
 		gm_UpdateEconomyStats();
 		gm_GetDisasterState(&st);
 		if (st.head == -1) {
-			gm_InitDisasterState(1, 0x3f800000, 0x3f000000, (float)(10.0 - (double)(4 - g_7747b4) * g_662cc0));
+			gm_InitDisasterState(1, 0x3f800000, 0x3f000000, (float)(10.0 - (double)(4 - gm_DifficultyLevel) * g_662cc0));
 		} else {
 			gm_UpdateDisasterState();
 		}
 		ai_DispatchGuildBuildPlan();
 		cm_StepCommandQueue();
 		Sleep(100);
-		ptr = (unsigned int*) &g_7f4ca4;
+		ptr = (unsigned int*) &gm_EntityIdField;
 		do {
 			cm_RequestCopyEntityData(0xffffffff, *ptr, 0, 3);
 			ptr = &ptr[0x87];
@@ -222,17 +222,17 @@ void __cdecl gm_RunRoundUpdate(void)
 		ptr = &ptr[0x87];
 	} while ((int) ptr < 0x85a28c);
 	if (g_6a3420) {
-		if (g_774965 && !(g_7747b0 & 4)) {
+		if (g_774965 && !(gm_ClientModeFlags & 4)) {
 			tmpVal = d2_CreateScrollPerga();
 			d2_SetForm(tmpVal, 2);
 			io_AppendText(0x7d);
 			d2_SetForm(tmpVal, 1);
-			io_AppendText(0x1ba0, *(int*) &g_774970 & 0xffff, *(int*) &g_774970 & 0xffff);
+			io_AppendText(0x1ba0, *(int*) &gm_LocalPlayerSlot & 0xffff, *(int*) &gm_LocalPlayerSlot & 0xffff);
 			d3snd_QueueSound(0xfffffff9, 0, 0x6a438c, 0xffffffff, 0);
 			tmpIdx = main_RunFrameLoop(0x543080, 0x66087);
 			while (tmpIdx) {
-				if (*(int*) &g_100f1dc == 2) {
-					g_774654 = 1;
+				if (*(int*) &d2_DialogButtonAction == 2) {
+					d2_DialogCloseRequested = 1;
 				}
 				tmpIdx = main_RunFrameLoop(0x543080, 0x66087);
 			}
@@ -241,15 +241,15 @@ void __cdecl gm_RunRoundUpdate(void)
 			g_774954 = 1;
 		}
 		if (g_6a3420 && !g_774954) {
-			if (!(*(int*) &g_77494c & 8) && g_14cbca0 != -1) {
+			if (!(*(int*) &nt_NetSyncFlags & 8) && nt_ClientSocket != -1) {
 				hst_ShowDueHistoryScroll(0);
 			} else {
 				hst_ShowDueHistoryScroll(1);
 			}
 		}
 	}
-	if ((*(int*) &g_77494c & 8) || g_14cbca0 == -1) {
+	if ((*(int*) &nt_NetSyncFlags & 8) || nt_ClientSocket == -1) {
 		gm_ApplyHourlyEntityUpdates();
 	}
-	*(char*) &g_772d10 = (char) savedSpeed;
+	*(char*) &d3snd_AmbientEnabled = (char) savedSpeed;
 }

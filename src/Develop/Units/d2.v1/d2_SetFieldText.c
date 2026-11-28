@@ -22,7 +22,7 @@ typedef struct
 
 #include "Develop/client_types.h"
 extern UI_FIELD g_102d140[];
-extern char* g_1015ea0;
+extern char* d2_Controls;
 
 int __cdecl d2_MeasureTextWidth(char* s, int font);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -35,7 +35,7 @@ void __cdecl d2_SetFieldText(int fld, char* text)
 	int len;
 
 	f = &((D2_TEXT_FIELD*)g_102d140)[fld];
-	e = (char*) *(int*) (&((D2_CONTROL_TL*) g_1015ea0)[f->ent].parent);
+	e = (char*) *(int*) (&((D2_CONTROL_TL*) d2_Controls)[f->ent].parent);
 	if (e == 0) {
 		return;
 	}
@@ -52,8 +52,8 @@ void __cdecl d2_SetFieldText(int fld, char* text)
 	memcpy(f->cur, text, f->len);
 	f->w = d2_MeasureTextWidth(text, f->font);
 	if (f->fixed != 0) {
-		((D2_CONTROL_TL*) g_1015ea0)[f->ent].width = f->w;
+		((D2_CONTROL_TL*) d2_Controls)[f->ent].width = f->w;
 	} else {
-		((D2_CONTROL_TL*) g_1015ea0)[f->ent].width = f->w >= 0 ? 0 : f->w;
+		((D2_CONTROL_TL*) d2_Controls)[f->ent].width = f->w >= 0 ? 0 : f->w;
 	}
 }

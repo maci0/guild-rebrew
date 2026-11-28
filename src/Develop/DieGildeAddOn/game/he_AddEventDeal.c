@@ -13,12 +13,12 @@ void __cdecl he_AddEventDeal(int id, int owner, char* name, int amount, void* po
 	EVENT_DEAL* t;
 
 	for (i = 0; i < 256; i++) {
-		if (g_7d2020[i].id == 0) {
+		if (he_EventDeals[i].id == 0) {
 			break;
 		}
 	}
 	if (i < 256) {
-		t = &g_7d2020[i];
+		t = &he_EventDeals[i];
 		t->id = id;
 		t->owner = owner;
 		t->amount = amount;

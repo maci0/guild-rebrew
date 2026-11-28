@@ -15,9 +15,9 @@ typedef struct Cand {
 } Cand;
 // SIZE 0x24
 
-extern __int64 g_666018;
+extern __int64 gm_TargetPersonTypeMask;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char g_68ff68[];
+extern char gm_LawEntries[];
 
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 char* __cdecl d2_OpenTargetPicker(int*, char*, int, int);
@@ -48,7 +48,7 @@ int __cdecl gm_ObjTriggerMultiCrimes(char* ent, int* arg)
 		memset(desc, 0, sizeof(desc));
 		memset(desc + 7, 0xff, 8 * sizeof(int));
 		io_FormatTextBuffer(name, 0x9c);
-		desc[2] = (*(int*)&g_666018);
+		desc[2] = (*(int*)&gm_TargetPersonTypeMask);
 		desc[0] = 1;
 		desc[1] = 0x400;
 		desc[4] = 6;
@@ -68,8 +68,8 @@ int __cdecl gm_ObjTriggerMultiCrimes(char* ent, int* arg)
 	twice = gm_HasActiveSpecialObject(ent, 0x2c5) != 0;
 	n = 0;
 	for (i = 0; i < 29; i++) {
-		if (((Cand*)g_68ff68)[i].kind == 2 && ((Cand*)g_68ff68)[i].active && ((Cand*)g_68ff68)[i].ptr) {
-			list[n++] = ((Cand*)g_68ff68)[i].id;
+		if (((Cand*)gm_LawEntries)[i].kind == 2 && ((Cand*)gm_LawEntries)[i].active && ((Cand*)gm_LawEntries)[i].ptr) {
+			list[n++] = ((Cand*)gm_LawEntries)[i].id;
 		}
 	}
 	if (n == 0) {

@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
-char g_6ab4f0[] = "_NACHRICHTEN_FRIEDHOF_13";
+char str_NACHRICHTEN_FRIEDHOF_13[] = "_NACHRICHTEN_FRIEDHOF_13";
 
 
 int __cdecl gm_RandomMod(int);
@@ -8,6 +8,6 @@ void __cdecl he_PostEntityMessage(int, int, void*, int, int, void*);
 
 void __cdecl he_NotifyFriedhof13(void* recipient)
 {
-	io_FormatTextBuffer(g_774a80, 0x40ac, (gm_RandomMod(3) & 0xffff) + 0x40a9);
-	he_PostEntityMessage(*(int*) ((char*) recipient + 4), -1, g_774a80, 1, 0x5fb, g_6ab4f0);
+	io_FormatTextBuffer(io_MessageFormatBuf, 0x40ac, (gm_RandomMod(3) & 0xffff) + 0x40a9);
+	he_PostEntityMessage(*(int*) ((char*) recipient + 4), -1, io_MessageFormatBuf, 1, 0x5fb, str_NACHRICHTEN_FRIEDHOF_13);
 }

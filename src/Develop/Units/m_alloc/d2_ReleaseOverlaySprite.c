@@ -1,4 +1,4 @@
-extern char* g_1015ec0[];
+extern char* d2_OverlaySprites[];
 
 void __cdecl d3_SafeReleaseSceneResource(void* p);
 void __cdecl m_FreeTracked(void* p);
@@ -9,8 +9,8 @@ void __cdecl d2_ReleaseOverlaySprite(char* p)
 	int i;
 
 	for (i = 0; i < 32; i++) {
-		if (g_1015ec0[i] == p) {
-			g_1015ec0[i] = 0;
+		if (d2_OverlaySprites[i] == p) {
+			d2_OverlaySprites[i] = 0;
 			if (*(void**) (p + 0x60) != 0) {
 				d3_SafeReleaseSceneResource(*(void**) (p + 0x60));
 			}

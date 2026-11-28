@@ -9,7 +9,7 @@ extern char* g_entity_type_table;    /* 0x00868050 */
 #include "Develop/DieGildeAddOn/game/game_player.h"      /* 0x00774970 */
 extern unsigned char g_slot_table[2]; /* 0x007f4ca0 */
 extern float flt_1;                  /* 0x006628a0 */
-extern float g_6628a8;               /* 0x006628a8 */
+extern float flt_0_0;               /* 0x006628a8 */
 extern double dbl_1_0;               /* 0x006629c8 */
 
 unsigned short* __cdecl fcn_00502cd0(int, int, ...);
@@ -89,7 +89,7 @@ int __cdecl ob_TransportFromLager(int a0, char* a1, char* a2, int a3, int a4,
 				countf = (float)count;
 				prod = countf * unitPrice;
 				scale = flt_1 / a5;
-				if (gm_CheckEntityStock(g_slot_table + g_774970 * 0x21c,
+				if (gm_CheckEntityStock(g_slot_table + gm_LocalPlayerSlot * 0x21c,
 				                 (int)(scale * prod), a6) && stockSlot[0xc] >= 0) {
 					n = gm_ConvertUnitsToAmount(1, a6);
 					if (abs((int)(scale * countf * unitPrice - prod)) < n) {
@@ -122,7 +122,7 @@ int __cdecl ob_TransportFromLager(int a0, char* a1, char* a2, int a3, int a4,
 					}
 					cm_SendSellObjekt(a0, *(int*)(a1 + 2), *stockSlot, count, a6,
 					             (int)(unitPrice / a5));
-					if (unitPrice != g_6628a8 && a5 != dbl_1_0) {
+					if (unitPrice != flt_0_0 && a5 != dbl_1_0) {
 						io_FormatTextBuffer(buf, 0xec, (int)(prod * a5 - prod));
 						d2_ShowStatusBanner(buf);
 						sb_PlayVoice(0, (char*)0x68aed0, 1, 0x3f, 0x7f, 0, 0);
@@ -153,7 +153,7 @@ next:
 				countf = (float)count;
 				prod = countf * unitPrice;
 				scale = flt_1 / a5;
-				if (gm_CheckEntityStock(g_slot_table + g_774970 * 0x21c,
+				if (gm_CheckEntityStock(g_slot_table + gm_LocalPlayerSlot * 0x21c,
 				                 (int)(scale * prod), a6) && stockSlot[0xc] >= 0) {
 					n = gm_ConvertUnitsToAmount(1, a6);
 					if (abs((int)(scale * countf * unitPrice - prod)) < n) {
@@ -186,7 +186,7 @@ next:
 					}
 					cm_SendSellObjekt(a0, *(int*)(a1 + 2), *stockSlot, count, a6,
 					             (int)(unitPrice / a5));
-					if (unitPrice != g_6628a8 && a5 != dbl_1_0) {
+					if (unitPrice != flt_0_0 && a5 != dbl_1_0) {
 						io_FormatTextBuffer(buf, 0xec, (int)(prod * a5 - prod));
 						d2_ShowStatusBanner(buf);
 						sb_PlayVoice(0, (char*)0x68aed0, 1, 0x3f, 0x7f, 0, 0);

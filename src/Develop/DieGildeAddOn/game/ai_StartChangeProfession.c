@@ -2,7 +2,7 @@
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern unsigned char* lpGebaeudeINST;
 extern unsigned char* lpGebaeudePROT;
-extern char g_773d75;
+extern char gm_ActiveTownIndex;
 
 int __cdecl gm_GetEntityTableEntry(int);
 int __cdecl gm_GetSeasonTreasury(int, signed char);
@@ -41,7 +41,7 @@ unsigned int __cdecl ai_StartChangeProfession(int a0, char* a1, int a2, int* a3,
 	if (v7 == 0) {
 		return 0;
 	}
-	v8 = gm_GetSeasonTreasury((int) a1, g_773d75);
+	v8 = gm_GetSeasonTreasury((int) a1, gm_ActiveTownIndex);
 	if (v8 / 0x20 < 5000) {
 		return 0;
 	}

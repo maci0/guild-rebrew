@@ -1,9 +1,9 @@
-extern double g_662aa0;
+extern double dbl_10;
 extern float g_664138;
 extern float g_664160;
 extern float g_664188;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
 int __cdecl gm_RandomMod(int a0);
@@ -25,14 +25,14 @@ int __cdecl ai_StartSpionage(int code, short* target, int zero, char* out1, char
 
 	mask = 0xf00500;
 	rnd = gm_RandomMod(3) & 0xffff;
-	thr = gm_GetSeasonTreasury(target, g_773d75);
+	thr = gm_GetSeasonTreasury(target, gm_ActiveTownIndex);
 	if (zero != 0) {
 		return 0;
 	}
 	if (ai_SelectRankedCandidates(target, 1, &mask, 0, (float) ((double) (gm_RandomMod(0x19) & 0xffff) + 10.0), &idx) == 0) {
 		return 0;
 	}
-	p = (char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) idx];
+	p = (char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned short) idx];
 	first = (float) gm_WalkEntityChain(*target) * g_664138;
 	score = (int) ((float) gm_WalkEntityChain(*(unsigned short*) p) * g_664138 + first);
 	first = (float) score;

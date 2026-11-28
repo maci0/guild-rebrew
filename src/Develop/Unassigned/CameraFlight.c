@@ -1,5 +1,5 @@
 extern char* evt_CurrentScript;
-extern char g_676924[];
+extern char evt_CameraFlightErrStr[];
 
 
 
@@ -9,7 +9,7 @@ void __cdecl evt_LogScriptError(void*, int, char*);
 int __cdecl CameraFlight(int* a1, int* a2, int* a3)
 {
 	if (d3_StartCameraFlight(*a1 / 17, 2, *a2, *a3) == 0) {
-		evt_LogScriptError(evt_CurrentScript, *(int*) ((char*) evt_CurrentScript + 0x118), g_676924);
+		evt_LogScriptError(evt_CurrentScript, *(int*) ((char*) evt_CurrentScript + 0x118), evt_CameraFlightErrStr);
 	}
 	return 1;
 }

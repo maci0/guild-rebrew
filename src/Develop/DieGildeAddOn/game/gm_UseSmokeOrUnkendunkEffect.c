@@ -2,11 +2,11 @@
 #include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 
 extern int gm_GameTime;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
-extern unsigned char g_7f4ca2[];
-extern unsigned int g_7f4ca4[];
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
+extern unsigned char gm_SlotTableKindView[];
+extern unsigned int gm_EntityIdField[];
 
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl d2_RunCityScrollMapDialog(int, int*, char*, int, int);
@@ -73,11 +73,11 @@ int __cdecl gm_UseSmokeOrUnkendunkEffect(char* entity, int* target)
 		fill0_5dc5e0(buf, 0xf8);
 		*(int*) (buf + 0x28) = gm_GameTime;
 		*(int*) (buf + 8) = *(int*) (entity + 4);
-		*(int*) (buf + 0x30) = g_7f4c08;
-		*(int*) (buf + 0x2c) = g_7f4c04;
+		*(int*) (buf + 0x30) = gm_GameTimeSliceDword;
+		*(int*) (buf + 0x2c) = gm_GameTimeHour;
 		*(char*) (buf + 4) = 0x76;
 		*(int*) (buf + 0xc) = -1;
-		*(unsigned short*) (buf + 0x34) = g_7f4c0c;
+		*(unsigned short*) (buf + 0x34) = gm_GameTimeTailWord;
 		*(char*) (buf + 0x36) = 0x0a;
 		*(int*) (buf + 0x58) = *(int*) (pkt + 1);
 		*(unsigned short*) (buf + 0x6e) = 0x178;
@@ -90,11 +90,11 @@ int __cdecl gm_UseSmokeOrUnkendunkEffect(char* entity, int* target)
 		fill0_5dc5e0(buf, 0xf8);
 		*(int*) (buf + 0x28) = gm_GameTime;
 		*(int*) (buf + 8) = *(int*) (entity + 4);
-		*(int*) (buf + 0x30) = g_7f4c08;
-		*(int*) (buf + 0x2c) = g_7f4c04;
+		*(int*) (buf + 0x30) = gm_GameTimeSliceDword;
+		*(int*) (buf + 0x2c) = gm_GameTimeHour;
 		*(char*) (buf + 4) = 0x76;
 		*(int*) (buf + 0xc) = -1;
-		*(unsigned short*) (buf + 0x34) = g_7f4c0c;
+		*(unsigned short*) (buf + 0x34) = gm_GameTimeTailWord;
 		*(char*) (buf + 0x36) = 0x0a;
 		*(int*) (buf + 0x58) = *(int*) (pkt + 1);
 		*(unsigned short*) (buf + 0x6e) = 0x178;
@@ -103,29 +103,29 @@ int __cdecl gm_UseSmokeOrUnkendunkEffect(char* entity, int* target)
 
 	*(int*) (buf + 0x28) = gm_GameTime;
 	*(int*) (buf + 8) = *(int*) (entity + 4);
-	*(int*) (buf + 0x30) = g_7f4c08;
-	*(int*) (buf + 0x2c) = g_7f4c04;
+	*(int*) (buf + 0x30) = gm_GameTimeSliceDword;
+	*(int*) (buf + 0x2c) = gm_GameTimeHour;
 	*(char*) (buf + 4) = 0x77;
 	*(int*) (buf + 0xc) = -1;
-	*(unsigned short*) (buf + 0x34) = g_7f4c0c;
+	*(unsigned short*) (buf + 0x34) = gm_GameTimeTailWord;
 	*(char*) (buf + 0x36) = 1;
 	*(int*) (buf + 0x58) = *(int*) (pkt + 1);
 	cm_SendCopyEntityData(buf);
 
 	cm_BeginPacketFieldDelta((char*) *target, *(int*) (*target + 2));
-	cm_AppendPacketFieldDelta(4, 1, (char*) *target + 0x25 - g_aed32c, pkt + 1);
+	cm_AppendPacketFieldDelta(4, 1, (char*) *target + 0x25 - cm_PacketDeltaBase, pkt + 1);
 	cm_RequestChangeAttribute();
 	cm_RequestChangeBits(*(int*) (pkt + 1), 0x5a, 2, 0x20, 0);
 
 	if (*(unsigned short*) (pkt + 0x27) != 0xffff) {
 		ent = *(unsigned short*) (pkt + 0x27);
-		kind = g_7f4ca2[ent * 0x21c];
+		kind = gm_SlotTableKindView[ent * 0x21c];
 		if (kind == 6 || kind == 7) {
 			char text[0x800];
 
 			io_FormatTextBuffer(text, 0xff2, pkt);
 			ent = *(unsigned short*) (pkt + 0x27);
-			he_PostEntityMessage(*(int*) (&g_7f4ca4[ent * 0x87]), -1, text, 0, 0x5fb, 0);
+			he_PostEntityMessage(*(int*) (&gm_EntityIdField[ent * 0x87]), -1, text, 0, 0x5fb, 0);
 		}
 	}
 	res = 1;

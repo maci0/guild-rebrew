@@ -5,7 +5,7 @@ typedef struct {
 } blk19;
 // SIZE 0x19
 
-extern blk19 g_68cb58;
+extern blk19 str_bewegung_zu_boden_sinken;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 double __cdecl gm_GetEntityHealthRatio(char*);
@@ -22,7 +22,7 @@ int __cdecl gm_CheckDuelKnockout(char* e)
 		d3_SpawnBlutEffect(*(char**) (*(char**) (e + 0x184) + 0x34), 0x40, 0.25f, 0.1f, 0.14f, 55.0f);
 		ch_CancelActionQueue(*(char**) (e + 0x184));
 		o = ch_CreateQueuedAction(*(char**) (e + 0x184), d3_SpawnBlutlacheEffect, 0x12, 0x36, 1);
-		*(blk19*) (o + 0xf0) = g_68cb58;
+		*(blk19*) (o + 0xf0) = str_bewegung_zu_boden_sinken;
 		*(int*) (*(char**) (*(char**) (e + 0x184) + 0x34) + 0x220) = 0;
 		g_772f44 = 1;
 		return 1;

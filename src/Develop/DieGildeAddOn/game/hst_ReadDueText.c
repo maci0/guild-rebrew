@@ -1,6 +1,6 @@
 extern int g_67fca8;
 extern int g_67fca4;
-extern unsigned char g_7728d4;
+extern unsigned char hst_HistoryTextActive;
 extern int gm_GameTime;
 
 int __cdecl hst_ParseDate(int pos, int n, int* out, int a1);
@@ -14,10 +14,10 @@ int __cdecl hst_ReadDueText(int a0, char* textOut)
 	int diff;
 
 	do {
-		if (g_7728d4 == 0)
+		if (hst_HistoryTextActive == 0)
 			return 3;
 		if (hst_ParseDate(g_67fca8, 3, v4, a0) == 0) {
-			g_7728d4 = 0;
+			hst_HistoryTextActive = 0;
 			return 4;
 		}
 		diff = gm_GameTime - v4[0];
@@ -33,7 +33,7 @@ int __cdecl hst_ReadDueText(int a0, char* textOut)
 		}
 		g_67fca8 += 3;
 		if (g_67fca4 < g_67fca8)
-			g_7728d4 = 0;
+			hst_HistoryTextActive = 0;
 	} while (v5 == 0 || v5 == 6);
 	return v5;
 }

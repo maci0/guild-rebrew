@@ -3,7 +3,7 @@ extern float g_10425b0[];
 extern float g_10425c0[];
 extern float g_10425d0[];
 extern float g_6629d0;
-extern const float g_662d40[3];
+extern const float d3_UnitAxisVectors[3];
 #include <math.h>
 
 extern char* d3_ActiveCamera;
@@ -47,10 +47,10 @@ void __cdecl d3_RebuildSkyDomeMesh(int self)
 		return;
 	}
 	src = (float*) (d3_ActiveCamera + 0x18c);
-	v[0] = g_662d40[1] * src[4] + g_662d40[2] * src[8] + g_662d40[0] * src[0];
-	v[1] = g_662d40[1] * src[5] + g_662d40[2] * src[9] + g_662d40[0] * src[1];
-	v[2] = g_662d40[1] * src[6] + g_662d40[2] * src[10] + g_662d40[0] * src[2];
-	*(float*) (p + 0x14) = (float) fmod(d3_SignedPlanarAngle((float*) g_662d40, v), 6.2831854820251465);
+	v[0] = d3_UnitAxisVectors[1] * src[4] + d3_UnitAxisVectors[2] * src[8] + d3_UnitAxisVectors[0] * src[0];
+	v[1] = d3_UnitAxisVectors[1] * src[5] + d3_UnitAxisVectors[2] * src[9] + d3_UnitAxisVectors[0] * src[1];
+	v[2] = d3_UnitAxisVectors[1] * src[6] + d3_UnitAxisVectors[2] * src[10] + d3_UnitAxisVectors[0] * src[2];
+	*(float*) (p + 0x14) = (float) fmod(d3_SignedPlanarAngle((float*) d3_UnitAxisVectors, v), 6.2831854820251465);
 	*(unsigned int*) (p + 0xc) = 0x30;
 	src = (float*) (d3_ActiveCamera + 0x18c);
 	D3DXMatrixTranspose(m, src);

@@ -1,5 +1,5 @@
 #include <string.h>
-extern void * g_6b5de0; extern int g_772614; extern int g_7725ec;
+extern void * g_6b5de0; extern int tp_d2_QuadVertexBuffer; extern int g_7725ec;
 int __cdecl d2_BuildQuadVertices(int a1, int a2, int a3, int a4, void* out);
 void __cdecl d3_SetRenderMaterialState(int a1, int a2, int a3, int a4, int a5);
 
@@ -48,17 +48,17 @@ int __cdecl d2_BlitSurfaceCore(int left, int top, int width, int height, char* s
 		locked = *(int*) (src + 0x20);
 		target = (void*) locked;
 		if ((*(int (__stdcall**) (int, int, int, int*, int))
-			 (*(char**) *(void**) &g_772614 + 0x2c))(*(int*) &g_772614, 0, 0x18,
+			 (*(char**) *(void**) &tp_d2_QuadVertexBuffer + 0x2c))(*(int*) &tp_d2_QuadVertexBuffer, 0, 0x18,
 													&locked, 0x2000) < 0) {
 			return 0;
 		}
 		target = (void*) locked;
 		memcpy(target, frame, 0xa8);
-		(*(int (__stdcall**) (int)) (*(char**) *(void**) &g_772614 + 0x30))
-			(*(int*) &g_772614);
+		(*(int (__stdcall**) (int)) (*(char**) *(void**) &tp_d2_QuadVertexBuffer + 0x30))
+			(*(int*) &tp_d2_QuadVertexBuffer);
 		(*(int (__stdcall**) (int, int, int, int))
 		 (*(char**) *(void**) &g_6b5de0 + 0x14c))(*(int*) &g_6b5de0, 0,
-												*(int*) &g_772614, 0x1c);
+												*(int*) &tp_d2_QuadVertexBuffer, 0x1c);
 		(*(int (__stdcall**) (int, int))
 		 (*(char**) *(void**) &g_6b5de0 + 0x130))(*(int*) &g_6b5de0, 0x144);
 		d3_SetRenderMaterialState(0xfe, 0, 0, 1, 1);

@@ -1,5 +1,5 @@
-extern int g_77250c;
-extern int g_67a370;
+extern int d2_ScreenSurface;
+extern int d3_ActiveScene;
 
 // SIZE 0xc8
 
@@ -25,9 +25,9 @@ void __cdecl d2_DrawBuildingUpgradeLabels(void)
 		e = p->e;
 		if (e != 0 && (*(int*) (e + 0x1cc) != 0 || *(int*) (e + 0x218) == 0) &&
 		    d3_GetObjectScreenRect(e, r) != 0) {
-			d2_DrawWordWrappedText(r[0] + (r[2] - r[0]) / 2 - 0x50, r[1], 0xa0, 0x60, g_77250c,
+			d2_DrawWordWrappedText(r[0] + (r[2] - r[0]) / 2 - 0x50, r[1], 0xa0, 0x60, d2_ScreenSurface,
 			             p->name, 0x28);
 		}
 	}
-	d3_TraverseSceneObjects(g_67a370, 0, 0x20, (void*) d3_DrawBuildingUpgradeLabel);
+	d3_TraverseSceneObjects(d3_ActiveScene, 0, 0x20, (void*) d3_DrawBuildingUpgradeLabel);
 }

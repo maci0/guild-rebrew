@@ -9,7 +9,7 @@ typedef struct {
 } Entry24;
 
 extern int main_LoopFlags;
-extern char g_10069a0[];
+extern char gm_MissionJobs[];
 
 void __cdecl d2_ShowMissionSpecDialog(int handle, int flags);
 
@@ -20,8 +20,8 @@ void __cdecl d2_ShowMissionForEntity(int key)
 
 	flags = main_LoopFlags | 0x80;
 	for (i = 0; i < 128; i++) {
-		if (((Entry24*)g_10069a0)[i].handle != 0 && ((Entry24*)g_10069a0)[i].key == key) {
-			d2_ShowMissionSpecDialog(((Entry24*)g_10069a0)[i].handle, flags | 0x80);
+		if (((Entry24*)gm_MissionJobs)[i].handle != 0 && ((Entry24*)gm_MissionJobs)[i].key == key) {
+			d2_ShowMissionSpecDialog(((Entry24*)gm_MissionJobs)[i].handle, flags | 0x80);
 		}
 	}
 }

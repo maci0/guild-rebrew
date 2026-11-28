@@ -3,7 +3,7 @@
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_774654;
+extern int d2_DialogCloseRequested;
 
 
 
@@ -55,13 +55,13 @@ void __cdecl d2_RunFireExtinguishDialog(char* e)
 	do {
 		cur = gm_SearchTable67(id);
 		if ((*(unsigned char*) (e + 0x5b) & 4) != 0 || cur == 0) {
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 		}
 		n = 1;
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc == 2) {
+		if (d2_DialogButtonAction == 2) {
 			if (d2_CurrentElementId == h1) {
 				p = 0.2f;
 			} else if (d2_CurrentElementId == h2) {
@@ -73,8 +73,8 @@ void __cdecl d2_RunFireExtinguishDialog(char* e)
 			} else {
 				goto next;
 			}
-			if (d2_CheckActionBlocker(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), n)) {
-				gm_ModifyHealth(*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, -n);
+			if (d2_CheckActionBlocker(((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot]), n)) {
+				gm_ModifyHealth(*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id, -n);
 				d2_SetFormVisibility(win, 0);
 				if (gm_RandomFloat01() < p) {
 					ent = he_StartHandlungSearch(1, 0, 0x4f);
@@ -89,15 +89,15 @@ void __cdecl d2_RunFireExtinguishDialog(char* e)
 						} while (ent != 0);
 					}
 done:
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 					d2_SetFormVisibility(win, 1);
 				} else {
 					d2_ShowModalMessageBox((*(int*) 0x14ab300), 4);
 					d2_SetFormVisibility(win, 1);
 				}
 			}
-		} else if (g_100f1dc == n) {
-			g_774654 = n;
+		} else if (d2_DialogButtonAction == n) {
+			d2_DialogCloseRequested = n;
 		}
 next:
 		if (main_RunFrameLoop((void*) d2_RunFireExtinguishDialog, 0x677c7) == 0) {

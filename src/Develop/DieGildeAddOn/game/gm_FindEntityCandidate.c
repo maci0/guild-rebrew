@@ -18,8 +18,8 @@ typedef struct Query {
 // SIZE 0x50
 
 
-extern char* g_77261c;
-extern unsigned int g_7728bc;
+extern char* ai_FeudTargetEntity;
+extern unsigned int gm_EntityCandidateCount;
 
 int __cdecl gm_MatchesTargetFilter(unsigned short a, unsigned short b, Query* q, int c);
 ENTITY_CANDIDATE* __cdecl gm_StepEntityCandidateRing(void);
@@ -38,16 +38,16 @@ int __cdecl gm_FindEntityCandidate(unsigned short* actor, int queryFlags, unsign
 	}
 	memcpy(query.name, excludedIds, len);
 	query.kind = 2;
-	if (((unsigned short*)g_77261c) != 0 && !(query.flags & 0x10000000)) {
+	if (((unsigned short*)ai_FeudTargetEntity) != 0 && !(query.flags & 0x10000000)) {
 		query.x40 = 0;
 		query.flags = queryFlags;
-		if (gm_MatchesTargetFilter(*actor, *((unsigned short*)g_77261c), &query, 0) != 0) {
-			*outId = *((unsigned short*)g_77261c);
+		if (gm_MatchesTargetFilter(*actor, *((unsigned short*)ai_FeudTargetEntity), &query, 0) != 0) {
+			*outId = *((unsigned short*)ai_FeudTargetEntity);
 			return 1;
 		}
 	}
 	query.x40 = 0;
-	for (i = (*(int*)&g_7728bc); candidate = gm_StepEntityCandidateRing(), i != 0 && candidate->entity != 0; i--) {
+	for (i = (*(int*)&gm_EntityCandidateCount); candidate = gm_StepEntityCandidateRing(), i != 0 && candidate->entity != 0; i--) {
 		if (!(candidate->score < minScore) && !(candidate->score > maxScore) && gm_MatchesTargetFilter(*actor, *(unsigned short*)candidate->entity, &query, 0) != 0) {
 			*outId = *(unsigned short*)candidate->entity;
 			return 1;

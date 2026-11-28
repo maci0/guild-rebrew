@@ -77,8 +77,8 @@ void __cdecl d2_RunDiebesgildeInfoDialog(char* p)
 	back = d2_GetWindowListItem(d, 3, io_AppendText(0x1ba6));
 	d2_AddWindowScrollButtons(-1, -1, d2_CurrentWindowId, d2_GetFormWindow(d, 2), 0x767);
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 		if (refresh != 0) {
 			memset(carts, 0, sizeof(carts));
@@ -87,7 +87,7 @@ void __cdecl d2_RunDiebesgildeInfoDialog(char* p)
 				grp = -1;
 			}
 			d2_SetForm(d, 2);
-			io_AppendText(g_6811b0);
+			io_AppendText(str_dollar_C);
 			j = 0;
 			for (e = fcn_00502cd0(*(int*) (p + 0x5d), 1, 0, 0xca); e != 0 && j < 8; e = gm_NextEntityQueryMatch()) {
 				q = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0x2a));
@@ -107,12 +107,12 @@ void __cdecl d2_RunDiebesgildeInfoDialog(char* p)
 						gm_EvalEntityInventoryValue(q, val);
 						b = d2_GetWindowListItem(d, 2, io_AppendText(0x19fc, *q + 0x427, *(unsigned short*) (q + 0x27), q, e + 0x1c, val[0], val[1], e[0x37], e[0x36]));
 						btns[n] = b;
-						(*(unsigned char**)&((D2_CONTROL_TL*)g_1015ea0)[b].associated_object) = q;
+						(*(unsigned char**)&((D2_CONTROL_TL*)d2_Controls)[b].associated_object) = q;
 						if (grp == -1) {
 							grp = d2_CreateRadioGroup(1, b);
-							(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[b].value_038) = 1;
-							(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[b].value_03c) = 1;
-							(*(unsigned char**)&((D2_CONTROL_TL*)g_1015ea0)[b].associated_object) = q;
+							(*(int*)&((D2_CONTROL_TL*)d2_Controls)[b].value_038) = 1;
+							(*(int*)&((D2_CONTROL_TL*)d2_Controls)[b].value_03c) = 1;
+							(*(unsigned char**)&((D2_CONTROL_TL*)d2_Controls)[b].associated_object) = q;
 							g_102cbc4[grp].sel = 0;
 							n++;
 						}
@@ -128,7 +128,7 @@ void __cdecl d2_RunDiebesgildeInfoDialog(char* p)
 			}
 			refresh = 0;
 		}
-		if (g_100f1dc != -1 && d2_CurrentElementId == back && grp != -1) {
+		if (d2_DialogButtonAction != -1 && d2_CurrentElementId == back && grp != -1) {
 			i = d2_GetRadioGroupSelection(grp);
 			if (i >= 0) {
 				r = cm_SendRemoveLinkedObject(*(int*) (p + 1), -1, *(int*) (carts[i] + 2));

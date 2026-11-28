@@ -19,17 +19,17 @@ typedef struct {
 } T411f90;
 
 extern int g_6b5c94;
-extern int g_14ce920[];
+extern int io_ActiveInputState[];
 
 void __cdecl io_SwapMouseButtons(void)
 {
 	T411f90 t;
 
 	if (g_6b5c94 != 0) {
-		t = (*(T411f90*)g_14ce920);
-		(*(T411f90*)g_14ce920).f0c = (*(T411f90*)g_14ce920).f20;
-		(*(T411f90*)g_14ce920).f18 = (*(T411f90*)g_14ce920).f2c;
-		(*(T411f90*)g_14ce920).f2c = t.f18;
-		(*(T411f90*)g_14ce920).f20 = t.f0c;
+		t = (*(T411f90*)io_ActiveInputState);
+		(*(T411f90*)io_ActiveInputState).f0c = (*(T411f90*)io_ActiveInputState).f20;
+		(*(T411f90*)io_ActiveInputState).f18 = (*(T411f90*)io_ActiveInputState).f2c;
+		(*(T411f90*)io_ActiveInputState).f2c = t.f18;
+		(*(T411f90*)io_ActiveInputState).f20 = t.f0c;
 	}
 }

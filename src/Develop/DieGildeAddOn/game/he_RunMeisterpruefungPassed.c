@@ -1,10 +1,10 @@
 extern int g_100f884; extern char g_7749e8;
-extern unsigned char** g_7749e4;
+extern unsigned char** tp_d2_ActiveHudSlot;
 #include <stdio.h>
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern unsigned char g_774964;
-extern unsigned char g_773d75;
+extern unsigned char gm_InWorldHud;
+extern unsigned char gm_ActiveTownIndex;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl gm_CompareGameTime(void*, void*);
@@ -41,9 +41,9 @@ void __cdecl he_RunMeisterpruefungPassed(int action)
 	int v8;
 	int v9;
 
-	if (g_774970 != *(unsigned short*) (action + 8))
+	if (gm_LocalPlayerSlot != *(unsigned short*) (action + 8))
 		return;
-	if (!g_774964)
+	if (!gm_InWorldHud)
 		return;
 	if (0 < gm_CompareGameTime((void*) (action + 0x44), (void*) 0x7f4c00))
 		return;
@@ -68,7 +68,7 @@ void __cdecl he_RunMeisterpruefungPassed(int action)
 		x = gm_MapEntityStatRange(*(unsigned char*) (action + 0xb0));
 		z = gm_GetOppositeStatIndex(*(unsigned char*) (action + 0xb0)) + 1;
 		d2_SetForm(*(int*) (*(int*) (action + 0x74) + 8), 1);
-		io_AppendText(0x15c3, g_773d75 * 0x2f4 + (int) 0x868080, (int) 0x7f4c00,
+		io_AppendText(0x15c3, gm_ActiveTownIndex * 0x2f4 + (int) 0x868080, (int) 0x7f4c00,
 			*(unsigned char*) (action + 0xb1) + y, (int) ((float) ((z - 1) * 0.5) + (3 * x + 0x155a)), x + 0x158a);
 		cm_RequestSetEntityLevel(*(int*) (ent + 4), *(unsigned char*) (action + 0xb1));
 		kind = *(char*) (ent + 2);
@@ -139,21 +139,21 @@ void __cdecl he_RunMeisterpruefungPassed(int action)
 	if (g_100f884 != slot[2]) {
 		if (!g_7749e8)
 			return;
-		if ((int) g_7749e4 != (int) slot)
+		if ((int) tp_d2_ActiveHudSlot != (int) slot)
 			return;
 	}
-	if (g_100f1dc == -1) {
+	if (d2_DialogButtonAction == -1) {
 		if (!g_7749e8)
 			return;
-		if ((int) g_7749e4 != (int) slot)
+		if ((int) tp_d2_ActiveHudSlot != (int) slot)
 			return;
 	} else {
-		if (g_100f1dc == 2) {
+		if (d2_DialogButtonAction == 2) {
 			d2_CloseActionPopup(action);
 			he_FreeAction((char*) action);
 			return;
 		}
-		if (g_100f1dc == 1) {
+		if (d2_DialogButtonAction == 1) {
 			d2_CloseActionPopup(action);
 			he_FreeAction((char*) action);
 			g_7749e8 = 0;

@@ -1,4 +1,4 @@
-extern char g_773dd4;
+extern char d3_CurrentSeason;
 
 
 
@@ -8,6 +8,6 @@ void __cdecl SelectTextureSet(char*, int, char, int);
 void __cdecl d3_ApplyVegetationTextureSet(char* obj)
 {
 	if (!strncmp(obj, "pfl_", 4) || !strncmp(obj, "vg_", 3) || strncmp(obj, "!vg_", 4) == 0) {
-		SelectTextureSet(obj, *(int*) (obj + 0x1cc), g_773dd4, 1);
+		SelectTextureSet(obj, *(int*) (obj + 0x1cc), d3_CurrentSeason, 1);
 	}
 }

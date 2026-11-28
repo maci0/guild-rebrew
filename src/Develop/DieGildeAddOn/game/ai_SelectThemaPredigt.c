@@ -1,4 +1,4 @@
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 unsigned short __cdecl gm_RandomMod(unsigned short n);
 char* __cdecl gm_LookupEntityRecordById(int id);
@@ -74,7 +74,7 @@ int __cdecl ai_SelectThemaPredigt(char* actorEntity, char* sermonObj)
 				 (float) (int) pos + g_662c98, (unsigned short*) &pos) == 0) {
 			goto other;
 		}
-		pick = ((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[(pos & 0xffff)]);
+		pick = ((char *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[(pos & 0xffff)]);
 	}
 	if (pick != 0) {
 		b = 1;

@@ -1,4 +1,4 @@
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 #include <string.h>
 
 unsigned char *__cdecl gm_LookupEntityRecordById(int);
@@ -28,7 +28,7 @@ static __inline int RandomMoneyTransfer(void *request, double increment, double 
     n = gm_WalkEntityChain(*(short *)entity);
     amount = (int)(((double)n * d) * scale);
     io_FormatTextBuffer(buf, *(unsigned short *)((char *)request + 4) + 0x12e7, amount);
-    cm_RequestTransferCurrencyNoKill(*(int *)request, -1, g_773d75, amount);
+    cm_RequestTransferCurrencyNoKill(*(int *)request, -1, gm_ActiveTownIndex, amount);
     len = strlen(buf);
     he_PostEntityMessage(*(int *)((char *)entity + 4), *(int *)((char *)entity + 4), buf, 0x100 < len, 0x603, 0);
     return 0;

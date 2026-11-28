@@ -13,7 +13,7 @@ extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern char* g_77255c;
+extern char* d2_CurrentWindow;
 extern char s_6a4320[];
 extern char s_6a4310[];
 extern char s_6a4304[];
@@ -40,9 +40,9 @@ void __cdecl d2_ShowBuildingTurnSummary(unsigned char* a)
 	dlg = d2_LoadForm(0x3c, 0, s_6a4320);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
-	*(int*) (g_77255c + 0x28c) = 0x56;
+	*(int*) (d2_CurrentWindow + 0x28c) = 0x56;
 	gm_GetBuildingTypeCategory(a[0]);
-	gm_CalcBuildingRoundBalance(a, g_774970, st);
+	gm_CalcBuildingRoundBalance(a, gm_LocalPlayerSlot, st);
 	if (a[5] != 0) {
 		io_AppendText((int) s_6a4310, a[0] * 14 + 0x48e, a + 5);
 	}
@@ -99,8 +99,8 @@ void __cdecl d2_ShowBuildingTurnSummary(unsigned char* a)
 	}
 	if (main_RunFrameLoop((void*) d2_ShowBuildingTurnSummary, 0x677c7) != 0) {
 		do {
-			if (g_14ce8e0 != 0) {
-				g_774654 = 1;
+			if (io_RightButtonReleased != 0) {
+				d2_DialogCloseRequested = 1;
 			}
 		} while (main_RunFrameLoop((void*) d2_ShowBuildingTurnSummary, 0x677c7) != 0);
 	}

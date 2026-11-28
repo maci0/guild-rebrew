@@ -2,7 +2,7 @@
 
 
 char* __cdecl d3_FindFreeSceneEntry(void);
-extern char g_9baae0[];
+extern char d3_SceneEntries[];
 
 char* __cdecl d3_LookupSceneEntry(int id)
 {
@@ -12,9 +12,9 @@ char* __cdecl d3_LookupSceneEntry(int id)
 	if (id == 0) {
 		return 0;
 	}
-	for (i = 0, address = (int) g_9baae0; address < (int) (g_9baae0 + 0x2b8); address += 0x57, i++) {
+	for (i = 0, address = (int) d3_SceneEntries; address < (int) (d3_SceneEntries + 0x2b8); address += 0x57, i++) {
 		if (*(int*) address == id) {
-			return g_9baae0 + i * 87;
+			return d3_SceneEntries + i * 87;
 		}
 	}
 	return d3_FindFreeSceneEntry();

@@ -23,8 +23,8 @@ typedef struct Tex {
 	char pad5e[0x12];
 } Tex;
 
-extern char* g_104049c;
-extern unsigned int g_10404a0;
+extern char* d3_TextureBank;
+extern unsigned int d3_TextureBankCount;
 
 Tex* __cdecl d3_FindTextureVariant(int idx, char kind)
 {
@@ -32,18 +32,18 @@ Tex* __cdecl d3_FindTextureVariant(int idx, char kind)
 	int id;
 
 	if (kind == 0) {
-		return &((Tex*)g_104049c)[idx];
+		return &((Tex*)d3_TextureBank)[idx];
 	}
-	id = ((Tex*)g_104049c)[idx].id;
-	if (((Tex*)g_104049c)[idx].col.a < 0xff || ((Tex*)g_104049c)[idx].col.c0) {
-		for (p = &((Tex*)g_104049c)[g_10404a0 - 1]; p >= ((Tex*)g_104049c); p--) {
+	id = ((Tex*)d3_TextureBank)[idx].id;
+	if (((Tex*)d3_TextureBank)[idx].col.a < 0xff || ((Tex*)d3_TextureBank)[idx].col.c0) {
+		for (p = &((Tex*)d3_TextureBank)[d3_TextureBankCount - 1]; p >= ((Tex*)d3_TextureBank); p--) {
 			if (p->refs > 0 && p->id == id && p->kind == kind) {
 				return p;
 			}
 		}
 		return 0;
 	}
-	for (p = ((Tex*)g_104049c); p <= &((Tex*)g_104049c)[g_10404a0 - 1]; p++) {
+	for (p = ((Tex*)d3_TextureBank); p <= &((Tex*)d3_TextureBank)[d3_TextureBankCount - 1]; p++) {
 		if (p->refs > 0 && p->id == id && p->kind == kind) {
 			return p;
 		}

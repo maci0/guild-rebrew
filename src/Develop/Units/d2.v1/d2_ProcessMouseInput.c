@@ -1,7 +1,7 @@
 #include "Develop/Units/d2.v1/g_100f200.h"
 #include "Develop/DieGildeAddOn/game/client_data.h"
 #include "Develop/Units/d2.v1/d2_win.h"
-extern int g_14cf900[]; extern short g_14cf902; extern char g_67d908[];
+extern int io_PolledCursorState[]; extern short io_PolledCursorY; extern char g_67d908[];
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/client_types.h"
 extern D2_RADIO_GROUP g_102cbc4[8];
@@ -16,7 +16,7 @@ extern int g_6b5c8c;
 extern int g_772578;
 extern int g_100f84c;
 extern int g_100f1d0;
-extern int g_100f1e4;
+extern int tp_d2_HoveredControl;
 extern int g_67d8d0;
 
 int __cdecl d2_HitTestGui(int x, int y);
@@ -40,8 +40,8 @@ void __cdecl d2_ProcessMouseInput(void)
 	Slot100f200* rect;
 
 	if (g_6772c4 != 0) {
-		d2_MouseX = *(short*) g_14cf900;
-		d2_MouseY = g_14cf902;
+		d2_MouseX = *(short*) io_PolledCursorState;
+		d2_MouseY = io_PolledCursorY;
 	}
 	g_100f890 = d2_HitTestGui(d2_MouseX, d2_MouseY);
 	d2_UpdateSelectedControl();
@@ -49,9 +49,9 @@ void __cdecl d2_ProcessMouseInput(void)
 		d2_HoveredWindow = g_67d388;
 		g_100f800 = -1;
 		v4 = 0;
-		v7 = ((D2_WIN*) g_1015f40)[g_67d388].count;
+		v7 = ((D2_WIN*) d2_Windows)[g_67d388].count;
 		if (v7 > 0) {
-			v5 = ((D2_WIN*) g_1015f40)[g_67d388].children;
+			v5 = ((D2_WIN*) d2_Windows)[g_67d388].children;
 			do {
 				if (*v5 == d2_CurrentElementId) {
 					g_100f800 = v4;
@@ -68,10 +68,10 @@ void __cdecl d2_ProcessMouseInput(void)
 	if (g_14ce8d8 != 0) {
 		v7 = d2_CurrentElementId;
 		if (g_100f890 != -1) {
-			v4 = (int) &((D2_CONTROL_TL*) g_1015ea0)[d2_CurrentElementId];
+			v4 = (int) &((D2_CONTROL_TL*) d2_Controls)[d2_CurrentElementId];
 			if ((*(int*) (v4 + 0x58) != 0 || *(int*) (v4 + 0x5c) != 0) &&
 			    *(int*) (v4 + 0x20) != 0x45) {
-				g_100f1dc = g_100f890;
+				d2_DialogButtonAction = g_100f890;
 				g_6b5c8c = 1;
 				v1 = *(unsigned int**) (v4 + 0x50);
 				if (v1 != 0) {
@@ -83,8 +83,8 @@ void __cdecl d2_ProcessMouseInput(void)
 				}
 				if (*(int*) (v4 + 0x58) != 0) {
 					*(int*) (v4 + 0x38) = *(int*) (v4 + 0x38) ^ 1;
-					((D2_CONTROL_TL*) ((int) g_1015ea0))[d2_CurrentElementId].value_03c =
-						((D2_CONTROL_TL*) ((int) g_1015ea0))[d2_CurrentElementId].value_038;
+					((D2_CONTROL_TL*) ((int) d2_Controls))[d2_CurrentElementId].value_03c =
+						((D2_CONTROL_TL*) ((int) d2_Controls))[d2_CurrentElementId].value_038;
 					sb_PlayVoice(g_772578, g_67d908, 1, 0x3f, 0x7f, 0, 0);
 				} else if (g_100f890 != 1) {
 					sb_PlayVoice(g_772578, g_67d908, 1, 0x3f, 0x7f, 0, 0);
@@ -110,18 +110,18 @@ void __cdecl d2_ProcessMouseInput(void)
 						}
 					}
 				}
-				if (g_100f1dc != g_100f84c) {
-					g_100f84c = g_100f1dc;
+				if (d2_DialogButtonAction != g_100f84c) {
+					g_100f84c = d2_DialogButtonAction;
 				}
 				g_100f1d0 = g_100f800;
 			}
 		}
 		if (v7 != -1) {
-			g_100f1e4 = (int) &((D2_CONTROL_TL*) g_1015ea0)[v7];
+			tp_d2_HoveredControl = (int) &((D2_CONTROL_TL*) d2_Controls)[v7];
 		}
 	} else {
-		g_100f1dc = -1;
-		g_100f1e4 = 0;
+		d2_DialogButtonAction = -1;
+		tp_d2_HoveredControl = 0;
 		g_100f1d0 = -1;
 	}
 	g_67d8d0 = -1;
@@ -145,7 +145,7 @@ void __cdecl d2_ProcessMouseInput(void)
 	} while (rect < g_100f200 + 32);
 	v8 = d2_HoveredWindow;
 	if (v8 != -1) {
-		v4 = (int) &g_1015f40[v8];
+		v4 = (int) &d2_Windows[v8];
 		if (g_14ce8d0 != 0 &&
 		    (*(unsigned char*) (v4 + 0x14) & 0x20) != 0 &&
 		    d2_MouseX > *(int*) (v4 + 0xc) + *(int*) (v4 + 4) - 0xc) {

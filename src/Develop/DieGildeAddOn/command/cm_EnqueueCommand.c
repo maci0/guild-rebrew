@@ -14,7 +14,7 @@ int __cdecl cm_EnqueueCommand(char* src)
 
 	p = g_aed200;
 	if (p == 0) {
-		if (g_14cbca0 != -1) {
+		if (nt_ClientSocket != -1) {
 			nt_CloseClientConnection();
 		}
 		return 1;

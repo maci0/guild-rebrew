@@ -10,6 +10,6 @@ typedef struct {
 	void* surface;
 } D2_SURFACE;
 
-extern D2_SURFACE* g_77256c;
+extern D2_SURFACE* d2_WhiteSurface;
 
 #endif

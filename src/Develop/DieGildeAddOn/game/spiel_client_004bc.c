@@ -1,7 +1,7 @@
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/ambient_animal_slot.h"
 
-extern int g_67a370;
+extern int d3_ActiveScene;
 
 unsigned short __cdecl gm_RandomMod(unsigned short);
 int __cdecl ch_QueuePlayAnimation(char*, char*, int);
@@ -40,7 +40,7 @@ void __cdecl anm_UpdateCat(AMBIENT_ANIMAL_SLOT* state)
 		}
 		return;
 	}
-	g = *(int*) (((char*)g_67a370) + 0xb0);
+	g = *(int*) (((char*)d3_ActiveScene) + 0xb0);
 	n = gm_RandomMod(3) + 1;
 	n = ch_GenerateNearbyWalkablePoints((int*) state->pos, n, pts[0]);
 	if (n <= 0)
@@ -74,7 +74,7 @@ void __cdecl anm_UpdateSheep(AMBIENT_ANIMAL_SLOT* state)
 			ch_QueuePlayAnimation(state->objekt, "bewegung/fressen", gm_RandomMod(3) + 1);
 		return;
 	}
-	g = *(int*) (((char*)g_67a370) + 0xb0);
+	g = *(int*) (((char*)d3_ActiveScene) + 0xb0);
 	n = gm_RandomMod(3) + 1;
 	n = ch_GenerateNearbyWalkablePoints((int*) state->pos, n, pts[0]);
 	if (n <= 0)

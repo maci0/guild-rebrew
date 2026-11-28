@@ -39,12 +39,12 @@ extern char g_6a2f18[];
 extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 
-extern ENTITY_REC_VIEW g_7f4ca0[];
-extern DYNASTY_REC_VIEW g_868060[];
+extern ENTITY_REC_VIEW gm_EntitySlotTable[];
+extern DYNASTY_REC_VIEW gm_TownTable[];
 extern char* gm_CityEntity;
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern unsigned char* g_7746c8;
+extern unsigned char* d2_InteriorBuilding;
 extern int g_14ad0cc;
 extern int g_14ad0d4;
 
@@ -83,13 +83,13 @@ void __cdecl d2_ShowBuildingInfoPanel(unsigned char* building)
 			io_AppendText(g_6a2f24, name, *building * 14 + 0x48e);
 		}
 	} else {
-		io_AppendText(g_6a2f24, 0x870, &g_868060[*(int*) (building + 0x65)]);
+		io_AppendText(g_6a2f24, 0x870, &gm_TownTable[*(int*) (building + 0x65)]);
 	}
 	d2_SetForm(g_6a25b8, 0);
-	g_6a25bc = d2_AddElementToWindow((((D2_WIN*) g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1, 0x48, *building + 0x427, d2_CurrentWindowId);
-	((D2_CTRL_VIEW*)g_1015ea0)[g_6a25bc].shown = 1;
+	g_6a25bc = d2_AddElementToWindow((((D2_WIN*) d2_Windows)[d2_CurrentWindowId].width - 0x30) >> 1, 0x48, *building + 0x427, d2_CurrentWindowId);
+	((D2_CTRL_VIEW*)d2_Controls)[g_6a25bc].shown = 1;
 	if (*(unsigned short*) (building + 0x27) != 0xffff && *(unsigned short*) (building + 0x27) != *(unsigned short*) gm_CityEntity) {
-		((D2_CTRL_VIEW*)g_1015ea0)[g_6a25bc].link = &g_7f4ca0[*(unsigned short*) (building + 0x27)];
+		((D2_CTRL_VIEW*)d2_Controls)[g_6a25bc].link = &gm_EntitySlotTable[*(unsigned short*) (building + 0x27)];
 	}
 	if (*building == 0x47 || *building == 0x1d || *building == 0x57) {
 		d2_CurrentValueBar = -1;
@@ -105,14 +105,14 @@ void __cdecl d2_ShowBuildingInfoPanel(unsigned char* building)
 	}
 	kind = gm_GetBuildingTypeCategory(*building);
 	t = (unsigned char*) &((BUILDING_PROTOTYPE*) lpGebaeudePROT)[*building];
-	r = gm_GetEntityUiFlags(g_774970, building, 0, 0);
-	if (*(unsigned short*) (building + 0x27) == g_774970 || *(unsigned short*) (building + 0x25) == g_774970 || (r & 0x10) != 0) {
+	r = gm_GetEntityUiFlags(gm_LocalPlayerSlot, building, 0, 0);
+	if (*(unsigned short*) (building + 0x27) == gm_LocalPlayerSlot || *(unsigned short*) (building + 0x25) == gm_LocalPlayerSlot || (r & 0x10) != 0) {
 		g_6a25ec = d2_CreateWindowTextButton(0, 0x8c, g_14ad0cc);
 	} else {
 		g_6a25ec = d2_CreateWindowTextButton(0, 0x8c, g_14ad0d4);
 	}
 	if ((kind == 1 || kind == 2 || kind == 4 || kind == 7 || kind == 8 || *t == 0x10 || *t == 0x1e || *t == 0x1f || *t == 0x1d) && *t != 5) {
-		if (g_7746c8 == 0) {
+		if (d2_InteriorBuilding == 0) {
 			g_6a25e4 = d2_CreateWindowTextButton(0, 0xa6, (int) g_6a2f18);
 		}
 		g_6a25c4[0] = -1;

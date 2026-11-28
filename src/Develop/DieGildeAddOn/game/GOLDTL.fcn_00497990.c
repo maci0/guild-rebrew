@@ -1,7 +1,7 @@
 extern char* lpGebaeudePROT;
 typedef struct { unsigned char kind; unsigned char unknown01[0x246]; unsigned char level; unsigned char unknown248[5]; } BUILDING_ROW;
 extern char* lpGebaeudeINST;
-extern char g_773d75;
+extern char gm_ActiveTownIndex;
 extern int g_666028;
 extern int g_66602c;
 extern float g_664178;
@@ -75,7 +75,7 @@ int __cdecl ai_StartWohnsitzKaufen(int a1, char* entityRec, int phaseFlag, char*
 	}
 	return 0;
 found:
-	A = (int) (gm_GetSeasonTreasury(entityRec, g_773d75) * g_664178);
+	A = (int) (gm_GetSeasonTreasury(entityRec, gm_ActiveTownIndex) * g_664178);
 	r = gm_CheckPrivilege(1, (int) entityRec, (int) buf);
 	q[0] = (r == 2 || r == 4);
 	r = gm_CheckPrivilege(5, (int) entityRec, (int) buf);

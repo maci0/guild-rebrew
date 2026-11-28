@@ -68,7 +68,7 @@ typedef struct WORKER_RECOVERY_UNIT {
 	char* info;
 } WORKER_RECOVERY_UNIT;
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 extern pos14_7f4c00 gm_GameTime;
 #pragma pack(push, 1)
@@ -93,8 +93,9 @@ void __cdecl ai_DispatchWorkerRecovery(WORKER_RECOVERY_UNIT* meister)
 
 	cnt = 2;
 	for (i = 0; i < 768; i++) {
-		if (((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].id != 0xffff && ((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].owner == meister->info && ((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].active
-		    && ((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].job != 0 && *((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].job == 0x16) {
+		if (((WORKER_RECOVERY_ENTITY*)gm_EntitySlotTable)[i].id != 0xffff && ((WORKER_RECOVERY_ENTITY*)gm_EntitySlotTable)[i].owner == meister->info &&
+			((WORKER_RECOVERY_ENTITY*)gm_EntitySlotTable)[i].active
+		    && ((WORKER_RECOVERY_ENTITY*)gm_EntitySlotTable)[i].job != 0 && *((WORKER_RECOVERY_ENTITY*)gm_EntitySlotTable)[i].job == 0x16) {
 			cnt--;
 		}
 	}
@@ -111,7 +112,7 @@ void __cdecl ai_DispatchWorkerRecovery(WORKER_RECOVERY_UNIT* meister)
 	}
 	memset(&msg, 0, sizeof(msg));
 	msg.type = 0x16;
-	msg.seed = ((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[*(unsigned short*)(meister->info + 0x27)].seed;
+	msg.seed = ((WORKER_RECOVERY_ENTITY*)gm_EntitySlotTable)[*(unsigned short*)(meister->info + 0x27)].seed;
 	msg.id = *(int*)(meister->info + 1);
 	msg.pos = (*(pos14_7f4c00*)&gm_GameTime);
 	msg.flag = 1;
@@ -125,27 +126,28 @@ void __cdecl ai_DispatchWorkerRecovery(WORKER_RECOVERY_UNIT* meister)
 		if (i >= 768) {
 			return;
 		}
-		if (((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].id != 0xffff
-			&& ((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].owner == meister->info
-			&& ((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].active
-			&& (((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].flags & 0x10)) {
-			if (((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].job != 0) {
-				if (*((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].job == 0x16) {
-					((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].flags &= ~0x10;
+		if (((WORKER_RECOVERY_ENTITY*)gm_EntitySlotTable)[i].id != 0xffff
+			&& ((WORKER_RECOVERY_ENTITY*)gm_EntitySlotTable)[i].owner == meister->info
+			&& ((WORKER_RECOVERY_ENTITY*)gm_EntitySlotTable)[i].active
+			&& (((WORKER_RECOVERY_ENTITY*)gm_EntitySlotTable)[i].flags & 0x10)) {
+			if (((WORKER_RECOVERY_ENTITY*)gm_EntitySlotTable)[i].job != 0) {
+				if (*((WORKER_RECOVERY_ENTITY*)gm_EntitySlotTable)[i].job == 0x16) {
+					((WORKER_RECOVERY_ENTITY*)gm_EntitySlotTable)[i].flags &= ~0x10;
 				}
-			} else if (((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].aux != 0 && ((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].aux->id == *(int*)(((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].owner + 1)) {
-				if (((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].b83 < ((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].b82) {
-					msg.target = ((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].seed;
+			} else if (((WORKER_RECOVERY_ENTITY*)gm_EntitySlotTable)[i].aux != 0 &&
+				((WORKER_RECOVERY_ENTITY*)gm_EntitySlotTable)[i].aux->id == *(int*)(((WORKER_RECOVERY_ENTITY*)gm_EntitySlotTable)[i].owner + 1)) {
+				if (((WORKER_RECOVERY_ENTITY*)gm_EntitySlotTable)[i].b83 < ((WORKER_RECOVERY_ENTITY*)gm_EntitySlotTable)[i].b82) {
+					msg.target = ((WORKER_RECOVERY_ENTITY*)gm_EntitySlotTable)[i].seed;
 					msg.mode = 3;
 					cm_SendCopyEntityData(&msg);
 					cnt--;
 				} else {
-					msg.target = ((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].seed;
+					msg.target = ((WORKER_RECOVERY_ENTITY*)gm_EntitySlotTable)[i].seed;
 					msg.mode = 2;
 					cm_SendCopyEntityData(&msg);
 					cnt--;
 				}
-				((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].flags2 |= 4;
+				((WORKER_RECOVERY_ENTITY*)gm_EntitySlotTable)[i].flags2 |= 4;
 			}
 		}
 		i++;

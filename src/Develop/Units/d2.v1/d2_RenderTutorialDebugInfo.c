@@ -1,6 +1,6 @@
 
 
-extern int* g_665f08;
+extern int* d2_TutorialState;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char* g_6a8204[];
 extern char* g_6a8238[];
@@ -20,10 +20,10 @@ void __cdecl d2_RenderTutorialDebugInfo(void)
 		io_AppendText(g_6a935c);
 		return;
 	}
-	io_AppendText(g_6a9340, g_6a8204[g_665f08[0]]);
-	io_AppendText(g_6a9324, g_6a8204[g_665f08[1]]);
-	io_AppendText(g_6a9308, g_665f08[21]);
-	io_AppendText(g_6a92ec, g_6a8238[g_665f08[22]]);
-	io_AppendText(g_6a92d0, g_665f08[23]);
-	io_AppendText(g_6a92b4, g_665f08[24]);
+	io_AppendText(g_6a9340, g_6a8204[d2_TutorialState[0]]);
+	io_AppendText(g_6a9324, g_6a8204[d2_TutorialState[1]]);
+	io_AppendText(g_6a9308, d2_TutorialState[21]);
+	io_AppendText(g_6a92ec, g_6a8238[d2_TutorialState[22]]);
+	io_AppendText(g_6a92d0, d2_TutorialState[23]);
+	io_AppendText(g_6a92b4, d2_TutorialState[24]);
 }

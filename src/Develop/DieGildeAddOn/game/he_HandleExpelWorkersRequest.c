@@ -1,7 +1,7 @@
 
 
 
-extern char g_679060[];
+extern char str_fmt_s[];
 
 int __cdecl d2_ShowExpelWorkersDialog(unsigned char* a1, int* a2);
 void __cdecl io_FormatTextBuffer(void*, int, ...);

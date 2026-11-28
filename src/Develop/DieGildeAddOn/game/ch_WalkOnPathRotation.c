@@ -5,7 +5,7 @@
 extern int __cdecl sprintf(char* buf, const char* fmt, ...);
 
 extern int ch_UpdateTime;
-extern unsigned int g_67529c;
+extern unsigned int ch_LastUpdateTime;
 
 float __cdecl d3_ComputeYawToTarget(char* obj, float* pos);
 void __cdecl d3_SetObjectEulerRotation(int a1, int a2, int a3, int a4);
@@ -34,7 +34,7 @@ void __cdecl ch_WalkOnPathRotation(char* obj)
 			angle = turnDelta + *(float*) (o + 0x88);
 			*(int*) (obj + 0x108) = 0;
 		} else {
-			ticks = ch_UpdateTime - g_67529c;
+			ticks = ch_UpdateTime - ch_LastUpdateTime;
 			turnStep = ticks * 0.9090909f;
 			if (*(int*) (inst + 4) & 8) {
 				turnStep *= 0.4f;
@@ -76,7 +76,7 @@ void __cdecl ch_WalkOnPathRotation(char* obj)
 			angle = turnDelta + *(float*) (o + 0x88);
 			*(int*) (obj + 0x108) = 0;
 		} else {
-			ticks = ch_UpdateTime - g_67529c;
+			ticks = ch_UpdateTime - ch_LastUpdateTime;
 			turnStep = ticks * 0.9090909f;
 			if (*(int*) (inst + 4) & 8) {
 				turnStep *= 0.4f;

@@ -2,7 +2,7 @@
 
 #include "Develop/Units/d3/client_scene_loader.h"
 
-extern int g_67a370;
+extern int d3_ActiveScene;
 
 void __cdecl d3_VisitSceneObjects(int, int, int, void*, void*);
 #include "Develop/Units/d3/client_lighting.h"
@@ -16,9 +16,9 @@ void __cdecl d3_ReloadSceneResources(int mask, int b, SCENE_PROGRESS a)
 	s.total = 0;
 	s.fn = a;
 	s.id = b;
-	d3_VisitSceneObjects(g_67a370, 0, mask, d3_ReloadObjectResourcesCallback, &s);
+	d3_VisitSceneObjects(d3_ActiveScene, 0, mask, d3_ReloadObjectResourcesCallback, &s);
 	s.skip = 0;
-	d3_VisitSceneObjects(g_67a370, 0, mask, d3_ReloadObjectResourcesCallback, &s);
+	d3_VisitSceneObjects(d3_ActiveScene, 0, mask, d3_ReloadObjectResourcesCallback, &s);
 	d3_ReloadSceneTextureSurfaces(a);
 	UpdateSceneLighting(1);
 }

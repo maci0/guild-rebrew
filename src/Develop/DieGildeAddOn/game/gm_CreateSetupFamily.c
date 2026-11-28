@@ -46,8 +46,8 @@ typedef struct {
 
 extern char g_7e23e0[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern unsigned char g_773d75;
-extern signed char g_6a3440;
+extern unsigned char gm_ActiveTownIndex;
+extern signed char gm_SelectedMissionIndex;
 
 #ifdef REBREW_GOLD
 void __cdecl gm_ClearMissionJobs(void);
@@ -125,9 +125,9 @@ void __cdecl gm_CreateSetupFamily(void)
 	cm_RequestCopyEntityData(child->id, p->id, 0x7f, 0);
 	cm_RequestCopyEntityData(spouse->id, child->id, 0x7f, 0);
 	cm_RequestCopyEntityData(child->id, spouse->id, 0x7f, 0);
-	cm_RequestMoveCredits(spouse->id, -1, (*(char*)&g_773d75), (gm_RandomMod(0x200) + 0x1f4) << 5);
-	cm_RequestMoveCredits(child->id, -1, (*(char*)&g_773d75), (gm_RandomMod(0x200) + 0x1f4) << 5);
-	if (g_6a3440 > -1) {
+	cm_RequestMoveCredits(spouse->id, -1, (*(char*)&gm_ActiveTownIndex), (gm_RandomMod(0x200) + 0x1f4) << 5);
+	cm_RequestMoveCredits(child->id, -1, (*(char*)&gm_ActiveTownIndex), (gm_RandomMod(0x200) + 0x1f4) << 5);
+	if (gm_SelectedMissionIndex > -1) {
 		gm_AllocMissionJob(p->id, (*(Setup*)g_7e23e0).dynasty, 0);
 	}
 	for (i = 0; i < 5; i++) {

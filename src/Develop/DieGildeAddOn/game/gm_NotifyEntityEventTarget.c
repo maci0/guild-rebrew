@@ -1,7 +1,7 @@
-extern double g_664e78;
-extern double g_664e78;
-extern float g_662cf8;
-extern float g_662cf8;
+extern double dbl_5_0;
+extern double dbl_5_0;
+extern float flt_100_0;
+extern float flt_100_0;
 /* Owned (both targets) by src/GOLDTL.fcn_004b6f00.c. */
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
@@ -30,7 +30,7 @@ int __cdecl gm_NotifyEntityEventTarget(void* request)
 	unsigned int len;
 
 	roll = gm_RandomMod(0x14) & 0xffff;
-	scale = (float) (((double) roll + g_664e78) * 0.01);
+	scale = (float) (((double) roll + dbl_5_0) * 0.01);
 	entity = gm_LookupEntityRecordById(*(int*) request);
 	if (entity == 0) {
 		return 1;
@@ -42,7 +42,7 @@ int __cdecl gm_NotifyEntityEventTarget(void* request)
 				float cur_scale;
 
 				cur_scale = scale;
-				scaled_val = (int) (cur_scale * g_662cf8);
+				scaled_val = (int) (cur_scale * flt_100_0);
 				io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7, scaled_val, target);
 				len = strlen(buf);
 				he_MessageBoxQuickjump(*(int*) ((char*) entity + 4), *(int*) ((char*) entity + 4),

@@ -26,20 +26,20 @@ typedef struct GOLDTL_Msg481 {
 	char pad84[0x74];
 } GOLDTL_Msg481;                    /* SIZE 0xf8 */
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-extern char g_7f4ca0[];
-extern unsigned short g_7f4c04;
+extern char gm_EntitySlotTable[];
+extern unsigned short gm_GameTimeHour;
 extern int gm_GameTime;
-extern int g_7f4c08;
+extern int gm_GameTimeSliceDword;
 extern unsigned char* lpGebaeudePROT;
 extern unsigned char* lpObjektePROT;
 extern unsigned char* lpGebaeudeINST;
-extern unsigned char g_99ef80[];
-extern int g_100dc20;
+extern unsigned char gm_CrimeGrid[];
+extern int ai_MeisterDebugState;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_100dc24;
-extern char* g_100df20;
+extern char* ai_TrackedGoodPlanEntries;
 extern unsigned short* gm_CityEntity;
-extern int g_7747b4;
+extern int gm_DifficultyLevel;
 
 int __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl gm_NextEntityQueryMatch(void);
@@ -118,20 +118,20 @@ void __cdecl ai_CalcMeisterDiebe(unsigned char* rec)
 	if (handle == 0) {
 		goto common;
 	}
-	g_100b0ac = 0;
+	ai_ProductionGoodsCount = 0;
 	ai_ResourceCount = 0;
 	ai_CollectGoodsResources((int) rec, (int) handle);
 	ai_PlanMeisterSupplies((int) rec, (int) handle, *(int*) (*(int*) (rec + 0x16c) + 0x39));
 	ai_ArmMeisterWorkers((int) rec, (int) handle);
-	if (g_100dc20 == *(int*) (rec + 0x16c) && g_100dc38 < 4) {
+	if (ai_MeisterDebugState == *(int*) (rec + 0x16c) && g_100dc38 < 4) {
 		j = 0;
 		n = ai_ResourceCount;
-		e = (unsigned char*) g_100b0c0;
+		e = (unsigned char*) ai_ResourceRequests;
 		do {
 			if (j >= n) {
 				break;
 			}
-			memcpy((void*) (g_100df20 + g_100dc38 * 0x40), e, 0x40);
+			memcpy((void*) (ai_TrackedGoodPlanEntries + g_100dc38 * 0x40), e, 0x40);
 			e = e + 0x40;
 			g_100dc38 = g_100dc38 + 1;
 			j = j + 1;
@@ -148,8 +148,8 @@ common:
 		ai_FlagIdleWorkersForRecovery((int) rec);
 	}
 	ai_DispatchWorkerRecovery((int) rec);
-	if (g_7f4c04 <= 6
-	    || (*(int*) (rec + 4) + ((unsigned int) g_7f4c04 & 0xffff)) % 3 != 0) {
+	if (gm_GameTimeHour <= 6
+	    || (*(int*) (rec + 4) + ((unsigned int) gm_GameTimeHour & 0xffff)) % 3 != 0) {
 		*(unsigned int*) (rec + 0x1b4) = *(unsigned int*) (rec + 0x1b4) & 0xffffffdf;
 		return;
 	}
@@ -159,7 +159,7 @@ common:
 	match = 0;
 	total = 0;
 	*(unsigned int*) (rec + 0x1b4) = *(unsigned int*) (rec + 0x1b4) | 0x20;
-	for (e = (unsigned char*) g_7f4ca0; (int) e < 0x85a0a0; e = e + sizeof(ENTITY_RECORD)) {
+	for (e = (unsigned char*) gm_EntitySlotTable; (int) e < 0x85a0a0; e = e + sizeof(ENTITY_RECORD)) {
 		if (e[8] > 0 && *(unsigned short*) e != 0xffff && e[2] != 0x0a
 		    && *(int*) (e + 0x16c) == *(int*) (rec + 0x16c)
 		    && e[0x165] != 0
@@ -171,7 +171,7 @@ common:
 			}
 		}
 	}
-	if (g_100dc20 == *(int*) (rec + 0x16c)) {
+	if (ai_MeisterDebugState == *(int*) (rec + 0x16c)) {
 		g_100dc34 = match;
 		if (*(int*) (rec + 0x1c0) != -1) {
 			g_100dc24 = gm_SearchTable67(*(int*) (rec + 0x1c0));
@@ -194,7 +194,7 @@ common:
 				goto L176c;
 			}
 		} else {
-			if (gm_RandomFloat01() > 0.85 && match >= 3 && gm_GameTime >= 7 - g_7747b4) {
+			if (gm_RandomFloat01() > 0.85 && match >= 3 && gm_GameTime >= 7 - gm_DifficultyLevel) {
 				goto L1e70;
 			}
 			sel = gm_RandomMod(3) & 0xffff;
@@ -209,7 +209,7 @@ common:
 		maxfactor = 0;
 		cy = 8;
 		cx = 8;
-		e = (unsigned char*) g_99ef80 + 2;
+		e = (unsigned char*) gm_CrimeGrid + 2;
 L1723:
 		best = e;
 		j = 8;
@@ -245,7 +245,7 @@ L176c:
 			unsigned char* p;
 			unsigned char* q;
 			int b;
-			for (p = (unsigned char*) g_99ef80 + 2; (int) p < (int) (g_99ef80 + 0xc2); p = p + 0x18) {
+			for (p = (unsigned char*) gm_CrimeGrid + 2; (int) p < (int) (gm_CrimeGrid + 0xc2); p = p + 0x18) {
 				q = p;
 				for (b = 8; b != 0; b--) {
 					float f = (float) *(unsigned short*) (q - 2) * 0.125f + (float) *(unsigned short*) q;
@@ -278,8 +278,8 @@ L176c:
 					} else {
 						int off = (cy + cx * 8) * 0x18;
 						factor = 1.0f
-						         - ((float) *(unsigned short*) (g_99ef80 + off) * 0.125f
-						            + (float) *(unsigned short*) (g_99ef80 + off + 2))
+						         - ((float) *(unsigned short*) (gm_CrimeGrid + off) * 0.125f
+						            + (float) *(unsigned short*) (gm_CrimeGrid + off + 2))
 						           / maxfactor;
 					}
 					j = gm_GetBuildingProtLevel(e);
@@ -359,8 +359,8 @@ L1a0c2:
 		msg.f8 = *(int*) ((unsigned int) (unsigned short) *(unsigned short*) (h + 0x27) * 0x21c + 0x7f4ca4);
 		msg.fc = *(int*) (h + 1);
 		msg.f28 = gm_GameTime;
-		msg.f2c = *(int*) &g_7f4c04;
-		msg.f30 = g_7f4c08;
+		msg.f2c = *(int*) &gm_GameTimeHour;
+		msg.f30 = gm_GameTimeSliceDword;
 		msg.f34 = *(unsigned short*) 0x7f4c0c;
 		msg.f36 = 1;
 		msg.f58 = *(int*) (best + 1);
@@ -438,8 +438,8 @@ Lcae:
 		msg.f8 = *(int*) ((unsigned int) (unsigned short) *(unsigned short*) (h + 0x27) * 0x21c + 0x7f4ca4);
 		msg.fc = *(int*) (h + 1);
 		msg.f28 = gm_GameTime;
-		msg.f2c = *(int*) &g_7f4c04;
-		msg.f30 = g_7f4c08;
+		msg.f2c = *(int*) &gm_GameTimeHour;
+		msg.f30 = gm_GameTimeSliceDword;
 		msg.f34 = *(unsigned short*) 0x7f4c0c;
 		msg.f36 = 1;
 		msg.f58 = *(int*) (best + 1);
@@ -498,7 +498,7 @@ L1e81:
 		goto L1727;
 	}
 	e = e + 0x18;
-	if ((int) e < (int) (g_99ef80 + 0xc2)) {
+	if ((int) e < (int) (gm_CrimeGrid + 0xc2)) {
 		goto L1723;
 	}
 	if (maxfactor == 0.0f) {
@@ -514,7 +514,7 @@ L1e81:
 			unsigned short hsel = *(unsigned short*) (*(int*) (rec + 0x16c) + 0x27);
 			if (hid != hsel && hid != 0xffff && (e[0x5a] & 1) == 0
 			    && cat != 3 && cat != 5 && cat != 0) {
-				ENTITY_RECORD* candidate = &((ENTITY_RECORD*) g_7f4ca0)[hid];
+				ENTITY_RECORD* candidate = &((ENTITY_RECORD*) gm_EntitySlotTable)[hid];
 				int q = (int) candidate->unk_16c;
 				if ((q == 0 || *(unsigned short*) (q + 0x27) != hsel)
 				    && candidate->entity_state < 8) {
@@ -524,8 +524,8 @@ L1e81:
 					} else {
 						int off = (cy + cx * 8) * 0x18;
 						factor = 1.0f
-						         - ((float) *(unsigned short*) (g_99ef80 + off) * 0.125f
-						            + (float) *(unsigned short*) (g_99ef80 + off + 2))
+						         - ((float) *(unsigned short*) (gm_CrimeGrid + off) * 0.125f
+						            + (float) *(unsigned short*) (gm_CrimeGrid + off + 2))
 						           / maxfactor;
 					}
 					factor = (float) (gm_RandomMod(100) & 0xffff) * factor * 0.01;
@@ -566,8 +566,8 @@ L1a0c:
 		msg.f8 = *(int*) ((unsigned int) (unsigned short) *(unsigned short*) (h + 0x27) * 0x21c + 0x7f4ca4);
 		msg.fc = *(int*) (h + 1);
 		msg.f28 = gm_GameTime;
-		msg.f2c = *(int*) &g_7f4c04;
-		msg.f30 = g_7f4c08;
+		msg.f2c = *(int*) &gm_GameTimeHour;
+		msg.f30 = gm_GameTimeSliceDword;
 		msg.f34 = *(unsigned short*) 0x7f4c0c;
 		msg.f36 = 1;
 		msg.f58 = *(int*) ((unsigned int) (unsigned short) *(unsigned short*) (best + 0x27) * 0x21c + 0x7f4ca4);
@@ -623,8 +623,8 @@ L2267:
 		msg.f8 = *(int*) (id * 0x21c + 0x7f4ca4);
 		msg.fc = *(int*) (h + 1);
 		msg.f28 = gm_GameTime;
-		msg.f2c = *(int*) &g_7f4c04;
-		msg.f30 = g_7f4c08;
+		msg.f2c = *(int*) &gm_GameTimeHour;
+		msg.f30 = gm_GameTimeSliceDword;
 		msg.f34 = *(unsigned short*) 0x7f4c0c;
 		msg.f36 = 1;
 		msg.f80 = *(int*) (id * 0x21c + 0x7f4ca4);

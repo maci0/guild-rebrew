@@ -17,7 +17,7 @@ typedef struct
 } Info4e7d40;
 /* SIZE 0x20 */
 
-extern Rec18_68da68 g_68da68[];
+extern Rec18_68da68 amt_OfficeRoleTemplates[];
 
 /* ADDRESS: GOLDTL 0x004e7d40 */
 int __cdecl amt_ApplyForOffice(char* entityRecord, int officeKind)
@@ -40,7 +40,7 @@ int __cdecl amt_ApplyForOffice(char* entityRecord, int officeKind)
 		return -1;
 	}
 	info.id = (unsigned char) officeKind;
-	*(Blk4e7d40*) info.data = *(Blk4e7d40*) ((char*)g_68da68 + amt_OfficeSlots[i].type * 0x18);
+	*(Blk4e7d40*) info.data = *(Blk4e7d40*) ((char*)amt_OfficeRoleTemplates + amt_OfficeSlots[i].type * 0x18);
 	info.sel = 0xff;
 	info.alt = 0xff;
 	if (info.data[4] != 0) {

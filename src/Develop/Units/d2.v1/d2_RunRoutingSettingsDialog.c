@@ -18,10 +18,10 @@ extern int g_14b5ebc;
 extern int g_14b5ec0;
 extern int g_14b5ec4;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern ROUTING_NODE* g_772908;
-extern D2_RADIO_SLOT g_10058a0[8];
+extern ROUTING_NODE* d2_ActiveRouteListHead;
+extern D2_RADIO_SLOT d2_RadioSlots[8];
 extern int g_772900;
 #include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 
@@ -77,36 +77,36 @@ void __cdecl d2_RunRoutingSettingsDialog(char* p, int arg)
 	d2_SetValueGaugeFlags(list, 0x82);
 	d2_SetValueGaugeStepLabels(list, 5, g_14b5eb4, g_14b5eb8, g_14b5ebc, g_14b5ec0, g_14b5ec4);
 	while (main_RunFrameLoop(d2_RunRoutingSettingsDialog, 0x657c7) != 0) {
-		if (g_14ce8e0 != 0 || (g_100f1dc != -1 && d2_CurrentElementId == ok)) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0 || (d2_DialogButtonAction != -1 && d2_CurrentElementId == ok)) {
+			d2_DialogCloseRequested = 1;
 		}
 		d2_SetForm(dlg, 4);
 		io_AppendText(*(unsigned char*) (p + 0x33) + 0x42ec);
 		d2_SetControlText(flip, g_14b5ed8[*(unsigned char*) (p + 0x33)]);
-		if (g_100f1dc != -1 && d2_CurrentElementId == clear) {
-			if (g_772908 != 0) {
-				rt_FreeRoutePoints((char*) g_772908);
+		if (d2_DialogButtonAction != -1 && d2_CurrentElementId == clear) {
+			if (d2_ActiveRouteListHead != 0) {
+				rt_FreeRoutePoints((char*) d2_ActiveRouteListHead);
 			}
 			for (i = 0; i < 8; i++) {
-				if (g_10058a0[i].id != -1) {
+				if (d2_RadioSlots[i].id != -1) {
 					d2_ClearRoutePointSlot(i);
 				}
 			}
 			g_772900 = 0;
 			d2_ResetRouteRadioGroup();
-			g_772908 = rt_AllocRoutePoint(0);
-			g_772908->f4 = *(int*) (p + 0x1c);
-			g_772908->f0 = *(int*) (p + 2);
-			d2_AddRoutePointMarker(arg, p, g_772908, g_772908);
-			d2_SelectRadioGroup(g_6816d8, 0);
-			g_774654 = 2;
+			d2_ActiveRouteListHead = rt_AllocRoutePoint(0);
+			d2_ActiveRouteListHead->f4 = *(int*) (p + 0x1c);
+			d2_ActiveRouteListHead->f0 = *(int*) (p + 2);
+			d2_AddRoutePointMarker(arg, p, d2_ActiveRouteListHead, d2_ActiveRouteListHead);
+			d2_SelectRadioGroup(d2_RouteRadioGroupId, 0);
+			d2_DialogCloseRequested = 2;
 		}
-		if (g_100f1dc != -1 && d2_CurrentElementId == flip) {
+		if (d2_DialogButtonAction != -1 && d2_CurrentElementId == flip) {
 			unsigned char b;
 
 			b = *(unsigned char*) (p + 0x33) == 0;
 			cm_BeginPacketFieldDelta(p, *(int*) (p + 2));
-			cm_AppendCommandSyncField(1, 1, (short) (p + 0x33 - g_aed32c), &b);
+			cm_AppendCommandSyncField(1, 1, (short) (p + 0x33 - cm_PacketDeltaBase), &b);
 			cm_SendSetAttribute();
 		}
 	}
@@ -115,7 +115,7 @@ void __cdecl d2_RunRoutingSettingsDialog(char* p, int arg)
 
 		b = d2_GetControlValue(list);
 		cm_BeginPacketFieldDelta(p, *(int*) (p + 2));
-		cm_AppendCommandSyncField(1, 1, (short) (p + 0x31 - g_aed32c), &b);
+		cm_AppendCommandSyncField(1, 1, (short) (p + 0x31 - cm_PacketDeltaBase), &b);
 		cm_SendSetAttribute();
 	}
 	d2_DestroyForm(dlg);

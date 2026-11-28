@@ -3,11 +3,11 @@
 
 typedef struct OBJECT_COLOR { unsigned char a, b, c, d; } OBJECT_COLOR;
 
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 extern char* ch_ContextCharacters[32];
-extern float g_662910;
-extern float g_662cf8;
-extern double g_6640e8;
+extern float flt_0_01;
+extern float flt_100_0;
+extern double dbl_0_01;
 
 char* __cdecl gm_LookupWeaponSpec(int);
 unsigned int __cdecl cut_RandMod(unsigned int);
@@ -46,7 +46,7 @@ void __cdecl ch_UpdateContextCharacters(void)
 	unsigned char c;
 
 	if (*(int*) ((*(char**) 0x6f0d74) + 4) == (*(int*) 0x60cb3c)) {
-		if ((unsigned int) g_6b7fac % 350 == 0) {
+		if ((unsigned int) gm_GameTicks % 350 == 0) {
 			for (i = 0; i < 32; i++) {
 				e = ch_ContextCharacters[i];
 				if (e == 0) {
@@ -105,7 +105,7 @@ void __cdecl ch_UpdateContextCharacters(void)
 						continue;
 					}
 					v = gm_GetCharacterDistFromTarget(e, *(char**) (*(char**) (g + 0x184) + 0x34));
-					if (v < g_662cf8) {
+					if (v < flt_100_0) {
 						found = 1;
 						if (v < best) {
 							best = v;
@@ -115,7 +115,7 @@ void __cdecl ch_UpdateContextCharacters(void)
 				e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
 				d3_SetSubtreeVisible((int) e34, (unsigned char) found);
 				if (found) {
-					t = (int) (255.0f - g_662910 * best * 255.0f);
+					t = (int) (255.0f - flt_0_01 * best * 255.0f);
 					memset(&color, 0, sizeof(color));
 					color.c = 0; color.a = (unsigned char) t;
 					e34 = *(char**) (*(char**) (e + 0x184) + 0x34);

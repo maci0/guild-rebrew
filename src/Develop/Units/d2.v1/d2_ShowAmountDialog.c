@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char g_14cf950;
+extern char io_LastKeyScancode;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
 
@@ -25,8 +25,8 @@ void __cdecl d2_ShowAmountDialog(void)
 	t = d2_GetWindowListItem(-1, w, io_AppendText("$3ABetrag:%m"));
 	d2_SetElementValue(t, 0, 0x2710, 0);
 	while (main_RunFrameLoop((void*) d2_ShowAmountDialog, 0x24087) != 0) {
-		if (g_14cf950 == 1) {
-			g_774654 = 1;
+		if (io_LastKeyScancode == 1) {
+			d2_DialogCloseRequested = 1;
 		}
 	}
 	d2_CloseWindow(w);

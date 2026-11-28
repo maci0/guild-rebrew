@@ -3,8 +3,8 @@
 #include "Develop/client_types.h"
 
 extern pos14_7f4c00 gm_GameTime;
-extern char g_7f4ca0[];
-extern char g_7f4ca4[];
+extern char gm_EntitySlotTable[];
+extern char gm_EntityIdField[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern double g_6629c8;
@@ -186,8 +186,8 @@ label_54e6a1:
 			float limit;
 
 			own = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xac));
-			ownrow = (char*) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (own + 0x27)];
-			p = (char*) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (e + 8)];
+			ownrow = (char*) &((ENTITY_RECORD*) gm_EntitySlotTable)[*(unsigned short*) (own + 0x27)];
+			p = (char*) &((ENTITY_RECORD*) gm_EntitySlotTable)[*(unsigned short*) (e + 8)];
 			limit = (float) (gm_GetBuildingTechEffect(own, 5, 1) * 0.01 + g_6629c8);
 			other = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xb0));
 			rec = fcn_00502cd0(*(int*) (other + 0x5d), 1, 0, 0xca);
@@ -198,7 +198,7 @@ label_54e6a1:
 				}
 				rec = gm_NextEntityQueryMatch();
 			}
-			if (g_774800) {
+			if (gm_AllEntitiesControllable) {
 				f = 5.0f;
 			}
 			if (f * 100.0f + (float) (gm_RandomMod(0x4b) & 0xffff) > limit * 125.0f) {
@@ -208,7 +208,7 @@ label_54e6a1:
 				*(int*) (pkt + 0x14) = *(int*) (own + 1);
 				pkt[0x30] = 2;
 				pkt[0x7c] = 2;
-				*(int*) (pkt + 0x0c) = ((ENTITY_RECORD*) g_7f4ca0)[(unsigned short) g_774970].entity_id;
+				*(int*) (pkt + 0x0c) = ((ENTITY_RECORD*) gm_EntitySlotTable)[(unsigned short) gm_LocalPlayerSlot].entity_id;
 				*(int*) (pkt + 0x34) = *(int*) (p + 4);
 				*(int*) (pkt + 0x38) = *(int*) (ownrow + 4);
 				i = 0;
@@ -256,18 +256,18 @@ label_54e6a1:
 				}
 				other = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xb0));
 				own = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xac));
-				m = gm_TransferAndSellAssets(own, other, (char*) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (e + 8)],
-				                 (char*) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (own + 0x27)]);
-				kc = *(unsigned char*) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (own + 0x27)].entity_state;
+				m = gm_TransferAndSellAssets(own, other, (char*) &((ENTITY_RECORD*) gm_EntitySlotTable)[*(unsigned short*) (e + 8)],
+				                 (char*) &((ENTITY_RECORD*) gm_EntitySlotTable)[*(unsigned short*) (own + 0x27)]);
+				kc = *(unsigned char*) &((ENTITY_RECORD*) gm_EntitySlotTable)[*(unsigned short*) (own + 0x27)].entity_state;
 				if (kc == 6 || kc == 7) {
 					io_FormatTextBuffer(text, 0x1c54, own, m);
-					he_MessageBoxQuickjump(((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (own + 0x27)].entity_id, -1, text, 0,
+					he_MessageBoxQuickjump(((ENTITY_RECORD*) gm_EntitySlotTable)[*(unsigned short*) (own + 0x27)].entity_id, -1, text, 0,
 					             0x5f0, *(int*) (own + 1), -1, 0, 0);
 				}
-				kc = *(unsigned char*) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (e + 8)].entity_state;
+				kc = *(unsigned char*) &((ENTITY_RECORD*) gm_EntitySlotTable)[*(unsigned short*) (e + 8)].entity_state;
 				if (kc == 6 || kc == 7) {
 					io_FormatTextBuffer(text, 0x1c55, *(unsigned short*) (own + 0x27), own, m);
-					he_PostEntityMessage(((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (e + 8)].entity_id, -1, text, 0, 0x5f0, 0);
+					he_PostEntityMessage(((ENTITY_RECORD*) gm_EntitySlotTable)[*(unsigned short*) (e + 8)].entity_id, -1, text, 0, 0x5f0, 0);
 				}
 				*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 				gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 0, 1);
@@ -277,11 +277,11 @@ label_54e6a1:
 			other = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xb0));
 			m = cut_GetBuildingCombatType(other) + 0x1125;
 			io_FormatTextBuffer(text, 0x114b, m, *(unsigned short*) (own + 0x27), own, m);
-			he_PostEntityMessage(((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (e + 8)].entity_id, -1, text, 0, 0x5f0, 0);
-			kc = *(unsigned char*) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (own + 0x27)].entity_state;
+			he_PostEntityMessage(((ENTITY_RECORD*) gm_EntitySlotTable)[*(unsigned short*) (e + 8)].entity_id, -1, text, 0, 0x5f0, 0);
+			kc = *(unsigned char*) &((ENTITY_RECORD*) gm_EntitySlotTable)[*(unsigned short*) (own + 0x27)].entity_state;
 			if (kc == 6 || kc == 7) {
 				io_FormatTextBuffer(text, 0x1c56, own);
-				he_MessageBoxQuickjump(((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (own + 0x27)].entity_id, -1, text, 0,
+				he_MessageBoxQuickjump(((ENTITY_RECORD*) gm_EntitySlotTable)[*(unsigned short*) (own + 0x27)].entity_id, -1, text, 0,
 				             0x5f0, *(int*) (own + 1), -1, 0, 0);
 			}
 			*(int*) (e + 0x70) = -1;

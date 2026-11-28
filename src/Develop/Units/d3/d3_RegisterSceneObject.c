@@ -1,7 +1,7 @@
 extern char* d3_ActiveCamera;
-extern char* g_fc28f4;
-extern char g_fc2700[];
-extern int g_67a370;
+extern char* d3_SceneRootSentinelTail;
+extern char d3_SceneRootSentinel[];
+extern int d3_ActiveScene;
 
 void __cdecl d3_SetActiveCamera(char*);
 void __cdecl d3_SetObjectRotation(char*, char*);
@@ -14,11 +14,11 @@ void __cdecl d3_RegisterSceneObject(char* o)
 		d3_SetObjectRotation(o, o + 0x84);
 	}
 	if (*(int*) (o + 0x218) != 0) {
-		*(char**) (o + 0x1f4) = g_fc28f4;
-		*(char**) (o + 0x1f0) = g_fc2700;
-		*(char**) (g_fc28f4 + 0x1f0) = o;
-		g_fc28f4 = o;
+		*(char**) (o + 0x1f4) = d3_SceneRootSentinelTail;
+		*(char**) (o + 0x1f0) = d3_SceneRootSentinel;
+		*(char**) (d3_SceneRootSentinelTail + 0x1f0) = o;
+		d3_SceneRootSentinelTail = o;
 		o[0x210] |= 3;
 	}
-	*(int*) (o + 0x208) = g_67a370;
+	*(int*) (o + 0x208) = d3_ActiveScene;
 }

@@ -60,7 +60,7 @@ int __cdecl d2_GetControlValue(int slot)
 	Slot* s;
 	char* d;
 
-	s = (Slot*)&((D2_CONTROL_TL*)g_1015ea0)[slot];
+	s = (Slot*)&((D2_CONTROL_TL*)d2_Controls)[slot];
 	if ((*(int*)&((D2_CONTROL_TL*)s)->kind) == 0x41) {
 		d = (*(char**)&((D2_CONTROL_TL*)s)->data);
 		if (*(int*) (d + 0x28) & 0x10) {

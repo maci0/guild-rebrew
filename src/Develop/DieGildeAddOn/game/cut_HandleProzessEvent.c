@@ -1,4 +1,4 @@
-extern unsigned short* g_772f24;
+extern unsigned short* cut_ActivePlayerEntity;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl ai_ShouldConfessTrialTorture(int*);
@@ -46,7 +46,7 @@ void __cdecl cut_HandleProzessEvent(char* context, int* ev)
 		break;
 	case 4:
 		if (*(int*) (context + 0x10) == ev[7] || *(int*) (context + 0x10) == ev[8] || *(int*) (context + 0x10) == ev[9]) {
-			e = gm_LookupEntityRecordById(((int*)g_772f24)[1]);
+			e = gm_LookupEntityRecordById(((int*)cut_ActivePlayerEntity)[1]);
 			*(int*) (context + 0x94) = ai_ShouldAcquitTrial(e, ev);
 		}
 		break;

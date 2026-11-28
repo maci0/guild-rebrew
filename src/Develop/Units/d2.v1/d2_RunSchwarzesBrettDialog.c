@@ -58,17 +58,17 @@ int __cdecl d2_RunSchwarzesBrettDialog(void)
 	b[1] = -1;
 	b[2] = -1;
 	b[3] = -1;
-	t = (unsigned int) g_6b7fac;
+	t = (unsigned int) gm_GameTicks;
 	h = d2_LoadForm(0, 0, (char*) 0x6ac514);
 	d2_CenterDialogWindows(h);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(h, 0);
 	io_AppendText(0x1912);
-	*(int*) &g_100f1dc = -1;
+	*(int*) &d2_DialogButtonAction = -1;
 	do {
-		if (t <= (unsigned int) g_6b7fac) {
+		if (t <= (unsigned int) gm_GameTicks) {
 			n = 1;
-			t = (unsigned int) g_6b7fac + 0x1f4U;
+			t = (unsigned int) gm_GameTicks + 0x1f4U;
 			a[0] = -1;
 			b[0] = -1;
 			a[1] = -1;
@@ -97,8 +97,8 @@ int __cdecl d2_RunSchwarzesBrettDialog(void)
 							*(int*) ((char*) a + k) = d2_GetWindowListItem(h, i,
 							    io_AppendText(0x1914, 2));
 							*(int*) ((char*) b + k) = ent->f4;
-							d2_SetSlotVisibility(*(int*) ((char*) &g_10161bc
-							    + 0x3cc * *(int*) ((char*) &g_1038140
+							d2_SetSlotVisibility(*(int*) ((char*) &d2_WindowElementIdView
+							    + 0x3cc * *(int*) ((char*) &d2_Forms
 							    + h * 0x2bc + n * 8)), 1);
 							n++;
 							i += 2; k += 4;
@@ -108,12 +108,12 @@ int __cdecl d2_RunSchwarzesBrettDialog(void)
 				} while (ent != 0);
 			}
 			if (n < 5) {
-				q = (int*) ((char*) &g_1038140 + h * 0x2bc + n * 8);
+				q = (int*) ((char*) &d2_Forms + h * 0x2bc + n * 8);
 				j = n * 2 - 1;
 				do {
 					d2_SetForm(h, j);
 					io_AppendText(0x6811b0);
-					d2_SetSlotVisibility(*(int*) ((char*) &g_10161bc
+					d2_SetSlotVisibility(*(int*) ((char*) &d2_WindowElementIdView
 					    + 0x3cc * *q), 0);
 					j += 2; q += 2;
 				} while (j < 9);
@@ -121,9 +121,9 @@ int __cdecl d2_RunSchwarzesBrettDialog(void)
 done:;
 
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
-		} else if (*(int*) &g_100f1dc != -1 && *(int*) 0x67d370 != -1) {
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
+		} else if (*(int*) &d2_DialogButtonAction != -1 && *(int*) 0x67d370 != -1) {
 			for (k = 0; k < 4; k++) {
 				if (a[k] == *(int*) 0x67d370) {
 					break;
@@ -132,8 +132,8 @@ done:;
 			if (k < 4) {
 				o = he_StartHandlungSearch(1, 1, b[k]);
 				if (o != 0) {
-					if (d2_CheckActionBlocker((char*) &g_7f4ca0 + 0x21c
-					    * (unsigned int) *(unsigned short*) &g_774970, 2) != 0) {
+					if (d2_CheckActionBlocker((char*) &gm_EntitySlotTable + 0x21c
+					    * (unsigned int) *(unsigned short*) &gm_LocalPlayerSlot, 2) != 0) {
 						*(pos14_7f4c00*) ((char*) o + 0x52) =
 						    *(pos14_7f4c00*) &gm_GameTime;
 						r = cm_SendSetHE(-1, (char*) o);
@@ -141,11 +141,11 @@ done:;
 							main_RunFrameLoop(0, 0x677c7);
 						}
 						if (cm_GetCommandStatus(r) == 1) {
-							gm_ModifyHealth(*(int*) ((char*) &g_7f4ca0
+							gm_ModifyHealth(*(int*) ((char*) &gm_EntitySlotTable
 							    + 4 + 0x21c
-							    * (unsigned int) *(unsigned short*) &g_774970), -2);
+							    * (unsigned int) *(unsigned short*) &gm_LocalPlayerSlot), -2);
 						}
-						t = (unsigned int) g_6b7fac;
+						t = (unsigned int) gm_GameTicks;
 					}
 				}
 			}

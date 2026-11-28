@@ -2,8 +2,8 @@
 
 extern char g_770b80[];
 extern unsigned char g_entity_type_bytes[];
-extern char g_7f4caa[];
-extern char g_7f4cc0[];
+extern char gm_EntityAgeField[];
+extern char gm_EntityAgeLimitField[];
 int __cdecl gm_RandomMod(unsigned short);
 void __cdecl gm_ResolveHeadIconSlots(void*);
 
@@ -28,8 +28,8 @@ CHARACTER_PORTRAIT_SPEC* __cdecl gm_LookupPortraitSpec(unsigned int player)
     i = 0;
     off = player * 0x21c;
     kind = g_entity_type_bytes[off];
-    if (!kind && (float) *(unsigned short*) (g_7f4caa + off)
-        < *(float*) (g_7f4cc0 + off)) {
+    if (!kind && (float) *(unsigned short*) (gm_EntityAgeField + off)
+        < *(float*) (gm_EntityAgeLimitField + off)) {
         if (g_770b80[off + 9])
             return (CHARACTER_PORTRAIT_SPEC*) 0x6118d0;
         return (CHARACTER_PORTRAIT_SPEC*) 0x611888;

@@ -12,7 +12,7 @@
 #pragma pack(pop)
 // SIZE 0xe
 
-extern char g_868060[];
+extern char gm_TownTable[];
 
 extern pos14_7f4c00 gm_GameTime;
 
@@ -72,9 +72,9 @@ int __cdecl fcn_004b9bd0(int* a1)
 	gm_ResolveEntityById((void**) (&x1), 0, 0, *(int*) (s + 0xb4));
 	if (x2 != 0 && x1 != 0) {
 		if (*x2 == 'G')
-			io_FormatTextBuffer(buf, *(unsigned short*) (a1 + 1) + 0x12e7, g_868060 + *(int*) (x2 + 0x65) * 756, g_868060, &d, g_868060);
+			io_FormatTextBuffer(buf, *(unsigned short*) (a1 + 1) + 0x12e7, gm_TownTable + *(int*) (x2 + 0x65) * 756, gm_TownTable, &d, gm_TownTable);
 		else
-			io_FormatTextBuffer(buf, *(unsigned short*) (a1 + 1) + 0x12e7, g_868060, g_868060 + *(int*) (x1 + 0x65) * 756, &d, g_868060 + *(int*) (x1 + 0x65) * 756);
+			io_FormatTextBuffer(buf, *(unsigned short*) (a1 + 1) + 0x12e7, gm_TownTable, gm_TownTable + *(int*) (x1 + 0x65) * 756, &d, gm_TownTable + *(int*) (x1 + 0x65) * 756);
 		he_PostEntityMessage(*(int*) (e + 2), *(int*) (e + 2), buf, strlen(buf) > 0x100, 0x5ef, 0);
 	}
 	return 0;

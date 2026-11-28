@@ -28,10 +28,10 @@ typedef struct MsgCtx {
 extern int tp_d2_SelectedControl;
 extern int g_6ab3dc;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern char g_6b5c60[];
-extern char* g_1015ea0;
+extern char str_empty[];
+extern char* d2_Controls;
 extern char* g_774a68;
-extern char g_10161bc[];
+extern char d2_WindowElementIdView[];
 
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_InitLandkarteDialog(MsgCtx*);
@@ -59,13 +59,13 @@ int __cdecl d2_RunCityScrollMapDialog(int flags, void* state, char* name, void (
 		strcpy(ctx.text, name);
 	}
 	else {
-		ctx.text[0] = g_6b5c60[0];
+		ctx.text[0] = str_empty[0];
 	}
 	d2_InitLandkarteDialog(&ctx);
 	d2_BuildCityScrollMap(&ctx);
 	while (main_RunFrameLoop((void*) d2_RunCityScrollMapDialog, 0x677c7) != 0) {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 		g_6ab3dc = (tp_d2_SelectedControl == 0);
 		d2_UpdateCityScrollMap(&ctx);
@@ -73,16 +73,16 @@ int __cdecl d2_RunCityScrollMapDialog(int flags, void* state, char* name, void (
 			if (g_14ce8d8 != 0 && d2_CurrentElementId != -1) {
 				for (i = 0; i < 0x10; i++) {
 					if (ctx.ids10[i] != -1 && d2_CurrentElementId == ctx.ids10[i]) {
-						v = *(int*) (&((D2_CONTROL_TL*) (g_1015ea0))[ctx.ids10[i]].associated_object);
+						v = *(int*) (&((D2_CONTROL_TL*) (d2_Controls))[ctx.ids10[i]].associated_object);
 						if (v != 0 && cb != 0) {
 							d2_SetFormVisibility(ctx.dlg, 0);
-							d2_SetSlotVisibility(*(int*) (g_10161bc + ctx.win * 0x3cc), 0);
+							d2_SetSlotVisibility(*(int*) (d2_WindowElementIdView + ctx.win * 0x3cc), 0);
 							cb(v, v);
 							d2_SetFormVisibility(ctx.dlg, 1);
-							d2_SetSlotVisibility(*(int*) (g_10161bc + ctx.win * 0x3cc), 1);
+							d2_SetSlotVisibility(*(int*) (d2_WindowElementIdView + ctx.win * 0x3cc), 1);
 						}
 						else {
-							g_774654 = 1;
+							d2_DialogCloseRequested = 1;
 						}
 						break;
 					}
@@ -93,7 +93,7 @@ int __cdecl d2_RunCityScrollMapDialog(int flags, void* state, char* name, void (
 			for (i = 0; i < 0x100; i++) {
 				if (ctx.ids[i] != -1 && ctx.ids[i] == d2_CurrentElementId) {
 					v = *(int*) (g_774a68 + i * 4);
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 					break;
 				}
 			}
@@ -109,26 +109,26 @@ int __cdecl d2_RunCityScrollMapDialog(int flags, void* state, char* name, void (
 						continue;
 					}
 					d2_SetFormVisibility(ctx.dlg, 0);
-					d2_SetSlotVisibility(*(int*) (g_10161bc + ctx.win * 0x3cc), 0);
+					d2_SetSlotVisibility(*(int*) (d2_WindowElementIdView + ctx.win * 0x3cc), 0);
 					v = d2_DispatchLawTargetDialog((char*) ctx.queue[i].value, (int) state, (int) name, (int) cb);
-					d2_SetSlotVisibility(*(int*) (g_10161bc + ctx.win * 0x3cc), 1);
+					d2_SetSlotVisibility(*(int*) (d2_WindowElementIdView + ctx.win * 0x3cc), 1);
 					d2_SetFormVisibility(ctx.dlg, 1);
 				}
 				if (v == 0) {
 					continue;
 				}
 				if (cb == 0) {
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 					break;
 				}
 				if (flags & 2) {
 					continue;
 				}
 				d2_SetFormVisibility(ctx.dlg, 0);
-				d2_SetSlotVisibility(*(int*) (g_10161bc + ctx.win * 0x3cc), 0);
+				d2_SetSlotVisibility(*(int*) (d2_WindowElementIdView + ctx.win * 0x3cc), 0);
 				cb(v, ctx.queue[i].value);
 				d2_SetFormVisibility(ctx.dlg, 1);
-				d2_SetSlotVisibility(*(int*) (g_10161bc + ctx.win * 0x3cc), 1);
+				d2_SetSlotVisibility(*(int*) (d2_WindowElementIdView + ctx.win * 0x3cc), 1);
 				break;
 			}
 		}

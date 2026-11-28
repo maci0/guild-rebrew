@@ -17,8 +17,8 @@ void __cdecl d3snd_PlaySelectedObjectClickSound(void)
 	int i;
 
 	for (i = 0; i < 768; i++) {
-		if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].selected != 0) {
-			d3snd_PlayObjectClickSound(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]));
+		if (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].selected != 0) {
+			d3snd_PlayObjectClickSound(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i]));
 			return;
 		}
 	}

@@ -79,8 +79,8 @@ int __cdecl fcn_004ccf10(int cmd, char* result)
 			return 1;
 		}
 		*(int*) ((char*) entity + 0x1c + i * 4) = -1;
-		if (g_774970 == *(unsigned short*) ((char*) site + 0x27))
-			he_NotifyPlotSlotPurchase(rec, ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), site, *(int*) (cmd + 0x20));
+		if (gm_LocalPlayerSlot == *(unsigned short*) ((char*) site + 0x27))
+			he_NotifyPlotSlotPurchase(rec, ((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot]), site, *(int*) (cmd + 0x20));
 	}
 
 	if (result != (char*) 0x0) {
@@ -163,7 +163,7 @@ int __cdecl fcn_004cd090(CM_JOIN_LEAVE_ELECTION_CMD* s, char* out)
 			return 1;
 		}
 		if (*(unsigned short*) (h + 0x27) != 0xffff) {
-			e = ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (h + 0x27)]);
+			e = ((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (h + 0x27)]);
 			if (e != 0 && e != gm_CityEntity &&
 			    *(char*) (e + 8) != 0 &&
 			    *(unsigned char*) (e + 2) != 0xf) {

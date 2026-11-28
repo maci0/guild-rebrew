@@ -25,12 +25,12 @@ typedef struct {
 	int ids[56];
 } Msg;
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern unsigned short g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
+extern unsigned short gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
 
 int __cdecl amt_ProcessOfficeElections(void);
 void __cdecl cm_EnqueueStagedPacket(Msg*);
@@ -46,14 +46,14 @@ void __cdecl d2_SendTutorialTownMsgA0(int a)
 		memset(&msg, 0, sizeof(msg));
 		n = 0;
 		for (i = 0; i < 768; i++) {
-			t = g_7f4ca0[i * 540 + 2];
+			t = gm_EntitySlotTable[i * 540 + 2];
 			if (t == 6) {
-				msg.owner = *(int*) (g_7f4ca0 + i * 540 + 4);
-				msg.ids[n] = *(int*) (g_7f4ca0 + i * 540 + 4);
+				msg.owner = *(int*) (gm_EntitySlotTable + i * 540 + 4);
+				msg.ids[n] = *(int*) (gm_EntitySlotTable + i * 540 + 4);
 				n++;
 			}
 			else if (t == 7) {
-				msg.ids[n] = *(int*) (g_7f4ca0 + i * 540 + 4);
+				msg.ids[n] = *(int*) (gm_EntitySlotTable + i * 540 + 4);
 				n++;
 			}
 		}
@@ -62,9 +62,9 @@ void __cdecl d2_SendTutorialTownMsgA0(int a)
 		msg.flags = 0xa0;
 		msg.target = -1;
 		msg.timestamp.a = (*(int*)&gm_GameTime);
-		msg.timestamp.b = (*(int*)&g_7f4c04);
-		msg.timestamp.c = g_7f4c08;
-		msg.timestamp.d = g_7f4c0c;
+		msg.timestamp.b = (*(int*)&gm_GameTimeHour);
+		msg.timestamp.c = gm_GameTimeSliceDword;
+		msg.timestamp.d = gm_GameTimeTailWord;
 		cm_EnqueueStagedPacket(&msg);
 	}
 }

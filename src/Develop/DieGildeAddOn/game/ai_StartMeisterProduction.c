@@ -50,16 +50,16 @@ typedef struct {
 extern char* lpObjektePROT;  /* +0x41 stride goods records: type byte, name */
  
 extern int ai_ResourceCount;        /* ware count */
-extern int g_100b0ac;        /* building count */
-extern int g_100dc20;
+extern int ai_ProductionGoodsCount;        /* building count */
+extern int ai_MeisterDebugState;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_100dc3c;
-extern char g_100dc40[];
+extern char ai_TrackedGoodPlanCounts[];
 extern char g_100dc60[];
 extern char g_100ddc0[];
-extern char g_100df20[];
-extern unsigned short g_7f4c04;
-extern char g_7f4ca0[];
+extern char ai_TrackedGoodPlanEntries[];
+extern unsigned short gm_GameTimeHour;
+extern char gm_EntitySlotTable[];
 
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl ai_CollectBuildingGoodsPlan(Bld*, int, int);
@@ -112,9 +112,9 @@ void __cdecl ai_StartMeisterProduction(Bld* bld)
 	gm_TryAutoUpgradeBuildingSlots(craft, bld, 0x4b);
 	ai_RequestAusbauUpgrade(craft, bld, 0x19);
 	ai_BuyStallGoods(bld);
-	if (g_7f4c04 != 0xd && g_7f4c04 != 8) {
-		for (i = 0; i < g_100b0ac; i++) {
-			rec = (PRODUCTION_GOODS_RECORD*) ((char*) g_100d0c0 + i * 0x58);
+	if (gm_GameTimeHour != 0xd && gm_GameTimeHour != 8) {
+		for (i = 0; i < ai_ProductionGoodsCount; i++) {
+			rec = (PRODUCTION_GOODS_RECORD*) ((char*) ai_ProductionGoodsPlans + i * 0x58);
 			if (rec->goods_id != (int) bld->id)
 				continue;
 			if ((int) *(unsigned short*) ((((char*)&((OBJECT_PROTOTYPE*)lpObjektePROT)[rec->goods_id])) + 0x36) <= rec->unk_40 &&
@@ -132,8 +132,8 @@ void __cdecl ai_StartMeisterProduction(Bld* bld)
 	}
 	else if (bld->f1b4 & 0x100) {
 		if (bld->id != 0) {
-			for (i = 0; i < g_100b0ac; i++) {
-				rec = (PRODUCTION_GOODS_RECORD*) ((char*) g_100d0c0 + i * 0x58);
+			for (i = 0; i < ai_ProductionGoodsCount; i++) {
+				rec = (PRODUCTION_GOODS_RECORD*) ((char*) ai_ProductionGoodsPlans + i * 0x58);
 				if (rec->goods_id != (int) bld->id)
 					continue;
 				if ((int) *(unsigned short*) ((((char*)&((OBJECT_PROTOTYPE*)lpObjektePROT)[rec->goods_id])) + 0x36) <= rec->unk_40 &&
@@ -151,10 +151,10 @@ void __cdecl ai_StartMeisterProduction(Bld* bld)
 		bld->id = 0;
 		bld->f1b4 = bld->f1b4 | 0x100;
 	}
-	if (*(unsigned char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (bld->x16c + 0x27)].entity_state) == 6) {
+	if (*(unsigned char*) ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (bld->x16c + 0x27)].entity_state) == 6) {
 		n = hp_PickWeightedProdItem(bld->x16c);
 		if (n != 0) {
-			for (rec = (PRODUCTION_GOODS_RECORD*) g_100d0c0; (char*) rec < (char*) g_100d0c0 + 0xb00; rec = (PRODUCTION_GOODS_RECORD*) ((char*) rec + 0x58)) {
+			for (rec = (PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans; (char*) rec < (char*) ai_ProductionGoodsPlans + 0xb00; rec = (PRODUCTION_GOODS_RECORD*) ((char*) rec + 0x58)) {
 				if (rec->goods_id != n)
 					continue;
 				if ((int) ((Craft*) craft)->x1c < rec->min_1)
@@ -193,8 +193,8 @@ void __cdecl ai_StartMeisterProduction(Bld* bld)
 		order[i] = order[r];
 		order[r] = val;
 	}
-	for (i = 0; i < g_100b0ac; i++) {
-		rec = (PRODUCTION_GOODS_RECORD*) ((char*) g_100d0c0 + order[i] * 0x58);
+	for (i = 0; i < ai_ProductionGoodsCount; i++) {
+		rec = (PRODUCTION_GOODS_RECORD*) ((char*) ai_ProductionGoodsPlans + order[i] * 0x58);
 		if ((rec->flags & 0x20) || (rec->flags & 0x200))
 			continue;
 		if ((((OBJECT_PROTOTYPE*)lpObjektePROT)[rec->goods_id].kind == 0x17 || ((OBJECT_PROTOTYPE*)lpObjektePROT)[rec->goods_id].kind == 0x25) && rec->unk_3c >= 5)
@@ -218,8 +218,8 @@ void __cdecl ai_StartMeisterProduction(Bld* bld)
 		sprintf(name, "Produktion von %s starten", (((char*)&((OBJECT_PROTOTYPE*)lpObjektePROT)[rec->goods_id])) + 1);
 		goto done;
 	}
-	for (i = 0; i < g_100b0ac; i++) {
-		rec = (PRODUCTION_GOODS_RECORD*) ((char*) g_100d0c0 + order[i] * 0x58);
+	for (i = 0; i < ai_ProductionGoodsCount; i++) {
+		rec = (PRODUCTION_GOODS_RECORD*) ((char*) ai_ProductionGoodsPlans + order[i] * 0x58);
 		if ((rec->flags & 0x20) || (rec->flags & 0x200))
 			continue;
 		if ((((OBJECT_PROTOTYPE*)lpObjektePROT)[rec->goods_id].kind == 0x17 || ((OBJECT_PROTOTYPE*)lpObjektePROT)[rec->goods_id].kind == 0x25) && rec->unk_3c >= 5)
@@ -246,20 +246,20 @@ void __cdecl ai_StartMeisterProduction(Bld* bld)
 done:
 	ai_RequestProductionGoods(craft);
 	ai_PlanResourceRestock(bld, craft);
-	if (0 < g_100b0ac) {
-		for (i = 0; i < g_100b0ac; i++) {
-			rec = (PRODUCTION_GOODS_RECORD*) ((char*) g_100d0c0 + i * 0x58);
+	if (0 < ai_ProductionGoodsCount) {
+		for (i = 0; i < ai_ProductionGoodsCount; i++) {
+			rec = (PRODUCTION_GOODS_RECORD*) ((char*) ai_ProductionGoodsPlans + i * 0x58);
 			if (rec->flags & 8) {
 				for (j = 0; j < 4; j++) {
-					if (g_100b0c0[rec->building_indices[j]].stock < (int) *(unsigned short*) ((((char*)&((OBJECT_PROTOTYPE*)lpObjektePROT)[rec->goods_id])) + 0x26 + j * 2))
+					if (ai_ResourceRequests[rec->building_indices[j]].stock < (int) *(unsigned short*) ((((char*)&((OBJECT_PROTOTYPE*)lpObjektePROT)[rec->goods_id])) + 0x26 + j * 2))
 						rec->flags = rec->flags & 0xfffffff7;
 				}
 			}
 		}
 	}
-	if (g_100b0ac > 0) {
-		for (i = 0; i < g_100b0ac; i++) {
-			rec = (PRODUCTION_GOODS_RECORD*) ((char*) g_100d0c0 + i * 0x58);
+	if (ai_ProductionGoodsCount > 0) {
+		for (i = 0; i < ai_ProductionGoodsCount; i++) {
+			rec = (PRODUCTION_GOODS_RECORD*) ((char*) ai_ProductionGoodsPlans + i * 0x58);
 			val = rec->flags;
 			if ((val & 0x20) || (val & 0x200))
 				rec->flags = val & 0xfffffff7;
@@ -267,24 +267,24 @@ done:
 	}
 	if (ai_ResourceCount > 0) {
 		for (i = 0; i < ai_ResourceCount; i++) {
-			val = g_100b0c0[i].flags;
+			val = ai_ResourceRequests[i].flags;
 			if (((val & 0x20) || (val & 0x200)) && (val & 0x10) &&
-			    g_100b0c0[i].parent_index >= 0) {
-				rec = (PRODUCTION_GOODS_RECORD*) ((char*) g_100d0c0 + g_100b0c0[i].parent_index * 0x58);
+			    ai_ResourceRequests[i].parent_index >= 0) {
+				rec = (PRODUCTION_GOODS_RECORD*) ((char*) ai_ProductionGoodsPlans + ai_ResourceRequests[i].parent_index * 0x58);
 				rec->flags = rec->flags | 0x10;
 			}
 		}
 	}
-	if (g_100dc20 == bld->x16c && g_100dc38 < 4) {
+	if (ai_MeisterDebugState == bld->x16c && g_100dc38 < 4) {
 		i = 0;
-		while (i < g_100b0ac && g_100dc38 < 4) {
-			rec = (PRODUCTION_GOODS_RECORD*) ((char*) g_100d0c0 + i * 0x58);
+		while (i < ai_ProductionGoodsCount && g_100dc38 < 4) {
+			rec = (PRODUCTION_GOODS_RECORD*) ((char*) ai_ProductionGoodsPlans + i * 0x58);
 			memcpy(g_100dc60 + g_100dc38 * 0x58, rec, 0x58);
 			for (j = 0; j < 4; j++) {
 				if (rec->building_indices[j] >= 0) {
-					n = *(int*) (g_100dc40 + g_100dc38 * 4);
-					memcpy(g_100df20 + (n + g_100dc38 * 4) * 0x40, &g_100b0c0[rec->building_indices[j]], 0x40);
-					*(int*) (g_100dc40 + g_100dc38 * 4) = *(int*) (g_100dc40 + g_100dc38 * 4) + 1;
+					n = *(int*) (ai_TrackedGoodPlanCounts + g_100dc38 * 4);
+					memcpy(ai_TrackedGoodPlanEntries + (n + g_100dc38 * 4) * 0x40, &ai_ResourceRequests[rec->building_indices[j]], 0x40);
+					*(int*) (ai_TrackedGoodPlanCounts + g_100dc38 * 4) = *(int*) (ai_TrackedGoodPlanCounts + g_100dc38 * 4) + 1;
 				}
 			}
 			g_100dc38 = g_100dc38 + 1;
@@ -317,12 +317,12 @@ done:
 		he_AssignActionSlot(bld->x16c, 0, (int) *(unsigned short*) (n - 2), 0);
 		put.count = put.count + 1;
 	}
-	if (g_100dc20 == bld->x16c)
+	if (ai_MeisterDebugState == bld->x16c)
 		g_100dc34 = put.count;
 	put.flags = 0;
-	if (g_100b0ac > 0) {
-		for (i = 0; i < g_100b0ac; i++) {
-			rec = (PRODUCTION_GOODS_RECORD*) ((char*) g_100d0c0 + i * 0x58);
+	if (ai_ProductionGoodsCount > 0) {
+		for (i = 0; i < ai_ProductionGoodsCount; i++) {
+			rec = (PRODUCTION_GOODS_RECORD*) ((char*) ai_ProductionGoodsPlans + i * 0x58);
 			if (rec->flags & 8)
 				put.flags = put.flags + 1;
 			if (rec->flags & 0x10)
@@ -336,24 +336,24 @@ done:
 		fcn_00489a70(bld, craft);
 		return;
 	}
-	if (g_100b0ac > 0) {
+	if (ai_ProductionGoodsCount > 0) {
 		put.bld = (int) bld;
 		put.craft = craft;
 		put.x10 = 0;
 		put.x20 = 0;
 		put.x1c = 0;
 		i = 0;
-		for (; i < g_100b0ac; i++) {
-			val = *(int*) ((char*) g_100d0c0 + i * 0x58 + 0x54);
+		for (; i < ai_ProductionGoodsCount; i++) {
+			val = *(int*) ((char*) ai_ProductionGoodsPlans + i * 0x58 + 0x54);
 			if (val & 0x10) {
 				if (val & 0x20) {
 					put.kind = 0x14;
-					put.rec = (int) ((char*) g_100d0c0 + i * 0x58);
+					put.rec = (int) ((char*) ai_ProductionGoodsPlans + i * 0x58);
 					ai_DispatchMeisterAction(&put);
 				}
 				else if (val & 0x200) {
 					put.kind = 0x15;
-					put.rec = (int) ((char*) g_100d0c0 + i * 0x58);
+					put.rec = (int) ((char*) ai_ProductionGoodsPlans + i * 0x58);
 					ai_DispatchMeisterAction(&put);
 				}
 				else
@@ -361,12 +361,12 @@ done:
 			}
 			else if (val & 8) {
 				put.kind = 4;
-				put.rec = (int) ((char*) g_100d0c0 + i * 0x58);
+				put.rec = (int) ((char*) ai_ProductionGoodsPlans + i * 0x58);
 				ai_DispatchMeisterAction(&put);
 			}
 			else
 				continue;
-			if (g_100dc20 == bld->x16c && g_100dc3c < 4) {
+			if (ai_MeisterDebugState == bld->x16c && g_100dc3c < 4) {
 				memcpy(g_100ddc0 + g_100dc3c * 0x58, (void*) put.rec, 0x58);
 				g_100dc3c = g_100dc3c + 1;
 			}

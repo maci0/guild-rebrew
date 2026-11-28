@@ -25,11 +25,11 @@ void __cdecl cut_RegisterEventCallbacks(int idx, EVENT_RUN runEvent, void* a3, v
 	int o;
 
 	o = idx * 20;
-	*(EVENT_RUN*) (g_9b0840 + o) = runEvent;
-	*(void**) (g_9b0840 + 4 + o) = a3;
-	*(void**) (g_9b0840 + 8 + o) = a4;
-	*(EVENT_CHECK*) (g_9b0840 + 0x10 + o) = checkEvent;
-	*(unsigned char*) (g_9b0840 + 0xc + o) = a6;
+	*(EVENT_RUN*) (he_EventCallbacks + o) = runEvent;
+	*(void**) (he_EventCallbacks + 4 + o) = a3;
+	*(void**) (he_EventCallbacks + 8 + o) = a4;
+	*(EVENT_CHECK*) (he_EventCallbacks + 0x10 + o) = checkEvent;
+	*(unsigned char*) (he_EventCallbacks + 0xc + o) = a6;
 }
 
 /* ADDRESS: GOLDTL 0x004e71a0 */

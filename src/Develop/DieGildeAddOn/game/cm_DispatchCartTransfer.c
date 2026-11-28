@@ -20,7 +20,7 @@
 
 extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern char g_77531c;
 
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
@@ -48,7 +48,7 @@ int __cdecl cm_DispatchCartTransfer(int playerIdx, char* cart, char* origin, cha
 	if (d2_DispatchTutorialEvent(0x24, dest, 0, 0) == 1) {
 		memset(msg, 0, sizeof(msg));
 		msg[4] = 0xf;
-		*(int*) (msg + 8) = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[playerIdx].entity_id;
+		*(int*) (msg + 8) = ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[playerIdx].entity_id;
 		*(int*) (msg + 0xc) = -1;
 		msg[0x36] = 2;
 		*(pos14_7f4c00*) (msg + 0x28) = (*(pos14_7f4c00*)&gm_GameTime);
@@ -62,9 +62,9 @@ int __cdecl cm_DispatchCartTransfer(int playerIdx, char* cart, char* origin, cha
 		if (cart[0x28] != 0) {
 			gm_CalcEntityInventoryStats(cart, info);
 			res = gm_CalcEscortCost(*(int*) (info + 0xb0), cart[0x28]);
-			cm_RequestTransferCurrencyNoKill(-1, ((ENTITY_RECORD_VIEW*)g_7f4ca0)[playerIdx].entity_id, g_773d75, res);
+			cm_RequestTransferCurrencyNoKill(-1, ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[playerIdx].entity_id, gm_ActiveTownIndex, res);
 		}
-		if (playerIdx == g_774970) {
+		if (playerIdx == gm_LocalPlayerSlot) {
 			d2_DispatchTutorialInput(0x24, dest, 0, 0);
 		}
 	}

@@ -1,4 +1,4 @@
-extern char g_774a80[];
+extern char io_MessageFormatBuf[];
 extern char g_6ab528[];
 
 
@@ -12,9 +12,9 @@ void __cdecl he_NotifyAlchemistEssence(void* slot, void* actor, void* building, 
 
 	t = *(char*) ((char*) slot + 2);
 	if (t == 6 || t == 7) {
-		io_FormatTextBuffer(g_774a80, 0x4074, (char*) actor + 0x30, (char*) actor + 0x40,
+		io_FormatTextBuffer(io_MessageFormatBuf, 0x4074, (char*) actor + 0x30, (char*) actor + 0x40,
 		    essenceId + 0x4172);
-		he_MessageBoxQuickjump(*(int*) ((char*) slot + 4), -1, g_774a80, 0, 0x5ec,
+		he_MessageBoxQuickjump(*(int*) ((char*) slot + 4), -1, io_MessageFormatBuf, 0, 0x5ec,
 		    *(int*) ((char*) *(int*) ((char*) actor + 0x16c) + 1),
 		    *(int*) ((char*) building + 2), 0, g_6ab528);
 	}

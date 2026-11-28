@@ -8,7 +8,7 @@
 
 // SIZE 0x44
 
-extern HEAD_SET g_6918e8[];
+extern HEAD_SET gm_MaleHeadSets[];
 
 
 void __cdecl gm_ResolveHeadSetIcons(HEAD_SET*);
@@ -20,9 +20,9 @@ HEAD_SET* __cdecl gm_FindOrAllocHeadSet(int which, int key)
 
 	i = 0;
 	if (which == 0) {
-		base = g_6918e8;
+		base = gm_MaleHeadSets;
 	} else if (which == 1) {
-		base = g_693228;
+		base = gm_FemaleHeadSets;
 	} else {
 		return 0;
 	}

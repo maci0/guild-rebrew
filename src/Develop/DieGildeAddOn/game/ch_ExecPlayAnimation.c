@@ -3,7 +3,7 @@
 
 #include "Develop/DieGildeAddOn/game/ch_action.h"
 
-extern float g_6628a8;
+extern float flt_0_0;
 void __cdecl ch_LoadCharacterMotion(char* e, char* name, int n);
 int __cdecl ch_IsAnimationFinished(char* e);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
@@ -34,7 +34,7 @@ void __cdecl ch_ExecPlayAnimation(CH_ACTION* t)
 		}
 	}
 	s = *(char**) (e + 0x70);
-	if (s != 0 && t->unbekannt_178 != g_6628a8) {
+	if (s != 0 && t->unbekannt_178 != flt_0_0) {
 		*(float*) (s + 0x60) = t->unbekannt_178;
 	}
 }

@@ -1,9 +1,9 @@
 #include <string.h>
-extern char g_6b5c60;
+extern char str_empty;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern double g_665ed0;
-extern int g_7f4c08;
-extern unsigned char g_773d75;
+extern int gm_GameTimeSliceDword;
+extern unsigned char gm_ActiveTownIndex;
 
 /* Out-parameter block of the entity search helper at 0x55be70. */
 typedef struct {
@@ -63,7 +63,7 @@ void* __cdecl fcn_00509570(char*);
 		char* _msg = (dst); \
 		*(int*) _msg = *(int*) 0x7f4c00; \
 		*(int*) (_msg + 4) = *(int*) 0x7f4c04; \
-		*(int*) (_msg + 8) = g_7f4c08; \
+		*(int*) (_msg + 8) = gm_GameTimeSliceDword; \
 		*(unsigned short*) (_msg + 12) = *(unsigned short*) 0x7f4c0c; \
 	} while (0)
 
@@ -213,14 +213,14 @@ void __cdecl he_RunEinbruch(char* e)
 			}
 			px = (char*) (0x7f4ca0 + *(unsigned short*) (pb + 8) * 0x21c);
 			if (px != 0 && pc != 0) {
-				num = gm_ConvertUnitsToAmount((gm_RandomMod(0xc8) & 0xffff) + 0x226, (char) g_773d75);
+				num = gm_ConvertUnitsToAmount((gm_RandomMod(0xc8) & 0xffff) + 0x226, (char) gm_ActiveTownIndex);
 				io_FormatTextBuffer(b200, 0x19ea, pa, num, *(unsigned short*) px);
 				he_PostEntityMessage(*(int*) (pc + 4), *(int*) (pc + 4), b200, 1, 0x5f0,
 				        "_NACHRICHTEN_HS_76");
 				io_FormatTextBuffer(b200, 0x19eb, pa, num);
 				he_PostEntityMessage(*(int*) (px + 4), *(int*) (px + 4), b200, 1, 0x5f0,
 				        "_NACHRICHTEN_HS_77");
-				cm_RequestTransferCurrencyNoKill(*(int*) (pc + 4), *(int*) (px + 4), (char) g_773d75, num);
+				cm_RequestTransferCurrencyNoKill(*(int*) (pc + 4), *(int*) (px + 4), (char) gm_ActiveTownIndex, num);
 			}
 			q = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xbc));
 			if (q != 0) {
@@ -320,7 +320,7 @@ void __cdecl he_RunEinbruch(char* e)
 				}
 			}
 			num = gm_GetBuildingTechEffect(pa, 7, 1);
-			*(float*) &num = (float) num * g_662910;
+			*(float*) &num = (float) num * flt_0_01;
 			fv = fv - *(float*) &num * g_665ed0;
 			if (fv > gm_RandomFloat01()) {
 				flag = 1;
@@ -336,7 +336,7 @@ void __cdecl he_RunEinbruch(char* e)
 		        *(int*) (px + 4), *(int*) (pa + 1));
 		if (flag != 0) {
 			memset(b400, 0, 0x400);
-			b400[0] = g_6b5c60;
+			b400[0] = str_empty;
 		}
 		pa = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xac));
 		if (pa == 0) {
@@ -352,7 +352,7 @@ void __cdecl he_RunEinbruch(char* e)
 			num = num < 0 ? 0 : num;
 			io_FormatTextBuffer(b400, 0x68bea4, num);
 			strcat(b400, b100);
-			cm_RequestTransferCurrencyNoKill(*(int*) (pc + 4), *(int*) (px + 4), (char) g_773d75, num);
+			cm_RequestTransferCurrencyNoKill(*(int*) (pc + 4), *(int*) (px + 4), (char) gm_ActiveTownIndex, num);
 			cm_BeginPacketFieldDelta(pb, *(int*) (pb + 1));
 			cm_AppendPacketFieldValue(4, 1, 0x69, &flag);
 			cm_RequestChangeAttribute();
@@ -398,9 +398,9 @@ void __cdecl he_RunEinbruch(char* e)
 						strcat(b400, b100);
 						cm_SendSellObjekt(*(int*) (pb + 2), *(int*) (q + 2),
 						        *(unsigned short*) cnt2, *(int*) (cnt2 + 2),
-						        (char) g_773d75);
+						        (char) gm_ActiveTownIndex);
 						flag = (int) (gm_GetSeasonPrice(*(unsigned short*) cnt2,
-						        (char) g_773d75) * (float) num + (float) flag);
+						        (char) gm_ActiveTownIndex) * (float) num + (float) flag);
 					}
 					cnt2 = (char*) gm_NextEntityQueryMatch();
 				}

@@ -15,7 +15,7 @@ typedef struct {
 	int id;
 } Req;
 
-extern __int64 g_666018;
+extern __int64 gm_TargetPersonTypeMask;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -37,7 +37,7 @@ int __cdecl gm_ObjApplyAction0x5b(char* e, char* action)
 		memset(&req, 0, sizeof(req));
 		memset(&req.pad[2], -1, 0x20);
 		io_FormatTextBuffer(text, 0x9c);
-		req.c = (*(int*)&g_666018);
+		req.c = (*(int*)&gm_TargetPersonTypeMask);
 		req.a = 0;
 		req.size = 0x400;
 		req.kind = 6;

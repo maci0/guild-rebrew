@@ -1,7 +1,7 @@
 #include "d2_gui.h"
 typedef unsigned short u16;
 typedef unsigned int   u32;
-extern int d2_CurrentWindowId, g_14ce8e0, g_774654;
+extern int d2_CurrentWindowId, io_RightButtonReleased, d2_DialogCloseRequested;
 void* __cdecl d2_LoadForm(int a, int b, char* c);
 void __cdecl d2_CenterDialogWindows(int a);
 void __cdecl d2_SetForm(int a, int b);
@@ -57,8 +57,8 @@ void __cdecl d2_RunBorrowerKrediteDialog(char* owner, int id)
             }
 
             count = he_GetActiveKrediteByBorrower(id, owner, entries);
-            cx = *(short*) (g_772500 + 0x269d8);
-            cy = *(short*) (g_772500 + 0x269da);
+            cx = *(short*) (d2_FileObjTable + 0x269d8);
+            cy = *(short*) (d2_FileObjTable + 0x269da);
             for (i = 0; i < count; i++) {
                 d2_SetForm((int)dlg, 2);
                 slot[i][1] = d2_AddElementToWindow(0, ebx, 0x75a,
@@ -81,8 +81,8 @@ void __cdecl d2_RunBorrowerKrediteDialog(char* owner, int id)
         }
         esi = 0;
 
-        if (g_14ce8e0 != 0)
-            g_774654 = 1;
+        if (io_RightButtonReleased != 0)
+            d2_DialogCloseRequested = 1;
     }
 
     d2_DestroyForm((int)dlg);

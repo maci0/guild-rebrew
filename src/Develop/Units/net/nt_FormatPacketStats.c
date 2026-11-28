@@ -4,8 +4,8 @@
 
 extern unsigned int nt_ReceivedPacketCount;
 extern unsigned int nt_ReceivedBytes;
-extern unsigned int g_6b7d60;
-extern unsigned int g_6b7d5c;
+extern unsigned int nt_SentPacketCount;
+extern unsigned int nt_SentBytes;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 
@@ -16,7 +16,7 @@ void __cdecl nt_FormatPacketStats(void)
 	char buf[256];
 	unsigned int* p;
 
-	sprintf(buf, (char*) 0x678aa4, nt_ReceivedPacketCount, nt_ReceivedBytes, g_6b7d60, g_6b7d5c);
+	sprintf(buf, (char*) 0x678aa4, nt_ReceivedPacketCount, nt_ReceivedBytes, nt_SentPacketCount, nt_SentBytes);
 	p = (unsigned int*) 0x14cbcc0;
 	for (i = 0; i < 0x6a; i++, p += 4) {
 		sprintf(buf, (char*) 0x678a40, i,
@@ -25,8 +25,8 @@ void __cdecl nt_FormatPacketStats(void)
 		        p[1],
 		        ((double) p[1] * 100.0) / nt_ReceivedBytes,
 		        p[2],
-		        ((double) p[2] * 100.0) / g_6b7d60,
+		        ((double) p[2] * 100.0) / nt_SentPacketCount,
 		        p[3],
-		        ((double) p[3] * 100.0) / g_6b7d5c);
+		        ((double) p[3] * 100.0) / nt_SentBytes);
 	}
 }

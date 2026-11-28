@@ -1,4 +1,4 @@
-extern float g_662cf8;
+extern float flt_100_0;
 extern float g_66293c;
 extern float g_6628fc;
 extern float g_6628b0;
@@ -11,16 +11,16 @@ extern int g_14ce8d0;
 extern int g_14ce8ec;
 extern int g_14ce8e4;
 extern int g_14ce8cc;
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 extern int g_14ce904;
 extern int g_14ce900;
 extern int g_14ce860;
 extern int g_14ce864;
-extern short g_14ce8c0;
-extern short g_14ce8c2;
-extern short g_14cf900;
-extern short g_14cf902;
-extern char g_14cf72a;
+extern short io_ActiveCursorX;
+extern short io_ActiveCursorY;
+extern short io_PolledCursorState;
+extern short io_PolledCursorY;
+extern char io_ShiftKeyDown;
 extern char g_14cf71d;
 extern char g_14cf70f;
 extern char g_67ab48;
@@ -28,9 +28,9 @@ extern char g_67ab49;
 extern int g_6772c4;
 extern int g_6b85a8;
 extern int g_6b85ac;
-extern int g_6b8478;
-extern int g_6b847c;
-extern int g_6b8480;
+extern int d3_TopViewCamera;
+extern int d3_FrontViewCamera;
+extern int d3_SideViewCamera;
 extern int d3_ActiveCamera;
 
 void __cdecl d2_ToggleMouseClipBounds(int flag);
@@ -73,47 +73,47 @@ int __cdecl d3_UpdateFreeCameraInput(void)
 	rotate[0] = 0.0f;
 	rotate[1] = 0.0f;
 	rotate[2] = 0.0f;
-	v2 = g_14cf72a;
+	v2 = io_ShiftKeyDown;
 	v21 = 0.0f;
 	v19 = 0.0f;
 	v20 = 0.0f;
 	v18 = 0.0f;
 	if (g_14ce8d8 != 0) {
-		g_6b85a8 = (int) g_14ce8c0;
-		g_6b85ac = (int) g_14ce8c2;
+		g_6b85a8 = (int) io_ActiveCursorX;
+		g_6b85ac = (int) io_ActiveCursorY;
 	}
 	else if (g_14ce8d0 != 0
 		&& *(int*) (g_1041d0c + 0x218) != 0
 		&& *(int*) (g_1041d0c + 0x218) < 5
-		&& g_1041d0c != g_6b8478
-		&& g_1041d0c != g_6b847c
-		&& g_1041d0c != g_6b8480) {
+		&& g_1041d0c != d3_TopViewCamera
+		&& g_1041d0c != d3_FrontViewCamera
+		&& g_1041d0c != d3_SideViewCamera) {
 		if (g_6772c4 != 0) {
 			g_6772c4 = 0;
 			d2_ToggleMouseClipBounds(0);
 		}
 		if (g_67ab48 != 0) {
 			v15 = 1;
-			dx = (int) g_14cf900 - g_6b85a8;
+			dx = (int) io_PolledCursorState - g_6b85a8;
 		}
 		else {
 			dx = 0;
 		}
 		if (g_67ab49 != 0) {
 			v15 = 1;
-			dy = (int) g_14cf902 - g_6b85ac;
+			dy = (int) io_PolledCursorY - g_6b85ac;
 		}
 		else {
 			dy = 0;
 		}
-		g_6b85a8 = (int) g_14cf900;
-		g_6b85ac = (int) g_14cf902;
+		g_6b85a8 = (int) io_PolledCursorState;
+		g_6b85ac = (int) io_PolledCursorY;
 		v18 = (float) dx / g_14ce860 * g_6628fc;
 		v20 = (float) dy / g_14ce864 * g_6628fc;
 	}
 	if (g_14ce8ec != 0) {
-		g_6b85a8 = (int) g_14cf900;
-		g_6b85ac = (int) g_14cf902;
+		g_6b85a8 = (int) io_PolledCursorState;
+		g_6b85ac = (int) io_PolledCursorY;
 	}
 	else if (g_14ce8e4 != 0) {
 		if (g_6772c4 != 0) {
@@ -122,20 +122,20 @@ int __cdecl d3_UpdateFreeCameraInput(void)
 		}
 		if (g_67ab48 != 0) {
 			v14 = 1;
-			dx = (int) g_14cf900 - g_6b85a8;
+			dx = (int) io_PolledCursorState - g_6b85a8;
 		}
 		else {
 			dx = 0;
 		}
 		if (g_67ab49 != 0) {
 			v14 = 1;
-			dy = (int) g_14cf902 - g_6b85ac;
+			dy = (int) io_PolledCursorY - g_6b85ac;
 		}
 		else {
 			dy = 0;
 		}
-		g_6b85ac = (int) g_14cf902;
-		g_6b85a8 = (int) g_14cf900;
+		g_6b85ac = (int) io_PolledCursorY;
+		g_6b85a8 = (int) io_PolledCursorState;
 		v21 = (float) ((float) dx / (unsigned int) g_14ce860);
 		v19 = (float) dy / (float) (unsigned int) g_14ce864;
 		scale0 = (float) ((unsigned int) g_14ce860
@@ -154,14 +154,14 @@ int __cdecl d3_UpdateFreeCameraInput(void)
 	if (g_14ce8e4 == 0 && g_14ce8d0 == 0 && g_6772c4 == 0) {
 		g_6772c4 = 1;
 		d2_ToggleMouseClipBounds(1);
-		io_SetMouseCursorPos((int) g_14ce8c0, (int) g_14ce8c2);
+		io_SetMouseCursorPos((int) io_ActiveCursorX, (int) io_ActiveCursorY);
 	}
 	if (g_14ce904 != 0) {
-		rotate[2] = rotate[2] + g_662cf8;
+		rotate[2] = rotate[2] + flt_100_0;
 		v14 = 1;
 	}
 	else if (g_14ce900 != 0) {
-		rotate[2] = rotate[2] - g_662cf8;
+		rotate[2] = rotate[2] - flt_100_0;
 		v14 = 1;
 	}
 	if (g_14cf70f != 0) {
@@ -198,7 +198,7 @@ label_4495a3:
 		UpdateSceneLighting(0);
 		v14 = 1;
 	}
-	if (g_14ce8e0 != 0) {
+	if (io_RightButtonReleased != 0) {
 		UpdateSceneLighting(0);
 		v14 = 1;
 	}

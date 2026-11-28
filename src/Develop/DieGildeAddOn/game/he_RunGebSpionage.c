@@ -16,7 +16,7 @@ typedef struct {
 #pragma pack()
 
 extern pos14_7f4c00 gm_GameTime;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 extern unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 extern char* __cdecl gm_LookupEntityRecordById(int id);
@@ -146,7 +146,7 @@ void __cdecl he_RunGebSpionage(char* action)
 			*(int*)(action + 0x70) = -1;
 			return;
 		}
-		ent = (char*)gm_LookupEntityRecordById(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*)(h + 0x27)].entity_id);
+		ent = (char*)gm_LookupEntityRecordById(((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*)(h + 0x27)].entity_id);
 		q = (char*)gm_SetupEntityQuery((unsigned char*)h);
 		t = 0;
 		k = 0;
@@ -172,7 +172,7 @@ void __cdecl he_RunGebSpionage(char* action)
 			*(int*)(action + 0x70) = -1;
 			return;
 		}
-		r = (char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*)(h2 + 0x27)];
+		r = (char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*)(h2 + 0x27)];
 		q = (char*)fcn_00502cd0(*(int*)(h2 + 0x5d), 2, 6, 0, 0x2a);
 		i = gm_WalkEntityChain(*(unsigned short*)r);
 		if (i >= 1600000) {
@@ -184,7 +184,7 @@ void __cdecl he_RunGebSpionage(char* action)
 			e = (char*)fcn_00502cd0(*(int*)(q + 0x14), 1, 5);
 			while (e != 0) {
 				amount = (float)gm_GetMsgField(q, e);
-				amount = gm_GetSeasonPrice(*(unsigned short*)e, g_773d75) * amount;
+				amount = gm_GetSeasonPrice(*(unsigned short*)e, gm_ActiveTownIndex) * amount;
 				v = (int)(amount + v);
 				e = (char*)gm_NextEntityQueryMatch();
 			}

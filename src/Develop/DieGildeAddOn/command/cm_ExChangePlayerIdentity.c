@@ -6,7 +6,7 @@ typedef struct {
 	char data[0x21c];
 } Rec21c;
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 int __cdecl gm_TransferDynastyEstate(int a, int b);
 int __cdecl gm_LookupEntityRecordById(int h);
@@ -31,7 +31,7 @@ int __cdecl cm_ExChangePlayerIdentity(char* cmd, char* result)
 				gv_RequestAddCandidateToOfficePool(h, obj, *val, gm_GetEntitySlotIndex(*(int*) (obj + 0x65), val));
 			}
 			result[1] = 1;
-			*(Rec21c**) (result + 6) = ((Rec21c *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[idx]);
+			*(Rec21c**) (result + 6) = ((Rec21c *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[idx]);
 		} else {
 			result[1] = 0;
 			*(int*) (result + 6) = 0;

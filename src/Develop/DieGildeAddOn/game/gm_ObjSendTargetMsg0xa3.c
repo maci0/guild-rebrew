@@ -15,13 +15,13 @@ typedef struct {
 	int id;
 } Req;
 
-extern __int64 g_666018;
+extern __int64 gm_TargetPersonTypeMask;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern unsigned short g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
+extern unsigned short gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
 
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 char* __cdecl d2_OpenTargetPicker(Req*, char*, int, int);
@@ -45,7 +45,7 @@ int __cdecl gm_ObjSendTargetMsg0xa3(char* e, char* request)
 		memset(&req, 0, sizeof(req));
 		memset(&req.pad[2], -1, 0x20);
 		io_FormatTextBuffer(text, 0x9c);
-		req.c = (*(int*)&g_666018);
+		req.c = (*(int*)&gm_TargetPersonTypeMask);
 		req.a = 1;
 		req.size = 0x400;
 		req.kind = 6;
@@ -62,9 +62,9 @@ int __cdecl gm_ObjSendTargetMsg0xa3(char* e, char* request)
 	msg[4] = (char) 0xa3;
 	*(int*) (msg + 0xc) = -1;
 	*(int*) (msg + 0x28) = (*(int*)&gm_GameTime);
-	*(int*) (msg + 0x2c) = (*(int*)&g_7f4c04);
-	*(int*) (msg + 0x30) = g_7f4c08;
-	*(short*) (msg + 0x34) = g_7f4c0c;
+	*(int*) (msg + 0x2c) = (*(int*)&gm_GameTimeHour);
+	*(int*) (msg + 0x30) = gm_GameTimeSliceDword;
+	*(short*) (msg + 0x34) = gm_GameTimeTailWord;
 	msg[0x36] = 1;
 	cm_SendCopyEntityData(msg);
 	if (e[2] == 6) {

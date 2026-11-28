@@ -11,7 +11,7 @@
 
 
 
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern char g_699874[];
 extern char g_6a6b70[];
 
@@ -47,21 +47,21 @@ void __cdecl he_RunInitBetrieb(char* u)
 			goto kill;
 		}
 		if (*(unsigned short*) (t + 0x25) != 0xffff) {
-			cm_SendSetGebBesitzer(*(int*) (t + 1), ((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (t + 0x25)].entity_id, *(int*) (p + 4));
+			cm_SendSetGebBesitzer(*(int*) (t + 1), ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (t + 0x25)].entity_id, *(int*) (p + 4));
 		} else {
 			cm_SendSetGebBesitzer(*(int*) (t + 1), *(int*) (p + 4), *(int*) (p + 4));
 		}
-		cm_RequestMoveCredits(*(int*) (p + 4), -1, g_773d75, gm_ConvertUnitsToAmount(0xbb8, g_773d75));
+		cm_RequestMoveCredits(*(int*) (p + 4), -1, gm_ActiveTownIndex, gm_ConvertUnitsToAmount(0xbb8, gm_ActiveTownIndex));
 		if (*(int*) (u + 0xbc) == 0) {
 			goto kill;
 		}
-		h = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (t + 0x25)]);
+		h = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (t + 0x25)]);
 		if (h != 0) {
 			if (h->entity_state == 6 || h->entity_state == 7) {
 				io_FormatTextBuffer(text, 0x17e6, t, *(unsigned short*) p, *(int*) (u + 0xbc));
 				he_MessageBoxQuickjump(h->entity_id, -1, text, 0, 0x5ec, *(int*) (t + 1), -1, 0, g_699874);
 			}
-			cm_RequestMoveCredits(h->entity_id, -1, g_773d75, *(int*) (u + 0xbc));
+			cm_RequestMoveCredits(h->entity_id, -1, gm_ActiveTownIndex, *(int*) (u + 0xbc));
 		}
 		cm_SendSetGebBesitzer(*(int*) (t + 1), *(int*) (p + 4), *(int*) (p + 4));
 		if (he_GetEntityReturnTarget(p, &site, &target) != 0) {

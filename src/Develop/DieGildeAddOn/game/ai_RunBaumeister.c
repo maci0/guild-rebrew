@@ -5,10 +5,10 @@
 
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern unsigned short g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
-extern unsigned char g_773d75;
+extern unsigned short gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
+extern unsigned char gm_ActiveTownIndex;
 extern float g_66414c;
 extern char g_67eb38[];
 extern char g_67eb2c[];
@@ -40,12 +40,12 @@ int __cdecl ai_RunBaumeister(char* entity, char* a2, char* a3)
 		*(int*) (msg + 0xc) = *(int*) (a3 + 4);
 		msg[0x36] = 1;
 		*(int*) (msg + 0x28) = (*(int*)&gm_GameTime);
-		*(int*) (msg + 0x2c) = (*(int*)&g_7f4c04);
-		*(int*) (msg + 0x30) = g_7f4c08;
-		*(short*) (msg + 0x34) = g_7f4c0c;
+		*(int*) (msg + 0x2c) = (*(int*)&gm_GameTimeHour);
+		*(int*) (msg + 0x30) = gm_GameTimeSliceDword;
+		*(short*) (msg + 0x34) = gm_GameTimeTailWord;
 		*(int*) (msg + 0x58) = *(int*) (a3 + 4);
 		cm_SendLogAction(g_67eb38);
-		cm_RequestMoveCredits(-1, *(int*) (b + 2), (*(char*)&g_773d75), (int) (gm_GetTypeProductValue(*(int*) (a2 + 4)) * 0.3f));
+		cm_RequestMoveCredits(-1, *(int*) (b + 2), (*(char*)&gm_ActiveTownIndex), (int) (gm_GetTypeProductValue(*(int*) (a2 + 4)) * 0.3f));
 		cm_SendCopyEntityData(msg);
 		cm_SendTraceEnd(g_67eb38);
 		if (*(int*) (a2 + 0x10) > 0 && *(int*) (a2 + 0x10) < 4) {
@@ -55,7 +55,7 @@ int __cdecl ai_RunBaumeister(char* entity, char* a2, char* a3)
 	} else {
 		cm_SendLogAction(g_67eb2c);
 		if (amt_ExecGebaeudeBauen(gm_CityEntity, a2, a3)) {
-			cm_RequestMoveCredits(-1, *(int*) (b + 2), (*(char*)&g_773d75), gm_GetTypeProductValue(*(int*) (a2 + 4)));
+			cm_RequestMoveCredits(-1, *(int*) (b + 2), (*(char*)&gm_ActiveTownIndex), gm_GetTypeProductValue(*(int*) (a2 + 4)));
 			cm_SendTraceEnd(g_67eb2c);
 			if (*(int*) (a2 + 0x10) > 0 && *(int*) (a2 + 0x10) < 4) {
 				g_100a0c0[*(int*) (a2 + 0x10) * 2] = g_100a0a0 + g_100a0a0;

@@ -39,7 +39,7 @@ typedef struct {
 
 extern char g_631090[];
 extern char* g_6f240c;
-extern char g_6b5c60[];
+extern char str_empty[];
 
 char* __cdecl StripPathAndExt(char*);
 void __cdecl d3_RemoveObjectAnimation(char*, char*);
@@ -171,7 +171,7 @@ int __cdecl d2_TurnBookPages(Book* b, signed char dir)
 			d2_SetFormTextures(b->widgets[i], top, bottom);
 			d2_SetGroupVisibility(b->widgets[i], 1);
 		} else {
-			d2_SetFormTextures(b->widgets[i], &(*(char*)g_6b5c60), &(*(char*)g_6b5c60));
+			d2_SetFormTextures(b->widgets[i], &(*(char*)str_empty), &(*(char*)str_empty));
 			d2_SetGroupVisibility(b->widgets[i], 0);
 		}
 	}

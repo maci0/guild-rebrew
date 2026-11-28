@@ -1,9 +1,9 @@
 #include "Develop/client_types.h"
 #include "Develop/DieGildeAddOn/game/season_slots.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern float flt_1;
-extern double g_664e78;
+extern double dbl_5_0;
 extern double dbl_1_0;
 
 char* __cdecl gm_FindCityItemHolder(int id);
@@ -27,7 +27,7 @@ float __cdecl gm_CalcMarketSlotPrice(int season, int slot)
 	id = ((MARKET_STOCK_TABLE*) g_85ab80)[season].slots[slot].objekt_id;
 	def = lpObjektePROT + id * 0x41;
 	store = gm_FindCityItemHolder(id);
-	if (store == 0 && season != g_773d75) {
+	if (store == 0 && season != gm_ActiveTownIndex) {
 		e = gm_FindKind47ByOwner(season);
 		if (e != 0) {
 			store = fcn_00502cd0(*(int*) (e + 0x5d), 2, 0, 0x1db, 6);
@@ -48,7 +48,7 @@ float __cdecl gm_CalcMarketSlotPrice(int season, int slot)
 				: ((MARKET_STOCK_TABLE*) g_85ab80)[season].slots[slot].basis / stock)
 			: flt_1);
 	scale = scale > 0.25 ? scale : 0.25;
-	if (scale >= g_664e78) {
+	if (scale >= dbl_5_0) {
 		scale = 5.0;
 	}
 	stock = scale;

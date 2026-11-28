@@ -2,8 +2,8 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #pragma intrinsic(memset)
 
-extern int g_100f1dc;
-extern int g_774654;
+extern int d2_DialogButtonAction;
+extern int d2_DialogCloseRequested;
 
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -121,7 +121,7 @@ int __cdecl d2_ShowGesetzDialog(char* entity, int* request)
 	default:
 		return 0;
 	}
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
 		if (keep) {
 			if (d2_GetControlValue(ctl) - add != rec[6] && box != -1) {
@@ -130,11 +130,11 @@ int __cdecl d2_ShowGesetzDialog(char* entity, int* request)
 				d2_SetElementEnabled(box, 0);
 			}
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc != -1) {
-			if (g_100f1dc == 2) {
+		if (d2_DialogButtonAction != -1) {
+			if (d2_DialogButtonAction == 2) {
 				if (d2_CheckActionBlocker(entity, 2) != 0) {
 					if (*(unsigned char*) ((char*) rec + 1) == 2) {
 						delta = 1 - rec[6];
@@ -150,10 +150,10 @@ int __cdecl d2_ShowGesetzDialog(char* entity, int* request)
 						cm_RequestModifyHealth(*(int*) (entity + 4), -2);
 						cm_RequestChangeBits(*(int*) (recp + 4), 0x1c8, 4, limit, 0);
 					}
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				}
-			} else if (g_100f1dc == 1) {
-				g_774654 = 1;
+			} else if (d2_DialogButtonAction == 1) {
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	} while (main_RunFrameLoop((void*) d2_ShowGesetzDialog, 0x657c7) != 0);

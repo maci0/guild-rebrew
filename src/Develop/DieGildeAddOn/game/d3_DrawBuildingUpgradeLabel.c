@@ -17,19 +17,19 @@ void __cdecl d3_DrawBuildingUpgradeLabel(char* sceneNode)
 	unsigned short* hit;
 	char* ownerRec;
 
-	if ((int) g_7746c8 != 0) {
-		ownerRec = (char*) g_7746c8;
+	if ((int) d2_InteriorBuilding != 0) {
+		ownerRec = (char*) d2_InteriorBuilding;
 	} else {
-		if (g_7746c4 == 0) {
+		if (d2_VisitedBuilding == 0) {
 			return;
 		}
-		ownerRec = g_7746c4;
+		ownerRec = d2_VisitedBuilding;
 	}
 	if (strstr(sceneNode, (char*) 0x6a1f84) == 0) {
 		return;
 	}
 	strcpy(key, sceneNode + 0x10);
-	if ((int) g_7746c8 != 0) {
+	if ((int) d2_InteriorBuilding != 0) {
 		item = (unsigned short*) fcn_00502cd0(*(int*) (ownerRec + 0x5d), 1, 4, 6);
 	} else {
 		item = (unsigned short*) fcn_00502cd0(*(int*) (ownerRec + 0x5d), 1, 4, 2);
@@ -42,7 +42,7 @@ void __cdecl d3_DrawBuildingUpgradeLabel(char* sceneNode)
 		}
 		item = gm_NextEntityQueryMatch();
 	}
-	if ((int) g_7746c8 == 0) {
+	if ((int) d2_InteriorBuilding == 0) {
 		return;
 	}
 	hit = (unsigned short*) fcn_00502cd0(*(int*) (ownerRec + 0x5d), 1, 0, 0xfd);
@@ -51,9 +51,9 @@ found:
 		return;
 	}
 	if (*hit == 0xfd) {
-		if ((int) g_7746cc != 0) {
+		if ((int) sv_SelectedBuilding != 0) {
 			sprintf(value, (char*) 0x68b3f8,
-				*(char**) ((int) *(unsigned short*) (int) g_7746cc * 8 + 0x14a79c0),
+				*(char**) ((int) *(unsigned short*) (int) sv_SelectedBuilding * 8 + 0x14a79c0),
 				*(char**) 0x14a5530);
 		} else {
 			sprintf(value, (char*) 0x68b3f8,
@@ -66,6 +66,6 @@ found:
 	}
 	if (d3_GetObjectScreenRect(sceneNode, rc)) {
 		d2_DrawWordWrappedText((rc[2] - rc[0]) / 2 + rc[0] - 0x50, rc[1], 0xa0, 0x60,
-			g_77250c, value, 0x28);
+			d2_ScreenSurface, value, 0x28);
 	}
 }

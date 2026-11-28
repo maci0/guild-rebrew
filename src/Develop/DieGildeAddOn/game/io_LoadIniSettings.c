@@ -1,5 +1,5 @@
 typedef struct { unsigned int first, second; } ProfilePair;
-extern float g_662910;
+extern float flt_0_01;
 __declspec(dllimport) unsigned int __stdcall GetPrivateProfileIntA(const char *, const char *, int, const char *);
 __declspec(dllimport) unsigned int __stdcall GetPrivateProfileStringA(const char *, const char *, const char *, char *, unsigned int, const char *);
 
@@ -17,18 +17,18 @@ void __cdecl io_LoadIniSettings(void)
     *(unsigned char *)0x77666a = GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad238,0,(char *)0x7e22c0);
     *(unsigned char *)0x77666b = GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad224,1,(char *)0x7e22c0);
     *(unsigned char *)0x77666c = GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad218,0,(char *)0x7e22c0);
-    *(float *)0x776670 = (float)(GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad208,0,(char *)0x7e22c0) * g_662910);
-    *(float *)0x776674 = (float)(GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad1f8,0,(char *)0x7e22c0) * g_662910);
-    *(float *)0x776678 = (float)(GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad1e8,0,(char *)0x7e22c0) * g_662910);
-    *(float *)0x77667c = (float)(GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad1d8,0x32,(char *)0x7e22c0) * g_662910);
-    *(float *)0x776680 = (float)(GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad1cc,100,(char *)0x7e22c0) * g_662910);
-    *(float *)0x776684 = (float)(GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad1c0,100,(char *)0x7e22c0) * g_662910);
-    *(float *)0x776688 = (float)(GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad1b4,100,(char *)0x7e22c0) * g_662910);
-    *(float *)0x77668c = (float)(GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad1a8,100,(char *)0x7e22c0) * g_662910);
-    *(float *)0x776690 = (float)(GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad1a0,100,(char *)0x7e22c0) * g_662910);
-    *(float *)0x776694 = (float)(GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad198,100,(char *)0x7e22c0) * g_662910);
-    *(float *)0x776698 = (float)(GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad190,100,(char *)0x7e22c0) * g_662910);
-    *(float *)0x77669c = (float)(GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad188,100,(char *)0x7e22c0) * g_662910);
+    *(float *)0x776670 = (float)(GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad208,0,(char *)0x7e22c0) * flt_0_01);
+    *(float *)0x776674 = (float)(GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad1f8,0,(char *)0x7e22c0) * flt_0_01);
+    *(float *)0x776678 = (float)(GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad1e8,0,(char *)0x7e22c0) * flt_0_01);
+    *(float *)0x77667c = (float)(GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad1d8,0x32,(char *)0x7e22c0) * flt_0_01);
+    *(float *)0x776680 = (float)(GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad1cc,100,(char *)0x7e22c0) * flt_0_01);
+    *(float *)0x776684 = (float)(GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad1c0,100,(char *)0x7e22c0) * flt_0_01);
+    *(float *)0x776688 = (float)(GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad1b4,100,(char *)0x7e22c0) * flt_0_01);
+    *(float *)0x77668c = (float)(GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad1a8,100,(char *)0x7e22c0) * flt_0_01);
+    *(float *)0x776690 = (float)(GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad1a0,100,(char *)0x7e22c0) * flt_0_01);
+    *(float *)0x776694 = (float)(GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad198,100,(char *)0x7e22c0) * flt_0_01);
+    *(float *)0x776698 = (float)(GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad190,100,(char *)0x7e22c0) * flt_0_01);
+    *(float *)0x77669c = (float)(GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad188,100,(char *)0x7e22c0) * flt_0_01);
     *(unsigned char *)0x776660 = GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad254,0,(char *)0x7e22c0);
     resIndex = GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6a4654,0,(char *)0x7e22c0);
     *(unsigned char *)0x77534c = resIndex;

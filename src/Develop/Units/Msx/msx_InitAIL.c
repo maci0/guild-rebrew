@@ -10,11 +10,11 @@ int __cdecl msx_InitAIL(void)
 {
 	int r = 0;
 
-	if (g_6b7f90 == 0) {
+	if (msx_Initialized == 0) {
 		msx_RegisterAILShutdown();
 		AIL_startup();
 		AIL_last_error();
-		g_6b7f90 = -1;
+		msx_Initialized = -1;
 	} else {
 		r = -1;
 	}

@@ -1,28 +1,28 @@
 /* Global shutdown of the game runtime. */
 
-extern int g_6b5c60;
+extern int str_empty;
 extern int g_538060;
 extern int d2_SuppressOverlay;
-extern int g_772f3c;
+extern int cut_SkipMode;
 extern int g_7749cc;
-extern int g_774934;
+extern int d3snd_SoundEnabled;
 extern int g_7747bc;
 extern int g_7747c0;
 extern int g_7747c4;
 extern int g_7747c8;
 extern int g_7747cc;
 extern int g_6b5c2c;
-extern int g_7e453c;
-extern int g_7e4538;
+extern int d3_SnowEffect;
+extern int d3_RainEffect;
 extern int g_6b89c0;
 extern char g_6b8061;
-extern int g_6b5cf8;
+extern int SonnenstrahlenObjekt;
 extern int d3_ActiveCameraAnimation;
 extern int g_77497c;
-extern int g_7e2aa0;
-extern int g_7746cc;
-extern int g_7746c4;
-extern int g_7746c8;
+extern int d2_SelectedBuilding;
+extern int sv_SelectedBuilding;
+extern int d2_VisitedBuilding;
+extern int d2_InteriorBuilding;
 
 void __cdecl d3_ClearSceneObjectCache(void);
 void __cdecl d2_SetMouseTooltip(void* p);
@@ -65,16 +65,16 @@ void __cdecl gm_ShutdownGameRuntime(void)
 	int* entry;
 
 	d3_ClearSceneObjectCache();
-	d2_SetMouseTooltip(&g_6b5c60);
-	d2_ShowStatusBanner(&g_6b5c60);
+	d2_SetMouseTooltip(&str_empty);
+	d2_ShowStatusBanner(&str_empty);
 	d2_SuppressOverlay = 1;
 	tb_CloseFunction(&g_538060);
-	g_772f3c = 0;
+	cut_SkipMode = 0;
 	evt_CloseAllScripts();
 	if (g_7749cc != 0) {
 		gv_SpawnIfPending(g_7749cc);
 	}
-	if (g_774934 != 0) {
+	if (d3snd_SoundEnabled != 0) {
 		d3snd_StopTrackedVoices();
 		d3snd_StopAllObjectSounds();
 		if (g_7747bc != 0) {
@@ -106,13 +106,13 @@ void __cdecl gm_ShutdownGameRuntime(void)
 			ch_DestroyCharacter(*entry);
 		}
 	}
-	if (g_7e453c != 0) {
-		((int (*)(char)) d3_DestroySnowEffect)(g_7e453c);
-		g_7e453c = 0;
+	if (d3_SnowEffect != 0) {
+		((int (*)(char)) d3_DestroySnowEffect)(d3_SnowEffect);
+		d3_SnowEffect = 0;
 	}
-	if (g_7e4538 != 0) {
-		d3_DestroyRain(g_7e4538);
-		g_7e4538 = 0;
+	if (d3_RainEffect != 0) {
+		d3_DestroyRain(d3_RainEffect);
+		d3_RainEffect = 0;
 	}
 	if (g_6b89c0 != 0) {
 		int ctx = g_6b89c0;
@@ -127,9 +127,9 @@ void __cdecl gm_ShutdownGameRuntime(void)
 		g_6b89c0 = 0;
 	}
 	g_6b8061 = 0;
-	if (g_6b5cf8 != 0) {
-		d3_DestroySunRayObject(g_6b5cf8);
-		g_6b5cf8 = 0;
+	if (SonnenstrahlenObjekt != 0) {
+		d3_DestroySunRayObject(SonnenstrahlenObjekt);
+		SonnenstrahlenObjekt = 0;
 	}
 	d3_ActiveCameraAnimation = 0;
 	d3_ClearAllSceneContexts();
@@ -140,8 +140,8 @@ void __cdecl gm_ShutdownGameRuntime(void)
 	nt_CloseClientConnection();
 	g_77497c = 0;
 	d2_SetOverlayAnimation(0, 0);
-	g_7e2aa0 = 0;
-	g_7746cc = 0;
-	g_7746c4 = 0;
-	g_7746c8 = 0;
+	d2_SelectedBuilding = 0;
+	sv_SelectedBuilding = 0;
+	d2_VisitedBuilding = 0;
+	d2_InteriorBuilding = 0;
 }

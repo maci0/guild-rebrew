@@ -1,9 +1,9 @@
 #include "Develop/client_types.h"
 #include "Develop/Units/d2.v1/d2_win.h"
 
-extern D2_FORM_RECORD g_1038140[];
-extern Win_1015f40 g_1015f40[0x60];
-extern char* g_1015ea0;
+extern D2_FORM_RECORD d2_Forms[];
+extern Win_1015f40 d2_Windows[0x60];
+extern char* d2_Controls;
 extern int d2_ScreenHeight;
 extern int g_1040494;
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -57,7 +57,7 @@ void __cdecl d2_RenderFormToTextures(int k)
 	int oh2;
 
 	saved = d2_QueuedQuadCount;
-	base = ((char*) g_1038140) + k * 0x2bc;
+	base = ((char*) d2_Forms) + k * 0x2bc;
 	if (*(int*) (base + 0x190) == 0) {
 		return;
 	}
@@ -75,7 +75,7 @@ void __cdecl d2_RenderFormToTextures(int k)
 		}
 		d2_BlitBufferToSurface(0, 0, *(int*) (pp[0] + 4), *(int*) (pp[0] + 8), *(int*) (pp[0] + 0x20), 0, 0, surf);
 		for (row = 0; row < *(int*) (base + 0x184); row++) {
-			win = &((D2_WIN*)g_1015f40)[((int*) (base + 4))[row]];
+			win = &((D2_WIN*)d2_Windows)[((int*) (base + 4))[row]];
 			oh2 = win->top;
 			oh1 = win->left;
 			win->top = ybase + oh2;
@@ -83,7 +83,7 @@ void __cdecl d2_RenderFormToTextures(int k)
 			win->left = oh1;
 			win->top = oh2;
 			for (col = 0; col < win->count; col++) {
-				obj = (char*) &((D2_CONTROL_TL*) g_1015ea0)[win->children[col]];
+				obj = (char*) &((D2_CONTROL_TL*) d2_Controls)[win->children[col]];
 				sx = (*(D2_CONTROL_TL*) obj).x - *(int*) (base + 0x188);
 				sy = ybase - *(int*) (base + 0x18c) + (*(D2_CONTROL_TL*) obj).y;
 				if ((*(D2_CONTROL_TL*) obj).value_004 != 0) {
@@ -112,7 +112,7 @@ void __cdecl d2_RenderFormToTextures(int k)
 					case 5:
 					case 8:
 						if ((*(D2_CONTROL_TL*) obj).flags_1d0 & 2) {
-							if ((char*) &((D2_CONTROL_TL*) g_1015ea0)[d2_CurrentElementId] == obj || (*(D2_CONTROL_TL*) obj).value_038 != 0) {
+							if ((char*) &((D2_CONTROL_TL*) d2_Controls)[d2_CurrentElementId] == obj || (*(D2_CONTROL_TL*) obj).value_038 != 0) {
 								if ((*(D2_CONTROL_TL*) obj).flags_1d0 & 1) {
 									(*(D2_CONTROL_TL*) obj).value_03c = 1;
 								}

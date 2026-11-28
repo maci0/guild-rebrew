@@ -114,9 +114,9 @@ void __cdecl cut_SetupBattleArena(void *arg)
 			}
 		}
 	}
-	cur = *(int *) (*(int *) &g_67a370 + 0xb0);
+	cur = *(int *) (*(int *) &d3_ActiveScene + 0xb0);
 	d3_UpdateSeasonTextures();
-	if (*(int *) &g_6b8300 != 0) {
+	if (*(int *) &d3_CurrentFloor != 0) {
 		*(int *) (*(int *) &d3_CurrentContextIndex * 0x3dc + 0x1043378) = *(int *) 0x1043378;
 		g_6b89c0 = *(int *) 0x1043378;
 		d3_UpdateWeatherAndSkyBlend();
@@ -131,7 +131,7 @@ void __cdecl cut_SetupBattleArena(void *arg)
 	}
 	for (p = (int *) 0x9b8e40, i = 0x400; i != 0; i--)
 		*p++ = 0;
-	for (p = (int *) &g_9ba1c0, i = 0x40; i != 0; i--)
+	for (p = (int *) &d3_ActiveBombs, i = 0x40; i != 0; i--)
 		*p++ = 0;
 	for (p = (int *) 0x9b9ec0, i = 0x80; i != 0; i--)
 		*p++ = 0;
@@ -143,7 +143,7 @@ void __cdecl cut_SetupBattleArena(void *arg)
 		*p = -1;
 	*(int *) 0x772ebc = sb_LoadSampleBank("kampf.sbf", 1);
 	*(int *) 0x772ec0 = sb_LoadSampleBank("kampf\\armbrust.sbf", 1);
-	*(int *) &g_772ec4 = sb_LoadSampleBank("kampf\\bombeundtopf.sbf", 1);
+	*(int *) &cut_BombSampleBank = sb_LoadSampleBank("kampf\\bombeundtopf.sbf", 1);
 	*(int *) 0x772ec8 = sb_LoadSampleBank("kampf\\dolche.sbf", 1);
 	*(int *) 0x772ecc = sb_LoadSampleBank("kampf\\pistole.sbf", 1);
 	*(int *) 0x772ed0 = sb_LoadSampleBank("kampf\\schwerter.sbf", 1);
@@ -205,22 +205,22 @@ void __cdecl cut_SetupBattleArena(void *arg)
 	}
 	*(int *) 0x772f0c = d3_AcquireModel("ub_STIEFEL", "ub_STIEFEL");
 	if (cur == 0) {
-		cur = d3sm_CreateMap(*(int *) &g_6b8300, *(int *) (*(int *) &g_67a370 + 0xb4), 2);
-		*(int *) (*(int *) &g_67a370 + 0xb0) = cur;
-		cur = *(int *) (*(int *) &g_67a370 + 0xb0);
+		cur = d3sm_CreateMap(*(int *) &d3_CurrentFloor, *(int *) (*(int *) &d3_ActiveScene + 0xb4), 2);
+		*(int *) (*(int *) &d3_ActiveScene + 0xb0) = cur;
+		cur = *(int *) (*(int *) &d3_ActiveScene + 0xb0);
 	}
 	*(float *) 0x9ba2c0 = (float) (*(float *) (cur + 0x10) * g_664ef8);
 	*(int *) 0x6a2570 = 0x3e19999a;
 	g_6a2574[0] = 0;
 	*(void **) 0x772eb4 = (void *) o;
 	d3_CollectCombatArenaMarkers();
-	*(int *) &g_772e9c = gm_LookupEntityRecordById(*(int *) (o + 0x34));
+	*(int *) &cut_CombatDefenderEntity = gm_LookupEntityRecordById(*(int *) (o + 0x34));
 	*(int *) 0x772e98 = gm_LookupEntityRecordById(*(int *) (o + 0x38));
-	if (*(int *) (*(unsigned short *) &g_774970 * 0x21c + (unsigned long)&g_7f4ca4) == g_68b79c && (o[0x7c] & 1) != 0) {
+	if (*(int *) (*(unsigned short *) &gm_LocalPlayerSlot * 0x21c + (unsigned long)&gm_EntityIdField) == g_68b79c && (o[0x7c] & 1) != 0) {
 		cm_BeginCommandSync();
 		for (p = (int *) (o + 0x100), i = 3; i != 0; i--, p++) {
 			if (*p != -1)
-				cm_SendSellObjekt(-2, -1, 0x154, 1, *(unsigned char *) &g_773d75, 0);
+				cm_SendSellObjekt(-2, -1, 0x154, 1, *(unsigned char *) &gm_ActiveTownIndex, 0);
 		}
 		cm_EndCommandSync();
 		while (cm_AreQueuedCommandsDone() == 0)
@@ -229,7 +229,7 @@ void __cdecl cut_SetupBattleArena(void *arg)
 	for (p = (int *) (o + 0xc0), i = 0x10; i != 0; i--, p++) {
 		if (*p != -1) {
 			e = cut_SpawnCombatActor(*p, "dummy_OFFENSE_ENTRY");
-			*(int *) (e + 0x16c) = *(int *) &g_772e9c;
+			*(int *) (e + 0x16c) = *(int *) &cut_CombatDefenderEntity;
 			if (*(int *) (e + 0x184) != 0) {
 				t = *(int *) (*(int *) (e + 0x184) + 0x34);
 				SelectTextureSet(t, *(int *) (t + 0x1cc), 5, 1);
@@ -248,8 +248,8 @@ void __cdecl cut_SetupBattleArena(void *arg)
 			}
 		}
 	}
-	d3_TraverseSceneObjects(*(int *) &g_67a370, 0, 0xc0, 0x4d1fd0);
-	base = *(int *) &g_67a370;
+	d3_TraverseSceneObjects(*(int *) &d3_ActiveScene, 0, 0xc0, 0x4d1fd0);
+	base = *(int *) &d3_ActiveScene;
 	pp = (int **) &ch_ContextCharacters;
 	for (i = 0x20; i != 0; i--)
 		*pp++ = 0;
@@ -328,7 +328,7 @@ void __cdecl cut_SetupBattleArena(void *arg)
 		}
 		p++;
 		if (i >= 3) {
-			d3sm_Rebuild(*(int *) (*(int *) &g_67a370 + 0xb0), *(int *) &g_6b8300);
+			d3sm_Rebuild(*(int *) (*(int *) &d3_ActiveScene + 0xb0), *(int *) &d3_CurrentFloor);
 			i = 0;
 			if (mode > 0) {
 				n = *(int *) (cur + 0x20);

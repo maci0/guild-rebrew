@@ -1,8 +1,8 @@
 typedef unsigned char u8;
 typedef unsigned short u16;
 
-extern int g_100f1dc;
-extern int g_14ce8e0;
+extern int d2_DialogButtonAction;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
 void* __cdecl d2_LoadForm(int a, int b, char* name);
@@ -50,10 +50,10 @@ int __cdecl d2_ShowBecircenDialog(int entity)
     wnd = d2_GetWindowListItem(dlg, 1,
                        io_AppendText(0x1db4, *(u16*) entity, *(u16*) entity));
     d2_CreateGuiWindow(wnd, 1, 5, 1);
-    g_100f1dc = -1;
+    d2_DialogButtonAction = -1;
     for (;;) {
-        if (g_100f1dc != -1) {
-            if (g_100f1dc == 2) {
+        if (d2_DialogButtonAction != -1) {
+            if (d2_DialogButtonAction == 2) {
                 player = d2_GetControlValue(wnd);
                 if (d2_CheckActionBlocker((void*) (0x7f4ca0 + 540 * *(u16*) 0x774970),
                                  player) != 0) {
@@ -67,15 +67,15 @@ int __cdecl d2_ShowBecircenDialog(int entity)
                                  *(int*) ((char*) entity + 4), t, 1);
                     io_FormatTextBuffer(buf, 0x1db5, *(u16*) entity, *(u16*) entity);
                     d2_ShowModalMessageBox(buf, 0);
-                    g_774654 = 4;
+                    d2_DialogCloseRequested = 4;
                     result = 1;
                 }
-            } else if (g_100f1dc == 1) {
-                g_774654 = 2;
+            } else if (d2_DialogButtonAction == 1) {
+                d2_DialogCloseRequested = 2;
             }
         }
-        if (g_14ce8e0 != 0)
-            g_774654 = 1;
+        if (io_RightButtonReleased != 0)
+            d2_DialogCloseRequested = 1;
         if (main_RunFrameLoop((void*) 0x5d6ea0, 0x657c7) == 0)
             break;
     }

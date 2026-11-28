@@ -1,7 +1,7 @@
 /* Open the arena betting page: query the match, build the layout and poll
  * input until the page is closed. */
 #include "Develop/DieGildeAddOn/game/client_data.h"
-extern int g_774654;
+extern int d2_DialogCloseRequested;
 void __cdecl io_FormatTextBuffer(char*, int, int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 void __cdecl d3snd_QueueSound(int, int, char*, int, int);
@@ -112,26 +112,26 @@ void __cdecl d2_OpenFriedhofFogDialog(int building)
 	v30 = io_AppendText(0x40be);
 	v27 = d2_GetWindowListItem(dialogId, 2, v30);
 	v30 = d2_GetWindowListItem(dialogId, 2, v30 + 1);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
 		d2_SetForm(dialogId, 3);
 		io_AppendText(0x6811b0);
 		v6 = (d2_GetControlValue(secondControl) + 2) * (d2_GetControlValue(firstControl) + 2);
 		io_AppendText(0x40b9);
 		io_AppendText(0x40ba, v6);
-		if (g_14ce8e0) {
+		if (io_RightButtonReleased) {
 			goto label_58df76;
 		}
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == v27) {
-				v5 = g_774970;
-				if (d2_CheckActionBlocker((int) (g_7f4ca0 + v5 * 0x21c), v6) == 1) {
+				v5 = gm_LocalPlayerSlot;
+				if (d2_CheckActionBlocker((int) (gm_EntitySlotTable + v5 * 0x21c), v6) == 1) {
 					for (v9 = 0; v9 < 0x3e; v9++) {
 						req[v9] = 0;
 					}
 					((char*) req)[4] = (char) 0x90;
 					((char*) req)[0x36] = (char) 2;
-					*(int*) ((char*) req + 8) = *(int*) (g_774970 * 0x21c + (unsigned long)&g_7f4ca4);
+					*(int*) ((char*) req + 8) = *(int*) (gm_LocalPlayerSlot * 0x21c + (unsigned long)&gm_EntityIdField);
 					*(int*) ((char*) req + 0xc) = *(int*) (building + 1);
 					*(pos14_7f4c00*) ((char*) req + 0x28) = gm_GameTime;
 					*(int*) ((char*) req + 0x5c) = d2_GetControlValue(firstControl);
@@ -139,7 +139,7 @@ void __cdecl d2_OpenFriedhofFogDialog(int building)
 					*(int*) ((char*) req + 0x58) = *(int*) (rec + 1);
 					cm_SendCopyEntityData(req);
 				label_58df76:
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				}
 			} else if (d2_CurrentElementId == v30) {
 				goto label_58df76;

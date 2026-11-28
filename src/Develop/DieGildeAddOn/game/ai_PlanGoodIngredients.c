@@ -66,7 +66,7 @@ int __cdecl ai_PlanGoodIngredients(char* actor, int* goodsPlan)
 		if (*p < 0) {
 			goto next;
 		}
-		seg = &g_100b0c0[*p];
+		seg = &ai_ResourceRequests[*p];
 		seg->state_30 = seg->state_30 < goodsPlan[18] ? seg->state_30 : goodsPlan[18];
 		seg->flags |= 2;
 		if (seg->goods_id == 0x1c7 || seg->goods_id == 0x1c4
@@ -77,7 +77,7 @@ int __cdecl ai_PlanGoodIngredients(char* actor, int* goodsPlan)
 		    || seg->goods_id == 0x226 || seg->goods_id == 0x227
 		    || seg->goods_id == 0x293 || seg->goods_id == 0x294
 		    || seg->goods_id == 0x295) {
-			rp = &g_100d0c0[seg->parent_index];
+			rp = &ai_ProductionGoodsPlans[seg->parent_index];
 			if ((rp->amount + rp->unk_3c) * 4 < rp->unk_40) {
 				w = *(unsigned short*) (g_item_def_table + goodsPlan[0] * 0x41 + off);
 				if (seg->stock + seg->allocated < w * 4) {
@@ -85,7 +85,7 @@ int __cdecl ai_PlanGoodIngredients(char* actor, int* goodsPlan)
 				}
 			}
 		} else if (seg->parent_index != -1) {
-			rp = &g_100d0c0[seg->parent_index];
+			rp = &ai_ProductionGoodsPlans[seg->parent_index];
 			rp->unk_48 = rp->unk_48 < goodsPlan[18] ? rp->unk_48 : goodsPlan[18];
 			rp->flags |= 2;
 			if ((rp->amount + rp->unk_3c) * 4 < rp->unk_40) {

@@ -3,8 +3,8 @@
 
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_67a370;
-extern int g_6791c8;
+extern int d3_ActiveScene;
+extern int evt_ActiveContextId;
 extern char* evt_CurrentScript;
 void __cdecl d3_TransformPoint(char* src, char* pos, float* out);
 #include "Develop/Units/d3/client_scene_transform.h"
@@ -27,7 +27,7 @@ char* __cdecl DummyBlocked(char** a, int* range)
 	d3_TransformPoint(*a, *a + 0x4c, pos);
 	for (; i < 0x300; i++) {
 		e = ((char**)ch_CharacterSlots)[i];
-		if (e != 0 && *(char**) (e + 0x88) == ((char*)g_67a370) && *(int*) (e + 0x2c) == g_6791c8) {
+		if (e != 0 && *(char**) (e + 0x88) == ((char*)d3_ActiveScene) && *(int*) (e + 0x2c) == evt_ActiveContextId) {
 			if (CompareVector3WithinTolerance((float*) (*(char**) (e + 0x34) + 0x4c), pos, (float) *range)) {
 				result = ((char**)ch_CharacterSlots)[i];
 				break;

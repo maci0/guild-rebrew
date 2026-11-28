@@ -6,7 +6,7 @@ struct SCENE_CONTEXT_SLOT {
 	char pad[0x3d8];
 };
 
-extern char g_1043370[];
+extern char tp_ch_PathGrid[];
 
 
 
@@ -33,16 +33,16 @@ void __cdecl d3_ClearAllSceneContexts(void)
 		}
 	}
 	for (i = 0; i < 0x22; i++) {
-		if (g_7f3b00[i] > 0) {
-			d3_SelectSceneContext(g_7f3b00[i], 0);
+		if (d3_BuildingCategorySceneIndices[i] > 0) {
+			d3_SelectSceneContext(d3_BuildingCategorySceneIndices[i], 0);
 			d3_ClearSceneState();
-			g_7f3b00[i] = -1;
+			d3_BuildingCategorySceneIndices[i] = -1;
 		}
 	}
 	for (i = 0; i < 64; i++) {
-		if (((struct SCENE_CONTEXT_SLOT*)g_1043370)[i].p != 0) {
-			gv_Free3Fields(((struct SCENE_CONTEXT_SLOT*)g_1043370)[i].p);
-			((struct SCENE_CONTEXT_SLOT*)g_1043370)[i].p = 0;
+		if (((struct SCENE_CONTEXT_SLOT*)tp_ch_PathGrid)[i].p != 0) {
+			gv_Free3Fields(((struct SCENE_CONTEXT_SLOT*)tp_ch_PathGrid)[i].p);
+			((struct SCENE_CONTEXT_SLOT*)tp_ch_PathGrid)[i].p = 0;
 		}
 	}
 }

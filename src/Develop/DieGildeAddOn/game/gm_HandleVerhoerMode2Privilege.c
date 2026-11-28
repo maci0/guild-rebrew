@@ -1,5 +1,5 @@
 /* Owned (both targets) by src/GOLDTL.fcn_004f7890.c. */
-extern char g_679060[];
+extern char str_fmt_s[];
 
 int  __cdecl gm_HandleVerhoerMode2(void*, void*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);

@@ -41,7 +41,7 @@ void __cdecl d2_ShowBuildingStatsDetail(unsigned char* a)
 	io_AppendText((int) s_6ac848, a);
 	d2_SetForm(dlg, 1);
 	gm_GetBuildingTypeCategory(a[0]);
-	gm_CalcBuildingRoundBalance(a, g_774970, st);
+	gm_CalcBuildingRoundBalance(a, gm_LocalPlayerSlot, st);
 	io_AppendText(0xa3, gm_GetEntityMood(a));
 	if (st[0] != 0) {
 		io_AppendText(0xa4, st[0]);
@@ -92,8 +92,8 @@ void __cdecl d2_ShowBuildingStatsDetail(unsigned char* a)
 	}
 	if (main_RunFrameLoop((void*) d2_ShowBuildingStatsDetail, 0x677c7) != 0) {
 		do {
-			if (g_14ce8e0 != 0) {
-				g_774654 = 1;
+			if (io_RightButtonReleased != 0) {
+				d2_DialogCloseRequested = 1;
 			}
 		} while (main_RunFrameLoop((void*) d2_ShowBuildingStatsDetail, 0x677c7) != 0);
 	}

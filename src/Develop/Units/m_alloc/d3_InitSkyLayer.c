@@ -6,7 +6,7 @@ typedef struct {
 	unsigned char a;
 } D3_SKY_COLOR;
 
-extern int g_772f3c;
+extern int cut_SkipMode;
 extern int g_772f68;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_772f64;
@@ -21,7 +21,7 @@ void __cdecl d3_InitSkyLayer(int textureName)
 {
 	D3_SKY_COLOR c;
 
-	if (g_772f3c == 0) {
+	if (cut_SkipMode == 0) {
 		g_6b89c0 = g_772f68 = d3_CreateSky(-2.25f, -0.2f, 600.0f);
 		*(int*) &c = 0;
 		c.b = 0;

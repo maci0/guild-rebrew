@@ -14,8 +14,8 @@ typedef struct
 } Pair;
 // SIZE 0x8
 
-extern Rec2d_9a3800 g_9a3800[512];
-extern Pair_99f800 g_99f800[0x800];
+extern Rec2d_9a3800 cm_CrimeRecords[512];
+extern Pair_99f800 cm_CrimeEvidenceLinks[0x800];
 
 int __cdecl cm_UpdateStraftatState(int a, int b, unsigned int st, int flag)
 {
@@ -27,12 +27,12 @@ int __cdecl cm_UpdateStraftatState(int a, int b, unsigned int st, int flag)
 	cnt = 0;
 	if (flag) {
 		for (i = 0; i < 0x800; i++) {
-			if (((Pair*)g_99f800)[i].a == a) {
-				id = ((Pair*)g_99f800)[i].b;
+			if (((Pair*)cm_CrimeEvidenceLinks)[i].a == a) {
+				id = ((Pair*)cm_CrimeEvidenceLinks)[i].b;
 				for (j = 0; j < 512; j++) {
-					if (g_9a3800[j].id == id) {
-						if (g_9a3800[j].x25 == 1 && g_9a3800[j].x16 == b) {
-							g_9a3800[j].x25 = st;
+					if (cm_CrimeRecords[j].id == id) {
+						if (cm_CrimeRecords[j].x25 == 1 && cm_CrimeRecords[j].x16 == b) {
+							cm_CrimeRecords[j].x25 = st;
 							cnt++;
 						}
 						break;
@@ -43,8 +43,8 @@ int __cdecl cm_UpdateStraftatState(int a, int b, unsigned int st, int flag)
 		return cnt;
 	}
 	for (j = 0; j < 512; j++) {
-		if (g_9a3800[j].x25 == st) {
-			g_9a3800[j].x25 = 1;
+		if (cm_CrimeRecords[j].x25 == st) {
+			cm_CrimeRecords[j].x25 = 1;
 			cnt++;
 		}
 	}

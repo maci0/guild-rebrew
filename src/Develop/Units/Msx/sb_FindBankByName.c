@@ -1,4 +1,4 @@
-extern int* g_6b7d78;
+extern int* sb_BankListHead;
 
 
 
@@ -8,7 +8,7 @@ int* __cdecl sb_FindBankByName(int key)
 {
 	int* node;
 
-	node = g_6b7d78;
+	node = sb_BankListHead;
 	while (node != 0) {
 		if (_strnicmp((int) node, key, 0x32) == 0) {
 			break;

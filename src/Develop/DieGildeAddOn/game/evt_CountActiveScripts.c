@@ -18,7 +18,7 @@ int __cdecl evt_CountActiveScripts(void)
 	EVT_SCRIPT_SLOT* e;
 
 	n = 0;
-	e = ((EVT_SCRIPT_SLOT*)g_6b7e94);
+	e = ((EVT_SCRIPT_SLOT*)evt_ScriptSlots);
 	for (i = 0; i < 0x80; i++) {
 		if ((e[i].used != 0 && e[i].owner != -1) || (e[i].flags & 1)) {
 			n++;

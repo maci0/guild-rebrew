@@ -53,7 +53,7 @@ void __cdecl he_EnsureAction0x6d(void)
 		m.b4 = 0x6d;
 		m.fc = -1;
 		m.b36 = 2;
-		m.f8 = ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id;
+		m.f8 = ((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id;
 		m.pos = (*(pos14_7f4c00*)&gm_GameTime);
 		cm_SendCopyEntityData(&m);
 	}

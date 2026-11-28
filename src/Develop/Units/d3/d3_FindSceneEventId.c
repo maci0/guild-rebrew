@@ -1,6 +1,6 @@
 #include "scene_event_entry.h"
 
-extern SCENE_EVENT_ENTRY g_67a470[8];
+extern SCENE_EVENT_ENTRY d3_SceneEvents[8];
 
 int __cdecl fcn_0065f220(const char* a, const char* b);
 
@@ -10,8 +10,8 @@ int __cdecl d3_FindSceneEventId(const char* name)
 	unsigned int i;
 
 	for (i = 0; i < 8; i++) {
-		if (fcn_0065f220(name, g_67a470[i].name) == 0) {
-			return g_67a470[i].value;
+		if (fcn_0065f220(name, d3_SceneEvents[i].name) == 0) {
+			return d3_SceneEvents[i].value;
 		}
 	}
 	return 0;

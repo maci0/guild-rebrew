@@ -11,7 +11,7 @@ int __cdecl d3snd_PlayObjectSound(char* voice, void* object, int volume, float r
 	if (voice == 0 || object == 0) {
 		return 0;
 	}
-	scaled = range * g_662b40;
+	scaled = range * dbl_0_0254;
 	req.objekt = object;
 	req.playbackControl = 1;
 	req.voice = voice;

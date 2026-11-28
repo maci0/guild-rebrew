@@ -2,7 +2,7 @@
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern int lpGebaeudeINST;
 extern int lpGebaeudePROT;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern char gm_GameTime[];
 
 void __cdecl he_FreeAction(char*);
@@ -155,7 +155,7 @@ anim7:
 		if (found)
 			cm_RequestSetWohnsitz(*(int*) (obj + 4), *(int*) (ent + 1));
 		i = gm_RandomMod(0x32);
-		cm_RequestTransferCurrencyNoKill(*(int*) (obj + 4), -1, g_773d75, ((i & 0xffff) + 0x33) * 0x20);
+		cm_RequestTransferCurrencyNoKill(*(int*) (obj + 4), -1, gm_ActiveTownIndex, ((i & 0xffff) + 0x33) * 0x20);
 		cm_BeginPacketFieldDelta(obj, *(int*) (obj + 4));
 		cm_AppendPacketFieldDelta(1, 1, 2, &v38);
 		cm_AppendPacketFieldDelta(1, 1, 0xc, &v34);

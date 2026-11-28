@@ -3,8 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-extern char* g_104049c;
-extern unsigned int g_10404a0;
+extern char* d3_TextureBank;
+extern unsigned int d3_TextureBankCount;
 extern int g_10405c0;
 
 /* SIZE 0x70 */
@@ -98,9 +98,9 @@ void __cdecl d3_LoadAnimatedTextureFrames(Tex* t, Col c, unsigned int flags, uns
 					sprintf(name, "%s%i", buf1, n + 1);
 					d3_LoadOrReuseTexture(name, out, flags, flags2);
 				} else {
-					e = (Tex*) g_104049c;
+					e = (Tex*) d3_TextureBank;
 					k = 0;
-					while (k < g_10404a0) {
+					while (k < d3_TextureBankCount) {
 						if (e->refs > 0
 						    && e->color48 == g_10405c0) {
 							if (strstr((char*) e, buf1) != 0) {

@@ -29,7 +29,7 @@ typedef struct {
 } House;
 
 extern pos14_7f4c00 gm_GameTime;
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char s_6ad434[];
 extern char s_6811b0[];
@@ -37,8 +37,8 @@ extern int d2_CurrentWindowId;
 extern int g_14b5ac0;
 extern int g_14b5ac4;
 extern int g_14b5ac8;
-extern int g_14ce8e0;
-extern int g_100f1dc;
+extern int io_RightButtonReleased;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
@@ -79,16 +79,16 @@ void __cdecl d2_OpenBlutracheDialog(char* e)
 	d2_SetForm(dlg, 3);
 	d2_CreateButtonRow(d2_CurrentWindowId, 0, ids, 2, g_14b5ac0, g_14b5ac4);
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
-		} else if (g_100f1dc != -1) {
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
+		} else if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == ids[0]) {
 				n = 0;
 				for (i = 0; i < 768; i++) {
 					if (n >= 4) {
 						break;
 					}
-					if (((House*)g_7f4ca0)[i].b188 != 0) {
+					if (((House*)gm_EntitySlotTable)[i].b188 != 0) {
 						list[n] = i;
 						n++;
 					}
@@ -97,19 +97,19 @@ void __cdecl d2_OpenBlutracheDialog(char* e)
 					memset(&m, 0, sizeof(m));
 					m.b4 = (char) 0xa1;
 					m.b36 = 1;
-					m.f8 = ((House*)g_7f4ca0)[g_774970].f4;
+					m.f8 = ((House*)gm_EntitySlotTable)[gm_LocalPlayerSlot].f4;
 					m.fc = *(int*) (e + 1);
 					m.pos = gm_GameTime;
 					for (i = 0; i < n; i++) {
-						m.ids[i] = ((House*)g_7f4ca0)[list[i]].f4;
+						m.ids[i] = ((House*)gm_EntitySlotTable)[list[i]].f4;
 					}
 					cm_SendCopyEntityData(&m);
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				} else {
 					d2_ShowModalMessageBox(g_14b5ac8, 0);
 				}
 			} else if (d2_CurrentElementId == ids[1]) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	} while (main_RunFrameLoop((void*) d2_OpenBlutracheDialog, 0x677c7) != 0);

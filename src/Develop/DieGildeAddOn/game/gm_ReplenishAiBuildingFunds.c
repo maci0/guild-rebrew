@@ -13,8 +13,8 @@
 
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern int g_7747b4;
-extern unsigned char g_773d75;
+extern int gm_DifficultyLevel;
+extern unsigned char gm_ActiveTownIndex;
 
 int __cdecl gm_AccumulateTyped2(ENTITY_RECORD*);
 int __cdecl cm_RequestMoveCredits(int, int, char, int);
@@ -31,20 +31,20 @@ void __cdecl gm_ReplenishAiBuildingFunds(void)
 
 	cmd_handle = -1;
 	if ((*(int*)&gm_GameTime) % ((*(int*)&gm_GameTime) / 10 + 1) == 0) {
-		limit = (g_7747b4 * 5 + 20) * 1600;
+		limit = (gm_DifficultyLevel * 5 + 20) * 1600;
 		batch_count = 0;
 		for (i = 0; i < 768; i++) {
-			if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 5) {
-				funds = gm_AccumulateTyped2(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]));
+			if (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_type == 5) {
+				funds = gm_AccumulateTyped2(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i]));
 				if (funds < limit) {
-					cmd_handle = cm_RequestMoveCredits(((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id, -1, (*(char*)&g_773d75), limit - funds);
+					cmd_handle = cm_RequestMoveCredits(((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_id, -1, (*(char*)&gm_ActiveTownIndex), limit - funds);
 					batch_count++;
 				}
-			} else if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 4
-				|| (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 2 && (*(int*)&gm_GameTime) % 4 == (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id & 3))) {
-				funds = gm_AccumulateTyped2(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]));
+			} else if (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_type == 4
+				|| (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_type == 2 && (*(int*)&gm_GameTime) % 4 == (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_id & 3))) {
+				funds = gm_AccumulateTyped2(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i]));
 				if (funds < limit) {
-					cmd_handle = cm_RequestMoveCredits(((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id, -1, (*(char*)&g_773d75), limit - funds);
+					cmd_handle = cm_RequestMoveCredits(((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_id, -1, (*(char*)&gm_ActiveTownIndex), limit - funds);
 					batch_count++;
 				}
 			}

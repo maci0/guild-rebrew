@@ -1,12 +1,12 @@
-extern int g_6b7f94;
+extern int msx_SampleHandleLimit;
 int __cdecl msx_CountActiveWaveDrivers(void);
 typedef void (__stdcall* g_66244c_f)(int, int);
-extern g_66244c_f g_66244c;
+extern g_66244c_f imp_AIL_set_preference;
 
-extern int g_6b7f90;
+extern int msx_Initialized;
 
 int __cdecl msx_CountActiveWaveDrivers(void);
-extern int* g_6b7f10[16];
+extern int* msx_SampleHandles[16];
 
 int __cdecl msx_FindWaveDriverIndex(int*);
 int __cdecl msx_FindFreeSampleSlot(int*);
@@ -18,8 +18,8 @@ int __cdecl msx_GetSampleHandleLimit(int* out)
 	int r = 0;
 
 	if (*(int*) 0x6b7f90 != 0) {
-		if (msx_CountActiveWaveDrivers() != 0 || g_6b7f94 != 0) {
-			*out = g_6b7f94;
+		if (msx_CountActiveWaveDrivers() != 0 || msx_SampleHandleLimit != 0) {
+			*out = msx_SampleHandleLimit;
 		} else {
 			r = -1;
 		}
@@ -35,10 +35,10 @@ int __cdecl msx_SetSampleHandleLimit(int value)
 {
 	int r = 0;
 
-	if (g_6b7f90 != 0) {
+	if (msx_Initialized != 0) {
 		if (msx_CountActiveWaveDrivers() <= 1) {
-			g_6b7f94 = value;
-			g_66244c(1, value);
+			msx_SampleHandleLimit = value;
+			imp_AIL_set_preference(1, value);
 		} else {
 			r = -1;
 		}
@@ -56,10 +56,10 @@ int __cdecl msx_AllocateSampleHandle(int* device, int* outHandle)
 	int i;
 	int j;
 
-	if (g_6b7f90 != 0 && (i = msx_FindWaveDriverIndex(device)) >= 0 && (j = msx_FindFreeSampleSlot(device)) >= 0 &&
+	if (msx_Initialized != 0 && (i = msx_FindWaveDriverIndex(device)) >= 0 && (j = msx_FindFreeSampleSlot(device)) >= 0 &&
 	    (*outHandle = AIL_allocate_sample_handle(*device)) != 0) {
 		device[5]++;
-		g_6b7f10[i][j] = *outHandle;
+		msx_SampleHandles[i][j] = *outHandle;
 	} else {
 		r = -1;
 	}

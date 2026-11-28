@@ -95,10 +95,10 @@ typedef struct {
 } FRAME;
 /* SIZE 0x110c */
 
-#define GUI(i) (((D2_CONTROL_TL*) g_1015ea0)[i])
+#define GUI(i) (((D2_CONTROL_TL*) d2_Controls)[i])
 
 extern int lpGebaeudePROT;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 void* __cdecl d2_OpenJournalBook(unsigned int, int, int, ...);
@@ -279,8 +279,8 @@ void __cdecl d2_RunSoeldnerbuchDialog(unsigned char* building, int buildingId)
 			if (gm_CheckEntityStock(
 			        (void*) ((int) &((ENTITY_RECORD*) 0x7f4ca0)[*(unsigned short*) 0x774970
 						]),
-			        gm_ConvertUnitsToAmount(n, g_773d75),
-			        g_773d75)) {
+			        gm_ConvertUnitsToAmount(n, gm_ActiveTownIndex),
+			        gm_ActiveTownIndex)) {
 				f.pIt = (int*) &f.rows[0].obj;
 				f.pg = f.cnt;
 				while (f.pg > 0) {
@@ -289,10 +289,10 @@ void __cdecl d2_RunSoeldnerbuchDialog(unsigned char* building, int buildingId)
 						cm_SendLogAction(0x6ac2bc);
 						cm_RequestMoveCredits(
 						    *(int*) (p + 4), -1,
-						    g_773d75,
+						    gm_ActiveTownIndex,
 						    gm_ConvertUnitsToAmount(
 						        perRow,
-						        g_773d75));
+						        gm_ActiveTownIndex));
 						cm_RequestCopyEntityData(
 						    *(int*) ((int) &((ENTITY_RECORD*) 0x7f4ca0)[*(unsigned short*)
 						                   0x774970
@@ -309,8 +309,8 @@ void __cdecl d2_RunSoeldnerbuchDialog(unsigned char* building, int buildingId)
 			    -1,
 			    *(int*) ((int) &((ENTITY_RECORD*) 0x7f4ca0)[*(unsigned short*) 0x774970
 						] + 4),
-			    g_773d75,
-			    gm_ConvertUnitsToAmount(n, g_773d75));
+			    gm_ActiveTownIndex,
+			    gm_ConvertUnitsToAmount(n, gm_ActiveTownIndex));
 		}
 	L7e3d:
 		n = f.cnt;

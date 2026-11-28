@@ -24,13 +24,13 @@ typedef struct SOUND_SOURCE {
 
 extern int d3snd_SourceCount;
 extern SOUND_SOURCE* tp_SoundSources;
-extern Chan_14cc460* g_772efc;
+extern Chan_14cc460* tp_cut_CombatAmbientTrack;
 extern Chan_14cc460* tp_msx_CurrentTrack;
 extern Chan_14cc460* g_772d20;
-extern Chan_14cc460* g_772d24;
+extern Chan_14cc460* tp_msx_MusicTrack;
 
 /* Read-only eight-byte scale view; native storage owner is unresolved. */
-extern const double g_662b40;
+extern const double dbl_0_0254;
 
 void __cdecl d3snd_SetVoiceFlag0x10(int* voice, int enabled);
 SOUND_SOURCE* __cdecl d3snd_FindFreeSource(void);

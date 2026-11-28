@@ -1,7 +1,7 @@
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern char g_774a80[];
-extern char g_6b5c60[];
+extern char io_MessageFormatBuf[];
+extern char str_empty[];
 
 
 
@@ -20,7 +20,7 @@ void __cdecl he_NotifyAblassPurchase(void* entity, void* recipient, int church, 
 		} else {
 			tag = ((*(int*)&gm_GameTime) >= 0x75) ? 0x20b9 : 0x20b8;
 		}
-		io_FormatTextBuffer(g_774a80, 0x20b6, *(unsigned short*) entity, church, cost, payout, tag);
-		he_PostEntityMessage(*(int*) ((char*) recipient + 4), -1, g_774a80, 0, 0x5ff, g_6b5c60);
+		io_FormatTextBuffer(io_MessageFormatBuf, 0x20b6, *(unsigned short*) entity, church, cost, payout, tag);
+		he_PostEntityMessage(*(int*) ((char*) recipient + 4), -1, io_MessageFormatBuf, 0, 0x5ff, str_empty);
 	}
 }

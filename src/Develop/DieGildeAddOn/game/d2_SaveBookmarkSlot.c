@@ -9,13 +9,13 @@ typedef struct
 } Tip;
 // SIZE 0xc
 
-extern char* g_7746c4;
-extern unsigned char* g_7746c8;
-extern char* g_7746cc;
-extern char* g_7e2aa0;
-extern char* g_773d78;
+extern char* d2_VisitedBuilding;
+extern unsigned char* d2_InteriorBuilding;
+extern char* sv_SelectedBuilding;
+extern char* d2_SelectedBuilding;
+extern char* gm_MarketEntity;
 #include "Develop/client_types.h"
-extern Slot_779d00 g_779d00[];
+extern Slot_779d00 main_CameraBookmarks[];
 extern char s_6a9b3c[];
 extern char s_6a9b30[];
 
@@ -30,31 +30,31 @@ void __cdecl d2_SaveBookmarkSlot(int index)
 	char* t;
 
 	t = 0;
-	e = g_7746c4;
+	e = d2_VisitedBuilding;
 	if (e != 0) {
-		if (g_7746cc != 0) {
-			t = g_7746cc;
+		if (sv_SelectedBuilding != 0) {
+			t = sv_SelectedBuilding;
 		}
 	} else {
-		e = ((char*)g_7746c8);
+		e = ((char*)d2_InteriorBuilding);
 		if (e != 0) {
-			t = g_7746cc;
+			t = sv_SelectedBuilding;
 			if (t == 0) {
 				t = fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0xfd);
 			}
 		} else {
-			e = g_7e2aa0;
+			e = d2_SelectedBuilding;
 			if (e == 0) {
-				e = g_773d78;
+				e = gm_MarketEntity;
 			}
 		}
 	}
 	if (t != 0) {
-		((Tip*)g_779d00)[index].x4 = *(int*) (e + 1);
-		((Tip*)g_779d00)[index].x8 = *(int*) (t + 2);
+		((Tip*)main_CameraBookmarks)[index].x4 = *(int*) (e + 1);
+		((Tip*)main_CameraBookmarks)[index].x8 = *(int*) (t + 2);
 	} else {
-		((Tip*)g_779d00)[index].x4 = *(int*) (e + 1);
-		((Tip*)g_779d00)[index].x8 = -1;
+		((Tip*)main_CameraBookmarks)[index].x4 = *(int*) (e + 1);
+		((Tip*)main_CameraBookmarks)[index].x8 = -1;
 	}
 	if (t != 0 && *(unsigned short*) t != 0xfd) {
 		io_FormatTextBuffer(buf, (int) s_6a9b30, index + 0x205e, e, *(unsigned short*) t * 2 + 0x9a8);

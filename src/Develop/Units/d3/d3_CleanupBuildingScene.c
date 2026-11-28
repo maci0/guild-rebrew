@@ -1,4 +1,4 @@
-extern int g_67a370;
+extern int d3_ActiveScene;
 extern int g_699b10;
 extern int g_6b86d8;
 extern int g_6b86dc;
@@ -19,7 +19,7 @@ void __cdecl d3_CleanupBuildingScene(void)
 {
 	char* p;
 
-	d3_TraverseSceneObjects(g_67a370, 0, 0xa0, (void*) d3snd_StopSceneObjectSfxVoice);
+	d3_TraverseSceneObjects(d3_ActiveScene, 0, 0xa0, (void*) d3snd_StopSceneObjectSfxVoice);
 	d3snd_StopAllAmbientVoices();
 	g_6b86d8 = 0x400;
 	g_6b86dc = 0x40;
@@ -31,6 +31,6 @@ void __cdecl d3_CleanupBuildingScene(void)
 			g_699b10 = -1;
 		}
 	}
-	ch_ClearSceneActionFinishCallbacks(g_67a370);
+	ch_ClearSceneActionFinishCallbacks(d3_ActiveScene);
 	g_67530c = -1;
 }

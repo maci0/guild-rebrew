@@ -21,7 +21,7 @@ typedef struct D2_CENTER_ELEMENT_SLOT {
 } D2_CENTER_ELEMENT_SLOT;
 // SIZE 0x2f4
 
-extern char* g_1015ea0;
+extern char* d2_Controls;
 extern int g_1040494;
 
 void __cdecl d2_PositionControl(int x, int y, int slot);
@@ -33,7 +33,7 @@ void __cdecl d2_CenterElement(int slot)
 	int x;
 	int y;
 
-	s = (D2_CENTER_ELEMENT_SLOT*) &((D2_CONTROL_TL*) g_1015ea0)[slot];
+	s = (D2_CENTER_ELEMENT_SLOT*) &((D2_CONTROL_TL*) d2_Controls)[slot];
 	if (((D2_CONTROL_TL*) s)->value_06c != 0) {
 		r = (D2_CENTER_PARENT_RECT*) ((D2_CONTROL_TL*) s)->parent;
 		if (r != 0) {

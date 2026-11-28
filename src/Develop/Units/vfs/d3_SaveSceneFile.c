@@ -14,17 +14,17 @@ typedef struct
 } fcn_00446cd0_Cam;
 // SIZE 0x60
 
-extern struct VFS_DIR* g_6b7fdc;
+extern struct VFS_DIR* vfs_RootDir;
 extern char s_6790b0[];
-extern int g_6b86d4;
+extern int d3_SceneRenderLock;
 #include "Develop/client_types.h"
-extern VECTOR3 g_67bbdc;
-extern VECTOR3 g_6b86c4;
+extern VECTOR3 d3_SceneAmbientColor;
+extern VECTOR3 d3_SceneLightingVec;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_10425fc;
 extern float g_104329c;
 extern char g_1041d80[];
-extern int g_67a370;
+extern int d3_ActiveScene;
 
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
 void __cdecl vfs_WriteInt(void* s, int v);
@@ -44,16 +44,16 @@ void __cdecl d3_SaveSceneFile(char* name, void* stream)
 
 	s = stream;
 	if (s == 0) {
-		s = vfs_Tfopen(name, s_6790b0, g_6b7fdc);
+		s = vfs_Tfopen(name, s_6790b0, vfs_RootDir);
 		if (s == 0) {
 			return;
 		}
 	}
-	g_6b86d4++;
+	d3_SceneRenderLock++;
 	vfs_WriteInt(s, 0x3a6c00bb);
 	vfs_WriteInt32(s, 0);
-	vfs_WriteVec3(s, ((int*)&g_67bbdc));
-	vfs_WriteVec3(s, ((int*)&g_6b86c4));
+	vfs_WriteVec3(s, ((int*)&d3_SceneAmbientColor));
+	vfs_WriteVec3(s, ((int*)&d3_SceneLightingVec));
 	vfs_WriteInt(s, d3_FogColor);
 	vfs_WriteInt32(s, (*(int*)&g_10425fc));
 	vfs_WriteInt32(s, (*(int*)&g_104329c));
@@ -66,10 +66,10 @@ void __cdecl d3_SaveSceneFile(char* name, void* stream)
 			vfs_WriteInt32(s, *(int*)&((D3_SCENE_SLOT*)g_1041d80)[i].pal[j].f8);
 		}
 	}
-	d3_VisitSceneObjects(g_67a370, 0, 0x18, (void*) d3_WriteSceneObjectCallback, s);
+	d3_VisitSceneObjects(d3_ActiveScene, 0, 0x18, (void*) d3_WriteSceneObjectCallback, s);
 	vfs_WriteByte(s, 0);
 	if (stream == 0) {
 		CloseVfsStream(s);
 	}
-	g_6b86d4--;
+	d3_SceneRenderLock--;
 }

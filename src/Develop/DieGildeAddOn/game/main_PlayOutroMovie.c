@@ -19,9 +19,9 @@ extern void (__stdcall* g_662264)(int);
 extern int g_7747d4, main_LoopFlags, g_1040494, d2_ScreenHeight, main_Instance;
 typedef void* HWND;
 extern HWND g_774940;
-extern float g_678158;
-extern unsigned char g_772d10;
-extern char g_14cf950;
+extern float msx_MasterFadeTarget;
+extern unsigned char d3snd_AmbientEnabled;
+extern char io_LastKeyScancode;
 
 /* ADDRESS: GOLDTL 0x005448e0 */
 void __cdecl main_PlayOutroMovie(void)
@@ -38,14 +38,14 @@ void __cdecl main_PlayOutroMovie(void)
 	fcn_004c2d90(0.0f, 0x3e8);
 	h = d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, (char*) 0x67d67c, 0x5a, 1);
 	for (;;) {
-		if ((*h & 4) && !(g_678158 >= 0.0f)) {
+		if ((*h & 4) && !(msx_MasterFadeTarget >= 0.0f)) {
 			break;
 		}
 		main_RunFrameLoop(0, main_LoopFlags);
 	}
 	b = buf;
-	saved = g_772d10;
-	g_772d10 = 0;
+	saved = d3snd_AmbientEnabled;
+	d3snd_AmbientEnabled = 0;
 	sprintf(b, (char*) 0x6a4538, (char*) 0x6a3658);
 	*(int*) 0x6b5c90 = 1;
 	io_PollKeyboardInput();
@@ -66,12 +66,12 @@ void __cdecl main_PlayOutroMovie(void)
 	io_PollKeyboardInput();
 	vol = (float) *(unsigned char*) 0x7766a2;
 	*(int*) 0x6b5c90 = 0;
-	g_14cf950 = 0;
+	io_LastKeyScancode = 0;
 	fcn_004c2d90(vol * (1.0f / 127.0f), 0x3e8);
 	if (*(int*) 0x77492c == 0) {
-		g_772d10 = (unsigned char) saved;
+		d3snd_AmbientEnabled = (unsigned char) saved;
 		ShutdownVideo();
 	} else {
-		g_772d10 = (unsigned char) saved;
+		d3snd_AmbientEnabled = (unsigned char) saved;
 	}
 }

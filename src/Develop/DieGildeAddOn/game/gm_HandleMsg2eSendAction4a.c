@@ -18,7 +18,7 @@ typedef struct Kind {
 extern pos14_7f4c00 gm_GameTime;
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -64,7 +64,7 @@ int __cdecl gm_HandleMsg2eSendAction4a(int* request)
 	chosen = ents[gm_RandomMod(n)];
 	kind = &((Kind*)lpGebaeudePROT)[chosen[0]];
 	for (i = 0; i < 768; i++) {
-		rec = g_7f4ca0 + i * 540;
+		rec = gm_EntitySlotTable + i * 540;
 		if (rec[2] == 0 && *(unsigned char**) (rec + 0x16c) == chosen) {
 			if (gm_CalcEntityFavor(*e, i, 1) < lim)
 				goto fail;
@@ -81,7 +81,7 @@ int __cdecl gm_HandleMsg2eSendAction4a(int* request)
 		*(int*) (message + 0xc) = v;
 		message[0x36] = 1;
 		*(int*) (message + 0x5c) = v;
-		*(int*) (message + 8) = *(int*) (g_7f4ca0 + g_774970 * 540 + 4);
+		*(int*) (message + 8) = *(int*) (gm_EntitySlotTable + gm_LocalPlayerSlot * 540 + 4);
 		*(pos14_7f4c00*) (message + 0x28) = (*(pos14_7f4c00*)&gm_GameTime);
 		*(short*) (message + 0x64) = *(unsigned short*) (request + 1) + 0x12e7;
 		*(int*) (message + 0x58) = *(int*) (e + 2);

@@ -1,7 +1,7 @@
 #include <math.h>
 #include <stdlib.h>
 
-extern int g_67a370;
+extern int d3_ActiveScene;
 
 void __cdecl d3_TransformPoint(char*, char*, float*);
 char __cdecl d3sm_SampleHeight(char*, float*, int*, int*, float*);
@@ -34,7 +34,7 @@ unsigned int __cdecl d3_FindGridCellOutsideRadius(char* originNode, int* outColu
 	int miny;
 	int span;
 
-	m = *(char**) ((char*) g_67a370 + 0xb0);
+	m = *(char**) ((char*) d3_ActiveScene + 0xb0);
 	best1 = 1e8f;
 	best2 = 0.0f;
 	x1 = 0;

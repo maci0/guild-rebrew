@@ -13,8 +13,8 @@ void __cdecl d2_ShowLagerOptions(char*, int);
 void __cdecl d2_OpenMeisterbriefDialog(char*);
 void __cdecl d3_SelectTavernCardTableCity(void);
 
-extern int g_7746d8;
-extern char* g_7746a0;
+extern int d2_SelectedEntityUiFlags;
+extern char* sv_ClickedObjekt;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_14abb60;
 
@@ -76,17 +76,17 @@ ready:
 
 	for (;;) {
 		d2_OpenContactEinkaufPanel(app);
-		if ((g_7746d8 & 0x200) != 0) {
+		if ((d2_SelectedEntityUiFlags & 0x200) != 0) {
 			first = RegisterStatusText(g_6a956c, g_14ad100, 0x15);
 			second = RegisterStatusText(g_6a9580, g_14ad0f0, 0xe);
 			third = RegisterStatusText(g_6a9924, g_14a7d28, 0x16);
 			fourth = RegisterStatusText(name, g_14abb60, 0x16);
 		}
-		active = g_7746a0;
+		active = sv_ClickedObjekt;
 		if (active != 0) {
 			if (active == first) {
 				d2_OpenTransportPanel(app);
-				active = g_7746a0;
+				active = sv_ClickedObjekt;
 			}
 			if (active == second) {
 				d2_ShowLagerOptions(app, *(int*) (app + 0x5d));

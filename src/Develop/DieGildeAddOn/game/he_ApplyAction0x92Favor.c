@@ -8,7 +8,7 @@ struct s_7f4ca0 {
 	char pad2[0x219];
 };
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 
 
@@ -32,9 +32,9 @@ void __cdecl he_ApplyAction0x92Favor(char* o)
 		if (x != 0) {
 			gv_SendExtendProductionTime(x, e, *(int*) (o + 0xb0), *(unsigned char*) (o + 0xb4),
 			             *(short*) (o + 0xbc), *(int*) (o + 0xb8));
-			r = &((struct s_7f4ca0*)g_7f4ca0)[*(unsigned short*) (e + 0x27)];
-			if (x != (char*) r && (((struct s_7f4ca0*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].kind == 6 ||
-			                       ((struct s_7f4ca0*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].kind == 7)) {
+			r = &((struct s_7f4ca0*)gm_EntitySlotTable)[*(unsigned short*) (e + 0x27)];
+			if (x != (char*) r && (((struct s_7f4ca0*)gm_EntitySlotTable)[*(unsigned short*) (e + 0x27)].kind == 6 ||
+			                       ((struct s_7f4ca0*)gm_EntitySlotTable)[*(unsigned short*) (e + 0x27)].kind == 7)) {
 				a = *(int*) (o + 0xb0);
 				b = *(int*) (o + 0xb8);
 				he_NotifyFriedhofEvent0x414f(r, x, e, a, b, (int) (b * g_6652d8[a]));

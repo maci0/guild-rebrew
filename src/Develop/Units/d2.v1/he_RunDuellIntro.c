@@ -17,12 +17,12 @@ typedef struct {
 } DUELL_TILE_VIEW;
 
 extern pos14_7f4c00 gm_GameTime;
-extern char* g_77255c;
+extern char* d2_CurrentWindow;
 extern int d2_CurrentWindowId;
-extern char* g_1015ea0;
+extern char* d2_Controls;
 extern int g_100f884;
-extern int g_100f1dc;
-extern char g_774964;
+extern int d2_DialogButtonAction;
+extern char gm_InWorldHud;
 extern char* g_7747b8;
 
 int __cdecl he_StartHandlungSearch(int, int, int);
@@ -70,12 +70,12 @@ void __cdecl he_RunDuellIntro(char* o)
 			if (g_100f884 != *(int*) (*(int*) (o + 0x74) + 8)) {
 				return;
 			}
-			if (g_100f1dc == -1) {
+			if (d2_DialogButtonAction == -1) {
 				return;
 			}
-			if (g_100f1dc == 2) {
+			if (d2_DialogButtonAction == 2) {
 				he_AcceptDuell(entity, v4, v6);
-			} else if (g_100f1dc == 1) {
+			} else if (d2_DialogButtonAction == 1) {
 				he_DeclineDuell(entity, v4, (unsigned char*) v6);
 			}
 			d2_CloseActionPopup(o);
@@ -84,7 +84,7 @@ void __cdecl he_RunDuellIntro(char* o)
 		case 0:
 			d2_CreateActionPopupSlot(o, 0, 0, "_DUELL_INTRO_EVENT_DUELLANTEN_HS_00", 0x5ec);
 			if (*(int*) (o + 0x74) != 0) {
-				if (g_774964 != 2) {
+				if (gm_InWorldHud != 2) {
 					sb_PlayVoice(g_7747b8, "NeueMessage_s_01", 1, 0x3f, 0x7f, 0, 0);
 				}
 				d2_SetForm(*(int*) (*(int*) (o + 0x74) + 8), 1);
@@ -92,10 +92,10 @@ void __cdecl he_RunDuellIntro(char* o)
 				d2_SetForm(*(int*) (*(int*) (o + 0x74) + 8), 2);
 				s.e = v4;
 				if (d2_BuildPersonStatusDesc(&s) != 0) {
-					d2_DrawPersonTile(*(int*) (g_77255c + 0xc) / 2 - 0x28, 0, d2_CurrentWindowId, &s);
-					((D2_CONTROL_TL*) g_1015ea0)[s.tile].value_05c = 1;
-					((D2_CONTROL_TL*) g_1015ea0)[s.tile].flags_1d0 = 3;
-					((D2_CONTROL_TL*) g_1015ea0)[s.tile].associated_object = s.e;
+					d2_DrawPersonTile(*(int*) (d2_CurrentWindow + 0xc) / 2 - 0x28, 0, d2_CurrentWindowId, &s);
+					((D2_CONTROL_TL*) d2_Controls)[s.tile].value_05c = 1;
+					((D2_CONTROL_TL*) d2_Controls)[s.tile].flags_1d0 = 3;
+					((D2_CONTROL_TL*) d2_Controls)[s.tile].associated_object = s.e;
 				}
 				d2_SetForm(*(int*) (*(int*) (o + 0x74) + 8), 3);
 				io_AppendText(0x1d6b, (int) *(unsigned short*) (entity + 0xb4),

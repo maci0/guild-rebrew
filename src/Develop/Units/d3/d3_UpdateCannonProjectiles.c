@@ -15,7 +15,7 @@
 #include "Develop/client_types.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
-#define SLOTS ((D3_PROJECTILE_SLOT*) g_7731b8)
+#define SLOTS ((D3_PROJECTILE_SLOT*) gm_CannonTowers)
 
 typedef struct Sefde0Entry {
 	int f00[12];
@@ -39,7 +39,7 @@ typedef struct D3_PROJECTILE_SLOT {
 	int* data;
 } D3_PROJECTILE_SLOT;
 
-extern int g_7731b8[];
+extern int gm_CannonTowers[];
 extern pos14_7f4c00 g_772fe8;
 extern pos14_7f4c00 gm_GameTime;
 extern float g_6652c4;

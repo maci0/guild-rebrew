@@ -14,7 +14,7 @@ extern int gm_NextEntityId;
 extern char g_14a6558[];
 extern char* lpGebaeudeINST;
 extern int lpObjektePROT;
-extern char g_6b5c60;
+extern char str_empty;
 extern char s_699858[];
 extern char s_69983c[];
 extern char s_69982c[];
@@ -118,7 +118,7 @@ char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 	geb[0x5c] = 0x64;
 	*(int*) (geb + 0x95) = -1;
 	if (owner != 0xffff) {
-		if (((ENTITY_RECORD*) g_7f4ca0)[owner].entity_state == 6) {
+		if (((ENTITY_RECORD*) gm_EntitySlotTable)[owner].entity_state == 6) {
 			hp_AddProdSetting(geb);
 		}
 	}
@@ -154,7 +154,7 @@ char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 		strcpy(geb + 5, ((BuildingNames5043d0*) g_14a6558)[type].name);
 		i = 0;
 	} else {
-		geb[5] = g_6b5c60;
+		geb[5] = str_empty;
 		i = 0;
 	}
 	for (; i < 12; i++, alias++) {
@@ -225,7 +225,7 @@ char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 	case 7:
 		*(pos14_7f4c00*) (geb + 0x69) = gm_GameTime;
 		if (owner != 0xffff) {
-			*(int*) (geb + 0x65) = ((ENTITY_RECORD*) g_7f4ca0)[owner].entity_id;
+			*(int*) (geb + 0x65) = ((ENTITY_RECORD*) gm_EntitySlotTable)[owner].entity_id;
 		} else {
 			*(int*) (geb + 0x65) = -1;
 		}

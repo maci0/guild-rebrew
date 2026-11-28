@@ -1,4 +1,4 @@
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 #include <string.h>
 
 int __cdecl fcn_0042e410(int);
@@ -18,7 +18,7 @@ unsigned int __cdecl gm_HandleMsg3eGrantBonus(void *request)
     int h;
     unsigned int len;
 
-    h = gm_ConvertUnitsToAmount((fcn_0042e410(5) & 0xffff) + 1, g_773d75);
+    h = gm_ConvertUnitsToAmount((fcn_0042e410(5) & 0xffff) + 1, gm_ActiveTownIndex);
     entity = gm_LookupEntityRecordById(*(int *)request);
     if (entity == 0)
     {
@@ -35,6 +35,6 @@ unsigned int __cdecl gm_HandleMsg3eGrantBonus(void *request)
     io_FormatTextBuffer(buf, *(unsigned short *)((char *)request + 4) + 0x12e7, h);
     len = strlen(buf);
     he_PostEntityMessage(*(int *)((char *)entity + 4), *(int *)((char *)entity + 4), buf, 0x100 < len, 0x603, 0);
-    cm_RequestTransferCurrencyNoKill(-1, *(int *)request, g_773d75, h);
+    cm_RequestTransferCurrencyNoKill(-1, *(int *)request, gm_ActiveTownIndex, h);
     return 0;
 }

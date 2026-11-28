@@ -1,4 +1,4 @@
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 
 void* __cdecl m_alloc(int size, char* tag);
 void __cdecl d3_CreateSkyDomeBuffers(char* p);
@@ -14,7 +14,7 @@ char* __cdecl d3_CreateSky(int a, int b, int c)
 		*(int*) (p + 8) = -1;
 		*(int*) (p + 0x24) = 0;
 		*(int*) (p + 0x18) = a;
-		*(int*) (p + 0x28) = g_6b7fac;
+		*(int*) (p + 0x28) = gm_GameTicks;
 		*(int*) (p + 0x2c) = 0;
 		*(int*) (p + 0x1c) = b;
 		*(int*) (p + 0x20) = c;

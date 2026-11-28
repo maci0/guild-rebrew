@@ -1,5 +1,5 @@
-extern float g_67db50;
-extern float g_67db54;
+extern float ai_DifficultyFactor;
+extern float ai_DifficultyRate;
 
 
 
@@ -14,7 +14,7 @@ void __cdecl cm_RequestCopyEntityData(int targetId, int sourceId, int value, int
 	*(int*) (buf + 0x14) = sourceId;
 	*(int*) (buf + 0x18) = value;
 	*(int*) (buf + 0x1c) = mode;
-	*(int*) (buf + 0x20) = (*(int*)&g_67db54);
-	*(int*) (buf + 0x24) = (int) g_67db50;
+	*(int*) (buf + 0x20) = (*(int*)&ai_DifficultyRate);
+	*(int*) (buf + 0x24) = (int) ai_DifficultyFactor;
 	cm_EnqueueClientPacket(buf);
 }

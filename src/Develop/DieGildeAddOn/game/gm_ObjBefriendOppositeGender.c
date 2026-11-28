@@ -12,7 +12,7 @@
 
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern __int64 g_666018;
+extern __int64 gm_TargetPersonTypeMask;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -39,9 +39,9 @@ int __cdecl gm_ObjBefriendOppositeGender(char* ent, int* arg)
 		memset(desc + 7, 0xff, 8 * sizeof(int));
 		io_FormatTextBuffer(name, 0x9c);
 		desc[0] = 1;
-		desc[1] = ((((ENTITY_RECORD*)g_7f4ca0)[g_774970].gender != 0) + 1) | 0x400;
+		desc[1] = ((((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot].gender != 0) + 1) | 0x400;
 		desc[4] = 6;
-		desc[2] = (*(int*)&g_666018);
+		desc[2] = (*(int*)&gm_TargetPersonTypeMask);
 		desc[3] = g_66601c;
 		obj = d2_OpenTargetPicker(desc, name, 0, 0);
 		if (obj == 0) {

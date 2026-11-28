@@ -49,7 +49,7 @@ int __cdecl he_TryTriggerAction0x9b(int id, ENTITY_RECORD* me)
 	if (he_HasNoActiveAction0x9b(me) != 0) {
 		e = gm_StartFilteredEntitySearch(1, 1, id);
 		if (e != 0) {
-			h = &((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (e + 0x27)];
+			h = &((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (e + 0x27)];
 			a = gm_GetEntitySkill((char*) h, 2);
 			b = gm_GetEntitySkill((char*) me, 2);
 			if (a - b * 0.5f + gm_RandomFloat01() * 0.5 < 0.8) {

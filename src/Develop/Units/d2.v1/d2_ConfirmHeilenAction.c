@@ -17,7 +17,7 @@ typedef struct {
 } D2_HEILEN_MSG;
 
 extern void* ch_ContextCharacters[];
-extern int g_7f4ca4[];
+extern int gm_EntityIdField[];
 extern pos14_7f4c00 gm_GameTime;
 
 int __cdecl d2_CheckOwnerBlocked(void*);
@@ -28,7 +28,7 @@ void __cdecl d3snd_PlayWorkerOrderVoice(void);
 void __cdecl fcn_005305a0(void);
 void __cdecl d2_RestoreHudAfterDialog(void);
 
-extern char g_7746cc[];
+extern char sv_SelectedBuilding[];
 /* ADDRESS: GOLDTL 0x0059dcf0 */
 void __cdecl d2_ConfirmHeilenAction(void* entity)
 {
@@ -53,10 +53,10 @@ void __cdecl d2_ConfirmHeilenAction(void* entity)
 		message.v04 = 0x6c;
 		idx = *(unsigned short*) ((char*) entity + 0x27);
 		message.v36 = 1;
-		message.v08 = g_7f4ca4[idx * 0x87];
+		message.v08 = gm_EntityIdField[idx * 0x87];
 		message.v0c = *(int*) ((char*) entity + 1);
 		message.v28 = gm_GameTime;
-		selection = *(void**) g_7746cc;
+		selection = *(void**) sv_SelectedBuilding;
 		message.v58 = *(int*) ((char*) entry + 4);
 		message.v70 = (selection != 0 && *(unsigned short*) selection != 0xfd) ? *(int*) ((char*) selection + 2) : -1;
 		cm_SendCopyEntityData(&message);

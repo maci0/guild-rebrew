@@ -1,4 +1,4 @@
-extern const float g_662d40[3];
+extern const float d3_UnitAxisVectors[3];
 extern void __cdecl d3_TransformPoint(char*, char*, float*);
 extern void __cdecl d3_NormalizeVector(float*);
 #include <math.h>
@@ -42,7 +42,7 @@ void __cdecl d3_EmitOrientedNodeEffect(char* effectNode)
 	dir[1] = 0.0f;
 	dir[2] = base[2] - pos[2];
 	d3_NormalizeVector(dir);
-	dot = g_662d40[2] * dir[2] + g_662d40[1] * dir[1] + g_662d40[0] * dir[0];
+	dot = d3_UnitAxisVectors[2] * dir[2] + d3_UnitAxisVectors[1] * dir[1] + d3_UnitAxisVectors[0] * dir[0];
 	angles[1] = (float) acos(dot < -1.0 || !(dot < 1.0) ? (dot < -1.0 ? -1.0 : 1.0) : dot);
 	if (dir[0] > 0.0f)
 		angles[1] = -angles[1];

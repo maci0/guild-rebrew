@@ -16,7 +16,7 @@ int __cdecl gm_CompareGameTime(void*, void*);
 void __cdecl gm_AddTime(void*, int, int, int);
 
 extern pos14_7f4c00 gm_GameTime;
-extern float g_6628a0;
+extern float flt_1_0;
 /* ADDRESS: GOLDTL 0x0054b450 */
 void __cdecl he_RunSkillDuelEvent(char* a0)
 {

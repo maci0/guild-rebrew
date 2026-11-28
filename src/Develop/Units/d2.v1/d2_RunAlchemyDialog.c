@@ -1,11 +1,11 @@
 extern int d2_CurrentWindowId;
-extern int g_100f1dc;
-extern int g_14ce8e0;
-extern int g_774654;
+extern int d2_DialogButtonAction;
+extern int io_RightButtonReleased;
+extern int d2_DialogCloseRequested;
 #include <string.h>
 #include "Develop/Units/d2.v1/d2_gui.h"
 
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 int __cdecl gm_FindOrAllocHeadSet(int, int);
 void * __cdecl ahm_GetDrawSlot(int);
 int __cdecl ahm_CalcRecipeScore(void *);
@@ -68,7 +68,7 @@ void __cdecl d2_RunAlchemyDialog(int a0)
 		}
 	}
 	if (count == 0) {
-		io_FormatTextBuffer(msg, 0x404a, 0x868060 + g_773d75 * 0x2f4);
+		io_FormatTextBuffer(msg, 0x404a, 0x868060 + gm_ActiveTownIndex * 0x2f4);
 		d2_ShowGreenMessageBox(*(void **)0x14b5404, msg, 0);
 		d3_EndCameraAndUiMode();
 		return;
@@ -95,7 +95,7 @@ void __cdecl d2_RunAlchemyDialog(int a0)
 			item[i] = d2_AddElementToWindow(5, y - 0x19, 0x6c7, keep);
 			fields = (int *)((char *)pt[0] + 0x34);
 			item[i] = d2_AddElementToWindow(7, y - 0x17, fields[i % 2] + 0x639, keep);
-			ent = (int *)((unsigned int)g_1015ea0 + item[i] * 0x2f4);
+			ent = (int *)((unsigned int)d2_Controls + item[i] * 0x2f4);
 			ent[0x5c / 4] = 1;
 			d2_AddToRadioGroup(idx, item[i]);
 			r = rec[off / 4];
@@ -103,45 +103,45 @@ void __cdecl d2_RunAlchemyDialog(int a0)
 			io_FormatTextBuffer(buf, 0x68b3f8, *(unsigned int *)(0x14b5908 + *(int *)(rp + 0x10) * 4), *(unsigned int *)(0x14b596c + *(int *)(rp + 0x14) * 4));
 			id = d2_EqualizeWindowButtonWidths(0, y - 0x30, buf, keep);
 			base = *(int *)(0x1015f4c + keep * 0x3cc);
-			ent = (int *)((unsigned int)g_1015ea0 + id * 0x2f4);
+			ent = (int *)((unsigned int)d2_Controls + id * 0x2f4);
 			ent[0x18 / 4] = base;
 			ent[0x6c / 4] = 1;
 			d2_SetElementFont(id, 0x54);
 			io_FormatTextBuffer(buf, 0x679060, *(unsigned int *)0x14b58e8);
 			id = d2_EqualizeWindowButtonWidths(0x50, y - 0x1a, buf, keep);
-			ent = (int *)((unsigned int)g_1015ea0 + id * 0x2f4);
+			ent = (int *)((unsigned int)d2_Controls + id * 0x2f4);
 			ent[0x18 / 4] = *(int *)(0x1015f4c + keep * 0x3cc) - 0x50;
 			d2_SetElementFont(id, 0x54);
 			d2_DrawSegmentedBar(0x8c, y - 0x1a, *(unsigned char *)(rp + 4), 0x4df);
 			io_FormatTextBuffer(buf, 0x679060, *(unsigned int *)0x14b58ec);
 			id = d2_EqualizeWindowButtonWidths(0x50, y - 0xd, buf, keep);
-			ent = (int *)((unsigned int)g_1015ea0 + id * 0x2f4);
+			ent = (int *)((unsigned int)d2_Controls + id * 0x2f4);
 			ent[0x18 / 4] = *(int *)(0x1015f4c + keep * 0x3cc) - 0x50;
 			d2_SetElementFont(id, 0x54);
 			d2_DrawSegmentedBar(0x8c, y - 0xd, *(unsigned char *)(rp + 5), 0x4df);
 			io_FormatTextBuffer(buf, 0x679060, *(unsigned int *)0x14b58f0);
 			id = d2_EqualizeWindowButtonWidths(0x50, y, buf, keep);
-			ent = (int *)((unsigned int)g_1015ea0 + id * 0x2f4);
+			ent = (int *)((unsigned int)d2_Controls + id * 0x2f4);
 			ent[0x18 / 4] = *(int *)(0x1015f4c + keep * 0x3cc) - 0x50;
 			d2_SetElementFont(id, 0x54);
 			d2_DrawSegmentedBar(0x8c, y, *(unsigned char *)(rp + 6), 0x4df);
 			io_FormatTextBuffer(buf, 0x679060, *(unsigned int *)0x14b58f4);
 			id = d2_EqualizeWindowButtonWidths(0x50, y + 0xd, buf, keep);
-			ent = (int *)((unsigned int)g_1015ea0 + id * 0x2f4);
+			ent = (int *)((unsigned int)d2_Controls + id * 0x2f4);
 			ent[0x18 / 4] = *(int *)(0x1015f4c + keep * 0x3cc) - 0x50;
 			d2_SetElementFont(id, 0x54);
 			d2_DrawSegmentedBar(0x8c, y + 0xd, *(unsigned char *)(rp + 7), 0x4df);
 			io_FormatTextBuffer(buf, 0x403f, *(unsigned char *)(rp + 8));
 			id = d2_EqualizeWindowButtonWidths(0xfa, y - 0x1b, buf, keep);
-			ent = (int *)((unsigned int)g_1015ea0 + id * 0x2f4);
+			ent = (int *)((unsigned int)d2_Controls + id * 0x2f4);
 			ent[0x18 / 4] = *(int *)(0x1015f4c + keep * 0x3cc) - 0xfa;
 			io_FormatTextBuffer(buf, 0x4040, ahm_CalcRecipeScore(r));
 			id = d2_EqualizeWindowButtonWidths(0xfa, y - 0xe, buf, keep);
-			ent = (int *)((unsigned int)g_1015ea0 + id * 0x2f4);
+			ent = (int *)((unsigned int)d2_Controls + id * 0x2f4);
 			ent[0x18 / 4] = *(int *)(0x1015f4c + keep * 0x3cc) - 0xfa;
 			io_FormatTextBuffer(buf, 0x4041, *(int *)(rp + 0xc) * 2 + 0x9a8);
 			id = d2_EqualizeWindowButtonWidths(0xfa, y - 1, buf, keep);
-			ent = (int *)((unsigned int)g_1015ea0 + id * 0x2f4);
+			ent = (int *)((unsigned int)d2_Controls + id * 0x2f4);
 			ent[0x18 / 4] = *(int *)(0x1015f4c + keep * 0x3cc) - 0xfa;
 			off += 4;
 			y += 0x64;
@@ -150,24 +150,24 @@ void __cdecl d2_RunAlchemyDialog(int a0)
 	}
 	d2_SetForm(w, 3);
 	d2_CreateButtonRow(last, 0, pt, 2, *(int *)0x14b5428, *(int *)0x14b542c);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
 		r = (void *)pt[0];
 		exp = *(unsigned int *)(0x102cbc8 + idx * 0x8c);
 		d2_SetElementEnabled(r, (exp != 0xffffffff) && (i != 0));
-		if (g_14ce8e0) {
-			g_774654 = 1;
-		} else if (g_100f1dc != -1) {
+		if (io_RightButtonReleased) {
+			d2_DialogCloseRequested = 1;
+		} else if (d2_DialogButtonAction != -1) {
 			if (*(unsigned int *)0x67d370 == pt[0]) {
 				for (id = 0; id < 3; id++) {
 					if (exp == (unsigned int)id) {
 						if (d2_DispatchAlchemyOrder(a0, rec[id], val[id])) {
-							g_774654 = 1;
+							d2_DialogCloseRequested = 1;
 						}
 					}
 				}
 			} else if (*(unsigned int *)0x67d370 == pt[1]) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	} while (main_RunFrameLoop(0x5848b0, 0x677c7));

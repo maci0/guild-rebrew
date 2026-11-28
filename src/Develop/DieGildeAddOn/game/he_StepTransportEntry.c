@@ -5,18 +5,18 @@ extern char s_6a6340[];
 extern char s_6a6354[];
 extern char s_6a6368[];
 extern char s_68b1e0[];
-extern char g_868060[];
+extern char gm_TownTable[];
 extern int d3_CurrentContextIndex;
 extern int g_774650;
-extern unsigned char* g_7746c8;
-extern int g_7e35c0[];
+extern unsigned char* d2_InteriorBuilding;
+extern int main_FrameHandlerStack[];
 /* building prototype row (0x24d bytes); only the leading type byte is read here. */
 typedef struct {
 	unsigned char type;
 	char pad1[0x24c];
 } GebProt_55e4a0;
 extern unsigned char* lpGebaeudePROT;
-extern char* g_1043370[];
+extern char* tp_ch_PathGrid[];
 extern unsigned char g_slot_table[2];
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 void* __cdecl gm_StartFilteredEntitySearch(int a, ...);
@@ -83,7 +83,7 @@ void __cdecl he_StepTransportEntry(char* ev)
 		n7 = init_AllocateGebaeudeSceneSlot(v8);
 		d3_SelectSceneContext(n7, 1);
 		if (he_PickRandomSceneObject(0)) {
-			idx = g_1043370[n7 * 247];
+			idx = tp_ch_PathGrid[n7 * 247];
 			if (idx != 0 && d3sm_SampleHeight(idx, position, (int*) &cellX, (int*) &cellY, (float*) v10)) {
 				cm_RequestWalkOnPath(*(int*) (e + 2), cellX, cellY, n7);
 			}
@@ -91,9 +91,9 @@ void __cdecl he_StepTransportEntry(char* ev)
 		cm_RequestChangeBits(*(int*) (e + 2), 0x13, 1, 0, 0x40);
 		if (*(char*) v8 == 0x47) {
 			io_FormatTextBuffer(buf, 0x1c3b, 1, 0x1c39,
-				*(int*) (v8 + 0x65) * 0x2f4 + (int) g_868060);
-			if ((*(int*) ((char*) g_7e35c0 + g_774650 * 8) != 0x5ba910
-				|| g_7746c8 != v8) && !(*(unsigned char*) (e + 0x20) & 1)
+				*(int*) (v8 + 0x65) * 0x2f4 + (int) gm_TownTable);
+			if ((*(int*) ((char*) main_FrameHandlerStack + g_774650 * 8) != 0x5ba910
+				|| d2_InteriorBuilding != v8) && !(*(unsigned char*) (e + 0x20) & 1)
 				&& !*(char*) (ev + 0xf2)) {
 				he_MessageBoxQuickjump(
 					*(int*) ((char*) g_slot_table + 4
@@ -104,10 +104,10 @@ void __cdecl he_StepTransportEntry(char* ev)
 		}
 		else if (*v7 == 0x47) {
 			io_FormatTextBuffer(buf, 0x1c3d, 1, 0x1c39,
-				*(int*) (v7 + 0x65) * 0x2f4 + (int) g_868060,
+				*(int*) (v7 + 0x65) * 0x2f4 + (int) gm_TownTable,
 				*(unsigned short*) (v8 + 0x27), v8);
-			if ((*(int*) ((char*) g_7e35c0 + g_774650 * 8) != 0x5ba910
-				|| g_7746c8 != v8) && !(*(unsigned char*) (e + 0x20) & 1)
+			if ((*(int*) ((char*) main_FrameHandlerStack + g_774650 * 8) != 0x5ba910
+				|| d2_InteriorBuilding != v8) && !(*(unsigned char*) (e + 0x20) & 1)
 				&& !*(char*) (ev + 0xf2)) {
 				he_MessageBoxQuickjump(
 					*(int*) ((char*) g_slot_table + 4
@@ -155,8 +155,8 @@ void __cdecl he_StepTransportEntry(char* ev)
 			else {
 				io_FormatTextBuffer(buf, 0x1c44, v8);
 			}
-			if ((*(int*) ((char*) g_7e35c0 + g_774650 * 8) != 0x5ba910
-				|| g_7746c8 != v8) && !(*(unsigned char*) (e + 0x20) & 1)
+			if ((*(int*) ((char*) main_FrameHandlerStack + g_774650 * 8) != 0x5ba910
+				|| d2_InteriorBuilding != v8) && !(*(unsigned char*) (e + 0x20) & 1)
 				&& !*(char*) (ev + 0xf2)) {
 				if (key[0]) {
 					he_MessageBoxQuickjump(

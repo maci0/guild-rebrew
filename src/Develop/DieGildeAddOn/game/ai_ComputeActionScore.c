@@ -1,8 +1,8 @@
 #include "Develop/DieGildeAddOn/game/client_method_registry.h"
-extern AM_METHOD g_1008540[];
+extern AM_METHOD am_Methods[];
 extern float g_662918;
 extern float g_662914;
-extern const float g_662cf8;
+extern const float flt_100_0;
 extern float g_662c98;
 int __cdecl gm_SumStraftatSeverity(int);
 
@@ -31,14 +31,14 @@ int __cdecl ai_ComputeActionScore(float* o0, float* o1, int idx, char* s, int* p
 	}
 	*o1 = 0.0f;
 	*o0 = 0.0f;
-	method = &g_1008540[idx];
+	method = &am_Methods[idx];
 	if ((unsigned char) method->flags & *(unsigned char*) (s + 0x218)) {
 		v10 = g_662c98;
 		v8 = g_662914;
 		found = 1;
 	} else {
 		v10 = g_662914;
-		v8 = g_662cf8;
+		v8 = flt_100_0;
 		found = 0;
 	}
 	t = (char*) &method->effects[0].value;

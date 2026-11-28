@@ -7,11 +7,11 @@ int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl he_HasActiveGrabpflege(char*, int, int);
 void __cdecl d2_UpdateWindowScroll(int);
 
-extern void* g_1015ea0;
+extern void* d2_Controls;
 extern char g_1016198[];
 extern int g_665f68[4];
 extern int g_665f58[4];
-extern char g_6811b0[];
+extern char str_dollar_C[];
 
 typedef struct SlotItem {
 	int id;                     /* 0x00 */
@@ -57,9 +57,9 @@ void __cdecl d2_PopulateBuildingSlotList(char* building, DialogState* st, unsign
 		saved = *(int*) (g_1016198 + st->slot * 0x3cc);
 	}
 	d2_SetForm(st->handle, 2);
-	io_AppendText((int) g_6811b0);
+	io_AppendText((int) str_dollar_C);
 	d2_SetForm(st->handle, 4);
-	io_AppendText((int) g_6811b0);
+	io_AppendText((int) str_dollar_C);
 	{
 		int id2;
 		d2_CreateWindowScrollbar(0, 0, st->owner, st->slot, 0x35, &id2, &id1, (int*) &type);
@@ -77,8 +77,8 @@ void __cdecl d2_PopulateBuildingSlotList(char* building, DialogState* st, unsign
 			if (he_HasActiveGrabpflege(building, item->id, de->kind)) {
 				d2_AddElementToWindow(0xf, y + 7, 0x7de, st->slot);
 			}
-			*(int*) ((char*) g_1015ea0 + 0x5c + de->btn * 0x2f4) = 1;
-			*(int*) ((char*) g_1015ea0 + 0x1d0 + de->btn * 0x2f4) = 3;
+			*(int*) ((char*) d2_Controls + 0x5c + de->btn * 0x2f4) = 1;
+			*(int*) ((char*) d2_Controls + 0x1d0 + de->btn * 0x2f4) = 3;
 			item = (SlotItem*) FindSlotEntryFiltered(0, building, item, 0, st->type);
 			count++;
 			y += 0x35;
@@ -88,8 +88,8 @@ void __cdecl d2_PopulateBuildingSlotList(char* building, DialogState* st, unsign
 	if (st->selected >= count) {
 		st->selected = 0;
 	}
-	*(int*) ((char*) g_1015ea0 + 0x3c + st->selected * 0x2f4) = 1;
-	*(int*) ((char*) g_1015ea0 + 0x38 + st->entries[st->selected].btn * 0x2f4) = 1;
+	*(int*) ((char*) d2_Controls + 0x3c + st->selected * 0x2f4) = 1;
+	*(int*) ((char*) d2_Controls + 0x38 + st->entries[st->selected].btn * 0x2f4) = 1;
 	if (count < 0x10) {
 		for (i = count; i < 0x10; i++) {
 			de = &st->entries[i];

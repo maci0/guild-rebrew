@@ -19,7 +19,7 @@ typedef struct
 // SIZE 0x2f4
 
 extern UI_FIELD g_102d140[];
-extern char* g_772500;
+extern char* d2_FileObjTable;
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern int d2_ScreenHeight;
 extern int g_1040494;
@@ -57,8 +57,8 @@ int __cdecl d2_CreateField(int x, int y, int def, unsigned char flags)
 	f->y = y;
 	f->def = def;
 	f->idx = i;
-	f->w = ((D2_FIELD_RES_DEF*)g_772500)[def].w;
-	f->h = ((D2_FIELD_RES_DEF*)g_772500)[def].h;
+	f->w = ((D2_FIELD_RES_DEF*)d2_FileObjTable)[def].w;
+	f->h = ((D2_FIELD_RES_DEF*)d2_FileObjTable)[def].h;
 	f->f1c = 0;
 	f->f12c = 0;
 	f->max = 999;
@@ -85,20 +85,20 @@ int __cdecl d2_CreateField(int x, int y, int def, unsigned char flags)
 		f->max = f->max > 0x19 ? f->max : 0x19;
 	}
 	id = d2_AllocateElement();
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].kind) = 0x41;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].x) = f->x;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].y) = f->y;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].width) = f->w;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].height) = f->h;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_008) = def;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_088) = i;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].mode) = 2;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_top) = 0;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_bottom) = d2_ScreenHeight;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_left) = 0;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_right) = g_1040494;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].data) = (int) f;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].font) = d2_DefaultFont;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].kind) = 0x41;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].x) = f->x;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].y) = f->y;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].width) = f->w;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].height) = f->h;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].value_008) = def;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].value_088) = i;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].mode) = 2;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].clip_top) = 0;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].clip_bottom) = d2_ScreenHeight;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].clip_left) = 0;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].clip_right) = g_1040494;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].data) = (int) f;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].font) = d2_DefaultFont;
 	f->ent = id;
 	return id;
 }

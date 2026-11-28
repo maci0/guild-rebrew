@@ -6,22 +6,22 @@
 #pragma intrinsic(memcpy, memset)
 
 #include "Develop/client_types.h"
-extern Rec24_99f5a0 g_99f5a0;
+extern Rec24_99f5a0 gm_DisasterState;
 extern char g_99f6a0[];
 extern char g_99f620[];
-extern CRIME_GRID_CELL g_99ef80[9][8];
+extern CRIME_GRID_CELL gm_CrimeGrid[9][8];
 extern GRAPH_SAMPLE g_99ec20[16];
-extern char g_99f5e0[];
+extern char gm_CityStatsBuffer[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl gm_ResetCityStats(void)
 {
-	memset(&g_99f5a0, 0, 36);
+	memset(&gm_DisasterState, 0, 36);
 	memset(g_99f6a0, 0, 340);
 	memset(g_99f620, 0, 104);
-	memset(((char*)g_99ef80), 0, 1536);
+	memset(((char*)gm_CrimeGrid), 0, 1536);
 	memset(((char*)g_99ec20), 0, 320);
-	memset(g_99f5e0, 0, 40);
-	g_99f5a0.head = -1;
-	(*(int*)&g_773d4c) = 0;
+	memset(gm_CityStatsBuffer, 0, 40);
+	gm_DisasterState.head = -1;
+	(*(int*)&gm_CityPopulation) = 0;
 }

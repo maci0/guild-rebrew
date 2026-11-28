@@ -8,7 +8,7 @@ typedef struct {
 	char name[0x2f4];
 } Dyn;
 
-extern char g_868060[];
+extern char gm_TownTable[];
 
 char *__cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_HasActiveSpecialObject(char *, int);
@@ -74,9 +74,9 @@ int __cdecl gm_SabotageHandlungItem(int *msg)
 	cm_AppendPacketFieldDelta(1, 1, 0x12, &val);
 	cm_RequestChangeAttribute();
 	if (*b == 0x47) {
-		io_FormatTextBuffer(buf, *(unsigned short *) ((char *) msg + 4) + 0x12e7, ((Dyn*)g_868060)[*(int *) (b + 0x65)].name, ((Dyn*)g_868060)[0].name);
+		io_FormatTextBuffer(buf, *(unsigned short *) ((char *) msg + 4) + 0x12e7, ((Dyn*)gm_TownTable)[*(int *) (b + 0x65)].name, ((Dyn*)gm_TownTable)[0].name);
 	} else {
-		io_FormatTextBuffer(buf, *(unsigned short *) ((char *) msg + 4) + 0x12e7, ((Dyn*)g_868060)[0].name, ((Dyn*)g_868060)[*(int *) (a + 0x65)].name);
+		io_FormatTextBuffer(buf, *(unsigned short *) ((char *) msg + 4) + 0x12e7, ((Dyn*)gm_TownTable)[0].name, ((Dyn*)gm_TownTable)[*(int *) (a + 0x65)].name);
 	}
 	he_PostEntityMessage(*(int *) (p + 4), *(int *) (p + 4), buf, strlen(buf) > 0x100, 0x603, 0);
 	return 0;

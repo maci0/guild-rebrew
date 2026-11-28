@@ -36,11 +36,11 @@ typedef struct {
 
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_7f4ca4[];
+extern char gm_EntityIdField[];
 
 Entity_54fd60* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
@@ -72,17 +72,17 @@ void __cdecl he_RunDuellCutscene(Order_54fd60* o)
             if (b != 0) {
                 memset(msg, 0, sizeof(msg));
                 *(int*) (msg + 0x34) = a->id;
-                *(int*) (msg + 0x1c) = g_7f4c04;
+                *(int*) (msg + 0x1c) = gm_GameTimeHour;
                 msg[8] = 4;
                 msg[0x26] = 0xa2;
                 *(int*) (msg + 0x14) = -1;
                 msg[0x30] = 2;
-                *(int*) (msg + 0xc) = *(int*) (g_7f4ca4 + (unsigned short) g_774970 * 0x21c);
+                *(int*) (msg + 0xc) = *(int*) (gm_EntityIdField + (unsigned short) gm_LocalPlayerSlot * 0x21c);
                 *(int*) (msg + 0x38) = b->id;
                 *(int*) (msg + 0x18) = (*(int*) &gm_GameTime);
                 msg[0x7c] = 0;
-                *(int*) (msg + 0x20) = g_7f4c08;
-                *(short*) (msg + 0x24) = g_7f4c0c;
+                *(int*) (msg + 0x20) = gm_GameTimeSliceDword;
+                *(short*) (msg + 0x24) = gm_GameTimeTailWord;
                 gm_AddTime((Stamp_54fd60*) (msg + 0x18), 0, 0x1e, 0);
                 cm_EnqueueStagedPacket(msg);
             }

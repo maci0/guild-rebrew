@@ -10,7 +10,7 @@ typedef struct {
 	int f184;
 	char pad188[0x21c - 0x188];
 } Ent525670;
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 extern char* g_entity_type_table;
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 extern int __cdecl gm_LookupEntityRecordById(int);
@@ -24,7 +24,7 @@ extern void __cdecl d3_SelectSceneContext(int, int);
 extern void __cdecl gm_CountBuildingWorkers(char*);
 extern void __cdecl d3_UpdateBuildStageMeshes(char*);
 extern void __cdecl gm_ResetWarehouseStock(void);
-extern char *gm_CityEntity, *g_773d78;
+extern char *gm_CityEntity, *gm_MarketEntity;
 extern int ls_SaveVersion, g_773d8c;
 /* Reload the whole world state after a new game starts.  Every master record
  * of the type table is released and reallocated, the entity list is relinked
@@ -49,12 +49,12 @@ unsigned int __cdecl gm_RebuildLoadedReferences(void)
 	gm_CityEntity = (char*) gm_LookupEntityRecordById((int) gm_CityEntity);
 	if (!gm_CityEntity)
 		return 0;
-	g_773d78 = (char*) gm_StartFilteredEntitySearch(1, 5, 10);
+	gm_MarketEntity = (char*) gm_StartFilteredEntitySearch(1, 5, 10);
 	if (ls_SaveVersion >= 0x10017) {
 		for (p = (char*) 0x773db4; (int) p < 0x773dd4; p += 4)
 			*(int*) p = gm_LookupEntityRecordById(*(int*) p);
 	}
-	p = (char*) g_7f4ca0 + 0x170;
+	p = (char*) gm_EntitySlotTable + 0x170;
 	do {
 		e = (Ent525670*) (p - 0x170);
 		if ((unsigned short) e->id != 0xffff) {
@@ -124,11 +124,11 @@ unsigned int __cdecl gm_RebuildLoadedReferences(void)
 			v9 = *(int*) (r + 0x70);
 			if (v9) {
 				*(int*) (r + 0x70) = 0;
-				g_774964 = 2;
+				gm_InWorldHud = 2;
 				if (*(unsigned char*) r == 0x11)
 					*(unsigned char*) (r + 0xf0) &= 0xef;
 				(*(void(__cdecl**)(char*)) (*(unsigned char*) r * 4 + 0x7dc440))(r);
-				g_774964 = 0;
+				gm_InWorldHud = 0;
 				*(int*) (r + 0x70) = v9;
 			}
 		}

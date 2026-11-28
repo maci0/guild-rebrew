@@ -1,6 +1,6 @@
 
 
-extern int g_7746a0;
+extern int sv_ClickedObjekt;
 extern int g_14b5a20;
 extern char g_6ad4c0[];
 
@@ -17,7 +17,7 @@ void __cdecl d2_RunFortuneTellerHud(int a)
 	d2_ClearStatusTextSlots();
 	while (main_RunFrameLoop(d2_RunFortuneTellerHud, 0x67fff) != 0) {
 		x = RegisterStatusText(g_6ad4c0, g_14b5a20, 0x16);
-		if (g_7746a0 != 0 && g_7746a0 == x) {
+		if (sv_ClickedObjekt != 0 && sv_ClickedObjekt == x) {
 			d2_RunBlutracheDialog(a);
 		}
 	}

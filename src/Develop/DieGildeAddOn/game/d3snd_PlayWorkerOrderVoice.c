@@ -42,11 +42,11 @@ void __cdecl d3snd_PlayWorkerOrderVoice(void)
 		if (*(char*) (*p + 9) == 0) {
 			quiet++;
 			quietId = *(unsigned short*) *p;
-			average = (int) (gm_CalcEntityFavor(g_774970, quietId, 1) + average);
+			average = (int) (gm_CalcEntityFavor(gm_LocalPlayerSlot, quietId, 1) + average);
 		} else {
 			loud++;
 			loudId = *(unsigned short*) *p;
-			average = (int) (gm_CalcEntityFavor(g_774970, loudId, 1) + average);
+			average = (int) (gm_CalcEntityFavor(gm_LocalPlayerSlot, loudId, 1) + average);
 		}
 	}
 	if (quiet + loud != 0) {

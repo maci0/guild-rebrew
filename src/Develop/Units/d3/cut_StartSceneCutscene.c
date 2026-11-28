@@ -1,13 +1,13 @@
-extern int g_772f3c;
-extern int g_6b8300;
+extern int cut_SkipMode;
+extern int d3_CurrentFloor;
 extern char g_77666a;
 extern int* cut_ActiveCutscene;
-extern int g_77250c;
+extern int d2_ScreenSurface;
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern int g_772f4c;
-extern int g_6791c8;
-extern int g_67a370;
+extern int evt_ActiveContextId;
+extern int d3_ActiveScene;
 extern int evt_LastGfxScriptId;
 extern int g_68bfc4;
 extern unsigned char* g_772f50;
@@ -37,7 +37,7 @@ void __cdecl cut_StartSceneCutscene(char* sceneName)
 	char* ui;
 	int n;
 
-	if (g_772f3c != 0)
+	if (cut_SkipMode != 0)
 		return;
 	{
 		int s;
@@ -49,26 +49,26 @@ void __cdecl cut_StartSceneCutscene(char* sceneName)
 		d3_SelectSceneContext(0, 1);
 		d3_SelectSceneContext(s, 0);
 	}
-	if (((char*)g_6b8300) != 0) {
+	if (((char*)d3_CurrentFloor) != 0) {
 		if (g_77666a == 0) {
 			n = 2;
-			((char*)g_6b8300)[0x8036] = (((char*)g_6b8300)[0x8036] & 0xeb) | 8;
+			((char*)d3_CurrentFloor)[0x8036] = (((char*)d3_CurrentFloor)[0x8036] & 0xeb) | 8;
 		} else {
 			n = 1;
-			((char*)g_6b8300)[0x8036] = (((char*)g_6b8300)[0x8036] & 0xe7) | 4;
+			((char*)d3_CurrentFloor)[0x8036] = (((char*)d3_CurrentFloor)[0x8036] & 0xe7) | 4;
 		}
-		d3_SetFloorDetailLevel(((char*)g_6b8300), n >> 1, 1);
+		d3_SetFloorDetailLevel(((char*)d3_CurrentFloor), n >> 1, 1);
 	}
 	if ((((char*)cut_ActiveCutscene)[0x26] & 0x20) != 0)
-		d2_ClearSurface(g_77250c);
+		d2_ClearSurface(d2_ScreenSurface);
 	if (gm_GetSeason(&(*(int*)&gm_GameTime)) == 3)
 		d3_ApplySceneLightingPreset();
-	g_6791c8 = -2;
+	evt_ActiveContextId = -2;
 	g_772f4c++;
-	if (((char*)g_67a370) != 0) {
-		ui = *(char**) (((char*)g_67a370) + 0x3c8);
+	if (((char*)d3_ActiveScene) != 0) {
+		ui = *(char**) (((char*)d3_ActiveScene) + 0x3c8);
 		if (ui != 0 && *(CutsceneUiCallback*) (ui + 0x210) != 0)
-			(*(CutsceneUiCallback*) (ui + 0x210))(((char*)g_67a370), 4, ui + 0x214, 0);
+			(*(CutsceneUiCallback*) (ui + 0x210))(((char*)d3_ActiveScene), 4, ui + 0x214, 0);
 	}
 	g_68bfc4 = evt_LastGfxScriptId;
 	d3_PrecacheAllSceneTextures(1);

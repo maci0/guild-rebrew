@@ -4,7 +4,7 @@
 #include <string.h>
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_7f4ca4[];
+extern char gm_EntityIdField[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
@@ -19,11 +19,11 @@ int __cdecl cm_ExUpdateCutsceneEntitySlot(char* x, char* out)
 	char* rec;
 	int* src;
 
-	if (*(int*) (x + 0x40) != *(int*) (g_7f4ca4 + g_774970 * 0x21c + 0x208))
+	if (*(int*) (x + 0x40) != *(int*) (gm_EntityIdField + gm_LocalPlayerSlot * 0x21c + 0x208))
 		return 1;
 	for (i = 0; i < 16; i++) {
-		if (*(int*) (g_9b0e20 + i * 0x35c + 0x10) == *(int*) (x + 0x10)) {
-			rec = g_9b0e20 + i * 0x35c;
+		if (*(int*) (cut_ParticipantSlots + i * 0x35c + 0x10) == *(int*) (x + 0x10)) {
+			rec = cut_ParticipantSlots + i * 0x35c;
 			src = (int*) (x + 0x14);
 			e = gm_LookupEntityRecordIn32SlotTable(*src);
 			if (e == 0) {

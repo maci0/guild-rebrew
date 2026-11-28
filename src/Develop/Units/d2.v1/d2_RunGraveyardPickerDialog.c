@@ -59,8 +59,8 @@ typedef struct {
 
 extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern volatile int g_6b7fac;
-extern int g_100f1dc;
+extern volatile int gm_GameTicks;
+extern int d2_DialogButtonAction;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char g_6a969c[];
 
@@ -95,7 +95,7 @@ void __cdecl d2_RunGraveyardPickerDialog(PickResult* result, char* graveyard, in
 	int flags;
 	int found;
 
-	deadline = (unsigned int)g_6b7fac;
+	deadline = (unsigned int)gm_GameTicks;
 	if (result != 0) {
 		result->item = 0;
 		result->item2 = 0;
@@ -109,7 +109,7 @@ void __cdecl d2_RunGraveyardPickerDialog(PickResult* result, char* graveyard, in
 	d2_SetForm(st.handle, 1);
 	st.filter = d2_CurrentWindowId;
 
-	io_AppendText((int) g_6a9694, titleId);
+	io_AppendText((int) str_CZ_s, titleId);
 	d2_SetForm(st.handle, 2);
 	st.slot = d2_CurrentWindowId;
 	d2_SetForm(st.handle, 3);
@@ -127,7 +127,7 @@ void __cdecl d2_RunGraveyardPickerDialog(PickResult* result, char* graveyard, in
 	d2_InitGraveyardSelectionList(graveyard, (SelDlg*)&st);
 	d2_PopulateBuildingSlotList(graveyard, &st, 0xffffffff);
 	d2_PopulateHireCandidateRows((unsigned int) graveyard, (unsigned int*) &st, -1, mode);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	deadline += 0x96;
 	selft = st.selected;
 
@@ -136,12 +136,12 @@ void __cdecl d2_RunGraveyardPickerDialog(PickResult* result, char* graveyard, in
 		cur = selft;
 		saved = st.type;
 		found = 0;
-		if ((unsigned int)g_6b7fac > deadline) {
+		if ((unsigned int)gm_GameTicks > deadline) {
 			flags = 7;
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
-		} else if (g_100f1dc != -1) {
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
+		} else if (d2_DialogButtonAction != -1) {
 			for (i = 0; i < 4 && !found; i++) {
 				if (st.ids[i] == d2_CurrentElementId && i != st.type) {
 					selft = 0;
@@ -181,7 +181,7 @@ void __cdecl d2_RunGraveyardPickerDialog(PickResult* result, char* graveyard, in
 							callback(graveyard, &rec);
 							d2_SetFormVisibility(st.handle, 1);
 						} else if (result != 0) {
-							g_774654 = 1;
+							d2_DialogCloseRequested = 1;
 						}
 					}
 				}
@@ -203,7 +203,7 @@ void __cdecl d2_RunGraveyardPickerDialog(PickResult* result, char* graveyard, in
 					callback(graveyard, &rec1);
 					d2_SetFormVisibility(st.handle, 1);
 				} else if (result != 0) {
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				}
 			}
 		}

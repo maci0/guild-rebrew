@@ -1,12 +1,12 @@
 extern int d2_TutorialActive;
-extern int *g_665f08;
-extern int g_7749e4;
+extern int *d2_TutorialState;
+extern int tp_d2_ActiveHudSlot;
 extern int d3_CameraAnimating;
 extern int d3_ActiveCameraAnimation;
-extern int g_7e2700;
+extern int d2_InsideBuildingActive;
 extern int g_774a18;
-extern volatile int g_6b7fac;
-extern volatile int g_6b7fc0;
+extern volatile int gm_GameTicks;
+extern volatile int tb_TimerPaused;
 extern int g_774650;
 extern int g_774658;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
@@ -43,24 +43,24 @@ int __cdecl d2_StepTutorialStateMachine(void)
 	if (d2_TutorialActive == 0) {
 		return -4;
 	}
-	if (g_665f08[6] == 0) {
+	if (d2_TutorialState[6] == 0) {
 		return -4;
 	}
-	if (*(int *)((int)g_665f08[7] + 0x74) == 0) {
+	if (*(int *)((int)d2_TutorialState[7] + 0x74) == 0) {
 		return -4;
 	}
-	if (g_7749e4 == *(int *)((int)g_665f08[7] + 0x74) && g_665f08[0] != 2) {
-		if (d3_CameraAnimating != 0 || g_7e2700 != 0) {
+	if (tp_d2_ActiveHudSlot == *(int *)((int)d2_TutorialState[7] + 0x74) && d2_TutorialState[0] != 2) {
+		if (d3_CameraAnimating != 0 || d2_InsideBuildingActive != 0) {
 			goto ret0;
 		}
 		d2_SetOverlayAnimation(0, 0);
-		g_665f08[0] = 3;
+		d2_TutorialState[0] = 3;
 	}
-	if (g_7749e4 != *(int *)((int)g_665f08[7] + 0x74)) {
-		g_665f08[0] = g_665f08[1];
+	if (tp_d2_ActiveHudSlot != *(int *)((int)d2_TutorialState[7] + 0x74)) {
+		d2_TutorialState[0] = d2_TutorialState[1];
 	}
-	if (g_665f08[0xc] == 1 && g_665f08[0] != 9) {
-		g_665f08[0xc] = 0;
+	if (d2_TutorialState[0xc] == 1 && d2_TutorialState[0] != 9) {
+		d2_TutorialState[0xc] = 0;
 		d2_HideTutorialPrompt();
 		d2_UpdateTutorialArrow(2);
 	}
@@ -71,10 +71,10 @@ int __cdecl d2_StepTutorialStateMachine(void)
 	if (d3_CameraAnimating != 0) {
 		return 0;
 	}
-	if (g_7e2700 != 0) {
+	if (d2_InsideBuildingActive != 0) {
 		return 0;
 	}
-	switch (g_665f08[0]) {
+	switch (d2_TutorialState[0]) {
 	case 1:
 		if (d3_ActiveCameraAnimation != 0) {
 			break;
@@ -82,228 +82,228 @@ int __cdecl d2_StepTutorialStateMachine(void)
 		if (d2_ShowTutorialPage() != 0) {
 			return -4;
 		}
-		g_665f08[0xe] = 0;
-		g_665f08[0xf] = 0;
-		g_665f08[0] = 2;
-		if (*(int *)((int)g_665f08[6] + 8) == 1 || *(int *)((int)g_665f08[6] + 8) == 2) {
-			g_665f08[1] = 4;
-			g_665f08[0xb] = 0;
+		d2_TutorialState[0xe] = 0;
+		d2_TutorialState[0xf] = 0;
+		d2_TutorialState[0] = 2;
+		if (*(int *)((int)d2_TutorialState[6] + 8) == 1 || *(int *)((int)d2_TutorialState[6] + 8) == 2) {
+			d2_TutorialState[1] = 4;
+			d2_TutorialState[0xb] = 0;
 		} else {
-			g_665f08[1] = 0xb;
-			g_665f08[0xb] = 1;
+			d2_TutorialState[1] = 0xb;
+			d2_TutorialState[0xb] = 1;
 		}
-		if (*(int *)((int)g_665f08[6] + 8) == 2) {
-			g_665f08[0xf] = 1;
+		if (*(int *)((int)d2_TutorialState[6] + 8) == 2) {
+			d2_TutorialState[0xf] = 1;
 		}
-		if (*(int *)((int)g_665f08[6] + 0x38) != 0) {
+		if (*(int *)((int)d2_TutorialState[6] + 0x38) != 0) {
 			d2_DispatchTutorialInput(2, 0, 0, 0);
 		}
-		g_665f08[0x14] = 0;
-		if (*(int *)((int)g_665f08[6] + 0x64) == 0) {
-			g_665f08[0x16] = 0;
+		d2_TutorialState[0x14] = 0;
+		if (*(int *)((int)d2_TutorialState[6] + 0x64) == 0) {
+			d2_TutorialState[0x16] = 0;
 		} else {
-			g_665f08[0x16] = 1;
+			d2_TutorialState[0x16] = 1;
 		}
-		g_665f08[0x15] = 0;
-		g_665f08[0x17] = 0;
-		g_665f08[0x18] = -1;
-		cb = *(void (__cdecl **)(int))((int)g_665f08[6] + 0x34);
+		d2_TutorialState[0x15] = 0;
+		d2_TutorialState[0x17] = 0;
+		d2_TutorialState[0x18] = -1;
+		cb = *(void (__cdecl **)(int))((int)d2_TutorialState[6] + 0x34);
 		if (cb != 0) {
 			cb(0);
 		}
-		d2_HighlightSelectedControl(*(int *)((int)g_665f08[7] + 0x74));
+		d2_HighlightSelectedControl(*(int *)((int)d2_TutorialState[7] + 0x74));
 		d2_SetOverlayAnimation(0, 0);
 		return 0;
 	case 2:
 		if (d2_PollTutorialVoiceDone() != 1) {
 			break;
 		}
-		g_665f08[0] = g_665f08[1];
-		g_665f08[2] = ((unsigned int) g_6b7fac);
-		g_665f08[3] = ((unsigned int) g_6b7fac);
-		g_665f08[4] = 0;
+		d2_TutorialState[0] = d2_TutorialState[1];
+		d2_TutorialState[2] = ((unsigned int) gm_GameTicks);
+		d2_TutorialState[3] = ((unsigned int) gm_GameTicks);
+		d2_TutorialState[4] = 0;
 		d2_HighlightSelectedControl(0);
 		return 0;
 	case 3:
 		if (d2_PollTutorialVoiceDone() != 1) {
 			break;
 		}
-		g_665f08[0] = g_665f08[1];
+		d2_TutorialState[0] = d2_TutorialState[1];
 		goto ret0;
 ret0:
 		d2_HighlightSelectedControl(0);
 		return 0;
 	case 4:
-		if (*(int *)((int)g_665f08[6] + 0x40) == 3) {
+		if (*(int *)((int)d2_TutorialState[6] + 0x40) == 3) {
 			d2_DispatchTutorialInput(0, 0, 0, 0);
 			return 0;
 		}
-		if (((unsigned int) g_6b7fac) > *(int *)((int)g_665f08[6] + 0x2c) + g_665f08[2]) {
-			g_665f08[2] = ((unsigned int) g_6b7fac);
-			if (g_665f08[10] == 0 && *(int *)((int)g_665f08[6] + 0x14) != 0) {
-				g_665f08[10] = 1;
+		if (((unsigned int) gm_GameTicks) > *(int *)((int)d2_TutorialState[6] + 0x2c) + d2_TutorialState[2]) {
+			d2_TutorialState[2] = ((unsigned int) gm_GameTicks);
+			if (d2_TutorialState[10] == 0 && *(int *)((int)d2_TutorialState[6] + 0x14) != 0) {
+				d2_TutorialState[10] = 1;
 				d2_ShowTutorialInlineForm();
 			}
 		} else {
-			if (((unsigned int) g_6b7fac) > g_665f08[2] + 0x238) {
-				if (g_665f08[10] != 1) {
+			if (((unsigned int) gm_GameTicks) > d2_TutorialState[2] + 0x238) {
+				if (d2_TutorialState[10] != 1) {
 					return 0;
 				}
-				g_665f08[2] = ((unsigned int) g_6b7fac);
-				g_665f08[10] = 0;
+				d2_TutorialState[2] = ((unsigned int) gm_GameTicks);
+				d2_TutorialState[10] = 0;
 				d2_HideTutorialHint();
 			}
 		}
-		if (g_665f08[10] == 1) {
-			d2_BringFormToFront(g_665f08[9]);
+		if (d2_TutorialState[10] == 1) {
+			d2_BringFormToFront(d2_TutorialState[9]);
 			return 0;
 		}
 		break;
 	case 5:
-		g_665f08[2] = ((unsigned int) g_6b7fac);
-		g_665f08[10] = 0;
+		d2_TutorialState[2] = ((unsigned int) gm_GameTicks);
+		d2_TutorialState[10] = 0;
 		d2_HideTutorialHint();
-		g_665f08[0xf] = 2;
-		if (*(unsigned int *)((int)g_665f08[6] + 0x50) <= 0) {
+		d2_TutorialState[0xf] = 2;
+		if (*(unsigned int *)((int)d2_TutorialState[6] + 0x50) <= 0) {
 			goto label7;
 		}
-		g_665f08[0x10] = 0;
-		g_665f08[0] = 6;
-		g_665f08[1] = 6;
+		d2_TutorialState[0x10] = 0;
+		d2_TutorialState[0] = 6;
+		d2_TutorialState[1] = 6;
 		d2_ShowTutorialStep();
 		return 0;
 label7:
-		g_665f08[0] = 7;
-		g_665f08[1] = 7;
+		d2_TutorialState[0] = 7;
+		d2_TutorialState[1] = 7;
 		return 0;
 	case 6:
-		start_time = (unsigned int) g_665f08[3];
-		cues = *(int**)((int)g_665f08[6] + 0x58);
-		cue_time = (unsigned int) cues[g_665f08[0x10] * 4];
-		current_time = (unsigned int) g_6b7fac;
+		start_time = (unsigned int) d2_TutorialState[3];
+		cues = *(int**)((int)d2_TutorialState[6] + 0x58);
+		cue_time = (unsigned int) cues[d2_TutorialState[0x10] * 4];
+		current_time = (unsigned int) gm_GameTicks;
 		deadline = cue_time + start_time;
 		cue_ready = current_time >= deadline;
-		g_6b7fc0 = cue_ready;
-		d2_SetElementEnabled(g_665f08[0x13], cue_ready);
+		tb_TimerPaused = cue_ready;
+		d2_SetElementEnabled(d2_TutorialState[0x13], cue_ready);
 		if (d2_CheckTutorialCueClicked() != 1) {
 			break;
 		}
-		g_665f08[0x10] = g_665f08[0x10] + 1;
-		g_665f08[2] = ((unsigned int) g_6b7fac);
-		if ((unsigned int)g_665f08[0x10] < *(unsigned int *)((int)g_665f08[6] + 0x50)) {
-			g_665f08[3] = ((unsigned int) g_6b7fac);
+		d2_TutorialState[0x10] = d2_TutorialState[0x10] + 1;
+		d2_TutorialState[2] = ((unsigned int) gm_GameTicks);
+		if ((unsigned int)d2_TutorialState[0x10] < *(unsigned int *)((int)d2_TutorialState[6] + 0x50)) {
+			d2_TutorialState[3] = ((unsigned int) gm_GameTicks);
 			d2_ShowTutorialStep();
 			return 0;
 		}
 		goto label7;
 	case 7:
-		g_665f08[0xf] = 3;
-		g_665f08[3] = ((unsigned int) g_6b7fac);
-		g_665f08[0x14] = 0;
+		d2_TutorialState[0xf] = 3;
+		d2_TutorialState[3] = ((unsigned int) gm_GameTicks);
+		d2_TutorialState[0x14] = 0;
 		d2_ShowTutorialStep();
-		g_6b7fc0 = 0;
-		if (*(int *)((int)g_665f08[6] + 0x4c) != 0) {
-			g_665f08[0] = 9;
-			g_665f08[1] = 9;
+		tb_TimerPaused = 0;
+		if (*(int *)((int)d2_TutorialState[6] + 0x4c) != 0) {
+			d2_TutorialState[0] = 9;
+			d2_TutorialState[1] = 9;
 		} else {
-			g_665f08[0] = 0xa;
-			g_665f08[1] = 0xa;
-			g_665f08[0xb] = (*(int *)((int)g_665f08[6] + 0x24) == 0);
+			d2_TutorialState[0] = 0xa;
+			d2_TutorialState[1] = 0xa;
+			d2_TutorialState[0xb] = (*(int *)((int)d2_TutorialState[6] + 0x24) == 0);
 		}
 		return 0;
 	case 9:
-		if (g_665f08[10] == 1) {
-			g_665f08[2] = ((unsigned int) g_6b7fac);
-			g_665f08[10] = 0;
+		if (d2_TutorialState[10] == 1) {
+			d2_TutorialState[2] = ((unsigned int) gm_GameTicks);
+			d2_TutorialState[10] = 0;
 			d2_HideTutorialHint();
 		}
-		if (g_665f08[0xc] == 0 && *(int *)((int)g_665f08[6] + 0x1c) != 0) {
-			g_665f08[0xc] = 1;
+		if (d2_TutorialState[0xc] == 0 && *(int *)((int)d2_TutorialState[6] + 0x1c) != 0) {
+			d2_TutorialState[0xc] = 1;
 			d2_ShowTutorialStepMessage();
 			d2_UpdateTutorialArrow(0);
 		}
-		if (g_665f08[0xc] == 1) {
-			d2_BringFormToFront(g_665f08[0xd]);
+		if (d2_TutorialState[0xc] == 1) {
+			d2_BringFormToFront(d2_TutorialState[0xd]);
 		}
 		d2_UpdateTutorialArrow(1);
 		return 0;
 	case 10:
-		if (g_665f08[10] == 1) {
-			g_665f08[2] = ((unsigned int) g_6b7fac);
-			g_665f08[10] = 0;
+		if (d2_TutorialState[10] == 1) {
+			d2_TutorialState[2] = ((unsigned int) gm_GameTicks);
+			d2_TutorialState[10] = 0;
 			d2_HideTutorialHint();
 		}
-		if (((unsigned int) g_6b7fac) > *(int *)((int)g_665f08[6] + 0x44) + g_665f08[3]) {
+		if (((unsigned int) gm_GameTicks) > *(int *)((int)d2_TutorialState[6] + 0x44) + d2_TutorialState[3]) {
 			d3_EndCameraAndUiMode();
-			g_774654 = g_774650 - g_774658;
-			g_665f08[0] = 0xb;
-			g_665f08[1] = 0xb;
-			g_665f08[3] = ((unsigned int) g_6b7fac);
+			d2_DialogCloseRequested = g_774650 - g_774658;
+			d2_TutorialState[0] = 0xb;
+			d2_TutorialState[1] = 0xb;
+			d2_TutorialState[3] = ((unsigned int) gm_GameTicks);
 		}
-		if (g_665f08[0xb] != 0) {
+		if (d2_TutorialState[0xb] != 0) {
 			break;
 		}
-		if (*(int *)((int)g_665f08[6] + 0x24) == 0) {
+		if (*(int *)((int)d2_TutorialState[6] + 0x24) == 0) {
 			break;
 		}
-		d2_ShowStatusBanner(*(int *)(*(int *)((int)g_665f08[6] + 0x24) * 4 + 0x14a5320));
-		if (*(int *)((int)g_665f08[6] + 0x28) != 0) {
-			if (g_665f08[5] != 0) {
-				if (sb_CheckVoicePlaying(g_665f08[5]) != 0) {
-					sb_StopVoice(g_665f08[5], 0);
+		d2_ShowStatusBanner(*(int *)(*(int *)((int)d2_TutorialState[6] + 0x24) * 4 + 0x14a5320));
+		if (*(int *)((int)d2_TutorialState[6] + 0x28) != 0) {
+			if (d2_TutorialState[5] != 0) {
+				if (sb_CheckVoicePlaying(d2_TutorialState[5]) != 0) {
+					sb_StopVoice(d2_TutorialState[5], 0);
 				}
-				g_665f08[5] = 0;
+				d2_TutorialState[5] = 0;
 			}
-			g_665f08[5] = d3snd_PlaySoundEffect(-7, 0, *(int *)((int)g_665f08[6] + 0x28), -1);
+			d2_TutorialState[5] = d3snd_PlaySoundEffect(-7, 0, *(int *)((int)d2_TutorialState[6] + 0x28), -1);
 		}
-		g_665f08[0xb] = 1;
+		d2_TutorialState[0xb] = 1;
 		d2_ShowTutorialPage();
 		return 0;
 	case 11:
-		if (g_665f08[10] == 1) {
-			g_665f08[2] = ((unsigned int) g_6b7fac);
-			g_665f08[10] = 0;
+		if (d2_TutorialState[10] == 1) {
+			d2_TutorialState[2] = ((unsigned int) gm_GameTicks);
+			d2_TutorialState[10] = 0;
 			d2_HideTutorialHint();
 		}
-		if (((unsigned int) g_6b7fac) > *(int *)((int)g_665f08[6] + 0x30) + g_665f08[3]) {
+		if (((unsigned int) gm_GameTicks) > *(int *)((int)d2_TutorialState[6] + 0x30) + d2_TutorialState[3]) {
 			d3_EndCameraAndUiMode();
-			g_774654 = g_774650 - g_774658;
-			g_665f08[0] = 0xc;
-			g_665f08[1] = 0xc;
-			g_665f08[3] = ((unsigned int) g_6b7fac);
+			d2_DialogCloseRequested = g_774650 - g_774658;
+			d2_TutorialState[0] = 0xc;
+			d2_TutorialState[1] = 0xc;
+			d2_TutorialState[3] = ((unsigned int) gm_GameTicks);
 		}
-		if (g_665f08[0xb] != 0) {
+		if (d2_TutorialState[0xb] != 0) {
 			break;
 		}
-		if (*(int *)((int)g_665f08[6] + 0x24) == 0) {
+		if (*(int *)((int)d2_TutorialState[6] + 0x24) == 0) {
 			break;
 		}
-		d2_ShowStatusBanner(*(int *)(*(int *)((int)g_665f08[6] + 0x24) * 4 + 0x14a5320));
-		if (*(int *)((int)g_665f08[6] + 0x28) != 0) {
-			if (g_665f08[5] != 0) {
-				if (sb_CheckVoicePlaying(g_665f08[5]) != 0) {
-					sb_StopVoice(g_665f08[5], 0);
+		d2_ShowStatusBanner(*(int *)(*(int *)((int)d2_TutorialState[6] + 0x24) * 4 + 0x14a5320));
+		if (*(int *)((int)d2_TutorialState[6] + 0x28) != 0) {
+			if (d2_TutorialState[5] != 0) {
+				if (sb_CheckVoicePlaying(d2_TutorialState[5]) != 0) {
+					sb_StopVoice(d2_TutorialState[5], 0);
 				}
-				g_665f08[5] = 0;
+				d2_TutorialState[5] = 0;
 			}
-			g_665f08[5] = d3snd_PlaySoundEffect(-7, 0, *(int *)((int)g_665f08[6] + 0x28), -1);
+			d2_TutorialState[5] = d3snd_PlaySoundEffect(-7, 0, *(int *)((int)d2_TutorialState[6] + 0x28), -1);
 		}
-		g_665f08[0xb] = 1;
+		d2_TutorialState[0xb] = 1;
 		d2_ShowTutorialPage();
 		return 0;
 	case 12:
-		if (g_665f08[10] == 1) {
-			g_665f08[2] = ((unsigned int) g_6b7fac);
-			g_665f08[10] = 0;
+		if (d2_TutorialState[10] == 1) {
+			d2_TutorialState[2] = ((unsigned int) gm_GameTicks);
+			d2_TutorialState[10] = 0;
 			d2_HideTutorialHint();
 		}
-		cb = *(void (__cdecl **)(int))((int)g_665f08[6] + 0x34);
+		cb = *(void (__cdecl **)(int))((int)d2_TutorialState[6] + 0x34);
 		if (cb != 0) {
 			cb(1);
 		}
-		g_665f08[6] = *(int *)((int)g_665f08[6] + 0x70);
-		g_665f08[0] = 1;
-		g_665f08[1] = 1;
+		d2_TutorialState[6] = *(int *)((int)d2_TutorialState[6] + 0x70);
+		d2_TutorialState[0] = 1;
+		d2_TutorialState[1] = 1;
 		d2_ShowStatusBanner((int)(void *)0x6b5c60);
 		break;
 	default:

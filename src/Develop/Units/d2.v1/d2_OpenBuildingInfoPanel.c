@@ -8,8 +8,8 @@
 
 
 extern int g_6a25b8;
-extern char* g_7746c4;
-extern unsigned char* g_7746c8;
+extern char* d2_VisitedBuilding;
+extern unsigned char* d2_InteriorBuilding;
 extern int g_1040494;
 extern char g_6a2fac[];
 extern char g_6a2f40[];
@@ -46,8 +46,8 @@ void __cdecl d2_OpenBuildingInfoPanel(void)
 	if (g_6a25b8 != -1) {
 		return;
 	}
-	if (g_7746c8 == 0) {
-		if (((unsigned char*)g_7746c4) != 0) {
+	if (d2_InteriorBuilding == 0) {
+		if (((unsigned char*)d2_VisitedBuilding) != 0) {
 			return;
 		}
 		g_6a25b8 = d2_LoadForm(g_1040494 - 0x68, 0x106, g_6a2fac);
@@ -56,21 +56,21 @@ void __cdecl d2_OpenBuildingInfoPanel(void)
 		g_6a25e0 = d2_CreateWindowTextButton(0, 0xa6, g_14ad0dc);
 		return;
 	}
-	if (*(unsigned short*) (g_7746c8 + 0x27) != g_774970) {
+	if (*(unsigned short*) (d2_InteriorBuilding + 0x27) != gm_LocalPlayerSlot) {
 		return;
 	}
-	pct = gm_GetEntityMood(g_7746c8);
+	pct = gm_GetEntityMood(d2_InteriorBuilding);
 	g_6a25b8 = d2_LoadForm(g_1040494 - 0x68, 0x106, g_6a2f40);
 	d2_SetForm(g_6a25b8, 0);
 	d2_SetForm(g_6a25b8, 1);
-	io_FormatEntityNameMarkup(*(unsigned short*) (g_7746c8 + 0x27), 2, 1, name);
-	io_AppendText(g_6a2f9c, name, *g_7746c8 * 14 + 0x48e, g_7746c8 + 5);
+	io_FormatEntityNameMarkup(*(unsigned short*) (d2_InteriorBuilding + 0x27), 2, 1, name);
+	io_AppendText(g_6a2f9c, name, *d2_InteriorBuilding * 14 + 0x48e, d2_InteriorBuilding + 5);
 	d2_SetForm(g_6a25b8, 0);
-	d2_AddElementToWindow(((((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1) - 1, 0x4c, *g_7746c8 + 0x427, d2_CurrentWindowId);
+	d2_AddElementToWindow(((((D2_WIN*)d2_Windows)[d2_CurrentWindowId].width - 0x30) >> 1) - 1, 0x4c, *d2_InteriorBuilding + 0x427, d2_CurrentWindowId);
 	d2_CurrentValueBar = d2_AddWindowValueGauge(0x15, 0x7a, 0x30, 0, 0x64, 0x75, 0x442, d2_CurrentWindowId);
 	d2_SetElementValue(d2_CurrentValueBar, 0, 0x64, pct);
 	g_6a25ec = d2_CreateWindowTextButton(0, 0x8c, g_14ad0cc);
-	if (*g_7746c8 == 0x1e) {
+	if (*d2_InteriorBuilding == 0x1e) {
 		g_6a25f0 = d2_CreateWindowTextButton(0, 0xa6, g_14ad0d0);
 	} else {
 		g_6a25e0 = d2_CreateWindowTextButton(0, 0xa6, g_14ad0dc);

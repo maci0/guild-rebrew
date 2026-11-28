@@ -1,4 +1,4 @@
-extern char g_774964;
+extern char gm_InWorldHud;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 
@@ -14,7 +14,7 @@ int __cdecl d2_OpenTutorialMainDialog(void);
 
 void __cdecl he_UpdateTutorialEvent(char* o)
 {
-	if (g_774964 != 0) {
+	if (gm_InWorldHud != 0) {
 		switch (*(int*) (o + 0x70)) {
 		case 2:
 			d2_CleanupTutorialAction();

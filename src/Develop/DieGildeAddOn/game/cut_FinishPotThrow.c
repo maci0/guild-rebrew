@@ -1,4 +1,4 @@
-extern unsigned short* g_772f24;
+extern unsigned short* cut_ActivePlayerEntity;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 
@@ -15,13 +15,13 @@ void __cdecl cut_FinishPotThrow(char* e)
 	char* q;
 
 	o = *(char**) (e + 0x17c);
-	if (*(int*) (((char*)g_772f24) + 4) == g_68b79c) {
+	if (*(int*) (((char*)cut_ActivePlayerEntity) + 4) == g_68b79c) {
 		q = gm_FindEntityActiveItem(o);
 		if (q != 0) {
 			int v = -1;
 
 			cm_BeginPacketFieldDelta(q, *(int*) (q + 2));
-			cm_AppendPacketFieldValue(4, 1, q - g_aed32c + 0x20, &v);
+			cm_AppendPacketFieldValue(4, 1, q - cm_PacketDeltaBase + 0x20, &v);
 			cm_RequestChangeAttribute();
 		}
 	}

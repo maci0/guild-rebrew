@@ -36,11 +36,11 @@ float __cdecl d3_ComputeYawToTarget(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
 char __cdecl d3sm_SampleHeight(char*, float*, int*, int*, float*);
 void __cdecl d3_GetFloorHeight(char*, float*, int, int*, int*, float*);
-extern float g_6628a8;
+extern float flt_0_0;
 #include "../../../Units/d3/d3_animation.h"
 
 #include "../../../Units/d3/d3_camera.h"
-extern char g_10432c0[];
+extern char d3_Universes[];
 
 char __cdecl d3_SetObjectVisible(char*, char);
 
@@ -53,7 +53,7 @@ int __cdecl d3_RemoveObjectAnim(char*);
 
 
 
-extern char g_6b5c60[];
+extern char str_empty[];
 D3_OBJECT* __cdecl d3_CreateSceneModelObject(D3_OBJECT*, float*, float*, char*);
 void __cdecl d3_InvalidateSubTreeFlags(char*, int);
 void __cdecl ch_PreloadCharacterMotions(char*, int, ...);
@@ -110,11 +110,11 @@ void __cdecl ch_UpdateAttachedModelPosition(char* obj, unsigned char force)
 	dz = position[2] - *(float*) (*(char**) (obj + 0x124) + 12);
 	distance = (float) sqrt(dz * dz + dy * dy + dx * dx);
 	position[0] = (*(float*) (attachment + 0x19c) + *(float*) (attachment + 0x18c))
-	            * g_6628a8 + distance * *(float*) (attachment + 0x1ac);
+	            * flt_0_0 + distance * *(float*) (attachment + 0x1ac);
 	position[1] = (*(float*) (attachment + 0x1a0) + *(float*) (attachment + 0x190))
-	            * g_6628a8 + distance * *(float*) (attachment + 0x1b0);
+	            * flt_0_0 + distance * *(float*) (attachment + 0x1b0);
 	position[2] = (*(float*) (attachment + 0x1a4) + *(float*) (attachment + 0x194))
-	            * g_6628a8 + distance * *(float*) (attachment + 0x1b4);
+	            * flt_0_0 + distance * *(float*) (attachment + 0x1b4);
 	relative[0] = position[0] + *(float*) (attachment + 0x4c);
 	relative[1] = position[1] + *(float*) (attachment + 0x50);
 	relative[2] = position[2] + *(float*) (attachment + 0x54);

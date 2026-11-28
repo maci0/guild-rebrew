@@ -35,7 +35,7 @@ void __cdecl ai_CountProductionGoodsKinds(int* ca, int* cb, PRODUCTION_GOODS_REC
 		if (n->building_indices[i] < 0) {
 			continue;
 		}
-		s = &g_100b0c0[n->building_indices[i]];
+		s = &ai_ResourceRequests[n->building_indices[i]];
 		if (!(s->flags & 1)) {
 			if ((*(char *)&((OBJECT_PROTOTYPE*)lpObjektePROT)[s->goods_id].kind) == 0x17 || (*(char *)&((OBJECT_PROTOTYPE*)lpObjektePROT)[s->goods_id].kind) == 0x25) {
 				(*ca)++;
@@ -44,11 +44,11 @@ void __cdecl ai_CountProductionGoodsKinds(int* ca, int* cb, PRODUCTION_GOODS_REC
 			}
 			s->flags |= 1;
 			if (s->parent_index != -1) {
-				((PRODUCTION_GOODS_RECORD*)g_100d0c0)[s->parent_index].flags |= 1;
+				((PRODUCTION_GOODS_RECORD*)ai_ProductionGoodsPlans)[s->parent_index].flags |= 1;
 			}
 		}
 		if (s->parent_index != -1) {
-			ai_CountProductionGoodsKinds(ca, cb, &((PRODUCTION_GOODS_RECORD*)g_100d0c0)[s->parent_index]);
+			ai_CountProductionGoodsKinds(ca, cb, &((PRODUCTION_GOODS_RECORD*)ai_ProductionGoodsPlans)[s->parent_index]);
 		}
 	}
 }

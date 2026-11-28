@@ -14,7 +14,7 @@ typedef struct {
 	char p50[4];
 } Rec;
 
-extern char* g_772500;
+extern char* d2_FileObjTable;
 extern signed char g_772510;
 
 int __cdecl d2_GetResourceData(int);
@@ -30,22 +30,22 @@ int __cdecl d2_DrawResource(int x, int y, int idx, int surface)
 	result = 0;
 	if (idx <= g_772504) {
 		base = -1;
-		if ((((Rec*)g_772500)[idx].type == 5 || ((Rec*)g_772500)[idx].type == 8) && ((Rec*)g_772500)[idx].x30 == 0) {
-			if (((Rec*)g_772500)[((Rec*)g_772500)[idx].link].x34 == 0) {
+		if ((((Rec*)d2_FileObjTable)[idx].type == 5 || ((Rec*)d2_FileObjTable)[idx].type == 8) && ((Rec*)d2_FileObjTable)[idx].x30 == 0) {
+			if (((Rec*)d2_FileObjTable)[((Rec*)d2_FileObjTable)[idx].link].x34 == 0) {
 				result = d2_GetResourceData(idx);
 			}
 			base = idx;
-			idx = ((Rec*)g_772500)[idx].link;
-		} else if (((Rec*)g_772500)[idx].x34 == 0) {
+			idx = ((Rec*)d2_FileObjTable)[idx].link;
+		} else if (((Rec*)d2_FileObjTable)[idx].x34 == 0) {
 			result = d2_GetResourceData(idx);
 		}
-		if (((Rec*)g_772500)[idx].flags & 2) {
+		if (((Rec*)d2_FileObjTable)[idx].flags & 2) {
 			idx += g_772510;
 		}
 		if (result == 0) {
-			result = ((Rec*)g_772500)[idx].x34;
+			result = ((Rec*)d2_FileObjTable)[idx].x34;
 		}
-		switch ((base == -1) ? ((Rec*)g_772500)[idx].type : ((Rec*)g_772500)[base].type) {
+		switch ((base == -1) ? ((Rec*)d2_FileObjTable)[idx].type : ((Rec*)d2_FileObjTable)[base].type) {
 		case 5:
 		case 8:
 			if (base != -1) {

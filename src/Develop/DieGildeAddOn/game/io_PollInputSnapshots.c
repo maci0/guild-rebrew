@@ -17,8 +17,8 @@ void __cdecl io_PollInputSnapshots(void)
     GOLD_INPUT_SNAPSHOT* snapshots = (GOLD_INPUT_SNAPSHOT*) 0x1467440;
     int i;
     if (CursorOsBypass) {
-        g_01467380 = CursorX1;
-        g_01467382 = CursorY1;
+        io_CursorXGold = CursorX1;
+        io_CursorYGold = CursorY1;
         current->coordinate[2] = *(short*) 0x14683c4;
     }
     current->value[0] = 0;

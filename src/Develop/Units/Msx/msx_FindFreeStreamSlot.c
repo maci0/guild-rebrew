@@ -11,7 +11,7 @@ int __cdecl msx_FindFreeStreamSlot(char* context)
 	i = msx_FindWaveDriverIndex(context);
 	if (i >= 0 && *(int*) (context + 0x14) < *(int*) (context + 0x18)) {
 		for (j = 0; j < *(int*) (context + 0x18); j++) {
-			if (g_6b7f50[i][j] == 0) {
+			if (msx_StreamHandles[i][j] == 0) {
 				return j;
 			}
 		}

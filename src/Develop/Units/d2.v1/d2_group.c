@@ -1,5 +1,5 @@
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 extern unsigned int g_772f70;
 extern int g_68bfcc;
 void __cdecl d2_SetElementEnabled(int, int);
@@ -23,12 +23,12 @@ typedef List8c_102cbc8 List8c;
 extern char g_772f74;
 extern int main_LoopFlags;
 extern int d2_CurrentWindowId;
-extern char* g_77255c;
-extern char* g_1015ea0;
-extern int g_100f1dc;
+extern char* d2_CurrentWindow;
+extern char* d2_Controls;
+extern int d2_DialogButtonAction;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern List8c_102cbc8 g_102cbc8[];
-extern char g_14cf950;
+extern List8c_102cbc8 d2_RadioGroupItems[];
+extern char io_LastKeyScancode;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
 int __cdecl d2_LoadForm(int, int, char *);
@@ -54,11 +54,11 @@ int __cdecl d2_UpdateProgressBar(int h, int total, int reset)
 
 	pct = 100;
 	if (reset != 0) {
-		g_772f70 = (*(unsigned int*)&g_6b7fac);
+		g_772f70 = (*(unsigned int*)&gm_GameTicks);
 		g_68bfcc = total;
 		d2_SetElementEnabled(h, 0);
 	} else {
-		v = (int) ((1.0f - (float) ((*(unsigned int*)&g_6b7fac) - g_772f70) / g_68bfcc) * 100.0f);
+		v = (int) ((1.0f - (float) ((*(unsigned int*)&gm_GameTicks) - g_772f70) / g_68bfcc) * 100.0f);
 		pct = MAX(v, 0);
 	}
 	d2_SetElementValue(h, 0, 100, pct);
@@ -79,7 +79,7 @@ int __cdecl d2_ShowMessageBox(char *text, unsigned int flags)
 	int i;
 	int k;
 
-	start = (*(unsigned int*)&g_6b7fac);
+	start = (*(unsigned int*)&gm_GameTicks);
 	id = -1;
 	result = 0;
 	if (g_772f74 != 0) {
@@ -106,12 +106,12 @@ int __cdecl d2_ShowMessageBox(char *text, unsigned int flags)
 	d2_CenterDialogWindows(h);
 	g_772f74 = 1;
 	list = d2_CreateRadioGroup(0);
-	for (i = 0; i < ((Screen*)g_77255c)->count; i++) {
-		k = ((Screen*)g_77255c)->ids[i];
+	for (i = 0; i < ((Screen*)d2_CurrentWindow)->count; i++) {
+		k = ((Screen*)d2_CurrentWindow)->ids[i];
 #if defined(REBREW_GOLD)
-		if (((Obj2f4*)g_1015ea0)[k].kind != 0x40) {
+		if (((Obj2f4*)d2_Controls)[k].kind != 0x40) {
 #else
-		if (((D2_CONTROL_TL*)g_1015ea0)[k].kind != 0x40) {
+		if (((D2_CONTROL_TL*)d2_Controls)[k].kind != 0x40) {
 #endif
 			d2_AddToRadioGroup(list, k);
 		}
@@ -120,28 +120,28 @@ int __cdecl d2_ShowMessageBox(char *text, unsigned int flags)
 	d2_SetForm(h, 0);
 	f80 = flags & 0x80;
 	if (f80) {
-		id = d2_AddWindowValueGauge(0x1c, ((Screen*)g_77255c)->h - 0x18, ((Screen*)g_77255c)->w - 0x40, 0, 500, 0x83, 0x42, d2_CurrentWindowId);
+		id = d2_AddWindowValueGauge(0x1c, ((Screen*)d2_CurrentWindow)->h - 0x18, ((Screen*)d2_CurrentWindow)->w - 0x40, 0, 500, 0x83, 0x42, d2_CurrentWindowId);
 	}
 	while (main_RunFrameLoop(d2_ShowMessageBox, mode) != 0) {
 		d2_UpdateRadioGroup(list);
 		if (flags & 0x40) {
 			d2_BringFormToFront(h);
 		}
-		if (g_100f1dc == 2 && d2_HoveredWindow == me) {
-			result = g_102cbc8[list].n + 1;
-			g_774654 = 1;
-		} else if ((g_100f1dc == 1 && d2_HoveredWindow == me) || g_14cf950 == 1) {
+		if (d2_DialogButtonAction == 2 && d2_HoveredWindow == me) {
+			result = d2_RadioGroupItems[list].n + 1;
+			d2_DialogCloseRequested = 1;
+		} else if ((d2_DialogButtonAction == 1 && d2_HoveredWindow == me) || io_LastKeyScancode == 1) {
 			result = 0;
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 		if (f80 && id != -1) {
-			d2_SetElementValue(id, 0, 500, (int) ((*(unsigned int*)&g_6b7fac) - start));
+			d2_SetElementValue(id, 0, 500, (int) ((*(unsigned int*)&gm_GameTicks) - start));
 		}
-		if ((flags & 4) && (*(unsigned int*)&g_6b7fac) > start + 500) {
-			g_774654 = 1;
+		if ((flags & 4) && (*(unsigned int*)&gm_GameTicks) > start + 500) {
+			d2_DialogCloseRequested = 1;
 		}
 	}
 	g_772f74 = 0;

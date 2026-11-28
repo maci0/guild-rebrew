@@ -2,7 +2,7 @@
 #include <winsock2.h>
 #include <string.h>
 
-extern int g_6b7d40;
+extern int nt_WsaInitialized;
 extern char g_6b7d44[];
 
 /* ADDRESS: GOLDTL 0x00420d20 */
@@ -14,13 +14,13 @@ char *__cdecl nt_GetLocalIp(void)
     struct in_addr addr;
 
     if (!g_6b7d44[0]) {
-        if (!g_6b7d40)
+        if (!nt_WsaInitialized)
             WSAStartup(2, &wsa);
         if (!gethostname(host, sizeof(host)) && (h = gethostbyname(host)) != 0) {
             addr = *(struct in_addr *)h->h_addr_list[0];
             strcpy(g_6b7d44, inet_ntoa(addr));
         }
-        if (!g_6b7d40)
+        if (!nt_WsaInitialized)
             WSACleanup();
     }
     return g_6b7d44;

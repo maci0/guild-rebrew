@@ -1,8 +1,8 @@
 /* Gold scans 32 records at 0x00930600; TL scans its 768-slot world table. */
 #include <string.h>
 
-extern int g_67a370;
-extern char g_930600[];
+extern int d3_ActiveScene;
+extern char gm_SmallEntityTable[];
 extern char* ch_ContextCharacters[32];
 
 void __cdecl ch_CollectSceneContextCharacters(void)
@@ -11,7 +11,7 @@ void __cdecl ch_CollectSceneContextCharacters(void)
     int n;
     int i;
 
-    self = g_67a370;
+    self = d3_ActiveScene;
     memset(ch_ContextCharacters, 0, sizeof(ch_ContextCharacters));
 
     n = 0;
@@ -19,9 +19,9 @@ void __cdecl ch_CollectSceneContextCharacters(void)
         if (n >= 31) {
             break;
         }
-        if (*(char**) (g_930600 + i * 0x21c + 0x184) != 0 &&
-            *(int*) (*(char**) (g_930600 + i * 0x21c + 0x184) + 0x88) == self) {
-            ch_ContextCharacters[n] = g_930600 + i * 0x21c;
+        if (*(char**) (gm_SmallEntityTable + i * 0x21c + 0x184) != 0 &&
+            *(int*) (*(char**) (gm_SmallEntityTable + i * 0x21c + 0x184) + 0x88) == self) {
+            ch_ContextCharacters[n] = gm_SmallEntityTable + i * 0x21c;
             n++;
         }
     }

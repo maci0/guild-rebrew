@@ -57,11 +57,11 @@ typedef struct {
 extern unsigned char *lpGebaeudePROT;
 extern unsigned char *lpGebaeudeINST;
 extern unsigned char *gm_CityEntity;
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 extern pos14_7f4c00 gm_GameTime;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern int g_6a3424;
-extern unsigned char g_6a3440;
+extern unsigned char gm_SelectedMissionIndex;
 
 int __cdecl gm_RandomMod(int);
 void __cdecl d3_TransformPoint(char *, char *, char *);
@@ -140,7 +140,7 @@ void __cdecl gm_InitStartingEntitiesAndRelations(void)
 	memset(counts, 0, sizeof(counts));
 	memset(found, 0, sizeof(found));
 	memset(handles, 0, sizeof(handles));
-	for (e = g_7f4ca0 + 2; (int)e < 0x85a0a2; e += sizeof(ENTITY_RECORD)) {
+	for (e = gm_EntitySlotTable + 2; (int)e < 0x85a0a2; e += sizeof(ENTITY_RECORD)) {
 		if (total >= 8)
 			break;
 		if (*(unsigned short *)(e - 2) != 0xffff
@@ -271,7 +271,7 @@ void __cdecl gm_InitStartingEntitiesAndRelations(void)
 		cm_RequestAssignWorker((unsigned char *)e, 1, o->role_230, o->worker_kind[0]);
 		cm_RequestAssignWorker((unsigned char *)e, 0, o->role_22f, 0);
 		cm_RequestAssignWorker((unsigned char *)e, 0, o->role_22f, 0);
-		cm_SendSellObjekt(*(int *)(e + 1), -1, 0x135, 1, g_773d75, 0);
+		cm_SendSellObjekt(*(int *)(e + 1), -1, 0x135, 1, gm_ActiveTownIndex, 0);
 		counts[k]++;
 	}
 
@@ -287,7 +287,7 @@ void __cdecl gm_InitStartingEntitiesAndRelations(void)
 		cm_SendSetGebBesitzer(*(int *)(e + 1), h, h);
 		cm_RequestAssignWorker((unsigned char *)e, 0, o->role_22f, 0);
 		cm_RequestAssignWorker((unsigned char *)e, 0, o->role_230, 0);
-		cm_SendSellObjekt(*(int *)(e + 1), -1, 0x135, 1, g_773d75, 0);
+		cm_SendSellObjekt(*(int *)(e + 1), -1, 0x135, 1, gm_ActiveTownIndex, 0);
 		counts[0x10]++;
 	}
 
@@ -315,8 +315,8 @@ void __cdecl gm_InitStartingEntitiesAndRelations(void)
 			}
 			q = cm_GetCommandResult(h);
 			cm_SendSetGebBesitzer(p->id, *(int *)(q + 4), *(int *)(q + 4));
-			count = gm_ConvertUnitsToAmount(3000, g_773d75);
-			cm_RequestMoveCredits(*(int *)(q + 4), -1, g_773d75, count);
+			count = gm_ConvertUnitsToAmount(3000, gm_ActiveTownIndex);
+			cm_RequestMoveCredits(*(int *)(q + 4), -1, gm_ActiveTownIndex, count);
 			if (outer <= 0xf) {
 				handles[outer] = q;
 				outer++;
@@ -330,10 +330,10 @@ void __cdecl gm_InitStartingEntitiesAndRelations(void)
 					cm_RequestAssignWorker((unsigned char *)p, 0, o->role_230, 0);
 				}
 			}
-			cm_SendSellObjekt(p->id, -1, 0x135, 1, g_773d75, 0);
+			cm_SendSellObjekt(p->id, -1, 0x135, 1, gm_ActiveTownIndex, 0);
 			if (o->category == 5) {
-				count = gm_ConvertUnitsToAmount(6000, g_773d75);
-				cm_RequestMoveCredits(*(int *)(q + 4), -1, g_773d75, count);
+				count = gm_ConvertUnitsToAmount(6000, gm_ActiveTownIndex);
+				cm_RequestMoveCredits(*(int *)(q + 4), -1, gm_ActiveTownIndex, count);
 			}
 			init_Betrieb((unsigned char *)p);
 			cm_EndCommandSync();
@@ -376,7 +376,7 @@ release_handles:
 		for (; i < outer; i++) {
 			e = (char *)handles[i];
 			if (e) {
-				cm_RequestMoveCredits(*(int *)(e + 4), -1, g_773d75,
+				cm_RequestMoveCredits(*(int *)(e + 4), -1, gm_ActiveTownIndex,
 						gm_GetTypeProductValue(4));
 			}
 		}
@@ -395,7 +395,7 @@ handles_done:
 		kind = o->category;
 		if (slot != 0xffff) {
 			if (kinds[kind] == 2 || kinds[kind] == 1) {
-				e = (char*)&((ENTITY_RECORD*)g_7f4ca0)[slot];
+				e = (char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[slot];
 				if (*(unsigned char *)(e + 2) == 5
 						|| *(unsigned char *)(e + 2) == 4) {
 					if (g_6a3424) {
@@ -408,7 +408,7 @@ handles_done:
 							}
 						}
 						cm_RequestAssignWorker((unsigned char *)p, 1, o->role_230, o->worker_kind[0]);
-						cm_SendSellObjekt(p->id, -1, 0x135, 1, g_773d75, 0);
+						cm_SendSellObjekt(p->id, -1, 0x135, 1, gm_ActiveTownIndex, 0);
 						init_Betrieb((unsigned char *)p);
 					}
 					continue;
@@ -442,16 +442,16 @@ handles_done:
 		}
 		e = (char *)gm_FindNextFilteredEntity();
 	}
-	if (g_6a3440 == 5) {
+	if (gm_SelectedMissionIndex == 5) {
 		k = 0;
-		for (e = g_7f4ca0 + 2; (int)e < (int)(g_7f4ca0 + 0x65402); e += sizeof(ENTITY_RECORD)) {
+		for (e = gm_EntitySlotTable + 2; (int)e < (int)(gm_EntitySlotTable + 0x65402); e += sizeof(ENTITY_RECORD)) {
 			if (*e == 6)
 				break;
 			k++;
 		}
 		memset(&msg, 0, sizeof(msg));
 		msg.b4 = 0x4c;
-		msg.f8 = *(int *)((char*)&((ENTITY_RECORD*)g_7f4ca0)[k].entity_id);
+		msg.f8 = *(int *)((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[k].entity_id);
 		msg.fc = msg.f8;
 		msg.f10 = 0;
 		msg.f14 = 0;
@@ -464,11 +464,11 @@ handles_done:
 	he_EnsureAction0x7a();
 	he_EnsureCityBuilding0x2bActions();
 	outer = 0;
-	for (e = g_7f4ca0 + 2; e < g_7f4ca0 + 0x651e6; e += sizeof(ENTITY_RECORD)) {
+	for (e = gm_EntitySlotTable + 2; e < gm_EntitySlotTable + 0x651e6; e += sizeof(ENTITY_RECORD)) {
 		if (*e == 6 || *e == 7 || *e == 5 || *e == 3 || *e == 4 || *e == 2) {
 			total = 0;
 			if (outer + 1 < 0x300) {
-				for (f = e + sizeof(ENTITY_RECORD); f < g_7f4ca0 + 0x65402; f += sizeof(ENTITY_RECORD)) {
+				for (f = e + sizeof(ENTITY_RECORD); f < gm_EntitySlotTable + 0x65402; f += sizeof(ENTITY_RECORD)) {
 					if (!(*f == 6 || *f == 7 || *f == 5 || *f == 3 || *f == 4
 								|| *f == 2))
 						continue;

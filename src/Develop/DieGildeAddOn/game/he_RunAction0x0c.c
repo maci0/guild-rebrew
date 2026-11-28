@@ -4,7 +4,7 @@
 
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 int __cdecl gm_CompareGameTime(pos14_7f4c00*, pos14_7f4c00*);
 int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
@@ -24,7 +24,7 @@ void __cdecl he_RunAction0x0c(char* u)
 		if (gm_CompareGameTime((pos14_7f4c00*) (u + 0x52), &gm_GameTime) > 0) {
 			break;
 		}
-		*(int*) (u + 0xc8) = cm_SendSellObjekt(*(int*) (u + 0xac), -1, *(int*) (u + 0xb4), 1, g_773d75, 0);
+		*(int*) (u + 0xc8) = cm_SendSellObjekt(*(int*) (u + 0xac), -1, *(int*) (u + 0xb4), 1, gm_ActiveTownIndex, 0);
 		(*(int*) (u + 0x70))++;
 		break;
 	case 1:

@@ -6,7 +6,7 @@ typedef struct Kind {
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern unsigned char* lpGebaeudePROT;
 extern unsigned char* lpGebaeudeINST;
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 int __cdecl gm_CheckStatLevel(int, int);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
@@ -43,7 +43,7 @@ int __cdecl ai_StartEhrerbietung(int a1, unsigned short* entity, int a3, char* r
 			lim = 0xf00500;
 			if (ai_SelectRankedCandidates(entity, 1, &lim, 0.0f, gm_RandomMod(0x20) + 25.0f, &id) == 0)
 				return 0;
-			p = g_7f4ca0 + id * 540;
+			p = gm_EntitySlotTable + id * 540;
 			n = *(int*) ((char*) entity + 0x194);
 			if (n >= 8)
 				n = 8;

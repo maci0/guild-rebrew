@@ -1,10 +1,10 @@
 
 
 
-extern int g_7746d8;
-extern int g_7746a0;
-extern int g_774800;
-extern char g_14cf950;
+extern int d2_SelectedEntityUiFlags;
+extern int sv_ClickedObjekt;
+extern int gm_AllEntitiesControllable;
+extern char io_LastKeyScancode;
 extern int g_14b55a0;
 extern int g_14b5570;
 extern int g_14b57bc;
@@ -55,7 +55,7 @@ void __cdecl d2_RunFriedhofActions(int arg)
 	d2_ClearStatusTextSlots();
 	while (main_RunFrameLoop(d2_RunFriedhofActions, 0x67fff) != 0) {
 		d3_TriggerFriedhofChatScript(arg);
-		if ((g_7746d8 & 0x200) != 0) {
+		if ((d2_SelectedEntityUiFlags & 0x200) != 0) {
 			ageAction = RegisterStatusText("contact_ALTERN_LASSEN", g_14b55a0, 0x2f);
 			hauntAction = RegisterStatusText("contact_HEIMSUCHUNG", g_14b5570, 0x29);
 			ingredientAction = RegisterStatusText("contact_ZUTATEN_SUCHEN", g_14b57bc, 0x13);
@@ -66,44 +66,44 @@ void __cdecl d2_RunFriedhofActions(int arg)
 			transportAction = RegisterStatusText("contact_TRANSPORT", g_14ad100, 0x15);
 		}
 		rentGraveAction = RegisterStatusText("contact_GRAB_MIETEN", g_14b5734, 0x16);
-		if (g_7746a0 != 0) {
-			if ((g_7746d8 & 0x200) != 0) {
+		if (sv_ClickedObjekt != 0) {
+			if ((d2_SelectedEntityUiFlags & 0x200) != 0) {
 				he_DispatchEntityInteractReturn(arg);
-				if (g_7746a0 == ageAction) {
+				if (sv_ClickedObjekt == ageAction) {
 					d2_RunAlternLassenDialog(arg);
-				} else if (g_7746a0 == hauntAction) {
+				} else if (sv_ClickedObjekt == hauntAction) {
 					d2_ShowHauntingDialog(arg);
-				} else if (g_7746a0 == ingredientAction) {
+				} else if (sv_ClickedObjekt == ingredientAction) {
 					d2_RunRohstoffsuchenDialog(arg);
-				} else if (g_7746a0 == graveCareAction) {
+				} else if (sv_ClickedObjekt == graveCareAction) {
 					d2_StartGrabpflege(arg);
-				} else if (g_7746a0 == createHelperAction) {
+				} else if (sv_ClickedObjekt == createHelperAction) {
 					d2_OpenFriedhofGehilfenDialog(arg);
-				} else if (g_7746a0 == insuranceAction) {
+				} else if (sv_ClickedObjekt == insuranceAction) {
 					d2_RunDeathPactDialog(arg);
-				} else if (g_7746a0 == burialPlanAction) {
+				} else if (sv_ClickedObjekt == burialPlanAction) {
 					d2_RunLiegeplanDialog(arg);
-				} else if (g_7746a0 == transportAction) {
+				} else if (sv_ClickedObjekt == transportAction) {
 					d2_OpenTransportPanel(arg);
 				}
 			}
-			if ((g_7746d8 & 0x80) != 0 && g_7746a0 == rentGraveAction) {
+			if ((d2_SelectedEntityUiFlags & 0x80) != 0 && sv_ClickedObjekt == rentGraveAction) {
 				d2_RunGraveyardDialog(arg);
 			}
-		} else if (g_774800 != 0) {
-			if ((*(unsigned char*)&g_14cf950) == 0x1e) {
+		} else if (gm_AllEntitiesControllable != 0) {
+			if ((*(unsigned char*)&io_LastKeyScancode) == 0x1e) {
 				d2_RunAlternLassenDialog(arg);
-			} else if ((*(unsigned char*)&g_14cf950) == 0x2f) {
+			} else if ((*(unsigned char*)&io_LastKeyScancode) == 0x2f) {
 				d2_RunDeathPactDialog(arg);
-			} else if ((*(unsigned char*)&g_14cf950) == 0x22) {
+			} else if ((*(unsigned char*)&io_LastKeyScancode) == 0x22) {
 				d2_OpenFriedhofFogDialog(arg);
-			} else if ((*(unsigned char*)&g_14cf950) == 0x23) {
+			} else if ((*(unsigned char*)&io_LastKeyScancode) == 0x23) {
 				d2_ShowHauntingDialog(arg);
-			} else if ((*(unsigned char*)&g_14cf950) == 0x19) {
+			} else if ((*(unsigned char*)&io_LastKeyScancode) == 0x19) {
 				d2_StartGrabpflege(arg);
-			} else if ((*(unsigned char*)&g_14cf950) == 0x16) {
+			} else if ((*(unsigned char*)&io_LastKeyScancode) == 0x16) {
 				d2_RunGraveyardDialog(arg);
-			} else if ((*(unsigned char*)&g_14cf950) == 0x11) {
+			} else if ((*(unsigned char*)&io_LastKeyScancode) == 0x11) {
 				d2_OpenFriedhofGehilfenDialog(arg);
 			}
 		}

@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char* g_773d78;
-extern unsigned char g_773d75;
+extern char* gm_MarketEntity;
+extern unsigned char gm_ActiveTownIndex;
 extern unsigned char* lpGebaeudePROT;
 extern char* lpObjektePROT;
 #include "Develop/DieGildeAddOn/game/season_slots.h"
@@ -35,13 +35,13 @@ void __cdecl gm_RefreshLocalMarketStock(int season)
 	ids[6] = 0x2db;
 	ids[7] = 0;
 
-	(*(int*)&g_773d78) = (int) gm_StartFilteredEntitySearch(1, 5, 0xa);
-	if ((*(int*)&g_773d78) == 0) {
+	(*(int*)&gm_MarketEntity) = (int) gm_StartFilteredEntitySearch(1, 5, 0xa);
+	if ((*(int*)&gm_MarketEntity) == 0) {
 		return;
 	}
 
-	slots = g_85ab90 + season * 0x2a90;
-	if (season != g_773d75) {
+	slots = gm_MarketStockTable + season * 0x2a90;
+	if (season != gm_ActiveTownIndex) {
 		return;
 	}
 	for (i = 0; i < 0x55; i++) {
@@ -71,7 +71,7 @@ void __cdecl gm_RefreshLocalMarketStock(int season)
 	}
 
 	for (i = 0; i < 0x55; i++) {
-		result = fcn_00502cd0(*(int*) ((char*) (*(int*)&g_773d78) + 0x5d), 1, 0, ((MARKET_STOCK_SLOT*)slots)[i].target_id);
+		result = fcn_00502cd0(*(int*) ((char*) (*(int*)&gm_MarketEntity) + 0x5d), 1, 0, ((MARKET_STOCK_SLOT*)slots)[i].target_id);
 		if (result != 0) {
 			result = fcn_00502cd0(*(int*) ((char*) result + 0x14), 1, 0, 0xff);
 			if (((MARKET_STOCK_SLOT*)slots)[i].active != 0) {
@@ -84,7 +84,7 @@ void __cdecl gm_RefreshLocalMarketStock(int season)
 
 	for (i = 0; ids[i] != 0; i++) {
 		count = 0;
-		result = fcn_00502cd0(*(int*) ((char*) (*(int*)&g_773d78) + 0x5d), 1, 0, ids[i]);
+		result = fcn_00502cd0(*(int*) ((char*) (*(int*)&gm_MarketEntity) + 0x5d), 1, 0, ids[i]);
 		if (result != 0) {
 			r2 = fcn_00502cd0(*(int*) ((char*) result + 0x14), 1, 0, 0xff);
 			if (r2 != 0) {

@@ -5,7 +5,7 @@
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern unsigned char* lpGebaeudePROT;
 extern char g_770b80[];
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 typedef struct TransportBuildingRow {
 	unsigned char kind;
@@ -210,7 +210,7 @@ void __cdecl he_AllocTransport(char* action)
 				if ((*(unsigned char*) (action + 0x78) & 2) != 0) {
 					cm_RequestTransferCurrencyNoKill(-1, *(int*) ((g_770b80 + 4) +
 					              *(unsigned short*) (action + 8) * 0x21c),
-					             (char) g_773d75, v);
+					             (char) gm_ActiveTownIndex, v);
 				}
 			} else {
 				*(char*) (query + 0x28) = 0;

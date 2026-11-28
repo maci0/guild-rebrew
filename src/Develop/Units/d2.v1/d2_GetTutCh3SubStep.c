@@ -1,8 +1,8 @@
 
 
 
-extern char* g_7746cc;
-extern int* g_665f08;
+extern char* sv_SelectedBuilding;
+extern int* d2_TutorialState;
 
 int __cdecl d2_GetTutCh3SubStep(void)
 {
@@ -11,12 +11,12 @@ int __cdecl d2_GetTutCh3SubStep(void)
 	int v;
 	int m;
 
-	p = ((unsigned short*)g_7746cc);
+	p = ((unsigned short*)sv_SelectedBuilding);
 	if (p != 0) {
 		k = *p;
 		v = k;
 		if (v >= 0x92 && v <= 0x97) {
-			m = *(int*) (((char*)g_665f08) + 0x38);
+			m = *(int*) (((char*)d2_TutorialState) + 0x38);
 			if (m == 0) {
 				return k == 0x92 ? 0 : 3;
 			}

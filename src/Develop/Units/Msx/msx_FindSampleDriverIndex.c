@@ -9,7 +9,7 @@ int __cdecl msx_FindSampleDriverIndex(int id)
 	for (i = 0; i < 16; i++) {
 		if (msx_WaveDrivers[i] != 0) {
 			for (j = 0; j < msx_WaveDrivers[i][6]; j++) {
-				if (g_6b7f10[i][j] == id) {
+				if (msx_SampleHandles[i][j] == id) {
 					return i;
 				}
 			}

@@ -21,7 +21,7 @@ typedef struct {
 	char pad249[0x24d - 0x249];
 } BuildingRow;
 
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
@@ -75,7 +75,7 @@ int __cdecl ai_StartUpgradeZunft(int a0, char* e, int a2, Blk24* o1, Blk24* o2)
 		return 0;
 	}
 	item = fcn_00502cd0(*(int*) (w + 0x5d), 2, 6, 0, 0x142);
-	price = gm_SumQueryEntryValues(*(int*) (item + 0x14), g_773d75);
+	price = gm_SumQueryEntryValues(*(int*) (item + 0x14), gm_ActiveTownIndex);
 	lvl = w[0x5c];
 	if (lvl < gm_RandomMod(0x10) + 0x32 && !(w[0x5a] & 4)) {
 		a.a = *(int*) (w + 1);
@@ -120,7 +120,7 @@ int __cdecl ai_StartUpgradeZunft(int a0, char* e, int a2, Blk24* o1, Blk24* o2)
 		}
 		d.b = flag;
 		d.e = 0;
-		val = (int) gm_GetSeasonPrice(a2, g_773d75);
+		val = (int) gm_GetSeasonPrice(a2, gm_ActiveTownIndex);
 		if (val < price) {
 			goto sell;
 		}
@@ -151,7 +151,7 @@ int __cdecl ai_StartUpgradeZunft(int a0, char* e, int a2, Blk24* o1, Blk24* o2)
 		o2->b = 1;
 		return 0x39;
 	}
-	r = gm_GetSeasonTreasury(e, g_773d75);
+	r = gm_GetSeasonTreasury(e, gm_ActiveTownIndex);
 	if (r < 80000) {
 		return 0;
 	}
@@ -166,7 +166,7 @@ int __cdecl ai_StartUpgradeZunft(int a0, char* e, int a2, Blk24* o1, Blk24* o2)
 	o2->kind = 0x12;
 	return 0x39;
 sell:
-	r = gm_GetSeasonTreasury(e, g_773d75);
+	r = gm_GetSeasonTreasury(e, gm_ActiveTownIndex);
 	if (r < 80000) {
 		return 0;
 	}

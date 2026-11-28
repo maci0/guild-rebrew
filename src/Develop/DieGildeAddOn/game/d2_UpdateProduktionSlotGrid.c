@@ -6,7 +6,7 @@ typedef struct {
 } Lane;
 extern Lane g_778d4c[4];
 extern Slot_778da0 g_778da0[16];
-extern char* g_1015ea0;
+extern char* d2_Controls;
 
 typedef unsigned char  u8;
 typedef unsigned short u16;
@@ -83,7 +83,7 @@ int __cdecl d2_UpdateProduktionSlotGrid(char* ep)
     for (j = 0; b == 0 && j < 16; j++) {
         id = g_778da0[j].x10;
         if (id != -1) {
-            if (((D2_CONTROL_TL*) ((int) g_1015ea0))[id].kind == 0x41) {
+            if (((D2_CONTROL_TL*) ((int) d2_Controls))[id].kind == 0x41) {
                 if (d2_GetControlValue(id))
                     b = 1;
             }

@@ -18,7 +18,7 @@ struct icon {
 	char pad[0x41];
 };
 
-extern char* g_1015ea0;
+extern char* d2_Controls;
 extern char* lpObjektePROT;
 extern int g_665f58[4];
 extern int g_665f84[4];
@@ -37,25 +37,25 @@ void __cdecl d2_RefreshRentAGraveOptions(char* a, int dlg, int mode, int* ids, i
 
 	s = *(char**) (a + 0x65);
 	d2_SetForm(dlg, mode);
-	io_AppendText((int) g_6811b0);
+	io_AppendText((int) str_dollar_C);
 	for (i = 0; i < 4; i++) {
 		ids[i] = d2_AddElementToWindow(6 + i * 0x6c, 0, g_665f58[i], d2_CurrentWindowId);
-		((D2_CONTROL_TL*) g_1015ea0)[ids[i]].value_05c = 1;
-		((D2_CONTROL_TL*) g_1015ea0)[ids[i]].flags_1d0 = 3;
-		((D2_CONTROL_TL*) g_1015ea0)[ids[i]].associated_object = (char*) &((OBJECT_PROTOTYPE*)lpObjektePROT)[g_665f84[i]];
+		((D2_CONTROL_TL*) d2_Controls)[ids[i]].value_05c = 1;
+		((D2_CONTROL_TL*) d2_Controls)[ids[i]].flags_1d0 = 3;
+		((D2_CONTROL_TL*) d2_Controls)[ids[i]].associated_object = (char*) &((OBJECT_PROTOTYPE*)lpObjektePROT)[g_665f84[i]];
 	}
 	d2_SetElementEnabled(ids[1], (unsigned char) s[0x19]);
 	d2_SetElementEnabled(ids[2], (unsigned char) s[0x1a]);
 	d2_SetElementEnabled(ids[3], (unsigned char) s[0x1b]);
 	if (*sel == 3 && s[0x1b] == 1) {
-		((D2_CONTROL_TL*) g_1015ea0)[ids[3]].value_03c = 1;
+		((D2_CONTROL_TL*) d2_Controls)[ids[3]].value_03c = 1;
 	} else if (*sel == 2 && s[0x1a] == 1) {
-		((D2_CONTROL_TL*) g_1015ea0)[ids[2]].value_03c = 1;
+		((D2_CONTROL_TL*) d2_Controls)[ids[2]].value_03c = 1;
 	} else if (*sel == 1 && s[0x19] == 1) {
-		((D2_CONTROL_TL*) g_1015ea0)[ids[1]].value_03c = 1;
+		((D2_CONTROL_TL*) d2_Controls)[ids[1]].value_03c = 1;
 	} else {
-		((D2_CONTROL_TL*) g_1015ea0)[ids[0]].value_03c = 1;
+		((D2_CONTROL_TL*) d2_Controls)[ids[0]].value_03c = 1;
 		*sel = 0;
 	}
-	((D2_CONTROL_TL*) g_1015ea0)[ids[*sel]].value_038 = 1;
+	((D2_CONTROL_TL*) d2_Controls)[ids[*sel]].value_038 = 1;
 }

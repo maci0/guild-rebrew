@@ -21,7 +21,7 @@ extern char g_6a2f74[];
 extern int d2_CurrentWindowId;
 #include "Develop/client_types.h"
 
-extern char* g_1015ea0;
+extern char* d2_Controls;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_14b5e84;
 extern int g_6a25e8;
@@ -51,10 +51,10 @@ void __cdecl d2_OpenTransporterInfoPanel(unsigned short* e)
 			d2_SetForm(g_6a25b8, 1);
 			io_AppendText(g_6a2f74, *parent, *e * 2 + 0x9a8);
 			d2_SetForm(g_6a25b8, 0);
-			x = ((((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1) - 1;
+			x = ((((D2_WIN*)d2_Windows)[d2_CurrentWindowId].width - 0x30) >> 1) - 1;
 			id = d2_AddElementToWindow(x, 0x30, *e + 0xdf, d2_CurrentWindowId);
-			((D2_CONTROL_TL*) g_1015ea0)[id].value_05c = 1;
-			if (*parent == g_774970) {
+			((D2_CONTROL_TL*) d2_Controls)[id].value_05c = 1;
+			if (*parent == gm_LocalPlayerSlot) {
 				g_6a25e8 = d2_CreateWindowTextButton(x, 0xac, g_14b5e84);
 			}
 			d2_CurrentValueBar = d2_AddWindowValueGauge(0x18, 0x66, 0x30, 0, 0x64, 0x75, 0x442, d2_CurrentWindowId);

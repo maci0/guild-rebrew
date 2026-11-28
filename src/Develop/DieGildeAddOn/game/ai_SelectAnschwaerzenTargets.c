@@ -1,5 +1,5 @@
 /* Owned (both targets) by src/GOLDTL.fcn_004cef70.c. */
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 unsigned short __cdecl gm_RandomMod(unsigned short);
 int __cdecl gm_FindEntityCandidate(short*, int, int, unsigned short*, float, float, unsigned short*);
@@ -28,10 +28,10 @@ int __cdecl ai_SelectAnschwaerzenTargets(short* entity, int unused, char* result
 	if (gm_FindEntityCandidate(entity, 0xf00500, 4, ids, 50.0f, 100.0f, &dst) == 0)
 		return 0;
 	result[0] = 7;
-	*(int*) (result + 4) = *(int*) (((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[src]) + 4);
-	f = gm_CalcSkillDuelScore((char*) entity, ((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[src]), 4);
+	*(int*) (result + 4) = *(int*) (((char *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[src]) + 4);
+	f = gm_CalcSkillDuelScore((char*) entity, ((char *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[src]), 4);
 	if (!(gm_RandomFloat01() + f >= 1.0f))
 		return 0;
-	*(int*) (result + 8) = *(int*) (((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[dst]) + 4);
+	*(int*) (result + 8) = *(int*) (((char *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[dst]) + 4);
 	return 1;
 }

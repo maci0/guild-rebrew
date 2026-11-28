@@ -56,7 +56,7 @@ typedef struct {
 extern CurveRow g_8680c0[];
 extern SEASON_TABLE g_85ab80[];
 extern char* lpObjektePROT;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl gm_PackGameTime(char*, Stamp*);
@@ -133,7 +133,7 @@ void __cdecl gm_UpdateTownSeasonPrices(int townRow, char* timeSource)
 		if (kind != 0x17 && kind != 0x25) {
 			g_85ab80[townRow].slots[i].unk_20 = (float) (((double) gm_CalcTownSlotTargetStock(townRow, i) - g_85ab80[townRow].slots[i].unk_20) * 0.5 + g_85ab80[townRow].slots[i].unk_20);
 		}
-		if (townRow == g_773d75) {
+		if (townRow == gm_ActiveTownIndex) {
 			g_85ab80[townRow].slots[i].unk_34 = gm_CalcTownSlotProductionSupply(townRow, i);
 		} else {
 			g_85ab80[townRow].slots[i].unk_34 = g_85ab80[townRow].slots[i].unk_30;
@@ -147,7 +147,7 @@ void __cdecl gm_UpdateTownSeasonPrices(int townRow, char* timeSource)
 		g_85ab80[townRow].slots[i].unk_1c = 0;
 		g_85ab80[townRow].slots[i].unk_18 = 0;
 	}
-	if (g_14cbca0 == -1) {
+	if (nt_ClientSocket == -1) {
 		gm_UpdateMarketStockSlots(townRow);
 		cm_SendRandomMarktSlotDelta(townRow);
 	}

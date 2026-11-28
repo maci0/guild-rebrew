@@ -11,7 +11,7 @@ typedef struct CMD_QUEUE_NODE_99 {
 #pragma pack(pop)
 /* SIZE 0x99 */
 extern char g_9bade0[];
-extern COMMAND_STATUS_SLOT g_fb5760[0x8000];
+extern COMMAND_STATUS_SLOT cm_CommandStatusQueue[0x8000];
 extern char* cm_CommandQueueHead;
 extern char* g_aed200;
 extern int ls_SaveVersion;
@@ -65,7 +65,7 @@ read_failed: return 0;
 		g_aed200 = (char*) &((CMD_QUEUE_NODE_99*) g_9bade0)[n];
 	}
 	n = (ls_SaveVersion >= 0x1003c) ? 0x8000 : 0x2000;
-	for (r = (char*) g_fb5760 + 2; (int) r < (int) g_fb5760 + 0x50002; r += 0xa) {
+	for (r = (char*) cm_CommandStatusQueue + 2; (int) r < (int) cm_CommandStatusQueue + 0x50002; r += 0xa) {
 		*(int*) (r + 4) = 0;
 		*(int*) r = -1;
 		*(char*) (r - 2) = 1;
@@ -101,7 +101,7 @@ read_failed: return 0;
 	}
 	n = (ls_SaveVersion >= 0x1003c) ? 0x8000 : 0x2000;
 	if (n > 0) {
-		for (r = (char*) g_fb5760; i < n; i++, r += 0xa) {
+		for (r = (char*) cm_CommandStatusQueue; i < n; i++, r += 0xa) {
 			if (!ls_ReadVfsDataChecked(r, 0xa, 1, fp)) {
 				return 0;
 			}

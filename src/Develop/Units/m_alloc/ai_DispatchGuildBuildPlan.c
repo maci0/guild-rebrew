@@ -24,9 +24,9 @@ typedef struct { u8 kind; u8 unknown01[0x246]; u8 level; u8 unknown248[5]; } Bui
 extern u8* lpGebaeudePROT;
 extern char* lpGebaeudeINST;
 extern char* gm_CityEntity;
-extern int g_7747b4;
+extern int gm_DifficultyLevel;
 extern int gm_GameTime;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 extern void *__cdecl memset(void *p, int v, u32 n);
 int __cdecl rand(void);
@@ -97,7 +97,7 @@ void __cdecl ai_DispatchGuildBuildPlan(void)
     u2 w;
     u2 *wp;
 
-    wi = g_7747b4;
+    wi = gm_DifficultyLevel;
     if (wi > 4)
         wi = 4;
     else if (wi <= 0)
@@ -216,7 +216,7 @@ void __cdecl ai_DispatchGuildBuildPlan(void)
             if (cm_GetCommandStatus(u) == 1) {
                 int two = 2;
                 p = (int *)cm_GetCommandResult(u);
-                cm_RequestMoveCredits(p[1], -1, g_773d75, e2);
+                cm_RequestMoveCredits(p[1], -1, gm_ActiveTownIndex, e2);
                 cm_BeginPacketFieldDelta(p, p[1]);
                 cm_AppendPacketFieldDelta(1, 1, 0xd, &two);
                 cm_RequestChangeAttribute();
@@ -350,7 +350,7 @@ void __cdecl ai_DispatchGuildBuildPlan(void)
             if (cm_GetCommandStatus(u) == 1) {
                 int two = 2;
                 p = (int *)cm_GetCommandResult(u);
-                cm_RequestMoveCredits(p[1], -1, g_773d75, e2);
+                cm_RequestMoveCredits(p[1], -1, gm_ActiveTownIndex, e2);
                 cm_BeginPacketFieldDelta(p, p[1]);
                 cm_AppendPacketFieldDelta(1, 1, 0xd, &two);
                 cm_RequestChangeAttribute();
@@ -436,7 +436,7 @@ void __cdecl ai_DispatchGuildBuildPlan(void)
             if (cm_GetCommandStatus(u) == 1) {
                 int two = 2;
                 p = (int *)cm_GetCommandResult(u);
-                cm_RequestMoveCredits(p[1], -1, g_773d75, e2);
+                cm_RequestMoveCredits(p[1], -1, gm_ActiveTownIndex, e2);
                 cm_BeginPacketFieldDelta(p, p[1]);
                 cm_AppendPacketFieldDelta(1, 1, 0xd, &two);
                 cm_RequestChangeAttribute();
@@ -546,7 +546,7 @@ void __cdecl ai_DispatchGuildBuildPlan(void)
             if (cm_GetCommandStatus(u) == 1) {
                 int two = 2;
                 p = (int *)cm_GetCommandResult(u);
-                cm_RequestMoveCredits(p[1], -1, g_773d75, e2);
+                cm_RequestMoveCredits(p[1], -1, gm_ActiveTownIndex, e2);
                 cm_BeginPacketFieldDelta(p, p[1]);
                 cm_AppendPacketFieldDelta(1, 1, 0xd, &two);
                 cm_AppendPacketFieldDelta(1, 1, 0xc, &v);
@@ -656,7 +656,7 @@ void __cdecl ai_DispatchGuildBuildPlan(void)
             if (cm_GetCommandStatus(u) == 1) {
                 int two = 2;
                 p = (int *)cm_GetCommandResult(u);
-                cm_RequestMoveCredits(p[1], -1, g_773d75, e2);
+                cm_RequestMoveCredits(p[1], -1, gm_ActiveTownIndex, e2);
                 cm_BeginPacketFieldDelta(p, p[1]);
                 cm_AppendPacketFieldDelta(1, 1, 0xd, &two);
                 cm_RequestChangeAttribute();

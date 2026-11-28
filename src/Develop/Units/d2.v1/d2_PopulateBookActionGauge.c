@@ -25,9 +25,9 @@ typedef struct
 	unsigned char state;
 } Gauge;
 
-extern char* g_1015ea0;
+extern char* d2_Controls;
 extern char* g_14abbb0;
-extern char* g_14abc28;
+extern char* txt_NoEntityName;
 
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 void __cdecl d2_SetLabelText(int, char*);
@@ -49,29 +49,29 @@ void __cdecl d2_PopulateBookActionGauge(char* e, Gauge* g, int a3, int a4)
 		}
 		g->state = 2;
 		d2_SetLabelText(g->label, buf);
-		((D2_CONTROL_TL*) g_1015ea0)[g->label].width = 0xa0;
-		((D2_CONTROL_TL*) g_1015ea0)[g->label].height = 0x28;
+		((D2_CONTROL_TL*) d2_Controls)[g->label].width = 0xa0;
+		((D2_CONTROL_TL*) d2_Controls)[g->label].height = 0x28;
 		g->state = 2;
 		return;
 	}
 	if (g->obj != 0 && ((char*) g->obj)[8] != 0) {
 		gm_FormatEntityTitleAndName(*g->obj, 1, 1, buf);
 		d2_SetLabelText(g->label, buf);
-		((D2_CONTROL_TL*) g_1015ea0)[g->label].value_06c = 1;
-		((D2_CONTROL_TL*) g_1015ea0)[g->label].width = 0xa0;
+		((D2_CONTROL_TL*) d2_Controls)[g->label].value_06c = 1;
+		((D2_CONTROL_TL*) d2_Controls)[g->label].width = 0xa0;
 		g->state = 1;
 		return;
 	}
 	d2_ClearGauge(g);
-	src = g_14abc28;
+	src = txt_NoEntityName;
 	dst = buf;
 	while ((*dst++ = *src++) != 0) {
 	}
 	g->state = 0;
 	d2_SetLabelText(g->label, buf);
-	((D2_CONTROL_TL*) g_1015ea0)[g->label].width = 0xa0;
-	((D2_CONTROL_TL*) g_1015ea0)[g->label].height = 0x28;
+	((D2_CONTROL_TL*) d2_Controls)[g->label].width = 0xa0;
+	((D2_CONTROL_TL*) d2_Controls)[g->label].height = 0x28;
 	d2_SetLabelText(g->value, "");
 	g->state = 0;
-	*(int*) (&((D2_CONTROL_TL*) g_1015ea0)[g->icon].associated_object) = 0;
+	*(int*) (&((D2_CONTROL_TL*) d2_Controls)[g->icon].associated_object) = 0;
 }

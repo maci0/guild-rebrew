@@ -1,4 +1,4 @@
-extern char g_679060[];
+extern char str_fmt_s[];
 
 void __cdecl io_FormatTextBuffer(void* dst, void* fmt, ...);
 void __cdecl d2_ShowPrivilegMessage(void* buf, int mode, int y);
@@ -23,7 +23,7 @@ int __cdecl gm_HandleRankBelow3Privilege(char* entity, int* command)
 			return r;
 		}
 		if (v == 1 && *(char*) (entity + 2) == 6) {
-			io_FormatTextBuffer((char*) command + 0x14, g_679060, 0x1d33);
+			io_FormatTextBuffer((char*) command + 0x14, str_fmt_s, 0x1d33);
 		}
 		return r;
 	}

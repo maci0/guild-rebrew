@@ -10,12 +10,12 @@ void __cdecl d2_SetLabelText(int i, const char* s)
 	char c;
 
 	p = s;
-	d = *(char**) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[i].value_088));
+	d = *(char**) (((char*)&((D2_CONTROL_TL*)d2_Controls)[i].value_088));
 	do {
 		c = *p++;
 		*d++ = c;
 	} while (c != 0);
-	if (*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[i].value_06c)) == 0 && *(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[i].value_070)) == 0) {
-		*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[i].width)) = d2_MeasureTextWidth(s, *(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[i].font)));
+	if (*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[i].value_06c)) == 0 && *(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[i].value_070)) == 0) {
+		*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[i].width)) = d2_MeasureTextWidth(s, *(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[i].font)));
 	}
 }

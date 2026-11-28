@@ -24,7 +24,7 @@ typedef struct {
 } FileSlot;
 
 typedef struct VFS_DIR VFS_DIR;
-extern VFS_DIR* g_6b7fdc;
+extern VFS_DIR* vfs_RootDir;
 
 DirList* __cdecl vfs_FindPathNode(char*, int);
 
@@ -37,7 +37,7 @@ int __cdecl vfs_ListFilesByExtension(char* dir, char* ext, FileSlot* out)
 	DirEntry* e;
 	char* p;
 
-	list = vfs_FindPathNode(dir, (int) g_6b7fdc);
+	list = vfs_FindPathNode(dir, (int) vfs_RootDir);
 	if (list == 0) {
 		return 0;
 	}

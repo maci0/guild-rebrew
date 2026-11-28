@@ -45,7 +45,7 @@ void __cdecl he_AllocTalentBoost(char* obj)
 		*(int*) (obj + 0x70) = 0;
 		*(unsigned char*) (obj + 0xad) = tilt;
 		*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;
-		if (g_774800 != 0) {
+		if (gm_AllEntitiesControllable != 0) {
 			gm_AddTime(obj + 0x52, 0, 0, 1);
 		} else {
 			gm_AddTime(obj + 0x52, 5, 0, 0);

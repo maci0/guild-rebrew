@@ -19,8 +19,8 @@ void __cdecl cm_SendTraceEnd(char*);
 int __cdecl d2_GetControlValue(int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
-extern int g_14ce8e0, d2_CurrentElementId, g_774654;
-#define SHP_REC (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]))
+extern int io_RightButtonReleased, d2_CurrentElementId, d2_DialogCloseRequested;
+#define SHP_REC (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot]))
 #define SHP_ID (*(unsigned short*) SHP_REC)
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x005d2470 */
@@ -77,44 +77,44 @@ int __cdecl d2_ShowGiftDialog(int* arg2, unsigned short* arg3)
 		io_AppendText(0x1f4f);
 	} else {
 		slider = d2_GetWindowListItem(dlg, 1,
-		    io_AppendText(0x1f4d, *arg3, *(unsigned char*) &g_773d75));
+		    io_AppendText(0x1f4d, *arg3, *(unsigned char*) &gm_ActiveTownIndex));
 		hv = io_AppendText(0x1f4e);
 		confirm = d2_GetWindowListItem(dlg, 1, hv);
 		vc = d2_GetWindowListItem(dlg, 1, hv + 1);
 		d2_CreateGuiWindow(slider,
-		    gm_AmountToUnits(v14, *(unsigned char*) &g_773d75),
-		    gm_AmountToUnits(ebp, *(unsigned char*) &g_773d75),
-		    gm_AmountToUnits(v14, *(unsigned char*) &g_773d75));
+		    gm_AmountToUnits(v14, *(unsigned char*) &gm_ActiveTownIndex),
+		    gm_AmountToUnits(ebp, *(unsigned char*) &gm_ActiveTownIndex),
+		    gm_AmountToUnits(v14, *(unsigned char*) &gm_ActiveTownIndex));
 	}
-	*(int*) &g_100f1dc = -1;
+	*(int*) &d2_DialogButtonAction = -1;
 	r = 0;
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (*(int*) &g_100f1dc == -1 || flag != 0) {
+		if (*(int*) &d2_DialogButtonAction == -1 || flag != 0) {
 			continue;
 		}
 		if (d2_CurrentElementId == confirm) {
 			hv = d2_GetControlValue(slider);
-			uv = gm_ConvertUnitsToAmount(hv, *(unsigned char*) &g_773d75);
-			if (gm_CheckEntityStock((void*) ((unsigned long)((char*)&((ENTITY_RECORD*)g_7f4ca0)[
-*(unsigned short*) &g_774970])), uv,
-				*(unsigned char*) &g_773d75) != 0) {
+			uv = gm_ConvertUnitsToAmount(hv, *(unsigned char*) &gm_ActiveTownIndex);
+			if (gm_CheckEntityStock((void*) ((unsigned long)((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[
+*(unsigned short*) &gm_LocalPlayerSlot])), uv,
+				*(unsigned char*) &gm_ActiveTownIndex) != 0) {
 				flags = *(unsigned int*) ((char*) arg2 + 0x1c8) | 0x20;
 				cm_SendLogAction((char*) 0x6acba4);
 				cm_RequestMoveCredits(*(int*) ((char*) arg3 + 4),
 				    *(int*) ((char*) arg2 + 4),
-				    *(unsigned char*) &g_773d75, uv);
+				    *(unsigned char*) &gm_ActiveTownIndex, uv);
 				cm_BeginPacketFieldDelta(arg2, *(int*) ((char*) arg2 + 4));
 				cm_AppendPacketFieldDelta(4, 1, 0x1c8, (char*) &flags);
 				cm_RequestChangeAttribute();
 				cm_SendTraceEnd((char*) 0x6acba4);
 			}
 			r = 1;
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 		} else if (d2_CurrentElementId == vc) {
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop((void*) d2_ShowGiftDialog, 0x677c7) != 0);
 	d2_DestroyForm(dlg);

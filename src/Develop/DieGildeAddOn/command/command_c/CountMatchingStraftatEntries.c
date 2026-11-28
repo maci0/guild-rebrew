@@ -15,7 +15,7 @@
 
 int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl FindStraftatIndexById(int);
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 extern int g_99f804[];
 extern int g_9a3804[];
 extern char g_9a3816[];
@@ -34,7 +34,7 @@ int __cdecl CountMatchingStraftatEntries(int arg0, int arg2)
 	if (gm_LookupEntityRecordById(arg0) == 0) {
 		return 0;
 	}
-	base = (int*) (g_7f4ca0 + (arg2 & 0xffff) * 540);
+	base = (int*) (gm_EntitySlotTable + (arg2 & 0xffff) * 540);
 	if (base == 0) {
 		return 0;
 	}

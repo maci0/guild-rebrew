@@ -2,7 +2,7 @@
 
 void __cdecl d3_NormalizeVector(float*);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
-extern char g_6628f8[];
+extern char d3_NegPi[];
 
 /* ADDRESS: GOLD 0x004539e0 */
 float __cdecl d3_SignedPlanarAngle(const float* a, const float* b)
@@ -27,7 +27,7 @@ float __cdecl d3_SignedPlanarAngle(const float* a, const float* b)
     opposite[1] = -second[1];
     opposite[2] = -second[2];
     if (CompareVector3WithinTolerance(first, opposite, 1.0e-7f))
-        return *(float*) g_6628f8;
+        return *(float*) d3_NegPi;
     cr[0] = second[2] * first[1] - second[1] * first[2];
     cr[1] = second[0] * first[2] - second[2] * first[0];
     cr[2] = second[1] * first[0] - second[0] * first[1];

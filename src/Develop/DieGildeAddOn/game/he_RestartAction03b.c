@@ -48,7 +48,7 @@ void __cdecl he_RestartAction03b(void)
 	m.b4 = (char) 0x3b;
 	m.fc = -1;
 	m.b36 = 1;
-	m.f8 = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id;
+	m.f8 = ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id;
 	m.pos = gm_GameTime;
 	cm_SendCopyEntityData(&m);
 }

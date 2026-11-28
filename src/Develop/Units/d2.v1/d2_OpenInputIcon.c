@@ -101,21 +101,21 @@ int __cdecl d2_OpenInputIcon(int x, int y, int w, int h, unsigned char flags)
 		f->max = 0x20;
 	}
 	if (flags & 0x30) {
-		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_078) = 1;
+		(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].value_078) = 1;
 	}
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].kind) = 0x41;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].x) = f->x;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].y) = f->y;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].width) = f->w;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].height) = f->h;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_008) = 0;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_088) = f->idx;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].mode) = 2;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_top) = f->y;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_left) = f->x;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_right) = f->x + f->w;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_bottom) = f->y + f->h;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].data) = (int) f;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].kind) = 0x41;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].x) = f->x;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].y) = f->y;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].width) = f->w;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].height) = f->h;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].value_008) = 0;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].value_088) = f->idx;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].mode) = 2;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].clip_top) = f->y;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].clip_left) = f->x;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].clip_right) = f->x + f->w;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].clip_bottom) = f->y + f->h;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].data) = (int) f;
 	f->ent = id;
 	return id;
 }

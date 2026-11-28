@@ -1,11 +1,11 @@
 
 
 
-extern int g_7746d8;
+extern int d2_SelectedEntityUiFlags;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_14ad288;
 extern int g_14ad0e8;
-extern int g_7746a0;
+extern int sv_ClickedObjekt;
 extern int g_6a25f0;
 
 void __cdecl d2_ClearStatusTextSlots(void);
@@ -39,7 +39,7 @@ void __cdecl d2_RunHolzfaellerInteriorHud(char* e)
 	d2_ClearStatusTextSlots();
 	x = *(int*) (e + 0x71);
 	while (main_RunFrameLoop((void*) d2_RunHolzfaellerInteriorHud, 0x67fff) != 0) {
-		if (g_7746d8 & 0x200) {
+		if (d2_SelectedEntityUiFlags & 0x200) {
 			lager = RegisterStatusText("contact_LAGER", g_14ad0f0, 0xe);
 			holz = RegisterStatusText("contact_PRODUKTION_HOLZ", g_14ad288, 0x13);
 			gelage = RegisterStatusText("contact_GELAGE", g_14ad0e8, 0x16);
@@ -49,22 +49,22 @@ void __cdecl d2_RunHolzfaellerInteriorHud(char* e)
 		}
 		d3_UpdateBuildingInteriorState();
 		d2_HandleErnten(e, x);
-		if (g_7746a0 != 0) {
-			if (g_7746a0 == transport) {
+		if (sv_ClickedObjekt != 0) {
+			if (sv_ClickedObjekt == transport) {
 				d2_OpenTransportPanel(e);
-			} else if (g_7746a0 == lager) {
+			} else if (sv_ClickedObjekt == lager) {
 				d2_ShowLagerOptions(e, *(int*) (e + 0x5d));
-			} else if (g_7746a0 == holz) {
+			} else if (sv_ClickedObjekt == holz) {
 				d2_RunMetalProduktionDialog(e);
-			} else if (g_7746a0 == gelage) {
+			} else if (sv_ClickedObjekt == gelage) {
 				d2_RunGelageDialog(e);
-			} else if (g_7746a0 == zs) {
+			} else if (sv_ClickedObjekt == zs) {
 				d2_RunWorkerTrainingDialog(e);
-			} else if (g_7746a0 == sp) {
+			} else if (sv_ClickedObjekt == sp) {
 				d2_RunWorkerTrainingDialog(e);
 			}
 		}
-		if (g_100f1dc != -1 && d2_CurrentElementId == g_6a25f0) {
+		if (d2_DialogButtonAction != -1 && d2_CurrentElementId == g_6a25f0) {
 			ob_HandleBepflanzung(e);
 		}
 	}

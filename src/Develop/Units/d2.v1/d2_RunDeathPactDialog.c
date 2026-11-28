@@ -17,7 +17,7 @@ struct D2_DEATH_PACT_MSG {
 	int f58;
 	char pad5c[0x9c];
 };
-extern int g_14ce8e0, d2_CurrentElementId;
+extern int io_RightButtonReleased, d2_CurrentElementId;
 void __cdecl d2_InitPlayerBar(void* a1, int a2);
 int __cdecl d2_LoadForm(int a1, int a2, char* path);
 void __cdecl d2_SetOverlayAnimation(int a1, int a2);
@@ -57,11 +57,11 @@ int __cdecl d2_RunDeathPactDialog(char* gebaeude)
 	i = io_AppendText(0x40f7);
 	id1 = d2_GetWindowListItem(dlg, 2, i);
 	id2 = d2_GetWindowListItem(dlg, 2, i + 1);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = one;
-		} else if (g_100f1dc != -1) {
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = one;
+		} else if (d2_DialogButtonAction != -1) {
 			sel = d2_CurrentElementId;
 			if (sel == id1) {
 				char* p;
@@ -89,13 +89,13 @@ found:
 					m.f58 = *(int*) (h + 4);
 					m.f38 = *(int*) (h + 4);
 					cm_SendCopyEntityData(&m);
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				} else {
 nofree:
 					d2_ShowModalMessageBox(*(int*) 0x14b556c, 0);
 				}
 			} else if (sel == id2) {
-				g_774654 = one;
+				d2_DialogCloseRequested = one;
 			}
 		}
 	} while (main_RunFrameLoop((void*) d2_RunDeathPactDialog, 0x677c7) != 0);

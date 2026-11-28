@@ -12,7 +12,7 @@ typedef struct VfsEntry {
 } VfsEntry;
 // SIZE 0x54
 
-extern char* g_772500;
+extern char* d2_FileObjTable;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int d2_ResourceOffset;
 
@@ -24,18 +24,18 @@ void* __cdecl d2_GetResourceData(int resource_id)
 	int original_resource_id;
 
 	d2_ResourceOffset = 0;
-	if (((VfsEntry*)g_772500)[resource_id].flags & 2) {
+	if (((VfsEntry*)d2_FileObjTable)[resource_id].flags & 2) {
 		resource_id += g_772510;
 	}
-	if ((((VfsEntry*)g_772500)[resource_id].kind == 5 || ((VfsEntry*)g_772500)[resource_id].kind == 8) && ((VfsEntry*)g_772500)[resource_id].offset == 0) {
-		if (((VfsEntry*)g_772500)[((VfsEntry*)g_772500)[resource_id].link].data == 0) {
-			d2_Show(((VfsEntry*)g_772500)[resource_id].link, 0);
+	if ((((VfsEntry*)d2_FileObjTable)[resource_id].kind == 5 || ((VfsEntry*)d2_FileObjTable)[resource_id].kind == 8) && ((VfsEntry*)d2_FileObjTable)[resource_id].offset == 0) {
+		if (((VfsEntry*)d2_FileObjTable)[((VfsEntry*)d2_FileObjTable)[resource_id].link].data == 0) {
+			d2_Show(((VfsEntry*)d2_FileObjTable)[resource_id].link, 0);
 		}
 		original_resource_id = resource_id;
-		resource_id = ((VfsEntry*)g_772500)[resource_id].link;
+		resource_id = ((VfsEntry*)d2_FileObjTable)[resource_id].link;
 		d2_ResourceOffset = original_resource_id - resource_id;
-	} else if (((VfsEntry*)g_772500)[resource_id].data == 0) {
+	} else if (((VfsEntry*)d2_FileObjTable)[resource_id].data == 0) {
 		d2_Show(resource_id, 0);
 	}
-	return ((VfsEntry*)g_772500)[resource_id].data;
+	return ((VfsEntry*)d2_FileObjTable)[resource_id].data;
 }

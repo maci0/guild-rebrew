@@ -34,7 +34,7 @@ struct house {
 };
 
 extern pos14_7f4c00 gm_GameTime;
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 void __cdecl cm_SendCopyEntityData(struct msg*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -52,9 +52,9 @@ void __cdecl he_ApplyZigeunerBetrothal(struct house* a, struct house* b)
 
 	h = 0;
 	for (i = 0; i < 768; i++) {
-		if (((struct house*)g_7f4ca0)[i].type == 0 && ((struct house*)g_7f4ca0)[i].site != 0 && ((struct house*)g_7f4ca0)[i].trade == 0
-		    && *(unsigned short*) (((struct house*)g_7f4ca0)[i].site + 0x27) == b->id) {
-			h = &((struct house*)g_7f4ca0)[i];
+		if (((struct house*)gm_EntitySlotTable)[i].type == 0 && ((struct house*)gm_EntitySlotTable)[i].site != 0 && ((struct house*)gm_EntitySlotTable)[i].trade == 0
+		    && *(unsigned short*) (((struct house*)gm_EntitySlotTable)[i].site + 0x27) == b->id) {
+			h = &((struct house*)gm_EntitySlotTable)[i];
 			break;
 		}
 	}

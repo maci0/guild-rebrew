@@ -101,7 +101,7 @@ Slot* __cdecl hst_ParseCommandline_1st_Pass(int id)
 		return 0;
 	}
 	if (n > -1 && n < 4) {
-		slot = &((Slot*)g_1007bc0)[n];
+		slot = &((Slot*)hst_HistoryGroups)[n];
 		if (set) {
 			hst_ResetHistoryGroup(n);
 		}

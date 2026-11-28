@@ -21,7 +21,7 @@ typedef struct Slot {
 } Slot;
 // SIZE 0x2f4
 
-extern char* g_1015ea0;
+extern char* d2_Controls;
 
 char* __cdecl d2_GetResourceData(int idx);
 
@@ -33,7 +33,7 @@ int __cdecl d2_GetElementResourceSize(int slot, int* w, int* h)
 	char* g;
 
 	if (slot != -1) {
-		s = &((Slot*)g_1015ea0)[slot];
+		s = &((Slot*)d2_Controls)[slot];
 		if (s->type == 1 || s->type == 8 || s->type == 5) {
 			f = d2_GetResourceData(s->value);
 			if (f) {

@@ -10,9 +10,9 @@ float __cdecl gm_CalcEntityFavor(unsigned int, unsigned int, unsigned int);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl ai_SelectRankedCandidates(unsigned short*, unsigned int, unsigned int*, float, float, unsigned short*);
 int __cdecl amt_CollectOfficeCandidates(int, int, unsigned char**);
-extern char* g_77261c;
-extern float g_662910;
-extern double g_662aa0;
+extern char* ai_FeudTargetEntity;
+extern float flt_0_01;
+extern double dbl_10;
 
 /* ADDRESS: GOLDTL 0x00496810 */
 int __cdecl ai_StartBestechung(int targetSlot, short* ent, int mode, Cmd* out1, Cmd* out2, int extra)
@@ -60,7 +60,7 @@ int __cdecl ai_StartBestechung(int targetSlot, short* ent, int mode, Cmd* out1, 
         r = ai_SelectBestMethod(9, *(unsigned short*)ent, 1, &c1, &c2);
         goto sent;
     }
-    strength = (int)((float)gm_GetSeasonTreasury(ent, g_773d75) * 0.33f);
+    strength = (int)((float)gm_GetSeasonTreasury(ent, gm_ActiveTownIndex) * 0.33f);
     if (out1->kind == 0) {
         if (*((unsigned char*)ent + 0x168) != 0) {
             best = -1;
@@ -68,7 +68,7 @@ int __cdecl ai_StartBestechung(int targetSlot, short* ent, int mode, Cmd* out1, 
             count = amt_CollectOfficeCandidates(*((unsigned char*)ent + 0x168), 6, list);
             if (count <= 0) return 0;
             for (i = 0; i < count; i++) {
-                if (list[i] != (unsigned char*)g_77261c) {
+                if (list[i] != (unsigned char*)ai_FeudTargetEntity) {
                     value = gm_CalcEntityFavor(*(unsigned short*)ent, *(unsigned short*)list[i], 1);
                     if (value < best_value) {
                         best_value = value;
@@ -81,7 +81,7 @@ int __cdecl ai_StartBestechung(int targetSlot, short* ent, int mode, Cmd* out1, 
         } else {
             if ((*(unsigned int*)((char*)ent + 0x1cc) & 0x1c000) != 0) return 0;
             mode = 0x10000500;
-            if (ai_SelectRankedCandidates((unsigned short*)ent, 1, (unsigned int*)&mode, 0.0f, (float)(unsigned short)gm_RandomMod(0x19) + g_662aa0, (unsigned short*)&targetSlot) == 0) return 0;
+            if (ai_SelectRankedCandidates((unsigned short*)ent, 1, (unsigned int*)&mode, 0.0f, (float)(unsigned short)gm_RandomMod(0x19) + dbl_10, (unsigned short*)&targetSlot) == 0) return 0;
             e = (unsigned char*)0x7f4ca0 + *(unsigned short*)&targetSlot * 0x21c;
         }
         if (e == 0) return 0;
@@ -106,8 +106,8 @@ int __cdecl ai_StartBestechung(int targetSlot, short* ent, int mode, Cmd* out1, 
     }
     if (out1->kind != 7) return 0;
     e = gm_LookupEntityRecordById(out1->f1);
-    if (e == 0 || e == (unsigned char*)g_77261c) return 0;
-    value = (float)strength * g_662910;
+    if (e == 0 || e == (unsigned char*)ai_FeudTargetEntity) return 0;
+    value = (float)strength * flt_0_01;
     if (!(value > 3200.0f)) value = 3200.0f;
     lower = (int)value;
     value = (float)strength * 0.15f;

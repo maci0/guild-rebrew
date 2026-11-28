@@ -2,7 +2,7 @@
  * scene objects there. */
 
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-extern __int64 g_666018;
+extern __int64 gm_TargetPersonTypeMask;
 extern int g_66601c;
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -38,7 +38,7 @@ unsigned int __cdecl gm_LowerTargetStandingWithPeers(ENTITY_RECORD_VIEW* actor, 
 			query[idxOrDelta + 7] = 0xffffffff;
 		}
 		io_FormatTextBuffer(pickerTitle, 0x9c);
-		query[2] = *(unsigned int*) &g_666018;
+		query[2] = *(unsigned int*) &gm_TargetPersonTypeMask;
 		query[0] = 0;
 		query[1] = 0x400;
 		query[4] = 6;
@@ -55,10 +55,10 @@ unsigned int __cdecl gm_LowerTargetStandingWithPeers(ENTITY_RECORD_VIEW* actor, 
 	remaining = 0x300;
 	do {
 		if (slotIdx != target->entity_index && slotIdx != actor->entity_index) {
-			if (((ENTITY_RECORD_VIEW*) g_7f4ca0)[slotIdx].entity_index != 0xffff &&
-			    ((ENTITY_RECORD_VIEW*) g_7f4ca0)[slotIdx].entity_type < 10 &&
-			    ((ENTITY_RECORD_VIEW*) g_7f4ca0)[slotIdx].class_166 != 0) {
-				peers[0] = &((ENTITY_RECORD_VIEW*) g_7f4ca0)[slotIdx];
+			if (((ENTITY_RECORD_VIEW*) gm_EntitySlotTable)[slotIdx].entity_index != 0xffff &&
+			    ((ENTITY_RECORD_VIEW*) gm_EntitySlotTable)[slotIdx].entity_type < 10 &&
+			    ((ENTITY_RECORD_VIEW*) gm_EntitySlotTable)[slotIdx].class_166 != 0) {
+				peers[0] = &((ENTITY_RECORD_VIEW*) gm_EntitySlotTable)[slotIdx];
 				break;
 			}
 		}
@@ -70,10 +70,10 @@ unsigned int __cdecl gm_LowerTargetStandingWithPeers(ENTITY_RECORD_VIEW* actor, 
 	do {
 		if (slotIdx != target->entity_index && slotIdx != actor->entity_index &&
 		    slotIdx != peers[0]->entity_index) {
-			if (((ENTITY_RECORD_VIEW*) g_7f4ca0)[slotIdx].entity_index != 0xffff &&
-			    ((ENTITY_RECORD_VIEW*) g_7f4ca0)[slotIdx].entity_type < 10 &&
-			    ((ENTITY_RECORD_VIEW*) g_7f4ca0)[slotIdx].class_166 != 0) {
-				peers[1] = &((ENTITY_RECORD_VIEW*) g_7f4ca0)[slotIdx];
+			if (((ENTITY_RECORD_VIEW*) gm_EntitySlotTable)[slotIdx].entity_index != 0xffff &&
+			    ((ENTITY_RECORD_VIEW*) gm_EntitySlotTable)[slotIdx].entity_type < 10 &&
+			    ((ENTITY_RECORD_VIEW*) gm_EntitySlotTable)[slotIdx].class_166 != 0) {
+				peers[1] = &((ENTITY_RECORD_VIEW*) gm_EntitySlotTable)[slotIdx];
 				break;
 			}
 		}
@@ -84,10 +84,10 @@ unsigned int __cdecl gm_LowerTargetStandingWithPeers(ENTITY_RECORD_VIEW* actor, 
 	for (remaining = 0x300; remaining != 0; remaining--) {
 		if (slotIdx != target->entity_index && slotIdx != actor->entity_index &&
 		    slotIdx != peers[0]->entity_index && slotIdx != peers[1]->entity_index) {
-			if (((ENTITY_RECORD_VIEW*) g_7f4ca0)[slotIdx].entity_index != 0xffff &&
-			    ((ENTITY_RECORD_VIEW*) g_7f4ca0)[slotIdx].entity_type < 10 &&
-			    ((ENTITY_RECORD_VIEW*) g_7f4ca0)[slotIdx].class_166 != 0) {
-				peers[2] = &((ENTITY_RECORD_VIEW*) g_7f4ca0)[slotIdx];
+			if (((ENTITY_RECORD_VIEW*) gm_EntitySlotTable)[slotIdx].entity_index != 0xffff &&
+			    ((ENTITY_RECORD_VIEW*) gm_EntitySlotTable)[slotIdx].entity_type < 10 &&
+			    ((ENTITY_RECORD_VIEW*) gm_EntitySlotTable)[slotIdx].class_166 != 0) {
+				peers[2] = &((ENTITY_RECORD_VIEW*) gm_EntitySlotTable)[slotIdx];
 				break;
 			}
 		}

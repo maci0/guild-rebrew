@@ -60,14 +60,14 @@ typedef struct D2_LAW_SCREEN_INFO {
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int d2_CurrentWindowId;
-extern char* g_772500;
-extern char* g_77255c;
-extern char* g_1015ea0;
-extern int g_14ce8e0;
+extern char* d2_FileObjTable;
+extern char* d2_CurrentWindow;
+extern char* d2_Controls;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int d2_CurrentElementId;
-extern int g_100f1dc;
-extern char g_7f4ca0[];
+extern int d2_DialogButtonAction;
+extern char gm_EntitySlotTable[];
 
 void* __cdecl d2_LoadForm(short, short, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -140,7 +140,7 @@ int __cdecl d2_RunLawTargetSelectDialog(unsigned char* rec, unsigned char* a2, i
 	ent = &((BUILDING_PROTOTYPE *) lpGebaeudePROT)[*(unsigned char*) rec];
 	type = ent->category;
 	if (type == 1 || type == 2) {
-		h = (D2_LAW_HOUSE_SLOT*) g_7f4ca0;
+		h = (D2_LAW_HOUSE_SLOT*) gm_EntitySlotTable;
 		do {
 			if (n >= 16) {
 				break;
@@ -154,7 +154,7 @@ int __cdecl d2_RunLawTargetSelectDialog(unsigned char* rec, unsigned char* a2, i
 	}
 	if ((type > 3 && type < 10) || (type > 10 && type < 15) || type == 16
 	    || (type > 17 && type < 23)) {
-		h = (D2_LAW_HOUSE_SLOT*) g_7f4ca0;
+		h = (D2_LAW_HOUSE_SLOT*) gm_EntitySlotTable;
 		do {
 			if (n >= 16) {
 				break;
@@ -179,20 +179,20 @@ int __cdecl d2_RunLawTargetSelectDialog(unsigned char* rec, unsigned char* a2, i
 		d2_SetForm(dlg, 0);
 		d2_AddWindowScrollButtons(-1, -1, d2_CurrentWindowId, v, 0x767);
 	}
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
 		if (flag) {
 			d2_SetForm(dlg, 2);
 			d2_ClearWindowChildren(d2_CurrentWindowId, 1);
-			width = *(short*) (g_772500 + 0x1ec2c);
-			dy = *(short*) (g_772500 + 0x1ec2e);
+			width = *(short*) (d2_FileObjTable + 0x1ec2c);
+			dy = *(short*) (d2_FileObjTable + 0x1ec2e);
 			if (n != 0) {
 				y = 0x1e;
 				for (i = 0; i < n; i++) {
 					s = &slots[i];
 					shown = 1;
 					if (a2 != 0 && *(int*) (a2 + 4) != 0) {
-						shown = gm_MatchesTargetFilter(g_774970, (unsigned short) s->id,
+						shown = gm_MatchesTargetFilter(gm_LocalPlayerSlot, (unsigned short) s->id,
 						                     a2, (int) rec);
 						if ((*(int*) a2 | shown) == 0) {
 							continue;
@@ -207,43 +207,43 @@ int __cdecl d2_RunLawTargetSelectDialog(unsigned char* rec, unsigned char* a2, i
 							d2_AddToRadioGroup(holder, btn);
 						}
 					}
-					progress = (int) gm_CalcEntityFavor(g_774970,
+					progress = (int) gm_CalcEntityFavor(gm_LocalPlayerSlot,
 					                              (unsigned short) s->id, 1);
 					s->label = d2_AddElementToWindow(0x98, y + 1,
-					                        ((D2_LAW_HOUSE_SLOT*) g_7f4ca0)[s->id].f18c,
+					                        ((D2_LAW_HOUSE_SLOT*) gm_EntitySlotTable)[s->id].f18c,
 					                        d2_CurrentWindowId);
 					io_FormatTextBuffer(text, 0x6a9680, s->id);
 					name = d2_EqualizeWindowButtonWidths(0x96 - (0xa0 - width) / 2,
 					                    dy + y - 0x46, text, d2_CurrentWindowId);
 					s->name = name;
-					((D2_CONTROL_TL*) (g_1015ea0))[name].value_06c = 1;
-					((D2_CONTROL_TL*) (g_1015ea0))[name].width = 0xa0;
+					((D2_CONTROL_TL*) (d2_Controls))[name].value_06c = 1;
+					((D2_CONTROL_TL*) (d2_Controls))[name].width = 0xa0;
 					d2_SetElementFont(name, 0x56);
-					((D2_CONTROL_TL*) (g_1015ea0))[btn].value_05c = shown;
-					((D2_CONTROL_TL*) (g_1015ea0))[btn].value_060 = (shown == 0);
+					((D2_CONTROL_TL*) (d2_Controls))[btn].value_05c = shown;
+					((D2_CONTROL_TL*) (d2_Controls))[btn].value_060 = (shown == 0);
 					slider = d2_AddWindowValueGauge(0x8c, dy + y + 4, 0x40, 0, 0x64,
 					                      0x75, 0x442, d2_CurrentWindowId);
 					s->slider = slider;
 					d2_CreateGuiWindow(slider, 0, 0x64, progress);
 					d2_SetElementEnabled(slider, 0);
-					d2_PositionControl(((D2_LAW_SCREEN_INFO*) g_77255c)->x
-					                 - (((D2_CONTROL_TL*) (g_1015ea0))[slider].width - width) / 2
+					d2_PositionControl(((D2_LAW_SCREEN_INFO*) d2_CurrentWindow)->x
+					                 - (((D2_CONTROL_TL*) (d2_Controls))[slider].width - width) / 2
 					                 + 0x96,
-					             ((D2_LAW_SCREEN_INFO*) g_77255c)->y + y + 4 + dy,
+					             ((D2_LAW_SCREEN_INFO*) d2_CurrentWindow)->y + y + 4 + dy,
 					             slider);
 					y += 0x5a;
 				}
 			}
 			flag = 0;
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			for (i = 0; i < n; i++) {
 				if (d2_CurrentElementId == slots[i].btn) {
 					if (i > -1) {
-						chosen = (int) &((D2_LAW_HOUSE_SLOT*) g_7f4ca0)[slots[i].id];
+						chosen = (int) &((D2_LAW_HOUSE_SLOT*) gm_EntitySlotTable)[slots[i].id];
 						result = chosen;
 						if (cb != 0) {
 							cb(chosen, (int) rec);
@@ -253,7 +253,7 @@ int __cdecl d2_RunLawTargetSelectDialog(unsigned char* rec, unsigned char* a2, i
 							}
 							holder = -1;
 						} else {
-							g_774654 = 1;
+							d2_DialogCloseRequested = 1;
 						}
 					}
 					break;

@@ -13,6 +13,6 @@ typedef struct {
 } RENDER_QUAD;
 /* SIZE 0xac */
 
-extern RENDER_QUAD g_1552020[0x400];
+extern RENDER_QUAD d2_QueuedQuads[0x400];
 
 #endif

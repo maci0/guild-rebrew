@@ -6,7 +6,7 @@ typedef struct {
 } ZUNFT_UPGRADE_ENTITY_VIEW;
 // SIZE 0x21c
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_14aad38;
 extern int g_14aac9c;
@@ -26,13 +26,13 @@ void __cdecl d2_StartZunftLevel2Action(void)
 	int flen;
 	int r;
 
-	r = amt_CanUpgradeBuildingTier2(&((ZUNFT_UPGRADE_ENTITY_VIEW*)g_7f4ca0)[g_774970]);
+	r = amt_CanUpgradeBuildingTier2(&((ZUNFT_UPGRADE_ENTITY_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot]);
 	if (r != 1) {
 		if (r == -1) {
 			d2_ShowModalMessageBox(g_14aad38, 0);
 			return;
 		}
-		d2_CheckActionBlocker(&((ZUNFT_UPGRADE_ENTITY_VIEW*)g_7f4ca0)[g_774970], 5);
+		d2_CheckActionBlocker(&((ZUNFT_UPGRADE_ENTITY_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot], 5);
 		return;
 	}
 	flen = 0x50;

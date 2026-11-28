@@ -36,11 +36,11 @@ struct msg {
 extern pos14_7f4c00 gm_GameTime;
 
 extern int d2_CurrentWindowId;
-extern int g_100f1dc;
-extern int g_14ce8e0;
+extern int d2_DialogButtonAction;
+extern int io_RightButtonReleased;
 extern int d2_CurrentElementId;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern int g_14b5798;
+extern int d2_GrabpflegeTitleId;
 extern int g_14b579c;
 extern int g_14b556c;
 
@@ -76,7 +76,7 @@ int __cdecl d2_ConfirmGrabpflege(char* who, char* request)
 
 	r = 0;
 	if (he_HasActiveGrabpflege(who, *(int*) (request + 4), *(unsigned char*) (request + 8)) != 0) {
-		d2_ShowGreenMessageBox(g_14b5798, g_14b579c, 0);
+		d2_ShowGreenMessageBox(d2_GrabpflegeTitleId, g_14b579c, 0);
 		return 0;
 	}
 	d2_InitPlayerBar(who, 0);
@@ -91,16 +91,16 @@ int __cdecl d2_ConfirmGrabpflege(char* who, char* request)
 	s = io_AppendText(0x4121);
 	ok = d2_GetWindowListItem(h, 2, s);
 	cancel = d2_GetWindowListItem(h, 2, s + 1);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
-		} else if (g_100f1dc != -1) {
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
+		} else if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == ok) {
 				hh = 0;
 				for (i = 0; i < 768; i++) {
-					if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].selected != 0) {
-						hh = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]);
+					if (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].selected != 0) {
+						hh = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i]);
 						break;
 					}
 				}
@@ -110,7 +110,7 @@ int __cdecl d2_ConfirmGrabpflege(char* who, char* request)
 					memset(&m, 0, sizeof(m));
 					m.kind = 0x8d;
 					m.code = 1;
-					m.owner = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (who + 0x27)].entity_id;
+					m.owner = ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (who + 0x27)].entity_id;
 					m.target = *(int*) (who + 1);
 					m.when = gm_GameTime;
 					m.who = *(int*) (request + 4);
@@ -121,10 +121,10 @@ int __cdecl d2_ConfirmGrabpflege(char* who, char* request)
 						main_RunFrameLoop(0, 0x20007);
 					}
 					r = 1;
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				}
 			} else if (d2_CurrentElementId == cancel) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	} while (main_RunFrameLoop(d2_ConfirmGrabpflege, 0x677c7) != 0);

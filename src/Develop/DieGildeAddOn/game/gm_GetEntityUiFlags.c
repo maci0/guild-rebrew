@@ -1,6 +1,6 @@
 extern unsigned char* lpGebaeudePROT;
 extern char* lpObjektePROT;
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 int __cdecl gm_MapBuildingCatToGuildSlot(unsigned char typ);
@@ -27,7 +27,7 @@ int __cdecl gm_GetEntityUiFlags(int playerIndex, unsigned char* building, unsign
 (unsigned int) *building]));
 		found = gm_CheckStatLevel(playerIndex, gm_MapBuildingCatToGuildSlot(*rec));
 		if (*rec == 0x1d)
-			return gm_GetBuildingUiFlags((void*) (((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[playerIndex])), building, object);
+			return gm_GetBuildingUiFlags((void*) (((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[playerIndex])), building, object);
 		switch (*rec) {
 		case 33:
 				if (*(unsigned short*) (building + 0x25) == playerIndex)
@@ -102,10 +102,10 @@ int __cdecl gm_GetEntityUiFlags(int playerIndex, unsigned char* building, unsign
 			case 25:
 			case 26:
 				result = 0x5081;
-				if ((*rec == 0x17 && *((unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[playerIndex] + 0x169) == 0x1e) ||
-				    (*rec == 0x18 && *((unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[playerIndex] + 0x169) == 0x1f) ||
-				    (*rec == 0x19 && *((unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[playerIndex] + 0x169) == 0x20) ||
-				    (*rec == 0x1a && *((unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[playerIndex] + 0x169) == 0x21))
+				if ((*rec == 0x17 && *((unsigned char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[playerIndex] + 0x169) == 0x1e) ||
+				    (*rec == 0x18 && *((unsigned char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[playerIndex] + 0x169) == 0x1f) ||
+				    (*rec == 0x19 && *((unsigned char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[playerIndex] + 0x169) == 0x20) ||
+				    (*rec == 0x1a && *((unsigned char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[playerIndex] + 0x169) == 0x21))
 					result = 0x52f1;
 				break;
 			case 11:
@@ -144,7 +144,7 @@ int __cdecl gm_GetEntityUiFlags(int playerIndex, unsigned char* building, unsign
 			case 15:
 				if (*rec != 3)
 					result = 0x5081;
-				ch = *((unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[playerIndex] + 0x166);
+				ch = *((unsigned char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[playerIndex] + 0x166);
 				if (ch == 0xf || ch == 0xe || ch == 0xd)
 					result |= 0x502;
 				if (ch == 0xf || ch == 0xe || ch == 0xd)
@@ -174,7 +174,7 @@ int __cdecl gm_GetEntityUiFlags(int playerIndex, unsigned char* building, unsign
 				}
 				break;
 			case 6:
-				geb = (unsigned char*) (((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[playerIndex]));
+				geb = (unsigned char*) (((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[playerIndex]));
 				result = 0x5001;
 				if (*(unsigned short*) (building + 0x25) == playerIndex)
 					result = 0x503d;
@@ -184,7 +184,7 @@ int __cdecl gm_GetEntityUiFlags(int playerIndex, unsigned char* building, unsign
 					result |= 0x30;
 				break;
 			case 28:
-				geb = (unsigned char*) (((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[playerIndex]));
+				geb = (unsigned char*) (((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[playerIndex]));
 				if (gm_MapEntityStatRange(*(unsigned char*) (geb + 0x164)) == 8)
 					result = 1;
 				else if (gm_StartFilteredEntitySearch(
@@ -250,7 +250,7 @@ common:
 			result |= 0x4000;
 	}
 finish:
-	if (g_774800 != 0) {
+	if (gm_AllEntitiesControllable != 0) {
 		result = 0xffffffff;
 		if (building != 0 && (*rec == 3 || *rec == 0x21))
 			result = 0xfffffffe;

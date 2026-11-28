@@ -1,18 +1,18 @@
 
 
 
-extern int* g_6b7d78;
-extern int g_6b7d7c;
-extern char g_14cb980[];
+extern int* sb_BankListHead;
+extern int sb_WaveDriver;
+extern char sb_NullSampleBank[];
 
 char* __cdecl sb_FindSampleBank(char* key)
 {
 	char* p;
 	int i;
 
-	p = ((char*)g_6b7d78);
-	if (g_6b7d7c == 0) {
-		return g_14cb980;
+	p = ((char*)sb_BankListHead);
+	if (sb_WaveDriver == 0) {
+		return sb_NullSampleBank;
 	}
 	for (; p != 0; p = *(char**) (p + 0x13c)) {
 		for (i = 0; i < *(int*) (p + 0x134); i++) {

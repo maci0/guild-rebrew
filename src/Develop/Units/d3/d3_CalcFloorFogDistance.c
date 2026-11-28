@@ -133,11 +133,11 @@ float __cdecl d3_CalcFloorFogDistance(float* floor, float* camPos, float* camRot
 	t1 = u0*camRot[1] + u2*camRot[9] + u1*camRot[5];
 	t2 = u2*camRot[10] + u1*camRot[6] + u0*camRot[2];
 	c0 = camRot[4]*0.0f;
-	plane[0][0] = (camRot[0]*0.0f - camRot[8]*g_6628a0) + c0;
+	plane[0][0] = (camRot[0]*0.0f - camRot[8]*flt_1_0) + c0;
 	c1 = camRot[5]*0.0f;
-	plane[0][1] = (camRot[1]*0.0f - camRot[9]*g_6628a0) + c1;
+	plane[0][1] = (camRot[1]*0.0f - camRot[9]*flt_1_0) + c1;
 	c2 = camRot[6]*0.0f;
-	plane[0][2] = (camRot[2]*0.0f - camRot[10]*g_6628a0) + c2;
+	plane[0][2] = (camRot[2]*0.0f - camRot[10]*flt_1_0) + c2;
 	plane[0][3] = plane[0][2]*t2 + plane[0][1]*t1 + plane[0][0]*t0;
 	v0 = camRot[8]*0.0f + c0;
 	plane[1][0] = v0 + camRot[0];
@@ -153,9 +153,9 @@ float __cdecl d3_CalcFloorFogDistance(float* floor, float* camPos, float* camRot
 	t0 = u0*camRot[0] + u2*camRot[8] + u1*camRot[4];
 	t1 = u0*camRot[1] + u2*camRot[9] + u1*camRot[5];
 	t2 = u2*camRot[10] + u1*camRot[6] + u0*camRot[2];
-	plane[2][0] = v0 - camRot[0]*g_6628a0;
-	plane[2][1] = v1 - camRot[1]*g_6628a0;
-	plane[2][2] = v2 - camRot[2]*g_6628a0;
+	plane[2][0] = v0 - camRot[0]*flt_1_0;
+	plane[2][1] = v1 - camRot[1]*flt_1_0;
+	plane[2][2] = v2 - camRot[2]*flt_1_0;
 	plane[2][3] = plane[2][2]*t2 + plane[2][1]*t1 + plane[2][0]*t0;
 	plane[3][0] = camRot[0]*0.0f + c0 + camRot[8];
 	plane[3][1] = camRot[1]*0.0f + c1 + camRot[9];

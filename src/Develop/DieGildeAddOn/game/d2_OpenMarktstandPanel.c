@@ -1,12 +1,12 @@
 
 
 
-extern char* g_7e2aa0;
-extern char* g_7746c0;
+extern char* d2_SelectedBuilding;
+extern char* d3_FocusedEntityObject;
 extern int g_7746d4;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char* g_773d78;
-extern char* g_7746cc;
+extern char* gm_MarketEntity;
+extern char* sv_SelectedBuilding;
 
 void __cdecl d2_DestroySelectionPanel(void);
 void __cdecl sv_ClearObjectSelection(void);
@@ -17,25 +17,25 @@ void __cdecl d2_RunTradeInventoryPanel(int, int);
 
 void __cdecl d2_OpenMarktstandPanel(int buildingArg, int queryTypeId)
 {
-	(*(int*)&g_7e2aa0) = 0;
-	g_7746c0 = 0;
+	(*(int*)&d2_SelectedBuilding) = 0;
+	d3_FocusedEntityObject = 0;
 	d2_DestroySelectionPanel();
 	sv_ClearObjectSelection();
 	g_7746d4 = 1;
 	if (g_6a25b8 != -1) {
 		d2_SetFormVisibility(g_6a25b8, 0);
 	}
-	(*(int*)&g_7746cc) = fcn_00502cd0(*(int*) (g_773d78 + 0x5d), 1, 0, queryTypeId);
-	if ((*(int*)&g_7746cc) != 0) {
-		d2_DispatchTutorialInput(0x17, (*(int*)&g_7746cc), 0, queryTypeId);
-		while ((*(int*)&g_7746cc) != 0) {
+	(*(int*)&sv_SelectedBuilding) = fcn_00502cd0(*(int*) (gm_MarketEntity + 0x5d), 1, 0, queryTypeId);
+	if ((*(int*)&sv_SelectedBuilding) != 0) {
+		d2_DispatchTutorialInput(0x17, (*(int*)&sv_SelectedBuilding), 0, queryTypeId);
+		while ((*(int*)&sv_SelectedBuilding) != 0) {
 			g_7746d4 = 1;
 			d2_RunTradeInventoryPanel(buildingArg, 9);
 		}
 	}
-	d2_DispatchTutorialInput(0x18, (*(int*)&g_7746cc), 0, queryTypeId);
-	d2_DispatchTutorialInput(0x17, (*(int*)&g_7746cc), 1, queryTypeId);
-	(*(int*)&g_7746cc) = 0;
+	d2_DispatchTutorialInput(0x18, (*(int*)&sv_SelectedBuilding), 0, queryTypeId);
+	d2_DispatchTutorialInput(0x17, (*(int*)&sv_SelectedBuilding), 1, queryTypeId);
+	(*(int*)&sv_SelectedBuilding) = 0;
 	if (g_6a25b8 != -1) {
 		d2_SetFormVisibility(g_6a25b8, 1);
 	}

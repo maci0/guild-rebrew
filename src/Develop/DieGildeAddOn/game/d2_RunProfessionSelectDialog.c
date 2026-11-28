@@ -59,7 +59,7 @@ unsigned int __cdecl d2_RunProfessionSelectDialog(unsigned short* actor)
     d2_SetForm(dialog, 0);
     colW = (*(int*) (d2_CurrentWindowId * 0x3cc + 0x1015f4c) - 0x40) / 5;
     rowH = (*(int*) (d2_CurrentWindowId * 0x3cc + 0x1015f50) - 0x84) / 3;
-    padOrProf = (colW - *(short*) ((int) g_772500 + 0x1d978)) / 2;
+    padOrProf = (colW - *(short*) ((int) d2_FileObjTable + 0x1d978)) / 2;
     io_AppendText(0x1d36);
     iconPtr = (unsigned int*) g_14a5adc;
     textBase = *(char*) ((char*) ent + 9) ? 0x18f : 0x130;
@@ -70,12 +70,12 @@ unsigned int __cdecl d2_RunProfessionSelectDialog(unsigned short* actor)
         ctrlId = d2_AddElementToWindow((idx % 5) * colW + 0x20 + padOrProf,
                           (idx / 5) * rowH + 100 + padOrProf, idx + 0x5a2,
                           d2_CurrentWindowId);
-        ((D2_CONTROL_TL*) g_1015ea0)[ctrlId].value_05c = 1;
-        ((D2_CONTROL_TL*) g_1015ea0)[ctrlId].flags_1d0 = 3;
+        ((D2_CONTROL_TL*) d2_Controls)[ctrlId].value_05c = 1;
+        ((D2_CONTROL_TL*) d2_Controls)[ctrlId].flags_1d0 = 3;
         d2_SetElementFont(ctrlId, 0x56);
-        ((D2_CONTROL_TL*) g_1015ea0)[ctrlId].value_06c = 1;
-        ((D2_CONTROL_TL*) g_1015ea0)[ctrlId].value_1dc = 0xffffffce;
-        ((D2_CONTROL_TL*) g_1015ea0)[ctrlId].value_1e0 = 0x44;
+        ((D2_CONTROL_TL*) d2_Controls)[ctrlId].value_06c = 1;
+        ((D2_CONTROL_TL*) d2_Controls)[ctrlId].value_1dc = 0xffffffce;
+        ((D2_CONTROL_TL*) d2_Controls)[ctrlId].value_1e0 = 0x44;
         if (profId) {
             sprintf(buf, (char*) *(unsigned int*) 0x14ac804,
                     gm_GetOppositeStatIndex(profId, (unsigned int) txt_TextEntries[profId + textBase]));
@@ -83,14 +83,14 @@ unsigned int __cdecl d2_RunProfessionSelectDialog(unsigned short* actor)
             buf[0] = 0;
         }
         d2_SetControlText(ctrlId, (int) buf);
-        ((D2_CONTROL_TL*) g_1015ea0)[ctrlId].width = 0xa4;
+        ((D2_CONTROL_TL*) d2_Controls)[ctrlId].width = 0xa4;
         if (profId == *(unsigned char*) ((char*) actor + 0x164)) {
             d2_SetElementEnabled(ctrlId, 0);
         } else if (!profId) {
-            ((D2_CONTROL_TL*) g_1015ea0)[ctrlId].value_1cc = 0x56;
-            ((D2_CONTROL_TL*) g_1015ea0)[ctrlId].value_1d4 = 0xa4;
+            ((D2_CONTROL_TL*) d2_Controls)[ctrlId].value_1cc = 0x56;
+            ((D2_CONTROL_TL*) d2_Controls)[ctrlId].value_1d4 = 0xa4;
             srcIcon = (char*) *iconPtr;
-            dstIcon = (char*) ((char*) &((D2_CONTROL_TL*) g_1015ea0)[ctrlId] + 0xcc);
+            dstIcon = (char*) ((char*) &((D2_CONTROL_TL*) d2_Controls)[ctrlId] + 0xcc);
             do {
                 ch = *srcIcon;
                 srcIcon = &srcIcon[1];
@@ -104,16 +104,16 @@ unsigned int __cdecl d2_RunProfessionSelectDialog(unsigned short* actor)
 
         idx = nextIdx;
     } while (idx + 1 <= 0xf);
-    g_100f1dc = -1;
+    d2_DialogButtonAction = -1;
     while (main_RunFrameLoop((void*) 0x5d97f0, 0x657c7)) {
-        if (g_14ce8e0) {
-            g_774654 = 1;
+        if (io_RightButtonReleased) {
+            d2_DialogCloseRequested = 1;
         }
         if (g_14ce8d8 && d2_CurrentElementId != -1) {
-            if (he_StartHandlungSearch(2, 2, g_774970, 0, 0x26)) {
+            if (he_StartHandlungSearch(2, 2, gm_LocalPlayerSlot, 0, 0x26)) {
                 int entOffset;
-                entOffset = (unsigned int) g_774970 * 0x21c;
-                io_FormatTextBuffer(buf, 0x15bd, g_774970,
+                entOffset = (unsigned int) gm_LocalPlayerSlot * 0x21c;
+                io_FormatTextBuffer(buf, 0x15bd, gm_LocalPlayerSlot,
                              (*(char*) (entOffset + 0x7f4ca9) ? 0x18f : 0x130)
                                  + *(unsigned char*) (entOffset + 0x7f4e04)
                                  - 1);
@@ -121,7 +121,7 @@ unsigned int __cdecl d2_RunProfessionSelectDialog(unsigned short* actor)
             } else {
                 d2_SetGroupVisibility(dialog, 0);
                 for (idx = 0; idx <= 0xf; idx++) {
-                    if (g_100f1dc == idx + 0x5a2) {
+                    if (d2_DialogButtonAction == idx + 0x5a2) {
                         break;
                     }
                 }
@@ -132,7 +132,7 @@ unsigned int __cdecl d2_RunProfessionSelectDialog(unsigned short* actor)
                     if (profId != *(unsigned char*) ((char*) actor + 0x164)
                         && d2_CheckActionBlocker((char*) actor, -apDelta)) {
                         for (idx = 0; idx <= 0xf; idx++) {
-                            if (g_100f1dc == idx + 0x5a2) {
+                            if (d2_DialogButtonAction == idx + 0x5a2) {
                                 break;
                             }
                         }
@@ -145,7 +145,7 @@ unsigned int __cdecl d2_RunProfessionSelectDialog(unsigned short* actor)
                             if (d2_ShowModalMessageBox((int) promptBuf, 1)) {
                                 cm_RequestSetEntityLevel(*(int*) ((char*) actor + 4), padOrProf);
                                 cm_RequestModifyHealth(*(int*) ((char*) actor + 4), apDelta);
-                                g_774654 = 1;
+                                d2_DialogCloseRequested = 1;
                                 result = 0x10;
                             }
                         }

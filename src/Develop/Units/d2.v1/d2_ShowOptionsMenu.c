@@ -5,7 +5,7 @@ extern int g_14ac498;
 extern int g_14ac49c;
 extern int g_14ac4a0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char g_14cf950;
+extern char io_LastKeyScancode;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
 int __cdecl d2_LoadForm(int, int, char*);
@@ -40,8 +40,8 @@ void __cdecl d2_ShowOptionsMenu(void)
 	b3 = d2_AddMenuOptionButton(3, g_14ac4a0, d2_CurrentWindowId);
 	p = d2_CreateRadioGroup(3, b1, b2, b3);
 	while (main_RunFrameLoop(d2_ShowOptionsMenu, 0x24087) != 0) {
-		if (g_14ce8e0 != 0 || (*(unsigned char*)&g_14cf950) == 1) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0 || (*(unsigned char*)&io_LastKeyScancode) == 1) {
+			d2_DialogCloseRequested = 1;
 		}
 		d2_UpdateRadioGroup(p);
 		if (g_14ce8d8 != 0 && d2_CurrentElementId != -1) {

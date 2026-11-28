@@ -12,15 +12,15 @@ void __cdecl d3_ReloadAllTextures(int selector, SCENE_PROGRESS progress)
 	total = 0;
 	if (progress != 0) {
 		total = 0;
-		for (i = 0; i < g_10404a0; i++) {
-			if (g_104049c[i].level > 0 && (g_104049c[i].flags & 2) == 0) {
+		for (i = 0; i < d3_TextureBankCount; i++) {
+			if (d3_TextureBank[i].level > 0 && (d3_TextureBank[i].flags & 2) == 0) {
 				total++;
 			}
 		}
 	}
 	done = 0;
-	r = g_104049c;
-	for (i = 0; i < g_10404a0; i++, r++) {
+	r = d3_TextureBank;
+	for (i = 0; i < d3_TextureBankCount; i++, r++) {
 		if (r->level > 0 && (r->flags & 2) == 0) {
 			d3_LoadTextureSurface(r, selector);
 			if (progress != 0) {

@@ -26,8 +26,8 @@ struct item {
 };
 #pragma pack()
 
-extern int* g_665f08;
-extern volatile int g_6b7fac;
+extern int* d2_TutorialState;
+extern volatile int gm_GameTicks;
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
@@ -36,27 +36,27 @@ int __cdecl d2_UpdateTutCh4Cat02Msg10Step(int* ev)
 	struct item* p;
 
 	if (ev[0] == 0x2b && (p = (struct item*) ev[1]) != 0) {
-		if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[p->good].category == 2 && p->owner == g_774970 && (*(struct fsm**)&g_665f08)->flag == 0
+		if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[p->good].category == 2 && p->owner == gm_LocalPlayerSlot && (*(struct fsm**)&d2_TutorialState)->flag == 0
 		    && (ev[3] == 5 || ev[3] == 2 || ev[3] == 0xd || ev[3] == 8)) {
-			(*(struct fsm**)&g_665f08)->flag = 1;
-			(*(struct fsm**)&g_665f08)->next = 0xa;
-			(*(struct fsm**)&g_665f08)->state = (*(struct fsm**)&g_665f08)->next;
-			(*(struct fsm**)&g_665f08)->since = g_6b7fac;
+			(*(struct fsm**)&d2_TutorialState)->flag = 1;
+			(*(struct fsm**)&d2_TutorialState)->next = 0xa;
+			(*(struct fsm**)&d2_TutorialState)->state = (*(struct fsm**)&d2_TutorialState)->next;
+			(*(struct fsm**)&d2_TutorialState)->since = gm_GameTicks;
 		}
 	} else if (ev[0] == 0x10 && (p = (struct item*) ev[1]) != 0) {
-		if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[p->good].category == 2 && p->owner == g_774970) {
-			if (ev[2] == 0 && (*(struct fsm**)&g_665f08)->flag == 0) {
-				(*(struct fsm**)&g_665f08)->next = 9;
+		if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[p->good].category == 2 && p->owner == gm_LocalPlayerSlot) {
+			if (ev[2] == 0 && (*(struct fsm**)&d2_TutorialState)->flag == 0) {
+				(*(struct fsm**)&d2_TutorialState)->next = 9;
 			}
 			if (ev[2] == 1) {
-				if ((*(struct fsm**)&g_665f08)->flag == 1) {
-					(*(struct fsm**)&g_665f08)->next = 0xb;
+				if ((*(struct fsm**)&d2_TutorialState)->flag == 1) {
+					(*(struct fsm**)&d2_TutorialState)->next = 0xb;
 				} else {
-					(*(struct fsm**)&g_665f08)->next = 4;
+					(*(struct fsm**)&d2_TutorialState)->next = 4;
 				}
 			}
-			(*(struct fsm**)&g_665f08)->state = (*(struct fsm**)&g_665f08)->next;
-			(*(struct fsm**)&g_665f08)->since = g_6b7fac;
+			(*(struct fsm**)&d2_TutorialState)->state = (*(struct fsm**)&d2_TutorialState)->next;
+			(*(struct fsm**)&d2_TutorialState)->since = gm_GameTicks;
 			return 1;
 		}
 	}

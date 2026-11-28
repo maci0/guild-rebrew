@@ -2,18 +2,18 @@
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 extern int d2_CurrentWindowId;
 extern char* lpObjektePROT;
-extern char* g_1015ea0;
-extern int g_100f1dc;
+extern char* d2_Controls;
+extern int d2_DialogButtonAction;
 extern int g_100f884;
 extern int d2_CurrentElementId;
-extern int g_7746cc;
+extern int sv_SelectedBuilding;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 extern int g_7798a0;
 extern int gm_GameTime;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned short g_7f3ee4;
 
@@ -113,7 +113,7 @@ int __cdecl d2_RunMetalProduktionDialog(char* building)
 	p[3] = 0xe;
 	d2_DrawPanelFrame(d2_CurrentWindowId, 0x70b, 0x742);
 	d2_CreateWindowScrollbar(0x270, 0x15e, d2_CurrentWindowId, d2_GetFormWindow(h, 2, 0x78, &v16, &v15, &item));
-	*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[item].font) = 0x54;
+	*(unsigned int*) (&((D2_CONTROL_TL*) (d2_Controls))[item].font) = 0x54;
 	do {
 		d2_SetForm(h, 2);
 		t = fcn_00502cd0(*(unsigned int*) (building + 0x5d), 2, 6, 0, 0xff);
@@ -122,7 +122,7 @@ int __cdecl d2_RunMetalProduktionDialog(char* building)
 		q = fcn_00502cd0(*(unsigned int*) (building + 0x5d), 2, 6, 0, 0x2a);
 		if (!q)
 			return 0;
-		if ((g_100f1dc != -1) && (g_100f884 == h)) {
+		if ((d2_DialogButtonAction != -1) && (g_100f884 == h)) {
 			any = 0;
 			p = (int*) 0x7e30e0;
 			do {
@@ -161,11 +161,11 @@ int __cdecl d2_RunMetalProduktionDialog(char* building)
 							if (*(unsigned short*) (building + 0x27) != 0xffff)
 								req.f8 = *(unsigned int*) (*(unsigned short*) (building + 0x27) * 0x21c + 0x7f4ca4);
 							else
-								req.f8 = *(unsigned int*) ((unsigned int) g_774970 * 0x21c + 0x7f4ca4);
+								req.f8 = *(unsigned int*) ((unsigned int) gm_LocalPlayerSlot * 0x21c + 0x7f4ca4);
 							req.c28 = gm_GameTime;
-							req.c2c = g_7f4c04;
-							req.c30 = g_7f4c08;
-							req.c34 = g_7f4c0c;
+							req.c2c = gm_GameTimeHour;
+							req.c30 = gm_GameTimeSliceDword;
+							req.c34 = gm_GameTimeTailWord;
 							req.id = *(unsigned short*) (0x779160 + k * 0x58);
 							req.f12 = *(unsigned int*) (building + 1);
 							req.f16 = 0;
@@ -184,7 +184,7 @@ located:
 								if (*p == 0xffff)
 									break;
 								if (p[4]) {
-									j = g_7746cc;
+									j = sv_SelectedBuilding;
 									if (!j)
 										j = fcn_00502cd0(*(unsigned int*) (building + 0x5d), 1, 0, 0xfd);
 									he_AssignActionSlot(building, j, *p, found);
@@ -210,7 +210,7 @@ located:
 				}
 			}
 		}
-		if (g_14ce8e0) {
+		if (io_RightButtonReleased) {
 			any = 0;
 			p = (int*) 0x7e30e0;
 			do {
@@ -231,7 +231,7 @@ located:
 					p += 10;
 				} while ((int) p < 0x7e35d0);
 			} else {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 				d3_EndCameraAndUiMode();
 			}
 		}

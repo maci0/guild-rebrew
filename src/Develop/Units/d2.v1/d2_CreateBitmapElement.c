@@ -39,7 +39,7 @@ typedef struct {
 	char p90[0x264];
 } Tile;
 
-extern char* g_1015ea0;
+extern char* d2_Controls;
 extern int d2_ScreenHeight;
 extern int g_1040494;
 
@@ -89,27 +89,27 @@ int __cdecl d2_CreateBitmapElement(int x, int y, int w, int h, char* src)
 	int i;
 
 	idx = d2_AllocateElement();
-	((D2_CONTROL_TL*) g_1015ea0)[idx].kind = 0x47;
-	((D2_CONTROL_TL*) g_1015ea0)[idx].x = x;
-	((D2_CONTROL_TL*) g_1015ea0)[idx].y = y;
-	((D2_CONTROL_TL*) g_1015ea0)[idx].height = h;
-	((D2_CONTROL_TL*) g_1015ea0)[idx].width = w;
-	((D2_CONTROL_TL*) g_1015ea0)[idx].value_008 = -1;
-	((D2_CONTROL_TL*) g_1015ea0)[idx].clip_top = 0;
-	((D2_CONTROL_TL*) g_1015ea0)[idx].clip_bottom = d2_ScreenHeight;
-	((D2_CONTROL_TL*) g_1015ea0)[idx].clip_left = 0;
-	((D2_CONTROL_TL*) g_1015ea0)[idx].clip_right = g_1040494;
+	((D2_CONTROL_TL*) d2_Controls)[idx].kind = 0x47;
+	((D2_CONTROL_TL*) d2_Controls)[idx].x = x;
+	((D2_CONTROL_TL*) d2_Controls)[idx].y = y;
+	((D2_CONTROL_TL*) d2_Controls)[idx].height = h;
+	((D2_CONTROL_TL*) d2_Controls)[idx].width = w;
+	((D2_CONTROL_TL*) d2_Controls)[idx].value_008 = -1;
+	((D2_CONTROL_TL*) d2_Controls)[idx].clip_top = 0;
+	((D2_CONTROL_TL*) d2_Controls)[idx].clip_bottom = d2_ScreenHeight;
+	((D2_CONTROL_TL*) d2_Controls)[idx].clip_left = 0;
+	((D2_CONTROL_TL*) d2_Controls)[idx].clip_right = g_1040494;
 	fill0((char*) &desc, 0x5c);
 	desc.h = h;
 	desc.w = w;
 	desc.x28 = 0x17;
-	*(Surf**) &((D2_CONTROL_TL*) g_1015ea0)[idx].payload.fields.value_08c = d2_CreateSurface(&desc, 0);
-	s = *(Surf**) &((D2_CONTROL_TL*) g_1015ea0)[idx].payload.fields.value_08c;
+	*(Surf**) &((D2_CONTROL_TL*) d2_Controls)[idx].payload.fields.value_08c = d2_CreateSurface(&desc, 0);
+	s = *(Surf**) &((D2_CONTROL_TL*) d2_Controls)[idx].payload.fields.value_08c;
 	if (d2_LockSurface(s)) {
 		for (i = 0; i < h; i++) {
 			memcpy(s->bits + s->pitch * i, src + i * w * 2, w * 2);
 		}
-		d2_UnlockSurface(*(Surf**) &((D2_CONTROL_TL*) g_1015ea0)[idx].payload.fields.value_08c);
+		d2_UnlockSurface(*(Surf**) &((D2_CONTROL_TL*) d2_Controls)[idx].payload.fields.value_08c);
 	}
 	return idx;
 }

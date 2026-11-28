@@ -3,7 +3,7 @@
 #include "Develop/client_types.h"
 
 extern pos14_7f4c00 gm_GameTime;
-extern char g_7f4ca4[];
+extern char gm_EntityIdField[];
 #include "Develop/DieGildeAddOn/game/game_matrices.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
@@ -185,8 +185,8 @@ void __cdecl he_RunCourtship(char* e)
 		return;
 	case 5:
 		if ((*(int*) (a + 0x5c) == *(int*) (b + 4)) & (*(int*) (b + 0x5c) == *(int*) (a + 4))) {
-		cm_RequestCopyEntityData(*(int*) (a + 4), *(int*) (b + 4), 0x7f - g_869480[*(unsigned short*) a][*(unsigned short*) b], 1);
-		cm_RequestCopyEntityData(*(int*) (b + 4), *(int*) (a + 4), 0x7f - g_869480[*(unsigned short*) b][*(unsigned short*) a], 1);
+		cm_RequestCopyEntityData(*(int*) (a + 4), *(int*) (b + 4), 0x7f - gm_EntityRelationMatrix[*(unsigned short*) a][*(unsigned short*) b], 1);
+		cm_RequestCopyEntityData(*(int*) (b + 4), *(int*) (a + 4), 0x7f - gm_EntityRelationMatrix[*(unsigned short*) b][*(unsigned short*) a], 1);
 		if (a[2] == 6 || a[2] == 5) {
 			pb = a;
 			if (a[9] != 1) {
@@ -209,7 +209,7 @@ void __cdecl he_RunCourtship(char* e)
 		*(int*) (msg + 0x14) = -1;
 		msg[0x30] = 2;
 		*(short*) (msg + 0x24) = gm_GameTime.d;
-		*(int*) (msg + 0x0c) = *(int*) (g_7f4ca4 + (unsigned short) g_774970 * 0x21c);
+		*(int*) (msg + 0x0c) = *(int*) (gm_EntityIdField + (unsigned short) gm_LocalPlayerSlot * 0x21c);
 		*(int*) (msg + 0x1c) = gm_GameTime.b;
 		*(int*) (msg + 0x20) = gm_GameTime.c;
 		gm_AddTime((pos14_7f4c00*) (msg + 0x18), 2, 0, 0);

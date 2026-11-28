@@ -34,10 +34,10 @@ typedef struct Desc {
 #include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern unsigned short g_7f4c04;
+extern unsigned short gm_GameTimeHour;
 extern int g_7f4c06;
 extern int g_7f4c0a;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 Desc* __cdecl gm_LookupSpecialObject(int);
 double __cdecl gm_RandomFloat01(void);
@@ -95,17 +95,17 @@ int __cdecl gm_UseSpecialObject(Ent* ent, Cmd* cmd)
 			v8 = 1;
 			one = 1;
 			cm_BeginPacketFieldDelta((char*) cmd->rec, *(int*) (cmd->rec + 1));
-			cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x1c), &vc);
-			cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x21), &v8);
-			cm_AppendPacketFieldDelta(1, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x20), &one);
-			cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x2d), &(*(int*)&gm_GameTime));
-			cm_AppendPacketFieldDelta(2, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x31), &(*(short*)&g_7f4c04));
-			cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x33), &g_7f4c06);
-			cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x37), &g_7f4c0a);
+			cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((char*) cmd->rec - cm_PacketDeltaBase + 0x1c), &vc);
+			cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((char*) cmd->rec - cm_PacketDeltaBase + 0x21), &v8);
+			cm_AppendPacketFieldDelta(1, 1, (unsigned short) ((char*) cmd->rec - cm_PacketDeltaBase + 0x20), &one);
+			cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((char*) cmd->rec - cm_PacketDeltaBase + 0x2d), &(*(int*)&gm_GameTime));
+			cm_AppendPacketFieldDelta(2, 1, (unsigned short) ((char*) cmd->rec - cm_PacketDeltaBase + 0x31), &(*(short*)&gm_GameTimeHour));
+			cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((char*) cmd->rec - cm_PacketDeltaBase + 0x33), &g_7f4c06);
+			cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((char*) cmd->rec - cm_PacketDeltaBase + 0x37), &g_7f4c0a);
 			cm_RequestChangeAttribute();
 		}
 		if (d->value == 0) {
-			cm_SendSellObjekt(-1, ent->handle, *cmd->rec, 1, g_773d75, 0);
+			cm_SendSellObjekt(-1, ent->handle, *cmd->rec, 1, gm_ActiveTownIndex, 0);
 		}
 		if (d->action != -1) {
 			if (ent->home) {

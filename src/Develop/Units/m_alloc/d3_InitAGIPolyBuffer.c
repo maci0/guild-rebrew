@@ -1,5 +1,5 @@
-char g_67b63c[] = "d3_io_a:AGIPolyBuffer";
-extern char g_67b63c[];
+char d3_AgiPolyBufferTag[] = "d3_io_a:AGIPolyBuffer";
+extern char d3_AgiPolyBufferTag[];
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
@@ -18,6 +18,6 @@ void __cdecl d3_InitAGIPolyBuffer(int unused, char* s)
 	if (n > 0 && *(void**) (s + 0x20) == 0) {
 		*(int*) (s + 0x18) = 0;
 		*(int*) (s + 0x1c) = 0;
-		*(void**) (s + 0x20) = m_alloc(0xe0000, g_67b63c);
+		*(void**) (s + 0x20) = m_alloc(0xe0000, d3_AgiPolyBufferTag);
 	}
 }

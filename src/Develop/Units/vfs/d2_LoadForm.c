@@ -7,13 +7,13 @@
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 extern GOLD_GUI_WINDOW g_00f8f120[];
-extern float g_6628a8;
-extern char g_6b5c60[];
+extern float flt_0_0;
+extern char str_empty[];
 extern int g_772560;
 extern int g_1038580;
 extern int g_772528;
 extern int g_67d3a0;
-extern int g_6b7fdc;
+extern int vfs_RootDir;
 extern int g_1040494;
 extern char s_67d268[];
 extern char s_67d774[];
@@ -163,7 +163,7 @@ int __cdecl d2_LoadForm(short x, short y, char* name)
                     d2_LoadBackgroundTexture(v2 + 0x7c, d2_CurrentWindowId);
                 }
                 current = (char*)&g_00f8f120[d2_CurrentWindowId];
-                if ((U8(current + 0xc) & 1) && F32(v2 + 0xbc) == g_6628a8) {
+                if ((U8(current + 0xc) & 1) && F32(v2 + 0xbc) == flt_0_0) {
                     I32(current + 0x394) = 0x3f266666;
                 } else {
                     I32(current + 0x394) = I32(v2 + 0xbc);
@@ -213,7 +213,7 @@ int __cdecl d2_LoadForm(short x, short y, char* name)
                             g_00f8f080[element].f40 = dialogOff + 0xfb1020;
                         }
                     }
-                    if (typePtr[-0x330] == 'C' && strcmp(imageName, g_6b5c60) != 0) {
+                    if (typePtr[-0x330] == 'C' && strcmp(imageName, str_empty) != 0) {
                         resource = txt_FindEntryIndex(imageName);
                         if (resource != -1) {
                             element = d2_ShowTxt(S16(coords), S16(coords + 0x60), ((char**)0x143a1c0)[resource], windowID);
@@ -338,7 +338,7 @@ int __cdecl d2_LoadForm(int posX, int posY, char* formName)
 	char* c;
 	char ch;
 
-	formPath[0] = g_6b5c60[0];
+	formPath[0] = str_empty[0];
 	memset(formPath + 1, 0, 255);
 
 	strcpy(formPath, formName);
@@ -347,7 +347,7 @@ int __cdecl d2_LoadForm(int posX, int posY, char* formName)
 		strcat(formPath, formName);
 		strcat(formPath, ".form");
 	}
-	v15 = (int) vfs_Tfopen(formPath, (char*) 0x6750e8, (void*) g_6b7fdc);
+	v15 = (int) vfs_Tfopen(formPath, (char*) 0x6750e8, (void*) vfs_RootDir);
 	if (!v15) {
 		sprintf(v22, s_67d774, formName);
 		return -1;
@@ -421,7 +421,7 @@ int __cdecl d2_LoadForm(int posX, int posY, char* formName)
 					v11 = d2_CurrentWindowId * 0x3cc;
 					if ((*(unsigned char*) (v11 + 0x1015f54) & 1)
 						&& *(float*) ((char*) v36 + 0xbc)
-						== g_6628a8)
+						== flt_0_0)
 						*(unsigned int*) (v11 + 0x10162e4) =
 							0x3f266666;
 					else
@@ -488,7 +488,7 @@ int __cdecl d2_LoadForm(int posX, int posY, char* formName)
 				}
 			}
 			v38 = 0;
-			*(int*) (&((D2_CONTROL_TL*)g_1015ea0)[*(int*) (*(int*) v32 * 0x3cc + 0x10161bc)].value_050)
+			*(int*) (&((D2_CONTROL_TL*)d2_Controls)[*(int*) (*(int*) v32 * 0x3cc + 0x10161bc)].value_050)
 				= v15 + 0x1038140;
 			v34 = *v32;
 			v13 = v33[0x33];
@@ -504,19 +504,19 @@ int __cdecl d2_LoadForm(int posX, int posY, char* formName)
 						v13 = d2_AddElementToWindow((short) *q,
 							(short) q[0x18], v12, v34);
 						if (*t == 0x12) {
-							*(unsigned int*) (&((D2_CONTROL_TL*)g_1015ea0)[v13].value_058) = 1;
-							*(unsigned int*) (&((D2_CONTROL_TL*)g_1015ea0)[v13].value_05c) = 0;
+							*(unsigned int*) (&((D2_CONTROL_TL*)d2_Controls)[v13].value_058) = 1;
+							*(unsigned int*) (&((D2_CONTROL_TL*)d2_Controls)[v13].value_05c) = 0;
 						}
 						if (*t == 8) {
-							*(unsigned int*) (&((D2_CONTROL_TL*)g_1015ea0)[v13].value_058) = 0;
-							*(unsigned int*) (&((D2_CONTROL_TL*)g_1015ea0)[v13].value_05c) = 1;
+							*(unsigned int*) (&((D2_CONTROL_TL*)d2_Controls)[v13].value_058) = 0;
+							*(unsigned int*) (&((D2_CONTROL_TL*)d2_Controls)[v13].value_05c) = 1;
 						}
-						*(int*) (&((D2_CONTROL_TL*)g_1015ea0)[v13].value_050) =
+						*(int*) (&((D2_CONTROL_TL*)d2_Controls)[v13].value_050) =
 							v15 + 0x1038140;
 					}
 					if (t[-0x330] == 0x43) {
 						if (strcmp((char*) v19,
-							g_6b5c60) != 0) {
+							str_empty) != 0) {
 							v13 = txt_FindEntryIndex(
 								(char*) v19);
 							if (v13 != -1) {
@@ -527,10 +527,10 @@ int __cdecl d2_LoadForm(int posX, int posY, char* formName)
 										+ 0x14a5320),
 									v34);
 								v13 = v12 * 0x2f4;
-								*(unsigned int*) (&((D2_CONTROL_TL*)(g_1015ea0 + v13))->value_008) =
+								*(unsigned int*) (&((D2_CONTROL_TL*)(d2_Controls + v13))->value_008) =
 									txt_FindEntryIndex(
 									(char*) v19);
-								*(int*) (&((D2_CONTROL_TL*)(g_1015ea0 + v13))->value_050) =
+								*(int*) (&((D2_CONTROL_TL*)(d2_Controls + v13))->value_050) =
 									v15 + 0x1038140;
 							}
 						}
@@ -542,7 +542,7 @@ int __cdecl d2_LoadForm(int posX, int posY, char* formName)
 							*(unsigned char*) ((char*) t + 1),
 							*(unsigned char*) ((char*) t + 2),
 							v37, v34);
-						*(int*) (&((D2_CONTROL_TL*)g_1015ea0)[v13].value_050) =
+						*(int*) (&((D2_CONTROL_TL*)d2_Controls)[v13].value_050) =
 							v15 + 0x1038140;
 					} else if (t[-0x330] == 0x45) {
 						v37 = *t & 0xff;
@@ -555,7 +555,7 @@ int __cdecl d2_LoadForm(int posX, int posY, char* formName)
 								+ v38 + 0xf1c),
 							0, 100, v12,
 							v37, v34);
-						*(int*) (&((D2_CONTROL_TL*)g_1015ea0)[v13].value_050) =
+						*(int*) (&((D2_CONTROL_TL*)d2_Controls)[v13].value_050) =
 							v15 + 0x1038140;
 					}
 					t++;

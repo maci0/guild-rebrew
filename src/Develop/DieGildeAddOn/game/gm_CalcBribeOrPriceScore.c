@@ -1,7 +1,7 @@
 #include <math.h>
 #include <stdlib.h>
 
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern float g_6652d8[];
 
 int __cdecl gm_WalkEntityChain(unsigned short raw_idx);
@@ -16,7 +16,7 @@ int __cdecl gm_CalcBribeOrPriceScore(int handle, int value, int mode, int flag, 
 	double bright;
 	int r;
 
-	v = (double) gm_AmountToUnits(gm_WalkEntityChain(*(unsigned short*) handle), g_773d75);
+	v = (double) gm_AmountToUnits(gm_WalkEntityChain(*(unsigned short*) handle), gm_ActiveTownIndex);
 	v = __max(__min(1000000.0, v), 10000.0);
 
 
@@ -34,7 +34,7 @@ int __cdecl gm_CalcBribeOrPriceScore(int handle, int value, int mode, int flag, 
 		bright = bright * 0.7f + 0.3f;
 		v = bright * (v * 0.75f);
 	}
-	r = gm_ConvertUnitsToAmount((int) v, g_773d75);
+	r = gm_ConvertUnitsToAmount((int) v, gm_ActiveTownIndex);
 	*out = (int) (r * g_6652d8[mode]);
 	return r;
 }

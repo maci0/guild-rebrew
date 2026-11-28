@@ -1,9 +1,9 @@
 extern int d2_CurrentWindowId;
-extern char* g_77255c;
+extern char* d2_CurrentWindow;
 #include "Develop/Units/d2.v1/d2_gui.h"
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char s_6ac994[];
 
@@ -52,22 +52,22 @@ void __cdecl d2_RunAmtChamberMenu(void (*cb)(int), int textId, int enableFirst)
 	for (i = 0; i < 7; i++) {
 		if (i != 0 || enableFirst != 0) {
 			id = btn[i];
-			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_05c)) = 1;
-			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].flags_1d0)) = 3;
+			*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[id].value_05c)) = 1;
+			*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[id].flags_1d0)) = 3;
 		}
 		id = btn[i];
-		*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].font)) = 0x55;
+		*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[id].font)) = 0x55;
 		d2_ShowCenteredText(*(int*) (0x14a9de8 + btn[i + 7] * 4),
-			     *(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].x)) - *(int*) (g_77255c + 4) + 0x20,
-			     *(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].y)) - *(int*) (g_77255c + 8) - 0x19,
+			     *(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[id].x)) - *(int*) (d2_CurrentWindow + 4) + 0x20,
+			     *(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[id].y)) - *(int*) (d2_CurrentWindow + 8) - 0x19,
 			     200, 0x55);
 	}
 	d2_SetOverlayAnimation(0, 0);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_14ce8e0)
-			g_774654 = 1;
-		if (g_100f1dc != -1) {
+		if (io_RightButtonReleased)
+			d2_DialogCloseRequested = 1;
+		if (d2_DialogButtonAction != -1) {
 			sel = -1;
 			for (i = 0; i < 7; i++) {
 				if (btn[i] == d2_CurrentElementId) {

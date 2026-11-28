@@ -1,6 +1,6 @@
 extern int MemUsed;
-extern int* g_6b7d78;
-extern int g_6b7d7c;
+extern int* sb_BankListHead;
+extern int sb_WaveDriver;
 
 // SIZE 0x40
 typedef struct Sample {
@@ -35,13 +35,13 @@ void __cdecl snd_ReleaseAllSampleBanks(void)
 	int i;
 	int idx;
 
-	if (g_6b7d7c == 0) {
+	if (sb_WaveDriver == 0) {
 		return;
 	}
 	if (MemUsed == 0) {
 		return;
 	}
-	bank = (Bank*) g_6b7d78;
+	bank = (Bank*) sb_BankListHead;
 	while (bank != 0) {
 		bank->f140 = 0;
 		i = 0;
@@ -74,5 +74,5 @@ void __cdecl snd_ReleaseAllSampleBanks(void)
 		m_FreeTracked((int) bank);
 		bank = (Bank*) p;
 	}
-	g_6b7d78 = 0;
+	sb_BankListHead = 0;
 }

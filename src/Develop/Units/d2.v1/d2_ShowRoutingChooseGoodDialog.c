@@ -1,14 +1,14 @@
 extern int d2_CurrentWindowId;
-extern char* g_1015ea0;
+extern char* d2_Controls;
 extern unsigned char* lpGebaeudePROT;
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 extern int d2_CurrentElementId;
 extern unsigned short g_7f3ee4;
 extern int g_90d520[];
 extern int g_14a79c0[];
-extern char g_679060[];
+extern char str_fmt_s[];
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
@@ -63,9 +63,9 @@ unsigned int __cdecl d2_ShowRoutingChooseGoodDialog(char* building, int a1, unsi
 				t = d2_AddElementToWindow((n % 4) * 0x40, (n / 4) * 0x40,
 					*(unsigned short*) e + 0xdf, d2_CurrentWindowId);
 				items[n] = t;
-				*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[t].value_05c) = 1;
-				*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[t].flags_1d0) = 3;
-				*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[t].value_1e4) = 0x525;
+				*(unsigned int*) (&((D2_CONTROL_TL*) (d2_Controls))[t].value_05c) = 1;
+				*(unsigned int*) (&((D2_CONTROL_TL*) (d2_Controls))[t].flags_1d0) = 3;
+				*(unsigned int*) (&((D2_CONTROL_TL*) (d2_Controls))[t].value_1e4) = 0x525;
 				g_90d520[n] = *(unsigned short*) e;
 				n++;
 			}
@@ -86,9 +86,9 @@ unsigned int __cdecl d2_ShowRoutingChooseGoodDialog(char* building, int a1, unsi
 				t = d2_AddElementToWindow((n % 4) * 0x40, (n / 4) * 0x40,
 					*(unsigned short*) e + 0xdf, d2_CurrentWindowId);
 				items[n] = t;
-				*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[t].value_05c) = 1;
-				*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[t].flags_1d0) = 3;
-				*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[t].value_1e4) = 0x525;
+				*(unsigned int*) (&((D2_CONTROL_TL*) (d2_Controls))[t].value_05c) = 1;
+				*(unsigned int*) (&((D2_CONTROL_TL*) (d2_Controls))[t].flags_1d0) = 3;
+				*(unsigned int*) (&((D2_CONTROL_TL*) (d2_Controls))[t].value_1e4) = 0x525;
 				g_90d520[n] = *(unsigned short*) e;
 				n++;
 			}
@@ -104,12 +104,12 @@ unsigned int __cdecl d2_ShowRoutingChooseGoodDialog(char* building, int a1, unsi
 				t = d2_AddElementToWindow((n % 4) * 0x40, (n / 4) * 0x40,
 					g_90d520[n] + 0xdf, d2_CurrentWindowId);
 				items[n] = t;
-				*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[t].value_05c) = 1;
-				*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[t].flags_1d0) = 0x23;
-				*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[t].value_1e4) = 0x525;
-				*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[t].value_1dc) = 4;
-				*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[t].value_1e0) = 0xf;
-				fcn_0064d41a((char*) ((char*) &((D2_CONTROL_TL*) (g_1015ea0))[t] + 0xcc),
+				*(unsigned int*) (&((D2_CONTROL_TL*) (d2_Controls))[t].value_05c) = 1;
+				*(unsigned int*) (&((D2_CONTROL_TL*) (d2_Controls))[t].flags_1d0) = 0x23;
+				*(unsigned int*) (&((D2_CONTROL_TL*) (d2_Controls))[t].value_1e4) = 0x525;
+				*(unsigned int*) (&((D2_CONTROL_TL*) (d2_Controls))[t].value_1dc) = 4;
+				*(unsigned int*) (&((D2_CONTROL_TL*) (d2_Controls))[t].value_1e0) = 0xf;
+				fcn_0064d41a((char*) ((char*) &((D2_CONTROL_TL*) (d2_Controls))[t] + 0xcc),
 					"%s", g_14a79c0[g_90d520[n] * 2]);
 				n++;
 			}
@@ -120,17 +120,17 @@ tail:
 	g_90d520[n] = 0;
 	t = d2_AddElementToWindow((n % 4) * 0x40 + 7, (n / 4) * 0x40 + 7, 0x527, d2_CurrentWindowId);
 	items[n] = t;
-	*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[t].value_05c) = 1;
-	*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[t].flags_1d0) = 3;
+	*(unsigned int*) (&((D2_CONTROL_TL*) (d2_Controls))[t].value_05c) = 1;
+	*(unsigned int*) (&((D2_CONTROL_TL*) (d2_Controls))[t].flags_1d0) = 3;
 	while (main_RunFrameLoop(0x4be560, 0x657c7)) {
-		if (g_14ce8e0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			for (t = 0; t < g_7f3ee4 + 1; t++) {
 				if (d2_CurrentElementId == items[t]) {
 					ret = g_90d520[t];
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 					break;
 				}
 			}

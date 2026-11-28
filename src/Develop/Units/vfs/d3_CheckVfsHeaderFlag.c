@@ -1,6 +1,6 @@
 
 
-extern struct VFS_DIR* g_6b7fdc;
+extern struct VFS_DIR* vfs_RootDir;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
@@ -18,7 +18,7 @@ char __cdecl d3_CheckVfsHeaderFlag(char* name)
 	void* h;
 
 	ok = 1;
-	h = vfs_Tfopen(name, g_6750e8, g_6b7fdc);
+	h = vfs_Tfopen(name, g_6750e8, vfs_RootDir);
 	if (h != 0) {
 		vfs_ReadData((char*) &magic, 4, 1, h);
 		vfs_ReadByte(h, &c);

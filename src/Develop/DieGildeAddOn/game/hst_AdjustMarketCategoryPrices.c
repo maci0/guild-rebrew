@@ -15,9 +15,9 @@ typedef struct {
 	char pad3c[0x80 - 0x3c];
 } Ent80;
 
-extern char g_85ab90[];
+extern char gm_MarketStockTable[];
 extern char* lpObjektePROT;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 int __cdecl atoi(char*);
 char* __cdecl gm_LookupWeaponSpec(int);
@@ -71,7 +71,7 @@ int __cdecl hst_AdjustMarketCategoryPrices(int unused1, int unused2, char* argum
 			switch (j) {
 			case 0: {
 				for (i = 0; i < 0x2a80; i += 0x80) {
-					row = g_85ab90 + g_773d75 * 0x2a90 + i;
+					row = gm_MarketStockTable + gm_ActiveTownIndex * 0x2a90 + i;
 					if (((MARKET_STOCK_SLOT*)row)->objekt_id == 0)
 						continue;
 					if (((MARKET_STOCK_SLOT*)row)->active == 0)
@@ -80,16 +80,16 @@ int __cdecl hst_AdjustMarketCategoryPrices(int unused1, int unused2, char* argum
 					if (p == 0 || *(int*) p == 0)
 						continue;
 					f = factor + 1.0f;
-					copy = *(Ent80*)((MARKET_STOCK_SLOT*)(g_85ab90 + g_773d75 * 0x2a90 + i));
+					copy = *(Ent80*)((MARKET_STOCK_SLOT*)(gm_MarketStockTable + gm_ActiveTownIndex * 0x2a90 + i));
 					copy.price = copy.base * (factor + 1.0f);
 					copy.value = eval_ObjektPreis2Credits(((MARKET_STOCK_SLOT*)row)->objekt_id, 0x64) * f;
-					cm_SendUpdateSlot80((char*) &copy, g_773d75);
+					cm_SendUpdateSlot80((char*) &copy, gm_ActiveTownIndex);
 				}
 				return 1;
 			}
 			case 1: {
 				for (i = 0; i < 0x2a80; i += 0x80) {
-					row = g_85ab90 + g_773d75 * 0x2a90 + i;
+					row = gm_MarketStockTable + gm_ActiveTownIndex * 0x2a90 + i;
 					if (((MARKET_STOCK_SLOT*)row)->objekt_id == 0)
 						continue;
 					if (((MARKET_STOCK_SLOT*)row)->active == 0)
@@ -100,13 +100,13 @@ int __cdecl hst_AdjustMarketCategoryPrices(int unused1, int unused2, char* argum
 					copy = *(Ent80*) row;
 					copy.price = copy.base * (factor + 1.0f);
 					copy.value = eval_ObjektPreis2Credits(((MARKET_STOCK_SLOT*)row)->objekt_id, 0x64) * f;
-					cm_SendUpdateSlot80((char*) &copy, g_773d75);
+					cm_SendUpdateSlot80((char*) &copy, gm_ActiveTownIndex);
 				}
 				return 1;
 			}
 			case 2: {
 				for (i = 0; i < 0x2a80; i += 0x80) {
-					row = g_85ab90 + g_773d75 * 0x2a90 + i;
+					row = gm_MarketStockTable + gm_ActiveTownIndex * 0x2a90 + i;
 					if (((MARKET_STOCK_SLOT*)row)->objekt_id == 0)
 						continue;
 					if (((MARKET_STOCK_SLOT*)row)->active == 0)
@@ -117,7 +117,7 @@ int __cdecl hst_AdjustMarketCategoryPrices(int unused1, int unused2, char* argum
 					copy = *(Ent80*) row;
 					copy.price = copy.base * (factor + 1.0f);
 					copy.value = eval_ObjektPreis2Credits(((MARKET_STOCK_SLOT*)row)->objekt_id, 0x64) * f;
-					cm_SendUpdateSlot80((char*) &copy, g_773d75);
+					cm_SendUpdateSlot80((char*) &copy, gm_ActiveTownIndex);
 				}
 			}
 			}

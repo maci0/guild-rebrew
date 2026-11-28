@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-extern char* g_7e2aa0;
+extern char* d2_SelectedBuilding;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
 typedef struct {
@@ -38,48 +38,48 @@ int __cdecl gm_DispatchDebugActionKeys(void)
 	case 0x1e:
 		return d2_RunCardGameDialog();
 	case 0x30:
-		o = g_7e2aa0;
+		o = d2_SelectedBuilding;
 		if (o != 0) {
 			d2_RunBlutracheDialog((int) o);
 		}
 		return;
 	case 0x2e:
-		o = g_7e2aa0;
+		o = d2_SelectedBuilding;
 		if (o != 0) {
 			d2_ShowBlutracheDialog((int) o);
 		}
 		return;
 	case 0x20:
-		o = g_7e2aa0;
+		o = d2_SelectedBuilding;
 		if (o != 0) {
 			d2_RunEhrerbietungDialog((int) o);
 		}
 		return;
 	case 0x12:
-		o = g_7e2aa0;
+		o = d2_SelectedBuilding;
 		if (o != 0) {
 			d2_OpenBlutracheDialog(o);
 		}
 		return;
 	case 0x25:
-		e = gm_LookupEntityRecordById(*(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970] + 0x60));
+		e = gm_LookupEntityRecordById(*(int*) ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot] + 0x60));
 		if (e != 0) {
 			gm_ApplyEntityHealthDelta(*(unsigned short*) e, -1000);
 		} else {
-			e = gm_LookupEntityRecordById(*(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970] + 0x60));
+			e = gm_LookupEntityRecordById(*(int*) ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot] + 0x60));
 			if (e != 0) {
 				gm_ApplyEntityHealthDelta(*(unsigned short*) e, -1000);
 			}
 		}
 		return;
 	case 0x14:
-		if (g_7e2aa0 == 0) {
+		if (d2_SelectedBuilding == 0) {
 			return;
 		}
-		ai_StartGraveyardOwner(0, (char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 0, &b2, &b1);
+		ai_StartGraveyardOwner(0, (char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot], 0, &b2, &b1);
 		return;
 	case 0x16:
-		o = g_7e2aa0;
+		o = d2_SelectedBuilding;
 		if (o == 0) {
 			return;
 		}
@@ -87,13 +87,13 @@ int __cdecl gm_DispatchDebugActionKeys(void)
 		if (e == 0) {
 			return;
 		}
-		if (gm_ComputeCannonShot((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], o, (int) e) == 0) {
+		if (gm_ComputeCannonShot((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot], o, (int) e) == 0) {
 			return;
 		}
-		ai_FireCannonVolley((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], o);
+		ai_FireCannonVolley((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot], o);
 		return;
 	case 0x2f:
-		o = g_7e2aa0;
+		o = d2_SelectedBuilding;
 		if (o != 0) {
 			d2_RunKanoneUI((int) o);
 		}

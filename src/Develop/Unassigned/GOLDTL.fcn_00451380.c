@@ -1,9 +1,9 @@
 #include <math.h>
 
 extern double g_662958;
-extern float g_662d60;
-extern float g_662d64;
-extern float g_662d68;
+extern float d3_BasisUpX;
+extern float d3_BasisUpY;
+extern float d3_BasisUpZ;
 
 void __cdecl d3_NormalizeVector(float* v);
 int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
@@ -37,7 +37,7 @@ float __cdecl d3_SignedPlanarAngle(float* vecA, float* vecB)
 	cr[0] = vb[2] * va[1] - vb[1] * va[2];
 	cr[1] = vb[0] * va[2] - vb[2] * va[0];
 	cr[2] = vb[1] * va[0] - vb[0] * va[1];
-	cross = g_662d60 * cr[0] + g_662d64 * cr[1] + g_662d68 * cr[2];
+	cross = d3_BasisUpX * cr[0] + d3_BasisUpY * cr[1] + d3_BasisUpZ * cr[2];
 	if (cross > 0.0f) {
 		return (float) (-asin(vb[2] * va[2] + vb[1] * va[1] + vb[0] * va[0]));
 	}

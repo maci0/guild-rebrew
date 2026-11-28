@@ -10,7 +10,7 @@ void __cdecl d2_SetElementImage(int element, int bild)
         return;
     }
 #else
-    eintrag = &((D2_GUI_ITEM*) g_1015ea0)[element];
+    eintrag = &((D2_GUI_ITEM*) d2_Controls)[element];
 #endif
     if (eintrag->kind < 0x40) {
         d2_SubRefcount(eintrag->f08);
@@ -18,8 +18,8 @@ void __cdecl d2_SetElementImage(int element, int bild)
     eintrag->data = d2_GetResourceData(bild);
     eintrag->bild_offset = d2_ResourceOffset;
     eintrag->f08 = d2_ResourceOffset + bild;
-    eintrag->w = ((D2_BILD_GROESSE*) g_772500)[bild].breite;
-    eintrag->f16 = ((D2_BILD_GROESSE*) g_772500)[bild].hoehe;
+    eintrag->w = ((D2_BILD_GROESSE*) d2_FileObjTable)[bild].breite;
+    eintrag->f16 = ((D2_BILD_GROESSE*) d2_FileObjTable)[bild].hoehe;
     eintrag->f22 = 0;
 #ifdef REBREW_GOLD
     eintrag->f24 = g_00fb9070;

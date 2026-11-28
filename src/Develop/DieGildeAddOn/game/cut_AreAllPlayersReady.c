@@ -22,8 +22,8 @@ int __cdecl cut_AreAllPlayersReady(unsigned char* a1)
 
 	r = 1;
 	for (i = 0; i < a1[0x30]; i++) {
-		if (((Player35c*)g_9b0e20)[i].used != 0 && ((Player35c*)g_9b0e20)[i].x10 != -1 && gm_LookupEntityRecordById(((Player35c*)g_9b0e20)[i].x10) != 0 &&
-		    ((Player35c*)g_9b0e20)[i].x4 == 0) {
+		if (((Player35c*)cut_ParticipantSlots)[i].used != 0 && ((Player35c*)cut_ParticipantSlots)[i].x10 != -1 && gm_LookupEntityRecordById(((Player35c*)cut_ParticipantSlots)[i].x10) != 0 &&
+		    ((Player35c*)cut_ParticipantSlots)[i].x4 == 0) {
 			r = 0;
 			break;
 		}

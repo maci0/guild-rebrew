@@ -9,8 +9,8 @@ void __cdecl d2_FreeOverlaySprite(void* node)
     int i;
 
     for (i = 0; i < 32; i++) {
-        if (g_1015ec0[i] == node) {
-            g_1015ec0[i] = 0;
+        if (d2_OverlaySprites[i] == node) {
+            d2_OverlaySprites[i] = 0;
             d3_ReleaseSceneResource(*(SCENE_RESOURCE**)((char*)node + 0x60));
             m_FreeTracked(node);
             return;

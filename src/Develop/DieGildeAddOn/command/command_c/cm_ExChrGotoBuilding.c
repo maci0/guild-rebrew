@@ -46,11 +46,11 @@ extern char g_68b108[];
 extern char g_68b13c[];
 extern char g_68b174[];
 extern char g_68b1ac[];
-TLBLK11 g_68149c = { 0x6d6d7564, 0x55545f79, 0x5245, 0 };
+TLBLK11 str_dummy_TUER = { 0x6d6d7564, 0x55545f79, 0x5245, 0 };
 extern TLBLK18 g_68b0f4;
 extern char* lpObjektePROT;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char* g_1043370[];
+extern char* tp_ch_PathGrid[];
 
 /* ADDRESS: GOLDTL 0x004ca970 */
 int __cdecl cm_ExChrGotoBuilding(char* e, char* out)
@@ -122,7 +122,7 @@ int __cdecl cm_ExChrGotoBuilding(char* e, char* out)
 			d3_SelectSceneContext(k, 1);
 			u = d3_FindSceneObject(0, 0x100, 0, g_68b1e0);
 			if (u != 0) {
-				m = g_1043370[k * 247];
+				m = tp_ch_PathGrid[k * 247];
 				d3_TransformPoint(u, u + 0x4c, pos);
 				if (d3sm_SampleHeight(m, pos, &col, &row, &height) != 0) {
 					r = ch_CreateAction(o, 0x2d, col, row, k);
@@ -143,10 +143,10 @@ int __cdecl cm_ExChrGotoBuilding(char* e, char* out)
 			if (*(int*) (C + 0x61) != 0) {
 				d3_SelectSceneContext(0, 1);
 				u = d3_FindSceneObject(*(int*) (C + 0x61), 0x100, 0,
-				    (char*) &g_68149c);
+				    (char*) &str_dummy_TUER);
 				if (u == 0)
 					u = d3_FindSceneObjectByPtrOrName(*(int*) (B + 0x61), 0x100, 0,
-					    (char*) &g_68149c);
+					    (char*) &str_dummy_TUER);
 				if (u == 0)
 					u = *(char**) (C + 0x61);
 				d3_TransformPoint(u, u + 0x4c, pos);
@@ -167,7 +167,7 @@ int __cdecl cm_ExChrGotoBuilding(char* e, char* out)
 			ch_QueueStandUpAnimation(o, g_6756b8);
 			u = d3_FindSceneObject(0, 0x100, 0, g_675908);
 			if (u != 0) {
-				m = g_1043370[k * 247];
+				m = tp_ch_PathGrid[k * 247];
 				d3_TransformPoint(u, u + 0x4c, pos);
 				if (d3sm_SampleHeight(m, pos, &col, &row, &height) != 0) {
 					r = ch_CreateAction(o, 0x2d, col, row, k);
@@ -183,11 +183,11 @@ int __cdecl cm_ExChrGotoBuilding(char* e, char* out)
 			if (r == 0)
 				goto after;
 			strcpy(r + 0x70, e + 0x3d);
-			*(TLBLK11*) (r + 0xf0) = g_68149c;
+			*(TLBLK11*) (r + 0xf0) = str_dummy_TUER;
 			if (C == 0)
 				goto after;
 			u = d3_FindSceneObject(*(int*) (C + 0x61), 0x100, 0,
-			    (char*) &g_68149c);
+			    (char*) &str_dummy_TUER);
 			if (u != 0) {
 				d3_TransformPoint(u, u + 0x4c, pos);
 			} else if (*(int*) (C + 0x61) != 0) {
@@ -215,17 +215,17 @@ after:
 			u = he_PickRandomSceneObject(*(char**) (B + 0x61));
 		} else {
 			u = d3_FindSceneObject(*(int*) (B + 0x61), 0x100, 0,
-			    (char*) &g_68149c);
+			    (char*) &str_dummy_TUER);
 			if (u == 0) {
 				u = d3_FindSceneObjectByPtrOrName(*(int*) (B + 0x61), 0x100, 0,
-				    (char*) &g_68149c);
+				    (char*) &str_dummy_TUER);
 				if (u == 0)
 					u = *(char**) (B + 0x61);
 			}
 		}
 	}
 	if (u != 0) {
-		m = g_1043370[0];
+		m = tp_ch_PathGrid[0];
 		d3_TransformPoint(u, u + 0x4c, pos);
 		if (d3sm_SampleHeight(m, pos, &col, &row, &height) != 0) {
 			r = ch_CreateAction(o, 0x2d, col, row, 0);
@@ -270,12 +270,12 @@ b3:
 	if (*(int*) (B + 1) != *(int*) (o + 0x2c)) {
 		d3_SelectSceneContext(0, 1);
 		u = d3_FindSceneObject(*(int*) (B + 0x61), 0x100, 0,
-		    (char*) &g_68149c);
+		    (char*) &str_dummy_TUER);
 		if (u == 0)
 			u = d3_FindSceneObjectByPtrOrName(*(int*) (B + 0x61), 0x100, 0,
-			    (char*) &g_68149c);
+			    (char*) &str_dummy_TUER);
 		if (u != 0) {
-			m = g_1043370[0];
+			m = tp_ch_PathGrid[0];
 			d3_TransformPoint(u, u + 0x4c, pos);
 			if (d3sm_SampleHeight(m, pos, &col, &row, &height) != 0) {
 				r = ch_CreateAction(o, 0x2d, col, row, 0);
@@ -332,7 +332,7 @@ b3:
 			u = d3_FindSceneObject(0, 0x100, 0, g_675908);
 		if (u == 0)
 			goto saved_exit;
-		m = g_1043370[k * 247];
+		m = tp_ch_PathGrid[k * 247];
 		d3_TransformPoint(u, u + 0x4c, pos);
 		if (d3sm_SampleHeight(m, pos, &col, &row, &height) != 0) {
 			r = ch_CreateAction(o, 0x2d, col, row, k);

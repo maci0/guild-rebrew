@@ -5,9 +5,9 @@
  * Header name and placement are reconstructed from network users. */
 #ifndef CLIENT_NET_STATS_H
 #define CLIENT_NET_STATS_H
-extern int g_14cbcc0[0x6a][4];
+extern int nt_PacketStats[0x6a][4];
 extern int nt_ReceivedPacketCount;
 extern int nt_ReceivedBytes;
-extern int g_6b7d60;
-extern int g_6b7d5c;
+extern int nt_SentPacketCount;
+extern int nt_SentBytes;
 #endif

@@ -3,17 +3,17 @@
 #include "Develop/client_types.h"
 
 extern pos14_7f4c00 gm_GameTime;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
 extern float g_696540[];
 extern float g_696550[];
-extern float g_6628a0;
+extern float flt_1_0;
 extern float g_662918;
 extern float g_665ec4;
 extern char* lpGebaeudePROT;
-extern char g_6b5c60[];
-extern unsigned char g_7747b0;
+extern char str_empty[];
+extern unsigned char gm_ClientModeFlags;
 
 int __cdecl gm_GetSeason(int*);
 void __cdecl he_FreeAction(void*);
@@ -78,7 +78,7 @@ void __cdecl he_RunDailyRoutine(char* action)
 					if (gm_CheckEntityType((char*) v18) != 0 || *(int*) (*(int*) p + 0x61) == 0) {
 						cm_RequestCancelEntityEvent(*(int*) (p - 0x168));
 						cm_RequestChrMoveToUniverse(*(int*) (p - 0x168), out1, out2, "dummy_EINGANG");
-						cm_RequestChrWalkToDummy(*(int*) (p - 0x168), out1, out2, g_6b5c60);
+						cm_RequestChrWalkToDummy(*(int*) (p - 0x168), out1, out2, str_empty);
 						*(unsigned int*) (p + 0x5c) |= 0x1000;
 					}
 					else {
@@ -103,7 +103,7 @@ void __cdecl he_RunDailyRoutine(char* action)
 									goto next0;
 								}
 							}
-							if ((float) (g_7f4c04 & 0xffff) < g_696540[hour] - 1.0f) {
+							if ((float) (gm_GameTimeHour & 0xffff) < g_696540[hour] - 1.0f) {
 								cm_RequestCancelEntityEvent(*(int*) (p - 0x168));
 								ch_StartMovement(*(int*) (p - 0x168), out1, out2, 0, 0, "Go to work");
 								found += 1;
@@ -120,12 +120,12 @@ next0:
 		}
 		if (found != 0) {
 			*(int*) (action + 0x52) = *(int*) &gm_GameTime;
-			*(int*) (action + 0x56) = g_7f4c04;
-			*(int*) (action + 0x5a) = g_7f4c08;
-			*(unsigned short*) (action + 0x5e) = g_7f4c0c;
+			*(int*) (action + 0x56) = gm_GameTimeHour;
+			*(int*) (action + 0x5a) = gm_GameTimeSliceDword;
+			*(unsigned short*) (action + 0x5e) = gm_GameTimeTailWord;
 			gm_AddTime(action + 0x52, 0, 5, 0);
 		}
-		if ((float) (g_7f4c04 & 0xffff) < g_696540[hour]) {
+		if ((float) (gm_GameTimeHour & 0xffff) < g_696540[hour]) {
 			return;
 		}
 		p = (char*) 0x7f4e04;
@@ -136,22 +136,22 @@ next0:
 				if (out2 != *(int*) (*(int*) (p + 0x20) + 0x2c)) {
 					cm_RequestCancelEntityEvent(*(int*) (p - 0x160));
 					cm_RequestChrMoveToUniverse(*(int*) (p - 0x160), out2, out1, "dummy_EINGANG");
-					cm_RequestChrWalkToDummy(*(int*) (p - 0x160), out2, out1, g_6b5c60);
+					cm_RequestChrWalkToDummy(*(int*) (p - 0x160), out2, out1, str_empty);
 					*(unsigned int*) (p + 0x64) |= 0x1000;
 				}
 			}
 			p += 0x21c;
 		}
 		*(int*) (action + 0x52) = *(int*) &gm_GameTime;
-		*(int*) (action + 0x56) = g_7f4c04;
-		*(int*) (action + 0x5a) = g_7f4c08;
-		*(unsigned short*) (action + 0x5e) = g_7f4c0c;
+		*(int*) (action + 0x56) = gm_GameTimeHour;
+		*(int*) (action + 0x5a) = gm_GameTimeSliceDword;
+		*(unsigned short*) (action + 0x5e) = gm_GameTimeTailWord;
 		sim_SetSyncParams((int*) (action + 0x52), (int) g_696550[hour], 0, 0);
 		*(int*) (action + 0x70) = 1;
 		*(int*) (action + 0xac) = 0;
 		return;
 	case 1:
-		if ((signed char) g_7747b0 < 0) {
+		if ((signed char) gm_ClientModeFlags < 0) {
 			he_FreeAction(action);
 			return;
 		}
@@ -254,12 +254,12 @@ after1:
 		}
 		if (moved != 0) {
 			*(int*) (action + 0x52) = *(int*) &gm_GameTime;
-			*(int*) (action + 0x56) = g_7f4c04;
-			*(int*) (action + 0x5a) = g_7f4c08;
-			*(unsigned short*) (action + 0x5e) = g_7f4c0c;
+			*(int*) (action + 0x56) = gm_GameTimeHour;
+			*(int*) (action + 0x5a) = gm_GameTimeSliceDword;
+			*(unsigned short*) (action + 0x5e) = gm_GameTimeTailWord;
 			gm_AddTime(action + 0x52, 0, 5, 0);
 		}
-		if ((float) (g_7f4c04 & 0xffff) <= g_696550[hour] + 2.0f) {
+		if ((float) (gm_GameTimeHour & 0xffff) <= g_696550[hour] + 2.0f) {
 			return;
 		}
 		p = (char*) 0x7f4e04;
@@ -277,13 +277,13 @@ after1:
 				if (count != 0 && gm_AccumulateTyped2(p - 0x164) > 0xc80 && gm_RandomMod(2) != 0) {
 					if (he_PickNearestWirtshaus(p - 0x164, count, list, &out2, &out1) != 0) {
 						cm_RequestChrMoveToUniverse(*(int*) (p - 0x160), out2, out1, "dummy_EINGANG");
-						cm_RequestChrWalkToDummy(*(int*) (p - 0x160), out2, out1, g_6b5c60);
+						cm_RequestChrWalkToDummy(*(int*) (p - 0x160), out2, out1, str_empty);
 					}
 				}
 				else {
 					if (out1 != -1) {
 						cm_RequestChrMoveToUniverse(*(int*) (p - 0x160), out2, out1, "dummy_EINGANG");
-						cm_RequestChrWalkToDummy(*(int*) (p - 0x160), out2, out1, g_6b5c60);
+						cm_RequestChrWalkToDummy(*(int*) (p - 0x160), out2, out1, str_empty);
 					}
 					else {
 						cm_RequestChrMoveToUniverse(*(int*) (p - 0x160), out2, -1, "dummy_TUER");

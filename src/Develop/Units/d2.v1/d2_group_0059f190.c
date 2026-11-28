@@ -1,8 +1,8 @@
-extern int g_7746d8;
+extern int d2_SelectedEntityUiFlags;
 extern int g_14ab314;
 extern int g_14ad1f8;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_7746a0;
+extern int sv_ClickedObjekt;
 
 void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -46,29 +46,29 @@ void __cdecl d2_RunParfumerieProductionMenu(char* building, int searchArg)
 	personal = 0;
 	d2_ClearStatusTextSlots();
 	while (main_RunFrameLoop((void*) d2_RunParfumerieProductionMenu, 0x67fff) != 0) {
-		if (g_7746d8 & 0x200) {
+		if (d2_SelectedEntityUiFlags & 0x200) {
 			sammeln = RegisterStatusText("contact_SAMMELN", g_14ab314, 0x16);
 			prod = RegisterStatusText("contact_PRODUKTION_PARFUMERIE", g_14ad1f8, 0x13);
 		}
-		if (g_7746d8 & 0x400) {
+		if (d2_SelectedEntityUiFlags & 0x400) {
 			lager = RegisterStatusText("contact_LAGER", g_14ad0f0, 0xe);
 			transport = RegisterStatusText("contact_TRANSPORT", g_14ad100, 0x15);
 			meister = RegisterStatusText("ob_MEISTERBRIEF", g_14a7d28, 0x16);
 			personal = RegisterStatusText("ob_PERSONALBUCH", g_14a7b50, 0xc);
 		}
 		d2_OpenContactEinkaufPanel(building);
-		if (g_7746a0 != 0) {
-			if (g_7746a0 == prod) {
+		if (sv_ClickedObjekt != 0) {
+			if (sv_ClickedObjekt == prod) {
 				d2_RunProduktionDialog(building);
-			} else if (g_7746a0 == transport) {
+			} else if (sv_ClickedObjekt == transport) {
 				d2_OpenTransportPanel(building);
-			} else if (g_7746a0 == personal) {
+			} else if (sv_ClickedObjekt == personal) {
 				d2_ShowPersonalbuch(building, "ob_PERSONALBUCH");
-			} else if (g_7746a0 == lager) {
+			} else if (sv_ClickedObjekt == lager) {
 				d2_ShowLagerOptions(building, *(int*) (building + 0x5d));
-			} else if (g_7746a0 == sammeln) {
+			} else if (sv_ClickedObjekt == sammeln) {
 				d2_ShowHandelSearch(building, searchArg);
-			} else if (g_7746a0 == meister) {
+			} else if (sv_ClickedObjekt == meister) {
 				d2_OpenMeisterbriefDialog(building);
 			}
 		}
@@ -94,29 +94,29 @@ void __cdecl d2_RunMixingProductionMenu(char* e, int a2)
 	personal = 0;
 	d2_ClearStatusTextSlots();
 	while (main_RunFrameLoop((void*) d2_RunMixingProductionMenu, 0x67fff) != 0) {
-		if (g_7746d8 & 0x200) {
+		if (d2_SelectedEntityUiFlags & 0x200) {
 			sammeln = RegisterStatusText("contact_SAMMELN", g_14ab314, 0x16);
 			prod = RegisterStatusText("contact_PRODUKTION_MISCHEN", g_14ad1f0, 0x13);
 		}
-		if (g_7746d8 & 0x400) {
+		if (d2_SelectedEntityUiFlags & 0x400) {
 			meister = RegisterStatusText("ob_MEISTERBRIEF", g_14a7d28, 0x16);
 			personal = RegisterStatusText("ob_PERSONALBUCH", g_14a7b50, 0xc);
 			lager = RegisterStatusText("contact_LAGER", g_14ad0f0, 0xe);
 			transport = RegisterStatusText("contact_TRANSPORT", g_14ad100, 0x15);
 		}
 		d2_OpenContactEinkaufPanel(e);
-		if (g_7746a0 != 0) {
-			if (g_7746a0 == prod) {
+		if (sv_ClickedObjekt != 0) {
+			if (sv_ClickedObjekt == prod) {
 				d2_RunProduktionDialog(e);
-			} else if (g_7746a0 == transport) {
+			} else if (sv_ClickedObjekt == transport) {
 				d2_OpenTransportPanel(e);
-			} else if (g_7746a0 == personal) {
+			} else if (sv_ClickedObjekt == personal) {
 				d2_ShowPersonalbuch(e, "ob_PERSONALBUCH");
-			} else if (g_7746a0 == lager) {
+			} else if (sv_ClickedObjekt == lager) {
 				d2_ShowLagerOptions(e, *(int*) (e + 0x5d));
-			} else if (g_7746a0 == sammeln) {
+			} else if (sv_ClickedObjekt == sammeln) {
 				d2_ShowHandelSearch(e, a2);
-			} else if (g_7746a0 == meister) {
+			} else if (sv_ClickedObjekt == meister) {
 				d2_OpenMeisterbriefDialog(e);
 			}
 		}

@@ -212,7 +212,7 @@ int __cdecl d2_SyncProduktionSlotGrid(int ctx, char* panel)
         }
         v8 = *v7;
         if (v8 != -1 &&
-            *(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[v8].kind)) == 0x41 &&
+            *(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[v8].kind)) == 0x41 &&
             d2_GetControlValue(v8)) {
             v10 = 1;
         }

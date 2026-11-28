@@ -16,7 +16,7 @@ extern GOLD_GUI_WINDOW g_00f8f120[];
 extern GuiEnt* g_00f8f080;
 extern short g_00fb9070;
 extern short g_00fb9072;
-extern Win_1015f40 g_1015f40[0x60];
+extern Win_1015f40 d2_Windows[0x60];
 extern int d2_ScreenHeight;
 extern int g_1040494;
 extern char s_67d420[];
@@ -70,7 +70,7 @@ int __cdecl d2_AddWindowImage(int x, int y, int resourceId, int win, int scaleTy
 	D2_WIN* w;
 	int id;
 
-	w = &((D2_WIN*)g_1015f40)[win];
+	w = &((D2_WIN*)d2_Windows)[win];
 	if (w->active == 0) {
 		return -1;
 	}
@@ -82,17 +82,17 @@ int __cdecl d2_AddWindowImage(int x, int y, int resourceId, int win, int scaleTy
 	id = w->children[w->count];
 	if (id != -1) {
 		d2_InsertControlAfterWindow(id, w);
-		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].parent) = (int) w;
-		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_top) = 0;
-		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_bottom) = d2_ScreenHeight;
-		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_left) = 0;
-		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_right) = g_1040494;
-		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_050) = (*(int*)&((D2_CONTROL_TL*)g_1015ea0)[w->slot].value_050);
-		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_048) = (*(int*)&((D2_CONTROL_TL*)g_1015ea0)[w->slot].value_048);
+		(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].parent) = (int) w;
+		(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].clip_top) = 0;
+		(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].clip_bottom) = d2_ScreenHeight;
+		(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].clip_left) = 0;
+		(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].clip_right) = g_1040494;
+		(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].value_050) = (*(int*)&((D2_CONTROL_TL*)d2_Controls)[w->slot].value_050);
+		(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].value_048) = (*(int*)&((D2_CONTROL_TL*)d2_Controls)[w->slot].value_048);
 		d2_SetElementScale(id, scaleType);
 		w->count++;
-		if ((*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].height) + y > (*(int*) &w->pad3c[0x218])) {
-			(*(int*) &w->pad3c[0x218]) = (*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].height) + y;
+		if ((*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].height) + y > (*(int*) &w->pad3c[0x218])) {
+			(*(int*) &w->pad3c[0x218]) = (*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].height) + y;
 		}
 	}
 	return id;

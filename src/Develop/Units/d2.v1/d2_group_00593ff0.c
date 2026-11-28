@@ -12,7 +12,7 @@ typedef struct
 extern int d2_CurrentWindowId;
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern char* g_14a5ad8[];
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
 extern char g_7e23e3;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
@@ -41,12 +41,12 @@ void __cdecl d2_DestroyForm(int);
 
 
 
-extern int g_6a9b9c;
+extern int d2_NetLobbyForm;
 #include "Develop/client_types.h"
-extern Win_1015f40 g_1015f40[0x60];
+extern Win_1015f40 d2_Windows[0x60];
 extern int g_774a3c;
 extern int g_774a38;
-extern char* g_779cb8;
+extern char* d2_LobbyLocalPlayerEntry;
 extern char* g_14b5d58;
 
 char* __cdecl d2_GetCurrentTextLogRecord(void);
@@ -93,25 +93,25 @@ int __cdecl d2_ChooseProfession(int a1)
 		t = types[i];
 		h = d2_AddElementToWindow(i % 3 * 96 + 100, (i / 3 + 1) * 80, t + 0x5a1, d2_CurrentWindowId);
 		btns[i] = h;
-		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[h].value_05c) = 1;
-		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[h].flags_1d0) = 3;
+		(*(int*)&((D2_CONTROL_TL*)d2_Controls)[h].value_05c) = 1;
+		(*(int*)&((D2_CONTROL_TL*)d2_Controls)[h].flags_1d0) = 3;
 		s = g_14a5ad8[t];
-		d = ((char*)&((D2_CONTROL_TL*)g_1015ea0)[h] + 0xcc);
+		d = ((char*)&((D2_CONTROL_TL*)d2_Controls)[h] + 0xcc);
 		do {
 			c = *s++;
 			*d++ = c;
 		} while (c != 0);
-		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[h].value_1cc) = 0x56;
+		(*(int*)&((D2_CONTROL_TL*)d2_Controls)[h].value_1cc) = 0x56;
 		d2_AddToRadioGroup(grp, h);
 	}
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	while (main_RunFrameLoop((void*) d2_ShowChooseProfessionDialog, a1) != 0) {
 		d2_UpdateRadioGroup(grp);
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			for (i = 0; i < 11; i++) {
 				if (d2_CurrentElementId == btns[i]) {
 					g_7e23e3 = gm_GetRangeStatId(types[i], 1);
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 					r = 1;
 					break;
 				}
@@ -135,8 +135,8 @@ void __cdecl d2_RefreshNetLobbyChatLog(void)
 
 	last = -1;
 	e = d2_GetCurrentTextLogRecord();
-	d2_SetForm(g_6a9b9c, 5);
-	h = *(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3c[0x218];
+	d2_SetForm(d2_NetLobbyForm, 5);
+	h = *(int*) &((D2_WIN*)d2_Windows)[d2_CurrentWindowId].pad3c[0x218];
 	io_AppendText((int) "$C");
 	g_774a3c = 0;
 	while (e != 0) {
@@ -148,7 +148,7 @@ void __cdecl d2_RefreshNetLobbyChatLog(void)
 			n = 9;
 		}
 		if (*(int*) (e + 0x64) != 0) {
-			if ((((int*)g_779cb8) != 0 && *(int*) (e + 0x64) == *((int*)g_779cb8)) || *(int*) (e + 0x68) == *((int*)g_779cb8)) {
+			if ((((int*)d2_LobbyLocalPlayerEntry) != 0 && *(int*) (e + 0x64) == *((int*)d2_LobbyLocalPlayerEntry)) || *(int*) (e + 0x68) == *((int*)d2_LobbyLocalPlayerEntry)) {
 				sprintf(buf, "$%dFF%s (%s): %s$A", n, e + 0x40, g_14b5d58, e);
 			}
 		} else {
@@ -157,11 +157,11 @@ void __cdecl d2_RefreshNetLobbyChatLog(void)
 		last = io_AppendText((int) buf);
 		e = d2_NextTextLogRecord();
 	}
-	if (g_774a3c > g_774a38 && last >= 0 && h > ((D2_WIN*)g_1015f40)[d2_CurrentWindowId].height) {
+	if (g_774a3c > g_774a38 && last >= 0 && h > ((D2_WIN*)d2_Windows)[d2_CurrentWindowId].height) {
 		g_774a38 = g_774a3c;
 		n = h + 0x18;
-		*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3c[0x218] = n;
-		*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3c[0x21c] = n - ((D2_WIN*)g_1015f40)[d2_CurrentWindowId].height;
+		*(int*) &((D2_WIN*)d2_Windows)[d2_CurrentWindowId].pad3c[0x218] = n;
+		*(int*) &((D2_WIN*)d2_Windows)[d2_CurrentWindowId].pad3c[0x21c] = n - ((D2_WIN*)d2_Windows)[d2_CurrentWindowId].height;
 		d2_UpdateWindowScroll(d2_CurrentWindowId);
 	}
 }

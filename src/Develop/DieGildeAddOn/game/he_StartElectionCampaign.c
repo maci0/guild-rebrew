@@ -1,9 +1,9 @@
 #include "Develop/client_types.h"
 
 extern pos14_7f4c00 gm_GameTime;
-extern unsigned short g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
+extern unsigned short gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
 
 void __cdecl gm_AddTime(void* clock, int arg2, int arg3, int arg4);
 int __cdecl gm_RandomMod(int range);

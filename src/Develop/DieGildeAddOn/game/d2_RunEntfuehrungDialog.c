@@ -48,7 +48,7 @@ int __cdecl d2_RunEntfuehrungDialog(void* a0)
 
 	res = 0;
 	if (a0 != 0 &&
-	    d2_CheckActionBlocker((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*)&g_774970], 3) != 0 &&
+	    d2_CheckActionBlocker((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*)&gm_LocalPlayerSlot], 3) != 0 &&
 	    (*(int*) ((char*) a0 + 0x16c) == 0 ||
 	     *(unsigned short*) (*(int*) ((char*) a0 + 0x16c) + 0x27) != *(unsigned short*) a0)) {
 	if (*(unsigned char*) ((char*) a0 + 0x1b1) != 0) {
@@ -71,25 +71,25 @@ int __cdecl d2_RunEntfuehrungDialog(void* a0)
 	v9 = io_AppendText(0x19b9, *(unsigned short*) a0, 3, *(unsigned short*) a0);
 	v10 = d2_GetWindowListItem(dialogId, 1, v9);
 	v9 = d2_GetWindowListItem(dialogId, 1, v9 + 1);
-	*(int*) &g_100f1dc = -1;
+	*(int*) &d2_DialogButtonAction = -1;
 	do {
-		if (g_14ce8e0 != 0)
-			g_774654 = 1;
-		if (*(int*) &g_100f1dc != -1) {
+		if (io_RightButtonReleased != 0)
+			d2_DialogCloseRequested = 1;
+		if (*(int*) &d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == v10) {
 				for (i = 0; i < 0x3e; i++)
 					((int*) msg)[i] = 0;
 				*(unsigned char*) (msg + 4) = 0x3c;
 				*(unsigned char*) (msg + 0x36) = 1;
-				slot = ((ENTITY_RECORD*)((char*)&g_7f4ca4 - 4))[*(unsigned short*)&g_774970].entity_id;
+				slot = ((ENTITY_RECORD*)((char*)&gm_EntityIdField - 4))[*(unsigned short*)&gm_LocalPlayerSlot].entity_id;
 				*(int*) (msg + 8) = slot;
 				*(int*) (msg + 0x58) = *(int*) ((char*) a0 + 4);
 				*(int*) (msg + 0x5c) = *(int*) ((char*) p + 1);
-				*(int*) (msg + 0x60) = *(int*) (*(int*) &g_7746c4 + 1);
+				*(int*) (msg + 0x60) = *(int*) (*(int*) &d2_VisitedBuilding + 1);
 				for (i = 0; i < 8; i++)
 					*(int*) (msg + 0x38 + i * 4) = -1;
 				k = 0;
-				for (q = (char*) &g_7f4ca4; (int) q < (int) 0x85a0a4; q += sizeof(ENTITY_RECORD)) {
+				for (q = (char*) &gm_EntityIdField; (int) q < (int) 0x85a0a4; q += sizeof(ENTITY_RECORD)) {
 					if (*(unsigned char*) (q + 0x184) != 0) {
 						*(int*) (msg + 0x38 + k * 4) = *(int*) q;
 						k++;
@@ -97,19 +97,19 @@ int __cdecl d2_RunEntfuehrungDialog(void* a0)
 				}
 				if (k != 0) {
 					cm_SendCopyEntityData(msg);
-					cm_RequestModifyHealth(((ENTITY_RECORD*)((char*)&g_7f4ca4 - 4))[*(unsigned short*)&g_774970].entity_id, -3);
-					gm_TryRecordCrime(0x1a, 1, ((ENTITY_RECORD*)((char*)&g_7f4ca4 - 4))[*(unsigned short*)&g_774970].entity_id,
+					cm_RequestModifyHealth(((ENTITY_RECORD*)((char*)&gm_EntityIdField - 4))[*(unsigned short*)&gm_LocalPlayerSlot].entity_id, -3);
+					gm_TryRecordCrime(0x1a, 1, ((ENTITY_RECORD*)((char*)&gm_EntityIdField - 4))[*(unsigned short*)&gm_LocalPlayerSlot].entity_id,
 						*(int*) ((char*) a0 + 4), -1);
 					d3snd_PlayWorkerOrderVoice();
 					sv_ClearObjectSelection();
 					res = 1;
-					g_774654 = 3;
+					d2_DialogCloseRequested = 3;
 				} else {
 					d2_ShowModalMessageBox((void*) g_14abaac, 0);
-					*(int*) &g_100f1dc = -1;
+					*(int*) &d2_DialogButtonAction = -1;
 				}
 			} else if (d2_CurrentElementId == v9)
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop((void*) 0x5ae6a0, 0x677c7) != 0);
 	d2_DestroyForm(dialogId);

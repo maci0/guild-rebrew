@@ -1,4 +1,4 @@
-extern float g_6628a8;
+extern float flt_0_0;
 /* ADDRESS: GOLDTL 0x00459980 */
 void __cdecl d3_SetSkyLayerTransition(void *skyCtx, void *layer, char value, float scale)
 {
@@ -9,7 +9,7 @@ void __cdecl d3_SetSkyLayerTransition(void *skyCtx, void *layer, char value, flo
 		return;
 	}
 	p = (unsigned char *)layer;
-	if (scale != g_6628a8) {
+	if (scale != flt_0_0) {
 		p[0x28] = p[0x2a];
 		p[0x29] = value;
 		*(int *) (p + 0xc) = zero;

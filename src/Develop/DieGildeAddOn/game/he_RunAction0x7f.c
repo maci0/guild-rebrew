@@ -33,8 +33,8 @@ typedef struct {
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
 extern pos14_7f4c00 gm_GameTime;
-extern unsigned char g_773d75;
-extern char g_6b5c60[];
+extern unsigned char gm_ActiveTownIndex;
+extern char str_empty[];
 
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl cm_SendCopyEntityData(Msg55a5*);
@@ -78,19 +78,19 @@ void __cdecl he_RunAction0x7f(char* u)
 			return;
 		}
 		if (*(int*) (u + 0xb0) != 0) {
-			h = ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (u + 8)]);
+			h = ((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (u + 8)]);
 			f = gm_GetEntitySkill(h, 3) > 0.1f ? gm_GetEntitySkill(h, 3) : 0.1f;
 			a = gm_WalkEntityChain(*(unsigned short*) h);
 			gm_ApplyEntityHealthDelta(*(unsigned short*) h, -(int) ((int) gm_GetEntityHealth(h) * ((1.0f - f) * 0.5f)));
 			d = (int) (a * f * 0.06f);
-			cm_RequestTransferCurrencyNoKill(*(int*) (u + 0xac), -1, g_773d75, d);
+			cm_RequestTransferCurrencyNoKill(*(int*) (u + 0xac), -1, gm_ActiveTownIndex, d);
 			io_FormatTextBuffer(buf, 0x10ba, d);
-			he_PostEntityMessage(*(int*) (u + 0xac), -1, buf, 0x20, 0x5fd, g_6b5c60);
+			he_PostEntityMessage(*(int*) (u + 0xac), -1, buf, 0x20, 0x5fd, str_empty);
 			he_FreeAction(u);
 			return;
 		}
 		io_FormatTextBuffer(buf, 0x10bb);
-		he_PostEntityMessage(*(int*) (u + 0xac), -1, buf, 0x20, 0x5fd, g_6b5c60);
+		he_PostEntityMessage(*(int*) (u + 0xac), -1, buf, 0x20, 0x5fd, str_empty);
 	}
 	he_FreeAction(u);
 }

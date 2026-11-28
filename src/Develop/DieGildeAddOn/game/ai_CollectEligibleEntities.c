@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-extern int g_77261c;
+extern int ai_FeudTargetEntity;
 
 unsigned short __cdecl gm_RandomMod(unsigned short);
 int __cdecl gm_MatchesTargetFilter(unsigned short, unsigned short, void*, int);
@@ -29,12 +29,12 @@ unsigned int __cdecl ai_CollectEligibleEntities(unsigned short* source, unsigned
 	*(int*) ((char*) query + 0x14) = 2;
 	checkFavor = 0;
 	have = 0;
-	if (g_77261c != 0) {
+	if (ai_FeudTargetEntity != 0) {
 		query[1] = actionKind;
 		query[16] = 0;
-		if (gm_MatchesTargetFilter(*source, *(unsigned short*) g_77261c, query, 0) != 0) {
+		if (gm_MatchesTargetFilter(*source, *(unsigned short*) ai_FeudTargetEntity, query, 0) != 0) {
 			have = 1;
-			*out = *(unsigned short*) g_77261c;
+			*out = *(unsigned short*) ai_FeudTargetEntity;
 		}
 	}
 	if ((minFavor > *(double*) 0x662950 || maxFavor < *(double*) 0x662c38) && minFavor < maxFavor) {

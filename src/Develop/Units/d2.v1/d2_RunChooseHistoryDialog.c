@@ -23,10 +23,10 @@ extern unsigned int *__cdecl gm_GetStatRecord(char *buf, unsigned char a);
 extern void __cdecl d3_SelectSceneContext(int a, int b);
 extern int __cdecl d2_OpenMessageBox(int a, int b);
 extern int __cdecl d2_RunParentProfessionSelection(int a);
-extern char g_14cf950;
-extern int g_100f1dc;
+extern char io_LastKeyScancode;
+extern int d2_DialogButtonAction;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_774654;
+extern int d2_DialogCloseRequested;
 extern int g_7e242c;
 extern int g_7e2468;
 extern int main_LoopFlags;
@@ -94,10 +94,10 @@ label_53dd68:
 			return 0;
 		}
 		d2_UpdateRadioGroup(dlg);
-		if (g_14ce8e0 || g_14cf950 == 1) {
-			g_774654 = 1;
+		if (io_RightButtonReleased || io_LastKeyScancode == 1) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc == 2 || g_14cf950 == 0x1c || retry) {
+		if (d2_DialogButtonAction == 2 || io_LastKeyScancode == 0x1c || retry) {
 			if (v2) {
 				goto label_53de5c;
 			}
@@ -106,7 +106,7 @@ label_53dd68:
 					mode = 2;
 					goto label_53de0b;
 				}
-				if (d2_CurrentElementId == lastOption || g_14cf950 == 0x1c) {
+				if (d2_CurrentElementId == lastOption || io_LastKeyScancode == 0x1c) {
 					mode = 0;
 					hst_SetHistoryScrollModeFlag(mode);
 				}
@@ -153,7 +153,7 @@ label_53de5c:
 						if (d2_RunParentProfessionSelection(0)) {
 label_53df85:
 							again = 1;
-							g_774654 = 1;
+							d2_DialogCloseRequested = 1;
 						} else {
 							d3_SelectSceneContext(0, 0);
 							v2 = 1;
@@ -186,8 +186,8 @@ label_53df85:
 				goto label_53de5c;
 			}
 			retry = 0;
-			if (g_100f1dc == 1) {
-				g_774654 = 1;
+			if (d2_DialogButtonAction == 1) {
+				d2_DialogCloseRequested = 1;
 			}
 		}
 		r = main_RunFrameLoop(0x53dc20, 0xc6);

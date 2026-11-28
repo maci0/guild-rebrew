@@ -1,20 +1,20 @@
 #include "Develop/Units/d3/client_scene_loader.h"
 #include "Develop/client_types.h"
 #include <string.h>
-extern void* g_6b7fdc;
+extern void* vfs_RootDir;
 extern unsigned char g_6339e4;
-extern int g_6b86d4;
-extern char* g_67a370;
+extern int d3_SceneRenderLock;
+extern char* d3_ActiveScene;
 extern char g_1041d80[];
 extern char* g_6338c4;
-extern char* g_6b8300;
+extern char* d3_CurrentFloor;
 extern char* g_fc52f0;
-extern char g_fc2700[];
+extern char d3_SceneRootSentinel[];
 void* __cdecl vfs_Tfopen(const char*, const char*, void*);
 int __cdecl CloseVfsStream(void*);
 int __cdecl vfs_ReadByte(void*, void*);
 void __cdecl vfs_ReadCString(void*, char*);
-int __cdecl fcn_004011d0(void*, void*);
+int __cdecl vfs_ReadDword(void*, void*);
 void __cdecl vfs_ReadVec3(void*, void*);
 void __cdecl ReportClientMessage(const char*);
 void __cdecl fcn_0043a6f0(float, float, int);
@@ -66,27 +66,27 @@ char __cdecl d3_LoadSceneStream(const char* filename, void* stream, SCENE_PROGRE
 	if (stream != 0) {
 		s = (char*) stream;
 	} else {
-		s = (char*) vfs_Tfopen(filename, "rb", g_6b7fdc);
+		s = (char*) vfs_Tfopen(filename, "rb", vfs_RootDir);
 	}
 	if (s == 0) {
 		return 0;
 	}
-	fcn_004011d0(s, &version);
+	vfs_ReadDword(s, &version);
 	if ((version & 0xffff0000) != 0x3a6c0000 || version < 0x3a6c0001) {
 		if (stream == 0) {
 			CloseVfsStream(s);
 		}
 		return 0;
 	}
-	g_6b86d4++;
+	d3_SceneRenderLock++;
 	if (version >= 0x3a6c000b) {
 		vfs_ReadCString(s, name);
-		fcn_004011d0(s, &discarded);
+		vfs_ReadDword(s, &discarded);
 		vfs_ReadVec3(s, &vec);
 		*(float*) 0x5fcc74 = discarded;
-		g_67bbdc.x = vec.x;
-		g_67bbdc.y = vec.y;
-		g_67bbdc.z = vec.z;
+		d3_SceneAmbientColor.x = vec.x;
+		d3_SceneAmbientColor.y = vec.y;
+		d3_SceneAmbientColor.z = vec.z;
 		if (version >= 0x3a6c00b5) {
 			vfs_ReadVec3(s, &vec);
 			(*(float*) 0x633b1c) = vec.x;
@@ -98,21 +98,21 @@ char __cdecl d3_LoadSceneStream(const char* filename, void* stream, SCENE_PROGRE
 			 * row counter of the geometry loop. */
 			index = 0;
 			if (version >= 0x3a6c00b7) {
-				fcn_004011d0(s, &index);
+				vfs_ReadDword(s, &index);
 			}
-			*(int*) (g_67a370 + 0xb4) = index;
-			fcn_004011d0(s, &fog_color);
-			fcn_004011d0(s, &fog_a);
-			fcn_004011d0(s, &fog_b);
+			*(int*) (d3_ActiveScene + 0xb4) = index;
+			vfs_ReadDword(s, &fog_color);
+			vfs_ReadDword(s, &fog_a);
+			vfs_ReadDword(s, &fog_b);
 			fcn_0043a6f0(fog_a, fog_b, fog_color);
 		}
 		/* The reference writes the row count into index before the loop
 		 * and never reads it back. */
 		index = 7;
 		for (index = 0; index < 7; index++) {
-			*(float*) (g_1041d80 + index * 0x60) = g_67bbdc.x;
-			*(float*) (g_1041d80 + index * 0x60 + 4) = g_67bbdc.y;
-			*(float*) (g_1041d80 + index * 0x60 + 8) = g_67bbdc.z;
+			*(float*) (g_1041d80 + index * 0x60) = d3_SceneAmbientColor.x;
+			*(float*) (g_1041d80 + index * 0x60 + 4) = d3_SceneAmbientColor.y;
+			*(float*) (g_1041d80 + index * 0x60 + 8) = d3_SceneAmbientColor.z;
 			*(int*) (g_1041d80 + index * 0x60 + 0xc) = 0;
 			*(int*) (g_1041d80 + index * 0x60 + 0x10) = 0;
 			*(int*) (g_1041d80 + index * 0x60 + 0x14) = 0;
@@ -137,11 +137,11 @@ char __cdecl d3_LoadSceneStream(const char* filename, void* stream, SCENE_PROGRE
 						 * object count read after the geometry block. */
 						count = 0;
 						do {
-							fcn_004011d0(s, &color);
-							fcn_004011d0(s, &discarded);
+							vfs_ReadDword(s, &color);
+							vfs_ReadDword(s, &discarded);
 							*(int*) (g_1041d80 + 0x18 + (count + index * 8) * 12) = color;
 							*(float*) (g_1041d80 + 0x1c + (count + index * 8) * 12) = discarded;
-							fcn_004011d0(s, &discarded);
+							vfs_ReadDword(s, &discarded);
 							*(float*) (g_1041d80 + 0x20 + (count + index * 8) * 12) = discarded;
 							count = count + 1;
 						} while (count < 6);
@@ -153,7 +153,7 @@ char __cdecl d3_LoadSceneStream(const char* filename, void* stream, SCENE_PROGRE
 		if (g_6338c4 != 0) {
 			d3_DisposeObject(g_6338c4);
 		}
-		fcn_004011d0(s, &count);
+		vfs_ReadDword(s, &count);
 		index = 0;
 		if (count > 0) {
 			do {
@@ -166,10 +166,10 @@ char __cdecl d3_LoadSceneStream(const char* filename, void* stream, SCENE_PROGRE
 		}
 		vfs_ReadByte(s, &present);
 		if (present != 0) {
-			g_6b8300 = d3_int_io_LoadFloor(s, version);
+			d3_CurrentFloor = d3_int_io_LoadFloor(s, version);
 		}
 		obj = g_fc52f0;
-		while (obj != g_fc2700) {
+		while (obj != d3_SceneRootSentinel) {
 			if (*(int*) (obj + 0x218) == 3 && _strcmpi(name, obj) == 0) {
 				g_6338c4 = obj;
 				if ((obj[0x211] & 1) != 0) {
@@ -190,9 +190,9 @@ char __cdecl d3_LoadSceneStream(const char* filename, void* stream, SCENE_PROGRE
 	if (stream == 0) {
 		CloseVfsStream(s);
 	}
-	if (version < 0x3a6c00b1 && g_6b8300 != 0) {
+	if (version < 0x3a6c00b1 && d3_CurrentFloor != 0) {
 		obj = g_fc52f0;
-		while (obj != g_fc2700) {
+		while (obj != d3_SceneRootSentinel) {
 			if (*(int*) (obj + 0x218) == 7) {
 				clone = d3_DuplicateObject(obj);
 				clone[0x211] |= 0x10;
@@ -203,7 +203,7 @@ char __cdecl d3_LoadSceneStream(const char* filename, void* stream, SCENE_PROGRE
 			obj = d3_GetNextSceneNode(obj);
 		}
 	}
-	if (g_6b8300 == 0) {
+	if (d3_CurrentFloor == 0) {
 		clone = *(char**) 0x633df8;
 		if (clone != 0) {
 			d3sm_Build(clone, 0);
@@ -217,20 +217,20 @@ char __cdecl d3_LoadSceneStream(const char* filename, void* stream, SCENE_PROGRE
 			(*(char**) 0x633df8) = 0;
 		}
 	}
-	universe = g_67a370;
+	universe = d3_ActiveScene;
 	if (*(int*) (universe + 0xb4) == 0) {
-		*(int*) (universe + 0xb4) = g_6b8300 != 0 ? 128 : 64;
-		universe = g_67a370;
+		*(int*) (universe + 0xb4) = d3_CurrentFloor != 0 ? 128 : 64;
+		universe = d3_ActiveScene;
 	}
-	if (g_6b8300 != 0) {
-		*(char**) (universe + 0xac) = g_6b8300;
+	if (d3_CurrentFloor != 0) {
+		*(char**) (universe + 0xac) = d3_CurrentFloor;
 	}
 	d3_ReloadAllTextures(0, progress);
-	g_6b86d4--;
+	d3_SceneRenderLock--;
 	if (filename != 0) {
-		strncpy(g_67a370, filename, 0x7f);
+		strncpy(d3_ActiveScene, filename, 0x7f);
 	}
-	*(unsigned char*) (g_67a370 + 0x3d4) = 1;
-	*(int*) (g_67a370 + 0x3d8) = 0;
+	*(unsigned char*) (d3_ActiveScene + 0x3d4) = 1;
+	*(int*) (d3_ActiveScene + 0x3d8) = 0;
 	return 1;
 }

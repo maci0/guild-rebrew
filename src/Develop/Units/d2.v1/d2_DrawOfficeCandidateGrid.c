@@ -1,14 +1,14 @@
 int __cdecl d2_AddWindowValueGauge();
 int __cdecl d2_AddElementToWindow();
 #include "d2_gui.h"
-extern char g_679060[];
+extern char str_fmt_s[];
 int __cdecl d2_SetElementEnabled();
 float __cdecl gm_CalcEntityFavor(unsigned int, unsigned int, unsigned int);
 int __cdecl io_FormatTextBuffer();
 int __cdecl d2_ShowCenteredText();
 int __cdecl gm_MatchesTargetFilter();
 
-extern char * g_1015ea0; extern char * g_772500; extern int d2_CurrentWindowId; extern unsigned short g_774970;
+extern char * d2_Controls; extern char * d2_FileObjTable; extern int d2_CurrentWindowId; extern unsigned short gm_LocalPlayerSlot;
 /* ADDRESS: GOLDTL 0x005c9f10 */
 int __cdecl d2_DrawOfficeCandidateGrid(int a0, int a1, int a2, int a3, int a4, unsigned short* a5)
 {
@@ -76,7 +76,7 @@ label_5ca044:
 		}
 		v6 = v15[-2] + 0x65;
 		v10 = v15[-1] + 0x23;
-		v11 = v6 - (int) *(short*) ((int) g_772500 + 0x1ebd8) / 2;
+		v11 = v6 - (int) *(short*) ((int) d2_FileObjTable + 0x1ebd8) / 2;
 		v5 = d2_AddElementToWindow(v11, v10, 0x5da, d2_CurrentWindowId);
 		v15[-5] = v5;
 		v2 = v15[-6];
@@ -86,16 +86,16 @@ label_5ca044:
 			if (v1 == 6 || v1 == 7 || v1 == 5) {
 				d2_AddElementToWindow(v11 - 0x20, v10, *(unsigned int*) (v2 + 0x54), d2_CurrentWindowId);
 			}
-			v5 = d2_AddElementToWindow(((v6 - (int) *(short*) ((int) g_772500 + 0x50 + *(int*) (v15[-6] + 0x18c) * 0x54) / 2) - 3), v10 + 1, *(int*) (v15[-6] + 0x18c), d2_CurrentWindowId);
+			v5 = d2_AddElementToWindow(((v6 - (int) *(short*) ((int) d2_FileObjTable + 0x50 + *(int*) (v15[-6] + 0x18c) * 0x54) / 2) - 3), v10 + 1, *(int*) (v15[-6] + 0x18c), d2_CurrentWindowId);
 			*v15 = v5;
 			d2_AddElementToWindow(v11 + 3, v10 + 3, v15[1], d2_CurrentWindowId);
 			if (v15[2]) {
-				d2_AddElementToWindow(v11 + 3, (int) *(short*) ((int) g_772500 + 0x1ebda) + -0x13 + v10, v15[2], d2_CurrentWindowId);
+				d2_AddElementToWindow(v11 + 3, (int) *(short*) ((int) d2_FileObjTable + 0x1ebda) + -0x13 + v10, v15[2], d2_CurrentWindowId);
 			}
 			if (v15[3]) {
-				d2_AddElementToWindow((int) *(short*) ((int) g_772500 + 0x1ebd8) + -0x10 + v11, v10 + 3, v15[3], d2_CurrentWindowId);
+				d2_AddElementToWindow((int) *(short*) ((int) d2_FileObjTable + 0x1ebd8) + -0x10 + v11, v10 + 3, v15[3], d2_CurrentWindowId);
 			}
-			d2_AddElementToWindow((int) *(short*) ((int) g_772500 + 0x1ebd8) + -0x10 + v11, (int) *(short*) ((int) g_772500 + 0x1ebda) + -0x13 + v10, v15[4], d2_CurrentWindowId);
+			d2_AddElementToWindow((int) *(short*) ((int) d2_FileObjTable + 0x1ebd8) + -0x10 + v11, (int) *(short*) ((int) d2_FileObjTable + 0x1ebda) + -0x13 + v10, v15[4], d2_CurrentWindowId);
 			if (a1 == 8) {
 				v12 = *(int*) &((unsigned short*) v15[-6])[0xe6];
 				if (v12 & 0x1000) {
@@ -122,7 +122,7 @@ label_5ca044:
 			}
 			v3 = a5;
 			if ((unsigned short*) v15[-6] != a5 && *(char*) &((unsigned short*) v15[-6])[1] != 6) {
-				v5 = d2_AddWindowValueGauge(v6 - 0x23, (int) *(short*) ((int) g_772500 + 0x1ebda) + 5 + v10, 0x40, 0, 100, 0x75, 0x442, d2_CurrentWindowId);
+				v5 = d2_AddWindowValueGauge(v6 - 0x23, (int) *(short*) ((int) d2_FileObjTable + 0x1ebda) + 5 + v10, 0x40, 0, 100, 0x75, 0x442, d2_CurrentWindowId);
 				v15[-4] = v5;
 				if (*(char*) &((unsigned short*) v15[-6])[1] != 7) {
 					v5 = (int) gm_CalcEntityFavor(*v3, *(unsigned short*) v15[-6], 1);
@@ -131,22 +131,22 @@ label_5ca044:
 					d2_SetElementValue(v5, 0, 100, 0);
 				}
 				d2_SetElementEnabled(v15[-4], 1);
-				((D2_CONTROL_TL*) ((int) g_1015ea0))[v15[-4]].value_05c = 1;
+				((D2_CONTROL_TL*) ((int) d2_Controls))[v15[-4]].value_05c = 1;
 			}
 			if (v3 != 0 && *(char*) &v3[1] == 6 && *(int*) (v15[-6] + 0x210) == *(int*) &v3[2]) {
-				d2_AddElementToWindow((int) *(short*) ((int) g_772500 + 0x1ebd8) + v11, v10, 0x6d3, d2_CurrentWindowId);
+				d2_AddElementToWindow((int) *(short*) ((int) d2_FileObjTable + 0x1ebd8) + v11, v10, 0x6d3, d2_CurrentWindowId);
 			}
-			if (a2 == 0 || gm_MatchesTargetFilter(g_774970, *(unsigned short*) v15[-6], a2, 0) != 0) {
-				((D2_CONTROL_TL*) ((int) g_1015ea0))[v15[-5]].value_05c = 1;
-				((D2_CONTROL_TL*) ((int) g_1015ea0))[v15[-5]].flags_1d0 = 3;
-				*(int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[v15[-5]].associated_object) = v15[-6];
+			if (a2 == 0 || gm_MatchesTargetFilter(gm_LocalPlayerSlot, *(unsigned short*) v15[-6], a2, 0) != 0) {
+				((D2_CONTROL_TL*) ((int) d2_Controls))[v15[-5]].value_05c = 1;
+				((D2_CONTROL_TL*) ((int) d2_Controls))[v15[-5]].flags_1d0 = 3;
+				*(int*) (&((D2_CONTROL_TL*) ((int) d2_Controls))[v15[-5]].associated_object) = v15[-6];
 			}
 		} else {
-			d2_AddElementToWindow((v6 - (int) *(short*) ((int) g_772500 + 0x1a2ac) / 2) - 3, v10 + 1, 0x4fb, d2_CurrentWindowId);
+			d2_AddElementToWindow((v6 - (int) *(short*) ((int) d2_FileObjTable + 0x1a2ac) / 2) - 3, v10 + 1, 0x4fb, d2_CurrentWindowId);
 			io_FormatTextBuffer(caption, "%s", v15[-3] + 0x253);
 			d2_ShowCenteredText(caption, v6, v15[-1], 0xca, 0x56);
-			((D2_CONTROL_TL*) ((int) g_1015ea0))[v15[-5]].value_05c = 1;
-			*(int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[v15[-5]].associated_object) = 0;
+			((D2_CONTROL_TL*) ((int) d2_Controls))[v15[-5]].value_05c = 1;
+			*(int*) (&((D2_CONTROL_TL*) ((int) d2_Controls))[v15[-5]].associated_object) = 0;
 			d2_SetElementEnabled(v15[-5], 0);
 		}
 		v17 += 1;

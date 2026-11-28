@@ -40,19 +40,19 @@ struct s_1015f4c
 	char pad3[0x20];
 };
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int d2_CurrentWindowId;
 extern int tp_d2_SelectedControl;
-extern int g_100f1dc;
-extern int g_14ce8e0;
+extern int d2_DialogButtonAction;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern char* g_1015ea0;
+extern char* d2_Controls;
 extern float g_662a98;
 extern float g_664168;
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern s_1015f4c g_1015f4c[];
+extern s_1015f4c d2_WindowMetricsView[];
 
 char* __cdecl he_StartHandlungSearch(int a, int b, int c, int d, int e);
 int __cdecl gm_CheckPrivilege(int a1, char* a2, int a3);
@@ -90,7 +90,7 @@ void __cdecl d2_RunTalenteDialog(int a0, int a1, int broadcastSlot)
 	int h;
 	int x;
 
-	slot = he_StartHandlungSearch(2, 2, g_774970, 0, 0x60);
+	slot = he_StartHandlungSearch(2, 2, gm_LocalPlayerSlot, 0, 0x60);
 	memset(big, 0, sizeof(big));
 	flag = 0;
 	ids[0] = 0x3a;
@@ -102,8 +102,8 @@ void __cdecl d2_RunTalenteDialog(int a0, int a1, int broadcastSlot)
 	if (broadcastSlot >= 5) {
 		return;
 	}
-	miss = (gm_CheckPrivilege(ids[broadcastSlot], (char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]), (int) big) & 2) != 0 ? -1 : 0;
-	color = *(unsigned char*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 0x80 + broadcastSlot);
+	miss = (gm_CheckPrivilege(ids[broadcastSlot], (char*) ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot]), (int) big) & 2) != 0 ? -1 : 0;
+	color = *(unsigned char*) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot]) + 0x80 + broadcastSlot);
 	if (color < 0x2a) {
 		color = 1;
 	} else if (color < 0x54) {
@@ -127,19 +127,19 @@ void __cdecl d2_RunTalenteDialog(int a0, int a1, int broadcastSlot)
 	io_AppendText(0x16af, broadcastSlot + 0x16b7);
 	io_AppendText(broadcastSlot + 0x16c3);
 	d2_SetForm(h, 2);
-	x = ((struct s_1015f4c*) g_1015f4c)[d2_CurrentWindowId].x;
-	f = (float) *(unsigned char*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 0x80 + broadcastSlot) * 0.023809524f;
+	x = ((struct s_1015f4c*) d2_WindowMetricsView)[d2_CurrentWindowId].x;
+	f = (float) *(unsigned char*) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot]) + 0x80 + broadcastSlot) * 0.023809524f;
 	if (!(f < 5.0f)) {
 		f = 5.0f;
 	}
 	found = d2_AddElementToWindow(x / 2 - 0x18, 4, (int) ((float) yoff[broadcastSlot] + f), d2_CurrentWindowId);
-	d2_DrawSegmentedBar(x / 2 - 0x23, 0x3c, *(unsigned char*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 0x80 + broadcastSlot), 0x4df);
+	d2_DrawSegmentedBar(x / 2 - 0x23, 0x3c, *(unsigned char*) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot]) + 0x80 + broadcastSlot), 0x4df);
 	d2_SetForm(h, 3);
 	if (slot != 0) {
 		io_AppendText(0x16b3, *(unsigned char*) (slot + 0xae) + 0x16b7, broadcastSlot + 0x16b7);
-	} else if (*(unsigned char*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 0x80 + broadcastSlot) >= 0xfc) {
+	} else if (*(unsigned char*) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot]) + 0x80 + broadcastSlot) >= 0xfc) {
 		io_AppendText(0x16b2);
-	} else if (*(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 0x194) >= (int) color) {
+	} else if (*(int*) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot]) + 0x194) >= (int) color) {
 		if (miss == 0) {
 			switch (main_GetLanguage()) {
 			case 0:
@@ -154,14 +154,14 @@ void __cdecl d2_RunTalenteDialog(int a0, int a1, int broadcastSlot)
 			switch (main_GetLanguage()) {
 			case 0:
 				io_AppendText(0x16b0,
-					     (*(unsigned char*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 9) != 0 ? 0x28 : 0) + 0x253 +
-						     *(unsigned char*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 0x169),
+					     (*(unsigned char*) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot]) + 9) != 0 ? 0x28 : 0) + 0x253 +
+						     *(unsigned char*) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot]) + 0x169),
 					     color, broadcastSlot + 0x16b7);
 				break;
 			case 1:
 				io_AppendText(0x16b0,
-					     (*(unsigned char*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 9) != 0 ? 0x28 : 0) + 0x253 +
-						     *(unsigned char*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 0x169),
+					     (*(unsigned char*) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot]) + 9) != 0 ? 0x28 : 0) + 0x253 +
+						     *(unsigned char*) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot]) + 0x169),
 					     broadcastSlot + 0x16b7, color);
 				break;
 			}
@@ -178,26 +178,26 @@ void __cdecl d2_RunTalenteDialog(int a0, int a1, int broadcastSlot)
 			t = *(Tbebe*) (slot + 0x44);
 			gm_AddTime(&t, 5, 0, 0);
 			dur = (float) gm_GetElapsedMinutes(slot + 0x44, slot + 0x52);
-			*(float*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[found].value_1f4)) =
+			*(float*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[found].value_1f4)) =
 				(float) gm_GetElapsedMinutes(slot + 0x44, (void*) &gm_GameTime) / dur;
 		}
-		if (g_14ce8e0 != 0 && tp_d2_SelectedControl == 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0 && tp_d2_SelectedControl == 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc == 2) {
+		if (d2_DialogButtonAction == 2) {
 			if (flag) {
-				cm_RequestModifyHealth(*(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 4), -color);
+				cm_RequestModifyHealth(*(int*) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot]) + 4), -color);
 				msg.b36 = 1;
 				msg.b4 = 0x60;
 				msg.b5a = (unsigned char) broadcastSlot;
-				msg.f8 = *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 4);
-				msg.fc = *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 4);
+				msg.f8 = *(int*) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot]) + 4);
+				msg.fc = *(int*) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot]) + 4);
 				cm_SendCopyEntityData(&msg);
 				d2_DispatchTutorialInput(0x2c, 0, 0, broadcastSlot);
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
-		} else if (g_100f1dc == 1) {
-			g_774654 = 1;
+		} else if (d2_DialogButtonAction == 1) {
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop((void*) d2_RunTalenteDialog, 0x677c7) != 0);
 	d3_EndCameraAndUiMode();

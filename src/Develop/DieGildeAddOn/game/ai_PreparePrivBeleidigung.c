@@ -35,7 +35,7 @@ int __cdecl ai_PreparePrivBeleidigung(int unused1, char* actor, int ctx, int unu
 		n = gm_FindSimilarEntities(actor, 0xc, kind, 30.0f, 100.0f, ids);
 		if (n) {
 			out[0] = 7;
-			*(int*) (out + 4) = ((ENTITY_RECORD*)g_7f4ca0)[ids[gm_RandomMod(n)]].entity_id;
+			*(int*) (out + 4) = ((ENTITY_RECORD*)gm_EntitySlotTable)[ids[gm_RandomMod(n)]].entity_id;
 			return 1;
 		}
 	}

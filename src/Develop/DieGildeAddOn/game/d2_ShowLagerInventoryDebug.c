@@ -43,11 +43,11 @@ void __cdecl d2_ShowLagerInventoryDebug(void)
 	int v1c;
 
 	idx = d2_CreateWindow(0x20, 0x60, 0x280, 0x190, 0x414);
-	d2_SetElementFont(((D2_WIN*)g_1015f40)[idx].slot, 0x54);
+	d2_SetElementFont(((D2_WIN*)d2_Windows)[idx].slot, 0x54);
 	if (main_RunFrameLoop((void*) 0x5b39c0, 0x657c7) != 0) {
 		do {
-			if (g_14ce8e0 != 0) {
-				g_774654 = 1;
+			if (io_RightButtonReleased != 0) {
+				d2_DialogCloseRequested = 1;
 			}
 			d2_CurrentWindowId = idx;
 			io_AppendText(0x6811b0);
@@ -77,7 +77,7 @@ void __cdecl d2_ShowLagerInventoryDebug(void)
 				base += 0x2f4;
 				save += 0x2a90;
 			} while ((int) base < 0x868c30);
-			d2_UpdateWindowDrag(&((D2_WIN*)g_1015f40)[idx]);
+			d2_UpdateWindowDrag(&((D2_WIN*)d2_Windows)[idx]);
 		} while (main_RunFrameLoop((void*) 0x5b39c0, 0x657c7) != 0);
 	}
 	d2_CloseWindow(idx);

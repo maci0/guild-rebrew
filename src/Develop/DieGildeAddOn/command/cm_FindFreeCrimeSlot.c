@@ -16,7 +16,7 @@ int __cdecl cm_FindFreeCrimeSlot(void)
 
 	slot = -1;
 	for (i = 0; i < 512; i++) {
-		if (g_9a3800[i].state == 0) {
+		if (cm_CrimeRecords[i].state == 0) {
 			slot = i;
 			i = 512;
 		}

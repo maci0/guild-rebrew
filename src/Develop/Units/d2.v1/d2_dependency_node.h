@@ -22,6 +22,6 @@ typedef struct DEPENDENCY_DIAGRAM_NODE {
 } DEPENDENCY_DIAGRAM_NODE;
 // SIZE 0x34
 
-extern Rec34_7f3f00 g_7f3f00[];
+extern Rec34_7f3f00 d2_DependencyDiagramNodes[];
 
 #endif

@@ -7,7 +7,7 @@ extern int g_14ad210;
 extern int g_14ad1c8;
 extern int g_14ad280;
 extern int g_14ad218;
-extern int g_7746a0;
+extern int sv_ClickedObjekt;
 
 int __cdecl d3_FindSceneObject(int, int, int, char*);
 int __cdecl RegisterStatusText(char*, int, int);
@@ -18,7 +18,7 @@ void __cdecl d2_OpenContactEinkaufPanel(char* e)
 	int r;
 
 	r = 0;
-	if (g_774970 != *(unsigned short*) (e + 0x27)) {
+	if (gm_LocalPlayerSlot != *(unsigned short*) (e + 0x27)) {
 		if (d3_FindSceneObject(0, 0x60, 0, "contact_EINKAUF")) {
 			r = RegisterStatusText("contact_EINKAUF", g_14ad0e0, 0x10);
 		} else if (d3_FindSceneObject(0, 0x60, 0, "contact_EINKAUF_METALL")) {
@@ -31,7 +31,7 @@ void __cdecl d2_OpenContactEinkaufPanel(char* e)
 			r = RegisterStatusText("contact_EINKAUF_STEIN", g_14ad218, 0x10);
 		}
 	}
-	if (g_774970 != *(unsigned short*) (e + 0x27) && g_7746a0 != 0 && g_7746a0 == r) {
+	if (gm_LocalPlayerSlot != *(unsigned short*) (e + 0x27) && sv_ClickedObjekt != 0 && sv_ClickedObjekt == r) {
 		d2_OpenTransportPanel(e);
 	}
 }

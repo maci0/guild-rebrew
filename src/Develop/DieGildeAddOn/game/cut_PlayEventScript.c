@@ -1,4 +1,4 @@
-extern int g_772f3c;
+extern int cut_SkipMode;
 
 int __cdecl evt_LoadGfxScript(int);
 void __cdecl fcn_00442830(void*);
@@ -9,7 +9,7 @@ int __cdecl cut_PlayEventScript(int a)
 	void* p;
 
 	p = 0;
-	if (g_772f3c == 0) {
+	if (cut_SkipMode == 0) {
 		p = (void*) evt_LoadGfxScript(a);
 		if (p != 0) {
 			fcn_00442830(p);

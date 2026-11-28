@@ -4,9 +4,9 @@
 
 
 extern int gm_GameTime;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
 extern char s_6a5b74[];
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
@@ -44,7 +44,7 @@ void __cdecl he_RunTalentBoost(char* actionRecord)
 		delay = *(unsigned char*) (actionRecord + 0xac) - (gm_RandomMod(*(unsigned char*) (actionRecord + 0xad)) & 0xffff);
 		index = *(unsigned short*) (actionRecord + 8);
 		byte = *(unsigned char*) (actionRecord + 0xae);
-		row = (char*)&((ENTITY_RECORD*)g_7f4ca0)[index];
+		row = (char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[index];
 		id = *(unsigned char*) (row + 0x80 + byte);
 		if ((float) (id + delay) > 252.0f) {
 			delay = (int) (252.0f - (float) id);
@@ -76,9 +76,9 @@ void __cdecl he_RunTalentBoost(char* actionRecord)
 				}
 				*(int*) (packet + 8) = *(int*) (row + 4);
 				*(int*) (packet + 0x28) = gm_GameTime;
-				*(int*) (packet + 0x2c) = g_7f4c04;
-				*(int*) (packet + 0x30) = g_7f4c08;
-				*(short*) (packet + 0x34) = g_7f4c0c;
+				*(int*) (packet + 0x2c) = gm_GameTimeHour;
+				*(int*) (packet + 0x30) = gm_GameTimeSliceDword;
+				*(short*) (packet + 0x34) = gm_GameTimeTailWord;
 				*(char*) (packet + 4) = 0x6a;
 				*(int*) (packet + 0xc) = -1;
 				*(char*) (packet + 0x36) = 9;

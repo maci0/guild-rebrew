@@ -1,4 +1,4 @@
-extern int g_67a370;
+extern int d3_ActiveScene;
 extern int d3snd_SourceCount;
 
 // SIZE 0x54
@@ -38,9 +38,9 @@ void __cdecl d3snd_UpdateSoundSources(void)
 			continue;
 		}
 #ifdef REBREW_GOLD
-		if (*(char**) (((struct snd_418e00*)tp_SoundSources)[i].obj + 0x208) != ((char*)g_67a370)) {
+		if (*(char**) (((struct snd_418e00*)tp_SoundSources)[i].obj + 0x208) != ((char*)d3_ActiveScene)) {
 #else
-		if (*(char**) (((struct snd_418e00*)tp_SoundSources)[i].obj + 0x20c) != ((char*)g_67a370)) {
+		if (*(char**) (((struct snd_418e00*)tp_SoundSources)[i].obj + 0x20c) != ((char*)d3_ActiveScene)) {
 #endif
 			if (((struct snd_418e00*)tp_SoundSources)[i].voice == 0) {
 				continue;

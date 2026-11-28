@@ -6,7 +6,7 @@ extern char g_69645c[];
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern char g_99f6a0[];
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
 int __cdecl d2_LoadForm(int a, int b, char* s);
@@ -30,8 +30,8 @@ void __cdecl d2_ShowTaxStatistics(void)
 		io_AppendText(g_69645c, (*(int*)&gm_GameTime) + i - 0x10, ((int*)g_99f6a0)[i]);
 	}
 	do {
-		if (g_14ce8e0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased) {
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop((void*) d2_ShowTaxStatistics, 0x677c7));
 	d2_DestroyForm(h);

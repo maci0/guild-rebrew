@@ -95,21 +95,21 @@ void __cdecl he_RunDeathPact(char* event)
 					gm_AddTime(event + 0x52, 0, 10, 0);
 					return;
 				}
-				if (gm_FindFilteredEntity((char*) ((*(unsigned short*) (event + 8)) * 0x21c + (unsigned long)&g_7f4ca0),
+				if (gm_FindFilteredEntity((char*) ((*(unsigned short*) (event + 8)) * 0x21c + (unsigned long)&gm_EntitySlotTable),
 						0x700408, 4, event + 0xc8, 0, 0x42c80000, &found) != 0) {
 					goto found_one;
 				}
 				*(int*) (event + 0x70) = -1;
 				return;
 found_one:
-				ref = gm_CalcScaledWealthValue((char*) ((found & 0xffff) * 0x21c + (unsigned long)&g_7f4ca0));
-				k = gm_AmountToUnits(gm_WalkEntityChain(found), g_773d75);
+				ref = gm_CalcScaledWealthValue((char*) ((found & 0xffff) * 0x21c + (unsigned long)&gm_EntitySlotTable));
+				k = gm_AmountToUnits(gm_WalkEntityChain(found), gm_ActiveTownIndex);
 				*(unsigned short*) (event + 0xc8 + *(int*) (event + 0xb0) * 2) = (unsigned short) found;
 				if (k > ref &&
 				    (*(unsigned char*) ((found & 0xffff) * 0x21c + 0x7f4e6c) & 1) == 0) {
-					if (*(unsigned char*) ((found & 0xffff) * 0x21c + (unsigned long)&g_7f4ca2) == 6 ||
-					    *(unsigned char*) ((found & 0xffff) * 0x21c + (unsigned long)&g_7f4ca2) == 7) {
-						msg.f08 = *(int*) ((found & 0xffff) * 0x21c + (unsigned long)&g_7f4ca4);
+					if (*(unsigned char*) ((found & 0xffff) * 0x21c + (unsigned long)&gm_SlotTableKindView) == 6 ||
+					    *(unsigned char*) ((found & 0xffff) * 0x21c + (unsigned long)&gm_SlotTableKindView) == 7) {
+						msg.f08 = *(int*) ((found & 0xffff) * 0x21c + (unsigned long)&gm_EntityIdField);
 						msg.f0c = msg.f08;
 						msg.f60 = msg.f08;
 						msg.kind = 0x8b;
@@ -127,12 +127,12 @@ found_one:
 					} else {
 						req.a = *(int*) (event + 0xc);
 						req.b = *(int*) (event + 0xac);
-						req.c = *(int*) ((found & 0xffff) * 0x21c + (unsigned long)&g_7f4ca4);
+						req.c = *(int*) ((found & 0xffff) * 0x21c + (unsigned long)&gm_EntityIdField);
 						req.d = ref;
 						if ((unsigned short) gm_RandomMod(2) != 0)
-							he_AcceptDeathPactPayment((char*) &req, (char*) ((found & 0xffff) * 0x21c + (unsigned long)&g_7f4ca0));
+							he_AcceptDeathPactPayment((char*) &req, (char*) ((found & 0xffff) * 0x21c + (unsigned long)&gm_EntitySlotTable));
 						else
-							he_DeclineDeathPactPayment((char*) &req, (char*) ((found & 0xffff) * 0x21c + (unsigned long)&g_7f4ca0));
+							he_DeclineDeathPactPayment((char*) &req, (char*) ((found & 0xffff) * 0x21c + (unsigned long)&gm_EntitySlotTable));
 					}
 				}
 				idx = ++*(int*) (event + 0xb0);

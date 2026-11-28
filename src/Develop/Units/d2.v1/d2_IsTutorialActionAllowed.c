@@ -2,8 +2,8 @@
 
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int* g_665f08;
-extern volatile int g_6b7fc0;
+extern int* d2_TutorialState;
+extern volatile int tb_TimerPaused;
 
 int __cdecl d2_IsTutorialActionAllowed(int mask)
 {
@@ -12,7 +12,7 @@ int __cdecl d2_IsTutorialActionAllowed(int mask)
 	if (d2_TutorialActive == 0) {
 		return 1;
 	}
-	p = ((char*)g_665f08);
+	p = ((char*)d2_TutorialState);
 	if (*(int*) (p + 0x3c) == 2 || *(int*) p == 5) {
 		return 0;
 	}
@@ -20,7 +20,7 @@ int __cdecl d2_IsTutorialActionAllowed(int mask)
 	if (p == 0) {
 		return 1;
 	}
-	if (g_6b7fc0 != 0) {
+	if (tb_TimerPaused != 0) {
 		return 0;
 	}
 	return (*(int*) (p + 0x6c) & mask) != 0;

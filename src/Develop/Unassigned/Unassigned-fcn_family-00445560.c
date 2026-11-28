@@ -1,5 +1,5 @@
 #include <string.h>
-extern int g_67a370;
+extern int d3_ActiveScene;
 
 void __cdecl d3_VisitSceneObjects(int, char*, int, void*, void*);
 int __cdecl d3_MatchSceneObjectCallback(char*, char**);
@@ -41,7 +41,7 @@ char* __cdecl d3_FindSceneObject(char* rootObj, int flags, char* matchPtr, char*
 		saved = *(int*) (rootObj + 0x1f4);
 		*(int*) (rootObj + 0x1f4) = 0;
 	}
-	d3_VisitSceneObjects(g_67a370, rootObj, flags | 0x200, d3_MatchSceneObjectCallback, state);
+	d3_VisitSceneObjects(d3_ActiveScene, rootObj, flags | 0x200, d3_MatchSceneObjectCallback, state);
 	if (rootObj != 0) {
 		*(int*) (rootObj + 0x1f4) = saved;
 	}

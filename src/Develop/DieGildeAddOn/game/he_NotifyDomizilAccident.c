@@ -1,5 +1,5 @@
-extern char g_774a80[];
-char g_6ab558[] = "_NACHRICHTEN_DOMIZIL_04";
+extern char io_MessageFormatBuf[];
+char he_DomizilNotifyKey[] = "_NACHRICHTEN_DOMIZIL_04";
 
 
 
@@ -12,8 +12,8 @@ void __cdecl he_NotifyDomizilAccident(void* entity, int actor, void* building)
 
 	kind = *(char*) ((char*) entity + 2);
 	if (kind == 6 || kind == 7) {
-		io_FormatTextBuffer(g_774a80, 0x407a, (char*) actor + 0x30, (char*) actor + 0x40, building);
-		he_MessageBoxQuickjump(*(int*) ((char*) entity + 4), -1, g_774a80, 1, 0x5ec,
-		    *(int*) ((char*) building + 1), -1, 0, g_6ab558);
+		io_FormatTextBuffer(io_MessageFormatBuf, 0x407a, (char*) actor + 0x30, (char*) actor + 0x40, building);
+		he_MessageBoxQuickjump(*(int*) ((char*) entity + 4), -1, io_MessageFormatBuf, 1, 0x5ec,
+		    *(int*) ((char*) building + 1), -1, 0, he_DomizilNotifyKey);
 	}
 }

@@ -20,9 +20,9 @@ typedef struct Stats {
 // SIZE 0xb8
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_100e720[];
-extern int g_100e760[];
-extern unsigned char g_773d75;
+extern int ai_ArmorGoodsIds[];
+extern int ai_WeaponGoodsIds[];
+extern unsigned char gm_ActiveTownIndex;
 
 float __cdecl gm_GetSeasonPrice(int id, unsigned char k);
 int __cdecl gm_GetMsgObjektField(char* b, int id);
@@ -45,49 +45,49 @@ void __cdecl ai_CollectGoodsResources(char* a, char* b)
 	char* r;
 	Stats st;
 
-	for (j = 0; g_100e760[j] != 0; j++) {
+	for (j = 0; ai_WeaponGoodsIds[j] != 0; j++) {
 		for (i = 0; i < ai_ResourceCount; i++) {
-			if (g_100b0c0[i].goods_id == g_100e760[j]) {
+			if (ai_ResourceRequests[i].goods_id == ai_WeaponGoodsIds[j]) {
 				break;
 			}
 		}
 		if (i >= ai_ResourceCount) {
-			g_100b0c0[ai_ResourceCount].goods_id = g_100e760[j];
-			g_100b0c0[ai_ResourceCount].parent_index = -1;
-			g_100b0c0[ai_ResourceCount].supplier = 0;
-			g_100b0c0[ai_ResourceCount].unk_10 = 0;
-			g_100b0c0[ai_ResourceCount].requested = 0;
-			g_100b0c0[ai_ResourceCount].unk_18 = 0;
-			g_100b0c0[ai_ResourceCount].price = gm_GetSeasonPrice(g_100e760[j], g_773d75);
-			g_100b0c0[ai_ResourceCount].allocated = 0;
-			g_100b0c0[ai_ResourceCount].stock = 0;
-			g_100b0c0[ai_ResourceCount].state_30 = 0x81;
-			g_100b0c0[ai_ResourceCount].flags = 0;
-			g_100b0c0[ai_ResourceCount].stock = gm_GetMsgObjektField(b, g_100e760[j]);
-			g_100b0c0[ai_ResourceCount].capacity = gm_eval_SlotVoll(b, g_100e760[j], 1000000);
+			ai_ResourceRequests[ai_ResourceCount].goods_id = ai_WeaponGoodsIds[j];
+			ai_ResourceRequests[ai_ResourceCount].parent_index = -1;
+			ai_ResourceRequests[ai_ResourceCount].supplier = 0;
+			ai_ResourceRequests[ai_ResourceCount].unk_10 = 0;
+			ai_ResourceRequests[ai_ResourceCount].requested = 0;
+			ai_ResourceRequests[ai_ResourceCount].unk_18 = 0;
+			ai_ResourceRequests[ai_ResourceCount].price = gm_GetSeasonPrice(ai_WeaponGoodsIds[j], gm_ActiveTownIndex);
+			ai_ResourceRequests[ai_ResourceCount].allocated = 0;
+			ai_ResourceRequests[ai_ResourceCount].stock = 0;
+			ai_ResourceRequests[ai_ResourceCount].state_30 = 0x81;
+			ai_ResourceRequests[ai_ResourceCount].flags = 0;
+			ai_ResourceRequests[ai_ResourceCount].stock = gm_GetMsgObjektField(b, ai_WeaponGoodsIds[j]);
+			ai_ResourceRequests[ai_ResourceCount].capacity = gm_eval_SlotVoll(b, ai_WeaponGoodsIds[j], 1000000);
 			ai_ResourceCount++;
 		}
 	}
-	for (j = 0; g_100e720[j] != 0; j++) {
+	for (j = 0; ai_ArmorGoodsIds[j] != 0; j++) {
 		for (i = 0; i < ai_ResourceCount; i++) {
-			if (g_100b0c0[i].goods_id == g_100e720[j]) {
+			if (ai_ResourceRequests[i].goods_id == ai_ArmorGoodsIds[j]) {
 				break;
 			}
 		}
 		if (i >= ai_ResourceCount) {
-			g_100b0c0[ai_ResourceCount].goods_id = g_100e720[j];
-			g_100b0c0[ai_ResourceCount].parent_index = -1;
-			g_100b0c0[ai_ResourceCount].supplier = 0;
-			g_100b0c0[ai_ResourceCount].unk_10 = 0;
-			g_100b0c0[ai_ResourceCount].requested = 0;
-			g_100b0c0[ai_ResourceCount].unk_18 = 0;
-			g_100b0c0[ai_ResourceCount].price = gm_GetSeasonPrice(g_100e760[j], g_773d75);
-			g_100b0c0[ai_ResourceCount].allocated = 0;
-			g_100b0c0[ai_ResourceCount].stock = 0;
-			g_100b0c0[ai_ResourceCount].state_30 = 0x81;
-			g_100b0c0[ai_ResourceCount].flags = 0;
-			g_100b0c0[ai_ResourceCount].stock = gm_GetMsgObjektField(b, g_100e720[j]);
-			g_100b0c0[ai_ResourceCount].capacity = gm_eval_SlotVoll(b, g_100e720[j], 1000000);
+			ai_ResourceRequests[ai_ResourceCount].goods_id = ai_ArmorGoodsIds[j];
+			ai_ResourceRequests[ai_ResourceCount].parent_index = -1;
+			ai_ResourceRequests[ai_ResourceCount].supplier = 0;
+			ai_ResourceRequests[ai_ResourceCount].unk_10 = 0;
+			ai_ResourceRequests[ai_ResourceCount].requested = 0;
+			ai_ResourceRequests[ai_ResourceCount].unk_18 = 0;
+			ai_ResourceRequests[ai_ResourceCount].price = gm_GetSeasonPrice(ai_WeaponGoodsIds[j], gm_ActiveTownIndex);
+			ai_ResourceRequests[ai_ResourceCount].allocated = 0;
+			ai_ResourceRequests[ai_ResourceCount].stock = 0;
+			ai_ResourceRequests[ai_ResourceCount].state_30 = 0x81;
+			ai_ResourceRequests[ai_ResourceCount].flags = 0;
+			ai_ResourceRequests[ai_ResourceCount].stock = gm_GetMsgObjektField(b, ai_ArmorGoodsIds[j]);
+			ai_ResourceRequests[ai_ResourceCount].capacity = gm_eval_SlotVoll(b, ai_ArmorGoodsIds[j], 1000000);
 			ai_ResourceCount++;
 		}
 	}
@@ -110,8 +110,8 @@ void __cdecl ai_CollectGoodsResources(char* a, char* b)
 			}
 			if (found == 0) {
 				for (i = 0; i < ai_ResourceCount; i++) {
-					if (id == g_100b0c0[i].goods_id) {
-						g_100b0c0[i].allocated += st.x68[k];
+					if (id == ai_ResourceRequests[i].goods_id) {
+						ai_ResourceRequests[i].allocated += st.x68[k];
 					}
 				}
 			}
@@ -119,8 +119,8 @@ void __cdecl ai_CollectGoodsResources(char* a, char* b)
 		for (m = 0; m < 3; m++) {
 			if (((unsigned short*) (e + 0xd6))[m] != 0) {
 				for (i = 0; i < ai_ResourceCount; i++) {
-					if (((unsigned short*) (e + 0xd6))[m] == g_100b0c0[i].goods_id) {
-						g_100b0c0[i].allocated += ((int*) (e + 0xdc))[m];
+					if (((unsigned short*) (e + 0xd6))[m] == ai_ResourceRequests[i].goods_id) {
+						ai_ResourceRequests[i].allocated += ((int*) (e + 0xdc))[m];
 					}
 				}
 			}

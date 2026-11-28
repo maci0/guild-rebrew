@@ -6,25 +6,25 @@
 
 extern int msx_MusicEnabled;
 extern float g_6819b0;
-extern float g_6628a8;
-extern int g_772d28;
-extern int g_772d10;
-extern int g_772d14;
+extern float flt_0_0;
+extern int msx_MusicOverrideActive;
+extern int d3snd_AmbientEnabled;
+extern int msx_SavedTrackState;
 
 void __cdecl msx_FadeMasterVolumeIfTrackActive(float, int);
 
 void __cdecl msx_OverrideMusicTrack(char* snd)
 {
-	if (g_772d28 == 0) {
-		g_772d14 = g_772d10 & 0xff;
-		*(char*) &g_772d10 = 0;
-		g_772d28 = 1;
+	if (msx_MusicOverrideActive == 0) {
+		msx_SavedTrackState = d3snd_AmbientEnabled & 0xff;
+		*(char*) &d3snd_AmbientEnabled = 0;
+		msx_MusicOverrideActive = 1;
 	}
-	if (msx_MusicEnabled != 0 && g_6819b0 != g_6628a8) {
+	if (msx_MusicEnabled != 0 && g_6819b0 != flt_0_0) {
 		if (snd != 0) {
 			if (tp_msx_CurrentTrack != 0)
 				msx_StopTrack(tp_msx_CurrentTrack, 1);
-			tp_msx_CurrentTrack = g_772d24 = msx_StartTrack(snd, 0);
+			tp_msx_CurrentTrack = tp_msx_MusicTrack = msx_StartTrack(snd, 0);
 		} else {
 			msx_FadeMasterVolumeIfTrackActive(0.4f, 2000);
 		}

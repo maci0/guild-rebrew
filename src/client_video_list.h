@@ -3,6 +3,6 @@
 
 /* Inferred declaration home. The complete node and storage owner are unknown. */
 struct Node;
-extern struct Node* g_6b6f84;
+extern struct Node* tp_VideoListHead;
 
 #endif

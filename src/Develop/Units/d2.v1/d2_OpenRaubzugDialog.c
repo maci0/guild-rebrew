@@ -30,11 +30,11 @@ typedef struct
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_14abd04;
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern unsigned char* g_7746c8;
+extern unsigned char* d2_InteriorBuilding;
 extern char s_6aa4e8[];
 
 int __cdecl he_HasNoActiveAction0x62(char*);
@@ -79,40 +79,40 @@ void __cdecl d2_OpenRaubzugDialog(int unused, char* e)
 	s = io_AppendText(0x1a84, e);
 	btn1 = d2_GetWindowListItem(dlg, 1, s);
 	btn2 = d2_GetWindowListItem(dlg, 1, s + 1);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == btn1) {
 				pkt.type = 0x75;
 				pkt.x36 = 1;
 				n = 0;
-				pkt.x8 = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id;
+				pkt.x8 = ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id;
 				pkt.x58 = *(int*) (e + 1);
-				pkt.x5c = *(int*) (((char*)g_7746c8) + 1);
+				pkt.x5c = *(int*) (((char*)d2_InteriorBuilding) + 1);
 				for (i = 0; i < 8; i++) {
 					pkt.ids[i] = -1;
 				}
 				for (i = 0; i < 768; i++) {
-					if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].selected != 0) {
-						pkt.ids[n] = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id;
+					if (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].selected != 0) {
+						pkt.ids[n] = ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_id;
 						n++;
 					}
 				}
 				if (n != 0) {
 					cm_SendCopyEntityData(&pkt);
-					gm_ModifyHealth(((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, -1);
+					gm_ModifyHealth(((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id, -1);
 					cm_ExProdObjekt();
 				}
 				else {
 					d2_ShowModalMessageBox((char*) g_14abd04, 0);
 				}
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 			else if (d2_CurrentElementId == btn2) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	} while (main_RunFrameLoop((void*) d2_OpenRaubzugDialog, 0x677c7) != 0);

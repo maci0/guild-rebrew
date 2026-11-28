@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char* g_77253c;
+extern char* d2_BlackTexture;
 
 void __cdecl d2_SelectFont(int font);
 void __cdecl d2_FlushQueuedQuads(int a, int b, int c);
@@ -42,12 +42,12 @@ void __cdecl d2_DrawElementTooltip(char* e)
 		d2_SelectFont(*(int*) (e + 0x1cc) != 0 ? *(int*) (e + 0x1cc) : d2_DefaultFont + 1);
 		if (*(int*) (e + 0x1d0) & 0x20) {
 			d2_FlushQueuedQuads(0, 0, 0);
-			d2_DrawTexturedQuad(*(int*) (e + 0x10), *(int*) (e + 0x14), *(int*) (e + 0x1d4), *(int*) (e + 0x1d8), *(int*) (g_77253c + 0x50), 0.5f);
+			d2_DrawTexturedQuad(*(int*) (e + 0x10), *(int*) (e + 0x14), *(int*) (e + 0x1d4), *(int*) (e + 0x1d8), *(int*) (d2_BlackTexture + 0x50), 0.5f);
 		}
 		if (*(int*) (e + 0x1d0) & 4) {
-			d2_DrawWordWrappedText(*(int*) (e + 0x10) - 0x30, *(int*) (e + 0x14) + *(int*) (e + 0x1c), *(int*) (e + 0x1d4) + 0x60, *(int*) (e + 0x1c), g_77250c, name, fl);
+			d2_DrawWordWrappedText(*(int*) (e + 0x10) - 0x30, *(int*) (e + 0x14) + *(int*) (e + 0x1c), *(int*) (e + 0x1d4) + 0x60, *(int*) (e + 0x1c), d2_ScreenSurface, name, fl);
 		} else {
-			d2_DrawWordWrappedText(x - 0x30, y, *(int*) (e + 0x1d4) + 0x60, *(int*) (e + 0x1c), g_77250c, name, fl);
+			d2_DrawWordWrappedText(x - 0x30, y, *(int*) (e + 0x1d4) + 0x60, *(int*) (e + 0x1c), d2_ScreenSurface, name, fl);
 		}
 	}
 }

@@ -27,7 +27,7 @@ typedef struct {
 } Msg;
 // SIZE 0xf8
 
-extern char g_7f4ca4[];
+extern char gm_EntityIdField[];
 
 void __cdecl io_FormatTextBuffer(char *, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char *, int, int, int, int, int, int);
@@ -55,7 +55,7 @@ void __cdecl he_ResolveAccidentOutcome(char *a1, char *entity, char *a3, char *a
 		memset(&m, 0, sizeof(m));
 		m.type = 0x71;
 		if (a1 != 0) {
-			m.who = *(int *) (g_7f4ca4 + *(unsigned short *) (a1 + 8) * 0x21c);
+			m.who = *(int *) (gm_EntityIdField + *(unsigned short *) (a1 + 8) * 0x21c);
 		} else {
 			m.who = *(int *) (a3 + 4);
 		}

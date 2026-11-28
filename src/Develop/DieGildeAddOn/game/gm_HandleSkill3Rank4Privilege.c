@@ -1,5 +1,5 @@
-extern char g_679060[];
-extern char g_679060[];
+extern char str_fmt_s[];
+extern char str_fmt_s[];
 
 
 

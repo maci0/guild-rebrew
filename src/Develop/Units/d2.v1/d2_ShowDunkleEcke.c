@@ -1,13 +1,13 @@
 #include <string.h>
 
 extern int d2_CurrentWindowId;
-extern char* g_772500;
-extern char* g_77255c;
+extern char* d2_FileObjTable;
+extern char* d2_CurrentWindow;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_100f1dc;
-extern unsigned char g_773d75;
+extern int d2_DialogButtonAction;
+extern unsigned char gm_ActiveTownIndex;
 
 /* Slot row passed to fcn_005ca560/fcn_005ca740. */
 struct sel {
@@ -101,8 +101,8 @@ void __cdecl d2_ShowDunkleEcke(char* building, char* a1)
 			d2_ClearWindowChildren(d2_CurrentWindowId, 1);
 			io_AppendText(0x18a3);
 			line = 0x46;
-			x = *(int*) (g_77255c + 0xc) / 2;
-			height = *(short*) (g_772500 + 0x1ebd8);
+			x = *(int*) (d2_CurrentWindow + 0xc) / 2;
+			height = *(short*) (d2_FileObjTable + 0x1ebd8);
 			for (j = 0; j < 3; j++) {
 				sel[j].x14 = line - 0x1e;
 				sel[j].x10 = (x - height) - 0x28;
@@ -118,7 +118,7 @@ void __cdecl d2_ShowDunkleEcke(char* building, char* a1)
 			}
 			changed = 0;
 		}
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			for (j = 0; j < 3; j++) {
 				if (d2_CurrentElementId == *(int*) sel[j].pad4)
 					break;
@@ -126,20 +126,20 @@ void __cdecl d2_ShowDunkleEcke(char* building, char* a1)
 			if (3 > j) {
 				for (i = 0; i < 3; i++) {
 					if (*(int*) (a1 + 0x1c + i * 4) == seen[j]) {
-						if (gm_CheckEntityStock((char*) (g_774970 * 0x21c + 0x7f4ca0),
-							vals[j], (char) g_773d75)) {
+						if (gm_CheckEntityStock((char*) (gm_LocalPlayerSlot * 0x21c + 0x7f4ca0),
+							vals[j], (char) gm_ActiveTownIndex)) {
 							out2[1] = 0x62757920;
-							out2[2] = *(unsigned int*) (g_774970 * 0x21c + 0x7f4ca4);
+							out2[2] = *(unsigned int*) (gm_LocalPlayerSlot * 0x21c + 0x7f4ca4);
 							out2[3] = *(unsigned int*) (building + 1);
 							out2[4] = seen[j];
 							out2[5] = vals[j];
 							cm_SendLogAction("buy dunkle ecke");
 							cm_RequestElectionOrTrade(&out2[1]);
 							cm_RequestLinkEvidence(seen[j],
-								*(unsigned int*) (g_774970 * 0x21c + 0x7f4ca4));
+								*(unsigned int*) (gm_LocalPlayerSlot * 0x21c + 0x7f4ca4));
 							cm_RequestTransferCurrencyNoKill(
 								*(unsigned int*) ((*(unsigned short*) (building + 0x27)) * 0x21c + 0x7f4ca4),
-								*(unsigned int*) (g_774970 * 0x21c + 0x7f4ca4), 0, vals[j]);
+								*(unsigned int*) (gm_LocalPlayerSlot * 0x21c + 0x7f4ca4), 0, vals[j]);
 							cm_SendTraceEnd("buy dunkle ecke");
 						}
 						break;
@@ -148,8 +148,8 @@ void __cdecl d2_ShowDunkleEcke(char* building, char* a1)
 				if (j == 3)
 					d2_ShowModalMessageBox("$Z$NDiese Information steht nicht mehr zum verkauf!", 0);
 			}
-		} else if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		} else if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop(d2_RunDunkleEckeOwnerDialog, 0x677c7) != 0);
 	d2_DestroyForm(handle);

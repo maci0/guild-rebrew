@@ -1,6 +1,6 @@
 #include "Develop/client_types.h"
 #include "Develop/DieGildeAddOn/game/client_straftat.h"
-extern Pair_99f800 g_99f800[0x800];
+extern Pair_99f800 cm_CrimeEvidenceLinks[0x800];
 unsigned char* __cdecl gm_LookupEntityRecordById(int id);
 /* ADDRESS: GOLDTL 0x004f65a0 */
 void* __cdecl gm_FindMostWantedCrimeTarget(unsigned char* a1, int cap, int* out, int* out_count)
@@ -35,22 +35,22 @@ void* __cdecl gm_FindMostWantedCrimeTarget(unsigned char* a1, int cap, int* out,
 	group_limit = 1;
 	id = *(int*) (a1 + 4);
 	for (off = 0; off < 0x5a00; off += 0x2d) {
-		if (((STRAFTAT_RECORD*) ((char*) g_9a3800 + off))->state <= 0) {
+		if (((STRAFTAT_RECORD*) ((char*) cm_CrimeRecords + off))->state <= 0) {
 			continue;
 		}
-		if (((STRAFTAT_RECORD*) ((char*) g_9a3800 + off))->target_id == id) {
+		if (((STRAFTAT_RECORD*) ((char*) cm_CrimeRecords + off))->target_id == id) {
 			continue;
 		}
-		ent = gm_LookupEntityRecordById(((STRAFTAT_RECORD*) ((char*) g_9a3800 + off))->target_id);
+		ent = gm_LookupEntityRecordById(((STRAFTAT_RECORD*) ((char*) cm_CrimeRecords + off))->target_id);
 		if (ent == 0) {
 			continue;
 		}
-		for (rec = (unsigned char*) g_99f800 + 4; (int) rec < 0x9a3804; rec += 8) {
-			if (*(int*) (rec - 4) == id && *(int*) rec == ((STRAFTAT_RECORD*) ((char*) g_9a3800 + off))->id) {
+		for (rec = (unsigned char*) cm_CrimeEvidenceLinks + 4; (int) rec < 0x9a3804; rec += 8) {
+			if (*(int*) (rec - 4) == id && *(int*) rec == ((STRAFTAT_RECORD*) ((char*) cm_CrimeRecords + off))->id) {
 				goto next;
 			}
 		}
-		list[n] = (unsigned char*) ((char*) g_9a3800 + off);
+		list[n] = (unsigned char*) ((char*) cm_CrimeRecords + off);
 		n++;
 		for (k = 0; k < group_limit; k++) {
 			if (k >= 0x300) {

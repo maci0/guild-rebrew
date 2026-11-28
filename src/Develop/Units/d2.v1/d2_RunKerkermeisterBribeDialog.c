@@ -31,7 +31,7 @@ typedef struct Dlg005ad000 {
 } Dlg005ad000;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 extern int d2_CurrentElementId;
 /* ADDRESS: GOLDTL 0x005ad000 */
 void __cdecl d2_RunKerkermeisterBribeDialog(void)
@@ -53,7 +53,7 @@ void __cdecl d2_RunKerkermeisterBribeDialog(void)
 		d3_EndCameraAndUiMode();
 		return;
 	}
-	if (he_StartHandlungSearch(2, 0, 0x39, 2, *(unsigned short*) &g_774970) != 0) {
+	if (he_StartHandlungSearch(2, 0, 0x39, 2, *(unsigned short*) &gm_LocalPlayerSlot) != 0) {
 		io_FormatTextBuffer(msg.pkt + 0x110, 0x19b6, *(unsigned short*) obj);
 		d2_ShowModalMessageBox((int) (msg.pkt + 0x110), 0);
 		d3_EndCameraAndUiMode();
@@ -62,37 +62,37 @@ void __cdecl d2_RunKerkermeisterBribeDialog(void)
 	dlg = d2_LoadForm(0, 0, (void*) 0x6ab180);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
-	h = *(unsigned char*) &g_773d75;
+	h = *(unsigned char*) &gm_ActiveTownIndex;
 	id = io_AppendText(0x19b1, h, h, *(unsigned short*) obj);
 	ctl1 = d2_GetWindowListItem(dlg, 1, id);
 	ctl2 = d2_GetWindowListItem(dlg, 1, id + 1);
 	msg.ctl = ctl2;
-	h = gm_SumSlotTreasury(*(unsigned short*) &g_774970);
+	h = gm_SumSlotTreasury(*(unsigned short*) &gm_LocalPlayerSlot);
 	d2_CreateGuiWindow(ctl1, 0x96,
-	             gm_AmountToUnits(h, *(unsigned char*) &g_773d75), 0xfa);
+	             gm_AmountToUnits(h, *(unsigned char*) &gm_ActiveTownIndex), 0xfa);
 	d2_SetOverlayAnimation(0, 0);
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (*(int*) &g_100f1dc != -1 && msg.ctl == d2_CurrentElementId) {
+		if (*(int*) &d2_DialogButtonAction != -1 && msg.ctl == d2_CurrentElementId) {
 			*(int*) (msg.pkt + 0x20) = *(int*) (obj + 4);
 			*(char*) (msg.pkt + 0x1c) = 0x39;
 			*(int*) (msg.pkt + 0x24) = -1;
 			*(char*) (msg.pkt + 0x4e) = 9;
 			*(int*) (msg.pkt + 0x74) = *(int*) (obj + 4);
-			*(int*) (msg.pkt + 0x70) = *(int*) ((unsigned long)&g_7f4ca4 +
-			                                    *(unsigned short*) &g_774970 * 0x21c);
-			h = *(unsigned char*) &g_773d75;
+			*(int*) (msg.pkt + 0x70) = *(int*) ((unsigned long)&gm_EntityIdField +
+			                                    *(unsigned short*) &gm_LocalPlayerSlot * 0x21c);
+			h = *(unsigned char*) &gm_ActiveTownIndex;
 			*(int*) (msg.pkt + 0x78) = gm_ConvertUnitsToAmount(
 			    d2_GetControlValue(ctl1), h);
 			cm_SendLogAction((void*) 0x6ab168);
 			cm_RequestMoveCredits(*(int*) (obj + 4),
-			             *(int*) ((unsigned long)&g_7f4ca4 + *(unsigned short*) &g_774970 * 0x21c),
-			             *(char*) &g_773d75, *(int*) (msg.pkt + 0x78));
+			             *(int*) ((unsigned long)&gm_EntityIdField + *(unsigned short*) &gm_LocalPlayerSlot * 0x21c),
+			             *(char*) &gm_ActiveTownIndex, *(int*) (msg.pkt + 0x78));
 			cm_SendCopyEntityData(msg.pkt + 0x18);
 			cm_SendTraceEnd((void*) 0x6ab168);
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop((void*) 0x5ad000, 0x677c7) != 0);
 	d2_DestroyForm(dlg);

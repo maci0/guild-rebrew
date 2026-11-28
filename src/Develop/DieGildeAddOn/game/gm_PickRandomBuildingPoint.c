@@ -1,7 +1,7 @@
 
 
 
-extern char g_68149c[];
+extern char str_dummy_TUER[];
 
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_FindNextFilteredEntity(void);
@@ -24,7 +24,7 @@ int __cdecl gm_PickRandomBuildingPoint(float* out)
 			list[n++] = e;
 	}
 	e = list[gm_RandomMod(n)];
-	r = d3_FindSceneObject(*(int*) (e + 0x61), 0x300, 0, g_68149c);
+	r = d3_FindSceneObject(*(int*) (e + 0x61), 0x300, 0, str_dummy_TUER);
 	if (r != 0) {
 		d3_TransformPoint(r, r + 0x4c, out);
 	} else {

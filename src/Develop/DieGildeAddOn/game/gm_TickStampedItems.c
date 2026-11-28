@@ -11,13 +11,13 @@ void __cdecl cm_SendSellObjekt(int, int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, int);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 extern int g_775320;
 extern int g_775324;
 extern int g_775328;
 extern unsigned short g_77532c;
 extern int g_775330;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 /* Ages the transient scene objects of one 32-slot block of the object table:
  * each stamped object counts down, and expired ones are released with their
@@ -35,7 +35,7 @@ void __cdecl gm_TickStampedItems(void)
 	int left;
 	int obj;
 
-	if (g_774970 >= 0x300) {
+	if (gm_LocalPlayerSlot >= 0x300) {
 		return;
 	}
 	gm_GetElapsedMinutes((void*) 0x775320, &gm_GameTime);
@@ -45,8 +45,8 @@ void __cdecl gm_TickStampedItems(void)
 		if (off >= 0x65400) {
 			break;
 		}
-		if (*(unsigned short*) (g_7f4ca0 + off) != 0xffff) {
-			item = fcn_00502cd0(*(int*) (g_7f4ca0 + 376 + off), 1, 5);
+		if (*(unsigned short*) (gm_EntitySlotTable + off) != 0xffff) {
+			item = fcn_00502cd0(*(int*) (gm_EntitySlotTable + 376 + off), 1, 5);
 			while (item != 0) {
 				obj = gm_LookupSpecialObject(*item);
 				if (obj != 0) {
@@ -59,9 +59,9 @@ void __cdecl gm_TickStampedItems(void)
 							*(pos14_7f4c00*) (rec + 0x2d) = gm_GameTime;
 							if (left < 0) {
 								*(int*) (rec + 0x21) = 0;
-								if (*(char*) (g_7f4ca0 + 2 + off) == 6) {
+								if (*(char*) (gm_EntitySlotTable + 2 + off) == 6) {
 									io_FormatTextBuffer(text, 0x1bc9, *item * 2 + 0x9a8);
-									he_PostEntityMessage(*(int*) (g_7f4ca0 + 4 + off),
+									he_PostEntityMessage(*(int*) (gm_EntitySlotTable + 4 + off),
 										-1, text, 0, 0x5ec, (char*) 0x6ac758);
 								}
 								if (*item == 0x178) {
@@ -70,10 +70,10 @@ void __cdecl gm_TickStampedItems(void)
 										cm_RequestChangeBits(*(int*) (obj + 1), 0x5a, 2, 0, 0x20);
 									}
 								}
-								obj = gm_IsLocalSimEntity(g_7f4ca0 + off);
-								if (obj != 0 && *(char*) (g_7f4ca0 + 2 + off) != 7) {
+								obj = gm_IsLocalSimEntity(gm_EntitySlotTable + off);
+								if (obj != 0 && *(char*) (gm_EntitySlotTable + 2 + off) != 7) {
 									cm_SendSellObjekt(-1, *(int*) (rec + 6), *item, 1,
-										g_773d75, 0);
+										gm_ActiveTownIndex, 0);
 								}
 							}
 						}

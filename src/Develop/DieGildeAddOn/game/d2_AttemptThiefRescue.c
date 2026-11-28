@@ -1,4 +1,4 @@
-extern char* g_aed32c;
+extern char* cm_PacketDeltaBase;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
 int __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -31,7 +31,7 @@ void __cdecl d2_AttemptThiefRescue(char* rec)
 	char* ent2;
 	char* act;
 
-	ent = (char*) (0x7f4ca0 + (unsigned int) g_774970 * 540);
+	ent = (char*) (0x7f4ca0 + (unsigned int) gm_LocalPlayerSlot * 540);
 	ent2 = (char*) (0x7f4ca0
 	    + (unsigned int) *(unsigned short*) (rec + 0x27) * 540);
 	d2_SetOverlayAnimation(0, 0);
@@ -51,7 +51,7 @@ void __cdecl d2_AttemptThiefRescue(char* rec)
 		int flags = -1;
 
 		cm_BeginPacketFieldDelta(rec, *(int*) (rec + 1));
-		cm_AppendPacketFieldDelta(4, 1, (int) (rec - g_aed32c) + 0x65, &flags);
+		cm_AppendPacketFieldDelta(4, 1, (int) (rec - cm_PacketDeltaBase) + 0x65, &flags);
 		cm_RequestChangeAttribute();
 		cm_SendBlockCharacter(*(int*) (ent + 4), -(int) *(unsigned char*) (ent + 0x1b1), 0);
 		if (*(int*) (ent + 0x184) != 0) {

@@ -1,5 +1,5 @@
-extern volatile int g_6b7fac;
-extern char *g_1043370[];
+extern volatile int gm_GameTicks;
+extern char *tp_ch_PathGrid[];
 char __cdecl d3sm_SampleHeight(int, float *, int *, int *, float *);
 int __cdecl d3_TraceTerrainSegment(int, float *, float *, int, int, int *, int *);
 
@@ -14,9 +14,9 @@ int __cdecl d3_StepProjectile(char *obj)
     float height;
     int map, n, remain, x, y, nx, ny, hit;
     gravity = *(float *)0x6660f0 * *(float *)0x6660e8;
-    map = (int)g_1043370[0];
+    map = (int)tp_ch_PathGrid[0];
     if (*(int *)(obj + 0x5c) != 1) return 0;
-    remain = g_6b7fac - *(int *)(obj + 0x60);
+    remain = gm_GameTicks - *(int *)(obj + 0x60);
     if (!d3sm_SampleHeight(map, (float *)(obj + 0x30), &x, &y, &height)) {
         *(int *)(obj + 0x5c) = 3;
         *(int *)(obj + 0x58) = 0;

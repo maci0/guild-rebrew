@@ -25,9 +25,9 @@ typedef struct {
 } Dialog;
 
 extern unsigned char* lpGebaeudePROT;
-extern char* g_77255c;
+extern char* d2_CurrentWindow;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
 int __cdecl d2_LoadForm(int, int, char*);
@@ -49,9 +49,9 @@ void __cdecl d2_ShowGebaeudeRoundBalance(Player* p)
 	box = d2_LoadForm(0x3c, 0, "Runden\\Spielerrunde_Ende_geb");
 	d2_CenterDialogWindows(box);
 	d2_SetForm(box, 1);
-	((Dialog*)g_77255c)->style = 0x55;
+	((Dialog*)d2_CurrentWindow)->style = 0x55;
 	gm_GetBuildingTypeCategory(p->office);
-	if (gm_CalcBuildingRoundBalance(p, (unsigned short) (*(int*)&g_774970), st) != 0) {
+	if (gm_CalcBuildingRoundBalance(p, (unsigned short) (*(int*)&gm_LocalPlayerSlot), st) != 0) {
 		if (p->name[0] != 0) {
 			io_AppendText("$A$Z%1s >%s<$2A", p->office * 14 + 0x48e, p->name);
 		} else {
@@ -104,8 +104,8 @@ void __cdecl d2_ShowGebaeudeRoundBalance(Player* p)
 		}
 	}
 	while (main_RunFrameLoop(d2_ShowGebaeudeRoundBalance, 0x24087) != 0) {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 	}
 	d2_DestroyForm(box);

@@ -2,7 +2,7 @@
 
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern float g_662d40[3];
+extern float d3_UnitAxisVectors[3];
 
 void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl d3_TransformDirection(int, float*, float*);
@@ -21,7 +21,7 @@ void __cdecl d3_ComputeObjectYawToTarget(float* out, int obj)
 	out[0] = 0;
 	out[1] = 0;
 	out[2] = 0;
-	d3_TransformDirection(obj, g_662d40, v);
-	out[1] = d3_SignedPlanarAngle(g_662d40, v);
+	d3_TransformDirection(obj, d3_UnitAxisVectors, v);
+	out[1] = d3_SignedPlanarAngle(d3_UnitAxisVectors, v);
 	d3_SelectSceneContext(save, 1);
 }

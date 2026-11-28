@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/client_data.h"
 #include "game_data.h"
-extern unsigned char g_773dd4;
+extern unsigned char d3_CurrentSeason;
 extern int g_773dd8;
 extern char* g_7747b8;
 #pragma pack(push, 1)
@@ -101,7 +101,7 @@ void __cdecl gm_HandleHausbau(int a0)
 			v8 = fcn_00508e40(*(int*) (buildAction + 0xac));
 			if (v8) {
 				*(int*) (buildAction + 0xcc) = cm_RequestMoveCredits(-1, *(int*) (buildAction + 0xac),
-					(v8 & 0xffffff00) | g_773d75, *(int*) (buildAction + 0xb4));
+					(v8 & 0xffffff00) | gm_ActiveTownIndex, *(int*) (buildAction + 0xb4));
 				v8 = fcn_00509570(v8);
 				if (v8) {
 					*(int*) (v8 + 0x54) = *(int*) (v8 + 0x54) + *(int*) (buildAction + 0xb4);
@@ -184,7 +184,7 @@ LfailB:
 		d3_BindEntitySceneObject(*(int*) (v15 + 0x61), v15, 2);
 		v8 = *(unsigned char*) v15;
 		v27 = (int) &((Building5744c0*) lpGebaeudePROT)[v8];
-		if (g_774800) {
+		if (gm_AllEntitiesControllable) {
 			*(int*) (buildAction + 0xc4) = d3_CountBuildStageMeshes(buildAction);
 			*(int*) (buildAction + 0xc0) = 10;
 		}
@@ -236,7 +236,7 @@ LfailB:
 		for (v11 = 0; v11 < 33; v11++) {
 			v18[v11] = 0;
 		}
-		d3_VisitSceneObjects(g_67a370, *(int*) (v16 + 0x50), 0x2c0, 0x5982d0, v18);
+		d3_VisitSceneObjects(d3_ActiveScene, *(int*) (v16 + 0x50), 0x2c0, 0x5982d0, v18);
 		*(unsigned char*) (buildAction + 0xd0) = 0;
 		v21 = 0.0f;
 		if (v18[32] > 0) {
@@ -279,7 +279,7 @@ LfailB:
 		for (v11 = 0; v11 < 33; v11++) {
 			v18[v11] = 0;
 		}
-		d3_VisitSceneObjects(g_67a370, *(int*) (v16 + 0x50), 0x2c0, 0x5982d0, v18);
+		d3_VisitSceneObjects(d3_ActiveScene, *(int*) (v16 + 0x50), 0x2c0, 0x5982d0, v18);
 		for (v11 = 0; v11 < v18[32]; v11++) {
 			if (g_773dd8) {
 				d3_RemoveSubTreeFromCellTree(v18[v11], g_773dd8);
@@ -380,16 +380,16 @@ LfailB:
 			if (*(int*) (v15 + 0x61)) {
 				v8 = gm_GetSeason((int) &gm_GameTime);
 				if (v8 == 1) {
-					g_773dd4 = (char) v8;
+					d3_CurrentSeason = (char) v8;
 				}
 				else if (v8 == 0) {
-					g_773dd4 = 0;
+					d3_CurrentSeason = 0;
 				}
 				else if (v8 == 2) {
-					g_773dd4 = (char) v8;
+					d3_CurrentSeason = (char) v8;
 				}
 				else if (v8 == 3) {
-					g_773dd4 = (char) v8;
+					d3_CurrentSeason = (char) v8;
 				}
 				d3_ApplySeasonTextureSet(*(int*) (v15 + 0x61));
 			}
@@ -400,7 +400,7 @@ LfailB:
 			if (v8 && *(int*) (v8 + 0x218) == 1) {
 				d3_SetSubtreeVisible(v8, 1);
 			}
-			v9 = g_7f4ca2[*(unsigned short*) (v15 + 0x27)].kind;
+			v9 = gm_SlotTableKindView[*(unsigned short*) (v15 + 0x27)].kind;
 			if (v9 == 6 || v9 == 5 || v9 == 7) {
 				d3_CreateEntityFlagPennant((void*) v15);
 			}
@@ -428,34 +428,34 @@ LfailB:
 					cm_AppendPacketFieldDelta(1, 0xe, 0x69, v20);
 					cm_RequestChangeAttribute();
 				}
-				if (g_7f4ca2[*(unsigned short*) (v15 + 0x27)].kind == 6) {
+				if (gm_SlotTableKindView[*(unsigned short*) (v15 + 0x27)].kind == 6) {
 					if (*(unsigned char*) v15 >= 4 && *(unsigned char*) v15 <= 7) {
 						fcn_0051af00(messageText, 0x1c2f, v15);
-						fcn_00545e80(((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (v15 + 0x27)].entity_id,
+						fcn_00545e80(((ENTITY_RECORD*) gm_EntitySlotTable)[*(unsigned short*) (v15 + 0x27)].entity_id,
 							*(int*) (buildAction + 0x10), messageText, 1, 0x5f6, *(int*) (v15 + 1), -1, 0,
 							(char*) 0x6a7d8c);
 					}
 					else {
 						fcn_0051af00(messageText, 0x1c27, v15);
-						fcn_00545e80(((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (v15 + 0x27)].entity_id,
+						fcn_00545e80(((ENTITY_RECORD*) gm_EntitySlotTable)[*(unsigned short*) (v15 + 0x27)].entity_id,
 							*(int*) (buildAction + 0x10), messageText, 0, 0x5f6, *(int*) (v15 + 1), -1, 0,
 							(char*) 0x6a7d8c);
 					}
 					sb_PlayVoice((int) g_7747b8, 0x6a7d7c, 1, 0x3f, 0x7f, 0, 0);
 				}
-				v9 = g_7f4ca2[*(unsigned short*) (v15 + 0x27)].kind;
+				v9 = gm_SlotTableKindView[*(unsigned short*) (v15 + 0x27)].kind;
 				if (v9 == 6 || v9 == 5) {
-					v27 = (int) (g_7f4ca0 + 4);
+					v27 = (int) (gm_EntitySlotTable + 4);
 					do {
 						if ((*(char*) (v27 - 2) == 6 || *(char*) (v27 - 2) == 7)
-							&& *(int*) v27 != ((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (v15 + 0x27)].entity_id) {
+							&& *(int*) v27 != ((ENTITY_RECORD*) gm_EntitySlotTable)[*(unsigned short*) (v15 + 0x27)].entity_id) {
 							fcn_0051af00(messageText, 0x1c30, *(unsigned short*) (v15 + 0x27),
 								(void*) (*(unsigned char*) v15 * 0xe + 0x48e));
 							fcn_00545e80(*(int*) v27, -1, messageText, 0, 0x607, *(int*) (v15 + 1), -1, 0,
 								(char*) 0x6a7d68);
 						}
 						v27 += sizeof(ENTITY_RECORD);
-					} while (v27 < (int) (g_7f4ca0 + 0x65404));
+					} while (v27 < (int) (gm_EntitySlotTable + 0x65404));
 				}
 				for (v11 = 0; v11 < 31; v11++) {
 					((int*) v19)[v11] = 0;
@@ -464,13 +464,13 @@ LfailB:
 			}
 			v9 = *(unsigned char*) v15;
 			if (v9 >= 4 && v9 <= 7) {
-				v27 = (int) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (v15 + 0x27)].unk_170;
+				v27 = (int) &((ENTITY_RECORD*) gm_EntitySlotTable)[*(unsigned short*) (v15 + 0x27)].unk_170;
 				v8 = *(int*) v27;
 				if (!v8 || *(unsigned char*) v8 > (unsigned char) v9) {
 					*(int*) v27 = (int) v15;
 				}
 			}
-			fcn_005001e0((void*) ((int) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (v15 + 0x27)]),
+			fcn_005001e0((void*) ((int) &((ENTITY_RECORD*) gm_EntitySlotTable)[*(unsigned short*) (v15 + 0x27)]),
 				(int) v15);
 			d3_SelectSceneContext(savedContext, 1);
 			*(int*) (buildAction + 0x7c) = 0;

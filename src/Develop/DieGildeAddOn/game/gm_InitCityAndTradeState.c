@@ -37,10 +37,10 @@ typedef struct {
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_7747e8;
 
-extern char g_868060[];
-extern unsigned char g_6a375c;
-extern unsigned char g_7747b0;
-extern unsigned char g_773d75;
+extern char gm_TownTable[];
+extern unsigned char gm_PlayerCount;
+extern unsigned char gm_ClientModeFlags;
+extern unsigned char gm_ActiveTownIndex;
 
 void __cdecl gm_InitCityOfficialsAndCitizens(int);
 void __cdecl gm_InitCivicBuildings(int);
@@ -60,20 +60,20 @@ int __cdecl gm_InitCityAndTradeState(int variant)
 	Player* pl;
 	Unit* u;
 
-	if (g_14cbca0 == -1) {
+	if (nt_ClientSocket == -1) {
 		srand(timeGetTime());
 	}
 	gm_InitCityOfficialsAndCitizens(0);
 	if (g_7747e8 != 0) {
 		for (i = 0; i < 768; i++) {
-			if (((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 6) {
+			if (((ENTITY_RECORD*)gm_EntitySlotTable)[i].entity_state == 6) {
 				gm_InitCivicBuildings(i);
 				break;
 			}
 		}
 	}
 	k = variant;
-	if (((Variant*)g_868060)[k].count - g_6a375c > 0) {
+	if (((Variant*)gm_TownTable)[k].count - gm_PlayerCount > 0) {
 		wares[0] = 0x18;
 		wares[1] = 0x27;
 		wares[2] = 0x33;
@@ -82,7 +82,7 @@ int __cdecl gm_InitCityAndTradeState(int variant)
 		wares[5] = 0x4b;
 		wares[6] = 0x12;
 		wares[7] = 6;
-		if ((*(signed char*)&g_7747b0) & 0x80) {
+		if ((*(signed char*)&gm_ClientModeFlags) & 0x80) {
 			p = wares;
 			variant = sizeof(wares);
 			/*
@@ -109,9 +109,9 @@ int __cdecl gm_InitCityAndTradeState(int variant)
 			wares[0] = 0x12;
 		} else {
 			for (i = 0; i < 768; i++) {
-				if (((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 6 || ((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 7) {
+				if (((ENTITY_RECORD*)gm_EntitySlotTable)[i].entity_state == 6 || ((ENTITY_RECORD*)gm_EntitySlotTable)[i].entity_state == 7) {
 					for (j = 0; j < 8; j++) {
-						if (((ENTITY_RECORD*)g_7f4ca0)[i].unk_164 == wares[j]) {
+						if (((ENTITY_RECORD*)gm_EntitySlotTable)[i].unk_164 == wares[j]) {
 							wares[j] = 0;
 							break;
 						}
@@ -119,14 +119,14 @@ int __cdecl gm_InitCityAndTradeState(int variant)
 				}
 			}
 		}
-		cm_DistributeStartingWares(((Variant*)g_868060)[k].count - g_6a375c, 8, wares);
+		cm_DistributeStartingWares(((Variant*)gm_TownTable)[k].count - gm_PlayerCount, 8, wares);
 	}
 	gm_InitStartingEntitiesAndRelations();
 	pl = gm_GetGuildHall(1);
 	if (pl != 0) {
 		u = fcn_00502cd0(pl->home, 2, 6, 0, 0x115);
 		if (u != 0) {
-			cm_RequestTransferCurrencyNoKill(u->id, -1, (*(char*)&g_773d75), 0x75300);
+			cm_RequestTransferCurrencyNoKill(u->id, -1, (*(char*)&gm_ActiveTownIndex), 0x75300);
 		}
 	}
 	return 1;

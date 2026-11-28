@@ -1,5 +1,5 @@
-extern char* g_104049c;
-extern unsigned int g_10404a0;
+extern char* d3_TextureBank;
+extern unsigned int d3_TextureBankCount;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl d3_ReleaseTextureInterface(char*);
@@ -20,8 +20,8 @@ void __cdecl d3_ReleaseTexture(int obj)
 		return;
 	}
 	if (*(int*) (o + 0x5c) > 0 && *(char*) (o + 0x5d) == 0) {
-		p = g_104049c;
-		for (i = 0; i < g_10404a0; i++, p += 0x70) {
+		p = d3_TextureBank;
+		for (i = 0; i < d3_TextureBankCount; i++, p += 0x70) {
 			if (*(int*) (p + 0x40) > 0 && *(int*) (p + 0x48) == *(int*) (o + 0x48) &&
 			    *(unsigned char*) (p + 0x5d) > 0) {
 				d3_ReleaseTexture((int) p);
@@ -35,15 +35,15 @@ void __cdecl d3_ReleaseTexture(int obj)
 	if (*(char*) (o + 0x54) & 2) {
 		*(int*) (o + 0x50) = 0;
 	} else {
-		idx = (int) (o - g_104049c) / 0x70;
-		p = g_104049c;
-		for (i = 0; i < g_10404a0; i++, p += 0x70) {
+		idx = (int) (o - d3_TextureBank) / 0x70;
+		p = d3_TextureBank;
+		for (i = 0; i < d3_TextureBankCount; i++, p += 0x70) {
 			if (*(int*) (p + 0x40) > 0 && (*(char*) (p + 0x54) & 2) &&
 			    *(int*) (p + 0x44) == idx) {
 				*(char*) (p + 0x54) = *(char*) (p + 0x54) & 0xfd;
 				*(int*) (p + 0x44) = *(int*) (o + 0x44);
-				nidx = (int) (p - g_104049c) / 0x70;
-				for (j = i + 1, p += 0x70; j < g_10404a0; j++, p += 0x70) {
+				nidx = (int) (p - d3_TextureBank) / 0x70;
+				for (j = i + 1, p += 0x70; j < d3_TextureBankCount; j++, p += 0x70) {
 					if (*(int*) (p + 0x40) > 0 && (*(char*) (p + 0x54) & 2) &&
 					    *(int*) (p + 0x44) == idx) {
 						*(int*) (p + 0x44) = nidx;
@@ -52,7 +52,7 @@ void __cdecl d3_ReleaseTexture(int obj)
 				break;
 			}
 		}
-		if (i == g_10404a0) {
+		if (i == d3_TextureBankCount) {
 			d3_ReleaseTextureInterface(o);
 		}
 	}

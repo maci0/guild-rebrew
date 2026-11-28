@@ -1,5 +1,5 @@
-extern char g_7f4ca0[];
-extern int g_14ce8e0;
+extern char gm_EntitySlotTable[];
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
 int __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
@@ -29,7 +29,7 @@ void __cdecl d2_RunKerkerplanDialog(char* obj)
 	d2_SetForm(h, 1);
 	io_AppendText(0x19ad);
 	d2_SetForm(h, 1);
-	entry = g_7f4ca0;
+	entry = gm_EntitySlotTable;
 	do {
 		if (gm_IsActiveWithoutThievesGuild(entry) != 0) {
 			io_AppendText(0x19ae, count + 1, *(unsigned short*) entry);
@@ -41,8 +41,8 @@ void __cdecl d2_RunKerkerplanDialog(char* obj)
 		io_AppendText(0x19af);
 	}
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop(d2_RunKerkerplanDialog, 0x677c7) != 0);
 	d3_EndCameraAndUiMode();

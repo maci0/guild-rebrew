@@ -1,4 +1,4 @@
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 char* __cdecl gm_SearchTable67(int id);
 float __cdecl gm_GetSeasonPrice(int id, unsigned char k);
@@ -16,6 +16,6 @@ int __cdecl ai_RunRaumKaufen(int unused, char* it, char* x)
 	if (it[0] != 2) {
 		return 0;
 	}
-	cm_SendSellObjekt(*(int*) (t + 1), -1, *(int*) (it + 4), *(int*) (it + 8), g_773d75, (int) gm_GetSeasonPrice(*(int*) (it + 4), g_773d75));
+	cm_SendSellObjekt(*(int*) (t + 1), -1, *(int*) (it + 4), *(int*) (it + 8), gm_ActiveTownIndex, (int) gm_GetSeasonPrice(*(int*) (it + 4), gm_ActiveTownIndex));
 	return 0xe;
 }

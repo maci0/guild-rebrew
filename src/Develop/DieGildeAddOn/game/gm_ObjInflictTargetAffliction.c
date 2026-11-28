@@ -1,8 +1,8 @@
 extern int gm_GameTime;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
-extern short g_aed32c;
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
+extern short cm_PacketDeltaBase;
 
 int __cdecl d2_RunCityScrollMapDialog(int a, int* dlg, char* txt, int c, int d);
 void __cdecl io_FormatTextBuffer(char* buf, int fmt, ...);
@@ -46,18 +46,18 @@ int __cdecl gm_ObjInflictTargetAffliction(char* cmd, char* action)
 		}
 		*(int*) (msg + 8) = *(int*) (cmd + 4);
 		*(int*) (msg + 0x28) = gm_GameTime;
-		*(int*) (msg + 0x2c) = g_7f4c04;
-		*(int*) (msg + 0x30) = g_7f4c08;
+		*(int*) (msg + 0x2c) = gm_GameTimeHour;
+		*(int*) (msg + 0x30) = gm_GameTimeSliceDword;
 		*(int*) (msg + 0x58) = *(int*) (esi + 1);
 		*(short*) (msg + 0x6e) = 0x177;
 		msg[4] = 0x76;
 		*(int*) (msg + 0xc) = -1;
-		*(short*) (msg + 0x34) = g_7f4c0c;
+		*(short*) (msg + 0x34) = gm_GameTimeTailWord;
 		msg[0x36] = 0xa;
 		cm_SendCopyEntityData(msg);
 		cm_BeginPacketFieldDelta(*(int*) action, *(int*) (*(int*) action + 2));
 		h = *(short*) action;
-		cm_AppendPacketFieldDelta(4, 1, h - g_aed32c + 0x25, esi + 1);
+		cm_AppendPacketFieldDelta(4, 1, h - cm_PacketDeltaBase + 0x25, esi + 1);
 		cm_RequestChangeAttribute();
 		slot = (char*) (0x7f4ca0 + *(unsigned short*) (esi + 0x27) * 0x21c);
 		gm_ApplyRandomDisease(slot, 0, 0);
@@ -75,18 +75,18 @@ int __cdecl gm_ObjInflictTargetAffliction(char* cmd, char* action)
 	}
 	*(int*) (msg + 8) = *(int*) (cmd + 4);
 	*(int*) (msg + 0x28) = gm_GameTime;
-	*(int*) (msg + 0x2c) = g_7f4c04;
-	*(int*) (msg + 0x30) = g_7f4c08;
+	*(int*) (msg + 0x2c) = gm_GameTimeHour;
+	*(int*) (msg + 0x30) = gm_GameTimeSliceDword;
 	*(int*) (msg + 0x58) = *(int*) (esi + 1);
 	*(short*) (msg + 0x6e) = 0x177;
 	msg[4] = 0x76;
 	*(int*) (msg + 0xc) = -1;
-	*(short*) (msg + 0x34) = g_7f4c0c;
+	*(short*) (msg + 0x34) = gm_GameTimeTailWord;
 	msg[0x36] = 0xa;
 	cm_SendCopyEntityData(msg);
 	cm_BeginPacketFieldDelta(*(int*) action, *(int*) (*(int*) action + 2));
 	h = *(short*) action;
-	cm_AppendPacketFieldDelta(4, 1, h - g_aed32c + 0x25, esi + 1);
+	cm_AppendPacketFieldDelta(4, 1, h - cm_PacketDeltaBase + 0x25, esi + 1);
 	cm_RequestChangeAttribute();
 	slot = (char*) (0x7f4ca0 + *(unsigned short*) (esi + 0x27) * 0x21c);
 	if (gm_HasActiveSpecialObject(slot, 0x2c4) == 0 || 0.75f < gm_RandomFloat01()) {

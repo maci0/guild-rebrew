@@ -12,8 +12,8 @@ typedef struct
 // SIZE 0x21c
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_7f4ca0[];
-extern int g_7746a0;
+extern char gm_EntitySlotTable[];
+extern int sv_ClickedObjekt;
 extern int g_14aa2f0;
 extern int g_14aa2f4;
 extern int g_14aa2ec;
@@ -60,26 +60,26 @@ void __cdecl d2_RunRathausCouncilMenu(int building)
 			else {
 				e = 0;
 			}
-			if ((((Player*)g_7f4ca0)[g_774970].x1c8 & 0x4000) && ((Player*)g_7f4ca0)[g_774970].xd == 1 && d2_IsTutorialActionAllowed(0x2000) == 1) {
+			if ((((Player*)gm_EntitySlotTable)[gm_LocalPlayerSlot].x1c8 & 0x4000) && ((Player*)gm_EntitySlotTable)[gm_LocalPlayerSlot].xd == 1 && d2_IsTutorialActionAllowed(0x2000) == 1) {
 				d = RegisterStatusText(s_6aaedc, g_14ad248, 0x16);
 			}
 			else {
 				d = 0;
 			}
-			if (g_7746a0 != 0) {
-				if (g_7746a0 == a) {
+			if (sv_ClickedObjekt != 0) {
+				if (sv_ClickedObjekt == a) {
 					d2_RunGesetzbuchDialog(0x112);
 				}
-				else if (g_7746a0 == b) {
+				else if (sv_ClickedObjekt == b) {
 					d2_RunGesetzbuchDialog(0x111);
 				}
-				else if (g_7746a0 == c) {
+				else if (sv_ClickedObjekt == c) {
 					d2_RunGesetzbuchDialog(0x113);
 				}
-				else if (g_7746a0 == d) {
+				else if (sv_ClickedObjekt == d) {
 					d2_RunBuergerrechtDialog(building);
 				}
-				else if (g_7746a0 == e) {
+				else if (sv_ClickedObjekt == e) {
 					d2_ShowOfficeApplicationDialog();
 				}
 			}

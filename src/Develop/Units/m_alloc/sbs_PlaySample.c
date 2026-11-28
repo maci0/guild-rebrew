@@ -1,7 +1,7 @@
 #include <string.h>
 extern void* g_6b7d80;
 extern void* g_6b7d84;
-extern int g_6b7d7c;
+extern int sb_WaveDriver;
 extern char g_679010[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
@@ -35,7 +35,7 @@ int __cdecl sbs_PlaySample(char* name, char* ext)
 	file = strstr(name, ".");
 	if (file != 0) {
 		if ((int) g_6b7d80 == 0) {
-			if (msx_AllocateSampleHandle(g_6b7d7c, &g_6b7d80) == -1) {
+			if (msx_AllocateSampleHandle(sb_WaveDriver, &g_6b7d80) == -1) {
 				goto fail;
 			}
 		}

@@ -29,7 +29,7 @@ typedef struct {
 #include "Develop/client_types.h"
 
 extern pos14_7f4c00 gm_GameTime;
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 void __cdecl he_FreeAction(char* s);
 void __cdecl io_FormatTextBuffer(char* buf, char* fmt, ...);
@@ -87,15 +87,15 @@ void __cdecl RunSimUnfall(char* s)
 	idx = *(int*) (s + 0xac);
 	count = 12;
 	do {
-		p = &((Player*) g_7f4ca0)[idx];
-		if (he_IsEntityEligibleForAccident(p) != 0 && ((Player*) g_7f4ca0)[idx].home->x27 != 0xffff) {
+		p = &((Player*) gm_EntitySlotTable)[idx];
+		if (he_IsEntityEligibleForAccident(p) != 0 && ((Player*) gm_EntitySlotTable)[idx].home->x27 != 0xffff) {
 			f = gm_RandomFloat01() * 100.0f;
-			r = gm_GetBuildingTechEffect(((Player*) g_7f4ca0)[idx].home, 2, 1);
+			r = gm_GetBuildingTechEffect(((Player*) gm_EntitySlotTable)[idx].home, 2, 1);
 			x = r * 0.0125f;
 			if (25.0f - 20.0f * x > f) {
 				y = MINV(MAXV(2.0f - x, 0.0f), 2.0f);
 				f = gm_ApplyEntityHealthDelta(idx, -50 - gm_RandomMod((int) (y * 255.0f + 1.0f)));
-				he_HandleAccidentOutcome(s, p, &((Player*) g_7f4ca0)[((Player*) g_7f4ca0)[idx].home->x27], ((Player*) g_7f4ca0)[idx].home, f, 0);
+				he_HandleAccidentOutcome(s, p, &((Player*) gm_EntitySlotTable)[((Player*) gm_EntitySlotTable)[idx].home->x27], ((Player*) gm_EntitySlotTable)[idx].home, f, 0);
 			}
 		}
 		idx = (*(int*) (s + 0xb0) + idx) % 0x300;

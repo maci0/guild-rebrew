@@ -6,7 +6,7 @@ typedef struct
 } TXS_TILE_NAME;
 // SIZE 0x40
 
-extern struct VFS_DIR* g_6b7fdc;
+extern struct VFS_DIR* vfs_RootDir;
 
 char* __cdecl d3_AppendVfsAssetPath(char* s, char* sub);
 char* __cdecl fcn_0064d1a0(char* s, int c);
@@ -38,7 +38,7 @@ void __cdecl d3_WriteTxsFile(char* o)
 		*dot = 0;
 	}
 	strcat(buf, ".TXS");
-	f = vfs_Tfopen(buf, "wb", g_6b7fdc);
+	f = vfs_Tfopen(buf, "wb", vfs_RootDir);
 	if (f == 0) {
 		return;
 	}

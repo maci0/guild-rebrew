@@ -1,13 +1,13 @@
 
 
 
-extern int g_7746d8;
+extern int d2_SelectedEntityUiFlags;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_14ad208;
 extern int g_14ad238;
 extern int g_14ad0f8;
 extern int g_14ad0e8;
-extern int g_7746a0;
+extern int sv_ClickedObjekt;
 
 void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -43,7 +43,7 @@ void __cdecl d2_RunSteinbruchInteriorHud(char* e)
 	zs = 0;
 	d2_ClearStatusTextSlots();
 	while (main_RunFrameLoop((void*) d2_RunSteinbruchInteriorHud, 0x67fff) != 0) {
-		if (g_7746d8 & 0x200) {
+		if (d2_SelectedEntityUiFlags & 0x200) {
 			lager = RegisterStatusText("contact_LAGER", g_14ad0f0, 0xe);
 			abbau = RegisterStatusText("contact_ABBAU", g_14ad208, 0xa);
 			suchen = RegisterStatusText("contact_SUCHEN_STEIN", g_14ad238, 0x16);
@@ -58,20 +58,20 @@ void __cdecl d2_RunSteinbruchInteriorHud(char* e)
 			}
 		}
 		d3_UpdateBuildingInteriorState();
-		if (g_7746a0 != 0) {
-			if (g_7746a0 == lager) {
+		if (sv_ClickedObjekt != 0) {
+			if (sv_ClickedObjekt == lager) {
 				d2_ShowLagerOptions(e, *(int*) (e + 0x5d));
-			} else if (g_7746a0 == gelage) {
+			} else if (sv_ClickedObjekt == gelage) {
 				d2_RunGelageDialog(e);
-			} else if (g_7746a0 == abbau) {
+			} else if (sv_ClickedObjekt == abbau) {
 				d2_RunProductionTradeDialog(e);
-			} else if (g_7746a0 == suchen) {
+			} else if (sv_ClickedObjekt == suchen) {
 				d2_ShowProductionDialog(e);
-			} else if (g_7746a0 == transport) {
+			} else if (sv_ClickedObjekt == transport) {
 				d2_OpenTransportPanel(e);
-			} else if (g_7746a0 == prod) {
+			} else if (sv_ClickedObjekt == prod) {
 				d2_RunMetalProduktionDialog(e);
-			} else if (g_7746a0 == zs || g_7746a0 == sp) {
+			} else if (sv_ClickedObjekt == zs || sv_ClickedObjekt == sp) {
 				d2_RunWorkerTrainingDialog(e);
 			}
 		}

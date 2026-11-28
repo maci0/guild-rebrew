@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_6b7d40;
+extern int nt_WsaInitialized;
 extern char* g_14cbca4;
 extern unsigned char* g_14cbca8;
 extern unsigned short g_14cbcae;
@@ -26,16 +26,16 @@ int __cdecl nt_ConnectToHost(const char* host, unsigned short port)
     int length;
 
     nt_ResetPacketStats();
-    g_14cbca0 = -1;
+    nt_ClientSocket = -1;
     g_14cbca4 = 0;
     g_14cbca8 = 0;
     *(short*) 0x1460aec = 0;
     g_14cbcae = 0;
-    g_14cbcb0 = 0;
+    nt_ConnectionClosed = 0;
     if (host == 0)
         return -1;
     WSAStartup(2, &startup);
-    g_6b7d40 = 1;
+    nt_WsaInitialized = 1;
     sock = socket(2, 1, 6);
     if (sock == INVALID_SOCKET)
         goto cleanup;
@@ -86,7 +86,7 @@ int __cdecl nt_ConnectToHost(const char* host, unsigned short port)
             length = 4;
             if (getsockopt(sock, 0xffff, 0x1002, (char*) &value, &length) != -1)
                 sprintf(text, (char*) 0x5f7e38, value);
-            g_14cbca0 = sock;
+            nt_ClientSocket = sock;
             return sock;
         }
         i++;
@@ -96,7 +96,7 @@ fail:
     shutdown(sock, 2);
     closesocket(sock);
 cleanup:
-    g_6b7d40 = 0;
+    nt_WsaInitialized = 0;
     WSACleanup();
     return -1;
 }

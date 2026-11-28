@@ -1,5 +1,5 @@
-extern int g_6b7d7c;
-extern volatile int g_6b7fac;
+extern int sb_WaveDriver;
+extern volatile int gm_GameTicks;
 
 int __cdecl sb_FindSampleBank(int* a0);
 int __cdecl sb_LoadEntry(int a0, int* a1);
@@ -23,7 +23,7 @@ int __cdecl sb_StartVoice(int* voice, int fade_in, int limit)
 	int stamp;
 
 	result = 0;
-	if (g_6b7d7c == 0) {
+	if (sb_WaveDriver == 0) {
 		return 0;
 	}
 	ent = (char*) voice[1];
@@ -68,8 +68,8 @@ int __cdecl sb_StartVoice(int* voice, int fade_in, int limit)
 		goto done;
 	}
 	if (fade_in != 0) {
-		voice[4] = (g_6b7fac * 2 + g_6b7fac) * 4
-			+ g_6b7fac;
+		voice[4] = (gm_GameTicks * 2 + gm_GameTicks) * 4
+			+ gm_GameTicks;
 		voice[5] |= 1;
 		msx_SetSampleVolume(*voice, 0);
 	} else {
@@ -84,8 +84,8 @@ int __cdecl sb_StartVoice(int* voice, int fade_in, int limit)
 		msx_SetSampleLoopCount(*voice, voice[3]);
 		voice[6] = 0;
 	}
-	stamp = (g_6b7fac * 2 + g_6b7fac) * 4
-		+ g_6b7fac;
+	stamp = (gm_GameTicks * 2 + gm_GameTicks) * 4
+		+ gm_GameTicks;
 	((int*) voice[1])[0xf] = voice[2] = stamp;
 	voice[5] &= ~8;
 	msx_StartSample(*voice);

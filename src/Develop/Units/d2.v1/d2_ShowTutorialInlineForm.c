@@ -1,8 +1,8 @@
 
 
 
-extern int* g_665f08;
-extern char g_6b5c60[];
+extern int* d2_TutorialState;
+extern char str_empty[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl d2_ShowStatusBanner(char*);
@@ -15,20 +15,20 @@ int __cdecl d3snd_PlaySoundEffect(int, int, int, int);
 
 void __cdecl d2_ShowTutorialInlineForm(void)
 {
-	if (g_665f08[6] != 0 && *(int*) (g_665f08[6] + 0x14) != 0) {
-		d2_ShowStatusBanner(g_6b5c60);
-		d2_SetForm(g_665f08[9], 0);
-		io_AppendText(g_6811b0);
-		io_AppendText(*(char**) (g_665f08[6] + 0x14));
-		d2_SetFormVisibility(g_665f08[9], 1);
-		if (*(int*) (g_665f08[6] + 0x18) != 0) {
-			if (g_665f08[5] != 0) {
-				if (sb_CheckVoicePlaying(g_665f08[5]) != 0) {
-					sb_StopVoice(g_665f08[5], 0);
+	if (d2_TutorialState[6] != 0 && *(int*) (d2_TutorialState[6] + 0x14) != 0) {
+		d2_ShowStatusBanner(str_empty);
+		d2_SetForm(d2_TutorialState[9], 0);
+		io_AppendText(str_dollar_C);
+		io_AppendText(*(char**) (d2_TutorialState[6] + 0x14));
+		d2_SetFormVisibility(d2_TutorialState[9], 1);
+		if (*(int*) (d2_TutorialState[6] + 0x18) != 0) {
+			if (d2_TutorialState[5] != 0) {
+				if (sb_CheckVoicePlaying(d2_TutorialState[5]) != 0) {
+					sb_StopVoice(d2_TutorialState[5], 0);
 				}
-				g_665f08[5] = 0;
+				d2_TutorialState[5] = 0;
 			}
-			g_665f08[5] = d3snd_PlaySoundEffect(-7, 0, *(int*) (g_665f08[6] + 0x18), -1);
+			d2_TutorialState[5] = d3snd_PlaySoundEffect(-7, 0, *(int*) (d2_TutorialState[6] + 0x18), -1);
 		}
 	}
 }

@@ -47,7 +47,7 @@ extern unsigned char g_6b89bc;
 extern unsigned char g_1040600;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_6628a4;
-extern unsigned long g_14ce728;
+extern unsigned long d3_LastReleaseRefCount;
 
 void* __cdecl d3_BuildShadowPatchFromMap(void* vb, void* ib, void* map, int step, int* rect,
 	GOLDTL_TileUv* uv, unsigned long diffuse);
@@ -176,11 +176,11 @@ char __cdecl d3_SubmitShadowPatch(void* obj, void* map)
 		if (ib != 0 && (*(int*) (s + 0x88) < (h + 1) * (w + 1)
 			|| *(int*) (s + 0x8c) < h * w * 2)) {
 			ops = *(GOLDTL_BufferVtbl**) ib;
-			g_14ce728 = ops->Release(ib);
+			d3_LastReleaseRefCount = ops->Release(ib);
 			*(void**) (s + 0x84) = 0;
 			vb = *(void**) (s + 0x80);
 			ops = *(GOLDTL_BufferVtbl**) vb;
-			g_14ce728 = ops->Release(vb);
+			d3_LastReleaseRefCount = ops->Release(vb);
 			*(void**) (s + 0x80) = 0;
 		}
 		if (*(void**) (s + 0x84) == 0) {
@@ -226,11 +226,11 @@ char __cdecl d3_SubmitShadowPatch(void* obj, void* map)
 	ib = *(void**) (s + 0x84);
 	if (ib != 0 && (*(int*) (s + 0x88) < 4 || *(int*) (s + 0x8c) < 2)) {
 		ops = *(GOLDTL_BufferVtbl**) ib;
-		g_14ce728 = ops->Release(ib);
+		d3_LastReleaseRefCount = ops->Release(ib);
 		*(void**) (s + 0x84) = 0;
 		vb = *(void**) (s + 0x80);
 		ops = *(GOLDTL_BufferVtbl**) vb;
-		g_14ce728 = ops->Release(vb);
+		d3_LastReleaseRefCount = ops->Release(vb);
 		*(void**) (s + 0x80) = 0;
 	}
 	if (*(void**) (s + 0x84) == 0) {

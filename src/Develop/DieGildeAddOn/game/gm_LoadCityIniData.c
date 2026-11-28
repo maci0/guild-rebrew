@@ -3,7 +3,7 @@
 #include <string.h>
 #include <windows.h>
 
-extern char g_6b5c60[];
+extern char str_empty[];
 
 int __cdecl io_ParseCsvIntList(char*, int*, int);
 int __cdecl gm_FindObjektPrototypeByName(char*);
@@ -49,7 +49,7 @@ int __cdecl gm_LoadCityIniData(char* name, int idx)
 	io_ParseCsvIntList(buf, (int*) (p + 0x2ec), 2);
 	if (idx == 0) {
 		count = 0;
-		GetPrivateProfileStringA("A - ALLGEMEIN", "NachbarStadt", g_6b5c60, buf, 0x100, datei);
+		GetPrivateProfileStringA("A - ALLGEMEIN", "NachbarStadt", str_empty, buf, 0x100, datei);
 		tok = strtok(buf, ",");
 		while (tok != 0) {
 			if (count >= 8) {
@@ -97,7 +97,7 @@ int __cdecl gm_LoadCityIniData(char* name, int idx)
 		q = p + 0x145 + i * 0x12;
 		k = 0;
 		sprintf(staedte[0], "Umland%i", i);
-		GetPrivateProfileStringA("E - UMLAND", staedte[0], g_6b5c60, buf, 0x100, datei);
+		GetPrivateProfileStringA("E - UMLAND", staedte[0], str_empty, buf, 0x100, datei);
 		tok = strtok(buf, ",");
 		while (tok != 0) {
 			if (k >= 0xa) {
@@ -133,7 +133,7 @@ int __cdecl gm_LoadCityIniData(char* name, int idx)
 		char sep[2] = ",";
 
 		k = 0;
-		GetPrivateProfileStringA("KONTOR", "Import", g_6b5c60, buf, 0x100, datei);
+		GetPrivateProfileStringA("KONTOR", "Import", str_empty, buf, 0x100, datei);
 		tok = strtok(buf, sep);
 		while (tok != 0) {
 			if (k >= 0x10) {
@@ -152,7 +152,7 @@ int __cdecl gm_LoadCityIniData(char* name, int idx)
 		char sep[2] = ",";
 
 		k = 0;
-		GetPrivateProfileStringA("KONTOR", "Export", g_6b5c60, buf, 0x100, datei);
+		GetPrivateProfileStringA("KONTOR", "Export", str_empty, buf, 0x100, datei);
 		tok = strtok(buf, sep);
 		while (tok != 0) {
 			if (k >= 0x10) {

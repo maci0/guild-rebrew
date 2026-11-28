@@ -3,11 +3,11 @@
 extern char g_68116c[];
 extern char g_6a4078[];
 extern int g_776704;
-extern signed char g_6a3440;
-extern int g_14ce8e0;
-extern char g_14cf950;
+extern signed char gm_SelectedMissionIndex;
+extern int io_RightButtonReleased;
+extern char io_LastKeyScancode;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
 
 int __cdecl d2_LoadForm(int, int, char*);
@@ -59,35 +59,35 @@ int __cdecl d2_ChooseHistory(void)
 	}
 	while (main_RunFrameLoop(d2_ChooseHistory, 0xc6) != 0) {
 		d2_UpdateRadioGroup(radioGroup);
-		if (g_14ce8e0 != 0 || g_14cf950 == 1) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0 || io_LastKeyScancode == 1) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc == 2) {
+		if (d2_DialogButtonAction == 2) {
 			if (d2_CurrentElementId == option0) {
-				(*(char*)&g_6a3440) = -1;
+				(*(char*)&gm_SelectedMissionIndex) = -1;
 			} else if (d2_CurrentElementId == option1) {
-				(*(char*)&g_6a3440) = 0;
+				(*(char*)&gm_SelectedMissionIndex) = 0;
 			} else if (d2_CurrentElementId == option2) {
-				(*(char*)&g_6a3440) = 1;
+				(*(char*)&gm_SelectedMissionIndex) = 1;
 			} else if (d2_CurrentElementId == option3) {
-				(*(char*)&g_6a3440) = 2;
+				(*(char*)&gm_SelectedMissionIndex) = 2;
 			} else if (d2_CurrentElementId == option4) {
-				(*(char*)&g_6a3440) = 3;
+				(*(char*)&gm_SelectedMissionIndex) = 3;
 			} else if (d2_CurrentElementId == option5) {
-				(*(char*)&g_6a3440) = 4;
+				(*(char*)&gm_SelectedMissionIndex) = 4;
 			} else if (d2_CurrentElementId == option6) {
-				(*(char*)&g_6a3440) = 5;
+				(*(char*)&gm_SelectedMissionIndex) = 5;
 			}
-			g_776704 = (*(char*)&g_6a3440);
+			g_776704 = (*(char*)&gm_SelectedMissionIndex);
 			if (g_776704 != -1) {
 				d2_SelectRadioGroup(radioGroup, g_776704 + 1);
 			} else {
 				d2_SelectRadioGroup(radioGroup, 0);
 			}
 			result = 1;
-			g_774654 = 1;
-		} else if (g_100f1dc == 1) {
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
+		} else if (d2_DialogButtonAction == 1) {
+			d2_DialogCloseRequested = 1;
 		}
 	}
 	d2_ClearRadioGroup(radioGroup);

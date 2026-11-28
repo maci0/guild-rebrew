@@ -22,7 +22,7 @@ void __cdecl cut_HandleDuellOfficeLoss(char* duel)
 		w = gm_GetEntitySkill(first, 3) > gm_GetEntitySkill(second, 3) ? second : first;
 		if (*(unsigned char*) (w + 0x166) != 0) {
 			if (srv_GetEntityOfficeSlot((unsigned char*) w, role, slot) != 0) {
-				if (*(int*) (duel + 0xc) == *(int*) (0x7f4ca4 + g_774970 * 0x21c)) {
+				if (*(int*) (duel + 0xc) == *(int*) (0x7f4ca4 + gm_LocalPlayerSlot * 0x21c)) {
 					amt_SendOfficeCommand(*(unsigned char*) slot, 0, 0, 4, 0xff);
 					p = (char*) 0x7f4ca2;
 					do {

@@ -1,14 +1,14 @@
 
 
 extern int g_7ea380[15];
-extern int g_774680;
-extern int g_774684;
+extern int d2_GroundplanMaskSurface;
+extern int tp_d2_GroundplanSurface;
 extern int g_774674;
 extern int g_774678;
 extern int g_77467c;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_6a25a8;
-int g_6a2598 = 0xffffffff;
+int d2_HudTopBarWindowId = 0xffffffff;
 extern int g_6a2524;
 
 void __cdecl d2_DestroyElement(int h);
@@ -29,13 +29,13 @@ void __cdecl d2_DestroyAllHudPanels(void)
 			g_7ea380[i] = -1;
 		}
 	}
-	if (g_774680 != 0) {
-		d2_ReleaseSurface(g_774680);
-		g_774680 = 0;
+	if (d2_GroundplanMaskSurface != 0) {
+		d2_ReleaseSurface(d2_GroundplanMaskSurface);
+		d2_GroundplanMaskSurface = 0;
 	}
-	if (g_774684 != 0) {
-		d2_ReleaseSurface(g_774684);
-		g_774684 = 0;
+	if (tp_d2_GroundplanSurface != 0) {
+		d2_ReleaseSurface(tp_d2_GroundplanSurface);
+		tp_d2_GroundplanSurface = 0;
 	}
 	if (g_774674 != 0) {
 		d2_ReleaseSurfaceGroup(g_774674, 0);
@@ -58,9 +58,9 @@ void __cdecl d2_DestroyAllHudPanels(void)
 	}
 	d2_DestroyHudOverlay();
 	g_6a25ac = -1;
-	if (g_6a2598 != -1) {
-		d2_CloseWindow(g_6a2598);
-		g_6a2598 = -1;
+	if (d2_HudTopBarWindowId != -1) {
+		d2_CloseWindow(d2_HudTopBarWindowId);
+		d2_HudTopBarWindowId = -1;
 	}
 	d2_DestroySelectionPanel();
 	g_6a2524 = 1;

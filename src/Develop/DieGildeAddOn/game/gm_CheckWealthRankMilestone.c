@@ -3,9 +3,9 @@
 
 extern char g_770b80[];
 extern int g_current_year;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
 
 extern int __cdecl gm_WalkEntityChain(int);
 extern unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
@@ -101,9 +101,9 @@ void __cdecl gm_CheckWealthRankMilestone(unsigned int packedId)
 			*(unsigned char*) (msg + 4) = 0x69;
 			*(int*) (msg + 8) = *(int*) (slot + 4);
 			*(int*) (msg + 0x28) = g_current_year;
-			*(int*) (msg + 0x2c) = g_7f4c04;
-			*(int*) (msg + 0x30) = g_7f4c08;
-			*(short*) (msg + 0x34) = g_7f4c0c;
+			*(int*) (msg + 0x2c) = gm_GameTimeHour;
+			*(int*) (msg + 0x30) = gm_GameTimeSliceDword;
+			*(short*) (msg + 0x34) = gm_GameTimeTailWord;
 			*(int*) (msg + 0xc) = -1;
 			*(unsigned char*) (msg + 0x36) = 9;
 			*(short*) (msg + 0x2c) = 7;
@@ -144,12 +144,12 @@ void __cdecl gm_CheckWealthRankMilestone(unsigned int packedId)
             }
 				*(int*) ((char*) msg + 8) = *(int*) (other + 2);
 				*(int*) (msg + 0x28) = g_current_year;
-				*(int*) (msg + 0x2c) = g_7f4c04;
-				*(int*) (msg + 0x30) = g_7f4c08;
+				*(int*) (msg + 0x2c) = gm_GameTimeHour;
+				*(int*) (msg + 0x30) = gm_GameTimeSliceDword;
 				*(unsigned char*) (msg + 4) = 0x69;
 				*(int*) (msg + 0xc) = -1;
 				*(unsigned char*) (msg + 0x36) = 9;
-				*(short*) (msg + 0x34) = g_7f4c0c;
+				*(short*) (msg + 0x34) = gm_GameTimeTailWord;
 				*(short*) (msg + 0x2c) = 7;
 				*(int*) (msg + 0x2e) = 0;
 				if (*(char*) (slot + 2) == 5) {

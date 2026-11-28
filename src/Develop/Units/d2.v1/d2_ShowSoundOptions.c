@@ -5,7 +5,7 @@ extern char s_6ad2f8[];
 extern char s_6ad2e8[];
 extern int main_LoopFlags;
 extern int d2_CurrentWindowId;
-extern unsigned char g_7766a0[4];
+extern unsigned char msx_AudioVolumeSettings[4];
 extern unsigned char g_7766a4[4];
 extern int g_14ac564;
 extern int g_14ac568;
@@ -20,9 +20,9 @@ extern int g_14ac54c;
 extern int g_14ac5a8;
 extern int g_14ac5ac;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char g_14cf950;
+extern char io_LastKeyScancode;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern char* g_7747b8;
 
 int __cdecl d2_LoadForm(int, int, char*);
@@ -84,16 +84,16 @@ void __cdecl d2_ShowSoundOptions(void)
 	s2 = d2_GetWindowListItem(dlg, 1, 2);
 	s3 = d2_GetWindowListItem(dlg, 1, 3);
 	s4 = d2_GetWindowListItem(dlg, 1, 4);
-	d2_SetElementValue(s0, 0, 0x7f, g_7766a0[0]);
+	d2_SetElementValue(s0, 0, 0x7f, msx_AudioVolumeSettings[0]);
 	d2_SetValueGaugeFlags(s0, 0x882);
 	d2_SetValueGaugeLabel(s0, g_14ac564);
-	d2_SetElementValue(s1, 0, 0x7f, g_7766a0[1]);
+	d2_SetElementValue(s1, 0, 0x7f, msx_AudioVolumeSettings[1]);
 	d2_SetValueGaugeFlags(s1, 0x882);
 	d2_SetValueGaugeLabel(s1, g_14ac568);
-	d2_SetElementValue(s2, 0, 0x7f, g_7766a0[2]);
+	d2_SetElementValue(s2, 0, 0x7f, msx_AudioVolumeSettings[2]);
 	d2_SetValueGaugeFlags(s2, 0x882);
 	d2_SetValueGaugeLabel(s2, g_14ac56c);
-	d2_SetElementValue(s3, 0, 0x7f, g_7766a0[3]);
+	d2_SetElementValue(s3, 0, 0x7f, msx_AudioVolumeSettings[3]);
 	d2_SetValueGaugeFlags(s3, 0x882);
 	d2_SetValueGaugeLabel(s3, g_14ac570);
 	d2_SetElementValue(s4, 0, 4, g_7766a4[0]);
@@ -105,15 +105,15 @@ void __cdecl d2_ShowSoundOptions(void)
 	ok = btn[0];
 	cancel = btn[1];
 	while (main_RunFrameLoop((void*) d2_ShowSoundOptions, wait) != 0) {
-		if (g_14ce8e0 != 0 || g_14cf950 == 1) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0 || io_LastKeyScancode == 1) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == ok) {
 				changed = 1;
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			} else if (d2_CurrentElementId == cancel) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
 		if (g_14ce8d0 != 0 && (d2_CurrentElementId == s0 || d2_CurrentElementId == s1 || d2_CurrentElementId == s2 || d2_CurrentElementId == s3)) {
@@ -128,10 +128,10 @@ void __cdecl d2_ShowSoundOptions(void)
 		}
 	}
 	if (changed) {
-		g_7766a0[0] = (unsigned char) d2_GetControlValue(s0);
-		g_7766a0[1] = (unsigned char) d2_GetControlValue(s1);
-		g_7766a0[2] = (unsigned char) d2_GetControlValue(s2);
-		g_7766a0[3] = (unsigned char) d2_GetControlValue(s3);
+		msx_AudioVolumeSettings[0] = (unsigned char) d2_GetControlValue(s0);
+		msx_AudioVolumeSettings[1] = (unsigned char) d2_GetControlValue(s1);
+		msx_AudioVolumeSettings[2] = (unsigned char) d2_GetControlValue(s2);
+		msx_AudioVolumeSettings[3] = (unsigned char) d2_GetControlValue(s3);
 		g_7766a4[0] = (unsigned char) d2_GetControlValue(s4);
 		io_SaveIniSettings();
 		msx_ApplyAudioSettings();

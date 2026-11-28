@@ -14,7 +14,7 @@ typedef struct Slot {
 // SIZE 0x2f4
 
 extern D2_RADIO_GROUP g_102cbc4[8];
-extern char* g_1015ea0;
+extern char* d2_Controls;
 extern char s_67d4b0[];
 
 #include "Develop/Units/Error/error_message.h"
@@ -43,8 +43,8 @@ int __cdecl d2_CreateRadioGroup(int n, ...)
 	va_start(ap, n);
 	for (j = 0; j < n; j++) {
 		g_102cbc4[i].ids[j] = va_arg(ap, int);
-		((D2_CONTROL_TL*) g_1015ea0)[g_102cbc4[i].ids[j]].value_058 = 1;
-		((D2_CONTROL_TL*) g_1015ea0)[g_102cbc4[i].ids[j]].flags_1d0 &= ~2;
+		((D2_CONTROL_TL*) d2_Controls)[g_102cbc4[i].ids[j]].value_058 = 1;
+		((D2_CONTROL_TL*) d2_Controls)[g_102cbc4[i].ids[j]].flags_1d0 &= ~2;
 	}
 	va_end(ap);
 	return i;

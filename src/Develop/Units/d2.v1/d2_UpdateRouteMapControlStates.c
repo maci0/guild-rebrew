@@ -28,11 +28,11 @@ void __cdecl d2_UpdateRouteMapControlStates(char* list, struct CITY_MAP_PANEL* p
 	for (i = 0; i < panel->count; i++) {
 		if (panel->slots[i].obj != 0) {
 			if (panel->slots[i].obj != g_772904) {
-				*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[panel->slots[i].id].flags_1d0)) |= 1;
-				*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[panel->slots[i].id].value_03c)) = 0;
+				*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[panel->slots[i].id].flags_1d0)) |= 1;
+				*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[panel->slots[i].id].value_03c)) = 0;
 			} else {
-				*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[panel->slots[i].id].flags_1d0)) &= ~1;
-				*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[panel->slots[i].id].value_03c)) = 1;
+				*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[panel->slots[i].id].flags_1d0)) &= ~1;
+				*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[panel->slots[i].id].value_03c)) = 1;
 			}
 		}
 	}
@@ -42,8 +42,8 @@ void __cdecl d2_UpdateRouteMapControlStates(char* list, struct CITY_MAP_PANEL* p
 		do {
 			for (i = 0; i < panel->count; i++) {
 				if (panel->slots[i].obj != 0 && *(int*) (panel->slots[i].obj + 1) == *(int*) (n + 4)) {
-					*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[panel->slots[i].id].value_03c)) = 1;
-					*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[panel->slots[i].id].flags_1d0)) &= ~1;
+					*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[panel->slots[i].id].value_03c)) = 1;
+					*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[panel->slots[i].id].flags_1d0)) &= ~1;
 					*p++ = panel->slots[i].obj;
 					break;
 				}

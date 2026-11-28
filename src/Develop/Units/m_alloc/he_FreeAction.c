@@ -67,9 +67,9 @@ void __cdecl he_FreeAction(HE_ACTION* u)
 	}
 	g_7dc424--;
 	memset(u, 0, sizeof(HE_ACTION));
-	if (u == &g_77e980[he_LastEventSlot]) {
+	if (u == &he_ActionSlots[he_LastEventSlot]) {
 		for (n = he_LastEventSlot; n >= 0; n--) {
-			if (g_77e980[n].kind != 0) {
+			if (he_ActionSlots[n].kind != 0) {
 				break;
 			}
 		}

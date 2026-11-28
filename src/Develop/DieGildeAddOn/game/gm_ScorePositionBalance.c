@@ -1,7 +1,7 @@
 #include <math.h>
 
-extern int g_67a370;
-extern unsigned short* g_772e9c;
+extern int d3_ActiveScene;
+extern unsigned short* cut_CombatDefenderEntity;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
@@ -23,9 +23,9 @@ float __cdecl gm_ScorePositionBalance(char* self, int x, int z, float range)
 	int* listB;
 	int i;
 
-	g = *(void**) ((char*) g_67a370 + 0xb0);
+	g = *(void**) ((char*) d3_ActiveScene + 0xb0);
 	best = 0.0f;
-	if (*(int*) (self + 0x16c) == (int) g_772e9c) {
+	if (*(int*) (self + 0x16c) == (int) cut_CombatDefenderEntity) {
 		listB = (int*) (g_772eb4 + 0xc0);
 		listA = (int*) (g_772eb4 + 0x80);
 	} else {

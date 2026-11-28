@@ -8,7 +8,7 @@
 
 int __cdecl gm_MapEntityStatRange(int a);
 float __cdecl gm_GetEntitySkill(char* p, int a);
-unsigned char __cdecl fcn_004f97a0(int a);
+unsigned char __cdecl gm_GetCitySkillAverage(int a);
 void __cdecl gm_GetLawEntry(int a, void* out);
 
 /* ADDRESS: GOLDTL 0x004918a0 */
@@ -25,7 +25,7 @@ int __cdecl ai_EvaluateLaw0x14(char* entity, int unused, int* out)
 	(void) unused;
 	gm_MapEntityStatRange((int) (unsigned char) entity[0x164]);
 	partial = ((float) gm_GetEntitySkill(entity, 3)
-		- ((float) fcn_004f97a0(3) + 1.0f) * 0.003968254197388887f)
+		- ((float) gm_GetCitySkillAverage(3) + 1.0f) * 0.003968254197388887f)
 		* 0.02380952425301075f;
 	fA = (float) ((*(float*) (entity + 0xf4) - 2.0) * *(float*) (entity + 0xfc));
 	fC = (float) ((*(float*) (entity + 0x100) - 2.0) * *(float*) (entity + 0x108));

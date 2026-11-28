@@ -1,7 +1,7 @@
 /* Reconstructed from native disassembly; frame slots follow the decompiler map. */
 #include <math.h>
-extern void* g_6b5c5c; extern int g_67a370; extern char* g_6b8300;
-extern double g_662908; extern float g_662914;  extern float g_6628cc; extern const float g_6628a0;
+extern void* g_6b5c5c; extern int d3_ActiveScene; extern char* d3_CurrentFloor;
+extern double g_662908; extern float g_662914;  extern float g_6628cc; extern const float flt_1_0;
 int __cdecl d3sm_GetObjectSuperMap();
 int __cdecl ch_RestoreGridRegion();
 int __cdecl ch_MarkGridDiamond();
@@ -71,7 +71,7 @@ int __cdecl ch_ReplanBlockedPath(int a0,int a1,int *a2)
   if (v36 > 10)
     v36 = 10;
   v10 = *(int *)(v28 + 0xf8);
-  if (*(int *)(g_67a370 + 0xac + v6 * 0x3dc)) 
+  if (*(int *)(d3_ActiveScene + 0xac + v6 * 0x3dc)) 
     *(unsigned int *)(((int)g_6b5c5c) + 0x10) = 0x42700000;
   else {
     *(unsigned int *)(((int)g_6b5c5c) + 0x10) = 0x42700000;
@@ -149,8 +149,8 @@ label_40874a:
             v33 = *(float *)(v10 + 0x54) - *(float *)(v2 + 0x54);
             v31 = sqrt(v31 * v31 + v32 * v32 + v33 * v33) * 0.01f * g_6628cc;
             *(float *)(v27 + 0x1a4) = v31;
-            if (g_6628a0 < v31)
-              v31 = g_6628a0;
+            if (flt_1_0 < v31)
+              v31 = flt_1_0;
             *(float *)(v27 + 0x1a4) = v31;
             v13 = 2;
           }
@@ -176,8 +176,8 @@ label_408870:
   v33 = *(float *)(v28 + 0x54) - *(float *)(v6 + 0x54);
   v31 = sqrt(v31 * v31 + v32 * v32 + v33 * v33) * 0.01f * g_6628cc;
   *(float *)(v27 + 0x1a4) = v31;
-  if (g_6628a0 < v31)
-    v31 = g_6628a0;
+  if (flt_1_0 < v31)
+    v31 = flt_1_0;
   *(float *)(v27 + 0x1a4) = v31;
   v13 = 2;
 label_40890a:
@@ -295,7 +295,7 @@ label_40892d:
       }
       v23 = (int *)(unsigned int)*(unsigned char *)(*(int *)(v28 + 0xf4) + v27 * 2);
       v22 = (unsigned int)*(unsigned char *)(*(int *)(v28 + 0xf4) + 1 + v27 * 2);
-      if ((*(int *)(a0 + 0x88) == 0x10432c0) || (v27 = 2, g_6b8300))
+      if ((*(int *)(a0 + 0x88) == 0x10432c0) || (v27 = 2, d3_CurrentFloor))
         v27 = 5;
       v4 = ch_FindWalkableCell(v35,*(int *)(a0 + 0x34) + 0x4c,v28 + 0x144,v23,v22,&v14,&v26,v36 * v27,*(unsigned int *)(v28 + 0x160) | 1);
       v13 = v35;
@@ -308,7 +308,7 @@ label_40892d:
       (*(int *)0x14d0c28) = 0x14cfc20;
       (*(int *)0x14d0c24) = 0x200;
       if (*(int *)(*(int *)(v35 + 0x24) + (int)(*(int *)(v35 + 0x20) * v15 + (int)v24) * 0x1c) == 0xd) { 
-        if ((*(int *)(a0 + 0x88) == 0x10432c0) || (v27 = 2, g_6b8300))
+        if ((*(int *)(a0 + 0x88) == 0x10432c0) || (v27 = 2, d3_CurrentFloor))
           v27 = 5;
         v4 = ch_FindWalkableCell(v35,*(int *)(a0 + 0x34) + 0x4c,v28 + 0x144,v24,v15,&v14,&v26,v36 * v27,*(unsigned int *)(v28 + 0x160) | 1);
         if (v4) { 

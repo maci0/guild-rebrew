@@ -1,5 +1,5 @@
-extern unsigned char g_773d75;
-extern char g_7f4ca0[][0x21c];
+extern unsigned char gm_ActiveTownIndex;
+extern char gm_EntitySlotTable[][0x21c];
 
 typedef struct {
 	unsigned short id;
@@ -23,8 +23,8 @@ int __cdecl gm_CalcOwnerAndStockValue(char* bld, int flag)
 	val = 0;
 	if (*(unsigned short*) (bld + 0x27) != 0xffff) {
 		i = *(unsigned short*) (bld + 0x27);
-		if ((unsigned char) g_7f4ca0[i][2] < 0xa) {
-			val = fcn_0050d2a0(g_7f4ca0[i]);
+		if ((unsigned char) gm_EntitySlotTable[i][2] < 0xa) {
+			val = fcn_0050d2a0(gm_EntitySlotTable[i]);
 		}
 	}
 	if (flag != 0) {
@@ -34,7 +34,7 @@ int __cdecl gm_CalcOwnerAndStockValue(char* bld, int flag)
 			if (slot != 0) {
 				do {
 					val = (int) (gm_GetSeasonPrice(*(unsigned short*) slot,
-					                          g_773d75)
+					                          gm_ActiveTownIndex)
 					             + (float) val);
 					slot = (char*) fcn_00502850();
 				} while (slot != 0);

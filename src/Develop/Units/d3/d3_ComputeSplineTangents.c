@@ -1,5 +1,5 @@
-extern float g_6628a0;
-#define K_6628A0 g_6628a0
+extern float flt_1_0;
+#define K_6628A0 flt_1_0
 #define K_6628CC 0.5f
 
 typedef struct {

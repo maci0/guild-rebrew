@@ -33,7 +33,7 @@ typedef struct Item0474cf0 {
 	int font;
 } Item0474cf0;
 
-extern int g_1015ea0;
+extern int d2_Controls;
 extern int tp_d2_SelectedControl;
 extern int g_100f1cc;
 extern int g_100f898;
@@ -52,19 +52,19 @@ void __cdecl d2_SelectControl(int slot)
 	int y;
 	Item0474cf0* selected;
 
-	slots = *(Slot0474cf0**) &g_1015ea0;
+	slots = *(Slot0474cf0**) &d2_Controls;
 	it = slots[slot].item;
 	if (*(Item0474cf0**) &tp_d2_SelectedControl == it) {
 		return;
 	}
 	if (*(Item0474cf0**) &tp_d2_SelectedControl != 0) {
 		slots[(*(Item0474cf0**) &tp_d2_SelectedControl)->slot].active = 0;
-		slots = *(Slot0474cf0**) &g_1015ea0;
+		slots = *(Slot0474cf0**) &d2_Controls;
 	}
 	*(Item0474cf0**) &tp_d2_SelectedControl = it;
 	slots[it->slot].active = 1;
 	selected = *(Item0474cf0**) &tp_d2_SelectedControl;
-	list = (*(Slot0474cf0**) &g_1015ea0)[selected->slot].list;
+	list = (*(Slot0474cf0**) &d2_Controls)[selected->slot].list;
 	i = 0;
 	while (list != 0 && i < list->count) {
 		if (list->ids[i] == it->slot) {

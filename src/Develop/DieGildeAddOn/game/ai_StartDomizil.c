@@ -1,5 +1,5 @@
 extern unsigned char* lpGebaeudePROT;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 #include <string.h>
 int __cdecl gm_CheckDomizilActionState(char*, char**);
 int __cdecl he_StartHandlungSearch(int, ...);
@@ -31,7 +31,7 @@ int __cdecl ai_StartDomizil(int a0, char* a1, int a2, int* a3, int* a4)
 				v12[2] = 1;
 				first = (int) (gm_GetTypeProductValue(v13[1]) * 0.3f);
 				if (ai_PrepareBuildSite(a0, entity, 0, v13, v12, 0) != 0) {
-					second = (int) (gm_SumQueryEntryValues(*(int*) (entity + 0x178), g_773d75) * 0.95f);
+					second = (int) (gm_SumQueryEntryValues(*(int*) (entity + 0x178), gm_ActiveTownIndex) * 0.95f);
 					if (second < first) {
 					int rem;
 						rem = first - second;
@@ -53,7 +53,7 @@ int __cdecl ai_StartDomizil(int a0, char* a1, int a2, int* a3, int* a4)
 			v12[2] = 1;
 			if (ai_PrepareBuildSite(a0, entity, 0, v12, v13, 1) != 0) {
 				first = gm_CalcBuildingCost(entity, v12[1]);
-				second = (int) (gm_SumQueryEntryValues(*(int*) (entity + 0x178), g_773d75) * 0.95f);
+				second = (int) (gm_SumQueryEntryValues(*(int*) (entity + 0x178), gm_ActiveTownIndex) * 0.95f);
 				if (second < first) {
 					int rem;
 					rem = first - second;

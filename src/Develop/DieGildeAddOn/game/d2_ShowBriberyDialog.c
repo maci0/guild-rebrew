@@ -52,8 +52,8 @@ void __cdecl d2_ShowBriberyDialog(unsigned int id, char* obj)
 	}
 	count = 0;
 	profile = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*)obj];
-	entity = (int) g_7746c4;
-	if (g_7746c4 != 0 || (entity = (int) g_7746c8) != 0) {
+	entity = (int) d2_VisitedBuilding;
+	if (d2_VisitedBuilding != 0 || (entity = (int) d2_InteriorBuilding) != 0) {
 		other = (int) fcn_00502cd0(*(int*) (entity + 0x5d), 1, 0, 0xca);
 		while (other != 0) {
 			if (*(int*) (other + 0x2a) != *(int*) (obj + 1)) {
@@ -63,7 +63,7 @@ void __cdecl d2_ShowBriberyDialog(unsigned int id, char* obj)
 			other = (int) gm_NextEntityQueryMatch();
 		}
 	}
-	other = (int) he_StartHandlungSearch(2, 2, g_774970, 0, 0x40);
+	other = (int) he_StartHandlungSearch(2, 2, gm_LocalPlayerSlot, 0, 0x40);
 	while (other != 0) {
 		for (index = 0; index < count; index++) {
 			if (*(int*) (other + 0xac) == *(int*) (list[index] + 0x2a)) {
@@ -77,11 +77,11 @@ void __cdecl d2_ShowBriberyDialog(unsigned int id, char* obj)
 	}
 	count += extra;
 	if (count >= *(unsigned char*) (profile + 0x247) * 2) {
-		io_FormatTextBuffer(msg2, 0x19fa, count, g_7746c8);
+		io_FormatTextBuffer(msg2, 0x19fa, count, d2_InteriorBuilding);
 		d2_ShowModalMessageBox(msg2, 0);
 		return;
 	}
-	choice = (char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*)(obj + 0x27)];
+	choice = (char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*)(obj + 0x27)];
 	option = d2_LoadForm(0, 0, "misc\\Bestechung");
 	d2_CenterDialogWindows(option);
 	d2_SetOverlayAnimation(0, 0);
@@ -89,21 +89,21 @@ void __cdecl d2_ShowBriberyDialog(unsigned int id, char* obj)
 	index = io_AppendText(0x19f7, *(unsigned short*) choice, obj);
 	other = d2_GetWindowListItem(option, 1, index);
 	index = d2_GetWindowListItem(option, 1, index + 1);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == other) {
 				for (i = 0; i < 8; i++) {
 					((unsigned int*) (packet + 0x38))[i] = 0xffffffff;
 				}
 				packet[4] = 0x40;
 				packet[0x36] = 1;
-				*(int*) (packet + 8) = *(int*) (g_7f4ca4 + g_774970 * 0x21c);
+				*(int*) (packet + 8) = *(int*) (gm_EntityIdField + gm_LocalPlayerSlot * 0x21c);
 				*(int*) (packet + 0x58) = *(int*) (obj + 1);
-				*(int*) (packet + 0x5c) = *(int*) (g_7746c8 + 1);
+				*(int*) (packet + 0x5c) = *(int*) (d2_InteriorBuilding + 1);
 				i = 0;
 				for (entity = 0x7f4ca4; entity < 0x85a0a4 && i < 8; entity += 0x21c) {
 					if (*(char*) (entity + 0x184) != 0) {
@@ -115,15 +115,15 @@ void __cdecl d2_ShowBriberyDialog(unsigned int id, char* obj)
 					cm_SendCopyEntityData((int) packet);
 					d3snd_PlayWorkerOrderVoice();
 					sv_ClearObjectSelection();
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				}
 				else {
 					d2_ShowModalMessageBox((char*) g_14abaac, 0);
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				}
 			}
 			else if (d2_CurrentElementId == index) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	} while (main_RunFrameLoop(0x59d6b0, 0x677c7));

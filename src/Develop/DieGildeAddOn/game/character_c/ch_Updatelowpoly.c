@@ -188,11 +188,11 @@ float __cdecl d3_ComputeYawToTarget(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
 char __cdecl d3sm_SampleHeight(char*, float*, int*, int*, float*);
 void __cdecl d3_GetFloorHeight(char*, float*, int, int*, int*, float*);
-extern float g_6628a8;
+extern float flt_0_0;
 #include "../../../Units/d3/d3_animation.h"
 
 #include "../../../Units/d3/d3_camera.h"
-extern char g_10432c0[];
+extern char d3_Universes[];
 
 char __cdecl d3_SetObjectVisible(char*, char);
 
@@ -204,7 +204,7 @@ int __cdecl d3_RemoveObjectAnim(char*);
 
 
 
-extern char g_6b5c60[];
+extern char str_empty[];
 D3_OBJECT* __cdecl d3_CreateSceneModelObject(D3_OBJECT*, float*, float*, char*);
 void __cdecl d3_InvalidateSubTreeFlags(char*, int);
 void __cdecl ch_PreloadCharacterMotions(char*, int, ...);
@@ -248,7 +248,7 @@ void __cdecl ch_Updatelowpoly(char* obj)
 			}
 			return;
 		}
-		if (*(char**) (obj + 0x88) == g_10432c0) {
+		if (*(char**) (obj + 0x88) == d3_Universes) {
 			if (ch_LowPolyMode != 1) {
 				goto lowpoly_model;
 			}

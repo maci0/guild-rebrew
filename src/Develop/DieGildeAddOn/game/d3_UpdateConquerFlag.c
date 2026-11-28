@@ -1,6 +1,6 @@
 extern int g_772f08;
-extern char* g_9b9e40[];
-extern char g_6b5c60[];
+extern char* d3_CombatFlagObjects[];
+extern char str_empty[];
 
 char* __cdecl d3_FindSceneObject(char*, int, char*, char*);
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
@@ -47,7 +47,7 @@ void __cdecl d3_UpdateConquerFlag(int* orderRecord)
 			rotation[2] = 0.0f;
 			d3_TransformPoint(info, (float*) (info + 0x4c), position);
 			obj = d3_CreateSceneModelObject(0, position, rotation, "ub_FLUCHTFLAGGE");
-			g_9b9e40[g_772f08] = d3_CreateSceneModelObject(0, position, rotation, g_6b5c60);
+			d3_CombatFlagObjects[g_772f08] = d3_CreateSceneModelObject(0, position, rotation, str_empty);
 			d3_ApplyObjectAnimation(obj, "sonstiges/anim_FLUCHTFLAGGE.baf", 1);
 			mode = *(int**) (ent + 0x16c);
 			if (mode != 0 && *(int*) ((char*) mode + 0x54) != 0) {

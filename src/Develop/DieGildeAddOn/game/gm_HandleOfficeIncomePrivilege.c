@@ -11,7 +11,7 @@ typedef struct {
 } Info;
 
 extern char g_690560[];
-extern char g_679060[];
+extern char str_fmt_s[];
 
 void __cdecl amt_ProcessPrivilegeIncome(short, int, Info*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);

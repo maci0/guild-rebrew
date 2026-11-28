@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/client_data.h"
-extern int g_773d48;
+extern int gm_QueuedCommandCount;
 #pragma pack(2)
 typedef struct {
 	unsigned char kind;
@@ -33,12 +33,12 @@ void __cdecl gm_UpdateActiveEntities(void)
 	int id;
 
 
-	g_773d48 = 0;
-	p = (ENTITY_UPDATE_SLOT*) g_7f4ca2;
+	gm_QueuedCommandCount = 0;
+	p = (ENTITY_UPDATE_SLOT*) gm_SlotTableKindView;
 	do {
-		if (g_773d48 > 0x40) {
+		if (gm_QueuedCommandCount > 0x40) {
 			cm_StepCommandQueue();
-			g_773d48 = 0;
+			gm_QueuedCommandCount = 0;
 		}
 		if (p->kind == 0x12) {
 			id = p->id;
@@ -46,15 +46,15 @@ void __cdecl gm_UpdateActiveEntities(void)
 			cm_BeginPacketFieldDelta((char*) p - 2, id);
 			cm_AppendPacketFieldDelta(1, 1, 2, (char*) &v);
 			cm_RequestChangeAttribute();
-			++g_773d48;
+			++gm_QueuedCommandCount;
 		}
 		p++;
-	} while ((int) p < (int) &g_7f4ca2[768]);
-	p = (ENTITY_UPDATE_SLOT*) g_7f4ca2;
+	} while ((int) p < (int) &gm_SlotTableKindView[768]);
+	p = (ENTITY_UPDATE_SLOT*) gm_SlotTableKindView;
 	do {
-		if (g_773d48 > 0x40) {
+		if (gm_QueuedCommandCount > 0x40) {
 			cm_StepCommandQueue();
-			g_773d48 = 0;
+			gm_QueuedCommandCount = 0;
 		}
 		if ((p->kind < 10 || p->kind == 0x14)
 		    && p->active != 0) {
@@ -68,11 +68,11 @@ void __cdecl gm_UpdateActiveEntities(void)
 				else {
 					cm_SendSwapEntityModel(p->id, (char*) 0x696508);
 				}
-				++g_773d48;
+				++gm_QueuedCommandCount;
 			}
 		}
 		p++;
-	} while ((int) p < (int) &g_7f4ca2[768]);
+	} while ((int) p < (int) &gm_SlotTableKindView[768]);
 	gm_MaintainNpcPopulation();
-	g_773d48 = 0;
+	gm_QueuedCommandCount = 0;
 }

@@ -1,5 +1,5 @@
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 /* Load the eight 0x170-byte render-object records from a save stream.  Older
    versions (before 0x10055) carry no rotation block, so the two rotation
    floats are forced to 1.0f. */
@@ -89,7 +89,7 @@ unsigned int __cdecl ls_LoadRenderSlots(void* file, int version)
         if (!ls_ReadVfsDataChecked((void*) (p + 0x7c), 4, 1, file)) {
             return 0;
         }
-        *(unsigned int*) (p + 0x78) = (unsigned int) g_6b7fac;
+        *(unsigned int*) (p + 0x78) = (unsigned int) gm_GameTicks;
         if (!ls_ReadVfsDataChecked((void*) (p + 0x80), 0x10, 1, file)) {
             return 0;
         }
@@ -117,7 +117,7 @@ unsigned int __cdecl ls_LoadRenderSlots(void* file, int version)
         if (!ls_ReadVfsDataChecked((void*) (p + 0xe4), 4, 1, file)) {
             return 0;
         }
-        *(unsigned int*) (p + 0xe0) = (unsigned int) g_6b7fac;
+        *(unsigned int*) (p + 0xe0) = (unsigned int) gm_GameTicks;
         if (!ls_ReadVfsDataChecked((void*) (p + 0xe8), 0x10, 1, file)) {
             return 0;
         }
@@ -145,7 +145,7 @@ unsigned int __cdecl ls_LoadRenderSlots(void* file, int version)
         if (!ls_ReadVfsDataChecked((void*) (p + 0x14c), 4, 1, file)) {
             return 0;
         }
-        *(unsigned int*) (p + 0x148) = (unsigned int) g_6b7fac;
+        *(unsigned int*) (p + 0x148) = (unsigned int) gm_GameTicks;
         if (!ls_ReadVfsDataChecked((void*) (p + 0x150), 0xc, 1, file)) {
             return 0;
         }

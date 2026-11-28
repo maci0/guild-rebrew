@@ -16,7 +16,7 @@ typedef struct {
 } ent2c;
 // SIZE 0x2c
 
-extern int g_67a370;
+extern int d3_ActiveScene;
 
 void __cdecl gm_GetEquippedCombatGear(char*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
@@ -32,7 +32,7 @@ int __cdecl cut_AssignConquerTarget(char* rec, char* e, char* obj)
 	int b;
 	int c;
 
-	h = *(int*) (((char*)g_67a370) + 0xb0);
+	h = *(int*) (((char*)d3_ActiveScene) + 0xb0);
 	gm_GetEquippedCombatGear(e);
 	d3_TransformPoint(obj, obj + 0x4c, v);
 	if (d3sm_SampleHeight(h, v, &c, &a, &b) == 0)

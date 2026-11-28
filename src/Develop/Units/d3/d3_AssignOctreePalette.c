@@ -5,7 +5,7 @@
 
 extern COLOR_OCTREE_NODE* g_6b6f20[6];
 extern int g_6b6308;
-extern unsigned char g_6b6008[3][0x100];
+extern unsigned char d3_OctreePalette[3][0x100];
 
 void __cdecl d3_AssignOctreePalette(int node_idx, int level)
 {
@@ -28,9 +28,9 @@ void __cdecl d3_AssignOctreePalette(int node_idx, int level)
 		cnt = g_6b6f20[level][node_idx].count;
 		gg = g_6b6f20[level][node_idx].g;
 		bb = g_6b6f20[level][node_idx].b;
-		g_6b6008[0][g_6b6308] = (unsigned char) ((g_6b6f20[level][node_idx].r + cnt / 2) / cnt);
-		g_6b6008[1][g_6b6308] = (unsigned char) ((cnt / 2 + gg) / cnt);
-		g_6b6008[2][g_6b6308++] = (unsigned char) ((cnt / 2 + bb) / cnt);
+		d3_OctreePalette[0][g_6b6308] = (unsigned char) ((g_6b6f20[level][node_idx].r + cnt / 2) / cnt);
+		d3_OctreePalette[1][g_6b6308] = (unsigned char) ((cnt / 2 + gg) / cnt);
+		d3_OctreePalette[2][g_6b6308++] = (unsigned char) ((cnt / 2 + bb) / cnt);
 	}
 }
 unsigned char _dpad_6b5df8[520] = {

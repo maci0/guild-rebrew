@@ -18,15 +18,15 @@
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 #include <string.h>
 #include "Develop/Units/d2.v1/d2_gui.h"
-extern char* g_772500;			/* 0x00772500 */
+extern char* d2_FileObjTable;			/* 0x00772500 */
 extern int d2_CurrentWindowId;			/* 0x00772514 */
 #include "Develop/DieGildeAddOn/game/client_data.h"
-extern int g_100f1dc;			/* 0x0100f1dc */
-extern char* g_1015ea0;		/* 0x01015ea0 */
-extern int g_14ce8e0;			/* 0x014ce8e0 */
-extern int g_774654;			/* 0x00774654 */
+extern int d2_DialogButtonAction;			/* 0x0100f1dc */
+extern char* d2_Controls;		/* 0x01015ea0 */
+extern int io_RightButtonReleased;			/* 0x014ce8e0 */
+extern int d2_DialogCloseRequested;			/* 0x00774654 */
 extern int d2_CurrentElementId;			/* 0x0067d370 */
-extern char g_7f4ca0[];			/* 0x007f4ca0 */
+extern char gm_EntitySlotTable[];			/* 0x007f4ca0 */
 
 int __cdecl d2_TutorialAllowsFlag(int);
 void __cdecl d2_DispatchTutorialInput(int, int, int, int);
@@ -100,13 +100,13 @@ void __cdecl d2_RunStammbaumDialog(unsigned int a0, unsigned char a1, int a2, un
 	}
 	d2_SetForm(win, 1);
 	count = 1;
-	g_100f1dc = -1;
-	rows = *(int*) ((char*) g_1015f4c + d2_CurrentWindowId * 0x3cc);
+	d2_DialogButtonAction = -1;
+	rows = *(int*) ((char*) d2_WindowMetricsView + d2_CurrentWindowId * 0x3cc);
 	for (;;) {
 		if (count) {
 			rows2 = rows / 2;
-			w = *(short*) ((char*) g_772500 + 0x1ec2c);
-			h = *(short*) ((char*) g_772500 + 0x1ec2e);
+			w = *(short*) ((char*) d2_FileObjTable + 0x1ec2c);
+			h = *(short*) ((char*) d2_FileObjTable + 0x1ec2e);
 			memset(tabA, 0xff, sizeof tabA);
 			memset(tabB, 0xff, sizeof tabB);
 			memset(tabC, 0xff, sizeof tabC);
@@ -202,12 +202,12 @@ void __cdecl d2_RunStammbaumDialog(unsigned int a0, unsigned char a1, int a2, un
 				if (tabA[0].id != -1) {
 					id = tabA[0].id & 0xffff;
 					d2_AddElementToWindow(idx, 0xc,
-					    *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[id]) + 0x18c),
+					    *(int*) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[id]) + 0x18c),
 					    d2_CurrentWindowId);
 					
-					*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[tabA[0].text]) + 0x1d0) = 3;
-					*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[tabA[0].text]) + 0x2f0) =
-					    (int) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[id]));
+					*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[tabA[0].text]) + 0x1d0) = 3;
+					*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[tabA[0].text]) + 0x2f0) =
+					    (int) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[id]));
 				} else {
 					d2_AddElementToWindow(idx, 0xc, 0x4fb, d2_CurrentWindowId);
 					tabA[0].text = -1;
@@ -223,12 +223,12 @@ void __cdecl d2_RunStammbaumDialog(unsigned int a0, unsigned char a1, int a2, un
 				} else {
 					id = tabA[1].id & 0xffff;
 					d2_AddElementToWindow(idx, 0xc,
-					    *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[id]) + 0x18c),
+					    *(int*) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[id]) + 0x18c),
 					    d2_CurrentWindowId);
 					
-					*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[tabA[1].text]) + 0x1d0) = 3;
-					*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[tabA[1].text]) + 0x2f0) =
-					    (int) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[id]));
+					*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[tabA[1].text]) + 0x1d0) = 3;
+					*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[tabA[1].text]) + 0x2f0) =
+					    (int) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[id]));
 				}
 
 				if (flag) {
@@ -243,11 +243,11 @@ void __cdecl d2_RunStammbaumDialog(unsigned int a0, unsigned char a1, int a2, un
 					} else {
 						id = tabB[2].id & 0xffff;
 						d2_AddElementToWindow(idx, 0x98,
-						    *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[id]) + 0x18c),
+						    *(int*) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[id]) + 0x18c),
 						    d2_CurrentWindowId);
-						*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[tabB[2].text]) + 0x1d0) = 3;
-						*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[tabB[2].text]) + 0x2f0) =
-						    (int) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[id]));
+						*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[tabB[2].text]) + 0x1d0) = 3;
+						*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[tabB[2].text]) + 0x2f0) =
+						    (int) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[id]));
 					}
 					tabB[3].text = d2_AddElementToWindow(rows2 + 0x10,
 					    0x96, 0x5db, d2_CurrentWindowId);
@@ -257,11 +257,11 @@ void __cdecl d2_RunStammbaumDialog(unsigned int a0, unsigned char a1, int a2, un
 					if ((unsigned short) tabB[3].id != 0xffff) {
 						id = tabB[3].id & 0xffff;
 						d2_AddElementToWindow(idx, 0x98,
-						    *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[id]) + 0x18c),
+						    *(int*) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[id]) + 0x18c),
 						    d2_CurrentWindowId);
-						*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[tabB[3].text]) + 0x1d0) = 3;
-						*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[tabB[3].text]) + 0x2f0) =
-						    (int) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[id]));
+						*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[tabB[3].text]) + 0x1d0) = 3;
+						*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[tabB[3].text]) + 0x2f0) =
+						    (int) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[id]));
 					} else {
 						d2_AddElementToWindow(idx, 0x98, 0x4fb, d2_CurrentWindowId);
 						tabB[3].text = -1;
@@ -276,11 +276,11 @@ void __cdecl d2_RunStammbaumDialog(unsigned int a0, unsigned char a1, int a2, un
 					if (tabB[2].id != -1) {
 						id = tabB[2].id & 0xffff;
 						d2_AddElementToWindow(idx, 0x98,
-						    *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[id]) + 0x18c),
+						    *(int*) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[id]) + 0x18c),
 						    d2_CurrentWindowId);
-						*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[tabB[2].text]) + 0x1d0) = 3;
-						*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[tabB[2].text]) + 0x2f0) =
-						    (int) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[id]));
+						*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[tabB[2].text]) + 0x1d0) = 3;
+						*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[tabB[2].text]) + 0x2f0) =
+						    (int) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[id]));
 					} else {
 						d2_AddElementToWindow(idx, 0x98, 0x4fb, d2_CurrentWindowId);
 						tabB[2].text = -1;
@@ -310,13 +310,13 @@ void __cdecl d2_RunStammbaumDialog(unsigned int a0, unsigned char a1, int a2, un
 							    (short) (posX[k] + n3);
 							id = *(short*) p & 0xffff;
 							d2_AddElementToWindow(posX[k] + 2, 0x98,
-							    *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[
+							    *(int*) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[
 id]) + 0x18c), d2_CurrentWindowId);
-							*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[
+							*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[
 *(int*) (p + 4)]) + 0x1d0) = 3;
-							*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[
+							*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[
 *(int*) (p + 4)]) + 0x2f0) =
-							    (int) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[id]));
+							    (int) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[id]));
 							p += 0x10;
 						}
 						posX[0] = nb - w - 0x10;
@@ -334,13 +334,13 @@ id]) + 0x18c), d2_CurrentWindowId);
 							    (short) (*px + n3);
 							id = *(short*) p & 0xffff;
 							d2_AddElementToWindow(*px + 2, 0x98,
-							    *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[
+							    *(int*) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[
 id]) + 0x18c), d2_CurrentWindowId);
-							*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[
+							*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[
 *(int*) (p + 4)]) + 0x1d0) = 3;
-							*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[
+							*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[
 *(int*) (p + 4)]) + 0x2f0) =
-							    (int) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[id]));
+							    (int) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[id]));
 							px++;
 							p += 0x10;
 						}
@@ -411,13 +411,13 @@ id]) + 0x18c), d2_CurrentWindowId);
 							    (short) (posC[k] + n3);
 							id = *(short*) p & 0xffff;
 							d2_AddElementToWindow(posC[k] + 2, 0x124,
-							    *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[
+							    *(int*) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[
 id]) + 0x18c), d2_CurrentWindowId);
-							*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[
+							*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[
 *(int*) (p + 4)]) + 0x1d0) = 3;
-							*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[
+							*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[
 *(int*) (p + 4)]) + 0x2f0) =
-							    (int) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[id]));
+							    (int) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[id]));
 							p += 0x10;
 						}
 					} else {
@@ -437,13 +437,13 @@ id]) + 0x18c), d2_CurrentWindowId);
 							    (short) (posB[k] + n3);
 							id = *(short*) p & 0xffff;
 							d2_AddElementToWindow(posB[k] + 2, 0x124,
-							    *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[
+							    *(int*) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[
 id]) + 0x18c), d2_CurrentWindowId);
-							*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[
+							*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[
 *(int*) (p + 4)]) + 0x1d0) = 3;
-							*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[
+							*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[
 *(int*) (p + 4)]) + 0x2f0) =
-							    (int) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[id]));
+							    (int) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[id]));
 							p += 0x10;
 						}
 					}
@@ -516,7 +516,7 @@ id]) + 0x18c), d2_CurrentWindowId);
 						if (*(short*) p == -1) {
 							break;
 						}
-						*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) (p + 4)]) + 0x5c) =
+						*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[*(int*) (p + 4)]) + 0x5c) =
 						    ((a1 & 1) && !(a1 & 0xc)) ||
 						    (a1 & 0x10) ? 1 : 0;
 						io_FormatTextBuffer(buf + 0x100, 0x6ac96c,
@@ -538,7 +538,7 @@ id]) + 0x18c), d2_CurrentWindowId);
 						if (*(short*) p == -1) {
 							break;
 						}
-						*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) (p + 4)]) + 0x5c) =
+						*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[*(int*) (p + 4)]) + 0x5c) =
 						    (a1 & 0xc) ? 0 : 1;
 						io_FormatTextBuffer(buf, 0x6ac96c,
 						    *(unsigned short*) p);
@@ -559,10 +559,10 @@ id]) + 0x18c), d2_CurrentWindowId);
 						if (*(short*) p == -1) {
 							break;
 						}
-						*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) (p + 4)]) + 0x5c) =
+						*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[*(int*) (p + 4)]) + 0x5c) =
 						    ((a1 & 1) && !(a1 & 0xc)) ||
 						    ((a1 & 2) && (a1 & 8) &&
-						    *(unsigned short*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[
+						    *(unsigned short*) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[
 (*(short*) p & 0xffff)]) + 0xa) > 0xa)
 						    ? 1 : 0;
 						io_FormatTextBuffer(buf + 0x200, 0x6ac96c,
@@ -582,10 +582,10 @@ id]) + 0x18c), d2_CurrentWindowId);
 				}
 			}
 		}
-		if (g_14ce8e0 != 0 && !(a1 & 8)) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0 && !(a1 & 8)) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			int hid;
 			int rec;
 			char* q;
@@ -598,7 +598,7 @@ id]) + 0x18c), d2_CurrentWindowId);
 				if (d2_CurrentElementId == *(int*) q) {
 					hid = k;
 					rec = gm_LookupEntityRecordById(
-					    *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[
+					    *(int*) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[
 (tabB[k].id & 0xffff)]) + 4));
 					break;
 				}
@@ -609,7 +609,7 @@ id]) + 0x18c), d2_CurrentWindowId);
 				if (d2_CurrentElementId == *(int*) q) {
 					hid = k;
 					rec = gm_LookupEntityRecordById(
-					    *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[
+					    *(int*) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[
 (tabA[k].id & 0xffff)]) + 4));
 					break;
 				}
@@ -619,7 +619,7 @@ id]) + 0x18c), d2_CurrentWindowId);
 			for (k = 0; hid == -1 && k < 5; k++) {
 				if (d2_CurrentElementId == *(int*) q) {
 					rec = gm_LookupEntityRecordById(
-					    *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[
+					    *(int*) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[
 (tabC[k].id & 0xffff)]) + 4));
 					break;
 				}

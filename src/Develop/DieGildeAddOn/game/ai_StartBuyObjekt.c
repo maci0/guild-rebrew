@@ -1,6 +1,6 @@
 extern char* lpObjektePROT;
 extern unsigned char* lpGebaeudePROT;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 unsigned short* __cdecl fcn_00502cd0(int, int, ...);
@@ -137,13 +137,13 @@ done:
 		if (owner == 0) {
 			goto fail;
 		}
-		i = gm_GetSeasonTreasury((char*) owner, g_773d75);
+		i = gm_GetSeasonTreasury((char*) owner, gm_ActiveTownIndex);
 		*(int*) (itemCmd + 0x10) = 0;
 	}
 	if (*(float*) (itemCmd + 0x14) > 0.0f && *(float*) (itemCmd + 0x14) < 1.0f) {
 		i = (int) ((float) i * *(float*) (itemCmd + 0x14));
 	}
-	return ((i < (int) gm_GetSeasonPrice(*(int*) (itemCmd + 4), g_773d75)) - 1U) & 0xb;
+	return ((i < (int) gm_GetSeasonPrice(*(int*) (itemCmd + 4), gm_ActiveTownIndex)) - 1U) & 0xb;
 
 fail:
 	return 0;

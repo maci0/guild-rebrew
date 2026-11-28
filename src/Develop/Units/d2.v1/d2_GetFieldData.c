@@ -40,7 +40,7 @@ typedef D2_FORM_RECORD Obj;
 
 #include "Develop/Units/d2.v1/d2_gui.h"
 
-extern D2_FORM_RECORD g_1038140[];
+extern D2_FORM_RECORD d2_Forms[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 /* ADDRESS: GOLDTL 0x00472100 */
@@ -49,11 +49,11 @@ char* __cdecl d2_GetFieldData(int slot_idx, int win_idx)
 	D2_WIN* w;
 	D2_CONTROL_TL* s;
 
-	w = &((D2_WIN*)g_1015f40)[g_1038140[g_772534].wins[win_idx]];
+	w = &((D2_WIN*)d2_Windows)[d2_Forms[g_772534].wins[win_idx]];
 	if (slot_idx > w->count) {
 		return 0;
 	}
-	s = &((D2_CONTROL_TL*)g_1015ea0)[w->children[slot_idx]];
+	s = &((D2_CONTROL_TL*)d2_Controls)[w->children[slot_idx]];
 	if (s->kind == 0x41) {
 		return *(char**)&s->data;
 	}

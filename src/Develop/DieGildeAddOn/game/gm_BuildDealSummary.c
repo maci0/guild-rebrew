@@ -60,7 +60,7 @@ int __cdecl gm_BuildDealSummary(int owner, Summary* out)
 	}
 	k = 0;
 	for (i = 0; i < 256; i++) {
-		d = &g_7d2020[i];
+		d = &he_EventDeals[i];
 		if (d->id != 0 && d->owner == owner) {
 			out->entries[k].id = d->id;
 			if (d->has_amount != 0) {

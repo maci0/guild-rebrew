@@ -8,6 +8,6 @@ typedef struct {
 } HEAD_SET;
 /* SIZE 0x44 */
 
-extern HEAD_SET g_693228[];
+extern HEAD_SET gm_FemaleHeadSets[];
 
 #endif

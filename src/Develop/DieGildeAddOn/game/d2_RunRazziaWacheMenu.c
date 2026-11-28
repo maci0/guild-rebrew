@@ -1,9 +1,9 @@
 
 
 
-extern int g_7746d8;
-extern int g_7746a0;
-extern char* g_7746cc;
+extern int d2_SelectedEntityUiFlags;
+extern int sv_ClickedObjekt;
+extern char* sv_SelectedBuilding;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_14ad118;
 extern int g_14ad160;
@@ -44,7 +44,7 @@ void __cdecl d2_RunRazziaWacheMenu(int building)
 	d2_ClearStatusTextSlots();
 	if (main_RunFrameLoop((void*) d2_RunRazziaWacheMenu, 0x67fff) != 0) {
 		do {
-			if (g_7746d8 & 0x200) {
+			if (d2_SelectedEntityUiFlags & 0x200) {
 				a = RegisterStatusText(s_6a9580, g_14ad0f0, 0xe);
 				b = RegisterStatusText(s_6aa5ac, g_14ad118, 0xd);
 				c = RegisterStatusText(s_6ab3cc, g_14ad160, 0x16);
@@ -52,23 +52,23 @@ void __cdecl d2_RunRazziaWacheMenu(int building)
 				e = RegisterStatusText(s_6ab3b0, g_14a5554, 0xc);
 				f = RegisterStatusText(s_6a956c, g_14ad100, 0x15);
 			}
-			if (g_7746a0 != 0 && (g_7746d8 & 0x200)) {
-				if (g_7746a0 == a) {
-					d2_ShowLagerOptions(building, *(int*) (g_7746cc + 0x14));
+			if (sv_ClickedObjekt != 0 && (d2_SelectedEntityUiFlags & 0x200)) {
+				if (sv_ClickedObjekt == a) {
+					d2_ShowLagerOptions(building, *(int*) (sv_SelectedBuilding + 0x14));
 				}
-				else if (g_7746a0 == b) {
+				else if (sv_ClickedObjekt == b) {
 					d2_RunEquipmentDialog(building);
 				}
-				else if (g_7746a0 == c) {
+				else if (sv_ClickedObjekt == c) {
 					d2_OpenRazziaDialog(building);
 				}
-				else if (g_7746a0 == d) {
+				else if (sv_ClickedObjekt == d) {
 					d2_StartThievesGuildSpyPicker(building);
 				}
-				else if (g_7746a0 == e) {
+				else if (sv_ClickedObjekt == e) {
 					d2_RunDiebesgildeInfoDialog(building);
 				}
-				else if (g_7746a0 == f) {
+				else if (sv_ClickedObjekt == f) {
 					d2_OpenTransportPanel(building);
 				}
 			}

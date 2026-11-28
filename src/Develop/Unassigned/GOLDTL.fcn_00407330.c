@@ -6,7 +6,7 @@ typedef struct CH_DUMMY_PICKS {
 } CH_DUMMY_PICKS;
 /* Inferred 32-pointer result view; native stack allocation is 0x84 bytes. */
 
-extern int g_67a370;
+extern int d3_ActiveScene;
 
 void __cdecl d3_VisitSceneObjects(char*, int, int, void*, CH_DUMMY_PICKS*);
 int __cdecl ch_CollectMatchingDummyNodes(char*, CH_DUMMY_PICKS*);
@@ -46,7 +46,7 @@ char* __cdecl ch_SelectRandomDummy(void)
 	CH_DUMMY_PICKS p;
 
 	memset(&p, 0, sizeof(p));
-	d3_VisitSceneObjects(((char*)g_67a370), 0, 0x100, (void*) ch_CollectMatchingDummyNodes, &p);
+	d3_VisitSceneObjects(((char*)d3_ActiveScene), 0, 0x100, (void*) ch_CollectMatchingDummyNodes, &p);
 	if (p.count == 0) {
 		return 0;
 	}

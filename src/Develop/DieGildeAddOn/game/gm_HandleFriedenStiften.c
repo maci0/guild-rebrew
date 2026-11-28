@@ -12,8 +12,8 @@ typedef struct {
 	int pad14[15];
 } Req;
 
-extern __int64 g_666018;
-extern char g_6b5c60[];
+extern __int64 gm_TargetPersonTypeMask;
+extern char str_empty[];
 extern char s_6acdac[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
@@ -69,11 +69,11 @@ int __cdecl gm_HandleFriedenStiften(unsigned char* e, unsigned char* ctx)
 		cm_RequestModifyHealth(*(int*) (e + 4), -3);
 		if (o1[2] == 6 || o1[2] == 7) {
 			io_FormatTextBuffer(text, 0x1de8, *(unsigned short*) o2, *(unsigned short*) e);
-			he_PostEntityMessage(*(int*) (o1 + 4), *(int*) (o1 + 4), text, 0, 0x5ec, g_6b5c60);
+			he_PostEntityMessage(*(int*) (o1 + 4), *(int*) (o1 + 4), text, 0, 0x5ec, str_empty);
 		}
 		if (o2[2] == 6 || o2[2] == 7) {
 			io_FormatTextBuffer(text, 0x1de8, *(unsigned short*) o1, *(unsigned short*) e);
-			he_PostEntityMessage(*(int*) (o2 + 4), *(int*) (o2 + 4), text, 0, 0x5ec, g_6b5c60);
+			he_PostEntityMessage(*(int*) (o2 + 4), *(int*) (o2 + 4), text, 0, 0x5ec, str_empty);
 		}
 		return 0x10;
 	}
@@ -81,7 +81,7 @@ int __cdecl gm_HandleFriedenStiften(unsigned char* e, unsigned char* ctx)
 	memset(&req, 0, sizeof(req));
 	req.size = 0x400;
 	req.kind = 6;
-	req.cd = g_666018;
+	req.cd = gm_TargetPersonTypeMask;
 	io_FormatTextBuffer(text, 0x1de4);
 	o1 = d2_OpenTargetPicker(&req, text, 0, 0);
 	if (o1 == 0) {
@@ -99,9 +99,9 @@ int __cdecl gm_HandleFriedenStiften(unsigned char* e, unsigned char* ctx)
 	id = io_AppendText(0x1de6, 3, *(unsigned short*) o1, *(unsigned short*) o2);
 	ok = d2_GetWindowListItem(dlg, 1, id);
 	cancel = d2_GetWindowListItem(dlg, 1, id + 1);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == ok) {
 				if (d2_CheckActionBlocker(e, 3)) {
 					a = gm_RandomMod(0x28) + 0xf;
@@ -119,15 +119,15 @@ int __cdecl gm_HandleFriedenStiften(unsigned char* e, unsigned char* ctx)
 						io_FormatTextBuffer(text, 0x1de8, *(unsigned short*) o1, *(unsigned short*) e);
 						he_PostEntityMessage(*(int*) (o2 + 4), *(int*) (o2 + 4), text, 0, 0x5ec, 0);
 					}
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 					result = 1;
 				}
 			} else if (d2_CurrentElementId == cancel) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop((void*) gm_HandleFriedenStiften, 0x657c7) != 0);
 	d2_DestroyForm(dlg);

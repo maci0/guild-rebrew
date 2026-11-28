@@ -2,10 +2,10 @@
 
 float __cdecl d3_SignedPlanarAngle(int, int);
 
-extern char g_6628f8[];
-extern char g_6628f8[];
-extern char g_6628c8[];
-extern char g_6628c8[];
+extern char d3_NegPi[];
+extern char d3_NegPi[];
+extern char d3_TwoPi[];
+extern char d3_TwoPi[];
 /* ADDRESS: GOLD 0x00453b30 */
 /* ADDRESS: GOLDTL 0x004514d0 */
 float __cdecl d3_WrapYawDelta(int left, int right)
@@ -13,8 +13,8 @@ float __cdecl d3_WrapYawDelta(int left, int right)
 	float value;
 
 	value = d3_SignedPlanarAngle(left, right);
-	if (value < *(float*) g_6628f8) {
-		value = value + *(float*) g_6628c8;
+	if (value < *(float*) d3_NegPi) {
+		value = value + *(float*) d3_TwoPi;
 	}
 	return value;
 }

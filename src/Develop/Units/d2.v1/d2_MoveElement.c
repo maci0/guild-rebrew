@@ -1,7 +1,7 @@
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/Units/d2.v1/gold_window.h"
 
-extern GOLD_GUI_WINDOW g_1015f40[0x60];
+extern GOLD_GUI_WINDOW d2_Windows[0x60];
 
 /* ADDRESS: GOLD 0x0046cd90 */
 void __cdecl d2_MoveElement(short x, short y, int id)
@@ -49,7 +49,7 @@ void __cdecl d2_MoveElement(short x, short y, int id)
 		*(short*) (0xf8a52f + rec->bild_offset * 17) = rec->y;
 		return;
 	case 0x40:
-		win = &g_1015f40[rec->bild_offset];
+		win = &d2_Windows[rec->bild_offset];
 		old_x = win->x;
 		old_y = win->y;
 		win->y = y;

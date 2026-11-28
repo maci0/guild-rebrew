@@ -1,8 +1,8 @@
 #include "Develop/client_types.h"
 
-extern unsigned char g_773d75;
-extern float g_662910;
-extern char g_868080[];
+extern unsigned char gm_ActiveTownIndex;
+extern float flt_0_01;
+extern char gm_CityDisplayNames[];
 
 
 
@@ -36,7 +36,7 @@ void __cdecl he_RunEvent053(int a)
 		he_FreeAction((void*) a);
 		return;
 	}
-	io_FormatTextBuffer(buf, 0x10c2, g_868080 + (unsigned char) g_773d75 * 0x2f4, (gm_RandomMod(3) & 0xffff) + 0x10c4);
+	io_FormatTextBuffer(buf, 0x10c2, gm_CityDisplayNames + (unsigned char) gm_ActiveTownIndex * 0x2f4, (gm_RandomMod(3) & 0xffff) + 0x10c4);
 	id = 0;
 	q = (char*) 0x7f4ca2;
 	do {
@@ -50,9 +50,9 @@ void __cdecl he_RunEvent053(int a)
 				he_PostEntityMessage(*(int*) (p + 4), -1, buf, 0x20, 0x601, 0);
 			}
 			if (id != 0) {
-				n = (int) ((double) gm_WalkEntityChain(*(unsigned short*) p) * g_662910);
+				n = (int) ((double) gm_WalkEntityChain(*(unsigned short*) p) * flt_0_01);
 				n *= (gm_RandomMod(4) & 0xffff) + 2;
-				cm_RequestTransferCurrencyNoKill(*(int*) (p + 4), -1, (unsigned char) g_773d75, n);
+				cm_RequestTransferCurrencyNoKill(*(int*) (p + 4), -1, (unsigned char) gm_ActiveTownIndex, n);
 				if (*(char*) (p + 2) == 6 || *(char*) (p + 2) == 7) {
 					io_FormatTextBuffer(msg, 0x10c3, id, n);
 					he_PostEntityMessage(*(int*) (p + 4), -1, msg, 0, 0x5ff, 0);

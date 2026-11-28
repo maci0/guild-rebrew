@@ -1,17 +1,17 @@
 #include <windows.h>
 #include <string.h>
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 
 /* Globals referenced by the lobby setup.  The 0x779c60 status block and the
  * 0x7e23e2 INI image have no managed data rows yet, so they are addressed
  * directly; the pointer globals are declared with their evidenced types. */
-extern unsigned* g_774a34;
+extern unsigned* lb_LobbyPlayerList;
 extern int g_779c40;
-extern char* g_779cb8;
-extern int* g_779ce4;
-extern void* g_1015ea0;
-extern void* g_6a9b9c;
+extern char* d2_LobbyLocalPlayerEntry;
+extern int* tp_d3_SceneState;
+extern void* d2_Controls;
+extern void* d2_NetLobbyForm;
 
 extern void* __cdecl d2_LoadForm(int, int, char*);
 extern void __cdecl d2_CenterDialogWindows(void*);
@@ -87,17 +87,17 @@ int __cdecl d2_RunNetLobbySetup(void)
 		add ecx, ebx
 		rep stosb
 	}
-	g_774a34 = (unsigned*)0;
+	lb_LobbyPlayerList = (unsigned*)0;
 	g_779c40 = -1;
-	g_779ce4 = (int*)d3_GetSceneState();
-	if (g_779ce4 == 0) {
+	tp_d3_SceneState = (int*)d3_GetSceneState();
+	if (tp_d3_SceneState == 0) {
 		h = (void*)d2_LoadForm(0, 0, (char*)0x68d714);
 		d2_CenterDialogWindows(h);
 		io_AppendText(0x87);
 		(*(int*)0x100f1dc) = -1;
 		do {
-			if (g_14ce8e0 != 0 || *(char*)0x14cf950 == 1) {
-				g_774654 = 1;
+			if (io_RightButtonReleased != 0 || *(char*)0x14cf950 == 1) {
+				d2_DialogCloseRequested = 1;
 				d2_DestroyForm(h);
 				return 0;
 			}
@@ -148,15 +148,15 @@ int __cdecl d2_RunNetLobbySetup(void)
 	while (cm_GetCommandStatus(d) == 0)
 		cm_StepCommandQueue();
 	d2_SetBackdropResource(0x7d6);
-	g_779cb8 = (char*)d3_GetLocalSceneEntry();
-	if (g_779cb8 == 0) {
+	d2_LobbyLocalPlayerEntry = (char*)d3_GetLocalSceneEntry();
+	if (d2_LobbyLocalPlayerEntry == 0) {
 		h = (void*)d2_LoadForm(0, 0, (char*)0x68d714);
 		d2_CenterDialogWindows(h);
 		io_AppendText(0x87);
 		(*(int*)0x100f1dc) = -1;
 		do {
-			if (g_14ce8e0 != 0 || *(char*)0x14cf950 == 1) {
-				g_774654 = 1;
+			if (io_RightButtonReleased != 0 || *(char*)0x14cf950 == 1) {
+				d2_DialogCloseRequested = 1;
 				d2_DestroyForm(h);
 				return 0;
 			}
@@ -165,23 +165,23 @@ int __cdecl d2_RunNetLobbySetup(void)
 		return 0;
 	}
 
-	g_6a9b9c = (void*)d2_LoadForm(0x3c, 0, (char*)0x6a9ba0);
-	d2_CenterDialogWindows(g_6a9b9c);
+	d2_NetLobbyForm = (void*)d2_LoadForm(0x3c, 0, (char*)0x6a9ba0);
+	d2_CenterDialogWindows(d2_NetLobbyForm);
 	d2_InitNetLobbyScrollbar();
 	d2_InitNetLobbyButtons();
 	d2_DrawCityCoatOfArms();
 	d3_FlushLoadAndPreloadQueue();
 	d2_DrawNetLobbyPlayerInfo();
 	d2_PopulateNetLobbyPlayerList();
-	fcn_004727a0(g_6a9b9c, 1);
-	h = (void*)d2_GetWindowListItem(g_6a9b9c, 0, 0);
+	fcn_004727a0(d2_NetLobbyForm, 1);
+	h = (void*)d2_GetWindowListItem(d2_NetLobbyForm, 0, 0);
 	d2_SetBildArgument(h, 0x40);
 	flag = 0;
 	d2_CreateGuiWindow(h, (char*)0x6b5c60);
-	*(int*)((char*)g_1015ea0 + (int)h * 0x2f4 + 0x18) = 0x26c;
-	*(int*)((char*)0x102d168 + *(int*)((char*)g_1015ea0 + (int)h * 0x2f4 + 0x88) * 0x220) |= 0x200;
-	*(int*)((char*)0x102d150 + *(int*)((char*)g_1015ea0 + (int)h * 0x2f4 + 0x88) * 0x220) = 0x26c;
-	*(int*)((char*)0x102d29c + *(int*)((char*)g_1015ea0 + (int)h * 0x2f4 + 0x88) * 0x220) = 0x26c;
+	*(int*)((char*)d2_Controls + (int)h * 0x2f4 + 0x18) = 0x26c;
+	*(int*)((char*)0x102d168 + *(int*)((char*)d2_Controls + (int)h * 0x2f4 + 0x88) * 0x220) |= 0x200;
+	*(int*)((char*)0x102d150 + *(int*)((char*)d2_Controls + (int)h * 0x2f4 + 0x88) * 0x220) = 0x26c;
+	*(int*)((char*)0x102d29c + *(int*)((char*)d2_Controls + (int)h * 0x2f4 + 0x88) * 0x220) = 0x26c;
 	(*(int*)0x100f1dc) = -1;
 
 	do {
@@ -208,11 +208,11 @@ int __cdecl d2_RunNetLobbySetup(void)
 
 		if (*(int*)0x14cbca0 == -1) {
 			ret = -1;
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 			goto next;
 		}
 		if (gm_AreAllMultiplayerReady()) {
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 			goto next;
 		}
 		if ((*(int*)0x100f1dc) != -1) {
@@ -221,25 +221,25 @@ int __cdecl d2_RunNetLobbySetup(void)
 				d = lb_RequestLeaveLobby();
 				while (cm_GetCommandStatus(d) == 0)
 					cm_StepCommandQueue();
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 				ret = -1;
 				goto last;
 			}
 			if (key == *(int*)0x6a9b90) {
-				d = lb_RequestToggleReady(*(int*)(g_779cb8 + 4) == 0);
+				d = lb_RequestToggleReady(*(int*)(d2_LobbyLocalPlayerEntry + 4) == 0);
 				while (cm_GetCommandStatus(d) == 0)
 					cm_StepCommandQueue();
-				*(int*)((char*)g_1015ea0 + *(int*)0x6a9b90 * 0x2f4 + 0x38) = *(int*)(g_779cb8 + 4);
+				*(int*)((char*)d2_Controls + *(int*)0x6a9b90 * 0x2f4 + 0x38) = *(int*)(d2_LobbyLocalPlayerEntry + 4);
 				if (gm_AreAllMultiplayerReady())
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 			} else if (key == *(int*)0x6a9b94) {
-				if (*(int*)(g_779cb8 + 4) != 0) {
+				if (*(int*)(d2_LobbyLocalPlayerEntry + 4) != 0) {
 					d = lb_RequestToggleReady(0);
 					while (cm_GetCommandStatus(d) == 0)
 						cm_StepCommandQueue();
-					*(int*)((char*)g_1015ea0 + *(int*)0x6a9b90 * 0x2f4 + 0x38) = *(int*)(g_779cb8 + 4);
+					*(int*)((char*)d2_Controls + *(int*)0x6a9b90 * 0x2f4 + 0x38) = *(int*)(d2_LobbyLocalPlayerEntry + 4);
 				}
-				if (*(int*)(g_779cb8 + 4) == 0 && d2_RunPlayerEditorDialog(0x24087, 1)) {
+				if (*(int*)(d2_LobbyLocalPlayerEntry + 4) == 0 && d2_RunPlayerEditorDialog(0x24087, 1)) {
 					strcpy((char*)0x779c72, (char*)0x7e23ea);
 					strcpy((char*)0x779c82, (char*)0x7e240a);
 					*(int*)0x779c6c = *(int*)0x7e23e4 - 0x59a;
@@ -258,22 +258,22 @@ int __cdecl d2_RunNetLobbySetup(void)
 			} else {
 				int i;
 				int sel = *(int*)0x779ce0;
-				for (i = 0; i < *g_774a34; i++) {
+				for (i = 0; i < *lb_LobbyPlayerList; i++) {
 					if (i != sel && key == ((int*)0x779cc0)[i])
 						break;
 				}
-				if (i < *g_774a34) {
+				if (i < *lb_LobbyPlayerList) {
 					int id = ((int*)0x779cc0)[i];
-					*(int*)((char*)g_1015ea0 + id * 0x2f4 + 0x38) = (*(int*)((char*)g_1015ea0 + id * 0x2f4 + 0x38) == 0);
-					if (*(int*)((char*)g_1015ea0 + id * 0x2f4 + 0x38) != 0)
-						g_779c40 = g_774a34[i + 1];
+					*(int*)((char*)d2_Controls + id * 0x2f4 + 0x38) = (*(int*)((char*)d2_Controls + id * 0x2f4 + 0x38) == 0);
+					if (*(int*)((char*)d2_Controls + id * 0x2f4 + 0x38) != 0)
+						g_779c40 = lb_LobbyPlayerList[i + 1];
 					else
 						g_779c40 = -1;
 					if (i >= 0) {
 						int k;
-						for (k = 0; k < *g_774a34; k++) {
+						for (k = 0; k < *lb_LobbyPlayerList; k++) {
 							if (i != k)
-								*(int*)((char*)g_1015ea0 + ((int*)0x779cc0)[k] * 0x2f4 + 0x38) = 0;
+								*(int*)((char*)d2_Controls + ((int*)0x779cc0)[k] * 0x2f4 + 0x38) = 0;
 						}
 					}
 				}
@@ -281,32 +281,32 @@ int __cdecl d2_RunNetLobbySetup(void)
 		}
 	next:
 		(*(int*)0x100f1dc) = -1;
-		if (g_779ce4[1] != 0) {
+		if (tp_d3_SceneState[1] != 0) {
 			if (gm_AreAllMultiplayerReady()) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			} else {
 				d = cm_RequestClearSceneEntries();
 				while (cm_GetCommandStatus(d) == 0)
 					cm_StepCommandQueue();
-				g_774a34 = (unsigned*)lb_GetPlayerList();
+				lb_LobbyPlayerList = (unsigned*)lb_GetPlayerList();
 				d2_DrawNetLobbyPlayerInfo();
 				d2_PopulateNetLobbyPlayerList();
 				d2_RefreshNetLobbyChatLog();
-				g_779ce4[1] = 0;
+				tp_d3_SceneState[1] = 0;
 			}
 		}
 	last:
 		;
 	} while (main_RunFrameLoop((void*)d2_RunNetLobbySetup, 0x24087) != 0);
 
-	d2_DestroyForm(g_6a9b9c);
+	d2_DestroyForm(d2_NetLobbyForm);
 	*(unsigned char*)0x7e23e2 = 0x12;
-	*(unsigned char*)0x7e23e3 = *(unsigned char*)(g_779cb8 + 0xb);
-	*(unsigned char*)0x7e23e8 = *(unsigned char*)(g_779cb8 + 0x10);
-	*(unsigned char*)0x7e23e9 = *(unsigned char*)(g_779cb8 + 0x11);
-	*(int*)0x7e23e4 = *(int*)(g_779cb8 + 0xc);
-	strcpy((char*)0x7e240a, (char*)(g_779cb8 + 0x22));
-	strcpy((char*)0x7e23ea, (char*)(g_779cb8 + 0x12));
+	*(unsigned char*)0x7e23e3 = *(unsigned char*)(d2_LobbyLocalPlayerEntry + 0xb);
+	*(unsigned char*)0x7e23e8 = *(unsigned char*)(d2_LobbyLocalPlayerEntry + 0x10);
+	*(unsigned char*)0x7e23e9 = *(unsigned char*)(d2_LobbyLocalPlayerEntry + 0x11);
+	*(int*)0x7e23e4 = *(int*)(d2_LobbyLocalPlayerEntry + 0xc);
+	strcpy((char*)0x7e240a, (char*)(d2_LobbyLocalPlayerEntry + 0x22));
+	strcpy((char*)0x7e23ea, (char*)(d2_LobbyLocalPlayerEntry + 0x12));
 	WritePrivateProfileStringA((char*)0x6a1e4c, (char*)0x6a1e54, (char*)0x7e23ea, (char*)0x7e22c0);
 	WritePrivateProfileStringA((char*)0x6a1e4c, (char*)0x6a1e3c, (char*)0x7e240a, (char*)0x7e22c0);
 	fcn_0064d41a(profileText, (char*)0x6a81d8, *(int*)0x7e23e4);

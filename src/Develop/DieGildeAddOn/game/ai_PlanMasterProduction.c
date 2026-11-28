@@ -1,7 +1,7 @@
 #include "production_goods.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/DieGildeAddOn/game/goods_plan.h"
-extern int g_100dc20;
+extern int ai_MeisterDebugState;
 extern int g_100dc3c;
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl ai_CollectBuildingGoodsPlan(int, int, int);
@@ -76,7 +76,7 @@ void __cdecl ai_PlanMasterProduction(int entityRecord)
 	ai_FlagWorkerTrainingNeeded(entityRecord);
 	ai_SendAction0x8f(entityRecord);
 	gm_UpdateWorkerArrival(entityRecord);
-	mode = (short) g_7f4c04;
+	mode = (short) gm_GameTimeHour;
 	if (mode == 8 || mode == 0xd) {
 		if ((*(unsigned int *) (entityRecord + 0x1b4) & 0x100) == 0) {
 			*(unsigned short *) (entityRecord + 0x1bc) = 0;
@@ -84,10 +84,10 @@ void __cdecl ai_PlanMasterProduction(int entityRecord)
 		} else if (*(unsigned short *) (entityRecord + 0x1bc) != 0) {
 			int n;
 
-			n = g_100b0ac;
+			n = ai_ProductionGoodsCount;
 			if (n > 0) {
 				for (i = 0; i < n; i++) {
-					sp = (void *) (i * 0x58 + (int) g_100d0c0);
+					sp = (void *) (i * 0x58 + (int) ai_ProductionGoodsPlans);
 					if (*(int *) sp == (int) *(unsigned short *) (entityRecord + 0x1bc)) {
 						if (*(int *) ((char *) sp + 0x40) >=
 							    (int) *(unsigned short *) (*(int *) sp * 0x41 + 0x36 + *(int *) 0x99ec10) &&
@@ -106,9 +106,9 @@ void __cdecl ai_PlanMasterProduction(int entityRecord)
 	} else {
 		int n;
 
-		n = g_100b0ac;
+		n = ai_ProductionGoodsCount;
 		for (i = 0; i < n; i++) {
-			sp = (void *) (i * 0x58 + (int) g_100d0c0);
+			sp = (void *) (i * 0x58 + (int) ai_ProductionGoodsPlans);
 			if (*(int *) sp == (int) *(unsigned short *) (entityRecord + 0x1bc)) {
 				if (*(int *) ((char *) sp + 0x40) >=
 					    (int) *(unsigned short *) (*(int *) sp * 0x41 + 0x36 + *(int *) 0x99ec10) &&
@@ -131,7 +131,7 @@ type6:
 		gate = hp_PickWeightedProdItem(*(int *) (entityRecord + 0x16c));
 		if (gate != 0) {
 			for (i = 0; i < 0x20; i++) {
-				sp = (void *) (i * 0x58 + (int) g_100d0c0);
+				sp = (void *) (i * 0x58 + (int) ai_ProductionGoodsPlans);
 				if (*(int *) sp == gate) {
 					int have;
 					int res;
@@ -183,69 +183,69 @@ shuffle:
 		order[i - 1] = order[r];
 		order[r] = j;
 	} while (i < 0x20);
-	for (i = 0; i < g_100b0ac; i++) {
+	for (i = 0; i < ai_ProductionGoodsCount; i++) {
 		int off;
 		int typ;
 		int have;
 		int res;
 
 		off = order[i] * 0x58;
-		if ((*(unsigned int *) (off + ((int) g_100d0c0 + 0x54)) & 0x400) != 0) {
+		if ((*(unsigned int *) (off + ((int) ai_ProductionGoodsPlans + 0x54)) & 0x400) != 0) {
 			continue;
 		}
-		typ = *(int *) (off + (int) g_100d0c0);
+		typ = *(int *) (off + (int) ai_ProductionGoodsPlans);
 		if ((*(char *) (typ * 0x41 + *(int *) 0x99ec10) == 0x17 ||
 		     *(char *) (typ * 0x41 + *(int *) 0x99ec10) == 0x25) &&
-		    *(int *) (off + ((int) g_100d0c0 + 0x3c)) < 5) {
+		    *(int *) (off + ((int) ai_ProductionGoodsPlans + 0x3c)) < 5) {
 			continue;
 		}
-		if ((int) *(unsigned char *) ((int) rec1 + 0x1c) >= *(int *) (off + ((int) g_100d0c0 + 0x1c)) &&
-		    (int) *(unsigned char *) ((int) rec1 + 0x1d) >= *(int *) (off + ((int) g_100d0c0 + 0x20)) &&
-		    *(int *) (off + ((int) g_100d0c0 + 0x40)) >=
+		if ((int) *(unsigned char *) ((int) rec1 + 0x1c) >= *(int *) (off + ((int) ai_ProductionGoodsPlans + 0x1c)) &&
+		    (int) *(unsigned char *) ((int) rec1 + 0x1d) >= *(int *) (off + ((int) ai_ProductionGoodsPlans + 0x20)) &&
+		    *(int *) (off + ((int) ai_ProductionGoodsPlans + 0x40)) >=
 			    (int) *(unsigned short *) (typ * 0x41 + 0x36 + *(int *) 0x99ec10) &&
 		    (res = gm_FindCityItemHolder(typ)) != 0) {
 			have = gm_eval_SlotVoll(res, typ, 1000000);
 			if ((int) *(unsigned short *) (typ * 0x41 + 0x36 + *(int *) 0x99ec10) +
-				    *(int *) (off + ((int) g_100d0c0 + 0x3c)) <= have &&
-			    ai_CanProduceGood(entityRecord, (void *) (off + (int) g_100d0c0), 1) != 0) {
-				*(unsigned int *) (off + ((int) g_100d0c0 + 0x54)) |= 8;
-				ai_PlanGoodIngredients(entityRecord, (void *) (off + (int) g_100d0c0));
-				*(unsigned short *) (entityRecord + 0x1bc) = *(unsigned short *) (off + (int) g_100d0c0);
+				    *(int *) (off + ((int) ai_ProductionGoodsPlans + 0x3c)) <= have &&
+			    ai_CanProduceGood(entityRecord, (void *) (off + (int) ai_ProductionGoodsPlans), 1) != 0) {
+				*(unsigned int *) (off + ((int) ai_ProductionGoodsPlans + 0x54)) |= 8;
+				ai_PlanGoodIngredients(entityRecord, (void *) (off + (int) ai_ProductionGoodsPlans));
+				*(unsigned short *) (entityRecord + 0x1bc) = *(unsigned short *) (off + (int) ai_ProductionGoodsPlans);
 				fcn_0064d41a(msg, "Produktion von %s starten",
-					*(int *) (off + (int) g_100d0c0) * 0x41 + 1 + *(int *) 0x99ec10);
+					*(int *) (off + (int) ai_ProductionGoodsPlans) * 0x41 + 1 + *(int *) 0x99ec10);
 				goto tail;
 			}
 		}
 	}
-	for (i = 0; i < g_100b0ac; i++) {
+	for (i = 0; i < ai_ProductionGoodsCount; i++) {
 		int off;
 		int typ;
 		int have;
 		int res;
 
 		off = order[i] * 0x58;
-		if ((*(unsigned int *) (off + ((int) g_100d0c0 + 0x54)) & 0x400) != 0) {
+		if ((*(unsigned int *) (off + ((int) ai_ProductionGoodsPlans + 0x54)) & 0x400) != 0) {
 			continue;
 		}
-		typ = *(int *) (off + (int) g_100d0c0);
+		typ = *(int *) (off + (int) ai_ProductionGoodsPlans);
 		if ((*(char *) (typ * 0x41 + *(int *) 0x99ec10) == 0x17 ||
 		     *(char *) (typ * 0x41 + *(int *) 0x99ec10) == 0x25) &&
-		    *(int *) (off + ((int) g_100d0c0 + 0x3c)) < 5) {
+		    *(int *) (off + ((int) ai_ProductionGoodsPlans + 0x3c)) < 5) {
 			continue;
 		}
-		if ((int) *(unsigned char *) ((int) rec1 + 0x1c) >= *(int *) (off + ((int) g_100d0c0 + 0x1c)) &&
-		    (int) *(unsigned char *) ((int) rec1 + 0x1d) >= *(int *) (off + ((int) g_100d0c0 + 0x20)) &&
-		    *(int *) (off + ((int) g_100d0c0 + 0x40)) >=
+		if ((int) *(unsigned char *) ((int) rec1 + 0x1c) >= *(int *) (off + ((int) ai_ProductionGoodsPlans + 0x1c)) &&
+		    (int) *(unsigned char *) ((int) rec1 + 0x1d) >= *(int *) (off + ((int) ai_ProductionGoodsPlans + 0x20)) &&
+		    *(int *) (off + ((int) ai_ProductionGoodsPlans + 0x40)) >=
 			    (int) *(unsigned short *) (typ * 0x41 + 0x36 + *(int *) 0x99ec10) &&
 		    (res = gm_FindCityItemHolder(typ)) != 0) {
 			have = gm_eval_SlotVoll(res, typ, 1000000);
 			if ((int) *(unsigned short *) (typ * 0x41 + 0x36 + *(int *) 0x99ec10) +
-				    *(int *) (off + ((int) g_100d0c0 + 0x3c)) <= have &&
-			    ai_CanProduceGood(entityRecord, (void *) (off + (int) g_100d0c0), 0) != 0) {
-				ai_PlanGoodIngredients(entityRecord, (void *) (off + (int) g_100d0c0));
-				*(unsigned short *) (entityRecord + 0x1bc) = *(unsigned short *) (off + (int) g_100d0c0);
+				    *(int *) (off + ((int) ai_ProductionGoodsPlans + 0x3c)) <= have &&
+			    ai_CanProduceGood(entityRecord, (void *) (off + (int) ai_ProductionGoodsPlans), 0) != 0) {
+				ai_PlanGoodIngredients(entityRecord, (void *) (off + (int) ai_ProductionGoodsPlans));
+				*(unsigned short *) (entityRecord + 0x1bc) = *(unsigned short *) (off + (int) ai_ProductionGoodsPlans);
 				fcn_0064d41a(msg, "Produktion von %s starten obwohl Rohstoffe fehlen",
-					*(int *) (off + (int) g_100d0c0) * 0x41 + 1 + *(int *) 0x99ec10);
+					*(int *) (off + (int) ai_ProductionGoodsPlans) * 0x41 + 1 + *(int *) 0x99ec10);
 				goto tail;
 			}
 		}
@@ -258,8 +258,8 @@ tail:
 		unsigned int *fl;
 		int n;
 
-		fl = (unsigned int *) ((int) g_100d0c0 + 0x54);
-		n = g_100b0ac;
+		fl = (unsigned int *) ((int) ai_ProductionGoodsPlans + 0x54);
+		n = ai_ProductionGoodsCount;
 		for (i = n; i > 0; i--) {
 			if ((*fl & 8) != 0) {
 				int *src;
@@ -278,10 +278,10 @@ tail:
 			}
 			fl += 0x16;
 		}
-		for (i = 0; i < g_100b0ac; i++) {
+		for (i = 0; i < ai_ProductionGoodsCount; i++) {
 			unsigned int *fl2;
 
-			fl2 = (unsigned int *) (i * 0x58 + ((int) g_100d0c0 + 0x54));
+			fl2 = (unsigned int *) (i * 0x58 + ((int) ai_ProductionGoodsPlans + 0x54));
 			if ((*fl2 & 0x400) != 0) {
 				*fl2 &= 0xfffffff7u;
 			}
@@ -296,17 +296,17 @@ tail:
 			if ((pp[0xe] & 0x400) != 0 && (pp[0xe] & 0x10) != 0 && *pp >= 0) {
 				unsigned int *fl;
 
-				fl = (unsigned int *) (*pp * 0x58 + ((int) g_100d0c0 + 0x54));
+				fl = (unsigned int *) (*pp * 0x58 + ((int) ai_ProductionGoodsPlans + 0x54));
 				*fl |= 0x10;
 			}
 			pp += 0x10;
 		}
 	}
-	if (g_100dc20 == *(int *) (entityRecord + 0x16c)) {
+	if (ai_MeisterDebugState == *(int *) (entityRecord + 0x16c)) {
 		int *pp;
 
-		pp = (int *) ((int) g_100d0c0 + 4);
-		for (i = 0; i < g_100b0ac && g_100dc38 < 4; i++) {
+		pp = (int *) ((int) ai_ProductionGoodsPlans + 4);
+		for (i = 0; i < ai_ProductionGoodsCount && g_100dc38 < 4; i++) {
 			int dst;
 			int *src;
 			int j;
@@ -322,7 +322,7 @@ tail:
 					int *s2;
 					int *d2;
 
-					s2 = (int *) ((char *) g_100b0c0 + id * 0x40);
+					s2 = (int *) ((char *) ai_ResourceRequests + id * 0x40);
 					d2 = (int *) ((*(int *) (g_100dc38 * 4 + 0x100dc40) +
 						       g_100dc38 * 4) * 0x40 + 0x100df20);
 					*(MEISTER_COPY_BLK64 *) d2 = *(MEISTER_COPY_BLK64 *) s2;
@@ -352,7 +352,7 @@ tail:
 		}
 		sp = (void *) ((char *) sp + 0x21c);
 	}
-	if (g_100dc20 == *(int *) (entityRecord + 0x16c)) {
+	if (ai_MeisterDebugState == *(int *) (entityRecord + 0x16c)) {
 		g_100dc34 = arg.cur;
 	}
 	ai_StartGrabpflege(entityRecord);
@@ -361,8 +361,8 @@ tail:
 		unsigned int *fl;
 		int n;
 
-		fl = (unsigned int *) ((int) g_100d0c0 + 0x54);
-		n = g_100b0ac;
+		fl = (unsigned int *) ((int) ai_ProductionGoodsPlans + 0x54);
+		n = ai_ProductionGoodsCount;
 		for (i = n; i > 0; i--) {
 			if ((*fl & 8) != 0) {
 				arg.k++;
@@ -386,18 +386,18 @@ tail:
 	arg.zero = 0;
 	arg.z2 = 0;
 	arg.z1 = 0;
-	for (i = 0; i < g_100b0ac; i++) {
+	for (i = 0; i < ai_ProductionGoodsCount; i++) {
 		unsigned int fv;
 		unsigned int *fl;
 
-		fl = (unsigned int *) (i * 0x58 + ((int) g_100d0c0 + 0x54));
+		fl = (unsigned int *) (i * 0x58 + ((int) ai_ProductionGoodsPlans + 0x54));
 		fv = *fl;
 		if ((fv & 0x10) == 0) {
 			if ((fv & 8) != 0) {
 				arg.kind = 4;
 				arg.entry = (void *) ((char *) fl - 0x54);
 				ai_DispatchMeisterAction(&arg);
-				if (g_100dc20 == *(int *) (entityRecord + 0x16c) && g_100dc3c < 4) {
+				if (ai_MeisterDebugState == *(int *) (entityRecord + 0x16c) && g_100dc3c < 4) {
 					int dst;
 
 					dst = g_100dc3c * 0x58 + 0x100ddc0;
@@ -409,7 +409,7 @@ tail:
 			arg.kind = 0x8c;
 			arg.entry = (void *) ((char *) fl - 0x54);
 			ai_DispatchMeisterAction(&arg);
-			if (g_100dc20 == *(int *) (entityRecord + 0x16c) && g_100dc3c < 4) {
+			if (ai_MeisterDebugState == *(int *) (entityRecord + 0x16c) && g_100dc3c < 4) {
 				int dst;
 
 				dst = g_100dc3c * 0x58 + 0x100ddc0;

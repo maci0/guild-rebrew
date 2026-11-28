@@ -2,9 +2,9 @@
 
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 
-extern char* g_6b5c20;
+extern char* tp_ch_ActionQueue;
 extern int d3_CurrentContextIndex;
-extern int g_6b7fdc;
+extern int vfs_RootDir;
 extern int ls_SaveVersion;
 extern char s_675504[];
 extern char s_6a24a8[];
@@ -119,7 +119,7 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 			}
 			sprintf(path, s_6a2490, name);
 			_strupr(path);
-			if (vfs_ResolvePath(path, (void*) g_6b7fdc, (void*) g_6b7fdc, text) == 0) {
+			if (vfs_ResolvePath(path, (void*) vfs_RootDir, (void*) vfs_RootDir, text) == 0) {
 				p = *(char**) (rec + 0x12c);
 				template_id = *(unsigned short*) p;
 				p[0x1f4] = 0;
@@ -207,7 +207,7 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 	} while ((int) list < 0x14d0c20);
 	d3_SelectSceneContext(total, 1);
 	{
-		*(unsigned int*) g_6b5c20 = 0;
+		*(unsigned int*) tp_ch_ActionQueue = 0;
 		n = 0;
 		if (ls_SaveVersion < 0x10044) {
 			count = 0x300;
@@ -218,7 +218,7 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 		}
 		i = 0;
 		do {
-			u = (unsigned int*) (g_6b5c20 + i);
+			u = (unsigned int*) (tp_ch_ActionQueue + i);
 			memset(u, 0, 0x194);
 			if (!ls_ReadVfsDataChecked(&t, 1, 1, (void*) stream)) {
 				return 0;
@@ -254,7 +254,7 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 	}
 	i = 0;
 	do {
-		rec = (char*) ((char*) g_6b5c20 + i);
+		rec = (char*) ((char*) tp_ch_ActionQueue + i);
 		u = (unsigned int*) rec;
 		type = *(unsigned char*) (rec + 9);
 		if (type == 0) {
@@ -308,11 +308,11 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 			u[10] = 0;
 			n = 0;
 			do {
-				if (*(unsigned int*) (g_6b5c20 + n + 0x28) == (unsigned int) u) {
-					*(unsigned int*) (g_6b5c20 + n + 0x28) = 0;
+				if (*(unsigned int*) (tp_ch_ActionQueue + n + 0x28) == (unsigned int) u) {
+					*(unsigned int*) (tp_ch_ActionQueue + n + 0x28) = 0;
 				}
-				if (*(unsigned int*) (g_6b5c20 + n + 0x24) == (unsigned int) u) {
-					*(unsigned int*) (g_6b5c20 + n + 0x24) = 0;
+				if (*(unsigned int*) (tp_ch_ActionQueue + n + 0x24) == (unsigned int) u) {
+					*(unsigned int*) (tp_ch_ActionQueue + n + 0x24) = 0;
 				}
 				n += 0x194;
 			} while (n < 0xc5440);

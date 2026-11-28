@@ -2,7 +2,7 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern double g_6660d8;
 extern double g_664ee8;
 extern double g_6629a0;
@@ -66,7 +66,7 @@ int __cdecl d2_RunDivorceAction(char* p)
 		cm_AppendCommandSyncField(2, 1, 0x50, &s.sel);
 		cm_RequestChangeAttribute();
 		m = (int) (w * g_664ee8);
-		x = cm_RequestMoveCredits(*(int*) (obj + 4), *(int*) (p + 4), g_773d75, m);
+		x = cm_RequestMoveCredits(*(int*) (obj + 4), *(int*) (p + 4), gm_ActiveTownIndex, m);
 		while (cm_GetCommandStatus(x) == 0) {
 			cm_StepCommandQueue();
 		}
@@ -83,11 +83,11 @@ int __cdecl d2_RunDivorceAction(char* p)
 	x = io_AppendText(0x1d8f, base + *(unsigned char*) (p + 0xd), 8, s.n - (int) (w * g_6629a0), *(unsigned short*) obj, *(unsigned short*) obj);
 	d2_GetWindowListItem(dlg, 1, x);
 	d2_GetWindowListItem(dlg, 1, x + 1);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	for (;;) {
-		if (g_100f1dc != -1) {
-			if (g_100f1dc == 2) {
-				if (d2_CheckActionBlocker(p, 8) == 0 || gm_CheckEntityStock(p, s.n, g_773d75) == 0) {
+		if (d2_DialogButtonAction != -1) {
+			if (d2_DialogButtonAction == 2) {
+				if (d2_CheckActionBlocker(p, 8) == 0 || gm_CheckEntityStock(p, s.n, gm_ActiveTownIndex) == 0) {
 					goto tail;
 				}
 				cm_RequestModifyHealth(*(int*) (p + 4), -8);
@@ -104,22 +104,22 @@ int __cdecl d2_RunDivorceAction(char* p)
 				while (cm_GetCommandStatus(x) == 0) {
 					cm_StepCommandQueue();
 				}
-				x = cm_RequestMoveCredits(*(int*) (obj + 4), *(int*) (p + 4), g_773d75, s.n);
+				x = cm_RequestMoveCredits(*(int*) (obj + 4), *(int*) (p + 4), gm_ActiveTownIndex, s.n);
 				while (cm_GetCommandStatus(x) == 0) {
 					cm_StepCommandQueue();
 				}
-				io_AppendText((int) g_6811b0);
+				io_AppendText((int) str_dollar_C);
 				io_AppendText(0x1d90);
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 				s.mode = 0x81;
-			} else if (g_100f1dc == 1) {
-				g_774654 = 1;
+			} else if (d2_DialogButtonAction == 1) {
+				d2_DialogCloseRequested = 1;
 				s.mode = 2;
 			}
 		}
 tail:
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 			s.mode = 2;
 		}
 		if (main_RunFrameLoop(d2_RunDivorceAction, 0x657c7) == 0) {

@@ -19,10 +19,10 @@ int __cdecl hst_ResetHistoryGroup(unsigned short g)
 
 	if (g >= 4)
 		return 0;
-	((HST_GROUP_SLOT*)g_1007bc0)[g].a = 1;
+	((HST_GROUP_SLOT*)hst_HistoryGroups)[g].a = 1;
 	for (i = 0; i < 4; i++) {
-		((HST_GROUP_SLOT*)g_1007bc0)[g].e[i].id = -1;
-		((HST_GROUP_SLOT*)g_1007bc0)[g].e[i].b = 0xffff;
+		((HST_GROUP_SLOT*)hst_HistoryGroups)[g].e[i].id = -1;
+		((HST_GROUP_SLOT*)hst_HistoryGroups)[g].e[i].b = 0xffff;
 	}
 	return 1;
 }

@@ -18,7 +18,7 @@ typedef struct Deal {
 	int x54;
 } Deal;
 
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern unsigned char g_772628[];
 
 double __cdecl log10(double x);
@@ -47,13 +47,13 @@ int __cdecl gm_ResolveWirtshausOffer(unsigned char* e, Deal* o, int kind)
 	o->price = 0;
 	k = gm_PickWirtshausGuest(kind);
 	o->x54 = 0;
-	pr = gm_AmountToUnits(gm_WalkEntityChain(*(unsigned short*) e), g_773d75);
+	pr = gm_AmountToUnits(gm_WalkEntityChain(*(unsigned short*) e), gm_ActiveTownIndex);
 	x = pr;
 	if (10000.0 > x) {
 		x = 10000.0;
 	}
 	x = x / (log10(x) + 1.0) * 0.1f;
-	o->price = gm_ConvertUnitsToAmount((int) (x * (kind * 0.25f)), g_773d75);
+	o->price = gm_ConvertUnitsToAmount((int) (x * (kind * 0.25f)), gm_ActiveTownIndex);
 	o->tax = (int) (o->price * 0.1f);
 	o->x28 = 0;
 	o->x2c = 0;

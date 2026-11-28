@@ -1,5 +1,5 @@
 #include <stdlib.h>
-extern int g_67a370;
+extern int d3_ActiveScene;
 float __cdecl gm_ScorePositionBalance(char* self, int x, int z, float range);
 
 /* ADDRESS: GOLDTL 0x004d31d0 */
@@ -18,7 +18,7 @@ int __cdecl gm_FindBestBalancedTile(char* self, int centerColumn, int centerRow,
 	int lo;
 	int hi; int row_hi;
 
-	map = *(char**) (((char*) g_67a370) + 0xb0);
+	map = *(char**) (((char*) d3_ActiveScene) + 0xb0);
 	i = 0;
 	best = 1e9f;
 	if (searchRadius > 0) {

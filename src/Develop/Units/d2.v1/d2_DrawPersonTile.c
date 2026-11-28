@@ -40,9 +40,9 @@ typedef struct
 	int f30;
 } D2_PERSON_TILE_SEL;
 
-extern char* g_772500;
+extern char* d2_FileObjTable;
 extern int d2_CurrentWindowId;
-extern char* g_1015ea0;
+extern char* d2_Controls;
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
@@ -58,37 +58,37 @@ int __cdecl d2_DrawPersonTile(int x, int y, int win, D2_PERSON_TILE_SEL* selecti
 	int cx;
 	int b;
 
-	cx = x + ((D2_TILE_SPRITE_DEF*)g_772500)[1498].w / 2;
+	cx = x + ((D2_TILE_SPRITE_DEF*)d2_FileObjTable)[1498].w / 2;
 	selection->tile = d2_AddElementToWindow(x, y, 0x5da, d2_CurrentWindowId);
 	selection->bar = -1;
 	if (selection->e != 0) {
-		selection->icon = d2_AddElementToWindow(cx - ((D2_TILE_SPRITE_DEF*)g_772500)[*(int*) (selection->e + 0x18c)].w / 2 - 3, y + 1, *(int*) (selection->e + 0x18c), d2_CurrentWindowId);
+		selection->icon = d2_AddElementToWindow(cx - ((D2_TILE_SPRITE_DEF*)d2_FileObjTable)[*(int*) (selection->e + 0x18c)].w / 2 - 3, y + 1, *(int*) (selection->e + 0x18c), d2_CurrentWindowId);
 		d2_AddElementToWindow(x + 3, y + 3, selection->f1c, d2_CurrentWindowId);
 		if (selection->f20 != 0)
-			d2_AddElementToWindow(x + 3, ((D2_TILE_SPRITE_DEF*)g_772500)[1498].h + y - 0x13, selection->f20, d2_CurrentWindowId);
+			d2_AddElementToWindow(x + 3, ((D2_TILE_SPRITE_DEF*)d2_FileObjTable)[1498].h + y - 0x13, selection->f20, d2_CurrentWindowId);
 		if (selection->f24 != 0)
-			d2_AddElementToWindow(((D2_TILE_SPRITE_DEF*)g_772500)[1498].w + x - 0x10, y + 3, selection->f24, d2_CurrentWindowId);
-		d2_AddElementToWindow(((D2_TILE_SPRITE_DEF*)g_772500)[1498].w + x - 0x10, ((D2_TILE_SPRITE_DEF*)g_772500)[1498].h + y - 0x13, selection->f28, d2_CurrentWindowId);
+			d2_AddElementToWindow(((D2_TILE_SPRITE_DEF*)d2_FileObjTable)[1498].w + x - 0x10, y + 3, selection->f24, d2_CurrentWindowId);
+		d2_AddElementToWindow(((D2_TILE_SPRITE_DEF*)d2_FileObjTable)[1498].w + x - 0x10, ((D2_TILE_SPRITE_DEF*)d2_FileObjTable)[1498].h + y - 0x13, selection->f28, d2_CurrentWindowId);
 		if (selection->e[2] != 6) {
-			b = d2_AddWindowValueGauge(cx - 0x23, ((D2_TILE_SPRITE_DEF*)g_772500)[1498].h + y + 2, 0x40, 0, 0x64, 0x75, 0x442, d2_CurrentWindowId);
+			b = d2_AddWindowValueGauge(cx - 0x23, ((D2_TILE_SPRITE_DEF*)d2_FileObjTable)[1498].h + y + 2, 0x40, 0, 0x64, 0x75, 0x442, d2_CurrentWindowId);
 			selection->bar = b;
 			if (selection->e[2] == 7)
 				d2_SetElementValue(b, 0, 0x64, 0, 1);
 			else
-				d2_SetElementValue(selection->bar, 0, 0x64, (int) gm_CalcEntityFavor(g_774970, *(unsigned short*) selection->e, 1));
+				d2_SetElementValue(selection->bar, 0, 0x64, (int) gm_CalcEntityFavor(gm_LocalPlayerSlot, *(unsigned short*) selection->e, 1));
 			d2_SetElementEnabled(selection->bar, 0);
 		}
-		if (*(int*) (selection->e + 0x210) == ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id)
-			d2_AddElementToWindow(((D2_TILE_SPRITE_DEF*)g_772500)[1498].w + x, y, 0x6d3, d2_CurrentWindowId);
+		if (*(int*) (selection->e + 0x210) == ((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id)
+			d2_AddElementToWindow(((D2_TILE_SPRITE_DEF*)d2_FileObjTable)[1498].w + x, y, 0x6d3, d2_CurrentWindowId);
 		if (selection->f30 != 0) {
-			((D2_CONTROL_TL*) g_1015ea0)[selection->tile].value_05c = 1;
-			((D2_CONTROL_TL*) g_1015ea0)[selection->tile].flags_1d0 = 3;
-			((D2_CONTROL_TL*) g_1015ea0)[selection->tile].associated_object = selection->e;
+			((D2_CONTROL_TL*) d2_Controls)[selection->tile].value_05c = 1;
+			((D2_CONTROL_TL*) d2_Controls)[selection->tile].flags_1d0 = 3;
+			((D2_CONTROL_TL*) d2_Controls)[selection->tile].associated_object = selection->e;
 		}
 		if (selection->e[2] == 5 || selection->e[2] == 6 || selection->e[2] == 7)
 			d2_AddElementToWindow(x - 0x20, y, *(int*) (selection->e + 0x54), d2_CurrentWindowId);
 	} else {
-		d2_AddElementToWindow(cx - ((D2_TILE_SPRITE_DEF*)g_772500)[1275].w / 2 - 3, y + 1, 0x4fb, d2_CurrentWindowId);
+		d2_AddElementToWindow(cx - ((D2_TILE_SPRITE_DEF*)d2_FileObjTable)[1275].w / 2 - 3, y + 1, 0x4fb, d2_CurrentWindowId);
 	}
 	return 0;
 }

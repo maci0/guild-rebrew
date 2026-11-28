@@ -203,7 +203,7 @@ typedef struct {
 } VECTOR3;
 
 /* Three-float view; complete allocation and storage owner remain unresolved. */
-extern VECTOR3 g_67bbdc;
+extern VECTOR3 d3_SceneAmbientColor;
 
 /* g_68da68, g_9a9220 */
 typedef struct {

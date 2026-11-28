@@ -7,10 +7,10 @@ typedef struct Ent {
 } Ent;
 // SIZE 0x21c
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern unsigned int g_14cbcb4;
-extern unsigned char g_6a375c;
+extern unsigned int nt_LocalShardIndex;
+extern unsigned char gm_PlayerCount;
 
 /* ADDRESS: GOLDTL 0x0047dcf0 */
 int __cdecl gm_IsEntityHomeInLocalShard(char* e)
@@ -24,9 +24,9 @@ int __cdecl gm_IsEntityHomeInLocalShard(char* e)
 	o = e;
 	p = *(char**) (e + 0x16c);
 	if (p && *(unsigned short*) (p + 0x27) != 0xffff) {
-		o = (char*) &((Ent*)g_7f4ca0)[*(unsigned short*) (p + 0x27)];
+		o = (char*) &((Ent*)gm_EntitySlotTable)[*(unsigned short*) (p + 0x27)];
 	}
-	if (g_14cbca0 != -1 && *(unsigned int*) (o + 4) % g_6a375c != g_14cbcb4) {
+	if (nt_ClientSocket != -1 && *(unsigned int*) (o + 4) % gm_PlayerCount != nt_LocalShardIndex) {
 		return 0;
 	}
 	return 1;

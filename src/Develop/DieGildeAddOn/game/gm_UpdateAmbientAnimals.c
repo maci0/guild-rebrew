@@ -11,8 +11,8 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char gm_GameTime[];
-extern unsigned char g_776664;
-extern volatile unsigned int g_6b7fac;
+extern unsigned char d3_GfxDetails;
+extern volatile unsigned int gm_GameTicks;
 extern unsigned int g_7728f0;
 extern int g_7728e4;
 extern AMBIENT_ANIMAL_SLOT* g_7728e8;
@@ -47,12 +47,12 @@ void __cdecl gm_UpdateAmbientAnimals(void)
 	saved = d3_CurrentContextIndex;
 	r = gm_GetSeason(gm_GameTime);
 	d3_SelectSceneContext(0, 1);
-	if (g_776664 == 0) {
+	if (d3_GfxDetails == 0) {
 		lim = 0;
 	} else {
-		lim = g_776664 == 1 ? 0x10 : 0x20;
+		lim = d3_GfxDetails == 1 ? 0x10 : 0x20;
 	}
-	if (g_6b7fac > g_7728f0 + 0x15e) {
+	if (gm_GameTicks > g_7728f0 + 0x15e) {
 		if ((int) gm_RandomMod(lim * 2) - lim > g_7728e4 && r != 3) {
 			s = gm_AllocAmbientAnimalSlot();
 			if (s != 0) {
@@ -78,7 +78,7 @@ void __cdecl gm_UpdateAmbientAnimals(void)
 				}
 			}
 		}
-		g_7728f0 = g_6b7fac;
+		g_7728f0 = gm_GameTicks;
 	}
 	s = &g_7728e8[g_7728ec];
 	if (s->objekt != 0) {
@@ -101,8 +101,8 @@ void __cdecl gm_UpdateAmbientAnimals(void)
 		if (r == 3) {
 			g_7728e8[g_7728ec].done = 1;
 		}
-		if (g_6b7fac > g_7728e8[g_7728ec].created_tick + 0x834 &&
-		    gm_RandomFloat01() > (g_7728e8[g_7728ec].created_tick + 0x834) / (g_6b7fac - (g_7728e8[g_7728ec].created_tick + 0x834))) {
+		if (gm_GameTicks > g_7728e8[g_7728ec].created_tick + 0x834 &&
+		    gm_RandomFloat01() > (g_7728e8[g_7728ec].created_tick + 0x834) / (gm_GameTicks - (g_7728e8[g_7728ec].created_tick + 0x834))) {
 			g_7728e8[g_7728ec].done = 1;
 		}
 		s = &g_7728e8[g_7728ec];

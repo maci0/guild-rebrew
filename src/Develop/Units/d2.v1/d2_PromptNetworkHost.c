@@ -7,9 +7,9 @@
 extern char g_7e22c0[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_6a3a34[];
-extern char g_14cf950;
+extern char io_LastKeyScancode;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
@@ -41,15 +41,15 @@ int __cdecl d2_PromptNetworkHost(void)
 	d2_SetForm(h, 1);
 	ok = d2_GetWindowListItem(h, 1, io_AppendText(0x1cb0));
 	while (main_RunFrameLoop(d2_PromptNetworkHost, 0x24087) != 0) {
-		if (g_14ce8e0 != 0 || g_14cf950 == 1) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0 || io_LastKeyScancode == 1) {
+			d2_DialogCloseRequested = 1;
 		}
-		if ((g_100f1dc != -1 || g_14cf950 == 0x1c) && (d2_CurrentElementId == ok || g_14cf950 == 0x1c)) {
+		if ((d2_DialogButtonAction != -1 || io_LastKeyScancode == 0x1c) && (d2_CurrentElementId == ok || io_LastKeyScancode == 0x1c)) {
 			result = 1;
 			strcpy(buf, d2_GetControlValue(e));
 			strcpy(g_7e2000, buf);
 			WritePrivateProfileStringA("Network", "Host", buf, g_7e22c0);
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 		}
 	}
 	d2_DestroyForm(h);

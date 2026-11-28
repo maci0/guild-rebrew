@@ -13,12 +13,12 @@ typedef struct {
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 extern int lpGebaeudePROT;
 extern int gm_GameTime;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
-extern char g_7f4ca0[];
-extern char g_7f4ca2[];
-extern unsigned char g_773d75;
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
+extern char gm_EntitySlotTable[];
+extern char gm_SlotTableKindView[];
+extern unsigned char gm_ActiveTownIndex;
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl gm_GetEntityMood(unsigned char* e);
 int __cdecl gm_CalculateGebaeudeValue(int, int);
@@ -58,7 +58,7 @@ void __cdecl ai_BuyStallGoods(char* actor)
 	if (*(unsigned char*) (actor + 0x1c8) & 8) {
 		return;
 	}
-	if ((short) g_7f4c04 != 7 && (short) g_7f4c04 != 0xc && (short) g_7f4c04 != 0x12) {
+	if ((short) gm_GameTimeHour != 7 && (short) gm_GameTimeHour != 0xc && (short) gm_GameTimeHour != 0x12) {
 		*(int*) (actor + 0x1b4) &= ~0x400;
 		return;
 	}
@@ -67,7 +67,7 @@ void __cdecl ai_BuyStallGoods(char* actor)
 	}
 	p = (char*) *(int*) (actor + 0x16c);
 	*(int*) (actor + 0x1b4) |= 0x400;
-	kind = (char)((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (p + 0x27)].entity_state;
+	kind = (char)((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (p + 0x27)].entity_state;
 	if (kind != 6 && kind != 7) {
 		return;
 	}
@@ -92,12 +92,12 @@ void __cdecl ai_BuyStallGoods(char* actor)
 			p = *(char**)(actor + 0x16c);
 			cm_RequestMoveCredits(-1,
 						 ((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*) (p + 0x27)].entity_id,
-						 (char) g_773d75,
+						 (char) gm_ActiveTownIndex,
 						 (int) amountf);
 			cm_SendCopyEntityData(pkt1);
 			cm_SendTraceEnd(g_67e330);
 			p = *(char**)(actor + 0x16c);
-			other = gm_GetEntityTableEntry(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (p + 0x27)]));
+			other = gm_GetEntityTableEntry(((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (p + 0x27)]));
 			if (other != 0) {
 				*(int*) (other + 0x44) = (int) ((float) *(int*) (other + 0x44) + amountf);
 			}
@@ -173,14 +173,14 @@ have:
 			*(int*) (pkt2 + 8) = ((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*) (building + 0x25)].entity_id;
 			*(int*) (pkt2 + 0xc) = *(int*) (building + 1);
 			*(int*) (pkt2 + 0x28) = gm_GameTime;
-			*(int*) (pkt2 + 0x2c) = g_7f4c04;
-			*(int*) (pkt2 + 0x30) = g_7f4c08;
-			*(unsigned short*) (pkt2 + 0x34) = g_7f4c0c;
+			*(int*) (pkt2 + 0x2c) = gm_GameTimeHour;
+			*(int*) (pkt2 + 0x30) = gm_GameTimeSliceDword;
+			*(unsigned short*) (pkt2 + 0x34) = gm_GameTimeTailWord;
 			pkt2[0x36] = 1;
 			*(unsigned short*) (pkt2 + 0x58) = (unsigned short) found;
 			*(int*) (pkt2 + 0x5c) = *(int*) (p + 2);
 			*(int*) (pkt2 + 0x64) = 1;
-			other = gm_GetEntityTableEntry(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (building + 0x25)]));
+			other = gm_GetEntityTableEntry(((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (building + 0x25)]));
 			if (other != 0) {
 				*(int*) (other + 0x40) = *(int*) (other + 0x40) + amount;
 			}
@@ -188,7 +188,7 @@ have:
 			building = *(char**)(actor + 0x16c);
 			cm_RequestMoveCredits(-1,
 						 ((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*) (building + 0x25)].entity_id,
-						 (char) g_773d75,
+						 (char) gm_ActiveTownIndex,
 						 amount);
 			cm_SendCopyEntityData(pkt2);
 			cm_SendTraceEnd((char*) 0x67e31c);

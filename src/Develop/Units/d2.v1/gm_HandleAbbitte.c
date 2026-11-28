@@ -1,7 +1,7 @@
 
 
 
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
@@ -52,9 +52,9 @@ int __cdecl gm_HandleAbbitte(char* e, char* o)
 		cancel = d2_GetWindowListItem(dlg, 1, id + 2);
 		sl = d2_GetWindowListItem(dlg, 1, id);
 		d2_SetElementValue(sl, 1, 9, 1);
-		g_100f1dc = -1;
+		d2_DialogButtonAction = -1;
 		do {
-			if (g_100f1dc != -1) {
+			if (d2_DialogButtonAction != -1) {
 				if (d2_CurrentElementId == ok) {
 					v = d2_GetControlValue(sl);
 					if (d2_CheckActionBlocker(e, v) != 0) {
@@ -62,14 +62,14 @@ int __cdecl gm_HandleAbbitte(char* e, char* o)
 						io_FormatTextBuffer(buf, 0x1deb, gs_ClearTargetStraftaten(*(int*) (e + 4), v));
 						d2_ShowModalMessageBox(buf, 0);
 						r = 1;
-						g_774654 = 1;
+						d2_DialogCloseRequested = 1;
 					}
 				} else if (d2_CurrentElementId == cancel) {
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				}
 			}
-			if (g_14ce8e0 != 0) {
-				g_774654 = 1;
+			if (io_RightButtonReleased != 0) {
+				d2_DialogCloseRequested = 1;
 			}
 		} while (main_RunFrameLoop((void*) gm_HandleAbbitte, 0x657c7) != 0);
 		d2_DestroyForm(dlg);

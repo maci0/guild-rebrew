@@ -1,5 +1,5 @@
-char g_68d6bc[] = "cut_getrandseed: %i";
-extern char g_68d6bc[];
+char str_cut_getrandseed_i[] = "cut_getrandseed: %i";
+extern char str_cut_getrandseed_i[];
 extern unsigned int cut_RandomSeed;
 extern unsigned int cut_RandomSeed;
 /* fcn_004e6c80 — format a message with the current global string. */
@@ -12,7 +12,7 @@ char* __cdecl cut_GetRandSeed(void)
 {
 	char buf[0x40];
 
-	fcn_0064d41a(buf, g_68d6bc, cut_RandomSeed);
+	fcn_0064d41a(buf, str_cut_getrandseed_i, cut_RandomSeed);
 	return (char*) cut_RandomSeed;
 }
 unsigned char _dpad_68d6bc[436] = {

@@ -15,7 +15,7 @@ void __cdecl d2_RenderPlayerDiceIcons(int text, unsigned char* player)
 	int y;
 
 	d2_ClearWindowChildren(d2_CurrentWindowId, 1);
-	io_AppendText(g_6a9694, text);
+	io_AppendText(str_CZ_s, text);
 	i = 0;
 	x = 0x1c;
 	if (*(char*) (*(int*) player + 2) == 6) {

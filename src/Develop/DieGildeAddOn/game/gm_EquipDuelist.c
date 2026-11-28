@@ -1,7 +1,7 @@
 
 
 extern char* g_773db4[];
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 #include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 
 int __cdecl gm_FindFirstFreeDuelistSlot(int* a);
@@ -26,40 +26,40 @@ void __cdecl gm_EquipDuelist(char* obj, unsigned char mode)
 		i = gm_FindFirstFreeDuelistSlot((int*) (obj + 0x80));
 		*(int*) (obj + 0x80 + i * 4) = *(int*) (g_773db4[i] + 4);
 		gm_RemoveSpecialTableItems(g_773db4[i]);
-		cm_SendSellObjekt(*(int*) (g_773db4[i] + 4), -1, 0x156, 1, (*(char*)&g_773d75), 0);
+		cm_SendSellObjekt(*(int*) (g_773db4[i] + 4), -1, 0x156, 1, (*(char*)&gm_ActiveTownIndex), 0);
 		gm_ApplyEntityHealthDelta(*(unsigned short*) g_773db4[i], -*(int*) (g_773db4[i] + 0x24));
 		v = 0xa8;
 		cm_BeginPacketFieldDelta(g_773db4[i], *(int*) (g_773db4[i] + 4));
-		cm_AppendPacketFieldDelta(1, 1, (unsigned short) (g_773db4[i] - g_aed32c + 0x83), &v);
+		cm_AppendPacketFieldDelta(1, 1, (unsigned short) (g_773db4[i] - cm_PacketDeltaBase + 0x83), &v);
 		cm_RequestChangeAttribute();
 		i = gm_FindFirstFreeDuelistSlot((int*) (obj + 0x80));
 		*(int*) (obj + 0x80 + i * 4) = *(int*) (g_773db4[i] + 4);
 		gm_RemoveSpecialTableItems(g_773db4[i]);
-		cm_SendSellObjekt(*(int*) (g_773db4[i] + 4), -1, 0x156, 1, (*(char*)&g_773d75), 0);
+		cm_SendSellObjekt(*(int*) (g_773db4[i] + 4), -1, 0x156, 1, (*(char*)&gm_ActiveTownIndex), 0);
 		gm_ApplyEntityHealthDelta(*(unsigned short*) g_773db4[i], -*(int*) (g_773db4[i] + 0x24));
 		v = 0xa8;
 		cm_BeginPacketFieldDelta(g_773db4[i], *(int*) (g_773db4[i] + 4));
-		cm_AppendPacketFieldDelta(1, 1, (unsigned short) (g_773db4[i] - g_aed32c + 0x83), &v);
+		cm_AppendPacketFieldDelta(1, 1, (unsigned short) (g_773db4[i] - cm_PacketDeltaBase + 0x83), &v);
 		cm_RequestChangeAttribute();
 	}
 	else if (mode == 2 || mode == 3) {
 		i = gm_FindFirstFreeDuelistSlot((int*) (obj + 0x80));
 		*(int*) (obj + 0x80 + i * 4) = *(int*) (g_773db4[i] + 4);
 		gm_RemoveSpecialTableItems(g_773db4[i]);
-		cm_SendSellObjekt(*(int*) (g_773db4[i] + 4), -1, 0x158, 1, (*(char*)&g_773d75), 0);
+		cm_SendSellObjekt(*(int*) (g_773db4[i] + 4), -1, 0x158, 1, (*(char*)&gm_ActiveTownIndex), 0);
 		gm_ApplyEntityHealthDelta(*(unsigned short*) g_773db4[i], -*(int*) (g_773db4[i] + 0x24));
 		v = 0xd2;
 		cm_BeginPacketFieldDelta(g_773db4[i], *(int*) (g_773db4[i] + 4));
-		cm_AppendPacketFieldDelta(1, 1, (unsigned short) (g_773db4[i] - g_aed32c + 0x83), &v);
+		cm_AppendPacketFieldDelta(1, 1, (unsigned short) (g_773db4[i] - cm_PacketDeltaBase + 0x83), &v);
 		cm_RequestChangeAttribute();
 		i = gm_FindFirstFreeDuelistSlot((int*) (obj + 0x80));
 		*(int*) (obj + 0x80 + i * 4) = *(int*) (g_773db4[i] + 4);
 		gm_RemoveSpecialTableItems(g_773db4[i]);
-		cm_SendSellObjekt(*(int*) (g_773db4[i] + 4), -1, 0x160, 1, (*(char*)&g_773d75), 0);
+		cm_SendSellObjekt(*(int*) (g_773db4[i] + 4), -1, 0x160, 1, (*(char*)&gm_ActiveTownIndex), 0);
 		gm_ApplyEntityHealthDelta(*(unsigned short*) g_773db4[i], -*(int*) (g_773db4[i] + 0x24));
 		v = 0xd2;
 		cm_BeginPacketFieldDelta(g_773db4[i], *(int*) (g_773db4[i] + 4));
-		cm_AppendPacketFieldDelta(1, 1, (unsigned short) (g_773db4[i] - g_aed32c + 0x83), &v);
+		cm_AppendPacketFieldDelta(1, 1, (unsigned short) (g_773db4[i] - cm_PacketDeltaBase + 0x83), &v);
 		cm_RequestChangeAttribute();
 	}
 }

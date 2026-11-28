@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern char* g_772524;
+extern char* d2_CurrentFontBank;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_1040494;
 extern int g_67d384;
@@ -24,22 +24,22 @@ void __cdecl d2_DrawDefaultFontText(int x, int y, int surf, char* text, unsigned
 	char* g;
 
 	x0 = x;
-	if (g_772524 == 0) {
-		g_772524 = d2_GetResourceData(d2_FindResourceByName(s_67d474));
+	if (d2_CurrentFontBank == 0) {
+		d2_CurrentFontBank = d2_GetResourceData(d2_FindResourceByName(s_67d474));
 	}
-	d2_FontHeight = *(unsigned short*) (g_772524 + 8);
+	d2_FontHeight = *(unsigned short*) (d2_CurrentFontBank + 8);
 	for (i = 0; i < (int) strlen(text); i++) {
 		c = text[i];
-		g = d2_GetBankEntry(g_772524, c);
+		g = d2_GetBankEntry(d2_CurrentFontBank, c);
 		x -= *(unsigned short*) (g + 0x11);
 		if (c != '~') {
 			if (c != ' ') {
 				if (flags & 2) {
-					d2_DrawHighlightSprite(x, y, surf, g_772524, c);
+					d2_DrawHighlightSprite(x, y, surf, d2_CurrentFontBank, c);
 				} else if (flags & 1) {
-					d2_DrawDimmedSpriteFrame(x, y, surf, g_772524, c);
+					d2_DrawDimmedSpriteFrame(x, y, surf, d2_CurrentFontBank, c);
 				} else {
-					d2_DrawSpriteFromSet(x, y, surf, g_772524, c);
+					d2_DrawSpriteFromSet(x, y, surf, d2_CurrentFontBank, c);
 				}
 				x += *(unsigned short*) (g + 0x15) + g_67d384;
 			} else {

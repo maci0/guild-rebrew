@@ -24,7 +24,8 @@ int __cdecl gm_CheckDomizilActionState(ENTITY_RECORD* entity, int* out)
 	if (g_67e964 < (*(int*)&gm_GameTime)) {
 		g_772624 = 0;
 		for (i = 0; i < 768; i++) {
-			if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 6 || ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 7 || ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 5) {
+			if (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_type == 6 || ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_type == 7 ||
+				((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_type == 5) {
 				g_772624++;
 			}
 		}

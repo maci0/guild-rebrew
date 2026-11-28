@@ -6,7 +6,7 @@ typedef struct Rec {
 } Rec;
 
 extern char* lpObjektePROT;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl gm_AccumulateTyped2(void*);
@@ -45,7 +45,7 @@ int __cdecl gm_CollectPaymentOrLiquidate(int receiverId, char* ownerEntity, int 
 	remaining = requestedAmount;
 	amount = got < remaining ? got : remaining;
 	if (amount > 0) {
-		cm_RequestMoveCredits(receiverId, *(int*) (ownerEntity + 4), g_773d75, amount);
+		cm_RequestMoveCredits(receiverId, *(int*) (ownerEntity + 4), gm_ActiveTownIndex, amount);
 		remaining -= amount;
 		written = amount;
 	}
@@ -71,7 +71,7 @@ int __cdecl gm_CollectPaymentOrLiquidate(int receiverId, char* ownerEntity, int 
 					while (sub != 0 && remaining > 0) {
 						if ((*(char *)&((OBJECT_PROTOTYPE*) lpObjektePROT)[*sub].kind) != 0x17
 							&& (*(char *)&((OBJECT_PROTOTYPE*) lpObjektePROT)[*sub].kind) != 0x25) {
-							div = (int) (gm_GetSeasonPrice(*sub, g_773d75) * 0.5);
+							div = (int) (gm_GetSeasonPrice(*sub, gm_ActiveTownIndex) * 0.5);
 							if (div != 0) {
 								amount = remaining / div;
 								if (amount <= 1) {
@@ -80,7 +80,7 @@ int __cdecl gm_CollectPaymentOrLiquidate(int receiverId, char* ownerEntity, int 
 								if (gm_GetMsgField(obj, sub) <= amount) {
 									amount = gm_GetMsgField(obj, sub);
 								}
-								cm_SendSellObjekt(-1, *(int*) ((char*) obj + 2), *sub, amount, g_773d75, 0);
+								cm_SendSellObjekt(-1, *(int*) ((char*) obj + 2), *sub, amount, gm_ActiveTownIndex, 0);
 								div *= amount;
 								total += div;
 								remaining -= div;
@@ -120,7 +120,7 @@ int __cdecl gm_CollectPaymentOrLiquidate(int receiverId, char* ownerEntity, int 
 					while (sub != 0 && remaining > 0) {
 						if ((*(char *)&((OBJECT_PROTOTYPE*) lpObjektePROT)[*sub].kind) == 0x17
 							|| (*(char *)&((OBJECT_PROTOTYPE*) lpObjektePROT)[*sub].kind) == 0x25) {
-							div = (int) (gm_GetSeasonPrice(*sub, g_773d75) * 0.5);
+							div = (int) (gm_GetSeasonPrice(*sub, gm_ActiveTownIndex) * 0.5);
 							if (div != 0) {
 								amount = remaining / div;
 								if (amount <= 1) {
@@ -129,7 +129,7 @@ int __cdecl gm_CollectPaymentOrLiquidate(int receiverId, char* ownerEntity, int 
 								if (gm_GetMsgField(obj, sub) <= amount) {
 									amount = gm_GetMsgField(obj, sub);
 								}
-								cm_SendSellObjekt(-1, *(int*) ((char*) obj + 2), *sub, amount, g_773d75, 0);
+								cm_SendSellObjekt(-1, *(int*) ((char*) obj + 2), *sub, amount, gm_ActiveTownIndex, 0);
 								div *= amount;
 								total += div;
 								remaining -= div;
@@ -150,13 +150,13 @@ int __cdecl gm_CollectPaymentOrLiquidate(int receiverId, char* ownerEntity, int 
 		}
 	}
 	if (total != 0) {
-		cm_RequestMoveCredits(receiverId, -1, g_773d75, total);
+		cm_RequestMoveCredits(receiverId, -1, gm_ActiveTownIndex, total);
 		io_FormatTextBuffer(buf, 0x18eb, total);
 		strcat(outLog, buf);
 		return written;
 	}
 	if (remaining > 0) {
-		cm_RequestTransferCurrencyNoKill(receiverId, *(int*) (ownerEntity + 4), g_773d75, remaining);
+		cm_RequestTransferCurrencyNoKill(receiverId, *(int*) (ownerEntity + 4), gm_ActiveTownIndex, remaining);
 	}
 	return written;
 }

@@ -35,8 +35,8 @@ void __cdecl d2_ShowWirtshausRules(void)
 	d2_SetForm(h, 2);
 	io_AppendText(0x188a);
 	while (main_RunFrameLoop(d2_ShowWirtshausRules, 0x677c7) != 0) {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 	}
 	d2_DestroyForm(h);

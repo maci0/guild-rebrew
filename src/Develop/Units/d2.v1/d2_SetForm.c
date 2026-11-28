@@ -16,12 +16,12 @@ extern int g_006ed938; /* 0x006ed938 */
 extern GOLD_GUI_WINDOW* g_006ed980; /* 0x006ed980 */
 extern char s_005feaf4[]; /* 0x005feaf4 */
 
-extern Win_1015f40 g_1015f40[0x60];
+extern Win_1015f40 d2_Windows[0x60];
 extern char s_67d54c[];
-extern D2_FORM_RECORD g_1038140[];
+extern D2_FORM_RECORD d2_Forms[];
 extern int g_772534;
 extern int d2_CurrentWindowId;
-extern char* g_77255c;
+extern char* d2_CurrentWindow;
 extern char s_67d7d0[];
 
 void __cdecl fcn_004222b0(const char* msg);
@@ -57,12 +57,12 @@ int __cdecl d2_SetForm(int k, int i)
 	} else {
 		k = g_772534;
 	}
-	if (i > g_1038140[k].count || i < 0) {
+	if (i > d2_Forms[k].count || i < 0) {
 		ReportClientMessage(s_67d7d0);
 		return 0;
 	}
-	d2_CurrentWindowId = g_1038140[k].wins[i];
-	(*(D2_WIN**)&g_77255c) = &((D2_WIN*)g_1015f40)[d2_CurrentWindowId];
+	d2_CurrentWindowId = d2_Forms[k].wins[i];
+	(*(D2_WIN**)&d2_CurrentWindow) = &((D2_WIN*)d2_Windows)[d2_CurrentWindowId];
 	return 1;
 }
 #endif

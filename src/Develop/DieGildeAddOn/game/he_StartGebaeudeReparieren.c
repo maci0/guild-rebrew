@@ -52,6 +52,6 @@ void __cdecl he_StartGebaeudeReparieren(struct unit* u)
 	u->p44 = gm_GameTime;
 	gm_AddTime(&u->p52, 0, 10, 0);
 	u->pb8 = u->p52;
-	h = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[u->house]);
+	h = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[u->house]);
 	gm_AddTime(&u->pb8, 0, (int) (10.0 * (h->unk_00d >= 9 ? 0.4f : h->unk_00d == 8 ? 0.6f : h->unk_00d == 7 ? 0.8f : 1.0f) * u->dist), 0);
 }

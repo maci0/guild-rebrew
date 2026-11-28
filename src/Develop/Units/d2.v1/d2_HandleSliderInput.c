@@ -42,8 +42,8 @@ typedef struct Slot {
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern int g_102d028;
 extern int g_102d02c;
-extern short g_14ce8c0;
-extern short g_14ce8c2;
+extern short io_ActiveCursorX;
+extern short io_ActiveCursorY;
 
 Glyph* __cdecl d2_GetBankEntry(char* font, int c);
 
@@ -66,7 +66,7 @@ void __cdecl d2_HandleSliderInput(void)
 	if (d2_CurrentElementId == -1) {
 		return;
 	}
-	s = &((D2_CONTROL_TL*)g_1015ea0)[d2_CurrentElementId];
+	s = &((D2_CONTROL_TL*)d2_Controls)[d2_CurrentElementId];
 	if (s->kind != 0x45 || (s->payload.fields.value_098 & 0x40) != 0) {
 		return;
 	}
@@ -74,8 +74,8 @@ void __cdecl d2_HandleSliderInput(void)
 		mx = g_102d028;
 		my = g_102d02c;
 	} else {
-		mx = g_14ce8c0;
-		my = g_14ce8c2;
+		mx = io_ActiveCursorX;
+		my = io_ActiveCursorY;
 	}
 	if (g_14ce8d0 != 0) {
 		font = (*(char**)&s->data);
@@ -83,7 +83,7 @@ void __cdecl d2_HandleSliderInput(void)
 		d2_GetBankEntry(font, 1);
 		d2_GetBankEntry(font, 3);
 		bar = d2_GetBankEntry(font, 6);
-		s = &((D2_CONTROL_TL*)g_1015ea0)[d2_CurrentElementId];
+		s = &((D2_CONTROL_TL*)d2_Controls)[d2_CurrentElementId];
 		flags = s->payload.fields.value_098;
 		max = s->payload.fields.value_094;
 		min = s->payload.fields.value_090;
@@ -104,11 +104,11 @@ void __cdecl d2_HandleSliderInput(void)
 				pos = max;
 			}
 			s->value_074 = 1;
-			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[d2_CurrentElementId].payload.fields.value_08c) = pos;
+			(*(int*)&((D2_CONTROL_TL*)d2_Controls)[d2_CurrentElementId].payload.fields.value_08c) = pos;
 		}
 	}
-	if (g_14ce8d8 != 0 || (g_14ce8d4 != 0 && (*(int*)&((D2_CONTROL_TL*)g_1015ea0)[d2_CurrentElementId].payload.fields.value_094) >= 100)) {
-		s = &((D2_CONTROL_TL*)g_1015ea0)[d2_CurrentElementId];
+	if (g_14ce8d8 != 0 || (g_14ce8d4 != 0 && (*(int*)&((D2_CONTROL_TL*)d2_Controls)[d2_CurrentElementId].payload.fields.value_094) >= 100)) {
+		s = &((D2_CONTROL_TL*)d2_Controls)[d2_CurrentElementId];
 		pos = s->payload.fields.value_08c;
 		max = s->payload.fields.value_094;
 		min = s->payload.fields.value_090;
@@ -125,6 +125,6 @@ void __cdecl d2_HandleSliderInput(void)
 			pos = max;
 		}
 		s->value_074 = 1;
-		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[d2_CurrentElementId].payload.fields.value_08c) = pos;
+		(*(int*)&((D2_CONTROL_TL*)d2_Controls)[d2_CurrentElementId].payload.fields.value_08c) = pos;
 	}
 }

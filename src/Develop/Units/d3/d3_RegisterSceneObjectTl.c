@@ -2,7 +2,7 @@
 
 #include "Develop/Units/d3/d3_camera.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_67a370;
+extern int d3_ActiveScene;
 
 
 void __cdecl d3_SetObjectRotation(char*, char*);
@@ -20,5 +20,5 @@ void __cdecl d3_RegisterSceneObjectTl(char* o)
 		g_1042538 = o;
 		o[0x214] |= 3;
 	}
-	*(int*) (o + 0x20c) = g_67a370;
+	*(int*) (o + 0x20c) = d3_ActiveScene;
 }

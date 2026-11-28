@@ -38,23 +38,23 @@ void __cdecl d2_UpdateSceneTooltip(void)
 		tooltipWindow = g_6a99e8;
 	}
 	v7 = 0;
-	if (*(int*) &g_7746a4 != 0 && *(int*) 0x774a24 != *(int*) &g_7746a4
+	if (*(int*) &d2_HoveredSceneObject != 0 && *(int*) 0x774a24 != *(int*) &d2_HoveredSceneObject
 		&& g_14ce8e8 != 0) {
 		v4 = 0;
 		if (*(int*) &sv_HoveredObjekt == 0) {
-			v7 = *(int*) &g_7746a4;
+			v7 = *(int*) &d2_HoveredSceneObject;
 		}
 		else {
 			v4 = *(unsigned short*) sv_HoveredObjekt;
 			if (v4 == 0) {
-				v7 = *(int*) &g_7746a4;
+				v7 = *(int*) &d2_HoveredSceneObject;
 			}
 		}
-		*(int*) 0x774a24 = *(int*) &g_7746a4;
+		*(int*) 0x774a24 = *(int*) &d2_HoveredSceneObject;
 		*(int*) 0x6a99ec = -1;
 	}
 	if (v3 != -1 && v3 != *(int*) 0x6a99ec) {
-		q = *(unsigned short**)&((D2_CONTROL_TL*)g_1015ea0)[d2_CurrentElementId]
+		q = *(unsigned short**)&((D2_CONTROL_TL*)d2_Controls)[d2_CurrentElementId]
 			.associated_object;
 		if (q != 0) {
 			if ((unsigned int) q >= 0x7f4ca0 && (unsigned int) q <= 0x85a09f) {
@@ -139,7 +139,7 @@ void __cdecl d2_UpdateSceneTooltip(void)
 		}
 		else {
 			*(int*) 0x6a99ec = v3;
-			*(int*) 0x6a99f0 = *(int*) (tooltipWindow * 700 + (unsigned long)&g_1038144);
+			*(int*) 0x6a99f0 = *(int*) (tooltipWindow * 700 + (unsigned long)&d2_FormPageWindows);
 			if (g_14ce8e8 != 0) {
 				g_6772c4 = 0;
 			}

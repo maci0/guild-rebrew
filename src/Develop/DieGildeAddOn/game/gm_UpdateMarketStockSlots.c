@@ -3,8 +3,8 @@
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char* g_773d78;
-extern unsigned char g_773d75;
+extern char* gm_MarketEntity;
+extern unsigned char gm_ActiveTownIndex;
 extern unsigned char* lpGebaeudePROT;
 extern char* lpObjektePROT;
 /* SIZE 0x80 */
@@ -55,12 +55,12 @@ void __cdecl gm_UpdateMarketStockSlots(int player)
 	int i;
 	int codes[8] = { 0x92, 0x93, 0x94, 0x95, 0x96, 0x97, 0x2db, 0 };
 
-	g_773d78 = (char*) gm_StartFilteredEntitySearch(1, 5, 10);
-	if (g_773d78 == 0) {
+	gm_MarketEntity = (char*) gm_StartFilteredEntitySearch(1, 5, 10);
+	if (gm_MarketEntity == 0) {
 		return;
 	}
-	s = (MARKET_STOCK_SLOT*) (g_85ab90 + player * 0x2a90);
-	if (player == g_773d75) {
+	s = (MARKET_STOCK_SLOT*) (gm_MarketStockTable + player * 0x2a90);
+	if (player == gm_ActiveTownIndex) {
 		p = s;
 		for (n = 0x55; n != 0; n--) {
 			p->active = 0;
@@ -95,11 +95,11 @@ void __cdecl gm_UpdateMarketStockSlots(int player)
 		p = s;
 		for (n = 0x55; n != 0; n--) {
 			rec = *(Slot*)s;
-			ent = fcn_00502cd0(*(int*) (g_773d78 + 0x5d), 1, 0, p->target_id);
+			ent = fcn_00502cd0(*(int*) (gm_MarketEntity + 0x5d), 1, 0, p->target_id);
 			if (ent != 0) {
 				ent2 = fcn_00502cd0(*(int*) (ent + 0x14), 1, 0, 0xff);
 				if (ent2 == 0) {
-					v = cm_SendSellObjekt(*(int*) (ent + 2), -1, 0xff, 1, (char) g_773d75, 0);
+					v = cm_SendSellObjekt(*(int*) (ent + 2), -1, 0xff, 1, (char) gm_ActiveTownIndex, 0);
 					while (cm_GetCommandStatus(v) == 0) {
 						cm_StepCommandQueue();
 					}
@@ -107,7 +107,7 @@ void __cdecl gm_UpdateMarketStockSlots(int player)
 				}
 				if (p->active != 0) {
 					if (fcn_00502cd0(*(int*) (ent2 + 0x14), 1, 0, p->objekt_id) == 0) {
-						v = cm_SendSellObjekt(*(int*) (ent2 + 2), -1, p->objekt_id, 1, (char) g_773d75, 0);
+						v = cm_SendSellObjekt(*(int*) (ent2 + 2), -1, p->objekt_id, 1, (char) gm_ActiveTownIndex, 0);
 						while (cm_GetCommandStatus(v) == 0) {
 							cm_StepCommandQueue();
 						}
@@ -116,7 +116,7 @@ void __cdecl gm_UpdateMarketStockSlots(int player)
 					o = fcn_00502cd0(*(int*) (ent2 + 0x14), 1, 0, p->objekt_id);
 					if (o != 0) {
 						v = cm_SendSellObjekt(-1, *(int*) (ent2 + 2), p->objekt_id,
-								 *(int*) (o + 0xe), (char) g_773d75, 0);
+								 *(int*) (o + 0xe), (char) gm_ActiveTownIndex, 0);
 						while (cm_GetCommandStatus(v) == 0) {
 							cm_StepCommandQueue();
 						}
@@ -131,7 +131,7 @@ void __cdecl gm_UpdateMarketStockSlots(int player)
 		for (v = *ip; v != 0; v = *++ip) {
 			int count;
 			count = 0;
-			ent = fcn_00502cd0(*(int*) (g_773d78 + 0x5d), 1, 0, v);
+			ent = fcn_00502cd0(*(int*) (gm_MarketEntity + 0x5d), 1, 0, v);
 			if (ent != 0) {
 				ent2 = fcn_00502cd0(*(int*) (ent + 0x14), 1, 0, 0xff);
 				if (ent2 != 0) {
@@ -144,7 +144,7 @@ void __cdecl gm_UpdateMarketStockSlots(int player)
 					if (o != 0 && (int) *(unsigned char*) (o + 0x1c) < count) {
 						count -= *(unsigned char*) (o + 0x1c);
 						cm_BeginPacketFieldDelta(o, *(int*) (o + 2));
-						cm_AppendPacketFieldValue(1, 1, o - g_aed32c + 0x1c, &count);
+						cm_AppendPacketFieldValue(1, 1, o - cm_PacketDeltaBase + 0x1c, &count);
 						cm_RequestChangeAttribute();
 					}
 				}

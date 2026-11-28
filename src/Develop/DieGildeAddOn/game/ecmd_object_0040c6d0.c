@@ -1,10 +1,10 @@
 extern char* evt_CurrentScript;
 
 void __cdecl evt_RequestScriptExit(char*);
-extern char g_675bbc[];
+extern char str_CallUserFunction_Invalid_userfunction[];
 
 void __cdecl evt_LogScriptError(void*, int, void*);
-extern char g_675be8[];
+extern char str_CallUserFunctionExtended_Invalid_userfunction[];
 
 void __cdecl evt_LogScriptError(void*, int, void*);
 
@@ -41,7 +41,7 @@ int __cdecl CallUserFunction(int** pp, int** pp2)
 
 	if (*pp == 0) {
 		g = evt_CurrentScript;
-		evt_LogScriptError(g, *(int*) ((char*) g + 0x118), g_675bbc);
+		evt_LogScriptError(g, *(int*) ((char*) g + 0x118), str_CallUserFunction_Invalid_userfunction);
 		return 0;
 	}
 	((int (__cdecl*) (int*)) * pp)(*pp2);
@@ -56,7 +56,7 @@ int __cdecl CallUserFunctionExtended(int** pp, int** pp2, int** pp3)
 
 	if (*pp == 0) {
 		g = evt_CurrentScript;
-		evt_LogScriptError(g, *(int*) ((char*) g + 0x118), g_675be8);
+		evt_LogScriptError(g, *(int*) ((char*) g + 0x118), str_CallUserFunctionExtended_Invalid_userfunction);
 		return 0;
 	}
 	((int (__cdecl*) (int*, int*)) * pp)(*pp2, *pp3);

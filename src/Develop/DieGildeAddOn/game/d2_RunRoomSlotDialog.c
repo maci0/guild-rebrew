@@ -1,8 +1,8 @@
 extern char* lpGebaeudePROT;
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
@@ -45,19 +45,19 @@ int __cdecl d2_RunRoomSlotDialog(unsigned short* room, unsigned char* building, 
 	}
 	io_AppendText(0x10f, 1);
 	do {
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == x_dlg) {
 				handled = 1;
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			} else if (d2_CurrentElementId == y_dlg) {
 				handled = 2;
-				g_774654 = 1;
-			} else if (g_100f1dc == 1) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
+			} else if (d2_DialogButtonAction == 1) {
+				d2_DialogCloseRequested = 1;
 			}
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 		r = main_RunFrameLoop(d2_RunRoomSlotDialog, 0x677c7);
 	} while (r != 0);

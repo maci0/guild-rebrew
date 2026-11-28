@@ -48,16 +48,16 @@ typedef struct {
 
 extern char* lpObjektePROT;  /* +0x41 stride goods records: type byte, name */
  
-extern int g_100b0ac;       /* building count */
-extern int g_100dc20;
+extern int ai_ProductionGoodsCount;       /* building count */
+extern int ai_MeisterDebugState;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_100dc3c;
-extern char g_100dc40[];
+extern char ai_TrackedGoodPlanCounts[];
 extern char g_100dc60[];
 extern char g_100ddc0[];
-extern char g_100df20[];
-extern unsigned short g_7f4c04;
-extern char g_7f4ca0[];
+extern char ai_TrackedGoodPlanEntries[];
+extern unsigned short gm_GameTimeHour;
+extern char gm_EntitySlotTable[];
 
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl ai_CollectBuildingGoodsPlan(Bld*, int, int);
@@ -110,16 +110,16 @@ void __cdecl ai_UpdateMeisterBuilding(Bld* bld)
 	gm_TryAutoUpgradeBuildingSlots(craft, bld, 0x4b);
 	ai_RequestAusbauUpgrade(craft, bld, 0x19);
 	ai_BuyStallGoods(bld);
-	if (g_7f4c04 != 8 && g_7f4c04 != 0xd) {
+	if (gm_GameTimeHour != 8 && gm_GameTimeHour != 0xd) {
 		hit = 0;
-		for (i = 0; i < g_100b0ac; i++) {
-			if (((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id != (int) bld->id)
+		for (i = 0; i < ai_ProductionGoodsCount; i++) {
+			if (((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[i].goods_id != (int) bld->id)
 				continue;
-			if (((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].unk_40 >= (int) ((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id].value_036 &&
-			    ai_CanProduceGood(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i], 1)) {
-				((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].flags |= 8;
-				ai_PlanGoodIngredients(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i]);
-				bld->id = (unsigned short) ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id;
+			if (((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[i].unk_40 >= (int) ((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[i].goods_id].value_036 &&
+			    ai_CanProduceGood(bld, &((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[i], 1)) {
+				((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[i].flags |= 8;
+				ai_PlanGoodIngredients(bld, &((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[i]);
+				bld->id = (unsigned short) ((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[i].goods_id;
 				hit = 1;
 			}
 			break;
@@ -133,51 +133,51 @@ void __cdecl ai_UpdateMeisterBuilding(Bld* bld)
 		bld->id = 0;
 	}
 	else if (bld->id != 0) {
-		for (i = 0; i < g_100b0ac; i++) {
-			if (((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id != (int) bld->id)
+		for (i = 0; i < ai_ProductionGoodsCount; i++) {
+			if (((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[i].goods_id != (int) bld->id)
 				continue;
-			if (((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].unk_40 >= (int) ((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id].value_036 &&
-			    ai_CanProduceGood(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i], 1)) {
-				((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].flags |= 8;
-				ai_PlanGoodIngredients(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i]);
-				bld->id = (unsigned short) ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id;
+			if (((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[i].unk_40 >= (int) ((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[i].goods_id].value_036 &&
+			    ai_CanProduceGood(bld, &((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[i], 1)) {
+				((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[i].flags |= 8;
+				ai_PlanGoodIngredients(bld, &((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[i]);
+				bld->id = (unsigned short) ((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[i].goods_id;
 				goto done;
 			}
 			break;
 		}
 	}
-	if (*(unsigned char*) (((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (bld->x16c + 0x27)]) + 2) == 6) {
+	if (*(unsigned char*) (((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (bld->x16c + 0x27)]) + 2) == 6) {
 		n = hp_PickWeightedProdItem(bld->x16c);
 		if (n != 0) {
 			for (i = 0; i < 0x20; i++) {
-				if (((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id != n)
+				if (((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[i].goods_id != n)
 					continue;
-				if ((int) ((Craft*) craft)->x1c < ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].min_1)
+				if ((int) ((Craft*) craft)->x1c < ((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[i].min_1)
 					break;
-				if ((int) ((Craft*) craft)->x1d < ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].min_2)
+				if ((int) ((Craft*) craft)->x1d < ((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[i].min_2)
 					break;
-				if (((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].unk_40 < (int) ((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id].value_036)
+				if (((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[i].unk_40 < (int) ((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[i].goods_id].value_036)
 					break;
-				n = gm_FindCityItemHolder(((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id);
+				n = gm_FindCityItemHolder(((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[i].goods_id);
 				if (n == 0)
 					break;
-				if (gm_eval_SlotVoll(n, ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id, 1000000) >=
-				    (int) ((unsigned short) ((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id].value_036 +
-				           ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].unk_3c)) {
-					if (!ai_CanProduceGood(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i], 1)) {
-						if (ai_CanProduceGood(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i], 0)) {
-							ai_PlanGoodIngredients(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i]);
-							bld->id = (unsigned short) ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id;
+				if (gm_eval_SlotVoll(n, ((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[i].goods_id, 1000000) >=
+				    (int) ((unsigned short) ((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[i].goods_id].value_036 +
+				           ((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[i].unk_3c)) {
+					if (!ai_CanProduceGood(bld, &((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[i], 1)) {
+						if (ai_CanProduceGood(bld, &((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[i], 0)) {
+							ai_PlanGoodIngredients(bld, &((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[i]);
+							bld->id = (unsigned short) ((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[i].goods_id;
 							fcn_0064d41a(name, "Produktion von %s starten obwohl Rohstoffe fehlen, da der spieler es so will",
-							             ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id]) + 1);
+							             ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[i].goods_id]) + 1);
 							goto done;
 						}
 					} else {
-						((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].flags |= 8;
-						ai_PlanGoodIngredients(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i]);
-						bld->id = (unsigned short) ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id;
+						((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[i].flags |= 8;
+						ai_PlanGoodIngredients(bld, &((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[i]);
+						bld->id = (unsigned short) ((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[i].goods_id;
 						fcn_0064d41a(name, "Produktion von %s starten, da Humanplayer es so will.",
-						             ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id]) + 1);
+						             ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[i].goods_id]) + 1);
 						goto done;
 					}
 				}
@@ -193,70 +193,71 @@ void __cdecl ai_UpdateMeisterBuilding(Bld* bld)
 		order[i] = order[r];
 		order[r] = j;
 	}
-	for (i = 0; i < g_100b0ac; i++) {
-		goods = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].goods_id]);
-		if ((((OBJECT_PROTOTYPE *)goods)->kind == 0x17 || ((OBJECT_PROTOTYPE *)goods)->kind == 0x25) && ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].unk_3c >= 5)
+	for (i = 0; i < ai_ProductionGoodsCount; i++) {
+		goods = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[order[i]].goods_id]);
+		if ((((OBJECT_PROTOTYPE *)goods)->kind == 0x17 || ((OBJECT_PROTOTYPE *)goods)->kind == 0x25) && ((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[order[i]].unk_3c >= 5)
 			continue;
-		if ((int) ((Craft*) craft)->x1c < ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].min_1)
+		if ((int) ((Craft*) craft)->x1c < ((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[order[i]].min_1)
 			continue;
-		if ((int) ((Craft*) craft)->x1d < ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].min_2)
+		if ((int) ((Craft*) craft)->x1d < ((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[order[i]].min_2)
 			continue;
-		if (((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].unk_40 < (int) ((OBJECT_PROTOTYPE *)goods)->value_036)
+		if (((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[order[i]].unk_40 < (int) ((OBJECT_PROTOTYPE *)goods)->value_036)
 			continue;
-		n = gm_FindCityItemHolder(((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].goods_id);
+		n = gm_FindCityItemHolder(((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[order[i]].goods_id);
 		if (n == 0)
 			continue;
-		if (gm_eval_SlotVoll(n, ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].goods_id, 1000000) <
-		    (int) ((unsigned short) ((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].goods_id].value_036 +
-		           ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].unk_3c))
+		if (gm_eval_SlotVoll(n, ((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[order[i]].goods_id, 1000000) <
+		    (int) ((unsigned short) ((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[order[i]].goods_id].value_036 +
+		           ((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[order[i]].unk_3c))
 			continue;
-		if (!ai_CanProduceGood(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]], 1))
+		if (!ai_CanProduceGood(bld, &((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[order[i]], 1))
 			continue;
-		((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].flags |= 8;
-		ai_PlanGoodIngredients(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]]);
-		bld->id = (unsigned short) ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].goods_id;
-		fcn_0064d41a(name, "Produktion von %s starten", ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].goods_id]) + 1);
+		((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[order[i]].flags |= 8;
+		ai_PlanGoodIngredients(bld, &((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[order[i]]);
+		bld->id = (unsigned short) ((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[order[i]].goods_id;
+		fcn_0064d41a(name, "Produktion von %s starten", ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[order[i]].goods_id]) + 1);
 		goto done;
 	}
-	for (i = 0; i < g_100b0ac; i++) {
-		goods = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].goods_id]);
-		if ((((OBJECT_PROTOTYPE *)goods)->kind == 0x17 || ((OBJECT_PROTOTYPE *)goods)->kind == 0x25) && ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].unk_3c >= 5)
+	for (i = 0; i < ai_ProductionGoodsCount; i++) {
+		goods = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[order[i]].goods_id]);
+		if ((((OBJECT_PROTOTYPE *)goods)->kind == 0x17 || ((OBJECT_PROTOTYPE *)goods)->kind == 0x25) && ((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[order[i]].unk_3c >= 5)
 			continue;
-		if ((int) ((Craft*) craft)->x1c < ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].min_1)
+		if ((int) ((Craft*) craft)->x1c < ((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[order[i]].min_1)
 			continue;
-		if ((int) ((Craft*) craft)->x1d < ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].min_2)
+		if ((int) ((Craft*) craft)->x1d < ((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[order[i]].min_2)
 			continue;
-		if (((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].unk_40 < (int) ((OBJECT_PROTOTYPE *)goods)->value_036)
+		if (((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[order[i]].unk_40 < (int) ((OBJECT_PROTOTYPE *)goods)->value_036)
 			continue;
-		n = gm_FindCityItemHolder(((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].goods_id);
+		n = gm_FindCityItemHolder(((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[order[i]].goods_id);
 		if (n == 0)
 			continue;
-		if (gm_eval_SlotVoll(n, ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].goods_id, 1000000) <
-		    (int) ((unsigned short) ((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].goods_id].value_036 +
-		           ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].unk_3c))
+		if (gm_eval_SlotVoll(n, ((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[order[i]].goods_id, 1000000) <
+		    (int) ((unsigned short) ((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[order[i]].goods_id].value_036 +
+		           ((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[order[i]].unk_3c))
 			continue;
-		if (!ai_CanProduceGood(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]], 0))
+		if (!ai_CanProduceGood(bld, &((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[order[i]], 0))
 			continue;
-		ai_PlanGoodIngredients(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]]);
-		bld->id = (unsigned short) ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].goods_id;
-		fcn_0064d41a(name, "Produktion von %s starten obwohl Rohstoffe fehlen", ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].goods_id]) + 1);
+		ai_PlanGoodIngredients(bld, &((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[order[i]]);
+		bld->id = (unsigned short) ((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[order[i]].goods_id;
+		fcn_0064d41a(name, "Produktion von %s starten obwohl Rohstoffe fehlen", ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[order[i]].goods_id]) + 1);
 		goto done;
 	}
 	bld->id = 0;
 done:
 	ai_RequestProductionGoods(craft);
 	ai_PlanResourceRestock(bld, craft);
-	if (g_100dc20 == bld->x16c) {
+	if (ai_MeisterDebugState == bld->x16c) {
 		i = 0;
 		if (g_100dc38 < 4) {
 			do {
-				if (i >= g_100b0ac)
+				if (i >= ai_ProductionGoodsCount)
 					break;
-				((PRODUCTION_GOODS_RECORD*) g_100dc60)[g_100dc38] = ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i];
+				((PRODUCTION_GOODS_RECORD*) g_100dc60)[g_100dc38] = ((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[i];
 				for (j = 0; j < 4; j++) {
-					if (((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].building_indices[j] >= 0) {
-						memcpy(g_100df20 + (*(int*) (g_100dc40 + g_100dc38 * 4) + g_100dc38 * 4) * 0x40, &g_100b0c0[((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].building_indices[j]], 0x40);
-						*(int*) (g_100dc40 + g_100dc38 * 4) = *(int*) (g_100dc40 + g_100dc38 * 4) + 1;
+					if (((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[i].building_indices[j] >= 0) {
+						memcpy(ai_TrackedGoodPlanEntries + (*(int*) (ai_TrackedGoodPlanCounts + g_100dc38 * 4) + g_100dc38 * 4) * 0x40,
+							&ai_ResourceRequests[((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[i].building_indices[j]], 0x40);
+						*(int*) (ai_TrackedGoodPlanCounts + g_100dc38 * 4) = *(int*) (ai_TrackedGoodPlanCounts + g_100dc38 * 4) + 1;
 					}
 				}
 				g_100dc38 = g_100dc38 + 1;
@@ -284,12 +285,12 @@ done:
 		he_AssignActionSlot(bld->x16c, 0, (int) *(unsigned short*) (n - 2), 0);
 		put.count = put.count + 1;
 	}
-	if (g_100dc20 == bld->x16c)
+	if (ai_MeisterDebugState == bld->x16c)
 		g_100dc34 = put.count;
 	put.flags = 0;
-	if (g_100b0ac > 0) {
-		for (i = 0; i < g_100b0ac; i++) {
-			rec = &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i];
+	if (ai_ProductionGoodsCount > 0) {
+		for (i = 0; i < ai_ProductionGoodsCount; i++) {
+			rec = &((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[i];
 			if (rec->flags & 8)
 				put.flags = put.flags + 1;
 			if (rec->flags & 0x10)
@@ -308,12 +309,12 @@ done:
 	put.x10 = 0;
 	put.x20 = 0;
 	put.x1c = 0;
-	for (i = 0; i < g_100b0ac; i++) {
-		if (((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].flags & 8) {
+	for (i = 0; i < ai_ProductionGoodsCount; i++) {
+		if (((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[i].flags & 8) {
 			put.kind = 4;
-			put.rec = (int) &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i];
+			put.rec = (int) &((PRODUCTION_GOODS_RECORD*) ai_ProductionGoodsPlans)[i];
 			ai_DispatchMeisterAction(&put);
-			if (g_100dc20 == bld->x16c && g_100dc3c < 4) {
+			if (ai_MeisterDebugState == bld->x16c && g_100dc3c < 4) {
 				((PRODUCTION_GOODS_RECORD*) g_100ddc0)[g_100dc3c] = *(PRODUCTION_GOODS_RECORD*) put.rec;
 				g_100dc3c = g_100dc3c + 1;
 			}

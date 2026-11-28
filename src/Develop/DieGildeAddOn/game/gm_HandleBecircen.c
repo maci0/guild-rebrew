@@ -13,7 +13,7 @@ typedef struct
 } Query;
 // SIZE 0x50
 
-extern __int64 g_666018;
+extern __int64 gm_TargetPersonTypeMask;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_CalcBecircenFavor(char*, char*, int);
@@ -52,7 +52,7 @@ int __cdecl gm_HandleBecircen(char* e, char* o)
 		memset(&q, 0, sizeof(q));
 		q.x4 = 0x400;
 		q.x10 = 6;
-		q.mask = g_666018;
+		q.mask = gm_TargetPersonTypeMask;
 		if (e[9] == 0) {
 			io_FormatTextBuffer(buf, 0x1dae, 0x1daf);
 		} else {

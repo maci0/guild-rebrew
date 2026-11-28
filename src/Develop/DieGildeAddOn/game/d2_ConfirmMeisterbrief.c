@@ -53,7 +53,7 @@ extern pos14_7f4c00 gm_GameTime;
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern char* g_7746cc;
+extern char* sv_SelectedBuilding;
 extern char s_6aca6c[];
 
 int __cdecl d2_LoadForm(int, int, char*);
@@ -106,10 +106,10 @@ void __cdecl d2_ConfirmMeisterbrief(unsigned char* obj, int mode)
 		return;
 	}
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		else if (g_100f1dc != -1) {
+		else if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == btn1) {
 				for (p = he_StartHandlungSearch(2, 0, 7, 3, *(int*) (obj + 1)); p != 0; p = he_fn_Handlung()) {
 					if (p[0xac] == 0) {
@@ -119,7 +119,7 @@ void __cdecl d2_ConfirmMeisterbrief(unsigned char* obj, int mode)
 				if (p == 0) {
 					memset(&pkt, 0, sizeof(pkt));
 					pkt.type = 7;
-					pkt.x8 = (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id);
+					pkt.x8 = (*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id);
 					pkt.xc = *(int*) (obj + 1);
 					pkt.x36 = 1;
 					pkt.name = (*(pos14_7f4c00*)&gm_GameTime);
@@ -128,7 +128,7 @@ void __cdecl d2_ConfirmMeisterbrief(unsigned char* obj, int mode)
 						pkt.x60 = -1;
 					}
 					else {
-						pkt.x60 = *(int*) (g_7746cc + 2);
+						pkt.x60 = *(int*) (sv_SelectedBuilding + 2);
 					}
 					pkt.x58 = 0;
 					cm_SendCopyEntityData(&pkt);
@@ -136,10 +136,10 @@ void __cdecl d2_ConfirmMeisterbrief(unsigned char* obj, int mode)
 					d2_ResetSelectionAndInput();
 					d2_ShowModalMessageBox(buf, 0);
 				}
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 			else if (d2_CurrentElementId == btn2) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	} while (main_RunFrameLoop((void*) d2_ConfirmMeisterbrief, 0x677c7) != 0);

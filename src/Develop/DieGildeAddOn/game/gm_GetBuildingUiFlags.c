@@ -2,7 +2,7 @@
 
 
 extern unsigned char* lpGebaeudePROT;
-extern int g_774800;
+extern int gm_AllEntitiesControllable;
 
 int __cdecl gm_MapBuildingCatToGuildSlot(int);
 int __cdecl gm_CheckStatLevel(int, int);
@@ -38,7 +38,7 @@ int __cdecl gm_GetBuildingUiFlags(unsigned short* who, unsigned char* p, short* 
 	if (cmd != 0 && *cmd == 0x21b) {
 		flags |= 0x5000;
 	}
-	if (g_774800 != 0) {
+	if (gm_AllEntitiesControllable != 0) {
 		flags = -1;
 	}
 	return flags;

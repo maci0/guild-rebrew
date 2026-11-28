@@ -1,6 +1,6 @@
 
 
-extern int g_67a370;
+extern int d3_ActiveScene;
 
 void __cdecl d3_UnlinkFromRenderList(char*);
 void __cdecl d3_ReleaseTexture(int);
@@ -11,7 +11,7 @@ void __cdecl d3_FreeMeshObject(char* o)
 	char* owner;
 
 	owner = *(char**) (o + 0x2f4);
-	if (owner == ((char*)g_67a370)) {
+	if (owner == ((char*)d3_ActiveScene)) {
 		*(char**) (*(char**) (o + 0x314) + 0x318) = *(char**) (o + 0x318);
 		*(char**) (*(char**) (o + 0x318) + 0x314) = *(char**) (o + 0x314);
 		if (o == *(char**) (owner + 0xa4)) {

@@ -2,8 +2,8 @@ extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern int g_100f1dc;
-extern float g_662cf8;
+extern int d2_DialogButtonAction;
+extern float flt_100_0;
 extern float g_664e88;
 extern float g_6660d4;
 
@@ -107,10 +107,10 @@ void __cdecl d2_RunAmtCandidatesDialog(int office)
 					continue;
 				rec[i].text2 = 0;
 				rec[i].text1 = *(char*) (ent + 0xc) ? 0x6c9 : 0x6ca;
-				if ((*(unsigned char*) (g_774970 * 0x21c + 0x7f4ca9) != *(unsigned char*) (ent + 9)) && (*(unsigned int*) (ent + 0x1c8) & 0x800000)) {
+				if ((*(unsigned char*) (gm_LocalPlayerSlot * 0x21c + 0x7f4ca9) != *(unsigned char*) (ent + 9)) && (*(unsigned int*) (ent + 0x1c8) & 0x800000)) {
 					j = he_StartHandlungSearch(1, 0, 0x6f);
 					while (j) {
-						if ((*(int*) (j + 0xac) == *(int*) (g_774970 * 0x21c + 0x7f4ca4)) && (*(int*) (ent + 4) == *(int*) (j + 0xb0))) {
+						if ((*(int*) (j + 0xac) == *(int*) (gm_LocalPlayerSlot * 0x21c + 0x7f4ca4)) && (*(int*) (ent + 4) == *(int*) (j + 0xb0))) {
 							rec[i].text2 = 0x6cc;
 							break;
 						}
@@ -118,12 +118,12 @@ void __cdecl d2_RunAmtCandidatesDialog(int office)
 					}
 				}
 				rec[i].text3 = 0;
-				if (CountMatchingStraftatEntries(*(int*) (ent + 4), g_774970) > 0) {
+				if (CountMatchingStraftatEntries(*(int*) (ent + 4), gm_LocalPlayerSlot) > 0) {
 					rec[i].text3 = 0x6cd;
 				} else {
 					j = he_StartHandlungSearch(1, 0, 0x18);
 					while (j) {
-						if ((*(unsigned short*) (j + 8) == g_774970) && (*(int*) (ent + 4) == *(int*) (j + 0xc4))) {
+						if ((*(unsigned short*) (j + 8) == gm_LocalPlayerSlot) && (*(int*) (ent + 4) == *(int*) (j + 0xc4))) {
 							rec[i].text3 = 0x6ce;
 							break;
 						}
@@ -133,7 +133,7 @@ void __cdecl d2_RunAmtCandidatesDialog(int office)
 				rec[i].text4 = 0;
 				j = he_StartHandlungSearch(1, 0, 0x45);
 				while (j) {
-					if ((*(int*) (j + 0xac) == *(int*) (g_774970 * 0x21c + 0x7f4ca4)) && (*(int*) (ent + 4) == *(int*) (j + 0xb0))) {
+					if ((*(int*) (j + 0xac) == *(int*) (gm_LocalPlayerSlot * 0x21c + 0x7f4ca4)) && (*(int*) (ent + 4) == *(int*) (j + 0xb0))) {
 						rec[i].text4 = 0x6cb;
 						break;
 					}
@@ -141,7 +141,7 @@ void __cdecl d2_RunAmtCandidatesDialog(int office)
 				}
 				if (!rec[i].text4) {
 					f = gm_GetEntityHealth(ent);
-					if (f < g_662cf8)
+					if (f < flt_100_0)
 						rec[i].text4 = 0x6d2;
 					else if (f < g_664e88)
 						rec[i].text4 = 0x6d1;
@@ -154,12 +154,12 @@ void __cdecl d2_RunAmtCandidatesDialog(int office)
 			if (office && (office != 7)) {
 				p = (char*) sel2;
 				if (!p)
-					p = (char*) (g_774970 * 0x21c + 0x7f4ca0);
+					p = (char*) (gm_LocalPlayerSlot * 0x21c + 0x7f4ca0);
 				d2_DrawOfficeCandidateGrid(d2_CurrentWindowId, office, 0, count, (int) rec, (short*) p);
 			} else {
 				p = (char*) sel2;
 				if (!p)
-					p = (char*) (g_774970 * 0x21c + 0x7f4ca0);
+					p = (char*) (gm_LocalPlayerSlot * 0x21c + 0x7f4ca0);
 				d2_DrawPersonCardGrid(d2_CurrentWindowId, office, 0, count, (int) rec, (int) p);
 			}
 			for (i = 0; i < count; i++) {
@@ -169,8 +169,8 @@ void __cdecl d2_RunAmtCandidatesDialog(int office)
 			}
 			again = 0;
 		}
-		if (g_14ce8e0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased) {
+			d2_DialogCloseRequested = 1;
 		} else {
 			if (g_14ce8e8) {
 				if (!sel) {
@@ -198,7 +198,7 @@ void __cdecl d2_RunAmtCandidatesDialog(int office)
 				again = 1;
 				goto loopend;
 			}
-			if (g_14ce8d8 && (g_100f1dc != -1)) {
+			if (g_14ce8d8 && (d2_DialogButtonAction != -1)) {
 				for (i = 0; i < count; i++) {
 					if (rec[i].h1 == d2_CurrentElementId)
 						break;

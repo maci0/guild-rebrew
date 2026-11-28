@@ -29,9 +29,9 @@ void __cdecl d3_InterpolateByteSpan(unsigned char* buf, int x0, int x1, unsigned
 void __cdecl d3_FillWaterRegion(unsigned char* regionen, int breite, int x, int y,
     int alte_region, int neue_region);
 
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 extern int g_6b5de0;
-extern unsigned long g_14ce728;
+extern unsigned long d3_LastReleaseRefCount;
 
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
@@ -298,7 +298,7 @@ void __cdecl PrepareFloorWater(char* e)
 			*(int*) (v17 + 0x13c) = 0;
 			*(int*) (v17 + 0x140) = 0;
 			*(int*) (v17 + 0x144) = 0;
-			*(int*) (v17 + 0x148) = g_6b7fac;
+			*(int*) (v17 + 0x148) = gm_GameTicks;
 		}
 	} else {
 		memcpy((void*) v10, (void*) *(int*) (e + 0x7da0),
@@ -387,13 +387,13 @@ void __cdecl PrepareFloorWater(char* e)
 				*(int*) (rec + 4) = -1;
 				v6 = *(int*) (v5 + 0x1a4);
 				if (v6 != 0 && *(int*) (v5 + 0x1ac) != v8) {
-					g_14ce728 = (*(int (__stdcall**) (int)) (*(int*) v6 + 8))(v6);
+					d3_LastReleaseRefCount = (*(int (__stdcall**) (int)) (*(int*) v6 + 8))(v6);
 					*(int*) (v5 + 0x1a4) = 0;
 				}
 				*(int*) (v5 + 0x1ac) = v8;
 				v6 = *(int*) (v5 + 0x1a0);
 				if (v6 != 0 && *(int*) (v5 + 0x1b0) != v11) {
-					g_14ce728 = (*(int (__stdcall**) (int)) (*(int*) v6 + 8))(v6);
+					d3_LastReleaseRefCount = (*(int (__stdcall**) (int)) (*(int*) v6 + 8))(v6);
 					*(int*) (v5 + 0x1a0) = 0;
 				}
 				*(int*) (v5 + 0x1b0) = v11;
@@ -548,12 +548,12 @@ teardown:
 					*(int*) (v6 - 4) = 0;
 				}
 				if (*(int*) (v6 - 0x18) != 0) {
-					g_14ce728 = (*(int (__stdcall**) (int))
+					d3_LastReleaseRefCount = (*(int (__stdcall**) (int))
 					    (*(int*) *(int*) (v6 - 0x18) + 8))(*(int*) (v6 - 0x18));
 					*(int*) (v6 - 0x18) = 0;
 				}
 				if (*(int*) (v6 - 0x14) != 0) {
-					g_14ce728 = (*(int (__stdcall**) (int))
+					d3_LastReleaseRefCount = (*(int (__stdcall**) (int))
 					    (*(int*) *(int*) (v6 - 0x14) + 8))(*(int*) (v6 - 0x14));
 					*(int*) (v6 - 0x14) = 0;
 				}

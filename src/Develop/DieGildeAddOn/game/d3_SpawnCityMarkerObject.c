@@ -14,7 +14,7 @@ typedef struct
 } Obj;
 // SIZE 0x228
 
-extern float g_662d70[4];
+extern float d3_ZeroVec4[4];
 
 char* __cdecl _strupr(char*);
 int __cdecl sprintf(char*, const char*, ...);
@@ -48,7 +48,7 @@ Obj* __cdecl d3_SpawnCityMarkerObject(char* name)
 		return 0;
 	}
 	d3_TransformPoint(e, e + 0x4c, pos);
-	o = d3_CreateSceneModelObject(0, pos, g_662d70, "sp_STADTPUNKT_K");
+	o = d3_CreateSceneModelObject(0, pos, d3_ZeroVec4, "sp_STADTPUNKT_K");
 	o->a0 = 1;
 	o->x220 = 4;
 	o->b1 = 0;

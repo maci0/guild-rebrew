@@ -13,7 +13,7 @@
 
 #include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 extern char g_6a58c0[];
-extern char g_6b5c60[];
+extern char str_empty[];
 
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AddObjekt(void);
@@ -38,25 +38,25 @@ void __cdecl gm_RolloverBuilding0x16Stats(void)
 		if (house != 0xffff && (e[0x5a] & 1) == 0) {
 			zero4 = 0;
 			zero2 = 0;
-			t = ((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[house])->entity_type;
+			t = ((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[house])->entity_type;
 			if ((t == 6 || t == 7) && *(short*) (e + 0x69) > 0) {
 				if ((double) *(short*) (e + 0x6b) / *(short*) (e + 0x69) < 0.5) {
 					char text[0x200];
 
 					io_FormatTextBuffer(text, 0x18a1, e, *(short*) (e + 0x69), *(int*) (e + 0x65));
-					he_MessageBoxQuickjump(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (e + 0x27)])->entity_id, -1, text, 0, 0x5fc, *(int*) (e + 1), -1, 0, g_6a58c0);
+					he_MessageBoxQuickjump(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[*(unsigned short*) (e + 0x27)])->entity_id, -1, text, 0, 0x5fc, *(int*) (e + 1), -1, 0, g_6a58c0);
 				} else {
 					char text2[0x200];
 
 					io_FormatTextBuffer(text2, 0x18a2, e, *(short*) (e + 0x69), *(int*) (e + 0x65));
-					he_MessageBoxQuickjump(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (e + 0x27)])->entity_id, -1, text2, 0, 0x5fc, *(int*) (e + 1), -1, 0, g_6b5c60);
+					he_MessageBoxQuickjump(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[*(unsigned short*) (e + 0x27)])->entity_id, -1, text2, 0, 0x5fc, *(int*) (e + 1), -1, 0, str_empty);
 				}
 			}
 			cm_BeginPacketFieldDelta(e, *(int*) (e + 1));
-			cm_AppendPacketFieldDelta(4, 1, e - g_aed32c + 0x6d, e + 0x65);
-			cm_AppendPacketFieldDelta(4, 1, e - g_aed32c + 0x65, &zero4);
-			cm_AppendPacketFieldDelta(2, 1, e - g_aed32c + 0x6b, &zero2);
-			cm_AppendPacketFieldDelta(2, 1, e - g_aed32c + 0x69, &zero2);
+			cm_AppendPacketFieldDelta(4, 1, e - cm_PacketDeltaBase + 0x6d, e + 0x65);
+			cm_AppendPacketFieldDelta(4, 1, e - cm_PacketDeltaBase + 0x65, &zero4);
+			cm_AppendPacketFieldDelta(2, 1, e - cm_PacketDeltaBase + 0x6b, &zero2);
+			cm_AppendPacketFieldDelta(2, 1, e - cm_PacketDeltaBase + 0x69, &zero2);
 			cm_RequestChangeAttribute();
 		}
 		e = gm_FindNextFilteredEntity();

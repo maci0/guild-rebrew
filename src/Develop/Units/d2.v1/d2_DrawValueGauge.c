@@ -26,10 +26,10 @@
  *
  */
 
-extern char* g_1015ea0;			/* 0x01015ea0 element table */
-extern float g_6628a8;			/* 0x006628a8 */
-extern float g_6628a0;			/* 0x006628a0 */
-extern float g_662cf8;			/* 0x00662cf8 */
+extern char* d2_Controls;			/* 0x01015ea0 element table */
+extern float flt_0_0;			/* 0x006628a8 */
+extern float flt_1_0;			/* 0x006628a0 */
+extern float flt_100_0;			/* 0x00662cf8 */
 extern double g_662908;			/* 0x00662908 */
 extern int d2_FontHeight;			/* 0x01015ea4 */
 extern int d2_CurrentElementId;			/* 0x0067d370 */
@@ -115,7 +115,7 @@ void __cdecl d2_DrawValueGauge(int slotIndex, int surface)
 	int y;
 	float ratio;
 
-	e = (int*) ((char*) &((D2_CONTROL_TL*) g_1015ea0)[slotIndex]);
+	e = (int*) ((char*) &((D2_CONTROL_TL*) d2_Controls)[slotIndex]);
 	f.v34 = 0;
 	f.v2c = 0;
 	hs = (char*) *(int*) (&(*(D2_CONTROL_TL*) e).data);
@@ -141,10 +141,10 @@ void __cdecl d2_DrawValueGauge(int slotIndex, int surface)
 		f.w8.i = (*(D2_CONTROL_TL*) e).payload.fields.value_0a0 - f.v38;
 		f.wc.f = (float) f.w8.i * ratio;
 	}
-	if (f.v18 > g_6628a8 && f.v18 < g_6628a0) {
+	if (f.v18 > flt_0_0 && f.v18 < flt_1_0) {
 		f.v18 = 1.0f;
 	}
-	if (f.wc.f > g_6628a8 && f.wc.f < g_6628a0) {
+	if (f.wc.f > flt_0_0 && f.wc.f < flt_1_0) {
 		f.wc.f = 1.0f;
 	}
 
@@ -158,7 +158,7 @@ void __cdecl d2_DrawValueGauge(int slotIndex, int surface)
 		f.w8.f = (float) f.v24;
 		if (f.w8.f - f.v18 > 0.0f && !(f.v20 & 8)) {
 			f.w0.idx = GLYPH_W(h1);
-			n = (int) (f.w8.f / (float) f.w0.idx + g_6628a0);
+			n = (int) (f.w8.f / (float) f.w0.idx + flt_1_0);
 			g_102d020 = n;
 			if (f.v10 == f.v38) {
 				g_102d020 = 1;
@@ -199,7 +199,7 @@ void __cdecl d2_DrawValueGauge(int slotIndex, int surface)
 						     b[0xe]);
 					f.w8.i = GLYPH_W(h1);
 					n = (int) (f.wc.f / (float) f.w8.i
-						   + g_6628a0);
+						   + flt_1_0);
 					g_102d020 = n;
 					for (f.w0.idx = 0;
 					     f.w0.idx < g_102d020;
@@ -229,7 +229,7 @@ void __cdecl d2_DrawValueGauge(int slotIndex, int surface)
 						     b[0xe]);
 					f.w8.i = GLYPH_W(h1);
 					n = (int) (f.v18 / (float) f.w8.i
-						   + g_6628a0);
+						   + flt_1_0);
 					g_102d020 = n;
 					if ((*(D2_CONTROL_TL*) e).disabled) {
 						for (f.w0.idx = 0;
@@ -272,7 +272,7 @@ void __cdecl d2_DrawValueGauge(int slotIndex, int surface)
 						     b[0xe]);
 					f.w8.i = GLYPH_W(h1);
 					n = (int) (f.v18 / (float) f.w8.i
-						   + g_6628a0);
+						   + flt_1_0);
 					g_102d020 = n;
 					if ((*(D2_CONTROL_TL*) e).disabled) {
 						for (f.w0.idx = 0;
@@ -316,7 +316,7 @@ void __cdecl d2_DrawValueGauge(int slotIndex, int surface)
 			if (ratio < 1.0) {
 				f.w0.b.v00 = 0xc4 - (int) (-24.0f * ratio);
 				f.w0.b.v01 = (int) (220.0f * ratio);
-				f.w0.b.v02 = (int) (g_6628a8 * ratio);
+				f.w0.b.v02 = (int) (flt_0_0 * ratio);
 			}
 			else {
 				f.w0.b.v00 = 0xdc - (int) ((ratio - 1.0) * 194.0);
@@ -330,7 +330,7 @@ void __cdecl d2_DrawValueGauge(int slotIndex, int surface)
 			/* 0x46802e: label bitmap clipped into the bar rect */
 			n = d2_QueueTexturedQuad((*(D2_CONTROL_TL*) e).x,
 					 (*(D2_CONTROL_TL*) e).y + (GLYPH_H(H3) - GLYPH_H(h1)) / 2,
-					 (*(D2_CONTROL_TL*) e).width, (*(D2_CONTROL_TL*) e).height, (int) g_77256c->surface, 0);
+					 (*(D2_CONTROL_TL*) e).width, (*(D2_CONTROL_TL*) e).height, (int) d2_WhiteSurface->surface, 0);
 			if (n) {
 				d2_SetQuadVertexColor((int*) n, 1, 1, 1);
 			}
@@ -342,7 +342,7 @@ void __cdecl d2_DrawValueGauge(int slotIndex, int surface)
 			/* 0x4680b3: clamped label bitmap */
 			n = d2_QueueTexturedQuad((*(D2_CONTROL_TL*) e).x + GLYPH_W(h0),
 					 (*(D2_CONTROL_TL*) e).y + (GLYPH_H(H3) - GLYPH_H(h1)) / 2,
-					 (int) f.v18, (*(D2_CONTROL_TL*) e).height, (int) g_77256c->surface, 0);
+					 (int) f.v18, (*(D2_CONTROL_TL*) e).height, (int) d2_WhiteSurface->surface, 0);
 			if (n) {
 				d2_SetQuadVertexColor((int*) n, f.w0.b.v00, f.w0.b.v01,
 					     f.w0.b.v02);
@@ -355,7 +355,7 @@ void __cdecl d2_DrawValueGauge(int slotIndex, int surface)
 			if (!(f.v20 & 8)) {
 				f.wc.i = GLYPH_W(h1);
 				f.w8.i = (int) (f.w8.f / (float) f.wc.i
-					       + g_6628a0);
+					       + flt_1_0);
 				for (f.w0.idx = 0; f.w0.idx < f.w8.i;
 				     f.w0.idx++) {
 					x = (*(D2_CONTROL_TL*) e).x + GLYPH_W(h0)
@@ -482,7 +482,7 @@ void __cdecl d2_DrawValueGauge(int slotIndex, int surface)
 				}
 				else if (f.v20 & 0x800) {
 					sprintf(f.buf, str_67d43c,
-						(int) ((float) f.v30 * g_662cf8
+						(int) ((float) f.v30 * flt_100_0
 						       / (float) f.v10
 						       + 0.5));
 				}
@@ -545,7 +545,7 @@ void __cdecl d2_DrawValueGauge(int slotIndex, int surface)
 	f.w8.f = (float) f.v24;
 	if (f.w8.f - f.v18 > 0.0f && !(f.v20 & 8)) {
 		f.v10 = GLYPH_H(h1);
-		g_102d024 = (int) (f.w8.f / (float) f.v10 + g_6628a0);
+		g_102d024 = (int) (f.w8.f / (float) f.v10 + flt_1_0);
 		for (f.w0.idx = 0; f.w0.idx < g_102d024; f.w0.idx++) {
 			y = (*(D2_CONTROL_TL*) e).y + GLYPH_H(h0)
 			    + GLYPH_H(h1) * (f.w0.idx - 1);
@@ -558,7 +558,7 @@ void __cdecl d2_DrawValueGauge(int slotIndex, int surface)
 		d2_SetClipRect((*(D2_CONTROL_TL*) e).x, (*(D2_CONTROL_TL*) e).y + GLYPH_H(h0),
 			     (*(D2_CONTROL_TL*) e).x + (*(D2_CONTROL_TL*) e).width, (*(D2_CONTROL_TL*) e).y + (*(D2_CONTROL_TL*) e).height - GLYPH_H(h0));
 		f.v10 = GLYPH_H(h1);
-		g_102d024 = (int) (f.wc.f / (float) f.v10 + g_6628a0);
+		g_102d024 = (int) (f.wc.f / (float) f.v10 + flt_1_0);
 		for (f.w0.idx = 0; f.w0.idx < g_102d024; f.w0.idx++) {
 			f.v10 = GLYPH_H(h0);
 			f.w8.i = (*(D2_CONTROL_TL*) e).y + GLYPH_H(h1) * f.w0.idx;
@@ -574,7 +574,7 @@ void __cdecl d2_DrawValueGauge(int slotIndex, int surface)
 		d2_SetClipRect((*(D2_CONTROL_TL*) e).x, (int) ((float) f.v10 - f.v18),
 			     (*(D2_CONTROL_TL*) e).x + (*(D2_CONTROL_TL*) e).width, f.v10);
 		f.v10 = GLYPH_H(h1);
-		g_102d024 = (int) (f.v18 / (float) f.v10 + g_6628a0);
+		g_102d024 = (int) (f.v18 / (float) f.v10 + flt_1_0);
 		for (f.w0.idx = 0; f.w0.idx < g_102d024; f.w0.idx++) {
 			f.v10 = GLYPH_H(h0);
 			f.w8.i = (*(D2_CONTROL_TL*) e).y + GLYPH_H(h1) * f.w0.idx;

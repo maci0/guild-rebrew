@@ -16,7 +16,7 @@ void __cdecl cut_ResetEventSlots(int* event)
 
     id = event + 13;
     for (n = 0; n < 16; n++) {
-        slot = (int*) (g_9b0e20 + 0xc + n * 0x35c);
+        slot = (int*) (cut_ParticipantSlots + 0xc + n * 0x35c);
         i = 0;
         slot[-3] = 1;
         slot[-1] = 0;
@@ -26,7 +26,7 @@ void __cdecl cut_ResetEventSlots(int* event)
             slot[1] = *id;
             if (*(unsigned char*) (event + 2) == 3) {
                 for (; i < *(unsigned char*) ((char*) event + 0x30); i++) {
-                    participant = (int*) (g_9b0e20 + 0x10 + i * 0x35c);
+                    participant = (int*) (cut_ParticipantSlots + 0x10 + i * 0x35c);
                     if (*(int*) participant != -1) {
                         cell = participant + 0x22;
                         for (j = 16; j != 0; j--) {

@@ -34,7 +34,7 @@ struct pos14 {
 #pragma pack(pop)
 
 extern struct pos14 gm_GameTime;
-extern int g_7749ec;
+extern int he_SensenmannMusicActive;
 extern unsigned char* lpGebaeudeINST;
 extern unsigned char* lpGebaeudePROT;
 
@@ -65,25 +65,25 @@ void __cdecl EvtSensenmann(char* e)
 		if (*(int*) (e + 0xc8) != 0) {
 			d3_DestroyObject((D3_OBJECT*) (*(int*) (e + 0xc8)));
 		}
-		if (g_7749ec != 0) {
+		if (he_SensenmannMusicActive != 0) {
 			msx_RestoreMusicIfAllowed();
 		}
-		g_7749ec = 0;
+		he_SensenmannMusicActive = 0;
 		he_FreeAction(e);
 		return;
 	}
 	if (*(int*) (e + 0xc8) == 0 && he_SpawnSensenmann(e) == 0) {
 		he_FreeAction(e);
-		if (g_7749ec != 0) {
+		if (he_SensenmannMusicActive != 0) {
 			msx_RestoreMusicIfAllowed();
 		}
-		g_7749ec = 0;
+		he_SensenmannMusicActive = 0;
 		return;
 	}
-	if (g_7749ec == 0) {
+	if (he_SensenmannMusicActive == 0) {
 		msx_StartMusicIfAllowed("cd2\\DerSeuchenzug.mp3");
 		if (tp_msx_CurrentTrack != 0) {
-			g_7749ec = 1;
+			he_SensenmannMusicActive = 1;
 		}
 	}
 	*(struct pos14*) (e + 0x52) = gm_GameTime;

@@ -30,8 +30,8 @@ typedef struct
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern int g_100f1dc;
-extern int g_14ce8e0;
+extern int d2_DialogButtonAction;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
 int __cdecl d2_LoadForm(int, int, char*);
@@ -62,15 +62,15 @@ int __cdecl d2_ShowIntimidationDialog(unsigned short* target)
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1d62, *target, *target, 2, *target);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_100f1dc != -1) {
-			if (g_100f1dc == 2) {
-				if (d2_CheckActionBlocker(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), 2) != 0) {
-					cm_RequestModifyHealth(*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, -2);
+		if (d2_DialogButtonAction != -1) {
+			if (d2_DialogButtonAction == 2) {
+				if (d2_CheckActionBlocker(((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot]), 2) != 0) {
+					cm_RequestModifyHealth(*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id, -2);
 					memset(&pkt, 0, sizeof(pkt));
 					pkt.type = 0x4b;
-					pkt.x8 = *(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id;
+					pkt.x8 = *(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id;
 					pkt.xc = pkt.x8;
 					pkt.name = (*(pos14_7f4c00*)&gm_GameTime);
 					pkt.x36 = 2;
@@ -81,15 +81,15 @@ int __cdecl d2_ShowIntimidationDialog(unsigned short* target)
 					gm_AddTime(&nm, 0x18, 0, 0);
 					io_FormatTextBuffer(buf, 0x1d63, &nm, *target);
 					d2_ShowModalMessageBox(buf, 0);
-					g_774654 = 4;
+					d2_DialogCloseRequested = 4;
 					r = 1;
 				}
-			} else if (g_100f1dc == 1) {
-				g_774654 = 2;
+			} else if (d2_DialogButtonAction == 1) {
+				d2_DialogCloseRequested = 2;
 			}
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop((void*) d2_ShowIntimidationDialog, 0x657c7) != 0);
 	d2_DestroyForm(dlg);

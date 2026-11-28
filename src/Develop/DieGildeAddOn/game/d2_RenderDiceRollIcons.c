@@ -11,7 +11,7 @@ void __cdecl d2_RenderDiceRollIcons(int a, unsigned char* p)
 	int y, x, i;
 
 	d2_ClearWindowChildren(d2_CurrentWindowId, 1);
-	io_AppendText(g_6a9694, a);
+	io_AppendText(str_CZ_s, a);
 
 	if (*(char*) (*(int*) p + 2) == 6) {
 		i = 0;

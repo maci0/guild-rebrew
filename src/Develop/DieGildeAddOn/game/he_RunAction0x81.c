@@ -3,7 +3,7 @@
 #include "Develop/client_types.h"
 
 extern pos14_7f4c00 gm_GameTime;
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 
 int __cdecl gm_RandomMod(int);
@@ -52,7 +52,7 @@ void __cdecl he_RunAction0x81(char* rec)
 		if (cnt >= want) {
 			break;
 		}
-		slot = ((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[si]);
+		slot = ((char *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[si]);
 		if (*(unsigned short*) slot != 0xffff &&
 		    *(unsigned char*)&((ENTITY_RECORD_VIEW*)slot)->entity_type <= 4 &&
 		    *(unsigned char*)&((ENTITY_RECORD_VIEW*)slot)->side == *(int*) (rec + 0xb4)) {

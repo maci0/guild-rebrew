@@ -25,6 +25,6 @@ int __cdecl ai_CheckAction027Predicate(int unused1, char* e, int unused3, int un
 		return 0;
 	}
 	out[0] = 7;
-	*(int*) (out + 4) = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id;
+	*(int*) (out + 4) = ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id].entity_id;
 	return 1;
 }

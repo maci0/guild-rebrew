@@ -11,10 +11,10 @@
 // SIZE 0x3cc
 
 #include "Develop/client_types.h"
-extern Win_1015f40 g_1015f40[0x60];
+extern Win_1015f40 d2_Windows[0x60];
 extern int d2_CurrentWindowId;
-extern char* g_77255c;
-extern int g_100f1dc;
+extern char* d2_CurrentWindow;
+extern int d2_DialogButtonAction;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
 int __cdecl hst_ReadDueText(char* name, char* text);
@@ -95,15 +95,15 @@ void __cdecl hst_ShowDueTextScroll(void)
 	d2_SetForm(h, 2);
 	io_AppendText(0x10b0);
 	d2_AddWindowScrollButtons(-1, -1, d2_CurrentWindowId, w, 0x767);
-	*(int*) &((D2_WIN*)g_1015f40)[w].pad3c[0x238] = 0x18;
+	*(int*) &((D2_WIN*)d2_Windows)[w].pad3c[0x238] = 0x18;
 	d2_SetForm(h, 1);
 	io_AppendText((int) "$C%s", text);
 	d2_SetForm(h, 3);
 	io_AppendText((int) "$C$Z$[%s$]", name);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
 		d2_UpdateScrollPerga();
-		if (g_100f1dc == 2) {
+		if (d2_DialogButtonAction == 2) {
 			{
 				char* p;
 				int len;
@@ -155,16 +155,16 @@ void __cdecl hst_ShowDueTextScroll(void)
 				}
 			}
 			if (hst_ReadDueText(name, text) != 1) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			} else {
 				d2_SetForm(h, 2);
 				io_AppendText(0x10b0);
 				d2_AddWindowScrollButtons(-1, -1, d2_CurrentWindowId, w, 0x767);
-				*(int*) &((D2_WIN*)g_1015f40)[w].pad3c[0x238] = 0x18;
+				*(int*) &((D2_WIN*)d2_Windows)[w].pad3c[0x238] = 0x18;
 				d2_SetForm(h, 1);
 				io_AppendText((int) "$C%s", text);
-				*(int*) &((D2_WIN*)g_77255c)->pad3c[0x21c] = 0;
-				((D2_WIN*)g_77255c)->pad3c[0x234] = 2;
+				*(int*) &((D2_WIN*)d2_CurrentWindow)->pad3c[0x21c] = 0;
+				((D2_WIN*)d2_CurrentWindow)->pad3c[0x234] = 2;
 				d2_SetForm(h, 3);
 				io_AppendText((int) "$C$Z$[%s$]", name);
 			}

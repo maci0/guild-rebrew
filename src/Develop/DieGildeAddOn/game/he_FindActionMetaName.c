@@ -13,7 +13,7 @@ typedef struct {
 
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern unsigned short g_7f4c04;
+extern unsigned short gm_GameTimeHour;
 extern s_7e2ac0 g_7e2ac0[48];
 extern float g_696540[];
 extern float g_696550[];
@@ -36,7 +36,7 @@ int __cdecl he_FindActionMetaName(char* ent, int owner, char* out)
 				break;
 			}
 			if (((Job*)g_7e2ac0)[i].timed != 0) {
-				t = (float) ((*(int*)&g_7f4c04) & 0xffff);
+				t = (float) ((*(int*)&gm_GameTimeHour) & 0xffff);
 				if (!(t < g_696550[hour])) {
 					break;
 				}

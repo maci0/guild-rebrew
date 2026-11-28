@@ -26,7 +26,7 @@ struct house {
 extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 extern char* lpObjektePROT;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 int __cdecl gm_CompareGameTime(pos14_7f4c00*, pos14_7f4c00*);
 
@@ -64,13 +64,13 @@ void __cdecl he_RunSuchen(char* e)
 		p = &((OBJECT_PROTOTYPE*)lpObjektePROT)[*(unsigned short*) (e + 0xac)];
 		amt = (gm_RandomMod((unsigned short) (p->value_036 * 40)) + p->value_036 * 40)
 		    * (*(int*) (e + 0x18) + *(int*) (e + 0x14));
-		cm_SendSellObjekt(*(int*) (e + 0xb4), -1, *(unsigned short*) (e + 0xac), amt, g_773d75, 0);
+		cm_SendSellObjekt(*(int*) (e + 0xb4), -1, *(unsigned short*) (e + 0xac), amt, gm_ActiveTownIndex, 0);
 		io_FormatTextBuffer(buf, 0x1bb8, *(unsigned short*) (e + 0xac) * 2 + 0x9a8, r, amt);
-		he_MessageBoxQuickjump((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (r + 0x27)].entity_id), -1, buf, 0, 0x5f1, *(int*) (r + 1), -1, 0,
+		he_MessageBoxQuickjump((*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (r + 0x27)].entity_id), -1, buf, 0, 0x5f1, *(int*) (r + 1), -1, 0,
 		    "_NACHRICHTEN_HS_08");
 		for (i = 0; i < 768; i++) {
-			if ((*(char**)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].ptr_17c) == e) {
-				he_AssignActionSlot(r, 0, (*(unsigned short*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_index), 0);
+			if ((*(char**)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].ptr_17c) == e) {
+				he_AssignActionSlot(r, 0, (*(unsigned short*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_index), 0);
 			}
 		}
 		he_FreeAction(e);
@@ -78,8 +78,8 @@ void __cdecl he_RunSuchen(char* e)
 	case -2:
 	case -1:
 		for (i = 0; i < 768; i++) {
-			if ((*(char**)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].ptr_17c) == e) {
-				he_AssignActionSlot(0, 0, (*(unsigned short*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_index), 0);
+			if ((*(char**)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].ptr_17c) == e) {
+				he_AssignActionSlot(0, 0, (*(unsigned short*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_index), 0);
 			}
 		}
 		break;

@@ -11,7 +11,7 @@ extern void __cdecl d3_TraverseSceneObjects(int, int, int, int);
 extern void __cdecl gv_Free3Fields(int);
 extern int __cdecl d3_SetFog(int, int, int);
 
-extern char g_10432c0[];
+extern char d3_Universes[];
 extern char g_1041d80[];
 #include "Develop/client_types.h"
 extern Pal_1041d20 g_1041d20[6];
@@ -19,7 +19,7 @@ extern int g_6b8484;
 extern int g_1041d0c;
 extern int g_67a37c;
 extern int g_67a380;
-extern float g_6b86c4;
+extern float d3_SceneLightingVec;
 extern float g_6b86c8;
 extern float g_6b86cc;
 extern char* d3_ActiveCamera;
@@ -58,7 +58,7 @@ typedef struct {
 	int f3d8;
 } SceneCtx4432d0;
 
-#define CTX_TABLE ((SceneCtx4432d0*) g_10432c0)
+#define CTX_TABLE ((SceneCtx4432d0*) d3_Universes)
 
 #pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x004432d0 */
@@ -81,13 +81,13 @@ char __cdecl d3_SelectSceneContext(int contextIndex, char a1)
 			CTX_TABLE[d3_CurrentContextIndex].fa8 = 0;
 			CTX_TABLE[d3_CurrentContextIndex].fa4 = 0;
 		}
-		CTX_TABLE[d3_CurrentContextIndex].fac = g_6b8300;
+		CTX_TABLE[d3_CurrentContextIndex].fac = d3_CurrentFloor;
 		CTX_TABLE[d3_CurrentContextIndex].fb8 = g_6b89c0;
 		CTX_TABLE[d3_CurrentContextIndex].f3d8 = g_6b8058;
-		CTX_TABLE[d3_CurrentContextIndex].fbc = g_67bbdc.x;
-		CTX_TABLE[d3_CurrentContextIndex].fc0 = g_67bbdc.y;
-		CTX_TABLE[d3_CurrentContextIndex].fc4 = g_67bbdc.z;
-		CTX_TABLE[d3_CurrentContextIndex].fc8 = g_6b86c4;
+		CTX_TABLE[d3_CurrentContextIndex].fbc = d3_SceneAmbientColor.x;
+		CTX_TABLE[d3_CurrentContextIndex].fc0 = d3_SceneAmbientColor.y;
+		CTX_TABLE[d3_CurrentContextIndex].fc4 = d3_SceneAmbientColor.z;
+		CTX_TABLE[d3_CurrentContextIndex].fc8 = d3_SceneLightingVec;
 		CTX_TABLE[d3_CurrentContextIndex].fcc = g_6b86c8;
 		CTX_TABLE[d3_CurrentContextIndex].fd0 = g_6b86cc;
 		{
@@ -158,15 +158,15 @@ char __cdecl d3_SelectSceneContext(int contextIndex, char a1)
 		g_1042538 = CTX_TABLE[contextIndex].f84;
 		d3_SceneRenderListHead = CTX_TABLE[contextIndex].fa4;
 		g_1040958 = CTX_TABLE[contextIndex].fa8;
-		g_6b8300 = CTX_TABLE[contextIndex].fac;
+		d3_CurrentFloor = CTX_TABLE[contextIndex].fac;
 		g_6b89c0 = CTX_TABLE[contextIndex].fb8;
 		g_67a37c = CTX_TABLE[contextIndex].f3cc;
 		g_67a380 = CTX_TABLE[contextIndex].f3d0;
 		g_6b8058 = CTX_TABLE[contextIndex].f3d8;
-		g_67bbdc.x = CTX_TABLE[contextIndex].fbc;
-		g_67bbdc.y = CTX_TABLE[contextIndex].fc0;
-		g_67bbdc.z = CTX_TABLE[contextIndex].fc4;
-		g_6b86c4 = CTX_TABLE[contextIndex].fc8;
+		d3_SceneAmbientColor.x = CTX_TABLE[contextIndex].fbc;
+		d3_SceneAmbientColor.y = CTX_TABLE[contextIndex].fc0;
+		d3_SceneAmbientColor.z = CTX_TABLE[contextIndex].fc4;
+		d3_SceneLightingVec = CTX_TABLE[contextIndex].fc8;
 		g_6b86c8 = CTX_TABLE[contextIndex].fcc;
 		d3_ActiveCamera = 0;
 		g_6b86cc = CTX_TABLE[contextIndex].fd0;
@@ -213,7 +213,7 @@ char __cdecl d3_SelectSceneContext(int contextIndex, char a1)
 			}
 		}
 		d3_CurrentContextIndex = contextIndex;
-		g_67a370 = (int) &CTX_TABLE[contextIndex];
+		d3_ActiveScene = (int) &CTX_TABLE[contextIndex];
 		if (g_1041d0c == g_6b8484)
 			g_1041d0c = CTX_TABLE[contextIndex].f88;
 		g_6b8484 = CTX_TABLE[contextIndex].f88;
@@ -223,20 +223,20 @@ char __cdecl d3_SelectSceneContext(int contextIndex, char a1)
 			d3_SetActiveCamera(g_6b8484);
 		}
 		if (a1 == 0) {
-			if (g_6b8300 == 0) {
+			if (d3_CurrentFloor == 0) {
 				if (*(int*) 0x6b89e4 != 0) {
 					d3sm_Rebuild(*(int*) 0x6b89e4, 0);
 				}
 				else {
 					*(int*) 0x6b89e4 = d3sm_CreateMap(0, -*(int*) 0x6b89b0, 1);
-					d3_TraverseSceneObjects(g_67a370, 0, 0xc0, 0x456df0);
+					d3_TraverseSceneObjects(d3_ActiveScene, 0, 0xc0, 0x456df0);
 				}
 			}
 			else if (*(int*) 0x6b89e4 != 0) {
 				gv_Free3Fields(*(int*) 0x6b89e4);
 				*(int*) 0x6b89e4 = 0;
 			}
-			g_1042a08 = 0;
+			d3_RenderedFaceCount = 0;
 			d3_SetFog(CTX_TABLE[contextIndex].fd8,
 				CTX_TABLE[contextIndex].fdc, CTX_TABLE[contextIndex].fd4);
 			*(char*) 0x6b859b = 1;

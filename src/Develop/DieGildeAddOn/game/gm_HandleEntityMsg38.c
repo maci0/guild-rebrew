@@ -9,7 +9,7 @@ typedef struct Rec {
 #pragma pack(pop)
 
 extern char* lpObjektePROT;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 unsigned short __cdecl gm_RandomMod(int);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
@@ -53,7 +53,7 @@ int __cdecl gm_HandleEntityMsg38(int* request)
 		return 0x400;
 	}
 	e = found[gm_RandomMod(n)];
-	cm_SendSellObjekt(-1, *(int*) (p + 4), *e, 1, g_773d75, 0);
+	cm_SendSellObjekt(-1, *(int*) (p + 4), *e, 1, gm_ActiveTownIndex, 0);
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7, *e * 2 + 0x9a8);
 	he_PostEntityMessage(*(int*) (p + 4), *(int*) (p + 4), buf, 0x100 < strlen(buf), 0x603, 0);
 	return 0;

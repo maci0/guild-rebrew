@@ -3,12 +3,12 @@
 /* Scene camera; inferred owner in d3_camera.h. */
 extern char* d3_ActiveCamera;
 /* Sun-ray state shared with sonnenstrahlen.c. */
-extern char* g_6b5cf8;
+extern char* SonnenstrahlenObjekt;
 extern int g_6b5cfc;
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 extern int SonnenstrahlenStartZeit;
 extern float flt_1;
-extern float g_6628a8;
+extern float flt_0_0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_662a7c;
 extern float g_662b28;
@@ -70,7 +70,7 @@ void __cdecl d3_UpdateSunRays(char* obj)
 		char* camera;
 		camera = d3_ActiveCamera;
 		a = (float) fmod(*(float*) (obj + 0x88) - *(float*) (camera + 0x88), g_662958);
-		if (a < g_6628a8) {
+		if (a < flt_0_0) {
 			a += 6.2831855f;
 		}
 		a = (float) fmod(a, g_662958);
@@ -82,16 +82,16 @@ void __cdecl d3_UpdateSunRays(char* obj)
 		result = d3_Smoothstep(-1.1780972f, 0.0f, (float) fmod(a, g_662958));
 	}
 	if (g_6b5cfc == 1) {
-		a = (float) (((double) (unsigned int) g_6b7fac - SonnenstrahlenStartZeit) * g_662b28);
+		a = (float) (((double) (unsigned int) gm_GameTicks - SonnenstrahlenStartZeit) * g_662b28);
 		if (a >= dbl_1_0) {
 			g_6b5cfc = 0;
 		}
 	} else if (g_6b5cfc == -1) {
-		a = flt_1 - (float) (((double) (unsigned int) g_6b7fac - SonnenstrahlenStartZeit) * g_662b28);
+		a = flt_1 - (float) (((double) (unsigned int) gm_GameTicks - SonnenstrahlenStartZeit) * g_662b28);
 		if (a <= 0.0) {
 			g_6b5cfc = 0;
 			d3_DestroySunRayObject(obj);
-			g_6b5cf8 = 0;
+			SonnenstrahlenObjekt = 0;
 			return;
 		}
 	} else {

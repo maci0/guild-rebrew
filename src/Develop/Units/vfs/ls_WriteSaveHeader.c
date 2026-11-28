@@ -3,20 +3,20 @@ extern int g_6a23bc;
 extern char g_6a23c0;
 extern char g_6a23b0[];
 extern int ls_SaveVersion;
-extern char g_868060[];
-extern char g_6a375c;
+extern char gm_TownTable[];
+extern char gm_PlayerCount;
 extern char gm_GameTime[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-extern char g_773de8;
-extern char g_7747b4[];
+extern char ls_SaveSlotIndex;
+extern char gm_DifficultyLevel[];
 extern char g_7e2480[];
 extern char g_7f3ac4[];
 extern unsigned short ls_SavePreviewPixels[];
-extern char* g_7746c4;
-extern char* g_7746c8;
-extern char* g_7746cc;
+extern char* d2_VisitedBuilding;
+extern char* d2_InteriorBuilding;
+extern char* sv_SelectedBuilding;
 
 char* __cdecl m_alloc(int, char*);
 void __cdecl m_FreeTracked(void*);
@@ -76,7 +76,7 @@ int __cdecl ls_WriteSaveHeader(void* outputStream, int a1)
 	if (r <= 0) {
 		goto fail;
 	}
-	base = g_868060 + g_773d75 * 0x2f4;
+	base = gm_TownTable + gm_ActiveTownIndex * 0x2f4;
 	p = name;
 	t = base;
 	while ((*p++ = *t++) != 0) {
@@ -84,7 +84,7 @@ int __cdecl ls_WriteSaveHeader(void* outputStream, int a1)
 	pair[0] = *(unsigned int*) (base + 0x40);
 	pair[1] = *(unsigned int*) (base + 0x44);
 	v14 = *(char*) (base + 0x48);
-	v15 = g_6a375c;
+	v15 = gm_PlayerCount;
 	if (vfs_fwrite(name, 0x20, 1, outputStream) <= 0) {
 		goto fail;
 	}
@@ -100,35 +100,35 @@ int __cdecl ls_WriteSaveHeader(void* outputStream, int a1)
 	if (vfs_fwrite(gm_GameTime, 0xe, 1, outputStream) <= 0) {
 		goto fail;
 	}
-	if (g_774970 != 0xffff) {
-		n = g_774970;
-		p = (char*)&((ENTITY_RECORD*)g_7f4ca0)[n];
-		if (vfs_fwrite(&((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_02c[4], 0x10, 1, outputStream) <= 0) {
+	if (gm_LocalPlayerSlot != 0xffff) {
+		n = gm_LocalPlayerSlot;
+		p = (char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[n];
+		if (vfs_fwrite(&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot].unk_02c[4], 0x10, 1, outputStream) <= 0) {
 			goto fail;
 		}
-		if (vfs_fwrite(&((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_02c[0x14], 0x10, 1, outputStream) <= 0) {
+		if (vfs_fwrite(&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot].unk_02c[0x14], 0x10, 1, outputStream) <= 0) {
 			goto fail;
 		}
-		if (vfs_fwrite(&((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_00c, 1, 1, outputStream) <= 0) {
+		if (vfs_fwrite(&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot].unk_00c, 1, 1, outputStream) <= 0) {
 			goto fail;
 		}
-		if (vfs_fwrite(&((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_052[2], 4, 1, outputStream) <= 0) {
+		if (vfs_fwrite(&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot].unk_052[2], 4, 1, outputStream) <= 0) {
 			goto fail;
 		}
-		if (vfs_fwrite(&((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_164, 1, 1, outputStream) <= 0) {
+		if (vfs_fwrite(&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot].unk_164, 1, 1, outputStream) <= 0) {
 			goto fail;
 		}
-		if (vfs_fwrite(&((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_165[1], 1, 1, outputStream) <= 0) {
+		if (vfs_fwrite(&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot].unk_165[1], 1, 1, outputStream) <= 0) {
 			goto fail;
 		}
-		if (vfs_fwrite(&((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_00d, 1, 1, outputStream) <= 0) {
+		if (vfs_fwrite(&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot].unk_00d, 1, 1, outputStream) <= 0) {
 			goto fail;
 		}
-		tmp = gm_AmountToUnits(gm_WalkEntityChain(g_774970), g_773d75);
+		tmp = gm_AmountToUnits(gm_WalkEntityChain(gm_LocalPlayerSlot), gm_ActiveTownIndex);
 		if (vfs_fwrite(&tmp, 4, 1, outputStream) <= 0) {
 			goto fail;
 		}
-		s = &((ENTITY_RECORD*)g_7f4ca0)[g_774970].gender;
+		s = &((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot].gender;
 	} else {
 		/* Native prologue initializes all four default bytes. */
 		if (vfs_fwrite(hdr, 0x10, 1, outputStream) <= 0) {
@@ -152,18 +152,18 @@ int __cdecl ls_WriteSaveHeader(void* outputStream, int a1)
 fail:
 		return 0;
 	}
-	if (vfs_fwrite(&g_773de8, 1, 1, outputStream) <= 0) {
+	if (vfs_fwrite(&ls_SaveSlotIndex, 1, 1, outputStream) <= 0) {
 		return 0;
 	}
 	v22 = -1;
-	if (g_7746c4 != 0) {
-		v22 = *(unsigned int*) (g_7746c4 + 1);
-	} else if (g_7746c8 != 0) {
-		v22 = *(unsigned int*) (g_7746c8 + 1);
+	if (d2_VisitedBuilding != 0) {
+		v22 = *(unsigned int*) (d2_VisitedBuilding + 1);
+	} else if (d2_InteriorBuilding != 0) {
+		v22 = *(unsigned int*) (d2_InteriorBuilding + 1);
 	}
 	vfs_fwrite(&v22, 4, 1, outputStream);
-	if (g_7746cc != 0) {
-		v22 = *(unsigned int*) (g_7746cc + 2);
+	if (sv_SelectedBuilding != 0) {
+		v22 = *(unsigned int*) (sv_SelectedBuilding + 2);
 	} else {
 		v22 = -1;
 	}
@@ -190,7 +190,7 @@ fail:
 	if (buf != 0) {
 		m_FreeTracked(buf);
 	}
-	vfs_fwrite(g_7747b4, 4, 1, outputStream);
+	vfs_fwrite(gm_DifficultyLevel, 4, 1, outputStream);
 	vfs_fwrite(g_7e2480, 0x60, 1, outputStream);
 	return 1;
 }

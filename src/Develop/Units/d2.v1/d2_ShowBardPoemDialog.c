@@ -1,12 +1,12 @@
 #include <stdio.h>
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int d2_CurrentWindowId;
-extern int g_100f1dc;
-extern int g_14ce8e0;
+extern int d2_DialogButtonAction;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern char g_6811b0[];
+extern char str_dollar_C[];
 extern char g_10161b4[];
 extern char g_1016198[];
 #include "Develop/DieGildeAddOn/game/entity_record.h"
@@ -44,22 +44,22 @@ void __cdecl d2_ShowBardPoemDialog(void)
 	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_CenterDialogWindows(h);
 	d2_SetOverlayAnimation(0, 0);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	d2_SetForm(h, 1);
 	if (elem != 0 && *(int*) (elem + 0x70) == 2) {
 		rec = (char*) gm_GetBardEventEntry(*(unsigned short*) (elem + 0xac));
 		d2_GetBardPoemTextId(*(unsigned short*) (elem + 0xac),
 		    *(unsigned short*) (elem + 0xae));
 		e2 = (char*) he_StartHandlungSearch(3, 0, 0x11, 3, *(int*) (elem + 4), 2,
-		    (int) g_774970);
+		    (int) gm_LocalPlayerSlot);
 		if (e2 != 0) {
 			*(int*) (e2 + 0x70) = -1;
 		}
-		if (*(int*) &((ENTITY_RECORD_VIEW*) g_7f4ca0)[(int) g_774970].flags_1c8 & 0x20000) {
+		if (*(int*) &((ENTITY_RECORD_VIEW*) gm_EntitySlotTable)[(int) gm_LocalPlayerSlot].flags_1c8 & 0x20000) {
 			io_AppendText(0x1e27);
 			do {
-				if (g_14ce8e0 != 0) {
-					g_774654 = 1;
+				if (io_RightButtonReleased != 0) {
+					d2_DialogCloseRequested = 1;
 				}
 			} while (main_RunFrameLoop((void*) d2_ShowBardPoemDialog, 0x677c7) != 0);
 			d2_DestroyForm(h);
@@ -67,12 +67,12 @@ void __cdecl d2_ShowBardPoemDialog(void)
 			return;
 		}
 		e2 = (char*) gm_CalcBardPoemCost((unsigned short*)
-		    ((char*) &((ENTITY_RECORD*) g_7f4ca0)[(int) g_774970]));
+		    ((char*) &((ENTITY_RECORD*) gm_EntitySlotTable)[(int) gm_LocalPlayerSlot]));
 		if (e2 == 0) {
 			io_AppendText(0x1e28);
 			do {
-				if (g_14ce8e0 != 0) {
-					g_774654 = 1;
+				if (io_RightButtonReleased != 0) {
+					d2_DialogCloseRequested = 1;
 				}
 			} while (main_RunFrameLoop((void*) d2_ShowBardPoemDialog, 0x677c7) != 0);
 			d2_DestroyForm(h);
@@ -84,17 +84,17 @@ void __cdecl d2_ShowBardPoemDialog(void)
 		sprintf(buf, "Gedichte_Announcement\\%s.mp3", rec + 0xe);
 		r = 0;
 		do {
-			if (g_14ce8e0 != 0) {
-				g_774654 = 1;
-			} else if (g_100f1dc != -1) {
-				if (g_100f1dc == 2) {
+			if (io_RightButtonReleased != 0) {
+				d2_DialogCloseRequested = 1;
+			} else if (d2_DialogButtonAction != -1) {
+				if (d2_DialogButtonAction == 2) {
 					gm_ApplyBardPoemEffect((unsigned char*)
-					    ((char*) &((ENTITY_RECORD*) g_7f4ca0)[(int) g_774970]), (int) e2,
+					    ((char*) &((ENTITY_RECORD*) gm_EntitySlotTable)[(int) gm_LocalPlayerSlot]), (int) e2,
 					    *(unsigned short*) (elem + 0xac));
 					r = 1;
-					g_774654 = 1;
-				} else if (g_100f1dc == 1) {
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
+				} else if (d2_DialogButtonAction == 1) {
+					d2_DialogCloseRequested = 1;
 				}
 			}
 		} while (main_RunFrameLoop((void*) d2_ShowBardPoemDialog, 0x677c7) != 0);
@@ -109,7 +109,7 @@ void __cdecl d2_ShowBardPoemDialog(void)
 		d2_InitWindowBounds(d2_CurrentWindowId);
 		d2_CenterDialogWindows(h);
 		d2_SetOverlayAnimation(0, 0);
-		g_100f1dc = -1;
+		d2_DialogButtonAction = -1;
 		d2_SetForm(h, 1);
 		io_AppendText((int) *(unsigned short*) (rec + 0xc));
 		d2_SetForm(h, 2);
@@ -119,20 +119,20 @@ void __cdecl d2_ShowBardPoemDialog(void)
 		*(int*) (g_10161b4 + idx * 0x3cc) = 0x30;
 		d2_SetForm(h, 2);
 		io_AppendText((int) *(unsigned short*) (rec + 0xc) + 2);
-		g_100f1dc = -1;
+		d2_DialogButtonAction = -1;
 		sprintf(buf, "gedichte\\%s.mp3", rec + 0xe);
 		do {
-			if (g_14ce8e0 != 0) {
-				g_774654 = 1;
+			if (io_RightButtonReleased != 0) {
+				d2_DialogCloseRequested = 1;
 			}
 		} while (main_RunFrameLoop((void*) d2_ShowBardPoemDialog, 0x677c7) != 0);
 		d2_SetForm(h, 3);
-		io_AppendText(g_6811b0);
+		io_AppendText(str_dollar_C);
 		d2_SetForm(h, 1);
-		io_AppendText(g_6811b0);
+		io_AppendText(str_dollar_C);
 		io_AppendText(0x1e5c);
 		d2_SetForm(h, 2);
-		io_AppendText(g_6811b0);
+		io_AppendText(str_dollar_C);
 		*(int*) (g_1016198 + d2_CurrentWindowId * 0x3cc) = 0;
 		if (*(int*) rec == 0) {
 			io_AppendText(0x1e5e, (int) *(unsigned short*) (rec + 4) + 0x16b7);
@@ -142,8 +142,8 @@ void __cdecl d2_ShowBardPoemDialog(void)
 			io_AppendText(0x1e5f);
 		}
 		do {
-			if (g_14ce8e0 != 0) {
-				g_774654 = 1;
+			if (io_RightButtonReleased != 0) {
+				d2_DialogCloseRequested = 1;
 			}
 		} while (main_RunFrameLoop((void*) d2_ShowBardPoemDialog, 0x677c7) != 0);
 		d2_DestroyForm(h);
@@ -152,8 +152,8 @@ void __cdecl d2_ShowBardPoemDialog(void)
 	}
 	io_AppendText(0x1e26);
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop((void*) d2_ShowBardPoemDialog, 0x677c7) != 0);
 	d2_DestroyForm(h);

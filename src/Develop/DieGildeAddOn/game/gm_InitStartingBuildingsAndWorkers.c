@@ -32,7 +32,7 @@ typedef struct {
 extern unsigned char* lpGebaeudeINST;
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/command/client_packet_builder.h"
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 
 
@@ -48,7 +48,7 @@ void __cdecl gm_InitStartingBuildingsAndWorkers(void)
 	ENTITY_RECORD* ent;
 	Player* inst;
 
-	ent = ((ENTITY_RECORD*)g_7f4ca0);
+	ent = ((ENTITY_RECORD*)gm_EntitySlotTable);
 	for (i = 0; i < 0x300; i++) {
 		if (ent->entity_state == 6) {
 			break;
@@ -67,11 +67,11 @@ void __cdecl gm_InitStartingBuildingsAndWorkers(void)
 				int value = 0xfa00;
 
 				cm_BeginPacketFieldDelta((char*) inst, inst->id);
-				cm_AppendPacketFieldDelta(4, 1, (char*) inst - g_aed32c + 0x39, &value);
+				cm_AppendPacketFieldDelta(4, 1, (char*) inst - cm_PacketDeltaBase + 0x39, &value);
 				cm_RequestChangeAttribute();
 				cm_SendSetGebBesitzer(inst->id, ent->entity_id, ent->entity_id);
 				cm_RequestAssignWorker(inst, 1, 0, ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[inst->office].worker_kind[0]);
-				cm_SendSellObjekt(inst->id, -1, 0x135, 1, (*(char*)&g_773d75), 0);
+				cm_SendSellObjekt(inst->id, -1, 0x135, 1, (*(char*)&gm_ActiveTownIndex), 0);
 			}
 		}
 	}

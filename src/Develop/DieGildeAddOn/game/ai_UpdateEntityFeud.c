@@ -5,8 +5,8 @@
  * dialogue for the chosen house. */
 #include <stdlib.h>
 #include "Develop/DieGildeAddOn/game/game_matrices.h"
-extern int g_7747b4;
-extern char g_7f4ca0[];
+extern int gm_DifficultyLevel;
+extern char gm_EntitySlotTable[];
 
 int __cdecl gm_IsNpcEntityState(void*);
 int __cdecl amt_GetEffectiveRoleLevel(int, int);
@@ -43,7 +43,7 @@ int __cdecl ai_UpdateEntityFeud(char* entity)
 		best = -1;
 		bestscore = 128.0f;
 		i = 0;
-		for (h = g_7f4ca0 + 2; (int) h < 0x85a0a2; h += (int)sizeof(ENTITY_RECORD), i++) {
+		for (h = gm_EntitySlotTable + 2; (int) h < 0x85a0a2; h += (int)sizeof(ENTITY_RECORD), i++) {
 			if (!((i != (int) *(unsigned short*) entity && h[0] == 6) || h[0] == 7)) {
 				if (gm_IsNpcEntityState(h - 2) == 0 || (h[0x164] == 0 && h[0x167] == 0)) {
 					continue;
@@ -51,9 +51,9 @@ int __cdecl ai_UpdateEntityFeud(char* entity)
 			}
 			d = abs(amt_GetEffectiveRoleLevel(i, 0) - amt_GetEffectiveRoleLevel(*(unsigned short*) entity, 0));
 			f = (10.0f - (float) d * 0.5f) * 0.1f;
-			if ((float) (signed char) g_90e0a0[i][*(unsigned short*) entity] * f < bestscore) {
+			if ((float) (signed char) gm_RelationDeltaMatrix[i][*(unsigned short*) entity] * f < bestscore) {
 				if (gm_CalcEntityFavor(i, (int) *(unsigned short*) entity, 1) < 34.0f) {
-					bestscore = (float) (signed char) g_90e0a0[i][*(unsigned short*) entity] * f;
+					bestscore = (float) (signed char) gm_RelationDeltaMatrix[i][*(unsigned short*) entity] * f;
 					best = i;
 				}
 			}
@@ -61,8 +61,8 @@ int __cdecl ai_UpdateEntityFeud(char* entity)
 		if (best == -1) {
 			return 0;
 		}
-		if (((signed char) g_869480[best][*(unsigned short*) entity] / 2
-		     + (signed char) g_90e0a0[best][*(unsigned short*) entity])
+		if (((signed char) gm_EntityRelationMatrix[best][*(unsigned short*) entity] / 2
+		     + (signed char) gm_RelationDeltaMatrix[best][*(unsigned short*) entity])
 		    >= -50 - ((int) gm_RandomMod(0x20) & 0xffff)) {
 			return 0;
 		}
@@ -71,16 +71,16 @@ int __cdecl ai_UpdateEntityFeud(char* entity)
 		cm_AppendPacketFieldDelta(1, 1, 0x215, &b);
 		d = abs((int) bestscore);
 		b = (unsigned char) (d / 3 + 1);
-		if ((((int) b < g_7747b4 + g_7747b4 + 0x23) ? (int) b : (g_7747b4 + g_7747b4 + 0x23))
-		    <= g_7747b4 + g_7747b4 + 0xf) {
-			b = (unsigned char) (g_7747b4 + g_7747b4 + 0xf);
-		} else if ((int) b >= g_7747b4 + g_7747b4 + 0x23) {
-			b = (unsigned char) (g_7747b4 + g_7747b4 + 0x23);
+		if ((((int) b < gm_DifficultyLevel + gm_DifficultyLevel + 0x23) ? (int) b : (gm_DifficultyLevel + gm_DifficultyLevel + 0x23))
+		    <= gm_DifficultyLevel + gm_DifficultyLevel + 0xf) {
+			b = (unsigned char) (gm_DifficultyLevel + gm_DifficultyLevel + 0xf);
+		} else if ((int) b >= gm_DifficultyLevel + gm_DifficultyLevel + 0x23) {
+			b = (unsigned char) (gm_DifficultyLevel + gm_DifficultyLevel + 0x23);
 		}
 		cm_AppendPacketFieldDelta(1, 1, 0x216, &b);
-		h = (char *)&((ENTITY_RECORD*)g_7f4ca0)[best];
+		h = (char *)&((ENTITY_RECORD*)gm_EntitySlotTable)[best];
 		cm_AppendPacketFieldDelta(4, 1, 0x210, h + 4);
-		cm_AppendPacketFieldDelta(1, 1, 0x214, &g_90e0a0[best][*(unsigned short*) entity]);
+		cm_AppendPacketFieldDelta(1, 1, 0x214, &gm_RelationDeltaMatrix[best][*(unsigned short*) entity]);
 		cm_RequestChangeAttribute();
 		cm_RequestCopyEntityData(*(int*) (h + 4), *(int*) (entity + 4), 0, 2);
 		he_NotifyFeudDeclared(entity, h);
@@ -100,7 +100,7 @@ int __cdecl ai_UpdateEntityFeud(char* entity)
 	if ((unsigned char) entity[0x215] >= (unsigned char) entity[0x216]) {
 		goto pulse;
 	}
-	if ((signed char) g_90e0a0[*(unsigned short*) other][*(unsigned short*) entity]
+	if ((signed char) gm_RelationDeltaMatrix[*(unsigned short*) other][*(unsigned short*) entity]
 	    + (signed char) entity[0x214] > 0) {
 		goto pulse2;
 	}

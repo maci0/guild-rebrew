@@ -27,8 +27,8 @@ void __cdecl d2_ShowApplicationError(char* text)
 		io_AppendText(g_6aca2c);
 	}
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop(d2_ShowApplicationError, 0x677c7) != 0);
 	d2_DestroyForm(h);

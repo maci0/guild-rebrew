@@ -1,11 +1,11 @@
-extern char* g_774a34;
+extern char* lb_LobbyPlayerList;
 extern int g_779ce0;
 extern int g_779c6c;
-extern int g_6a9b9c;
+extern int d2_NetLobbyForm;
 extern int d2_CurrentWindowId;
 #include "Develop/Units/d2.v1/d2_gui.h"
-extern int g_14a5774;
-extern int g_14a579c;
+extern int txt_MaleTitleFirst;
+extern int txt_FemaleTitleFirst;
 extern int g_14a595c[];
 extern int g_14a57e0[];
 extern int g_14a6538[];
@@ -36,20 +36,20 @@ void __cdecl d2_DrawNetLobbyPlayerInfo(void)
 	int y;
 	int z;
 
-	rec = (char*) d3_GetSceneEntry(*(int*) (g_774a34 + g_779ce0 * 4 + 4));
+	rec = (char*) d3_GetSceneEntry(*(int*) (lb_LobbyPlayerList + g_779ce0 * 4 + 4));
 	if (rec != 0)
 		g_779c6c = *(int*) (rec + 0xc);
-	d2_SetForm(g_6a9b9c, 3);
-	io_AppendText((int) g_6811b0);
-	i = *(int*)&((D2_CONTROL_TL*)g_1015ea0)[d2_AddElementToWindow(5, 10, g_779c6c + 0x59a, d2_CurrentWindowId)].width + 0xf;
+	d2_SetForm(d2_NetLobbyForm, 3);
+	io_AppendText((int) str_dollar_C);
+	i = *(int*)&((D2_CONTROL_TL*)d2_Controls)[d2_AddElementToWindow(5, 10, g_779c6c + 0x59a, d2_CurrentWindowId)].width + 0xf;
 	if (!g_779c70) {
-		v = g_14a5774;
+		v = txt_MaleTitleFirst;
 	} else {
-		v = g_14a579c;
+		v = txt_FemaleTitleFirst;
 	}
 	fcn_0064d41a(buf, "%s %s %s", v, g_779c72, g_779c82);
 	x = 10;
-	y = *(int*)&((D2_CONTROL_TL*)g_1015ea0)[d2_EqualizeWindowButtonWidths(i, x, buf, d2_CurrentWindowId)].height + 2;
+	y = *(int*)&((D2_CONTROL_TL*)d2_Controls)[d2_EqualizeWindowButtonWidths(i, x, buf, d2_CurrentWindowId)].height + 2;
 	x = x + y;
 	if (g_779c70 == 1)
 		v = g_14a595c[g_779c6b];

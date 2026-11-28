@@ -2,8 +2,8 @@
 #include <string.h>
 
 extern char* d3_ActiveCamera;
-extern char* g_6b5cf8;
-extern volatile int g_6b7fac;
+extern char* SonnenstrahlenObjekt;
+extern volatile int gm_GameTicks;
 extern int SonnenstrahlenAktiv;
 extern int SonnenstrahlenStartZeit;
 
@@ -69,16 +69,16 @@ void __cdecl fcn_004172e0(char* object)
 		result = d3_Smoothstep(-1.1780972f, 0.0f, (float) fmod(a, 6.2831854820251465));
 	}
 	if (SonnenstrahlenAktiv == 1) {
-		a = (float) ((double) (unsigned int) g_6b7fac - SonnenstrahlenStartZeit) * 0.002f;
+		a = (float) ((double) (unsigned int) gm_GameTicks - SonnenstrahlenStartZeit) * 0.002f;
 		if (a >= 1.0) {
 			SonnenstrahlenAktiv = 0;
 		}
 	} else if (SonnenstrahlenAktiv == -1) {
-		a = 1.0f - (float) ((double) (unsigned int) g_6b7fac - SonnenstrahlenStartZeit) * 0.002f;
+		a = 1.0f - (float) ((double) (unsigned int) gm_GameTicks - SonnenstrahlenStartZeit) * 0.002f;
 		if (a <= 0.0f) {
 			SonnenstrahlenAktiv = 0;
 			d3_DestroySonnenstrahlen(object);
-			g_6b5cf8 = 0;
+			SonnenstrahlenObjekt = 0;
 			return;
 		}
 	} else {

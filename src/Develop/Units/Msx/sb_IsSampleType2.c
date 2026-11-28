@@ -1,14 +1,14 @@
 
 
 
-extern int g_6b7d7c;
+extern int sb_WaveDriver;
 char* __cdecl sb_FindSampleByName(int, int);
 
 int __cdecl sb_IsSampleType2(int bank, int name)
 {
 	char* entry;
 
-	if (g_6b7d7c == 0) {
+	if (sb_WaveDriver == 0) {
 		return 1;
 	}
 	entry = sb_FindSampleByName(bank, name);

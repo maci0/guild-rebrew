@@ -14,9 +14,9 @@ extern int msx_SetTrackVolume(int handle, int value);
 extern int msx_StartAmbientTrack(char *name, int value);
 extern void msx_StopAmbientTrack(int handle);
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
-extern char *g_6b8300;
-extern unsigned char g_772d10;
-extern volatile int g_6b7fac;
+extern char *d3_CurrentFloor;
+extern unsigned char d3snd_AmbientEnabled;
+extern volatile int gm_GameTicks;
 extern int d3_CurrentContextIndex;
 extern char *d3_ActiveCamera;
 extern int g_772d4c;
@@ -24,10 +24,10 @@ extern int *g_772d48;
 extern int *g_772d44;
 extern int g_772d50;
 extern int g_772d30;
-extern unsigned char *g_7746c4;
-extern short *g_7746cc;
-extern int *g_773d78;
-extern int *g_7e4538;
+extern unsigned char *d2_VisitedBuilding;
+extern short *sv_SelectedBuilding;
+extern int *gm_MarketEntity;
+extern int *d3_RainEffect;
 extern unsigned char *lpGebaeudePROT;
 extern char g_772b10;
 
@@ -70,10 +70,10 @@ int __cdecl gm_UpdateAmbientAudio(void)
 	unsigned char c;
 	unsigned char *p;
 
-	if (g_6b8300 != 0 && g_772d10 != 0) {
+	if (d3_CurrentFloor != 0 && d3snd_AmbientEnabled != 0) {
 		metric = 0;
-		tickOrOffset = (g_6b7fac + g_6b7fac * 2) * 4
-		    + g_6b7fac;
+		tickOrOffset = (gm_GameTicks + gm_GameTicks * 2) * 4
+		    + gm_GameTicks;
 		if (g_772d4c != gm_GetSeason((int *) 0x7f4c00)) {
 			g_772d4c = gm_GetSeason((int *) 0x7f4c00);
 			if (g_772d48 != 0) {
@@ -89,8 +89,8 @@ int __cdecl gm_UpdateAmbientAudio(void)
 		}
 		f = (2000.0f - *(float *) (d3_ActiveCamera + 0x50)
 		    - d3_SampleAverageTerrainHeight((float *) (d3_ActiveCamera + 0x4c))) * flt_time_scale;
-		if (g_7e4538 != 0) {
-			metric = *g_7e4538;
+		if (d3_RainEffect != 0) {
+			metric = *d3_RainEffect;
 		}
 		offset = g_772d4c * 100;
 		if ((unsigned) (tickOrOffset - *(int *) (offset + 0x681830)) >
@@ -231,8 +231,8 @@ join:
 					* 127.0f), 0, 0);
 			}
 		}
-		if (g_772d30 != 0 && g_773d78 != 0) {
-			i = *(int *) ((char *) g_773d78 + 0x61);
+		if (g_772d30 != 0 && gm_MarketEntity != 0) {
+			i = *(int *) ((char *) gm_MarketEntity + 0x61);
 			d3_TransformPoint(i, i + 0x4c, buf);
 			i = ch_CountCharactersNear(0, 0, buf, 0x44610000) * 0x14;
 			if (i >= 0x7f) {
@@ -242,8 +242,8 @@ join:
 		}
 	}
 	else {
-		metric = (g_6b7fac + g_6b7fac * 2) * 4
-		    + g_6b7fac;
+		metric = (gm_GameTicks + gm_GameTicks * 2) * 4
+		    + gm_GameTicks;
 		if (g_772d4c != gm_GetSeason((int *) 0x7f4c00)) {
 			g_772d4c = gm_GetSeason((int *) 0x7f4c00);
 		}
@@ -266,9 +266,9 @@ join:
 		*(int *) (tickOrOffset + 0x681858) = metric;
 		*(int *) (tickOrOffset + 0x681880) = metric;
 	}
-	if (g_7746c4 != 0 && g_772d10 != 0) {
-		c = ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned) *g_7746c4].category;
-		if (c == 0x16 && g_7746cc != 0 && *g_7746cc == 0x120) {
+	if (d2_VisitedBuilding != 0 && d3snd_AmbientEnabled != 0) {
+		c = ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned) *d2_VisitedBuilding].category;
+		if (c == 0x16 && sv_SelectedBuilding != 0 && *sv_SelectedBuilding == 0x120) {
 			if (g_772d50 == 0) {
 				i = msx_StartAmbientTrack(s_689dfc, 5);
 				g_772d50 = i;
@@ -279,7 +279,7 @@ join:
 			return msx_SetTrackVolume(g_772d50, (int) fv);
 		}
 		if (c != 0x12 && c != 0x14 && c != 8 && c != 0x15 && c != 0x0e) {
-			if (c != 7 || g_7746cc == 0 || *g_7746cc != 0xf7) {
+			if (c != 7 || sv_SelectedBuilding == 0 || *sv_SelectedBuilding != 0xf7) {
 				goto label;
 			}
 			i = ch_CountCharacters(d3_CurrentContextIndex, 0) * 6;
@@ -294,14 +294,14 @@ join:
 		i = ch_CountCharacters(d3_CurrentContextIndex, 0) * 6;
 		fv = flt_64 < (float) i ? flt_64 : (float) i;
 		if (g_772d50 == 0) {
-			if (*(int *) ((char *) g_7746c4 + 0x95) == -1) {
+			if (*(int *) ((char *) d2_VisitedBuilding + 0x95) == -1) {
 				return 0;
 			}
 			i = msx_StartAmbientTrack(s_689dc0, (int) fv);
 			g_772d50 = i;
 			return i;
 		}
-		if (*(int *) ((char *) g_7746c4 + 0x95) == -1) {
+		if (*(int *) ((char *) d2_VisitedBuilding + 0x95) == -1) {
 			msx_StopAmbientTrack(g_772d50);
 			g_772d50 = 0;
 			return 0;

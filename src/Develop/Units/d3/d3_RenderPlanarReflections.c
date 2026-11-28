@@ -57,7 +57,7 @@ typedef struct {
 extern float g_1040cc0[16];
 extern float g_1040c80[16];
 
-extern int g_67a370;
+extern int d3_ActiveScene;
 extern char g_6b8000;
 
 void __cdecl d3_UpdateObjectCameraTransform(Ent*, char*, int);
@@ -94,7 +94,7 @@ void __cdecl d3_RenderPlanarReflections(Ent* e)
 	D3DXMatrixTranspose((Mat*) g_1040c80, (Mat*) g_1040c80);
 	((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*)g_6b5de0), 0x16, 2);
 	g_6b8000 = 1;
-	d3_VisitSceneObjects(g_67a370, 0, 0x40, d3_VisitRenderSceneNode, &big);
+	d3_VisitSceneObjects(d3_ActiveScene, 0, 0x40, d3_VisitRenderSceneNode, &big);
 	g_6b8000 = 0;
 	((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*)g_6b5de0), 0x16, 3);
 }

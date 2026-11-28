@@ -11,7 +11,7 @@
 
 #include "Develop/client_types.h"
 
-extern HE_ACTION* g_7dc420;
+extern HE_ACTION* he_HandlungSearchCursor;
 extern char g_7749dc;
 extern int g_7749e0;
 extern unsigned char g_6a4758[4];
@@ -50,14 +50,14 @@ HE_ACTION* __cdecl he_StartHandlungSearch(int n, ...)
 		}
 	}
 	va_end(ap);
-	g_7dc420 = g_77e980;
+	he_HandlungSearchCursor = he_ActionSlots;
 	i = 0;
-	while (g_7dc420->kind == 0 && i < 0x400) {
-		g_7dc420++;
+	while (he_HandlungSearchCursor->kind == 0 && i < 0x400) {
+		he_HandlungSearchCursor++;
 		i++;
 	}
 	if (i >= 0x400) {
-		g_7dc420 = 0;
+		he_HandlungSearchCursor = 0;
 	}
 	return he_fn_Handlung();
 }

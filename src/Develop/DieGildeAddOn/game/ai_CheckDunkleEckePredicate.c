@@ -28,6 +28,6 @@ int __cdecl ai_CheckDunkleEckePredicate(int unused1, char* entity, int unused3, 
 		return 0;
 	}
 	out[0] = 7;
-	*(int*) (out + 4) = ((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[id])->entity_id;
+	*(int*) (out + 4) = ((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[id])->entity_id;
 	return 1;
 }

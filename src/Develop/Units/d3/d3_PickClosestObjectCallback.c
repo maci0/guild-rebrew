@@ -3,7 +3,7 @@
 
 extern float g_fc5348;
 extern float g_fc2944;
-extern float g_10432a4;
+extern float d3_ProjectionDist;
 
 char __cdecl d3_GetObjectBoundingSphere(char*, char*, float*, float*);
 
@@ -70,8 +70,8 @@ char __cdecl d3_PickClosestObjectCallback(char* e, char* ctx)
 	if (d3_GetObjectBoundingSphere(e, *(char**) (ctx + 0x48), v, &w)) {
 		inv = 1.0f / v[2];
 		slot = (float*) (ctx + *(int*) (e + 0x218) * 8);
-		w = g_10432a4 * inv * w;
-		x = g_10432a4 * v[0] * inv + *(float*) (ctx + 0x50);
+		w = d3_ProjectionDist * inv * w;
+		x = d3_ProjectionDist * v[0] * inv + *(float*) (ctx + 0x50);
 		y = d3_ProjectionScaleY * v[1] * inv + *(float*) (ctx + 0x54);
 		d2 = x * x + y * y;
 		if (d2 < slot[1] && (float) sqrt(d2) < w) {

@@ -1,4 +1,4 @@
-extern int *g_665f08;
+extern int *d2_TutorialState;
 
 /* ADDRESS: GOLDTL 0x0057f180 */
 int __cdecl d2_CheckTutCh2RathausStepDone(int* msg)
@@ -8,9 +8,9 @@ int __cdecl d2_CheckTutCh2RathausStepDone(int* msg)
 	if (*msg == 0x19) {
 		e = (short*) msg[1];
 		if (e != 0 && *e == 0x110) {
-			g_665f08[0] = 0xb;
-			g_665f08[1] = 0xb;
-			g_665f08[3] = *(int*) 0x6b7fac;
+			d2_TutorialState[0] = 0xb;
+			d2_TutorialState[1] = 0xb;
+			d2_TutorialState[3] = *(int*) 0x6b7fac;
 			return 1;
 		}
 	}

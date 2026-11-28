@@ -69,13 +69,13 @@ void __cdecl d2_RunAdvancedGfxOptionsDialog(void)
     d2_SetElementValue(c[3], 0, 150, (int)(*(float *)0x77669c * 100.0f));
     while (main_RunFrameLoop((void *)d2_RunAdvancedGfxOptionsDialog, flags)) {
         if (*(int *)0x14ce8e0 || *(unsigned char *)0x14cf950 == 1)
-            g_774654 = 1;
+            d2_DialogCloseRequested = 1;
         if (*(int *)0x100f1dc != -1) {
             if (*(int *)0x67d370 == selection[0]) {
                 accepted = 1;
-                g_774654 = 1;
+                d2_DialogCloseRequested = 1;
             } else if (*(int *)0x67d370 == selection[1]) {
-                g_774654 = 1;
+                d2_DialogCloseRequested = 1;
             }
         }
         if (*(int *)0x14ce8d0) {

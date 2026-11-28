@@ -1,11 +1,11 @@
 extern char* g_14ab248;
 extern char* gm_CityEntity;
-extern char g_7f4ca0[];
-extern int g_100f1dc;
-extern int g_14ce8e0;
+extern char gm_EntitySlotTable[];
+extern int d2_DialogButtonAction;
+extern int io_RightButtonReleased;
 extern int d2_CurrentElementId;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 int __cdecl d2_LoadForm(int, int, char*);
@@ -80,21 +80,21 @@ void __cdecl d2_ShowRenovationDialog(char* e)
 	do {
 		p = gm_SearchTable67(id);
 		if (!((*(unsigned char*) (e + 0x5b) & 4) == 0 && p != 0)) {
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId != h0 && d2_CurrentElementId != h1 && d2_CurrentElementId != h2) {
 				if (d2_CurrentElementId == h3) {
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				}
 			} else {
 				val = 0;
 				dur = 0;
 				*(unsigned char*) (msg + 4) = 0x1c;
-				*(int*) (msg + 8) = ((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) g_774970].entity_id;
+				*(int*) (msg + 8) = ((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned int) gm_LocalPlayerSlot].entity_id;
 				*(int*) (msg + 0xc) = -1;
 				*(unsigned char*) (msg + 0x36) = 1;
 				*(int*) (msg + 0x58) = *(int*) (e + 1);
@@ -112,27 +112,27 @@ void __cdecl d2_ShowRenovationDialog(char* e)
 					char* q;
 
 					q = gm_FindBuildingTreasury(e);
-					if (q != 0 && d2_CheckFundsAndNotify(q, *(int*) (q + 0x14), val, (char) g_773d75) != 0) {
+					if (q != 0 && d2_CheckFundsAndNotify(q, *(int*) (q + 0x14), val, (char) gm_ActiveTownIndex) != 0) {
 						*(int*) (msg + 0x5c) = dur;
 						cm_SendLogAction("renovieren");
-						cm_RequestMoveCredits(-1, *(int*) (q + 2), (char) g_773d75, val);
+						cm_RequestMoveCredits(-1, *(int*) (q + 2), (char) gm_ActiveTownIndex, val);
 						cm_SendCopyEntityData(msg);
 						cm_SendTraceEnd("renovieren");
-						g_774654 = 1;
+						d2_DialogCloseRequested = 1;
 					}
-				} else if (gm_CheckEntityStock((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) g_774970], val, (char) g_773d75) != 0) {
+				} else if (gm_CheckEntityStock((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned int) gm_LocalPlayerSlot], val, (char) gm_ActiveTownIndex) != 0) {
 					char* q;
 
-					q = gm_GetEntityTableEntry((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) g_774970]);
+					q = gm_GetEntityTableEntry((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned int) gm_LocalPlayerSlot]);
 					if (q != 0) {
 						*(int*) (q + 0x44) += val;
 					}
 					*(int*) (msg + 0x5c) = dur;
 					cm_SendLogAction("renovieren");
-					cm_RequestMoveCredits(-1, ((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) g_774970].entity_id, (char) g_773d75, val);
+					cm_RequestMoveCredits(-1, ((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned int) gm_LocalPlayerSlot].entity_id, (char) gm_ActiveTownIndex, val);
 					cm_SendCopyEntityData(msg);
 					cm_SendTraceEnd("renovieren");
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				}
 			}
 		}

@@ -45,13 +45,13 @@ typedef int (__stdcall* D3D8_ENABLE_LIGHT_FN)(D3D_DEVICE_VIEW*, int, int);
 extern float g_67bc1c;
 extern float g_67bc20;
 extern char g_67bc24;
-extern void* g_1041d04;
+extern void* d3_LightSortList;
 
-extern void* g_6b86e4;
-extern void* g_6b86e8;
+extern void* d3_DirectionalLightList;
+extern void* d3_SceneLightListHead;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_6b8704;
-extern int g_6b8708;
+extern int d3_MaxLightListCount;
+extern int d3_LightSortCount;
 
 int __cdecl d3_CompareLightWeightDesc(float*, float*);
 void __cdecl d3_SetupD3DLight(int, char*, float, float*, float*);
@@ -78,15 +78,15 @@ void __cdecl d3_SelectActiveObjectLights(float radius, float scale, char* probes
 	if (!g_67bc24) {
 		return;
 	}
-	g_6b8708 = 0;
-	for (light = (D3_SCENE_LIGHT_NODE*) g_6b86e4; light != 0 && g_6b8708 < g_6b8704; light = light->next) {
-		((D3_LIGHT_SORT_ENTRY*) g_1041d04)[g_6b8708].e = (char*) light;
-		((D3_LIGHT_SORT_ENTRY*) g_1041d04)[g_6b8708].value = g_67bc1c * light->power * scale + 3.402823466e+38F;
-		((D3_LIGHT_SORT_ENTRY*) g_1041d04)[g_6b8708].pad = 0;
-		g_6b8708++;
+	d3_LightSortCount = 0;
+	for (light = (D3_SCENE_LIGHT_NODE*) d3_DirectionalLightList; light != 0 && d3_LightSortCount < d3_MaxLightListCount; light = light->next) {
+		((D3_LIGHT_SORT_ENTRY*) d3_LightSortList)[d3_LightSortCount].e = (char*) light;
+		((D3_LIGHT_SORT_ENTRY*) d3_LightSortList)[d3_LightSortCount].value = g_67bc1c * light->power * scale + 3.402823466e+38F;
+		((D3_LIGHT_SORT_ENTRY*) d3_LightSortList)[d3_LightSortCount].pad = 0;
+		d3_LightSortCount++;
 	}
 	probe = (D3_LIGHT_PROBE_VEC*) probes;
-	for (light = (D3_SCENE_LIGHT_NODE*) g_6b86e8; light != 0 && g_6b8708 < g_6b8704; light = light->next) {
+	for (light = (D3_SCENE_LIGHT_NODE*) d3_SceneLightListHead; light != 0 && d3_LightSortCount < d3_MaxLightListCount; light = light->next) {
 		acc = 0.0f;
 		for (i = 0; i < 9; i++) {
 			dx = probe[i].x - light->x;
@@ -109,15 +109,15 @@ void __cdecl d3_SelectActiveObjectLights(float radius, float scale, char* probes
 			}
 		}
 		if (acc > 0.0f) {
-			((D3_LIGHT_SORT_ENTRY*) g_1041d04)[g_6b8708].e = (char*) light;
-			((D3_LIGHT_SORT_ENTRY*) g_1041d04)[g_6b8708].value = acc;
-			((D3_LIGHT_SORT_ENTRY*) g_1041d04)[g_6b8708].pad = 0;
-			g_6b8708++;
+			((D3_LIGHT_SORT_ENTRY*) d3_LightSortList)[d3_LightSortCount].e = (char*) light;
+			((D3_LIGHT_SORT_ENTRY*) d3_LightSortList)[d3_LightSortCount].value = acc;
+			((D3_LIGHT_SORT_ENTRY*) d3_LightSortList)[d3_LightSortCount].pad = 0;
+			d3_LightSortCount++;
 		}
 	}
-	qsort((D3_LIGHT_SORT_ENTRY*) g_1041d04, g_6b8708, 0xc, (int (__cdecl*)(const void*, const void*)) d3_CompareLightWeightDesc);
-	if (g_6b8708 < d3_MaxActiveLights) {
-		n = g_6b8708;
+	qsort((D3_LIGHT_SORT_ENTRY*) d3_LightSortList, d3_LightSortCount, 0xc, (int (__cdecl*)(const void*, const void*)) d3_CompareLightWeightDesc);
+	if (d3_LightSortCount < d3_MaxActiveLights) {
+		n = d3_LightSortCount;
 	} else {
 		n = d3_MaxActiveLights;
 	}
@@ -125,7 +125,7 @@ void __cdecl d3_SelectActiveObjectLights(float radius, float scale, char* probes
 		((D3D8_ENABLE_LIGHT_FN) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_98[8])((D3D_DEVICE_VIEW*)g_6b5de0, i, 0);
 	}
 	for (i = 0; i < n; i++) {
-		d3_SetupD3DLight(sign + i, ((D3_LIGHT_SORT_ENTRY*) g_1041d04)[i].e, scale, dirMat, posMat);
+		d3_SetupD3DLight(sign + i, ((D3_LIGHT_SORT_ENTRY*) d3_LightSortList)[i].e, scale, dirMat, posMat);
 		((D3D8_ENABLE_LIGHT_FN) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_98[8])((D3D_DEVICE_VIEW*)g_6b5de0, i, 1);
 	}
 }

@@ -6,11 +6,11 @@
 extern int g_7f4e0c[];          /* record array base + 0x16c, stride 0x21c */
 #include "game_data.h"
 typedef struct StatsProto { unsigned char kind; char pad1[0x246]; unsigned char field247, field248; char tail[4]; } StatsProto;
-extern unsigned short g_696178[]; /* per-kind counters, 4 words each */
+extern unsigned short gm_BuildingSlotLimits[]; /* per-kind counters, 4 words each */
 extern unsigned short g_696180;
 extern float g_99ef90[];         /* cell table, 6 floats per entry */
 extern float g_99ef94[];
-extern float g_99f590[];
+extern float gm_LastCityPopTime[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_6629c0;
 extern double g_6629c8;
@@ -87,7 +87,7 @@ void __cdecl gm_CollectOccupancyStats(float* out)
 				if (!(type >= 0x0b && type <= 0x0d) && type != 0x10) {
 					if (gm_PosToStatsGrid(pos + 0x4c, &x, &y) != 0) {
 						idx = y + x * 8;
-						g_99ef94[idx * 6] = g_99ef94[idx * 6] + g_6628a0;
+						g_99ef94[idx * 6] = g_99ef94[idx * 6] + flt_1_0;
 					}
 				}
 			}
@@ -101,7 +101,7 @@ void __cdecl gm_CollectOccupancyStats(float* out)
 				if (!(type >= 0x0b && type <= 0x0d) && type != 0x10) {
 					if (gm_PosToStatsGrid(pos + 0x4c, &x2, &y2) != 0) {
 						idx = y2 + x2 * 8;
-						g_99ef94[idx * 6] = g_99ef94[idx * 6] + g_6628a0;
+						g_99ef94[idx * 6] = g_99ef94[idx * 6] + flt_1_0;
 					}
 				}
 			}
@@ -111,16 +111,16 @@ void __cdecl gm_CollectOccupancyStats(float* out)
 	for (n = 0x100; n != 0; n--) {
 		type = *(unsigned char*) rec;
 		if (type > 0 && type < 0x44 && *(short*) (rec + 0x27) != -1) {
-			proto = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[type]; weight_a = weight_a + *(unsigned short*) (g_696178 + type * 4);
-			weight_b = weight_b + *(unsigned short*) (g_696178 + type * 4 + 2);
-			sum_c = sum_c + *(unsigned short*) (g_696178 + type * 4 + 1);
-			if (*(unsigned short*) (g_696178 + type * 4 + 1) != 0) {
+			proto = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[type]; weight_a = weight_a + *(unsigned short*) (gm_BuildingSlotLimits + type * 4);
+			weight_b = weight_b + *(unsigned short*) (gm_BuildingSlotLimits + type * 4 + 2);
+			sum_c = sum_c + *(unsigned short*) (gm_BuildingSlotLimits + type * 4 + 1);
+			if (*(unsigned short*) (gm_BuildingSlotLimits + type * 4 + 1) != 0) {
 				sum_a = sum_a
 				    + proto->level;
 				sum_b = sum_b
 				    + proto->level_limit;
 			}
-			if (*(unsigned short*) (g_696178 + type * 4 + 3) != 0) {
+			if (*(unsigned short*) (gm_BuildingSlotLimits + type * 4 + 3) != 0) {
 				sum_d = sum_d
 				    + proto->level;
 				slot0_e = slot0_e
@@ -141,14 +141,14 @@ void __cdecl gm_CollectOccupancyStats(float* out)
 	    * ((double) sum_d / (double) slot0_e) + g_662908)
 	    * ((double) f / (double) weight_a) * (double) sum_c);
 	out[0] = gm_GetLiteracyRate();
-	out[3] = g_6628a0 - (double) slot1_count / f;
-	out[1] = g_6628a0 - (double) slot0_count / f;
-	scale = g_6628a0 / (f + f);
+	out[3] = flt_1_0 - (double) slot1_count / f;
+	out[1] = flt_1_0 - (double) slot0_count / f;
+	scale = flt_1_0 / (f + f);
 	for (rec = (char*) g_99ef90; rec < (char*) 0x99f590;) {
 		for (n = 8; n != 0; n--) {
 			f = *(float*) rec;
-			if (!(f > g_6628a0)) {
-				f = g_6628a0;
+			if (!(f > flt_1_0)) {
+				f = flt_1_0;
 			}
 			*(float*) rec = f;
 			normalized = scale * *(float*) (rec + 4);
@@ -161,12 +161,12 @@ void __cdecl gm_CollectOccupancyStats(float* out)
 	w = gm_CalcLaw00And01Factor(buf_a);
 	out[2] = (float) ((g_6629c8 - ((double) lit * (double) g_6629c0
 	    + w * g_664e60)) * (double) accum);
-	f = g_6628a0 - out[2];
-	cell = f * out[0] * (g_6628a0 - out[1]) * (g_6628a0 - out[3]);
-	out[9] = (cell + cell + (f + out[0] + (g_6628a0 - out[1])
-	    + (g_6628a0 - out[3])) * g_6628bc) * g_662a68;
+	f = flt_1_0 - out[2];
+	cell = f * out[0] * (flt_1_0 - out[1]) * (flt_1_0 - out[3]);
+	out[9] = (cell + cell + (f + out[0] + (flt_1_0 - out[1])
+	    + (flt_1_0 - out[3])) * g_6628bc) * g_662a68;
 }
-unsigned short g_696178[1] = { 0 };
+unsigned short gm_BuildingSlotLimits[1] = { 0 };
 unsigned char _dpad_693228[12112] = {
     0x21, 0x00, 0x00, 0x00, 0x66, 0x65, 0x6c, 0x64, 0x61, 0x72, 0x62, 0x65, 0x69, 0x74, 0x65, 0x72,
     0x69, 0x6e, 0x5f, 0x46, 0x52, 0x41, 0x55, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,

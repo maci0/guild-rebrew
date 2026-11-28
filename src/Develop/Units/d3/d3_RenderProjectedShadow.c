@@ -9,11 +9,11 @@
  * into the render-to-surface target that matches the texture size. */
 
 extern unsigned char g_1040600;
-extern float* g_6b89e4;
+extern float* d3_InteriorSupermap;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern void** g_1040610[];
 #include "Develop/Units/d8_vesa/d3d_device_view.h"
-extern unsigned long g_14ce728;
+extern unsigned long d3_LastReleaseRefCount;
 
 void __cdecl d3_TransformPoint(char* object, float* in, float* out);
 void* __cdecl d3_GetObjectMesh(char* o, float* r);
@@ -158,25 +158,25 @@ void __cdecl d3_RenderProjectedShadow(char* object, char* subObj, char* renderOb
                 minz = (float) rec[0x1a] * *(float*) (map + 0x78) + *(float*) (map + 0x58);
                 maxz = (float) rec[0x1b] * *(float*) (map + 0x78) + *(float*) (map + 0x58);
             }
-        } else if (g_6b89e4 != 0 && *(unsigned char*) &rec[0x26] == 0) {
-            rec[0x18] = (int) ((minx - g_6b89e4[0]) / g_6b89e4[4]);
-            rec[0x19] = (int) ((maxx - g_6b89e4[0]) / g_6b89e4[4] + 1.0);
-            rec[0x1a] = (int) ((maxz - g_6b89e4[2]) / g_6b89e4[6]);
-            rec[0x1b] = (int) ((minz - g_6b89e4[2]) / g_6b89e4[6] + 1.0);
-            if (rec[0x18] < *(int*) &g_6b89e4[8] && rec[0x19] > 0
-                && rec[0x1a] < *(int*) &g_6b89e4[8] && rec[0x1b] > 0) {
-                rec[4] = *(int*) &g_6b89e4[10];
-                rec[5] = *(int*) &g_6b89e4[8];
-                rec[0xb] = *(int*) &g_6b89e4[4];
-                rec[0xc] = *(int*) &g_6b89e4[5];
-                rec[0xd] = *(int*) &g_6b89e4[6];
-                rec[0xf] = *(int*) &g_6b89e4[0];
-                rec[0x10] = *(int*) &g_6b89e4[1];
-                rec[0x11] = *(int*) &g_6b89e4[2];
-                minx = (float) rec[0x18] * g_6b89e4[4] + g_6b89e4[0];
-                maxx = (float) rec[0x19] * g_6b89e4[4] + g_6b89e4[0];
-                minz = (float) rec[0x1a] * g_6b89e4[6] + g_6b89e4[2];
-                maxz = (float) rec[0x1b] * g_6b89e4[6] + g_6b89e4[2];
+        } else if (d3_InteriorSupermap != 0 && *(unsigned char*) &rec[0x26] == 0) {
+            rec[0x18] = (int) ((minx - d3_InteriorSupermap[0]) / d3_InteriorSupermap[4]);
+            rec[0x19] = (int) ((maxx - d3_InteriorSupermap[0]) / d3_InteriorSupermap[4] + 1.0);
+            rec[0x1a] = (int) ((maxz - d3_InteriorSupermap[2]) / d3_InteriorSupermap[6]);
+            rec[0x1b] = (int) ((minz - d3_InteriorSupermap[2]) / d3_InteriorSupermap[6] + 1.0);
+            if (rec[0x18] < *(int*) &d3_InteriorSupermap[8] && rec[0x19] > 0
+                && rec[0x1a] < *(int*) &d3_InteriorSupermap[8] && rec[0x1b] > 0) {
+                rec[4] = *(int*) &d3_InteriorSupermap[10];
+                rec[5] = *(int*) &d3_InteriorSupermap[8];
+                rec[0xb] = *(int*) &d3_InteriorSupermap[4];
+                rec[0xc] = *(int*) &d3_InteriorSupermap[5];
+                rec[0xd] = *(int*) &d3_InteriorSupermap[6];
+                rec[0xf] = *(int*) &d3_InteriorSupermap[0];
+                rec[0x10] = *(int*) &d3_InteriorSupermap[1];
+                rec[0x11] = *(int*) &d3_InteriorSupermap[2];
+                minx = (float) rec[0x18] * d3_InteriorSupermap[4] + d3_InteriorSupermap[0];
+                maxx = (float) rec[0x19] * d3_InteriorSupermap[4] + d3_InteriorSupermap[0];
+                minz = (float) rec[0x1a] * d3_InteriorSupermap[6] + d3_InteriorSupermap[2];
+                maxz = (float) rec[0x1b] * d3_InteriorSupermap[6] + d3_InteriorSupermap[2];
             }
         }
     }
@@ -237,7 +237,7 @@ void __cdecl d3_RenderProjectedShadow(char* object, char* subObj, char* renderOb
             (*(int (__stdcall**) (void*, unsigned int)) (*(char**) mesh + 0xc))(mesh, n);
         (*(int (__stdcall**) (void*)) ((char*) *g_1040610[idx] + 0x18))(g_1040610[idx]);
     }
-    g_14ce728 = (*(unsigned long (__stdcall**) (void*)) (*(char**) surf + 8))(surf);
+    d3_LastReleaseRefCount = (*(unsigned long (__stdcall**) (void*)) (*(char**) surf + 8))(surf);
     if (*(unsigned char*) ((char*) rec[3] + 0x10) != 0)
         d3_FilterTextureMipMaps(*(int*) (tex + 0x50));
 }

@@ -1,7 +1,7 @@
 
 
 
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
@@ -26,14 +26,14 @@ void __cdecl d2_AcceptLoanOffer(char* building, char* offer)
 	if (building == 0) {
 		return;
 	}
-	if (gm_CheckEntityStock(g, *(int*) (offer + 0xb4), (*(char*)&g_773d75)) == 0) {
+	if (gm_CheckEntityStock(g, *(int*) (offer + 0xb4), (*(char*)&gm_ActiveTownIndex)) == 0) {
 		return;
 	}
 	if (d2_ShowModalMessageBox(msg, 1) == 0) {
 		return;
 	}
-	slot = ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (building + 0x27)]);
-	cm_RequestMoveCredits(*(int*) (building + 1), *(int*) (offer + 0xb0), (*(char*)&g_773d75), *(int*) (offer + 0xb4));
+	slot = ((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (building + 0x27)]);
+	cm_RequestMoveCredits(*(int*) (building + 1), *(int*) (offer + 0xb0), (*(char*)&gm_ActiveTownIndex), *(int*) (offer + 0xb4));
 	p = (char*) gm_GetEntityTableEntry((char*) (g));
 	if (p != 0) {
 		*(int*) (p + 0x48) += *(int*) (offer + 0xb4);

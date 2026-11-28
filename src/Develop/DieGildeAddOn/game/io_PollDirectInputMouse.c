@@ -2,12 +2,12 @@
 
 extern int g_14ce8d0;
 extern int g_14ce8d8;
-extern int g_14ce920[];
-extern short g_14ce922;
-extern short g_14ce8c0;
-extern short g_14ce8c2;
-extern int g_14cf900[];
-extern short g_14cf902;
+extern int io_ActiveInputState[];
+extern short io_MouseY;
+extern short io_ActiveCursorX;
+extern short io_ActiveCursorY;
+extern int io_PolledCursorState[];
+extern short io_PolledCursorY;
 extern int g_6772c4;
 
 
@@ -26,7 +26,7 @@ void __cdecl io_PollDirectInputMouse(void)
 	short dy;
 	HWND hwnd;
 
-	dev = g_14ce8a0;
+	dev = io_MouseDevice;
 	vtable = dev->vtbl;
 	err = vtable->GetDeviceState(dev, sizeof(state), &state);
 
@@ -48,18 +48,18 @@ void __cdecl io_PollDirectInputMouse(void)
 		g_14ce8d8 = 0;
 		g_14ce8d0 = 0;
 	}
-	dx = (short) (g_14ce920[0] + state.lX);
-	dy = (short) (g_14ce922 + *(short*) &state.lY);
+	dx = (short) (io_ActiveInputState[0] + state.lX);
+	dy = (short) (io_MouseY + *(short*) &state.lY);
 	g_6772c4 = 1;
-	g_14ce8c0 = dx;
-	*(short*) g_14cf900 = dx;
-	g_14ce8c2 = dy;
-	g_14cf902 = dy;
-	*(short*) g_14ce920 = dx;
-	g_14ce922 = dy;
+	io_ActiveCursorX = dx;
+	*(short*) io_PolledCursorState = dx;
+	io_ActiveCursorY = dy;
+	io_PolledCursorY = dy;
+	*(short*) io_ActiveInputState = dx;
+	io_MouseY = dy;
 	pt.x = dx;
 	pt.y = dy;
-	hwnd = g_14ce89c;
+	hwnd = io_InputHwnd;
 	ClientToScreen(hwnd, &pt);
 	SetCursorPos(pt.x, pt.y);
 }

@@ -48,7 +48,7 @@ typedef struct {
 
 #include "Develop/DieGildeAddOn/game/game_matrices.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
@@ -84,8 +84,8 @@ void __cdecl amt_InitRulerEntity(int mode, int unused, unsigned short owner, RUL
 	g->bc = 0;
 	for (i = 0; i < 0x300; i++) {
 		for (j = 0; j < 0x300; j++) {
-			g_869480[i][j] = gm_RandomMod(0x40) - 0x20;
-			g_90e0a0[i][j] = 0;
+			gm_EntityRelationMatrix[i][j] = gm_RandomMod(0x40) - 0x20;
+			gm_RelationDeltaMatrix[i][j] = 0;
 		}
 	}
 	g->w50 = 0x7fff;
@@ -105,10 +105,10 @@ void __cdecl amt_InitRulerEntity(int mode, int unused, unsigned short owner, RUL
 		g->b80[i] = (unsigned char) (gm_RandomMod(0x2a) + 210.0f);
 	}
 	g->bd = 9;
-	gm_AddObjekt(g->handle, *(unsigned short*) (g_8680b4 + g_773d75 * 0x2f4), 16000000);
+	gm_AddObjekt(g->handle, *(unsigned short*) (g_8680b4 + gm_ActiveTownIndex * 0x2f4), 16000000);
 	k = 0xffff;
 	for (i = 0; i < 768 && k == 0xffff; i++) {
-		if (((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 6) {
+		if (((ENTITY_RECORD*)gm_EntitySlotTable)[i].entity_state == 6) {
 			k = i;
 		}
 	}
@@ -126,14 +126,14 @@ void __cdecl amt_InitRulerEntity(int mode, int unused, unsigned short owner, RUL
 	if (mode == 0x15) {
 		if ((*(int*)&gm_GameTime) > 0 && k != 0xffff) {
 			io_FormatTextBuffer(buf, 0x42b3, g->id);
-			he_PostEntityMessage(((ENTITY_RECORD*)g_7f4ca0)[k].entity_id, -1, buf, 0, 0x602, "_NACHRICHTEN_NEU_01");
+			he_PostEntityMessage(((ENTITY_RECORD*)gm_EntitySlotTable)[k].entity_id, -1, buf, 0, 0x602, "_NACHRICHTEN_NEU_01");
 		}
 		g->f18c = gm_PickRandomType26HeadPortrait();
 		gm_AdvanceRulerHistoricalEntry();
 	} else {
 		if ((*(int*)&gm_GameTime) > 0 && k != 0xffff) {
 			io_FormatTextBuffer(buf, 0x42b5, g->id);
-			he_PostEntityMessage(((ENTITY_RECORD*)g_7f4ca0)[k].entity_id, -1, buf, 0, 0x602, "_NACHRICHTEN_NEU_03");
+			he_PostEntityMessage(((ENTITY_RECORD*)gm_EntitySlotTable)[k].entity_id, -1, buf, 0, 0x602, "_NACHRICHTEN_NEU_03");
 		}
 		g->f18c = gm_PickRandomHeadPortrait();
 		gm_AdvanceHistoricalEntry();

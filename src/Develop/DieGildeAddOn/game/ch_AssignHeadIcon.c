@@ -18,7 +18,7 @@ typedef struct Figure {
  
  
 
-extern char g_10432c0;
+extern char d3_Universes;
 extern int g_773d40;
 extern char* g_773d44;
 extern char g_69649c[];
@@ -48,7 +48,7 @@ void __cdecl ch_AssignHeadIcon(Figure* f)
 		char* lst;
 		char* name;
 
-		if (*(char**) (f->model + 0x88) == &g_10432c0) {
+		if (*(char**) (f->model + 0x88) == &d3_Universes) {
 			return;
 		}
 		o = *(char**) (*(char**) (f->model + 0x34) + 0x1ec) + 0xf4;

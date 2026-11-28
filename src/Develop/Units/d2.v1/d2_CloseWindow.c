@@ -17,8 +17,8 @@ int __cdecl d2_CloseWindow(int index)
 	return 0;
 }
 #else
-extern char g_10161d0[];
-extern char g_10161bc[];
+extern char d2_WindowActiveView[];
+extern char d2_WindowElementIdView[];
 
 
 void __cdecl d2_DestroyElement(int);
@@ -28,9 +28,9 @@ int __cdecl d2_CloseWindow(int index)
 {
 	char* p;
 
-	p = g_10161d0 + index * 0x3cc;
+	p = d2_WindowActiveView + index * 0x3cc;
 	if (*(int*) p != 0) {
-		d2_DestroyElement(*(int*) (g_10161bc + index * 0x3cc));
+		d2_DestroyElement(*(int*) (d2_WindowElementIdView + index * 0x3cc));
 		return 1;
 	}
 	return 0;

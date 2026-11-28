@@ -2,7 +2,7 @@
 #include <string.h>
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char* g_773d78;
+extern char* gm_MarketEntity;
 
 void __cdecl d3_SelectSceneContext(int, int);
 #include "Develop/DieGildeAddOn/game/client_placement.h"
@@ -60,8 +60,8 @@ char* __cdecl gm_PickRandomOrNearestBuilding(char* u, int key)
 				d3_SelectSceneContext(saved, 1);
 				return found;
 			}
-			if (g_773d78 != 0 && *(char**) (g_773d78 + 0x61) != 0) {
-				ref = *(char**) (g_773d78 + 0x61);
+			if (gm_MarketEntity != 0 && *(char**) (gm_MarketEntity + 0x61) != 0) {
+				ref = *(char**) (gm_MarketEntity + 0x61);
 				d3_TransformPoint(ref, ref + 0x4c, p1);
 				found = 0;
 				best = 1.00000002e+21f;

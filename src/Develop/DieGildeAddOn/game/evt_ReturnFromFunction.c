@@ -1,5 +1,5 @@
-extern int g_6b7ec0;
-extern int g_6b7ec0;
+extern int evt_ReturnValue;
+extern int evt_ReturnValue;
 
 
 
@@ -17,5 +17,5 @@ void __cdecl evt_ReturnFromFunction(void)
 	if (evt_PopCallFrame((*(int*)&evt_CurrentScript)) == 0) {
 		evt_RequestScriptExit((*(int*)&evt_CurrentScript));
 	}
-	g_6b7ec0 = x;
+	evt_ReturnValue = x;
 }

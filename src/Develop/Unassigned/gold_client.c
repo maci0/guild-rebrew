@@ -11,8 +11,8 @@ struct SAVED_SCENE_REF {
 #pragma pack()
 
 #include "Develop/client_types.h"
-extern COMMAND_STATUS_SLOT g_fb5760[0x8000];
-#define g_f31161 ((struct SAVED_SCENE_REF *)((char *)g_fb5760 + 1))
+extern COMMAND_STATUS_SLOT cm_CommandStatusQueue[0x8000];
+#define g_f31161 ((struct SAVED_SCENE_REF *)((char *)cm_CommandStatusQueue + 1))
 
 void __cdecl d3_SelectSceneContext(int, int);
 int __cdecl gm_LookupEntityRecordById(int);

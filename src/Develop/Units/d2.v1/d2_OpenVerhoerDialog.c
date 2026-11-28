@@ -13,10 +13,10 @@ typedef struct
 } Query;
 // SIZE 0x50
 
-extern __int64 g_666018;
+extern __int64 gm_TargetPersonTypeMask;
 extern int g_14ac6a0;
 extern int g_14acb78;
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
@@ -73,7 +73,7 @@ int __cdecl d2_OpenVerhoerDialog(char* e, char* o)
 	}
 	q.x10 = 6;
 	q.x4 = 0xc00;
-	q.mask = g_666018;
+	q.mask = gm_TargetPersonTypeMask;
 	g = d2_RunOfficeListDialog(4, &q, g_14acb78, "", 0);
 	if (g == 0) {
 		return 2;
@@ -85,22 +85,22 @@ int __cdecl d2_OpenVerhoerDialog(char* e, char* o)
 	id = io_AppendText(0x1e17, *g, 4);
 	ok = d2_GetWindowListItem(dlg, 1, id);
 	cancel = d2_GetWindowListItem(dlg, 1, id + 1);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == ok && d2_CheckActionBlocker(e, 4) != 0) {
 				h = amt_SendAction0x45(e, (char*) g, 1);
 				while (h != -1 && cm_GetCommandStatus(h) == 0) {
 					cm_StepCommandQueue();
 				}
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 				r = 0x91;
 			} else if (d2_CurrentElementId == cancel) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop((void*) d2_OpenVerhoerDialog, 0x657c7) != 0);
 	d2_DestroyForm(dlg);

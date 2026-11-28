@@ -11,13 +11,13 @@ typedef struct
 } fcn_004659c0_Def;
 // SIZE 0x54
 
-extern char* g_772500;
+extern char* d2_FileObjTable;
 extern int g_772508;
 extern int g_67d36c;
 extern FILE* g_772564;
 extern char g_102d040[];
 extern int g_7725b0;
-extern char* g_7725ac;
+extern char* d2_ExcludedShapeNames;
 extern int g_67dabc;
 extern char s_67d410[];
 extern char s_67d3d4[];
@@ -36,15 +36,15 @@ int __cdecl d2_Show(int idx, char* path)
 	char* old;
 	char buf[0x80];
 
-	if (((fcn_004659c0_Def*)g_772500)[idx].data == 0) {
-		while (((fcn_004659c0_Def*)g_772500)[idx].size + g_772508 > g_67d36c) {
+	if (((fcn_004659c0_Def*)d2_FileObjTable)[idx].data == 0) {
+		while (((fcn_004659c0_Def*)d2_FileObjTable)[idx].size + g_772508 > g_67d36c) {
 			if (vfs_EvictOldestCacheEntry() == 0) {
 				break;
 			}
 		}
-		((fcn_004659c0_Def*)g_772500)[idx].data = m_alloc(((fcn_004659c0_Def*)g_772500)[idx].size, s_67d410);
-		if (((fcn_004659c0_Def*)g_772500)[idx].data == 0) {
-			sprintf(buf, s_67d3d4, idx, &((fcn_004659c0_Def*)g_772500)[idx]);
+		((fcn_004659c0_Def*)d2_FileObjTable)[idx].data = m_alloc(((fcn_004659c0_Def*)d2_FileObjTable)[idx].size, s_67d410);
+		if (((fcn_004659c0_Def*)d2_FileObjTable)[idx].data == 0) {
+			sprintf(buf, s_67d3d4, idx, &((fcn_004659c0_Def*)d2_FileObjTable)[idx]);
 			return 0;
 		}
 		if (path != 0) {
@@ -55,22 +55,22 @@ int __cdecl d2_Show(int idx, char* path)
 		if (g_772564 == 0) {
 			return 0;
 		}
-		fseek(g_772564, ((fcn_004659c0_Def*)g_772500)[idx].ofs, 0);
-		fread(((fcn_004659c0_Def*)g_772500)[idx].data, ((fcn_004659c0_Def*)g_772500)[idx].size, 1, g_772564);
-		if (((fcn_004659c0_Def*)g_772500)[idx].fmt < 0x10) {
+		fseek(g_772564, ((fcn_004659c0_Def*)d2_FileObjTable)[idx].ofs, 0);
+		fread(((fcn_004659c0_Def*)d2_FileObjTable)[idx].data, ((fcn_004659c0_Def*)d2_FileObjTable)[idx].size, 1, g_772564);
+		if (((fcn_004659c0_Def*)d2_FileObjTable)[idx].fmt < 0x10) {
 			save = g_67dabc;
 			for (i = 0; i < g_7725b0; i++) {
-				if (fcn_0065f220(g_7725ac + i * 0x30, ((fcn_004659c0_Def*)g_772500)[idx].name) == 0) {
+				if (fcn_0065f220(d2_ExcludedShapeNames + i * 0x30, ((fcn_004659c0_Def*)d2_FileObjTable)[idx].name) == 0) {
 					g_67dabc = 0;
 					break;
 				}
 			}
-			old = ((fcn_004659c0_Def*)g_772500)[idx].data;
-			((fcn_004659c0_Def*)g_772500)[idx].data = d2_BuildShapeBank(old);
+			old = ((fcn_004659c0_Def*)d2_FileObjTable)[idx].data;
+			((fcn_004659c0_Def*)d2_FileObjTable)[idx].data = d2_BuildShapeBank(old);
 			m_FreeTracked(old);
 			g_67dabc = save;
 		}
-		g_772508 += ((fcn_004659c0_Def*)g_772500)[idx].size;
+		g_772508 += ((fcn_004659c0_Def*)d2_FileObjTable)[idx].size;
 	}
 	fclose(g_772564);
 	return 1;

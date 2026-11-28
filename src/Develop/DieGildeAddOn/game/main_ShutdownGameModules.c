@@ -31,14 +31,14 @@ void __cdecl main_ShutdownGameModules(void)
 	d3_FreeTable7e1d60();
 	evt_ShutdownScripts();
 	main_CloseFrameRateTimer();
-	if (g_774934 != 0) {
+	if (d3snd_SoundEnabled != 0) {
 		d3snd_Shutdown();
 		d3_FreeBuffer6b5d08();
 	}
 	if (msx_MusicEnabled != 0) {
 		msx_ShutdownDrivers();
 	}
-	if (g_774934 != 0) {
+	if (d3snd_SoundEnabled != 0) {
 		msx_ShutdownAIL();
 		d3sndw_Shutdown();
 	}

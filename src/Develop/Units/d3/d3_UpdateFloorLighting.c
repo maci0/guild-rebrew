@@ -2,20 +2,20 @@
 #include <string.h>
 
 /* Compiler float/double pools and lighting constants. */
-extern float g_6628a0; /* 1.0f */
-extern float g_6628a8; /* 0.0f */
+extern float flt_1_0; /* 1.0f */
+extern float flt_0_0; /* 0.0f */
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_662ca8;
 extern double g_662ca0;
-extern float g_662d40[3];
-extern float g_67bbdc;
-extern float g_67bbe0;
-extern float g_67bbe4;
-extern float g_6b86c4;
+extern float d3_UnitAxisVectors[3];
+extern float d3_SceneAmbientColor;
+extern float d3_SceneAmbientColorG;
+extern float d3_SceneAmbientColorB;
+extern float d3_SceneLightingVec;
 extern float g_6b86c8;
 extern float g_6b86cc;
 extern float g_1040d00[0x400];
-extern int g_67a370;
+extern int d3_ActiveScene;
 
 void __cdecl d3_InvalidateFloorChunks(char* a);
 void __cdecl d3_TransformDirection(char* node, float* in, float* out);
@@ -104,7 +104,7 @@ void __cdecl d3_UpdateFloorLighting(char* a0)
 		}
 		it.obj = self;
 		it.item = 0;
-		d3_VisitSceneObjects((char*) g_67a370, 0, 0xe, d3_CollectFloorLightCallback, &it);
+		d3_VisitSceneObjects((char*) d3_ActiveScene, 0, 0xe, d3_CollectFloorLightCallback, &it);
 		if (it.item != 0) {
 			char* e;
 
@@ -113,7 +113,7 @@ void __cdecl d3_UpdateFloorLighting(char* a0)
 			*(float*) (self + 0x90) = *(float*) (e + 0x5c) * 0.003921569f;
 			*(float*) (self + 0x94) = *(float*) (e + 0x60) * 0.003921569f;
 			*(float*) (self + 0x98) = *(float*) (e + 0x64) * 0.003921569f;
-			d3_TransformDirection(e, g_662d40, u);
+			d3_TransformDirection(e, d3_UnitAxisVectors, u);
 			grad = *(float*) (self + 0x78) * *(float*) (self + 0x84);
 			grad += grad;
 			lum = *(char**) (self + 0x10);
@@ -136,9 +136,9 @@ void __cdecl d3_UpdateFloorLighting(char* a0)
 						d2 = (int) (unsigned char) curRow[x] - (int) (unsigned char) prevRow[x];
 						s1 = (float) d1 * grad;
 						s2 = (float) d2 * kb;
-						nrm = g_6628a0 / (float) sqrt(s2 * s2 + s1 * s1 + kaa);
+						nrm = flt_1_0 / (float) sqrt(s2 * s2 + s1 * s1 + kaa);
 						tot = u[0] * (nrm * s1) + u[1] * (ka * nrm) + u[2] * (nrm * s2);
-						if (tot < g_6628a8) {
+						if (tot < flt_0_0) {
 							idx = (int) (tot * g_662ca0);
 							chan = f27 * g_1040d00[idx];
 							val = (unsigned int) (int) chan;
@@ -183,30 +183,30 @@ void __cdecl d3_UpdateFloorLighting(char* a0)
 								shade = (float) (int) (b0 & 0x7f);
 								shade += shade;
 								if (b0 & 0x80) {
-									red = (int) (shade * *(float*) (self + 0x90) + g_67bbdc + g_6b86c4);
+									red = (int) (shade * *(float*) (self + 0x90) + d3_SceneAmbientColor + d3_SceneLightingVec);
 									if ((unsigned int) red > 0xff) {
 										red = 0xff;
 									}
-									grn = (int) (shade * *(float*) (self + 0x94) + g_67bbe0 + g_6b86c8);
+									grn = (int) (shade * *(float*) (self + 0x94) + d3_SceneAmbientColorG + g_6b86c8);
 									if ((unsigned int) grn > 0xff) {
 										grn = 0xff;
 									}
-									blu = (int) (shade * *(float*) (self + 0x98) + g_67bbe4 + g_6b86cc);
+									blu = (int) (shade * *(float*) (self + 0x98) + d3_SceneAmbientColorB + g_6b86cc);
 									if ((unsigned int) blu > 0xff) {
 										blu = 0xff;
 									}
 								} else {
-									red = (int) (shade * *(float*) (self + 0x90) + g_67bbdc);
+									red = (int) (shade * *(float*) (self + 0x90) + d3_SceneAmbientColor);
 									if ((unsigned int) red > 0xff) {
 										red = 0xff;
 									}
 									red = red & 0xff;
-									grn = (int) (shade * *(float*) (self + 0x94) + g_67bbe0);
+									grn = (int) (shade * *(float*) (self + 0x94) + d3_SceneAmbientColorG);
 									if ((unsigned int) grn > 0xff) {
 										grn = 0xff;
 									}
 									grn = grn & 0xff;
-									blu = (int) (shade * *(float*) (self + 0x98) + g_67bbe4);
+									blu = (int) (shade * *(float*) (self + 0x98) + d3_SceneAmbientColorB);
 									if ((unsigned int) blu > 0xff) {
 										blu = 0xff;
 									}
@@ -239,30 +239,30 @@ void __cdecl d3_UpdateFloorLighting(char* a0)
 								shade = (float) (int) (b0 & 0x7f);
 								shade += shade;
 								if (b0 & 0x80) {
-									red = (int) (shade * *(float*) (self + 0x90) + g_67bbdc + g_6b86c4);
+									red = (int) (shade * *(float*) (self + 0x90) + d3_SceneAmbientColor + d3_SceneLightingVec);
 									if ((unsigned int) red > 0xff) {
 										red = 0xff;
 									}
-									grn = (int) (shade * *(float*) (self + 0x94) + g_67bbe0 + g_6b86c8);
+									grn = (int) (shade * *(float*) (self + 0x94) + d3_SceneAmbientColorG + g_6b86c8);
 									if ((unsigned int) grn > 0xff) {
 										grn = 0xff;
 									}
-									blu = (int) (shade * *(float*) (self + 0x98) + g_67bbe4 + g_6b86cc);
+									blu = (int) (shade * *(float*) (self + 0x98) + d3_SceneAmbientColorB + g_6b86cc);
 									if ((unsigned int) blu > 0xff) {
 										blu = 0xff;
 									}
 								} else {
-									red = (int) (shade * *(float*) (self + 0x90) + g_67bbdc);
+									red = (int) (shade * *(float*) (self + 0x90) + d3_SceneAmbientColor);
 									if ((unsigned int) red > 0xff) {
 										red = 0xff;
 									}
 									red = red & 0xff;
-									grn = (int) (shade * *(float*) (self + 0x94) + g_67bbe0);
+									grn = (int) (shade * *(float*) (self + 0x94) + d3_SceneAmbientColorG);
 									if ((unsigned int) grn > 0xff) {
 										grn = 0xff;
 									}
 									grn = grn & 0xff;
-									blu = (int) (shade * *(float*) (self + 0x98) + g_67bbe4);
+									blu = (int) (shade * *(float*) (self + 0x98) + d3_SceneAmbientColorB);
 									if ((unsigned int) blu > 0xff) {
 										blu = 0xff;
 									}

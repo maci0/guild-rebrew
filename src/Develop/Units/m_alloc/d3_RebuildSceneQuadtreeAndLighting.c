@@ -1,4 +1,4 @@
-extern int g_67a370;
+extern int d3_ActiveScene;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 
@@ -10,7 +10,7 @@ int __cdecl d3_BuildSceneQuadtree(int, int, int, int);
 
 void __cdecl d3_RebuildSceneQuadtreeAndLighting(void)
 {
-	d3_TraverseSceneObjects(g_67a370, 0, 0xc0, d3_ReparentFackelLights);
+	d3_TraverseSceneObjects(d3_ActiveScene, 0, 0xc0, d3_ReparentFackelLights);
 	if (g_773dd8) {
 		d3_FreeQuadtreeNode(g_773dd8);
 		g_773dd8 = d3_BuildSceneQuadtree(0, 0x40, 8, 7);

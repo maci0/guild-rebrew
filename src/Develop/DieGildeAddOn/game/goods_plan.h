@@ -21,6 +21,6 @@ typedef struct GOODS_PLAN_ENTRY {
 } GOODS_PLAN_ENTRY;
 // SIZE 0x40
 
-extern GOODS_PLAN_ENTRY g_100b0c0[];
+extern GOODS_PLAN_ENTRY ai_ResourceRequests[];
 
 #endif

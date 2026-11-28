@@ -35,8 +35,8 @@ typedef struct {
 
 extern float g_6660fc;
 extern float g_666100;
-extern float g_6628a8;
-extern volatile int g_6b7fac;
+extern float flt_0_0;
+extern volatile int gm_GameTicks;
 
 V4* __cdecl d3_GetDefaultParticleColor(void);
 
@@ -75,7 +75,7 @@ int __cdecl d3_SpawnPhysicsParticle(Particle* o, V3* pos, V3* dir, float speed, 
 	o->cur.z *= o->cur.w;
 	o->start = o->cur;
 	o->color = *c;
-	v = MAX(MIN(o->color.w, g_666100), g_6628a8);
+	v = MAX(MIN(o->color.w, g_666100), flt_0_0);
 	o->color.w = v;
 	o->color.x *= v;
 	o->color.y *= v;
@@ -85,7 +85,7 @@ int __cdecl d3_SpawnPhysicsParticle(Particle* o, V3* pos, V3* dir, float speed, 
 	o->mass = info[4];
 	o->area = info[2];
 	o->active = 1;
-	o->time = g_6b7fac;
+	o->time = gm_GameTicks;
 	o->age = 0;
 	return 1;
 }

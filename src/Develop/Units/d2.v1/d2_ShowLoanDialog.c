@@ -1,11 +1,11 @@
-extern char* g_772500;
-extern char* g_77255c;
+extern char* d2_FileObjTable;
+extern char* d2_CurrentWindow;
 extern int d2_CurrentWindowId;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern int g_14ab658;
 extern int g_14ab65c;
 
@@ -78,7 +78,7 @@ void __cdecl d2_ShowLoanDialog(char* p)
 	*(int*) (arg + 0x10162f0) = 0x18;
 	*(int*) (arg + 0x10162f4) = 0x18;
 	d2_SetForm(dialog, 1);
-	io_AppendText(0x18c9, *(unsigned short*) (g_8680b4 + g_773d75 * 0x2f4) * 2 + 0x9a8);
+	io_AppendText(0x18c9, *(unsigned short*) (g_8680b4 + gm_ActiveTownIndex * 0x2f4) * 2 + 0x9a8);
 	d2_SetOverlayAnimation(0, 0);
 	while (main_RunFrameLoop(d2_ShowLoanDialog, 0x677c7) != 0) {
 		if (refresh) {
@@ -91,10 +91,10 @@ void __cdecl d2_ShowLoanDialog(char* p)
 					rows[i].line = 0;
 				}
 			}
-			n = he_GetActiveKrediteByBorrower(g_774970, 0, lines);
-			count = he_GetActiveKrediteByBorrower(g_774970, p, lines);
+			n = he_GetActiveKrediteByBorrower(gm_LocalPlayerSlot, 0, lines);
+			count = he_GetActiveKrediteByBorrower(gm_LocalPlayerSlot, p, lines);
 			d2_SetForm(dialog, 4);
-			io_AppendText(g_6811b0);
+			io_AppendText(str_dollar_C);
 			if (count >= 9) {
 				io_AppendText(0x18cb);
 				refresh = 1;
@@ -110,7 +110,7 @@ void __cdecl d2_ShowLoanDialog(char* p)
 				refresh = 0;
 			}
 			d2_SetForm(dialog, 3);
-			io_AppendText(g_6811b0);
+			io_AppendText(str_dollar_C);
 			if (refresh == 0) {
 				d2_CreateButtonRow(d2_CurrentWindowId, 0, sel, 2, g_14ab658, g_14ab65c);
 				first = sel[0];
@@ -121,14 +121,14 @@ void __cdecl d2_ShowLoanDialog(char* p)
 				second = sel[0];
 			}
 			index = 0;
-			h = *(short*) (g_772500 + 0x269da);
-			w = *(short*) (g_772500 + 0x269d8);
+			h = *(short*) (d2_FileObjTable + 0x269da);
+			w = *(short*) (d2_FileObjTable + 0x269d8);
 			if (count > 0) {
 				y = 0;
 				for (i = 0; i < count; i++) {
 					d2_SetForm(dialog, 2);
-					rows[i].text = d2_AddElementToWindow((*(int*) (g_77255c + 0xc) - w) >> 1, y, 0x75a, d2_CurrentWindowId);
-					rows[i].image = d2_CreateChildWindow((*(int*) (g_77255c + 0xc) - w) >> 1, y, w, h, 0x10, d2_CurrentWindowId);
+					rows[i].text = d2_AddElementToWindow((*(int*) (d2_CurrentWindow + 0xc) - w) >> 1, y, 0x75a, d2_CurrentWindowId);
+					rows[i].image = d2_CreateChildWindow((*(int*) (d2_CurrentWindow + 0xc) - w) >> 1, y, w, h, 0x10, d2_CurrentWindowId);
 					line = lines[index];
 					rows[i].line = line;
 					*(int*) (rows[i].image * 0x3cc + 0x10161cc) = 0x56;
@@ -152,14 +152,14 @@ void __cdecl d2_ShowLoanDialog(char* p)
 			slot = prev;
 		}
 		refresh = 0;
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 		if (second != -1) {
 			arg = count > 0 && *(int*) (slot * 0x8c + 0x102cbc8) != -1;
 			d2_SetElementEnabled(second, arg);
 		}
-		if (g_100f1dc != -1 && g_100f1dc == 2) {
+		if (d2_DialogButtonAction != -1 && d2_DialogButtonAction == 2) {
 			if (d2_CurrentElementId != first || first == -1) {
 				if (d2_CurrentElementId == second && second != -1) {
 					d2_SetFormVisibility(dialog, 0);

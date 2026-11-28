@@ -1,10 +1,10 @@
 extern int g_6a256c;
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 extern int d2_CurrentWindowId;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern int g_14ce8e0;
-extern char g_1015f40[];
-extern char g_868060[];
+extern int io_RightButtonReleased;
+extern char d2_Windows[];
+extern char gm_TownTable[];
 #include "Develop/DieGildeAddOn/game/season_slots.h"
 extern double g_665ed0;
 extern char g_6a40b0[];
@@ -55,8 +55,8 @@ void __cdecl d2_ShowCityTradeInfoDialog(char* building)
 	k = -1;
 	if (main_RunFrameLoop((void*) d2_ShowCityTradeInfoDialog, 0x677c7)) {
 		do {
-			if (g_14ce8e0 != 0) {
-				g_774654 = 1;
+			if (io_RightButtonReleased != 0) {
+				d2_DialogCloseRequested = 1;
 			}
 			if (k != 1) {
 				if (idx != -1) {
@@ -73,12 +73,12 @@ void __cdecl d2_ShowCityTradeInfoDialog(char* building)
 				d2_SetForm(idx, 1);
 				io_AppendText((char*) 0x1a11);
 				d2_SetForm(idx, 5);
-				io_AppendText((char*) 0x1a14, *(int*) (building + 0x65) * 0x2f4 + g_868060, g_85ab80[*(int*) (building + 0x65)].unk_00);
-				windowData = g_1015f40 + *(int*) (idx * 700 + 0x103814c) * 0x3cc;
-				sprintf(name, "Wappen128_ns_Stadt_%s", (char*) (*(int*) (building + 0x65) * 0x2f4 + (int) g_868060));
+				io_AppendText((char*) 0x1a14, *(int*) (building + 0x65) * 0x2f4 + gm_TownTable, g_85ab80[*(int*) (building + 0x65)].unk_00);
+				windowData = d2_Windows + *(int*) (idx * 700 + 0x103814c) * 0x3cc;
+				sprintf(name, "Wappen128_ns_Stadt_%s", (char*) (*(int*) (building + 0x65) * 0x2f4 + (int) gm_TownTable));
 				d2_SetBackgroundTexture(name, *(int*) windowData);
 				*(int*) (windowData + 0x3a4) = 0;
-				flag = g_6b7fac;
+				flag = gm_GameTicks;
 				slot = fcn_00502cd0(*(int*) (building + 0x5d), 2, 0, 0x1db, 6);
 				if (slot == 0) {
 					return;
@@ -113,7 +113,7 @@ void __cdecl d2_ShowCityTradeInfoDialog(char* building)
 				}
 				k = 1;
 			}
-			dt = (double) ((unsigned int)g_6b7fac - flag) * (1.0 / 650.0);
+			dt = (double) ((unsigned int)gm_GameTicks - flag) * (1.0 / 650.0);
 			if (!(dt < g_665ed0)) {
 				dt = g_665ed0;
 			}

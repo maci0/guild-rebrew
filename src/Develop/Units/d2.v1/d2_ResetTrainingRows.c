@@ -23,7 +23,7 @@ void __cdecl d2_ResetTrainingRows(void)
 	D2_TRAINING_ROW* r;
 
 	for (i = 0; i < 32; i++) {
-		r = (D2_TRAINING_ROW*) g_7774a0 + i;
+		r = (D2_TRAINING_ROW*) d2_TrainingRows + i;
 		r->entity = 0;
 		r->portrait_element = -1;
 		r->row_element = -1;

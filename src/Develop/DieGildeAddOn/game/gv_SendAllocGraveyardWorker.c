@@ -34,6 +34,6 @@ int __cdecl gv_SendAllocGraveyardWorker(char* obj, int fieldId, int slotIndex, i
 	m.x10 = (char) slotIndex;
 	m.x11 = workerId;
 	m.x15 = actionKind;
-	gm_TryRecordCrime(0x1b, 1, ((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (obj + 0x27)].entity_id, -1, *(int*) (obj + 1));
+	gm_TryRecordCrime(0x1b, 1, ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (obj + 0x27)].entity_id, -1, *(int*) (obj + 1));
 	return cm_SendAllocGraveyardWorker(&m);
 }

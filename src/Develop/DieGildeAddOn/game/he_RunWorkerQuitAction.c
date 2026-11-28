@@ -49,7 +49,7 @@ void __cdecl he_RunWorkerQuitAction(char* u)
 		cm_RequestChangePlayerHe(*(int*) (h + 4), 0, 0);
 		cm_RequestCancelEntityEvent(*(int*) (h + 4));
 		cm_BeginPacketFieldDelta(h, *(int*) (h + 4));
-		cm_AppendCommandSyncField(4, 1, h - g_aed32c + 0x16c, &v);
+		cm_AppendCommandSyncField(4, 1, h - cm_PacketDeltaBase + 0x16c, &v);
 		cm_SendSetAttribute();
 		if (gm_FindFallbackPublicBuilding(h, &a, &b) != 0) {
 			if (b != -1) {
@@ -59,15 +59,15 @@ void __cdecl he_RunWorkerQuitAction(char* u)
 			}
 		}
 		v = -5;
-		cm_RequestCopyEntityData(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (*(char**) (h + 0x16c) + 0x27)])->entity_id, *(int*) (h + 4), v, 1);
+		cm_RequestCopyEntityData(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[*(unsigned short*) (*(char**) (h + 0x16c) + 0x27)])->entity_id, *(int*) (h + 4), v, 1);
 		q = gm_FindBuildingPrimarySlot(*(char**) (h + 0x16c));
 		io_FormatTextBuffer(text, 0x1bac, *(unsigned short*) h, *(char**) (h + 0x16c));
 		if (q != 0) {
 			h = *(char**) (h + 0x16c);
-			he_MessageBoxQuickjump(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (h + 0x27)])->entity_id, -1, text, 0, 0x5f2, *(int*) (h + 1), *(int*) (q + 2), 0,
+			he_MessageBoxQuickjump(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[*(unsigned short*) (h + 0x27)])->entity_id, -1, text, 0, 0x5f2, *(int*) (h + 1), *(int*) (q + 2), 0,
 			    "_NACHRICHTEN_HS_01");
 		} else {
-			he_PostEntityMessage(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (*(char**) (h + 0x16c) + 0x27)])->entity_id, -1, text, 0, 0x5f2, "_NACHRICHTEN_HS_01");
+			he_PostEntityMessage(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[*(unsigned short*) (*(char**) (h + 0x16c) + 0x27)])->entity_id, -1, text, 0, 0x5f2, "_NACHRICHTEN_HS_01");
 		}
 		he_FreeAction(u);
 		return;

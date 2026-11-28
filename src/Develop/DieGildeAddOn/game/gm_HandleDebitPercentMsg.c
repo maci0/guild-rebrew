@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 
 #include <string.h>
@@ -29,7 +29,7 @@ int __cdecl gm_HandleDebitPercentMsg(void* noticeRequest)
 	n = gm_WalkEntityChain(*(short*) p);
 	r = (int) (((double) n * d) * 0.01);
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) noticeRequest + 4) + 0x12e7, r);
-	cm_RequestTransferCurrencyNoKill(*(int*) noticeRequest, -1, g_773d75, r);
+	cm_RequestTransferCurrencyNoKill(*(int*) noticeRequest, -1, gm_ActiveTownIndex, r);
 	len = strlen(buf);
 	he_PostEntityMessage(*(int*) ((char*) p + 4), *(int*) ((char*) p + 4), buf,
 	    0x100 < len, 0x603, 0);

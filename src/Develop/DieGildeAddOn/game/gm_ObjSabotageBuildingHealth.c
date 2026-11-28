@@ -37,9 +37,9 @@ typedef struct {
 	char pad170[0xac];
 } House;
 
-extern char g_7f4ca0[];
-extern __int64 g_666018;
-extern char* g_14a558c;
+extern char gm_EntitySlotTable[];
+extern __int64 gm_TargetPersonTypeMask;
+extern char* txt_TargetBuildingPrompt;
 extern char* g_14a5590;
 
 Unit* __cdecl d2_RunCityScrollMapDialog(int, Req*, char*, int, int);
@@ -70,7 +70,7 @@ int __cdecl gm_ObjSabotageBuildingHealth(unsigned char* obj, int* arg)
 		req.size = -1;
 		req.kind = 6;
 		req.cd = 0x1a0744300;
-		q = d2_RunCityScrollMapDialog(1, &req, g_14a558c, 0, 0);
+		q = d2_RunCityScrollMapDialog(1, &req, txt_TargetBuildingPrompt, 0, 0);
 		if (q == 0) {
 			return 0;
 		}
@@ -78,7 +78,7 @@ int __cdecl gm_ObjSabotageBuildingHealth(unsigned char* obj, int* arg)
 		req.ids[0] = q->w27;
 		req.size = 0x400;
 		req.kind = 6;
-		req.cd = g_666018;
+		req.cd = gm_TargetPersonTypeMask;
 		e = d2_OpenTargetPicker(&req, g_14a5590, 0, 0);
 		if (e == 0) {
 			return 0;
@@ -93,10 +93,10 @@ int __cdecl gm_ObjSabotageBuildingHealth(unsigned char* obj, int* arg)
 			return 0;
 		}
 	}
-	cm_RequestCopyEntityData(*(unsigned short*) e, ((House*)g_7f4ca0)[q->w27].f4, -20 - gm_RandomMod(0x20), 1);
+	cm_RequestCopyEntityData(*(unsigned short*) e, ((House*)gm_EntitySlotTable)[q->w27].f4, -20 - gm_RandomMod(0x20), 1);
 	for (i = 0; i < 768; i++) {
-		if (((House*)g_7f4ca0)[i].b2 == 0 && ((House*)g_7f4ca0)[i].f16c == q) {
-			gm_ApplyEntityHealthDelta(i, (int) -((gm_RandomFloat01() * 0.2f + 0.1f) * ((House*)g_7f4ca0)[i].f1c));
+		if (((House*)gm_EntitySlotTable)[i].b2 == 0 && ((House*)gm_EntitySlotTable)[i].f16c == q) {
+			gm_ApplyEntityHealthDelta(i, (int) -((gm_RandomFloat01() * 0.2f + 0.1f) * ((House*)gm_EntitySlotTable)[i].f1c));
 		}
 	}
 	if (e[2] == 6 || e[2] == 7) {

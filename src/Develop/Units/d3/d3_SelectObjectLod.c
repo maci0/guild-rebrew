@@ -5,7 +5,7 @@
 #include "Develop/Units/d3/d3_camera.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-extern float g_6628a8;
+extern float flt_0_0;
 extern float g_1042a10;
 
 #if defined(REBREW_GOLD)
@@ -95,8 +95,8 @@ int __cdecl d3_SelectObjectLod(char* obj)
 		if (idx >= *(unsigned char*) (ext + 0x163c)) {
 			dist = fn - 1.0f;
 		}
-		else if (dist < g_6628a8) {
-			dist = g_6628a8;
+		else if (dist < flt_0_0) {
+			dist = flt_0_0;
 		}
 		idx = (int) dist;
 		entry = ext + 0xf4 + idx * 0x4a4;

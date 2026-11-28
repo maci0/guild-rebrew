@@ -14,9 +14,9 @@ typedef struct {
 	char pad8[0x21c - 8];
 } Obj;
 
-extern Rec2d g_9a3800[512];
-extern Pair g_99f800[0x800];
-extern char g_7f4ca0[];
+extern Rec2d cm_CrimeRecords[512];
+extern Pair cm_CrimeEvidenceLinks[0x800];
+extern char gm_EntitySlotTable[];
 
 int __cdecl FindStraftatIndexById(int b);
 
@@ -43,13 +43,13 @@ int __cdecl gm_CollectFrequentCrimeTargets(int* ids, int* d, unsigned short k)
 		d[i] = 0;
 	}
 	memset(list, 0xff, 0x200 * 4);
-	e = ((char*)&((ENTITY_RECORD*)g_7f4ca0)[k]);
+	e = ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[k]);
 
 	for (i = 0; i < 0x800; i++) {
-		if (g_99f800[i].owner == *(int*) (e + 4)) {
-			s = FindStraftatIndexById(g_99f800[i].key);
-			if (s != -1 && g_9a3800[s].x25 == 1) {
-				list[m] = g_9a3800[s].x16;
+		if (cm_CrimeEvidenceLinks[i].owner == *(int*) (e + 4)) {
+			s = FindStraftatIndexById(cm_CrimeEvidenceLinks[i].key);
+			if (s != -1 && cm_CrimeRecords[s].x25 == 1) {
+				list[m] = cm_CrimeRecords[s].x16;
 				m++;
 			}
 		}

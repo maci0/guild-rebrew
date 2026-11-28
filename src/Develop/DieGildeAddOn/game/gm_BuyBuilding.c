@@ -52,7 +52,7 @@ typedef struct {
 
 extern unsigned char* lpGebaeudePROT;
 
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 extern pos14_7f4c00 gm_GameTime;
 
@@ -83,14 +83,14 @@ void __cdecl gm_BuyBuilding(int search, int buyer, int price, Order* o, int noti
 	cm_SendLogAction("buy_building");
 	if (s->slot != 0xffff) {
 		io_FormatTextBuffer(msg, 0x17e6, s, u->slot, price);
-		he_MessageBoxQuickjump(((ENTITY_RECORD*)g_7f4ca0)[s->slot].entity_id, -1, msg, 0, 0x5ff, s->id, -1, 0, "_NACHRICHTEN_HS_30");
-		cm_RequestTransferCurrencyNoKill(((ENTITY_RECORD*)g_7f4ca0)[s->slot].entity_id, buyer, (*(char*)&g_773d75), price);
+		he_MessageBoxQuickjump(((ENTITY_RECORD*)gm_EntitySlotTable)[s->slot].entity_id, -1, msg, 0, 0x5ff, s->id, -1, 0, "_NACHRICHTEN_HS_30");
+		cm_RequestTransferCurrencyNoKill(((ENTITY_RECORD*)gm_EntitySlotTable)[s->slot].entity_id, buyer, (*(char*)&gm_ActiveTownIndex), price);
 		cm_SendSetGebBesitzer(s->id, u->id, u->id);
 		if (notify != 0 && office->category == 2) {
 			cm_RequestSetWohnsitz(u->id, s->id);
 		}
 	} else {
-		cm_RequestMoveCredits(-1, buyer, (*(char*)&g_773d75), price);
+		cm_RequestMoveCredits(-1, buyer, (*(char*)&gm_ActiveTownIndex), price);
 		cm_SendSetGebBesitzer(s->id, u->id, u->id);
 		if (notify != 0 && office->category == 2) {
 			cm_RequestSetWohnsitz(u->id, s->id);

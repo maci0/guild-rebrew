@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern float g_6628a8;
+extern float flt_0_0;
 extern float g_6628ac;
 
 #include "Develop/DieGildeAddOn/game/client_method_registry.h"
@@ -46,10 +46,10 @@ typedef struct Entry {
 	int ref2;                /* 0xbc */
 } Entry;
 
-extern AM_METHOD g_1008540[];
+extern AM_METHOD am_Methods[];
 extern char* gm_RichterKatholisch;
 extern char* gm_RichterEvangelisch;
-extern char* g_77261c;
+extern char* ai_FeudTargetEntity;
 
 char* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
@@ -86,7 +86,7 @@ int __cdecl ai_ScoreBestechung(float* firstScore, float* secondScore, int idx, A
 	}
 	*firstScore = 0.0f;
 	*secondScore = 0.0f;
-	method = &g_1008540[idx];
+	method = &am_Methods[idx];
 	if (actor->f168 != 0) {
 		goto calc;
 	}
@@ -109,13 +109,13 @@ int __cdecl ai_ScoreBestechung(float* firstScore, float* secondScore, int idx, A
 			sv[0] = gm_LookupEntityRecordById(entry->val);
 			sv[1] = gm_LookupEntityRecordById(entry->ref1);
 			sv[2] = gm_LookupEntityRecordById(entry->ref2);
-			if (sv[0] != 0 && sv[0] != g_77261c) {
+			if (sv[0] != 0 && sv[0] != ai_FeudTargetEntity) {
 				fv[0] = gm_CalcEntityFavor(actor->w0, *(unsigned short*) sv[0], 1);
 			}
-			if (sv[1] != 0 && sv[1] != g_77261c) {
+			if (sv[1] != 0 && sv[1] != ai_FeudTargetEntity) {
 				fv[1] = gm_CalcEntityFavor(actor->w0, *(unsigned short*) sv[1], 1);
 			}
-			if (sv[2] != 0 && sv[2] != g_77261c) {
+			if (sv[2] != 0 && sv[2] != ai_FeudTargetEntity) {
 				fv[2] = gm_CalcEntityFavor(actor->w0, *(unsigned short*) sv[2], 1);
 			}
 			for (i = 0; i < 3; i++) {

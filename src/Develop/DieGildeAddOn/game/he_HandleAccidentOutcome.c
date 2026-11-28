@@ -19,13 +19,13 @@ typedef struct ACCIDENT_DEATH_MSG {
 	char pad5c[0x9c];
 } ACCIDENT_DEATH_MSG;
 
-extern float g_6628a8;
+extern float flt_0_0;
 extern float g_6628cc;
 extern int gm_GameTime;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
-extern int g_7f4ca4[];
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
+extern int gm_EntityIdField[];
 extern char s_6a5930[];
 extern char s_6a594c[];
 extern char s_6a5960[];
@@ -68,15 +68,15 @@ void __cdecl he_HandleAccidentOutcome(int action, char* subject, char* owner,
 		memset(&msg, 0, 0xf8);
 		msg.f4 = 0x71;
 		if (action) {
-			msg.f8 = g_7f4ca4[*(unsigned short*) (action + 8) * 0x87];
+			msg.f8 = gm_EntityIdField[*(unsigned short*) (action + 8) * 0x87];
 		} else {
 			msg.f8 = *(int*) (owner + 4);
 		}
 		msg.f28 = gm_GameTime;
-		msg.f2c = g_7f4c04;
-		msg.f30 = g_7f4c08;
+		msg.f2c = gm_GameTimeHour;
+		msg.f30 = gm_GameTimeSliceDword;
 		msg.fc = -1;
-		msg.f34 = (unsigned short) g_7f4c0c;
+		msg.f34 = (unsigned short) gm_GameTimeTailWord;
 		msg.f36 = 2;
 		msg.f58 = *(int*) (p + 4);
 		cm_SendCopyEntityData(&msg);

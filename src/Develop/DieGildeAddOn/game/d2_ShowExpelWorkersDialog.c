@@ -10,7 +10,7 @@ typedef struct
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern unsigned short g_7f4c04;
+extern unsigned short gm_GameTimeHour;
 
 int __cdecl amt_FindOfficeSlotByType(int, Law*);
 int __cdecl d2_LoadForm(int, int, char*);
@@ -47,17 +47,17 @@ int __cdecl d2_ShowExpelWorkersDialog(char* e)
 	id = io_AppendText(0x1e25);
 	ok = d2_GetWindowListItem(dlg, 1, id);
 	cancel = d2_GetWindowListItem(dlg, 1, id + 1);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
-		} else if (g_100f1dc != -1) {
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
+		} else if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == ok) {
-				amt_SendOfficeCommand(x.x0, 0, 0, g_7f4c04 > 13 ? 0xff : 3, 0xff);
+				amt_SendOfficeCommand(x.x0, 0, 0, gm_GameTimeHour > 13 ? 0xff : 3, 0xff);
 				r = 0x90;
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			} else if (d2_CurrentElementId == cancel) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	} while (main_RunFrameLoop((void*) d2_ShowExpelWorkersDialog, 0x657c7) != 0);

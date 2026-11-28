@@ -2,20 +2,20 @@
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int main_LoopFlags;
 extern int g_14b556c;
 extern int g_14b5574;
 extern int g_14b5588;
 extern int gm_GameTime;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
-extern char g_7f4ca0[];
-extern char g_7f4ca4[];
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
+extern char gm_EntitySlotTable[];
+extern char gm_EntityIdField[];
 
 void* __cdecl d2_OpenTargetPicker(void*, char*, int, int);
 int __cdecl d3_EndCameraAndUiMode(void);
@@ -89,22 +89,22 @@ int __cdecl d2_ShowHauntingDialog(char* subject)
 	b2 = d2_GetWindowListItem(h, 2, n);
 	b3 = d2_GetWindowListItem(h, 2, n + 1);
 	d2_CreateGuiWindow(b1, 4, 0xc, 4);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
-		} else if (g_100f1dc != -1) {
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
+		} else if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == b2) {
 				flag = 0;
 				n = d2_GetControlValue(b1);
 
-				if (d2_CheckActionBlocker(((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]), n) == 0) {
+				if (d2_CheckActionBlocker(((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot]), n) == 0) {
 					flag = 1;
 				}
 				hh = 0;
 				for (i = 0; i < 768; i++) {
-					if (*(unsigned char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[i].unk_17c[0xc]) != 0) {
-						hh = ((char*)&((ENTITY_RECORD*)g_7f4ca0)[i]);
+					if (*(unsigned char*) ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[i].unk_17c[0xc]) != 0) {
+						hh = ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[i]);
 						break;
 					}
 				}
@@ -117,12 +117,12 @@ int __cdecl d2_ShowHauntingDialog(char* subject)
 					req[4] = (char) 0x88;
 					req[0x36] = 2;
 					*(int*) (req + 0x64) = n;
-					*(int*) (req + 8) = *(int*)&((ENTITY_RECORD*)(g_7f4ca4 - 4))[*(unsigned short*) (subject + 0x27)].entity_id;
+					*(int*) (req + 8) = *(int*)&((ENTITY_RECORD*)(gm_EntityIdField - 4))[*(unsigned short*) (subject + 0x27)].entity_id;
 					*(int*) (req + 0xc) = *(int*) (subject + 1);
 					*(int*) (req + 0x28) = gm_GameTime;
-					*(int*) (req + 0x2c) = g_7f4c04;
-					*(int*) (req + 0x30) = g_7f4c08;
-					*(short*) (req + 0x34) = g_7f4c0c;
+					*(int*) (req + 0x2c) = gm_GameTimeHour;
+					*(int*) (req + 0x30) = gm_GameTimeSliceDword;
+					*(short*) (req + 0x34) = gm_GameTimeTailWord;
 					*(int*) (req + 0x5c) = *(int*) (v + 4);
 					*(int*) (req + 0x60) = *(int*) (hh + 4);
 					*(int*) (req + 0x38) = *(int*) (hh + 4);
@@ -135,7 +135,7 @@ int __cdecl d2_ShowHauntingDialog(char* subject)
 						flag = -1;
 						f.mask = 0x7b4c4a0;
 						f.b = 0;
-						ai_FindEntityInFavorRange(((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]), 0, f, 0,
+						ai_FindEntityInFavorRange(((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot]), 0, f, 0,
 						    100.0f, &flag);
 						*(int*) (req + 0x58) = flag;
 					}
@@ -144,11 +144,11 @@ int __cdecl d2_ShowHauntingDialog(char* subject)
 						main_RunFrameLoop(0, 0x20007);
 					}
 					main_LoopFlags = 0x677c7;
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 					d2_ShowModalMessageBox(g_14b5588, 0);
 				}
 			} else if (d2_CurrentElementId == b3) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	} while (main_RunFrameLoop((void*) d2_ShowHauntingDialog, 0x677c7) != 0);

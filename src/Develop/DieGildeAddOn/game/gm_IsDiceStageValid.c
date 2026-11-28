@@ -1,5 +1,5 @@
-extern char g_6641a4[];
-extern char g_6641a4[];
+extern char gm_ValidDiceStages[];
+extern char gm_ValidDiceStages[];
 
 /* ADDRESS: GOLD 0x00493380 */
 /* ADDRESS: GOLDTL 0x00492950 */
@@ -15,7 +15,7 @@ int __cdecl gm_IsDiceStageValid(char* p, int entity, int stage)
 	} else {
 		return 0;
 	}
-	for (e = (int) g_6641a4; e < (int) g_6641a4 + 0x48; e += 8) {
+	for (e = (int) gm_ValidDiceStages; e < (int) gm_ValidDiceStages + 0x48; e += 8) {
 		if (*(int*) (e - 4) == value && *(int*) e == stage) {
 			return 1;
 		}

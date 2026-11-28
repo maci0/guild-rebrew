@@ -1,7 +1,7 @@
 
 
 
-extern char g_7f4ca4[];
+extern char gm_EntityIdField[];
 extern unsigned char* lpGebaeudePROT;
 extern char g_699adc[];
 extern char g_699af0[];
@@ -34,7 +34,7 @@ void __cdecl gm_AdjustGebaeudeCondition(char* o, int delta)
 	if (*o != 0 && d + o[0x5c] <= 0) {
 		rec = (unsigned char*) &((BUILDING_PROTOTYPE*) lpGebaeudePROT)[(unsigned char) *o];
 		if (*rec != 0xf && *rec != 0x1c && *rec != 0x1b && *rec != 0xa && *rec != 6 && *rec < 0x17 && *rec != 0x10) {
-			for (p = g_7f4ca4; (int) p < (int) (g_7f4ca4 + 0x65400); p += sizeof(ENTITY_RECORD)) {
+			for (p = gm_EntityIdField; (int) p < (int) (gm_EntityIdField + 0x65400); p += sizeof(ENTITY_RECORD)) {
 				if (*(unsigned char*) (p - 2) == 6 || *(unsigned char*) (p - 2) == 7) {
 					if (*(unsigned short*) (p - 4) != *(unsigned short*) (o + 0x27)) {
 						io_FormatTextBuffer(other, 0x1c52, *(unsigned short*) (o + 0x27), o);

@@ -1,5 +1,5 @@
 extern int d2_CurrentWindowId;
-extern char* g_1015ea0;
+extern char* d2_Controls;
 
 
 int __cdecl d2_AddWindowTextButton(char*, int, int, int, int);
@@ -12,7 +12,7 @@ int __cdecl d2_CreateWindowTextButton(char* a, int b, int c)
 
 	h = d2_AddWindowTextButton(a + 3, b, 0xc5, c, d2_CurrentWindowId);
 	d2_SetElementFont(h, 0x54);
-	((D2_CONTROL_TL*) (g_1015ea0))[h].value_06c = 1;
+	((D2_CONTROL_TL*) (d2_Controls))[h].value_06c = 1;
 	d2_SetElementWidth(h, 0x60);
 	return h;
 }

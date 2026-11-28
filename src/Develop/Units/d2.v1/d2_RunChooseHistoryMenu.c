@@ -2,7 +2,7 @@ extern int g_7e2468;
 extern char g_7e2430[5];
 extern char g_7e23e3;
 extern int g_14abee0[];
-extern int g_774654;
+extern int d2_DialogCloseRequested;
 extern int g_1040494;
 extern int d2_ScreenHeight;
 int __cdecl d3_SelectSceneContext();
@@ -66,7 +66,7 @@ int __cdecl d2_RunChooseHistoryMenu(void)
 	v5 = d2_GetWindowListItem(dialog, 0, v3 + 1);
 	v6 = d2_GetWindowListItem(dialog, 0, v3 + 2);
 	v3 = d2_GetWindowListItem(dialog, 0, v3 + 3);
-	if (*(unsigned char*) &g_6a375c > 1) {
+	if (*(unsigned char*) &gm_PlayerCount > 1) {
 		v13 = d2_GetWindowListItem(dialog, 0, io_AppendText(0x681164, 2, 0x1acb));
 	}
 	if (*(int*) 0x776700 <= -1) {
@@ -85,24 +85,24 @@ int __cdecl d2_RunChooseHistoryMenu(void)
 			break;
 		}
 		d2_UpdateRadioGroup(group);
-		if (g_14ce8e0 || *(unsigned char*) &g_14cf950 == 1 || *(int*) &g_100f1dc == 1) {
-			g_774654 = 1;
+		if (io_RightButtonReleased || *(unsigned char*) &io_LastKeyScancode == 1 || *(int*) &d2_DialogButtonAction == 1) {
+			d2_DialogCloseRequested = 1;
 		}
-		r = *(int*) &g_100f1dc;
+		r = *(int*) &d2_DialogButtonAction;
 		if (r == 2 || v1) {
 			v1 = 0;
 			if (d2_CurrentElementId == v4) {
-				*(unsigned char*) &g_6a3440 = 0xff;
+				*(unsigned char*) &gm_SelectedMissionIndex = 0xff;
 			} else if (d2_CurrentElementId == v5) {
-				*(unsigned char*) &g_6a3440 = 1;
+				*(unsigned char*) &gm_SelectedMissionIndex = 1;
 			} else if (d2_CurrentElementId == v6) {
-				*(unsigned char*) &g_6a3440 = 2;
+				*(unsigned char*) &gm_SelectedMissionIndex = 2;
 			} else if (d2_CurrentElementId == v3) {
-				*(unsigned char*) &g_6a3440 = 3;
+				*(unsigned char*) &gm_SelectedMissionIndex = 3;
 			} else if (d2_CurrentElementId == v13) {
-				*(unsigned char*) &g_6a3440 = 5;
+				*(unsigned char*) &gm_SelectedMissionIndex = 5;
 			}
-			r = *(signed char*) &g_6a3440;
+			r = *(signed char*) &gm_SelectedMissionIndex;
 			*(int*) 0x776700 = r;
 			if (r != -1) {
 				d2_SelectRadioGroup(group, r + 1);
@@ -144,16 +144,16 @@ int __cdecl d2_RunChooseHistoryMenu(void)
 			}
 			d2_SetFormVisibility(dialog, 1);
 			if (v12 != 0) {
-				if (*(unsigned char*) &g_6a375c >= 1) {
-					*(int*) &g_7747b0 |= 8;
+				if (*(unsigned char*) &gm_PlayerCount >= 1) {
+					*(int*) &gm_ClientModeFlags |= 8;
 				}
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 				v12 = 1;
 			}
 		} else {
 			v1 = 0;
 			if (r == 1) {
-				g_774654 = r;
+				d2_DialogCloseRequested = r;
 			}
 		}
 	}

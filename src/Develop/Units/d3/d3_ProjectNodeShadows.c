@@ -2,7 +2,7 @@
 
 #include "Develop/Units/d3/d3_camera.h"
 #include "Develop/Units/d3/client_lighting.h"
-extern char* g_6b86e0; extern float g_662d40[3];
+extern char* g_6b86e0; extern float d3_UnitAxisVectors[3];
 typedef struct D3_SHADOW_PROJ_VEC4 {
 	float x;
 	float y;
@@ -77,7 +77,7 @@ void __cdecl d3_ProjectNodeShadows(char* node)
 			break;
 		}
 		d3_TransformPoint(s, s + 0x4c, &position);
-		d3_TransformDirection(s, g_662d40, &direction);
+		d3_TransformDirection(s, d3_UnitAxisVectors, &direction);
 		h = d3_GetShadowPlaneHeight(node, ctx, s);
 		base = ((D3_SHADOW_QUERY_API*) *(char**) (ctx + 0x318))->query(
 		    node, ctx, *(char**) (node + 0x1ec) + 8);
@@ -110,7 +110,7 @@ void __cdecl d3_ProjectNodeShadows(char* node)
 		} while (i != 0);
 		if (!(d3_TestBoxAgainstFrustum(base, 0, 0) & 0x40)) {
 			*(unsigned char*) (node + 0x216) |= 0x80;
-			d3_UpdateNodeShadowMap(node, s, g_6b8300, h);
+			d3_UpdateNodeShadowMap(node, s, d3_CurrentFloor, h);
 		}
 	}
 }

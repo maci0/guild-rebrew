@@ -20,7 +20,7 @@ typedef struct {
 
 typedef P413680* (__cdecl* Corners413680)(char* obj, char* m, char* p);
 
-extern float g_6628a8;
+extern float flt_0_0;
 void __cdecl d3_UpdateObjectCameraTransform(char* obj, char* cam, int flag);
 
 char __cdecl d3_ComputeObjectBoundingSphere(char* obj, char* cam, float* center, float* radius)
@@ -55,7 +55,7 @@ char __cdecl d3_ComputeObjectBoundingSphere(char* obj, char* cam, float* center,
 			c.x *= 0.125f;
 			c.y *= 0.125f;
 			c.z *= 0.125f;
-			c.w = g_6628a8;
+			c.w = flt_0_0;
 			for (i = 0; i < 8; i++) {
 				dx = c.x - p[i].x;
 				dy = c.y - p[i].y;

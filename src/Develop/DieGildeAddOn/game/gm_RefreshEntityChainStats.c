@@ -1,9 +1,9 @@
 /* Per-tick refresh of the visible entity rows: sends the three slot amounts
  * and the averaged fill level, then updates the row's animation values. */
 
-extern int g_773d48;
+extern int gm_QueuedCommandCount;
 extern unsigned char g_slot_table[2];
-extern int g_aed32c;
+extern int cm_PacketDeltaBase;
 extern double g_6629c8;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern double g_6640f0;
@@ -37,11 +37,11 @@ void __cdecl gm_RefreshEntityChainStats(void)
 	char* e;
 
 	gm_FindRichestEntity(&flag, &n);
-	g_773d48 = 0;
+	gm_QueuedCommandCount = 0;
 	for (e = (char*) g_slot_table; (int) e < (int) g_slot_table + 0x65400; e += 0x21c) {
-		if (g_773d48 > 0x40) {
+		if (gm_QueuedCommandCount > 0x40) {
 			cm_StepCommandQueue();
-			g_773d48 = 0;
+			gm_QueuedCommandCount = 0;
 		}
 		if (*(short*) e == -1) {
 			continue;
@@ -60,23 +60,23 @@ void __cdecl gm_RefreshEntityChainStats(void)
 			v = *(int*) (e + 0x1d8 + i * 4);
 			total += v;
 			count += v != 0;
-			cm_AppendPacketFieldDelta(4, 1, (int) e + 0x1d4 + i * 4 - g_aed32c, &v);
+			cm_AppendPacketFieldDelta(4, 1, (int) e + 0x1d4 + i * 4 - cm_PacketDeltaBase, &v);
 		}
 		count = (r + total) / (count + 1);
-		cm_AppendPacketFieldDelta(4, 1, ((int) e - g_aed32c) + 0x1e0, &r);
+		cm_AppendPacketFieldDelta(4, 1, ((int) e - cm_PacketDeltaBase) + 0x1e0, &r);
 		*(double*) dmem = (double) count / (double) r;
 		if (!(*(double*) dmem < g_6629c8)) {
 			*(double*) dmem = 1.0;
 		}
 		inv = 1.0f - (float) r / (float) n;
 		cm_RequestChangeAttribute();
-		g_773d48++;
+		gm_QueuedCommandCount++;
 		cm_RequestChangeFloat(*(int*) (e + 4), 0x1e4, -(*(float*) (e + 0x1e4) - (*(double*) dmem + inv) * 0.5));
 		inv = (float) (-(*(float*) (e + 0xb4) - g_6640f0 * *(float*) (e + 0xb4)));
 		cm_BeginSecondaryPacketDelta((int*) e);
 		cm_AppendDesireDelta(3, inv);
 		cm_SendChangeDesire();
-		g_773d48++;
+		gm_QueuedCommandCount++;
 	}
-	g_773d48 = 0;
+	gm_QueuedCommandCount = 0;
 }

@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/ch_script.h"
-extern char g_6761ec[];
+extern char str_DeleteCharacterAnimations_Invalid[];
 
 
 
@@ -15,7 +15,7 @@ int __cdecl KillCharacterAnimations(char** target)
 
 	p = *target;
 	if (p == 0) {
-		evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), g_6761ec);
+		evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), str_DeleteCharacterAnimations_Invalid);
 	} else {
 		q = *(char**) (p + 0x128);
 		if (q != 0) {

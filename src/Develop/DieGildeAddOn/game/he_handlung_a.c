@@ -1,4 +1,4 @@
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 char* __cdecl he_StartHandlungSearch(int a, int b, int c);
 char* __cdecl he_fn_Handlung(void);
@@ -20,7 +20,7 @@ int __cdecl he_GetActiveKrediteByBorrower(int id, char* owner, char** out)
 		if (count >= 9) {
 			break;
 		}
-		if (*(int*) (action + 0xb0) == *(int*) (((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[id] + 4)) && (owner == 0 || *(int*) (action + 0xac) == *(int*) (owner + 1))) {
+		if (*(int*) (action + 0xb0) == *(int*) (((char *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[id] + 4)) && (owner == 0 || *(int*) (action + 0xac) == *(int*) (owner + 1))) {
 			out[count++] = action;
 		}
 		action = he_fn_Handlung();
@@ -44,7 +44,7 @@ int __cdecl he_GetActiveKrediteByLender(int key, char* obj, unsigned int id, cha
 		}
 		lender = gm_StartFilteredEntitySearch(1, 1, *(int*) (action + 0xac));
 		if (lender != 0 && *(unsigned short*) (lender + 0x27) == key && (obj == 0 || obj == lender)
-		    && (id == 0xffff || *(int*) (((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[id] + 4)) == *(int*) (action + 0xb0))) {
+		    && (id == 0xffff || *(int*) (((char *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[id] + 4)) == *(int*) (action + 0xb0))) {
 			out[count++] = action;
 		}
 		action = he_fn_Handlung();

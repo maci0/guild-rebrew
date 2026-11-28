@@ -1,4 +1,4 @@
-extern char g_67a370[];
+extern char d3_ActiveScene[];
 
 int __cdecl d3_VisitSceneObjectsUntilStopped(int, int, int, int, int);
 void __cdecl d3_VisitSceneObjects(int, int, int, int, int);
@@ -18,6 +18,6 @@ void __cdecl d3_VisitObjectAttachments(int a1, int a2)
 	if (a1 == 0) {
 		return;
 	}
-	d3_VisitSceneObjects(*(int*) &g_67a370, a1, 0x240, 0x43a540, a2);
+	d3_VisitSceneObjects(*(int*) &d3_ActiveScene, a1, 0x240, 0x43a540, a2);
 }
 #endif

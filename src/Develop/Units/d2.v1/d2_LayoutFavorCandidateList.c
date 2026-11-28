@@ -14,8 +14,8 @@ typedef struct
 // SIZE 0x38
 
 extern int d2_CurrentWindowId;
-extern char* g_772500;
-extern Win_1015f40 g_1015f40[0x60];
+extern char* d2_FileObjTable;
+extern Win_1015f40 d2_Windows[0x60];
 extern int g_14aad8c;
 
 int __cdecl d2_ClearAndScrollSubform(int, int, int);
@@ -33,15 +33,15 @@ int __cdecl d2_LayoutFavorCandidateList(int dialog, int selectedForm, int altern
 		return 0;
 	}
 	y = d2_ClearAndScrollSubform(dialog, selectedForm, alternateForm);
-	half = ((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width / 2;
+	half = ((D2_WIN*)d2_Windows)[d2_CurrentWindowId].width / 2;
 	d2_ShowCenteredText(g_14aad8c, half, 8, half * 2, 0x55);
 	for (i = 0; i < n; i++) {
-		items[i].x10 = (((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width - *(short*) (g_772500 + 0x1ebd8)) / 2;
+		items[i].x10 = (((D2_WIN*)d2_Windows)[d2_CurrentWindowId].width - *(short*) (d2_FileObjTable + 0x1ebd8)) / 2;
 		items[i].x14 = i * 0x70 + 0x28;
 		d2_DrawPersonCard(items[i].x10, i * 0x70 + 0x28, d2_CurrentWindowId, 0x56, &items[i], 1);
 	}
 	d2_EnableDialogItems(n, items);
-	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3c[0x21c] = y;
-	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3c[0x238] = 0x70;
+	*(int*) &((D2_WIN*)d2_Windows)[d2_CurrentWindowId].pad3c[0x21c] = y;
+	*(int*) &((D2_WIN*)d2_Windows)[d2_CurrentWindowId].pad3c[0x238] = 0x70;
 	return 1;
 }

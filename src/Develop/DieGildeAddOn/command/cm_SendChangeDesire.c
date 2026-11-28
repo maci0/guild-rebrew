@@ -5,7 +5,7 @@
 
 #pragma intrinsic(memcpy, memset)
 
-extern char g_aed2a0[];
+extern char cm_SecondaryPacketDelta[];
 void __cdecl cm_EnqueueClientPacket(void*);
 
 void __cdecl cm_SendChangeDesire(void)
@@ -13,6 +13,6 @@ void __cdecl cm_SendChangeDesire(void)
 	char buf[0x9c];
 
 	buf[0] = 0x18;
-	memcpy(buf + 0x10, g_aed2a0, 0x7c);
+	memcpy(buf + 0x10, cm_SecondaryPacketDelta, 0x7c);
 	cm_EnqueueClientPacket(buf);
 }

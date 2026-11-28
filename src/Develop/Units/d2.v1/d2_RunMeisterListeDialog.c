@@ -22,9 +22,9 @@ extern int g_776c90;
 extern int g_777ca0;
 extern int g_778b00;
 extern char g_1016198[];
-extern char* g_1015ea0;
+extern char* d2_Controls;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern int d2_CurrentWindowId;
 extern char g_6ac878[];
 extern char g_6ac870[];
@@ -79,21 +79,21 @@ int __cdecl d2_RunMeisterListeDialog(void)
 	d2_SetForm(h, 4);
 	io_AppendText(0x1936);
 	d2_SetForm(h, 2);
-	e = gm_StartFilteredEntitySearch(1, 4, g_774970);
+	e = gm_StartFilteredEntitySearch(1, 4, gm_LocalPlayerSlot);
 	if (e != 0) {
 		do {
 			m = gm_FindBuildingOwner(e);
-			if (m != 0 && *(unsigned short*) m != g_774970) {
+			if (m != 0 && *(unsigned short*) m != gm_LocalPlayerSlot) {
 				d2_SetForm(h, 2);
 				g_777d00[n].btn = d2_AddElementToWindow(0, n * 0x3e, *e + 0x427, d2_CurrentWindowId);
 				io_FormatTextBuffer(buf, g_6ac870, *e * 14 + 0x48e, e + 5);
 				g_777d00[n].name_text = d2_ShowTxt(0x40, n * 0x3e + 8, buf, d2_CurrentWindowId);
-				(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[g_777d00[n].name_text].width) = 0xa0;
+				(*(int*)&((D2_CONTROL_TL*)d2_Controls)[g_777d00[n].name_text].width) = 0xa0;
 				d2_SetElementFont(g_777d00[n].name_text, 0x54);
 				io_FormatTextBuffer(buf, g_68be7c, *(int*) (m + 0x1b8));
 				g_777d00[n].value_text = d2_ShowTxt(0x180, n * 0x3e + 0x14, buf, d2_CurrentWindowId);
 				g_777d00[n].bar = d2_AddWindowInputIcon(0xea, n * 0x3e + 0x14, 0x40, 0x40, 0x82, d2_CurrentWindowId);
-				d2_SetElementValue(g_777d00[n].bar, 0x3e8, 0x2328, gm_AmountToUnits(*(int*) (e + 0x39), g_773d75));
+				d2_SetElementValue(g_777d00[n].bar, 0x3e8, 0x2328, gm_AmountToUnits(*(int*) (e + 0x39), gm_ActiveTownIndex));
 				g_777d00[n].value = d2_GetControlValue(g_777d00[n].bar);
 				g_777d00[n].e = e;
 				n++;

@@ -30,14 +30,14 @@ extern unsigned char* g_7e4548;
 extern Slot_1043340 g_1043340[64];
 extern int g_7e4468;
 extern int g_7e446c;
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 extern int g_77472c;
 extern float g_7e42e0;
 extern int g_7e4380;
 extern int g_7e2a60;
 extern int g_6a2bd8;
 extern char g_7746fc;
-extern int g_67a370;
+extern int d3_ActiveScene;
 extern int g_774728;
 extern float g_6a2bec;
 
@@ -83,7 +83,7 @@ void __cdecl d3_UpdateDaylightPhase(Stamp* now)
 	if (g_7e4548 != 0) {
 		light = g_7e4548[0x2a] * 0.003921569f;
 	}
-	if (((Slot_52a960*)g_1043340)[d3_CurrentContextIndex].f2c != 0 && (unsigned int) g_6b7fac < (unsigned int) (g_7e4468 + g_7e446c)) {
+	if (((Slot_52a960*)g_1043340)[d3_CurrentContextIndex].f2c != 0 && (unsigned int) gm_GameTicks < (unsigned int) (g_7e4468 + g_7e446c)) {
 		d3_InterpolateSceneFog(0, 2, 1.0f);
 		g_77472c = 1;
 		return;
@@ -109,10 +109,10 @@ void __cdecl d3_UpdateDaylightPhase(Stamp* now)
 	idx = v % 7;
 	if (g_6a2bd8 != idx && ((Slot_52a960*)g_1043340)[d3_CurrentContextIndex].f2c != 0) {
 		if (idx >= 0 && g_7746fc == 0) {
-			d3_VisitSceneObjects(g_67a370, 0, 6, d3_ToggleSceneObjFlag, 0);
+			d3_VisitSceneObjects(d3_ActiveScene, 0, 6, d3_ToggleSceneObjFlag, 0);
 			g_7746fc++;
 		} else if (idx >= 3 && g_7746fc == 1) {
-			d3_VisitSceneObjects(g_67a370, 0, 6, d3_ToggleSceneObjFlag, 1);
+			d3_VisitSceneObjects(d3_ActiveScene, 0, 6, d3_ToggleSceneObjFlag, 1);
 			g_7746fc++;
 		}
 		g_6a2bd8 = idx;

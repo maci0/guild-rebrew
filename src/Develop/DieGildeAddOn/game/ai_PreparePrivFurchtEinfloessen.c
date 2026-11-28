@@ -25,10 +25,10 @@ int __cdecl ai_PreparePrivFurchtEinfloessen(int unused1, char* actor, int unused
 	if (!ai_SelectRankedCandidates(actor, 1, &filterMask, 0.0f, (float) gm_RandomMod(0x20) + 40.0f, &targetId)) {
 		return 0;
 	}
-	if (!he_HasNoActiveEvent04b(actor, ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[targetId]))) {
+	if (!he_HasNoActiveEvent04b(actor, ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[targetId]))) {
 		return 0;
 	}
 	out[0] = 7;
-	*(int*) (out + 4) = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[targetId].entity_id;
+	*(int*) (out + 4) = ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[targetId].entity_id;
 	return 1;
 }

@@ -1,8 +1,8 @@
 #include <stdio.h>
 
 #ifndef REBREW_GOLD
-extern char g_6a56d0[];
-extern char g_7f4cd0[];
+extern char str_he_AllocNone_Invalid_HE_Type[];
+extern char gm_EntityNameField[];
 #endif
 
 void __cdecl he_AllocNone(void* a1)
@@ -14,6 +14,6 @@ void __cdecl he_AllocNone(void* a1)
 #ifdef REBREW_GOLD
 	sprintf(buf, (const char*) 0x626680, *(unsigned char*) a1, (char*) 0x770bb0 + idx * 0x21c);
 #else
-	sprintf(buf, g_6a56d0, *(unsigned char*) a1, g_7f4cd0 + idx * 0x21c);
+	sprintf(buf, str_he_AllocNone_Invalid_HE_Type, *(unsigned char*) a1, gm_EntityNameField + idx * 0x21c);
 #endif
 }

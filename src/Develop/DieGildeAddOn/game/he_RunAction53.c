@@ -61,11 +61,12 @@ void __cdecl he_RunAction53(char* e)
 	idx = *(int*) (e + 0xc4);
 	i = 0;
 	while (*(int*) (e + 0xcc) != 0 && i < 16) {
-		if ((((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx].entity_index) != 0xffff && (((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx].entity_id) != *(int*) (e + 0xbc) && (((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx].entity_type) < 10
-		    && (((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx].health) > 0) {
-			f = -gm_BlendWeights(*(float*) (e + 0xd0), gm_GetEntitySkill((char*) ((struct house*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx]), 4));
+		if ((((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[idx].entity_index) != 0xffff && (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[idx].entity_id) != *(int*) (e + 0xbc) &&
+			(((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[idx].entity_type) < 10
+		    && (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[idx].health) > 0) {
+			f = -gm_BlendWeights(*(float*) (e + 0xd0), gm_GetEntitySkill((char*) ((struct house*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[idx]), 4));
 			v = (int) (f * 10.0f + 1.0f) * mult;
-			cm_RequestCopyEntityData(*(int*) (e + 0xbc), (((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx].entity_id), v, 1);
+			cm_RequestCopyEntityData(*(int*) (e + 0xbc), (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[idx].entity_id), v, 1);
 		}
 		i++;
 		*(int*) (e + 0xcc) = *(int*) (e + 0xcc) - 1;

@@ -3,7 +3,7 @@
 
 int __cdecl vfs_ReadByte(void* stream, void* dst);
 char* __cdecl vfs_ReadCString(void* stream, char* dst);
-int __cdecl fcn_004011d0(void* stream, void* dst);
+int __cdecl vfs_ReadDword(void* stream, void* dst);
 int __cdecl fcn_004011f0(void* stream, void* dst);
 void __cdecl vfs_ReadVec3(void* stream, void* dst);
 void __cdecl ReportClientMessage(const char* msg);
@@ -218,7 +218,7 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 			if (version < 0x3a6c00a0u) {
 				object[0x214] = (char) (object[0x214] | 0x40);
 			}
-			fcn_004011d0(stream, object + 0x68);
+			vfs_ReadDword(stream, object + 0x68);
 			vfs_ReadVec3(stream, object + 0x4c);
 			vfs_ReadVec3(stream, object + 0x5c);
 			vfs_ReadVec3(stream, object + 0x90);
@@ -234,26 +234,26 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 					vfs_ReadByte(stream, &b);
 					object[0x215] = (char) ((object[0x215] & ~0x04) | ((b << 2) & 0x04));
 				}
-				fcn_004011d0(stream, object + 0x90);
-				fcn_004011d0(stream, object + 0x94);
-				fcn_004011d0(stream, object + 0x98);
+				vfs_ReadDword(stream, object + 0x90);
+				vfs_ReadDword(stream, object + 0x94);
+				vfs_ReadDword(stream, object + 0x98);
 				vfs_ReadVec3(stream, object + 0x5c);
 				vfs_ReadVec3(stream, object + 0x4c);
 				vfs_ReadVec3(stream, object + 0x84);
 				if (version >= 0x3a6c00acu) {
-					fcn_004011d0(stream, RD_LIGHTS(object) + 0x198);
+					vfs_ReadDword(stream, RD_LIGHTS(object) + 0x198);
 					fcn_004011f0(stream, RD_LIGHTS(object) + 0x19c);
 				}
 				off = 0;
 				for (start = 0; start < count; start++) {
-					fcn_004011d0(stream, RD_LIGHTS(object) + off * 0x38 + 0x28);
-					fcn_004011d0(stream, RD_LIGHTS(object) + off * 0x38 + 0x24);
-					fcn_004011d0(stream, RD_LIGHTS(object) + off * 0x38 + 0x2c);
+					vfs_ReadDword(stream, RD_LIGHTS(object) + off * 0x38 + 0x28);
+					vfs_ReadDword(stream, RD_LIGHTS(object) + off * 0x38 + 0x24);
+					vfs_ReadDword(stream, RD_LIGHTS(object) + off * 0x38 + 0x2c);
 					vfs_ReadVec3(stream, RD_LIGHTS(object) + off * 0x38 + 0x18);
 					vfs_ReadVec3(stream, RD_LIGHTS(object) + off * 0x38);
 					vfs_ReadVec3(stream, RD_LIGHTS(object) + off * 0x38 + 0x0c);
 					if (version >= 0x3a6c00acu) {
-						fcn_004011d0(stream, RD_LIGHTS(object) + off * 0x38 + 0x30);
+						vfs_ReadDword(stream, RD_LIGHTS(object) + off * 0x38 + 0x30);
 						fcn_004011f0(stream, RD_LIGHTS(object) + off * 0x38 + 0x34);
 					}
 					off++;
@@ -264,10 +264,10 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 					}
 				}
 			} else {
-				fcn_004011d0(stream, object + 0x84);
-				fcn_004011d0(stream, object + 0x88);
+				vfs_ReadDword(stream, object + 0x84);
+				vfs_ReadDword(stream, object + 0x88);
 				if (version >= 0x3a6c000cu) {
-					fcn_004011d0(stream, object + 0x8c);
+					vfs_ReadDword(stream, object + 0x8c);
 				} else {
 					*(int*) (object + 0x8c) = 0x3f800000;
 				}
@@ -283,9 +283,9 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 					count = d3_GetSceneVersionSlotCount(version);
 					off = 0;
 					for (start = 0; start < count; start++) {
-						fcn_004011d0(stream, RD_LIGHTS(object) + off * 0x38 + 0x28);
-						fcn_004011d0(stream, RD_LIGHTS(object) + off * 0x38 + 0x24);
-						fcn_004011d0(stream, RD_LIGHTS(object) + off * 0x38 + 0x2c);
+						vfs_ReadDword(stream, RD_LIGHTS(object) + off * 0x38 + 0x28);
+						vfs_ReadDword(stream, RD_LIGHTS(object) + off * 0x38 + 0x24);
+						vfs_ReadDword(stream, RD_LIGHTS(object) + off * 0x38 + 0x2c);
 						vfs_ReadVec3(stream, RD_LIGHTS(object) + off * 0x38 + 0x18);
 						vfs_ReadVec3(stream, RD_LIGHTS(object) + off * 0x38);
 						off++;

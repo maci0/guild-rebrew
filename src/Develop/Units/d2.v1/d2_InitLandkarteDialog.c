@@ -12,7 +12,7 @@ typedef struct
 // SIZE 0x60
 
 extern int d2_CurrentWindowId;
-extern char* g_77255c;
+extern char* d2_CurrentWindow;
 extern int g_774a64;
 extern char s_6ab3e4[];
 
@@ -31,7 +31,7 @@ int __cdecl d2_InitLandkarteDialog(MsgBox* m)
 	d2_SetForm(m->dlg, 0);
 	m->win = d2_CreateChildWindow(0x4a, 0x4c, 0x206, 0x164, 0, d2_CurrentWindowId);
 	d2_CurrentWindowId = m->win;
-	*(int*) (g_77255c + 0x3c8) = g_774a64;
+	*(int*) (d2_CurrentWindow + 0x3c8) = g_774a64;
 	d2_SetForm(m->dlg, 0);
 	if (m->msg == 0) {
 		if (m->flags & 4) {

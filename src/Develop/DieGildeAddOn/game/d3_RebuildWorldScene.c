@@ -1,5 +1,5 @@
-extern int g_67a370;
-extern int g_6b8300;
+extern int d3_ActiveScene;
+extern int d3_CurrentFloor;
 
 
 
@@ -25,8 +25,8 @@ void __cdecl d3_RebuildWorldScene(void)
 			gm_UpdateBuildingSmokeEffect(e);
 		}
 	}
-	d3_VisitSceneObjects(((char*)g_67a370), 0, 0x40, (void*) d3_ClassifyBuildingSceneObject, 0);
+	d3_VisitSceneObjects(((char*)d3_ActiveScene), 0, 0x40, (void*) d3_ClassifyBuildingSceneObject, 0);
 	d3_RebuildSceneQuadtreeAndLighting();
 	d3_ReleaseUnusedSceneObjects();
-	d3sm_Rebuild(*(int*) (((char*)g_67a370) + 0xb0), g_6b8300);
+	d3sm_Rebuild(*(int*) (((char*)d3_ActiveScene) + 0xb0), d3_CurrentFloor);
 }

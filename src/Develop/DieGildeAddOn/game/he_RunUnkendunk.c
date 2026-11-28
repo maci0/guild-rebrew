@@ -1,7 +1,7 @@
 #include "Develop/client_types.h"
 
 extern pos14_7f4c00 gm_GameTime;
-extern char g_7f4ca4[];
+extern char gm_EntityIdField[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void* __cdecl gm_SearchTable67(int id);
@@ -40,7 +40,7 @@ void __cdecl he_RunUnkendunk(char* obj)
 		return;
 	}
 	for (i = 0; i < 768; i++) {
-		rec = g_7f4ca4 + i * 0x21c;
+		rec = gm_EntityIdField + i * 0x21c;
 		if (*(unsigned char*) (rec + 4) > 0 && *(int*) (rec + 0x180) != 0 && *(void**) (rec + 0x168) == q && *(int*) (rec + 0x16c) != 0 && gm_RandomFloat01() > 0.5 &&
 		    *(int*) (*(int*) (rec + 0x180) + 0x2c) == *(int*) (obj + 0xac)) {
 			e = (char*) sim_StartEntityQueryByType((unsigned char*) *(int*) (rec + 0x16c));

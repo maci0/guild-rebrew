@@ -16,7 +16,7 @@ typedef struct
 } Req;
 // SIZE 0x50
 
-extern __int64 g_666018;
+extern __int64 gm_TargetPersonTypeMask;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_14aba0c;
 
@@ -64,7 +64,7 @@ void __cdecl d2_StartEntfuehrungDialog(char* building)
 	req.a = 0;
 	req.size = 0x400;
 	req.kind = 6;
-	req.c = (*(int*)&g_666018);
+	req.c = (*(int*)&gm_TargetPersonTypeMask);
 	req.d = g_66601c;
 	io_FormatTextBuffer(text, 0x19b8);
 	d2_InitPlayerBar(building, 0);

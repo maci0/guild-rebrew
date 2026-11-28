@@ -24,16 +24,16 @@ typedef struct {
 	int x3c8;
 } Cfg;
 
-extern struct VFS_DIR* g_6b7fdc;
+extern struct VFS_DIR* vfs_RootDir;
 extern int g_6b8484;
-extern VECTOR3 g_67bbdc;
-extern VECTOR3 g_6b86c4;
-extern int g_67a370;
+extern VECTOR3 d3_SceneAmbientColor;
+extern VECTOR3 d3_SceneLightingVec;
+extern int d3_ActiveScene;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_10425fc;
 extern float g_104329c;
 extern char g_1041d80[];
-extern int g_6b8300;
+extern int d3_CurrentFloor;
 
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
 void __cdecl vfs_WriteInt(void*, int);
@@ -59,7 +59,7 @@ void __cdecl d3_SaveScene(const char* name, void* stream)
 
 	s = stream;
 	if (s == 0) {
-		s = vfs_Tfopen(name, "wb", g_6b7fdc);
+		s = vfs_Tfopen(name, "wb", vfs_RootDir);
 		if (s == 0) {
 			return;
 		}
@@ -67,9 +67,9 @@ void __cdecl d3_SaveScene(const char* name, void* stream)
 	vfs_WriteInt(s, 0x3a6c00bb);
 	vfs_WriteCString(s, g_6b8484);
 	vfs_WriteInt32(s, 0.0f);
-	vfs_WriteVec3(s, &g_67bbdc);
-	vfs_WriteVec3(s, &g_6b86c4);
-	vfs_WriteInt(s, ((Cfg*)g_67a370)->xb4);
+	vfs_WriteVec3(s, &d3_SceneAmbientColor);
+	vfs_WriteVec3(s, &d3_SceneLightingVec);
+	vfs_WriteInt(s, ((Cfg*)d3_ActiveScene)->xb4);
 	vfs_WriteInt(s, d3_FogColor);
 	vfs_WriteInt32(s, g_10425fc);
 	vfs_WriteInt32(s, g_104329c);
@@ -90,11 +90,11 @@ void __cdecl d3_SaveScene(const char* name, void* stream)
 	for (p = ((void*)d3_ObjectListHead); p != &(*(char*)d3_SceneObjectSentinel); p = d3_NextVisibleSceneNode(p)) {
 		d3_WriteSceneNodeTree(s, p);
 	}
-	vfs_WriteByte(s, g_6b8300 != 0);
-	if (g_6b8300 != 0) {
-		d3_SaveFloor(s, g_6b8300);
+	vfs_WriteByte(s, d3_CurrentFloor != 0);
+	if (d3_CurrentFloor != 0) {
+		d3_SaveFloor(s, d3_CurrentFloor);
 	}
-	d3_WriteEventTable(s, ((Cfg*)g_67a370)->x3c8);
+	d3_WriteEventTable(s, ((Cfg*)d3_ActiveScene)->x3c8);
 	if (stream == 0) {
 		CloseVfsStream(s);
 	}

@@ -25,8 +25,8 @@ typedef struct {
 	char pad1a0[0x21c - 0x1a0];
 } Obj;
 
-extern char g_7f4ca0[];
-extern int g_773d48;
+extern char gm_EntitySlotTable[];
+extern int gm_QueuedCommandCount;
 extern int g_99f6e0;
 
 void __cdecl gm_GetLawEntry(int kind, Offer* o);
@@ -52,7 +52,7 @@ int __cdecl gm_CollectCityTaxOffers(unsigned short id, Slots* s, unsigned char f
 	if (i >= 6) {
 		return 0;
 	}
-	n = ((Obj *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[id])->count;
+	n = ((Obj *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[id])->count;
 	f = n * (offer.amount * 0.01f);
 	if (!(f > 0.0f)) {
 		f = 0.0f;
@@ -65,8 +65,8 @@ int __cdecl gm_CollectCityTaxOffers(unsigned short id, Slots* s, unsigned char f
 		if (flags & 1) {
 			p = gm_GetGuildHall(1);
 			p = fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x115);
-			cm_RequestTransferCurrencyNoKill(*(int*) (p + 2), ((Obj *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[id])->owner, 0, v);
-			g_773d48++;
+			cm_RequestTransferCurrencyNoKill(*(int*) (p + 2), ((Obj *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[id])->owner, 0, v);
+			gm_QueuedCommandCount++;
 		}
 		if (flags & 2) {
 			g_99f6e0 += v;

@@ -1,8 +1,8 @@
 
 
 
-extern int* g_6b7f50[16];
-extern int g_6b7f90;
+extern int* msx_StreamHandles[16];
+extern int msx_Initialized;
 
 int __cdecl msx_FindWaveDriverIndex(int*);
 int __cdecl msx_FindFreeStreamSlot(int*);
@@ -17,10 +17,10 @@ int __cdecl msx_OpenStream(int* device, int filename, int* outHandle)
 	int i;
 	int j;
 
-	if (g_6b7f90 != 0 && (i = msx_FindWaveDriverIndex(device)) >= 0 && (j = msx_FindFreeStreamSlot(device)) >= 0) {
+	if (msx_Initialized != 0 && (i = msx_FindWaveDriverIndex(device)) >= 0 && (j = msx_FindFreeStreamSlot(device)) >= 0) {
 		*outHandle = g_662404(*device, filename, r);
 		if (*outHandle != 0) {
-			g_6b7f50[i][j] = *outHandle;
+			msx_StreamHandles[i][j] = *outHandle;
 			device[5]++;
 		} else {
 			g_6623b8();

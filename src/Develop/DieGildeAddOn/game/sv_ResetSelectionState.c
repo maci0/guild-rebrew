@@ -2,19 +2,19 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 void* __cdecl fcn_00502cd0(int, int, ...);
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char* g_7746c4; extern unsigned char* g_7746c8; extern int* g_7e2a9c;
-extern char* g_7e2aa0; extern char* g_7746c0; extern char g_7746f4;
+extern char* d2_VisitedBuilding; extern unsigned char* d2_InteriorBuilding; extern int* d2_SelectedItem;
+extern char* d2_SelectedBuilding; extern char* d3_FocusedEntityObject; extern char g_7746f4;
 /* ADDRESS: GOLDTL 0x00530510 */
 void __cdecl sv_ResetSelectionState(void)
 {
 	unsigned short* entity;
 	unsigned short id; int mode; char *table;
 
-	mode = (int) g_7746c4; entity = (unsigned short*) g_7746c8;
-	g_7e2a9c = 0;
-	g_7e2aa0 = 0;
+	mode = (int) d2_VisitedBuilding; entity = (unsigned short*) d2_InteriorBuilding;
+	d2_SelectedItem = 0;
+	d2_SelectedBuilding = 0;
 	*(int*) 0x7ea3bc = 0;
-	g_7746c0 = 0;
+	d3_FocusedEntityObject = 0;
 	if (mode != 0) {
 
 		if (entity == 0) {

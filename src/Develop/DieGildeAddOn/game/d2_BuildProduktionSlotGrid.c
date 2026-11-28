@@ -29,7 +29,7 @@ typedef struct {
 
 extern Lane g_778d4c[4];
 extern Slot_778da0 g_778da0[16];
-extern char* g_1015ea0;
+extern char* d2_Controls;
 
 unsigned short* __cdecl fcn_00502cd0(int, int, int, ...);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
@@ -152,7 +152,7 @@ int __cdecl d2_BuildProduktionSlotGrid(char* msg, char* src)
 	result = 0;
 	for (i = 0; result == 0 && i < 16; i++) {
 		id = ((Watch*) g_778da0)[i].ent;
-		if (id != -1 && ((D2_CONTROL_TL*) g_1015ea0)[id].kind == 0x41 && d2_GetControlValue(id) != 0) {
+		if (id != -1 && ((D2_CONTROL_TL*) d2_Controls)[id].kind == 0x41 && d2_GetControlValue(id) != 0) {
 			result = 1;
 		}
 	}

@@ -72,7 +72,7 @@ void __cdecl he_RunBuildingExpansion(char* u)
 			*(int*) (u + 0xb0) -= 1;
 			if (*(unsigned char*) (h + 0x1c) < a) {
 				cm_BeginPacketFieldDelta(h, *(int*) (h + 2));
-				off = h - g_aed32c + 0x1c;
+				off = h - cm_PacketDeltaBase + 0x1c;
 				cm_AppendPacketFieldValue(1, 1, off, &v);
 				cm_RequestChangeAttribute();
 			}
@@ -80,7 +80,7 @@ void __cdecl he_RunBuildingExpansion(char* u)
 			*(int*) (u + 0xb4) -= 1;
 			if (*(unsigned char*) (h + 0x1d) < b) {
 				cm_BeginPacketFieldDelta(h, *(int*) (h + 2));
-				off = h - g_aed32c + 0x1d;
+				off = h - cm_PacketDeltaBase + 0x1d;
 				cm_AppendPacketFieldValue(1, 1, off, &v);
 				cm_RequestChangeAttribute();
 			}
@@ -102,9 +102,9 @@ void __cdecl he_RunBuildingExpansion(char* u)
 		w = gm_FindBuildingPrimarySlot(p);
 		io_FormatTextBuffer(text, 0x1bba, p);
 		if (w != 0) {
-			he_MessageBoxQuickjump(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id, -1, text, 0, msg, *(int*) (p + 1), *(int*) (w + 2), 0, 0);
+			he_MessageBoxQuickjump(((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (u + 8)].entity_id, -1, text, 0, msg, *(int*) (p + 1), *(int*) (w + 2), 0, 0);
 		} else {
-			he_MessageBoxQuickjump(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id, -1, text, 0, msg, *(int*) (p + 1), -1, 0, 0);
+			he_MessageBoxQuickjump(((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (u + 8)].entity_id, -1, text, 0, msg, *(int*) (p + 1), -1, 0, 0);
 		}
 		he_FreeAction(u);
 		break;

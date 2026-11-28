@@ -4,9 +4,9 @@
 #include <math.h>
 
 extern unsigned short g_6b5d18;
-extern float* g_6b5d0c;
-extern char* g_6b5d10;
-extern char* g_6b5d14;
+extern float* d3snd_ProbeSinTable;
+extern char* d3sndw_SlotWaterIds;
+extern char* d3sndw_SlotStates;
 extern char g_67779c[];
 void* __cdecl m_alloc(int size, char* tag);
 void __cdecl m_FreeTracked(void* p);
@@ -25,13 +25,13 @@ int __cdecl d3sndw_Init(unsigned short n)
 		g_6b5d18 = n;
 		cnt = n;
 		size = n * 4;
-		g_6b5d0c = (float*) m_alloc(size, g_67779c);
-		if (g_6b5d0c != 0) {
-			g_6b5d10 = (char*) m_alloc(size, g_67779c);
-			if (g_6b5d10 != 0) {
+		d3snd_ProbeSinTable = (float*) m_alloc(size, g_67779c);
+		if (d3snd_ProbeSinTable != 0) {
+			d3sndw_SlotWaterIds = (char*) m_alloc(size, g_67779c);
+			if (d3sndw_SlotWaterIds != 0) {
 				len = size;
 				__asm {
-					mov edi, g_6b5d10
+					mov edi, d3sndw_SlotWaterIds
 					mov ebx, len
 					xor eax, eax
 					lea ecx, [edi+edi*2]
@@ -47,13 +47,13 @@ int __cdecl d3sndw_Init(unsigned short n)
 					add ecx, ebx
 					rep stosb
 				}
-				g_6b5d14 = (char*) m_alloc(size, g_67779c);
-				if (g_6b5d14 != 0) {
+				d3sndw_SlotStates = (char*) m_alloc(size, g_67779c);
+				if (d3sndw_SlotStates != 0) {
 					a = 0;
 					step = 6.2831855f / (float) cnt;
 					len2 = size;
 					__asm {
-						mov edi, g_6b5d14
+						mov edi, d3sndw_SlotStates
 						mov ebx, len2
 						xor eax, eax
 						lea ecx, [edi+edi*2]
@@ -70,20 +70,20 @@ int __cdecl d3sndw_Init(unsigned short n)
 						rep stosb
 					}
 					for (i = 0; i < n; i++) {
-						g_6b5d0c[i] = (float) sin(a);
+						d3snd_ProbeSinTable[i] = (float) sin(a);
 						a += step;
 					}
 					return 1;
 				}
-				m_FreeTracked(g_6b5d10);
-				g_6b5d10 = 0;
-				m_FreeTracked(g_6b5d0c);
-				g_6b5d10 = 0;
-				g_6b5d0c = 0;
+				m_FreeTracked(d3sndw_SlotWaterIds);
+				d3sndw_SlotWaterIds = 0;
+				m_FreeTracked(d3snd_ProbeSinTable);
+				d3sndw_SlotWaterIds = 0;
+				d3snd_ProbeSinTable = 0;
 				return 0;
 			}
-			m_FreeTracked(g_6b5d0c);
-			g_6b5d0c = 0;
+			m_FreeTracked(d3snd_ProbeSinTable);
+			d3snd_ProbeSinTable = 0;
 		}
 	}
 	return 0;

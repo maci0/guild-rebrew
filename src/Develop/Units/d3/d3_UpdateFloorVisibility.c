@@ -15,8 +15,8 @@ extern float g_1042190;
 extern float g_1042194;
 extern float g_1042198;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_10432a8;
-extern int g_1042a04;
+extern int d3_FrameFaceCount;
+extern int d3_FrameVertexCount;
 
 extern unsigned int __cdecl d3_ProjectFloorCellBounds(int, int, int, int);
 extern unsigned char __cdecl d3_TestBoxAgainstFrustum(void*, char*, char*);
@@ -114,18 +114,18 @@ int __cdecl d3_UpdateFloorVisibility(char* floor)
 				if (objects[1] != 0) {
 					if (*(unsigned char*) (w + 0xe) > 0) {
 						d3_RenderedVertexCount += (*(D3_MESH_QUERY_FN*) ((char*) *(void**) objects[1] + 0x14))(objects[1]);
-						g_1042a08 += (*(D3_MESH_QUERY_FN*) ((char*) *(void**) objects[1] + 0x10))(objects[1]);
+						d3_RenderedFaceCount += (*(D3_MESH_QUERY_FN*) ((char*) *(void**) objects[1] + 0x10))(objects[1]);
 					}
-					g_10432a8 += (*(D3_MESH_QUERY_FN*) ((char*) *(void**) objects[1] + 0x10))(objects[1]);
-					g_1042a04 += (*(D3_MESH_QUERY_FN*) ((char*) *(void**) objects[1] + 0x14))(objects[1]);
+					d3_FrameFaceCount += (*(D3_MESH_QUERY_FN*) ((char*) *(void**) objects[1] + 0x10))(objects[1]);
+					d3_FrameVertexCount += (*(D3_MESH_QUERY_FN*) ((char*) *(void**) objects[1] + 0x14))(objects[1]);
 				}
 				if (objects[0] != 0) {
 					if (*(unsigned char*) (w + 0xe) > 0) {
 						d3_RenderedVertexCount += (*(D3_MESH_QUERY_FN*) ((char*) *(void**) objects[0] + 0x14))(objects[0]);
-						g_1042a08 += (*(D3_MESH_QUERY_FN*) ((char*) *(void**) objects[0] + 0x10))(objects[0]);
+						d3_RenderedFaceCount += (*(D3_MESH_QUERY_FN*) ((char*) *(void**) objects[0] + 0x10))(objects[0]);
 					}
-					g_10432a8 += (*(D3_MESH_QUERY_FN*) ((char*) *(void**) objects[0] + 0x10))(objects[0]);
-					g_1042a04 += (*(D3_MESH_QUERY_FN*) ((char*) *(void**) objects[0] + 0x14))(objects[0]);
+					d3_FrameFaceCount += (*(D3_MESH_QUERY_FN*) ((char*) *(void**) objects[0] + 0x10))(objects[0]);
+					d3_FrameVertexCount += (*(D3_MESH_QUERY_FN*) ((char*) *(void**) objects[0] + 0x14))(objects[0]);
 				}
 				objects = (void**) ((char*) objects + 0x34);
 				k -= 1;

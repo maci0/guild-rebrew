@@ -1,13 +1,13 @@
 #include "Develop/Units/d3/d3_camera.h"
-extern int g_10432a8;
-extern int g_1042a04;
+extern int d3_FrameFaceCount;
+extern int d3_FrameVertexCount;
 extern int g_67bc4c;
 extern int g_6b8718;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned int g_6b8710;
 extern unsigned int g_6b8714;
 #include "Develop/Units/d8_vesa/d3d_device_view.h"
-extern volatile unsigned int g_6b7fac; void __cdecl d3_FreeMeshObject(void*);
+extern volatile unsigned int gm_GameTicks; void __cdecl d3_FreeMeshObject(void*);
 int __cdecl d3_FindTextureVariant(int, char);
 void __cdecl d3_ComposeObserverMatrix(char*, char*, int, float*);
 void __cdecl d3_SetRenderMaterialState(unsigned char, unsigned char, int, unsigned char, unsigned char);
@@ -32,12 +32,12 @@ void __cdecl d3_UpdateAndRenderEffect(void *arg)
 
 	obj = (unsigned char *) arg;
 	if (*(void **) (obj + 0x310) == 0 ||
-	    ((char (__cdecl *) (void *, unsigned int)) *(void **) (obj + 0x310))(obj, g_6b7fac) == 0) {
+	    ((char (__cdecl *) (void *, unsigned int)) *(void **) (obj + 0x310))(obj, gm_GameTicks) == 0) {
 		d3_FreeMeshObject(obj);
 		return;
 	}
-	g_10432a8 += *(int *) (obj + 0xd8) * 2;
-	g_1042a04 += *(int *) (obj + 0xd8) * 4;
+	d3_FrameFaceCount += *(int *) (obj + 0xd8) * 2;
+	d3_FrameVertexCount += *(int *) (obj + 0xd8) * 4;
 	n = *(int *) (obj + 0xd8);
 	cnt = 0;
 	if (n > 0) {
@@ -151,5 +151,5 @@ void __cdecl d3_UpdateAndRenderEffect(void *arg)
 		}
 	}
 	d3_RenderedVertexCount += cnt;
-	g_1042a08 += cnt;
+	d3_RenderedFaceCount += cnt;
 }

@@ -6,18 +6,18 @@
 
 extern int d3_CurrentContextIndex;
 extern char* lpObjektePROT;
-extern char g_774964;
+extern char gm_InWorldHud;
 extern int g_774670;
 extern int d2_ScreenHeight;
 extern int g_1040494;
 extern int main_LoopFlags;
-extern char g_7747b0;
+extern char gm_ClientModeFlags;
 extern char init_SceneContextIndices[];
-extern char g_10432c0[];
+extern char d3_Universes[];
 extern void* ch_CharacterSlots[];
-extern int g_67a370;
-extern int g_6b8300;
-extern float g_662d70[];
+extern int d3_ActiveScene;
+extern int d3_CurrentFloor;
+extern float d3_ZeroVec4[];
 extern char s_67d67c[];
 extern char s_6a1c1c[];
 extern char s_6a1c30[];
@@ -66,7 +66,7 @@ void __cdecl init_LoadObjektScene(int objectTypeIndex)
 	name = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[objectTypeIndex]);
 	progress = 0;
 	paused = 0;
-	if (g_774964 && g_774670 <= 0) {
+	if (gm_InWorldHud && g_774670 <= 0) {
 		unsigned int flags;
 		unsigned char* ch;
 
@@ -78,7 +78,7 @@ void __cdecl init_LoadObjektScene(int objectTypeIndex)
 		d2_ReleaseOverlaySprite((char*) ch);
 		progress = (int) d2_UpdateProgressOverlay;
 	}
-	if ((g_7747b0 & 8) && !tb_IsCallbackPaused((TIMER_CALLBACK) gm_AdvanceGameClock)) {
+	if ((gm_ClientModeFlags & 8) && !tb_IsCallbackPaused((TIMER_CALLBACK) gm_AdvanceGameClock)) {
 		tb_SetCallbackPaused((TIMER_CALLBACK) gm_AdvanceGameClock, 1);
 		paused = 1;
 	}
@@ -92,32 +92,32 @@ void __cdecl init_LoadObjektScene(int objectTypeIndex)
 		strupr(path);
 		if (d3_LoadScene(path, 0, (SCENE_PROGRESS) progress)) {
 			d3_SelectSceneContext(d3_CurrentContextIndex, 0);
-			d3_TraverseSceneObjects(g_67a370, 0, 0x1e0, (void (__cdecl*)(void)) d3_ResolveSceneObjectProtoId);
-			d3_TraverseSceneObjects(g_67a370, 0, 6, (void (__cdecl*)(void)) d3_InitBuildingSceneAnimRates);
+			d3_TraverseSceneObjects(d3_ActiveScene, 0, 0x1e0, (void (__cdecl*)(void)) d3_ResolveSceneObjectProtoId);
+			d3_TraverseSceneObjects(d3_ActiveScene, 0, 6, (void (__cdecl*)(void)) d3_InitBuildingSceneAnimRates);
 			init_SceneContextIndices[objectTypeIndex] = (char) type;
 			d3_SelectSceneContext(saved, 0);
 		}
 	} else {
 		type = (signed char) init_SceneContextIndices[objectTypeIndex];
-		if (g_10432c0[type * 0xf7 * 4 + 0x3d5] != 0) {
+		if (d3_Universes[type * 0xf7 * 4 + 0x3d5] != 0) {
 			slot = type * 0xf7;
 			d3_SelectSceneContext(type, 0);
 			sprintf(path, s_6a1c1c, name + 1);
 			strupr(path);
 			if (d3_LoadScene(path, 0, (SCENE_PROGRESS) progress)) {
 				d3_SelectSceneContext(d3_CurrentContextIndex, 0);
-				gv_Free3Fields((int*) *(int*) (g_67a370 + 0xb0));
-				*(int*) (g_67a370 + 0xb0) = 0;
-				d3sm_GetSceneSuperMap((char*) g_67a370);
-				d3sm_Rebuild((char*) *(int*) (g_67a370 + 0xb0), g_6b8300);
-				d3_TraverseSceneObjects(g_67a370, 0, 0x1e0, (void (__cdecl*)(void)) d3_ResolveSceneObjectProtoId);
-				d3_TraverseSceneObjects(g_67a370, 0, 6, (void (__cdecl*)(void)) d3_InitBuildingSceneAnimRates);
+				gv_Free3Fields((int*) *(int*) (d3_ActiveScene + 0xb0));
+				*(int*) (d3_ActiveScene + 0xb0) = 0;
+				d3sm_GetSceneSuperMap((char*) d3_ActiveScene);
+				d3sm_Rebuild((char*) *(int*) (d3_ActiveScene + 0xb0), d3_CurrentFloor);
+				d3_TraverseSceneObjects(d3_ActiveScene, 0, 0x1e0, (void (__cdecl*)(void)) d3_ResolveSceneObjectProtoId);
+				d3_TraverseSceneObjects(d3_ActiveScene, 0, 6, (void (__cdecl*)(void)) d3_InitBuildingSceneAnimRates);
 				p = ch_CharacterSlots;
 				do {
 					obj = (char*) *p;
 					if (obj != 0
-					    && *(int*) (obj + 0x88) == (int) (g_10432c0 + slot * 4)) {
-						if (CompareVector3WithinTolerance((float*) (obj + 0x38), g_662d70, 0.5f) != 0) {
+					    && *(int*) (obj + 0x88) == (int) (d3_Universes + slot * 4)) {
+						if (CompareVector3WithinTolerance((float*) (obj + 0x38), d3_ZeroVec4, 0.5f) != 0) {
 							if ((*(int*) (obj + 0x124) != 0
 							     && (found = d3_FindSceneObject(0, 0x100, 0, s_68b0f4)) != 0)
 							    || (found = ch_SelectRandomDummy()) != 0
@@ -133,12 +133,12 @@ void __cdecl init_LoadObjektScene(int objectTypeIndex)
 					}
 					p++;
 				} while ((int) p < 0x14d0c20);
-				g_10432c0[(signed char) init_SceneContextIndices[objectTypeIndex] * 0x3dc + 0x3d5] = 0;
+				d3_Universes[(signed char) init_SceneContextIndices[objectTypeIndex] * 0x3dc + 0x3d5] = 0;
 				d3_SelectSceneContext(saved, 0);
 			}
 		}
 	}
-	if ((g_7747b0 & 8) && paused) {
+	if ((gm_ClientModeFlags & 8) && paused) {
 		tb_SetCallbackPaused((TIMER_CALLBACK) gm_AdvanceGameClock, 0);
 	}
 }

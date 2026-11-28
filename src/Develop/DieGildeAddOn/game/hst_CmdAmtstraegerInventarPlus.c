@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 int __cdecl gm_IsSlotActivePerson(unsigned short);
 int __cdecl fcn_0064fcaf(char*);
@@ -31,7 +31,7 @@ int __cdecl hst_CmdAmtstraegerInventarPlus(int unused0, int unused1, char* arg)
 	for (i = 0, slot = (char*) 0x7f4e09; (int) slot < (int) 0x85a209; slot += 0x21c, i++) {
 		if (gm_IsSlotActivePerson((unsigned short) i) != 0) {
 			if (*(char*) (slot - 3) != 0 || *slot != 0) {
-				cm_SendSellObjekt(*(int*) (slot - 0x165), -1, objId, 1, g_773d75, 0);
+				cm_SendSellObjekt(*(int*) (slot - 0x165), -1, objId, 1, gm_ActiveTownIndex, 0);
 			}
 		}
 	}

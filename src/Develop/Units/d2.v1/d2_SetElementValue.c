@@ -11,7 +11,7 @@
 #define d2_GUI_DIRTY_OFFSET 0x48
 #define d2_GUI_STATE_OFFSET 0x28
 #else
-#define d2_GUI_POOL g_1015ea0
+#define d2_GUI_POOL d2_Controls
 #define d2_GUI_ID_LIMIT 0x400
 #define d2_GUI_NUMBER_OFFSET 0x90
 #define d2_GUI_DIRTY_OFFSET 0x58

@@ -15,7 +15,7 @@ void __cdecl d2_RenderDialogIconsAndText(int a)
 	int y;
 
 	d2_ClearWindowChildren(d2_CurrentWindowId, 1);
-	io_AppendText(g_6a9694, a);
+	io_AppendText(str_CZ_s, a);
 	i = 0;
 	x = 0x1c;
 	y = 0x1d;

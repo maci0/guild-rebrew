@@ -9,7 +9,7 @@ int __cdecl d2_AddWindowTextButton(int offsetX, int offsetY, int resourceId, int
 {
 	int r;
 
-	r = d2_CreateTextButton(((D2_WIN*)g_1015f40)[win].left + offsetX, ((D2_WIN*)g_1015f40)[win].top + offsetY, resourceId, text);
+	r = d2_CreateTextButton(((D2_WIN*)d2_Windows)[win].left + offsetX, ((D2_WIN*)d2_Windows)[win].top + offsetY, resourceId, text);
 	d2_AddWindowChild(r, win);
 	return r;
 }

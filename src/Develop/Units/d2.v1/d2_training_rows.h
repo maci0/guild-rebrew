@@ -15,6 +15,6 @@ typedef struct D2_TRAINING_ROW {
 } D2_TRAINING_ROW;
 /* SIZE 0x40 */
 
-extern D2_TRAINING_ROW g_7774a0[32];
+extern D2_TRAINING_ROW d2_TrainingRows[32];
 
 #endif

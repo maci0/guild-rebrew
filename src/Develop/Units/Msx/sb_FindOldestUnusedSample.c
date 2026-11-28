@@ -1,5 +1,5 @@
-extern int g_6b7d7c;
-extern char* g_6b7d78;
+extern int sb_WaveDriver;
+extern char* sb_BankListHead;
 
 char* __cdecl sb_FindVoiceBySample(int key, int* idx);
 int __cdecl msx_GetSampleStatus(int a1);
@@ -15,9 +15,9 @@ char* __cdecl sb_FindOldestUnusedSample(void)
 	int n;
 	int idx;
 
-	o = g_6b7d78;
+	o = sb_BankListHead;
 	found = 0;
-	if (g_6b7d7c == 0) {
+	if (sb_WaveDriver == 0) {
 		return (char*) 0x14cbc20;
 	}
 	while (o != 0) {

@@ -29,7 +29,7 @@ typedef struct Place579 {
 } Place579;
 
 extern pos14_7f4c00 gm_GameTime;
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 extern float g_696540[];
 extern float g_696550[];
 
@@ -129,9 +129,9 @@ void __cdecl he_RunGrabpflege(char* a0)
 		fig = gm_FindBuildingOwner(rec);
 		io_FormatTextBuffer(text, 0x4126, 0x411e, *(unsigned short*) entity, rec);
 		row = (int) (*(unsigned short*) (a0 + 8)) * 0x21c;
-		if ((g_7f4ca0[row + 2] == 6 || g_7f4ca0[row + 2] == 7)
+		if ((gm_EntitySlotTable[row + 2] == 6 || gm_EntitySlotTable[row + 2] == 7)
 			&& (!fig || !(*(unsigned char*) (fig + 0x1b4) & 1))) {
-			he_MessageBoxQuickjump(*(int*) (g_7f4ca0 + row + 4), -1, text, 0, 0x5ec,
+			he_MessageBoxQuickjump(*(int*) (gm_EntitySlotTable + row + 4), -1, text, 0, 0x5ec,
 				*(int*) (rec + 1), -1, 0, (char*) 0x6a7f70);
 		}
 	}

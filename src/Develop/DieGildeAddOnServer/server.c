@@ -1806,9 +1806,9 @@ void __cdecl srv_FormatStatIdentity(unsigned char* entity, char* out)
 	char* name;
 
 	if (entity[2] >= 10)
-		name = g_68d780[10];
+		name = srv_EntityKindNames[10];
 	else
-		name = g_68d780[entity[2]];
+		name = srv_EntityKindNames[entity[2]];
 	sprintf(out, "%i\t%i\t%i\t%s\t%s\t%i\t%s\t%i\t%s\t%s\t%s\t%s\t",
 	    g_current_year, *(int*) (entity + 4), *(unsigned short*) entity, name,
 	    entity + 0x30, entity[8], g_14a6544[entity[9]], *(unsigned short*) (entity + 0xa),

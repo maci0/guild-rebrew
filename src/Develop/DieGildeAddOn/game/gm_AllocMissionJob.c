@@ -10,8 +10,8 @@ typedef struct {
 } rec24;
 // SIZE 0x24
 
-extern signed char g_6a3440;
-extern char g_10069a0[];
+extern signed char gm_SelectedMissionIndex;
+extern char gm_MissionJobs[];
 
 void __cdecl sim_SetSyncParams(int*, int, int, int);
 
@@ -19,22 +19,22 @@ rec24* __cdecl gm_AllocMissionJob(int entityId, int missionId)
 {
 	int i;
 
-	if ((*(char*)&g_6a3440) == 5) {
-		((rec24*)g_10069a0)[0].f0 = missionId;
-		((rec24*)g_10069a0)[0].f4 = entityId;
-		((rec24*)g_10069a0)[0].f8 = 0;
-		sim_SetSyncParams(&((rec24*)g_10069a0)[0].f8, 0, 0, 0);
-		((rec24*)g_10069a0)[0].f20 = 0;
-		return &((rec24*)g_10069a0)[0];
+	if ((*(char*)&gm_SelectedMissionIndex) == 5) {
+		((rec24*)gm_MissionJobs)[0].f0 = missionId;
+		((rec24*)gm_MissionJobs)[0].f4 = entityId;
+		((rec24*)gm_MissionJobs)[0].f8 = 0;
+		sim_SetSyncParams(&((rec24*)gm_MissionJobs)[0].f8, 0, 0, 0);
+		((rec24*)gm_MissionJobs)[0].f20 = 0;
+		return &((rec24*)gm_MissionJobs)[0];
 	}
 	for (i = 0; i < 128; i++) {
-		if (((rec24*)g_10069a0)[i].f0 == 0) {
-			((rec24*)g_10069a0)[i].f0 = missionId;
-			((rec24*)g_10069a0)[i].f4 = entityId;
-			((rec24*)g_10069a0)[i].f8 = 0;
-			sim_SetSyncParams(&((rec24*)g_10069a0)[i].f8, 0, 0, 0);
-			((rec24*)g_10069a0)[i].f20 = 0;
-			return &((rec24*)g_10069a0)[i];
+		if (((rec24*)gm_MissionJobs)[i].f0 == 0) {
+			((rec24*)gm_MissionJobs)[i].f0 = missionId;
+			((rec24*)gm_MissionJobs)[i].f4 = entityId;
+			((rec24*)gm_MissionJobs)[i].f8 = 0;
+			sim_SetSyncParams(&((rec24*)gm_MissionJobs)[i].f8, 0, 0, 0);
+			((rec24*)gm_MissionJobs)[i].f20 = 0;
+			return &((rec24*)gm_MissionJobs)[i];
 		}
 	}
 	return 0;

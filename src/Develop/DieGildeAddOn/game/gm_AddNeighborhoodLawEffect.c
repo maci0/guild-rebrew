@@ -13,7 +13,7 @@ typedef struct {
 #include "Develop/client_types.h"
 typedef CRIME_GRID_CELL Cell;
 
-extern CRIME_GRID_CELL g_99ef80[9][8];
+extern CRIME_GRID_CELL gm_CrimeGrid[9][8];
 
 void __cdecl gm_GetLawEntry(int kind, Offer* o);
 
@@ -37,7 +37,7 @@ void __cdecl gm_AddNeighborhoodLawEffect(int key, unsigned char kind, int* ox, i
 	y = gm_RandomMod(8);
 	if (p != 0 && *(char**) (p + 0x61) != 0) {
 		gm_PosToStatsGrid(*(char**) (p + 0x61) + 0x4c, &x, &y);
-		g_99ef80[x][y].supply += offer.amount;
+		gm_CrimeGrid[x][y].supply += offer.amount;
 		if (x + 1 > 8) {
 			xmax = 8;
 		} else {
@@ -49,7 +49,7 @@ void __cdecl gm_AddNeighborhoodLawEffect(int key, unsigned char kind, int* ox, i
 		}
 		for (i = x - 1 < 0 ? 0 : x - 1; i <= xmax; i++) {
 			for (j = y - 1 < 0 ? 0 : y - 1; j <= ymax; j++) {
-				g_99ef80[i][j].demand += offer.amount;
+				gm_CrimeGrid[i][j].demand += offer.amount;
 			}
 		}
 		*ox = x;

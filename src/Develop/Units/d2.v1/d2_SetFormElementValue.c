@@ -16,9 +16,9 @@ typedef struct
 typedef Page_1038144 D2_FORM_PAGE_VIEW;
 // SIZE 0x2bc
 
-extern Win_1015f40 g_1015f40[0x60];
+extern Win_1015f40 d2_Windows[0x60];
 #include "Develop/Units/d2.v1/d2_gui.h"
-extern Page_1038144 g_1038144[];
+extern Page_1038144 d2_FormPageWindows[];
 extern int g_772534;
 
 /* ADDRESS: GOLDTL 0x00472510 */
@@ -28,11 +28,11 @@ void __cdecl d2_SetFormElementValue(int idx, int slot, int value1, int value2, i
 	D2_CONTROL_TL* e;
 	char* sub;
 
-	w = &((D2_FORM_WINDOW*)g_1015f40)[g_1038144[g_772534].i[slot]];
+	w = &((D2_FORM_WINDOW*)d2_Windows)[d2_FormPageWindows[g_772534].i[slot]];
 	if (idx > w->i[0x2c / 4]) {
 		return;
 	}
-	e = &((D2_CONTROL_TL*)g_1015ea0)[((int*) w->i[0x28 / 4])[idx]];
+	e = &((D2_CONTROL_TL*)d2_Controls)[((int*) w->i[0x28 / 4])[idx]];
 	if ((*(int*)&e->kind) == 0x41) {
 		sub = (char*) (*(int*)&e->data);
 		if (*(int*) (sub + 0x28) & 1) {

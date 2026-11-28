@@ -1,5 +1,5 @@
 #include <string.h>
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl d2_LoadForm(int, int, char*);
 int __cdecl d2_CreateWindowTextButton(int, int, int);
@@ -375,7 +375,7 @@ l_after:
 			*(int*) 0x14a5664, *(int*) 0x14a5670);
 		f.v6c = f.v140;
 		f.v58 = f.v144;
-		f.v34 = g_773d75;
+		f.v34 = gm_ActiveTownIndex;
 		f.v54 = f.v13C;
 	} else {
 		/* 0x5bad6d: one row id, then the entity's own selection field */
@@ -1303,7 +1303,7 @@ l_5bc8d0:
 	}
 	idx = gm_eval_SlotVoll(f.v18, slot_value, j);
 	f.v28 = idx * i;
-	f.vA4 = (int) gm_ConvertUnitsToAmount(1, (int) (g_773d75));
+	f.vA4 = (int) gm_ConvertUnitsToAmount(1, (int) (gm_ActiveTownIndex));
 	*(float*) &f.v28 = (float) f.v28;
 	if ((int) (*(float*) &f.v28 * *(float*) &f.v64 - *(float*) &f.v28)
 	    < f.vA4) {
@@ -1498,7 +1498,7 @@ l_5bcd9a:
 			j = d2_GetControlValue(*(int*) idx);
 			if (j > 0) {
 				cm_SendSellObjekt(-1, *(int*) (f.v18 + 2), *(int*) (idx - 0x10), j,
-				             (int) (g_773d75), 0);
+				             (int) (gm_ActiveTownIndex), 0);
 				d2_CreateGuiWindow(*(int*) idx, 0, *(int*) (idx + 0x20), 0);
 			} else if (j < 0) {
 				cm_RequestClearLagerslot(*(int*) (f.v18 + 2), *(int*) (idx - 0x10));
@@ -1511,7 +1511,7 @@ l_5bcd9a:
 			j = d2_GetControlValue(*(int*) idx);
 			if (j > 0) {
 				cm_SendSellObjekt(-1, *(int*) (f.v18 + 2), *(int*) (idx - 0x10), j,
-				             (int) (g_773d75), 0);
+				             (int) (gm_ActiveTownIndex), 0);
 				d2_CreateGuiWindow(*(int*) idx, 0, *(int*) (idx + 0x20), 0);
 			} else if (j < 0) {
 				cm_RequestClearLagerslot(*(int*) (f.v18 + 2), *(int*) (idx - 0x10));
@@ -1542,7 +1542,7 @@ l_5bcd9a:
 					continue;
 				}
 				cm_SendSellObjekt(-1, *(int*) (h + 2), slot_value, i,
-				             (int) (g_773d75), 0);
+				             (int) (gm_ActiveTownIndex), 0);
 				d2_CreateGuiWindow(j, 0,
 				             ((int*) (f.v15C + 0x64))[f.v24], 0);
 			}
@@ -1692,7 +1692,7 @@ l_5bd26b:
 		}
 		if (gm_CheckEntityStock((int) (0x7f4ca0
 		                       + *(unsigned short*) 0x774970 * 0x21c),
-		                f.v20, (int) g_773d75) == 0) {
+		                f.v20, (int) gm_ActiveTownIndex) == 0) {
 			goto l_5bd632;
 		}
 		cm_RequestMoveCredits(-1,

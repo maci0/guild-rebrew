@@ -10,7 +10,7 @@ typedef struct {
 // SIZE 0x38
 
 extern unsigned char* lpGebaeudePROT;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 #include "Develop/client_types.h"
 extern Slot_778da0 g_7796e0[16];
 extern Slot_778da0 g_778da0[16];
@@ -34,7 +34,7 @@ void __cdecl d2_CalcTradeCartCost(unsigned char* building, int unused, int mode)
 	if (*building == 0x47) {
 		kind = *(int*) (building + 0x65);
 	} else {
-		kind = g_773d75;
+		kind = gm_ActiveTownIndex;
 	}
 	for (i = 0; i < 8; i++) {
 		if (((TRADE_CART_SLOT*)g_7796e0)[i].h != -1 && d2_GetControlValue(((TRADE_CART_SLOT*)g_7796e0)[i].h) != 0) {

@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -54,7 +54,7 @@ int __cdecl ai_StartBuergermeisterKerker(int a0, unsigned short *a1, int a2, Msg
     v6p = (char *)gm_FindPublicTreasury(1);
     if (v6p == 0)
         return 0;
-    v7 = gm_SumQueryEntryValues(*(int *)(v6p + 0x14), g_773d75);
+    v7 = gm_SumQueryEntryValues(*(int *)(v6p + 0x14), gm_ActiveTownIndex);
     if ((targetEntity[0x5a] & 4) == 0)
     {
         if ((int)targetEntity[0x5c] < (int)(gm_RandomMod(0x40) + 0x25))

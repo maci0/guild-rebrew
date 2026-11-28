@@ -1,4 +1,4 @@
-extern char g_690478[];
+extern char gm_PrivilegeHandlers[];
 
 
 
@@ -15,7 +15,7 @@ int __cdecl gm_CheckPrivilege(int index, char* a2, int a3)
 	if (*(unsigned char*) (a2 + 2) >= 0xa) {
 		return 1;
 	}
-	return (*(fcn_004fa5b0_fn*) (g_690478 + index * 4))(a2, a3);
+	return (*(fcn_004fa5b0_fn*) (gm_PrivilegeHandlers + index * 4))(a2, a3);
 }
 unsigned char _dpad_690561[7] = {
     0x5a, 0x25, 0x73, 0x24, 0x4e, 0x00, 0x00

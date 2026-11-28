@@ -16,7 +16,7 @@ int __cdecl gm_FindStraftatId(unsigned int key, int start, int* out)
 
 	i = gm_FindStraftatIndex(key, start);
 	if (i >= 0) {
-		*out = g_9a3800[i].id;
+		*out = cm_CrimeRecords[i].id;
 	}
 	return i;
 }

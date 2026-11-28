@@ -10,7 +10,7 @@ int __cdecl msx_ReleaseAllDrivers(void)
 	int r = 0;
 	int a;
 
-	if (g_6b7f90 != 0) {
+	if (msx_Initialized != 0) {
 		for (a = (int) msx_WaveDrivers; a < (int) (msx_WaveDrivers + 16); a += 4) {
 			if (*(int*) a != 0 && msx_ReleaseDigitalHandle(*(int*) a) != 0) {
 				r = -1;

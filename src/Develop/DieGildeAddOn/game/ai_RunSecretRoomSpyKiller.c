@@ -8,10 +8,10 @@ typedef struct F8 {
 
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern unsigned short g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
-extern unsigned char g_773d75;
+extern unsigned short gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
+extern unsigned char gm_ActiveTownIndex;
 
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 void __cdecl cm_SendCopyEntityData(char* msg);
@@ -24,15 +24,15 @@ int __cdecl ai_RunSecretRoomSpyKiller(char* entity, char* request, char* params)
 	char msg[0xf8];
 	F8 filter;
 
-	cm_RequestTransferCurrencyNoKill(-1, *(int*) (entity + 4), (*(char*)&g_773d75), *(int*) (params + 8));
+	cm_RequestTransferCurrencyNoKill(-1, *(int*) (entity + 4), (*(char*)&gm_ActiveTownIndex), *(int*) (params + 8));
 	memset(msg, 0, sizeof(msg));
 	msg[4] = (char) 0x99;
 	*(int*) (msg + 8) = *(int*) (entity + 4);
 	*(int*) (msg + 0xc) = *(int*) (request + 0xc);
 	*(int*) (msg + 0x28) = (*(int*)&gm_GameTime);
-	*(int*) (msg + 0x2c) = (*(int*)&g_7f4c04);
-	*(int*) (msg + 0x30) = g_7f4c08;
-	*(short*) (msg + 0x34) = g_7f4c0c;
+	*(int*) (msg + 0x2c) = (*(int*)&gm_GameTimeHour);
+	*(int*) (msg + 0x30) = gm_GameTimeSliceDword;
+	*(short*) (msg + 0x34) = gm_GameTimeTailWord;
 	msg[0x36] = 2;
 	*(int*) (msg + 0x5c) = *(int*) (request + 0xc);
 	*(int*) (msg + 0x60) = -1;

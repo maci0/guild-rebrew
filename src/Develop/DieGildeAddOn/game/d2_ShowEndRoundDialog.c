@@ -20,11 +20,11 @@ void __cdecl d2_ShowEndRoundDialog(void)
 	q = 0;
 	d2_CenterDialogWindows(h);
 	do {
-		if (g_100f1dc != -1) {
-			if (g_100f1dc == 2) {
+		if (d2_DialogButtonAction != -1) {
+			if (d2_DialogButtonAction == 2) {
 				q = 1;
 			}
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop((void*) d2_ShowEndRoundDialog, 0x67fff) != 0);
 	d2_DestroyForm(h);

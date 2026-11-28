@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_AddObjekt(void);
@@ -49,7 +49,7 @@ int __cdecl gm_DeductRandomBuildingGood(unsigned short* entity, int* outId, floa
 				v = (int) (k * factor);
 				if (v < 1)
 					v = 1;
-				cm_SendSellObjekt(-1, *(int*) (q + 2), *(unsigned short*) s, v, g_773d75, 0);
+				cm_SendSellObjekt(-1, *(int*) (q + 2), *(unsigned short*) s, v, gm_ActiveTownIndex, 0);
 			}
 		}
 		return 1;

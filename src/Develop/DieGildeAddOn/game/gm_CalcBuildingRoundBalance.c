@@ -20,7 +20,7 @@ typedef struct {
 } BUILDING_BALANCE_INFO;
 
 extern char* lpGebaeudePROT;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 float __cdecl gm_GetWorkforceOutput(unsigned char* p, int k, int a, int b);
@@ -53,7 +53,7 @@ int __cdecl gm_CalcBuildingRoundBalance(unsigned char* bld, int ownerIdx, char* 
 	if (ownerIdx != *(unsigned short*) (bld + 0x27)) {
 		goto tail;
 	}
-	slot = (int) &((ENTITY_RECORD*) g_7f4ca0)[ownerIdx];
+	slot = (int) &((ENTITY_RECORD*) gm_EntitySlotTable)[ownerIdx];
 	if (*row == 0x1e) {
 		if (ahm_GetWorkshopOwner(bld) != 0) {
 			val = ahm_CalcWorkshopOutputScore((char*) bld);
@@ -63,7 +63,7 @@ int __cdecl gm_CalcBuildingRoundBalance(unsigned char* bld, int ownerIdx, char* 
 		goto finalize;
 	}
 	for (k = 0; k < 0x300; k++) {
-		ent = &((ENTITY_RECORD*) g_7f4ca0)[k];
+		ent = &((ENTITY_RECORD*) gm_EntitySlotTable)[k];
 		if (ent->unk_16c != (char*) bld) {
 			continue;
 		}
@@ -106,13 +106,13 @@ finalize:
 	if (*row == 7) {
 		entry = fcn_00502cd0(*(int*) (bld + 0x5d), 2, 6, 0, 0xe8);
 		if (entry != 0) {
-			val = gm_SumQueryEntryValues(*(int*) (entry + 0x14), g_773d75);
+			val = gm_SumQueryEntryValues(*(int*) (entry + 0x14), gm_ActiveTownIndex);
 			*(int*) (out + 0x30) += val;
 			var += *(int*) (out + 0x30);
 		}
 		entry = fcn_00502cd0(*(int*) (bld + 0x5d), 2, 6, 0, 0xf0);
 		if (entry != 0) {
-			val = gm_SumQueryEntryValues(*(int*) (entry + 0x14), g_773d75);
+			val = gm_SumQueryEntryValues(*(int*) (entry + 0x14), gm_ActiveTownIndex);
 			*(int*) (out + 0x3c) += val;
 			var += *(int*) (out + 0x3c);
 		}

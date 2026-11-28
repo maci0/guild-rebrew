@@ -20,12 +20,12 @@
 void* g_6b5de0 = 0;
 extern unsigned char g_6b8001;
 extern int g_14ce7ac;
-extern unsigned char g_6b7ffa;
+extern unsigned char d3_RenderAmbientOnly;
 extern unsigned char g_6b7ffb;
 extern unsigned char g_6b7ffc;
 extern unsigned char g_6b7ffd;
 extern unsigned char g_6b7fff;
-extern char g_1052bd0[];
+extern char d3_RenderQualityFlags[];
 
 #pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x00436aa0 */
@@ -74,7 +74,7 @@ void __cdecl d3_ResetRenderStates(unsigned char* flags)
     ((D3D_DEVICE_VIEW*) g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*) g_6b5de0), 0xf, 0);
     ((D3D_DEVICE_VIEW*) g_6b5de0)->vtbl->SetTextureStageState(((D3D_DEVICE_VIEW*) g_6b5de0), 0, 0xb, 0);
     ((D3D_DEVICE_VIEW*) g_6b5de0)->vtbl->SetTextureStageState(((D3D_DEVICE_VIEW*) g_6b5de0), 0, 0x18, 0);
-    g_6b7ffa = 0;
+    d3_RenderAmbientOnly = 0;
     g_6b7ffb = 0;
     g_6b7ffc = 0;
     g_6b7ffd = 0;
@@ -100,7 +100,7 @@ void __cdecl d3_ResetRenderStates(unsigned char* flags)
         return;
     copy_size = 8;
     __asm {
-        mov edi, offset g_1052bd0
+        mov edi, offset d3_RenderQualityFlags
         mov esi, flags
         mov ebx, copy_size
         lea ecx, [edi+edi*2]

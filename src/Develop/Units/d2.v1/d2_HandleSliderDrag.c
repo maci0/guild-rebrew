@@ -49,13 +49,13 @@ void __cdecl d2_HandleSliderDrag(void)
 		g_00f8a664 = g_005f323c;
 		spin = g_006ed9dc;
 		g_006ed9c4 = spin->value;
-		g_006ed9e8 = g_01467380;
-		g_006ed9ec = g_01467382;
+		g_006ed9e8 = io_CursorXGold;
+		g_006ed9ec = io_CursorYGold;
 		if (spin->flags & 0x80) {
 			g_005f323c = (g_006ed9c4 - spin->min) * 4 / step + g_006ed9ec;
 			g_006310b4 = (g_006ed9c4 - spin->max) * 4 / step + g_006ed9ec;
 		}
 		spin->pos = (g_006ed9c4 - spin->min) * 4 / step + g_006ed9ec;
 	}
-	fcn_00477490(g_006ed9dc, g_006ed9c4, g_006ed9ec, g_01467382);
+	fcn_00477490(g_006ed9dc, g_006ed9c4, g_006ed9ec, io_CursorYGold);
 }

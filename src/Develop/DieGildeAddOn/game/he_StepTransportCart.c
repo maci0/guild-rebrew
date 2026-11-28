@@ -27,11 +27,11 @@ typedef struct Handler {
 
 extern unsigned char* lpGebaeudePROT;
 extern int d3_CurrentContextIndex;
-extern Slot21c g_7f4ca0[];
-extern int g_7e35c0[];
+extern Slot21c gm_EntitySlotTable[];
+extern int main_FrameHandlerStack[];
 extern int g_774650;
-extern char* g_7746c4;
-extern unsigned short* g_7746cc;
+extern char* d2_VisitedBuilding;
+extern unsigned short* sv_SelectedBuilding;
 
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_FindRecordById(int);
@@ -99,14 +99,14 @@ void __cdecl he_StepTransportCart(char* e)
 			} else {
 				io_FormatTextBuffer(buf, 0x1c44, c);
 			}
-			k = g_7f4ca0[*(unsigned short*) (e + 8)].kind;
+			k = gm_EntitySlotTable[*(unsigned short*) (e + 8)].kind;
 			if (k == 6 || k == 7) {
-				if (((Handler*) g_7e35c0)[g_774650].fn == d2_RunTradeInventoryPanel) {
-					if (g_7746c4 == c) {
+				if (((Handler*) main_FrameHandlerStack)[g_774650].fn == d2_RunTradeInventoryPanel) {
+					if (d2_VisitedBuilding == c) {
 						goto done;
 					}
-					if (gm_IsWarehouse(c) && g_7746cc != 0) {
-						w = *g_7746cc;
+					if (gm_IsWarehouse(c) && sv_SelectedBuilding != 0) {
+						w = *sv_SelectedBuilding;
 						if ((w >= 0x92 && w <= 0x97) || w == 0x2db) {
 							goto done;
 						}
@@ -115,10 +115,10 @@ void __cdecl he_StepTransportCart(char* e)
 				if (!(r[0x20] & 1) && e[0xf2] == 0) {
 					h = gm_FindBuildingPrimarySlot(c);
 					if (h != 0) {
-						he_MessageBoxQuickjump(g_7f4ca0[*(unsigned short*) (e + 8)].id, *(int*) (r + 2), buf, 0, 0x608,
+						he_MessageBoxQuickjump(gm_EntitySlotTable[*(unsigned short*) (e + 8)].id, *(int*) (r + 2), buf, 0, 0x608,
 						             *(int*) (c + 1), *(int*) (h + 2), 0, 0);
 					} else {
-						he_MessageBoxQuickjump(g_7f4ca0[*(unsigned short*) (e + 8)].id, *(int*) (r + 2), buf, 0, 0x608,
+						he_MessageBoxQuickjump(gm_EntitySlotTable[*(unsigned short*) (e + 8)].id, *(int*) (r + 2), buf, 0, 0x608,
 						             *(int*) (c + 1), -1, 0, 0);
 					}
 				}

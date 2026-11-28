@@ -16,8 +16,8 @@ extern void* d3_ActiveCamera;
 extern char g_1052be0[];
 extern float g_1052c00[16];
 extern float g_1043294;
-extern float g_6628a0;
-extern float g_6628a8;
+extern float flt_1_0;
+extern float flt_0_0;
 
 double __cdecl sqrt(double);
 float* __stdcall fcn_005ec410(float*, float, float, float);

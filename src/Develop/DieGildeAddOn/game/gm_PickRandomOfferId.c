@@ -3,7 +3,7 @@
 
 #include "offer.h"
 
-extern Offer g_6abb08[];
+extern Offer gm_SpecialObjectOffers[];
 extern int g_6ac240;
 
 unsigned short __cdecl gm_RandomMod(unsigned short);
@@ -19,7 +19,7 @@ unsigned short __cdecl gm_PickRandomOfferId(int lo, int hi)
 	n = g_6ac240;
 	k = n;
 	while (k != 0) {
-		o = &g_6abb08[r];
+		o = &gm_SpecialObjectOffers[r];
 		if (o->level >= lo && o->level <= hi) {
 			return (unsigned short) o->id;
 		}

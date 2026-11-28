@@ -21,14 +21,14 @@ void __cdecl d2_UpdateRadioGroup(int groupIndex)
 	if (*(int*) 0x67d3d0) {
 		goto scan;
 	}
-	if (*(int*) 0x6b8af8 != (int) g_14ce8c0
-		|| *(int*) 0x6b8afc != (int) g_14ce8c2) {
+	if (*(int*) 0x6b8af8 != (int) io_ActiveCursorX
+		|| *(int*) 0x6b8afc != (int) io_ActiveCursorY) {
 		*(int*) 0x67d3d0 = 1;
 scan:
 		if (!tp_d2_SelectedControl) {
 			for (i = 0; i < count; i++) {
 				if (g_102cbc4[groupIndex].ids[i] == d2_CurrentElementId
-					&& (!(*(unsigned char*) (groupIndex * 0x8c + (unsigned long)&g_102cbc0) & 1)
+					&& (!(*(unsigned char*) (groupIndex * 0x8c + (unsigned long)&d2_RadioGroups) & 1)
 						|| g_14ce8cc)) {
 					sel = i;
 				}
@@ -38,7 +38,7 @@ scan:
 			}
 		}
 	}
-	key = g_14cf950;
+	key = io_LastKeyScancode;
 	id = g_67d38c;
 	if (key == (char) 0xc8 || (g_14ce904 && id == -1)) {
 		sel--;
@@ -52,15 +52,15 @@ scan:
 		goto skip;
 	}
 	*(int*) 0x67d3d0 = 0;
-	*(int*) 0x6b8af8 = g_14ce8c0;
-	*(int*) 0x6b8afc = g_14ce8c2;
+	*(int*) 0x6b8af8 = io_ActiveCursorX;
+	*(int*) 0x6b8afc = io_ActiveCursorY;
 	if (sel < 0) {
 		sel = count - 1;
 	}
 	sel %= count;
 	if (alt) {
 		id = g_102cbc4[groupIndex].ids[sel];
-		alt = (char*) &((D2_CONTROL_TL*) g_1015ea0)[id];
+		alt = (char*) &((D2_CONTROL_TL*) d2_Controls)[id];
 		io_SetMouseCursorPos(
 			(int) (((D2_CONTROL_TL*) alt)->width * 0.5
 				+ ((D2_CONTROL_TL*) alt)->x),
@@ -81,18 +81,18 @@ skip:
 	if (sel != g_102cbc4[groupIndex].sel || !*(int*) 0x67d3d0) {
 		d2_SelectRadioGroup(groupIndex, sel);
 	}
-	if (g_14cf950 != 0x1c) {
+	if (io_LastKeyScancode != 0x1c) {
 		return;
 	}
 	g_14ce8d8 = 1;
-	g_14cf950 = 0;
+	io_LastKeyScancode = 0;
 	id = g_102cbc4[groupIndex].ids[sel];
 	d2_CurrentElementId = id;
-	alt = (char*) &((D2_CONTROL_TL*) g_1015ea0)[id];
+	alt = (char*) &((D2_CONTROL_TL*) d2_Controls)[id];
 	if (((D2_CONTROL_TL*) alt)->kind != 9) {
-		g_100f1dc = ((D2_CONTROL_TL*) alt)->value_008;
+		d2_DialogButtonAction = ((D2_CONTROL_TL*) alt)->value_008;
 	}
 	else {
-		g_100f1dc = (*(unsigned char*) &((D2_CONTROL_TL*) alt)->flags_1d0 & 0x10) ? 1 : 2;
+		d2_DialogButtonAction = (*(unsigned char*) &((D2_CONTROL_TL*) alt)->flags_1d0 & 0x10) ? 1 : 2;
 	}
 }

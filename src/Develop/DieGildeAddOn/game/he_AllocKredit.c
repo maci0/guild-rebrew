@@ -19,7 +19,7 @@ struct rec {
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
@@ -50,13 +50,13 @@ void __cdecl he_AllocKredit(char* e)
 	if (q == 0 || (e[0x78] & 2) == 0) {
 		return;
 	}
-	h = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (q + 0x27)]);
+	h = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[*(unsigned short*) (q + 0x27)]);
 	o = gm_LookupEntityRecordById(*(int*) (e + 0xb0));
 	if (h->entity_state != 6 && h->entity_state != 7) {
 		return;
 	}
 	v = 0;
-	r = fcn_00502cd0(*(int*) (q + 0x5d), 1, 0, ((struct rec*)g_8680b4)[g_773d75].v);
+	r = fcn_00502cd0(*(int*) (q + 0x5d), 1, 0, ((struct rec*)g_8680b4)[gm_ActiveTownIndex].v);
 	if (r != 0) {
 		v = *(int*) (r + 0xe);
 	}

@@ -29,7 +29,7 @@ int __cdecl ai_CheckAction01cPredicate(char* unused1, char* actor, char* ctx, ch
 		return 0;
 	}
 	out[0] = 7;
-	*(int*) (out + 4) = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[(unsigned short) idx].entity_id;
+	*(int*) (out + 4) = ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[(unsigned short) idx].entity_id;
 	*(int*) (out + 8) = min(max(gm_RandomMod(*(int*) (actor + 0x194) / 2), 1), 5);
 	return 1;
 }

@@ -38,8 +38,8 @@ unsigned int __cdecl gm_CanBuildBuildingType(int buildingType, int playerIndex)
 	if (playerIndex == 0xffff) {
 		return 0;
 	}
-	rb = (unsigned char*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[playerIndex]);
-	if (g_774800 != 0 && (rb[2] == 6 || rb[2] == 7)) {
+	rb = (unsigned char*) ((char *)&((ENTITY_RECORD*)gm_EntitySlotTable)[playerIndex]);
+	if (gm_AllEntitiesControllable != 0 && (rb[2] == 6 || rb[2] == 7)) {
 		return 1;
 	}
 	if (type == 1) {

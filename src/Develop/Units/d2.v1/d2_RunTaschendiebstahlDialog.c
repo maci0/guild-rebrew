@@ -31,12 +31,12 @@ typedef struct {
 } Player;
 // SIZE 0x21c
 
-extern char g_7f4ca0[];
-extern char* g_7746c8;
+extern char gm_EntitySlotTable[];
+extern char* d2_InteriorBuilding;
 extern int g_14abc44;
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern pos14_7f4c00 gm_GameTime;
 extern char s_6aa490[];
@@ -81,15 +81,15 @@ int __cdecl d2_RunTaschendiebstahlDialog(int unused, char* param)
 	n = io_AppendText(0x19ee, *(unsigned short*) (param + 0x27), param);
 	btn1 = d2_GetWindowListItem(dlg, 1, n);
 	btn2 = d2_GetWindowListItem(dlg, 1, n + 1);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_14ce8e0)
-			g_774654 = 1;
-		if (g_100f1dc != -1) {
+		if (io_RightButtonReleased)
+			d2_DialogCloseRequested = 1;
+		if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == btn1) {
 				dlg2 = he_StartHandlungSearch(3, 0, 0x49, 2,
-					*(unsigned short*) (g_7746c8 + 0x27), 3,
-					*(int*) (g_7746c8 + 1));
+					*(unsigned short*) (d2_InteriorBuilding + 0x27), 3,
+					*(int*) (d2_InteriorBuilding + 1));
 				while (dlg2 != 0) {
 					if (*(int*) (dlg2 + 0xac) == *(int*) (param + 1))
 						break;
@@ -97,13 +97,13 @@ int __cdecl d2_RunTaschendiebstahlDialog(int unused, char* param)
 				}
 				if (dlg2 == 0) {
 					pkt.type = 0x49;
-					slot = &((Player*) g_7f4ca0)[*(unsigned short*) (g_7746c8 + 0x27)];
+					slot = &((Player*) gm_EntitySlotTable)[*(unsigned short*) (d2_InteriorBuilding + 0x27)];
 					pkt.x8 = slot->x4;
-					pkt.xc = *(int*) (g_7746c8 + 1);
+					pkt.xc = *(int*) (d2_InteriorBuilding + 1);
 					pkt.name = gm_GameTime;
 					pkt.x36 = 1;
 					pkt.x58 = *(int*) (param + 1);
-					pkt.x5c = *(int*) (g_7746c8 + 1);
+					pkt.x5c = *(int*) (d2_InteriorBuilding + 1);
 					for (n = 0; n < 8; n++)
 						pkt.ids[n] = -1;
 					n = 0;
@@ -133,12 +133,12 @@ int __cdecl d2_RunTaschendiebstahlDialog(int unused, char* param)
 							io_FormatTextBuffer(buf, 0x19ef, 6);
 							d2_ShowModalMessageBox((int) buf, 0);
 						}
-						g_774654 = 2;
+						d2_DialogCloseRequested = 2;
 					}
 				}
 				else {
 					flag = 1;
-					g_774654 = 2;
+					d2_DialogCloseRequested = 2;
 					for (p = (char*) 0x7e4260; (int) p < 0x7e42e0; p += 4) {
 						player = *(Player**) p;
 						if (player != 0 && player->x188 != 0)
@@ -147,7 +147,7 @@ int __cdecl d2_RunTaschendiebstahlDialog(int unused, char* param)
 				}
 			}
 			else if (d2_CurrentElementId == btn2) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
 		if (main_RunFrameLoop((void*) d2_RunTaschendiebstahlDialog, 0x677c7) == 0) {

@@ -3,7 +3,7 @@
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern unsigned char* lpGebaeudePROT;
 extern unsigned char* lpGebaeudeINST;
-extern char g_6b5c60[];
+extern char str_empty[];
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned char* __cdecl gm_FindNextFilteredEntity(void);
@@ -29,7 +29,7 @@ void __cdecl init_AssignBuildingNames(void)
 	e = (unsigned char*) gm_StartFilteredEntitySearch(1, 6);
 	while (e != 0) {
 		if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*e].category != 0x1c) {
-			e[5] = (unsigned char) g_6b5c60[0];
+			e[5] = (unsigned char) str_empty[0];
 		}
 		e = (unsigned char*) gm_FindNextFilteredEntity();
 	}
@@ -40,7 +40,7 @@ void __cdecl init_AssignBuildingNames(void)
 	do {
 		if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*e].category != 0x1c) {
 			cnt = 0;
-			e[5] = (unsigned char) g_6b5c60[0];
+			e[5] = (unsigned char) str_empty[0];
 			p = tbl;
 			for (i = 0; i < 0xc; i++) {
 				src = (char*) *(int*) ((i + (int) *e * 0xe) * 4 + 0x14a6560);

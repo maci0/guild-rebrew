@@ -2,7 +2,7 @@
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/client_actions.h"
 #include "Develop/DieGildeAddOn/game/entity.h"
-extern char g_6b5c60[];
+extern char str_empty[];
 extern char* txt_TextEntries[];
 extern char* g_14a5770[];
 char* __cdecl txt_GetPackedStringEntry(char*, int, int);
@@ -19,11 +19,11 @@ int __cdecl gm_FormatEntityName(int entityId, int gramCase, int formatMode, char
 	unsigned char loc[0x21c];
 	char* p;
 	int i;
-	b1[0] = g_6b5c60[0];
+	b1[0] = str_empty[0];
 	memset(&b1[1], 0, 255);
-	b3[0] = g_6b5c60[0];
+	b3[0] = str_empty[0];
 	memset(&b3[1], 0, 255);
-	b2[0] = g_6b5c60[0];
+	b2[0] = str_empty[0];
 	memset(&b2[1], 0, 255);
 	if (entityId < 0 || entityId == 0xffff) {
 		strcpy(outBuf, (*(char**) 0x1440ac8));
@@ -37,7 +37,7 @@ int __cdecl gm_FormatEntityName(int entityId, int gramCase, int formatMode, char
 		strcpy((char*) p + 0x30, g_14a5770[2]);
 	}
 	if (p == (char*) gm_CityEntity) {
-		strcpy(outBuf, (char*) 0x7e3f40 + g_773d75 * 0x2f4);
+		strcpy(outBuf, (char*) 0x7e3f40 + gm_ActiveTownIndex * 0x2f4);
 		if ((unsigned char) gramCase == 2) {
 			strcat(outBuf, "'s");
 		}

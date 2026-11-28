@@ -10,7 +10,7 @@ typedef struct Msg {
 } Msg;
 // SIZE 0x18
 
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 char* __cdecl gm_FindRecordById(int);
 char* __cdecl gm_SearchTable67(int);
@@ -55,15 +55,15 @@ int __cdecl ai_RunBuyObject(int unused, Msg* m, Msg* ev)
 		return 0;
 	}
 	if (m->d == 0x39) {
-		n = (int) gm_GetSeasonPrice(m->a, g_773d75);
+		n = (int) gm_GetSeasonPrice(m->a, gm_ActiveTownIndex);
 		gm_ResolveEntityById(0, (void**) (&home), 0, m->c);
 		if (home == 0) {
 			return 0;
 		}
-		cm_RequestMoveCredits(-1, *(int*) (home + 2), g_773d75, n);
-		cm_SendSellObjekt(id, -1, m->a, m->b, g_773d75, 0);
+		cm_RequestMoveCredits(-1, *(int*) (home + 2), gm_ActiveTownIndex, n);
+		cm_SendSellObjekt(id, -1, m->a, m->b, gm_ActiveTownIndex, 0);
 		return 0x39;
 	}
-	cm_SendSellObjekt(id, -1, m->a, m->b, g_773d75, (int) gm_GetSeasonPrice(m->a, g_773d75));
+	cm_SendSellObjekt(id, -1, m->a, m->b, gm_ActiveTownIndex, (int) gm_GetSeasonPrice(m->a, gm_ActiveTownIndex));
 	return 0xb;
 }

@@ -1,6 +1,6 @@
-extern char* g_6b7ebc;
+extern char* evt_WaitingScriptTask;
 extern char* evt_CurrentScript;
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 
 /* Sleep. While this command is the one in progress, wait until the
  * clock reaches the stored base plus the tick count divided by 14.
@@ -12,16 +12,16 @@ int __cdecl fcn_0040c630(int* ticks)
 	char* vm;
 	int n;
 
-	if (g_6b7ebc != 0 && *(void**) (g_6b7ebc + 0x44) == (void*) fcn_0040c630) {
+	if (evt_WaitingScriptTask != 0 && *(void**) (evt_WaitingScriptTask + 0x44) == (void*) fcn_0040c630) {
 		vm = evt_CurrentScript;
 		n = *ticks;
-		if (n != -1 && (unsigned) g_6b7fac >= (unsigned) (n / 14 + *(int*) (vm + 0xc88))) {
+		if (n != -1 && (unsigned) gm_GameTicks >= (unsigned) (n / 14 + *(int*) (vm + 0xc88))) {
 			return 0;
 		}
 		*(void**) (vm + 0xc60) = (void*) fcn_0040c630;
 		return 0;
 	}
 	*(void**) (evt_CurrentScript + 0xc60) = (void*) fcn_0040c630;
-	*(int*) (evt_CurrentScript + 0xc88) = g_6b7fac;
+	*(int*) (evt_CurrentScript + 0xc88) = gm_GameTicks;
 	return 1;
 }

@@ -3,7 +3,7 @@ void __cdecl cm_AppendPacketFieldDelta(unsigned char size, unsigned char count, 
 void __cdecl cm_RequestChangeFloat(int id, int kind, float value);
 void __cdecl cm_RequestChangeAttribute(void);
 
-extern unsigned int g_773d48;
+extern unsigned int gm_QueuedCommandCount;
 
 /* ADDRESS: GOLDTL 0x004fee50 */
 void __cdecl gm_SetEntityAge(char* o, int v)
@@ -30,6 +30,6 @@ void __cdecl gm_SetEntityAge(char* o, int v)
 		cm_BeginPacketFieldDelta(o, *(int*) (o + 4));
 		cm_AppendPacketFieldDelta(2, 1, 10, (char*) &v);
 		cm_RequestChangeAttribute();
-		g_773d48++;
+		gm_QueuedCommandCount++;
 	}
 }

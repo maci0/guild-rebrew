@@ -13,8 +13,8 @@ typedef struct Ent {
 } Ent;
 // SIZE 0x21c
 
-extern char g_7f4ca0[];
-extern unsigned short g_7f4c04;
+extern char gm_EntitySlotTable[];
+extern unsigned short gm_GameTimeHour;
 
 float __cdecl gm_RandomFloat01(void);
 void __cdecl he_SetEntityScriptFlag(Ent* e, int a2);
@@ -26,7 +26,7 @@ void __cdecl gm_UpdateWorkerArrival(Ent* entity)
 	int i;
 
 	found = 0;
-	if ((*(short*)&g_7f4c04) != 7 && (*(short*)&g_7f4c04) != 0xc && (*(short*)&g_7f4c04) != 0x12) {
+	if ((*(short*)&gm_GameTimeHour) != 7 && (*(short*)&gm_GameTimeHour) != 0xc && (*(short*)&gm_GameTimeHour) != 0x12) {
 		entity->flags &= ~0x1000;
 		return;
 	}
@@ -35,9 +35,9 @@ void __cdecl gm_UpdateWorkerArrival(Ent* entity)
 	}
 	entity->flags |= 0x1000;
 	for (i = 0; found == 0 && i < 768; i++) {
-		if (((Ent*)g_7f4ca0)[i].id != 0xffff && ((Ent*)g_7f4ca0)[i].home == entity->home && ((Ent*)g_7f4ca0)[i].role == 0x1c && ((Ent*)g_7f4ca0)[i].kind == 0x14
-		    && (((Ent*)g_7f4ca0)[i].flags & 1) && ((Ent*)g_7f4ca0)[i].job && *(int*) (((Ent*)g_7f4ca0)[i].job + 0x2c) == *(int*) (((Ent*)g_7f4ca0)[i].home + 1)) {
-			found = &((Ent*)g_7f4ca0)[i];
+		if (((Ent*)gm_EntitySlotTable)[i].id != 0xffff && ((Ent*)gm_EntitySlotTable)[i].home == entity->home && ((Ent*)gm_EntitySlotTable)[i].role == 0x1c && ((Ent*)gm_EntitySlotTable)[i].kind == 0x14
+		    && (((Ent*)gm_EntitySlotTable)[i].flags & 1) && ((Ent*)gm_EntitySlotTable)[i].job && *(int*) (((Ent*)gm_EntitySlotTable)[i].job + 0x2c) == *(int*) (((Ent*)gm_EntitySlotTable)[i].home + 1)) {
+			found = &((Ent*)gm_EntitySlotTable)[i];
 		}
 	}
 	if (found && gm_RandomFloat01() > 0.75f) {

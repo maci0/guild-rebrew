@@ -1,4 +1,4 @@
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 int __cdecl d2_LoadForm(int, int, char *);
 void __cdecl d2_UpdateViewportCenter(int);
 void __cdecl d2_PositionFormWindows(int, int);
@@ -94,7 +94,7 @@ void __cdecl d2_ShowGraphicsOptions(void)
     do {
       if ((*(unsigned int *)0x14ce8e0) || (*(unsigned char *)0x14cf950 == 1))
         *(unsigned int *)0x774654 = 1;
-      if (g_100f1dc != -1) {
+      if (d2_DialogButtonAction != -1) {
         if (*(unsigned int *)0x67d370 != selection[0]) {
           if (*(unsigned int *)0x67d370 != selection[1]) {
             if (*(unsigned int *)0x67d370 == selection[2]) {

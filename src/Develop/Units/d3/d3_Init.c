@@ -49,11 +49,11 @@ extern unsigned char g_6b7ff8;
 extern char g_6b8018;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_1052bbc;
-extern float g_10432a4;
+extern float d3_ProjectionDist;
 extern float g_1052bc4;
 extern float g_1052bb4;
 extern float g_1052bb8;
-extern char g_10432c0[];
+extern char d3_Universes[];
 
 void __cdecl d3_InitSceneObject(char* o);
 void __cdecl d3_InitLightBuffers(int nlist, int nactive);
@@ -100,7 +100,7 @@ char __cdecl d3_Init(D3_INIT_CONFIG* cfg)
 		g_10529e0.y = g_10529e0.h - g_10529e0.ch;
 	g_1042fc4 = 0;
 	g_1042fc5 = 0;
-	g_1042a08 = 0;
+	d3_RenderedFaceCount = 0;
 	g_1042fc0 = 6;
 	g_1042557 |= 2;
 	g_1043277 |= 2;
@@ -134,14 +134,14 @@ char __cdecl d3_Init(D3_INIT_CONFIG* cfg)
 	g_6b8018 = 1;
 	d3_SetViewport(g_10529e0.x, g_10529e0.y, g_10529e0.cw, g_10529e0.ch, g_10529e0.f4c, g_10529e0.f50, g_10529e0.f54, g_10529e0.w, g_10529e0.h);
 	d3_CurrentContextIndex = 0;
-	g_1052bc4 = (float) atan2(g_1052bbc, g_10432a4);
+	g_1052bc4 = (float) atan2(g_1052bbc, d3_ProjectionDist);
 	g_1052bb8 = (float) atan2(g_1052bb4, d3_ProjectionScaleY);
 	{
 		int len;
 
 		len = 0xf700;
 		__asm {
-			mov edi, offset g_10432c0
+			mov edi, offset d3_Universes
 			mov ebx, len
 			xor eax, eax
 			lea ecx, [edi+edi*2]

@@ -1,7 +1,7 @@
 typedef int(__stdcall* Fn1)(void* self);
 
 extern void* g_6b5de0;
-extern unsigned long g_14ce728;
+extern unsigned long d3_LastReleaseRefCount;
 
 int __stdcall fcn_00610011(void* dev, int a, int b, int c, int d, int e, int f, void** out);
 
@@ -9,7 +9,7 @@ int __stdcall fcn_00610011(void* dev, int a, int b, int c, int d, int e, int f, 
 int __cdecl d3_CreateDeviceTexture(int size, int a2, int a3, void** out, unsigned char levels)
 {
 	if (*out != 0) {
-		(*(int*)&g_14ce728) = ((Fn1) (*(void***) *out)[2])(*out);
+		(*(int*)&d3_LastReleaseRefCount) = ((Fn1) (*(void***) *out)[2])(*out);
 		*out = 0;
 	}
 	return fcn_00610011(g_6b5de0, size, size, levels + 1, a3, a2, ~a3 & 1, out);

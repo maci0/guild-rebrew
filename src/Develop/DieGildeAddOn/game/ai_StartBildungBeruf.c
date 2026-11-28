@@ -19,7 +19,7 @@ int __cdecl he_StartHandlungSearch(int a, ...);
 int __cdecl fcn_0042e410(unsigned short a);
 int __cdecl fcn_004fbd20(int a);
 int __cdecl gm_CheckPrivilege(int a, char* obj, int* frame);
-extern float g_662a94; extern float g_6628a8; extern float g_66413c;
+extern float g_662a94; extern float flt_0_0; extern float g_66413c;
 int __cdecl fcn_00502cd0(int a, int b, int c, int d);
 
 /* ADDRESS: GOLDTL 0x00495fe0 */
@@ -126,7 +126,7 @@ int __cdecl ai_StartBildungBeruf(int unused, char* obj, int flag, int* out1, int
 		if (extra.values[loop] == 0) {
 			extra.values[loop] = 0xfc;
 		}
-		r = gm_CheckPrivilege(cands[loop], obj, frame); bonus = (r & 2) ? -1.0f : g_6628a8;
+		r = gm_CheckPrivilege(cands[loop], obj, frame); bonus = (r & 2) ? -1.0f : flt_0_0;
 		tmp8 = (unsigned char) obj[loop + 0x80];
 		if (tmp8 < 0x2a) {
 			costs[loop] = 1;

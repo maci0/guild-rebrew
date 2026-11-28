@@ -3,7 +3,13 @@
  * retries until the session exists, then hands the session to the game and
  * tears the scene down. Returns 1 when the city path check fails, 2 when the
  * network scene check fails, 0 after a completed startup. */
-extern signed char g_6a3440; extern unsigned char g_6a375c; extern int d3_CurrentContextIndex; extern int g_77250c; extern unsigned char g_773d75; extern int g_77494c; extern char g_868060[];
+extern signed char gm_SelectedMissionIndex;
+extern unsigned char gm_PlayerCount;
+extern int d3_CurrentContextIndex;
+extern int d2_ScreenSurface;
+extern unsigned char gm_ActiveTownIndex;
+extern int nt_NetSyncFlags;
+extern char gm_TownTable[];
 #pragma intrinsic(strcpy)
 
 int __cdecl sprintf(char *buf, const char *fmt, ...);
@@ -61,21 +67,21 @@ int __cdecl ls_StartNetworkGame(char *path)
     int i;
     char *p;
 
-    sprintf(text, *(char **) 0x14ac600, *(unsigned char *) &g_6a375c);
+    sprintf(text, *(char **) 0x14ac600, *(unsigned char *) &gm_PlayerCount);
     d2_ShowNetworkLoadStatus((unsigned int) text);
-    *(int *) &g_77494c = 0;
+    *(int *) &nt_NetSyncFlags = 0;
     do {
         main_PumpWindowMessages();
         cm_StepCommandQueue();
-    } while (*(int *) &g_77494c == 0);
-    if (*(int *) &g_77494c & 1) {
+    } while (*(int *) &nt_NetSyncFlags == 0);
+    if (*(int *) &nt_NetSyncFlags & 1) {
         if (*path == 0)
             sprintf(path, "%s/AUGSBURG.NET", "gamedata/cities");
         d2_ShowNetworkLoadStatus(*(unsigned int *) 0x14ac5f0);
         if (ls_SendGame(path) == 0)
             return 1;
     }
-    flag = *(int *) &g_77494c & 1;
+    flag = *(int *) &nt_NetSyncFlags & 1;
     d2_ShowNetworkLoadStatus(*(unsigned int *) 0x14ac5f4);
     if (ls_WaitAndLoadNetSave() == 0)
         return 2;
@@ -93,11 +99,11 @@ int __cdecl ls_StartNetworkGame(char *path)
     d2_SetFormVisibility(*(int *) 0x7e1d40, 1);
     WritePrivateProfileStringA("Network", "Name", (char *) 0x7e23ea, file);
     WritePrivateProfileStringA("Network", "Familienname", (char *) 0x7e240a, file);
-    d2_ClearSurface(*(int *) &g_77250c);
+    d2_ClearSurface(*(int *) &d2_ScreenSurface);
     d2_SetBackdropResource(((unsigned short) gm_RandomMod(2) != 1) ? 0x791 : 0x78e);
     d2_RenderAndPresentFrame();
-    if (*(int *) &g_77494c & 1) {
-        msg[0] = *(unsigned char *) &g_6a375c;
+    if (*(int *) &nt_NetSyncFlags & 1) {
+        msg[0] = *(unsigned char *) &gm_PlayerCount;
         cm_RequestSysMessage(6, (char *) msg);
     }
     session = cm_SendAllocClientSpieler(0xffff, 0xffff, *(unsigned char *) 0x7e23e2,
@@ -121,43 +127,43 @@ int __cdecl ls_StartNetworkGame(char *path)
         cm_StepCommandQueue();
     }
     handle = cm_GetCommandResult(session);
-    if (*(int *) &g_77494c & 1) {
-        *(unsigned char *) &g_6a3440 = 0xff;
+    if (*(int *) &nt_NetSyncFlags & 1) {
+        *(unsigned char *) &gm_SelectedMissionIndex = 0xff;
         msg[0] = -1;
         stamp = (int) timeGetTime();
         *(int *) 0x7e1f60 = stamp;
         msg[1] = stamp;
         cm_RequestSysMessage(9, (char *) msg);
     }
-    while (*(unsigned char *) &g_6a3440 == 0xfe) {
+    while (*(unsigned char *) &gm_SelectedMissionIndex == 0xfe) {
         main_PumpWindowMessages();
         cm_StepCommandQueue();
     }
-    if (*(unsigned char *) &g_6a3440 != 0xff) {
-        if (*(unsigned char *) &g_6a3440 != 5)
+    if (*(unsigned char *) &gm_SelectedMissionIndex != 0xff) {
+        if (*(unsigned char *) &gm_SelectedMissionIndex != 5)
             *(int *) 0x7e1f60 = (int) timeGetTime();
-        gm_AllocRandomMissionJob(*(int *) (handle + 4), *(signed char *) &g_6a3440, 1);
+        gm_AllocRandomMissionJob(*(int *) (handle + 4), *(signed char *) &gm_SelectedMissionIndex, 1);
     }
     result = gm_ConvertUnitsToAmount(*(int *) 0x7747fc == 0 ? 2000 : 500000,
-                          *(unsigned char *) &g_773d75);
-    cm_RequestMoveCredits(*(int *) (handle + 4), -1, *(unsigned char *) &g_773d75,
+                          *(unsigned char *) &gm_ActiveTownIndex);
+    cm_RequestMoveCredits(*(int *) (handle + 4), -1, *(unsigned char *) &gm_ActiveTownIndex,
                  result);
-    while ((*(int *) &g_77494c & 4) == 0) {
+    while ((*(int *) &nt_NetSyncFlags & 4) == 0) {
         main_PumpWindowMessages();
         cm_StepCommandQueue();
     }
     if (flag != 0) {
         d2_ShowNetworkLoadStatus(*(unsigned int *) 0x14ac5f8);
-        gm_InitCityAndTradeState(*(unsigned char *) &g_773d75);
+        gm_InitCityAndTradeState(*(unsigned char *) &gm_ActiveTownIndex);
     }
     sv_WaitForNetworkSync(0x24087);
     d2_ShowNetworkLoadStatus(*(unsigned int *) 0x14ac5fc);
     init_LocalData();
     sv_WaitForNetworkSync(0x24087);
     if (flag != 0) {
-        gm_RestockTownMarket(*(unsigned char *) &g_773d75);
+        gm_RestockTownMarket(*(unsigned char *) &gm_ActiveTownIndex);
         i = 0;
-        p = (char *) &g_868060;
+        p = (char *) &gm_TownTable;
         do {
             if (*p == 0)
                 break;
@@ -169,7 +175,7 @@ int __cdecl ls_StartNetworkGame(char *path)
         cm_SetGameSpeedSetting(2);
     }
     *(int *) 0x7725c8 = 0;
-    if (*(signed char *) &g_6a3440 > -1 && *(signed char *) &g_6a3440 < 6) {
+    if (*(signed char *) &gm_SelectedMissionIndex > -1 && *(signed char *) &gm_SelectedMissionIndex < 6) {
         engine = d3_CurrentContextIndex;
         d3_SelectSceneContext(d3_FindFreeSceneContext(), 0);
         d3_LoadScene("scenes/*network.ed3", 0, 0);

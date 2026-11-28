@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char g_6b5c60[];
+extern char str_empty[];
 
 
 
@@ -12,12 +12,12 @@ void __cdecl he_NotifyAction0x35Blocked(void* firstEntity, void* secondEntity)
 
 	t = *(char*) ((char*) firstEntity + 2);
 	if (t == 6 || t != 7) {
-		io_FormatTextBuffer(g_774a80, 0x20bf);
-		he_PostEntityMessage(*(int*) ((char*) firstEntity + 4), -1, g_774a80, 0, 0x5fb, g_6b5c60);
+		io_FormatTextBuffer(io_MessageFormatBuf, 0x20bf);
+		he_PostEntityMessage(*(int*) ((char*) firstEntity + 4), -1, io_MessageFormatBuf, 0, 0x5fb, str_empty);
 	}
 	t = *(char*) ((char*) secondEntity + 2);
 	if (t == 6 || t != 7) {
-		io_FormatTextBuffer(g_774a80, 0x20c0, *(unsigned short*) firstEntity);
-		he_PostEntityMessage(*(int*) ((char*) secondEntity + 4), -1, g_774a80, 0, 0x5fb, g_6b5c60);
+		io_FormatTextBuffer(io_MessageFormatBuf, 0x20c0, *(unsigned short*) firstEntity);
+		he_PostEntityMessage(*(int*) ((char*) secondEntity + 4), -1, io_MessageFormatBuf, 0, 0x5fb, str_empty);
 	}
 }

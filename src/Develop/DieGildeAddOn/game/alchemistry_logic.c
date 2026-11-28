@@ -643,9 +643,9 @@ int __cdecl ahm_AllocateEntitySlot(int obj, int tgt, int src)
 }
 #endif
 #if !defined(REBREW_SERVER)
-extern int g_14cbca0;
+extern int nt_ClientSocket;
 extern int gm_NextEntityId;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 char* __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
 void __cdecl gm_RefreshLocalMarketStock(int season);
 
@@ -659,7 +659,7 @@ int __cdecl ahm_AllocateEntitySlot(char* obj, char* tgt, char* src)
 	for (i = 0; i < 6; i++) {
 		if (*(int*) (tgt + 0xc + i * 8) == 0) {
 			query = fcn_00502cd0(*(int*) (src + 0x5d), 2, 6, 0, 0xff);
-			if (g_14cbca0 != -1) {
+			if (nt_ClientSocket != -1) {
 				gm_NextEntityId = *(int*) (obj + 0x14);
 			}
 			*(int*) (tgt + 0xc + i * 8) = *(int*) (obj + 8);
@@ -667,7 +667,7 @@ int __cdecl ahm_AllocateEntitySlot(char* obj, char* tgt, char* src)
 			if (query != 0) {
 				gm_AddObjekt(*(int*) (query + 2), *(int*) (obj + 8), 2);
 			}
-			gm_RefreshLocalMarketStock(g_773d75);
+			gm_RefreshLocalMarketStock(gm_ActiveTownIndex);
 			return 1;
 		}
 	}

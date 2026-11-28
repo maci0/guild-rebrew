@@ -15,7 +15,7 @@ typedef struct
 // SIZE 0x38
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern Win_1015f40 g_1015f40[0x60];
+extern Win_1015f40 d2_Windows[0x60];
 extern int g_14aadc8;
 #include "Develop/DieGildeAddOn/game/aemter.h"
 
@@ -36,7 +36,7 @@ int __cdecl d2_LayoutOfficeCandidateList(int dialog, int selectedForm, int alter
 		return 0;
 	}
 	y = d2_ClearAndScrollSubform(dialog, selectedForm, alternateForm);
-	half = ((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width / 2;
+	half = ((D2_WIN*)d2_Windows)[d2_CurrentWindowId].width / 2;
 	d2_ShowCenteredText(g_14aadc8, half, 8, half * 2, 0x55);
 	pos = 0x28;
 	cat = 0x28;
@@ -52,7 +52,7 @@ int __cdecl d2_LayoutOfficeCandidateList(int dialog, int selectedForm, int alter
 		pos += 0x70;
 	}
 	d2_EnableDialogItems(n, items);
-	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3c[0x21c] = y;
-	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3c[0x238] = 0x70;
+	*(int*) &((D2_WIN*)d2_Windows)[d2_CurrentWindowId].pad3c[0x21c] = y;
+	*(int*) &((D2_WIN*)d2_Windows)[d2_CurrentWindowId].pad3c[0x238] = 0x70;
 	return 1;
 }

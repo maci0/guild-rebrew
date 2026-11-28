@@ -1,14 +1,14 @@
 #include <string.h>
 
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern int d2_CurrentElementId;
-extern int g_100f1dc;
-extern int g_14ce8e0;
-extern int g_774654;
-extern char* g_7746c4;
-extern unsigned short g_774970;
-extern char g_7f4ca0[];
-extern char g_7f4ca4[];
+extern int d2_DialogButtonAction;
+extern int io_RightButtonReleased;
+extern int d2_DialogCloseRequested;
+extern char* d2_VisitedBuilding;
+extern unsigned short gm_LocalPlayerSlot;
+extern char gm_EntitySlotTable[];
+extern char gm_EntityIdField[];
 
 int __cdecl gm_WalkEntityChain(unsigned short id);
 int __cdecl gm_CalculateGebaeudeValue(void* obj, int n);
@@ -62,7 +62,7 @@ int __cdecl d2_RunSabotageDialog(unsigned short* obj, unsigned char* record)
 	if (gm_CheckPrivilege(0x1b, (void*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c), slots) & 2) {
 		value = value / 2;
 	}
-	if (gm_CheckEntityStock((void*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c), value, g_773d75) == 0) {
+	if (gm_CheckEntityStock((void*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c), value, gm_ActiveTownIndex) == 0) {
 		return 0;
 	}
 	entity = he_StartHandlungSearch(2, 2, *(unsigned short*) 0x774970, 0, 0x19);
@@ -112,13 +112,13 @@ int __cdecl d2_RunSabotageDialog(unsigned short* obj, unsigned char* record)
 	ids[5] = 0x18;
 	d2_DrawLawCandidateStatus(ids);
 	while (main_RunFrameLoop((void*) d2_RunSabotageDialog, 0x677c7) != 0) {
-		if (g_14ce8e0 != 0 || g_100f1dc == 1) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0 || d2_DialogButtonAction == 1) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc == 2 && evid != -1 && d2_CurrentElementId == evid) {
+		if (d2_DialogButtonAction == 2 && evid != -1 && d2_CurrentElementId == evid) {
 			ev[4] = 0x19;
-			*(int*) (ev + 8) = *(int*) (g_7f4ca4 + g_774970 * 0x21c);
-			*(int*) (ev + 0xc) = *(int*) (g_7746c4 + 1);
+			*(int*) (ev + 8) = *(int*) (gm_EntityIdField + gm_LocalPlayerSlot * 0x21c);
+			*(int*) (ev + 0xc) = *(int*) (d2_VisitedBuilding + 1);
 			ev[0x36] = 1;
 			*(int*) (ev + 0x7c) = value;
 			*(int*) (ev + 0x58) = *(int*) (record + 1);
@@ -128,7 +128,7 @@ int __cdecl d2_RunSabotageDialog(unsigned short* obj, unsigned char* record)
 			io_FormatTextBuffer(text2, 0x1701, *(unsigned short*) (record + 0x25),
 				*(unsigned char*) record * 0xe + 0x48e);
 			d2_ShowModalMessageBox(text2, 0);
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 			count = 1;
 		}
 	}

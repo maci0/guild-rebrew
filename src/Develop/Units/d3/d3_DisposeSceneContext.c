@@ -10,7 +10,7 @@ typedef struct {
 
 #include "Develop/client_types.h"
 extern Slot_1043340 g_1043340[64];
-extern int g_6b8300;
+extern int d3_CurrentFloor;
 extern int g_6b8484;
 
 void __cdecl d3_ClearSceneState(void);
@@ -40,9 +40,9 @@ char __cdecl d3_DisposeSceneContext(int idx)
 				while (((void*)d3_SceneRenderListHead) != &(*(char*)g_1040640)) {
 					d3_FreeMeshObject(((void*)d3_SceneRenderListHead));
 				}
-				if (g_6b8300 != 0) {
-					d3_ReleaseRenderDeviceContext(g_6b8300);
-					g_6b8300 = 0;
+				if (d3_CurrentFloor != 0) {
+					d3_ReleaseRenderDeviceContext(d3_CurrentFloor);
+					d3_CurrentFloor = 0;
 				}
 				if (g_6b89c0 != 0) {
 					d3_FreeSkyDome(g_6b89c0);

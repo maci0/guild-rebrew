@@ -92,26 +92,26 @@ void __cdecl d2_PopulateHireCandidateRows(unsigned int a0, unsigned int* a1, int
         do {
             v14 = v2[3];
             v8 = (*(int*) (v14 * 0x3cc + 0x1015f4c) -
-                  (int) *(short*) ((int) g_772500 + 0x2399c)) / 2;
+                  (int) *(short*) ((int) d2_FileObjTable + 0x2399c)) / 2;
             v15[-1] = d2_AddElementToWindow(v8, *(int*) (v14 * 0x3cc + 0x1015f50) * rowIndex + 2, 0x6c7, v14);
             v14 = d2_AddElementToWindow(v8 + 2,
                                *(int*) (v2[3] * 0x3cc + 0x1015f50) * rowIndex + 4,
                                *(unsigned int*) (*v15 + 0x3c), v2[3]);
             v15[-1] = v14;
-            *(unsigned int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[v14].value_05c) = v17;
-            *(unsigned int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[v15[-1]].flags_1d0) = 3;
+            *(unsigned int*) (&((D2_CONTROL_TL*) ((int) d2_Controls))[v14].value_05c) = v17;
+            *(unsigned int*) (&((D2_CONTROL_TL*) ((int) d2_Controls))[v15[-1]].flags_1d0) = 3;
             d2_FormatWorkerFullName((void*) *v15, v12);
             d2_FormatCandidateRolePair((char*) *v15, v13);
             v7 = *(int*) (v2[3] * 0x3cc + 0x1015f50) * rowIndex + 0x38;
             v14 = d2_EqualizeWindowButtonWidths(0, v7, v12, v2[3]);
-            *(unsigned int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[v14].value_06c) = 1;
-            *(unsigned int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[v14].width) =
+            *(unsigned int*) (&((D2_CONTROL_TL*) ((int) d2_Controls))[v14].value_06c) = 1;
+            *(unsigned int*) (&((D2_CONTROL_TL*) ((int) d2_Controls))[v14].width) =
                 *(unsigned int*) (v2[3] * 0x3cc + 0x1015f4c);
             d2_SetElementFont(v14, 0x54);
             v7 += 0xd;
             v14 = d2_EqualizeWindowButtonWidths(0, v7, v13, v2[3]);
-            *(unsigned int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[v14].value_06c) = 1;
-            *(unsigned int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[v14].width) =
+            *(unsigned int*) (&((D2_CONTROL_TL*) ((int) d2_Controls))[v14].value_06c) = 1;
+            *(unsigned int*) (&((D2_CONTROL_TL*) ((int) d2_Controls))[v14].width) =
                 *(unsigned int*) (v2[3] * 0x3cc + 0x1015f4c);
             d2_SetElementFont(v14, 0x54);
             v7 += 0x12;
@@ -119,7 +119,7 @@ void __cdecl d2_PopulateHireCandidateRows(unsigned int a0, unsigned int* a1, int
             do {
                 io_FormatTextBuffer(v12, 0x6a9688, v14 + 0x16b7);
                 v8 = d2_EqualizeWindowButtonWidths((void*) 0x28, v7, v12, v2[3]);
-                *(unsigned int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[v8].width) = 300;
+                *(unsigned int*) (&((D2_CONTROL_TL*) ((int) d2_Controls))[v8].width) = 300;
                 d2_SetElementFont(v8, 0x54);
                 d2_DrawSegmentedBar(0xa0, v7, *(unsigned char*) (*v15 + 0x24 + v14), 0x4df);
                 v14 += 1;

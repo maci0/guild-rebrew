@@ -25,9 +25,9 @@ typedef struct {
 	char pad2ec[8];
 } Variant;
 
-extern char g_868060[];
+extern char gm_TownTable[];
 #include "Develop/DieGildeAddOn/command/client_packet_builder.h"
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 Estate* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 Shop* __cdecl fcn_00502cd0(int, int, int, int, int);
@@ -57,20 +57,20 @@ void __cdecl gm_InitializeShopInventory(void)
 		if (w != 0) {
 			count = 0;
 			for (i = 0; i < 16; i++) {
-				if (((Variant*)g_868060)[kind].buy[i] != 0) {
+				if (((Variant*)gm_TownTable)[kind].buy[i] != 0) {
 					count++;
 				}
 			}
 			cm_BeginPacketFieldDelta((char*) w, w->id);
-			cm_AppendPacketFieldDelta(1, 1, (char*) w - g_aed32c + 0x1c, &count);
+			cm_AppendPacketFieldDelta(1, 1, (char*) w - cm_PacketDeltaBase + 0x1c, &count);
 			count = 4;
-			cm_AppendPacketFieldDelta(4, 1, (char*) w - g_aed32c + 0xe, &count);
+			cm_AppendPacketFieldDelta(4, 1, (char*) w - cm_PacketDeltaBase + 0xe, &count);
 			cm_RequestChangeAttribute();
-			p = ((Variant*)g_868060)[kind].buy;
+			p = ((Variant*)gm_TownTable)[kind].buy;
 			for (i = 16; i != 0; i--) {
 				if (*p != 0) {
-					cm_SendSellObjekt(w->id, -1, *p, 1, (*(char*)&g_773d75), 0);
-					cm_SendSellObjekt(-1, w->id, *p, 1, (*(char*)&g_773d75), 0);
+					cm_SendSellObjekt(w->id, -1, *p, 1, (*(char*)&gm_ActiveTownIndex), 0);
+					cm_SendSellObjekt(-1, w->id, *p, 1, (*(char*)&gm_ActiveTownIndex), 0);
 				}
 				p++;
 			}
@@ -79,20 +79,20 @@ void __cdecl gm_InitializeShopInventory(void)
 		if (w != 0) {
 			count = 0;
 			for (i = 0; i < 16; i++) {
-				if (((Variant*)g_868060)[kind].sell[i] != 0) {
+				if (((Variant*)gm_TownTable)[kind].sell[i] != 0) {
 					count++;
 				}
 			}
 			cm_BeginPacketFieldDelta((char*) w, w->id);
-			cm_AppendPacketFieldDelta(1, 1, (char*) w - g_aed32c + 0x1c, &count);
+			cm_AppendPacketFieldDelta(1, 1, (char*) w - cm_PacketDeltaBase + 0x1c, &count);
 			count = 4;
-			cm_AppendPacketFieldDelta(4, 1, (char*) w - g_aed32c + 0xe, &count);
+			cm_AppendPacketFieldDelta(4, 1, (char*) w - cm_PacketDeltaBase + 0xe, &count);
 			cm_RequestChangeAttribute();
-			p = ((Variant*)g_868060)[kind].sell;
+			p = ((Variant*)gm_TownTable)[kind].sell;
 			for (i = 16; i != 0; i--) {
 				if (*p != 0) {
-					cm_SendSellObjekt(w->id, -1, *p, 1, (*(char*)&g_773d75), 0);
-					cm_SendSellObjekt(-1, w->id, *p, 1, (*(char*)&g_773d75), 0);
+					cm_SendSellObjekt(w->id, -1, *p, 1, (*(char*)&gm_ActiveTownIndex), 0);
+					cm_SendSellObjekt(-1, w->id, *p, 1, (*(char*)&gm_ActiveTownIndex), 0);
 				}
 				p++;
 			}

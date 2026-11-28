@@ -8,10 +8,10 @@ int __cdecl d2_DestroyForm(int);
 void __cdecl io_ClearInputState(void);
 int __cdecl main_RunFrameLoop(int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
-extern char* g_1015ea0;
+extern char* d2_Controls;
 extern int d2_CurrentWindowId;
-extern int g_14ce8e0;
-extern int g_100f1dc;
+extern int io_RightButtonReleased;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
@@ -68,27 +68,27 @@ int __cdecl d2_RunChooseRoutingGoodDialog(int ctx, D2_ROUTE_NODE* list)
 			d2_CurrentWindowId);
 		entries[i] = entry;
 
-		*(int*) ((char*) ((char*)&((D2_CONTROL_TL*)g_1015ea0)[entry]) + 0x5c) = 1;
-		*(int*) ((char*) ((char*)&((D2_CONTROL_TL*)g_1015ea0)[entry]) + 0x1d0) = 3;
-		*(int*) ((char*) ((char*)&((D2_CONTROL_TL*)g_1015ea0)[entry]) + 0x1e4) = 0x525;
+		*(int*) ((char*) ((char*)&((D2_CONTROL_TL*)d2_Controls)[entry]) + 0x5c) = 1;
+		*(int*) ((char*) ((char*)&((D2_CONTROL_TL*)d2_Controls)[entry]) + 0x1d0) = 3;
+		*(int*) ((char*) ((char*)&((D2_CONTROL_TL*)d2_Controls)[entry]) + 0x1e4) = 0x525;
 	}
 	values[i] = 0;
 	entry = d2_AddElementToWindow((i % 4) * 0x40 + 7, (i / 4) * 0x40 + 7, 0x527,
 		d2_CurrentWindowId);
 	entries[i] = entry;
 
-	*(int*) ((char*) ((char*)&((D2_CONTROL_TL*)g_1015ea0)[entry]) + 0x5c) = 1;
-	*(int*) ((char*) ((char*)&((D2_CONTROL_TL*)g_1015ea0)[entry]) + 0x1d0) = 3;
+	*(int*) ((char*) ((char*)&((D2_CONTROL_TL*)d2_Controls)[entry]) + 0x5c) = 1;
+	*(int*) ((char*) ((char*)&((D2_CONTROL_TL*)d2_Controls)[entry]) + 0x1d0) = 3;
 
 	while (main_RunFrameLoop(0x4bea00, 0x657c7) != 0) {
 
 
-		if (g_14ce8e0 != 0 || result != 0) {
-			g_774654 = 1;
-		} else if (g_100f1dc != -1 && d2_CurrentElementId == active) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0 || result != 0) {
+			d2_DialogCloseRequested = 1;
+		} else if (d2_DialogButtonAction != -1 && d2_CurrentElementId == active) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			for (i = 0; i < count + 1; i++) {
 				if (d2_CurrentElementId == entries[i]) {
 					result = values[i];

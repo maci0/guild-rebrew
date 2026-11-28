@@ -3,7 +3,7 @@
 
 #include <math.h>
 
-extern int g_67a370;
+extern int d3_ActiveScene;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl d3_CollectEscapePointsCallback(char*, char**);
@@ -26,7 +26,7 @@ char* __cdecl d3_FindNearestEscapeNode(char* e)
 	res = 0;
 	best = 1000000.0f;
 	g_772f10 = 0;
-	d3_VisitSceneObjects(((char*)g_67a370), 0, 0xc0, d3_CollectEscapePointsCallback, list);
+	d3_VisitSceneObjects(((char*)d3_ActiveScene), 0, 0xc0, d3_CollectEscapePointsCallback, list);
 	c = *(char**) (*(char**) (e + 0x184) + 0x34);
 	d3_TransformPoint(c, c + 0x4c, pos);
 	for (i = 0; i < g_772f10; i++) {

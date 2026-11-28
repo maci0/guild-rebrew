@@ -41,11 +41,11 @@ extern char* ch_ContextCharacters[32];
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern int g_14abc44;
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern char* g_7746c4;
+extern char* d2_VisitedBuilding;
 extern char s_6aa490[];
 
 int __cdecl d2_LoadForm(int, int, char*);
@@ -83,26 +83,26 @@ int __cdecl d2_OpenTaschendiebstahlDialog(int unused, char* e)
 	s = io_AppendText(0x19ee, *(unsigned short*) (e + 0x27), e);
 	btn1 = d2_GetWindowListItem(dlg, 1, s);
 	btn2 = d2_GetWindowListItem(dlg, 1, s + 1);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == btn1) {
-				for (p = he_StartHandlungSearch(3, 0, 0x49, 2, *(unsigned short*) (g_7746c4 + 0x27), 3, *(int*) (g_7746c4 + 1)); p != 0; p = he_fn_Handlung()) {
+				for (p = he_StartHandlungSearch(3, 0, 0x49, 2, *(unsigned short*) (d2_VisitedBuilding + 0x27), 3, *(int*) (d2_VisitedBuilding + 1)); p != 0; p = he_fn_Handlung()) {
 					if (*(int*) (p + 0xac) == *(int*) (e + 1)) {
 						break;
 					}
 				}
 				if (p == 0) {
 					pkt.type = 0x49;
-					pkt.x8 = (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (g_7746c4 + 0x27)].entity_id);
-					pkt.xc = *(int*) (g_7746c4 + 1);
+					pkt.x8 = (*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (d2_VisitedBuilding + 0x27)].entity_id);
+					pkt.xc = *(int*) (d2_VisitedBuilding + 1);
 					pkt.name = (*(pos14_7f4c00*)&gm_GameTime);
 					pkt.x36 = 1;
 					pkt.x58 = *(int*) (e + 1);
-					pkt.x5c = *(int*) (g_7746c4 + 1);
+					pkt.x5c = *(int*) (d2_VisitedBuilding + 1);
 					for (i = 0; i < 8; i++) {
 						pkt.ids[i] = -1;
 					}
@@ -123,12 +123,12 @@ int __cdecl d2_OpenTaschendiebstahlDialog(int unused, char* e)
 						r = 1;
 						cm_SendCopyEntityData(&pkt);
 						cm_ExProdObjekt();
-						g_774654 = 2;
+						d2_DialogCloseRequested = 2;
 					}
 				}
 				else {
 					r = 1;
-					g_774654 = 2;
+					d2_DialogCloseRequested = 2;
 					for (i = 0; i < 32; i++) {
 						if (((Player**)ch_ContextCharacters)[i] != 0 && ((Player**)ch_ContextCharacters)[i]->x188 != 0) {
 							he_AssignActionSlot(0, 0, ((Player**)ch_ContextCharacters)[i]->x0, p);
@@ -137,7 +137,7 @@ int __cdecl d2_OpenTaschendiebstahlDialog(int unused, char* e)
 				}
 			}
 			else if (d2_CurrentElementId == btn2) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	} while (main_RunFrameLoop((void*) d2_OpenTaschendiebstahlDialog, 0x677c7) != 0);

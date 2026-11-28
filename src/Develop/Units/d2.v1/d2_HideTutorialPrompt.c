@@ -1,7 +1,7 @@
 
 
 
-extern int* g_665f08;
+extern int* d2_TutorialState;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl d2_SetForm(int, int);
@@ -12,13 +12,13 @@ void __cdecl sb_StopVoice(int, int);
 
 void __cdecl d2_HideTutorialPrompt(void)
 {
-	d2_SetForm(g_665f08[13], 0);
-	io_AppendText(g_6811b0);
-	d2_SetFormVisibility(g_665f08[13], 0);
-	if (g_665f08[5] != 0) {
-		if (sb_CheckVoicePlaying(g_665f08[5]) != 0) {
-			sb_StopVoice(g_665f08[5], 0);
+	d2_SetForm(d2_TutorialState[13], 0);
+	io_AppendText(str_dollar_C);
+	d2_SetFormVisibility(d2_TutorialState[13], 0);
+	if (d2_TutorialState[5] != 0) {
+		if (sb_CheckVoicePlaying(d2_TutorialState[5]) != 0) {
+			sb_StopVoice(d2_TutorialState[5], 0);
 		}
-		g_665f08[5] = 0;
+		d2_TutorialState[5] = 0;
 	}
 }

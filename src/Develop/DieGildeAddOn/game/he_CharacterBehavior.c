@@ -4,7 +4,7 @@
 #include <string.h>
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_67a370;
+extern int d3_ActiveScene;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 unsigned short __cdecl gm_RandomMod(int);
@@ -45,7 +45,7 @@ void __cdecl he_CharacterBehavior(char* u, int where)
 			ch_QueuePlayAnimation(*(char**) (e + 0x184), g[gm_RandomMod(3)], gm_RandomMod(3) + 1);
 			ch_QueuePlayAnimation(*(char**) (e + 0x184), g[gm_RandomMod(3)], gm_RandomMod(3) + 1);
 		} else {
-			world = *(int*) (((char*)g_67a370) + 0xb0);
+			world = *(int*) (((char*)d3_ActiveScene) + 0xb0);
 			n = gm_RandomMod(3) + 1;
 			n = ch_GenerateNearbyWalkablePoints(where, n, list);
 			for (i = 0; i < n; i++) {

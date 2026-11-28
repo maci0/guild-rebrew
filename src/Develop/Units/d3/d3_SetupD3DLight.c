@@ -80,9 +80,9 @@ char __cdecl d3_SetupD3DLight(int index, char* e, float scale, float* m4, float*
 		light.Range = (float) sqrt(g_662d38);
 		power = g_67bc1c * *(float*) (e + 0x94) * scale;
 		if (index & 0x80000000) {
-			light.Ambient.r = (power * *(float*) (e + 0x5c)) * g_662d34;
-			light.Ambient.g = (power * *(float*) (e + 0x60)) * g_662d34;
-			light.Ambient.b = (power * *(float*) (e + 0x64)) * g_662d34;
+			light.Ambient.r = (power * *(float*) (e + 0x5c)) * flt_0_6;
+			light.Ambient.g = (power * *(float*) (e + 0x60)) * flt_0_6;
+			light.Ambient.b = (power * *(float*) (e + 0x64)) * flt_0_6;
 			power *= 0.4f;
 		}
 	} else {

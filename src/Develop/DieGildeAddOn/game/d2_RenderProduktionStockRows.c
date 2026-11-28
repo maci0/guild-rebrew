@@ -45,7 +45,7 @@ typedef struct Stock {
 #define g_row_item(r, k) (*(int*) ((r) + 0x3c + (k) * 4))
 #define g_row_last(r) (*(int*) ((r) + 0x4c))
 
-#define g_object(idx) ((char*)&((D2_CONTROL_TL*)g_1015ea0)[(idx)])
+#define g_object(idx) ((char*)&((D2_CONTROL_TL*)d2_Controls)[(idx)])
 #define g_id_field(row, ofs) (*(unsigned short*) ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[g_row_type(row)] + (ofs)))
 
 /* ADDRESS: GOLDTL 0x00595330 */
@@ -68,12 +68,12 @@ void __cdecl d2_RenderProduktionStockRows(int windowId, int formId, int rowCount
 	int i;
 
 	ent = 0;
-	if (g_7746c4 == 0) {
-		if (g_7746c8) {
-			ent = (char*) g_7746c8;
+	if (d2_VisitedBuilding == 0) {
+		if (d2_InteriorBuilding) {
+			ent = (char*) d2_InteriorBuilding;
 		}
 	} else {
-		ent = (char*) g_7746c4;
+		ent = (char*) d2_VisitedBuilding;
 	}
 	gm_GetBuildingTypeCategory((unsigned char) *ent);
 	d2_SetForm(windowId, 0);
@@ -110,22 +110,22 @@ void __cdecl d2_RenderProduktionStockRows(int windowId, int formId, int rowCount
 			key = 0x26;
 			delta = 0x11;
 			slot = row + 0x3c;
-			*(int*)&((D2_CONTROL_TL*)g_1015ea0)[g_row_sub(row)].value_05c = 1;
-			*(int*)&((D2_CONTROL_TL*)g_1015ea0)[g_row_sub(row)].value_1e8 = -1;
-			*(int*)&((D2_CONTROL_TL*)g_1015ea0)[g_row_sub(row)].value_1ec = -1;
+			*(int*)&((D2_CONTROL_TL*)d2_Controls)[g_row_sub(row)].value_05c = 1;
+			*(int*)&((D2_CONTROL_TL*)d2_Controls)[g_row_sub(row)].value_1e8 = -1;
+			*(int*)&((D2_CONTROL_TL*)d2_Controls)[g_row_sub(row)].value_1ec = -1;
 			do {
 				if (*(int*) (slot - 0x38)) {
 					*(int*) slot = d2_AddWindowImage(delta, 0x3a,
 					                            *(int*) (slot - 0x38) + 0xdf,
 					                            g_row_handle(row), -2);
-					*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) slot].value_05c = 1;
+					*(int*)&((D2_CONTROL_TL*)d2_Controls)[*(int*) slot].value_05c = 1;
 					d2_SetElementFont(*(int*) slot, 0x54);
 					_itoa(g_id_field(row, key), numbuf, 10);
 					d2_SetControlText(*(int*) slot, (int) numbuf);
-					*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) slot].value_1dc = -8;
-					*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) slot].value_1e0 = 6;
-					*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) slot].value_1e8 = -1;
-					*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) slot].value_1ec = -1;
+					*(int*)&((D2_CONTROL_TL*)d2_Controls)[*(int*) slot].value_1dc = -8;
+					*(int*)&((D2_CONTROL_TL*)d2_Controls)[*(int*) slot].value_1e0 = 6;
+					*(int*)&((D2_CONTROL_TL*)d2_Controls)[*(int*) slot].value_1e8 = -1;
+					*(int*)&((D2_CONTROL_TL*)d2_Controls)[*(int*) slot].value_1ec = -1;
 				}
 				key += 2;
 				slot += 4;
@@ -149,10 +149,10 @@ void __cdecl d2_RenderProduktionStockRows(int windowId, int formId, int rowCount
 				}
 				if (idx < stock.n) {
 					if ((int) g_id_field(row, key) <= stock.vals[idx]) {
-						*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) slot].value_1e4 = 0x74d;
+						*(int*)&((D2_CONTROL_TL*)d2_Controls)[*(int*) slot].value_1e4 = 0x74d;
 						pick = delta;
 					} else {
-						*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) slot].value_1e4 = 0x74e;
+						*(int*)&((D2_CONTROL_TL*)d2_Controls)[*(int*) slot].value_1e4 = 0x74e;
 						if (status <= 1) {
 							status = 1;
 						}
@@ -161,7 +161,7 @@ void __cdecl d2_RenderProduktionStockRows(int windowId, int formId, int rowCount
 					}
 				} else {
 					status = 2;
-					*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) slot].value_1e4 = 0x74f;
+					*(int*)&((D2_CONTROL_TL*)d2_Controls)[*(int*) slot].value_1e4 = 0x74f;
 					if (g_row_sel(row) == cnt) {
 						delta = (unsigned int) g_id_field(row, key);
 						pick = delta;
@@ -172,7 +172,7 @@ void __cdecl d2_RenderProduktionStockRows(int windowId, int formId, int rowCount
 			cnt++;
 			slot += 4;
 		} while (key < 0x2e);
-		*(int*)&((D2_CONTROL_TL*)g_1015ea0)[g_row_sub(row)].value_1e4 = status + 0x750;
+		*(int*)&((D2_CONTROL_TL*)d2_Controls)[g_row_sub(row)].value_1e4 = status + 0x750;
 
 		found = he_StartHandlungSearch(2, 0, 4, 3, *(unsigned int*) (ent + 1));
 		while (found != 0) {
@@ -212,7 +212,7 @@ void __cdecl d2_RenderProduktionStockRows(int windowId, int formId, int rowCount
 				}
 			}
 			if (g_row_extra(row) >= 0
-			    && *(int*)&((D2_CONTROL_TL*)g_1015ea0)[g_row_extra(row)].value_008 != state) {
+			    && *(int*)&((D2_CONTROL_TL*)d2_Controls)[g_row_extra(row)].value_008 != state) {
 				d2_DestroyElement(g_row_extra(row));
 				g_row_extra(row) = -1;
 			}
@@ -221,10 +221,10 @@ void __cdecl d2_RenderProduktionStockRows(int windowId, int formId, int rowCount
 			}
 			delta = *(int*) (found + 0x18) + *(int*) (found + 0x14);
 			if (*found == 4) {
-				*(float*)&((D2_CONTROL_TL*)g_1015ea0)[g_row_sub(row)].value_1f4.real =
+				*(float*)&((D2_CONTROL_TL*)d2_Controls)[g_row_sub(row)].value_1f4.real =
 					g_6629c8 - *(float*) (found + 0xb4) / *(float*) (found + 0xb8);
 			} else if (*found == 3) {
-				*(float*)&((D2_CONTROL_TL*)g_1015ea0)[g_row_sub(row)].value_1f4.real =
+				*(float*)&((D2_CONTROL_TL*)d2_Controls)[g_row_sub(row)].value_1f4.real =
 					g_6629c8 - (float) *(int*) (found + 0xb0) / *(float*) (found + 0xb4);
 			}
 		} else {
@@ -233,7 +233,7 @@ void __cdecl d2_RenderProduktionStockRows(int windowId, int formId, int rowCount
 				g_row_extra(row) = -1;
 			}
 			if (g_row_sub(row) != -1) {
-				*(float*)&((D2_CONTROL_TL*)g_1015ea0)[g_row_sub(row)].value_1f4.real = 0.0f;
+				*(float*)&((D2_CONTROL_TL*)d2_Controls)[g_row_sub(row)].value_1f4.real = 0.0f;
 			}
 			idx = 0;
 		}
@@ -241,7 +241,7 @@ void __cdecl d2_RenderProduktionStockRows(int windowId, int formId, int rowCount
 		slot = row + 0x3c;
 		for (j = 4; j != 0; j--) {
 			if (*(int*) (slot - 0x38)) {
-				*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) slot].value_03c = 0;
+				*(int*)&((D2_CONTROL_TL*)d2_Controls)[*(int*) slot].value_03c = 0;
 			}
 			slot += 4;
 		}
@@ -259,7 +259,7 @@ void __cdecl d2_RenderProduktionStockRows(int windowId, int formId, int rowCount
 				io_AppendText(0x6aa194, delta, 0x51e, 0xb8, g_row_type(row) * 2 + 0x9a8);
 			}
 		} else if (pick != 0) {
-			*(int*)&((D2_CONTROL_TL*)g_1015ea0)[g_row_item(row, key)].value_03c = 1;
+			*(int*)&((D2_CONTROL_TL*)d2_Controls)[g_row_item(row, key)].value_03c = 1;
 			d2_CurrentWindowId = g_row_last(row);
 			if (g_id_field(row, 0x36) == 1) {
 				switch (main_GetLanguage()) {
@@ -297,7 +297,7 @@ void __cdecl d2_RenderProduktionStockRows(int windowId, int formId, int rowCount
 			}
 		} else {
 			pick = 1;
-			*(int*)&((D2_CONTROL_TL*)g_1015ea0)[g_row_item(row, key)].value_03c = 1;
+			*(int*)&((D2_CONTROL_TL*)d2_Controls)[g_row_item(row, key)].value_03c = 1;
 			d2_CurrentWindowId = g_row_last(row);
 			if (g_id_field(row, 0x36) == 1) {
 				switch (main_GetLanguage()) {

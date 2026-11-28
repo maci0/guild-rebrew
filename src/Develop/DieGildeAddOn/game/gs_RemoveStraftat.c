@@ -16,7 +16,7 @@ typedef struct {
 } Obj;
 
 
-extern Pair_99f800 g_99f800[0x800];
+extern Pair_99f800 cm_CrimeEvidenceLinks[0x800];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
@@ -35,28 +35,28 @@ int __cdecl gs_RemoveStraftat(int key, int force)
 	if (idx == -1) {
 		return 3;
 	}
-	if (g_9a3800[idx].count > 0) {
-		g_9a3800[idx].count--;
+	if (cm_CrimeRecords[idx].count > 0) {
+		cm_CrimeRecords[idx].count--;
 	}
-	if (g_9a3800[idx].count != 0 && force == 0) {
+	if (cm_CrimeRecords[idx].count != 0 && force == 0) {
 		return 2;
 	}
-	if (g_9a3800[idx].state != 1 && (force == 0 || g_9a3800[idx].state == 0)) {
+	if (cm_CrimeRecords[idx].state != 1 && (force == 0 || cm_CrimeRecords[idx].state == 0)) {
 		return 1;
 	}
-	targetEntity = gm_LookupEntityRecordById(g_9a3800[idx].target_id);
-	cm_SubtractCrimeGrid(g_9a3800[idx].unk_21, g_9a3800[idx].kind);
+	targetEntity = gm_LookupEntityRecordById(cm_CrimeRecords[idx].target_id);
+	cm_SubtractCrimeGrid(cm_CrimeRecords[idx].unk_21, cm_CrimeRecords[idx].kind);
 	for (i = 0; i < 2048; i++) {
-		if (key == g_99f800[i].key) {
-			if (g_774970 != 0xffff && g_99f800[i].owner == (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id) && targetEntity != 0 && force == 0) {
-				he_NotifyStraftatExpired(((Obj*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), targetEntity);
+		if (key == cm_CrimeEvidenceLinks[i].key) {
+			if (gm_LocalPlayerSlot != 0xffff && cm_CrimeEvidenceLinks[i].owner == (*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id) && targetEntity != 0 && force == 0) {
+				he_NotifyStraftatExpired(((Obj*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot]), targetEntity);
 			}
-			g_99f800[i].owner = -1;
-			g_99f800[i].key = -1;
+			cm_CrimeEvidenceLinks[i].owner = -1;
+			cm_CrimeEvidenceLinks[i].key = -1;
 		}
 	}
-	g_9a3800[idx].state = 0;
-	g_9a3800[idx].target_id = -1;
-	g_9a3800[idx].id = -1;
+	cm_CrimeRecords[idx].state = 0;
+	cm_CrimeRecords[idx].target_id = -1;
+	cm_CrimeRecords[idx].id = -1;
 	return 0;
 }

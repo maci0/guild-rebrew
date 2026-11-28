@@ -2,9 +2,9 @@
 
 extern int g_14ce860;
 extern int g_14ce864;
-extern float g_10432a4;
+extern float d3_ProjectionDist;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_67a370;
+extern int d3_ActiveScene;
 
 extern void __cdecl d3_VisitSceneObjects(int, int, int, void*, void*);
 extern int __cdecl d3_CollectObjectScreenCorners(int, int*);
@@ -76,7 +76,7 @@ unsigned char __cdecl d3_PickObjectSurfaceUV(float x, float y, int obj, int inde
 	fr.ctx.edge[3].x = 0;
 	fr.ctx.edge[3].y = 0;
 	fr.ctx.found = 0;
-	d3_VisitSceneObjects(g_67a370, obj, 0x40, (void*) d3_CollectObjectScreenCorners, &fr.ctx);
+	d3_VisitSceneObjects(d3_ActiveScene, obj, 0x40, (void*) d3_CollectObjectScreenCorners, &fr.ctx);
 	if (!fr.ctx.found)
 		return 0;
 
@@ -138,7 +138,7 @@ unsigned char __cdecl d3_PickObjectSurfaceUV(float x, float y, int obj, int inde
 	n3 = fr.t1 - fr.w1;
 	fr.dx = x - d3_ViewportCenterX;
 	fr.dy = -(y - g_1052bc8);
-	fr.dz = g_10432a4;
+	fr.dz = d3_ProjectionDist;
 	den = fr.dz * n3 + fr.dy * n2 + fr.dx * n1;
 	if (!((float) fabs(den) > 1e-7))
 		return 0;

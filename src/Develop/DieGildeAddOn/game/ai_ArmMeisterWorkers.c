@@ -8,12 +8,12 @@ int __cdecl gm_CheckBuildingCategoryForItem(int, int);
 void __cdecl cm_SendSellObjekt(int, int, int, int, char, int);
 int __cdecl sprintf(char*, char*, ...);
 
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_100e724;
 extern int g_100e764;
 extern char* lpObjektePROT;
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 /* ADDRESS: GOLDTL 0x00489010 */
 void __cdecl ai_ArmMeisterWorkers(char* meister, char* building)
 {
@@ -29,7 +29,7 @@ void __cdecl ai_ArmMeisterWorkers(char* meister, char* building)
 	int done;
 
 	for (m = 0; m < 0x300; m++) {
-		p = g_7f4ca0 + m * 0x21c;
+		p = gm_EntitySlotTable + m * 0x21c;
 		if (*(unsigned short*) p == 0xffff
 		    || *(char**) (p + 0x16c) != *(char**) (meister + 0x16c)
 		    || *(char*) (p + 0x165) == 0
@@ -81,9 +81,9 @@ void __cdecl ai_ArmMeisterWorkers(char* meister, char* building)
 			sprintf(buf, (char*) 0x67e388, meister + 0x30, p + 0x30,
 			        (char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*(int*) found] + 1);
 			sprintf(buf, (char*) 0x67e358, *(int*) (p + 4),
-			        *(int*) (building + 2), *(int*) found, 1, g_773d75, 0);
+			        *(int*) (building + 2), *(int*) found, 1, gm_ActiveTownIndex, 0);
 			cm_SendSellObjekt(*(int*) (p + 4), *(int*) (building + 2), *(int*) found, 1,
-			             g_773d75, 0);
+			             gm_ActiveTownIndex, 0);
 			*(int*) (found + 0x28) = *(int*) (found + 0x28) - 1;
 		}
 	}

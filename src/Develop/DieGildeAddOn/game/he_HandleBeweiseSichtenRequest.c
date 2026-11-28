@@ -5,7 +5,7 @@ void* __cdecl he_StartHandlungSearch(int, int, int);
 void* __cdecl he_fn_Handlung(void);
 void  __cdecl d2_RunBeweiseSichtenDialog(void*, void*);
 void  __cdecl io_FormatTextBuffer(void*, int, int);
-extern char g_679060[];
+extern char str_fmt_s[];
 
 int __cdecl he_HandleBeweiseSichtenRequest(void* entity, void* request)
 {

@@ -1,5 +1,5 @@
 #include <string.h>
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 #include "../d3/d3_animation.h"
 void __cdecl d3_FreeObjectAnimation(char* a0);
 char* __cdecl m_alloc(unsigned int size, char* file);
@@ -79,6 +79,6 @@ int* __cdecl d3_CreateObjectAnimation(char* a0, D3_ANIMATION_OPTIONS flags, int 
 		d3_BuildAnimSplineTangents(animation);
 	}
 	*(int**) (a0 + 0x1d0) = animation;
-	*(int*) (a0 + 0x40) = g_6b7fac;
+	*(int*) (a0 + 0x40) = gm_GameTicks;
 	return animation;
 }

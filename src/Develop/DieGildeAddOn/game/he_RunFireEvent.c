@@ -3,10 +3,10 @@
 #include "Develop/client_types.h"
 
 extern pos14_7f4c00 gm_GameTime;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
-extern char g_7f4ca4[];
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
+extern char gm_EntityIdField[];
 
 int* __cdecl d3snd_QueueSound(int, int, char*, int, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -87,16 +87,16 @@ void __cdecl he_RunFireEvent(char* a0)
 					if (*(int*) e == *(int*) (rec + 1)) {
 						*(int*) e = -1;
 						*(int*) (m + 0x28) = *(int*) &gm_GameTime;
-						*(int*) (m + 0x30) = g_7f4c08;
+						*(int*) (m + 0x30) = gm_GameTimeSliceDword;
 						m[4] = 0x4f;
 						m[0x36] = 2;
 						*(int*) (m + 0x5c) = 0x19;
 						m[0xb0] = 1;
-						*(int*) (m + 8) = *(int*) (g_7f4ca4 + *(unsigned short*) (a0 + 8) * 0x21c);
+						*(int*) (m + 8) = *(int*) (gm_EntityIdField + *(unsigned short*) (a0 + 8) * 0x21c);
 						*(int*) (m + 0xc) = *(int*) (rec + 1);
-						*(int*) (m + 0x2c) = g_7f4c04;
+						*(int*) (m + 0x2c) = gm_GameTimeHour;
 						*(int*) (m + 0x58) = *(int*) (rec + 1);
-						*(short*) (m + 0x34) = g_7f4c0c;
+						*(short*) (m + 0x34) = gm_GameTimeTailWord;
 						*(int*) (m + 0xa4) = *(int*) (a0 + 4);
 						cm_SendCopyEntityData(m);
 					}

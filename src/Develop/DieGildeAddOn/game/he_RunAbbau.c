@@ -28,10 +28,10 @@ int __cdecl gm_CompareGameTime(char*, char*);
 void __cdecl gm_AddTime(char*, int, int, int);
 void __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 extern char gm_GameTime[];
 extern char* gm_CityEntity;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern char* lpObjektePROT;
 extern double g_6629c8;
 extern double g_662908;
@@ -56,14 +56,14 @@ void __cdecl he_RunAbbau(char* self)
 	gm_ResolveEntityById(&node, 0, 0, *(int*) (self + 0xb8));
 	if (node == 0) {
 		for (i = 0; i < 768; i++) {
-			if (*(char**) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[i]) + 0x17c) == self)
-				he_AssignActionSlot(0, 0, *(unsigned short*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[i])), 0);
+			if (*(char**) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[i]) + 0x17c) == self)
+				he_AssignActionSlot(0, 0, *(unsigned short*) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[i])), 0);
 		}
 		he_FreeAction(self);
 		return;
 	}
 	if (*(unsigned short*) (node + 0x27) != 0xffff) {
-		row = ((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (node + 0x27)]);
+		row = ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (node + 0x27)]);
 		if (row != gm_CityEntity)
 			map = row;
 	}
@@ -111,11 +111,11 @@ skip_map:
 				gm_ResolveEntityById(0, &o2, 0, *(int*) (self + 0xc0));
 				if (q == 0) {
 					io_FormatTextBuffer(buf, 0x1bb7, *(unsigned short*) (self + 0xac) * 2 + 0x9a8, node);
-					he_MessageBoxQuickjump(*(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (self + 8)]) + 4),
+					he_MessageBoxQuickjump(*(int*) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (self + 8)]) + 4),
 						-1, buf, 0, 0x5f1, *(int*) (node + 1), -1, 0, "_NACHRICHTEN_HS_07");
 					for (i = 0; i < 768; i++) {
-						if (*(char**) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[i]) + 0x17c) == self)
-							he_AssignActionSlot(node, 0, *(unsigned short*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[i])), 0);
+						if (*(char**) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[i]) + 0x17c) == self)
+							he_AssignActionSlot(node, 0, *(unsigned short*) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[i])), 0);
 					}
 					he_FreeAction(self);
 					return;
@@ -124,7 +124,7 @@ skip_map:
 				if (n >= *(int*) (q + 0xe))
 					n = *(int*) (q + 0xe);
 				cm_SendSellObjekt(*(int*) (self + 0xc0), *(int*) (self + 0xbc), *(unsigned short*) (self + 0xac),
-					n, g_773d75, 0);
+					n, gm_ActiveTownIndex, 0);
 				*(int*) (self + 0xb0) += *(int *)&((OBJECT_PROTOTYPE *)entry)->value_022;
 				*(float*) (self + 0xb4) = (float) *(int*) (self + 0xb0);
 			}
@@ -143,16 +143,16 @@ skip_map:
 			return;
 		}
 		for (i = 0; i < 768; i++) {
-			if (*(char**) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[i]) + 0x17c) == self)
-				he_AssignActionSlot(node, 0, *(unsigned short*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[i])), 0);
+			if (*(char**) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[i]) + 0x17c) == self)
+				he_AssignActionSlot(node, 0, *(unsigned short*) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[i])), 0);
 		}
 		he_FreeAction(self);
 		return;
 	case -2:
 	case -1:
 		for (i = 0; i < 768; i++) {
-			if (*(char**) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[i]) + 0x17c) == self)
-				he_AssignActionSlot(0, 0, *(unsigned short*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[i])), 0);
+			if (*(char**) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[i]) + 0x17c) == self)
+				he_AssignActionSlot(0, 0, *(unsigned short*) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[i])), 0);
 		}
 		he_FreeAction(self);
 		return;

@@ -5,7 +5,7 @@
 
 extern char g_6a24d0[];
 typedef struct VFS_DIR VFS_DIR;
-extern VFS_DIR* g_6b7fdc;
+extern VFS_DIR* vfs_RootDir;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
@@ -31,7 +31,7 @@ int __cdecl ls_SendGame(char* path)
 	int sent;
 
 	n = 0;
-	h = vfs_Tfopen(path, g_6a24d0, g_6b7fdc);
+	h = vfs_Tfopen(path, g_6a24d0, vfs_RootDir);
 	if (h == 0) {
 		return 0;
 	}

@@ -236,7 +236,7 @@ int __cdecl lb_BroadcastStateChange(unsigned int* a, unsigned int* b, unsigned c
 }
 
 
-extern char g_679060[];
+extern char str_fmt_s[];
 void __cdecl io_FormatTextBuffer(void*, int, int);
 int __cdecl d2_ShowIncitingHatredDialog(char*, char*);
 
@@ -291,7 +291,7 @@ int __cdecl lb_ExPlayerRecordBroadcast(unsigned int* player, unsigned char* msg)
 	state = *(int*) msg;
 	if (state == 3 || state == 1) {
 		if (*((char*) player + 2) == 6) {
-			io_FormatTextBuffer((char*) msg + 0x14, (int) g_679060, 0x1dce);
+			io_FormatTextBuffer((char*) msg + 0x14, (int) str_fmt_s, 0x1dce);
 		}
 		if (*((char*) player + 0x166) != 0x18) {
 			return 1;
@@ -317,7 +317,7 @@ int __cdecl lb_ExPlayerRecordBroadcast(unsigned int* player, unsigned char* msg)
 					return 0xa;
 				}
 				if (*((char*) player + 2) == 6) {
-					io_FormatTextBuffer((char*) msg + 0x14, (int) g_679060, 0x1dce);
+					io_FormatTextBuffer((char*) msg + 0x14, (int) str_fmt_s, 0x1dce);
 				}
 				return 0xa;
 			}

@@ -6,9 +6,9 @@ struct sym_4260f0 {
 	char name[0x2c];
 };
 
-extern char* g_6b7eb8;
-extern void* g_14cb8e0;
-extern int g_14cb8e4;
+extern char* evt_MemberScopeScript;
+extern void* evt_GlobalVariables;
+extern int evt_GlobalVariableCount;
 
 /* ADDRESS: GOLDTL 0x004260f0 */
 void* __cdecl evt_FindSymbol(char* ctx, char* name)
@@ -17,7 +17,7 @@ void* __cdecl evt_FindSymbol(char* ctx, char* name)
 	char** locals;
 	int i;
 
-	scope = g_6b7eb8 != 0 ? g_6b7eb8 : ctx;
+	scope = evt_MemberScopeScript != 0 ? evt_MemberScopeScript : ctx;
 	i = 0;
 	locals = *(char***) (ctx + 0xc28);
 	if (locals != 0) {
@@ -36,9 +36,9 @@ void* __cdecl evt_FindSymbol(char* ctx, char* name)
 			return &(*(struct sym_4260f0**) (scope + 0x108))[i];
 		}
 	}
-	for (i = 0; i < g_14cb8e4; i++) {
-		if (strcmp(((struct sym_4260f0*)g_14cb8e0)[i].name, name) == 0) {
-			return &((struct sym_4260f0*)g_14cb8e0)[i];
+	for (i = 0; i < evt_GlobalVariableCount; i++) {
+		if (strcmp(((struct sym_4260f0*)evt_GlobalVariables)[i].name, name) == 0) {
+			return &((struct sym_4260f0*)evt_GlobalVariables)[i];
 		}
 	}
 	return 0;

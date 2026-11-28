@@ -17,7 +17,7 @@ typedef struct Stats {
 extern char* g_14a9aa8;
 extern char* g_14a9ab4;
 extern char* g_14a9ac0;
-extern char g_6b5c60[];
+extern char str_empty[];
 
 char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_FindRecordById(int);
@@ -74,26 +74,26 @@ int __cdecl cut_NotifyCombatCutscene(char* event)
 	if (flags & 1) {
 		io_FormatTextBuffer(buf, 0x11e0, *(unsigned short*) partyB);
 		strcat(buf, g_14a9aa8);
-		he_SendCmdMessage(partyA, event, buf, g_6b5c60);
+		he_SendCmdMessage(partyA, event, buf, str_empty);
 		io_FormatTextBuffer(buf, 0x11e1, *(unsigned short*) partyA);
 		strcat(buf, g_14a9aa8);
-		he_SendCmdMessage(partyB, event, buf, g_6b5c60);
+		he_SendCmdMessage(partyB, event, buf, str_empty);
 	} else if (flags & 2) {
 		combatType = cut_GetBuildingCombatType(gm_SearchTable67(*(int*) (event + 0x10c))) + 0x1125;
 		io_FormatTextBuffer(buf, 0x11e3, combatType, *(unsigned short*) partyB, targetObj);
 		strcat(buf, g_14a9ab4);
-		he_SendCmdMessage(partyA, event, buf, g_6b5c60);
+		he_SendCmdMessage(partyA, event, buf, str_empty);
 		io_FormatTextBuffer(buf, 0x11e4, *(unsigned short*) partyA, combatType, targetObj);
 		strcat(buf, g_14a9ab4);
-		he_SendCmdMessage(partyB, event, buf, g_6b5c60);
+		he_SendCmdMessage(partyB, event, buf, str_empty);
 		return 1;
 	} else if (flags & 4) {
 		io_FormatTextBuffer(buf, 0x11e6, *(unsigned short*) partyB);
 		strcat(buf, g_14a9ac0);
-		he_SendCmdMessage(partyA, event, buf, g_6b5c60);
+		he_SendCmdMessage(partyA, event, buf, str_empty);
 		io_FormatTextBuffer(buf, 0x11e7, *(unsigned short*) partyA);
 		strcat(buf, g_14a9ac0);
-		he_SendCmdMessage(partyB, event, buf, g_6b5c60);
+		he_SendCmdMessage(partyB, event, buf, str_empty);
 	}
 	return 1;
 }

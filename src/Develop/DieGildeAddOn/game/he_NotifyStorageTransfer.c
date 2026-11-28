@@ -1,7 +1,7 @@
-extern int g_665f78[];
-extern int g_665f78[];
-extern char g_774a80[];
-extern char g_6b5c60[];
+extern int he_GraveSlotTextIds[];
+extern int he_GraveSlotTextIds[];
+extern char io_MessageFormatBuf[];
+extern char str_empty[];
 
 
 
@@ -18,14 +18,14 @@ void __cdecl he_NotifyStorageTransfer(void* entity, void* otherEntity, int count
 		switch (main_GetLanguage()) {
 		case 0:
 		case 2:
-			io_FormatTextBuffer(g_774a80, 0x4150, *(unsigned short*) otherEntity, count,
-			    g_665f78[tableIndex]);
+			io_FormatTextBuffer(io_MessageFormatBuf, 0x4150, *(unsigned short*) otherEntity, count,
+			    he_GraveSlotTextIds[tableIndex]);
 			break;
 		case 1:
-			io_FormatTextBuffer(g_774a80, 0x4150, *(unsigned short*) otherEntity,
-			    g_665f78[tableIndex], count);
+			io_FormatTextBuffer(io_MessageFormatBuf, 0x4150, *(unsigned short*) otherEntity,
+			    he_GraveSlotTextIds[tableIndex], count);
 			break;
 		}
-		he_PostEntityMessage(*(int*) ((char*) entity + 4), -1, g_774a80, 0, 0x5fc, g_6b5c60);
+		he_PostEntityMessage(*(int*) ((char*) entity + 4), -1, io_MessageFormatBuf, 0, 0x5fc, str_empty);
 	}
 }

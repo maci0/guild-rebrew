@@ -1,5 +1,5 @@
-extern char* g_6b7e88;
-extern int g_6b7d7c;
+extern char* sb_Voices;
+extern int sb_WaveDriver;
 
 
 
@@ -10,12 +10,12 @@ int __cdecl msx_ReleaseWaveDriver(int);
 void __cdecl d3snd_Shutdown(void)
 {
 	snd_ReleaseAllSampleBanks();
-	if ((*(int*)&g_6b7e88) != 0) {
-		m_FreeTracked((*(int*)&g_6b7e88));
-		(*(int*)&g_6b7e88) = 0;
+	if ((*(int*)&sb_Voices) != 0) {
+		m_FreeTracked((*(int*)&sb_Voices));
+		(*(int*)&sb_Voices) = 0;
 	}
-	if (g_6b7d7c != 0) {
-		msx_ReleaseWaveDriver(g_6b7d7c);
-		g_6b7d7c = 0;
+	if (sb_WaveDriver != 0) {
+		msx_ReleaseWaveDriver(sb_WaveDriver);
+		sb_WaveDriver = 0;
 	}
 }

@@ -1,9 +1,9 @@
 
 
 
-extern int* g_665f08;
+extern int* d2_TutorialState;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 
 int __cdecl d2_CheckTutorialCueClicked(void)
 {
@@ -12,7 +12,7 @@ int __cdecl d2_CheckTutorialCueClicked(void)
 	if (*(int*) ((char*)&d2_TutorialActive) == 0) {
 		return -4;
 	}
-	if (*(int*) ((char*)&g_100f1dc) != -1 && d2_CurrentElementId == g_665f08[19]) {
+	if (*(int*) ((char*)&d2_DialogButtonAction) != -1 && d2_CurrentElementId == d2_TutorialState[19]) {
 		r = 1;
 	} else {
 		r = 0;

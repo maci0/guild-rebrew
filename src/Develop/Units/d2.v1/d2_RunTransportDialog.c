@@ -35,16 +35,16 @@ typedef struct {
 
 #include "Develop/client_types.h"
 
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int d2_CurrentWindowId;
 extern int g_14a566c;
-extern volatile int g_6b7fac;
-extern Win_1015f40 g_1015f40[0x60];
-extern D2_FORM_RECORD g_1038140[];
+extern volatile int gm_GameTicks;
+extern Win_1015f40 d2_Windows[0x60];
+extern D2_FORM_RECORD d2_Forms[];
 #include "Develop/Units/d2.v1/d2_gui.h"
-extern char g_868060[];
-extern int g_100f1dc;
+extern char gm_TownTable[];
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
 
 int __cdecl main_RunFrameLoop(void*, int);
@@ -91,8 +91,8 @@ void __cdecl d2_RunTransportDialog(char* b)
 	sel = 1;
 	shown = -1;
 	while (main_RunFrameLoop(d2_RunTransportDialog, 0x677c7) != 0) {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 		if (sel != shown) {
 			if (h != -1) {
@@ -102,11 +102,11 @@ void __cdecl d2_RunTransportDialog(char* b)
 			d2_CenterDialogWindows(h);
 			d2_SetForm(h, 0);
 			d2_DrawPanelFrame(d2_CurrentWindowId, 0x70b, 0x73f);
-			slot = (D2_WIN*) &g_1015f40[((Dlg*)g_1038140)[h].slot];
+			slot = (D2_WIN*) &d2_Windows[((Dlg*)d2_Forms)[h].slot];
 			fcn_0064d41a(buf, "ief_Wappen%li", *(int*) (b + 0x65));
 			d2_SetBackgroundTexture(buf, slot->pad0);
 			slot->alpha = 0.0f;
-			t0 = *(unsigned int*)&g_6b7fac;
+			t0 = *(unsigned int*)&gm_GameTicks;
 			d2_SetForm(h, 4);
 			d2_CreateButtonRow(d2_CurrentWindowId, 0, &pick, 3, g_14a566c, "Import", "Export");
 			d2_SetSlotVisibility(pick.x0, 0);
@@ -118,7 +118,7 @@ void __cdecl d2_RunTransportDialog(char* b)
 					return;
 				}
 				d2_SetForm(h, 3);
-				io_AppendText(0x1c47, g_868060 + *(int*) (b + 0x65) * 0x2f4);
+				io_AppendText(0x1c47, gm_TownTable + *(int*) (b + 0x65) * 0x2f4);
 			}
 			else {
 				grp = fcn_00502cd0(*(int*) (b + 0x5d), 2, 0, 0x1dc, 6);
@@ -126,23 +126,23 @@ void __cdecl d2_RunTransportDialog(char* b)
 					return;
 				}
 				d2_SetForm(h, 3);
-				io_AppendText(0x1c48, g_868060 + *(int*) (b + 0x65) * 0x2f4);
+				io_AppendText(0x1c48, gm_TownTable + *(int*) (b + 0x65) * 0x2f4);
 			}
-			((D2_CONTROL_TL*)g_1015ea0)[a].disabled = sel;
-			((D2_CONTROL_TL*)g_1015ea0)[a].value_060 = sel;
-			((D2_CONTROL_TL*)g_1015ea0)[c].disabled = sel == 0;
-			((D2_CONTROL_TL*)g_1015ea0)[c].value_060 = sel == 0;
+			((D2_CONTROL_TL*)d2_Controls)[a].disabled = sel;
+			((D2_CONTROL_TL*)d2_Controls)[a].value_060 = sel;
+			((D2_CONTROL_TL*)d2_Controls)[c].disabled = sel == 0;
+			((D2_CONTROL_TL*)d2_Controls)[c].value_060 = sel == 0;
 			d2_ResetBuildingUiSlots();
 			shown = sel;
 		}
-		d = (*(unsigned int*)&g_6b7fac - t0) * 0.0013333333333333333;
+		d = (*(unsigned int*)&gm_GameTicks - t0) * 0.0013333333333333333;
 		if (!(d < 0.25)) {
 			d = 0.25;
 		}
 		slot->alpha = (float) d;
 		d2_SyncProduktionSlotGrid(b, grp);
 		d2_DrawProduktionSlotGrid(h, 1, 0, b, grp);
-		if (g_100f1dc == 2) {
+		if (d2_DialogButtonAction == 2) {
 			if (d2_CurrentElementId == a) {
 				sel = 1;
 			}

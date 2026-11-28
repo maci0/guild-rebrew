@@ -2,10 +2,10 @@
  * entries and books the result on the player's record. */
 
 extern char* g_772e98;
-extern char* g_772e9c;
-extern unsigned char g_773d75;
+extern char* cut_CombatDefenderEntity;
+extern unsigned char gm_ActiveTownIndex;
 extern double g_662908;
-extern float g_6628a0;
+extern float flt_1_0;
 
 char* __cdecl fcn_00502cd0(int, ...);
 short* __cdecl gm_ResolveParentEntity(short*);
@@ -28,7 +28,7 @@ int __cdecl cut_PlunderBuildingCarts(int* cutscene, char* building, int* attacke
 	int* p;
 
 	total = 0;
-	if (g_772e9c == 0 || g_772e98 == 0) {
+	if (cut_CombatDefenderEntity == 0 || g_772e98 == 0) {
 		return 0;
 	}
 	rec = fcn_00502cd0(*(int*) (building + 0x5d), 2, 6, 0, 0x116);
@@ -47,20 +47,20 @@ int __cdecl cut_PlunderBuildingCarts(int* cutscene, char* building, int* attacke
 				soldQty = (int) v;
 				if (rec != 0) {
 					cm_SendSellObjekt(*(int*) (rec + 2), *(int*) (ent + 6),
-					    *(unsigned short*) ent, soldQty, g_773d75, 0);
+					    *(unsigned short*) ent, soldQty, gm_ActiveTownIndex, 0);
 				} else {
 					cm_SendSellObjekt(-1, *(int*) (ent + 6),
-					    *(unsigned short*) ent, soldQty, g_773d75, 0);
+					    *(unsigned short*) ent, soldQty, gm_ActiveTownIndex, 0);
 				}
-				total = (int) (gm_GetSeasonPrice(*(unsigned short*) ent, g_773d75)
+				total = (int) (gm_GetSeasonPrice(*(unsigned short*) ent, gm_ActiveTownIndex)
 				    * (float) soldQty + (float) total);
 				ent = gm_NextEntityQueryMatch();
 			}
 			if (rec == 0) {
 				total = (int) ((double) total * 0.5);
-				cm_RequestMoveCredits(attacker[1], -1, g_773d75, total);
+				cm_RequestMoveCredits(attacker[1], -1, gm_ActiveTownIndex, total);
 			}
-			ent = gm_GetEntityTableEntry(g_772e9c);
+			ent = gm_GetEntityTableEntry(cut_CombatDefenderEntity);
 			if (ent != 0) {
 				*(int*) (ent + 0x1c) += total;
 			}

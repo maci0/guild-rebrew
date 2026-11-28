@@ -45,7 +45,7 @@ struct msg {
 
 
 
-extern char g_868060[];
+extern char gm_TownTable[];
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char* g_f8f080;
@@ -54,8 +54,8 @@ extern char s_679060[];
 extern char s_68be7c[];
 extern int d2_CurrentWindowId;
 extern int main_LoopFlags;
-extern int g_100f1dc;
-extern int g_14ce8e0;
+extern int d2_DialogButtonAction;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int d2_CurrentElementId;
 
@@ -84,7 +84,7 @@ int __cdecl d2_RunStudiumDialog(int unused, unsigned short* p)
 	int result;
 	int i;
 
-	gm_CalcStudiumOffers(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), shares);
+	gm_CalcStudiumOffers(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot]), shares);
 	dlg = d2_LoadForm(0, 0, s_6ace6c);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
@@ -94,7 +94,7 @@ int __cdecl d2_RunStudiumDialog(int unused, unsigned short* p)
 		ids[i] = d2_AddElementToWindow(0x14, i * 0x5a + 10, 0x4c6, d2_CurrentWindowId);
 		((Slot*)g_f8f080)[ids[i]].shown = 1;
 		((Slot*)g_f8f080)[ids[i]].style = 3;
-		io_FormatTextBuffer(text, s_679060, ((Player*)g_868060)[i + 1].name);
+		io_FormatTextBuffer(text, s_679060, ((Player*)gm_TownTable)[i + 1].name);
 		d2_ShowTxt(0xbe, i * 0x5a + 10, text, d2_CurrentWindowId);
 		io_FormatTextBuffer(text, s_679060, shares[i].kind + 0x16b7);
 		d2_ShowTxt(0xbe, i * 0x5a + 10 + 0x14, text, d2_CurrentWindowId);
@@ -106,15 +106,15 @@ int __cdecl d2_RunStudiumDialog(int unused, unsigned short* p)
 	d2_SetForm(dlg, 3);
 	ids[3] = d2_GetWindowListItem(dlg, 3, io_AppendText(0x1ba8));
 	d2_SetOverlayAnimation(0, 0);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	result = 0;
 	while (main_RunFrameLoop((void*) d2_RunStudiumDialog, main_LoopFlags) != 0) {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == ids[3]) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			} else {
 				for (i = 0; i < 3; i++) {
 					if (d2_CurrentElementId == ids[i]) {
@@ -122,14 +122,14 @@ int __cdecl d2_RunStudiumDialog(int unused, unsigned short* p)
 						m.b4 = 0x5f;
 						m.f8 = *(int*) (p + 2);
 						m.fc = -1;
-						m.f58 = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id;
+						m.f58 = ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id;
 						m.b64 = (char) shares[i].kind;
 						m.b65 = (char) shares[i].goal;
 						m.f60 = shares[i].amount;
 						cm_SendCopyEntityData(&m);
 						cm_RequestChangeBits(*(int*) (p + 2), 0x1c8, 4, 0x10000, 0);
 						result = 1;
-						g_774654 = 1;
+						d2_DialogCloseRequested = 1;
 						break;
 					}
 				}

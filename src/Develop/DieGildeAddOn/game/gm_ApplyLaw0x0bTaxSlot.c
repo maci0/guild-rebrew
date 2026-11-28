@@ -1,10 +1,10 @@
 
 
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-extern float g_6628a8;
-extern int g_773d48;
+extern float flt_0_0;
+extern int gm_QueuedCommandCount;
 extern int g_99f7f0;
 
 int __cdecl gm_GetLawEntry(int k, int* info);
@@ -27,10 +27,10 @@ int __cdecl gm_ApplyLaw0x0bTaxSlot(unsigned short id, unsigned char* s, unsigned
 	if (i >= 6) {
 		return 0;
 	}
-	n = ((ENTITY_RECORD_VIEW*) g_7f4ca0)[id].value_19c;
+	n = ((ENTITY_RECORD_VIEW*) gm_EntitySlotTable)[id].value_19c;
 	v = n * (info[6] * 0.01f);
-	if (!(v > g_6628a8)) {
-		v = g_6628a8;
+	if (!(v > flt_0_0)) {
+		v = flt_0_0;
 	}
 	amt = (int) v;
 	if (n > 0) {
@@ -38,8 +38,8 @@ int __cdecl gm_ApplyLaw0x0bTaxSlot(unsigned short id, unsigned char* s, unsigned
 		*(int*) (s + 8 + i * 4) = amt;
 		*(int*) (s + 0x20 + i * 4) = info[6];
 		if (flags & 1) {
-			cm_RequestTransferCurrencyNoKill(-1, ((ENTITY_RECORD*) g_7f4ca0)[id].entity_id, 0, amt);
-			g_773d48++;
+			cm_RequestTransferCurrencyNoKill(-1, ((ENTITY_RECORD*) gm_EntitySlotTable)[id].entity_id, 0, amt);
+			gm_QueuedCommandCount++;
 		}
 		if (flags & 2) {
 			g_99f7f0 += amt;

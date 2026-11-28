@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_6b8300;
-extern unsigned short g_774970;
+extern int d3_CurrentFloor;
+extern unsigned short gm_LocalPlayerSlot;
 /* Release the client path/mode tables and reset the scene clock state. */
 
 void __cdecl cut_FadeToBlack(void);
@@ -59,10 +59,10 @@ void __cdecl cut_CleanupCombatScene(int dlg)
 		if (*(unsigned short*) ((char*) q - 0x184) != 0xffff && *q) {
 			v = *(int*) (dlg + 0xc);
 			if (v ==
-			        *(int*) ((unsigned short) g_774970 *
+			        *(int*) ((unsigned short) gm_LocalPlayerSlot *
 			                     0x21c +
 			                 0x7f4ca4) ||
-			    g_14cbca0 == -1) {
+			    nt_ClientSocket == -1) {
 				p = gm_LookupEntityRecordById(*(int*) ((char*) q - 0x180));
 				if (p[2] != 11) {
 					gm_ApplyEntityHealthDelta(*(unsigned short*) p,
@@ -75,7 +75,7 @@ void __cdecl cut_CleanupCombatScene(int dlg)
 		}
 		q = (int*) ((char*) q + 0x21c);
 	} while ((int) q < 0x9b8f44);
-	v = g_6b8300;
+	v = d3_CurrentFloor;
 	*(float*) 0x6a2570 = 1.0f;
 	if (v) {
 		i = d3_CurrentContextIndex;

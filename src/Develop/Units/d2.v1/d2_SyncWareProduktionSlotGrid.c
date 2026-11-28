@@ -1,9 +1,9 @@
-extern int g_7746d8;
+extern int d2_SelectedEntityUiFlags;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 extern char* lpObjektePROT;
-extern char* g_aed32c;
+extern char* cm_PacketDeltaBase;
 
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 char* __cdecl gm_NextEntityQueryMatch(void);
@@ -175,20 +175,20 @@ int __cdecl d2_SyncWareProduktionSlotGrid(char* building, char* a1)
 	found = 0;
 	for (p = (unsigned int*) 0x778db0; !found && (int) p < 0x779130; p += 0xe) {
 		if (*p != (unsigned int) -1
-		    && *(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*p].kind)) == 0x41
+		    && *(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[*p].kind)) == 0x41
 		    && d2_GetControlValue(*p))
 			found = 1;
 	}
 	if (!found) {
 		for (p = (unsigned int*) 0x7796f0; !found && (int) p < 0x7798b0; p += 0xe) {
 			if (*p != (unsigned int) -1
-			    && *(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*p].kind)) == 0x41
+			    && *(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[*p].kind)) == 0x41
 			    && d2_GetControlValue(*p))
 				found = 1;
 		}
 	}
 
-	if ((g_7746d8 & 0x200) != 0 && g_14ce8d8 != 0 && !CountDisplayCounters()) {
+	if ((d2_SelectedEntityUiFlags & 0x200) != 0 && g_14ce8d8 != 0 && !CountDisplayCounters()) {
 		for (p = (unsigned int*) 0x778dc0; (int) p < 0x779140; p += 0xe) {
 			if (*p == (unsigned int) -1 || *p != *(unsigned int*) 0x67d370)
 				continue;
@@ -200,7 +200,7 @@ int __cdecl d2_SyncWareProduktionSlotGrid(char* building, char* a1)
 			else
 				cat = *(unsigned int*) (ent + 0xe) + 1;
 			cm_BeginPacketFieldDelta((int) ent, *(int*) (ent + 1));
-			cm_AppendCommandSyncField(4, 1, (int) ((char*) ent - g_aed32c) + 0x1c, &cat);
+			cm_AppendCommandSyncField(4, 1, (int) ((char*) ent - cm_PacketDeltaBase) + 0x1c, &cat);
 			cm_SendSetAttribute();
 			*(int*) (ent + 0xe) = cat;
 		}
@@ -215,7 +215,7 @@ int __cdecl d2_SyncWareProduktionSlotGrid(char* building, char* a1)
 			else
 				cat = *(unsigned int*) (ent + 0xe) + 1;
 			cm_BeginPacketFieldDelta((int) ent, *(int*) (ent + 1));
-			cm_AppendCommandSyncField(4, 1, (int) ((char*) ent - g_aed32c) + 0x1c, &cat);
+			cm_AppendCommandSyncField(4, 1, (int) ((char*) ent - cm_PacketDeltaBase) + 0x1c, &cat);
 			cm_SendSetAttribute();
 			*(int*) (ent + 0xe) = cat;
 		}

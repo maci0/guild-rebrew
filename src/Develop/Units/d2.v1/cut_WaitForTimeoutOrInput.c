@@ -1,8 +1,8 @@
 
 
 
-extern volatile int g_6b7fac;
-extern int g_772f3c;
+extern volatile int gm_GameTicks;
+extern int cut_SkipMode;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
@@ -16,20 +16,20 @@ int __cdecl cut_WaitForTimeoutOrInput(int secs, int(__cdecl* cb)(int), int arg)
 	int start;
 	int res;
 
-	start = (*(unsigned int*)&g_6b7fac);
+	start = (*(unsigned int*)&gm_GameTicks);
 	res = 0;
-	if (g_772f3c != 0)
+	if (cut_SkipMode != 0)
 		return 0;
 	if (main_RunFrameLoop(cut_WaitSeconds, cut_EventLoopFlags | 0x8000) != 0) {
 		do {
-			if (g_14ce8e0 != 0) {
+			if (io_RightButtonReleased != 0) {
 				if (cb != 0)
 					res = cb(arg);
 				else
 					res = 1;
-				g_774654 = 1;
-			} else if ((*(unsigned int*)&g_6b7fac) >= secs * (1.0 / 14.0) + start) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
+			} else if ((*(unsigned int*)&gm_GameTicks) >= secs * (1.0 / 14.0) + start) {
+				d2_DialogCloseRequested = 1;
 			}
 			d2_UpdateFloatingStatTexts();
 			d2_AppendPendingPlayerNames((*(int*)&cut_ActiveCutscene));

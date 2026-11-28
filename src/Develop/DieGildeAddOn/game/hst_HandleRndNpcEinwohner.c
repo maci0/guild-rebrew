@@ -1,5 +1,5 @@
 /* Owned (both targets) by src/GOLDTL.fcn_00549330.c. */
-extern char g_7f4ca4[];
+extern char gm_EntityIdField[];
 
 
 
@@ -73,8 +73,8 @@ int __cdecl hst_HandleRndNpcEinwohner(int selectionMode, int pairs, int idx, cha
 		}
 	} else {
 		i = 0;
-		slotCursor = g_7f4ca4;
-		while ((int) slotCursor < (int) (g_7f4ca4 + 0x65400)) {
+		slotCursor = gm_EntityIdField;
+		while ((int) slotCursor < (int) (gm_EntityIdField + 0x65400)) {
 			if (hst_IsCandidateUnlisted(*(int*) slotCursor) != 0) {
 				entityRecord = slotCursor - 4;
 				if (flag == 0 || *(unsigned char*) (slotCursor + 5) == wantGender) {

@@ -67,15 +67,15 @@ void __cdecl d2_SetElementScale(int id, int scale)
 	}
 	w0 = w;
 	h0 = h;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_080) = scale;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].value_080) = scale;
 	if (scale > 1) {
-		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].width) = h0 * scale;
-		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].height) = w0 * scale;
+		(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].width) = h0 * scale;
+		(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].height) = w0 * scale;
 	}
 	if (scale < -1) {
 		n = abs(scale);
-		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].width) = h0 / n;
-		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].height) = w0 / n;
+		(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].width) = h0 / n;
+		(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].height) = w0 / n;
 	}
 }
 #endif

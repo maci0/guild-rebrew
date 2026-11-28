@@ -1,13 +1,13 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern double g_662930;
-extern double g_662aa0;
+extern double dbl_3_0;
+extern double dbl_10;
 extern float g_662aac;
 extern float g_662ab0;
 extern float g_662ab4;
 extern float g_662ab8;
 extern double g_662ac0;
-extern float g_662ac8;
-extern double g_662ad0;
+extern float flt_4;
+extern double dbl_4_0;
 
 int __cdecl rand(void);
 
@@ -62,11 +62,11 @@ unsigned char __cdecl fcn_004172e0(LENS_FLARE_EMITTER* e, unsigned int t)
         e->f20 = 0;
         for (; i < e->count; i++, p++) {
             if (!(p->flags & 1)) {
-                p->f38 = (float) ((float) rand() * 3.0518509447574615e-05f * g_662ad0) - 2.0f;
-                p->f3c = (float) ((float) rand() * 3.0518509447574615e-05f * g_662930) - 1.5f;
-                p->f40 = (float) ((float) rand() * 3.0518509447574615e-05f * g_662ad0) - 2.0f;
-                p->f00 = (float) ((float) rand() * 3.0518509447574615e-05f * g_662aa0) - 5.0f;
-                p->f04 = (float) rand() * 3.0518509447574615e-05f * g_662ac8 + 0.5f;
+                p->f38 = (float) ((float) rand() * 3.0518509447574615e-05f * dbl_4_0) - 2.0f;
+                p->f3c = (float) ((float) rand() * 3.0518509447574615e-05f * dbl_3_0) - 1.5f;
+                p->f40 = (float) ((float) rand() * 3.0518509447574615e-05f * dbl_4_0) - 2.0f;
+                p->f00 = (float) ((float) rand() * 3.0518509447574615e-05f * dbl_10) - 5.0f;
+                p->f04 = (float) rand() * 3.0518509447574615e-05f * flt_4 + 0.5f;
                 p->f08 = (float) ((float) rand() * 3.0518509447574615e-05f * g_662ac0) - 4.8f;
                 p->f10 = (float) ((rand() & 0x7f) + 0x7f);
                 p->f30 = t;

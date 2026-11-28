@@ -5,7 +5,7 @@
 #include <string.h>
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern char s_6acc44[];
 extern char s_679060[];
 #include "Develop/Units/d2.v1/client_dialog_state.h"
@@ -55,7 +55,7 @@ int __cdecl d2_ShowMedicusDialog(unsigned char* e)
 		cm_RequestModifyHealth(*(int*) (e + 4), -2);
 		cm_RequestChangeBits(*(int*) (e + 4), 0x1c8, 4, 0x40, 0);
 		if (gm_RandomMod(2)) {
-			cm_RequestMoveCredits(-1, *(int*) (e + 4), g_773d75, money);
+			cm_RequestMoveCredits(-1, *(int*) (e + 4), gm_ActiveTownIndex, money);
 			gm_ApplyEntityHealthDelta(*(unsigned short*) e, half);
 			gm_CureRandomAffliction(e);
 		}
@@ -69,17 +69,17 @@ int __cdecl d2_ShowMedicusDialog(unsigned char* e)
 	id = io_AppendText(0x1d3b, 2, money);
 	ok = d2_GetWindowListItem(dlg, 1, id);
 	cancel = d2_GetWindowListItem(dlg, 1, id + 1);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == ok) {
-				if (d2_CheckActionBlocker(e, 2) && gm_CheckEntityStock(e, money, g_773d75)) {
+				if (d2_CheckActionBlocker(e, 2) && gm_CheckEntityStock(e, money, gm_ActiveTownIndex)) {
 					cm_RequestModifyHealth(*(int*) (e + 4), -2);
 					io_FormatTextBuffer(text, 0x1d3c);
 					if (gm_RandomMod(2)) {
 						io_FormatTextBuffer(tmp, s_679060, 0x1d3d);
 						strcat(text, tmp);
-						cm_RequestMoveCredits(-1, *(int*) (e + 4), g_773d75, money);
+						cm_RequestMoveCredits(-1, *(int*) (e + 4), gm_ActiveTownIndex, money);
 						gm_CureRandomAffliction(e);
 					} else {
 						io_FormatTextBuffer(tmp, s_679060, 0x1d3e);
@@ -93,14 +93,14 @@ int __cdecl d2_ShowMedicusDialog(unsigned char* e)
 						cm_StepCommandQueue();
 					}
 					d2_ShowModalMessageBox(text, 0);
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				}
 			} else if (d2_CurrentElementId == cancel) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop((void*) d2_ShowMedicusDialog, 0x657c7) != 0);
 	d2_DestroyForm(dlg);

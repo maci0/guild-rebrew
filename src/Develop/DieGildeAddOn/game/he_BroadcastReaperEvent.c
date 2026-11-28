@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_6ab44c[];
-extern char g_7f4ca4[];
+extern char gm_EntityIdField[];
 
 
 
@@ -17,10 +17,10 @@ void __cdecl he_BroadcastReaperEvent(void)
 
 	id = gm_RandomMod(2);
 	fcn_0064d41a(buf, g_6ab44c, id + 0x12);
-	io_FormatTextBuffer(g_774a80, id + 0x20cd);
-	for (p = (int) g_7f4ca4; p < (int) g_7f4ca4 + 0x65400; p += 0x21c) {
+	io_FormatTextBuffer(io_MessageFormatBuf, id + 0x20cd);
+	for (p = (int) gm_EntityIdField; p < (int) gm_EntityIdField + 0x65400; p += 0x21c) {
 		if (*(char*) (p - 2) == 6) {
-			he_PostEntityMessage(*(int*) p, -1, g_774a80, 0, 0x600, buf);
+			he_PostEntityMessage(*(int*) p, -1, io_MessageFormatBuf, 0, 0x600, buf);
 		}
 	}
 }

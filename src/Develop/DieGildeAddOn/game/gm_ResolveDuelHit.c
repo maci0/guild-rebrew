@@ -52,26 +52,26 @@ void __cdecl gm_ResolveDuelHit(int ctx)
         v22 = 0;
         v5 = 0;
     }
-    if (*(int*)((char*)g_772f24 + 4) == g_68b79c &&
+    if (*(int*)((char*)cut_ActivePlayerEntity + 4) == g_68b79c &&
         (v7[0x16] == 1 || v7[0x16] == 2)) {
         v8 = (int) gm_FindEntityActiveItem(v3);
         if (v8) {
             int v11;
             v11 = -1;
             cm_BeginPacketFieldDelta((char*) v8, *(int*) (v8 + 2));
-            cm_AppendPacketFieldValue(4, 1, (v8 - (int)g_aed32c) + 0x20, &v11);
+            cm_AppendPacketFieldValue(4, 1, (v8 - (int)cm_PacketDeltaBase) + 0x20, &v11);
             cm_RequestChangeAttribute();
         }
     }
     if (v22) {
         r = cut_RandMod(10);
-        if ((int) g_772e9c == *(int*) ((char*) v4 + 0x16c)) {
+        if ((int) cut_CombatDefenderEntity == *(int*) ((char*) v4 + 0x16c)) {
             d3_ScheduleActionTimer((char*) v4, v22, 1);
         } else {
             d3_ScheduleActionTimer((char*) v4, v22, 2);
         }
         if (r > 8) {
-            if (*(int*) (ctx + 0x188) != *(int*) ((int)g_772e9c + 4)) {
+            if (*(int*) (ctx + 0x188) != *(int*) ((int)cut_CombatDefenderEntity + 4)) {
                 d3snd_QueueSound(*v4, *(int*) 0x772ef4, (char*) 0x68be54, -1, 500);
             } else {
                 d3snd_QueueSound(*v4, *(int*) 0x772ef8, (char*) 0x68be54, -1, 500);

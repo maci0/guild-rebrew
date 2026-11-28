@@ -108,8 +108,8 @@ void __cdecl ShowPersonTooltip(char* w)
 		d2_DrawSkillBar(0x64, i * 15 + 2, w, i, 0x4df);
 	}
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop(ShowPersonTooltip, 0x677c7) != 0);
 	d2_ResetUiInputAndBounds();

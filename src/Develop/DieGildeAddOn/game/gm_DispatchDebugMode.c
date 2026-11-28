@@ -1,4 +1,4 @@
-extern unsigned char g_14cf950;
+extern unsigned char io_LastKeyScancode;
 extern int g_77480c;
 
 extern int __cdecl gm_DispatchDebugSubsystemKeys(void);
@@ -11,7 +11,7 @@ extern int __cdecl d2_DispatchDebugHotkey(void);
 /* ADDRESS: GOLDTL 0x005365d0 */
 int __cdecl gm_DispatchDebugMode(void)
 {
-	switch (g_14cf950) {
+	switch (io_LastKeyScancode) {
 	case 0x4f:
 		g_77480c = 1;
 		return gm_DispatchDebugActionKeys();

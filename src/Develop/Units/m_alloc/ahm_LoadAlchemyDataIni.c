@@ -26,12 +26,12 @@ extern char s_68dee0[];
 extern char s_6b5c60[];
 
 
-extern double g_6640e8;
+extern double dbl_0_01;
 extern int main_Instance;
 extern int ahm_PlayerPrototypeCount;
-extern unsigned char* g_772fdc;
+extern unsigned char* ahm_PlayerPrototypes;
 extern int g_772fe0;
-extern unsigned char* g_772fe4;
+extern unsigned char* ahm_RecipePrototypes;
 
 void* __cdecl m_alloc(unsigned int size, const char* tag);
 void __cdecl m_FreeTracked(void* p);
@@ -58,12 +58,12 @@ unsigned int __cdecl ahm_LoadAlchemyDataIni(void)
 	if (ahm_PlayerPrototypeCount <= 0) {
 		goto drop_second;
 	}
-	if (g_772fdc) {
-		m_FreeTracked(g_772fdc);
-		g_772fdc = 0;
+	if (ahm_PlayerPrototypes) {
+		m_FreeTracked(ahm_PlayerPrototypes);
+		ahm_PlayerPrototypes = 0;
 	}
-	g_772fdc = (unsigned char*) m_alloc(ahm_PlayerPrototypeCount * 0xc, s_68df8c);
-	if (g_772fdc == 0) {
+	ahm_PlayerPrototypes = (unsigned char*) m_alloc(ahm_PlayerPrototypeCount * 0xc, s_68df8c);
+	if (ahm_PlayerPrototypes == 0) {
 		goto drop_second;
 	}
 
@@ -72,19 +72,19 @@ unsigned int __cdecl ahm_LoadAlchemyDataIni(void)
 			GetPrivateProfileStringA(app, s_68df78, s_68df80, out, 0x100, path);
 			v = atoi(out);
 			v = v <= 0 ? 0 : v;
-			g_772fdc[i * 0xc + 0] = (unsigned char) (v >= 0xfc ? 0xfc : v);
+			ahm_PlayerPrototypes[i * 0xc + 0] = (unsigned char) (v >= 0xfc ? 0xfc : v);
 			GetPrivateProfileStringA(app, s_68df70, s_68df80, out, 0x100, path);
 			v = atoi(out);
 			v = v <= 0 ? 0 : v;
-			g_772fdc[i * 0xc + 1] = (unsigned char) (v >= 0xfc ? 0xfc : v);
+			ahm_PlayerPrototypes[i * 0xc + 1] = (unsigned char) (v >= 0xfc ? 0xfc : v);
 			GetPrivateProfileStringA(app, s_68df68, s_68df80, out, 0x100, path);
 			v = atoi(out);
 			v = v <= 0 ? 0 : v;
-			g_772fdc[i * 0xc + 2] = (unsigned char) (v >= 0xfc ? 0xfc : v);
+			ahm_PlayerPrototypes[i * 0xc + 2] = (unsigned char) (v >= 0xfc ? 0xfc : v);
 			GetPrivateProfileStringA(app, s_68df60, s_68df80, out, 0x100, path);
 			v = atoi(out);
 			v = v <= 0 ? 0 : v;
-			g_772fdc[i * 0xc + 3] = (unsigned char) (v >= 0xfc ? 0xfc : v);
+			ahm_PlayerPrototypes[i * 0xc + 3] = (unsigned char) (v >= 0xfc ? 0xfc : v);
 			GetPrivateProfileStringA(app, s_68df54, s_68df5c, out, 0x100, path);
 			v = atoi(out);
 			v = v > 0x12 ? (v < 0x1e ? v : 0x1e) : 0x12;
@@ -92,9 +92,9 @@ unsigned int __cdecl ahm_LoadAlchemyDataIni(void)
 
 
 
-			g_772fdc[i * 0xc + 4] = (unsigned char) v;
+			ahm_PlayerPrototypes[i * 0xc + 4] = (unsigned char) v;
 			GetPrivateProfileStringA(app, s_68df44, s_68df4c, out, 0x100, path);
-			*(int*) (g_772fdc + i * 0xc + 8) = ahm_FindObjektByObName(out);
+			*(int*) (ahm_PlayerPrototypes + i * 0xc + 8) = ahm_FindObjektByObName(out);
 
 		}
 
@@ -103,12 +103,12 @@ unsigned int __cdecl ahm_LoadAlchemyDataIni(void)
 	if (g_772fe0 <= 0) {
 		goto drop_first;
 	}
-	if (g_772fe4) {
-		m_FreeTracked(g_772fe4);
-		g_772fe4 = 0;
+	if (ahm_RecipePrototypes) {
+		m_FreeTracked(ahm_RecipePrototypes);
+		ahm_RecipePrototypes = 0;
 	}
-	g_772fe4 = (unsigned char*) m_alloc(g_772fe0 * 0xc, s_68def8);
-	if (g_772fe4 == 0) {
+	ahm_RecipePrototypes = (unsigned char*) m_alloc(g_772fe0 * 0xc, s_68def8);
+	if (ahm_RecipePrototypes == 0) {
 		goto drop_first;
 	}
 	if (g_772fe0 <= 0) {
@@ -136,7 +136,7 @@ clamp_low:
 				f = atof(out) * 0.01;
 			}
 		}
-		*(float*) (g_772fe4 + i * 0xc + 4) = (float) f;
+		*(float*) (ahm_RecipePrototypes + i * 0xc + 4) = (float) f;
 		GetPrivateProfileStringA(app, s_68df70, s_68dee8, out, 0x100, path);
 		f = atof(out) * 0.01;
 		if (f > 0.0) {
@@ -156,21 +156,21 @@ clamp_low2:
 				f = atof(out) * 0.01;
 			}
 		}
-		*(float*) (g_772fe4 + i * 0xc + 8) = (float) f;
+		*(float*) (ahm_RecipePrototypes + i * 0xc + 8) = (float) f;
 		GetPrivateProfileStringA(app, s_68dee0, s_68df4c, out, 0x100, path);
-		*(int*) (g_772fe4 + i * 0xc) = ahm_FindObjektByObName(out);
+		*(int*) (ahm_RecipePrototypes + i * 0xc) = ahm_FindObjektByObName(out);
 
 	}
 	return 1;
 drop_first:
-	if (g_772fdc) {
-		m_FreeTracked(g_772fdc);
-		g_772fdc = 0;
+	if (ahm_PlayerPrototypes) {
+		m_FreeTracked(ahm_PlayerPrototypes);
+		ahm_PlayerPrototypes = 0;
 	}
 drop_second:
-	if (g_772fe4) {
-		m_FreeTracked(g_772fe4);
-		g_772fe4 = 0;
+	if (ahm_RecipePrototypes) {
+		m_FreeTracked(ahm_RecipePrototypes);
+		ahm_RecipePrototypes = 0;
 	}
 	g_772fe0 = 0;
 	ahm_PlayerPrototypeCount = 0;

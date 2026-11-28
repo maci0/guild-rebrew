@@ -18,8 +18,8 @@ typedef struct {
 } Obj;
 
 
-extern Pair_99f800 g_99f800[0x800];
-extern char g_7f4ca0[];
+extern Pair_99f800 cm_CrimeEvidenceLinks[0x800];
+extern char gm_EntitySlotTable[];
 
 char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl cm_SendRemoveStraftat(int id, int v);
@@ -41,23 +41,23 @@ int __cdecl gs_ClearTargetStraftaten(int target, int max)
 	m = 0;
 	if (p != 0) {
 		for (k = 0; k < 768 && m < 8; k++) {
-			if ((((Obj*)g_7f4ca0)[k].type == 6 || ((Obj*)g_7f4ca0)[k].type == 7) && ((Obj*)g_7f4ca0)[k].owner != target) {
+			if ((((Obj*)gm_EntitySlotTable)[k].type == 6 || ((Obj*)gm_EntitySlotTable)[k].type == 7) && ((Obj*)gm_EntitySlotTable)[k].owner != target) {
 				flag[m] = 0;
-				who[m] = (char*) &((Obj*)g_7f4ca0)[k];
+				who[m] = (char*) &((Obj*)gm_EntitySlotTable)[k];
 				m++;
 			}
 		}
 	}
 	for (j = 0; j < 512 && n < max; j++) {
-		if (g_9a3800[j].target_id == target && g_9a3800[j].state == 1) {
+		if (cm_CrimeRecords[j].target_id == target && cm_CrimeRecords[j].state == 1) {
 			for (k = 0; k < 2048; k++) {
 				for (r = 0; r < m; r++) {
-					if (g_99f800[k].owner == *(int*) (who[r] + 4) && g_99f800[k].key == g_9a3800[j].id) {
+					if (cm_CrimeEvidenceLinks[k].owner == *(int*) (who[r] + 4) && cm_CrimeEvidenceLinks[k].key == cm_CrimeRecords[j].id) {
 						flag[r] = 1;
 					}
 				}
 			}
-			cm_SendRemoveStraftat(g_9a3800[j].id, 1);
+			cm_SendRemoveStraftat(cm_CrimeRecords[j].id, 1);
 			n++;
 		}
 	}

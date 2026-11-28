@@ -46,7 +46,7 @@ typedef struct
 } Shop;
 // SIZE 0x24d
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 #include "Develop/client_types.h"
@@ -114,22 +114,22 @@ void __cdecl d2_ShowTrainingDialog(unsigned char* obj, char* sceneObj, int targe
 	s = io_AppendText(0x1a45, kind + 0x20d, kind + 0x20e, targetId + 0x16b7);
 	btn1 = d2_GetWindowListItem(dlg, 1, s);
 	btn2 = d2_GetWindowListItem(dlg, 1, s + 1);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == btn1) {
 				n = 0;
 				for (i = 0; i < 768; i++) {
 					if (n >= 3) {
 						break;
 					}
-					if (((Player*)g_7f4ca0)[i].x188 != 0) {
+					if (((Player*)gm_EntitySlotTable)[i].x188 != 0) {
 						memset(&pkt, 0, sizeof(pkt));
 						pkt.type = 0x16;
-						pkt.x8 = ((Player*)g_7f4ca0)[g_774970].x4;
+						pkt.x8 = ((Player*)gm_EntitySlotTable)[gm_LocalPlayerSlot].x4;
 						pkt.xc = *(int*) (obj + 1);
 						pkt.name = (*(pos14_7f4c00*)&gm_GameTime);
 						pkt.x36 = 1;
@@ -139,7 +139,7 @@ void __cdecl d2_ShowTrainingDialog(unsigned char* obj, char* sceneObj, int targe
 						else {
 							pkt.x60 = -1;
 						}
-						pkt.x5c = ((Player*)g_7f4ca0)[i].x4;
+						pkt.x5c = ((Player*)gm_EntitySlotTable)[i].x4;
 						pkt.x58 = (char) targetId;
 						cm_SendCopyEntityData(&pkt);
 						n++;
@@ -154,11 +154,11 @@ void __cdecl d2_ShowTrainingDialog(unsigned char* obj, char* sceneObj, int targe
 						io_FormatTextBuffer(buf, 0x1a4a, 3);
 						d2_ShowModalMessageBox(buf, 0);
 					}
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				}
 			}
 			else if (d2_CurrentElementId == btn2) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	} while (main_RunFrameLoop((void*) d2_ShowTrainingDialog, 0x677c7) != 0);

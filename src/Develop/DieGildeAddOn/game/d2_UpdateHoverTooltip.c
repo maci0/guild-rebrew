@@ -5,16 +5,16 @@
  * action code and finally dispatches it to the tooltip channel. */
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern int g_7746b4;
-extern int g_7746a4;
-extern int g_7746c4;
-extern int g_7746c8;
-extern short* g_7746cc;
+extern int sv_HoveredCharacter;
+extern int d2_HoveredSceneObject;
+extern int d2_VisitedBuilding;
+extern int d2_InteriorBuilding;
+extern short* sv_SelectedBuilding;
 extern int sv_HoveredObjekt;
 extern int g_14ce8cc;
 extern int g_67fcb4;
 extern char* g_14a5310[];
-extern char g_6b5c60[];
+extern char str_empty[];
 
 unsigned short __cdecl fcn_0042e410(int a);
 int __cdecl he_StartHandlungSearch(int n, ...);
@@ -48,10 +48,10 @@ void __cdecl d2_UpdateHoverTooltip(void)
 	char mode;
 	int action;
 
-	if (g_7746b4 == 0) {
-		if (g_7746a4 == 0)
+	if (sv_HoveredCharacter == 0) {
+		if (d2_HoveredSceneObject == 0)
 			return;
-		if (*(int*) (g_7746a4 + 0x220) != 2)
+		if (*(int*) (d2_HoveredSceneObject + 0x220) != 2)
 			return;
 		if (sv_HoveredObjekt != 0)
 			return;
@@ -60,33 +60,33 @@ void __cdecl d2_UpdateHoverTooltip(void)
 		return;
 	sel = 0;
 	kind = 0;
-	if (g_7746c4 != 0)
-		sel = (unsigned char*) g_7746c4;
-	else if (g_7746c8 != 0)
-		sel = (unsigned char*) g_7746c8;
+	if (d2_VisitedBuilding != 0)
+		sel = (unsigned char*) d2_VisitedBuilding;
+	else if (d2_InteriorBuilding != 0)
+		sel = (unsigned char*) d2_InteriorBuilding;
 	if (sel != 0)
 		kind = &((struct Building_531d20*) lpGebaeudePROT)[*sel];
-	if (g_7746b4 == 0
-	    || (gm_GetEntityUiFlags(g_774970, 0, 0, g_7746b4), g_7746b4 == 0))
-		rec = g_7746a4 != 0 ? ch_FindCharacterByKey(g_7746a4) : 0;
+	if (sv_HoveredCharacter == 0
+	    || (gm_GetEntityUiFlags(gm_LocalPlayerSlot, 0, 0, sv_HoveredCharacter), sv_HoveredCharacter == 0))
+		rec = d2_HoveredSceneObject != 0 ? ch_FindCharacterByKey(d2_HoveredSceneObject) : 0;
 	else
-		rec = *(int*) (g_7746b4 + 0x184);
+		rec = *(int*) (sv_HoveredCharacter + 0x184);
 	if (rec != 0 && (*(unsigned char*) (rec + 4) & 1) == 0)
 		return;
-	if (sel != 0 && !(kind->class_id == 0x16 && *g_7746cc == 0x120) && kind->class_id != 0x0f)
+	if (sel != 0 && !(kind->class_id == 0x16 && *sv_SelectedBuilding == 0x120) && kind->class_id != 0x0f)
 		return;
 	fcn_0042e410(4);
 	id = -1;
-	text[0] = g_6b5c60[0];
+	text[0] = str_empty[0];
 	for (i = 1; i < 0x200; i++)
 		text[i] = 0;
 	obj = -1;
-	if (g_7746b4 != 0) {
+	if (sv_HoveredCharacter != 0) {
 		mode = 1;
-		if (*(unsigned char*) (g_7746b4 + 0x164) != 0)
-			i = gm_MapEntityStatRange(*(unsigned char*) (g_7746b4 + 0x164));
-		else if (*(unsigned char*) (g_7746b4 + 0x165) != 0)
-			i = gm_MapEntityToCategorySlot(*(unsigned char*) (g_7746b4 + 0x165));
+		if (*(unsigned char*) (sv_HoveredCharacter + 0x164) != 0)
+			i = gm_MapEntityStatRange(*(unsigned char*) (sv_HoveredCharacter + 0x164));
+		else if (*(unsigned char*) (sv_HoveredCharacter + 0x165) != 0)
+			i = gm_MapEntityToCategorySlot(*(unsigned char*) (sv_HoveredCharacter + 0x165));
 		else
 			goto set_idx_00531d20;
 		if (i == 0x0b || i == 0x0c) {
@@ -98,10 +98,10 @@ void __cdecl d2_UpdateHoverTooltip(void)
 		set_idx_00531d20:
 			idx = (unsigned short) fcn_0042e410(4) + 1;
 		}
-		rec = *(int*) (g_7746b4 + 0x17c);
+		rec = *(int*) (sv_HoveredCharacter + 0x17c);
 		if (rec != 0) {
 			idx = -1;
-			action = *(unsigned char*) (g_7746b4 + 0x180);
+			action = *(unsigned char*) (sv_HoveredCharacter + 0x180);
 			switch (action) {
 			case 0x49:
 				ent = (unsigned char*) gm_SearchTable67(*(int*) (rec + 0xac));
@@ -129,8 +129,8 @@ void __cdecl d2_UpdateHoverTooltip(void)
 					    (void*) (unsigned) *idp);
 				break;
 			case 0x14:
-				if (*(int*) (g_7746b4 + 0x16c) != 0) {
-					ent = *(unsigned char**) (g_7746b4 + 0x16c);
+				if (*(int*) (sv_HoveredCharacter + 0x16c) != 0) {
+					ent = *(unsigned char**) (sv_HoveredCharacter + 0x16c);
 					if (((struct Building_531d20*) lpGebaeudePROT)[*ent].class_id == 0x20)
 						io_FormatTextBuffer((char*) text,
 						    0x1286 + (fcn_0042e410(3) & 0xffff));
@@ -218,9 +218,9 @@ void __cdecl d2_UpdateHoverTooltip(void)
 				    0x1280 + (fcn_0042e410(3) & 0xffff));
 				break;
 			case 0x8c:
-				if (*(int*) (g_7746b4 + 0x16c) != 0) {
+				if (*(int*) (sv_HoveredCharacter + 0x16c) != 0) {
 					unsigned char* bp;
-					ent = *(unsigned char**) (g_7746b4 + 0x16c);
+					ent = *(unsigned char**) (sv_HoveredCharacter + 0x16c);
 					bp = (unsigned char*) lpGebaeudePROT + *ent * 0x24d;
 					if (*bp == 0x1d)
 						io_FormatTextBuffer((char*) text,
@@ -280,15 +280,15 @@ void __cdecl d2_UpdateHoverTooltip(void)
 		}
 		break;
 	}
-	if (g_7746b4 != 0) {
+	if (sv_HoveredCharacter != 0) {
 		if (obj != -1) {
-			d2_SetHoverTooltip(*(int*) (g_7746b4 + 0x184), obj, 0);
+			d2_SetHoverTooltip(*(int*) (sv_HoveredCharacter + 0x184), obj, 0);
 			return;
 		}
 		if (text[0] != 0)
-			d2_SetHoverTooltip(*(int*) (g_7746b4 + 0x184), 0, text);
+			d2_SetHoverTooltip(*(int*) (sv_HoveredCharacter + 0x184), 0, text);
 		return;
 	}
-	if (g_7746a4 != 0)
-		d2_SetHoverTooltip(ch_FindCharacterByKey(g_7746a4), obj, 0);
+	if (d2_HoveredSceneObject != 0)
+		d2_SetHoverTooltip(ch_FindCharacterByKey(d2_HoveredSceneObject), obj, 0);
 }

@@ -1,9 +1,9 @@
 extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 
 extern int __cdecl gm_CollectEntityCarts(int a0, int a1);
 extern int __cdecl io_FormatTextBuffer(char *a0, char *a1, ...);
@@ -68,7 +68,7 @@ void __cdecl d2_ShowNewCartDialog(int sourceObj)
     groupOffset = 35 * groupId;
     do
     {
-        if (g_100f1dc >= 0x5e2 && g_100f1dc <= 0x5e4)
+        if (d2_DialogButtonAction >= 0x5e2 && d2_DialogButtonAction <= 0x5e4)
         {
             for (i = 0; i < 3; i++)
             {
@@ -76,13 +76,13 @@ void __cdecl d2_ShowNewCartDialog(int sourceObj)
                     choiceIndex = i;
             }
         }
-        else if (g_100f1dc == 2)
+        else if (d2_DialogButtonAction == 2)
         {
             if (d2_CurrentElementId == confirmButton)
             {
                 priceValue = (int) eval_ObjektPreis2Credits(choiceIndex + 0x134, 100);
-                if (gm_CheckEntityStock((char *)(g_774970 * 0x21c + 0x7f4ca0), priceValue,
-                        (priceValue & 0xffffff00) | g_773d75))
+                if (gm_CheckEntityStock((char *)(gm_LocalPlayerSlot * 0x21c + 0x7f4ca0), priceValue,
+                        (priceValue & 0xffffff00) | gm_ActiveTownIndex))
                 {
                     switch (main_GetLanguage())
                     {
@@ -95,14 +95,14 @@ void __cdecl d2_ShowNewCartDialog(int sourceObj)
                     }
                     if (d2_ShowModalMessageBox(confirmBuf, 0x101))
                     {
-                        cm_RequestTransferCurrencyNoKill(-1, *(int *)(g_774970 * 0x21c + 0x7f4ca4),
-                            g_773d75, priceValue);
-                        v = gm_GetEntityTableEntry(g_774970 * 0x21c + 0x7f4ca0);
+                        cm_RequestTransferCurrencyNoKill(-1, *(int *)(gm_LocalPlayerSlot * 0x21c + 0x7f4ca4),
+                            gm_ActiveTownIndex, priceValue);
+                        v = gm_GetEntityTableEntry(gm_LocalPlayerSlot * 0x21c + 0x7f4ca0);
                         if (v != 0)
                             *(int *)(v + 0x50) = *(int *)(v + 0x50) + priceValue;
                         cm_SendSellObjekt(*(int *)(sourceObj + 1), -1, choiceIndex + 0x134, 1,
-                            g_773d75, 0);
-                        g_774654 = 1;
+                            gm_ActiveTownIndex, 0);
+                        d2_DialogCloseRequested = 1;
                     }
                 }
             }
@@ -114,8 +114,8 @@ void __cdecl d2_ShowNewCartDialog(int sourceObj)
             d2_SetControlText(confirmButton, messageBuf);
             d2_CenterElement(confirmButton);
         }
-        if (g_14ce8e0 != 0)
-            g_774654 = 1;
+        if (io_RightButtonReleased != 0)
+            d2_DialogCloseRequested = 1;
     } while (main_RunFrameLoop((void *)0x5b9980, 0x677c7) != 0);
     d2_DestroyForm(h);
     d2_ClearRadioGroup(groupId);

@@ -13,7 +13,7 @@ typedef struct Obj {
 // SIZE 0x2bc
 
 #include "Develop/client_types.h"
-extern D2_FORM_RECORD g_1038140[];
+extern D2_FORM_RECORD d2_Forms[];
 
 void __cdecl d2_ResetFormBackground(int k);
 void __cdecl d2_CaptureFormPageTextures(int k, char* a, char* b);
@@ -24,7 +24,7 @@ int __cdecl d2_SetFormTextures(int formId, char* topTex, char* bottomTex)
 {
 	Obj* form;
 
-	form = &((Obj*)g_1038140)[formId];
+	form = &((Obj*)d2_Forms)[formId];
 	if (!form->used) {
 		return 0;
 	}

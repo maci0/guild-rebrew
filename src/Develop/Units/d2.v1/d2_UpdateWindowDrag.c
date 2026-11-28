@@ -1,8 +1,8 @@
 extern int g_14ce8e8;
-extern short g_14ce8c0;
-extern short g_14ce8c2;
-extern short g_14cf900;
-extern short g_14cf902;
+extern short io_ActiveCursorX;
+extern short io_ActiveCursorY;
+extern short io_PolledCursorState;
+extern short io_PolledCursorY;
 extern int g_774a74;
 extern int g_774a6c;
 extern int g_774a70;
@@ -39,8 +39,8 @@ int __cdecl d2_UpdateWindowDrag(char* w)
 		int px;
 
 		if (g_774a74 == 0) {
-			x = g_14ce8c0;
-			y = g_14ce8c2;
+			x = io_ActiveCursorX;
+			y = io_ActiveCursorY;
 			g_6772c4 = 0;
 			g_774a74 = 1;
 			g_774a6c = x;
@@ -63,8 +63,8 @@ int __cdecl d2_UpdateWindowDrag(char* w)
 			bx = g_774a5c;
 			bp = g_774a60;
 		}
-		px = g_14cf900 - x;
-		py = g_14cf902 - y;
+		px = io_PolledCursorState - x;
+		py = io_PolledCursorY - y;
 		px = (int) (float) px;
 		py = (int) (float) py;
 		if (*(int*) (w + 0x268) != bx + px || *(int*) (w + 0x258) != bp + py) {

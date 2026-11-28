@@ -1,12 +1,12 @@
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 #include "Develop/DieGildeAddOn/command/client_packet_builder.h"
-extern int g_772908;
+extern int d2_ActiveRouteListHead;
 extern int g_772900;
 extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_6ab3dc;
 extern int tp_d2_SelectedControl;
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern char* g_772904;
 #include <string.h>
 
@@ -54,7 +54,7 @@ int __cdecl d2_RunTradeRouteEditor(char *obj)
 	if (obj == 0) {
 		return 0;
 	}
-	g_772908 = (int) rt_CloneRoutePoints(*(void **) (obj + 0x29));
+	d2_ActiveRouteListHead = (int) rt_CloneRoutePoints(*(void **) (obj + 0x29));
 	memset(town + 0xc, 0, 0x50);
 	*(int *) (town + 0x10) = 0x400;
 	*(int *) (town + 0x1c) = 0;
@@ -70,21 +70,21 @@ int __cdecl d2_RunTradeRouteEditor(char *obj)
 		*(int *) (0x10058a0 + i * 8) = -1;
 		*(int *) (0x10058a4 + i * 8) = 0;
 	}
-	head = g_772908;
+	head = d2_ActiveRouteListHead;
 	if (head == 0) {
 		changed = 1; cm_BeginPacketFieldDelta(obj, *(int *) (obj + 2));
-		cm_AppendCommandSyncField(1, 1, (int) (obj - g_aed32c) + 0x33, &changed);
+		cm_AppendCommandSyncField(1, 1, (int) (obj - cm_PacketDeltaBase) + 0x33, &changed);
 		cm_SendSetAttribute();
 		head = (int) rt_AllocRoutePoint(0);
-		g_772908 = head;
+		d2_ActiveRouteListHead = head;
 		*(int *) (head + 4) = *(int *) (obj + 0x1c);
 		*(int *) head = *(int *) (obj + 2);
 		d2_AddRoutePointMarker(town, obj, (void *) head, (void *) head);
-		d2_SelectRadioGroup(g_6816d8, 0);
+		d2_SelectRadioGroup(d2_RouteRadioGroupId, 0);
 		g_772904 = 0;
 	} else {
 		for (p = (char *) head; p != 0; p = *(char **) (p + 0x3c)) {
-			d2_AddRoutePointMarker(town, obj, (void *) g_772908, p);
+			d2_AddRoutePointMarker(town, obj, (void *) d2_ActiveRouteListHead, p);
 		}
 	}
 	d2_SetForm(*(int *) town, 2);
@@ -92,26 +92,26 @@ int __cdecl d2_RunTradeRouteEditor(char *obj)
 		*(int *) 0x14b5e90, *(int *) 0x14b5e94, *(int *) 0x14b5e98);
 	form0 = forms[0]; form1 = forms[1]; form2 = forms[2];
 	while (main_RunFrameLoop((void *) 0x4bfe00, 0x657c7) != 0) {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 		g_6ab3dc = (tp_d2_SelectedControl == 0);
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == form2) {
 				d2_RunRoutingSettingsDialog(obj, town);
 			} else if (d2_CurrentElementId == form0) {
-				if (g_6816d8 != -1) {
-					v = *(int *) (g_6816d8 * 0x8c + 0x102cbc8);
+				if (d2_RouteRadioGroupId != -1) {
+					v = *(int *) (d2_RouteRadioGroupId * 0x8c + 0x102cbc8);
 					if (v != -1) {
 						d2_EditRoutePointDialog(*(int *) (0x10058a4 + v * 8), town);
 					}
 				}
 			} else if (d2_CurrentElementId == form1 && g_772904 != 0) {
-				p = (char *) rt_AllocRoutePoint((void *) g_772908);
+				p = (char *) rt_AllocRoutePoint((void *) d2_ActiveRouteListHead);
 				*(int *) (p + 4) = *(int *) (g_772904 + 1);
 				*(int *) p = *(int *) (obj + 2);
-				d2_AddRoutePointMarker(town, obj, (void *) g_772908, p);
-				d2_SelectRadioGroup(g_6816d8, g_772900 - 1);
+				d2_AddRoutePointMarker(town, obj, (void *) d2_ActiveRouteListHead, p);
+				d2_SelectRadioGroup(d2_RouteRadioGroupId, g_772900 - 1);
 				g_772904 = 0;
 			}
 		}
@@ -127,7 +127,7 @@ int __cdecl d2_RunTradeRouteEditor(char *obj)
 						v = *(int *) (0x10058a4 + j * 8);
 						if (v != 0 && (v = *(int *) (v + 4)) != -1 &&
 						    gm_SearchTable67(v) == (int) g_772904) {
-							d2_SelectRadioGroup(g_6816d8, j);
+							d2_SelectRadioGroup(d2_RouteRadioGroupId, j);
 							g_772904 = 0;
 						}
 					}
@@ -142,24 +142,24 @@ int __cdecl d2_RunTradeRouteEditor(char *obj)
 			d2_SetElementEnabled(form1, 0);
 			d2_SetElementEnabled(form0, 1);
 		}
-		d2_UpdateRouteMapControlStates((void *) g_772908, town);
+		d2_UpdateRouteMapControlStates((void *) d2_ActiveRouteListHead, town);
 		d2_UpdateAllRoutePointImages();
 		d2_PollRadioSlots();
 	}
-	n = rt_CountRoutePoints((void *) g_772908);
+	n = rt_CountRoutePoints((void *) d2_ActiveRouteListHead);
 	if (n >= 2) {
-		cm_SendSetObjektRoute((int) obj, (void *) g_772908);
+		cm_SendSetObjektRoute((int) obj, (void *) d2_ActiveRouteListHead);
 	} else {
 		changed = 0; cm_SendClearObjektResources((int) obj);
 		cm_BeginPacketFieldDelta(obj, *(int *) (obj + 2));
-		cm_AppendCommandSyncField(1, 1, (int) (obj - g_aed32c) + 0x33, &changed);
+		cm_AppendCommandSyncField(1, 1, (int) (obj - cm_PacketDeltaBase) + 0x33, &changed);
 		cm_SendSetAttribute();
 	}
 	d2_DestroyMapDialog(town);
-	if (g_6816d8 != -1) {
-		d2_ClearRadioGroup(g_6816d8);
-		g_6816d8 = -1;
+	if (d2_RouteRadioGroupId != -1) {
+		d2_ClearRadioGroup(d2_RouteRadioGroupId);
+		d2_RouteRadioGroupId = -1;
 	}
-	rt_FreeRoutePoints((void *) g_772908);
+	rt_FreeRoutePoints((void *) d2_ActiveRouteListHead);
 	return 0;
 }

@@ -4,7 +4,7 @@ extern char g_681130[];
 extern char g_68112c[];
 extern char g_681110[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
 char* __cdecl gm_LookupMissionSpec(int);
@@ -36,10 +36,10 @@ void __cdecl d2_ShowMissionSpecDialog(int a1, int flags)
 	fcn_0064d41a(buf, g_681110, *(int*) (r + 0xc));
 	x = d3snd_PlaySoundEffect(-7, 0, buf, -1);
 	while (main_RunFrameLoop(d2_ShowMissionSpecDialog, flags) != 0) {
-		if (g_14ce8e0 != 0)
-			g_774654 = 1;
-		if (g_100f1dc == 2)
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0)
+			d2_DialogCloseRequested = 1;
+		if (d2_DialogButtonAction == 2)
+			d2_DialogCloseRequested = 1;
 	}
 	if (h != -1)
 		d2_DestroyForm(h);

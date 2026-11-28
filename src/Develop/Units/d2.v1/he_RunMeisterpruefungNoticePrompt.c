@@ -4,12 +4,12 @@
 
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern trade_868080 g_868080[];
-extern unsigned char g_773d75;
+extern trade_868080 gm_CityDisplayNames[];
+extern unsigned char gm_ActiveTownIndex;
 extern int g_100f884;
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern char g_6a5a10[];
-extern char g_6811b0[];
+extern char str_dollar_C[];
 
 int __cdecl gm_CompareGameTime(pos14_7f4c00*, char*);
 void __cdecl d2_CloseActionPopup(char*);
@@ -36,8 +36,8 @@ void __cdecl he_RunMeisterpruefungNoticePrompt(char* u)
 			}
 			d2_CenterDialogWindows(*(int*) (*(char**) (u + 0x74) + 8));
 			d2_SetForm(*(int*) (*(char**) (u + 0x74) + 8), 0);
-			io_AppendText((int) g_6811b0);
-			io_AppendText(0x10b9, &g_868080[g_773d75], *(unsigned short*) (u + 8));
+			io_AppendText((int) str_dollar_C);
+			io_AppendText(0x10b9, &gm_CityDisplayNames[gm_ActiveTownIndex], *(unsigned short*) (u + 8));
 			*(int*) (u + 0x70) = 1;
 			break;
 		case 1:
@@ -50,17 +50,17 @@ void __cdecl he_RunMeisterpruefungNoticePrompt(char* u)
 				*(int*) (u + 0x70) = 0;
 				return;
 			}
-			if (g_100f884 != *(int*) (*(char**) (u + 0x74) + 8) || g_100f1dc == -1) {
+			if (g_100f884 != *(int*) (*(char**) (u + 0x74) + 8) || d2_DialogButtonAction == -1) {
 				return;
 			}
-			if (g_100f1dc == 2) {
+			if (d2_DialogButtonAction == 2) {
 				o = he_StartHandlungSearch(2, 2, *(unsigned short*) (u + 8), 1, *(int*) (u + 0xb0));
 				*(int*) (o + 0xb0) = 1;
 				d2_CloseActionPopup(u);
 				he_FreeAction(u);
 				return;
 			}
-			if (g_100f1dc == 1) {
+			if (d2_DialogButtonAction == 1) {
 				d2_CloseActionPopup(u);
 				he_FreeAction(u);
 			}

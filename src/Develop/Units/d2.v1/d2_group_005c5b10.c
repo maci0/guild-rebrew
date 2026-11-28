@@ -38,16 +38,16 @@ typedef struct
 
 
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #include "Develop/client_types.h"
-extern Win_1015f40 g_1015f40[0x60];
+extern Win_1015f40 d2_Windows[0x60];
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern pos14_7f4c00 gm_GameTime;
 extern int d2_CurrentWindowId;
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char s_6ac738[];
 extern char s_6ac730[];
@@ -75,8 +75,8 @@ typedef struct {
 } Pair;
 
 extern D2_ITEM_BUTTON g_776c60[6];
-extern char* g_775318;
-extern char* g_77255c;
+extern char* d2_InventoryPanelEntity;
+extern char* d2_CurrentWindow;
 extern int g_10161cc[];
 
 int __cdecl d2_CreateChildWindow(int, int, int, int, int, int);
@@ -84,7 +84,7 @@ int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl io_AppendText(int, ...);
 
 /* ADDRESS: GOLDTL 0x006abb00 */
-int g_6abb00 = 0xffffffff;
+int d2_InventoryPanelWindowId = 0xffffffff;
 
 unsigned char _dpad_6ab570[1424] = {
     0x5f, 0x4e, 0x41, 0x43, 0x48, 0x52, 0x49, 0x43, 0x48, 0x54, 0x45, 0x4e, 0x5f, 0x44, 0x4f, 0x4d,
@@ -191,42 +191,43 @@ void __cdecl d2_RunGelageDialog(char* a)
 	dlg = d2_LoadForm(0, 0, s_6ac738);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);
-	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8[0] = 0xe;
-	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8[4] = 0xe;
-	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8[8] = 0xe;
-	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8[12] = 0xe;
+	*(int*) &((D2_WIN*)d2_Windows)[d2_CurrentWindowId].pad3a8[0] = 0xe;
+	*(int*) &((D2_WIN*)d2_Windows)[d2_CurrentWindowId].pad3a8[4] = 0xe;
+	*(int*) &((D2_WIN*)d2_Windows)[d2_CurrentWindowId].pad3a8[8] = 0xe;
+	*(int*) &((D2_WIN*)d2_Windows)[d2_CurrentWindowId].pad3a8[12] = 0xe;
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x19a9);
 	d2_SetForm(dlg, 2);
-	s = io_AppendText(0x19aa, g_773d75);
+	s = io_AppendText(0x19aa, gm_ActiveTownIndex);
 	sl = d2_GetWindowListItem(dlg, 2, s);
 	btn2 = d2_GetWindowListItem(dlg, 2, s + 1);
-	v = gm_AmountToUnits(gm_AccumulateTyped2(&((Player*)g_7f4ca0)[g_774970]), g_773d75) > 1000 ? 1000 : gm_AmountToUnits(gm_AccumulateTyped2(&((Player*)g_7f4ca0)[g_774970]), g_773d75);
+	v = gm_AmountToUnits(gm_AccumulateTyped2(&((Player*)gm_EntitySlotTable)[gm_LocalPlayerSlot]),
+		gm_ActiveTownIndex) > 1000 ? 1000 : gm_AmountToUnits(gm_AccumulateTyped2(&((Player*)gm_EntitySlotTable)[gm_LocalPlayerSlot]), gm_ActiveTownIndex);
 	d2_SetElementValue(sl, 0x64, v, 0x64);
 	if (main_RunFrameLoop((void*) d2_RunGelageDialog, 0x677c7) != 0) {
 		do {
-			if (g_100f1dc == 2) {
+			if (d2_DialogButtonAction == 2) {
 				if (btn2 != -1 && d2_CurrentElementId == btn2) {
-					v = gm_ConvertUnitsToAmount(d2_GetControlValue(sl), g_773d75);
+					v = gm_ConvertUnitsToAmount(d2_GetControlValue(sl), gm_ActiveTownIndex);
 					memset(&pkt, 0, sizeof(pkt));
 					pkt.type = 0x38;
-					pkt.x8 = ((Player*)g_7f4ca0)[g_774970].x4;
+					pkt.x8 = ((Player*)gm_EntitySlotTable)[gm_LocalPlayerSlot].x4;
 					pkt.xc = *(int*) (a + 1);
 					pkt.name = (*(pos14_7f4c00*)&gm_GameTime);
 					pkt.x36 = 1;
 					pkt.x58 = v;
 					cm_SendLogAction(s_6ac730);
-					cm_RequestMoveCredits(-1, ((Player*)g_7f4ca0)[g_774970].x4, g_773d75, v);
+					cm_RequestMoveCredits(-1, ((Player*)gm_EntitySlotTable)[gm_LocalPlayerSlot].x4, gm_ActiveTownIndex, v);
 					cm_SendCopyEntityData(&pkt);
 					cm_SendTraceEnd(s_6ac730);
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				}
 			}
-			else if (g_100f1dc == 1) {
-				g_774654 = 1;
+			else if (d2_DialogButtonAction == 1) {
+				d2_DialogCloseRequested = 1;
 			}
-			if (g_14ce8e0 != 0) {
-				g_774654 = 1;
+			if (io_RightButtonReleased != 0) {
+				d2_DialogCloseRequested = 1;
 			}
 		} while (main_RunFrameLoop((void*) d2_RunGelageDialog, 0x677c7) != 0);
 	}
@@ -239,15 +240,15 @@ void __cdecl d2_OpenEntityQuickSlots(int layer, int x, int y, unsigned short who
 {
 	int i;
 
-	if (g_6abb00 == -1) {
+	if (d2_InventoryPanelWindowId == -1) {
 		for (i = 0; i < 6; i++) {
 			((Pair*)g_776c60)[i].id = -1;
 			((Pair*)g_776c60)[i].v = 0;
 		}
-		g_775318 = g_7f4ca0 + who * 540;
-		g_6abb00 = d2_CreateChildWindow(x, y, 0xcd, 0xc4, 0x10, layer);
-		d2_AddElementToWindow(0, 0, 0x587, g_6abb00);
-		d2_CreateChildWindow(0, 0x2c, *(int*) (g_77255c + 0xc), 0x1e, 0x110, d2_CurrentWindowId);
+		d2_InventoryPanelEntity = gm_EntitySlotTable + who * 540;
+		d2_InventoryPanelWindowId = d2_CreateChildWindow(x, y, 0xcd, 0xc4, 0x10, layer);
+		d2_AddElementToWindow(0, 0, 0x587, d2_InventoryPanelWindowId);
+		d2_CreateChildWindow(0, 0x2c, *(int*) (d2_CurrentWindow + 0xc), 0x1e, 0x110, d2_CurrentWindowId);
 		g_10161cc[d2_CurrentWindowId * 243] = 0x54;
 		io_AppendText(text);
 	}

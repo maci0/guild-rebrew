@@ -3,15 +3,15 @@ extern char* lpGebaeudePROT;
 extern char* lpObjektePROT;
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern int d2_CurrentWindowId;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
-extern int g_100f1dc;
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
+extern int d2_DialogButtonAction;
 extern int g_14b556c;
-extern int g_774654;
+extern int d2_DialogCloseRequested;
 extern int main_LoopFlags;
 extern int d2_CurrentElementId;
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 int __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl d2_CheckOwnerBlocked(int);
@@ -139,7 +139,7 @@ void __cdecl d2_RunRohstoffsuchenDialog(unsigned char* gebaeude)
 		j = 0x19;
 		for (count = 0; count < n; count++) {
 			h = d2_AddElementToWindow(i, j, (int) ids[count] + 0xdf, d2_CurrentWindowId);
-			vp = (unsigned char*) &((D2_CONTROL_TL*)g_1015ea0)[h];
+			vp = (unsigned char*) &((D2_CONTROL_TL*)d2_Controls)[h];
 			*(int*)&((D2_CONTROL_TL*)vp)->value_05c = 1;
 			*(int*)&((D2_CONTROL_TL*)vp)->flags_1d0 = 3;
 			*(int*)&((D2_CONTROL_TL*)vp)->value_1dc = 100;
@@ -202,7 +202,7 @@ void __cdecl d2_RunRohstoffsuchenDialog(unsigned char* gebaeude)
 				d2_SetControlText(handles[i], text);
 			}
 		}
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			for (sel = 0; sel < n; sel++) {
 				if (handles[sel] == d2_CurrentElementId)
 					break;
@@ -214,9 +214,9 @@ void __cdecl d2_RunRohstoffsuchenDialog(unsigned char* gebaeude)
 				req.owner = *(unsigned int*) (*(unsigned short*) (gebaeude + 0x27) * 0x21c + 0x7f4ca4);
 				req.self = *(unsigned int*) (gebaeude + 1);
 				req.date0 = *(int*) 0x7f4c00;
-				req.date1 = g_7f4c04;
-				req.date2 = g_7f4c08;
-				req.date3 = g_7f4c0c;
+				req.date1 = gm_GameTimeHour;
+				req.date2 = gm_GameTimeSliceDword;
+				req.date3 = gm_GameTimeTailWord;
 				req.good = (unsigned short) ids[sel];
 				j = 0;
 				p = (unsigned char*) 0x7f4ca4;
@@ -247,8 +247,8 @@ void __cdecl d2_RunRohstoffsuchenDialog(unsigned char* gebaeude)
 				}
 				goto next;
 			}
-		} else if (g_14ce8e0) {
-			g_774654 = 1;
+		} else if (io_RightButtonReleased) {
+			d2_DialogCloseRequested = 1;
 		}
 next:
 		sel = main_RunFrameLoop(0x58d5f0, 0x677c7);

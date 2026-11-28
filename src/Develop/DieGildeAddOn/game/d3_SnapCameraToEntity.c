@@ -44,14 +44,14 @@ typedef struct House {
 // SIZE 0x21c
 
 #include "Develop/Units/d3/d3_camera.h"
-extern float g_662d40[3];
+extern float d3_UnitAxisVectors[3];
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern float g_7e3a40[3];
+extern float d3_SavedCameraPos[3];
 extern float d3_CameraTargetRotation[3];
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_7f4ca0[];
-extern char* g_7e2aa0;
-extern char* g_7746c0;
+extern char gm_EntitySlotTable[];
+extern char* d2_SelectedBuilding;
+extern char* d3_FocusedEntityObject;
 
 int __cdecl d3_GetObjectVerticalBounds(char* e, float* lo, float* hi);
 float* __stdcall D3DXMatrixTranspose(float* out, float* in);
@@ -84,9 +84,9 @@ void __cdecl d3_SnapCameraToEntity(Ent* entity)
 	obj = entity->obj;
 	d3_GetObjectVerticalBounds(obj, &lo, &hi);
 	D3DXMatrixTranspose(m, ((View*)d3_ActiveCamera)->mat);
-	a = g_662d40[0] * -600.0f;
-	b = g_662d40[1] * -600.0f;
-	c = g_662d40[2] * -600.0f;
+	a = d3_UnitAxisVectors[0] * -600.0f;
+	b = d3_UnitAxisVectors[1] * -600.0f;
+	c = d3_UnitAxisVectors[2] * -600.0f;
 	off.x = a * m[0] + b * m[4] + c * m[8];
 	off.y = a * m[1] + b * m[5] + c * m[9];
 	off.z = a * m[2] + b * m[6] + c * m[10];
@@ -112,12 +112,12 @@ void __cdecl d3_SnapCameraToEntity(Ent* entity)
 	d3_CameraTargetRotation[0] = rot.x;
 	d3_CameraTargetRotation[1] = rot.y;
 	d3_CameraTargetRotation[2] = rot.z;
-	g_7e3a40[0] = q.x;
-	g_7e3a40[1] = q.y;
-	g_7e3a40[2] = q.z;
+	d3_SavedCameraPos[0] = q.x;
+	d3_SavedCameraPos[1] = q.y;
+	d3_SavedCameraPos[2] = q.z;
 	d3_SetNodePosition((View*)d3_ActiveCamera, (Vec3*) &q);
 	d3_SetObjectRotation((View*)d3_ActiveCamera, &rot);
-	s = (Save*) gm_GetEntityTableEntry((char*) (((House *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])));
+	s = (Save*) gm_GetEntityTableEntry((char*) (((House *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[gm_LocalPlayerSlot])));
 	if (s != 0) {
 		*(int*) &s->pos.x = *(int*) &q.x;
 		*(int*) &s->pos.y = *(int*) &q.y;
@@ -126,6 +126,6 @@ void __cdecl d3_SnapCameraToEntity(Ent* entity)
 		*(int*) &s->rot.y = *(int*) &rot.y;
 		*(int*) &s->rot.z = *(int*) &rot.z;
 	}
-	g_7e2aa0 = (char*) entity;
-	g_7746c0 = entity->obj;
+	d2_SelectedBuilding = (char*) entity;
+	d3_FocusedEntityObject = entity->obj;
 }

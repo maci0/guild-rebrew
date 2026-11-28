@@ -15,8 +15,8 @@ typedef struct {
 	char pad1[0x24c];
 } GebProt_559aa0;
 
-extern int g_7e4538;
-extern int g_7e453c;
+extern int d3_RainEffect;
+extern int d3_SnowEffect;
 extern float g_6628cc;
 extern unsigned char* lpGebaeudePROT;
 extern unsigned char* lpGebaeudeINST;
@@ -66,8 +66,8 @@ void __cdecl gm_SimulatePoliticians(struct job* job)
 	gm_ResolveEntityById((void**) &record, 0, 0, job->item);
 	found = 0;
 	if (record != 0) {
-		divisor = (gm_RandomMod(6) & 0xffff) + 2 + (g_7e453c != 0)
-			+ (g_7e4538 != 0 ? 2 : 0);
+		divisor = (gm_RandomMod(6) & 0xffff) + 2 + (d3_SnowEffect != 0)
+			+ (d3_RainEffect != 0 ? 2 : 0);
 		if (gm_IsEntityAtBuilding(entity, record) == 0)
 			return;
 		candidate = *(char**) (entity + 0x184);
@@ -76,11 +76,11 @@ void __cdecl gm_SimulatePoliticians(struct job* job)
 			found = 1;
 			job->flags |= 0x40;
 			if (job->pada[2] == 0xff) { /* never true (signed char vs 0xff), as in the original; do not "fix" */
-				job->pada[2] = (char) g_7f4c04;
+				job->pada[2] = (char) gm_GameTimeHour;
 				cm_RequestChangeBits(*(unsigned int*) (entity + 4), 0x1c8, 4, 0, 0x1000);
 				return;
 			}
-			if ((g_7f4c04 & 0xffff) <= (signed char) job->pada[2] + 1)
+			if ((gm_GameTimeHour & 0xffff) <= (signed char) job->pada[2] + 1)
 				return;
 			job->flags &= 0xbf;
 			cm_RequestChangeBits(*(unsigned int*) (entity + 4), 0x1c8, 4, 0x1000, 0);

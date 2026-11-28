@@ -19,8 +19,8 @@ struct Bank {
 	Bank* next;
 };
 
-extern int g_6b7d7c;
-extern int* g_6b7d78;
+extern int sb_WaveDriver;
+extern int* sb_BankListHead;
 extern char g_14cbc20[];
 
 Sample* __cdecl sb_FindSampleByName(Bank* bank, const char* name)
@@ -32,7 +32,7 @@ Sample* __cdecl sb_FindSampleByName(Bank* bank, const char* name)
 
 	r = 0;
 	i = 0;
-	if (g_6b7d7c == 0) {
+	if (sb_WaveDriver == 0) {
 		return &(*(Sample*)g_14cbc20);
 	}
 	if (bank != 0) {
@@ -44,7 +44,7 @@ Sample* __cdecl sb_FindSampleByName(Bank* bank, const char* name)
 			}
 		}
 	} else {
-		for (b = ((Bank*)g_6b7d78); b != 0; b = b->next) {
+		for (b = ((Bank*)sb_BankListHead); b != 0; b = b->next) {
 			r = sb_FindSampleByName(b, name);
 			if (r != 0) {
 				break;

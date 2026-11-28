@@ -1,6 +1,6 @@
-extern int g_6b7d7c;
+extern int sb_WaveDriver;
 extern int MemUsed;
-extern char* g_6b7d78;
+extern char* sb_BankListHead;
 extern char g_14cbae0[];
 extern char g_678f70[]; /* Unloading Samplebank %s ... MemUsed before unloading %d bytes. */
 extern char g_678f28[]; /* Finished unloading Samplebank %s ... MemUsed after unloading %d bytes. */
@@ -24,13 +24,13 @@ int __cdecl sb_ReleaseSampleBank(char* a0)
 
 	r = 0;
 	prev = 0;
-	if (g_6b7d7c == 0) {
+	if (sb_WaveDriver == 0) {
 		return 1;
 	}
 	if (MemUsed == 0 || a0 == 0) {
 		r = -1; goto done;
 	}
-	bank = g_6b7d78;
+	bank = sb_BankListHead;
 	if (bank == 0) {
 		goto done;
 	}
@@ -50,7 +50,7 @@ found:
 	if (prev != 0) {
 		*(char**) (prev + 0x13c) = *(char**) (bank + 0x13c);
 	} else {
-		g_6b7d78 = *(char**) (bank + 0x13c);
+		sb_BankListHead = *(char**) (bank + 0x13c);
 	}
 	name = a0 + 0x32;
 	fcn_0064d41a(g_14cbae0, g_678f70, name, MemUsed);

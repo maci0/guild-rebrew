@@ -3,11 +3,11 @@
 #include "Develop/Units/d2.v1/client_dialog_helpers.h"
 
 extern int gm_GameTime;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_7f4ca4[];
+extern char gm_EntityIdField[];
 
 int __cdecl cm_GetCommandStatus(int id);
 int __cdecl cm_SendSetHE(int a, char* unit);
@@ -116,10 +116,10 @@ void __cdecl he_RunAction0x2c(char* action)
 		*(unsigned char*) (msg + 0x26) = 0xa2;
 		*(int*) (msg + 0x14) = -1;
 		*(int*) (msg + 0x0c) =
-		    *(int*) (g_7f4ca4 + (unsigned short) g_774970 * 0x21c);
-		*(int*) (msg + 0x1c) = g_7f4c04;
-		*(int*) (msg + 0x20) = g_7f4c08;
-		*(unsigned short*) (msg + 0x24) = g_7f4c0c;
+		    *(int*) (gm_EntityIdField + (unsigned short) gm_LocalPlayerSlot * 0x21c);
+		*(int*) (msg + 0x1c) = gm_GameTimeHour;
+		*(int*) (msg + 0x20) = gm_GameTimeSliceDword;
+		*(unsigned short*) (msg + 0x24) = gm_GameTimeTailWord;
 		*(int*) (msg + 0x34) = waitId;
 		gm_AddTime((pos14_7f4c00*) (msg + 0x18), 0, 0x2d, 0);
 		cm_EnqueueStagedPacket(pkt);

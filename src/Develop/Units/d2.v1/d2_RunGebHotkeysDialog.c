@@ -87,7 +87,7 @@ void __cdecl d2_RunGebHotkeysDialog(void)
 		if (redraw) {
 			d2_SetForm(win, 1);
 			if (last_win != -1) {
-				old_sel = *(int*) (y + (unsigned long)&g_102cbc8);
+				old_sel = *(int*) (y + (unsigned long)&d2_RadioGroupItems);
 				d2_ClearRadioGroup(last_win);
 			}
 			d2_ClearWindowChildren(*(int*) &d2_CurrentWindowId, 1);
@@ -96,7 +96,7 @@ void __cdecl d2_RunGebHotkeysDialog(void)
 			y = 9;
 			row = (int*) 0x779d08;
 			slot = last_win * 0x8c;
-			*(int*) (slot + (unsigned long)&g_102cbc0) = 1;
+			*(int*) (slot + (unsigned long)&d2_RadioGroups) = 1;
 			do {
 				ent = 0;
 				res = 0;
@@ -110,18 +110,18 @@ void __cdecl d2_RunGebHotkeysDialog(void)
 					d2_AddElementToWindow(0x60, y - 9, *ent + 0x427, *(int*) &d2_CurrentWindowId);
 					io_FormatTextBuffer(buf, 0x6a9b48, *(unsigned short*) &ent[0x27], ent);
 					v3 = d2_ShowTxt(0x9c, y, buf, *(int*) &d2_CurrentWindowId);
-					((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[v3].width = 0x80;
-					((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[v3].font = 0x54;
+					((D2_CONTROL_TL*) (*(int*) &d2_Controls))[v3].width = 0x80;
+					((D2_CONTROL_TL*) (*(int*) &d2_Controls))[v3].font = 0x54;
 				} else {
 					v3 = d2_ShowTxt(0x60, y, *(char**) 0x14ad494, *(int*) &d2_CurrentWindowId);
-					((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[v3].font = 0x53;
+					((D2_CONTROL_TL*) (*(int*) &d2_Controls))[v3].font = 0x53;
 				}
 				if (res != 0 && *res != 0xfd) {
 					d2_AddElementToWindow(0x128, y - 9, *res + 0xdf, *(int*) &d2_CurrentWindowId);
 					io_FormatTextBuffer(buf, 0x6a9b44, (int) *res * 2 + 0x9a8);
 					v3 = d2_ShowTxt(0x164, y + 9, buf, *(int*) &d2_CurrentWindowId);
-					((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[v3].width = 0x80;
-					((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[v3].font = 0x54;
+					((D2_CONTROL_TL*) (*(int*) &d2_Controls))[v3].width = 0x80;
+					((D2_CONTROL_TL*) (*(int*) &d2_Controls))[v3].font = 0x54;
 				}
 				row += 3;
 				i++;
@@ -132,24 +132,24 @@ void __cdecl d2_RunGebHotkeysDialog(void)
 			item = old_sel;
 			y = slot;
 		}
-		if (g_14ce8e0 != 0 || *(char*) &g_14cf950 == 'X' || *(char*) &g_14cf950 == 1)
-			g_774654 = 1;
-		if (*(int*) &g_100f1dc != -1) {
+		if (io_RightButtonReleased != 0 || *(char*) &io_LastKeyScancode == 'X' || *(char*) &io_LastKeyScancode == 1)
+			d2_DialogCloseRequested = 1;
+		if (*(int*) &d2_DialogButtonAction != -1) {
 			sel = *(int*) 0x67d370;
-			if (*(int*) 0x67d370 == clicks[1] && *(int*) (y + (unsigned long)&g_102cbc8) != -1) {
-				d2_ClearBookmarkSlot((char*) (*(int*) (y + (unsigned long)&g_102cbc8) * 0xc + (unsigned long)&g_779d00));
+			if (*(int*) 0x67d370 == clicks[1] && *(int*) (y + (unsigned long)&d2_RadioGroupItems) != -1) {
+				d2_ClearBookmarkSlot((char*) (*(int*) (y + (unsigned long)&d2_RadioGroupItems) * 0xc + (unsigned long)&main_CameraBookmarks));
 				redraw = 1;
 			}
-			if (sel == clicks[0] && *(int*) (y + (unsigned long)&g_102cbc8) != -1) {
-				d2_SaveBookmarkSlot(*(int*) (y + (unsigned long)&g_102cbc8));
+			if (sel == clicks[0] && *(int*) (y + (unsigned long)&d2_RadioGroupItems) != -1) {
+				d2_SaveBookmarkSlot(*(int*) (y + (unsigned long)&d2_RadioGroupItems));
 				redraw = 1;
 			}
 		}
 		d2_UpdateRadioGroup(last_win);
-		i = *(int*) (y + (unsigned long)&g_102cbc8) != -1 &&
-			*(int*) (*(int*) (y + (unsigned long)&g_102cbc8) * 0xc + 0x779d04) != -1;
+		i = *(int*) (y + (unsigned long)&d2_RadioGroupItems) != -1 &&
+			*(int*) (*(int*) (y + (unsigned long)&d2_RadioGroupItems) * 0xc + 0x779d04) != -1;
 		d2_SetElementEnabled(clicks[1], i);
-		d2_SetElementEnabled(clicks[0], *(int*) (y + (unsigned long)&g_102cbc8) != -1);
+		d2_SetElementEnabled(clicks[0], *(int*) (y + (unsigned long)&d2_RadioGroupItems) != -1);
 		d2_FocusBookmarkSlot();
 	} while (main_RunFrameLoop((int) d2_RunGebHotkeysDialog, 0x657c7));
 	d2_ClearRadioGroup(last_win);

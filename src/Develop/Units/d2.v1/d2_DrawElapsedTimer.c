@@ -1,4 +1,4 @@
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_68bfd0[];
 
@@ -12,7 +12,7 @@ void __cdecl d2_DrawElapsedTimer(void)
 	char buf[0x80];
 
 	d2_SelectFont(0x54);
-	fcn_0064d41a(buf, g_68bfd0, (((unsigned int)g_6b7fac) - (*(unsigned int*)&g_772f54)) * 14 / 60000,
-	    (((unsigned int)g_6b7fac) - (*(unsigned int*)&g_772f54)) * 14 / 1000 % 60, (((unsigned int)g_6b7fac) - (*(unsigned int*)&g_772f54)) * 14 % 1000);
-	d2_DrawWordWrappedText(0, 10, 200, 0x18, g_77250c, buf, 0x30);
+	fcn_0064d41a(buf, g_68bfd0, (((unsigned int)gm_GameTicks) - (*(unsigned int*)&cut_StartTick)) * 14 / 60000,
+	    (((unsigned int)gm_GameTicks) - (*(unsigned int*)&cut_StartTick)) * 14 / 1000 % 60, (((unsigned int)gm_GameTicks) - (*(unsigned int*)&cut_StartTick)) * 14 % 1000);
+	d2_DrawWordWrappedText(0, 10, 200, 0x18, d2_ScreenSurface, buf, 0x30);
 }

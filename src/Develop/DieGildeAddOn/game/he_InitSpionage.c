@@ -18,8 +18,8 @@ typedef struct Query {
 
 extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern __int64 g_666018;
-extern char g_7f4ca0[];
+extern __int64 gm_TargetPersonTypeMask;
+extern char gm_EntitySlotTable[];
 extern char g_67ed14[];
 extern char g_6a656c[];
 
@@ -77,7 +77,7 @@ void __cdecl he_InitSpionage(char* u)
 	}
 	gm_ResolveEntityById((void**) (&o), 0, 0, *(int*) (u + 0xac));
 	if (o == 0) {
-		ai_FindEntityInFavorRange(&((House*)g_7f4ca0)[*(unsigned short*) (u + 8)], 6, g_666018, 0, 100.0f, (int*) (u + 0xac));
+		ai_FindEntityInFavorRange(&((House*)gm_EntitySlotTable)[*(unsigned short*) (u + 8)], 6, gm_TargetPersonTypeMask, 0, 100.0f, (int*) (u + 0xac));
 		gm_ResolveEntityById((void**) (&o), 0, 0, *(int*) (u + 0xac));
 		if (o == 0) {
 			*(int*) (u + 0x84) = cm_SendSetHE(-1, u);
@@ -86,7 +86,7 @@ void __cdecl he_InitSpionage(char* u)
 	}
 	memset(&q, 0, sizeof(q));
 	q.kind = 1;
-	h = &((House*)g_7f4ca0)[*(unsigned short*) (u + 8)];
+	h = &((House*)gm_EntitySlotTable)[*(unsigned short*) (u + 8)];
 	*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
 	*(pos14_7f4c00*) (u + 0xc8) = gm_GameTime;
 	if (gm_CheckPrivilege(0x26, h, &q) == 2) {

@@ -9,16 +9,16 @@
 // SIZE 0x8
 
 #include "Develop/client_types.h"
-extern Pair_99f800 g_99f800[0x800];
+extern Pair_99f800 cm_CrimeEvidenceLinks[0x800];
 
 int __cdecl cm_ExClearEvidenceLink(char* command, char* response)
 {
 	int i;
 
 	for (i = 0; i < 0x800; i++) {
-		if (g_99f800[i].owner == *(int*) (command + 0x14) && g_99f800[i].key == *(int*) (command + 0x10)) {
-			g_99f800[i].owner = -1;
-			g_99f800[i].key = -1;
+		if (cm_CrimeEvidenceLinks[i].owner == *(int*) (command + 0x14) && cm_CrimeEvidenceLinks[i].key == *(int*) (command + 0x10)) {
+			cm_CrimeEvidenceLinks[i].owner = -1;
+			cm_CrimeEvidenceLinks[i].key = -1;
 			if (response != 0) {
 				*response = 1;
 			}

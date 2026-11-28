@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char g_67536c[];
+extern char str_ch_Create_Character[];
 
 
 
@@ -11,7 +11,7 @@ void* __cdecl ch_AllocateCharacterSlot(int index)
 {
 	void* p;
 
-	p = (void*) m_alloc(0x244, g_67536c);
+	p = (void*) m_alloc(0x244, str_ch_Create_Character);
 	memset(p, 0, 0x244);
 	if (ch_CharacterSlots[index] != 0) {
 		return 0;

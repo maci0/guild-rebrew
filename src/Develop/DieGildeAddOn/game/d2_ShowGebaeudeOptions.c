@@ -58,7 +58,7 @@ void __cdecl d2_ShowGebaeudeOptions(unsigned char* p)
 	do {
 		t = gm_SearchTable67(id);
 		if ((*(unsigned short*) (p + 0x5a) & 0x400) != 0 || t == 0) {
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 		}
 		fl = *(unsigned short*) (p + 0x5a);
 		if (fl != last) {
@@ -68,7 +68,7 @@ void __cdecl d2_ShowGebaeudeOptions(unsigned char* p)
 		if (redraw != 0) {
 			d2_SetForm(d, 1);
 			k = (int) (9 - gm_GetEntityMood(p) / 10 + 0.5);
-			if (*(unsigned short*) (p + 0x27) != g_774970 && *(unsigned short*) (p + 0x25) != g_774970) {
+			if (*(unsigned short*) (p + 0x27) != gm_LocalPlayerSlot && *(unsigned short*) (p + 0x25) != gm_LocalPlayerSlot) {
 				io_AppendText(0x17a0, *(unsigned short*) (p + 0x25), p, k + 0x17b1, k + 0x17bb, r);
 				if (*tbl == 1) {
 					io_AppendText(0x17a2, p[0x65]);
@@ -104,10 +104,10 @@ void __cdecl d2_ShowGebaeudeOptions(unsigned char* p)
 				d2_SetElementEnabled(h4, 1);
 			}
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == h1) {
 				d2_SetFormVisibility(d, 0);
 				d2_RunTechTreeDialog(p, 0xfd);

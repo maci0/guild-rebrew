@@ -8,7 +8,7 @@ void __cdecl cm_StepCommandQueue(void);
 int __cdecl gm_TryRecordCrime(int, int, int, int, int);
 
 extern int gm_GameTime;
-extern int g_773d48;
+extern int gm_QueuedCommandCount;
 
 /* Per-frame object tick: on every fourth frame, walks the object table and
  * either advances the animation of the visible objects or updates the state of
@@ -31,7 +31,7 @@ void __cdecl gm_TickObjectTable(void)
 	mode = *(int*) (info + 0x18);
 	if (mode == 2) {
 		p = (char*) 0x7f4ca2;
-		g_773d48 = 0;
+		gm_QueuedCommandCount = 0;
 		do {
 			if (*(short*) (p - 2) != -1) {
 				kind = *(unsigned char*) p;
@@ -41,24 +41,24 @@ void __cdecl gm_TickObjectTable(void)
 						count = (p[0xa] == 0);
 						cm_RequestChangeFloat(*(int*) (p + 2), 0x1d0,
 							gm_RandomFloat01() * 0.5f + 0.25f);
-						g_773d48++;
+						gm_QueuedCommandCount++;
 						cm_BeginPacketFieldDelta(p - 2, *(int*) (p + 2));
 						cm_AppendPacketFieldDelta(1, 1, 0xc, &count);
 						cm_RequestChangeAttribute();
-						g_773d48++;
-						if (g_773d48 > 0x40) {
+						gm_QueuedCommandCount++;
+						if (gm_QueuedCommandCount > 0x40) {
 							cm_StepCommandQueue();
-							g_773d48 = 0;
+							gm_QueuedCommandCount = 0;
 						}
 					}
 				}
 			}
 			p += 0x21c;
 		} while ((int) p < 0x85a0a2);
-		g_773d48 = 0;
+		gm_QueuedCommandCount = 0;
 		return;
 	}
-	g_773d48 = 0;
+	gm_QueuedCommandCount = 0;
 	p = (char*) 0x7f4ca2;
 	do {
 		if (*(short*) (p - 2) != -1) {
@@ -71,19 +71,19 @@ void __cdecl gm_TickObjectTable(void)
 					arg = *(int*) (*(int*) (p + 0x16e) + 1);
 				}
 				if (gm_TryRecordCrime(2, mode == 0, *(int*) (p + 2), -1, arg) != -1) {
-					g_773d48++;
+					gm_QueuedCommandCount++;
 				}
 				if (*(float*) (p + 0x1ce) > 0.1f) {
 					cm_RequestChangeFloat(*(int*) (p + 2), 0x1d0, -0.1f);
 				}
-				g_773d48++;
-				if (g_773d48 > 0x40) {
+				gm_QueuedCommandCount++;
+				if (gm_QueuedCommandCount > 0x40) {
 					cm_StepCommandQueue();
-					g_773d48 = 0;
+					gm_QueuedCommandCount = 0;
 				}
 			}
 		}
 		p += 0x21c;
 	} while ((int) p < 0x85a0a2);
-	g_773d48 = 0;
+	gm_QueuedCommandCount = 0;
 }

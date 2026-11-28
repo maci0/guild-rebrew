@@ -1,5 +1,5 @@
 #include "Develop/Units/d3/d3_object.h"
-extern int g_67a370;
+extern int d3_ActiveScene;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
@@ -30,7 +30,7 @@ int __cdecl ch_DestroyCharacter(char* obj)
 			if (*(int*) (obj + 0x34) != 0) {
 				saved = -1;
 				ch_ReleaseMorphAnimation(obj);
-				if (g_67a370 != *(int*) (obj + 0x88)) {
+				if (d3_ActiveScene != *(int*) (obj + 0x88)) {
 					saved = d3_CurrentContextIndex;
 					d3_SelectSceneContext(d3_GetContextIndex(*(int*) (obj + 0x88)), 1);
 				}

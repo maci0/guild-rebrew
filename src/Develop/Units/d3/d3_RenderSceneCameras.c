@@ -14,7 +14,7 @@ void __cdecl d3_RenderSceneCameras(void)
 	int* p;
 	char formatBuffer[260];
 
-	if (!*(char*) 0x6b85a1 && *(char*) 0x6b8018 && g_6b86d4 <= 0) {
+	if (!*(char*) 0x6b85a1 && *(char*) 0x6b8018 && d3_SceneRenderLock <= 0) {
 		*(char*) 0x6b85a1 = 1;
 		if (*(char*) 0x6b85a0) {
 			d3_SetViewport((float) ((*(unsigned int*) 0x10529e0 >> 1) - 1), (float) (*(unsigned int*) 0x10529e4 >> 1), 0, 0,

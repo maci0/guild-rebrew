@@ -56,17 +56,17 @@ void __cdecl d3_WriteSceneFile(char* path, int supplied)
         preset += 0x60;
     } while ((int) preset < 0xfbac6c);
     count = 0;
-    for (node = g_fc52f0; node != (int) g_fc2700; node = d3_GetNextSceneNode(node))
+    for (node = g_fc52f0; node != (int) d3_SceneRootSentinel; node = d3_GetNextSceneNode(node))
         count++;
     vfs_WriteDword(stream, count);
     node = g_fc52f0;
-    while (node != (int) g_fc2700) {
+    while (node != (int) d3_SceneRootSentinel) {
         wr_object(stream, node);
         node = d3_GetNextSceneNode(node);
     }
-    fcn_004011f0(stream, g_6b8300 != 0);
-    if (g_6b8300)
-        d3_SaveFloor(stream, (char*) g_6b8300);
+    fcn_004011f0(stream, d3_CurrentFloor != 0);
+    if (d3_CurrentFloor)
+        d3_SaveFloor(stream, (char*) d3_CurrentFloor);
     d3_WriteEventTable(stream, *(struct Event**) (g_5fb5b0 + 0x3c8));
     if (!supplied)
         CloseVfsStream(stream);

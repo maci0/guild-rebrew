@@ -3,11 +3,11 @@
 
 extern char g_6a3a80[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char g_14cf950;
+extern char io_LastKeyScancode;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern int g_100f1dc;
-extern unsigned char g_7747b0;
-extern signed char g_6a3440;
+extern int d2_DialogButtonAction;
+extern unsigned char gm_ClientModeFlags;
+extern signed char gm_SelectedMissionIndex;
 
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
@@ -42,35 +42,35 @@ int __cdecl d2_ShowChooseNetworkDialog(void)
 	b = d2_GetWindowListItem(h, 0, io_AppendText(0x1ca7));
 	c = d2_GetWindowListItem(h, 0, io_AppendText(0x1ca8));
 	list = d2_CreateRadioGroup(3, a, b, c);
-	(*(unsigned char*)&g_6a3440) = 0xfe;
+	(*(unsigned char*)&gm_SelectedMissionIndex) = 0xfe;
 	while (main_RunFrameLoop(d2_ShowChooseNetworkDialog, 0x24087) != 0) {
 		d2_UpdateRadioGroup(list);
-		if (g_14ce8e0 != 0 || g_14cf950 == 1) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0 || io_LastKeyScancode == 1) {
+			d2_DialogCloseRequested = 1;
 			result = 0;
 		}
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == a) {
-				(*(int*)&g_7747b0) = 5;
+				(*(int*)&gm_ClientModeFlags) = 5;
 				d2_SetFormVisibility(h, 0);
 				if (d2_StartLocalSessionSetup() != 0) {
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 					result = 1;
 				}
 				d2_SetFormVisibility(h, 1);
 			} else if (d2_CurrentElementId == b) {
-				(*(int*)&g_7747b0) = 5;
+				(*(int*)&gm_ClientModeFlags) = 5;
 				d2_SetFormVisibility(h, 0);
 				if (d2_ShowServerBrowser(0) != 0) {
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 					result = 1;
 				}
 				d2_SetFormVisibility(h, 1);
 			} else if (d2_CurrentElementId == c) {
-				(*(int*)&g_7747b0) = 4;
+				(*(int*)&gm_ClientModeFlags) = 4;
 				d2_SetFormVisibility(h, 0);
 				if (d2_ShowNetworkLoadDialog() != 0) {
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 					result = 1;
 				}
 				d2_SetFormVisibility(h, 1);

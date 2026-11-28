@@ -80,7 +80,7 @@ typedef struct ENTITY_RECORD {
     unsigned char unk_219[3];
 } ENTITY_RECORD;
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 /* Proposed separate field view; do not use as a second allocation. */
 /* // SIZE 0x21c */

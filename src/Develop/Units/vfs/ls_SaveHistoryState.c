@@ -13,7 +13,7 @@ typedef struct {
 	Pair pairs[8];
 } Group;
 
-extern char g_7728d4;
+extern char hst_HistoryTextActive;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 unsigned int __cdecl vfs_fwrite(void* p, int size, int n, void* file);
@@ -24,7 +24,7 @@ int __cdecl ls_SaveHistoryState(void* file)
 	int i;
 	int k;
 
-	if (vfs_fwrite(&(*(unsigned char*)&g_7728d4), 1, 1, file) <= 0)
+	if (vfs_fwrite(&(*(unsigned char*)&hst_HistoryTextActive), 1, 1, file) <= 0)
 		return 0;
 	v = g_67fca8 - hst_HistoryTextBase;
 	if (vfs_fwrite(&v, 4, 1, file) <= 0)
@@ -37,12 +37,12 @@ int __cdecl ls_SaveHistoryState(void* file)
 			return 0;
 	}
 	for (i = 0; i < 4; i++) {
-		if (vfs_fwrite(&((Group*)g_1007bc0)[i].count, 4, 1, file) <= 0)
+		if (vfs_fwrite(&((Group*)hst_HistoryGroups)[i].count, 4, 1, file) <= 0)
 			return 0;
 		for (k = 0; k < 8; k++) {
-			if (vfs_fwrite(&((Group*)g_1007bc0)[i].pairs[k].a, 4, 1, file) <= 0)
+			if (vfs_fwrite(&((Group*)hst_HistoryGroups)[i].pairs[k].a, 4, 1, file) <= 0)
 				return 0;
-			if (vfs_fwrite(&((Group*)g_1007bc0)[i].pairs[k].b, 4, 1, file) <= 0)
+			if (vfs_fwrite(&((Group*)hst_HistoryGroups)[i].pairs[k].b, 4, 1, file) <= 0)
 				return 0;
 		}
 	}

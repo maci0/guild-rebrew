@@ -3,11 +3,11 @@
 
 extern int g_7766a8;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char g_14cf950;
-extern int g_7e2700;
+extern char io_LastKeyScancode;
+extern int d2_InsideBuildingActive;
 extern int tp_d2_SelectedControl;
 extern int main_LoopFlags;
-extern unsigned char g_7747b0;
+extern unsigned char gm_ClientModeFlags;
 extern int g_14a5538;
 
 void __cdecl d2_SaveScreenshot(void);
@@ -22,17 +22,17 @@ void __cdecl main_HandleHotkeyAction(void)
 	int lvl;
 
 	lvl = (int) (g_7766a8 / 40 + g_6628cc);
-	if (g_14cf950 == 0 || g_7e2700 == 1) {
+	if (io_LastKeyScancode == 0 || d2_InsideBuildingActive == 1) {
 		return;
 	}
-	if (g_14cf950 == 0x1f) {
+	if (io_LastKeyScancode == 0x1f) {
 		d2_SaveScreenshot();
 	}
-	if (g_14cf950 == 0x10 && tp_d2_SelectedControl == 0 && (main_LoopFlags & 0x10000) == 0) {
+	if (io_LastKeyScancode == 0x10 && tp_d2_SelectedControl == 0 && (main_LoopFlags & 0x10000) == 0) {
 		ls_QuickSave();
 	}
-	if ((g_7747b0 & 4) == 0) {
-		if (g_14cf950 == 0x4e) {
+	if ((gm_ClientModeFlags & 4) == 0) {
+		if (io_LastKeyScancode == 0x4e) {
 			cm_RequestIncreaseGameSpeed();
 			if (lvl < 4) {
 				lvl++;
@@ -40,20 +40,20 @@ void __cdecl main_HandleHotkeyAction(void)
 				gm_ApplyGameSettings();
 			}
 		}
-		if (g_14cf950 == 0x4a) {
+		if (io_LastKeyScancode == 0x4a) {
 			cm_SendDecreaseGameSpeed();
 			if (lvl > 0) {
 				g_7766a8 = (lvl - 1) * 40;
 				gm_ApplyGameSettings();
 			}
 		}
-	} else if (g_7747b0 & 0x10) {
-		if (g_14cf950 == 0x4e) {
+	} else if (gm_ClientModeFlags & 0x10) {
+		if (io_LastKeyScancode == 0x4e) {
 			cm_RequestIncreaseGameSpeed();
-		} else if (g_14cf950 == 0x4a) {
+		} else if (io_LastKeyScancode == 0x4a) {
 			cm_SendDecreaseGameSpeed();
 		}
-	} else if (g_14cf950 == 0x4e || g_14cf950 == 0x4a) {
+	} else if (io_LastKeyScancode == 0x4e || io_LastKeyScancode == 0x4a) {
 		d2_ShowStatusBanner(g_14a5538);
 	}
 }

@@ -13,8 +13,8 @@ void __cdecl d2_RunScrollPerga(void)
 	d2_CreateScrollPerga();
 	while (main_RunFrameLoop(d2_RunScrollPerga, 0x657c7) != 0) {
 		d2_UpdateScrollPerga();
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 	}
 	d2_DestroyScrollPerga();

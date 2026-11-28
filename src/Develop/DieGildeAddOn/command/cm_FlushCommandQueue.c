@@ -28,7 +28,7 @@ int __cdecl cm_FlushCommandQueue(void)
 {
 	if ((*(node99**)&g_1005760) == 0)
 		return 0;
-	if (g_14cbca0 == -1) {
+	if (nt_ClientSocket == -1) {
 		while (1) {
 			if (cm_EnqueueCommand((*(node99**)&g_1005760)) != 0)
 				break;

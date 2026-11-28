@@ -1,9 +1,9 @@
 extern char* d3_ActiveCamera;
-extern float g_6628a0;
+extern float flt_1_0;
 extern int g_14ce860;
 extern int g_14ce864;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern float g_10432a4;
+extern float d3_ProjectionDist;
 extern float g_1052c00[];
 
 extern void* __cdecl m_alloc(unsigned int size, const char* tag);
@@ -90,8 +90,8 @@ unsigned char __cdecl d3_CollectObjectScreenCorners(int sceneObject, int* select
 				src[2] = *(unsigned int*) ((char*) bbox + i * 0x20 + 8);
 				f = verts + i * 6;
 				fcn_005eb225(f + 3, src, (void*) (*(int*) (sceneObject + 0x1ec) + 0x48));
-				f[0] = g_10432a4 * (g_6628a0 / f[5]) * f[3] + d3_ViewportCenterX;
-				f[1] = d3_ProjectionScaleY * f[4] * (g_6628a0 / f[5]) + g_1052bc8;
+				f[0] = d3_ProjectionDist * (flt_1_0 / f[5]) * f[3] + d3_ViewportCenterX;
+				f[1] = d3_ProjectionScaleY * f[4] * (flt_1_0 / f[5]) + g_1052bc8;
 			}
 		}
 		m_FreeTracked(bbox);

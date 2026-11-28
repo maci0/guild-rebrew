@@ -71,7 +71,7 @@ RENDER_QUAD* __cdecl d2_QueueClippedTexturedQuad(float u, float v, int w, int h,
 	if (ch + y > d2_ClipBottom) {
 		ch = d2_ClipBottom - y;
 	}
-	q = &g_1552020[d2_QueuedQuadCount];
+	q = &d2_QueuedQuads[d2_QueuedQuadCount];
 	if (d2_BuildQuadVertices(x, y, cw, ch, q) == 0) {
 		return 0;
 	}

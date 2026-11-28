@@ -3,8 +3,8 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern int g_7746d8;
-extern int g_7746a0;
+extern int d2_SelectedEntityUiFlags;
+extern int sv_ClickedObjekt;
 extern int g_14b5458;
 extern int g_14ad0f8;
 extern int g_14b5400;
@@ -48,38 +48,38 @@ void __cdecl d2_RunAlchemistMenu(char* a, char* b)
 	alch = 0;
 	d2_ClearStatusTextSlots();
 	while (main_RunFrameLoop(d2_RunAlchemistMenu, 0x67fff) != 0) {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_7746d8 & 0x200) {
+		if (d2_SelectedEntityUiFlags & 0x200) {
 			alch = RegisterStatusText("contact_REZEPTBUCH", g_14b5458, 0x16);
 			book = RegisterStatusText("contact_PRODUKTION_ALCHIMIST", g_14ad0f8, 0x13);
 		}
-		if (g_7746d8 & 0x400) {
+		if (d2_SelectedEntityUiFlags & 0x400) {
 			contract = RegisterStatusText("contact_CONTRACT", g_14b5400, 0xe);
 			store = RegisterStatusText("contact_LAGER", g_14ad0f0, 0xe);
 			transport = RegisterStatusText("contact_TRANSPORT", g_14ad100, 0x15);
 			alchcontract = RegisterStatusText("contact_ALCHIMISTENVERTRAG", g_14b53fc, 0x16);
 		}
-		if (g_7746a0 != 0) {
-			if (g_7746a0 == transport) {
+		if (sv_ClickedObjekt != 0) {
+			if (sv_ClickedObjekt == transport) {
 				d2_OpenTransportPanel(a);
-			} else if (g_7746a0 == store) {
+			} else if (sv_ClickedObjekt == store) {
 				d2_ShowLagerOptions(a, *(int*) (a + 0x5d));
 			} else if (*(int*) (b + 0x1c) != 0) {
 				d2_RunDomizilKabinettDialog(a, b);
-			} else if (g_7746a0 == book) {
+			} else if (sv_ClickedObjekt == book) {
 				r = he_GetActionProgress(a, &y, &x, 0);
 				if (r != 0) {
 					d2_ShowModalMessageBox(g_14b59d0[r], 0x100);
 				} else {
 					d2_RunProduktionDialog(a);
 				}
-			} else if (g_7746a0 == alch) {
+			} else if (sv_ClickedObjekt == alch) {
 				fcn_00585030(a);
-			} else if (g_7746a0 == alchcontract) {
+			} else if (sv_ClickedObjekt == alchcontract) {
 				d2_RunAlchemistryWorkshopDialog(a);
-			} else if (g_7746a0 == contract) {
+			} else if (sv_ClickedObjekt == contract) {
 				d2_RunAlchemyDialog(a);
 			}
 		}

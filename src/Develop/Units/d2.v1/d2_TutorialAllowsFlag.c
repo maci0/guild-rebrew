@@ -1,7 +1,7 @@
-extern int* g_665f08;
-extern int* g_665f08;
-extern volatile int g_6b7fc0;
-extern volatile int g_6b7fc0;
+extern int* d2_TutorialState;
+extern int* d2_TutorialState;
+extern volatile int tb_TimerPaused;
+extern volatile int tb_TimerPaused;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 /* ADDRESS: GOLD 0x00576680 */
@@ -13,7 +13,7 @@ int __cdecl d2_TutorialAllowsFlag(int a1)
 	if (*(int*) ((char*)&d2_TutorialActive) == 0) {
 		return 1;
 	}
-	p = g_665f08;
+	p = d2_TutorialState;
 	if (*(int*) ((char*) p + 0x3c) == 2 || *p == 5) {
 		return 0;
 	}
@@ -21,7 +21,7 @@ int __cdecl d2_TutorialAllowsFlag(int a1)
 	if (p == 0) {
 		return 1;
 	}
-	if (*(int*) ((char*)&g_6b7fc0) != 0) {
+	if (*(int*) ((char*)&tb_TimerPaused) != 0) {
 		return 0;
 	}
 	return (*(int*) ((char*) p + 0x68) & a1) != 0;

@@ -57,7 +57,7 @@ void __cdecl he_TriggerCathedralEvent(void)
 			}
 		}
 		m.b4 = 0x22;
-		m.f8 = ((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (e + 0x27)])->entity_id;
+		m.f8 = ((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[*(unsigned short*) (e + 0x27)])->entity_id;
 		m.fc = *(int*) (e + 1);
 		m.b36 = 2;
 		m.b58 = 1;

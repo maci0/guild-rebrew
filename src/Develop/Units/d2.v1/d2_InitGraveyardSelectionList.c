@@ -28,7 +28,7 @@ struct seldlg {
 	int sel;
 };
 
-extern char* g_1015ea0;
+extern char* d2_Controls;
 extern char* lpObjektePROT;
 extern int g_665f58[4];
 extern int g_665f84[4];
@@ -46,25 +46,25 @@ void __cdecl d2_InitGraveyardSelectionList(char* a, struct seldlg* d)
 
 	s = *(char**) (a + 0x65);
 	d2_SetForm(d->dlg, 6);
-	io_AppendText((int) g_6811b0);
+	io_AppendText((int) str_dollar_C);
 	for (i = 0; i < 4; i++) {
 		d->ids[i] = d2_AddElementToWindow(6 + i * 0x6c, 0, g_665f58[i], d->font);
-		((D2_CONTROL_TL*) g_1015ea0)[d->ids[i]].value_05c = 1;
-		((D2_CONTROL_TL*) g_1015ea0)[d->ids[i]].flags_1d0 = 3;
-		((D2_CONTROL_TL*) g_1015ea0)[d->ids[i]].associated_object = (char*) &((OBJECT_PROTOTYPE*)lpObjektePROT)[g_665f84[i]];
+		((D2_CONTROL_TL*) d2_Controls)[d->ids[i]].value_05c = 1;
+		((D2_CONTROL_TL*) d2_Controls)[d->ids[i]].flags_1d0 = 3;
+		((D2_CONTROL_TL*) d2_Controls)[d->ids[i]].associated_object = (char*) &((OBJECT_PROTOTYPE*)lpObjektePROT)[g_665f84[i]];
 	}
 	d2_SetElementEnabled(d->ids[1], (unsigned char) s[0x19]);
 	d2_SetElementEnabled(d->ids[2], (unsigned char) s[0x1a]);
 	d2_SetElementEnabled(d->ids[3], (unsigned char) s[0x1b]);
 	if (d->sel == 3 && s[0x1b] == 1) {
-		((D2_CONTROL_TL*) g_1015ea0)[d->ids[3]].value_03c = 1;
+		((D2_CONTROL_TL*) d2_Controls)[d->ids[3]].value_03c = 1;
 	} else if (d->sel == 2 && s[0x1a] == 1) {
-		((D2_CONTROL_TL*) g_1015ea0)[d->ids[2]].value_03c = 1;
+		((D2_CONTROL_TL*) d2_Controls)[d->ids[2]].value_03c = 1;
 	} else if (d->sel == 1 && s[0x19] == 1) {
-		((D2_CONTROL_TL*) g_1015ea0)[d->ids[1]].value_03c = 1;
+		((D2_CONTROL_TL*) d2_Controls)[d->ids[1]].value_03c = 1;
 	} else {
-		((D2_CONTROL_TL*) g_1015ea0)[d->ids[0]].value_03c = 1;
+		((D2_CONTROL_TL*) d2_Controls)[d->ids[0]].value_03c = 1;
 		d->sel = 0;
 	}
-	((D2_CONTROL_TL*) g_1015ea0)[d->ids[d->sel]].value_038 = 1;
+	((D2_CONTROL_TL*) d2_Controls)[d->ids[d->sel]].value_038 = 1;
 }

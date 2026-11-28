@@ -25,7 +25,7 @@ typedef struct {
 	char pad60[0x98];
 } Msg5;
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 extern float g_662a70;
 extern float g_662a6c;
 extern double g_662908;

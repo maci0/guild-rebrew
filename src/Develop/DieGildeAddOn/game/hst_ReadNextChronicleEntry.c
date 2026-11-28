@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/client_data.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_67fca4;
-extern unsigned char g_7728d4;
+extern unsigned char hst_HistoryTextActive;
 int __cdecl hst_ParseDate(int, int, int*, int);
 int __cdecl hst_ParseTextPasses(char*, int, int);
 
@@ -15,11 +15,11 @@ int __cdecl hst_ReadNextChronicleEntry(int a0, char* outputText, int a2)
 
 	pos = g_67fca8;
 	do {
-		if (g_7728d4 == 0) {
+		if (hst_HistoryTextActive == 0) {
 			return 3;
 		}
 		if (!hst_ParseDate(pos, 3, slot, a0)) {
-			g_7728d4 = 0;
+			hst_HistoryTextActive = 0;
 			return 4;
 		}
 		diff = gm_GameTime.a - slot[0];
@@ -40,7 +40,7 @@ int __cdecl hst_ReadNextChronicleEntry(int a0, char* outputText, int a2)
 		pos = g_67fca8 + 3;
 		g_67fca8 = pos;
 		if (g_67fca4 < pos) {
-			g_7728d4 = 0;
+			hst_HistoryTextActive = 0;
 		}
 	} while (result == 0 || result == 6 || result == 5);
 	return result;

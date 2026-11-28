@@ -1,7 +1,7 @@
-extern char* g_77255c;
-extern char* g_1015ea0;
+extern char* d2_CurrentWindow;
+extern char* d2_Controls;
 extern int d2_CurrentWindowId;
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
@@ -71,16 +71,16 @@ void __cdecl d2_ShowTechTreeEffects(unsigned char* building, unsigned char* a1)
 		}
 	}
 	step = (int) (10.0f / count * 24.0f);
-	height = (*(int*) (g_77255c + 0x10) - step * count) / 2 + 0xe;
+	height = (*(int*) (d2_CurrentWindow + 0x10) - step * count) / 2 + 0xe;
 	for (i = 0; table[i] != 0; i++) {
 		if (gm_SumBuildingComponentValues(building[0], table[i]) != 0) {
 			label = d2_AddElementToWindow(0, height, 2, d2_CurrentWindowId);
 			wins[i] = label;
-			((D2_CONTROL_TL*) (g_1015ea0))[label].flags_1d0 = 3;
-			((D2_CONTROL_TL*) (g_1015ea0))[label].font = 0x55;
+			((D2_CONTROL_TL*) (d2_Controls))[label].flags_1d0 = 3;
+			((D2_CONTROL_TL*) (d2_Controls))[label].font = 0x55;
 			io_FormatTextBuffer(buf, "%s:", *(unsigned int*) (table[i] * 8 + 0x14a9180));
 			d2_SetControlText(label, buf);
-			((D2_CONTROL_TL*) (g_1015ea0))[label].value_05c = 1;
+			((D2_CONTROL_TL*) (d2_Controls))[label].value_05c = 1;
 			if (table[i] == 3) {
 				type = 6;
 			}
@@ -99,16 +99,16 @@ void __cdecl d2_ShowTechTreeEffects(unsigned char* building, unsigned char* a1)
 			wins[i] = -1;
 		}
 	}
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	for (;;) {
 		found = (int) gm_SearchTable67(id);
 		if ((a1[0x5b] & 4) != 0 || found == 0) {
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_14ce8e0 != 0 || (g_100f1dc != -1 && elem == d2_CurrentElementId)) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0 || (d2_DialogButtonAction != -1 && elem == d2_CurrentElementId)) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			for (i = 0; table[i] != 0; i++) {
 				if (wins[i] != -1 && d2_CurrentElementId == wins[i]) {
 					io_FormatTextBuffer(buf, "$Z$[%s$]$N%s", table[i] * 2 + 0xf98,

@@ -1,5 +1,5 @@
 extern int __cdecl d2_FindFreeElementSlot(void);
-extern int g_772540, g_772528, g_1015ea0;
+extern int d2_ZOrderStack, g_772528, d2_Controls;
 /* ADDRESS: GOLDTL 0x00469890 */
 int __cdecl d2_AllocateElement(void)
 {
@@ -14,8 +14,8 @@ int __cdecl d2_AllocateElement(void)
 		return -1;
 	}
 	base = (id << 6) - id;
-	tbl = (int*)g_772540;
-	rec = (int*) (g_1015ea0 + base * 12);
+	tbl = (int*)d2_ZOrderStack;
+	rec = (int*) (d2_Controls + base * 12);
 	for (i = 0x3ff; i >= 0; i--) {
 		if (tbl[i] != 0) {
 			i++;
@@ -29,6 +29,6 @@ int __cdecl d2_AllocateElement(void)
 	if (id > g_772528) {
 		g_772528 = id;
 	}
-	*(int*) (g_1015ea0 + base * 12 + 4) = 1;
+	*(int*) (d2_Controls + base * 12 + 4) = 1;
 	return id;
 }

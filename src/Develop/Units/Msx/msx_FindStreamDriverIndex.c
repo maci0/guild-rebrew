@@ -9,7 +9,7 @@ int __cdecl msx_FindStreamDriverIndex(int id)
 	for (i = 0; i < 16; i++) {
 		if (msx_WaveDrivers[i] != 0) {
 			for (j = 0; j < msx_WaveDrivers[i][6]; j++) {
-				if (g_6b7f50[i][j] == id) {
+				if (msx_StreamHandles[i][j] == id) {
 					return i;
 				}
 			}

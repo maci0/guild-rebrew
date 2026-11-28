@@ -51,9 +51,9 @@ typedef struct D3_UNIVERSE_VIEW {
 } D3_UNIVERSE_VIEW;
 
 extern unsigned char* lpGebaeudePROT;
-extern signed char g_7f3b00[];
-extern unsigned char* g_7746c8;
-extern char g_10432c0[];
+extern signed char d3_BuildingCategorySceneIndices[];
+extern unsigned char* d2_InteriorBuilding;
+extern char d3_Universes[];
 
 void __cdecl init_LoadGebaeudeScene(int);
 
@@ -64,20 +64,20 @@ int __cdecl init_AllocateGebaeudeSceneSlot(unsigned char* e)
 	int r;
 
 	k = ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*e].category;
-	if (((signed char*)g_7f3b00)[k] == -1) {
-		if (e == g_7746c8 || *e == 0x1e) {
+	if (((signed char*)d3_BuildingCategorySceneIndices)[k] == -1) {
+		if (e == d2_InteriorBuilding || *e == 0x1e) {
 			init_LoadGebaeudeScene(*e);
 		} else {
 			r = d3_FindFreeSceneContext();
 			if (r == -1) {
 				return r;
 			}
-			((signed char*)g_7f3b00)[k] = (signed char) r;
-			((D3_UNIVERSE_VIEW*)g_10432c0)[r].verwendet = 1;
-			strcpy((char*)&((D3_UNIVERSE_VIEW*)g_10432c0)[r],
+			((signed char*)d3_BuildingCategorySceneIndices)[k] = (signed char) r;
+			((D3_UNIVERSE_VIEW*)d3_Universes)[r].verwendet = 1;
+			strcpy((char*)&((D3_UNIVERSE_VIEW*)d3_Universes)[r],
 				(char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*e] + 1);
 		}
 	}
-	return ((signed char*)g_7f3b00)[k];
+	return ((signed char*)d3_BuildingCategorySceneIndices)[k];
 }
 #endif

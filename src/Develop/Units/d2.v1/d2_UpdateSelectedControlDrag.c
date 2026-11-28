@@ -18,8 +18,8 @@ extern int g_14ce8dc;
 extern int g_7725e8;
 extern int g_100f1e0;
 extern int g_100f1d8;
-extern short g_14ce8c0;
-extern short g_14ce8c2;
+extern short io_ActiveCursorX;
+extern short io_ActiveCursorY;
 extern int g_7725b8;
 extern int g_7725dc;
 extern int g_7725e0;
@@ -48,14 +48,14 @@ int __cdecl d2_UpdateSelectedControlDrag(void)
 		g_100f1e0 = d2_MouseTopBoundary;
 		p = (*(Spin**)&tp_d2_SelectedControl);
 		g_7725b8 = p->value;
-		g_7725dc = g_14ce8c0;
-		g_7725e0 = g_14ce8c2;
+		g_7725dc = io_ActiveCursorX;
+		g_7725e0 = io_ActiveCursorY;
 		if (p->flags & 0x80) {
 			d2_MouseBottomBoundary = (g_7725b8 - p->min) * 4 / step + g_7725e0;
 			d2_MouseTopBoundary = (g_7725b8 - p->max) * 4 / step + g_7725e0;
 		}
 		p->pos = (g_7725b8 - p->min) * 4 / step + g_7725e0;
 	}
-	d2_UpdateSpinValue((*(Spin**)&tp_d2_SelectedControl), g_7725b8, g_7725e0, g_14ce8c2);
+	d2_UpdateSpinValue((*(Spin**)&tp_d2_SelectedControl), g_7725b8, g_7725e0, io_ActiveCursorY);
 	return 1;
 }

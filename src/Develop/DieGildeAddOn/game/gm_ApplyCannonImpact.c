@@ -3,12 +3,12 @@
 #include "Develop/client_types.h"
 
 extern pos14_7f4c00 gm_GameTime;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
 extern unsigned char* g_entity_ptr;
 extern char* gm_CityEntity;
-extern char g_7f4ca4[];
+extern char gm_EntityIdField[];
 extern char g_677640[];
 
 typedef struct CANNON_HIT_SLOT {
@@ -242,15 +242,15 @@ void __cdecl gm_ApplyCannonImpact(int applyDamage, int impactId, int projectileP
 					*(int*) (msg + 8) = *(int*) (gm_CityEntity + 4);
 				} else {
 					*(int*) (msg + 8) =
-					    *(int*) (g_7f4ca4 +
+					    *(int*) (gm_EntityIdField +
 					             (*(unsigned short*) (p + 0x27) &
 					              0xffff) * 0x21c);
 				}
 				*(int*) (msg + 0xc) = *(int*) (p + 1);
 				*(int*) (msg + 0x28) = *(int*) &gm_GameTime;
-				*(int*) (msg + 0x2c) = g_7f4c04;
-				*(int*) (msg + 0x30) = g_7f4c08;
-				*(short*) (msg + 0x34) = g_7f4c0c;
+				*(int*) (msg + 0x2c) = gm_GameTimeHour;
+				*(int*) (msg + 0x30) = gm_GameTimeSliceDword;
+				*(short*) (msg + 0x34) = gm_GameTimeTailWord;
 				msg[0x36] = 2;
 				*(int*) (msg + 0x58) = *(int*) (p + 1);
 				*(int*) (msg + 0x5c) =

@@ -3,7 +3,7 @@
 
 extern char g_6a93e0[];
 extern int d2_CurrentWindowId;
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
@@ -44,25 +44,25 @@ int __cdecl d2_ConfirmFireAlchemist(char* a, int* unused)
 	s = io_AppendText(0x403e);
 	b1 = d2_GetWindowListItem(h, 2, s);
 	b2 = d2_GetWindowListItem(h, 2, s + 1);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
 		p = ahm_GetWorkshopOwner(a);
 		if (p == 0) {
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 			main_RunFrameLoop(d2_ConfirmFireAlchemist, 0x20007);
 			d2_DestroyForm(h);
 			return 0;
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
-		} else if (g_100f1dc != -1) {
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
+		} else if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == b1) {
 				result = 1;
 				he_CancelErforschenActions(a);
 				ahm_SendFireCommand(p);
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			} else if (d2_CurrentElementId == b2) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	} while (main_RunFrameLoop(d2_ConfirmFireAlchemist, 0x677c7) != 0);

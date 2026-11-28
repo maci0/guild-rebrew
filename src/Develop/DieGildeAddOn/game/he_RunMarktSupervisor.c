@@ -41,20 +41,20 @@ typedef struct {
 	char pad3c[0x44];
 } MarktSlot;
 
-extern char* g_773d78;
-extern unsigned char g_773d75;
+extern char* gm_MarketEntity;
+extern unsigned char gm_ActiveTownIndex;
 extern char* gm_CityEntity;
 extern char* lpObjektePROT;
-extern unsigned char g_7747b0;
+extern unsigned char gm_ClientModeFlags;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
-extern float g_6628a8;
+extern float flt_0_0;
 extern float g_662948;
 
 
-extern double g_662930;
+extern double dbl_3_0;
 extern double g_6629c8;
-extern double g_6640f8;
+extern double dbl_0_75;
 extern double g_664468;
 extern double g_665dd0;
 
@@ -98,7 +98,7 @@ void __cdecl he_RunMarktSupervisor(char* action)
 	char* pat;
 	char* hall;
 
-	if (g_773d78 == 0) {
+	if (gm_MarketEntity == 0) {
 		he_FreeAction(action);
 		return;
 	}
@@ -122,12 +122,12 @@ void __cdecl he_RunMarktSupervisor(char* action)
 	if (*(int*) (action + 0x70) != 0) {
 		return;
 	}
-	if (gm_GetSeasonTreasury((int) gm_CityEntity, g_773d75) < 0x4e2000) {
-		cm_RequestMoveCredits(*(int*) (gm_CityEntity + 4), -1, g_773d75, 0x4e2000);
+	if (gm_GetSeasonTreasury((int) gm_CityEntity, gm_ActiveTownIndex) < 0x4e2000) {
+		cm_RequestMoveCredits(*(int*) (gm_CityEntity + 4), -1, gm_ActiveTownIndex, 0x4e2000);
 	}
 	/* pass 1: refill the player's own stock */
 	for (i = 0; i < 0x55; i++) {
-		slot = (MarktSlot*)&((MARKET_STOCK_SLOT*)(g_85ab90 + g_773d75 * 0x2a90))[i];
+		slot = (MarktSlot*)&((MARKET_STOCK_SLOT*)(gm_MarketStockTable + gm_ActiveTownIndex * 0x2a90))[i];
 		if (((MARKET_STOCK_SLOT*)slot)->objekt_id == 0) {
 			continue;
 		}
@@ -157,8 +157,8 @@ void __cdecl he_RunMarktSupervisor(char* action)
 		uf.f = (float) (rec.f34 * 0.0714285746f * d);
 		up.n = gm_RandomMod(100) & 0xffff;
 		uf.f = (up.n + 20.0f) * uf.f * 0.01f;
-		if (uf.f != g_6628a8) {
-			if (g_6628a0 > uf.f) {
+		if (uf.f != flt_0_0) {
+			if (flt_1_0 > uf.f) {
 				uf.f = 1.0f;
 			}
 		}
@@ -166,16 +166,16 @@ void __cdecl he_RunMarktSupervisor(char* action)
 			rec.f10 = (int) (rec.f10 + uf.f);
 			if (rec.f20 * g_662908 < rec.f24) {
 				cm_SendSellObjekt(*(int*) (ent + 2), -1,
-				    rec.id, (int) uf.f, g_773d75, 0);
+				    rec.id, (int) uf.f, gm_ActiveTownIndex, 0);
 				rec.f24 = rec.f34 * 0.0714285746f * d * g_662948 + rec.f24;
 			}
-		} else if (ub.n > rec.f34 * g_6640f8) {
+		} else if (ub.n > rec.f34 * dbl_0_75) {
 			uf.f = (float) (rec.f34 * 0.0714285746f * d);
-			rec.f24 = rec.f24 - uf.f * g_662d34;
+			rec.f24 = rec.f24 - uf.f * flt_0_6;
 			if (rec.f20 * 0.25 > rec.f24) {
 				rec.f24 = rec.f20 * 0.25;
 			}
-			if (g_6628a0 > rec.f24) {
+			if (flt_1_0 > rec.f24) {
 				rec.f24 = 1.0f;
 			}
 		}
@@ -189,13 +189,13 @@ void __cdecl he_RunMarktSupervisor(char* action)
 			}
 		}
 		if ((unsigned short) gm_RandomMod(100) > 0xa || (unsigned short) gm_GameTime.b == 0xc) {
-			rec.f38 = gm_CalcMarketSlotPrice(g_773d75, i);
+			rec.f38 = gm_CalcMarketSlotPrice(gm_ActiveTownIndex, i);
 		}
-		cm_SendMarktSlotDelta(&rec, g_773d75);
+		cm_SendMarktSlotDelta(&rec, gm_ActiveTownIndex);
 	}
 	/* pass 2: price the slots the player does not hold */
 	for (i = 0; i < 0x55; i++) {
-		slot = (MarktSlot*)&((MARKET_STOCK_SLOT*)(g_85ab90 + g_773d75 * 0x2a90))[i];
+		slot = (MarktSlot*)&((MARKET_STOCK_SLOT*)(gm_MarketStockTable + gm_ActiveTownIndex * 0x2a90))[i];
 		if (((MARKET_STOCK_SLOT*)slot)->objekt_id == 0) {
 			continue;
 		}
@@ -220,10 +220,10 @@ void __cdecl he_RunMarktSupervisor(char* action)
 		}
 		gm_RandomMod(10);
 		g = (float) (rec.f20 * 0.0714285746f * ((double) v * g_665dd0));
-		if (g != g_6628a8) {
+		if (g != flt_0_0) {
 			rec.f2c = rec.f2c + g;
 		}
-		if (!(rec.f2c < g_6628a0)) {
+		if (!(rec.f2c < flt_1_0)) {
 			t = (int) rec.f2c;
 			rec.f2c = rec.f2c - (float) t;
 		} else {
@@ -237,7 +237,7 @@ void __cdecl he_RunMarktSupervisor(char* action)
 		}
 		if (t != 0) {
 			rec.f14 = rec.f14 + t;
-			rec.f24 = rec.f24 - g * g_662d34;
+			rec.f24 = rec.f24 - g * flt_0_6;
 			if (rec.f24 < g_6629c8) {
 				rec.f24 = 1.0f;
 			}
@@ -245,21 +245,21 @@ void __cdecl he_RunMarktSupervisor(char* action)
 			if (ub.n < 1) {
 				ub.n = 1;
 			}
-			if (g_7747b0 < 0x80) {
+			if (gm_ClientModeFlags < 0x80) {
 				cm_SendSellObjekt(-1, *(int*) (ent + 2),
-				    rec.id, ub.n, g_773d75, 0);
+				    rec.id, ub.n, gm_ActiveTownIndex, 0);
 			}
 		} else {
 			rec.f24 = rec.f24 + g * g_662948;
 			if (gm_RandomFloat01() < 0.25) {
 				t = (gm_RandomMod(3) & 0xffff) + 1;
 				cm_SendSellObjekt(*(int*) (ent + 2), -1,
-				    rec.id, t, g_773d75, 0);
-				rec.f24 = g * g_662d34 + rec.f24;
+				    rec.id, t, gm_ActiveTownIndex, 0);
+				rec.f24 = g * flt_0_6 + rec.f24;
 			}
 		}
-		if (rec.f20 * g_662930 < rec.f24) {
-			rec.f24 = rec.f20 * g_662930;
+		if (rec.f20 * dbl_3_0 < rec.f24) {
+			rec.f24 = rec.f20 * dbl_3_0;
 		}
 		if (rec.f20 * 1.5f < rec.f24) {
 			if (rec.f20 * 1.5f / rec.f24 < gm_RandomFloat01()) {
@@ -279,13 +279,13 @@ void __cdecl he_RunMarktSupervisor(char* action)
 			}
 		}
 		if ((unsigned short) gm_RandomMod(100) > 0xa || (unsigned short) gm_GameTime.b == 0xc) {
-			rec.f38 = gm_CalcMarketSlotPrice(g_773d75, i);
+			rec.f38 = gm_CalcMarketSlotPrice(gm_ActiveTownIndex, i);
 		}
-		cm_SendMarktSlotDelta(&rec, g_773d75);
+		cm_SendMarktSlotDelta(&rec, gm_ActiveTownIndex);
 	}
 	/* pass 3: the three trade lagers next to each market hall */
 	i = 1;
-	lager = g_85ab90 + 0x2a90;
+	lager = gm_MarketStockTable + 0x2a90;
 	bar = (char*) 0x868354;
 	do {
 		if (*bar == 0) {
@@ -315,7 +315,7 @@ void __cdecl he_RunMarktSupervisor(char* action)
 			uf.n = ub.n;
 			g = (float) (rec.f20 * 0.0714285746f * ((double) v * g_665dd0));
 			rec.f2c = rec.f2c + g;
-			if (rec.f2c < g_6628a0) {
+			if (rec.f2c < flt_1_0) {
 				up.n = 0;
 			} else {
 				up.n = (int) rec.f2c;
@@ -330,20 +330,20 @@ void __cdecl he_RunMarktSupervisor(char* action)
 						ub.n = 1;
 					}
 					cm_SendSellObjekt(-1, *(int*) (ent + 2),
-					    rec.id, ub.n, g_773d75, 0);
+					    rec.id, ub.n, gm_ActiveTownIndex, 0);
 				}
 			}
 			if (ub.n < g) {
 				rec.f24 = rec.f24 + (g - ub.n) * 0.4;
-				if (rec.f20 * g_662930 < rec.f24) {
-					rec.f24 = rec.f20 * g_662930;
+				if (rec.f20 * dbl_3_0 < rec.f24) {
+					rec.f24 = rec.f20 * dbl_3_0;
 				}
 			} else {
 				rec.f24 = rec.f24 - g * g_662908;
 				if (rec.f20 * 0.25 > rec.f24) {
 					rec.f24 = rec.f20 * 0.25;
 				}
-				if (g_6628a0 > rec.f24) {
+				if (flt_1_0 > rec.f24) {
 					rec.f24 = 1.0f;
 				}
 			}
@@ -380,7 +380,7 @@ void __cdecl he_RunMarktSupervisor(char* action)
 			    * ((double) v * g_665dd0));
 			uf.n = gm_RandomMod(3) & 0xffff;
 			uf.f = (float) uf.n + g;
-			if (uf.f < g_6628a0) {
+			if (uf.f < flt_1_0) {
 				uf.f = 1.0f;
 			}
 			ub.n = gm_eval_SlotVoll(ent,
@@ -390,13 +390,13 @@ void __cdecl he_RunMarktSupervisor(char* action)
 			if (ub.n > ((MarktSlot*) scratch)->f20 * g_662908) {
 				cm_SendSellObjekt(*(int*) (ent + 2), -1,
 				    ((MarktSlot*) scratch)->id,
-				    (int) uf.f, g_773d75, 0);
+				    (int) uf.f, gm_ActiveTownIndex, 0);
 				((MarktSlot*) scratch)->f24 = g * g_662908
 				    + ((MarktSlot*) scratch)->f24;
-				if (((MarktSlot*) scratch)->f20 * g_662930
+				if (((MarktSlot*) scratch)->f20 * dbl_3_0
 				    < ((MarktSlot*) scratch)->f24) {
 					((MarktSlot*) scratch)->f24 =
-					    ((MarktSlot*) scratch)->f20 * g_662930;
+					    ((MarktSlot*) scratch)->f20 * dbl_3_0;
 				}
 			} else {
 				((MarktSlot*) scratch)->f24 =
@@ -406,7 +406,7 @@ void __cdecl he_RunMarktSupervisor(char* action)
 					((MarktSlot*) scratch)->f24 =
 					    ((MarktSlot*) scratch)->f20 * 0.25;
 				}
-				if (g_6628a0 > ((MarktSlot*) scratch)->f24) {
+				if (flt_1_0 > ((MarktSlot*) scratch)->f24) {
 					((MarktSlot*) scratch)->f24 = 1.0f;
 				}
 			}

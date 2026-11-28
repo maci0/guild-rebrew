@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern char g_6b5c60[];
+extern char str_empty[];
 extern char g_1052f00[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern void* txt_TextBuffer;
@@ -36,7 +36,7 @@ int __cdecl txt_LoadTextFileDefinition(char* path)
 		memcpy(g_1052f00, path, len + 1);
 		g_1052f00[len + 1] = 0;
 	} else {
-		g_1052f00[0] = g_6b5c60[0];
+		g_1052f00[0] = str_empty[0];
 	}
 	f = fcn_0064e2f9(path, "rt");
 	n = 0;

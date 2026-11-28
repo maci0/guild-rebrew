@@ -29,7 +29,7 @@ typedef struct {
 // SIZE 0x54
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_67a370;
+extern int d3_ActiveScene;
 
 void __cdecl ch_SetVisible(char*, int);
 void __cdecl d3_ChangeObjectTransparency(char*, int, Col);
@@ -81,7 +81,7 @@ void __cdecl ch_UpdateFade(Fade* f)
 	} else if (!(alpha < 1.0f)) {
 		alpha = 1.0f;
 	}
-	if (*(int*) (e + 0x88) == g_67a370 && f->fade_in != 0 && (*(unsigned short*) (e + 0x8c) & 0x4000) == 0 &&
+	if (*(int*) (e + 0x88) == d3_ActiveScene && f->fade_in != 0 && (*(unsigned short*) (e + 0x8c) & 0x4000) == 0 &&
 	    alpha < 0.1 && ch_FindNearbyCharacters(e, &hit.ent, 30.0f) != 0) {
 		f->start = (float) (ch_UpdateTime - 1);
 		*(unsigned short*) (hit.ent + 0x8c) |= 0x4000;

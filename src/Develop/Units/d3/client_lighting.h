@@ -4,11 +4,11 @@
 /* Inferred lighting interface. These are access views, not storage owners. */
 /* ADDRESS: GOLDTL 0x006b86d4 */
 /* ADDRESS: GOLD 0x00633b04 */
-extern int g_6b86d4;
+extern int d3_SceneRenderLock;
 
 /* ADDRESS: GOLDTL 0x006b8300 */
 /* ADDRESS: GOLD 0x00633738 */
-extern int g_6b8300;
+extern int d3_CurrentFloor;
 
 #if defined(REBREW_GOLD)
 /* Inferred names; complete backing allocations remain unknown. */

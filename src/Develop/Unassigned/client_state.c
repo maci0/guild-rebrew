@@ -1,6 +1,6 @@
-extern int g_14cf900[];
-extern int g_14ce920[];
-extern short g_14ce8c0;
+extern int io_PolledCursorState[];
+extern int io_ActiveInputState[];
+extern short io_ActiveCursorX;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 void __cdecl io_PollMouseInput(void);
 
@@ -14,12 +14,12 @@ void __cdecl io_PollKeyboardInput(void);
 /* ADDRESS: GOLDTL 0x004125c0 */
 void __cdecl io_SetMouseCursorPos(int x, int y)
 {
-	((short*)g_14cf900)[0] = (short) x;
-	((short*)g_14cf900)[1] = (short) y;
-	((short*)g_14ce920)[0] = (short) x;
-	((short*)g_14ce920)[1] = (short) y;
-	((short*)&g_14ce8c0)[0] = (short) x;
-	((short*)&g_14ce8c0)[1] = (short) y;
+	((short*)io_PolledCursorState)[0] = (short) x;
+	((short*)io_PolledCursorState)[1] = (short) y;
+	((short*)io_ActiveInputState)[0] = (short) x;
+	((short*)io_ActiveInputState)[1] = (short) y;
+	((short*)&io_ActiveCursorX)[0] = (short) x;
+	((short*)&io_ActiveCursorX)[1] = (short) y;
 	if (g_6772c4 == 0) {
 		((void (__stdcall*)(int, int)) *(void**) 0x662300)(x, y);
 	}
@@ -30,7 +30,7 @@ void __cdecl io_SetMouseCursorPos(int x, int y)
 void __cdecl io_ResetInputToCursor(void)
 {
 	io_PollMouseInput();
-	(*(struct IO_CURSOR_STATE*)&g_14ce8c0) = (*(struct IO_CURSOR_STATE*)g_14cf900);
+	(*(struct IO_CURSOR_STATE*)&io_ActiveCursorX) = (*(struct IO_CURSOR_STATE*)io_PolledCursorState);
 	io_PollKeyboardInput();
 }
 
@@ -41,17 +41,17 @@ void __cdecl io_PopQueuedInputState(void)
 	unsigned char* rec;
 
 	if (*(int*) 0x6772c4 != 0) {
-		(&g_14ce8c0)[0] = ((short*) g_14cf900)[0];
-		(&g_14ce8c0)[1] = ((short*) g_14cf900)[1];
-		(&g_14ce8c0)[2] = ((short*) g_14cf900)[2];
+		(&io_ActiveCursorX)[0] = ((short*) io_PolledCursorState)[0];
+		(&io_ActiveCursorX)[1] = ((short*) io_PolledCursorState)[1];
+		(&io_ActiveCursorX)[2] = ((short*) io_PolledCursorState)[2];
 	}
 	i = 0;
-	((int*) &g_14ce8c0)[3] = 0;
-	((int*) &g_14ce8c0)[6] = 0;
-	((int*) &g_14ce8c0)[8] = 0;
-	((int*) &g_14ce8c0)[11] = 0;
-	((int*) &g_14ce8c0)[12] = 0;
-	((int*) &g_14ce8c0)[15] = 0;
+	((int*) &io_ActiveCursorX)[3] = 0;
+	((int*) &io_ActiveCursorX)[6] = 0;
+	((int*) &io_ActiveCursorX)[8] = 0;
+	((int*) &io_ActiveCursorX)[11] = 0;
+	((int*) &io_ActiveCursorX)[12] = 0;
+	((int*) &io_ActiveCursorX)[15] = 0;
 	for (; i < 32; i++) {
 		if (*(int*) (0x14ce9c8 + i * 0x4c) != 0) {
 			rec = (unsigned char*) (0x14ce986 + i * 0x4c);

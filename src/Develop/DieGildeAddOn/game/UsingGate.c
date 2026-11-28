@@ -7,7 +7,7 @@ struct room_4066d0 {
 	char pad[0x3d8];
 };
 
-extern char g_1043370[];
+extern char tp_ch_PathGrid[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl d3_GetContextIndex(int);
@@ -49,7 +49,7 @@ void __cdecl UsingGate(char* ev)
 	d3_SelectSceneContext(room, 1);
 	door = d3_FindSceneObject(0, 0x120, 0, ev + 0x130);
 	if (door != 0) {
-		map = ((struct room_4066d0*)g_1043370)[room].map;
+		map = ((struct room_4066d0*)tp_ch_PathGrid)[room].map;
 		d3_TransformPoint(door, door + 0x4c, pos);
 		if (d3sm_SampleHeight(map, pos, &col, &row, &height)) {
 			ch_InsertAction(obj, ev, 0x2d, col, row, room);

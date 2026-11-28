@@ -10,25 +10,25 @@ typedef struct {
 } Lrow;
 
 extern int d2_CurrentWindowId;
-extern char* g_77255c;
+extern char* d2_CurrentWindow;
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/Units/d2.v1/d2_win.h"
-extern char g_1015f40[];
-extern char g_6b5c60[];
+extern char d2_Windows[];
+extern char str_empty[];
 extern char g_6aac84[];
 extern char g_6aac7c[];
 extern char g_6aacac[];
 extern int g_14ab710;
 extern int g_14ab718;
 extern int g_14ab6fc;
-extern int g_14ce8e0;
-extern char g_100f8c0;
-extern int g_100f1dc;
+extern int io_RightButtonReleased;
+extern char d2_HoverTextBuffer;
+extern int d2_DialogButtonAction;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern int d2_CurrentElementId;
-extern double g_6640e8;
+extern double dbl_0_01;
 
 void __cdecl ResetDisplayCounters(void);
 int __cdecl CountDisplayCounters(void);
@@ -97,32 +97,32 @@ int __cdecl d2_ShowMoneyExchangeDialog(char* a0)
 	d2_SetForm(dialogId, 0);
 	d2_DrawPanelFrame(d2_CurrentWindowId, 0x73b, 0x73f);
 	d2_SetForm(dialogId, 0);
-	h1 = d2_ShowTxt((*(int*)(((char*)&((D2_CONTROL_TL*)g_1015ea0)[e1].x)) - *(int*)(g_77255c + 4)) + 2,
-		(*(int*)(((char*)&((D2_CONTROL_TL*)g_1015ea0)[e1].height)) - *(int*)(g_77255c + 8)) + 2
-			+ *(int*)(((char*)&((D2_CONTROL_TL*)g_1015ea0)[e1].y)),
-		g_6b5c60, d2_CurrentWindowId);
-	h2 = d2_ShowTxt((*(int*)(((char*)&((D2_CONTROL_TL*)g_1015ea0)[e2].x)) - *(int*)(g_77255c + 4)) + 2,
-		(*(int*)(((char*)&((D2_CONTROL_TL*)g_1015ea0)[e2].height)) - *(int*)(g_77255c + 8)) + 2
-			+ *(int*)(((char*)&((D2_CONTROL_TL*)g_1015ea0)[e2].y)),
-		g_6b5c60, d2_CurrentWindowId);
-	*(int*)(((char*)&((D2_CONTROL_TL*)g_1015ea0)[h1].font)) = 0x54;
-	*(int*)(((char*)&((D2_CONTROL_TL*)g_1015ea0)[h2].font)) = 0x54;
-	*(int*)(((char*)&((D2_CONTROL_TL*)g_1015ea0)[e4].value_054)) = 1;
+	h1 = d2_ShowTxt((*(int*)(((char*)&((D2_CONTROL_TL*)d2_Controls)[e1].x)) - *(int*)(d2_CurrentWindow + 4)) + 2,
+		(*(int*)(((char*)&((D2_CONTROL_TL*)d2_Controls)[e1].height)) - *(int*)(d2_CurrentWindow + 8)) + 2
+			+ *(int*)(((char*)&((D2_CONTROL_TL*)d2_Controls)[e1].y)),
+		str_empty, d2_CurrentWindowId);
+	h2 = d2_ShowTxt((*(int*)(((char*)&((D2_CONTROL_TL*)d2_Controls)[e2].x)) - *(int*)(d2_CurrentWindow + 4)) + 2,
+		(*(int*)(((char*)&((D2_CONTROL_TL*)d2_Controls)[e2].height)) - *(int*)(d2_CurrentWindow + 8)) + 2
+			+ *(int*)(((char*)&((D2_CONTROL_TL*)d2_Controls)[e2].y)),
+		str_empty, d2_CurrentWindowId);
+	*(int*)(((char*)&((D2_CONTROL_TL*)d2_Controls)[h1].font)) = 0x54;
+	*(int*)(((char*)&((D2_CONTROL_TL*)d2_Controls)[h2].font)) = 0x54;
+	*(int*)(((char*)&((D2_CONTROL_TL*)d2_Controls)[e4].value_054)) = 1;
 	d2_SetForm(dialogId, 0);
-	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8[0] = 0xe;
-	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8[4] = 0x18;
-	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8[8] = 0xe;
-	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8[12] = 0xe;
+	*(int*) &((D2_WIN*)d2_Windows)[d2_CurrentWindowId].pad3a8[0] = 0xe;
+	*(int*) &((D2_WIN*)d2_Windows)[d2_CurrentWindowId].pad3a8[4] = 0x18;
+	*(int*) &((D2_WIN*)d2_Windows)[d2_CurrentWindowId].pad3a8[8] = 0xe;
+	*(int*) &((D2_WIN*)d2_Windows)[d2_CurrentWindowId].pad3a8[12] = 0xe;
 	d2_SetForm(dialogId, 1);
 	io_AppendText(0x18f5);
 	d2_SetForm(dialogId, 2);
 	io_AppendText(0x18f6, *(int*)(a0 + 0x69),
-		*(unsigned short*)(g_773d75 * 0x2f4 + 0x8680b4) * 2 + 0x9a8, *(int*)(a0 + 0x6d));
+		*(unsigned short*)(gm_ActiveTownIndex * 0x2f4 + 0x8680b4) * 2 + 0x9a8, *(int*)(a0 + 0x6d));
 	d2_SetMouseTooltip(g_14ab6fc);
 	d2_SetOverlayAnimation(0, 0);
 	v29 = -1;
 	do {
-		if (g_14ce8e0) {
+		if (io_RightButtonReleased) {
 			if (CountDisplayCounters()) {
 				d2_ClearSelectedControl();
 				for (v15 = 0; v15 < 0x1c0; v15 += 0x1c) {
@@ -132,14 +132,14 @@ int __cdecl d2_ShowMoneyExchangeDialog(char* a0)
 						d2_SetElementValue(*(int*)((char*)globRows + v15), 0, 0, 0);
 				}
 			} else {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
 		ResetDisplayCounters();
 		if (v31 != 2) {
 			v29 = d2_PopulateInventoryGrid(*(int*)(a0 + 0x5d), ownRows, dialogId, 5, 1);
 			if (v29 != -1) {
-				if (!g_100f8c0 || !v31) {
+				if (!d2_HoverTextBuffer || !v31) {
 					io_FormatTextBuffer(buf, 0x18fa, ownRows[v29].x14, ownRows[v29].val * 2 + 0x9a8);
 					d2_SetMouseTooltip(buf);
 				}
@@ -149,14 +149,14 @@ int __cdecl d2_ShowMoneyExchangeDialog(char* a0)
 				goto label_image_done;
 			}
 		}
-		v29 = d2_PopulateInventoryGrid(*(int*)(g_774970 * 0x21c + 0x7f4e18), globRows, dialogId, 4, 1);
+		v29 = d2_PopulateInventoryGrid(*(int*)(gm_LocalPlayerSlot * 0x21c + 0x7f4e18), globRows, dialogId, 4, 1);
 		if (v29 == -1) {
 			v30 = -1;
 			v31 = 0;
 			d2_SetMouseTooltip(g_14ab6fc);
 			d2_SetElementImage(e4, 0x4f7);
 		} else {
-			if (!g_100f8c0 || !v31) {
+			if (!d2_HoverTextBuffer || !v31) {
 				io_FormatTextBuffer(buf, 0x18f8, globRows[v29].x14, globRows[v29].val * 2 + 0x9a8);
 				d2_SetMouseTooltip(buf);
 			}
@@ -189,7 +189,7 @@ int __cdecl d2_ShowMoneyExchangeDialog(char* a0)
 			itoa(v16, buf, 10);
 			d2_SetLabelText(h2, buf);
 		}
-		if (g_100f1dc == 3 || g_100f1dc == 4) {
+		if (d2_DialogButtonAction == 3 || d2_DialogButtonAction == 4) {
 			if (d2_CurrentElementId == e2) {
 				d2_SetForm(dialogId, 4);
 				d2_ScrollWindow(0, -0x4c, d2_CurrentWindowId);
@@ -213,7 +213,7 @@ int __cdecl d2_ShowMoneyExchangeDialog(char* a0)
 					v4 = ownRows[v30].x14;
 					factor = (float) (*(int*)(a0 + 0x6d) * 0.01);
 					value = (float) gm_TradeUnitsToAmount(v4, v3);
-					if (g_774970 != *(unsigned short*)(a0 + 0x27)) {
+					if (gm_LocalPlayerSlot != *(unsigned short*)(a0 + 0x27)) {
 						fee = value * factor;
 						v17 = gm_TradeUnitsToAmount(1, v3);
 						if (!((float) v17 < fee)) fee = (float) gm_TradeUnitsToAmount(1, v3);
@@ -226,13 +226,13 @@ int __cdecl d2_ShowMoneyExchangeDialog(char* a0)
 						v28 = (int) value;
 						v17 = gm_TradeUnitsToAmount(v4, v3);
 						cm_SendLogAction(g_6aac7c);
-						cm_SendSellObjekt(-1, *(int*)(g_774970 * 0x21c + 0x7f4ca4), v2, v28, g_773d75, 0);
-						cm_SendSellObjekt(*(int*)(g_774970 * 0x21c + 0x7f4ca4), -1, v3, (int) (v17 - fee), g_773d75, 0);
-						cm_SendSellObjekt(-1, *(int*)(a0 + 1), v3, v17, g_773d75, 0);
-						cm_SendSellObjekt(*(int*)(a0 + 1), -1, v2, (int) (v17 + fee), g_773d75, 0);
+						cm_SendSellObjekt(-1, *(int*)(gm_LocalPlayerSlot * 0x21c + 0x7f4ca4), v2, v28, gm_ActiveTownIndex, 0);
+						cm_SendSellObjekt(*(int*)(gm_LocalPlayerSlot * 0x21c + 0x7f4ca4), -1, v3, (int) (v17 - fee), gm_ActiveTownIndex, 0);
+						cm_SendSellObjekt(-1, *(int*)(a0 + 1), v3, v17, gm_ActiveTownIndex, 0);
+						cm_SendSellObjekt(*(int*)(a0 + 1), -1, v2, (int) (v17 + fee), gm_ActiveTownIndex, 0);
 						v5 = cm_SendTraceEnd(g_6aac7c);
 						while (!cm_GetCommandStatus(v5)) main_RunFrameLoop(0, 0x677c7);
-						d2_PopulateInventoryGrid(*(int*)(g_774970 * 0x21c + 0x7f4e18), globRows, dialogId, 4, 1);
+						d2_PopulateInventoryGrid(*(int*)(gm_LocalPlayerSlot * 0x21c + 0x7f4e18), globRows, dialogId, 4, 1);
 						d2_PopulateInventoryGrid(*(int*)(a0 + 0x5d), ownRows, dialogId, 5, 1);
 						d2_ShowStatusBanner(g_14ab718);
 						d2_ClearSelectedControl();
@@ -252,7 +252,7 @@ int __cdecl d2_ShowMoneyExchangeDialog(char* a0)
 					v4 = globRows[v30].x14;
 					v1 = ownRows[v16].x18 < v4 ? ownRows[v16].x18 : v4;
 					value = (float) gm_TradeUnitsToAmount(v1, v2);
-					if (g_774970 != *(unsigned short*)(a0 + 0x27)) {
+					if (gm_LocalPlayerSlot != *(unsigned short*)(a0 + 0x27)) {
 						fee = (float) (*(int*)(a0 + 0x6d) * 0.01 * value);
 						v17 = gm_TradeUnitsToAmount(1, v3);
 						if (!((float) v17 < fee)) fee = (float) gm_TradeUnitsToAmount(1, v3);
@@ -262,14 +262,14 @@ int __cdecl d2_ShowMoneyExchangeDialog(char* a0)
 						gm_TradeUnitsToAmount(v1, v3);
 						cm_SendLogAction(g_6aac7c);
 						v28 = (int) value;
-						cm_SendSellObjekt(-1, *(int*)(g_774970 * 0x21c + 0x7f4ca4), v3, v28, g_773d75, 0);
+						cm_SendSellObjekt(-1, *(int*)(gm_LocalPlayerSlot * 0x21c + 0x7f4ca4), v3, v28, gm_ActiveTownIndex, 0);
 						v17 = (int) (value - fee);
-						cm_SendSellObjekt(*(int*)(g_774970 * 0x21c + 0x7f4ca4), -1, v2, v17, g_773d75, 0);
-						cm_SendSellObjekt(-1, *(int*)(a0 + 1), v2, v17, g_773d75, 0);
-						cm_SendSellObjekt(*(int*)(a0 + 1), -1, v3, v28, g_773d75, 0);
+						cm_SendSellObjekt(*(int*)(gm_LocalPlayerSlot * 0x21c + 0x7f4ca4), -1, v2, v17, gm_ActiveTownIndex, 0);
+						cm_SendSellObjekt(-1, *(int*)(a0 + 1), v2, v17, gm_ActiveTownIndex, 0);
+						cm_SendSellObjekt(*(int*)(a0 + 1), -1, v3, v28, gm_ActiveTownIndex, 0);
 						v5 = cm_SendTraceEnd(g_6aac7c);
 						while (!cm_GetCommandStatus(v5)) main_RunFrameLoop(0, 0x677c7);
-						d2_PopulateInventoryGrid(*(int*)(g_774970 * 0x21c + 0x7f4e18), globRows, dialogId, 4, 1);
+						d2_PopulateInventoryGrid(*(int*)(gm_LocalPlayerSlot * 0x21c + 0x7f4e18), globRows, dialogId, 4, 1);
 						d2_PopulateInventoryGrid(*(int*)(a0 + 0x5d), ownRows, dialogId, 5, 1);
 						d2_ShowStatusBanner(g_14ab718);
 						d2_ClearSelectedControl();

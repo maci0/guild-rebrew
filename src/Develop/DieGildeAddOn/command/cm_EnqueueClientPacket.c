@@ -26,7 +26,7 @@ extern unsigned char* g_14cbca8;
 extern int g_aecde0;
 extern int g_aed330;
 extern CLIENT_QUEUED_PACKET g_aed740[0x8000];
-extern COMMAND_STATUS_SLOT g_fb5760[0x8000];
+extern COMMAND_STATUS_SLOT cm_CommandStatusQueue[0x8000];
 
 unsigned short __cdecl ahm_GetCommandPayloadSize(CLIENT_QUEUED_PACKET*);
 int __cdecl cm_FlushPendingDataPackets(void);
@@ -41,12 +41,12 @@ int __cdecl cm_EnqueueClientPacket(CLIENT_QUEUED_PACKET* queuedInput)
 	int n;
 	int seq;
 
-	if (g_14cbcb0 != 0)
+	if (nt_ConnectionClosed != 0)
 		return -1;
 	n = g_1005768 + 1;
 	seq = n & 0x7fff;
 	p = &g_aed740[seq];
-	if (g_14cbca0 != -1 && (*(CLIENT_QUEUED_PACKET**)&g_14cbca8) == p)
+	if (nt_ClientSocket != -1 && (*(CLIENT_QUEUED_PACKET**)&g_14cbca8) == p)
 		return -1;
 	for (q = (*(CLIENT_QUEUED_PACKET**)&g_1005760); q != 0; q = q->next) {
 		if (q == p)
@@ -61,8 +61,8 @@ int __cdecl cm_EnqueueClientPacket(CLIENT_QUEUED_PACKET* queuedInput)
 	p->nextseq = 0;
 	if (queuedInput->type == 0x20 && queuedInput->data[0] == 0xe)
 		g_aecde0 = p->cur;
-	g_fb5760[seq].f0 = 0;
-	g_fb5760[seq].f2 = seq;
+	cm_CommandStatusQueue[seq].f0 = 0;
+	cm_CommandStatusQueue[seq].f2 = seq;
 	last = (*(CLIENT_QUEUED_PACKET**)&g_1005760);
 	if (last != 0) {
 		while (last->next != 0)

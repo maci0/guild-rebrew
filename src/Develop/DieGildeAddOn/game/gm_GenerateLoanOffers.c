@@ -5,9 +5,9 @@
 #include "Develop/DieGildeAddOn/game/game_timestamp.h"
 typedef struct { int values[3]; } LOAN_OFFER;
 
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern double g_6628f0;
-extern double g_6640e8, g_6629c8, g_662ad8, g_662908, g_6653f8, g_662a08;
+extern double dbl_0_01, g_6629c8, g_662ad8, g_662908, g_6653f8, dbl_1_5;
 extern float g_662914, g_662a98;
 
 int __cdecl gm_QueryEntitySum(int, unsigned char);
@@ -42,7 +42,7 @@ unsigned int __cdecl gm_GenerateLoanOffers(int bank, unsigned short* borrower, u
 
 	flag = 0;
 	if (borrower && bank && *(unsigned short*) (bank + 0x27) != 0xffff && maxOffers) {
-		v21 = gm_QueryEntitySum(*(int*) (bank + 0x5d), g_773d75);
+		v21 = gm_QueryEntitySum(*(int*) (bank + 0x5d), gm_ActiveTownIndex);
 		if ((char) borrower[1] == 6) {
 			if (gm_GameTime.a < 6) {
 				v6 = (int) *(unsigned short*) (bank + 0x27);
@@ -58,7 +58,7 @@ unsigned int __cdecl gm_GenerateLoanOffers(int bank, unsigned short* borrower, u
 						v21 = (int) (have + offer);
 						v8 = (int) offer;
 						cm_RequestMoveCredits(*(int*) (bank + 1), 0xffffffff,
-						             g_773d75, v8);
+						             gm_ActiveTownIndex, v8);
 					}
 				}
 			}
@@ -110,7 +110,7 @@ unsigned int __cdecl gm_GenerateLoanOffers(int bank, unsigned short* borrower, u
 				}
 				v6 = gm_RandomMod(6) + 2;
 				cap = *(int*) (bank + 0x65) * g_6653f8;
-				v18 = (int) (cap + (*(int*) (bank + 0x65) * g_662a08 - cap)
+				v18 = (int) (cap + (*(int*) (bank + 0x65) * dbl_1_5 - cap)
 				              * ((float) v6 * 0.16666667f));
 				v2 = *(char*) ((unsigned int) *(unsigned short*) (bank + 0x27) *
 				                   0x21c +

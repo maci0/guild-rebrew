@@ -13,7 +13,7 @@ int __cdecl d3snd_PlaySoundEffect(int a, int b, int c, int d)
 {
 	int h;
 
-	if (g_774934 == 0)
+	if (d3snd_SoundEnabled == 0)
 		return 0;
 	if (g_772d34 != 0 && *(int*) (g_772d34 + 8) != 0)
 		return 0;

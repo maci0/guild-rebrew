@@ -236,7 +236,7 @@ display:
     cut_SetRandSeed(*(int*) (e + 0x78));
     sprintf(text, (char*) 0x68d58c, e[8]);
     *(int*) 0x772f40 = (int) e;
-    (*(void (__cdecl**) (int*)) (g_9b0840 + e[8] * 20)) (event);
+    (*(void (__cdecl**) (int*)) (he_EventCallbacks + e[8] * 20)) (event);
     d2_DestroyForm(*(int*) (e + 0x2c));
     *(int*) 0x68bfc0 = saved_68bfc0;
     if (*(int*) 0x772f3c != 0)

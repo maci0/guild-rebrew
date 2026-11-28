@@ -14,7 +14,7 @@ typedef struct {
 // SIZE 0x2c
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern unsigned short* g_772e9c;
+extern unsigned short* cut_CombatDefenderEntity;
 
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 ent2c* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
@@ -32,11 +32,11 @@ void __cdecl cut_AssignIdleCombatOrders(char* team)
 	teamSlot = 0;
 	for (i = 0; i < ((unsigned char*)g_772eb4)[0x30]; i++) {
 		if (*(int*) (((unsigned char*)g_772eb4) + 0x34 + i * 4) == *(int*) (team + 4)) {
-			teamSlot = g_9b0e20 + i * 0x35c;
+			teamSlot = cut_ParticipantSlots + i * 0x35c;
 			break;
 		}
 	}
-	if (team == ((char*)g_772e9c))
+	if (team == ((char*)cut_CombatDefenderEntity))
 		base = (int*) (((unsigned char*)g_772eb4) + 0xc0);
 	else
 		base = (int*) (((unsigned char*)g_772eb4) + 0x80);

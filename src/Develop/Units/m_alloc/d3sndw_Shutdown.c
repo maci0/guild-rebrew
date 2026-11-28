@@ -1,20 +1,20 @@
 #include "Develop/Units/m_alloc/m_alloc.h"
 
-extern float* g_6b5d0c;
-extern char* g_6b5d10;
-extern char* g_6b5d14;
+extern float* d3snd_ProbeSinTable;
+extern char* d3sndw_SlotWaterIds;
+extern char* d3sndw_SlotStates;
 
 /* ADDRESS: GOLDTL 0x004195f0 */
 void __cdecl d3sndw_Shutdown(void)
 {
-	if (g_6b5d0c != 0) {
-		m_FreeTracked(g_6b5d0c);
-		g_6b5d0c = 0;
-		m_FreeTracked(g_6b5d10);
-		g_6b5d10 = 0;
-		m_FreeTracked(g_6b5d14);
-		g_6b5d14 = 0;
-		g_6b5d10 = 0;
-		g_6b5d0c = 0;
+	if (d3snd_ProbeSinTable != 0) {
+		m_FreeTracked(d3snd_ProbeSinTable);
+		d3snd_ProbeSinTable = 0;
+		m_FreeTracked(d3sndw_SlotWaterIds);
+		d3sndw_SlotWaterIds = 0;
+		m_FreeTracked(d3sndw_SlotStates);
+		d3sndw_SlotStates = 0;
+		d3sndw_SlotWaterIds = 0;
+		d3snd_ProbeSinTable = 0;
 	}
 }

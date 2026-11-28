@@ -29,7 +29,7 @@ typedef struct Actor {
 	unsigned char flags;
 } Actor;
 
-extern AM_METHOD g_1008540[];
+extern AM_METHOD am_Methods[];
 
 /* ADDRESS: GOLDTL 0x004a4550 */
 int __cdecl ai_CalculateMatchingMethodEffects(float* s1, float* s2, int idx, Actor* e)
@@ -41,7 +41,7 @@ int __cdecl ai_CalculateMatchingMethodEffects(float* s1, float* s2, int idx, Act
 
 	*s1 = 0;
 	*s2 = 0;
-	t = &g_1008540[idx];
+	t = &am_Methods[idx];
 	if (t->flags & e->flags) {
 		k = 40.0f;
 		found = 1;

@@ -77,17 +77,17 @@ typedef struct Msg {
 #pragma pack(pop)
 
  
-extern Ent g_7f4ca0[];
+extern Ent gm_EntitySlotTable[];
 extern unsigned char* lpGebaeudePROT;
 extern char* lpObjektePROT;
-extern char g_7f4ca4[];
+extern char gm_EntityIdField[];
 extern char gm_GameTime[];
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
-extern int g_100b0ac;
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
+extern int ai_ProductionGoodsCount;
 extern int ai_ResourceCount;
-extern int g_100dc20;
+extern int ai_MeisterDebugState;
 extern int g_100dc34;
 
 char* __cdecl fcn_00502cd0(int, int, int, ...);
@@ -146,17 +146,17 @@ int __cdecl ai_RunResourceMaster(char* meister)
 	}
 	ai_CollectBuildingGoodsPlan(meister, prod_slot, craft_slot);
 
-	if (g_100b0ac > 0) {
-		p2 = (int*) &g_100d0c0[0].building_indices[0];
-		for (n = g_100b0ac; n != 0; n--) {
+	if (ai_ProductionGoodsCount > 0) {
+		p2 = (int*) &ai_ProductionGoodsPlans[0].building_indices[0];
+		for (n = ai_ProductionGoodsCount; n != 0; n--) {
 			q = (char*) p2;
 			for (i = 4; i != 0; i--) {
-				if (*(int*) q >= 0 && g_100b0c0[*(int*) q].parent_index >= 0) {
-					g_100d0c0[g_100b0c0[*(int*) q].parent_index].flags |= 4;
+				if (*(int*) q >= 0 && ai_ResourceRequests[*(int*) q].parent_index >= 0) {
+					ai_ProductionGoodsPlans[ai_ResourceRequests[*(int*) q].parent_index].flags |= 4;
 					for (j = 0; j < ai_ResourceCount; j++) {
-						if (g_100d0c0[g_100b0c0[*(int*) q].parent_index].goods_id
-						    == g_100b0c0[j].goods_id) {
-							g_100b0c0[j].flags |= 4;
+						if (ai_ProductionGoodsPlans[ai_ResourceRequests[*(int*) q].parent_index].goods_id
+						    == ai_ResourceRequests[j].goods_id) {
+							ai_ResourceRequests[j].flags |= 4;
 						}
 					}
 				}
@@ -186,15 +186,15 @@ int __cdecl ai_RunResourceMaster(char* meister)
 				memset(m, 0, sizeof(m));
 				h = *(char**) (meister + 0x16c);
 				m[4] = 9;
-				*(int*) (m + 8) = *(int*) (g_7f4ca4 +
+				*(int*) (m + 8) = *(int*) (gm_EntityIdField +
 				                           *(unsigned short*) (h + 0x27) * 0x21c);
 				*(int*) (m + 0xc) = *(int*) (h + 1);
 				*(int*) (m + 0x10) = 0;
 				*(int*) (m + 0x14) = 0;
 				*(int*) (m + 0x28) = *(int*) &gm_GameTime;
-				*(int*) (m + 0x2c) = g_7f4c04;
-				*(int*) (m + 0x30) = g_7f4c08;
-				*(short*) (m + 0x34) = g_7f4c0c;
+				*(int*) (m + 0x2c) = gm_GameTimeHour;
+				*(int*) (m + 0x30) = gm_GameTimeSliceDword;
+				*(short*) (m + 0x34) = gm_GameTimeTailWord;
 				m[0x36] = 1;
 				*(int*) (m + 0x58) = *(int*) (h + 1);
 				*(int*) (m + 0x5c) = *(int*) (prod_slot + 2);
@@ -221,11 +221,11 @@ done_m:
 		}
 	}
 	h = *(char**) (meister + 0x16c);
-	if (g_7f4ca0[*(unsigned short*) (h + 0x27)].f2 == 6) {
+	if (gm_EntitySlotTable[*(unsigned short*) (h + 0x27)].f2 == 6) {
 		v = hp_PickWeightedProdItem((int) h);
 		if (q != 0) {
 			for (i = 0; i < 0x20; i++) {
-				if (g_100d0c0[i].goods_id == v) {
+				if (ai_ProductionGoodsPlans[i].goods_id == v) {
 					goto found;
 				}
 			}
@@ -234,138 +234,138 @@ done_m:
 	goto scan;
 
 found:
-	if ((int) *(unsigned char*) (craft_slot + 0x1c) < g_100d0c0[i].min_1) {
+	if ((int) *(unsigned char*) (craft_slot + 0x1c) < ai_ProductionGoodsPlans[i].min_1) {
 		goto scan;
 	}
-	if ((int) *(unsigned char*) (craft_slot + 0x1d) < g_100d0c0[i].min_2) {
+	if ((int) *(unsigned char*) (craft_slot + 0x1d) < ai_ProductionGoodsPlans[i].min_2) {
 		goto scan;
 	}
-	if (g_100d0c0[i].unk_40 < (int) ((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[i].goods_id].value_036) {
+	if (ai_ProductionGoodsPlans[i].unk_40 < (int) ((OBJECT_PROTOTYPE*) lpObjektePROT)[ai_ProductionGoodsPlans[i].goods_id].value_036) {
 		goto scan;
 	}
-	v = (int) gm_FindCityItemHolder(g_100d0c0[i].goods_id);
+	v = (int) gm_FindCityItemHolder(ai_ProductionGoodsPlans[i].goods_id);
 	if (v == 0) {
 		goto scan;
 	}
-	t = (int) gm_eval_SlotVoll((char*) v, g_100d0c0[i].goods_id, 0xf4240);
-	if (t < (int) ((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[i].goods_id].value_036 + g_100d0c0[i].unk_3c) {
+	t = (int) gm_eval_SlotVoll((char*) v, ai_ProductionGoodsPlans[i].goods_id, 0xf4240);
+	if (t < (int) ((OBJECT_PROTOTYPE*) lpObjektePROT)[ai_ProductionGoodsPlans[i].goods_id].value_036 + ai_ProductionGoodsPlans[i].unk_3c) {
 		goto scan;
 	}
-	if (((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[i].goods_id].kind == 0x17) {
-		q = fcn_00502cd0(*(int*) (store_slot + 0x14), 1, 0, g_100d0c0[i].goods_id);
+	if (((OBJECT_PROTOTYPE*) lpObjektePROT)[ai_ProductionGoodsPlans[i].goods_id].kind == 0x17) {
+		q = fcn_00502cd0(*(int*) (store_slot + 0x14), 1, 0, ai_ProductionGoodsPlans[i].goods_id);
 		if (q == 0) {
 			goto scan;
 		}
-		if (*(int*) (q + 0xe) < (int) ((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[i].goods_id].value_036) {
+		if (*(int*) (q + 0xe) < (int) ((OBJECT_PROTOTYPE*) lpObjektePROT)[ai_ProductionGoodsPlans[i].goods_id].value_036) {
 			goto scan;
 		}
-		g_100d0c0[i].flags |= 8;
-		ai_PlanGoodIngredients(meister, (int*) &g_100d0c0[i]);
-	} else if (ai_CanProduceGood(meister, (int*) &g_100d0c0[i], 1)) {
-		g_100d0c0[i].flags |= 8;
-		ai_PlanGoodIngredients(meister, (int*) &g_100d0c0[i]);
-	} else if (ai_CanProduceGood(meister, (int*) &g_100d0c0[i], 0)) {
-		ai_PlanGoodIngredients(meister, (int*) &g_100d0c0[i]);
+		ai_ProductionGoodsPlans[i].flags |= 8;
+		ai_PlanGoodIngredients(meister, (int*) &ai_ProductionGoodsPlans[i]);
+	} else if (ai_CanProduceGood(meister, (int*) &ai_ProductionGoodsPlans[i], 1)) {
+		ai_ProductionGoodsPlans[i].flags |= 8;
+		ai_PlanGoodIngredients(meister, (int*) &ai_ProductionGoodsPlans[i]);
+	} else if (ai_CanProduceGood(meister, (int*) &ai_ProductionGoodsPlans[i], 0)) {
+		ai_PlanGoodIngredients(meister, (int*) &ai_ProductionGoodsPlans[i]);
 	} else {
 		goto scan;
 	}
 	goto after;
 
 scan:
-	for (i = 0; i < g_100b0ac; i++) {
-		if (g_100d0c0[i].flags & 4) {
+	for (i = 0; i < ai_ProductionGoodsCount; i++) {
+		if (ai_ProductionGoodsPlans[i].flags & 4) {
 			continue;
 		}
-		if ((int) *(unsigned char*) (craft_slot + 0x1c) < g_100d0c0[i].min_1) {
+		if ((int) *(unsigned char*) (craft_slot + 0x1c) < ai_ProductionGoodsPlans[i].min_1) {
 			continue;
 		}
-		if ((int) *(unsigned char*) (craft_slot + 0x1d) < g_100d0c0[i].min_2) {
+		if ((int) *(unsigned char*) (craft_slot + 0x1d) < ai_ProductionGoodsPlans[i].min_2) {
 			continue;
 		}
-		if (g_100d0c0[i].unk_40 < (int) ((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[i].goods_id].value_036) {
+		if (ai_ProductionGoodsPlans[i].unk_40 < (int) ((OBJECT_PROTOTYPE*) lpObjektePROT)[ai_ProductionGoodsPlans[i].goods_id].value_036) {
 			continue;
 		}
-		v = (int) gm_FindCityItemHolder(g_100d0c0[i].goods_id);
+		v = (int) gm_FindCityItemHolder(ai_ProductionGoodsPlans[i].goods_id);
 		if (v == 0) {
 			continue;
 		}
-		t = (int) gm_eval_SlotVoll((char*) v, g_100d0c0[i].goods_id, 0xf4240);
-		if (t < (int) ((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[i].goods_id].value_036 + g_100d0c0[i].unk_3c) {
+		t = (int) gm_eval_SlotVoll((char*) v, ai_ProductionGoodsPlans[i].goods_id, 0xf4240);
+		if (t < (int) ((OBJECT_PROTOTYPE*) lpObjektePROT)[ai_ProductionGoodsPlans[i].goods_id].value_036 + ai_ProductionGoodsPlans[i].unk_3c) {
 			continue;
 		}
-		if (((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[i].goods_id].kind == 0x17) {
-			q = fcn_00502cd0(*(int*) (store_slot + 0x14), 1, 0, g_100d0c0[i].goods_id);
+		if (((OBJECT_PROTOTYPE*) lpObjektePROT)[ai_ProductionGoodsPlans[i].goods_id].kind == 0x17) {
+			q = fcn_00502cd0(*(int*) (store_slot + 0x14), 1, 0, ai_ProductionGoodsPlans[i].goods_id);
 			if (q == 0) {
 				continue;
 			}
-			if (*(int*) (q + 0xe) < (int) ((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[i].goods_id].value_036) {
+			if (*(int*) (q + 0xe) < (int) ((OBJECT_PROTOTYPE*) lpObjektePROT)[ai_ProductionGoodsPlans[i].goods_id].value_036) {
 				continue;
 			}
-			g_100d0c0[i].flags |= 8;
-			ai_PlanGoodIngredients(meister, (int*) &g_100d0c0[i]);
+			ai_ProductionGoodsPlans[i].flags |= 8;
+			ai_PlanGoodIngredients(meister, (int*) &ai_ProductionGoodsPlans[i]);
 			goto after;
-		} else if (ai_CanProduceGood(meister, (int*) &g_100d0c0[i], 1)) {
-			g_100d0c0[i].flags |= 8;
-			ai_PlanGoodIngredients(meister, (int*) &g_100d0c0[i]);
+		} else if (ai_CanProduceGood(meister, (int*) &ai_ProductionGoodsPlans[i], 1)) {
+			ai_ProductionGoodsPlans[i].flags |= 8;
+			ai_PlanGoodIngredients(meister, (int*) &ai_ProductionGoodsPlans[i]);
 			goto after;
 		}
 	}
 
 after:
-	for (i = 0; i < g_100b0ac; i++) {
-		if (g_100d0c0[i].flags & 8) {
+	for (i = 0; i < ai_ProductionGoodsCount; i++) {
+		if (ai_ProductionGoodsPlans[i].flags & 8) {
 			break;
 		}
-		if (g_100d0c0[i].flags & 4) {
+		if (ai_ProductionGoodsPlans[i].flags & 4) {
 			continue;
 		}
-		if ((int) *(unsigned char*) (craft_slot + 0x1c) < g_100d0c0[i].min_1) {
+		if ((int) *(unsigned char*) (craft_slot + 0x1c) < ai_ProductionGoodsPlans[i].min_1) {
 			continue;
 		}
-		if ((int) *(unsigned char*) (craft_slot + 0x1d) < g_100d0c0[i].min_2) {
+		if ((int) *(unsigned char*) (craft_slot + 0x1d) < ai_ProductionGoodsPlans[i].min_2) {
 			continue;
 		}
-		if (g_100d0c0[i].unk_40 < (int) ((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[i].goods_id].value_036) {
+		if (ai_ProductionGoodsPlans[i].unk_40 < (int) ((OBJECT_PROTOTYPE*) lpObjektePROT)[ai_ProductionGoodsPlans[i].goods_id].value_036) {
 			continue;
 		}
-		v = (int) gm_FindCityItemHolder(g_100d0c0[i].goods_id);
+		v = (int) gm_FindCityItemHolder(ai_ProductionGoodsPlans[i].goods_id);
 		if (v == 0) {
 			continue;
 		}
-		t = (int) gm_eval_SlotVoll((char*) v, g_100d0c0[i].goods_id, 0xf4240);
-		if (t < (int) ((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[i].goods_id].value_036 + g_100d0c0[i].unk_3c) {
+		t = (int) gm_eval_SlotVoll((char*) v, ai_ProductionGoodsPlans[i].goods_id, 0xf4240);
+		if (t < (int) ((OBJECT_PROTOTYPE*) lpObjektePROT)[ai_ProductionGoodsPlans[i].goods_id].value_036 + ai_ProductionGoodsPlans[i].unk_3c) {
 			continue;
 		}
-		if (((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[i].goods_id].kind == 0x17) {
-			g_100d0c0[i].flags |= 0x10;
+		if (((OBJECT_PROTOTYPE*) lpObjektePROT)[ai_ProductionGoodsPlans[i].goods_id].kind == 0x17) {
+			ai_ProductionGoodsPlans[i].flags |= 0x10;
 			break;
 		}
-		if (ai_CanProduceGood(meister, (int*) &g_100d0c0[i], 0)) {
-			ai_PlanGoodIngredients(meister, (int*) &g_100d0c0[i]);
+		if (ai_CanProduceGood(meister, (int*) &ai_ProductionGoodsPlans[i], 0)) {
+			ai_PlanGoodIngredients(meister, (int*) &ai_ProductionGoodsPlans[i]);
 			break;
 		}
 	}
 
-	for (i = 0; i < g_100b0ac; i++) {
-		if ((g_100d0c0[i].flags & 8) == 0) {
+	for (i = 0; i < ai_ProductionGoodsCount; i++) {
+		if ((ai_ProductionGoodsPlans[i].flags & 8) == 0) {
 			continue;
 		}
-		if (((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[i].goods_id].kind == 0x17) {
+		if (((OBJECT_PROTOTYPE*) lpObjektePROT)[ai_ProductionGoodsPlans[i].goods_id].kind == 0x17) {
 			if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) (*(char**) (meister + 0x16c))].category == 0xb) {
-				g_100d0c0[i].flags |= 0x10;
+				ai_ProductionGoodsPlans[i].flags |= 0x10;
 			} else {
-				q = fcn_00502cd0(*(int*) (store_slot + 0x14), 1, 0, g_100d0c0[i].goods_id);
+				q = fcn_00502cd0(*(int*) (store_slot + 0x14), 1, 0, ai_ProductionGoodsPlans[i].goods_id);
 				if (q == 0
-				    || *(int*) (q + 0xe) < (int) ((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[i].goods_id].value_036) {
-					g_100d0c0[i].flags =
-					    (g_100d0c0[i].flags & ~8) | 0x10;
+				    || *(int*) (q + 0xe) < (int) ((OBJECT_PROTOTYPE*) lpObjektePROT)[ai_ProductionGoodsPlans[i].goods_id].value_036) {
+					ai_ProductionGoodsPlans[i].flags =
+					    (ai_ProductionGoodsPlans[i].flags & ~8) | 0x10;
 				}
 			}
 		} else {
 			for (j = 0; j != 4; j++) {
-				if (g_100b0c0[g_100d0c0[i].building_indices[j]].stock
-				    < (int) ((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[i].goods_id].ingredient_amounts[0]) {
-					g_100d0c0[i].flags &= ~8;
+				if (ai_ResourceRequests[ai_ProductionGoodsPlans[i].building_indices[j]].stock
+				    < (int) ((OBJECT_PROTOTYPE*) lpObjektePROT)[ai_ProductionGoodsPlans[i].goods_id].ingredient_amounts[0]) {
+					ai_ProductionGoodsPlans[i].flags &= ~8;
 				}
 			}
 		}
@@ -377,27 +377,27 @@ after:
 
 	st.avail = 0;
 	for (j = 0; j < 0x300; j++) {
-		if (g_7f4ca0[j].f8 > 0 && g_7f4ca0[j].id != 0xffff
-		    && g_7f4ca0[j].f2 != 0xa
-		    && g_7f4ca0[j].f16c == *(int*) (meister + 0x16c)
-		    && g_7f4ca0[j].f165 != 0
-		    && g_7f4ca0[j].f184 != 0
-		    && *(int*) (g_7f4ca0[j].f184 + 0x2c) == *(int*) (*(char**) (meister + 0x16c) + 1)
-		    && (g_7f4ca0[j].host == 0 || *(unsigned char*) g_7f4ca0[j].host != 0x28)
-		    && !(flag != 0 && (char*) meister == (char*) &g_7f4ca0[j])) {
-			he_AssignActionSlot(*(char**) (meister + 0x16c), 0, g_7f4ca0[j].id, 0);
+		if (gm_EntitySlotTable[j].f8 > 0 && gm_EntitySlotTable[j].id != 0xffff
+		    && gm_EntitySlotTable[j].f2 != 0xa
+		    && gm_EntitySlotTable[j].f16c == *(int*) (meister + 0x16c)
+		    && gm_EntitySlotTable[j].f165 != 0
+		    && gm_EntitySlotTable[j].f184 != 0
+		    && *(int*) (gm_EntitySlotTable[j].f184 + 0x2c) == *(int*) (*(char**) (meister + 0x16c) + 1)
+		    && (gm_EntitySlotTable[j].host == 0 || *(unsigned char*) gm_EntitySlotTable[j].host != 0x28)
+		    && !(flag != 0 && (char*) meister == (char*) &gm_EntitySlotTable[j])) {
+			he_AssignActionSlot(*(char**) (meister + 0x16c), 0, gm_EntitySlotTable[j].id, 0);
 			st.avail++;
 		}
 	}
-	if (g_100dc20 == *(int*) (meister + 0x16c)) {
+	if (ai_MeisterDebugState == *(int*) (meister + 0x16c)) {
 		g_100dc34 = st.avail;
 	}
 	st.want = 0;
 	{
 		int* f;
 
-		f = &g_100d0c0[0].flags;
-		for (i = 0; i < g_100b0ac; i++) {
+		f = &ai_ProductionGoodsPlans[0].flags;
+		for (i = 0; i < ai_ProductionGoodsCount; i++) {
 			if (*f & 8) {
 				st.want++;
 			}
@@ -426,7 +426,7 @@ after:
 	if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) (*(char**) (meister + 0x16c))].category != 0xb) {
 		goto ltail;
 	}
-	if ((unsigned short) g_7f4c04 % 2 == 0) {
+	if ((unsigned short) gm_GameTimeHour % 2 == 0) {
 		*(int*) (meister + 0x1b4) &= ~0x20;
 		goto ltail;
 	}
@@ -449,16 +449,16 @@ after:
 				ch = i;
 			}
 		}
-		for (i = 0; i < g_100b0ac * 4; i++) {
-			j = gm_RandomMod(g_100b0ac) & 0xffff;
-			if (((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[j].goods_id].kind == 0x17) {
+		for (i = 0; i < ai_ProductionGoodsCount * 4; i++) {
+			j = gm_RandomMod(ai_ProductionGoodsCount) & 0xffff;
+			if (((OBJECT_PROTOTYPE*) lpObjektePROT)[ai_ProductionGoodsPlans[j].goods_id].kind == 0x17) {
 				break;
 			}
 		}
-		if (((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[j].goods_id].kind != 0x17) {
+		if (((OBJECT_PROTOTYPE*) lpObjektePROT)[ai_ProductionGoodsPlans[j].goods_id].kind != 0x17) {
 			goto lflag;
 		}
-		g = plt_FindPlantInfo(g_100d0c0[j].goods_id);
+		g = plt_FindPlantInfo(ai_ProductionGoodsPlans[j].goods_id);
 		v = 0;
 		for (i = 0; i < *(int*) p2 && v < 4; i++) {
 			for (j = 0; v < 4 && j < *(int*) p2; j++) {
@@ -481,8 +481,8 @@ ltail:
 	{
 		char* rec;
 
-		rec = (char*) &g_100d0c0[0];
-		for (i = 0; i < g_100b0ac; i++) {
+		rec = (char*) &ai_ProductionGoodsPlans[0];
+		for (i = 0; i < ai_ProductionGoodsCount; i++) {
 			if (((PRODUCTION_GOODS_RECORD*) rec)->flags & 0x10) {
 				if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) (*(char**)(meister + 0x16c))].category != 0xb) {
 					st.kind = 8;
@@ -496,7 +496,7 @@ ltail:
 						if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) (*(char**)(meister + 0x16c))].category == 0xb) {
 							st.kind = 0x28;
 							ai_DispatchMeisterAction((int*) &st);
-							if (g_100dc20 == *(int*)(meister + 0x16c) && *(int*) 0x100dc3c < 4) {
+							if (ai_MeisterDebugState == *(int*)(meister + 0x16c) && *(int*) 0x100dc3c < 4) {
 								*(PRODUCTION_GOODS_RECORD*) (0x100ddc0 + *(int*) 0x100dc3c * 0x58) =
 								    *(PRODUCTION_GOODS_RECORD*) st.rec;
 								*(int*) 0x100dc3c = *(int*) 0x100dc3c + 1;
@@ -510,7 +510,7 @@ ltail:
 						st.rec = rec;
 					}
 					ai_DispatchMeisterAction((int*) &st);
-					if (g_100dc20 == *(int*)(meister + 0x16c) && *(int*) 0x100dc3c < 4) {
+					if (ai_MeisterDebugState == *(int*)(meister + 0x16c) && *(int*) 0x100dc3c < 4) {
 						*(PRODUCTION_GOODS_RECORD*) (0x100ddc0 + *(int*) 0x100dc3c * 0x58) =
 						    *(PRODUCTION_GOODS_RECORD*) st.rec;
 						*(int*) 0x100dc3c = *(int*) 0x100dc3c + 1;

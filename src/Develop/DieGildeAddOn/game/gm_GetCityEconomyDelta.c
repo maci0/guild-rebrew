@@ -9,5 +9,5 @@ extern float g_773d54;
 /* One expression keeps the quotient on the x87 stack; a named local spills it. */
 float __cdecl gm_GetCityEconomyDelta(void)
 {
-	return MIN(1.0f, MAX(-1.0f, (g_773d54 - g_773d4c) / g_773d4c));
+	return MIN(1.0f, MAX(-1.0f, (g_773d54 - gm_CityPopulation) / gm_CityPopulation));
 }

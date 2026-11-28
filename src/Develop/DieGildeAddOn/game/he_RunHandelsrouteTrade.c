@@ -21,10 +21,10 @@ typedef struct {
 	int fa0;
 	char pada4[0x54];
 } Msg572ff0;
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 extern pos14_7f4c00 gm_GameTime;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern char* gm_CityEntity;
 extern char* lpGebaeudePROT;
 extern char* lpObjektePROT;
@@ -145,7 +145,7 @@ void __cdecl he_RunHandelsrouteTrade(char* a)
 			while (r != 0) {
 				*(int*) (a + 0xe8) = cm_SendSellObjekt(*(int*) (e2 + 2),
 				    *(int*) (q + 2), *(unsigned short*) r, *(int*) (r + 0xe),
-				    g_773d75, 0);
+				    gm_ActiveTownIndex, 0);
 				r = gm_NextEntityQueryMatch();
 			}
 		} else {
@@ -155,7 +155,7 @@ void __cdecl he_RunHandelsrouteTrade(char* a)
 				while (r != 0) {
 					*(int*) (a + 0xe8) = cm_SendSellObjekt(*(int*) (e2 + 2),
 					    *(int*) (q + 2), *(unsigned short*) r, *(int*) (r + 0xe),
-					    g_773d75, 0);
+					    gm_ActiveTownIndex, 0);
 					r = gm_NextEntityQueryMatch();
 				}
 			}
@@ -209,22 +209,22 @@ void __cdecl he_RunHandelsrouteTrade(char* a)
 			}
 			t = gm_GetMsgField(q, r2);
 			m = gm_eval_SlotVoll(e2, *(unsigned short*) r2, t);
-			d = (int) (gm_GetSeasonPrice(*(unsigned short*) r2, g_773d75)
+			d = (int) (gm_GetSeasonPrice(*(unsigned short*) r2, gm_ActiveTownIndex)
 			    * 0.9);
 			if (t < m) {
 				m = t;
 			}
 			cm_SendSellObjekt(*(int*) (e2 + 2),
-			    *(int*) (q + 2), *(unsigned short*) r2, m, g_773d75, d);
+			    *(int*) (q + 2), *(unsigned short*) r2, m, gm_ActiveTownIndex, d);
 			if (itm != 0) {
 				*(int*) (itm + 0x1b8) = *(int*) (itm + 0x1b8) + d * m;
 			}
 			if ((t -= m) != 0) {
 				d = (int) (gm_GetSeasonPrice(*(unsigned short*) r2,
-				    g_773d75) * 0.8);
+				    gm_ActiveTownIndex) * 0.8);
 				*(int*) (a + 0xe8) = cm_SendSellObjekt(-1,
 				    *(int*) (q + 2), *(unsigned short*) r2, t,
-				    g_773d75, d);
+				    gm_ActiveTownIndex, d);
 			}
 i1next:
 			ps[0] = 0;
@@ -235,9 +235,9 @@ i1next:
 		goto done;
 	}
 	if (itm != 0 && *(int*) (itm + 0x16c) != 0) {
-		left = gm_GetSeasonTreasury(g_7f4ca0
+		left = gm_GetSeasonTreasury(gm_EntitySlotTable
 		    + *(unsigned short*) (*(int*) (itm + 0x16c) + 0x27) * 0x21c,
-		    g_773d75);
+		    gm_ActiveTownIndex);
 		if (left >= *(int*) (itm + 0x1b8)) {
 			left = *(int*) (itm + 0x1b8);
 		}
@@ -269,10 +269,10 @@ i1next:
 			goto i2advance;
 		}
 		if (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*) pktB].category != '\n') {
-			amt = (int) (gm_GetSeasonPrice(*(unsigned short*) r2, g_773d75)
+			amt = (int) (gm_GetSeasonPrice(*(unsigned short*) r2, gm_ActiveTownIndex)
 			    * *(float*) (pktB + 0x49));
 		} else {
-			amt = (int) (gm_GetSeasonPrice(*(unsigned short*) r2, g_773d75)
+			amt = (int) (gm_GetSeasonPrice(*(unsigned short*) r2, gm_ActiveTownIndex)
 			    * 1.1);
 		}
 		lim = pi[6];
@@ -289,7 +289,7 @@ i1next:
 		m = m < 0 ? 0 : m;
 		if (m != 0) {
 			*(int*) (a + 0xe8) = cm_SendSellObjekt(*(int*) (q + 2),
-			    *(int*) (e2 + 2), *(unsigned short*) r2, m, g_773d75, amt);
+			    *(int*) (e2 + 2), *(unsigned short*) r2, m, gm_ActiveTownIndex, amt);
 		}
 		if (itm != 0 && *(int*) (itm + 0x16c) != 0) {
 			sprintf(buf, (char*) 0x6a7d00, itm + 0x30,
@@ -367,7 +367,7 @@ done:
 	msg.kind = 0x0f;
 	msg.f0c = -1;
 	msg.code = 2;
-	msg.owner = *(int*) (g_7f4ca0 + 4 + *(unsigned short*) (a + 8) * 0x21c);
+	msg.owner = *(int*) (gm_EntitySlotTable + 4 + *(unsigned short*) (a + 8) * 0x21c);
 	msg.f58 = *(int*) (pktA + 2);
 	msg.f5c = *(int*) (pktB + 1);
 	msg.f60 = *(int*) (a + 0xb0);

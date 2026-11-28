@@ -1,8 +1,8 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int d2_CurrentWindowId;
-extern char* g_1015ea0;
-extern int g_100f1dc;
-extern int g_774654;
+extern char* d2_Controls;
+extern int d2_DialogButtonAction;
+extern int d2_DialogCloseRequested;
 
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
@@ -66,15 +66,15 @@ unsigned int __cdecl d2_ChooseRoutingGood(int a0, int a1, unsigned int a2)
 		v6 = d2_CreateWindowTextButton(0, 4 + i * 0x1e, *(int*) (0x14a56e8 + i * 4));
 		handles[i] = v6;
 		v7 = fcn_00502cd0(*(int*) (a0 + 0x5d), 2, 6, 0, *(int*) (ids + i));
-		*(int*) (&((D2_CONTROL_TL*) (g_1015ea0))[v6].associated_object) = v7;
+		*(int*) (&((D2_CONTROL_TL*) (d2_Controls))[v6].associated_object) = v7;
 		d2_AddToRadioGroup(k, v6);
 	}
 	d2_SelectRadioGroup(k, 0);
 	d2_ResetSelectionAndInput();
 	for (;;) {
 		n = k * 0x8c;
-		if (g_14ce8e0 != 0 || selection != 0 || (g_100f1dc != -1 && d2_CurrentElementId == closeButton)) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0 || selection != 0 || (d2_DialogButtonAction != -1 && d2_CurrentElementId == closeButton)) {
+			d2_DialogCloseRequested = 1;
 		}
 		if (*(int*) (0x102cbc8 + n) != v18 || v2) {
 			d2_SetForm(g, 2);
@@ -83,7 +83,7 @@ unsigned int __cdecl d2_ChooseRoutingGood(int a0, int a1, unsigned int a2)
 				list[i] = -1;
 			}
 			i = 0;
-			v6 = *(int*) (&((D2_CONTROL_TL*) (g_1015ea0))[handles[*(int*) (0x102cbc8 + n)]].associated_object);
+			v6 = *(int*) (&((D2_CONTROL_TL*) (d2_Controls))[handles[*(int*) (0x102cbc8 + n)]].associated_object);
 			if (v6 != 0) {
 				v7 = *(unsigned int*) (v6 + 0x14);
 			} else {
@@ -95,9 +95,9 @@ unsigned int __cdecl d2_ChooseRoutingGood(int a0, int a1, unsigned int a2)
 				while (p2 != 0) {
 					v6 = d2_AddElementToWindow((i % 4) * 0x40, (i / 4) * 0x40, *(unsigned short*) p2 + 0xdf, d2_CurrentWindowId);
 					list[i] = v6;
-					((D2_CONTROL_TL*) (g_1015ea0))[v6].value_05c = 1;
-					((D2_CONTROL_TL*) (g_1015ea0))[v6].flags_1d0 = 3;
-					((D2_CONTROL_TL*) (g_1015ea0))[v6].value_1e4 = 0x525;
+					((D2_CONTROL_TL*) (d2_Controls))[v6].value_05c = 1;
+					((D2_CONTROL_TL*) (d2_Controls))[v6].flags_1d0 = 3;
+					((D2_CONTROL_TL*) (d2_Controls))[v6].value_1e4 = 0x525;
 					items[i] = *(unsigned short*) p2;
 					p2 = (char*) gm_NextEntityQueryMatch();
 					i++;
@@ -107,11 +107,11 @@ unsigned int __cdecl d2_ChooseRoutingGood(int a0, int a1, unsigned int a2)
 			v6 = d2_AddElementToWindow((i % 4) * 0x40 + 7, (i / 4) * 0x40 + 7, 0x527, d2_CurrentWindowId);
 			list[i] = v6;
 			v2 = 0;
-			((D2_CONTROL_TL*) (g_1015ea0))[v6].value_05c = 1;
-			((D2_CONTROL_TL*) (g_1015ea0))[v6].flags_1d0 = 3;
+			((D2_CONTROL_TL*) (d2_Controls))[v6].value_05c = 1;
+			((D2_CONTROL_TL*) (d2_Controls))[v6].flags_1d0 = 3;
 			v18 = *(int*) (0x102cbc8 + n);
 		}
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			for (i = 0; i < 0x30; i++) {
 				if (d2_CurrentElementId == list[i]) {
 					selection = items[i];

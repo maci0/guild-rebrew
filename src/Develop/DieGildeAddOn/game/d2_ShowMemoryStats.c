@@ -12,8 +12,8 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern int g_67a370;
-extern int g_6b8300;
+extern int d3_ActiveScene;
+extern int d3_CurrentFloor;
 extern int g_773d8c;
 extern char s_6ab7e4[];
 extern char s_6ab7cc[];
@@ -50,11 +50,11 @@ void __cdecl d2_ShowMemoryStats(void)
 	char* p;
 
 	h = d2_CreateWindow(0x20, 0x60, 0x280, 0x190, 0x414);
-	d2_SetElementFont(((D2_WIN*)g_1015f40)[h].slot, 0x54);
+	d2_SetElementFont(((D2_WIN*)d2_Windows)[h].slot, 0x54);
 	while (main_RunFrameLoop((void*) d2_ShowMemoryStats, 0x657c7) != 0) {
-		w = &((D2_WIN*)g_1015f40)[h];
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		w = &((D2_WIN*)d2_Windows)[h];
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 		d2_CurrentWindowId = h;
 		io_AppendText((int) "$C");
@@ -67,10 +67,10 @@ void __cdecl d2_ShowMemoryStats(void)
 		v = d3_GetSceneMemorySize(0x1ff, 2, 0);
 		total += v;
 		io_AppendText((int) s_6ab790, v);
-		v = d3sm_GetMemorySize(*(int*) (((char*)g_67a370) + 0xb0));
+		v = d3sm_GetMemorySize(*(int*) (((char*)d3_ActiveScene) + 0xb0));
 		total += v;
 		io_AppendText((int) s_6ab778, v);
-		v = d3_GetTerrainMemorySize(g_6b8300, 1);
+		v = d3_GetTerrainMemorySize(d3_CurrentFloor, 1);
 		total += v;
 		io_AppendText((int) s_6ab764, v);
 		v = d3_GetSceneMemorySize(0x1ff, 0x28, 0);

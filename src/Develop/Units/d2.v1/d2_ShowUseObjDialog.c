@@ -1,6 +1,6 @@
 
 
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char g_6ac76c[];
@@ -23,10 +23,10 @@ void __cdecl d2_ShowUseObjDialog(char* text)
 	d2_SetForm(h, 1);
 	io_AppendText("%s", text);
 	d2_SetOverlayAnimation(0, 0);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop(d2_ShowUseObjDialog, 0x677c7) != 0);
 	d2_DestroyForm(h);

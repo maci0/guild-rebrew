@@ -13,8 +13,8 @@ typedef struct {
 } rec24;
 // SIZE 0x24
 
-extern signed char g_6a3440;
-extern char g_10069a0[];
+extern signed char gm_SelectedMissionIndex;
+extern char gm_MissionJobs[];
 
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 
@@ -24,20 +24,20 @@ int __cdecl ls_LoadMissionJobs(void* stream)
 
 	if (stream == 0)
 		return 0;
-	if (!ls_ReadVfsDataChecked(&(*(char*)&g_6a3440), 1, 1, stream))
+	if (!ls_ReadVfsDataChecked(&(*(char*)&gm_SelectedMissionIndex), 1, 1, stream))
 		return 0;
 	for (i = 0; i < 128; i++) {
-		if (!ls_ReadVfsDataChecked(&((rec24*)g_10069a0)[i].f0, 4, 1, stream))
+		if (!ls_ReadVfsDataChecked(&((rec24*)gm_MissionJobs)[i].f0, 4, 1, stream))
 			return 0;
-		if (!ls_ReadVfsDataChecked(&((rec24*)g_10069a0)[i].f4, 4, 1, stream))
+		if (!ls_ReadVfsDataChecked(&((rec24*)gm_MissionJobs)[i].f4, 4, 1, stream))
 			return 0;
-		if (!ls_ReadVfsDataChecked(((rec24*)g_10069a0)[i].st, 0xe, 1, stream))
+		if (!ls_ReadVfsDataChecked(((rec24*)gm_MissionJobs)[i].st, 0xe, 1, stream))
 			return 0;
-		if (!ls_ReadVfsDataChecked(&((rec24*)g_10069a0)[i].f18, 4, 1, stream))
+		if (!ls_ReadVfsDataChecked(&((rec24*)gm_MissionJobs)[i].f18, 4, 1, stream))
 			return 0;
-		if (!ls_ReadVfsDataChecked(&((rec24*)g_10069a0)[i].f1c, 4, 1, stream))
+		if (!ls_ReadVfsDataChecked(&((rec24*)gm_MissionJobs)[i].f1c, 4, 1, stream))
 			return 0;
-		if (!ls_ReadVfsDataChecked(&((rec24*)g_10069a0)[i].f20, 1, 1, stream))
+		if (!ls_ReadVfsDataChecked(&((rec24*)gm_MissionJobs)[i].f20, 1, 1, stream))
 			return 0;
 	}
 	return 1;

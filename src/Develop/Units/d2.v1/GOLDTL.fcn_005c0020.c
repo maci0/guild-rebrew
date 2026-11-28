@@ -3,11 +3,11 @@
 
 extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 typedef struct {
 	int x0;
@@ -57,7 +57,7 @@ void __cdecl fcn_005c0020(void)
 	int y;
 	int h2;
 
-	ent = (char*) 0x7f4ca0 + g_774970 * 0x21c;
+	ent = (char*) 0x7f4ca0 + gm_LocalPlayerSlot * 0x21c;
 	dlg = d2_LoadForm(0, 0, (char*) 0x6ac4f4);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
@@ -100,21 +100,21 @@ void __cdecl fcn_005c0020(void)
 
 	}
 	else {
-		io_AppendText(0x1741, g_774970);
+		io_AppendText(0x1741, gm_LocalPlayerSlot);
 	}
 	d2_SetOverlayAnimation(0, 0);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		else if (g_100f1dc != -1) {
+		else if (d2_DialogButtonAction != -1) {
 			selected = -1;
 			for (i = 0; i < count; i++) {
 				if (d2_CurrentElementId == recs[i].x4) { selected = i; break; }
 			}
 			if (selected > -1)
-				d2_ShowBeweiseDetails((char*) 0x7f4ca0 + g_774970 * 0x21c,
+				d2_ShowBeweiseDetails((char*) 0x7f4ca0 + gm_LocalPlayerSlot * 0x21c,
 				    recs[selected].x0);
 		}
 	} while (main_RunFrameLoop((void*) fcn_005c0020, 0x657c7) != 0);

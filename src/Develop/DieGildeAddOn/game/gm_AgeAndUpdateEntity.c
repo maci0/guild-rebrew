@@ -4,17 +4,17 @@
 
 extern pos14_7f4c00 gm_GameTime;
 extern float g_662a94;
-extern float g_6628a8;
+extern float flt_0_0;
 extern float g_66444c;
 extern float g_665370;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
-extern char g_7f4ca2[];
-extern char g_7f4ca4[];
-extern int g_773d48;
-extern char* g_aed32c;
-extern char g_6b5c60[];
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
+extern char gm_SlotTableKindView[];
+extern char gm_EntityIdField[];
+extern int gm_QueuedCommandCount;
+extern char* cm_PacketDeltaBase;
+extern char str_empty[];
 extern char g_6964f0[];
 
 int __cdecl gm_CanDeleteEntity(char*);
@@ -56,7 +56,7 @@ double __cdecl gm_AgeAndUpdateEntity(char* entity)
 		v4 = gm_CanDeleteEntity(entity);
 		if (v4 != 0) {
 			cm_RequestKillSpieler(*(int*) (entity + 4), 1);
-			g_773d48 += 1;
+			gm_QueuedCommandCount += 1;
 		}
 		return g_662a94;
 	}
@@ -65,7 +65,7 @@ double __cdecl gm_AgeAndUpdateEntity(char* entity)
 		if (v4 == 1) {
 			c = 0;
 			cm_BeginPacketFieldDelta(entity, *(int*) (entity + 4));
-			cm_AppendCommandSyncField(1, 1, (char*) ((int) entity + (8 - (int) g_aed32c)),
+			cm_AppendCommandSyncField(1, 1, (char*) ((int) entity + (8 - (int) cm_PacketDeltaBase)),
 			             &c);
 			cm_SendSetAttribute();
 			memset(msg, 0, sizeof(msg));
@@ -81,18 +81,18 @@ double __cdecl gm_AgeAndUpdateEntity(char* entity)
 			cm_SendCopyEntityData(msg);
 			e = *(int*) (entity + 0x16c);
 			if (e != 0 && *(unsigned short*) (e + 0x27) != 0xffff) {
-				kind = *(char*) (g_7f4ca2 +
+				kind = *(char*) (gm_SlotTableKindView +
 				                 *(unsigned short*) (e + 0x27) * 0x21c);
 				if (kind == 6 || kind == 7) {
 					io_FormatTextBuffer(nb, 0x414a, *(unsigned short*) entity, e);
-					he_PostEntityMessage(*(int*) (g_7f4ca4 +
+					he_PostEntityMessage(*(int*) (gm_EntityIdField +
 					                      *(unsigned short*) (*(int*) (entity + 0x16c) +
 					                                          0x27) * 0x21c), -1, nb, 0, 0x60a,
-					             g_6b5c60);
+					             str_empty);
 				}
 			}
 		}
-		return g_6628a8;
+		return flt_0_0;
 	}
 	v5 = *(int*) (entity + 0x2c);
 	if (v5 != 0) {
@@ -168,7 +168,7 @@ double __cdecl gm_AgeAndUpdateEntity(char* entity)
 			}
 		}
 		cm_RequestChangeBits(*(int*) (entity + 4), 0x2c, 4, v5, -1);
-		g_773d48 += 1;
+		gm_QueuedCommandCount += 1;
 	}
 	if ((*(unsigned char*) (entity + 0x1cc) & 2) != 0) {
 		v10 = *(float*) (entity + 0x1c) -
@@ -176,14 +176,14 @@ double __cdecl gm_AgeAndUpdateEntity(char* entity)
 		cm_BeginPacketFieldDelta(entity, *(int*) (entity + 4));
 		cm_AppendPacketFieldDelta(4, 1, 0x1c, &v10);
 		cm_RequestChangeAttribute();
-		g_773d48 += 1;
+		gm_QueuedCommandCount += 1;
 		if (v10 <= 0.0f) {
 			c = 0;
 			cm_BeginPacketFieldDelta(entity, *(int*) (entity + 4));
-			cm_AppendCommandSyncField(1, 1, (char*) ((int) entity + (8 - (int) g_aed32c)),
+			cm_AppendCommandSyncField(1, 1, (char*) ((int) entity + (8 - (int) cm_PacketDeltaBase)),
 			             &c);
 			cm_SendSetAttribute();
-			g_773d48 += 1;
+			gm_QueuedCommandCount += 1;
 			memset(msg, 0, sizeof(msg));
 			msg[4] = 0x72;
 			*(int*) (msg + 8) = *(int*) (entity + 4);
@@ -195,18 +195,18 @@ double __cdecl gm_AgeAndUpdateEntity(char* entity)
 
 			*(int*) (msg + 0x58) = *(int*) (entity + 4);
 			cm_SendCopyEntityData(msg);
-			g_773d48 += 1;
+			gm_QueuedCommandCount += 1;
 			e = *(int*) (entity + 0x16c);
 			if (e != 0 && *(unsigned short*) (e + 0x27) != 0xffff) {
-				kind = *(char*) (g_7f4ca2 +
+				kind = *(char*) (gm_SlotTableKindView +
 				                 *(unsigned short*) (e + 0x27) * 0x21c);
 				if (kind == 6 || kind == 7) {
 					io_FormatTextBuffer(nb, 0x1c51, e, *(unsigned short*) entity);
-					he_PostEntityMessage(*(int*) (g_7f4ca4 +
+					he_PostEntityMessage(*(int*) (gm_EntityIdField +
 					                      *(unsigned short*) (*(int*) (entity + 0x16c) +
 					                                          0x27) * 0x21c), -1, nb, 0, 0x60a,
-					             g_6b5c60);
-					g_773d48 += 1;
+					             str_empty);
+					gm_QueuedCommandCount += 1;
 				}
 			}
 		}
@@ -230,7 +230,7 @@ double __cdecl gm_AgeAndUpdateEntity(char* entity)
 		cm_BeginPacketFieldDelta(entity, *(int*) (entity + 4));
 		cm_AppendPacketFieldDelta(4, 1, 0x1c, &v10);
 		cm_RequestChangeAttribute();
-		g_773d48 += 1;
+		gm_QueuedCommandCount += 1;
 	}
 	v11 = (double) *(int*) (entity + 0x24) + v10;
 	v15 = (float) v11;
@@ -244,15 +244,15 @@ double __cdecl gm_AgeAndUpdateEntity(char* entity)
 			cm_AppendPacketFieldDelta(4, 1, 0x1c, &v10);
 			cm_AppendPacketFieldDelta(4, 1, 0x24, &v14);
 			cm_RequestChangeAttribute();
-			g_773d48 += 1;
+			gm_QueuedCommandCount += 1;
 			cm_RequestChangeBits(*(int*) (entity + 4), 0x1cc, 4, 2, 0);
-			g_773d48 = g_773d48 + 1;
+			gm_QueuedCommandCount = gm_QueuedCommandCount + 1;
 			return v10;
 		}
 		cm_BeginPacketFieldDelta(entity, *(int*) (entity + 4));
-		cm_AppendCommandSyncField(1, 1, (char*) ((int) entity + (8 - (int) g_aed32c)), &c);
+		cm_AppendCommandSyncField(1, 1, (char*) ((int) entity + (8 - (int) cm_PacketDeltaBase)), &c);
 		cm_SendSetAttribute();
-		g_773d48 += 1;
+		gm_QueuedCommandCount += 1;
 		memset(msg, 0, sizeof(msg));
 		msg[4] = 0x72;
 		*(int*) (msg + 8) = *(int*) (entity + 4);
@@ -264,30 +264,30 @@ double __cdecl gm_AgeAndUpdateEntity(char* entity)
 
 		*(int*) (msg + 0x58) = *(int*) (entity + 4);
 		cm_SendCopyEntityData(msg);
-		g_773d48 += 1;
+		gm_QueuedCommandCount += 1;
 		e = *(int*) (entity + 0x16c);
 		if (e != 0 && *(unsigned short*) (e + 0x27) != 0xffff) {
-			kind = *(char*) (g_7f4ca2 +
+			kind = *(char*) (gm_SlotTableKindView +
 			                 *(unsigned short*) (e + 0x27) * 0x21c);
 			if (kind == 6 || kind == 7) {
 				if ((*(unsigned char*) (entity + 0x1cc) & 4) != 0) {
 					io_FormatTextBuffer(nb, 0x4080, entity + 0x30, entity + 0x40,
 					             *(unsigned short*) (entity + 0xa));
-					he_PostEntityMessage(*(int*) (g_7f4ca4 +
+					he_PostEntityMessage(*(int*) (gm_EntityIdField +
 					                      *(unsigned short*) (*(int*) (entity + 0x16c) +
 					                                          0x27) * 0x21c), -1, nb, 0, 0x60a,
 					             g_6964f0);
 				} else {
 					io_FormatTextBuffer(nb, 0x1c51, e, *(unsigned short*) entity);
-					he_PostEntityMessage(*(int*) (g_7f4ca4 +
+					he_PostEntityMessage(*(int*) (gm_EntityIdField +
 					                      *(unsigned short*) (*(int*) (entity + 0x16c) +
 					                                          0x27) * 0x21c), -1, nb, 0, 0x60a,
-					             g_6b5c60);
+					             str_empty);
 				}
-				g_773d48 += 1;
+				gm_QueuedCommandCount += 1;
 			}
 		}
-		return g_6628a8;
+		return flt_0_0;
 	}
 	gm_UpdateEntityPregnancy(entity);
 	if (v15 > 0.0) {
@@ -299,6 +299,6 @@ double __cdecl gm_AgeAndUpdateEntity(char* entity)
 	cm_BeginPacketFieldDelta(entity, *(int*) (entity + 4));
 	cm_AppendPacketFieldDelta(2, 1, 10, &w);
 	cm_RequestChangeAttribute();
-	g_773d48 = g_773d48 + 1;
+	gm_QueuedCommandCount = gm_QueuedCommandCount + 1;
 	return v11;
 }

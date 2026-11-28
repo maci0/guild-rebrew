@@ -2,7 +2,7 @@
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 
-extern char* g_6b5c20;
+extern char* tp_ch_ActionQueue;
 extern char* lpObjekteINST;
 extern char* lpObjektePROT;
 
@@ -63,7 +63,7 @@ int __cdecl ls_SaveFiguresAndAnimQueue(unsigned int handle)
 	} while (i < 0x14f218);
 	i = 0;
 	do {
-		src = i + g_6b5c20;
+		src = i + tp_ch_ActionQueue;
 		if (*(char*) (src + 9) != 0) {
 			*(int*) (src + 0x14) = *(int*) *(int*) (src + 0x14);
 			*(int*) (src + 0x24) = ch_GetQueueEntryIndex(*(int*) (src + 0x24));
@@ -77,7 +77,7 @@ int __cdecl ls_SaveFiguresAndAnimQueue(unsigned int handle)
 	for (;;) {
 		flag = 0;
 		memset(&rec, 0, 0x194);
-		src = i + g_6b5c20;
+		src = i + tp_ch_ActionQueue;
 		idx = *(int*) (src + 0x14);
 		if (idx >= 0 && idx < 0x300) {
 			object = *(char**) (0x14d0020 + idx * 4);
@@ -125,7 +125,7 @@ int __cdecl ls_SaveFiguresAndAnimQueue(unsigned int handle)
 	}
 	i = 0;
 	do {
-		src = i + g_6b5c20;
+		src = i + tp_ch_ActionQueue;
 		if (*(char*) (src + 9) != 0) {
 			*(int*) (src + 0x14) = *(int*) (0x14d0020 + *(int*) (src + 0x14) * 4);
 			*(int*) (src + 0x24) = ch_GetQueueEntryByIndex(*(int*) (src + 0x24));

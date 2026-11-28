@@ -51,11 +51,11 @@ void __cdecl d3_ResetFloorTileCache(void)
 			rep stosb
 		}
 	}
-	if ((void*) g_6b8300 != 0)
-		d3_InvalidateFloorChunks((void*) g_6b8300);
+	if ((void*) d3_CurrentFloor != 0)
+		d3_InvalidateFloorChunks((void*) d3_CurrentFloor);
 	for (offset = 0; offset < 0xf800; offset += 0x3e0) {
 		resource = *(char**) (0xfd7c4c + offset);
-		if (resource != 0 && resource != (char*) g_6b8300)
+		if (resource != 0 && resource != (char*) d3_CurrentFloor)
 			d3_InvalidateFloorChunks(resource);
 	}
 }

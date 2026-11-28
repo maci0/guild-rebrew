@@ -25,8 +25,8 @@ typedef struct Player {
 } Player;
 // SIZE 0x2f4
 
-extern unsigned char g_773d75;
-extern char g_868060[];
+extern unsigned char gm_ActiveTownIndex;
+extern char gm_TownTable[];
 
 Ent* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_HasActiveSpecialObject(Ent*, int);
@@ -85,7 +85,7 @@ int __cdecl gm_HandleMsg24FineWorkshop(Cmd* cmd)
 	}
 	f = ((gm_RandomMod(2) & 0xffff) + 1.0f) * 0.01f;
 	amount = (int)(gm_WalkEntityChain(e->id) * f);
-	cm_RequestTransferCurrencyNoKill(-1, cmd->handle, g_773d75, amount);
+	cm_RequestTransferCurrencyNoKill(-1, cmd->handle, gm_ActiveTownIndex, amount);
 	k = gm_RandomMod(n) & 0xffff;
 	o = objs[k];
 	house = houses[k];
@@ -93,9 +93,9 @@ int __cdecl gm_HandleMsg24FineWorkshop(Cmd* cmd)
 	gm_ResolveEntityById((void**) (&work), 0, 0, o->shop);
 	if (shop != 0 && work != 0) {
 		if (*shop == 'G') {
-			io_FormatTextBuffer(text, cmd->text + 0x12e7, ((Player*)g_868060)[0].name);
+			io_FormatTextBuffer(text, cmd->text + 0x12e7, ((Player*)gm_TownTable)[0].name);
 		} else {
-			io_FormatTextBuffer(text, cmd->text + 0x12e7, ((Player*)g_868060)[*(int*) (work + 0x65)].name, amount);
+			io_FormatTextBuffer(text, cmd->text + 0x12e7, ((Player*)gm_TownTable)[*(int*) (work + 0x65)].name, amount);
 		}
 		he_PostEntityMessage(e->handle, e->handle, text, 0x100 < strlen(text), 0x5ef, 0);
 	}

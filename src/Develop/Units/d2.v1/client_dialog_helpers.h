@@ -66,7 +66,7 @@ typedef struct Cmd {
 
 /* Lowest value drawn by the graph helpers, CLAMP0 bound.
  * Matched siblings 0x005d3ad0 and 0x005d3c20. */
-extern double g_662950;
+extern double dbl_0_0;
 
 /* Initial maximum for the graph scaling loop.
  * Matched sibling 0x005d3c20. */
@@ -80,15 +80,15 @@ extern int g_14ce86c;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
 /* Active player or team index byte. */
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 /* Entity table base, walked with a 0x21c stride. */
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 /* Current cursor or selection triple. Seen in row 0x00589d00. */
 extern int gm_GameTime;
-extern int g_7f4c04;
-extern int g_7f4c08;
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
 
 /* Unit type table, indexed by the type byte of an entity record and
  * walked with a 0x24d stride. GOLDTL.fcn_004a4bb0.c. */

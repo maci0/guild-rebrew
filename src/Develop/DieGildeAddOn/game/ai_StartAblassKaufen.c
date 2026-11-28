@@ -1,7 +1,7 @@
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern unsigned short g_7f4c04;
-extern unsigned char g_773d75;
+extern unsigned short gm_GameTimeHour;
+extern unsigned char gm_ActiveTownIndex;
 
 int __cdecl gm_SumStraftatSeverity(int);
 int __cdecl gm_CountStraftatenForEntity(int);
@@ -31,7 +31,7 @@ int __cdecl ai_StartAblassKaufen(int unused, char* e, int busy, char* out, char*
 	float f1;
 
 	if (busy == 0 && (*(unsigned int*) (e + 4) & 3) == (unsigned int)((*(int*)&gm_GameTime) % 4) &&
-	    (*(unsigned int*) (e + 4) & 7) == (unsigned int)(((*(int*)&g_7f4c04) & 0xffff) % 8)) {
+	    (*(unsigned int*) (e + 4) & 7) == (unsigned int)(((*(int*)&gm_GameTimeHour) & 0xffff) % 8)) {
 		v1 = gm_SumStraftatSeverity(*(int*) (e + 4));
 		v2 = gm_CountStraftatenForEntity(*(int*) (e + 4));
 		if (gm_RandomMod(8) + 8 <= v1) {
@@ -49,7 +49,7 @@ int __cdecl ai_StartAblassKaufen(int unused, char* e, int busy, char* out, char*
 				if (n != 0) {
 					t = list[gm_RandomMod(n)];
 					if (*(int*) (e + 0x194) < 4) {
-						funds = gm_GetSeasonTreasury(e, g_773d75);
+						funds = gm_GetSeasonTreasury(e, gm_ActiveTownIndex);
 						f1 = gm_WalkEntityChain(*(unsigned short*) e) * 0.005f;
 						amt = (int) (v1 * ((200.0f - gm_CalcEntityFavor(*(unsigned short*) e,
 							*(unsigned short*) (t + 0x27), 1)) * 0.01f) * f1);

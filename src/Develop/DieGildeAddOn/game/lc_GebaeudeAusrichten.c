@@ -59,27 +59,27 @@ typedef struct {
 } LC_GEBAEUDE_FRAME;
 
 extern unsigned char* lpGebaeudePROT;
-extern int g_67a370;
+extern int d3_ActiveScene;
 extern int g_6798d4;
-extern int g_6b7fdc;
+extern int vfs_RootDir;
 extern int d3_ActiveCamera;
 extern char* g_774a68;
-extern unsigned short g_774970;
-extern char g_7f4ca0[];
-extern int g_774654;
-extern char g_14cf950;
-extern short g_14ce8c0;
-extern short g_14ce8c2;
+extern unsigned short gm_LocalPlayerSlot;
+extern char gm_EntitySlotTable[];
+extern int d2_DialogCloseRequested;
+extern char io_LastKeyScancode;
+extern short io_ActiveCursorX;
+extern short io_ActiveCursorY;
 extern int g_14ce8cc;
 extern int g_14ce8d8;
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 extern int g_14ab2e0;
 extern int g_14ab2e4;
 extern int g_14ab2d0;
 extern int d2_CurrentElementId;
 extern int g_6a2590;
 extern int g_6a2594;
-extern char g_6b5c60;
+extern char str_empty;
 
 int __cdecl gm_RandomMod(int);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
@@ -133,7 +133,7 @@ int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 
 	f.iFlag48 = 1;
 	f.iFlag44 = 1;
-	f.pKontext = *(char**) (g_67a370 + 0xb0);
+	f.pKontext = *(char**) (d3_ActiveScene + 0xb0);
 	f.iErgebnis = 0;
 	f.iRot = 0;
 	f.iAnzahl = 0;
@@ -141,7 +141,7 @@ int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 	f.fAbstand = 1.0e9f;
 	f.iTypOffset = gebaeudetyp * 0x24d;
 	if (lpGebaeudePROT[f.iTypOffset] == 2) {
-		pSuch = (unsigned char*) gm_StartFilteredEntitySearch(2, 4, g_774970, 5, 2);
+		pSuch = (unsigned char*) gm_StartFilteredEntitySearch(2, 4, gm_LocalPlayerSlot, 5, 2);
 		while (pSuch != 0) {
 			if (*pSuch == gebaeudetyp) {
 				io_FormatTextBuffer((char*) f.pObjekte, 0x17f2, gebaeudetyp * 14 + 0x48e);
@@ -166,7 +166,7 @@ int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 		} else {
 			sprintf(f.cPfad, (char*) 0x67f0ac, (char*) 0x7e1ae0, f.cName);
 		}
-		if (vfs_ResolvePath(f.cPfad, g_6b7fdc, g_6b7fdc, f.cTmp) != 0) {
+		if (vfs_ResolvePath(f.cPfad, vfs_RootDir, vfs_RootDir, f.cTmp) != 0) {
 			strcpy(pTemp, f.cPfad);
 			pTemp += 0x60;
 			f.iAnzahl++;
@@ -184,7 +184,7 @@ int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 	}
 	f.iKennung = (unsigned short) gm_RandomMod(f.iAnzahl);
 	if (lpGebaeudePROT[f.iTypOffset] == 0x21) {
-		f.iKennung = (*(unsigned char*) (g_7f4ca0 + 9 + g_774970 * 0x21c) != 1);
+		f.iKennung = (*(unsigned char*) (gm_EntitySlotTable + 9 + gm_LocalPlayerSlot * 0x21c) != 1);
 	}
 	if (lc_GetBauplatzPrefix(gebaeudetyp, f.cOgrName) == 0) {
 		return 0;
@@ -231,7 +231,7 @@ int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 	}
 	UpdateSceneLighting(1);
 	io_ClearInputButtonFlags(2);
-	g_14cf950 = 0x32;
+	io_LastKeyScancode = 0x32;
 	pAktuell = 0;
 	for (;;) {
 		if (f.iFlag48 != 0) {
@@ -288,7 +288,7 @@ int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 			*(float*) (pAktuell + 0x8c) = f.fObjektPos[2];
 			f.iFlag48 = 0;
 		}
-		if (g_14cf950 != 0x32) {
+		if (io_LastKeyScancode != 0x32) {
 			if (g_14ce8d8 == 0) {
 				goto platzieren;
 			}
@@ -304,7 +304,7 @@ int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 		}
 		else {
 			if (f.iFlag44 != 0) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
 		f.iFlag44 = 0;
@@ -332,8 +332,8 @@ platzieren:
 			d3_ComputeObjectYawToTarget(f.fAusrichtung, pNaechster);
 			d3_SetObjectRotation(pAktuell, f.fAusrichtung);
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 		if (pAktuell != 0) {
 			if (f.fPruef < 90.0f) {
@@ -358,7 +358,7 @@ platzieren:
 			}
 		}
 		if (d3_UpdateCameraController() == 0) {
-			d3sm_RaycastScreenPoint((int) f.pKontext, g_14ce8c0, g_14ce8c2, (int*) &f.fAbstand, &f.iKennung2);
+			d3sm_RaycastScreenPoint((int) f.pKontext, io_ActiveCursorX, io_ActiveCursorY, (int*) &f.fAbstand, &f.iKennung2);
 			if (d3_GridPointToWorld(f.pKontext, f.iKennung2, *(int*) &f.fAbstand, f.fPos) != 0) {
 				d3_SetNodePosition(pAktuell, f.fPos);
 				d3_AlignObjectToTerrain(pAktuell, 1, 0);
@@ -370,7 +370,7 @@ platzieren:
 			d3_BuildEulerRotationMatrix(f.fVec, f.fMatrix);
 		}
 		if (g_14ce8cc != 0 && pNaechster != 0) {
-			i = gm_CalcBuildingCost((int) (g_7f4ca0 + g_774970 * 0x21c), gebaeudetyp);
+			i = gm_CalcBuildingCost((int) (gm_EntitySlotTable + gm_LocalPlayerSlot * 0x21c), gebaeudetyp);
 			io_FormatTextBuffer(f.cText, 0x17ef, i, gebaeudetyp * 14 + 0x48e,
 				*(int*) (lpGebaeudePROT + f.iTypOffset + 0x243));
 			if (d2_ShowModalMessageBox(f.cText, 1) != 0) {
@@ -379,7 +379,7 @@ platzieren:
 			else {
 				f.iErgebnis = 0;
 			}
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 		}
 		if (main_RunFrameLoop((int) 0x5988b0, 0x657c7) == 0) {
 			break;
@@ -392,7 +392,7 @@ platzieren:
 	}
 	else {
 		d3_DestroyObject(pAktuell);
-		*name_aus = g_6b5c60;
+		*name_aus = str_empty;
 		pAktuell = 0;
 	}
 	for (i = 0; i < f.iTreffer; i++) {

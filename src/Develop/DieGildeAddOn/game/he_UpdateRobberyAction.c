@@ -3,7 +3,7 @@
 #include "Develop/client_types.h"
 
 extern pos14_7f4c00 gm_GameTime;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern float g_664168;
 
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -114,12 +114,12 @@ void __cdecl he_UpdateRobberyAction(char* action)
 			return;
 		}
 		if (hits != 0) {
-			dmg = gm_ConvertUnitsToAmount(damage, g_773d75);
+			dmg = gm_ConvertUnitsToAmount(damage, gm_ActiveTownIndex);
 			io_FormatTextBuffer(buf, 0x1a6a, dmg);
 			he_MessageBoxQuickjump(*(int*) ((char*) 0x7f4ca4 + *(unsigned short*) (action + 8) * 0x21c),
 			    -1, buf, 0, 0x5ec, *(int*) (ent + 1), -1, 0, 0);
 			cm_RequestMoveCredits(*(int*) ((char*) 0x7f4ca4 + *(unsigned short*) (action + 8) * 0x21c),
-			    -1, g_773d75, dmg);
+			    -1, gm_ActiveTownIndex, dmg);
 		}
 		*(pos14_7f4c00*) (action + 0x52) = gm_GameTime;
 		gm_AddTime(action + 0x52, 0, 2, 0);

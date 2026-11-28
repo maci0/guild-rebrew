@@ -2,7 +2,7 @@
 #include <string.h>
 
 extern char* evt_CurrentScript;
-extern float g_662d40[3];
+extern float d3_UnitAxisVectors[3];
 
 void __cdecl evt_LogScriptError(char*, int, const char*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
@@ -35,8 +35,8 @@ char* __cdecl CreateCharacterAtDummy(char** file, char** dummy, char** name)
 		rot[0] = 0.0f;
 		rot[1] = 0.0f;
 		rot[2] = 0.0f;
-		d3_TransformDirection(*dummy, g_662d40, dir);
-		rot[1] = d3_SignedPlanarAngle(g_662d40, dir);
+		d3_TransformDirection(*dummy, d3_UnitAxisVectors, dir);
+		rot[1] = d3_SignedPlanarAngle(d3_UnitAxisVectors, dir);
 		d3_SetObjectRotation(*(void**) (ch + 0x34), rot);
 		d3_SetNodePosition(*(void**) (ch + 0x34), pos);
 		*(int*) (ch + 0x30) = *(int*) (evt_CurrentScript + 0x104);

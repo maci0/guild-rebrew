@@ -1,12 +1,12 @@
-extern int g_772ea8;
+extern int cut_CombatResolved;
 extern unsigned short* g_772e98;
-extern unsigned short* g_772e9c;
+extern unsigned short* cut_CombatDefenderEntity;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_772eac;
+extern int cut_PlunderedAmount;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern unsigned char g_773d75;
-extern int g_774654;
-extern double g_6640f8;
+extern unsigned char gm_ActiveTownIndex;
+extern int d2_DialogCloseRequested;
+extern double dbl_0_75;
 extern double g_664108;
 
 int __cdecl d2_LoadForm(int, int, char*);
@@ -77,12 +77,12 @@ unsigned int __cdecl cut_RunCombatStartDialog(int dialogState)
 	sel = 0;
 	win = d2_LoadForm(0, 0, (char*) 0x68be84);
 	d2_CenterForm(win, 3);
-	g_772ea8 = 0;
+	cut_CombatResolved = 0;
 	id = (int) gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (dialogState + 0x14));
 	rec = (int) gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (dialogState + 0x10c));
 	k = cut_GetBuildingCombatType(rec);
 	d2_SetForm(win, 1);
-	if (*((char*) g_772e9c + 2) == 6) {
+	if (*((char*) cut_CombatDefenderEntity + 2) == 6) {
 		if (*(unsigned char*) (dialogState + 0x7c) & 2) {
 			io_AppendText(0x1138, k + 0x1125, rec, *g_772e98, id);
 			d2_SetForm(win, 2);
@@ -97,7 +97,7 @@ unsigned int __cdecl cut_RunCombatStartDialog(int dialogState)
 				p++;
 				i--;
 			} while (i);
-			v = gm_GetEntitySkill((char*) g_772e9c, 3);
+			v = gm_GetEntitySkill((char*) cut_CombatDefenderEntity, 3);
 			io_AppendText(0x112e, rec, *g_772e98);
 			d2_SetForm(win, 2);
 			io_AppendText(0x112f, count, 0xc10);
@@ -108,7 +108,7 @@ unsigned int __cdecl cut_RunCombatStartDialog(int dialogState)
 					io_AppendText(0x1135);
 				}
 			}
-			if (v >= g_6640f8) {
+			if (v >= dbl_0_75) {
 				t = gm_GetScaledEntitySkill((char*) g_772e98, 3);
 				t = (int) ((float) t * 0.023809524f);
 				if (t > 4) {
@@ -133,25 +133,25 @@ unsigned int __cdecl cut_RunCombatStartDialog(int dialogState)
 		d2_GetWindowListItem(win, 2, sel + 1);
 		t = main_RunFrameLoop(0x4d5940, 0x7d6c6);
 		while (t) {
-			if (g_14ce8e0) {
-				g_774654 = 1;
-				g_772ea8 = 1;
+			if (io_RightButtonReleased) {
+				d2_DialogCloseRequested = 1;
+				cut_CombatResolved = 1;
 				answer = 0;
 			}
-			if (g_100f1dc == 2) {
+			if (d2_DialogButtonAction == 2) {
 				answer = 1;
-				g_774654 = 1;
-			} else if (g_100f1dc == 1) {
-				g_772ea8 = 1;
+				d2_DialogCloseRequested = 1;
+			} else if (d2_DialogButtonAction == 1) {
+				cut_CombatResolved = 1;
 				answer = 0;
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 
 
 			t = main_RunFrameLoop(0x4d5940, 0x7d6c6);
 		}
 	}
-	if ((*(unsigned char*) (dialogState + 0x7c) & 1) && *((char*) g_772e98 + 2) == 6 && !g_772ea8) {
+	if ((*(unsigned char*) (dialogState + 0x7c) & 1) && *((char*) g_772e98 + 2) == 6 && !cut_CombatResolved) {
 
 		items.count_a = 0;
 		total = 0;
@@ -187,7 +187,7 @@ unsigned int __cdecl cut_RunCombatStartDialog(int dialogState)
 				i--;
 			} while (i);
 			if (sel) {
-				io_AppendText(0x113d, count, 0xc10, sel, *g_772e9c, r);
+				io_AppendText(0x113d, count, 0xc10, sel, *cut_CombatDefenderEntity, r);
 			}
 		}
 		t = gm_GetScaledEntitySkill((char*) g_772e98, 3);
@@ -211,7 +211,7 @@ unsigned int __cdecl cut_RunCombatStartDialog(int dialogState)
 					sel = 0;
 					if (0 < items.count_b) {
 						do {
-							total = (int) (gm_GetSeasonPrice(items.ids[sel], g_773d75) * (float) items.weights[sel] + (float) total);
+							total = (int) (gm_GetSeasonPrice(items.ids[sel], gm_ActiveTownIndex) * (float) items.weights[sel] + (float) total);
 							sel++;
 						} while (sel < items.count_b);
 					}
@@ -242,14 +242,14 @@ unsigned int __cdecl cut_RunCombatStartDialog(int dialogState)
 		}
 		t = main_RunFrameLoop(0x4d5940, 0x7d6c6);
 		while (t) {
-			if (g_14ce8e0) {
-				g_774654 = 1;
+			if (io_RightButtonReleased) {
+				d2_DialogCloseRequested = 1;
 				answer = 0;
 			}
-			if (g_100f1dc != -1) {
+			if (d2_DialogButtonAction != -1) {
 				clicked = d2_CurrentElementId;
 				if (clicked == t4) {
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 					answer = 1;
 				} else if (clicked == sel || clicked == r || clicked == n) {
 					count = 0;
@@ -264,21 +264,21 @@ unsigned int __cdecl cut_RunCombatStartDialog(int dialogState)
 						rec = (int) gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (dialogState + 0x10c));
 						io_FormatTextBuffer(text, 0x1142);
 						d2_ShowMessageBox(text, 0);
-						g_774654 = 1;
+						d2_DialogCloseRequested = 1;
 						answer = 0;
-						g_772ea8 = 1;
-						g_772eac = cut_PlunderBuildingCarts((int) g_772eb4, rec, (char*) g_772e9c, (char*) g_772e98, (float) count * 0.01);
+						cut_CombatResolved = 1;
+						cut_PlunderedAmount = cut_PlunderBuildingCarts((int) g_772eb4, rec, (char*) cut_CombatDefenderEntity, (char*) g_772e98, (float) count * 0.01);
 					} else {
 						io_FormatTextBuffer(str, 0x1143);
 						d2_ShowMessageBox(str, 0);
-						g_774654 = 1;
+						d2_DialogCloseRequested = 1;
 						answer = 1;
 					}
 				}
 			}
 			t = main_RunFrameLoop(0x4d5940, 0x7d6c6);
 		}
-	} else if ((*(unsigned char*) (dialogState + 0x7c) & 1) && *((char*) g_772e98 + 2) != 6 && !g_772ea8) {
+	} else if ((*(unsigned char*) (dialogState + 0x7c) & 1) && *((char*) g_772e98 + 2) != 6 && !cut_CombatResolved) {
 
 		clicked = 0;
 		p = (int*) (dialogState + 0x80);
@@ -303,10 +303,10 @@ unsigned int __cdecl cut_RunCombatStartDialog(int dialogState)
 			if ((gm_RandomMod(0x5a) & 0xffff) + 10 <= count) {
 				rec = (int) gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (dialogState + 0x10c));
 				answer = 0;
-				g_772ea8 = 1;
-				g_772eac = cut_PlunderBuildingCarts((int) g_772eb4, rec, (char*) g_772e9c, (char*) g_772e98, (float) count * 0.01);
+				cut_CombatResolved = 1;
+				cut_PlunderedAmount = cut_PlunderBuildingCarts((int) g_772eb4, rec, (char*) cut_CombatDefenderEntity, (char*) g_772e98, (float) count * 0.01);
 			} else {
-				g_772eac = -1;
+				cut_PlunderedAmount = -1;
 				answer = 1;
 			}
 		}

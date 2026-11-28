@@ -7,13 +7,13 @@ extern int g_6a25b4;
 extern int g_6a25e0;
 extern int g_6a25e4;
 extern int g_6a2524;
-extern char* g_7e2aa0;
-extern int* g_7e2a9c;
-extern char* g_7746c0;
-extern int g_7746d8;
+extern char* d2_SelectedBuilding;
+extern int* d2_SelectedItem;
+extern char* d3_FocusedEntityObject;
+extern int d2_SelectedEntityUiFlags;
 extern int g_7746dc;
 extern char g_7746f4;
-extern char g_6b5c60[];
+extern char str_empty[];
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 void* __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl d2_SetElementEnabled(int, int);
@@ -52,45 +52,45 @@ void __cdecl d2_UpdateSelectionPanels(void)
     char* pick;
 
     pick = 0;
-    if (g_6a25b4 != -1 || g_774964 == 0)
+    if (g_6a25b4 != -1 || gm_InWorldHud == 0)
         return;
-    if (g_7e2aa0 != 0 && fcn_00502cd0(*(int*)(g_7e2aa0 + 0x5d), 2, 6, 0, 0x2a) == 0
-        && fcn_00502cd0(*(int*)(g_7e2aa0 + 0x5d), 2, 6, 0, 0x116) == 0)
+    if (d2_SelectedBuilding != 0 && fcn_00502cd0(*(int*)(d2_SelectedBuilding + 0x5d), 2, 6, 0, 0x2a) == 0
+        && fcn_00502cd0(*(int*)(d2_SelectedBuilding + 0x5d), 2, 6, 0, 0x116) == 0)
         d2_SetElementEnabled(g_6a25e4, 0);
     else
         d2_SetElementEnabled(g_6a25e4, 1);
-    selected = g_7e2aa0;
+    selected = d2_SelectedBuilding;
     flags = main_LoopFlags & 0x2000;
-    if (flags && g_100f1dc != -1) {
+    if (flags && d2_DialogButtonAction != -1) {
         if (g_6a25ec != -1 && d2_CurrentElementId == g_6a25ec) {
-            if (g_7746c4 != 0) {
-                g_7746dc = gm_GetEntityUiFlags(g_774970, (u8*)g_7746c4, 0, 0);
-            } else if (g_7746c8 != 0) {
-                if (g_7746cc != 0) {
-                    item = (unsigned short*)fcn_00502cd0(*(int*)(g_7746c8 + 0x5d),
-                        1, 0, *(unsigned short*)(g_7746c8 + 0x29));
-                    g_7746dc = gm_GetEntityUiFlags(g_774970, 0, item, 0);
+            if (d2_VisitedBuilding != 0) {
+                g_7746dc = gm_GetEntityUiFlags(gm_LocalPlayerSlot, (u8*)d2_VisitedBuilding, 0, 0);
+            } else if (d2_InteriorBuilding != 0) {
+                if (sv_SelectedBuilding != 0) {
+                    item = (unsigned short*)fcn_00502cd0(*(int*)(d2_InteriorBuilding + 0x5d),
+                        1, 0, *(unsigned short*)(d2_InteriorBuilding + 0x29));
+                    g_7746dc = gm_GetEntityUiFlags(gm_LocalPlayerSlot, 0, item, 0);
                 } else {
-                    g_7746dc = gm_GetEntityUiFlags(g_774970, g_7746c8, 0, 0);
+                    g_7746dc = gm_GetEntityUiFlags(gm_LocalPlayerSlot, d2_InteriorBuilding, 0, 0);
                 }
             } else {
                 if (selected == 0)
                     goto refresh;
-                g_7746dc = gm_GetEntityUiFlags(g_774970, (u8*)selected, 0, 0);
+                g_7746dc = gm_GetEntityUiFlags(gm_LocalPlayerSlot, (u8*)selected, 0, 0);
             }
-            if (g_7746c4 != 0 && (g_7746dc & 0x10)) {
-                d2_RunTechTreeDialog(g_7746c4, *(unsigned short*)(g_7746c4 + 0x29));
-            } else if (g_7746c8 != 0 && g_7746cc == 0) {
-                d2_RunGebaeudeOptionenDialog((char*)g_7746c8);
-            } else if (g_7746c8 != 0 && (g_7746dc & 0x10)) {
-                d2_RunTechTreeDialog((char*)g_7746c8, *(unsigned short*)g_7746cc);
-            } else if (g_7e2aa0 != 0) {
-                kind = gm_GetBuildingTypeCategory(*(u8*)g_7e2aa0);
-                g_7746dc = gm_GetEntityUiFlags(g_774970, (u8*)g_7e2aa0, 0, 0);
+            if (d2_VisitedBuilding != 0 && (g_7746dc & 0x10)) {
+                d2_RunTechTreeDialog(d2_VisitedBuilding, *(unsigned short*)(d2_VisitedBuilding + 0x29));
+            } else if (d2_InteriorBuilding != 0 && sv_SelectedBuilding == 0) {
+                d2_RunGebaeudeOptionenDialog((char*)d2_InteriorBuilding);
+            } else if (d2_InteriorBuilding != 0 && (g_7746dc & 0x10)) {
+                d2_RunTechTreeDialog((char*)d2_InteriorBuilding, *(unsigned short*)sv_SelectedBuilding);
+            } else if (d2_SelectedBuilding != 0) {
+                kind = gm_GetBuildingTypeCategory(*(u8*)d2_SelectedBuilding);
+                g_7746dc = gm_GetEntityUiFlags(gm_LocalPlayerSlot, (u8*)d2_SelectedBuilding, 0, 0);
                 if ((kind == 3 || kind == 5) && (g_7746dc & 0x10))
-                    d2_ShowGebaeudeOptions(g_7e2aa0);
+                    d2_ShowGebaeudeOptions(d2_SelectedBuilding);
                 else
-                    d2_RunGebaeudeOptionenDialog(g_7e2aa0);
+                    d2_RunGebaeudeOptionenDialog(d2_SelectedBuilding);
             }
         } else if (g_6a25e4 != -1 && d2_CurrentElementId == g_6a25e4) {
             if (selected != 0 && *(u8*)selected != 0x47) {
@@ -99,11 +99,11 @@ void __cdecl d2_UpdateSelectionPanels(void)
                     ((SelectProto*)lpGebaeudePROT)[*(u8*)selected].kind == 0x10 ||
                     ((SelectProto*)lpGebaeudePROT)[*(u8*)selected].kind == 0x1e) {
                     if (d2_TutorialAllowsFlag(0x400) == 1) {
-                        g_7746d8 = gm_GetEntityUiFlags(g_774970, (u8*)selected, 0, 0);
+                        d2_SelectedEntityUiFlags = gm_GetEntityUiFlags(gm_LocalPlayerSlot, (u8*)selected, 0, 0);
                         d2_DispatchTutorialInput(0x12, (int)selected, 0, 0);
                         d2_RunTradeInventoryPanel((int)selected, 1);
                         d2_DispatchTutorialInput(0x12, (int)selected, 1, 0);
-                        g_7e2aa0 = selected;
+                        d2_SelectedBuilding = selected;
                         d2_ResetUiInputAndBounds();
                     }
                 }
@@ -114,7 +114,7 @@ void __cdecl d2_UpdateSelectionPanels(void)
                 query[1] = 0;
                 query[5] = 4;
                 d2_DispatchTutorialInput(0xf, 0, 0, 0);
-                d2_OpenTargetPicker((char*)query, (int)g_6b5c60, (int)g_6b5c60,
+                d2_OpenTargetPicker((char*)query, (int)str_empty, (int)str_empty,
                     (void*)d2_NoopTargetPickerCallback);
                 d2_DispatchTutorialInput(0xf, 0, 1, 0);
             }
@@ -122,27 +122,27 @@ void __cdecl d2_UpdateSelectionPanels(void)
     }
 refresh:
     d2_UpdateSelectionPanel();
-    if (g_7e2aa0 == *(char**)0x774780 &&
-        g_7746c8 == *(u8**)0x77477c &&
-        g_7746c4 == *(char**)0x774778 &&
-        g_7746cc == *(char**)0x774784 &&
-        g_7e2a9c == *(int**)0x774788 &&
-        g_7ea360 == *(int*)0x77478c &&
+    if (d2_SelectedBuilding == *(char**)0x774780 &&
+        d2_InteriorBuilding == *(u8**)0x77477c &&
+        d2_VisitedBuilding == *(char**)0x774778 &&
+        sv_SelectedBuilding == *(char**)0x774784 &&
+        d2_SelectedItem == *(int**)0x774788 &&
+        d2_SelectedPerson == *(int*)0x77478c &&
         (unsigned char)g_7746f4 == *(int*)0x774790 &&
         g_7746f0 == *(int*)0x774794 && g_6a2524 == 0)
         return;
     g_6a2524 = 0;
     d2_DestroySelectionPanel();
-    item = (unsigned short*)g_7e2a9c;
-    focus = g_7ea360;
+    item = (unsigned short*)d2_SelectedItem;
+    focus = d2_SelectedPerson;
     count = g_7746f0;
     if (item != 0 && ((OBJECT_PROTOTYPE*)lpObjektePROT)[*item].kind == 0x1d &&
         count == 0 && focus == 0) {
         d2_OpenTransporterInfoPanel(item);
         goto reload;
     }
-    if (g_7746c0 == 0 && g_7746f4 == 0 && count == 0) {
-        if (g_7746cc != 0 || focus != 0)
+    if (d3_FocusedEntityObject == 0 && g_7746f4 == 0 && count == 0) {
+        if (sv_SelectedBuilding != 0 || focus != 0)
             goto snapshot;
         d2_OpenBuildingInfoPanel();
         goto reload;
@@ -152,23 +152,23 @@ refresh:
             d2_OpenPersonInfoPanel(0);
         } else {
             d2_OpenPersonInfoPanel((char*)focus);
-            *(int*)0x77478c = g_7ea360;
+            *(int*)0x77478c = d2_SelectedPerson;
             d2_UpdateSelectionPanel();
         }
         goto reload;
     }
     goto snapshot;
 reload:
-    focus = g_7ea360;
-    item = (unsigned short*)g_7e2a9c;
+    focus = d2_SelectedPerson;
+    item = (unsigned short*)d2_SelectedItem;
     count = g_7746f0;
 snapshot:
-    record = g_7746cc;
+    record = sv_SelectedBuilding;
     *(int*)0x774790 = (unsigned char)g_7746f4;
     *(int*)0x774794 = count;
-    if (g_7746c0 == 0 && g_7746c8 == 0 && g_7746c4 == 0) {
+    if (d3_FocusedEntityObject == 0 && d2_InteriorBuilding == 0 && d2_VisitedBuilding == 0) {
         *(unsigned short**)0x774788 = item;
-        selected = g_7e2aa0;
+        selected = d2_SelectedBuilding;
         *(u8**)0x77477c = 0;
         *(char**)0x774778 = 0;
         *(char**)0x774648 = 0;
@@ -177,15 +177,15 @@ snapshot:
         *(char**)0x774780 = selected;
         return;
     }
-    selected = g_7e2aa0;
-    *(u8**)0x77477c = g_7746c8;
-    *(char**)0x774778 = g_7746c4;
+    selected = d2_SelectedBuilding;
+    *(u8**)0x77477c = d2_InteriorBuilding;
+    *(char**)0x774778 = d2_VisitedBuilding;
     *(char**)0x774784 = record;
     *(int*)0x77478c = focus;
     *(unsigned short**)0x774788 = item;
     *(char**)0x774780 = selected;
     if ((item != 0 || record != 0) && g_6a25b8 == -1) {
-        *(char**)0x774648 = g_7746c0;
+        *(char**)0x774648 = d3_FocusedEntityObject;
         if (item != 0) {
             d2_ShowGebaeudeItemInfoPanel(item);
             d2_UpdateSelectionPanel();
@@ -197,15 +197,15 @@ snapshot:
         }
         return;
     }
-    if (g_7e2aa0 == 0 && g_7746c8 == 0) {
+    if (d2_SelectedBuilding == 0 && d2_InteriorBuilding == 0) {
         *(char**)0x774648 = 0;
         return;
     }
-    *(char**)0x774648 = g_7746c0;
-    if (g_7e2aa0 != 0)
-        pick = g_7e2aa0;
-    else if (g_7746c8 != 0)
-        pick = (char*)g_7746c8;
+    *(char**)0x774648 = d3_FocusedEntityObject;
+    if (d2_SelectedBuilding != 0)
+        pick = d2_SelectedBuilding;
+    else if (d2_InteriorBuilding != 0)
+        pick = (char*)d2_InteriorBuilding;
     d2_ShowBuildingInfoPanel((u8*)pick);
     d2_UpdateSelectionPanel();
 }

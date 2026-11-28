@@ -10,10 +10,10 @@ struct ALLOC_CHAR_RECORD {
 // SIZE 0x21c
 
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-extern int g_14cbca0;
+extern int nt_ClientSocket;
 extern int gm_NextEntityId;
 extern int cm_LastEntityId;
-extern int(__stdcall* g_662318)(void);
+extern int(__stdcall* imp_timeGetTime)(void);
 
 void __cdecl srv_SeedRandom(int);
 int __cdecl cm_ResolveSpecialEntityId(unsigned char*, int);
@@ -32,10 +32,10 @@ int __cdecl fcn_004cc590(unsigned char* request, char* response)
 	char* r;
 	int id;
 
-	if (g_14cbca0 != -1)
+	if (nt_ClientSocket != -1)
 		gm_NextEntityId = *(int*) (request + 0x10);
 	else
-		*(int*) (request + 0x22) = g_662318();
+		*(int*) (request + 0x22) = imp_timeGetTime();
 	if (response != 0) {
 		response[0] = 2;
 		response[1] = 1;
@@ -54,20 +54,20 @@ int __cdecl fcn_004cc590(unsigned char* request, char* response)
 	if (id == 0xffff)
 		return 1;
 	if (*(int*) (request + 0x1b) != -1 && (r = gm_FindRecordById(*(int*) (request + 0x1b))) != 0)
-		init_SpawnBuildingCharacter((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id), *(int*) (e + 1), *(int*) (r + 2), 0, 0);
+		init_SpawnBuildingCharacter((*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id].entity_id), *(int*) (e + 1), *(int*) (r + 2), 0, 0);
 	else
-		init_SpawnBuildingCharacter((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id), *(int*) (e + 1), -1, 0, 0);
-	(*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].ptr_16c) = 0;
-	(*(char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_type) = 0xd;
+		init_SpawnBuildingCharacter((*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id].entity_id), *(int*) (e + 1), -1, 0, 0);
+	(*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id].ptr_16c) = 0;
+	(*(char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id].entity_type) = 0xd;
 	if (request[0x21] != 0) {
-		gm_AllocObjekt((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id), request[0x21], 1);
-		ch_UpdateHeldObjectAttachment(((struct ALLOC_CHAR_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id]));
+		gm_AllocObjekt((*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id].entity_id), request[0x21], 1);
+		ch_UpdateHeldObjectAttachment(((struct ALLOC_CHAR_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id]));
 	}
-	cm_LastEntityId = (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id);
+	cm_LastEntityId = (*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id].entity_id);
 	if (response != 0) {
 		response[0] = 1;
 		response[1] = 1;
-		*(struct ALLOC_CHAR_RECORD**) (response + 6) = ((struct ALLOC_CHAR_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id]);
+		*(struct ALLOC_CHAR_RECORD**) (response + 6) = ((struct ALLOC_CHAR_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id]);
 	}
 	return 0;
 }

@@ -8,11 +8,11 @@
 extern int __cdecl sprintf(char* buf, const char* fmt, ...);
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern unsigned char g_6b5c28;
+extern unsigned char ch_SceneDebugSwitch;
 extern int g_6b5c2c;
 extern int g_6b5c30;
-extern unsigned int g_67529c;
-extern int g_67a370;
+extern unsigned int ch_LastUpdateTime;
+extern int d3_ActiveScene;
 
 extern int __cdecl d3sm_GetObjectSuperMap(char*);
 extern void __cdecl d3_RemoveObjectAnim(char*);
@@ -128,7 +128,7 @@ void __cdecl ch_WalkOnPath58(char* obj)
 			                 1);
 			*(char**) (inst + 0x70) = p;
 			if (p == 0) {
-				if (g_6b5c28) {
+				if (ch_SceneDebugSwitch) {
 					*(unsigned char*) (*(int*) (obj + 0x14) + 0x8c) |= 8;
 				}
 				goto remove;
@@ -161,7 +161,7 @@ void __cdecl ch_WalkOnPath58(char* obj)
 		}
 		*(int*) (inst + 0x70) = 0;
 		ch_AdjustHeightToGround(obj);
-		if (g_6b5c28) {
+		if (ch_SceneDebugSwitch) {
 			*(unsigned short*) (*(int*) (obj + 0x14) + 0x8c) |= 8;
 		}
 		goto remove;
@@ -170,14 +170,14 @@ void __cdecl ch_WalkOnPath58(char* obj)
 		if (*(int*) (inst + 0x70) != 0) {
 			return;
 		}
-		if (g_6b5c28) {
+		if (ch_SceneDebugSwitch) {
 			*(unsigned short*) (*(int*) (obj + 0x14) + 0x8c) |= 8;
 		}
 		goto remove;
 	}
 	state = ch_AdjustHeightToGround(obj);
 	p = *(char**) (inst + 0x70);
-	if (p != 0 && g_6b5c2c != 0 && g_67a370 == *(int*) (inst + 0x88) &&
+	if (p != 0 && g_6b5c2c != 0 && d3_ActiveScene == *(int*) (inst + 0x88) &&
 	    g_67530c == *(int*) (inst + 0x2c) &&
 	    *(int*) p != *(unsigned char*) (obj + 0x100) &&
 	    (*(int*) p == 4 || *(int*) p == 0x0c || *(int*) p == 0x12 ||
@@ -255,7 +255,7 @@ next:
 		*(int*) (obj + 0xf8) = i;
 		if (i >= *(int*) (obj + 0xf0)) {
 			ch_FinishAni(inst);
-			if (g_6b5c28) {
+			if (ch_SceneDebugSwitch) {
 				*(unsigned char*) (*(int*) (obj + 0x14) + 0x8c) |= 8;
 			}
 			if (*(int*) (obj + 0xf4) != 0) {
@@ -315,7 +315,7 @@ next:
 		d = d3_ComputeYawToTarget(o, (float*) (obj + 0x124));
 		*(float*) (obj + 0x108) = d;
 		if (d > 0.04 || d < -0.04) {
-			t = ch_UpdateTime - g_67529c;
+			t = ch_UpdateTime - ch_LastUpdateTime;
 			f = t * 0.9090908765792847f;
 			if (*(int*) (inst + 4) & 8) {
 				f *= 0.4f;
@@ -351,7 +351,7 @@ next:
 		d = d3_ComputeYawToTarget(o, (float*) (obj + 0x124));
 		*(float*) (obj + 0x108) = d;
 		if (d > 0.04 || d < -0.04) {
-			t = ch_UpdateTime - g_67529c;
+			t = ch_UpdateTime - ch_LastUpdateTime;
 			f = t * 0.9090908765792847f;
 			if (*(int*) (inst + 4) & 8) {
 				f *= 0.4f;

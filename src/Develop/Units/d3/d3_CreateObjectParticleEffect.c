@@ -28,7 +28,7 @@ typedef struct {
 	int kind;
 } System;
 
-extern float g_662d70[4];
+extern float d3_ZeroVec4[4];
 System* __cdecl d3_CreateParticleSystem(int n, const char* name, Bytes4 f, int a, char* e, void (__cdecl* cb)(void));
 void __cdecl d3_SetEffectPosition(System* s, float* pos);
 void __cdecl d3_UpdateParticleSystem(void);
@@ -45,7 +45,7 @@ System* __cdecl d3_CreateObjectParticleEffect(char* e, const char* name, unsigne
 		f.c = (flag & 1) | 2;
 		s = d3_CreateParticleSystem(n, name, f, a, e, d3_UpdateParticleSystem);
 		if (s != 0) {
-			d3_SetEffectPosition(s, g_662d70);
+			d3_SetEffectPosition(s, d3_ZeroVec4);
 			s->pos.x = pos->x;
 			s->pos.y = pos->y;
 			s->pos.z = pos->z;

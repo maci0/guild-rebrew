@@ -14,14 +14,14 @@
 
 extern char* cm_LoadBuf;
 extern unsigned int g_aed328;
-extern unsigned int g_1005820;
+extern unsigned int cm_LoadBufOffset;
 extern int ls_SaveVersion;
 extern int gm_NextEntityId;
-extern int g_699368;
+extern int cut_NextCutsceneId;
 extern int g_7749d0;
 extern pos14_7f4c00 gm_GameTime;
-extern pos14_7f4c00 g_7e1f70;
-extern unsigned char g_773d75;
+extern pos14_7f4c00 gm_SyncGameTime;
+extern unsigned char gm_ActiveTownIndex;
 extern char* gm_CityEntity;
 extern int g_773d68;
 extern int g_773d6c;
@@ -54,7 +54,7 @@ int __cdecl ls_WaitAndLoadNetSave(void)
 	void* f;
 	int i;
 
-	while (cm_LoadBuf == 0 || g_1005820 < g_aed328) {
+	while (cm_LoadBuf == 0 || cm_LoadBufOffset < g_aed328) {
 		main_PumpWindowMessages();
 		cm_StepCommandQueue();
 	}
@@ -75,7 +75,7 @@ int __cdecl ls_WaitAndLoadNetSave(void)
 	if (ls_ReadVfsDataChecked(&gm_NextEntityId, 4, 1, f) == 0
 	    || ls_ReadVfsDataChecked(&g_7749d0, 4, 1, f) == 0
 	    || ls_ReadVfsDataChecked(&gm_GameTime, 0xe, 1, f) == 0
-	    || ls_ReadVfsDataChecked(&g_773d75, 1, 1, f) == 0
+	    || ls_ReadVfsDataChecked(&gm_ActiveTownIndex, 1, 1, f) == 0
 	    || ls_ReadVfsDataChecked(&gm_CityEntity, 4, 1, f) == 0
 	    || ls_ReadVfsDataChecked(&g_773d68, 4, 1, f) == 0
 	    || ls_ReadVfsDataChecked(&g_773d6c, 4, 1, f) == 0
@@ -85,11 +85,11 @@ int __cdecl ls_WaitAndLoadNetSave(void)
 		cm_LoadBuf = 0;
 		return 0;
 	}
-	g_7e1f70 = gm_GameTime;
+	gm_SyncGameTime = gm_GameTime;
 	ls_ReadVfsDataChecked(&g_773d7c, 4, 1, f);
 	ls_ReadVfsDataChecked(&g_100dc00, 0x18, 1, f);
 	if (ls_SaveVersion >= 0x10030) {
-		ls_ReadVfsDataChecked(&g_699368, 4, 1, f);
+		ls_ReadVfsDataChecked(&cut_NextCutsceneId, 4, 1, f);
 	}
 	if (ls_SaveVersion >= 0x1003d) {
 		ls_ReadVfsDataChecked(&cm_LastCrimeId, 4, 1, f);
@@ -121,8 +121,8 @@ int __cdecl ls_WaitAndLoadNetSave(void)
 		return 0;
 	}
 	for (i = 0; i < 768; i++) {
-		if (((ENTITY_RECORD*)g_7f4ca0)[i].entity_index != 0xffff && ((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 6) {
-			((ENTITY_RECORD*)g_7f4ca0)[i].entity_state = 5;
+		if (((ENTITY_RECORD*)gm_EntitySlotTable)[i].entity_index != 0xffff && ((ENTITY_RECORD*)gm_EntitySlotTable)[i].entity_state == 6) {
+			((ENTITY_RECORD*)gm_EntitySlotTable)[i].entity_state = 5;
 		}
 	}
 	if (fcn_00524040(f) == 0) {

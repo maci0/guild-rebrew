@@ -16,7 +16,7 @@ typedef struct {
 } Obj;
 
 extern char g_1041d6c;
-extern int g_67a370;
+extern int d3_ActiveScene;
 
 char __cdecl d3_CheckObjectHasActiveSlot(void* p, int arg);
 void __cdecl d3_VisitSceneObjects(int list, int a, int mask, char(__cdecl* fn)(void*, int), int arg);
@@ -57,7 +57,7 @@ char __cdecl d3_HasAnySceneObjectSlot(unsigned int n)
 {
 	g_1041d6c = 0;
 	if (n < 7) {
-		d3_VisitSceneObjects(g_67a370, 0, 0x1e, d3_CheckObjectHasActiveSlot, n);
+		d3_VisitSceneObjects(d3_ActiveScene, 0, 0x1e, d3_CheckObjectHasActiveSlot, n);
 		return g_1041d6c;
 	}
 	return 0;

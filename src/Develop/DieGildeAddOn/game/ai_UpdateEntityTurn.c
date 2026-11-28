@@ -33,7 +33,7 @@ typedef struct AI_TURN_PROTO {
 #pragma pack(pop)
 
 extern unsigned char* lpGebaeudePROT;
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 int __cdecl ai_IsEntityTurnActive(AI_TURN_ENTITY*);
 AI_TURN_ENTITY* __cdecl ai_UpdateEntityFeud(AI_TURN_ENTITY*);
@@ -98,7 +98,7 @@ void __cdecl ai_UpdateEntityTurn(AI_TURN_ENTITY* entity)
 					x223 = proto->x223;
 					x230 = proto->x230;
 					cm_RequestAssignWorker(building, 1, x230, x223);
-					sprintf(buf, (char*) 0x67db58, *(unsigned short*) &g_7f4c04,
+					sprintf(buf, (char*) 0x67db58, *(unsigned short*) &gm_GameTimeHour,
 					 *(int*) 0x7f4c06, (char*) entity + 0x30, building->name);
 				}
 			}

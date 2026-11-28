@@ -1,6 +1,6 @@
 #include <string.h>
 
-extern char g_10432c0[];
+extern char d3_Universes[];
 extern int d3_CurrentContextIndex;
 extern int g_67530c;
 extern int g_675310;
@@ -44,7 +44,7 @@ void __cdecl ch_Move2Universe(char* a0)
 		ch_RemoveQueueEntry(action);
 		return;
 	}
-	v5 = (int) ch_MoveCharacter2Universe(character, g_10432c0 + contextIndex * 0x3dc);
+	v5 = (int) ch_MoveCharacter2Universe(character, d3_Universes + contextIndex * 0x3dc);
 	if (v5 == 0) {
 		ReportClientMessage((char*) 0x675918);
 		ch_RemoveQueueEntry(action);

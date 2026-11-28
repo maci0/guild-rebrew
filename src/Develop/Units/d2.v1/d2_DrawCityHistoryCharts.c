@@ -2,13 +2,13 @@
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern unsigned char d2_PlotRadius;
 extern int d2_CurrentWindowId;
-extern int g_1015f4c;
+extern int d2_WindowMetricsView;
 extern int g_1015f50;
-extern unsigned char *g_1015ea0;
+extern unsigned char *d2_Controls;
 extern int gm_GameTime;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
 extern float g_6628bc;
 extern float g_662924;
 extern float g_66293c;
@@ -58,7 +58,7 @@ void __cdecl d2_DrawCityHistoryCharts(unsigned short flags, Gfx g, int win)
 	d2_ClearPaintbox();
 	d2_ClearWindowChildren(win, 1);
 	d2_PlotRadius = 1;
-	w = *(int *) ((char *) &g_1015f4c + win * 0x3cc);
+	w = *(int *) ((char *) &d2_WindowMetricsView + win * 0x3cc);
 	h = *(int *) ((char *) &g_1015f50 + win * 0x3cc);
 	step = (w - 0x69) / 16;
 	if (flags & 1)
@@ -83,8 +83,8 @@ void __cdecl d2_DrawCityHistoryCharts(unsigned short flags, Gfx g, int win)
 	for (i = 0, n = 0x64; n > 0; i++, n -= 0x19) {
 		io_FormatTextBuffer(loc.buf, (char *) 0x6acbec, n);
 		id = d2_EqualizeWindowButtonWidths(3, (int) ((float) i * g_6628bc * y + 5.0f), loc.buf, d2_CurrentWindowId);
-		*(int *) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].width)) = 0x23;
-		*(int *) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_070)) = 1;
+		*(int *) (((char*)&((D2_CONTROL_TL*)d2_Controls)[id].width)) = 0x23;
+		*(int *) (((char*)&((D2_CONTROL_TL*)d2_Controls)[id].value_070)) = 1;
 	}
 	if (m != 0) {
 		x1 = w - 0x3c;
@@ -95,23 +95,23 @@ void __cdecl d2_DrawCityHistoryCharts(unsigned short flags, Gfx g, int win)
 		io_FormatTextBuffer(loc.buf, (char *) 0x67d444, m);
 		d = d2_MeasureTextWidth(loc.buf, 0x55) + 2;
 		id = d2_EqualizeWindowButtonWidths(x1, 5, loc.buf, d2_CurrentWindowId);
-		*(int *) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].width)) = d;
-		*(int *) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_070)) = 1;
+		*(int *) (((char*)&((D2_CONTROL_TL*)d2_Controls)[id].width)) = d;
+		*(int *) (((char*)&((D2_CONTROL_TL*)d2_Controls)[id].value_070)) = 1;
 		io_FormatTextBuffer(loc.buf, (char *) 0x67d444, m / 2);
 		id = d2_EqualizeWindowButtonWidths(x1, (h - 0x1e) / 2 + 5, loc.buf, d2_CurrentWindowId);
-		*(int *) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].width)) = d;
-		*(int *) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_070)) = 1;
+		*(int *) (((char*)&((D2_CONTROL_TL*)d2_Controls)[id].width)) = d;
+		*(int *) (((char*)&((D2_CONTROL_TL*)d2_Controls)[id].value_070)) = 1;
 	}
 	loc.src[0] = gm_GameTime;
-	loc.src[1] = g_7f4c04;
-	loc.src[2] = g_7f4c08;
-	*(short *) ((char *) loc.src + 0xc) = g_7f4c0c;
+	loc.src[1] = gm_GameTimeHour;
+	loc.src[2] = gm_GameTimeSliceDword;
+	*(short *) ((char *) loc.src + 0xc) = gm_GameTimeTailWord;
 	gm_PackGameTime(loc.src, loc.out);
 	if (loc.out[1] == 1) {
 		io_FormatTextBuffer(loc.buf, (char *) 0x67d444, *(short *) (loc.out + 2));
 		d = d2_MeasureTextWidth(loc.buf, 0x55);
 		id = d2_EqualizeWindowButtonWidths(step * 16 + 0x2d, h - 0xd, loc.buf, d2_CurrentWindowId);
-		*(int *) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].width)) = d;
+		*(int *) (((char*)&((D2_CONTROL_TL*)d2_Controls)[id].width)) = d;
 	}
 	loc.src[0]--;
 	gm_PackGameTime(loc.src, loc.out);
@@ -122,7 +122,7 @@ void __cdecl d2_DrawCityHistoryCharts(unsigned short flags, Gfx g, int win)
 			io_FormatTextBuffer(loc.buf, (char *) 0x67d444, *(short *) (loc.out + 2));
 			d = d2_MeasureTextWidth(loc.buf, 0x55);
 			id = d2_EqualizeWindowButtonWidths(n, h - 0xd, loc.buf, d2_CurrentWindowId);
-			*(int *) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].width)) = d;
+			*(int *) (((char*)&((D2_CONTROL_TL*)d2_Controls)[id].width)) = d;
 			d2_DrawLine(n, h - 0x13, n, h - 0xd, 0x10, 0x10, 0x10);
 		}
 		loc.src[0]--;
@@ -132,7 +132,7 @@ void __cdecl d2_DrawCityHistoryCharts(unsigned short flags, Gfx g, int win)
 		io_FormatTextBuffer(loc.buf, (char *) 0x67d444, *(short *) (loc.out + 2));
 		d = d2_MeasureTextWidth(loc.buf, 0x55);
 		id = d2_EqualizeWindowButtonWidths(0x2d, h - 0xd, loc.buf, d2_CurrentWindowId);
-		*(int *) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].width)) = d;
+		*(int *) (((char*)&((D2_CONTROL_TL*)d2_Controls)[id].width)) = d;
 	}
 	d2_PlotRadius = saved;
 }

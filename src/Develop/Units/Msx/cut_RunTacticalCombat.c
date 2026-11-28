@@ -32,20 +32,20 @@ typedef struct Game {
 	int player;
 } Game;
 
-extern volatile int g_6b7fb8;
+extern volatile int tb_TimerTicks;
 #include "Develop/Units/Msx/client_sound.h"
 extern int g_772e94;
-extern int g_772ea4;
-extern int g_772ea8;
+extern int cut_CombatCancelledEntity;
+extern int cut_CombatResolved;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern unsigned char g_7747b0;
-extern char g_14cf950;
+extern unsigned char gm_ClientModeFlags;
+extern char io_LastKeyScancode;
 extern char* ch_ContextCharacters[32];
-extern int g_67a370;
-extern char g_6b5c60[];
+extern int d3_ActiveScene;
+extern char str_empty[];
 extern char* g_14a97d4;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern unsigned short* g_772f24;
+extern unsigned short* cut_ActivePlayerEntity;
 
 unsigned short __cdecl gm_RandomMod(int n);
 void __cdecl cut_RefreshCombatContextCharacters(void);
@@ -69,39 +69,39 @@ void __cdecl cut_RunTacticalCombat(int arg)
 	int id;
 	int i;
 
-	last = (unsigned int) g_6b7fb8 - 0x15e;
+	last = (unsigned int) tb_TimerTicks - 0x15e;
 	r = gm_RandomMod(100);
 	cut_RefreshCombatContextCharacters();
 	d2_InitCombatHud(arg);
-	g_772efc = 0;
+	tp_cut_CombatAmbientTrack = 0;
 	if (r < 0x32) {
-		g_772efc = msx_StartAmbientTrack("Athmos\\Kampfathmo_1.mp3", 0xb);
+		tp_cut_CombatAmbientTrack = msx_StartAmbientTrack("Athmos\\Kampfathmo_1.mp3", 0xb);
 	} else {
-		g_772efc = msx_StartAmbientTrack("Athmos\\Kampfathmo_2.mp3", 0xb);
+		tp_cut_CombatAmbientTrack = msx_StartAmbientTrack("Athmos\\Kampfathmo_2.mp3", 0xb);
 	}
 	g_772e94 = 0;
 	while (main_RunFrameLoop(cut_RunTacticalCombat, 0xfd6c6) != 0) {
-		if (g_772ea8 != 0) {
+		if (cut_CombatResolved != 0) {
 			break;
 		}
-		if (((*(int*)&g_7747b0) & 4) == 0 && g_14cf950 == 0x39) {
+		if (((*(int*)&gm_ClientModeFlags) & 4) == 0 && io_LastKeyScancode == 0x39) {
 			g_772e94 = g_772e94 == 0;
 			for (i = 0; i < 0x20; i++) {
-				if (((Unit**)ch_ContextCharacters)[i] != 0 && ((Unit**)ch_ContextCharacters)[i]->obj->owner == g_67a370) {
+				if (((Unit**)ch_ContextCharacters)[i] != 0 && ((Unit**)ch_ContextCharacters)[i]->obj->owner == d3_ActiveScene) {
 					ch_SetAnimationPaused(((Unit**)ch_ContextCharacters)[i]->obj, g_772e94);
 				}
 			}
-			d2_ShowStatusBanner(&(*(char*)g_6b5c60));
+			d2_ShowStatusBanner(&(*(char*)str_empty));
 		}
 		if (g_772e94 != 0) {
 			d2_ShowStatusBanner(g_14a97d4);
 		} else {
 			d2_UpdateCombatFrame(arg);
 		}
-		if (g_772ea4 != 0 || g_772ea8 != 0) {
-			g_774654 = 1;
+		if (cut_CombatCancelledEntity != 0 || cut_CombatResolved != 0) {
+			d2_DialogCloseRequested = 1;
 		} else if (g_772e94 == 0) {
-			if ((unsigned int) g_6b7fb8 > last + 0x1a4) {
+			if ((unsigned int) tb_TimerTicks > last + 0x1a4) {
 				for (i = 0; i < ((Party*)g_772eb4)->count; i++) {
 					id = ((Party*)g_772eb4)->ids[i];
 					if (id != -1) {
@@ -111,18 +111,18 @@ void __cdecl cut_RunTacticalCombat(int arg)
 						}
 					}
 				}
-				last = (unsigned int) g_6b7fb8;
+				last = (unsigned int) tb_TimerTicks;
 			}
-			if (((Game*)g_772f24)->player == g_68b79c) {
+			if (((Game*)cut_ActivePlayerEntity)->player == g_68b79c) {
 				cut_ResolveCombatWinner(((Party*)g_772eb4));
 				for (i = 0; i < ((Party*)g_772eb4)->count; i++) {
 					if (((Party*)g_772eb4)->ids[i] != -1) {
-						gm_UpdateTaskProgress(&((Slot*)g_9b0e20)[i]);
+						gm_UpdateTaskProgress(&((Slot*)cut_ParticipantSlots)[i]);
 					}
 				}
 			}
-			if (g_772ea4 != 0 || g_772ea8 != 0) {
-				g_774654 = 1;
+			if (cut_CombatCancelledEntity != 0 || cut_CombatResolved != 0) {
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	}

@@ -3,8 +3,8 @@
 #include "Develop/client_types.h"
 
 extern pos14_7f4c00 gm_GameTime;
-extern char g_7f4ca4[];
-extern unsigned char g_773d75;
+extern char gm_EntityIdField[];
+extern unsigned char gm_ActiveTownIndex;
 extern char g_67e348[];
 
 unsigned short __cdecl gm_RandomMod(int n);
@@ -40,7 +40,7 @@ void __cdecl ai_RequestAusbauUpgrade(char* slot, char* entity, int chance)
 	}
 	memset(msg, 0, 0xf8);
 	msg[4] = 0x13;
-	*(int*) (msg + 8) = *(int*) (g_7f4ca4 + *(unsigned short*) (*(char**) (entity + 0x16c) + 0x27) * 0x21c);
+	*(int*) (msg + 8) = *(int*) (gm_EntityIdField + *(unsigned short*) (*(char**) (entity + 0x16c) + 0x27) * 0x21c);
 	*(int*) (msg + 0xc) = *(int*) (*(char**) (entity + 0x16c) + 1);
 	msg[0x36] = 1;
 	*(pos14_7f4c00*) (msg + 0x28) = gm_GameTime;
@@ -49,7 +49,7 @@ void __cdecl ai_RequestAusbauUpgrade(char* slot, char* entity, int chance)
 	*(int*) (msg + 0x64) = 1;
 	cm_SendLogAction((int) g_67e348);
 	cm_SendCopyEntityData((int) msg);
-	cm_RequestMoveCredits(-1, *(int*) (g_7f4ca4 + *(unsigned short*) (*(char**) (entity + 0x16c) + 0x27) * 0x21c), g_773d75, 0x3200);
+	cm_RequestMoveCredits(-1, *(int*) (gm_EntityIdField + *(unsigned short*) (*(char**) (entity + 0x16c) + 0x27) * 0x21c), gm_ActiveTownIndex, 0x3200);
 	*(int*) (entity + 0x1b8) += -0x3200;
 	cm_SendTraceEnd((int) g_67e348);
 	*(unsigned int*) (entity + 0x1c8) |= 8;

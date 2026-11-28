@@ -49,22 +49,22 @@ typedef struct
 /* SIZE 0x21c */
 
 extern unsigned char* lpGebaeudePROT;
-extern char* g_77255c;
+extern char* d2_CurrentWindow;
 extern int d2_CurrentWindowId;
-extern int g_6b7fac;
-extern int g_100f1dc;
+extern int gm_GameTicks;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 extern int g_14abc44;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern int g_7746c0;
-extern char* g_7746cc;
+extern int d3_FocusedEntityObject;
+extern char* sv_SelectedBuilding;
 extern int g_7746f0;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern int g_7ea360;
+extern int d2_SelectedPerson;
 
-extern char g_7f4ca0[];
-extern char g_7f4ca4[];
+extern char gm_EntitySlotTable[];
+extern char gm_EntityIdField[];
 extern char s_6aa194[];
 extern char s_6ac79c[];
 extern char s_6ac7dc[];
@@ -72,9 +72,9 @@ extern char s_6ac7ec[];
 extern char s_6ac7fc[];
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
 
 void __cdecl d2_SetBackgroundTexture(const char*, int);
 int __cdecl d2_LoadForm(int, int, char*);
@@ -142,13 +142,13 @@ void __cdecl d2_RunWorkerTrainingDialog(unsigned char* obj)
 	d2_CreateItemRowControls(2, 0x764, out + 6, hwnd);
 	d2_SetForm(dlg, 1);
 	if (t->category != 4 && t->category != 0x10) {
-		d2_SetBackgroundTexture(s_6ac7fc, *(int*) g_77255c);
+		d2_SetBackgroundTexture(s_6ac7fc, *(int*) d2_CurrentWindow);
 	}
 	else {
-		d2_SetBackgroundTexture(s_6ac7ec, *(int*) g_77255c);
+		d2_SetBackgroundTexture(s_6ac7ec, *(int*) d2_CurrentWindow);
 	}
-	*(int*) (g_77255c + 0x3a4) = 0;
-	start = g_6b7fac;
+	*(int*) (d2_CurrentWindow + 0x3a4) = 0;
+	start = gm_GameTicks;
 	if (fcn_00502cd0(*(int*) (obj + 0x5d), 2, 6, 0, 0x35) != 0) {
 		btnA = 1;
 	}
@@ -173,15 +173,15 @@ void __cdecl d2_RunWorkerTrainingDialog(unsigned char* obj)
 	else d2_SetElementEnabled(out[6], 0);
 	for (;;) {
 		d2_SetForm(dlg, 1);
-		i = g_6b7fac - start;
+		i = gm_GameTicks - start;
 		alpha = (double) (unsigned int) i * 0.0013333333333333333;
 		if (!(alpha < 0.4)) { alpha = 0.4; }
-		*(float*) (g_77255c + 0x3a4) = (float) alpha;
+		*(float*) (d2_CurrentWindow + 0x3a4) = (float) alpha;
 
 
-		if (g_14ce8e0 != 0) {
+		if (io_RightButtonReleased != 0) {
 			if (CountDisplayCounters() == 0) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			} else {
 				sv_ClearObjectSelection();
 			}
@@ -213,15 +213,15 @@ void __cdecl d2_RunWorkerTrainingDialog(unsigned char* obj)
 		io_AppendText(s_6aa194, cnt3, 0x51e, 0x1a47, 0x16ba);
 		d2_CurrentWindowId = out[8];
 		io_AppendText(s_6ac7dc, cnt6c, 0x51e, 0x1a48);
-		if (g_100f1dc != -1 && CountDisplayCounters() != 0) {
+		if (d2_DialogButtonAction != -1 && CountDisplayCounters() != 0) {
 			for (i = 0; i < 3; i++) {
 				if (out[i * 3] != -1 && d2_CurrentElementId == out[i * 3]) {
 					sum = cnt2 + cnt3;
 					if (i == 0 || i == 1) {
 						for (j = 0; j < 0x300; j++) {
-							if (((Player*) g_7f4ca0)[j].x188 != 0) {
+							if (((Player*) gm_EntitySlotTable)[j].x188 != 0) {
 								memset(&pkt, 0, sizeof(pkt));
-								if (((Player*) g_7f4ca0)[j].x17c != 0 && *((Player*) g_7f4ca0)[j].x17c == 0x16) {
+								if (((Player*) gm_EntitySlotTable)[j].x17c != 0 && *((Player*) gm_EntitySlotTable)[j].x17c == 0x16) {
 									sum--;
 								}
 								if (sum >= 3) {
@@ -229,19 +229,19 @@ void __cdecl d2_RunWorkerTrainingDialog(unsigned char* obj)
 									break;
 								}
 								pkt.type = 0x16;
-								pkt.x8 = *(int*) (g_7f4ca4 + g_774970 * 0x21c);
+								pkt.x8 = *(int*) (gm_EntityIdField + gm_LocalPlayerSlot * 0x21c);
 								pkt.xc = *(int*) (obj + 1);
 								pkt.name = *(pos14_7f4c00*) &gm_GameTime;
 								pkt.x36 = 1;
-								if (g_7746cc != 0) {
-									pkt.x60 = *(int*) (g_7746cc + 2);
+								if (sv_SelectedBuilding != 0) {
+									pkt.x60 = *(int*) (sv_SelectedBuilding + 2);
 								}
 								else {
 									pkt.x60 = -1;
 								}
-								pkt.x5c = ((Player*) g_7f4ca0)[j].x4;
+								pkt.x5c = ((Player*) gm_EntitySlotTable)[j].x4;
 								*(char*) &pkt.x58 = (i != 0) + 2;
-								he_AssignActionSlot(obj, 0, ((Player*) g_7f4ca0)[j].x0, 0);
+								he_AssignActionSlot(obj, 0, ((Player*) gm_EntitySlotTable)[j].x0, 0);
 								cm_SendCopyEntityData(&pkt);
 								sum++;
 							}
@@ -252,20 +252,20 @@ void __cdecl d2_RunWorkerTrainingDialog(unsigned char* obj)
 							if (sum >= 3) {
 								break;
 							}
-							if (((Player*) g_7f4ca0)[j].x188 != 0) {
+							if (((Player*) gm_EntitySlotTable)[j].x188 != 0) {
 								pkt.type = 0x6c;
-								pkt.x8 = *(int*) (g_7f4ca4 + *(unsigned short*) (obj + 0x27) * 0x21c);
+								pkt.x8 = *(int*) (gm_EntityIdField + *(unsigned short*) (obj + 0x27) * 0x21c);
 								pkt.xc = *(int*) (obj + 1);
 								pkt.name = *(pos14_7f4c00*) &gm_GameTime;
 								pkt.x36 = 1;
-								pkt.x58 = ((Player*) g_7f4ca0)[j].x4;
-								if (g_7746cc != 0 && *(unsigned short*) g_7746cc != 0xfd) {
-									pkt.x70 = *(int*) (g_7746cc + 2);
+								pkt.x58 = ((Player*) gm_EntitySlotTable)[j].x4;
+								if (sv_SelectedBuilding != 0 && *(unsigned short*) sv_SelectedBuilding != 0xfd) {
+									pkt.x70 = *(int*) (sv_SelectedBuilding + 2);
 								}
 								else {
 									pkt.x70 = -1;
 								}
-								he_AssignActionSlot(obj, 0, ((Player*) g_7f4ca0)[j].x0, 0);
+								he_AssignActionSlot(obj, 0, ((Player*) gm_EntitySlotTable)[j].x0, 0);
 								cm_SendCopyEntityData(&pkt);
 								sum++;
 							}
@@ -286,7 +286,7 @@ void __cdecl d2_RunWorkerTrainingDialog(unsigned char* obj)
 				}
 			}
 		}
-		else if (g_100f1dc != -1 && CountDisplayCounters() == 0) {
+		else if (d2_DialogButtonAction != -1 && CountDisplayCounters() == 0) {
 			for (i = 0; i < 3; i++) {
 				if (out[i * 3] != -1 && d2_CurrentElementId == out[i * 3]) {
 					if (i != 2) {

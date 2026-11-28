@@ -17,6 +17,6 @@ typedef struct {
 #pragma pack(pop)
 /* SIZE 0x2d */
 
-extern STRAFTAT_RECORD g_9a3800[512];
+extern STRAFTAT_RECORD cm_CrimeRecords[512];
 
 #endif

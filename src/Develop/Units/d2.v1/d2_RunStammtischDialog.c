@@ -1,7 +1,7 @@
 extern int d2_CurrentWindowId;
-extern int g_772500;
-extern int g_77255c;
-extern int g_14ce8e0;
+extern int d2_FileObjTable;
+extern int d2_CurrentWindow;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
 void* __cdecl d2_LoadForm(int a, int b, char* name);
@@ -64,13 +64,13 @@ void __cdecl d2_RunStammtischDialog(int gebaeude, int* objekt)
 			if (n == 0) {
 				io_AppendText((char*) 0x188e);
 			} else {
-				int x0 = *(int*) (g_77255c + 0xc) + *(short*) (g_772500 + 0x1ebd8) * -2;
+				int x0 = *(int*) (d2_CurrentWindow + 0xc) + *(short*) (d2_FileObjTable + 0x1ebd8) * -2;
 				int third = x0 / 3;
 				int remainder_half = (x0 % 3) / 2;
 				p = sel[0];
 				for (i = 0; i < n; i++) {
 					p[0xc] = 1;
-					p[4] = (i % 2 + 1) * third + remainder_half + (*(short*) (g_772500 + 0x1ebd8) + 10) * (i % 2) - 10;
+					p[4] = (i % 2 + 1) * third + remainder_half + (*(short*) (d2_FileObjTable + 0x1ebd8) + 10) * (i % 2) - 10;
 					p[5] = (i / 2) * 0x82 + 100;
 					d2_BuildPersonStatusDesc(p);
 					d2_DrawPersonCard(p[4], p[5], d2_CurrentWindowId, 0x54, p, 1);
@@ -83,8 +83,8 @@ void __cdecl d2_RunStammtischDialog(int gebaeude, int* objekt)
 				io_AppendText((char*) 0x1892);
 			}
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 		if (main_RunFrameLoop((void (*)(void)) d2_RunStammtischDialog, 0x677c7) == 0) {
 			break;

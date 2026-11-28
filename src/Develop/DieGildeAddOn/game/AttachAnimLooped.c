@@ -19,7 +19,7 @@ int __cdecl AttachAnimLooped(char** character, char** animation, int* kind)
     char copied;
 
     object = *character;
-    if (g_6b7ebc != 0 && *(void**) (g_6b7ebc + 0x44) == (void*) AttachAnimLooped) {
+    if (evt_WaitingScriptTask != 0 && *(void**) (evt_WaitingScriptTask + 0x44) == (void*) AttachAnimLooped) {
         draw = *(char**) (object + 0x1ec);
         /* Native pointer-cell views; complete slot records remain unresolved. */
 #ifdef REBREW_GOLD

@@ -1,4 +1,4 @@
-extern char g_774a80[];
+extern char io_MessageFormatBuf[];
 
 
 
@@ -14,10 +14,10 @@ void __cdecl he_NotifyFeudEscalated(void* entity, void* recipient)
 	t = *(char*) ((char*) recipient + 2);
 	if (t == 6 || t == 7) {
 		io_FormatTextBuffer(buf, gm_RandomMod(3) + 0x134a, *(unsigned short*) entity);
-		io_FormatTextBuffer(g_774a80, 0x1343, *(unsigned short*) entity,
+		io_FormatTextBuffer(io_MessageFormatBuf, 0x1343, *(unsigned short*) entity,
 		    gm_RandomMod(3) +
 		        (*(char*) ((char*) recipient + 9) != 0 ? 0x1347 : 0x1344),
 		    *(unsigned short*) recipient, buf);
-		he_PostEntityMessage(*(int*) ((char*) recipient + 4), -1, g_774a80, 1, 0x5ec, 0);
+		he_PostEntityMessage(*(int*) ((char*) recipient + 4), -1, io_MessageFormatBuf, 1, 0x5ec, 0);
 	}
 }

@@ -20,7 +20,7 @@ typedef struct Query {
 
 extern int g_10058e0;
 extern BoxRec* g_10058e4;
-extern int g_67a370;
+extern int d3_ActiveScene;
 
 int __cdecl _strnicmp(const char* a, const char* b, int n);
 int __cdecl fcn_0065f220(const char* a, const char* b);
@@ -50,7 +50,7 @@ void __cdecl d3_PlaceBuildingProxyBoxes(char* name)
 
 	memset(&q, 0, sizeof(q));
 	strcpy(q.path, name);
-	d3_VisitSceneObjects(g_67a370, 0, 0x1c0, d3_CollectMatchingSceneObjects, &q);
+	d3_VisitSceneObjects(d3_ActiveScene, 0, 0x1c0, d3_CollectMatchingSceneObjects, &q);
 	if (q.count == 0) {
 		return;
 	}

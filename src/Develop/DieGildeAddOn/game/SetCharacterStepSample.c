@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/ch_script.h"
-extern char g_6752a8[];
+extern char ch_StepSampleName[];
 
 
 
@@ -7,6 +7,6 @@ extern char g_6752a8[];
 
 int __cdecl SetCharacterStepSample(char** p)
 {
-	strcpy(g_6752a8, *p);
+	strcpy(ch_StepSampleName, *p);
 	return 1;
 }

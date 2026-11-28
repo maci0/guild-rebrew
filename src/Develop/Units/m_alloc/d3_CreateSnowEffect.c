@@ -50,7 +50,7 @@ typedef struct {
 	unsigned char b3;
 } LoadFlags;
 
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 #include "Develop/Units/d3/d3_camera.h"
 extern char g_677618[];
 extern char g_677604[];
@@ -97,11 +97,11 @@ Snow* __cdecl d3_CreateSnowEffect(int count)
 	s->zero48 = 0;
 	s->one4c = 0x3f800000;
 	s->zero50 = 0;
-	s->tint[0] = g_6b7fac;
-	s->tint[1] = g_6b7fac;
-	s->tint[2] = g_6b7fac;
-	s->tint[3] = g_6b7fac;
-	s->tint[4] = g_6b7fac;
+	s->tint[0] = gm_GameTicks;
+	s->tint[1] = gm_GameTicks;
+	s->tint[2] = gm_GameTicks;
+	s->tint[3] = gm_GameTicks;
+	s->tint[4] = gm_GameTicks;
 	if (((char*)d3_ActiveCamera) != 0) {
 		s->cam70 = *(int*) (((char*)d3_ActiveCamera) + 0x84);
 		s->cam74 = *(int*) (((char*)d3_ActiveCamera) + 0x88);

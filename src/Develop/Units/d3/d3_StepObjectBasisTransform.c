@@ -8,9 +8,9 @@ extern void __cdecl d3_BuildEulerRotationMatrix(float*, float*);
 extern float* __stdcall fcn_005eb970(float*, const float*, const float*);
 extern void __cdecl d3_MatrixToEulerAngles(float*, float*);
 extern char g_6b85a0;
-extern float g_6628a8;
+extern float flt_0_0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern const float g_662d40[3];
+extern const float d3_UnitAxisVectors[3];
 
 /* Project one entity point through the active camera basis.  The view matrix
  * is built from the entity's own view object (or from the pass-through view
@@ -67,10 +67,10 @@ int __cdecl d3_StepObjectBasisTransform(unsigned char* self, float* dir, float* 
 		}
 		if (same) {
 			if (self == *(unsigned char**) 0x6b8484 && g_6b85a0 == 0) {
-				t[0] = m[0] * g_662d40[0] + m[4] * g_662d40[1]
-				    + m[8] * g_662d40[2];
-				t[2] = m[2] * g_662d40[0] + m[6] * g_662d40[1]
-				    + m[10] * g_662d40[2];
+				t[0] = m[0] * d3_UnitAxisVectors[0] + m[4] * d3_UnitAxisVectors[1]
+				    + m[8] * d3_UnitAxisVectors[2];
+				t[2] = m[2] * d3_UnitAxisVectors[0] + m[6] * d3_UnitAxisVectors[1]
+				    + m[10] * d3_UnitAxisVectors[2];
 				t[1] = 0.0f; len = (float) sqrt(t[0] * t[0] + t[2] * t[2]);
 				if (!(len < 0.1f)) {
 					ang = -(float) d3_WrapYawDelta((float*) 0x662d40, t);
@@ -78,8 +78,8 @@ int __cdecl d3_StepObjectBasisTransform(unsigned char* self, float* dir, float* 
 					x = (float) cos(ang) * t[0] + (float) sin(ang) * t[2];
 					z = (float) cos(ang) * t[2] - (float) sin(ang) * t[0];
 				} else {
-					t[0] = dir[0]; t[1] = dir[1]; x = t[1] * m[4] + t[0] * m[0] + g_6628a8 * m[8];
-					z = t[1] * m[6] + t[0] * m[2] + g_6628a8 * m[10];
+					t[0] = dir[0]; t[1] = dir[1]; x = t[1] * m[4] + t[0] * m[0] + flt_0_0 * m[8];
+					z = t[1] * m[6] + t[0] * m[2] + flt_0_0 * m[10];
 				}
 				written = 1;
 				outA[0] = x + *(float*) (self + 0x4c);

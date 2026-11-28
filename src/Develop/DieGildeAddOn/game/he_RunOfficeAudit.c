@@ -36,9 +36,9 @@ void __cdecl he_RunOfficeAudit(char* action)
 	idx = *(int*) (action + 0x70);
 	if (idx == 0xc) {
 		if (*(int*) (action + 0xac) == 0) {
-			io_FormatTextBuffer(buf, 0x10bc, (unsigned char*) 0x868080 + g_773d75 * 0x2f4);
+			io_FormatTextBuffer(buf, 0x10bc, (unsigned char*) 0x868080 + gm_ActiveTownIndex * 0x2f4);
 		} else {
-			io_FormatTextBuffer(buf, 0x10be, (unsigned char*) 0x868080 + g_773d75 * 0x2f4);
+			io_FormatTextBuffer(buf, 0x10be, (unsigned char*) 0x868080 + gm_ActiveTownIndex * 0x2f4);
 		}
 		p = (unsigned char*) 0x7f4ca2;
 		do {

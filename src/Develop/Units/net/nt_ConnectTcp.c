@@ -49,7 +49,7 @@ extern char* g_14cbca4;
 extern unsigned char* g_14cbca8;
 extern unsigned short g_14cbcac;
 extern unsigned short g_14cbcae;
-extern int g_6b7d40;
+extern int nt_WsaInitialized;
 
 void __cdecl nt_ResetPacketStats(void);
 void __cdecl nt_LogWinsockError(int err);
@@ -73,17 +73,17 @@ int __cdecl nt_ConnectTcp(char* host, int port)
 	int r;
 
 	nt_ResetPacketStats();
-	g_14cbca0 = -1;
+	nt_ClientSocket = -1;
 	g_14cbca4 = 0;
 	g_14cbca8 = 0;
 	g_14cbcac = 0;
 	g_14cbcae = 0;
-	g_14cbcb0 = 0;
+	nt_ConnectionClosed = 0;
 	if (host == 0) {
 		return -1;
 	}
 	WSAStartup(2, wsa);
-	g_6b7d40 = 1;
+	nt_WsaInitialized = 1;
 	s = socket(2, 1, 6);
 	if (s != (unsigned int) -1) {
 		opt = 1;
@@ -138,7 +138,7 @@ fail:
 		shutdown(s, 2);
 		closesocket(s);
 	}
-	g_6b7d40 = 0;
+	nt_WsaInitialized = 0;
 	WSACleanup();
 	s = -1;
 	return s;
@@ -151,6 +151,6 @@ connected:
 	if (getsockopt(s, 0xffff, 0x1002, (char*) &opt, &len) != -1) {
 		sprintf(buf, "getsockopt SO_RCVBUF: %d", opt);
 	}
-	g_14cbca0 = s;
+	nt_ClientSocket = s;
 	return s;
 }

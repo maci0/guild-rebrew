@@ -7,10 +7,10 @@ typedef struct {
 	int arg;
 } Mode59a2;
 
-extern char g_14cf950;
+extern char io_LastKeyScancode;
 #include "Develop/Units/d3/d3_camera.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_7e35c0[];
+extern int main_FrameHandlerStack[];
 
 void __cdecl d2_RunWorldHudLoop(void);
 void __cdecl d2_DispatchTutorialInput(int, int, int, int);
@@ -22,7 +22,7 @@ void __cdecl d3_HandleCameraLevelKey(void)
 	float v[3];
 	float x;
 
-	if (g_14cf950 == '1' && d3_ActiveCamera != 0 && ((Mode59a2*)g_7e35c0)[g_774650].fn == (void*) d2_RunWorldHudLoop) {
+	if (io_LastKeyScancode == '1' && d3_ActiveCamera != 0 && ((Mode59a2*)main_FrameHandlerStack)[g_774650].fn == (void*) d2_RunWorldHudLoop) {
 		d2_DispatchTutorialInput(0x16, 0, 0, 0);
 		x = *(float*) (d3_ActiveCamera + 0x84);
 		v[0] = x;

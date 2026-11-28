@@ -36,11 +36,11 @@ float __cdecl d3_ComputeYawToTarget(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
 char __cdecl d3sm_SampleHeight(char*, float*, int*, int*, float*);
 void __cdecl d3_GetFloorHeight(char*, float*, int, int*, int*, float*);
-extern float g_6628a8;
+extern float flt_0_0;
 #include "../../../Units/d3/d3_animation.h"
 
 #include "../../../Units/d3/d3_camera.h"
-extern char g_10432c0[];
+extern char d3_Universes[];
 
 char __cdecl d3_SetObjectVisible(char*, char);
 
@@ -53,7 +53,7 @@ int __cdecl d3_RemoveObjectAnim(char*);
 
 
 
-extern char g_6b5c60[];
+extern char str_empty[];
 D3_OBJECT* __cdecl d3_CreateSceneModelObject(D3_OBJECT*, float*, float*, char*);
 void __cdecl d3_InvalidateSubTreeFlags(char*, int);
 void __cdecl ch_PreloadCharacterMotions(char*, int, ...);
@@ -78,7 +78,7 @@ int __cdecl ch_MoveCharacter2Universe(char* obj, void* universe)
 
 	if (obj != 0 && *(void**) (obj + 0x88) != 0 && universe != 0
 	    && d3_MoveObjectToScene(*(void**) (obj + 0x34), *(void**) (obj + 0x88), universe)) {
-		d3_SetObjectPosition(*(void**) (obj + 0x34), g_662d70);
+		d3_SetObjectPosition(*(void**) (obj + 0x34), d3_ZeroVec4);
 		if (*(void***) (obj + 0x124) != 0) {
 			d3_MoveObjectToScene(**(void***) (obj + 0x124), *(void**) (obj + 0x88), universe);
 		}
@@ -88,12 +88,12 @@ int __cdecl ch_MoveCharacter2Universe(char* obj, void* universe)
 		*(void**) (obj + 0x88) = universe;
 		if (d3_GetContextIndex(universe) == 0) {
 			n = *(D3_OBJECT**) (obj + 0x34);
-			n->darstellungsflag = g_6752a4;
+			n->darstellungsflag = ch_DefaultMirrorFlag;
 		} else {
 			n = *(D3_OBJECT**) (obj + 0x34);
 			n->darstellungsflag = 0;
 		}
-		if (universe == (void*) g_67a370 && (*(D3_OBJECT**) (obj + 0x34))->kontext == 0) {
+		if (universe == (void*) d3_ActiveScene && (*(D3_OBJECT**) (obj + 0x34))->kontext == 0) {
 			sprintf(buf, "ch_MoveCharacter2Universe(): character deflated, will be inflated:%s", obj + 0x170);
 			ch_EnsureCharacterMeshes(obj);
 		}

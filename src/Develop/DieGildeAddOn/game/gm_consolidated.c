@@ -1,8 +1,8 @@
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern unsigned short g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
+extern unsigned short gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
 extern char s_67fb2c[];
 
 char* __cdecl gm_LookupEntityRecordById(int id);
@@ -46,9 +46,9 @@ int __cdecl aip_ExecPamphlet(char* actor, int a2, char* x)
 	*(int*) (msg + 8) = *(int*) (actor + 4);
 	*(int*) (msg + 0xc) = *(int*) (actor + 4);
 	*(int*) (msg + 0x58) = (*(int*)&gm_GameTime);
-	*(int*) (msg + 0x5c) = (*(int*)&g_7f4c04);
-	*(int*) (msg + 0x60) = g_7f4c08;
-	*(short*) (msg + 0x64) = g_7f4c0c;
+	*(int*) (msg + 0x5c) = (*(int*)&gm_GameTimeHour);
+	*(int*) (msg + 0x60) = gm_GameTimeSliceDword;
+	*(short*) (msg + 0x64) = gm_GameTimeTailWord;
 	msg[0x6d] = (char) gm_RandomMod(0x1d);
 	*(int*) (msg + 0x68) = *(int*) (target + 4);
 	cm_SendLogAction(s_67fb2c);
@@ -100,9 +100,9 @@ int __cdecl aip_ExecAnschwaerzen(char* actor, int a2, char* x)
 	msg[4] = 0x2f;
 	*(int*) (msg + 0xc) = -1;
 	msg[0x36] = 1;
-	*(int*) (msg + 0x2c) = (*(int*)&g_7f4c04);
-	*(int*) (msg + 0x30) = g_7f4c08;
-	*(short*) (msg + 0x34) = g_7f4c0c;
+	*(int*) (msg + 0x2c) = (*(int*)&gm_GameTimeHour);
+	*(int*) (msg + 0x30) = gm_GameTimeSliceDword;
+	*(short*) (msg + 0x34) = gm_GameTimeTailWord;
 	cm_SendLogAction(s_67fb50);
 	cm_SendCopyEntityData(msg);
 	cm_RequestModifyHealth(*(int*) (actor + 4), -3);

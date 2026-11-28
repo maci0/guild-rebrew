@@ -29,9 +29,9 @@ typedef struct {
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern unsigned short g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
+extern unsigned short gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
 
 int __cdecl he_GetActionProgress(char*, int*, int*, int);
 unsigned short __cdecl gm_RandomMod(int);
@@ -48,12 +48,12 @@ int __cdecl he_SendEvent096(char* e, int* list, int idx)
 	}
 	memset(&msg, 0, sizeof(msg));
 	msg.kind = 0x96;
-	msg.owner = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].entity_id;
+	msg.owner = ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (e + 0x27)].entity_id;
 	msg.entity = *(int*) (e + 1);
 	msg.timestamp.a = (*(int*)&gm_GameTime);
-	msg.timestamp.b = (*(int*)&g_7f4c04);
-	msg.timestamp.c = g_7f4c08;
-	msg.timestamp.d = g_7f4c0c;
+	msg.timestamp.b = (*(int*)&gm_GameTimeHour);
+	msg.timestamp.c = gm_GameTimeSliceDword;
+	msg.timestamp.d = gm_GameTimeTailWord;
 	msg.flag = 1;
 	msg.v5c = list[idx * 2 + 3];
 	msg.v58 = list[0];

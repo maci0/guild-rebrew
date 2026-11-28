@@ -11,7 +11,7 @@ extern void __cdecl io_FormatTextBuffer(char* buf, int a, int b, int c);
 extern void __cdecl he_PostEntityMessage(int a, int b, char* buf, int c, int d, int e);
 extern double g_6629c8;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 /* ADDRESS: GOLDTL 0x004b8130 */
 int __cdecl gm_HandleMsg19GrantBonusAndFavor(int* request)
@@ -55,7 +55,7 @@ int __cdecl gm_HandleMsg19GrantBonusAndFavor(int* request)
     d = (double) t + g_6629c8;
     v = gm_WalkEntityChain(*(unsigned short*) rec);
     r = (int) (0.01 * ((double) v * d));
-    cm_RequestTransferCurrencyNoKill(-1, request[0], g_773d75, r);
+    cm_RequestTransferCurrencyNoKill(-1, request[0], gm_ActiveTownIndex, r);
     if (rec[0x169] == 0x1e) {
         mode = 0;
     } else if (rec[0x169] == 0x1f) {

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "Develop/Units/m_alloc/m_alloc.h"
 extern int g_0063319c;
-extern int* g_6b7d78;
+extern int* sb_BankListHead;
 char* __cdecl sb_FindVoiceBySample(int, int*);
 void __cdecl sb_StopVoice(void*, int);
 #define I32(p) (*(int*)(p))
@@ -23,7 +23,7 @@ int __cdecl sb_UnloadSampleBank(char* target)
     if (!I32(0x633194) || !target) {
         rc = -1;
     } else {
-        bank = (char*)g_6b7d78;
+        bank = (char*)sb_BankListHead;
         while (bank) {
             if (bank == target)
                 break;
@@ -34,7 +34,7 @@ int __cdecl sb_UnloadSampleBank(char* target)
             if (previous)
                 *(char**)(previous + 0x13c) = *(char**)(bank + 0x13c);
             else
-                g_6b7d78 = *(int**)(bank + 0x13c);
+                sb_BankListHead = *(int**)(bank + 0x13c);
             name = target + 0x32;
             sprintf((char*)0x1460920, "Unloading Samplebank %s ... MemUsed before unloading %d bytes.", name, I32(0x633194));
             for (i = 0; i < I32(bank + 0x134); i++) {

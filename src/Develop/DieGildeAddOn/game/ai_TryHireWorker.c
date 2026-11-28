@@ -13,7 +13,7 @@
 
 
 
-extern unsigned short g_7f4c04;
+extern unsigned short gm_GameTimeHour;
 extern unsigned char* lpGebaeudePROT;
 
 unsigned short __cdecl gm_RandomMod(int n);
@@ -27,7 +27,7 @@ void __cdecl ai_TryHireWorker(char* e)
 	int n;
 	int i;
 
-	k = (*(short*)&g_7f4c04);
+	k = (*(short*)&gm_GameTimeHour);
 	if (k != 7 && k != 12 && k != 18) {
 		*(int*) (e + 0x1b4) &= ~0x40;
 		return;
@@ -37,13 +37,13 @@ void __cdecl ai_TryHireWorker(char* e)
 	}
 	o = *(char**) (e + 0x16c);
 	*(int*) (e + 0x1b4) |= 0x40;
-	kind = ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (o + 0x27)].entity_state;
+	kind = ((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (o + 0x27)].entity_state;
 	if ((kind == 6 || kind == 7) && !(*(int*) (e + 0x1b4) & 2)) {
 		return;
 	}
 	n = 0;
 	for (i = 0; i < 768; i++) {
-		if (((ENTITY_RECORD*)g_7f4ca0)[i].entity_index != 0xffff && ((ENTITY_RECORD*)g_7f4ca0)[i].unk_16c == o && ((ENTITY_RECORD*)g_7f4ca0)[i].unk_165[0] != 0) {
+		if (((ENTITY_RECORD*)gm_EntitySlotTable)[i].entity_index != 0xffff && ((ENTITY_RECORD*)gm_EntitySlotTable)[i].unk_16c == o && ((ENTITY_RECORD*)gm_EntitySlotTable)[i].unk_165[0] != 0) {
 			n++;
 		}
 	}

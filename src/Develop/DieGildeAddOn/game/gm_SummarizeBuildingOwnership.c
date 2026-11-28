@@ -11,7 +11,7 @@ typedef struct {
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 
-extern char g_7f4ca4[];
+extern char gm_EntityIdField[];
 
 void __cdecl gm_SummarizeBuildingOwnership(int kind, stat12* out)
 {
@@ -30,7 +30,7 @@ void __cdecl gm_SummarizeBuildingOwnership(int kind, stat12* out)
 	while (e != 0) {
 		k = *(unsigned short*) (e + 0x27);
 		if (k != 0xffff) {
-			t = g_7f4ca4[k * 0x21c - 2];
+			t = gm_EntityIdField[k * 0x21c - 2];
 			if (t == 6 || t == 7)
 				match++;
 		}

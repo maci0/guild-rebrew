@@ -17,7 +17,7 @@ typedef struct F8 {
 
 
 
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl amt_CanUpgradeBuildingTier2(char* e);
@@ -45,7 +45,7 @@ int __cdecl ai_StartZunftAufruhr(int a1, char* e, int a3, char* out)
 		return 0;
 	}
 	v = (int) max(gm_WalkEntityChain(*(unsigned short*) e) * 0.01f, 160.0f);
-	if (v > (int) (gm_GetSeasonTreasury(e, (*(char*)&g_773d75)) * 0.22f)) {
+	if (v > (int) (gm_GetSeasonTreasury(e, (*(char*)&gm_ActiveTownIndex)) * 0.22f)) {
 		return 0;
 	}
 	f.mask = 0x807d4190;
@@ -59,7 +59,7 @@ int __cdecl ai_StartZunftAufruhr(int a1, char* e, int a3, char* out)
 	}
 	count = 0;
 	for (i = 0; i < 768; i++) {
-		if ((*(char**)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].ptr_16c) == target) {
+		if ((*(char**)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].ptr_16c) == target) {
 			count++;
 		}
 	}

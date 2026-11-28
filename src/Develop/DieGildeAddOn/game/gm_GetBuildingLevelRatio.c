@@ -3,7 +3,7 @@
 
 extern unsigned char* lpGebaeudeINST;
 extern unsigned char* lpGebaeudePROT;
-extern float g_6628a8;
+extern float flt_0_0;
 
 float __cdecl gm_GetBuildingLevelRatio(void)
 {
@@ -26,5 +26,5 @@ float __cdecl gm_GetBuildingLevelRatio(void)
 	if (s2 != 0) {
 		return (float) s1 / s2;
 	}
-	return g_6628a8;
+	return flt_0_0;
 }

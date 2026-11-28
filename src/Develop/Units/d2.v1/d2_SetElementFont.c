@@ -5,7 +5,7 @@ void __cdecl d2_SetElementFont(int i, int v)
 {
 	D2_CONTROL_TL* e;
 
-	e = &((D2_CONTROL_TL*)g_1015ea0)[i];
+	e = &((D2_CONTROL_TL*)d2_Controls)[i];
 	*(int*)&e->font = v;
 	switch (*(int*)&e->kind) {
 	case 0x40:

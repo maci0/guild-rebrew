@@ -96,7 +96,8 @@ int __cdecl cm_ParseChurchDebugArgument(int a1, int a2, char* argumentText)
 	}
 	cnt = 0;
 	for (i = 0; i < 0x300; i++) {
-		if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_index != 0xffff && ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type <= 4 && ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].side == faith) {
+		if (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_index != 0xffff && ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_type <= 4 &&
+			((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].side == faith) {
 			cnt++;
 		}
 	}

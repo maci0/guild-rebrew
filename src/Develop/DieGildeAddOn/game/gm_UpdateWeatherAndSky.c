@@ -36,23 +36,23 @@ typedef struct {
 
 #include "Develop/client_types.h"
 
-extern unsigned char g_773d75;
-extern char g_868060[];
+extern unsigned char gm_ActiveTownIndex;
+extern char gm_TownTable[];
 extern pos14_7f4c00 gm_GameTime;
 extern int g_7e43a0;
 extern int g_7e43a4;
 extern int g_7e4530;
 extern int g_7e4534;
-extern int g_7e4538;
-extern int g_7e453c;
-extern int g_7e4540[6];
+extern int d3_RainEffect;
+extern int d3_SnowEffect;
+extern int d3_SkyLayers[6];
 extern int g_7e4468;
 extern int g_7e446c;
 extern int g_7e4380;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_7746fc;
 extern Slot_1043340 g_1043340[64];
-extern Tabs_7e43a8 g_7e43a8;
+extern Tabs_7e43a8 gm_HourlyWeatherSlots;
 extern float g_6a2640;
 extern float g_6a2644;
 extern float g_6a2648;
@@ -101,8 +101,8 @@ void __cdecl gm_UpdateWeatherAndSky(GAME_TIMESTAMP* now, int flag)
 
 	gm_PackGameTime((int*) now, buf);
 	mode = gm_QuerySeason((int*) now);
-	g_7e43a0 = ((int*) ((char*) g_868060 + 0x108))[g_773d75 * 189 + mode];
-	g_7e43a4 = ((int*) ((char*) g_868060 + 0x118))[g_773d75 * 189 + mode];
+	g_7e43a0 = ((int*) ((char*) gm_TownTable + 0x108))[gm_ActiveTownIndex * 189 + mode];
+	g_7e43a4 = ((int*) ((char*) gm_TownTable + 0x118))[gm_ActiveTownIndex * 189 + mode];
 	if (flag != 0) {
 		if (mode == 3) {
 			g_7e4530 = (gm_RandomMod(100) < g_7e43a0 / 2) + 1;
@@ -110,90 +110,90 @@ void __cdecl gm_UpdateWeatherAndSky(GAME_TIMESTAMP* now, int flag)
 			g_7e4530 = 0;
 		}
 		for (i = 0; i < 24; i++) {
-			g_7e43a8.a[i] = 0;
+			gm_HourlyWeatherSlots.a[i] = 0;
 		}
 		for (i = 0; i < 24; i++) {
 			if (gm_RandomMod(100) < g_7e43a0) {
-				g_7e43a8.a[i] = gm_RandomMod(g_7e43a0 * 10);
+				gm_HourlyWeatherSlots.a[i] = gm_RandomMod(g_7e43a0 * 10);
 			}
-			if (g_7e43a8.a[i] > 700) {
-				g_7e43a8.a[i] = (g_7e43a8.a[i] & 1) + 999;
-			} else if (g_7e43a8.a[i] > 500) {
-				g_7e43a8.a[i] = (g_7e43a8.a[i] & 1) + 499;
-			} else if (g_7e43a8.a[i] > 250) {
-				g_7e43a8.a[i] = (g_7e43a8.a[i] & 1) + 149;
+			if (gm_HourlyWeatherSlots.a[i] > 700) {
+				gm_HourlyWeatherSlots.a[i] = (gm_HourlyWeatherSlots.a[i] & 1) + 999;
+			} else if (gm_HourlyWeatherSlots.a[i] > 500) {
+				gm_HourlyWeatherSlots.a[i] = (gm_HourlyWeatherSlots.a[i] & 1) + 499;
+			} else if (gm_HourlyWeatherSlots.a[i] > 250) {
+				gm_HourlyWeatherSlots.a[i] = (gm_HourlyWeatherSlots.a[i] & 1) + 149;
 			} else {
-				g_7e43a8.a[i] = 0;
+				gm_HourlyWeatherSlots.a[i] = 0;
 			}
-			if (g_7e4530 == 0 && g_7e43a8.a[i] >= 999) {
-				g_7e43a8.b[i] = gm_RandomMod(3);
+			if (g_7e4530 == 0 && gm_HourlyWeatherSlots.a[i] >= 999) {
+				gm_HourlyWeatherSlots.b[i] = gm_RandomMod(3);
 			} else {
-				g_7e43a8.b[i] = 0;
+				gm_HourlyWeatherSlots.b[i] = 0;
 			}
 		}
 		angle = gm_RandomFloat01() * 6.2831853;
 		step = rand() > 0x3fff ? -0.175f : 0.175f;
 		for (i = 0; i < 24; i++) {
-			((Vec24*) &g_7e43a8.c)->v[i] = sin(angle);
-			((Vec24*) &g_7e43a8.d)->v[i] = cos(angle);
+			((Vec24*) &gm_HourlyWeatherSlots.c)->v[i] = sin(angle);
+			((Vec24*) &gm_HourlyWeatherSlots.d)->v[i] = cos(angle);
 			angle += gm_RandomFloat01() * step;
 		}
 	}
-	gm_InitWeatherWave(mode, gm_GameTime.a, (Vec24*) &g_7e43a8.c, (Vec24*) &g_7e43a8.d);
+	gm_InitWeatherWave(mode, gm_GameTime.a, (Vec24*) &gm_HourlyWeatherSlots.c, (Vec24*) &gm_HourlyWeatherSlots.d);
 	g_7e4468 = 0;
 	g_7e446c = 0;
 	g_7e4534 = -1;
 	maxv = 0;
 	for (i = 0; i < 24; i++) {
-		if (maxv <= g_7e43a8.a[i]) {
-			maxv = g_7e43a8.a[i];
+		if (maxv <= gm_HourlyWeatherSlots.a[i]) {
+			maxv = gm_HourlyWeatherSlots.a[i];
 		}
 	}
 	if (g_7e4530 != 0) {
 		if (g_7e4530 == 1) {
-			if (g_7e4538 != 0) {
-				d3_DestroyRain(g_7e4538);
-				g_7e4538 = 0;
+			if (d3_RainEffect != 0) {
+				d3_DestroyRain(d3_RainEffect);
+				d3_RainEffect = 0;
 			}
-		} else if (g_7e4538 == 0) {
-			g_7e4538 = (int) d3_CreateRain(maxv);
+		} else if (d3_RainEffect == 0) {
+			d3_RainEffect = (int) d3_CreateRain(maxv);
 		}
-		if (g_7e453c == 0) {
-			g_7e453c = (int) d3_CreateSnowEffect(maxv);
+		if (d3_SnowEffect == 0) {
+			d3_SnowEffect = (int) d3_CreateSnowEffect(maxv);
 		}
-		d3_SetSnowEffectOptions((int*) g_7e453c, 2, 0, 0, 3, 0xff);
-		d3_SetSnowEffectOptions((int*) g_7e453c, 1, 0, 0);
+		d3_SetSnowEffectOptions((int*) d3_SnowEffect, 2, 0, 0, 3, 0xff);
+		d3_SetSnowEffectOptions((int*) d3_SnowEffect, 1, 0, 0);
 	} else {
-		if (g_7e453c != 0) {
-			d3_DestroySnowEffect(g_7e453c);
-			g_7e453c = 0;
+		if (d3_SnowEffect != 0) {
+			d3_DestroySnowEffect(d3_SnowEffect);
+			d3_SnowEffect = 0;
 		}
-		if (g_7e4538 == 0) {
-			g_7e4538 = (int) d3_CreateRain(maxv);
+		if (d3_RainEffect == 0) {
+			d3_RainEffect = (int) d3_CreateRain(maxv);
 		}
-		d3_SetRainEffectOptions((int*) g_7e4538, 1, 0, 0);
+		d3_SetRainEffectOptions((int*) d3_RainEffect, 1, 0, 0);
 	}
 	if (g_6b89c0 == 0) {
 		g_6b89c0 = (int) d3_CreateSky(-0.95f, -0.2f, 600.0f);
 	}
 	for (i = 0; i < 6; i++) {
-		if (g_7e4540[i] != 0) {
-			d3_RemoveSkyLayer(g_6b89c0, g_7e4540[i]);
-			g_7e4540[i] = 0;
+		if (d3_SkyLayers[i] != 0) {
+			d3_RemoveSkyLayer(g_6b89c0, d3_SkyLayers[i]);
+			d3_SkyLayers[i] = 0;
 		}
 	}
 	*(int*) &col = 0xff;
 	col.b = 0;
-	g_7e4540[0] = d3_CreateSkyLayer(g_6b89c0, 0, (int) "Sky_Schoen_01", col, g_6a2640, 0, g_6a2644, g_6a2648);
-	d3_SetSkyLayerScrollSpeed(g_6b89c0, g_7e4540[0], 0);
+	d3_SkyLayers[0] = d3_CreateSkyLayer(g_6b89c0, 0, (int) "Sky_Schoen_01", col, g_6a2640, 0, g_6a2644, g_6a2648);
+	d3_SetSkyLayerScrollSpeed(g_6b89c0, d3_SkyLayers[0], 0);
 	*(int*) &col = 0;
 	col.b = 0;
-	g_7e4540[1] = d3_CreateSkyLayer(g_6b89c0, 0, (int) "Sky_Schoen_02", col, g_6a268c, 0, g_6a2690, g_6a2694);
-	d3_SetSkyLayerScrollSpeed(g_6b89c0, g_7e4540[1], 0);
+	d3_SkyLayers[1] = d3_CreateSkyLayer(g_6b89c0, 0, (int) "Sky_Schoen_02", col, g_6a268c, 0, g_6a2690, g_6a2694);
+	d3_SetSkyLayerScrollSpeed(g_6b89c0, d3_SkyLayers[1], 0);
 	*(int*) &col = 0;
 	col.b = 0;
-	g_7e4540[2] = d3_CreateSkyLayer(g_6b89c0, 0, (int) "sky_dunkel_01", col, g_6a28f0, 0, g_6a28f4, g_6a28f8);
-	d3_SetSkyLayerScrollSpeed(g_6b89c0, g_7e4540[2], 0);
+	d3_SkyLayers[2] = d3_CreateSkyLayer(g_6b89c0, 0, (int) "sky_dunkel_01", col, g_6a28f0, 0, g_6a28f4, g_6a28f8);
+	d3_SetSkyLayerScrollSpeed(g_6b89c0, d3_SkyLayers[2], 0);
 	player = d3_CurrentContextIndex;
 	for (i = 0; i < 64; i++) {
 		if (((D3_CONTEXT_SLOT*) g_1043340)[i].f2c != 0) {

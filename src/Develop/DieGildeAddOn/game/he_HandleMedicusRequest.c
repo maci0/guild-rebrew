@@ -2,7 +2,7 @@
 
 
 int  __cdecl d2_ShowMedicusDialog(void*, void*);
-extern char g_679060[];
+extern char str_fmt_s[];
 void __cdecl io_FormatTextBuffer(void*, int, int);
 
 int __cdecl he_HandleMedicusRequest(void* entity, void* request)

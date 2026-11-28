@@ -28,11 +28,11 @@ struct result {
 	struct rec44 rec;
 };
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int d2_CurrentWindowId;
-extern int g_100f1dc;
-extern int g_14ce8e0;
+extern int d2_DialogButtonAction;
+extern int io_RightButtonReleased;
 extern int d2_CurrentElementId;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int g_14b5650;
@@ -73,7 +73,7 @@ int __cdecl d2_OpenSeanceDialog(int a1, char* s, struct result* out)
 	out->f10 = **(int**) (s + 0x2c + *(int*) (s + 0x88) * 0xc);
 	p = *(struct rec44**) (s + 0x2c + *(int*) (s + 0x88) * 0xc);
 	out->rec = *p;
-	if ((((struct house*)g_7f4ca0)[g_774970].flags & 8) != 0) {
+	if ((((struct house*)gm_EntitySlotTable)[gm_LocalPlayerSlot].flags & 8) != 0) {
 		d2_ShowGreenMessageBox(g_14b5650, g_14b5654, 0);
 		return 0;
 	}
@@ -89,20 +89,20 @@ int __cdecl d2_OpenSeanceDialog(int a1, char* s, struct result* out)
 	b6 = d2_GetWindowListItem(h, 2, io_AppendText(0x40d0, 6));
 	b8 = d2_GetWindowListItem(h, 2, io_AppendText(0x40d1, 8));
 	cancel = d2_GetWindowListItem(h, 2, io_AppendText(0x40d2));
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
-		} else if (g_100f1dc != -1) {
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
+		} else if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == cancel) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			} else {
 				if (d2_CurrentElementId == b4) {
-					k = d2_CheckActionBlocker(&((struct house*)g_7f4ca0)[g_774970], 4);
+					k = d2_CheckActionBlocker(&((struct house*)gm_EntitySlotTable)[gm_LocalPlayerSlot], 4);
 				} else if (d2_CurrentElementId == b6) {
-					k = d2_CheckActionBlocker(&((struct house*)g_7f4ca0)[g_774970], 6) * 2;
+					k = d2_CheckActionBlocker(&((struct house*)gm_EntitySlotTable)[gm_LocalPlayerSlot], 6) * 2;
 				} else if (d2_CurrentElementId == b8) {
-					k = d2_CheckActionBlocker(&((struct house*)g_7f4ca0)[g_774970], 8) * 3;
+					k = d2_CheckActionBlocker(&((struct house*)gm_EntitySlotTable)[gm_LocalPlayerSlot], 8) * 3;
 				} else {
 					continue;
 				}
@@ -110,7 +110,7 @@ int __cdecl d2_OpenSeanceDialog(int a1, char* s, struct result* out)
 					out->kind = k;
 					out->cost = price[k - 1];
 					r = 1;
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				}
 			}
 		}

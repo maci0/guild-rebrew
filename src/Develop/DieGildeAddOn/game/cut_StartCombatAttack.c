@@ -5,7 +5,7 @@ typedef struct {
 } blk24;
 // SIZE 0x24
 
-blk24 g_68bef4 = { { 0x7a657073, 0x2f6c6169, 0x686e6965, 0x646e6561, 0x765f6769, 0x625f6d6f, 0x6e65646f, 0x68656e5f, 0x006e656d } };
+blk24 ch_PickupAnimName = { { 0x7a657073, 0x2f6c6169, 0x686e6965, 0x646e6561, 0x765f6769, 0x625f6d6f, 0x6e65646f, 0x68656e5f, 0x006e656d } };
 
 char __cdecl d3sm_SampleHeight(char*, float*, int*, int*, float*);
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
@@ -22,12 +22,12 @@ void __cdecl gm_ResolveDuelHit(void);
 void __cdecl cut_FinishPotThrow(void);
 int __cdecl gm_RandomMod(unsigned short);
 
-extern int g_67a370;
-extern char* g_772e9c;
+extern int d3_ActiveScene;
+extern char* cut_CombatDefenderEntity;
 extern int g_772edc;
 extern int g_772ee0;
-extern int g_772ec4;
-extern unsigned short* g_772f24;
+extern int cut_BombSampleBank;
+extern unsigned short* cut_ActivePlayerEntity;
 extern int g_68b79c;
 extern int g_102d020;
 extern int g_102d024;
@@ -51,7 +51,7 @@ void __cdecl cut_StartCombatAttack(int* p)
 	int ext;
 	float height;
 
-	map = *(char**) (((char*) g_67a370) + 0xb0);
+	map = *(char**) (((char*) d3_ActiveScene) + 0xb0);
 	if (p[1] == 0) {
 		return;
 	}
@@ -84,7 +84,7 @@ void __cdecl cut_StartCombatAttack(int* p)
 	goto check_174;
 make_task:
 	if ((unsigned short) gm_RandomMod(10) > 8) {
-		if (*(int*) (save + 4) == *(int*) (g_772e9c + 4)) {
+		if (*(int*) (save + 4) == *(int*) (cut_CombatDefenderEntity + 4)) {
 			d3snd_QueueSound(*rec, g_772edc, "_K_C2C_ANGRIFF", -1, 500);
 		} else {
 			d3snd_QueueSound(*rec, g_772ee0, "_K_C2C_ANGRIFF", -1, 500);
@@ -131,8 +131,8 @@ block_174:
 	*(unsigned short**) (task + 0x180) = rec;
 	*(int*) (task + 0x184) = p[5];
 	*(int*) (task + 0x188) = p[6];
-	*(blk24*) (task + 0xf0) = g_68bef4;
-	if (*(int*) (((char*) g_772f24) + 4) == g_68b79c) {
+	*(blk24*) (task + 0xf0) = ch_PickupAnimName;
+	if (*(int*) (((char*) cut_ActivePlayerEntity) + 4) == g_68b79c) {
 		unsigned int tileX;
 		q = *(char**) ((char*) rec + 0x184);
 		if (!d3sm_SampleHeight(map, (float*) (*(int*) (q + 0x34) + 0x4c),
@@ -161,7 +161,7 @@ label_4d84fc:
 	strcpy(task + 0xf0, r + 0x11);
 	ch_CreateAction(*(char**) ((char*) rec + 0x184), 0x3b,
 	             cut_RandMod(0x1e) + 0x8c);
-	sb_PlayVoice((char*) g_772ec4, "topfwerfen_s", 1, 0x3f, 0x7f, 0, 0);
+	sb_PlayVoice((char*) cut_BombSampleBank, "topfwerfen_s", 1, 0x3f, 0x7f, 0, 0);
 	p[0] = -1;
 	p[1] = 0;
 }

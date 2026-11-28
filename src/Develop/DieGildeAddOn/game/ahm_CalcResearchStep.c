@@ -1,5 +1,5 @@
 
-extern float g_6628a8;
+extern float flt_0_0;
 
 
 float __cdecl ahm_GetEssenceValue(char*, int);

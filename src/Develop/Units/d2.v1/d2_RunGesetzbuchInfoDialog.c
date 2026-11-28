@@ -25,8 +25,8 @@ void __cdecl d2_RunGesetzbuchInfoDialog(int textId, int value)
 	d2_SetForm(h, 2);
 	io_AppendText((char*) (textId + 2));
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop(d2_RunGesetzbuchInfoDialog, 0x677c7) != 0);
 	d2_DestroyForm(h);

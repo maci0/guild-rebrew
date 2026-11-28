@@ -13,23 +13,23 @@ struct house {
 	char pad8[0x214];
 };
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern int d2_CurrentWindowId;
-extern int g_100f1dc;
-extern int g_14ce8e0;
+extern int d2_DialogButtonAction;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern unsigned short g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
+extern unsigned short gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
 extern char g_6a96d8[];
 extern char g_6a9828[];
 extern char g_6a9814[];
 extern float g_6628d8;
-extern float g_6628a0;
+extern float flt_1_0;
 extern float g_6628bc;
 
 int __cdecl d3snd_SelectVoiceCode(int, int);
@@ -75,27 +75,27 @@ void __cdecl d2_RunSeanceTreasureDialog(char* e, char* res)
 	else {
 		char ev[0xf8];
 
-		amt = MIN(MAX((int) (gm_WalkEntityChain(g_774970) * 0.25f), 0x27100), 0xc3500);
-		cm_RequestMoveCredits(((struct house*)g_7f4ca0)[g_774970].handle, -1, g_773d75, amt);
+		amt = MIN(MAX((int) (gm_WalkEntityChain(gm_LocalPlayerSlot) * 0.25f), 0x27100), 0xc3500);
+		cm_RequestMoveCredits(((struct house*)gm_EntitySlotTable)[gm_LocalPlayerSlot].handle, -1, gm_ActiveTownIndex, amt);
 		memset(ev, 0, sizeof(ev));
 		ev[4] = (char) 0x8e;
-		*(int*) (ev + 8) = ((struct house*)g_7f4ca0)[g_774970].handle;
+		*(int*) (ev + 8) = ((struct house*)gm_EntitySlotTable)[gm_LocalPlayerSlot].handle;
 		*(int*) (ev + 0xc) = *(int*) (e + 1);
 		*(int*) (ev + 0x28) = (*(int*)&gm_GameTime);
-		*(int*) (ev + 0x2c) = (*(int*)&g_7f4c04);
-		*(int*) (ev + 0x30) = g_7f4c08;
-		*(short*) (ev + 0x34) = g_7f4c0c;
+		*(int*) (ev + 0x2c) = (*(int*)&gm_GameTimeHour);
+		*(int*) (ev + 0x30) = gm_GameTimeSliceDword;
+		*(short*) (ev + 0x34) = gm_GameTimeTailWord;
 		ev[0x36] = 1;
 		*(int*) (ev + 0x58) = amt;
 		cm_SendCopyEntityData(ev);
-		gm_IncreaseEntityStat(&((struct house*)g_7f4ca0)[g_774970], 3);
+		gm_IncreaseEntityStat(&((struct house*)gm_EntitySlotTable)[gm_LocalPlayerSlot], 3);
 	}
 	h = d2_LoadForm(0, 0, g_6a96d8);
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
 	d2_InitWindowBounds(d2_CurrentWindowId);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	d2_SetForm(h, 1);
 	if (mode == 0) {
 		d3snd_QueueSound(t, 0, g_6a9828, gm_RandomMod(8), 0xfa);
@@ -106,8 +106,8 @@ void __cdecl d2_RunSeanceTreasureDialog(char* e, char* res)
 		io_AppendText(0x40d3, 0x40cc);
 	}
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop(d2_RunSeanceTreasureDialog, 0x777c7) != 0);
 	d2_DestroyForm(h);

@@ -25,9 +25,9 @@ typedef struct {
 } Ent_5b4c80;
 
 #include "Develop/client_types.h"
-extern Win_1015f40 g_1015f40[0x60];
-extern char* g_1015ea0;
-extern char g_7f4ca0[];
+extern Win_1015f40 d2_Windows[0x60];
+extern char* d2_Controls;
+extern char gm_EntitySlotTable[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
@@ -62,20 +62,20 @@ void __cdecl d2_ShowCharacterActionDebug(void)
 	fill = 1;
 	left = d2_CreateChildWindow(0, 0, 0x140, 0x190, 0x10, win = d2_CreateWindow(0x20, 0x60, 0x280, 0x190, 0x414));
 	right = d2_CreateChildWindow(0x140, 0, 0x140, 0x190, 0x10, win);
-	d2_SetElementFont(((D2_WIN*)g_1015f40)[win].slot, 0x54);
-	d2_SetElementFont(((D2_WIN*)g_1015f40)[left].slot, 0x54);
-	d2_SetElementFont(((D2_WIN*)g_1015f40)[right].slot, 0x54);
+	d2_SetElementFont(((D2_WIN*)d2_Windows)[win].slot, 0x54);
+	d2_SetElementFont(((D2_WIN*)d2_Windows)[left].slot, 0x54);
+	d2_SetElementFont(((D2_WIN*)d2_Windows)[right].slot, 0x54);
 	if (main_RunFrameLoop((void*) d2_ShowCharacterActionDebug, 0x657c7)) {
-		rp = &((D2_WIN*)g_1015f40)[right];
+		rp = &((D2_WIN*)d2_Windows)[right];
 		do {
-			if (g_14ce8e0 != 0) {
-				g_774654 = 1;
+			if (io_RightButtonReleased != 0) {
+				d2_DialogCloseRequested = 1;
 			}
-			if (g_100f1dc != -1) {
+			if (d2_DialogButtonAction != -1) {
 				for (i = 0; i < 0x300; i++) {
 					if (ids[i] != -1 && d2_CurrentElementId == ids[i]) {
-						if (((D2_CONTROL_TL*) g_1015ea0)[d2_CurrentElementId].associated_object != 0) {
-							d2_RunCharacterDebugDialog(((D2_CONTROL_TL*) g_1015ea0)[d2_CurrentElementId].associated_object);
+						if (((D2_CONTROL_TL*) d2_Controls)[d2_CurrentElementId].associated_object != 0) {
+							d2_RunCharacterDebugDialog(((D2_CONTROL_TL*) d2_Controls)[d2_CurrentElementId].associated_object);
 						}
 						break;
 					}
@@ -83,22 +83,23 @@ void __cdecl d2_ShowCharacterActionDebug(void)
 			}
 			if (fill) {
 				d2_CurrentWindowId = left;
-				saved = *(int*) &((D2_WIN*)g_1015f40)[left].pad3c[0x21c];
+				saved = *(int*) &((D2_WIN*)d2_Windows)[left].pad3c[0x21c];
 				io_AppendText((int) "$C");
 				ids[0] = d2_GetWindowListItem(-1, d2_CurrentWindowId, io_AppendText((int) "%ib[NIEMAND]$6THeCnt:%i$A", 2, he_CountActiveHandlungen(0)));
-				((D2_CONTROL_TL*) g_1015ea0)[ids[0]].associated_object = 0;
-				((D2_CONTROL_TL*) g_1015ea0)[ids[0]].value_05c = 1;
+				((D2_CONTROL_TL*) d2_Controls)[ids[0]].associated_object = 0;
+				((D2_CONTROL_TL*) d2_Controls)[ids[0]].value_05c = 1;
 				n = 1;
 				for (i = 0; i < 0x300; i++) {
 					if (n >= 0x40) {
 						break;
 					}
 					ids[i] = -1;
-					if (((Ent_5b4c80*)g_7f4ca0)[i].slot != 0xffff) {
-						ids[i] = d2_GetWindowListItem(-1, d2_CurrentWindowId, io_AppendText((int) "%it[%1N4]$6THeCnt:%i$A", ((Ent_5b4c80*)g_7f4ca0)[i].slot, he_CountActiveHandlungen(&((Ent_5b4c80*)g_7f4ca0)[i])));
-						((D2_CONTROL_TL*) g_1015ea0)[ids[i]].associated_object = &((Ent_5b4c80*)g_7f4ca0)[i];
+					if (((Ent_5b4c80*)gm_EntitySlotTable)[i].slot != 0xffff) {
+						ids[i] = d2_GetWindowListItem(-1, d2_CurrentWindowId, io_AppendText((int) "%it[%1N4]$6THeCnt:%i$A", ((Ent_5b4c80*)gm_EntitySlotTable)[i].slot,
+							he_CountActiveHandlungen(&((Ent_5b4c80*)gm_EntitySlotTable)[i])));
+						((D2_CONTROL_TL*) d2_Controls)[ids[i]].associated_object = &((Ent_5b4c80*)gm_EntitySlotTable)[i];
 						n++;
-						((D2_CONTROL_TL*) g_1015ea0)[ids[i]].value_05c = 1;
+						((D2_CONTROL_TL*) d2_Controls)[ids[i]].value_05c = 1;
 					}
 					if (n >= 0x3f) {
 						if (d2_CurrentWindowId == right) {
@@ -109,10 +110,10 @@ void __cdecl d2_ShowCharacterActionDebug(void)
 						n = 0;
 					}
 				}
-				*(int*) &((D2_WIN*)g_1015f40)[left].pad3c[0x21c] = saved;
+				*(int*) &((D2_WIN*)d2_Windows)[left].pad3c[0x21c] = saved;
 				fill = 0;
 			}
-			d2_UpdateWindowDrag(&((D2_WIN*)g_1015f40)[left]);
+			d2_UpdateWindowDrag(&((D2_WIN*)d2_Windows)[left]);
 			d2_UpdateWindowDrag(rp);
 		} while (main_RunFrameLoop((void*) d2_ShowCharacterActionDebug, 0x657c7));
 	}

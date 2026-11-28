@@ -9,7 +9,7 @@ int __cdecl d2_AddWindowBitmapElement(int dx, int dy, int width, int height, int
 {
 	int r;
 
-	r = d2_CreateBitmapElement(((D2_WIN*)g_1015f40)[win].left + dx, ((D2_WIN*)g_1015f40)[win].top + dy, width, height, src);
+	r = d2_CreateBitmapElement(((D2_WIN*)d2_Windows)[win].left + dx, ((D2_WIN*)d2_Windows)[win].top + dy, width, height, src);
 	d2_AddWindowChild(r, win);
 	return r;
 }

@@ -1,10 +1,10 @@
 #include "Develop/Units/d2.v1/d2_radio_slot.h"
-extern unsigned char g_773d75;
-extern char* g_1043370;
+extern unsigned char gm_ActiveTownIndex;
+extern char* tp_ch_PathGrid;
 extern int g_772900;
-extern int g_6816d8;
+extern int d2_RouteRadioGroupId;
 #include "Develop/Units/d2.v1/d2_gui.h"
-extern D2_RADIO_SLOT g_10058a0[8];
+extern D2_RADIO_SLOT d2_RadioSlots[8];
 
 typedef struct MapPos {
 	int f0;
@@ -38,9 +38,9 @@ int __cdecl d2_AddRoutePointMarker(int* town, char* building, char* routeHead, c
 	int n;
 	char* map;
 
-	idx = g_773d75;
+	idx = gm_ActiveTownIndex;
 	idx = (idx << 6) - idx;
-	map = g_1043370;
+	map = tp_ch_PathGrid;
 	rec = point;
 	idx = idx * 12;
 	a = *(int*) (0x86834c + idx);
@@ -59,16 +59,16 @@ int __cdecl d2_AddRoutePointMarker(int* town, char* building, char* routeHead, c
 	v = d2_FindLinkedRecordIndex(routeHead, rec) + 0x7bb;
 	v = d2_AddElementToWindow((int) p.x - 0x20, (int) p.y - 0x20, v, town[2]);
 	n = g_772900;
-	g_10058a0[n].id = v;
-	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[v].value_058)) = 1;
-	if (g_6816d8 == -1) {
-		g_6816d8 = d2_CreateRadioGroup(1, g_10058a0[g_772900].id);
+	d2_RadioSlots[n].id = v;
+	*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[v].value_058)) = 1;
+	if (d2_RouteRadioGroupId == -1) {
+		d2_RouteRadioGroupId = d2_CreateRadioGroup(1, d2_RadioSlots[g_772900].id);
 	} else {
-		d2_AddToRadioGroup(g_6816d8, g_10058a0[g_772900].id);
+		d2_AddToRadioGroup(d2_RouteRadioGroupId, d2_RadioSlots[g_772900].id);
 	}
 	n = g_772900;
-	g_10058a0[n].b = (int) rec;
-	v = g_10058a0[n].id;
+	d2_RadioSlots[n].b = (int) rec;
+	v = d2_RadioSlots[n].id;
 	g_772900++;
 	return v;
 }

@@ -1,20 +1,20 @@
 #include <string.h>
 
-extern char* g_6b8300;
+extern char* d3_CurrentFloor;
 extern int g_1040494;
 extern int g_6a25b8;
 extern int d2_CurrentWindowId;
-extern char* g_1015ea0;
-extern short g_14ce8c0;
-extern short g_14ce8c2;
+extern char* d2_Controls;
+extern short io_ActiveCursorX;
+extern short io_ActiveCursorY;
 extern char* d3_ActiveCamera;
 extern int g_14ce8cc;
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int d2_CurrentElementId;
 #include "game_player.h"
-extern char g_773d75;
-extern char g_14cf950;
+extern char gm_ActiveTownIndex;
+extern char io_LastKeyScancode;
 extern double g_662908;
 
 unsigned short* __cdecl fcn_00502cd0(int a, int b, int c, int d);
@@ -118,12 +118,12 @@ void __cdecl ob_HandleBepflanzung(int gebaeude)
 	v23 = 0;
 	v26 = 0;
 	v25 = 0;
-	if (!g_6b8300) {
+	if (!d3_CurrentFloor) {
 		return;
 	}
 	v18 = 0;
 	do {
-		v3 = v17 + 0x7e24 + (int) g_6b8300;
+		v3 = v17 + 0x7e24 + (int) d3_CurrentFloor;
 		if (strstr((char*) v3, (char*) 0x67dd10)) {
 			v36 = v18;
 		}
@@ -160,8 +160,8 @@ void __cdecl ob_HandleBepflanzung(int gebaeude)
 			v8[v17] = v16;
 			if (v24 == -1) {
 				v24 = d2_CreateRadioGroup(1, v16);
-				*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[v16].value_038) = 1;
-				*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[v16].value_03c) = 1;
+				*(unsigned int*) (&((D2_CONTROL_TL*) (d2_Controls))[v16].value_038) = 1;
+				*(unsigned int*) (&((D2_CONTROL_TL*) (d2_Controls))[v16].value_03c) = 1;
 			} else {
 				d2_AddToRadioGroup(v24, v16);
 			}
@@ -171,8 +171,8 @@ void __cdecl ob_HandleBepflanzung(int gebaeude)
 	}
 	v35 = v24 * 0x23;
 	for (;;) {
-		v18 = d3_PickFloorPoint(g_6b8300, (int) g_14ce8c0,
-			(int) g_14ce8c2, 30.0f, pick);
+		v18 = d3_PickFloorPoint(d3_CurrentFloor, (int) io_ActiveCursorX,
+			(int) io_ActiveCursorY, 30.0f, pick);
 		if (v18 != 0xffffffff && v6) {
 			v19 = v18 & 0xffff;
 			v16 = (int) v18 >> 0x10;
@@ -186,8 +186,8 @@ void __cdecl ob_HandleBepflanzung(int gebaeude)
 			world[1] += *(float*) (d3_ActiveCamera + 0x50);
 			world[2] += *(float*) (d3_ActiveCamera + 0x54);
 			d3_SetNodePosition(v6, world);
-			if (*(unsigned char*) (*(int*) g_6b8300 * v16
-					+ *(int*) (g_6b8300 + 0x14) + v19) == v36
+			if (*(unsigned char*) (*(int*) d3_CurrentFloor * v16
+					+ *(int*) (d3_CurrentFloor + 0x14) + v19) == v36
 				&& (v16 = plt_CheckZoneAvailability(v40, v19, v16,
 						(unsigned char) ((char*) v26)[0x42])) != 0) {
 				v16 = v25;
@@ -225,8 +225,8 @@ void __cdecl ob_HandleBepflanzung(int gebaeude)
 					v3 = 0x400;
 				}
 				cm_RequestMoveCredits(0xffffffff,
-					*(unsigned int*) (g_774970 * 0x21c
-						+ 0x7f4ca4), g_773d75, v3);
+					*(unsigned int*) (gm_LocalPlayerSlot * 0x21c
+						+ 0x7f4ca4), gm_ActiveTownIndex, v3);
 				init_SetPflanzenMap(v17, 0);
 				v17 = *(int*) ((char*) v17 + 0x14);
 				if (v17) {
@@ -238,8 +238,8 @@ void __cdecl ob_HandleBepflanzung(int gebaeude)
 				}
 			}
 		}
-		if (g_14ce8e0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased) {
+			d2_DialogCloseRequested = 1;
 		}
 		if (g_14ce8cc) {
 			v17 = 0;
@@ -253,14 +253,14 @@ void __cdecl ob_HandleBepflanzung(int gebaeude)
 				} while (v17 < v16);
 			}
 		}
-		if (g_14cf950 == 'N') {
+		if (io_LastKeyScancode == 'N') {
 			v23 += 1;
 			if (v23 > v16 - 1) {
 				v23 = 0;
 			}
 			d2_SelectRadioGroup(v24, v23);
 		}
-		else if (g_14cf950 == 'J') {
+		else if (io_LastKeyScancode == 'J') {
 			v23 -= 1;
 			if (v23 <= -1) {
 				v23 = v16 - 1;
@@ -280,7 +280,7 @@ void __cdecl ob_HandleBepflanzung(int gebaeude)
 			if (!v6) {
 				fcn_0064d41a(v15, (char*) 0x6ac6c4, v14);
 				ReportClientMessage(v15);
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 			else {
 				unsigned char color[4] = { 0 };

@@ -1,8 +1,8 @@
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
-extern int g_775318;
+extern int d2_InventoryPanelEntity;
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern char* lpObjektePROT;
-extern char* g_6abb00;
+extern char* d2_InventoryPanelWindowId;
 extern char* g_14b52c4;
 extern int g_14a79c0[];
 void* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
@@ -26,7 +26,7 @@ unsigned int __cdecl d2_UpdateActiveItemSlots(void)
 	unsigned short* match;
 	int i;
 
-	container = g_775318;
+	container = d2_InventoryPanelEntity;
 	result = 0;
 	if (container == 0) {
 		return 0;
@@ -36,19 +36,19 @@ unsigned int __cdecl d2_UpdateActiveItemSlots(void)
 			if (fcn_00502cd0(*(int*) (container + 0x178), 1, 0, *(unsigned short*) *slot) != 0) {
 				handle = d2_GetControlValue(slot[-1]);
 				d2_SetElementValue(slot[-1], 0, *(unsigned int*) (*slot + 0xe), handle);
-				fcn_0064d41a(((char*)&((D2_CONTROL_TL*)g_1015ea0)[slot[-1]] + 0xcc), "%s~ %li %s",
+				fcn_0064d41a(((char*)&((D2_CONTROL_TL*)d2_Controls)[slot[-1]] + 0xcc), "%s~ %li %s",
 				    (unsigned int) g_14a79c0[*(unsigned short*) *slot * 2], *(unsigned int*) (*slot + 0xe), g_14b52c4);
 				used = gm_LookupSpecialObject(*(unsigned short*) *slot);
 				if (used != 0) {
 					if (*(int*) (*slot + 0x21) != 0) {
 						d2_SetElementEnabled(slot[-1], 0);
-						*(float*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[slot[-1]].value_1f4)) = 1.0
+						*(float*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[slot[-1]].value_1f4)) = 1.0
 						    - (float) *(int*) (*slot + 0x1c) / *(int*) (used + 4);
 					}
 					else {
 						d2_SetElementEnabled(slot[-1], 1);
-						*(unsigned int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[slot[-1]].value_060)) = 0;
-						*(unsigned int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[slot[-1]].value_1f4)) = 0;
+						*(unsigned int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[slot[-1]].value_060)) = 0;
+						*(unsigned int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[slot[-1]].value_1f4)) = 0;
 					}
 				}
 				if (handle != 0) {
@@ -79,19 +79,19 @@ unsigned int __cdecl d2_UpdateActiveItemSlots(void)
 					if (*(int*) (i * 8 + 0x776c64) == 0) {
 						*(int*) (i * 8 + 0x776c64) = (int) match;
 						handle = d2_AddWindowField((i % 3) * 0x38 + 0x15, (i / 3) * 0x36 + 0x4a,
-						    *match + 0xdf, 10, g_6abb00);
+						    *match + 0xdf, 10, d2_InventoryPanelWindowId);
 						*(int*) (i * 8 + 0x776c60) = handle;
-						*(unsigned int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[handle].flags_1d0)) = 0x23;
-						*(unsigned int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[handle].value_1dc)) = 0xffffffff;
-						*(unsigned int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[handle].value_1e0)) = 0;
-						fcn_0064d41a(((char*)&((D2_CONTROL_TL*)g_1015ea0)[handle] + 0x0cc), "%s~ %li St",
+						*(unsigned int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[handle].flags_1d0)) = 0x23;
+						*(unsigned int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[handle].value_1dc)) = 0xffffffff;
+						*(unsigned int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[handle].value_1e0)) = 0;
+						fcn_0064d41a(((char*)&((D2_CONTROL_TL*)d2_Controls)[handle] + 0x0cc), "%s~ %li St",
 						    (unsigned int) g_14a79c0[*match * 2],
 						    *(unsigned int*) ((char*) match + 0xe));
 						used = gm_LookupSpecialObject(*match);
 						if (used != 0) {
 							if (*(int*) ((char*) match + 0x21) != 0) {
 								d2_SetElementEnabled(handle, 0);
-								*(float*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[handle].value_1f4)) = 1.0
+								*(float*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[handle].value_1f4)) = 1.0
 								    - (float) *(int*) ((char*) match + 0x1c) / *(int*) (used + 4);
 							}
 							else {

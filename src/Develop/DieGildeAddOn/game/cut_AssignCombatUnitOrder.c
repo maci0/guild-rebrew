@@ -1,4 +1,4 @@
-extern char* g_67a370;
+extern char* d3_ActiveScene;
 extern float g_664330;
 
 char* __cdecl gm_GetEquippedCombatGear(char*);
@@ -34,7 +34,7 @@ void __cdecl cut_AssignCombatUnitOrder(char* rec, char* e)
 				}
 			}
 			if (*(int*) (obj + 0x58) == 2) {
-				map = *(char**) (g_67a370 + 0xb0);
+				map = *(char**) (d3_ActiveScene + 0xb0);
 				if (d3sm_SampleHeight(map, (float*) (*(char**) (*(char**) (e + 0x184) + 0x34) + 0x4c), (int*) &gridX, (int*) &grid_z, &f4)) {
 					obj = (char*) gm_FindBestCombatCell(e, gridX, (int) grid_z, (int) (g_664330 / *(float*) (map + 0x10)), &gridX, &grid_z);
 					if (obj != 0) {

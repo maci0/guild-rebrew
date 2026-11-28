@@ -20,11 +20,11 @@ typedef struct BUILDING_PRICE_ROW {
     unsigned char unknown235[0x18];
 } BUILDING_PRICE_ROW;
 
-extern float g_6628a8;
+extern float flt_0_0;
 extern double g_662908;
 
 
-extern float g_662ac8;
+extern float flt_4;
 extern float g_662acc;
 extern double g_665bd8;
 extern float g_665be0;
@@ -64,13 +64,13 @@ float __cdecl eval_ObjektPreis2Credits(int id, int percent)
     buildingType = g_99e0a0[id];
     building = (BUILDING_PRICE_ROW*) g_entity_type_table + buildingType;
     if (buildingType) {
-        acc = g_6628a8;
+        acc = flt_0_0;
         for (i = 0; i < 2; i++) {
             acc += building->unknown233[i] *
                    g_665be0 * g_665bd8;
         }
     } else {
-        acc = g_662ac8;
+        acc = flt_4;
     }
     price = q * (acc * 0.5);
 

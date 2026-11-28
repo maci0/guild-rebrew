@@ -1,8 +1,8 @@
 #include <string.h>
-extern int g_6b7f90, g_6b7f94;
+extern int msx_Initialized, msx_SampleHandleLimit;
 extern int* msx_WaveDrivers[16];
-extern int* g_6b7f10[16];
-extern int* g_6b7f50[16];
+extern int* msx_SampleHandles[16];
+extern int* msx_StreamHandles[16];
 
 void* __cdecl m_alloc(unsigned int size, const char* tag);
 void __cdecl m_FreeTracked(void* ptr);
@@ -23,7 +23,7 @@ int __cdecl msx_OpenDigOutput(int* out, int channels, int bits, int rate)
 	int loaded;
 
 	*out = 0;
-	if (g_6b7f90 == 0) {
+	if (msx_Initialized == 0) {
 		goto fail;
 	}
 	index = msx_FindFreeWaveDriver();
@@ -46,17 +46,17 @@ int __cdecl msx_OpenDigOutput(int* out, int channels, int bits, int rate)
 fail:
 		return -1;
 	}
-	if (msx_CountActiveWaveDrivers() == 1 && g_6b7f94 == 0) {
+	if (msx_CountActiveWaveDrivers() == 1 && msx_SampleHandleLimit == 0) {
 		msx_SetSampleHandleLimit(AIL_get_preference(1));
 	}
-	g_6b7f10[index] = m_alloc(g_6b7f94 * 4, (char*) 0x679874);
-	g_6b7f50[index] = m_alloc(g_6b7f94 * 4, (char*) 0x679874);
+	msx_SampleHandles[index] = m_alloc(msx_SampleHandleLimit * 4, (char*) 0x679874);
+	msx_StreamHandles[index] = m_alloc(msx_SampleHandleLimit * 4, (char*) 0x679874);
 	/* Reviewed native fill cores at 0x0042a24a-0x0042a26a and 0x0042a284-0x0042a2a4. */
 	{
 
 
-		bits = g_6b7f94 * 4;
-		channels = (int) g_6b7f10[index];
+		bits = msx_SampleHandleLimit * 4;
+		channels = (int) msx_SampleHandles[index];
 		__asm {
 			mov edi, channels
 			mov ebx, bits
@@ -74,8 +74,8 @@ fail:
 			add ecx, ebx
 			rep stosb
 		}
-		bits = g_6b7f94 * 4;
-		channels = (int) g_6b7f50[index];
+		bits = msx_SampleHandleLimit * 4;
+		channels = (int) msx_StreamHandles[index];
 		__asm {
 			mov edi, channels
 			mov ebx, bits
@@ -94,7 +94,7 @@ fail:
 			rep stosb
 		}
 	}
-	*(int*) ((char*) msx_WaveDrivers[index] + 0x18) = g_6b7f94;
+	*(int*) ((char*) msx_WaveDrivers[index] + 0x18) = msx_SampleHandleLimit;
 	*(int*) ((char*) msx_WaveDrivers[index] + 0x14) = 0;
 	*out = (int) msx_WaveDrivers[index];
 	return 0;

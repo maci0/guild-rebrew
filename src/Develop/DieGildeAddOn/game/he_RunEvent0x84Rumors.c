@@ -32,7 +32,7 @@ void __cdecl he_RunEvent0x84Rumors(char* u)
 		break;
 	case 0:
 		if (g_77670b != 0) {
-			he_PostEntityMessage(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])->entity_id, -1, g_14ad590[((int*)g_77e020)[*(int*) (u + 0xac)]], 0, 0x5f9, 0);
+			he_PostEntityMessage(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[gm_LocalPlayerSlot])->entity_id, -1, g_14ad590[((int*)g_77e020)[*(int*) (u + 0xac)]], 0, 0x5f9, 0);
 			(*(int*) (u + 0xac))++;
 			if (*(int*) (u + 0xac) > 0x1a) {
 				*(int*) (u + 0x70) = 1;

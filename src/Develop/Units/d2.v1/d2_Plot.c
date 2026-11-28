@@ -9,9 +9,9 @@
 typedef D2_FORM_RECORD Obj;
 
 extern int d2_CurrentWindowId;
-extern D2_FORM_RECORD g_1038140[];
+extern D2_FORM_RECORD d2_Forms[];
 extern int g_772534;
-extern char* g_77255c;
+extern char* d2_CurrentWindow;
 extern char s_67d54c[];
 extern char s_67d7d0[];
 
@@ -24,7 +24,7 @@ void* __cdecl d3_LoadTextureWithDefaultTint(const char* name, int a2);
 void __cdecl d2_UnlockSurface(void*);
 
 #if defined(REBREW_GOLD)
-extern GOLD_GUI_WINDOW g_1015f40[];
+extern GOLD_GUI_WINDOW d2_Windows[];
 
 /* ADDRESS: GOLD 0x00476210 */
 void __cdecl d2_Plot(int x, int y, int r, int g, int b)
@@ -32,7 +32,7 @@ void __cdecl d2_Plot(int x, int y, int r, int g, int b)
 	GOLD_GUI_WINDOW* win;
 	int border;
 
-	win = &g_1015f40[d2_CurrentWindowId];
+	win = &d2_Windows[d2_CurrentWindowId];
 	if (win->active == 0) {
 		return;
 	}
@@ -75,14 +75,14 @@ void __cdecl d2_Plot(int x, int y, int r, int g, int b)
 	d3_UnlockSurfaceHandle((void*) win->unk_028);
 }
 #else
-extern Win_1015f40 g_1015f40[0x60];
+extern Win_1015f40 d2_Windows[0x60];
 
 /* ADDRESS: GOLDTL 0x00472960 */
 void __cdecl d2_Plot(int x, int y, unsigned char r, unsigned char g, unsigned char b)
 {
 	D2_WIN* w;
 
-	w = &((D2_WIN*)g_1015f40)[d2_CurrentWindowId];
+	w = &((D2_WIN*)d2_Windows)[d2_CurrentWindowId];
 	if (w->active == 0) {
 		return;
 	}

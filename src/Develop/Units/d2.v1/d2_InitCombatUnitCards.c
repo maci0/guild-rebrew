@@ -39,14 +39,14 @@ typedef struct Game {
 	unsigned short id;
 } Game;
 
-extern GUI_ENTRY g_9b4840[6];
+extern GUI_ENTRY d2_CombatUnitCards[6];
 extern char* ch_ContextCharacters[32];
-extern unsigned short* g_772f24;
+extern unsigned short* cut_ActivePlayerEntity;
 extern int d2_CurrentWindowId;
-extern char g_6b5c60[];
-extern char* g_1015ea0;
+extern char str_empty[];
+extern char* d2_Controls;
 #include "Develop/client_types.h"
-extern Win_1015f40 g_1015f40[0x60];
+extern Win_1015f40 d2_Windows[0x60];
 
 int __cdecl gm_GetEntityControlMask(int a1, char* a2);
 int __cdecl d2_CreateElement(int x, int y, int a3);
@@ -68,12 +68,12 @@ void __cdecl d2_InitCombatUnitCards(void)
 	int k;
 
 	for (i = 0; i < 6; i++) {
-		g_9b4840[i].win = -1;
-		g_9b4840[i].icon = -1;
-		g_9b4840[i].unused0c = -1;
-		g_9b4840[i].text = -1;
-		g_9b4840[i].label = -1;
-		g_9b4840[i].name = -1;
+		d2_CombatUnitCards[i].win = -1;
+		d2_CombatUnitCards[i].icon = -1;
+		d2_CombatUnitCards[i].unused0c = -1;
+		d2_CombatUnitCards[i].text = -1;
+		d2_CombatUnitCards[i].label = -1;
+		d2_CombatUnitCards[i].name = -1;
 	}
 	k = 0;
 	for (i = 0; i < 0x1f; i++) {
@@ -81,27 +81,27 @@ void __cdecl d2_InitCombatUnitCards(void)
 			break;
 		}
 		unit = ch_ContextCharacters[i];
-		if (unit != 0 && (gm_GetEntityControlMask(((Game*)g_772f24)->id, unit) & 0x800) != 0) {
-			g_9b4840[k].frame = d2_CreateElement(k * 0x80 + 0x18, 0xf, 0x5da);
-			g_9b4840[k].win = d2_CreateWindow(k * 0x80, 0, 0x80, 0x4b, 0x110);
+		if (unit != 0 && (gm_GetEntityControlMask(((Game*)cut_ActivePlayerEntity)->id, unit) & 0x800) != 0) {
+			d2_CombatUnitCards[k].frame = d2_CreateElement(k * 0x80 + 0x18, 0xf, 0x5da);
+			d2_CombatUnitCards[k].win = d2_CreateWindow(k * 0x80, 0, 0x80, 0x4b, 0x110);
 			name = gm_GetEquippedCombatGear(unit);
 			if (name != 0 && *name != 0) {
-				g_9b4840[k].name = d2_AddElementToWindow(0x54, 0xf, (int) (*name + 0xdf), d2_CurrentWindowId);
-				d2_SetElementScale(g_9b4840[k].name, -2);
-				g_9b4840[k].label = d2_ShowTxt(0x54, 0x26, &(*(char*)g_6b5c60), d2_CurrentWindowId);
-				((D2_CONTROL_TL*) g_1015ea0)[g_9b4840[k].label].font = 0x54;
-				((D2_CONTROL_TL*) g_1015ea0)[g_9b4840[k].label].width = 0x18;
-				((D2_CONTROL_TL*) g_1015ea0)[g_9b4840[k].label].value_06c = 1;
+				d2_CombatUnitCards[k].name = d2_AddElementToWindow(0x54, 0xf, (int) (*name + 0xdf), d2_CurrentWindowId);
+				d2_SetElementScale(d2_CombatUnitCards[k].name, -2);
+				d2_CombatUnitCards[k].label = d2_ShowTxt(0x54, 0x26, &(*(char*)str_empty), d2_CurrentWindowId);
+				((D2_CONTROL_TL*) d2_Controls)[d2_CombatUnitCards[k].label].font = 0x54;
+				((D2_CONTROL_TL*) d2_Controls)[d2_CombatUnitCards[k].label].width = 0x18;
+				((D2_CONTROL_TL*) d2_Controls)[d2_CombatUnitCards[k].label].value_06c = 1;
 			}
-			g_9b4840[k].unit = unit;
-			*(int*) &((D2_WIN*)g_1015f40)[g_9b4840[k].win].pad14[0xc] = 0;
-			*(int*) &((D2_WIN*)g_1015f40)[g_9b4840[k].win].pad280[12] = 0x54;
-			g_9b4840[k].icon = d2_AddElementToWindow(0x28, 0x11, *(int*) (unit + 0x18c), d2_CurrentWindowId);
-			((D2_CONTROL_TL*) g_1015ea0)[g_9b4840[k].icon].value_058 = 1;
-			g_9b4840[k].text = d2_ShowTxt(0, 0, &(*(char*)g_6b5c60), d2_CurrentWindowId);
-			((D2_CONTROL_TL*) g_1015ea0)[g_9b4840[k].text].font = 0x54;
-			((D2_CONTROL_TL*) g_1015ea0)[g_9b4840[k].text].width = 0x80;
-			((D2_CONTROL_TL*) g_1015ea0)[g_9b4840[k].text].value_06c = 1;
+			d2_CombatUnitCards[k].unit = unit;
+			*(int*) &((D2_WIN*)d2_Windows)[d2_CombatUnitCards[k].win].pad14[0xc] = 0;
+			*(int*) &((D2_WIN*)d2_Windows)[d2_CombatUnitCards[k].win].pad280[12] = 0x54;
+			d2_CombatUnitCards[k].icon = d2_AddElementToWindow(0x28, 0x11, *(int*) (unit + 0x18c), d2_CurrentWindowId);
+			((D2_CONTROL_TL*) d2_Controls)[d2_CombatUnitCards[k].icon].value_058 = 1;
+			d2_CombatUnitCards[k].text = d2_ShowTxt(0, 0, &(*(char*)str_empty), d2_CurrentWindowId);
+			((D2_CONTROL_TL*) d2_Controls)[d2_CombatUnitCards[k].text].font = 0x54;
+			((D2_CONTROL_TL*) d2_Controls)[d2_CombatUnitCards[k].text].width = 0x80;
+			((D2_CONTROL_TL*) d2_Controls)[d2_CombatUnitCards[k].text].value_06c = 1;
 			length = (float)(gm_GetScaledEntitySkill((char*) unit, 3));
 			d2_DrawSegmentedBar(0x24, 0x41, (int)length, 0x4df);
 			k++;

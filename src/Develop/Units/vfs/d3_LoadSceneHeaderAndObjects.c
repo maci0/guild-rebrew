@@ -16,14 +16,14 @@ typedef struct {
 	Pal pal[6];
 } Slot;
 
-extern struct VFS_DIR* g_6b7fdc;
-extern VECTOR3 g_67bbdc;
-extern VECTOR3 g_6b86c4;
+extern struct VFS_DIR* vfs_RootDir;
+extern VECTOR3 d3_SceneAmbientColor;
+extern VECTOR3 d3_SceneLightingVec;
 extern char g_1041d80[];
 
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
 int __cdecl fcn_004011f0(void* stream, void* dst);
-int __cdecl fcn_004011d0(void* stream, void* dst);
+int __cdecl vfs_ReadDword(void* stream, void* dst);
 void __cdecl vfs_ReadVec3(void* stream, void* dst);
 int __cdecl vfs_ReadByte(void* stream, void* dst);
 int __cdecl d3_GetSceneVersionSlotCount(int);
@@ -49,7 +49,7 @@ void __cdecl d3_LoadSceneHeaderAndObjects(const char* name, void* stream)
 	if (stream != 0) {
 		s = stream;
 	} else {
-		s = vfs_Tfopen(name, "rb", g_6b7fdc);
+		s = vfs_Tfopen(name, "rb", vfs_RootDir);
 	}
 	if (s == 0) {
 		return;
@@ -57,12 +57,12 @@ void __cdecl d3_LoadSceneHeaderAndObjects(const char* name, void* stream)
 	fcn_004011f0(s, &ver);
 	if ((ver & 0xffff0000) == 0x3a6c0000 && ver >= 0x3a6c00b9) {
 		n = d3_GetSceneVersionSlotCount(ver);
-		fcn_004011d0(s, &f);
-		vfs_ReadVec3(s, &g_67bbdc);
-		vfs_ReadVec3(s, &g_6b86c4);
+		vfs_ReadDword(s, &f);
+		vfs_ReadVec3(s, &d3_SceneAmbientColor);
+		vfs_ReadVec3(s, &d3_SceneLightingVec);
 		fcn_004011f0(s, &color);
-		fcn_004011d0(s, &f);
-		fcn_004011d0(s, &g);
+		vfs_ReadDword(s, &f);
+		vfs_ReadDword(s, &g);
 		d3_SetFog(f, g, color);
 		for (i = 0; i < n; i++) {
 			vfs_ReadVec3(s, &((D3_SCENE_SLOT*)g_1041d80)[i].a);
@@ -70,8 +70,8 @@ void __cdecl d3_LoadSceneHeaderAndObjects(const char* name, void* stream)
 			for (k = 0; k < 6; k++) {
 				fcn_004011f0(s, &col);
 				((D3_SCENE_SLOT*)g_1041d80)[i].pal[k].color = col;
-				fcn_004011d0(s, &((D3_SCENE_SLOT*)g_1041d80)[i].pal[k].f4);
-				fcn_004011d0(s, &((D3_SCENE_SLOT*)g_1041d80)[i].pal[k].f8);
+				vfs_ReadDword(s, &((D3_SCENE_SLOT*)g_1041d80)[i].pal[k].f4);
+				vfs_ReadDword(s, &((D3_SCENE_SLOT*)g_1041d80)[i].pal[k].f8);
 			}
 		}
 		vfs_ReadByte(s, &more);

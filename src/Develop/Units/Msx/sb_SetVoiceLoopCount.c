@@ -1,5 +1,5 @@
-extern int g_6b7d7c;
-extern int g_6b7d7c;
+extern int sb_WaveDriver;
+extern int sb_WaveDriver;
 
 
 
@@ -7,7 +7,7 @@ void __cdecl msx_SetSampleLoopCount(int, int);
 
 void __cdecl sb_SetVoiceLoopCount(int* p, int value)
 {
-	if (*(int*) ((char*)&g_6b7d7c) == 0) {
+	if (*(int*) ((char*)&sb_WaveDriver) == 0) {
 		return;
 	}
 	if (p == 0) {

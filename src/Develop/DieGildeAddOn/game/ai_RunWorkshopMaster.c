@@ -42,16 +42,16 @@ typedef struct {
 extern char* lpObjektePROT;			/* entity type table, entry stride 0x41 */
 #include "Develop/DieGildeAddOn/game/entity_record.h"
  
-extern int g_100b0ac;			/* production entry count */
+extern int ai_ProductionGoodsCount;			/* production entry count */
 extern char g_100b0c4[];		/* resource entry table, stride 0x40 */
 extern int ai_ResourceCount;			/* resource entry count */
 extern char g_100b0e8[];
-extern int g_100dc20;			/* owner production building */
+extern int ai_MeisterDebugState;			/* owner production building */
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_100dc3c;
-extern int g_100dc40[];
+extern int ai_TrackedGoodPlanCounts[];
 extern int* g_100dc48;
-extern unsigned short g_7f4c04;
+extern unsigned short gm_GameTimeHour;
 
 void* __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl ai_CollectBuildingGoodsPlan(AI_MASTER_ENTITY*, void*, void*);
@@ -75,7 +75,7 @@ void __cdecl ai_DispatchMeisterAction(AI_MEISTER_PLAN*);
 int __cdecl wsprintfA(char*, char*, ...);
 
 #define type_entry(id) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[(id)]))
-#define slot_at(id) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(id)])
+#define slot_at(id) ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[(id)])
 
 /* Runs the start preconditions and returns fcn_00486640's answer. */
 static __inline int can_start(AI_MASTER_ENTITY* e, void* rec, PRODUCTION_GOODS_RECORD* p, int human)
@@ -158,18 +158,18 @@ void __cdecl ai_RunWorkshopMaster(AI_MASTER_ENTITY* e)
 	ai_RequestAusbauUpgrade(stk, e, 0x19);
 	ai_BuyStallGoods(e);
 
-	if (g_7f4c04 == 8 || g_7f4c04 == 0xd) {
+	if (gm_GameTimeHour == 8 || gm_GameTimeHour == 0xd) {
 		if ((e->flags & 0x100) == 0) {
 			e->item = 0;
 			e->flags |= 0x100;
 		} else if (e->item != 0) {
-			for (i = 0; i < g_100b0ac; i++) {
-				if (g_100d0c0[i].goods_id != e->item) {
+			for (i = 0; i < ai_ProductionGoodsCount; i++) {
+				if (ai_ProductionGoodsPlans[i].goods_id != e->item) {
 					continue;
 				}
-				if (g_100d0c0[i].unk_40 >= ((OBJECT_PROTOTYPE *)type_entry(g_100d0c0[i].goods_id))->value_036 &&
-				    ai_CanProduceGood(e, &g_100d0c0[i], 1) != 0) {
-					start_production(e, &g_100d0c0[i], 0, msg);
+				if (ai_ProductionGoodsPlans[i].unk_40 >= ((OBJECT_PROTOTYPE *)type_entry(ai_ProductionGoodsPlans[i].goods_id))->value_036 &&
+				    ai_CanProduceGood(e, &ai_ProductionGoodsPlans[i], 1) != 0) {
+					start_production(e, &ai_ProductionGoodsPlans[i], 0, msg);
 					goto after_start;
 				}
 				break;
@@ -177,13 +177,13 @@ void __cdecl ai_RunWorkshopMaster(AI_MASTER_ENTITY* e)
 		}
 	} else {
 		found = 0;
-		for (i = 0; i < g_100b0ac; i++) {
-			if (g_100d0c0[i].goods_id != e->item) {
+		for (i = 0; i < ai_ProductionGoodsCount; i++) {
+			if (ai_ProductionGoodsPlans[i].goods_id != e->item) {
 				continue;
 			}
-			if (g_100d0c0[i].unk_40 >= ((OBJECT_PROTOTYPE *)type_entry(g_100d0c0[i].goods_id))->value_036 &&
-			    ai_CanProduceGood(e, &g_100d0c0[i], 1) != 0) {
-				start_production(e, &g_100d0c0[i], 0, msg);
+			if (ai_ProductionGoodsPlans[i].unk_40 >= ((OBJECT_PROTOTYPE *)type_entry(ai_ProductionGoodsPlans[i].goods_id))->value_036 &&
+			    ai_CanProduceGood(e, &ai_ProductionGoodsPlans[i], 1) != 0) {
+				start_production(e, &ai_ProductionGoodsPlans[i], 0, msg);
 				found = 1;
 			}
 			break;
@@ -197,7 +197,7 @@ void __cdecl ai_RunWorkshopMaster(AI_MASTER_ENTITY* e)
 	slot = slot_at(*(unsigned short*) ((char*) e->root + 0x27));
 	if (*(char*) (slot + 2) == 6 &&
 	    (id = hp_PickWeightedProdItem(e->root)) != 0) {
-		for (scan = g_100d0c0, i = 0; (char*) scan < (char*) 0x100dbc0; scan = (PRODUCTION_GOODS_RECORD*) ((char*) scan + 0x58), i++) {
+		for (scan = ai_ProductionGoodsPlans, i = 0; (char*) scan < (char*) 0x100dbc0; scan = (PRODUCTION_GOODS_RECORD*) ((char*) scan + 0x58), i++) {
 			if (scan->goods_id == id) {
 				if (can_start(e, stk, scan, 1)) {
 					start_production(e, scan, (char*) 0x67dcc0, msg);
@@ -221,27 +221,27 @@ void __cdecl ai_RunWorkshopMaster(AI_MASTER_ENTITY* e)
 		order[i] = order[r];
 		order[r] = t;
 	}
-	if (g_100b0ac > 0) {
+	if (ai_ProductionGoodsCount > 0) {
 		i = 0;
 		do {
-			prod = &g_100d0c0[order[i]];
+			prod = &ai_ProductionGoodsPlans[order[i]];
 			if ((prod->flags & 0x400) == 0 && can_start(e, stk, prod, 1)) {
 				start_production(e, prod, (char*) 0x67dc6c, msg);
 				goto after_start;
 			}
 			i++;
-		} while (i < g_100b0ac);
+		} while (i < ai_ProductionGoodsCount);
 	}
-	if (g_100b0ac > 0) {
+	if (ai_ProductionGoodsCount > 0) {
 		i = 0;
 		do {
-			prod = &g_100d0c0[order[i]];
+			prod = &ai_ProductionGoodsPlans[order[i]];
 			if ((prod->flags & 0x400) == 0 && can_start(e, stk, prod, 0)) {
 				start_production(e, prod, (char*) 0x67dc38, msg);
 				goto after_start;
 			}
 			i++;
-		} while (i < g_100b0ac);
+		} while (i < ai_ProductionGoodsCount);
 	}
 	e->item = 0;
 
@@ -249,7 +249,7 @@ after_start:
 	ai_RequestProductionGoods(rec);
 	ai_PlanResourceRestock(e, rec);
 
-	for (prod = g_100d0c0, i = 0; i < g_100b0ac; i++, prod = &g_100d0c0[i]) {
+	for (prod = ai_ProductionGoodsPlans, i = 0; i < ai_ProductionGoodsCount; i++, prod = &ai_ProductionGoodsPlans[i]) {
 		if ((prod->flags & 8) != 0) {
 			for (k = 0; k < 4; k++) {
 				id = *(int*) ((char*) prod + 4 + k * 4);
@@ -260,31 +260,31 @@ after_start:
 			}
 		}
 	}
-	for (prod = g_100d0c0, i = 0; i < g_100b0ac; i++, prod = &g_100d0c0[i]) {
+	for (prod = ai_ProductionGoodsPlans, i = 0; i < ai_ProductionGoodsCount; i++, prod = &ai_ProductionGoodsPlans[i]) {
 		if ((prod->flags & 0x400) != 0) {
 			prod->flags &= ~8;
 		}
 	}
 	for (res = (Res483f20*) g_100b0c4, i = 0; i < ai_ResourceCount; i++, res = (Res483f20*) ((char*) res + 0x40)) {
 		if ((res->flags & 0x400) != 0 && (res->flags & 0x10) != 0 && res->id >= 0) {
-			g_100d0c0[res->id].flags |= 0x10;
+			ai_ProductionGoodsPlans[res->id].flags |= 0x10;
 		}
 	}
 
-	if (g_100dc20 == e->root && g_100dc38 < 4) {
+	if (ai_MeisterDebugState == e->root && g_100dc38 < 4) {
 		i = 0;
 		do {
-			if (g_100b0ac <= i) {
+			if (ai_ProductionGoodsCount <= i) {
 				break;
 			}
-			memcpy((char*) 0x100dc60 + g_100dc38 * 0x58, &g_100d0c0[i], 0x58);
+			memcpy((char*) 0x100dc60 + g_100dc38 * 0x58, &ai_ProductionGoodsPlans[i], 0x58);
 			for (k = 0; k < 4; k++) {
-				id = *(int*) ((char*) &g_100d0c0[i] + 4 + k * 4);
+				id = *(int*) ((char*) &ai_ProductionGoodsPlans[i] + 4 + k * 4);
 				if (id >= 0) {
 					memcpy((char*) 0x100df20 +
-						   (g_100dc40[g_100dc38] + g_100dc38 * 4) * 0x40,
+						   (ai_TrackedGoodPlanCounts[g_100dc38] + g_100dc38 * 4) * 0x40,
 					       (char*) 0x100b0c0 + id * 0x40, 0x40);
-					g_100dc40[g_100dc38]++;
+					ai_TrackedGoodPlanCounts[g_100dc38]++;
 				}
 			}
 			g_100dc38++;
@@ -295,7 +295,7 @@ after_start:
 	ai_CancelBlockedActions(e, 4);
 
 	built = 0;
-	for (slot = g_7f4ca0; slot < (char*)&((ENTITY_RECORD*)g_7f4ca0)[0x300]; slot = (char*)((ENTITY_RECORD*)slot + 1)) {
+	for (slot = gm_EntitySlotTable; slot < (char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[0x300]; slot = (char*)((ENTITY_RECORD*)slot + 1)) {
 		if (*(unsigned char*) (slot + 8) <= 0) {
 			continue;
 		}
@@ -324,12 +324,12 @@ after_start:
 		he_AssignActionSlot(e->root, 0, *(unsigned short*) slot, 0);
 		built++;
 	}
-	if (g_100dc20 == e->root) {
+	if (ai_MeisterDebugState == e->root) {
 		g_100dc34 = built;
 	}
 
 	n = 0;
-	for (prod = g_100d0c0, i = 0; i < g_100b0ac; i++, prod = &g_100d0c0[i]) {
+	for (prod = ai_ProductionGoodsPlans, i = 0; i < ai_ProductionGoodsCount; i++, prod = &ai_ProductionGoodsPlans[i]) {
 		if ((prod->flags & 8) != 0) {
 			n++;
 		}
@@ -346,7 +346,7 @@ after_start:
 		return;
 	}
 
-	for (prod = g_100d0c0, i = 0; i < g_100b0ac; i++, prod = &g_100d0c0[i]) {
+	for (prod = ai_ProductionGoodsPlans, i = 0; i < ai_ProductionGoodsCount; i++, prod = &ai_ProductionGoodsPlans[i]) {
 		plan.ent = (int) e;
 		plan.entry = (int) prod;
 		if ((prod->flags & 0x10) != 0) {
@@ -361,7 +361,7 @@ after_start:
 		} else {
 			continue;
 		}
-		if (g_100dc20 == e->root && g_100dc3c < 4) {
+		if (ai_MeisterDebugState == e->root && g_100dc3c < 4) {
 			memcpy((char*) 0x100ddc0 + g_100dc3c * 0x58, prod, 0x58);
 			g_100dc3c++;
 		}

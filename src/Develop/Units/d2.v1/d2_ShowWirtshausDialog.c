@@ -3,8 +3,8 @@
  * choice loop. Chosen action opens the guest/order subdialog, runs the Wirtshaus
  * action helpers (0x5a0cd0, 0x492d60, 0x493000) and formats the result lines.
  * Stack slots are bound to the native frame offsets (frame 0x390). */
-extern int g_774654; extern int g_14ce8e0; extern int g_100f1dc;
-extern int d2_CurrentWindowId; extern unsigned char g_773d75; extern unsigned short g_774970; extern unsigned short g_7f4c04; extern char g_7f4ca4[];
+extern int d2_DialogCloseRequested; extern int io_RightButtonReleased; extern int d2_DialogButtonAction;
+extern int d2_CurrentWindowId; extern unsigned char gm_ActiveTownIndex; extern unsigned short gm_LocalPlayerSlot; extern unsigned short gm_GameTimeHour; extern char gm_EntityIdField[];
 #include <math.h>
 #include <string.h>
 
@@ -95,7 +95,7 @@ void __cdecl d2_ShowWirtshausDialog(void)
 	int v30;
 	int v31;
 	unsigned char frame[0x37c];
-  playerSlot = (*(unsigned short *)&g_774970);
+  playerSlot = (*(unsigned short *)&gm_LocalPlayerSlot);
   v14 = 0;
   v3 = playerSlot * 0x21c + 0x7f4ca0;
   v11 = 0x15;
@@ -109,7 +109,7 @@ void __cdecl d2_ShowWirtshausDialog(void)
   v28 = -1;
   v30 = -1;
   v29 = -1;
-  v11 = gm_AmountToUnits(fcn_0050dac0((unsigned short)playerSlot),(*(unsigned char *)&g_773d75));
+  v11 = gm_AmountToUnits(fcn_0050dac0((unsigned short)playerSlot),(*(unsigned char *)&gm_ActiveTownIndex));
   v7 = fcn_00509570(v3);
   windowId = d2_LoadForm(0,0,(char *)0x6aa908);
   d2_SetForm(windowId,0);
@@ -118,7 +118,7 @@ void __cdecl d2_ShowWirtshausDialog(void)
   d2_SetForm(windowId,1);
   d2_SetOverlayAnimation(0,0);
   io_AppendText(0x1874);
-  if ((fcn_0042e450() < *(float *)(v7 + 0x5c)) && ((*(unsigned short *)&g_7f4c04) > 0xb) && (v11 >= 10000)) {
+  if ((fcn_0042e450() < *(float *)(v7 + 0x5c)) && ((*(unsigned short *)&gm_GameTimeHour) > 0xb) && (v11 >= 10000)) {
     d2_SetForm(windowId,2);
     io_AppendText(0x1876);
     d2_SetForm(windowId,3);
@@ -130,25 +130,25 @@ void __cdecl d2_ShowWirtshausDialog(void)
   else {
     d2_SetForm(windowId,2);
     io_AppendText(0x1875);
-    if ((*(unsigned short *)&g_7f4c04) > 0xb) {
+    if ((*(unsigned short *)&gm_GameTimeHour) > 0xb) {
       *(float *)(v7 + 0x5c) = *(float *)(v7 + 0x5c) * 0.66f - 0.02f;
     }
   }
   /* Phase 2: modal choice poll (0x5a1536-0x5a15f0). */
   v2 = 1;
-  (*(int *)&g_100f1dc) = -1;
+  (*(int *)&d2_DialogButtonAction) = -1;
   do {
-    if (g_14ce8e0) {
-      g_774654 = 1;
+    if (io_RightButtonReleased) {
+      d2_DialogCloseRequested = 1;
       v2 = 1;
     }
-    else if ((*(int *)&g_100f1dc) != -1) {
+    else if ((*(int *)&d2_DialogButtonAction) != -1) {
       if ((*(int *)0x67d370) == v30) {
-        g_774654 = 1;
+        d2_DialogCloseRequested = 1;
         v2 = 1;
       }
       else if ((*(int *)0x67d370) == v28) {
-        g_774654 = 1;
+        d2_DialogCloseRequested = 1;
         v2 = 0;
       }
       else if ((*(int *)0x67d370) == v29) {
@@ -159,15 +159,15 @@ void __cdecl d2_ShowWirtshausDialog(void)
     }
   } while (main_RunFrameLoop(0x5a1430,0x677c7));
   /* Phase 3: guest/order subdialog opened from the Wirtshaus menu. */
-  if ((!v2) && (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8))) {
+  if ((!v2) && (*(char *)((unsigned int)(*(unsigned short *)&gm_LocalPlayerSlot) * 0x21c + 0x7f4ca8))) {
     d2_SetForm(windowId,3);
     io_AppendText(0x6811b0);
     v11 = d2_GetWindowListItem(windowId,3,io_AppendText(0x187a));
     v7 = d2_GetWindowListItem(windowId,3,io_AppendText(0x187b));
     v8 = d2_GetWindowListItem(windowId,3,io_AppendText(0x187c));
-    (*(int *)&g_100f1dc) = -1;
+    (*(int *)&d2_DialogButtonAction) = -1;
     do {
-      if ((*(int *)&g_100f1dc) != -1) {
+      if ((*(int *)&d2_DialogButtonAction) != -1) {
         v9 = 1;
         if ((*(int *)0x67d370) == v11) {
         }
@@ -178,10 +178,10 @@ void __cdecl d2_ShowWirtshausDialog(void)
           v9 = 4;
         }
         gm_ResolveWirtshausOffer(v3,&v14,v9);
-        g_774654 = 1;
+        d2_DialogCloseRequested = 1;
       }
     } while (main_RunFrameLoop(0x5a1430,0x777c7));
-    if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) {
+    if (*(char *)((unsigned int)(*(unsigned short *)&gm_LocalPlayerSlot) * 0x21c + 0x7f4ca8)) {
       d2_SetForm(windowId,2);
       io_AppendText(0x6811b0);
       if (v13[2] == v3) {
@@ -193,12 +193,12 @@ void __cdecl d2_ShowWirtshausDialog(void)
       d2_SetForm(windowId,3);
       io_AppendText(0x6811b0);
       io_AppendText(0x187f);
-      (*(int *)&g_100f1dc) = -1;
+      (*(int *)&d2_DialogButtonAction) = -1;
       do {
-        if ((*(int *)&g_100f1dc) == 2)
-          g_774654 = 1;
+        if ((*(int *)&d2_DialogButtonAction) == 2)
+          d2_DialogCloseRequested = 1;
       } while (main_RunFrameLoop(0x5a1430,0x777c7));
-      if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) {
+      if (*(char *)((unsigned int)(*(unsigned short *)&gm_LocalPlayerSlot) * 0x21c + 0x7f4ca8)) {
         d2_DestroyForm(windowId);
         v22[1] = 2;
         v22[0] = -1;
@@ -244,7 +244,7 @@ void __cdecl d2_ShowWirtshausDialog(void)
         else {
           d2_ShowWirtshausDiceStep(&v14,v24,1,windowId,2,0x96,0);
         }
-        if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) {
+        if (*(char *)((unsigned int)(*(unsigned short *)&gm_LocalPlayerSlot) * 0x21c + 0x7f4ca8)) {
           gm_ExecuteDiceStage(&v14,v13[2],1);
           gm_UpdateBlackjackState(&v14);
           if (v25) {
@@ -253,14 +253,14 @@ void __cdecl d2_ShowWirtshausDialog(void)
           else {
             d2_ShowWirtshausDiceStep(&v14,v24,1,windowId,2,0x14,1);
           }
-          if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) {
+          if (*(char *)((unsigned int)(*(unsigned short *)&gm_LocalPlayerSlot) * 0x21c + 0x7f4ca8)) {
             if (v25) {
               d2_ShowWirtshausDiceStep(&v14,v24,1,windowId,2,0x96,0);
             }
             else {
               d2_ShowWirtshausDiceStep(&v14,v12,1,windowId,3,0x96,0);
             }
-            if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) {
+            if (*(char *)((unsigned int)(*(unsigned short *)&gm_LocalPlayerSlot) * 0x21c + 0x7f4ca8)) {
               gm_ExecuteDiceStage(&v14,v21[0],1);
               gm_UpdateBlackjackState(&v14);
               if (v25) {
@@ -269,25 +269,25 @@ void __cdecl d2_ShowWirtshausDialog(void)
               else {
                 d2_ShowWirtshausDiceStep(&v14,v12,1,windowId,3,0x14,1);
               }
-              if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) {
+              if (*(char *)((unsigned int)(*(unsigned short *)&gm_LocalPlayerSlot) * 0x21c + 0x7f4ca8)) {
                 if ((v13[1] != 5) && (v13[1] != 6)) {
                   if (!v25) {
                     v9 = ai_EvalBlackjackAction(&v14,*v24);
                     d2_ShowWirtshausDiceStep(&v14,v24,v9,windowId,2,0x96,0);
-                    if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) {
+                    if (*(char *)((unsigned int)(*(unsigned short *)&gm_LocalPlayerSlot) * 0x21c + 0x7f4ca8)) {
                       gm_ExecuteDiceStage(&v14,*v24,v9);
                       gm_UpdateBlackjackState(&v14);
                       d2_ShowWirtshausDiceStep(&v14,v24,v9,windowId,2,0x14,1);
-                      if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) goto label_5a1b81;
+                      if (*(char *)((unsigned int)(*(unsigned short *)&gm_LocalPlayerSlot) * 0x21c + 0x7f4ca8)) goto label_5a1b81;
                     }
                     goto label_532ef0;
                   }
 label_5a1b81:
                   v25 = 0;
-                  (*(int *)&g_100f1dc) = -1;
+                  (*(int *)&d2_DialogButtonAction) = -1;
                   do {
                     if (v25)
-                      g_774654 = 1;
+                      d2_DialogCloseRequested = 1;
                     else if (v2) {
                       v2 = 0;
                       d2_SetForm(windowId,4);
@@ -308,7 +308,7 @@ label_5a1b81:
                         v31 -= 1;
                       } while (v31);
                     }
-                    else if ((*(int *)&g_100f1dc) != -1) {
+                    else if ((*(int *)&d2_DialogButtonAction) != -1) {
                       v11 = 0;
                       v10 = v22;
                       do {
@@ -338,13 +338,13 @@ label_5a1b81:
                     }
                   } while (main_RunFrameLoop(0x5a1430,0x777c7));
                 }
-                if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) {
+                if (*(char *)((unsigned int)(*(unsigned short *)&gm_LocalPlayerSlot) * 0x21c + 0x7f4ca8)) {
                   d2_ShowWirtshausRoundResult(&v14,windowId);
                   if (((v13[1] == 5 && v3 == v13[2]) || (v13[1] == 6 && v3 == v21[0])))
                     cm_RequestTransferCurrencyNoKill(*(unsigned int *)(v3 + 4),0xffffffff,0,v34);
                   do {
-                    if (g_14ce8e0)
-                      g_774654 = 1;
+                    if (io_RightButtonReleased)
+                      d2_DialogCloseRequested = 1;
                   } while (main_RunFrameLoop(0x5a1430,0x777c7));
                 }
               }

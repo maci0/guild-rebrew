@@ -25,7 +25,7 @@ int __cdecl d2_CreateRentAGraveDialog(int* s, int a2)
 	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetForm(s[0], 1);
 	s[1] = d2_CurrentWindowId;
-	io_AppendText(g_6a9694, a2);
+	io_AppendText(str_CZ_s, a2);
 	d2_SetForm(s[0], 2);
 	s[2] = d2_CurrentWindowId;
 	d2_SetForm(s[0], 3);
@@ -34,7 +34,7 @@ int __cdecl d2_CreateRentAGraveDialog(int* s, int a2)
 	s[5] = d2_CurrentWindowId;
 	d2_SetForm(s[0], 4);
 	s[6] = d2_CurrentWindowId;
-	io_AppendText(g_6811b0);
+	io_AppendText(str_dollar_C);
 	d2_RenderCandidateStatCards(s);
 	return 1;
 }

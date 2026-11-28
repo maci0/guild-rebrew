@@ -1,4 +1,4 @@
-char g_68ae64[] = "cm_RequestChrMoveToUniverse(): dummyname is too long...";
+char str_cm_RequestChrMoveToUniverse_dummyname[] = "cm_RequestChrMoveToUniverse(): dummyname is too long...";
 
 
 
@@ -19,7 +19,7 @@ void __cdecl cm_RequestChrMoveToUniverse(int a1, int a2, int a3, char* dummyName
 	if (strlen(dummyName) < 0x20) {
 		strcpy(buf + 0x1c, dummyName);
 	} else {
-		ReportClientMessage(g_68ae64);
+		ReportClientMessage(str_cm_RequestChrMoveToUniverse_dummyname);
 	}
 	cm_EnqueueClientPacket(buf);
 }

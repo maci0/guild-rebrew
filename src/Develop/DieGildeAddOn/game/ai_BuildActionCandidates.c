@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/entity_candidate.h"
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 typedef struct
 {
@@ -15,8 +15,8 @@ typedef struct
 extern int g_664418[];
 extern int g_664440[];
 extern int* g_664448;
-extern int g_7728bc;
-extern int g_7747b4;
+extern int gm_EntityCandidateCount;
+extern int gm_DifficultyLevel;
 
 int __cdecl amt_GetRoleLevel(int c);
 int __cdecl amt_GetRoleTemplate(int idx, Rec18* out);
@@ -47,7 +47,7 @@ void __cdecl ai_BuildActionCandidates(char* subjectEnt)
 	char* q;
 
 	n = 0;
-	g_7728bc = 0;
+	gm_EntityCandidateCount = 0;
 	memset(g_10082a0, 0, 0x180);
 	if (0 == *(unsigned char*) (subjectEnt + 0x166)) {
 		cnt = amt_CollectOfficeSlotsByGroup(1, 6, out);
@@ -262,7 +262,7 @@ void __cdecl ai_BuildActionCandidates(char* subjectEnt)
 		}
 	}
 	if (*(unsigned char*) (subjectEnt + 0x168) || *(unsigned char*) (subjectEnt + 2) == 5) {
-		for (q = g_7f4ca0; (int) q < (int) (g_7f4ca0 + 0x65400); q += 0x21c) {
+		for (q = gm_EntitySlotTable; (int) q < (int) (gm_EntitySlotTable + 0x65400); q += 0x21c) {
 			if (q == subjectEnt)
 				continue;
 			if (*(unsigned short*) q == 0xffff)
@@ -293,13 +293,13 @@ void __cdecl ai_BuildActionCandidates(char* subjectEnt)
 			n++;
 		}
 	}
-	flag = (4 - g_7747b4) * 5;
+	flag = (4 - gm_DifficultyLevel) * 5;
 	for (i = 0; i < n; i++) {
 		if (*(unsigned char*) (g_10082a0[i].entity + 2) == 6
 		    || *(unsigned char*) (g_10082a0[i].entity + 2) == 7)
 			g_10082a0[i].score += (float) flag;
 	}
-	g_7728bc = n;
+	gm_EntityCandidateCount = n;
 	if (n > 3) {
 		divisor = 0xb;
 		pv = g_664440;
@@ -312,7 +312,7 @@ void __cdecl ai_BuildActionCandidates(char* subjectEnt)
 		g_664448[0] = (int) &g_10082a0[gm_RandomMod(n) & 0xffff];
 		g_664448[1] = g_664418[gm_RandomMod(divisor) & 0xffff];
 		if (g_664448[1] > 1) {
-			if (g_7728bc % g_664448[1] == 0) {
+			if (gm_EntityCandidateCount % g_664448[1] == 0) {
 				i = ((unsigned short) gm_RandomMod(2) != 0) ? 1 : -1;
 				g_664448[1] += i;
 				return;

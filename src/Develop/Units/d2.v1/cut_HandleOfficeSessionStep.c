@@ -1,6 +1,6 @@
 
 
-extern char g_6b5c60[];
+extern char str_empty[];
 
 char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl d2_RunCouncilVoteDialog(char* a, char* p, char* q, int* out);
@@ -35,7 +35,7 @@ void __cdecl cut_HandleOfficeSessionStep(char* o, int* m)
 		r = d2_RunCouncilVoteDialog(a, p, q, &out);
 		*(int*) (o + 0x98) = out;
 		*(int*) (o + 0x94) = r;
-		fcn_0064d41a(o + 0x14, &(*(char*)g_6b5c60));
+		fcn_0064d41a(o + 0x14, &(*(char*)str_empty));
 	} else if (m[0] == 2) {
 		if (amt_IsNextOfficeStep(a, m[2]) == 0) {
 			return;
@@ -43,6 +43,6 @@ void __cdecl cut_HandleOfficeSessionStep(char* o, int* m)
 		r = cut_ShowSessionDialog(*(char*) (m + 1), a, m + 3, &out);
 		*(int*) (o + 0x98) = out;
 		*(int*) (o + 0x94) = r;
-		fcn_0064d41a(o + 0x14, &(*(char*)g_6b5c60));
+		fcn_0064d41a(o + 0x14, &(*(char*)str_empty));
 	}
 }

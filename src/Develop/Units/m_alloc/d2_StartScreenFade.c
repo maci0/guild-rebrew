@@ -12,8 +12,8 @@ typedef struct Sprite {
 } Sprite;
 // SIZE 0x64
 
-extern char* g_1015ec0[];
-extern volatile int g_6b7fb8;
+extern char* d2_OverlaySprites[];
+extern volatile int tb_TimerTicks;
 extern char s_67d8b0[];
 
 void* __cdecl m_alloc(int size, const char* tag);
@@ -26,7 +26,7 @@ Sprite* __cdecl d2_StartScreenFade(int a1, int a2, int a3, int a4, int textureNa
 	Sprite* sprite;
 
 	for (i = 0; i < 0x20; i++) {
-		if (((Sprite**)g_1015ec0)[i] == 0) {
+		if (((Sprite**)d2_OverlaySprites)[i] == 0) {
 			break;
 		}
 	}
@@ -41,9 +41,9 @@ Sprite* __cdecl d2_StartScreenFade(int a1, int a2, int a3, int a4, int textureNa
 	sprite->a7 = a7;
 	sprite->a6 = a6;
 	sprite->tex = d3_LoadTextureWithDefaultTint(textureName, 0);
-	sprite->t0 = g_6b7fb8;
-	sprite->t1 = g_6b7fb8;
-	((Sprite**)g_1015ec0)[i] = sprite;
+	sprite->t0 = tb_TimerTicks;
+	sprite->t1 = tb_TimerTicks;
+	((Sprite**)d2_OverlaySprites)[i] = sprite;
 	return sprite;
 }
 #if defined(REBREW_SERVER) || defined(REBREW_GOLD)

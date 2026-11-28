@@ -16,7 +16,7 @@ typedef struct
 } Shop;
 // SIZE 0x24d
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
@@ -41,10 +41,10 @@ void __cdecl d2_OpenMeisterbriefDialog(unsigned char* obj)
 	int i;
 	char* p;
 
-	if (obj == 0 || g_774970 != *(unsigned short*) (obj + 0x27)) {
+	if (obj == 0 || gm_LocalPlayerSlot != *(unsigned short*) (obj + 0x27)) {
 		return;
 	}
-	me = &((Player*)g_7f4ca0)[g_774970];
+	me = &((Player*)gm_EntitySlotTable)[gm_LocalPlayerSlot];
 	t = &((Shop*)lpGebaeudePROT)[obj[0]];
 	x = gm_FindBuildingOwner(obj);
 	if (t->x0 == 5 || t->x0 == 9) {
@@ -55,7 +55,7 @@ void __cdecl d2_OpenMeisterbriefDialog(unsigned char* obj)
 	}
 	else {
 		mode = 0x20;
-		lvl = gm_CheckStatLevel(g_774970, gm_MapEntityStatRange(t->lv[0]));
+		lvl = gm_CheckStatLevel(gm_LocalPlayerSlot, gm_MapEntityStatRange(t->lv[0]));
 		if (lvl != 0) {
 			for (i = 0; i < 6; i++) {
 				if (lvl == t->lv[i]) {

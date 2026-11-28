@@ -36,7 +36,7 @@ void __cdecl d2_SetFieldTextId(int fld, int str)
 	int len;
 
 	f = &((D2_TEXTID_FIELD*)g_102d140)[fld];
-	e = (char*) (*(int*)&((D2_CONTROL_TL*)g_1015ea0)[f->ent].parent);
+	e = (char*) (*(int*)&((D2_CONTROL_TL*)d2_Controls)[f->ent].parent);
 	if (e == 0) {
 		return;
 	}
@@ -52,5 +52,5 @@ void __cdecl d2_SetFieldTextId(int fld, int str)
 	memmove(f->cur + len, f->cur, strlen(*(char**) (e + 0x3c)) - (f->cur - *(char**) (e + 0x3c)) + 1);
 	memcpy(f->cur, txt_TextEntries[str], f->len);
 	f->w = d2_MeasureTextWidth(txt_TextEntries[str], f->font);
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[f->ent].width) = f->w;
+	(*(int*)&((D2_CONTROL_TL*)d2_Controls)[f->ent].width) = f->w;
 }

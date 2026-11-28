@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern unsigned short* g_772e9c;
+extern unsigned short* cut_CombatDefenderEntity;
 
 float* __cdecl cut_GetCombatActionWeights(char*);
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
@@ -32,11 +32,11 @@ void __cdecl cut_AssignCombatTeamOrders(char* teamActor)
 	w = cut_GetCombatActionWeights(teamActor);
 	for (i = 0; i < ((unsigned char*) g_772eb4)[0x30]; i++) {
 		if (*(int*) (g_772eb4 + 0x34 + i * 4) == *(int*) (teamActor + 4)) {
-			rec = g_9b0e20 + i * 0x35c;
+			rec = cut_ParticipantSlots + i * 0x35c;
 			break;
 		}
 	}
-	if (teamActor == (char*) g_772e9c) {
+	if (teamActor == (char*) cut_CombatDefenderEntity) {
 		base = g_772eb4 + 0xc0;
 	} else {
 		base = g_772eb4 + 0x80;

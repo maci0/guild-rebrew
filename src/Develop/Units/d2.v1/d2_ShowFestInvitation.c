@@ -13,7 +13,8 @@ typedef struct {
   unsigned char count;
 } Party5c18e0;
 extern pos14_7f4c00 gm_GameTime;
-extern int g_100f1dc, g_14ce8e0, d2_CurrentElementId; extern int g_666018, g_66601c, d2_CurrentWindowId, g_774654; extern unsigned short g_774970;
+extern int d2_DialogButtonAction, io_RightButtonReleased, d2_CurrentElementId; extern int gm_TargetPersonTypeMask, g_66601c, d2_CurrentWindowId,
+	d2_DialogCloseRequested; extern unsigned short gm_LocalPlayerSlot;
 int __cdecl d3_FreeObjectAnimation();
 int __cdecl d3_SetNodePosition();
 int __cdecl d3_SetObjectRotation();
@@ -105,7 +106,7 @@ void __cdecl d2_ShowFestInvitation(int a0,int a1)
   v20[3] = 0;
   v30 = 5;
   v15[1] = 0x400;
-  v15[2] = g_666018;
+  v15[2] = gm_TargetPersonTypeMask;
   v15[3] = g_66601c;
   gm_AddTime(&timer,0x18,0,0);
   timer.b = 0x14;
@@ -136,7 +137,7 @@ label_5c221e:
     party.b = v30;
     party.a = v29;
     party.text = 0;
-    party.ent = (unsigned int)g_774970 * 0x21c + 0x7f4ca0;
+    party.ent = (unsigned int)gm_LocalPlayerSlot * 0x21c + 0x7f4ca0;
     v9 = d2_LoadForm(0,0,(char *)0x6ac5bc);
     v28 = v9;
     d2_SetForm(v9,0);
@@ -162,10 +163,10 @@ label_5c221e:
       io_AppendText(0x1783,v5 + 0x177a);
     gm_ResolveDinnerParty(&party,0);
     io_AppendText(0x1784,party.text);
-    g_100f1dc = -1;
+    d2_DialogButtonAction = -1;
     do {
-      if (g_14ce8e0)
-        g_774654 = 1;
+      if (io_RightButtonReleased)
+        d2_DialogCloseRequested = 1;
     } while (main_RunFrameLoop(0x5c18e0,0x677c7));
   }
   else {
@@ -175,7 +176,7 @@ label_5c221e:
     d2_InitWindowBounds(d2_CurrentWindowId);
     d2_CenterDialogWindows(v9);
     d2_SetOverlayAnimation(0,0);
-    g_100f1dc = 0xffffffff;
+    d2_DialogButtonAction = 0xffffffff;
     d2_SetForm(v9,1);
     io_AppendText(0x6811b0);
     io_AppendText(0x1772);
@@ -189,15 +190,15 @@ label_5c221e:
     } while (v6 < 5);
     v10 = d2_GetWindowListItem(v9,1,io_AppendText((char *)0x6ac5a4,v6 + 0x1773));
     v12 = a1;
-    g_100f1dc = -1;
+    d2_DialogButtonAction = -1;
     v17[v18 & 0xff] = v10;
     v10 = v27;
     do {
-      if (g_14ce8e0) {
+      if (io_RightButtonReleased) {
         v10 = 0;
-        g_774654 = 1;
+        d2_DialogCloseRequested = 1;
       }
-      if (g_100f1dc != -1) {
+      if (d2_DialogButtonAction != -1) {
         v6 = 0;
         v18 = 0;
         do {
@@ -205,7 +206,7 @@ label_5c221e:
             cm_BeginPacketFieldDelta(v12,*(unsigned int *)(v12 + 2));
             cm_AppendPacketFieldDelta(1,1,0x2c,&v18);
             cm_RequestChangeAttribute();
-            g_774654 = 1;
+            d2_DialogCloseRequested = 1;
             v29 = v18 & 0xff;
             v10 = 1;
             break;
@@ -233,15 +234,15 @@ label_5c221e:
         } while (v6 < 5);
         v12 = d2_GetWindowListItem(v9,1,io_AppendText((char *)0x6ac5a4,v6 + 0x177a));
         v10 = a1;
-        g_100f1dc = -1;
+        d2_DialogButtonAction = -1;
         v17[v18 & 0xff] = v12;
         v12 = v27;
         do {
-          if (g_14ce8e0) {
+          if (io_RightButtonReleased) {
             v12 = 0;
-            g_774654 = 1;
+            d2_DialogCloseRequested = 1;
           }
-          if (g_100f1dc != -1) {
+          if (d2_DialogButtonAction != -1) {
             v6 = 0;
             v18 = 0;
             do {
@@ -249,7 +250,7 @@ label_5c221e:
                 cm_BeginPacketFieldDelta(v10,*(unsigned int *)(v10 + 2));
                 cm_AppendPacketFieldDelta(1,1,0x2d,&v18);
                 cm_RequestChangeAttribute();
-                g_774654 = 1;
+                d2_DialogCloseRequested = 1;
                 v30 = v18 & 0xff;
                 v12 = 1;
                 break;
@@ -280,7 +281,7 @@ label_5c221e:
         d2_InitWindowBounds(d2_CurrentWindowId);
         d2_CenterDialogWindows(v9);
         d2_SetOverlayAnimation(0,0);
-        g_100f1dc = -1;
+        d2_DialogButtonAction = -1;
         v12 = -1;
         do {
           if (v18) {
@@ -293,7 +294,7 @@ label_5c221e:
             v10 = 0;
             party.count = 0;
             party.b = v30;
-            party.ent = (unsigned int)g_774970 * 0x21c + 0x7f4ca0;
+            party.ent = (unsigned int)gm_LocalPlayerSlot * 0x21c + 0x7f4ca0;
             party.a = v29;
             do {
               v2 = *(unsigned short **)((int)v20 + v12);
@@ -327,10 +328,10 @@ label_5c221e:
             if (!v10)
               d2_SetElementEnabled(buttons[0],0);
           }
-          if (g_100f1dc != -1) {
-            if (g_14ce8e0) {
+          if (d2_DialogButtonAction != -1) {
+            if (io_RightButtonReleased) {
               v27 = 0;
-              g_774654 = 1;
+              d2_DialogCloseRequested = 1;
             }
             if (d2_CurrentElementId != v36) { 
               if (d2_CurrentElementId != commit) { 
@@ -346,7 +347,7 @@ label_5c221e:
                 }
                 else {
                   v27 = 0;
-                  g_774654 = 1;
+                  d2_DialogCloseRequested = 1;
                 }
               }
               else {
@@ -355,7 +356,7 @@ label_5c221e:
                 *(unsigned char*) (message + 4) = 0x37;
                 *(unsigned int*) (message + 0x6c) = 0;
                 *(unsigned char*) (message + 0x36) = 2;
-                *(unsigned int*) (message + 8) = *(unsigned int *)((unsigned int)g_774970 * 0x21c + 0x7f4ca4);
+                *(unsigned int*) (message + 8) = *(unsigned int *)((unsigned int)gm_LocalPlayerSlot * 0x21c + 0x7f4ca4);
                 *(unsigned int*) (message + 0xc) = *(unsigned int *)(a0 + 1);
                 cm_SendCopyEntityData(message);
                 v10 = 0;
@@ -392,7 +393,7 @@ label_5c221e:
                   v12 = v36;
                 }
                 v27 = 1;
-                g_774654 = 1;
+                d2_DialogCloseRequested = 1;
               }
             }
             else {

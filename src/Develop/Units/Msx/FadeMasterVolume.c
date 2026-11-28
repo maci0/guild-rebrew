@@ -3,13 +3,13 @@
 #include <windows.h>
 
 extern int msx_TrackDriver;
-extern float g_678150;
-extern float g_678154;
-extern float g_678158;
-extern unsigned int g_67815c;
-extern int g_678160;
-extern int g_6b7190;
-extern volatile int g_6b7fac;
+extern float msx_MasterFadeScale;
+extern float msx_MasterFadeStart;
+extern float msx_MasterFadeTarget;
+extern unsigned int msx_MasterFadeDuration;
+extern int msx_MasterVolume;
+extern int msx_MasterFadeStartTime;
+extern volatile int gm_GameTicks;
 extern CRITICAL_SECTION msx_TrackLock;
 void __cdecl SetMasterVolume(int vol);
 
@@ -20,14 +20,14 @@ void __cdecl FadeMasterVolume(float fade, int time)
 	}
 	EnterCriticalSection(&msx_TrackLock);
 	if (time == 0) {
-		g_678150 = fade;
-		SetMasterVolume(g_678160);
+		msx_MasterFadeScale = fade;
+		SetMasterVolume(msx_MasterVolume);
 		LeaveCriticalSection(&msx_TrackLock);
 		return;
 	}
-	g_67815c = time;
-	g_678158 = fade;
-	g_678154 = g_678150;
-	g_6b7190 = g_6b7fac * 8 + g_6b7fac * 4 + g_6b7fac;
+	msx_MasterFadeDuration = time;
+	msx_MasterFadeTarget = fade;
+	msx_MasterFadeStart = msx_MasterFadeScale;
+	msx_MasterFadeStartTime = gm_GameTicks * 8 + gm_GameTicks * 4 + gm_GameTicks;
 	LeaveCriticalSection(&msx_TrackLock);
 }

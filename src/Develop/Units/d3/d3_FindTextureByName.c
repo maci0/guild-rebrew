@@ -1,7 +1,7 @@
 #include <string.h>
 
-extern char* g_104049c;
-extern unsigned int g_10404a0;
+extern char* d3_TextureBank;
+extern unsigned int d3_TextureBankCount;
 
 int __cdecl fcn_0065f220(const char* a, const char* b);
 
@@ -13,8 +13,8 @@ char* __cdecl d3_FindTextureByName(const char* name)
 	char* p;
 
 	strcpy(buf, name);
-	p = g_104049c;
-	for (i = 0; i < g_10404a0; i++, p += 0x70) {
+	p = d3_TextureBank;
+	for (i = 0; i < d3_TextureBankCount; i++, p += 0x70) {
 		if (*(int*) (p + 0x40) > 0 && fcn_0065f220(buf, p) == 0) {
 			return p;
 		}

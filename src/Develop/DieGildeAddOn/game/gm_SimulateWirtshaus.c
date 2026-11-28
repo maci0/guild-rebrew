@@ -1,12 +1,12 @@
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 #pragma optimize("y", off)
 #include <string.h>
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 extern char g_6a5e88[];
-extern char g_773d75;
-extern short g_aed32c;
+extern char gm_ActiveTownIndex;
+extern short cm_PacketDeltaBase;
 extern float g_665e9c;
-extern double g_662a08;
+extern double dbl_1_5;
 
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl fcn_00502cd0(int, ...);
@@ -91,11 +91,11 @@ void __cdecl gm_SimulateWirtshaus(char* action)
 	i = *(int*) (action + 0xac);
 	end = i + 0x180;
 	for (; i < end; i++) {
-		if (gm_FindMatchingSimEntry((short*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[i]), (int*) ent, &idx) != 0) {
-			x1 = (int) (gm_GetSeasonPrice(0x179, g_773d75) * g_662a08);
-			y1 = (int) (gm_GetSeasonPrice(0x17a, g_773d75) * g_662a08);
+		if (gm_FindMatchingSimEntry((short*) ((char *)&((ENTITY_RECORD*)gm_EntitySlotTable)[i]), (int*) ent, &idx) != 0) {
+			x1 = (int) (gm_GetSeasonPrice(0x179, gm_ActiveTownIndex) * dbl_1_5);
+			y1 = (int) (gm_GetSeasonPrice(0x17a, gm_ActiveTownIndex) * dbl_1_5);
 			v = gm_RandomMod(4) + 3;
-			w = gm_AccumulateTyped2((int) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[i]));
+			w = gm_AccumulateTyped2((int) ((char *)&((ENTITY_RECORD*)gm_EntitySlotTable)[i]));
 			mx = x1;
 			if (x1 <= y1) {
 				mx = y1;
@@ -103,61 +103,61 @@ void __cdecl gm_SimulateWirtshaus(char* action)
 			if ((float) w > (float) mx * g_665e9c && ent[idx].p4 != 0 && ent[idx].p8 != 0) {
 				if ((unsigned short) gm_RandomMod(2) != 0) {
 					cm_SendLogAction((unsigned int) g_6a5e88);
-					cm_SendSellObjekt(-1, *(int*) (ent[idx].p4 + 6), 0x179, 1, g_773d75, 0);
-					cm_RequestTransferCurrencyNoKill(-1, *(unsigned int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[i] + 4), g_773d75, (int) ((float) x1 * g_665e9c));
-					cm_RequestTransferCurrencyNoKill(*(unsigned int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (ent[idx].p0 + 0x27)] + 4), -1, g_773d75, x1);
+					cm_SendSellObjekt(-1, *(int*) (ent[idx].p4 + 6), 0x179, 1, gm_ActiveTownIndex, 0);
+					cm_RequestTransferCurrencyNoKill(-1, *(unsigned int*) ((char *)&((ENTITY_RECORD*)gm_EntitySlotTable)[i] + 4), gm_ActiveTownIndex, (int) ((float) x1 * g_665e9c));
+					cm_RequestTransferCurrencyNoKill(*(unsigned int*) ((char *)&((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (ent[idx].p0 + 0x27)] + 4), -1, gm_ActiveTownIndex, x1);
 					cm_BeginPacketFieldDelta((int) ent[idx].p0, *(int*) (ent[idx].p0 + 1));
-					cm_AppendPacketFieldValue(4, 1, (int) *(unsigned short*) ent[idx].p0 - g_aed32c + 0x65, &x1);
-					cm_AppendPacketFieldValue(2, 1, (int) *(unsigned short*) ent[idx].p0 - g_aed32c + 0x6b, &v);
+					cm_AppendPacketFieldValue(4, 1, (int) *(unsigned short*) ent[idx].p0 - cm_PacketDeltaBase + 0x65, &x1);
+					cm_AppendPacketFieldValue(2, 1, (int) *(unsigned short*) ent[idx].p0 - cm_PacketDeltaBase + 0x6b, &v);
 					cm_RequestChangeAttribute();
 					cm_SendTraceEnd((unsigned int) g_6a5e88);
 					cm_BeginPacketFieldDelta((int) ent[idx].p0, *(int*) (ent[idx].p0 + 1));
-					cm_AppendPacketFieldValue(2, 1, (int) *(unsigned short*) ent[idx].p0 - g_aed32c + 0x69, &v);
+					cm_AppendPacketFieldValue(2, 1, (int) *(unsigned short*) ent[idx].p0 - cm_PacketDeltaBase + 0x69, &v);
 					cm_RequestChangeAttribute();
 				} else {
 					cm_SendLogAction((unsigned int) g_6a5e88);
-					cm_SendSellObjekt(-1, *(int*) (ent[idx].p8 + 6), 0x17a, 1, g_773d75, 0);
-					cm_RequestTransferCurrencyNoKill(-1, *(unsigned int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[i] + 4), g_773d75, (int) ((float) y1 * g_665e9c));
-					cm_RequestTransferCurrencyNoKill(*(unsigned int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (ent[idx].p0 + 0x27)] + 4), -1, g_773d75, y1);
+					cm_SendSellObjekt(-1, *(int*) (ent[idx].p8 + 6), 0x17a, 1, gm_ActiveTownIndex, 0);
+					cm_RequestTransferCurrencyNoKill(-1, *(unsigned int*) ((char *)&((ENTITY_RECORD*)gm_EntitySlotTable)[i] + 4), gm_ActiveTownIndex, (int) ((float) y1 * g_665e9c));
+					cm_RequestTransferCurrencyNoKill(*(unsigned int*) ((char *)&((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (ent[idx].p0 + 0x27)] + 4), -1, gm_ActiveTownIndex, y1);
 					cm_BeginPacketFieldDelta((int) ent[idx].p0, *(int*) (ent[idx].p0 + 1));
-					cm_AppendPacketFieldValue(4, 1, (int) *(unsigned short*) ent[idx].p0 - g_aed32c + 0x65, &y1);
-					cm_AppendPacketFieldValue(2, 1, (int) *(unsigned short*) ent[idx].p0 - g_aed32c + 0x6b, &v);
+					cm_AppendPacketFieldValue(4, 1, (int) *(unsigned short*) ent[idx].p0 - cm_PacketDeltaBase + 0x65, &y1);
+					cm_AppendPacketFieldValue(2, 1, (int) *(unsigned short*) ent[idx].p0 - cm_PacketDeltaBase + 0x6b, &v);
 					cm_RequestChangeAttribute();
 					cm_SendTraceEnd((unsigned int) g_6a5e88);
 					cm_BeginPacketFieldDelta((int) ent[idx].p0, *(int*) (ent[idx].p0 + 1));
-					cm_AppendPacketFieldValue(2, 1, (int) *(unsigned short*) ent[idx].p0 - g_aed32c + 0x69, &v);
+					cm_AppendPacketFieldValue(2, 1, (int) *(unsigned short*) ent[idx].p0 - cm_PacketDeltaBase + 0x69, &v);
 					cm_RequestChangeAttribute();
 				}
 			} else if (w > x1 && ent[idx].p4 != 0) {
 				cm_SendLogAction((unsigned int) g_6a5e88);
-				cm_SendSellObjekt(-1, *(int*) (ent[idx].p4 + 6), 0x179, 1, g_773d75, 0);
-				cm_RequestTransferCurrencyNoKill(-1, *(unsigned int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[i] + 4), g_773d75, (int) ((float) x1 * g_665e9c));
-				cm_RequestTransferCurrencyNoKill(*(unsigned int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (ent[idx].p0 + 0x27)] + 4), -1, g_773d75, x1);
+				cm_SendSellObjekt(-1, *(int*) (ent[idx].p4 + 6), 0x179, 1, gm_ActiveTownIndex, 0);
+				cm_RequestTransferCurrencyNoKill(-1, *(unsigned int*) ((char *)&((ENTITY_RECORD*)gm_EntitySlotTable)[i] + 4), gm_ActiveTownIndex, (int) ((float) x1 * g_665e9c));
+				cm_RequestTransferCurrencyNoKill(*(unsigned int*) ((char *)&((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (ent[idx].p0 + 0x27)] + 4), -1, gm_ActiveTownIndex, x1);
 				cm_BeginPacketFieldDelta((int) ent[idx].p0, *(int*) (ent[idx].p0 + 1));
-				cm_AppendPacketFieldValue(4, 1, (int) *(unsigned short*) ent[idx].p0 - g_aed32c + 0x65, &x1);
-				cm_AppendPacketFieldValue(2, 1, (int) *(unsigned short*) ent[idx].p0 - g_aed32c + 0x6b, &v);
+				cm_AppendPacketFieldValue(4, 1, (int) *(unsigned short*) ent[idx].p0 - cm_PacketDeltaBase + 0x65, &x1);
+				cm_AppendPacketFieldValue(2, 1, (int) *(unsigned short*) ent[idx].p0 - cm_PacketDeltaBase + 0x6b, &v);
 				cm_RequestChangeAttribute();
 				cm_SendTraceEnd((unsigned int) g_6a5e88);
 				cm_BeginPacketFieldDelta((int) ent[idx].p0, *(int*) (ent[idx].p0 + 1));
-				cm_AppendPacketFieldValue(2, 1, (int) *(unsigned short*) ent[idx].p0 - g_aed32c + 0x69, &v);
+				cm_AppendPacketFieldValue(2, 1, (int) *(unsigned short*) ent[idx].p0 - cm_PacketDeltaBase + 0x69, &v);
 				cm_RequestChangeAttribute();
 			} else if (w > y1) {
 				if (ent[idx].p8 != 0) {
 					cm_SendLogAction((unsigned int) g_6a5e88);
-					cm_SendSellObjekt(-1, *(int*) (ent[idx].p8 + 6), 0x17a, 1, g_773d75, 0);
-					cm_RequestTransferCurrencyNoKill(-1, *(unsigned int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[i] + 4), g_773d75, (int) ((float) y1 * g_665e9c));
-					cm_RequestTransferCurrencyNoKill(*(unsigned int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (ent[idx].p0 + 0x27)] + 4), -1, g_773d75, y1);
+					cm_SendSellObjekt(-1, *(int*) (ent[idx].p8 + 6), 0x17a, 1, gm_ActiveTownIndex, 0);
+					cm_RequestTransferCurrencyNoKill(-1, *(unsigned int*) ((char *)&((ENTITY_RECORD*)gm_EntitySlotTable)[i] + 4), gm_ActiveTownIndex, (int) ((float) y1 * g_665e9c));
+					cm_RequestTransferCurrencyNoKill(*(unsigned int*) ((char *)&((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (ent[idx].p0 + 0x27)] + 4), -1, gm_ActiveTownIndex, y1);
 					cm_BeginPacketFieldDelta((int) ent[idx].p0, *(int*) (ent[idx].p0 + 1));
-					cm_AppendPacketFieldValue(4, 1, (int) *(unsigned short*) ent[idx].p0 - g_aed32c + 0x65, &y1);
-					cm_AppendPacketFieldValue(2, 1, (int) *(unsigned short*) ent[idx].p0 - g_aed32c + 0x6b, &v);
+					cm_AppendPacketFieldValue(4, 1, (int) *(unsigned short*) ent[idx].p0 - cm_PacketDeltaBase + 0x65, &y1);
+					cm_AppendPacketFieldValue(2, 1, (int) *(unsigned short*) ent[idx].p0 - cm_PacketDeltaBase + 0x6b, &v);
 					cm_RequestChangeAttribute();
 					cm_SendTraceEnd((unsigned int) g_6a5e88);
 					cm_BeginPacketFieldDelta((int) ent[idx].p0, *(int*) (ent[idx].p0 + 1));
-					cm_AppendPacketFieldValue(2, 1, (int) *(unsigned short*) ent[idx].p0 - g_aed32c + 0x69, &v);
+					cm_AppendPacketFieldValue(2, 1, (int) *(unsigned short*) ent[idx].p0 - cm_PacketDeltaBase + 0x69, &v);
 					cm_RequestChangeAttribute();
 				} else if (w > x1) {
 					cm_BeginPacketFieldDelta((int) ent[idx].p0, *(int*) (ent[idx].p0 + 1));
-					cm_AppendPacketFieldValue(2, 1, (int) *(unsigned short*) ent[idx].p0 - g_aed32c + 0x69, &v);
+					cm_AppendPacketFieldValue(2, 1, (int) *(unsigned short*) ent[idx].p0 - cm_PacketDeltaBase + 0x69, &v);
 					cm_RequestChangeAttribute();
 				}
 			}

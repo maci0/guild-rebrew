@@ -5,7 +5,7 @@ typedef struct Slots {
 // SIZE 0xb8
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern unsigned char* lpGebaeudePROT;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern float g_664174;
 
 int* __cdecl gm_GetChainNodeAtIndex(int, int);
@@ -74,10 +74,10 @@ void __cdecl he_LoadTransportCargoAtStop(char* route, int difficulty)
 					val = 0;
 					if (*(unsigned short*) (pkt + 0x27) != *(unsigned short*) v4) {
 						if (((char)(((BUILDING_PROTOTYPE*)t)->category)) == 0xa) {
-							val = (int) (gm_GetSeasonPrice(*(unsigned short*) item, g_773d75) *
+							val = (int) (gm_GetSeasonPrice(*(unsigned short*) item, gm_ActiveTownIndex) *
 								     g_664174);
 						} else {
-							val = (int) (gm_GetSeasonPrice(*(unsigned short*) item, g_773d75) *
+							val = (int) (gm_GetSeasonPrice(*(unsigned short*) item, gm_ActiveTownIndex) *
 								     *(float*) (pkt + 0x49));
 						}
 					}

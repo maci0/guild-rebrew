@@ -2,7 +2,7 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_633444;
-extern int g_67a370;
+extern int d3_ActiveScene;
 extern char s_6aa1b4[];
 
 int __cdecl sprintf(char*, const char*, ...);
@@ -41,7 +41,7 @@ int __cdecl lc_GetGebaeudeBauplatz(LC_GEBAEUDE_BAUPLATZ* out, unsigned char* obj
 	lc_ScenePoint(*(char**) (obj + 0x61), (float*) (*(char**) (obj + 0x61) + 0x4c), out->position);
 	sprintf(buf, s_6aa1b4, out->position[0], out->position[1], out->position[2]);
 	out->node = 0;
-	lc_WalkScene((char*) g_67a370, 0, 0x180, lc_MatchGebaeudeBauplatzNode, out);
+	lc_WalkScene((char*) d3_ActiveScene, 0, 0x180, lc_MatchGebaeudeBauplatzNode, out);
 	if (out->node == 0) {
 		lc_RenderState(old, 1);
 		return 0;

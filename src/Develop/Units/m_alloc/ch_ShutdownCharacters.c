@@ -11,7 +11,7 @@ typedef struct {
 } Slot;
 
 extern void* g_6b5c5c;
-char* g_6b5c20 = 0;
+char* tp_ch_ActionQueue = 0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 void __cdecl ch_FreeMap(void* p);
 void __cdecl m_FreeTracked(void* p);
@@ -26,10 +26,10 @@ void __cdecl ch_ShutdownCharacters(void)
 	if (g_6b5c5c != 0) {
 		ch_FreeMap(g_6b5c5c);
 	}
-	if ((*(Slot**)&g_6b5c20) != 0) {
+	if ((*(Slot**)&tp_ch_ActionQueue) != 0) {
 		for (i = 0; i < 2000; i++) {
-			if ((*(Slot**)&g_6b5c20)[i].kind == 0x2d && (*(Slot**)&g_6b5c20)[i].data != 0) {
-				d = &(*(Slot**)&g_6b5c20)[i].data;
+			if ((*(Slot**)&tp_ch_ActionQueue)[i].kind == 0x2d && (*(Slot**)&tp_ch_ActionQueue)[i].data != 0) {
+				d = &(*(Slot**)&tp_ch_ActionQueue)[i].data;
 				m_FreeTracked(*d);
 				*d = 0;
 			}
@@ -42,8 +42,8 @@ void __cdecl ch_ShutdownCharacters(void)
 		}
 		p++;
 	} while ((int) p < (int) &((char**)ch_CharacterSlots)[0x300]);
-	if ((*(Slot**)&g_6b5c20) != 0) {
-		m_FreeTracked((*(Slot**)&g_6b5c20));
-		(*(Slot**)&g_6b5c20) = 0;
+	if ((*(Slot**)&tp_ch_ActionQueue) != 0) {
+		m_FreeTracked((*(Slot**)&tp_ch_ActionQueue));
+		(*(Slot**)&tp_ch_ActionQueue) = 0;
 	}
 }

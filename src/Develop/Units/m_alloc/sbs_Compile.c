@@ -1,6 +1,6 @@
 #pragma optimize("y", off)
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char* g_6b7d78;
+extern char* sb_BankListHead;
 extern char g_679010[]; /* %lang */
 extern char g_679018[]; /* sbs_Compile */
 
@@ -47,12 +47,12 @@ int __cdecl sbs_Compile(char* name)
 		text = sbs_CalcCompiledSize();
 		root = (int) m_alloc(text, g_679018);
 		if (root != 0) {
-	g_6b7d78 = (char*) root;
+	sb_BankListHead = (char*) root;
 	MemUsed += (int) text;
 	step = 0x144;
 	/* Reviewed original operand-homed fill (inline fill/copy block). */
 	__asm {
-		mov edi, g_6b7d78
+		mov edi, sb_BankListHead
 		mov ebx, step
 		xor eax, eax
 		lea ecx, [edi+edi*2]
@@ -68,10 +68,10 @@ int __cdecl sbs_Compile(char* name)
 		add ecx, ebx
 		rep stosb
 	}
-	strncpy(g_6b7d78, sbs_BankManager, 0x32);
+	strncpy(sb_BankListHead, sbs_BankManager, 0x32);
 	offset = root + step;
-	*(int*) (g_6b7d78 + 0x134) = n1 + n2;
-	*(char**) (g_6b7d78 + 0x138) = (char*) offset;
+	*(int*) (sb_BankListHead + 0x134) = n1 + n2;
+	*(char**) (sb_BankListHead + 0x138) = (char*) offset;
 	offset = ((n1 + n2) << 6) + step;
 			if (n1 != 0) {
 				node = *(char**) (sbs_BankManager + 0x38);
@@ -79,13 +79,13 @@ int __cdecl sbs_Compile(char* name)
 					i = 0;
 					if (result == 0) {
 						do {
-							*(char*) (*(char**) (g_6b7d78 + 0x138) + i + 0x36) = 1;
-							*(int*) (*(char**) (g_6b7d78 + 0x138) + i) = offset;
-							*(int*) (*(char**) (g_6b7d78 + 0x138) + i + 0x38) = 0;
-							*(int*) (*(char**) (g_6b7d78 + 0x138) + i + 0x3c) = 0;
+							*(char*) (*(char**) (sb_BankListHead + 0x138) + i + 0x36) = 1;
+							*(int*) (*(char**) (sb_BankListHead + 0x138) + i) = offset;
+							*(int*) (*(char**) (sb_BankListHead + 0x138) + i + 0x38) = 0;
+							*(int*) (*(char**) (sb_BankListHead + 0x138) + i + 0x3c) = 0;
 							p = (char*) (root + offset);
 							result = sbs_ExtractBaseName(node,
-							    *(char**) (g_6b7d78 + 0x138) + i + 4, 0x32);
+							    *(char**) (sb_BankListHead + 0x138) + i + 4, 0x32);
 							if (result == 0) {
 								*(int*) (p + 4) = *(int*) (node + 0x100);
 								*(char*) p = (char) sbs_GetAudioFormat(node);
@@ -120,14 +120,14 @@ int __cdecl sbs_Compile(char* name)
 						if (result != 0) {
 							break;
 						}
-						*(char*) (*(char**) (g_6b7d78 + 0x138) + n2 + 0x36) = 2;
-						*(int*) (*(char**) (g_6b7d78 + 0x138) + n2) = offset;
-						*(int*) (*(char**) (g_6b7d78 + 0x138) + n2 + 0x38) = 0;
-						*(int*) (*(char**) (g_6b7d78 + 0x138) + n2 + 0x3c) = 0;
+						*(char*) (*(char**) (sb_BankListHead + 0x138) + n2 + 0x36) = 2;
+						*(int*) (*(char**) (sb_BankListHead + 0x138) + n2) = offset;
+						*(int*) (*(char**) (sb_BankListHead + 0x138) + n2 + 0x38) = 0;
+						*(int*) (*(char**) (sb_BankListHead + 0x138) + n2 + 0x3c) = 0;
 						p = (char*) (root + offset);
 						*(int*) p = sbs_CountSetEntries(node);
 						*(int*) (p + 8) = sbs_CalcSetDataSize(node);
-						strncpy(*(char**) (g_6b7d78 + 0x138) + n2 + 4, node, 0x32);
+						strncpy(*(char**) (sb_BankListHead + 0x138) + n2 + 4, node, 0x32);
 						offset += 0xc;
 						if (*(int*) p != 0) {
 							*(int*) (p + 4) = root + offset;

@@ -1,10 +1,10 @@
 /* Session cutscene command: resolves up to four participant entities, builds
  * the cutscene dialog and runs its message loop until the user leaves it. */
 
-extern char* g_77255c;
+extern char* d2_CurrentWindow;
 extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
 int __cdecl amt_FindOfficeSlotByKey(char*, void*);
@@ -76,13 +76,13 @@ int __cdecl cut_ShowSessionDialog(char* a0, int a1, int* entityIds, int* a3)
 	for (i = found; i < 4; i++) {
 		handles[i] = -1;
 	}
-	n = d2_AddWindowValueGauge((*(int*) (g_77255c + 0xc) - 300) / 2 - 8, 8, 300, 0, 100,
+	n = d2_AddWindowValueGauge((*(int*) (d2_CurrentWindow + 0xc) - 300) / 2 - 8, 8, 300, 0, 100,
 	    0x75, 0x42, d2_CurrentWindowId);
 	d2_UpdateProgressBar(n, 0x5dc, 1);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	while (main_RunFrameLoop((void*) 0x4dc230, cut_EventLoopFlags) != 0) {
 		if (d2_UpdateProgressBar(n, 0, 0) != 0) {
-			if (g_100f1dc != -1) {
+			if (d2_DialogButtonAction != -1) {
 				for (i = 0; i < found; i++) {
 					if (d2_CurrentElementId == handles[i]) {
 						result = *(int*) ((char*) ents[i] + 4);
@@ -93,7 +93,7 @@ int __cdecl cut_ShowSessionDialog(char* a0, int a1, int* entityIds, int* a3)
 			goto next;
 		}
 setflag:
-		g_774654 = 1;
+		d2_DialogCloseRequested = 1;
 next:
 		;
 	}

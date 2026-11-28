@@ -35,11 +35,11 @@ void __cdecl he_RunAction0x9d(char* u)
 		*(int*) (u + 0x84) = -1;
 		*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
 		h2 = gm_LookupEntityRecordById(*(int*) (u + 0xb0));
-		if (h2 == 0 || ((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (u + 8)])->entity_index == 0xffff) {
+		if (h2 == 0 || ((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[*(unsigned short*) (u + 8)])->entity_index == 0xffff) {
 			*(int*) (u + 0x84) = cm_SendSetHE(-1, u);
 			return;
 		}
-		h = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (u + 8)]);
+		h = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[*(unsigned short*) (u + 8)]);
 		switch (*(int*) (u + 0x70)) {
 		case 0:
 			he_DispatchZigeunerEvent(h, h2, *(int*) (u + 0xac));

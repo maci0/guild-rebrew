@@ -1,4 +1,4 @@
-extern char g_6b5c60[];
+extern char str_empty[];
 
 
 
@@ -23,5 +23,5 @@ void __cdecl cm_SaveGameAndWait(int flags, char* name)
 		d2_ShowStatusBanner(name);
 		main_RunFrameLoop(0, flags);
 	}
-	d2_ShowStatusBanner(g_6b5c60);
+	d2_ShowStatusBanner(str_empty);
 }

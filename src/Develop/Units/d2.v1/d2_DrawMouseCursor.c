@@ -27,6 +27,6 @@ int __cdecl d2_DrawMouseCursor(int x, int y)
 		a = 7;
 		b = 5;
 	}
-	d2_DrawCursorAndCounters(g_77250c, px, py, a, b);
+	d2_DrawCursorAndCounters(d2_ScreenSurface, px, py, a, b);
 	return 1;
 }

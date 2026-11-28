@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/loadsave/g_774a78.h"
 
-extern Node* g_774a78;
+extern Node* hp_ProdEntryList;
 
 
 /* ADDRESS: GOLDTL 0x005b1a80 */
@@ -8,7 +8,7 @@ char* __cdecl hp_FindProdSettingNode(int key)
 {
 	char* p;
 
-	p = (char*) g_774a78;
+	p = (char*) hp_ProdEntryList;
 	while (p != 0) {
 		if (*(int*) p == key) {
 			return p;
@@ -33,7 +33,7 @@ void __cdecl hp_SyncProdSetting(char* p)
 }
 
 float __cdecl gm_NextLCGFloat(char* o);
-extern float g_662cf8;
+extern float flt_100_0;
 
 
 /* ADDRESS: GOLDTL 0x005b1e40 */
@@ -50,7 +50,7 @@ int __cdecl hp_PickWeightedProdItem(char* p)
 	if (o == 0) {
 		return 0;
 	}
-	thr = (int) (gm_NextLCGFloat(o) * g_662cf8);
+	thr = (int) (gm_NextLCGFloat(o) * flt_100_0);
 	k = 0;
 	res = 0;
 	sum = 0;

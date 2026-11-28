@@ -11,7 +11,7 @@
 
 
 
-extern char* g_77261c;
+extern char* ai_FeudTargetEntity;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 unsigned short __cdecl gm_RandomMod(int n);
@@ -37,8 +37,8 @@ int __cdecl ai_CheckAction028Predicate(char* unused1, char* actor, char* unused3
 
 	f.mask = 0x807d4190;
 	f.b = 1;
-	if (g_77261c != 0) {
-		ai_FindEntityInFavorRange(g_77261c, 4, f, 0, 100.0f, &found);
+	if (ai_FeudTargetEntity != 0) {
+		ai_FindEntityInFavorRange(ai_FeudTargetEntity, 4, f, 0, 100.0f, &found);
 	}
 	if (found == -1 && ai_FindEntityInFavorRange(actor, 6, f, 0, gm_RandomMod(0x20) + 32.0f, &found) == 0) {
 		return 0;
@@ -50,8 +50,8 @@ int __cdecl ai_CheckAction028Predicate(char* unused1, char* actor, char* unused3
 	t = 0;
 	i = gm_RandomMod(0x300);
 	for (n = 0x300; n != 0;) {
-		if (((ENTITY_RECORD*)g_7f4ca0)[i].entity_index != 0xffff && ((ENTITY_RECORD*)g_7f4ca0)[i].unk_16c == q && ((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 0) {
-			t = &((ENTITY_RECORD*)g_7f4ca0)[i];
+		if (((ENTITY_RECORD*)gm_EntitySlotTable)[i].entity_index != 0xffff && ((ENTITY_RECORD*)gm_EntitySlotTable)[i].unk_16c == q && ((ENTITY_RECORD*)gm_EntitySlotTable)[i].entity_state == 0) {
+			t = &((ENTITY_RECORD*)gm_EntitySlotTable)[i];
 			break;
 		}
 		n--;

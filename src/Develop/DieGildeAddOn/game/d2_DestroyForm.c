@@ -17,11 +17,11 @@ void __cdecl d2_DestroyForm(int dialogIndex)
 			return;
 		}
 	}
-	base = &g_1038140[dialogIndex];
-	if (g_1038140[dialogIndex].used == 0) {
+	base = &d2_Forms[dialogIndex];
+	if (d2_Forms[dialogIndex].used == 0) {
 		return;
 	}
-	items = (int*) g_1038144;
+	items = (int*) d2_FormPageWindows;
 	for (i = base->count - 1; i >= 0; i--) {
 		d2_CloseWindow(items[dialogIndex * 175 + i]);
 	}

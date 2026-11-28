@@ -1,5 +1,5 @@
-extern int g_772f3c;
-extern int g_772f3c;
+extern int cut_SkipMode;
+extern int cut_SkipMode;
 
 
 
@@ -10,7 +10,7 @@ void __cdecl evt_StopScriptIfActive(int scriptId)
 {
 	void* p;
 
-	if (*(int*) ((char*)&g_772f3c) != 0) {
+	if (*(int*) ((char*)&cut_SkipMode) != 0) {
 		return;
 	}
 	p = (void*) evt_FindScriptById(scriptId);

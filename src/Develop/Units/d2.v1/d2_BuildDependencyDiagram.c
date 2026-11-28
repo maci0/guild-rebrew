@@ -71,18 +71,18 @@ int __cdecl d2_BuildDependencyDiagram(unsigned char* a0, unsigned short* a1, int
 		if (g_item_def_table[j * 0x41] == 2 || g_item_def_table[j * 0x41] == 6) {
 			break;
 		}
-		((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[g_85ab60].item_id = j;
-		((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[g_85ab60].parent_a = *(unsigned short*) (rec + 0xa3 + i * 4);
-		((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[g_85ab60].parent_b = *(unsigned short*) (rec + 0xa5 + i * 4);
-		((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[g_85ab60].depth = 0xffff;
-		((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[g_85ab60].x = 0;
-		((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[g_85ab60].y = 0;
-		((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[g_85ab60].unk_1c = -1;
-		((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[g_85ab60].unk_20 = -1;
-		((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[g_85ab60].unk_24 = -1;
-		((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[g_85ab60].unk_28 = -1;
-		((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[g_85ab60].unk_2c = -1;
-		((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[g_85ab60].state = 0xff;
+		((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[g_85ab60].item_id = j;
+		((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[g_85ab60].parent_a = *(unsigned short*) (rec + 0xa3 + i * 4);
+		((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[g_85ab60].parent_b = *(unsigned short*) (rec + 0xa5 + i * 4);
+		((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[g_85ab60].depth = 0xffff;
+		((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[g_85ab60].x = 0;
+		((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[g_85ab60].y = 0;
+		((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[g_85ab60].unk_1c = -1;
+		((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[g_85ab60].unk_20 = -1;
+		((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[g_85ab60].unk_24 = -1;
+		((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[g_85ab60].unk_28 = -1;
+		((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[g_85ab60].unk_2c = -1;
+		((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[g_85ab60].state = 0xff;
 		g_85ab60++;
 
 	}
@@ -93,7 +93,7 @@ int __cdecl d2_BuildDependencyDiagram(unsigned char* a0, unsigned short* a1, int
 	max = 0;
 	for (i = 0; i < n; i++) {
 		v = d2_CalculateDependencyDepth(i);
-		((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].depth = (unsigned short) v;
+		((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].depth = (unsigned short) v;
 		if (max <= (v & 0xffff)) {
 			max = v & 0xffff;
 		}
@@ -105,11 +105,11 @@ int __cdecl d2_BuildDependencyDiagram(unsigned char* a0, unsigned short* a1, int
 		v = 0;
 		for (; i < n; i++) {
 			for (j = i; j < n; j++) {
-				if (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[j].depth < ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i - 1].depth) {
-					tmp = ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i - 1];
-					((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i - 1] = ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[j];
+				if (((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[j].depth < ((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i - 1].depth) {
+					tmp = ((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i - 1];
+					((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i - 1] = ((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[j];
 					v = 1;
-					((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[j] = tmp;
+					((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[j] = tmp;
 				}
 			}
 		}
@@ -119,7 +119,7 @@ int __cdecl d2_BuildDependencyDiagram(unsigned char* a0, unsigned short* a1, int
 	if (n > 0) {
 		k = 0;
 		for (i = 0; i < n; i++) {
-			if (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].depth > k) {
+			if (((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].depth > k) {
 				k++;
 				g_7f4c20[k] = (unsigned short) i;
 			}
@@ -130,7 +130,7 @@ int __cdecl d2_BuildDependencyDiagram(unsigned char* a0, unsigned short* a1, int
 	span = width / (rootCount * 2);
 	v = span - 0x18;
 	for (i = 0; i < rootCount; i++) {
-		((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x = v;
+		((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].x = v;
 		v += span * 2;
 	}
 	for (k = 1; k < g_90e090; k++) {
@@ -140,25 +140,25 @@ int __cdecl d2_BuildDependencyDiagram(unsigned char* a0, unsigned short* a1, int
 			sum = 0;
 			num = 0;
 			for (h = 0; h < v; h++) {
-				if (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[h].item_id == ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].parent_a
-				    || ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[h].item_id == ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].parent_b) {
-					sum += ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[h].x;
+				if (((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[h].item_id == ((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].parent_a
+				    || ((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[h].item_id == ((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].parent_b) {
+					sum += ((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[h].x;
 					num++;
 				}
 			}
 			if (num != 0) {
 				sum /= num;
 			}
-			((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x = sum;
+			((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].x = sum;
 		}
 		do {
 			n = 0;
 			for (i = v + 1; i < j; i++) {
 				for (h = i; h < j; h++) {
-					if (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[h].x < ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i - 1].x) {
-						tmp = ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i - 1];
-						((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i - 1] = ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[h];
-						((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[h] = tmp;
+					if (((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[h].x < ((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i - 1].x) {
+						tmp = ((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i - 1];
+						((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i - 1] = ((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[h];
+						((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[h] = tmp;
 						n = 1;
 					}
 				}
@@ -166,7 +166,7 @@ int __cdecl d2_BuildDependencyDiagram(unsigned char* a0, unsigned short* a1, int
 		} while (n);
 		for (i = v; i < j; i++) {
 			for (h = i; h < j; h++) {
-				if (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[h].x != ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x) {
+				if (((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[h].x != ((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].x) {
 					break;
 				}
 			}
@@ -176,17 +176,17 @@ int __cdecl d2_BuildDependencyDiagram(unsigned char* a0, unsigned short* a1, int
 				half = d >> 1;
 				acc = 0;
 				for (h = i; h < i + len; h++) {
-					((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[h].x += acc / (len - 1) - half;
+					((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[h].x += acc / (len - 1) - half;
 					acc += d;
 				}
 			}
 		}
 		for (i = v; i < j; i++) {
 			for (h = i + 1; h < j; h++) {
-				if (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[h].x - ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x < 0x50) {
-					d = (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x - ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[h].x + 0x50) >> 1;
-					((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x -= d;
-					((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[h].x += d;
+				if (((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[h].x - ((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].x < 0x50) {
+					d = (((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].x - ((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[h].x + 0x50) >> 1;
+					((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].x -= d;
+					((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[h].x += d;
 				}
 			}
 		}
@@ -195,11 +195,11 @@ int __cdecl d2_BuildDependencyDiagram(unsigned char* a0, unsigned short* a1, int
 	max = -1;
 	for (k = 0; k < g_90e090; k++) {
 		for (i = g_7f4c20[k]; i < g_7f4c20[k + 1]; i++) {
-			if (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x <= min) {
-				min = ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x;
+			if (((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].x <= min) {
+				min = ((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].x;
 			}
-			if (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x >= max) {
-				max = ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x;
+			if (((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].x >= max) {
+				max = ((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].x;
 			}
 		}
 	}
@@ -208,7 +208,7 @@ int __cdecl d2_BuildDependencyDiagram(unsigned char* a0, unsigned short* a1, int
 		base = (int) -((float) (min - 0x18) * scale);
 		for (k = 0; k < g_90e090; k++) {
 			for (i = g_7f4c20[k]; i < g_7f4c20[k + 1]; i++) {
-				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x = (int) ((float) ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x * scale) + base;
+				((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].x = (int) ((float) ((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].x * scale) + base;
 			}
 		}
 	}
@@ -218,7 +218,7 @@ int __cdecl d2_BuildDependencyDiagram(unsigned char* a0, unsigned short* a1, int
 		v = h;
 	}
 	for (i = 0; i < g_85ab60; i++) {
-		((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].y = ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].depth * v / g_90e090 + 0x10;
+		((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].y = ((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].depth * v / g_90e090 + 0x10;
 	}
 	return 0;
 }

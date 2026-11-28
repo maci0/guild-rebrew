@@ -1,11 +1,11 @@
 
 
 extern char g_6a4120[];
-extern signed char g_6a3440;
+extern signed char gm_SelectedMissionIndex;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char g_14cf950;
+extern char io_LastKeyScancode;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
@@ -29,7 +29,7 @@ int __cdecl d2_RunChooseCharacterIntroDialog(void)
 	h = d2_LoadForm(0, 0, g_6a4120);
 	d2_CenterDialogWindows(h);
 	io_AppendText(0x1adf);
-	if ((*(char*)&g_6a3440) != -1) {
+	if ((*(char*)&gm_SelectedMissionIndex) != -1) {
 		io_AppendText(0x1ae0);
 	}
 	s = io_AppendText(0x1ae1);
@@ -37,15 +37,15 @@ int __cdecl d2_RunChooseCharacterIntroDialog(void)
 	list = d2_CreateRadioGroup(2, a, d2_GetWindowListItem(h, 0, s + 1));
 	while (main_RunFrameLoop(d2_RunChooseCharacterIntroDialog, 0xc6) != 0) {
 		d2_UpdateRadioGroup(list);
-		if (g_14ce8e0 != 0 || g_14cf950 == 1) {
+		if (io_RightButtonReleased != 0 || io_LastKeyScancode == 1) {
 			result = -1;
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc == 2 || g_14cf950 == 0x1c) {
+		if (d2_DialogButtonAction == 2 || io_LastKeyScancode == 0x1c) {
 			result = 1;
-			g_774654 = 1;
-		} else if (g_100f1dc == 1) {
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
+		} else if (d2_DialogButtonAction == 1) {
+			d2_DialogCloseRequested = 1;
 		}
 	}
 	d2_ClearRadioGroup(list);

@@ -15,17 +15,17 @@ typedef struct Screen {
 } Screen;
 // SIZE 0x30
 
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 extern char g_77470c;
 extern int main_LoopFlags;
 extern int d2_CurrentWindowId;
-extern char* g_77255c;
-extern char* g_1015ea0;
-extern int g_100f1dc;
+extern char* d2_CurrentWindow;
+extern char* d2_Controls;
+extern int d2_DialogButtonAction;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/client_types.h"
-extern List8c_102cbc8 g_102cbc8[];
-extern char g_14cf950;
+extern List8c_102cbc8 d2_RadioGroupItems[];
+extern char io_LastKeyScancode;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
 int __cdecl d2_LoadForm(int, int, char*);
@@ -62,7 +62,7 @@ int __cdecl d2_ShowModalMessageBox(char* text, int flags)
 	int i;
 	int id;
 
-	start = (*(unsigned int*)&g_6b7fac);
+	start = (*(unsigned int*)&gm_GameTicks);
 	timer = -1;
 	result = 0;
 	if (g_77470c != 0) {
@@ -89,9 +89,9 @@ int __cdecl d2_ShowModalMessageBox(char* text, int flags)
 	d2_CenterDialogWindows(dlg);
 	g_77470c = 1;
 	list = d2_CreateRadioGroup(0);
-	for (i = 0; i < ((Screen*)g_77255c)->count; i++) {
-		id = ((Screen*)g_77255c)->ids[i];
-		if (((D2_CONTROL_TL*) g_1015ea0)[id].kind != 0x40) {
+	for (i = 0; i < ((Screen*)d2_CurrentWindow)->count; i++) {
+		id = ((Screen*)d2_CurrentWindow)->ids[i];
+		if (((D2_CONTROL_TL*) d2_Controls)[id].kind != 0x40) {
 			d2_AddToRadioGroup(list, id);
 		}
 	}
@@ -99,28 +99,28 @@ int __cdecl d2_ShowModalMessageBox(char* text, int flags)
 	d2_SetForm(dlg, 0);
 	bar = flags & 0x80;
 	if (bar) {
-		timer = d2_AddWindowValueGauge(0x1c, ((Screen*)g_77255c)->x10 - 0x18, ((Screen*)g_77255c)->xc - 0x40, 0, 0x1f4, 0x83, 0x42, d2_CurrentWindowId);
+		timer = d2_AddWindowValueGauge(0x1c, ((Screen*)d2_CurrentWindow)->x10 - 0x18, ((Screen*)d2_CurrentWindow)->xc - 0x40, 0, 0x1f4, 0x83, 0x42, d2_CurrentWindowId);
 	}
 	while (main_RunFrameLoop((void*) d2_ShowModalMessageBox, wait) != 0) {
 		d2_UpdateRadioGroup(list);
 		if (flags & 0x40) {
 			d2_BringFormToFront(dlg);
 		}
-		if (g_100f1dc == 2 && d2_HoveredWindow == screen) {
-			result = ((int*)g_102cbc8)[list * 35] + 1;
-			g_774654 = 1;
-		} else if ((g_100f1dc == 1 && d2_HoveredWindow == screen) || g_14cf950 == 1) {
+		if (d2_DialogButtonAction == 2 && d2_HoveredWindow == screen) {
+			result = ((int*)d2_RadioGroupItems)[list * 35] + 1;
+			d2_DialogCloseRequested = 1;
+		} else if ((d2_DialogButtonAction == 1 && d2_HoveredWindow == screen) || io_LastKeyScancode == 1) {
 			result = 0;
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 		if (bar && timer != -1) {
-			d2_SetElementValue(timer, 0, 0x1f4, (int) ((*(unsigned int*)&g_6b7fac) - start));
+			d2_SetElementValue(timer, 0, 0x1f4, (int) ((*(unsigned int*)&gm_GameTicks) - start));
 		}
-		if ((flags & 4) && (*(unsigned int*)&g_6b7fac) > start + 0x1f4) {
-			g_774654 = 1;
+		if ((flags & 4) && (*(unsigned int*)&gm_GameTicks) > start + 0x1f4) {
+			d2_DialogCloseRequested = 1;
 		}
 	}
 	g_77470c = 0;

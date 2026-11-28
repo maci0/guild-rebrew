@@ -7,10 +7,10 @@ typedef struct Ent {
 } Ent;
 // SIZE 0x21c
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern unsigned int g_14cbcb4;
-extern unsigned char g_6a375c;
+extern unsigned int nt_LocalShardIndex;
+extern unsigned char gm_PlayerCount;
 
 /* ADDRESS: GOLDTL 0x0047dd60 */
 int __cdecl gm_CanEvaluateMaster(char* e)
@@ -32,10 +32,10 @@ int __cdecl gm_CanEvaluateMaster(char* e)
 	if (idx == 0xffff) {
 		return 0;
 	}
-	if (((Ent*)g_7f4ca0)[idx].kind == 7) {
+	if (((Ent*)gm_EntitySlotTable)[idx].kind == 7) {
 		return 0;
 	}
-	if (g_14cbca0 != -1 && ((Ent*)g_7f4ca0)[idx].kind != 6 && ((Ent*)g_7f4ca0)[idx].seed % g_6a375c != g_14cbcb4) {
+	if (nt_ClientSocket != -1 && ((Ent*)gm_EntitySlotTable)[idx].kind != 6 && ((Ent*)gm_EntitySlotTable)[idx].seed % gm_PlayerCount != nt_LocalShardIndex) {
 		return 0;
 	}
 	return 1;

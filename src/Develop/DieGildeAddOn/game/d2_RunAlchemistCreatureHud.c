@@ -1,8 +1,8 @@
 
 
 
-extern int g_7746d8;
-extern int g_7746a0;
+extern int d2_SelectedEntityUiFlags;
+extern int sv_ClickedObjekt;
 extern int g_14a80b8;
 extern int g_14a80d8;
 extern int g_14a80b0;
@@ -21,11 +21,11 @@ void __cdecl d2_RunAlchemistCreatureHud(int entity, int mode)
 
 	d2_ClearStatusTextSlots();
 	while (main_RunFrameLoop(d2_RunAlchemistCreatureHud, 0x67fff) != 0) {
-		if (g_7746d8 & 0x200) {
+		if (d2_SelectedEntityUiFlags & 0x200) {
 			RegisterStatusText(g_6aa684, g_14a80b8, 0x16);
 			RegisterStatusText(g_6aa674, g_14a80d8, 0x16);
 			option = RegisterStatusText(g_6aa668, g_14a80b0, 0x16);
-			if (g_7746a0 == option) {
+			if (sv_ClickedObjekt == option) {
 				d2_RunHandelSuchenDialog(entity, mode);
 			}
 		}

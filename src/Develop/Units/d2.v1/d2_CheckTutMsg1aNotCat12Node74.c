@@ -2,7 +2,7 @@
 
 
 extern unsigned char* lpGebaeudePROT;
-extern char* g_7746cc;
+extern char* sv_SelectedBuilding;
 
 int __cdecl d2_CheckTutMsg1aNotCat12Node74(int* msg)
 {
@@ -11,7 +11,7 @@ int __cdecl d2_CheckTutMsg1aNotCat12Node74(int* msg)
 	if (*msg == 0x1a) {
 		e = (unsigned char*) msg[1];
 		if (e != 0) {
-			if (((char) ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*e].category) == 0x12 && *((short*)g_7746cc) == 0x74) {
+			if (((char) ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*e].category) == 0x12 && *((short*)sv_SelectedBuilding) == 0x74) {
 				return 0;
 			}
 		}

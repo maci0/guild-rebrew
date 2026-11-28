@@ -28,13 +28,13 @@ struct msg {
 
 extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern pos14_7f4c00 gm_GameTime;
 extern unsigned char g_slot_table[2];
-extern char g_7f4ca4[];
+extern char gm_EntityIdField[];
 
 void* __cdecl d2_OpenTargetPicker(void*, char*, int, int);
 int __cdecl amt_GetRoleLevel(int);
@@ -105,8 +105,8 @@ void __cdecl d2_RunSpyCabinetDialog(int a0)
 	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetForm(dlg, 2);
 	elem = d2_ShowTxt(0, 3, (char*) *(int*) 0x14b531c, d2_CurrentWindowId);
-	*(int*) (elem * 0x2f4 + (int) g_1015ea0 + 0x6c) = 1;
-	*(int*) (elem * 0x2f4 + (int) g_1015ea0 + 0x18) = *(int*) (d2_CurrentWindowId * 0x3cc + 0x1015f4c);
+	*(int*) (elem * 0x2f4 + (int) d2_Controls + 0x6c) = 1;
+	*(int*) (elem * 0x2f4 + (int) d2_Controls + 0x18) = *(int*) (d2_CurrentWindowId * 0x3cc + 0x1015f4c);
 	d2_SetElementFont(elem, 0x54);
 	elem = d2_AddWindowValueGauge(0x57, 0x14, 0xc8, 0, 0x64, 0x7b, 2, d2_CurrentWindowId);
 	d2_SetElementValue(elem, 0, 2, 0, 1);
@@ -115,7 +115,7 @@ void __cdecl d2_RunSpyCabinetDialog(int a0)
 	v16 = io_AppendText(0x4003);
 	confirmButton = d2_GetWindowListItem(dlg, 3, v16);
 	cancelButton = d2_GetWindowListItem(dlg, 3, v16 + 1);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
 		sel = d2_GetControlValue(elem);
 		v16 = sel;
@@ -123,18 +123,18 @@ void __cdecl d2_RunSpyCabinetDialog(int a0)
 		io_AppendText(0x6811b0);
 		io_AppendText(0x3ffd, 0x3ffb, *(unsigned short*) targetEntity, n);
 		cost = ids[sel]; io_AppendText(0x3ffe, cost);
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
-		} else if (g_100f1dc != -1) {
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
+		} else if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == confirmButton) {
-				if (d2_CheckActionBlocker(g_slot_table + g_774970 * 0x21c, cost) == 1 && he_HasNoActiveAssassinAction((void*) a0) != 0) {
-					gm_ModifyHealth(*(int*) (g_slot_table + g_774970 * 0x21c + 4), -cost);
+				if (d2_CheckActionBlocker(g_slot_table + gm_LocalPlayerSlot * 0x21c, cost) == 1 && he_HasNoActiveAssassinAction((void*) a0) != 0) {
+					gm_ModifyHealth(*(int*) (g_slot_table + gm_LocalPlayerSlot * 0x21c + 4), -cost);
 					memset(&req, 0, sizeof(req));
 					req.kind = 0x99;
 					req.code = 2;
 					req.f64 = -1;
 					req.f68 = 1;
-					req.owner = *(int*) (*(unsigned short*) (a0 + 0x27) * 0x21c + (int) g_7f4ca4);
+					req.owner = *(int*) (*(unsigned short*) (a0 + 0x27) * 0x21c + (int) gm_EntityIdField);
 					req.when = gm_GameTime;
 					req.target = *(int*) (a0 + 1);
 					req.f5c = *(int*) (a0 + 1);
@@ -149,7 +149,7 @@ void __cdecl d2_RunSpyCabinetDialog(int a0)
 						v16 = -1;
 						f.mask = 0x7b4c4a0;
 						f.b = 0;
-						ai_FindEntityInFavorRange((unsigned short*) (g_slot_table + g_774970 * 0x21c), 0, f, 0, 100.0f, &v16);
+						ai_FindEntityInFavorRange((unsigned short*) (g_slot_table + gm_LocalPlayerSlot * 0x21c), 0, f, 0, 100.0f, &v16);
 						req.f58 = v16;
 					}
 					id = cm_SendCopyEntityData(&req);
@@ -157,10 +157,10 @@ void __cdecl d2_RunSpyCabinetDialog(int a0)
 						main_RunFrameLoop(0, 0x20007);
 					}
 					d3snd_PlaySoundEffect(-7, 0, (char*) 0x6a9508, 0);
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				}
 			} else if (d2_CurrentElementId == cancelButton) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	} while (main_RunFrameLoop((void*) d2_RunSpyCabinetDialog, 0x677c7) != 0);

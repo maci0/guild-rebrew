@@ -10,7 +10,7 @@ typedef struct
 } Ctl;
 // SIZE 0x2f4
 
-extern char* g_1015ea0;
+extern char* d2_Controls;
 
 void __cdecl d2_SetElementEnabled(int, int);
 int __cdecl gv_CheckSlotActive(void* slot, int type);
@@ -27,7 +27,7 @@ int __cdecl d2_UpdateRentGraveOptions(char* building, int unlockedCount, int unu
 	sel = -1;
 	for (i = 0; i < unlockedCount + 1; i++) {
 		d2_SetElementEnabled(controlIds[i], 0);
-		((D2_CONTROL_TL*) g_1015ea0)[controlIds[i]].value_038 = 0;
+		((D2_CONTROL_TL*) d2_Controls)[controlIds[i]].value_038 = 0;
 	}
 	for (i = unlockedCount + 1; i < 4; i++) {
 		if (gv_CheckSlotActive(*(void**) (building + 0x65), i)) {
@@ -38,12 +38,12 @@ int __cdecl d2_UpdateRentGraveOptions(char* building, int unlockedCount, int unu
 			}
 		} else {
 			d2_SetElementEnabled(controlIds[i], 0);
-			((D2_CONTROL_TL*) g_1015ea0)[controlIds[i]].value_038 = 0;
+			((D2_CONTROL_TL*) d2_Controls)[controlIds[i]].value_038 = 0;
 		}
 	}
-	if (((D2_CONTROL_TL*) g_1015ea0)[controlIds[*selectedIndex]].disabled != 0 && sel != -1) {
+	if (((D2_CONTROL_TL*) d2_Controls)[controlIds[*selectedIndex]].disabled != 0 && sel != -1) {
 		*selectedIndex = sel;
-		((D2_CONTROL_TL*) g_1015ea0)[controlIds[sel]].value_038 = 1;
+		((D2_CONTROL_TL*) d2_Controls)[controlIds[sel]].value_038 = 1;
 	}
 	return r;
 }

@@ -13,8 +13,8 @@ void __cdecl ai_RequestProductionGoods(char* x)
 {
 	int i;
 
-	for (i = 0; i < g_100b0ac; i++) {
-		if (g_100d0c0[i].unk_3c == 0 && (g_100d0c0[i].flags & 8) == 0)
-			cm_RequestClearLagerslot(*(int*) (x + 2), g_100d0c0[i].goods_id);
+	for (i = 0; i < ai_ProductionGoodsCount; i++) {
+		if (ai_ProductionGoodsPlans[i].unk_3c == 0 && (ai_ProductionGoodsPlans[i].flags & 8) == 0)
+			cm_RequestClearLagerslot(*(int*) (x + 2), ai_ProductionGoodsPlans[i].goods_id);
 	}
 }

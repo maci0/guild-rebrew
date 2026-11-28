@@ -28,9 +28,9 @@ extern int g_14abb28;
 extern int g_14abb38;
 extern int g_14abb54;
 extern int d2_CurrentWindowId;
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char s_6aaebc[];
 
@@ -65,7 +65,7 @@ void __cdecl d2_ShowOfficeApplicationDialog(void)
 	prev = -1;
 	cnt = 0;
 	flag = 1;
-	p = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]);
+	p = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[gm_LocalPlayerSlot]);
 	if (p->unk_00d < 2) {
 		d2_ShowModalMessageBox(g_14abb2c, 0);
 		return;
@@ -87,7 +87,7 @@ void __cdecl d2_ShowOfficeApplicationDialog(void)
 	dlg = d2_LoadForm(0, 0, s_6aaebc);
 	d2_CenterDialogWindows(dlg);
 	d2_SetOverlayAnimation(0, 0);
-	g_100f1dc = prev;
+	d2_DialogButtonAction = prev;
 	do {
 		n = amt_SelectOfficeCandidates(p, 6, list);
 		if (n != prev) {
@@ -106,10 +106,10 @@ void __cdecl d2_ShowOfficeApplicationDialog(void)
 			}
 			flag = 0;
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			sel = -1;
 			for (i = 0; i < n; i++) {
 				if (btns[i] == d2_CurrentElementId) {
@@ -120,7 +120,7 @@ void __cdecl d2_ShowOfficeApplicationDialog(void)
 			if (sel > -1 && sel < n) {
 				if (d2_RunAmtsbewerbungDialog(p, list[sel].x0) == 1) {
 					d2_ShowModalMessageBox(g_14abb54, 0);
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				}
 			}
 		}

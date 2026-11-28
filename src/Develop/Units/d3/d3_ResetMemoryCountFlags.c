@@ -8,8 +8,8 @@ typedef struct Item {
 } Item;
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char* g_104049c;
-extern unsigned int g_10404a0;
+extern char* d3_TextureBank;
+extern unsigned int d3_TextureBankCount;
 
 void __cdecl d3_ResetMemoryCountFlags(unsigned int flags)
 {
@@ -29,8 +29,8 @@ void __cdecl d3_ResetMemoryCountFlags(unsigned int flags)
 		}
 	}
 	if ((flags & 0x100) == 0) {
-		it = ((Item*)g_104049c);
-		for (; i < g_10404a0; i++) {
+		it = ((Item*)d3_TextureBank);
+		for (; i < d3_TextureBankCount; i++) {
 			it[i].flags &= 0xbf;
 		}
 	}

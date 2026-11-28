@@ -1,5 +1,5 @@
 extern float g_664150;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_IsNpcEntityState(char*);
@@ -64,7 +64,7 @@ int __cdecl ai_StartBerufsausbildung(int busy, char* ent, int pending, char* out
 		return 0;
 	}
 	scale = (int) ((float) gm_WalkEntityChain(*(unsigned short*) ent) * g_664150);
-	if (gm_GetSeasonTreasury(ent, (char) g_773d75) < scale * 6) {
+	if (gm_GetSeasonTreasury(ent, (char) gm_ActiveTownIndex) < scale * 6) {
 		return 0;
 	}
 	w = (unsigned short) gm_RandomMod(0xf);

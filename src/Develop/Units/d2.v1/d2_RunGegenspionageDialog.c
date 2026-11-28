@@ -21,10 +21,10 @@ typedef struct Cmd {
 
 extern char s_6a2f5c[];
 extern char s_6acd38[];
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 
 int __cdecl amt_SendAndWaitOfficeCommand(ENTITY_RECORD*, ENTITY_RECORD*, ENTITY_RECORD*);
 void __cdecl io_FormatTextBuffer(char*, ...);
@@ -81,11 +81,11 @@ int __cdecl d2_RunGegenspionageDialog(ENTITY_RECORD* ent, Cmd* cmd)
 		if (left == 0) {
 			break;
 		}
-		if (((ENTITY_RECORD*)g_7f4ca0)[i].unk_165[1] == want_a) {
-			pa = &((ENTITY_RECORD*)g_7f4ca0)[i];
+		if (((ENTITY_RECORD*)gm_EntitySlotTable)[i].unk_165[1] == want_a) {
+			pa = &((ENTITY_RECORD*)gm_EntitySlotTable)[i];
 			left--;
-		} else if (((ENTITY_RECORD*)g_7f4ca0)[i].unk_165[1] == want_b) {
-			pb = &((ENTITY_RECORD*)g_7f4ca0)[i];
+		} else if (((ENTITY_RECORD*)gm_EntitySlotTable)[i].unk_165[1] == want_b) {
+			pb = &((ENTITY_RECORD*)gm_EntitySlotTable)[i];
 			left--;
 		}
 	}
@@ -107,9 +107,9 @@ int __cdecl d2_RunGegenspionageDialog(ENTITY_RECORD* ent, Cmd* cmd)
 	s = io_AppendText(0x1dc9, 6, pb->entity_index, pa->entity_index);
 	yes = d2_GetWindowListItem(h, 1, s);
 	no = d2_GetWindowListItem(h, 1, s + 1);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == yes) {
 				if (d2_CheckActionBlocker(ent, 6)) {
 					if (amt_SendAndWaitOfficeCommand(ent, pb, pa)) {
@@ -118,14 +118,14 @@ int __cdecl d2_RunGegenspionageDialog(ENTITY_RECORD* ent, Cmd* cmd)
 						io_FormatTextBuffer(text, s_6a2f5c, 0x1dcb);
 					}
 					d2_ShowModalMessageBox(text, 0);
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				}
 			} else if (d2_CurrentElementId == no) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
-		if (g_14ce8e0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased) {
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop(gm_HandleGegenspionage, 0x657c7));
 	d2_DestroyForm(h);

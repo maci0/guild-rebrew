@@ -1,7 +1,7 @@
 /* g_662a48 is owned (both targets) by src/GOLDTL.fcn_004b6fe0.c; g_6640e8 by
    src/GOLDTL.fcn_004b6f00.c; g_773d75 by src/GOLDTL.fcn_005b24b0.c. */
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 #include <string.h>
 
@@ -55,7 +55,7 @@ int __cdecl gm_ApplyType16PercentDebit(void* request)
 		n = gm_WalkEntityChain(*(short*) p);
 		r = (int) (((double) n * d) * 0.01);
 		io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7, r);
-		cm_RequestTransferCurrencyNoKill(*(int*) request, -1, g_773d75, r);
+		cm_RequestTransferCurrencyNoKill(*(int*) request, -1, gm_ActiveTownIndex, r);
 		len = strlen(buf);
 		he_PostEntityMessage(*(int*) ((char*) p + 4), *(int*) ((char*) p + 4), buf,
 		    0x100 < len, 0x603, 0);

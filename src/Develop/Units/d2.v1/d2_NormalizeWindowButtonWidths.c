@@ -18,8 +18,8 @@ typedef struct Slot {
 // SIZE 0x2f4
 
 #include "Develop/client_types.h"
-extern Win_1015f40 g_1015f40[0x60];
-extern char* g_1015ea0;
+extern Win_1015f40 d2_Windows[0x60];
+extern char* d2_Controls;
 
 void __cdecl d2_SetElementWidth(int slot, int w);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -30,11 +30,11 @@ void __cdecl d2_NormalizeWindowButtonWidths(int win)
 	int maxw;
 	int i;
 
-	w = &((Win*)g_1015f40)[win];
+	w = &((Win*)d2_Windows)[win];
 	maxw = 0;
 	for (i = 0; i < w->count; i++) {
-		if (((D2_CONTROL_TL*) g_1015ea0)[w->children[i]].kind == 9 && ((D2_CONTROL_TL*) g_1015ea0)[w->children[i]].width > maxw) {
-			maxw = ((D2_CONTROL_TL*) g_1015ea0)[w->children[i]].width;
+		if (((D2_CONTROL_TL*) d2_Controls)[w->children[i]].kind == 9 && ((D2_CONTROL_TL*) d2_Controls)[w->children[i]].width > maxw) {
+			maxw = ((D2_CONTROL_TL*) d2_Controls)[w->children[i]].width;
 		}
 	}
 	maxw += 8;
@@ -42,8 +42,8 @@ void __cdecl d2_NormalizeWindowButtonWidths(int win)
 		maxw = 0x80;
 	}
 	for (i = 0; i < w->count; i++) {
-		if (((D2_CONTROL_TL*) g_1015ea0)[w->children[i]].kind == 9) {
-			((D2_CONTROL_TL*) g_1015ea0)[w->children[i]].value_06c = 1;
+		if (((D2_CONTROL_TL*) d2_Controls)[w->children[i]].kind == 9) {
+			((D2_CONTROL_TL*) d2_Controls)[w->children[i]].value_06c = 1;
 			d2_SetElementWidth(w->children[i], maxw);
 		}
 	}

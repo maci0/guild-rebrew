@@ -1,4 +1,4 @@
-unsigned char __cdecl fcn_004f97a0(int a);
+unsigned char __cdecl gm_GetCitySkillAverage(int a);
 int __cdecl gm_SumStraftatSeverity(int a);
 int __cdecl gm_GetLawEntry(int idx, void* dst);
 char* __cdecl amt_FindOfficeHolderByType(int a);
@@ -20,7 +20,7 @@ int __cdecl ai_EvaluateLaw0x01(char* e, int unused, int* choice)
 	float r;
 
 	job = gm_MapEntityStatRange(*(unsigned char*) (e + 0x164));
-	m = (gm_GetEntitySkill(e, 4) - (fcn_004f97a0(4) + 1.0f) * 0.003968254f)
+	m = (gm_GetEntitySkill(e, 4) - (gm_GetCitySkillAverage(4) + 1.0f) * 0.003968254f)
 		* 0.023809524f;
 	y = (float) ((*(float*) (e + 0xf4) - 2.0) * *(float*) (e + 0xfc));
 	w = (float) ((*(float*) (e + 0x100) - 2.0) * *(float*) (e + 0x108));

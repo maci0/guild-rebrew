@@ -30,8 +30,8 @@ extern GuiObj g_00fb1020[];
 extern GuiEnt* g_00f8f080;
 void __cdecl d2_ApplyElementEnabled(int index, int value);
 
-extern D2_FORM_RECORD g_1038140[];
-extern char* g_1015ea0;
+extern D2_FORM_RECORD d2_Forms[];
+extern char* d2_Controls;
 
 #if defined(REBREW_GOLD)
 /* ADDRESS: GOLD 0x00475580 */
@@ -58,11 +58,11 @@ void __cdecl d2_SetFormVisibility(int formId, int visible)
 	Obj* form;
 	int i;
 
-	form = &((Obj*)g_1038140)[formId];
+	form = &((Obj*)d2_Forms)[formId];
 	if (form->used) {
 		for (i = 0; i < 0x400; i++) {
-			if (((D2_CONTROL_TL*) g_1015ea0)[i].kind && *(Obj**) &((D2_CONTROL_TL*) g_1015ea0)[i].value_050 == form) {
-				((D2_CONTROL_TL*) g_1015ea0)[i].value_048 = (visible == 0);
+			if (((D2_CONTROL_TL*) d2_Controls)[i].kind && *(Obj**) &((D2_CONTROL_TL*) d2_Controls)[i].value_050 == form) {
+				((D2_CONTROL_TL*) d2_Controls)[i].value_048 = (visible == 0);
 			}
 		}
 		form->active = visible;

@@ -23,7 +23,7 @@ typedef struct Act {
 
 extern unsigned char* lpGebaeudeINST;
 extern int g_6643d8[];
-extern int g_7f4ca4[];
+extern int gm_EntityIdField[];
 
 unsigned short __cdecl gm_RandomMod(int n);
 float __cdecl gm_RandomFloat01(void);
@@ -141,7 +141,7 @@ int __cdecl ai_StartStammtisch(int busy, unsigned short* self, int pending, Act*
 		out->a = cand[sel]->id;
 		out->b = 0x6a6f696e;
 		out->code = 0x12;
-		out->a = g_7f4ca4[cand[sel]->owner * 135];
+		out->a = gm_EntityIdField[cand[sel]->owner * 135];
 		out->b = 0;
 		return 0x35;
 	}

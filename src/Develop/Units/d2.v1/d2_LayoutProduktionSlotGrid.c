@@ -1,4 +1,4 @@
-extern char* g_1015ea0; /* 0x1015ea0, GUI pool, stride 0x2f4 */
+extern char* d2_Controls; /* 0x1015ea0, GUI pool, stride 0x2f4 */
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl d2_SetForm(int k, int i);
 int __cdecl d2_AddElementToWindow(int x, int y, int id, int win);
@@ -59,10 +59,10 @@ void __cdecl d2_LayoutProduktionSlotGrid(int a0, int a1, int a2, unsigned int a3
     p = (int*) 0x778d50;
     do {
         if (p[-2] >= 2) {
-            *(unsigned int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[p[0]].value_048)) = 0;
+            *(unsigned int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[p[0]].value_048)) = 0;
             d2_PositionControl(r[1] + p[-4], r[2] + p[-3], *p);
         } else {
-            *(unsigned int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[p[0]].value_048)) = 1;
+            *(unsigned int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[p[0]].value_048)) = 1;
         }
         p += 5;
     } while ((int) p < 0x778da0);

@@ -25,7 +25,7 @@ void __cdecl d2_PositionWindow(int k, unsigned char center)
 	int x;
 	int y;
 
-	w = &((D2_WIN*)g_1015f40)[k];
+	w = &((D2_WIN*)d2_Windows)[k];
 	if (center & 1) {
 		x = d2_CenterX - w->width / 2;
 	} else {

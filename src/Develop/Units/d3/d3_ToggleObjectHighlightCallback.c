@@ -1,4 +1,4 @@
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 
 void __cdecl d3_InvalidateSubTreeFlags(char* p, int a);
 
@@ -8,7 +8,7 @@ char __cdecl d3_ToggleObjectHighlightCallback(char* a, char on)
 	if (on) {
 		if (*(int*) (a + 0x218) == 5 && *a == 'r') {
 			*(int*) (a + 0x218) = 6;
-			*(int*) (a + 0x40) = g_6b7fac;
+			*(int*) (a + 0x40) = gm_GameTicks;
 			d3_InvalidateSubTreeFlags(a, 0);
 			return 1;
 		}

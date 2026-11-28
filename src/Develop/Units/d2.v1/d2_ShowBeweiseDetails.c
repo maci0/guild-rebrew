@@ -27,12 +27,12 @@ typedef struct {
 // SIZE 0x14
 
 #include "Develop/client_types.h"
-extern Rec2d_9a3800 g_9a3800[512];
+extern Rec2d_9a3800 cm_CrimeRecords[512];
 #include "Develop/Units/d2.v1/crime_description.h"
 extern char g_6ac4c8[];
 extern int d2_CurrentWindowId;
-extern int g_100f1dc;
-extern int g_14ce8e0;
+extern int d2_DialogButtonAction;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
 int __cdecl gs_CollectEvidenceIndicesForTarget(int, int*, unsigned short);
@@ -70,7 +70,7 @@ void __cdecl d2_ShowBeweiseDetails(unsigned short* who, unsigned short* e)
 		return;
 	}
 	for (i = 0; i < n; i++) {
-		recs[i] = ((Rec5bfd*)g_9a3800)[list[i]];
+		recs[i] = ((Rec5bfd*)cm_CrimeRecords)[list[i]];
 	}
 	d2_SortCrimeRecordsByKind(n, recs);
 	h = d2_LoadForm(0, 0, g_6ac4c8);
@@ -97,10 +97,10 @@ void __cdecl d2_ShowBeweiseDetails(unsigned short* who, unsigned short* e)
 	if (gm_CheckPrivilege(0x16, e, q) & 2) {
 		io_AppendText(0x174a);
 	}
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop(d2_ShowBeweiseDetails, 0x657c7) != 0);
 	d2_DestroyForm(h);

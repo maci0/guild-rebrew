@@ -3,13 +3,13 @@
 #include "msx.h"
 
 extern int g_678168;
-extern float g_678150;
-extern float g_678154;
-extern float g_678158;
-extern unsigned int g_67815c;
-extern int g_678160;
-extern int g_6b7190;
-extern volatile int g_6b7fac;
+extern float msx_MasterFadeScale;
+extern float msx_MasterFadeStart;
+extern float msx_MasterFadeTarget;
+extern unsigned int msx_MasterFadeDuration;
+extern int msx_MasterVolume;
+extern int msx_MasterFadeStartTime;
+extern volatile int gm_GameTicks;
 
 int __cdecl msx_GetStreamStatus(int h);
 int __cdecl msx_SetStreamVolume(int h, int v);
@@ -118,16 +118,16 @@ void __cdecl msx_UpdateTracks(void)
 				}
 			}
 		}
-		if (g_678158 >= 0.0f) {
-			t = g_6b7fac * 8 + g_6b7fac * 4 + g_6b7fac;
-			t -= g_6b7190;
-			if (t < g_67815c) {
-				g_678150 = (g_678158 - g_678154) / (float) g_67815c * (float) t + g_678154;
+		if (msx_MasterFadeTarget >= 0.0f) {
+			t = gm_GameTicks * 8 + gm_GameTicks * 4 + gm_GameTicks;
+			t -= msx_MasterFadeStartTime;
+			if (t < msx_MasterFadeDuration) {
+				msx_MasterFadeScale = (msx_MasterFadeTarget - msx_MasterFadeStart) / (float) msx_MasterFadeDuration * (float) t + msx_MasterFadeStart;
 			} else {
-				g_678150 = g_678158;
-				g_678158 = -1.0f;
+				msx_MasterFadeScale = msx_MasterFadeTarget;
+				msx_MasterFadeTarget = -1.0f;
 			}
-			SetMasterVolume(g_678160);
+			SetMasterVolume(msx_MasterVolume);
 		}
 	}
 }

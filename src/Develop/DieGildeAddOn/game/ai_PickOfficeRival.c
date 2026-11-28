@@ -40,7 +40,7 @@ ENTITY_RECORD* __cdecl ai_PickOfficeRival(ENTITY_RECORD* subject)
 
 		amt_GetRoleTemplate(subject->unk_165[2], &roleTmpl);
 		for (i = 0; i < 768; i++) {
-			candidate = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[i]);
+			candidate = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[i]);
 			if (candidate->unk_165[1] != 0 && srv_GetEntityOfficeSlot((unsigned char*) candidate, &roleTmpl, &rivalTmpl) != 0 && roleTmpl.x8 <= 1) {
 				if (best == 0) {
 					best = candidate;
@@ -88,7 +88,7 @@ ENTITY_RECORD* __cdecl ai_PickOfficeRival(ENTITY_RECORD* subject)
 
 			mask = 0xc00;
 			if (ai_SelectRankedCandidates(subject, 1, &mask, 0, 25.0f, &idx) != 0) {
-				return ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[(unsigned short) idx]);
+				return ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[(unsigned short) idx]);
 			}
 		}
 	}

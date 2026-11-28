@@ -1,4 +1,4 @@
-extern char g_10432c0[];
+extern char d3_Universes[];
 extern int g_67530c;
 extern char __cdecl SelectTextureSet(void* e, void* o, unsigned char lod, char refresh);
 
@@ -20,7 +20,7 @@ void __cdecl d3_UpdateEntityTextureVariant(int* a0)
     ctx = *(char**) (obj + 0x34);
     res = *(char**) (ctx + 0x1ec) + 0xf4;
     q = *(char**) (res + 0x318);
-    if (*(char**) (obj + 0x88) != g_10432c0) {
+    if (*(char**) (obj + 0x88) != d3_Universes) {
         if (*(int*) (q + 0x1e8) <= 4) {
             idx = (unsigned int) a0[1] % (unsigned int) *(int*) (q + 0x1e8);
         } else {

@@ -12,8 +12,8 @@ typedef struct
 // SIZE 0x14
 
 extern int d2_CurrentWindowId;
-extern int g_100f1dc;
-extern int g_14ce8e0;
+extern int d2_DialogButtonAction;
+extern int io_RightButtonReleased;
 extern int d2_CurrentElementId;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char s_6a9748[];
@@ -73,14 +73,14 @@ int __cdecl d2_ShowFriedhofGehilfenDialog(int a1, Req* request)
 	id = io_AppendText(0x4133);
 	ok = d2_GetWindowListItem(dlg, 2, id);
 	cancel = d2_GetWindowListItem(dlg, 2, id + 1);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
-		} else if (g_100f1dc != -1) {
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
+		} else if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == ok) {
 				if (*request->xc == -1) {
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				} else {
 					h = gv_SendAllocGraveyardWorker(a1, *request->x0, request->x8, request->x10, 0x1c);
 					while (h != -1 && (status = cm_GetCommandStatus(h)) == 0) {
@@ -93,10 +93,10 @@ int __cdecl d2_ShowFriedhofGehilfenDialog(int a1, Req* request)
 						evt_CallScriptFunction(id, 1, line);
 					}
 					result = 1;
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				}
 			} else if (d2_CurrentElementId == cancel) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	} while (main_RunFrameLoop((void*) d2_ShowFriedhofGehilfenDialog, 0x677c7) != 0);

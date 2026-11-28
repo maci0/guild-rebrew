@@ -17,7 +17,7 @@ typedef struct Slot {
 // SIZE 0x2f4
 
 extern GuiEnt* g_00f8f080; /* 0x00f8f080 */
-extern char* g_1015ea0;
+extern char* d2_Controls;
 
 int __cdecl d2_CalcTextWidth(const char* text, int font);
 int __cdecl d2_MeasureTextWidth(const char* text, int font);
@@ -52,7 +52,7 @@ void __cdecl d2_SetEditControlText(int slot, char* text)
 	char* par;
 	int n;
 
-	s = &((Slot*)g_1015ea0)[slot];
+	s = &((Slot*)d2_Controls)[slot];
 	par = s->link;
 	if (par && s->buf) {
 		if (s->len) {

@@ -86,41 +86,41 @@ int __cdecl d2_ShowDuelChallengeDialog(unsigned char* e)
 		arr[5] = 4;
 		d2_DrawLawCandidateStatus(arr);
 	}
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_100f1dc != -1) {
-			if (g_100f1dc == 2) {
-				if (d2_CheckActionBlocker(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), 2)) {
+		if (d2_DialogButtonAction != -1) {
+			if (d2_DialogButtonAction == 2) {
+				if (d2_CheckActionBlocker(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot]), 2)) {
 					struct msg m;
 
 					a = gm_RandomMod(9) + 0x1d76;
 					b = gm_RandomMod(9) + 0x1d6d;
 					memset(&m, 0, sizeof(m));
-					m.f8 = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id;
+					m.f8 = ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id;
 					m.pos = gm_GameTime;
 					m.b4 = 0x47;
 					m.b36 = 2;
 					m.w60 = b;
 					m.w62 = a;
 					m.f5c = *(int*) (e + 4);
-					m.fc = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id;
-					m.f58 = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id;
+					m.fc = ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id;
+					m.f58 = ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id;
 					h = cm_SendCopyEntityData(&m);
 					while (cm_GetCommandStatus(h) == 0) {
 						cm_StepCommandQueue();
 					}
-					cm_RequestModifyHealth(((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, -2);
+					cm_RequestModifyHealth(((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id, -2);
 					io_FormatTextBuffer(text, 0x1d6a, b, *(unsigned short*) e, a);
 					d2_ShowModalMessageBox(text, 0);
-					g_774654 = 3;
+					d2_DialogCloseRequested = 3;
 					result = 1;
 				}
-			} else if (g_100f1dc == 1) {
-				g_774654 = 2;
+			} else if (d2_DialogButtonAction == 1) {
+				d2_DialogCloseRequested = 2;
 			}
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop((void*) d2_ShowDuelChallengeDialog, 0x657c7) != 0);
 	d2_DestroyForm(dlg);

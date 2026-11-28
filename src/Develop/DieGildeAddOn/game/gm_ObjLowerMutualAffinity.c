@@ -1,5 +1,5 @@
 #include <string.h>
-extern __int64 g_666018;
+extern __int64 gm_TargetPersonTypeMask;
 
 unsigned short* __cdecl d2_OpenTargetPicker(unsigned int*, char*, int, int);
 int __cdecl gm_LookupEntityRecordById(int);
@@ -26,7 +26,7 @@ unsigned int __cdecl gm_ObjLowerMutualAffinity(int actorRec, int eventArgs)
 		q[0] = 0;
 		q[1] = 0x400;
 		q[4] = 6;
-		*(__int64*) (q + 2) = g_666018;
+		*(__int64*) (q + 2) = gm_TargetPersonTypeMask;
 		firstTarget = d2_OpenTargetPicker(q, buf, 0, 0);
 		if (firstTarget != 0) {
 			q[5] = 3;

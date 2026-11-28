@@ -54,7 +54,7 @@ typedef struct {
 
 
 
-extern Win2_469 g_1015f40[0x60];
+extern Win2_469 d2_Windows[0x60];
 extern UI_FIELD g_102d140[0x10];
 
 /* ADDRESS: GOLDTL 0x00469c40 */
@@ -70,7 +70,7 @@ void __cdecl d2_PositionControl(int a1, int a2, int index)
 	int xo;
 	int yo;
 
-	e = (D2_CONTROL_TL *) g_1015ea0 + index;
+	e = (D2_CONTROL_TL *) d2_Controls + index;
 	kind = e->kind;
 	e->x = a1;
 	e->y = a2;
@@ -127,9 +127,9 @@ void __cdecl d2_PositionControl(int a1, int a2, int index)
 		*(unsigned short *) ((char*) g_100e7a0 + 0x10 + e->value_088 * 20) = (unsigned short) e->y;
 		break;
 	case 0x40:
-		xo = g_1015f40[e->value_088].x;
-		yo = g_1015f40[e->value_088].y;
-		w = (Win2_469 *) g_1015f40 + e->value_088;
+		xo = d2_Windows[e->value_088].x;
+		yo = d2_Windows[e->value_088].y;
+		w = (Win2_469 *) d2_Windows + e->value_088;
 		w->x = a1;
 		w->y = a2;
 		if (e->clip_right > g_1040494) {
@@ -141,7 +141,7 @@ void __cdecl d2_PositionControl(int a1, int a2, int index)
 		for (i = 0; i < w->n; i++) {
 			D2_CONTROL_TL *c;
 			idx = w->ids[i];
-			c = (D2_CONTROL_TL *) g_1015ea0 + idx;
+			c = (D2_CONTROL_TL *) d2_Controls + idx;
 			d2_PositionControl(c->x - xo + w->x, c->y - yo + w->y, idx);
 		}
 		break;

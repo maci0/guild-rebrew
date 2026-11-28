@@ -2,8 +2,8 @@
 
 extern float g_6629d0;
 
-extern unsigned char g_773d75;
-extern void* g_14a558c;
+extern unsigned char gm_ActiveTownIndex;
+extern void* txt_TargetBuildingPrompt;
 
 int __cdecl fcn_005015e0(int* out, int a, int b, int c);
 int __cdecl d2_RunCityScrollMapDialog(int a, int* b, void* c, int d, int e);
@@ -38,7 +38,7 @@ int __cdecl gm_ObjForceSellBuildingStock(char* actor, char* action)
 		request[4] = 6;
 		request[2] = 0xa0744300;
 		request[3] = one;
-		recordAddr = d2_RunCityScrollMapDialog(one, request, g_14a558c, 0, 0);
+		recordAddr = d2_RunCityScrollMapDialog(one, request, txt_TargetBuildingPrompt, 0, 0);
 		if (recordAddr == 0)
 			return 0;
 	} else {
@@ -61,7 +61,7 @@ int __cdecl gm_ObjForceSellBuildingStock(char* actor, char* action)
 				    : (int) ((fcn_0042e450() * g_6629d0 + 0.1f)
 				    * *(int*) ((char*) f + 0xe));
 				cm_SendSellObjekt(-1, *(int*) ((char*) e + 2),
-				    *(unsigned short*) f, quantity, g_773d75, 0);
+				    *(unsigned short*) f, quantity, gm_ActiveTownIndex, 0);
 			}
 			f = (int*) fcn_00502850();
 		}

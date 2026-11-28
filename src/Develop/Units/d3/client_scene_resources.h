@@ -27,9 +27,9 @@ typedef struct SCENE_RESOURCE {
 
 /* Declaration views; allocation and storage owners are unknown. */
 /* ADDRESS: GOLD 0x00fb9074 */
-extern SCENE_RESOURCE* g_104049c;
+extern SCENE_RESOURCE* d3_TextureBank;
 /* ADDRESS: GOLD 0x00fb9084 */
-extern unsigned int g_10404a0;
+extern unsigned int d3_TextureBankCount;
 /* ADDRESS: GOLD 0x00633f00 */
 extern int g_6b8af0;
 

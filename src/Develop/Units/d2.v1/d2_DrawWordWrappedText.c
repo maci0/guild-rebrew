@@ -1,7 +1,7 @@
 #include <string.h>
 
-extern char* g_772524;
-extern char* g_77253c;
+extern char* d2_CurrentFontBank;
+extern char* d2_BlackTexture;
 extern int g_772544;
 extern int g_772548;
 extern int g_77254c;
@@ -62,9 +62,9 @@ int __cdecl d2_DrawWordWrappedText(int x, int y, int width, int height, int surf
     g_772548 = 0;
     g_77254c = 9999;
     g_772550 = y;
-    if (!g_772524)
-        g_772524 = (char*)d2_GetResourceData(d2_FindResourceByName("_FONT"));
-    d2_FontHeight = *(unsigned short*)(g_772524 + 8);
+    if (!d2_CurrentFontBank)
+        d2_CurrentFontBank = (char*)d2_GetResourceData(d2_FindResourceByName("_FONT"));
+    d2_FontHeight = *(unsigned short*)(d2_CurrentFontBank + 8);
     memset(words, 0, sizeof(words));
     if (surface && (flags & 0xa0)) {
         visible = 1;
@@ -99,7 +99,7 @@ int __cdecl d2_DrawWordWrappedText(int x, int y, int width, int height, int surf
             bg_height = d2_ClipBottom - bg_y;
         if (visible)
             d2_DrawTexturedQuad(bg_width, bg_y, bg_x, bg_height,
-                         *(int*)(g_77253c + 0x50), 0.7f);
+                         *(int*)(d2_BlackTexture + 0x50), 0.7f);
         g_772544 = bg_x;
         g_772548 = bg_height;
     }
@@ -186,16 +186,16 @@ int __cdecl d2_DrawWordWrappedText(int x, int y, int width, int height, int surf
                     for (j = 0; j < (int)strlen(word); j++) {
                         c = (unsigned char)*p;
                         if (c != '~') {
-                            glyph = d2_GetBankEntry(g_772524, c);
+                            glyph = d2_GetBankEntry(d2_CurrentFontBank, c);
                             if (right)
                                 draw_x -= *(unsigned short*)(glyph + 0x11);
                             if (c != ' ') {
                                 if (surface) {
                                     if (flags & 2)
-                                        d2_DrawHighlightSprite(draw_x, draw_y, surface, g_772524, c);
+                                        d2_DrawHighlightSprite(draw_x, draw_y, surface, d2_CurrentFontBank, c);
                                     else if (flags & 1)
-                                        d2_DrawDimmedSpriteFrame(draw_x, draw_y, surface, g_772524, c);
-                                    else if (draw(draw_x, draw_y, surface, g_772524, c))
+                                        d2_DrawDimmedSpriteFrame(draw_x, draw_y, surface, d2_CurrentFontBank, c);
+                                    else if (draw(draw_x, draw_y, surface, d2_CurrentFontBank, c))
                                         d2_DrawDepthIndex--;
                                 }
                                 draw_x += *(unsigned short*)(glyph + 0x15) + g_67d384;

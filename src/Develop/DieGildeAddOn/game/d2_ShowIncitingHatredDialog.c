@@ -20,12 +20,12 @@ typedef struct
 } HatredEntity;
 /* SIZE 8 */
 
-extern int g_100f1dc;
-extern int g_14ce8e0;
-extern __int64 g_666018;
+extern int d2_DialogButtonAction;
+extern int io_RightButtonReleased;
+extern __int64 gm_TargetPersonTypeMask;
 extern int d2_CurrentElementId;
 extern float g_6628ac;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 #include "Develop/client_types.h"
 
@@ -102,7 +102,7 @@ int __cdecl d2_ShowIncitingHatredDialog(char* actor, char* request)
 		bd2 = gm_GetEntityRelation(secondEntity->id, firstEntity->id);
 		cm_RequestCopyEntityData(firstEntity->handle, secondEntity->handle, bw1 - bd1 - 0x7f, 1);
 		cm_RequestCopyEntityData(secondEntity->handle, firstEntity->handle, bw2 - bd2 - 0x7f, 1);
-		cm_RequestMoveCredits(-1, *(int*) (actor + 4), *(char*) &g_773d75, bv);
+		cm_RequestMoveCredits(-1, *(int*) (actor + 4), *(char*) &gm_ActiveTownIndex, bv);
 		cm_RequestModifyHealth(*(int*) (actor + 4), -4);
 		if (firstEntity->type == 6 || firstEntity->type == 7) {
 			io_FormatTextBuffer(buf, 0x1dd3, secondEntity->id, secondEntity->id);
@@ -118,7 +118,7 @@ int __cdecl d2_ShowIncitingHatredDialog(char* actor, char* request)
 	memset(&req, 0, sizeof(req));
 	req.x4 = 0x400;
 	req.x10 = 6;
-	req.mask = g_666018;
+	req.mask = gm_TargetPersonTypeMask;
 	io_FormatTextBuffer(buf, 0x1dcf);
 	firstEntity = (HatredEntity*) d2_OpenTargetPicker(&req, buf, 0, 0);
 	if (firstEntity == 0) {
@@ -139,12 +139,12 @@ int __cdecl d2_ShowIncitingHatredDialog(char* actor, char* request)
 	ret = io_AppendText(0x1dd1, 4, v, firstEntity->id, secondEntity->id);
 	r1 = d2_GetWindowListItem(dialog, 1, ret);
 	r2 = d2_GetWindowListItem(dialog, 1, ret + 1);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == r1) {
 				if (d2_CheckActionBlocker(actor, 4) != 0 &&
-				    gm_CheckEntityStock(actor, v, *(char*) &g_773d75) != 0) {
+				    gm_CheckEntityStock(actor, v, *(char*) &gm_ActiveTownIndex) != 0) {
 					w1 = gm_RandomMod(0x1e) + 3;
 					w2 = gm_RandomMod(0x1e) + 3;
 					d1 = gm_GetEntityRelation(firstEntity->id, secondEntity->id);
@@ -154,7 +154,7 @@ int __cdecl d2_ShowIncitingHatredDialog(char* actor, char* request)
 					cm_RequestCopyEntityData(secondEntity->handle, firstEntity->handle,
 						     w2 - d2 - 0x7f, 1);
 					cm_RequestMoveCredits(-1, *(int*) (actor + 4),
-						     *(char*) &g_773d75, v);
+						     *(char*) &gm_ActiveTownIndex, v);
 					cm_RequestModifyHealth(*(int*) (actor + 4), -4);
 					io_FormatTextBuffer(buf, 0x1dd2, firstEntity->id, secondEntity->id);
 					d2_ShowModalMessageBox(buf, 0);
@@ -168,15 +168,15 @@ int __cdecl d2_ShowIncitingHatredDialog(char* actor, char* request)
 						he_PostEntityMessage(secondEntity->handle, secondEntity->handle, buf,
 							     0, 0x5fb, (char*) 0x6a59fc);
 					}
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 					rc = 1;
 				}
 			} else if (d2_CurrentElementId == r2) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
-		if (g_14ce8e0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased) {
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop((void*) 0x5d78e0, 0x657c7) != 0);
 	d2_DestroyForm(dialog);

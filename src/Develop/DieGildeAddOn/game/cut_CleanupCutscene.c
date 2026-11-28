@@ -1,7 +1,7 @@
-extern int g_772f3c;
+extern int cut_SkipMode;
 extern int g_772f4c;
 extern int g_68bfc4;
-extern int g_67a370;
+extern int d3_ActiveScene;
 int evt_LastGfxScriptId = 0xffffffff;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d3/d3_camera.h"
@@ -24,7 +24,7 @@ void __cdecl cut_CleanupCutscene(void)
 	char* w;
 	char* ui;
 
-	if (g_772f3c != 0)
+	if (cut_SkipMode != 0)
 		return;
 	if (g_772f4c <= 0)
 		return;
@@ -33,10 +33,10 @@ void __cdecl cut_CleanupCutscene(void)
 		if (w != 0)
 			evt_RequestScriptExit(w);
 	}
-	if (((char*)g_67a370) != 0) {
-		ui = *(char**) (((char*)g_67a370) + 0x3c8);
+	if (((char*)d3_ActiveScene) != 0) {
+		ui = *(char**) (((char*)d3_ActiveScene) + 0x3c8);
 		if (ui != 0 && *(hook_4e4910*) (ui + 0x294) != 0)
-			(*(hook_4e4910*) (ui + 0x294))(((char*)g_67a370), 5, ui + 0x298, 0);
+			(*(hook_4e4910*) (ui + 0x294))(((char*)d3_ActiveScene), 5, ui + 0x298, 0);
 	}
 	if (evt_LastGfxScriptId != -1) {
 		for (w = evt_FindScriptById(evt_LastGfxScriptId); w != 0 && (w[0x124] & 1) != 0; w = evt_FindScriptById(evt_LastGfxScriptId))
@@ -48,9 +48,9 @@ void __cdecl cut_CleanupCutscene(void)
 		for (w = evt_FindScriptById(g_68bfc4); w != 0 && (w[0x124] & 1) != 0; w = evt_FindScriptById(g_68bfc4))
 			main_RunFrameLoop(0, cut_EventLoopFlags | 0x80);
 	}
-	if (*(int*) (((char*)g_67a370) + 0xb0) != 0) {
-		gv_Free3Fields(*(int*) (((char*)g_67a370) + 0xb0));
-		*(int*) (((char*)g_67a370) + 0xb0) = 0;
+	if (*(int*) (((char*)d3_ActiveScene) + 0xb0) != 0) {
+		gv_Free3Fields(*(int*) (((char*)d3_ActiveScene) + 0xb0));
+		*(int*) (((char*)d3_ActiveScene) + 0xb0) = 0;
 	}
 	d3_FreeObjectAnimation(d3_ActiveCamera);
 	d3_ActiveCameraAnimation = 0;

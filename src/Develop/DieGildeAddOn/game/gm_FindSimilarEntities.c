@@ -60,9 +60,9 @@ unsigned int __cdecl gm_FindSimilarEntities(unsigned short* e, unsigned int max,
 	cnt = 0;
 	i = gm_RandomMod(0x300);
 	while (cnt < max && tries != 0) {
-		t = ((ENTITY_RECORD*)g_7f4ca0)[i].entity_state;
+		t = ((ENTITY_RECORD*)gm_EntitySlotTable)[i].entity_state;
 		if (t != 8 && t != 7 && t != 5 && t != 9 && t != 0x14) {
-			job = ((ENTITY_RECORD*)g_7f4ca0)[i].unk_164;
+			job = ((ENTITY_RECORD*)gm_EntitySlotTable)[i].unk_164;
 			if (job != 0 && job != 0x52 && gm_MatchesTargetFilter(*e, (unsigned short) i, &q, 0) != 0
 			    && abs(a2 - gm_GetEntityOfficeRank((unsigned short) i, 0)) < 6) {
 				if (!ranged || (f = gm_CalcEntityFavor(i, *e, 1), !(f < lo) && !(f > hi))) {
@@ -76,9 +76,9 @@ unsigned int __cdecl gm_FindSimilarEntities(unsigned short* e, unsigned int max,
 	tries = 0x300;
 	i = gm_RandomMod(0x300);
 	while (cnt < max && tries != 0) {
-		t = ((ENTITY_RECORD*)g_7f4ca0)[i].entity_state;
+		t = ((ENTITY_RECORD*)gm_EntitySlotTable)[i].entity_state;
 		if (t != 8 && t != 7 && t != 5 && t != 9 && t != 0x14) {
-			if (((ENTITY_RECORD*)g_7f4ca0)[i].unk_164 == 0 && gm_MatchesTargetFilter(*e, (unsigned short) i, &q, 0) != 0
+			if (((ENTITY_RECORD*)gm_EntitySlotTable)[i].unk_164 == 0 && gm_MatchesTargetFilter(*e, (unsigned short) i, &q, 0) != 0
 			    && abs(a2 - gm_GetEntityOfficeRank((unsigned short) i, 0)) < 6) {
 				if (!ranged || (f = gm_CalcEntityFavor(i, *e, 1), !(f < lo) && !(f > hi))) {
 					out[cnt++] = (unsigned short) i;

@@ -8,7 +8,7 @@ typedef Msg_aed340 Msg;
 
 #include "Develop/DieGildeAddOn/command/client_packet_queue.h"
 extern char g_aed438[];
-extern int g_14cbca0;
+extern int nt_ClientSocket;
 extern int g_7749d0;
 
 char *__cdecl gm_LookupEntityRecordById(int);
@@ -23,9 +23,9 @@ int __cdecl fcn_004c9160(char *packet, char *reply)
 	char *w;
 	char *s2;
 
-	m = *(Msg*) g_aed340;
+	m = *(Msg*) cm_IncomingPacketData;
 	o = gm_LookupEntityRecordById(m.who);
-	if (g_14cbca0 != -1) {
+	if (nt_ClientSocket != -1) {
 		if (m.flags & 1) {
 			if (o == 0) {
 				return 1;

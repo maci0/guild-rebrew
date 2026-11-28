@@ -14,7 +14,7 @@ typedef struct BarImg {
 } BarImg;
 // SIZE 0x54
 
-extern char* g_772500;
+extern char* d2_FileObjTable;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 #include "Develop/DieGildeAddOn/game/spiel.h"
@@ -32,7 +32,7 @@ void __cdecl d2_DrawSkillBar(int x, int y, char* entity, int skillIndex, int bar
 	int half;
 	int i;
 
-	w = ((BarImg*) g_772500)[bar].w + 2;
+	w = ((BarImg*) d2_FileObjTable)[bar].w + 2;
 	cur = gm_GetScaledEntitySkill(entity, skillIndex);
 	max = (unsigned char) entity[skillIndex + 0x80];
 	if (cur > max) {

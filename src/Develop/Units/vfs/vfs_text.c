@@ -14,7 +14,7 @@ typedef struct {
 extern char g_1053000[][0x50];
 extern char* txt_TextEntries[];
 typedef struct VFS_DIR VFS_DIR;
-extern VFS_DIR* g_6b7fdc;
+extern VFS_DIR* vfs_RootDir;
 
 int __cdecl txt_FindTextBank(const char* name);
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
@@ -54,7 +54,7 @@ int __cdecl txt_ReloadTextFile(const char* name)
 		return 0;
 	}
 	sprintf(path, "textbin_%s\\%s.res", "german", ((TEXT_BANK_ENTRY*)txt_TextBanks)[idx].name);
-	f = vfs_Tfopen(path, "rb", g_6b7fdc);
+	f = vfs_Tfopen(path, "rb", vfs_RootDir);
 	if (f == 0) {
 		return 0;
 	}

@@ -19,10 +19,10 @@ void __cdecl cm_RequestMoveCredits(int, int, char, int);
 void __cdecl cm_SendTraceEnd(char*);
 void __cdecl cm_RequestChangeAttribute(void);
 
-extern Slot7f4ca2 g_7f4ca2[768];
-extern char g_7f4ca4[];
-extern unsigned char g_773d75;
-extern int g_aed32c;
+extern Slot7f4ca2 gm_SlotTableKindView[768];
+extern char gm_EntityIdField[];
+extern unsigned char gm_ActiveTownIndex;
+extern int cm_PacketDeltaBase;
 
 /* Nudges the stock level of the entity's home building towards the level the
    entity is drifting to, then rebalances the building's per-kind stock against
@@ -88,7 +88,7 @@ void __cdecl ai_CalcMeisterBank(char* e)
 	}
 	cm_AppendPacketFieldDelta(4, 1,
 	             (unsigned short) (*(unsigned short*) (e + 0x16c) -
-	                               *(unsigned short*) &g_aed32c) + 0x65,
+	                               *(unsigned short*) &cm_PacketDeltaBase) + 0x65,
 	             &t);
 	cm_RequestChangeAttribute();
 stock_done:
@@ -107,9 +107,9 @@ stock_done:
 			o = *(char**) (e + 0x16c);
 			cm_RequestMoveCredits(
 				-1,
-				*(int*) (g_7f4ca4 +
+				*(int*) (gm_EntityIdField +
 				         *(unsigned short*) (o + 0x27) * 0x21c),
-				(char) g_773d75, t);
+				(char) gm_ActiveTownIndex, t);
 			cm_SendTraceEnd("Bankmeister");
 		} else if (r > total * 6 / 0x14) {
 			d = r - total * 4 / 0x14;
@@ -117,9 +117,9 @@ stock_done:
 			cm_SendLogAction("Bankmeister");
 			o = *(char**) (e + 0x16c);
 			cm_RequestMoveCredits(
-				*(int*) (g_7f4ca4 +
+				*(int*) (gm_EntityIdField +
 				         *(unsigned short*) (o + 0x27) * 0x21c),
-				-1, (char) g_773d75, d);
+				-1, (char) gm_ActiveTownIndex, d);
 			t = (int) (d * 1.03);
 			o = *(char**) (e + 0x16c);
 			cm_RequestMoveCredits(-1, *(int*) (o + 1), (char) i, t);
@@ -127,23 +127,23 @@ stock_done:
 		}
 	}
 	o = *(char**) (e + 0x16c);
-	t = gm_QueryEntitySum(*(int*) (o + 0x5d), (char) g_773d75);
+	t = gm_QueryEntitySum(*(int*) (o + 0x5d), (char) gm_ActiveTownIndex);
 	total = *(int*) (e + 0x1b8);
 	if ((double) t < 1.5 * (double) total && total - sum > 0) {
 		o = *(char**) (e + 0x16c);
 		cm_RequestMoveCredits(
 			*(int*) (o + 1),
-			*(int*) (g_7f4ca4 + *(unsigned short*) (o + 0x27) * 0x21c),
-			(char) g_773d75, (int) ((total - sum) * 0.8));
+			*(int*) (gm_EntityIdField + *(unsigned short*) (o + 0x27) * 0x21c),
+			(char) gm_ActiveTownIndex, (int) ((total - sum) * 0.8));
 	} else {
 		o = *(char**) (e + 0x16c);
-		if (g_7f4ca2[*(unsigned short*) (o + 0x27)].kind != 6 &&
-		    g_7f4ca2[*(unsigned short*) (o + 0x27)].kind != 7 &&
+		if (gm_SlotTableKindView[*(unsigned short*) (o + 0x27)].kind != 6 &&
+		    gm_SlotTableKindView[*(unsigned short*) (o + 0x27)].kind != 7 &&
 		    t > total * 2) {
 			cm_RequestMoveCredits(
-				*(int*) (g_7f4ca4 +
+				*(int*) (gm_EntityIdField +
 				         *(unsigned short*) (o + 0x27) * 0x21c),
-				*(int*) (o + 1), (char) g_773d75,
+				*(int*) (o + 1), (char) gm_ActiveTownIndex,
 				(int) (t - total * 2.25));
 		}
 	}

@@ -3,7 +3,7 @@
 
 #include "Develop/Units/d3/d3_animation.h"
 
-extern char g_67553c[]; /* morph_%i */
+extern char ch_MorphAnimFmt[]; /* morph_%i */
 extern char g_675584[]; /* character/%s/%s.baf */
 extern char g_675548[]; /* could not attach CurrentAnimStream */
 extern char g_675598[]; /* huston we got a problem */
@@ -58,7 +58,7 @@ void __cdecl ch_CheckAniMorph(char* obj)
 	}
 	if (*(char**) (obj + 0x7c) != 0) {
 		if ((*(char**) (obj + 0x7c))[0x6d] & 0x20) {
-			sprintf(buf, g_67553c, obj);
+			sprintf(buf, ch_MorphAnimFmt, obj);
 			d3_RemoveObjectAnimation(*(char**) (entity + 0x1ec) + 0xf4, buf);
 			d3_ReleaseAnim(d3_FindAnimByName(buf), 1);
 			*(char**) (obj + 0x7c) = 0;
@@ -74,7 +74,7 @@ void __cdecl ch_CheckAniMorph(char* obj)
 			/* morph the running animation into the pending stream */
 			frame = *(int*) (anim + 0x150);
 			step = frame != -1 ? frame : 0;
-			sprintf(buf, g_67553c, obj);
+			sprintf(buf, ch_MorphAnimFmt, obj);
 			src = *(char**) (obj + 0x70);
 			anim = *(char**) (obj + 0x80);
 			frames = *(char**) (src + 0x68);

@@ -1,7 +1,8 @@
 #include <string.h>
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern int d2_CurrentWindowId, g_100f1dc, g_14ce8e0, g_774654, d2_CurrentElementId; extern char* g_1015ea0; extern unsigned short g_774970; extern unsigned char g_773d75;
+extern int d2_CurrentWindowId, d2_DialogButtonAction, io_RightButtonReleased, d2_DialogCloseRequested,
+	d2_CurrentElementId; extern char* d2_Controls; extern unsigned short gm_LocalPlayerSlot; extern unsigned char gm_ActiveTownIndex;
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 typedef struct { int mask; int b; } FAVOR_MASK_FILTER;
@@ -75,7 +76,7 @@ void __cdecl d2_RunBeweiseFaelschenDialog(int building)
 	int id;
 	FAVOR_MASK_FILTER f;
 
-	total = gm_WalkEntityChain(g_774970);
+	total = gm_WalkEntityChain(gm_LocalPlayerSlot);
 	memset(&q, 0, sizeof(q));
 	memset(q.f1c, -1, sizeof(q.f1c));
 	q.f0 = 1;
@@ -99,8 +100,8 @@ void __cdecl d2_RunBeweiseFaelschenDialog(int building)
 	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetForm(dlg, 2);
 	elem = d2_EqualizeWindowButtonWidths(0, 3, *(int*) 0x14b5360, d2_CurrentWindowId);
-	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[elem].value_06c)) = 1;
-	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[elem].width)) =
+	*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[elem].value_06c)) = 1;
+	*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[elem].width)) =
 	    *(int*) (d2_CurrentWindowId * 0x3cc + 0x1015f4c);
 	d2_SetElementFont(elem, 0x54);
 	elem = d2_AddWindowValueGauge(0x57, 0x14, 0xc8, 0, 0x64, 0x7b, 2, d2_CurrentWindowId);
@@ -111,46 +112,46 @@ void __cdecl d2_RunBeweiseFaelschenDialog(int building)
 	btn = io_AppendText(0x4014);
 	no = d2_GetWindowListItem(dlg, 3, btn);
 	yes = d2_GetWindowListItem(dlg, 3, btn + 1);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
 		sel = d2_GetControlValue(elem);
 		d2_SetForm(dlg, 1);
 		io_AppendText(0x6811b0);
 		io_AppendText(0x400e, 0x400c, *(unsigned short*) selectedEntity);
 		io_AppendText(0x400f, amt[sel], ids[sel]);
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
-		} else if (g_100f1dc != -1) {
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
+		} else if (d2_DialogButtonAction != -1) {
 			pick = d2_CurrentElementId;
 			if (pick == no) {
 				char* p;
 
 				if (gm_CheckEntityStock(
 				        (char*) (0x7f4ca0 +
-				                 (unsigned int) g_774970 *
+				                 (unsigned int) gm_LocalPlayerSlot *
 				                     0x21c),
-				        ids[sel], g_773d75) != 0 &&
+				        ids[sel], gm_ActiveTownIndex) != 0 &&
 				    d2_CheckActionBlocker(
 				        (char*) (0x7f4ca0 +
-				                 (unsigned int) g_774970 *
+				                 (unsigned int) gm_LocalPlayerSlot *
 				                     0x21c),
 				        amt[sel]) == 1 &&
 				    he_HasNoActiveAssassinAction((void*) building) != 0) {
 					p = gm_GetEntityTableEntry(
 					    (char*) (0x7f4ca0 +
-					             (unsigned int) g_774970 *
+					             (unsigned int) gm_LocalPlayerSlot *
 					                 0x21c));
 					if (p != 0)
 						*(int*) (p + 0x28) += ids[sel];
 					cm_RequestTransferCurrencyNoKill(
 					    -1,
 					    *(int*) (0x7f4ca4 +
-					             (unsigned int) g_774970 *
+					             (unsigned int) gm_LocalPlayerSlot *
 					                 0x21c),
-					    g_773d75, ids[sel]);
+					    gm_ActiveTownIndex, ids[sel]);
 					gm_ModifyHealth(
 					    *(int*) (0x7f4ca4 +
-					             (unsigned int) g_774970 *
+					             (unsigned int) gm_LocalPlayerSlot *
 					                 0x21c),
 					    -amt[sel]);
 					memset(&req, 0, sizeof(req));
@@ -178,7 +179,7 @@ void __cdecl d2_RunBeweiseFaelschenDialog(int building)
 						f.b = 0;
 						ai_FindEntityInFavorRange(
 						    (unsigned short*) (0x7f4ca0 +
-						                       (unsigned int) g_774970 *
+						                       (unsigned int) gm_LocalPlayerSlot *
 						                           0x21c),
 						    0, f, 0, 100.0f, &n);
 						req.f58 = n;
@@ -192,10 +193,10 @@ void __cdecl d2_RunBeweiseFaelschenDialog(int building)
 						} while (1);
 					}
 					d3snd_PlaySoundEffect(-7, 0, (char*) 0x6a9508, 0);
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				}
 			} else if (pick == yes) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	} while (main_RunFrameLoop((void*) 0x589d00, 0x677c7) != 0);

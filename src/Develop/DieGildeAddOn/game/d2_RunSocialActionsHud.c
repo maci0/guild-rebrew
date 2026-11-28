@@ -1,7 +1,7 @@
 
 
 
-extern int g_7746a0;
+extern int sv_ClickedObjekt;
 extern int g_14ab0b8;
 extern int g_14aadd8;
 extern int g_14ab098;
@@ -28,14 +28,14 @@ void __cdecl d2_RunSocialActionsHud(int entity, int mode)
 		x = RegisterStatusText(g_6aa78c, g_14ab0b8, 0x16);
 		y = RegisterStatusText(g_6aa77c, g_14aadd8, 0xc);
 		z = RegisterStatusText(g_6aa764, g_14ab098, 0xc);
-		if (g_7746a0 != 0) {
-			if (g_7746a0 == x) {
+		if (sv_ClickedObjekt != 0) {
+			if (sv_ClickedObjekt == x) {
 				d2_ShowFestInvitation(entity, mode);
 			}
-			else if (g_7746a0 == y) {
+			else if (sv_ClickedObjekt == y) {
 				d2_RunTalenteDialog(entity, mode, 3);
 			}
-			else if (g_7746a0 == z) {
+			else if (sv_ClickedObjekt == z) {
 				d2_ShowAnschwaerzenDialog(entity);
 				d3_EndCameraAndUiMode();
 			}

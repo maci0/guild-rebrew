@@ -10,7 +10,7 @@ typedef struct Req {
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern unsigned char* lpGebaeudePROT;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern char g_6a6248[];
 
 typedef struct Ent {
@@ -21,7 +21,7 @@ typedef struct Ent {
 } Ent;
 // SIZE 0x21c
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int count, ...);
 int __cdecl gm_CheckEntityType(unsigned char* e);
@@ -49,7 +49,7 @@ void __cdecl he_RunSellGebaeudeObjekt(char* o)
 	case 0:
 		e = gm_StartFilteredEntitySearch(1, 1, *(int*) (o + 0xac));
 		if (e != 0) {
-			cm_SendSellObjekt(*(int*) (e + 1), -1, *(unsigned short*) (o + 0xb0), 1, (*(char*)&g_773d75), 0);
+			cm_SendSellObjekt(*(int*) (e + 1), -1, *(unsigned short*) (o + 0xb0), 1, (*(char*)&gm_ActiveTownIndex), 0);
 			cm_RequestChangeBits(*(int*) (e + 1), 0x5a, 2, 0, 0x80);
 		}
 		(*(int*) (o + 0x70))++;
@@ -67,7 +67,8 @@ void __cdecl he_RunSellGebaeudeObjekt(char* o)
 						kind = 0x60b;
 					}
 				}
-				he_MessageBoxQuickjump(((Ent*)g_7f4ca0)[*(unsigned short*) (o + 8)].handle, ((Ent*)g_7f4ca0)[*(unsigned short*) (o + 8)].handle, buf, 0, kind, *(int*) (e + 1), *(int*) (p + 2), 0, g_6a6248);
+				he_MessageBoxQuickjump(((Ent*)gm_EntitySlotTable)[*(unsigned short*) (o + 8)].handle, ((Ent*)gm_EntitySlotTable)[*(unsigned short*) (o + 8)].handle, buf, 0, kind, *(int*) (e + 1),
+					*(int*) (p + 2), 0, g_6a6248);
 			}
 			if (gm_CheckEntityType(e)) {
 				Req m;

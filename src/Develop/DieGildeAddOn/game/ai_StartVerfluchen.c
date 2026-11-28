@@ -7,7 +7,7 @@ typedef struct Kind {
 extern unsigned char* lpGebaeudePROT;
 extern unsigned char* lpGebaeudeINST;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 int __cdecl gm_CheckStatLevel(int, int);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
@@ -64,8 +64,8 @@ int __cdecl ai_StartVerfluchen(int action, unsigned short* entity, int a3, char*
 	lim = 0xf00500;
 	if (ai_SelectRankedCandidates(entity, 1, &lim, 0.0f, gm_RandomMod(0x20) + 25.0f, &id) == 0)
 		return 0;
-	p = ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id]);
-	money = (int) (gm_SumQueryEntryValues(*(int*) ((char*) entity + 0x178), (*(char*)&g_773d75)) * 0.25f);
+	p = ((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id]);
+	money = (int) (gm_SumQueryEntryValues(*(int*) ((char*) entity + 0x178), (*(char*)&gm_ActiveTownIndex)) * 0.25f);
 	gm_WalkEntityChain(*entity);
 	for (n = best_v - 1; n > 0; n--) {
 		if (money > (n > 1 ? n : 1) * 32000)

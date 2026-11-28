@@ -8,9 +8,9 @@ int __cdecl gm_FindPlayerById(int id)
 	int a;
 
 	i = 0;
-	for (a = (int) g_9b0e20 + 0x10; a < (int) g_9b0e20 + 0x35d0; a += 0x35c, i++) {
+	for (a = (int) cut_ParticipantSlots + 0x10; a < (int) cut_ParticipantSlots + 0x35d0; a += 0x35c, i++) {
 		if (*(int*) a == id) {
-			return (int) ((int) g_9b0e20 + i * 860);
+			return (int) ((int) cut_ParticipantSlots + i * 860);
 		}
 	}
 	return 0;

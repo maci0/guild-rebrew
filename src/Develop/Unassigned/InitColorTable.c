@@ -1,12 +1,12 @@
-extern int g_10405e0[];
+extern int d3_SceneLightingColors[];
 
 /* ADDRESS: GOLDTL 0x00459b80 */
 void __cdecl InitColorTable(void)
 {
-	g_10405e0[0] = 0xff000040;
-	g_10405e0[1] = 0xffe08080;
-	g_10405e0[2] = 0xffe0e0e0;
-	g_10405e0[3] = 0xffffffff;
-	g_10405e0[4] = 0xffe0e0e0;
-	g_10405e0[5] = 0xffe08080;
+	d3_SceneLightingColors[0] = 0xff000040;
+	d3_SceneLightingColors[1] = 0xffe08080;
+	d3_SceneLightingColors[2] = 0xffe0e0e0;
+	d3_SceneLightingColors[3] = 0xffffffff;
+	d3_SceneLightingColors[4] = 0xffe0e0e0;
+	d3_SceneLightingColors[5] = 0xffe08080;
 }

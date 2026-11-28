@@ -21,10 +21,10 @@ struct s_1015f4c {
 
 #include "Develop/client_types.h"
 
-extern s_1015f4c g_1015f4c[];
+extern s_1015f4c d2_WindowMetricsView[];
 extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
@@ -106,17 +106,17 @@ int __cdecl d2_RunBeweiseSichtenAltDialog(char* e, char* request)
 			rows[i].x = 0x32;
 			rows[i].y = i * 0x69 + 10;
 			d2_DrawPersonCard(0x32, i * 0x69 + 10, d2_CurrentWindowId, 0x56, &rows[i], 1);
-			d2_CreateRightAlignedText(text, ((struct s_1015f4c*) g_1015f4c)[d2_CurrentWindowId].x - 0xf, i * 0x69 + 10 + 0x2d, 0xc8, 0x55);
+			d2_CreateRightAlignedText(text, ((struct s_1015f4c*) d2_WindowMetricsView)[d2_CurrentWindowId].x - 0xf, i * 0x69 + 10 + 0x2d, 0xc8, 0x55);
 		}
 	} else {
-		io_AppendText(0x1741, g_774970);
+		io_AppendText(0x1741, gm_LocalPlayerSlot);
 	}
 	d2_SetOverlayAnimation(0, 0);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
-		} else if (g_100f1dc != -1) {
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
+		} else if (d2_DialogButtonAction != -1) {
 			sel = -1;
 			for (i = 0; i < count; i++) {
 				if (d2_CurrentElementId == rows[i].id) {

@@ -60,18 +60,18 @@ void __cdecl d2_RunKreditGeberDialog(char* building)
 	d2_DrawPanelFrame(d2_CurrentWindowId, 0x73b, 0x73f);
 	d2_CreateWindowScrollbar(0x206, 0x167, d2_CurrentWindowId, d2_GetFormWindow(h, 2),
 	    0x78, &v3, &v2, &v1);
-	*(int*) &((D2_WIN*) g_1015f40)[d2_CurrentWindowId].pad3a8[0x0] = 0xe;
-	*(int*) &((D2_WIN*) g_1015f40)[d2_CurrentWindowId].pad3a8[0x4] = 0x18;
-	*(int*) &((D2_WIN*) g_1015f40)[d2_CurrentWindowId].pad3a8[0x8] = 0xe;
-	*(int*) &((D2_WIN*) g_1015f40)[d2_CurrentWindowId].pad3a8[0xc] = 0xe;
+	*(int*) &((D2_WIN*) d2_Windows)[d2_CurrentWindowId].pad3a8[0x0] = 0xe;
+	*(int*) &((D2_WIN*) d2_Windows)[d2_CurrentWindowId].pad3a8[0x4] = 0x18;
+	*(int*) &((D2_WIN*) d2_Windows)[d2_CurrentWindowId].pad3a8[0x8] = 0xe;
+	*(int*) &((D2_WIN*) d2_Windows)[d2_CurrentWindowId].pad3a8[0xc] = 0xe;
 	d2_SetForm(h, 1);
 	io_AppendText(0x18d9);
 	d2_SetForm(h, 3);
 	d2_CreateButtonRow(d2_CurrentWindowId, 0, tmp, 1, g_14ab694);
 	close_btn = tmp[0];
 	while (main_RunFrameLoop((void*) d2_RunKreditGeberDialog, 0x677c7) != 0) {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 		if (first) {
 			d2_SetForm(h, 2);
@@ -84,7 +84,7 @@ void __cdecl d2_RunKreditGeberDialog(char* building)
 					items[i][2] = 0;
 				}
 			}
-			io_AppendText((int) g_6811b0);
+			io_AppendText((int) str_dollar_C);
 			n = he_GetActiveKrediteByLender(*(unsigned short*) (building + 0x27), building, 0xffff, out);
 			for (i = 0; i < 16; i++) {
 				ids[i] = -1;
@@ -92,7 +92,7 @@ void __cdecl d2_RunKreditGeberDialog(char* building)
 			count = 0;
 			for (j = 0; j < n; j++) {
 				for (i = 0; i < count + 1; i++) {
-					if (((ENTITY_RECORD*) g_7f4ca0)[ids[i]].entity_id == *(int*) (out[j] + 0xb0)) {
+					if (((ENTITY_RECORD*) gm_EntitySlotTable)[ids[i]].entity_id == *(int*) (out[j] + 0xb0)) {
 						break;
 					}
 					if (ids[i] == -1) {
@@ -107,7 +107,7 @@ void __cdecl d2_RunKreditGeberDialog(char* building)
 			}
 			d2_SetForm(h, 2);
 			io_AppendText(0x18de,
-			    *(unsigned short*) (g_8680b4 + g_773d75 * 0x2f4) * 2 + 0x9a8);
+			    *(unsigned short*) (g_8680b4 + gm_ActiveTownIndex * 0x2f4) * 2 + 0x9a8);
 			if (count == 0) {
 				io_AppendText(0x48d);
 			}
@@ -124,7 +124,7 @@ void __cdecl d2_RunKreditGeberDialog(char* building)
 			}
 			first = 0;
 		}
-		if (g_100f1dc == 2) {
+		if (d2_DialogButtonAction == 2) {
 			if (d2_CurrentElementId == close_btn) {
 				d2_RunKreditFreigabeDialog(building);
 			}

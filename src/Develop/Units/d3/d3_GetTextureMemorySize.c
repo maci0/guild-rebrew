@@ -10,7 +10,7 @@ typedef struct Bits8 {
 } Bits8;
 // SIZE 0x1
 
-extern char* g_104049c;
+extern char* d3_TextureBank;
 
 /* ADDRESS: GOLDTL 0x00459d00 */
 int __cdecl d3_GetTextureMemorySize(char* a)
@@ -22,7 +22,7 @@ int __cdecl d3_GetTextureMemorySize(char* a)
 		r = 0x70;
 		if (((Bits8*) (a + 0x54))->b1) {
 			((Bits8*) (a + 0x54))->b6 = 1;
-			a = g_104049c + *(int*) (a + 0x44) * 0x70;
+			a = d3_TextureBank + *(int*) (a + 0x44) * 0x70;
 		}
 		if (!((Bits8*) (a + 0x54))->b6) {
 			((Bits8*) (a + 0x54))->b6 = 1;

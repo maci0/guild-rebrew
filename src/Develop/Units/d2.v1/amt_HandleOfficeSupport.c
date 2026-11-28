@@ -13,10 +13,10 @@ typedef struct
 } Query;
 // SIZE 0x50
 
-extern __int64 g_666018;
+extern __int64 gm_TargetPersonTypeMask;
 extern int g_14ac6a0;
 extern int g_14acb40;
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
@@ -66,7 +66,7 @@ int __cdecl amt_HandleOfficeSupport(char* e, char* o)
 	}
 	q.x10 = 6;
 	q.x4 = 0xc00;
-	q.mask = g_666018;
+	q.mask = gm_TargetPersonTypeMask;
 	h = d2_OpenTargetPicker(&q, g_14acb40, 0, 0);
 	if (h == 0) {
 		return 2;
@@ -78,19 +78,19 @@ int __cdecl amt_HandleOfficeSupport(char* e, char* o)
 	id = io_AppendText(0x1e09, *h);
 	ok = d2_GetWindowListItem(dlg, 1, id);
 	cancel = d2_GetWindowListItem(dlg, 1, id + 1);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == ok) {
 				amt_ApplyOfficeSupportEffect(e, (char*) h);
 				r = 0x91;
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			} else if (d2_CurrentElementId == cancel) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop((void*) amt_HandleOfficeSupport, 0x657c7) != 0);
 	d2_DestroyForm(dlg);

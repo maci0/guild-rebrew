@@ -31,7 +31,7 @@ int __cdecl cm_ExProdObjekt(int msg, char* result)
 	char* recipe_shift;
 	uint recipe_idx;
 
-	if (g_14cbca0 != -1)
+	if (nt_ClientSocket != -1)
 		gm_NextEntityId = *(int*) (msg + 0x1a);
 	quantity = gm_GetFieldByType((char*)msg, *(int*)(msg + 0x10));
 	*(int*)(msg + 0x10) = quantity;

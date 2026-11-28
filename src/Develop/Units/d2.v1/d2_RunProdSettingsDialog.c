@@ -2,12 +2,12 @@
 
 extern int g_775348;
 extern int d2_CurrentWindowId;
-extern char g_773d75;
-extern int g_100f1dc;
+extern char gm_ActiveTownIndex;
+extern int d2_DialogButtonAction;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
-extern int g_aed32c;
+extern int cm_PacketDeltaBase;
 
 extern int g_14a90a0;
 extern int g_14b5874;
@@ -91,7 +91,7 @@ void __cdecl d2_RunProdSettingsDialog(int building, unsigned short* actor)
 	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_CenterDialogWindows(v28);
 	d2_SetOverlayAnimation(0, 0);
-	v15 = gm_AmountToUnits(*(unsigned int*) ((char*) building + 0x39), g_773d75);
+	v15 = gm_AmountToUnits(*(unsigned int*) ((char*) building + 0x39), gm_ActiveTownIndex);
 	cfgp = (Ce800Config*) &actor[0xda];
 	cfg = *cfgp;
 	if (!g_775348) {
@@ -106,17 +106,17 @@ void __cdecl d2_RunProdSettingsDialog(int building, unsigned short* actor)
 		v29 = v18[0];
 		v30 = v18[1];
 	}
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	for (;;) {
-		if (g_14ce8e0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased) {
+			d2_DialogCloseRequested = 1;
 		} else if (g_14ce8d0) {
 			if (g_775348 == 1) {
 				v23 = 0;
 				do {
 					if (d2_CurrentElementId == v12[v23]) {
 						if (v23 < 7 && v12[v23] != -1) {
-							g_100f1dc = -1;
+							d2_DialogButtonAction = -1;
 							v5 = d2_GetControlValue(v12[v23]);
 							gm_AdjustProductionShare(building,
 								*(unsigned int*) ((char*) v27 + v23 * 8),
@@ -149,7 +149,7 @@ void __cdecl d2_RunProdSettingsDialog(int building, unsigned short* actor)
 				if (d2_CurrentElementId == v23) {
 					v2 = *v21;
 					*v21 = (v2 == 0);
-					*(unsigned int*) &((D2_CONTROL_TL*) g_1015ea0)[v23].value_038
+					*(unsigned int*) &((D2_CONTROL_TL*) d2_Controls)[v23].value_038
 						= (*v21 == 0);
 					d2_SetElementEnabled(*(unsigned int*) ((char*) v12 + v8),
 						*v21 == 0);
@@ -159,7 +159,7 @@ void __cdecl d2_RunProdSettingsDialog(int building, unsigned short* actor)
 			} while (v8 < 0x1c);
 		}
 		v23 = d2_CurrentElementId;
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			if (g_775348 == 1) {
 				if (v23 == v29) {
 					d2_InitProdSettingControls(v28, &v16, &v15, v14,
@@ -239,12 +239,12 @@ void __cdecl d2_RunProdSettingsDialog(int building, unsigned short* actor)
 							}
 							cm_BeginPacketFieldDelta(actor, *(unsigned int*) ((char*) actor + 4));
 							cm_AppendPacketFieldDelta(4, 1,
-								(int) ((char*) actor + 0x1b4 - g_aed32c),
+								(int) ((char*) actor + 0x1b4 - cm_PacketDeltaBase),
 								&cfg.flags);
 							cm_RequestChangeAttribute();
 							cm_BeginPacketFieldDelta(building, *(unsigned int*) ((char*) building + 1));
 							cm_AppendPacketFieldDelta(4, 1,
-								(int) ((char*) building + 0x99 - g_aed32c),
+								(int) ((char*) building + 0x99 - cm_PacketDeltaBase),
 								&cfg.flags);
 							cm_RequestChangeAttribute();
 							d2_InitProdSettingControls(v28, &v16, &v15, v14,
@@ -261,15 +261,15 @@ void __cdecl d2_RunProdSettingsDialog(int building, unsigned short* actor)
 			if (!g_775348) {
 				v15 = d2_GetControlValue(v16);
 			}
-			v15 = gm_ConvertUnitsToAmount(v15, g_773d75);
+			v15 = gm_ConvertUnitsToAmount(v15, gm_ActiveTownIndex);
 			cm_BeginPacketFieldDelta(building, *(unsigned int*) ((char*) building + 1));
 			cm_AppendPacketFieldDelta(4, 1,
-				(int) ((char*) building + 0x39 - g_aed32c), &v15);
+				(int) ((char*) building + 0x39 - cm_PacketDeltaBase), &v15);
 			cm_RequestChangeAttribute();
 			v18[0] = v15 - *(int*) ((char*) building + 0x39);
 			cm_BeginPacketFieldDelta(actor, *(unsigned int*) ((char*) actor + 4));
 			cm_AppendPacketFieldValue(4, 1,
-				(int) ((char*) actor + 0x1b8 - g_aed32c), &v18[0]);
+				(int) ((char*) actor + 0x1b8 - cm_PacketDeltaBase), &v18[0]);
 			cm_RequestChangeAttribute();
 			d2_DestroyForm(v28);
 			return;

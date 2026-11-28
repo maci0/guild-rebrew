@@ -13,7 +13,7 @@ typedef struct OfficeRecord {
 /* SIZE 0x18 */
 int __cdecl ai_FindEntityInFavorRange(void *, int, F8, float, float, int *); int __cdecl gm_ResolveEntityById(void *, int, int, int);
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-extern char g_868060[];
+extern char gm_TownTable[];
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl gm_WalkEntityChain(unsigned short);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
@@ -56,13 +56,13 @@ void __cdecl gm_ApplyMiracleEffect(unsigned char *e, int mode)
 		if (ai_FindEntityInFavorRange(e, 2, f, 0.0f, 100.0f, &found) == 0)
 			return;
 		gm_ResolveEntityById(&ent, 0, 0, found);
-		best = &((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short *) (ent + 0x27)];
+		best = &((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short *) (ent + 0x27)];
 		v = gm_WalkEntityChain(best->entity_index);
 		r = gm_RandomMod(3) + 2;
 		score = (int) ((double) r * ((double) v * 0.01));
-		cm_RequestTransferCurrencyNoKill(best->entity_id, -1, g_773d75, score);
+		cm_RequestTransferCurrencyNoKill(best->entity_id, -1, gm_ActiveTownIndex, score);
 		io_FormatTextBuffer(t1, 0x1df8, best->entity_index, ent, best->entity_index, score,
-					 &g_868060[g_773d75 * 0x2f4 + 0x20]);
+					 &gm_TownTable[gm_ActiveTownIndex * 0x2f4 + 0x20]);
 	} else if (mode == 1) {
 		int a;
 
@@ -73,7 +73,7 @@ void __cdecl gm_ApplyMiracleEffect(unsigned char *e, int mode)
 		fcn_0064d41a(t4, "%s%s", msg, t1, t2);
 		strcat(msg, t1);
 		for (i = 0; i < 768; i++) {
-			best = &((ENTITY_RECORD*)g_7f4ca0)[i];
+			best = &((ENTITY_RECORD*)gm_EntitySlotTable)[i];
 			if (best->entity_index != 0xffff) {
 				if (best->unk_024 < -0x14) {
 					if (gm_RandomMod(2) != 0) {
@@ -101,7 +101,7 @@ void __cdecl gm_ApplyMiracleEffect(unsigned char *e, int mode)
 		if (ai_FindEntityInFavorRange(e, 2, f, 0.0f, 100.0f, &found) == 0)
 			return;
 		gm_ResolveEntityById(&ent, 0, 0, found);
-		best = &((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short *) (ent + 0x27)];
+		best = &((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short *) (ent + 0x27)];
 		delta = (char) (ent[0x5c] - gm_RandomMod(0x10) - 10);
 		if (delta <= 0)
 			return;
@@ -118,7 +118,7 @@ void __cdecl gm_ApplyMiracleEffect(unsigned char *e, int mode)
 		a = 0x400800;
 		if (gm_FindEntityCandidatesInRange(e, 1, &a, 0.0f, 100.0f, &b) == 0)
 			return;
-		best = &((ENTITY_RECORD*)g_7f4ca0)[b];
+		best = &((ENTITY_RECORD*)gm_EntitySlotTable)[b];
 		if (srv_GetEntityOfficeSlot(best, &role, &slot) == 0)
 			return;
 		amt_SendOfficeCommand((void *) slot.v[0], 0, 0, 4, 0xff);
@@ -133,7 +133,7 @@ void __cdecl gm_ApplyMiracleEffect(unsigned char *e, int mode)
 		delta = gm_RandomMod(0x15);
 		if (gm_FindEntityCandidatesInRange(e, 1, &a, 0.0f, 100.0f, &b) == 0)
 			return;
-		best = &((ENTITY_RECORD*)g_7f4ca0)[b];
+		best = &((ENTITY_RECORD*)gm_EntitySlotTable)[b];
 		picked = -1;
 		n = gm_RandomMod(5);
 		for (i = 5; i != 0; i--) {
@@ -159,9 +159,9 @@ void __cdecl gm_ApplyMiracleEffect(unsigned char *e, int mode)
 
 		n = 0;
 		for (i = 0; i < 768 && n < 8; i++) {
-			if (((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 6 || ((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 7
-				|| ((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 5) {
-				slots[n] = &((ENTITY_RECORD*)g_7f4ca0)[i];
+			if (((ENTITY_RECORD*)gm_EntitySlotTable)[i].entity_state == 6 || ((ENTITY_RECORD*)gm_EntitySlotTable)[i].entity_state == 7
+				|| ((ENTITY_RECORD*)gm_EntitySlotTable)[i].entity_state == 5) {
+				slots[n] = &((ENTITY_RECORD*)gm_EntitySlotTable)[i];
 				n++;
 			}
 		}
@@ -181,14 +181,14 @@ void __cdecl gm_ApplyMiracleEffect(unsigned char *e, int mode)
 		v = gm_RandomMod(5) + 3;
 		score = (int) ((float) v * bv * 0.01f);
 		gm_ResolveEntityById(&ent, 0, 0, id);
-		cm_RequestTransferCurrencyNoKill(best->entity_id, -1, g_773d75, score);
+		cm_RequestTransferCurrencyNoKill(best->entity_id, -1, gm_ActiveTownIndex, score);
 		io_FormatTextBuffer(t1, 0x1dff, best->entity_index, ent, best->entity_index, score);
 	} else {
 		return;
 	}
 	strcat(msg, t1);
 	for (i = 0; i < 768; i++) {
-		if (((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 6 || ((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 7)
-			he_PostEntityMessage(((ENTITY_RECORD*)g_7f4ca0)[i].entity_id, -1, msg, 1, 0x5fe, 0);
+		if (((ENTITY_RECORD*)gm_EntitySlotTable)[i].entity_state == 6 || ((ENTITY_RECORD*)gm_EntitySlotTable)[i].entity_state == 7)
+			he_PostEntityMessage(((ENTITY_RECORD*)gm_EntitySlotTable)[i].entity_id, -1, msg, 1, 0x5fe, 0);
 	}
 }

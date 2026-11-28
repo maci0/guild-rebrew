@@ -1,4 +1,4 @@
-extern short g_7725c4;
+extern short d2_CursorStateId;
 extern int g_772570;
 extern int g_772574;
 
@@ -11,16 +11,16 @@ void __cdecl d2_UpdateMouseCursorOffset(void)
 
 	a = 0;
 	b = 0;
-	if (g_7725c4 == 1) {
+	if (d2_CursorStateId == 1) {
 		b = -0x30;
-	} else if (g_7725c4 == 3) {
+	} else if (d2_CursorStateId == 3) {
 		a = -0x28;
-	} else if (g_7725c4 == 6) {
+	} else if (d2_CursorStateId == 6) {
 		a = -0x28;
-	} else if (g_7725c4 == 8) {
+	} else if (d2_CursorStateId == 8) {
 		a = -0x28;
 		b = -0x30;
-	} else if (g_7725c4 == 7) {
+	} else if (d2_CursorStateId == 7) {
 		b = -0x30;
 	}
 	g_772570 = a;

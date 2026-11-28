@@ -56,7 +56,7 @@ int __cdecl ReportClientMessage(char*);
 char* __cdecl vfs_ReadCString(char*, char*);
 int __cdecl vfs_ReadByte(char*, char*);
 int __cdecl fcn_004011f0(char*, int*);
-int __cdecl fcn_004011d0(char*, float*);
+int __cdecl vfs_ReadDword(char*, float*);
 int __cdecl ReadVfsFourDwords(char*, void*);
 int __cdecl vfs_ReadVec3(char*, void*);
 int __cdecl bio_rd_array_quick(char*, int, int*);
@@ -159,12 +159,12 @@ int __cdecl d3_int_io_LoadFloor(char* stream, unsigned int version)
 						desc.recs[saved].h0 = last;
 						desc.recs[saved].bits = bits;
 						if (version >= 0x3a6c00b6) {
-							fcn_004011d0(stream, &desc.recs[saved].f14);
+							vfs_ReadDword(stream, &desc.recs[saved].f14);
 						} else {
 							desc.recs[saved].f14 = 63.0f;
 						}
-						fcn_004011d0(stream, &desc.recs[saved].f0c);
-						fcn_004011d0(stream, &desc.recs[saved].f10);
+						vfs_ReadDword(stream, &desc.recs[saved].f0c);
+						vfs_ReadDword(stream, &desc.recs[saved].f10);
 						ReadVfsFourDwords(stream, desc.recs[saved].block);
 						if (version < 0x3a6c00ac) {
 							desc.recs[saved].block[0] *= 0.33333334f;
@@ -201,8 +201,8 @@ int __cdecl d3_int_io_LoadFloor(char* stream, unsigned int version)
 		for (saved = 0; saved < i; saved++) {
 			vfs_ReadCString(stream, desc.strings[saved]);
 		}
-		fcn_004011d0(stream, &desc.scale);
-		fcn_004011d0(stream, &desc.height);
+		vfs_ReadDword(stream, &desc.scale);
+		vfs_ReadDword(stream, &desc.height);
 		if (version <= 0x3a6c000f) {
 			for (i = 0; i < 0x100; i++) {
 				vfs_ReadCString(stream, skip);

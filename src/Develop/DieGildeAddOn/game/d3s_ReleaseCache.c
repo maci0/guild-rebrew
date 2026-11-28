@@ -5,10 +5,10 @@ typedef struct
 } D3S_CACHE_VTBL;
 // SIZE 0xc
 
-extern unsigned long g_14ce728;
+extern unsigned long d3_LastReleaseRefCount;
 extern unsigned int g_10405fc;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int* g_6b89e4;
+extern int* d3_InteriorSupermap;
 
 void __cdecl d3s_FreeCache(void);
 void __cdecl gv_Free3Fields(int* slot);
@@ -22,15 +22,15 @@ void __cdecl d3s_ReleaseCache(void)
 	for (a = 0x1040610; a <= 0x1040618; a += 4) {
 		o = *(void**) a;
 		if (o != 0) {
-			(*(int*)&g_14ce728) = (*(D3S_CACHE_VTBL**) o)->Release(o);
+			(*(int*)&d3_LastReleaseRefCount) = (*(D3S_CACHE_VTBL**) o)->Release(o);
 			*(void**) a = 0;
 		}
 	}
 	(*(int*)&g_10405fc) = 0;
 	(*(int*)&g_104061c) = 0;
 	d3s_FreeCache();
-	if (g_6b89e4 != 0) {
-		gv_Free3Fields(g_6b89e4);
-		g_6b89e4 = 0;
+	if (d3_InteriorSupermap != 0) {
+		gv_Free3Fields(d3_InteriorSupermap);
+		d3_InteriorSupermap = 0;
 	}
 }

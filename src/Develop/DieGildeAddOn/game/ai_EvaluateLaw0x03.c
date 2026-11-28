@@ -1,7 +1,7 @@
 
 
 #include "Develop/DieGildeAddOn/game/spiel.h"
-unsigned char __cdecl fcn_004f97a0(int a);
+unsigned char __cdecl gm_GetCitySkillAverage(int a);
 int __cdecl gm_GetLawEntry(int idx, void* dst);
 
 int __cdecl ai_EvaluateLaw0x03(char* entity, int unused, int* out)
@@ -16,7 +16,7 @@ int __cdecl ai_EvaluateLaw0x03(char* entity, int unused, int* out)
 
 	job = gm_MapEntityStatRange(*(unsigned char*) (entity + 0x164));
 	t = gm_GetEntitySkill(entity, 4);
-	m = (t - (fcn_004f97a0(4) + 1.0f) * 0.003968254f) * 0.023809524f;
+	m = (t - (gm_GetCitySkillAverage(4) + 1.0f) * 0.003968254f) * 0.023809524f;
 	y = (float)((*(float*) (entity + 0xf4) - 2.0) * *(float*) (entity + 0xfc));
 	w = (float)((*(float*) (entity + 0x100) - 2.0) * *(float*) (entity + 0x108));
 	z = (float)((*(float*) (entity + 0x10c) - 2.0) * *(float*) (entity + 0x114));

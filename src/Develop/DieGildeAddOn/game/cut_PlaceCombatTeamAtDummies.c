@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern float g_662d40[3];
+extern float d3_UnitAxisVectors[3];
 extern void *__cdecl sub_4cef30(int);
 extern void *__cdecl sub_4ce610(void *);
 extern int __cdecl sub_64d41a(char *, unsigned long, int, int);
@@ -21,7 +21,7 @@ void __cdecl cut_PlaceCombatTeamAtDummies(int *arr, int teamTag)
     int j, v, ok, col, row, x, y, special = 1, ordinary = 1;
     unsigned long *q;
 
-    floor = *(void **)(g_67a370 + 0xb0);
+    floor = *(void **)(d3_ActiveScene + 0xb0);
     for (j = 0; j < 0x10; j++) {
         v = arr[j];
         if (v == -1)
@@ -50,8 +50,8 @@ void __cdecl cut_PlaceCombatTeamAtDummies(int *arr, int teamTag)
         sub_407e30(floor, p, p, col, row, &x, &y, 2, 0);
         sub_45b920(floor, x, y, position);
         sub_402ab0(*(void **)((char *)actor + 0x184), position, 1);
-        rotation[0] = 0.0f; rotation[1] = 0.0f; rotation[2] = 0.0f; sub_455140(dummy, g_662d40, direction);
-        rotation[1] = sub_451380(g_662d40, direction);
+        rotation[0] = 0.0f; rotation[1] = 0.0f; rotation[2] = 0.0f; sub_455140(dummy, d3_UnitAxisVectors, direction);
+        rotation[1] = sub_451380(d3_UnitAxisVectors, direction);
         sub_438cb0(*(void **)((char *)*(void **)((char *)actor + 0x184) + 0x34), rotation);
     }
     return;

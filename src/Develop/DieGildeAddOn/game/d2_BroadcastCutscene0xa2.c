@@ -20,9 +20,9 @@
 extern char* gm_CityEntity;
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern unsigned short g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
+extern unsigned short gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
 
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 void* __cdecl gm_FindNextFilteredEntity(void);
@@ -55,8 +55,8 @@ void __cdecl d2_BroadcastCutscene0xa2(char* p)
 	msg[0x26] = (char) 0xa2;
 	*(int*) (msg + 0x14) = -1;
 	msg[0x30] = 2;
-	*(int*) (msg + 0xc) = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id;
-	*(int*) (msg + 0x34) = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].entity_id;
+	*(int*) (msg + 0xc) = ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id;
+	*(int*) (msg + 0x34) = ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (e + 0x27)].entity_id;
 	*(int*) (msg + 0x38) = *(int*) (par + 4);
 	msg[0x7c] = 9;
 	for (i = 0; i < 16; i++) {
@@ -84,15 +84,15 @@ void __cdecl d2_BroadcastCutscene0xa2(char* p)
 		if (n >= 4) {
 			break;
 		}
-		if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_index != 0xffff && (*(char**)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].ptr_16c) == e) {
-			((int*) (msg + 0xc0))[n] = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id;
+		if (((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_index != 0xffff && (*(char**)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].ptr_16c) == e) {
+			((int*) (msg + 0xc0))[n] = ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_id;
 			n++;
 		}
 	}
 	*(int*) (msg + 0x18) = (*(int*)&gm_GameTime);
-	*(int*) (msg + 0x1c) = (*(int*)&g_7f4c04);
-	*(int*) (msg + 0x20) = g_7f4c08;
-	*(short*) (msg + 0x24) = g_7f4c0c;
+	*(int*) (msg + 0x1c) = (*(int*)&gm_GameTimeHour);
+	*(int*) (msg + 0x20) = gm_GameTimeSliceDword;
+	*(short*) (msg + 0x24) = gm_GameTimeTailWord;
 	gm_AddTime(msg + 0x18, 0, 0xf, 0);
 	cm_EnqueueStagedPacket(msg);
 }

@@ -1,8 +1,8 @@
 extern int d2_CurrentWindowId;
-extern char* g_1015ea0;
-extern int g_100f1dc;
-extern int g_100f1e4;
-extern char g_1015f4c[];
+extern char* d2_Controls;
+extern int d2_DialogButtonAction;
+extern int tp_d2_HoveredControl;
+extern char d2_WindowMetricsView[];
 extern char g_7e23e0[];
 extern unsigned char g_7e23e1;
 extern unsigned char g_7e23e2;
@@ -54,29 +54,29 @@ unsigned int __cdecl d2_ShowChoosePlayerDialog(int a0)
 	d2_SetForm(win, 1);
 	io_AppendText(0x1acf, g_7e1d00);
 	d2_SetForm(win, 2);
-	n = (*(int*) (g_1015f4c + d2_CurrentWindowId * 0x3cc) - 0x20) / 0x30;
+	n = (*(int*) (d2_WindowMetricsView + d2_CurrentWindowId * 0x3cc) - 0x20) / 0x30;
 	for (i = 0; i < 8; i++) {
 		slot = d2_AddElementToWindow((i % n) * 0x30, (i / n) * 0x30, i + 0x59a, d2_CurrentWindowId);
 		items[i] = slot;
-		((D2_CONTROL_TL*) g_1015ea0)[slot].value_058 = 1;
-		((D2_CONTROL_TL*) g_1015ea0)[slot].value_038 = 0;
-		((D2_CONTROL_TL*) g_1015ea0)[slot].value_03c = 0;
-		((D2_CONTROL_TL*) g_1015ea0)[slot].value_060 = 1;
+		((D2_CONTROL_TL*) d2_Controls)[slot].value_058 = 1;
+		((D2_CONTROL_TL*) d2_Controls)[slot].value_038 = 0;
+		((D2_CONTROL_TL*) d2_Controls)[slot].value_03c = 0;
+		((D2_CONTROL_TL*) d2_Controls)[slot].value_060 = 1;
 	}
 	for (i = 0; i < 8; i++) {
 		if (g_7e23e4 == i + 0x59a) {
 			slot = items[i];
-			((D2_CONTROL_TL*) g_1015ea0)[slot].disabled = 1;
-			((D2_CONTROL_TL*) g_1015ea0)[slot].value_068 = 1;
-			((D2_CONTROL_TL*) g_1015ea0)[slot].value_060 = 0;
-			((D2_CONTROL_TL*) g_1015ea0)[slot].value_03c = 0;
+			((D2_CONTROL_TL*) d2_Controls)[slot].disabled = 1;
+			((D2_CONTROL_TL*) d2_Controls)[slot].value_068 = 1;
+			((D2_CONTROL_TL*) d2_Controls)[slot].value_060 = 0;
+			((D2_CONTROL_TL*) d2_Controls)[slot].value_03c = 0;
 		}
 	}
 	for (i = 0; i < 8; i++) {
-		if (((D2_CONTROL_TL*) g_1015ea0)[items[i]].disabled == 0) {
+		if (((D2_CONTROL_TL*) d2_Controls)[items[i]].disabled == 0) {
 			sel = items[i];
-			((D2_CONTROL_TL*) g_1015ea0)[sel].value_038 = 1;
-			((D2_CONTROL_TL*) g_1015ea0)[sel].value_03c = 1;
+			((D2_CONTROL_TL*) d2_Controls)[sel].value_038 = 1;
+			((D2_CONTROL_TL*) d2_Controls)[sel].value_03c = 1;
 			break;
 		}
 	}
@@ -86,16 +86,16 @@ unsigned int __cdecl d2_ShowChoosePlayerDialog(int a0)
 	r4 = d2_GetWindowListItem(win, 4, io_AppendText((int) "%2mt", 0x486, 0x486));
 	w3 = d2_GetWindowListItem(win, 0, 3);
 	w4 = d2_GetWindowListItem(win, 0, 5);
-	*(unsigned int*) (d2_BildArgument2 + ((D2_CONTROL_TL*) g_1015ea0)[w3].value_088 * 0x160) = 0xc;
-	*(unsigned int*) (d2_BildArgument2 + ((D2_CONTROL_TL*) g_1015ea0)[w4].value_088 * 0x160) = 0xc;
+	*(unsigned int*) (d2_BildArgument2 + ((D2_CONTROL_TL*) d2_Controls)[w3].value_088 * 0x160) = 0xc;
+	*(unsigned int*) (d2_BildArgument2 + ((D2_CONTROL_TL*) d2_Controls)[w4].value_088 * 0x160) = 0xc;
 	if (g_7e23ea[0]) {
 		d2_CreateGuiWindow(w3, g_7e23ea);
 		d2_CreateGuiWindow(w4, g_7e240a);
 		for (i = 0; i < 8; i++) {
-			if (((D2_CONTROL_TL*) g_1015ea0)[items[i]].value_008 == g_7e23e4) {
+			if (((D2_CONTROL_TL*) d2_Controls)[items[i]].value_008 == g_7e23e4) {
 				sel = items[i];
-				((D2_CONTROL_TL*) g_1015ea0)[sel].value_038 = 1;
-				((D2_CONTROL_TL*) g_1015ea0)[sel].value_03c = 1;
+				((D2_CONTROL_TL*) d2_Controls)[sel].value_038 = 1;
+				((D2_CONTROL_TL*) d2_Controls)[sel].value_03c = 1;
 				break;
 			}
 		}
@@ -103,14 +103,14 @@ unsigned int __cdecl d2_ShowChoosePlayerDialog(int a0)
 	d2_ResetSelectionAndInput();
 	id = main_RunFrameLoop((int) d2_ShowChoosePlayerDialog, a0);
 	while (id) {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc == 2) {
+		if (d2_DialogButtonAction == 2) {
 			g_7e23e0[0] = 0;
 			g_7e23e1 = 0;
 			g_7e23e2 = 0x12;
-			g_7e23e4 = ((D2_CONTROL_TL*) g_1015ea0)[sel].value_008;
+			g_7e23e4 = ((D2_CONTROL_TL*) d2_Controls)[sel].value_008;
 			g_7e23e8 = (char) (d2_GetControlValue(r3) + 'w');
 			g_7e23e9 = (char) (d2_GetControlValue(r4) + 'z');
 			src = (char*) d2_GetControlValue(w3);
@@ -129,24 +129,24 @@ unsigned int __cdecl d2_ShowChoosePlayerDialog(int a0)
 				*dst = ch;
 				dst++;
 			} while (ch);
-			g_774654 = 1;
+			d2_DialogCloseRequested = 1;
 			changed = 1;
-		} else if (g_100f1dc >= 0x59a && g_100f1dc < 0x5a2) {
+		} else if (d2_DialogButtonAction >= 0x59a && d2_DialogButtonAction < 0x5a2) {
 			for (i = 0; i < 8; i++) {
-				elementAddress = (int) &((D2_CONTROL_TL*) g_1015ea0)[items[i]];
+				elementAddress = (int) &((D2_CONTROL_TL*) d2_Controls)[items[i]];
 				found = 0;
-				if (elementAddress != g_100f1e4) {
-					((D2_CONTROL_TL*) g_1015ea0)[items[i]].value_038 = 0;
-					((D2_CONTROL_TL*) g_1015ea0)[items[i]].value_03c = 0;
-					((D2_CONTROL_TL*) g_1015ea0)[items[i]].value_060 = 1;
+				if (elementAddress != tp_d2_HoveredControl) {
+					((D2_CONTROL_TL*) d2_Controls)[items[i]].value_038 = 0;
+					((D2_CONTROL_TL*) d2_Controls)[items[i]].value_03c = 0;
+					((D2_CONTROL_TL*) d2_Controls)[items[i]].value_060 = 1;
 				} else {
 					sel = items[i];
 					found = 1;
 				}
 			}
 			if (!found) {
-				((D2_CONTROL_TL*) g_1015ea0)[sel].value_038 = 1;
-				((D2_CONTROL_TL*) g_1015ea0)[sel].value_03c = 1;
+				((D2_CONTROL_TL*) d2_Controls)[sel].value_038 = 1;
+				((D2_CONTROL_TL*) d2_Controls)[sel].value_03c = 1;
 			}
 		}
 		id = main_RunFrameLoop((int) d2_ShowChoosePlayerDialog, a0);

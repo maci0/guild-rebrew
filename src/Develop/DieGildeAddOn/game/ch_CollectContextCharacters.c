@@ -7,7 +7,7 @@ struct s_7f4ca0 {
 	char pad2[0x94];
 };
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 extern char* ch_ContextCharacters[32];
 
 
@@ -25,18 +25,18 @@ void __cdecl ch_CollectContextCharacters(char* b)
 	if (b != 0) {
 		out = ((struct s_7f4ca0**)ch_ContextCharacters);
 		for (i = 0; i < 768 && (int) out < (int) &((struct s_7f4ca0**)ch_ContextCharacters)[31]; i++) {
-			if (((struct s_7f4ca0*)g_7f4ca0)[i].d != 0 && *(int*) (((struct s_7f4ca0*)g_7f4ca0)[i].d + 0x2c) == *(int*) (b + 1)) {
-				*out++ = &((struct s_7f4ca0*)g_7f4ca0)[i];
+			if (((struct s_7f4ca0*)gm_EntitySlotTable)[i].d != 0 && *(int*) (((struct s_7f4ca0*)gm_EntitySlotTable)[i].d + 0x2c) == *(int*) (b + 1)) {
+				*out++ = &((struct s_7f4ca0*)gm_EntitySlotTable)[i];
 				if ((int) out > (int) &((struct s_7f4ca0**)ch_ContextCharacters)[8]) {
-					ch_SetVisible(((struct s_7f4ca0*)g_7f4ca0)[i].d, 0);
+					ch_SetVisible(((struct s_7f4ca0*)gm_EntitySlotTable)[i].d, 0);
 				}
 			}
 		}
 	} else {
 		out = ((struct s_7f4ca0**)ch_ContextCharacters);
 		for (i = 0; i < 768 && (int) out < (int) &((struct s_7f4ca0**)ch_ContextCharacters)[31]; i++) {
-			if (((struct s_7f4ca0*)g_7f4ca0)[i].d != 0 && *(int*) (((struct s_7f4ca0*)g_7f4ca0)[i].d + 0x2c) == -1) {
-				*out++ = &((struct s_7f4ca0*)g_7f4ca0)[i];
+			if (((struct s_7f4ca0*)gm_EntitySlotTable)[i].d != 0 && *(int*) (((struct s_7f4ca0*)gm_EntitySlotTable)[i].d + 0x2c) == -1) {
+				*out++ = &((struct s_7f4ca0*)gm_EntitySlotTable)[i];
 			}
 		}
 	}

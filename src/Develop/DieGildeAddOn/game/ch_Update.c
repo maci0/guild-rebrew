@@ -1,14 +1,14 @@
 
 
-int g_67a370 = 17052352;
+int d3_ActiveScene = 17052352;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern volatile int g_6b7fac;
-extern unsigned int g_67529c;
+extern volatile int gm_GameTicks;
+extern unsigned int ch_LastUpdateTime;
 extern int g_6b5c30;
 extern int g_67531c;
 extern char* g_6b5c54;
 extern char* g_6b5c58;
-extern char g_1043370[];
+extern char tp_ch_PathGrid[];
 extern char g_6756a0[];
 extern char g_67540c[];
 extern char g_67567c[];
@@ -39,19 +39,19 @@ int __cdecl ch_Update(void)
 	float pos[4];
 	char* list[32];
 
-	ch_UpdateTime = g_6b7fac;
+	ch_UpdateTime = gm_GameTicks;
 	g_6b5c30 = 0;
 	if (g_67531c == 0) {
 		return 0;
 	}
-	if (g_6b5c54 != (char*) g_67a370 || g_6b5c58 != (char*) g_67a370) {
-		if (*(char**) g_1043370 != 0 && g_6b5c54 != (char*) g_67a370) {
-			ch_BackupGrid(*(char**) g_1043370);
-			g_6b5c54 = (char*) g_67a370;
+	if (g_6b5c54 != (char*) d3_ActiveScene || g_6b5c58 != (char*) d3_ActiveScene) {
+		if (*(char**) tp_ch_PathGrid != 0 && g_6b5c54 != (char*) d3_ActiveScene) {
+			ch_BackupGrid(*(char**) tp_ch_PathGrid);
+			g_6b5c54 = (char*) d3_ActiveScene;
 		}
-		if (g_67a370 != 0 && d3_CurrentContextIndex != 0 && *(char**) ((char*) g_67a370 + 0xb0) != 0 && g_6b5c58 != (char*) g_67a370) {
-			ch_BackupGrid(*(char**) ((char*) g_67a370 + 0xb0));
-			g_6b5c58 = (char*) g_67a370;
+		if (d3_ActiveScene != 0 && d3_CurrentContextIndex != 0 && *(char**) ((char*) d3_ActiveScene + 0xb0) != 0 && g_6b5c58 != (char*) d3_ActiveScene) {
+			ch_BackupGrid(*(char**) ((char*) d3_ActiveScene + 0xb0));
+			g_6b5c58 = (char*) d3_ActiveScene;
 		}
 	}
 	for (p = (char**) ch_CharacterSlots; (int) p < (int) (ch_CharacterSlots + 0x300); p++) {
@@ -67,7 +67,7 @@ int __cdecl ch_Update(void)
 				*(*p + 0x8d) &= 0xdf;
 			}
 			ch_ExecuteAction(*p);
-		} else if (*(char**) (*p + 0x88) == (char*) g_67a370 && (f = *(unsigned short*) (*p + 0x8c), (f & 0x32) == 0) &&
+		} else if (*(char**) (*p + 0x88) == (char*) d3_ActiveScene && (f = *(unsigned short*) (*p + 0x8c), (f & 0x32) == 0) &&
 			   (f & 0x8000) == 0 && *(int*) (*p + 0x124) == 0) {
 			if (ch_FindNearbyCharacters(*p, list, 20.0f) != 0) {
 				map = d3sm_GetObjectSuperMap(*p);
@@ -85,7 +85,7 @@ int __cdecl ch_Update(void)
 		if (*(int*) (*p + 0x22c) != 0) {
 			ch_Updatelowpoly(*p);
 		}
-		if (t == 0 && (char*) g_67a370 == *(char**) (*p + 0x88) && d3_CurrentContextIndex != 0 && *(int*) (*p + 0x70) == 0) {
+		if (t == 0 && (char*) d3_ActiveScene == *(char**) (*p + 0x88) && d3_CurrentContextIndex != 0 && *(int*) (*p + 0x70) == 0) {
 			f = *(unsigned short*) (*p + 0x8c);
 			if ((f & 0x1000) != 0 && (f & 2) == 0 &&
 			    (*(*(char**) (*(char**) (*p + 0x34) + 0x1ec) + 0x163d) & 0x40) == 0) {
@@ -115,7 +115,7 @@ int __cdecl ch_Update(void)
 		}
 	}
 	ch_UpdateFades();
-	g_67529c = g_6b7fac;
+	ch_LastUpdateTime = gm_GameTicks;
 	return 1;
 }
 unsigned char _dlead_GOLDTL_fcn_00405e20[20226] = {

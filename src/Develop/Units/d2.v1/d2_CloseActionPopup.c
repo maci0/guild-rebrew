@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/client_types.h"
-extern int g_7749e4;
+extern int tp_d2_ActiveHudSlot;
 extern int g_6a4768;
 extern D2_ACTION_POPUP_SLOT g_77e8c0[16];
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -29,8 +29,8 @@ void __cdecl d2_CloseActionPopup(char* obj)
         d2_DestroyForm(*(int*) (*(int*) (obj + 0x74) + 8));
         *(int*) (*(int*) (obj + 0x74) + 8) = -1;
     }
-    if (g_7749e4 == *(int*) (obj + 0x74)) {
-        g_7749e4 = 0;
+    if (tp_d2_ActiveHudSlot == *(int*) (obj + 0x74)) {
+        tp_d2_ActiveHudSlot = 0;
     }
     *(int*) (obj + 0x74) = 0;
     for (i = 0; i < 16; i++) {
@@ -56,8 +56,8 @@ void __cdecl d2_CloseActionPopup(char* obj)
             }
             if (g_77e8c0[i].h != -1) {
                 d2_PositionControl(
-                    ((D2_CONTROL_TL*) g_1015ea0)[g_77e8c0[i].h].x - 0x20,
-                    ((D2_CONTROL_TL*) g_1015ea0)[g_77e8c0[i].h].y,
+                    ((D2_CONTROL_TL*) d2_Controls)[g_77e8c0[i].h].x - 0x20,
+                    ((D2_CONTROL_TL*) d2_Controls)[g_77e8c0[i].h].y,
                     g_77e8c0[i].h);
             }
         }

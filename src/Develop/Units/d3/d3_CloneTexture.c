@@ -19,8 +19,8 @@ typedef struct {
 	int x6c;
 } Tex;
 
-extern char* g_104049c;
-extern unsigned int g_10404a0;
+extern char* d3_TextureBank;
+extern unsigned int d3_TextureBankCount;
 extern int g_10405c0;
 
 Tex* __cdecl d3_AllocTextureSlot(int, int);
@@ -71,14 +71,14 @@ Tex* __cdecl d3_CloneTexture(Tex* src, int color, char recurse)
 		if (src->flags & 2) {
 			p->x44 = src->x44;
 		} else {
-			p->x44 = src - ((Tex*)g_104049c);
+			p->x44 = src - ((Tex*)d3_TextureBank);
 		}
 		g_10405c4++;
 		if (p->x48 != -1 && p->x5c > 0 && recurse) {
 			p->x48 = g_10405c0;
-			for (i = 0; i < g_10404a0; i++) {
-				if (((Tex*)g_104049c)[i].x40 > 0 && ((Tex*)g_104049c)[i].x48 == src->x48) {
-					d3_CloneTexture(&((Tex*)g_104049c)[i], color, 0);
+			for (i = 0; i < d3_TextureBankCount; i++) {
+				if (((Tex*)d3_TextureBank)[i].x40 > 0 && ((Tex*)d3_TextureBank)[i].x48 == src->x48) {
+					d3_CloneTexture(&((Tex*)d3_TextureBank)[i], color, 0);
 				}
 			}
 			g_10405c0++;

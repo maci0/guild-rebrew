@@ -9,8 +9,8 @@ extern float g_696550[];
 extern double g_6629c8;
 extern double g_662908;
 extern int gm_GameTime;
-extern int g_7f4c04;
-extern unsigned char g_773d75;
+extern int gm_GameTimeHour;
+extern unsigned char gm_ActiveTownIndex;
 
 int __cdecl gm_GetSeason(int*);
 void __cdecl gm_AddTime(int, int, int, int);
@@ -49,7 +49,7 @@ void __cdecl he_RunKraeuter(char* action)
 	char* e;
 
 	win = gm_GetSeason(&gm_GameTime);
-	value = g_7f4c04 & 0xffff;
+	value = gm_GameTimeHour & 0xffff;
 	nearest = 0;
 	if ((g_696550[win] <= (float) value || (float) value < g_696540[win]) && *(int*) (action + 0x70) != -1 && *(int*) (action + 0x70) != -2) {
 		gm_AddTime((int) (action + 0x52), 0, 5, 0);
@@ -193,17 +193,17 @@ void __cdecl he_RunKraeuter(char* action)
 			}
 			id = (unsigned short*) gm_FindBuildingOwner(v9);
 			if (rec) {
-				cm_SendSellObjekt(*(int*) (q + 2), -1, *(unsigned short*) (action + 0xae), rec, g_773d75, 0);
+				cm_SendSellObjekt(*(int*) (q + 2), -1, *(unsigned short*) (action + 0xae), rec, gm_ActiveTownIndex, 0);
 				io_FormatTextBuffer(text, 0x1802, 0x17fd, v9);
 				io_FormatTextBuffer(name, 0x1803, rec, *(unsigned short*) (action + 0xae) * 2 + 0x9a8);
 				strcat(text, name);
 			} else {
 				io_FormatTextBuffer(text, 0x1804, 0x17fd, v9);
 			}
-			if ((((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (action + 8)].entity_state == 6
-					|| ((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (action + 8)].entity_state == 7)
+			if ((((ENTITY_RECORD*) gm_EntitySlotTable)[*(unsigned short*) (action + 8)].entity_state == 6
+					|| ((ENTITY_RECORD*) gm_EntitySlotTable)[*(unsigned short*) (action + 8)].entity_state == 7)
 				&& (!id || !(*(unsigned char*) ((int) id + 0x1b4) & 1))) {
-				he_MessageBoxQuickjump(((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (action + 8)].entity_id, -1, text, 0, 0x5ec,
+				he_MessageBoxQuickjump(((ENTITY_RECORD*) gm_EntitySlotTable)[*(unsigned short*) (action + 8)].entity_id, -1, text, 0, 0x5ec,
 					*(int*) (v9 + 1), *(int*) (action + 0xb0), 0, 0);
 			}
 			break;

@@ -2,8 +2,8 @@
 typedef unsigned char u8;
 typedef unsigned short u16;
 
-extern int g_100f1dc; extern float g_664138;
-extern int g_14ce8e0;
+extern int d2_DialogButtonAction; extern float g_664138;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
 void* __cdecl d2_LoadForm(int a, int b, char* name);
@@ -72,10 +72,10 @@ int __cdecl d2_RunUnterschlagungDialog(int actor, int a1)
     d2_CenterDialogWindows(dlg);
     d2_SetForm(dlg, 1);
     io_AppendText(0x1dc2, *(u16*) actor);
-    g_100f1dc = -1;
+    d2_DialogButtonAction = -1;
     for (;;) {
-        if (g_100f1dc != -1) {
-            if (g_100f1dc == 2) {
+        if (d2_DialogButtonAction != -1) {
+            if (d2_DialogButtonAction == 2) {
                 if (d2_CheckActionBlocker(actor, 4) != 0) {
                     cm_RequestTransferCurrencyNoKill(*(int*) (actor + 4), -1, 0, h2);
                     cm_RequestModifyHealth(*(int*) (actor + 4), -4);
@@ -87,14 +87,14 @@ int __cdecl d2_RunUnterschlagungDialog(int actor, int a1)
                     d2_ShowModalMessageBox(frame + 0x14, 0);
                     dlg = *(int*) (frame + 0x8);
                     *(int*) (frame + 0) = 0x90;
-                    g_774654 = 1;
+                    d2_DialogCloseRequested = 1;
                 }
-            } else if (g_100f1dc == 1) {
-                g_774654 = 1;
+            } else if (d2_DialogButtonAction == 1) {
+                d2_DialogCloseRequested = 1;
             }
         }
-        if (g_14ce8e0 != 0)
-            g_774654 = 1;
+        if (io_RightButtonReleased != 0)
+            d2_DialogCloseRequested = 1;
         if (main_RunFrameLoop((void*) d2_RunUnterschlagungDialog, 0x657c7) == 0) {
             d2_DestroyForm(dlg);
             return *(int*) (frame + 0);

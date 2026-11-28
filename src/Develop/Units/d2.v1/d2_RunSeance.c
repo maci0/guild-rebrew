@@ -9,9 +9,9 @@ typedef struct
 	char pad165[0x21c - 0x165];
 } fcn_0058e220_Ent;
 
-extern fcn_0058e220_Ent g_7f4ca0[];
+extern fcn_0058e220_Ent gm_EntitySlotTable[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern volatile unsigned int g_6b7fac;
+extern volatile unsigned int gm_GameTicks;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char g_6a97f8[];
 extern char g_6a97d4[];
@@ -60,9 +60,9 @@ int __cdecl d2_RunSeance(int a1, S58* scriptSubject)
 	d2_SetForm(w, 0);
 	h = evt_LoadGfxScript(g_6a97d4);
 	if (h != 0) {
-		p = gm_FindOrAllocHeadSet(g_7f4ca0[g_774970].b9, g_7f4ca0[g_774970].b164);
+		p = gm_FindOrAllocHeadSet(gm_EntitySlotTable[gm_LocalPlayerSlot].b9, gm_EntitySlotTable[gm_LocalPlayerSlot].b164);
 		if (p == 0)
-			gm_FindOrAllocHeadSet(g_7f4ca0[g_774970].b9, 0);
+			gm_FindOrAllocHeadSet(gm_EntitySlotTable[gm_LocalPlayerSlot].b9, 0);
 		q = gm_FindOrAllocHeadSet(scriptSubject->x4c, scriptSubject->x48);
 		if (q == 0)
 			q = gm_FindOrAllocHeadSet(scriptSubject->x4c, 0);
@@ -86,7 +86,7 @@ int __cdecl d2_RunSeance(int a1, S58* scriptSubject)
 				main_RunFrameLoop(0, 0x743c7);
 		}
 	} else {
-		t0 = g_6b7fac;
+		t0 = gm_GameTicks;
 		wait[0] = 0x47;
 		wait[1] = 0xf8;
 		wait[2] = 0xf8;
@@ -97,11 +97,11 @@ int __cdecl d2_RunSeance(int a1, S58* scriptSubject)
 		wait[7] = 0xf8;
 		wait[8] = 0xf8;
 		do {
-			if (wait[i] + t0 < g_6b7fac) {
-				t0 = g_6b7fac;
+			if (wait[i] + t0 < gm_GameTicks) {
+				t0 = gm_GameTicks;
 				d2_SetForm(w, 0);
 				if (i >= 8) {
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				} else {
 					d2_SetForm(w, 0);
 					io_AppendText(snd[i]);

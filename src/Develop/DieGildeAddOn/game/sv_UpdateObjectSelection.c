@@ -37,21 +37,21 @@ typedef struct {
 	char pad190[0x8c];
 } SELECTION_ENTITY_SLOT;
 
-extern int g_67a370;
-extern char* g_7746c4;
-extern unsigned char* g_7746c8;
-extern char* g_7746cc;
-extern int g_7746a0;
+extern int d3_ActiveScene;
+extern char* d2_VisitedBuilding;
+extern unsigned char* d2_InteriorBuilding;
+extern char* sv_SelectedBuilding;
+extern int sv_ClickedObjekt;
 extern int g_7746b8;
-extern int g_7ea360;
-extern char g_7e2760[];
+extern int d2_SelectedPerson;
+extern char sv_EntityGreyTintFlags[];
 extern char* ch_ContextCharacters[32];
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 extern int g_7e4318;
 extern unsigned short* g_7e431c;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern short g_14ce8c0;
-extern short g_14ce8c2;
+extern short io_ActiveCursorX;
+extern short io_ActiveCursorY;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl d3_SetObjectGreyTint(int, int);
@@ -103,11 +103,11 @@ void __cdecl sv_UpdateObjectSelection(void)
 	ent = 0;
 	a = -1;
 	b = -1;
-	map = *(SELECTION_SCENE_MAP**) ((char*) g_67a370 + 0xb0);
-	if (g_7746c4 != 0) {
-		ent = g_7746c4;
-	} else if (g_7746c8 != 0) {
-		ent = (char*) g_7746c8;
+	map = *(SELECTION_SCENE_MAP**) ((char*) d3_ActiveScene + 0xb0);
+	if (d2_VisitedBuilding != 0) {
+		ent = d2_VisitedBuilding;
+	} else if (d2_InteriorBuilding != 0) {
+		ent = (char*) d2_InteriorBuilding;
 	}
 	if (g_14ce8d4 != 0) {
 		goto L684;
@@ -124,7 +124,7 @@ void __cdecl sv_UpdateObjectSelection(void)
 L684:
 	if (g_14ce8e4 == 0) {
 		if (d3_SelectionBoxActive == 0 && g_6772c4 != 0 && d2_HoveredWindow == -1
-		    && ent != 0 && *(unsigned short*) (ent + 0x27) == g_774970) {
+		    && ent != 0 && *(unsigned short*) (ent + 0x27) == gm_LocalPlayerSlot) {
 			d3_BeginSelectionBox();
 		}
 		goto La5d;
@@ -137,7 +137,7 @@ L6d3:
 	if (g_7746b8 != 0) {
 		goto L192f;
 	}
-	if (g_7746a0 != 0) {
+	if (sv_ClickedObjekt != 0) {
 		goto La50;
 	}
 	if ((*(int *)&g_7e431c) != 0) {
@@ -152,14 +152,14 @@ L6d3:
 	}
 	k = 0;
 	for (idx = 0; idx < 0x300; idx++) {
-		s = &((SELECTION_ENTITY_SLOT*) g_7f4ca0)[idx];
+		s = &((SELECTION_ENTITY_SLOT*) gm_EntitySlotTable)[idx];
 		if (s->flag == 0) {
 			continue;
 		}
 		if (s->f8 == 0) {
 			continue;
 		}
-		if ((gm_GetEntityUiFlags(g_774970, 0, 0, (int) s) & 0x800) == 0) {
+		if ((gm_GetEntityUiFlags(gm_LocalPlayerSlot, 0, 0, (int) s) & 0x800) == 0) {
 			continue;
 		}
 		if (s->owner == 0) {
@@ -183,7 +183,7 @@ L6d3:
 		u.offs[7][1] = 1;
 		u.offs[8][0] = -1;
 		u.offs[8][1] = 1;
-		if (d3sm_RaycastScreenPoint((int) map, g_14ce8c0, g_14ce8c2, &b, &a) == 0) {
+		if (d3sm_RaycastScreenPoint((int) map, io_ActiveCursorX, io_ActiveCursorY, &b, &a) == 0) {
 			continue;
 		}
 		cell = 0;
@@ -227,9 +227,9 @@ L192f:
 	if (map == 0 || g_14ce8cc == 0 || d2_HoveredWindow != -1) {
 		goto La50;
 	}
-	fcn_0064d41a(u.buf, (char*) 0x68143c, (char*) g_7746a0 + 8);
-	if (d3_FindSceneObject((char*) g_7746a0, 0x100, 0, u.buf) == 0) {
-		strcpy(u.buf, (char*) g_7746a0);
+	fcn_0064d41a(u.buf, (char*) 0x68143c, (char*) sv_ClickedObjekt + 8);
+	if (d3_FindSceneObject((char*) sv_ClickedObjekt, 0x100, 0, u.buf) == 0) {
+		strcpy(u.buf, (char*) sv_ClickedObjekt);
 	}
 	ei = -1;
 	for (idx = 0; idx < 32; idx++) {
@@ -245,11 +245,11 @@ L192f:
 			he_AssignActionSlot(*(int*) (e + 0x16c), 0, *(unsigned short*) e, 0);
 		}
 		if (*(unsigned short*) g_7746b8 == 0xfd) {
-			if (g_7746c8 != 0) {
-				ei = init_AllocateGebaeudeSceneSlot(g_7746c8);
-			} else if (g_7746c4 != 0) {
+			if (d2_InteriorBuilding != 0) {
+				ei = init_AllocateGebaeudeSceneSlot(d2_InteriorBuilding);
+			} else if (d2_VisitedBuilding != 0) {
 				ei = 0;
-				p = g_7746c4;
+				p = d2_VisitedBuilding;
 				goto L1a0d;
 			} else {
 				goto L1a0d;
@@ -257,10 +257,10 @@ L192f:
 		} else {
 			ei = init_EnsureObjektSceneContext((char*) g_7746b8);
 		}
-		if (g_7746c8 != 0) {
-			p = (char*) g_7746c8;
-		} else if (g_7746c4 != 0) {
-			p = g_7746c4;
+		if (d2_InteriorBuilding != 0) {
+			p = (char*) d2_InteriorBuilding;
+		} else if (d2_VisitedBuilding != 0) {
+			p = d2_VisitedBuilding;
 		}
 L1a0d:
 		if (ei >= 0) {
@@ -280,11 +280,11 @@ La5d:
 	ResetDisplayCounters();
 	c = 0;
 	for (idx = 0; idx < 0x300; idx++) {
-		s = &((SELECTION_ENTITY_SLOT*) g_7f4ca0)[idx];
+		s = &((SELECTION_ENTITY_SLOT*) gm_EntitySlotTable)[idx];
 		e = s->owner;
 		if (e != 0) {
 			c = s->flag;
-			if (c != g_7e2760[idx] && (*(unsigned char*) (e + 0x8c) & 0x40) == 0) {
+			if (c != sv_EntityGreyTintFlags[idx] && (*(unsigned char*) (e + 0x8c) & 0x40) == 0) {
 				if (c != 0) {
 					d3_SetObjectGreyTint(*(int*) (e + 0x34), 1);
 				} else {
@@ -294,20 +294,20 @@ La5d:
 			c = s->flag;
 			if (c != 0) {
 				if (g_7746f0 == 0) {
-					g_7ea360 = (int) s;
+					d2_SelectedPerson = (int) s;
 				}
 				g_7746f0 = g_7746f0 + 1;
 				f = (char*) s->f16c;
 				if (f != 0 && *(int*) (f + 1) == *(int*) (s->owner + 0x2c)
-				    && !(g_7746c8 == 0
-				         && (g_7746cc == 0 || *(unsigned short*) g_7746cc == 0x120))) {
+				    && !(d2_InteriorBuilding == 0
+				         && (sv_SelectedBuilding == 0 || *(unsigned short*) sv_SelectedBuilding == 0x120))) {
 					d2_AddDisplayCounter(s->f18c, 1);
 				}
 			}
 		}
-		g_7e2760[idx] = s->flag;
+		sv_EntityGreyTintFlags[idx] = s->flag;
 	}
-	if (g_14ce8e0 != 0 && g_7746f0 != 0) {
+	if (io_RightButtonReleased != 0 && g_7746f0 != 0) {
 		sv_ClearObjectSelection();
 	}
 }

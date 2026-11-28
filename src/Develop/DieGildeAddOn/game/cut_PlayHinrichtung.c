@@ -3,7 +3,7 @@
 #include "game_data.h"
 extern int cut_EventLoopFlags;
 extern int d2_SuppressOverlay;
-extern int g_772f54;
+extern int cut_StartTick;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl cut_RandMod(int);
@@ -98,7 +98,7 @@ void __cdecl cut_PlayHinrichtung(int eventRecord)
 	sprintf(s_dst, (char*) 0x679060, id + 4);
 	evt_StartGfxScript((char*) 0x68cf80, buf);
 	cut_WaitForScript(evt_StartGfxScript((char*) 0x68cf54, (char*) 0x6b5c60));
-	if (*(int*) (eventRecord + 0xc) == *(int*) (g_774970 * 0x21c + 0x7f4ca4)) {
+	if (*(int*) (eventRecord + 0xc) == *(int*) (gm_LocalPlayerSlot * 0x21c + 0x7f4ca4)) {
 		gm_ApplyEntityHealthDelta(*p, (int) -(*(float*) ((char*) p + 0x1c) + *(float*) 0x662a98));
 	}
 	switch (*(char*) (eventRecord + 0x7c)) {
@@ -123,7 +123,7 @@ void __cdecl cut_PlayHinrichtung(int eventRecord)
 		d3_DestroySceneRain();
 	}
 	d3_DestroySkyLayer();
-	g_772f54 = 0;
+	cut_StartTick = 0;
 	cut_CleanupCutscene();
 	d2_SuppressOverlay = 0;
 	msx_RestoreMusicIfAllowed();

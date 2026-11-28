@@ -5,8 +5,8 @@
 #include "Develop/client_types.h"
 typedef Tabs_7e43a8 Tabs;
 
-extern Tabs_7e43a8 g_7e43a8;
-extern unsigned short g_7f4c04;
+extern Tabs_7e43a8 gm_HourlyWeatherSlots;
+extern unsigned short gm_GameTimeHour;
 
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned short __cdecl gm_RandomMod(int n);
@@ -21,11 +21,11 @@ void __cdecl he_RunWeatherStorm(char* p)
 
 	switch (*(int*) (p + 0x70)) {
 	case 0:
-		for (i = ((*(int*)&g_7f4c04) & 0xffff) + 1; i < ((*(int*)&g_7f4c04) & 0xffff) + 4; i++) {
-			g_7e43a8.a[i] = 1000;
-			g_7e43a8.b[i] = 3;
+		for (i = ((*(int*)&gm_GameTimeHour) & 0xffff) + 1; i < ((*(int*)&gm_GameTimeHour) & 0xffff) + 4; i++) {
+			gm_HourlyWeatherSlots.a[i] = 1000;
+			gm_HourlyWeatherSlots.b[i] = 3;
 		}
-		*(short*) (p + 0x56) = (short) ((*(int*)&g_7f4c04) + 2);
+		*(short*) (p + 0x56) = (short) ((*(int*)&gm_GameTimeHour) + 2);
 		*(int*) (p + 0x58) = 0;
 		*(int*) (p + 0x70) += 1;
 		return;

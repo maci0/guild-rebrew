@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_67d8cc;
-extern short g_7725c4;
+extern short d2_CursorStateId;
 
 void* __cdecl d2_GetResourceData(int resource_id);
 void __cdecl d2_ClearAnimationSlot(int h);
@@ -20,6 +20,6 @@ void __cdecl d2_SetOverlayAnimation(int unused_arg, int resource_id)
 			d2_ClearAnimationSlot(g_67d8cc);
 			g_67d8cc = -1;
 		}
-		g_7725c4 = 0;
+		d2_CursorStateId = 0;
 	}
 }

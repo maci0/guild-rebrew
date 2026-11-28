@@ -11,6 +11,6 @@ typedef struct HE_AP_EVENT {
     char name[0x40];
 } HE_AP_EVENT;
 
-extern HE_AP_EVENT g_7dcae0[256];
+extern HE_AP_EVENT he_ApEvents[256];
 
 #endif

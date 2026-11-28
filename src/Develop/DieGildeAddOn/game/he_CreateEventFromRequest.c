@@ -55,8 +55,8 @@ struct spawn {
 	struct blob160 blob;
 };
 
-extern void (__cdecl* g_7d1d80[])(HE_ACTION*);
-extern char g_7dc440[];
+extern void (__cdecl* he_EventCreateHandlers[])(HE_ACTION*);
+extern char he_EventDispatchHandlers[];
 #include "Develop/client_types.h"
 
 extern unsigned char* g_7d1980[];
@@ -76,7 +76,7 @@ HE_ACTION* __cdecl he_CreateEventFromRequest(struct spawn* t)
 	HE_ACTION* u;
 
 	e = 0;
-	if (t->kind >= 0xa7 || g_7d1d80[t->kind] == 0 || ((int*)g_7dc440)[t->kind] == 0) {
+	if (t->kind >= 0xa7 || he_EventCreateHandlers[t->kind] == 0 || ((int*)he_EventDispatchHandlers)[t->kind] == 0) {
 		return 0;
 	}
 	if (t->owner != -1) {
@@ -86,14 +86,14 @@ HE_ACTION* __cdecl he_CreateEventFromRequest(struct spawn* t)
 		}
 	}
 	for (i = 0; i < 1024; i++) {
-		if (((HE_ACTION*)g_77e980)[i].kind == 0) {
+		if (((HE_ACTION*)he_ActionSlots)[i].kind == 0) {
 			break;
 		}
 	}
 	if (i == 1024) {
 		return 0;
 	}
-	u = &((HE_ACTION*)g_77e980)[i];
+	u = &((HE_ACTION*)he_ActionSlots)[i];
 	if (i > he_LastEventSlot) {
 		he_LastEventSlot = i;
 	}
@@ -134,7 +134,7 @@ HE_ACTION* __cdecl he_CreateEventFromRequest(struct spawn* t)
 		u->unk_8c[k] = t->extra[k];
 	}
 	memcpy(u->unk_ac, &t->blob, sizeof(t->blob));
-	g_7d1d80[t->kind](u);
+	he_EventCreateHandlers[t->kind](u);
 	g_7dc424++;
 	return u;
 }

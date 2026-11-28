@@ -48,11 +48,11 @@ typedef struct {
 } Msg; /* 0xf8 */
 
 extern int lpObjektePROT;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 extern int gm_GameTime;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
 
 int __cdecl gm_CollectBuildingStock(char*, void*, int);
 int __cdecl gm_CalcEntityInventoryStats(char*, Stats*);
@@ -105,10 +105,10 @@ unsigned int __cdecl ai_RebalanceCityStock(char* o, char* req)
 			m.state = *(int*) (*(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c + 0x7f4ca4);
 			m.f0c = *(int*) (*(int*) (o + 0x16c) + 1);
 			m.p28 = gm_GameTime;
-			m.p2c = g_7f4c04;
-			m.p30 = g_7f4c08;
+			m.p2c = gm_GameTimeHour;
+			m.p30 = gm_GameTimeSliceDword;
 			m.flag2 = 1;
-			m.p34 = g_7f4c0c;
+			m.p34 = gm_GameTimeTailWord;
 			gm_AddTime(&m.p28, 0, 0, 10);
 			m.f58 = *(int*) (item + 2);
 			m.slots[0] = 5;
@@ -142,9 +142,9 @@ unsigned int __cdecl ai_RebalanceCityStock(char* o, char* req)
 					if (st.x68[j] == 0)
 						continue;
 					sprintf(line, (char*) 0x67e8c0, *(int*) (o + 0x16c) + 5, st.x68[j], (char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[st.x48[j]] + 1);
-					sprintf(line, (char*) 0x67e358, -1, *(int*) (q + 2), (int) st.x48[j], st.x68[j], g_773d75, (double) (int) gm_GetSeasonPrice((int) st.x48[j], g_773d75));
-					cm_SendSellObjekt(-1, *(int*) (q + 2), (short) st.x48[j], st.x68[j], (char) g_773d75, (int) gm_GetSeasonPrice((int) st.x48[j], g_773d75));
-					*(int*) (o + 0x1b8) = (int) (gm_GetSeasonPrice((int) st.x48[j], g_773d75) + *(int*) (o + 0x1b8));
+					sprintf(line, (char*) 0x67e358, -1, *(int*) (q + 2), (int) st.x48[j], st.x68[j], gm_ActiveTownIndex, (double) (int) gm_GetSeasonPrice((int) st.x48[j], gm_ActiveTownIndex));
+					cm_SendSellObjekt(-1, *(int*) (q + 2), (short) st.x48[j], st.x68[j], (char) gm_ActiveTownIndex, (int) gm_GetSeasonPrice((int) st.x48[j], gm_ActiveTownIndex));
+					*(int*) (o + 0x1b8) = (int) (gm_GetSeasonPrice((int) st.x48[j], gm_ActiveTownIndex) + *(int*) (o + 0x1b8));
 					st.x48[j] = 0;
 					st.x68[j] = 0;
 				}
@@ -153,10 +153,10 @@ unsigned int __cdecl ai_RebalanceCityStock(char* o, char* req)
 			lim = *(int*) 0x100d10c;
 			if (amt < lim)
 				lim = amt;
-			sprintf(line, (char*) 0x67e358, *(int*) (q + 2), *(int*) (req + 2), *(int*) 0x100d0c0, lim, g_773d75, 0);
+			sprintf(line, (char*) 0x67e358, *(int*) (q + 2), *(int*) (req + 2), *(int*) 0x100d0c0, lim, gm_ActiveTownIndex, 0);
 			if (*(int*) 0x100d10c <= amt)
 				amt = *(int*) 0x100d10c;
-			cm_SendSellObjekt(*(int*) (q + 2), *(int*) (req + 2), *(short*) 0x100d0c0, amt, (char) g_773d75, 0);
+			cm_SendSellObjekt(*(int*) (q + 2), *(int*) (req + 2), *(short*) 0x100d0c0, amt, (char) gm_ActiveTownIndex, 0);
 			m.ids[n] = *(unsigned short*) 0x100d0c0;
 			m.slots[n] = *(int*) (*(int*) 0x100d0d4 + 1);
 			n++;
@@ -178,11 +178,11 @@ unsigned int __cdecl ai_RebalanceCityStock(char* o, char* req)
 								want = *(int*) (e + 0x4c);
 								if (lim < want)
 									want = lim;
-								sprintf(line, (char*) 0x67e358, *(int*) (q + 2), *(int*) (req + 2), *(int*) e, want, g_773d75, 0);
+								sprintf(line, (char*) 0x67e358, *(int*) (q + 2), *(int*) (req + 2), *(int*) e, want, gm_ActiveTownIndex, 0);
 								want = *(int*) (e + 0x4c);
 								if (lim < want)
 									want = lim;
-								cm_SendSellObjekt(*(int*) (q + 2), *(int*) (req + 2), *(int*) e, want, (char) g_773d75, 0);
+								cm_SendSellObjekt(*(int*) (q + 2), *(int*) (req + 2), *(int*) e, want, (char) gm_ActiveTownIndex, 0);
 								m.ids[n] = *(unsigned short*) e;
 								m.slots[n] = *(int*) (*(int*) (e + 0x14) + 1);
 								n++;
@@ -230,13 +230,13 @@ unsigned int __cdecl ai_RebalanceCityStock(char* o, char* req)
 					want = (want * 9) / 8;
 					cm_SendLogAction((int) (char*) 0x67e8b0);
 					cm_RequestMoveCredits(*(int*) (0x7f4ca4 + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c), -1, (char) k, want);
-					cm_RequestMoveCredits(-1, *(int*) (0x7f4ca4 + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c), (char) g_773d75, (int) ((double) want * 1.03));
+					cm_RequestMoveCredits(-1, *(int*) (0x7f4ca4 + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c), (char) gm_ActiveTownIndex, (int) ((double) want * 1.03));
 					cm_SendTraceEnd((int) (char*) 0x67e8b0);
 				}
 				else if (want * 2 < sum) {
 					want = sum - (want * 9) / 8;
 					cm_SendLogAction((int) (char*) 0x67e8b0);
-					cm_RequestMoveCredits(*(int*) (0x7f4ca4 + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c), -1, (char) g_773d75, want);
+					cm_RequestMoveCredits(*(int*) (0x7f4ca4 + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c), -1, (char) gm_ActiveTownIndex, want);
 					cm_RequestMoveCredits(-1, *(int*) (0x7f4ca4 + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c), (char) k, (int) ((double) want * 1.03));
 					cm_SendTraceEnd((int) (char*) 0x67e8b0);
 				}
@@ -248,9 +248,9 @@ unsigned int __cdecl ai_RebalanceCityStock(char* o, char* req)
 			m.state = *(int*) (*(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c + 0x7f4ca4);
 			m.f0c = *(int*) (*(int*) (o + 0x16c) + 1);
 			m.p28 = gm_GameTime;
-			m.p2c = g_7f4c04;
-			m.p30 = g_7f4c08;
-			m.p34 = g_7f4c0c;
+			m.p2c = gm_GameTimeHour;
+			m.p30 = gm_GameTimeSliceDword;
+			m.p34 = gm_GameTimeTailWord;
 			m.flag2 = 1;
 			m.f58 = *(int*) (item + 2);
 			m.f5c = lim;

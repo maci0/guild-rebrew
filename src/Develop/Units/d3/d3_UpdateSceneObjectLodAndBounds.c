@@ -2,8 +2,8 @@ extern int g_6b8050;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char* d3_ActiveCamera;
 extern float g_662a34;
-extern int g_10432a8;
-extern int g_1042a04;
+extern int d3_FrameFaceCount;
+extern int d3_FrameVertexCount;
 
 int __cdecl d3_SelectObjectLod(unsigned int a0);
 void __cdecl d3_UpdateObjectCameraTransform(unsigned int a0, char* a1, int a2);
@@ -26,8 +26,8 @@ unsigned char __cdecl d3_UpdateSceneObjectLodAndBounds(char* o)
 	g_6b8050 = g_6b8050 + 1;
 	transformObject = d3_SelectObjectLod((unsigned int) o);
 	if (transformObject != 0) {
-		g_10432a8 = g_10432a8 + *(int*) (transformObject + 0x314);
-		g_1042a04 = g_1042a04 + *(int*) (transformObject + 0x310);
+		d3_FrameFaceCount = d3_FrameFaceCount + *(int*) (transformObject + 0x314);
+		d3_FrameVertexCount = d3_FrameVertexCount + *(int*) (transformObject + 0x310);
 		p = *(int*) (o + 0x1ec);
 		*(int*) (o + 0x1cc) = transformObject;
 		sel = (*(unsigned char*) (o + 0x214) >> 2) & 1;

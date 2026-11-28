@@ -9,7 +9,7 @@ void __cdecl evt_RequestAllScriptsExit(void)
 	char* p;
 
 	for (i = 0; i < 0x64c00; i += 0xc98) {
-		p = g_6b7e94 + i;
+		p = evt_ScriptSlots + i;
 		if (*(unsigned char*) p != 0 || *(int*) (p + 0x100) != -1) {
 			evt_RequestScriptExit(p);
 		}

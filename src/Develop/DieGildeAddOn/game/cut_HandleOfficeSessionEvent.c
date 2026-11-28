@@ -1,4 +1,4 @@
-extern char g_6b5c60[];
+extern char str_empty[];
 int __cdecl sprintf(char* buf, const char* fmt, ...);
 
 char* __cdecl gm_LookupEntityRecordById(int a1);
@@ -40,7 +40,7 @@ void __cdecl cut_HandleOfficeSessionEvent(char* obj, int* request)
 		*(int*) (obj + 0x98) = tmp;
 		*(int*) (obj + 0x94) = r;
 		obj += 0x14;
-		sprintf(obj, g_6b5c60);
+		sprintf(obj, str_empty);
 		return;
 	}
 	if (request[0] == 2) {
@@ -52,7 +52,7 @@ void __cdecl cut_HandleOfficeSessionEvent(char* obj, int* request)
 		*(int*) (obj + 0x98) = tmp;
 		*(int*) (obj + 0x94) = r;
 		obj += 0x14;
-		sprintf(obj, g_6b5c60);
+		sprintf(obj, str_empty);
 		return;
 	}
 }

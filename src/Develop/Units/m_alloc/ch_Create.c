@@ -2,8 +2,8 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/Error/error_message.h"
 
-extern char g_67536c[];
-extern char g_67534c[];
+extern char str_ch_Create_Character[];
+extern char str_ch_Create_Too_many_characters[];
 void* __cdecl m_alloc(int, char*);
 void __cdecl m_FreeTracked(void*);
 void __cdecl fcn_004222b0(char*);
@@ -1864,7 +1864,7 @@ void* __cdecl ch_Create(void)
 	int i = 0;
 	void* p;
 
-	p = (void*) m_alloc(0x244, g_67536c);
+	p = (void*) m_alloc(0x244, str_ch_Create_Character);
 	memset(p, 0, 0x244);
 	if (ch_CharacterSlots[i] != 0) {
 		while (i < 0x300 && ch_CharacterSlots[++i] != 0) {
@@ -1876,7 +1876,7 @@ void* __cdecl ch_Create(void)
 		return p;
 	}
 	m_FreeTracked(p);
-	ReportClientMessage(g_67534c);
+	ReportClientMessage(str_ch_Create_Too_many_characters);
 	return 0;
 }
 #endif

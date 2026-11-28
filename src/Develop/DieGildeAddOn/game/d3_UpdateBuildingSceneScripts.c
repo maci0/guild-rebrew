@@ -3,16 +3,16 @@
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 #include "Develop/client_types.h"
-extern char* g_7746cc;
+extern char* sv_SelectedBuilding;
 #include "game_data.h"
 typedef struct JobProto { unsigned char kind; unsigned char rest[0x24c]; } JobProto;
-extern char g_7f4ca4[];
+extern char gm_EntityIdField[];
 extern unsigned int g_6a2520;
 
-extern int g_67a370;
+extern int d3_ActiveScene;
 extern float g_696540[];
 extern float g_696550[];
-extern int g_6b7fdc;
+extern int vfs_RootDir;
 
 extern pos14_7f4c00 gm_GameTime;
 extern s_7e2ac0 g_7e2ac0[48];
@@ -58,18 +58,18 @@ void __cdecl d3_UpdateBuildingSceneScripts(unsigned char* building)
 	int flags[8];
 
 	itemdef = 0;
-	if (g_7746cc != 0 && *(unsigned short*) g_7746cc != 0xfd) {
-		itemdef = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*(unsigned short*) g_7746cc]);
+	if (sv_SelectedBuilding != 0 && *(unsigned short*) sv_SelectedBuilding != 0xfd) {
+		itemdef = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*(unsigned short*) sv_SelectedBuilding]);
 	}
 	type_row = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*building];
-	if ((unsigned int)g_6b7fac > g_6a2520 + 500) {
-		if (g_67a370 != 0) {
-			info = *(char**) (g_67a370 + 0x3c8);
+	if ((unsigned int)gm_GameTicks > g_6a2520 + 500) {
+		if (d3_ActiveScene != 0) {
+			info = *(char**) (d3_ActiveScene + 0x3c8);
 			if (info != 0 && *(int*) (info + 0x318) != 0) {
-				((void (__cdecl*) (int, int, int, int)) *(int*) (info + 0x318)) (g_67a370, 6, (int) (info + 0x31c), 0);
+				((void (__cdecl*) (int, int, int, int)) *(int*) (info + 0x318)) (d3_ActiveScene, 6, (int) (info + 0x31c), 0);
 			}
 		}
-		g_6a2520 = g_6b7fac;
+		g_6a2520 = gm_GameTicks;
 	}
 	hour = gm_GetSeason((int*) &gm_GameTime);
 	i = 0;
@@ -78,19 +78,19 @@ void __cdecl d3_UpdateBuildingSceneScripts(unsigned char* building)
 		if (ent != 0 && (info = *(char**) (ent + 0x184)) != 0
 		    && *(int*) (info + 0x2c) == *(int*) (building + 1)
 		    && *(unsigned char*) (ent + 8) > 0
-		    && *(int*) (info + 0x88) == g_67a370) {
+		    && *(int*) (info + 0x88) == d3_ActiveScene) {
 			mode = 0;
 			job[0] = 0;
 			r = he_FindActionMetaName(ent, (int) building, job);
 			if (r != 0) {
 				if (type_row->category == 0x0d) {
-					if (g_7746cc != 0) {
-						if (*(unsigned short*) g_7746cc == 0x37
-						    && *(int*) (*(char**) (ent + 0x184) + 0x30) == *(int*) (g_7746cc + 2)) {
+					if (sv_SelectedBuilding != 0) {
+						if (*(unsigned short*) sv_SelectedBuilding == 0x37
+						    && *(int*) (*(char**) (ent + 0x184) + 0x30) == *(int*) (sv_SelectedBuilding + 2)) {
 							mode = 1;
 						}
-						else if (*(unsigned short*) g_7746cc == 0xfd
-						         && *(int*) (*(char**) (ent + 0x184) + 0x30) == *(int*) (g_7746cc + 2)) {
+						else if (*(unsigned short*) sv_SelectedBuilding == 0xfd
+						         && *(int*) (*(char**) (ent + 0x184) + 0x30) == *(int*) (sv_SelectedBuilding + 2)) {
 							p = *(char**) (ent + 0x17c);
 							mode = 1;
 							if (p != 0 && *(int*) (p + 0xc8) != 0) {
@@ -107,7 +107,7 @@ void __cdecl d3_UpdateBuildingSceneScripts(unsigned char* building)
 					}
 				}
 				else {
-					if (type_row->category == 8 && *(unsigned short*) g_7746cc == 0xdd
+					if (type_row->category == 8 && *(unsigned short*) sv_SelectedBuilding == 0xdd
 					    && *(char*) (ent + 0x180) == 0x15) {
 						mode = 1;
 					}
@@ -121,8 +121,8 @@ void __cdecl d3_UpdateBuildingSceneScripts(unsigned char* building)
 				}
 			}
 			else {
-				if (type_row->category == 0x16 && g_7746cc != 0 && *(unsigned short*) g_7746cc == 0x120
-				    && *(int*) (*(char**) (ent + 0x184) + 0x30) == *(int*) (g_7746cc + 2)
+				if (type_row->category == 0x16 && sv_SelectedBuilding != 0 && *(unsigned short*) sv_SelectedBuilding == 0x120
+				    && *(int*) (*(char**) (ent + 0x184) + 0x30) == *(int*) (sv_SelectedBuilding + 2)
 				    && (*(unsigned int*) (ent + 0x1c8) & 0x1000) == 0) {
 					strcpy(job, "besucher");
 					mode = 1;
@@ -195,11 +195,11 @@ void __cdecl d3_UpdateBuildingSceneScripts(unsigned char* building)
 					}
 					sprintf(path, "%slocations\\%s\\%s%i_%s.esc", "x:\\engine\\gfx\\scripts\\",
 					        name, job, k, name);
-					if (!vfs_LookupPath(path, (void*) g_6b7fdc, &found)) {
+					if (!vfs_LookupPath(path, (void*) vfs_RootDir, &found)) {
 						sprintf(path, "%slocations\\%s\\%s0_%s.esc", "x:\\engine\\gfx\\scripts\\",
 						        name, job, name);
 					}
-					if (vfs_LookupPath(path, (void*) g_6b7fdc, &found)) {
+					if (vfs_LookupPath(path, (void*) vfs_RootDir, &found)) {
 						sprintf(sp, "sp_%i", *(int*) (ent + 4));
 						script = evt_LoadScript(path);
 						if (script != 0) {

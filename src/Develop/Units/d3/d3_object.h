@@ -128,9 +128,9 @@ void __cdecl d3_CleanupObjectAuxSlots(D3_OBJECT* object);
 /* Declaration views of the list sentinel and its pointer field at +0x1f4.
  * The sentinel's complete extent and storage owner remain unknown. */
 /* ADDRESS: GOLD 0x00fc2700 */
-extern char g_fc2700[];
+extern char d3_SceneRootSentinel[];
 /* ADDRESS: GOLD 0x00fc28f4 */
-extern char* g_fc28f4;
+extern char* d3_SceneRootSentinelTail;
 void __cdecl d3_RegisterSceneObject(char* object);
 #endif
 

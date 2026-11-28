@@ -3,7 +3,7 @@ unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream);
 #include "Develop/client_types.h"
 
 extern GRAPH_SAMPLE g_99ec20[16];
-extern CRIME_GRID_CELL g_99ef80[9][8];
+extern CRIME_GRID_CELL gm_CrimeGrid[9][8];
 
 /* ADDRESS: GOLDTL 0x005208e0 */
 int __cdecl ls_SaveCityStatsAndCrimeGrid(char* fp)
@@ -123,16 +123,16 @@ int __cdecl ls_SaveCityStatsAndCrimeGrid(char* fp)
 	}
 	for (r = 0; r < 8; r++) {
 		for (i = 0; i < 8; i++) {
-			if (vfs_fwrite(&g_99ef80[r][i].demand, 2, 1, fp) <= 0) {
+			if (vfs_fwrite(&gm_CrimeGrid[r][i].demand, 2, 1, fp) <= 0) {
 				return 0;
 			}
-			if (vfs_fwrite(&g_99ef80[r][i].supply, 2, 1, fp) <= 0) {
+			if (vfs_fwrite(&gm_CrimeGrid[r][i].supply, 2, 1, fp) <= 0) {
 				return 0;
 			}
-			if (vfs_fwrite(&g_99ef80[r][i].pad4[0], 1, 1, fp) <= 0) {
+			if (vfs_fwrite(&gm_CrimeGrid[r][i].pad4[0], 1, 1, fp) <= 0) {
 				return 0;
 			}
-			if (vfs_fwrite(&g_99ef80[r][i].pad4[4], 4, 1, fp) <= 0) {
+			if (vfs_fwrite(&gm_CrimeGrid[r][i].pad4[4], 4, 1, fp) <= 0) {
 				return 0;
 			}
 		}

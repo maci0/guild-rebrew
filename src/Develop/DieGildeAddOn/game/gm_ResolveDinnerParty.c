@@ -24,7 +24,7 @@ typedef struct {
 } BANQUET_PARTY;
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 unsigned short __cdecl gm_RandomMod(unsigned short range);
 int __cdecl amt_GetEffectiveRoleLevel(unsigned short id, int a2);
@@ -101,7 +101,7 @@ int __cdecl gm_ResolveDinnerParty(BANQUET_PARTY* p, int flag)
 	q = gm_WalkEntityChain(p->ent->slot);
 	p->text = (int) ((float) (10 - p->b - p->a) * q * p->count * 0.001f);
 	if (flag) {
-		cm_RequestMoveCredits(-1, p->ent->id, *(char*) &g_773d75, p->text);
+		cm_RequestMoveCredits(-1, p->ent->id, *(char*) &gm_ActiveTownIndex, p->text);
 	}
 	return 0;
 }

@@ -2,7 +2,7 @@
 
 
 #include "Develop/DieGildeAddOn/game/spiel.h"
-unsigned char __cdecl fcn_004f97a0(int a);
+unsigned char __cdecl gm_GetCitySkillAverage(int a);
 int __cdecl gm_GetLawEntry(int idx, void* dst);
 
 int __cdecl ai_EvalStrafrechtLaw19(char* actor, int unused, int* out)
@@ -17,7 +17,7 @@ int __cdecl ai_EvalStrafrechtLaw19(char* actor, int unused, int* out)
 
 	job = gm_MapEntityStatRange(*(unsigned char*) (actor + 0x164));
 	skill_val = gm_GetEntitySkill(actor, 3);
-	skill_val = (skill_val - (fcn_004f97a0(3) + 1.0f) * 0.003968254f) * 0.023809524f;
+	skill_val = (skill_val - (gm_GetCitySkillAverage(3) + 1.0f) * 0.003968254f) * 0.023809524f;
 	axis_good = (float)((*(float*) (actor + 0xf4) - 2.0) * *(float*) (actor + 0xfc));
 	axis_neutral = (*(float*) (actor + 0x100) - 2.0) * *(float*) (actor + 0x108);
 	axis_evil = (*(float*) (actor + 0x10c) - 2.0) * *(float*) (actor + 0x114);

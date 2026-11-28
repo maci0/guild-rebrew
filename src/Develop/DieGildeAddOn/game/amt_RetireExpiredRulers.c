@@ -1,7 +1,7 @@
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 int __cdecl amt_FindOfficeSlotByType(int, void*);
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
@@ -47,8 +47,8 @@ void __cdecl amt_RetireExpiredRulers(void)
 			if (e1 != 0) {
 				io_FormatTextBuffer(buf, 0x42b2, *e1);
 				for (i = 0; i < 768; i++) {
-					if (g_7f4ca0[i * 540 + 2] == 6 || g_7f4ca0[i * 540 + 2] == 7)
-						he_PostEntityMessage(*(int*) (g_7f4ca0 + i * 540 + 4), -1, buf, 0, 0x602, "_NACHRICHTEN_NEU_00");
+					if (gm_EntitySlotTable[i * 540 + 2] == 6 || gm_EntitySlotTable[i * 540 + 2] == 7)
+						he_PostEntityMessage(*(int*) (gm_EntitySlotTable + i * 540 + 4), -1, buf, 0, 0x602, "_NACHRICHTEN_NEU_00");
 				}
 			}
 		}
@@ -61,8 +61,8 @@ void __cdecl amt_RetireExpiredRulers(void)
 			if (e2 != 0) {
 				io_FormatTextBuffer(buf, 0x42b4, *e2);
 				for (i = 0; i < 768; i++) {
-					if (g_7f4ca0[i * 540 + 2] == 6 || g_7f4ca0[i * 540 + 2] == 7)
-						he_PostEntityMessage(*(int*) (g_7f4ca0 + i * 540 + 4), -1, buf, 0, 0x602, "_NACHRICHTEN_NEU_02");
+					if (gm_EntitySlotTable[i * 540 + 2] == 6 || gm_EntitySlotTable[i * 540 + 2] == 7)
+						he_PostEntityMessage(*(int*) (gm_EntitySlotTable + i * 540 + 4), -1, buf, 0, 0x602, "_NACHRICHTEN_NEU_02");
 				}
 			}
 		}

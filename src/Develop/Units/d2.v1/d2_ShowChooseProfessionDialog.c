@@ -17,7 +17,7 @@ struct gadget {
 extern char* g_14a5ad8[];
 extern int d2_CurrentWindowId;
 extern char g_6a3f8c[];
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_7e23e3;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
@@ -67,20 +67,20 @@ int __cdecl d2_ShowChooseProfessionDialog(int flags)
 		t = types[i];
 		id = d2_AddElementToWindow((i % 3) * 0x60 + 0x64, (i / 3 * 5 + 5) * 0x10, t + 0x5a1, d2_CurrentWindowId);
 		ids[i] = id;
-		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_05c) = 1;
-		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].flags_1d0) = 3;
-		strcpy(((char*)&((D2_CONTROL_TL*)g_1015ea0)[id] + 0xcc), g_14a5ad8[t]);
-		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_1cc) = 0x56;
+		(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].value_05c) = 1;
+		(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].flags_1d0) = 3;
+		strcpy(((char*)&((D2_CONTROL_TL*)d2_Controls)[id] + 0xcc), g_14a5ad8[t]);
+		(*(int*)&((D2_CONTROL_TL*)d2_Controls)[id].value_1cc) = 0x56;
 		d2_AddToRadioGroup(list, id);
 	}
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	while (main_RunFrameLoop(d2_ShowChooseProfessionDialog, flags) != 0) {
 		d2_UpdateRadioGroup(list);
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			for (i = 0; i < 11; i++) {
 				if (d2_CurrentElementId == ids[i]) {
 					(*(unsigned char*)&g_7e23e3) = gm_GetRangeStatId(types[i], 1);
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 					result = 1;
 					break;
 				}

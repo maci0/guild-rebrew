@@ -1,4 +1,4 @@
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int d2_CurrentWindowId;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
@@ -36,15 +36,15 @@ void __cdecl d2_OpenRentAGraveDialog(char* a0)
 	d2_RefreshRentAGraveOptions(a0, dlg, 2, ids, &sel);
 	d2_SetForm(dlg, 3);
 	task = d2_GetWindowListItem(dlg, 3, io_AppendText(0x6a4078, 0x4117));
-	selected = sel; g_100f1dc = -1;
+	selected = sel; d2_DialogButtonAction = -1;
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
-		} else if (g_100f1dc != -1) {
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
+		} else if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == task) {
 				d2_SetFormVisibility(dlg, 0);
 				if (d2_ConfirmRentAGrave(a0, selected) == 1) {
-					g_774654 = 1;
+					d2_DialogCloseRequested = 1;
 				}
 				d2_SetFormVisibility(dlg, 1);
 			} else {

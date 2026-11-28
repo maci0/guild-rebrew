@@ -1,4 +1,4 @@
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 void __cdecl d2_SetCurrentFont(int);
 unsigned char __cdecl d3_GetObjectScreenRect(char*, int*);
 void __cdecl d2_RenderWrappedText(int, int, int, int, int, char*, int);
@@ -22,7 +22,7 @@ void __cdecl d2_RenderFloatingMessages(void)
     int y;
 
     for (i = 0; i < 0x40; i++) {
-        if (slots[i].actor && (unsigned int) g_6b7fac > slots[i].time + 300u)
+        if (slots[i].actor && (unsigned int) gm_GameTicks > slots[i].time + 300u)
             slots[i].actor = 0;
     }
     d2_SetCurrentFont(0x54);
@@ -30,7 +30,7 @@ void __cdecl d2_RenderFloatingMessages(void)
         if (!slots[i].actor)
             continue;
         entity = *(char**) (slots[i].actor + 0x34);
-        if (*(int*) (entity + 0x208) != g_67a370)
+        if (*(int*) (entity + 0x208) != d3_ActiveScene)
             continue;
         if (*(int*) (entity + 0x218) != 1) {
             if (!d3_GetObjectScreenRect(entity, rect))

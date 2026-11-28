@@ -1,4 +1,4 @@
-extern int g_774800;
+extern int gm_AllEntitiesControllable;
 
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
@@ -17,7 +17,7 @@ void __cdecl he_InitEvent0a0(char* o)
 	}
 	*(pos14_7f4c00*) (o + 0x44) = gm_GameTime;
 	*(pos14_7f4c00*) (o + 0x52) = gm_GameTime;
-	if (g_774800 != 0) {
+	if (gm_AllEntitiesControllable != 0) {
 		gm_AddTime((pos14_7f4c00*) (o + 0x52), 1, 0, 0);
 	} else {
 		gm_AddTime((pos14_7f4c00*) (o + 0x52), 0x18, 0, 0);

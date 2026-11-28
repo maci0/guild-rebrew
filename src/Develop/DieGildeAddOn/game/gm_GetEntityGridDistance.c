@@ -1,6 +1,6 @@
 #include <math.h>
 
-extern int g_67a370;
+extern int d3_ActiveScene;
 
 char __cdecl d3_GridPointToWorld(int g, int x, int z, float *out);
 
@@ -11,7 +11,7 @@ float __cdecl gm_GetEntityGridDistance(void *a0, int gridX, int gridZ)
     struct { float z, x; } b;
     char *position;
 
-    d3_GridPointToWorld(*(int *)((char *)g_67a370 + 0xb0), gridX, gridZ, p);
+    d3_GridPointToWorld(*(int *)((char *)d3_ActiveScene + 0xb0), gridX, gridZ, p);
     p[1] = 0.0f;
     position = (char *)*(int *)((char *)*(int *)((char *)a0 + 0x184) + 0x34);
     b.x = *(float *)(position + 0x4c);

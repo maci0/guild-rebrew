@@ -31,7 +31,7 @@ unsigned int __cdecl vfs_fwrite(void* data, int size, int count, void* stream);
 #pragma pack()
 
 
-extern HE_AP_EVENT g_7dcae0[256];
+extern HE_AP_EVENT he_ApEvents[256];
 
 /* ADDRESS: GOLDTL 0x00520d90 */
 int __cdecl he_SaveEvents(void* stream)
@@ -42,7 +42,7 @@ int __cdecl he_SaveEvents(void* stream)
 
 	count = 0;
 	for (i = 0; i < 1024; i++) {
-		if (g_77e980[i].kind != 0)
+		if (he_ActionSlots[i].kind != 0)
 			count++;
 	}
 	if (vfs_fwrite(&count, 4, 1, stream) <= 0)
@@ -51,8 +51,8 @@ int __cdecl he_SaveEvents(void* stream)
 	if (vfs_fwrite(&i, 4, 1, stream) <= 0)
 		return 0;
 	for (i = 0; i < 1024; i++) {
-		if (g_77e980[i].kind != 0) {
-			HE_ACTION* u = &g_77e980[i];
+		if (he_ActionSlots[i].kind != 0) {
+			HE_ACTION* u = &he_ActionSlots[i];
 			if (vfs_fwrite(&u->kind, 1, 1, stream) <= 0)
 				return 0;
 			if (vfs_fwrite(&u->serial, 4, 1, stream) <= 0)
@@ -96,48 +96,48 @@ int __cdecl he_SaveEvents(void* stream)
 	}
 	count = 0;
 	for (i = 0; i < 256; i++) {
-		if (g_7d2020[i].id != 0)
+		if (he_EventDeals[i].id != 0)
 			count++;
 	}
 	if (vfs_fwrite(&count, 4, 1, stream) <= 0)
 		return 0;
 	for (i = 0; i < 256; i++) {
-		if (g_7d2020[i].id == 0)
+		if (he_EventDeals[i].id == 0)
 			continue;
-		if (vfs_fwrite((void*) (g_7d2020[i].id + 4), 4, 1, stream) <= 0)
+		if (vfs_fwrite((void*) (he_EventDeals[i].id + 4), 4, 1, stream) <= 0)
 			return 0;
-		if (vfs_fwrite(&g_7d2020[i].state, 1, 1, stream) <= 0)
+		if (vfs_fwrite(&he_EventDeals[i].state, 1, 1, stream) <= 0)
 			return 0;
-		if (vfs_fwrite(&g_7d2020[i].has_amount, 4, 1, stream) <= 0)
+		if (vfs_fwrite(&he_EventDeals[i].has_amount, 4, 1, stream) <= 0)
 			return 0;
-		if (vfs_fwrite(&g_7d2020[i].owner, 4, 1, stream) <= 0)
+		if (vfs_fwrite(&he_EventDeals[i].owner, 4, 1, stream) <= 0)
 			return 0;
-		if (vfs_fwrite(&g_7d2020[i].amount, 4, 1, stream) <= 0)
+		if (vfs_fwrite(&he_EventDeals[i].amount, 4, 1, stream) <= 0)
 			return 0;
-		if (vfs_fwrite(&g_7d2020[i].pos, 0xe, 1, stream) <= 0)
+		if (vfs_fwrite(&he_EventDeals[i].pos, 0xe, 1, stream) <= 0)
 			return 0;
-		if (vfs_fwrite(g_7d2020[i].name, 0x80, 1, stream) <= 0)
+		if (vfs_fwrite(he_EventDeals[i].name, 0x80, 1, stream) <= 0)
 			return 0;
 	}
 	count = 0;
 	for (i = 0; i < 256; i++) {
-		if (g_7dcae0[i].value_08 != 0 || g_7dcae0[i].value_0c != 0 || g_7dcae0[i].name[0] != 0)
+		if (he_ApEvents[i].value_08 != 0 || he_ApEvents[i].value_0c != 0 || he_ApEvents[i].name[0] != 0)
 			count++;
 	}
 	if (vfs_fwrite(&count, 4, 1, stream) <= 0)
 		return 0;
 	for (i = 0; i < 256; i++) {
-		if (g_7dcae0[i].value_08 == 0 && g_7dcae0[i].value_0c == 0 && g_7dcae0[i].name[0] == 0)
+		if (he_ApEvents[i].value_08 == 0 && he_ApEvents[i].value_0c == 0 && he_ApEvents[i].name[0] == 0)
 			continue;
-		if (vfs_fwrite(&g_7dcae0[i].lifetime, 1, 1, stream) <= 0)
+		if (vfs_fwrite(&he_ApEvents[i].lifetime, 1, 1, stream) <= 0)
 			return 0;
-		if (vfs_fwrite(&g_7dcae0[i].subject_id, 4, 1, stream) <= 0)
+		if (vfs_fwrite(&he_ApEvents[i].subject_id, 4, 1, stream) <= 0)
 			return 0;
-		if (vfs_fwrite(&g_7dcae0[i].value_08, 4, 1, stream) <= 0)
+		if (vfs_fwrite(&he_ApEvents[i].value_08, 4, 1, stream) <= 0)
 			return 0;
-		if (vfs_fwrite(&g_7dcae0[i].value_0c, 4, 1, stream) <= 0)
+		if (vfs_fwrite(&he_ApEvents[i].value_0c, 4, 1, stream) <= 0)
 			return 0;
-		if (vfs_fwrite(g_7dcae0[i].name, 0x40, 1, stream) <= 0)
+		if (vfs_fwrite(he_ApEvents[i].name, 0x40, 1, stream) <= 0)
 			return 0;
 	}
 	return 1;

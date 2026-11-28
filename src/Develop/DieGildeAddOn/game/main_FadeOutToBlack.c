@@ -20,7 +20,7 @@ void __cdecl main_FadeOutToBlack(void)
 	unsigned char* p;
 
 	flags = 0x24087;
-	if (g_14cbca0 == -1) {
+	if (nt_ClientSocket == -1) {
 		flags = 0x24086;
 	}
 	tb_CloseFunction(d2_LoadingScreenTimerCallback);
@@ -30,7 +30,7 @@ void __cdecl main_FadeOutToBlack(void)
 	}
 	d2_DestroyForm(g_7e1d40);
 	d2_ClearBackdropResource();
-	d2_ClearSurface(g_77250c);
+	d2_ClearSurface(d2_ScreenSurface);
 	d2_SuppressOverlay = 0;
 	d2_ReleaseOverlaySprite(p);
 }

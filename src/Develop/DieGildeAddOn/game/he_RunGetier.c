@@ -1,6 +1,6 @@
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern double g_6640e8;
+extern double dbl_0_01;
 extern double g_6629c8;
 int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl cm_SendCancelCharacterActions(int);

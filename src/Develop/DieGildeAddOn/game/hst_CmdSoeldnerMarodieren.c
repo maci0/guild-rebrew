@@ -10,7 +10,7 @@
 
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern char g_7f4ca4[];
+extern char gm_EntityIdField[];
 
 int __cdecl gm_IsSlotLivingPerson(int);
 void __cdecl cm_SendCopyEntityData(void*);
@@ -29,8 +29,8 @@ int __cdecl hst_CmdSoeldnerMarodieren(void)
 			memset(m, 0, sizeof(m));
 			st.hour = i % 4 + 0xd;
 			m[4] = 0x58;
-			*(int*) (m + 8) = *(int*) (g_7f4ca4 + i * 0x21c);
-			*(int*) (m + 0xc) = *(int*) (g_7f4ca4 + i * 0x21c);
+			*(int*) (m + 8) = *(int*) (gm_EntityIdField + i * 0x21c);
+			*(int*) (m + 0xc) = *(int*) (gm_EntityIdField + i * 0x21c);
 			m[0x36] = 1;
 			*(GAME_TIMESTAMP*) (m + 0x28) = st;
 			cm_SendCopyEntityData(m);

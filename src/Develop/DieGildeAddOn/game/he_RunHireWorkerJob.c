@@ -4,9 +4,9 @@
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 #include "Develop/client_types.h"
 
-extern char g_7f4ca0[];
-extern int g_7f4ca4;
-extern unsigned char g_773d75;
+extern char gm_EntitySlotTable[];
+extern int gm_EntityIdField;
+extern unsigned char gm_ActiveTownIndex;
 extern pos14_7f4c00 gm_GameTime;
 extern char s_675908[];
 extern char s_6a625c[];
@@ -61,11 +61,11 @@ void __cdecl he_RunHireWorkerJob(char* ctx)
 			break;
 		}
 		ver = *(unsigned char*) rec;
-		ver = (int) gm_GetScaledWorkforceOutput((unsigned char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (rec + 0x27)]),
+		ver = (int) gm_GetScaledWorkforceOutput((unsigned char*) ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (rec + 0x27)]),
 		    ver, -1, 1);
-		if (ver > gm_AccumulateTyped2((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (rec + 0x27)])) {
+		if (ver > gm_AccumulateTyped2((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (rec + 0x27)])) {
 			io_FormatTextBuffer(text, 0x1a40, rec);
-			he_MessageBoxQuickjump(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (rec + 0x27)].entity_id,
+			he_MessageBoxQuickjump(((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (rec + 0x27)].entity_id,
 			    *(int*) (ctx + 0x10), text, 0, 0x5f2, *(int*) (rec + 1),
 			    *(int*) (ctx + 0xe0), 0, 0);
 			he_FreeAction(ctx);
@@ -95,7 +95,7 @@ void __cdecl he_RunHireWorkerJob(char* ctx)
 		}
 		ent = cm_GetCommandResult(*(int*) (ctx + 0xe4));
 		if (ent == 0) {
-			he_PostEntityMessage(((ENTITY_RECORD*)g_7f4ca0)
+			he_PostEntityMessage(((ENTITY_RECORD*)gm_EntitySlotTable)
 			    [*(unsigned short*) (ctx + 8)].entity_id,
 			    -1, s_6a625c, 0, 0x5f2, 0);
 			he_FreeAction(ctx);
@@ -131,27 +131,27 @@ void __cdecl he_RunHireWorkerJob(char* ctx)
 			if (obj == 0 || *(int*) (ctx + 0xb0 + i * 4) <= 0) {
 				continue;
 			}
-			ver = (int) gm_GetScaledWorkforceOutput((unsigned char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)
+			ver = (int) gm_GetScaledWorkforceOutput((unsigned char*) ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)
 			    [*(unsigned short*) (rec + 0x27)]), *(unsigned char*) rec, -1, 1);
 			*(int*) (ctx + 0xb0 + i * 4) = *(int*) (ctx + 0xb0 + i * 4) - 1;
 			bank = *(unsigned short*) (ctx + 8);
-			kind = ((ENTITY_RECORD*)g_7f4ca0)[bank].entity_state;
+			kind = ((ENTITY_RECORD*)gm_EntitySlotTable)[bank].entity_state;
 			if (kind == 6 || kind == 7) {
 				h = gm_FindBuildingOwner(rec);
 				io_FormatTextBuffer(text, 0x1bab, ver, *obj, rec);
 				if (h != 0 && (*(unsigned char*) (h + 0x1b4) & 1)) {
-					he_MessageBoxQuickjump(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (ctx + 8)].entity_id,
+					he_MessageBoxQuickjump(((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (ctx + 8)].entity_id,
 					    *(int*) (rec + 1), text, 0, 0x60c, *(int*) (rec + 1),
 					    *(int*) (ctx + 0xe0), 0, s_6a5b54);
 				} else {
-					he_MessageBoxQuickjump(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (ctx + 8)].entity_id,
+					he_MessageBoxQuickjump(((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (ctx + 8)].entity_id,
 					    *(int*) (rec + 1), text, 0, 0x5f2, *(int*) (rec + 1),
 					    *(int*) (ctx + 0xe0), 0, s_6a5b54);
 				}
 			}
 			cm_RequestTransferCurrencyNoKill(*(int*) (obj + 2),
-			    ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (ctx + 8)].entity_id, g_773d75, ver);
-			h = gm_GetEntityTableEntry((char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (ctx + 8)]));
+			    ((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (ctx + 8)].entity_id, gm_ActiveTownIndex, ver);
+			h = gm_GetEntityTableEntry((char*) ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (ctx + 8)]));
 			if (h != 0) {
 				*(int*) (h + 0x4c) = *(int*) (h + 0x4c) + ver;
 			}

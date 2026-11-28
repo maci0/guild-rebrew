@@ -1,5 +1,5 @@
 #include "g_680bd0.h"
-extern Entry680bd0 g_680bd0[48];
+extern Entry680bd0 gm_MissionSpecs[48];
 /* ADDRESS: GOLDTL 0x004b3ce0 */
 int* __cdecl gm_FindNextMissionSpec(int key, int* previous)
 {
@@ -20,7 +20,7 @@ int* __cdecl gm_FindNextMissionSpec(int key, int* previous)
 		}
 		return 0;
 	}
-	end = (char*) &g_680bd0[47];
+	end = (char*) &gm_MissionSpecs[47];
 	if ((char*) previous >= end) {
 		return 0;
 	}

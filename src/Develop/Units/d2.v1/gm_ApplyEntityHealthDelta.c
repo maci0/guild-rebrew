@@ -22,7 +22,7 @@ typedef struct
 	char pad28[0x21c - 0x28];
 } HEALTH_DELTA_ENTITY_VIEW;
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 #include "Develop/client_types.h"
 
@@ -54,7 +54,7 @@ float __cdecl gm_ApplyEntityHealthDelta(unsigned short id, int delta)
 	char msg[0xf8];
 	HEALTH_DELTA_ENTITY_VIEW* e;
 
-	e = &((HEALTH_DELTA_ENTITY_VIEW*)g_7f4ca0)[id];
+	e = &((HEALTH_DELTA_ENTITY_VIEW*)gm_EntitySlotTable)[id];
 	if (e->id == 0xffff || e->kind == 10 || e->alive == 0)
 		return -1.0f;
 	if (e->kind != 0x14) {
@@ -63,7 +63,7 @@ float __cdecl gm_ApplyEntityHealthDelta(unsigned short id, int delta)
 		if (res <= 0.0) {
 			dead = 0;
 			cm_BeginPacketFieldDelta((char*) e, e->h);
-			cm_AppendCommandSyncField(1, 1, (short) ((char*) e - g_aed32c + 8), &dead);
+			cm_AppendCommandSyncField(1, 1, (short) ((char*) e - cm_PacketDeltaBase + 8), &dead);
 			cm_SendSetAttribute();
 			memset(msg, 0, sizeof(msg));
 			msg[4] = 0x72;
@@ -89,7 +89,7 @@ float __cdecl gm_ApplyEntityHealthDelta(unsigned short id, int delta)
 		if (res <= 0.0) {
 			dead = 0;
 			cm_BeginPacketFieldDelta((char*) e, e->h);
-			cm_AppendCommandSyncField(1, 1, (short) ((char*) e - g_aed32c + 8), &dead);
+			cm_AppendCommandSyncField(1, 1, (short) ((char*) e - cm_PacketDeltaBase + 8), &dead);
 			cm_SendSetAttribute();
 			memset(msg, 0, sizeof(msg));
 			msg[4] = 0x72;

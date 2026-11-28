@@ -1,5 +1,5 @@
 extern char* lpGebaeudePROT;
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 int __cdecl gm_GetBuildingTechEffect(unsigned char* p, int a, int b);
 char* __cdecl gm_FindBuildingOwner(int arg1);

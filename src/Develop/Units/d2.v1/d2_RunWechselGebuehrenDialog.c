@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
 void* __cdecl d2_LoadForm(int a, int b, char* name);
@@ -35,9 +35,9 @@ void __cdecl d2_RunWechselGebuehrenDialog(char* o)
     d2_CreateGuiWindow(w1, 3, 0xf, *(int*) (o + 0x6d));
 
     while (main_RunFrameLoop((void*) d2_RunWechselGebuehrenDialog, 0x677c7) != 0) {
-        if (g_14ce8e0 != 0 || g_100f1dc == 1)
-            g_774654 = 1;
-        if (g_100f1dc == 2) {
+        if (io_RightButtonReleased != 0 || d2_DialogButtonAction == 1)
+            d2_DialogCloseRequested = 1;
+        if (d2_DialogButtonAction == 2) {
             int a;
             int b;
 
@@ -47,9 +47,9 @@ void __cdecl d2_RunWechselGebuehrenDialog(char* o)
             cm_AppendPacketFieldDelta(4, 1, 0x69, &a);
             cm_AppendPacketFieldDelta(4, 1, 0x6d, &b);
             cm_RequestChangeAttribute();
-            g_774654 = 1;
-        } else if (g_100f1dc == 1) {
-            g_774654 = 1;
+            d2_DialogCloseRequested = 1;
+        } else if (d2_DialogButtonAction == 1) {
+            d2_DialogCloseRequested = 1;
         }
     }
     d2_DestroyForm((int) dlg);

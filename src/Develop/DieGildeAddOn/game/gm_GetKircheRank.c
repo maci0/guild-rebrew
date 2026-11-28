@@ -11,7 +11,7 @@ typedef struct
 } Ent21c;
 // SIZE 0x21c
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 int __cdecl gm_GetKircheRank(int entityIdx, int add)
 {
@@ -23,9 +23,9 @@ int __cdecl gm_GetKircheRank(int entityIdx, int add)
 	if (entityIdx < 0 || entityIdx >= 0x300) {
 		return 0;
 	}
-	v = ((Ent21c*)g_7f4ca0)[entityIdx].x1ac + add;
+	v = ((Ent21c*)gm_EntitySlotTable)[entityIdx].x1ac + add;
 	for (j = 0; j < 768; j++) {
-		if (v <= ((Ent21c*)g_7f4ca0)[j].x1ac && ((Ent21c*)g_7f4ca0)[j].id != 0xffff && ((Ent21c*)g_7f4ca0)[j].x2 < 10 && j != entityIdx) {
+		if (v <= ((Ent21c*)gm_EntitySlotTable)[j].x1ac && ((Ent21c*)gm_EntitySlotTable)[j].id != 0xffff && ((Ent21c*)gm_EntitySlotTable)[j].x2 < 10 && j != entityIdx) {
 			r++;
 		}
 	}

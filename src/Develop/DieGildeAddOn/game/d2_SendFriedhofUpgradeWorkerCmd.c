@@ -29,7 +29,7 @@ typedef struct
 // SIZE 0xf8
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 
@@ -50,7 +50,7 @@ int __cdecl d2_SendFriedhofUpgradeWorkerCmd(char* building, unsigned short* work
 		memset(&pkt, 0, sizeof(pkt));
 		pkt.type = 0x8f;
 		pkt.x36 = 1;
-		pkt.x8 = *(int*) (g_7f4ca0 + g_774970 * 540 + 4);
+		pkt.x8 = *(int*) (gm_EntitySlotTable + gm_LocalPlayerSlot * 540 + 4);
 		pkt.xc = *(int*) (building + 1);
 		pkt.name = (*(pos14_7f4c00*)&gm_GameTime);
 		if (entry != 0) {

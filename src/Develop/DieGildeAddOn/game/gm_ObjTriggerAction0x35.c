@@ -21,7 +21,7 @@ int __cdecl gm_ObjTriggerAction0x35(char* e)
 
 	for (p = he_StartHandlungSearch(1, 0, 0x35); p != 0; p = he_fn_Handlung()) {
 		if (*(int*) (e + 4) == *(int*) (p + 0xbc)) {
-			he_NotifyAction0x35Blocked(e, ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (p + 8)]));
+			he_NotifyAction0x35Blocked(e, ((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (p + 8)]));
 			*(Stamp*) (p + 0x52) = (*(Stamp*)&gm_GameTime);
 			cm_SendSetHE(-1, p);
 		}

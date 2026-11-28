@@ -8,7 +8,7 @@ typedef D2_FORM_RECORD Obj;
 
 extern GuiObj g_00fb1020[];
 extern GOLD_GUI_WINDOW g_00f8f120[];
-extern D2_FORM_RECORD g_1038140[];
+extern D2_FORM_RECORD d2_Forms[];
 
 #if defined(REBREW_GOLD)
 /* ADDRESS: GOLD 0x00475b70 */
@@ -32,9 +32,9 @@ int __cdecl d2_GetWindowListItem(int k, int i, int j)
 	D2_WIN* w;
 
 	if (k != -1) {
-		w = &((D2_WIN*)g_1015f40)[g_1038140[k].wins[i]];
+		w = &((D2_WIN*)d2_Windows)[d2_Forms[k].wins[i]];
 	} else {
-		w = &((D2_WIN*)g_1015f40)[i];
+		w = &((D2_WIN*)d2_Windows)[i];
 	}
 	if (j > w->count) {
 		return -1;

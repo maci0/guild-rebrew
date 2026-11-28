@@ -34,7 +34,7 @@ void __cdecl d2_PopulateDealSummaryList(int win, int sub, int idx, int unused)
 	d2_SetForm(win, sub);
 	memset(g_776ca0, 0, sizeof(g_776ca0));
 	gm_BuildDealSummary(idx, buf);
-	io_AppendText(0x1efa, ((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx].value_194);
+	io_AppendText(0x1efa, ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[idx].value_194);
 	k = 0;
 	while (*(int*) (buf + 0x35 + k * 0x1e) != 0 && k < 256) {
 		r = buf + 0x35 + k * 0x1e;

@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char g_6b5c60[];
+extern char str_empty[];
 
 
 
@@ -12,7 +12,7 @@ void __cdecl he_NotifyOfficeAction(void* setter, void* recipient)
 
 	t = *(char*) ((char*) recipient + 2);
 	if (t == 6 || t == 7) {
-		io_FormatTextBuffer(g_774a80, 0x20bb, *(unsigned short*) setter);
-		he_PostEntityMessage(*(int*) ((char*) recipient + 4), -1, g_774a80, 0, 0x5fd, g_6b5c60);
+		io_FormatTextBuffer(io_MessageFormatBuf, 0x20bb, *(unsigned short*) setter);
+		he_PostEntityMessage(*(int*) ((char*) recipient + 4), -1, io_MessageFormatBuf, 0, 0x5fd, str_empty);
 	}
 }

@@ -31,7 +31,7 @@ typedef struct
 
 #include "Develop/client_types.h"
 
-extern Win_1015f40 g_1015f40[0x60];
+extern Win_1015f40 d2_Windows[0x60];
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 void __cdecl d2_PositionControl(int x, int y, int slot);
@@ -46,7 +46,7 @@ void __cdecl d2_UpdateWindowScroll(int win)
 	int slot;
 	int i;
 
-	w = &((D2_SCROLL_STEP_WIN*)g_1015f40)[win];
+	w = &((D2_SCROLL_STEP_WIN*)d2_Windows)[win];
 	v = w->vx;
 	if (v < 0) {
 		w->x -= w->step;
@@ -95,7 +95,7 @@ y_axis:
 		}
 		while (i < w->count) {
 			slot = w->ids[i];
-			ent = (D2_SCROLL_STEP_ENT*)&((D2_CONTROL_TL*)g_1015ea0)[slot];
+			ent = (D2_SCROLL_STEP_ENT*)&((D2_CONTROL_TL*)d2_Controls)[slot];
 			d2_PositionControl(((*(int*)&((D2_CONTROL_TL*)ent)->x) - w->y) + w->prevy,
 				((*(int*)&((D2_CONTROL_TL*)ent)->y) - w->x) + w->prevx, slot);
 			if ((*(int*)&((D2_CONTROL_TL*)ent)->kind) == 0x11) {

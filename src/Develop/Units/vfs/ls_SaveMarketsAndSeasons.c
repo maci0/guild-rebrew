@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/season_slots.h"
-extern char g_868060[];
+extern char gm_TownTable[];
 extern unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream);
 
 /* ADDRESS: GOLDTL 0x00520310 */
@@ -50,7 +50,7 @@ unsigned int __cdecl ls_SaveMarketsAndSeasons(unsigned int stream)
 		}
 	}
 	for (i = 0; i < 4; i++) {
-		row = g_868060 + i * 0x2f4;
+		row = gm_TownTable + i * 0x2f4;
 		if (vfs_fwrite(row, 0x20, 1, (char*) stream) <= 0)
 			return 0;
 		if (vfs_fwrite(row + 0x40, 8, 1, (char*) stream) <= 0)

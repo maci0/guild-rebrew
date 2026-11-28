@@ -17,7 +17,7 @@ typedef struct
 // SIZE 0x38
 
 extern int d2_CurrentWindowId;
-extern Win_1015f40 g_1015f40[0x60];
+extern Win_1015f40 d2_Windows[0x60];
 extern int g_14aadc0[];
 
 int __cdecl d2_ClearAndScrollSubform(int, int, int);
@@ -38,7 +38,7 @@ int __cdecl d2_LayoutOfficePeerList(int a1, int a2, int a3, unsigned int n, Item
 		return 0;
 	}
 	y = d2_ClearAndScrollSubform(a1, a2, a3);
-	half = ((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width / 2;
+	half = ((D2_WIN*)d2_Windows)[d2_CurrentWindowId].width / 2;
 	io_FormatTextBuffer(buf, 0x16a7, items[0].x34 + 0x253);
 	d2_ShowCenteredText((int) buf, half, 8, half * 2, 0x55);
 	for (i = 0; i < n; i++) {
@@ -48,7 +48,7 @@ int __cdecl d2_LayoutOfficePeerList(int a1, int a2, int a3, unsigned int n, Item
 		d2_CreateRightAlignedText(g_14aadc0[items[i].x2c], 0x14a, i * 0x70 + 0x28 + 0x1e, 200, 0x55);
 	}
 	d2_EnableDialogItems(n, items);
-	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3c[0x21c] = y;
-	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3c[0x238] = 0x70;
+	*(int*) &((D2_WIN*)d2_Windows)[d2_CurrentWindowId].pad3c[0x21c] = y;
+	*(int*) &((D2_WIN*)d2_Windows)[d2_CurrentWindowId].pad3c[0x238] = 0x70;
 	return 1;
 }

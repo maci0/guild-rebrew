@@ -1,7 +1,7 @@
 #include <math.h>
 
-extern float g_6628a8;
-extern float g_6628a0;
+extern float flt_0_0;
+extern float flt_1_0;
 
 /* ADDRESS: GOLDTL 0x004518a0 */
 void __cdecl d3_NormalizeVector(float* v)
@@ -15,8 +15,8 @@ void __cdecl d3_NormalizeVector(float* v)
 	y = v[1];
 	x = v[0];
 	len = (float) sqrt(x * x + y * y + z * z);
-	if (len != g_6628a8) {
-		len = g_6628a0 / len;
+	if (len != flt_0_0) {
+		len = flt_1_0 / len;
 		v[0] *= len;
 		v[1] *= len;
 		v[2] *= len;

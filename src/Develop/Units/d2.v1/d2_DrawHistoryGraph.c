@@ -42,7 +42,7 @@ int __cdecl d2_DrawHistoryGraph(Arg5d36 s, int w, int h)
 			m = g_99ec2c[i].v;
 		}
 	}
-	m = (int) (g_773d4c > (float) m ? g_773d4c : (float) m);
+	m = (int) (gm_CityPopulation > (float) m ? gm_CityPopulation : (float) m);
 	for (i = 0; i < 8; i++) {
 		if (m < steps[i]) {
 			m = steps[i];
@@ -57,6 +57,6 @@ int __cdecl d2_DrawHistoryGraph(Arg5d36 s, int w, int h)
 		d2_DrawLine(x0, (int) (by - g_99ec2c[i].v * sy), x1, (int) (by - g_99ec2c[i + 1].v * sy), 0x33, 0x33, 0x33);
 		x0 = x1;
 	}
-	d2_DrawLine(step * 15 + 0x2d, (int) (by - g_99ec2c[15].v * sy), step * 16 + 0x2d, (int) (by - g_773d4c * sy), 0x33, 0x33, 0x33);
+	d2_DrawLine(step * 15 + 0x2d, (int) (by - g_99ec2c[15].v * sy), step * 16 + 0x2d, (int) (by - gm_CityPopulation * sy), 0x33, 0x33, 0x33);
 	return m;
 }

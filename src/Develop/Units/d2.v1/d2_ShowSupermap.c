@@ -17,9 +17,9 @@ typedef struct {
 	unsigned char* data;
 } Map5b52;
 
-extern volatile int g_6b7fc0;
+extern volatile int tb_TimerPaused;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_774654;
+extern int d2_DialogCloseRequested;
 extern int g_6a2c04;
 extern char g_6abaec[];
 
@@ -45,7 +45,7 @@ void __cdecl d2_ShowSupermap(Map5b52* m, int x0, int y0, int x1, int y1)
 	frame = 0;
 	h = d2_LoadForm(0, 0, g_6abaec);
 	d2_CenterForm(h, 3);
-	g_6b7fc0 = 1;
+	tb_TimerPaused = 1;
 	g_6a2c04 = 0;
 	while (main_RunFrameLoop((void*) d2_ShowSupermap, 0x277c7) != 0) {
 		d2_SetForm(h, 1);
@@ -84,11 +84,11 @@ void __cdecl d2_ShowSupermap(Map5b52* m, int x0, int y0, int x1, int y1)
 				frame++;
 			}
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 	}
 	d2_DestroyForm(h);
-	g_6b7fc0 = 0;
+	tb_TimerPaused = 0;
 	g_6a2c04 = 1;
 }

@@ -1,10 +1,10 @@
 
 
-extern int g_77494c;
+extern int nt_NetSyncFlags;
 
 int __cdecl cm_OrCommandFlags(unsigned char* command, char* result)
 {
-	g_77494c |= command[0x10];
+	nt_NetSyncFlags |= command[0x10];
 	if (result != 0) {
 		*result = 1;
 	}

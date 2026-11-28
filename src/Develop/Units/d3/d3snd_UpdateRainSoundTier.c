@@ -2,13 +2,13 @@
  * one of four intensity tiers, starts/stops the per-tier loop sounds and
  * returns the volume through the shared voice bank. */
 
-extern int g_6b8300;
-extern char g_772d10;
+extern int d3_CurrentFloor;
+extern char d3snd_AmbientEnabled;
 extern int g_772d3c;
 extern int g_772d40;
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 extern char* d3_ActiveCamera;
-extern int* g_7e4538;
+extern int* d3_RainEffect;
 extern int g_7747bc;
 extern int* g_1005854;
 extern int* g_100585c;
@@ -21,8 +21,8 @@ extern int g_1005840;
 extern int g_1005844;
 extern int g_1005848;
 extern short g_100584c;
-extern short g_7f4c0c;
-extern int gm_GameTime, g_7f4c04, g_7f4c08;
+extern short gm_GameTimeTailWord;
+extern int gm_GameTime, gm_GameTimeHour, gm_GameTimeSliceDword;
 float __cdecl d3_SampleAverageTerrainHeight(float* pos);
 int __cdecl gm_GetSeason(int* p);
 int* __cdecl sb_PlayVoice(char* bank, char* name, int loop, int pan, int vol,
@@ -33,7 +33,7 @@ int __cdecl _ftol(void);
 int __cdecl fcn_0064d3f8(void);
 
 extern float g_664330;
-extern float g_6628a0;
+extern float flt_1_0;
 extern float g_662a18;
 extern float g_664e80;
 extern float g_664e88;
@@ -62,16 +62,16 @@ void __cdecl d3snd_UpdateRainSoundTier(void)
     int vol;
     int pick;
 
-    if (g_6b8300 != 0 && g_772d10 != 0
+    if (d3_CurrentFloor != 0 && d3snd_AmbientEnabled != 0
         && g_772d3c == gm_GetSeason((int*) 0x7f4c00)) {
         scaled = 0;
         d = *(float*) (d3_ActiveCamera + 0x50)
             - d3_SampleAverageTerrainHeight((float*) (d3_ActiveCamera + 0x4c));
         g_1005840 = gm_GameTime;
-        g_1005844 = g_7f4c04;
-        g_1005848 = g_7f4c08;
-        g_100584c = (short) g_7f4c0c;
-        if (g_7e4538 != 0 && (count = *g_7e4538) != 0) {
+        g_1005844 = gm_GameTimeHour;
+        g_1005848 = gm_GameTimeSliceDword;
+        g_100584c = (short) gm_GameTimeTailWord;
+        if (d3_RainEffect != 0 && (count = *d3_RainEffect) != 0) {
             scaled = count * 8;
             if (count >= 999) {
                 vol = (int) ((dbl_2600 - d) * flt_889 * flt_inv2600);
@@ -273,14 +273,14 @@ void __cdecl d3snd_UpdateRainSoundTier(void)
                 g_1005854 = 0;
             }
         }
-        if (g_6b8300 != 0 && g_772d10 != 0
-            && (unsigned int) ((g_6b7fac
-                        + g_6b7fac * 2) * 4
-                    - g_772d40 + scaled + g_6b7fac)
+        if (d3_CurrentFloor != 0 && d3snd_AmbientEnabled != 0
+            && (unsigned int) ((gm_GameTicks
+                        + gm_GameTicks * 2) * 4
+                    - g_772d40 + scaled + gm_GameTicks)
                 >= (unsigned int) ((int*) 0x6817f8)[g_772d3c * 3]) {
-            g_772d40 = (g_6b7fac
-                    + g_6b7fac * 2) * 4
-                + g_6b7fac;
+            g_772d40 = (gm_GameTicks
+                    + gm_GameTicks * 2) * 4
+                + gm_GameTicks;
             if (((float*) 0x6817f0)[g_772d3c * 3]
                     + (float) fcn_0064d3f8() * flt_inv32768
                 > flt_1) {

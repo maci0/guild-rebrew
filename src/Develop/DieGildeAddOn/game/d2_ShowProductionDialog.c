@@ -1,23 +1,23 @@
 #include "Develop/DieGildeAddOn/game/client_data.h"
 #include "Develop/Units/d2.v1/d2_win.h"
-extern char g_779160[];
-extern char* g_1015ea0;
+extern char d2_ProductionPanels[];
+extern char* d2_Controls;
 extern char* g_item_def_table;
 extern int d2_CurrentWindowId;
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern int g_100f884;
 extern int d2_CurrentElementId;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 #include "game_player.h"
-extern char* g_7746cc;
+extern char* sv_SelectedBuilding;
 #include "Develop/Units/d2.v1/d2_gui.h"
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
-extern char g_7f4ca4[];
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
+extern char gm_EntityIdField[];
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-extern int g_774654;
+extern int d2_DialogCloseRequested;
 
 void* __cdecl memset(void*, int, unsigned int);
 char* __cdecl itoa(int, char*, int);
@@ -106,17 +106,17 @@ int __cdecl d2_ShowProductionDialog(char* building)
 	d2_SetForm(h, 3);
 	io_AppendText(0xc7);
 	d2_ResetBuildingUiSlots();
-	*(int*) g_779160 = 0;
+	*(int*) d2_ProductionPanels = 0;
 	count = 1;
 	d2_SetForm(h, 0);
 	k = d2_CurrentWindowId * 0x3cc;
-	*(int*) &((D2_WIN*)((char*)g_1015f40 + k))->pad3a8[0] = 0xe;
-	*(int*) &((D2_WIN*)((char*)g_1015f40 + k))->pad3a8[4] = 0xe;
-	*(int*) &((D2_WIN*)((char*)g_1015f40 + k))->pad3a8[8] = 0xe;
-	*(int*) &((D2_WIN*)((char*)g_1015f40 + k))->pad3a8[12] = 0xe;
+	*(int*) &((D2_WIN*)((char*)d2_Windows + k))->pad3a8[0] = 0xe;
+	*(int*) &((D2_WIN*)((char*)d2_Windows + k))->pad3a8[4] = 0xe;
+	*(int*) &((D2_WIN*)((char*)d2_Windows + k))->pad3a8[8] = 0xe;
+	*(int*) &((D2_WIN*)((char*)d2_Windows + k))->pad3a8[12] = 0xe;
 	d2_DrawPanelFrame(d2_CurrentWindowId, 0x70b, 0x742);
 	d2_CreateWindowScrollbar(0x270, 0x15e, d2_CurrentWindowId, d2_GetFormWindow(h, 2, 0x78, &v16, &v15, &item));
-	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[item].font)) = 0x54;
+	*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[item].font)) = 0x54;
 	d2_SetOverlayAnimation(0, 0);
 	do {
 		d2_SetForm(h, 2);
@@ -132,7 +132,7 @@ int __cdecl d2_ShowProductionDialog(char* building)
 		if (p3 == 0) {
 			return 0;
 		}
-		if (g_100f1dc != -1 && g_100f884 == h) {
+		if (d2_DialogButtonAction != -1 && g_100f884 == h) {
 			hasAny = 0;
 			q = (char*) 0x7e30e0;
 			do {
@@ -150,7 +150,7 @@ int __cdecl d2_ShowProductionDialog(char* building)
 			i = 0;
 			if (count > 0) {
 				do {
-					e = (char*) ((int) g_779160 + i * 0x58);
+					e = (char*) ((int) d2_ProductionPanels + i * 0x58);
 					if (d2_CurrentElementId == *(int*) (e + 0x34)) {
 						if (hasAny == 0) {
 							q = (char*) 0x7e30d0;
@@ -159,16 +159,16 @@ int __cdecl d2_ShowProductionDialog(char* building)
 								if (n == 0xffff) {
 									break;
 								}
-								p = *(char**) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[n] + 0x17c);
+								p = *(char**) ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[n] + 0x17c);
 								if (i == 0) {
 									if (p != 0 && *(char*) p == 9 && *(int*) (p + 0x10) == *(int*) (building + 1)) {
-										*(unsigned char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[n] + 0x188) = 0;
+										*(unsigned char*) ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[n] + 0x188) = 0;
 									}
 								}
 								else {
 									if (p != 0 && *(char*) p == 8 && *(int*) (p + 0x10) == *(int*) (building + 1)
 										&& *(unsigned short*) (p + 0xac) == *(int*) e) {
-										*(unsigned char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[n] + 0x188) = 1;
+										*(unsigned char*) ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[n] + 0x188) = 1;
 									}
 								}
 								q += 0x28;
@@ -180,15 +180,15 @@ int __cdecl d2_ShowProductionDialog(char* building)
 								if (p == 0) {
 									memset(&msg, 0, 0xf8);
 									msg.timestamp.a = gm_GameTime.a;
-									msg.timestamp.c = g_7f4c08;
+									msg.timestamp.c = gm_GameTimeSliceDword;
 									msg.type = 9;
-									msg.f08 = *(int*) (&((ENTITY_RECORD*)g_7f4ca0)[(unsigned)g_774970].entity_id);
+									msg.f08 = *(int*) (&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned)gm_LocalPlayerSlot].entity_id);
 									msg.f0c = *(int*) (building + 1);
 									msg.f10 = 0;
 									msg.f14 = 0;
 									msg.f36 = 1;
-									msg.timestamp.b = g_7f4c04;
-									msg.timestamp.d = (unsigned short) g_7f4c0c;
+									msg.timestamp.b = gm_GameTimeHour;
+									msg.timestamp.d = (unsigned short) gm_GameTimeTailWord;
 									msg.f58 = *(int*) (building + 1);
 									msg.f5c = *(int*) (p1 + 2);
 									msg.f60 = *(int*) (p3 + 2);
@@ -214,15 +214,15 @@ int __cdecl d2_ShowProductionDialog(char* building)
 									memset(&msg, 0, 0xf8);
 									msg.timestamp.a = gm_GameTime.a;
 									msg.type = 8;
-									msg.timestamp.c = g_7f4c08;
+									msg.timestamp.c = gm_GameTimeSliceDword;
 									msg.f36 = 1;
 									*(unsigned short*) &msg.f58 = (unsigned short) *(int*) e;
-									msg.f08 = *(int*) (&((ENTITY_RECORD*)g_7f4ca0)[(unsigned)g_774970].entity_id);
+									msg.f08 = *(int*) (&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned)gm_LocalPlayerSlot].entity_id);
 									msg.f10 = 0;
 									msg.f14 = 0;
 									msg.f0c = *(int*) (building + 1);
-									msg.timestamp.b = g_7f4c04;
-									msg.timestamp.d = (unsigned short) g_7f4c0c;
+									msg.timestamp.b = gm_GameTimeHour;
+									msg.timestamp.d = (unsigned short) gm_GameTimeTailWord;
 									msg.f5c = *(int*) (building + 1);
 									msg.f60 = *(int*) (p3 + 2);
 									k = cm_SendCopyEntityData((char*) &msg);
@@ -242,8 +242,8 @@ int __cdecl d2_ShowProductionDialog(char* building)
 										break;
 									}
 									if (*(int*) (q + 0x10) != 0) {
-										he_AssignActionSlot(building, g_7746cc, n, p);
-										*(unsigned char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[n] + 0x188) = 0;
+										he_AssignActionSlot(building, sv_SelectedBuilding, n, p);
+										*(unsigned char*) ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[n] + 0x188) = 0;
 									}
 									q += 0x28;
 								} while (q < (char*) 0x7e35d0);
@@ -257,7 +257,7 @@ int __cdecl d2_ShowProductionDialog(char* building)
 				} while (i < count);
 			}
 		}
-		if (g_14ce8e0 != 0) {
+		if (io_RightButtonReleased != 0) {
 			hasAny = 0;
 			q = (char*) 0x7e30e0;
 			do {
@@ -279,29 +279,29 @@ int __cdecl d2_ShowProductionDialog(char* building)
 					if (n == 0xffff) {
 						break;
 					}
-					*(unsigned char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[n] + 0x188) = 0;
+					*(unsigned char*) ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[n] + 0x188) = 0;
 					q += 0x28;
 				} while (q < (char*) 0x7e35d0);
 			}
 			else {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 				d3_EndCameraAndUiMode();
 			}
 		}
 		e = fcn_00502cd0(*(int*) (p1 + 0x14), 1, 4, 0x17);
 		if (e != 0) {
 			k = count;
-			p = (char*) ((int) g_779160 + count * 0x58);
+			p = (char*) ((int) d2_ProductionPanels + count * 0x58);
 			do {
 				if (*(int*) (e + 0xe) > 1) {
 					v = 0;
 					for (n = 1; n < k; n++) {
-						if (*(int*) ((int) g_779160 + n * 0x58) == *(unsigned short*) e) {
+						if (*(int*) ((int) d2_ProductionPanels + n * 0x58) == *(unsigned short*) e) {
 							v = 1;
 							break;
 						}
 					}
-					if (v == 0 && p < (g_779160 + 0x580)) {
+					if (v == 0 && p < (d2_ProductionPanels + 0x580)) {
 						*(int*) p = *(unsigned short*) e;
 						p += 0x58;
 						k++;
@@ -313,7 +313,7 @@ int __cdecl d2_ShowProductionDialog(char* building)
 		}
 		if (count > 1) {
 			n = count - 1;
-			p = (g_779160 + 0xa8);
+			p = (d2_ProductionPanels + 0xa8);
 			do {
 				q = p - 0x4c;
 				*(int*) p = 0x7fffffff;

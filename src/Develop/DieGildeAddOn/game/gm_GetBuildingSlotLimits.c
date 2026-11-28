@@ -1,5 +1,5 @@
-extern char g_696178[];
-extern char g_696178[];
+extern char gm_BuildingSlotLimits[];
+extern char gm_BuildingSlotLimits[];
 
 
 
@@ -16,7 +16,7 @@ int __cdecl gm_GetBuildingSlotLimits(int idx, int* out)
 	if (idx >= 0x58) {
 		return 0;
 	}
-	t = (fcn_004fac80_E*) g_696178;
+	t = (fcn_004fac80_E*) gm_BuildingSlotLimits;
 	out[0] = t[idx].a;
 	out[1] = t[idx].b;
 	return 1;

@@ -49,10 +49,10 @@ struct D3_SKY_DEV {
 #pragma pack(pop)
 
 extern char* g_6b5de0;
-extern int g_6b86d4;
-extern unsigned char g_67a2ac;
+extern int d3_SceneRenderLock;
+extern unsigned char d3_LightingEnabled;
 extern unsigned char g_6b7ff9;
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 int __cdecl d3_RebuildSkyDomeMesh(D3_SKY_DOME_STATE*);
 void __cdecl d3_RenderSkyLayer(D3_SKY_DOME_STATE*, D3_SKY_LAYER_NODE*);
 
@@ -71,8 +71,8 @@ char __cdecl d3_UpdateAndRenderSky(D3_SKY_DOME_STATE* e)
 	if (e->f_c == -1) {
 		d3_RebuildSkyDomeMesh(e);
 	}
-	e->dt = (float) ((unsigned long) g_6b7fac - e->last);
-	e->last = (unsigned long) g_6b7fac;
+	e->dt = (float) ((unsigned long) gm_GameTicks - e->last);
+	e->last = (unsigned long) gm_GameTicks;
 	n = e->node;
 	if (n) {
 	do {
@@ -98,7 +98,7 @@ char __cdecl d3_UpdateAndRenderSky(D3_SKY_DOME_STATE* e)
 			found = n;
 		}
 	}
-	if (found && e->f_c > 0 && g_6b86d4 <= 1) {
+	if (found && e->f_c > 0 && d3_SceneRenderLock <= 1) {
 		((D3_SKY_DEV*) g_6b5de0)->vtbl->SetRenderState((D3_SKY_DEV*) g_6b5de0, 0x88, 0);
 		((D3_SKY_DEV*) g_6b5de0)->vtbl->SetRenderState((D3_SKY_DEV*) g_6b5de0, 7, 0);
 		((D3_SKY_DEV*) g_6b5de0)->vtbl->SetVertexShader((D3_SKY_DEV*) g_6b5de0, 0x1c4);
@@ -109,7 +109,7 @@ char __cdecl d3_UpdateAndRenderSky(D3_SKY_DOME_STATE* e)
 			found = found->next;
 		} while (found);
 		((D3_SKY_DEV*) g_6b5de0)->vtbl->SetRenderState((D3_SKY_DEV*) g_6b5de0, 0x88, 1);
-		if (g_67a2ac) {
+		if (d3_LightingEnabled) {
 			arg = (g_6b7ff9 != 0) + 1;
 		}
 		else {

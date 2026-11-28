@@ -19,9 +19,9 @@ typedef struct D2_PROD_OPTION_SOURCE {
 } D2_PROD_OPTION_SOURCE;
 
 extern char* g_entity_type_table; /* 0x868050, BSS pointer */
-extern unsigned char g_773d75;    /* 0x773d75, BSS */
+extern unsigned char gm_ActiveTownIndex;    /* 0x773d75, BSS */
 extern int d2_CurrentWindowId;              /* 0x772514, BSS */
-extern float g_662cf8;            /* 0x662cf8, .rdata, 100.0f */
+extern float flt_100_0;            /* 0x662cf8, .rdata, 100.0f */
 
 int __cdecl d2_SetForm(int k, int i);
 int __cdecl d2_GetWindowListItem(int k, int i, int j);
@@ -81,7 +81,7 @@ void __cdecl d2_InitProdSettingControls(int id, int* out, int* value, int* slots
     }
 
     element = d2_GetWindowListItem(id, 2,
-                           io_AppendText(0x1953, text, g_773d75));
+                           io_AppendText(0x1953, text, gm_ActiveTownIndex));
     *out = element;
     d2_SetElementValue(element, 1000, 9000, *value);
 
@@ -91,7 +91,7 @@ void __cdecl d2_InitProdSettingControls(int id, int* out, int* value, int* slots
                                d2_CurrentWindowId);
         *handle = element;
         f = source->value38;
-        d2_SetElementValue(element, 50, 150, (int) (f * g_662cf8));
+        d2_SetElementValue(element, 50, 150, (int) (f * flt_100_0));
         return;
     }
     *handle = -1;

@@ -18,7 +18,7 @@ typedef struct F8 {
 extern float g_664368;
 extern float g_66436c;
 extern float g_6628d8;
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 
 int __cdecl ai_FindEntityInFavorRange(char* p, int kind, F8 f, int c, float r, int* out);
 int __cdecl gm_ResolveEntityById(void** out, int a, int b, int c);
@@ -58,7 +58,7 @@ int __cdecl ai_StartBuergermeisterRathaus(int a1, char* e, char* q, Blk24* o1, B
 		return 0;
 	}
 	rec = (char*) fcn_00502cd0(*(int*) (q + 0x5d), 2, 6, 0, 0x115);
-	val = gm_SumQueryEntryValues(*(int*) (rec + 0x14), g_773d75);
+	val = gm_SumQueryEntryValues(*(int*) (rec + 0x14), gm_ActiveTownIndex);
 	if (!(*(unsigned char*) (q + 0x5a) & 4)) {
 		if (*(char*) (q + 0x5c) < gm_RandomMod(0x40) + 0x25) {
 			b1.kind = 4;

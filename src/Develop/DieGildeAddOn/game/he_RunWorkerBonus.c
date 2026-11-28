@@ -1,5 +1,5 @@
-extern char g_7f4ca0[];
-extern unsigned char g_773d75;
+extern char gm_EntitySlotTable[];
+extern unsigned char gm_ActiveTownIndex;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 int __cdecl gm_ConvertUnitsToAmount(int a, unsigned char k);
@@ -29,18 +29,18 @@ void __cdecl he_RunWorkerBonus(char* obj)
 		}
 		e = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (obj + 0x10));
 		if (e != 0) {
-			n = gm_ConvertUnitsToAmount(1000, g_773d75);
+			n = gm_ConvertUnitsToAmount(1000, gm_ActiveTownIndex);
 			step = (*(int*) (obj + 0xac) / n) * 0x14;
 			for (i = 0; i < 768; i++) {
-				if (*(unsigned short*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[i])) != 0xffff && *(char**) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[i]) + 0x16c) == e) {
-					id = *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) *(unsigned short*) (obj + 8)]) + 4);
-					cm_RequestCopyEntityData(id, *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[i]) + 4), step, 0);
+				if (*(unsigned short*) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[i])) != 0xffff && *(char**) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[i]) + 0x16c) == e) {
+					id = *(int*) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned int) *(unsigned short*) (obj + 8)]) + 4);
+					cm_RequestCopyEntityData(id, *(int*) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[i]) + 4), step, 0);
 				}
 			}
-			if (*(unsigned char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) *(unsigned short*) (obj + 8)].entity_state) == 6
-			    || *(unsigned char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) *(unsigned short*) (obj + 8)].entity_state) == 7) {
+			if (*(unsigned char*) ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned int) *(unsigned short*) (obj + 8)].entity_state) == 6
+			    || *(unsigned char*) ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned int) *(unsigned short*) (obj + 8)].entity_state) == 7) {
 				io_FormatTextBuffer(buf, 0x19ab, e);
-				id = *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) *(unsigned short*) (obj + 8)]) + 4);
+				id = *(int*) (((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned int) *(unsigned short*) (obj + 8)]) + 4);
 				he_MessageBoxQuickjump(id, id, buf, 0, 0x5ec, *(int*) (e + 1), -1, 0, 0);
 			}
 		}

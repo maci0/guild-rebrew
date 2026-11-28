@@ -1,4 +1,4 @@
-extern int g_aed32c;
+extern int cm_PacketDeltaBase;
 
 int __cdecl gm_LookupEntityRecordById(int a0);
 void __cdecl cm_BeginPacketFieldDelta(char* a0, int a1);
@@ -33,7 +33,7 @@ void __cdecl he_HandleEntlassen(int event)
 		v6 = 0;
 		if (*(int*) (ent + 0x16c) != 0) {
 			cm_BeginPacketFieldDelta(ent, *(int*) (ent + 4));
-			cm_AppendCommandSyncField(4, 1, (int) ent - g_aed32c + 0x16c, &v6);
+			cm_AppendCommandSyncField(4, 1, (int) ent - cm_PacketDeltaBase + 0x16c, &v6);
 			cm_SendSetAttribute();
 			if (gm_GetEntityRelation(*(unsigned short*) (*(int*) (ent + 0x16c) + 0x27), *(unsigned short*) ent) > -0x1e) {
 				v6 = -0x1e - gm_GetEntityRelation(*(unsigned short*) (*(int*) (ent + 0x16c) + 0x27), *(unsigned short*) ent);

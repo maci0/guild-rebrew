@@ -61,13 +61,13 @@ void __cdecl he_CreateEventGfxInfo(unsigned char* p)
 		break;
 	case 0x40:
 		r = gm_SearchTable67(*(int*) (p + 0xac));
-		if (r != 0 && *(int*) (r + 0x61) != 0 && *(short*) (p + 8) == (short) g_774970) {
+		if (r != 0 && *(int*) (r + 0x61) != 0 && *(short*) (p + 8) == (short) gm_LocalPlayerSlot) {
 			he_CreateGfxInfo(p, g_6a5818, *(int*) (r + 0x61));
 		}
 		break;
 	case 0x35:
 		o = gm_LookupEntityRecordById(*(int*) (p + 0xbc));
-		if (o != 0 && *o == g_774970 && d3_CurrentContextIndex == 0) {
+		if (o != 0 && *o == gm_LocalPlayerSlot && d3_CurrentContextIndex == 0) {
 			v = d3_FindSceneObject(0, 0x40, 0, g_6a5804);
 			if (v != 0) {
 				he_CreateGfxInfo(p, g_6a57d8, v);
@@ -75,7 +75,7 @@ void __cdecl he_CreateEventGfxInfo(unsigned char* p)
 		}
 		break;
 	case 0x6b:
-		if (*(int*) (p + 0x70) == 2 && d3_CurrentContextIndex == 0 && (g_7f4e68[g_774970 * 135] & 0x20000) == 0) {
+		if (*(int*) (p + 0x70) == 2 && d3_CurrentContextIndex == 0 && (g_7f4e68[gm_LocalPlayerSlot * 135] & 0x20000) == 0) {
 			v = d3_FindSceneObject(0, 0x40, 0, g_6a57f8);
 			if (v != 0) {
 				he_CreateGfxInfo(p, g_6a57d8, v);
@@ -89,7 +89,7 @@ void __cdecl he_CreateEventGfxInfo(unsigned char* p)
 		}
 		break;
 	case 4:
-		if (*(unsigned short*) (p + 8) == g_774970 && *(int*) (p + 0xc8) != 0) {
+		if (*(unsigned short*) (p + 8) == gm_LocalPlayerSlot && *(int*) (p + 0xc8) != 0) {
 			r = gm_SearchTable67(*(int*) (p + 0xbc));
 			if (r != 0 && *(int*) (r + 0x61) != 0) {
 				he_CreateGfxInfo(p, g_6a57d8, *(int*) (r + 0x61));

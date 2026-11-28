@@ -12,7 +12,7 @@ typedef struct
 // SIZE 0x14
 
 extern Timer14 g_9b4900[16];
-extern double g_6640e8;
+extern double dbl_0_01;
 
 void __cdecl d3_ScheduleActionTimer(char* owner, int duration, int arg)
 {

@@ -1,6 +1,6 @@
 extern int g_7e4318;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char g_7f4ca4[];
+extern char gm_EntityIdField[];
 
 /* SIZE 0xf8: stack message sent through fcn_004c5530 */
 typedef struct {
@@ -71,7 +71,7 @@ void __cdecl he_RedirectStreifeSelection(void)
 				msg.flag36 = 2;
 				first = *(int*) row;
 				cursor++;
-				msg.owner = *(int*) (g_7f4ca4 + g_774970 * 0x21c);
+				msg.owner = *(int*) (gm_EntityIdField + gm_LocalPlayerSlot * 0x21c);
 				msg.v58 = *(int*) (g + 1);
 				msg.v5c = *(int*) (*(int*) row + 1);
 				cursor[-1] = *(int*) (row - 0x168);

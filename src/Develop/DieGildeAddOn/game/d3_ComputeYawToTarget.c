@@ -7,7 +7,7 @@ void __cdecl d3_NormalizeVector(float* v);
 
 #if defined(REBREW_GOLD)
 
-extern float g_662d40[3];
+extern float d3_UnitAxisVectors[3];
 
 /* ADDRESS: GOLD 0x00448ac0 */
 float __cdecl d3_ComputeYawToTarget(char* obj, float* target)
@@ -22,7 +22,7 @@ float __cdecl d3_ComputeYawToTarget(char* obj, float* target)
 	float c;
 	float rotated_x;
 
-	d3_TransformToObjectSpace(obj, g_662d40, a);
+	d3_TransformToObjectSpace(obj, d3_UnitAxisVectors, a);
 	d3_TransformPoint(obj, obj + 0x4c, pos);
 	a[0] -= pos[0];
 	a[2] -= pos[2];

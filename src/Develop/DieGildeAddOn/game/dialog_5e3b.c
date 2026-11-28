@@ -17,11 +17,11 @@ typedef struct {
 	char name[0x78];
 } SaveReq;
 
-extern unsigned char g_7747b0;
+extern unsigned char gm_ClientModeFlags;
 extern char* g_14ac604;
 extern int g_14ac608;
-extern char g_773de8;
-extern char g_6b5c60[];
+extern char ls_SaveSlotIndex;
+extern char str_empty[];
 
 void __cdecl d2_ShowStatusBanner(char*);
 int __cdecl ls_CanSaveGame(void);
@@ -63,8 +63,8 @@ void __cdecl ls_QuickSave(void)
 	SaveReq s;
 	int r;
 
-	if (g_7747b0 & 4) {
-		if (!(g_7747b0 & 0x10)) {
+	if (gm_ClientModeFlags & 4) {
+		if (!(gm_ClientModeFlags & 0x10)) {
 			d2_ShowStatusBanner((char*) g_14ac608);
 			return;
 		}
@@ -79,12 +79,12 @@ void __cdecl ls_QuickSave(void)
 		while (cm_GetCommandStatus(r) == 0) {
 			cm_StepCommandQueue();
 		}
-	} else if (!(g_7747b0 & 0x80)) {
+	} else if (!(gm_ClientModeFlags & 0x80)) {
 		d2_ShowStatusBanner("Quicksave");
 		main_RunFrameLoop(0, 0x657c7);
 		ls_CaptureSavePreview();
-		g_773de8 = 1;
+		ls_SaveSlotIndex = 1;
 		ls_SaveGame("Gamedata\\Saves\\Quicksave.SAV", "Quicksave", 1);
-		d2_ShowStatusBanner(g_6b5c60);
+		d2_ShowStatusBanner(str_empty);
 	}
 }

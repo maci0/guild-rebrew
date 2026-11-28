@@ -1,5 +1,5 @@
 int __cdecl d2_GetResourceData(int);
-extern char* g_772500;
+extern char* d2_FileObjTable;
 
 /* ADDRESS: GOLD 0x00476020 */
 int __cdecl d2_SetCurrentFont(int index)
@@ -7,7 +7,7 @@ int __cdecl d2_SetCurrentFont(int index)
 	int rec;
 	int slot;
 
-	if (*(int*) (g_772500 + index * 0x54 + 0x3c) != 7) {
+	if (*(int*) (d2_FileObjTable + index * 0x54 + 0x3c) != 7) {
 		return 0;
 	}
 	rec = d2_GetResourceData(index);

@@ -1,6 +1,6 @@
 extern void* g_1468ae0[];
 extern void* ch_CharacterSlots[];
-extern char g_10432c0[];
+extern char d3_Universes[];
 
 #include "Develop/Units/d3/client_scene_transform.h"
 
@@ -18,7 +18,7 @@ int __cdecl ch_CountCharactersNear(int a1, int a2, float* position, float tolera
 		e = *p;
 		if (e != 0) {
 			if (a1 == -1 ||
-			    *(int*) ((char*) e + 0x88) == (int) (g_10432c0 + a1 * 0x3e0)) {
+			    *(int*) ((char*) e + 0x88) == (int) (d3_Universes + a1 * 0x3e0)) {
 				if (a2 != 0 ||
 				    *(int*) (*(int*) ((char*) e + 0x34) + 0x218) != 1) {
 					if (CompareVector3WithinTolerance((float*) (*(char**) ((char*) e + 0x34) + 0x4c),
@@ -46,7 +46,7 @@ int __cdecl ch_CountCharactersNear(int a1, int a2, float* pos, float tolerance)
 		obj = *cursor;
 		if (obj != 0) {
 			if (a1 == -1 ||
-			    *(int*) ((char*) obj + 0x88) == (int) (g_10432c0 + a1 * 0x3dc)) {
+			    *(int*) ((char*) obj + 0x88) == (int) (d3_Universes + a1 * 0x3dc)) {
 				if (a2 != 0 ||
 				    *(int*) (*(int*) ((char*) obj + 0x34) + 0x218) != 1) {
 					if (CompareVector3WithinTolerance((float*) (*(char**) ((char*) obj + 0x34) + 0x4c),

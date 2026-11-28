@@ -15,7 +15,7 @@ typedef struct {
 	int count;
 } Script;
 
-extern char* g_6b7eb8;
+extern char* evt_MemberScopeScript;
 
 Def* __cdecl evt_FindDefinition(Script* s, const char* name)
 {
@@ -25,7 +25,7 @@ Def* __cdecl evt_FindDefinition(Script* s, const char* name)
 	int i;
 	int n;
 
-	o = ((Script*)g_6b7eb8);
+	o = ((Script*)evt_MemberScopeScript);
 	if (o == 0) {
 		o = s;
 	}

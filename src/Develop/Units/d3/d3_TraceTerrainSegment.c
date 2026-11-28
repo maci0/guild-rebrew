@@ -20,7 +20,7 @@ typedef struct {
 } V4;
 
 extern float g_6ad624;
-extern float g_6628a0;
+extern float flt_1_0;
 
 void __cdecl d3sm_SampleHeight(void*, V3*, int*, int*, float*);
 
@@ -45,7 +45,7 @@ int __cdecl d3_TraceTerrainSegment(void* map, V3* from, V3* to, int gx, int gy, 
 		}
 		return 0;
 	}
-	step = g_6628a0 / (float) sqrt((float) (dy * dy) + dx * dx);
+	step = flt_1_0 / (float) sqrt((float) (dy * dy) + dx * dx);
 	d.x = to->x - from->x;
 	d.y = to->y - from->y;
 	d.z = to->z - from->z;
@@ -68,6 +68,6 @@ int __cdecl d3_TraceTerrainSegment(void* map, V3* from, V3* to, int gx, int gy, 
 			return 1;
 		}
 		t += step;
-	} while (t < g_6628a0);
+	} while (t < flt_1_0);
 	return 0;
 }

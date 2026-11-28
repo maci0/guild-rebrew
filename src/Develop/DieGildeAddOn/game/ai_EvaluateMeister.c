@@ -49,10 +49,10 @@ typedef struct {
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern char* g_100e748;
-extern char g_7f4ca0[];
-extern char* g_7746c4;
-extern unsigned char* g_7746c8;
-extern LightState g_100dc20;
+extern char gm_EntitySlotTable[];
+extern char* d2_VisitedBuilding;
+extern unsigned char* d2_InteriorBuilding;
+extern LightState ai_MeisterDebugState;
 extern Master47de* g_100dc28;
 extern Ent47de* g_100dc2c;
 extern int g_100dc30;
@@ -89,15 +89,15 @@ void __cdecl ai_EvaluateMeister(Master47de* m)
 	if (m == (Master47de*)g_100e748) {
 		sprintf(buf, "Evaluation von Meister %s in %s beginnt...", ((Master47de*)g_100e748)->name, ((Master47de*)g_100e748)->bld->name);
 		sprintf(buf, "Aktuelles Budget: %li", ((Master47de*)g_100e748)->budget);
-		sprintf(buf, "Tats\xe4" "chlich verf\xfcgbares Budget: %li", gm_AccumulateTyped2(&((Ent47de*)g_7f4ca0)[m->bld->owner]));
+		sprintf(buf, "Tats\xe4" "chlich verf\xfcgbares Budget: %li", gm_AccumulateTyped2(&((Ent47de*)gm_EntitySlotTable)[m->bld->owner]));
 	}
 	if (m->bld->owner == m->id) {
 		m->budget = gm_AccumulateTyped2(m);
 	}
-	if (m->bld == ((Bld47de*)g_7746c4) || m->bld == ((Bld47de*)g_7746c8)) {
-		g_100dc20.owner = (char*) m->bld;
+	if (m->bld == ((Bld47de*)d2_VisitedBuilding) || m->bld == ((Bld47de*)d2_InteriorBuilding)) {
+		ai_MeisterDebugState.owner = (char*) m->bld;
 		g_100dc28 = m;
-		g_100dc2c = &((Ent47de*)g_7f4ca0)[m->bld->owner];
+		g_100dc2c = &((Ent47de*)gm_EntitySlotTable)[m->bld->owner];
 		g_100dc30 = m->budget;
 	}
 	if (gm_GetBuildingTypeCategory(m->bld->office) == 1 || gm_GetBuildingTypeCategory(m->bld->office) == 4) {

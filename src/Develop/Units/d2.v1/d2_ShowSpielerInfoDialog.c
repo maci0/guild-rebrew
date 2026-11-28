@@ -3,15 +3,15 @@
 extern int main_LoopFlags;
 extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern char *g_1015ea0;
+extern char *d2_Controls;
 
 
 extern int g_14ad084;
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 
 struct d2_daterec {
 	char day;
@@ -178,11 +178,11 @@ void __cdecl d2_ShowSpielerInfoDialog(unsigned short *person, int read_only)
 		io_AppendText("$3>$L-$A$0>");
 	}
 	d2_SetForm(h, 3);
-	stamp = ((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width;
+	stamp = ((D2_WIN*)d2_Windows)[d2_CurrentWindowId].width;
 	io_FormatTextBuffer(buf12, 0x1f61);
 	idx = d2_ShowTxt(0, 1, buf12, d2_CurrentWindowId);
-	((D2_CONTROL_TL*) (g_1015ea0))[idx].value_06c = 1;
-	((D2_CONTROL_TL*) (g_1015ea0))[idx].width = stamp;
+	((D2_CONTROL_TL*) (d2_Controls))[idx].value_06c = 1;
+	((D2_CONTROL_TL*) (d2_Controls))[idx].width = stamp;
 	inx = 2;
 	i = 0;
 	do {
@@ -195,84 +195,84 @@ void __cdecl d2_ShowSpielerInfoDialog(unsigned short *person, int read_only)
 	io_FormatTextBuffer(buf12, 0x1f63);
 	idx = d2_ShowTxt(0, 0x9a, buf12, d2_CurrentWindowId);
 	inx = 7;
-	((D2_CONTROL_TL*) (g_1015ea0))[idx].value_06c = 1;
-	((D2_CONTROL_TL*) (g_1015ea0))[idx].width = stamp;
+	((D2_CONTROL_TL*) (d2_Controls))[idx].value_06c = 1;
+	((D2_CONTROL_TL*) (d2_Controls))[idx].width = stamp;
 	if (*(int *)((char *)person + 0x2c) != 0) {
 		if (*(int *)((char *)person + 0x2c) & 0xf) {
 			io_FormatTextBuffer(buf12, 0x161e);
 			idx = d2_ShowTxt(0, inx * 0x18 + 10, buf12, d2_CurrentWindowId);
-			((D2_CONTROL_TL*) (g_1015ea0))[idx].value_06c = 1;
-			((D2_CONTROL_TL*) (g_1015ea0))[idx].width = stamp;
+			((D2_CONTROL_TL*) (d2_Controls))[idx].value_06c = 1;
+			((D2_CONTROL_TL*) (d2_Controls))[idx].width = stamp;
 			inx++;
 		}
 		if (*(int *)((char *)person + 0x2c) & 0xf0) {
 			io_FormatTextBuffer(buf12, 0x161f);
 			idx = d2_ShowTxt(0, inx * 0x18 + 10, buf12, d2_CurrentWindowId);
-			((D2_CONTROL_TL*) (g_1015ea0))[idx].value_06c = 1;
-			((D2_CONTROL_TL*) (g_1015ea0))[idx].width = stamp;
+			((D2_CONTROL_TL*) (d2_Controls))[idx].value_06c = 1;
+			((D2_CONTROL_TL*) (d2_Controls))[idx].width = stamp;
 			inx++;
 		}
 		if (*(int *)((char *)person + 0x2c) & 0xf00) {
 			io_FormatTextBuffer(buf12, 0x1620);
 			idx = d2_ShowTxt(0, inx * 0x18 + 10, buf12, d2_CurrentWindowId);
-			((D2_CONTROL_TL*) (g_1015ea0))[idx].value_06c = 1;
-			((D2_CONTROL_TL*) (g_1015ea0))[idx].width = stamp;
+			((D2_CONTROL_TL*) (d2_Controls))[idx].value_06c = 1;
+			((D2_CONTROL_TL*) (d2_Controls))[idx].width = stamp;
 			inx++;
 		}
 		if (*(int *)((char *)person + 0x2c) & 0x3000) {
 			io_FormatTextBuffer(buf12, 0x1621);
 			idx = d2_ShowTxt(0, inx * 0x18 + 10, buf12, d2_CurrentWindowId);
-			((D2_CONTROL_TL*) (g_1015ea0))[idx].value_06c = 1;
-			((D2_CONTROL_TL*) (g_1015ea0))[idx].width = stamp;
+			((D2_CONTROL_TL*) (d2_Controls))[idx].value_06c = 1;
+			((D2_CONTROL_TL*) (d2_Controls))[idx].width = stamp;
 			inx++;
 		}
 		if (*(int *)((char *)person + 0x2c) & 0x1c000) {
 			io_FormatTextBuffer(buf12, 0x1622);
 			idx = d2_ShowTxt(0, inx * 0x18 + 10, buf12, d2_CurrentWindowId);
-			((D2_CONTROL_TL*) (g_1015ea0))[idx].value_06c = 1;
-			((D2_CONTROL_TL*) (g_1015ea0))[idx].width = stamp;
+			((D2_CONTROL_TL*) (d2_Controls))[idx].value_06c = 1;
+			((D2_CONTROL_TL*) (d2_Controls))[idx].width = stamp;
 			inx++;
 		}
 		if (*(int *)((char *)person + 0x2c) & 0xe0000) {
 			io_FormatTextBuffer(buf12, 0x1623);
 			idx = d2_ShowTxt(0, inx * 0x18 + 10, buf12, d2_CurrentWindowId);
-			((D2_CONTROL_TL*) (g_1015ea0))[idx].value_06c = 1;
-			((D2_CONTROL_TL*) (g_1015ea0))[idx].width = stamp;
+			((D2_CONTROL_TL*) (d2_Controls))[idx].value_06c = 1;
+			((D2_CONTROL_TL*) (d2_Controls))[idx].width = stamp;
 			inx++;
 		}
 		if (*(int *)((char *)person + 0x2c) & 0x700000) {
 			io_FormatTextBuffer(buf12, 0x1624);
 			idx = d2_ShowTxt(0, inx * 0x18 + 10, buf12, d2_CurrentWindowId);
-			((D2_CONTROL_TL*) (g_1015ea0))[idx].value_06c = 1;
-			((D2_CONTROL_TL*) (g_1015ea0))[idx].width = stamp;
+			((D2_CONTROL_TL*) (d2_Controls))[idx].value_06c = 1;
+			((D2_CONTROL_TL*) (d2_Controls))[idx].width = stamp;
 			inx++;
 		}
 		if (*(int *)((char *)person + 0x2c) & 0x1800000) {
 			io_FormatTextBuffer(buf12, 0x1625);
 			idx = d2_ShowTxt(0, inx * 0x18 + 10, buf12, d2_CurrentWindowId);
-			((D2_CONTROL_TL*) (g_1015ea0))[idx].value_06c = 1;
-			((D2_CONTROL_TL*) (g_1015ea0))[idx].width = stamp;
+			((D2_CONTROL_TL*) (d2_Controls))[idx].value_06c = 1;
+			((D2_CONTROL_TL*) (d2_Controls))[idx].width = stamp;
 			inx++;
 		}
 		if (*(int *)((char *)person + 0x2c) & 0x1e000000) {
 			io_FormatTextBuffer(buf12, 0x1626);
 			idx = d2_ShowTxt(0, inx * 0x18 + 10, buf12, d2_CurrentWindowId);
-			((D2_CONTROL_TL*) (g_1015ea0))[idx].value_06c = 1;
-			((D2_CONTROL_TL*) (g_1015ea0))[idx].width = stamp;
+			((D2_CONTROL_TL*) (d2_Controls))[idx].value_06c = 1;
+			((D2_CONTROL_TL*) (d2_Controls))[idx].width = stamp;
 		}
 	}
 	if (read_only != 0) {
 		d2_SetForm(h, 4);
 		r5 = d2_GetWindowListItem(h, 4, io_AppendText(0x1f50, *person));
 	} else {
-		if ((*((char *)g_7f4ca0 + 540 * g_774970 + 9) == 0 &&
-		     *(int *)((char *)person + 0x60) == *(int *)(g_7f4ca0 + 540 * g_774970 + 4)) ||
-		    (*((char *)g_7f4ca0 + 540 * g_774970 + 9) == 1 &&
-		     *(int *)((char *)person + 0x64) == *(int *)(g_7f4ca0 + 540 * g_774970 + 4))) {
+		if ((*((char *)gm_EntitySlotTable + 540 * gm_LocalPlayerSlot + 9) == 0 &&
+		     *(int *)((char *)person + 0x60) == *(int *)(gm_EntitySlotTable + 540 * gm_LocalPlayerSlot + 4)) ||
+		    (*((char *)gm_EntitySlotTable + 540 * gm_LocalPlayerSlot + 9) == 1 &&
+		     *(int *)((char *)person + 0x64) == *(int *)(gm_EntitySlotTable + 540 * gm_LocalPlayerSlot + 4))) {
 			if (!(*((char *)person + 0x164) != 0)) {
 				if (he_StartHandlungSearch(2, 2, *person, 0, 0x5e) == 0) {
 					if (person[5] + 4 >= *(float *)((char *)person + 0x20)) {
-						if ((*((unsigned char *)g_7f4ca0 + 540 * g_774970 + 0x1c8) & 0x20) == 0) {
+						if ((*((unsigned char *)gm_EntitySlotTable + 540 * gm_LocalPlayerSlot + 0x1c8) & 0x20) == 0) {
 							int buttons[2];
 							io_FormatTextBuffer(bufA, 0x1f4b, *person);
 							io_FormatTextBuffer(bufB, 0x1a96);
@@ -284,7 +284,7 @@ void __cdecl d2_ShowSpielerInfoDialog(unsigned short *person, int read_only)
 						goto label_2281;
 					}
 				}
-				if ((*((unsigned char *)g_7f4ca0 + 540 * g_774970 + 0x1c8) & 0x20) == 0) {
+				if ((*((unsigned char *)gm_EntitySlotTable + 540 * gm_LocalPlayerSlot + 0x1c8) & 0x20) == 0) {
 					io_FormatTextBuffer(bufA, 0x1f4b, *person);
 					d2_SetForm(h, 4);
 					r1 = d2_GetWindowListItem(h, 4,
@@ -292,7 +292,7 @@ void __cdecl d2_ShowSpielerInfoDialog(unsigned short *person, int read_only)
 				}
 			} else {
 				if ((*(int *)((char *)person + 0x1c8) & 0x10000) == 0) {
-					if ((*((unsigned char *)g_7f4ca0 + 540 * g_774970 + 0x1c8) & 0x20) == 0) {
+					if ((*((unsigned char *)gm_EntitySlotTable + 540 * gm_LocalPlayerSlot + 0x1c8) & 0x20) == 0) {
 						int buttons[2];
 						io_FormatTextBuffer(bufB, 0x1f4b, *person);
 						io_FormatTextBuffer(bufA, 0x1a97);
@@ -301,52 +301,52 @@ void __cdecl d2_ShowSpielerInfoDialog(unsigned short *person, int read_only)
 						r1 = buttons[0];
 						r4 = buttons[1];
 					}
-				} else if ((*((unsigned char *)g_7f4ca0 + 540 * g_774970 + 0x1c8) & 0x20) == 0) {
+				} else if ((*((unsigned char *)gm_EntitySlotTable + 540 * gm_LocalPlayerSlot + 0x1c8) & 0x20) == 0) {
 					io_FormatTextBuffer(bufA, 0x1f4b, *person);
 					d2_SetForm(h, 4);
 					r1 = d2_GetWindowListItem(h, 4,
 					    io_AppendText("%ia[%s]", bufA));
 				}
 			}
-		} else if (*(int *)(g_7f4ca0 + 540 * g_774970 + 4) == *(int *)((char *)person + 4) &&
+		} else if (*(int *)(gm_EntitySlotTable + 540 * gm_LocalPlayerSlot + 4) == *(int *)((char *)person + 4) &&
 		    gm_HasActiveMission(*(int *)((char *)person + 4)) != 0) {
 			d2_SetForm(h, 4);
 			r3 = d2_GetWindowListItem(h, 4, io_AppendText(0x1f49));
 		}
 	}
 label_2281:
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	d2_CurrentElementId = -1;
 	do {
 		if (r1 != -1) {
-			if (gm_AccumulateTyped2(g_7f4ca0 + 540 * g_774970) <= 0) {
+			if (gm_AccumulateTyped2(gm_EntitySlotTable + 540 * gm_LocalPlayerSlot) <= 0) {
 				d2_SetElementEnabled(r1, 0);
 			} else {
 				d2_SetElementEnabled(r1, 1);
 			}
 		}
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			d2_SetFormVisibility(h, 0);
 			if (d2_CurrentElementId == r5) {
 				io_FormatTextBuffer(bufB, 0x1f51, *person, *person);
 				if (d2_ShowModalMessageBox(bufB, 1) != 0) {
-					cm_SendChangePlayerIdentity(*(int *)(g_7f4ca0 + 540 * g_774970 + 4),
+					cm_SendChangePlayerIdentity(*(int *)(gm_EntitySlotTable + 540 * gm_LocalPlayerSlot + 4),
 					    *(int *)((char *)person + 4));
-					g_774654 = 2;
+					d2_DialogCloseRequested = 2;
 				}
 			} else if (d2_CurrentElementId == r1) {
-				if (d2_ShowGiftDialog(g_7f4ca0 + 540 * g_774970, person) != 0) {
+				if (d2_ShowGiftDialog(gm_EntitySlotTable + 540 * gm_LocalPlayerSlot, person) != 0) {
 					d2_SetElementEnabled(r1, 0);
 				}
 			} else if (d2_CurrentElementId == r2) {
-				if (d2_ShowChooseProfessionDialog2(g_7f4ca0 + 540 * g_774970, person) != 0) {
+				if (d2_ShowChooseProfessionDialog2(gm_EntitySlotTable + 540 * gm_LocalPlayerSlot, person) != 0) {
 					d2_SetElementEnabled(r2, 0);
 				}
 			} else if (d2_CurrentElementId == r4) {
-				if (d2_RunStudiumOfferDialog(g_7f4ca0 + 540 * g_774970, person) != 0) {
+				if (d2_RunStudiumOfferDialog(gm_EntitySlotTable + 540 * gm_LocalPlayerSlot, person) != 0) {
 					d2_SetElementEnabled(r4, 0);
 				}
 			} else if (d2_CurrentElementId == r3) {

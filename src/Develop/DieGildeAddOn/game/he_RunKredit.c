@@ -51,7 +51,7 @@ void __cdecl he_RunKredit(int loanEvent)
 				return;
 			}
 			f = (float) (*(int*) (loanEvent + 0xb4) *
-			             (*(int*) (loanEvent + 0xc0) * g_6640e8));
+			             (*(int*) (loanEvent + 0xc0) * dbl_0_01));
 			time = gm_AccumulateTyped2(n);
 			if ((float) time < f) {
 				time = (int) f;
@@ -64,7 +64,7 @@ void __cdecl he_RunKredit(int loanEvent)
 				}
 			} else {
 				cm_RequestTransferCurrencyNoKill(*(int*) ((char*) obj + 1), *(int*) (loanEvent + 0xb0),
-				           g_773d75, (int) f);
+				           gm_ActiveTownIndex, (int) f);
 				*(int*) ((char*) obj + 0x55) = (int) (*(int*) ((char*) obj + 0x55) + f);
 			}
 			} else {

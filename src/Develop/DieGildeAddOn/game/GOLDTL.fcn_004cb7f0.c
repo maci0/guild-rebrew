@@ -1,21 +1,21 @@
 #include <stdio.h>
 #include <string.h>
 
-extern int g_14cbca0;
+extern int nt_ClientSocket;
 extern int gm_NextEntityId;
 extern char* lpGebaeudePROT;
 extern char g_7f4ca9[];
 extern int g_6798d4;
-extern int g_6b7fdc;
+extern int vfs_RootDir;
 extern int d3_CurrentContextIndex;
 extern int d3_ActiveCamera;
 extern int g_773dd8;
-extern unsigned char g_773dd4;
-extern unsigned char g_773d75;
-extern unsigned int g_67a370;
+extern unsigned char d3_CurrentSeason;
+extern unsigned char gm_ActiveTownIndex;
+extern unsigned int d3_ActiveScene;
 extern int g_774728;
 extern float g_6a2bec;
-extern float g_662d40[3];
+extern float d3_UnitAxisVectors[3];
 extern char g_67f0ac[];
 extern char g_7e1ae0[];
 typedef struct {
@@ -72,7 +72,7 @@ int __cdecl fcn_004cb7f0(char* upgradeCmd, char* replyData)
 	int i;
 	int res;
 
-	if (g_14cbca0 != -1) {
+	if (nt_ClientSocket != -1) {
 		gm_NextEntityId = *(int*) (upgradeCmd + 0x14);
 	}
 	upgradeBuilding = gm_StartFilteredEntitySearch(1, 1, *(int*) (upgradeCmd + 0x10));
@@ -107,7 +107,7 @@ int __cdecl fcn_004cb7f0(char* upgradeCmd, char* replyData)
 		} else {
 			fcn_0064d41a(path, g_67f0ac, g_7e1ae0, name);
 		}
-		if (vfs_ResolvePath(path, g_6b7fdc, g_6b7fdc, tmp) != 0) {
+		if (vfs_ResolvePath(path, vfs_RootDir, vfs_RootDir, tmp) != 0) {
 			break;
 		}
 		i++;
@@ -125,11 +125,11 @@ int __cdecl fcn_004cb7f0(char* upgradeCmd, char* replyData)
 		ReportClientMessage(name);
 		goto restore;
 	} else {
-		d3_TransformDirection((char*) *(int*)(upgradeBuilding + 0x61), g_662d40, direction);
+		d3_TransformDirection((char*) *(int*)(upgradeBuilding + 0x61), d3_UnitAxisVectors, direction);
 		angles[0] = 0;
 		angles[1] = 0;
 		angles[2] = 0;
-		angles[1] = d3_SignedPlanarAngle(g_662d40, direction);
+		angles[1] = d3_SignedPlanarAngle(d3_UnitAxisVectors, direction);
 		d3_SetNodePosition((char*) obj, (int*) vec);
 		d3_SetObjectRotation((char*) obj, (int*) angles);
 		d3_SetObjectGroundPosition(obj, vec);
@@ -153,14 +153,14 @@ int __cdecl fcn_004cb7f0(char* upgradeCmd, char* replyData)
 	if (h != 0) {
 		float f;
 		res = gm_GetSeason((char*) 0x7f4c00);
-		if (res == 1) g_773dd4 = (unsigned char)res;
-		else if (res == 0) g_773dd4 = (unsigned char)res;
-		else if (res == 2) g_773dd4 = (unsigned char)res;
-		else if (res == 3) g_773dd4 = (unsigned char)res;
+		if (res == 1) d3_CurrentSeason = (unsigned char)res;
+		else if (res == 0) d3_CurrentSeason = (unsigned char)res;
+		else if (res == 2) d3_CurrentSeason = (unsigned char)res;
+		else if (res == 3) d3_CurrentSeason = (unsigned char)res;
 		d3_ApplySeasonTextureSet(*(int*)(upgradeBuilding + 0x61));
-		d3_TraverseSceneObjects((char*) g_67a370, (char*) *(int*)(upgradeBuilding + 0x61), 0x2c0, (void (__cdecl*) (char*)) 0x514d80);
+		d3_TraverseSceneObjects((char*) d3_ActiveScene, (char*) *(int*)(upgradeBuilding + 0x61), 0x2c0, (void (__cdecl*) (char*)) 0x514d80);
 		f = (float) g_774728 + g_6a2bec;
-		d3_VisitSceneObjects(g_67a370, *(int*)(upgradeBuilding + 0x61), 0x21e, 0x445d20, &f);
+		d3_VisitSceneObjects(d3_ActiveScene, *(int*)(upgradeBuilding + 0x61), 0x21e, 0x445d20, &f);
 		if (*(int*) (upgradeBuilding + 0x95) != -1) {
 			obj = (int) evt_FindScriptById(*(int*) (upgradeBuilding + 0x95));
 			if (obj != 0) {
@@ -173,7 +173,7 @@ int __cdecl fcn_004cb7f0(char* upgradeCmd, char* replyData)
 restore:
 	d3_SelectSceneContext(saved, 1);
 done:
-	gm_RefreshLocalMarketStock(g_773d75);
+	gm_RefreshLocalMarketStock(gm_ActiveTownIndex);
 	if (replyData != 0) {
 		replyData[0] = 2;
 		replyData[1] = 0;

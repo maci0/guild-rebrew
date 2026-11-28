@@ -13,7 +13,7 @@ typedef struct {
 	Pair pairs[8];
 } Group;
 
-extern char g_7728d4;
+extern char hst_HistoryTextActive;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
@@ -25,7 +25,7 @@ int __cdecl ls_LoadHistoryState(void* file)
 	int i;
 	int k;
 
-	if (!ls_ReadVfsDataChecked(&(*(unsigned char*)&g_7728d4), 1, 1, file))
+	if (!ls_ReadVfsDataChecked(&(*(unsigned char*)&hst_HistoryTextActive), 1, 1, file))
 		return 0;
 	hst_LoadHistoryText();
 	if (!ls_ReadVfsDataChecked(&v, 4, 1, file))
@@ -39,12 +39,12 @@ int __cdecl ls_LoadHistoryState(void* file)
 			return 0;
 	}
 	for (i = 0; i < 4; i++) {
-		if (!ls_ReadVfsDataChecked(&((Group*)g_1007bc0)[i].count, 4, 1, file))
+		if (!ls_ReadVfsDataChecked(&((Group*)hst_HistoryGroups)[i].count, 4, 1, file))
 			return 0;
 		for (k = 0; k < 8; k++) {
-			if (!ls_ReadVfsDataChecked(&((Group*)g_1007bc0)[i].pairs[k].a, 4, 1, file))
+			if (!ls_ReadVfsDataChecked(&((Group*)hst_HistoryGroups)[i].pairs[k].a, 4, 1, file))
 				return 0;
-			if (!ls_ReadVfsDataChecked(&((Group*)g_1007bc0)[i].pairs[k].b, 4, 1, file))
+			if (!ls_ReadVfsDataChecked(&((Group*)hst_HistoryGroups)[i].pairs[k].b, 4, 1, file))
 				return 0;
 		}
 	}

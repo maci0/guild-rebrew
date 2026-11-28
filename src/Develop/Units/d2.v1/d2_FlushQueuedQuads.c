@@ -52,7 +52,7 @@ typedef struct {
 } Sample;
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern Device* g_772614;
+extern Device* tp_d2_QuadVertexBuffer;
 extern Device* g_6b5de0;
 #include "Develop/Unassigned/render_quad.h"
 
@@ -75,18 +75,18 @@ int __cdecl d2_FlushQueuedQuads(int idx, Snd* snd, char* src)
 	Sample s;
 
 	start = idx;
-	if (((Device*) g_772614)->vtbl->Lock((Device*) g_772614, 0, d2_QueuedQuadCount * 0x18 - idx * 0x18, &idx, 0x2000) < 0) {
+	if (((Device*) tp_d2_QuadVertexBuffer)->vtbl->Lock((Device*) tp_d2_QuadVertexBuffer, 0, d2_QueuedQuadCount * 0x18 - idx * 0x18, &idx, 0x2000) < 0) {
 		return 0;
 	}
 	data = (BankData*) idx;
-	first = &g_1552020[start];
+	first = &d2_QueuedQuads[start];
 	rec = first;
 	for (i = start; i < d2_QueuedQuadCount; i++) {
 		*data = *(BankData*) rec;
 		rec++;
 		data++;
 	}
-	((Device*) g_772614)->vtbl->Unlock((Device*) g_772614);
+	((Device*) tp_d2_QuadVertexBuffer)->vtbl->Unlock((Device*) tp_d2_QuadVertexBuffer);
 	d2_BindQuadVertexBuffer();
 	g_6b5de0->vtbl->SetRenderState(g_6b5de0, 7, 0);
 	g_6b5de0->vtbl->SetRenderState(g_6b5de0, 0x88, 0);

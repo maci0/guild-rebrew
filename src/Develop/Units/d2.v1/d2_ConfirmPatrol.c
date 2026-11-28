@@ -40,18 +40,18 @@ typedef struct
 } Player;
 // SIZE 0x21c
 
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 extern char* ch_ContextCharacters[32];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern int g_14abc98;
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
-extern int g_14ce8e0;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern char* g_7746c4;
-extern char* g_7746cc;
+extern char* d2_VisitedBuilding;
+extern char* sv_SelectedBuilding;
 extern char s_6ab348[];
 
 int __cdecl d2_ShowModalMessageBox(int, int);
@@ -80,7 +80,7 @@ int __cdecl d2_ConfirmPatrol(int unused, char* str)
 		return 0;
 	}
 	for (i = 0; i < 768; i++) {
-		if (((Player*)g_7f4ca0)[i].x188 != 0) {
+		if (((Player*)gm_EntitySlotTable)[i].x188 != 0) {
 			break;
 		}
 	}
@@ -95,16 +95,16 @@ int __cdecl d2_ConfirmPatrol(int unused, char* str)
 	s = io_AppendText(0x1a70);
 	btn1 = d2_GetWindowListItem(dlg, 1, s);
 	btn2 = d2_GetWindowListItem(dlg, 1, s + 1);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc != -1) {
+		if (d2_DialogButtonAction != -1) {
 			if (d2_CurrentElementId == btn1) {
 				pkt.type = 0x65;
-				pkt.x8 = ((Player*)g_7f4ca0)[g_774970].x4;
-				pkt.xc = *(int*) (g_7746c4 + 1);
+				pkt.x8 = ((Player*)gm_EntitySlotTable)[gm_LocalPlayerSlot].x4;
+				pkt.xc = *(int*) (d2_VisitedBuilding + 1);
 				pkt.name = (*(pos14_7f4c00*)&gm_GameTime);
 				pkt.x36 = 2;
 				strcpy(pkt.str, str);
@@ -112,8 +112,8 @@ int __cdecl d2_ConfirmPatrol(int unused, char* str)
 					pkt.ids[i] = -1;
 				}
 				n = 0;
-				pkt.x78 = *(int*) (g_7746c4 + 1);
-				pkt.x7c = *(int*) (g_7746cc + 2);
+				pkt.x78 = *(int*) (d2_VisitedBuilding + 1);
+				pkt.x7c = *(int*) (sv_SelectedBuilding + 2);
 				for (i = 0; i < 32; i++) {
 					if (n >= 6) {
 						break;
@@ -127,10 +127,10 @@ int __cdecl d2_ConfirmPatrol(int unused, char* str)
 					cm_SendCopyEntityData(&pkt);
 					cm_ExProdObjekt();
 				}
-				g_774654 = 2;
+				d2_DialogCloseRequested = 2;
 			}
 			else if (d2_CurrentElementId == btn2) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	} while (main_RunFrameLoop((void*) d2_ConfirmPatrol, 0x677c7) != 0);

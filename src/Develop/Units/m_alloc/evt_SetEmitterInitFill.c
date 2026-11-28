@@ -1,5 +1,5 @@
 extern char* evt_CurrentScript;
-extern char g_676bfc[];
+extern char str_SetEmitterInitFill_invalid[];
 
 
 // SIZE 0xcd
@@ -18,7 +18,7 @@ int __cdecl evt_SetEmitterInitFill(S4105a0** object, char* flag)
 
 	p = *object;
 	if (m_is_tracked(p) == 0) {
-		evt_LogScriptError(evt_CurrentScript, *(int*) ((char*) evt_CurrentScript + 0x118), g_676bfc);
+		evt_LogScriptError(evt_CurrentScript, *(int*) ((char*) evt_CurrentScript + 0x118), str_SetEmitterInitFill_invalid);
 		return 0;
 	}
 	p->b5 = *flag;

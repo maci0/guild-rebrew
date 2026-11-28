@@ -13,8 +13,8 @@ typedef struct {
 	Cell* cells;
 } Grid;
 
-extern char g_1043370[];
-extern int g_67a370;
+extern char tp_ch_PathGrid[];
+extern int d3_ActiveScene;
 extern int g_14d1f40[];
 extern int g_1511f40[];
 
@@ -24,9 +24,9 @@ void __cdecl ch_BackupGrid(Grid* grid)
 	int i;
 	int j;
 
-	if ((*(Grid**)g_1043370) == grid) {
+	if ((*(Grid**)tp_ch_PathGrid) == grid) {
 		dst = g_14d1f40;
-	} else if (*(Grid**) (((char*)g_67a370) + 0xb0) == grid) {
+	} else if (*(Grid**) (((char*)d3_ActiveScene) + 0xb0) == grid) {
 		dst = g_1511f40;
 	} else {
 		return;

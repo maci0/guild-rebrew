@@ -1,4 +1,4 @@
-extern float g_6628a8;
+extern float flt_0_0;
 
 /* ADDRESS: GOLDTL 0x004356c0 */
 char* __cdecl d3_SelectBaseMorphSlot(char* a)
@@ -8,7 +8,7 @@ char* __cdecl d3_SelectBaseMorphSlot(char* a)
 	char* e;
 	int i;
 
-	best = g_6628a8;
+	best = flt_0_0;
 	res = 0;
 	if (a[0x4a0] != 0) {
 		e = a + 0x460;

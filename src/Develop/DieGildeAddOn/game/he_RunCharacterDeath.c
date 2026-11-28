@@ -1,8 +1,8 @@
 #include "Develop/client_types.h"
 extern char gm_GameTime[];
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-extern char g_68cb58[];
-extern char g_6b5c60[];
+extern char str_bewegung_zu_boden_sinken[];
+extern char str_empty[];
 extern int gm_CityEntity;
 
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -70,13 +70,13 @@ void __cdecl he_RunCharacterDeath(char* eventState)
 		he_AssignActionSlot(0, 0, *(unsigned short*) s, 0);
 		if ((*(unsigned char*) (eventState + 0x78) & 2) != 0) {
 			if (*(char**) (s + 0x16c) != 0) {
-				c = *(char*) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (*(char**) (s + 0x16c) + 0x27)].entity_state;
+				c = *(char*) &((ENTITY_RECORD*) gm_EntitySlotTable)[*(unsigned short*) (*(char**) (s + 0x16c) + 0x27)].entity_state;
 				if (c == 6 || c == 7) {
 					io_FormatTextBuffer((int*) (buf + 0x114), 0x42f4, *(unsigned short*) s, (int) *(char**) (s + 0x16c));
 					v = *(int*) (*(char**) (s + 0x16c) + 1);
 					he_MessageBoxQuickjump(
-						*(unsigned int*) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (*(char**) (s + 0x16c) + 0x27)].entity_id,
-						v, buf + 0x114, 0, 0x60a, v, -1, g_6b5c60, g_6b5c60);
+						*(unsigned int*) &((ENTITY_RECORD*) gm_EntitySlotTable)[*(unsigned short*) (*(char**) (s + 0x16c) + 0x27)].entity_id,
+						v, buf + 0x114, 0, 0x60a, v, -1, str_empty, str_empty);
 				}
 			}
 		}
@@ -96,7 +96,7 @@ void __cdecl he_RunCharacterDeath(char* eventState)
 			ch_CancelActionQueue(obj);
 			p = ch_CreateAction((int) *(char**) (s + 0x184), 0x36, 1);
 			if (p != 0) {
-				memcpy(p + 0xf0, g_68cb58, 0x19);
+				memcpy(p + 0xf0, str_bewegung_zu_boden_sinken, 0x19);
 			}
 		}
 		*(pos14_7f4c00*) (eventState + 0x52) = *(pos14_7f4c00*) gm_GameTime;

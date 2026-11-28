@@ -2,7 +2,7 @@
 
 extern char g_6a4144[];
 extern int d2_CurrentWindowId;
-extern char* g_77255c;
+extern char* d2_CurrentWindow;
 extern char* g_14b5e38;
 extern int g_14b5e3c;
 extern int g_14b5e40;
@@ -11,9 +11,9 @@ extern int g_14b5e48;
 extern int g_14b5e4c;
 extern int g_7e1fa0[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char g_14cf950;
+extern char io_LastKeyScancode;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-extern int g_100f1dc;
+extern int d2_DialogButtonAction;
 extern float g_6640cc;
 extern float g_66292c;
 
@@ -51,7 +51,7 @@ void __cdecl d2_RunChooseOpponentsDialog(int n)
 	io_AppendText(0x42c5);
 	d2_SetForm(h, 3);
 	w = (int) (g_6640cc / n * g_66292c);
-	x = (*(int*) (g_77255c + 0x10) - w * n) / 2 + 0xe;
+	x = (*(int*) (d2_CurrentWindow + 0x10) - w * n) / 2 + 0xe;
 	for (i = 0; i < n; i++) {
 		sprintf(buf, "%s %c", g_14b5e38, i + 0x41);
 		ids[i] = d2_AddWindowValueGauge(0x80, x + i * w, 0xc8, 0, 0x64, 0x7b, 0x802, d2_CurrentWindowId);
@@ -63,8 +63,8 @@ void __cdecl d2_RunChooseOpponentsDialog(int n)
 	d2_SetForm(h, 2);
 	ok = d2_GetWindowListItem(h, 2, io_AppendText(0x7d));
 	while (main_RunFrameLoop(d2_RunChooseOpponentsDialog, 0xc6) != 0) {
-		if (g_14ce8e0 != 0 || g_14cf950 == 1 || (g_100f1dc == 2 && d2_CurrentElementId == ok)) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0 || io_LastKeyScancode == 1 || (d2_DialogButtonAction == 2 && d2_CurrentElementId == ok)) {
+			d2_DialogCloseRequested = 1;
 		}
 	}
 	for (i = 0; i < n; i++) {

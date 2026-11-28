@@ -1,7 +1,7 @@
 
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern struct VFS_DIR* g_6b7fdc;
+extern struct VFS_DIR* vfs_RootDir;
 extern char g_6a23b0[];
 
 void __cdecl d2_SetBackdropResource(int);
@@ -24,7 +24,7 @@ void __cdecl ls_WriteSavePreviewPixels(int previewModeArg, char* name)
 	n = 0;
 	d2_SetBackdropResource(previewModeArg);
 	ls_CaptureSavePreview();
-	fh = vfs_Tfopen(name, g_6790b0, g_6b7fdc);
+	fh = vfs_Tfopen(name, g_6790b0, vfs_RootDir);
 	if (fh != 0) {
 		buf = m_alloc(0xe100, g_6a23b0);
 		for (y = 0; y < 120; y++) {

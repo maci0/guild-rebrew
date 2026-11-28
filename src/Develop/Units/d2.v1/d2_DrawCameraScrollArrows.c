@@ -1,14 +1,14 @@
 extern char main_LoopFlags;
-extern int g_7746c4;
-extern int g_7746c8;
-extern int g_7746cc;
-extern int g_7746d8;
+extern int d2_VisitedBuilding;
+extern int d2_InteriorBuilding;
+extern int sv_SelectedBuilding;
+extern int d2_SelectedEntityUiFlags;
 extern int g_7746dc;
 extern int d3_CameraHorizontalIndex;
 extern int d3_CameraVerticalStep;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char *d3_ActiveCamera;
-extern int g_77250c;
+extern int d2_ScreenSurface;
 extern int d2_CenterX;
 extern int d2_DialogCenterY;
 extern int d2_ScreenHeight;
@@ -32,20 +32,20 @@ void __cdecl d2_DrawCameraScrollArrows(void)
 
     if (!(main_LoopFlags & 8))
         return;
-    if (g_7746c4 != 0 || g_7746c8 != 0)
+    if (d2_VisitedBuilding != 0 || d2_InteriorBuilding != 0)
     {
-        selection = g_7746c4 ? g_7746c4 : g_7746c8;
+        selection = d2_VisitedBuilding ? d2_VisitedBuilding : d2_InteriorBuilding;
         if (selection != 0)
         {
-            if (g_7746cc != 0 || g_7746c8 != 0)
+            if (sv_SelectedBuilding != 0 || d2_InteriorBuilding != 0)
             {
-                g_7746dc = gm_GetEntityUiFlags(g_774970, selection, g_7746cc, 0);
+                g_7746dc = gm_GetEntityUiFlags(gm_LocalPlayerSlot, selection, sv_SelectedBuilding, 0);
                 if (!(g_7746dc & 0x1000))
                     return;
             }
         }
     }
-    if (!(g_7746d8 & 0x1000))
+    if (!(d2_SelectedEntityUiFlags & 0x1000))
         return;
     resource = d2_GetResourceData(0x52c);
     if (d3_CameraHorizontalIndex == -1)
@@ -86,21 +86,21 @@ void __cdecl d2_DrawCameraScrollArrows(void)
         if (!CompareVector3WithinTolerance(d3_ActiveCamera + 0xcc, 0x662d70, 0.2f))
             topState = 1;
     }
-    d2_SetClipRect(0, 0, *(int *)(g_77250c + 4), *(int *)(g_77250c + 8));
+    d2_SetClipRect(0, 0, *(int *)(d2_ScreenSurface + 4), *(int *)(d2_ScreenSurface + 8));
     if (bottomState == 2)
-        d2_DrawSpriteFromSet(d2_CenterX - 0x10, d2_ScreenHeight - 0x20, g_77250c, resource, 0);
+        d2_DrawSpriteFromSet(d2_CenterX - 0x10, d2_ScreenHeight - 0x20, d2_ScreenSurface, resource, 0);
     else if (bottomState == 1)
-        d2_DrawSpriteFromSet(d2_CenterX - 0x10, d2_ScreenHeight - 0x20, g_77250c, resource, bottomState);
+        d2_DrawSpriteFromSet(d2_CenterX - 0x10, d2_ScreenHeight - 0x20, d2_ScreenSurface, resource, bottomState);
     if (leftState == 2)
-        d2_DrawSpriteFromSet(4, d2_DialogCenterY, g_77250c, resource, leftState);
+        d2_DrawSpriteFromSet(4, d2_DialogCenterY, d2_ScreenSurface, resource, leftState);
     else if (leftState == 1)
-        d2_DrawSpriteFromSet(4, d2_DialogCenterY, g_77250c, resource, 3);
+        d2_DrawSpriteFromSet(4, d2_DialogCenterY, d2_ScreenSurface, resource, 3);
     if (rightState == 2)
-        d2_DrawSpriteFromSet(g_1040494 - 0x96, d2_DialogCenterY, g_77250c, resource, 4);
+        d2_DrawSpriteFromSet(g_1040494 - 0x96, d2_DialogCenterY, d2_ScreenSurface, resource, 4);
     else if (rightState == 1)
-        d2_DrawSpriteFromSet(g_1040494 - 0x96, d2_DialogCenterY, g_77250c, resource, 5);
+        d2_DrawSpriteFromSet(g_1040494 - 0x96, d2_DialogCenterY, d2_ScreenSurface, resource, 5);
     if (topState == 2)
-        d2_DrawSpriteFromSet(d2_CenterX - 0x10, 0x38, g_77250c, resource, 6);
+        d2_DrawSpriteFromSet(d2_CenterX - 0x10, 0x38, d2_ScreenSurface, resource, 6);
     else if (topState == 1)
-        d2_DrawSpriteFromSet(d2_CenterX - 0x10, 0x38, g_77250c, resource, 7);
+        d2_DrawSpriteFromSet(d2_CenterX - 0x10, 0x38, d2_ScreenSurface, resource, 7);
 }

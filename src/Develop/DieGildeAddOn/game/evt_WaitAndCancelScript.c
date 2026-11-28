@@ -1,9 +1,9 @@
 
 
 
-extern int g_772f3c;
+extern int cut_SkipMode;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char g_14cf950;
+extern char io_LastKeyScancode;
 
 int __cdecl main_RunFrameLoop(int, int);
 int __cdecl evt_FindScriptById(int);
@@ -14,11 +14,11 @@ void __cdecl evt_WaitAndCancelScript(int id)
 {
 	int r;
 
-	if (g_772f3c != 0)
+	if (cut_SkipMode != 0)
 		return;
 	if (main_RunFrameLoop(0, 0x7d6c6) != 0) {
 		do {
-			if (g_14ce8e0 != 0 || g_14cf950 != 0)
+			if (io_RightButtonReleased != 0 || io_LastKeyScancode != 0)
 				break;
 			if (evt_FindScriptById(id) == 0)
 				return;

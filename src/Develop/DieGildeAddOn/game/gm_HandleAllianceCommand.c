@@ -5,8 +5,8 @@ float __cdecl gm_GetSeasonPrice(int, unsigned char);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, int, int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 #include "Develop/DieGildeAddOn/game/client_data.h"
-extern char g_6b5c60[];
-extern unsigned char g_773d75;
+extern char str_empty[];
+extern unsigned char gm_ActiveTownIndex;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00549c50 */
 void __cdecl gm_HandleAllianceCommand(int cmd, int obj, int arr, int id, int extra)
@@ -25,7 +25,7 @@ void __cdecl gm_HandleAllianceCommand(int cmd, int obj, int arr, int id, int ext
 	float fy;
 
 	n = 0;
-	slot = ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short *) (obj + 0x27)]);
+	slot = ((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short *) (obj + 0x27)]);
 	for (i = 0; i < 4; i++) {
 		char *e;
 
@@ -45,7 +45,7 @@ void __cdecl gm_HandleAllianceCommand(int cmd, int obj, int arr, int id, int ext
 				for (i = 0; i < n; i++) {
 					if (found[i][2] == 6 || found[i][2] == 7) {
 						he_MessageBoxQuickjump(*(int *) (found[i] + 4), -1, text1, 0, 0x5ec,
-							*(int *) (obj + 1), -1, 0, g_6b5c60);
+							*(int *) (obj + 1), -1, 0, str_empty);
 					}
 				}
 				if (slot[2] == 6 || slot[2] == 7) {
@@ -57,7 +57,7 @@ void __cdecl gm_HandleAllianceCommand(int cmd, int obj, int arr, int id, int ext
 						io_FormatTextBuffer(text1, 0x1894, obj, *(unsigned short *) e);
 					}
 					he_MessageBoxQuickjump(*(int *) (slot + 4), -1, text1, 0, 0x5ec,
-						*(int *) (obj + 1), -1, 0, g_6b5c60);
+						*(int *) (obj + 1), -1, 0, str_empty);
 					return;
 				}
 			}
@@ -67,7 +67,7 @@ void __cdecl gm_HandleAllianceCommand(int cmd, int obj, int arr, int id, int ext
 			for (i = 0; i < n; i++) {
 				if (found[i][2] == 6 || found[i][2] == 7) {
 					he_MessageBoxQuickjump(*(int *) (found[i] + 4), -1, text1, 0, 0x5ec,
-						*(int *) (obj + 1), -1, 0, g_6b5c60);
+						*(int *) (obj + 1), -1, 0, str_empty);
 				}
 			}
 			return;
@@ -75,8 +75,8 @@ void __cdecl gm_HandleAllianceCommand(int cmd, int obj, int arr, int id, int ext
 	} case 0x65786563: {
 			char *e;
 
-			fh = gm_GetSeasonPrice(0x17a, g_773d75);
-			fy = gm_GetSeasonPrice(0x179, g_773d75);
+			fh = gm_GetSeasonPrice(0x17a, gm_ActiveTownIndex);
+			fy = gm_GetSeasonPrice(0x179, gm_ActiveTownIndex);
 			step = (int) (fh + fy);
 			total = 0;
 			io_FormatTextBuffer(text1, 0x189a, obj, step);
@@ -84,10 +84,10 @@ void __cdecl gm_HandleAllianceCommand(int cmd, int obj, int arr, int id, int ext
 				total = step * n;
 				for (i = 0; i < n; i++) {
 					e = found[i];
-					cm_RequestTransferCurrencyNoKill(*(int *) (slot + 4), *(int *) (e + 4), g_773d75, step);
+					cm_RequestTransferCurrencyNoKill(*(int *) (slot + 4), *(int *) (e + 4), gm_ActiveTownIndex, step);
 					if (e[2] == 6 || e[2] == 7) {
 						he_MessageBoxQuickjump(*(int *) (e + 4), -1, text1, 0, 0x5ec,
-							*(int *) (obj + 1), -1, 0, g_6b5c60);
+							*(int *) (obj + 1), -1, 0, str_empty);
 					}
 					cm_RequestCopyEntityData(*(int *) (slot + 4), *(int *) (e + 4), 3, 1);
 					cm_RequestCopyEntityData(*(int *) (e + 4), *(int *) (slot + 4), 3, 1);
@@ -96,7 +96,7 @@ void __cdecl gm_HandleAllianceCommand(int cmd, int obj, int arr, int id, int ext
 			if (slot[2] == 6 || slot[2] == 7) {
 				io_FormatTextBuffer(text1, 0x1893, obj, total);
 				he_MessageBoxQuickjump(*(int *) (slot + 4), -1, text1, 0, 0x5ec,
-					*(int *) (obj + 1), -1, 0, g_6b5c60);
+					*(int *) (obj + 1), -1, 0, str_empty);
 			}
 			if (n > 0) {
 				for (i = 0; i < n; i++) {
@@ -120,7 +120,7 @@ void __cdecl gm_HandleAllianceCommand(int cmd, int obj, int arr, int id, int ext
 				if ((found[i][2] == 6 || found[i][2] == 7) &&
 				    *(int *) (found[i] + 4) != *(int *) (e + 4)) {
 					he_MessageBoxQuickjump(*(int *) (found[i] + 4), -1, text1, 0, 0x5ec,
-						*(int *) (obj + 1), -1, 0, g_6b5c60);
+						*(int *) (obj + 1), -1, 0, str_empty);
 				}
 			}
 			if (slot[2] == 6 || slot[2] == 7) {
@@ -132,13 +132,13 @@ void __cdecl gm_HandleAllianceCommand(int cmd, int obj, int arr, int id, int ext
 					io_FormatTextBuffer(text1, 0x1895, obj, *(unsigned short *) e);
 				}
 				he_MessageBoxQuickjump(*(int *) (slot + 4), -1, text1, 0, 0x5ec,
-					*(int *) (obj + 1), -1, 0, g_6b5c60);
+					*(int *) (obj + 1), -1, 0, str_empty);
 			}
 			if (n == 4) {
 				int *p;
 
 				io_FormatTextBuffer(text1, 0x1899, obj);
-				p = (int *) &g_7f4ca4;
+				p = (int *) &gm_EntityIdField;
 				do {
 					if ((*(char *) ((int) p - 2) == 6 || *(char *) ((int) p - 2) == 7) &&
 					    *p != *(int *) (slot + 4)) {
@@ -146,7 +146,7 @@ void __cdecl gm_HandleAllianceCommand(int cmd, int obj, int arr, int id, int ext
 							if (*p == *(int *) (found[i] + 4)) {
 								if (i < 4) {
 									he_MessageBoxQuickjump(*p, -1, text1, 0, 0x5ec,
-										*(int *) (obj + 1), -1, 0, g_6b5c60);
+										*(int *) (obj + 1), -1, 0, str_empty);
 								}
 								break;
 							}
@@ -161,11 +161,11 @@ void __cdecl gm_HandleAllianceCommand(int cmd, int obj, int arr, int id, int ext
 		int *p;
 
 		io_FormatTextBuffer(text1, 0x1898, obj);
-		p = (int *) &g_7f4ca4;
+		p = (int *) &gm_EntityIdField;
 		do {
 			if ((*(char *) ((int) p - 2) == 6 || *(char *) ((int) p - 2) == 7) &&
 			    *p != *(int *) (slot + 4)) {
-				he_MessageBoxQuickjump(*p, -1, text1, 0, 0x5ec, *(int *) (obj + 1), -1, 0, g_6b5c60);
+				he_MessageBoxQuickjump(*p, -1, text1, 0, 0x5ec, *(int *) (obj + 1), -1, 0, str_empty);
 			}
 			p = (int *) ((int) p + 0x87 * 4);
 		} while ((int) p < 0x85a0a4);

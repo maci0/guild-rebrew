@@ -9,8 +9,8 @@
 #ifndef REBREW_SERVER
 #include "memtrack.h"
 extern int g_6b6f78;
-extern int g_6b6f64;
-extern TRACKED_MEMORY_BLOCK* g_6b6f80;
+extern int m_TrackedSlotCapacity;
+extern TRACKED_MEMORY_BLOCK* m_TrackedSlotArray;
 extern int g_6b6f6c;
 extern int g_6b6f68;
 #endif
@@ -514,8 +514,8 @@ void* __cdecl m_alloc(unsigned int size, const char* file_and_line);
 extern int g_6b6f70;
 extern int g_6b6f74;
 extern struct ALLOC_GROUP_NODE g_14cc5c0;
-#define g_array_ptr g_6b6f80
-#define m_TrackedCapacity g_6b6f64
+#define g_array_ptr m_TrackedSlotArray
+#define m_TrackedCapacity m_TrackedSlotCapacity
 #define m_AllocationBalance g_6b6f78
 #define g_alloc_root_name g_14cc5c0
 #define g_stat1 g_6b6f68
@@ -731,8 +731,8 @@ extern void* __cdecl malloc(unsigned int size);
 #define m_TRACKED_SLOT_COUNT m_TrackedCapacity
 #define m_TRACKED_SLOTS g_array_ptr
 #else
-#define m_TRACKED_SLOT_COUNT g_6b6f64
-#define m_TRACKED_SLOTS g_6b6f80
+#define m_TRACKED_SLOT_COUNT m_TrackedSlotCapacity
+#define m_TRACKED_SLOTS m_TrackedSlotArray
 #endif
 
 /* Returns 1 when ptr is null or a tracked allocation. */
@@ -804,15 +804,15 @@ void __cdecl m_FreeTracked(void* ptr)
 		return;
 	}
 
-	s = g_6b6f80;
+	s = m_TrackedSlotArray;
 	g_6b6f78--;
-	for (i = 0; i < g_6b6f64; i++) {
+	for (i = 0; i < m_TrackedSlotCapacity; i++) {
 		if (s->ptr == ptr) {
 			break;
 		}
 		s++;
 	}
-	if (i == g_6b6f64) {
+	if (i == m_TrackedSlotCapacity) {
 		return;
 	}
 	size = s->size;

@@ -1,7 +1,7 @@
-extern volatile unsigned int g_6b7fac;    /* 0x6b7fac */
-extern char* g_772ec4;           /* 0x772ec4 */
-extern unsigned short* g_772e9c; /* 0x772e9c, entity pointer */
-extern double g_6640e8;          /* 0.01 */
+extern volatile unsigned int gm_GameTicks;    /* 0x6b7fac */
+extern char* cut_BombSampleBank;           /* 0x772ec4 */
+extern unsigned short* cut_CombatDefenderEntity; /* 0x772e9c, entity pointer */
+extern double dbl_0_01;          /* 0.01 */
 extern float g_664ed0;           /* 1/170 */
 extern float g_664ed4;           /* 170.0 */
 extern double g_6629c8;          /* 1.0 */
@@ -46,7 +46,7 @@ int __cdecl cut_UpdateActiveBombs(void)
     do {
         if (*p != 0) {
             count++;
-            if (g_6b7fac > (unsigned int) (p[1] + 0x15e)) {
+            if (gm_GameTicks > (unsigned int) (p[1] + 0x15e)) {
                 v[0] = -243.0f;
                 v[1] = -90.0f;
                 v[2] = 190.0f;
@@ -55,7 +55,7 @@ int __cdecl cut_UpdateActiveBombs(void)
                 v[5] = 0.0f;
                 v[6] = 38.0f;
                 v[7] = 0.0f;
-                sb_PlayVoice(g_772ec4, "kampf/bauch_greifen", 1, 0x3f, 0x7f,
+                sb_PlayVoice(cut_BombSampleBank, "kampf/bauch_greifen", 1, 0x3f, 0x7f,
                              0, 0);
                 obj = *p;
                 v[0] = *(float*) (obj + 0x4c);
@@ -94,7 +94,7 @@ int __cdecl cut_UpdateActiveBombs(void)
                                 t = (int) ((double) d *
                                            (1.0 - dist * (1.0f / 170.0f)));
                                 *(int*) (*q + 0x24) -= t;
-                                if (*(int*) (*q + 0x16c) == *(int*) &g_772e9c)
+                                if (*(int*) (*q + 0x16c) == *(int*) &cut_CombatDefenderEntity)
                                     d3_ScheduleActionTimer((char*) *q, t, 1);
                                 else
                                     d3_ScheduleActionTimer((char*) *q, t, 2);

@@ -1,5 +1,5 @@
 #include "Develop/client_types.h"
-extern Win_1015f40 g_1015f40[0x60];
+extern Win_1015f40 d2_Windows[0x60];
 extern int d2_CurrentWindowId;
 
 #include "Develop/Units/Error/error_message.h"
@@ -58,7 +58,7 @@ void __cdecl d2_ClearPaintbox(void)
 {
 	char* m;
 
-	m = ((char*)g_1015f40) + d2_CurrentWindowId * 0x3cc;
+	m = ((char*)d2_Windows) + d2_CurrentWindowId * 0x3cc;
 	if (*(int*) (m + 0x290) == 0) {
 		ReportClientMessage((const char*) 0x67d844);
 		return;
@@ -75,7 +75,7 @@ void __cdecl d2_ClearPaintboxRect(int a, int b, int c, int d)
 {
 	Win* w;
 
-	w = &((Win*)g_1015f40)[d2_CurrentWindowId];
+	w = &((Win*)d2_Windows)[d2_CurrentWindowId];
 	if (!w->used) {
 		ReportClientMessage(s_67d844);
 		return;
@@ -93,7 +93,7 @@ void __cdecl d2_DrawShape(int x, int y, int id)
 	D2_PAINTBOX_WIN* w;
 	int src;
 
-	w = &((D2_PAINTBOX_WIN*)g_1015f40)[d2_CurrentWindowId];
+	w = &((D2_PAINTBOX_WIN*)d2_Windows)[d2_CurrentWindowId];
 	if (w->i[0x290 / 4] == 0) {
 		ReportClientMessage(s_67d890);
 		return;

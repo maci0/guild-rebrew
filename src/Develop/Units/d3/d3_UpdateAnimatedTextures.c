@@ -10,7 +10,7 @@ typedef struct
 } D3_TEX_ANIM_SLOT;
 // SIZE 0x70
 
-extern char* g_104049c;
+extern char* d3_TextureBank;
 extern unsigned int g_662ea8[];
 
 unsigned int __cdecl vfs_CalcCrc32(void* buf, unsigned int n);
@@ -34,7 +34,7 @@ char __cdecl d3_UpdateAnimatedTextures(char* o, unsigned int t)
 		for (i = 0; i < n; i++) {
 			e = arr[i];
 			if (e != 0 && e->frames > 0 && e->f5d == 0 && (e->f5e & 0xf) > 0 && e->f40 > 0) {
-				arr[n + i] = (D3_TEX_ANIM_SLOT*) d3_FindTextureVariant(e - ((D3_TEX_ANIM_SLOT*)g_104049c), (t / g_662ea8[e->f5e & 0xf] + h) % e->frames);
+				arr[n + i] = (D3_TEX_ANIM_SLOT*) d3_FindTextureVariant(e - ((D3_TEX_ANIM_SLOT*)d3_TextureBank), (t / g_662ea8[e->f5e & 0xf] + h) % e->frames);
 			}
 		}
 	}

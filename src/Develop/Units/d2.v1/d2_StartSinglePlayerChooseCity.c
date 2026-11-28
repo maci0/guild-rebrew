@@ -1,6 +1,6 @@
-extern unsigned char g_7747b0;
-extern unsigned char g_6a375c;
-extern int g_77250c;
+extern unsigned char gm_ClientModeFlags;
+extern unsigned char gm_PlayerCount;
+extern int d2_ScreenSurface;
 
 
 
@@ -13,12 +13,12 @@ int __cdecl d2_StartSinglePlayerChooseCity(void)
 {
 	int r;
 
-	(*(int*)&g_7747b0) = 0;
+	(*(int*)&gm_ClientModeFlags) = 0;
 	d2_SetOverlayAnimation(0, 0);
-	(*(char*)&g_6a375c) = 1;
+	(*(char*)&gm_PlayerCount) = 1;
 	r = d2_RunChooseCityDialog(1, 0);
 	if (r == 0) {
-		d2_ClearSurface(g_77250c);
+		d2_ClearSurface(d2_ScreenSurface);
 		d2_SetBackdropResource(0x797);
 	}
 	return r;

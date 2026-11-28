@@ -11,14 +11,14 @@ typedef struct {
 
 extern int d3_ActiveCameraAnimation;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern float g_14ce880[3];
-extern float g_7e3a40[3];
+extern float d3_CameraTargetPos[3];
+extern float d3_SavedCameraPos[3];
 extern float d3_CameraTargetRotation[3];
 #include "Develop/Units/d3/d3_camera.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int g_77465c;
 extern char* g_7746a8;
-extern int g_7e2a9c;
+extern int d2_SelectedItem;
 
 #include "Develop/Units/d3/client_scene_transform.h"
 void __cdecl d3_FreeObjectAnimation(View* v);
@@ -34,12 +34,12 @@ void __cdecl d3_EndCameraAndUiMode(void)
 
 	done = 0;
 	if (d3_ActiveCameraAnimation != 0) {
-		if (CompareVector3WithinTolerance(g_14ce880, g_7e3a40, 0.1f)) {
+		if (CompareVector3WithinTolerance(d3_CameraTargetPos, d3_SavedCameraPos, 0.1f)) {
 			d3_FreeObjectAnimation(((View*)d3_ActiveCamera));
 			d3_ActiveCameraAnimation = 0;
 			d3_CameraAnimating = 0;
 			done = 1;
-			d3_SetNodePosition(((View*)d3_ActiveCamera), g_7e3a40);
+			d3_SetNodePosition(((View*)d3_ActiveCamera), d3_SavedCameraPos);
 			d3_SetObjectRotation(((View*)d3_ActiveCamera), d3_CameraTargetRotation);
 		} else {
 			d3_FreeObjectAnimation(((View*)d3_ActiveCamera));
@@ -48,9 +48,9 @@ void __cdecl d3_EndCameraAndUiMode(void)
 		}
 	}
 	if (g_774650 > g_774658 && done == 0) {
-		if (g_77465c >= g_774650 - g_774654) {
+		if (g_77465c >= g_774650 - d2_DialogCloseRequested) {
 			d3_AnimateCameraToStoredTransform();
-			g_77465c = g_774650 - g_774654;
+			g_77465c = g_774650 - d2_DialogCloseRequested;
 			if (g_7746a8 != 0) {
 				e = *(char**) (g_7746a8 + 0x1d4);
 				if (e != 0 && *(void**) (e + 0x18c) != 0) {
@@ -58,11 +58,11 @@ void __cdecl d3_EndCameraAndUiMode(void)
 				}
 				g_7746a8 = 0;
 			}
-			if (g_7e2a9c != 0) {
+			if (d2_SelectedItem != 0) {
 				sv_ResetSelectionState();
 			}
 		}
-	} else if ((!CompareVector3WithinTolerance(((View*)d3_ActiveCamera)->rot, d3_CameraTargetRotation, 0.1f) || !CompareVector3WithinTolerance(((View*)d3_ActiveCamera)->pos, g_7e3a40, 0.1f)) &&
+	} else if ((!CompareVector3WithinTolerance(((View*)d3_ActiveCamera)->rot, d3_CameraTargetRotation, 0.1f) || !CompareVector3WithinTolerance(((View*)d3_ActiveCamera)->pos, d3_SavedCameraPos, 0.1f)) &&
 		   done == 0) {
 		d3_AnimateCameraToStoredTransform();
 		if (g_7746a8 != 0) {
@@ -73,7 +73,7 @@ void __cdecl d3_EndCameraAndUiMode(void)
 			g_7746a8 = 0;
 		}
 	}
-	if (g_7e2a9c != 0) {
+	if (d2_SelectedItem != 0) {
 		sv_ResetSelectionState();
 	}
 }

@@ -1,10 +1,10 @@
 
 
 
-extern int g_77494c;
+extern int nt_NetSyncFlags;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_1007cd0;
-extern char g_7728d4;
+extern char hst_HistoryTextActive;
 
 __declspec(dllimport) unsigned long __stdcall GetTickCount(void);
 void __cdecl cm_RequestSysMessage(int, int*);
@@ -16,16 +16,16 @@ void __cdecl hst_ShowDueHistoryScroll(int mode)
 {
 	int buf[0x1f];
 
-	if (((*(unsigned char*)&g_77494c) & 8) != 0 || g_14cbca0 == -1) {
+	if (((*(unsigned char*)&nt_NetSyncFlags) & 8) != 0 || nt_ClientSocket == -1) {
 		buf[0] = GetTickCount();
 		cm_RequestSysMessage(5, buf);
 	}
-	while (g_1007cd0 != 0 && g_14cbcb0 == 0)
+	while (g_1007cd0 != 0 && nt_ConnectionClosed == 0)
 		cm_StepCommandQueue();
-	if (g_14cbcb0 == 0 && g_7728d4 != 0) {
-		if (g_7728d4 == 1)
+	if (nt_ConnectionClosed == 0 && hst_HistoryTextActive != 0) {
+		if (hst_HistoryTextActive == 1)
 			hst_ShowDueTextScroll();
-		else if (g_7728d4 == 2)
+		else if (hst_HistoryTextActive == 2)
 			d2_ShowHistoryScrollDialog(mode);
 	}
 }

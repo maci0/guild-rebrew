@@ -75,12 +75,12 @@ typedef struct Ent {
 
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern int d2_CurrentWindowId;
-extern char* g_77255c;
+extern char* d2_CurrentWindow;
 extern int g_77259c;
 extern int g_67d390;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_67d3a0;
-extern char g_1015f40[];
+extern char d2_Windows[];
 
 int __cdecl d2_CreateSurface(int* p, int kind);
 void __cdecl d2_ClearSurface(int h);
@@ -103,7 +103,7 @@ int __cdecl d2_CreateWindow(unsigned int x, unsigned int y, unsigned int width, 
 	if (g_77259c > 0x60) {
 		g_77259c = 1;
 	}
-	for (i = 0, p = (unsigned int*) (g_1015f40 + 0x290); (int) p < (int) (g_1015f40 + 0x16f10); p += 0xf3, i++) {
+	for (i = 0, p = (unsigned int*) (d2_Windows + 0x290); (int) p < (int) (d2_Windows + 0x16f10); p += 0xf3, i++) {
 		if (*p == 0) {
 			goto found;
 		}
@@ -113,7 +113,7 @@ found:
 	if (i == -1) {
 		return i;
 	}
-	rec = &((WinRec*) g_1015f40)[i];
+	rec = &((WinRec*) d2_Windows)[i];
 	rec->x4 = x;
 	rec->xc = width;
 	rec->x8 = y;
@@ -170,20 +170,20 @@ found:
 		}
 	}
 	ei = d2_AllocateElement();
-	((D2_CONTROL_TL*)g_1015ea0)[ei].kind = 0x40;
-	((D2_CONTROL_TL*)g_1015ea0)[ei].x = rec->x4;
-	((D2_CONTROL_TL*)g_1015ea0)[ei].y = rec->x8;
-	((D2_CONTROL_TL*)g_1015ea0)[ei].width = rec->xc;
-	((D2_CONTROL_TL*)g_1015ea0)[ei].height = rec->x10;
-	((D2_CONTROL_TL*)g_1015ea0)[ei].value_008 = i + 0x400;
-	((D2_CONTROL_TL*)g_1015ea0)[ei].value_088 = i;
-	((D2_CONTROL_TL*)g_1015ea0)[ei].clip_top = rec->x8;
-	((D2_CONTROL_TL*)g_1015ea0)[ei].clip_right = rec->xc + rec->x4;
-	((D2_CONTROL_TL*)g_1015ea0)[ei].clip_left = rec->x4;
-	((D2_CONTROL_TL*)g_1015ea0)[ei].clip_bottom = rec->x10 + rec->x8;
-	((D2_CONTROL_TL*)g_1015ea0)[ei].mode = 2;
-	((D2_CONTROL_TL*)g_1015ea0)[ei].data = rec;
-	((D2_CONTROL_TL*)g_1015ea0)[ei].parent = 0;
+	((D2_CONTROL_TL*)d2_Controls)[ei].kind = 0x40;
+	((D2_CONTROL_TL*)d2_Controls)[ei].x = rec->x4;
+	((D2_CONTROL_TL*)d2_Controls)[ei].y = rec->x8;
+	((D2_CONTROL_TL*)d2_Controls)[ei].width = rec->xc;
+	((D2_CONTROL_TL*)d2_Controls)[ei].height = rec->x10;
+	((D2_CONTROL_TL*)d2_Controls)[ei].value_008 = i + 0x400;
+	((D2_CONTROL_TL*)d2_Controls)[ei].value_088 = i;
+	((D2_CONTROL_TL*)d2_Controls)[ei].clip_top = rec->x8;
+	((D2_CONTROL_TL*)d2_Controls)[ei].clip_right = rec->xc + rec->x4;
+	((D2_CONTROL_TL*)d2_Controls)[ei].clip_left = rec->x4;
+	((D2_CONTROL_TL*)d2_Controls)[ei].clip_bottom = rec->x10 + rec->x8;
+	((D2_CONTROL_TL*)d2_Controls)[ei].mode = 2;
+	((D2_CONTROL_TL*)d2_Controls)[ei].data = rec;
+	((D2_CONTROL_TL*)d2_Controls)[ei].parent = 0;
 	rec->x278 = 2;
 	rec->x27c = ei;
 	rec->x280 = 1;
@@ -210,6 +210,6 @@ found:
 		rec->x3c = m_alloc(0x17d0, "d2_t:w->txt");
 	}
 	d2_CurrentWindowId = i;
-	g_77255c = (char*) rec;
+	d2_CurrentWindow = (char*) rec;
 	return i;
 }

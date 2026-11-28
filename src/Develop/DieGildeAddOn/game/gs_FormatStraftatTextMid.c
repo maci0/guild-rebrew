@@ -9,7 +9,7 @@ typedef struct tag_req_2d {
 	char raw[0x2d];
 } STRAFTAT_TEXT_REQ;
 
-extern char g_69037c[];
+extern char str_Hm_das_ist_doch_nicht_verboten[];
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 
@@ -34,7 +34,7 @@ int __cdecl gs_FormatStraftatTextMid(void* output, STRAFTAT_TEXT_REQ s, int b)
 		io_FormatTextBuffer(output, v + 0x1450, w, (char*) &s + 4);
 		break;
 	default:
-		memcpy(output, g_69037c, 0x20);
+		memcpy(output, str_Hm_das_ist_doch_nicht_verboten, 0x20);
 		r = 0;
 		break;
 	}

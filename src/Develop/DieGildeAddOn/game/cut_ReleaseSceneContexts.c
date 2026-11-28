@@ -2,7 +2,7 @@
 
 
 extern char g_68d00c[];
-extern char g_6b5c60[];
+extern char str_empty[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl cut_FadeToBlack(void);
@@ -26,11 +26,11 @@ int __cdecl cut_ReleaseSceneContexts(int* scene)
 		d2_DestroyForm(scene[1]);
 	if (scene[0] != -1)
 		evt_StopScriptIfActive(scene[0]);
-	scene[0] = evt_StartGfxScript(g_68d00c, g_6b5c60);
+	scene[0] = evt_StartGfxScript(g_68d00c, str_empty);
 	cut_WaitForScript(scene[0]);
 	scene[0] = -1;
 	scene[1] = -1;
-	g_772f54 = 0;
+	cut_StartTick = 0;
 	cut_CleanupCutscene();
 	msx_RestoreMusicIfAllowed();
 	d2_SuppressOverlay = 0;

@@ -17,16 +17,16 @@ struct good {
 };
 #pragma pack()
 
-extern int* g_665f08;
-extern volatile int g_6b7fac;
+extern int* d2_TutorialState;
+extern volatile int gm_GameTicks;
 extern unsigned char* lpGebaeudePROT;
 
 int __cdecl d2_UpdateTutCh1Cat0aStep(int* ev)
 {
 	if (ev[0] == 0xd && ev[1] != 0 && ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) ev[1]].category == 0xa) {
-		((struct fsm*)g_665f08)->state = 0xb;
-		((struct fsm*)g_665f08)->next = 0xb;
-		((struct fsm*)g_665f08)->since = g_6b7fac;
+		((struct fsm*)d2_TutorialState)->state = 0xb;
+		((struct fsm*)d2_TutorialState)->next = 0xb;
+		((struct fsm*)d2_TutorialState)->since = gm_GameTicks;
 		return 1;
 	}
 	return 3;

@@ -5,7 +5,7 @@
 #include "Develop/Units/Error/error_message.h"
 
 extern GOLD_GUI_WINDOW g_00f8f120[];
-extern Win_1015f40 g_1015f40[0x60];
+extern Win_1015f40 d2_Windows[0x60];
 extern char s_67d420[];
 
 int __cdecl d2_CreateElementAt(short, short, int);
@@ -59,7 +59,7 @@ int __cdecl d2_AddElementToWindow(int x, int y, int a3, int win)
 	D2_WIN* w;
 	int id;
 
-	w = &((D2_WIN*)g_1015f40)[win];
+	w = &((D2_WIN*)d2_Windows)[win];
 	if (!w->active) {
 		return -1;
 	}

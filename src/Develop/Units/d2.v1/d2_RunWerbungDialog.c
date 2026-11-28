@@ -30,8 +30,8 @@ typedef struct
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern int g_100f1dc;
-extern int g_14ce8e0;
+extern int d2_DialogButtonAction;
+extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
 int __cdecl gm_CalcWerbungSteps(int, int);
@@ -54,22 +54,22 @@ int __cdecl d2_RunWerbungDialog(unsigned short* target)
 	int r;
 	int h;
 
-	cost = gm_CalcWerbungSteps(*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, *(int*) (target + 2));
+	cost = gm_CalcWerbungSteps(*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id, *(int*) (target + 2));
 	dlg = d2_LoadForm(0, 0, "privillegien\\werbung2");
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1ce5, *target, cost);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	r = 0;
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
-		if (g_100f1dc != -1) {
-			if (g_100f1dc == 2) {
+		if (d2_DialogButtonAction != -1) {
+			if (d2_DialogButtonAction == 2) {
 				memset(&pkt, 0, sizeof(pkt));
 				pkt.type = 0x41;
-				pkt.x8 = *(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id;
+				pkt.x8 = *(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id;
 				pkt.xc = pkt.x8;
 				pkt.name = (*(pos14_7f4c00*)&gm_GameTime);
 				pkt.x36 = 2;
@@ -80,14 +80,14 @@ int __cdecl d2_RunWerbungDialog(unsigned short* target)
 					cm_StepCommandQueue();
 				}
 				r = 1;
-				g_774654 = 1;
-			} else if (g_100f1dc == 1) {
-				g_774654 = 1;
+				d2_DialogCloseRequested = 1;
+			} else if (d2_DialogButtonAction == 1) {
+				d2_DialogCloseRequested = 1;
 			}
 		}
 	} while (main_RunFrameLoop((void*) d2_RunWerbungDialog, 0x657c7) != 0);
 	d2_DestroyForm(dlg);
-	g_100f1dc = -1;
+	d2_DialogButtonAction = -1;
 	io_ClearInputButtonFlags(0x11);
 	return r;
 }

@@ -5,24 +5,24 @@
 
 struct VFS_DIR;
 
-extern struct VFS_DIR* g_6b7fdc;
+extern struct VFS_DIR* vfs_RootDir;
 extern unsigned char g_6b85a4;
-extern int g_6b86d4;
-extern VECTOR3 g_6b86c4;
-extern char* g_67a370;
+extern int d3_SceneRenderLock;
+extern VECTOR3 d3_SceneLightingVec;
+extern char* d3_ActiveScene;
 extern char g_1041d80[];
 extern char* g_6b8484;
-extern char* g_6b8300;
+extern char* d3_CurrentFloor;
 extern char* d3_ObjectListHead;
 extern char d3_SceneObjectSentinel[];
-extern char* g_6b89e4;
+extern char* d3_InteriorSupermap;
 extern int g_6b89b0;
 
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
 int __cdecl CloseVfsStream(void* stream);
 int __cdecl vfs_ReadByte(void* stream, void* dst);
 char* __cdecl vfs_ReadCString(void* stream, char* dst);
-int __cdecl fcn_004011d0(void* stream, void* dst);
+int __cdecl vfs_ReadDword(void* stream, void* dst);
 int __cdecl fcn_004011f0(void* stream, void* dst);
 void __cdecl vfs_ReadVec3(void* stream, void* dst);
 void __cdecl ReportClientMessage(const char* msg);
@@ -77,7 +77,7 @@ char __cdecl d3_LoadScene(const char* filename, void* stream, SCENE_PROGRESS pro
 	if (stream != 0) {
 		s = (char*) stream;
 	} else {
-		s = (char*) vfs_Tfopen(filename, "rb", g_6b7fdc);
+		s = (char*) vfs_Tfopen(filename, "rb", vfs_RootDir);
 	}
 	if (s == 0) {
 		return 0;
@@ -89,19 +89,19 @@ char __cdecl d3_LoadScene(const char* filename, void* stream, SCENE_PROGRESS pro
 		}
 		return 0;
 	}
-	g_6b86d4++;
+	d3_SceneRenderLock++;
 	if (version >= 0x3a6c000b) {
 		vfs_ReadCString(s, name);
-		fcn_004011d0(s, &discarded);
+		vfs_ReadDword(s, &discarded);
 		vfs_ReadVec3(s, &vec);
-		g_67bbdc.x = vec.x;
-		g_67bbdc.y = vec.y;
-		g_67bbdc.z = vec.z;
+		d3_SceneAmbientColor.x = vec.x;
+		d3_SceneAmbientColor.y = vec.y;
+		d3_SceneAmbientColor.z = vec.z;
 		if (version >= 0x3a6c00b5) {
 			vfs_ReadVec3(s, &vec);
-			g_6b86c4.x = vec.x;
-			g_6b86c4.y = vec.y;
-			g_6b86c4.z = vec.z;
+			d3_SceneLightingVec.x = vec.x;
+			d3_SceneLightingVec.y = vec.y;
+			d3_SceneLightingVec.z = vec.z;
 		}
 		if (version >= 0x3a6c00b3) {
 			/* index doubles as the scene value written below, then as the
@@ -110,19 +110,19 @@ char __cdecl d3_LoadScene(const char* filename, void* stream, SCENE_PROGRESS pro
 			if (version >= 0x3a6c00b7) {
 				fcn_004011f0(s, &index);
 			}
-			*(int*) (g_67a370 + 0xb4) = index;
+			*(int*) (d3_ActiveScene + 0xb4) = index;
 			fcn_004011f0(s, &fog_color);
-			fcn_004011d0(s, &fog_a);
-			fcn_004011d0(s, &fog_b);
+			vfs_ReadDword(s, &fog_a);
+			vfs_ReadDword(s, &fog_b);
 			d3_SetFog(fog_a, fog_b, fog_color);
 		}
 		/* The reference writes the row count into index before the loop
 		 * and never reads it back. */
 		index = 7;
 		for (index = 0; index < 7; index++) {
-			((D3_SCENE_SLOT*)g_1041d80)[index].a.x = g_67bbdc.x;
-			((D3_SCENE_SLOT*)g_1041d80)[index].a.y = g_67bbdc.y;
-			((D3_SCENE_SLOT*)g_1041d80)[index].a.z = g_67bbdc.z;
+			((D3_SCENE_SLOT*)g_1041d80)[index].a.x = d3_SceneAmbientColor.x;
+			((D3_SCENE_SLOT*)g_1041d80)[index].a.y = d3_SceneAmbientColor.y;
+			((D3_SCENE_SLOT*)g_1041d80)[index].a.z = d3_SceneAmbientColor.z;
 			*(int*)&((D3_SCENE_SLOT*)g_1041d80)[index].b.x = 0;
 			*(int*)&((D3_SCENE_SLOT*)g_1041d80)[index].b.y = 0;
 			*(int*)&((D3_SCENE_SLOT*)g_1041d80)[index].b.z = 0;
@@ -148,10 +148,10 @@ char __cdecl d3_LoadScene(const char* filename, void* stream, SCENE_PROGRESS pro
 						count = 0;
 						do {
 							fcn_004011f0(s, &color);
-							fcn_004011d0(s, &discarded);
+							vfs_ReadDword(s, &discarded);
 							((D3_SCENE_SLOT*)g_1041d80)[index].pal[count].color = color;
 							((D3_SCENE_SLOT*)g_1041d80)[index].pal[count].f4 = discarded;
-							fcn_004011d0(s, &discarded);
+							vfs_ReadDword(s, &discarded);
 							((D3_SCENE_SLOT*)g_1041d80)[index].pal[count].f8 = discarded;
 							count = count + 1;
 						} while (count < 6);
@@ -176,7 +176,7 @@ char __cdecl d3_LoadScene(const char* filename, void* stream, SCENE_PROGRESS pro
 		}
 		vfs_ReadByte(s, &present);
 		if (present != 0) {
-			g_6b8300 = d3_int_io_LoadFloor(s, version);
+			d3_CurrentFloor = d3_int_io_LoadFloor(s, version);
 		}
 		obj = d3_ObjectListHead;
 		while (obj != d3_SceneObjectSentinel) {
@@ -200,7 +200,7 @@ char __cdecl d3_LoadScene(const char* filename, void* stream, SCENE_PROGRESS pro
 	if (stream == 0) {
 		CloseVfsStream(s);
 	}
-	if (version < 0x3a6c00b1 && g_6b8300 != 0) {
+	if (version < 0x3a6c00b1 && d3_CurrentFloor != 0) {
 		obj = d3_ObjectListHead;
 		while (obj != d3_SceneObjectSentinel) {
 			if (*(int*) (obj + 0x218) == 7) {
@@ -213,31 +213,31 @@ char __cdecl d3_LoadScene(const char* filename, void* stream, SCENE_PROGRESS pro
 			obj = d3_NextVisibleSceneNode(obj);
 		}
 	}
-	if (g_6b8300 == 0) {
-		if (g_6b89e4 != 0) {
-			d3sm_Rebuild(g_6b89e4, 0);
+	if (d3_CurrentFloor == 0) {
+		if (d3_InteriorSupermap != 0) {
+			d3sm_Rebuild(d3_InteriorSupermap, 0);
 		} else {
-			g_6b89e4 = d3sm_CreateMap(0, -g_6b89b0, 1);
+			d3_InteriorSupermap = d3sm_CreateMap(0, -g_6b89b0, 1);
 		}
-	} else if (g_6b89e4 != 0) {
-		gv_Free3Fields((int*) g_6b89e4);
-		g_6b89e4 = 0;
+	} else if (d3_InteriorSupermap != 0) {
+		gv_Free3Fields((int*) d3_InteriorSupermap);
+		d3_InteriorSupermap = 0;
 	}
-	universe = g_67a370;
+	universe = d3_ActiveScene;
 	if (*(int*) (universe + 0xb4) == 0) {
-		*(int*) (universe + 0xb4) = g_6b8300 != 0 ? 128 : 64;
-		universe = g_67a370;
+		*(int*) (universe + 0xb4) = d3_CurrentFloor != 0 ? 128 : 64;
+		universe = d3_ActiveScene;
 	}
-	if (g_6b8300 != 0) {
-		*(char**) (universe + 0xac) = g_6b8300;
+	if (d3_CurrentFloor != 0) {
+		*(char**) (universe + 0xac) = d3_CurrentFloor;
 	}
 	d3_ReloadSceneTextureSurfaces(progress);
-	g_6b86d4--;
+	d3_SceneRenderLock--;
 	if (filename != 0) {
-		strncpy(g_67a370, filename, 0x7f);
+		strncpy(d3_ActiveScene, filename, 0x7f);
 	}
-	*(unsigned char*) (g_67a370 + 0x3d4) = 1;
-	*(int*) (g_67a370 + 0x3d8) = 0;
+	*(unsigned char*) (d3_ActiveScene + 0x3d4) = 1;
+	*(int*) (d3_ActiveScene + 0x3d8) = 0;
 	return 1;
 }
 /* Layout scaffolding: shifts the next source object to its reference

@@ -15,18 +15,18 @@
 
 #include "Develop/client_types.h"
 
-extern VECTOR3 g_67bbdc;
+extern VECTOR3 d3_SceneAmbientColor;
 extern float g_1052bd8;
 extern int g_1052bdc;
 extern char g_1052c40;
-extern char g_6b7ffa;
+extern char d3_RenderAmbientOnly;
 extern unsigned char g_6b7ffb;
 extern unsigned char g_6b7ffc;
 extern unsigned char g_6b7ffd;
 extern unsigned char g_6b7ffe;
 extern unsigned char g_6b7fff;
 extern char g_6b8000;
-char g_67a2ac = 1;
+char d3_LightingEnabled = 1;
 
 void __cdecl d3_SetScaledMaterial(float a, char* b, int c, char d);
 
@@ -37,13 +37,13 @@ void __cdecl d3_SetRenderMaterialState(unsigned char alpha, unsigned char flags,
 
 	f = (float) alpha * (1.0f / 255.0f);
 	if (alpha < 0xff || (flags & 1) != 0) {
-		if (g_6b7ffa == 0) {
-			if (g_67a2ac) {
+		if (d3_RenderAmbientOnly == 0) {
+			if (d3_LightingEnabled) {
 				((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(g_6b5de0, 0x2f, 0x10);
 				((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(g_6b5de0, 0xe, 0);
 			}
 			((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(g_6b5de0, 0x1b, 1);
-			g_6b7ffa = 1;
+			d3_RenderAmbientOnly = 1;
 		}
 		if ((flags & 1) != 0 && g_6b7ffb == 0) {
 			((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(g_6b5de0, 0x14, 2);
@@ -60,19 +60,19 @@ void __cdecl d3_SetRenderMaterialState(unsigned char alpha, unsigned char flags,
 			}
 			g_6b7ffb = 0;
 		}
-	} else if (g_6b7ffa != 0) {
-		if (g_67a2ac) {
+	} else if (d3_RenderAmbientOnly != 0) {
+		if (d3_LightingEnabled) {
 			((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(g_6b5de0, 0x2f, 0);
 			((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(g_6b5de0, 0xe, 1);
 		}
 		((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(g_6b5de0, 0x1b, 0);
 		((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(g_6b5de0, 0x14, 1);
 		((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(g_6b5de0, 0x13, 2);
-		g_6b7ffa = 0;
+		d3_RenderAmbientOnly = 0;
 		g_6b7ffb = 0;
 	}
 	if (f != g_1052bd8 || color != g_1052bdc) {
-		d3_SetScaledMaterial((float) alpha * (1.0f / 255.0f), (char*)&g_67bbdc, color, flags & 1);
+		d3_SetScaledMaterial((float) alpha * (1.0f / 255.0f), (char*)&d3_SceneAmbientColor, color, flags & 1);
 		g_1052bd8 = f;
 		g_1052c40 = flags;
 		g_1052bdc = color;
@@ -83,7 +83,7 @@ void __cdecl d3_SetRenderMaterialState(unsigned char alpha, unsigned char flags,
 		g_6b7ffc = test;
 	}
 	if (test) {
-		((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(g_6b5de0, 0x18, g_6b7ffa ? 0 : 0xbf);
+		((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(g_6b5de0, 0x18, d3_RenderAmbientOnly ? 0 : 0xbf);
 	}
 	if (cull != g_6b7ffe) {
 		((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(g_6b5de0, 0x16, cull ? 1 : (g_6b8000 ? 2 : 3));

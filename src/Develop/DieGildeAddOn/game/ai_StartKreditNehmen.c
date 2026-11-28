@@ -12,11 +12,11 @@ typedef struct {
 } BuildingRow;
 
 extern int g_6643d8[];
-extern int g_7f4c04;
+extern int gm_GameTimeHour;
 extern unsigned char* lpGebaeudePROT;
 
 extern float g_662a94;
-extern float g_6628a8;
+extern float flt_0_0;
 
 extern unsigned short __cdecl gm_RandomMod(int);
 extern char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
@@ -55,7 +55,7 @@ int __cdecl ai_StartKreditNehmen(int code, short* target, char* ent, char* out1,
 	if (gm_RandomMod(10) < n + 1)
 		return 0;
 	if (code == 0x33) {
-		t = (g_7f4c04 & 0xffff) - 8;
+		t = (gm_GameTimeHour & 0xffff) - 8;
 		if (t <= 0 || t < 10) {
 			if (t <= 0) {
 				t = 0;
@@ -99,7 +99,7 @@ int __cdecl ai_StartKreditNehmen(int code, short* target, char* ent, char* out1,
 		gm_GetLawEntry(0xe, msg);
 		for (i = 0; i < n; i++)
 			score[i + 1] = (float) (msg[6] - 2) / rec[i * 3 + 2] * (rec[i * 3 + 1] * *(float*) 0x662dbc) * rec[i * 3];
-		d = g_6628a8;
+		d = flt_0_0;
 		best = -1;
 		for (i = 0; i < n; i++) {
 			if (d < score[i + 1]) {
@@ -142,7 +142,7 @@ int __cdecl ai_StartKreditNehmen(int code, short* target, char* ent, char* out1,
 		else
 			score[i + 1] = g_662a94;
 	}
-	d = g_6628a8;
+	d = flt_0_0;
 	best = -1;
 	for (i = 0; i < n; i++) {
 		if (d < score[i + 1]) {

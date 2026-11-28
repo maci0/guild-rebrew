@@ -11,7 +11,7 @@ int* __cdecl d3snd_QueueSound(int code, int arg2, int text, int variation, int d
 {
 	int* p;
 
-	if (g_774934 == 0)
+	if (d3snd_SoundEnabled == 0)
 		return 0;
 	p = d3snd_PrepareVoiceSample(code, arg2, text, variation);
 	if (p != 0) {

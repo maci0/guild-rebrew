@@ -8,7 +8,7 @@ typedef struct DirtyRect {
 // SIZE 0x14
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern DirtyRect* g_772588;
+extern DirtyRect* d2_DirtyRects;
 
 /* ADDRESS: GOLDTL 0x00465ff0 */
 void __cdecl d2_AddDirtyRect(int x, int y, int w, int h, char* owner)
@@ -43,13 +43,13 @@ void __cdecl d2_AddDirtyRect(int x, int y, int w, int h, char* owner)
 	if (h < 0) {
 		h = 1;
 	}
-	for (i = 0; g_772588[i].owner != 0 && i < 0x400; i++) {
+	for (i = 0; d2_DirtyRects[i].owner != 0 && i < 0x400; i++) {
 	}
 	if (i < 0x400) {
-		g_772588[i].x = x;
-		g_772588[i].y = y;
-		g_772588[i].w = w;
-		g_772588[i].h = h;
-		g_772588[i].owner = owner;
+		d2_DirtyRects[i].x = x;
+		d2_DirtyRects[i].y = y;
+		d2_DirtyRects[i].w = w;
+		d2_DirtyRects[i].h = h;
+		d2_DirtyRects[i].owner = owner;
 	}
 }

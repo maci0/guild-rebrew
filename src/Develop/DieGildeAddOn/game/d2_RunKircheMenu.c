@@ -1,15 +1,15 @@
 
 
 
-extern int g_7746d8;
+extern int d2_SelectedEntityUiFlags;
 extern int g_14ab954;
 extern int g_14ab8f4;
 extern int g_14ab918;
 extern int g_14ab934;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-extern int g_7746a0;
-extern char g_14cf950;
-extern int g_774800;
+extern int sv_ClickedObjekt;
+extern char io_LastKeyScancode;
+extern int gm_AllEntitiesControllable;
 
 void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -33,11 +33,11 @@ void __cdecl d2_RunKircheMenu(char* e, int msg)
 	weih = 0;
 	d2_ClearStatusTextSlots();
 	while (main_RunFrameLoop((void*) d2_RunKircheMenu, 0x67fff) != 0) {
-		if (g_7746d8 & 0x200) {
+		if (d2_SelectedEntityUiFlags & 0x200) {
 			predigt = RegisterStatusText("contact_PREDIGT", g_14ab954, 0x16);
 			weih = RegisterStatusText("ob_WEIHWASSERBECKEN", g_14ab8f4, 0x16);
 		}
-		if (*(unsigned short*) (e + 0x27) != g_774970 && *(unsigned short*) (e + 0x27) != 0xffff) {
+		if (*(unsigned short*) (e + 0x27) != gm_LocalPlayerSlot && *(unsigned short*) (e + 0x27) != 0xffff) {
 			if (fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0xf2) != 0) {
 				beicht = RegisterStatusText("ob_KIRCHE_BEICHTSTUHLRAUM", g_14ab918, 0x16);
 			} else {
@@ -46,26 +46,26 @@ void __cdecl d2_RunKircheMenu(char* e, int msg)
 			spende = RegisterStatusText("ob_SPENDENKAESTCHEN", g_14ab934, 0x16);
 			weih = RegisterStatusText("ob_WEIHWASSERBECKEN", g_14ab8f4, 0x16);
 		}
-		if (g_7746a0 != 0) {
-			if (g_7746d8 & 0x200) {
-				if (g_7746a0 == predigt) {
+		if (sv_ClickedObjekt != 0) {
+			if (d2_SelectedEntityUiFlags & 0x200) {
+				if (sv_ClickedObjekt == predigt) {
 					d2_RunChurchSermonDialog(e);
-				} else if (g_7746a0 == weih) {
+				} else if (sv_ClickedObjekt == weih) {
 					d2_RunTaufeDialog(e, msg);
 				}
 			}
-			if (*(unsigned short*) (e + 0x27) != g_774970) {
-				if (g_7746a0 == beicht) {
+			if (*(unsigned short*) (e + 0x27) != gm_LocalPlayerSlot) {
+				if (sv_ClickedObjekt == beicht) {
 					d2_OpenBeichteDialog(e);
 				}
-				if (g_7746a0 == spende) {
+				if (sv_ClickedObjekt == spende) {
 					d2_RunKircheSpendenDialog(e);
 				}
-				if (g_7746a0 == weih) {
+				if (sv_ClickedObjekt == weih) {
 					d2_RunTaufeDialog(e, msg);
 				}
 			}
-		} else if (g_14cf950 == 0x30 && g_774800 != 0) {
+		} else if (io_LastKeyScancode == 0x30 && gm_AllEntitiesControllable != 0) {
 			d2_OpenBeichteDialog(e);
 		}
 	}

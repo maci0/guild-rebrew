@@ -1,7 +1,7 @@
-extern int g_1008524;
-extern int g_1008524;
-extern int g_100af80[];
-extern int g_100af80[];
+extern int ai_ActiveMethodCount;
+extern int ai_ActiveMethodCount;
+extern int ai_ActiveMethodStack[];
+extern int ai_ActiveMethodStack[];
 
 /* ADDRESS: GOLD 0x00495790 */
 /* ADDRESS: GOLDTL 0x00495150 */
@@ -10,9 +10,9 @@ int __cdecl ai_IsMethodActive(int value)
 	int i;
 	int n;
 
-	n = g_1008524;
+	n = ai_ActiveMethodCount;
 	for (i = 0; i < n; i++) {
-		if (g_100af80[i] == value) {
+		if (ai_ActiveMethodStack[i] == value) {
 			return 1;
 		}
 	}

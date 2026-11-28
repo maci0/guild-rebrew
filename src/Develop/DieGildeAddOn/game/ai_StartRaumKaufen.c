@@ -1,7 +1,7 @@
 #include "game_data.h"
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 extern unsigned char g_slot_table[2];
-extern unsigned char g_773d75;
+extern unsigned char gm_ActiveTownIndex;
 typedef struct { char x00[0x21]; unsigned char x21; char x22[0x22b]; } BUILDING_LIMIT_VIEW;
 char* __cdecl gm_SearchTable67(int);
 unsigned short* __cdecl fcn_00502cd0(int, int, int, int);
@@ -37,10 +37,10 @@ int __cdecl ai_StartRaumKaufen(int unused, char* entity, int mode, char* itemReq
 		return 0;
 	if (*(unsigned short*) (building + 0x27) == 0xffff)
 		return 0;
-	amount = gm_GetSeasonTreasury(g_slot_table + *(unsigned short*) (building + 0x27) * 0x21c, g_773d75);
+	amount = gm_GetSeasonTreasury(g_slot_table + *(unsigned short*) (building + 0x27) * 0x21c, gm_ActiveTownIndex);
 	if (*(float*) (itemReq + 0x14) > 0.0f && *(float*) (itemReq + 0x14) < 1.0f)
 		amount = (int) ((float) amount * *(float*) (itemReq + 0x14));
-	who = g_773d75;
+	who = gm_ActiveTownIndex;
 	if (amount < (int) gm_GetSeasonPrice(*(int*) (itemReq + 4), who))
 		return 0;
 	i = 0;

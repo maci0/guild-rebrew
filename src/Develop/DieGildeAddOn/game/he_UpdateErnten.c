@@ -5,14 +5,14 @@
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
-extern unsigned char g_773d75;
-extern char g_7f4ca4[];
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
+extern unsigned char gm_ActiveTownIndex;
+extern char gm_EntityIdField[];
 extern unsigned char* lpGebaeudePROT;
 extern char* lpObjektePROT;
-extern void* g_6b7fdc;
+extern void* vfs_RootDir;
 extern int d3_CurrentContextIndex;
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl plt_FindRecordById(char*, int);
@@ -69,7 +69,7 @@ void __cdecl he_UpdateErnten(char* ev)
 							sprintf(erm, "Ernten_start_%s", plantInfo + 2);
 							sprintf(path, "%slocations/%s/%s_%s.esc", "x:\\engine\\gfx\\scripts\\",
 							        ent + 1, erm, ent + 1);
-							if (vfs_LookupPath(path, g_6b7fdc, &found)) {
+							if (vfs_LookupPath(path, vfs_RootDir, &found)) {
 								char* script = evt_LoadScript(path);
 
 								if (script != 0) {
@@ -112,7 +112,7 @@ void __cdecl he_UpdateErnten(char* ev)
 							sprintf(erm, "Ernten_end_%s", plantInfo + 2);
 							sprintf(path, "%slocations/%s/%s_%s.esc", "x:\\engine\\gfx\\scripts\\",
 							        ent + 1, erm, ent + 1);
-							if (vfs_LookupPath(path, g_6b7fdc, &found)) {
+							if (vfs_LookupPath(path, vfs_RootDir, &found)) {
 								char* script = evt_LoadScript(path);
 
 								if (script != 0) {
@@ -141,7 +141,7 @@ void __cdecl he_UpdateErnten(char* ev)
 							rec = fcn_00502cd0(*(int*) (v4 + 0x5d), 2, 0, 0x2a, 6);
 							if (rec != 0) {
 								cm_SendSellObjekt(*(int*) (rec + 2), -1, *(unsigned short*) (v5 + 0xa),
-								             1 << (*(unsigned char*) (v5 + 0xd) - 1), g_773d75, 0);
+								             1 << (*(unsigned char*) (v5 + 0xd) - 1), gm_ActiveTownIndex, 0);
 							}
 							k = 0;
 							p = v24 + 0xd;
@@ -160,7 +160,7 @@ void __cdecl he_UpdateErnten(char* ev)
 
 											memset(pkt, 0, 0xf8);
 											pkt[4] = 0x28;
-											*(int*) (pkt + 8) = *(int*) (g_7f4ca4 + *(unsigned short*) (ev + 8) * (int)sizeof(ENTITY_RECORD));
+											*(int*) (pkt + 8) = *(int*) (gm_EntityIdField + *(unsigned short*) (ev + 8) * (int)sizeof(ENTITY_RECORD));
 											id = *(int*) (v4 + 1);
 											*(int*) (pkt + 0x0c) = id;
 											*(int*) (pkt + 0x10) = 1;

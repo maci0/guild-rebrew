@@ -2,7 +2,7 @@
 
 extern char g_776708;
 
-extern Slot7f4ca2 g_7f4ca2[768];
+extern Slot7f4ca2 gm_SlotTableKindView[768];
 
 
 
@@ -18,11 +18,11 @@ int __cdecl d2_GetHudThemeResourceId(void)
 	r = 0x534;
 	if (g_776708 == 0) {
 		for (i = 0; i < 768; i++) {
-			if (g_7f4ca2[i].kind == 6 || g_7f4ca2[i].kind == 7) {
+			if (gm_SlotTableKindView[i].kind == 6 || gm_SlotTableKindView[i].kind == 7) {
 				break;
 			}
 		}
-		k = gm_MapEntityStatRange(g_7f4ca2[i].b);
+		k = gm_MapEntityStatRange(gm_SlotTableKindView[i].b);
 		if (k == 1 || k == 2 || k == 10) {
 			r = 0x534;
 		} else if (k == 3 || k == 4) {

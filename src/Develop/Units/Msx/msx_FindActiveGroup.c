@@ -1,6 +1,6 @@
 #include "Develop/Units/Msx/id_group.h"
-extern IdGroup g_688118[];
-extern IdGroup g_688118[];
+extern IdGroup msx_LocationTrackGroups[];
+extern IdGroup msx_LocationTrackGroups[];
 
 /* ADDRESS: GOLD 0x004c1f90 */
 /* ADDRESS: GOLDTL 0x004c27f0 */
@@ -11,7 +11,7 @@ int __cdecl msx_FindActiveGroup(void)
 	char* p;
 
 	i = 0;
-	p = (char*) g_688118;
+	p = (char*) msx_LocationTrackGroups;
 	do {
 		if (p[0x112] != 0) {
 			return i;

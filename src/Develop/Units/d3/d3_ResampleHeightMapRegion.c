@@ -10,7 +10,7 @@
  *       columns between two samples are blended
  */
 
-extern float g_6628a0; /* 1.0f */
+extern float flt_1_0; /* 1.0f */
 
 float __cdecl d3_EvalHermiteSpline(float a, float b, float c, float d, float t);
 
@@ -48,7 +48,7 @@ void __cdecl d3_ResampleHeightMapRegion(unsigned char* base, int w, int x0, int 
 	}
 	x1 = MIN(w, MAX(x0 + size, 0));
 	y1 = MIN(w, MAX(y0 + size, 0));
-	inv = g_6628a0 / (float) step;
+	inv = flt_1_0 / (float) step;
 	mask = w - 1;
 	x = x0;
 	while (x + step <= 0) {

@@ -8,7 +8,7 @@ struct node98 {
 	float m[16];
 };
 
-extern float g_662d40[3];
+extern float d3_UnitAxisVectors[3];
 extern float g_662b08;
 
 extern void __cdecl d3_SetObjectRotation(void*, float*);
@@ -57,7 +57,7 @@ void __cdecl d3_UpdateCannonAimCamera(char* o)
 	D3DXMatrixTranspose(m, ((struct node98*) *(void**) (o + 0x98))->m);
 	v[2] = 0.0f;
 	v[4] = 0.0f;
-	v[3] = d3_WrapYawDelta((int) g_662d40, (int) c) - g_662b08 -
+	v[3] = d3_WrapYawDelta((int) d3_UnitAxisVectors, (int) c) - g_662b08 -
 	       *(float*) (o + 0x14);
 	d3_SetObjectRotation(*(void**) (o + 0x9c), v + 2);
 
@@ -65,15 +65,15 @@ void __cdecl d3_UpdateCannonAimCamera(char* o)
 		d3_UpdateCannonAimMatrices(o);
 	}
 
-	v[0] = g_662d40[0] * ((struct node98*) *(void**) (o + 0x98))->m[0] +
-	       (g_662d40[1] * ((struct node98*) *(void**) (o + 0x98))->m[4] +
-	        g_662d40[2] * ((struct node98*) *(void**) (o + 0x98))->m[8]);
-	v[1] = g_662d40[0] * ((struct node98*) *(void**) (o + 0x98))->m[1] +
-	       (g_662d40[1] * ((struct node98*) *(void**) (o + 0x98))->m[5] +
-	        g_662d40[2] * ((struct node98*) *(void**) (o + 0x98))->m[9]);
-	v[2] = g_662d40[0] * ((struct node98*) *(void**) (o + 0x98))->m[2] +
-	       (g_662d40[1] * ((struct node98*) *(void**) (o + 0x98))->m[6] +
-	        g_662d40[2] * ((struct node98*) *(void**) (o + 0x98))->m[10]);
+	v[0] = d3_UnitAxisVectors[0] * ((struct node98*) *(void**) (o + 0x98))->m[0] +
+	       (d3_UnitAxisVectors[1] * ((struct node98*) *(void**) (o + 0x98))->m[4] +
+	        d3_UnitAxisVectors[2] * ((struct node98*) *(void**) (o + 0x98))->m[8]);
+	v[1] = d3_UnitAxisVectors[0] * ((struct node98*) *(void**) (o + 0x98))->m[1] +
+	       (d3_UnitAxisVectors[1] * ((struct node98*) *(void**) (o + 0x98))->m[5] +
+	        d3_UnitAxisVectors[2] * ((struct node98*) *(void**) (o + 0x98))->m[9]);
+	v[2] = d3_UnitAxisVectors[0] * ((struct node98*) *(void**) (o + 0x98))->m[2] +
+	       (d3_UnitAxisVectors[1] * ((struct node98*) *(void**) (o + 0x98))->m[6] +
+	        d3_UnitAxisVectors[2] * ((struct node98*) *(void**) (o + 0x98))->m[10]);
 	d3_NormalizeVector(v);
 
 	v[4] = *(float*) o - v[0] * 30.0f;
@@ -133,9 +133,9 @@ void __cdecl d3_UpdateCannonAimCamera(char* o)
 		v[1] = *(float*) (o + 4) - u * v[1];
 		v[2] = *(float*) (o + 8) - u * v[2];
 		d3_SetNodePosition(*(void**) (o + 0x98), v);
-		v[4] = -70.0f + u * g_662d40[0];
-		v[5] = -50.0f + u * g_662d40[1];
-		v[6] = 120.0f + u * g_662d40[2];
+		v[4] = -70.0f + u * d3_UnitAxisVectors[0];
+		v[5] = -50.0f + u * d3_UnitAxisVectors[1];
+		v[6] = 120.0f + u * d3_UnitAxisVectors[2];
 		d3_SetNodePosition(*(void**) (o + 0x9c), v + 4);
 		return;
 	}

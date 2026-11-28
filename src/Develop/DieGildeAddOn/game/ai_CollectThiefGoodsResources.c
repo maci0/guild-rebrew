@@ -48,8 +48,8 @@ typedef struct
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char* lpGebaeudeINST;
-extern int g_773d78;
-extern unsigned char g_773d75;
+extern int gm_MarketEntity;
+extern unsigned char gm_ActiveTownIndex;
 
 char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
 char* __cdecl gm_FindNextFilteredEntity(void);
@@ -97,7 +97,7 @@ void __cdecl ai_CollectThiefGoodsResources(char* actor, int building, int skipSe
 
 	pa = (AI_THIEF_BUY_ENTRY*) 0x100b0c0;
 	pb = (AI_THIEF_SELL_ENTRY*) 0x100d0c0;
-	g_100b0ac = 0;
+	ai_ProductionGoodsCount = 0;
 	ai_ResourceCount = 0;
 	if (!skipSell) {
 		ent = gm_StartFilteredEntitySearch(1, 0, 0x47);
@@ -157,8 +157,8 @@ label_485b77:
 							f0 = eval_ObjektPreis2Credits(id, 100);
 							f1 = gm_GetSeasonPrice(id, (unsigned char) *(char*) (ent + 0x65)) - f0;
 							idx = 0;
-							if (1 <= g_100b0ac) {
-								while (idx < g_100b0ac) {
+							if (1 <= ai_ProductionGoodsCount) {
+								while (idx < ai_ProductionGoodsCount) {
 									if (pb[idx].id == id) {
 										if (f1 < pb[idx].f34)
 											goto label_485d61;
@@ -167,7 +167,7 @@ label_485b77:
 									idx++;
 								}
 							}
-							if (g_100b0ac <= 0x1f) {
+							if (ai_ProductionGoodsCount <= 0x1f) {
 								pb[idx].id = id;
 								pb[idx].f04 = -1;
 								pb[idx].f08 = -1;
@@ -185,8 +185,8 @@ label_485b77:
 								pb[idx].f4c = 0;
 								pb[idx].f50 = gm_eval_SlotVoll((int) cont, id, 1000000);
 								pb[idx].f54 = 0x100;
-								if (idx == g_100b0ac)
-									g_100b0ac++;
+								if (idx == ai_ProductionGoodsCount)
+									ai_ProductionGoodsCount++;
 								q = fcn_00502cd0(*(int*) (cont + 0x14), 1, 5);
 								while (q && q != slot)
 									q = gm_NextEntityQueryMatch();
@@ -211,9 +211,9 @@ label_485d61:
 		slot = fcn_00502cd0(*(int*) (cont + 0x14), 1, 5);
 		while (slot) {
 			id = *(unsigned short*) slot;
-			obj = gm_FindSlotById(g_773d75, id);
+			obj = gm_FindSlotById(gm_ActiveTownIndex, id);
 			if (obj && *(int*) (obj + 4)) {
-				f1 = gm_GetSeasonPrice(id, (unsigned char) g_773d75) * (float) *(int*) (rec + 0x45)
+				f1 = gm_GetSeasonPrice(id, (unsigned char) gm_ActiveTownIndex) * (float) *(int*) (rec + 0x45)
 				    * 0.01f;
 				f0 = eval_ObjektPreis2Credits(id, 100) - f1;
 				idx = 0;
@@ -258,7 +258,7 @@ label_485f7e:
 	idx = 0;
 	while (idx < ai_ResourceCount) {
 		found = 0;
-		for (i = 0; i < g_100b0ac; i++) {
+		for (i = 0; i < ai_ProductionGoodsCount; i++) {
 			if (pa[idx].id == pb[i].id) {
 				found = 1;
 				break;
@@ -268,18 +268,18 @@ label_485f7e:
 			obj = gm_FindCityItemHolder(pa[idx].id);
 			if (obj) {
 				f0 = eval_ObjektPreis2Credits(pa[idx].id, 100);
-				if (g_100b0ac <= 0x1f) {
-					i = g_100b0ac;
+				if (ai_ProductionGoodsCount <= 0x1f) {
+					i = ai_ProductionGoodsCount;
 					pb[i].id = pa[idx].id;
 					pb[i].f04 = -1;
 					pb[i].f08 = -1;
 					pb[i].f0c = -1;
 					pb[i].f10 = -1;
-					pb[i].ent = (char*) g_773d78;
+					pb[i].ent = (char*) gm_MarketEntity;
 					pb[i].obj = obj;
 					pb[i].f44 = 0;
 					pb[i].f24 = 0;
-					pb[i].f34 = gm_GetSeasonPrice(pa[idx].id, (unsigned char) g_773d75) - f0;
+					pb[i].f34 = gm_GetSeasonPrice(pa[idx].id, (unsigned char) gm_ActiveTownIndex) - f0;
 					pb[i].f38 = 0;
 					pb[i].f48 = 0x21;
 					pb[i].f54 = 0;
@@ -287,7 +287,7 @@ label_485f7e:
 					pb[i].f40 = gm_eval_SlotVoll(building, pa[idx].id, 1000000);
 					pb[i].f4c = 0;
 					pb[i].f50 = gm_eval_SlotVoll((int) obj, pa[idx].id, 1000000);
-					g_100b0ac++;
+					ai_ProductionGoodsCount++;
 				}
 			}
 			else {
@@ -311,7 +311,7 @@ label_485f7e:
 				}
 				if (found)
 					continue;
-				for (j = 0; j < g_100b0ac; j++) {
+				for (j = 0; j < ai_ProductionGoodsCount; j++) {
 					if (pb[j].id == (rb.slots[i] & 0xffff))
 						pb[j].f38 += rb.vals[i];
 				}
@@ -325,7 +325,7 @@ label_485f7e:
 					continue;
 				id = *(unsigned short*) (rec + 0xd6 + j * 2);
 				k = *(int*) (rec + 0xdc + j * 4);
-				for (i = 0; i < g_100b0ac; i++) {
+				for (i = 0; i < ai_ProductionGoodsCount; i++) {
 					if (pb[i].id == id)
 						pb[i].f38 += k;
 				}
@@ -338,7 +338,7 @@ label_485f7e:
 		rec = he_fn_Handlung();
 	}
 	for (i = 0; i < ai_ResourceCount; i++) {
-		for (j = 0; j < g_100b0ac; j++) {
+		for (j = 0; j < ai_ProductionGoodsCount; j++) {
 			if (pa[i].id != pb[j].id)
 				continue;
 			t = pa[i].f2c;
@@ -352,7 +352,7 @@ label_485f7e:
 			pa[i].f34 = (int) fa;
 		}
 	}
-	for (i = 0; i < g_100b0ac; i++) {
+	for (i = 0; i < ai_ProductionGoodsCount; i++) {
 		t = pb[i].f3c;
 		if (pb[i].f50 < t)
 			t = pb[i].f50;
@@ -367,8 +367,8 @@ label_485f7e:
 			}
 		}
 	}
-	for (i = 0; i < g_100b0ac; i++) {
-		for (j = i; j < g_100b0ac; j++) {
+	for (i = 0; i < ai_ProductionGoodsCount; i++) {
+		for (j = i; j < ai_ProductionGoodsCount; j++) {
 			if ((float) pb[i].f4c * pb[i].f34 < (float) pb[j].f4c * pb[j].f34) {
 				tb = pb[i];
 				pb[i] = pb[j];
@@ -376,7 +376,7 @@ label_485f7e:
 			}
 		}
 	}
-	for (i = 0; i < g_100b0ac; i++)
+	for (i = 0; i < ai_ProductionGoodsCount; i++)
 		pb[i].f48 = i;
 	for (i = 0; i < ai_ResourceCount; i++)
 		pa[i].f30 = i;

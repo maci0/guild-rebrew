@@ -30,11 +30,11 @@ typedef struct Msg4ad6a0 {
 extern int g_7728d0;
 extern int g_664e10[];
 extern int g_664e34[];
-extern char g_7f4ca0[];
+extern char gm_EntitySlotTable[];
 extern int gm_GameTime;
-extern int g_7f4c04;
-extern int g_7f4c08;
-extern short g_7f4c0c;
+extern int gm_GameTimeHour;
+extern int gm_GameTimeSliceDword;
+extern short gm_GameTimeTailWord;
 
 int __cdecl amt_FindOfficeSlotByType(int id, int* out);
 char* __cdecl amt_GetOfficeHolderRecord(int kind);
@@ -72,7 +72,7 @@ void __cdecl amt_AssignSpecialOffices(void)
 	}
 	memset(hits, 0, sizeof(hits));
 	count = 0;
-	rec = g_7f4ca0;
+	rec = gm_EntitySlotTable;
 	do {
 		if (count >= 4) {
 			break;
@@ -110,10 +110,10 @@ void __cdecl amt_AssignSpecialOffices(void)
 		amt_SendOfficeCommand((unsigned char) info[0], best, 0, 1, 0xff);
 		if (best[2] == 6 || best[2] == 7 || best[2] == 5) {
 			msg.timestamp.a = gm_GameTime;
-			msg.timestamp.b = g_7f4c04;
+			msg.timestamp.b = gm_GameTimeHour;
 			selectedOwnerId = *(int*) (best + 4);
-			msg.timestamp.c = g_7f4c08;
-			msg.timestamp.d = g_7f4c0c;
+			msg.timestamp.c = gm_GameTimeSliceDword;
+			msg.timestamp.d = gm_GameTimeTailWord;
 			msg.type = 0xa5;
 			msg.id = selectedOwnerId;
 			msg.unk_c = -1;
@@ -121,7 +121,7 @@ void __cdecl amt_AssignSpecialOffices(void)
 			msg.unk_6c = id;
 			msg.unk_68 = selectedOwnerId;
 			cm_SendCopyEntityData((char*) &msg);
-			for (rec = g_7f4ca0 + 2; (int) rec < (int) g_7f4ca0 + 0x65402; rec += 0x21c) {
+			for (rec = gm_EntitySlotTable + 2; (int) rec < (int) gm_EntitySlotTable + 0x65402; rec += 0x21c) {
 				if (*(unsigned short*) (rec - 2) != 0xffff && rec - 2 != best &&
 				    (*rec == 6 || *rec == 7)) {
 					msg.id = *(int*) (rec + 2);

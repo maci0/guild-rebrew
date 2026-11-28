@@ -26,8 +26,8 @@ void __cdecl d2_ShowMeisterbriefDialog(void)
 	d2_SetForm(h, 1);
 	io_AppendText((char*) 0x195e);
 	do {
-		if (g_14ce8e0 != 0) {
-			g_774654 = 1;
+		if (io_RightButtonReleased != 0) {
+			d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop(d2_ShowMeisterbriefDialog, 0x677c7) != 0);
 	d2_DestroyForm(h);

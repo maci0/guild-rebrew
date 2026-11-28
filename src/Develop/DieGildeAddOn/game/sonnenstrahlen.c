@@ -6,7 +6,7 @@
 #define fcn_00418860 fcn_004172e0
 #endif
 
-extern volatile int g_6b7fac;
+extern volatile int gm_GameTicks;
 int SonnenstrahlenAktiv = 0;
 int SonnenstrahlenStartZeit = 0xffffffff;
 int SonnenstrahlenPhase = 0;
@@ -15,18 +15,18 @@ char* __cdecl d3_CreateSceneModelObject(char*, float*, float*, char*);
 void __cdecl StopSonnenstrahlen(char* objekt, int phase)
 {
     SonnenstrahlenAktiv = -1;
-    SonnenstrahlenStartZeit = g_6b7fac;
+    SonnenstrahlenStartZeit = gm_GameTicks;
     SonnenstrahlenPhase = phase;
 }
 void __cdecl d3_UpdateSunRays(char*);
 
 #include "../../Units/d3/d3_camera.h"
-char* g_6b5cf8 = 0;
+char* SonnenstrahlenObjekt = 0;
 
 void __cdecl StartSonnenstrahlen(char* unused)
 {
 	int value;
-	value = g_6b7fac;
+	value = gm_GameTicks;
 	SonnenstrahlenAktiv = 1;
 	SonnenstrahlenStartZeit = value;
 	SonnenstrahlenPhase = 0;
@@ -50,24 +50,24 @@ char* __cdecl CreateSonnenstrahlen(void)
 	position[1] = value;
 	value = *(float*) (d3_ActiveCamera + 0x54);
 	position[2] = value;
-	g_6b5cf8 = d3_CreateSceneModelObject(0, position, rotation, "sonnenstrahlen");
+	SonnenstrahlenObjekt = d3_CreateSceneModelObject(0, position, rotation, "sonnenstrahlen");
 #ifdef REBREW_GOLD
-	g_6b5cf8[0x212] |= 0x0c;
-	g_6b5cf8[0x211] &= ~2;
+	SonnenstrahlenObjekt[0x212] |= 0x0c;
+	SonnenstrahlenObjekt[0x211] &= ~2;
 #else
-	g_6b5cf8[0x216] |= 3;
-	g_6b5cf8[0x214] &= 0x7f;
+	SonnenstrahlenObjekt[0x216] |= 3;
+	SonnenstrahlenObjekt[0x214] &= 0x7f;
 #endif
-	*(int*) (g_6b5cf8 + 0x220) = 5;
-	*(int*) (g_6b5cf8 + 0x224) = 1;
+	*(int*) (SonnenstrahlenObjekt + 0x220) = 5;
+	*(int*) (SonnenstrahlenObjekt + 0x224) = 1;
 #ifdef REBREW_GOLD
-	g_6b5cf8[0x213] &= ~4;
+	SonnenstrahlenObjekt[0x213] &= ~4;
 #else
-	g_6b5cf8[0x217] &= ~1;
+	SonnenstrahlenObjekt[0x217] &= ~1;
 #endif
-	StartSonnenstrahlen(g_6b5cf8);
-	d3_UpdateSunRays(g_6b5cf8);
-	return g_6b5cf8;
+	StartSonnenstrahlen(SonnenstrahlenObjekt);
+	d3_UpdateSunRays(SonnenstrahlenObjekt);
+	return SonnenstrahlenObjekt;
 }
 unsigned char _dpad_67754c[280] = {
     0xff, 0xff, 0xff, 0xff, 0x25, 0x73, 0x25, 0x73, 0x2e, 0x6f, 0x61, 0x6d, 0x00, 0x00, 0x00, 0x00,
