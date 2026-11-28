@@ -1,6 +1,6 @@
 #include <string.h>
 #include <stdio.h>
-#include "../DieGildeAddOn/game/game_data.h"
+#include "Develop/DieGildeAddOn/game/game_data.h"
 typedef struct { unsigned char kind; char rest[0x24c]; } SpawnBuilding;
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern int rand(void);

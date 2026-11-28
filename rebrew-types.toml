@@ -379,12 +379,12 @@ kind = 4
 name = 5
 param = 72
 [types."ch.dummy_picks".GOLDTL]
-file = "src/Develop/Unassigned/GOLDTL.fcn_00407330.c"
+file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_00407330.c"
 symbol = "CH_DUMMY_PICKS"
 size = 132
 native_size = 132
 extent = "allocation"
-evidence = "Goal55 TL407330/Gold406790 reserve and clear 0x84 stack bytes; callback TL406ee0/Gold406340 stores pointers at base+4*count and updates signed count at+0x80, returning count<32. Inferred private result view and field names, not an original typedef or source-unit attestation. Rebind after later source/header edits; native evidence unchanged. Rebound 2026-11-28 after naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
+evidence = "Goal55 TL407330/Gold406790 reserve and clear 0x84 stack bytes; callback TL406ee0/Gold406340 stores pointers at base+4*count and updates signed count at+0x80, returning count<32. Inferred private result view and field names, not an original typedef or source-unit attestation. Rebind after later source/header edits; native evidence unchanged. Rebound 2026-11-28 after its source file was renamed and naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
 source_hash = "1700c11008f89f9ed124dfd6f4a4973ff6e6a566bc6f25174ae5c5c7d53dd6db"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -396,12 +396,12 @@ item = 0
 count = 128
 
 [types."ch.dummy_picks".GOLD]
-file = "src/Develop/Unassigned/GOLDTL.fcn_00407330.c"
+file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_00407330.c"
 symbol = "CH_DUMMY_PICKS"
 size = 132
 native_size = 132
 extent = "allocation"
-evidence = "Goal55 TL407330/Gold406790 reserve and clear 0x84 stack bytes; callback TL406ee0/Gold406340 stores pointers at base+4*count and updates signed count at+0x80, returning count<32. Inferred private result view and field names, not an original typedef or source-unit attestation. GOLD rebind after later source/header edits; native evidence unchanged. Rebound 2026-11-28 after naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
+evidence = "Goal55 TL407330/Gold406790 reserve and clear 0x84 stack bytes; callback TL406ee0/Gold406340 stores pointers at base+4*count and updates signed count at+0x80, returning count<32. Inferred private result view and field names, not an original typedef or source-unit attestation. GOLD rebind after later source/header edits; native evidence unchanged. Rebound 2026-11-28 after its source file was renamed and naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
 source_hash = "1700c11008f89f9ed124dfd6f4a4973ff6e6a566bc6f25174ae5c5c7d53dd6db"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"

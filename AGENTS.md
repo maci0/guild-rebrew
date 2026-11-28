@@ -423,6 +423,15 @@ ignored `rebrew-metadata.sqlite3` file.
 Append the date, change, reason, evidence, decision owner and verification for
 each deliverable change. Record reversals in new entries. [Provenance ledger](docs/provenance.md)
 
+## Commits
+
+Commit and push often: each finished, gated step (a batch, a merge, a move, a
+fix) is committed and pushed to `main` at once, never left uncommitted in the
+tree. Commit only on a full gate pass: both clients link, the server raw link is
+byte-identical, lint is 0 errors and 0 warnings on all targets, and no stored
+status falls. Work that cannot pass the gate yet is pushed to a `wip/` branch so
+it is never only local; `main` takes the gated version.
+
 ## Game compiler policy
 
 Compile game functions with the canonical flags for their whole translation unit
