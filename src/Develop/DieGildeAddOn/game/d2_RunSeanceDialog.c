@@ -14,7 +14,7 @@
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 
 int __cdecl d3snd_SelectVoiceCode(int, int);
 char* __cdecl d2_RunSeance(char*, char*);

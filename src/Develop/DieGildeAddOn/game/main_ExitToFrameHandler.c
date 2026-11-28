@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int g_7e35c0[];
 
 /* ADDRESS: GOLDTL 0x005356b0 */

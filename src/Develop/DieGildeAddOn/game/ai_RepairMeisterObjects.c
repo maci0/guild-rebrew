@@ -1,5 +1,5 @@
 #include <string.h>
-#include "client_data.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
 #pragma pack(push, 1)
 typedef struct {
 	int x00;

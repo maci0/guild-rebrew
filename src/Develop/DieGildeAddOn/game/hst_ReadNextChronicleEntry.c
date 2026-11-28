@@ -1,4 +1,4 @@
-#include "client_data.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_67fca4;
 extern unsigned char g_7728d4;

@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int main_LoopFlags;
 extern int g_100f1dc;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern signed char g_6a3440;
 
 int __cdecl d2_LoadForm(int, int, char*);

@@ -11,7 +11,7 @@ extern char g_7e23e8;
 extern char g_7e23e9;
 extern char g_7e23ea[];
 extern char g_7e240a[];
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl d2_LoadForm(int, int, char*);

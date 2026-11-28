@@ -26,7 +26,7 @@ extern __int64 g_666018;
 extern int d2_CurrentElementId;
 extern float g_6628ac;
 extern unsigned char g_773d75;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 #include "client_types.h"
 
 char* __cdecl gm_LookupEntityRecordById(int a);

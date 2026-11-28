@@ -19,7 +19,7 @@ typedef struct {
 extern D2_RADIO_GROUP g_102cbc4[8];
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char g_6ab1e4[];
 
 int __cdecl d2_LoadForm(int, int, char*);

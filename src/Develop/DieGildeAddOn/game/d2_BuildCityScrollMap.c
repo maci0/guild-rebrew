@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-#include "client_data.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
 #include "game_data.h"
 extern char* g_774a68;
 #include "Develop/DieGildeAddOn/game/game_data.h"

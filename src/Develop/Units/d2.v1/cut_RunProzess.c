@@ -3,7 +3,7 @@ extern int g_68bfc0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern float g_662b28;
-#include "client_straftat.h"
+#include "Develop/DieGildeAddOn/game/client_straftat.h"
 extern char g_9b0eb4[];
 extern char g_9b1210[];
 extern char g_9b156c[];

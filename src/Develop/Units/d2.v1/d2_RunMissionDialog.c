@@ -35,7 +35,7 @@ typedef struct Req {
 extern char g_10069a0[];
 extern int d2_CurrentElementId;
 extern int g_100f1dc;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern signed char g_6a3440;
 
 Spec* __cdecl gm_LookupMissionSpec(int op);

@@ -15,7 +15,7 @@ extern unsigned char g_7f4e51[];
 extern char* g_item_def_table;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_774650;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int g_774658;
 extern int g_77465c;
 extern int d3_CameraHorizontalIndex;

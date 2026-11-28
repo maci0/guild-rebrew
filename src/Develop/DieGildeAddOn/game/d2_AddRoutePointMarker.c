@@ -1,4 +1,4 @@
-#include "g_10058a0.h"
+#include "Develop/Units/d2.v1/d2_radio_slot.h"
 extern unsigned char g_773d75;
 extern char* g_1043370;
 extern int g_772900;

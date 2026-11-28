@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 
 extern char* g_14a5adc[15];
 

@@ -15,7 +15,7 @@
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern __int64 g_666018;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char g_6ac494[];
 
 int __cdecl d2_CheckActionBlocker(void*, int);

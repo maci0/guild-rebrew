@@ -2,7 +2,7 @@ extern int d2_CurrentWindowId;
 extern char* g_1015ea0;
 extern unsigned char* lpGebaeudePROT;
 extern int g_100f1dc;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int g_14ce8e0;
 extern int d2_CurrentElementId;
 extern unsigned short g_7f3ee4;

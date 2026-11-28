@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int g_14ce8e0;
 extern char g_7f4ca4[];
 /* Dialog message loop for 0x6ac5d8: validates the click id through

@@ -18,7 +18,7 @@ typedef struct {
 
 extern int g_100f1dc;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 
 Book *__cdecl d2_OpenJournalBook(char *, char *, int, char *, char *);
 void __cdecl d2_SetForm(int, int);

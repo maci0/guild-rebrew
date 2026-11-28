@@ -4116,7 +4116,7 @@ int __cdecl cm_ExAddStraftat(int cmd, char* result)
 #endif
 #if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_straftat.h"
+#include "Develop/DieGildeAddOn/game/client_straftat.h"
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
 /* SIZE 0x2d */

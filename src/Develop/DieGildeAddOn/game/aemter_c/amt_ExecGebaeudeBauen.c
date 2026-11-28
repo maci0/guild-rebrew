@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 #include <stdio.h>
 #include <string.h>
-#include "client_data.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
 extern unsigned char* lpGebaeudePROT;
 extern int g_6b7fdc;
 

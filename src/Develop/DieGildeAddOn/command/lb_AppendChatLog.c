@@ -3,7 +3,7 @@
 
 #include <string.h>
 
-#include "g_9ba3a0.h"
+#include "Develop/Units/d2.v1/text_log_record.h"
 
 extern TEXT_LOG_RECORD g_9ba3a0[15];
 extern int g_9ba9f4;

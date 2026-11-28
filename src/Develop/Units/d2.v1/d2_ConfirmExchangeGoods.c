@@ -20,7 +20,7 @@ extern char g_868060[];
 extern char g_6aacdc[];
 extern int g_14ce8e0;
 extern int g_100f1dc;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern double g_665fb0;
 extern unsigned char g_773d75;
 

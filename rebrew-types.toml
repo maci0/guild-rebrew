@@ -809,10 +809,10 @@ symbol = "D2_TEXT_WINDOW"
 size = 972
 native_size = 972
 extent = "allocation"
-evidence = "Rebound after the Rebrew 6.14.3 upgrade changed the compiler-context hash; the reviewed native extent and every modeled offset are unchanged.24.0 upgrade changed the compiler-context hash; the reviewed native extent and modeled offsets are unchanged. Rebound 2026-11-14: header stat metadata changed when hard-linked scratch copies were deleted; header content, sizes and offsets unchanged. Rebound for rebrew 6.49.0: reached-header hash is now content-based; header content, sizes and offsets unchanged.h, d2_gui.h, game_structs.h and others) were revised; recorded size, extent and offsets rechecked by the compiler. Rebound 2026-11-27 after naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
+evidence = "Rebound after the Rebrew 6.14.3 upgrade changed the compiler-context hash; the reviewed native extent and every modeled offset are unchanged.24.0 upgrade changed the compiler-context hash; the reviewed native extent and modeled offsets are unchanged. Rebound 2026-11-14: header stat metadata changed when hard-linked scratch copies were deleted; header content, sizes and offsets unchanged. Rebound for rebrew 6.49.0: reached-header hash is now content-based; header content, sizes and offsets unchanged.h, d2_gui.h, game_structs.h and others) were revised; recorded size, extent and offsets rechecked by the compiler. Rebound 2026-11-28 after naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
 source_hash = "b5c3b210eacf12e8e1a08c73f6f287f17d909e4fea287daac6613bf408e65b8c"
-headers_hash = "836f1721da1f9b7252c01bd042642912fed996c8f97efbf91deee922c3ee1b17"
+headers_hash = "c3041a854dd8010414d2bd46e88959886c4d47523393048df91a483fe9adbd15"
 context_hash = "c64f764cd83daca788662d56da59758ac73d6c262235b18c9028bd73d3e1b3e0"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
@@ -823,10 +823,10 @@ symbol = "D2_CONTROL_TL"
 size = 756
 native_size = 756
 extent = "allocation"
-evidence = "Rebound after the Rebrew 6.14.3 upgrade changed the compiler-context hash; the reviewed native extent and every modeled offset are unchanged. Rebound after the Rebrew 6.24.0 upgrade changed the compiler-context hash; the reviewed native extent and modeled offsets are unchanged. Rebound 2026-11-14: header stat metadata changed when hard-linked scratch copies were deleted; header content, sizes and offsets unchanged. Rebound for rebrew 6.49.0: reached-header hash is now content-based; header content, sizes and offsets unchanged. Rebound 2026-11-19 after the reviewed global renames changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after batch r5b49 struct and literal edits changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-20 after the second function rename batch changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-21 after the shared struct headers (d3_object.h, d2_gui.h, game_structs.h and others) were revised; recorded size, extent and offsets rechecked by the compiler. Rebound 2026-11-21 to the shared D2_CONTROL_TL definition in d2_gui.h, which d2_ShowTxt.c now uses through a typedef; size 756 and native extent unchanged."
+evidence = "Rebound after the Rebrew 6.14.3 upgrade changed the compiler-context hash; the reviewed native extent and every modeled offset are unchanged.24.0 upgrade changed the compiler-context hash; the reviewed native extent and modeled offsets are unchanged. Rebound 2026-11-14: header stat metadata changed when hard-linked scratch copies were deleted; header content, sizes and offsets unchanged. Rebound for rebrew 6.49.0: reached-header hash is now content-based; header content, sizes and offsets unchanged.h, d2_gui.h, game_structs.h and others) were revised; recorded size, extent and offsets rechecked by the compiler.h, which d2_ShowTxt.c now uses through a typedef; size 756 and native extent unchanged. Rebound 2026-11-28 after naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
-source_hash = "7bc071ecfb3243e58aa8693cb55985074bff23f854234ef7f5b770afcbaa8bc8"
-headers_hash = "84b247668f02c8b8387eac67509ba5a805dec830b34650588fa8c30fabcc5101"
+source_hash = "d76e7e36475015a227b2fc4326db8f9218dfb822ea4b1c473e8ca6523e02063e"
+headers_hash = "7af9b03676689bd1eecf72e5d5b7211f9004bda8d05c0c85634db923358b2424"
 context_hash = "c64f764cd83daca788662d56da59758ac73d6c262235b18c9028bd73d3e1b3e0"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 

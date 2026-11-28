@@ -2,7 +2,7 @@
 #define CLIENT_DATA_H
 
 #include "client_types.h"
-#include "g_7f4ca2.h"
+#include "Develop/DieGildeAddOn/game/g_7f4ca2.h"
 
 /* Client data views; declarations allocate no storage. */
 extern Win_1015f40 g_1015f40[0x60];

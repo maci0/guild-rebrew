@@ -40,7 +40,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 
 extern int d2_CurrentElementId;
-#include "client_data.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
 int __cdecl gm_WalkEntityChain(unsigned short);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);

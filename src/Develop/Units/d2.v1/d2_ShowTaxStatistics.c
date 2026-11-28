@@ -7,7 +7,7 @@ extern char g_69645c[];
 extern pos14_7f4c00 gm_GameTime;
 extern char g_99f6a0[];
 extern int g_14ce8e0;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 
 int __cdecl d2_LoadForm(int a, int b, char* s);
 void __cdecl d2_CenterDialogWindows(int h);

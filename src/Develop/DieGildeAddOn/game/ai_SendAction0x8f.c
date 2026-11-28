@@ -1,5 +1,5 @@
 #include <string.h>
-#include "client_data.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 

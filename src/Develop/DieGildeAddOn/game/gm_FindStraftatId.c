@@ -1,7 +1,7 @@
 
 
 #include "client_types.h"
-#include "client_straftat.h"
+#include "Develop/DieGildeAddOn/game/client_straftat.h"
 #pragma pack(push, 1)
 
 // SIZE 0x2d

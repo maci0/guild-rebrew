@@ -4,7 +4,7 @@ extern int g_100f1dc;
 extern int d2_CurrentElementId;
 extern char g_6a3440;
 extern int g_7728dc;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 
 int __cdecl gm_LookupMissionSpec(int a);
 void __cdecl d2_RunMissionBriefingDialog(int a, int b);

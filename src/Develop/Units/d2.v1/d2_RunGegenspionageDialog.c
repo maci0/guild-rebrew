@@ -23,7 +23,7 @@ extern char s_6a2f5c[];
 extern char s_6acd38[];
 extern int g_100f1dc;
 extern int d2_CurrentElementId;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int g_14ce8e0;
 
 int __cdecl amt_SendAndWaitOfficeCommand(ENTITY_RECORD*, ENTITY_RECORD*, ENTITY_RECORD*);

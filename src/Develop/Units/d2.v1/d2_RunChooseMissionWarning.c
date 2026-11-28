@@ -2,7 +2,7 @@ extern unsigned int g_7e1f60;
 extern signed char g_6a3440;
 extern unsigned char g_6a375c;
 extern int g_100f1dc;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_7e242c;
 

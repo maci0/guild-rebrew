@@ -25,7 +25,7 @@ int __cdecl d2_RunWerbungSelectDialog(char*, int*);
 
 extern float g_6628a8;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_773d75;
 extern pos14_7f4c00 gm_GameTime;

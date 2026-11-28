@@ -27,7 +27,7 @@ typedef struct D2_BILD_GROESSE {
 } D2_BILD_GROESSE;
 
 #ifdef REBREW_GOLD
-#include "../../../gold_gui.h"
+#include "Develop/Units/d2.v1/gold_gui.h"
 typedef GuiEnt D2_GUI_ITEM;
 extern GuiEnt* g_00f8f080;
 extern short g_00fb9070;

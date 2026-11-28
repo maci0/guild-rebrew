@@ -5,7 +5,7 @@
  * the neighbouring entities as the next target and books the skill checks
  * that decide whether the corner stays dark. */
 
-#include "client_straftat.h"
+#include "Develop/DieGildeAddOn/game/client_straftat.h"
 extern int gm_RandomSearchSteps[];
 extern char* g_aed32c;
 typedef struct BuildingRow557460 { unsigned char kind; char fields[0x24c]; } BuildingRow557460;

@@ -1,4 +1,4 @@
-#include "client_data.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
 extern int g_100f888, g_6a99e8, g_14ce8e8, g_6772c4, d2_MouseX, d2_MouseY, d2_CurrentElementId, d2_SuppressOverlay; void __cdecl d2_DestroyForm(int); void __cdecl io_SetMouseCursorPos(int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/object_prototype.h"

@@ -6,7 +6,7 @@ extern int g_100f1dc;
 extern int d2_CurrentElementId;
 extern int g_772908;
 extern int g_772900;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int g_6816d8;
 extern int g_14ce8e0;
 extern int g_14b5e9c;

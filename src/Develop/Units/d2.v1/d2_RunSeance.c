@@ -12,7 +12,7 @@ typedef struct
 extern fcn_0058e220_Ent g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern volatile unsigned int g_6b7fac;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char g_6a97f8[];
 extern char g_6a97d4[];
 extern char g_68b3f8[];

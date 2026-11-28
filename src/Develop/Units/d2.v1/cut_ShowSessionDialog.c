@@ -5,7 +5,7 @@ extern char* g_77255c;
 extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_100f1dc;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 
 int __cdecl amt_FindOfficeSlotByKey(char*, void*);
 int __cdecl amt_GetRoleTemplate(int, void*);

@@ -1,4 +1,4 @@
-#include "client_data.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
 
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_AddTime(char*, int, int, int);

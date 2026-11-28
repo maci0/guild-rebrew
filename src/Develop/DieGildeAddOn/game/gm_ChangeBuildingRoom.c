@@ -3,7 +3,7 @@
 
 extern char* g_7746c4;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 #include "Develop/Units/d3/d3_camera.h"
 extern float g_7e3a40[3];
 extern float d3_CameraTargetRotation[3];

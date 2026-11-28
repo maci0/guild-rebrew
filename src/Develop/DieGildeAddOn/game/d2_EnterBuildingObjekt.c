@@ -16,7 +16,7 @@ typedef struct {
 extern char* g_7746c4;
 extern char* g_7746c8;
 extern char* g_7746cc;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char g_7f4e51[];
 extern char g_7f4ca4[];
 extern char g_1043690[];

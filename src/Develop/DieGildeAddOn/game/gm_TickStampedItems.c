@@ -1,4 +1,4 @@
-#include "client_data.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
 int __cdecl gm_GetElapsedMinutes(void*, void*);
 unsigned short* __cdecl fcn_00502cd0(int, int, int);

@@ -5,7 +5,7 @@ extern int g_100f1dc;
 extern int g_6a3760;
 extern int g_774954;
 extern char g_6a3440;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 
 int __cdecl gm_LookupMissionSpec(int);
 char* __cdecl d2_LoadForm(int, int, char*);

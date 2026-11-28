@@ -22,7 +22,7 @@ extern int g_100f1dc;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_68b7a8;
 extern unsigned short* g_772f24;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl d3_UpdateCameraAtScreenEdges(void);

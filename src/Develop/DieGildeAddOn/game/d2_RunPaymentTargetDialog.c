@@ -2,7 +2,7 @@
 #include <string.h>
 #include "game_player.h"
 #include "spiel.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 #pragma intrinsic(memset)

@@ -1,4 +1,4 @@
-#include "g_10058a0.h"
+#include "Develop/Units/d2.v1/d2_radio_slot.h"
 
 extern D2_RADIO_SLOT g_10058a0[8];
 void __cdecl d2_PollRadioSlotControl(int *id);

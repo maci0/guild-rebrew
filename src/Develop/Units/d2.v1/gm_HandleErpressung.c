@@ -23,7 +23,7 @@ extern pos14_7f4c00 gm_GameTime;
 extern char s_6acc74[];
 extern int g_100f1dc;
 extern int g_14ce8e0;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 
 int __cdecl gs_CollectEvidenceForTarget(int, char*, unsigned short);
 int __cdecl d2_LoadForm(int, int, char*);

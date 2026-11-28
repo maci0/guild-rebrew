@@ -46,7 +46,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 extern char s_6acd1c[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 
 void __cdecl cm_RequestModifyHealth(int, int);
 Obj* __cdecl he_StartHandlungSearch(int, int, int);

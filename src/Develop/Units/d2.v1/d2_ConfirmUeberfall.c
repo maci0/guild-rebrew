@@ -44,7 +44,7 @@ extern pos14_7f4c00 gm_GameTime;
 extern int g_100f1dc;
 extern int d2_CurrentElementId;
 extern int g_14ce8e0;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern unsigned char* g_7746c8;
 extern char s_6aa464[];
 

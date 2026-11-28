@@ -11,7 +11,7 @@
 #include "client_types.h"
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char s_6ab6b8[];
 extern char s_6ab67c[];
 extern char s_6ab63c[];

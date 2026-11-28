@@ -20,7 +20,7 @@ typedef struct S55cc80Packet {
 	int kind;
 } S55cc80Packet;
 #pragma pack(pop)
-#include "client_data.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
 extern int g_7746d4;
 int __cdecl gm_CompareGameTime(char*, char*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);

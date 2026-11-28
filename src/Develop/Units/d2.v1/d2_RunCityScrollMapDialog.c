@@ -27,7 +27,7 @@ typedef struct MsgCtx {
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int tp_d2_SelectedControl;
 extern int g_6ab3dc;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char g_6b5c60[];
 extern char* g_1015ea0;
 extern char* g_774a68;

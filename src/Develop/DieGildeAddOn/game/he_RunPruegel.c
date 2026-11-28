@@ -1,4 +1,4 @@
-#include "client_data.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
 int __cdecl cm_GetCommandStatus(int a0); int __cdecl cm_GetCommandResult(int a0);
 int __cdecl gm_GetEntityTableEntry(int a0);
 int __cdecl cm_RequestTransferCurrencyNoKill(int a0, int a1, unsigned char a2, int a3);

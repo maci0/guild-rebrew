@@ -36,7 +36,7 @@ typedef struct {
 #include "client_types.h"
 
 extern int g_14ce8e0;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int d2_CurrentWindowId;
 extern int g_14a566c;
 extern volatile int g_6b7fac;

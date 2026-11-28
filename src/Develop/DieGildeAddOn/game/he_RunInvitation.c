@@ -1,4 +1,4 @@
-#include "client_data.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
 extern void __cdecl gm_ResolveEntityById(char**, int, int, int); extern char* __cdecl fcn_00502cd0(int, ...);
 extern void __cdecl he_FreeAction(char*);
 extern char* __cdecl he_StartHandlungSearch(int, int, int, ...);

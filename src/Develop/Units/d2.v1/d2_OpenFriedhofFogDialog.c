@@ -1,6 +1,6 @@
 /* Open the arena betting page: query the match, build the layout and poll
  * input until the page is closed. */
-#include "client_data.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
 extern int g_774654;
 void __cdecl io_FormatTextBuffer(char*, int, int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);

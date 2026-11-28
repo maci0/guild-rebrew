@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #pragma intrinsic(memset)
-#include "gold_gui.h"
+#include "Develop/Units/d2.v1/gold_gui.h"
 #include "Develop/Units/d2.v1/gold_window.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/d2_gui.h"

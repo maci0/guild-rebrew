@@ -42,7 +42,7 @@ extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern Ent g_7f4ca0[];
 extern int g_100f1dc;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int g_14ce8e0;
 extern int d2_CurrentElementId;
 extern int g_14abc98;

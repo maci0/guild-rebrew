@@ -3,7 +3,7 @@
 
 extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char g_6aae08[];
 
 char* __cdecl fcn_00502cd0(int, int, int, int, int);

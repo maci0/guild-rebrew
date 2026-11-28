@@ -77,7 +77,7 @@ extern int g_14ce86c;
 
 /* Dialog busy flag written while a modal dialog runs.
  * Used by fcn_005a4bb0 and row 0x00589d00. */
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 
 /* Active player or team index byte. */
 extern unsigned char g_773d75;

@@ -1,7 +1,7 @@
 extern int g_6a256c;
 extern volatile int g_6b7fac;
 extern int d2_CurrentWindowId;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int g_14ce8e0;
 extern char g_1015f40[];
 extern char g_868060[];

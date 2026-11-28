@@ -11,7 +11,7 @@ extern char g_6a9624[];
 extern char g_6a9604[];
 extern char g_6a95e8[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int g_7746a0;
 
 void __cdecl d2_ClearStatusTextSlots(void);

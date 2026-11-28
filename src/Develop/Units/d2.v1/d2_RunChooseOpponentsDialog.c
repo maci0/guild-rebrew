@@ -12,7 +12,7 @@ extern int g_14b5e4c;
 extern int g_7e1fa0[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_14cf950;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int g_100f1dc;
 extern float g_6640cc;
 extern float g_66292c;

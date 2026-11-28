@@ -1,6 +1,6 @@
 
 
-#include "g_772f90.h"
+#include "Develop/DieGildeAddOn/game/alchemy_player_prototype.h"
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern ALCHEMY_PLAYER_PROTOTYPE* g_772fdc;

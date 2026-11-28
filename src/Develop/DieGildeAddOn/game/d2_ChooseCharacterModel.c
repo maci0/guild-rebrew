@@ -1,6 +1,6 @@
 #include <string.h>
 #include "game_data.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_14ce8e0, d2_CurrentElementId, g_7e2468;

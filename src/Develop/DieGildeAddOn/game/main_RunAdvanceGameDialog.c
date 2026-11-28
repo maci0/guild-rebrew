@@ -6,7 +6,7 @@ extern char g_774660;
 extern float g_675308;
 extern char g_14cf950;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern float g_665e40;
 extern char g_6a33b4[];
 

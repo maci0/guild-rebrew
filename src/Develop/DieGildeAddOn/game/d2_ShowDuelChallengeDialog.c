@@ -33,7 +33,7 @@ extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char s_6ac494[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl d2_ShowModalMessageBox(char*, int);

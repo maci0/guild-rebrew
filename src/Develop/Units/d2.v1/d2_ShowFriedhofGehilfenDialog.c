@@ -15,7 +15,7 @@ extern int d2_CurrentWindowId;
 extern int g_100f1dc;
 extern int g_14ce8e0;
 extern int d2_CurrentElementId;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char s_6a9748[];
 extern char s_6a9714[];
 extern char s_6a96d8[];

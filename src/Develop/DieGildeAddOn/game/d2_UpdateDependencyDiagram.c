@@ -1,5 +1,5 @@
 #include "game_data.h"
-#include "client_data.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_7f4c10;
 #include "Develop/Units/d2.v1/d2_dependency_node.h"

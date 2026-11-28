@@ -10,7 +10,7 @@ extern short g_14ce8c2;
 extern char* d3_ActiveCamera;
 extern int g_14ce8cc;
 extern int g_14ce8e0;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int d2_CurrentElementId;
 #include "game_player.h"
 extern char g_773d75;

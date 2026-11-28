@@ -36,7 +36,7 @@ extern int d2_CurrentWindowId;
 extern char* g_772500;
 extern char* g_77255c;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int d2_CurrentElementId;
 extern int gm_GameTime;
 extern int g_7f4c04;

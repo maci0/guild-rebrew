@@ -1,4 +1,4 @@
-#include "client_data.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
 #include "Develop/Units/d2.v1/d2_win.h"
 /*
  * Rebuild the trade-goods tooltip list for object a0: item name, weight,

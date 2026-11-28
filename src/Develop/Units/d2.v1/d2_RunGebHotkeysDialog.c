@@ -8,8 +8,8 @@ typedef struct DialogItem {
 	char pad88[0x1a4 - 0x88];
 	int f1a4;
 } DialogItem;
-#include "client_data.h"
-#include "client_dialog_state.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 void __cdecl d2_PruneBookmarkSlots(void);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);

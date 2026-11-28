@@ -1,4 +1,4 @@
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int g_14ce8e0, g_100f1dc, d2_CurrentElementId;
 extern char g_14cf950;
 extern int g_6a81dc[5];

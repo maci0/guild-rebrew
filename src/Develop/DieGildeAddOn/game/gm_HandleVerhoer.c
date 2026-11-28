@@ -25,7 +25,7 @@ extern int g_14ac6a0;
 extern char s_6acd74[];
 extern char s_6ace58[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl amt_FindOfficeSlotByType(int, Info*);

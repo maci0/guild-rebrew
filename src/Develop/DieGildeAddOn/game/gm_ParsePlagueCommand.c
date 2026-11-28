@@ -1,6 +1,6 @@
 #include <string.h>
 #include "client_actions.h"
-#include "client_data.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
 
 int __cdecl atoi(const char*);
 void __cdecl cm_SendCopyEntityData(void*);

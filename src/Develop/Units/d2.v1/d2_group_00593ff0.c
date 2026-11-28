@@ -15,7 +15,7 @@ extern char* g_14a5ad8[];
 extern int g_100f1dc;
 extern int d2_CurrentElementId;
 extern char g_7e23e3;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char s_6a3f8c[];
 
 int __cdecl d2_LoadForm(int, int, char*);

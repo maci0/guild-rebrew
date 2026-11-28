@@ -2,7 +2,7 @@
 #include "Develop/Units/d2.v1/d2_win.h"
 #include "client_types.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 
 extern char s_67d67c[];
 extern char* g_77255c;

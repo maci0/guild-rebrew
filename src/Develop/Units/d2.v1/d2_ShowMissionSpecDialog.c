@@ -5,7 +5,7 @@ extern char g_68112c[];
 extern char g_681110[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_100f1dc;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 
 char* __cdecl gm_LookupMissionSpec(int);
 int __cdecl d2_LoadForm(int, int, char*);

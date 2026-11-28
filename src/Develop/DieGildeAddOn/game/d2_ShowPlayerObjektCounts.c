@@ -22,7 +22,7 @@ typedef struct
 
 extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char s_6811b0[];
 extern char s_6ab848[];
 extern char s_6ab834[];

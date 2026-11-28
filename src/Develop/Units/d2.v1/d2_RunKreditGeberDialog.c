@@ -1,6 +1,6 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 #include "Develop/Units/d2.v1/d2_window_view.h"
 extern int g_14ab694;

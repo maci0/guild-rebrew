@@ -1,4 +1,4 @@
-#include "g_10058a0.h"
+#include "Develop/Units/d2.v1/d2_radio_slot.h"
 
 // SIZE 0x40
 typedef struct ROUTING_NODE {
@@ -19,7 +19,7 @@ extern int g_14b5ec0;
 extern int g_14b5ec4;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_100f1dc;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern ROUTING_NODE* g_772908;
 extern D2_RADIO_SLOT g_10058a0[8];
 extern int g_772900;

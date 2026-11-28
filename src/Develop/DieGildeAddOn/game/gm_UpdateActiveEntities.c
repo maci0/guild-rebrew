@@ -1,4 +1,4 @@
-#include "client_data.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
 extern int g_773d48;
 #pragma pack(2)
 typedef struct {

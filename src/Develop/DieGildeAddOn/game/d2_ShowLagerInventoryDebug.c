@@ -9,7 +9,7 @@ void __cdecl d2_CloseWindow(int);
 #include "Develop/Units/d2.v1/d2_window_view.h"
 extern char* lpObjektePROT;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 
 typedef struct
 {

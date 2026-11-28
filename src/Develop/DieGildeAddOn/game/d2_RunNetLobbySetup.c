@@ -1,6 +1,6 @@
 #include <windows.h>
 #include <string.h>
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int g_14ce8e0;
 
 /* Globals referenced by the lobby setup.  The 0x779c60 status block and the

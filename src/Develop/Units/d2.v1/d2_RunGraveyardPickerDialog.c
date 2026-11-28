@@ -61,7 +61,7 @@ extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern volatile int g_6b7fac;
 extern int g_100f1dc;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char g_6a969c[];
 
 int __cdecl d2_LoadForm(int, int, char*);

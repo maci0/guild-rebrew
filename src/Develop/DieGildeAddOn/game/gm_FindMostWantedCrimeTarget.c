@@ -1,5 +1,5 @@
 #include "client_types.h"
-#include "client_straftat.h"
+#include "Develop/DieGildeAddOn/game/client_straftat.h"
 extern Pair_99f800 g_99f800[0x800];
 unsigned char* __cdecl gm_LookupEntityRecordById(int id);
 /* ADDRESS: GOLDTL 0x004f65a0 */

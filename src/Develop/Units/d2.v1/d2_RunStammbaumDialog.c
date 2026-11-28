@@ -20,7 +20,7 @@
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern char* g_772500;			/* 0x00772500 */
 extern int d2_CurrentWindowId;			/* 0x00772514 */
-#include "client_data.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
 extern int g_100f1dc;			/* 0x0100f1dc */
 extern char* g_1015ea0;		/* 0x01015ea0 */
 extern int g_14ce8e0;			/* 0x014ce8e0 */

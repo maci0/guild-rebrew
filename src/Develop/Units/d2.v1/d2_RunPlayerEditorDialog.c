@@ -7,7 +7,7 @@ extern char g_7e240a[];      /* family name buffer (0x20) */
 extern char g_14cf950;       /* last pressed key */
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_100f1dc;        /* focused element id */
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int* g_774a34;        /* entity list head */
 extern int* g_779cb8;        /* rejected entity */
 extern int* g_779ce4;

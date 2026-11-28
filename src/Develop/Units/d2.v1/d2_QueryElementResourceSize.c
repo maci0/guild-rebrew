@@ -1,4 +1,4 @@
-#include "gold_gui.h"
+#include "Develop/Units/d2.v1/gold_gui.h"
 
 int __cdecl d2_GetResourceData(int);
 

@@ -1,4 +1,4 @@
-#include "client_data.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
 #include "Develop/Units/d2.v1/d2_win.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl d2_ResizeWindow(int w, int h, int win);

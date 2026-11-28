@@ -1,6 +1,6 @@
 extern char g_7f4ca0[];
 extern int g_14ce8e0;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 
 int __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
 int __cdecl d2_LoadForm(int, int, char*);

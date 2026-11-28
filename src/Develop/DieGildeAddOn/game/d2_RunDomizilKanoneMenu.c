@@ -1,7 +1,7 @@
 extern int g_7746d8;
 extern char* g_14b5494;
 extern int g_14ce8e0;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char* g_7746a0;
 
 void __cdecl d2_ClearStatusTextSlots(void);

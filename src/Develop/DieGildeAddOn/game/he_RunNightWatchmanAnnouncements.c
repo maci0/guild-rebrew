@@ -1,4 +1,4 @@
-#include "client_data.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
 extern int __cdecl gm_GetSeason(char*); extern void __cdecl d3snd_QueueSound(int, int, char*, int, int);
 extern void __cdecl he_FreeAction(char*);
 extern void __cdecl gm_AddTime(char*, int, int, int);

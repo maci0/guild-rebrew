@@ -1,5 +1,5 @@
-#include "g_100f200.h"
-#include "client_data.h"
+#include "Develop/Units/d2.v1/g_100f200.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
 #include "Develop/Units/d2.v1/d2_win.h"
 extern int g_14cf900[]; extern short g_14cf902; extern char g_67d908[];
 #include "Develop/Units/d2.v1/d2_gui.h"

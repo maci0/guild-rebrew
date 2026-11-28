@@ -19,7 +19,7 @@ extern int main_LoopFlags;
 extern char* g_77255c;
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern int g_100f1dc;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char s_68d760[];
 extern char s_68d74c[];

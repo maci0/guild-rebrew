@@ -1,5 +1,5 @@
 extern int g_772ea4;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d3_UpdateCameraAtScreenEdges(void);

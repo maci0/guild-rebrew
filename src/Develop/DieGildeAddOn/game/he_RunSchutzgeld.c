@@ -17,7 +17,7 @@ typedef struct Msg553490 {
 
 extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
-#include "client_data.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_RandomMod(int);

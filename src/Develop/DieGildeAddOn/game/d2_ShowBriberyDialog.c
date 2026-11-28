@@ -1,7 +1,7 @@
 #include "game_data.h"
 #include "game_player.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int g_14abaac;
 int __cdecl he_HasNoActiveAction0x62(char* obj); void* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
 #include "Develop/DieGildeAddOn/game/entity_record.h"

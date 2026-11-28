@@ -2,7 +2,7 @@ extern int d2_CurrentWindowId;
 extern int g_772500;
 extern int g_77255c;
 extern int g_14ce8e0;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 
 void* __cdecl d2_LoadForm(int a, int b, char* name);
 void __cdecl d2_CenterDialogWindows(void* dlg);

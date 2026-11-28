@@ -1,7 +1,7 @@
-#include "client_data.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_100f1dc, g_14abaac, g_14ce8e0;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 int __cdecl d2_CheckOwnerBlocked(char* obj);
 void __cdecl d2_InitPlayerBar(char* obj, int a);

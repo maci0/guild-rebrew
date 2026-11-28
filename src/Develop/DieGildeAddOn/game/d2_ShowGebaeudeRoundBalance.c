@@ -28,7 +28,7 @@ extern unsigned char* lpGebaeudePROT;
 extern char* g_77255c;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_14ce8e0;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);

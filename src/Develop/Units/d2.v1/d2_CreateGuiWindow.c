@@ -1,5 +1,5 @@
 #include <string.h>
-#include "gold_gui.h"
+#include "Develop/Units/d2.v1/gold_gui.h"
 #include "Develop/Units/d2.v1/gold_window.h"
 extern GOLD_GUI_WINDOW g_00f8f120[];
 extern GuiEnt* g_00f8f080;

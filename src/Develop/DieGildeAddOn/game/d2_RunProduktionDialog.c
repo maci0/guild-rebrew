@@ -1,5 +1,5 @@
 extern int g_100f1dc, g_14ce8e0, d2_CurrentElementId;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 /* Runs the town trade/settlement dialog: opens the window, collects the shop
    list, draws the goods rows and processes input until the player closes it. */
 #include "Develop/DieGildeAddOn/game/game_data.h"

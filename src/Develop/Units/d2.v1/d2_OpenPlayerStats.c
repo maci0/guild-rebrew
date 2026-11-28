@@ -9,7 +9,7 @@
  * this function.
  */
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_data.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
 extern int g_777ca0;
 extern int g_776c90;
 extern int g_775338;

@@ -1,4 +1,4 @@
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 #include "client_packet_builder.h"
 extern int g_772908;
 extern int g_772900;

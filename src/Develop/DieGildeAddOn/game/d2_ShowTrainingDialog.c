@@ -53,7 +53,7 @@ extern unsigned char* lpGebaeudePROT;
 extern pos14_7f4c00 gm_GameTime;
 extern int g_14abc44;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char s_6ac79c[];
 
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);

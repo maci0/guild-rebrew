@@ -3,7 +3,7 @@ extern char* g_77255c;
 extern int d2_CurrentWindowId;
 extern int cut_EventLoopFlags;
 extern int g_100f1dc;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int d2_CurrentElementId;
 
 int __cdecl d2_LoadForm(int, int, char*);

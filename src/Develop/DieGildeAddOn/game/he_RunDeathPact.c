@@ -19,7 +19,7 @@ typedef struct Req578 {
 	int c;
 	int d;
 } Req578;
-#include "client_data.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
 typedef struct Msg578 {
 	char pad0[4];
 	unsigned char kind;

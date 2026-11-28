@@ -1,4 +1,4 @@
-#include "client_data.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
 #include "Develop/Units/d2.v1/d2_win.h"
 extern int main_LoopFlags;
 extern int d2_CurrentWindowId;
@@ -8,7 +8,7 @@ extern char *g_1015ea0;
 
 extern int g_14ad084;
 extern int g_14ce8e0;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int g_100f1dc;
 extern int d2_CurrentElementId;
 extern char g_7f4ca0[];

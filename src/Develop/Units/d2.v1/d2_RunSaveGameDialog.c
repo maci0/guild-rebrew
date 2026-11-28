@@ -62,7 +62,7 @@ extern int d2_HoveredWindow;
 extern char* g_14ac64c;
 extern int g_14ce8e0;
 extern int g_14ce8d8;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int d2_CurrentElementId;
 
 int __cdecl d2_LoadForm(int, int, char*);

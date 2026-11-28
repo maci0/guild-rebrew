@@ -1,6 +1,6 @@
 #include <string.h>
 
-#include "rgb.h"
+#include "Develop/Units/d2.v1/rgb.h"
 
 typedef struct TexDesc {
 	int pad0;

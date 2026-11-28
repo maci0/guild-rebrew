@@ -3,7 +3,7 @@
 
 extern int g_100f1dc;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_SetFormVisibility(int, int);

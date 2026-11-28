@@ -4,7 +4,7 @@ extern char g_681130[];
 extern char g_68112c[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_100f1dc;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);

@@ -11,7 +11,7 @@ extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca0[];
 extern int g_100f1dc;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char g_14cf950;
 extern int g_14abbf4;
 extern int g_14ce8e0;

@@ -7,7 +7,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "client_types.h"
-#include "client_data.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
 #include "DieGildeAddOn/game/aemter.h"
 #include "DieGildeAddOn/game/building_prototype.h"
 #include "DieGildeAddOn/game/entity_record.h"

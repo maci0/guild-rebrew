@@ -17,7 +17,7 @@
 
 #include "client_types.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 
 #include "Develop/DieGildeAddOn/game/game_timestamp.h"
 

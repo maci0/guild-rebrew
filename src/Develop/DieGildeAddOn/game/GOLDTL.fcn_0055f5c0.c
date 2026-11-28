@@ -1,7 +1,7 @@
 #include <string.h>
 
 #include "client_types.h"
-#include "g_7f4ca2.h"
+#include "Develop/DieGildeAddOn/game/g_7f4ca2.h"
 
 extern unsigned short g_774970;
 extern unsigned char g_774964;

@@ -29,7 +29,7 @@ extern Win_1015f40 g_1015f40[0x60];
 extern char* g_1015ea0;
 extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 
 int __cdecl d2_CreateWindow(int x, int y, int w, int h, int a5);
 int __cdecl d2_CreateChildWindow(int x, int y, int cx, int cy, int a5, int win);

@@ -5,7 +5,7 @@ extern int g_100f1dc;
 extern int d2_CurrentElementId;
 extern int g_14ce8e0;
 extern int g_14ce8e8;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern volatile unsigned int g_6b7fac;
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/entity_record.h"
@@ -31,7 +31,7 @@ typedef struct {
 } TabRec_5ccca0;
 
 extern TabRec_5ccca0 g_6ac8a8[];
-#include "client_data.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
 #include "Develop/Units/d2.v1/d2_win.h"
 int __cdecl d2_AddWindowTextButton(int, int, int, int, int);
 void __cdecl d2_SetElementWidth(int, int);

@@ -4,7 +4,7 @@ void __cdecl he_MessageBoxQuickjump(int, int, char *, int, int, int, int, int, c
 float __cdecl gm_GetSeasonPrice(int, unsigned char);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, int, int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
-#include "client_data.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
 extern char g_6b5c60[];
 extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/game_data.h"

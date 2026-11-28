@@ -5,7 +5,7 @@ signed char g_6a3440 = 254;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_14cf950;
 extern int g_100f1dc;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int main_LoopFlags;
 
 int __cdecl d2_LoadForm(int, int, char*);

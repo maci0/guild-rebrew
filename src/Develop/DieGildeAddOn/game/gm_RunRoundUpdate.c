@@ -61,7 +61,7 @@ int __cdecl d2_CreateScrollPerga();
 int __cdecl cm_StepCommandQueue();
 int __cdecl gm_RandomMod(int);
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 #include "client_types.h"
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 typedef struct ResetProto { unsigned char kind; unsigned char rest[0x24c]; } ResetProto;

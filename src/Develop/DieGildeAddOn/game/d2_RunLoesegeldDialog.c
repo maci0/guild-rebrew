@@ -7,7 +7,7 @@ extern char* g_aed32c;
 extern int g_14aba40;
 extern int g_14aba48;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern double g_6640f8;
 extern double g_665fc0;

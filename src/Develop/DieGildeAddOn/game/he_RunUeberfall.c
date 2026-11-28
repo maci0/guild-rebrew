@@ -20,7 +20,7 @@ typedef union
 	Stats stats;
 	unsigned char msg[0x114];
 } MsgBuf;
-#include "client_data.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
 extern float g_664168;
 extern char* __cdecl gm_LookupEntityRecordById(int);
 extern void __cdecl he_AssignActionSlot(int, int, int, char*);

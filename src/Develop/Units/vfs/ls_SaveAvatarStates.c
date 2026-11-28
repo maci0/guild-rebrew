@@ -1,7 +1,7 @@
 
 
 
-#include "g_68e020.h"
+#include "Develop/DieGildeAddOn/game/g_68e020.h"
 
 extern Entry68e020 g_68e020[32];
 

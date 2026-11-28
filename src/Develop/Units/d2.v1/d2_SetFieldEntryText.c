@@ -1,5 +1,5 @@
 #include <string.h>
-#include "gold_gui.h"
+#include "Develop/Units/d2.v1/gold_gui.h"
 extern GuiEnt* g_00f8f080;
 int __cdecl d2_CalcTextWidth(const char*, int);
 

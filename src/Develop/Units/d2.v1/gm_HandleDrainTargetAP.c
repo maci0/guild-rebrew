@@ -17,7 +17,7 @@ extern char s_6acd74[];
 extern char s_6a59fc[];
 extern int g_100f1dc;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl cm_RequestModifyHealth(int, int);

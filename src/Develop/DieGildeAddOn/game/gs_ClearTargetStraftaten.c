@@ -5,7 +5,7 @@
 
 // SIZE 0x8
 #include "client_types.h"
-#include "client_straftat.h"
+#include "Develop/DieGildeAddOn/game/client_straftat.h"
 typedef Pair_99f800 Pair;
 
 // SIZE 0x21c

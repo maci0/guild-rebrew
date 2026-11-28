@@ -19,7 +19,7 @@ extern char g_868060[];
 extern unsigned char g_773d75;
 extern int g_100f1dc;
 extern int g_14ce8e0;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int d2_CurrentElementId;
 extern char g_6aae08[];
 

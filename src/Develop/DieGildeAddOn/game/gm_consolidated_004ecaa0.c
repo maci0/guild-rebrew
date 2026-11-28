@@ -11,7 +11,7 @@ extern int g_68dec0[];
 void __cdecl srand(unsigned int seed);
 unsigned short __cdecl gm_RandomMod(unsigned short n);
 void __cdecl ahm_ShufflePlayerPrototypes(void);
-#include "g_772f90.h"
+#include "Develop/DieGildeAddOn/game/alchemy_player_prototype.h"
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern ALCHEMY_PLAYER_PROTOTYPE* g_772fdc;

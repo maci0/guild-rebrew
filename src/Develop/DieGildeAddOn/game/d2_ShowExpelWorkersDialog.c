@@ -9,7 +9,7 @@ typedef struct
 // SIZE 0x18
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern unsigned short g_7f4c04;
 
 int __cdecl amt_FindOfficeSlotByType(int, Law*);

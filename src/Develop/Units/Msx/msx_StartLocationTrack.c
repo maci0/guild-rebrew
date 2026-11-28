@@ -12,7 +12,7 @@ typedef struct MSX_LOCATION_TRACK_MAP {
 } MSX_LOCATION_TRACK_MAP;
 
 #include "client_types.h"
-#include "g_688118.h"
+#include "Develop/Units/Msx/id_group.h"
 
 extern char* g_7746c4;
 extern unsigned char* g_7746c8;

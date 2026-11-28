@@ -1,4 +1,4 @@
-#include "client_data.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
 extern float g_773d4c, g_773d50, g_99ec14, g_99f590[];
 extern char g_99f5e0[];
 void __cdecl gm_CollectOccupancyStats(void*);

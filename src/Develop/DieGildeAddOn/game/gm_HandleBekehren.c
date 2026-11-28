@@ -19,7 +19,7 @@ extern float g_662964;
 extern unsigned char g_773d75;
 extern char s_6acdcc[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl gm_AccumulateTyped2(House*);

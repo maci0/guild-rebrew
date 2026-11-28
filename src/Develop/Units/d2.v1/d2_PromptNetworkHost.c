@@ -8,7 +8,7 @@ extern char g_7e22c0[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_6a3a34[];
 extern char g_14cf950;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int g_100f1dc;
 
 int __cdecl d2_LoadForm(int, int, char*);

@@ -1,4 +1,4 @@
-#include "gold_gui.h"
+#include "Develop/Units/d2.v1/gold_gui.h"
 #include "Develop/Units/d2.v1/gold_window.h"
 #include "Develop/Units/d2.v1/d2_window_view.h"
 #include "client_types.h"

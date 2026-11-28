@@ -15,7 +15,7 @@ extern Win_1015f40 g_1015f40[0x60];
 extern int d2_CurrentWindowId;
 extern char* g_77255c;
 extern int g_100f1dc;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 
 int __cdecl hst_ReadNextChronicleEntry(char* name, char* text, int arg);
 int __cdecl d2_CreateScrollPerga(void);

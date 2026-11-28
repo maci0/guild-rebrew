@@ -1,6 +1,6 @@
 /* Refreshes the portrait graphics of one animation object: three slot frames,
    bars, the two counter labels and the position/displacement fields. */
-#include "client_data.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
 int __cdecl d2_GetControlValue(int);
 float __cdecl gm_CalcArtilleryVolleyCost(int, int, int);
 void __cdecl gm_GetArtilleryLimits(char*, int*, int*);

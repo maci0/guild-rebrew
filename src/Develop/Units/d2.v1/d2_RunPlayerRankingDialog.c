@@ -39,7 +39,7 @@ extern char s_67d444[];
 extern int d2_CurrentWindowId;
 extern int g_100f1dc;
 extern int g_14ce8e0;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 
 void __cdecl gm_RankPlayers(int*, Entry*);
 int __cdecl d2_TutorialAllowsFlag(int);

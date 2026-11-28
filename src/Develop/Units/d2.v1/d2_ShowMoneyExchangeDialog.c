@@ -24,7 +24,7 @@ extern int g_14ab6fc;
 extern int g_14ce8e0;
 extern char g_100f8c0;
 extern int g_100f1dc;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_773d75;
 extern int d2_CurrentElementId;

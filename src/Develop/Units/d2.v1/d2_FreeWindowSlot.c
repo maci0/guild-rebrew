@@ -1,5 +1,5 @@
 #include <string.h>
-#include "gold_gui.h"
+#include "Develop/Units/d2.v1/gold_gui.h"
 extern GuiObj g_00fb1020[];
 int __cdecl d2_CloseWindow(int);
 void __cdecl d2_DestroySurface(int);

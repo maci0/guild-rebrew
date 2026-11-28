@@ -19,7 +19,7 @@ extern unsigned char g_773d75;
 extern int d2_CurrentWindowId;
 extern int g_100f1dc;
 extern int g_14ce8e0;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern unsigned short g_7f4c04;

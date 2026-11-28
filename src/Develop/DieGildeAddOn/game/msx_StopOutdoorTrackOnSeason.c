@@ -2,7 +2,7 @@
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 #include "client_sound.h"
 #include "client_types.h"
-#include "g_688118.h"
+#include "Develop/Units/Msx/id_group.h"
 
 extern volatile int g_6b7fac;
 extern char g_774964;

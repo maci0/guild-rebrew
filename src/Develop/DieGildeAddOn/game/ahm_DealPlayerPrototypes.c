@@ -1,7 +1,7 @@
 
 
 
-#include "g_772f90.h"
+#include "Develop/DieGildeAddOn/game/alchemy_player_prototype.h"
 
 extern int g_772f78;
 extern int g_772f7c;

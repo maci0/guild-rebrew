@@ -1,4 +1,4 @@
-#include "g_10058a0.h"
+#include "Develop/Units/d2.v1/d2_radio_slot.h"
 extern D2_RADIO_SLOT g_10058a0[8];
 extern D2_RADIO_SLOT g_10058a0[8];
 // fcn_004bf3e0: first i with table[i].id != -1 && table[i].b == a

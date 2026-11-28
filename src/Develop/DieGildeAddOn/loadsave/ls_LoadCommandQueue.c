@@ -1,5 +1,5 @@
 #include "client_types.h"
-#include "client_queued_packet.h"
+#include "Develop/DieGildeAddOn/command/client_queued_packet.h"
 
 #pragma pack(push, 1)
 typedef struct CMD_QUEUE_NODE_99 {

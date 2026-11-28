@@ -3,7 +3,7 @@
 extern int g_774970;
 extern int g_774968;
 extern int g_774978;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int g_7e2700;
 extern int main_LoopFlags;
 extern int g_6a3420;

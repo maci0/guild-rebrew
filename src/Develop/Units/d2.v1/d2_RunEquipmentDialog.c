@@ -2,7 +2,7 @@
 #include "Develop/Units/d2.v1/d2_training_rows.h"
 extern Slot_778da0 g_778da0[16];
 extern Slot_778da0 g_7796e0[16];
-#include "client_data.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
 /*
  * Open the trade-goods dialogue for the object a0 and run its modal loop.
  * Creates (or reuses) the dialog slot, fills the four product rows and the
@@ -22,7 +22,7 @@ extern char* g_1015ea0;          /* 0x01015ea0 */
 extern int d2_CurrentElementId;           /* 0x0067d370 */
 extern int d2_CurrentWindowId;           /* 0x00772514 */
 extern unsigned char g_773d75; /* 0x00773d75 */
-#include "client_dialog_state.h"           /* 0x00774654 */
+#include "Develop/Units/d2.v1/client_dialog_state.h"           /* 0x00774654 */
 extern int g_775334;           /* 0x00775334 */
 extern int main_LoopFlags;           /* 0x007e46ac */
 extern char s_6ac7b0[];        /* 0x006ac7b0 */

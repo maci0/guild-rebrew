@@ -53,7 +53,7 @@ char* __cdecl fcn_00502cd0(int a, int b, int c, ...);
 char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_GetMsgField(int a, int b);
 int __cdecl fcn_0064d41a(char* buf, char* fmt, ...);
-#include "client_data.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
 /* ADDRESS: GOLDTL 0x0052ea30 */
 void __cdecl d2_UpdateSelectionPanel(void)
 {

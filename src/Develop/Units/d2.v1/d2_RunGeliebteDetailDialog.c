@@ -1,10 +1,10 @@
 #include <string.h>
-#include "client_data.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
 
 extern char* g_772500;
 extern int d2_CurrentWindowId;
 extern char* g_77255c;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int d2_CurrentElementId;
 

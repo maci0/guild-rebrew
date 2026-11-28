@@ -16,7 +16,7 @@ extern int g_14b5780;
 extern int g_14b5784;
 extern int g_100f1dc;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 
 void __cdecl d2_CreateButtonRow(int, int, int*, int, int, int);
 void __cdecl d2_SetElementEnabled(int, int);

@@ -3,7 +3,7 @@ extern unsigned short* g_772e98;
 extern unsigned short* g_772e9c;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_772eac;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern unsigned char g_773d75;
 extern int g_774654;
 extern double g_6640f8;

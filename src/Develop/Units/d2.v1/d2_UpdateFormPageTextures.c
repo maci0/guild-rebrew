@@ -1,4 +1,4 @@
-#include "gold_gui.h"
+#include "Develop/Units/d2.v1/gold_gui.h"
 
 extern GuiObj g_00fb1020[];
 void __cdecl d2_RestoreFormPageTextures(int index);

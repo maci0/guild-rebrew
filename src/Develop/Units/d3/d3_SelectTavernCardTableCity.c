@@ -8,7 +8,7 @@ extern char* g_7746a4;
 extern short g_14ce8c0;
 extern short g_14ce8c2;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char s_6a41a4[];
 
 int __cdecl sprintf(char*, const char*, ...);

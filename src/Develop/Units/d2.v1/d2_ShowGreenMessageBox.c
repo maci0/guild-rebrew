@@ -31,7 +31,7 @@ extern int g_100f1dc;
 extern List8c_102cbc8 g_102cbc8[];
 extern char g_14cf950;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 
 int __cdecl d2_LoadForm(int, int, char *);
 void __cdecl d2_SetForm(int, int);

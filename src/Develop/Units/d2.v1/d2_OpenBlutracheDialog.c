@@ -40,7 +40,7 @@ extern int g_14b5ac8;
 extern int g_14ce8e0;
 extern int g_100f1dc;
 extern int d2_CurrentElementId;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 
 void __cdecl d2_InitPlayerBar(char*, int);
 int __cdecl d2_LoadForm(int, int, char*);

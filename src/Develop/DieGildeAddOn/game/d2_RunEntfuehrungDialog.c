@@ -1,4 +1,4 @@
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int g_14abaac;
 /* Kidnapping message handler: validates the request against the current
  * location slot, builds and posts the stealing-guild packet, and pumps the

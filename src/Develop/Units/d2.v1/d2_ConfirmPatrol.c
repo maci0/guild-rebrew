@@ -49,7 +49,7 @@ extern int g_14abc98;
 extern int g_100f1dc;
 extern int d2_CurrentElementId;
 extern int g_14ce8e0;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char* g_7746c4;
 extern char* g_7746cc;
 extern char s_6ab348[];

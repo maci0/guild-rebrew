@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #define D(a) (*(int *)(a))
 #define B(a) (*(unsigned char *)(a))

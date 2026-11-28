@@ -1,6 +1,6 @@
 
 
-#include "g_6b5dd0.h"
+#include "Develop/Units/d3/display_adapter_info.h"
 
 extern DISPLAY_ADAPTER_INFO* g_6b5dd0;
 extern unsigned int g_6b5de8;

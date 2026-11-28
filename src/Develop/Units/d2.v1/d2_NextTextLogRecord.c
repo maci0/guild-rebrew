@@ -1,7 +1,7 @@
 
 
 
-#include "g_9ba3a0.h"
+#include "Develop/Units/d2.v1/text_log_record.h"
 
 extern int g_772e8c;
 extern int g_9ba9f4;

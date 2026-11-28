@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-#include "g_7f4ca2.h"
+#include "Develop/DieGildeAddOn/game/g_7f4ca2.h"
 
 typedef struct Stat {
 	int v[9];

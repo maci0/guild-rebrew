@@ -1,6 +1,6 @@
 extern int g_774650;
 extern int g_774658;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int g_774670;
 extern int g_77493c;
 extern int g_774708;

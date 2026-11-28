@@ -17,7 +17,7 @@ extern char g_6a4080[];
 extern float g_66418c;
 extern float g_665e64;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 
 char* __cdecl d3_FindSceneObject(int, int, int, char*);
 char* __cdecl d3_CreateSceneModelObject(int, float*, char*, char*);

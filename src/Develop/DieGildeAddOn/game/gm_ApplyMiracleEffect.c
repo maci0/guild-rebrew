@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #pragma intrinsic(strcat)
-#include "client_data.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
 typedef struct F8 {
 	unsigned int mask;
 	int b;

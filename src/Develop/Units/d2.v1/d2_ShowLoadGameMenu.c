@@ -17,7 +17,7 @@ extern int main_LoopFlags;
 extern int d2_CurrentWindowId;
 extern int g_14ce8e0;
 extern int g_14ce8d8;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int d2_HoveredWindow;
 extern char* g_1015ea0;
 #include "client_types.h"

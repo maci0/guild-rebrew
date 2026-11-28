@@ -9,7 +9,7 @@ extern volatile int g_6b7fac;
 extern volatile int g_6b7fc0;
 extern int g_774650;
 extern int g_774658;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 
 int __cdecl sb_CheckVoicePlaying(int);
 int __cdecl sb_StopVoice(int, int);

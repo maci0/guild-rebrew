@@ -14,7 +14,7 @@ extern char* lpObjektePROT;
 extern char* g_7746c4;
 extern int g_7746c8;
 extern int g_7746f8;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int g_7747b4;
 extern int g_85ab60;
 extern int g_14ce8e0;

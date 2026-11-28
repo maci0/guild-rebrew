@@ -4,7 +4,7 @@ typedef unsigned short u16;
 
 extern int g_100f1dc; extern float g_664138;
 extern int g_14ce8e0;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 
 void* __cdecl d2_LoadForm(int a, int b, char* name);
 void __cdecl d2_SetOverlayAnimation(int a, int b);

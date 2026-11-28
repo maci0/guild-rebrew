@@ -8,7 +8,7 @@
 extern unsigned char g_773d75;
 extern char s_6acc44[];
 extern char s_679060[];
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl cm_RequestModifyHealth(int, int);

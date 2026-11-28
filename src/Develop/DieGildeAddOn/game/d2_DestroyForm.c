@@ -1,5 +1,5 @@
 #include <string.h>
-#include "client_data.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
 
 extern int __cdecl d2_CloseWindow(int a1);
 extern int __cdecl d2_ReleaseSurface(void* o);

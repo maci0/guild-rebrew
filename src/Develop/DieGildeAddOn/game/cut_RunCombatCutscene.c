@@ -32,7 +32,7 @@ typedef struct COMBAT_CUTSCENE_DLG {
 	int list_c[3];
 	int owner;
 } COMBAT_CUTSCENE_DLG;
-#include "client_data.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
 int __cdecl cut_GetRandSeed(void);
 void __cdecl cut_SetRandSeed(int);
 Ent* __cdecl gm_LookupEntityRecordById(int);

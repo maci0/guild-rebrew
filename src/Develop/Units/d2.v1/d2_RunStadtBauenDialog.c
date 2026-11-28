@@ -22,7 +22,7 @@ extern int d2_CurrentWindowId;
 extern int g_100f1dc;
 extern int g_14ce8e0;
 extern int g_7746f8;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char* g_1015ea0;
 extern int g_10162e8;
 extern int g_10162ec;

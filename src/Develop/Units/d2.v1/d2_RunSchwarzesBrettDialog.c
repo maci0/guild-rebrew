@@ -13,8 +13,8 @@ typedef struct {
 	char padc0[1];
 	unsigned char fc1;
 } D2_SCHWARZES_BRETT_ENTRY;
-#include "client_data.h"
-#include "client_dialog_state.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);

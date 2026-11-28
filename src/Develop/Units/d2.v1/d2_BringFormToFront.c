@@ -1,4 +1,4 @@
-#include "gold_gui.h"
+#include "Develop/Units/d2.v1/gold_gui.h"
 #include "client_types.h"
 
 extern GuiObj g_00fb1020[]; /* 0x00fb1020 */

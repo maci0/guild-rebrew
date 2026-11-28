@@ -3,7 +3,7 @@
 
 extern int g_100f1dc;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char g_6ac9b4[];
 extern char g_6ac9a4[];
 

@@ -19,7 +19,7 @@ int __cdecl gm_CalcProzessBasePenalty(char*);
 int __cdecl gm_ValidateProzessCharge(char*, unsigned int);
 void __cdecl d2_SetElementEnabled(int, int);
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char* g_77255c;
 #ifdef REBREW_GOLD
 #define cut_SECOND_CHOICE 0

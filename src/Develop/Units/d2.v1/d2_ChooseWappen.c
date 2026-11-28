@@ -26,7 +26,7 @@ extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int d2_CurrentWindowId;
 extern int g_100f1dc;
-#include "client_dialog_state.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 #include "client_packet_builder.h"
 extern char g_6ac80c[];
 

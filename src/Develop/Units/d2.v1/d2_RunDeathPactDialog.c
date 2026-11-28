@@ -1,7 +1,7 @@
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_data.h"
-#include "client_dialog_state.h"
+#include "Develop/DieGildeAddOn/game/client_data.h"
+#include "Develop/Units/d2.v1/client_dialog_state.h"
 struct D2_DEATH_PACT_MSG {
 	char pad0[4];
 	unsigned char b4;

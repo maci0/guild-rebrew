@@ -1,6 +1,6 @@
 #include <string.h>
 
-#include "g_9baa20.h"
+#include "Develop/Units/d3/g_9baa20.h"
 
 #pragma pack(1)
 struct NET_SCENE_ENTRY {
