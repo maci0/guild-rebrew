@@ -22,6 +22,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl cm_SendAllocCharacter(int, int, int, int, int, int, char*);
 int __cdecl ai_FindEntityInFavorRange(ENTITY_RECORD* p, int kind, F8 f, int c, float r, int* out);
 
+/* ADDRESS: GOLDDE 0x00548c30 */
 void __cdecl he_AllocPruegelAction(char* action)
 {
 	char* actor;

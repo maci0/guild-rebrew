@@ -4,6 +4,7 @@
 
 void __cdecl cm_RequestSysMessage(int, void*);
 
+/* ADDRESS: GOLDDE 0x004b22d0 */
 void __cdecl cm_SendDecreaseGameSpeed(void)
 {
 	char buf[0x7c];

@@ -40,6 +40,7 @@ int __cdecl gm_CalculateGebaeudeValue(char*, int);
 float __cdecl gm_RandomFloat01(void);
 void __cdecl cm_SendCopyEntityData(struct msg*);
 
+/* ADDRESS: GOLDDE 0x0052f2b0 */
 void __cdecl he_TriggerLeaseOffer(void)
 {
 	char* cand[3];

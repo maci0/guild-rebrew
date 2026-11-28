@@ -4,6 +4,7 @@ extern int d3_RainEffect;
 
 /* ADDRESS: GOLD 0x00555510 */
 /* ADDRESS: GOLDTL 0x0055d6e0 */
+/* ADDRESS: GOLDDE 0x005438f0 */
 void __cdecl he_ApplyTransportSpeedModifiers(char* a, char* b)
 {
 	char* d;

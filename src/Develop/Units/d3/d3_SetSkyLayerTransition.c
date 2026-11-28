@@ -1,5 +1,6 @@
 extern float flt_0_0;
 /* ADDRESS: GOLDTL 0x00459980 */
+/* ADDRESS: GOLDDE 0x0044f140 */
 void __cdecl d3_SetSkyLayerTransition(void *skyCtx, void *layer, char value, float scale)
 {
 	unsigned char *p;

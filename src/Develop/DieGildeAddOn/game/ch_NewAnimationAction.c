@@ -6,6 +6,7 @@
 char* __cdecl ch_NewAction(int);
 void __cdecl ch_ExecPlayAnimation(void);
 
+/* ADDRESS: GOLDDE 0x00405550 */
 char* __cdecl ch_NewAnimationAction(int a1, char* s, int a3, float a4)
 {
 	char* e;

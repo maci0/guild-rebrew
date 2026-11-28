@@ -2,6 +2,7 @@
 #include <string.h>
 int __cdecl main_GetLanguage(void);
 
+/* ADDRESS: GOLDDE 0x0051fd50 */
 void __cdecl main_FormatGameVersion(char* out)
 {
 	char sep[2] = " ";

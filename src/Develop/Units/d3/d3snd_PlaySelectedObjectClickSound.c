@@ -12,6 +12,7 @@ void __cdecl d3snd_PlayObjectClickSound(ENTITY_RECORD*);
 
 /* ADDRESS: GOLD 0x004c2ce0 */
 /* ADDRESS: GOLDTL 0x004c35b0 */
+/* ADDRESS: GOLDDE 0x004b1060 */
 void __cdecl d3snd_PlaySelectedObjectClickSound(void)
 {
 	int i;

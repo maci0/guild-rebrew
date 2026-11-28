@@ -2,6 +2,7 @@
  * compares the two three-byte groups, later states sum the byte arrays and
  * compare the totals with the thresholds. */
 /* ADDRESS: GOLDTL 0x00493000 */
+/* ADDRESS: GOLDDE 0x00481eb0 */
 void __cdecl gm_UpdateBlackjackState(unsigned char* bj)
 {
 	int state;

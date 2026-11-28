@@ -37,6 +37,7 @@ extern short gm_GameTimeTailWord;
 int __cdecl he_GetActionProgress(char*, int*, int*, int);
 void __cdecl cm_SendCopyEntityData(Msg*);
 
+/* ADDRESS: GOLDDE 0x0056b510 */
 int __cdecl d2_SendAlchemyResearch(char* e, int* list)
 {
 	int x;

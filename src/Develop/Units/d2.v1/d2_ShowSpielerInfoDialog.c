@@ -53,6 +53,7 @@ int __cdecl _ftol(void);
 int __cdecl d2_ShowTxt(int, int, char *, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005d1790 */
+/* ADDRESS: GOLDDE 0x005b2ff0 */
 void __cdecl d2_ShowSpielerInfoDialog(unsigned short *person, int read_only)
 {
 	char bufB[512];

@@ -3,6 +3,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b3cf0 */
 void __cdecl cm_RequestChangePlayerHe(int entity_id, int kind, int unused)
 {
 	char buf[0x9c];

@@ -8,6 +8,7 @@ void __cdecl io_FormatTextBuffer(char* buf, int msg, int arg);
 void __cdecl he_PostEntityMessage(int a, int b, char* buf, int overflow, int msg, int zero);
 
 /* ADDRESS: GOLDTL 0x004bb420 */
+/* ADDRESS: GOLDDE 0x004a9490 */
 int __cdecl gm_HandleMsg3bReduceSkill(unsigned short* param)
 {
 	char buf[0x100];

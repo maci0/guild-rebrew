@@ -14,6 +14,7 @@ struct OFFICE_SLOT_INFO {
 
 
 /* ADDRESS: GOLDTL 0x004aae50 */
+/* ADDRESS: GOLDDE 0x00499190 */
 int __cdecl ai_SelectOfficeCandidate(int officeKey, unsigned short* referenceId, int* candidateIds, int* unusedOut)
 {
 	float score[4];

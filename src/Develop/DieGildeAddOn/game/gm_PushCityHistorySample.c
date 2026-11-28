@@ -21,6 +21,7 @@ extern int g_99f604;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLD 0x4f88c0 */
 
+/* ADDRESS: GOLDDE 0x004e6a90 */
 void __cdecl gm_PushCityHistorySample(void)
 {
 	memmove(((CITY_HISTORY_SAMPLE*)g_99ec20), ((CITY_HISTORY_SAMPLE*)g_99ec20) + 1, 15 * sizeof(CITY_HISTORY_SAMPLE));

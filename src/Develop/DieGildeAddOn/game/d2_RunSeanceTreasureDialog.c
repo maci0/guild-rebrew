@@ -55,6 +55,7 @@ void __cdecl evt_RequestScriptExit(char*);
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
+/* ADDRESS: GOLDDE 0x00574450 */
 void __cdecl d2_RunSeanceTreasureDialog(char* e, char* res)
 {
 	float f;

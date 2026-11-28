@@ -14,6 +14,7 @@ int __cdecl d3_FindSceneEventId(char*);
 char __cdecl d3e_RegisterSceneEvent(char*, int, int, char*);
 
 /* ADDRESS: GOLDTL 0x0043b850 */
+/* ADDRESS: GOLDDE 0x00434600 */
 void __cdecl d3e_ReadSceneEvents(void* r)
 {
 	int n;

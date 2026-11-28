@@ -7,6 +7,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 void __cdecl he_DispatchZigeunerEvent(char*, char*, int);
 
+/* ADDRESS: GOLDDE 0x00562460 */
 void __cdecl he_ChargeOrCurseZigeuner(char* o, int lvl)
 {
 	char buf[0x200];

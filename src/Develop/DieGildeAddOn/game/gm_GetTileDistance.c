@@ -7,6 +7,7 @@ extern char dbl_2_9081633[];
 
 #pragma intrinsic(fabs, sqrt)
 
+/* ADDRESS: GOLDDE 0x004ede60 */
 double __cdecl gm_GetTileDistance(int x1, int y1, int x2, int y2)
 {
 	double dx;

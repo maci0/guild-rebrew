@@ -11,6 +11,7 @@ int __cdecl gm_CheckPrivilege(int, char*, int);
 
 /* fcn_00505e30: float of short [0x7f4caa + (a&0xffff)*540]. */
 /* ADDRESS: GOLDTL 0x00508e80 */
+/* ADDRESS: GOLDDE 0x004f4000 */
 float __cdecl gm_GetEntityAge(int a)
 {
 #ifdef REBREW_GOLD
@@ -22,6 +23,7 @@ float __cdecl gm_GetEntityAge(int a)
 
 #ifndef REBREW_GOLD
 /* ADDRESS: GOLDTL 0x005d2a40 */
+/* ADDRESS: GOLDDE 0x005b42a0 */
 int __cdecl gm_CalcWerbungSteps(int sourceId, int targetId)
 {
 	char* p;

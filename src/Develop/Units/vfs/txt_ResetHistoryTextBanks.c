@@ -21,6 +21,7 @@ void __cdecl txt_ReleaseTextBank(TXT_BANK_HEADER*);
 
 
 /* ADDRESS: GOLDTL 0x004b2070 */
+/* ADDRESS: GOLDDE 0x004a0390 */
 void __cdecl txt_ResetHistoryTextBanks(void)
 {
 	int j;

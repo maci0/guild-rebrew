@@ -141,6 +141,7 @@ void __cdecl d3_EndCameraAndUiMode(void);
 int __cdecl fcn_00505370(char*);
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 /* ADDRESS: GOLDTL 0x005b7880 */
+/* ADDRESS: GOLDDE 0x0059a080 */
 void __cdecl d2_RunSoeldnerbuchDialog(unsigned char* building, int buildingId)
 {
 	FRAME f;

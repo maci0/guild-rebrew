@@ -18,6 +18,7 @@ int __cdecl ahm_FindRecipeSlot(void* p, int id);
 int __cdecl cm_RequestAhmCommand(void* m);
 
 /* ADDRESS: GOLDTL 0x004eea30 */
+/* ADDRESS: GOLDDE 0x004dae00 */
 int __cdecl ahm_RequestSetMatchingSlotValue(void* obj, int id, float fraction)
 {
 	Msg18F m;

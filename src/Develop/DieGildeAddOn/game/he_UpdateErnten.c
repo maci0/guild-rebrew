@@ -34,6 +34,7 @@ void __cdecl gm_AddTime(void*, int, int, int);
 char* __cdecl plt_FindPlantInfo(int);
 
 /* ADDRESS: GOLDTL 0x00565ab0 */
+/* ADDRESS: GOLDDE 0x0054bc00 */
 void __cdecl he_UpdateErnten(char* ev)
 {
 	char* v8;

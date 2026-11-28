@@ -3,6 +3,7 @@
 
 extern char* evt_CurrentScript;
 
+/* ADDRESS: GOLDDE 0x00420e10 */
 int __cdecl evt_SeekSemicolon(void)
 {
 	while (*(char**) (evt_CurrentScript + 0x118) < (char*) (*(int*) (evt_CurrentScript + 0x120) + *(int*) (evt_CurrentScript + 0x11c))) {

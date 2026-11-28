@@ -16,6 +16,7 @@ int __cdecl he_CountEntityActions(char* e, ENTITY_RECORD* t, int* cnt);
 int __cdecl he_HasNoActiveAction0x88(ENTITY_RECORD* t, char* e);
 double __cdecl gm_RandomFloat01(void);
 
+/* ADDRESS: GOLDDE 0x004989e0 */
 int __cdecl ai_SelectPamphletTarget(char* actor, char* unused, char* out)
 {
 	int cnt;

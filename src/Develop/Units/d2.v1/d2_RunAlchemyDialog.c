@@ -32,6 +32,7 @@ int __cdecl d2_DispatchAlchemyOrder(int, void *, int);
 void __cdecl d2_ShowGreenMessageBox(void *, char *, int);
 
 /* ADDRESS: GOLDTL 0x5848b0 */
+/* ADDRESS: GOLDDE 0x0056a570 */
 void __cdecl d2_RunAlchemyDialog(int a0)
 {
 	char msg[992];

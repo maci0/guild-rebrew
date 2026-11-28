@@ -31,6 +31,7 @@ void __cdecl d2_StartScreenFade(int, int, int, int, char*, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004e4730 */
+/* ADDRESS: GOLDDE 0x004d10d0 */
 void __cdecl cut_StartSceneCutscene(char* sceneName)
 {
 	char buf[0x80];

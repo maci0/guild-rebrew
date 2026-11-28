@@ -5,6 +5,7 @@ unsigned short* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl gm_SetEntityLevel(int, int);
 void __cdecl ch_AssignHeadIcon(unsigned short*);
 
+/* ADDRESS: GOLDDE 0x004b9d10 */
 int __cdecl cm_ExSetEntityLevel(char* command, char* result)
 {
 	unsigned short* p;

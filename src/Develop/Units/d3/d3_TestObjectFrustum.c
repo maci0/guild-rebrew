@@ -11,6 +11,7 @@ typedef int (__cdecl* D3_BBOX_QUERY_FN)(char*, char*, int);
 
 Res __cdecl d3_TestBoxAgainstFrustum(int, char*, char*);
 
+/* ADDRESS: GOLDDE 0x004314c0 */
 Res __cdecl d3_TestObjectFrustum(char* a, char* b, int c)
 {
 	Res r;

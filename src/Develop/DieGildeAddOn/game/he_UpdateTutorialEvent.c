@@ -12,6 +12,7 @@ void __cdecl main_RunGameLoop(void);
 int __cdecl d2_StepTutorialStateMachine(void);
 int __cdecl d2_OpenTutorialMainDialog(void);
 
+/* ADDRESS: GOLDDE 0x005411f0 */
 void __cdecl he_UpdateTutorialEvent(char* o)
 {
 	if (gm_InWorldHud != 0) {

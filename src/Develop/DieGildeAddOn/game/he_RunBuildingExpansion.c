@@ -30,6 +30,7 @@ void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, ch
 void __cdecl he_FreeAction(char*);
 
 /* ADDRESS: GOLDTL 0x0055fd10 */
+/* ADDRESS: GOLDDE 0x00545ee0 */
 void __cdecl he_RunBuildingExpansion(char* u)
 {
 	char* h;

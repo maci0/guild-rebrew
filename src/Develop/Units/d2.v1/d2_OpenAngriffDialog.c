@@ -24,6 +24,7 @@ void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl sv_ClearObjectSelection(void);
 void __cdecl d2_OpenTaschendiebstahlDialog(void);
 
+/* ADDRESS: GOLDDE 0x00592ab0 */
 void __cdecl d2_OpenAngriffDialog(int a)
 {
 	Req req;

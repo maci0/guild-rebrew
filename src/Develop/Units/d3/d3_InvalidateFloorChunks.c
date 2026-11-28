@@ -17,6 +17,7 @@ void __cdecl d3_InvalidateFloorChunks(char* obj)
 }
 #else
 /* ADDRESS: GOLDTL 0x0043bf20 */
+/* ADDRESS: GOLDDE 0x00434be0 */
 void __cdecl d3_InvalidateFloorChunks(char* floor)
 {
 	int i;

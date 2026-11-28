@@ -7,6 +7,7 @@ void __cdecl msx_CloseAllWaveDrivers(void);
 __declspec(dllimport) void __stdcall AIL_shutdown(void);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
+/* ADDRESS: GOLDDE 0x00424a40 */
 int __cdecl msx_ShutdownAIL(void)
 {
 	int r = 0;

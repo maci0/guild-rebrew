@@ -20,6 +20,7 @@ int __cdecl gm_GetTypeProductValue(int k);
 void __cdecl cm_RequestMoveCredits(int a, int b, char c, int n);
 void __cdecl cm_SendCopyEntityData(char* msg);
 
+/* ADDRESS: GOLDDE 0x0048f2d0 */
 int __cdecl ai_RunUpgradeZunft(char* a1, char* a2, char* a3)
 {
 	char* resolved;

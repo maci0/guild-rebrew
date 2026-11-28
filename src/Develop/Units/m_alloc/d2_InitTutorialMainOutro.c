@@ -8,6 +8,7 @@ int* __cdecl m_alloc(int size, char* tag);
 void __cdecl d2_FreeTutorialNodes(int);
 
 #pragma optimize("y", off)
+/* ADDRESS: GOLDDE 0x00569d80 */
 int* __cdecl d2_InitTutorialMainOutro(void)
 {
 	int* p;

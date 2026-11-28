@@ -23,6 +23,7 @@ void* __cdecl he_NotifyFeudEscalated(void*, void*);
 void __cdecl he_NotifyFeudEnded(void*, void*);
 
 /* ADDRESS: GOLDTL 0x0047d2a0 */
+/* ADDRESS: GOLDDE 0x0046c260 */
 int __cdecl ai_UpdateEntityFeud(char* entity)
 {
 	register char* h;

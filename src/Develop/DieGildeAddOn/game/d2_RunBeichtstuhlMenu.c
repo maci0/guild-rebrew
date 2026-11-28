@@ -11,6 +11,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_OpenBeichteDialog(int);
 
+/* ADDRESS: GOLDDE 0x00590d60 */
 void __cdecl d2_RunBeichtstuhlMenu(int building)
 {
 	int x;

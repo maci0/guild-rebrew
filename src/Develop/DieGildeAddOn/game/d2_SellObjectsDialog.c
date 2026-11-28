@@ -21,6 +21,7 @@ int __cdecl d2_ShowModalMessageBox(char*, int);
 void __cdecl gm_RemoveClientEntityLink(char*);
 void __cdecl cm_RequestMoveCredits(int, int, char, int);
 
+/* ADDRESS: GOLDDE 0x0059c4b0 */
 void __cdecl d2_SellObjectsDialog(int n, char** items)
 {
 	char buf[0x400];

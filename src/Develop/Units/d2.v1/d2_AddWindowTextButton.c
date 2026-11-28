@@ -5,6 +5,7 @@ int __cdecl d2_CreateTextButton(int x, int y, int a3, int a4);
 void __cdecl d2_AddWindowChild(int r, int i);
 
 /* ADDRESS: GOLDTL 0x00468df0 */
+/* ADDRESS: GOLDDE 0x0045c770 */
 int __cdecl d2_AddWindowTextButton(int offsetX, int offsetY, int resourceId, int text, int win)
 {
 	int r;

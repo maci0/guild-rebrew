@@ -17,6 +17,7 @@ char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl he_FreeAction(char*);
 
+/* ADDRESS: GOLDDE 0x00554320 */
 void __cdecl he_AllocKillPlayer(char* e)
 {
 	char* o;

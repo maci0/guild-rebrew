@@ -18,6 +18,7 @@ unsigned short __cdecl gm_RandomMod(int n);
 
 /* ADDRESS: GOLD 0x004a91a0 */
 /* ADDRESS: GOLDTL 0x004a92c0 */
+/* ADDRESS: GOLDDE 0x00497600 */
 int __cdecl ai_PreparePrivBeleidigung(int unused1, char* actor, int ctx, int unused4, char* out)
 {
 	unsigned short ids[12];

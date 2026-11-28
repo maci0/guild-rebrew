@@ -25,6 +25,7 @@ float __cdecl eval_ObjektPreis2Credits(int, int);
 void __cdecl cm_SendUpdateSlot80(char*, char);
 
 /* ADDRESS: GOLDTL 0x004b1320 */
+/* ADDRESS: GOLDDE 0x0049f640 */
 int __cdecl hst_AdjustMarketCategoryPrices(int unused1, int unused2, char* argumentText)
 {
 	float f;

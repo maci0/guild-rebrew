@@ -2,6 +2,7 @@
 extern char g_679e00[];
 #include "Develop/Units/Error/error_message.h"
 
+/* ADDRESS: GOLDDE 0x00427c60 */
 int __cdecl tb_OpenFunction(TIMER_CALLBACK a, unsigned int b)
 {
 	int i;

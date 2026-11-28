@@ -1,3 +1,4 @@
+extern char tp_VideoListHead[];
 /* Drains the pending queue through the two notification helpers, then
  * uninitialises COM. */
 
@@ -7,17 +8,18 @@ void __cdecl ReleaseVideoInterfaces(char*);
 void __cdecl FreeVideoListNode(struct Node*);
 
 /* ADDRESS: GOLDTL 0x0041e650 */
+/* ADDRESS: GOLDDE 0x0041c080 */
 void __cdecl ShutdownVideo(void)
 {
 	char* node;
 
-	node = *(char**) 0x6b6f84;
+	node = *(char**) &tp_VideoListHead;
 	if (node != 0) {
 		do {
 			ReleaseVideoInterfaces(node);
-			node = *(char**) 0x6b6f84;
+			node = *(char**) &tp_VideoListHead;
 			FreeVideoListNode((struct Node*) node);
-			node = *(char**) 0x6b6f84;
+			node = *(char**) &tp_VideoListHead;
 		} while (node != 0);
 	}
 	CoUninitialize();

@@ -67,6 +67,7 @@ void __cdecl d2_DestroyForm(int h);
 
 #pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x005a2580 */
+/* ADDRESS: GOLDDE 0x00587400 */
 void __cdecl d2_RunDunkleEckeOwnerDialog(char* building, char* context, char* entry)
 {
 	struct sel sel[3];

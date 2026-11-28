@@ -27,6 +27,7 @@ void __cdecl d2_DestroyForm(int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl d2_ShowModalMessageBox(char*, int);
 
+/* ADDRESS: GOLDDE 0x00572550 */
 int __cdecl d2_RunFriedhofDialog(char* entity, int a2, unsigned char a3, int choice)
 {
 	int r;

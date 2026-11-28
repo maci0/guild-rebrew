@@ -25,6 +25,7 @@ int __cdecl d2_ShowGraveyardConfirm(char*, int, unsigned char);
 int __cdecl d2_RunRentGraveDialog(char*, int, unsigned char);
 int __cdecl main_RunFrameLoop(void*, int);
 
+/* ADDRESS: GOLDDE 0x00572950 */
 void __cdecl d2_RunRentAGraveMenu(char* input, Req* s)
 {
 	int ids[2];

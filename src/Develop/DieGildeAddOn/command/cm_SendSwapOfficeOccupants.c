@@ -15,6 +15,7 @@ typedef struct
 
 #pragma pack(pop)
 
+/* ADDRESS: GOLDDE 0x004b4360 */
 void __cdecl cm_SendSwapOfficeOccupants(Small10* body)
 {
 	char buf[0x9c];

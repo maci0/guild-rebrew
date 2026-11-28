@@ -10,6 +10,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_UpdateFloatingStatTexts(void);
 void __cdecl d2_AppendPendingPlayerNames(int);
 
+/* ADDRESS: GOLDDE 0x004d1760 */
 void __cdecl cut_WaitSeconds(int secs)
 {
 	int start;

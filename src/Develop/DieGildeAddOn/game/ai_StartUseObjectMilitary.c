@@ -36,6 +36,7 @@ int __cdecl ai_SelectBestMethod(int kind, int id, int a3, Pos* b, Pos* a);
 int __cdecl gm_RandomMod(unsigned short n);
 
 /* ADDRESS: GOLDTL 0x00499dc0 */
+/* ADDRESS: GOLDDE 0x00488800 */
 int __cdecl ai_StartUseObjectMilitary(int methodKindArg, char* e, int busy, Pos* out1, Pos* out2)
 {
 	Pos a;

@@ -9,6 +9,7 @@ typedef struct
 } ELECTION_TRADE_BODY;
 // SIZE 0x14
 
+/* ADDRESS: GOLDDE 0x004b40c0 */
 void __cdecl cm_RequestElectionOrTrade(ELECTION_TRADE_BODY* body)
 {
 	char buf[0x9c];

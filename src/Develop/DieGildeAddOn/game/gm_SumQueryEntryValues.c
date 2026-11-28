@@ -4,6 +4,7 @@ void* __cdecl gm_QueryEntities(int, int, int, int);
 void* __cdecl gm_NextEntityQueryMatch(void);
 
 /* ADDRESS: GOLDTL 0x0050b810 */
+/* ADDRESS: GOLDDE 0x004f8000 */
 int __cdecl gm_SumQueryEntryValues(int list)
 {
 	void* entry;

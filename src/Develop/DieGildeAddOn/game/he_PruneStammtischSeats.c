@@ -19,6 +19,7 @@ void __cdecl cm_SendLogAction(char* s);
 void __cdecl cm_SendTraceEnd(char* s);
 void __cdecl cm_RequestJoinLeaveElection(Msg* msg);
 
+/* ADDRESS: GOLDDE 0x0052da50 */
 void __cdecl he_PruneStammtischSeats(void)
 {
 	char* e;

@@ -2,6 +2,7 @@
 
 typedef void (__stdcall* f)(void*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x004663a0 */
 void __cdecl d3_AcquireBackBuffer(void)
 {
 	void* obj;

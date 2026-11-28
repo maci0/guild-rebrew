@@ -24,6 +24,7 @@ void __cdecl he_StartDeathPactPrompt(char* a0)
 	*(int*) (a0 + 0x70) = 0;
 }
 
+/* ADDRESS: GOLDDE 0x0055f1f0 */
 void __cdecl he_AcceptDeathPactPayment(void* recipient, void* entity)
 {
 	char buf[0x400];

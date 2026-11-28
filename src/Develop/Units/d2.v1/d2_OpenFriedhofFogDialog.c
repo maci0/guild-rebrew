@@ -30,6 +30,7 @@ void __cdecl d3_EndCameraAndUiMode(void);
  * it here instead of overriding the locked CFLAGS. */
 #pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x0058dbe0 */
+/* ADDRESS: GOLDDE 0x005738a0 */
 void __cdecl d2_OpenFriedhofFogDialog(int building)
 {
 	int query[0x14];

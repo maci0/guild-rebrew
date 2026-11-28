@@ -62,6 +62,7 @@ void __cdecl cm_SendSetGebBesitzer(int, int, int);
 float __cdecl gm_RandomQuadratic(void);
 
 /* ADDRESS: GOLDTL 0x00509fc0 */
+/* ADDRESS: GOLDDE 0x004f5040 */
 void __cdecl gm_LiquidateEntityAssets(unsigned short* subjectRecord, char* reportText, int resetAttributes)
 {
 	char buf[0x800];

@@ -40,6 +40,7 @@ void __cdecl d2_ShowIntimidationDialog(void);
 
 /* The message struct is local to the branch that sends it: with it at function
    scope the header stores before the e+4 load issue ahead of the push. */
+/* ADDRESS: GOLDDE 0x005b7c40 */
 int __cdecl gm_RunIntimidationAction(unsigned char* obj, char* request)
 {
 	Req req;

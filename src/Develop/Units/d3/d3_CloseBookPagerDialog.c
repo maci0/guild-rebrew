@@ -40,6 +40,7 @@ void __cdecl d3_SetFogEnabled(int v);
 void __cdecl m_FreeTracked(void* p);
 void __cdecl sb_PlayVoice(int h, char* s, int a, int b, int c, int d, int e);
 
+/* ADDRESS: GOLDDE 0x0051d820 */
 void __cdecl d3_CloseBookPagerDialog(Pager* p)
 {
 	char* e;

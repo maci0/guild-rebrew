@@ -37,6 +37,7 @@ void __cdecl d2_FlushQueuedQuads(int a, int b, int c);
 int __cdecl d2_BuildQuadVertices(int x, int y, int w, int h, RENDER_QUAD* q);
 void __cdecl d2_SetQuadVertexColor(RENDER_QUAD* q, unsigned char r, unsigned char g, unsigned char b);
 
+/* ADDRESS: GOLDDE 0x0046af70 */
 RENDER_QUAD* __cdecl d2_QueueTexturedQuad(int x, int y, int w, int h, int tex, Rect47bf* src)
 {
 	int cw;

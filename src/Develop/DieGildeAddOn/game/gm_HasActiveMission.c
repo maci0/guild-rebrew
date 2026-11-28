@@ -3,6 +3,7 @@
 
 extern char gm_MissionJobs[];
 
+/* ADDRESS: GOLDDE 0x004a1f70 */
 int __cdecl gm_HasActiveMission(int key)
 {
 	int p;

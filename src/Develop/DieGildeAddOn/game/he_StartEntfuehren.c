@@ -11,6 +11,7 @@ char* __cdecl he_fn_Handlung(void);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x0054ee30 */
 void __cdecl he_StartEntfuehren(char* o)
 {
 	char* p;

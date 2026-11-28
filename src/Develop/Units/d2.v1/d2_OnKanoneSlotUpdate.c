@@ -8,6 +8,7 @@ extern char d2_KanoneHitTable[];
 extern int g_774a1c;
 
 /* ADDRESS: GOLDTL 0x00586bd0 */
+/* ADDRESS: GOLDDE 0x0056c890 */
 int __cdecl d2_OnKanoneSlotUpdate(struct DATENSATZ_KOPIE* datensatz)
 {
 	if (datensatz == 0) {

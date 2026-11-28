@@ -5,6 +5,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x00537600 */
 void __cdecl he_StartPeriodicStipend(char* u)
 {
 	*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;

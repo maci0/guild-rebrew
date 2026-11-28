@@ -1,3 +1,4 @@
+extern char gm_EntitySlotTable[];
 // for slots: if([p]!=0xffff) ai_UpdateEntityDrives(p).
 
 void __cdecl ai_UpdateEntityDrives(int);
@@ -15,10 +16,11 @@ void __cdecl ai_UpdateAllEntityDrives(void)
 }
 #else
 /* ADDRESS: GOLDTL 0x0047cf30 */
+/* ADDRESS: GOLDDE 0x0046bef0 */
 void __cdecl ai_UpdateAllEntityDrives(void)
 {
 	int p;
-	for (p = 0x7f4ca0; p < 0x85a0a0; p += 0x21c) {
+	for (p = (int) &gm_EntitySlotTable; p < ((int) &gm_EntitySlotTable + 0x65400); p += 0x21c) {
 		if (*(unsigned short*) p != 0xffff) {
 			ai_UpdateEntityDrives(p);
 		}

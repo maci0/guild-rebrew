@@ -50,6 +50,7 @@ int __cdecl gm_CheckPrivilege(int, unsigned short*, int*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x005a2230 */
 void __cdecl d2_ShowBeweiseDetails(unsigned short* who, unsigned short* e)
 {
 	int h;

@@ -83,6 +83,7 @@ void __cdecl ReportClientMessage(const char*);
 void __cdecl d3_WriteEventTable(int, void*);
 
 /* ADDRESS: GOLDTL 0x00446540 */
+/* ADDRESS: GOLDDE 0x0043dfa0 */
 void __cdecl d3_WriteSceneNodeTree(int stream, Node* n)
 {
 	char buf[0x100];

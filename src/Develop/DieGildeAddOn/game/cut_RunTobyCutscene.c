@@ -4,6 +4,7 @@ void __cdecl cut_WaitTicks(int a);
 void __cdecl cut_CleanupCutscene(void);
 
 /* ADDRESS: GOLDTL 0x004e1920 */
+/* ADDRESS: GOLDDE 0x004ce340 */
 void __cdecl cut_RunTobyCutscene(int cutscene)
 {
 	cut_StartSceneCutscene("cutscene_toby.ed3");

@@ -9,6 +9,7 @@ int __cdecl amt_SelectOfficeCandidates(void*, int, void*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, void*, int, int, void*);
 
+/* ADDRESS: GOLDDE 0x004d8ab0 */
 void __cdecl amt_NotifyLowRankEligibility(void* entity)
 {
 	char items[0x48];

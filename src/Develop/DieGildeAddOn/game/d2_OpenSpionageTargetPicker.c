@@ -19,6 +19,7 @@ void __cdecl d2_OpenTargetPicker(Query*, char*, int, void*);
 void __cdecl d2_RunSpionageDialog(void);
 void __cdecl d3_EndCameraAndUiMode(void);
 
+/* ADDRESS: GOLDDE 0x005854b0 */
 void __cdecl d2_OpenSpionageTargetPicker(void)
 {
 	Query q;

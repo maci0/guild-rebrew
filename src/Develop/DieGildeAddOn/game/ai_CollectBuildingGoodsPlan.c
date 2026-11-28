@@ -69,6 +69,7 @@ void __cdecl cm_RequestClearLagerslot(int, int);
 void __cdecl ai_CalcProductionGoodProfit(PRODUCTION_GOODS_RECORD*);
 
 /* ADDRESS: GOLDTL 0x004849b0 */
+/* ADDRESS: GOLDDE 0x00473960 */
 void __cdecl ai_CollectBuildingGoodsPlan(char* entity, char* prod, char* craft)
 {
 	Stats st;

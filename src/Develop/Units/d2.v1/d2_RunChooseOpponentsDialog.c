@@ -33,6 +33,7 @@ int __cdecl main_RunFrameLoop(void (__cdecl*)(int), int);
 int __cdecl d2_GetControlValue(int);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x00525680 */
 void __cdecl d2_RunChooseOpponentsDialog(int n)
 {
 	int h;

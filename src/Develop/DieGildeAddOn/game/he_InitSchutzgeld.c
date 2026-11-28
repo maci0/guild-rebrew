@@ -8,6 +8,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x005397d0 */
 void __cdecl he_InitSchutzgeld(char* o)
 {
 	*(int*) (o + 0x84) = -1;

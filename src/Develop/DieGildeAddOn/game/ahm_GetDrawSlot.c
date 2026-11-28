@@ -4,6 +4,7 @@ extern ALCHEMY_DRAW_SLOT ahm_DrawSlots[3];
 
 /* ADDRESS: GOLD 0x004ec2d0 */
 /* ADDRESS: GOLDTL 0x004ee060 */
+/* ADDRESS: GOLDDE 0x004da4a0 */
 char* __cdecl ahm_GetDrawSlot(int i)
 {
 	if (i < 0 || i >= 3) {

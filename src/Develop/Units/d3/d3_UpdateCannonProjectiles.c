@@ -1,3 +1,5 @@
+extern const float d3_ZeroVec4[4];
+extern char g_662d80[];
 /*
  * Per frame update of the eight "kugel" sprite slots.
  *
@@ -54,6 +56,7 @@ void __cdecl d3_ReleaseLightSlot(int);
 void __cdecl gm_ApplyCannonImpact(int, int, int, int*);
 
 /* ADDRESS: GOLDTL 0x004efde0 */
+/* ADDRESS: GOLDDE 0x004dc150 */
 void __cdecl d3_UpdateCannonProjectiles(void)
 {
 	int save;
@@ -106,7 +109,7 @@ void __cdecl d3_UpdateCannonProjectiles(void)
 						}
 						if (runs != 0) {
 							if (SLOTS[slot].objects[i] == 0) {
-								SLOTS[slot].objects[i] = d3_CreateSceneModelObject(0, (float*) 0x662d70, (float*) 0x662d80, (char*) 0x68ff14);
+								SLOTS[slot].objects[i] = d3_CreateSceneModelObject(0, (float*) &d3_ZeroVec4, (float*) &g_662d80, "kugel");
 								*(unsigned char*) (SLOTS[slot].objects[i] + 0x215) |= 1;
 								*(unsigned char*) (SLOTS[slot].objects[i] + 0x216) |= 3;
 								*(unsigned char*) (SLOTS[slot].objects[i] + 0x215) &= ~2;

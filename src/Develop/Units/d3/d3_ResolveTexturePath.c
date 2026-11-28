@@ -10,6 +10,7 @@ extern char g_6b89f0[];
 
 int __cdecl vfs_ResolvePath(char*, int, int, char*);
 
+/* ADDRESS: GOLDDE 0x00450f00 */
 void __cdecl d3_ResolveTexturePath(char* name)
 {
 	char buf[0x100];

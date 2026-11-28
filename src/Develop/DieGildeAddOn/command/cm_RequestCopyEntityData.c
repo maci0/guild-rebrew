@@ -5,6 +5,7 @@ extern float ai_DifficultyRate;
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b2e80 */
 void __cdecl cm_RequestCopyEntityData(int targetId, int sourceId, int value, int mode)
 {
 	char buf[0x9c];

@@ -4,6 +4,7 @@ int __cdecl he_StartHandlungSearch(int a, int b, int c, int d, int e);
 unsigned short __cdecl gm_RandomMod(int n);
 
 /* ADDRESS: GOLDTL 0x0048fb10 */
+/* ADDRESS: GOLDDE 0x0047e9e0 */
 int __cdecl ai_PlanDeathPact(int unused, char* actor, char* req, char* out)
 {
 	char* worker;

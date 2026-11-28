@@ -6,6 +6,7 @@
 
 unsigned char* __cdecl gm_LookupEntityRecordById(int h);
 
+/* ADDRESS: GOLDDE 0x004baf80 */
 int __cdecl cm_ExModifyEntityLevel(char* o, char* out)
 {
 	unsigned char* p;

@@ -9,6 +9,7 @@ int __cdecl evt_EvaluateExpression(int);
 int __cdecl evt_PopCallFrame(int);
 void __cdecl evt_RequestScriptExit(int);
 
+/* ADDRESS: GOLDDE 0x00421f90 */
 void __cdecl evt_ReturnFromFunction(void)
 {
 	int x;

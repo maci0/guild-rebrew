@@ -26,6 +26,7 @@ int __cdecl cm_SendSetHE(int, char*);
 void __cdecl cm_SendCopyEntityData(STREIFE_REDIRECT_MSG*);
 
 /* ADDRESS: GOLDTL 0x00531320 */
+/* ADDRESS: GOLDDE 0x00519ca0 */
 void __cdecl he_RedirectStreifeSelection(void)
 {
 	STREIFE_REDIRECT_MSG msg;

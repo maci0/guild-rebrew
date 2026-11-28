@@ -1,3 +1,4 @@
+extern char g_7e4260[];
 #include "Develop/client_types.h"
 
 
@@ -58,6 +59,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x0059d060 */
+/* ADDRESS: GOLDDE 0x00582300 */
 int __cdecl d2_RunTaschendiebstahlDialog(int unused, char* param)
 {
 	Packet pkt;
@@ -107,7 +109,7 @@ int __cdecl d2_RunTaschendiebstahlDialog(int unused, char* param)
 					for (n = 0; n < 8; n++)
 						pkt.ids[n] = -1;
 					n = 0;
-					for (p = (char*) 0x7e4260; (int) p < 0x7e42e0; p += 4) {
+					for (p = (char*) &g_7e4260; (int) p < ((int) &g_7e4260 + 0x80); p += 4) {
 						if (n >= 6)
 							break;
 						player = *(Player**) p;
@@ -124,7 +126,7 @@ int __cdecl d2_RunTaschendiebstahlDialog(int unused, char* param)
 						cm_SendCopyEntityData(&pkt);
 						d3snd_PlayWorkerOrderVoice();
 						count = 0;
-						for (p = (char*) 0x7e4260; (int) p < 0x7e42e0; p += 4) {
+						for (p = (char*) &g_7e4260; (int) p < ((int) &g_7e4260 + 0x80); p += 4) {
 							player = *(Player**) p;
 							if (player != 0 && player->x188 != 0)
 								count++;
@@ -139,7 +141,7 @@ int __cdecl d2_RunTaschendiebstahlDialog(int unused, char* param)
 				else {
 					flag = 1;
 					d2_DialogCloseRequested = 2;
-					for (p = (char*) 0x7e4260; (int) p < 0x7e42e0; p += 4) {
+					for (p = (char*) &g_7e4260; (int) p < ((int) &g_7e4260 + 0x80); p += 4) {
 						player = *(Player**) p;
 						if (player != 0 && player->x188 != 0)
 							he_AssignActionSlot(0, 0, *(unsigned short*) player, dlg2);

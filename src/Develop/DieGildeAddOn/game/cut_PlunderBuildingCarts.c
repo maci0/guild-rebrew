@@ -16,6 +16,7 @@ void __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 void __cdecl cm_RequestMoveCredits(int, int, char, int);
 
 /* ADDRESS: GOLDTL 0x004d52a0 */
+/* ADDRESS: GOLDDE 0x004c21f0 */
 int __cdecl cut_PlunderBuildingCarts(int* cutscene, char* building, int* attacker,
     int unusedDefender, float scale)
 {

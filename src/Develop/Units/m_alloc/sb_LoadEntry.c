@@ -123,6 +123,7 @@ int __cdecl sb_LoadEntry(char* a0, SB_LOAD_STATE* loadState)
 }
 #else
 /* ADDRESS: GOLDTL 0x00422ad0 */
+/* ADDRESS: GOLDDE 0x0041f950 */
 int __cdecl sb_LoadEntry(char *a0, SB_LOAD *loadState)
 {
     FILE *f;

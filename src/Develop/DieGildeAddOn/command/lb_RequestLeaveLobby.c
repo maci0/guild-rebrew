@@ -6,6 +6,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004bba00 */
 void __cdecl lb_RequestLeaveLobby(int unused)
 {
 	char buf[0x9c];

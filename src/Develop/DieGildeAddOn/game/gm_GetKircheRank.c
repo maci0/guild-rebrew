@@ -13,6 +13,7 @@ typedef struct
 
 extern char gm_EntitySlotTable[];
 
+/* ADDRESS: GOLDDE 0x004f9340 */
 int __cdecl gm_GetKircheRank(int entityIdx, int add)
 {
 	int r;

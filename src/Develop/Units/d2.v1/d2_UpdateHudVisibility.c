@@ -30,6 +30,7 @@ void __cdecl d2_SetFormVisibility(int h, int v);
 void __cdecl d2_SetEventLeisteVisibility(int v);
 void __cdecl d2_SetSlotVisibility(int h, int v);
 
+/* ADDRESS: GOLDDE 0x00510370 */
 void __cdecl d2_UpdateHudVisibility(int show)
 {
 	int i;

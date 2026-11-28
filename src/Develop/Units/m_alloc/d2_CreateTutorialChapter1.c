@@ -52,6 +52,7 @@ void __cdecl d2_IsTutorialStepAllowed(void);
 void __cdecl d2_UpdateTutCh1FocusStep(void);
 void __cdecl d2_UpdateTutCh1Cat0aStep(void);
 
+/* ADDRESS: GOLDDE 0x00566b90 */
 int* __cdecl d2_CreateTutorialChapter1(void)
 {
 	int* first;

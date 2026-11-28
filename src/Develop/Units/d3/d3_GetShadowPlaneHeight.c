@@ -161,6 +161,7 @@ done:
 }
 #else
 /* ADDRESS: GOLDTL 0x00457140 */
+/* ADDRESS: GOLDDE 0x0044c900 */
 float __cdecl d3_GetShadowPlaneHeight(D3_SHADOW_H_OBJ* node, D3_SHADOW_H_CTX* ctx)
 {
 	D3_SHADOW_H_OBJ* p;

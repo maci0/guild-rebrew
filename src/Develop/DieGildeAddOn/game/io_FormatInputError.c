@@ -4,6 +4,7 @@ extern char str_Error_hex[];
 
 #include <windows.h>
 
+/* ADDRESS: GOLDDE 0x004103e0 */
 void __cdecl io_FormatInputError(int unused, int hr, char* fmt, ...)
 {
 	char buf[0x400];

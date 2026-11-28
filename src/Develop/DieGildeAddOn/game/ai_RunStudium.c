@@ -3,6 +3,7 @@ void __cdecl cm_SendCopyEntityData(int a1);
 void __cdecl cm_RequestChangeBits(int a1, int a2, int a3, int a4, int a5);
 
 /* ADDRESS: GOLDTL 0x004a1080 */
+/* ADDRESS: GOLDDE 0x0048fab0 */
 int __cdecl ai_RunStudium(char* a0, char* a1, char* a2)
 {
 	char packet[0xf8];

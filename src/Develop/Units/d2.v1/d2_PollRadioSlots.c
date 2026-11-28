@@ -4,6 +4,7 @@ extern D2_RADIO_SLOT d2_RadioSlots[8];
 void __cdecl d2_PollRadioSlotControl(int *id);
 
 /* ADDRESS: GOLDTL 0x004be530 */
+/* ADDRESS: GOLDDE 0x004ac0b0 */
 void __cdecl d2_PollRadioSlots(void)
 {
     D2_RADIO_SLOT *tp_eintrag;

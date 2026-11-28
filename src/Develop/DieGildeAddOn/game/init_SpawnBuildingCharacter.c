@@ -20,6 +20,7 @@ void __cdecl ch_SpawnEntityCharacter(char* o, int h, int x, int y, int view, cha
 void __cdecl ch_PreloadCharacterMotions(char* v, int n, ...);
 void __cdecl ch_SetVisible(char* v, int a);
 
+/* ADDRESS: GOLDDE 0x004e9ef0 */
 char* __cdecl init_SpawnBuildingCharacter(int id, int type, int sub, int x, int y)
 {
 	int old;

@@ -13,11 +13,12 @@ int __cdecl ch_AllocMap(int a)
 }
 #else
 /* ADDRESS: GOLDTL 0x00408220 */
+/* ADDRESS: GOLDDE 0x004073c0 */
 void __cdecl ch_AllocMap(int a1)
 {
 	void* p;
 
-	p = m_alloc(0x14, (void*) 0x675ac0);
+	p = m_alloc(0x14, "ch_map");
 	*(int*) ((char*) p + 0x10) = a1;
 }
 #endif

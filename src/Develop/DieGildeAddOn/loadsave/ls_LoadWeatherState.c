@@ -13,6 +13,7 @@ extern float g_77658c;
 
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 
+/* ADDRESS: GOLDDE 0x005c9fb0 */
 int __cdecl ls_LoadWeatherState(void* fh)
 {
 	if (ls_ReadVfsDataChecked(&g_7763a0, 4, 1, fh) == 0) {

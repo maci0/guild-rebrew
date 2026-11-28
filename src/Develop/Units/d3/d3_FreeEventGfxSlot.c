@@ -9,6 +9,7 @@ int __cdecl d3_FindSceneObject(int, int, char*, int);
 void __cdecl he_ArrangeEntityMarkers(char*);
 
 
+/* ADDRESS: GOLDDE 0x0052ce60 */
 void __cdecl d3_FreeEventGfxSlot(int* s)
 {
 	char* h;

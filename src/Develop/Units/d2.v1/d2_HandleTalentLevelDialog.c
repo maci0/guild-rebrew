@@ -1,3 +1,4 @@
+extern char g_7f4c00[];
 /* panel/slot record edited by this handler */
 typedef struct {
 	char p0[8];
@@ -32,6 +33,7 @@ void __cdecl io_AppendText(int a0);
 void __cdecl d3snd_QueueSound(int a0, int a1, char* fmt, int a3, int a4);
 
 /* ADDRESS: GOLDTL 0x00555a80 */
+/* ADDRESS: GOLDDE 0x0053be30 */
 void __cdecl d2_HandleTalentLevelDialog(Panel* p)
 {
 	ENTITY_RECORD* rec;
@@ -46,7 +48,7 @@ void __cdecl d2_HandleTalentLevelDialog(Panel* p)
 	if (gm_InWorldHud == 0) {
 		return;
 	}
-	if (gm_CompareGameTime(p->name, (char*) 0x7f4c00) == 1) {
+	if (gm_CompareGameTime(p->name, (char*) &g_7f4c00) == 1) {
 		return;
 	}
 	if (p->state == -2 || p->state == -1) {
@@ -87,7 +89,7 @@ void __cdecl d2_HandleTalentLevelDialog(Panel* p)
 	return;
 open:
 	if (p->handle == 0) {
-		d2_CreateActionPopupSlot(p, 0, 0, (char*) 0x6a5ec4, 0x5ec);
+		d2_CreateActionPopupSlot(p, 0, 0, "SPECIAL\\TALENT_STUFE", 0x5ec);
 	}
 	if (p->handle == 0) {
 		he_FreeAction(p);
@@ -98,16 +100,16 @@ open:
 	io_AppendText(0x16c8);
 	v = p->base + (int) p->kind * 6 + 0x16c9;
 	io_AppendText(v);
-	d3snd_QueueSound(-7, 0, (char*) 0x6a5e40, 0, 0x64);
-	d3snd_QueueSound(-8, 0, (char*) 0x6a5eb4, p->base + (int) p->kind * 6, 0xfa);
+	d3snd_QueueSound(-7, 0, "FanfarePositivHeldenhaftKurz", 0, 0x64);
+	d3snd_QueueSound(-8, 0, "_TALENT_MAIN", p->base + (int) p->kind * 6, 0xfa);
 	if (p->sub < 6) {
 		io_AppendText(p->sub + 0x16e6);
-		d3snd_QueueSound(-8, 0, (char*) 0x6a5ea4, p->sub - 1, 0x64);
+		d3snd_QueueSound(-8, 0, "_TALENT_STUFE", p->sub - 1, 0x64);
 	} else {
 		io_AppendText((int) p->kind + 0x16ec);
-		d3snd_QueueSound(-8, 0, (char*) 0x6a5e98, (int) p->kind, 0x64);
+		d3snd_QueueSound(-8, 0, "_TALENT_MAX", (int) p->kind, 0x64);
 	}
-	d3snd_QueueSound(-7, 0, (char*) 0x67d908, -1, 0);
+	d3snd_QueueSound(-7, 0, "MausclickLinks_s_01", -1, 0);
 	d2_SetForm(*(int*) (p->handle + 8), 2);
 	io_AppendText(0x16f1);
 	p->state = 1;

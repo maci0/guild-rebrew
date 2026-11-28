@@ -1,6 +1,7 @@
 // fcn_004d0cd0 — first index holding -1 in the 16-int array, else -1.
 
 /* ADDRESS: GOLDTL 0x004d1d20 */
+/* ADDRESS: GOLDDE 0x004bf010 */
 int __cdecl gm_FindFirstFreeDuelistSlot(int* slots)
 {
 	int i;

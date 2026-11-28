@@ -11,6 +11,7 @@ void __cdecl d3_BuildTerrainTileMeshes(Tile*);
 void __cdecl d3_RebuildFloorMeshes(char*);
 
 /* ADDRESS: GOLDTL 0x0043c2c0 */
+/* ADDRESS: GOLDDE 0x00434e90 */
 void __cdecl d3_BuildFloorGeometry(int* floor)
 {
 	unsigned char div[3];

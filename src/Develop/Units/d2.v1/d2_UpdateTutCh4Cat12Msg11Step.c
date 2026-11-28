@@ -31,6 +31,7 @@ extern volatile int gm_GameTicks;
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
+/* ADDRESS: GOLDDE 0x00565370 */
 int __cdecl d2_UpdateTutCh4Cat12Msg11Step(int* ev)
 {
 	struct item* p;

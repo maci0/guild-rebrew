@@ -41,6 +41,7 @@ int __cdecl sb_CheckVoicePlaying(int);
 void __cdecl sb_StopVoice(int, int);
 int __cdecl d3snd_PlaySoundEffect(int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x00566470 */
 int __cdecl d2_ShowTutorialStep(void)
 {
 	int k;

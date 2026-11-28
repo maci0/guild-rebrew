@@ -4,6 +4,7 @@ extern short io_ActiveCursorX;
 extern int io_PolledCursorState[];
 extern int io_ActiveInputState[];
 
+/* ADDRESS: GOLDDE 0x00410330 */
 void __cdecl io_ClearInputState(void)
 {
 	((int*)&io_ActiveCursorX)[6] = 0;

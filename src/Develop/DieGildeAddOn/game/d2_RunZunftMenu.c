@@ -15,6 +15,7 @@ int __cdecl amt_CheckHighOfficeEligibility(char*);
 void __cdecl d2_RunGildenkasseDialog(char*);
 void __cdecl d2_RunHighOfficePrivilegeDialog(void);
 
+/* ADDRESS: GOLDDE 0x0058f8e0 */
 void __cdecl d2_RunZunftMenu(char* e)
 {
 	int a;

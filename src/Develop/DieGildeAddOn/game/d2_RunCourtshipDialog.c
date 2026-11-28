@@ -32,6 +32,7 @@ extern pos14_7f4c00 gm_GameTime;
 extern char gm_EntitySlotTable[];
 
 /* ADDRESS: GOLDTL 0x005d3120 */
+/* ADDRESS: GOLDDE 0x005b4980 */
 int __cdecl d2_RunCourtshipDialog(int entity, int* request)
 {
 	int mode;

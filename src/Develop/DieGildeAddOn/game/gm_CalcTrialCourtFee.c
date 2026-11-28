@@ -8,6 +8,7 @@ extern unsigned char gm_ActiveTownIndex;
 int __cdecl gm_AmountToUnits(int a, unsigned char b);
 
 /* ADDRESS: GOLDTL 0x00493dc0 */
+/* ADDRESS: GOLDDE 0x00482c10 */
 int __cdecl gm_CalcTrialCourtFee(unsigned short* accuser, unsigned short* accused)
 {
 	int x;

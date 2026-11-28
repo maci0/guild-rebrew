@@ -45,6 +45,7 @@ void __cdecl d2_DestroyForm(int handle);
 void __cdecl d2_RunDunkleEckeOwnerDialog(char* a, char* b, char* c);
 
 /* ADDRESS: GOLDTL 0x005a2970 */
+/* ADDRESS: GOLDDE 0x005877f0 */
 void __cdecl d2_ShowDunkleEcke(char* building, char* a1)
 {
 	struct sel sel[3];

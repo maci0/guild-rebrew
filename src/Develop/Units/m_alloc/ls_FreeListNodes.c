@@ -3,6 +3,7 @@
 void __cdecl m_FreeTracked(void*);
 void __cdecl ls_FreeListNodes(void* p);
 
+/* ADDRESS: GOLDDE 0x00596360 */
 void __cdecl ls_FreeListNodes(void* p)
 {
 	void* q;

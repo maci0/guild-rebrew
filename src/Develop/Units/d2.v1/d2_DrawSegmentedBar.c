@@ -5,6 +5,7 @@ extern int d2_CurrentWindowId;
 
 void __cdecl d2_AddElementToWindow(int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x0051ca50 */
 void __cdecl d2_DrawSegmentedBar(int x0, int y, int len, int t)
 {
 	int w;

@@ -40,6 +40,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005d2ec0 */
+/* ADDRESS: GOLDDE 0x005b4720 */
 int __cdecl d2_RunWerbungSelectDialog(char* a0)
 {
 	int count;

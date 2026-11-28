@@ -35,6 +35,7 @@ void __cdecl he_FreeAction(struct unit*);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x00549a20 */
 void __cdecl he_StartGebaeudeReparieren(struct unit* u)
 {
 	char* e;

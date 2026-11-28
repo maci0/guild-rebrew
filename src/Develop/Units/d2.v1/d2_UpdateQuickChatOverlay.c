@@ -20,6 +20,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 
 /* ADDRESS: GOLDTL 0x00536b10 */
+/* ADDRESS: GOLDDE 0x0051e4d0 */
 void __cdecl d2_UpdateQuickChatOverlay(void)
 {
 	if (main_FrameHandlerStack[g_774650].fn != d2_RunChatConsole &&

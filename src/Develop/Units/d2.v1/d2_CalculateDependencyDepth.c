@@ -8,6 +8,7 @@
 
 extern int g_85ab60;
 
+/* ADDRESS: GOLDDE 0x004f94c0 */
 int __cdecl d2_CalculateDependencyDepth(int i)
 {
 	int a;

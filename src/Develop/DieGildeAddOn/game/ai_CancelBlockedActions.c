@@ -25,6 +25,7 @@ char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl he_AssignActionSlot(char* o, int a, int id, int b);
 
+/* ADDRESS: GOLDDE 0x00476d30 */
 void __cdecl ai_CancelBlockedActions(char* e, int k)
 {
 	char* q;

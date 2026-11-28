@@ -23,6 +23,7 @@ extern Pair_99f800 cm_CrimeEvidenceLinks[0x800];
 void* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl FindStraftatIndexById(int b);
 
+/* ADDRESS: GOLDDE 0x004e21b0 */
 int __cdecl gs_CollectEvidenceIndicesForTarget(int targetId, int* outIndices, unsigned short holderSlot)
 {
 	char* holder;

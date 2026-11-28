@@ -17,6 +17,7 @@ void __cdecl d3_SetSkyLayerScrollSpeed(int h, int s, int a);
 void __cdecl d3_SetSkyLayerTransition(int h, int s, int a, float b);
 
 /* ADDRESS: GOLDTL 0x004e4b60 */
+/* ADDRESS: GOLDDE 0x004d14e0 */
 void __cdecl d3_InitSkyLayer(int textureName)
 {
 	D3_SKY_COLOR c;

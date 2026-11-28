@@ -9,6 +9,7 @@ int __cdecl ai_CalculateMatchingMethodEffects(float* a0, float* a1, int a2, char
     int a5, int a6);
 
 /* ADDRESS: GOLDTL 0x0049d220 */
+/* ADDRESS: GOLDDE 0x0048bc60 */
 int __cdecl ai_ScoreBuergermeister(float* scoreFirst, float* scoreSecond, int a2, char* candidateRecord, int a4,
     int a5, int a6)
 {

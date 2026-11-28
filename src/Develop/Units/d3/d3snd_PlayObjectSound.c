@@ -3,6 +3,7 @@
 void __cdecl sb_StartVoice(char* obj, int a, int b);
 
 
+/* ADDRESS: GOLDDE 0x00417130 */
 int __cdecl d3snd_PlayObjectSound(char* voice, void* object, int volume, float range)
 {
 	SOUND_SOURCE req;

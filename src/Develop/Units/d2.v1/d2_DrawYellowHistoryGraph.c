@@ -20,6 +20,7 @@ void __cdecl d2_DrawLine(int, int, int, int, int, int, int);
 
 #define CLAMP0(v) ((v) > 0.0 ? (v) : 0.0)
 
+/* ADDRESS: GOLDDE 0x005b51e0 */
 void __cdecl d2_DrawYellowHistoryGraph(GRAPH_VALUE cur, int w, int h)
 {
 	int step;

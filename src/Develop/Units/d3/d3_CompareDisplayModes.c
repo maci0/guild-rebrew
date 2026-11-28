@@ -1,6 +1,7 @@
 int __cdecl d3_GetFormatBpp(int a);
 
 /* ADDRESS: GOLDTL 0x0041a8d0 */
+/* ADDRESS: GOLDDE 0x00418610 */
 int __cdecl d3_CompareDisplayModes(unsigned int* a, unsigned int* b)
 {
 	unsigned int x;

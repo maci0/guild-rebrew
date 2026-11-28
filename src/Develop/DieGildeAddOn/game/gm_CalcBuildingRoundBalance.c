@@ -30,6 +30,7 @@ char* __cdecl gm_QueryEntities(int, int, int, int, int);
 int __cdecl gm_SumQueryEntryValues(int, unsigned char b);
 
 /* ADDRESS: GOLDTL 0x0050c1b0 */
+/* ADDRESS: GOLDDE 0x004f6f50 */
 int __cdecl gm_CalcBuildingRoundBalance(unsigned char* bld, int ownerIdx, char* out)
 {
 	unsigned char* row;

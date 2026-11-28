@@ -20,6 +20,7 @@ void __cdecl d2_UpdateRadioGroup(int);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x005254c0 */
 int __cdecl d2_RunChooseIntroMenu(void)
 {
 	int option1;

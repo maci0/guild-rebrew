@@ -72,6 +72,7 @@ void __cdecl ai_RunWorkshopMaster(Master47de*);
 void __cdecl ai_UpdateMeisterBuilding(Master47de*);
 void __cdecl ai_StartMeisterProduction(Master47de*);
 
+/* ADDRESS: GOLDDE 0x0046ce00 */
 void __cdecl ai_EvaluateMeister(Master47de* m)
 {
 	char buf[0x100];

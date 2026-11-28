@@ -24,6 +24,7 @@ void __cdecl he_FreeAction(char*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl cm_SendAllocCharacter(int, int, int, int, int, int, char*);
 
+/* ADDRESS: GOLDDE 0x0055ca70 */
 void __cdecl he_StartAssassinAction(char* u)
 {
 	char text[0x400];

@@ -16,6 +16,7 @@ void __cdecl cm_SendSetHE(int mode, char* e);
 char* __cdecl gm_LookupEntityRecordById(int entityId);
 
 /* ADDRESS: GOLDTL 0x0054b820 */
+/* ADDRESS: GOLDDE 0x00531cc0 */
 void __cdecl he_StartFest(char* e)
 {
 	char buf[0xf8];

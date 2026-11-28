@@ -10,6 +10,7 @@ void __cdecl he_PostEntityMessage(int a, int b, char* buf, int c, int d, int e);
 void __cdecl gm_ModifyHealth(int a, int b);
 
 /* ADDRESS: GOLDTL 0x004b8d00 */
+/* ADDRESS: GOLDDE 0x004a6db0 */
 int __cdecl gm_HandleMsg21ModifyHealth(int* request)
 {
 	char buf[0x200];

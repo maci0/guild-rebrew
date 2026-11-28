@@ -28,6 +28,7 @@ extern char d3_LightingEnabled;
 void __cdecl d3_SetScaledMaterial(float a, char* b, int c, int d);
 
 /* ADDRESS: GOLDTL 0x00437160 */
+/* ADDRESS: GOLDDE 0x00430660 */
 void __cdecl d3_BeginScenePass(unsigned char fog, int color, char light)
 {
 	((D3_SCENE_METHOD_FN) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_00[34])(((D3D_DEVICE_VIEW*)g_6b5de0));

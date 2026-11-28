@@ -5,6 +5,7 @@ extern unsigned char gm_ActiveTownIndex;
 int __cdecl gm_SumQueryEntryValues(int, unsigned char);
 
 /* ADDRESS: GOLDTL 0x004f0ff0 */
+/* ADDRESS: GOLDDE 0x004dd260 */
 int __cdecl gm_CanFireCannonShot(char* obj, int a1, int a2, int a3, int* out1, int* out2)
 {
 	int c1;

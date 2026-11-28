@@ -6,6 +6,7 @@
 int __cdecl ch_SetVisible(int, int);
 int __cdecl ch_RemoveQueueEntry(void*);
 
+/* ADDRESS: GOLDDE 0x0040a900 */
 void __cdecl ch_DequeueIfIdle(char* a)
 {
 	if (*(int*) (a + 0xc) != 0) {

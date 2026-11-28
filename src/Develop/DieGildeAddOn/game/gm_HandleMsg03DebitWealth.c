@@ -1,3 +1,4 @@
+extern char gm_ActiveTownIndex[];
 #include <string.h>
 
 int __cdecl gm_LookupEntityRecordById(int);
@@ -8,6 +9,7 @@ void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004b6a00 */
+/* ADDRESS: GOLDDE 0x004a4c90 */
 int __cdecl gm_HandleMsg03DebitWealth(int* request)
 {
 	unsigned char* f;
@@ -27,9 +29,9 @@ int __cdecl gm_HandleMsg03DebitWealth(int* request)
 	r = fcn_0042e410(3);
 	d = (double) r + *(double*) 0x6629c8;
 	t = (double) fcn_0050dac0(*(unsigned short*) f) * d;
-	n = (int) (t * *(double*) 0x6640e8);
+	n = (int) (t * 0.01);
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7, n);
-	cm_RequestTransferCurrencyNoKill(request[0], -1, *(unsigned char*) 0x773d75, n);
+	cm_RequestTransferCurrencyNoKill(request[0], -1, *(unsigned char*) &gm_ActiveTownIndex, n);
 	he_PostEntityMessage(*(int*) (f + 4), *(int*) (f + 4), buf, strlen(buf) > 0x100, 0x603, 0);
 	return 0;
 }

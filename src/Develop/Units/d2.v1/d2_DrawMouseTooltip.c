@@ -7,6 +7,7 @@ extern int d2_ScreenSurface;
 void __cdecl d2_SelectFont(int);
 void __cdecl d2_DrawWordWrappedText(int, int, int, int, int, char*, int);
 
+/* ADDRESS: GOLDDE 0x0051c090 */
 void __cdecl d2_DrawMouseTooltip(void)
 {
 	if (d2_HoverTextBuffer[0] != 0 && g_7766ba != 0) {

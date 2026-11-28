@@ -21,6 +21,7 @@ void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
 int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 
 /* ADDRESS: GOLDTL 0x004973a0 */
+/* ADDRESS: GOLDDE 0x00485e40 */
 int __cdecl ai_RunBuyObject(int unused, Msg* m, Msg* ev)
 {
 	char* r;

@@ -26,6 +26,7 @@ void __cdecl d3snd_StopSourceVoice(struct snd_418e00*);
 
 /* Updates the positional sound sources: silences the ones outside the
  * current room, pans the others and releases finished voices. */
+/* ADDRESS: GOLDDE 0x00416b40 */
 void __cdecl d3snd_UpdateSoundSources(void)
 {
 	int i;

@@ -25,6 +25,7 @@ void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl sv_ClearObjectSelection(void);
 int __cdecl ConfirmProductionSelection(int, char*);
 
+/* ADDRESS: GOLDDE 0x00593ee0 */
 void __cdecl d2_ShowProductionSelection(char* a)
 {
 	Req req;

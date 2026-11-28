@@ -8,6 +8,7 @@ void __cdecl cm_EnqueueClientPacket(void*);
 
 int __cdecl fcn_0064d3f8(void);
 
+/* ADDRESS: GOLDDE 0x004b31c0 */
 void __cdecl cm_SendAddStraftat(void* crimeRecord)
 {
 	char buf[0x9c];

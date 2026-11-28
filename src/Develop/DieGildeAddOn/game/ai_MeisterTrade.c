@@ -132,6 +132,7 @@ char* __cdecl gm_FindCityItemHolder(int who);
 double __cdecl gm_RandomFloat01(void);
 
 /* ADDRESS: GOLDTL 0x00489a70 */
+/* ADDRESS: GOLDDE 0x00478940 */
 int __cdecl ai_MeisterTrade(char* o, char* bld)
 {
 	char* q;

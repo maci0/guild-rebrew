@@ -25,6 +25,7 @@ void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_FreeAction(char*);
 
+/* ADDRESS: GOLDDE 0x00559b80 */
 void __cdecl he_AllocGebaeudeBauen(char* u)
 {
 	char text[0x80];

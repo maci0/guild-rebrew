@@ -18,6 +18,7 @@ extern struct s_7e6060 g_7e6060[64];
 
 void __cdecl d2_ClearHoverTooltipSlot(void);
 
+/* ADDRESS: GOLDDE 0x0051a5c0 */
 void __cdecl d2_SetHoverTooltip(char* obj, int text_id, char* name)
 {
 	int i;

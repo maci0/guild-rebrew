@@ -19,6 +19,7 @@ int __cdecl main_RunFrameLoop(void (__cdecl*)(void), int);
 void __cdecl d2_DestroyForm(int);
 /* ADDRESS: GOLD 0x530820 */
 
+/* ADDRESS: GOLDDE 0x0051ebc0 */
 void __cdecl main_RunAdvanceGameDialog(void)
 {
 	int saved;

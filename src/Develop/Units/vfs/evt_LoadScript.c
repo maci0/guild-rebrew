@@ -45,6 +45,7 @@ int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream);
 int __cdecl evt_NormalizeScriptSource(char *, char *, int *);
 void __cdecl m_FreeTracked(void *);
 
+/* ADDRESS: GOLDDE 0x00421820 */
 Script *__cdecl evt_LoadScript(char *name)
 {
 	void *f;

@@ -31,6 +31,7 @@ int __cdecl cm_SendCancelCharacterActions(int);
 int __cdecl he_FreeAction(int);
 
 /* ADDRESS: GOLDTL 0x00552a60 */
+/* ADDRESS: GOLDDE 0x00538e10 */
 void __cdecl he_RunTaschendieb(int event)
 {
 	unsigned char v1;

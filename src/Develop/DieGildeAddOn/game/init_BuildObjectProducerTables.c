@@ -23,6 +23,7 @@ extern unsigned char* lpGebaeudePROT;
 extern char* lpObjektePROT;
 
 /* ADDRESS: GOLDTL 0x00500e40 */
+/* ADDRESS: GOLDDE 0x004ec550 */
 void __cdecl init_BuildObjectProducerTables(void)
 {
 	int kind;

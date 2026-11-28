@@ -9,6 +9,7 @@ void __cdecl cm_SendCopyEntityData(int a1);
 char* __cdecl gm_QueryEntities(int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00488e10 */
+/* ADDRESS: GOLDDE 0x00477ce0 */
 void __cdecl ai_SendAction0x8f(char* e)
 {
 	char s[0xf8];

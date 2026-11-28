@@ -18,6 +18,7 @@ extern int cm_LastCrimeId;
 extern Rec2d_9a3800 cm_CrimeRecords[512];
 extern Pair_99f800 cm_CrimeEvidenceLinks[0x800];
 
+/* ADDRESS: GOLDDE 0x004e2520 */
 void __cdecl cm_InitCrimeRecords(void)
 {
 	int i;

@@ -3,6 +3,7 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
+/* ADDRESS: GOLDDE 0x004b24b0 */
 void __cdecl cm_RecycleCommandQueueNode(char* node)
 {
 	char* prev;

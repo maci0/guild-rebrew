@@ -7,6 +7,7 @@ extern COLOR_OCTREE_NODE* g_6b6f20[6];
 extern int g_6b6308;
 void* __cdecl fcn_0064de9d(int n, int size);
 
+/* ADDRESS: GOLDDE 0x00419b10 */
 int __cdecl d3_AllocOctreeNodes(void)
 {
 	COLOR_OCTREE_NODE** p;

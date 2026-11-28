@@ -45,6 +45,7 @@ void __cdecl d3_ReleaseTexture(Tex*);
 
 
 /* ADDRESS: GOLDTL 0x00442a30 */
+/* ADDRESS: GOLDDE 0x0043ae80 */
 char __cdecl SelectTextureSet(Ent* e, Obj* o, unsigned char lod, char refresh)
 {
 	char ok;

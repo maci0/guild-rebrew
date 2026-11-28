@@ -3,6 +3,7 @@
 int __cdecl cm_SendSetHE(char, unsigned char*);
 
 /* ADDRESS: GOLDTL 0x0055a820 */
+/* ADDRESS: GOLDDE 0x00540b10 */
 void __cdecl he_StartCountdownAction(unsigned char* e)
 {
     if ((e[0x78] & 4) == 0) {

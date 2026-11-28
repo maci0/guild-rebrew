@@ -149,6 +149,7 @@ extern unsigned char g_6b7ffe;
 #define DEV_43ad20 ((D3_SCENE_DEVICE*) g_6b5de0)
 
 /* ADDRESS: GOLDTL 0x0043ad20 */
+/* ADDRESS: GOLDDE 0x00433ae0 */
 void __cdecl d3_RenderScene(char a0, int a1)
 {
 	int v3;

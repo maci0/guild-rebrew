@@ -7,6 +7,7 @@ char* __cdecl he_fn_Handlung(void);
 void __cdecl io_FormatTextBuffer(char* buf, int fmt, int arg);
 
 /* ADDRESS: GOLDTL 0x004f7210 */
+/* ADDRESS: GOLDDE 0x004e2ff0 */
 int __cdecl gm_HandleCourtshipCommand(int entity, int* command)
 {
 	char* e;

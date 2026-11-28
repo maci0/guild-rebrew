@@ -3,6 +3,7 @@
 extern int main_FrameHandlerStack[];
 
 /* ADDRESS: GOLDTL 0x005356b0 */
+/* ADDRESS: GOLDDE 0x0051df10 */
 void __cdecl main_ExitToFrameHandler(int handler_fn)
 {
 	int i;

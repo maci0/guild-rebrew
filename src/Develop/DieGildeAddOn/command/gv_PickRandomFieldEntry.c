@@ -13,6 +13,7 @@ extern unsigned char* lpGebaeudePROT;
 int __cdecl cm_GetBuildingStatCount(unsigned char* e);
 unsigned short __cdecl gm_RandomMod(unsigned short n);
 
+/* ADDRESS: GOLDDE 0x004ddb00 */
 Rec44* __cdecl gv_PickRandomFieldEntry(unsigned char* e)
 {
 	BUILDING_PROTOTYPE *ent;

@@ -5,6 +5,7 @@ int __cdecl RegisterStatusText(char *, int, int);
 void __cdecl d2_RunZigeunerBlutracheDialog(void *);
 void __cdecl d2_RunEhrerbietungDialog(void *);
 /* ADDRESS: GOLDTL 0x005e6840 */
+/* ADDRESS: GOLDDE 0x005c7b00 */
 void __cdecl d2_RunContactMenu(void *a) {
  int x = 0, y = 0;
  d2_ClearStatusTextSlots();

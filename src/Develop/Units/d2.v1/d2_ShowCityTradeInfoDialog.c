@@ -1,3 +1,4 @@
+extern char g_103814c[];
 extern int g_6a256c;
 extern volatile int gm_GameTicks;
 extern int d2_CurrentWindowId;
@@ -25,6 +26,7 @@ int __cdecl d2_DrawPricedItemSlot(int x, int y, int layer, int a4, int a5);
 int __cdecl sprintf(char*, const char*, ...);
 
 /* ADDRESS: GOLDTL 0x005a31b0 */
+/* ADDRESS: GOLDDE 0x00588030 */
 void __cdecl d2_ShowCityTradeInfoDialog(char* building)
 {
 	char name[260];
@@ -66,15 +68,15 @@ void __cdecl d2_ShowCityTradeInfoDialog(char* building)
 				d2_CenterDialogWindows(idx);
 				d2_SetForm(idx, 0);
 				win = d2_CurrentWindowId * 0x3cc;
-				*(int*) (win + 0x10162e8) = 0x18;
-				*(int*) (win + 0x10162ec) = 0x18;
-				*(int*) (win + 0x10162f0) = 0x1c;
-				*(int*) (win + 0x10162f4) = 0xb;
+				*(int*) (win + ((int) &d2_Windows + 0x3a8)) = 0x18;
+				*(int*) (win + ((int) &d2_Windows + 0x3ac)) = 0x18;
+				*(int*) (win + ((int) &d2_Windows + 0x3b0)) = 0x1c;
+				*(int*) (win + ((int) &d2_Windows + 0x3b4)) = 0xb;
 				d2_SetForm(idx, 1);
 				io_AppendText((char*) 0x1a11);
 				d2_SetForm(idx, 5);
 				io_AppendText((char*) 0x1a14, *(int*) (building + 0x65) * 0x2f4 + gm_TownTable, g_85ab80[*(int*) (building + 0x65)].unk_00);
-				windowData = d2_Windows + *(int*) (idx * 700 + 0x103814c) * 0x3cc;
+				windowData = d2_Windows + *(int*) (idx * 700 + (int) &g_103814c) * 0x3cc;
 				sprintf(name, "Wappen128_ns_Stadt_%s", (char*) (*(int*) (building + 0x65) * 0x2f4 + (int) gm_TownTable));
 				d2_SetBackgroundTexture(name, *(int*) windowData);
 				*(int*) (windowData + 0x3a4) = 0;

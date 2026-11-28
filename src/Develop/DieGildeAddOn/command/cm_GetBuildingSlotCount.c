@@ -7,6 +7,7 @@
 
 extern unsigned char* lpGebaeudePROT;
 
+/* ADDRESS: GOLDDE 0x004dd640 */
 int __cdecl cm_GetBuildingSlotCount(unsigned char* cmd)
 {
 	int upgrade_data;

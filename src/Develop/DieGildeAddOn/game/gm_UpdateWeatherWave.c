@@ -36,6 +36,7 @@ double __cdecl sin(double);
 #pragma intrinsic(sin)
 int __cdecl gm_GetElapsedMinutes(GAME_TIMESTAMP*, GAME_TIMESTAMP*);
 
+/* ADDRESS: GOLDDE 0x005c9dc0 */
 void __cdecl gm_UpdateWeatherWave(void)
 {
 	int elapsedMinutes;

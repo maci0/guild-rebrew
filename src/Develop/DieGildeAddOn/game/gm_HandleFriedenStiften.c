@@ -36,6 +36,7 @@ void __cdecl d2_ShowModalMessageBox(char*, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x005b9f00 */
 int __cdecl gm_HandleFriedenStiften(unsigned char* e, unsigned char* ctx)
 {
 	int result;

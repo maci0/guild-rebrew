@@ -5,6 +5,7 @@
 void __cdecl d3_SelectSceneContext(int, int);
 #include "Develop/Units/d3/client_scene_transform.h"
 
+/* ADDRESS: GOLDDE 0x0057dea0 */
 void __cdecl d3_GetObjectWorldPosition(float* result, char* object)
 {
 	float v[4];

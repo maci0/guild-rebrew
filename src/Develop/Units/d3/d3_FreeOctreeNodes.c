@@ -8,6 +8,7 @@ extern OctRef* g_6b6f40;
 extern void* g_6b6f44;
 void __cdecl free(void* p);
 
+/* ADDRESS: GOLDDE 0x00419ba0 */
 void __cdecl d3_FreeOctreeNodes(void)
 {
 	if (g_6b6f20[0] != 0) {

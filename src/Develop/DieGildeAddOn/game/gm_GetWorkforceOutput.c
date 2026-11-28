@@ -5,6 +5,7 @@ extern unsigned char* lpGebaeudePROT;
 extern int gm_DifficultyLevel;
 extern float flt_0_0;
 
+/* ADDRESS: GOLDDE 0x004f6910 */
 float __cdecl gm_GetTypeWageBase(unsigned char* p, int k, int a, int b)
 {
 	float r;

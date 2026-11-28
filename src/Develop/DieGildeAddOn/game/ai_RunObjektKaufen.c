@@ -5,6 +5,7 @@ int __cdecl cm_SendSellObjekt(int, int, int, int, char, int);
 
 
 /* ADDRESS: GOLDTL 0x0049c2b0 */
+/* ADDRESS: GOLDDE 0x0048acf0 */
 int __cdecl ai_RunObjektKaufen(int* a, char* e, int* b)
 {
 	int n;

@@ -19,6 +19,7 @@ extern char g_6a3550[];
 int __cdecl txt_FindEntryIndex(char*);
 int __cdecl atoi(const char*);
 
+/* ADDRESS: GOLDDE 0x00555e20 */
 void __cdecl he_OpenHelpEvents(char* name)
 {
 	char delim[2] = ":";

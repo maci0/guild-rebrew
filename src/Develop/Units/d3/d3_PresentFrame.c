@@ -2,6 +2,7 @@
 
 typedef void (__stdcall* D3_PRESENT_FN)(void*, int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x00419950 */
 void __cdecl d3_PresentFrame(void)
 {
 	void* obj;

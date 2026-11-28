@@ -5,6 +5,7 @@ void __cdecl d3_TransformPoint(char* obj, char* pos, float* out);
 void __cdecl d3_ComputeObjectWorldBounds(float* n, float* m, char* obj);
 
 /* ADDRESS: GOLDTL 0x004a6160 */
+/* ADDRESS: GOLDDE 0x00494b60 */
 int __cdecl gm_GetCannonShotEndpoints(char* a, float* pa, char* b, float* pb)
 {
 	struct {

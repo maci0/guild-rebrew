@@ -14,6 +14,7 @@ extern char gm_EntityIdField[];
 
 void __cdecl cm_SendCopyEntityData(void*);
 
+/* ADDRESS: GOLDDE 0x0049e2e0 */
 int __cdecl hst_HandleBelagerungStart(void)
 {
 	char m[0xf8];

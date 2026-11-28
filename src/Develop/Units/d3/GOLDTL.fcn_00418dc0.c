@@ -10,6 +10,7 @@
 
 
 /* ADDRESS: GOLD 0x00417710 */
+/* ADDRESS: GOLDDE 0x00416a10 */
 SOUND_SOURCE* __cdecl d3snd_AttachSoundSource(char* voice, char* objekt, int volume, float range)
 {
     SOUND_SOURCE* source = 0;
@@ -37,6 +38,7 @@ SOUND_SOURCE* __cdecl d3snd_AttachSoundSource(char* voice, char* objekt, int vol
 }
 
 
+/* ADDRESS: GOLDDE 0x00416b00 */
 SOUND_SOURCE* __cdecl d3snd_FindFreeSource(void)
 {
 	int i = 0;

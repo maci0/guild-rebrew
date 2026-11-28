@@ -100,6 +100,7 @@ void __cdecl d2_SelectFont(int handle);
 char* __cdecl d3_LoadTextureWithDefaultTint(char* name, int a1);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x004700a0 */
+/* ADDRESS: GOLDDE 0x004635e0 */
 int __cdecl d2_Open(int a0, int a1, int screenHeight, char* a3, char* a4)
 {
 	char path[0x100];
@@ -141,7 +142,7 @@ int __cdecl d2_Open(int a0, int a1, int screenHeight, char* a3, char* a4)
 	memset(&g_1040480, 0, 0x10);
 	memset(d2_OverlaySprites, 0, 0x80);
 	for (i = 0; i < 0x30; i++) {
-		*(int*) (0x1038140 + i * 0x2bc) = i;
+		*(int*) ((int) &d2_Forms + i * 0x2bc) = i;
 	}
 	for (i = 0; i < 0x60; i++) {
 		*(int*) (d2_Windows + i * 0x3cc) = i;

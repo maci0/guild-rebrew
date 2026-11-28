@@ -23,6 +23,7 @@ extern int d3_ActiveScene;
 void __cdecl d3_VisitSceneObjects(int, int, int, void*, void*);
 char __cdecl d3_PickClosestObjectCallback(char*, char*);
 
+/* ADDRESS: GOLDDE 0x0043c040 */
 char* __cdecl d3_FindSceneObjectAtScreenPoint(float a, float b, int flags, int mask)
 {
 	float best;

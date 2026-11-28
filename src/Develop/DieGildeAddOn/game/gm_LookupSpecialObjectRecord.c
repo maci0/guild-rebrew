@@ -3,6 +3,7 @@ extern Offer gm_SpecialObjectOffers[];
 
 /* ADDRESS: GOLD 0x005ba7b0 */
 /* ADDRESS: GOLDTL 0x005c6220 */
+/* ADDRESS: GOLDDE 0x005a84a0 */
 char* __cdecl gm_LookupSpecialObjectRecord(int key, int* out)
 {
 	int n;

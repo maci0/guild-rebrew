@@ -40,6 +40,7 @@ void __cdecl he_FreeAction(char*);
 /* Query state machine: state 0 rolls a random increase of the entity record
  * selected at e+0xb0, state 1 sends the request to the selected entity. */
 /* ADDRESS: GOLDTL 0x00560eb0 */
+/* ADDRESS: GOLDDE 0x00547080 */
 void __cdecl he_RunTrainierenSkill(char* e)
 {
 	char* who;

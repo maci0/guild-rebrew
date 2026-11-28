@@ -5,6 +5,7 @@ extern float g_665370;
 
 char* __cdecl gm_QueryEntities(int obj, int mode, ...);
 
+/* ADDRESS: GOLDDE 0x004df8c0 */
 float __cdecl gv_CalcDecayReduction(char* graveyard)
 {
 	int sum;

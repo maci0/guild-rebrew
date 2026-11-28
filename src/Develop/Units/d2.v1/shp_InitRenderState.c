@@ -1,5 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x00477520 */
+/* ADDRESS: GOLDDE 0x00469280 */
 int __cdecl shp_InitRenderState(int suppressDraw, int blendMode)
 {
 	*(int*) 0x100f1bc = blendMode;

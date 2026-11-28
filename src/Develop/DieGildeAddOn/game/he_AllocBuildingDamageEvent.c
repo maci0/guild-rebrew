@@ -5,6 +5,7 @@ struct unit;
 void __cdecl he_FreeAction(struct unit*);
 
 /* ADDRESS: GOLDTL 0x00551010 */
+/* ADDRESS: GOLDDE 0x00537400 */
 void __cdecl he_AllocBuildingDamageEvent(char* u)
 {
 	*(pos14_7f4c00*) (u + 0x52) = *(pos14_7f4c00*) (u + 0x44);

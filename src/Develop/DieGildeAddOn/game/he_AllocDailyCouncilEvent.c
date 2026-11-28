@@ -6,6 +6,7 @@ void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl cm_SendSetHE(int, char*);
 
 /* ADDRESS: GOLDTL 0x0055ac00 */
+/* ADDRESS: GOLDDE 0x00540eb0 */
 void __cdecl he_AllocDailyCouncilEvent(char* e)
 {
 	if ((e[0x78] & 4) != 0) {

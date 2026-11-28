@@ -3,6 +3,7 @@ void __cdecl ch_DestroyCharacter(char*);
 
 
 /* ADDRESS: GOLDTL 0x004cd4a0 */
+/* ADDRESS: GOLDDE 0x004bac80 */
 int __cdecl cm_ExDestroyEntityCharacter(char* packet, char* reply)
 {
 	char* e;

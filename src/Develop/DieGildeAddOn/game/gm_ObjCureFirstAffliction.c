@@ -3,6 +3,7 @@
 
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x005be300 */
 int __cdecl gm_ObjCureFirstAffliction(char* entity)
 {
 	int afflictions;

@@ -5,6 +5,7 @@ extern char str_he_AllocNone_Invalid_HE_Type[];
 extern char gm_EntityNameField[];
 #endif
 
+/* ADDRESS: GOLDDE 0x0052ba60 */
 void __cdecl he_AllocNone(void* a1)
 {
 	char buf[0x100];

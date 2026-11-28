@@ -6,6 +6,7 @@
 extern int g_772fe0;
 extern ALCHEMY_RECIPE_PROTOTYPE* ahm_RecipePrototypes;
 
+/* ADDRESS: GOLDDE 0x004d9030 */
 ALCHEMY_RECIPE_PROTOTYPE* __cdecl ahm_FindRecipePrototypeByKey(int key)
 {
 	int i;

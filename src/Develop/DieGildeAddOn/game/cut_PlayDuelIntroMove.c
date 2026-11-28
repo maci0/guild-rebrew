@@ -27,6 +27,7 @@ int __cdecl ch_QueuePlayAnimation(char*, const char*, int);
 
 /* Duel intro: plays the challenger's opening move chosen by the duel kind. */
 /* ADDRESS: GOLDTL 0x004e0210 */
+/* ADDRESS: GOLDDE 0x004ccc30 */
 void __cdecl cut_PlayDuelIntroMove(char* e, char* foe)
 {
 	unsigned char* d;

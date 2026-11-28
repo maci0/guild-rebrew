@@ -56,6 +56,7 @@ void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl cm_SendCopyEntityData(char* msg);
 
 /* ADDRESS: GOLDTL 0x004f01c0 */
+/* ADDRESS: GOLDDE 0x004dc530 */
 void __cdecl gm_ApplyCannonImpact(int applyDamage, int impactId, int projectilePtr, CANNON_HIT_RESULT* resultOut)
 {
 	CANNON_HIT_RESULT out;

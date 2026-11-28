@@ -11,6 +11,7 @@ extern char g_68fea0[];
 
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 
+/* ADDRESS: GOLDDE 0x004db440 */
 int __cdecl ls_LoadAvatarStates(void* file)
 {
 	unsigned char val;

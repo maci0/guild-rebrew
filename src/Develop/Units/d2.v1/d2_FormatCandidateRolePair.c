@@ -3,6 +3,7 @@
 
 void __cdecl io_FormatTextBuffer(char*, const char*, ...);
 
+/* ADDRESS: GOLDDE 0x005716e0 */
 void __cdecl d2_FormatCandidateRolePair(char* o, char* buf)
 {
 	if (*(int*) (o + 0x30) != 0 && *(int*) (o + 0x34) != 0) {

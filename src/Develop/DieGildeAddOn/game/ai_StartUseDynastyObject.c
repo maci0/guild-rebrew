@@ -33,6 +33,7 @@ void __cdecl gm_CheckEntityObjectSlots(char* e, int n, Slot* slots, Counts* cnt)
 int __cdecl ai_SelectBestMethod(int type, int id, int n, Msg* a, Msg* b);
 
 /* ADDRESS: GOLDTL 0x0049adb0 */
+/* ADDRESS: GOLDDE 0x004897f0 */
 int __cdecl ai_StartUseDynastyObject(int kind, char* e, int busy, Msg* out1, Msg* out2)
 {
 	Counts cnt;

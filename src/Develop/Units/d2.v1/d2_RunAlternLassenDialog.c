@@ -52,6 +52,7 @@ struct hand_s {
 };
 
 /* ADDRESS: GOLDTL 0x0058f6a0 */
+/* ADDRESS: GOLDDE 0x00575360 */
 void __cdecl d2_RunAlternLassenDialog(const unsigned char* entity)
 {
     unsigned long query[20];

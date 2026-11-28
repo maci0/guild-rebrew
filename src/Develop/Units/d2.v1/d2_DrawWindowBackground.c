@@ -64,6 +64,7 @@ void __cdecl d2_DrawSpriteFromSet(int x, int y, int surf, int tex, int c);
 void __cdecl d2_DrawSurfaceQuad(int x, int y, int w, int h, int bits, float alpha);
 
 /* ADDRESS: GOLDTL 0x0046dd60 */
+/* ADDRESS: GOLDDE 0x004613e0 */
 void __cdecl d2_DrawWindowBackground(D2_BG_WINDOW* w, int dst)
 {
 	void* p;

@@ -10,6 +10,7 @@ unsigned short __cdecl gm_RandomMod(int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl cm_SendSetHE(int, char*);
 
+/* ADDRESS: GOLDDE 0x00562750 */
 void __cdecl he_InitEvent0a0(char* o)
 {
 	if (o[0x78] & 4) {

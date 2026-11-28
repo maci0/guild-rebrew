@@ -12,6 +12,7 @@ int SonnenstrahlenStartZeit = 0xffffffff;
 int SonnenstrahlenPhase = 0;
 char* __cdecl d3_FindSceneObject(char*, int, char*, char*);
 char* __cdecl d3_CreateSceneModelObject(char*, float*, float*, char*);
+/* ADDRESS: GOLDDE 0x004164d0 */
 void __cdecl StopSonnenstrahlen(char* objekt, int phase)
 {
     SonnenstrahlenAktiv = -1;
@@ -23,6 +24,7 @@ void __cdecl d3_UpdateSunRays(char*);
 #include "../../Units/d3/d3_camera.h"
 char* SonnenstrahlenObjekt = 0;
 
+/* ADDRESS: GOLDDE 0x004164f0 */
 void __cdecl StartSonnenstrahlen(char* unused)
 {
 	int value;
@@ -32,6 +34,7 @@ void __cdecl StartSonnenstrahlen(char* unused)
 	SonnenstrahlenPhase = 0;
 }
 
+/* ADDRESS: GOLDDE 0x00416510 */
 char* __cdecl CreateSonnenstrahlen(void)
 {
 	float rotation[3];

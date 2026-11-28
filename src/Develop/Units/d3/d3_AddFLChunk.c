@@ -107,6 +107,7 @@ typedef struct FL_OBJ {
  * chunk back through the 0x4012xx bit-stream helpers. */
 #pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x0044fc70 */
+/* ADDRESS: GOLDDE 0x00445890 */
 void __cdecl d3_AddFLChunk(char* name, char flag)
 {
 	FL_INFO info;

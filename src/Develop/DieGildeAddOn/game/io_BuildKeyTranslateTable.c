@@ -5,6 +5,7 @@
 
 extern unsigned short g_14cf300[];
 
+/* ADDRESS: GOLDDE 0x004101f0 */
 int __cdecl io_BuildKeyTranslateTable(void)
 {
 	int i;

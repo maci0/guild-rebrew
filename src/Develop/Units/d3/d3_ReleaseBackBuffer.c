@@ -2,6 +2,7 @@ extern int d2_ScreenSurface;
 extern unsigned long d3_LastReleaseRefCount;
 
 /* ADDRESS: GOLDTL 0x00473610 */
+/* ADDRESS: GOLDDE 0x00466370 */
 short __cdecl d3_ReleaseBackBuffer(void)
 {
 	int obj;

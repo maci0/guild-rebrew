@@ -10,6 +10,7 @@ extern float g_10425d0[];
 void __cdecl d3_LerpVec3(float*, float*, float, float*);
 void __cdecl d3_NormalizeVector(float*);
 
+/* ADDRESS: GOLDDE 0x0044eed0 */
 void __cdecl d3_ResetSkyDomeNormals(char* o, char flag)
 {
 	float vc[4];

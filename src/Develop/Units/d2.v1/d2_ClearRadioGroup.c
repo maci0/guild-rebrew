@@ -7,6 +7,7 @@ extern char d2_RadioGroups[];
 
 #pragma intrinsic(memcpy, memset)
 
+/* ADDRESS: GOLDDE 0x0045ce90 */
 void __cdecl d2_ClearRadioGroup(int i)
 {
 	memset((void*) (d2_RadioGroups + i * 140), 0, 0x8c);

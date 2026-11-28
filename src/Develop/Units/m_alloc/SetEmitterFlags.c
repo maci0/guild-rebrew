@@ -13,6 +13,7 @@ extern char* evt_CurrentScript;
 #include "Develop/Units/m_alloc/m_alloc_checks.h"
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
+/* ADDRESS: GOLDDE 0x0040f2e0 */
 int __cdecl SetEmitterFlags(char** a, int* s, unsigned char* k, unsigned char* b5, unsigned char* b6, unsigned char* b7, unsigned char* c0)
 {
 	char* e;

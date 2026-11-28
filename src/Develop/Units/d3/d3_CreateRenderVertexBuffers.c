@@ -6,6 +6,7 @@ typedef struct {
 } fcn_00418680_vtbl;
 // SIZE 0x60
 
+/* ADDRESS: GOLDDE 0x00416480 */
 void __cdecl d3_CreateRenderVertexBuffers(void)
 {
 	void* obj;

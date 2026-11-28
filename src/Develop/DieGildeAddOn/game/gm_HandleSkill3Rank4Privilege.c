@@ -7,6 +7,7 @@ extern char str_fmt_s[];
 void __cdecl io_FormatTextBuffer(void*, int, int);
 void __cdecl d2_ShowPrivilegMessage(void*, int, int);
 
+/* ADDRESS: GOLDDE 0x004e3670 */
 int __cdecl gm_HandleSkill3Rank4Privilege(void* entity, void* request)
 {
 	char buf[0x200];

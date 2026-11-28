@@ -15,6 +15,7 @@ int __cdecl gm_CompareGameTime(pos14_7f4c00*, char*);
 void __cdecl d3_FreeMeshObject(char*);
 void __cdecl he_FreeAction(char*);
 
+/* ADDRESS: GOLDDE 0x0053e340 */
 void __cdecl he_RunTimedEffectAction(char* action)
 {
 	char* target;

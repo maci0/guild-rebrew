@@ -12,6 +12,7 @@ typedef struct
 
 extern char gm_LawEntries[];
 
+/* ADDRESS: GOLDDE 0x004e0a40 */
 int __cdecl gm_FindLawByKindAndSub(char* obj, int sub, Rec24* out)
 {
 	int i;

@@ -10,6 +10,7 @@ void __cdecl d3_UpdateObjectCameraTransform(unsigned int a0, char* a1, int a2);
 char __cdecl d3_TestObjectFrustum(unsigned int a0, int a1, int a2);
 
 /* ADDRESS: GOLDTL 0x00438450 */
+/* ADDRESS: GOLDDE 0x004316a0 */
 unsigned char __cdecl d3_UpdateSceneObjectLodAndBounds(char* o)
 {
 	unsigned char result;

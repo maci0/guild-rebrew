@@ -12,6 +12,7 @@ extern char d3_SceneEntries[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_9badd4;
 
+/* ADDRESS: GOLDDE 0x004bb8e0 */
 void __cdecl d3_InitSceneState(int clientId, int sessionParam)
 {
 	memset(&g_9baa20, 0, 0x24);

@@ -18,6 +18,7 @@ int __cdecl gm_SumQueryEntryValues(int a, char b);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
 /* ADDRESS: GOLDTL 0x004ab910 */
+/* ADDRESS: GOLDDE 0x00499c50 */
 int __cdecl ai_StartVerfluchen(int action, unsigned short* entity, int a3, char* out)
 {
 	int lim;

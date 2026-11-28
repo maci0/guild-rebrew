@@ -7,6 +7,7 @@ void __cdecl d2_DrawTexturedQuad(int x, int y, int w, int h, int color, float al
 void __cdecl d2_DrawWordWrappedText(int x, int y, int w, int h, int surf, char* text, int flags);
 
 /* ADDRESS: GOLDTL 0x00469fd0 */
+/* ADDRESS: GOLDDE 0x0045d7c0 */
 void __cdecl d2_DrawElementTooltip(char* e)
 {
 	char* name;

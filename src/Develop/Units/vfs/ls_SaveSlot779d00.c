@@ -9,6 +9,7 @@ extern Slot_779d00 main_CameraBookmarks[];
 
 unsigned int __cdecl vfs_fwrite(void*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x00577f90 */
 int __cdecl ls_SaveSlot779d00(int fh)
 {
 	int n;

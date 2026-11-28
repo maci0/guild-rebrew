@@ -17,6 +17,7 @@ int __cdecl he_GetActionProgress(char*, int*, int*, int);
 void __cdecl he_TriggerAhmLabEvent(char*, char*, char*, int);
 void __cdecl he_FreeAction(char*);
 
+/* ADDRESS: GOLDDE 0x0055c420 */
 void __cdecl he_RunAhmAction0x98(char* e)
 {
 	int a;

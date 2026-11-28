@@ -20,6 +20,7 @@ struct BUY_GOOD_MSG {
 
 
 /* ADDRESS: GOLDTL 0x004ab3e0 */
+/* ADDRESS: GOLDDE 0x00499720 */
 int __cdecl ai_RequestBuyGood(char* actor, char* good, char* target)
 {
 	struct BUY_GOOD_MSG msg;

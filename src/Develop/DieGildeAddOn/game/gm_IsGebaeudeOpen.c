@@ -13,6 +13,7 @@ extern Range g_6aa0b0[];
 extern unsigned char* lpGebaeudePROT;
 extern unsigned short gm_GameTimeHour;
 
+/* ADDRESS: GOLDDE 0x0058c100 */
 int __cdecl gm_IsGebaeudeOpen(unsigned char* p, int* lo, int* hi)
 {
 	BUILDING_PROTOTYPE *t;

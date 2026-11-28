@@ -18,6 +18,7 @@ struct HST_LAW_BOUNDS {
 
 
 /* ADDRESS: GOLDTL 0x004b0b30 */
+/* ADDRESS: GOLDDE 0x0049ee50 */
 int __cdecl hst_HandleGesetz(int a1, int a2, char* arg)
 {
 	int ids[2];

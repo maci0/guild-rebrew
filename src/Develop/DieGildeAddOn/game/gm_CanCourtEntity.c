@@ -6,6 +6,7 @@ int __cdecl abs(int);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl amt_GetEffectiveRoleLevel(unsigned short, int);
 
+/* ADDRESS: GOLDDE 0x005b41b0 */
 int __cdecl gm_CanCourtEntity(int actorId, int targetId)
 {
 	unsigned char* actor;

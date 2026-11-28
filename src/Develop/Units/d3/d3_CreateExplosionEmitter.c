@@ -26,6 +26,7 @@ void __cdecl d3_SetEffectPosition(int* a0, float* a1);
 void __cdecl d3_UpdateExplosionParticles(void);
 
 /* ADDRESS: GOLDTL 0x00417d00 */
+/* ADDRESS: GOLDDE 0x00415b00 */
 int* __cdecl d3_CreateExplosionEmitter(char* a0, float* pos, int n, float a3, float a4, float a5, float a6, int a7)
 {
 	Bytes4 f;

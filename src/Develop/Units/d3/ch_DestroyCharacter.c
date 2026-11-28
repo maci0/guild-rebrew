@@ -14,6 +14,7 @@ void __cdecl m_FreeTracked(char*);
 /* Removes an object from the live-object table and releases its scene
  * nodes. */
 /* ADDRESS: GOLDTL 0x004030e0 */
+/* ADDRESS: GOLDDE 0x00402610 */
 int __cdecl ch_DestroyCharacter(char* obj)
 {
 	int i = 0;

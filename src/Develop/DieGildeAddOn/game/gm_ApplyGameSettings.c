@@ -11,6 +11,7 @@ extern int g_7766ac;
 
 void __cdecl io_SetMouseSensitivity(int);
 
+/* ADDRESS: GOLDDE 0x005c3a70 */
 void __cdecl gm_ApplyGameSettings(void)
 {
 	g_6b5c94 = 0;

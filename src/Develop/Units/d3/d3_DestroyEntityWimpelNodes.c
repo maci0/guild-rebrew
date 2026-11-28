@@ -26,6 +26,7 @@ void __cdecl d3_RemoveSubTreeFromCellTree(char*, int);
 #endif
 
 /* ADDRESS: GOLD 0x005286e0 */
+/* ADDRESS: GOLDDE 0x00516710 */
 void __cdecl d3_DestroyEntityWimpelNodes(char* e)
 {
 	struct D3_WIMPEL_NODE_LIST l;

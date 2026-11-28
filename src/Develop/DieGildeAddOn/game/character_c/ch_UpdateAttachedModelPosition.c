@@ -72,6 +72,7 @@ void __cdecl d3_PreloadLowPolyAnims(char*, int, ...);
 #endif
 
 #undef ch_UNIVERSE_STRIDE
+/* ADDRESS: GOLDDE 0x00403350 */
 void __cdecl ch_UpdateAttachedModelPosition(char* obj, unsigned char force)
 {
 	char* model;

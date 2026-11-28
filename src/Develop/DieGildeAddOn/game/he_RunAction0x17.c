@@ -12,6 +12,7 @@ extern pos14_7f4c00 gm_GameTime;
 void __cdecl gm_AddTime(char*, int, int, int);
 void __cdecl he_FreeAction(char*);
 
+/* ADDRESS: GOLDDE 0x00547450 */
 void __cdecl he_RunAction0x17(char* e)
 {
 	switch (*(int*) (e + 0x70)) {

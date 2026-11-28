@@ -20,6 +20,7 @@
 char __cdecl d3_GridPointToWorld(char*, int, int, float*);
 
 /* ADDRESS: GOLDTL 0x00407e30 */
+/* ADDRESS: GOLDDE 0x00406fd0 */
 char __cdecl ch_FindWalkableCell(char* map, float* from, float* to, int x, int y, int* outX, int* outY, int maxRows, int flags)
 {
 	int i = 0;

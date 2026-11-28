@@ -3,6 +3,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b4320 */
 void __cdecl cm_SendBlockCharacter(int entityId, int delta, int vacateOffices)
 {
 	char buf[0x9c];

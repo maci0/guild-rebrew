@@ -12,6 +12,7 @@ typedef struct {
 
 void __cdecl d3_AnimateObjectTransform(char*, char*, D3_VEC3_BUILD*, int, int);
 
+/* ADDRESS: GOLDDE 0x00559d10 */
 void __cdecl d3_AnimateBuildStage(char* obj, char* buildAction)
 {
 	D3_VEC3_BUILD offset;

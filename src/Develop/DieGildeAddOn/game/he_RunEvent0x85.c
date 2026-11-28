@@ -26,6 +26,7 @@ char* __cdecl gm_SetupEntityQuery(char*);
 void __cdecl d2_EnterBuildingObjekt(char*, int, char*);
 void __cdecl he_FreeAction(char*);
 
+/* ADDRESS: GOLDDE 0x00556370 */
 void __cdecl he_RunEvent0x85(char* u)
 {
 	char* list[0x40];

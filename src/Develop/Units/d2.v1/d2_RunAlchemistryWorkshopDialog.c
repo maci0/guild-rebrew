@@ -65,6 +65,7 @@ void __cdecl d3_EndCameraAndUiMode(void);
 void __cdecl d2_ShowAlchemyFormulaBook(int);
 
 /* ADDRESS: GOLDTL 0x00585910 */
+/* ADDRESS: GOLDDE 0x0056b5d0 */
 void __cdecl d2_RunAlchemistryWorkshopDialog(char* e)
 {
 	char text[0x100];

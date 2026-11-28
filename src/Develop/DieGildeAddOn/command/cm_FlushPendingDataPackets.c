@@ -33,6 +33,7 @@ extern COMMAND_STATUS_SLOT cm_CommandStatusQueue[0x8000];
 int __cdecl ahm_GetCommandPayloadSize(unsigned char*);
 
 /* ADDRESS: GOLDTL 0x004c4090 */
+/* ADDRESS: GOLDDE 0x004b1aa0 */
 int __cdecl cm_FlushPendingDataPackets(void)
 {
 	CLIENT_QUEUED_PACKET* p;

@@ -8,6 +8,7 @@ extern void __cdecl ai_ComputeBaseActionScore(void* a0, void* a1, int a2, int a3
 
 
 /* ADDRESS: GOLDTL 0x0049c800 */
+/* ADDRESS: GOLDDE 0x0048b240 */
 void __cdecl ai_ScoreDrohen(int* out1, int* out2, int a2, int a3, int a4, int a5, int a6)
 {
 	Stat0049c800 st;

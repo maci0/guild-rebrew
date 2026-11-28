@@ -1,5 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x00414be0 */
+/* ADDRESS: GOLDDE 0x00413190 */
 void __cdecl d3_SetObjectColorRgb(char* p, unsigned char r, unsigned char g, unsigned char b)
 {
 	char* q;

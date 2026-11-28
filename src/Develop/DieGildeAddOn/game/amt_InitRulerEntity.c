@@ -65,6 +65,7 @@ int __cdecl gm_PickRandomHeadPortrait(void);
 void __cdecl gm_AdvanceRulerHistoricalEntry(void);
 void __cdecl gm_AdvanceHistoricalEntry(void);
 
+/* ADDRESS: GOLDDE 0x0049c010 */
 void __cdecl amt_InitRulerEntity(int mode, int unused, unsigned short owner, RULER_ENTITY* g)
 {
 	char buf[0x100];

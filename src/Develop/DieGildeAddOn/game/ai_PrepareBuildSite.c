@@ -15,6 +15,7 @@ int __cdecl gm_CheckPrivilege(int k, char* e, Query* q);
 int __cdecl gm_CanBuildBuildingType(int k, int id);
 int __cdecl gm_PickRandomOrNearestBuilding(char* e, int k);
 
+/* ADDRESS: GOLDDE 0x004935b0 */
 int __cdecl ai_PrepareBuildSite(char* action, char* e, char* mode, char* cmd, char* out, int want)
 {
 	Query q;

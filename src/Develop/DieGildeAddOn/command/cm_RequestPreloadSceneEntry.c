@@ -7,6 +7,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004bbb80 */
 void __cdecl cm_RequestPreloadSceneEntry(int entryId)
 {
 	char buf[0x9c];

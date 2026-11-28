@@ -5,6 +5,7 @@ extern float g_6652d8[];
 
 int __cdecl gv_CalcGravePrice(int, int, int, int, int*);
 
+/* ADDRESS: GOLDDE 0x004e0610 */
 int __cdecl gv_CalcGraveUpgradePrice(int entity, int currentTier, int targetTier, int* ownerShareOut)
 {
 	int first;

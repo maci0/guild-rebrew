@@ -8,6 +8,7 @@ extern unsigned int vfs_Crc32Table[];
 
 /* ADDRESS: GOLD 0x00401000 */
 /* ADDRESS: GOLDTL 0x00401000 */
+/* ADDRESS: GOLDDE 0x00401000 */
 unsigned int __cdecl vfs_CalcCrc32(unsigned char* buf, unsigned int n)
 {
 	unsigned int crc;

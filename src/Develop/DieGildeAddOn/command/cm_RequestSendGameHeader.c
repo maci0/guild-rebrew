@@ -3,6 +3,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b2850 */
 void __cdecl cm_RequestSendGameHeader(int totalBytes)
 {
 	char buf[0x9c];

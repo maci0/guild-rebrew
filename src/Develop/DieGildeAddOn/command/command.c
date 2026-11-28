@@ -786,6 +786,8 @@ typedef struct ChainNode {
 } ChainNode;
 #pragma pack(pop)
 
+/* ADDRESS: GOLDDE 0x004b2740 */
+/* ADDRESS: SERVERDE 0x1000bcc0 */
 int __cdecl cm_CheckCommandGroup(char* cmd_payload)
 {
 	ChainNode* node;
@@ -831,6 +833,7 @@ error:
 /* Resolves a field value by type from a command packet.
  * Performs entity ID resolution through the global entity
  * tables. Returns the resolved value or 0 on failure. */
+/* ADDRESS: SERVERDE 0x1000bd50 */
 int __cdecl gm_GetFieldByType(char* p, int type)
 {
 	unsigned int byte_value;
@@ -1164,6 +1167,7 @@ int __cdecl cm_ChkMoveCredits(int cmd, char* result)
 int __cdecl cm_ResolveSpecialEntityId(char*, int);
 /* ADDRESS: GOLDTL 0x004c6ee0 */
 /* ADDRESS: GOLD 0x004c6350 */
+/* ADDRESS: GOLDDE 0x004b46d0 */
 int __cdecl cm_ChkMoveCredits(char* x)
 {
 	char* e1;
@@ -1366,6 +1370,7 @@ int __cdecl cm_ResolveSpecialEntityId(char*, int);
 
 /* ADDRESS: GOLDTL 0x004c7250 */
 /* ADDRESS: GOLD 0x004c66c0 */
+/* ADDRESS: GOLDDE 0x004b4a40 */
 int __cdecl cm_ChkChangeBits(char* cmd)
 {
 	char* e1;
@@ -1409,6 +1414,7 @@ int __cdecl cm_ChkSetGebBesitzer(char* obj)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLDTL 0x004c72e0 */
 /* ADDRESS: GOLD 0x004c6750 */
+/* ADDRESS: GOLDDE 0x004b4ad0 */
 int __cdecl cm_ChkSetGebBesitzer(int* args)
 {
 	char* p;
@@ -1449,6 +1455,7 @@ int __cdecl cm_ValidateGeneric(void* cmd, char* result)
  * or trade ('buy ') commands by resolving the entity and
  * verifying timing constraints against g_current_year. */
 
+/* ADDRESS: SERVERDE 0x1000c250 */
 int __cdecl cm_ChkElectionOrTrade(int cmd)
 {
 	ushort* entity;
@@ -1490,6 +1497,7 @@ int __cdecl cm_ChkElectionOrTrade(int cmd)
 
 
 #if defined(REBREW_SERVER)
+/* ADDRESS: SERVERDE 0x1000c300 */
 int __cdecl cm_ChkJoinLeaveElection(int* cmd)
 {
 	int action;
@@ -1549,6 +1557,7 @@ cler_query:
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLDTL 0x004c7400 */
 /* ADDRESS: GOLD 0x004c6870 */
+/* ADDRESS: GOLDDE 0x004b4bf0 */
 int __cdecl cm_ChkJoinLeaveElection(int* cmd)
 {
 	int action;
@@ -1612,6 +1621,7 @@ cler_query:
  * 1 if any entity is missing or not ready. */
 
 #ifdef REBREW_SERVER
+/* ADDRESS: SERVERDE 0x1000c450 */
 int __cdecl cm_ChkCutsceneReady(char* obj)
 {
 	int entity_ptr;
@@ -1665,6 +1675,7 @@ int __cdecl cm_ChkCommandType(char* cmd, char* result)
 
 /* ADDRESS: GOLD 0x004c6a20 */
 /* ADDRESS: GOLDTL 0x004c75b0 */
+/* ADDRESS: GOLDDE 0x004b4da0 */
 int __cdecl cm_ChkCommandType(char* p, char* out)
 {
 	char c;
@@ -1680,6 +1691,8 @@ int __cdecl cm_ChkCommandType(char* p, char* out)
 }
 #endif
 
+/* ADDRESS: GOLDDE 0x004b4dd0 */
+/* ADDRESS: SERVERDE 0x1000c500 */
 int __cdecl cm_MarkAndReturn(int cmd, char* result)
 {
 	(void) cmd;
@@ -1966,6 +1979,7 @@ int __cdecl cm_ExFree(int cmd, char* result)
  * Currency type is indexed from g_entity_slot_table. Returns 1
  * if subtraction fails (insufficient funds). */
 
+/* ADDRESS: SERVERDE 0x1000c8d0 */
 int __cdecl cm_ExMoveCredits(int cmd, char* result)
 {
 	void* entity_ptr;
@@ -2007,6 +2021,7 @@ int __cdecl cm_ExMoveCredits(int cmd, char* result)
 	return 0;
 }
 
+/* ADDRESS: SERVERDE 0x1000c980 */
 int __cdecl cm_ExTransferCurrencyNoKill(int cmd, char* result)
 {
 	int field_result;
@@ -2096,6 +2111,7 @@ int __cdecl cm_ExTransferCurrencyNoKill(int cmd, char* result)
  * compute_size operand first, as the reference does). */
 
 /* ADDRESS: GOLDTL 0x004c7c50 */
+/* ADDRESS: GOLDDE 0x004b5430 */
 uint cm_ExSellObjekt(char* cmd, uchar* result)
 {
 #ifdef REBREW_SERVER
@@ -3100,6 +3116,7 @@ int __cdecl cm_ExClearLagerslot(short* cmd, uchar* result)
  * inventory via gm_AllocObjekt. Takes entity ID from cmd+0x10
  * and object parameters from the command payload. */
 
+/* ADDRESS: SERVERDE 0x1000d710 */
 int __cdecl cm_ExAllocObjekt(int cmd, char* result)
 {
 	int field_id;
@@ -3311,6 +3328,7 @@ int __cdecl cm_ResolveSpecialEntityId(char*, int);
 
 /* ADDRESS: GOLDTL 0x004c8b10 */
 /* ADDRESS: GOLD 0x004c7f70 */
+/* ADDRESS: GOLDDE 0x004b62f0 */
 int __cdecl cm_ExSetAttribute(char* x, char* out)
 {
 	char* e1;
@@ -3464,6 +3482,7 @@ typedef struct {
 
 /* ADDRESS: GOLDTL 0x004c8bf0 */
 /* ADDRESS: GOLD 0x004c8050 */
+/* ADDRESS: GOLDDE 0x004b63d0 */
 int __cdecl cm_ExChangeDesire(char* x, char* out)
 {
 	char* e;
@@ -3868,6 +3887,7 @@ int __cdecl cm_ExSetHE(int cmd, char* result)
  * Handles three flag types: 0x01 (sets flag 0x20), 0x0e (sets
  * flag 0x40), 0x12 (sets game speed from g_game_speed_table). */
 #if defined(REBREW_SERVER) || defined(REBREW_GOLD)
+/* ADDRESS: SERVERDE 0x1000dee0 */
 int __cdecl cm_ExSysMessage(int cmd, char* result)
 {
 	int speed_index;
@@ -3918,6 +3938,7 @@ void __cdecl d2_ShowStatusBanner(void* p);
 void __cdecl gm_ApplyGameSettings(void);
 
 /* ADDRESS: GOLDTL 0x004c9550 */
+/* ADDRESS: GOLDDE 0x004b6d30 */
 int __cdecl cm_ExSysMessage(char* pkt, char* out)
 {
 	int status;
@@ -4148,6 +4169,7 @@ void __cdecl he_NotifyCrimeRecorded(char*, char*);
  * resolves the offender, reports the new entry and walks the entity list
  * that belongs to the case. */
 /* ADDRESS: GOLDTL 0x004c9a10 */
+/* ADDRESS: GOLDDE 0x004b71f0 */
 int __cdecl cm_ExAddStraftat(char* src, char* out)
 {
 	STRAFTAT_RECORD* rec;
@@ -4238,6 +4260,7 @@ int __cdecl cm_ExAddStraftat(char* src, char* out)
  * global ID counter. Used when creating new game entities. */
 
 #if defined(REBREW_SERVER) || defined(REBREW_GOLD)
+/* ADDRESS: SERVERDE 0x1000dfb0 */
 int __cdecl cm_ExAllocCutscene(int cmd, char* result)
 {
 	DWORD timestamp;
@@ -4299,6 +4322,8 @@ null_entry:
 }
 #endif
 
+/* ADDRESS: GOLDDE 0x004b77d0 */
+/* ADDRESS: SERVERDE 0x1000dfe0 */
 int __cdecl cm_ExRemoveLinkedObject(int cmd, char *status_ptr)
 {
 	char *statusOut;
@@ -4362,6 +4387,7 @@ ok:
  * optionally creates new plant map entries via plt_SetPlantMap.
  * Writes the found record pointer and status byte into *result. */
 
+/* ADDRESS: SERVERDE 0x1000e0b0 */
 int __cdecl cm_ChainRecordLookup(int cmd, char* result)
 {
 	char status;
@@ -4484,6 +4510,7 @@ int __cdecl cm_ResolveSpecialEntityId(char*, int);
 
 /* ADDRESS: GOLDTL 0x004ca2e0 */
 /* ADDRESS: GOLD 0x004c9740 */
+/* ADDRESS: GOLDDE 0x004b7ac0 */
 int __cdecl cm_ExAllocThemaPredigt(char* x, char* out)
 {
 	char* obj;
@@ -4589,6 +4616,7 @@ int __cdecl cm_ExSetGebBesitzer(int cmd, char* result)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLDTL 0x004cb650 */
 /* ADDRESS: GOLD 0x004caaa0 */
+/* ADDRESS: GOLDDE 0x004b8e30 */
 int __cdecl cm_ExSetGebBesitzer(char* x, char* out)
 {
 	char* e;
@@ -4746,6 +4774,7 @@ int __cdecl evt_RequestScriptExit(char*);
 int __cdecl gm_FreeGebaeude(unsigned char*);
 #endif
 
+/* ADDRESS: GOLDDE 0x004b9470 */
 int __cdecl cm_ExDestroyBuilding(int cmd, char* result)
 {
 #ifndef REBREW_SERVER
@@ -5040,6 +5069,7 @@ int __cdecl cm_ExKillTransporter(int cmd, char* result)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLDTL 0x004cc710 */
 /* ADDRESS: GOLD 0x004cbb90 */
+/* ADDRESS: GOLDDE 0x004b9ef0 */
 int __cdecl cm_ExKillTransporter(char* input, char* response)
 {
 	char* p;
@@ -5059,6 +5089,7 @@ int __cdecl cm_ExKillTransporter(char* input, char* response)
 #endif
 
 #if defined(REBREW_SERVER) || defined(REBREW_GOLD)
+/* ADDRESS: SERVERDE 0x1000e290 */
 int __cdecl cm_ExCreateGeb(int cmd, char* result)
 {
 	unsigned short* owner_record;
@@ -5110,6 +5141,7 @@ void __cdecl rd_ConnectBuildingToSupermap(int a, int b);
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 /* ADDRESS: GOLDTL 0x004cc820 */
+/* ADDRESS: GOLDDE 0x004ba000 */
 int __cdecl cm_ExCreateGeb(char* request, char* out)
 {
 	char name[260];
@@ -5228,6 +5260,7 @@ done:
  * }
  */
 
+/* ADDRESS: SERVERDE 0x1000e970 */
 int __cdecl cm_ExCondWrite(void* obj, char* buf)
 {
 	if (buf != (char*) 0) {
@@ -5261,6 +5294,7 @@ int __cdecl cm_ExCondWrite(void* obj, char* buf)
  * }
  */
 
+/* ADDRESS: SERVERDE 0x1000ea10 */
 int __cdecl cm_InitDefaultResponse(int cmd, char* result)
 {
 	(void) cmd;
@@ -5276,6 +5310,7 @@ int __cdecl cm_InitDefaultResponse(int cmd, char* result)
  * Handles 'elec' (election) and 'buy ' (trade/purchase)
  * command types with entity resolution and state updates. */
 
+/* ADDRESS: SERVERDE 0x1000ea30 */
 int __cdecl cm_ExElectionOrTrade(int cmd, char* result)
 {
 	void* entity;
@@ -5344,6 +5379,7 @@ int __cdecl cm_ExElectionOrTrade(int cmd, char* result)
  * For 'leav', finds the player's slot and clears it. */
 
 
+/* ADDRESS: SERVERDE 0x1000eb70 */
 int __cdecl cm_ExJoinLeaveElection(int cmd, char* result)
 {
 	int action;
@@ -5439,6 +5475,7 @@ cler_query:
  * }
  */
 
+/* ADDRESS: SERVERDE 0x1000ed30 */
 int __cdecl cm_ExCondWrite2(void* obj, char* buf)
 {
 	if (buf != (char*) 0) {
@@ -5453,6 +5490,7 @@ int __cdecl cm_ExCondWrite2(void* obj, char* buf)
  * of the command. Returns 1 (fail) if no entity found, 0 on
  * success. Clears param_2[1] if result buffer is non-null. */
 
+/* ADDRESS: SERVERDE 0x1000ed50 */
 int __cdecl cm_ChkEntityLookup(int cmd, char* result)
 {
 	int found;
@@ -5470,6 +5508,7 @@ int __cdecl cm_ChkEntityLookup(int cmd, char* result)
  * cutscene-related commands for entity state transitions
  * during in-game cinematics. */
 #ifdef REBREW_SERVER
+/* ADDRESS: SERVERDE 0x1000ed80 */
 int __cdecl cm_ExCutsceneReady(int cmd, char* result)
 {
 	int readyResult;
@@ -5501,6 +5540,7 @@ int __cdecl cm_ExCutsceneReady(int cmd, char* result)
  * delta from the command payload. */
 
 #if defined(REBREW_SERVER) /* the clients link their own twin of this function */
+/* ADDRESS: SERVERDE 0x1000ede0 */
 int __cdecl cm_ExModifyHealth(int cmd)
 {
 	int entity;
@@ -5681,6 +5721,7 @@ int __cdecl cm_ExAllocWarEvent(int cmd, char* result)
  * 4=gv_ActivateSection, 5=gv_UpdateProductionProgress,
  * 6=gv_ValidateEntityAction. Stamps timestamp and random seed. */
 
+/* ADDRESS: SERVERDE 0x1000f090 */
 int __cdecl cm_DispatchProduction(int cmd, char* result)
 {
 	uint32_t* data_ptr;
@@ -5724,6 +5765,7 @@ int __cdecl cm_DispatchProduction(int cmd, char* result)
  * gv_MoveSlotEntry, which relocates an entity between inventory slots. */
 
 
+/* ADDRESS: SERVERDE 0x1000f120 */
 int __cdecl cm_DispatchMoveSlot(void* cmd, char* result_buf)
 {
 	(void) result_buf;
@@ -5754,6 +5796,7 @@ int __cdecl cm_ExAllocGraveyardWorker(int cmd, char* result)
 	return (alloc_id != 0) - 1;
 }
 #else
+/* ADDRESS: GOLDDE 0x004bb270 */
 int __cdecl cm_ExAllocGraveyardWorker(int cmd, char* result)
 {
 	int id;
@@ -5840,6 +5883,7 @@ int __cdecl cm_ExAllocAlchemist(int cmd, char* result)
  * other alchemist-related operations. */
 
 #ifdef REBREW_SERVER
+/* ADDRESS: SERVERDE 0x1000f1c0 */
 int __cdecl cm_ExSimSpecialAction(int cmd, char* result)
 {
 	char* record;
@@ -5984,6 +6028,7 @@ int __cdecl cm_GetBuildingStatCount(uchar* cmd)
  * Same shape, different constants -> twin file, not a shared marker. */
 /* ADDRESS: GOLDTL 0x004f1320 */
 /* ADDRESS: GOLD 0x004ef3c0 */
+/* ADDRESS: GOLDDE 0x004dd590 */
 int __cdecl cm_GetBuildingStatCount(uchar* cmd)
 {
 	int upgrade_data;

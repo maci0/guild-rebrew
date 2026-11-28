@@ -53,6 +53,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 void __cdecl evt_RequestScriptExit(char*);
 
+/* ADDRESS: GOLDDE 0x00574720 */
 void __cdecl d2_RunSeanceItemsDialog(char* e, char* res)
 {
 	char* m;

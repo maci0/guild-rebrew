@@ -8,6 +8,7 @@ int __cdecl ai_ComputeActionScore(float* o1, float* o2, int a3, char* e, Stat* s
 int __cdecl ai_ComputeBaseActionScore(float* o1, float* o2, int a3, char* e, int a5, int a6, int a7);
 
 /* ADDRESS: GOLDTL 0x00499000 */
+/* ADDRESS: GOLDDE 0x00487a40 */
 int __cdecl ai_ScoreSabotieren(float* firstScore, float* secondScore, int idx, char* entity, int extraA, int extraB, int extraC)
 {
 	Stat st;

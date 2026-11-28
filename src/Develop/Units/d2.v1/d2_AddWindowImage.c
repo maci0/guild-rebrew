@@ -65,6 +65,7 @@ int __cdecl d2_AddWindowImage(int x, int y, int image, int window_id, int contex
 }
 #else
 /* ADDRESS: GOLDTL 0x0046f7e0 */
+/* ADDRESS: GOLDDE 0x00462d40 */
 int __cdecl d2_AddWindowImage(int x, int y, int resourceId, int win, int scaleType)
 {
 	D2_WIN* w;

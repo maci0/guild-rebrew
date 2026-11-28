@@ -1,5 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x0040bdc0 */
+/* ADDRESS: GOLDDE 0x0040acc0 */
 void __cdecl ch_ResetGridAndUniverseCache(void)
 {
 	*(int*) 0x67530c = -1;

@@ -27,6 +27,7 @@ void __stdcall fcn_005ed39b(float* out, float l, float r, float b, float t,
                             float zn, float zf);
 
 /* ADDRESS: GOLDTL 0x004582d0 */
+/* ADDRESS: GOLDDE 0x0044da90 */
 void __cdecl d3_RenderProjectedShadow(char* object, char* subObj, char* renderObj, char* map, float* va,
                           float* vb, char* node, int* rec, float height)
 {

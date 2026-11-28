@@ -20,6 +20,7 @@ void __cdecl he_CancelErforschenActions(char*);
 void __cdecl ahm_SendFireCommand(char*);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x0056c740 */
 int __cdecl d2_ConfirmFireAlchemist(char* a, int* unused)
 {
 	int result;

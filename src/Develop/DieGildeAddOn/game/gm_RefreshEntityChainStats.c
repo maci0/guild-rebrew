@@ -20,6 +20,7 @@ int __cdecl cm_AppendDesireDelta(unsigned char, float);
 void __cdecl cm_SendChangeDesire(void);
 
 /* ADDRESS: GOLDTL 0x004fd0a0 */
+/* ADDRESS: GOLDDE 0x004e8bd0 */
 void __cdecl gm_RefreshEntityChainStats(void)
 {
 	short flag;

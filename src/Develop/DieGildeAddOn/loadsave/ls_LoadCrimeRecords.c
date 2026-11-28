@@ -40,6 +40,7 @@ extern Pair_99f800 cm_CrimeEvidenceLinks[0x800];
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 
 /* ADDRESS: GOLDTL 0x004f4c40 */
+/* ADDRESS: GOLDDE 0x004e0d00 */
 int __cdecl ls_LoadCrimeRecords(void* f)
 {
 	int ver;

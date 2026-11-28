@@ -7,6 +7,7 @@ void __cdecl snd_ReleaseAllSampleBanks(void);
 void __cdecl m_FreeTracked(int);
 int __cdecl msx_ReleaseWaveDriver(int);
 
+/* ADDRESS: GOLDDE 0x0041efd0 */
 void __cdecl d3snd_Shutdown(void)
 {
 	snd_ReleaseAllSampleBanks();

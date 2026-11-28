@@ -3,6 +3,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b3820 */
 void __cdecl cm_SendSetGebBesitzer(int gebId, int eigentuemerId, int besitzerId)
 {
 	char buf[0x9c];

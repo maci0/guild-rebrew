@@ -30,6 +30,7 @@ void __cdecl cm_SendCopyEntityData(char*);
 char* __cdecl gm_LookupSpecialObjectRecord(int, int*);
 void __cdecl d2_ShowUseObjDialog(char*);
 
+/* ADDRESS: GOLDDE 0x005c0c50 */
 int __cdecl gm_ObjSendTargetMsg0xa3(char* e, char* request)
 {
 	int out;

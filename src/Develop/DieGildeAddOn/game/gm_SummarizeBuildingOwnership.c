@@ -13,6 +13,7 @@ unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 
 extern char gm_EntityIdField[];
 
+/* ADDRESS: GOLDDE 0x004a36d0 */
 void __cdecl gm_SummarizeBuildingOwnership(int kind, stat12* out)
 {
 	unsigned char* e;

@@ -20,6 +20,7 @@ int __cdecl gm_CheckEntityType(unsigned char* e);
 int __cdecl gm_IsWarehouse(unsigned char* e);
 void __cdecl d3_TransformPoint(char* view, char* pos, Vec4* out);
 
+/* ADDRESS: GOLDDE 0x004f0010 */
 unsigned char* __cdecl gm_FindNearestBuildingByKind(unsigned char* me, int kind)
 {
 	float best_d;

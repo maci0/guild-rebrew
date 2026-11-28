@@ -18,6 +18,7 @@ typedef struct
 
 extern char gm_EntitySlotTable[];
 
+/* ADDRESS: GOLDDE 0x004eb270 */
 int __cdecl gm_IsEntityOrphaned(unsigned char* p)
 {
 	int id;

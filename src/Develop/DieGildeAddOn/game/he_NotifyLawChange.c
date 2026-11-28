@@ -8,6 +8,7 @@ extern char gm_EntityIdField[];
 void __cdecl io_FormatTextBuffer(void*, int, int, int);
 void __cdecl he_PostEntityMessage(int, int, void*, int, int, void*);
 
+/* ADDRESS: GOLDDE 0x005970e0 */
 void __cdecl he_NotifyLawChange(void* noticeEntity, int lawName)
 {
 	if (*(unsigned short*) noticeEntity != *(unsigned short*) ((char*)&gm_LocalPlayerSlot)) {

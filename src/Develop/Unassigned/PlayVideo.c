@@ -39,6 +39,7 @@ char* __cdecl FindVideoById(int);
 /* Shows a video window topmost and starts playback; a modal video pumps
  * messages until its window closes. */
 /* ADDRESS: GOLDTL 0x0041f350 */
+/* ADDRESS: GOLDDE 0x0041c680 */
 int __cdecl PlayVideo(int id)
 {
 	char* v;

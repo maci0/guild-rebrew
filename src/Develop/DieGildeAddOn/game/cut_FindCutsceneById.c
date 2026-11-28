@@ -3,6 +3,7 @@
 
 /* ADDRESS: GOLD 0x004e50a0 */
 /* ADDRESS: GOLDTL 0x004e6a30 */
+/* ADDRESS: GOLDDE 0x004d3280 */
 char* __cdecl cut_FindCutsceneById(int a1)
 {
 	int i;

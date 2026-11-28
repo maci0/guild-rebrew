@@ -9,6 +9,7 @@ char* __cdecl gm_FindCityItemHolder(int);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, int, int);
 int __cdecl cm_SendSellObjekt(int, int, int, int, char, int);
 
+/* ADDRESS: GOLDDE 0x00565860 */
 void __cdecl d2_GrantTutorialLumber(int a)
 {
 	char* e;

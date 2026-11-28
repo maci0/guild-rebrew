@@ -11,6 +11,7 @@ int __cdecl ai_StartUseSeance(void);
 int __cdecl ai_RunUseSeance(void);
 
 /* ADDRESS: GOLDTL 0x004901d0 */
+/* ADDRESS: GOLDDE 0x0047f080 */
 int __cdecl ai_RegisterGraveyardMethods(char* e)
 {
 	AM_METHOD d;

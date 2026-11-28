@@ -41,6 +41,7 @@ extern D2_FORM_RECORD d2_Forms[];
 void __cdecl d2_PositionControl(int x, int y, int slot);
 
 /* ADDRESS: GOLDTL 0x00471b60 */
+/* ADDRESS: GOLDDE 0x00465060 */
 void __cdecl d2_CenterDialogWindows(int k)
 {
 	Obj* o;

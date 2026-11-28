@@ -78,6 +78,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x00599350 */
+/* ADDRESS: GOLDDE 0x0057eb00 */
 void __cdecl d2_ShowBuildingMenu(void)
 {
 	char path[0x104];

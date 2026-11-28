@@ -14,6 +14,7 @@ void __cdecl d2_InitWindowBounds(int);
 int __cdecl io_AppendText(char*, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 
+/* ADDRESS: GOLDDE 0x00565d70 */
 int __cdecl d2_OpenTutorialMainDialog(void)
 {
 	int o;

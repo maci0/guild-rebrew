@@ -12,6 +12,7 @@ void __cdecl he_FreeAction(char*);
 int __cdecl cm_RequestAssignWorker(unsigned char*, int, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x00536540 */
 void __cdecl he_AllocRndGeselle(char* o)
 {
 	unsigned char* e;

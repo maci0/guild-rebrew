@@ -15,6 +15,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_RunHandelSuchenDialog(int, int);
 
+/* ADDRESS: GOLDDE 0x005841c0 */
 void __cdecl d2_RunAlchemistCreatureHud(int entity, int mode)
 {
 	int option;

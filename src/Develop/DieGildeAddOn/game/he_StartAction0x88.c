@@ -24,6 +24,7 @@ void __cdecl he_FreeAction(char*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl gm_ModifyHealth(int, int);
 
+/* ADDRESS: GOLDDE 0x0055e250 */
 void __cdecl he_StartAction0x88(char* u)
 {
 	char text[0x400];

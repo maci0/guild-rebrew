@@ -62,6 +62,7 @@ typedef struct {
 #pragma pack(pop)
 
 /* ADDRESS: GOLDTL 0x00561380 */
+/* ADDRESS: GOLDDE 0x00547550 */
 void __cdecl he_RunSabotage(void *action)
 {
 	unsigned char *p;

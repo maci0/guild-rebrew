@@ -5,6 +5,7 @@ int __cdecl gm_FindCardRankGroup(int* h, int a2, int skip, int* out);
 int __cdecl gm_RandomMod(int);
 
 /* ADDRESS: GOLDTL 0x004a7d40 */
+/* ADDRESS: GOLDDE 0x00496090 */
 void __cdecl ai_EvaluateCardGameFold(void)
 {
 	char* p;

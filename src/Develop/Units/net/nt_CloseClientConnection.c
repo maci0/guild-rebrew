@@ -6,6 +6,7 @@ extern void (__stdcall *imp_WSACleanup)(void);
 
 /* ADDRESS: GOLD 0x00424c30 */
 /* ADDRESS: GOLDTL 0x00421050 */
+/* ADDRESS: GOLDDE 0x0041df20 */
 void __cdecl nt_CloseClientConnection(void)
 {
 	if (nt_ClientSocket != -1) {

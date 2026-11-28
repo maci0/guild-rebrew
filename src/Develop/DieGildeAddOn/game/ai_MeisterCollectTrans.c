@@ -27,6 +27,7 @@ int __cdecl sprintf(char*, char*, ...);
 /* Master AI: counts the transports the master already runs, then reports a
    free transporter (job 0x135/0x136) to the server. */
 /* ADDRESS: GOLDTL 0x00489250 */
+/* ADDRESS: GOLDDE 0x00478120 */
 void __cdecl ai_MeisterCollectTrans(char* e)
 {
 	void* found;

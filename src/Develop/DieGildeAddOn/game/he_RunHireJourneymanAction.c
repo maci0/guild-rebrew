@@ -14,6 +14,7 @@ void __cdecl ch_StartMovement(int, int, int, int, int, char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 
+/* ADDRESS: GOLDDE 0x005365f0 */
 void __cdecl he_RunHireJourneymanAction(char* action)
 {
 	int target_id;

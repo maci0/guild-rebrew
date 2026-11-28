@@ -25,6 +25,7 @@ void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 char* __cdecl gm_LookupSpecialObjectRecord(int, int*);
 void __cdecl d2_ShowUseObjDialog(char*);
 
+/* ADDRESS: GOLDDE 0x005c0e90 */
 int __cdecl gm_ObjSetEntityFlag0x400000(char* e, char* action)
 {
 	int out;

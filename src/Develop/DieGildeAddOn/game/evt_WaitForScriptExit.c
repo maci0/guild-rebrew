@@ -5,6 +5,7 @@ extern int main_LoopFlags;
 char* __cdecl evt_FindScriptById(int);
 void __cdecl main_RunFrameLoop(int, unsigned int);
 
+/* ADDRESS: GOLDDE 0x00519c50 */
 void __cdecl evt_WaitForScriptExit(int script_id)
 {
 	unsigned int fl;

@@ -18,6 +18,7 @@ void __cdecl msx_RunTrackThread(void* arg);
 
 /* ADDRESS: GOLD 0x00423770 */
 /* ADDRESS: GOLDTL 0x0041fa10 */
+/* ADDRESS: GOLDDE 0x0041ca60 */
 void __cdecl msx_RunTrackThread(void* arg)
 {
 	LARGE_INTEGER now;
@@ -38,6 +39,7 @@ void __cdecl msx_RunTrackThread(void* arg)
 
 /* ADDRESS: GOLD 0x00423830 */
 /* ADDRESS: GOLDTL 0x0041fad0 */
+/* ADDRESS: GOLDDE 0x0041cb20 */
 int __cdecl msx_InitDrivers(int a, int b, int c)
 {
 	DWORD tid;

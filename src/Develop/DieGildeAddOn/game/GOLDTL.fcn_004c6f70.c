@@ -1,3 +1,4 @@
+extern char gm_EntitySlotTable[];
 int __cdecl cm_ResolveSpecialEntityId(char*, int);
 int __cdecl gm_ResolveEntityById(int*, char**, int*, int);
 int __cdecl gm_QueryEntities(int, int, int, int);
@@ -7,6 +8,7 @@ int __cdecl gm_CheckInventoryCapacity(int, int, int);
 int __cdecl gm_QueryEntitySum(int, char);
 
 /* ADDRESS: GOLDTL 0x004c6f70 */
+/* ADDRESS: GOLDDE 0x004b4760 */
 int __cdecl cm_ChkClientSellObjekt(char* request)
 {
 	int v12;
@@ -47,7 +49,7 @@ int __cdecl cm_ChkClientSellObjekt(char* request)
 		}
 		if (v14 != 0) {
 			if (*(unsigned short*) (v14 + 0x27) != 0xffff) {
-				obj = *(unsigned short*) (v14 + 0x27) * 0x21c + 0x7f4ca0;
+				obj = *(unsigned short*) (v14 + 0x27) * 0x21c + (int) &gm_EntitySlotTable;
 			} else {
 				obj = 0;
 			}

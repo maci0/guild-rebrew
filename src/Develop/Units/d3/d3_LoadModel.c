@@ -5,6 +5,7 @@ int __cdecl d3_FindCachedModel(char* s);
 int __cdecl d3_LoadCachedModel(char* key, char* val);
 
 /* ADDRESS: GOLDTL 0x0044c200 */
+/* ADDRESS: GOLDDE 0x004426a0 */
 int __cdecl d3_LoadModel(int baseName, int altName)
 {
 	int i;

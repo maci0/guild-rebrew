@@ -114,6 +114,7 @@ void __cdecl d3_RecalculateObjectBounds(char* object)
 }
 #else
 /* ADDRESS: GOLDTL 0x0044a390 */
+/* ADDRESS: GOLDDE 0x00440970 */
 void __cdecl d3_RecalculateObjectBounds(MeshBox* m)
 {
 	Vert* v;

@@ -9,6 +9,7 @@ typedef struct
 } Body20;
 // SIZE 0x80
 
+/* ADDRESS: GOLDDE 0x004b2880 */
 void __cdecl cm_SendLoadChunk(Body20* data)
 {
 	char buf[0x9c];

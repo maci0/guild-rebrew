@@ -9,6 +9,7 @@ void __cdecl he_FreeAction(char*);
 int __cdecl cm_SendSetHE(char, unsigned char*);
 
 /* ADDRESS: GOLDTL 0x00578e10 */
+/* ADDRESS: GOLDDE 0x0055ece0 */
 void __cdecl he_StartDeathPact(char* action)
 {
 	int flag;

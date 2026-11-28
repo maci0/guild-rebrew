@@ -17,6 +17,7 @@ unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl ai_SelectRankedCandidates(char* e, int a, int* b, int c, float r, int* out);
 int __cdecl amt_GetRoleLevel(int k);
 
+/* ADDRESS: GOLDDE 0x0047cba0 */
 int __cdecl ai_SetupSecretRoomMode1(char* e, char* action, char* target)
 {
 	int mask;

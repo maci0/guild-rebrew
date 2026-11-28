@@ -5,6 +5,7 @@ float __cdecl gm_GetSeasonPrice(int id, unsigned char k);
 int __cdecl cm_SendSellObjekt(int a, int b, int c, int d, unsigned char k, int n);
 
 /* ADDRESS: GOLDTL 0x00497670 */
+/* ADDRESS: GOLDDE 0x004860f0 */
 int __cdecl ai_RunRaumKaufen(int unused, char* it, char* x)
 {
 	char* t;

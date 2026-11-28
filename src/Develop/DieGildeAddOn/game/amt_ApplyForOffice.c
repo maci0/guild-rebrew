@@ -20,6 +20,7 @@ typedef struct
 extern Rec18_68da68 amt_OfficeRoleTemplates[];
 
 /* ADDRESS: GOLDTL 0x004e7d40 */
+/* ADDRESS: GOLDDE 0x004d4350 */
 int __cdecl amt_ApplyForOffice(char* entityRecord, int officeKind)
 {
 	Info4e7d40 info;

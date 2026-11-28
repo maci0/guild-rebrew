@@ -10,6 +10,7 @@ void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 
+/* ADDRESS: GOLDDE 0x00535850 */
 void __cdecl he_AcceptDuell(char* o, char* a, char* b)
 {
 	char buf[0x400];

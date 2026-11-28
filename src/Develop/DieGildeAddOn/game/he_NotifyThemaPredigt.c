@@ -8,6 +8,7 @@ extern char str_empty[];
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 
+/* ADDRESS: GOLDDE 0x00596de0 */
 void __cdecl he_NotifyThemaPredigt(char* preacher, char* target, int topicBuilding)
 {
 	int i;

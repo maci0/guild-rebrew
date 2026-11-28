@@ -29,6 +29,7 @@ float __cdecl gm_ApplyEntityHealthDelta(unsigned short, int);
 void __cdecl cm_AppendPacketFieldValue(int, int, int, char*);
 void __cdecl cm_RequestChangeAttribute(void);
 
+/* ADDRESS: GOLDDE 0x00528a80 */
 void __cdecl gm_ApplyHourlyEntityUpdates(void)
 {
 	int i;

@@ -21,6 +21,7 @@ extern int* d2_TutorialState;
 extern volatile int gm_GameTicks;
 extern unsigned char* lpGebaeudePROT;
 
+/* ADDRESS: GOLDDE 0x00564e00 */
 int __cdecl d2_UpdateTutCh1Cat0aStep(int* ev)
 {
 	if (ev[0] == 0xd && ev[1] != 0 && ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) ev[1]].category == 0xa) {

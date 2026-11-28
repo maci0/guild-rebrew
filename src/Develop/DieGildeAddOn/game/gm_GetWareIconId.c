@@ -17,6 +17,7 @@ typedef struct {
 
 extern char* lpObjektePROT;
 
+/* ADDRESS: GOLDDE 0x004f0740 */
 int __cdecl gm_GetWareIconId(unsigned short* slot)
 {
 	WareIcon icons[55] = {

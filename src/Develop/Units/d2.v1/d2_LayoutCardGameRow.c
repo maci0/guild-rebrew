@@ -69,6 +69,7 @@ int __cdecl d2_AddElementToWindow(int x, int y, int gfx, int win);
 /* ADDRESS: GOLDTL 0x005e7b70 */
 
 /* Lays out one row of the panel: caption, icon, then one button per item. */
+/* ADDRESS: GOLDDE 0x005c8e20 */
 void __cdecl d2_LayoutCardGameRow(int row, int count, int* list)
 {
 	char buf[0x100];

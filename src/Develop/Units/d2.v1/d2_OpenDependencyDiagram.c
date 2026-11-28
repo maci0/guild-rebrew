@@ -44,6 +44,7 @@ void __cdecl d2_DestroyForm(int h);
 void __cdecl d2_UpdateDependencyDiagram(unsigned char* a, unsigned short* b);
 void __cdecl d2_DrawDependencyLine(int a, int b, int c, int d);
 
+/* ADDRESS: GOLDDE 0x004fa4c0 */
 int __cdecl d2_OpenDependencyDiagram(int arg, unsigned char* a, unsigned short* b)
 {
 	Slot* s;

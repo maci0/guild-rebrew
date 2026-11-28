@@ -37,6 +37,7 @@ extern int __cdecl gm_IsSlotEntryValid();
 extern int __cdecl cm_SendCopyEntityData(void* msg);
 
 /* ADDRESS: GOLDTL 0x004f3ef0 */
+/* ADDRESS: GOLDDE 0x004dffb0 */
 void __cdecl gv_UpdateGraveyardPlots(char* entity)
 {
 	int n;

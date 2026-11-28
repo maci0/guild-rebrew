@@ -3,6 +3,7 @@ extern int* sb_BankListHead;
 
 
 
+/* ADDRESS: GOLDDE 0x0041f5b0 */
 int* __cdecl sb_FindBankByPath(int needle)
 {
 	int* node;

@@ -4,6 +4,7 @@
 int __cdecl gm_GetTypeProductValue(int k);
 int __cdecl gm_GetLawEntry(int k, int* info);
 
+/* ADDRESS: GOLDDE 0x004f7f90 */
 int __cdecl gm_CalcBuildingCost(unsigned char* p, int k)
 {
 	int info[9];

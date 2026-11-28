@@ -7,6 +7,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b4470 */
 void __cdecl cm_RequestMoveSlot(char* source)
 {
 	char buf[0x9c];

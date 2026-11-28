@@ -2,6 +2,7 @@
 
 typedef int (__stdcall* D3_TEX_RELEASE_FN)(void*);
 
+/* ADDRESS: GOLDDE 0x00451030 */
 void __cdecl d3_ReleaseTextureInterface(char* p)
 {
 	void* q;

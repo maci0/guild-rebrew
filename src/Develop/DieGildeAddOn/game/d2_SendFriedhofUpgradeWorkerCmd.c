@@ -38,6 +38,7 @@ int __cdecl d2_ShowModalMessageBox(char*, int);
 char* __cdecl gm_QueryEntities(int, int, int, int);
 void __cdecl cm_SendCopyEntityData(Packet*);
 
+/* ADDRESS: GOLDDE 0x00575c20 */
 int __cdecl d2_SendFriedhofUpgradeWorkerCmd(char* building, unsigned short* worker, int level)
 {
 	Packet pkt;

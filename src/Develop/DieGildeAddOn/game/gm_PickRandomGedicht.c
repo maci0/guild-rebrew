@@ -5,6 +5,7 @@
 
 int __cdecl gm_RandomMod(int);
 
+/* ADDRESS: GOLDDE 0x0049a5b0 */
 void __cdecl gm_PickRandomGedicht(unsigned short prev_id)
 {
 	int r;

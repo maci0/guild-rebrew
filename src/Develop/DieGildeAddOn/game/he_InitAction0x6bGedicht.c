@@ -12,6 +12,7 @@ extern pos14_7f4c00 gm_GameTime;
 short __cdecl gm_GetGedichtCount(void);
 int __cdecl cm_SendSetHE(int, char*);
 
+/* ADDRESS: GOLDDE 0x0053c080 */
 void __cdecl he_InitAction0x6bGedicht(char* e)
 {
 	if ((e[0x78] & 4) == 0) {

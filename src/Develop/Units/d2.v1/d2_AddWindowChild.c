@@ -20,6 +20,7 @@ extern char s_67d420[];
 void __cdecl d2_InsertControlAfterWindow(int slot, D2_WIN* parent);
 
 /* ADDRESS: GOLDTL 0x00465eb0 */
+/* ADDRESS: GOLDDE 0x00459ae0 */
 int __cdecl d2_AddWindowChild(int id, int win)
 {
 	D2_WIN* w;

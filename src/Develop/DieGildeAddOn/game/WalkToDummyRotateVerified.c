@@ -7,6 +7,7 @@ extern char* evt_CurrentScript;
 void __cdecl ch_QueueWalkToDummyRotate(char* a, char* b);
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
+/* ADDRESS: GOLDDE 0x0040ba70 */
 int __cdecl WalkToDummyRotateVerified(char** a, char** b, int* c)
 {
 	if (evt_WaitingScriptTask != 0 && *(void**) (evt_WaitingScriptTask + 0x44) == (void*) WalkToDummyRotateVerified) {

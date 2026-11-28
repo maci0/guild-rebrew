@@ -9,6 +9,7 @@ typedef struct Vec3 {
 
 void __cdecl d3_TransformPoint(char*, Vec3*, Vec3*);
 
+/* ADDRESS: GOLDDE 0x0044ad00 */
 void __cdecl d3_TransformPointToRef(char* node, char* ref, Vec3* point, Vec3* out)
 {
 	float t[4];

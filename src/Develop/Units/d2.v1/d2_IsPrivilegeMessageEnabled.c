@@ -1,5 +1,6 @@
 extern int g_7749f4;
 /* ADDRESS: GOLDTL 0x0057de80 */
+/* ADDRESS: GOLDDE 0x00563c70 */
 int __cdecl d2_IsPrivilegeMessageEnabled(unsigned int a0)
 {
 	int v;

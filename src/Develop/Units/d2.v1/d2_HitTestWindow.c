@@ -1,3 +1,4 @@
+#include "d2_capacity.h"
 typedef struct HitObj {
 	int f0;
 	char pad4[0xc];
@@ -22,6 +23,7 @@ extern HitObj** d2_ZOrderStack;
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 /* ADDRESS: GOLDTL 0x0046ac40 */
+/* ADDRESS: GOLDDE 0x0045e430 */
 int __cdecl d2_HitTestWindow(int x, int y)
 {
 	HitObj* o;
@@ -29,7 +31,7 @@ int __cdecl d2_HitTestWindow(int x, int y)
 	int hit;
 
 	g_67d388 = -1;
-	for (n = 0x3ff; n >= 0; n--) {
+	for (n = d2_ELEMENT_CAPACITY - 1; n >= 0; n--) {
 		hit = 0;
 		o = d2_ZOrderStack[n];
 		if (o == 0) {

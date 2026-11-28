@@ -1,3 +1,4 @@
+extern char g_85a224[];
 #include "Develop/client_types.h"
 typedef struct { unsigned char kind, unknown01[0x24c]; } BuildingProto5167c0;
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
@@ -44,6 +45,7 @@ void __cdecl d3_UpdateBuildingSlotVisibility(void);
 void __cdecl d3_InitGateNodeFlags(void);
 
 /* ADDRESS: GOLDTL 0x005167c0 */
+/* ADDRESS: GOLDDE 0x00501230 */
 void __cdecl d3_UpdateBuildingView(unsigned char* building, int queryId)
 {
 	int mode;
@@ -130,7 +132,7 @@ void __cdecl d3_UpdateBuildingView(unsigned char* building, int queryId)
 			}
 		}
 		p++;
-	} while ((int) p < 0x14d0c20);
+	} while ((int) p < ((int) &ch_CharacterSlots + 0xc00));
 	p = (unsigned char**) (gm_EntitySlotTable + 0x184);
 	do {
 		obj = *p;
@@ -149,7 +151,7 @@ void __cdecl d3_UpdateBuildingView(unsigned char* building, int queryId)
 			}
 		}
 		p = (unsigned char**) ((char*) p + 0x21c);
-	} while ((int) p < 0x85a224);
+	} while ((int) p < (int) &g_85a224);
 	p = (unsigned char**) gm_QueryEntities(0, 2, 7, 4, 0x1d);
 	while (p != 0) {
 		obj = (unsigned char*) *(void**) ((char*) p + 0x3b);

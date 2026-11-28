@@ -21,6 +21,7 @@ typedef struct {
 
 slot80* __cdecl gm_FindSlotById(int, int);
 
+/* ADDRESS: GOLDDE 0x004b9a90 */
 int __cdecl cm_ExMarktSlotDelta(char* x, char* out)
 {
 	slot80* s;

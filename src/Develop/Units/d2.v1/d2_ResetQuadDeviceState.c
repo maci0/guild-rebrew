@@ -15,6 +15,7 @@ extern int g_772618;
 
 
 /* ADDRESS: GOLDTL 0x0047c520 */
+/* ADDRESS: GOLDDE 0x0046b4f0 */
 void __cdecl d2_ResetQuadDeviceState(void)
 {
 	if (g_772618 != 0) {

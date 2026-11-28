@@ -8,6 +8,7 @@ extern int g_772e8c;
 extern int g_9ba9f4;
 extern TEXT_LOG_RECORD g_9ba3a0[15];
 
+/* ADDRESS: GOLDDE 0x004bb7e0 */
 char* __cdecl d2_GetCurrentTextLogRecord(void)
 {
 	if (g_772e88 != 0) {

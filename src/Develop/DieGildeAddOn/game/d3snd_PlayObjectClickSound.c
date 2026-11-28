@@ -8,6 +8,7 @@ extern char g_68a930[];
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl d3snd_PlaySoundEffect(int, int, char*, int);
 
+/* ADDRESS: GOLDDE 0x004b0ff0 */
 void __cdecl d3snd_PlayObjectClickSound(unsigned short* e)
 {
 	int r;

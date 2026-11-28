@@ -10,6 +10,7 @@ typedef struct {
 
 extern void* g_6b7e9c;
 
+/* ADDRESS: GOLDDE 0x00424830 */
 Var* __cdecl evt_FindCommand(const char* name)
 {
 	int i;

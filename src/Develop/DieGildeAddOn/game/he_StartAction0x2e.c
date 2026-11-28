@@ -1,3 +1,4 @@
+extern char str_empty[];
 #include "Develop/client_types.h"
 #include "Develop/DieGildeAddOn/game/client_actions.h"
 
@@ -21,6 +22,7 @@ int __cdecl he_PostEntityMessage(int id, int arg, char* text1, unsigned char fla
 void __cdecl gm_TryRecordCrime(int a, int b, int c, int d, int e);
 
 /* ADDRESS: GOLDTL 0x0054b150 */
+/* ADDRESS: GOLDDE 0x00531610 */
 void __cdecl he_StartAction0x2e(char* entity)
 {
 	char buf[0x200];
@@ -45,7 +47,7 @@ void __cdecl he_StartAction0x2e(char* entity)
 	cm_RequestCopyEntityData(*(int*) (secondEntity + 4), *(int*) (firstEntity + 4), -0x14, 1);
 	if (firstEntity[2] == 6 || firstEntity[2] == 7) {
 		io_FormatTextBuffer(buf, 0x175a, *(unsigned short*) secondEntity, *(unsigned short*) secondEntity);
-		he_PostEntityMessage(*(int*) (firstEntity + 4), -1, buf, 0, 0x5fb, (char*) 0x6b5c60);
+		he_PostEntityMessage(*(int*) (firstEntity + 4), -1, buf, 0, 0x5fb, (char*) &str_empty);
 	}
 	v4 = -1;
 	p = *(char**) (secondEntity + 0x170);

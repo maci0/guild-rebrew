@@ -51,6 +51,7 @@ int __cdecl d2_FindRadioSlotByValue(int*);
 void __cdecl d2_ClearRoutePointSlot(int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x004bf1b0 */
+/* ADDRESS: GOLDDE 0x004acd30 */
 void __cdecl d2_EditRoutePointDialog(int* route_point, int* uiContext)
 {
 	int counts[3] = { 1, 2, 3 };

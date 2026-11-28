@@ -19,6 +19,7 @@ int __cdecl he_StartHandlungSearch(int, int, int);
 int __cdecl he_fn_Handlung(void);
 
 /* ADDRESS: GOLDTL 0x00498670 */
+/* ADDRESS: GOLDDE 0x004870e0 */
 int __cdecl ai_StartBetriebBauen(int target_action, short *ent, int mode, Cmd *out1, Cmd *out2)
 {
 	Cmd o1;

@@ -41,6 +41,7 @@ int __cdecl amt_FindOfficeWantingApplicants(int);
 int __cdecl amt_SpawnOfficeCandidate(int);
 short __cdecl gm_RandomMod(int);
 
+/* ADDRESS: GOLDDE 0x00540f50 */
 void __cdecl he_RunDailyCouncilEvent(Ent *e)
 {
 	int n;

@@ -40,6 +40,7 @@ float __cdecl d3_SampleAverageTerrainHeight(Vec3* p);
 void __cdecl d3_SetNodePosition(View* v, Vec4* p);
 void __cdecl d3_SetObjectRotation(View* v, Vec3* r);
 
+/* ADDRESS: GOLDDE 0x00513e70 */
 void __cdecl d3_SetCameraHeightFraction(float t)
 {
 	float h;

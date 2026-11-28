@@ -44,6 +44,7 @@ void __cdecl cm_RequestModifyHealth(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x005b6ed0 */
 int __cdecl gm_HandleErpressung(unsigned char* e, unsigned char* o)
 {
 	int chance;

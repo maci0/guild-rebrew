@@ -14,6 +14,7 @@ typedef struct
 extern Timer14 g_9b4900[16];
 extern double dbl_0_01;
 
+/* ADDRESS: GOLDDE 0x004bd120 */
 void __cdecl d3_ScheduleActionTimer(char* owner, int duration, int arg)
 {
 	int i;

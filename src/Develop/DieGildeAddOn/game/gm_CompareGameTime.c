@@ -12,6 +12,7 @@ typedef struct
 // SIZE 0xe
 #pragma pack(pop)
 
+/* ADDRESS: GOLDDE 0x004ec3f0 */
 int __cdecl gm_CompareGameTime(Time* a, Time* b)
 {
 	int ta;

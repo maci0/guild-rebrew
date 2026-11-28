@@ -8,6 +8,7 @@ char* __cdecl gm_QueryEntities(int a, int b, int c, int d, int e);
 void __cdecl gm_RemoveObjectByType(void* list, unsigned int id);
 void __cdecl gm_KillSpieler(unsigned int idx, int param);
 
+/* ADDRESS: GOLDDE 0x004db030 */
 int __cdecl ahm_HandleFireCommand(int cmd, int* ids, char* parent)
 {
 	unsigned short* entity;

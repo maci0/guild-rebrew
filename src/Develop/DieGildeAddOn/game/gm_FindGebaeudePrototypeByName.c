@@ -4,6 +4,7 @@ extern unsigned char* lpGebaeudePROT;
 
 int __cdecl fcn_0065f220(const char*, const char*);
 
+/* ADDRESS: GOLDDE 0x004f0230 */
 int __cdecl gm_FindGebaeudePrototypeByName(const char* name)
 {
 	int i;

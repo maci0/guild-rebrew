@@ -9,6 +9,7 @@ int __cdecl d2_RunChooseCityDialog(int, int);
 void __cdecl d2_ClearSurface(int);
 void __cdecl d2_SetBackdropResource(int);
 
+/* ADDRESS: GOLDDE 0x00525f80 */
 int __cdecl d2_StartSinglePlayerChooseCity(void)
 {
 	int r;

@@ -18,6 +18,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl gv_SendExtendProductionTime(char*, unsigned char*, int, int, short, int);
 void __cdecl he_NotifyFriedhofEvent0x414f(struct s_7f4ca0*, char*, unsigned char*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x00560ed0 */
 void __cdecl he_ApplyAction0x92Favor(char* o)
 {
 	unsigned char* e;

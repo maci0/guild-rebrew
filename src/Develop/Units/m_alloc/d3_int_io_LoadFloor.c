@@ -67,6 +67,7 @@ int __cdecl d3_LoadTextureSurfaceTl(int);
 char* __cdecl d3_LoadFloorPatch(char*);
 
 /* ADDRESS: GOLDTL 0x00447e30 */
+/* ADDRESS: GOLDDE 0x0043f5b0 */
 int __cdecl d3_int_io_LoadFloor(char* stream, unsigned int version)
 {
 	FLOOR_DESC desc;

@@ -2,6 +2,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b2ca0 */
 void __cdecl cm_RequestMoveObjekt(int srcObjId, int dstObjId, int count)
 {
 	char buf[0x9c];

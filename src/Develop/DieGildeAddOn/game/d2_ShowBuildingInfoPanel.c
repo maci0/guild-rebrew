@@ -61,6 +61,7 @@ unsigned char __cdecl gm_GetEntityUiFlags(int, unsigned char*, int, int);
 int __cdecl d2_CreateWindowTextButton(int x, int y, int z);
 
 /* ADDRESS: GOLDTL 0x0052df40 */
+/* ADDRESS: GOLDDE 0x005168d0 */
 void __cdecl d2_ShowBuildingInfoPanel(unsigned char* building)
 {
 	char name[128];

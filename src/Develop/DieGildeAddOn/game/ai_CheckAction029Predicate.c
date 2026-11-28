@@ -3,6 +3,7 @@ unsigned short __cdecl gm_RandomMod(int);
 
 
 /* ADDRESS: GOLDTL 0x004a9000 */
+/* ADDRESS: GOLDDE 0x00497340 */
 int __cdecl ai_CheckAction029Predicate(int unused, char* e)
 {
 	if (gm_MapEntityStatRange(*(unsigned char*) (e + 0x164)) == 7 && gm_RandomMod(3) != 0)

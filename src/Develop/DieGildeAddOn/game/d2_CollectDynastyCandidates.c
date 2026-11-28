@@ -46,6 +46,7 @@ Node* __cdecl he_StartHandlungSearch(int, int, int);
 extern unsigned char g_slot_table[2];
 
 /* ADDRESS: GOLDTL 0x005cb440 */
+/* ADDRESS: GOLDDE 0x005aced0 */
 int __cdecl d2_CollectDynastyCandidates(Ent* subject, int capacity, Row* rows, int filterKind)
 {
 	Ent* e;

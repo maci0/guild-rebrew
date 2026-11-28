@@ -16,6 +16,7 @@ void* __cdecl he_StartHandlungSearch(int, ...);
 void* __cdecl gm_SearchTable67(int);
 
 /* ADDRESS: GOLDTL 0x005c2910 */
+/* ADDRESS: GOLDDE 0x005a4d50 */
 void __cdecl d2_ShowGebaeudeSaleDialog(char* e)
 {
 	int win;

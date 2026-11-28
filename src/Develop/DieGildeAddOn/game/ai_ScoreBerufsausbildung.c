@@ -18,6 +18,7 @@ char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl ai_ComputeBaseActionScore(float* s1, float* s2, int idx, char* e, int a5, int a6, int a7);
 
 /* ADDRESS: GOLDTL 0x004a0a40 */
+/* ADDRESS: GOLDDE 0x0048f470 */
 int __cdecl ai_ScoreBerufsausbildung(float* s1, float* s2, int idx, char* actor, int flag, int a6, int a7)
 {
 	char* other;

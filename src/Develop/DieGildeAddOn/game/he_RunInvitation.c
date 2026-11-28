@@ -18,6 +18,7 @@ extern void __cdecl gm_AddTime(void*, int, int, int);
 extern int __cdecl d3snd_PlaySoundEffect(int, int, char*, int);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x0054bc90 */
+/* ADDRESS: GOLDDE 0x00532130 */
 void __cdecl he_RunInvitation(char* action)
 {
 	char text[512];

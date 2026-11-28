@@ -14,6 +14,7 @@ int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_RunSoeldnerbuchDialog(int, char*);
 void __cdecl d2_RunEquipmentDialog(int);
 
+/* ADDRESS: GOLDDE 0x00580460 */
 void __cdecl d2_RunWacheInteriorHud(int a)
 {
 	int x;

@@ -31,6 +31,7 @@ void __cdecl d3_AllocShadowTextures(void);
 #include "Develop/Units/d3/client_lighting.h"
 
 /* ADDRESS: GOLDTL 0x0043b360 */
+/* ADDRESS: GOLDDE 0x00434120 */
 char __cdecl d3_ResetDeviceObjects(void)
 {
 	char* o;

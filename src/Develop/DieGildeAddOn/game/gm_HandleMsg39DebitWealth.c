@@ -1,3 +1,4 @@
+extern char g_6629c8[];
 #include <string.h>
 
 extern unsigned char gm_ActiveTownIndex;
@@ -15,6 +16,7 @@ void __cdecl cm_RequestTransferCurrencyNoKill(int a, int b, unsigned char c, int
  * 0x004bb210..0x004bb312 (259 bytes); rows 0x004bb210 (47) and 0x004bb23f (212)
  * are one function split at the head's branch target. */
 /* ADDRESS: GOLDTL 0x004bb210 */
+/* ADDRESS: GOLDDE 0x004a9280 */
 int __cdecl gm_HandleMsg39DebitWealth(int* request)
 {
 	int v;
@@ -30,7 +32,7 @@ int __cdecl gm_HandleMsg39DebitWealth(int* request)
 		return 0x400;
 	}
 	v = fcn_0042e410(3) & 0xffff;
-	d = (double) v + *(double*) 0x6629c8;
+	d = (double) v + *(double*) &g_6629c8;
 	v = (int) (((double) fcn_0050dac0(*(short*) ent) * d) * 0.01);
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7, v);
 	he_PostEntityMessage(ent[1], ent[1], buf, 0x100 < strlen(buf), 0x603, 0);

@@ -16,6 +16,7 @@ void __cdecl cm_SendTraceEnd(char* s);
 void __cdecl cm_RequestJoinLeaveElection(Small3i* a1);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x0048dff0 */
 int __cdecl ai_RunStammtisch(char* a1, char* a2)
 {
 	Small3i msg;

@@ -6,6 +6,7 @@ int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl io_FormatTextBuffer(void*, int, int);
 void __cdecl d2_ShowStatusBanner(void*);
 
+/* ADDRESS: GOLDDE 0x004c54a0 */
 void __cdecl cut_CancelActorActions(void* request)
 {
 	char buf[0x100];

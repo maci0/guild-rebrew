@@ -9,6 +9,7 @@ char* __cdecl gm_FindNextFilteredEntity(void);
 #include "Develop/Units/d3/client_scene_transform.h"
 #include "Develop/DieGildeAddOn/game/client_placement.h"
 
+/* ADDRESS: GOLDDE 0x0057db80 */
 void __cdecl lc_UpdateBuildingVegetation(char* e)
 {
 	float pa[4];

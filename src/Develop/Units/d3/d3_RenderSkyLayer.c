@@ -1,6 +1,7 @@
 void __cdecl d3_SetRenderMaterialState(unsigned char, unsigned char, int, unsigned char, unsigned char);
 
 /* ADDRESS: GOLDTL 0x00458e00 */
+/* ADDRESS: GOLDDE 0x0044e5c0 */
 char __cdecl d3_RenderSkyLayer(char* dome, char* layer)
 {
 	void* obj;

@@ -3,6 +3,7 @@
 
 void __cdecl sb_StopVoice(void*);
 
+/* ADDRESS: GOLDDE 0x004170b0 */
 void __cdecl d3snd_StopObjectVoice(char* sound_obj)
 {
 	void* voice;

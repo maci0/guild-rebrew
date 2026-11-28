@@ -10,6 +10,7 @@ typedef struct Node {
 // SIZE 0x218
 
 /* ADDRESS: GOLDTL 0x00439ba0 */
+/* ADDRESS: GOLDDE 0x00432ab0 */
 void __cdecl d3_AppendObjectSibling(Node* a, Node* b)
 {
 	Node* p;

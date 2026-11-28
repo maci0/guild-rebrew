@@ -30,6 +30,7 @@ void __cdecl cm_SendCopyEntityData(char* msg);
 void __cdecl cm_AppendPacketFieldValue(int, int, int, int*);
 void __cdecl cm_RequestChangeAttribute(void);
 
+/* ADDRESS: GOLDDE 0x0048d7e0 */
 int __cdecl ai_RunKreditNehmen(char* actor, char* action, char* terms)
 {
 	char* p1;

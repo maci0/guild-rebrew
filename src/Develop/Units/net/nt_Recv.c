@@ -15,6 +15,7 @@ void __cdecl fcn_0064d41a(char* buf, char* fmt, int a, int b);
 void __cdecl nt_RecordPacketStats(char* buf, int len, int flag);
 
 /* ADDRESS: GOLDTL 0x004210a0 */
+/* ADDRESS: GOLDDE 0x0041df70 */
 int __cdecl nt_Recv(void)
 {
 	char buf[256];

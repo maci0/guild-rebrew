@@ -30,6 +30,7 @@ extern Pair_99f800 cm_CrimeEvidenceLinks[0x800];
 
 int __cdecl vfs_fwrite(void *, int, int, int);
 
+/* ADDRESS: GOLDDE 0x004e0aa0 */
 int __cdecl ls_SaveCrimeRecords(int fp)
 {
 	int n1;

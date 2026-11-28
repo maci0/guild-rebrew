@@ -1,8 +1,10 @@
+extern char str_fmt_s[];
 #include <string.h>
 extern void __cdecl io_FormatTextBuffer(char *buf, int id, ...);
 extern void __cdecl d2_ShowPrivilegMessage(char *buf, int a1, int a2);
 
 /* ADDRESS: GOLDTL 0x004f8660 */
+/* ADDRESS: GOLDDE 0x004e4440 */
 int __cdecl fcn_004f8660(char *obj, int *msg)
 {
 	if (*msg != 3 && *msg != 1) {
@@ -20,7 +22,7 @@ int __cdecl fcn_004f8660(char *obj, int *msg)
 		return 2;
 	}
 	if (*msg == 1 && obj[2] == 6) {
-		io_FormatTextBuffer((char *) msg + 0x14, 0x679060, 0x1da3);
+		io_FormatTextBuffer((char *) msg + 0x14, (int) &str_fmt_s, 0x1da3);
 	}
 	return 2;
 }

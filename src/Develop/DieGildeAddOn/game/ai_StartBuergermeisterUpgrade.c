@@ -24,6 +24,7 @@ int __cdecl ai_FindEntityInFavorRange(char* p, int kind, F8 f, int c, float r, i
 int __cdecl ai_FindMissingBuildingUpgrade(int* a, int* b, char* q, int c);
 int __cdecl ai_SelectBestMethod(int kind, int id, int n, Blk24* b1, Blk24* b2);
 
+/* ADDRESS: GOLDDE 0x0048c200 */
 int __cdecl ai_StartBuergermeisterUpgrade(int kind, char* e, int busy, Blk24* o1, Blk24* o2)
 {
 	int v[2];

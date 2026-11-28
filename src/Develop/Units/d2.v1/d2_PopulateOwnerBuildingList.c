@@ -27,6 +27,7 @@ int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
+/* ADDRESS: GOLDDE 0x005ab2b0 */
 int __cdecl d2_PopulateOwnerBuildingList(unsigned short* who, int n, int* arr)
 {
 	int cnt;

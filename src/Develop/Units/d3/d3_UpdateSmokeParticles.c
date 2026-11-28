@@ -28,6 +28,7 @@ struct track_417f00 {
 };
 
 /* ADDRESS: GOLDTL 0x00417f00 */
+/* ADDRESS: GOLDDE 0x00415d00 */
 int __cdecl d3_UpdateSmokeParticles(struct track_417f00* tr, unsigned int t)
 {
 	struct key_417f00* k;

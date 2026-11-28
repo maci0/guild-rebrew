@@ -34,6 +34,7 @@ int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 void __cdecl cm_SendCopyEntityData(char*);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x0058b3c0 */
 int __cdecl d2_ConfirmExchangeGoods(char* who, int n, int w, unsigned char k)
 {
 	int res;

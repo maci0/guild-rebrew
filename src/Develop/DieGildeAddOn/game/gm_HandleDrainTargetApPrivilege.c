@@ -5,6 +5,7 @@ void __cdecl gm_HandleDrainTargetAP(char*, int*);
 
 
 /* ADDRESS: GOLDTL 0x004f94e0 */
+/* ADDRESS: GOLDDE 0x004e52c0 */
 int __cdecl gm_HandleDrainTargetApPrivilege(char* e, int* s)
 {
 	char* p;

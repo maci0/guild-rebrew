@@ -36,6 +36,7 @@ extern int d2_ObjektNameTable[];
 
 #pragma optimize("l", off)
 /* ADDRESS: GOLDTL 0x0050b980 */
+/* ADDRESS: GOLDDE 0x004f69c0 */
 float __cdecl eval_ObjektPreis2Credits(int id, int percent)
 {
     OBJECT_PROTOTYPE* r;

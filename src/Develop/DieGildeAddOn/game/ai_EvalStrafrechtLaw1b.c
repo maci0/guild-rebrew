@@ -5,6 +5,7 @@
 unsigned char __cdecl gm_GetCitySkillAverage(int a);
 int __cdecl gm_GetLawEntry(int idx, void* dst);
 
+/* ADDRESS: GOLDDE 0x004811c0 */
 int __cdecl ai_EvalStrafrechtLaw1b(char* e, int unused, int* out)
 {
 	int info[9];

@@ -18,6 +18,7 @@ void __cdecl he_InitEvent0a4(void);
 void __cdecl he_UpdateEvent0a4(void);
 int __cdecl he_RegisterActionMeta(int, char*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x005619f0 */
 int __cdecl he_RegisterZigeunerHandlers(void)
 {
 	if (he_RegisterHandler(0x9d, (void*) he_StartAction0x9d, (void*) he_RunAction0x9d) != 0 ||

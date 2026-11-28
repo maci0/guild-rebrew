@@ -1,3 +1,6 @@
+extern char gm_GameTimeHour[];
+extern char g_662b10[];
+extern char g_6628cc[];
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 typedef struct Rec18 {
@@ -33,6 +36,7 @@ int __cdecl amt_GetRoleTemplate(int, Rec18*);
 int __cdecl gm_GetStraftatEvidenceOffer(unsigned int, void*, void*, void*, void*);
 
 /* ADDRESS: GOLDTL 0x004ab1a0 */
+/* ADDRESS: GOLDDE 0x004994e0 */
 unsigned int __cdecl ai_FindDunkleEckeStraftat(int* subject, Msg* firstMessage, Msg* secondMessage)
 {
 	Rec18 rec;
@@ -51,7 +55,7 @@ unsigned int __cdecl ai_FindDunkleEckeStraftat(int* subject, Msg* firstMessage, 
 	unsigned char* obj;
 
 	if ((*(unsigned int*) ((char*) subject + 0x1cc) & 0x2000000) == 0) {
-		g = *(unsigned int*) 0x7f4c04;
+		g = *(unsigned int*) &gm_GameTimeHour;
 		if ((unsigned short) g >= 0x15 &&
 		    (g & 0xffff) % 3 == *(unsigned int*) ((char*) subject + 4) % 3) {
 			total = gm_AccumulateTyped2(subject);
@@ -82,14 +86,14 @@ unsigned int __cdecl ai_FindDunkleEckeStraftat(int* subject, Msg* firstMessage, 
 					tries = 3;
 					do {
 						if (gm_GetStraftatEvidenceOffer(*(unsigned int*) (obj + 0x1c + i * 4),
-								 (void*) ((unsigned int) *(unsigned short*) (ent + 0x27) * 0x21c + 0x7f4ca0),
+								 (void*) ((unsigned int) *(unsigned short*) (ent + 0x27) * 0x21c + ((int) &gm_GameTimeHour + 0x9c)),
 								 &val, &out2, &out1) != 0 &&
-						    !((float) total * *(float*) 0x662b10 < (float) val)) {
-							amt_GetRoleTemplate(*(unsigned char*) ((out2 & 0xffff) * 0x21c + 0x7f4e06), &rec);
+						    !((float) total * *(float*) &g_662b10 < (float) val)) {
+							amt_GetRoleTemplate(*(unsigned char*) ((out2 & 0xffff) * 0x21c + ((int) &gm_GameTimeHour + 0x202)), &rec);
 							if ((unsigned short) gm_RandomMod(0xc) > (unsigned short) rec.x8) {
 								return 0;
 							}
-							if ((float) gm_RandomFloat01() < *(float*) 0x6628cc) {
+							if ((float) gm_RandomFloat01() < *(float*) &g_6628cc) {
 								memset(firstMessage, 0, 0x18);
 								memset(secondMessage, 0, 0x18);
 							} else {

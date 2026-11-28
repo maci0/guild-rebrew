@@ -21,6 +21,7 @@ typedef struct {
 extern int g_6b5c94;
 extern int io_ActiveInputState[];
 
+/* ADDRESS: GOLDDE 0x00410bf0 */
 void __cdecl io_SwapMouseButtons(void)
 {
 	T411f90 t;

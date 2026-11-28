@@ -56,6 +56,7 @@ void __cdecl d2_UpdateTutCh2Node13Step(void);
 void __cdecl d2_FocusTutorialBuilding0x0a(void);
 void __cdecl d2_UpdateTutCh2Node74Step(void);
 
+/* ADDRESS: GOLDDE 0x00567460 */
 int* __cdecl d2_CreateTutorialChapter2(void)
 {
 	int* first;

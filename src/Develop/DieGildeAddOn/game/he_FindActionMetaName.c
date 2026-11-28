@@ -20,6 +20,7 @@ extern float g_696550[];
 
 int __cdecl gm_GetSeason(int* stamp);
 
+/* ADDRESS: GOLDDE 0x005194a0 */
 int __cdecl he_FindActionMetaName(char* ent, int owner, char* out)
 {
 	int hour;

@@ -67,6 +67,7 @@ void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl cm_RequestMoveCredits(int, int, char, int);
 void __cdecl gm_AllocMissionJob(int, int, int);
 
+/* ADDRESS: GOLDDE 0x00529e70 */
 void __cdecl gm_CreateSetupFamily(void)
 {
 	Figure* p;

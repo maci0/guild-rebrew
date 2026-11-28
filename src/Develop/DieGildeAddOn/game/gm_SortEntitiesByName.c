@@ -5,6 +5,7 @@
 
 void __cdecl gm_FormatEntityTitleAndName(int id, int a, int b, char* out);
 
+/* ADDRESS: GOLDDE 0x004f8a50 */
 void __cdecl gm_SortEntitiesByName(int n, int* arr, int flag)
 {
 	char b[0x80];

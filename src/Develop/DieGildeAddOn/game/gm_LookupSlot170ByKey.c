@@ -5,6 +5,7 @@
 extern Slot170_7731b8 gm_CannonTowers[8];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
+/* ADDRESS: GOLDDE 0x004dc0a0 */
 int __cdecl gm_LookupSlot170ByKey(int selectedKey)
 {
 	int i;

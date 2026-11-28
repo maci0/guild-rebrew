@@ -4,6 +4,7 @@
 
 char* __cdecl strchr(const char*, int);
 
+/* ADDRESS: GOLDDE 0x00401040 */
 char* __cdecl StripPathAndExt(char* path)
 {
 	char* p;

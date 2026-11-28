@@ -1,5 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x004346f0 */
+/* ADDRESS: GOLDDE 0x0042dcb0 */
 int __cdecl d3_GetAnimSize(char* o)
 {
 	int r = 0;

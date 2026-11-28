@@ -19,6 +19,7 @@ void __cdecl d2_DestroyForm(int);
 int __cdecl sb_CheckVoicePlaying(int);
 void __cdecl sb_StopVoice(int, int);
 
+/* ADDRESS: GOLDDE 0x004a37c0 */
 void __cdecl d2_ShowMissionSpecDialog(int a1, int flags)
 {
 	char buf[0x100];

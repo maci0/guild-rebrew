@@ -20,6 +20,7 @@ typedef struct
 
 int __cdecl gv_EnqueueSlotCommand(void*);
 
+/* ADDRESS: GOLDDE 0x004de600 */
 int __cdecl gv_RequestRentGrave(int entity, void* graveyard, int slotType, short duration, int price)
 {
 	GV_RENT_GRAVE_MSG msg;

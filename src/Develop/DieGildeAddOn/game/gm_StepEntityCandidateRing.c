@@ -10,6 +10,7 @@ extern fcn_004a34d0_ring* g_664448;
 
 
 /* ADDRESS: GOLDTL 0x004a34d0 */
+/* ADDRESS: GOLDDE 0x00491f00 */
 ENTITY_CANDIDATE* __cdecl gm_StepEntityCandidateRing(void)
 {
 	unsigned int n;

@@ -1,3 +1,4 @@
+extern char g_681130[];
 extern int gm_MissionJobs;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char gm_EntitySlotTable[];
@@ -21,6 +22,7 @@ void __cdecl main_ExitToGameLoop(int);
 void __cdecl d2_WaitHistoryMissionDialog(int);
 
 /* ADDRESS: GOLDTL 0x004b60e0 */
+/* ADDRESS: GOLDDE 0x004a4370 */
 void __cdecl d2_WaitHistoryMissionDialog(int flags)
 {
 	unsigned short* tab;
@@ -30,9 +32,9 @@ void __cdecl d2_WaitHistoryMissionDialog(int flags)
 	int r;
 
 	r = 0;
-	tab = (unsigned short*) (0x7f4ca0 + (unsigned int) gm_LocalPlayerSlot * 0x21c);
+	tab = (unsigned short*) ((int) &gm_EntitySlotTable + (unsigned int) gm_LocalPlayerSlot * 0x21c);
 	tag = gm_LookupMissionSpec(gm_MissionJobs);
-	obj = d2_LoadForm(0, 0, (char*) 0x681130);
+	obj = d2_LoadForm(0, 0, (char*) &g_681130);
 	d2_CenterDialogWindows(obj);
 	d2_SetForm(obj, 0);
 	v = (flags & 0xfffffff6) | 0x100;

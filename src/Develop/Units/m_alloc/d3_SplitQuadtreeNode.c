@@ -7,6 +7,7 @@ char* __cdecl d3_CollectObjectsInBounds(char* src, float* lo, float* hi);
 void __cdecl d3_FreeQuadtreeNode(char** n);
 
 /* ADDRESS: GOLDTL 0x00454850 */
+/* ADDRESS: GOLDDE 0x0044a100 */
 void __cdecl d3_SplitQuadtreeNode(unsigned int* node, unsigned int splitLimit, unsigned int depth, unsigned int maxDepth)
 {
 	float lo[4];

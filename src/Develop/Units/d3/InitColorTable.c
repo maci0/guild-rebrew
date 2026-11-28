@@ -1,6 +1,7 @@
 extern int d3_SceneLightingColors[];
 
 /* ADDRESS: GOLDTL 0x00459b80 */
+/* ADDRESS: GOLDDE 0x0044f340 */
 void __cdecl InitColorTable(void)
 {
 	d3_SceneLightingColors[0] = 0xff000040;

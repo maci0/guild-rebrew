@@ -6,6 +6,7 @@ extern int __cdecl gm_CalcTownSlotProductionSupply(int a, int b);
 extern float __cdecl eval_ObjektPreis2Credits(int a, int b);
 
 /* ADDRESS: GOLDTL 0x005016f0 */
+/* ADDRESS: GOLDDE 0x004ecd30 */
 void __cdecl gm_InitTownGoodsTable(int which)
 {
 	char* def;

@@ -20,6 +20,7 @@ typedef struct
 // SIZE 0x50
 
 /* ADDRESS: GOLDTL 0x00492e50 */
+/* ADDRESS: GOLDDE 0x00481d00 */
 int __cdecl ai_EvalBlackjackAction(BLACKJACK_STATE* a, char* b)
 {
 	unsigned char* p;

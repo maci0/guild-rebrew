@@ -1,4 +1,5 @@
 /* ADDRESS: GOLDTL 0x0045cab0 */
+/* ADDRESS: GOLDDE 0x00451a60 */
 void __cdecl d3_PackTextureFlags(unsigned char* a, unsigned char* o1, unsigned char* o2)
 {
 	if (a != 0 && o1 != 0 && o2 != 0) {

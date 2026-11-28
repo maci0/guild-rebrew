@@ -8,6 +8,7 @@ extern char gm_LawEntries[];
 #pragma intrinsic(memcpy, memset)
 
 /* ADDRESS: GOLDTL 0x004f4830 */
+/* ADDRESS: GOLDDE 0x004e08f0 */
 int __cdecl gm_GetLawEntry(int idx, void* dst)
 {
 	if (idx >= 0x1d) {
@@ -26,6 +27,7 @@ void __cdecl he_NotifyLawChange(char* o, char* buf);
 
 /* ADDRESS: GOLD 0x004f27d0 */
 /* ADDRESS: GOLDTL 0x004f48e0 */
+/* ADDRESS: GOLDDE 0x004e09a0 */
 int __cdecl gm_ApplyLawChange(char* msg)
 {
 	int rec[9];
@@ -51,6 +53,7 @@ extern char g_9a3825[];
 
 /* ADDRESS: GOLD 0x004f39e0 */
 /* ADDRESS: GOLDTL 0x004f5dd0 */
+/* ADDRESS: GOLDDE 0x004e1bb0 */
 int __cdecl gm_SumStraftatSeverity(int entityId)
 {
 	int buf[9];

@@ -8,6 +8,7 @@ void __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl io_AppendText(char*, ...);
 void __cdecl d2_AddElementToWindow(int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x00585a60 */
 void __cdecl d2_RenderPlayerDiceIcons(int text, unsigned char* player)
 {
 	int i;

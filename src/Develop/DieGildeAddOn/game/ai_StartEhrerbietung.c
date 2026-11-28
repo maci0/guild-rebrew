@@ -15,6 +15,7 @@ int __cdecl ai_SelectRankedCandidates(unsigned short* e, int n, int* lim, float 
 
 
 /* ADDRESS: GOLDTL 0x004abe20 */
+/* ADDRESS: GOLDDE 0x0049a160 */
 int __cdecl ai_StartEhrerbietung(int a1, unsigned short* entity, int a3, char* result)
 {
 	int lim;

@@ -1,5 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x00507080 */
+/* ADDRESS: GOLDDE 0x004f2220 */
 int __cdecl gm_MapZunftToBuildingCategory(int zunft)
 {
 	switch (zunft) {

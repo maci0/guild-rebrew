@@ -19,6 +19,7 @@ void __cdecl he_FreeAction(char*);
 void __cdecl d3_TransformPoint(char*, float*, float*);
 
 /* ADDRESS: GOLDTL 0x0056ce70 */
+/* ADDRESS: GOLDDE 0x00552e70 */
 void __cdecl he_StartHausbrand(char* obj)
 {
 	float posA[4];

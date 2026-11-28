@@ -10,6 +10,7 @@ int __cdecl evt_FindScriptById(int);
 void __cdecl evt_RequestScriptExit(int);
 void __cdecl io_ClearInputState(void);
 
+/* ADDRESS: GOLDDE 0x004bcee0 */
 void __cdecl evt_WaitAndCancelScript(int id)
 {
 	int r;

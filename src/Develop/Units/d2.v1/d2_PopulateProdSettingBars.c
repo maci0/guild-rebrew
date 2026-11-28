@@ -40,6 +40,7 @@ void __cdecl d2_SetElementEnabled(int, int);
 int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
+/* ADDRESS: GOLDDE 0x005b07a0 */
 void __cdecl d2_PopulateProdSettingBars(int dlg, Entry* list, int* bars, int* icons)
 {
 	int i;

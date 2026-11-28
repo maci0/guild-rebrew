@@ -7,6 +7,7 @@ unsigned short* __cdecl gm_LookupEntityRecordById(int);
 #include "Develop/Units/Error/error_message.h"
 void __cdecl he_AssignActionSlot(int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x004b9ca0 */
 int __cdecl cm_ExChangePlayerHe(char* x, char* out)
 {
 	unsigned short* e;

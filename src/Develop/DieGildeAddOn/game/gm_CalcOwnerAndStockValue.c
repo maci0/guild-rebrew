@@ -13,6 +13,7 @@ int __cdecl fcn_00502850(void);
 float __cdecl gm_GetSeasonPrice(int id, unsigned char a);
 
 /* ADDRESS: GOLDTL 0x0050d0c0 */
+/* ADDRESS: GOLDDE 0x004f7e50 */
 int __cdecl gm_CalcOwnerAndStockValue(char* bld, int flag)
 {
 	char* unused;

@@ -7,6 +7,7 @@ void __cdecl cm_StageRawPacketPayload(int size, void* p);
 int __cdecl cm_EnqueueClientPacket(void* rec);
 
 /* ADDRESS: GOLDTL 0x004c5580 */
+/* ADDRESS: GOLDDE 0x004b2f40 */
 int __cdecl cm_SendRawEntityPacket(char* rec, int size, char* src)
 {
 	char tmp[0x9c];

@@ -30,6 +30,7 @@ int __cdecl gm_ConvertUnitsToAmount(int a, unsigned char k);
 float __cdecl gm_RandomFloat01(void);
 
 /* ADDRESS: GOLDTL 0x004927c0 */
+/* ADDRESS: GOLDDE 0x00481670 */
 int __cdecl gm_ResolveWirtshausOffer(unsigned char* e, Deal* o, int kind)
 {
 	char* d;

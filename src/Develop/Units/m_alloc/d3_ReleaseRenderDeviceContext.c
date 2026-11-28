@@ -1,3 +1,4 @@
+extern char d3_LastReleaseRefCount[];
 typedef struct {
 	int (*f0)(void);
 	int (*f1)(void);
@@ -9,6 +10,7 @@ void __cdecl d3_ReleaseTexture(int);
 void __cdecl m_FreeTracked(void*);
 
 /* ADDRESS: GOLDTL 0x0043bcf0 */
+/* ADDRESS: GOLDDE 0x004349b0 */
 void __cdecl d3_ReleaseRenderDeviceContext(int a)
 {
 	char* e;
@@ -35,12 +37,12 @@ void __cdecl d3_ReleaseRenderDeviceContext(int a)
 				*(int*) (e - 4) = 0;
 				p = (int*) *(int*) (e - 0x18);
 				if (p != 0) {
-					*(int*) 0x14ce728 = ((D3_RENDER_CTX_VTBL*) *p)->release(p);
+					*(int*) &d3_LastReleaseRefCount = ((D3_RENDER_CTX_VTBL*) *p)->release(p);
 					*(int*) (e - 0x18) = 0;
 				}
 				p = (int*) *(int*) (e - 0x14);
 				if (p != 0) {
-					*(int*) 0x14ce728 = ((D3_RENDER_CTX_VTBL*) *p)->release(p);
+					*(int*) &d3_LastReleaseRefCount = ((D3_RENDER_CTX_VTBL*) *p)->release(p);
 					*(int*) (e - 0x14) = 0;
 				}
 			}
@@ -48,12 +50,12 @@ void __cdecl d3_ReleaseRenderDeviceContext(int a)
 			for (k = 0; k < 8; k++) {
 				p = (int*) *(int*) (s - 4);
 				if (p != 0) {
-					*(int*) 0x14ce728 = ((D3_RENDER_CTX_VTBL*) *p)->release(p);
+					*(int*) &d3_LastReleaseRefCount = ((D3_RENDER_CTX_VTBL*) *p)->release(p);
 					*(int*) (s - 4) = 0;
 				}
 				p = (int*) *(int*) s;
 				if (p != 0) {
-					*(int*) 0x14ce728 = ((D3_RENDER_CTX_VTBL*) *p)->release(p);
+					*(int*) &d3_LastReleaseRefCount = ((D3_RENDER_CTX_VTBL*) *p)->release(p);
 					*(int*) s = 0;
 				}
 				if (*(int*) (s - 0x14) != 0) {

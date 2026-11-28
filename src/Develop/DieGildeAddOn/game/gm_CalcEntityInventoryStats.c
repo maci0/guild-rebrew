@@ -22,6 +22,7 @@ char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_GetStorageSlotCapacity(char* q, int id);
 float __cdecl eval_ObjektPreis2Credits(int id, int n);
 
+/* ADDRESS: GOLDDE 0x004f8bd0 */
 int __cdecl gm_CalcEntityInventoryStats(char* e, Stats* s)
 {
 	char* q;

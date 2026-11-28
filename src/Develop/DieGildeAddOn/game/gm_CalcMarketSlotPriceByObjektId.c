@@ -4,6 +4,7 @@
 
 float __cdecl gm_CalcMarketSlotPrice(int, int);
 
+/* ADDRESS: GOLDDE 0x004eddc0 */
 float __cdecl gm_CalcMarketSlotPriceByObjektId(int a, int id)
 {
 	int i;

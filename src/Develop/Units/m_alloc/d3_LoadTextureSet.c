@@ -10,6 +10,7 @@ char* __cdecl vfs_ReadCString(void*, char*);
 void __cdecl CloseVfsStream(void*);
 
 /* ADDRESS: GOLDTL 0x0044b340 */
+/* ADDRESS: GOLDDE 0x004417e0 */
 void __cdecl d3_LoadTextureSet(char* name, char** tex, int* width, int* height)
 {
 	void* f;

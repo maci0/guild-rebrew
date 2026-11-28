@@ -88,6 +88,7 @@ void __cdecl d3_SetSnowEffectOptions(int*, int, ...);
 void __cdecl d3_SetRainEffectOptions(int*, int, ...);
 
 /* ADDRESS: GOLDTL 0x0052a3a0 */
+/* ADDRESS: GOLDDE 0x005135b0 */
 void __cdecl gm_UpdateWeatherAndSky(GAME_TIMESTAMP* now, int flag)
 {
 	char buf[12];

@@ -8,6 +8,7 @@ extern void** g_1040610[];
 
 long __stdcall fcn_005ef8cf(void*, unsigned int, unsigned int, int, int, int, void**);
 
+/* ADDRESS: GOLDDE 0x0044c440 */
 void __cdecl d3_AllocShadowTextures(void)
 {
 	unsigned int s;

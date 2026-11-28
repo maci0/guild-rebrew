@@ -7,6 +7,7 @@ extern float d3_GammaBrightness[3];
 #include "Develop/Units/d8_vesa/d3d_device_view.h"
 
 /* ADDRESS: GOLDTL 0x0041b870 */
+/* ADDRESS: GOLDDE 0x00419510 */
 int __cdecl d3_ApplyGammaRamp(void)
 {
     unsigned short table[3][256];

@@ -16,6 +16,7 @@ typedef struct S0045b920 {
 } S0045b920;
 // SIZE 0x2c
 
+/* ADDRESS: GOLDDE 0x004509e0 */
 char __cdecl d3_GridPointToWorld(S0045b920* g, int x, int z, float* out)
 {
 	if (g != 0 && x >= 0 && x < g->n && z >= 0 && z < g->n) {

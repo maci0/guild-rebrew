@@ -5,6 +5,7 @@ void __cdecl cm_EnqueueClientPacket(void*);
 
 void __cdecl fcn_0064d530(void*, int, int);
 
+/* ADDRESS: GOLDDE 0x004b3790 */
 void __cdecl cm_RequestPlayAnimation(int entity_id, int anim_name, char count)
 {
 	char buf[0x9c];

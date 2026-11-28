@@ -35,6 +35,7 @@ unsigned short __cdecl gm_RandomMod(int);
 
 #pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x0054ca10 */
+/* ADDRESS: GOLDDE 0x00532eb0 */
 void __cdecl he_RunCourtship(char* e)
 {
 	unsigned char* a;

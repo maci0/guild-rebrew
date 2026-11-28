@@ -13,6 +13,7 @@ void __cdecl d3_UpdateFloorLighting(int);
 
 /* The TL build ignores the flag; Gold has native flag-dependent work. */
 /* ADDRESS: GOLDTL 0x00450a00 */
+/* ADDRESS: GOLDDE 0x00446620 */
 void __cdecl UpdateSceneLighting(unsigned char flag)
 {
     d3_SceneRenderLock++;

@@ -6,6 +6,7 @@ extern void __cdecl ai_ComputeActionScore(unsigned int* a0, unsigned int* a1,
     unsigned int a2, unsigned char* a3, void* rec);
 
 /* ADDRESS: GOLDTL 0x004995b0 */
+/* ADDRESS: GOLDDE 0x00487ff0 */
 void __cdecl ai_ScoreVerpruegeln(unsigned int* outFirst, unsigned int* outSecond, unsigned int methodIndex,
     unsigned char* entity, unsigned int extra1, unsigned int extra2, unsigned int extra3)
 {

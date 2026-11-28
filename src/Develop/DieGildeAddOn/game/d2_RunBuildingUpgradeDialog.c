@@ -63,6 +63,7 @@ void __cdecl cm_SendTraceEnd(char*);
 int __cdecl fcn_0065f220(const char*, const char*);
 
 /* ADDRESS: GOLDTL 0x005c30e0 */
+/* ADDRESS: GOLDDE 0x005a5520 */
 void __cdecl d2_RunBuildingUpgradeDialog(unsigned char* buildingEntry)
 {
 	int quotedCost;

@@ -21,6 +21,7 @@ int __cdecl he_TryDispatchNpcAction(struct job*, int, int);
 int __cdecl cm_SendSetHE(int, char*);
 void __cdecl he_FreeAction(char*);
 
+/* ADDRESS: GOLDDE 0x005401f0 */
 void __cdecl he_RunPoliticians(char* u)
 {
 	int n;

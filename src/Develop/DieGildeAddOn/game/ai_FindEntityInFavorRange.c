@@ -6,6 +6,7 @@ int __cdecl ai_MatchesBuildingFilter(unsigned short* a0, int* a1, int a2);
 float __cdecl gm_CalcEntityFavor(unsigned short a0, unsigned short a1, int a2);
 
 /* ADDRESS: GOLDTL 0x004a5e60 */
+/* ADDRESS: GOLDDE 0x00494860 */
 int __cdecl ai_FindEntityInFavorRange(unsigned short* entity, int kind, int filterLo, int filterHi, float minimum, float maximum, int* resultId)
 {
 	int buf[20];

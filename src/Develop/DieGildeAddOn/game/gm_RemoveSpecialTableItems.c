@@ -8,6 +8,7 @@ unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_LookupWeaponSpec(int);
 int __cdecl cm_SendSellObjekt(int, int, int, int, char, int);
 
+/* ADDRESS: GOLDDE 0x004bbe80 */
 void __cdecl gm_RemoveSpecialTableItems(char* entity)
 {
 	unsigned short* p;

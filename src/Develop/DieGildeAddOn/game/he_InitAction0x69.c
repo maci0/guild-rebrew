@@ -11,6 +11,7 @@ struct pos14 {
 };
 #pragma pack()
 
+/* ADDRESS: GOLDDE 0x0053b280 */
 void __cdecl he_InitAction0x69(char* e)
 {
 	*(struct pos14*) (e + 0x52) = *(struct pos14*) (e + 0x44);

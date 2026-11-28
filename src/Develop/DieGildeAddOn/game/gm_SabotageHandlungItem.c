@@ -25,6 +25,7 @@ void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl io_FormatTextBuffer(char *, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char *, int, int, int);
 
+/* ADDRESS: GOLDDE 0x004a6e70 */
 int __cdecl gm_SabotageHandlungItem(int *msg)
 {
 	char val;

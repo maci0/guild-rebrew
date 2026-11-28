@@ -27,6 +27,7 @@ int __cdecl d2_MeasureTextWidth(char* s, int font);
 void __cdecl d2_InsertControlAfterWindow(int slot, D2_WIN* parent);
 
 /* ADDRESS: GOLDTL 0x0046fdf0 */
+/* ADDRESS: GOLDDE 0x00463350 */
 int __cdecl d2_AddWindowText(int x, int y, char* text, int win)
 {
 	D2_WIN* w;

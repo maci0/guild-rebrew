@@ -41,6 +41,7 @@ typedef struct {
 } GebProt_5110d0;
 
 /* ADDRESS: GOLDTL 0x005110d0 */
+/* ADDRESS: GOLDDE 0x004fbda0 */
 void __cdecl init_LoadGebaeudeScene(int prototypeIndex)
 {
 	char name[260];

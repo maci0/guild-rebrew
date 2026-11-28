@@ -44,6 +44,7 @@ extern unsigned char g_6b85a4;
 	*(int*) (RD_LIGHTS(object) + (dst) + 0x08) = *(int*) (RD_LIGHTS(object) + (src) + 0x08);
 
 /* ADDRESS: GOLDTL 0x00447110 */
+/* ADDRESS: GOLDDE 0x0043e890 */
 char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsigned char resources)
 {
 	unsigned char b;

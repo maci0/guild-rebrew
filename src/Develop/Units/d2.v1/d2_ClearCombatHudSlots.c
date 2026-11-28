@@ -20,6 +20,7 @@ void __cdecl d2_DestroyElement(int slot);
 #endif
 
 /* ADDRESS: GOLDTL 0x004d0ec0 */
+/* ADDRESS: GOLDDE 0x004be1b0 */
 void __cdecl d2_ClearCombatHudSlots(void)
 {
     int i;

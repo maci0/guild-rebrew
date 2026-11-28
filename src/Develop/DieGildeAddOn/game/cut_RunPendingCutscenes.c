@@ -11,6 +11,7 @@ int* __cdecl cut_FindLowestIdFlaggedCutscene(void);
 int __cdecl cm_AppendCommandSyncField(unsigned char, unsigned char, short, void*);
 void __cdecl cm_SendSetAttribute(void);
 
+/* ADDRESS: GOLDDE 0x004d3160 */
 char __cdecl cut_RunPendingCutscenes(int idx)
 {
 	char ok;

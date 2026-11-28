@@ -5,6 +5,7 @@ extern char str_empty[];
 int __cdecl d3_LoadFloorTexture(char*, int, int);
 void __cdecl d3_InvalidateFloorChunks(char*);
 
+/* ADDRESS: GOLDDE 0x00438540 */
 int __cdecl d3_ReloadFloorTextureSlot(char* floor, int name, int idx)
 {
 	int r;

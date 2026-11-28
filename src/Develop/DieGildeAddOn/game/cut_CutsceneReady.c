@@ -23,6 +23,7 @@ void __cdecl cm_SendTraceEnd(char*);
 
 
 /* ADDRESS: GOLDTL 0x004e64e0 */
+/* ADDRESS: GOLDDE 0x004d2d30 */
 int __cdecl cut_CutsceneReady(int* c)
 {
 	Msg m;

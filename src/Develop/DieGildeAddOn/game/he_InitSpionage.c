@@ -38,6 +38,7 @@ int __cdecl cm_SendSetHE(int, char*);
 
 /* `close` is set in two if arms: one combined condition keeps it in a
  * register, three arms give it more slot weight than `o`. */
+/* ADDRESS: GOLDDE 0x00548360 */
 void __cdecl he_InitSpionage(char* u)
 {
 	Query q;

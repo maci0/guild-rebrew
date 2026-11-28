@@ -4,6 +4,7 @@
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 void __cdecl d3_ScheduleActionTimer(char*, int, int);
 
+/* ADDRESS: GOLDDE 0x004ba690 */
 int __cdecl cm_ExReduceLifespan(char* request, char* output)
 {
 	char* target;

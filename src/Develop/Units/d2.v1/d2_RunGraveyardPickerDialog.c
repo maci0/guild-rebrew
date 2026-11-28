@@ -79,6 +79,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x0058bb10 */
+/* ADDRESS: GOLDDE 0x005717d0 */
 void __cdecl d2_RunGraveyardPickerDialog(PickResult* result, char* graveyard, int titleId, int mode,
 			  void (__cdecl* callback)(char*, PickResult*))
 {

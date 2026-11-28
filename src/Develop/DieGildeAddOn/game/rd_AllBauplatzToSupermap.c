@@ -5,6 +5,7 @@ int __cdecl fcn_0064d41a(char* buf, char* fmt, ...);
 void __cdecl rd_FillSupermapQuad(char** context, float* points, unsigned char byte_value, int record_value);
 
 /* ADDRESS: GOLDTL 0x004bdda0 */
+/* ADDRESS: GOLDDE 0x004ab920 */
 void __cdecl rd_AllBauplatzToSupermap(char** context, char* object)
 {
 	char msg[0x40];

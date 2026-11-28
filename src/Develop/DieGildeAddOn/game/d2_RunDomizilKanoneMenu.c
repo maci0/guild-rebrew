@@ -12,6 +12,7 @@ void __cdecl d2_RunKanoneUI(int h);
 void __cdecl d2_RunDomizilKanoneMenu(int dlg, char* msg);
 
 /* ADDRESS: GOLDTL 0x0058ae60 */
+/* ADDRESS: GOLDDE 0x00570b20 */
 void __cdecl d2_RunDomizilKanoneMenu(int dlg, char* msg)
 {
 	char* control;

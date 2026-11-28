@@ -54,6 +54,7 @@ int __cdecl gm_SumQueryEntryValues(int, char);
 int __cdecl gm_GetEntityRelation(int, int);
 
 /* ADDRESS: GOLDTL 0x005422c0 */
+/* ADDRESS: GOLDDE 0x00528b50 */
 void __cdecl gm_UpdateOwnerBuildings(unsigned int arg)
 {
 	unsigned char* rec;

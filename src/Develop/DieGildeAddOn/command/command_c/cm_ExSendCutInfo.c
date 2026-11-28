@@ -18,6 +18,7 @@ int __cdecl fcn_0064d41a(char*, char*, ...);
 
 
 /* ADDRESS: GOLDTL 0x004c9d10 */
+/* ADDRESS: GOLDDE 0x004b74f0 */
 int __cdecl cm_ExSendCutInfo(char* cmd, char* out)
 {
 	char buf[0x100];

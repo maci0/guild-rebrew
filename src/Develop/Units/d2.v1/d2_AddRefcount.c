@@ -17,6 +17,7 @@ typedef struct S00469900 {
 extern char* d2_FileObjTable;
 extern volatile int gm_GameTicks;
 
+/* ADDRESS: GOLDDE 0x0045d220 */
 void __cdecl d2_AddRefcount(int i)
 {
 	S00469900* e;

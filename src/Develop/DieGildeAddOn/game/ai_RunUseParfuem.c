@@ -15,6 +15,7 @@ float* __cdecl gm_LookupSpecialObject(int id);
 int __cdecl gm_UseSpecialObject(char* e, Req* r);
 
 /* ADDRESS: GOLDTL 0x0049bbc0 */
+/* ADDRESS: GOLDDE 0x0048a600 */
 int __cdecl ai_RunUseParfuem(char* actor, int* itemArgs, int* animData)
 {
 	float* props;

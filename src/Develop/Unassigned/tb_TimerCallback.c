@@ -22,6 +22,7 @@ __declspec(dllimport) unsigned int __stdcall timeSetEvent(unsigned int, unsigned
 /* Multimedia timer tick: runs the periodic callbacks and re-arms the
  * one-shot timer. */
 /* ADDRESS: GOLDTL 0x0042dcd0 */
+/* ADDRESS: GOLDDE 0x00427aa0 */
 void __stdcall tb_TimerCallback(unsigned int id, unsigned int msg, unsigned long user, unsigned long dw1, unsigned long dw2)
 {
 	int i;

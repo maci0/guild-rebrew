@@ -16,6 +16,7 @@ extern void __cdecl main_RunFrameLoop(int a, int b);
 extern void __cdecl d2_DestroyForm(void *obj);
 
 /* ADDRESS: GOLDTL 0x004b5630 */
+/* ADDRESS: GOLDDE 0x004a38c0 */
 void __cdecl d2_RunMissionBriefingDialog(int mission, unsigned loopFlags)
 {
 	char buf[256];

@@ -3,6 +3,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b3210 */
 void __cdecl cm_SendRemoveStraftat(int crime_id, int entity_id)
 {
 	char buf[0x9c];

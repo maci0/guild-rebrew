@@ -10,6 +10,7 @@ typedef struct Face {
 
 int __cdecl vfs_ReadDword(void* stream, void* dst);
 
+/* ADDRESS: GOLDDE 0x00443b10 */
 void __cdecl d3_ReadFaceTexCoords(void* r, char* o)
 {
 	float t;

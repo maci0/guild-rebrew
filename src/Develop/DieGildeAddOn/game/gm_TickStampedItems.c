@@ -24,6 +24,7 @@ extern unsigned char gm_ActiveTownIndex;
  * effect and sound. */
 
 /* ADDRESS: GOLDTL 0x005c6310 */
+/* ADDRESS: GOLDDE 0x005a8590 */
 void __cdecl gm_TickStampedItems(void)
 {
 	char text[0x400];

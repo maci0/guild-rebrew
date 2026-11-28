@@ -13,6 +13,7 @@ extern ALCHEMY_DRAW_SLOT ahm_DrawSlots[3];
 
 unsigned int __cdecl vfs_fwrite(void* p, int size, int n, void* file);
 
+/* ADDRESS: GOLDDE 0x004da180 */
 int __cdecl ls_SaveAlchemyDrawSlots(void* file)
 {
 	int i;

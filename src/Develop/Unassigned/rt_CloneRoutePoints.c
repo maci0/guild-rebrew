@@ -17,6 +17,7 @@ ROUTE_NODE* __cdecl rt_AllocRoutePoint(ROUTE_NODE*);
 
 
 /* ADDRESS: GOLDTL 0x004be2a0 */
+/* ADDRESS: GOLDDE 0x004abe20 */
 ROUTE_NODE* __cdecl rt_CloneRoutePoints(ROUTE_NODE* src)
 {
 	ROUTE_NODE* q;

@@ -2,6 +2,7 @@
 
 extern int g_14ce86c;
 
+/* ADDRESS: GOLDDE 0x00419760 */
 unsigned int __cdecl d2_PackColorForPixelFormat(int r, int g, unsigned char b)
 {
 	unsigned int c;

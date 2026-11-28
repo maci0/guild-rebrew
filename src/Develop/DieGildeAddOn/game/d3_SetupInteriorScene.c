@@ -44,6 +44,7 @@ void __cdecl d3_UpdateTerrainSeasonTextures(void);
 #include "Develop/Units/d3/d3_d3d.h"
 void __cdecl d3_ApplySceneLightingPreset(void);
 
+/* ADDRESS: GOLDDE 0x005016c0 */
 void __cdecl d3_SetupInteriorScene(Player* p, void* unit)
 {
 	Office* o;

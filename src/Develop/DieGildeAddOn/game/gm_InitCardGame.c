@@ -55,6 +55,7 @@ int __cdecl gm_AmountToUnits(int a, unsigned char b);
 int __cdecl gm_ConvertUnitsToAmount(int a, unsigned char b);
 int __cdecl gm_ResetCardGameRound(Game* s);
 
+/* ADDRESS: GOLDDE 0x004955b0 */
 int __cdecl gm_InitCardGame(char* owner, Game* game)
 {
 	int i;

@@ -5,6 +5,7 @@ extern char* sv_SelectedBuilding;
 
 extern int* d2_TutorialState;
 
+/* ADDRESS: GOLDDE 0x00565900 */
 int __cdecl d2_GetTutCh5SubStep(void)
 {
 	unsigned short* p;

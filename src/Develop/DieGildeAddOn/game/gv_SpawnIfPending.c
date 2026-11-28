@@ -2,6 +2,7 @@
 
 void __cdecl gv_SpawnEntities(void*);
 
+/* ADDRESS: GOLDDE 0x004428e0 */
 void __cdecl gv_SpawnIfPending(char* p)
 {
 	if (p == 0) {

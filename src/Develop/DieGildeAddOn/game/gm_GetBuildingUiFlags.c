@@ -7,6 +7,7 @@ extern int gm_AllEntitiesControllable;
 int __cdecl gm_MapBuildingCatToGuildSlot(int);
 int __cdecl gm_CheckStatLevel(int, int);
 
+/* ADDRESS: GOLDDE 0x00576090 */
 int __cdecl gm_GetBuildingUiFlags(unsigned short* who, unsigned char* p, short* cmd)
 {
 	unsigned char* t;

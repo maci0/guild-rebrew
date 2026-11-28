@@ -28,6 +28,7 @@ void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, ch
 void __cdecl he_FreeAction(char*);
 int __cdecl main_GetLanguage(void);
 
+/* ADDRESS: GOLDDE 0x00561600 */
 void __cdecl he_RunFriedhofStealAction(char* e)
 {
 	char* q;

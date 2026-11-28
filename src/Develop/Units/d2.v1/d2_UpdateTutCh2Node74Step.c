@@ -4,6 +4,7 @@
 extern int* d2_TutorialState;
 extern volatile int gm_GameTicks;
 
+/* ADDRESS: GOLDDE 0x00565180 */
 int __cdecl d2_UpdateTutCh2Node74Step(int* msg)
 {
 	short* e;

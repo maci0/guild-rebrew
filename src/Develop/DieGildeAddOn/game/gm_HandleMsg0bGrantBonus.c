@@ -1,3 +1,5 @@
+extern char dbl_2_0[];
+extern char gm_ActiveTownIndex[];
 
 
 void* __cdecl gm_LookupEntityRecordById(int);
@@ -7,6 +9,7 @@ void __cdecl io_FormatTextBuffer(void*, int, int);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 void __cdecl he_PostEntityMessage(int, int, void*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x004a5350 */
 int __cdecl gm_HandleMsg0bGrantBonus(void* request)
 {
 	char buf[0x100];
@@ -20,11 +23,11 @@ int __cdecl gm_HandleMsg0bGrantBonus(void* request)
 		return 1;
 	}
 	v = gm_RandomMod(3);
-	d = (double) v + *(double*) 0x662a48;
+	d = (double) v + *(double*) &dbl_2_0;
 	n = (int) (((double) gm_CalcPersonWealth(*(unsigned short*) p) * d) *
-	    *(double*) 0x664e58);
+	    *(double*) ((int) &dbl_2_0 + 0x2410));
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7, n);
-	cm_RequestTransferCurrencyNoKill(*(int*) request, -1, *(char*) 0x773d75, n);
+	cm_RequestTransferCurrencyNoKill(*(int*) request, -1, *(char*) &gm_ActiveTownIndex, n);
 	he_PostEntityMessage(*(int*) ((char*) p + 4), *(int*) ((char*) p + 4), buf,
 	    (unsigned) strlen(buf) > 0x100, 0x603, 0);
 	return 0;

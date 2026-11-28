@@ -26,6 +26,7 @@ extern volatile int tb_TimerPaused;
 void __cdecl d2_SetFormVisibility(int, int);
 void __cdecl d2_BringFormToFront(int);
 
+/* ADDRESS: GOLDDE 0x0052c120 */
 void __cdecl d2_UpdateActionPopupFocus(void)
 {
 	int i;

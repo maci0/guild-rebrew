@@ -61,6 +61,7 @@ void __cdecl gm_ResetDynastySlot(int);
 /* Black editor panel for the current 0x7f4ca0 entity: prints the building
  * and unit counters, then runs the modal 0x24087 message loop. */
 /* ADDRESS: GOLDTL 0x00541620 */
+/* ADDRESS: GOLDDE 0x00527eb0 */
 void __cdecl d2_RunRoundSummaryDialog(void)
 {
 	unsigned char panel[0x114];

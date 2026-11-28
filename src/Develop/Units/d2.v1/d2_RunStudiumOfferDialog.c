@@ -74,6 +74,7 @@ void __cdecl cm_SendCopyEntityData(struct msg*);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x005bd100 */
 int __cdecl d2_RunStudiumOfferDialog(int unused, unsigned short* p)
 {
 	int dlg;

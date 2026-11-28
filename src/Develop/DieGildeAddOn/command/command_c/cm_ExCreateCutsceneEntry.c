@@ -5,6 +5,7 @@ void __cdecl ReportClientMessage(const char* message);
 
 /* Inferred distinct client handler name; native diagnostic text is retained. */
 /* ADDRESS: GOLDTL 0x004c9ee0 */
+/* ADDRESS: GOLDDE 0x004b76c0 */
 int __cdecl cm_ExCreateCutsceneEntry(char* command, char* result)
 {
     unsigned int payload[69];

@@ -97,6 +97,7 @@ float* __stdcall D3DXMatrixTranspose(float*, const float*);
 float __cdecl d3_WrapYawDelta(float*, float*);
 
 /* ADDRESS: GOLDTL 0x0052c060 */
+/* ADDRESS: GOLDDE 0x00514d80 */
 int __cdecl d3_UpdateCameraFromMouse(void)
 {
 	Vec4 v;

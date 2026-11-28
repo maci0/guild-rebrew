@@ -23,6 +23,7 @@ extern void __cdecl he_MessageBoxQuickjump(int, int, char *, int, int, int, int,
 					   int, int);
 
 /* ADDRESS: GOLDTL 0x0055df80 */
+/* ADDRESS: GOLDDE 0x00544190 */
 void __cdecl he_TransportStadtStadt(char *transportEvent)
 {
 	char *v3;

@@ -26,6 +26,7 @@ void __cdecl d2_ShowCityTradeInfoDialog(char*, int);
 void __cdecl d3_ClearSceneObjectCache(void);
 void __cdecl d3_EndCameraAndUiMode(void);
 
+/* ADDRESS: GOLDDE 0x00588400 */
 void __cdecl d3_SelectTavernCardTableCity(void)
 {
 	char* items[4];

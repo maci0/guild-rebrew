@@ -7,6 +7,7 @@ extern Entry68e020 g_68e020[32];
 
 int __cdecl vfs_fwrite(void* buf, int size, int count, int stream);
 
+/* ADDRESS: GOLDDE 0x004db3b0 */
 int __cdecl ls_SaveAvatarStates(int stream)
 {
 	unsigned int n;

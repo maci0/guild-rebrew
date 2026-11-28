@@ -81,6 +81,7 @@ static __inline void fill0(char* dst, int size)
 
 // FUNCTION: GOLDTL 0x00469140
 
+/* ADDRESS: GOLDDE 0x0045cac0 */
 int __cdecl d2_CreateBitmapElement(int x, int y, int w, int h, char* src)
 {
 	int idx;

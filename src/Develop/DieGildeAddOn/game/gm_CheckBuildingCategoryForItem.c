@@ -1,6 +1,7 @@
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* ADDRESS: GOLDTL 0x005c7270 */
+/* ADDRESS: GOLDDE 0x005a9110 */
 int __cdecl gm_CheckBuildingCategoryForItem(void* o, int type)
 {
 	unsigned char* p;

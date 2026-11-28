@@ -14,6 +14,7 @@ void __cdecl d2_ClearPaintboxRect(int, int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl d2_SetElementFont(int, int);
 
+/* ADDRESS: GOLDDE 0x005aaef0 */
 void __cdecl d2_ShowCenteredText(int text, int x, int y, int w, int font)
 {
 	int r;

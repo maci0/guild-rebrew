@@ -1,5 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x00408270 */
+/* ADDRESS: GOLDDE 0x00407410 */
 int __cdecl ch_WorldToGridCoordinates(float* a, float* b, int* ox, int* oy)
 {
 	float v[4];

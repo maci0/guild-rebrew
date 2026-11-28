@@ -28,6 +28,7 @@ void __cdecl lb_AppendChatLog(int, int, char*);
 
 
 /* ADDRESS: GOLDTL 0x004ce430 */
+/* ADDRESS: GOLDDE 0x004bbbd0 */
 int __cdecl d3_ApplyLobbySceneUpdate(char* rec, char* out)
 {
 	struct NET_CHAT_LOG_PAYLOAD tmp;

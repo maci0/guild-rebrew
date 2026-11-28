@@ -19,6 +19,7 @@ extern unsigned short __cdecl gm_RandomMod(unsigned short n);
 #pragma optimize("y", off)
 
 /* ADDRESS: GOLDTL 0x00496e60 */
+/* ADDRESS: GOLDDE 0x00485900 */
 int __cdecl ai_StartAmtsbewerbung(int actorKind, char* actor, int busy, Msg* out1, Msg* out2)
 {
 	Msg b;

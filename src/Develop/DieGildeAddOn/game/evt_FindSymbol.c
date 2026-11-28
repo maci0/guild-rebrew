@@ -11,6 +11,7 @@ extern void* evt_GlobalVariables;
 extern int evt_GlobalVariableCount;
 
 /* ADDRESS: GOLDTL 0x004260f0 */
+/* ADDRESS: GOLDDE 0x00420bc0 */
 void* __cdecl evt_FindSymbol(char* ctx, char* name)
 {
 	char* scope;

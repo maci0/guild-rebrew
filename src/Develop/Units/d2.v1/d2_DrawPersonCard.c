@@ -12,6 +12,7 @@ extern int __cdecl d2_SetElementEnabled(int element, int a);
  * unit icon plus its 0xca-wide gauges, then create the element and kick off
  * its animation. */
 /* ADDRESS: GOLDTL 0x005ca740 */
+/* ADDRESS: GOLDDE 0x005ac1d0 */
 int __cdecl d2_DrawPersonCard(int a0, int a1, int a2, int a3, int* row, int a5)
 {
 	int v8;

@@ -1,4 +1,5 @@
 #include <string.h>
+/* ADDRESS: GOLDDE 0x004fe8a0 */
 int __cdecl d3_CollectMatchingSceneObjects(char* name, int* list)
 {
 	if (strstr(name, (char*) list + 0x804)) {

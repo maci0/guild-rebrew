@@ -7,6 +7,7 @@ extern int d3_ActiveScene;
 void __cdecl d3_VisitSceneObjects(int, int, int, void*, void*);
 #include "Develop/Units/d3/client_lighting.h"
 
+/* ADDRESS: GOLDDE 0x004339c0 */
 void __cdecl d3_ReloadSceneResources(int mask, int b, SCENE_PROGRESS a)
 {
 	SCENE_PROGRESS_CONTEXT s;

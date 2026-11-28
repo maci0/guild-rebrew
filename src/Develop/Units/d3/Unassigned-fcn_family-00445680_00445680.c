@@ -5,6 +5,7 @@ void __cdecl d3_VisitSceneObjects(int, char*, int, void*, void*);
 int __cdecl d3_FindSceneObjectMatchCallback(char*, char**);
 
 /* ADDRESS: GOLDTL 0x00445680 */
+/* ADDRESS: GOLDDE 0x0043d410 */
 int __cdecl d3_FindSceneObjectMatchCallback(char* s, char** st)
 {
 	char* p;
@@ -25,6 +26,7 @@ int __cdecl d3_FindSceneObjectMatchCallback(char* s, char** st)
 }
 
 /* ADDRESS: GOLDTL 0x004456e0 */
+/* ADDRESS: GOLDDE 0x0043d470 */
 char* __cdecl d3_FindSceneObjectByPtrOrName(char* o, int flags, char* ptr, char* name)
 {
 	char* st[3];

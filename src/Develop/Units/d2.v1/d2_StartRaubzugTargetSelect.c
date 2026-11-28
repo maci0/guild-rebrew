@@ -23,6 +23,7 @@ void __cdecl d2_OpenRaubzugDialog(int, char*);
 void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl sv_ClearObjectSelection(void);
 
+/* ADDRESS: GOLDDE 0x00582ef0 */
 void __cdecl d2_StartRaubzugTargetSelect(char* building)
 {
 	Query q;

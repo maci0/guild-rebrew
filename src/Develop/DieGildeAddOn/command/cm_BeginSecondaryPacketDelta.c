@@ -7,6 +7,7 @@ extern char cm_SecondaryPacketDelta[];
 
 #pragma intrinsic(memcpy, memset)
 
+/* ADDRESS: GOLDDE 0x004b21f0 */
 void __cdecl cm_BeginSecondaryPacketDelta(int* p)
 {
 	int v;

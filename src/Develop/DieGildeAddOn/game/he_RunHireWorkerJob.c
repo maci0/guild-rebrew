@@ -34,6 +34,7 @@ char* __cdecl gm_GetEntityTableEntry(char*);
 int __cdecl gm_RandomMod(int);
 
 /* ADDRESS: GOLDTL 0x0055c740 */
+/* ADDRESS: GOLDDE 0x00542990 */
 void __cdecl he_RunHireWorkerJob(char* ctx)
 {
 	char text[0x400];

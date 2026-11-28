@@ -9,6 +9,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_SetFormVisibility(int, int);
 int __cdecl d2_OpenSeanceDialog(int, char*, int);
 
+/* ADDRESS: GOLDDE 0x00574a80 */
 int __cdecl d2_RunSeanceMenu(int entity, char* s, int resultOut)
 {
 	int r;

@@ -5,6 +5,7 @@
 int __cdecl cm_ResolveSpecialEntityId(char*, int);
 
 
+/* ADDRESS: GOLDDE 0x004b6490 */
 int __cdecl cm_ExModifyEntityFieldBits(char* x, char* out)
 {
 	char* e1;

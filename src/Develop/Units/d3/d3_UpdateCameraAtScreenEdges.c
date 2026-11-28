@@ -23,6 +23,7 @@ void __cdecl d3_FreeObjectAnimation(char*);
 void __cdecl d3_AnimateObjectTransform(char*, int*, int*, int, int);
 
 /* ADDRESS: GOLDTL 0x0052ae80 */
+/* ADDRESS: GOLDDE 0x00514090 */
 void __cdecl d3_UpdateCameraAtScreenEdges(void)
 {
 	int minx;

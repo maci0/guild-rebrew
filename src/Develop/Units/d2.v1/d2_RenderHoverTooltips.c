@@ -19,6 +19,7 @@ char __cdecl d3_GetObjectScreenRect(void*, int*);
 void __cdecl d2_DrawWordWrappedText(int, int, int, int, int, char*, int);
 
 /* ADDRESS: GOLDTL 0x00532650 */
+/* ADDRESS: GOLDDE 0x0051afd0 */
 void __cdecl d2_RenderHoverTooltips(void)
 {
 	char** q;

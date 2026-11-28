@@ -28,6 +28,7 @@ void __cdecl cm_RequestModifyHealth(int id, int k);
 void __cdecl cm_SendTraceEnd(char* s);
 
 /* ADDRESS: GOLDTL 0x004aaa60 */
+/* ADDRESS: GOLDDE 0x00498da0 */
 int __cdecl aip_ExecPamphlet(char* actor, int a2, char* x)
 {
 	char msg[0xf8];
@@ -58,6 +59,7 @@ int __cdecl aip_ExecPamphlet(char* actor, int a2, char* x)
 }
 
 /* ADDRESS: GOLDTL 0x004aab30 */
+/* ADDRESS: GOLDDE 0x00498e70 */
 int __cdecl aip_ExecDrohen(char* actor, int a2, char* x)
 {
 	char msg[0xf8];
@@ -88,6 +90,7 @@ int __cdecl aip_ExecDrohen(char* actor, int a2, char* x)
 }
 
 /* ADDRESS: GOLDTL 0x004aac00 */
+/* ADDRESS: GOLDDE 0x00498f40 */
 int __cdecl aip_ExecAnschwaerzen(char* actor, int a2, char* x)
 {
 	char msg[0xf8];

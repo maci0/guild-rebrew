@@ -44,6 +44,7 @@ void __cdecl d2_SetSlotVisibility(int, int);
 int __cdecl d2_DispatchLawTargetDialog(char*, int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005bdc30 */
+/* ADDRESS: GOLDDE 0x005a0090 */
 int __cdecl d2_RunCityScrollMapDialog(int flags, void* state, char* name, void (__cdecl* cb)(int, int))
 {
 	MsgCtx ctx;

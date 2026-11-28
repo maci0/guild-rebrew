@@ -37,6 +37,7 @@ extern double g_6629c8;
 extern double g_662908;
 
 /* ADDRESS: GOLDTL 0x00571240 */
+/* ADDRESS: GOLDDE 0x005571f0 */
 void __cdecl he_RunAbbau(char* self)
 {
 	char* node;

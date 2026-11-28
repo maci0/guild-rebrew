@@ -1,3 +1,4 @@
+#include "d2_capacity.h"
 
 
 // SIZE 0x2f4
@@ -26,6 +27,7 @@ extern unsigned short g_773e40[];
 #include "Develop/client_types.h"
 extern D2_FORM_RECORD d2_Forms[];
 
+/* ADDRESS: GOLDDE 0x0051c5e0 */
 void __cdecl d2_MarkDialogFormControls(int mark)
 {
 	int i;
@@ -37,7 +39,7 @@ void __cdecl d2_MarkDialogFormControls(int mark)
 		for (i = 0; i < 48; i++) {
 			if (((Home*)d2_Forms)[i].x190 != 0 && ((Home*)d2_Forms)[i].x1a0 != 0) {
 				h = &((Home*)d2_Forms)[i];
-				for (k = 0; k < 0x400; k++) {
+				for (k = 0; k < d2_ELEMENT_CAPACITY; k++) {
 					if ((*(int*)&((D2_CONTROL_TL*)d2_Controls)[k].kind) != 0 && (*(void**)&((D2_CONTROL_TL*)d2_Controls)[k].value_050) == h && (*(int*)&((D2_CONTROL_TL*)d2_Controls)[k].value_048) == 0) {
 						g_773e40[g_7747a8++] = (unsigned short) k;
 						(*(int*)&((D2_CONTROL_TL*)d2_Controls)[k].value_048) = 1;

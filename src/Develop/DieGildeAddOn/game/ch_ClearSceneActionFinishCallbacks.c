@@ -14,6 +14,7 @@ typedef struct {
 
 extern char* tp_ch_ActionQueue;
 
+/* ADDRESS: GOLDDE 0x0040b200 */
 void __cdecl ch_ClearSceneActionFinishCallbacks(int key)
 {
 	int i;

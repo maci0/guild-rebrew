@@ -15,6 +15,7 @@ extern char* d2_Controls;
 void __cdecl d2_DestroyElement(int slot);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x0046f2c0 */
+/* ADDRESS: GOLDDE 0x00462850 */
 int __cdecl d2_ClearWindowChildren(int win, int keep)
 {
 	int i;

@@ -17,6 +17,7 @@ void __cdecl d3_ClearAllSceneContexts(void);
 int __cdecl main_GetLanguage(void);
 #include "Develop/Units/d3/client_scene_loader.h"
 
+/* ADDRESS: GOLDDE 0x00520aa0 */
 void __cdecl main_LoadCitySelectionScene(char* name, int net)
 {
 	char path[0x104];

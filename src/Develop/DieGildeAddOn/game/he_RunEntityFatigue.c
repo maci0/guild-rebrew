@@ -14,6 +14,7 @@ void __cdecl gm_AddTime(void*, int, int, int);
  * timer, a sub-1.0 rest value keeps it idle for 0x14, otherwise a 0x25 packet
  * is queued and the record is marked busy. */
 /* ADDRESS: GOLDTL 0x0056fcb0 */
+/* ADDRESS: GOLDDE 0x00555c70 */
 void __cdecl he_RunEntityFatigue(char* e)
 {
 	int info[4];

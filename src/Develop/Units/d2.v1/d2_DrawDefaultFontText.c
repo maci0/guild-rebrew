@@ -16,6 +16,7 @@ void __cdecl d2_DrawDimmedSpriteFrame(int x, int y, int surf, char* font, int c)
 void __cdecl d2_DrawSpriteFromSet(int x, int y, int surf, char* font, int c);
 
 /* ADDRESS: GOLDTL 0x0046bbc0 */
+/* ADDRESS: GOLDDE 0x0045f240 */
 void __cdecl d2_DrawDefaultFontText(int x, int y, int surf, char* text, unsigned char flags)
 {
 	int x0;

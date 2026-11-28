@@ -23,6 +23,7 @@ extern int g_1040954;
 extern int g_1040c78;
 extern int g_6b8718;
 
+/* ADDRESS: GOLDDE 0x00447b30 */
 void __cdecl d3_InitRenderVertexBuffer(void)
 {
 	unsigned int fvf;

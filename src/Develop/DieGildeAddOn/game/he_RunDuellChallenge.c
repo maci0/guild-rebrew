@@ -47,6 +47,7 @@ void __cdecl he_FreeAction(Order_54f0c0*);
 
 
 /* ADDRESS: GOLDTL 0x0054f0c0 */
+/* ADDRESS: GOLDDE 0x00535560 */
 void __cdecl he_RunDuellChallenge(Order_54f0c0* o)
 {
 	char buf[0x100];

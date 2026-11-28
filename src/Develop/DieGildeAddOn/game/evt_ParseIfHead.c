@@ -40,6 +40,7 @@ void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
 /* Parses an if head: evaluates the condition and pushes a block level. */
 /* ADDRESS: GOLDTL 0x00427280 */
+/* ADDRESS: GOLDDE 0x00421ce0 */
 int __cdecl evt_ParseIfHead(void)
 {
 	struct tok_427280 t;

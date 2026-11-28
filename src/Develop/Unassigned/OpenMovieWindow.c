@@ -40,6 +40,7 @@ void __cdecl FreeVideoListNode(char*);
 /* Creates the MOVIEWNDCLASS movie window for a file, opens the DirectShow
    filter graph on it and returns the movie client id, or 0 on failure. */
 /* ADDRESS: GOLDTL 0x0041e680 */
+/* ADDRESS: GOLDDE 0x0041c0b0 */
 int __cdecl OpenMovieWindow(char* name, void* hwnd, void* inst, int x, int y, int w, int h, int flags)
 {
 	WNDCLASSEXA wc;

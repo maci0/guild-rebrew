@@ -1,5 +1,6 @@
 #include "Develop/client_types.h"
 
+/* ADDRESS: GOLDDE 0x004664c0 */
 void __cdecl ResetDisplayCounters(void)
 {
     int i;

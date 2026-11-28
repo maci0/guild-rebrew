@@ -4,6 +4,7 @@
 extern char* sv_SelectedBuilding;
 extern int* d2_TutorialState;
 
+/* ADDRESS: GOLDDE 0x00565a20 */
 int __cdecl d2_GetTutCh3SubStep(void)
 {
 	unsigned short* p;

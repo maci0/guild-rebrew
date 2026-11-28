@@ -34,6 +34,7 @@ typedef struct LightIter {
 
 #pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x0043ef20 */
+/* ADDRESS: GOLDDE 0x00437af0 */
 void __cdecl d3_UpdateFloorLighting(char* a0)
 {
 	char* lum;

@@ -4,6 +4,7 @@ int __cdecl ai_ComputeBaseActionScore(float* o1, float* o2, int a3, char* e, int
 int __cdecl ai_CalculateMatchingMethodEffects(float* o1, float* o2, int a3, char* e, int a5, int a6, int a7);
 
 /* ADDRESS: GOLDTL 0x004a03d0 */
+/* ADDRESS: GOLDDE 0x0048ee00 */
 int __cdecl ai_ScoreUpgradeZunft(float* o1, float* o2, int a3, char* e, int a5, int a6, int a7)
 {
 	unsigned char kind;

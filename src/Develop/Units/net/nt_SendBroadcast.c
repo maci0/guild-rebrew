@@ -6,6 +6,7 @@ extern struct sin_402220 nt_BroadcastAddr;
 
 extern int (__stdcall *g_662350)(int, int, int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x00401cb0 */
 void __cdecl nt_SendBroadcast(int buf, int len)
 {
 	int h;

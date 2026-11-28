@@ -5,6 +5,7 @@ void* __cdecl gm_QueryEntities(int, int, ...);
 extern char* d2_VisitedBuilding; extern unsigned char* d2_InteriorBuilding; extern int* d2_SelectedItem;
 extern char* d2_SelectedBuilding; extern char* d3_FocusedEntityObject; extern char g_7746f4;
 /* ADDRESS: GOLDTL 0x00530510 */
+/* ADDRESS: GOLDDE 0x00518e90 */
 void __cdecl sv_ResetSelectionState(void)
 {
 	unsigned short* entity;

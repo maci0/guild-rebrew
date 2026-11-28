@@ -28,6 +28,7 @@ extern int cm_PacketDeltaBase;
    entity is drifting to, then rebalances the building's per-kind stock against
    the entity's total. */
 /* ADDRESS: GOLDTL 0x00482b60 */
+/* ADDRESS: GOLDDE 0x00471b10 */
 void __cdecl ai_CalcMeisterBank(char* e)
 {
 	Stat st;

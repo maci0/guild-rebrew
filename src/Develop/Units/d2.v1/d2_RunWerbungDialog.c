@@ -46,6 +46,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 void __cdecl io_ClearInputButtonFlags(int);
 
+/* ADDRESS: GOLDDE 0x005b4590 */
 int __cdecl d2_RunWerbungDialog(unsigned short* target)
 {
 	Packet pkt;

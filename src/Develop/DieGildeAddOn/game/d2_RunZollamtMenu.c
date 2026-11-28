@@ -24,6 +24,7 @@ void __cdecl d2_SelectPatrolTarget(char*);
 void __cdecl d2_StartZollkasseTargetSelect(char*);
 void __cdecl d2_OpenMeisterbriefDialog(char*);
 
+/* ADDRESS: GOLDDE 0x00594720 */
 void __cdecl d2_RunZollamtMenu(char* building)
 {
 	int a;

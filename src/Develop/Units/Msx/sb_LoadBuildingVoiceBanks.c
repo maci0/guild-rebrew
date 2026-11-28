@@ -12,6 +12,7 @@ int __cdecl sb_LoadLocalizedSampleBank(char*, int);
 /* Loads the worker comment and greeting sound banks for the building type
  * of the given building. */
 /* ADDRESS: GOLDTL 0x004c3170 */
+/* ADDRESS: GOLDDE 0x004b0c20 */
 void __cdecl sb_LoadBuildingVoiceBanks(unsigned char* b)
 {
 	char greet[256] = "";

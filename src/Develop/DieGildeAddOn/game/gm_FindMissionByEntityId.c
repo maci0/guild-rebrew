@@ -3,6 +3,7 @@
 
 extern char gm_MissionJobs[];
 
+/* ADDRESS: GOLDDE 0x004a1eb0 */
 char* __cdecl gm_FindMissionByEntityId(int* query)
 {
 	int i;

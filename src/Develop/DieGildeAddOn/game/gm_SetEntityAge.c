@@ -6,6 +6,7 @@ void __cdecl cm_RequestChangeAttribute(void);
 extern unsigned int gm_QueuedCommandCount;
 
 /* ADDRESS: GOLDTL 0x004fee50 */
+/* ADDRESS: GOLDDE 0x004ea8d0 */
 void __cdecl gm_SetEntityAge(char* o, int v)
 {
 	float f;

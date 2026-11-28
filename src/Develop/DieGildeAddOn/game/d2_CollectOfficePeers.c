@@ -29,6 +29,7 @@ int __cdecl gm_MatchesTargetFilter(unsigned short a, unsigned short b, void* q, 
  * max == 0, the count available. The inventory entry also holds a second
  * function at 0x5cc100 (314 bytes). */
 /* ADDRESS: GOLDTL 0x005cbfb0 */
+/* ADDRESS: GOLDDE 0x005ada40 */
 unsigned int __cdecl d2_CollectOfficePeers(char* e, unsigned int max, Sel* out, void* q)
 {
 	int m;

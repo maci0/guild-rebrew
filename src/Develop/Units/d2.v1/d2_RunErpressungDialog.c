@@ -1,3 +1,5 @@
+extern char d2_WindowMetricsView[];
+extern char g_14ac864[];
 #include <string.h>
 #include "Develop/client_types.h"
 #include "Develop/DieGildeAddOn/game/client_actions.h"
@@ -59,6 +61,7 @@ void __cdecl d2_DestroyForm(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 
 /* ADDRESS: GOLDTL 0x005d5930 */
+/* ADDRESS: GOLDDE 0x005b7190 */
 int __cdecl d2_RunErpressungDialog(unsigned char* p, int* q)
 {
 	D2_ERPRESSUNG_CRIME_REC recs[0x20];
@@ -141,7 +144,7 @@ int __cdecl d2_RunErpressungDialog(unsigned char* p, int* q)
 				r->x10 = 0x32;
 				r->x14 = y;
 				d2_DrawPersonCard(0x32, y, d2_CurrentWindowId, 0x56, r, 1);
-				d2_CreateRightAlignedText(text, *(int*) (d2_CurrentWindowId * 0x3cc + 0x1015f4c) - 0xf, y + 0x2d, 200, 0x55);
+				d2_CreateRightAlignedText(text, *(int*) (d2_CurrentWindowId * 0x3cc + (int) &d2_WindowMetricsView) - 0xf, y + 0x2d, 200, 0x55);
 				r++;
 				y += 0x69;
 			} while (--k != 0);
@@ -160,7 +163,7 @@ int __cdecl d2_RunErpressungDialog(unsigned char* p, int* q)
 							io_FormatTextBuffer(buf, 0x1d52, *(unsigned short*) recs[i].p0);
 							d2_ShowModalMessageBox(buf, 0);
 						} else if (recs[i].x34 < 3) {
-							d2_ShowModalMessageBox(*(char**) 0x14ac864, 0);
+							d2_ShowModalMessageBox(*(char**) &g_14ac864, 0);
 						} else {
 							obj = gm_LookupEntityRecordById(ids[i]);
 							if (gm_HandleErpressung(p, (unsigned char*) obj) != 0) {

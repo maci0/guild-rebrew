@@ -22,6 +22,7 @@ int __cdecl sb_LoadLocalizedSampleBank(char*, int);
 #pragma optimize("y", off)
 
 /* ADDRESS: GOLDTL 0x00581e20 */
+/* ADDRESS: GOLDDE 0x00567b90 */
 TaskNode* __cdecl d2_CreateTutorialChapter3(void)
 {
 	int* first;

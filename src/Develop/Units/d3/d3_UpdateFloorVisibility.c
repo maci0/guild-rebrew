@@ -28,6 +28,7 @@ typedef int (__stdcall* D3_MESH_QUERY_FN)(void*);
 /* Recomputes the two cached shadow boxes of an entity from the eight
  * surrounding placements and sums the visibility/occupancy callbacks of the
  * 8x8 cell grid. Returns the number of lit cells. */
+/* ADDRESS: GOLDDE 0x00439a10 */
 int __cdecl d3_UpdateFloorVisibility(char* floor)
 {
 	float* m;

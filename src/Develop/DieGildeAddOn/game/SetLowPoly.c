@@ -6,6 +6,7 @@ extern char g_676330[];
 
 void __cdecl evt_LogScriptError(void*, int, void*);
 
+/* ADDRESS: GOLDDE 0x0040cdb0 */
 int __cdecl SetLowPoly(char** pp, int* on)
 {
 	void* g;

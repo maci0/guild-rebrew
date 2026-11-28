@@ -14,6 +14,7 @@ extern char gm_EntitySlotTable[];
 void __cdecl d3_VisitSceneObjects(int, char*, int, void*, char*);
 char __cdecl d3_CreatePennantAtFlagDummy(char*, char*);
 
+/* ADDRESS: GOLDDE 0x00516360 */
 void __cdecl d3_CreateEntityFlagPennant(char* e)
 {
 	char* o;

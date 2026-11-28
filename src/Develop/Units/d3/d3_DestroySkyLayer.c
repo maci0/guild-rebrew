@@ -9,6 +9,7 @@ extern int g_772f68;
 void __cdecl d3_RemoveSkyLayer(int, int);
 void __cdecl d3_FreeSkyDome(int);
 
+/* ADDRESS: GOLDDE 0x004d1580 */
 void __cdecl d3_DestroySkyLayer(void)
 {
 	if (cut_SkipMode == 0) {

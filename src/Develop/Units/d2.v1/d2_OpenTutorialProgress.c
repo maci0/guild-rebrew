@@ -11,6 +11,7 @@ void __cdecl d2_CenterForm(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x00566300 */
 void __cdecl d2_OpenTutorialProgress(void)
 {
 	d2_TutorialState[26] = d2_LoadForm(0, 0, g_6a8364);

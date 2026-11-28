@@ -7,6 +7,7 @@
 void __cdecl d3_FreeObjectAnimation(void*);
 void __cdecl d3_AnimateObjectTransform(char*, float*, float*, int, int);
 
+/* ADDRESS: GOLDDE 0x00404b00 */
 void __cdecl ch_AnimateCameraView(char* a1, int view, int a3)
 {
 	float a[3];

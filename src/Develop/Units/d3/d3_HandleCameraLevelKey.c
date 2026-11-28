@@ -17,6 +17,7 @@ void __cdecl d2_DispatchTutorialInput(int, int, int, int);
 #include "Develop/Units/d3/client_scene_transform.h"
 void __cdecl d3_AnimateObjectTransform(char*, float*, float*, int, int);
 
+/* ADDRESS: GOLDDE 0x0057f5c0 */
 void __cdecl d3_HandleCameraLevelKey(void)
 {
 	float v[3];

@@ -5,6 +5,7 @@ void __cdecl d2_RunBeweiseSichtenAltDialog(char*, int*);
 
 
 /* ADDRESS: GOLDTL 0x004f99d0 */
+/* ADDRESS: GOLDDE 0x004e57b0 */
 int __cdecl gm_DispatchCourtTrialAction(char* e, int* s)
 {
 	char* p;

@@ -89,6 +89,7 @@ int __cdecl d2_CreateRenderableForm(int x, int y, char* formName)
 }
 #else
 /* ADDRESS: GOLDTL 0x00471170 */
+/* ADDRESS: GOLDDE 0x00464670 */
 int __cdecl d2_CreateRenderableForm(int x, int y, char* formName)
 {
 	int id;

@@ -5,6 +5,7 @@ extern int sb_WaveDriver;
 void __cdecl sb_StartVoice(int*, int, int);
 int __cdecl msx_ResumeSample(int);
 
+/* ADDRESS: GOLDDE 0x00420300 */
 void __cdecl sb_ResumeOrStartVoice(int* voice)
 {
 	if (sb_WaveDriver != 0 && voice[0] != 0) {

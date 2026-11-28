@@ -24,6 +24,7 @@ void* __cdecl d2_QueueTexturedQuad(int x, int y, int w, int h, int a5, Rect4* r)
 void __cdecl d2_SetQuadVertexColor(void* p, int r, int g, int b);
 
 /* ADDRESS: GOLDTL 0x00469320 */
+/* ADDRESS: GOLDDE 0x0045cca0 */
 void __cdecl d2_DrawBitmapElement(int slot)
 {
 	Rect4 rc;

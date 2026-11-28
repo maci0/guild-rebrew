@@ -41,6 +41,7 @@ void __cdecl d2_AddWindowScrollButtons(int x, int y, int win, int target, int id
 }
 #else
 /* ADDRESS: GOLDTL 0x0046e830 */
+/* ADDRESS: GOLDDE 0x00461e60 */
 void __cdecl d2_AddWindowScrollButtons(int x, int y, int win, int target, int id)
 {
 	int wo;

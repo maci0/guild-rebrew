@@ -5,6 +5,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b34d0 */
 void __cdecl cm_RequestChrWalkToDummy(int charId, int gebId, int objId, char* text)
 {
 	char buf[0x9c];

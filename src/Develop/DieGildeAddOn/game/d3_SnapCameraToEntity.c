@@ -62,6 +62,7 @@ void __cdecl d3_SetNodePosition(View* v, Vec3* p);
 void __cdecl d3_SetObjectRotation(View* v, Vec3* r);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
+/* ADDRESS: GOLDDE 0x00515c40 */
 void __cdecl d3_SnapCameraToEntity(Ent* entity)
 {
 	Vec4 q;

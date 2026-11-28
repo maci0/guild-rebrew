@@ -17,6 +17,7 @@ void __cdecl sim_SetSyncParams(void* target, int type_id, int field_6, int field
 int __cdecl am_InitMethods(void);
 
 /* ADDRESS: GOLDTL 0x0047ce90 */
+/* ADDRESS: GOLDDE 0x0046be50 */
 int __cdecl ai_InitContextAndGoodsLists(void)
 {
 	g_100dc00 = 0;

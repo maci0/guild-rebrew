@@ -15,6 +15,7 @@ float* __cdecl gm_LookupSpecialObject(int id);
 int __cdecl gm_UseSpecialObject(char* e, Req* r);
 
 /* ADDRESS: GOLDTL 0x0049aa80 */
+/* ADDRESS: GOLDDE 0x004894c0 */
 int __cdecl ai_RunEducationObject(char* entity, int* action)
 {
 	float* objData;

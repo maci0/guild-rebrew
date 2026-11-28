@@ -13,6 +13,7 @@ void __cdecl d3_SetObjectRotation(char* node, float* v);
 
 /* ADDRESS: GOLD 0x004315c0 */
 /* ADDRESS: GOLDTL 0x004311a0 */
+/* ADDRESS: GOLDDE 0x0042a8b0 */
 void __cdecl d3_ApplyAnimDelta(char* node, char* anim, int from, int to, int flags)
 {
 	float d[4];

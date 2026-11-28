@@ -30,6 +30,7 @@ int __cdecl ai_EvalRecipePriceRatios(Calc*);
 unsigned short __cdecl gm_RandomMod(int);
 
 /* ADDRESS: GOLDTL 0x0049f6d0 */
+/* ADDRESS: GOLDDE 0x0048e100 */
 unsigned int __cdecl ai_StartZunftPreismanipulation(int a0, unsigned short* actorEntity, int* a2, char* a3)
 {
 	Calc calc[7];

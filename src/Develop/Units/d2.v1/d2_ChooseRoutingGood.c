@@ -25,6 +25,7 @@ void* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl main_RunFrameLoop(void* fn, int arg);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x004bec20 */
+/* ADDRESS: GOLDDE 0x004ac7a0 */
 unsigned int __cdecl d2_ChooseRoutingGood(int a0, int a1, unsigned int a2)
 {
 	int handles[7];

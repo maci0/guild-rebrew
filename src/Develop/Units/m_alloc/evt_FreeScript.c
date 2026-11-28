@@ -11,6 +11,7 @@ void __cdecl m_FreeTracked(void*);
 
 /* Frees a script with its symbol data, child scripts and buffers. */
 /* ADDRESS: GOLDTL 0x00429d30 */
+/* ADDRESS: GOLDDE 0x00424700 */
 int __cdecl evt_FreeScript(char* script)
 {
 	int i;

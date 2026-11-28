@@ -7,6 +7,7 @@ extern char* evt_CurrentScript;
 int __cdecl d3_FindSceneObject(int a, int b, int c, char* name);
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
+/* ADDRESS: GOLDDE 0x0040d590 */
 int __cdecl ecmd_GetSubObjectHandle(int* parent, char** name)
 {
 	char buf[0x200];

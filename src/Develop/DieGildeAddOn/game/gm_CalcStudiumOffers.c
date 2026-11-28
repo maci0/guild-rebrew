@@ -19,6 +19,7 @@ float __cdecl gm_GetTileDistance(int x0, int y0, int x1, int y1);
 unsigned short __cdecl gm_RandomMod(int n);
 
 /* ADDRESS: GOLDTL 0x004942a0 */
+/* ADDRESS: GOLDDE 0x00482d60 */
 void __cdecl gm_CalcStudiumOffers(unsigned short* e, Share* out)
 {
 	int total;

@@ -10,6 +10,7 @@ void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004b6650 */
+/* ADDRESS: GOLDDE 0x004a48e0 */
 int __cdecl gm_HandleMsg00DebitWealth(int* a)
 {
 	char buf[0x100];

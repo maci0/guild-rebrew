@@ -6,6 +6,7 @@ int __cdecl ai_MatchesBuildingFilter(unsigned short* a0, int* a1, int a2);
 float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, int a2);
 
 /* ADDRESS: GOLDTL 0x004a5fe0 */
+/* ADDRESS: GOLDDE 0x004949e0 */
 int __cdecl ai_CollectMatchingBuildings(unsigned short* actor, int arg1, int arg2, int mask, float minFavor, float maxFavor, int maxCount, int* entityIds)
 {
 	int flag;

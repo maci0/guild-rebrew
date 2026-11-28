@@ -6,6 +6,7 @@ int __cdecl gm_FindMatchingLawEntry(int);
 float __cdecl gm_RandomFloat01(void);
 void __cdecl gm_TryRecordCrime(int, int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x0055d7b0 */
 int __cdecl gm_RecordAssassinEvidence(char* a, char* b, int c)
 {
 	int k;

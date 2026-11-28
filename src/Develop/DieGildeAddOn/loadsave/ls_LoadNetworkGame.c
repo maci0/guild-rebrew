@@ -27,6 +27,7 @@ void __cdecl ls_LoadSavegame(char* s, int n);
 void __cdecl sv_WaitForNetworkSync(int v);
 void __cdecl init_LocalData(void);
 
+/* ADDRESS: GOLDDE 0x004ff4c0 */
 int __cdecl ls_LoadNetworkGame(char* name)
 {
 	Msg msg;

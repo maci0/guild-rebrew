@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+/* ADDRESS: GOLDDE 0x00501c10 */
 int __cdecl io_ParseCsvIntList(char* s, int* out, int max)
 {
 	char buf[256];

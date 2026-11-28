@@ -7,6 +7,7 @@ extern COLOR_OCTREE_NODE* g_6b6f20[6];
 extern int g_6b6308;
 extern unsigned char d3_OctreePalette[3][0x100];
 
+/* ADDRESS: GOLDDE 0x0041a050 */
 void __cdecl d3_AssignOctreePalette(int node_idx, int level)
 {
 	int i;

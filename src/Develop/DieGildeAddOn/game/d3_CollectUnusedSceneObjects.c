@@ -77,6 +77,7 @@ void __cdecl d3_CollectUnusedSceneObjects(int a1, char** list)
 }
 #else
 /* ADDRESS: GOLDTL 0x00598150 */
+/* ADDRESS: GOLDDE 0x0057d900 */
 void __cdecl d3_CollectUnusedSceneObjects(int a1, char** list)
 {
 	float pa[4];

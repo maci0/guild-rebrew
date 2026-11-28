@@ -5,6 +5,7 @@ char* __cdecl StripPathAndExt(char* path);
 void __cdecl evt_LogScriptError(char* script, unsigned int position, const char* message);
 
 /* ADDRESS: GOLDTL 0x0040eff0 */
+/* ADDRESS: GOLDDE 0x0040ddf0 */
 int __cdecl AttachAnimLooped(char** character, char** animation, int* kind)
 {
     D3_ANIMATION_OPTIONS options;

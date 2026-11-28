@@ -1,3 +1,6 @@
+void __cdecl gv_MatchEntityGraveyardSlot();
+void __cdecl gv_IsGraveSlotFree();
+extern char g_7f4c00[];
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 int __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_0047d220(char* p);
@@ -10,6 +13,7 @@ int __cdecl fcn_0042e410(int a);
 extern unsigned char* lpGebaeudePROT;
 extern unsigned char* lpGebaeudeINST; extern unsigned char gm_ActiveTownIndex; extern float g_664160;
 /* ADDRESS: GOLDTL 0x0048fe70 */
+/* ADDRESS: GOLDDE 0x0047ed40 */
 int __cdecl ai_StartHandleGrave(int unused0, char* actorEntity, int busy, int* out1, int* out2, int* out3)
 {
 	int cand[8];
@@ -31,10 +35,10 @@ int __cdecl ai_StartHandleGrave(int unused0, char* actorEntity, int busy, int* o
 	if (*(unsigned short*) (actorEntity + 0x50) == 0x7fff) {
 		return 0;
 	}
-	if ((*(int*) 0x7f4c04 & 0xffff) % 6 != (unsigned) (*(int*) (actorEntity + 4)) % 6) {
+	if ((*(int*) ((int) &g_7f4c00 + 0x4) & 0xffff) % 6 != (unsigned) (*(int*) (actorEntity + 4)) % 6) {
 		return 0;
 	}
-	if (*(int*) 0x7f4c00 % 3 != (unsigned) (*(int*) (actorEntity + 4)) % 3) {
+	if (*(int*) &g_7f4c00 % 3 != (unsigned) (*(int*) (actorEntity + 4)) % 3) {
 		return 0;
 	}
 	if (*(char*) (actorEntity + 2) != 5) {
@@ -61,7 +65,7 @@ int __cdecl ai_StartHandleGrave(int unused0, char* actorEntity, int busy, int* o
 				cand[n] = (int) rec;
 				n++;
 			}
-			graveSlot = (int*) fcn_004f18d0(actorEntity, rec, 0, 0x4f17f0, 0xff);
+			graveSlot = (int*) fcn_004f18d0(actorEntity, rec, 0, (int) gv_MatchEntityGraveyardSlot, 0xff);
 			if (graveSlot != 0) {
 				break;
 			}
@@ -79,7 +83,7 @@ int __cdecl ai_StartHandleGrave(int unused0, char* actorEntity, int busy, int* o
 			return 0;
 		}
 		do {
-			targetSlot = (int*) fcn_004f18d0(0, rec, 0, 0x4f1840, grade);
+			targetSlot = (int*) fcn_004f18d0(0, rec, 0, (int) gv_IsGraveSlotFree, grade);
 			if (targetSlot != 0) {
 				break;
 			}
@@ -102,7 +106,7 @@ int __cdecl ai_StartHandleGrave(int unused0, char* actorEntity, int busy, int* o
 	} else if (n != 0
 	    && 0x23 <= (fcn_0042e410(8) & 0xffff) + *(unsigned short*) (actorEntity + 0xa)) {
 		graveSlot = (int*) cand[fcn_0042e410(n) & 0xffff];
-		targetSlot = (int*) fcn_004f18d0(0, (char*) graveSlot, 0, 0x4f1840, 0xff);
+		targetSlot = (int*) fcn_004f18d0(0, (char*) graveSlot, 0, (int) gv_IsGraveSlotFree, 0xff);
 		if (targetSlot != 0) {
 			int price, dummy;
 			price = gv_CalcGravePrice((int) actorEntity, 0xff, *targetSlot, 1, &dummy);

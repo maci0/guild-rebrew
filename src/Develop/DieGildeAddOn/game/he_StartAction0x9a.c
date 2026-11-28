@@ -7,6 +7,7 @@ void __cdecl gm_AddTime(void*, int, int, int);
 int __cdecl cm_SendSetHE(char, unsigned char*);
 
 /* ADDRESS: GOLDTL 0x005776a0 */
+/* ADDRESS: GOLDDE 0x0055d5d0 */
 int __cdecl he_StartAction0x9a(unsigned char* e)
 {
 	int r;

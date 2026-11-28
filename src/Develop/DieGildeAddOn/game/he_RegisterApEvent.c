@@ -9,6 +9,7 @@ extern HE_AP_EVENT he_ApEvents[256];
 
 #include <string.h>
 
+/* ADDRESS: GOLDDE 0x0052d4e0 */
 HE_AP_EVENT* __cdecl he_RegisterApEvent(int a, char* name, int b, int c)
 {
 	int i;

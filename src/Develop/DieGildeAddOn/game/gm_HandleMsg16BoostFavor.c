@@ -9,6 +9,7 @@ void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl io_FormatTextBuffer(void*, int, int, int);
 void __cdecl he_PostEntityMessage(int, int, void*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x004a5e20 */
 int __cdecl gm_HandleMsg16BoostFavor(void* request)
 {
 	char buf[0x400];

@@ -1,3 +1,5 @@
+extern char g_85a0a2[];
+extern char gm_SlotTableKindView[];
 #include "Develop/DieGildeAddOn/game/game_timestamp.h"
 
 
@@ -27,6 +29,7 @@ int __cdecl srv_GetEntityOfficeSlot(unsigned char*, void*, void*);
 int __cdecl amt_SendOfficeCommand(unsigned char, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004f6850 */
+/* ADDRESS: GOLDDE 0x004e2630 */
 void __cdecl cut_ExecuteProzessPunishment(unsigned short* entity, int action)
 {
 	char level;
@@ -124,7 +127,7 @@ void __cdecl cut_ExecuteProzessPunishment(unsigned short* entity, int action)
 		list[1] = *(int*) (gm_RichterKatholisch + 4);
 		list[2] = *(int*) (gm_RichterEvangelisch + 4);
 		n = 3;
-		for (p = (char*) 0x7f4ca2; n < 0x10 && (int) p < 0x85a0a2; p += 0x21c) {
+		for (p = (char*) &gm_SlotTableKindView; n < 0x10 && (int) p < (int) &g_85a0a2; p += 0x21c) {
 			if (id != *(int*) (p + 2) &&
 			    (p[0] == 6 || p[0] == 7 || p[0] == 5)) {
 				list[n] = *(int*) (p + 2);

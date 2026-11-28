@@ -25,6 +25,7 @@ typedef struct Cell {
 int __cdecl d3_TransformBoundsCorners(Cell*, char*, char*);
 Res __cdecl d3_TestBoxAgainstFrustum(int, char*, char*);
 
+/* ADDRESS: GOLDDE 0x0044a830 */
 void __cdecl d3_UpdateFrustumCellVisibility(Cell* c, char* e, int v)
 {
 	Res r;

@@ -9,6 +9,7 @@ void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x005bc0d0 */
 void __cdecl amt_ApplyOfficeSupportEffect(unsigned short* who, char* e)
 {
 	int n;

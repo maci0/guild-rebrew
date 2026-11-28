@@ -9,6 +9,7 @@ int __cdecl d3snd_PrepareVoiceSample(int, int, int, int);
 void __cdecl sb_StartVoice(int, int, int);
 void __cdecl sb_SetVoiceVolume(int, int);
 
+/* ADDRESS: GOLDDE 0x004b0ae0 */
 int __cdecl d3snd_PlaySoundEffect(int a, int b, int c, int d)
 {
 	int h;

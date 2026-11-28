@@ -6,6 +6,7 @@ void __cdecl msx_RegisterAILShutdown(void);
 __declspec(dllimport) int __stdcall AIL_startup(void);
 __declspec(dllimport) char* __stdcall AIL_last_error(void);
 
+/* ADDRESS: GOLDDE 0x00424a10 */
 int __cdecl msx_InitAIL(void)
 {
 	int r = 0;

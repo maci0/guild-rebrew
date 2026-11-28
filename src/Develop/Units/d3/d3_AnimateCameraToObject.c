@@ -21,6 +21,7 @@ float __cdecl d3_SampleAverageTerrainHeight(float* p);
 void __cdecl d3_FreeObjectAnimation(char* cam);
 void __cdecl d3_AnimateObjectTransform(char* cam, float* a, float* b, int d, int e);
 
+/* ADDRESS: GOLDDE 0x00515f10 */
 void __cdecl d3_AnimateCameraToObject(char* entity)
 {
 	float lo;

@@ -24,6 +24,7 @@ extern char* d2_Controls;
 void __cdecl d2_SetElementWidth(int slot, int w);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x0046c4e0 */
+/* ADDRESS: GOLDDE 0x0045fb60 */
 void __cdecl d2_NormalizeWindowButtonWidths(int win)
 {
 	Win* w;

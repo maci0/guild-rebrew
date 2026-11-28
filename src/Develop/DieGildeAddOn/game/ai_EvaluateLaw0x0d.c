@@ -20,6 +20,7 @@ void __cdecl gm_GetLawEntry(int a, Stat* st);
 #define MINF(a, b) (((a) < (b)) ? (a) : (b))
 
 /* ADDRESS: GOLDTL 0x004911b0 */
+/* ADDRESS: GOLDDE 0x00480060 */
 int __cdecl ai_EvaluateLaw0x0d(Ent* e, int unused, int* out)
 {
 	Stat st;

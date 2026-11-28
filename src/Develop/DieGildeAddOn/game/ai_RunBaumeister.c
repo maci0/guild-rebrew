@@ -24,6 +24,7 @@ void __cdecl cm_RequestMoveCredits(int a, int b, char c, int n);
 void __cdecl cm_SendCopyEntityData(char* msg);
 int __cdecl amt_ExecGebaeudeBauen(char* a1, char* a2, char* a3);
 
+/* ADDRESS: GOLDDE 0x0048cf00 */
 int __cdecl ai_RunBaumeister(char* entity, char* a2, char* a3)
 {
 	char msg[0xf8];

@@ -5,6 +5,7 @@ extern unsigned int g_aed208;
 extern unsigned char g_aed224;
 extern char g_aed225[];
 
+/* ADDRESS: GOLDDE 0x004b2110 */
 int __cdecl cm_AppendCommandSyncField(unsigned char type, unsigned char count, short id, char* data)
 {
 	unsigned int size;

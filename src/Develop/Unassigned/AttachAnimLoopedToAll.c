@@ -16,6 +16,7 @@ extern int d3_ActiveScene;
 void __cdecl d3_VisitSceneObjects(int a, int b, int c, void (__cdecl* cb)(void), Query* q);
 void __cdecl d3_AttachMatchingAnimation(void);
 
+/* ADDRESS: GOLDDE 0x0040e140 */
 int __cdecl AttachAnimLoopedToAll(char** name, char** name2, int* a, int* b)
 {
 	Query q;

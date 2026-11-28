@@ -29,6 +29,7 @@ struct D3_MORPH_BLEND {
 };
 
 /* ADDRESS: GOLDTL 0x004357b0 */
+/* ADDRESS: GOLDDE 0x0042ecd0 */
 void __cdecl d3_CalcMorphFrameWeights(struct D3_MORPH_BLEND* b, float* w0, float* w1)
 {
 	struct D3_MORPH_ANIM* an;

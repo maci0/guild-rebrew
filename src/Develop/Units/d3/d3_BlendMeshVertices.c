@@ -62,6 +62,7 @@ int* __cdecl d3_SelectBaseMorphSlot(int entity);
 void __cdecl d3_CalcMorphFrameWeights(unsigned char* blend, float* w1, float* w0);
 
 /* ADDRESS: GOLDTL 0x00435910 */
+/* ADDRESS: GOLDDE 0x0042ee30 */
 void __cdecl d3_BlendMeshVertices(int entity, int* vertexCounts, Vertex* vertices, float* bounds)
 {
 	unsigned char* layout;

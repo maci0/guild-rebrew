@@ -6,6 +6,7 @@ unsigned short __cdecl gm_RandomMod(int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, void*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x00597020 */
 void __cdecl he_NotifyFeudEscalated(void* entity, void* recipient)
 {
 	char buf[0x200];

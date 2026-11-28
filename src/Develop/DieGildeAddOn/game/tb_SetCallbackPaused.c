@@ -1,5 +1,6 @@
 #include "Develop/DieGildeAddOn/game/client_timer.h"
 
+/* ADDRESS: GOLDDE 0x00427d00 */
 int __cdecl tb_SetCallbackPaused(TIMER_CALLBACK callback, int paused)
 {
 	int i;

@@ -12,6 +12,7 @@ extern char* lpObjektePROT;
 
 int __cdecl fcn_0065f220(char*, char*);
 
+/* ADDRESS: GOLDDE 0x004ecad0 */
 int __cdecl gm_FindObjektPrototypeByName(char* name)
 {
 	int i;

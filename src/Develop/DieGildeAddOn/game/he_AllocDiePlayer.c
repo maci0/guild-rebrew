@@ -13,6 +13,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 #include "Develop/Units/Error/error_message.h"
 void __cdecl he_FreeAction(char*);
 
+/* ADDRESS: GOLDDE 0x00554110 */
 void __cdecl he_AllocDiePlayer(char* e)
 {
 	char* p;

@@ -59,6 +59,7 @@ void __cdecl d2_PositionControl(int, int, int);
 int __cdecl sprintf(char*, const char*, ...);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00596d70 */
+/* ADDRESS: GOLDDE 0x0057c830 */
 void __cdecl d2_UpdateProduktionSlotTile(int dialog, int form, PRODUKTION_SLOT_ROW* r, int makeIcon,
                           unsigned int flags, unsigned char* p)
 {

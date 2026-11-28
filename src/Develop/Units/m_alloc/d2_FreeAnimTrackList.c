@@ -11,6 +11,7 @@ void __cdecl m_FreeTracked(void*);
 
 
 /* ADDRESS: GOLDTL 0x0047b5d0 */
+/* ADDRESS: GOLDDE 0x0046a5c0 */
 void __cdecl d2_FreeAnimTrackList(D2_ANIM_TRACK_LIST* l)
 {
 	int i;

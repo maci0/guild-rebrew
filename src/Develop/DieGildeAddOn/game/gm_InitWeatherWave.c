@@ -35,6 +35,7 @@ double __cdecl sin(double);
 double __cdecl fabs(double);
 #pragma intrinsic(sin, fabs)
 
+/* ADDRESS: GOLDDE 0x005c9b20 */
 void __cdecl gm_InitWeatherWave(int mode, int id, Vec24* a, Vec24* b)
 {
 	int i;

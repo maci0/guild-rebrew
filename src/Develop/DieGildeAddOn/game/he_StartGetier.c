@@ -15,6 +15,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl he_AssignActionSlot(int, int, int, char*);
 void __cdecl gm_AddTime(struct pos14*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x00546b10 */
 void __cdecl he_StartGetier(char* e)
 {
 	char* p;

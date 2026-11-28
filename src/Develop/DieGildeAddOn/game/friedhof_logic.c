@@ -19,6 +19,8 @@ extern int g_field_worker_count_wt2[4];
 extern int g_field_worker_count_wt3[4];
 
 
+/* ADDRESS: GOLDDE 0x004dd6c0 */
+/* ADDRESS: SERVERDE 0x1000f350 */
 int __cdecl gv_CheckSlotActive(void* slot, int type)
 {
 	if (type == 0) {
@@ -47,6 +49,8 @@ int __cdecl gv_CheckSlotActive(void* slot, int type)
 
 extern int __cdecl gv_CheckSlotActive(void* worker, int worktype);
 
+/* ADDRESS: GOLDDE 0x004dd740 */
+/* ADDRESS: SERVERDE 0x1000f3d0 */
 void* __cdecl gv_GetSlotEntry(void* worker, int worktype, unsigned char job)
 {
 	if (*(int*) ((char*) worker + 4) < 1 || *(int*) ((char*) worker + 4) > 3)
@@ -125,6 +129,7 @@ typedef struct {
 /* SIZE 0x14 */
 
 /* ADDRESS: GOLDTL 0x004f1790 */
+/* ADDRESS: GOLDDE 0x004dd880 */
 int __cdecl gm_GetEntitySlotIndex(char* owner, SLOT_ENTRY* entry)
 {
 	if (entry->kind == 0) {
@@ -184,6 +189,7 @@ int __cdecl gv_eval_SameOwner(int* wanted, int* entry)
  * gm_ResolveEntityById and storing it into `slot + 4`. */
 
 
+/* ADDRESS: SERVERDE 0x1000f510 */
 int __cdecl gv_eval_SlotFrei(void* unused, int* p)
 {
 	(void) unused;
@@ -250,6 +256,8 @@ extern int __cdecl cm_GetBuildingSlotCount(unsigned char* entity);
  * The slot list is selected by type (0..3) or derived from the building
  * stats for type 0xff.  Returns the first slot for which the filter
  * returns non-zero, or NULL. */
+/* ADDRESS: GOLDDE 0x004dd990 */
+/* ADDRESS: SERVERDE 0x1000f520 */
 void* __cdecl FindSlotEntryFiltered(void* filter_arg, void* entity, void* cursor, void* filter, int type)
 {
 	unsigned char* entry;
@@ -350,6 +358,7 @@ int __cdecl gv_eval_SlotFrei(void* unused, int* p);
  * store address (subscript, pointer walk, split index, addend order,
  * hoisted base) all emit identical bytes. */
 
+/* ADDRESS: SERVERDE 0x1000f660 */
 int __cdecl gv_SpawnEntities(void* entity, int count)
 {
 	unsigned char type;
@@ -411,6 +420,8 @@ extern void* __cdecl memset(void* dest, int c, unsigned int count);
  * the slot plus its worker table and slot-entry table, initializes the
  * production slots for the field type, and links the slot to the field. */
 
+/* ADDRESS: GOLDDE 0x004ddde0 */
+/* ADDRESS: SERVERDE 0x1000f7e0 */
 int __cdecl gv_AllocGraveyardField(unsigned char* field)
 {
 	unsigned char* entry;
@@ -739,6 +750,7 @@ void __cdecl gv_FreeFieldAllocs(int* slot);
  */
 /* ADDRESS: GOLDTL 0x004f2060 */
 /* ADDRESS: GOLD 0x004eff50 */
+/* ADDRESS: GOLDDE 0x004de120 */
 int __cdecl gv_UpgradeField(unsigned char* field)
 {
 	unsigned char* entry;
@@ -868,6 +880,7 @@ extern void __cdecl m_FreeTracked(void* ptr);
 /* Frees a 3-field slot: releases the two tracked pointers at
  * +0x1c and +0x20 (if set), then the slot itself. */
 #if defined(REBREW_SERVER) || defined(REBREW_GOLD)
+/* ADDRESS: SERVERDE 0x1000fd50 */
 void __cdecl gv_Free3Fields(int* slot)
 {
 	if (slot == 0)
@@ -987,6 +1000,7 @@ extern void* __cdecl FindSlotEntryFiltered(void* a, void* b, int c, int d, int e
 extern int __cdecl gm_SubObjectNoKill(int a, int b, int c); /* 0x10016ea0 */
 extern int __cdecl gm_AddObjekt(int a, int b, int c);
 
+/* ADDRESS: SERVERDE 0x1000ff90 */
 int __cdecl gv_HireProductionWorker(void* req)
 {
 	void* entity1;
@@ -1062,6 +1076,7 @@ extern int __cdecl gm_AddObjekt(int a, int b, int c);
  * entity, verifies the grave slot, then adds the building's production
  * time to the slot and accumulates the produced goods. */
 #if defined(REBREW_SERVER) || defined(REBREW_GOLD)
+/* ADDRESS: SERVERDE 0x10010190 */
 int __cdecl gv_ExtendProductionTime(void* building)
 {
 	void* entity;
@@ -1126,6 +1141,7 @@ extern int __cdecl fcn_10016ea0(int a, int b, int c);
 extern int __cdecl _ftol(void);
 
 /* ADDRESS: GOLDTL 0x004f2880 */
+/* ADDRESS: GOLDDE 0x004de940 */
 int __cdecl gv_ExtendProductionTime(void* building)
 {
 	void* entity;
@@ -1191,6 +1207,7 @@ int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_
 int __cdecl gv_CheckSlotActive(void* slot, int type);
 void* __cdecl gv_GetSlotEntry(void* worker, int worktype, unsigned char job);
 #if defined(REBREW_SERVER)
+/* ADDRESS: SERVERDE 0x10010320 */
 int __cdecl gv_SetGraveHolder(void* a)
 {
 	void* rec;
@@ -1240,6 +1257,7 @@ extern char gm_EntitySlotTable[];
 
 /* ADDRESS: GOLDTL 0x004f2a80 */
 /* ADDRESS: GOLD 0x004f0970 */
+/* ADDRESS: GOLDDE 0x004deb40 */
 int __cdecl gv_SetGraveHolder(void* a)
 {
 	void* rec;
@@ -1294,6 +1312,7 @@ extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** 
  * entity, checks the grave slot is a free graveyard field, then enables
  * the production slots of the worker array for the section's field type. */
 #if defined(REBREW_SERVER)
+/* ADDRESS: SERVERDE 0x10010440 */
 int __cdecl gv_ActivateSection(void* cmd)
 {
 	void* entity;
@@ -1361,6 +1380,7 @@ extern char gm_EntitySlotTable[];
 
 /* ADDRESS: GOLDTL 0x004f2c00 */
 /* ADDRESS: GOLD 0x004f0af0 */
+/* ADDRESS: GOLDDE 0x004decc0 */
 int __cdecl gv_ActivateSection(void* cmd)
 {
 	void* entity;
@@ -1429,6 +1449,7 @@ extern unsigned short* g_entity_table_end; /* 0x1003546c */
 extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 extern int __cdecl gv_CheckSlotActive(void* slot, int type);
 extern void* __cdecl gv_GetSlotEntry(void* worker, int worktype, unsigned char job);
+/* ADDRESS: GOLDDE 0x004dee50 */
 int __cdecl gv_UpdateGraveCondition(void* building)
 {
 	void* entity;
@@ -1514,6 +1535,7 @@ int __cdecl gv_ValidateEntityAction(void* cmd)
 extern int __cdecl gm_AssignBuildingResidents(void* entity, int cmd_arg);
 
 /* ADDRESS: GOLDTL 0x004f2ee0 */
+/* ADDRESS: GOLDDE 0x004defa0 */
 int __cdecl gv_ValidateEntityAction(void* cmd)
 {
 	void* entity;
@@ -1568,6 +1590,7 @@ int __cdecl gm_AddObjekt(int a, int b, int c);
  * for the current season. */
 #if defined(REBREW_SERVER)
 /* ADDRESS: SERVER 0x10011940 */
+/* ADDRESS: SERVERDE 0x10010710 */
 int __cdecl gv_MoveSlotEntry(void* a)
 {
 	void* cmd;
@@ -1691,6 +1714,7 @@ fail1:
 	return -1;
 }
 #else
+/* ADDRESS: GOLDDE 0x004df0a0 */
 int __cdecl gv_MoveSlotEntry(void* a)
 {
 	void* cmd;
@@ -1808,6 +1832,7 @@ extern void __cdecl LogMessageInternal(char* module, unsigned int line, char* ms
 extern void* __cdecl memset(void* dest, int c, unsigned int size);
 extern char* __cdecl strcpy(char* dest, const char* src);
 
+/* ADDRESS: GOLDDE 0x004df3d0 */
 int __cdecl gv_ExAllocGraveyardWorker(void* req)
 {
 	void* entry;

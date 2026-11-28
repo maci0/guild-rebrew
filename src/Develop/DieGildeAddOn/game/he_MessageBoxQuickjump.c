@@ -26,6 +26,7 @@ struct msg {
 #include "Develop/Units/Error/error_message.h"
 int __cdecl cm_SendRawEntityPacket(struct msg*, int, char*);
 
+/* ADDRESS: GOLDDE 0x0052c500 */
 int __cdecl he_MessageBoxQuickjump(int id, int arg, char* text1, unsigned char flags, int value, int x, int y, char* name, char* text2)
 {
 	struct msg m;

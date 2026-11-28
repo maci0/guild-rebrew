@@ -35,6 +35,7 @@ void __cdecl d2_ShowSchneidereiPlauschDialog(void);
 /* The request's zero-fill is the original's hand-written block-fill
  * prelude; recorded C memset probes did not emit it (archived docs/codegen-walls.md
  * section 6b). */
+/* ADDRESS: GOLDDE 0x005c63f0 */
 void __cdecl d2_SelectPlauschTarget(void)
 {
 	Req req;

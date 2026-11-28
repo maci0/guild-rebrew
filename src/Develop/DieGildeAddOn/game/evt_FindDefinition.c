@@ -17,6 +17,7 @@ typedef struct {
 
 extern char* evt_MemberScopeScript;
 
+/* ADDRESS: GOLDDE 0x00420d80 */
 Def* __cdecl evt_FindDefinition(Script* s, const char* name)
 {
 	Script* o;

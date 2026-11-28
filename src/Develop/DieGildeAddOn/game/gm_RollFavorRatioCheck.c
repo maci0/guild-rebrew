@@ -4,6 +4,7 @@ float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int 
 double __cdecl gm_RandomFloat01(void);
 
 /* ADDRESS: GOLDTL 0x0050e720 */
+/* ADDRESS: GOLDDE 0x004f9460 */
 int __cdecl gm_RollFavorRatioCheck(int entity1, int entity2, int numerator, int denominator)
 {
 	double scaledFavor;

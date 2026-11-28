@@ -3,6 +3,7 @@
 
 extern float flt_0_0;
 
+/* ADDRESS: GOLDDE 0x004f8b40 */
 int __cdecl gm_CalcEscortCost(int v, int mode)
 {
 	int r;

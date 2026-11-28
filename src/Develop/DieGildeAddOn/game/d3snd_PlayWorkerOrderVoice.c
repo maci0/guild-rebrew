@@ -11,6 +11,7 @@ float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int 
  * over them and posts one of three localized messages for the winning side, or
  * -5 when that side has no identified representative. */
 /* ADDRESS: GOLDTL 0x004c35f0 */
+/* ADDRESS: GOLDDE 0x004b10a0 */
 void __cdecl d3snd_PlayWorkerOrderVoice(void)
 {
 	int* p;

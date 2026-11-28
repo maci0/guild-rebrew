@@ -9,6 +9,7 @@ int __cdecl cm_SendCopyEntityData(char*);
 char* __cdecl gm_LookupEntityRecordById(int);
 
 /* ADDRESS: GOLDTL 0x00572e40 */
+/* ADDRESS: GOLDDE 0x00558dc0 */
 void __cdecl he_StartHandelsrouteTrade(char* c)
 {
 	char buf[0xf8];

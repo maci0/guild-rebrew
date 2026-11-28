@@ -16,6 +16,7 @@ int __cdecl d2_GetControlValue(int);
    message records into the 0x38-byte slot rows, then resolve each slot
    reference to its field values. */
 /* ADDRESS: GOLDTL 0x005974e0 */
+/* ADDRESS: GOLDDE 0x0057cfa0 */
 int __cdecl d2_SyncProduktionSlotGrid(int ctx, char* panel)
 {
     unsigned int layoutValues[68];

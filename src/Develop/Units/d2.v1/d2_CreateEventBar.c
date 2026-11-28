@@ -19,6 +19,7 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl d2_PositionControl(int, int, int);
 void __cdecl d2_SetFormVisibility(int, int);
 
+/* ADDRESS: GOLDDE 0x0052bf60 */
 void __cdecl d2_CreateEventBar(void)
 {
 	int i;

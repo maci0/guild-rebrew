@@ -3,6 +3,7 @@
  * through *out.  tex[8] is the edge length, tex[10] the byte plane. */
 
 /* ADDRESS: GOLDTL 0x0045b990 */
+/* ADDRESS: GOLDDE 0x00450a50 */
 char __cdecl d3sm_3D2SuperMap(float* tex, float* pt, int* outx, int* outy, float* out)
 {
 	int x;

@@ -12,6 +12,7 @@ struct fsm {
 extern int* d2_TutorialState;
 extern volatile int gm_GameTicks;
 
+/* ADDRESS: GOLDDE 0x00564d00 */
 int __cdecl d2_UpdateTutCh1FocusStep(int* ev)
 {
 	char* p;

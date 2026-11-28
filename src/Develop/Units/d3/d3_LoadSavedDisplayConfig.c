@@ -15,6 +15,7 @@ void __cdecl io_CloseRegistryKey(int);
 /* Reads the saved display adapter and mode from the registry; returns 1
  * when both are still available. */
 /* ADDRESS: GOLDTL 0x0041b290 */
+/* ADDRESS: GOLDDE 0x00418fd0 */
 char __cdecl d3_LoadSavedDisplayConfig(unsigned int* adapter, int* mode)
 {
 	int h;

@@ -4,6 +4,7 @@
 char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 char* __cdecl he_fn_Handlung(void);
 
+/* ADDRESS: GOLDDE 0x005423e0 */
 int __cdecl he_CountEntityActions(unsigned short* e, char* b, int* out)
 {
 	int n;

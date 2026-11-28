@@ -26,6 +26,7 @@ void __cdecl d3_TransformPoint(char* object, float* in, float* out);
 void __cdecl cm_SendUpdateCutsceneEntitySlot(int a1, void* a2);
 
 /* ADDRESS: GOLDTL 0x004d4f30 */
+/* ADDRESS: GOLDDE 0x004c1e80 */
 char* __cdecl cut_ResolveCombatWinner(COMBAT_WORLD* world)
 {
     int countA;

@@ -18,6 +18,7 @@ typedef struct
 
 int __cdecl gv_EnqueueSlotCommand(GV_SLOT_CMD_MSG* m);
 
+/* ADDRESS: GOLDDE 0x004dead0 */
 int __cdecl gv_SendSetGraveOwner(int* a, char* b, int c, int d)
 {
 	GV_SLOT_CMD_MSG m;

@@ -6,6 +6,7 @@ int __cdecl gm_RandomMod(int);
 void __cdecl io_FormatTextBuffer(void*, int, int);
 void __cdecl he_PostEntityMessage(int, int, void*, int, int, void*);
 
+/* ADDRESS: GOLDDE 0x005979b0 */
 void __cdecl he_NotifyFriedhof13(void* recipient)
 {
 	io_FormatTextBuffer(io_MessageFormatBuf, 0x40ac, (gm_RandomMod(3) & 0xffff) + 0x40a9);

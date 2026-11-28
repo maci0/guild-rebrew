@@ -3,6 +3,7 @@
 void __cdecl d3_TransformPoint(char*, char*, char*);
 int __cdecl d3_CreateSceneModelObject(int, char*, char*, int);
 
+/* ADDRESS: GOLDDE 0x0040d660 */
 int __cdecl CreateObjectAtDummy(int* a1, char** dummy)
 {
 	char pos[0x10];

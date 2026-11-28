@@ -18,6 +18,7 @@ struct D3_AMBIENT_POINT {
 
 
 /* ADDRESS: GOLDTL 0x004bc090 */
+/* ADDRESS: GOLDDE 0x004a9fe0 */
 void __cdecl gm_InitAmbientBirds(AMBIENT_ANIMAL_SLOT* result)
 {
 	unsigned char* chosen;

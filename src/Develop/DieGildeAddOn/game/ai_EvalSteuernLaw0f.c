@@ -13,6 +13,7 @@ char* __cdecl gm_QueryEntities(int, int, int, int, int);
 int __cdecl gm_SumQueryEntryValues(int a, char b);
 int __cdecl amt_CalcTotalOfficeSalaries(void);
 
+/* ADDRESS: GOLDDE 0x004801f0 */
 int __cdecl ai_EvalSteuernLaw0f(char* entity, char* unused, int* out)
 {
 	int info[9];

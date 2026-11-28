@@ -5,6 +5,7 @@ int __cdecl fcn_0064d41a(char*, char*, ...);
 
 
 /* ADDRESS: GOLDTL 0x004e6d20 */
+/* ADDRESS: GOLDDE 0x004d3540 */
 float __cdecl cut_RandFloat(void)
 {
 	char buf[0x40];

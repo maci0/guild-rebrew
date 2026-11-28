@@ -19,6 +19,7 @@ void __cdecl evt_EnterFunction(char*, int);
 
 /* Starts a loaded script at its main entry point and logs the start. */
 /* ADDRESS: GOLDTL 0x00428230 */
+/* ADDRESS: GOLDDE 0x00422c90 */
 int __cdecl evt_RunScript(char* script)
 {
 	int entry;

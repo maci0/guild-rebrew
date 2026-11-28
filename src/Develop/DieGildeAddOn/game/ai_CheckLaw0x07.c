@@ -6,6 +6,7 @@ struct BUF_490c10 { char pad_00[0x18]; int idx; char pad_1c[8]; };
 int __cdecl gm_MapEntityStatRange(int stat_id);
 int __cdecl gm_GetLawEntry(int idx, void* dst);
 /* ADDRESS: GOLDTL 0x00490c10 */
+/* ADDRESS: GOLDDE 0x0047fac0 */
 int __cdecl ai_CheckLaw0x07(AI_LAW_ENTITY* entity, int unused, int* out)
 {
     BUF_490c10 buf;

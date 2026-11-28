@@ -267,6 +267,7 @@ typedef struct Span14 {
 #pragma pack()
 
 /* ADDRESS: GOLDTL 0x0055d0d0 */
+/* ADDRESS: GOLDDE 0x005432e0 */
 void __cdecl he_AllocTransport(char* action)
 {
 	char* query;

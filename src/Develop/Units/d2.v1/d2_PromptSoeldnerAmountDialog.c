@@ -29,6 +29,7 @@ int __cdecl d2_ShowModalMessageBox(int, int);
 int __cdecl d2_GetControlValue(int);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x00597f50 */
 int __cdecl d2_PromptSoeldnerAmountDialog(void)
 {
 	int timer;

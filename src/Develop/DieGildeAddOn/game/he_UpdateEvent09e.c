@@ -14,6 +14,7 @@ void __cdecl gm_AddTime(char* p, int a, int b, int c);
 void __cdecl he_FreeAction(Node* n);
 
 /* ADDRESS: GOLDTL 0x0057c7b0 */
+/* ADDRESS: GOLDDE 0x005625e0 */
 void __cdecl he_UpdateEvent09e(Node* o)
 {
 	int n;

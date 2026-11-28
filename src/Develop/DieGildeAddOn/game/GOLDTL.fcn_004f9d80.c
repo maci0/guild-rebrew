@@ -6,6 +6,7 @@ extern char str_fmt_s[];
 int __cdecl d2_ShowPrivilegMessage(void*, int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 
+/* ADDRESS: GOLDDE 0x004e5b60 */
 int __cdecl fcn_004f9d80(unsigned char* entity, int* command)
 {
 	char buf[0x100];

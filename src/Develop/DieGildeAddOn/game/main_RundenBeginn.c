@@ -1,3 +1,8 @@
+extern char g_85a0a2[];
+extern char str_empty[];
+extern char g_774950[];
+extern char gm_SlotTableKindView[];
+extern char nt_ClientSocket[];
 /* Round-begin HUD refresh: walks the entity slot table and attaches the role,
  * action, office and building icons of each visible entity. */
 
@@ -20,6 +25,7 @@ void __cdecl nt_ResetPacketStats(void);
 int __cdecl fcn_0064d41a(char* out, char* fmt, ...);
 
 /* ADDRESS: GOLDTL 0x0053fc80 */
+/* ADDRESS: GOLDDE 0x00526790 */
 void __cdecl main_RundenBeginn(void)
 {
 	char bufA[256];
@@ -40,23 +46,23 @@ void __cdecl main_RundenBeginn(void)
 	int eventValue;
 	int tmp;
 
-	bufA[0] = *(char*) 0x6b5c60;
+	bufA[0] = *(char*) &str_empty;
 	for (i = 1; i < 0x100; i++)
 		bufA[i] = 0;
 	nt_FormatPacketStats();
 	nt_ResetPacketStats();
-	fcn_0064d41a(bufA, (char*) 0x6a42d0, *(int*) 0x774950);
-	slot2 = (char*) 0x7f4ca2;
+	fcn_0064d41a(bufA, "main_RundenBeginn(): init round no %i", *(int*) &g_774950);
+	slot2 = (char*) &gm_SlotTableKindView;
 	do {
 		if (*(unsigned short*) (slot2 - 2) == 0xffff)
 			goto next;
 		slot = slot2 - 2;
 		if (*(unsigned char*) slot2 < 1 || *(unsigned char*) slot2 > 8)
 			goto next;
-		if (*(int*) 0x14cbca0 != -1) {
+		if (*(int*) &nt_ClientSocket != -1) {
 			if (gm_IsLocalSimEntity(slot) == 0)
 				goto next;
-			if (*(int*) 0x14cbca0 != -1 && *(unsigned char*) slot2 == 7)
+			if (*(int*) &nt_ClientSocket != -1 && *(unsigned char*) slot2 == 7)
 				goto next;
 		}
 		if (*(unsigned char*) slot2 == 6 || *(unsigned char*) slot2 == 5) {
@@ -130,5 +136,5 @@ void __cdecl main_RundenBeginn(void)
 		cm_RequestModifyHealth(*(int*) (slot + 4), tmp);
 next:
 		slot2 += 0x21c;
-	} while ((int) slot2 < (int) 0x85a0a2);
+	} while ((int) slot2 < (int) (int) &g_85a0a2);
 }

@@ -3,6 +3,7 @@
 
 int __cdecl amt_SwapOfficeOccupants(char*);
 
+/* ADDRESS: GOLDDE 0x004baf30 */
 int __cdecl cm_ExSimCommand(char* input, char* response)
 {
 	int r;

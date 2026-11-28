@@ -9,6 +9,7 @@ extern char str_empty[];
 extern unsigned char gm_ActiveTownIndex;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00549c50 */
+/* ADDRESS: GOLDDE 0x00530130 */
 void __cdecl gm_HandleAllianceCommand(int cmd, int obj, int arr, int id, int extra)
 {
 	char text1[0x400];

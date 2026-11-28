@@ -14,6 +14,7 @@ int __cdecl gm_IsWarehouse(char*);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 #include "Develop/Units/d3/client_scene_transform.h"
 
+/* ADDRESS: GOLDDE 0x005538c0 */
 void __cdecl he_StartWeatherStorm(char* u)
 {
 	int i;

@@ -1,3 +1,4 @@
+#include "d2_capacity.h"
 #include <string.h>
 
 typedef struct Slot {
@@ -32,30 +33,31 @@ extern char s_67d59c[];
 #include "Develop/Units/Error/error_message.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x0046f650 */
+/* ADDRESS: GOLDDE 0x00462bb0 */
 void __cdecl d2_InsertControlAfterWindow(int slot, char* parent)
 {
 	int i;
 	Slot* p;
 
-	for (i = 0; i < 0x3ff; i++) {
+	for (i = 0; i < d2_ELEMENT_CAPACITY - 1; i++) {
 		if (((Slot**)d2_ZOrderStack)[i] == (Slot*) &((D2_CONTROL_TL*) d2_Controls)[slot]) {
-			if (i == 0x3ff) {
-				((Slot**)d2_ZOrderStack)[0x3ff] = 0;
-			} else if (i < 0x3ff) {
-				memmove(&((Slot**)d2_ZOrderStack)[i], &((Slot**)d2_ZOrderStack)[i + 1], 0xff8 - i * 4);
+			if (i == d2_ELEMENT_CAPACITY - 1) {
+				((Slot**)d2_ZOrderStack)[d2_ELEMENT_CAPACITY - 1] = 0;
+			} else if (i < d2_ELEMENT_CAPACITY - 1) {
+				memmove(&((Slot**)d2_ZOrderStack)[i], &((Slot**)d2_ZOrderStack)[i + 1], (d2_ELEMENT_CAPACITY - 2) * 4 - i * 4);
 			}
 			break;
 		}
 	}
-	for (i = 0x3ff; i >= 0; i--) {
+	for (i = d2_ELEMENT_CAPACITY - 1; i >= 0; i--) {
 		p = ((Slot**)d2_ZOrderStack)[i];
 		if (p && ((p->link == parent && p->type != 0x40) || p->id == *(int*) (parent + 0x27c))) {
 			break;
 		}
 	}
 	if (i >= 0) {
-		if (i < 0x3ff) {
-			memmove(&((Slot**)d2_ZOrderStack)[i + 2], &((Slot**)d2_ZOrderStack)[i + 1], 0xff8 - i * 4);
+		if (i < d2_ELEMENT_CAPACITY - 1) {
+			memmove(&((Slot**)d2_ZOrderStack)[i + 2], &((Slot**)d2_ZOrderStack)[i + 1], (d2_ELEMENT_CAPACITY - 2) * 4 - i * 4);
 		}
 		((Slot**)d2_ZOrderStack)[i + 1] = (Slot*) &((D2_CONTROL_TL*) d2_Controls)[slot];
 	} else {

@@ -7,6 +7,7 @@ void __cdecl d2_RefreshTownView(int, int);
 void __cdecl d2_UpdateViewportCenter(int);
 void __cdecl d2_PositionWindow(int, int);
 
+/* ADDRESS: GOLDDE 0x005121e0 */
 void __cdecl d2_RestoreHudPanels(void)
 {
 	d2_ClearSurface(d2_ScreenSurface);

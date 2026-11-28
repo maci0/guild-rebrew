@@ -5,6 +5,7 @@
 
 int __cdecl gv_TransferSlotEntry(void*);
 
+/* ADDRESS: GOLDDE 0x004bb230 */
 void __cdecl cm_ChkGraveyardTransfer(char* a, char* b)
 {
 	int r;

@@ -27,6 +27,7 @@ typedef struct {
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 Figure* __cdecl ch_AllocateCharacterSlot(int);
 
+/* ADDRESS: GOLDDE 0x0050c9e0 */
 Figure* __cdecl ls_ReadCharacterRecord(void* f)
 {
 	int v;

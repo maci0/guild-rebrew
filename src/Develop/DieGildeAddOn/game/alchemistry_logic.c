@@ -105,6 +105,8 @@ extern unsigned char g_connections[0x264264];
  * out its operational fields via memset. */
 
 
+/* ADDRESS: GOLDDE 0x0046cdb0 */
+/* ADDRESS: SERVERDE 0x1000b030 */
 void __cdecl ahm_ResetEntityState(void* a)
 {
 	if (*(unsigned char*) ((char*) a + 2) == 1 ||
@@ -123,6 +125,8 @@ void __cdecl ahm_ResetEntityState(void* a)
 
 
 
+/* ADDRESS: GOLDDE 0x004d8ca0 */
+/* ADDRESS: SERVERDE 0x1000b080 */
 int __cdecl ahm_CheckFlag(void* a)
 {
 	char* rec;
@@ -130,7 +134,7 @@ int __cdecl ahm_CheckFlag(void* a)
 	if (*(int*) ((char*) a + 0x1cc) & 4) {
 		rec = *(char**) ((char*) a + 0x16c);
 		if (rec != 0) {
-#if defined(REBREW_SERVER)
+#if defined(REBREW_SERVER) && !defined(REBREW_SERVERDE)
 			if (*(unsigned char*) (AHM_BUILDING_PROTOTYPES +
 			    *(unsigned char*) rec + *(unsigned char*) rec * 0x24c) == 0x1e)
 				return *(int*) (rec + 0x65) != 0;
@@ -177,6 +181,7 @@ int* __cdecl ahm_FindRecipeSlot(char* entity, int key)
 #endif
 
 /* ADDRESS: GOLDTL 0x004ec960 */
+/* ADDRESS: GOLDDE 0x004d8db0 */
 int* __cdecl ahm_FindRecipeSlotImpl(char* entity, int key)
 {
 	char* slots;
@@ -313,6 +318,7 @@ void __cdecl ch_AssignHeadIcon(unsigned short*);
  * Matches the reference (1002 bytes).  The inline comments at each block say
  * which spelling is load-bearing. */
 
+/* ADDRESS: GOLDDE 0x004da6d0 */
 unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 {
 	void* dynamic;
@@ -591,6 +597,8 @@ ret_false:
 }
 
 
+/* ADDRESS: GOLDDE 0x004dabd0 */
+/* ADDRESS: SERVERDE 0x1000b4a0 */
 int __cdecl ahm_ApplyColorComponent(char* color_cmd, char* target)
 {
 	float val;
@@ -622,6 +630,7 @@ int __cdecl ahm_ApplyColorComponent(char* color_cmd, char* target)
 
 
 #if defined(REBREW_SERVER) /* the clients link their own twin of this function */
+/* ADDRESS: SERVERDE 0x1000b540 */
 int __cdecl ahm_AllocateEntitySlot(int obj, int tgt, int src)
 {
 	int i;
@@ -651,6 +660,7 @@ void __cdecl gm_RefreshLocalMarketStock(int season);
 
 /* ADDRESS: GOLDTL 0x004ee8c0 */
 /* ADDRESS: GOLD 0x004ecb30 */
+/* ADDRESS: GOLDDE 0x004dad00 */
 int __cdecl ahm_AllocateEntitySlot(char* obj, char* tgt, char* src)
 {
 	int i;
@@ -676,6 +686,8 @@ int __cdecl ahm_AllocateEntitySlot(char* obj, char* tgt, char* src)
 #endif
 
 
+/* ADDRESS: GOLDDE 0x004dad90 */
+/* ADDRESS: SERVERDE 0x1000b5d0 */
 int __cdecl ahm_SlotClearMatch(char* data, char* target, char* src)
 {
 	int i;
@@ -707,6 +719,7 @@ found:
  * alchemy recipe ingredient matching and assignment. */
 
 
+/* ADDRESS: SERVERDE 0x1000b640 */
 int __cdecl ahm_SearchAndSet(SRC* src, TGT* tgt)
 {
 	int i;
@@ -723,6 +736,7 @@ int __cdecl ahm_SearchAndSet(SRC* src, TGT* tgt)
  * alchemy cleanup to remove specific entity references. */
 
 
+/* ADDRESS: SERVERDE 0x1000b680 */
 int __cdecl ahm_ClampFloatValue(float* arg1, float* arg2)
 {
 	float sum;
@@ -747,6 +761,7 @@ int __cdecl ahm_ClampFloatValue(float* arg1, float* arg2)
  * the alchemist for the next batch. */
 
 
+/* ADDRESS: SERVERDE 0x1000b6e0 */
 int __cdecl ahm_FireEntityAndCleanup(int cmd, int* entity_id_ptr, int parent_record)
 {
 	unsigned short* entity;
@@ -852,6 +867,8 @@ int __cdecl ahm_fio_SaveAhmInfo(void* file, char* obj)
 }
 #endif
 
+/* ADDRESS: GOLDDE 0x004db210 */
+/* ADDRESS: SERVERDE 0x1000b790 */
 int __cdecl ahm_AllocAhmInfo(void* stream, int arg2)
 {
 	char buf[0x3c];
@@ -882,6 +899,7 @@ int __cdecl ahm_AllocAhmInfo(void* stream, int arg2)
 }
 
 
+/* ADDRESS: SERVERDE 0x1000b8c0 */
 char* __cdecl ahm_InitRandomEntity(void)
 {
 	unsigned int idx;
@@ -1040,6 +1058,7 @@ int __cdecl ahm_fio_LoadAvatars(void* file)
 }
 
 
+/* ADDRESS: SERVERDE 0x1000b930 */
 int* __cdecl ahm_LookupEntityInTable(int entity_id)
 {
 	int i;

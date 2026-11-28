@@ -25,6 +25,7 @@ void __cdecl d2_ShowStatusBanner(char*);
    the reply text by message kind, then lay out the portrait, the speaker and
    the page counter. */
 /* ADDRESS: GOLDTL 0x004d4950 */
+/* ADDRESS: GOLDDE 0x004c18a0 */
 void __cdecl gm_ResolveDuelHit(int ctx)
 {
     char* v3;

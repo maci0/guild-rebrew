@@ -73,6 +73,7 @@ int __cdecl d2_ShowModalMessageBox(char*, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x005b0540 */
 void __cdecl d2_ConfirmMeisterbrief(unsigned char* obj, int mode)
 {
 	int btn2;

@@ -2,6 +2,7 @@
 
 typedef int (__stdcall* D2_COM_RELEASE_FN)(void*);
 
+/* ADDRESS: GOLDDE 0x00469240 */
 void __cdecl d2_ReleaseRenderToSurface(void)
 {
 	void* p;

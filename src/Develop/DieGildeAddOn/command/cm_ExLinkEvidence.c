@@ -13,6 +13,7 @@ extern Pair_99f800 cm_CrimeEvidenceLinks[0x800];
 
 int __cdecl gs_AllocEvidenceSlot(int, int);
 
+/* ADDRESS: GOLDDE 0x004b7450 */
 int __cdecl cm_ExLinkEvidence(char* cmd, char* response)
 {
 	int index;

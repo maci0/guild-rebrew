@@ -75,6 +75,7 @@ typedef struct Msg59b {
 } Msg59b;
 
 /* ADDRESS: GOLDTL 0x0059b260 */
+/* ADDRESS: GOLDDE 0x00580500 */
 int __cdecl d2_ShowProductionDialog(char* building)
 {
 	Msg59b msg;

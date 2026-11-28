@@ -23,6 +23,7 @@ typedef P413680* (__cdecl* Corners413680)(char* obj, char* m, char* p);
 extern float flt_0_0;
 void __cdecl d3_UpdateObjectCameraTransform(char* obj, char* cam, int flag);
 
+/* ADDRESS: GOLDDE 0x00411c30 */
 char __cdecl d3_ComputeObjectBoundingSphere(char* obj, char* cam, float* center, float* radius)
 {
 	char r;

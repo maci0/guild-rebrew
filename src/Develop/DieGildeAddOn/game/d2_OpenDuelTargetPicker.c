@@ -10,6 +10,7 @@ void __cdecl d3_EndCameraAndUiMode(void);
 
 
 /* ADDRESS: GOLDTL 0x005c1090 */
+/* ADDRESS: GOLDDE 0x005a34d0 */
 void __cdecl d2_OpenDuelTargetPicker(int enabled)
 {
 	char buf[0x90];

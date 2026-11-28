@@ -11,6 +11,7 @@ void __cdecl d3_AssignOctreePalette(int a, int b);
 int __cdecl d3_QuantizeImagePixels(void* dst, void* src, int w, int h, int pitch);
 void __cdecl d3_CopyOctreePalette(int a);
 
+/* ADDRESS: GOLDDE 0x00419970 */
 int __cdecl d3_QuantizeImageOctree(void* dst, void* src, int w, int h, int mode, int pitch, int fmt)
 {
 	if (g_6b6f3c == 0) {

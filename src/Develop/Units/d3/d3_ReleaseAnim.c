@@ -60,6 +60,7 @@ void __cdecl d3_ReleaseAnim(char* a, char force)
 }
 #else
 /* ADDRESS: GOLDTL 0x00434760 */
+/* ADDRESS: GOLDDE 0x0042dd20 */
 void __cdecl d3_ReleaseAnim(char* a, char force)
 {
 	char* e;

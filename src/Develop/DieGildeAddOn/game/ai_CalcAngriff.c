@@ -29,6 +29,7 @@ int __cdecl gm_CalcOwnerAndStockValue(char*, int);
 void __cdecl cm_SendCopyEntityData(char*);
 
 /* ADDRESS: GOLDTL 0x00480c60 */
+/* ADDRESS: GOLDDE 0x0046fc10 */
 int __cdecl ai_CalcAngriff(char* attackerRec, int a2)
 {
 	char msg[0xf8];

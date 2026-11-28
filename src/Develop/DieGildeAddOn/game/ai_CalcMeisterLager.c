@@ -52,6 +52,7 @@ void __cdecl ai_CollectThiefGoodsResources(char *, char *, int);
 void __cdecl ai_MeisterTradeFernEinkauf(char *, char *);
 void __cdecl ai_RebalanceCityStock(char *, char *);
 
+/* ADDRESS: GOLDDE 0x00471ed0 */
 void __cdecl ai_CalcMeisterLager(char *meister)
 {
 	int flag;

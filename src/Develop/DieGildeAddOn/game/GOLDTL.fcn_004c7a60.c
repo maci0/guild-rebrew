@@ -8,6 +8,7 @@ extern char cm_LastObjectId[];
 
 /* ADDRESS: GOLD 0x004c4450 */
 /* ADDRESS: GOLDTL 0x004c4dc0 */
+/* ADDRESS: GOLDDE 0x004b27d0 */
 int __cdecl cm_ResolveSpecialEntityId(int a1, int value)
 {
 	if (value == -2) {
@@ -27,6 +28,7 @@ int __cdecl gm_FreeGebaeude(void* entity);
 void __cdecl gm_KillSpieler(int entity_id, int flag);
 
 /* ADDRESS: GOLDTL 0x004c7a60 */
+/* ADDRESS: GOLDDE 0x004b5240 */
 int __cdecl cm_ExFreeEntity(void* e, char* flag)
 {
 	void* existing;

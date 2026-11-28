@@ -5,6 +5,7 @@ extern int d3_ActiveScene;
 int __cdecl gm_IsMapTileWalkable(int x, int y);
 
 /* ADDRESS: GOLDTL 0x004cec00 */
+/* ADDRESS: GOLDDE 0x004bc3a0 */
 int __cdecl gm_FindNearestWalkableTile(int x, int y, int *out_x, int *out_y)
 {
 	int radius;

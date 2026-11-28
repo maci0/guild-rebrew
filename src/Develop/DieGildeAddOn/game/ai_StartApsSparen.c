@@ -1,3 +1,5 @@
+extern char am_Methods[];
+extern char flt_0_0[];
 typedef struct B18_499cc0 {
 	char c0;
 	char pad1[3];
@@ -11,6 +13,7 @@ typedef struct B18_499cc0 {
 int __cdecl ai_SelectBestMethod(int kind, int id, int a3, B18_499cc0* b1, B18_499cc0* b2);
 
 /* ADDRESS: GOLDTL 0x00499cc0 */
+/* ADDRESS: GOLDDE 0x00488700 */
 int __cdecl ai_StartApsSparen(int a1, unsigned short* a2, int a3, B18_499cc0* out1, B18_499cc0* out2)
 {
 	B18_499cc0 b1;
@@ -30,14 +33,14 @@ int __cdecl ai_StartApsSparen(int a1, unsigned short* a2, int a3, B18_499cc0* ou
 	b2.f4 = 0;
 	id = ai_SelectBestMethod(0x1a, *a2, 0, &b1, &b2);
 	if (id != 0) {
-		rec = (unsigned char*) (0x1008540 + id * 0x94);
+		rec = (unsigned char*) ((int) &am_Methods + id * 0x94);
 		for (i = 0; i < 4; i++) {
-			if (rec[0x30 + i * 8] == 0 && *(float*) (rec + 0x34 + i * 8) < *(float*) 0x6628a8) {
+			if (rec[0x30 + i * 8] == 0 && *(float*) (rec + 0x34 + i * 8) < *(float*) &flt_0_0) {
 				return 0x1a;
 			}
 		}
 		for (i = 0; i < 4; i++) {
-			if (rec[0x70 + i * 8] == 0 && *(float*) (rec + 0x74 + i * 8) < *(float*) 0x6628a8) {
+			if (rec[0x70 + i * 8] == 0 && *(float*) (rec + 0x74 + i * 8) < *(float*) &flt_0_0) {
 				return 0x1a;
 			}
 		}

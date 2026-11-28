@@ -86,6 +86,7 @@ void __cdecl d3_SetRenderMaterialState(int, int, int, int, int);
 void __cdecl d3_EndScenePass(void);
 
 /* ADDRESS: GOLDTL 0x00416a20 */
+/* ADDRESS: GOLDDE 0x00414e20 */
 void __cdecl d3_RenderSnowLines(Lines *l)
 {
 	int span;

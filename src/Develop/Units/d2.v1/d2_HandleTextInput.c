@@ -51,6 +51,7 @@ char __cdecl io_TranslateKeyCode(int shift, int ctrl, int alt, char key);
 
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00474300 */
+/* ADDRESS: GOLDDE 0x00467000 */
 void __cdecl d2_HandleTextInput(void)
 {
 	int saved;

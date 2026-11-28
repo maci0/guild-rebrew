@@ -3,6 +3,7 @@
 
 
 /* ADDRESS: GOLDTL 0x00591c30 */
+/* ADDRESS: GOLDDE 0x005778e0 */
 void __cdecl d2_ClearBookmarkSlot(char* p)
 {
 	*(int*) (p + 4) = -1;
@@ -22,6 +23,7 @@ extern Slot_779d00 main_CameraBookmarks[];
 
 
 /* ADDRESS: GOLDTL 0x00591c40 */
+/* ADDRESS: GOLDDE 0x005778f0 */
 void __cdecl d2_ResetBookmarkSlots(void)
 {
 	int i;

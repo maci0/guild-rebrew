@@ -38,6 +38,7 @@ int __cdecl d2_CreateWindowTextButton(int x, int y, int z);
 int __cdecl d2_AddWindowValueGauge(int a, int b, int c, int d, int e, int f, int g, int h);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
+/* ADDRESS: GOLDDE 0x00516de0 */
 void __cdecl d2_OpenTransporterInfoPanel(unsigned short* e)
 {
 	unsigned short* parent;

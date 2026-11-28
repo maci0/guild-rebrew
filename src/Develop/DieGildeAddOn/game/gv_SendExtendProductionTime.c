@@ -20,6 +20,7 @@ typedef struct
 
 int __cdecl gv_EnqueueSlotCommand(void*);
 
+/* ADDRESS: GOLDDE 0x004de8d0 */
 int __cdecl gv_SendExtendProductionTime(int slot, int building, int worktype, int slotIndex, short duration, int cost)
 {
 	GV_EXTEND_SLOT_MSG msg;

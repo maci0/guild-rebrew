@@ -4,6 +4,7 @@
 extern int* d2_TutorialState;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
+/* ADDRESS: GOLDDE 0x00564a90 */
 int __cdecl d2_CanCloseWindowDuringTutorial(void)
 {
 	int* p;

@@ -7,6 +7,7 @@ void __cdecl evt_ReadToken(int, int*);
 void __cdecl evt_SkipBlock(int);
 void __cdecl evt_SeekSemicolon(void);
 
+/* ADDRESS: GOLDDE 0x00422000 */
 int __cdecl evt_TrySkipIfFalseBlock(void)
 {
 	int buf[0x19];

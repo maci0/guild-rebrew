@@ -5,6 +5,7 @@ extern float d3_GammaExponent[3];
 void __cdecl d3_ApplyGammaRamp(void);
 
 /* ADDRESS: GOLDTL 0x0041b820 */
+/* ADDRESS: GOLDDE 0x004194c0 */
 void __cdecl d3_SetGammaParams(float* brightness, float* contrast, float* gamma)
 {
 	int i;

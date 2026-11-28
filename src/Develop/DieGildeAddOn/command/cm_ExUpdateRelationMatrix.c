@@ -8,6 +8,7 @@ int __cdecl cm_ResolveSpecialEntityId(int a, int b);
 /* Updates one slot's relation matrix for the given update kind and mode.
  * Native body: 889 bytes at 0x004c8de0. */
 /* ADDRESS: GOLDTL 0x004c8de0 */
+/* ADDRESS: GOLDDE 0x004b65c0 */
 int __cdecl cm_ExUpdateRelationMatrix(int* a, unsigned char* changed)
 {
 	char* p;

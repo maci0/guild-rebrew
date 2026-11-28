@@ -2,6 +2,7 @@
 
 /* ADDRESS: GOLD 0x004284a0 */
 /* ADDRESS: GOLDTL 0x00426cc0 */
+/* ADDRESS: GOLDDE 0x00421790 */
 void* __cdecl evt_FindScriptById(int recordId)
 {
 	int i;

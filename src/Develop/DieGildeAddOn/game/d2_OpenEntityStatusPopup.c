@@ -13,6 +13,7 @@ int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 void __cdecl d2_CreateGuiWindow(int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004cfab0 */
+/* ADDRESS: GOLDDE 0x004bcf90 */
 void __cdecl d2_OpenEntityStatusPopup(int owner, int targetEntity)
 {
 	int rect[4];

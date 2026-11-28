@@ -10,6 +10,7 @@ struct BUILDING_OWNERSHIP_STATS {
 
 
 /* ADDRESS: GOLDTL 0x004b4dc0 */
+/* ADDRESS: GOLDDE 0x004a30b0 */
 int __cdecl gm_HasAllCategoryBuildings(int entity, int holder, char* spec)
 {
 	struct BUILDING_OWNERSHIP_STATS stats;

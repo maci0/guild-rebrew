@@ -17,6 +17,7 @@ typedef struct {
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 CH_ACTION* __cdecl ch_NewAction(char* e);
 
+/* ADDRESS: GOLDDE 0x0040b130 */
 CH_ACTION* __cdecl ch_CreateQueuedAction(char* e, void (__cdecl* done)(CH_ACTION* t), unsigned char level, int kind, ...)
 {
 	CH_ACTION* t;

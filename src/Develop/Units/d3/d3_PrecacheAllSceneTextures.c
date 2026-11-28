@@ -14,6 +14,7 @@ extern int d3_ActiveScene;
 void __cdecl d3_TraverseSceneObjects(int, int, int, void*);
 #include "Develop/Units/d3/d3_d3d.h"
 
+/* ADDRESS: GOLDDE 0x0043b680 */
 void __cdecl d3_PrecacheAllSceneTextures(int flag)
 {
 	unsigned int i;

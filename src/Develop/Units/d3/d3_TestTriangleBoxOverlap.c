@@ -1,4 +1,5 @@
 /* ADDRESS: GOLDTL 0x00413e00 */
+/* ADDRESS: GOLDDE 0x004123b0 */
 int __cdecl d3_TestTriangleBoxOverlap(float *pointA, float *pointB, float *pointC, float *boxMin,
                          float *boxMax)
 {

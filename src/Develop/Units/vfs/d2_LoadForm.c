@@ -285,6 +285,7 @@ int __cdecl d2_LoadForm(short x, short y, char* name)
 }
 #else
 /* ADDRESS: GOLDTL 0x00470820 */
+/* ADDRESS: GOLDDE 0x00463d60 */
 int __cdecl d2_LoadForm(int posX, int posY, char* formName)
 {
 	char v22[256];

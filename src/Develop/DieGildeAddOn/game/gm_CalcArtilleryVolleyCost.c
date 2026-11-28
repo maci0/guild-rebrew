@@ -6,6 +6,7 @@ extern float g_662a3c;
 extern float g_662b28;
 
 /* ADDRESS: GOLDTL 0x004f0eb0 */
+/* ADDRESS: GOLDDE 0x004dd120 */
 float __cdecl gm_CalcArtilleryVolleyCost(int level, int percent, int count)
 {
 	float step;

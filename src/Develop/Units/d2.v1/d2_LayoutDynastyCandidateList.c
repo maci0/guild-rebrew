@@ -26,6 +26,7 @@ void __cdecl d2_DrawPersonCard(int, int, int, int, Item*, int);
 void __cdecl d2_CreateRightAlignedText(int, int, int, int, int);
 void __cdecl d2_EnableDialogItems(unsigned int, Item*);
 
+/* ADDRESS: GOLDDE 0x005addb0 */
 int __cdecl d2_LayoutDynastyCandidateList(int a1, int a2, int a3, unsigned int n, Item* items)
 {
 	int y;

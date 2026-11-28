@@ -34,6 +34,7 @@ void __cdecl cm_SendCopyEntityData(char*);
  * slots already bound to the entity's owner, and either reports the pending
  * offer or asks for a new builder. */
 /* ADDRESS: GOLDTL 0x00487000 */
+/* ADDRESS: GOLDDE 0x00475fb0 */
 void __cdecl ai_ManageMeisterWorkers(char* meister)
 {
 	char msg[0xf8];

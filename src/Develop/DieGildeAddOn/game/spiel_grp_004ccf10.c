@@ -21,6 +21,7 @@ int __cdecl gm_QueryEntities(int a, int b, int c, int d, int e);
 void __cdecl gm_HandleAllianceCommand(int a, int b, int c, int d);
 
 /* ADDRESS: GOLDTL 0x004ccf10 */
+/* ADDRESS: GOLDDE 0x004ba6f0 */
 int __cdecl fcn_004ccf10(int cmd, char* result)
 {
 	void* entity;
@@ -90,6 +91,7 @@ int __cdecl fcn_004ccf10(int cmd, char* result)
 }
 
 /* ADDRESS: GOLDTL 0x004cd090 */
+/* ADDRESS: GOLDDE 0x004ba870 */
 int __cdecl fcn_004cd090(CM_JOIN_LEAVE_ELECTION_CMD* s, char* out)
 {
 	int h;

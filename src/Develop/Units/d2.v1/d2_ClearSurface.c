@@ -87,6 +87,7 @@ int __cdecl d2_ClearSurface(char* surface)
 }
 #else
 /* ADDRESS: GOLDTL 0x00476970 */
+/* ADDRESS: GOLDDE 0x00468b90 */
 int __cdecl d2_ClearSurface(Tex* tex)
 {
 	int was_locked;

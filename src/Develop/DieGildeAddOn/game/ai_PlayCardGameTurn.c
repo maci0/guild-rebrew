@@ -7,6 +7,7 @@ int __cdecl gm_RandomMod(int);
 void __cdecl gm_ReplaceCardSlot(void*, int);
 
 /* ADDRESS: GOLDTL 0x004a7900 */
+/* ADDRESS: GOLDDE 0x00495c50 */
 void __cdecl ai_PlayCardGameTurn(void)
 {
 	char* p;

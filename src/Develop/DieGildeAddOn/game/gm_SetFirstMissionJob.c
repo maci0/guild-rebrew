@@ -6,6 +6,7 @@ extern char g_10069c0;
 
 void __cdecl sim_SetSyncParams(void*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x004a2030 */
 void __cdecl gm_SetFirstMissionJob(int entityId, int missionOp)
 {
 	(*(int*)gm_MissionJobs) = missionOp;

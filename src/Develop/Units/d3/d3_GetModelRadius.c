@@ -1,5 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x0044c0c0 */
+/* ADDRESS: GOLDDE 0x00442560 */
 float __cdecl d3_GetModelRadius(int unused, char* node)
 {
 	if (node != 0) {

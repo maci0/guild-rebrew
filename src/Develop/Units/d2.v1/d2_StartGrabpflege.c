@@ -8,6 +8,7 @@ void __cdecl d2_RunGraveyardPickerDialog(int, int, int, int, void*);
 void __cdecl d3_EndCameraAndUiMode(void);
 void __cdecl d2_ConfirmGrabpflege(void);
 
+/* ADDRESS: GOLDDE 0x00575820 */
 void __cdecl d2_StartGrabpflege(int a)
 {
 	if (d2_CheckOwnerBlocked(a) == 0) {

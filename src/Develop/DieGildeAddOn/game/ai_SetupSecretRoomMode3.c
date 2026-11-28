@@ -11,6 +11,7 @@ extern unsigned char gm_ActiveTownIndex;
 int __cdecl gm_SumQueryEntryValues(int a, unsigned char b);
 
 /* ADDRESS: GOLDTL 0x0048df90 */
+/* ADDRESS: GOLDDE 0x0047ce60 */
 int __cdecl ai_SetupSecretRoomMode3(Ent* e, char* firstOut, char* secondOut)
 {
 	int t;

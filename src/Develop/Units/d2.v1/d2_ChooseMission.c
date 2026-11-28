@@ -34,6 +34,7 @@ void __cdecl d2_DestroyForm(int);
 
 
 /* ADDRESS: GOLDTL 0x004b3fe0 */
+/* ADDRESS: GOLDDE 0x004a22d0 */
 int __cdecl d2_ChooseMission(int missionKey)
 {
 	int result;

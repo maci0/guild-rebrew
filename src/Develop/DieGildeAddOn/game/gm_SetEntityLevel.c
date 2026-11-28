@@ -7,6 +7,7 @@ extern int g_7746d4;
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
 
+/* ADDRESS: GOLDDE 0x004f2960 */
 void __cdecl gm_SetEntityLevel(int id, int nk)
 {
 	unsigned char* o;

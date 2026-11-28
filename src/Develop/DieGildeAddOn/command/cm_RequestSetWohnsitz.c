@@ -3,6 +3,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b38c0 */
 void __cdecl cm_RequestSetWohnsitz(int entity_id, int building_id)
 {
 	char buf[0x9c];

@@ -6,6 +6,7 @@ extern unsigned long d3_LastReleaseRefCount;
 int __stdcall fcn_00610011(void* dev, int a, int b, int c, int d, int e, int f, void** out);
 
 /* ADDRESS: GOLDTL 0x00437110 */
+/* ADDRESS: GOLDDE 0x00430610 */
 int __cdecl d3_CreateDeviceTexture(int size, int a2, int a3, void** out, unsigned char levels)
 {
 	if (*out != 0) {

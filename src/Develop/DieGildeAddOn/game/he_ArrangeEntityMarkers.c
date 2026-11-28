@@ -10,6 +10,7 @@ int __cdecl d3_GetObjectVerticalBounds(char*, float*, float*);
 void __cdecl d3_SetNodePosition(char*, int*);
 
 /* ADDRESS: GOLDTL 0x00546480 */
+/* ADDRESS: GOLDDE 0x0052cb00 */
 void __cdecl he_ArrangeEntityMarkers(char* entity)
 {
 	Rec7dc6e0* list[32];

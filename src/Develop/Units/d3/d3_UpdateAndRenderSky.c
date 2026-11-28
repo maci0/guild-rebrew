@@ -57,6 +57,7 @@ int __cdecl d3_RebuildSkyDomeMesh(D3_SKY_DOME_STATE*);
 void __cdecl d3_RenderSkyLayer(D3_SKY_DOME_STATE*, D3_SKY_LAYER_NODE*);
 
 /* ADDRESS: GOLDTL 0x00459530 */
+/* ADDRESS: GOLDDE 0x0044ecf0 */
 char __cdecl d3_UpdateAndRenderSky(D3_SKY_DOME_STATE* e)
 {
 	D3_SKY_LAYER_NODE* n;

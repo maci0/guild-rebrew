@@ -19,6 +19,7 @@ int __cdecl ahm_HasActiveLabFeature(char*, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl gm_GetElapsedMinutes(pos14_7f4c00*, pos14_7f4c00*);
 
+/* ADDRESS: GOLDDE 0x0055bd40 */
 void __cdecl he_RunAhmRefineRecipe(char* u)
 {
 	int k;

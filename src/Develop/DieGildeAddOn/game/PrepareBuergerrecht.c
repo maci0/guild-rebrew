@@ -2,6 +2,7 @@ extern unsigned char gm_ActiveTownIndex;
 
 int __cdecl gm_GetSeasonTreasury(char*, char);
 
+/* ADDRESS: GOLDDE 0x00488490 */
 int __cdecl PrepareBuergerrecht(void* kontext, char* objekt, int modus, char* ergebnis)
 {
     (void)kontext;

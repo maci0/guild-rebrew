@@ -1,3 +1,5 @@
+extern char g_8680b4[];
+extern char gm_EntitySlotTable[];
 extern int d2_DialogButtonAction;
 extern int io_RightButtonReleased;
 extern int d2_DialogCloseRequested;
@@ -26,6 +28,7 @@ void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl d2_DestroyForm(int a);
 
 /* ADDRESS: GOLDTL 0x005a4bb0 */
+/* ADDRESS: GOLDDE 0x005898c0 */
 void __cdecl d2_RunKreditFreigabeDialog(char* o)
 {
     char* dlg;
@@ -44,14 +47,14 @@ void __cdecl d2_RunKreditFreigabeDialog(char* o)
     io_AppendText((void*)0x18e5);
     have = gm_QueryEntitySum(*(int*)(o + 0x5d), gm_ActiveTownIndex);
     d2_SetForm((int)dlg, 2);
-    txt = io_AppendText((void*)0x18e6, (void*)(2 * *(u16*)(gm_ActiveTownIndex * 0x2f4 + 0x8680b4) + 0x9a8));
+    txt = io_AppendText((void*)0x18e6, (void*)(2 * *(u16*)(gm_ActiveTownIndex * 0x2f4 + (int) &g_8680b4) + 0x9a8));
     it1 = d2_GetWindowListItem((int)dlg, 2, txt);
     it2 = d2_GetWindowListItem((int)dlg, 2, txt + 1);
     d2_CreateGuiWindow(it1, 5, 0x28, *(int*)(o + 0x65));
-    sval = gm_AccumulateTyped2(*(u16*)(o + 0x27) * 0x21c + 0x7f4ca0);
+    sval = gm_AccumulateTyped2(*(u16*)(o + 0x27) * 0x21c + (int) &gm_EntitySlotTable);
     d2_CreateGuiWindow(it2, 0, gm_AmountToUnits(sval, gm_ActiveTownIndex), gm_AmountToUnits(have, gm_ActiveTownIndex));
     d2_SetOverlayAnimation(0, 0);
-    while (main_RunFrameLoop((void*)0x5a4bb0, 0x677c7) != 0) {
+    while (main_RunFrameLoop((void*)d2_RunKreditFreigabeDialog, 0x677c7) != 0) {
         if (io_RightButtonReleased != 0 || d2_DialogButtonAction == 1)
             d2_DialogCloseRequested = 1;
         v = gm_ConvertUnitsToAmount(d2_GetControlValue(it2), gm_ActiveTownIndex);
@@ -61,10 +64,10 @@ void __cdecl d2_RunKreditFreigabeDialog(char* o)
             if (have < r) {
                 d = r - have;
                 cm_RequestMoveCredits(*(int*)(o + 1),
-                             *(int*)(0x7f4ca4 + *(u16*)(o + 0x27) * 0x21c), gm_ActiveTownIndex, d);
+                             *(int*)(((int) &gm_EntitySlotTable + 0x4) + *(u16*)(o + 0x27) * 0x21c), gm_ActiveTownIndex, d);
             } else {
                 d = have - r;
-                cm_RequestMoveCredits(*(int*)(0x7f4ca4 + *(u16*)(o + 0x27) * 0x21c),
+                cm_RequestMoveCredits(*(int*)(((int) &gm_EntitySlotTable + 0x4) + *(u16*)(o + 0x27) * 0x21c),
                              *(int*)(o + 1), gm_ActiveTownIndex, d);
             }
             r = d2_GetControlValue(it1);

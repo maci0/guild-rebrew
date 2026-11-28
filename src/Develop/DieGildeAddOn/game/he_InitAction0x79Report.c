@@ -4,6 +4,7 @@
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 
+/* ADDRESS: GOLDDE 0x0053f520 */
 void __cdecl he_InitAction0x79Report(char* e)
 {
 	*(int*) (e + 0x70) = 0;

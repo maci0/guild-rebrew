@@ -24,6 +24,7 @@ extern unsigned char* lpGebaeudePROT;
 void __cdecl ch_CollectContextCharacters(unsigned char* home);
 void __cdecl ch_PreloadCharacterMotions(char* view, int n, ...);
 
+/* ADDRESS: GOLDDE 0x00501110 */
 void __cdecl ch_PreloadBuildingMotions(unsigned char* home)
 {
 	NameSet* s;

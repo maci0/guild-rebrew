@@ -1,4 +1,5 @@
 #include <string.h>
+/* ADDRESS: GOLDDE 0x005166d0 */
 char __cdecl d3_CollectWimpelNodes(char* name, int* list)
 {
 	if (strstr(name, "sp_WIMPEL")) {

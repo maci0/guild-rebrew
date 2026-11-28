@@ -27,6 +27,7 @@ int __cdecl fcn_0042e410(int n);
 void __cdecl cm_RequestLinkEvidence(int a, int b);
 
 /* ADDRESS: GOLDTL 0x00557460 */
+/* ADDRESS: GOLDDE 0x0053d7c0 */
 void __cdecl he_RunDunkleEcke(char* dlg)
 {
 	char* hit;

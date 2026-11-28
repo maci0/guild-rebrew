@@ -19,6 +19,7 @@ int __cdecl gm_GetSeasonTreasury(char*, char);
 int __cdecl gm_BuyBuilding(int, int, int, char*, int);
 
 /* ADDRESS: GOLDTL 0x00497990 */
+/* ADDRESS: GOLDDE 0x00486410 */
 int __cdecl ai_StartWohnsitzKaufen(int a1, char* entityRec, int phaseFlag, char* decisionMsg, int a5)
 {
 	unsigned char* e;
@@ -193,6 +194,7 @@ fraction:
 }
 
 /* ADDRESS: GOLDTL 0x00497e60 */
+/* ADDRESS: GOLDDE 0x004868e0 */
 int __cdecl ai_RunWohnsitzKaufen(int a1, char* a2)
 {
 	unsigned char* t;

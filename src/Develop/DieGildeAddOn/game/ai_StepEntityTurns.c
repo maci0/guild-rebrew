@@ -44,6 +44,7 @@ void __cdecl cm_AppendPacketFieldValue(int, int, int, int*);
 void __cdecl cm_RequestChangeAttribute(void);
 
 /* ADDRESS: GOLDTL 0x0047da10 */
+/* ADDRESS: GOLDDE 0x0046c9d0 */
 void __cdecl ai_StepEntityTurns(void)
 {
 	float f;

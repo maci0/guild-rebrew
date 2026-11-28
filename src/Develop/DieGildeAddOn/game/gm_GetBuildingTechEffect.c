@@ -6,6 +6,7 @@ extern unsigned char* lpGebaeudePROT;
 void* __cdecl gm_QueryEntities(int list, int a, int b, int c, int d);
 int __cdecl gm_GetEntityMood(unsigned char* e);
 
+/* ADDRESS: GOLDDE 0x004f74b0 */
 int __cdecl gm_GetBuildingTechEffect(unsigned char* e, int kind, int flag)
 {
 	BUILDING_PROTOTYPE* t;

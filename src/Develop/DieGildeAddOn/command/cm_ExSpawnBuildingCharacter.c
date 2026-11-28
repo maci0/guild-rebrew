@@ -3,6 +3,7 @@
 
 int __cdecl init_SpawnBuildingCharacter(int, int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x004b8110 */
 int __cdecl cm_ExSpawnBuildingCharacter(char* params, char* out)
 {
 	int result;

@@ -32,6 +32,7 @@ extern int g_7e2468;
 extern int main_LoopFlags;
 
 /* ADDRESS: GOLDTL 0x0053dc20 */
+/* ADDRESS: GOLDDE 0x00524ec0 */
 int __cdecl d2_RunChooseHistoryDialog(void)
 {
 	char buf[8];

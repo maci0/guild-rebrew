@@ -27,6 +27,7 @@ extern int g_67d8ec;
 extern int g_7725e4;
 extern int g_7725e8;
 /* ADDRESS: GOLDTL 0x004748b0 */
+/* ADDRESS: GOLDDE 0x004675b0 */
 int __cdecl d2_UpdateSelectedControl(void)
 {
 	unsigned int *p;

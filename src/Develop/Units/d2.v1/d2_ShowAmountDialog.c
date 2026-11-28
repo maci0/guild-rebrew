@@ -12,6 +12,7 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_CloseWindow(int);
 
+/* ADDRESS: GOLDDE 0x00521af0 */
 void __cdecl d2_ShowAmountDialog(void)
 {
 	int w;

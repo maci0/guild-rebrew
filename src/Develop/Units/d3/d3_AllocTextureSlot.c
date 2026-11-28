@@ -55,6 +55,7 @@ extern unsigned int d3_TextureBankCount;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 /* ADDRESS: GOLDTL 0x0045c290 */
+/* ADDRESS: GOLDDE 0x00451240 */
 Tex* __cdecl d3_AllocTextureSlot(Col c, int* out)
 {
 	Tex* t;

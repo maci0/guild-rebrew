@@ -2,6 +2,7 @@ int __cdecl gm_CalculateGebaeudeValue(int, int);
 
 
 /* ADDRESS: GOLDTL 0x004a48a0 */
+/* ADDRESS: GOLDDE 0x004932a0 */
 int __cdecl gm_CalcBuildingRepairCost(int building, int kind)
 {
 	int n;

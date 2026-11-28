@@ -43,6 +43,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl d2_ConfirmTextIdMessageBox(int, unsigned int);
 void __cdecl d2_DestroyForm(int);
 #include "Develop/Units/d2.v1/d2_gui.h"
+/* ADDRESS: GOLDDE 0x005c1c60 */
 int __cdecl d2_ShowLoadGameMenu(void)
 {
 	int result;

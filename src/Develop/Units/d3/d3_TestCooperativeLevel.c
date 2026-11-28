@@ -1,6 +1,7 @@
 #include "Develop/Units/d8_vesa/d3d_device_view.h"
 
 /* ADDRESS: GOLDTL 0x0041baa0 */
+/* ADDRESS: GOLDDE 0x00419740 */
 int __cdecl d3_TestCooperativeLevel(void)
 {
 	int hr = (int) 0x80004005;

@@ -3,6 +3,7 @@ unsigned short __cdecl gm_RandomMod(int);
 
 
 /* ADDRESS: GOLDTL 0x004ac290 */
+/* ADDRESS: GOLDDE 0x0049a5d0 */
 unsigned short __cdecl gm_PickRandomGedichtVariant(int id)
 {
 	unsigned short variantId;

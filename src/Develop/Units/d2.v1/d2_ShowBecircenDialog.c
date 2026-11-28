@@ -1,3 +1,5 @@
+extern char gm_EntitySlotTable[];
+extern char gm_LocalPlayerSlot[];
 typedef unsigned char u8;
 typedef unsigned short u16;
 
@@ -23,6 +25,7 @@ void __cdecl cm_RequestModifyHealth(int a, int b);
 void __cdecl cm_RequestCopyEntityData(int a, int b, int c, int d);
 
 /* ADDRESS: GOLDTL 0x005d6ea0 */
+/* ADDRESS: GOLDDE 0x005b8700 */
 int __cdecl d2_ShowBecircenDialog(int entity)
 {
     int dlg;
@@ -34,7 +37,7 @@ int __cdecl d2_ShowBecircenDialog(int entity)
     u8 v;
 
     result = 0;
-    v = *(u8*) (0x7f4ca9 + 540 * *(u16*) 0x774970);
+    v = *(u8*) (((int) &gm_EntitySlotTable + 0x9) + 540 * *(u16*) &gm_LocalPlayerSlot);
     if (v == *(u8*) ((char*) entity + 9)) {
         if (v == 0)
             io_FormatTextBuffer(buf, 0x1db1, 0x1db2);
@@ -55,15 +58,15 @@ int __cdecl d2_ShowBecircenDialog(int entity)
         if (d2_DialogButtonAction != -1) {
             if (d2_DialogButtonAction == 2) {
                 player = d2_GetControlValue(wnd);
-                if (d2_CheckActionBlocker((void*) (0x7f4ca0 + 540 * *(u16*) 0x774970),
+                if (d2_CheckActionBlocker((void*) ((int) &gm_EntitySlotTable + 540 * *(u16*) &gm_LocalPlayerSlot),
                                  player) != 0) {
-                    t = gm_CalcBecircenFavor((void*) (0x7f4ca0 +
-                                              540 * *(u16*) 0x774970),
+                    t = gm_CalcBecircenFavor((void*) ((int) &gm_EntitySlotTable +
+                                              540 * *(u16*) &gm_LocalPlayerSlot),
                                      entity, player);
-                    cm_RequestModifyHealth(*(int*) (0x7f4ca4 + 540 * *(u16*) 0x774970),
+                    cm_RequestModifyHealth(*(int*) (((int) &gm_EntitySlotTable + 0x4) + 540 * *(u16*) &gm_LocalPlayerSlot),
                                  -player);
-                    cm_RequestCopyEntityData(*(int*) (0x7f4ca4 +
-                                          540 * *(u16*) 0x774970),
+                    cm_RequestCopyEntityData(*(int*) (((int) &gm_EntitySlotTable + 0x4) +
+                                          540 * *(u16*) &gm_LocalPlayerSlot),
                                  *(int*) ((char*) entity + 4), t, 1);
                     io_FormatTextBuffer(buf, 0x1db5, *(u16*) entity, *(u16*) entity);
                     d2_ShowModalMessageBox(buf, 0);
@@ -76,7 +79,7 @@ int __cdecl d2_ShowBecircenDialog(int entity)
         }
         if (io_RightButtonReleased != 0)
             d2_DialogCloseRequested = 1;
-        if (main_RunFrameLoop((void*) 0x5d6ea0, 0x657c7) == 0)
+        if (main_RunFrameLoop((void*) d2_ShowBecircenDialog, 0x657c7) == 0)
             break;
     }
     d2_DestroyForm(dlg);

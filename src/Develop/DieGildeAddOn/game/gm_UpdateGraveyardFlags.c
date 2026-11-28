@@ -18,6 +18,7 @@ extern char gm_EntitySlotTable[];
 
 char* __cdecl gm_QueryEntities(int, int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x0051a500 */
 void __cdecl gm_UpdateGraveyardFlags(void)
 {
 	char* e;

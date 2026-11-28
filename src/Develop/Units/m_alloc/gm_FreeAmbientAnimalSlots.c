@@ -3,6 +3,7 @@
 
 void __cdecl m_FreeTracked(void*);
 
+/* ADDRESS: GOLDDE 0x004a9ca0 */
 void __cdecl gm_FreeAmbientAnimalSlots(void)
 {
 	if (g_7728e8 != 0) {

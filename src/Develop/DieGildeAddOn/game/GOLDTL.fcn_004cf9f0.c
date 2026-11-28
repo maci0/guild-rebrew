@@ -2,6 +2,7 @@
 
 
 /* ADDRESS: GOLDTL 0x004cf9f0 */
+/* ADDRESS: GOLDDE 0x004bced0 */
 int __cdecl d3_GetObjectEntity(char* p)
 {
 	return *(int*) (p + 0x204);
@@ -28,6 +29,7 @@ void __cdecl d2_ShowStatusBanner(char*);
 
 
 /* ADDRESS: GOLDTL 0x004d4790 */
+/* ADDRESS: GOLDDE 0x004c16e0 */
 int __cdecl cut_HandleUnitDefeat(char* e)
 {
 	char buf[0x100];
@@ -69,6 +71,7 @@ char __cdecl d3_SetSubtreeVisible(int, unsigned char);
 
 
 /* ADDRESS: GOLDTL 0x004d4ee0 */
+/* ADDRESS: GOLDDE 0x004c1e30 */
 void __cdecl cut_CollectGroundItem(char* e)
 {
 	char* q;

@@ -29,6 +29,7 @@ void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl cm_EnqueueStagedPacket(void*);
 
 /* ADDRESS: GOLDTL 0x004ff490 */
+/* ADDRESS: GOLDDE 0x004eaea0 */
 void __cdecl gm_UpdateEntityPregnancy(char* entity)
 {
 	char* ent;

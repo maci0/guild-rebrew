@@ -40,6 +40,7 @@ int __cdecl main_RunFrameLoop(int, int); void __cdecl d2_DestroyForm(int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00591ea0 */
+/* ADDRESS: GOLDDE 0x00577b50 */
 void __cdecl d2_RunGebHotkeysDialog(void)
 {
 	int clicks[2];

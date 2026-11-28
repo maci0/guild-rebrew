@@ -25,6 +25,7 @@ void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl sv_ClearObjectSelection(void);
 int __cdecl d2_RunRaeuberlagerTargetDialog(int a0, char* a1);
 
+/* ADDRESS: GOLDDE 0x005828d0 */
 void __cdecl d2_SelectSchutzgeldTarget(char* building)
 {
 	Req req;

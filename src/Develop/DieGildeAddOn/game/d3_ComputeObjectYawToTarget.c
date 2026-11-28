@@ -8,6 +8,7 @@ void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl d3_TransformDirection(int, float*, float*);
 float __cdecl d3_SignedPlanarAngle(float*, float*);
 
+/* ADDRESS: GOLDDE 0x0057def0 */
 void __cdecl d3_ComputeObjectYawToTarget(float* out, int obj)
 {
 	float v[3];

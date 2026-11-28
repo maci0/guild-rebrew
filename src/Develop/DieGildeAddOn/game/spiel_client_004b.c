@@ -9,6 +9,7 @@ int __cdecl gm_AmountToUnits(int, char);
 
 /* ADDRESS: GOLD 0x004b4830 */
 /* ADDRESS: GOLDTL 0x004b49a0 */
+/* ADDRESS: GOLDDE 0x004a2c90 */
 int __cdecl fcn_004b49a0(int id, char* thr)
 {
 	char* p;
@@ -20,6 +21,7 @@ int __cdecl fcn_004b49a0(int id, char* thr)
 }
 
 /* ADDRESS: GOLDTL 0x004b49e0 */
+/* ADDRESS: GOLDDE 0x004a2cd0 */
 int __cdecl fcn_004b49e0(int id, char* thr)
 {
 	char* p;
@@ -31,6 +33,7 @@ int __cdecl fcn_004b49e0(int id, char* thr)
 }
 
 /* ADDRESS: GOLDTL 0x004b4a20 */
+/* ADDRESS: GOLDDE 0x004a2d10 */
 int __cdecl fcn_004b4a20(int id, char* thr)
 {
 	char* p;

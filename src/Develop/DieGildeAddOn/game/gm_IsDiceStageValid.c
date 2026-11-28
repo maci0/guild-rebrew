@@ -3,6 +3,7 @@ extern char gm_ValidDiceStages[];
 
 /* ADDRESS: GOLD 0x00493380 */
 /* ADDRESS: GOLDTL 0x00492950 */
+/* ADDRESS: GOLDDE 0x00481800 */
 int __cdecl gm_IsDiceStageValid(char* p, int entity, int stage)
 {
 	int value;

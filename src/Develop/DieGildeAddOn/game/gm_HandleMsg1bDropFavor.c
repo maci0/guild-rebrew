@@ -13,6 +13,7 @@ void __cdecl he_PostEntityMessage(int, int, void*, int, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004b8410 */
+/* ADDRESS: GOLDDE 0x004a64c0 */
 int __cdecl gm_HandleMsg1bDropFavor(void* request)
 {
 	char buf[0x400];

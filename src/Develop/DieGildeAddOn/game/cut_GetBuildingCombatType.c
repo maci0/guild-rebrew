@@ -10,6 +10,7 @@ typedef struct
 
 extern unsigned char* lpGebaeudePROT;
 
+/* ADDRESS: GOLDDE 0x004c23a0 */
 int __cdecl cut_GetBuildingCombatType(unsigned char* building)
 {
 	BUILDING_PROTOTYPE * tile;

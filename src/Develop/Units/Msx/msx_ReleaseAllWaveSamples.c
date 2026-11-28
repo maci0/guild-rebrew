@@ -4,6 +4,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 int __cdecl msx_ReleaseSampleHandle(int);
 
+/* ADDRESS: GOLDDE 0x00424f90 */
 int __cdecl msx_ReleaseAllWaveSamples(void)
 {
 	int r = 0;

@@ -13,6 +13,7 @@ extern char str_empty[];
 
 /* Inferred source placement; registration proves the validator slot. */
 /* ADDRESS: GOLDTL 0x004dc7d0 */
+/* ADDRESS: GOLDDE 0x004c92a0 */
 int __cdecl cut_NotifyProzess(char* cmd)
 {
     char* a;

@@ -8,6 +8,7 @@ extern Rec7dc6e0 g_7dc6e0[64];
 
 void __cdecl d3_FreeEventGfxSlot(Rec7dc6e0*);
 
+/* ADDRESS: GOLDDE 0x0052d1c0 */
 void __cdecl d3_PruneEventGfxSlots(void)
 {
 	int i;

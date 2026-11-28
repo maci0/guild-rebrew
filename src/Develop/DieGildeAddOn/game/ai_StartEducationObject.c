@@ -82,6 +82,7 @@ int __cdecl ai_RunUseObjectAps(char* ctx, int* arg)
 }
 
 /* ADDRESS: GOLDTL 0x0049a880 */
+/* ADDRESS: GOLDDE 0x004892c0 */
 int __cdecl ai_StartEducationObject(int kind, char* e, int busy, Msg* out1, Msg* out2)
 {
 	Slot slots[4];

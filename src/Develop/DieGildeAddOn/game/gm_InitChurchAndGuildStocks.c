@@ -11,6 +11,7 @@ char* __cdecl gm_AllocObjekt(int, int, int);
 int __cdecl cm_SendSellObjekt(int, int, int, int, char, int);
 unsigned short __cdecl gm_RandomMod(int);
 
+/* ADDRESS: GOLDDE 0x004fd220 */
 void __cdecl gm_InitChurchAndGuildStocks(void)
 {
 	int kinds[4];

@@ -13,6 +13,7 @@ extern volatile int gm_GameTicks;
 extern CRITICAL_SECTION msx_TrackLock;
 void __cdecl SetMasterVolume(int vol);
 
+/* ADDRESS: GOLDDE 0x0041d490 */
 void __cdecl FadeMasterVolume(float fade, int time)
 {
 	if (msx_TrackDriver == 0 || fade < 0.0f || fade > 1.0f) {

@@ -3,6 +3,7 @@
 #include <string.h>
 
 #include "d2_gui.h"
+#include "d2_capacity.h"
 
 #ifdef REBREW_GOLD
 #define d2_GUI_POOL g_00f8f080
@@ -12,7 +13,7 @@
 #define d2_GUI_STATE_OFFSET 0x28
 #else
 #define d2_GUI_POOL d2_Controls
-#define d2_GUI_ID_LIMIT 0x400
+#define d2_GUI_ID_LIMIT d2_ELEMENT_CAPACITY
 #define d2_GUI_NUMBER_OFFSET 0x90
 #define d2_GUI_DIRTY_OFFSET 0x58
 #define d2_GUI_STATE_OFFSET 0x38
@@ -20,6 +21,7 @@
 
 /* Inferred interface: widget kind and flags select the payload. */
 /* ADDRESS: GOLDTL 0x00472380 */
+/* ADDRESS: GOLDDE 0x004656a0 */
 void __cdecl d2_SetElementValue(int id, ...)
 {
 	D2_GUI_ITEM* e;

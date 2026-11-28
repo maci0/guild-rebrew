@@ -46,6 +46,7 @@ void __cdecl d3_AdjustCameraHeight(void);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl io_SetMouseCursorPos(int a, int b);
 
+/* ADDRESS: GOLDDE 0x005156d0 */
 int __cdecl d3_UpdateCameraController(void)
 {
 	char* p;

@@ -46,6 +46,7 @@ void __cdecl gm_ExecZunftAufruhr(ZUNFT_ENTITY_VIEW*, ZUNFT_LEVEL2_REQUEST*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x0058ec30 */
 int __cdecl d2_RunZunftLevel2Dialog(int unused, char* target)
 {
 	int w2;

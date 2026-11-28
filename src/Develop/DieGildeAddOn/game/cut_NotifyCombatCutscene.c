@@ -33,6 +33,7 @@ void __cdecl he_SendCmdMessage(char*, char*, char*, char*);
 // listed record (+0x100, -1 = none) must exist and hold a positive total.
 
 /* ADDRESS: GOLDTL 0x004d74b0 */
+/* ADDRESS: GOLDDE 0x004c4400 */
 int __cdecl cut_NotifyCombatCutscene(char* event)
 {
 	int i;

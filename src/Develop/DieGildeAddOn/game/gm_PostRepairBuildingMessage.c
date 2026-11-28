@@ -14,6 +14,7 @@ void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004b9e60 */
+/* ADDRESS: GOLDDE 0x004a7f10 */
 int __cdecl gm_PostRepairBuildingMessage(int* a1)
 {
 	char* x2;

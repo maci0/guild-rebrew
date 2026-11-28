@@ -48,6 +48,7 @@ void __cdecl d3_PrecacheAllSceneTextures(int);
 void __cdecl d2_RestoreHudPanels(void);
 
 /* ADDRESS: GOLDTL 0x00586c10 */
+/* ADDRESS: GOLDDE 0x0056c8d0 */
 void __cdecl d2_RunKanoneUI(char* obj)
 {
     int flags;

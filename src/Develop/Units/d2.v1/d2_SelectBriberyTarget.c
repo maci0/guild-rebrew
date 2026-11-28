@@ -23,6 +23,7 @@ void __cdecl d2_RunCityScrollMapDialog(int, Req*, char*, void*, int);
 void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl sv_ClearObjectSelection(void);
 
+/* ADDRESS: GOLDDE 0x00582c50 */
 void __cdecl d2_SelectBriberyTarget(int e)
 {
 	Req req;

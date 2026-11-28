@@ -12,6 +12,7 @@ void __cdecl nt_LogWinsockError(int err);
 void __cdecl nt_CloseClientConnection(void);
 void __cdecl nt_RecordPacketStats(unsigned char* p, unsigned int n, char flag);
 
+/* ADDRESS: GOLDDE 0x0041e160 */
 int __cdecl nt_FlushSend(void)
 {
 	int n;

@@ -5,6 +5,7 @@ extern int* d2_TutorialState;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int d2_DialogButtonAction;
 
+/* ADDRESS: GOLDDE 0x00566700 */
 int __cdecl d2_CheckTutorialCueClicked(void)
 {
 	int r;

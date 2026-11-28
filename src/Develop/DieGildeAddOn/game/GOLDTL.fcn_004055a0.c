@@ -5,6 +5,7 @@ void __cdecl d3_SetObjectAnimationActive(char*, char*, char);
 #include "Develop/Units/d3/client_scene_transform.h"
 
 /* ADDRESS: GOLDTL 0x00405540 */
+/* ADDRESS: GOLDDE 0x00404950 */
 void __cdecl ch_SetAnimationPaused(unsigned char* object, int paused)
 {
     unsigned char* animation;
@@ -30,6 +31,7 @@ void __cdecl ch_SetAnimationPaused(unsigned char* object, int paused)
 
 /* Returns the camera offset and rotation for one of the four character
  * views, relative to the character's node. */
+/* ADDRESS: GOLDDE 0x004049b0 */
 void __cdecl ch_GetCameraView(char* obj, int view, float* pos, float* rot)
 {
 	if (obj == 0) {

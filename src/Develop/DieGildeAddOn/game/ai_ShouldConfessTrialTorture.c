@@ -25,6 +25,7 @@ float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int 
 unsigned short __cdecl gm_RandomMod(int n);
 
 /* ADDRESS: GOLDTL 0x00493640 */
+/* ADDRESS: GOLDDE 0x00482490 */
 int __cdecl ai_ShouldConfessTrialTorture(Plan* trial)
 {
 	unsigned int rounds;

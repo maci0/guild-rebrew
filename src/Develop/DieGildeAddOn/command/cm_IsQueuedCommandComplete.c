@@ -20,6 +20,7 @@ typedef struct node99 {
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
+/* ADDRESS: GOLDDE 0x004b1bd0 */
 int __cdecl cm_IsQueuedCommandComplete(node99* n)
 {
 	node99* p;

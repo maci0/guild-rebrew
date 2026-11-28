@@ -13,6 +13,7 @@ extern int g_6acf84;
 LRESULT CALLBACK main_WindowProc(HWND, UINT, WPARAM, LPARAM);
 void __cdecl main_FormatGameVersion(char*);
 
+/* ADDRESS: GOLDDE 0x00520890 */
 int __cdecl main_CreateWindow(HINSTANCE inst, int unused, int windowed)
 {
 	RECT work;

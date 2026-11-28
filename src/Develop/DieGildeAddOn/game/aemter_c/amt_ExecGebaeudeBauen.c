@@ -39,6 +39,7 @@ int __cdecl sprintf(char*, const char*, ...);
 char* __cdecl strupr(char*);
 
 /* ADDRESS: GOLDTL 0x004a4d90 */
+/* ADDRESS: GOLDDE 0x00493790 */
 int __cdecl amt_ExecGebaeudeBauen(int a0, char* a1, char* a2)
 {
 	char buildingName[260];

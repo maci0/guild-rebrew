@@ -18,6 +18,7 @@ int __cdecl evt_FindCommand(const char*);
 
 /* evt_ImportCommand: registers a script command with its argument types. */
 /* ADDRESS: GOLDTL 0x00429ed0 */
+/* ADDRESS: GOLDDE 0x004248a0 */
 int __cdecl evt_ImportCommand(const char* name, void* fn, int flags, int nargs, ...)
 {
 	int i;

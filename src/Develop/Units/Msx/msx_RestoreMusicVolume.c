@@ -9,6 +9,7 @@ void __cdecl msx_FadeMasterVolumeIfTrackActive(float, int);
 
 
 /* ADDRESS: GOLDTL 0x004c2d50 */
+/* ADDRESS: GOLDDE 0x004b0800 */
 void __cdecl msx_RestoreMusicVolume(void)
 {
 	msx_MusicOverrideActive = 0;

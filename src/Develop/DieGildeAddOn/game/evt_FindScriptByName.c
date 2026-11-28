@@ -9,6 +9,7 @@ typedef struct {
 #include "Develop/DieGildeAddOn/game/game_data.h"
 int __cdecl fcn_0065f220(char*, char*);
 
+/* ADDRESS: GOLDDE 0x004217d0 */
 T426d00* __cdecl evt_FindScriptByName(char* name)
 {
 	int i;

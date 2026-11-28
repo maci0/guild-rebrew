@@ -10,6 +10,7 @@ int __cdecl fcn_004011f0(void* stream, void* dst);
 int __cdecl vfs_fseek(void*, int, int);
 #include "Develop/Units/vfs/vfs.h"
 
+/* ADDRESS: GOLDDE 0x00444db0 */
 void* __cdecl vfs_OpenFastChunk(char* name)
 {
 	int magic;

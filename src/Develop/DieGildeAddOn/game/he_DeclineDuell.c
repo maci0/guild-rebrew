@@ -18,6 +18,7 @@ void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl cm_SendSetHE(int, char*);
 
 /* ADDRESS: GOLDTL 0x0054f4a0 */
+/* ADDRESS: GOLDDE 0x00535940 */
 void __cdecl he_DeclineDuell(char* a0, char* firstEntity, unsigned char* secondEntity)
 {
 	Row_54f4a0 role;

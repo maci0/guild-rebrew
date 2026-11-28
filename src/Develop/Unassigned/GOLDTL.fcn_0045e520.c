@@ -34,6 +34,7 @@ void fcn_0045dea0(z_streamp strm);
 
 
 /* ADDRESS: GOLDTL 0x0045e520 */
+/* ADDRESS: GOLDDE 0x00453040 */
 block_state fcn_0045e520(s, flush)
     deflate_state *s;
     int flush;

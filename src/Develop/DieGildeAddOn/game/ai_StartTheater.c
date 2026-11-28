@@ -16,6 +16,7 @@ unsigned short __cdecl gm_RandomMod(unsigned short);
 
 
 /* ADDRESS: GOLDTL 0x004abbe0 */
+/* ADDRESS: GOLDDE 0x00499f20 */
 int __cdecl ai_StartTheater(int a1, unsigned short* entity, int a3, char* action)
 {
 	int lvl;

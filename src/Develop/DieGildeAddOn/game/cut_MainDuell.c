@@ -79,6 +79,7 @@ void __cdecl ReportClientMessage(char* msg);
 int __cdecl msx_RestoreMusicIfAllowed(void);
 
 /* ADDRESS: GOLDTL 0x004e0620 */
+/* ADDRESS: GOLDDE 0x004cd040 */
 void __cdecl cut_MainDuell(char* a0)
 {
     int keepB;

@@ -29,6 +29,7 @@ extern unsigned char gm_ActiveTownIndex;
 extern int cm_PacketDeltaBase;
 
 /* ADDRESS: GOLDTL 0x005099e0 */
+/* ADDRESS: GOLDDE 0x004f4a60 */
 void __cdecl gm_TransferEntityBuildings(void *fromEntity, void *toEntity)
 {
 	void *ent;

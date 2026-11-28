@@ -50,6 +50,7 @@ void __cdecl d2_DestroyForm(int);
 void __cdecl io_ClearInputState(void);
 
 /* ADDRESS: GOLDTL 0x004bf8e0 */
+/* ADDRESS: GOLDDE 0x004ad460 */
 void __cdecl d2_RunRoutingSettingsDialog(char* p, int arg)
 {
 	int ids[10];

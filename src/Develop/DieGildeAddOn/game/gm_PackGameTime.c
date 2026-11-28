@@ -1,5 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x00500d60 */
+/* ADDRESS: GOLDDE 0x004ec4a0 */
 void __cdecl gm_PackGameTime(int* src, char* dst)
 {
 	*(short*) (dst + 2) = (short) *src + 0x578;

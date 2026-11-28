@@ -35,6 +35,7 @@ void __cdecl sb_ReleaseSampleBank(void* h);
 void __cdecl fcn_004e4eb0(void);
 
 /* ADDRESS: GOLDTL 0x004e2b70 */
+/* ADDRESS: GOLDDE 0x004cf580 */
 void __cdecl cut_PlayDeathCutscene(void* arg)
 {
 	float f10;

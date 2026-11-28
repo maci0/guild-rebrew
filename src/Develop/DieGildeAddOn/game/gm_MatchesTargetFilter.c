@@ -7,6 +7,7 @@ int __cdecl gm_IsNpcEntityState(void*);
 float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 
 /* ADDRESS: GOLDTL 0x005cf720 */
+/* ADDRESS: GOLDDE 0x005b1140 */
 int __cdecl gm_MatchesTargetFilter(unsigned int self, unsigned int candidate, unsigned char* p)
 {
 	unsigned int off;

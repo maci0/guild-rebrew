@@ -24,6 +24,7 @@ extern g_662318_f imp_timeGetTime;
 void __stdcall tb_TimerCallback(unsigned int, unsigned int, unsigned long, unsigned long, unsigned long);
 void __cdecl fcn_0064d3eb(unsigned int);
 
+/* ADDRESS: GOLDDE 0x00427bb0 */
 int __cdecl tb_StartTimer(unsigned int delay, int oneshot)
 {
 	imp_timeGetDevCaps(tb_TimeCaps, 8);

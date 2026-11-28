@@ -3,6 +3,7 @@ extern unsigned short __cdecl gm_RandomMod(int);
 extern float __cdecl gm_RandomFloat01(void);
 
 /* ADDRESS: GOLDTL 0x004929e0 */
+/* ADDRESS: GOLDDE 0x00481890 */
 void __cdecl ai_RollWirtshausDice(char* gameContext, char* playerEntity, int initialRoll)
 {
 	unsigned char* dice;

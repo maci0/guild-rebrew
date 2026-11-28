@@ -8,6 +8,7 @@ int __cdecl d2_GetSurfaceDesc(D2_TEX_SIZE_OBJ*, void*);
 
 
 /* ADDRESS: GOLDTL 0x004760e0 */
+/* ADDRESS: GOLDDE 0x00468490 */
 int __cdecl d2_UpdateTextureBytes(D2_TEX_SIZE_OBJ* tex)
 {
 	int desc[8];

@@ -16,6 +16,7 @@ typedef struct
 
 int __cdecl gm_CompareGameTime(void*, char*);
 
+/* ADDRESS: GOLDDE 0x004b30c0 */
 int __cdecl cm_RequestUpdateGameTime(Quad4* stamp)
 {
 	char buf[0x9c];

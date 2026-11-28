@@ -64,6 +64,7 @@ int __cdecl ai_ComputeActionScore(float* a0, float* a1, int idx, Actor* e, int* 
    cheapest one as action type 7; otherwise falls back to the plain
    building-deal calculators. */
 /* ADDRESS: GOLDTL 0x004964e0 */
+/* ADDRESS: GOLDDE 0x00484f80 */
 int __cdecl ai_ScoreBestechung(float* firstScore, float* secondScore, int idx, Actor* actor, int busy,
 	char* resultData, int extra)
 {

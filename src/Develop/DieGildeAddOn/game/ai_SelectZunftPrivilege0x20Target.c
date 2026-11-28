@@ -23,6 +23,7 @@ float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int 
 unsigned short __cdecl gm_RandomMod(int n);
 
 /* ADDRESS: GOLDTL 0x0049fe50 */
+/* ADDRESS: GOLDDE 0x0048e880 */
 int __cdecl ai_SelectZunftPrivilege0x20Target(Ent* e)
 {
 	float sum;

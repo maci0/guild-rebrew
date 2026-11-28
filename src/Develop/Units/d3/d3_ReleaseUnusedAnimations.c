@@ -6,6 +6,7 @@
 int __cdecl d3_GetAnimSize(char*);
 #include "Develop/Units/d3/d3_animation.h"
 
+/* ADDRESS: GOLDDE 0x0042deb0 */
 char __cdecl d3_ReleaseUnusedAnimations(int need, int have)
 {
 	char* p;

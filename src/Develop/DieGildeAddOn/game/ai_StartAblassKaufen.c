@@ -17,6 +17,7 @@ int __cdecl gm_HasActiveSpecialObject(void*, int);
 #define MINV(a, b) ((a) < (b) ? (a) : (b))
 
 /* ADDRESS: GOLDTL 0x0049c310 */
+/* ADDRESS: GOLDDE 0x0048ad50 */
 int __cdecl ai_StartAblassKaufen(int unused, char* e, int busy, char* out, char* kind)
 {
 	int v1;

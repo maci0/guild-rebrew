@@ -1,6 +1,7 @@
 #include <string.h>
 
 /* ADDRESS: GOLDTL 0x004315c0 */
+/* ADDRESS: GOLDDE 0x0042acd0 */
 char __cdecl d3_BindAnimTrackNodes(char* obj)
 {
 	char* child;

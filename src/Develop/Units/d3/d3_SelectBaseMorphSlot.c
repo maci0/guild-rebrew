@@ -1,6 +1,7 @@
 extern float flt_0_0;
 
 /* ADDRESS: GOLDTL 0x004356c0 */
+/* ADDRESS: GOLDDE 0x0042ec80 */
 char* __cdecl d3_SelectBaseMorphSlot(char* a)
 {
 	float best;

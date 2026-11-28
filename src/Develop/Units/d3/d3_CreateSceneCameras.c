@@ -14,6 +14,7 @@ void __cdecl d3_SetObjectEulerRotation(char* o, float x, float y, float z);
 void __cdecl d3_RegisterSceneObjectTl(char* o);
 
 /* ADDRESS: GOLDTL 0x00444040 */
+/* ADDRESS: GOLDDE 0x0043c320 */
 void __cdecl d3_CreateSceneCameras(void)
 {
 	(*(char**)&g_6b8484) = d3_SpawnObject(3, s_67a9ac);

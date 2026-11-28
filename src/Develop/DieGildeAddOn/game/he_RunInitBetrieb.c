@@ -27,6 +27,7 @@ int __cdecl he_GetEntityReturnTarget(char*, int*, int*);
 void __cdecl ch_StartMovement(int, int, int, int, int, char*);
 void __cdecl he_FreeAction(char*);
 
+/* ADDRESS: GOLDDE 0x00553f50 */
 void __cdecl he_RunInitBetrieb(char* u)
 {
 	int site;

@@ -9,6 +9,7 @@ int __cdecl sb_LoadLocalizedSampleBank(char*, int);
 
 #pragma optimize("y", off)
 /* ADDRESS: GOLD 0x00578760 */
+/* ADDRESS: GOLDDE 0x00566ac0 */
 int* __cdecl d2_InitTutorialMainIntro(void)
 {
 	int* intro;

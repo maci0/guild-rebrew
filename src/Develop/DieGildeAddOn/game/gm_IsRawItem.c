@@ -10,6 +10,7 @@ typedef struct
 
 extern char* lpObjektePROT;
 
+/* ADDRESS: GOLDDE 0x004ecb10 */
 int __cdecl gm_IsRawItem(int i)
 {
 	OBJECT_PROTOTYPE* e;

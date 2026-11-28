@@ -11,6 +11,7 @@ void __cdecl d3_RemoveObjectAnim(int h);
 
 void __cdecl fcn_00403870(char* e);
 
+/* ADDRESS: GOLDDE 0x00402860 */
 void __cdecl ch_SetLowPolyMode(unsigned char mode)
 {
 	int saved;

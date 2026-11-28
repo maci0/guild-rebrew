@@ -74,6 +74,7 @@ int __cdecl sb_PlayPrioritizedVoice(char* bank, const char* name, int prio, int 
 void __cdecl d2_ResetKanoneHitTable(void);
 
 /* ADDRESS: GOLDTL 0x00588aa0 */
+/* ADDRESS: GOLDDE 0x0056e760 */
 int __cdecl d2_FireKanone(Emitter* emitter, char* building)
 {
 	Particle p0;

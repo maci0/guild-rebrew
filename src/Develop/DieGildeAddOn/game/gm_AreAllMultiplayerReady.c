@@ -10,6 +10,7 @@ extern int g_9baa24[8];
 
 char* __cdecl d3_GetSceneEntry(int);
 
+/* ADDRESS: GOLDDE 0x004bb870 */
 int __cdecl gm_AreAllMultiplayerReady(void)
 {
 	unsigned int need;

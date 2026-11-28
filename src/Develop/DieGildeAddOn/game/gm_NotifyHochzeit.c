@@ -15,6 +15,7 @@ void __cdecl he_SendCmdMessage(void*, void*, char*, char*);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x004ce8b0 */
 int __cdecl gm_NotifyHochzeit(char* event)
 {
 	char buf[0x200];

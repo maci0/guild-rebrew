@@ -5,6 +5,7 @@ extern int g_1043040[];
 extern int g_1042a2c;
 extern int g_1043298;
 
+/* ADDRESS: GOLDDE 0x0044b450 */
 void __cdecl d3_SetupRightEdgeStep(int topIdx, int botIdx)
 {
 	int y0;

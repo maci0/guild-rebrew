@@ -25,6 +25,7 @@ void __cdecl d2_DrawSegmentedBar(int, int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x0053b1b0 */
+/* ADDRESS: GOLDDE 0x005229b0 */
 int __cdecl d2_RunChooseTalentDialog(void)
 {
 	int v_len;

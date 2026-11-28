@@ -19,6 +19,7 @@ void __cdecl d2_RunZunftLevel2Dialog(void);
 void __cdecl d2_RunCityScrollMapDialog(int, char*, int, void (__cdecl*)(void), int);
 
 #pragma optimize("y", off)
+/* ADDRESS: GOLDDE 0x0058eea0 */
 void __cdecl d2_StartZunftLevel2Action(void)
 {
 	char buf[0x50];

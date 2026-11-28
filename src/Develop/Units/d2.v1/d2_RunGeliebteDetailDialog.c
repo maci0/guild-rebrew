@@ -44,6 +44,7 @@ int __cdecl cm_GetCommandStatus(int handle);
 int __cdecl main_RunFrameLoop(int func, int id);
 
 /* ADDRESS: GOLDTL 0x0059fa80 */
+/* ADDRESS: GOLDDE 0x00584900 */
 void __cdecl d2_RunGeliebteDetailDialog(int a0, unsigned short* a1, int a2)
 {
 	unsigned int v3;
@@ -97,7 +98,7 @@ void __cdecl d2_RunGeliebteDetailDialog(int a0, unsigned short* a1, int a2)
 		if (!io_RightButtonReleased && v5) {
 			if (d2_DialogButtonAction != -1) {
 				if (d2_CurrentElementId == id_a) {
-					if (!*(char*) ((unsigned int) gm_LocalPlayerSlot * 0x21c + 0x7f4ca9)) {
+					if (!*(char*) ((unsigned int) gm_LocalPlayerSlot * 0x21c + ((int) &gm_GameTime + 0xa9))) {
 						io_FormatTextBuffer(text, 0x1a57, *v6);
 					} else {
 						io_FormatTextBuffer(text, 0x1a58, *v6);
@@ -128,7 +129,7 @@ void __cdecl d2_RunGeliebteDetailDialog(int a0, unsigned short* a1, int a2)
 						io_FormatTextBuffer(title, 0x1a5b, 2, *v6,
 							*v10);
 						if (d2_ShowModalMessageBox(title, 1) && (v11 = gm_LocalPlayerSlot,
-							d2_CheckActionBlocker((char*) (v11 * 0x21c + 0x7f4ca0), 2))) {
+							d2_CheckActionBlocker((char*) (v11 * 0x21c + ((int) &gm_GameTime + 0xa0)), 2))) {
 							*(int*) (v7 + 0xbc) = gm_GameTime.a;
 							cm_SendSetHE(3, v7);
 							gm_ModifyHealth(*(unsigned int*) (a0 + 4),
@@ -143,7 +144,7 @@ void __cdecl d2_RunGeliebteDetailDialog(int a0, unsigned short* a1, int a2)
 		} else {
 			d2_DialogCloseRequested = 1;
 		}
-		if (!main_RunFrameLoop(0x59fa80, 0x677c7)) {
+		if (!main_RunFrameLoop((int) d2_RunGeliebteDetailDialog, 0x677c7)) {
 			d2_DestroyForm(dialog);
 			return;
 		}

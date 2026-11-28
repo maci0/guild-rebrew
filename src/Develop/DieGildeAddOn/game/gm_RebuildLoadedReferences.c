@@ -31,6 +31,7 @@ extern int ls_SaveVersion, g_773d8c;
  * from the owner chains of the loaded objects, every live game object runs its
  * per-kind reset handler, and the remaining reference tables are rebuilt. */
 /* ADDRESS: GOLDTL 0x00525670 */
+/* ADDRESS: GOLDDE 0x0050e940 */
 unsigned int __cdecl gm_RebuildLoadedReferences(void)
 {
 	char* p;

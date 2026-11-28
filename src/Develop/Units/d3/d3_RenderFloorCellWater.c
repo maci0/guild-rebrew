@@ -28,6 +28,7 @@ void __cdecl d3_NormalizeVector(float* v);
 void __cdecl d3_SetRenderMaterialState(int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00440870 */
+/* ADDRESS: GOLDDE 0x00439230 */
 void __cdecl d3_RenderFloorCellWater(char* o, char* c)
 {
 	char* m;

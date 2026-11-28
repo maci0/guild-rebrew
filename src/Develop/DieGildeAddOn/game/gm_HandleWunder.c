@@ -60,6 +60,7 @@ int __cdecl gm_HandleWunder(char* e)
 }
 #else
 /* ADDRESS: GOLDTL 0x005d96d0 */
+/* ADDRESS: GOLDDE 0x005baf30 */
 int __cdecl gm_HandleWunder(char* e)
 {
 	int r;

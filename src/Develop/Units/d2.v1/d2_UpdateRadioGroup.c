@@ -4,6 +4,7 @@ extern int g_14ce904, g_14ce900, d2_CurrentElementId, g_67d38c, g_14ce8d8, g_14c
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00469630 */
+/* ADDRESS: GOLDDE 0x0045cf50 */
 void __cdecl d2_UpdateRadioGroup(int groupIndex)
 {
 	int count;

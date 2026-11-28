@@ -14,6 +14,7 @@ void __cdecl d3_SpawnBlutEffect(char*, int, float, float, float, float);
 char* __cdecl ch_CreateQueuedAction(char*, void*, int, int, int);
 void __cdecl d3_SpawnBlutlacheEffect(char*);
 
+/* ADDRESS: GOLDDE 0x004cc860 */
 int __cdecl gm_CheckDuelKnockout(char* e)
 {
 	char* o;

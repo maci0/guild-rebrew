@@ -10,6 +10,7 @@ void __cdecl cm_RequestMoveCredits(int a, int b, char c, int n);
 void __cdecl cm_SendCopyEntityData(char* msg);
 
 /* ADDRESS: GOLDTL 0x004978d0 */
+/* ADDRESS: GOLDDE 0x00486350 */
 int __cdecl ai_RunRepairBuilding(char* entity, char* repairReq, char* treasuryReq)
 {
     char msg[0xf8];

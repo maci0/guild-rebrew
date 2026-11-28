@@ -25,6 +25,7 @@ char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl cm_SubtractCrimeGrid(int arg, unsigned char kind);
 void __cdecl he_NotifyStraftatExpired(Obj* o, char* p);
 
+/* ADDRESS: GOLDDE 0x004e19b0 */
 int __cdecl gs_RemoveStraftat(int key, int force)
 {
 	int idx;

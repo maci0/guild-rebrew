@@ -53,6 +53,7 @@ int __cdecl cm_RequestMoveCredits(int a0, int a1, char a2, int a3);
 void __cdecl cm_SetGameSpeedSetting(int a0);
 
 /* ADDRESS: GOLDTL 0x005145a0 */
+/* ADDRESS: GOLDDE 0x004ff040 */
 int __cdecl ls_StartNetworkGame(char *path)
 {
     char text[512];

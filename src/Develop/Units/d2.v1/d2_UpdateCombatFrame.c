@@ -37,6 +37,7 @@ void __cdecl d3_UpdateMineExplosions(void);
 ent2c* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
 int __cdecl cm_SendUpdateCutsceneEntitySlot(int, ent2c*);
 
+/* ADDRESS: GOLDDE 0x004c4cc0 */
 void __cdecl d2_UpdateCombatFrame(char* rec)
 {
 	ent2c l;

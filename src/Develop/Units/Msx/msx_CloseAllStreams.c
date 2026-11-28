@@ -4,6 +4,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 int __cdecl msx_CloseStream(int);
 
+/* ADDRESS: GOLDDE 0x00425270 */
 int __cdecl msx_CloseAllStreams(void)
 {
 	int r = 0;

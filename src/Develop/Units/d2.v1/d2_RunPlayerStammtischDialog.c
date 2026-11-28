@@ -31,6 +31,7 @@ int __cdecl d2_ShowModalMessageBox(char*, int);
 void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005a2080 */
+/* ADDRESS: GOLDDE 0x00586f00 */
 void __cdecl d2_RunPlayerStammtischDialog(int building, int table)
 {
 	int sel[4][0xe];

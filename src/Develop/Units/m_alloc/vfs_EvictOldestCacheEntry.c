@@ -20,6 +20,7 @@ void __cdecl d2_FreeAnimTrackList(void* p);
 void __cdecl m_FreeTracked(void* p);
 
 /* ADDRESS: GOLDTL 0x00465850 */
+/* ADDRESS: GOLDDE 0x00459480 */
 int __cdecl vfs_EvictOldestCacheEntry(void)
 {
 	int i;

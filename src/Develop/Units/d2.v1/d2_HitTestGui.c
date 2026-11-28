@@ -1,3 +1,4 @@
+#include "d2_capacity.h"
 typedef struct Slot {
 	int id;
 	int used;
@@ -53,6 +54,7 @@ void __cdecl d2_HitTestWindow(int x, int y);
 int __cdecl d2_HitTestRenderableForm(int x, int y);
 
 /* ADDRESS: GOLDTL 0x0046aee0 */
+/* ADDRESS: GOLDDE 0x0045e6d0 */
 int __cdecl d2_HitTestGui(int x, int y)
 {
 	int i;
@@ -69,7 +71,7 @@ int __cdecl d2_HitTestGui(int x, int y)
 	d2_HitTestWindow(x, y);
 	g_67d38c = -1;
 	g_67d374 = -1;
-	for (i = 0x3ff; i >= 0; i--) {
+	for (i = d2_ELEMENT_CAPACITY - 1; i >= 0; i--) {
 		hidden = 0;
 		s = ((Slot**)d2_ZOrderStack)[i];
 		if (s) {
@@ -83,7 +85,7 @@ int __cdecl d2_HitTestGui(int x, int y)
 			}
 		}
 	}
-	for (i = 0x3ff; i >= 0; i--) {
+	for (i = d2_ELEMENT_CAPACITY - 1; i >= 0; i--) {
 		hidden = 0;
 		s = ((Slot**)d2_ZOrderStack)[i];
 		if (s) {

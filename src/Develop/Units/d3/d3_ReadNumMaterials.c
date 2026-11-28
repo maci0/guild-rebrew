@@ -3,6 +3,7 @@ extern void *__cdecl fcn_0041db70(int size, void *pool);
 extern char g_0067b854;
 
 /* ADDRESS: GOLDTL 0x0044dcf0 */
+/* ADDRESS: GOLDDE 0x00443a30 */
 void __cdecl d3_ReadNumMaterials(void *p, char *obj)
 {
     int count;

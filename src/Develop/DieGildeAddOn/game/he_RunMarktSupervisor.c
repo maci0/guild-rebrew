@@ -77,6 +77,7 @@ int __cdecl gm_eval_SlotVoll(char*, int, int);
 int __cdecl fcn_64d41a(char*, const char*, ...);
 
 /* ADDRESS: GOLDTL 0x00568060 */
+/* ADDRESS: GOLDDE 0x0054e0a0 */
 void __cdecl he_RunMarktSupervisor(char* action)
 {
 	union { float f; int n; } uf;

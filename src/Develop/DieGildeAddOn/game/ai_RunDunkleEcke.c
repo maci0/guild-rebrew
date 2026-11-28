@@ -7,6 +7,7 @@ void __cdecl cm_RequestChangeBits(int id, int a2, int a3, int a4, int a5);
 #endif
 
 /* ADDRESS: GOLDTL 0x0049e860 */
+/* ADDRESS: GOLDDE 0x0048d290 */
 int __cdecl ai_RunDunkleEcke(char* e, char* a, char* b)
 {
 	if (a[0] == 4 && b[0] == 1) {

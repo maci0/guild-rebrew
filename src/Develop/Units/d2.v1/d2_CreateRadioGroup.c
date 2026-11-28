@@ -20,6 +20,7 @@ extern char s_67d4b0[];
 #include "Develop/Units/Error/error_message.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x004693b0 */
+/* ADDRESS: GOLDDE 0x0045cd30 */
 int __cdecl d2_CreateRadioGroup(int n, ...)
 {
 	int i;

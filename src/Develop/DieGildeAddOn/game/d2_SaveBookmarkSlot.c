@@ -23,6 +23,7 @@ char* __cdecl gm_QueryEntities(int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl d2_ShowStatusBanner(char*);
 
+/* ADDRESS: GOLDDE 0x00577a50 */
 void __cdecl d2_SaveBookmarkSlot(int index)
 {
 	char buf[0x100];

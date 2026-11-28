@@ -7,6 +7,7 @@ typedef struct {
 } D3_VBUF_VTBL;
 // SIZE 0xc
 
+/* ADDRESS: GOLDDE 0x00416440 */
 void __cdecl d3_ReleaseRenderVertexBuffers(void)
 {
 	void** p;

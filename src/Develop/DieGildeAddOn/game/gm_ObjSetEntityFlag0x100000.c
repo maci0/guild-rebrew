@@ -23,6 +23,7 @@ char* __cdecl d2_OpenTargetPicker(Req*, char*, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x005bf4e0 */
 int __cdecl gm_ObjSetEntityFlag0x100000(char* e, char* action)
 {
 	Req req;

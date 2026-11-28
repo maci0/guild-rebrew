@@ -38,6 +38,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d3_EndCameraAndUiMode(void);
 
 /* ADDRESS: GOLDTL 0x005aaf60 */
+/* ADDRESS: GOLDDE 0x0058fa70 */
 void __cdecl d2_RunKircheSpendenDialog(char* gebaeude)
 {
 	char buf[512];

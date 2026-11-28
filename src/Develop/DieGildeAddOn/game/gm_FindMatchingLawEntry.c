@@ -16,6 +16,7 @@ struct info_577940 {
 
 void __cdecl gm_GetLawEntry(int, struct info_577940*);
 
+/* ADDRESS: GOLDDE 0x0055d860 */
 int __cdecl gm_FindMatchingLawEntry(int x)
 {
 	struct info_577940 info;

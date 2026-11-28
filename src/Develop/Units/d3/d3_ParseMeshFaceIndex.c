@@ -25,6 +25,7 @@ char* __cdecl fcn_0064f026(char* s, char* delim);
 int __cdecl atoi(char* s);
 
 /* ADDRESS: GOLDTL 0x0044d3f0 */
+/* ADDRESS: GOLDDE 0x00443190 */
 void __cdecl d3_ParseMeshFaceIndex(void* stream, D3_MESH_FACE_CTX* ctx)
 {
 	char* tok;

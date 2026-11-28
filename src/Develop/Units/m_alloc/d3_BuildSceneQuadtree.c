@@ -16,6 +16,7 @@ void __cdecl d3_VisitSceneObjects(int, int, int, void*, void*);
 char __cdecl d3_CollectActiveMeshObjects(char*, char*);
 void __cdecl d3_SplitQuadtreeNode(char*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x0044a4b0 */
 char* __cdecl d3_BuildSceneQuadtree(int node, int mask, int split_limit, int max_depth)
 {
 	char* ctx;

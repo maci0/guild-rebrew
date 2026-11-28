@@ -21,6 +21,7 @@ int __cdecl main_RunFrameLoop(int (__cdecl*)(void), int);
 char* __cdecl d2_GetControlValue(int);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x00520fc0 */
 int __cdecl d2_PromptNetworkHost(void)
 {
 	int ok;

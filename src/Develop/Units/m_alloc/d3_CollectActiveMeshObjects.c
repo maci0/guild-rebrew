@@ -10,6 +10,7 @@ extern char g_6b89a4[];
 
 void* __cdecl m_PoolAlloc(void*, int, int);
 
+/* ADDRESS: GOLDDE 0x00449e70 */
 char __cdecl d3_CollectActiveMeshObjects(char* e, char* ctx)
 {
 	char* d;

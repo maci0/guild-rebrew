@@ -16,6 +16,7 @@ void __cdecl d3_SetNodePosition(void*, float*);
 /* CreateCharacterAtDummy(): loads a character at a dummy object, facing
  * along the dummy's forward axis. */
 /* ADDRESS: GOLDTL 0x0040c9b0 */
+/* ADDRESS: GOLDDE 0x0040b7c0 */
 char* __cdecl CreateCharacterAtDummy(char** file, char** dummy, char** name)
 {
 	char* ch;

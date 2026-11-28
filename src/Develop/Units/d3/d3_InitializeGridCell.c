@@ -1,4 +1,5 @@
 /* ADDRESS: GOLDTL 0x0043f640 */
+/* ADDRESS: GOLDDE 0x00438210 */
 void __cdecl d3_InitializeGridCell(char* a)
 {
 	a[0x1ee] = (char) 0xff;

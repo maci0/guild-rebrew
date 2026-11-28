@@ -37,6 +37,7 @@ int __cdecl he_GetEntityHomeTarget(char*, int*, int*, int*);
 int __cdecl he_PickNearestWirtshaus(char*, int, char**, int*, int*);
 
 /* ADDRESS: GOLDTL 0x00567590 */
+/* ADDRESS: GOLDDE 0x0054d5d0 */
 void __cdecl he_RunDailyRoutine(char* action)
 {
 	char* p;

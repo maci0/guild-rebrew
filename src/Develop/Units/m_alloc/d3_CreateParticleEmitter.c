@@ -1,3 +1,6 @@
+void __cdecl d3_UpdateDirectedEmitter();
+void __cdecl d3_UpdateDriftEmitter();
+void __cdecl d3_StepParticleEmitter();
 #include <string.h>
 
 #pragma optimize("y", off)
@@ -7,6 +10,7 @@ void __cdecl d3_SetEffectPosition(void*, int);
 void __cdecl d3_SetEffectDirection(void*, void*, int);
 
 /* ADDRESS: GOLDTL 0x00454460 */
+/* ADDRESS: GOLDDE 0x00449d10 */
 int __cdecl d3_CreateParticleEmitter(int a0, int a1, int a2, int a3, int* a4, int a5, int* a6)
 {
 	int* s;
@@ -17,11 +21,11 @@ int __cdecl d3_CreateParticleEmitter(int a0, int a1, int a2, int a3, int* a4, in
 	s = 0;
 	v = *a6;
 	if (v == 0) {
-		s = (int*) d3_CreateParticleSystem(a2, a3, (int) a4, a5, a0, 0x452c60);
+		s = (int*) d3_CreateParticleSystem(a2, a3, (int) a4, a5, a0, (int) d3_UpdateDirectedEmitter);
 	} else if (v == 1) {
-		s = (int*) d3_CreateParticleSystem(a2, a3, (int) a4, a5, a0, 0x453470);
+		s = (int*) d3_CreateParticleSystem(a2, a3, (int) a4, a5, a0, (int) d3_UpdateDriftEmitter);
 	} else if (v == 2) {
-		s = (int*) d3_CreateParticleSystem(a2, a3, (int) a4, a5, a0, 0x453d80);
+		s = (int*) d3_CreateParticleSystem(a2, a3, (int) a4, a5, a0, (int) d3_StepParticleEmitter);
 	}
 	if (s != 0) {
 		d3_SetEffectPosition(s, a1);

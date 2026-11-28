@@ -16,6 +16,7 @@ char __cdecl d3sm_3D2SuperMap(int, float*, int*, int*, int*);
 char* __cdecl ch_CreateAction(char*, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004bc540 */
+/* ADDRESS: GOLDDE 0x004aa490 */
 void __cdecl anm_UpdateCat(AMBIENT_ANIMAL_SLOT* state)
 {
 	int x;
@@ -54,6 +55,7 @@ void __cdecl anm_UpdateCat(AMBIENT_ANIMAL_SLOT* state)
 }
 
 /* ADDRESS: GOLDTL 0x004bc6b0 */
+/* ADDRESS: GOLDDE 0x004aa600 */
 void __cdecl anm_UpdateSheep(AMBIENT_ANIMAL_SLOT* state)
 {
 	int x;

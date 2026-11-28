@@ -37,6 +37,7 @@ void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
 int __cdecl ai_SelectThemaPredigt(PredigtEntityRecord*, int);
 
 /* ADDRESS: GOLDTL 0x0054a6a0 */
+/* ADDRESS: GOLDDE 0x00530b80 */
 void __cdecl he_RunPredigt(int action)
 {
 	int v2;

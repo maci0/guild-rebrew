@@ -15,6 +15,7 @@ void __cdecl d3_FreeObjectAnimation(void*);
 void __cdecl d3_UpdateSunRays(char*);
 
 /* ADDRESS: GOLD 0x00411c10 */
+/* ADDRESS: GOLDDE 0x00411930 */
 void __cdecl d3_UpdateCameraAnimAndSunRays(void)
 {
 	if ((*(char**)&d3_ActiveCameraAnimation) != 0) {

@@ -5,6 +5,7 @@ void __cdecl gm_HandleBekehren(char*, int*);
 
 
 /* ADDRESS: GOLDTL 0x004f96f0 */
+/* ADDRESS: GOLDDE 0x004e54d0 */
 int __cdecl gm_DispatchBekehrenAction(char* e, int* s)
 {
 	char* p;

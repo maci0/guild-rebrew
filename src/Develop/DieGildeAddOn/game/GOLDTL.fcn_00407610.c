@@ -8,6 +8,7 @@ void __cdecl d3_SetNodePosition(char*, float*);
 /* Eases a character's height towards the ground of its map cell; returns
  * the cell type. */
 /* ADDRESS: GOLDTL 0x00407610 */
+/* ADDRESS: GOLDDE 0x004067b0 */
 int __cdecl ch_AdjustHeightToGround(char* ev)
 {
 	char* map;
@@ -59,6 +60,7 @@ typedef struct PairRun {
 
 
 /* ADDRESS: GOLDTL 0x00407760 */
+/* ADDRESS: GOLDDE 0x00406900 */
 int __cdecl ch_DownsamplePath(char* flags, PairRun* src, char* dst, char* scale)
 {
 	int hi;

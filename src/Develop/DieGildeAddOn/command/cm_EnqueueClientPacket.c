@@ -33,6 +33,7 @@ int __cdecl cm_FlushPendingDataPackets(void);
 
 
 /* ADDRESS: GOLDTL 0x004c4330 */
+/* ADDRESS: GOLDDE 0x004b1d40 */
 int __cdecl cm_EnqueueClientPacket(CLIENT_QUEUED_PACKET* queuedInput)
 {
 	CLIENT_QUEUED_PACKET* p;

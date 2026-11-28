@@ -3,6 +3,7 @@ int __cdecl fcn_005cff10(char* s);
 int __cdecl d2_RunLawTargetSelectDialog(char* s, int a2, int a3, int a4);
 
 /* ADDRESS: GOLDTL 0x005d0460 */
+/* ADDRESS: GOLDDE 0x005b1e70 */
 int __cdecl d2_DispatchLawTargetDialog(char* s, int a2, int a3, int a4)
 {
 	char* p;

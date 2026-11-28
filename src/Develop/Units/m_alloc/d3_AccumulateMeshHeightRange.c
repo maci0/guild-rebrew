@@ -67,6 +67,7 @@ typedef struct A {
 } A;
 
 /* ADDRESS: GOLDTL 0x00413fb0 */
+/* ADDRESS: GOLDDE 0x00412560 */
 int __cdecl d3_AccumulateMeshHeightRange(A* bounds, B* b)
 {
     int r;
@@ -107,7 +108,7 @@ int __cdecl d3_AccumulateMeshHeightRange(A* bounds, B* b)
         if (bmin.x < bounds->f68 && bounds->f58 < bmax.x && bounds->f6c > bmin.y &&
             bounds->f70 > bmin.z && bounds->f60 < bmax.z) {
             itf = b->obj->itf;
-            buf = (float*) m_alloc(itf->count, (char*) 0x67755c);
+            buf = (float*) m_alloc(itf->count, "!d3t:Vertices");
             for (i = 0; i < itf->count; i++) {
                 buf[i * 3 + 0] = itf->points[i].z * b->mat->m[8] +
                                  itf->points[i].y * b->mat->m[4] +

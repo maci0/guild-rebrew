@@ -14,6 +14,7 @@ unsigned short __cdecl gm_RandomMod(int);
 int __cdecl evt_LoadGfxScript(char*);
 void __cdecl evt_CallScriptFunction(int, int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x005761b0 */
 void __cdecl d3_TriggerFriedhofChatScript(void)
 {
 	int va;

@@ -59,6 +59,7 @@ void __cdecl d2_SetElementScale(int id, int a2);
 void __cdecl d2_DrawSegmentedBar(int x0, int y, int len, int t);
 void __cdecl d2_UpdateCombatUnitHud(void);
 
+/* ADDRESS: GOLDDE 0x004bdf60 */
 void __cdecl d2_InitCombatUnitCards(void)
 {
 	char* unit;

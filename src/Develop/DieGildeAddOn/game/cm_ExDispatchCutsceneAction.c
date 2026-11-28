@@ -12,6 +12,7 @@ void __cdecl d3_UpdateConquerFlag(int*);
 
 
 /* ADDRESS: GOLDTL 0x004cd330 */
+/* ADDRESS: GOLDDE 0x004bab10 */
 int __cdecl cm_ExDispatchCutsceneAction(unsigned char* command, char* result)
 {
 	char* e;

@@ -50,6 +50,7 @@ int __cdecl evt_ParseSymbolDeclaration(char*, int);
 /* Runs script statements until a block end (keyword 10), token type 12, or
  * the running flag at g+0x124 clears. */
 /* ADDRESS: GOLDTL 0x004291c0 */
+/* ADDRESS: GOLDDE 0x00423be0 */
 int __cdecl evt_ExecuteStatements(char* g)
 {
 	struct tok_4291c0 t;

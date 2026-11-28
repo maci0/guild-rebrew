@@ -15,6 +15,7 @@ extern D2_ACTION_POPUP_SLOT g_77e8c0[16];
 void __cdecl d2_CloseActionPopup(int);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x0052bfe0 */
 void __cdecl d2_ClearActionPopupSlots(void)
 {
 	int i;

@@ -12,6 +12,7 @@ int __cdecl sprintf(char* a0, const char* a1, ...);
 char* __cdecl strcpy(char* a0, const char* a1);
 
 /* ADDRESS: GOLDTL 0x00428340 */
+/* ADDRESS: GOLDDE 0x00422da0 */
 int __cdecl evt_CallScriptFunction(char* scriptCtx, int argCount, ...)
 {
 	int obj;

@@ -21,6 +21,7 @@ int __cdecl gm_FindRecordById(int);
 int __cdecl gm_SearchTable67(int);
 int __cdecl cut_FindCutsceneById(int);
 
+/* ADDRESS: GOLDDE 0x00507d40 */
 void __cdecl ls_RebindSavedSceneRefs(void)
 {
 	int save;

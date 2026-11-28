@@ -19,6 +19,7 @@ int __cdecl gm_CollectItemSuppliers(int type);
 int __cdecl ai_CanProduceGood(char* bld, int* goodsPlan, int directOnly);
 
 /* ADDRESS: GOLDTL 0x00486640 */
+/* ADDRESS: GOLDDE 0x004755f0 */
 int __cdecl ai_CanProduceGood(char* bld, int* goodsPlan, int directOnly)
 {
 	int* p;

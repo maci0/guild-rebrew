@@ -10,6 +10,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl gm_AddTime(char*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x005320e0 */
 void __cdecl he_InitInvitation(char* e)
 {
 	*(pos14_7f4c00*) (e + 0x52) = (*(pos14_7f4c00*)&gm_GameTime);

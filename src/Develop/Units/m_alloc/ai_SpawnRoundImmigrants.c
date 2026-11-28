@@ -65,6 +65,7 @@ int __cdecl gm_ReplenishPersonFunds();
     }
 
 /* ADDRESS: GOLDTL 0x00547770 */
+/* ADDRESS: GOLDDE 0x0052dcd0 */
 void __cdecl ai_SpawnRoundImmigrants(void)
 {
     int cnt2[33];

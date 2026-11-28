@@ -12,6 +12,7 @@ void __cdecl he_StartAhmAction0x98(void);
 void __cdecl he_RunAhmAction0x98(void);
 int __cdecl he_RegisterActionMeta(int, char*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x0055b830 */
 int __cdecl he_RegisterAhmHandlers(void)
 {
 	if (he_RegisterHandler(0x95, (void*) he_StartAhmUnlockRecipe, (void*) he_RunAhmUnlockRecipe) != 0 ||

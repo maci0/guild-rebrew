@@ -14,6 +14,7 @@ void __cdecl sb_StopVoice(int, int);
 int __cdecl d3snd_PlaySoundEffect(int, int, int, int);
 
 /* ADDRESS: GOLD 0x00577e50 */
+/* ADDRESS: GOLDDE 0x005661c0 */
 void __cdecl d2_ShowTutorialStepMessage(void)
 {
 	if (d2_TutorialState[6] != 0 && *(int*) (d2_TutorialState[6] + 0x1c) != 0) {

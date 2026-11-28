@@ -14,6 +14,7 @@ typedef struct
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
+/* ADDRESS: GOLDDE 0x004d1940 */
 int __cdecl cut_AreAllPlayersDone(unsigned char* cutscene)
 {
 	int i;

@@ -72,6 +72,7 @@ typedef struct {
 } Req_59c000;
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x0059c000 */
+/* ADDRESS: GOLDDE 0x005812a0 */
 int __cdecl d2_RunMetalProduktionDialog(char* building)
 {
 	Req_59c000 req;

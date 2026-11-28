@@ -3,6 +3,7 @@
 void __cdecl d2_DestroyForm(int);
 void __cdecl d2_DestroyElement(int);
 
+/* ADDRESS: GOLDDE 0x005962c0 */
 void __cdecl d2_DestroyMapDialog(int* obj)
 {
 	int i;

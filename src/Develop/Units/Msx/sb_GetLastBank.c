@@ -4,6 +4,7 @@ extern char sb_NullSampleBank[];
 
 /* ADDRESS: GOLD 0x00426630 */
 /* ADDRESS: GOLDTL 0x00422aa0 */
+/* ADDRESS: GOLDDE 0x0041f920 */
 char* __cdecl sb_GetLastBank(void)
 {
 	char* p;

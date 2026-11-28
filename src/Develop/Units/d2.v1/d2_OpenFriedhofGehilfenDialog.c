@@ -7,6 +7,7 @@ void __cdecl d2_RunGraveyardPickerDialog(int, char*, int, int, void*);
 int __cdecl d2_ShowFriedhofGehilfenDialog();
 void __cdecl d3_EndCameraAndUiMode(void);
 
+/* ADDRESS: GOLDDE 0x00575860 */
 void __cdecl d2_OpenFriedhofGehilfenDialog(char* e)
 {
 	if (d2_CheckOwnerBlocked(e) == 0) {

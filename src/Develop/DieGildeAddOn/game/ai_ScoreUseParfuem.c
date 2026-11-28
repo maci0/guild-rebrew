@@ -8,6 +8,7 @@ int __cdecl ai_ComputeActionScore(float* o1, float* o2, int a3, char* e, Stat* s
 int __cdecl ai_ComputeBaseActionScore(float* o1, float* o2, int a3, char* e, int a5, int a6, char* p);
 
 /* ADDRESS: GOLDTL 0x0049bb00 */
+/* ADDRESS: GOLDDE 0x0048a540 */
 int __cdecl ai_ScoreUseParfuem(float* o1, float* o2, int idx, char* entity, int extra_a, int extra_b, char* p)
 {
 	Stat st;

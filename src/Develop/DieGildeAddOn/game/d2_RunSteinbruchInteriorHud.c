@@ -22,6 +22,7 @@ void __cdecl d2_OpenTransportPanel(char*);
 void __cdecl d2_RunMetalProduktionDialog(char*);
 void __cdecl d2_RunWorkerTrainingDialog(char*);
 
+/* ADDRESS: GOLDDE 0x00581de0 */
 void __cdecl d2_RunSteinbruchInteriorHud(char* e)
 {
 	int gelage;

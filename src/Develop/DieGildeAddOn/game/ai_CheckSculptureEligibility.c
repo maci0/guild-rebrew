@@ -2,6 +2,7 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int arg_count, ...);
 
 
 /* ADDRESS: GOLDTL 0x0048e7f0 */
+/* ADDRESS: GOLDDE 0x0047d6c0 */
 int __cdecl ai_CheckSculptureEligibility(char* entity, unsigned short** out)
 {
 	unsigned short* building;

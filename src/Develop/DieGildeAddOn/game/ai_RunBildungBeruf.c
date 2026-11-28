@@ -2,6 +2,7 @@ int __cdecl cm_RequestModifyHealth(unsigned int, int);
 int __cdecl cm_SendCopyEntityData(void *);
 
 /* ADDRESS: GOLDTL 0x00496480 */
+/* ADDRESS: GOLDDE 0x00484f20 */
 int __cdecl ai_RunBildungBeruf(int *a, unsigned char *b)
 {
     char t[0xf8];

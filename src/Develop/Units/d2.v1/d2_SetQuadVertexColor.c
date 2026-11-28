@@ -11,6 +11,7 @@ typedef struct {
 
 
 /* ADDRESS: GOLDTL 0x0047b9a0 */
+/* ADDRESS: GOLDDE 0x0046a990 */
 void __cdecl d2_SetQuadVertexColor(fcn_0047b9a0_vertex* v, unsigned char r, unsigned char g, unsigned char b)
 {
 	int i;

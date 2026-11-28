@@ -16,6 +16,7 @@ void __cdecl cm_RequestMoveCredits(int a1, int a2, char a3, int a4);
 void __cdecl cm_SendTraceEnd(int a1);
 
 /* ADDRESS: GOLDTL 0x00487c00 */
+/* ADDRESS: GOLDDE 0x00476bb0 */
 void __cdecl ai_RequestAusbauUpgrade(char* slot, char* entity, int chance)
 {
 	unsigned char msg[0xf8];

@@ -11,6 +11,7 @@ int __cdecl fcn_0064fcaf(char*);
 int __cdecl gm_FindObjektPrototypeByName(char*);
 int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 
+/* ADDRESS: GOLDDE 0x004a00f0 */
 int __cdecl hst_CmdInventarPlus(char* tbl, int idx, char* arg)
 {
 	char* e;

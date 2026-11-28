@@ -14,6 +14,7 @@ extern GRAPH_SAMPLE g_99ec20[16];
 extern char gm_CityStatsBuffer[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
+/* ADDRESS: GOLDDE 0x004e6470 */
 void __cdecl gm_ResetCityStats(void)
 {
 	memset(&gm_DisasterState, 0, 36);

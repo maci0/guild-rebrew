@@ -32,6 +32,7 @@ int __cdecl io_AppendText();
 int __cdecl gm_GetElapsedMinutes(void*, void*);
 
 /* ADDRESS: GOLDTL 0x0050ee80 */
+/* ADDRESS: GOLDDE 0x004f9bc0 */
 void __cdecl d2_UpdateDependencyDiagram(unsigned char* a, unsigned short* b)
 {
 	DEPENDENCY_DIAGRAM_NODE* p;

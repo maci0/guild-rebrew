@@ -15,6 +15,7 @@ extern char* d2_Controls;
 void __cdecl d2_SetElementEnabled(int, int);
 int __cdecl gv_CheckSlotActive(void* slot, int type);
 #include "Develop/Units/d2.v1/d2_gui.h"
+/* ADDRESS: GOLDDE 0x00572440 */
 int __cdecl d2_UpdateRentGraveOptions(char* building, int unlockedCount, int unused, int* controlIds, int* selectedIndex)
 {
 	int r;

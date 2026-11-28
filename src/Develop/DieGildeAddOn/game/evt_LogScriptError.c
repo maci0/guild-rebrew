@@ -14,6 +14,7 @@ extern void* evt_ScriptErrorLog;
 
 /* Reports a script error: logs the message with its source line. */
 /* ADDRESS: GOLDTL 0x00425bf0 */
+/* ADDRESS: GOLDDE 0x004206c0 */
 void __cdecl evt_LogScriptError(char* s, unsigned int pos, const char* msg)
 {
 	int line;

@@ -15,6 +15,7 @@ typedef struct
 
 #pragma pack(pop)
 
+/* ADDRESS: GOLDDE 0x004b3cb0 */
 void __cdecl cm_RequestSetLaw(Small3* body)
 {
 	char buf[0x9c];

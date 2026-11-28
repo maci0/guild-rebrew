@@ -15,6 +15,7 @@ typedef struct
 int __cdecl gm_GetLawEntry(unsigned char k, int* info);
 int __cdecl cm_RequestSetLaw(Msg0c* m);
 
+/* ADDRESS: GOLDDE 0x004e0920 */
 int __cdecl gm_SetLawValue(unsigned short* entity, unsigned char lawId, int value)
 {
 	Msg0c m;

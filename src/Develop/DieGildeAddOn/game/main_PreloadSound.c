@@ -10,6 +10,7 @@ extern int g_7e1d60[0x80];
 int __cdecl sb_LoadLocalizedSampleBank(char*, int);
 int __cdecl sb_LoadSampleBank(char*, int);
 
+/* ADDRESS: GOLDDE 0x005262c0 */
 int __cdecl main_PreloadSound(char* path)
 {
 	char line[0x100];

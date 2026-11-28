@@ -1,5 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x00411740 */
+/* ADDRESS: GOLDDE 0x004103a0 */
 void __cdecl io_ClearMouseAndKeyState(void)
 {
 	*(int*) 0x14ce8ec = 0;

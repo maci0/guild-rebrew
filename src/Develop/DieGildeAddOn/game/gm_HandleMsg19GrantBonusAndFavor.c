@@ -1,3 +1,4 @@
+extern char gm_SlotTableKindView[];
 #include <string.h>
 
 extern unsigned short* __cdecl gm_LookupEntityRecordById(int id);
@@ -14,6 +15,7 @@ extern double g_6629c8;
 extern unsigned char gm_ActiveTownIndex;
 
 /* ADDRESS: GOLDTL 0x004b8130 */
+/* ADDRESS: GOLDDE 0x004a61e0 */
 int __cdecl gm_HandleMsg19GrantBonusAndFavor(int* request)
 {
     char buf[0x400];
@@ -41,7 +43,7 @@ int __cdecl gm_HandleMsg19GrantBonusAndFavor(int* request)
     if (gm_HasActiveSpecialObject((unsigned short*) rec, 0x290) != 0) {
         return 0x400;
     }
-    for (i = 0x7f4ca2; i < 0x85a0a2; i += 0x21c) {
+    for (i = (int) &gm_SlotTableKindView; i < ((int) &gm_SlotTableKindView + 0x65400); i += 0x21c) {
         if (*(char*) i == 6 || *(char*) i == 7) {
             continue;
         }

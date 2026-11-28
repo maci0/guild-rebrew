@@ -1,3 +1,4 @@
+extern char g_67728c[];
 extern int gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_99ed10;
@@ -29,6 +30,7 @@ void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl he_PostEntityMessage(int slot, int entity, char* text, int flag, int size, int extra);
 
 /* ADDRESS: GOLDTL 0x004fbdd0 */
+/* ADDRESS: GOLDDE 0x004e7a20 */
 void __cdecl gm_PostPeriodicCityReport(void)
 {
 	float sum[3];
@@ -101,12 +103,12 @@ void __cdecl gm_PostPeriodicCityReport(void)
 		else {
 			index = table[index + 4];
 		}
-		io_FormatTextBuffer((char*) &table[4], 0x67728c, index, index + 1);
+		io_FormatTextBuffer((char*) &table[4], (int) &g_67728c, index, index + 1);
 		have = 1;
 	}
 	if (sum3 > g_dbl_6653e0) {
 		io_FormatTextBuffer(text, 0x1c0d, id0, id1, id2, id3, 0x1c0e);
-		for (slot = (char*) 0x7f4ca4; (int) slot < 0x85a0a4; slot += 0x21c) {
+		for (slot = (char*) &gm_EntityIdField; (int) slot < ((int) &gm_EntityIdField + 0x65400); slot += 0x21c) {
 			if (*(char*) (slot - 2) == 6) {
 				he_PostEntityMessage(*(int*) slot, -1, text, 1, 0x5f8, 0);
 				if (have != 0) {
@@ -118,7 +120,7 @@ void __cdecl gm_PostPeriodicCityReport(void)
 	}
 	if (sum3 < g_dbl_6653d8) {
 		io_FormatTextBuffer(text, 0x1c0f, id0, id1, id2, id3, 0x1c10);
-		for (slot = (char*) 0x7f4ca4; (int) slot < 0x85a0a4; slot += 0x21c) {
+		for (slot = (char*) &gm_EntityIdField; (int) slot < ((int) &gm_EntityIdField + 0x65400); slot += 0x21c) {
 			if (*(char*) (slot - 2) == 6) {
 				he_PostEntityMessage(*(int*) slot, -1, text, 1, 0x5f8, 0);
 				if (have != 0) {
@@ -131,7 +133,7 @@ void __cdecl gm_PostPeriodicCityReport(void)
 	if (have == 0) {
 		return;
 	}
-	for (slot = (char*) 0x7f4ca4; (int) slot < 0x85a0a4; slot += 0x21c) {
+	for (slot = (char*) &gm_EntityIdField; (int) slot < ((int) &gm_EntityIdField + 0x65400); slot += 0x21c) {
 		if (*(char*) (slot - 2) == 6) {
 			he_PostEntityMessage(*(int*) slot, -1, (char*) &table[4], 0, 0x5f8, 0);
 		}

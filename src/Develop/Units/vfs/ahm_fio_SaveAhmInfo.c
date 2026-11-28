@@ -7,6 +7,7 @@
 
 unsigned int __cdecl vfs_fwrite(void* p, int size, int n, int file);
 
+/* ADDRESS: GOLDDE 0x004db0e0 */
 int __cdecl ahm_fio_SaveAhmInfo(int file, char* obj)
 {
 	char buf[0x3c];

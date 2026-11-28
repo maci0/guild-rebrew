@@ -8,6 +8,7 @@ typedef DISPLAY_COUNTER Pair0c;
 
 
 /* ADDRESS: GOLDTL 0x00473690 */
+/* ADDRESS: GOLDDE 0x004663e0 */
 void __cdecl d2_AddDisplayCounter(int key, int amt)
 {
 	int i;

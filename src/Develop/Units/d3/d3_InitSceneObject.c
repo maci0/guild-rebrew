@@ -30,6 +30,7 @@ void __cdecl d3_SetObjectEulerRotation(char* o, int a, int b, int c);
 void __cdecl d3_SetNodePositionXYZ(char* o, int a, int b, int c);
 
 /* ADDRESS: GOLDTL 0x00439e70 */
+/* ADDRESS: GOLDDE 0x00432d80 */
 void __cdecl d3_InitSceneObject(char* o)
 {
 	int i;

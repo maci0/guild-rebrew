@@ -5,6 +5,7 @@ extern int __cdecl d2_CloseWindow(int a1);
 extern int __cdecl d2_ReleaseSurface(void* o);
 
 /* ADDRESS: GOLDTL 0x00471e30 */
+/* ADDRESS: GOLDDE 0x00465330 */
 void __cdecl d2_DestroyForm(int dialogIndex)
 {
 	D2_FORM_RECORD* base;

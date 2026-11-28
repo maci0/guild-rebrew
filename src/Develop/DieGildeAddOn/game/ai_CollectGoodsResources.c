@@ -33,6 +33,7 @@ char* __cdecl gm_FindRecordById(int);
 int __cdecl gm_CalcEntityInventoryStats(char* e, Stats* s);
 
 /* ADDRESS: GOLD 0x486180 */
+/* ADDRESS: GOLDDE 0x00474600 */
 void __cdecl ai_CollectGoodsResources(char* a, char* b)
 {
 	int i;

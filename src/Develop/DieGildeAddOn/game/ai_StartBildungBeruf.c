@@ -23,6 +23,7 @@ extern float g_662a94; extern float flt_0_0; extern float g_66413c;
 int __cdecl gm_QueryEntities(int a, int b, int c, int d);
 
 /* ADDRESS: GOLDTL 0x00495fe0 */
+/* ADDRESS: GOLDDE 0x00484a80 */
 int __cdecl ai_StartBildungBeruf(int unused, char* obj, int flag, int* out1, int* out2)
 {
 	union { AI_METHOD_OUT msg; float ratios[5]; } action;

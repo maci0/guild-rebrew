@@ -1,6 +1,7 @@
 void __cdecl cm_SendCopyEntityData(char* msg);
 
 /* ADDRESS: GOLDTL 0x004a0da0 */
+/* ADDRESS: GOLDDE 0x0048f7d0 */
 int __cdecl ai_RunBerufsausbildung(char* actor, char* x, char* y)
 {
 	char msg[0xf8];

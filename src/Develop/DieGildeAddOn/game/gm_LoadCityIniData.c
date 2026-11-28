@@ -1,3 +1,6 @@
+extern char g_6b23a4[];
+extern char gm_TownTable[];
+extern char g_6b25b0[];
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -11,6 +14,7 @@ int __cdecl gm_FindGebaeudePrototypeByName(const char*);
 int __cdecl _isctype(int, int);
 
 /* ADDRESS: GOLDTL 0x00517250 */
+/* ADDRESS: GOLDDE 0x00501cc0 */
 int __cdecl gm_LoadCityIniData(char* name, int idx)
 {
 	char staedte[8][0x40];
@@ -25,9 +29,9 @@ int __cdecl gm_LoadCityIniData(char* name, int idx)
 	char* q;
 
 	if (idx == 0) {
-		memset((void*) 0x868060, 0, 0xbd0);
+		memset((void*) &gm_TownTable, 0, 0xbd0);
 	}
-	p = (unsigned char*) (0x868060 + idx * 0x2f4);
+	p = (unsigned char*) (((int) &gm_TownTable) + idx * 0x2f4);
 	sprintf(datei, "%s%s/%s.ini", "\\project\\gfx\\", "gamedata/cities", name);
 	GetPrivateProfileStringA("A - ALLGEMEIN", "Stadtname", "Unknown", buf, 0x100, datei);
 	strcpy((char*) p, buf);
@@ -139,8 +143,8 @@ int __cdecl gm_LoadCityIniData(char* name, int idx)
 			if (k >= 0x10) {
 				break;
 			}
-			while (*(int*) 0x6b25b0 > 1 ? _isctype(*tok, 8)
-			    : (*(unsigned char*) (*(unsigned char**) 0x6b23a4 + *tok * 2) & 8)) {
+			while (*(int*) &g_6b25b0 > 1 ? _isctype(*tok, 8)
+			    : (*(unsigned char*) (*(unsigned char**) (int) &g_6b23a4 + *tok * 2) & 8)) {
 				tok++;
 			}
 			((unsigned short*) (p + 0x2ac))[k] = (unsigned short) gm_FindObjektPrototypeByName((char*) (tok + 3));
@@ -158,8 +162,8 @@ int __cdecl gm_LoadCityIniData(char* name, int idx)
 			if (k >= 0x10) {
 				break;
 			}
-			while (*(int*) 0x6b25b0 > 1 ? _isctype(*tok, 8)
-			    : (*(unsigned char*) (*(unsigned char**) 0x6b23a4 + *tok * 2) & 8)) {
+			while (*(int*) &g_6b25b0 > 1 ? _isctype(*tok, 8)
+			    : (*(unsigned char*) (*(unsigned char**) (int) &g_6b23a4 + *tok * 2) & 8)) {
 				tok++;
 			}
 			((unsigned short*) (p + 0x2cc))[k] = (unsigned short) gm_FindObjektPrototypeByName((char*) (tok + 3));

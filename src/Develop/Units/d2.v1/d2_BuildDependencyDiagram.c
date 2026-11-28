@@ -28,6 +28,7 @@ extern unsigned short g_7f4c20[];
 int __cdecl d2_CalculateDependencyDepth(int i);
 
 /* ADDRESS: GOLDTL 0x0050e830 */
+/* ADDRESS: GOLDDE 0x004f9570 */
 int __cdecl d2_BuildDependencyDiagram(unsigned char* a0, unsigned short* a1, int width, int height)
 {
 	char* rec;

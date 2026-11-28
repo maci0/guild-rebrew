@@ -17,6 +17,7 @@ typedef struct
 // SIZE 0x2d
 #pragma pack(pop)
 
+/* ADDRESS: GOLDDE 0x004e2560 */
 void __cdecl d2_SortCrimeRecordsByKind(int n, Rec2d* arr)
 {
 	Rec2d tmp;

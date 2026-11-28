@@ -3,6 +3,7 @@
 typedef void (__stdcall* D3_FONT_LOST_FN)(void*);
 typedef int (__stdcall* D3_COM_RELEASE_FN)(void*);
 
+/* ADDRESS: GOLDDE 0x00419460 */
 void __cdecl d3_InvalidateDeviceResources(void)
 {
 	void* p;

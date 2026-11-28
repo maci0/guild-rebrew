@@ -1,5 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x0054b420 */
+/* ADDRESS: GOLDDE 0x005318e0 */
 void __cdecl he_StartSkillDuelEvent(char* entry)
 {
 	entry += 0x52;

@@ -7,6 +7,7 @@ extern char* evt_CurrentScript;
 #define BASE (*(char**) (evt_CurrentScript + 0x11c))
 #define LEN (*(int*) (evt_CurrentScript + 0x120))
 
+/* ADDRESS: GOLDDE 0x00420e80 */
 int __cdecl evt_SkipBlock(char dir)
 {
 	int depth;

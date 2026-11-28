@@ -4,6 +4,7 @@ extern unsigned char* lpGebaeudePROT;
 
 #include <string.h>
 
+/* ADDRESS: GOLDDE 0x004ff8f0 */
 char __cdecl d3_ClassifyBuildingSceneObject(char* o)
 {
 	unsigned char* t;

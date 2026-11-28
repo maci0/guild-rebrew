@@ -14,6 +14,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl he_AbortActionIfFlag2(char*);
 void __cdecl cm_RequestUpdateStraftatState(int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x00541ee0 */
 void __cdecl he_ClearEntityActions(char* h)
 {
 	char* e;

@@ -9,6 +9,7 @@ void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl d2_ConfirmUeberfall(void);
 void __cdecl sv_ClearObjectSelection(void);
 
+/* ADDRESS: GOLDDE 0x005822c0 */
 void __cdecl d2_OpenUeberfallDialog(char* a)
 {
 	if (d2_CheckOwnerBlocked(a) == 0) {

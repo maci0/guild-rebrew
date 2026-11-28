@@ -10,6 +10,7 @@ char* __cdecl gm_LookupHistoricalEntry(int, int*);
 char* __cdecl gm_RandomMod(int);
 void __cdecl cm_RequestAllocSpieler(int, int, int, char*, int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x0049b500 */
 void __cdecl amt_SpawnHistoricalOfficeHolders(void)
 {
 	int kind;

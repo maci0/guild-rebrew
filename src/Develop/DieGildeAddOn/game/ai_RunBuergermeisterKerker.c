@@ -19,6 +19,7 @@ int __cdecl gm_GetTypeProductValue(int k);
 void __cdecl cm_RequestMoveCredits(int a, int b, char c, int n);
 void __cdecl cm_SendCopyEntityData(char* msg);
 
+/* ADDRESS: GOLDDE 0x0048caf0 */
 int __cdecl ai_RunBuergermeisterKerker(char* actor, char* a2, char* target)
 {
 	char msg[0xf8];

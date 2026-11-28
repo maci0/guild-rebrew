@@ -35,6 +35,7 @@ void __cdecl gm_TryRecordCrime(int, int, int, int, int);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 
+/* ADDRESS: GOLDDE 0x004cdd50 */
 int __cdecl cut_NotifyDuell(char* event)
 {
 	Cmd* cmd;

@@ -1,3 +1,4 @@
+extern char g_67d444[];
 #include "Develop/Units/d2.v1/client_dialog_helpers.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern unsigned char d2_PlotRadius;
@@ -37,6 +38,7 @@ int __cdecl d2_DrawHistoryGraph(Arg, int, int);
 void __cdecl io_FormatTextBuffer(char *, char *, ...);
 
 /* ADDRESS: GOLDTL 0x005d3d90 */
+/* ADDRESS: GOLDDE 0x005b55f0 */
 void __cdecl d2_DrawCityHistoryCharts(unsigned short flags, Gfx g, int win)
 {
 	unsigned char saved;
@@ -81,7 +83,7 @@ void __cdecl d2_DrawCityHistoryCharts(unsigned short flags, Gfx g, int win)
 		d2_DrawLine(0x28, n, 0x2d, n, 0x10, 0x10, 0x10);
 	}
 	for (i = 0, n = 0x64; n > 0; i++, n -= 0x19) {
-		io_FormatTextBuffer(loc.buf, (char *) 0x6acbec, n);
+		io_FormatTextBuffer(loc.buf, "%i%", n);
 		id = d2_EqualizeWindowButtonWidths(3, (int) ((float) i * g_6628bc * y + 5.0f), loc.buf, d2_CurrentWindowId);
 		*(int *) (((char*)&((D2_CONTROL_TL*)d2_Controls)[id].width)) = 0x23;
 		*(int *) (((char*)&((D2_CONTROL_TL*)d2_Controls)[id].value_070)) = 1;
@@ -92,12 +94,12 @@ void __cdecl d2_DrawCityHistoryCharts(unsigned short flags, Gfx g, int win)
 		x2 = w - 0x37;
 		d2_DrawLine(x2, 8, x1, 8, 0x10, 0x10, 0x10);
 		d2_DrawLine(x2, (h - 0x1e) / 2 + 8, x1, (h - 0x1e) / 2 + 8, 0x10, 0x10, 0x10);
-		io_FormatTextBuffer(loc.buf, (char *) 0x67d444, m);
+		io_FormatTextBuffer(loc.buf, (char *) &g_67d444, m);
 		d = d2_MeasureTextWidth(loc.buf, 0x55) + 2;
 		id = d2_EqualizeWindowButtonWidths(x1, 5, loc.buf, d2_CurrentWindowId);
 		*(int *) (((char*)&((D2_CONTROL_TL*)d2_Controls)[id].width)) = d;
 		*(int *) (((char*)&((D2_CONTROL_TL*)d2_Controls)[id].value_070)) = 1;
-		io_FormatTextBuffer(loc.buf, (char *) 0x67d444, m / 2);
+		io_FormatTextBuffer(loc.buf, (char *) &g_67d444, m / 2);
 		id = d2_EqualizeWindowButtonWidths(x1, (h - 0x1e) / 2 + 5, loc.buf, d2_CurrentWindowId);
 		*(int *) (((char*)&((D2_CONTROL_TL*)d2_Controls)[id].width)) = d;
 		*(int *) (((char*)&((D2_CONTROL_TL*)d2_Controls)[id].value_070)) = 1;
@@ -108,7 +110,7 @@ void __cdecl d2_DrawCityHistoryCharts(unsigned short flags, Gfx g, int win)
 	*(short *) ((char *) loc.src + 0xc) = gm_GameTimeTailWord;
 	gm_PackGameTime(loc.src, loc.out);
 	if (loc.out[1] == 1) {
-		io_FormatTextBuffer(loc.buf, (char *) 0x67d444, *(short *) (loc.out + 2));
+		io_FormatTextBuffer(loc.buf, (char *) &g_67d444, *(short *) (loc.out + 2));
 		d = d2_MeasureTextWidth(loc.buf, 0x55);
 		id = d2_EqualizeWindowButtonWidths(step * 16 + 0x2d, h - 0xd, loc.buf, d2_CurrentWindowId);
 		*(int *) (((char*)&((D2_CONTROL_TL*)d2_Controls)[id].width)) = d;
@@ -119,7 +121,7 @@ void __cdecl d2_DrawCityHistoryCharts(unsigned short flags, Gfx g, int win)
 		n = step * i + 0x2d;
 		d2_DrawLine(n, h - 0x13, n, h - 0x10, 0x10, 0x10, 0x10);
 		if (loc.out[1] == 1) {
-			io_FormatTextBuffer(loc.buf, (char *) 0x67d444, *(short *) (loc.out + 2));
+			io_FormatTextBuffer(loc.buf, (char *) &g_67d444, *(short *) (loc.out + 2));
 			d = d2_MeasureTextWidth(loc.buf, 0x55);
 			id = d2_EqualizeWindowButtonWidths(n, h - 0xd, loc.buf, d2_CurrentWindowId);
 			*(int *) (((char*)&((D2_CONTROL_TL*)d2_Controls)[id].width)) = d;
@@ -129,7 +131,7 @@ void __cdecl d2_DrawCityHistoryCharts(unsigned short flags, Gfx g, int win)
 		gm_PackGameTime(loc.src, loc.out);
 	}
 	if (loc.out[1] == 1) {
-		io_FormatTextBuffer(loc.buf, (char *) 0x67d444, *(short *) (loc.out + 2));
+		io_FormatTextBuffer(loc.buf, (char *) &g_67d444, *(short *) (loc.out + 2));
 		d = d2_MeasureTextWidth(loc.buf, 0x55);
 		id = d2_EqualizeWindowButtonWidths(0x2d, h - 0xd, loc.buf, d2_CurrentWindowId);
 		*(int *) (((char*)&((D2_CONTROL_TL*)d2_Controls)[id].width)) = d;

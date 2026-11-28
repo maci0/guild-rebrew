@@ -26,6 +26,7 @@ typedef struct {
  * 12/13/14 latch the three buttons. The cursor is clamped to the screen rect
  * and the whole state is published afterwards. */
 /* ADDRESS: GOLDTL 0x00411fe0 */
+/* ADDRESS: GOLDDE 0x00410c40 */
 void __cdecl io_PollMouseInput(void)
 {
 	DWORD count;

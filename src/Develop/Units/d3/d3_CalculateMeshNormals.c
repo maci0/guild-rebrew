@@ -25,6 +25,7 @@ void __cdecl d3_CalculateTriangleNormal(Vert*, Vert*, Vert*, Vec3*);
 void __cdecl d3_NormalizeVector(Vec3*);
 
 /* ADDRESS: GOLDTL 0x0044f7e0 */
+/* ADDRESS: GOLDDE 0x00445400 */
 void __cdecl d3_CalculateMeshNormals(char* m)
 {
 	float n[4];

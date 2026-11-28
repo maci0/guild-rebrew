@@ -50,6 +50,7 @@ typedef struct {
 } FxRow_4a6550;
 
 /* ADDRESS: GOLDTL 0x004a6550 */
+/* ADDRESS: GOLDDE 0x00494f50 */
 int __cdecl ai_FireCannonVolley(char* actor, char* cannon)
 {
 	char buf1[104];

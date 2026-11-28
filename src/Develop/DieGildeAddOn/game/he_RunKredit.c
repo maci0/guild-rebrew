@@ -1,3 +1,6 @@
+extern char g_6a6620[];
+extern char g_699a88[];
+extern char str_empty[];
 /* Run the credit window state machine: validate the open request, refresh the
  * slot message and record the activity time stamp. */
 
@@ -15,6 +18,7 @@ void __cdecl he_FreeAction(int);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 
 /* ADDRESS: GOLDTL 0x00564b90 */
+/* ADDRESS: GOLDDE 0x0054ad40 */
 void __cdecl he_RunKredit(int loanEvent)
 {
 	char info[0x80];
@@ -42,7 +46,7 @@ void __cdecl he_RunKredit(int loanEvent)
 			obj = gm_StartFilteredEntitySearch(1, 1, *(int*) (loanEvent + 0xac));
 			if (obj) {
 			n = gm_LookupEntityRecordById(*(int*) (loanEvent + 0xb0));
-			slot = (char*) 0x7f4ca0 +
+			slot = (char*) &gm_EntitySlotTable +
 			       (unsigned short) *(unsigned short*) (obj + 0x27) * 0x21c;
 			if (!n) {
 				io_FormatTextBuffer(buf, 0x18e7, *(int*) (loanEvent + 0xb4));
@@ -68,7 +72,7 @@ void __cdecl he_RunKredit(int loanEvent)
 				*(int*) ((char*) obj + 0x55) = (int) (*(int*) ((char*) obj + 0x55) + f);
 			}
 			} else {
-				fcn_64d41a(info, (char*) 0x6a6620, *(int*) (loanEvent + 0xac));
+				fcn_64d41a(info, (char*) &g_6a6620, *(int*) (loanEvent + 0xac));
 				he_FreeAction(loanEvent);
 				return;
 			}
@@ -80,7 +84,7 @@ void __cdecl he_RunKredit(int loanEvent)
 		}
 		obj = gm_StartFilteredEntitySearch(1, 1, *(int*) (loanEvent + 0xac));
 		if (obj) {
-			slot = (char*) 0x7f4ca0 +
+			slot = (char*) &gm_EntitySlotTable +
 			       (unsigned short) *(unsigned short*) (obj + 0x27) * 0x21c;
 			n = gm_LookupEntityRecordById(*(int*) (loanEvent + 0xb0));
 			if (*(unsigned char*) (loanEvent + 0x78) & 2) {
@@ -92,9 +96,9 @@ void __cdecl he_RunKredit(int loanEvent)
 				gm_CollectPaymentOrLiquidate(*(int*) ((char*) obj + 1), n,
 				           *(int*) (loanEvent + 0xb4), buf);
 				if (time < *(int*) (loanEvent + 0xb4))
-					he_PostEntityMessage(*(int*) (loanEvent + 0xb0), -1, buf, 0, 0x5ff, (char*) 0x699a88);
+					he_PostEntityMessage(*(int*) (loanEvent + 0xb0), -1, buf, 0, 0x5ff, (char*) &g_699a88);
 				else
-					he_PostEntityMessage(*(int*) (loanEvent + 0xb0), -1, buf, 0, 0x5ff, (char*) 0x6b5c60);
+					he_PostEntityMessage(*(int*) (loanEvent + 0xb0), -1, buf, 0, 0x5ff, (char*) &str_empty);
 				if (*(unsigned char*) (slot + 2) == 6 ||
 				    *(unsigned char*) (slot + 2) == 7) {
 					io_FormatTextBuffer(msg, 0x18d8, *(unsigned short*) n, obj,
@@ -107,7 +111,7 @@ void __cdecl he_RunKredit(int loanEvent)
 		obj = gm_StartFilteredEntitySearch(1, 1, *(int*) (loanEvent + 0xac));
 		if (obj) {
 			n = gm_LookupEntityRecordById(*(int*) (loanEvent + 0xb0));
-			slot = (char*) 0x7f4ca0 +
+			slot = (char*) &gm_EntitySlotTable +
 			       (unsigned short) *(unsigned short*) (obj + 0x27) * 0x21c;
 			if (!n) {
 				io_FormatTextBuffer(msg, 0x18e7, *(int*) (loanEvent + 0xb4));

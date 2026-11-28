@@ -6,6 +6,7 @@ extern unsigned int g_6b6f38;
 extern unsigned int* g_6b6d18;
 extern unsigned char d3_OctreePalette[3][0x100];
 
+/* ADDRESS: GOLDDE 0x0041a6b0 */
 int __cdecl d3_FindNearestPaletteColor(int r, int g, int b)
 {
 	unsigned int i;

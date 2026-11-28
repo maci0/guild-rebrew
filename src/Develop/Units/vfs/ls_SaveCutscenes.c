@@ -25,6 +25,7 @@ typedef struct {
 
 unsigned int __cdecl vfs_fwrite(void* p, int size, int n, int f);
 
+/* ADDRESS: GOLDDE 0x0050a590 */
 int __cdecl ls_SaveCutscenes(int f)
 {
 	int count;

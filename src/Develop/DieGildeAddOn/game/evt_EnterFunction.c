@@ -47,6 +47,7 @@ typedef struct EvtSymbol {
  * the interpreter's depth to the function's stack size. */
 
 /* ADDRESS: GOLDTL 0x00427c40 */
+/* ADDRESS: GOLDDE 0x004226a0 */
 void __cdecl evt_EnterFunction(EvtContext* ip, EvtFunction* fn)
 {
 	EvtSymbol* sym;

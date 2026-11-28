@@ -84,6 +84,7 @@ void __cdecl d3_UpdateSceneDetailLevel(int, int);
 void __cdecl d3_UpdateDaylightPhase(char*);
 #include "Develop/Units/d3/d3_d3d.h"
 
+/* ADDRESS: GOLDDE 0x005019d0 */
 void __cdecl d3_ResetWorldSceneState(void)
 {
 	int mode;

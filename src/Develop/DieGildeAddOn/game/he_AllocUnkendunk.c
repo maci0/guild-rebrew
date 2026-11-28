@@ -9,6 +9,7 @@ extern pos14_7f4c00 gm_GameTime;
 char* __cdecl gm_LookupSpecialObject(int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x0053e4e0 */
 void __cdecl he_AllocUnkendunk(char* o)
 {
 	char* t;

@@ -11,6 +11,7 @@
 
 /* ADDRESS: GOLD 0x004f36e0 */
 /* ADDRESS: GOLDTL 0x004f5810 */
+/* ADDRESS: GOLDDE 0x004e18b0 */
 int __cdecl FindStraftatIndexById(int a)
 {
 	int i;

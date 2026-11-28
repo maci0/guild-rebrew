@@ -4,6 +4,7 @@ int __cdecl gm_LookupEntityRecordById(int value);
 int __cdecl gm_IncreaseEntitySkill(int value, int mode);
 
 /* ADDRESS: GOLDTL 0x005dd0c0 */
+/* ADDRESS: GOLDDE 0x005be660 */
 int __cdecl gm_BoostEntitySkill3(void *actor, void *request)
 {
     char buf[0x100];

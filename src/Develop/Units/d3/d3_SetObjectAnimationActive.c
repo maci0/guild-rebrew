@@ -37,6 +37,7 @@ void __cdecl d3_SetObjectAnimationActive(char* obj, char* name, unsigned char bi
 extern volatile int gm_GameTicks;
 
 /* ADDRESS: GOLDTL 0x00435630 */
+/* ADDRESS: GOLDDE 0x0042ebf0 */
 void __cdecl d3_SetObjectAnimationActive(char* obj, char* name, unsigned char bit)
 {
 	Slot* slots;

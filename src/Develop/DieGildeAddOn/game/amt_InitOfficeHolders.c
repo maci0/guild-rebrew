@@ -30,6 +30,7 @@ int __cdecl gm_ConvertUnitsToAmount(int, int);
 void __cdecl amt_SpawnHistoricalOfficeHolders(void);
 extern unsigned char gm_ActiveTownIndex;
 /* ADDRESS: GOLDTL 0x00511c60 */
+/* ADDRESS: GOLDDE 0x004fc800 */
 int __cdecl amt_InitOfficeHolders(void)
 {
 	int v36;

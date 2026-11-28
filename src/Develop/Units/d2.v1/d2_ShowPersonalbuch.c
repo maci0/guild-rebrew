@@ -174,6 +174,7 @@ int __cdecl d3_EndCameraAndUiMode(void);
 
 
 /* ADDRESS: GOLDTL 0x005b6300 */
+/* ADDRESS: GOLDDE 0x00598b00 */
 int __cdecl d2_ShowPersonalbuch(unsigned char* a1, int a2, int a3)
 {
 	FRAME f;

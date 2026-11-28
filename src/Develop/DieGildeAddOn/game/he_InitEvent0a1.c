@@ -8,6 +8,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl he_FreeAction(char*);
 void __cdecl gm_GenerateShuffledIndices(int, int*);
 
+/* ADDRESS: GOLDDE 0x00562b80 */
 void __cdecl he_InitEvent0a1(char* u)
 {
 	short kinds[4];

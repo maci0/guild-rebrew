@@ -58,6 +58,7 @@ void __cdecl d2_SetGroupVisibility(int k, int flag);
 void __cdecl d2_ShowModalMessageBox(int, int);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x00588da0 */
 void __cdecl d2_ChooseNewLoan(char* p)
 {
 	struct line list[3];

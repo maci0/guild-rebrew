@@ -3,6 +3,7 @@
 
 void* __cdecl sb_CheckVoicePlaying(void*);
 
+/* ADDRESS: GOLDDE 0x00417110 */
 void* __cdecl d3snd_GetObjectVoiceStatus(char* sound_obj)
 {
 	void* voice;

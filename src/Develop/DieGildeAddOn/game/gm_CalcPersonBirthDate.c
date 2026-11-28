@@ -9,6 +9,7 @@ typedef struct {
 #pragma pack(pop)
 
 /* ADDRESS: GOLDTL 0x00509120 */
+/* ADDRESS: GOLDDE 0x004f42a0 */
 int __cdecl gm_CalcPersonBirthDate(char* e, char* out)
 {
 	int time[4];

@@ -12,6 +12,7 @@ void __cdecl io_FormatTextBuffer(void*, int, int);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 void __cdecl he_PostEntityMessage(int, int, void*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x004a5430 */
 int __cdecl gm_HandleEntityMsg0c(void* request)
 {
 	char buf[0x100];

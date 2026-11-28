@@ -74,6 +74,7 @@ float __cdecl gm_RandomFloat01(void);
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
 /* ADDRESS: GOLDTL 0x004813b0 */
+/* ADDRESS: GOLDDE 0x00470360 */
 void __cdecl ai_CalcMeisterDiebe(unsigned char* rec)
 {
 	GOLDTL_Msg481 msg;

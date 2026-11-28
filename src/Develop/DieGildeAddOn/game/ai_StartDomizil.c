@@ -10,6 +10,7 @@ int __cdecl ai_PrepareBuildSite(int, char*, int, int*, int*, int);
 int __cdecl ai_StartKreditNehmen(int, char*, int, int*, int*);
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* ADDRESS: GOLDTL 0x0048d6c0 */
+/* ADDRESS: GOLDDE 0x0047c590 */
 int __cdecl ai_StartDomizil(int a0, char* a1, int a2, int* a3, int* a4)
 {
 	int v12[6];

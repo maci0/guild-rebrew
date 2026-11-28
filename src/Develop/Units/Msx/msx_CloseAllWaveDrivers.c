@@ -4,6 +4,7 @@
 
 int __cdecl msx_ReleaseWaveDriver(int);
 
+/* ADDRESS: GOLDDE 0x00424ce0 */
 int __cdecl msx_CloseAllWaveDrivers(void)
 {
 	int r = 0;

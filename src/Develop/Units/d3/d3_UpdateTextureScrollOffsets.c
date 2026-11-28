@@ -7,6 +7,7 @@ extern float g_1040504[15];
 
 
 /* ADDRESS: GOLDTL 0x0045ccf0 */
+/* ADDRESS: GOLDDE 0x00451ca0 */
 void __cdecl d3_UpdateTextureScrollOffsets(unsigned int now)
 {
 	float dt;

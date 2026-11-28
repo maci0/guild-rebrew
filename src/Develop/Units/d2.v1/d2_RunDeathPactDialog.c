@@ -34,6 +34,7 @@ void __cdecl fcn_005305a0(void);
 int __cdecl d3_EndCameraAndUiMode(void);
 void __cdecl d2_ShowModalMessageBox(int a1, int a2);
 /* ADDRESS: GOLDTL 0x0058fbd0 */
+/* ADDRESS: GOLDDE 0x00575890 */
 int __cdecl d2_RunDeathPactDialog(char* gebaeude)
 {
 	int id1;

@@ -16,6 +16,7 @@ void __cdecl cm_RequestChangeAttribute(void);
 int __cdecl d2_DestroyForm(int dlg);
 
 /* ADDRESS: GOLDTL 0x005a6570 */
+/* ADDRESS: GOLDDE 0x0058b280 */
 void __cdecl d2_RunWechselGebuehrenDialog(char* o)
 {
     char* dlg;

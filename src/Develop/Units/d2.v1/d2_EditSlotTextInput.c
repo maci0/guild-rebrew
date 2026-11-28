@@ -20,6 +20,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 char* __cdecl d2_GetControlValue(int);
 void __cdecl d2_DestroyElement(int);
 
+/* ADDRESS: GOLDDE 0x005c20a0 */
 int __cdecl d2_EditSlotTextInput(int a, int b, char* text)
 {
 	int result;

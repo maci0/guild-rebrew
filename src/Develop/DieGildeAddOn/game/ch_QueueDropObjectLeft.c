@@ -7,6 +7,7 @@
 CH_ACTION* __cdecl ch_NewAction(char* e);
 void __cdecl ch_DroppingObject(CH_ACTION* t);
 
+/* ADDRESS: GOLDDE 0x00405eb0 */
 int __cdecl ch_QueueDropObjectLeft(char* e, const char* name, const char* name2, int param)
 {
 	CH_ACTION* t;

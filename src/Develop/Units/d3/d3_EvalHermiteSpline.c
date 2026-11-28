@@ -2,6 +2,7 @@
 // evaluating the third product first.
 
 /* ADDRESS: GOLDTL 0x004517e0 */
+/* ADDRESS: GOLDDE 0x004473c0 */
 float __cdecl d3_EvalHermiteSpline(float p0, float p1, float m0, float m1, float t)
 {
 	float t2;

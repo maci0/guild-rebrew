@@ -32,6 +32,7 @@ void __cdecl d2_RunGraveyardDialog(int);
 void __cdecl d2_OpenFriedhofFogDialog(int);
 void __cdecl d3_UpdateBuildingInteriorState(void);
 
+/* ADDRESS: GOLDDE 0x00574d60 */
 void __cdecl d2_RunFriedhofActions(int arg)
 {
 	int graveCareAction;

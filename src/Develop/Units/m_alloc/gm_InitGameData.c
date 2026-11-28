@@ -17,6 +17,7 @@ void __cdecl init_BuildObjectProducerTables(void);
 void __cdecl gm_KillAllSpieler(void);
 void __cdecl srv_SeedRandomWithTime(void);
 
+/* ADDRESS: GOLDDE 0x004ec750 */
 int __cdecl gm_InitGameData(char* dir)
 {
 	unsigned int* src;

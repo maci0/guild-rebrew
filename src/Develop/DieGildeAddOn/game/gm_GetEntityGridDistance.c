@@ -5,6 +5,7 @@ extern int d3_ActiveScene;
 char __cdecl d3_GridPointToWorld(int g, int x, int z, float *out);
 
 /* ADDRESS: GOLDTL 0x004cf000 */
+/* ADDRESS: GOLDDE 0x004bc560 */
 float __cdecl gm_GetEntityGridDistance(void *a0, int gridX, int gridZ)
 {
     float p[8];

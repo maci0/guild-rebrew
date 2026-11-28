@@ -1,6 +1,7 @@
 #include <math.h>
 
 /* ADDRESS: GOLDTL 0x004be000 */
+/* ADDRESS: GOLDDE 0x004abb80 */
 void __cdecl rd_FillSupermapQuad(char** context, float* points, unsigned char byte_value, int record_value)
 {
     float x0;

@@ -5,6 +5,7 @@ extern int g_7f3e20[];
 
 void __cdecl sb_StopVoice(int, int);
 
+/* ADDRESS: GOLDDE 0x00500a70 */
 void __cdecl d3snd_StopAllAmbientVoices(void)
 {
 	int i;

@@ -4,6 +4,7 @@ extern void __cdecl gm_ModifyHealth(int, int);
 extern void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004abf80 */
+/* ADDRESS: GOLDDE 0x0049a2c0 */
 int __cdecl ai_RunEhrerbietung(char* entity, char* action)
 {
 	unsigned short* p;

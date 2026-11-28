@@ -38,6 +38,7 @@ void __cdecl d2_AcceptLoanOffer(char*, char*);
 
 /* Inferred name and source home; the native registry selects this callback. */
 /* ADDRESS: GOLDTL 0x005a4490 */
+/* ADDRESS: GOLDDE 0x005891a0 */
 void __cdecl d2_ShowLoanDialog(char* p)
 {
 	struct loan_offer rows[9];

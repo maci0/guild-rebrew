@@ -48,6 +48,7 @@ int __cdecl main_RunFrameLoop(void* fn, int id);
 void __cdecl d2_DestroyForm(char* dlg);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005d42e0 */
+/* ADDRESS: GOLDDE 0x005b5b40 */
 void __cdecl d2_RunStadtStatistikDialog(void)
 {
 	unsigned char colors[15];

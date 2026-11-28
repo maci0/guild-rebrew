@@ -23,6 +23,7 @@ ENTITY_CANDIDATE* __cdecl gm_StepEntityCandidateRing(void);
 
 /* ADDRESS: GOLD 0x004a58d0 */
 /* ADDRESS: GOLDTL 0x004a5340 */
+/* ADDRESS: GOLDDE 0x00493d40 */
 int __cdecl ai_SelectRankedCandidates(unsigned short* e, unsigned int n, unsigned int* ids,
 	float lo, float hi, unsigned short* out)
 {

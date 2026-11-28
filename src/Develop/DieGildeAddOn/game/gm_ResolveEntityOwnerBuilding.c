@@ -6,6 +6,7 @@ extern char gm_EntitySlotTable[];
 
 
 
+/* ADDRESS: GOLDDE 0x004f81c0 */
 short* __cdecl gm_ResolveEntityOwnerBuilding(short* entity)
 {
 	void* dynamic_ent;

@@ -3,6 +3,7 @@
 
 extern unsigned char* lpGebaeudePROT;
 
+/* ADDRESS: GOLDDE 0x004f9260 */
 int __cdecl gm_GetBuildingCategorySlot(int buildingType, int* out)
 {
 	int r;

@@ -18,6 +18,7 @@ int __cdecl hst_ParseDate(int pos, int k, Val* v, char* buf);
 void __cdecl cm_SendCopyEntityData(char* msg);
 
 /* ADDRESS: GOLDTL 0x004b1b60 */
+/* ADDRESS: GOLDDE 0x0049fe80 */
 int __cdecl hst_TriggerDueEvent(void)
 {
 	char msg[0xf8];

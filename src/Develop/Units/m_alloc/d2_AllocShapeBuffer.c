@@ -5,6 +5,7 @@ extern char d2_ShapeUCoordsTag[];
 
 void* __cdecl m_alloc(int, char*);
 
+/* ADDRESS: GOLDDE 0x00469bc0 */
 void* __cdecl d2_AllocShapeBuffer(int wordCount, int entryCount, int unused)
 {
 	void* p;

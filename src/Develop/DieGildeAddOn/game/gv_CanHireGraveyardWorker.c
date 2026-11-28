@@ -13,6 +13,7 @@ extern unsigned char* lpGebaeudePROT;
 extern char gm_EntitySlotTable[];
 
 /* ADDRESS: GOLDTL 0x004f3e60 */
+/* ADDRESS: GOLDDE 0x004dff20 */
 int __cdecl gv_CanHireGraveyardWorker(unsigned char* building, int* count)
 {
 	GV_BUILDING_CAP_VIEW* proto;

@@ -4,6 +4,7 @@
 int __cdecl d3sm_GetCellMaterial(int x, int y, int* img);
 
 /* ADDRESS: GOLDTL 0x0045a3a0 */
+/* ADDRESS: GOLDDE 0x0044f460 */
 void __cdecl d3sm_BuildFromTerrain(int* text, int* fmt)
 {
 	unsigned int width;

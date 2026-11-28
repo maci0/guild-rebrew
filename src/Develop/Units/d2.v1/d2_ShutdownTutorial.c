@@ -11,6 +11,7 @@ void __cdecl sb_ReleaseSampleBank(int);
 void __cdecl d2_FreeTutorialNodes(int);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x00566990 */
 void __cdecl d2_ShutdownTutorial(void)
 {
 	int i;

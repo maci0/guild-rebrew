@@ -141,6 +141,68 @@ LIBC = "LIBC.lib"
 WINMM = "WINMM.lib"
 WS2_32 = "WS2_32.lib"
 ADVAPI32 = "ADVAPI32.lib"
+
+
+# German v2.06 D3D8 client: GOG DE GildeGold_TL.exe = Steam DE Europa1400Gold.exe after SteamStub
+# (.text SHA-256 52877ae2...). Same compiler generation as the English TL; shares src/ with it.
+# Inventory and EN->DE address map from Lennard's work on the German build (Ghidra export, used with permission).
+[targets."GildeGold_TL.exe"]
+check_known_bindings = true
+# German-only source differences use #if defined(REBREW_GOLDDE) (see docs/de/decisions.md).
+defines = ["REBREW_GOLDDE"]
+compiler = { profile = "msvc-6.0-sp5-pp" }
+# Statically linked D3DX8 band of the German image.
+external_ranges = ["0x5cb000-0x604fff"]
+binary = "original/de/GildeGold_TL.exe"
+format = "pe"
+arch = "x86_32"
+reversed_dir = "src"
+inventory_file = "db/inventory-GildeGold_TL.exe.json"
+bin_dir = "bin/GildeGold_TL.exe"
+module = "GOLDDE"
+[targets."GildeGold_TL.exe".external_libs]
+KERNEL32 = "KERNEL32.lib"
+USER32 = "USER32.lib"
+DDRAW = "DDRAW.lib"
+DINPUT = "DINPUT.lib"
+OLE32 = "OLE32.lib"
+CTLFWR32 = "CTLFWR32.lib"
+MSS32 = "references/mss-6.1c/mss32.lib"
+MSVCRT = ""
+D3DX8 = "references/dxsdk8/lib/d3dx8.lib"
+LIBCMT = "LIBCMT.lib"
+WINMM = "WINMM.lib"
+WS2_32 = "WS2_32.lib"
+ADVAPI32 = "ADVAPI32.lib"
+GDI32 = ""
+
+# German v2.06 server.dll (Steam DE = GOG DE, SHA-256 b341730b...). Shares src/ with server.dll
+# through stacked SERVERDE anchors. Inventory and EN->DE map from Lennard's work on the German build.
+[targets."server_de.dll"]
+check_known_bindings = true
+# REBREW_SERVERDE marks German-server code that differs from the English server
+# (docs/de/decisions.md D14), as REBREW_GOLDDE does for the German client.
+defines = ["REBREW_SERVER", "REBREW_LEGACY_SERVER_LAYOUT", "REBREW_SERVERDE"]
+# `rebrew toolchain detect original/de/server.dll`: 9 Processor-Pack x87 compares, 0 plain
+# (the English server.dll is plain), so the German server uses the Processor Pack code generator.
+# The forced include compiles diagnostic logging out, as in the German build (decisions.md D14).
+compiler = { profile = "msvc-6.0-sp5-pp", base_cflags = '/nologo /c /MT /D "_WIN32_WINNT=0x0400" /Ireferences/zlib-1.1.3 /FIUnits/Error/serverde_build.h' }
+binary = "original/de/server.dll"
+format = "pe"
+arch = "x86_32"
+module = "SERVERDE"
+reversed_dir = "src"
+inventory_file = "db/inventory-server_de.dll.json"
+bin_dir = "bin/server_de.dll"
+[targets."server_de.dll".external_libs]
+KERNEL32 = "KERNEL32.lib"
+USER32 = "USER32.lib"
+WS2_32 = "WS2_32.lib"
+ADVAPI32 = "ADVAPI32.lib"
+LIBCMT = "LIBCMT.lib"
+WINMM = "WINMM.lib"
+MSVCRT = ""
+
 [compiler]
 profile = "msvc-6.0-sp5"
 # The namespace runner uses the pinned toolchain image filesystem and Wine;

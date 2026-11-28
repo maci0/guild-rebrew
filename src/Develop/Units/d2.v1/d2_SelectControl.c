@@ -43,6 +43,7 @@ extern int g_67d3b0;
 
 /* Selects one GUI pool record */
 /* ADDRESS: GOLDTL 0x00474cf0 */
+/* ADDRESS: GOLDDE 0x004679f0 */
 void __cdecl d2_SelectControl(int slot)
 {
 	Item0474cf0* it;

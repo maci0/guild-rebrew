@@ -30,6 +30,7 @@ void __cdecl io_FormatTextBuffer(char*, int, int);
 int __cdecl d2_ShowModalMessageBox(char*, int);
 int __cdecl d3_EndCameraAndUiMode(void);
 /* ADDRESS: GOLDTL 0x005a02b0 */
+/* ADDRESS: GOLDDE 0x00585130 */
 int __cdecl d2_RunMeisterpruefungDialog(void)
 {
 	float grade;
@@ -46,7 +47,7 @@ int __cdecl d2_RunMeisterpruefungDialog(void)
 
 	slot = ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned int) gm_LocalPlayerSlot]);
 	n = gm_GetOppositeStatIndex(*(unsigned char*) (slot + 0x164)) + 1;
-	h = d2_LoadForm(0, 0, (char*) 0x6aa80c);
+	h = d2_LoadForm(0, 0, "locations\\wohnsitz\\meisterpruefung");
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
 	d2_InitWindowBounds(d2_CurrentWindowId);

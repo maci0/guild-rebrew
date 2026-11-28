@@ -21,6 +21,7 @@ int* __cdecl d3snd_QueueSound(int, int, char*, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004d0f00 */
+/* ADDRESS: GOLDDE 0x004be1f0 */
 void __cdecl d2_SelectClickedCombatWorker(void)
 {
 	unsigned short* me;

@@ -8,6 +8,7 @@ void __cdecl d3_BuildViewMatrix(char* a, int b, D3_MAT4X4* m, D3_MAT4X4* out);
 D3_MAT4X4* __stdcall fcn_005eb970(D3_MAT4X4* out, D3_MAT4X4* a, D3_MAT4X4* b);
 
 /* ADDRESS: GOLDTL 0x004557c0 */
+/* ADDRESS: GOLDDE 0x0044af80 */
 void __cdecl d3_ComposeObserverMatrix(char* node, char* observer, int flag, D3_MAT4X4* out)
 {
 	D3_MAT4X4 id;

@@ -71,6 +71,7 @@ void __cdecl d3_TransformWorldToParent(Obj04497f0* o, Vec04497f0* in, void* dir,
 }
 #else
 /* ADDRESS: GOLDTL 0x00445760 */
+/* ADDRESS: GOLDDE 0x0043d4f0 */
 void __cdecl d3_TransformWorldToParent(D3_NODE* node, D3_VEC3* in, void* dir, D3_VEC3* out, int outAngles)
 {
 	D3_NODE* p;

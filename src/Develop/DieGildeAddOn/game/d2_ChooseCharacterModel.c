@@ -21,6 +21,7 @@ int __cdecl gm_MapEntityStatRange(int arg);
 int __cdecl main_RunFrameLoop(int task, int time);
 
 /* ADDRESS: GOLDTL 0x0053b6b0 */
+/* ADDRESS: GOLDDE 0x00522eb0 */
 unsigned int __cdecl d2_ChooseCharacterModel(int jobCode)
 {
 	float pos[4];

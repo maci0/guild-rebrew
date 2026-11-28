@@ -7,6 +7,7 @@ void __cdecl d3snd_TrackQueuedVoice(int*, int);
 
 
 /* ADDRESS: GOLDTL 0x004c30a0 */
+/* ADDRESS: GOLDDE 0x004b0b50 */
 int* __cdecl d3snd_QueueSound(int code, int arg2, int text, int variation, int delay)
 {
 	int* p;

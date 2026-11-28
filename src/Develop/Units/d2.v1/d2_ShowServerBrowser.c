@@ -63,6 +63,7 @@ int __cdecl d2_SelectRadioGroup(int, int);
 __declspec(dllimport) int __stdcall WritePrivateProfileStringA(char*, char*, char*, char*);
 
 /* ADDRESS: GOLDTL 0x00539930 */
+/* ADDRESS: GOLDDE 0x00521130 */
 unsigned int __cdecl d2_ShowServerBrowser(int a0)
 {
 	int v17[24];

@@ -10,6 +10,7 @@ void __cdecl d3_BuildEulerRotationMatrix(float*, char*);
 void __cdecl d3_TraverseSceneObjects(int, char*, int, void*);
 void __cdecl d3_ClearAuxSlotState(void);
 
+/* ADDRESS: GOLDDE 0x00431df0 */
 void __cdecl d3_SetObjectRotation(char* o, int* v)
 {
 	float n[4];

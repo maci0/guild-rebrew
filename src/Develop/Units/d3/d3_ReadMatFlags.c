@@ -13,6 +13,7 @@ typedef struct
 
 int __cdecl vfs_ReadByte(void* stream, void* dst);
 
+/* ADDRESS: GOLDDE 0x00443880 */
 void __cdecl d3_ReadMatFlags(void* stream, F4dRec* record)
 {
 	vfs_ReadByte(stream, (char*) &stream);

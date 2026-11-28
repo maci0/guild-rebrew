@@ -18,6 +18,7 @@ typedef struct
 int __cdecl vfs_ReadByte(void* stream, void* dst);
 
 /* ADDRESS: GOLDTL 0x0044da30 */
+/* ADDRESS: GOLDDE 0x00443770 */
 void __cdecl d3_ReadMatAlphaType(void* stream, D3_BIN_MAT_ALPHA_CTX* ctx)
 {
 	vfs_ReadByte(stream, &ctx->recs[ctx->n].fc0);

@@ -21,6 +21,7 @@ unsigned short __cdecl gm_RandomMod(int n);
 float __cdecl eval_ObjektPreis2Credits(int id, int pct);
 void __cdecl cm_SendMarktSlotDelta(Offer* o, char who);
 
+/* ADDRESS: GOLDDE 0x004ed620 */
 void __cdecl cm_SendRandomMarktSlotDelta(void)
 {
 	Offer copy;

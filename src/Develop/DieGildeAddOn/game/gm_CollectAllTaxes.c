@@ -6,6 +6,7 @@ extern int gm_QueuedCommandCount;
 void __cdecl amt_ProcessPrivilegeIncome(int, int, int*);
 void __cdecl cm_StepCommandQueue(void);
 
+/* ADDRESS: GOLDDE 0x004e8b80 */
 void __cdecl gm_CollectAllTaxes(void)
 {
 	int buf[4];

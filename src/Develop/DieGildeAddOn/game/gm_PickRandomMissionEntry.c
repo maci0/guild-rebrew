@@ -7,6 +7,7 @@ int __cdecl gm_MissionRandomMod(int);
 
 
 /* ADDRESS: GOLDTL 0x004b3db0 */
+/* ADDRESS: GOLDDE 0x004a20a0 */
 int __cdecl gm_PickRandomMissionEntry(int key)
 {
 	int n;

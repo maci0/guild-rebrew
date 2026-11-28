@@ -62,6 +62,7 @@ void __cdecl sv_ClearObjectSelection(void);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x00582080 */
 int __cdecl d2_ConfirmUeberfall(char* name)
 {
 	int btn2;

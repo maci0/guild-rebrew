@@ -11,6 +11,7 @@ int __cdecl gm_AllocClientSpieler(int a0, int a1, int a2, unsigned short a3,
                         int a4, int a5, int a6, int a7);
 
 /* ADDRESS: GOLDTL 0x004c7790 */
+/* ADDRESS: GOLDDE 0x004b4f70 */
 int __cdecl fcn_004c7790(void* packet, char* reply)
 {
 	int v;

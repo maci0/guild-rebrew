@@ -37,6 +37,7 @@ int __cdecl he_GetActionProgress(char*, int*, int*, int);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl cm_SendCopyEntityData(Msg*);
 
+/* ADDRESS: GOLDDE 0x0056b420 */
 int __cdecl he_SendEvent096(char* e, int* list, int idx)
 {
 	int x;

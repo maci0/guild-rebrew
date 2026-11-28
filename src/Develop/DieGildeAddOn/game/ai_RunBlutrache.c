@@ -7,6 +7,7 @@ void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl he_ShowZigeunerGroupMessage(void *, int, int *);
 
 /* ADDRESS: GOLDTL 0x004ab7d0 */
+/* ADDRESS: GOLDDE 0x00499b10 */
 int __cdecl ai_RunBlutrache(int actor, char *a2, char *a3)
 {
 	int h;

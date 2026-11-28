@@ -16,6 +16,7 @@ void __cdecl evt_CallScriptFunction(char* o, int n, ...);
 void __cdecl evt_RequestScriptExit(char*);
 void __cdecl he_FreeAction(char*);
 
+/* ADDRESS: GOLDDE 0x00560cb0 */
 void __cdecl he_UpdateNecromancerFog(char* u)
 {
 	float pos[4];

@@ -19,6 +19,7 @@ int __cdecl d3_GetContextIndex(int);
 
 /* Attaches the named motion of a character kind to an object. */
 /* ADDRESS: GOLDTL 0x00404150 */
+/* ADDRESS: GOLDDE 0x00403680 */
 char* __cdecl ch_AttachMotion(char* obj, int kind)
 {
 	D3_ANIMATION_OPTIONS opt;

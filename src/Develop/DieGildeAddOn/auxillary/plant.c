@@ -32,6 +32,8 @@ extern int g_dynamic_count;
  * the zone type matches the requested plant type. */
 
 
+/* ADDRESS: GOLDDE 0x004aaa00 */
+/* ADDRESS: SERVERDE 0x100139a0 */
 char* __cdecl plt_FindPlantInfo(int key)
 {
 	unsigned int idx;
@@ -45,6 +47,8 @@ char* __cdecl plt_FindPlantInfo(int key)
 	return 0;
 }
 
+/* ADDRESS: GOLDDE 0x004aaa50 */
+/* ADDRESS: SERVERDE 0x100139f0 */
 char* __cdecl plt_FindRecord(char* base, unsigned int type1, unsigned int type2)
 {
 	int i;
@@ -68,6 +72,7 @@ char* __cdecl plt_FindRecord(char* base, unsigned int type1, unsigned int type2)
 
 /* ADDRESS: GOLDTL 0x004bcc20 */
 /* ADDRESS: GOLD 0x004bc640 */
+/* ADDRESS: GOLDDE 0x004aaaa0 */
 char* __cdecl plt_FindRecordByOwner(char* base, int owner)
 {
 	char* p;
@@ -83,6 +88,7 @@ char* __cdecl plt_FindRecordByOwner(char* base, int owner)
 
 /* ADDRESS: GOLDTL 0x004bcc50 */
 /* ADDRESS: GOLD 0x004bc670 */
+/* ADDRESS: GOLDDE 0x004aaad0 */
 char* __cdecl plt_FindRecordById(char* base, int id)
 {
 	char* p;
@@ -96,6 +102,8 @@ char* __cdecl plt_FindRecordById(char* base, int id)
 	return 0;
 }
 
+/* ADDRESS: GOLDDE 0x004aab00 */
+/* ADDRESS: SERVERDE 0x10013a40 */
 int __cdecl plt_FindCoveringPlant(char* base, int x, int y)
 {
 	int i;
@@ -131,6 +139,8 @@ int __cdecl plt_FindCoveringPlant(char* base, int x, int y)
  * records for a matching grid position. Returns record index
  * or -1 if not found. */
 
+/* ADDRESS: GOLDDE 0x004aab70 */
+/* ADDRESS: SERVERDE 0x10013ab0 */
 int __cdecl plt_CheckZoneAvailability(int zone_table, unsigned int x, unsigned int y, int zone_type)
 {
 	int i;
@@ -165,6 +175,7 @@ int __cdecl plt_CheckZoneAvailability(int zone_table, unsigned int x, unsigned i
  * zone record with the specified plant type and coordinates.
  * Returns the record pointer on success. */
 
+/* ADDRESS: SERVERDE 0x10013b60 */
 int __cdecl plt_SetPlantMap(int zone_table, unsigned int x, unsigned int y, int zone_type, int extra)
 {
 	char* map;

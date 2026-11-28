@@ -1,3 +1,5 @@
+extern char gm_EntitySlotTable[];
+extern char g_6a69c8[];
 extern char* cm_PacketDeltaBase;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
@@ -20,6 +22,7 @@ void __cdecl d3_EndCameraAndUiMode(void);
 float __cdecl gm_RandomFloat01(void);
 
 /* ADDRESS: GOLDTL 0x005aee90 */
+/* ADDRESS: GOLDDE 0x00593890 */
 void __cdecl d2_AttemptThiefRescue(char* rec)
 {
 	char text[0x400];
@@ -31,8 +34,8 @@ void __cdecl d2_AttemptThiefRescue(char* rec)
 	char* ent2;
 	char* act;
 
-	ent = (char*) (0x7f4ca0 + (unsigned int) gm_LocalPlayerSlot * 540);
-	ent2 = (char*) (0x7f4ca0
+	ent = (char*) ((int) &gm_EntitySlotTable + (unsigned int) gm_LocalPlayerSlot * 540);
+	ent2 = (char*) ((int) &gm_EntitySlotTable
 	    + (unsigned int) *(unsigned short*) (rec + 0x27) * 540);
 	d2_SetOverlayAnimation(0, 0);
 	io_FormatTextBuffer(text, 0x3fea, *(unsigned char*) (ent + 0x1b1) * 2);
@@ -45,7 +48,7 @@ void __cdecl d2_AttemptThiefRescue(char* rec)
 	f = gm_GetEntitySkill(ent, 4);
 	f = gm_GetEntitySkill(ent, 3) + f;
 	f = gm_GetEntitySkill(ent, 2) + f;
-	f = f * *(float*) 0x6629d0 + *(float*) 0x664328;
+	f = f * 0.2f + 0.15f;
 	cm_RequestModifyHealth(*(int*) (ent + 4), -(int) *(unsigned char*) (ent + 0x1b1) * 2);
 	if (gm_RandomFloat01() < f) {
 		int flags = -1;
@@ -57,7 +60,7 @@ void __cdecl d2_AttemptThiefRescue(char* rec)
 		if (*(int*) (ent + 0x184) != 0) {
 			if (he_GetEntityHomeTarget(ent, &a, &b, 0) != 0) {
 				ch_StartMovement(*(int*) (ent + 4), a, b, 0, 0,
-				    (char*) 0x6a69c8);
+				    (char*) &g_6a69c8);
 			}
 		}
 		act = he_StartHandlungSearch(1, 0, 0x3d);

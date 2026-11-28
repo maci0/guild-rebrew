@@ -38,6 +38,7 @@ extern Slot g_7798c0[16];
 extern Slot_778da0 g_778da0[16];
 extern Slot_778da0 g_7796e0[16];
 
+/* ADDRESS: GOLDDE 0x00579e00 */
 void __cdecl d2_ResetBuildingUiSlots(void)
 {
 	int i;

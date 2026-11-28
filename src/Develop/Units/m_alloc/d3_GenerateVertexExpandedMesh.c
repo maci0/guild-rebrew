@@ -31,6 +31,7 @@ void* __cdecl m_alloc(unsigned int size, const char* file_and_line);
 void __cdecl m_FreeTracked(void* p);
 
 /* ADDRESS: GOLDTL 0x0044a9f0 */
+/* ADDRESS: GOLDDE 0x00440fd0 */
 void __cdecl d3_GenerateVertexExpandedMesh(MeshObj* m)
 {
 	int* counts;

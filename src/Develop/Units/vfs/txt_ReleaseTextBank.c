@@ -6,6 +6,7 @@ extern int txt_TextBankBuffers[];
 int __cdecl txt_FindTextBank(int);
 int __cdecl m_FreeTracked(int);
 
+/* ADDRESS: GOLDDE 0x00427610 */
 void __cdecl txt_ReleaseTextBank(int bankName)
 {
 	int i;

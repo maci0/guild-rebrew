@@ -15,6 +15,7 @@ struct unk_41f7f0 {
 
 /* Releases a video's DirectShow interfaces. */
 /* ADDRESS: GOLDTL 0x0041f7f0 */
+/* ADDRESS: GOLDDE 0x0041c850 */
 void __cdecl ReleaseVideoInterfaces(char* video)
 {
 	if (*(struct unk_41f7f0**) (video + 0x140) != 0) {

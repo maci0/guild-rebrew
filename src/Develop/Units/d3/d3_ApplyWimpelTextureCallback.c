@@ -6,6 +6,7 @@ extern char gm_EntitySlotTable[];
 int __cdecl fcn_0065f220(const char*, const char*);
 void __cdecl SelectTextureSet(char*, int, char, int);
 
+/* ADDRESS: GOLDDE 0x00516300 */
 char __cdecl d3_ApplyWimpelTextureCallback(char* obj, char* building)
 {
 	if (fcn_0065f220(obj, "sp_WIMPEL") == 0 && *(unsigned short*) (building + 0x27) != 0xffff) {

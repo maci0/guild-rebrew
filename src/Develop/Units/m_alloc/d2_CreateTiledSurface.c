@@ -56,6 +56,7 @@ void __cdecl d2_UpdateTextureBytes(Tex*);
 long __stdcall fcn_006114ff(void*, void*, void*, void*, void*, void*, int, unsigned int);
 
 /* ADDRESS: GOLDTL 0x0047b640 */
+/* ADDRESS: GOLDDE 0x0046a630 */
 Tiles* __cdecl d2_CreateTiledSurface(int x, int y, int w, int h, Img* img, int size)
 {
 	TexDesc d;

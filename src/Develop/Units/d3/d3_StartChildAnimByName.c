@@ -31,6 +31,7 @@ void __cdecl d3_BindAnimTrackNodes(D3_ANIM_OBJ* o);
 void __cdecl d3_UpdateObjectAnimPose(D3_ANIM_OBJ* o);
 
 /* ADDRESS: GOLDTL 0x0043a720 */
+/* ADDRESS: GOLDDE 0x004334e0 */
 char __cdecl d3_StartChildAnimByName(D3_ANIM_OBJ* o, char* name)
 {
 	D3_ANIM_OBJ* p;

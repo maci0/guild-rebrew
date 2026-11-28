@@ -31,6 +31,7 @@ char* __cdecl gm_QueryEntities(int id, int a, int b, int c, int d);
 unsigned short* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 
+/* ADDRESS: GOLDDE 0x0048dcc0 */
 int __cdecl ai_StartStammtisch(int busy, unsigned short* self, int pending, Act* out)
 {
 	int sel;

@@ -12,6 +12,7 @@ void __cdecl d3_NormalizeVector(float* v);
 void __cdecl d3_CalculateTriangleNormal(float* a, float* b, float* c, float* n);
 
 /* ADDRESS: GOLDTL 0x00434ba0 */
+/* ADDRESS: GOLDDE 0x0042e160 */
 void __cdecl d3_CalculateAnimNormals(char* anim, char* mesh)
 {
 	float* points;

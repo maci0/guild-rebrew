@@ -8,6 +8,7 @@ char* __cdecl he_fn_Handlung(void);
 /* Finds the first linked object of kind 4, 149, 150 or 151 and reports its
  * progress fraction (clamped to [0, 1]) and, for some kinds, its owner. */
 /* ADDRESS: GOLDTL 0x004ecf00 */
+/* ADDRESS: GOLDDE 0x004d9350 */
 int __cdecl he_GetActionProgress(char* e, int* owner, float* frac, int want_idle)
 {
 	char* p;

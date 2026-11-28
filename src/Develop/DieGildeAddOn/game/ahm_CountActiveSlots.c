@@ -3,6 +3,7 @@
 
 int __cdecl ahm_CheckFlag(void*);
 
+/* ADDRESS: GOLDDE 0x004d8c60 */
 int __cdecl ahm_CountActiveSlots(char* entity)
 {
 	char* q;

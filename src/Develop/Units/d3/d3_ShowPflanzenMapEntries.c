@@ -11,6 +11,7 @@ void __cdecl d3_SetSubtreeVisible(void*, int);
 
 
 /* ADDRESS: GOLDTL 0x004bd150 */
+/* ADDRESS: GOLDDE 0x004aafd0 */
 void __cdecl d3_ShowPflanzenMapEntries(D3_PFLANZEN_MAP_ENTRY* tab)
 {
 	int i;

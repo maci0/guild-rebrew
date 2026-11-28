@@ -5,6 +5,7 @@ void __cdecl ls_FreeListNodes(void*);
 
 /* ADDRESS: GOLD 0x005a8a70 */
 /* ADDRESS: GOLDTL 0x005b1ef0 */
+/* ADDRESS: GOLDDE 0x005968f0 */
 void __cdecl ls_FreeList774a78(void)
 {
 	if (hp_ProdEntryList != 0) {

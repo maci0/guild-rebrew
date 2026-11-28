@@ -6,6 +6,7 @@ typedef struct Stat {
 void __cdecl gm_GetLawEntry(int a, Stat* buf);
 
 /* ADDRESS: GOLDTL 0x004907c0 */
+/* ADDRESS: GOLDDE 0x0047f670 */
 int __cdecl ai_EvaluateConfessionLaw(char* entity, int unused, int* out)
 {
 	Stat st;

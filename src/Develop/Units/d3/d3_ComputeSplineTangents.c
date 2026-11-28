@@ -8,6 +8,7 @@ typedef struct {
 } D3_SPLINE_KEY;
 
 /* ADDRESS: GOLDTL 0x004321f0 */
+/* ADDRESS: GOLDDE 0x0042b820 */
 void __cdecl d3_ComputeSplineTangents(D3_SPLINE_KEY* previous, D3_SPLINE_KEY* current, D3_SPLINE_KEY* next)
 {
 	float d[4];

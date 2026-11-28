@@ -17,6 +17,7 @@ extern int* d2_TutorialState;
 
 
 /* ADDRESS: GOLDTL 0x0057eba0 */
+/* ADDRESS: GOLDDE 0x00564970 */
 int __cdecl d2_DispatchTutorialEvent(int a, int b, int c, int d)
 {
 	int buf[4];

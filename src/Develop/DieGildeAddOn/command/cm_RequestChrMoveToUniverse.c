@@ -8,6 +8,7 @@ void __cdecl cm_EnqueueClientPacket(void*);
 
 #include "Develop/Units/Error/error_message.h"
 
+/* ADDRESS: GOLDDE 0x004b3530 */
 void __cdecl cm_RequestChrMoveToUniverse(int a1, int a2, int a3, char* dummyName)
 {
 	char buf[0x9c];

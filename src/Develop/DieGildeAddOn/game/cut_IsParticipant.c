@@ -4,6 +4,7 @@
 
 void* __cdecl gm_LookupEntityRecordById(int);
 
+/* ADDRESS: GOLDDE 0x004d2a50 */
 int __cdecl cut_IsParticipant(int id, unsigned char* cutscene)
 {
 	int i;

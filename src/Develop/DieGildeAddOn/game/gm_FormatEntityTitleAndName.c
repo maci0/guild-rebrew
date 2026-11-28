@@ -14,6 +14,7 @@ char* __cdecl io_SelectDelimitedString(char*, int, int);
 #define ENDS_APOSTROPHE(x) ((x)[strlen(x) - 1] == 's' || (x)[strlen(x) - 1] == 'z' || (unsigned char) (x)[strlen(x) - 1] == -0x21 || (x)[strlen(x) - 1] == 'x')
 
 /* ADDRESS: GOLDTL 0x00517c00 */
+/* ADDRESS: GOLDDE 0x00502670 */
 int __cdecl gm_FormatEntityTitleAndName(int entityIndex, unsigned char a2, int a3, char* nameOut)
 {
 	unsigned char b1[0x100];

@@ -4,6 +4,7 @@
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 int  __cdecl d2_ShowModalMessageBox(void*, int);
 
+/* ADDRESS: GOLDDE 0x0050f220 */
 int __cdecl d2_CheckActionBlocker(void* obj, int value)
 {
 	char buf[0x80];

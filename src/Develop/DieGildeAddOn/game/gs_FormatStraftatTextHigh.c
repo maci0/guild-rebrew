@@ -12,6 +12,7 @@ void __cdecl io_FormatTextBuffer(void*, int, ...);
 
 int __cdecl main_GetLanguage(void);
 
+/* ADDRESS: GOLDDE 0x004e1440 */
 int __cdecl gs_FormatStraftatTextHigh(void* output, GS_STRAFTAT_REC_HIGH request, int count)
 {
 	char* buildingName;

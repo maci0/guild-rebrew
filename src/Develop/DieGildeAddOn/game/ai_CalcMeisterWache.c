@@ -31,6 +31,7 @@ char *__cdecl gm_SetupEntityQuery(char *);
 void *__cdecl gm_SearchTable67(int);
 
 /* ADDRESS: GOLDTL 0x00480330 */
+/* ADDRESS: GOLDDE 0x0046f2e0 */
 void __cdecl ai_CalcMeisterWache(char *meister)
 {
 	char msg[0xf8];

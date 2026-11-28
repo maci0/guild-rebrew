@@ -9,6 +9,7 @@ void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl cut_SpawnBombThrow(char* pos, int a, int b);
 
 /* ADDRESS: GOLDTL 0x004d4e30 */
+/* ADDRESS: GOLDDE 0x004c1d80 */
 void __cdecl cut_FinishPotThrow(char* e)
 {
 	char* o;

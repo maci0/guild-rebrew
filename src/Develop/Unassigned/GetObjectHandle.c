@@ -7,6 +7,7 @@ int __cdecl fcn_0064d41a(char*, char*, ...);
 extern char* evt_CurrentScript;
 void __cdecl evt_LogScriptError(void*, int, char*);
 
+/* ADDRESS: GOLDDE 0x0040d3b0 */
 int __cdecl GetObjectHandle(int* id)
 {
 	char buf[0x200];

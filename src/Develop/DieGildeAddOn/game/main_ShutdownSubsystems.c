@@ -11,6 +11,7 @@ void __cdecl d3_Shutdown(void);
 void __cdecl d3_ReleaseGraphicsInterfaces(void);
 void __cdecl io_ShutdownInput(void);
 
+/* ADDRESS: GOLDDE 0x0051fa30 */
 void __cdecl main_ShutdownSubsystems(void)
 {
 	g_774944 = 0;

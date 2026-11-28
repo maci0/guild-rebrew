@@ -8,6 +8,7 @@ extern struct Node* hp_ProdEntryList;
 int __cdecl vfs_fwrite(void*, int, int, int);
 
 /* ADDRESS: GOLD 0x5a8a90 */
+/* ADDRESS: GOLDDE 0x00596910 */
 int __cdecl ls_SaveList774a78(int fh)
 {
 	int n;

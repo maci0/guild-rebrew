@@ -1,3 +1,6 @@
+extern char ai_ResourceRequests[];
+extern char g_100b100[];
+extern char g_67e358[];
 /* 0x21c-stride entity-table sweep from 0x7f4ca0 to 0x85a0a0: matches the
    record whose owner pointer equals the driver's, resolves its type row
    through 0x100e764/0x100e724 and reports the 0x39 event. */
@@ -15,6 +18,7 @@ extern int g_100e764;
 extern char* lpObjektePROT;
 extern char gm_EntitySlotTable[];
 /* ADDRESS: GOLDTL 0x00489010 */
+/* ADDRESS: GOLDDE 0x00477ee0 */
 void __cdecl ai_ArmMeisterWorkers(char* meister, char* building)
 {
 	char buf[0x400];
@@ -43,7 +47,7 @@ void __cdecl ai_ArmMeisterWorkers(char* meister, char* building)
 			return;
 		}
 		done = 0;
-		for (a = (char*) 0x100b100, b = (char*) &g_100e764; !done; b += 4, a += 0x40) {
+		for (a = (char*) &g_100b100, b = (char*) &g_100e764; !done; b += 4, a += 0x40) {
 			if (*(int*) (b - 4) == 0 || *(int*) b == 0) {
 				break;
 			}
@@ -51,7 +55,7 @@ void __cdecl ai_ArmMeisterWorkers(char* meister, char* building)
 			*(int*) (b - 4) = k;
 			if (k != 0) {
 				for (i = 0; !done && i < ai_ResourceCount; i++) {
-					if (*(int*) (0x100b0c0 + i * 0x40) == *(int*) b) {
+					if (*(int*) ((int) &ai_ResourceRequests + i * 0x40) == *(int*) b) {
 						found = a;
 						done = 1;
 					}
@@ -59,7 +63,7 @@ void __cdecl ai_ArmMeisterWorkers(char* meister, char* building)
 			}
 		}
 		if (!done) {
-			for (a = (char*) 0x100b100, b = (char*) &g_100e724; !done; b += 4, a += 0x40) {
+			for (a = (char*) &g_100b100, b = (char*) &g_100e724; !done; b += 4, a += 0x40) {
 				if (*(int*) (b - 4) == 0 || *(int*) b == 0) {
 					break;
 				}
@@ -67,7 +71,7 @@ void __cdecl ai_ArmMeisterWorkers(char* meister, char* building)
 				*(int*) (b - 4) = k;
 				if (k != 0) {
 					for (i = 0; !done && i < ai_ResourceCount; i++) {
-						if (*(int*) (0x100b0c0 + i * 0x40) == *(int*) b) {
+						if (*(int*) ((int) &ai_ResourceRequests + i * 0x40) == *(int*) b) {
 							found = a;
 							done = 1;
 						}
@@ -78,9 +82,9 @@ void __cdecl ai_ArmMeisterWorkers(char* meister, char* building)
 		if (found != 0 && *(int*) (found + 0x28) != 0
 		    && gm_LookupWeaponSpec(*(int*) found) != 0
 		    && gm_CheckBuildingCategoryForItem((int) meister, *(int*) found) != 0) {
-			sprintf(buf, (char*) 0x67e388, meister + 0x30, p + 0x30,
+			sprintf(buf, "Meister %s bewaffnet %s mit %s", meister + 0x30, p + 0x30,
 			        (char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*(int*) found] + 1);
-			sprintf(buf, (char*) 0x67e358, *(int*) (p + 4),
+			sprintf(buf, (char*) &g_67e358, *(int*) (p + 4),
 			        *(int*) (building + 2), *(int*) found, 1, gm_ActiveTownIndex, 0);
 			cm_SendSellObjekt(*(int*) (p + 4), *(int*) (building + 2), *(int*) found, 1,
 			             gm_ActiveTownIndex, 0);

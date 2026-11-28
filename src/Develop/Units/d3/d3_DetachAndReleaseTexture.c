@@ -19,6 +19,7 @@ extern unsigned int d3_TextureBankCount;
 
 void __cdecl d3_ReleaseTexture(Tex*);
 
+/* ADDRESS: GOLDDE 0x004522d0 */
 void* __cdecl d3_DetachAndReleaseTexture(Tex* t, char all)
 {
 	void* r;

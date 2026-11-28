@@ -14,6 +14,7 @@ int __cdecl io_AppendText(char*, ...);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x005b01a0 */
 void __cdecl d2_RunGesetzbuchInfoDialog(int textId, int value)
 {
 	int h;

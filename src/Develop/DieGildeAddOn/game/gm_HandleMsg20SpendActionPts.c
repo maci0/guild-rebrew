@@ -9,6 +9,7 @@ void __cdecl gm_ModifyHealth(int, int);
 
 
 /* ADDRESS: GOLDTL 0x004b8c20 */
+/* ADDRESS: GOLDDE 0x004a6cd0 */
 int __cdecl gm_HandleMsg20SpendActionPts(int* request)
 {
 	char buf[0x200];

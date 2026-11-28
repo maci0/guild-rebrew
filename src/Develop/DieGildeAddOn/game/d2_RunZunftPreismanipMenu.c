@@ -13,6 +13,7 @@ int __cdecl gm_CheckZunftPreismanipulation(char*);
 void __cdecl d2_RunZunftPreismanipulationDialog(int);
 
 /* ADDRESS: GOLD 0x5a1bb0 */
+/* ADDRESS: GOLDDE 0x0058f9e0 */
 void __cdecl d2_RunZunftPreismanipMenu(int a)
 {
 	int x;

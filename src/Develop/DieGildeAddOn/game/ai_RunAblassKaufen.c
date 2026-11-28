@@ -26,6 +26,7 @@ void __cdecl gm_ModifyHealth(int a0, int a1);
 void __cdecl he_NotifyConfession(int a0, char* a1, int a2);
 
 /* ADDRESS: GOLDTL 0x0049c590 */
+/* ADDRESS: GOLDDE 0x0048afd0 */
 int __cdecl ai_RunAblassKaufen(int entityArg, char* purchaseReq, char* commandArg)
 {
 	int rec;

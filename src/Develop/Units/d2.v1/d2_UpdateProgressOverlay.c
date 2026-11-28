@@ -34,6 +34,7 @@ void __cdecl d2_RefreshTownView(int a, int b);
 void __cdecl d2_RenderAllElements(int v);
 void __cdecl d3_PresentFrame(void);
 
+/* ADDRESS: GOLDDE 0x0050fea0 */
 void __cdecl d2_UpdateProgressOverlay(int phase, int cur, int max)
 {
 	if (g_6a2bdc == -1) {

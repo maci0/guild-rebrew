@@ -17,6 +17,7 @@ long __cdecl fcn_0064e561(long* t);
 void __cdecl fcn_0064d3eb(unsigned int seed);
 int __cdecl fcn_0064d41a(char* buf, char* fmt, ...);
 
+/* ADDRESS: GOLDDE 0x0041eeb0 */
 int __cdecl sb_Init(int id, int count, int a, int b, int c)
 {
 	int r;

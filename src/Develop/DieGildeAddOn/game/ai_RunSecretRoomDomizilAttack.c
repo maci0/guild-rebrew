@@ -21,6 +21,7 @@ typedef struct F8 {
 int __cdecl ai_FindEntityInFavorRange(char* p, int kind, F8 f, int c, float r, int* out);
 
 /* ADDRESS: GOLDTL 0x0048e0f0 */
+/* ADDRESS: GOLDDE 0x0047cfc0 */
 int __cdecl ai_RunSecretRoomDomizilAttack(char* actor, char* ctx, char* entry)
 {
 	int found;

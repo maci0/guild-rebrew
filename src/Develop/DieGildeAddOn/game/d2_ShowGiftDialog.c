@@ -24,6 +24,7 @@ extern int io_RightButtonReleased, d2_CurrentElementId, d2_DialogCloseRequested;
 #define SHP_ID (*(unsigned short*) SHP_REC)
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x005d2470 */
+/* ADDRESS: GOLDDE 0x005b3cd0 */
 int __cdecl d2_ShowGiftDialog(int* arg2, unsigned short* arg3)
 {
 	int v14 = -1;

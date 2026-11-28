@@ -18,6 +18,7 @@ void __cdecl cm_SendCopyEntityData(char* msg);
 int __cdecl ai_FindEntityInFavorRange(char* p, int kind, F8 f, int c, float r, int* out);
 
 /* ADDRESS: GOLDTL 0x0048e4b0 */
+/* ADDRESS: GOLDDE 0x0047d380 */
 int __cdecl ai_RunSecretRoomSpyKiller(char* entity, char* request, char* params)
 {
 	int found;

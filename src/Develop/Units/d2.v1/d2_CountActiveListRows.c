@@ -2,6 +2,7 @@
 // fcn_0059c830 — count non-(-1) of 16 entries (stride 0x1c).
 
 /* ADDRESS: GOLDTL 0x005a59b0 */
+/* ADDRESS: GOLDDE 0x0058a6c0 */
 int __cdecl d2_CountActiveListRows(char* a)
 {
 	int i;

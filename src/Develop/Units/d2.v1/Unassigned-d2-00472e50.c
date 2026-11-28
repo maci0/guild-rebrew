@@ -54,23 +54,25 @@ void __cdecl d2_DrawSpriteFromSet(int x, int y, int surf, int src, int mode);
 void __cdecl d2_UnlockSurface(int surf);
 
 /* ADDRESS: GOLDTL 0x00472e50 */
+/* ADDRESS: GOLDDE 0x00466010 */
 void __cdecl d2_ClearPaintbox(void)
 {
 	char* m;
 
 	m = ((char*)d2_Windows) + d2_CurrentWindowId * 0x3cc;
 	if (*(int*) (m + 0x290) == 0) {
-		ReportClientMessage((const char*) 0x67d844);
+		ReportClientMessage("d2_ClearPaintbox:Invalidate window!");
 		return;
 	}
 	if (*(int*) (m + 0x38) == 0) {
-		ReportClientMessage((const char*) 0x67d818);
+		ReportClientMessage("d2_ClearPaintbox:Window has no paintbox!");
 		return;
 	}
 	d2_ClearSurface(*(int*) (m + 0x38));
 }
 
 /* ADDRESS: GOLDTL 0x00472ea0 */
+/* ADDRESS: GOLDDE 0x00466060 */
 void __cdecl d2_ClearPaintboxRect(int a, int b, int c, int d)
 {
 	Win* w;

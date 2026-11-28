@@ -7,6 +7,7 @@ int __cdecl gm_ApplyRandomDisease(char*, int*, int*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 
+/* ADDRESS: GOLDDE 0x00561d90 */
 void __cdecl he_ShowZigeunerMessage(char* a, char* b)
 {
 	int v0;

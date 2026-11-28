@@ -29,6 +29,7 @@ void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl he_PostEntityMessage(int, int, char*, unsigned char, int, char*);
 
+/* ADDRESS: GOLDDE 0x00561e50 */
 void __cdecl he_ApplyZigeunerFavorPenalty(ENTITY_RECORD* a, ENTITY_RECORD* b)
 {
 	rec18 r;

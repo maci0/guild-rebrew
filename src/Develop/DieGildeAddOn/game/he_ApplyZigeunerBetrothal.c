@@ -40,6 +40,7 @@ void __cdecl cm_SendCopyEntityData(struct msg*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl he_PostEntityMessage(int, int, char*, unsigned char, int, char*);
 
+/* ADDRESS: GOLDDE 0x00561fa0 */
 void __cdecl he_ApplyZigeunerBetrothal(struct house* a, struct house* b)
 {
 	struct msg m;

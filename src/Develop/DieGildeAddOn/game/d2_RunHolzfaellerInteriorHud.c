@@ -20,6 +20,7 @@ void __cdecl d2_RunGelageDialog(char*);
 void __cdecl d2_RunWorkerTrainingDialog(char*);
 void __cdecl ob_HandleBepflanzung(char*);
 
+/* ADDRESS: GOLDDE 0x00581c40 */
 void __cdecl d2_RunHolzfaellerInteriorHud(char* e)
 {
 	int zs;

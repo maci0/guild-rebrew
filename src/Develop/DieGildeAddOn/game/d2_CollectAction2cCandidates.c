@@ -29,6 +29,7 @@ unsigned short* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl d2_BuildPersonStatusDesc(Action2cCandidate* s);
 int __cdecl gm_MatchesTargetFilter(unsigned short, unsigned short, int, int);
 
+/* ADDRESS: GOLDDE 0x005ad5c0 */
 int __cdecl d2_CollectAction2cCandidates(unsigned short* who, unsigned int max, Action2cCandidate* out, int kind)
 {
 	int result;

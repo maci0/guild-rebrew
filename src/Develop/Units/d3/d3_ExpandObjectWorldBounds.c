@@ -17,6 +17,7 @@ void __cdecl d3_UpdateObjectCameraTransform(char* obj, char* cam, int force);
 void __cdecl d3_ExpandObjectWorldBounds(float* lo, float* hi, char* entity);
 
 /* ADDRESS: GOLDTL 0x00414830 */
+/* ADDRESS: GOLDDE 0x00412de0 */
 void __cdecl d3_ExpandObjectWorldBounds(float* lo, float* hi, char* entity)
 {
 	P414830* p;

@@ -10,6 +10,7 @@ extern char gm_CityStatsBuffer[];
 
 #pragma intrinsic(memcpy, memset)
 
+/* ADDRESS: GOLDDE 0x004e7fd0 */
 float __cdecl gm_GetCityStatsSummary(char* p)
 {
 	float v;

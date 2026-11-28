@@ -1,3 +1,5 @@
+extern char g_6a59fc[];
+extern char g_6acd8c[];
 #include <string.h>
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 #include "Develop/DieGildeAddOn/game/client_actions.h"
@@ -54,6 +56,7 @@ extern void __cdecl d2_DestroyForm(int);
 /* Validates the current entity action against its target and executes the
  * action's announce/notify path; returns one of the 0x10/0x20/0x60/0x81 codes. */
 /* ADDRESS: GOLDTL 0x005d81f0 */
+/* ADDRESS: GOLDDE 0x005b9a50 */
 unsigned int __cdecl d2_ShowExpelWorkerDialog(char* entity, int* action)
 {
 	ExpelWorkerReq found;
@@ -97,7 +100,7 @@ unsigned int __cdecl d2_ShowExpelWorkerDialog(char* entity, int* action)
 		    ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (rec + 0x27)].entity_type == 7) {
 			io_FormatTextBuffer(text, 0x1ddf, *(unsigned short*) entity, rec, *(unsigned short*) ent);
 			he_PostEntityMessage(*(unsigned short*) (rec + 0x27), *(unsigned short*) (rec + 0x27),
-				text, 0, 0x5fb, (char*) 0x6a59fc);
+				text, 0, 0x5fb, (char*) &g_6a59fc);
 		}
 		gm_TransferEntityBuildings(ent, (int) gm_CityEntity);
 		cm_RequestKillSpieler(*(int*) (ent + 4), 1);
@@ -129,7 +132,7 @@ unsigned int __cdecl d2_ShowExpelWorkerDialog(char* entity, int* action)
 	if (*(unsigned short*) (rec + 0x27) == 0xffff)
 		return 0;
 	state_ptr = (char*) ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (rec + 0x27)]);
-	j = d2_LoadForm(0, 0, (char*) 0x6acd8c);
+	j = d2_LoadForm(0, 0, (char*) &g_6acd8c);
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(j);
 	d2_SetForm(j, 1);
@@ -167,7 +170,7 @@ unsigned int __cdecl d2_ShowExpelWorkerDialog(char* entity, int* action)
 							io_FormatTextBuffer(text, 0x1ddf, *(unsigned short*) entity, rec,
 								*(unsigned short*) ent);
 							he_PostEntityMessage(*(int*) (state_ptr + 4), *(int*) (state_ptr + 4),
-								text, 0, 0x5fb, (char*) 0x6a59fc);
+								text, 0, 0x5fb, (char*) &g_6a59fc);
 						}
 						gm_TransferEntityBuildings(ent, (int) gm_CityEntity);
 						cm_RequestKillSpieler(*(int*) (ent + 4), 1);

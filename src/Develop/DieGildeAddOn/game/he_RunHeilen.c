@@ -25,6 +25,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl he_FreeAction(char*);
 
+/* ADDRESS: GOLDDE 0x00553c30 */
 void __cdecl he_RunHeilen(char* u)
 {
 	float x;

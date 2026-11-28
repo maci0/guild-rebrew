@@ -9,6 +9,7 @@
 #include "Develop/Units/Error/error_message.h"
 
 
+/* ADDRESS: GOLDDE 0x0040afa0 */
 CH_ACTION* __cdecl ch_NewAction(char* e)
 {
 	CH_ACTION* t;

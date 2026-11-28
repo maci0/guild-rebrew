@@ -13,6 +13,7 @@ extern unsigned int nt_LocalShardIndex;
 extern unsigned char gm_PlayerCount;
 
 /* ADDRESS: GOLDTL 0x0047dcf0 */
+/* ADDRESS: GOLDDE 0x0046ccb0 */
 int __cdecl gm_IsEntityHomeInLocalShard(char* e)
 {
 	char* o;

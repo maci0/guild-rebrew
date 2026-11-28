@@ -21,6 +21,7 @@ typedef struct Key4 {
 void __cdecl d3_CloneTexture(unsigned char* a, Key4 k, char c);
 
 /* ADDRESS: GOLDTL 0x0045d3b0 */
+/* ADDRESS: GOLDDE 0x00452360 */
 void __cdecl d3_CloneTextureWithColorKey(unsigned char* a, Key4 k, char c)
 {
 	if (a[0x58] >= 0xff && !((Bits8*) (a + 0x5a))->b0 && (k.id != 0xff || k.f.b0)) {

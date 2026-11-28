@@ -1,6 +1,7 @@
 void __cdecl d3_ChangeObjectTransparency(char* a, char* e, int v);
 
 /* ADDRESS: GOLDTL 0x0043a540 */
+/* ADDRESS: GOLDDE 0x00433450 */
 char __cdecl d3_SetObjectColorCallback(char* a, int* v)
 {
 	unsigned int i;

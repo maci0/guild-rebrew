@@ -47,6 +47,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d3_EndCameraAndUiMode(void);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x00592540 */
 void __cdecl d2_RunDiebesgildeInfoDialog(char* p)
 {
 	int n;

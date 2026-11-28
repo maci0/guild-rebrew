@@ -5,6 +5,7 @@ float __cdecl gm_ApplyEntityHealthDelta(short, int);
 
 /* ADDRESS: GOLD 0x004b05e0 */
 /* ADDRESS: GOLDTL 0x004b0720 */
+/* ADDRESS: GOLDDE 0x0049ea40 */
 int __cdecl hst_HandleKillPlayer(char* record, int index)
 {
 	char* p;

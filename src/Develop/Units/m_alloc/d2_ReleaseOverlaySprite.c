@@ -4,6 +4,7 @@ void __cdecl d3_SafeReleaseSceneResource(void* p);
 void __cdecl m_FreeTracked(void* p);
 
 /* ADDRESS: GOLDTL 0x00473150 */
+/* ADDRESS: GOLDDE 0x00466160 */
 void __cdecl d2_ReleaseOverlaySprite(char* p)
 {
 	int i;

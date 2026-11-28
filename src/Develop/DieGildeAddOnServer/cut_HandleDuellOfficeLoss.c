@@ -6,6 +6,7 @@ int __cdecl amt_SendOfficeCommand(unsigned char id, unsigned char* ea, unsigned 
 void __cdecl io_FormatTextBuffer(void* out, int id, ...);
 int __cdecl he_PostEntityMessage(int id, int arg, char* text1, unsigned char flags, int value, char* text2);
 
+/* ADDRESS: GOLDDE 0x004ccf10 */
 void __cdecl cut_HandleDuellOfficeLoss(char* duel)
 {
 	char* first;

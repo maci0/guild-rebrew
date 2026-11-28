@@ -20,6 +20,7 @@ typedef struct
 
 int __cdecl gv_EnqueueSlotCommand(void*);
 
+/* ADDRESS: GOLDDE 0x004de3a0 */
 int __cdecl gv_RequestAddCandidateToOfficePool(int candidate, int building, int slot_type, int slot_index)
 {
 	GV_OFFICE_POOL_MSG msg;

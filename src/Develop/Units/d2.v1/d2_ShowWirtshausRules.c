@@ -16,6 +16,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x005857e0 */
 void __cdecl d2_ShowWirtshausRules(void)
 {
 	int h;

@@ -47,6 +47,7 @@ int __cdecl d2_AllocateElement(void);
 int __cdecl d2_MeasureTextWidth(char* s, int font);
 
 /* ADDRESS: GOLDTL 0x00467240 */
+/* ADDRESS: GOLDDE 0x0045ac80 */
 int __cdecl d2_OpenInputIcon(int x, int y, int w, int h, unsigned char flags)
 {
 	int i;

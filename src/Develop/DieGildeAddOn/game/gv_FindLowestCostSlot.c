@@ -7,6 +7,7 @@ int __cdecl gm_QueryEntities(int a, int b, int c, int d, int e);
 unsigned char* __cdecl FindSlotEntryFiltered(int a, char* e, unsigned char* prev, void* filter, int mask);
 int __cdecl gm_IsSlotEntryValid(void);
 
+/* ADDRESS: GOLDDE 0x004e0470 */
 unsigned char* __cdecl gv_FindLowestCostSlot(char* building, unsigned char lim)
 {
 	unsigned char* best;

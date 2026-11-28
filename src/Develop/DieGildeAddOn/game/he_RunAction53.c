@@ -26,6 +26,7 @@ void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 int __cdecl gm_CompareGameTime(char*, pos14_7f4c00*);
 void __cdecl he_FreeAction(char*);
 
+/* ADDRESS: GOLDDE 0x005329a0 */
 void __cdecl he_RunAction53(char* e)
 {
 	char* a;

@@ -6,6 +6,7 @@ void __cdecl gm_GetLawEntry(int, int*);
    pointer; the product goes through a float temporary, so its load issues
    before the out store. */
 /* ADDRESS: GOLD 0x4f9d40 */
+/* ADDRESS: GOLDDE 0x004e7f10 */
 float __cdecl gm_CalcWeightedLawFactor(int* out)
 {
 	float sum = 0;

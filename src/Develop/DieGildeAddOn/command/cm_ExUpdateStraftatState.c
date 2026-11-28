@@ -3,6 +3,7 @@
 
 int __cdecl cm_UpdateStraftatState(int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x004b9580 */
 int __cdecl cm_ExUpdateStraftatState(void* input, char* response)
 {
 	char b;

@@ -73,6 +73,7 @@ void __cdecl gm_InitTownGoodsTable(int);
 void __cdecl gm_UpdateMarketStockSlots(int);
 int __cdecl d3sm_CreateMap(Device*, int, int);
 
+/* ADDRESS: GOLDDE 0x004fecc0 */
 int __cdecl gm_LoadCityMap(char* map)
 {
 	void* folder;

@@ -33,6 +33,7 @@ void __cdecl cm_RequestCopyEntityData(int a1, int a2, int a3, int a4);
 void __cdecl cm_RequestMoveCredits(int a1, int a2, char a3, int a4);
 
 /* ADDRESS: GOLDTL 0x00494470 */
+/* ADDRESS: GOLDDE 0x00482f30 */
 int __cdecl gm_ResolveDinnerParty(BANQUET_PARTY* p, int flag)
 {
 	int i;

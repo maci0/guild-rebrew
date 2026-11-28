@@ -6,6 +6,7 @@
 #endif
 void __cdecl d2_DestroyElement(int);
 
+/* ADDRESS: GOLDDE 0x00598470 */
 void __cdecl d2_ClearGauge(int* gauge)
 {
 	int i;

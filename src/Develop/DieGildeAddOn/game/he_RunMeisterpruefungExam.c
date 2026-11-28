@@ -44,6 +44,7 @@ int __cdecl io_AppendText(int, ...);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl cm_SendCopyEntityData(struct msg*);
 
+/* ADDRESS: GOLDDE 0x00536db0 */
 void __cdecl he_RunMeisterpruefungExam(char* u)
 {
 	int t;

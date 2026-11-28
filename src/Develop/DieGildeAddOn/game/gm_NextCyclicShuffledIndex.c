@@ -2,6 +2,7 @@
 // fcn_004de610 — out = [0x9afe00 + ([0x772f60] % [0x68bfc8])*4] % a; [0x772f60]++; return out.
 
 /* ADDRESS: GOLDTL 0x004dff20 */
+/* ADDRESS: GOLDDE 0x004cc940 */
 int __cdecl gm_NextCyclicShuffledIndex(int a)
 {
 	int c;

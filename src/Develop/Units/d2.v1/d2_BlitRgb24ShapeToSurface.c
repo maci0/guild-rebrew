@@ -3,6 +3,7 @@ typedef unsigned short u16;
 typedef unsigned int u32;
 #include <string.h>
 /* ADDRESS: GOLDTL 0x0047a990 */
+/* ADDRESS: GOLDDE 0x00469980 */
 unsigned int __cdecl d2_BlitRgb24ShapeToSurface(int x, int y, char* shape, char* surface)
 {
 	u32* v1;

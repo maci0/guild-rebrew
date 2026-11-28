@@ -28,6 +28,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyScrollPerga(void);
 
 /* ADDRESS: GOLDTL 0x004b3810 */
+/* ADDRESS: GOLDDE 0x004a1b30 */
 void __cdecl d2_ShowHistoryScrollDialog(int arg)
 {
 	char text[0x1fb8];

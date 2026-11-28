@@ -3,6 +3,7 @@
 extern int g_007725ec; /* 0x007725ec */
 typedef void (__stdcall *comfn_t)(int self);
 
+/* ADDRESS: GOLDDE 0x00469260 */
 void __cdecl d2_OnLostRenderToSurface(void)
 {
     int self = g_007725ec;

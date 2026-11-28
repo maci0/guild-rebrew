@@ -29,6 +29,7 @@ int __cdecl gm_IsSlotNpcPerson(int a1);
 int __cdecl gm_IsSlotPlayerPerson(int a1);
 
 #pragma optimize("y", off)
+/* ADDRESS: GOLDDE 0x0049db20 */
 int __cdecl hst_HandleRndReich(int mode, int* pairs, int idx, char* text, void* out)
 {
 	char buf[0x200];

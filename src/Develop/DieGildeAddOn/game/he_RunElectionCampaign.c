@@ -32,6 +32,7 @@ void __cdecl cm_RequestJoinLeaveElection(int*);
 void __cdecl cm_SendTraceEnd(char*);
 
 /* ADDRESS: GOLDTL 0x0054a210 */
+/* ADDRESS: GOLDDE 0x005306f0 */
 void __cdecl he_RunElectionCampaign(char* action)
 {
     char* o;

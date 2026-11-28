@@ -3,6 +3,7 @@
 void __cdecl d3_FreeMeshObject(char* p);
 
 /* ADDRESS: GOLDTL 0x004438b0 */
+/* ADDRESS: GOLDDE 0x0043bd00 */
 char __cdecl d3_TransferObjectSceneCallback(char* node, char** moveCtx)
 {
 	char* p;

@@ -9,6 +9,7 @@ char __cdecl d3sm_3D2SuperMap(char* g, float* v, int* a, int* b, int* c);
 int __cdecl d3_GetContextIndex(char* p);
 char* __cdecl ch_CreateAction(char* e, int kind, ...);
 
+/* ADDRESS: GOLDDE 0x0040a820 */
 void __cdecl ch_QueueWalkToDummyRotate(char* owner, char* e)
 {
 	char* g;

@@ -22,6 +22,7 @@ int __cdecl d3_GetContextIndex(char*);
 
 
 /* The option padding is left as in the native partially initialized view. */
+/* ADDRESS: GOLDDE 0x00403940 */
 void __cdecl ch_FinishAni(char* obj)
 {
     char* node;
@@ -78,6 +79,7 @@ void __cdecl ch_FinishAni(char* obj)
 
 /* Loads each named motion of a character that is not loaded yet; walking
  * and cart pulling are loaded looping. */
+/* ADDRESS: GOLDDE 0x00403f30 */
 void __cdecl ch_PreloadCharacterMotions(char* obj, int n, ...)
 {
 	int i;

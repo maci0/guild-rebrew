@@ -1,3 +1,5 @@
+extern char g_6a6278[];
+extern char g_675908[];
 /*
  * Kugel (ball) packet state machine, one step per frame.
  *
@@ -41,6 +43,7 @@ void __cdecl gm_AddTime(char*, int, int, int);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 typedef struct S55cc80Proto { unsigned char bytes[0x24d]; } S55cc80Proto;
 /* ADDRESS: GOLDTL 0x0055cc80 */
+/* ADDRESS: GOLDDE 0x00542e90 */
 void __cdecl he_RunHireMasterJob(char* self)
 {
 	char buf[0x400];
@@ -100,7 +103,7 @@ void __cdecl he_RunHireMasterJob(char* self)
 		}
 		answer = (unsigned short*) cm_GetCommandResult(*(int*) (self + 0xb8));
 		if (answer == 0) {
-			he_PostEntityMessage(*(int*) ((unsigned long)&gm_EntityIdField + (*(unsigned short*) (self + 8)) * 0x21c), -1, (char*) 0x6a628c, 0, 0x5f8, 0);
+			he_PostEntityMessage(*(int*) ((unsigned long)&gm_EntityIdField + (*(unsigned short*) (self + 8)) * 0x21c), -1, "Einwohnerlimit erreicht!", 0, 0x5f8, 0);
 			he_FreeAction(self);
 			return;
 		}
@@ -124,9 +127,9 @@ void __cdecl he_RunHireMasterJob(char* self)
 			t = (int)gm_GetHireWage(row, packet->idx0, *(unsigned char*)(self + 0xac), -1);
 			((int*) (self + 0xb0))[count] = ((int*) (self + 0xb0))[count] - 1;
 			if (*(unsigned char*) ((unsigned long)&gm_SlotTableKindView + (*(unsigned short*) (self + 8)) * 0x21c) == 6 ||
-				*(unsigned char*) ((unsigned long)&gm_SlotTableKindView + (*(unsigned short*) (self + 8)) * 0x21c) == 7) {
+			    *(unsigned char*) ((unsigned long)&gm_SlotTableKindView + (*(unsigned short*) (self + 8)) * 0x21c) == 7) {
 				io_FormatTextBuffer(buf, 0x1bb1, t, (unsigned int)answer[0], (char*) packet);
-				he_MessageBoxQuickjump(*(int*)((unsigned long)&gm_EntityIdField+(*(unsigned short*)(self+8)) * 0x21c), packet->handle, buf, 0, 0x5f2, packet->handle, *(int*)(self+0xb4), 0, 0x6a6278);
+				he_MessageBoxQuickjump(*(int*)((unsigned long)&gm_EntityIdField+(*(unsigned short*)(self+8)) * 0x21c), packet->handle, buf, 0, 0x5f2, packet->handle, *(int*)(self+0xb4), 0, (int) &g_6a6278);
 			}
 			cm_RequestTransferCurrencyNoKill(*(int*) (answer + 2), *(int*) ((unsigned long)&gm_EntityIdField + (*(unsigned short*) (self + 8)) * 0x21c), *(unsigned char*) &gm_ActiveTownIndex, t);
 			break;
@@ -146,7 +149,7 @@ void __cdecl he_RunHireMasterJob(char* self)
 			t = -1;
 		}
 	send:
-		cm_RequestChrMoveToUniverse(*(int*) (self + 0xbc), *(int*) (self + 0x10), t, (char*) 0x675908);
+		cm_RequestChrMoveToUniverse(*(int*) (self + 0xbc), *(int*) (self + 0x10), t, (char*) &g_675908);
 		for (count = 0; count < 1; count++) {
 			if (((int*) (self + 0xb0))[count] > 0) break;
 		}

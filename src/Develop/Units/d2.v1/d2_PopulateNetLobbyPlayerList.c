@@ -36,6 +36,7 @@ int __cdecl sprintf(char*, const char*, ...);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
+/* ADDRESS: GOLDDE 0x00579200 */
 void __cdecl d2_PopulateNetLobbyPlayerList(void)
 {
 	int y;

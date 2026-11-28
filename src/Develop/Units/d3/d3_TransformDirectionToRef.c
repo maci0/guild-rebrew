@@ -9,6 +9,7 @@ typedef struct Vec3 {
 
 void __cdecl d3_TransformDirection(char*, Vec3*, Vec3*);
 
+/* ADDRESS: GOLDDE 0x0044ab30 */
 void __cdecl d3_TransformDirectionToRef(char* node, char* ref, Vec3* dir, Vec3* out)
 {
 	float t[4];

@@ -25,6 +25,7 @@ struct hist_4ac9c0 {
 
 /* ADDRESS: GOLD 0x004ac8a0 */
 /* ADDRESS: GOLDTL 0x004ac9c0 */
+/* ADDRESS: GOLDDE 0x0049ad00 */
 int __cdecl hmt_WriteHistoricalDfn(struct hist_4ac9c0* h)
 {
 	int magic;

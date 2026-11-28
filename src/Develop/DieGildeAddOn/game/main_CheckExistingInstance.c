@@ -4,6 +4,7 @@
 __declspec(dllimport) void* __stdcall CreateMutexA(void*, int, const char*);
 __declspec(dllimport) unsigned long __stdcall GetLastError(void);
 
+/* ADDRESS: GOLDDE 0x0051fea0 */
 int __cdecl main_CheckExistingInstance(void** mutexOut)
 {
 	void* mutex;

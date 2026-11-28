@@ -5,6 +5,7 @@ unsigned short* __cdecl gm_QueryEntities(int, int, int);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_LookupWeaponSpec(int);
 
+/* ADDRESS: GOLDDE 0x004bbd60 */
 int __cdecl gm_GetUnitWeaponSpec(char* obj)
 {
 	unsigned short* p;

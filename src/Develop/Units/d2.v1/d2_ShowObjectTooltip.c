@@ -34,6 +34,7 @@ int __cdecl gm_FindBuildingOwner(int);
 float __cdecl gm_CalcBuildingProductivity(int, int, int*);
 
 /* ADDRESS: GOLDTL 0x00590b80 */
+/* ADDRESS: GOLDDE 0x00576830 */
 int __cdecl d2_ShowObjectTooltip(int itemId)
 {
 	int arr[32];

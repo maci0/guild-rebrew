@@ -23,6 +23,7 @@ void __cdecl evt_ImportCommand(const char*, void*, ...);
 
 /* Registers the core script commands. */
 /* ADDRESS: GOLDTL 0x0040c7c0 */
+/* ADDRESS: GOLDDE 0x0040b5d0 */
 void __cdecl evt_RegisterCoreCommands(void)
 {
 	evt_ImportCommand("ecmd_Dummy", ecmd_Dummy, 5, 0);

@@ -92,6 +92,7 @@ static __inline void copy0(void* dst, void* src, int size)
 
 // FUNCTION: GOLDTL 0x00449ba0
 
+/* ADDRESS: GOLDDE 0x00440280 */
 void __cdecl d3_AttachModelPart(Ent* e, Obj* o, int id)
 {
 	char buf[0x100];

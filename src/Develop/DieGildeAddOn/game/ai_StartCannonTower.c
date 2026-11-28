@@ -28,6 +28,7 @@ void __cdecl gm_ResolveEntityById(void**, int, int, int);
 int __cdecl gm_ComputeCannonShot(char*, char*, int);
 
 /* ADDRESS: GOLDTL 0x0048e5b0 */
+/* ADDRESS: GOLDDE 0x0047d480 */
 int __cdecl ai_StartCannonTower(int a0, char* a1, int a2, char* firstAction, char* a4)
 {
 	char* p;

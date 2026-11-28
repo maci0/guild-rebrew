@@ -6,6 +6,7 @@ extern Card_1007ce0 g_1007ce0[24];
 
 /* ADDRESS: GOLD 0x004a76d0 */
 /* ADDRESS: GOLDTL 0x004a77f0 */
+/* ADDRESS: GOLDDE 0x00495b40 */
 int __cdecl gm_GetHighestCard(int* hand, int skipFirstTwo)
 {
 	int start;

@@ -15,6 +15,7 @@ int __cdecl cm_RequestAllocSpieler(int, int, int, int, int, int, int, int);
 void __cdecl he_FreeAction(char*);
 
 /* ADDRESS: GOLDTL 0x005513d0 */
+/* ADDRESS: GOLDDE 0x00537780 */
 void __cdecl he_RunChildBirth(char* action)
 {
 	char msg[0x114];

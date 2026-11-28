@@ -5,6 +5,7 @@
 
 extern HE_AP_EVENT he_ApEvents[256];
 
+/* ADDRESS: GOLDDE 0x0052d5a0 */
 int __cdecl he_SumEventValuesForSubject(int k)
 {
 	int sum;

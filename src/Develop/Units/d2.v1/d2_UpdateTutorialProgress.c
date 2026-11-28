@@ -12,6 +12,7 @@ void __cdecl d2_CloseTutorialProgress(void);
 #define ELAPSED(t) (((unsigned int)gm_GameTicks) - (t) ? ((unsigned int)gm_GameTicks) - (t) : 0)
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
+/* ADDRESS: GOLDDE 0x005663b0 */
 void __cdecl d2_UpdateTutorialProgress(void)
 {
 	unsigned int dur;

@@ -12,6 +12,7 @@ void __cdecl main_ExitToFrameHandler(void*);
 void __cdecl d2_RunWorldHudLoop(void);
 void __cdecl amt_ReleaseEntityOffices(unsigned char*, int);
 
+/* ADDRESS: GOLDDE 0x004bae70 */
 int __cdecl cm_ExBlockCharacter(char* x, char* out)
 {
 	unsigned char* e;

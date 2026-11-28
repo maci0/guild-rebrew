@@ -9,6 +9,7 @@ int __cdecl amt_FindOfficeSlotByType(int id, int* out);
 int __cdecl gm_LookupEntityRecordById(int h);
 #include "Develop/DieGildeAddOn/game/aemter.h"
 
+/* ADDRESS: GOLDDE 0x0049b970 */
 void __cdecl amt_VacateSpecialOffice(void)
 {
 	int info[6];

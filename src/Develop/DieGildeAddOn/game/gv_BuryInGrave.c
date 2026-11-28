@@ -18,6 +18,7 @@ typedef struct PoolEntry5 {
 #pragma pack(pop)
 
 /* ADDRESS: GOLDTL 0x004f2350 */
+/* ADDRESS: GOLDDE 0x004de410 */
 int __cdecl gv_BuryInGrave(int e)
 {
 	char* p;

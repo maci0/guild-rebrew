@@ -5,6 +5,7 @@ int  __cdecl d2_RunProfessionSelectDialog(void*, void*);
 extern char str_fmt_s[];
 void __cdecl io_FormatTextBuffer(void*, int, int);
 
+/* ADDRESS: GOLDDE 0x004e31c0 */
 int __cdecl gm_HandleChooseProfessionCommand(void* entity, void* context)
 {
 	int result;

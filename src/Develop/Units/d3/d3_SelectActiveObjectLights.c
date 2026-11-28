@@ -57,6 +57,7 @@ int __cdecl d3_CompareLightWeightDesc(float*, float*);
 void __cdecl d3_SetupD3DLight(int, char*, float, float*, float*);
 
 /* ADDRESS: GOLDTL 0x00450e90 */
+/* ADDRESS: GOLDDE 0x00446a70 */
 void __cdecl d3_SelectActiveObjectLights(float radius, float scale, char* probes, float* dirMat, float* posMat)
 {
 	D3_SCENE_LIGHT_NODE* light;

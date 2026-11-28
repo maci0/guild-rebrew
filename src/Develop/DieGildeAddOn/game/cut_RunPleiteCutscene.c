@@ -43,6 +43,7 @@ void __cdecl gm_LiquidateEntityAssets(void* a, void* b, int c);
 void __cdecl cut_RegisterEventCallbacks(void);
 
 /* ADDRESS: GOLDTL 0x004e3020 */
+/* ADDRESS: GOLDDE 0x004cfa30 */
 void __cdecl cut_RunPleiteCutscene(void* arg)
 {
 	int table[6];

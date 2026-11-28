@@ -1,3 +1,4 @@
+#include "d2_capacity.h"
 #include <string.h>
 
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -41,6 +42,7 @@ void __cdecl d2_ReorderControlStack(int slot)
 
 /* A do-while (not a for loop) gives the reference's register roles. */
 /* ADDRESS: GOLDTL 0x0046f4c0 */
+/* ADDRESS: GOLDDE 0x00462a20 */
 void __cdecl d2_ReorderControlStack(int slot)
 {
 	D2_STACK_ELEMENT_SLOT* s;
@@ -48,13 +50,13 @@ void __cdecl d2_ReorderControlStack(int slot)
 	int free;
 
 	free = -1;
-	i = 0x3ff;
+	i = d2_ELEMENT_CAPACITY - 1;
 	s = (D2_STACK_ELEMENT_SLOT*)&((D2_CONTROL_TL*)d2_Controls)[slot];
 	do {
 		if (((D2_STACK_ELEMENT_SLOT**)d2_ZOrderStack)[i] == s) {
 			if (free != -1) {
 				((D2_STACK_ELEMENT_SLOT**)d2_ZOrderStack)[free] = ((D2_STACK_ELEMENT_SLOT**)d2_ZOrderStack)[i];
-				memmove(&((D2_STACK_ELEMENT_SLOT**)d2_ZOrderStack)[i], &((D2_STACK_ELEMENT_SLOT**)d2_ZOrderStack)[i + 1], 0xff8 - i * 4);
+				memmove(&((D2_STACK_ELEMENT_SLOT**)d2_ZOrderStack)[i], &((D2_STACK_ELEMENT_SLOT**)d2_ZOrderStack)[i + 1], (d2_ELEMENT_CAPACITY - 2) * 4 - i * 4);
 			}
 			return;
 		}

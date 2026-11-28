@@ -8,6 +8,7 @@ void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 unsigned short __cdecl gm_RandomMod(int);
 
 /* ADDRESS: GOLDTL 0x005643e0 */
+/* ADDRESS: GOLDDE 0x0054a590 */
 void __cdecl he_StartGebaeudeKaufangebot(char* e)
 {
 	char* p;

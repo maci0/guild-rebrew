@@ -5,6 +5,7 @@ extern int* d2_TutorialState;
 extern volatile int gm_GameTicks;
 extern unsigned char* lpGebaeudePROT;
 
+/* ADDRESS: GOLDDE 0x00564ff0 */
 int __cdecl d2_UpdateTutCh2Cat0dStep(int* m)
 {
 	if (m[0] == 0x1b && m[1] != 0 && d2_TutorialState[1] == 4) {

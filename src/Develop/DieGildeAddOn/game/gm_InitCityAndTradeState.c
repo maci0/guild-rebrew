@@ -50,6 +50,7 @@ Player* __cdecl gm_GetGuildHall(int);
 Unit* __cdecl gm_QueryEntities(int, int, int, int, int);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 
+/* ADDRESS: GOLDDE 0x004ff5f0 */
 int __cdecl gm_InitCityAndTradeState(int variant)
 {
 	int wares[8];

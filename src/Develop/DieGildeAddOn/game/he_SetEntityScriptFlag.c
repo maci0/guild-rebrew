@@ -5,6 +5,7 @@ char* __cdecl gm_FindBuildingOwner(int);
 int __cdecl evt_FindScriptById(int);
 void __cdecl evt_RequestScriptExit(int);
 
+/* ADDRESS: GOLDDE 0x00576160 */
 void __cdecl he_SetEntityScriptFlag(char* obj, unsigned int flag)
 {
 	int id;

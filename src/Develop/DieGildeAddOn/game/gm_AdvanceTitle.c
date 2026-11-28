@@ -1,3 +1,6 @@
+extern char g_85a0a2[];
+extern char g_6653a0[];
+extern char gm_SlotTableKindView[];
 #include <string.h>
 
 #include "Develop/client_types.h"
@@ -27,6 +30,7 @@ extern unsigned char gm_PlayerCount;
 /* Erhoeht den Diebstahls-Zaehler eines Objekts und schickt je nach
  * Objektart ein Aendern-Paket 0x69 oder die Quickjump-Meldung. */
 /* ADDRESS: GOLDTL 0x004f6d60 */
+/* ADDRESS: GOLDDE 0x004e2b40 */
 void __cdecl gm_AdvanceTitle(unsigned int entityIndex)
 {
 	char text[0x200];
@@ -58,7 +62,7 @@ void __cdecl gm_AdvanceTitle(unsigned int entityIndex)
 	if (limit > 0xa) {
 		limit = 0xa;
 	}
-	if (v > *(int*) ((char*) 0x6653a0 + limit * 4) && count == 1) {
+	if (v > *(int*) ((char*) &g_6653a0 + limit * 4) && count == 1) {
 		found = gm_StartFilteredEntitySearch(1, 5, 0xf);
 		if (found == 0) {
 			return;
@@ -76,7 +80,7 @@ void __cdecl gm_AdvanceTitle(unsigned int entityIndex)
 		}
 		return;
 	}
-	if (v > *(int*) ((char*) 0x6653a0 + limit * 4) && count < 9) {
+	if (v > *(int*) ((char*) &g_6653a0 + limit * 4) && count < 9) {
 		*((unsigned char*)&entityIndex + 3) = count + 1;
 		if (*(char*) (slot + 2) != 6 && *(char*) (slot + 2) != 7) {
 			cm_BeginPacketFieldDelta(slot, *(int*) (slot + 4));
@@ -124,7 +128,7 @@ void __cdecl gm_AdvanceTitle(unsigned int entityIndex)
 		    && *(char*) (slot + 2) != 7) {
 			return;
 		}
-		other = (char*) 0x7f4ca2;
+		other = (char*) &gm_SlotTableKindView;
 		v = 0;
 		do {
 			if (v >= gm_PlayerCount) {
@@ -174,7 +178,7 @@ void __cdecl gm_AdvanceTitle(unsigned int entityIndex)
 				v++;
 			}
 			other += sizeof(ENTITY_RECORD);
-		} while ((int) other < 0x85a0a2);
+		} while ((int) other < (int) &g_85a0a2);
 	}
 }
 

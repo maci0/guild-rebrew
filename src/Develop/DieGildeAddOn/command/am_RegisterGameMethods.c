@@ -144,6 +144,7 @@ int __cdecl ai_StartStudium(void);
 int __cdecl ai_RunStudium(void);
 
 /* ADDRESS: GOLDTL 0x004a1130 */
+/* ADDRESS: GOLDDE 0x0048fb60 */
 int __cdecl am_RegisterGameMethods(char* e)
 {
 	AM_METHOD d;

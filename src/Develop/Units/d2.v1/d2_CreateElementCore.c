@@ -7,6 +7,7 @@ int __cdecl d2_AllocAnimationSlot(int, int, int, int);
 int __cdecl d2_GetBankEntry(int, int);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x004699c0 */
+/* ADDRESS: GOLDDE 0x0045d2e0 */
 int __cdecl d2_CreateElementCore(unsigned int x, int y, int resourceId)
 {
 	int v4;

@@ -3,6 +3,7 @@
 
 /* ADDRESS: GOLD 0x0047daa0 */
 /* ADDRESS: GOLDTL 0x0047cf60 */
+/* ADDRESS: GOLDDE 0x0046bf20 */
 void __cdecl ai_UpdateEntityDrives(char* e)
 {
     double v;

@@ -5,6 +5,7 @@
 
 float __cdecl eval_ObjektPreis2Credits(int, int);
 
+/* ADDRESS: GOLDDE 0x004f6b90 */
 float __cdecl gm_GetSeasonPrice(int id, unsigned char a)
 {
 	int i;

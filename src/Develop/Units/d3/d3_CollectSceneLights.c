@@ -23,6 +23,7 @@ extern int d3_ActiveScene;
 void __cdecl d3_VisitSceneObjects(int, int, int, void*, int);
 void __cdecl d3_ClassifySceneLightNode(void);
 
+/* ADDRESS: GOLDDE 0x00446890 */
 void __cdecl d3_CollectSceneLights(int ctx, unsigned char mask)
 {
 	int i;

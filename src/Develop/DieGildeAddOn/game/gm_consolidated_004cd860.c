@@ -1,3 +1,4 @@
+extern char g_699364[];
 typedef struct {
 	short v[7];
 } stamp14;
@@ -21,6 +22,7 @@ int __cdecl fcn_004f2ee0(char*);
 int __cdecl fcn_0064d3f8(void);
 
 /* ADDRESS: GOLDTL 0x004cd860 */
+/* ADDRESS: GOLDDE 0x004bb040 */
 int __cdecl fcn_004cd860(char* input, char* response)
 {
 	char* e1;
@@ -61,6 +63,7 @@ found:
 }
 
 /* ADDRESS: GOLDTL 0x004cd990 */
+/* ADDRESS: GOLDDE 0x004bb170 */
 int __cdecl cm_DispatchGraveyardCommand(char* input, char* response)
 {
 	int r;
@@ -71,8 +74,8 @@ int __cdecl cm_DispatchGraveyardCommand(char* input, char* response)
 		response[1] = 0;
 		*(int*) (response + 6) = 0;
 	}
-	if (*(int*) 0x14cbca0 != -1) {
-		*(int*) 0x699364 = *(int*) (input + 0x27);
+	if (*(int*) &nt_ClientSocket != -1) {
+		*(int*) &g_699364 = *(int*) (input + 0x27);
 	} else {
 		*(int*) (input + 0x2b) = fcn_0064d3f8();
 	}

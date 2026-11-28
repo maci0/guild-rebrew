@@ -38,6 +38,7 @@ extern double g_664ef8;
 extern int g_6b89c0; extern char g_6a2574[];
 typedef struct BuildingRow4d1ff0 { unsigned char kind; char fields[0x24c]; } BuildingRow4d1ff0;
 /* ADDRESS: GOLDTL 0x004d1ff0 */
+/* ADDRESS: GOLDDE 0x004bf2e0 */
 void __cdecl cut_SetupBattleArena(void *arg)
 {
 	int first;

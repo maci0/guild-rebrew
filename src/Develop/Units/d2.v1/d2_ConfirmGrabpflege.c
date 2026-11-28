@@ -62,6 +62,7 @@ void __cdecl d2_DestroyForm(int);
 void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl sv_ClearObjectSelection(void);
 
+/* ADDRESS: GOLDDE 0x00572e40 */
 int __cdecl d2_ConfirmGrabpflege(char* who, char* request)
 {
 	int r;

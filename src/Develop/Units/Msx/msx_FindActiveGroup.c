@@ -4,6 +4,7 @@ extern IdGroup msx_LocationTrackGroups[];
 
 /* ADDRESS: GOLD 0x004c1f90 */
 /* ADDRESS: GOLDTL 0x004c27f0 */
+/* ADDRESS: GOLDDE 0x004b0310 */
 int __cdecl msx_FindActiveGroup(void)
 {
 	int i;

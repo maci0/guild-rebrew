@@ -15,6 +15,7 @@ float* __cdecl gm_LookupSpecialObject(int id);
 int __cdecl gm_UseSpecialObject(char* e, Req* r);
 
 /* ADDRESS: GOLDTL 0x0049b120 */
+/* ADDRESS: GOLDDE 0x00489b60 */
 int __cdecl ai_RunUseDynastyObject(char* entity, int* itemReq, int* targetReq)
 {
 	float* itemProto;

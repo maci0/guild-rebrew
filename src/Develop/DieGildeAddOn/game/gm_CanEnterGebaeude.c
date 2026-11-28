@@ -26,6 +26,7 @@ int __cdecl gm_IsGebaeudeOpen(unsigned char* p, int* lo, int* hi);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl d2_ShowGreenMessageBox(char*, char*, int);
 
+/* ADDRESS: GOLDDE 0x0058c1a0 */
 int __cdecl gm_CanEnterGebaeude(unsigned char* p)
 {
 	int a;

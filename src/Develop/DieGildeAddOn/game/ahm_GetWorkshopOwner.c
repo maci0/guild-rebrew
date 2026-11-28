@@ -12,6 +12,7 @@ extern unsigned char* lpGebaeudePROT;
 
 void* __cdecl gm_LookupEntityRecordById(int);
 
+/* ADDRESS: GOLDDE 0x004d8c20 */
 void* __cdecl ahm_GetWorkshopOwner(unsigned char* building)
 {
 	int* idPtr;

@@ -5,6 +5,7 @@
 
 int __cdecl msx_ReleaseDigitalHandle(int);
 
+/* ADDRESS: GOLDDE 0x00424d60 */
 int __cdecl msx_ReleaseAllDrivers(void)
 {
 	int r = 0;

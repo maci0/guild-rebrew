@@ -26,6 +26,7 @@ void __cdecl d3_LoadTextureSurfaceTl(int anim);
 void __cdecl fcn_0064d530(char* dst, char* src, int n);
 
 /* ADDRESS: GOLDTL 0x0043f7e0 */
+/* ADDRESS: GOLDDE 0x00438390 */
 int __cdecl d3_LoadFloorTexture(fcn_0043f7e0_Floor* o, char* name, int slot)
 {
 	fcn_0043f7e0_Tint tint;

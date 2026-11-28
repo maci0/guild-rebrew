@@ -22,6 +22,7 @@ typedef struct {
 /* Flushes cached timing and walks the scene tree, then refreshes both
  * frame-rate counters. Re-entrant calls only run the trailing mode hook. */
 /* ADDRESS: GOLDTL 0x0043b170 */
+/* ADDRESS: GOLDDE 0x00433f30 */
 void __cdecl d3_UpdateScene(unsigned int flags, char force, unsigned int mode, char deep)
 {
 	if (d3_SceneRenderLock < 0) {

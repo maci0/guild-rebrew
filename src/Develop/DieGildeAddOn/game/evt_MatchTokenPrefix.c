@@ -1,5 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x004265f0 */
+/* ADDRESS: GOLDDE 0x004210c0 */
 int __cdecl evt_MatchTokenPrefix(char* a, char* b)
 {
 	int i;

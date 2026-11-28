@@ -43,6 +43,7 @@ void __cdecl d2_RunBeatupDialog(void);
 /* The first request's zero-fill is the original's hand-written block-fill
  * prelude; recorded C memset probes did not emit it (archived docs/codegen-walls.md
  * section 6b). */
+/* ADDRESS: GOLDDE 0x00584540 */
 void __cdecl d2_RunSabotageActionsHud(int entity, int mode)
 {
 	int a;

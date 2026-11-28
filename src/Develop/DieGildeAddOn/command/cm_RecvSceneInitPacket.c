@@ -4,6 +4,7 @@ void __cdecl cm_RecycleCommandQueueNode(char*);
 
 
 /* ADDRESS: GOLDTL 0x004c3fa0 */
+/* ADDRESS: GOLDDE 0x004b19b0 */
 int __cdecl cm_RecvSceneInitPacket(void)
 {
 	char* p;

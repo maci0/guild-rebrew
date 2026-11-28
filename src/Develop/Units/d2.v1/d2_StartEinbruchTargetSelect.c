@@ -24,6 +24,7 @@ void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl sv_ClearObjectSelection(void);
 void __cdecl d2_ConfirmEinbruch(void);
 
+/* ADDRESS: GOLDDE 0x005920b0 */
 void __cdecl d2_StartEinbruchTargetSelect(char* building)
 {
 	Req req;

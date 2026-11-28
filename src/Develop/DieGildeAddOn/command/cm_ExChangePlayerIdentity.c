@@ -14,6 +14,7 @@ int __cdecl gv_FindEntityGraveyardSlot(int h, char** obj, int** val);
 unsigned char __cdecl gm_GetEntitySlotIndex(int a, int* b);
 void __cdecl gv_RequestAddCandidateToOfficePool(int h, char* obj, int v, int flag);
 
+/* ADDRESS: GOLDDE 0x004b5190 */
 int __cdecl cm_ExChangePlayerIdentity(char* cmd, char* result)
 {
 	int idx;

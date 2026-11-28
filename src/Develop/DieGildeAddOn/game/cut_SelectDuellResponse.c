@@ -5,6 +5,7 @@ extern int g_772f2c;
 
 unsigned int __cdecl cut_RandMod(unsigned int);
 
+/* ADDRESS: GOLDDE 0x004ce2b0 */
 void __cdecl cut_SelectDuellResponse(char* state)
 {
 	int r;

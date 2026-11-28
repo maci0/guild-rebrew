@@ -3,6 +3,7 @@
 
 void __cdecl d2_SetElementEnabled(int, int);
 
+/* ADDRESS: GOLDDE 0x005add80 */
 void __cdecl d2_EnableDialogItems(int count, char* items)
 {
 	int* ctrl_id;

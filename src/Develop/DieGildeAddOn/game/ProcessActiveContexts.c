@@ -29,6 +29,7 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 /* Inferred execution-context role/name; original source-unit ownership unresolved. */
 extern char* evt_CurrentScript;
 extern void __cdecl evt_RunGfxScript(unsigned char*);
+/* ADDRESS: GOLDDE 0x004241e0 */
 void __cdecl ProcessActiveContexts(void)
 {
 	int i;

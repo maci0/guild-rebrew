@@ -11,6 +11,7 @@ extern pos14_7f4c00 gm_GameTime;
 char* __cdecl gm_LookupSpecialObject(int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x0053e1b0 */
 void __cdecl he_AllocSmokeEffect(char* o)
 {
 	char* e;

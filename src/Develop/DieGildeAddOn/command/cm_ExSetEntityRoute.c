@@ -6,6 +6,7 @@ void __cdecl rt_FreeRoutePoints(void*);
 void* __cdecl rt_CloneRoutePoints(void*);
 
 /* ADDRESS: GOLDTL 0x004cdda0 */
+/* ADDRESS: GOLDDE 0x004bb580 */
 int __cdecl cm_ExSetEntityRoute(char* command, unsigned char* response, unsigned char* unused)
 {
 	char buf[0x240];

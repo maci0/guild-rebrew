@@ -7,6 +7,7 @@ int* __cdecl gv_LookupWorkerSlot(char* e, int* r);
 int __cdecl gm_GetEntitySlotIndex(int d, int* s);
 int __cdecl gv_SendAllocGraveyardWorker(char* e, int a, int b, int c, int d);
 
+/* ADDRESS: GOLDDE 0x004df7b0 */
 int __cdecl gv_AssignGraveyardField(char* e)
 {
 	int* r;

@@ -2,6 +2,7 @@ extern char gm_WeaponSpecs[];
 
 /* ADDRESS: GOLD 0x004cd9d0 */
 /* ADDRESS: GOLDTL 0x004ce590 */
+/* ADDRESS: GOLDDE 0x004bbd30 */
 int __cdecl gm_LookupWeaponSpec(int value)
 {
 	int index;

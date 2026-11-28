@@ -27,6 +27,7 @@ extern float __cdecl gm_GetCityStatsSummary(float *a0);
 extern int __cdecl gm_GetTypeProductValue(int a0);
 
 /* ADDRESS: GOLDTL 0x0049dd90 */
+/* ADDRESS: GOLDDE 0x0048c7c0 */
 int __cdecl ai_StartBuergermeisterKerker(int a0, unsigned short *a1, int a2, Msg_49dd90 *a3, Msg_49dd90 *a4)
 {
     char *targetEntity;

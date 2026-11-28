@@ -14,6 +14,7 @@ extern double g_665b80;
 extern double g_665b78;
 
 /* ADDRESS: GOLDTL 0x00502450 */
+/* ADDRESS: GOLDDE 0x004eda90 */
 int __cdecl gm_CalcTownSlotTargetStock(int a, int b)
 {
 	unsigned short w;
@@ -36,6 +37,7 @@ unsigned char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 
 /* ADDRESS: GOLDTL 0x005024e0 */
+/* ADDRESS: GOLDDE 0x004edb20 */
 int __cdecl gm_CalcTownSlotProductionSupply(int a, int b)
 {
 	char* c;

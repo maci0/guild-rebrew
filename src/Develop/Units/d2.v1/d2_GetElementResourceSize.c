@@ -26,6 +26,7 @@ extern char* d2_Controls;
 char* __cdecl d2_GetResourceData(int idx);
 
 /* ADDRESS: GOLDTL 0x00472050 */
+/* ADDRESS: GOLDDE 0x00465450 */
 int __cdecl d2_GetElementResourceSize(int slot, int* w, int* h)
 {
 	Slot* s;

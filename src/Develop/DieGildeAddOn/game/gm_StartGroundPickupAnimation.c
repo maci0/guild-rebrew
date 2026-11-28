@@ -15,6 +15,7 @@ void __cdecl d3_ApplyWorldTransformToObject(int, char*, char*);
 void __cdecl d3_SetObjectVisible(int, int);
 char* __cdecl ch_CreateAction(int, int, int);
 
+/* ADDRESS: GOLDDE 0x004c53f0 */
 void __cdecl gm_StartGroundPickupAnimation(int* a)
 {
 	char* e;

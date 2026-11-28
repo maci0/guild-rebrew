@@ -1,3 +1,7 @@
+extern char gm_SlotTableKindView[];
+extern char g_6b8010[];
+extern char str_empty[];
+extern char g_67d444[];
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
@@ -26,6 +30,7 @@ void __cdecl d3_FreeEventGfxSlot(int);
 extern pos14_7f4c00 gm_GameTime;
 
 /* ADDRESS: GOLDTL 0x00555d30 */
+/* ADDRESS: GOLDDE 0x0053c0e0 */
 void __cdecl he_RunBardeEvent(char* obj)
 {
 	char buf[0x200];
@@ -67,7 +72,7 @@ void __cdecl he_RunBardeEvent(char* obj)
 			return;
 		}
 		io_FormatTextBuffer(buf, 0x1e29);
-		for (j = 0x7f4ca2; j < 0x85a0a2; j += 0x21c) {
+		for (j = (int) &gm_SlotTableKindView; j < ((int) &gm_SlotTableKindView + 0x65400); j += 0x21c) {
 			if (*(unsigned short*) (j - 2) == 0xffff) {
 				continue;
 			}
@@ -75,7 +80,7 @@ void __cdecl he_RunBardeEvent(char* obj)
 				continue;
 			}
 			he_PostEntityMessage(*(int*) (j + 2), *(int*) (obj + 4), buf, 0,
-				     0x601, (void*) 0x6b5c60);
+				     0x601, (void*) &str_empty);
 		}
 		gm_AddTime(obj + 0x52, 0, 5, 0);
 		*(int*) (obj + 0x84) = cm_SendSetHE(2, obj);
@@ -89,10 +94,10 @@ void __cdecl he_RunBardeEvent(char* obj)
 			if (e == 0 || *(int*) e != 0x68427244) {
 				*(int*) (obj + 0xb4) = -1;
 				x = gm_GetBardEventEntry(*(unsigned short*) (obj + 0xac));
-				sprintf(buf, (char*) 0x67d444, *(int*) (x + 8));
-				t = *(int*) 0x6b8010;
+				sprintf(buf, (char*) &g_67d444, *(int*) (x + 8));
+				t = *(int*) &g_6b8010;
 				d3_SelectSceneContext(0, 1);
-				q = evt_LoadGfxScript((char*) 0x6a5edc);
+				q = evt_LoadGfxScript("SpecialEvents\\barde\\barde_create.esc");
 				if (q != 0) {
 					*(int*) q = 0x68427244;
 					*(int*) (obj + 0xb4) = *(int*) (q + 0x100);
@@ -111,14 +116,14 @@ void __cdecl he_RunBardeEvent(char* obj)
 		}
 		*(int*) (obj + 0x70) = 2;
 		if (*(int*) (obj + 0x88) != 0 &&
-		    (*(int*) (gm_LocalPlayerSlot * 0x21c + 0x7f4e68) & 0x20000) != 0) {
+		    (*(int*) (gm_LocalPlayerSlot * 0x21c + ((int) &gm_SlotTableKindView + 0x1c6)) & 0x20000) != 0) {
 			d3_FreeEventGfxSlot(*(int*) (obj + 0x88));
 			*(int*) (obj + 0x88) = 0;
 		}
 		return;
 	case 3:
 		if (*(unsigned char*) (obj + 0x78) & 2) {
-			for (j = 0x7f4e68; j < 0x85a268; j += 0x21c) {
+			for (j = ((int) &gm_SlotTableKindView + 0x1c6); j < ((int) &gm_SlotTableKindView + 0x655c6); j += 0x21c) {
 				if (*(unsigned short*) (j - 0x1c8) == 0xffff) {
 					continue;
 				}

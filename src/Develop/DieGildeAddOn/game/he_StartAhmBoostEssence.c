@@ -13,6 +13,7 @@ void __cdecl he_AssignActionSlot(char*, int, int, char*);
 void __cdecl d3snd_PlayWorkerOrderVoice(void);
 void __cdecl he_FreeAction(char*);
 
+/* ADDRESS: GOLDDE 0x0055bfa0 */
 void __cdecl he_StartAhmBoostEssence(char* u)
 {
 	char* h;

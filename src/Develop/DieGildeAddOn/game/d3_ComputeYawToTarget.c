@@ -48,6 +48,7 @@ float __cdecl d3_ComputeYawToTarget(char* obj, float* target)
 #else
 
 /* ADDRESS: GOLDTL 0x00444700 */
+/* ADDRESS: GOLDDE 0x0043c490 */
 float __cdecl d3_ComputeYawToTarget(char* obj, float* target)
 {
 	float pos[4];

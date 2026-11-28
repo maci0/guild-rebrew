@@ -13,6 +13,7 @@
 #endif
 
 /* ADDRESS: GOLDTL 0x005305a0 */
+/* ADDRESS: GOLDDE 0x00518f20 */
 void __cdecl sv_ClearObjectSelection(void)
 {
 	int p;

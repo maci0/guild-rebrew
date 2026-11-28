@@ -13,6 +13,7 @@ void __cdecl d3_TransformDirectionToRef(char* o, char* a, float* v, char* m);
 void __cdecl d3_TransformPointToRef(char* o, char* a, char* v, char* m);
 
 /* ADDRESS: GOLDTL 0x00450d40 */
+/* ADDRESS: GOLDDE 0x00446920 */
 char __cdecl d3_ClassifySceneLightNode(char* node, char* cam)
 {
 	if (*(int*) (node + 0x218) == 4) {

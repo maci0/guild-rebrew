@@ -46,6 +46,7 @@ void __cdecl io_FormatTextBuffer(void*, char*, ...);
 void __cdecl d2_SetLabelText(int, char*);
 void __cdecl d2_SetElementFont(int, int);
 
+/* ADDRESS: GOLDDE 0x0058a470 */
 void __cdecl d2_PopulateGeldleiheRows(Row* rows, int window, int form, int a4)
 {
 	char buf[0x80];

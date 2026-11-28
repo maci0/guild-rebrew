@@ -16,6 +16,7 @@ void __cdecl he_NotifyHeimsuchung(char*, char*, char*);
 /* Runs the plague-heimsuchung action message through its states and updates
  * the action duration it reports back to the caller. */
 /* ADDRESS: GOLDTL 0x005784d0 */
+/* ADDRESS: GOLDDE 0x0055e3a0 */
 void __cdecl he_RunHeimsuchung(char* obj)
 {
 	unsigned short* lager;

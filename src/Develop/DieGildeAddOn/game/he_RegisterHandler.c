@@ -5,6 +5,7 @@ extern char he_EventDispatchHandlers[];
 
 /* ADDRESS: GOLD 0x0053d860 */
 /* ADDRESS: GOLDTL 0x00545580 */
+/* ADDRESS: GOLDDE 0x0052bc30 */
 int __cdecl he_RegisterHandler(int index, int a2, int a3)
 {
 	if (index < 0 || index >= 0xa7) {

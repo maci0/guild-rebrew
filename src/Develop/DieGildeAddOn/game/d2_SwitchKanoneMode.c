@@ -8,6 +8,7 @@ void __cdecl d3_SetNodePosition(char*, int*);
 char __cdecl d3_SetObjectVisible(char*, char);
 
 /* ADDRESS: GOLDTL 0x00588710 */
+/* ADDRESS: GOLDDE 0x0056e3d0 */
 void __cdecl d2_SwitchKanoneMode(int obj, int state, int res, int selectedIndex, int loopMask)
 {
 	unsigned int start = *(unsigned int*) 0x6b7fac;

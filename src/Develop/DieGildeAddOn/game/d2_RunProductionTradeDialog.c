@@ -68,6 +68,7 @@ typedef struct {
 } Req_59ba40;
 
 /* ADDRESS: GOLDTL 0x0059ba40 */
+/* ADDRESS: GOLDDE 0x00580ce0 */
 int __cdecl d2_RunProductionTradeDialog(char* building)
 {
 	Req_59ba40 req;

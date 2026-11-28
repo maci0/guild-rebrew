@@ -8,6 +8,7 @@ int __cdecl gm_AddObjekt(int, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004c7b00 */
+/* ADDRESS: GOLDDE 0x004b52e0 */
 int __cdecl cm_ClientExMoveCredits(unsigned char* command, char* result)
 {
 	int v;

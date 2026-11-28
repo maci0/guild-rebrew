@@ -11,6 +11,7 @@ extern int d3_ActiveScene;
 void __cdecl d3_VisitSceneObjects(int a, char* e, int mask, void (__cdecl* cb)(void), RGB_COLOR* c);
 void __cdecl d3_SetObjectColorBytes(void);
 
+/* ADDRESS: GOLDDE 0x00413240 */
 void __cdecl d3_SetSubtreeColor(char* e, unsigned char r, unsigned char g, unsigned char b)
 {
 	RGB_COLOR c;

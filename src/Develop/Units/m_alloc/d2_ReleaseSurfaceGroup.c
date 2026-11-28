@@ -21,6 +21,7 @@ void __cdecl d2_ReleaseSurface(Item* p);
 void __cdecl m_FreeTracked(void* p);
 
 /* ADDRESS: GOLDTL 0x0047ac60 */
+/* ADDRESS: GOLDDE 0x00469c50 */
 void __cdecl d2_ReleaseSurfaceGroup(Group* g)
 {
 	int i;

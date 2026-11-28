@@ -57,6 +57,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005e5a50 */
+/* ADDRESS: GOLDDE 0x005c6d10 */
 void __cdecl d2_RunBlutracheDialog(char* entity)
 {
 	char text[512];

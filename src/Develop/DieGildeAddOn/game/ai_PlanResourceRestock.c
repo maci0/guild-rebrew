@@ -18,6 +18,7 @@ char* __cdecl gm_FindCityItemHolder(int id);
 Ware* __cdecl gm_QueryEntities(int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x0047e0e0 */
+/* ADDRESS: GOLDDE 0x0046d090 */
 void __cdecl ai_PlanResourceRestock(int building, char* pkt)
 {
 	float ratio;

@@ -3,6 +3,7 @@
 void __cdecl d3_ReleaseTexture(int);
 void __cdecl m_FreeTracked(void*);
 
+/* ADDRESS: GOLDDE 0x0044efb0 */
 void __cdecl d3_RemoveSkyLayer(char* owner, char* n)
 {
 	char* p;

@@ -5,6 +5,7 @@
 
 #pragma intrinsic(strlen)
 
+/* ADDRESS: GOLDDE 0x00425770 */
 void __cdecl txt_TrimTrailingSpaces(char* s)
 {
 	int n;

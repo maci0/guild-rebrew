@@ -15,6 +15,7 @@ int __stdcall fcn_00610011(void* device, int width, int height, int kind, int st
  * rounds the size up to the power of two the device needs and allocates.
  * The descriptor filled by the resource callback is an inferred view. */
 /* ADDRESS: GOLDTL 0x004770a0 */
+/* ADDRESS: GOLDDE 0x00468e70 */
 int __cdecl d2_CreateSurface(int* src, int flags)
 {
 	typedef struct TexDesc {

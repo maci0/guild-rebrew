@@ -7,6 +7,7 @@ extern char evt_StopCharacterErrStr[];
 void __cdecl evt_LogScriptError(int*, int, char*);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 
+/* ADDRESS: GOLDDE 0x0040c910 */
 int __cdecl StopCharacter(void* actorRef)
 {
 	void* actor;

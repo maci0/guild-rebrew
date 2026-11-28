@@ -5,6 +5,7 @@ int  __cdecl d2_RunErpressungDialog(void*, void*);
 extern char str_fmt_s[];
 void __cdecl io_FormatTextBuffer(void*, int, int);
 
+/* ADDRESS: GOLDDE 0x004e3360 */
 int __cdecl he_HandleErpressungRequest(void* entity, void* request)
 {
 	int mode;

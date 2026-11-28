@@ -12,6 +12,7 @@ void __cdecl d3_ReplaceObjectModel(char* e, int v);
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
 /* ADDRESS: GOLDTL 0x0040e9c0 */
+/* ADDRESS: GOLDDE 0x0040d7c0 */
 int __cdecl ecmd_SetAngle(char** a, float* x, float* y, float* z)
 {
 	if (*a != 0) {
@@ -27,6 +28,7 @@ int __cdecl ecmd_SetAngle(char** a, float* x, float* y, float* z)
 
 /* ADDRESS: GOLD 0x0040db30 */
 /* ADDRESS: GOLDTL 0x0040ea40 */
+/* ADDRESS: GOLDDE 0x0040d840 */
 int __cdecl ecmd_MoveObject(char** a, int* x, int* y, int* z, int* w)
 {
 	if (*a != 0) {
@@ -40,6 +42,7 @@ int __cdecl ecmd_MoveObject(char** a, int* x, int* y, int* z, int* w)
 
 /* ADDRESS: GOLD 0x0040dbb0 */
 /* ADDRESS: GOLDTL 0x0040eac0 */
+/* ADDRESS: GOLDDE 0x0040d8c0 */
 char** __cdecl ecmd_RotateObject(char** a, int* x, int* y, int* z, int* w)
 {
 	if (*a != 0) {
@@ -53,6 +56,7 @@ char** __cdecl ecmd_RotateObject(char** a, int* x, int* y, int* z, int* w)
 
 /* ADDRESS: GOLD 0x0040dc30 */
 /* ADDRESS: GOLDTL 0x0040eb40 */
+/* ADDRESS: GOLDDE 0x0040d940 */
 int __cdecl ecmd_MoveObjectRelative(char** a, int* x, int* y, int* z, int* w)
 {
 	if (*a != 0) {
@@ -67,6 +71,7 @@ int __cdecl ecmd_MoveObjectRelative(char** a, int* x, int* y, int* z, int* w)
 
 /* ADDRESS: GOLD 0x0040dcb0 */
 /* ADDRESS: GOLDTL 0x0040ebc0 */
+/* ADDRESS: GOLDDE 0x0040d9c0 */
 int __cdecl ecmd_RotateObjectRelative(char** a, int* x, int* y, int* z, int* w)
 {
 	if (*a != 0) {
@@ -82,6 +87,7 @@ int __cdecl ecmd_RotateObjectRelative(char** a, int* x, int* y, int* z, int* w)
 
 /* ADDRESS: GOLD 0x0040ddb0 */
 /* ADDRESS: GOLDTL 0x0040ecc0 */
+/* ADDRESS: GOLDDE 0x0040dac0 */
 int __cdecl ecmd_ReplaceObject(char** a, int* v)
 {
 	if (*a != 0) {

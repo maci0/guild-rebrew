@@ -9,6 +9,7 @@ void __cdecl cm_RequestChrMoveToUniverse(int h, int a, int b, char* tag);
 void __cdecl cm_RequestChrWalkToDummy(int h, int a, int b, char* tag);
 
 /* ADDRESS: GOLDTL 0x0057f9a0 */
+/* ADDRESS: GOLDDE 0x00565740 */
 void __cdecl cm_SendPlayerReturnToBuilding(int unused)
 {
 	char* cursor;

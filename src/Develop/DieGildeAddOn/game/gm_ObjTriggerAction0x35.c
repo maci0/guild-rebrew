@@ -15,6 +15,7 @@ char* __cdecl he_fn_Handlung(void);
 void __cdecl he_NotifyAction0x35Blocked(char*, char*);
 void __cdecl cm_SendSetHE(int, char*);
 
+/* ADDRESS: GOLDDE 0x005bf450 */
 int __cdecl gm_ObjTriggerAction0x35(char* e)
 {
 	char* p;

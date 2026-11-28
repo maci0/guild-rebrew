@@ -33,6 +33,7 @@ int __cdecl d3_FindSceneObject(int a1, int a2, int a3, char* name);
 int __cdecl d3_CreateObjectAnimation(char* obj, Flags4cf450 fl, int n, void* ents);
 
 /* ADDRESS: GOLDTL 0x00414d20 */
+/* ADDRESS: GOLDDE 0x004132d0 */
 int __cdecl d3_StartCameraFlight(int duration, int count, ...)
 {
 	char rec[0x1600];

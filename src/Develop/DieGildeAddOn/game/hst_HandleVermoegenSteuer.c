@@ -11,6 +11,7 @@ int __cdecl gm_IsSlotActivePerson(int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x0049e700 */
 int __cdecl hst_HandleVermoegenSteuer(int sel, int id, char* arg)
 {
 	void* city;

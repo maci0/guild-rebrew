@@ -5,6 +5,7 @@
 extern int* d2_TutorialState;
 extern volatile int tb_TimerPaused;
 
+/* ADDRESS: GOLDDE 0x00564a40 */
 int __cdecl d2_IsTutorialActionAllowed(int mask)
 {
 	char* p;

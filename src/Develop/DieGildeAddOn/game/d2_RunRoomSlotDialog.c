@@ -12,6 +12,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005bdfc0 */
+/* ADDRESS: GOLDDE 0x005a0420 */
 int __cdecl d2_RunRoomSlotDialog(unsigned short* room, unsigned char* building, int slotCountA, int slotCountB)
 {
 	int btn;
@@ -23,7 +24,7 @@ int __cdecl d2_RunRoomSlotDialog(unsigned short* room, unsigned char* building, 
 	int r;
 
 	info = &((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*building];
-	dlg = d2_LoadForm(0, 0, (char*) 0x6ac448);
+	dlg = d2_LoadForm(0, 0, "Handel\\Handel_Lager_Neuer_Slot");
 	d2_CenterDialogWindows(dlg);
 	io_AppendText(0x10b);
 	if (*room != 0x116) {

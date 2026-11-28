@@ -5,6 +5,7 @@
 
 void __cdecl msx_ReacquireWaveDriver(int, int, int);
 
+/* ADDRESS: GOLDDE 0x00424df0 */
 void __cdecl msx_ReacquireAllWaveDrivers(int window, int message)
 {
 	int driverCursor;

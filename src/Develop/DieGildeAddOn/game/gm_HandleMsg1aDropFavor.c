@@ -1,3 +1,4 @@
+extern char gm_EntitySlotTable[];
 #include <string.h>
 
 typedef struct {
@@ -14,6 +15,7 @@ void __cdecl io_FormatTextBuffer(char *, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char *, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004b82f0 */
+/* ADDRESS: GOLDDE 0x004a63a0 */
 int __cdecl gm_HandleMsg1aDropFavor(int *obj)
 {
 	int a;
@@ -39,7 +41,7 @@ int __cdecl gm_HandleMsg1aDropFavor(int *obj)
 		return 0x400;
 	}
 	type = a & 0xffff;
-	t = (char *) (0x7f4ca0 + type * 0x21c);
+	t = (char *) ((int) &gm_EntitySlotTable + type * 0x21c);
 	r = gm_RandomMod(5) & 0xffff;
 	neg = r * 2 + 6;
 	cm_RequestCopyEntityData(h->f4, *(int *) (t + 4), -neg, 1);

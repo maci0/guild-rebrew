@@ -8,6 +8,7 @@ void __cdecl he_SwapZigeunerMoods(int, int);
 void __cdecl he_SendZigeunerMsg9e(int, int);
 void __cdecl he_SendZigeunerMsg9f(int, int);
 
+/* ADDRESS: GOLDDE 0x00561d00 */
 void __cdecl he_DispatchZigeunerEvent(int actor, int target, int kind)
 {
 	if (kind == 0) {

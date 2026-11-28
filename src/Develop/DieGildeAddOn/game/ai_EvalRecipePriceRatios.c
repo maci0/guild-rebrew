@@ -29,6 +29,7 @@ extern unsigned char gm_ActiveTownIndex;
 float __cdecl gm_GetSeasonPrice(int id, unsigned char a);
 float __cdecl eval_ObjektPreis2Credits(int id, int k);
 
+/* ADDRESS: GOLDDE 0x00492af0 */
 int __cdecl ai_EvalRecipePriceRatios(Calc* p)
 {
 	int i;

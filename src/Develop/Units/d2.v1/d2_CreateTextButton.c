@@ -64,6 +64,7 @@ int __cdecl d2_CreateTextButton(int x, int y, int a3, int a4)
 }
 #else
 /* ADDRESS: GOLDTL 0x00468cf0 */
+/* ADDRESS: GOLDDE 0x0045c670 */
 int __cdecl d2_CreateTextButton(int x, int y, int resourceId, int text)
 {
 	int idx;

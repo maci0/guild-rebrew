@@ -1,3 +1,5 @@
+void __cdecl main_RunGameLoop();
+extern char g_85a0a4[];
 __declspec(dllimport) void __stdcall Sleep(unsigned long);
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 int __cdecl d3_DeinitUniverse();
@@ -68,6 +70,7 @@ typedef struct ResetProto { unsigned char kind; unsigned char rest[0x24c]; } Res
 extern int g_6a3420; extern int g_774954; extern char g_774965; extern int nt_ClientSocket; extern int d2_SuppressOverlay; extern double g_662cc0;
 extern int g_1040480; extern int g_1040484; extern int g_1040488; extern int g_104048c; extern int d2_ScreenHeight; extern int g_1040494;
 /* ADDRESS: GOLDTL 0x00543080 */
+/* ADDRESS: GOLDDE 0x00529910 */
 void __cdecl gm_RunRoundUpdate(void)
 {
 	int savedSpeed;
@@ -105,7 +108,7 @@ void __cdecl gm_RunRoundUpdate(void)
 			io_FormatTextBuffer(messageText, 0x79);
 			if (!d2_ShowModalMessageBox(messageText, 1)) {
 				g_774954 = 1;
-				main_ExitToFrameHandler(0x5438c0);
+				main_ExitToFrameHandler((int) main_RunGameLoop);
 				return;
 			}
 			d2_RenderAndPresentFrame();
@@ -129,11 +132,11 @@ void __cdecl gm_RunRoundUpdate(void)
 	he_TickEventDeals();
 	he_TickApEvents();
 	if (g_6a3420) {
-		tmpVal = d2_LoadForm(0, 0, 0x6a43ac);
+		tmpVal = d2_LoadForm(0, 0, ((int) &g_6a3420 + 0xf8c));
 		d2_CenterForm(tmpVal, 3);
 		d2_SetForm(tmpVal, 1);
 		io_AppendText(0x7d);
-		gm_PackGameTime(0x7f4c00, timeBuf);
+		gm_PackGameTime(((int) &d3_BuildingCategorySceneIndices + 0x1100), timeBuf);
 		d2_SetForm(tmpVal, 0);
 		d2_DestroyForm(tmpVal);
 	}
@@ -162,14 +165,14 @@ void __cdecl gm_RunRoundUpdate(void)
 		cm_PruneCompletedStraftaten();
 		cm_StepCommandQueue();
 		Sleep(100);
-		entPtr = (char*) 0x7f4ca8;
+		entPtr = (char*) ((int) &gm_EntityIdField + 0x4);
 		do {
 			if (*(unsigned short*) &entPtr[-8] != 0xffff && *entPtr) {
 				gm_UpdateOwnerBuildings(tmpIdx);
 			}
 			entPtr = &entPtr[0x21c];
 			tmpIdx += 1;
-		} while ((int) entPtr < 0x85a0a8);
+		} while ((int) entPtr < ((int) &g_85a0a4 + 0x4));
 		cm_StepCommandQueue();
 		Sleep(100);
 		gm_UpdateActiveEntities();
@@ -210,17 +213,17 @@ void __cdecl gm_RunRoundUpdate(void)
 		do {
 			cm_RequestCopyEntityData(0xffffffff, *ptr, 0, 3);
 			ptr = &ptr[0x87];
-		} while ((int) ptr < 0x85a0a4);
+		} while ((int) ptr < (int) &g_85a0a4);
 		cm_RequestCopyEntityData(0xffffffff, 0xffffffff, 0, 4);
 		gm_ReplenishOfficeCandidates();
 	} else {
 		gm_AdvanceRoundCounters(2);
 	}
-	ptr = (unsigned int*) 0x7f4e8c;
+	ptr = (unsigned int*) ((int) &gm_EntityIdField + 0x1e8);
 	do {
 		*ptr = 0;
 		ptr = &ptr[0x87];
-	} while ((int) ptr < 0x85a28c);
+	} while ((int) ptr < ((int) &g_85a0a4 + 0x1e8));
 	if (g_6a3420) {
 		if (g_774965 && !(gm_ClientModeFlags & 4)) {
 			tmpVal = d2_CreateScrollPerga();
@@ -228,13 +231,13 @@ void __cdecl gm_RunRoundUpdate(void)
 			io_AppendText(0x7d);
 			d2_SetForm(tmpVal, 1);
 			io_AppendText(0x1ba0, *(int*) &gm_LocalPlayerSlot & 0xffff, *(int*) &gm_LocalPlayerSlot & 0xffff);
-			d3snd_QueueSound(0xfffffff9, 0, 0x6a438c, 0xffffffff, 0);
-			tmpIdx = main_RunFrameLoop(0x543080, 0x66087);
+			d3snd_QueueSound(0xfffffff9, 0, ((int) &g_6a3420 + 0xf6c), 0xffffffff, 0);
+			tmpIdx = main_RunFrameLoop((int) gm_RunRoundUpdate, 0x66087);
 			while (tmpIdx) {
 				if (*(int*) &d2_DialogButtonAction == 2) {
 					d2_DialogCloseRequested = 1;
 				}
-				tmpIdx = main_RunFrameLoop(0x543080, 0x66087);
+				tmpIdx = main_RunFrameLoop((int) gm_RunRoundUpdate, 0x66087);
 			}
 			d2_DestroyForm(tmpVal);
 			main_PlayOutroMovie();

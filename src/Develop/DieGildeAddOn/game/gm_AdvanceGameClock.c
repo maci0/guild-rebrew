@@ -11,6 +11,7 @@ extern pos14_7f4c00 gm_SyncGameTime;
 
 void __cdecl gm_AddTime(char*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x0051f960 */
 void __cdecl gm_AdvanceGameClock(void)
 {
 	int t;

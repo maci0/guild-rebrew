@@ -64,6 +64,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 int __cdecl gm_UseSpecialObject(Ent* e, Req* r);
 
+/* ADDRESS: GOLDDE 0x005a87c0 */
 int __cdecl d2_ConfirmUseObjekt(unsigned short* item)
 {
 	Req r = {0};

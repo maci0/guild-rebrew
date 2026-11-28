@@ -4,6 +4,7 @@ extern int sb_WaveDriver;
 
 int __cdecl msx_SetSampleVolume(int, int);
 
+/* ADDRESS: GOLDDE 0x00420620 */
 int __cdecl sb_SetVoiceVolume(int* state, int value)
 {
 	int r;

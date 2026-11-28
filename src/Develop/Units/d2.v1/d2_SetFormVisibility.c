@@ -1,3 +1,4 @@
+#include "d2_capacity.h"
 #include "Develop/client_types.h"
 #include "Develop/Units/d2.v1/gold_gui.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -53,6 +54,7 @@ void __cdecl d2_SetFormVisibility(int index, int value)
 }
 #else
 /* ADDRESS: GOLDTL 0x00471af0 */
+/* ADDRESS: GOLDDE 0x00464ff0 */
 void __cdecl d2_SetFormVisibility(int formId, int visible)
 {
 	Obj* form;
@@ -60,7 +62,7 @@ void __cdecl d2_SetFormVisibility(int formId, int visible)
 
 	form = &((Obj*)d2_Forms)[formId];
 	if (form->used) {
-		for (i = 0; i < 0x400; i++) {
+		for (i = 0; i < d2_ELEMENT_CAPACITY; i++) {
 			if (((D2_CONTROL_TL*) d2_Controls)[i].kind && *(Obj**) &((D2_CONTROL_TL*) d2_Controls)[i].value_050 == form) {
 				((D2_CONTROL_TL*) d2_Controls)[i].value_048 = (visible == 0);
 			}

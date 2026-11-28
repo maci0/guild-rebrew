@@ -6,6 +6,7 @@ void __cdecl io_FormatTextBuffer(void*, int, void*, void*, int);
 void __cdecl he_MessageBoxQuickjump(int, int, void*, int, int, int, int, int, void*);
 
 /* ADDRESS: GOLD 0x5a9d10 */
+/* ADDRESS: GOLDDE 0x00597b90 */
 void __cdecl he_NotifyDomizil03(void* recipient, void* subject, void* targetObj, int recipeId)
 {
 	char t;

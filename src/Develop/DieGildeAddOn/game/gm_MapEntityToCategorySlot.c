@@ -1,5 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x00507c30 */
+/* ADDRESS: GOLDDE 0x004f2dd0 */
 int __cdecl gm_MapEntityToCategorySlot(unsigned int k)
 {
 	switch (k) {

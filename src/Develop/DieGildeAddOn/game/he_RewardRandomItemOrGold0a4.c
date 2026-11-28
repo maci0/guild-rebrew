@@ -26,6 +26,7 @@ float __cdecl gm_GetSeasonPrice(int, unsigned char);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 
+/* ADDRESS: GOLDDE 0x00563a60 */
 void __cdecl he_RewardRandomItemOrGold0a4(char* h)
 {
 	struct level lv;

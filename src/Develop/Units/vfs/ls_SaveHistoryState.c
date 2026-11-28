@@ -18,6 +18,7 @@ extern char hst_HistoryTextActive;
 
 unsigned int __cdecl vfs_fwrite(void* p, int size, int n, void* file);
 
+/* ADDRESS: GOLDDE 0x0050a6f0 */
 int __cdecl ls_SaveHistoryState(void* file)
 {
 	int v;

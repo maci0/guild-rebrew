@@ -49,6 +49,7 @@ typedef struct Stock {
 #define g_id_field(row, ofs) (*(unsigned short*) ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[g_row_type(row)] + (ofs)))
 
 /* ADDRESS: GOLDTL 0x00595330 */
+/* ADDRESS: GOLDDE 0x0057adf0 */
 void __cdecl d2_RenderProduktionStockRows(int windowId, int formId, int rowCount, int filterId, int mode)
 {
 	char numbuf[32];

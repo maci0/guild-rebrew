@@ -46,6 +46,7 @@ void __cdecl d3_TransformPoint(char* obj, const float* in, float* out)
 }
 #else
 /* ADDRESS: GOLDTL 0x00455350 */
+/* ADDRESS: GOLDDE 0x0044ac00 */
 void __cdecl d3_TransformPoint(char* object, float* in, float* out)
 {
 	Node* n;

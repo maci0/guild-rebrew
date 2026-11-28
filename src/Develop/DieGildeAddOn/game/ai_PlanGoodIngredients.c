@@ -44,6 +44,7 @@ int __cdecl gm_CollectItemSuppliers(int type);
 int __cdecl ai_PlanGoodIngredients(char* actor, int* goodsPlan);
 
 /* ADDRESS: GOLDTL 0x004868d0 */
+/* ADDRESS: GOLDDE 0x00475880 */
 int __cdecl ai_PlanGoodIngredients(char* actor, int* goodsPlan)
 {
 	int* p;

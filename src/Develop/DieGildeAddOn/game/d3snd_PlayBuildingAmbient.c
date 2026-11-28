@@ -7,6 +7,7 @@ void __cdecl gm_GetSeason(char*);
 int __cdecl gm_CheckEntityType(unsigned char*);
 void __cdecl d3snd_PlayAmbientVoice(const char*, int, int);
 
+/* ADDRESS: GOLDDE 0x00500a20 */
 void __cdecl d3snd_PlayBuildingAmbient(unsigned char* e)
 {
 	gm_GetSeason(((char*)&gm_GameTime));

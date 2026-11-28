@@ -42,6 +42,7 @@ unsigned short __cdecl gm_RandomMod(int);
 #include "Develop/DieGildeAddOn/game/event_callbacks.h"
 #include "Develop/DieGildeAddOn/game/cutscene.h"
 
+/* ADDRESS: GOLDDE 0x00527c60 */
 void __cdecl gm_ResetDynastySlot(int idx)
 {
 	int keep[3];

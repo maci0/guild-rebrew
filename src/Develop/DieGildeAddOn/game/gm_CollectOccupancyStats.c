@@ -23,6 +23,7 @@ float __cdecl gm_CalcWeightedLawFactor(int*);
 double __cdecl gm_CalcLaw00And01Factor(int*);
 
 /* ADDRESS: GOLDTL 0x004faed0 */
+/* ADDRESS: GOLDDE 0x004e6cb0 */
 void __cdecl gm_CollectOccupancyStats(float* out)
 {
 	char* rec;

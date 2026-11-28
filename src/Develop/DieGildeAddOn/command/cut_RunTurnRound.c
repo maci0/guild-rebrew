@@ -69,6 +69,7 @@ void __cdecl cut_SetRandSeed(int);
 int __cdecl sprintf(char*, const char*, ...);
 
 /* ADDRESS: GOLDTL 0x004e51d0 */
+/* ADDRESS: GOLDDE 0x004d1a20 */
 void __cdecl cut_RunTurnRound(unsigned char* cutscene, int id)
 {
 	rec35c c1;

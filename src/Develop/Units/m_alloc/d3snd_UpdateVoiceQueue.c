@@ -22,6 +22,7 @@ void __cdecl m_FreeTracked(struct D3SND_VOICE_NODE*);
 
 
 /* ADDRESS: GOLDTL 0x004c0b40 */
+/* ADDRESS: GOLDDE 0x004ae660 */
 void __cdecl d3snd_UpdateVoiceQueue(void)
 {
 	struct D3SND_VOICE_NODE* cur;

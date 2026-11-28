@@ -2,6 +2,7 @@
 // fcn_0046c690 — table entry at 0x102cbc8 + arg*140.
 
 /* ADDRESS: GOLDTL 0x00469610 */
+/* ADDRESS: GOLDDE 0x0045cf30 */
 int __cdecl d2_GetRadioGroupSelection(int a)
 {
 	return *(int*) ((char*) 0x102cbc8 + a * 140);

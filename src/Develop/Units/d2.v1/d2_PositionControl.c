@@ -58,6 +58,7 @@ extern Win2_469 d2_Windows[0x60];
 extern UI_FIELD g_102d140[0x10];
 
 /* ADDRESS: GOLDTL 0x00469c40 */
+/* ADDRESS: GOLDDE 0x0045d560 */
 void __cdecl d2_PositionControl(int a1, int a2, int index)
 {
 	D2_CONTROL_TL *e;

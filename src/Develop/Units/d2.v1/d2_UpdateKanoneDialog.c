@@ -1,3 +1,12 @@
+extern char g_14b54c0[];
+extern char g_6a9480[];
+extern char g_14b54c4[];
+extern char g_9a9214[];
+extern char g_9a9218[];
+extern char g_9a921c[];
+extern char g_9a9208[];
+extern char g_9a920c[];
+extern char g_9a9210[];
 /* Refreshes the portrait graphics of one animation object: three slot frames,
    bars, the two counter labels and the position/displacement fields. */
 #include "Develop/DieGildeAddOn/game/client_data.h"
@@ -18,6 +27,7 @@ void __cdecl io_FormatTextBuffer(char*, char*, ...);
 int __cdecl gm_GetSeasonTreasury(char*, unsigned char);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00588200 */
+/* ADDRESS: GOLDDE 0x0056dec0 */
 void __cdecl d2_UpdateKanoneDialog(char* obj, char* panel, char* a2)
 {
 	int level;
@@ -66,25 +76,25 @@ void __cdecl d2_UpdateKanoneDialog(char* obj, char* panel, char* a2)
 	d2_CreateGuiWindow(*(int*) (panel + 0xc4), 0, 100,
 	             (int) (*(float*) (a2 + 8 + *(int*) (panel + 0xa0) * 4) * 100.0f), 1);
 	d2_SetForm(*(int*) (panel + 0xc0), 2);
-	io_AppendText(0x6811b0);
-	rec = d2_EqualizeWindowButtonWidths(0, 0xf, *(char**) 0x14b54c0, *(int*) &d2_CurrentWindowId);
+	io_AppendText((int) &str_dollar_C);
+	rec = d2_EqualizeWindowButtonWidths(0, 0xf, *(char**) &g_14b54c0, *(int*) &d2_CurrentWindowId);
 	((D2_CONTROL_TL*) (*(int*) &d2_Controls))[rec].value_06c = 1;
 	((D2_CONTROL_TL*) (*(int*) &d2_Controls))[rec].width =
 	    *(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&d2_WindowMetricsView) / 2;
 	d2_SetElementFont(rec, 0x54);
-	io_FormatTextBuffer(text, (char*) 0x6a9480, v2, v1);
+	io_FormatTextBuffer(text, (char*) &g_6a9480, v2, v1);
 	rec = d2_EqualizeWindowButtonWidths(0, 0x23, text, *(int*) &d2_CurrentWindowId);
 	((D2_CONTROL_TL*) (*(int*) &d2_Controls))[rec].value_06c = 1;
 	((D2_CONTROL_TL*) (*(int*) &d2_Controls))[rec].width =
 	    *(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&d2_WindowMetricsView) / 2;
 	d2_SetElementFont(rec, 0x54);
 	rec = d2_EqualizeWindowButtonWidths(*(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&d2_WindowMetricsView) / 2,
-	                   0xf, *(char**) 0x14b54c4, *(int*) &d2_CurrentWindowId);
+	                   0xf, *(char**) &g_14b54c4, *(int*) &d2_CurrentWindowId);
 	((D2_CONTROL_TL*) (*(int*) &d2_Controls))[rec].value_06c = 1;
 	((D2_CONTROL_TL*) (*(int*) &d2_Controls))[rec].width =
 	    *(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&d2_WindowMetricsView) / 2;
 	d2_SetElementFont(rec, 0x54);
-	io_FormatTextBuffer(text, (char*) 0x6a9480,
+	io_FormatTextBuffer(text, (char*) &g_6a9480,
 	             gm_GetSeasonTreasury((char*) (*(unsigned short*) &gm_LocalPlayerSlot * 0x21c + (unsigned long)&gm_EntitySlotTable),
 	                          *(unsigned char*) &gm_ActiveTownIndex),
 	             *(int*) (*(unsigned short*) &gm_LocalPlayerSlot * 0x21c + (unsigned long)&gm_EntitySlotTable + 0x194));
@@ -94,10 +104,10 @@ void __cdecl d2_UpdateKanoneDialog(char* obj, char* panel, char* a2)
 	((D2_CONTROL_TL*) (*(int*) &d2_Controls))[rec].width =
 	    *(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&d2_WindowMetricsView) / 2;
 	d2_SetElementFont(rec, 0x54);
-	*(int*) 0x9a9214 = level;
-	*(int*) 0x9a9218 = percent;
-	*(int*) 0x9a921c = *(int*) (panel + 0xa0);
-	*(int*) 0x9a9208 = *(int*) (panel + 0x10);
-	*(int*) 0x9a920c = *(int*) (panel + 0x14);
-	*(int*) 0x9a9210 = *(int*) (panel + 0x18);
+	*(int*) &g_9a9214 = level;
+	*(int*) &g_9a9218 = percent;
+	*(int*) &g_9a921c = *(int*) (panel + 0xa0);
+	*(int*) &g_9a9208 = *(int*) (panel + 0x10);
+	*(int*) &g_9a920c = *(int*) (panel + 0x14);
+	*(int*) &g_9a9210 = *(int*) (panel + 0x18);
 }

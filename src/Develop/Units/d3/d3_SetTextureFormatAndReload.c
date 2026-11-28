@@ -3,6 +3,7 @@ extern char* d3_TextureBank;
 char __cdecl d3_ReloadTexture(char* a);
 
 /* ADDRESS: GOLDTL 0x0045d090 */
+/* ADDRESS: GOLDDE 0x00452040 */
 char __cdecl d3_SetTextureFormatAndReload(char* a, int v)
 {
 	if (a != 0) {

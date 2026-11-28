@@ -8,6 +8,7 @@ extern int msx_Initialized;
 
 int __cdecl msx_FindSampleHandleIndex(int);
 
+/* ADDRESS: GOLDDE 0x00424ee0 */
 int __cdecl msx_SetSampleData(int sampleHandle, int fileExt, int data, int size)
 {
 	int r = 0;

@@ -102,6 +102,7 @@ int __cdecl d2_CreateRadioGroup(int, ...);
 void __cdecl d2_AddToRadioGroup(int, int);
 
 /* ADDRESS: GOLDTL 0x005b88b0 */
+/* ADDRESS: GOLDDE 0x0059b0b0 */
 void __cdecl d2_RunPersonalbuchDialog(char* building, int winCtx)
 {
 	int cnt;

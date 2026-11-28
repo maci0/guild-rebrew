@@ -32,6 +32,7 @@ void __cdecl ai_StepEntityTurns(void);
 void __cdecl gm_TickStampedItems(void);
 void __cdecl gm_UpdateGraveyardFlags(void);
 
+/* ADDRESS: GOLDDE 0x004b6c20 */
 int __cdecl cm_ExAdvanceGameTick(char* x, char* out)
 {
 	int i;

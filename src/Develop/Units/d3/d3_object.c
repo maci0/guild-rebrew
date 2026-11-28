@@ -15,6 +15,7 @@ void __cdecl d3_DisposeObject(char*);
 #endif
 
 /* Inferred name and placement; this removes a list node, not its hierarchy. */
+/* ADDRESS: GOLDDE 0x00432a40 */
 void __cdecl d3_RemoveObjectFromList(D3_OBJECT* object)
 {
     switch (object->art) {
@@ -37,6 +38,7 @@ void __cdecl d3_RemoveObjectFromList(D3_OBJECT* object)
 }
 
 /* Inferred name and placement; native draw-part providers remain separate. */
+/* ADDRESS: GOLDDE 0x00432c90 */
 void __cdecl d3_CleanupObjectDrawData(D3_OBJECT* object)
 {
 	int i;
@@ -61,6 +63,7 @@ void __cdecl d3_CleanupObjectDrawData(D3_OBJECT* object)
 	object->kontext = 0;
 }
 
+/* ADDRESS: GOLDDE 0x00432fb0 */
 void __cdecl d3_UnlinkObject(D3_OBJECT* object)
 {
 	if (object->naechstes != 0) {
@@ -83,6 +86,7 @@ void __cdecl d3_UnlinkObject(D3_OBJECT* object)
 	object->flags0 &= ~2;
 }
 
+/* ADDRESS: GOLDDE 0x0043b030 */
 char __cdecl d3_DestroyObject(D3_OBJECT* object)
 {
 	if (object != 0) {
@@ -103,6 +107,7 @@ void __cdecl d3_ReleaseResourceSlot(char*);
 #else
 void __cdecl d3_ReleaseMeshSlotTextures(char*);
 #endif
+/* ADDRESS: GOLDDE 0x0044c340 */
 void __cdecl d3_CleanupObjectAuxSlots(D3_OBJECT* object)
 {
     int i;

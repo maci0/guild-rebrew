@@ -20,6 +20,7 @@ void __cdecl d3snd_StopSourceVoiceSafe(int a);
 
 /* Disposes a scene object and its children, switching to its universe first. */
 /* ADDRESS: GOLDTL 0x004398d0 */
+/* ADDRESS: GOLDDE 0x004327e0 */
 void __cdecl d3_DisposeObject(char* obj)
 {
 	char* u;

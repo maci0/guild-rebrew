@@ -12,6 +12,7 @@ extern char* sb_Voices;
 int __cdecl msx_GetSampleStatus(int h);
 void __cdecl msx_InitSample(int h);
 
+/* ADDRESS: GOLDDE 0x0041f830 */
 Voice* __cdecl sb_AllocVoice(void)
 {
 	Voice* best;

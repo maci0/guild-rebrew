@@ -14,6 +14,7 @@ extern float __cdecl sub_451380(float *, float *);
 extern void __cdecl sub_438cb0(void *, float *);
 
 /* ADDRESS: GOLDTL 0x004d2c80 */
+/* ADDRESS: GOLDDE 0x004bff70 */
 void __cdecl cut_PlaceCombatTeamAtDummies(int *arr, int teamTag)
 {
     char buf[0x100]; float direction[3], position[4], rotation[3], height;

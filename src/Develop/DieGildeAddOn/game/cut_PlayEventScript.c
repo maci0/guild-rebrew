@@ -4,6 +4,7 @@ int __cdecl evt_LoadGfxScript(int);
 void __cdecl fcn_00442830(void*);
 
 /* ADDRESS: GOLDTL 0x004e4470 */
+/* ADDRESS: GOLDDE 0x004d0e60 */
 int __cdecl cut_PlayEventScript(int a)
 {
 	void* p;

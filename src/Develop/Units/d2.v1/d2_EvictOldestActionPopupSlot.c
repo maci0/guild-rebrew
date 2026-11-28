@@ -8,6 +8,7 @@ void __cdecl d2_CloseActionPopup(char*);
 void __cdecl he_FreeAction(char*);
 
 /* ADDRESS: GOLDTL 0x005455b0 */
+/* ADDRESS: GOLDDE 0x0052bc60 */
 unsigned int __cdecl d2_EvictOldestActionPopupSlot(void)
 {
 	pos14_7f4c00 pos;

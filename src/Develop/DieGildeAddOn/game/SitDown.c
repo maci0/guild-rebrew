@@ -6,6 +6,7 @@ extern char* evt_CurrentScript;
 char* __cdecl CreateAnimationEvent(char* owner, char* name);
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
+/* ADDRESS: GOLDDE 0x0040c510 */
 int __cdecl SitDown(char** a, char** v)
 {
 	if (evt_WaitingScriptTask != 0 && *(void**) (evt_WaitingScriptTask + 0x44) == (void*) SitDown) {

@@ -6,6 +6,7 @@ extern int g_7f3e20[];
 
 int __cdecl sb_PlayVoice(int, int, int, int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x005009d0 */
 void __cdecl d3snd_PlayAmbientVoice(int soundName, int volume, int pitch)
 {
 	int h;

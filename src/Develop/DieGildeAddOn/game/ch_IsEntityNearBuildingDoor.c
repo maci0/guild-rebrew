@@ -8,6 +8,7 @@ char* __cdecl d3_FindSceneObject(char*, int, int, char*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 #include "Develop/Units/d3/client_scene_transform.h"
 
+/* ADDRESS: GOLDDE 0x00512920 */
 int __cdecl ch_IsEntityNearBuildingDoor(char* actor, unsigned char* building)
 {
 	float radius;

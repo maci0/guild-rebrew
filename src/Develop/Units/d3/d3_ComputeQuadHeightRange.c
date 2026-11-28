@@ -6,6 +6,7 @@ int __cdecl d3_ComputeTriangleHeightRange(void* o, void* a, void* b, void* c, vo
  * pair and the code picks those, otherwise it takes the componentwise
  * extremes of the two missing endpoints. */
 /* ADDRESS: GOLDTL 0x00413c40 */
+/* ADDRESS: GOLDDE 0x004121f0 */
 int __cdecl d3_ComputeQuadHeightRange(void* obj, float* outA, float* outB, void* p4, void* p5, void* p6, void* p7)
 {
     void* thirdPoint;

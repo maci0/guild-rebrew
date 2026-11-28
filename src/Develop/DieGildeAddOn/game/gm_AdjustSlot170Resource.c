@@ -9,6 +9,7 @@ extern volatile int gm_GameTicks;
 
 char* __cdecl gm_FindSlot170Entry(int a1);
 
+/* ADDRESS: GOLDDE 0x004dcfd0 */
 int __cdecl gm_ExecCannonFire(int* a, int flag)
 {
 	SLOT170_ACTION_BLK blk;

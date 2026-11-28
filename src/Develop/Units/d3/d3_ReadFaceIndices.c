@@ -9,6 +9,7 @@ typedef struct Face {
 
 int __cdecl fcn_004011f0(void* stream, void* dst);
 
+/* ADDRESS: GOLDDE 0x00443a80 */
 void __cdecl d3_ReadFaceIndices(void* stream, char* ctx)
 {
 	int t;

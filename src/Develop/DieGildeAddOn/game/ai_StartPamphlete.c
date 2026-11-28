@@ -17,6 +17,7 @@ int __cdecl ai_SelectBestMethod(int kind, int id, int n, Msg* b1, Msg* b2);
 int __cdecl ai_SelectPamphletTarget(char* e, char* a2, char* out);
 
 /* ADDRESS: GOLDTL 0x0049cb20 */
+/* ADDRESS: GOLDDE 0x0048b560 */
 int __cdecl ai_StartPamphlete(int a1, char* e, int busy, Msg* out1, Msg* out2)
 {
 	Msg a;

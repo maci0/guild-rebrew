@@ -74,6 +74,7 @@ static int ent34(char* e)
 }
 
 /* ADDRESS: GOLDTL 0x004d8d00 */
+/* ADDRESS: GOLDDE 0x004c59f0 */
 void __cdecl gm_UpdateTaskProgress(char* context)
 {
 	char b118[0x30];

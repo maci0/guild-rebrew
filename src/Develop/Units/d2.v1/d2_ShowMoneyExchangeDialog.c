@@ -66,6 +66,7 @@ int __cdecl d3_EndCameraAndUiMode(void);
 char* __cdecl itoa(int, char*, int);
 
 /* ADDRESS: GOLDTL 0x005a59d0 */
+/* ADDRESS: GOLDDE 0x0058a6e0 */
 int __cdecl d2_ShowMoneyExchangeDialog(char* a0)
 {
 	int v1, v2, v3, v4, v5, v6, v7, dialogId;

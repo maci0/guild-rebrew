@@ -51,6 +51,7 @@ void __cdecl d2_DispatchTutorialInput(int, int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x0058ddd0 */
 void __cdecl d2_RunBuergerrechtDialog(char* p)
 {
 	ENTITY_RECORD* ent;

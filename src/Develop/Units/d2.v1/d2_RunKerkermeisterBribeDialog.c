@@ -34,6 +34,7 @@ typedef struct Dlg005ad000 {
 extern int io_RightButtonReleased;
 extern int d2_CurrentElementId;
 /* ADDRESS: GOLDTL 0x005ad000 */
+/* ADDRESS: GOLDDE 0x00591b10 */
 void __cdecl d2_RunKerkermeisterBribeDialog(void)
 {
 	Dlg005ad000 msg;

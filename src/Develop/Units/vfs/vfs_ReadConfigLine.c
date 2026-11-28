@@ -6,6 +6,7 @@
 extern char g_6b5b20[];
 char* __cdecl vfs_fgets(char* buf, int size, void* f);
 
+/* ADDRESS: GOLDDE 0x004010b0 */
 char* __cdecl vfs_ReadConfigLine(void* stream)
 {
 	int i;

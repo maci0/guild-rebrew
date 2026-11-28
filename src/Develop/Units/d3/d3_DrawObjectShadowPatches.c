@@ -20,6 +20,7 @@ typedef long (__stdcall* D3_SHADOW_INDICES_FN)(D3D_DEVICE_VIEW*, void*, unsigned
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
+/* ADDRESS: GOLDDE 0x0044e4e0 */
 void __cdecl d3_DrawObjectShadowPatches(char* o)
 {
 	int i;

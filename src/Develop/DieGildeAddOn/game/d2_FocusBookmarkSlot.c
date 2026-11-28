@@ -15,6 +15,7 @@ int __cdecl gm_SearchTable67(int);
 char* __cdecl gm_FindRecordById(int);
 void __cdecl d2_EnterBuildingObjekt(int, int, char*);
 
+/* ADDRESS: GOLDDE 0x005779b0 */
 void __cdecl d2_FocusBookmarkSlot(void)
 {
 	int i;

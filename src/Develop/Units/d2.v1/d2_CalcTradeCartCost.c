@@ -20,6 +20,7 @@ extern int g_774698;
 int __cdecl d2_GetControlValue(int);
 float __cdecl gm_GetSeasonPrice(int id, unsigned char a);
 
+/* ADDRESS: GOLDDE 0x0059cf50 */
 void __cdecl d2_CalcTradeCartCost(unsigned char* building, int unused, int mode)
 {
 	float sum;

@@ -1,3 +1,5 @@
+extern char g_85a210[];
+extern char gm_EntitySlotTable[];
 #include <stdlib.h>
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 extern int gm_QueuedCommandCount;
@@ -14,6 +16,7 @@ float __cdecl gm_ApplyEntityHealthDelta(int a, int b);
 void __cdecl cm_RequestTransferCurrencyNoKill(int a1, int a2, char a3, int a4);
 
 /* ADDRESS: GOLDTL 0x004fcc20 */
+/* ADDRESS: GOLDDE 0x004e8750 */
 void __cdecl gm_UpdateBuildingSubsidies(void)
 {
 	int handle;
@@ -30,7 +33,7 @@ void __cdecl gm_UpdateBuildingSubsidies(void)
 	r = 0xe - *(int*) (buf + 0x18); n = gm_ConvertUnitsToAmount(r, gm_ActiveTownIndex);
 	i = 0;
 	gm_QueuedCommandCount = 0;
-	q = (char*) 0x7f4e10;
+	q = (char*) ((int) &gm_EntitySlotTable + 0x170);
 	do {
 		rec = q - 0x170;
 		if (gm_QueuedCommandCount > 0x40) {
@@ -52,7 +55,7 @@ void __cdecl gm_UpdateBuildingSubsidies(void)
 					}
 				}
 				if (obj != 0) {
-					cm_RequestCopyEntityData(((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*) (obj + 0x27)].entity_id,
+					cm_RequestCopyEntityData(((ENTITY_RECORD*) &gm_EntitySlotTable)[*(unsigned short*) (obj + 0x27)].entity_id,
 					    *(int*) (rec + 4), -0xa, 1);
 					gm_QueuedCommandCount++;
 				}
@@ -65,6 +68,6 @@ void __cdecl gm_UpdateBuildingSubsidies(void)
 		}
 		q += sizeof(ENTITY_RECORD);
 		i++;
-	} while ((int) q < 0x85a210);
+	} while ((int) q < (int) &g_85a210);
 	gm_QueuedCommandCount = 0;
 }

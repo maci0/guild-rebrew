@@ -22,6 +22,7 @@ void __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl io_AppendText(int, ...);
 double __cdecl eval_ObjektPreis2Credits(int, int);
 
+/* ADDRESS: GOLDDE 0x00576e40 */
 int __cdecl d2_OpenObjektUpgradeTooltip(int id)
 {
 	int dlg;

@@ -35,6 +35,7 @@ unsigned char __cdecl gm_GetRangeStatId(int, int);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x00524540 */
 int __cdecl d2_ShowChooseProfessionDialog(int flags)
 {
 	int list;

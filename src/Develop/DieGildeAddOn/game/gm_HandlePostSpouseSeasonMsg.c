@@ -23,6 +23,7 @@ struct PACKED_DATE_MSG {
 
 
 /* ADDRESS: GOLDTL 0x004bb640 */
+/* ADDRESS: GOLDDE 0x004a96b0 */
 int __cdecl gm_HandlePostSpouseSeasonMsg(int* a1)
 {
 	pos14_7f4c00 st;

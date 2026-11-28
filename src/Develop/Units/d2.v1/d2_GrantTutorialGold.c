@@ -6,6 +6,7 @@
 
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x005656d0 */
 void __cdecl d2_GrantTutorialGold(int a)
 {
 	if (a == 0) {

@@ -27,6 +27,7 @@ void __cdecl d3_SetObjectRotation(View* v, float* r);
 void __cdecl d3_AnimateCameraToStoredTransform(void);
 void __cdecl sv_ResetSelectionState(void);
 
+/* ADDRESS: GOLDDE 0x0051b7e0 */
 void __cdecl d3_EndCameraAndUiMode(void)
 {
 	int done;

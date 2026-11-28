@@ -5,6 +5,7 @@ extern int d2_DialogButtonAction;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_14cf732;
 
+/* ADDRESS: GOLDDE 0x0056dc50 */
 int __cdecl d2_CheckKanoneFireInput(char* o)
 {
 	if (*(int*) (o + 0x7c) == 0 && !(*(float*) (o + 0x20) > 0.01f)) {

@@ -47,6 +47,7 @@ extern void* g_6b5df4;
 
 /* dd_Line: queues a screen-space line as two vertices. */
 /* ADDRESS: GOLDTL 0x0041b5f0 */
+/* ADDRESS: GOLDDE 0x00419290 */
 void __cdecl dd_Line(int x1, int y1, int x2, int y2, int color)
 {
 	if (g_6777ac == -1) {
@@ -71,6 +72,7 @@ void __cdecl dd_Line(int x1, int y1, int x2, int y2, int color)
 }
 
 /* ADDRESS: GOLDTL 0x0041b700 */
+/* ADDRESS: GOLDDE 0x004193a0 */
 void __cdecl dd_EndLines(void)
 {
 	if (g_6777ac == -1) {

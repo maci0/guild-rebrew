@@ -19,6 +19,7 @@ typedef struct Run {
 } Run;
 
 /* ADDRESS: GOLDTL 0x0047a710 */
+/* ADDRESS: GOLDDE 0x00469700 */
 int __cdecl d2_DrawShapeToArgbSurface(int x, int y, char* hdr, Surface* s)
 {
 	int* runs;

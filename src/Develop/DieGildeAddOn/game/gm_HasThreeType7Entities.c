@@ -5,6 +5,7 @@ char* __cdecl gm_FindNextFilteredEntity(void);
 
 
 /* ADDRESS: GOLDTL 0x004b4c10 */
+/* ADDRESS: GOLDDE 0x004a2f00 */
 int __cdecl gm_HasThreeType7Entities(unsigned short* owner_id, int arg_b, int arg_c)
 {
 	int count;

@@ -6,6 +6,7 @@ unsigned short __cdecl gm_RandomMod(int);
 
 
 /* ADDRESS: GOLDTL 0x004a8d40 */
+/* ADDRESS: GOLDDE 0x00497080 */
 int __cdecl ai_CheckUseTrankPredicate(int unused, char* entity)
 {
 	if (*(unsigned int*) (entity + 4) % 4 == (unsigned int)((*(int*)&gm_GameTime) % 4) && *(unsigned int*) (entity + 4) % 8 == (unsigned int)((unsigned short) (*(int*)&gm_GameTimeHour) % 8))

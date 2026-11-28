@@ -11,6 +11,7 @@ void __cdecl he_SetEntityScriptFlag(char*, int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 char* __cdecl ch_AttachEntityGfxScript(char*, char*);
 
+/* ADDRESS: GOLDDE 0x00574ce0 */
 void __cdecl he_DispatchEntityInteractReturn(void)
 {
 	char* r;

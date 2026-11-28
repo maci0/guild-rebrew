@@ -34,6 +34,7 @@ int __cdecl ai_IsMethodActive(int);
 void __cdecl ai_PushActiveMethod(int);
 void __cdecl ai_PopActiveMethod(void);
 
+/* ADDRESS: GOLDDE 0x00483ec0 */
 int __cdecl ai_SelectBestMethod(int who, int idx, int arg, Pos *out1, Pos *out2)
 {
 	float best1;

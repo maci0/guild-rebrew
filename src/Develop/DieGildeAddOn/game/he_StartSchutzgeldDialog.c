@@ -11,6 +11,7 @@ extern pos14_7f4c00 gm_GameTime;
 void __cdecl gm_AddTime(char*, int, int, int);
 
 /* ADDRESS: GOLDTL 0x005530d0 */
+/* ADDRESS: GOLDDE 0x00539480 */
 void __cdecl he_StartSchutzgeldDialog(char* obj)
 {
 	pos14_7f4c00* p;

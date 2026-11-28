@@ -9,6 +9,7 @@ typedef struct Bone {
 	float b[3];
 } Bone;
 
+/* ADDRESS: GOLDDE 0x004457c0 */
 int __cdecl d3_CalcMeshBinarySize(char* mesh, char* obj)
 {
 	int sz;

@@ -179,6 +179,7 @@ unsigned char _dpad_6ab570[1424] = {
 };
 
 /* ADDRESS: GOLDTL 0x005c5b10 */
+/* ADDRESS: GOLDDE 0x005a7d90 */
 void __cdecl d2_RunGelageDialog(char* a)
 {
 	int btn2;
@@ -236,6 +237,7 @@ void __cdecl d2_RunGelageDialog(char* a)
 }
 
 /* ADDRESS: GOLDTL 0x005c5da0 */
+/* ADDRESS: GOLDDE 0x005a8020 */
 void __cdecl d2_OpenEntityQuickSlots(int layer, int x, int y, unsigned short who, int text)
 {
 	int i;

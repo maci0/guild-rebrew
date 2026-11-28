@@ -1,7 +1,9 @@
+extern char str_fmt_s[];
 void __cdecl io_FormatTextBuffer(void* out, int id, ...);
 void __cdecl d2_ShowPrivilegMessage(void* buf, int a, char* b);
 
 /* ADDRESS: GOLDTL 0x004fa090 */
+/* ADDRESS: GOLDDE 0x004e5e70 */
 int __cdecl fcn_004fa090(char* a0, int* a1)
 {
 	char buf[0x100];
@@ -28,7 +30,7 @@ int __cdecl fcn_004fa090(char* a0, int* a1)
 	}
 	if (*pa == 1) {
 		if (*(unsigned char*) (a0 + 2) == kind) {
-			io_FormatTextBuffer((char*) pa + 0x14, 0x679060, 0x1e11);
+			io_FormatTextBuffer((char*) pa + 0x14, (int) &str_fmt_s, 0x1e11);
 		}
 	}
 	return 2;

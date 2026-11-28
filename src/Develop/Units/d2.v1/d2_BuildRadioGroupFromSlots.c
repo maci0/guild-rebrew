@@ -8,6 +8,7 @@ void __cdecl d2_AddToRadioGroup(int, int);
 
 
 /* ADDRESS: GOLDTL 0x004be380 */
+/* ADDRESS: GOLDDE 0x004abf00 */
 void __cdecl d2_BuildRadioGroupFromSlots(void)
 {
 	int i;

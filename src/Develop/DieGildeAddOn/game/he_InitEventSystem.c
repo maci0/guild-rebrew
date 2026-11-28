@@ -22,6 +22,7 @@ int __cdecl he_RegisterAssassinHandlers(void);
 int __cdecl he_RegisterZigeunerHandlers(void);
 int __cdecl he_RegisterAction0xa2Handler(void);
 
+/* ADDRESS: GOLDDE 0x0052bae0 */
 int __cdecl he_InitEventSystem(void)
 {
 	if (he_RegisterHandler(0, (void*) he_AllocNone, (void*) he_RunNone) != 0) {

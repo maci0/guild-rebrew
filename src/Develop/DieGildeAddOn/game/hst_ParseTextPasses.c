@@ -4,6 +4,7 @@ void __cdecl hst_ParseCommandline_2nd_Pass(int);
 
 
 /* ADDRESS: GOLDTL 0x004b2dd0 */
+/* ADDRESS: GOLDDE 0x004a10f0 */
 int __cdecl hst_ParseTextPasses(int a, int b, int c)
 {
 	if (hst_ParseText_Fake_1st_Pass(a, b + 1) == 0)

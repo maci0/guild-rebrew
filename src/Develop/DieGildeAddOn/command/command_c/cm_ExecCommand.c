@@ -12,6 +12,7 @@ int __cdecl cm_CheckCommandGroup(char*);
 void __cdecl main_ExitToFrameHandler(int);
 
 /* ADDRESS: GOLDTL 0x004c4b00 */
+/* ADDRESS: GOLDDE 0x004b2510 */
 int __cdecl cm_ExecCommand(void)
 {
 	char* node;

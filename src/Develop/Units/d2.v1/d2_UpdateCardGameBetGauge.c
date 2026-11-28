@@ -15,6 +15,7 @@ int __cdecl gm_AmountToUnits(int, char);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl d2_SetSlotVisibility(int, int);
 
+/* ADDRESS: GOLDDE 0x005c7fd0 */
 void __cdecl d2_UpdateCardGameBetGauge(int show)
 {
 	if (show != 0) {

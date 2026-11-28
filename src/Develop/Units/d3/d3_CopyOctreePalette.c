@@ -7,6 +7,7 @@ extern char d3_OctreePaletteBlue[];
 
 /* ADDRESS: GOLD 0x00420780 */
 /* ADDRESS: GOLDTL 0x0041bd80 */
+/* ADDRESS: GOLDDE 0x00419a20 */
 void __cdecl d3_CopyOctreePalette(char* out_palette)
 {
 	int i;

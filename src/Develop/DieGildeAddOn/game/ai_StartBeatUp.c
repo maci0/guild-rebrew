@@ -30,6 +30,7 @@ typedef struct {
 } AI_BEATUP_MSG;
 
 /* ADDRESS: GOLDTL 0x00499640 */
+/* ADDRESS: GOLDDE 0x00488080 */
 int __cdecl ai_StartBeatUp(int unused0, char* e, int busy, AI_BEATUP_MSG* out1, AI_BEATUP_MSG* out2)
 {
 	int vb;

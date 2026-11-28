@@ -9,6 +9,7 @@ void* __cdecl m_alloc(unsigned int size, const char* tag);
 void __cdecl d3_InitSceneObject(char* o);
 
 /* ADDRESS: GOLDTL 0x004524e0 */
+/* ADDRESS: GOLDDE 0x00447d90 */
 char* __cdecl d3_CreateParticleSystem(unsigned int entryCount, char* assetName, int a2, float a3, int a4, int a5)
 {
 	char* s;
@@ -21,16 +22,16 @@ char* __cdecl d3_CreateParticleSystem(unsigned int entryCount, char* assetName, 
 		assetHandle = d3_LoadOrReuseTexture(assetName, a2, 0, 0);
 		if (assetHandle != 0) {
 			d3_LoadTextureSurfaceTl(assetHandle);
-			s = m_alloc(0x31c, (char*) 0x67bc8c);
+			s = m_alloc(0x31c, "d3_par:ParticleSystem");
 			*(int*) (s + 0xdc) = assetHandle;
 			i = (assetHandle - d3_TextureBank) / 0x70;
 			*(int*) (s + 0xd8) = entryCount;
 			*(float*) (s + 0xe4) = a3;
 			*(int*) (s + 0xe0) = i;
 			*(int*) (s + 0x310) = a5;
-			*(char**) (s + 0x28) = m_alloc(*(unsigned int*) (s + 0xd8) * 0x54, (char*) 0x67bc78);
-			*(char**) (s + 0x2c) = m_alloc(*(unsigned int*) (s + 0xd8) * 4, (char*) 0x67bc64);
-			*(char**) (s + 0x30) = m_alloc(*(unsigned int*) (s + 0xd8) * 4, (char*) 0x67bc50);
+			*(char**) (s + 0x28) = m_alloc(*(unsigned int*) (s + 0xd8) * 0x54, "d3_par:Particles");
+			*(char**) (s + 0x2c) = m_alloc(*(unsigned int*) (s + 0xd8) * 4, "d3_par:TexIndices");
+			*(char**) (s + 0x30) = m_alloc(*(unsigned int*) (s + 0xd8) * 4, "d3_par:PartIndices");
 			*(int*) (s + 0) = 0;
 			*(int*) (s + 4) = 0;
 			*(int*) (s + 8) = 0;

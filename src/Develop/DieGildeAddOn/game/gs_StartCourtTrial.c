@@ -41,6 +41,7 @@ int __cdecl gm_RandomMod(int);
 int __cdecl gm_FindFilteredEntity(Ent*, int, int, unsigned short*, int, float, int*);
 void __cdecl cm_SendCopyEntityData(Msg*);
 
+/* ADDRESS: GOLDDE 0x005bb500 */
 int __cdecl gs_StartCourtTrial(Ent* ent, Ent* other, int count, int flag)
 {
 	unsigned short ids[4];

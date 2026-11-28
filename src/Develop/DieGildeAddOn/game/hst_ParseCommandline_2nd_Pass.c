@@ -65,7 +65,7 @@ int __cdecl hst_ParseCommandline_2nd_Pass(int textRef)
 		}
 		len = strlen((char*) txt_TextEntries[textRef]);
 		if ((unsigned int) len > 0x17c0) {
-			sprintf(buf, (char*) 0x680a9c, textRef);
+			sprintf(buf, "hst_ParseCommandline_2nd_Pass() failed: Label %i is too long", textRef);
 			return 0;
 		}
 		strncpy(label, (char*) txt_TextEntries[textRef], 0x17c0);
@@ -79,7 +79,7 @@ int __cdecl hst_ParseCommandline_2nd_Pass(int textRef)
 		buf[0] = label[6];
 		i = atoi(buf);
 		if (i <= -1 || i >= 4) {
-			sprintf(buf, (char*) 0x680a50, textRef - hst_HistoryTextBase);
+			sprintf(buf, "hst_ParseCommandline_2nd_Pass() failed: Invalid GROUP reference in Label %i", textRef - hst_HistoryTextBase);
 			return 0;
 		}
 		rec = i * 0x44 + 0x1007bc0;

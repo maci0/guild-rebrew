@@ -9,6 +9,7 @@ CH_ACTION* __cdecl ch_NewAction(char* e);
 void __cdecl UsingGate(CH_ACTION* t);
 #include "Develop/Units/Error/error_message.h"
 
+/* ADDRESS: GOLDDE 0x004059f0 */
 CH_ACTION* __cdecl ch_UseGate(char* e, const char* name, const char* name2, int a, int b, int c)
 {
 	CH_ACTION* t;

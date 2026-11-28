@@ -2,6 +2,7 @@ void* __cdecl d3_CreateObjectMesh(char* e);
 void __cdecl d3_BlendMeshVertices(char* a0, int a1, int a2, int* a3);
 
 /* ADDRESS: GOLDTL 0x00436930 */
+/* ADDRESS: GOLDDE 0x0042fe50 */
 void* __cdecl d3_GetObjectMesh(char* sceneObject, int* out)
 {
 	char* v1;

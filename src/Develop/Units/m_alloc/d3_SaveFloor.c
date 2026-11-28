@@ -137,6 +137,7 @@ void __cdecl vfs_WriteVec4(void* s, int* v);
 void __cdecl vfs_WriteArray(void* s, int a, int b, void* data);
 
 /* ADDRESS: GOLDTL 0x004469e0 */
+/* ADDRESS: GOLDDE 0x0043e440 */
 void __cdecl d3_SaveFloor(void* s, char* o)
 {
 	void* buf;

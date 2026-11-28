@@ -6,6 +6,7 @@ void __cdecl io_FormatTextBuffer(void*, int, ...);
 
 
 /* ADDRESS: GOLDTL 0x004fa160 */
+/* ADDRESS: GOLDDE 0x004e5f40 */
 int __cdecl fcn_004fa160(void* entity, void* request)
 {
 	char buf[0x100];

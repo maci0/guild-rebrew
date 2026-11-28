@@ -8,6 +8,7 @@ float __cdecl gm_ApplyEntityHealthDelta(unsigned short id, int delta);
 
 /* Releases every played sound of the behaviour when its counter ran out. */
 /* ADDRESS: GOLDTL 0x0057a180 */
+/* ADDRESS: GOLDDE 0x0055ffe0 */
 void __cdecl he_RunDeathPactCollection(char* action)
 {
 	char* entity;

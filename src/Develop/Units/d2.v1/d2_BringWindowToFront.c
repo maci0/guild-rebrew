@@ -1,3 +1,4 @@
+#include "d2_capacity.h"
 #include <string.h>
 
 #include "Develop/Units/d2.v1/gold_gui.h"
@@ -61,6 +62,7 @@ void __cdecl d2_BringWindowToFront(int win)
 }
 #else
 /* ADDRESS: GOLDTL 0x0046f540 */
+/* ADDRESS: GOLDDE 0x00462aa0 */
 void __cdecl d2_BringWindowToFront(int win)
 {
 	D2_WIN* w;
@@ -73,7 +75,7 @@ void __cdecl d2_BringWindowToFront(int win)
 	first = -1;
 	last = -1;
 	w = &((D2_WIN*)d2_Windows)[win];
-	for (i = 0x3ff; i >= 0; i--) {
+	for (i = d2_ELEMENT_CAPACITY - 1; i >= 0; i--) {
 		if (((D2_ZORDER_ELEMENT**)d2_ZOrderStack)[i] != 0 && ((D2_ZORDER_ELEMENT**)d2_ZOrderStack)[i]->id == w->slot) {
 			last = i;
 			break;
@@ -87,8 +89,8 @@ void __cdecl d2_BringWindowToFront(int win)
 	}
 	n = (first - last) * 4 + 4;
 	memcpy(tmp, &((D2_ZORDER_ELEMENT**)d2_ZOrderStack)[last], n);
-	memmove(&((D2_ZORDER_ELEMENT**)d2_ZOrderStack)[last], &((D2_ZORDER_ELEMENT**)d2_ZOrderStack)[first + 1], 0xff8 - first * 4);
-	for (i = 0x3ff; i >= 0; i--) {
+	memmove(&((D2_ZORDER_ELEMENT**)d2_ZOrderStack)[last], &((D2_ZORDER_ELEMENT**)d2_ZOrderStack)[first + 1], (d2_ELEMENT_CAPACITY - 2) * 4 - first * 4);
+	for (i = d2_ELEMENT_CAPACITY - 1; i >= 0; i--) {
 		if (((D2_ZORDER_ELEMENT**)d2_ZOrderStack)[i] != 0) {
 			break;
 		}

@@ -3,6 +3,7 @@
 void* __cdecl fcn_0064f026(int, void*);
 int __cdecl atoi(void*);
 
+/* ADDRESS: GOLDDE 0x00443310 */
 void __cdecl d3_ParseMeshTimeIndex(int unused, char* out)
 {
 	void* p;

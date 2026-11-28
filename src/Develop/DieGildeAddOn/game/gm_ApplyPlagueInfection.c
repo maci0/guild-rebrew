@@ -18,6 +18,7 @@ void __cdecl cm_AppendPacketFieldDelta(int a, int b, int c, int* v);
 void __cdecl cm_RequestChangeAttribute(void);
 float __cdecl gm_ApplyEntityHealthDelta(unsigned short id, int v);
 
+/* ADDRESS: GOLDDE 0x004f3610 */
 float __cdecl gm_ApplyPlagueInfection(char* p)
 {
 	S0c s;

@@ -1,9 +1,11 @@
+extern char g_677750[];
 #include <string.h>
 #include "Develop/Units/Msx/client_sound.h"
 extern void* __cdecl m_alloc(unsigned int size, const char* file_and_line);
 
 #pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x00418bc0 */
+/* ADDRESS: GOLDDE 0x00416950 */
 int __cdecl d3snd_InitSources(int a0)
 {
 	int result;
@@ -17,7 +19,7 @@ int __cdecl d3snd_InitSources(int a0)
 		else
 			a0 = d3snd_SourceCount;
 		n = (unsigned int) a0 * 0x54;
-		tp_SoundSources = (SOUND_SOURCE*) m_alloc(n, (const char*) 0x677750);
+		tp_SoundSources = (SOUND_SOURCE*) m_alloc(n, (const char*) &g_677750);
 		if (tp_SoundSources != 0) {
 			a0 = d3snd_SourceCount * 0x54;
 	__asm {

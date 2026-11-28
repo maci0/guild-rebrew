@@ -11,6 +11,7 @@ void __cdecl vfs_WriteInt32(int, int);
 #define stream_write vfs_WriteInt32
 #endif
 
+/* ADDRESS: GOLDDE 0x004012e0 */
 void __cdecl vfs_WriteVec4(int stream, int* values)
 {
 	stream_write(stream, values[0]);

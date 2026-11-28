@@ -2,6 +2,7 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
+/* ADDRESS: GOLDDE 0x00425570 */
 int __cdecl msx_FindSampleHandleIndex(int key)
 {
 	int i;

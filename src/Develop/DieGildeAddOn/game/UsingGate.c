@@ -22,6 +22,7 @@ char __cdecl d3sm_3D2SuperMap(char*, float*, int*, int*, float*);
 /* Steps a change-room event: puts the character's exit object into the new
  * room and queues the walk-in events. */
 /* ADDRESS: GOLDTL 0x004066d0 */
+/* ADDRESS: GOLDDE 0x00405870 */
 void __cdecl UsingGate(char* ev)
 {
 	char* obj;

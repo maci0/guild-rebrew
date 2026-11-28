@@ -18,6 +18,7 @@ int __cdecl main_RunFrameLoop(void (*fn)(void), int code);
 void __cdecl d2_DestroyForm(void* dlg);
 
 /* ADDRESS: GOLDTL 0x005a1e40 */
+/* ADDRESS: GOLDDE 0x00586cc0 */
 void __cdecl d2_RunStammtischDialog(int gebaeude, int* objekt)
 {
 	int changed;

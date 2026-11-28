@@ -3,6 +3,7 @@
 
 void __cdecl d3_NormalizeVector(float*);
 
+/* ADDRESS: GOLDDE 0x00447620 */
 void __cdecl d3_CalculateTriangleNormal(float* a, float* b, float* c, float* n)
 {
 	float dx;

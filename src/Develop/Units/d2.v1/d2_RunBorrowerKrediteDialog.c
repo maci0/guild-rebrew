@@ -16,6 +16,7 @@ int __cdecl d2_CreateChildWindow(int a, int b, int c, int d, int e, int f);
 void __cdecl d2_DestroyForm(int a);
 void __cdecl d3_EndCameraAndUiMode(void);
 /* ADDRESS: GOLDTL 0x005a4960 */
+/* ADDRESS: GOLDDE 0x00589670 */
 void __cdecl d2_RunBorrowerKrediteDialog(char* owner, int id)
 {
     int slot[9][3];

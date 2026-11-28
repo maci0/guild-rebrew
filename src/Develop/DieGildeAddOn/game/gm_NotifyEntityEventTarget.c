@@ -18,6 +18,7 @@ void __cdecl he_MessageBoxQuickjump(int, int, void*, int, int, int, int, int, vo
 
 /* ADDRESS: GOLD 0x004bab90 */
 /* ADDRESS: GOLDTL 0x004baf60 */
+/* ADDRESS: GOLDDE 0x004a9000 */
 int __cdecl gm_NotifyEntityEventTarget(void* request)
 {
 	float scale;

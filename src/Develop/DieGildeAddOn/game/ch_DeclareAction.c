@@ -10,6 +10,7 @@ typedef CH_ACTION_DECLARATION Entry;
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 #include "Develop/Units/Error/error_message.h"
 
+/* ADDRESS: GOLDDE 0x004053b0 */
 int __cdecl ch_DeclareAction(int idx, int handler, unsigned char kind, const char* name, int param)
 {
 	if (idx > 0x3f) {

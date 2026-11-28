@@ -12,6 +12,7 @@ extern int g_772e88;
 char* __cdecl d3_GetSceneEntry(int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
+/* ADDRESS: GOLDDE 0x004bb720 */
 void __cdecl lb_AppendChatLog(int a, int b, char* s)
 {
 	char* r;

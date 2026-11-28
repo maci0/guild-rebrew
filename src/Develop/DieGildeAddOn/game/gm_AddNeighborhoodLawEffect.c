@@ -20,6 +20,7 @@ void __cdecl gm_GetLawEntry(int kind, Offer* o);
 unsigned short __cdecl gm_RandomMod(int n);
 void __cdecl gm_PosToStatsGrid(char* pos, int* x, int* y);
 
+/* ADDRESS: GOLDDE 0x004e6630 */
 void __cdecl gm_AddNeighborhoodLawEffect(int key, unsigned char kind, int* ox, int* oy)
 {
 	int x;

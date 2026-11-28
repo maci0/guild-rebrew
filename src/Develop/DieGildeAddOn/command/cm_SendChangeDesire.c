@@ -8,6 +8,7 @@
 extern char cm_SecondaryPacketDelta[];
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b2da0 */
 void __cdecl cm_SendChangeDesire(void)
 {
 	char buf[0x9c];

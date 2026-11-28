@@ -3,6 +3,7 @@
 
 int __cdecl cm_GetBuildingStatCount(char*);
 
+/* ADDRESS: GOLDDE 0x004dd610 */
 int __cdecl cm_CountOccupiedBuildingStats(char* building)
 {
 	int n;

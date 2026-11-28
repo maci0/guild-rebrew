@@ -31,6 +31,7 @@ void __cdecl io_FormatTextBuffer(void*, int, ...);
  * frame to 0x210); the same block shape is what keeps the caller's copy of
  * a4 in esi, so the tail adds the length in edx instead of reusing esi. */
 #pragma optimize("y", off)
+/* ADDRESS: GOLDDE 0x0049d720 */
 int __cdecl hst_HandleStadtkasse(int unused1, int unused2, int unused3, char* token_text, int text_out)
 {
 	char buf[0x200];

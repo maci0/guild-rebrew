@@ -6,6 +6,7 @@ extern char d2_InventoryPanelWindowId[];
 
 int __cdecl d2_CloseWindow(int);
 
+/* ADDRESS: GOLDDE 0x005a8440 */
 void __cdecl d2_CloseInventoryPanel(void)
 {
 	ResetDisplayCounters();

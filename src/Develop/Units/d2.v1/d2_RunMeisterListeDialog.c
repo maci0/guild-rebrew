@@ -49,6 +49,7 @@ int __cdecl gm_AmountToUnits(int, unsigned char);
 int __cdecl d2_GetControlValue(int);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x005aa800 */
 int __cdecl d2_RunMeisterListeDialog(void)
 {
 	int n;

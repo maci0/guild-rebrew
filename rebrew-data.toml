@@ -16781,11 +16781,11 @@ link_symbol = "___old_sbh_p_starting_region"
 ["SERVER.0x10033b98".verification]
 status = "EXACT"
 writer = "verify"
-input_hash = "892325bf27468000ed690e8f59e3d09d0a5cf77c3943c8317dfaa86439142247"
+input_hash = "696f62b264ffec0195610d401486fcd9f20400438532c8e7e34f62c1b02255b9"
 definition_hash = "6fd9ae5b5d8d6bccc971c6e6eb5b7ee83ba9335b55b22c4a665d688c20ea6085"
 built_va = "0x10033b98"
-placement_method = "link-symbol"
-measured_at = "2026-11-26T11:38:26+00:00"
+placement_method = "identical-image"
+measured_at = "2026-11-28T16:07:09+00:00"
 
 ["SERVER.0x10033b9c"]
 file = "src/crt_region/data_globals.c"
@@ -16848,11 +16848,11 @@ link_symbol = "_rterrs"
 ["SERVER.0x10033ef0".verification]
 status = "EXACT"
 writer = "verify"
-input_hash = "8483f7374345b450d1c1d33989974f08aef3ff861e2688c1d583cb4065b0c20d"
+input_hash = "017509f04be1ff00f9e76bc55fa87d0b8e82ef3ba221ec8af1df1807c147cf10"
 definition_hash = "1deaa0ab25137726e01ba6bc790a7fdc8fabfc1e63ee4cfa6defa834acbeed1a"
 built_va = "0x10033ef0"
-placement_method = "link-symbol"
-measured_at = "2026-11-26T11:38:26+00:00"
+placement_method = "identical-image"
+measured_at = "2026-11-28T16:07:09+00:00"
 
 ["SERVER.0x10033f80"]
 file = "src/layout_spans.h"
@@ -18649,11 +18649,11 @@ updated_at = "2026-11-26T11:38:26+00:00"
 ["SERVER.0x100354fc".verification]
 status = "EXACT"
 writer = "verify"
-input_hash = "df321d7d9701e5ed1f603ae1b338b2eaafe23861a596824a34efa62a264966b1"
+input_hash = "bdbe195d1c1bf94351e8485c615741c2484cef7ca9efc724c1bd4b2c09d1530b"
 definition_hash = "0531ef9074cba062613857f7b7f096afb2fee4be81b4ee890c923e02ff41c19b"
 built_va = "0x100354fc"
-placement_method = "link-symbol"
-measured_at = "2026-11-26T11:38:26+00:00"
+placement_method = "identical-image"
+measured_at = "2026-11-28T16:07:10+00:00"
 
 ["SERVER.0x10035500"]
 file = "src/crt_region/data_globals.c"
@@ -18823,11 +18823,11 @@ updated_at = "2026-11-26T11:38:26+00:00"
 ["SERVER.0x100355a4".verification]
 status = "EXACT"
 writer = "verify"
-input_hash = "7c3be2d2172c1b2efb3f8a6b58e230e0c0b2eab16a10cf651fe54ac3925f8151"
+input_hash = "a7e35a096d4f03fab532151762195df48d667d18c775ffd8ee76b0972deccbb8"
 definition_hash = "a7faa74a45fc9cb638a8c73aad89c4a9b1b4158e13857b4148477e9628d3c161"
 built_va = "0x100355a4"
-placement_method = "link-symbol"
-measured_at = "2026-11-26T11:38:26+00:00"
+placement_method = "identical-image"
+measured_at = "2026-11-28T16:07:10+00:00"
 
 ["SERVER.0x100355a8"]
 file = "src/crt_region/section_spans.c"
@@ -18867,11 +18867,11 @@ updated_at = "2026-11-26T11:38:26+00:00"
 ["SERVER.0x100355d8".verification]
 status = "EXACT"
 writer = "verify"
-input_hash = "7e7c77d1505c33b16cbb078ba12d3e1fbad3beb4ef3137251cbe0935283938f5"
+input_hash = "e0ee18606c31671e055c58ed5ff813c2f4e2ff49cfd07aa3aa294a74066ac121"
 definition_hash = "1d4df276112240b399e1b6359c18e3eee4c5b495be59b1d92b6c831fa0ad030b"
 built_va = "0x100355d8"
-placement_method = "link-symbol"
-measured_at = "2026-11-26T11:38:26+00:00"
+placement_method = "identical-image"
+measured_at = "2026-11-28T16:07:10+00:00"
 
 ["SERVER.0x100356dc"]
 file = "src/crt_region/data_globals.c"
@@ -18890,11 +18890,11 @@ updated_at = "2026-11-26T11:38:26+00:00"
 ["SERVER.0x100356dc".verification]
 status = "EXACT"
 writer = "verify"
-input_hash = "e6a2889e725a6fe8119becdf298e44a317601faaa83a0143e983f13b4540e44c"
+input_hash = "13c6aba38d0389e7a168a4865df067d9a7a3d472d28cb09938ea5a6039e9a2f0"
 definition_hash = "ce1a38f79fcc8d414d66debda421bac5a9d5890b69a46e478f652e32eb3f51ad"
 built_va = "0x100356dc"
-placement_method = "link-symbol"
-measured_at = "2026-11-26T11:38:26+00:00"
+placement_method = "identical-image"
+measured_at = "2026-11-28T16:07:10+00:00"
 
 ["SERVER.0x100356e0"]
 file = "src/crt_region/data_globals.c"
@@ -18957,11 +18957,11 @@ updated_at = "2026-11-26T11:38:26+00:00"
 ["SERVER.0x10035838".verification]
 status = "EXACT"
 writer = "verify"
-input_hash = "ab4a4ef3802d2e8bb4ee90d6252881c99538aaa0330a54bcf3ea2019f83527e5"
+input_hash = "c45d2b5909cd99fe577bd44ff8b31ec11b21ec36814fdffa6727c0250fffae72"
 definition_hash = "7a871812d3d67c44fd3cc611b3928390b9223d28e9c73ca158281bd73f9d27c2"
 built_va = "0x10035838"
-placement_method = "link-symbol"
-measured_at = "2026-11-26T11:38:26+00:00"
+placement_method = "identical-image"
+measured_at = "2026-11-28T16:07:10+00:00"
 
 ["SERVER.0x1003583c"]
 file = "src/crt_region/data_globals.c"
@@ -18980,11 +18980,11 @@ updated_at = "2026-11-26T11:38:26+00:00"
 ["SERVER.0x1003583c".verification]
 status = "EXACT"
 writer = "verify"
-input_hash = "603ebd2e45a93c17132744e152248043c7c144de6f556ab51bfafddaab1258e2"
+input_hash = "8ccbd422104508f50993eb33f625eac39e0a6c27d879076b9b769d77e646b06f"
 definition_hash = "790fa71fbf09709b523b98d3e1332c4bf9c497fefa7aef124a64b9c932c99de2"
 built_va = "0x1003583c"
-placement_method = "link-symbol"
-measured_at = "2026-11-26T11:38:26+00:00"
+placement_method = "identical-image"
+measured_at = "2026-11-28T16:07:10+00:00"
 
 ["SERVER.0x10035840"]
 file = "src/crt_region/data_globals.c"
@@ -19003,11 +19003,11 @@ updated_at = "2026-11-26T11:38:26+00:00"
 ["SERVER.0x10035840".verification]
 status = "EXACT"
 writer = "verify"
-input_hash = "19b4fe31ec0f4550c16539a2e3311b4e5c2de8cf4a675dddccd1c86c355cc7b9"
+input_hash = "fda2e5567c3bbc4be520d43490a765dcc1b09e8b3967b3e1cc39fc00a50df92c"
 definition_hash = "2bbaf99f7e8118ece3091c25c5fc060ad340b5f5d576c3c4ffa47964dc9e03df"
 built_va = "0x10035840"
-placement_method = "link-symbol"
-measured_at = "2026-11-26T11:38:26+00:00"
+placement_method = "identical-image"
+measured_at = "2026-11-28T16:07:10+00:00"
 
 ["SERVER.0x10035844"]
 file = "src/crt_region/section_spans.c"

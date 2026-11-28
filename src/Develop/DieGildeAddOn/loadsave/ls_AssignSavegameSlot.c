@@ -2,6 +2,7 @@
  * relocations at call sites are not reproduced; the emitted bytes are the
  * reference encodings. */
 /* ADDRESS: GOLDTL 0x005e0090 */
+/* ADDRESS: GOLDDE 0x005c15f0 */
 __declspec(naked) void __cdecl ls_AssignSavegameSlot(void)
 {
 	__asm {

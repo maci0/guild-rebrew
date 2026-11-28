@@ -35,6 +35,7 @@ int __cdecl ai_RunZunftPreismanipulation(int a1, char* e)
 	return 0;
 }
 
+/* ADDRESS: GOLDDE 0x0048e500 */
 int __cdecl ai_StartZunftAufruhr(int a1, char* e, int a3, char* out)
 {
 	int v;

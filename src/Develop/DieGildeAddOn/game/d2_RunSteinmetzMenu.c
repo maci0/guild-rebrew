@@ -16,6 +16,7 @@ void __cdecl d2_ShowPersonalbuch(char*, char*);
 void __cdecl d2_ShowLagerOptions(char*, int);
 void __cdecl d2_OpenMeisterbriefDialog(char*);
 
+/* ADDRESS: GOLDDE 0x005843f0 */
 void __cdecl d2_RunSteinmetzMenu(char* e)
 {
 	int prod;

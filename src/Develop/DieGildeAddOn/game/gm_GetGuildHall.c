@@ -3,6 +3,7 @@
 
 void* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
 
+/* ADDRESS: GOLDDE 0x004f91e0 */
 void* __cdecl gm_GetGuildHall(int building_slot)
 {
 	void* building;

@@ -16,6 +16,7 @@ int __cdecl txt_loadTextFile(char*);
 __declspec(dllimport) int __stdcall MessageBoxA(void*, char*, char*, int);
 
 /* ADDRESS: GOLDTL 0x0042bd20 */
+/* ADDRESS: GOLDDE 0x00425cb0 */
 int __cdecl txt_LoadTextFileDefinition(char* path)
 {
 	char* p;

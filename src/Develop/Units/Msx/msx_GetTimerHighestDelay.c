@@ -1,6 +1,7 @@
 /* Import forwarder: jmp dword ptr [0x662444].  Not a C body; the pointer call
  * in a void wrapper is the only C form that emits the bare indirect jump. */
 /* ADDRESS: GOLDTL 0x0042b2e0 */
+/* ADDRESS: GOLDDE 0x00425690 */
 void __cdecl msx_GetTimerHighestDelay(void)
 {
     (*(void (__stdcall **)(void))0x662444)();

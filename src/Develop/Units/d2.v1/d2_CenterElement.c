@@ -26,6 +26,7 @@ extern int g_1040494;
 
 void __cdecl d2_PositionControl(int x, int y, int slot);
 #include "Develop/Units/d2.v1/d2_gui.h"
+/* ADDRESS: GOLDDE 0x0045ca10 */
 void __cdecl d2_CenterElement(int slot)
 {
 	D2_CENTER_ELEMENT_SLOT* s;

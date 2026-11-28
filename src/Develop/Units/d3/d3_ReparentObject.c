@@ -55,6 +55,7 @@ void __cdecl d3_TransformWorldToParent(Ent*, Vec4*, Mat*, Slot*, char*);
 
 
 /* ADDRESS: GOLDTL 0x004458e0 */
+/* ADDRESS: GOLDDE 0x0043d670 */
 char __cdecl d3_ReparentObject(Ent* e, Ent* parent)
 {
 	Vec3 v;

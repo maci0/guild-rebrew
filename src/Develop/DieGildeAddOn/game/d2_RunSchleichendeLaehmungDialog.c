@@ -55,6 +55,7 @@ void __cdecl d2_DestroyForm(int);
 void __cdecl d3_EndCameraAndUiMode(void);
 
 /* ADDRESS: GOLDTL 0x0058a6b0 */
+/* ADDRESS: GOLDDE 0x00570370 */
 void __cdecl d2_RunSchleichendeLaehmungDialog(char *gebaeude)
 {
     int tmp;

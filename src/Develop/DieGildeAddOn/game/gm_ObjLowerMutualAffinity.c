@@ -9,6 +9,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
 /* ADDRESS: GOLDTL 0x005dd2f0 */
+/* ADDRESS: GOLDDE 0x005be890 */
 unsigned int __cdecl gm_ObjLowerMutualAffinity(int actorRec, int eventArgs)
 {
 	unsigned int q[20];

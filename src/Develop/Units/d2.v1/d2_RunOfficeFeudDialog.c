@@ -26,6 +26,7 @@ void __cdecl amt_HandleOfficeAction(char*, Req*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x0058f5f0 */
 void __cdecl d2_RunOfficeFeudDialog(int a1)
 {
 	Req s;

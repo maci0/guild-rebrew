@@ -5,6 +5,7 @@ void __cdecl d3_SetNodePosition(char*, float*);
 void __cdecl d3_AlignObjectToTerrain(char*, int, int);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 
+/* ADDRESS: GOLDDE 0x0057e010 */
 void __cdecl d3_SetObjectGroundPosition(char* obj, float* pos)
 {
 	float v[4];

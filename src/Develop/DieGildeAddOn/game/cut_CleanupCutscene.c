@@ -19,6 +19,7 @@ void __cdecl d3_ClearSceneState(void);
 
 
 /* ADDRESS: GOLDTL 0x004e4910 */
+/* ADDRESS: GOLDDE 0x004d12b0 */
 void __cdecl cut_CleanupCutscene(void)
 {
 	char* w;

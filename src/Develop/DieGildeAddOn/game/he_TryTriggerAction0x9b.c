@@ -37,6 +37,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl he_PostEntityMessage(int, int, char*, unsigned char, int, char*);
 void __cdecl cm_SendCopyEntityData(struct msg*);
 
+/* ADDRESS: GOLDDE 0x0055d9f0 */
 int __cdecl he_TryTriggerAction0x9b(int id, ENTITY_RECORD* me)
 {
 	float a;

@@ -7,6 +7,7 @@ extern unsigned int cm_LoadBufOffset;
 
 int __cdecl m_alloc(int, char*);
 
+/* ADDRESS: GOLDDE 0x004b4e10 */
 int __cdecl cm_AllocateLoadBuffer(void* packet, char* reply)
 {
 	int n;

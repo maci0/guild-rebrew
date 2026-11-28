@@ -32,6 +32,7 @@ void __cdecl d3_ResetLightBuffers(void);
 void __cdecl fcn_00436fc0(void);
 
 /* ADDRESS: GOLDTL 0x00439490 */
+/* ADDRESS: GOLDDE 0x004323a0 */
 void __cdecl d3_Shutdown(void)
 {
 	int saved;

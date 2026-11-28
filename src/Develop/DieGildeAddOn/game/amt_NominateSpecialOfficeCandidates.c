@@ -15,6 +15,7 @@ int __cdecl io_FormatTextBuffer(char* buf, int a, int b);
 int __cdecl he_PostEntityMessage(int id, int arg, char* text1, unsigned char flags, int value, char* text2);
 
 /* ADDRESS: GOLDTL 0x004ad2e0 */
+/* ADDRESS: GOLDDE 0x0049b620 */
 void __cdecl amt_NominateSpecialOfficeCandidates(void)
 {
 	OfficeCandidateHit hits[4];

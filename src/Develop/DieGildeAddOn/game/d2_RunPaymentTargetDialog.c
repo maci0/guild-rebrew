@@ -42,6 +42,7 @@ void __cdecl d2_DestroyForm(int);
 extern float g_664330;
 
 /* ADDRESS: GOLDTL 0x005c02a0 */
+/* ADDRESS: GOLDDE 0x005a26e0 */
 int __cdecl d2_RunPaymentTargetDialog(char* entity)
 {
     int result;

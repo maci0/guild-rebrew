@@ -19,6 +19,7 @@ unsigned char __cdecl d2_GetControlValue(int);
 void __cdecl d2_SetFormVisibility(int, int);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x00520b80 */
 int __cdecl d2_ChoosePlayerCount(void)
 {
 	int result;

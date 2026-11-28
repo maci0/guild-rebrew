@@ -19,6 +19,7 @@ void __cdecl he_AccumulateEvent0a1Yield(char* u, int count);
 int __cdecl gm_RandomMod(int);
 
 /* ADDRESS: GOLDTL 0x0057d0d0 */
+/* ADDRESS: GOLDDE 0x00562f00 */
 void __cdecl he_UpdateEvent0a1(char* entity)
 {
 	int found;

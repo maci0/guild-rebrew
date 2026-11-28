@@ -17,6 +17,7 @@ int __cdecl gm_CountStraftatenForEntity(int a)
 }
 #else
 /* ADDRESS: GOLDTL 0x004f5da0 */
+/* ADDRESS: GOLDDE 0x004e1b80 */
 int __cdecl gm_CountStraftatenForEntity(int a)
 {
 	int p;

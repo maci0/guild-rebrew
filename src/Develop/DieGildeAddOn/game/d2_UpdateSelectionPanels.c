@@ -38,6 +38,7 @@ void __cdecl d2_ShowBuildingInfoPanel(unsigned char*);
 
 /* Dispatch selection actions, then refresh changed panel state. */
 /* ADDRESS: GOLDTL 0x0052f7b0 */
+/* ADDRESS: GOLDDE 0x00518130 */
 void __cdecl d2_UpdateSelectionPanels(void)
 {
     int query[20];

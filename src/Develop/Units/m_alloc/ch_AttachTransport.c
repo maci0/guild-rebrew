@@ -27,6 +27,7 @@ void __cdecl d3_SetObjectRotation(struct node_403ce0*, char*);
 
 /* Attaches a transport node to an object at the object's anchor point. */
 /* ADDRESS: GOLDTL 0x00403ce0 */
+/* ADDRESS: GOLDDE 0x00403210 */
 struct link_403ce0* __cdecl ch_AttachTransport(char* obj, struct node_403ce0* node)
 {
 	struct link_403ce0* link;

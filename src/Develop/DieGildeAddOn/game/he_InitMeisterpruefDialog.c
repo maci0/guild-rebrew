@@ -8,6 +8,7 @@ typedef struct {
 
 void __cdecl gm_AddTime(char*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x00536d70 */
 void __cdecl he_InitMeisterpruefDialog(char* e)
 {
 	*(Rec14*) (e + 0x52) = *(Rec14*) (e + 0x44);

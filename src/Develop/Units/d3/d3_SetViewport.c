@@ -22,6 +22,7 @@ void __cdecl d3_InvalidateSceneRenderCache(unsigned char);
 /* Sets the 3D viewport (size, origin, depth range, view distance, screen
  * mode) and rebuilds the projection when anything changed. */
 /* ADDRESS: GOLDTL 0x00438da0 */
+/* ADDRESS: GOLDDE 0x00431ee0 */
 void __cdecl d3_SetViewport(float w, float h, float x, float y, float znear, float zfar, float dist, int sw, int sh)
 {
 	int left;

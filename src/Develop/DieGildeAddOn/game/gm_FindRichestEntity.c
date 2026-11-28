@@ -3,6 +3,7 @@ extern pos14_7f4c00 gm_GameTime;
 int __cdecl gm_CalcPersonWealth(int idx);
 
 /* ADDRESS: GOLDTL 0x004fd400 */
+/* ADDRESS: GOLDDE 0x004e8f30 */
 int __cdecl gm_FindRichestEntity(short* out, int* value)
 {
 	int* rec;

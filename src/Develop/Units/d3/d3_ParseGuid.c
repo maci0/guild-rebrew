@@ -38,6 +38,7 @@ char __cdecl d3_ParseGuid(const char* s, Guid* g)
 }
 #else
 /* ADDRESS: GOLDTL 0x0041b3a0 */
+/* ADDRESS: GOLDDE 0x004190e0 */
 char __cdecl d3_ParseGuid(const char* str, Guid* out_guid)
 {
 	int d1;

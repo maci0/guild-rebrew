@@ -36,6 +36,7 @@ void __cdecl d2_RunZigeunerInteriorHud(int a0);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_774658, d3_CameraHorizontalIndex, d3_CameraVerticalStep, d2_SuppressOverlay, g_67530c, g_675310;
 /* ADDRESS: GOLDTL 0x005a80d0 */
+/* ADDRESS: GOLDDE 0x0058cdd0 */
 void __cdecl d2_EnterGebaeudeInterior(unsigned char* building)
 {
 	unsigned char* buildingPtr;

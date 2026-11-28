@@ -19,6 +19,7 @@ void __cdecl d2_OpenStraftatAccusePicker(int);
 void __cdecl d3_EndCameraAndUiMode(void);
 void __cdecl d2_RunTalenteDialog(int, int, int);
 
+/* ADDRESS: GOLDDE 0x00584730 */
 void __cdecl d2_RunRhetoricActionsHud(int entity, int mode)
 {
 	int x;

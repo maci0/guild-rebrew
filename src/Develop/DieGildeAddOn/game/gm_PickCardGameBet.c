@@ -20,6 +20,7 @@ unsigned short __cdecl gm_RandomMod(short);
 
 
 /* ADDRESS: GOLDTL 0x004a8810 */
+/* ADDRESS: GOLDDE 0x00496b60 */
 void __cdecl gm_PickCardGameBet(void)
 {
 	if (((CardGameState*)g_1007cd4)->activeSlot != 0) {

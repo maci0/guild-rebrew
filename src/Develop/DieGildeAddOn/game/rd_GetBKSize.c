@@ -9,6 +9,7 @@ extern char g_6816ac[];
 int __cdecl fcn_0065f220(char*, char*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
+/* ADDRESS: GOLDDE 0x004abac0 */
 char* __cdecl rd_GetBKSize(char* name)
 {
 	char buf[0x40];

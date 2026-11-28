@@ -6,6 +6,7 @@ extern unsigned int d3_TextureBankCount;
 int __cdecl fcn_0065f220(const char* a, const char* b);
 
 /* ADDRESS: GOLDTL 0x0045bde0 */
+/* ADDRESS: GOLDDE 0x00450ea0 */
 char* __cdecl d3_FindTextureByName(const char* name)
 {
 	char buf[0x40];

@@ -17,6 +17,7 @@ int __cdecl d2_ConfirmRentAGrave(char*, int);
 void __cdecl d2_SetFormVisibility(int, int);
 
 /* ADDRESS: GOLDTL 0x0058d020 */
+/* ADDRESS: GOLDDE 0x00572ce0 */
 void __cdecl d2_OpenRentAGraveDialog(char* a0)
 {
 	int sel; int selected;

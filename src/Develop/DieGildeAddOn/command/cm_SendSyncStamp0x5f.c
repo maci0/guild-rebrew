@@ -6,6 +6,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004bbac0 */
 void __cdecl cm_SendSyncStamp0x5f(void* payload)
 {
 	char buf[0x9c];

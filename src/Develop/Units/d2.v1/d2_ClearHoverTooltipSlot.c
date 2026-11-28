@@ -3,6 +3,7 @@ extern char d2_HoverTooltipSlots[];
 
 /* ADDRESS: GOLD 0x0052c4d0 */
 /* ADDRESS: GOLDTL 0x00531c00 */
+/* ADDRESS: GOLDDE 0x0051a580 */
 void __cdecl d2_ClearHoverTooltipSlot(int value)
 {
 	int i;

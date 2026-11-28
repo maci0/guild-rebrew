@@ -4,6 +4,7 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 
+/* ADDRESS: GOLDDE 0x004e2ac0 */
 void __cdecl cut_FormatProzessPunishment(void* entity, int mode, void* output)
 {
 	int v;

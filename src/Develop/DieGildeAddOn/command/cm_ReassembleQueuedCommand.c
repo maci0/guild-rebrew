@@ -6,6 +6,7 @@ extern char* cm_CommandQueueHead;
 extern unsigned char cm_IncomingPacketData[];
 
 /* ADDRESS: GOLDTL 0x004c4250 */
+/* ADDRESS: GOLDDE 0x004b1c60 */
 int __cdecl cm_ReassembleQueuedCommand(char* obj)
 {
 	char* e;

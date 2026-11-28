@@ -58,6 +58,7 @@ void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl sv_ClearObjectSelection(void);
 void __cdecl d3_EndCameraAndUiMode(void);
 
+/* ADDRESS: GOLDDE 0x005c7910 */
 void __cdecl d2_OpenBlutracheDialog(char* e)
 {
 	int ids[2];

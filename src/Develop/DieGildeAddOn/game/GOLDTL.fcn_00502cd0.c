@@ -20,6 +20,7 @@ extern unsigned short* g_773da4;
 
 void* __cdecl gm_NextEntityQueryMatch(void);
 
+/* ADDRESS: GOLDDE 0x004ee060 */
 unsigned short* __cdecl gm_QueryEntities(int container_id, int arg_count, ...)
 {
 	int* arg_ptr;

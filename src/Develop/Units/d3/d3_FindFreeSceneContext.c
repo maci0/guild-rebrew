@@ -1,5 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x00413160 */
+/* ADDRESS: GOLDDE 0x004118d0 */
 int __cdecl d3_FindFreeSceneContext(void)
 {
 	int i;

@@ -37,6 +37,7 @@ void __cdecl d3_EndCameraAndUiMode(void);
 int __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005aeab0 */
+/* ADDRESS: GOLDDE 0x005934b0 */
 void __cdecl d2_RunLoesegeldDialog(char* rec)
 {
 	char text[0x400];

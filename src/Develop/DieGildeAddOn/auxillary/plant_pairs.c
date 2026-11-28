@@ -105,6 +105,7 @@ int g_plant_flag = 1;
 /* Simple lookup into a global table by index. Returns value
  * through out-pointer. Returns 0 if index out of range. */
 
+/* ADDRESS: SERVERDE 0x10013c30 */
 int __cdecl plt_TableLookup(int index, int* out)
 {
 	if (index >= 0x58) {

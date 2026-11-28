@@ -29,6 +29,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl d3snd_QueueSound(int, int, char*, int, int);
 
+/* ADDRESS: GOLDDE 0x0055f2c0 */
 void __cdecl he_HandleDeathPactPrompt(char* u)
 {
 	char* h;

@@ -3,6 +3,7 @@ extern unsigned char* lpGebaeudeINST;
 
 void __cdecl d3_BindEntitySceneObject(char*, char*, int);
 
+/* ADDRESS: GOLDDE 0x0050b780 */
 char __cdecl d3_BindBuildingSceneObjects(char* e)
 {
 	int i;

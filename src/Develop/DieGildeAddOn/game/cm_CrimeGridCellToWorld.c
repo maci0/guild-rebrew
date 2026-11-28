@@ -6,6 +6,7 @@ extern char tp_ch_PathGrid[];
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl d3_GridPointToWorld(char*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x004e6870 */
 void __cdecl cm_CrimeGridCellToWorld(int x, int y, int c)
 {
 	char* g;

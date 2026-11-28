@@ -5,6 +5,7 @@
 
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 
+/* ADDRESS: GOLDDE 0x0049bee0 */
 int __cdecl ls_LoadHighOfficeTargets(void* stream)
 {
 	if (!ls_ReadVfsDataChecked(&g_7728c0, 4, 1, stream)) {

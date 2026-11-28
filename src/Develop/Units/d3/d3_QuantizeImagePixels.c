@@ -11,6 +11,7 @@ extern unsigned short g_6b6d20[256];
 int __cdecl d3_FindNearestPaletteColor(int r, int g, int b);
 
 /* ADDRESS: GOLDTL 0x0041c470 */
+/* ADDRESS: GOLDDE 0x0041a110 */
 unsigned int __cdecl d3_QuantizeImagePixels(unsigned char* input, char* output, int width, int height, int dither)
 {
 	unsigned int i;

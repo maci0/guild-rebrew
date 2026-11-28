@@ -42,6 +42,7 @@ void __cdecl d2_LockSurface(Tex*);
 void __cdecl d2_UnlockSurface(Tex*);
 void __cdecl d2_ReleaseSurface(Tex*);
 
+/* ADDRESS: GOLDDE 0x005c5270 */
 void __cdecl ls_CaptureSavePreview(void)
 {
 	Rect src;

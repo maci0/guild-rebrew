@@ -10,6 +10,7 @@ typedef struct {
 } pickctx;
 // SIZE 0xa4
 
+/* ADDRESS: GOLDDE 0x004aa910 */
 int __cdecl d3_CollectSceneObjectsByName(char* name, pickctx* c)
 {
 	if (strcmp(name, c->name) == 0) {

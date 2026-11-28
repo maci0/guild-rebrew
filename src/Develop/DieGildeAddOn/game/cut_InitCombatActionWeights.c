@@ -5,6 +5,7 @@ extern int g_9b43e0[];
 /* Seed the 6x6 control-point lattice, run the cumulative edge interpolation
  * and clear the duplicate corners where the rows meet. */
 /* ADDRESS: GOLDTL 0x004d3800 */
+/* ADDRESS: GOLDDE 0x004c0af0 */
 void __cdecl cut_InitCombatActionWeights(void)
 {
 	int i;

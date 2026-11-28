@@ -76,6 +76,7 @@ void __cdecl d3_PreloadLowPolyAnims(char*, int, ...);
 
 extern char* tp_ch_ActionQueue;
 
+/* ADDRESS: GOLDDE 0x00404490 */
 CH_QUEUE_SLOT* __cdecl ch_GetFreeQueueEntry(void)
 {
 	int i;
@@ -92,6 +93,7 @@ CH_QUEUE_SLOT* __cdecl ch_GetFreeQueueEntry(void)
 }
 
 
+/* ADDRESS: GOLDDE 0x004044d0 */
 int __cdecl ch_RemoveQueueEntry(char* task)
 {
     char* next;
@@ -132,6 +134,7 @@ clear:
 #include "Develop/Units/m_alloc/m_alloc.h"
 
 
+/* ADDRESS: GOLDDE 0x00404540 */
 int __cdecl ch_ClearActionQueue(void* character)
 {
 	void* e;
@@ -151,6 +154,7 @@ int __cdecl ch_ClearActionQueue(void* character)
 /* Original character.c placement is inferred from the ch_ subsystem. */
 
 
+/* ADDRESS: GOLDDE 0x004045e0 */
 char* __cdecl ch_InsertAction(char* object, char* position, int kind, ...)
 {
     /* Native initializes this fallback value only for an unregistered kind. */
@@ -227,6 +231,7 @@ char* __cdecl ch_InsertAction(char* object, char* position, int kind, ...)
 #include "Develop/DieGildeAddOn/game/ch_action.h"
 
 /* Drops an object onto the ground of its map cell; returns the cell type. */
+/* ADDRESS: GOLDDE 0x004047b0 */
 int __cdecl ch_PlaceOnGround(void* object, int force)
 {
 	char* obj;
@@ -269,6 +274,7 @@ int __cdecl ch_PlaceOnGround(void* object, int force)
 }
 
 
+/* ADDRESS: GOLDDE 0x004048c0 */
 int __cdecl ch_ExecuteAction(char* e)
 {
 	CH_ACTION* t;
@@ -298,6 +304,7 @@ int __cdecl ch_ExecuteAction(char* e)
 int __cdecl ch_QueueStandUpAnimation(char* p, char* s);
 
 
+/* ADDRESS: GOLDDE 0x00405350 */
 int __cdecl ch_CancelActionQueue(char* e)
 {
 	CH_ACTION* t;

@@ -6,6 +6,7 @@ extern int* d2_TutorialState;
 void __cdecl d2_TurnBookPagesForward(int);
 void __cdecl d2_TurnBookPagesBack(int);
 
+/* ADDRESS: GOLDDE 0x00565ac0 */
 int __cdecl d2_AdvanceTutCh3BookCue(void)
 {
 	int* g;

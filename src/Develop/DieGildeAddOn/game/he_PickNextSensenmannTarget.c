@@ -10,6 +10,7 @@ int __cdecl he_SpawnSensenmann(char*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00558d10 */
+/* ADDRESS: GOLDDE 0x0053f070 */
 void __cdecl he_PickNextSensenmannTarget(char* e)
 {
 	char buf[0x200];

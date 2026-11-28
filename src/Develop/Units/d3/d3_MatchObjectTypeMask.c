@@ -1,5 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x004378c0 */
+/* ADDRESS: GOLDDE 0x00430b10 */
 char __cdecl d3_MatchObjectTypeMask(int which, unsigned int flags)
 {
 	switch (which) {

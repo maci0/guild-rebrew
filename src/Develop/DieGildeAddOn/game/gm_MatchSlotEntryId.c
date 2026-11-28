@@ -2,6 +2,7 @@
 
 extern int g_6652f8[];
 
+/* ADDRESS: GOLDDE 0x004dd950 */
 int __cdecl gm_MatchSlotEntryId(int* needle, int* list)
 {
 	int n;

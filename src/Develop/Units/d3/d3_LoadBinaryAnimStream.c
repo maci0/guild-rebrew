@@ -18,6 +18,7 @@ void __cdecl CloseVfsStream(void*);
 /* Chunked binary animation-stream loader.  The returned record is 0x16c
  * bytes; its frame table is v12 entries of 0xc0 bytes. */
 /* ADDRESS: GOLDTL 0x0044e1e0 */
+/* ADDRESS: GOLDDE 0x00443ed0 */
 char* __cdecl d3_LoadBinaryAnimStream(char* path, char* name, char a2)
 {
 	int v11;

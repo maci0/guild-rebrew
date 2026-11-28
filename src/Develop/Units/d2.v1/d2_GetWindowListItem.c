@@ -27,6 +27,7 @@ int __cdecl d2_GetWindowListItem(int group, int item, int index)
 }
 #else
 /* ADDRESS: GOLDTL 0x00472250 */
+/* ADDRESS: GOLDDE 0x00465570 */
 int __cdecl d2_GetWindowListItem(int k, int i, int j)
 {
 	D2_WIN* w;

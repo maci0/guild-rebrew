@@ -16,6 +16,7 @@ extern char g_67bd38[];
 
 void* __cdecl m_alloc(int, void*);
 
+/* ADDRESS: GOLDDE 0x00450f90 */
 void __cdecl d3_InitTextures(unsigned int n, int levels)
 {
 	g_10405cc = 0;

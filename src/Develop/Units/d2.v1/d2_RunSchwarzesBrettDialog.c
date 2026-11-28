@@ -34,6 +34,7 @@ int __cdecl d3_EndCameraAndUiMode(void);
 int __cdecl gm_ModifyHealth(int, int);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x005c1110 */
+/* ADDRESS: GOLDDE 0x005a3550 */
 int __cdecl d2_RunSchwarzesBrettDialog(void)
 {
 	int n;

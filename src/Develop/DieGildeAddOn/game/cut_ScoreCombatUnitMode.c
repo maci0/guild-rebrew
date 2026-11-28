@@ -5,6 +5,7 @@ float __cdecl gm_CalcCombatStrength(void* obj);
 float __cdecl gm_GetEntityHealthRatio(void* obj);
 
 /* ADDRESS: GOLDTL 0x004d3e90 */
+/* ADDRESS: GOLDDE 0x004c1180 */
 float __cdecl cut_ScoreCombatUnitMode(void* obj, unsigned int mode)
 {
 	float r;

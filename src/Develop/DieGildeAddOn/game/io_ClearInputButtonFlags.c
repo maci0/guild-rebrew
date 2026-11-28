@@ -4,6 +4,7 @@ extern int g_6b5c94;
 extern short io_ActiveCursorX;
 extern int io_PolledCursorState[];
 
+/* ADDRESS: GOLDDE 0x004112d0 */
 void __cdecl io_ClearInputButtonFlags(unsigned char mask)
 {
 	if (g_6b5c94 != 0) {

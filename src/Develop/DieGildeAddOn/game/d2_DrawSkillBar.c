@@ -20,6 +20,7 @@ extern char* d2_FileObjTable;
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl d2_AddElementToWindow(int x, int y, int a3, int win);
 
+/* ADDRESS: GOLDDE 0x0051cb00 */
 void __cdecl d2_DrawSkillBar(int x, int y, char* entity, int skillIndex, int bar)
 {
 	int w;

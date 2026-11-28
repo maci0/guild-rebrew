@@ -1,9 +1,11 @@
+extern char str_fmt_s[];
 #include <string.h>
 
 void __cdecl io_FormatTextBuffer(void* out, int id, ...);
 void __cdecl d2_ShowPrivilegMessage(void* buf, int a, char* b);
 
 /* ADDRESS: GOLDTL 0x004f8570 */
+/* ADDRESS: GOLDDE 0x004e4350 */
 int __cdecl fcn_004f8570(char* entity, int* request)
 {
     char buf[0x200];
@@ -22,7 +24,7 @@ int __cdecl fcn_004f8570(char* entity, int* request)
         return 2;
     }
     if (*request == 1 && entity[2] == 6) {
-        io_FormatTextBuffer(((char*) request) + 0x14, 0x679060, 0x1da1);
+        io_FormatTextBuffer(((char*) request) + 0x14, (int) &str_fmt_s, 0x1da1);
     }
     return 2;
 }

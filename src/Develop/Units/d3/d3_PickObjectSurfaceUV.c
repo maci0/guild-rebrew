@@ -46,6 +46,7 @@ typedef struct {
 } pick_frame;
 
 /* ADDRESS: GOLDTL 0x00444860 */
+/* ADDRESS: GOLDDE 0x0043c5f0 */
 unsigned char __cdecl d3_PickObjectSurfaceUV(float x, float y, int obj, int index,
 	float* outx, float* outy)
 {

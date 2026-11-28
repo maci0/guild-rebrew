@@ -10,6 +10,7 @@ extern Card_1007ce0 g_1007ce0[24];
 
 /* The 0x180-byte native table is addressed literally; no data row owns it. */
 /* ADDRESS: GOLDTL 0x004a7be0 */
+/* ADDRESS: GOLDDE 0x00495f30 */
 void __cdecl gm_EvaluateCardGameBoard(void)
 {
 	int counts[6];

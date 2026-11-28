@@ -17,6 +17,7 @@ void __cdecl d2_OpenRathausGebInfo(void);
 void __cdecl d2_OpenTagesordnungDialog(void);
 void __cdecl d2_RunAmtCandidatesMenu(void);
 
+/* ADDRESS: GOLDDE 0x0058dcc0 */
 void __cdecl d2_RunRathausMenu(void)
 {
 	int kauf;

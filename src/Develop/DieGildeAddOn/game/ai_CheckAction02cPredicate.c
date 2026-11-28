@@ -3,6 +3,7 @@ int __cdecl gm_CollectFrequentCrimeTargets(int* ids, int* d, unsigned short id);
 char* __cdecl gm_LookupEntityRecordById(int id);
 
 /* ADDRESS: GOLDTL 0x004a91a0 */
+/* ADDRESS: GOLDDE 0x004974e0 */
 int __cdecl ai_CheckAction02cPredicate(int unused1, char* e, int unused3, int unused4, char* out)
 {
 	int d[32];

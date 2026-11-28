@@ -1,3 +1,5 @@
+extern char g_14cfc20[];
+extern char g_675ad8[];
 #include <string.h>
 
 extern int __cdecl fcn_0064d41a(char* buf, const char* fmt, ...);
@@ -37,6 +39,7 @@ typedef struct {
 /* Rebuilds one object's render state from its definition record. Native
  * extent 1056 bytes. */
 /* ADDRESS: GOLDTL 0x004094c0 */
+/* ADDRESS: GOLDDE 0x004083c0 */
 unsigned int __cdecl ch_BuildWalkPath(int rec, int gridContext)
 {
 	char buf[0x60];
@@ -48,7 +51,7 @@ unsigned int __cdecl ch_BuildWalkPath(int rec, int gridContext)
 
 	obj = *(int*) (rec + 0x14);
 	if (*(int*) (obj + 0x7c) != 0) {
-		fcn_0064d41a(buf, (char*) 0x67553c, obj);
+		fcn_0064d41a(buf, "morph_%i", obj);
 		d3_RemoveObjectAnimation(*(int*) (*(int*) (obj + 0x34) + 0x1ec) + 0xf4, buf);
 		r = d3_FindAnimByName(buf);
 		d3_ReleaseAnim(r, 1);
@@ -109,7 +112,7 @@ unsigned int __cdecl ch_BuildWalkPath(int rec, int gridContext)
 			ch_FindWalkableCell(gridContext, *(int*) (obj + 0x34) + 0x4c,
 			    *(int*) (obj + 0x34) + 0x4c, cell.x, cell.z,
 			    &cell.z, &cell.x, 8, *(unsigned int*) (rec + 0x160));
-		g_14d0c20.cells = (unsigned char*) 0x14cfc20;
+		g_14d0c20.cells = (unsigned char*) &g_14cfc20;
 		g_14d0c20.max = 0x200;
 		if (FindPath((void*) &g_14d0c20, gridContext, v15, v14, cell.z, cell.x,
 		    *(unsigned char*) (obj + 0x240)) == -1) {
@@ -127,7 +130,7 @@ unsigned int __cdecl ch_BuildWalkPath(int rec, int gridContext)
 			return 0;
 		}
 		*(int*) (rec + 0xf4) = (int) m_alloc(g_14d0c20.n * 2,
-		    (char*) 0x675ad8);
+		    (char*) &g_675ad8);
 		*(int*) (rec + 0xf0) = ch_DownsamplePath(obj, (void*) &g_14d0c20,
 		    (void*) *(int*) (rec + 0xf4), gridContext);
 		*(int*) (rec + 0xf8) = 0;

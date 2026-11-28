@@ -34,6 +34,7 @@ extern void __cdecl ch_FinishAni(char*);
 extern void __cdecl fcn_0041ddd0(char*);
 
 /* ADDRESS: GOLDTL 0x0040aa00 */
+/* ADDRESS: GOLDDE 0x00409900 */
 void __cdecl ch_WalkOnPath58(char* obj)
 {
 	char* inst;

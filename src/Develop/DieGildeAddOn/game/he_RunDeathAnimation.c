@@ -16,6 +16,7 @@ void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl cm_RequestKillSpieler(int, int);
 void __cdecl he_FreeAction(char*);
 
+/* ADDRESS: GOLDDE 0x00554170 */
 void __cdecl he_RunDeathAnimation(char* u)
 {
 	char* h;

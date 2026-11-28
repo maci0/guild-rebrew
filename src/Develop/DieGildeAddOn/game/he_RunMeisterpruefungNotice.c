@@ -19,6 +19,7 @@ int __cdecl io_AppendText(int, ...);
 char* __cdecl gm_QueryEntities(int, int, int, int, int);
 void __cdecl d2_EnterBuildingObjekt(char*, int, char*);
 
+/* ADDRESS: GOLDDE 0x0054b250 */
 void __cdecl he_RunMeisterpruefungNotice(char* u)
 {
 	char* h;

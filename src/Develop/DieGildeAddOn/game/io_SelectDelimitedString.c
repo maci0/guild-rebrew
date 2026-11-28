@@ -1,4 +1,5 @@
 /* ADDRESS: GOLDTL 0x0042b2f0 */
+/* ADDRESS: GOLDDE 0x004256a0 */
 char* __cdecl io_SelectDelimitedString(char* base, int count, int mode)
 {
 	char c;

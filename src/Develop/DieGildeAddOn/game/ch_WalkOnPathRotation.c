@@ -11,6 +11,7 @@ float __cdecl d3_ComputeYawToTarget(char* obj, float* pos);
 void __cdecl d3_SetObjectEulerRotation(int a1, int a2, int a3, int a4);
 
 /* ADDRESS: GOLDTL 0x0040a200 */
+/* ADDRESS: GOLDDE 0x00409100 */
 void __cdecl ch_WalkOnPathRotation(char* obj)
 {
 	char buf[256];

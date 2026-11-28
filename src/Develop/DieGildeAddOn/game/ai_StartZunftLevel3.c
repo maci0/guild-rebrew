@@ -4,6 +4,7 @@ int __cdecl ai_SelectZunftPrivilege0x20Target(char* e);
 int __cdecl ai_SelectZunftPrivilegeGroup(char* e);
 
 /* ADDRESS: GOLDTL 0x004a02d0 */
+/* ADDRESS: GOLDDE 0x0048ed00 */
 int __cdecl ai_StartZunftLevel3(int a1, char* e, int a3, char* out)
 {
 	char c;

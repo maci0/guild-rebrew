@@ -13,6 +13,7 @@ char* __cdecl gm_AddObjekt(void);
 char* __cdecl gm_FindNextFilteredEntity(void);
 #include "Develop/Units/d3/client_scene_transform.h"
 
+/* ADDRESS: GOLDDE 0x0057d800 */
 char __cdecl d3_CollectPrefixSceneObjects(char* e, char* pfx)
 {
 	float pa[4];

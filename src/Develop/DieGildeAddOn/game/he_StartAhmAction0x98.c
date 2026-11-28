@@ -8,6 +8,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 int __cdecl cm_SendSetHE(int, char*);
 
+/* ADDRESS: GOLDDE 0x0055c330 */
 void __cdecl he_StartAhmAction0x98(char* o)
 {
 	pos14_7f4c00* p;

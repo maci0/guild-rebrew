@@ -11,6 +11,7 @@ void __cdecl he_PostEntityMessage(int a, int b, void* buf, int d, int e, void* f
 void __cdecl he_FreeAction(char* a);
 
 
+/* ADDRESS: GOLDDE 0x00563810 */
 void __cdecl he_UpdateEvent0a3(char* a)
 {
 	unsigned short* e;

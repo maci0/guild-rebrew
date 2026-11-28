@@ -113,6 +113,7 @@ void __cdecl d3_NormalizeVector(float* v);
 #pragma data_seg(".text")
 
 /* ADDRESS: GOLDTL 0x00452c60 */
+/* ADDRESS: GOLDDE 0x00448510 */
 unsigned char __cdecl d3_UpdateDirectedEmitter(PARTICLE_EMITTER* e, unsigned int t)
 {
 	EMITTER_PARTICLE* p;
@@ -277,6 +278,7 @@ unsigned char __cdecl d3_UpdateDirectedEmitter(PARTICLE_EMITTER* e, unsigned int
    random direction, integrate live slots by the elapsed time, fade and retire
    expired slots. Returns 0 once the slot budget is filled. */
 /* ADDRESS: GOLDTL 0x00453470 */
+/* ADDRESS: GOLDDE 0x00448d20 */
 char __cdecl d3_UpdateDriftEmitter(void* a1, unsigned int tick)
 {
 	char* e;

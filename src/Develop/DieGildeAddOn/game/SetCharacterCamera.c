@@ -9,6 +9,7 @@ void __cdecl ch_SetCameraView(char*, int);
 
 /* SetCharacterCamera(): puts the camera into one of the character views. */
 /* ADDRESS: GOLDTL 0x0040d8c0 */
+/* ADDRESS: GOLDDE 0x0040c6d0 */
 int __cdecl SetCharacterCamera(char** ch, char** view)
 {
 	if (*ch == 0) {

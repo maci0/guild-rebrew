@@ -33,6 +33,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005e6360 */
+/* ADDRESS: GOLDDE 0x005c7620 */
 void __cdecl d2_RunEhrerbietungDialog(char* entity)
 {
     int ids[2];

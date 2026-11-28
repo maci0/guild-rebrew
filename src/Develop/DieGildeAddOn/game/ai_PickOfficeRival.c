@@ -24,6 +24,7 @@ float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int 
 int __cdecl ai_SelectRankedCandidates(ENTITY_RECORD* e, int a, int* b, int c, float r, int* out);
 
 /* ADDRESS: GOLDTL 0x0049fc80 */
+/* ADDRESS: GOLDDE 0x0048e6b0 */
 ENTITY_RECORD* __cdecl ai_PickOfficeRival(ENTITY_RECORD* subject)
 {
 	ENTITY_RECORD* list[5];

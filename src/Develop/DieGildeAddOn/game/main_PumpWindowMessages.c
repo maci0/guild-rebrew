@@ -12,6 +12,7 @@ __declspec(dllimport) int __stdcall TranslateMessage(void*);
 __declspec(dllimport) int __stdcall DispatchMessageA(void*);
 
 
+/* ADDRESS: GOLDDE 0x0051df40 */
 int __cdecl main_PumpWindowMessages(void)
 {
 	while (PeekMessageA(g_7e2a80, g_774940, 0, 0, 0) != 0) {

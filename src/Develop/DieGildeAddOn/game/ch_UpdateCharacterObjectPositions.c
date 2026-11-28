@@ -4,6 +4,7 @@
 
 void __cdecl d3_SetObjectPosition(int, void*);
 
+/* ADDRESS: GOLDDE 0x00402520 */
 void __cdecl ch_UpdateCharacterObjectPositions(void)
 {
 	void** p;

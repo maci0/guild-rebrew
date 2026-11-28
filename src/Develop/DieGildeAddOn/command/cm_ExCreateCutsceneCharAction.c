@@ -7,6 +7,7 @@ char* __cdecl ch_FindCharacterByName(char*);
 int __cdecl d3_GetContextIndex(int);
 char* __cdecl ch_CreateAction(char*, int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x004ba3b0 */
 int __cdecl cm_ExCreateCutsceneCharAction(char* x, char* out)
 {
 	char* a;

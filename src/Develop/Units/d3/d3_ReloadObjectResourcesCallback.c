@@ -11,6 +11,7 @@ void __cdecl d3_AttachCachedModelParts(char* o, int a, char* name);
 void __cdecl d3_InvalidateSubTreeFlags(char* o, int a);
 
 /* ADDRESS: GOLDTL 0x0043aad0 */
+/* ADDRESS: GOLDDE 0x00433890 */
 char __cdecl d3_ReloadObjectResourcesCallback(char* o, SCENE_PROGRESS_CONTEXT* cb)
 {
 	char* ext;

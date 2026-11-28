@@ -8,6 +8,7 @@
 void __cdecl ch_EnsureCharacterMeshes(void*);
 void __cdecl d3_RemoveObjectAnimation(char*, char*);
 
+/* ADDRESS: GOLDDE 0x00405700 */
 void __cdecl ch_ClearSitting(unsigned char* ch)
 {
 	unsigned char* p;

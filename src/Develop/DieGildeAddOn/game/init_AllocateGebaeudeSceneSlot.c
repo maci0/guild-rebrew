@@ -58,6 +58,7 @@ extern char d3_Universes[];
 void __cdecl init_LoadGebaeudeScene(int);
 
 /* ADDRESS: GOLDTL 0x005155e0 */
+/* ADDRESS: GOLDDE 0x00500050 */
 int __cdecl init_AllocateGebaeudeSceneSlot(unsigned char* e)
 {
 	int k;

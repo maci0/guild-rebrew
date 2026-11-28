@@ -41,6 +41,7 @@ int __cdecl d3_CreateObjectAnimation(char* obj, FLAGS546590 fl, int n, FRAME5465
 int __cdecl he_ArrangeEntityMarkers(char* entity);
 
 /* ADDRESS: GOLDTL 0x00546590 */
+/* ADDRESS: GOLDDE 0x0052cc10 */
 char* __cdecl he_CreateAnimatedEntityMarker(char* effectState, char* name, char* entity)
 {
 	FRAME546590 frames[2];

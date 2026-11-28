@@ -1,3 +1,5 @@
+extern char gm_EntityIdField[];
+extern char g_85a0a4[];
 #include "Develop/DieGildeAddOn/game/game_timestamp.h"
 #include <string.h>
 
@@ -21,6 +23,7 @@ int __cdecl gm_IsSlotPlayerPerson(int);
 void __cdecl cm_SendCopyEntityData(void*);
 
 /* ADDRESS: GOLDTL 0x004b1a90 */
+/* ADDRESS: GOLDDE 0x0049fdb0 */
 int __cdecl gm_SendPlayerMorningEvents(void)
 {
 	char msg[0xf8];
@@ -35,7 +38,7 @@ int __cdecl gm_SendPlayerMorningEvents(void)
 	stamp.minute = 0;
 	sent = 0;
 	n = 0;
-	rec = (char*) 0x7f4ca4;
+	rec = (char*) &gm_EntityIdField;
 	do {
 		if (sent >= 8) {
 			break;
@@ -53,6 +56,6 @@ int __cdecl gm_SendPlayerMorningEvents(void)
 		}
 		n++;
 		rec += 0x21c;
-	} while ((int) rec < 0x85a0a4);
+	} while ((int) rec < (int) &g_85a0a4);
 	return 1;
 }

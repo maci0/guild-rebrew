@@ -50,6 +50,7 @@ void __cdecl he_FreeAction(char*);
 /* One step of the disease simulation: walks twelve towns in a pseudo-random
  * order and rolls an illness for each one. */
 /* ADDRESS: GOLDTL 0x00556ed0 */
+/* ADDRESS: GOLDDE 0x0053d230 */
 void __cdecl RunSimKrankheiten(char* s)
 {
 	float x;

@@ -9,6 +9,7 @@ extern char gm_EntityIdField[];
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, void*, int, int, void*);
 
+/* ADDRESS: GOLDDE 0x00597300 */
 void __cdecl amt_NotifyOfficeSwap(void* first, void* second, void* third)
 {
 	if (*(char*) ((char*) second + 2) == 6) {

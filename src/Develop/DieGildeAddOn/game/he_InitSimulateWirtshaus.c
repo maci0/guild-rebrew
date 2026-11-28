@@ -9,6 +9,7 @@
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 
+/* ADDRESS: GOLDDE 0x0053b7f0 */
 void __cdecl he_InitSimulateWirtshaus(char* e)
 {
 	*(pos14_7f4c00*) (e + 0x52) = (*(pos14_7f4c00*)&gm_GameTime);

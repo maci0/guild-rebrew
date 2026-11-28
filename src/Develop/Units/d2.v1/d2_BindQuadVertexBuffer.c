@@ -16,6 +16,7 @@ extern int tp_d2_QuadVertexBuffer;
 
 
 /* ADDRESS: GOLDTL 0x0047c4e0 */
+/* ADDRESS: GOLDDE 0x0046b4b0 */
 void __cdecl d2_BindQuadVertexBuffer(void)
 {
 	if (g_772618 == 0) {

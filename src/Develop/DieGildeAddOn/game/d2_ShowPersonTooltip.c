@@ -25,6 +25,7 @@ void __cdecl io_FormatTextBuffer(char*, char*, ...);
 void __cdecl d2_DrawSkillBar(int, int, char*, int, int);
 void __cdecl d2_DispatchTutorialInput(int, char*, int, int);
 
+/* ADDRESS: GOLDDE 0x00577140 */
 int __cdecl d2_ShowPersonTooltip(char* w)
 {
 	int h;

@@ -18,6 +18,7 @@ int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 unsigned short __cdecl gm_RandomMod(int);
 
 /* ADDRESS: GOLDTL 0x00495a80 */
+/* ADDRESS: GOLDDE 0x00484520 */
 int __cdecl ai_StartBildung(int unused, char* actorEntity, int mode, char* out1, char* out2)
 {
 	int left;

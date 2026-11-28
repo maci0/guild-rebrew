@@ -27,6 +27,7 @@ int __cdecl ai_FindEntityInFavorRange(unsigned short*, int, int, int, float, flo
 void __cdecl he_FreeAction(char*);
 
 /* ADDRESS: GOLDTL 0x00576c90 */
+/* ADDRESS: GOLDDE 0x0055cbc0 */
 void __cdecl he_RunAssassinAction(char* e)
 {
 	char text[0x100];

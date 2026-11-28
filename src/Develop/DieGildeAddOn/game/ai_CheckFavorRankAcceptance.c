@@ -3,6 +3,7 @@ float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int 
 float __cdecl gm_RandomFloat01(void);
 
 /* ADDRESS: GOLDTL 0x004943e0 */
+/* ADDRESS: GOLDDE 0x00482ea0 */
 int __cdecl ai_CheckFavorRankAcceptance(unsigned short* host, unsigned short* guest)
 {
 	int hostRank;

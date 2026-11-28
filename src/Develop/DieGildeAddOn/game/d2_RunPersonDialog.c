@@ -30,6 +30,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_ResetUiInputAndBounds(void);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x005775a0 */
 void __cdecl d2_RunPersonDialog(char* w)
 {
 	int h;

@@ -23,6 +23,7 @@ extern double g_662ad8;
 
 int __cdecl gm_GetElapsedMinutes(Blob14* a, Blob14* b);
 
+/* ADDRESS: GOLDDE 0x004e7dd0 */
 void __cdecl gm_StepCityPopulation(void)
 {
 	int r;

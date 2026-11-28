@@ -5,6 +5,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl evt_FindScriptById(int);
 void __cdecl evt_RequestScriptExit(int);
 
+/* ADDRESS: GOLDDE 0x004ba350 */
 int __cdecl cm_ExStopEntityScript(char* request, char* response)
 {
 	char* entity;

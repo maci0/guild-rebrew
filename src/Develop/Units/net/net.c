@@ -133,6 +133,7 @@ __declspec(selectany) int cm_LastSyncCount = 0;
 #endif
 
 /* ADDRESS: GOLDTL 0x004208a0 */
+/* ADDRESS: GOLDDE 0x0041d800 */
 void __cdecl nt_LogWinsockError(int err_code)
 {
 	char buf[256];

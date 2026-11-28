@@ -9,6 +9,7 @@ typedef struct
 } Body20;
 // SIZE 0x80
 
+/* ADDRESS: GOLDDE 0x004b45e0 */
 void __cdecl cm_SendAdjustResourceSlots(Body20* source)
 {
 	char buf[0x9c];

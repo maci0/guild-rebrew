@@ -53,6 +53,7 @@ void __cdecl d2_SetElementEnabled(int i, int flag);
 float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 
 /* ADDRESS: GOLDTL 0x005caaa0 */
+/* ADDRESS: GOLDDE 0x005ac530 */
 int __cdecl d2_DrawPersonTile(int x, int y, int win, D2_PERSON_TILE_SEL* selection)
 {
 	int cx;

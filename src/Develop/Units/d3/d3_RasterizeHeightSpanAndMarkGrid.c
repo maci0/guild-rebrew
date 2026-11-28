@@ -8,6 +8,7 @@ typedef struct Cell0455e60 {
 } Cell0455e60;
 // SIZE 0x1c
 
+/* ADDRESS: GOLDDE 0x0044b620 */
 void __cdecl d3_RasterizeHeightSpanAndMarkGrid(int fixed, int unused, int kind, int n, unsigned char* heights, Cell0455e60* grid, int cx, int cy, int size, int r)
 {
 	unsigned char h;

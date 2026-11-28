@@ -12,6 +12,7 @@ extern unsigned int g_aed204;
 #include "Develop/client_types.h"
 extern COMMAND_STATUS_SLOT cm_CommandStatusQueue[0x8000];
 
+/* ADDRESS: GOLDDE 0x004b1ed0 */
 int __cdecl cm_AreQueuedCommandsDone(void)
 {
 	unsigned int i;

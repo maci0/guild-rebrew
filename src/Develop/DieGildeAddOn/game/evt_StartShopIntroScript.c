@@ -1,3 +1,5 @@
+void __cdecl d3snd_PlayShopFavorGreeting();
+extern char g_6a1f54[];
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 #include "game_data.h"
 extern int g_699b10;
@@ -14,6 +16,7 @@ int __cdecl evt_FindScriptById(int);
 void __cdecl evt_RequestScriptExit(int);
 void __cdecl evt_CallScriptFunction(int, int, int, int);
 /* ADDRESS: GOLDTL 0x00515c60 */
+/* ADDRESS: GOLDDE 0x005006d0 */
 void __cdecl evt_StartShopIntroScript(unsigned char* building, unsigned char* visitor)
 {
 	int zv[2];
@@ -62,11 +65,11 @@ found:
 			v3 = zv[0];
 fmt:
 			v3++;
-			fcn_0064d41a(path, (char*) 0x6a1f54, g_6790c8, v3, v3);
+			fcn_0064d41a(path, (char*) &g_6a1f54, g_6790c8, v3, v3);
 		}
 		else {
 			v3++;
-			fcn_0064d41a(path, (char*) 0x6a1f54, g_6790c8, v3, v3);
+			fcn_0064d41a(path, (char*) &g_6a1f54, g_6790c8, v3, v3);
 		}
 	}
 	r = vfs_LookupPath(path, (int) vfs_RootDir, (char*) &zv[1]);
@@ -83,7 +86,7 @@ fmt:
 				evt_RequestScriptExit(v3);
 			}
 		}
-		evt_CallScriptFunction(r, 2, *(int*) (v8 + 0x184), 0x4c3800);
+		evt_CallScriptFunction(r, 2, *(int*) (v8 + 0x184), (int) d3snd_PlayShopFavorGreeting);
 		*(int*) (r + 0xc94) = *(int*) (v8 + 0x184);
 		*(int*) (*(int*) (v8 + 0x184) + 0x28) = *(int*) (r + 0x100);
 		g_699b10 = *(int*) (r + 0x100);

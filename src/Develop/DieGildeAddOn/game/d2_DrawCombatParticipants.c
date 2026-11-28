@@ -21,6 +21,7 @@ int* __cdecl gm_GetEquippedCombatGear(char*);
 void __cdecl d2_SetElementScale(int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x004d5740 */
+/* ADDRESS: GOLDDE 0x004c2690 */
 void __cdecl d2_DrawCombatParticipants(char* ids, int originX, int originY)
 {
 	char buf[0x100];

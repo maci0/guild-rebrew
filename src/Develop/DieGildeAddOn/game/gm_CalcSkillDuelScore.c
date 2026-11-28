@@ -5,6 +5,7 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
 /* ADDRESS: GOLDTL 0x00507e70 */
+/* ADDRESS: GOLDDE 0x004f2ff0 */
 float __cdecl gm_CalcSkillDuelScore(char* attacker, char* defender, int skillId)
 {
 	float atkSkill;

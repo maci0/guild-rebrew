@@ -16,6 +16,7 @@
  
  
 
+/* ADDRESS: GOLDDE 0x005a8c50 */
 void __cdecl d2_ResetTrainingRows(void)
 {
 	int i;

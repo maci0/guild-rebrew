@@ -54,6 +54,7 @@ int __cdecl d2_CreateChildWindow(short x, short y, short width, short height, un
 }
 #else
 /* ADDRESS: GOLDTL 0x0046f100 */
+/* ADDRESS: GOLDDE 0x00462690 */
 int __cdecl d2_CreateChildWindow(int x, int y, int cx, int cy, int flags, int win)
 {
 	D2_CHILD_WIN* w;

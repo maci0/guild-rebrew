@@ -68,6 +68,7 @@ void __cdecl d3_ResetWorldSceneState(void);
 void __cdecl d3_UpdateSceneDetailLevel(int a, char b);
 
 /* ADDRESS: GOLDTL 0x00521920 */
+/* ADDRESS: GOLDDE 0x0050abf0 */
 int __cdecl ls_LoadSavegame(char* cpath)
 {
 	void* stream;

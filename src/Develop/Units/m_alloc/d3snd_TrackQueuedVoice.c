@@ -10,6 +10,7 @@ void __cdecl d3snd_SetVoiceFlag0x10(char*, int);
 void* __cdecl d3snd_GetLastTrackedVoice(void);
 
 /* ADDRESS: GOLDTL 0x004c0a80 */
+/* ADDRESS: GOLDDE 0x004ae5b0 */
 int __cdecl d3snd_TrackQueuedVoice(char* a0, int a1)
 {
 	char* p;

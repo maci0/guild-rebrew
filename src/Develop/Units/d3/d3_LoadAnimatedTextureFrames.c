@@ -52,6 +52,7 @@ int __cdecl d3_ResolveTexturePath(char*);
 Tex* __cdecl d3_LoadOrReuseTexture(char*, Col, unsigned int, unsigned int);
 
 /* ADDRESS: GOLDTL 0x0045c380 */
+/* ADDRESS: GOLDDE 0x00451330 */
 void __cdecl d3_LoadAnimatedTextureFrames(Tex* t, Col c, unsigned int flags, unsigned int flags2)
 {
 	char name[0x100];

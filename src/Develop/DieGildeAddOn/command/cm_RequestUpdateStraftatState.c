@@ -3,6 +3,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b3900 */
 void __cdecl cm_RequestUpdateStraftatState(int actorId, int targetId, int actionId, int mode)
 {
 	char buf[0x9c];

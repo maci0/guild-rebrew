@@ -6,6 +6,7 @@ void __cdecl cm_SendRandomEventState(void* msg);
 extern pos14_7f4c00 gm_GameTime;
 
 /* ADDRESS: GOLDTL 0x004fb650 */
+/* ADDRESS: GOLDDE 0x004e7360 */
 void __cdecl gm_InitDisasterState(int enabled, int scaleA, int scaleB, int duration)
 {
 	int buf[10];
@@ -119,6 +120,7 @@ void __cdecl gm_DisableDisasterState(void)
 }
 
 /* ADDRESS: GOLDTL 0x004fbc90 */
+/* ADDRESS: GOLDDE 0x004e78e0 */
 int __cdecl gm_DispatchDisasterCommand(unsigned int* msg)
 {
 	int len;

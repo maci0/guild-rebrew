@@ -7,6 +7,7 @@ extern unsigned int g_6b6f38;
 void __cdecl d3_SiftDownOctreeHeap();
 
 /* ADDRESS: GOLDTL 0x0041c290 */
+/* ADDRESS: GOLDDE 0x00419f30 */
 void __cdecl d3_ReduceOctreeColors(unsigned int limit)
 {
 	unsigned char lvl;

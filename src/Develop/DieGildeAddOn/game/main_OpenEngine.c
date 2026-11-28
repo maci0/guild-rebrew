@@ -258,6 +258,7 @@ void __cdecl evt_GetLoadAndRunGfxScriptFunc(void);
 int __cdecl main_PumpWindowMessages(void);
 
 /* ADDRESS: GOLDTL 0x00538d00 */
+/* ADDRESS: GOLDDE 0x00520500 */
 int __cdecl main_OpenEngine(void)
 {
 	char ini[0x104];

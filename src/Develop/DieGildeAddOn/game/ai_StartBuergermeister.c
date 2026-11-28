@@ -16,6 +16,7 @@ int __cdecl gm_GetTypeProductValue(int);
 int __cdecl ai_PrepareBuildSite(int, char*, int, void*, void*, int);
 
 /* ADDRESS: GOLDTL 0x0049d300 */
+/* ADDRESS: GOLDDE 0x0048bd40 */
 int __cdecl ai_StartBuergermeister(int a0, unsigned short* a1, int a2,
 	unsigned int* a3, unsigned int* a4)
 {

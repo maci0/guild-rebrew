@@ -63,6 +63,7 @@ char* __cdecl gm_GetEntityTableEntry(char*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
 /* ADDRESS: GOLDTL 0x0059aa10 */
+/* ADDRESS: GOLDDE 0x0057fd30 */
 void __cdecl d2_RunTechTreeDialog(char* a0, int a1)
 {
 	char msg[0xf8];

@@ -24,6 +24,7 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 int __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
 void __cdecl cm_RequestChangeAttribute(void);
 
+/* ADDRESS: GOLDDE 0x005be3a0 */
 int __cdecl gm_ObjHalveWorkerLevel(char* cmd, char* arg)
 {
 	char val;

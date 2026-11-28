@@ -1,3 +1,5 @@
+extern char d2_DialogButtonAction[];
+extern char io_LastKeyScancode[];
 void __cdecl io_ClearInputState(void);
 
 #if defined(REBREW_GOLD)
@@ -10,10 +12,11 @@ void __cdecl d2_ResetSelectionAndInput(void)
 }
 #else
 /* ADDRESS: GOLDTL 0x00473660 */
+/* ADDRESS: GOLDDE 0x004663c0 */
 void __cdecl d2_ResetSelectionAndInput(void)
 {
-	*(int*) 0x100f1dc = 0xffffffff;
+	*(int*) &d2_DialogButtonAction = 0xffffffff;
 	io_ClearInputState();
-	*(char*) 0x14cf950 = 0;
+	*(char*) &io_LastKeyScancode = 0;
 }
 #endif

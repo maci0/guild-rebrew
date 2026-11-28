@@ -34,6 +34,7 @@ static __inline int RandomMoneyTransfer(void *request, double increment, double 
     return 0;
 }
 
+/* ADDRESS: GOLDDE 0x004a4f70 */
 int __cdecl gm_HandleEntityMsg06(void *request)
 {
     return RandomMoneyTransfer(request, 1.0, 0.01);

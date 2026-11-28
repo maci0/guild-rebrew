@@ -5,6 +5,7 @@ extern char g_67a3e4[];
 void* __cdecl m_alloc(int, void*);
 void __cdecl d3_ResetMorphExt(char*, char*);
 
+/* ADDRESS: GOLDDE 0x00432eb0 */
 void __cdecl d3_AddObjectDrawData(char* o)
 {
 	int i;

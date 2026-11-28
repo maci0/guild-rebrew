@@ -44,6 +44,7 @@ void __cdecl d2_DestroyForm(int);
  * value, 0x80 a progress bar, 4 closes after 0x1f4 ticks of g_6b7fac,
  * 0x40 calls fcn_004707d0 each frame. Returns the 1/0 close code. */
 /* ADDRESS: GOLDTL 0x00526660 */
+/* ADDRESS: GOLDDE 0x0050f920 */
 int __cdecl d2_RunMessageBox(int parent, int flags)
 {
 	int style;

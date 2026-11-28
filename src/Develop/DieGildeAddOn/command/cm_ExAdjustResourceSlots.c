@@ -2,6 +2,7 @@ int __cdecl gm_ExecCannonFire(char*, char*);
 
 
 /* ADDRESS: GOLDTL 0x004cdd60 */
+/* ADDRESS: GOLDDE 0x004bb540 */
 int __cdecl cm_ExAdjustResourceSlots(char* a1, char* output)
 {
 	int status;

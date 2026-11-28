@@ -7,6 +7,7 @@ extern int g_aed330;
 extern unsigned short g_aece00;
 extern char g_aece02[];
 
+/* ADDRESS: GOLDDE 0x004b2800 */
 int __cdecl cm_StageRawPacketPayload(unsigned short n, void* src)
 {
 	if (g_aed330 != 0) {

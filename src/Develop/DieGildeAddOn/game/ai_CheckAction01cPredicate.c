@@ -16,6 +16,7 @@ int __cdecl ai_SelectRankedCandidates(char* e, int a, int* b, int c, float r, in
 #define max(a, b) ((a) > (b) ? (a) : (b))
 #define min(a, b) ((a) < (b) ? (a) : (b))
 
+/* ADDRESS: GOLDDE 0x00496f40 */
 int __cdecl ai_CheckAction01cPredicate(char* unused1, char* actor, char* ctx, char* unused4, char* out)
 {
 	int mask;

@@ -68,6 +68,7 @@ char* __cdecl gm_FindRecordById(int id);
 void __cdecl gm_CalcEntityInventoryStats(int a, int* out);
 
 /* ADDRESS: GOLDTL 0x00485970 */
+/* ADDRESS: GOLDDE 0x00474920 */
 void __cdecl ai_CollectThiefGoodsResources(char* actor, int building, int skipSell)
 {
 	AI_THIEF_BUY_ENTRY* pa;

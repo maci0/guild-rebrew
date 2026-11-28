@@ -17,6 +17,7 @@ void __cdecl gm_AddTime(SIM_CLOCK_489920* clock, int arg2, int arg3, int arg4);
 void __cdecl cm_SendCopyEntityData(int msg);
 
 /* ADDRESS: GOLDTL 0x00489920 */
+/* ADDRESS: GOLDDE 0x004787f0 */
 void __cdecl ai_RepairMeisterObjects(char* e)
 {
 	char* o;
@@ -39,7 +40,7 @@ void __cdecl ai_RepairMeisterObjects(char* e)
 			memset(s, 0, sizeof(s));
 			o = *(char**) (e + 0x16c);
 			*(char*) (s + 4) = 0x10;
-			*(int*) (s + 8) = *(int*) (*(unsigned short*) (o + 0x27) * 0x21c + 0x7f4ca4);
+			*(int*) (s + 8) = *(int*) (*(unsigned short*) (o + 0x27) * 0x21c + ((int) &gm_GameTime + 0xa4));
 			*(int*) (s + 0xc) = *(int*) (o + 1);
 
 

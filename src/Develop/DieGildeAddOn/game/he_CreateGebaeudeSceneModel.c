@@ -29,6 +29,7 @@ void __cdecl d3_SetSubtreeVisible(char*, int);
 void __cdecl d3_UpdateBuildStageMeshes(char*);
 void __cdecl d3_BindEntitySceneObject(char*, unsigned char*, int);
 
+/* ADDRESS: GOLDDE 0x0055a260 */
 char* __cdecl he_CreateGebaeudeSceneModel(float* rot, struct vec3* pos, unsigned char* kind, char* model, char* u)
 {
 	int saved;

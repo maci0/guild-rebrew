@@ -11,6 +11,7 @@ typedef struct
 } Small3i;
 // SIZE 0xc
 
+/* ADDRESS: GOLDDE 0x004b4100 */
 void __cdecl cm_RequestJoinLeaveElection(Small3i* data)
 {
 	char buf[0x9c];

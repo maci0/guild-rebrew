@@ -1,4 +1,5 @@
 /* ADDRESS: GOLDTL 0x004042b0 */
+/* ADDRESS: GOLDDE 0x004037e0 */
 int __cdecl ch_IsAnimationFinished(void *self)
 {
     void *p;

@@ -21,6 +21,7 @@ unsigned short __cdecl gm_RandomMod(int);
 float __cdecl gm_CalcEntityFavor(int, int, int);
 
 /* ADDRESS: GOLDTL 0x004a57a0 */
+/* ADDRESS: GOLDDE 0x004941a0 */
 unsigned int __cdecl gm_FindFilteredEntity(unsigned short *entity, int filterFlags, int excludeCount, char *excludeIds, float minFavor, float maxFavor, unsigned short *out)
 {
 	int step;

@@ -9,6 +9,7 @@ void __cdecl d3_StartCameraFlight(int, int, int, int, int, int, int, int);
 /* Script command: forwards its seven arguments to fcn_00414d20, the first
  * divided by 14; while the script is suspended it re-arms itself. */
 /* ADDRESS: GOLDTL 0x0040f720 */
+/* ADDRESS: GOLDDE 0x0040e520 */
 int __cdecl NewCameraFlight(int* a1, int* a2, int* a3, int* a4, int* a5, int* a6, int* a7)
 {
 	if (evt_WaitingScriptTask != 0 && *(int (__cdecl**)()) (evt_WaitingScriptTask + 0x44) == (int (__cdecl*)()) NewCameraFlight) {

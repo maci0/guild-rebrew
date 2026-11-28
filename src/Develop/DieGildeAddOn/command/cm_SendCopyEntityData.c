@@ -4,6 +4,7 @@
 void __cdecl cm_StageRawPacketPayload(int, int);
 int __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b2ef0 */
 void __cdecl cm_SendCopyEntityData(int packet)
 {
 	char buf[0x9c];

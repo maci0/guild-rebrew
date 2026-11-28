@@ -5,6 +5,7 @@ int __cdecl amt_GetEffectiveRoleLevel(unsigned short a0, int a1);
 float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 
 /* ADDRESS: GOLDTL 0x004f7120 */
+/* ADDRESS: GOLDDE 0x004e2f00 */
 int __cdecl gm_GetStraftatEvidenceOffer(int id, short* referenceId, int* a2, short* outEntityId, int* outCode)
 {
 	int rec[9];

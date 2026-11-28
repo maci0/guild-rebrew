@@ -1,5 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x0049bdf0 */
+/* ADDRESS: GOLDDE 0x0048a830 */
 int __cdecl cm_StartUseTrank(int a1, int a2, int a3, unsigned char* a4)
 {
 	if (*a4 == 1 && a3 == 4) {

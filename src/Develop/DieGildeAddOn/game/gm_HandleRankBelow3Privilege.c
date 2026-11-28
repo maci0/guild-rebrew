@@ -4,6 +4,7 @@ void __cdecl io_FormatTextBuffer(void* dst, void* fmt, ...);
 void __cdecl d2_ShowPrivilegMessage(void* buf, int mode, int y);
 
 /* ADDRESS: GOLDTL 0x004f7310 */
+/* ADDRESS: GOLDDE 0x004e30f0 */
 int __cdecl gm_HandleRankBelow3Privilege(char* entity, int* command)
 {
 	char buf[0x100];

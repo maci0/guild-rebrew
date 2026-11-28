@@ -17,6 +17,7 @@ void __cdecl d2_RunTalenteDialog(int, int, int);
 void __cdecl d2_ShowAnschwaerzenDialog(int);
 void __cdecl d3_EndCameraAndUiMode(void);
 
+/* ADDRESS: GOLDDE 0x00584830 */
 void __cdecl d2_RunSocialActionsHud(int entity, int mode)
 {
 	int x;

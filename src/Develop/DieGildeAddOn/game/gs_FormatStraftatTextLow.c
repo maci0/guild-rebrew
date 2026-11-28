@@ -14,6 +14,7 @@ typedef struct tag_req_2d_b {
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 
+/* ADDRESS: GOLDDE 0x004e1270 */
 int __cdecl gs_FormatStraftatTextLow(void* dst, GS_STRAFTAT_REC rec, int count)
 {
 	unsigned short targetId;

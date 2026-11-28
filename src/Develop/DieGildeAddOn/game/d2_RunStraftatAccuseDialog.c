@@ -34,6 +34,7 @@ float __cdecl gm_CalcSkillDuelScore(void*, unsigned short*, int);
 void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005c06e0 */
+/* ADDRESS: GOLDDE 0x005a2b20 */
 int __cdecl d2_RunStraftatAccuseDialog(unsigned short* entityRecord)
 {
 	int result;

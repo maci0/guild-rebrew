@@ -61,6 +61,7 @@ typedef struct {
 } RAW_MAT_SEARCH_REQ;
 
 /* ADDRESS: GOLDTL 0x0058d5f0 */
+/* ADDRESS: GOLDDE 0x005732b0 */
 void __cdecl d2_RunRohstoffsuchenDialog(unsigned char* gebaeude)
 {
 	RAW_MAT_SEARCH_REQ req;

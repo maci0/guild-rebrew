@@ -20,6 +20,7 @@ extern Tabs_7e43a8 gm_HourlyWeatherSlots;
 int __cdecl ls_LoadWeatherState(void* stream);
 int __cdecl ls_LoadRenderSlots(void* stream, int version);
 
+/* ADDRESS: GOLDDE 0x0050e880 */
 int __cdecl ls_LoadTabAndWeatherState(void* x)
 {
 	int i;

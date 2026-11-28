@@ -6,6 +6,7 @@
 
 int __cdecl gm_GetBuildingCategorySlot(int, int*);
 
+/* ADDRESS: GOLDDE 0x00511120 */
 void __cdecl gm_CollectGebaeudeUpgrades(unsigned char* e)
 {
 	int t;

@@ -37,6 +37,7 @@ void __cdecl anm_UpdateSheep(AMBIENT_ANIMAL_SLOT*);
 /* Per-tick driver for the 32 ambient slots: may spawn one, then updates and
    retires the slot at the rotating cursor g_7728ec. */
 /* ADDRESS: GOLDTL 0x004bbd70 */
+/* ADDRESS: GOLDDE 0x004a9cc0 */
 void __cdecl gm_UpdateAmbientAnimals(void)
 {
 	int saved;

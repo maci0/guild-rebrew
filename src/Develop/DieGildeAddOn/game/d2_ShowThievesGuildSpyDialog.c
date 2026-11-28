@@ -68,6 +68,7 @@ void __cdecl d2_DestroyForm(int h);
 void __cdecl fcn_005305a0(void);
 
 /* ADDRESS: GOLDTL 0x005ad640 */
+/* ADDRESS: GOLDDE 0x00592150 */
 int __cdecl d2_ShowThievesGuildSpyDialog(void* a0, char* obj)
 {
 	int cnt;

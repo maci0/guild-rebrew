@@ -38,6 +38,7 @@ void __cdecl evt_RequestScriptExit(Vm*);
 #endif
 int __cdecl ecmd_Sleep();
 
+/* ADDRESS: GOLDDE 0x00423910 */
 int __cdecl evt_ExecuteCommand(Cmd* c)
 {
 	int result;

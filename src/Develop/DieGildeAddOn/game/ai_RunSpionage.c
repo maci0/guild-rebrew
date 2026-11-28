@@ -5,6 +5,7 @@ void __cdecl cm_SendCopyEntityData(char* msg);
 void __cdecl cm_SendTraceEnd(char* s);
 
 /* ADDRESS: GOLDTL 0x0049c130 */
+/* ADDRESS: GOLDDE 0x0048ab70 */
 int __cdecl ai_RunSpionage(char* a1, char* x)
 {
 	char msg[0xf8];

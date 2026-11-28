@@ -1,3 +1,4 @@
+extern char g_14a9de8[];
 extern int d2_CurrentWindowId;
 extern char* d2_CurrentWindow;
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -19,6 +20,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005cde50 */
+/* ADDRESS: GOLDDE 0x005af8e0 */
 void __cdecl d2_RunAmtChamberMenu(void (*cb)(int), int textId, int enableFirst)
 {
 	int btn[14];
@@ -57,7 +59,7 @@ void __cdecl d2_RunAmtChamberMenu(void (*cb)(int), int textId, int enableFirst)
 		}
 		id = btn[i];
 		*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[id].font)) = 0x55;
-		d2_ShowCenteredText(*(int*) (0x14a9de8 + btn[i + 7] * 4),
+		d2_ShowCenteredText(*(int*) ((int) &g_14a9de8 + btn[i + 7] * 4),
 			     *(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[id].x)) - *(int*) (d2_CurrentWindow + 4) + 0x20,
 			     *(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[id].y)) - *(int*) (d2_CurrentWindow + 8) - 0x19,
 			     200, 0x55);

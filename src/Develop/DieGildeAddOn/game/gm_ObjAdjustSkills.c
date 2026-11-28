@@ -22,6 +22,7 @@ typedef struct {
 
 void __cdecl cm_SendCopyEntityData(Msg*);
 
+/* ADDRESS: GOLDDE 0x005c0de0 */
 int __cdecl gm_ObjAdjustSkills(char* subject)
 {
 	Msg msg;

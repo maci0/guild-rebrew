@@ -30,6 +30,7 @@ int __cdecl ai_PrepareBuildSite(int, short*, int, Cmd*, Cmd*, int);
 int __cdecl ai_StartKreditNehmen(int, short*, int, Cmd*, Cmd*);
 
 /* ADDRESS: GOLDTL 0x00497ec0 */
+/* ADDRESS: GOLDDE 0x00486940 */
 int __cdecl ai_StartWohnsitzBauen(int a0, short* entity, int a2, Cmd* request, Cmd* a4)
 {
 	int n;

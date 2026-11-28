@@ -1,3 +1,7 @@
+extern char gm_CityDisplayNames[];
+extern char g_85a0a4[];
+extern char g_7f4c00[];
+extern char gm_EntityIdField[];
 extern int g_100f884; extern char g_7749e8;
 extern unsigned char** tp_d2_ActiveHudSlot;
 #include <stdio.h>
@@ -24,6 +28,7 @@ void __cdecl d3snd_QueueSound(int, int, char*, int, int);
 void __cdecl d2_CloseActionPopup(int);
 
 /* ADDRESS: GOLDTL 0x00565350 */
+/* ADDRESS: GOLDDE 0x0054b4a0 */
 void __cdecl he_RunMeisterpruefungPassed(int action)
 {
 	unsigned char* ent;
@@ -45,7 +50,7 @@ void __cdecl he_RunMeisterpruefungPassed(int action)
 		return;
 	if (!gm_InWorldHud)
 		return;
-	if (0 < gm_CompareGameTime((void*) (action + 0x44), (void*) 0x7f4c00))
+	if (0 < gm_CompareGameTime((void*) (action + 0x44), (void*) &g_7f4c00))
 		return;
 	if (!*(unsigned char*) (action + 0xb1)) {
 		v = gm_LookupEntityRecordById(*(unsigned int*) (action + 0xac));
@@ -68,18 +73,18 @@ void __cdecl he_RunMeisterpruefungPassed(int action)
 		x = gm_MapEntityStatRange(*(unsigned char*) (action + 0xb0));
 		z = gm_GetOppositeStatIndex(*(unsigned char*) (action + 0xb0)) + 1;
 		d2_SetForm(*(int*) (*(int*) (action + 0x74) + 8), 1);
-		io_AppendText(0x15c3, gm_ActiveTownIndex * 0x2f4 + (int) 0x868080, (int) 0x7f4c00,
+		io_AppendText(0x15c3, gm_ActiveTownIndex * 0x2f4 + (int) (int) &gm_CityDisplayNames, (int) (int) &g_7f4c00,
 			*(unsigned char*) (action + 0xb1) + y, (int) ((float) ((z - 1) * 0.5) + (3 * x + 0x155a)), x + 0x158a);
 		cm_RequestSetEntityLevel(*(int*) (ent + 4), *(unsigned char*) (action + 0xb1));
 		kind = *(char*) (ent + 2);
 		if (kind == 6 || kind == 7 || kind == 5) {
 			io_FormatTextBuffer(buf, 0x1c1f, *(unsigned short*) ent,
 				*(unsigned char*) (action + 0xb0) + y, *(unsigned char*) (action + 0xb1) + y);
-			p = (char*) 0x7f4ca4; do {
+			p = (char*) &gm_EntityIdField; do {
 				kind = *(char*) (p - 2);
 				if ((kind == 6 || kind == 7) && *(int*) p != *(int*) (ent + 4))
 					he_PostEntityMessage(*(int*) p, -1, buf, 0, 0x5fe, 0);
-			} while (p += 0x21c, (int) p < 0x85a0a4);
+			} while (p += 0x21c, (int) p < (int) &g_85a0a4);
 			*(unsigned int*) (ent + 0x1c8) &= 0x7fffffff;
 		}
 		*(int*) (action + 0x70) = *(int*) (action + 0x70) + 1;

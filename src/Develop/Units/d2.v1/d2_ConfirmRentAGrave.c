@@ -37,6 +37,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl d2_ShowModalMessageBox(char*, int);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x00572a60 */
 int __cdecl d2_ConfirmRentAGrave(char* who, int k)
 {
 	int h;

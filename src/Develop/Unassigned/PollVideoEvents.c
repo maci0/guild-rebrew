@@ -18,6 +18,7 @@ struct Events {
 
 char* __cdecl FindVideoById(int id);
 
+/* ADDRESS: GOLDDE 0x0041c790 */
 long __cdecl PollVideoEvents(int id, long* p1, long* p2)
 {
 	char* video;

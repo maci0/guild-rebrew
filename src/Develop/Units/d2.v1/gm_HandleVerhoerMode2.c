@@ -36,6 +36,7 @@ void __cdecl cm_StepCommandQueue(void);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x005bcc40 */
 int __cdecl gm_HandleVerhoerMode2(char* e, char* o)
 {
 	Query q;

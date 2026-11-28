@@ -35,6 +35,7 @@ void __cdecl cm_SendCopyEntityData(char* msg);
 void __cdecl cm_RequestModifyHealth(int id, int k);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x005a2ed0 */
 void __cdecl d2_ShowAnschwaerzenDialog(int selected_obj)
 {
 	int cancel_btn;

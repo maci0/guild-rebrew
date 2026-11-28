@@ -17,6 +17,7 @@ int __cdecl gm_RemoveLinkedNodeById(int*, int);
 
 int __cdecl d3_RemoveObjectAnim(int);
 
+/* ADDRESS: GOLDDE 0x0040e1d0 */
 char __cdecl d3_RemoveAnimationIfNameContains(int a, int b)
 {
 	if (strstr((char*) a, (char*) b) != 0) {

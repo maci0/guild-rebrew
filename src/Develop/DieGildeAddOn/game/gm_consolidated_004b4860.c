@@ -13,6 +13,7 @@ void* __cdecl gm_QueryEntities(int, int, int, int, int);
 
 /* ADDRESS: GOLD 0x004b46f0 */
 /* ADDRESS: GOLDTL 0x004b4860 */
+/* ADDRESS: GOLDDE 0x004a2b50 */
 int __cdecl gm_HasMatureCategory2Building(unsigned short* key, char* x)
 {
 	unsigned char* e;
@@ -29,6 +30,7 @@ int __cdecl gm_HasMatureCategory2Building(unsigned short* key, char* x)
 
 /* ADDRESS: GOLD 0x004b4760 */
 /* ADDRESS: GOLDTL 0x004b48d0 */
+/* ADDRESS: GOLDDE 0x004a2bc0 */
 int __cdecl gm_HasThreeFullyEquippedBuildings(unsigned short* a1)
 {
 	unsigned char* e;

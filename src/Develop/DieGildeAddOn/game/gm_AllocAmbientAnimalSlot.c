@@ -13,6 +13,7 @@ extern volatile int gm_GameTicks;
 
 
 /* ADDRESS: GOLDTL 0x004bc010 */
+/* ADDRESS: GOLDDE 0x004a9f60 */
 AMBIENT_ANIMAL_SLOT* __cdecl gm_AllocAmbientAnimalSlot(void)
 {
 	int i;

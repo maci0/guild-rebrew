@@ -12,6 +12,7 @@ unsigned int __cdecl vfs_fwrite(void* p, int size, int n, int f);
 int __cdecl ls_SaveWeatherState(int f);
 int __cdecl ls_SaveRenderSlots(int f);
 
+/* ADDRESS: GOLDDE 0x0050ab10 */
 int __cdecl ls_SaveWeatherAndSlots(int stream)
 {
 	int i;

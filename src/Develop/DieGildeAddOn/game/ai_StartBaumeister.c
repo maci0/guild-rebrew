@@ -28,6 +28,7 @@ int __cdecl ai_PrepareBuildSite(char* a1, char* e, int a3, Blk24* b1, Blk24* b2,
 /* The fallback's b1.kind is never written (as in the reference). The
  * pair structs are block-scoped: at function scope the b1.kind store is
  * scheduled ahead of the b1.a load. */
+/* ADDRESS: GOLDDE 0x0048cc10 */
 int __cdecl ai_StartBaumeister(char* a1, char* e, int a3, Blk24* o1, Blk24* o2)
 {
 	unsigned char* rec;

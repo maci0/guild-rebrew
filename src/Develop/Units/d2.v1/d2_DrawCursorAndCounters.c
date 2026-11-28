@@ -52,6 +52,7 @@ void __cdecl d2_DrawWordWrappedText(int, int, int, int, Ctx*, char*, int);
 
 
 /* ADDRESS: GOLDTL 0x00473800 */
+/* ADDRESS: GOLDDE 0x00466500 */
 void __cdecl d2_DrawCursorAndCounters(Ctx* c, int x, int y)
 {
 	Item* p;

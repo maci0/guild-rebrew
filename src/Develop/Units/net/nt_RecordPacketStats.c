@@ -3,6 +3,7 @@
 
 extern int nt_PacketStats[][4];
 
+/* ADDRESS: GOLDDE 0x0041db00 */
 void __cdecl nt_RecordPacketStats(unsigned char* p, unsigned int n, char flag)
 {
 	int k;

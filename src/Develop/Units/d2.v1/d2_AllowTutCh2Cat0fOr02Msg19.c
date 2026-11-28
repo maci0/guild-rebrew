@@ -3,6 +3,7 @@
 
 extern unsigned char* lpGebaeudePROT;
 
+/* ADDRESS: GOLDDE 0x00564c70 */
 int __cdecl d2_AllowTutCh2Cat0fOr02Msg19(int* msg)
 {
 	unsigned char* e;

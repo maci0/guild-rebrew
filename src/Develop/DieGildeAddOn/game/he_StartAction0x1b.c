@@ -36,6 +36,7 @@ int __cdecl gm_SumContainerCredits(int);
 void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
 void __cdecl he_FreeAction(char*);
 
+/* ADDRESS: GOLDDE 0x005495b0 */
 void __cdecl he_StartGebVerkaufen(char* u)
 {
 	struct BUILDING_PROTOTYPE * gd;

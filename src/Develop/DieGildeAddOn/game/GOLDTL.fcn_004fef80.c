@@ -19,6 +19,7 @@ typedef struct
 
 extern float g_662a94;
 
+/* ADDRESS: GOLDDE 0x004eaa00 */
 float __cdecl gm_GetEntityHealth(ENTITY_HEALTH_OBJ* p)
 {
 	float x;
@@ -59,6 +60,7 @@ typedef struct
 // SIZE 0x24
 
 
+/* ADDRESS: GOLDDE 0x004eaa70 */
 float __cdecl gm_GetEntityMaxHealth(ENTITY_HEALTH_VIEW* bar)
 {
 	float v;
@@ -80,6 +82,7 @@ extern float flt_0_0;
 
 
 /* ADDRESS: GOLDTL 0x004ff040 */
+/* ADDRESS: GOLDDE 0x004eaac0 */
 float __cdecl gm_GetEntityHealthRatio(ENTITY_HEALTH_VIEW* bar)
 {
 	if (bar->id == 0xffff) {

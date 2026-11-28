@@ -6,6 +6,7 @@
 char* __cdecl ch_NewAction(char*);
 void __cdecl ch_RunStandUpAnimation(void);
 
+/* ADDRESS: GOLDDE 0x00405810 */
 int __cdecl ch_QueueStandUpAnimation(char* p, char* s)
 {
 	char* e;

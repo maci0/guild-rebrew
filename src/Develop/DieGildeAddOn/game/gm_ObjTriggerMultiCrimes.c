@@ -28,6 +28,7 @@ void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 char* __cdecl gm_LookupSpecialObjectRecord(int, int*);
 void __cdecl d2_ShowUseObjDialog(char*);
 
+/* ADDRESS: GOLDDE 0x005c07e0 */
 int __cdecl gm_ObjTriggerMultiCrimes(char* ent, int* arg)
 {
 	int ok;

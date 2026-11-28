@@ -4,6 +4,7 @@
 extern char gm_EntityIdField[];
 extern float flt_100_0;
 
+/* ADDRESS: GOLDDE 0x004a2d50 */
 int __cdecl gm_HasMinOwnedEntityPercent(char* entity, char* spec)
 {
 	int total;

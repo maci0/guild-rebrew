@@ -14,6 +14,7 @@ char __cdecl d3sm_3D2SuperMap(char*, float*, int*, int*, float*);
 
 /* Steps a walk-to-exit event: queues a walk to the room's exit cell. */
 /* ADDRESS: GOLDTL 0x0040b7f0 */
+/* ADDRESS: GOLDDE 0x0040a6f0 */
 void __cdecl ch_RunWalkToRandomDummy(char* ev)
 {
 	char* map;

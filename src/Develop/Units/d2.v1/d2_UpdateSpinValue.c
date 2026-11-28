@@ -15,6 +15,7 @@ typedef struct Spin {
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 /* ADDRESS: GOLDTL 0x00473f50 */
+/* ADDRESS: GOLDDE 0x00466c50 */
 void __cdecl d2_UpdateSpinValue(Spin* p, int v, int a3, int a4)
 {
 	int step;

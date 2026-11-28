@@ -1,6 +1,7 @@
 extern char* tp_ch_ActionQueue;
 
 /* ADDRESS: GOLDTL 0x0051fd00 */
+/* ADDRESS: GOLDDE 0x00508fd0 */
 unsigned int __cdecl ch_GetQueueEntryIndex(unsigned int action)
 {
 	unsigned int idx;

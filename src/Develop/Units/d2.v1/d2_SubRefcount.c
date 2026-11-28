@@ -4,6 +4,7 @@ extern char g_67d4e0[];
 #include "Develop/Units/Error/error_message.h"
 
 /* ADDRESS: GOLDTL 0x00469960 */
+/* ADDRESS: GOLDDE 0x0045d280 */
 void __cdecl d2_SubRefcount(int i)
 {
 	char* e;

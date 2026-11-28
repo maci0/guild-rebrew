@@ -11,6 +11,7 @@ int __cdecl fcn_0047d220(char* a);
  * the modulo gates and both comparisons. The 96-byte extent also includes the
  * 10 nop bytes after the 86-byte body. */
 /* ADDRESS: GOLDTL 0x0047d240 */
+/* ADDRESS: GOLDDE 0x0046c200 */
 int __cdecl ai_IsEntityTurnActive(char* entity)
 {
 	int turn_slice;

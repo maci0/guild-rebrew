@@ -9,6 +9,7 @@ void __cdecl d3_TransformPoint(char* object, float* position, float* result);
 #endif
 
 /* ADDRESS: GOLDTL 0x00598550 */
+/* ADDRESS: GOLDDE 0x0057dd00 */
 char __cdecl lc_MatchGebaeudeBauplatzNode(char* object, void* context)
 {
 	float position[4];

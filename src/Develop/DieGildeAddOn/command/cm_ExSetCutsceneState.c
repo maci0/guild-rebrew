@@ -3,6 +3,7 @@
 
 char* __cdecl cut_FindCutsceneById(int);
 
+/* ADDRESS: GOLDDE 0x004bb490 */
 int __cdecl cm_ExSetCutsceneState(char* request, char* result)
 {
 	char* p;

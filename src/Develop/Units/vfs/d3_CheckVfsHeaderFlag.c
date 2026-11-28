@@ -9,6 +9,7 @@ int __cdecl vfs_ReadByte(void* stream, void* dst);
 int __cdecl fcn_004011f0(void* stream, void* dst);
 #include "Develop/Units/vfs/vfs.h"
 
+/* ADDRESS: GOLDDE 0x00444d00 */
 char __cdecl d3_CheckVfsHeaderFlag(char* name)
 {
 	int v;

@@ -35,6 +35,7 @@ void __cdecl gm_AddTime(pos14_7f4c00* t, int a, int b, int c);
 int __cdecl cm_RequestSysMessage(int kind, Req* r);
 void __cdecl he_FreeAction(char* o);
 
+/* ADDRESS: GOLDDE 0x0054a110 */
 void __cdecl he_RunSellGebaeudeObjekt(char* o)
 {
 	int kind;

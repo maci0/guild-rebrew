@@ -13,6 +13,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004b9320 */
+/* ADDRESS: GOLDDE 0x004a73d0 */
 int __cdecl gm_HandleMsg24PostHandlungNews(char* request)
 {
 	char* e;

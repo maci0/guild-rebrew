@@ -30,6 +30,7 @@ void __cdecl m_FreeTracked(void*);
 /* Starts a walk event: removes a pending morph, attaches the walk (or cart
  * pulling) motion and scales its speed to the event's step time. */
 /* ADDRESS: GOLDTL 0x00409ae0 */
+/* ADDRESS: GOLDDE 0x004089e0 */
 int __cdecl ch_StartWalkAnimation(char* ev, char* step)
 {
 	char* obj;

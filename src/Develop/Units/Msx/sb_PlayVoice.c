@@ -11,6 +11,7 @@ Voice* __cdecl sb_AllocVoice(void);
 char* __cdecl sb_FindSampleByName(char* bank, const char* name);
 int __cdecl sb_StartVoice(Voice* v, int a, int b);
 
+/* ADDRESS: GOLDDE 0x00420290 */
 Voice* __cdecl sb_PlayVoice(char* bank, const char* name, int loop, int pan, int vol, int a, int b)
 {
 	Voice* v;

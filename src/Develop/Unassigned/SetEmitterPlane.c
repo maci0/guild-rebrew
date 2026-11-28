@@ -1,9 +1,12 @@
+extern char g_6b7e98[];
+extern char g_676b64[];
 
 
 int __cdecl fcn_0041dd90(void* p);
 void __cdecl evt_LogScriptError(void* vm, int line, char* file);
 
 /* ADDRESS: GOLDTL 0x00410380 */
+/* ADDRESS: GOLDDE 0x0040f180 */
 int __cdecl SetEmitterPlane(void** pp, int* normalX, int* normalY, int* normalZ, int* distance)
 {
 	void* obj;
@@ -13,8 +16,8 @@ int __cdecl SetEmitterPlane(void** pp, int* normalX, int* normalY, int* normalZ,
 
 	obj = *pp;
 	if (!fcn_0041dd90(obj)) {
-		evt_LogScriptError(*(void**) 0x6b7e98,
-			*(int*) ((char*) *(void**) 0x6b7e98 + 0x118), (char*) 0x676b64);
+		evt_LogScriptError(*(void**) &g_6b7e98,
+			*(int*) ((char*) *(void**) &g_6b7e98 + 0x118), (char*) &g_676b64);
 		return 0;
 	}
 	scaledY = (float) *normalY * 0.01f;

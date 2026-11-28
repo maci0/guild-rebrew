@@ -3,6 +3,7 @@
 
 extern char gm_EntitySlotTable[];
 
+/* ADDRESS: GOLDDE 0x00512210 */
 void __cdecl he_AddActionActor(int slot_idx, char* action)
 {
 	char* rec;

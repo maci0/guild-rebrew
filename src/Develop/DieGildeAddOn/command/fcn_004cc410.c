@@ -1,6 +1,7 @@
 int __cdecl amt_ValidateOfficeApplication(unsigned char *arg);
 
 /* ADDRESS: GOLDTL 0x004cc410 */
+/* ADDRESS: GOLDDE 0x004b9bf0 */
 int __cdecl fcn_004cc410(char *a1, char *output)
 {
     int status;

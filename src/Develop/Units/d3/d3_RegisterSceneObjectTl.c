@@ -7,6 +7,7 @@ extern int d3_ActiveScene;
 
 void __cdecl d3_SetObjectRotation(char*, char*);
 
+/* ADDRESS: GOLDDE 0x004329b0 */
 void __cdecl d3_RegisterSceneObjectTl(char* o)
 {
 	if (*(int*) (o + 0x218) == 3 && d3_ActiveCamera == 0) {

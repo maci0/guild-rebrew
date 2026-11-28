@@ -7,6 +7,7 @@ void __cdecl cm_RequestUpdateResidenceDecor(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl d2_ShowUseObjDialog(char*);
 
+/* ADDRESS: GOLDDE 0x005bea80 */
 int __cdecl gm_ObjBoostOneSkill(unsigned char* e, int* action)
 {
 	int ids[5];

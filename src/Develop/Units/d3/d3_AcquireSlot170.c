@@ -7,6 +7,7 @@ typedef Slot170_7731b8 Slot170;
 
 extern Slot170_7731b8 gm_CannonTowers[8];
 
+/* ADDRESS: GOLDDE 0x004dcc70 */
 int __cdecl d3_AcquireSlot170(int id)
 {
 	int free;

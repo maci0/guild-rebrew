@@ -28,6 +28,7 @@ void sv_ClearObjectSelection(void);
 void d2_DrawSkillBar(int a, int b, char* entity, int c, int d);
 
 /* ADDRESS: GOLDTL 0x00529890 */
+/* ADDRESS: GOLDDE 0x00512aa0 */
 void __cdecl d2_UpdateBuildingWorkerSlots(char* building)
 {
 	unsigned char* v2;

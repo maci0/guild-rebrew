@@ -87,6 +87,7 @@ int __cdecl d2_RunRoomSlotDialog();
    begins at 0x324. Keep the full 0x724-byte extent addressable. */
 
 /* ADDRESS: GOLDTL 0x005be140 */
+/* ADDRESS: GOLDDE 0x005a05a0 */
 void __cdecl d2_ShowLagerOptions(unsigned char *a0,int a1)
 {
 	unsigned int *  v1;

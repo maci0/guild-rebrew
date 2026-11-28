@@ -8,6 +8,7 @@ void __cdecl d3_FreeQuadtreeNode(int);
 int __cdecl d3_BuildSceneQuadtree(int, int, int, int);
 #include "Develop/Units/d3/client_lighting.h"
 
+/* ADDRESS: GOLDDE 0x004ff8a0 */
 void __cdecl d3_RebuildSceneQuadtreeAndLighting(void)
 {
 	d3_TraverseSceneObjects(d3_ActiveScene, 0, 0xc0, d3_ReparentFackelLights);

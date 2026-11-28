@@ -13,6 +13,7 @@ extern volatile int gm_GameTicks;
 
 int __cdecl d3_CreateSceneModelObject(int, int, float*, char*);
 
+/* ADDRESS: GOLDDE 0x004bc5f0 */
 rec8* __cdecl d3_SpawnBombObject(int pos)
 {
 	float v[3];

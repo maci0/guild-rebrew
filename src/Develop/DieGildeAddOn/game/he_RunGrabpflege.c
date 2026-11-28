@@ -1,3 +1,5 @@
+extern char g_662a3c[];
+extern char g_6628bc[];
 #include "Develop/client_types.h"
 
 
@@ -52,6 +54,7 @@ void __cdecl he_FreeAction(char* a0);
    map cell, advances the hauled amount along the way, places the icon and
    reports the action text. */
 /* ADDRESS: GOLDTL 0x00579de0 */
+/* ADDRESS: GOLDDE 0x0055fc40 */
 void __cdecl he_RunGrabpflege(char* a0)
 {
 	Place579* place;
@@ -95,10 +98,10 @@ void __cdecl he_RunGrabpflege(char* a0)
 	}
 	if (place->status == 0) {
 		v = gm_GetElapsedMinutes(&place->posBC, &gm_GameTime);
-		f = (float) (4 - *(int*) slot) * v * *(float*) 0x662a3c;
+		f = (float) (4 - *(int*) slot) * v * *(float*) &g_662a3c;
 		if ((entity[0x165] == 0x1b || entity[0x165] == 0x1c)
 			&& (*(unsigned char*) (entity + 0x1b4) & 1)) {
-			f *= *(float*) 0x6628bc;
+			f *= *(float*) &g_6628bc;
 		}
 		place->add += f;
 		place->pos52 = gm_GameTime;
@@ -132,7 +135,7 @@ void __cdecl he_RunGrabpflege(char* a0)
 		if ((gm_EntitySlotTable[row + 2] == 6 || gm_EntitySlotTable[row + 2] == 7)
 			&& (!fig || !(*(unsigned char*) (fig + 0x1b4) & 1))) {
 			he_MessageBoxQuickjump(*(int*) (gm_EntitySlotTable + row + 4), -1, text, 0, 0x5ec,
-				*(int*) (rec + 1), -1, 0, (char*) 0x6a7f70);
+				*(int*) (rec + 1), -1, 0, "_NACHRICHTEN_FRIEDHOF_02");
 		}
 	}
 	if (entity) {

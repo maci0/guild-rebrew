@@ -1,5 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x004cfe00 */
+/* ADDRESS: GOLDDE 0x004bd2e0 */
 void __cdecl d3_ResetActionTimers(void)
 {
 	int a;

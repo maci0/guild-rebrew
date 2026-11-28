@@ -4,6 +4,7 @@ extern char gm_PrivilegeHandlers[];
 
 typedef int (__cdecl* fcn_004fa5b0_fn)(char*, int);
 
+/* ADDRESS: GOLDDE 0x004e6390 */
 int __cdecl gm_CheckPrivilege(int index, char* a2, int a3)
 {
 	if (index >= 0x3a) {

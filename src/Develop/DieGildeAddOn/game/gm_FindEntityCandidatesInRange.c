@@ -7,6 +7,7 @@ int __cdecl gm_MatchesTargetFilter(unsigned short, unsigned short, void*, int);
 float __cdecl gm_CalcEntityFavor(unsigned short, unsigned short, int);
 
 /* ADDRESS: GOLDTL 0x004a55c0 */
+/* ADDRESS: GOLDDE 0x00493fc0 */
 unsigned int __cdecl gm_FindEntityCandidatesInRange(unsigned short* actor, unsigned int requestedCount, unsigned int* queryFlags,
 				  float minimumScore, float maximumScore, unsigned short* outIds)
 {

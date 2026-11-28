@@ -12,6 +12,7 @@ void* __cdecl fcn_0064d740(void* dst, const void* src, unsigned int n);
 
 
 /* ADDRESS: GOLDTL 0x004b20e0 */
+/* ADDRESS: GOLDDE 0x004a0400 */
 int __cdecl hst_ParseText_Fake_1st_Pass(char* out, int id)
 {
 	char buf[0x17d0];

@@ -34,6 +34,7 @@ unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
 /* ADDRESS: GOLDTL 0x004c2100 */
+/* ADDRESS: GOLDDE 0x004afc20 */
 void __cdecl msx_StartLocationTrack(void)
 {
 	unsigned char* e;

@@ -18,6 +18,7 @@ float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int 
 int __cdecl sprintf(char*, const char*, ...);
 
 /* ADDRESS: GOLDTL 0x005091d0 */
+/* ADDRESS: GOLDDE 0x004f4350 */
 void __cdecl gm_RankPlayers(int* pn, PLAYER_RANK_ROW* rows)
 {
 	int tmp[6];

@@ -35,6 +35,7 @@ typedef struct {
 } DivorceDlgSel;
 
 /* ADDRESS: GOLDTL 0x005d52d0 */
+/* ADDRESS: GOLDDE 0x005b6b30 */
 int __cdecl d2_RunDivorceAction(char* p)
 {
 	float w;

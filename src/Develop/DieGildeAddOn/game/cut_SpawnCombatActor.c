@@ -11,6 +11,7 @@ char* __cdecl gm_GetEquippedCombatGear(char*);
 char* __cdecl gm_FindEntityActiveItem(char*);
 
 /* ADDRESS: GOLDTL 0x004d1970 */
+/* ADDRESS: GOLDDE 0x004bec60 */
 void* __cdecl cut_SpawnCombatActor(int entityId, int dummyName)
 {
 	char* src;

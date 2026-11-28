@@ -18,6 +18,7 @@ void __cdecl d3_VisitSceneObjects(char*, int, int, int (__cdecl*)(), struct quer
 /* Script command: runs the name query callback over every object of the
  * current room. */
 /* ADDRESS: GOLDTL 0x0040f400 */
+/* ADDRESS: GOLDDE 0x0040e200 */
 int __cdecl DetachAnimFromAll(char** args)
 {
 	struct query_40f400 q;

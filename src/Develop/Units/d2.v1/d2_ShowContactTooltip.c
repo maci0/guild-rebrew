@@ -12,6 +12,7 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(char*, ...);
 
+/* ADDRESS: GOLDDE 0x00577090 */
 int __cdecl d2_ShowContactTooltip(char* name)
 {
 	char base[0x80];

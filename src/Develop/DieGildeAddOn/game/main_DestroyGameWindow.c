@@ -10,6 +10,7 @@ void __cdecl main_DestroyGameWindow(void)
 }
 #else
 /* ADDRESS: GOLDTL 0x00538140 */
+/* ADDRESS: GOLDDE 0x0051fa10 */
 void __cdecl main_DestroyGameWindow(void)
 {
 	((int (__stdcall*)(int)) *(void**) 0x6622cc)(*(int*) 0x774940);

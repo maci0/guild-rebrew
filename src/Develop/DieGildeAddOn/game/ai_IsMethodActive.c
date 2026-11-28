@@ -5,6 +5,7 @@ extern int ai_ActiveMethodStack[];
 
 /* ADDRESS: GOLD 0x00495790 */
 /* ADDRESS: GOLDTL 0x00495150 */
+/* ADDRESS: GOLDDE 0x00483c10 */
 int __cdecl ai_IsMethodActive(int value)
 {
 	int i;

@@ -3,6 +3,7 @@
 
 #include "Develop/DieGildeAddOn/command/client_packet_queue.h"
 
+/* ADDRESS: GOLDDE 0x004b42e0 */
 void __cdecl cm_RequestModifyHealth(int entityId, int delta)
 {
 	char buf[0x9c];

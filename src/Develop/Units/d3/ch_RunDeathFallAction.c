@@ -10,6 +10,7 @@ int __cdecl d3_CreateSceneModelObject(int, char*, float*, char*);
 int __cdecl d3_ApplyObjectAnimation(int, char*, int);
 
 /* ADDRESS: GOLDTL 0x004d4700 */
+/* ADDRESS: GOLDDE 0x004c1650 */
 int __cdecl ch_RunDeathFallAction(char* e)
 {
 	float rot[3];

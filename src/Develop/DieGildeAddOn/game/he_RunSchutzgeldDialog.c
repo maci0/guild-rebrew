@@ -1,3 +1,4 @@
+extern char gm_EntityIdField[];
 #include "Develop/Units/d2.v1/client_dialog_helpers.h"
 
 /* Protection money message box. State 0 opens the dialog and seeds the
@@ -32,6 +33,7 @@ void __cdecl cm_RequestChangeBits(int a, int b, int c, int d, int e);
 void __cdecl d3snd_QueueSound(int a, int b, char* name, int c, int d);
 
 /* ADDRESS: GOLDTL 0x00553110 */
+/* ADDRESS: GOLDDE 0x005394c0 */
 void __cdecl he_RunSchutzgeldDialog(int dlg, int a1, int a2)
 {
 	int msg;
@@ -82,9 +84,9 @@ void __cdecl he_RunSchutzgeldDialog(int dlg, int a1, int a2)
 			cm_RequestChangeBits(*(int*) (msg + 1), 0x5a, 2, 0x100, 0);
 			cm_RequestTransferCurrencyNoKill(
 			    *(int*) (*(unsigned short*) (actor + 8) * 0x21c
-			    + 0x7f4ca4),
+			    + (int) &gm_EntityIdField),
 			    *(int*) (*(unsigned short*) (msg + 0x27) * 0x21c
-			    + 0x7f4ca4), 0, *(int*) (actor + 0xb4));
+			    + (int) &gm_EntityIdField), 0, *(int*) (actor + 0xb4));
 			if (*(int*) (actor + 0xbc) != -1) {
 				msg = gm_StartFilteredEntitySearch(1, 1, *(int*) (actor + 0xbc));
 				*(int*) (msg + 0x4d) = *(int*) (msg + 0x4d)

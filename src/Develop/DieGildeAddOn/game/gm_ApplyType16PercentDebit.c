@@ -17,6 +17,7 @@ void* __cdecl gm_FindNextFilteredEntity(void);
 
 /* ADDRESS: GOLD 0x004b6bf0 */
 /* ADDRESS: GOLDTL 0x004b6dc0 */
+/* ADDRESS: GOLDDE 0x004a5050 */
 int __cdecl gm_ApplyType16PercentDebit(void* request)
 {
 	int arr[0xc];

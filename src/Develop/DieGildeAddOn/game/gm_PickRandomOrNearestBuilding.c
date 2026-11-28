@@ -16,6 +16,7 @@ float __cdecl gm_RandomFloat01(void);
  * random weight) to the owner's or the player's reference entity, else a
  * random non-empty entry. */
 /* ADDRESS: GOLDTL 0x004a48e0 */
+/* ADDRESS: GOLDDE 0x004932e0 */
 char* __cdecl gm_PickRandomOrNearestBuilding(char* u, int key)
 {
 	char* list[0x100];

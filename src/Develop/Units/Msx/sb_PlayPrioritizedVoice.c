@@ -13,6 +13,7 @@ char* __cdecl sb_FindSampleBank(char* sample);
 void __cdecl sb_LoadEntry(char* bank, char* sample);
 int __cdecl sb_StartVoice(Voice* v, int a, int b);
 
+/* ADDRESS: GOLDDE 0x00420340 */
 Voice* __cdecl sb_PlayPrioritizedVoice(char* bank, const char* name, int prio, int loop, int pan, int vol, int a)
 {
 	Voice* v;

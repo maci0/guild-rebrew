@@ -31,6 +31,7 @@ char* __cdecl he_fn_Handlung(void);
 int __cdecl CountMatchingStraftatEntries(int, unsigned short);
 float __cdecl gm_GetEntityHealth(char*);
 
+/* ADDRESS: GOLDDE 0x005abff0 */
 int __cdecl d2_BuildPersonStatusDesc(Sel* s)
 {
 	char* e;

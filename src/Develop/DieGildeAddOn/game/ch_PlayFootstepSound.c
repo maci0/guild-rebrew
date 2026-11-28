@@ -1,3 +1,4 @@
+extern char d3_ActiveScene[];
 /* Plays the surface walking sound for the current path step: picks the
  * material name from the step type and remembers the step type on the object. */
 
@@ -20,6 +21,7 @@ char* __cdecl sb_PrepareVoice(int, int);
 void __cdecl d3snd_PlayObjectSound(char*, void*, unsigned char, float);
 
 /* ADDRESS: GOLDTL 0x004098e0 */
+/* ADDRESS: GOLDDE 0x004087e0 */
 void __cdecl ch_PlayFootstepSound(char* obj, int surface)
 {
 	char name[0x80];
@@ -34,7 +36,7 @@ void __cdecl ch_PlayFootstepSound(char* obj, int surface)
 	if (g_6b5c2c == 0) {
 		return;
 	}
-	if (*(int*) 0x67a370 != *(int*) (e + 0x88)) {
+	if (*(int*) &d3_ActiveScene != *(int*) (e + 0x88)) {
 		return;
 	}
 	if (g_67530c != *(int*) (e + 0x2c)) {

@@ -5,6 +5,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 
 
 /* ADDRESS: GOLDTL 0x004c7140 */
+/* ADDRESS: GOLDDE 0x004b4930 */
 int __cdecl cm_ValidateAttributeDelta(unsigned char* packet)
 {
 	char* stat;

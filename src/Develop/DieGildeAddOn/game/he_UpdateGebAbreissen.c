@@ -37,6 +37,7 @@ void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 void __cdecl cm_RequestDestroyBuilding(int);
 void __cdecl he_FreeAction(char*);
 
+/* ADDRESS: GOLDDE 0x0054a3c0 */
 void __cdecl he_UpdateGebAbreissen(char* e)
 {
 	int a;

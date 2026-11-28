@@ -13,6 +13,7 @@ typedef struct {
 // SIZE 0x28
 
 /* ADDRESS: GOLDTL 0x00421f10 */
+/* ADDRESS: GOLDDE 0x0041ede0 */
 void __cdecl ReversePathLinks(PATH_LINK_GRID* grid, unsigned short startIndex)
 {
 	unsigned short v;

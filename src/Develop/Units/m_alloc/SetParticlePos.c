@@ -6,6 +6,7 @@ extern char* evt_CurrentScript;
 void __cdecl d3_SetEffectPosition(char* e, float* v);
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
+/* ADDRESS: GOLDDE 0x0040f600 */
 int __cdecl SetParticlePos(char** a, int* x, int* y, int* z)
 {
 	float v[4];

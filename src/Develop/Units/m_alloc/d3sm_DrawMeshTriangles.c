@@ -75,6 +75,7 @@ int __cdecl d3_RasterizeHeightTriangle(float* uvs, unsigned char* depths, int ar
 	int width, unsigned char flags, int arg5, int steps);
 
 /* ADDRESS: GOLDTL 0x0045a9d0 */
+/* ADDRESS: GOLDDE 0x0044fa90 */
 char __cdecl d3sm_DrawMeshTriangles(D3SM_MESH_OBJ* o, D3SM_VIEWPORT_CTX* c)
 {
 	D3SM_MESH_DESC* mesh;

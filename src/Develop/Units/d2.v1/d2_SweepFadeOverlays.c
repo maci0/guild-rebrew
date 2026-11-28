@@ -1,13 +1,15 @@
+extern char d2_OverlaySprites[];
 
 
 // fcn_00472a50 — table: if(n && *(int*)n&8) { fcn_00476850(n); *p=0; } else if(n) *(int*)n|=4.
 
 int __cdecl d2_FreeOverlaySprite(int);
 
+/* ADDRESS: GOLDDE 0x00466330 */
 void __cdecl d2_SweepFadeOverlays(void)
 {
 	int p;
-	for (p = 0x1015ec0; p < 0x1015f40; p += 4) {
+	for (p = (int) &d2_OverlaySprites; p < ((int) &d2_OverlaySprites + 0x80); p += 4) {
 		int n;
 		int f;
 		n = *(int*) p;

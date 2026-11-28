@@ -29,6 +29,7 @@ unsigned short __cdecl gm_RandomMod(int);
 int __cdecl gm_IsSlotActivePerson(unsigned short entityId);
 
 #pragma optimize("y", off)
+/* ADDRESS: GOLDDE 0x0049de80 */
 int __cdecl hst_HandleRndHandelsherr(int mode, int* pairs, int idx, char* text, void* out)
 {
 	char buf[0x200];

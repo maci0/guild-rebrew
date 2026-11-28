@@ -6,6 +6,7 @@ void __cdecl d3_TransformPoint(int, int, float*);
 #include "Develop/Units/d3/client_scene_transform.h"
 
 
+/* ADDRESS: GOLDDE 0x0059c820 */
 int __cdecl gm_CanTradeWithObject(char* building, char* target)
 {
 	char* s;

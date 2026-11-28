@@ -56,6 +56,7 @@ void __cdecl d2_DestroyForm(int);
 void __cdecl d3_EndCameraAndUiMode(void);
 
 /* Inferred name from the selection dialog and production-command packet. */
+/* ADDRESS: GOLDDE 0x00593cf0 */
 int __cdecl ConfirmProductionSelection(int unused, char* a)
 {
 	int btn1;

@@ -12,6 +12,7 @@ int __cdecl ai_ChooseProzessSentence(char*, int*);
 
 
 /* ADDRESS: GOLDTL 0x004dfba0 */
+/* ADDRESS: GOLDDE 0x004cc670 */
 void __cdecl cut_HandleProzessEvent(char* context, int* ev)
 {
 	char* e;

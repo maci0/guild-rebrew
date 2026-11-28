@@ -32,6 +32,7 @@ int __cdecl he_HasNoActiveAction0x9b(Unit*);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
 /* ADDRESS: GOLDTL 0x00507f10 */
+/* ADDRESS: GOLDDE 0x004f3090 */
 float __cdecl gm_GetEntitySkill(char* entity, int skill_index)
 {
 	Unit* entity_view;

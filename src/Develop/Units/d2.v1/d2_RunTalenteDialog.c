@@ -75,6 +75,7 @@ void __cdecl cm_RequestModifyHealth(int a, int b);
 void __cdecl cm_SendCopyEntityData(MsgBebe* msg);
 
 /* ADDRESS: GOLDTL 0x005bebe0 */
+/* ADDRESS: GOLDDE 0x005a1020 */
 void __cdecl d2_RunTalenteDialog(int a0, int a1, int broadcastSlot)
 {
 	int big[0x88];

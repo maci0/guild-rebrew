@@ -1,5 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x00546f80 */
+/* ADDRESS: GOLDDE 0x0052d570 */
 void __cdecl he_TickApEvents(void)
 {
 	int a;

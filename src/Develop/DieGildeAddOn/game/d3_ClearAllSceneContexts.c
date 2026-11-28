@@ -15,6 +15,7 @@ void __cdecl d3_FreeQuadtreeNode(int);
 void __cdecl d3_ClearSceneState(void);
 void __cdecl gv_Free3Fields(int);
 
+/* ADDRESS: GOLDDE 0x004fb600 */
 void __cdecl d3_ClearAllSceneContexts(void)
 {
 	int i;

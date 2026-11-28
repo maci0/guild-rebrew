@@ -55,6 +55,7 @@ void __cdecl d3_LoadAnimatedTextureFrames(Tex*, unsigned int, unsigned int, unsi
 int __cdecl vfs_ReadBmpInfo(int, unsigned int*, int*, unsigned int*);
 
 /* ADDRESS: GOLDTL 0x0045c5b0 */
+/* ADDRESS: GOLDDE 0x00451560 */
 Tex* __cdecl d3_LoadOrReuseTexture(char* name, Col c, unsigned int flags, unsigned int flags2)
 {
 	unsigned char c26;

@@ -22,6 +22,7 @@ int __cdecl main_RunFrameLoop(int, int);
 int __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005a6e90 */
+/* ADDRESS: GOLDDE 0x0058bba0 */
 int __cdecl d2_ShowWealthOverviewDialog(unsigned short *subjectRecord)
 {
     int activeTab, refreshNeeded;

@@ -19,6 +19,7 @@ int __cdecl cm_SendSellObjekt(int a, int b, int c, int d, unsigned char k, int n
 void __cdecl cm_RequestChangeBits(int id, int a2, int a3, int a4, int a5);
 
 /* ADDRESS: GOLDTL 0x0048ef30 */
+/* ADDRESS: GOLDDE 0x0047de00 */
 int __cdecl ai_RunAlchemistryItems(char* e, char* p, char* q)
 {
 	float* d;

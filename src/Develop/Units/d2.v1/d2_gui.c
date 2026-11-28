@@ -1,5 +1,6 @@
 #include "d2_gui.h"
 
+/* ADDRESS: GOLDDE 0x00459eb0 */
 void __cdecl d2_SetElementImage(int element, int bild)
 {
     D2_GUI_ITEM* eintrag;

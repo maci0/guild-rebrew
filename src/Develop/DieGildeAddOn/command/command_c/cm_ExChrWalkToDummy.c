@@ -17,6 +17,7 @@ char* __cdecl ch_CreateAction(char*, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004ca3d0 */
+/* ADDRESS: GOLDDE 0x004b7bb0 */
 int __cdecl cm_ExChrWalkToDummy(char* a1, char* a2)
 {
 	int saved;

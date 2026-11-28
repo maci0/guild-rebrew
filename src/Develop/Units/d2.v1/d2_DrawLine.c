@@ -6,6 +6,7 @@ void __cdecl d2_Plot(int, int, unsigned char, unsigned char, unsigned char);
  * Bresenham error accumulator. */
 /* ADDRESS: GOLD 0x004764e0 */
 /* ADDRESS: GOLDTL 0x00472c30 */
+/* ADDRESS: GOLDDE 0x00465df0 */
 void __cdecl d2_DrawLine(int x0, int y0, int x1, int y1, unsigned char a4, unsigned char a5, unsigned char a6)
 {
 	int n;

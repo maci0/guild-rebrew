@@ -10,6 +10,7 @@ int __cdecl ai_LoadHistoricalDfn(int*);
 extern int g_67fbac;
 
 /* ADDRESS: GOLDTL 0x004acbb0 */
+/* ADDRESS: GOLDDE 0x0049aef0 */
 int __cdecl gm_LoadHistoricalTable(void)
 {
 	int r;
@@ -28,6 +29,7 @@ int __cdecl gm_LoadHistoricalTable(void)
 }
 
 /* ADDRESS: GOLDTL 0x004acee0 */
+/* ADDRESS: GOLDDE 0x0049b220 */
 void __cdecl gm_ResetHistoricalCursors(void)
 {
 	g_7728c4 = g_67fbb0->key;
@@ -36,6 +38,7 @@ void __cdecl gm_ResetHistoricalCursors(void)
 
 /* ADDRESS: GOLD 0x004ad010 */
 /* ADDRESS: GOLDTL 0x004ad130 */
+/* ADDRESS: GOLDDE 0x0049b470 */
 char* __cdecl gm_LookupHistoricalEntry(int id, int* kind)
 {
 	int i;

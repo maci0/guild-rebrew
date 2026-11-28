@@ -24,6 +24,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x005bf2a0 */
 int __cdecl gm_ObjCreateMutualRivalry(char* e, char* request)
 {
 	Req req;

@@ -52,6 +52,7 @@ char* __cdecl d3_SelectObjectLod(char* object)
 }
 #else
 /* ADDRESS: GOLDTL 0x004382e0 */
+/* ADDRESS: GOLDDE 0x00431530 */
 int __cdecl d3_SelectObjectLod(char* obj)
 {
 	float dx;

@@ -15,6 +15,7 @@ void __cdecl sb_SetMasterVolume(int);
 void __cdecl SetMasterVolume(int);
 void __cdecl fcn_004c3140(int);
 
+/* ADDRESS: GOLDDE 0x005c3af0 */
 void __cdecl msx_ApplyAudioSettings(void)
 {
 	float s;

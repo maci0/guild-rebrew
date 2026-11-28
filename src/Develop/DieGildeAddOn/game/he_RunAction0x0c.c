@@ -15,6 +15,7 @@ void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl d3_BindEntitySceneObject(int, char*, int);
 void __cdecl he_FreeAction(char*);
 
+/* ADDRESS: GOLDDE 0x00559a00 */
 void __cdecl he_RunAction0x0c(char* u)
 {
 	char* x;

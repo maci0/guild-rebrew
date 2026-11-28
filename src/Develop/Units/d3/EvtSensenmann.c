@@ -50,6 +50,7 @@ int __cdecl he_PlaceSensenmannCamera(char* e);
 
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 
+/* ADDRESS: GOLDDE 0x0053f1e0 */
 void __cdecl EvtSensenmann(char* e)
 {
 	int n;

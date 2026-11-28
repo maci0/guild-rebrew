@@ -14,6 +14,7 @@ void __cdecl d3_VisitSceneObjects(int, char*, int, void*, struct list_55d630*);
 char __cdecl he_CollectTransporterDummies(char*, struct list_55d630*);
 unsigned short __cdecl gm_RandomMod(int);
 
+/* ADDRESS: GOLDDE 0x00543840 */
 char* __cdecl he_PickRandomTransporterDummy(char* o)
 {
 	struct list_55d630 l;

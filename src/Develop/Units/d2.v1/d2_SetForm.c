@@ -50,6 +50,7 @@ int __cdecl d2_SetForm(int k, int i)
 }
 #else
 /* ADDRESS: GOLDTL 0x004727a0 */
+/* ADDRESS: GOLDDE 0x00465960 */
 int __cdecl d2_SetForm(int k, int i)
 {
 	if (k) {

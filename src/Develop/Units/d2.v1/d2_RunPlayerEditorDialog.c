@@ -59,6 +59,7 @@ char* __cdecl itoa(int, char*, int);
  * the eight crest buttons and runs the modal edit loop until the dialog
  * closes, then writes the selected name back to the ini file. */
 /* ADDRESS: GOLDTL 0x005936f0 */
+/* ADDRESS: GOLDDE 0x005793a0 */
 int __cdecl d2_RunPlayerEditorDialog(int msg, int param)
 {
 	char text[0x100];

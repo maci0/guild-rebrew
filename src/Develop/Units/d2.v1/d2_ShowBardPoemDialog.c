@@ -28,6 +28,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl he_StartHandlungSearch();
 
 /* ADDRESS: GOLDTL 0x005c1490 */
+/* ADDRESS: GOLDDE 0x005a38d0 */
 void __cdecl d2_ShowBardPoemDialog(void)
 {
 	int h;

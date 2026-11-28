@@ -8,6 +8,7 @@ void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl cm_SendAllocCharacter(int, int, int, int, int, int, char*);
 
+/* ADDRESS: GOLDDE 0x005474b0 */
 void __cdecl he_ScheduleSabotage(char* e)
 {
 	char* t;

@@ -15,6 +15,7 @@ void __cdecl gm_GetLawEntry(int a, Stat* st);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
 /* ADDRESS: GOLDTL 0x00490b20 */
+/* ADDRESS: GOLDDE 0x0047f9d0 */
 int __cdecl ai_EvaluateLaw0x05(Ent* entity, int unused, int* out)
 {
 	Stat st;

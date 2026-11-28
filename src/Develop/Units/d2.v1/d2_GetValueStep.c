@@ -1,4 +1,5 @@
 /* ADDRESS: GOLDTL 0x004722c0 */
+/* ADDRESS: GOLDDE 0x004655e0 */
 int __cdecl d2_GetValueStep(char* element)
 {
 	int step;

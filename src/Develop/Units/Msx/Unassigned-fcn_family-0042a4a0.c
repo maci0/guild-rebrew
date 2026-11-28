@@ -31,6 +31,7 @@ int __cdecl msx_GetSampleHandleLimit(int* out)
 
 /* ADDRESS: GOLD 0x0042bb40 */
 /* ADDRESS: GOLDTL 0x0042a4d0 */
+/* ADDRESS: GOLDDE 0x00424e30 */
 int __cdecl msx_SetSampleHandleLimit(int value)
 {
 	int r = 0;
@@ -50,6 +51,7 @@ int __cdecl msx_SetSampleHandleLimit(int value)
 
 /* ADDRESS: GOLD 0x0042bb80 */
 /* ADDRESS: GOLDTL 0x0042a510 */
+/* ADDRESS: GOLDDE 0x00424e70 */
 int __cdecl msx_AllocateSampleHandle(int* device, int* outHandle)
 {
 	int r = 0;

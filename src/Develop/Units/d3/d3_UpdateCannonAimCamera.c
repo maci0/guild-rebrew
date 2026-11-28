@@ -21,6 +21,7 @@ extern int __cdecl d2_GetControlValue(int);
 extern void __cdecl d3_UpdateCannonAimMatrices(char*);
 
 /* ADDRESS: GOLDTL 0x00587a50 */
+/* ADDRESS: GOLDDE 0x0056d710 */
 void __cdecl d3_UpdateCannonAimCamera(char* o)
 {
 	float f;

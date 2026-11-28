@@ -66,6 +66,7 @@ void __cdecl ResetDisplayCounters(void);
 int __cdecl __itoa(int, char*, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005c72f0 */
+/* ADDRESS: GOLDDE 0x005a9190 */
 int __cdecl d2_RunEquipmentDialog(int objectArg)
 {
 	int v7;

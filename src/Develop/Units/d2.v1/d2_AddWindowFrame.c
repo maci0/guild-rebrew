@@ -4,6 +4,7 @@
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl d2_ReorderControlStack(int);
 
+/* ADDRESS: GOLDDE 0x00594bc0 */
 void __cdecl d2_AddWindowFrame(int layer, int id)
 {
 	d2_ReorderControlStack(d2_AddElementToWindow(0, 0, id, layer));

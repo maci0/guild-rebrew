@@ -21,6 +21,7 @@ int __cdecl gm_FindBestBalancedTile(char*, int, int, int, int*, int*);
 ent2c* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
 int __cdecl cm_SendUpdateCutsceneEntitySlot(int, ent2c*);
 
+/* ADDRESS: GOLDDE 0x004be7a0 */
 int __cdecl cut_AssignGuardOrder(char* rec, char* e)
 {
 	int a;

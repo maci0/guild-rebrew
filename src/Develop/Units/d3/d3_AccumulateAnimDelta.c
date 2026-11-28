@@ -12,6 +12,7 @@ void __cdecl d3_SetNodePosition(char* node, float* v);
 #define FRAMES_431330(an) (*(struct AnimFrame**) (*(char**) ((an) + 0x68) + 0x15c))
 
 /* ADDRESS: GOLDTL 0x00431330 */
+/* ADDRESS: GOLDDE 0x0042aa40 */
 void __cdecl d3_AccumulateAnimDelta(char* node, char* an, int t, int key, int flags)
 {
 	int cur;

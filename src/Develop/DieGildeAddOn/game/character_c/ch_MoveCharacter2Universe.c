@@ -71,6 +71,7 @@ void __cdecl d3_PreloadLowPolyAnims(char*, int, ...);
 #endif
 
 #undef ch_UNIVERSE_STRIDE
+/* ADDRESS: GOLDDE 0x004030f0 */
 int __cdecl ch_MoveCharacter2Universe(char* obj, void* universe)
 {
 	char buf[0x100];

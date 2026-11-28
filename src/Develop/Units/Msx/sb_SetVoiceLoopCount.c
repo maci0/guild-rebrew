@@ -5,6 +5,7 @@ extern int sb_WaveDriver;
 
 void __cdecl msx_SetSampleLoopCount(int, int);
 
+/* ADDRESS: GOLDDE 0x00420680 */
 void __cdecl sb_SetVoiceLoopCount(int* p, int value)
 {
 	if (*(int*) ((char*)&sb_WaveDriver) == 0) {

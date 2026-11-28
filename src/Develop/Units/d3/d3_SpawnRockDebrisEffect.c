@@ -15,6 +15,7 @@ int* __cdecl d3_CreateParticleSystem(int n, const char* name, Bytes4 f, int a, i
 void __cdecl d3_SetEffectPosition(int* s, float* pos);
 void __cdecl d3_UpdateRockDebrisParticles(void);
 
+/* ADDRESS: GOLDDE 0x004163a0 */
 int* __cdecl d3_SpawnRockDebrisEffect(int a1, float* pos, int n, int a4, int v0, int v1, int v2, int v3, int v4, int v5, int v6, int v7)
 {
 	Bytes4 effectFlags;

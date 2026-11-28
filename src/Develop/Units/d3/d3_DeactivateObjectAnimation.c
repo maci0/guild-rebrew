@@ -34,6 +34,7 @@ void __cdecl d3_DeactivateObjectAnimation(char* base, char* name)
 }
 #else
 /* ADDRESS: GOLDTL 0x004355d0 */
+/* ADDRESS: GOLDDE 0x0042eb90 */
 void __cdecl d3_DeactivateObjectAnimation(char* a, const char* name)
 {
 	int i;

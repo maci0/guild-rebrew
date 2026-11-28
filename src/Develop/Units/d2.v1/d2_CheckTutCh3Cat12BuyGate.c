@@ -5,6 +5,7 @@ extern int* d2_TutorialState;
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
+/* ADDRESS: GOLDDE 0x00565960 */
 int __cdecl d2_CheckTutCh3Cat12BuyGate(int* m)
 {
 	if (d2_TutorialState[14] >= 0 && m[0] == 0x28 && m[3] == 0x155) {

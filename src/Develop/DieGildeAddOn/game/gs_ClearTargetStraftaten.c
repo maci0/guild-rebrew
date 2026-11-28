@@ -25,6 +25,7 @@ char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl cm_SendRemoveStraftat(int id, int v);
 void __cdecl he_NotifyStraftatExpired(char* o, char* p);
 
+/* ADDRESS: GOLDDE 0x004e1c00 */
 int __cdecl gs_ClearTargetStraftaten(int target, int max)
 {
 	int n;

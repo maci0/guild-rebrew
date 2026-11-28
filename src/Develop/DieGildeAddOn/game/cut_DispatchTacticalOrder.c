@@ -31,6 +31,7 @@ int __cdecl cm_SendUpdateCutsceneEntitySlot(int, TACTICAL_SLOT_PKT*);
 void __cdecl d2_ShowStatusBanner(char*);
 
 /* ADDRESS: GOLDTL 0x004d15c0 */
+/* ADDRESS: GOLDDE 0x004be8b0 */
 char __cdecl cut_DispatchTacticalOrder(char* context, char* targetEntity)
 {
 	TACTICAL_SLOT_PKT l;

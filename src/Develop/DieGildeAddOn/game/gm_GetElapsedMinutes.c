@@ -10,6 +10,7 @@ typedef struct {
 #pragma pack(pop)
 // SIZE 0xa
 
+/* ADDRESS: GOLDDE 0x004ec460 */
 int __cdecl gm_GetElapsedMinutes(fcn_00500d20_rec* start, fcn_00500d20_rec* end)
 {
 	return ((end->f0 - start->f0) * 24 - start->f4 + end->f4) * 60 - start->f6 + end->f6;

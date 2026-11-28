@@ -6,6 +6,7 @@ extern RGB_COLOR g_100f1b8;
 int __cdecl d2_PackColorForPixelFormat(unsigned char r, unsigned char g, unsigned char b);
 
 /* ADDRESS: GOLDTL 0x00479e00 */
+/* ADDRESS: GOLDDE 0x004692b0 */
 void __cdecl d2_SetActiveTextColor(unsigned char r, unsigned char g, unsigned char b)
 {
 	int c;

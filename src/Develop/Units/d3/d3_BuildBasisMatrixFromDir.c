@@ -9,6 +9,7 @@ extern float d3_UnitAxisVectors[3];
 void __cdecl d3_NormalizeVector(float*);
 
 /* ADDRESS: GOLDTL 0x00451500 */
+/* ADDRESS: GOLDDE 0x004470e0 */
 void __cdecl d3_BuildBasisMatrixFromDir(float* dir, float angle, float* mat)
 {
 	float s;

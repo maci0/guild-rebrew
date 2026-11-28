@@ -61,6 +61,7 @@ void __cdecl d2_DestroyForm(int);
 void __cdecl d3_EndCameraAndUiMode(void);
 
 /* ADDRESS: GOLDTL 0x0059ecc0 */
+/* ADDRESS: GOLDDE 0x00583b40 */
 void __cdecl d2_RunHandelSuchenDialog(int gebaeude, int a1)
 {
 	int i;

@@ -6,6 +6,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004bbb20 */
 void __cdecl cm_SendUpdateSceneEntry(void* payload)
 {
 	char buf[0x9c];

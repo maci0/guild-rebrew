@@ -26,6 +26,7 @@ void __cdecl d2_RunBuildingUpgradeDialog(unsigned char*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x005a6e20 */
 void __cdecl d2_ShowGebaeudeOptions(unsigned char* p)
 {
 	int h1;

@@ -41,6 +41,7 @@ struct internal_state {
 
 /* ADDRESS: GOLD 0x00465160 */
 /* ADDRESS: GOLDTL 0x004616e0 */
+/* ADDRESS: GOLDDE 0x00455e50 */
 int __cdecl fcn_004616e0(z_streamp z, int f)
 {
   int r;

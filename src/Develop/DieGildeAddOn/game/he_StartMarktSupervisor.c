@@ -8,6 +8,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x0054e030 */
 void __cdecl he_StartMarktSupervisor(char* o)
 {
 	pos14_7f4c00* p;

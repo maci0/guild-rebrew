@@ -12,6 +12,7 @@ typedef struct Ent7c {
 // SIZE 0x7c
 
 /* ADDRESS: GOLDTL 0x00439e10 */
+/* ADDRESS: GOLDDE 0x00432d20 */
 void __cdecl d3_ResetMorphExt(char* a, int v)
 {
 	int i;

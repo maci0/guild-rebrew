@@ -17,6 +17,7 @@ unsigned char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl d2_RunDivorceAction(unsigned char* entity, int* request);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 
+/* ADDRESS: GOLDDE 0x004e39d0 */
 int __cdecl he_HandleDivorceRequest(unsigned char* entity, int* request)
 {
 	int i;

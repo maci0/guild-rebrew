@@ -4,6 +4,7 @@ extern char* d2_Controls;
 int __cdecl d2_AddWindowTextButton(int, int, int, int, int);
 void __cdecl d2_SetElementWidth(int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
+/* ADDRESS: GOLDDE 0x00521ba0 */
 int __cdecl d2_AddMainMenuButton(int a1, int a2, int a3)
 {
 	int id;

@@ -3,6 +3,7 @@
 
 extern unsigned char* lpGebaeudePROT;
 
+/* ADDRESS: GOLDDE 0x00564c30 */
 int __cdecl d2_AllowTutCh2RathausMsg19(int* msg)
 {
 	unsigned char* e;

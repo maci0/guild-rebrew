@@ -1,3 +1,6 @@
+extern char g_677c94[];
+extern char g_6b23a4[];
+extern char g_6b25b0[];
 #include <string.h>
 
 int __cdecl evt_RunScript(char* script);
@@ -10,6 +13,7 @@ int __cdecl atoi(char* s);
 /* Splits a script call line on spaces and runs the script with up to seven
  * arguments; numeric tokens are converted, other tokens pass as text. */
 /* ADDRESS: GOLDTL 0x004284d0 */
+/* ADDRESS: GOLDDE 0x00422f30 */
 void __cdecl evt_RunScriptLine(char* o, char* line)
 {
 	char delim[2];
@@ -25,7 +29,7 @@ void __cdecl evt_RunScriptLine(char* o, char* line)
 	int i;
 	int num;
 
-	*(unsigned short*) delim = *(const unsigned short*) 0x677c94;
+	*(unsigned short*) delim = *(const unsigned short*) &g_677c94;
 	count = 0;
 	strcpy(buf, line);
 	p = fcn_0064f026(buf, delim);
@@ -45,10 +49,10 @@ void __cdecl evt_RunScriptLine(char* o, char* line)
 	}
 	for (i = 0; i < count; i++) {
 		p = tokens + i * 0x40;
-		if (*(int*) 0x6b25b0 > 1) {
+		if (*(int*) &g_6b25b0 > 1) {
 			num = _isctype(*p, 4);
 		} else {
-			num = *(unsigned char*) (*(unsigned char**) 0x6b23a4 + *p * 2) & 4;
+			num = *(unsigned char*) (*(unsigned char**) (int) &g_6b23a4 + *p * 2) & 4;
 		}
 		if (num != 0) {
 			values[i] = atoi(p);

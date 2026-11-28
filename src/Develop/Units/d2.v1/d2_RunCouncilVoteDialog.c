@@ -19,6 +19,7 @@ void __cdecl d2_DestroyForm(int);
 
 
 /* ADDRESS: GOLDTL 0x004dc230 */
+/* ADDRESS: GOLDDE 0x004c8d00 */
 int __cdecl d2_RunCouncilVoteDialog(unsigned short* a1, unsigned short* a2, unsigned short* a3, int* out)
 {
 	int aux;

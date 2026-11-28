@@ -61,6 +61,7 @@ void __cdecl m_FreeTracked(void* p);
 int __cdecl d3_LoadOrReuseTexture(char* name, LoadFlags flags, int a3, int a4);
 void __cdecl d3_LoadTextureSurfaceTl(int h);
 
+/* ADDRESS: GOLDDE 0x00414460 */
 Snow* __cdecl d3_CreateSnowEffect(int count)
 {
 	Snow* s;

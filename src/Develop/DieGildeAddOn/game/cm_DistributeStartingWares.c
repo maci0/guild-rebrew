@@ -29,6 +29,7 @@ Figure* __cdecl cm_GetCommandResult(int);
 int __cdecl cm_AppendCommandSyncField(unsigned char, unsigned char, short, void*);
 void __cdecl cm_SendSetAttribute(void);
 
+/* ADDRESS: GOLDDE 0x004fc4a0 */
 void __cdecl cm_DistributeStartingWares(int count, int size, int* faces)
 {
 	int face;

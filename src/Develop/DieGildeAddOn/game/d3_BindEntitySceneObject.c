@@ -9,6 +9,7 @@ void __cdecl d3_SetSubtreeVisible(char*, int);
 void __cdecl d3_ResolveSceneObjectProtoId(char*);
 void __cdecl d3_DetachEntitySceneSubtree(void);
 
+/* ADDRESS: GOLDDE 0x004fb4f0 */
 void __cdecl d3_BindEntitySceneObject(char* obj, unsigned char* ent, int kind)
 {
 	unsigned char* t;

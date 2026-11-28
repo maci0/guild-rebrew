@@ -2,6 +2,7 @@ extern char gm_MissionSpecKeyView[];
 
 /* ADDRESS: GOLD 0x004b3b40 */
 /* ADDRESS: GOLDTL 0x004b3cb0 */
+/* ADDRESS: GOLDDE 0x004a1fa0 */
 int __cdecl gm_CountMissionEntriesByKey(int key)
 {
 	int count;

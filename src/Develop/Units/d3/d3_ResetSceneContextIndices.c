@@ -5,6 +5,7 @@ extern signed char d3_BuildingCategorySceneIndices[];
 
 /* ADDRESS: GOLD 0x0050d460 */
 /* ADDRESS: GOLDTL 0x00510900 */
+/* ADDRESS: GOLDDE 0x004fb5d0 */
 char __cdecl d3_ResetSceneContextIndices(void)
 {
 	int i;

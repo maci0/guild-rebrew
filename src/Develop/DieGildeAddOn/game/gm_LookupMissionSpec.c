@@ -4,6 +4,7 @@ extern Entry680bd0 gm_MissionSpecs[48];
 
 /* ADDRESS: GOLD 0x004b3ae0 */
 /* ADDRESS: GOLDTL 0x004b3c50 */
+/* ADDRESS: GOLDDE 0x004a1f40 */
 char* __cdecl gm_LookupMissionSpec(int key)
 {
 	int i;

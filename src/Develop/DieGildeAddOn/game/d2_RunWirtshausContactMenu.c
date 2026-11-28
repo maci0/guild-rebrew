@@ -53,6 +53,7 @@ void __cdecl cm_SendCopyEntityData(Msg5a2db0* m);
 /* Runs one contact/office tick per pumped message, resolving the three
  * office markers and dispatching on the active contact. */
 /* ADDRESS: GOLDTL 0x005a2db0 */
+/* ADDRESS: GOLDDE 0x00587c30 */
 void __cdecl d2_RunWirtshausContactMenu(char* target, char* actor)
 {
 	Msg5a2db0 m;

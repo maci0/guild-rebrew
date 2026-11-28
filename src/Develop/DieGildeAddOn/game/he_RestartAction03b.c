@@ -36,6 +36,7 @@ char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 void __cdecl he_FreeAction(char*);
 void __cdecl cm_SendCopyEntityData(struct msg*);
 
+/* ADDRESS: GOLDDE 0x0052f680 */
 void __cdecl he_RestartMarktSupervisor(void)
 {
 	struct msg m;

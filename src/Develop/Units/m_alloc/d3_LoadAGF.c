@@ -99,6 +99,7 @@ BGF_OBJ* __cdecl d3_LoadFastChunk(char*, char*, char*, int, int);
 
 #pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x0044b480 */
+/* ADDRESS: GOLDDE 0x00441920 */
 BGF_OBJ* __cdecl d3_LoadAGF(char* name, char* objectName, char* nametab, int namestep,
 	int namecount)
 {

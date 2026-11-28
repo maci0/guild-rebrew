@@ -10,6 +10,7 @@ char* __cdecl gm_AllocObjekt(int a, int b, int c);
 int __cdecl gm_RemoveObjectByType(char* list, int b);
 int __cdecl sprintf(char* buf, const char* fmt, ...);
 
+/* ADDRESS: GOLDDE 0x004eec10 */
 int __cdecl gm_RemoveObjectQuantity(int a, int b, int c)
 {
 	char* list_head;

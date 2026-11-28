@@ -16,6 +16,7 @@ typedef struct
 
 void __cdecl evt_RequestScriptExit(Obj*);
 
+/* ADDRESS: GOLDDE 0x004d1030 */
 int __cdecl cut_ExitPendingEvtScripts(void)
 {
 	int i;

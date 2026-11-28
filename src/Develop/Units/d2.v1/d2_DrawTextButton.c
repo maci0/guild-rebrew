@@ -23,6 +23,7 @@ void __cdecl d2_SetClipRect(int a, int b, int c, int d);
 void __cdecl d2_DrawWordWrappedText(int x, int y, int w, int h, int surf, char* text, int flags);
 
 /* ADDRESS: GOLDTL 0x00468e40 */
+/* ADDRESS: GOLDDE 0x0045c7c0 */
 void __cdecl d2_DrawTextButton(int slotIndex, int surface)
 {
 	char* slot;

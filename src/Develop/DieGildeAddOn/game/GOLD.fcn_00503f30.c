@@ -18,6 +18,7 @@ int __cdecl gm_CheckStatInRange(int a)
 
 
 /* ADDRESS: GOLDTL 0x00506df0 */
+/* ADDRESS: GOLDDE 0x004f2100 */
 int __cdecl gm_IsInRange(int x)
 {
 	int stat_range;

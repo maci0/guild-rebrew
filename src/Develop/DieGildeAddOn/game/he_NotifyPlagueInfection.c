@@ -8,6 +8,7 @@ int  __cdecl fcn_0064d41a(char*, char*, int);
 void __cdecl io_FormatTextBuffer(void*, int);
 void __cdecl he_PostEntityMessage(int, int, void*, int, int, void*);
 
+/* ADDRESS: GOLDDE 0x00597210 */
 void __cdecl he_NotifyPlagueInfection(void* recipient)
 {
 	char buf[0x40];

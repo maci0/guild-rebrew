@@ -33,6 +33,7 @@ void __cdecl d3_SetObjectRotation(Obj* o, V6* v);
 void __cdecl d3_AttachCachedModelParts(Obj* o, int a, int id);
 
 /* ADDRESS: GOLDTL 0x0043a140 */
+/* ADDRESS: GOLDDE 0x00433050 */
 Obj* __cdecl d3_CloneObject(Obj* src)
 {
 	Obj* o;

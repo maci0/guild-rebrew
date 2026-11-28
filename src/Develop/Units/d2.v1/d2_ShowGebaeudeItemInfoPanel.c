@@ -42,6 +42,7 @@ int __cdecl gm_GetEntityUiFlags(int id, unsigned char* store, int a, int b);
 int __cdecl gm_CollectBuildingSubObjects(unsigned char* store, unsigned short* item, int a);
 int __cdecl d2_CreateWindowTextButton(int x, int y, int z);
 
+/* ADDRESS: GOLDDE 0x00516be0 */
 void __cdecl d2_ShowGebaeudeItemInfoPanel(unsigned short* item)
 {
 	unsigned char* store;

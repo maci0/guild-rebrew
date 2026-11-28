@@ -46,6 +46,7 @@ int __cdecl ls_LoadSavegameHeader(void* stream, char* dest);
 int __cdecl CloseVfsStream(void* stream);
 
 /* ADDRESS: GOLDTL 0x00539600 */
+/* ADDRESS: GOLDDE 0x00520e00 */
 int __cdecl ls_LoadNetworkSaveHeader(void)
 {
 	char hdr[0xfc];

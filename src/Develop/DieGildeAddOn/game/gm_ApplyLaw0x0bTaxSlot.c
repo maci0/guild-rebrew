@@ -10,6 +10,7 @@ extern int g_99f7f0;
 int __cdecl gm_GetLawEntry(int k, int* info);
 void __cdecl cm_RequestTransferCurrencyNoKill(int a, int b, int c, int d);
 
+/* ADDRESS: GOLDDE 0x004e85a0 */
 int __cdecl gm_ApplyLaw0x0bTaxSlot(unsigned short id, unsigned char* s, unsigned char flags)
 {
 	int info[9];

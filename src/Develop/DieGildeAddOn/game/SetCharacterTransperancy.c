@@ -16,6 +16,7 @@ extern char* evt_CurrentScript;
 void __cdecl d3_ChangeObjectTransparency(int a, int b, Bytes4 c);
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
+/* ADDRESS: GOLDDE 0x0040ce80 */
 int __cdecl SetCharacterTransperancy(char** a, unsigned char* v)
 {
 	Bytes4 col;

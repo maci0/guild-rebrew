@@ -18,6 +18,7 @@ void __cdecl m_FreeTracked(void*);
 void __cdecl d3_ReleaseTexture(char*);
 
 /* ADDRESS: GOLDTL 0x0044a120 */
+/* ADDRESS: GOLDDE 0x00440800 */
 void __cdecl d3_ReleaseAGFMesh(char* e)
 {
 	char* p;

@@ -13,6 +13,7 @@ void __cdecl d2_RunGebHotkeysDialog(void);
 void __cdecl d2_FocusBookmarkSlot(void);
 void __cdecl d2_SaveBookmarkSlot(int);
 
+/* ADDRESS: GOLDDE 0x00578120 */
 void __cdecl main_ProcessGameHotkeys(void)
 {
 	char c;

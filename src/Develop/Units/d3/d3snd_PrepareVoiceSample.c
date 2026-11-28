@@ -31,6 +31,7 @@ int __cdecl sb_PreparePrioritizedVoice(int a0, char* text, int n);
 int __cdecl sb_PrepareVoice(int a0, char* text);
 
 /* ADDRESS: GOLDTL 0x004c2de0 */
+/* ADDRESS: GOLDDE 0x004b0890 */
 int __cdecl d3snd_PrepareVoiceSample(int code, int bank, char* text, int variation)
 {
 	char num[0x14];

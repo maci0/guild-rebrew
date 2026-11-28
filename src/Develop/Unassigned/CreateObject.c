@@ -2,6 +2,7 @@
 
 void __cdecl d3_CreateSceneModelObject(int, int*, float*, int);
 
+/* ADDRESS: GOLDDE 0x0040d600 */
 void __cdecl CreateObject(int* x, int* y, int* z, int* nameRef)
 {
 	float a[3];

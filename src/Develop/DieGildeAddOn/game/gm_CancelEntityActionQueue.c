@@ -4,6 +4,7 @@ void* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 
 /* ADDRESS: GOLDTL 0x004d85c0 */
+/* ADDRESS: GOLDDE 0x004c52b0 */
 void __cdecl gm_CancelEntityActionQueue(int* request)
 {
 	void* record;

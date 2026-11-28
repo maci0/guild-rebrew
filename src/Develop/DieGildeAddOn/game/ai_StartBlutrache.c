@@ -13,6 +13,7 @@ int __cdecl ai_CollectEligibleEntities(int*, int, int, float, float, int, unsign
 int __cdecl amt_GetRoleLevel(unsigned char);
 
 /* ADDRESS: GOLDTL 0x004ab500 */
+/* ADDRESS: GOLDDE 0x00499840 */
 unsigned int __cdecl ai_StartBlutrache(unsigned int a0, unsigned short* entity, int a2,
                                   char* packet, int a4)
 {

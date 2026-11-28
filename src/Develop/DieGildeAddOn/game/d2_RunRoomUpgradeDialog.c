@@ -53,6 +53,7 @@ int __cdecl gm_GetElapsedMinutes(char*, char*);
 void __cdecl d2_SetLabelText(int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005c2a40 */
+/* ADDRESS: GOLDDE 0x005a4e80 */
 void __cdecl d2_RunRoomUpgradeDialog(unsigned char* productionBuilding)
 {
 	int slots[96];

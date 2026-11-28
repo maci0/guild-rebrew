@@ -3,6 +3,7 @@ extern char gm_TownTable[];
 extern unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream);
 
 /* ADDRESS: GOLDTL 0x00520310 */
+/* ADDRESS: GOLDDE 0x005095e0 */
 unsigned int __cdecl ls_SaveMarketsAndSeasons(unsigned int stream)
 {
 	char* row;

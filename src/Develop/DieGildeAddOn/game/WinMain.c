@@ -127,6 +127,7 @@ extern void __cdecl main_SetScreensaverActive(void* p);
 
 int __cdecl main_OpenEngine(void);
 /* ADDRESS: GOLDTL 0x00544c50 */
+/* ADDRESS: GOLDDE 0x0052b320 */
 int __stdcall WinMain(void *instance, void *previous, char *command, int show)
 {
 	char text[0x100];

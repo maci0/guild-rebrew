@@ -194,6 +194,7 @@ typedef struct {
 } frame_t;
 
 /* ADDRESS: GOLDTL 0x005ba910 */
+/* ADDRESS: GOLDDE 0x0059d110 */
 int __cdecl d2_RunTradeInventoryPanel(int buildingArg, int modeFlags)
 {
 	frame_t f;

@@ -34,6 +34,7 @@ int __cdecl gm_GetBuildingTechEffect(int, int, int);
 void __cdecl gm_UpdateEntityPregnancy(char*);
 
 /* ADDRESS: GOLDTL 0x004fe5f0 */
+/* ADDRESS: GOLDDE 0x004ea070 */
 double __cdecl gm_AgeAndUpdateEntity(char* entity)
 {
 	char msg[0xf8];

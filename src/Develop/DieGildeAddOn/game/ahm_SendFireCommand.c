@@ -6,6 +6,7 @@
 int __cdecl ahm_CheckFlag(void*);
 int __cdecl cm_RequestAhmCommand(int*);
 
+/* ADDRESS: GOLDDE 0x004dafe0 */
 int __cdecl ahm_SendFireCommand(char* obj)
 {
 	int buf[6];

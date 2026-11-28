@@ -22,6 +22,7 @@ struct msg {
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl cm_SendRawEntityPacket(struct msg*, int, char*);
 
+/* ADDRESS: GOLDDE 0x0052c3c0 */
 int __cdecl he_PostEntityMessage(int id, int arg, char* text1, unsigned char flags, int value, char* text2)
 {
 	struct msg m;

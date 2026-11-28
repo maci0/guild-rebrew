@@ -6,6 +6,7 @@
 int __cdecl fcn_004bb6c0(void*);
 int __cdecl he_FreeAction(int);
 
+/* ADDRESS: GOLDDE 0x00533cb0 */
 void __cdecl he_RunAction0x42EntityMsg(char* action)
 {
 	if (*(int*) (action + 0x70) != -2) {

@@ -17,6 +17,7 @@ void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004ac320 */
+/* ADDRESS: GOLDDE 0x0049a660 */
 int __cdecl gm_CalcBardPoemCost(unsigned short* e)
 {
 	short s;
@@ -31,6 +32,7 @@ int __cdecl gm_CalcBardPoemCost(unsigned short* e)
 }
 
 /* ADDRESS: GOLDTL 0x004ac410 */
+/* ADDRESS: GOLDDE 0x0049a750 */
 void __cdecl gm_ApplyBardPoemEffect(unsigned char* entity, int a2, int a3)
 {
 	int* p;

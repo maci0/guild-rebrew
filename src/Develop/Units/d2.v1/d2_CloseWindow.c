@@ -24,6 +24,7 @@ extern char d2_WindowElementIdView[];
 void __cdecl d2_DestroyElement(int);
 
 /* ADDRESS: GOLDTL 0x0046f280 */
+/* ADDRESS: GOLDDE 0x00462810 */
 int __cdecl d2_CloseWindow(int index)
 {
 	char* p;

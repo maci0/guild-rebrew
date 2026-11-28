@@ -10,6 +10,7 @@ void __cdecl d3_RemoveObjectAnimation(char* o, char* name);
  * return, and a separate copy of the -1 epilogue. */
 
 /* ADDRESS: GOLDTL 0x00404f60 */
+/* ADDRESS: GOLDDE 0x00404370 */
 int __cdecl ch_FinishAnimation(char* ev)
 {
 	char* obj;

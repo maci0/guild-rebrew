@@ -32,6 +32,7 @@ int __cdecl main_RunFrameLoop(void *, int);
 void __cdecl d3_CloseBookPagerDialog(Book *);
 void __cdecl d3_EndCameraAndUiMode(void);
 
+/* ADDRESS: GOLDDE 0x005afef0 */
 void __cdecl d2_RunGesetzbuchDialog(int cmd)
 {
 	int base;

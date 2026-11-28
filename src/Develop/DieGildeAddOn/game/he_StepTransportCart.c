@@ -1,3 +1,4 @@
+extern char d3_Universes[];
 
 // Transport event step: on the first call starts the transport (flag
 // +0xd0); afterwards, once the carrier arrived (within 100 units of +0xd8)
@@ -50,6 +51,7 @@ int __cdecl cm_SendSetHE(int, char*);
 void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl d2_RunTradeInventoryPanel(void*, int);
 
+/* ADDRESS: GOLDDE 0x00543980 */
 void __cdecl he_StepTransportCart(char* e)
 {
 	char* s44;
@@ -83,7 +85,7 @@ void __cdecl he_StepTransportCart(char* e)
 	} else {
 		o = *(char**) (r + 0x3b);
 		if (o != 0 && *(int*) (o + 0x128) == 0 &&
-		    ((*(int*) (o + 0x88) == 0x10432c0 && CompareVector3WithinTolerance((float*) (*(char**) (o + 0x34) + 0x4c), (float*) (e + 0xd8), 100.0f)) ||
+		    ((*(int*) (o + 0x88) == (int) &d3_Universes && CompareVector3WithinTolerance((float*) (*(char**) (o + 0x34) + 0x4c), (float*) (e + 0xd8), 100.0f)) ||
 		     *(int*) (e + 0xd4) > 6)) {
 			if (!gm_IsWarehouse(c)) {
 				*(int*) (e + 0xec) = cm_RequestMoveObjekt(*(int*) (c + 1), *(int*) (s44 + 1), *(int*) (r + 2));

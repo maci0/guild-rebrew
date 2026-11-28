@@ -4,6 +4,7 @@
 int __cdecl cm_ResolveSpecialEntityId(unsigned char* msg, int serial);
 
 
+/* ADDRESS: GOLDDE 0x004b6210 */
 int __cdecl cm_ApplyFieldDeltaPacket(unsigned char* msg, char* done)
 {
 	char* a;

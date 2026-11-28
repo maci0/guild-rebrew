@@ -14,6 +14,7 @@ int __cdecl d2_CreateValueGauge(int x, int y, int a3, int a4, int a5, int a6, in
 int __cdecl d2_AddWindowChild(int id, int win);
 
 /* ADDRESS: GOLDTL 0x004677e0 */
+/* ADDRESS: GOLDDE 0x0045b210 */
 int __cdecl d2_AddWindowValueGauge(int x, int y, int barLength, int value, int maxValue, int resourceId, int flags, int win)
 {
 	D2_WIN* window;

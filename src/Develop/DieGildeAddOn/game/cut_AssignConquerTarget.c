@@ -23,6 +23,7 @@ void __cdecl d3_TransformPoint(char*, char*, float*);
 char __cdecl d3sm_3D2SuperMap(int, float*, int*, int*, int*);
 ent2c* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
 
+/* ADDRESS: GOLDDE 0x004be610 */
 int __cdecl cut_AssignConquerTarget(char* rec, char* e, char* obj)
 {
 	float v[4];

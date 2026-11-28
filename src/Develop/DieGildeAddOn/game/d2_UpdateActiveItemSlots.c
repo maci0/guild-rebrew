@@ -16,6 +16,7 @@ int __cdecl d2_AddWindowField(int x, int y, int id, int group, char* name);
 void __cdecl d2_DestroyElement(int handle);
 int __cdecl fcn_0064d41a(char* buf, char* fmt, ...);
 /* ADDRESS: GOLDTL 0x005c5e70 */
+/* ADDRESS: GOLDDE 0x005a80f0 */
 unsigned int __cdecl d2_UpdateActiveItemSlots(void)
 {
 	int* slot;

@@ -9,6 +9,7 @@ void __cdecl d3_BuildAnimSplineTangents(void* a0);
 #pragma optimize("y", off)
 
 /* ADDRESS: GOLDTL 0x004339e0 */
+/* ADDRESS: GOLDDE 0x0042cfa0 */
 int* __cdecl d3_CreateObjectAnimation(char* a0, D3_ANIMATION_OPTIONS flags, int frameCount, void* srcFrames)
 {
 	int* animation;

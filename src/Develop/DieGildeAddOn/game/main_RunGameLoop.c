@@ -181,6 +181,7 @@ typedef struct {
 } SyncRect;
 
 /* ADDRESS: GOLDTL 0x005438c0 */
+/* ADDRESS: GOLDDE 0x0052a150 */
 void __cdecl main_RunGameLoop(int skipBuildingInit)
 {
 	SyncRect r1;

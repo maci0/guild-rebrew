@@ -43,6 +43,7 @@ int __cdecl gm_GetEntityUiFlags(int, int, int, char*);
 void __cdecl d3_UpdateObjectCameraTransform(char*, char*, int);
 Vec3* __stdcall fcn_005eb2e4(Vec3*, Vec3*, char*, Mat4*, Mat4*, Mat4*);
 
+/* ADDRESS: GOLDDE 0x0051cea0 */
 void __cdecl d3_UpdateCharacterBoxSelection(void)
 {
 	int x0;

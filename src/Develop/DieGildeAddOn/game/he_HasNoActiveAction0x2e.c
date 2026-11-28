@@ -4,6 +4,7 @@
 char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 char* __cdecl he_fn_Handlung(void);
 
+/* ADDRESS: GOLDDE 0x00542340 */
 int __cdecl he_HasNoActiveAction0x2e(char* a, char* b)
 {
 	char* r;

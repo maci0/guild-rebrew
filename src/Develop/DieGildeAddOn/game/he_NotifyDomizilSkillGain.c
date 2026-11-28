@@ -6,6 +6,7 @@ extern char he_DomizilNotifyKey[];
 void __cdecl io_FormatTextBuffer(void*, int, void*, void*, int);
 void __cdecl he_MessageBoxQuickjump(int, int, void*, int, int, int, int, int, void*);
 
+/* ADDRESS: GOLDDE 0x00597da0 */
 void __cdecl he_NotifyDomizilSkillGain(void* entity, void* actor, void* building, int index)
 {
 	char t;

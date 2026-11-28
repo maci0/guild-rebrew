@@ -12,6 +12,7 @@ void __cdecl txt_TrimTrailingSpaces(char* s);
 char* __cdecl fcn_0064e790(const char* s, int c);
 
 /* ADDRESS: GOLDTL 0x0042b810 */
+/* ADDRESS: GOLDDE 0x004257a0 */
 int __cdecl txt_ParseTextVariants(char* text, int index)
 {
 	char v19[128];

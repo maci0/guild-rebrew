@@ -28,6 +28,7 @@ int __cdecl cut_FindCutsceneById(int);
 void __cdecl he_FreeAction(char*);
 
 /* ADDRESS: GOLDTL 0x0056e3c0 */
+/* ADDRESS: GOLDDE 0x005543c0 */
 void __cdecl he_RunCharacterDeath(char* eventState)
 {
 	char* s;

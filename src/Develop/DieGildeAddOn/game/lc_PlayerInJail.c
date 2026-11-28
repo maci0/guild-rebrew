@@ -14,6 +14,7 @@ char* __cdecl gm_FindNextFilteredEntity(void);
 char* __cdecl gm_QueryEntities(int, int, int, int);
 void __cdecl d2_EnterBuildingObjekt(char*, int, char*);
 
+/* ADDRESS: GOLDDE 0x0057fc10 */
 void __cdecl lc_PlayerInJail(void)
 {
 	char* p;

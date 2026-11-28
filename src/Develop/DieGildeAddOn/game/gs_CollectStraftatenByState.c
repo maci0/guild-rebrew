@@ -3,6 +3,7 @@
 
 extern char g_9a3825[];
 
+/* ADDRESS: GOLDDE 0x004e17e0 */
 int __cdecl gs_CollectStraftatenByState(int state, int* out)
 {
 	int count;

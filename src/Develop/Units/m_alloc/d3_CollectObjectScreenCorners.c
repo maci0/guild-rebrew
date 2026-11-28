@@ -15,6 +15,7 @@ extern void __stdcall fcn_005eb2e4(float* dst, unsigned int* src, char* a, float
 	float* c, void* ctx);
 
 /* ADDRESS: GOLDTL 0x00444ff0 */
+/* ADDRESS: GOLDDE 0x0043cd80 */
 unsigned char __cdecl d3_CollectObjectScreenCorners(int sceneObject, int* selectionBounds)
 {
 	char* holder;

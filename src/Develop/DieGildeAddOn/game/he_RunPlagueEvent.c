@@ -28,6 +28,7 @@ void __cdecl he_RunPlagueSpread(void* ev);
 void __cdecl he_NotifyPlagueInfection(char* a1, char* a2);
 typedef struct { unsigned char kind; char unknown[0x24c]; } BUILDING_PROT_5522;
 /* ADDRESS: GOLDTL 0x005522d0 */
+/* ADDRESS: GOLDDE 0x00538680 */
 void __cdecl he_RunPlagueEvent(char* ev)
 {
 	char buf[512];

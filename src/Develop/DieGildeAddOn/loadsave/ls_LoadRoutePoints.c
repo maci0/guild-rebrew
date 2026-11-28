@@ -19,6 +19,7 @@ char* __cdecl rt_AllocRoutePoint(int head);
 
 /* Reads a table of 0x40-byte records and appends each record to its owner list. */
 /* ADDRESS: GOLDTL 0x004c0840 */
+/* ADDRESS: GOLDDE 0x004ae3c0 */
 int __cdecl ls_LoadRoutePoints(int n)
 {
 	Rec64* rec;

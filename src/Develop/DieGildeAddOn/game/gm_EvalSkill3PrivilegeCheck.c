@@ -8,6 +8,7 @@ float __cdecl gm_RandomFloat01(void);
 int __cdecl gm_CheckPrivilege(int a1, char* a2, int a3);
 
 /* ADDRESS: GOLDTL 0x00494740 */
+/* ADDRESS: GOLDDE 0x00483200 */
 int __cdecl gm_EvalSkill3PrivilegeCheck(int actor, int entity, int* level_out, int unused)
 {
 	float v;

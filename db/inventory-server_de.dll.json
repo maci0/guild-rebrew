@@ -1,0 +1,2508 @@
+[
+  {
+    "va": 268439552,
+    "size": 302,
+    "name": "fcn.10001000",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 302,
+        "reason": "Start of a German function that measures EXACT/RELOC against its English twin (admitted extent up to the next row; scripts/de_inventory_plan.py)",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:34:50.206128+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268440016,
+    "size": 309,
+    "name": "fcn.100011d0",
+    "extent_history": [
+      {
+        "old_size": 11,
+        "new_size": 309,
+        "reason": "Extent of a German function that measures EXACT/RELOC against its English twin: SIZE bytes ending in its own last instruction (scripts/de_inventory_plan.py)",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:34:51.891980+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268440336,
+    "size": 468,
+    "name": "fcn.10001310"
+  },
+  {
+    "va": 268440848,
+    "size": 128,
+    "name": "fcn.10001510"
+  },
+  {
+    "va": 268441712,
+    "size": 114,
+    "name": "fcn.10001870"
+  },
+  {
+    "va": 268441840,
+    "size": 176,
+    "name": "fcn.100018f0"
+  },
+  {
+    "va": 268445216,
+    "size": 284,
+    "name": "fcn.10002620",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 284,
+        "reason": "German server function start: call target in German twins that measure EXACT/RELOC (scripts/de_callee_pairs.py). End: its ret where alignment padding and a new function follow, else the next known start without padding; within 0.75..1.33 of the English size or confirmed by the code after the boundary",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:37:03.330069+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268445504,
+    "size": 1931,
+    "name": "fcn.10002740",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 1931,
+        "reason": "German server function start: call target in German twins that measure EXACT/RELOC (scripts/de_callee_pairs.py). End: its ret where alignment padding and a new function follow, else the next known start without padding; within 0.75..1.33 of the English size or confirmed by the code after the boundary",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:37:03.330069+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268447440,
+    "size": 376,
+    "name": "fcn.10002ed0"
+  },
+  {
+    "va": 268447824,
+    "size": 48,
+    "name": "fcn.10003050"
+  },
+  {
+    "va": 268447872,
+    "size": 240,
+    "name": "fcn.10003080"
+  },
+  {
+    "va": 268448112,
+    "size": 183,
+    "name": "fcn.10003170"
+  },
+  {
+    "va": 268448304,
+    "size": 404,
+    "name": "fcn.10003230"
+  },
+  {
+    "va": 268448720,
+    "size": 83,
+    "name": "fcn.100033d0"
+  },
+  {
+    "va": 268448816,
+    "size": 119,
+    "name": "fcn.10003430",
+    "extent_history": [
+      {
+        "old_size": 35,
+        "new_size": 119,
+        "reason": "Extent of a German function that measures EXACT/RELOC against its English twin: SIZE bytes ending in its own last instruction (scripts/de_inventory_plan.py)",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:34:51.891980+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268449248,
+    "size": 128,
+    "name": "fcn.100035e0"
+  },
+  {
+    "va": 268449376,
+    "size": 192,
+    "name": "fcn.10003660"
+  },
+  {
+    "va": 268449568,
+    "size": 555,
+    "name": "fcn.10003720",
+    "extent_history": [
+      {
+        "old_size": 560,
+        "new_size": 555,
+        "reason": "Compiled body equals the German native bytes with 0 differences; the remaining extent bytes are only 0x90/0xcc padding (lief read of original/de/server.dll), as in the 2026-11-09 GoldTL repair",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-27T21:42:26.747440+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268450320,
+    "size": 65,
+    "name": "fcn.10003a10"
+  },
+  {
+    "va": 268450400,
+    "size": 80,
+    "name": "fcn.10003a60"
+  },
+  {
+    "va": 268450480,
+    "size": 43,
+    "name": "fcn.10003ab0"
+  },
+  {
+    "va": 268450528,
+    "size": 123,
+    "name": "fcn.10003ae0"
+  },
+  {
+    "va": 268450656,
+    "size": 160,
+    "name": "fcn.10003b60"
+  },
+  {
+    "va": 268453968,
+    "size": 57,
+    "name": "fcn.10004850"
+  },
+  {
+    "va": 268454032,
+    "size": 57,
+    "name": "fcn.10004890"
+  },
+  {
+    "va": 268455888,
+    "size": 20,
+    "name": "fcn.10004fd0"
+  },
+  {
+    "va": 268456784,
+    "size": 66,
+    "name": "fcn.10005350",
+    "extent_history": [
+      {
+        "old_size": 60,
+        "new_size": 66,
+        "reason": "Extent of a German function that measures EXACT/RELOC against its English twin: SIZE bytes ending in its own last instruction (scripts/de_inventory_plan.py)",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:34:51.891980+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268456864,
+    "size": 80,
+    "name": "fcn.100053a0"
+  },
+  {
+    "va": 268456944,
+    "size": 272,
+    "name": "fcn.100053f0"
+  },
+  {
+    "va": 268457216,
+    "size": 1064,
+    "name": "fcn.10005500",
+    "extent_history": [
+      {
+        "old_size": 1072,
+        "new_size": 1064,
+        "reason": "zlib inflate compiles to 1,064 bytes under the Processor Pack compiler, all matching the German bytes (its jump table ends at 1,064); the rest of the old row is NOP alignment",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T09:55:44.709754+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268458288,
+    "size": 163,
+    "name": "fcn.10005930"
+  },
+  {
+    "va": 268459664,
+    "size": 393,
+    "name": "fcn.10005e90"
+  },
+  {
+    "va": 268460064,
+    "size": 46,
+    "name": "fcn.10006020"
+  },
+  {
+    "va": 268460112,
+    "size": 306,
+    "name": "fcn.10006050"
+  },
+  {
+    "va": 268460432,
+    "size": 544,
+    "name": "fcn.10006190",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 544,
+        "reason": "German server function start: call target in German twins that measure EXACT/RELOC (scripts/de_callee_pairs.py). End: its ret where alignment padding and a new function follow, else the next known start without padding; within 0.75..1.33 of the English size or confirmed by the code after the boundary",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:37:03.330069+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268460976,
+    "size": 117,
+    "name": "fcn.100063b0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 117,
+        "reason": "German server function start: call target in German twins that measure EXACT/RELOC (scripts/de_callee_pairs.py). End: its ret where alignment padding and a new function follow, else the next known start without padding; within 0.75..1.33 of the English size or confirmed by the code after the boundary",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:37:03.330069+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268461104,
+    "size": 162,
+    "name": "fcn.10006430"
+  },
+  {
+    "va": 268461728,
+    "size": 262,
+    "name": "fcn.100066a0",
+    "extent_history": [
+      {
+        "old_size": 272,
+        "new_size": 262,
+        "reason": "m_ShutdownAllocator compiles to 262 bytes that all match the German bytes and end in ret; the rest of the old row is NOP alignment",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T08:43:25.953949+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268462000,
+    "size": 261,
+    "name": "fcn.100067b0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 261,
+        "reason": "German m_PoolAlloc: called by German vfs_OpenStream where English vfs_OpenStream calls m_PoolAlloc; follows m_ShutdownAllocator (0x100066a0, 272 bytes) as in the English link; ends at its ret before NOP alignment (261 bytes, the size the shared definition compiles to)",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T08:41:26.932939+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268462512,
+    "size": 102,
+    "name": "fcn.100069b0"
+  },
+  {
+    "va": 268464352,
+    "size": 224,
+    "name": "fcn.100070e0"
+  },
+  {
+    "va": 268465232,
+    "size": 111,
+    "name": "fcn.10007450",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 111,
+        "reason": "Start of a German function that measures EXACT/RELOC against its English twin (admitted extent up to the next row; scripts/de_inventory_plan.py)",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:34:50.206128+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268465344,
+    "size": 231,
+    "name": "fcn.100074c0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 231,
+        "reason": "Start of a German function that measures EXACT/RELOC against its English twin (admitted extent up to the next row; scripts/de_inventory_plan.py)",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:34:50.206128+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268469120,
+    "size": 53,
+    "name": "fcn.10008380"
+  },
+  {
+    "va": 268469184,
+    "size": 496,
+    "name": "fcn.100083c0"
+  },
+  {
+    "va": 268469680,
+    "size": 144,
+    "name": "fcn.100085b0"
+  },
+  {
+    "va": 268469824,
+    "size": 32,
+    "name": "fcn.10008640"
+  },
+  {
+    "va": 268469856,
+    "size": 22,
+    "name": "fcn.10008660"
+  },
+  {
+    "va": 268469888,
+    "size": 48,
+    "name": "fcn.10008680"
+  },
+  {
+    "va": 268469936,
+    "size": 14,
+    "name": "fcn.100086b0"
+  },
+  {
+    "va": 268470272,
+    "size": 446,
+    "name": "fcn.10008800",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 446,
+        "reason": "German server function start: call target in German twins that measure EXACT/RELOC (scripts/de_callee_pairs.py). End: its ret where alignment padding and a new function follow, else the next known start without padding; within 0.75..1.33 of the English size or confirmed by the code after the boundary",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:37:03.330069+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268470720,
+    "size": 704,
+    "name": "fcn.100089c0"
+  },
+  {
+    "va": 268471424,
+    "size": 19,
+    "name": "fcn.10008c80"
+  },
+  {
+    "va": 268471472,
+    "size": 8,
+    "name": "fcn.10008cb0"
+  },
+  {
+    "va": 268474320,
+    "size": 111,
+    "name": "fcn.100097d0",
+    "extent_history": [
+      {
+        "old_size": 112,
+        "new_size": 111,
+        "reason": "Compiled body equals the German native bytes with 0 differences; the remaining extent bytes are only 0x90/0xcc padding (lief read of original/de/server.dll), as in the 2026-11-09 GoldTL repair",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-27T21:42:26.747440+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268476272,
+    "size": 144,
+    "name": "fcn.10009f70"
+  },
+  {
+    "va": 268476736,
+    "size": 97,
+    "name": "fcn.1000a140"
+  },
+  {
+    "va": 268477552,
+    "size": 372,
+    "name": "fcn.1000a470"
+  },
+  {
+    "va": 268477936,
+    "size": 205,
+    "name": "fcn.1000a5f0"
+  },
+  {
+    "va": 268478144,
+    "size": 425,
+    "name": "fcn.1000a6c0"
+  },
+  {
+    "va": 268478576,
+    "size": 144,
+    "name": "fcn.1000a870"
+  },
+  {
+    "va": 268479552,
+    "size": 48,
+    "name": "fcn.1000ac40"
+  },
+  {
+    "va": 268479600,
+    "size": 42,
+    "name": "fcn.1000ac70"
+  },
+  {
+    "va": 268479648,
+    "size": 272,
+    "name": "fcn.1000aca0"
+  },
+  {
+    "va": 268480560,
+    "size": 66,
+    "name": "fcn.1000b030"
+  },
+  {
+    "va": 268480640,
+    "size": 70,
+    "name": "fcn.1000b080",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 70,
+        "reason": "German server function start: call target in German twins that measure EXACT/RELOC (scripts/de_callee_pairs.py). End: its ret where alignment padding and a new function follow, else the next known start without padding; within 0.75..1.33 of the English size or confirmed by the code after the boundary",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:37:03.330069+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268481696,
+    "size": 160,
+    "name": "fcn.1000b4a0"
+  },
+  {
+    "va": 268481856,
+    "size": 144,
+    "name": "fcn.1000b540"
+  },
+  {
+    "va": 268482000,
+    "size": 110,
+    "name": "fcn.1000b5d0"
+  },
+  {
+    "va": 268482112,
+    "size": 64,
+    "name": "fcn.1000b640"
+  },
+  {
+    "va": 268482176,
+    "size": 96,
+    "name": "fcn.1000b680"
+  },
+  {
+    "va": 268482272,
+    "size": 166,
+    "name": "fcn.1000b6e0"
+  },
+  {
+    "va": 268482448,
+    "size": 304,
+    "name": "fcn.1000b790"
+  },
+  {
+    "va": 268482752,
+    "size": 112,
+    "name": "fcn.1000b8c0"
+  },
+  {
+    "va": 268482864,
+    "size": 45,
+    "name": "fcn.1000b930"
+  },
+  {
+    "va": 268483776,
+    "size": 144,
+    "name": "fcn.1000bcc0"
+  },
+  {
+    "va": 268483920,
+    "size": 130,
+    "name": "fcn.1000bd50"
+  },
+  {
+    "va": 268485200,
+    "size": 169,
+    "name": "fcn.1000c250"
+  },
+  {
+    "va": 268485376,
+    "size": 333,
+    "name": "fcn.1000c300"
+  },
+  {
+    "va": 268485712,
+    "size": 86,
+    "name": "fcn.1000c450",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 86,
+        "reason": "German server function start: call target in German twins that measure EXACT/RELOC (scripts/de_callee_pairs.py). End: its ret where alignment padding and a new function follow, else the next known start without padding; within 0.75..1.33 of the English size or confirmed by the code after the boundary",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:37:03.330069+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268485888,
+    "size": 14,
+    "name": "fcn.1000c500",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 14,
+        "reason": "Start of a German function that measures EXACT/RELOC against its English twin (admitted extent up to the next row; scripts/de_inventory_plan.py)",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:34:50.206128+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268486864,
+    "size": 164,
+    "name": "fcn.1000c8d0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 164,
+        "reason": "Start of a German function that measures EXACT/RELOC against its English twin (admitted extent up to the next row; scripts/de_inventory_plan.py)",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:34:50.206128+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268487040,
+    "size": 142,
+    "name": "fcn.1000c980",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 142,
+        "reason": "Start of a German function that measures EXACT/RELOC against its English twin (admitted extent up to the next row; scripts/de_inventory_plan.py)",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:34:50.206128+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268490512,
+    "size": 123,
+    "name": "fcn.1000d710",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 123,
+        "reason": "Start of a German function that measures EXACT/RELOC against its English twin (admitted extent up to the next row; scripts/de_inventory_plan.py)",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:34:50.206128+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268492512,
+    "size": 122,
+    "name": "fcn.1000dee0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 122,
+        "reason": "Start of a German function that measures EXACT/RELOC against its English twin (admitted extent up to the next row; scripts/de_inventory_plan.py)",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:34:50.206128+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268492720,
+    "size": 37,
+    "name": "fcn.1000dfb0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 37,
+        "reason": "Start of a German function that measures EXACT/RELOC against its English twin (admitted extent up to the next row; scripts/de_inventory_plan.py)",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:34:50.206128+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268492768,
+    "size": 208,
+    "name": "fcn.1000dfe0"
+  },
+  {
+    "va": 268492976,
+    "size": 327,
+    "name": "fcn.1000e0b0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 327,
+        "reason": "Start of a German function that measures EXACT/RELOC against its English twin (admitted extent up to the next row; scripts/de_inventory_plan.py)",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:34:50.206128+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268493456,
+    "size": 160,
+    "name": "fcn.1000e290"
+  },
+  {
+    "va": 268495216,
+    "size": 22,
+    "name": "fcn.1000e970",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 22,
+        "reason": "Start of a German function that measures EXACT/RELOC against its English twin (admitted extent up to the next row; scripts/de_inventory_plan.py)",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:34:50.206128+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268495376,
+    "size": 25,
+    "name": "fcn.1000ea10",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 25,
+        "reason": "Start of a German function that measures EXACT/RELOC against its English twin (admitted extent up to the next row; scripts/de_inventory_plan.py)",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:34:50.206128+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268495408,
+    "size": 320,
+    "name": "fcn.1000ea30"
+  },
+  {
+    "va": 268495728,
+    "size": 448,
+    "name": "fcn.1000eb70"
+  },
+  {
+    "va": 268496176,
+    "size": 22,
+    "name": "fcn.1000ed30",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 22,
+        "reason": "Start of a German function that measures EXACT/RELOC against its English twin (admitted extent up to the next row; scripts/de_inventory_plan.py)",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:34:50.206128+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268496208,
+    "size": 41,
+    "name": "fcn.1000ed50",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 41,
+        "reason": "Start of a German function that measures EXACT/RELOC against its English twin (admitted extent up to the next row; scripts/de_inventory_plan.py)",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:34:50.206128+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268496256,
+    "size": 96,
+    "name": "fcn.1000ed80"
+  },
+  {
+    "va": 268496352,
+    "size": 70,
+    "name": "fcn.1000ede0"
+  },
+  {
+    "va": 268497040,
+    "size": 144,
+    "name": "fcn.1000f090"
+  },
+  {
+    "va": 268497184,
+    "size": 17,
+    "name": "fcn.1000f120",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 17,
+        "reason": "Start of a German function that measures EXACT/RELOC against its English twin (admitted extent up to the next row; scripts/de_inventory_plan.py)",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:34:50.206128+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268497344,
+    "size": 272,
+    "name": "fcn.1000f1c0"
+  },
+  {
+    "va": 268497744,
+    "size": 113,
+    "name": "fcn.1000f350",
+    "extent_history": [
+      {
+        "old_size": 107,
+        "new_size": 113,
+        "reason": "Extent of a German function that measures EXACT/RELOC against its English twin: SIZE bytes ending in its own last instruction (scripts/de_inventory_plan.py)",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:34:51.891980+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268497872,
+    "size": 317,
+    "name": "fcn.1000f3d0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 317,
+        "reason": "German server function start: call target in German twins that measure EXACT/RELOC (scripts/de_callee_pairs.py). End: its ret where alignment padding and a new function follow, else the next known start without padding; within 0.75..1.33 of the English size or confirmed by the code after the boundary",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:37:03.330069+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268498192,
+    "size": 14,
+    "name": "fcn.1000f510",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 14,
+        "reason": "Start of a German function that measures EXACT/RELOC against its English twin (admitted extent up to the next row; scripts/de_inventory_plan.py)",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:34:50.206128+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268498208,
+    "size": 319,
+    "name": "fcn.1000f520",
+    "extent_history": [
+      {
+        "old_size": 320,
+        "new_size": 319,
+        "reason": "Compiled body equals the German native bytes with 0 differences; the remaining extent bytes are only 0x90/0xcc padding (lief read of original/de/server.dll), as in the 2026-11-09 GoldTL repair",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-27T21:42:26.747440+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268498528,
+    "size": 374,
+    "name": "fcn.1000f660",
+    "extent_history": [
+      {
+        "old_size": 384,
+        "new_size": 374,
+        "reason": "gv_SpawnEntities compiles to 374 bytes that all match the German bytes, ending in ret; the rest of the old row is NOP alignment",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T08:38:24.821007+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268498912,
+    "size": 832,
+    "name": "fcn.1000f7e0"
+  },
+  {
+    "va": 268500304,
+    "size": 66,
+    "name": "fcn.1000fd50"
+  },
+  {
+    "va": 268500880,
+    "size": 512,
+    "name": "fcn.1000ff90"
+  },
+  {
+    "va": 268501392,
+    "size": 400,
+    "name": "fcn.10010190"
+  },
+  {
+    "va": 268501792,
+    "size": 288,
+    "name": "fcn.10010320"
+  },
+  {
+    "va": 268502080,
+    "size": 304,
+    "name": "fcn.10010440"
+  },
+  {
+    "va": 268505456,
+    "size": 37,
+    "name": "fcn.10011170"
+  },
+  {
+    "va": 268505504,
+    "size": 851,
+    "name": "fcn.100111a0",
+    "extent_history": [
+      {
+        "old_size": 864,
+        "new_size": 851,
+        "reason": "Compiled body equals the German native bytes with 0 differences; the remaining extent bytes are only 0x90/0xcc padding (lief read of original/de/server.dll), as in the 2026-11-09 GoldTL repair",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-27T21:42:26.747440+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268506368,
+    "size": 282,
+    "name": "fcn.10011500"
+  },
+  {
+    "va": 268514880,
+    "size": 224,
+    "name": "fcn.10013640"
+  },
+  {
+    "va": 268515744,
+    "size": 80,
+    "name": "fcn.100139a0"
+  },
+  {
+    "va": 268515824,
+    "size": 80,
+    "name": "fcn.100139f0"
+  },
+  {
+    "va": 268515904,
+    "size": 112,
+    "name": "fcn.10013a40"
+  },
+  {
+    "va": 268516016,
+    "size": 163,
+    "name": "fcn.10013ab0",
+    "extent_history": [
+      {
+        "old_size": 176,
+        "new_size": 163,
+        "reason": "Compiled body equals the German native bytes with 0 differences; the remaining extent bytes are only 0x90/0xcc padding (lief read of original/de/server.dll), as in the 2026-11-09 GoldTL repair",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-27T21:42:26.747440+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268516192,
+    "size": 207,
+    "name": "fcn.10013b60",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 207,
+        "reason": "German server function start: call target in German twins that measure EXACT/RELOC (scripts/de_callee_pairs.py). End: its ret where alignment padding and a new function follow, else the next known start without padding; within 0.75..1.33 of the English size or confirmed by the code after the boundary",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:37:03.330069+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268516400,
+    "size": 41,
+    "name": "fcn.10013c30"
+  },
+  {
+    "va": 268516992,
+    "size": 83,
+    "name": "fcn.10013e80"
+  },
+  {
+    "va": 268517088,
+    "size": 160,
+    "name": "fcn.10013ee0"
+  },
+  {
+    "va": 268517568,
+    "size": 41,
+    "name": "fcn.100140c0"
+  },
+  {
+    "va": 268518768,
+    "size": 57,
+    "name": "fcn.10014570"
+  },
+  {
+    "va": 268518832,
+    "size": 194,
+    "name": "fcn.100145b0"
+  },
+  {
+    "va": 268519040,
+    "size": 64,
+    "name": "fcn.10014680"
+  },
+  {
+    "va": 268519104,
+    "size": 135,
+    "name": "fcn.100146c0"
+  },
+  {
+    "va": 268519248,
+    "size": 211,
+    "name": "fcn.10014750"
+  },
+  {
+    "va": 268519472,
+    "size": 692,
+    "name": "fcn.10014830",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 692,
+        "reason": "German server function start: call target in German twins that measure EXACT/RELOC (scripts/de_callee_pairs.py). End: its ret where alignment padding and a new function follow, else the next known start without padding; within 0.75..1.33 of the English size or confirmed by the code after the boundary",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:37:03.330069+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268520176,
+    "size": 72,
+    "name": "fcn.10014af0"
+  },
+  {
+    "va": 268520256,
+    "size": 451,
+    "name": "fcn.10014b40",
+    "extent_history": [
+      {
+        "old_size": 464,
+        "new_size": 451,
+        "reason": "Compiled body equals the German native bytes with 0 differences; the remaining extent bytes are only 0x90/0xcc padding (lief read of original/de/server.dll), as in the 2026-11-09 GoldTL repair",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-27T21:42:26.747440+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268520720,
+    "size": 300,
+    "name": "fcn.10014d10",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 300,
+        "reason": "German server function start: call target in German twins that measure EXACT/RELOC (scripts/de_callee_pairs.py). End: its ret where alignment padding and a new function follow, else the next known start without padding; within 0.75..1.33 of the English size or confirmed by the code after the boundary",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:37:03.330069+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268521024,
+    "size": 37,
+    "name": "fcn.10014e40"
+  },
+  {
+    "va": 268521072,
+    "size": 144,
+    "name": "fcn.10014e70"
+  },
+  {
+    "va": 268521216,
+    "size": 1,
+    "name": "fcn.10014f00",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 1,
+        "reason": "Start of a German function that measures EXACT/RELOC against its English twin (admitted extent up to the next row; scripts/de_inventory_plan.py)",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:34:50.206128+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268521232,
+    "size": 125,
+    "name": "fcn.10014f10",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 125,
+        "reason": "Function start after the NOP alignment that follows gm_ClearObjektResources (a 1-byte ret, EXACT at 0x10014f00), up to the next row without padding; same link position as English gm_RemoveLinkedNodeById 0x10016680",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:33:56.965982+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268521360,
+    "size": 66,
+    "name": "fcn.10014f90"
+  },
+  {
+    "va": 268521440,
+    "size": 1283,
+    "name": "fcn.10014fe0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 1283,
+        "reason": "German server function start: call target in German twins that measure EXACT/RELOC (scripts/de_callee_pairs.py). End: its ret where alignment padding and a new function follow, else the next known start without padding; within 0.75..1.33 of the English size or confirmed by the code after the boundary",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:37:03.330069+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268522736,
+    "size": 202,
+    "name": "fcn.100154f0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 202,
+        "reason": "German server function start: call target in German twins that measure EXACT/RELOC (scripts/de_callee_pairs.py). End: its ret where alignment padding and a new function follow, else the next known start without padding; within 0.75..1.33 of the English size or confirmed by the code after the boundary",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:37:03.330069+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268522944,
+    "size": 150,
+    "name": "fcn.100155c0",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 150,
+        "reason": "German server function start: call target in German twins that measure EXACT/RELOC (scripts/de_callee_pairs.py). End: its ret where alignment padding and a new function follow, else the next known start without padding; within 0.75..1.33 of the English size or confirmed by the code after the boundary",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:37:03.330069+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268523104,
+    "size": 165,
+    "name": "fcn.10015660",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 165,
+        "reason": "German server function start: call target in German twins that measure EXACT/RELOC (scripts/de_callee_pairs.py). End: its ret where alignment padding and a new function follow, else the next known start without padding; within 0.75..1.33 of the English size or confirmed by the code after the boundary",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:37:03.330069+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268523280,
+    "size": 341,
+    "name": "fcn.10015710",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 341,
+        "reason": "German server function start: call target in German twins that measure EXACT/RELOC (scripts/de_callee_pairs.py). End: its ret where alignment padding and a new function follow, else the next known start without padding; within 0.75..1.33 of the English size or confirmed by the code after the boundary",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:37:03.330069+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268523632,
+    "size": 284,
+    "name": "fcn.10015870",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 224,
+        "reason": "German server function start: call target in German twins that measure EXACT/RELOC (scripts/de_callee_pairs.py). End: its ret where alignment padding and a new function follow, else the next known start without padding; within 0.75..1.33 of the English size or confirmed by the code after the boundary",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:37:03.330069+00:00"
+      },
+      {
+        "old_size": 224,
+        "new_size": 284,
+        "reason": "gm_StartFilteredEntitySearch compiles to 284 bytes that all match the German bytes; the earlier ret-boundary estimate (224) stopped at an early ret",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T08:23:07.358403+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268523920,
+    "size": 48,
+    "name": "fcn.10015990"
+  },
+  {
+    "va": 268523968,
+    "size": 240,
+    "name": "fcn.100159c0"
+  },
+  {
+    "va": 268524384,
+    "size": 202,
+    "name": "fcn.10015b60"
+  },
+  {
+    "va": 268525632,
+    "size": 160,
+    "name": "fcn.10016040"
+  },
+  {
+    "va": 268525792,
+    "size": 181,
+    "name": "fcn.100160e0",
+    "extent_history": [
+      {
+        "old_size": 57,
+        "new_size": 181,
+        "reason": "Extent of a German function that measures EXACT/RELOC against its English twin: SIZE bytes ending in its own last instruction (scripts/de_inventory_plan.py)",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:34:51.891980+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268525984,
+    "size": 62,
+    "name": "fcn.100161a0"
+  },
+  {
+    "va": 268526048,
+    "size": 74,
+    "name": "fcn.100161e0",
+    "extent_history": [
+      {
+        "old_size": 68,
+        "new_size": 74,
+        "reason": "Extent of a German function that measures EXACT/RELOC against its English twin: SIZE bytes ending in its own last instruction (scripts/de_inventory_plan.py)",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:34:51.891980+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268526128,
+    "size": 320,
+    "name": "fcn.10016230"
+  },
+  {
+    "va": 268527168,
+    "size": 35,
+    "name": "fcn.10016640"
+  },
+  {
+    "va": 268527216,
+    "size": 36,
+    "name": "fcn.10016670"
+  },
+  {
+    "va": 268527296,
+    "size": 288,
+    "name": "fcn.100166c0"
+  },
+  {
+    "va": 268527680,
+    "size": 32,
+    "name": "fcn.10016840",
+    "extent_history": [
+      {
+        "old_size": 26,
+        "new_size": 32,
+        "reason": "Extent of a German function that measures EXACT/RELOC against its English twin: SIZE bytes ending in its own last instruction (scripts/de_inventory_plan.py)",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:34:51.891980+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268527712,
+    "size": 70,
+    "name": "fcn.10016860",
+    "extent_history": [
+      {
+        "old_size": 28,
+        "new_size": 70,
+        "reason": "Extent of a German function that measures EXACT/RELOC against its English twin: SIZE bytes ending in its own last instruction (scripts/de_inventory_plan.py)",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:34:51.891980+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268527792,
+    "size": 87,
+    "name": "fcn.100168b0"
+  },
+  {
+    "va": 268527888,
+    "size": 291,
+    "name": "fcn.10016910",
+    "extent_history": [
+      {
+        "old_size": 24,
+        "new_size": 291,
+        "reason": "Extent of a German function that measures EXACT/RELOC against its English twin: SIZE bytes ending in its own last instruction (scripts/de_inventory_plan.py)",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:34:51.891980+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268528192,
+    "size": 288,
+    "name": "fcn.10016a40"
+  },
+  {
+    "va": 268528480,
+    "size": 80,
+    "name": "fcn.10016b60"
+  },
+  {
+    "va": 268528560,
+    "size": 56,
+    "name": "fcn.10016bb0"
+  },
+  {
+    "va": 268528624,
+    "size": 80,
+    "name": "fcn.10016bf0"
+  },
+  {
+    "va": 268528704,
+    "size": 800,
+    "name": "fcn.10016c40"
+  },
+  {
+    "va": 268533120,
+    "size": 392,
+    "name": "fcn.10017d80",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 392,
+        "reason": "German server function start: call target in German twins that measure EXACT/RELOC (scripts/de_callee_pairs.py). End: its ret where alignment padding and a new function follow, else the next known start without padding; within 0.75..1.33 of the English size or confirmed by the code after the boundary",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:37:03.330069+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268533520,
+    "size": 360,
+    "name": "fcn.10017f10",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 360,
+        "reason": "German server function start: call target in German twins that measure EXACT/RELOC (scripts/de_callee_pairs.py). End: its ret where alignment padding and a new function follow, else the next known start without padding; within 0.75..1.33 of the English size or confirmed by the code after the boundary",
+        "binary_hash": "b341730ba273255fb0099975f30a7b1a950e322be3a491bfd8e137781ac97f06",
+        "changed_at": "2026-11-28T07:37:03.330069+00:00"
+      }
+    ]
+  },
+  {
+    "va": 268533888,
+    "size": 74,
+    "name": "fcn.10018080"
+  },
+  {
+    "va": 268533968,
+    "size": 102,
+    "name": "fcn.100180d0"
+  },
+  {
+    "va": 268534080,
+    "size": 96,
+    "name": "fcn.10018140"
+  },
+  {
+    "va": 268534176,
+    "size": 62,
+    "name": "fcn.100181a0"
+  },
+  {
+    "va": 268534240,
+    "size": 83,
+    "name": "fcn.100181e0"
+  },
+  {
+    "va": 268534336,
+    "size": 124,
+    "name": "fcn.10018240"
+  },
+  {
+    "va": 268534464,
+    "size": 112,
+    "name": "fcn.100182c0"
+  },
+  {
+    "va": 268534576,
+    "size": 48,
+    "name": "fcn.10018330"
+  },
+  {
+    "va": 268534624,
+    "size": 48,
+    "name": "fcn.10018360"
+  },
+  {
+    "va": 268535040,
+    "size": 400,
+    "name": "fcn.10018500"
+  },
+  {
+    "va": 268535440,
+    "size": 97,
+    "name": "fcn.10018690"
+  },
+  {
+    "va": 268535594,
+    "size": 49,
+    "name": "fcn.1001872a"
+  },
+  {
+    "va": 268535643,
+    "size": 76,
+    "name": "fcn.1001875b"
+  },
+  {
+    "va": 268535719,
+    "size": 78,
+    "name": "fcn.100187a7"
+  },
+  {
+    "va": 268535797,
+    "size": 49,
+    "name": "fcn.100187f5"
+  },
+  {
+    "va": 268535846,
+    "size": 19,
+    "name": "fcn.10018826"
+  },
+  {
+    "va": 268535865,
+    "size": 82,
+    "name": "fcn.10018839"
+  },
+  {
+    "va": 268535947,
+    "size": 34,
+    "name": "fcn.1001888b"
+  },
+  {
+    "va": 268535981,
+    "size": 353,
+    "name": "fcn.100188ad"
+  },
+  {
+    "va": 268536334,
+    "size": 44,
+    "name": "fcn.10018a0e"
+  },
+  {
+    "va": 268536378,
+    "size": 141,
+    "name": "fcn.10018a3a"
+  },
+  {
+    "va": 268536519,
+    "size": 25,
+    "name": "fcn.10018ac7"
+  },
+  {
+    "va": 268536544,
+    "size": 39,
+    "name": "fcn.10018ae0"
+  },
+  {
+    "va": 268536583,
+    "size": 220,
+    "name": "fcn.10018b07"
+  },
+  {
+    "va": 268536803,
+    "size": 45,
+    "name": "fcn.10018be3"
+  },
+  {
+    "va": 268536865,
+    "size": 15,
+    "name": "fcn.10018c21"
+  },
+  {
+    "va": 268536880,
+    "size": 165,
+    "name": "fcn.10018c30"
+  },
+  {
+    "va": 268537045,
+    "size": 9,
+    "name": "fcn.10018cd5"
+  },
+  {
+    "va": 268537054,
+    "size": 9,
+    "name": "fcn.10018cde"
+  },
+  {
+    "va": 268537063,
+    "size": 26,
+    "name": "fcn.10018ce7"
+  },
+  {
+    "va": 268537089,
+    "size": 115,
+    "name": "fcn.10018d01"
+  },
+  {
+    "va": 268537204,
+    "size": 9,
+    "name": "fcn.10018d74"
+  },
+  {
+    "va": 268537213,
+    "size": 9,
+    "name": "fcn.10018d7d"
+  },
+  {
+    "va": 268537222,
+    "size": 18,
+    "name": "fcn.10018d86"
+  },
+  {
+    "va": 268537240,
+    "size": 44,
+    "name": "fcn.10018d98"
+  },
+  {
+    "va": 268537284,
+    "size": 103,
+    "name": "fcn.10018dc4"
+  },
+  {
+    "va": 268537387,
+    "size": 95,
+    "name": "fcn.10018e2b"
+  },
+  {
+    "va": 268537482,
+    "size": 54,
+    "name": "fcn.10018e8a"
+  },
+  {
+    "va": 268537536,
+    "size": 47,
+    "name": "fcn.10018ec0"
+  },
+  {
+    "va": 268537583,
+    "size": 266,
+    "name": "fcn.10018eef"
+  },
+  {
+    "va": 268537849,
+    "size": 47,
+    "name": "fcn.10018ff9"
+  },
+  {
+    "va": 268537896,
+    "size": 232,
+    "name": "fcn.10019028"
+  },
+  {
+    "va": 268538128,
+    "size": 106,
+    "name": "fcn.10019110"
+  },
+  {
+    "va": 268538234,
+    "size": 88,
+    "name": "fcn.1001917a"
+  },
+  {
+    "va": 268538322,
+    "size": 45,
+    "name": "fcn.100191d2"
+  },
+  {
+    "va": 268538368,
+    "size": 47,
+    "name": "fcn.10019200"
+  },
+  {
+    "va": 268538415,
+    "size": 46,
+    "name": "fcn.1001922f"
+  },
+  {
+    "va": 268538461,
+    "size": 92,
+    "name": "fcn.1001925d"
+  },
+  {
+    "va": 268538562,
+    "size": 164,
+    "name": "fcn.100192c2"
+  },
+  {
+    "va": 268538726,
+    "size": 59,
+    "name": "fcn.10019366"
+  },
+  {
+    "va": 268538800,
+    "size": 272,
+    "name": "fcn.100193b0"
+  },
+  {
+    "va": 268539072,
+    "size": 192,
+    "name": "fcn.100194c0"
+  },
+  {
+    "va": 268539264,
+    "size": 152,
+    "name": "fcn.10019580"
+  },
+  {
+    "va": 268539416,
+    "size": 56,
+    "name": "fcn.10019618"
+  },
+  {
+    "va": 268539472,
+    "size": 13,
+    "name": "fcn.10019650"
+  },
+  {
+    "va": 268539485,
+    "size": 34,
+    "name": "fcn.1001965d"
+  },
+  {
+    "va": 268539519,
+    "size": 111,
+    "name": "fcn.1001967f"
+  },
+  {
+    "va": 268539630,
+    "size": 204,
+    "name": "fcn.100196ee"
+  },
+  {
+    "va": 268540992,
+    "size": 39,
+    "name": "fcn.10019c40"
+  },
+  {
+    "va": 268541031,
+    "size": 65,
+    "name": "fcn.10019c67"
+  },
+  {
+    "va": 268541096,
+    "size": 729,
+    "name": "fcn.10019ca8"
+  },
+  {
+    "va": 268541825,
+    "size": 86,
+    "name": "fcn.10019f81"
+  },
+  {
+    "va": 268541911,
+    "size": 217,
+    "name": "fcn.10019fd7"
+  },
+  {
+    "va": 268542128,
+    "size": 157,
+    "name": "fcn.1001a0b0"
+  },
+  {
+    "va": 268542285,
+    "size": 51,
+    "name": "fcn.1001a14d"
+  },
+  {
+    "va": 268542524,
+    "size": 47,
+    "name": "fcn.1001a23c"
+  },
+  {
+    "va": 268542571,
+    "size": 35,
+    "name": "fcn.1001a26b"
+  },
+  {
+    "va": 268542606,
+    "size": 47,
+    "name": "fcn.1001a28e"
+  },
+  {
+    "va": 268542653,
+    "size": 35,
+    "name": "fcn.1001a2bd"
+  },
+  {
+    "va": 268542688,
+    "size": 93,
+    "name": "fcn.1001a2e0"
+  },
+  {
+    "va": 268542781,
+    "size": 131,
+    "name": "fcn.1001a33d"
+  },
+  {
+    "va": 268542912,
+    "size": 43,
+    "name": "fcn.1001a3c0"
+  },
+  {
+    "va": 268542955,
+    "size": 141,
+    "name": "fcn.1001a3eb"
+  },
+  {
+    "va": 268543096,
+    "size": 42,
+    "name": "fcn.1001a478"
+  },
+  {
+    "va": 268543152,
+    "size": 123,
+    "name": "fcn.1001a4b0"
+  },
+  {
+    "va": 268543275,
+    "size": 368,
+    "name": "fcn.1001a52b"
+  },
+  {
+    "va": 268543643,
+    "size": 200,
+    "name": "fcn.1001a69b"
+  },
+  {
+    "va": 268543843,
+    "size": 280,
+    "name": "fcn.1001a763"
+  },
+  {
+    "va": 268544123,
+    "size": 1857,
+    "name": "fcn.1001a87b"
+  },
+  {
+    "va": 268545980,
+    "size": 53,
+    "name": "fcn.1001afbc"
+  },
+  {
+    "va": 268546033,
+    "size": 49,
+    "name": "fcn.1001aff1"
+  },
+  {
+    "va": 268546082,
+    "size": 56,
+    "name": "fcn.1001b022"
+  },
+  {
+    "va": 268546138,
+    "size": 13,
+    "name": "fcn.1001b05a"
+  },
+  {
+    "va": 268546151,
+    "size": 16,
+    "name": "fcn.1001b067"
+  },
+  {
+    "va": 268546167,
+    "size": 14,
+    "name": "fcn.1001b077"
+  },
+  {
+    "va": 268546181,
+    "size": 444,
+    "name": "fcn.1001b085"
+  },
+  {
+    "va": 268546625,
+    "size": 84,
+    "name": "fcn.1001b241"
+  },
+  {
+    "va": 268546709,
+    "size": 101,
+    "name": "fcn.1001b295"
+  },
+  {
+    "va": 268546810,
+    "size": 115,
+    "name": "fcn.1001b2fa"
+  },
+  {
+    "va": 268546925,
+    "size": 202,
+    "name": "fcn.1001b36d"
+  },
+  {
+    "va": 268547127,
+    "size": 40,
+    "name": "fcn.1001b437"
+  },
+  {
+    "va": 268547167,
+    "size": 352,
+    "name": "fcn.1001b45f"
+  },
+  {
+    "va": 268547519,
+    "size": 194,
+    "name": "fcn.1001b5bf"
+  },
+  {
+    "va": 268547713,
+    "size": 41,
+    "name": "fcn.1001b681"
+  },
+  {
+    "va": 268547754,
+    "size": 108,
+    "name": "fcn.1001b6aa"
+  },
+  {
+    "va": 268547862,
+    "size": 97,
+    "name": "fcn.1001b716"
+  },
+  {
+    "va": 268547959,
+    "size": 21,
+    "name": "fcn.1001b777"
+  },
+  {
+    "va": 268547980,
+    "size": 84,
+    "name": "fcn.1001b78c"
+  },
+  {
+    "va": 268548064,
+    "size": 30,
+    "name": "fcn.1001b7e0"
+  },
+  {
+    "va": 268548094,
+    "size": 19,
+    "name": "fcn.1001b7fe"
+  },
+  {
+    "va": 268548113,
+    "size": 103,
+    "name": "fcn.1001b811"
+  },
+  {
+    "va": 268548216,
+    "size": 160,
+    "name": "fcn.1001b878"
+  },
+  {
+    "va": 268548376,
+    "size": 27,
+    "name": "fcn.1001b918"
+  },
+  {
+    "va": 268548403,
+    "size": 45,
+    "name": "fcn.1001b933"
+  },
+  {
+    "va": 268548448,
+    "size": 328,
+    "name": "fcn.1001b960"
+  },
+  {
+    "va": 268548776,
+    "size": 93,
+    "name": "fcn.1001baa8"
+  },
+  {
+    "va": 268548869,
+    "size": 168,
+    "name": "fcn.1001bb05"
+  },
+  {
+    "va": 268549037,
+    "size": 29,
+    "name": "fcn.1001bbad"
+  },
+  {
+    "va": 268549109,
+    "size": 43,
+    "name": "fcn.1001bbf5"
+  },
+  {
+    "va": 268549152,
+    "size": 809,
+    "name": "fcn.1001bc20"
+  },
+  {
+    "va": 268549961,
+    "size": 777,
+    "name": "fcn.1001bf49"
+  },
+  {
+    "va": 268550738,
+    "size": 177,
+    "name": "fcn.1001c252"
+  },
+  {
+    "va": 268550915,
+    "size": 251,
+    "name": "fcn.1001c303"
+  },
+  {
+    "va": 268551166,
+    "size": 758,
+    "name": "fcn.1001c3fe"
+  },
+  {
+    "va": 268551924,
+    "size": 324,
+    "name": "fcn.1001c6f4"
+  },
+  {
+    "va": 268552248,
+    "size": 86,
+    "name": "fcn.1001c838"
+  },
+  {
+    "va": 268552334,
+    "size": 194,
+    "name": "fcn.1001c88e"
+  },
+  {
+    "va": 268552528,
+    "size": 87,
+    "name": "fcn.1001c950"
+  },
+  {
+    "va": 268552615,
+    "size": 69,
+    "name": "fcn.1001c9a7"
+  },
+  {
+    "va": 268552684,
+    "size": 520,
+    "name": "fcn.1001c9ec"
+  },
+  {
+    "va": 268553204,
+    "size": 292,
+    "name": "fcn.1001cbf4"
+  },
+  {
+    "va": 268553496,
+    "size": 169,
+    "name": "fcn.1001cd18"
+  },
+  {
+    "va": 268553668,
+    "size": 32,
+    "name": "fcn.1001cdc4"
+  },
+  {
+    "va": 268553734,
+    "size": 148,
+    "name": "fcn.1001ce06"
+  },
+  {
+    "va": 268553882,
+    "size": 34,
+    "name": "fcn.1001ce9a"
+  },
+  {
+    "va": 268554132,
+    "size": 101,
+    "name": "fcn.1001cf94"
+  },
+  {
+    "va": 268554233,
+    "size": 395,
+    "name": "fcn.1001cff9"
+  },
+  {
+    "va": 268554640,
+    "size": 821,
+    "name": "fcn.1001d190"
+  },
+  {
+    "va": 268555461,
+    "size": 220,
+    "name": "fcn.1001d4c5"
+  },
+  {
+    "va": 268555681,
+    "size": 101,
+    "name": "fcn.1001d5a1"
+  },
+  {
+    "va": 268555782,
+    "size": 473,
+    "name": "fcn.1001d606"
+  },
+  {
+    "va": 268556255,
+    "size": 147,
+    "name": "fcn.1001d7df"
+  },
+  {
+    "va": 268556402,
+    "size": 18,
+    "name": "fcn.1001d872"
+  },
+  {
+    "va": 268556420,
+    "size": 62,
+    "name": "fcn.1001d884"
+  },
+  {
+    "va": 268556482,
+    "size": 131,
+    "name": "fcn.1001d8c2"
+  },
+  {
+    "va": 268556715,
+    "size": 62,
+    "name": "fcn.1001d9ab"
+  },
+  {
+    "va": 268556777,
+    "size": 97,
+    "name": "fcn.1001d9e9"
+  },
+  {
+    "va": 268556874,
+    "size": 194,
+    "name": "fcn.1001da4a"
+  },
+  {
+    "va": 268557068,
+    "size": 85,
+    "name": "fcn.1001db0c"
+  },
+  {
+    "va": 268557153,
+    "size": 167,
+    "name": "fcn.1001db61"
+  },
+  {
+    "va": 268557320,
+    "size": 147,
+    "name": "fcn.1001dc08"
+  },
+  {
+    "va": 268557467,
+    "size": 81,
+    "name": "fcn.1001dc9b"
+  },
+  {
+    "va": 268557548,
+    "size": 37,
+    "name": "fcn.1001dcec"
+  },
+  {
+    "va": 268557585,
+    "size": 548,
+    "name": "fcn.1001dd11"
+  },
+  {
+    "va": 268558133,
+    "size": 43,
+    "name": "fcn.1001df35"
+  },
+  {
+    "va": 268558176,
+    "size": 117,
+    "name": "fcn.1001df60"
+  },
+  {
+    "va": 268558304,
+    "size": 240,
+    "name": "fcn.1001dfe0"
+  },
+  {
+    "va": 268558544,
+    "size": 290,
+    "name": "fcn.1001e0d0"
+  },
+  {
+    "va": 268558834,
+    "size": 156,
+    "name": "fcn.1001e1f2"
+  },
+  {
+    "va": 268559237,
+    "size": 185,
+    "name": "fcn.1001e385"
+  },
+  {
+    "va": 268559422,
+    "size": 153,
+    "name": "fcn.1001e43e"
+  },
+  {
+    "va": 268559575,
+    "size": 436,
+    "name": "fcn.1001e4d7"
+  },
+  {
+    "va": 268560011,
+    "size": 306,
+    "name": "fcn.1001e68b"
+  },
+  {
+    "va": 268560317,
+    "size": 57,
+    "name": "fcn.1001e7bd"
+  },
+  {
+    "va": 268560374,
+    "size": 339,
+    "name": "fcn.1001e7f6"
+  },
+  {
+    "va": 268560842,
+    "size": 291,
+    "name": "fcn.1001e9ca"
+  },
+  {
+    "va": 268561133,
+    "size": 124,
+    "name": "fcn.1001eaed"
+  },
+  {
+    "va": 268561257,
+    "size": 127,
+    "name": "fcn.1001eb69"
+  },
+  {
+    "va": 268561384,
+    "size": 66,
+    "name": "fcn.1001ebe8"
+  },
+  {
+    "va": 268561450,
+    "size": 95,
+    "name": "fcn.1001ec2a"
+  },
+  {
+    "va": 268561545,
+    "size": 34,
+    "name": "fcn.1001ec89"
+  },
+  {
+    "va": 268561579,
+    "size": 41,
+    "name": "fcn.1001ecab"
+  },
+  {
+    "va": 268561620,
+    "size": 719,
+    "name": "fcn.1001ecd4"
+  },
+  {
+    "va": 268562339,
+    "size": 68,
+    "name": "fcn.1001efa3"
+  },
+  {
+    "va": 268562407,
+    "size": 89,
+    "name": "fcn.1001efe7"
+  },
+  {
+    "va": 268562496,
+    "size": 120,
+    "name": "fcn.1001f040"
+  },
+  {
+    "va": 268562608,
+    "size": 104,
+    "name": "fcn.1001f0b0"
+  },
+  {
+    "va": 268562720,
+    "size": 117,
+    "name": "fcn.1001f120"
+  },
+  {
+    "va": 268562837,
+    "size": 46,
+    "name": "fcn.1001f195"
+  },
+  {
+    "va": 268562883,
+    "size": 647,
+    "name": "fcn.1001f1c3"
+  },
+  {
+    "va": 268563530,
+    "size": 33,
+    "name": "fcn.1001f44a"
+  },
+  {
+    "va": 268563563,
+    "size": 428,
+    "name": "fcn.1001f46b"
+  },
+  {
+    "va": 268563991,
+    "size": 320,
+    "name": "fcn.1001f617"
+  },
+  {
+    "va": 268564311,
+    "size": 266,
+    "name": "fcn.1001f757"
+  },
+  {
+    "va": 268564577,
+    "size": 23,
+    "name": "fcn.1001f861"
+  },
+  {
+    "va": 268564600,
+    "size": 517,
+    "name": "fcn.1001f878"
+  },
+  {
+    "va": 268565120,
+    "size": 56,
+    "name": "fcn.1001fa80"
+  },
+  {
+    "va": 268565184,
+    "size": 83,
+    "name": "fcn.1001fac0"
+  },
+  {
+    "va": 268565272,
+    "size": 53,
+    "name": "fcn.1001fb18"
+  },
+  {
+    "va": 268565325,
+    "size": 22,
+    "name": "fcn.1001fb4d"
+  },
+  {
+    "va": 268565347,
+    "size": 146,
+    "name": "fcn.1001fb63"
+  },
+  {
+    "va": 268565493,
+    "size": 137,
+    "name": "fcn.1001fbf5"
+  },
+  {
+    "va": 268565630,
+    "size": 111,
+    "name": "fcn.1001fc7e"
+  },
+  {
+    "va": 268565741,
+    "size": 203,
+    "name": "fcn.1001fced"
+  },
+  {
+    "va": 268565944,
+    "size": 73,
+    "name": "fcn.1001fdb8"
+  },
+  {
+    "va": 268566017,
+    "size": 86,
+    "name": "fcn.1001fe01"
+  },
+  {
+    "va": 268566103,
+    "size": 140,
+    "name": "fcn.1001fe57"
+  },
+  {
+    "va": 268566243,
+    "size": 27,
+    "name": "fcn.1001fee3"
+  },
+  {
+    "va": 268566270,
+    "size": 12,
+    "name": "fcn.1001fefe"
+  },
+  {
+    "va": 268566282,
+    "size": 27,
+    "name": "fcn.1001ff0a"
+  },
+  {
+    "va": 268566309,
+    "size": 141,
+    "name": "fcn.1001ff25"
+  },
+  {
+    "va": 268566450,
+    "size": 364,
+    "name": "fcn.1001ffb2"
+  },
+  {
+    "va": 268566814,
+    "size": 22,
+    "name": "fcn.1002011e"
+  },
+  {
+    "va": 268566836,
+    "size": 22,
+    "name": "fcn.10020134"
+  },
+  {
+    "va": 268566858,
+    "size": 45,
+    "name": "fcn.1002014a"
+  },
+  {
+    "va": 268566903,
+    "size": 45,
+    "name": "fcn.10020177"
+  },
+  {
+    "va": 268566948,
+    "size": 119,
+    "name": "fcn.100201a4"
+  },
+  {
+    "va": 268567067,
+    "size": 92,
+    "name": "fcn.1002021b"
+  },
+  {
+    "va": 268567159,
+    "size": 201,
+    "name": "fcn.10020277"
+  },
+  {
+    "va": 268567360,
+    "size": 144,
+    "name": "fcn.10020340"
+  },
+  {
+    "va": 268567504,
+    "size": 62,
+    "name": "fcn.100203d0"
+  },
+  {
+    "va": 268567568,
+    "size": 58,
+    "name": "fcn.10020410"
+  },
+  {
+    "va": 268567626,
+    "size": 329,
+    "name": "fcn.1002044a"
+  },
+  {
+    "va": 268567955,
+    "size": 429,
+    "name": "fcn.10020593"
+  },
+  {
+    "va": 268568384,
+    "size": 74,
+    "name": "fcn.10020740"
+  },
+  {
+    "va": 268568458,
+    "size": 27,
+    "name": "fcn.1002078a"
+  },
+  {
+    "va": 268568509,
+    "size": 41,
+    "name": "fcn.100207bd"
+  },
+  {
+    "va": 268568550,
+    "size": 389,
+    "name": "fcn.100207e6"
+  },
+  {
+    "va": 268568939,
+    "size": 28,
+    "name": "fcn.1002096b"
+  },
+  {
+    "va": 268568967,
+    "size": 137,
+    "name": "fcn.10020987"
+  },
+  {
+    "va": 268569104,
+    "size": 293,
+    "name": "fcn.10020a10"
+  },
+  {
+    "va": 268569397,
+    "size": 139,
+    "name": "fcn.10020b35"
+  },
+  {
+    "va": 268569536,
+    "size": 125,
+    "name": "fcn.10020bc0"
+  },
+  {
+    "va": 268569661,
+    "size": 33,
+    "name": "fcn.10020c3d"
+  },
+  {
+    "va": 268569694,
+    "size": 94,
+    "name": "fcn.10020c5e"
+  },
+  {
+    "va": 268569788,
+    "size": 46,
+    "name": "fcn.10020cbc"
+  },
+  {
+    "va": 268569834,
+    "size": 45,
+    "name": "fcn.10020cea"
+  },
+  {
+    "va": 268569879,
+    "size": 199,
+    "name": "fcn.10020d17"
+  },
+  {
+    "va": 268570078,
+    "size": 1233,
+    "name": "fcn.10020dde"
+  },
+  {
+    "va": 268571311,
+    "size": 673,
+    "name": "fcn.100212af"
+  },
+  {
+    "va": 268571984,
+    "size": 208,
+    "name": "fcn.10021550"
+  },
+  {
+    "va": 268572192,
+    "size": 257,
+    "name": "fcn.10021620"
+  },
+  {
+    "va": 268572449,
+    "size": 111,
+    "name": "fcn.10021721"
+  },
+  {
+    "va": 268572612,
+    "size": 63,
+    "name": "fcn.100217c4"
+  },
+  {
+    "va": 268572675,
+    "size": 110,
+    "name": "fcn.10021803"
+  },
+  {
+    "va": 268572785,
+    "size": 544,
+    "name": "fcn.10021871"
+  },
+  {
+    "va": 268573329,
+    "size": 124,
+    "name": "fcn.10021a91"
+  },
+  {
+    "va": 268573453,
+    "size": 637,
+    "name": "fcn.10021b0d"
+  },
+  {
+    "va": 268574090,
+    "size": 391,
+    "name": "fcn.10021d8a"
+  },
+  {
+    "va": 268574481,
+    "size": 88,
+    "name": "fcn.10021f11"
+  },
+  {
+    "va": 268574569,
+    "size": 103,
+    "name": "fcn.10021f69"
+  },
+  {
+    "va": 268574672,
+    "size": 151,
+    "name": "fcn.10021fd0"
+  },
+  {
+    "va": 268574823,
+    "size": 46,
+    "name": "fcn.10022067"
+  }
+]

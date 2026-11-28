@@ -22,6 +22,7 @@ void __cdecl cm_SendCopyEntityData(char* msg);
 int __cdecl amt_ExecGebaeudeBauen(char* actor, char* building_spec, char* target_arg);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x00487700 */
 int __cdecl ai_RunBetriebBauen(char* actor, char* building_spec, char* target_arg)
 {
 	char msg[0xf8];

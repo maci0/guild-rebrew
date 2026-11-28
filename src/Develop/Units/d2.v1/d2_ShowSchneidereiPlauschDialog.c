@@ -41,6 +41,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x005c6110 */
 void __cdecl d2_ShowSchneidereiPlauschDialog(ENTITY_RECORD* other)
 {
 	int count;

@@ -3,6 +3,7 @@
 
 int __cdecl amt_ApplyForOffice(int, int);
 
+/* ADDRESS: GOLDDE 0x00485aa0 */
 int __cdecl ai_RunAmtsbewerbung(int entity, char* request)
 {
 	if (*request != 0xa) {

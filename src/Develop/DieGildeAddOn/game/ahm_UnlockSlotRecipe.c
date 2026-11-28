@@ -19,6 +19,7 @@ int __cdecl ahm_HasRecipeSlotCapacity(char* p);
 int* __cdecl ahm_FindRecipePrototypeByKey(int id);
 int __cdecl cm_RequestAhmCommand(Msg18* m);
 
+/* ADDRESS: GOLDDE 0x004dac70 */
 int __cdecl ahm_UnlockSlotRecipe(char* p, int id)
 {
 	Msg18 m;

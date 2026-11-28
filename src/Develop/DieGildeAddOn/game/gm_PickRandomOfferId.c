@@ -8,6 +8,7 @@ extern int g_6ac240;
 
 unsigned short __cdecl gm_RandomMod(unsigned short);
 
+/* ADDRESS: GOLDDE 0x00597ee0 */
 unsigned short __cdecl gm_PickRandomOfferId(int lo, int hi)
 {
 	int r;

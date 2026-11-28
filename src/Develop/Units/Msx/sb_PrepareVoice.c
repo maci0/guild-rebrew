@@ -15,6 +15,7 @@ void __cdecl msx_SetSampleVolume(int h, int v);
 void __cdecl msx_SetSamplePan(int h, int v);
 void __cdecl msx_SetSampleLoopCount(int h, int v);
 
+/* ADDRESS: GOLDDE 0x0041f320 */
 Voice* __cdecl sb_PrepareVoice(int bank, int name)
 {
 	Voice* v;

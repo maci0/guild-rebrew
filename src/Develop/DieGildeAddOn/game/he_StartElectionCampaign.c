@@ -10,6 +10,7 @@ int __cdecl gm_RandomMod(int range);
 int __cdecl cm_SendSetHE(char a1, unsigned char* e);
 
 /* ADDRESS: GOLDTL 0x00549b90 */
+/* ADDRESS: GOLDDE 0x00530070 */
 void __cdecl he_StartElectionCampaign(char* p)
 {
 	if (*(unsigned char*) (p + 0x78) & 4) {

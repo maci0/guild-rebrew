@@ -4,6 +4,7 @@
 #include <string.h>
 #include <windows.h>
 
+/* ADDRESS: GOLDDE 0x00410150 */
 int __cdecl io_ReadRegistryString(HKEY key, const char* name, char* out)
 {
 	DWORD size;

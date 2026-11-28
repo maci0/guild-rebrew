@@ -8,6 +8,7 @@ void __cdecl he_RegisterApEvent(int, char*, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00551330 */
+/* ADDRESS: GOLDDE 0x005376e0 */
 void __cdecl he_RunPeriodicApDrain(char* e)
 {
 	switch (*(int*) (e + 0x70)) {

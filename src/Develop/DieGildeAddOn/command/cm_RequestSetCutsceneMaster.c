@@ -3,6 +3,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b4570 */
 void __cdecl cm_RequestSetCutsceneMaster(char* event, char* entity)
 {
 	char buf[0x9c];

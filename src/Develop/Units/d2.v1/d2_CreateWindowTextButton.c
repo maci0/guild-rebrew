@@ -6,6 +6,7 @@ int __cdecl d2_AddWindowTextButton(char*, int, int, int, int);
 void __cdecl d2_SetElementFont(int, int);
 void __cdecl d2_SetElementWidth(int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
+/* ADDRESS: GOLDDE 0x00516870 */
 int __cdecl d2_CreateWindowTextButton(char* a, int b, int c)
 {
 	int h;

@@ -1,3 +1,9 @@
+void __cdecl d3_ClearAuxSlotState();
+extern char g_10425fc[];
+extern char g_104329c[];
+extern char d3_InteriorSupermap[];
+extern char g_6b89b0[];
+extern char g_6b859b[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include <string.h>
 
@@ -62,6 +68,7 @@ typedef struct {
 
 #pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x004432d0 */
+/* ADDRESS: GOLDDE 0x0043b720 */
 char __cdecl d3_SelectSceneContext(int contextIndex, char a1)
 {
 	if (contextIndex >= 0x40)
@@ -111,9 +118,9 @@ char __cdecl d3_SelectSceneContext(int contextIndex, char a1)
 				rep movsb
 			}
 		}
-		CTX_TABLE[d3_CurrentContextIndex].fd4 = *(int*) 0x6b805c;
-		CTX_TABLE[d3_CurrentContextIndex].fd8 = *(int*) 0x10425fc;
-		CTX_TABLE[d3_CurrentContextIndex].fdc = *(int*) 0x104329c;
+		CTX_TABLE[d3_CurrentContextIndex].fd4 = *(int*) ((int) &g_6b8058 + 0x4);
+		CTX_TABLE[d3_CurrentContextIndex].fd8 = *(int*) &g_10425fc;
+		CTX_TABLE[d3_CurrentContextIndex].fdc = *(int*) &g_104329c;
 		{
 			char* cp = CTX_TABLE[d3_CurrentContextIndex].fe0;
 			int cn = 0x48;
@@ -224,27 +231,27 @@ char __cdecl d3_SelectSceneContext(int contextIndex, char a1)
 		}
 		if (a1 == 0) {
 			if (d3_CurrentFloor == 0) {
-				if (*(int*) 0x6b89e4 != 0) {
-					d3sm_Rebuild(*(int*) 0x6b89e4, 0);
+				if (*(int*) &d3_InteriorSupermap != 0) {
+					d3sm_Rebuild(*(int*) &d3_InteriorSupermap, 0);
 				}
 				else {
-					*(int*) 0x6b89e4 = d3sm_CreateMap(0, -*(int*) 0x6b89b0, 1);
-					d3_TraverseSceneObjects(d3_ActiveScene, 0, 0xc0, 0x456df0);
+					*(int*) &d3_InteriorSupermap = d3sm_CreateMap(0, -*(int*) &g_6b89b0, 1);
+					d3_TraverseSceneObjects(d3_ActiveScene, 0, 0xc0, (int) d3_ClearAuxSlotState);
 				}
 			}
-			else if (*(int*) 0x6b89e4 != 0) {
-				gv_Free3Fields(*(int*) 0x6b89e4);
-				*(int*) 0x6b89e4 = 0;
+			else if (*(int*) &d3_InteriorSupermap != 0) {
+				gv_Free3Fields(*(int*) &d3_InteriorSupermap);
+				*(int*) &d3_InteriorSupermap = 0;
 			}
 			d3_RenderedFaceCount = 0;
 			d3_SetFog(CTX_TABLE[contextIndex].fd8,
 				CTX_TABLE[contextIndex].fdc, CTX_TABLE[contextIndex].fd4);
-			*(char*) 0x6b859b = 1;
+			*(char*) &g_6b859b = 1;
 		}
 		return 1;
 	}
 	if (a1 == 0)
-		*(char*) 0x6b859b = 1;
+		*(char*) &g_6b859b = 1;
 	return 1;
 }
 #pragma optimize("", on)

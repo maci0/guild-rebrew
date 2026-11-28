@@ -34,6 +34,7 @@ void __cdecl d2_SetLabelText(int, char*);
 void __cdecl gm_FormatEntityTitleAndName(int, int, int, char*);
 void __cdecl d2_ClearGauge(Gauge*);
 #include "Develop/Units/d2.v1/d2_gui.h"
+/* ADDRESS: GOLDDE 0x005984e0 */
 void __cdecl d2_PopulateBookActionGauge(char* e, Gauge* g, int a3, int a4)
 {
 	char buf[0x100];

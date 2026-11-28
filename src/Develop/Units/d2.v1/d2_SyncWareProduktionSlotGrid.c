@@ -17,6 +17,7 @@ int __cdecl d2_GetControlValue(int);
 int __cdecl CountDisplayCounters(void);
 
 /* ADDRESS: GOLDTL 0x00595e20 */
+/* ADDRESS: GOLDDE 0x0057b8e0 */
 int __cdecl d2_SyncWareProduktionSlotGrid(char* building, char* a1)
 {
 	unsigned int tbl1[36];

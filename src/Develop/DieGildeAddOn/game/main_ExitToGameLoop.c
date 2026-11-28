@@ -4,6 +4,7 @@ void __cdecl main_ExitToFrameHandler(void* fn);
 int __cdecl main_RunGameLoop(void);
 
 /* ADDRESS: GOLDTL 0x004b5b20 */
+/* ADDRESS: GOLDDE 0x004a3db0 */
 void __cdecl main_ExitToGameLoop(void* fn)
 {
 	g_774954 = 1;

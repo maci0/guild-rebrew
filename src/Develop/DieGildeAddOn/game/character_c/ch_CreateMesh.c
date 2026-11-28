@@ -71,6 +71,7 @@ void __cdecl d3_PreloadLowPolyAnims(char*, int, ...);
 
 #undef ch_UNIVERSE_STRIDE
 /* ADDRESS: GOLDTL 0x00403880 */
+/* ADDRESS: GOLDDE 0x00402db0 */
 int __cdecl ch_CreateMesh(char* model, char* resource, float* position)
 {
     float rotation[4];

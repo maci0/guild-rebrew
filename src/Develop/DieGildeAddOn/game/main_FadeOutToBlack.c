@@ -14,6 +14,7 @@ void __cdecl d2_ClearBackdropResource(void);
 void __cdecl d2_ClearSurface(int);
 void __cdecl d2_ReleaseOverlaySprite(unsigned char*);
 
+/* ADDRESS: GOLDDE 0x00526230 */
 void __cdecl main_FadeOutToBlack(void)
 {
 	int flags;

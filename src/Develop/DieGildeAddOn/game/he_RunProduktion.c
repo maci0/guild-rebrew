@@ -42,6 +42,7 @@ void __cdecl he_AssignActionSlot(char* objekt, int a, int besitzer, char* ereign
 
 /* Field offsets and names below are inferred from the complete native body.
  * The original event type and its complete allocation remain unresolved. */
+/* ADDRESS: GOLDDE 0x00557820 */
 void __cdecl he_RunProduktion(char* e)
 {
     char* gebaeude;

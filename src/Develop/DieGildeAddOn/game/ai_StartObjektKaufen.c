@@ -7,6 +7,7 @@ int __cdecl gm_GetSeasonTreasury(int a, unsigned char k);
 float __cdecl gm_GetSeasonPrice(int id, unsigned char k);
 
 /* ADDRESS: GOLDTL 0x0049c1c0 */
+/* ADDRESS: GOLDDE 0x0048ac00 */
 int __cdecl ai_StartObjektKaufen(int a1, int a2, int k, char* it, char* out)
 {
 	char* g;

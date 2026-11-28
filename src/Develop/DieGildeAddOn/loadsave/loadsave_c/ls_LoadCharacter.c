@@ -44,6 +44,7 @@ extern int __cdecl init_AllocateGebaeudeSceneSlot(char*);
 /* Laedt die gespeicherten Figurendatensaetze, wandelt gespeicherte
  * Aktions-/Lagerkennungen zurueck in Zeiger und baut die Meshes neu auf. */
 /* ADDRESS: GOLDTL 0x005238c0 */
+/* ADDRESS: GOLDDE 0x0050cb90 */
 unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 {
 	char name[128];

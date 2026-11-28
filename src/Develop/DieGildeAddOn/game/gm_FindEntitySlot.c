@@ -18,6 +18,7 @@ typedef struct
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
+/* ADDRESS: GOLDDE 0x004bc2e0 */
 Slot2c* __cdecl gm_FindEntitySlot(char* entity)
 {
 	int n;

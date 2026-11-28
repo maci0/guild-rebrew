@@ -14,6 +14,7 @@ void __cdecl d2_DrawWordWrappedText(int, int, int, int, int, char*, int);
 void __cdecl d3_TraverseSceneObjects(int, int, int, void*);
 void __cdecl d3_DrawBuildingUpgradeLabel(void);
 
+/* ADDRESS: GOLDDE 0x0051b280 */
 void __cdecl d2_DrawBuildingUpgradeLabels(void)
 {
 	int r[4];

@@ -13,6 +13,7 @@ void* __cdecl m_PoolAlloc(void*, int, int);
 void __cdecl m_pool_free(void*, void*);
 char __cdecl d3_CollectActiveMeshObjects(char*, char*);
 
+/* ADDRESS: GOLDDE 0x00449ee0 */
 char* __cdecl d3_CollectObjectsInBounds(char* src, float* lo, float* hi)
 {
 	char* ctx;

@@ -13,6 +13,7 @@ void __cdecl ahm_ClearDrawSlot(int a1);
 void __cdecl cm_RequestMoveCredits(int a1, int a2, char a3, int a4);
 
 /* ADDRESS: GOLDTL 0x00584f00 */
+/* ADDRESS: GOLDDE 0x0056abc0 */
 int __cdecl d2_DispatchAlchemyOrder(int building, char* order, int cost)
 {
     char buf[0x200];

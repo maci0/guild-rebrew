@@ -11,6 +11,7 @@ int __cdecl cm_SendSetHE(int, char*);
 void __cdecl he_ApplyBuildingAura(char*, int, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x00560bb0 */
 void __cdecl he_RunAction0x90(char* o)
 {
 	pos14_7f4c00* p;

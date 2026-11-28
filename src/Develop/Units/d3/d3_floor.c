@@ -1,6 +1,7 @@
 #include "d3_floor.h"
 
 /* Native expects valid coordinates and distinct low-byte region values. */
+/* ADDRESS: GOLDDE 0x00434c20 */
 void __cdecl d3_FillWaterRegion(unsigned char* regionen, int breite,
     int x, int y, int alte_region, int neue_region)
 {

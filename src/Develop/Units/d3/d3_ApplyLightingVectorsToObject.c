@@ -1,5 +1,6 @@
 extern int g_7e4530;
 /* ADDRESS: GOLDTL 0x0052a320 */
+/* ADDRESS: GOLDDE 0x00513530 */
 char __cdecl d3_ApplyLightingVectorsToObject(char* e)
 {
 	char* base;

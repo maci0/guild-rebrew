@@ -13,6 +13,7 @@ typedef struct {
 
 
 
+/* ADDRESS: GOLDDE 0x0042e970 */
 float __cdecl d3_GetMaxVertexDistance(V4353b0* v, int n)
 {
 	float best;

@@ -26,6 +26,7 @@ void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl gm_AddTime(int*, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00555510 */
+/* ADDRESS: GOLDDE 0x0053b8c0 */
 void __cdecl gm_SimulateWirtshaus(char* action)
 {
 	struct {

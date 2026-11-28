@@ -5,6 +5,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 
 /* ADDRESS: GOLDTL 0x0055afb0 */
+/* ADDRESS: GOLDDE 0x00541260 */
 void __cdecl he_InitTitleAward(char* o)
 {
 	*(pos14_7f4c00*) (o + 0x52) = gm_GameTime;

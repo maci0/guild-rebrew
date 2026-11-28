@@ -10,6 +10,7 @@ unsigned short* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl he_AssignActionSlot(int, int, int, char*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x005463b0 */
 void __cdecl he_StartKraeuter(char* o)
 {
 	int any;

@@ -28,6 +28,7 @@ Def* __cdecl gm_LookupSpecialObject(int id);
 int __cdecl gm_HasActiveSpecialObject(char* e, int id);
 
 /* ADDRESS: GOLDTL 0x004a51d0 */
+/* ADDRESS: GOLDDE 0x00493bd0 */
 void __cdecl gm_CheckEntityObjectSlots(char* entity, int slotCount, Slot* slots, Counts* counts)
 {
 	char* it;

@@ -18,6 +18,7 @@ typedef struct {
 int __cdecl cm_EnqueueClientPacket(msg9c*);
 
 /* ADDRESS: GOLDTL 0x004ce210 */
+/* ADDRESS: GOLDDE 0x004bb9b0 */
 int __cdecl lb_RequestToggleReady(int a1)
 {
 	info8 info;

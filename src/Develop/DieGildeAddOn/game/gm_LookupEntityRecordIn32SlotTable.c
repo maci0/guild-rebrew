@@ -28,6 +28,7 @@ extern char gm_SmallEntityTable[];
 #endif
 
 /* ADDRESS: GOLDTL 0x004cef30 */
+/* ADDRESS: GOLDDE 0x004bc490 */
 int __cdecl gm_LookupEntityRecordIn32SlotTable(int search_id)
 {
 	char* base_cursor;

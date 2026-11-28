@@ -19,6 +19,7 @@ int __cdecl gm_CheckEntityType(char*);
 char* __cdecl gm_FindBuildingPrimarySlot(char*);
 char* __cdecl gm_QueryEntities(int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x0054d070 */
 int __cdecl he_GetEntityReturnTarget(char* h, int* out1, int* out2)
 {
 	int id;

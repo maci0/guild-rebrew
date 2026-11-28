@@ -9,6 +9,7 @@ float __cdecl gm_CalcSkillDuelScore(char* a, char* b, int c);
 double __cdecl gm_RandomFloat01(void);
 
 /* ADDRESS: GOLDTL 0x0049c880 */
+/* ADDRESS: GOLDDE 0x0048b2c0 */
 int __cdecl ai_StartDrohen(int a0, unsigned short* a1, int a2, int* a3, int* a4)
 {
 	int v7[6];

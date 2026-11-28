@@ -7,6 +7,7 @@ void __cdecl d3_MarkSceneObjectForQuadtree(void);
 void __cdecl d3_FreeQuadtreeNode(int);
 int __cdecl d3_BuildSceneQuadtree(int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x004ffa30 */
 void __cdecl d3_RebuildSceneQuadtree(void)
 {
 	if (g_773dd8) {

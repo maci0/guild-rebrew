@@ -12,6 +12,7 @@ char* __cdecl fcn_0064f026(char* s, const char* delim);
 int __cdecl atoi(const char* s);
 
 /* ADDRESS: GOLDTL 0x0044d500 */
+/* ADDRESS: GOLDDE 0x00443290 */
 void __cdecl d3_ParseMeshMaterialRef(int unused, char* ctx)
 {
 	char* tok;

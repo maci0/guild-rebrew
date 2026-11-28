@@ -9,6 +9,7 @@ struct BUILDING_OWNERSHIP_SUMMARY {
 
 
 /* ADDRESS: GOLDTL 0x004b4c60 */
+/* ADDRESS: GOLDDE 0x004a2f50 */
 int __cdecl gm_HasBuildingGroupMonopoly(int unused_id, char* thr)
 {
 	struct BUILDING_OWNERSHIP_SUMMARY s;

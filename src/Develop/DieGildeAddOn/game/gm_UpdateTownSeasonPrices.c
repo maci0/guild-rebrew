@@ -67,6 +67,7 @@ int __cdecl gm_CalcTownSlotProductionSupply(int, int);
 float __cdecl gm_CalcMarketSlotPrice(int, int);
 
 /* ADDRESS: GOLDTL 0x005020e0 */
+/* ADDRESS: GOLDDE 0x004ed720 */
 void __cdecl gm_UpdateTownSeasonPrices(int townRow, char* timeSource)
 {
 	Stamp stamp;

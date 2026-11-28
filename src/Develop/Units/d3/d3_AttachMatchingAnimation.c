@@ -5,6 +5,7 @@
 char* __cdecl StripPathAndExt(char* path);
 
 /* ADDRESS: GOLDTL 0x0040f1c0 */
+/* ADDRESS: GOLDDE 0x0040dfc0 */
 char __cdecl d3_AttachMatchingAnimation(char* a0, char* a1)
 {
 	D3_ANIMATION_OPTIONS options;

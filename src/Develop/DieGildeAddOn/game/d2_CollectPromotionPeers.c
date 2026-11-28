@@ -1,8 +1,11 @@
+extern char gm_EntitySlotTable[];
+extern char g_85a0a0[];
 int __cdecl amt_ListPromotionOffices(unsigned char* a1, int max, int* out);
 int __cdecl d2_BuildPersonStatusDesc(void* sel);
 int __cdecl gm_MatchesTargetFilter(unsigned short a, unsigned short b, int c, int d);
 
 /* ADDRESS: GOLDTL 0x005cc100 */
+/* ADDRESS: GOLDDE 0x005adb90 */
 int __cdecl d2_CollectPromotionPeers(char* entity, unsigned int capacity, char* results, int query)
 {
 	int n;
@@ -21,7 +24,7 @@ int __cdecl d2_CollectPromotionPeers(char* entity, unsigned int capacity, char* 
 		return 0;
 	}
 	if (capacity == 0) {
-		ent = (char*) 0x7f4e08;
+		ent = (char*) ((int) &gm_EntitySlotTable + 0x168);
 		do {
 			if (*ent != 0) {
 				i = 0;
@@ -36,7 +39,7 @@ int __cdecl d2_CollectPromotionPeers(char* entity, unsigned int capacity, char* 
 				}
 			}
 			ent += 0x21c;
-		} while ((int) ent < 0x85a208);
+		} while ((int) ent < ((int) &g_85a0a0 + 0x168));
 		return count;
 	}
 	i = 0;
@@ -46,7 +49,7 @@ int __cdecl d2_CollectPromotionPeers(char* entity, unsigned int capacity, char* 
 				break;
 			}
 			out = results + count * 0x38;
-			ent = (char*) 0x7f4ca0;
+			ent = (char*) &gm_EntitySlotTable;
 			do {
 				if (ids[i] == (int) (unsigned char) ent[0x168]) {
 					*(char**) out = ent;
@@ -61,7 +64,7 @@ int __cdecl d2_CollectPromotionPeers(char* entity, unsigned int capacity, char* 
 					}
 				}
 				ent += 0x21c;
-			} while ((int) ent < 0x85a0a0);
+			} while ((int) ent < (int) &g_85a0a0);
 			i++;
 		} while (i < n);
 	}

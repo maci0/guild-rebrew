@@ -23,6 +23,7 @@ int __cdecl cut_WaitForScriptOrInput(int, void*, int*);
 int __cdecl cut_ReleaseSceneContexts(int*);
 
 /* ADDRESS: GOLDTL 0x004e2090 */
+/* ADDRESS: GOLDDE 0x004ceaa0 */
 void __cdecl cut_PlayHochzeitCutscene(int event)
 {
 	unsigned short* entity1;

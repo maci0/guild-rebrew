@@ -13,6 +13,7 @@ int __cdecl m_is_tracked(void* object);
 unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, unsigned int handle);
 
 /* ADDRESS: GOLDTL 0x0051ffc0 */
+/* ADDRESS: GOLDDE 0x00509290 */
 int __cdecl ls_SaveFiguresAndAnimQueue(unsigned int handle)
 {
 	CH_QUEUE_SLOT rec;

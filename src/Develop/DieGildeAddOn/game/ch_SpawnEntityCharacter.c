@@ -13,6 +13,7 @@ void __cdecl d3_UpdateEntityTextureVariant(char*);
 void __cdecl ch_AssignHeadIcon(char*);
 
 /* ADDRESS: GOLDTL 0x004fe2e0 */
+/* ADDRESS: GOLDDE 0x004e9d60 */
 int __cdecl ch_SpawnEntityCharacter(char* entity, int sceneCtx, int* posPtr, int* rotPtr, int parentObj, int* dummyName)
 {
 	int savedContext;

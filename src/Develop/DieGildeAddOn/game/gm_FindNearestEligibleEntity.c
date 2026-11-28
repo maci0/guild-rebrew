@@ -7,6 +7,7 @@ int __cdecl gm_CheckEntityType(unsigned char* geb);
 int __cdecl gm_IsWarehouse(unsigned char* geb);
 
 /* ADDRESS: GOLDTL 0x00504db0 */
+/* ADDRESS: GOLDDE 0x004f0130 */
 unsigned char* __cdecl gm_FindNearestEligibleEntity(unsigned char* self, int kind)
 {
 	float best;

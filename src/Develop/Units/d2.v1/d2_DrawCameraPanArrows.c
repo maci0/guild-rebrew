@@ -1,3 +1,4 @@
+extern char g_664ef0[];
 /* Draws the four direction arrows of the camera pad: each mode is 1 or 2
  * depending on whether the camera vector already sits at its limit. */
 
@@ -103,6 +104,7 @@ void __cdecl d2_DrawCameraPanArrows(void)
 }
 #else
 /* ADDRESS: GOLDTL 0x004d03e0 */
+/* ADDRESS: GOLDDE 0x004bd6d0 */
 void __cdecl d2_DrawCameraPanArrows(void)
 {
     int res;
@@ -146,10 +148,10 @@ void __cdecl d2_DrawCameraPanArrows(void)
     }
     d2_SetClipRect(0, 0, *(int*) (d2_ScreenSurface + 4), *(int*) (d2_ScreenSurface + 8));
     if (up == 2)
-        d2_DrawSpriteFromSet(g_1040494 / 2 - 0x14, (int) (d2_UiScale * *(float*) 0x664ef0 - g_66293c),
+        d2_DrawSpriteFromSet(g_1040494 / 2 - 0x14, (int) (d2_UiScale * *(float*) &g_664ef0 - g_66293c),
                      d2_ScreenSurface, res, 0);
     else if (up == 1)
-        d2_DrawSpriteFromSet(g_1040494 / 2 - 0x14, (int) (d2_UiScale * *(float*) 0x664ef0 - g_66293c),
+        d2_DrawSpriteFromSet(g_1040494 / 2 - 0x14, (int) (d2_UiScale * *(float*) &g_664ef0 - g_66293c),
                      d2_ScreenSurface, res, 1);
     if (left == 2)
         d2_DrawSpriteFromSet(8, d2_ScreenHeight / 2 + 0x14, d2_ScreenSurface, res, 2);

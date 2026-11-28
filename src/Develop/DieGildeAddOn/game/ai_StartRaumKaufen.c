@@ -13,6 +13,7 @@ struct unit* __cdecl he_StartHandlungSearch(int, ...);
 struct unit* __cdecl he_fn_Handlung(void);
 
 /* ADDRESS: GOLDTL 0x004974e0 */
+/* ADDRESS: GOLDDE 0x00485f60 */
 int __cdecl ai_StartRaumKaufen(int unused, char* entity, int mode, char* itemReq, char* bldReq)
 {
 	char* building;

@@ -24,6 +24,7 @@ void __cdecl cm_InitCommandQueuePool(void);
 /* The inventory entry also holds two more functions:
  * 0x538220 (47 bytes) and the window procedure at 0x538250. */
 /* ADDRESS: GOLDTL 0x005381a0 */
+/* ADDRESS: GOLDDE 0x0051fa70 */
 void __cdecl main_ShutdownGameModules(void)
 {
 	io_SaveIniSettings();

@@ -1,6 +1,7 @@
 int __cdecl ai_ComputeBaseActionScore(float* o1, float* o2, int a3, char* e, int a5, int a6, int a7);
 
 /* ADDRESS: GOLDTL 0x00496dc0 */
+/* ADDRESS: GOLDDE 0x00485860 */
 int __cdecl ai_ScoreAmtsbewerbung(float* o1, float* o2, int actionIdx, char* entity, int skip, int extraA, int extraB)
 {
 	float scale;

@@ -26,6 +26,7 @@ void __cdecl d2_StartThievesGuildSpyPicker(int);
 void __cdecl d2_RunDiebesgildeInfoDialog(int);
 void __cdecl d2_OpenTransportPanel(int);
 
+/* ADDRESS: GOLDDE 0x005948a0 */
 void __cdecl d2_RunRazziaWacheMenu(int building)
 {
 	int a;

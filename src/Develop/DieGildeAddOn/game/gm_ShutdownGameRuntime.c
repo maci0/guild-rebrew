@@ -1,3 +1,4 @@
+extern char g_14d0020[];
 /* Global shutdown of the game runtime. */
 
 extern int str_empty;
@@ -57,6 +58,7 @@ void __cdecl nt_CloseClientConnection(void);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
 
 /* ADDRESS: GOLDTL 0x0053fa80 */
+/* ADDRESS: GOLDDE 0x00526590 */
 void __cdecl gm_ShutdownGameRuntime(void)
 {
     register int _dummy_reg_88 = 0;
@@ -101,7 +103,7 @@ void __cdecl gm_ShutdownGameRuntime(void)
 	gm_KillAllSpieler();
 	gm_ResetAllEntities();
 	gm_CleanupObjectEntities();
-	for (entry = (int*) 0x14d0020; (int) entry < 0x14d0c20; entry++) {
+	for (entry = (int*) &g_14d0020; (int) entry < ((int) &g_14d0020 + 0xc00); entry++) {
 		if (*entry != 0) {
 			ch_DestroyCharacter(*entry);
 		}
@@ -116,7 +118,7 @@ void __cdecl gm_ShutdownGameRuntime(void)
 	}
 	if (g_6b89c0 != 0) {
 		int ctx = g_6b89c0;
-		for (entry = (int*) 0x7e4540; (int) entry < 0x7e4558; entry++) {
+		for (entry = (int*) ((int) &d3_SnowEffect + 0x4); (int) entry < ((int) &d3_SnowEffect + 0x1c); entry++) {
 			if (*entry != 0) {
 				d3_RemoveSkyLayer(ctx, *entry);
 				ctx = g_6b89c0;

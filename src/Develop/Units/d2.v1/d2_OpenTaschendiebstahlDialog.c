@@ -63,6 +63,7 @@ void __cdecl he_AssignActionSlot(int, int, int, char*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x00592850 */
 int __cdecl d2_OpenTaschendiebstahlDialog(int unused, char* e)
 {
 	int r;

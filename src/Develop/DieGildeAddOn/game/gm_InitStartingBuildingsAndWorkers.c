@@ -42,6 +42,7 @@ void __cdecl cm_SendSetGebBesitzer(int, int, int);
 int __cdecl cm_RequestAssignWorker(Player*, int, int, int);
 int __cdecl cm_SendSellObjekt(int, int, int, int, char, int);
 
+/* ADDRESS: GOLDDE 0x004ffe60 */
 void __cdecl gm_InitStartingBuildingsAndWorkers(void)
 {
 	int i;

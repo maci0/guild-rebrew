@@ -6,6 +6,7 @@ extern char g_68bda0[];
 
 int __cdecl fcn_0064f170(char*, char*, int);
 
+/* ADDRESS: GOLDDE 0x004c08a0 */
 char __cdecl d3_CollectEnemyWareNode(char* node, char* entity)
 {
 	unsigned short* w;

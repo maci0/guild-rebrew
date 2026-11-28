@@ -3,6 +3,7 @@ void __cdecl d2_SetQuadVertexColor(int, unsigned char, unsigned char, unsigned c
 
 
 /* ADDRESS: GOLDTL 0x0047cc80 */
+/* ADDRESS: GOLDDE 0x0046bc50 */
 int __cdecl d2_DrawScaledSpriteQuad(int x, int y, int surf, void* shapeBank, int idx, float scale, int tint)
 {
 	int result;

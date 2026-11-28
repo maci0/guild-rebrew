@@ -12,6 +12,7 @@ void __cdecl sb_SetVoicePan(void*, int);
 /* Pans a sound source by the angle between the camera's forward axis and
  * the direction to the emitting object. */
 /* ADDRESS: GOLDTL 0x00418fb0 */
+/* ADDRESS: GOLDDE 0x00416cf0 */
 void __cdecl d3_UpdateSoundSourcePan(char* src)
 {
 	float pos[4];

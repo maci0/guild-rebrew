@@ -6,6 +6,7 @@ extern D2_RADIO_SLOT d2_RadioSlots[8];
 
 /* ADDRESS: GOLD 0x004bf3e0 */
 /* ADDRESS: GOLDTL 0x004bfc40 */
+/* ADDRESS: GOLDDE 0x004ad7c0 */
 int __cdecl d2_FindRadioSlotByValue(int a)
 {
 	int i;

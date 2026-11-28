@@ -37,6 +37,7 @@ void __cdecl d3_UpdateBuildingView(unsigned char*, unsigned int);
 void __cdecl d3_InitUniverse(char);
 
 /* ADDRESS: GOLDTL 0x004e4180 */
+/* ADDRESS: GOLDDE 0x004d0b90 */
 void __cdecl he_RunSalonEvent(char* event)
 {
 	int* m;
@@ -69,6 +70,7 @@ void __cdecl he_RunSalonEvent(char* event)
 }
 
 /* ADDRESS: GOLDTL 0x004e4230 */
+/* ADDRESS: GOLDDE 0x004d0c40 */
 void __cdecl cut_SwitchEntityScene(unsigned char* entity, unsigned int sceneId)
 {
 	int flags;

@@ -5,6 +5,7 @@ extern char* evt_CurrentScript;
 char* __cdecl evt_LoadGfxScript(int);
 void __cdecl evt_RunScript(char*);
 
+/* ADDRESS: GOLDDE 0x0040b2e0 */
 char* __cdecl RunScript(int* scriptName)
 {
 	char* p;

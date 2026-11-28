@@ -1,5 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x005338a0 */
+/* ADDRESS: GOLDDE 0x0051c190 */
 void __cdecl d2_ClearStatusTextSlots(void)
 {
 	int a;

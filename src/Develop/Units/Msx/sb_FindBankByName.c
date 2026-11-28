@@ -4,6 +4,7 @@ extern int* sb_BankListHead;
 
 int __cdecl _strnicmp(int, int, int);
 
+/* ADDRESS: GOLDDE 0x0041f580 */
 int* __cdecl sb_FindBankByName(int key)
 {
 	int* node;

@@ -2,6 +2,7 @@
 
 typedef int (__stdcall* fcn_0047c450_f)(void*, int, int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x0046b440 */
 int __cdecl d2_CreateQuadVertexBuffer(void)
 {
 	void* obj;

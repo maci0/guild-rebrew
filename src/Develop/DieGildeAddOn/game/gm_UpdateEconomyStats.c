@@ -6,6 +6,7 @@ void __cdecl cm_RequestUpdateEconomyStats(void*);
 void* __cdecl memcpy(void* dst, const void* src, unsigned int n);
 
 /* ADDRESS: GOLDTL 0x004fb390 */
+/* ADDRESS: GOLDDE 0x004e70a0 */
 void __cdecl gm_UpdateEconomyStats(void)
 {
 	int buf[0x19];

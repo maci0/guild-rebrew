@@ -26,6 +26,7 @@ int __cdecl fcn_0064d41a(char* buf, char* fmt, ...);
  * entries of the 0x508-stride table, WM_COMMAND rebuilds the selected row,
  * WM_CLOSE saves the chosen columns. Native extent 0x41adc0..0x41b1b4. */
 /* ADDRESS: GOLDTL 0x0041adc0 */
+/* ADDRESS: GOLDDE 0x00418b00 */
 int __stdcall d3_DisplaySetupDlgProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 {
 	unsigned int i;

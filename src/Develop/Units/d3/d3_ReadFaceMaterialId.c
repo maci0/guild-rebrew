@@ -18,6 +18,7 @@ int __cdecl fcn_004011f0(void* stream, void* dst);
 char* __cdecl vfs_ReadByte(void* stream, void* dst);
 
 /* ADDRESS: GOLDTL 0x0044de70 */
+/* ADDRESS: GOLDDE 0x00443bb0 */
 void __cdecl d3_ReadFaceMaterialId(void* stream, D3_MESH_STREAM_CTX* c)
 {
 	unsigned char b;

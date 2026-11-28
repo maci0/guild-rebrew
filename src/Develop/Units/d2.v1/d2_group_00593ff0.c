@@ -124,6 +124,7 @@ int __cdecl d2_ChooseProfession(int a1)
 }
 
 /* ADDRESS: GOLDTL 0x005941e0 */
+/* ADDRESS: GOLDDE 0x00579ca0 */
 void __cdecl d2_RefreshNetLobbyChatLog(void)
 {
 	char buf[0x160];

@@ -38,6 +38,7 @@ void __cdecl d2_ShowKircheTop5(void);
 /* Church indulgence ("Ablass") dialog: offers the indulgence for the current
  * player and, once bought, continues with the results screen. */
 /* ADDRESS: GOLDTL 0x005ab3e0 */
+/* ADDRESS: GOLDDE 0x0058fef0 */
 void __cdecl d2_RunAblassDialog(char* churchBuilding)
 {
 	char text[0x200];

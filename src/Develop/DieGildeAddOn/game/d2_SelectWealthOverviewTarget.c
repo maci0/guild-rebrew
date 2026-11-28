@@ -20,6 +20,7 @@ void __cdecl d2_OpenTargetPicker(Query*, char*, int, void*);
 void __cdecl d2_ShowWealthOverviewDialog(void);
 void __cdecl d3_EndCameraAndUiMode(void);
 
+/* ADDRESS: GOLDDE 0x0058bea0 */
 void __cdecl d2_SelectWealthOverviewTarget(void)
 {
 	Query q;

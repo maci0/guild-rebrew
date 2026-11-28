@@ -14,12 +14,13 @@ void __cdecl d3s_FreeCache(void);
 void __cdecl gv_Free3Fields(int* slot);
 
 /* ADDRESS: GOLDTL 0x00456cf0 */
+/* ADDRESS: GOLDDE 0x0044c4b0 */
 void __cdecl d3s_ReleaseCache(void)
 {
 	int a;
 	void* o;
 
-	for (a = 0x1040610; a <= 0x1040618; a += 4) {
+	for (a = ((int) &g_10405fc + 0x14); a <= ((int) &g_10405fc + 0x1c); a += 4) {
 		o = *(void**) a;
 		if (o != 0) {
 			(*(int*)&d3_LastReleaseRefCount) = (*(D3S_CACHE_VTBL**) o)->Release(o);

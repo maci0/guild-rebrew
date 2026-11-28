@@ -41,6 +41,7 @@ void __cdecl d3_FreeObjectAnimation(char* cam);
 void __cdecl d3_AnimateObjectTransform(char* cam, float* a, float* b, int d, int e);
 
 /* ADDRESS: GOLDTL 0x0052cbb0 */
+/* ADDRESS: GOLDDE 0x005158d0 */
 void __cdecl d3_FocusCameraOnEntity(Ent* entity)
 {
 	float n;

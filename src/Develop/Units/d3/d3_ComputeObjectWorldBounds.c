@@ -6,6 +6,7 @@ void __cdecl d3_UpdateObjectCameraTransform(char* obj, char* cam, char force);
 int __cdecl d3_ExpandObjectWorldBounds(void);
 
 /* ADDRESS: GOLDTL 0x00414960 */
+/* ADDRESS: GOLDDE 0x00412f10 */
 void __cdecl d3_ComputeObjectWorldBounds(float* minBounds, float* maxBounds, char* obj)
 {
 	float* p;

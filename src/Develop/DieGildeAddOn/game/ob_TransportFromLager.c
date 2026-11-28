@@ -1,3 +1,7 @@
+extern char g_68aed0[];
+extern char g_7796e0[];
+extern char g_664ef8[];
+extern char g_778da0[];
 /*
  * Move the selected goods from the warehouse for every stock slot that covers
  * the requested amount, refresh the slot display and report the remainder.
@@ -33,6 +37,7 @@ void __cdecl d2_ShowStatusBanner(char*);
 void __cdecl sb_PlayVoice(int, char*, int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x005ba0e0 */
+/* ADDRESS: GOLDDE 0x0059c8e0 */
 int __cdecl ob_TransportFromLager(int a0, char* a1, char* a2, int a3, int a4,
                                   float a5, int a6, int a7)
 {
@@ -51,7 +56,7 @@ int __cdecl ob_TransportFromLager(int a0, char* a1, char* a2, int a3, int a4,
 	if (!a4) {
 		query = (int)gm_QueryEntities(0, 2, 7, 1, a0);
 		if (!query) {
-			ReportClientMessage((const char*)0x6ac37c);
+			ReportClientMessage("ob_TransportFromLager(): Could not find lager by id...");
 			return 0;
 		}
 	}
@@ -62,7 +67,7 @@ int __cdecl ob_TransportFromLager(int a0, char* a1, char* a2, int a3, int a4,
 		float countf;
 		float prod;
 		float scale;
-	stockSlot = (int*)0x7796e0;
+	stockSlot = (int*) &g_7796e0;
 	do {
 		if (stockSlot[4] != -1 && d2_GetControlValue(stockSlot[4])) {
 			count = d2_GetControlValue(stockSlot[4]);
@@ -76,7 +81,7 @@ int __cdecl ob_TransportFromLager(int a0, char* a1, char* a2, int a3, int a4,
 			if (count > 0) {
 				if (a3) {
 					if (*type == '\n') {
-						unitPrice = gm_GetSeasonPrice(*stockSlot, a6) * *(double*)0x664ef8;
+						unitPrice = gm_GetSeasonPrice(*stockSlot, a6) * *(double*) &g_664ef8;
 					} else {
 						unitPrice = gm_GetSeasonPrice(*stockSlot, a6) * *(float*)(a2 + 0x49);
 					}
@@ -125,7 +130,7 @@ int __cdecl ob_TransportFromLager(int a0, char* a1, char* a2, int a3, int a4,
 					if (unitPrice != flt_0_0 && a5 != dbl_1_0) {
 						io_FormatTextBuffer(buf, 0xec, (int)(prod * a5 - prod));
 						d2_ShowStatusBanner(buf);
-						sb_PlayVoice(0, (char*)0x68aed0, 1, 0x3f, 0x7f, 0, 0);
+						sb_PlayVoice(0, (char*) &g_68aed0, 1, 0x3f, 0x7f, 0, 0);
 					}
 					d2_SetElementValue(stockSlot[4], 0, stockSlot[0xc],
 					                   d2_GetControlValue(stockSlot[4]) - count, 0);
@@ -134,8 +139,8 @@ int __cdecl ob_TransportFromLager(int a0, char* a1, char* a2, int a3, int a4,
 		}
 next:
 		stockSlot += 0xe;
-	} while ((int)stockSlot < 0x7798a0);
-	stockSlot = (int*)0x778da0;
+	} while ((int)stockSlot < ((int) &g_7796e0 + 0x1c0));
+	stockSlot = (int*) &g_778da0;
 	do {
 		if (stockSlot[4] != -1 && d2_GetControlValue(stockSlot[4])) {
 			count = d2_GetControlValue(stockSlot[4]);
@@ -189,7 +194,7 @@ next:
 					if (unitPrice != flt_0_0 && a5 != dbl_1_0) {
 						io_FormatTextBuffer(buf, 0xec, (int)(prod * a5 - prod));
 						d2_ShowStatusBanner(buf);
-						sb_PlayVoice(0, (char*)0x68aed0, 1, 0x3f, 0x7f, 0, 0);
+						sb_PlayVoice(0, (char*) &g_68aed0, 1, 0x3f, 0x7f, 0, 0);
 					}
 					d2_SetElementValue(stockSlot[4], 0, stockSlot[0xc],
 					                   d2_GetControlValue(stockSlot[4]) - count, 0);
@@ -198,7 +203,7 @@ next:
 		}
 next2:
 		stockSlot += 0xe;
-	} while ((int)stockSlot < 0x779120);
+	} while ((int)stockSlot < ((int) &g_778da0 + 0x380));
 	}
 	cm_EndCommandSync();
 	while (!cm_AreQueuedCommandsDone()) {

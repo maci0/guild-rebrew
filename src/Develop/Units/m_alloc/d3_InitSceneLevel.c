@@ -67,6 +67,7 @@ void __cdecl d3_SetObjectRotation(Ent*, Vec3*);
 
 
 /* ADDRESS: GOLDTL 0x00443030 */
+/* ADDRESS: GOLDDE 0x0043b480 */
 char __cdecl d3_InitSceneLevel(Level* lv)
 {
 	Ent* e;

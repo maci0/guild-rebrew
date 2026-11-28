@@ -40,6 +40,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 void __cdecl d2_ShowUseObjDialog(char*);
 
+/* ADDRESS: GOLDDE 0x005bfbd0 */
 int __cdecl gm_ObjDisruptTargetRivals(ENTITY_RECORD* obj, int* arg)
 {
 	ENTITY_RECORD* picks[3];

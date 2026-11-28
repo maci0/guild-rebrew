@@ -30,6 +30,7 @@ void __cdecl cm_RequestModifyHealth(int a1, int a2);
 int __cdecl cm_SendSetHE(int a1, char* e);
 
 /* ADDRESS: GOLDTL 0x0054ee10 */
+/* ADDRESS: GOLDDE 0x005352b0 */
 void __cdecl he_StartDuellChallenge(char* t)
 {
 	int impactValue;

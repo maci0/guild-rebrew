@@ -40,6 +40,7 @@ void __cdecl d2_UpdateFloatingStatTexts(void);
 /* Ages the effect timers of the 32 tracked records, then drives their
    proximity/visibility states against the current selection. */
 /* ADDRESS: GOLDTL 0x004d0070 */
+/* ADDRESS: GOLDDE 0x004bd360 */
 void __cdecl cut_UpdateCombatEffects(void)
 {
 	V43a3f0 c;

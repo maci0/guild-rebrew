@@ -2,6 +2,7 @@
 int __cdecl msx_FindSampleHandleIndex(int a);
 
 /* ADDRESS: GOLDTL 0x0042a850 */
+/* ADDRESS: GOLDDE 0x00425050 */
 int __cdecl msx_ResumeSample(int a)
 {
     int r = 0;

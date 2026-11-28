@@ -1,3 +1,4 @@
+void __cdecl d3_SetObjectColorCallback();
 extern char d3_ActiveScene[];
 
 int __cdecl d3_VisitSceneObjectsUntilStopped(int, int, int, int, int);
@@ -13,11 +14,12 @@ void __cdecl d3_VisitObjectAttachments(int a, int b)
 }
 #else
 /* ADDRESS: GOLDTL 0x0043a5a0 */
+/* ADDRESS: GOLDDE 0x004334b0 */
 void __cdecl d3_VisitObjectAttachments(int a1, int a2)
 {
 	if (a1 == 0) {
 		return;
 	}
-	d3_VisitSceneObjects(*(int*) &d3_ActiveScene, a1, 0x240, 0x43a540, a2);
+	d3_VisitSceneObjects(*(int*) &d3_ActiveScene, a1, 0x240, (int) d3_SetObjectColorCallback, a2);
 }
 #endif
