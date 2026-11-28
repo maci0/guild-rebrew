@@ -25,7 +25,7 @@ int __cdecl gm_ApplyWealthPercentDebit(void* noticeRequest)
 	}
 	v = gm_RandomMod(2);
 	d = (double) v + *(double*) 0x6629c8;
-	n = (int) (((double) gm_WalkEntityChain(*(unsigned short*) entity) * d) *
+	n = (int) (((double) gm_CalcPersonWealth(*(unsigned short*) entity) * d) *
 	    *(double*) 0x6640e8);
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) noticeRequest + 4) + 0x12e7, n);
 	cm_RequestTransferCurrencyNoKill(-1, *(int*) noticeRequest, *(char*) 0x773d75, n);

@@ -38,7 +38,7 @@ void __cdecl he_RunMeisterpruefungPrompt(char* u)
 		}
 		switch (*(int*) (u + 0x70)) {
 		case 0:
-			v = (int) (gm_WalkEntityChain(*(unsigned short*) (u + 8)) * g_6652c8);
+			v = (int) (gm_CalcPersonWealth(*(unsigned short*) (u + 8)) * g_6652c8);
 			if (*(char**) (u + 0x74) == 0) {
 				d2_CreateActionPopupSlot(u, 0, 0, g_6a5a10, 0x5ec);
 			}
@@ -57,7 +57,7 @@ void __cdecl he_RunMeisterpruefungPrompt(char* u)
 			}
 			if (d2_DialogButtonAction == 2) {
 				cm_RequestMoveCredits(*(int*) (gm_CityEntity + 4), ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (u + 8)].entity_id, gm_ActiveTownIndex,
-				    (int) (gm_WalkEntityChain(*(unsigned short*) (u + 8)) * g_6652c8));
+				    (int) (gm_CalcPersonWealth(*(unsigned short*) (u + 8)) * g_6652c8));
 				gm_AdjustOfficeHoldersFavor(*(unsigned short*) (u + 8), 8);
 				d2_CloseActionPopup(u);
 				he_FreeAction(u);

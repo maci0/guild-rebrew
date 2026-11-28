@@ -68,8 +68,8 @@ int __cdecl d2_RunPaymentTargetDialog(char* entity)
     text_id = io_AppendText(0x174d, *(unsigned short*)entity, gm_ActiveTownIndex);
     edit = d2_GetWindowListItem(dlg, 1, text_id);
     accept = d2_GetWindowListItem(dlg, 1, text_id + 1);
-    amount = gm_WalkEntityChain(gm_LocalPlayerSlot);
-    amount = (int)(abs(amount + gm_WalkEntityChain(*(unsigned short*)entity)) * 0.0007843137136660516f);
+    amount = gm_CalcPersonWealth(gm_LocalPlayerSlot);
+    amount = (int)(abs(amount + gm_CalcPersonWealth(*(unsigned short*)entity)) * 0.0007843137136660516f);
     command = gm_AccumulateTyped2(((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot]));
     d2_ClampAmountToRange(amount, command, 0x20, &limit);
     d2_SetElementValue(edit, gm_AmountToUnits(amount, gm_ActiveTownIndex),
@@ -98,8 +98,8 @@ int __cdecl d2_RunPaymentTargetDialog(char* entity)
                     cm_RequestMoveCredits(*(int*)(entity + 4), *(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id, gm_ActiveTownIndex, amount);
                     duration = amount * ((*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].flags_1cc & 0x800)
                         ? flt_6 : flt_4) * g_664330;
-                    command = gm_WalkEntityChain(gm_LocalPlayerSlot);
-                    command += gm_WalkEntityChain(*(unsigned short*)entity);
+                    command = gm_CalcPersonWealth(gm_LocalPlayerSlot);
+                    command += gm_CalcPersonWealth(*(unsigned short*)entity);
                     command = (int)(duration / command);
                     command = cm_RequestCopyEntityData(*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_id, *(int*)(entity + 4), command, 1);
                     while (!cm_GetCommandStatus(command))

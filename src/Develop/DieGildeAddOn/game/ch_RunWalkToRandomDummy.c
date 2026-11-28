@@ -8,7 +8,7 @@ int __cdecl d3_GetContextIndex(int);
 void __cdecl d3_SelectSceneContext(int, int);
 char* __cdecl ch_SelectRandomDummy(void);
 void __cdecl d3_TransformPoint(char*, char*, float*);
-char __cdecl d3sm_SampleHeight(char*, float*, int*, int*, float*);
+char __cdecl d3sm_3D2SuperMap(char*, float*, int*, int*, float*);
 
 
 
@@ -40,7 +40,7 @@ void __cdecl ch_RunWalkToRandomDummy(char* ev)
 	door = ch_SelectRandomDummy();
 	if (door != 0 && map != 0) {
 		d3_TransformPoint(door, door + 0x4c, pos);
-		if (d3sm_SampleHeight(map, pos, &col, &row, &height)) {
+		if (d3sm_3D2SuperMap(map, pos, &col, &row, &height)) {
 			walk = ch_InsertAction(*(char**) (ev + 0x14), ev, 0x2d, col, row, room);
 			*(int*) (walk + 0x160) |= 0x10;
 			*(float*) (walk + 0x144) = pos[0];

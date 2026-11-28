@@ -8,7 +8,7 @@ extern float flt_0_0;
 float __cdecl gv_CalcDecayReduction(char* o);
 void __cdecl cm_RequestChangeFloat(int id, int kind, float v);
 
-int __cdecl gv_DecayGravediggerHealth(char* entity)
+int __cdecl gm_DecayServantHealth(char* entity)
 {
 	char* graveyard;
 	float decay;

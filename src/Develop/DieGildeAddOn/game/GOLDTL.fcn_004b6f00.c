@@ -25,7 +25,7 @@ static __inline int RandomMoneyTransfer(void *request, double increment, double 
     }
     n = gm_RandomMod(3) & 0xffff;
     d = (double)n + increment;
-    n = gm_WalkEntityChain(*(short *)entity);
+    n = gm_CalcPersonWealth(*(short *)entity);
     amount = (int)(((double)n * d) * scale);
     io_FormatTextBuffer(buf, *(unsigned short *)((char *)request + 4) + 0x12e7, amount);
     cm_RequestTransferCurrencyNoKill(*(int *)request, -1, gm_ActiveTownIndex, amount);

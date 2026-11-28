@@ -45,19 +45,19 @@ typedef struct {
 
 extern unsigned char* lpGebaeudePROT;
 
-float __cdecl gm_GetWorkforceOutput(unsigned char* p, int k, int a, int b);
+float __cdecl gm_GetTypeWageBase(unsigned char* p, int k, int a, int b);
 
 
 /* Lives in this file because it must see fcn_00507910 above it: msvc6 then
  * knows the callee leaves edx alone and keeps k there across the call. */
 /* ADDRESS: GOLDTL 0x005101e0 */
-float __cdecl gm_GetScaledWorkforceOutput(unsigned char* p, int k, int a, int b)
+float __cdecl gm_GetHireWage(unsigned char* p, int k, int a, int b)
 {
 	int c;
 
 	c = gm_MapBuildingCatToGuildSlot(((BUILDING_PROTOTYPE*)lpGebaeudePROT)[k].category);
 	if (c != 10 && c != 11 && c != 12) {
-		return gm_GetWorkforceOutput(p, k, a, b) * 3.0f;
+		return gm_GetTypeWageBase(p, k, a, b) * 3.0f;
 	}
-	return gm_GetWorkforceOutput(p, k, a, b) * 9.0f;
+	return gm_GetTypeWageBase(p, k, a, b) * 9.0f;
 }

@@ -27,7 +27,7 @@ int __cdecl gm_ApplyEntityPercentDebit(void* request)
 	}
 	n = gm_RandomMod(4) & 0xffff;
 	pct = (double) n + 2.0;
-	n = gm_WalkEntityChain(*(short*) entity);
+	n = gm_CalcPersonWealth(*(short*) entity);
 	amount = (int) (((double) n * pct) * 0.01);
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7,
 	    (gm_RandomMod(6) & 0xffff) + 3, amount);

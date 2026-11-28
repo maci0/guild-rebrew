@@ -5,7 +5,7 @@ extern int gm_GameTime;
 void __cdecl gm_AddTime(char*, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00550480 */
-void __cdecl fcn_00550480(char* p)
+void __cdecl he_StartRaubritter(char* p)
 {
 	char* q;
 

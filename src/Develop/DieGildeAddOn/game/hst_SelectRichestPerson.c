@@ -97,7 +97,7 @@ int __cdecl hst_SelectRichestPerson(int mode, int* pairs, int idx, char* text, v
 	}
 	for (i = 0; i < 768; i++) {
 		if (gm_IsSlotActivePerson((unsigned short) i) != 0 && (n == 0 || (*(unsigned char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].gender) == want)) {
-			v = gm_WalkEntityChain((unsigned short) i);
+			v = gm_CalcPersonWealth((unsigned short) i);
 			if (v > best && hst_IsCandidateUnlisted((*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_id)) != 0) {
 				best = v;
 				r = ((Rec21c*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i]);

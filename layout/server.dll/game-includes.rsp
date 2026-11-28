@@ -63,7 +63,7 @@
 /INCLUDE:_ahm_LookupEntityInTable
 /INCLUDE:_ahm_QueryEntityBuildingType
 /INCLUDE:_ahm_GetCommandPayloadSize
-/INCLUDE:_ahm_ProcessEntityChain
+/INCLUDE:_cm_CheckCommandGroup
 /INCLUDE:_gm_GetFieldByType
 /INCLUDE:_cm_ChkMoveCredits
 /INCLUDE:_cm_ChkSellObjekt
@@ -144,9 +144,9 @@
 /INCLUDE:_AssignProductionSlot
 /INCLUDE:_gv_HireProductionWorker
 /INCLUDE:_gv_ExtendProductionTime
-/INCLUDE:_gv_ReplaceProductionWorker
+/INCLUDE:_gv_SetGraveHolder
 /INCLUDE:_gv_ActivateSection
-/INCLUDE:_gv_UpdateProductionProgress
+/INCLUDE:_gv_UpdateGraveCondition
 /INCLUDE:_gv_ValidateEntityAction
 /INCLUDE:_gv_MoveSlotEntry
 /INCLUDE:_gv_ExAllocGraveyardWorker
@@ -171,7 +171,7 @@
 /INCLUDE:_lb_ExLobbyServerCommand
 /INCLUDE:_plt_FindPlantInfo
 /INCLUDE:_plt_FindRecord
-/INCLUDE:_find_zone_record
+/INCLUDE:_plt_FindCoveringPlant
 /INCLUDE:_plt_CheckZoneAvailability
 /INCLUDE:_plt_SetPlantMap
 /INCLUDE:_plt_TableLookup
@@ -237,7 +237,7 @@
 /INCLUDE:_gm_ResolveParentEntity
 /INCLUDE:_gm_GetEntityType
 /INCLUDE:_gm_EntityAccumulate
-/INCLUDE:_gm_WalkEntityChain
+/INCLUDE:_gm_CalcPersonWealth
 /INCLUDE:_gm_FindEntityByOwner
 /INCLUDE:_gm_GetMsgField
 /INCLUDE:_compute_size

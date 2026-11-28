@@ -22,7 +22,7 @@ typedef struct {
 extern float g_6ad624;
 extern float flt_1_0;
 
-void __cdecl d3sm_SampleHeight(void*, V3*, int*, int*, float*);
+void __cdecl d3sm_3D2SuperMap(void*, V3*, int*, int*, float*);
 
 int __cdecl d3_TraceTerrainSegment(void* map, V3* from, V3* to, int gx, int gy, int* ox, int* oy)
 {
@@ -36,7 +36,7 @@ int __cdecl d3_TraceTerrainSegment(void* map, V3* from, V3* to, int gx, int gy, 
 	int dx;
 	int dy;
 
-	d3sm_SampleHeight(map, to, ox, oy, &h);
+	d3sm_3D2SuperMap(map, to, ox, oy, &h);
 	dx = abs(*ox - gx);
 	dy = abs(*oy - gy);
 	if (dx <= 1 && dy <= 1) {
@@ -60,7 +60,7 @@ int __cdecl d3_TraceTerrainSegment(void* map, V3* from, V3* to, int gx, int gy, 
 		cur.x = d.x + cur.x;
 		cur.y = d.y + cur.y;
 		cur.z = d.z + cur.z;
-		d3sm_SampleHeight(map, (V3*) &cur, &cx, &cy, &h);
+		d3sm_3D2SuperMap(map, (V3*) &cur, &cx, &cy, &h);
 		if (g_6ad624 + h > cur.y) {
 			to->x = cur.x;
 			to->y = cur.y;

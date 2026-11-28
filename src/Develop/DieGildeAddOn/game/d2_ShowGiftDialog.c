@@ -1,4 +1,4 @@
-int __cdecl gm_WalkEntityChain(int);
+int __cdecl gm_CalcPersonWealth(int);
 int __cdecl gm_AccumulateTyped2(char*);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_LoadForm(int, int, char*);
@@ -41,28 +41,28 @@ int __cdecl d2_ShowGiftDialog(int* arg2, unsigned short* arg3)
 	int uv;
 	int slider;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-	v14 = (int) ((float) gm_WalkEntityChain(SHP_ID) * 0.005f);
+	v14 = (int) ((float) gm_CalcPersonWealth(SHP_ID) * 0.005f);
 	if (v14 < 0x640) {
 		v14 = 0x640;
 	} else {
-		v14 = (int) ((float) gm_WalkEntityChain(SHP_ID) * 0.005f);
+		v14 = (int) ((float) gm_CalcPersonWealth(SHP_ID) * 0.005f);
 	}
-	v4 = (float) gm_WalkEntityChain(SHP_ID) * 0.05f;
+	v4 = (float) gm_CalcPersonWealth(SHP_ID) * 0.05f;
 	v8 = gm_AccumulateTyped2(SHP_REC);
 	if ((float) v8 > v4) {
-		selected = (float) gm_WalkEntityChain(SHP_ID) * 0.05f;
+		selected = (float) gm_CalcPersonWealth(SHP_ID) * 0.05f;
 	} else {
 		selected = (float) gm_AccumulateTyped2(SHP_REC);
 	}
 	if ((int) selected <= 0xc7f) {
 		ebp = 0xc80;
 	} else {
-		v4 = (float) gm_WalkEntityChain(SHP_ID) * 0.05f;
+		v4 = (float) gm_CalcPersonWealth(SHP_ID) * 0.05f;
 		v8 = gm_AccumulateTyped2(SHP_REC);
 		if (!((float) v8 > v4)) {
 			selected = (float) gm_AccumulateTyped2(SHP_REC);
 		} else {
-			selected = (float) gm_WalkEntityChain(SHP_ID) * 0.05f;
+			selected = (float) gm_CalcPersonWealth(SHP_ID) * 0.05f;
 		}
 		ebp = (int) selected;
 		if (ebp <= 0) return 0;

@@ -5,7 +5,7 @@ int __cdecl ai_SelectBestMethod(int, int, int, Cmd*, Cmd*);
 int __cdecl gm_QueryEntities(int, int, int, int, int);
 int __cdecl gm_RandomMod(unsigned short);
 float __cdecl gm_RandomFloat01(void);
-int __cdecl gm_WalkEntityChain(unsigned short);
+int __cdecl gm_CalcPersonWealth(unsigned short);
 float __cdecl gm_CalcEntityFavor(unsigned int, unsigned int, unsigned int);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl ai_SelectRankedCandidates(unsigned short*, unsigned int, unsigned int*, float, float, unsigned short*);
@@ -88,8 +88,8 @@ int __cdecl ai_StartBestechung(int targetSlot, short* ent, int mode, Cmd* out1, 
         out1->kind = 7;
         out1->f1 = *(int*)(e + 4);
         out1->f2 = 1;
-        if ((float)abs(gm_WalkEntityChain(*(unsigned short*)ent) + gm_WalkEntityChain(*(unsigned short*)e)) * 0.0007843137f > 1600.0f) {
-            value = (float)abs(gm_WalkEntityChain(*(unsigned short*)ent) + gm_WalkEntityChain(*(unsigned short*)e)) * 0.0007843137f;
+        if ((float)abs(gm_CalcPersonWealth(*(unsigned short*)ent) + gm_CalcPersonWealth(*(unsigned short*)e)) * 0.0007843137f > 1600.0f) {
+            value = (float)abs(gm_CalcPersonWealth(*(unsigned short*)ent) + gm_CalcPersonWealth(*(unsigned short*)e)) * 0.0007843137f;
         } else {
             value = 1600.0f;
         }
@@ -101,7 +101,7 @@ int __cdecl ai_StartBestechung(int targetSlot, short* ent, int mode, Cmd* out1, 
         out2->f1 = 0;
         chosen = (int)(gm_RandomFloat01() * (upper - lower) + lower);
         out2->f2 = chosen;
-        out2->f4 = (int)((float)(unsigned int)chosen * 500.0f / (float)(gm_WalkEntityChain(*(unsigned short*)ent) + gm_WalkEntityChain(*(unsigned short*)e)));
+        out2->f4 = (int)((float)(unsigned int)chosen * 500.0f / (float)(gm_CalcPersonWealth(*(unsigned short*)ent) + gm_CalcPersonWealth(*(unsigned short*)e)));
         return 9;
     }
     if (out1->kind != 7) return 0;
@@ -116,7 +116,7 @@ int __cdecl ai_StartBestechung(int targetSlot, short* ent, int mode, Cmd* out1, 
     out2->f1 = 0;
     chosen = (int)(gm_RandomFloat01() * ((int)value - lower) + lower);
     out2->f2 = chosen;
-    out2->f4 = (int)((float)(unsigned int)chosen * 500.0f / (float)(gm_WalkEntityChain(*(unsigned short*)ent) + gm_WalkEntityChain(*(unsigned short*)e)));
+    out2->f4 = (int)((float)(unsigned int)chosen * 500.0f / (float)(gm_CalcPersonWealth(*(unsigned short*)ent) + gm_CalcPersonWealth(*(unsigned short*)e)));
     return 9;
 
 sent:

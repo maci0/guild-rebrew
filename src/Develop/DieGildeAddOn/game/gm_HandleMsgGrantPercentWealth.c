@@ -30,7 +30,7 @@ int __cdecl gm_HandleMsgGrantPercentWealth(void* record)
 	}
 	n = gm_RandomMod(4) & 0xffff;
 	d = (double) n + 1.0;
-	n = gm_WalkEntityChain(*(short*) p);
+	n = gm_CalcPersonWealth(*(short*) p);
 	r = (int) (((double) n * d) * 0.01);
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) record + 4) + 0x12e7, r);
 	len = strlen(buf);

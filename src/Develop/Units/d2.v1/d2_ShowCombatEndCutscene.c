@@ -16,7 +16,7 @@ extern unsigned char* lpGebaeudePROT;
 extern unsigned char gm_ActiveTownIndex;
 extern int d2_CurrentWindowId;
 extern int cm_PacketDeltaBase;
-extern char* g_14a79c0[];
+extern char* d2_ObjektNameTable[];
 typedef struct { unsigned char kind; unsigned char unknown01[0x24c]; } COMBAT_BUILDING_STUB;
 
 void __cdecl d2_SetMouseTooltip(char*);
@@ -332,7 +332,7 @@ sync:
 					if (n < 1) {
 						n = 1;
 					}
-					sprintf(small, "%i %s$A", n, g_14a79c0[*(unsigned short*) ent * 2]);
+					sprintf(small, "%i %s$A", n, d2_ObjektNameTable[*(unsigned short*) ent * 2]);
 					strcat(buf, small);
 					if (g_68b79c == *(int*) (gm_EntityIdField + gm_LocalPlayerSlot * 0x21c)) {
 						cm_SendSellObjekt(*(int*) (rec + 2), *(int*) (cur + 2), *(unsigned short*) ent, n, gm_ActiveTownIndex, 0);
@@ -443,7 +443,7 @@ reduce:
 							if (n < 1) {
 								n = 1;
 							}
-							sprintf(small, "%i %s$A", n, g_14a79c0[*(unsigned short*) p * 2]);
+							sprintf(small, "%i %s$A", n, d2_ObjektNameTable[*(unsigned short*) p * 2]);
 							strcat(buf, small);
 							if (g_68b79c == *(int*) (gm_EntityIdField + gm_LocalPlayerSlot * 0x21c)) {
 								cm_SendSellObjekt(*(int*) (rec + 2), *(int*) (cur + 2), *(unsigned short*) p, n, gm_ActiveTownIndex, 0);

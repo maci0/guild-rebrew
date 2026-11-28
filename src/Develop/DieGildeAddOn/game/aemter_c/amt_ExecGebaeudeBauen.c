@@ -31,7 +31,7 @@ void __cdecl amt_NotifyOfficeLost(void*, unsigned int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_FindNextFilteredEntity(void);
 char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl gm_WalkEntityChain(unsigned short);
+int __cdecl gm_CalcPersonWealth(unsigned short);
 void __cdecl lc_GetBauplatzPrefix(int, char*);
 int __cdecl d3_CollectUnusedSceneObjects(char*, int*);
 void __cdecl d3_ComputeObjectYawToTarget(float* out, int obj);

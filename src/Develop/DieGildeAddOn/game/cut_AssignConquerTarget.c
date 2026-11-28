@@ -20,7 +20,7 @@ extern int d3_ActiveScene;
 
 void __cdecl gm_GetEquippedCombatGear(char*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
-char __cdecl d3sm_SampleHeight(int, float*, int*, int*, int*);
+char __cdecl d3sm_3D2SuperMap(int, float*, int*, int*, int*);
 ent2c* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
 
 int __cdecl cut_AssignConquerTarget(char* rec, char* e, char* obj)
@@ -35,7 +35,7 @@ int __cdecl cut_AssignConquerTarget(char* rec, char* e, char* obj)
 	h = *(int*) (((char*)d3_ActiveScene) + 0xb0);
 	gm_GetEquippedCombatGear(e);
 	d3_TransformPoint(obj, obj + 0x4c, v);
-	if (d3sm_SampleHeight(h, v, &c, &a, &b) == 0)
+	if (d3sm_3D2SuperMap(h, v, &c, &a, &b) == 0)
 		return 0;
 	r = gm_FindOrCreateEntitySlot(rec, e);
 	r->fc = 0;

@@ -23,8 +23,8 @@ int __cdecl gm_HandleMsg0eGrantBonus(int* request)
 		return 1;
 	if (gm_HasActiveSpecialObject(entity, 0x290) != 0)
 		return 0x400;
-	amount = (int) ((gm_RandomMod(2) + 1.0) * gm_WalkEntityChain(*entity) * 0.01);
-	if (amount > gm_WalkEntityChain(*entity))
+	amount = (int) ((gm_RandomMod(2) + 1.0) * gm_CalcPersonWealth(*entity) * 0.01);
+	if (amount > gm_CalcPersonWealth(*entity))
 		return 0;
 	io_FormatTextBuffer(buf, *(unsigned short*) (request + 1) + 0x12e7, amount);
 	cm_RequestTransferCurrencyNoKill(-1, request[0], gm_ActiveTownIndex, amount);

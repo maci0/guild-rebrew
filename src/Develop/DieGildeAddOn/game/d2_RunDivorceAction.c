@@ -51,7 +51,7 @@ int __cdecl d2_RunDivorceAction(char* p)
 		if (*(int*) (p + 0x194) < 8) {
 			return 0x22;
 		}
-		w = (float) gm_WalkEntityChain(*(unsigned short*) p);
+		w = (float) gm_CalcPersonWealth(*(unsigned short*) p);
 		s.n = gm_AccumulateTyped2(p);
 		if ((float) s.n / w < g_6660d8) {
 			return 0x22;
@@ -72,7 +72,7 @@ int __cdecl d2_RunDivorceAction(char* p)
 		}
 		return 0x11;
 	}
-	w = (float) gm_WalkEntityChain(*(unsigned short*) p);
+	w = (float) gm_CalcPersonWealth(*(unsigned short*) p);
 	s.n = (int) (w * g_664ee8);
 	obj = gm_LookupEntityRecordById(*(int*) (p + 0x5c));
 	dlg = d2_LoadForm(0, 0, "privillegien\\scheidung");

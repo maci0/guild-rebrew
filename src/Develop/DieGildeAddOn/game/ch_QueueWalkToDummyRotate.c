@@ -5,7 +5,7 @@ char* __cdecl d3sm_GetObjectSuperMap(char* p);
 void __cdecl d3_TransformPoint(char* src, char* pos, float* out);
 void __cdecl d3_TransformDirection(char* src, float* v, float* out);
 float __cdecl d3_SignedPlanarAngle(float* a, float* b);
-char __cdecl d3sm_SampleHeight(char* g, float* v, int* a, int* b, int* c);
+char __cdecl d3sm_3D2SuperMap(char* g, float* v, int* a, int* b, int* c);
 int __cdecl d3_GetContextIndex(char* p);
 char* __cdecl ch_CreateAction(char* e, int kind, ...);
 
@@ -24,7 +24,7 @@ void __cdecl ch_QueueWalkToDummyRotate(char* owner, char* e)
 	d3_TransformPoint(e, e + 0x4c, a);
 	d3_TransformDirection(e, d3_UnitAxisVectors, b);
 	ang = d3_SignedPlanarAngle(d3_UnitAxisVectors, b);
-	if (d3sm_SampleHeight(g, a, &x, &y, &z)) {
+	if (d3sm_3D2SuperMap(g, a, &x, &y, &z)) {
 		r = ch_CreateAction(owner, 0x2d, x, y, d3_GetContextIndex(*(char**) (e + 0x20c)));
 		*(int*) (r + 0x160) |= 0x10;
 		*(float*) (r + 0x144) = a[0];

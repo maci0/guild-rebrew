@@ -7,7 +7,7 @@ int __cdecl evt_FindScriptById(int);
 void __cdecl evt_RequestScriptExit(int);
 void __cdecl gm_KillSpieler(int, int);
 
-int __cdecl fcn_004c9980(char* x, char* out)
+int __cdecl cm_ExRemoveSpieler(char* x, char* out)
 {
 	unsigned short* e;
 	int ok;

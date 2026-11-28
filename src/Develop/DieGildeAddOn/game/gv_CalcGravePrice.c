@@ -4,19 +4,19 @@
 extern unsigned char gm_ActiveTownIndex;
 extern float g_6652d8[];
 
-int __cdecl gm_WalkEntityChain(unsigned short raw_idx);
+int __cdecl gm_CalcPersonWealth(unsigned short raw_idx);
 int __cdecl gm_AmountToUnits(int a, unsigned char k);
 int __cdecl gm_ConvertUnitsToAmount(int a, unsigned char k);
 
 /* ADDRESS: GOLDTL 0x004f4440 */
-int __cdecl gm_CalcBribeOrPriceScore(int handle, int value, int mode, int flag, int* out)
+int __cdecl gv_CalcGravePrice(int handle, int value, int mode, int flag, int* out)
 {
 	double v;
 	double f;
 	double bright;
 	int r;
 
-	v = (double) gm_AmountToUnits(gm_WalkEntityChain(*(unsigned short*) handle), gm_ActiveTownIndex);
+	v = (double) gm_AmountToUnits(gm_CalcPersonWealth(*(unsigned short*) handle), gm_ActiveTownIndex);
 	v = __max(__min(1000000.0, v), 10000.0);
 
 

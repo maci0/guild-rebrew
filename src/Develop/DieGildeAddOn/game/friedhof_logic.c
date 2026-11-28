@@ -1191,7 +1191,7 @@ int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_
 int __cdecl gv_CheckSlotActive(void* slot, int type);
 void* __cdecl gv_GetSlotEntry(void* worker, int worktype, unsigned char job);
 #if defined(REBREW_SERVER)
-int __cdecl gv_ReplaceProductionWorker(void* a)
+int __cdecl gv_SetGraveHolder(void* a)
 {
 	void* rec;
 	void* rec2;
@@ -1240,7 +1240,7 @@ extern char gm_EntitySlotTable[];
 
 /* ADDRESS: GOLDTL 0x004f2a80 */
 /* ADDRESS: GOLD 0x004f0970 */
-int __cdecl gv_ReplaceProductionWorker(void* a)
+int __cdecl gv_SetGraveHolder(void* a)
 {
 	void* rec;
 	void* rec2;
@@ -1429,7 +1429,7 @@ extern unsigned short* g_entity_table_end; /* 0x1003546c */
 extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 extern int __cdecl gv_CheckSlotActive(void* slot, int type);
 extern void* __cdecl gv_GetSlotEntry(void* worker, int worktype, unsigned char job);
-int __cdecl gv_UpdateProductionProgress(void* building)
+int __cdecl gv_UpdateGraveCondition(void* building)
 {
 	void* entity;
 	unsigned short grave_id;

@@ -56,7 +56,7 @@ int __cdecl gm_HandleBekehren(House* e)
 		if (*(int*) ((char*) e + 0x194) < 6) {
 			return 0x20;
 		}
-		money = (int) (gm_WalkEntityChain(e->id) * g_662964);
+		money = (int) (gm_CalcPersonWealth(e->id) * g_662964);
 		if (gm_AccumulateTyped2(e) < money) {
 			return 0x20;
 		}
@@ -87,7 +87,7 @@ int __cdecl gm_HandleBekehren(House* e)
 		House* h;
 
 		result = 0;
-		money = (int) (gm_WalkEntityChain(e->id) * g_662964);
+		money = (int) (gm_CalcPersonWealth(e->id) * g_662964);
 		dlg = d2_LoadForm(0, 0, s_6acdcc);
 		d2_SetOverlayAnimation(0, 0);
 		d2_CenterDialogWindows(dlg);

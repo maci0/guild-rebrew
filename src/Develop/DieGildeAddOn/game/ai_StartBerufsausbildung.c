@@ -4,7 +4,7 @@ extern unsigned char gm_ActiveTownIndex;
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_IsNpcEntityState(char*);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
-int __cdecl gm_WalkEntityChain(unsigned short);
+int __cdecl gm_CalcPersonWealth(unsigned short);
 int __cdecl gm_GetSeasonTreasury(char*, char);
 unsigned short __cdecl gm_RandomMod(int);
 char* __cdecl gm_GetEntityTableEntry(char*);
@@ -63,7 +63,7 @@ int __cdecl ai_StartBerufsausbildung(int busy, char* ent, int pending, char* out
 	if (best == 0) {
 		return 0;
 	}
-	scale = (int) ((float) gm_WalkEntityChain(*(unsigned short*) ent) * g_664150);
+	scale = (int) ((float) gm_CalcPersonWealth(*(unsigned short*) ent) * g_664150);
 	if (gm_GetSeasonTreasury(ent, (char) gm_ActiveTownIndex) < scale * 6) {
 		return 0;
 	}

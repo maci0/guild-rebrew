@@ -109,8 +109,8 @@ void __cdecl cut_PromptProzessChoice(char* participant, int* action)
     case 2:
         if (*(int*) (participant + 0x10) != action[5]) return;
         gm_GenerateShuffledIndices(7, order);
-        value = (gm_WalkEntityChain(*(unsigned short*) own)
-            + gm_WalkEntityChain(*(unsigned short*) other)) / 2000;
+        value = (gm_CalcPersonWealth(*(unsigned short*) own)
+            + gm_CalcPersonWealth(*(unsigned short*) other)) / 2000;
         dialog = d2_LoadForm(0, 0, "cutscenes\\folterwahl");
         d2_CenterForm(dialog, 3);
         d2_SetForm(dialog, 0);

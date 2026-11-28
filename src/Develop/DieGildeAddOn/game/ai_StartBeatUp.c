@@ -7,7 +7,7 @@ extern float g_664160;
 extern int ai_FeudTargetEntity;
 
 int __cdecl gm_GetSeasonTreasury(char*, char);
-int __cdecl gm_WalkEntityChain(unsigned short);
+int __cdecl gm_CalcPersonWealth(unsigned short);
 int __cdecl gm_CheckPrivilege(int, char*, int*);
 int __cdecl gm_QueryEntities(int, int, int, int, int);
 int __cdecl ai_SelectBestMethod(int, unsigned short, int, void*, void*);
@@ -51,7 +51,7 @@ int __cdecl ai_StartBeatUp(int unused0, char* e, int busy, AI_BEATUP_MSG* out1, 
 	}
 	memset(buf, 0, sizeof(buf));
 	buf[0] = 1;
-	vb = (int) ((float) gm_WalkEntityChain(*(unsigned short*) e) * g_66433c);
+	vb = (int) ((float) gm_CalcPersonWealth(*(unsigned short*) e) * g_66433c);
 	if ((gm_CheckPrivilege(0x1b, e, buf) & 2) != 0) {
 		vb /= 2;
 	}

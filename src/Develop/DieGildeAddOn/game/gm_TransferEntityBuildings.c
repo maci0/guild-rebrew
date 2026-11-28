@@ -12,7 +12,7 @@ void __cdecl cm_SendCopyEntityData(void *);
 void *__cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_SumTreasury(void *);
 void __cdecl cm_RequestMoveCredits(int, int, int, int);
-int __cdecl gm_WalkEntityChain(int);
+int __cdecl gm_CalcPersonWealth(int);
 void __cdecl cm_BeginPacketFieldDelta(void *, int);
 void __cdecl cm_AppendPacketFieldValue(int, int, int, void *);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void *);
@@ -104,7 +104,7 @@ void __cdecl gm_TransferEntityBuildings(void *fromEntity, void *toEntity)
 		val = gm_SumTreasury(fromEntity);
 		i = 4 + (*((unsigned char *) fromEntity + 2) == 5);
 		cm_RequestMoveCredits(*(int *) ((char *) toEntity + 4), -1, gm_ActiveTownIndex, val);
-		type = gm_WalkEntityChain(*(unsigned short *) fromEntity);
+		type = gm_CalcPersonWealth(*(unsigned short *) fromEntity);
 		cm_BeginPacketFieldDelta(toEntity, *(int *) ((char *) toEntity + 4));
 		cm_AppendPacketFieldValue(4, 1, (int) toEntity - cm_PacketDeltaBase + 0x1a8, &type);
 		if (flag != 0

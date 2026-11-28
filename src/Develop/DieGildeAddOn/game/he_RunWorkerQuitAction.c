@@ -22,7 +22,7 @@ void __cdecl he_FreeAction(char*);
 /* ADDRESS: GOLDTL 0x005666b0 */
 /* Timed action 0x33 (HE_PERSONAL_KUENDIGEN) START: if the person still exists and is not
  * class 0x14, due = start; otherwise the action is freed. */
-void __cdecl fcn_005666b0(char* h)
+void __cdecl he_StartWorkerQuitAction(char* h)
 {
 	char* p;
 

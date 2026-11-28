@@ -20,7 +20,7 @@ void __cdecl he_RunInvitation(void);
 void __cdecl he_RunAction53(void);
 void __cdecl he_StartCourtship(void);
 void __cdecl he_RunCourtship(void);
-void __cdecl he_StartAction0x42EntityMsg(void);
+void __cdecl he_StartRandomEvent(void);
 void __cdecl he_InitStreife(void);
 void __cdecl he_UpdateRobberyAction(void);
 void __cdecl he_StartRazzia(void);
@@ -68,11 +68,11 @@ void __cdecl he_RunSchutzgeld(void);
 void __cdecl he_AllocBetriebsPruefung(void);
 void __cdecl he_RunBetriebsPruefung(void);
 void __cdecl he_AllocMultiActorAction(void);
-void __cdecl he_RunMultiActorAction(void);
+void __cdecl he_RunUmlandPatrol(void);
 void __cdecl he_StartSimUnfall(void);
 void __cdecl RunSimUnfall(void);
-void __cdecl he_StartAction0x67(void);
-void __cdecl he_RunAction0x67(void);
+void __cdecl he_StartPacht(void);
+void __cdecl he_RunPacht(void);
 void __cdecl he_InitAction0x69(void);
 void __cdecl he_RunTitleGrantEvent(void);
 void __cdecl he_InitSimulateWirtshaus(void);
@@ -159,7 +159,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(65, (void*) he_StartCourtship, (void*) he_RunCourtship) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(66, (void*) he_StartAction0x42EntityMsg, (void*) 0x0054d810) != 0) {
+	if (he_RegisterHandler(66, (void*) he_StartRandomEvent, (void*) 0x0054d810) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(67, (void*) he_InitStreife, (void*) he_UpdateRobberyAction) != 0) {
@@ -247,14 +247,14 @@ int __cdecl he_RegisterEventHandlers(void)
 		return 1;
 	}
 	he_RegisterActionMeta(100, 0, 0, 1287, -1);
-	if (he_RegisterHandler(101, (void*) he_AllocMultiActorAction, (void*) he_RunMultiActorAction) != 0) {
+	if (he_RegisterHandler(101, (void*) he_AllocMultiActorAction, (void*) he_RunUmlandPatrol) != 0) {
 		return 1;
 	}
 	he_RegisterActionMeta(101, 0, 0, 1287, -1);
 	if (he_RegisterHandler(102, (void*) he_StartSimUnfall, (void*) RunSimUnfall) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(103, (void*) he_StartAction0x67, (void*) he_RunAction0x67) != 0) {
+	if (he_RegisterHandler(103, (void*) he_StartPacht, (void*) he_RunPacht) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(104, (void*) he_InitSimulateWirtshaus, (void*) gm_SimulateWirtshaus) != 0) {

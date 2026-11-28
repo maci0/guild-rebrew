@@ -14,7 +14,7 @@ unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl ai_SelectRankedCandidates(char* e, int a, int* b, int c, float r, int* out);
 int __cdecl amt_GetRoleLevel(int k);
 int __cdecl gm_SumQueryEntryValues(int a, char b);
-int __cdecl gm_WalkEntityChain(unsigned short raw_idx);
+int __cdecl gm_CalcPersonWealth(unsigned short raw_idx);
 
 /* ADDRESS: GOLDTL 0x0048ddd0 */
 int __cdecl ai_SetupSecretRoomMode2(char* actor, char* thresholdOut, char* resultOut)
@@ -49,8 +49,8 @@ int __cdecl ai_SetupSecretRoomMode2(char* actor, char* thresholdOut, char* resul
 		return 0;
 	}
 	gm_SumQueryEntryValues(*(int*) (actor + 0x178), *(char*) 0x773d75);
-	total = gm_WalkEntityChain(*(unsigned short*) actor);
-	total += gm_WalkEntityChain(target->entity_index);
+	total = gm_CalcPersonWealth(*(unsigned short*) actor);
+	total += gm_CalcPersonWealth(target->entity_index);
 	tot[0] = (int) ((float) total * *(float*) 0x662910);
 	tot[1] = (int) ((float) total * *(float*) 0x664150);
 	tot[2] = (int) ((float) total * *(float*) 0x6628ac);

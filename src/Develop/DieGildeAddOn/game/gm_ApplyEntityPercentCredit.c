@@ -32,7 +32,7 @@ int __cdecl gm_ApplyEntityPercentCredit(void* record)
 	}
 	roll = gm_RandomMod(4);
 	pct = (double) roll + 1.0;
-	amount = (int) (((double) gm_WalkEntityChain(*(unsigned short*) entity) * pct) *
+	amount = (int) (((double) gm_CalcPersonWealth(*(unsigned short*) entity) * pct) *
 	    0.01);
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) record + 4) + 0x12e7, amount);
 	cm_RequestTransferCurrencyNoKill(-1, *(int*) record, (*(char*)&gm_ActiveTownIndex), amount);

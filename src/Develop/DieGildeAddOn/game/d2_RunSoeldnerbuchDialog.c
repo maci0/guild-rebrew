@@ -128,7 +128,7 @@ int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 int __cdecl d2_SetLabelText(int, char*);
 int __cdecl d2_EqualizeWindowButtonWidths(int, int, char*, int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
-float __cdecl gm_GetScaledWorkforceOutput(unsigned char*, int, int, int);
+float __cdecl gm_GetHireWage(unsigned char*, int, int, int);
 int __cdecl d2_ShowModalMessageBox(char*, int);
 int __cdecl fcn_0051af00(char*, char*, ...);
 int __cdecl gm_GetEntityRelation(int, int);
@@ -474,7 +474,7 @@ void __cdecl d2_RunSoeldnerbuchDialog(unsigned char* building, int buildingId)
 			f.hC = -1;
 			f.hD = -1;
 			if (f.rows[i].obj == 0) {
-				n = (int) gm_GetScaledWorkforceOutput(
+				n = (int) gm_GetHireWage(
 				    (unsigned char*) ((int) &((ENTITY_RECORD*) 0x7f4ca0)[*(unsigned short*) (building + 0x27)
 						
 						]),

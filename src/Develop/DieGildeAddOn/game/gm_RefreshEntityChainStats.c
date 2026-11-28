@@ -9,7 +9,7 @@ extern double g_6629c8;
 extern double g_6640f0;
 
 void __cdecl gm_FindRichestEntity(short*, int*);
-int __cdecl gm_WalkEntityChain(unsigned short);
+int __cdecl gm_CalcPersonWealth(unsigned short);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
 void __cdecl cm_RequestChangeAttribute(void);
@@ -54,7 +54,7 @@ void __cdecl gm_RefreshEntityChainStats(void)
 		}
 		total = 0;
 		count = 0;
-		r = gm_WalkEntityChain(*(unsigned short*) e);
+		r = gm_CalcPersonWealth(*(unsigned short*) e);
 		cm_BeginPacketFieldDelta(e, *(int*) (e + 4));
 		for (i = 0; i < 3; i++) {
 			v = *(int*) (e + 0x1d8 + i * 4);

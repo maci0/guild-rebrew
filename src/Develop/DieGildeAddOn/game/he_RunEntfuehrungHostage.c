@@ -15,7 +15,7 @@ void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl he_FreeAction(char*);
 char* __cdecl gm_FindBuildingOwner(int);
 char* __cdecl he_RegisterApEvent(int, char*, int, int);
-int __cdecl gm_WalkEntityChain(unsigned short);
+int __cdecl gm_CalcPersonWealth(unsigned short);
 void __cdecl cm_SendCopyEntityData(int);
 
 /* Entity event handler: state 0 builds and posts the event message, state -1
@@ -98,7 +98,7 @@ void __cdecl he_RunEntfuehrungHostage(char* eventTrack)
 		} else if (*(unsigned char*) (e + 0x1b1) == 1) {
 			f = 0.02f;
 		}
-		n = gm_WalkEntityChain(*(unsigned short*) e);
+		n = gm_CalcPersonWealth(*(unsigned short*) e);
 		award = (int) ((flt_665ecc < (float) n ? flt_665ecc : (float) n) * f);
 		eid = *(int*) (e + 4);
 		*(int*) (b.msg + 0xc) = *(int*) (rec + 1);

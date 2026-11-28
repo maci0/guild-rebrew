@@ -110,7 +110,7 @@ int __cdecl hst_HandleRndReich(int mode, int* pairs, int idx, char* text, void* 
 	}
 	for (i = 0; i < 768; i++) {
 		if (test(i) != 0) {
-			v = gm_WalkEntityChain((unsigned short) i);
+			v = gm_CalcPersonWealth((unsigned short) i);
 			if (v > score[4] && hst_IsCandidateUnlisted((*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].entity_id)) != 0) {
 				score[4] = v;
 				found |= 1;

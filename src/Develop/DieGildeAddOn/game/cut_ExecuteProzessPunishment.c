@@ -14,7 +14,7 @@ extern int gm_RichterEvangelisch;
 extern float g_6652c8;
 extern char gm_EntityIdField[];
 
-int __cdecl gm_WalkEntityChain(unsigned short);
+int __cdecl gm_CalcPersonWealth(unsigned short);
 int __cdecl gm_RandomMod(int);
 void __cdecl gm_AddTime(GAME_TIMESTAMP*, int, int, int);
 void __cdecl cm_SendCopyEntityData(char*);
@@ -38,7 +38,7 @@ void __cdecl cut_ExecuteProzessPunishment(unsigned short* entity, int action)
 	char* pkt;
 	int* list;
 
-	n = gm_WalkEntityChain((unsigned short) entity[0]);
+	n = gm_CalcPersonWealth((unsigned short) entity[0]);
 
 	switch (action) {
 	case 0:

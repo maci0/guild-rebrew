@@ -9,7 +9,7 @@ extern unsigned char gm_ActiveTownIndex;
 int __cdecl gm_RandomMod(int a0);
 int __cdecl gm_GetSeasonTreasury(short* ent, unsigned char player);
 int __cdecl ai_SelectRankedCandidates(short* a0, int a1, int* a2, int a3, float a4, int* a5);
-int __cdecl gm_WalkEntityChain(unsigned short a0);
+int __cdecl gm_CalcPersonWealth(unsigned short a0);
 int __cdecl he_StartHandlungSearch(int a0, int a1, int a2, int a3, int a4);
 
 /* ADDRESS: GOLDTL 0x0049bfa0 */
@@ -33,8 +33,8 @@ int __cdecl ai_StartSpionage(int code, short* target, int zero, char* out1, char
 		return 0;
 	}
 	p = (char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned short) idx];
-	first = (float) gm_WalkEntityChain(*target) * g_664138;
-	score = (int) ((float) gm_WalkEntityChain(*(unsigned short*) p) * g_664138 + first);
+	first = (float) gm_CalcPersonWealth(*target) * g_664138;
+	score = (int) ((float) gm_CalcPersonWealth(*(unsigned short*) p) * g_664138 + first);
 	first = (float) score;
 	score = (int) (first * ((float) rnd * g_664188 + 1.0f));
 	if ((float) thr * g_664160 < (float) score) {

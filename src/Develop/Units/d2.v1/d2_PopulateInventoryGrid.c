@@ -40,7 +40,7 @@ extern char* d2_Controls;
 extern char* d2_CurrentWindow;
 extern int d2_CurrentWindowId;
 extern char str_empty[];
-extern int g_14a79c0[];
+extern int d2_ObjektNameTable[];
 extern char g_6aac70[];
 
 unsigned short* __cdecl gm_QueryEntities(int, int, int, ...);
@@ -123,7 +123,7 @@ int __cdecl d2_PopulateInventoryGrid(int list, Row* rows, int a3, int a4, char s
 		if (q != 0 && gm_AmountToTradeUnits(*(int*) (q + 0xe), r->key) != 0) {
 			amount = gm_AmountToTradeUnits(*(int*) (q + 0xe), r->key);
 			d2_SetElementValue(r->icon, 0, amount, ent);
-			io_FormatTextBuffer(buf, (int) g_6aac70, amount, g_14a79c0[r->key * 2]);
+			io_FormatTextBuffer(buf, (int) g_6aac70, amount, d2_ObjektNameTable[r->key * 2]);
 			d2_SetLabelText(r->label, buf);
 			(*(int*)&((D2_CONTROL_TL*)d2_Controls)[r->label].width) = 0xbe;
 			r->count = amount;

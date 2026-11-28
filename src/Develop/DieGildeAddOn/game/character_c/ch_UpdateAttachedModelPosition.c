@@ -34,7 +34,7 @@ char* __cdecl d3sm_GetObjectSuperMap(char*);
 #include "Develop/Units/d3/client_scene_transform.h"
 float __cdecl d3_ComputeYawToTarget(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
-char __cdecl d3sm_SampleHeight(char*, float*, int*, int*, float*);
+char __cdecl d3sm_3D2SuperMap(char*, float*, int*, int*, float*);
 void __cdecl d3_GetFloorHeight(char*, float*, int, int*, int*, float*);
 extern float flt_0_0;
 #include "../../../Units/d3/d3_animation.h"
@@ -135,7 +135,7 @@ void __cdecl ch_UpdateAttachedModelPosition(char* obj, unsigned char force)
 	*(int*) &rotation[2] = *(int*) (attachment + 0x8c);
 	rotation[1] += angle;
 	d3_SetObjectRotation(attachment, rotation);
-	if (d3sm_SampleHeight(map, (float*) (attachment + 0x4c), &col, &row, &height)) {
+	if (d3sm_3D2SuperMap(map, (float*) (attachment + 0x4c), &col, &row, &height)) {
 		cell = *(int*) (*(char**) (map + 0x24) + (*(int*) (map + 0x20) * row + col) * 0x1c);
 		if ((cell == 0 || cell == 13) && *(char**) (*(char**) (obj + 0x88) + 0xac) == 0) {
 			goto cache_position;

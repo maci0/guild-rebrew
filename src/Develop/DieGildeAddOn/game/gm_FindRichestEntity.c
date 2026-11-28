@@ -1,6 +1,6 @@
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-int __cdecl gm_WalkEntityChain(int idx);
+int __cdecl gm_CalcPersonWealth(int idx);
 
 /* ADDRESS: GOLDTL 0x004fd400 */
 int __cdecl gm_FindRichestEntity(short* out, int* value)
@@ -23,7 +23,7 @@ int __cdecl gm_FindRichestEntity(short* out, int* value)
 		p = (unsigned char*) 0x7f4ca2;
 		while ((int) p < 0x85a0a2) {
 			if (*(unsigned short*) (p - 2) != 0xffff && *p < 0xa && p[6] > 0) {
-				v = gm_WalkEntityChain(i);
+				v = gm_CalcPersonWealth(i);
 				if (v > best) {
 					best = v;
 					limit = i;

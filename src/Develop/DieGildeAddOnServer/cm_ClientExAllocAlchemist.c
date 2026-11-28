@@ -3,7 +3,7 @@ int __cdecl srv_SeedRandom(int);
 int __cdecl ahm_ExAllocAlchemist(int *);
 
 /* ADDRESS: GOLDTL 0x004cdb10 */
-int __cdecl fcn_004cdb10(int *p, unsigned char *out)
+int __cdecl cm_ClientExAllocAlchemist(int *p, unsigned char *out)
 {
     int v;
 

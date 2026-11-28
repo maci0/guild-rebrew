@@ -97,7 +97,7 @@ int __cdecl d2_CreatePersonTooltip(char* entity)
 	if ((*(int*) (entity + 0x1cc) & 0x3000) == 0) {
 		io_AppendText(0x37, (entity[9] != 0 ? 0x11e : 0x114) + *(unsigned char*) (entity + 0xd));
 	}
-	io_AppendText(0x2e, gm_WalkEntityChain(*(unsigned short*) entity));
+	io_AppendText(0x2e, gm_CalcPersonWealth(*(unsigned short*) entity));
 	if ((*(int*) (entity + 0x1cc) & 0x3000) == 0) {
 		io_AppendText(0x2f);
 		target = gm_LookupEntityRecordById(*(int*) (entity + 0x5c));

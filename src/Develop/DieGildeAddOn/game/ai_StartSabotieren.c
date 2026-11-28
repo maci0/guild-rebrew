@@ -35,7 +35,7 @@ int __cdecl ai_FindEntityInFavorRange(char* p, int kind, F8 f, int c, float r, i
 void __cdecl gm_ResolveEntityById(int* out, int a, int b, int id);
 int __cdecl he_HasNoActiveAction0x88(char* obj, char* e);
 int __cdecl gm_CalculateGebaeudeValue(int* p, int n);
-int __cdecl gm_WalkEntityChain(unsigned short id);
+int __cdecl gm_CalcPersonWealth(unsigned short id);
 int __cdecl gm_CheckPrivilege(int a, char* e, void* buf);
 float __cdecl gm_CalcSkillDuelScore(char* a, char* b, int i);
 float __cdecl gm_RandomFloat01(void);
@@ -113,7 +113,7 @@ int __cdecl ai_StartSabotieren(int who, char* entity, int busy, Msg* out1, Msg* 
 					if (he_HasNoActiveAction0x88(gm_EntitySlotTable + *(unsigned short*)(targetRec + 0x27) * 0x21c, entity) != 0) {
 						memset(buf, 0, 0x220);
 						buf[0] = 1;
-						v4 = (int)((float)gm_CalculateGebaeudeValue((int*)targetRec, 100) * 0.05f + (float)gm_WalkEntityChain(*(unsigned short*)entity) * 0.02f);
+						v4 = (int)((float)gm_CalculateGebaeudeValue((int*)targetRec, 100) * 0.05f + (float)gm_CalcPersonWealth(*(unsigned short*)entity) * 0.02f);
 						owner = gm_EntitySlotTable + *(unsigned short*)(targetRec + 0x27) * 0x21c;
 						if ((gm_CheckPrivilege(0x1b, entity, buf) & 2) != 0) {
 							v4 = v4 / 2;

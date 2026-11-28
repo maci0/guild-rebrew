@@ -15,7 +15,7 @@ extern char s_6a5b54[];
 int __cdecl gm_CompareGameTime(void*, void*);
 void __cdecl gm_AddTime(void*, int, int, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-float __cdecl gm_GetScaledWorkforceOutput(unsigned char*, int, int, int);
+float __cdecl gm_GetHireWage(unsigned char*, int, int, int);
 int __cdecl gm_AccumulateTyped2(char*);
 int __cdecl gm_GetSeasonTreasury(char*, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -61,7 +61,7 @@ void __cdecl he_RunHireWorkerJob(char* ctx)
 			break;
 		}
 		ver = *(unsigned char*) rec;
-		ver = (int) gm_GetScaledWorkforceOutput((unsigned char*) ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (rec + 0x27)]),
+		ver = (int) gm_GetHireWage((unsigned char*) ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (rec + 0x27)]),
 		    ver, -1, 1);
 		if (ver > gm_AccumulateTyped2((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*) (rec + 0x27)])) {
 			io_FormatTextBuffer(text, 0x1a40, rec);
@@ -131,7 +131,7 @@ void __cdecl he_RunHireWorkerJob(char* ctx)
 			if (obj == 0 || *(int*) (ctx + 0xb0 + i * 4) <= 0) {
 				continue;
 			}
-			ver = (int) gm_GetScaledWorkforceOutput((unsigned char*) ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)
+			ver = (int) gm_GetHireWage((unsigned char*) ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)
 			    [*(unsigned short*) (rec + 0x27)]), *(unsigned char*) rec, -1, 1);
 			*(int*) (ctx + 0xb0 + i * 4) = *(int*) (ctx + 0xb0 + i * 4) - 1;
 			bank = *(unsigned short*) (ctx + 8);

@@ -56,7 +56,7 @@ int __cdecl d2_RunZunftLevel2Dialog(int unused, char* target)
 	int t;
 	int w1;
 
-	cost = (int) MAX5AA1(gm_WalkEntityChain((*(unsigned short*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_index)) * 0.01f, g_664388);
+	cost = (int) MAX5AA1(gm_CalcPersonWealth((*(unsigned short*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].entity_index)) * 0.01f, g_664388);
 	if (gm_CheckEntityStock(((ZUNFT_ENTITY_VIEW*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot]), cost, gm_ActiveTownIndex) == 0) {
 		return 0;
 	}

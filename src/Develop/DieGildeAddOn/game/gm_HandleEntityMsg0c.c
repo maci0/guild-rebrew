@@ -33,7 +33,7 @@ int __cdecl gm_HandleEntityMsg0c(void* request)
 	}
 	v = gm_RandomMod(3);
 	d = (double) v + 1.0;
-	n = (int) (((double) gm_WalkEntityChain(*(unsigned short*) p) * d) *
+	n = (int) (((double) gm_CalcPersonWealth(*(unsigned short*) p) * d) *
 	    0.01);
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7, n);
 	cm_RequestTransferCurrencyNoKill(-1, *(int*) request, (*(char*)&gm_ActiveTownIndex), n);

@@ -13,7 +13,7 @@ extern char* lpGebaeudeINST;
 void* __cdecl fcn_0064d740(void* dst, const void* src, unsigned int n);
 int __cdecl gm_CalcEntityTaxSlots(unsigned short id, int* out, int c);
 void __cdecl cm_StepCommandQueue(void);
-int __cdecl gm_TickObjectTable(void);
+int __cdecl gm_ApplyFaithLaw(void);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 void* __cdecl gm_FindNextFilteredEntity(void);
 
@@ -55,7 +55,7 @@ void __cdecl gm_AdvanceRoundCounters(int flag)
 		} while ((int) p < 0x85a238);
 	}
 	if ((flag & 1) != 0) {
-		gm_TickObjectTable();
+		gm_ApplyFaithLaw();
 	}
 	if ((flag & 1) != 0) {
 		char* ptrs[8];

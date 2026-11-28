@@ -10,7 +10,7 @@ extern unsigned short gm_LocalPlayerSlot;
 extern char gm_EntitySlotTable[];
 extern char gm_EntityIdField[];
 
-int __cdecl gm_WalkEntityChain(unsigned short id);
+int __cdecl gm_CalcPersonWealth(unsigned short id);
 int __cdecl gm_CalculateGebaeudeValue(void* obj, int n);
 int __cdecl gm_CheckEntityStock(void* slot, int value, unsigned char flag);
 int __cdecl gm_CheckPrivilege(int cmd, void* slot, unsigned int* list);
@@ -57,7 +57,7 @@ int __cdecl d2_RunSabotageDialog(unsigned short* obj, unsigned char* record)
 	memset(slots, 0, sizeof(slots));
 	idx = *(unsigned short*) 0x774970;
 	slots[0] = 1;
-	value = (int) ((float) gm_WalkEntityChain(*(unsigned short*) (0x7f4ca0 + idx * 0x21c)) * *(float*) 0x6628ac
+	value = (int) ((float) gm_CalcPersonWealth(*(unsigned short*) (0x7f4ca0 + idx * 0x21c)) * *(float*) 0x6628ac
 		+ (float) gm_CalculateGebaeudeValue(record, 100) * *(float*) 0x662b10);
 	if (gm_CheckPrivilege(0x1b, (void*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c), slots) & 2) {
 		value = value / 2;

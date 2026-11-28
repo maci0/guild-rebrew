@@ -481,6 +481,9 @@ if(REBREW_BUILD_GOLD)
   # Naming batch prs: names GOLD callers use that no GOLD body defines yet (from its link log).
   rebrew_append_scaffold(GOLD_SOURCES
     "${PROJECT_SOURCE_DIR}/stubs/gold/symbol_stubs_naming_prs.c")
+  # Naming batch n17: names GOLD callers use that no GOLD body defines yet (from its link log).
+  rebrew_append_scaffold(GOLD_SOURCES
+    "${PROJECT_SOURCE_DIR}/stubs/gold/symbol_stubs_naming_n17.c")
 
   if(GOLD_SOURCES)
     add_executable(europa1400gold WIN32 ${GOLD_SOURCES})
@@ -552,6 +555,9 @@ if(REBREW_BUILD_GOLDTL)
   # Naming batch prs: names GOLDTL callers use that no GOLDTL body defines yet (from its link log).
   rebrew_append_scaffold(GOLDTL_SOURCES
     "${PROJECT_SOURCE_DIR}/stubs/goldtl/symbol_stubs_naming_prs.c")
+  # Naming batch n17: names GOLDTL callers use that no GOLDTL body defines yet (from its link log).
+  rebrew_append_scaffold(GOLDTL_SOURCES
+    "${PROJECT_SOURCE_DIR}/stubs/goldtl/symbol_stubs_naming_n17.c")
   # Two shim definitions call GOLD-side symbols; the callee bodies belong to
   # the other client and are not part of this image, so the symbols come from
   # link_scaffold.c instead of dragging that target's closures in.

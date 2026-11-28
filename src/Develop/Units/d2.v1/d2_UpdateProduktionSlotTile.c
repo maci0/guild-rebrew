@@ -37,7 +37,7 @@ typedef struct {
 /* g_1038144 is the page index table; g_1015f40 the window pool. */
 extern int d2_FormPageWindows[];
 extern char d2_Windows[];
-extern int g_14a79c0[];
+extern int d2_ObjektNameTable[];
 extern char* g_14b52c0;
 
 int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
@@ -189,7 +189,7 @@ void __cdecl d2_UpdateProduktionSlotTile(int dialog, int form, PRODUKTION_SLOT_R
 		((D2_CONTROL_TL*) (d2_Controls))[r->icon].value_1dc = 4;
 		((D2_CONTROL_TL*) (d2_Controls))[r->icon].value_1e0 = 0;
 		sprintf((char*) &((D2_CONTROL_TL*) d2_Controls)[r->icon] + 0xcc, "%s~ %li %s",
-				((unsigned int*) g_14a79c0)[r->id * 2], r->f30, g_14b52c0);
+				((unsigned int*) d2_ObjektNameTable)[r->id * 2], r->f30, g_14b52c0);
 		if (r->icon >= 0) {
 			d2_PositionControl(w->left + r->x + 0xf, w->top + r->y + 6, r->icon);
 		}

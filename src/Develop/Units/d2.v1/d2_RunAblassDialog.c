@@ -9,7 +9,7 @@ extern int io_RightButtonReleased;
 int __cdecl gm_CountStraftatenForEntity(int a);
 int __cdecl gm_SumStraftatSeverity(int a);
 void __cdecl gs_ClearTargetStraftaten(int a, int b);
-int __cdecl gm_WalkEntityChain(unsigned short);
+int __cdecl gm_CalcPersonWealth(unsigned short);
 float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 int __cdecl gm_HasActiveSpecialObject(char*, int);
 int __cdecl d2_LoadForm(int, int, char*);
@@ -59,7 +59,7 @@ void __cdecl d2_RunAblassDialog(char* churchBuilding)
 	count = gm_CountStraftatenForEntity(*(int*) ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot] + 4));
 	kind = gm_SumStraftatSeverity(*(int*) ((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot] + 4));
 	if (kind != 0) {
-		scale = (float) gm_WalkEntityChain(gm_LocalPlayerSlot) * 0.005f;
+		scale = (float) gm_CalcPersonWealth(gm_LocalPlayerSlot) * 0.005f;
 		factor = 1.5f;
 		if (*(unsigned short*) (churchBuilding + 0x27) != gm_LocalPlayerSlot)
 			factor = (200.0f - gm_CalcEntityFavor(gm_LocalPlayerSlot, *(unsigned short*) (churchBuilding + 0x27), 1)) * 0.01f;

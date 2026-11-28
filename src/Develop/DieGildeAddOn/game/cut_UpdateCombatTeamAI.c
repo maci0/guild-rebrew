@@ -5,7 +5,7 @@ char* __cdecl gm_FindOrCreateEntitySlot(int a, char* s);
 int __cdecl cut_FindCombatTarget(char* s);
 char* __cdecl d3_FindNearestEscapeNode(char* s);
 int __cdecl d3_TransformPoint(char* a, char* b, void* c);
-char __cdecl d3sm_SampleHeight(int a, void* b, void* c, void* d, void* e);
+char __cdecl d3sm_3D2SuperMap(int a, void* b, void* c, void* d, void* e);
 int __cdecl cm_SendUpdateCutsceneEntitySlot(int a, void* b);
 double __cdecl gm_GetEntityHealthRatio(char* s);
 int __cdecl fcn_0064d228(float v);
@@ -110,7 +110,7 @@ int __cdecl cut_UpdateCombatTeamAI(int ctx, int teamPtr)
 			targetPtr = (char*) d3_FindNearestEscapeNode(s);
 			d3_TransformPoint(targetPtr, targetPtr + 0x4c, point);
 			map_x = ctx;
-			status = d3sm_SampleHeight(*(int*) (d3_ActiveScene + 0xb0),
+			status = d3sm_3D2SuperMap(*(int*) (d3_ActiveScene + 0xb0),
 			    point, &map_x, &countC0, &height);
 			if (status != 0) {
 				continue;

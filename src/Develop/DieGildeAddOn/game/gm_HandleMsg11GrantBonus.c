@@ -13,7 +13,7 @@ int __cdecl gm_HasActiveSpecialObject(char* h, int n);
 int __cdecl ai_FindEntityInFavorRange(char* p, int kind, F8 f, int c, float r, int* out);
 int __cdecl gm_ResolveEntityById(void** out, int a, int b, int id);
 unsigned short __cdecl gm_RandomMod(int n);
-int __cdecl gm_WalkEntityChain(unsigned short id);
+int __cdecl gm_CalcPersonWealth(unsigned short id);
 int __cdecl io_FormatTextBuffer(char* buf, int id, int a, int b);
 int __cdecl cm_RequestTransferCurrencyNoKill(int a, int b, unsigned char c, int d);
 int __cdecl he_PostEntityMessage(int a, int b, char* s, int flag, int c, int d);
@@ -44,7 +44,7 @@ int __cdecl gm_HandleMsg11GrantBonus(int* request)
 	if (gm_ResolveEntityById((void**) &y, 0, 0, x) == 0)
 		return 0x400;
 	d = (double) (gm_RandomMod(3) & 0xffff) + 1.0;
-	r = (int) ((double) gm_WalkEntityChain(*(unsigned short*) h) * d * 0.01);
+	r = (int) ((double) gm_CalcPersonWealth(*(unsigned short*) h) * d * 0.01);
 	w = *(unsigned short*) ((char*) request + 4);
 	io_FormatTextBuffer(buf, w + 0x12e7, y, r);
 	cm_RequestTransferCurrencyNoKill(-1, *request, gm_ActiveTownIndex, r);

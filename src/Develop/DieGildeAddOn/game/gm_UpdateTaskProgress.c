@@ -36,7 +36,7 @@ unsigned int __cdecl cut_RandMod(int);
 int __cdecl gm_HasActiveSpecialObject(void*, int);
 char* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
 int __cdecl cut_AssignTargetOrder(char*, char*, char*, int, int);
-char __cdecl d3sm_SampleHeight(char*, float*, int*, int*, int*);
+char __cdecl d3sm_3D2SuperMap(char*, float*, int*, int*, int*);
 int __cdecl gm_FindBestBalancedTile(char*, int, int, int, unsigned int*, unsigned int*);
 char* __cdecl d3_FindSceneObject(int, int, int, char*);
 void __cdecl d3_TransformPoint(char*, float*, float*);
@@ -291,7 +291,7 @@ void __cdecl gm_UpdateTaskProgress(char* context)
 					goto tail1;
 				if (p->c1c)
 					goto tail1;
-				if (!d3sm_SampleHeight(base, (float*)(ent34(obj) + 0x4c),
+				if (!d3sm_3D2SuperMap(base, (float*)(ent34(obj) + 0x4c),
 					&v10, &v14, &v28))
 					break;
 				p->f14 = v10;
@@ -307,11 +307,11 @@ void __cdecl gm_UpdateTaskProgress(char* context)
 					goto tail1;
 				if (p->c1c)
 					goto tail1;
-				if (!d3sm_SampleHeight(base, (float*)((*(int*)(*(int*)(obj + 0x184) + 0x34)) + 0x4c),
+				if (!d3sm_3D2SuperMap(base, (float*)((*(int*)(*(int*)(obj + 0x184) + 0x34)) + 0x4c),
 					&v84, &v80, &v28))
 					break;
 				if (tgt) {
-					if (!d3sm_SampleHeight(base,
+					if (!d3sm_3D2SuperMap(base,
 						(float*)((*(int*)(*(int*)(tgt + 0x184) + 0x34)) + 0x4c),
 						&p->f14, &p->f18, &v28))
 						break;
@@ -335,7 +335,7 @@ lvl3:
 			cm_SendCutCommand55(obj, 2, p);
 			msg.f[0] = *(int*)(obj + 4);
 			msg.f[1] = 0;
-			if (!d3sm_SampleHeight(base, (float*)(ent34(obj) + 0x4c),
+			if (!d3sm_3D2SuperMap(base, (float*)(ent34(obj) + 0x4c),
 				(int*)0x102d020, (int*)0x102d024, &v28))
 				break;
 			if (gm_FindBestBalancedTile(obj, *(int*)0x102d020, *(int*)0x102d024, 0xc,
@@ -351,7 +351,7 @@ tail1_body:
 				break;
 			if (!p->f20)
 				break;
-			if (!d3sm_SampleHeight(base, (float*)(ent34(obj) + 0x4c),
+			if (!d3sm_3D2SuperMap(base, (float*)(ent34(obj) + 0x4c),
 				(int*)0x102d020, (int*)0x102d024, &v28))
 				break;
 			if (gm_FindBestBalancedTile(obj, *(int*)0x102d020, *(int*)0x102d024, 0xc,
@@ -421,7 +421,7 @@ tail1_body:
 				    (char*)(*(int*)(obj + 0x16c) == *(int*)0x772e9c
 					? 0x68bf70 : 0x68bf58));
 				d3_TransformPoint((char*)n, (float*)(n + 0x4c), vec);
-				if (!d3sm_SampleHeight(base, (float*)(n + 0x4c), &v10, &v14, &v28))
+				if (!d3sm_3D2SuperMap(base, (float*)(n + 0x4c), &v10, &v14, &v28))
 					break;
 				if (!gm_FindNearestWalkableTile(v10, v14, &v10, &v14))
 					break;

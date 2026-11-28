@@ -18,7 +18,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 /* One stage of the message-box tick; state lives at +0x70 of the caller's record. */
 /* ADDRESS: GOLDTL 0x0055f300 */
-void __cdecl he_RunObjektUpgrade(char* e)
+void __cdecl he_RunObjektReparatur(char* e)
 {
 	void* item;
 	char ch;

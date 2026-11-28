@@ -5296,7 +5296,7 @@ int __cdecl gm_ChangePlayerIdentityImpl(int from_id, int to_id, int unused)
 	} while (counter != 0);
 
 	chain = *(unsigned short*) from_ent;
-	link = gm_WalkEntityChain(chain);
+	link = gm_CalcPersonWealth(chain);
 	to_ent = (char*) gm_LookupEntityRecordById(to_id);
 	if (to_ent == NULL) {
 		return -2;
@@ -6481,7 +6481,7 @@ int __cdecl gm_GetBuildingWorth(unsigned char* building, int* out)
 	type = (unsigned char*) g_entity_type_table + building[0] * 0x24d;
 	v = g_const_0_0;
 	if (*(unsigned short*) (building + 0x27) != 0xffff) {
-		v = (float) gm_WalkEntityChain(*(unsigned short*) (building + 0x27));
+		v = (float) gm_CalcPersonWealth(*(unsigned short*) (building + 0x27));
 		if (2048000.0f < v) {
 			v = 2048000.0f;
 		}
@@ -7030,7 +7030,7 @@ int __cdecl gm_EntityAccumulate(void* entity)
  * Combines query iteration with field accumulation. */
 
 
-int __cdecl gm_WalkEntityChain(unsigned short raw_idx)
+int __cdecl gm_CalcPersonWealth(unsigned short raw_idx)
 {
 	unsigned short idx;
 	int slot;

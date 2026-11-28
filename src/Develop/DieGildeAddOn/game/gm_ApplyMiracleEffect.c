@@ -15,7 +15,7 @@ int __cdecl ai_FindEntityInFavorRange(void *, int, F8, float, float, int *); int
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 extern char gm_TownTable[];
 unsigned short __cdecl gm_RandomMod(int);
-int __cdecl gm_WalkEntityChain(unsigned short);
+int __cdecl gm_CalcPersonWealth(unsigned short);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl cm_BeginPacketFieldDelta(void *, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void *);
@@ -57,7 +57,7 @@ void __cdecl gm_ApplyMiracleEffect(unsigned char *e, int mode)
 			return;
 		gm_ResolveEntityById(&ent, 0, 0, found);
 		best = &((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short *) (ent + 0x27)];
-		v = gm_WalkEntityChain(best->entity_index);
+		v = gm_CalcPersonWealth(best->entity_index);
 		r = gm_RandomMod(3) + 2;
 		score = (int) ((double) r * ((double) v * 0.01));
 		cm_RequestTransferCurrencyNoKill(best->entity_id, -1, gm_ActiveTownIndex, score);
@@ -166,9 +166,9 @@ void __cdecl gm_ApplyMiracleEffect(unsigned char *e, int mode)
 			}
 		}
 		best = slots[0];
-		bv = gm_WalkEntityChain(best->entity_index);
+		bv = gm_CalcPersonWealth(best->entity_index);
 		for (i = 1; i < n; i++) {
-			v = gm_WalkEntityChain(slots[i]->entity_index);
+			v = gm_CalcPersonWealth(slots[i]->entity_index);
 			if (v < bv) {
 				bv = v;
 				best = slots[i];

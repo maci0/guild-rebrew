@@ -152,7 +152,7 @@ extern char* __cdecl gm_QueryEntities(int, int, int, int, int);
 /* Timed action 0xA6 (route supervisor) FINISH: once the linked record is gone or the
  * phase is 0, walks every matching cart and hands it to he_ProcessTradeCartRoute, then reschedules. */
 /* ADDRESS: GOLDTL 0x00570870 */
-void __cdecl fcn_00570870(char* h)
+void __cdecl he_RunRouteSupervisor(char* h)
 {
 	char* e;
 	int phase;

@@ -10,7 +10,7 @@ int __cdecl gm_CalcTortureCost(unsigned short* entityA, unsigned short* entityB,
 	int baseCost;
 	int i;
 
-	baseCost = (int) ((gm_WalkEntityChain(*entityA) + gm_WalkEntityChain(*entityB)) * 0.0005f);
+	baseCost = (int) ((gm_CalcPersonWealth(*entityA) + gm_CalcPersonWealth(*entityB)) * 0.0005f);
 	for (i = 0; i < 7; i++) {
 		if (gm_TortureMultipliers[i].key == key) {
 			return gm_TortureMultipliers[i].mult * baseCost;

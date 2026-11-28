@@ -9,7 +9,7 @@ void __cdecl cut_FormatProzessPunishment(void* entity, int mode, void* output)
 	int v;
 	int n;
 
-	v = gm_WalkEntityChain(*(unsigned short*) entity);
+	v = gm_CalcPersonWealth(*(unsigned short*) entity);
 	n = (int) ((float) v * 0.03f);
 	switch (mode) {
 	case 1:

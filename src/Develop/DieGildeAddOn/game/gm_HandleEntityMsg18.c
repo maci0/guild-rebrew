@@ -68,7 +68,7 @@ int __cdecl gm_HandleEntityMsg18(unsigned int* request)
 	}
 	v = gm_RandomMod(4);
 	d = (double) v + dbl_2_0;
-	n = (int) (((double) gm_WalkEntityChain(*ent) * d) *
+	n = (int) (((double) gm_CalcPersonWealth(*ent) * d) *
 	    dbl_0_01);
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7, n);
 	he_PostEntityMessage(*(int*) ((char*) ent + 4), *(int*) ((char*) ent + 4), buf,

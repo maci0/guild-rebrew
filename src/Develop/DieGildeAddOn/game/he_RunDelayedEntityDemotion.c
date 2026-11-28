@@ -26,7 +26,7 @@ void __cdecl cm_SendCopyEntityData(struct msg*);
 void __cdecl cm_RequestSetEntityLevel(int, int);
 void __cdecl he_FreeAction(char*);
 
-void __cdecl he_RunDelayedEntityDemotion(char* action)
+void __cdecl he_RunMeisterpruefungFinish(char* action)
 {
 	struct msg msg;
 	char* entity;

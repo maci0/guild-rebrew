@@ -10,7 +10,7 @@ void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl he_FreeAction(char*);
 
-void __cdecl he_AllocTimedFlagAction(char* action)
+void __cdecl he_StartReparatur(char* action)
 {
 	unsigned char* subentity;
 

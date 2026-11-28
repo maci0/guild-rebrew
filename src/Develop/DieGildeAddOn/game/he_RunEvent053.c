@@ -15,7 +15,7 @@ int __cdecl gm_RandomMod(int);
 int __cdecl ai_FindEntityInFavorRange(unsigned short*, int, int, int, float, float, int*);
 void __cdecl gm_ResolveEntityById(void**, void**, void**, int);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
-int __cdecl gm_WalkEntityChain(unsigned short);
+int __cdecl gm_CalcPersonWealth(unsigned short);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 
 /* ADDRESS: GOLDTL 0x005505b0 */
@@ -50,7 +50,7 @@ void __cdecl he_RunEvent053(int a)
 				he_PostEntityMessage(*(int*) (p + 4), -1, buf, 0x20, 0x601, 0);
 			}
 			if (id != 0) {
-				n = (int) ((double) gm_WalkEntityChain(*(unsigned short*) p) * flt_0_01);
+				n = (int) ((double) gm_CalcPersonWealth(*(unsigned short*) p) * flt_0_01);
 				n *= (gm_RandomMod(4) & 0xffff) + 2;
 				cm_RequestTransferCurrencyNoKill(*(int*) (p + 4), -1, (unsigned char) gm_ActiveTownIndex, n);
 				if (*(char*) (p + 2) == 6 || *(char*) (p + 2) == 7) {

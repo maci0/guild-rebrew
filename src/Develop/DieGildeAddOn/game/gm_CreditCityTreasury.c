@@ -6,7 +6,7 @@ char* __cdecl gm_GetGuildHall(int);
 char* __cdecl gm_QueryEntities(int, int, int, ...);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 
-void __cdecl gm_CreditCityTreasury(int amount)
+void __cdecl gm_DebitCityTreasury(int amount)
 {
 	char* e;
 	char* r;

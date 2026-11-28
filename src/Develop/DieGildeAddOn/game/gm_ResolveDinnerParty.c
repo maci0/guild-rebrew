@@ -28,7 +28,7 @@ extern unsigned char gm_ActiveTownIndex;
 
 unsigned short __cdecl gm_RandomMod(unsigned short range);
 int __cdecl amt_GetEffectiveRoleLevel(unsigned short id, int a2);
-int __cdecl gm_WalkEntityChain(unsigned short id);
+int __cdecl gm_CalcPersonWealth(unsigned short id);
 void __cdecl cm_RequestCopyEntityData(int a1, int a2, int a3, int a4);
 void __cdecl cm_RequestMoveCredits(int a1, int a2, char a3, int a4);
 
@@ -98,7 +98,7 @@ int __cdecl gm_ResolveDinnerParty(BANQUET_PARTY* p, int flag)
 			cm_RequestCopyEntityData(p->ent->id, p->members[i].ent->id, x, 1);
 		}
 	}
-	q = gm_WalkEntityChain(p->ent->slot);
+	q = gm_CalcPersonWealth(p->ent->slot);
 	p->text = (int) ((float) (10 - p->b - p->a) * q * p->count * 0.001f);
 	if (flag) {
 		cm_RequestMoveCredits(-1, p->ent->id, *(char*) &gm_ActiveTownIndex, p->text);

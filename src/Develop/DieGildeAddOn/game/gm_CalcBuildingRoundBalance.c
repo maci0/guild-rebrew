@@ -23,7 +23,7 @@ extern char* lpGebaeudePROT;
 extern unsigned char gm_ActiveTownIndex;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-float __cdecl gm_GetWorkforceOutput(unsigned char* p, int k, int a, int b);
+float __cdecl gm_GetTypeWageBase(unsigned char* p, int k, int a, int b);
 void* __cdecl ahm_GetWorkshopOwner(unsigned char* e);
 int __cdecl ahm_CalcWorkshopOutputScore(char* e);
 char* __cdecl gm_QueryEntities(int, int, int, int, int);
@@ -71,7 +71,7 @@ int __cdecl gm_CalcBuildingRoundBalance(unsigned char* bld, int ownerIdx, char* 
 		for (i = 0; i < 6; i++) {
 			if (row[i + 0x223] != 0 && row[i + 0x223] == ent->unk_164 &&
 			    ent->entity_state != 0x14) {
-				val = (int) (gm_GetWorkforceOutput((unsigned char*) slot, *bld, i, -1) *
+				val = (int) (gm_GetTypeWageBase((unsigned char*) slot, *bld, i, -1) *
 					     ((double) *(int*) (bld + 0x3d) * 0.01));
 				*(int*) (out + 0x18 + i * 4) += val;
 				total += val;
@@ -81,7 +81,7 @@ int __cdecl gm_CalcBuildingRoundBalance(unsigned char* bld, int ownerIdx, char* 
 		for (i = 0; i < 2; i++) {
 			if (row[i + 0x22f] != 0 && row[i + 0x22f] == ent->unk_165[0] &&
 			    ent->entity_state != 0x14) {
-				val = (int) (gm_GetWorkforceOutput((unsigned char*) slot, *bld, -1, i) *
+				val = (int) (gm_GetTypeWageBase((unsigned char*) slot, *bld, -1, i) *
 					     ((double) *(int*) (bld + 0x3d) * 0.01));
 				*(int*) (out + 0x10 + i * 4) += val;
 				total += val;
@@ -89,7 +89,7 @@ int __cdecl gm_CalcBuildingRoundBalance(unsigned char* bld, int ownerIdx, char* 
 			}
 		}
 		if (found == 0 && ent->entity_state != 0x14) {
-			val = (int) (gm_GetWorkforceOutput((unsigned char*) slot, *bld, -1, 0) *
+			val = (int) (gm_GetTypeWageBase((unsigned char*) slot, *bld, -1, 0) *
 				     ((double) *(int*) (bld + 0x3d) * 0.01));
 			*(int*) (out + 0x10) += val;
 			total += val;

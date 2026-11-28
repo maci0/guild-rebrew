@@ -37,7 +37,7 @@ extern int gm_GameTimeSliceDword;
 extern short gm_GameTimeTailWord;
 
 int __cdecl amt_FindOfficeSlotByType(int id, int* out);
-char* __cdecl amt_GetOfficeHolderRecord(int kind);
+char* __cdecl amt_GetOfficeOverlord(int kind);
 float __cdecl amt_ScoreOfficeCandidate(unsigned char* a1, unsigned short* a2, int a3, int a4);
 void __cdecl cm_RequestChangeBits(int a1, int a2, int a3, int a4, int a5);
 int __cdecl amt_SendOfficeCommand(unsigned char a1, char* a2, char* a3, int a4, int a5);
@@ -83,7 +83,7 @@ void __cdecl amt_AssignSpecialOffices(void)
 		}
 		rec += 0x21c;
 	} while ((int) rec < 0x85a0a0);
-	obj = amt_GetOfficeHolderRecord(id);
+	obj = amt_GetOfficeOverlord(id);
 	if (obj == 0) {
 		for (i = 0; i < count; i++) {
 			if (hits[i].p == 0) {

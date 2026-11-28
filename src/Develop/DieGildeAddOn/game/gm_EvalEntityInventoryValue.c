@@ -26,7 +26,7 @@ int __cdecl gm_EvalEntityInventoryValue(unsigned char* o, int* out)
 	rec = &((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*o];
 	v = flt_0_0;
 	if (*(unsigned short*) (o + 0x27) != 0xffff) {
-		v = (float) gm_WalkEntityChain(*(unsigned short*) (o + 0x27));
+		v = (float) gm_CalcPersonWealth(*(unsigned short*) (o + 0x27));
 		if (g_665bf4 < v) {
 			v = g_665bf4;
 		}

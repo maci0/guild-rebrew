@@ -28,7 +28,7 @@ extern char gm_SlotTableKindView[1];
 void* __cdecl gm_LookupEntityRecordById(unsigned int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl gm_MapEntityStatRange(unsigned char);
-int __cdecl gm_WalkEntityChain(unsigned short);
+int __cdecl gm_CalcPersonWealth(unsigned short);
 unsigned char __cdecl gm_GetRangeStatId(int, int);
 void __cdecl cm_SendCopyEntityData(AI_LEVEL_TRAINING_MSG*);
 
@@ -109,10 +109,10 @@ void __cdecl ai_ScheduleLevelTraining(void)
 				if (!v29 && candidateCount) {
 					rec -= 2;
 					v6 = gm_MapEntityStatRange(rec[0x164]);
-					v28 = gm_WalkEntityChain(*(unsigned short*) rec);
+					v28 = gm_CalcPersonWealth(*(unsigned short*) rec);
 					v29 = (int) ((float) v28 * g_664150);
 					v8 = gm_MapEntityStatRange(e0[0x164]);
-					v28 = gm_WalkEntityChain(*(unsigned short*) e0);
+					v28 = gm_CalcPersonWealth(*(unsigned short*) e0);
 					v7 = (int) ((float) v28 * g_664150);
 					if (v6 && !v8) {
 						chosen = rec;

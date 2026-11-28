@@ -35,7 +35,7 @@ int __cdecl gm_CheckAndCollectEntityDebt(Entity* e, int extra)
 		return 0;
 	}
 	d = -v;
-	d += gm_WalkEntityChain(e->slot);
+	d += gm_CalcPersonWealth(e->slot);
 	if (e->type != 6 && e->type != 7) {
 		if (abs((int) v) / d > 0.2) {
 			return 1;

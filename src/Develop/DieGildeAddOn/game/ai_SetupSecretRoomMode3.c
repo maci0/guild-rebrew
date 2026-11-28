@@ -19,7 +19,7 @@ int __cdecl ai_SetupSecretRoomMode3(Ent* e, char* firstOut, char* secondOut)
 	int v;
 	int i;
 
-	t = gm_WalkEntityChain(e->id);
+	t = gm_CalcPersonWealth(e->id);
 	m = gm_SumQueryEntryValues(e->stock, gm_ActiveTownIndex);
 	v = (int) (m * 0.25f);
 	thr[0] = (int) (t * 0.01f);

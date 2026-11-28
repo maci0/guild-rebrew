@@ -42,7 +42,7 @@ void __cdecl gm_HasGuildHall(int);
 void* __cdecl gm_StartFilteredEntitySearch(int, ...);
 void* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_CollectBuildingObjectSlots(char*, int*);
-float __cdecl gm_GetWorkforceOutput(unsigned char*, int, int, int);
+float __cdecl gm_GetTypeWageBase(unsigned char*, int, int, int);
 void* __cdecl sim_StartEntityQueryByType(unsigned char*);
 unsigned char* __cdecl gm_FindBuildingPrimarySlot(unsigned char*);
 int __cdecl init_SpawnBuildingCharacter(int, int, int, int, int);
@@ -239,7 +239,7 @@ void __cdecl gm_UpdateOwnerBuildings(unsigned int arg)
 				if (gm_CollectBuildingObjectSlots((char*) p, (int*) msg)) {
 					for (a = 0; a < 2; a++) {
 						for (j = 0; j < 12; j++) {
-							f = gm_GetWorkforceOutput(tile, *p, -1, a);
+							f = gm_GetTypeWageBase(tile, *p, -1, a);
 							v = (int) (((double) *(int*) (p + 0x3d) * 0.01) * f);
 							id2 = ((int*) msg)[1 + a * 12 + j];
 							if (id2 == 0xffff) {
@@ -355,7 +355,7 @@ void __cdecl gm_UpdateOwnerBuildings(unsigned int arg)
 						}
 					}
 					for (j = 0; j < 12; j++) {
-						f = gm_GetWorkforceOutput(tile, *p, -1, 0);
+						f = gm_GetTypeWageBase(tile, *p, -1, 0);
 						v = (int) (((double) *(int*) (p + 0x3d) * 0.01) * f);
 						id2 = ((int*) msg)[0x19 + j];
 						if (id2 != 0xffff) {

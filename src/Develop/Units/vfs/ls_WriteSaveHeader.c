@@ -22,7 +22,7 @@ char* __cdecl m_alloc(int, char*);
 void __cdecl m_FreeTracked(void*);
 unsigned int __cdecl vfs_fwrite(void*, int, int, void*);
 void __cdecl gfx_UnpackPixelRgb(unsigned int, char*, char*, char*);
-int __cdecl gm_WalkEntityChain(unsigned short);
+int __cdecl gm_CalcPersonWealth(unsigned short);
 int __cdecl gm_AmountToUnits(int, unsigned char);
 
 /* ADDRESS: GOLDTL 0x0051e490 */
@@ -124,7 +124,7 @@ int __cdecl ls_WriteSaveHeader(void* outputStream, int a1)
 		if (vfs_fwrite(&((ENTITY_RECORD*)gm_EntitySlotTable)[gm_LocalPlayerSlot].unk_00d, 1, 1, outputStream) <= 0) {
 			goto fail;
 		}
-		tmp = gm_AmountToUnits(gm_WalkEntityChain(gm_LocalPlayerSlot), gm_ActiveTownIndex);
+		tmp = gm_AmountToUnits(gm_CalcPersonWealth(gm_LocalPlayerSlot), gm_ActiveTownIndex);
 		if (vfs_fwrite(&tmp, 4, 1, outputStream) <= 0) {
 			goto fail;
 		}

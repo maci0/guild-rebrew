@@ -2,7 +2,7 @@
 
 char* __cdecl gm_LookupEntityRecordById(int);
 float __cdecl gm_GetEntityAge(int);
-int __cdecl gm_WalkEntityChain(unsigned short);
+int __cdecl gm_CalcPersonWealth(unsigned short);
 float __cdecl gm_CalcEntityFavor(unsigned int, unsigned int, unsigned int);
 int __cdecl gm_CheckPrivilege(int, char*, int);
 
@@ -47,20 +47,20 @@ int __cdecl gm_CalcWerbungSteps(int sourceId, int targetId)
 	}
 	t = gm_LookupEntityRecordById(*(int*) (q + 0x60));
 	if (t != 0) {
-		f10 = (float) (gm_WalkEntityChain(*(unsigned short*) t) / 2);
+		f10 = (float) (gm_CalcPersonWealth(*(unsigned short*) t) / 2);
 	}
 	t = gm_LookupEntityRecordById(*(int*) (q + 0x64));
 	if (t != 0) {
-		f8 = (float) (gm_WalkEntityChain(*(unsigned short*) t) / 2);
+		f8 = (float) (gm_CalcPersonWealth(*(unsigned short*) t) / 2);
 	}
-	if ((float) gm_WalkEntityChain(*(unsigned short*) q) > 0.0f) {
-		fc = (float) gm_WalkEntityChain(*(unsigned short*) q);
+	if ((float) gm_CalcPersonWealth(*(unsigned short*) q) > 0.0f) {
+		fc = (float) gm_CalcPersonWealth(*(unsigned short*) q);
 	}
 	else {
 		fc = 0.0f;
 	}
 	fc = MAX(fc, MAX(f10, f8));
-	f8 = (float) gm_WalkEntityChain(*(unsigned short*) p);
+	f8 = (float) gm_CalcPersonWealth(*(unsigned short*) p);
 	if (f8 > fc) {
 		f8 = 1.0f;
 	}

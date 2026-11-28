@@ -35,8 +35,8 @@ int __cdecl ai_PrepareSecretRoomAction0(char* actor, char* action_out, char* tar
 	}
 	t = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)gm_EntitySlotTable)[(unsigned short) idx]);
 	have = (int) (gm_SumQueryEntryValues(*(int*) (actor + 0x178), (*(char*)&gm_ActiveTownIndex)) * 0.25f);
-	need = gm_WalkEntityChain(*(unsigned short*) actor);
-	need = (int) ((gm_WalkEntityChain(t->entity_index) + need) * 0.02f);
+	need = gm_CalcPersonWealth(*(unsigned short*) actor);
+	need = (int) ((gm_CalcPersonWealth(t->entity_index) + need) * 0.02f);
 	if (have < need) {
 		return 0;
 	}

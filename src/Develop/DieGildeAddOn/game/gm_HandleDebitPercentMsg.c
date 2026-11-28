@@ -26,7 +26,7 @@ int __cdecl gm_HandleDebitPercentMsg(void* noticeRequest)
 	}
 	n = gm_RandomMod(3) & 0xffff;
 	d = (double) n + 2.0;
-	n = gm_WalkEntityChain(*(short*) p);
+	n = gm_CalcPersonWealth(*(short*) p);
 	r = (int) (((double) n * d) * 0.01);
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) noticeRequest + 4) + 0x12e7, r);
 	cm_RequestTransferCurrencyNoKill(*(int*) noticeRequest, -1, gm_ActiveTownIndex, r);

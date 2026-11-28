@@ -8,7 +8,7 @@ int __cdecl sprintf(char*, const char*, ...);
 void __cdecl cm_RecycleCommandQueueNode(char*);
 int __cdecl cm_IsQueuedCommandComplete(char*);
 void __cdecl cm_ReassembleQueuedCommand(char*);
-int __cdecl ahm_ProcessEntityChain(char*);
+int __cdecl cm_CheckCommandGroup(char*);
 void __cdecl main_ExitToFrameHandler(int);
 
 /* ADDRESS: GOLDTL 0x004c4b00 */
@@ -60,7 +60,7 @@ int __cdecl cm_ExecCommand(void)
 				if (*node == 5)
 					prev = node;
 			} else if (*node == 6) {
-				if (!ahm_ProcessEntityChain(prev))
+				if (!cm_CheckCommandGroup(prev))
 					pass = 0;
 				slot = prev + 0x95;
 				next = *(char**) slot;

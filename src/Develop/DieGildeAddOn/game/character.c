@@ -34,7 +34,7 @@ char* __cdecl d3sm_GetObjectSuperMap(char*);
 #include "Develop/Units/d3/client_scene_transform.h"
 float __cdecl d3_ComputeYawToTarget(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
-char __cdecl d3sm_SampleHeight(char*, float*, int*, int*, float*);
+char __cdecl d3sm_3D2SuperMap(char*, float*, int*, int*, float*);
 void __cdecl d3_GetFloorHeight(char*, float*, int, int*, int*, float*);
 extern float flt_0_0;
 #include "Develop/Units/d3/d3_animation.h"
@@ -247,7 +247,7 @@ int __cdecl ch_PlaceOnGround(void* object, int force)
 		*(int*) &pos[0] = *(int*) (node + 0x4c);
 		*(int*) &pos[1] = *(int*) (node + 0x50);
 		*(int*) &pos[2] = *(int*) (node + 0x54);
-		if (d3sm_SampleHeight(map, pos, &col, &row, &height)) {
+		if (d3sm_3D2SuperMap(map, pos, &col, &row, &height)) {
 			cell = *(int*) (*(char**) (map + 0x24) + (*(int*) (map + 0x20) * row + col) * 0x1c);
 			if (force != 0 || (cell != 0 && cell != 0xd)) {
 				if (*(int*) (*(char**) (obj + 0x88) + 0xac) != 0) {

@@ -11,7 +11,7 @@ char* __cdecl gm_QueryEntities(int, int, int, int);
 char* __cdecl gm_NextEntityQueryMatch(void);
 char* __cdecl gm_AllocObjekt(int, int, int);
 
-int __cdecl gv_AddCandidateToOfficePool(char*);
+int __cdecl gv_BuryInGrave(char*);
 int __cdecl gv_RentGravePlot(char*);
 int __cdecl fcn_004f2880(char*);
 int __cdecl fcn_004f2a80(char*);
@@ -61,7 +61,7 @@ found:
 }
 
 /* ADDRESS: GOLDTL 0x004cd990 */
-int __cdecl fcn_004cd990(char* input, char* response)
+int __cdecl cm_DispatchGraveyardCommand(char* input, char* response)
 {
 	int r;
 	char* p;
@@ -79,7 +79,7 @@ int __cdecl fcn_004cd990(char* input, char* response)
 	p = input + 0x10;
 	switch (*(int*) p) {
 	case 0:
-		r = gv_AddCandidateToOfficePool(p);
+		r = gv_BuryInGrave(p);
 		break;
 	case 1:
 		r = gv_RentGravePlot(p);

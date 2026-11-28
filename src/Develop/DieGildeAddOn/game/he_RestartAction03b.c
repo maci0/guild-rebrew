@@ -36,7 +36,7 @@ char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 void __cdecl he_FreeAction(char*);
 void __cdecl cm_SendCopyEntityData(struct msg*);
 
-void __cdecl he_RestartAction03b(void)
+void __cdecl he_RestartMarktSupervisor(void)
 {
 	struct msg m;
 	char* p;

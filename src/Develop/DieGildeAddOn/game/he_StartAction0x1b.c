@@ -36,7 +36,7 @@ int __cdecl gm_SumContainerCredits(int);
 void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
 void __cdecl he_FreeAction(char*);
 
-void __cdecl he_StartAction0x1b(char* u)
+void __cdecl he_StartGebVerkaufen(char* u)
 {
 	struct BUILDING_PROTOTYPE * gd;
 	char text[0x800];

@@ -3,7 +3,7 @@ extern char* d3_ActiveScene;
 char* __cdecl gm_FindOrCreateEntitySlot(int, char*);
 char* __cdecl gm_GetEquippedCombatGear(char*);
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
-char __cdecl d3sm_SampleHeight(int, int, void*, void*, void*);
+char __cdecl d3sm_3D2SuperMap(int, int, void*, void*, void*);
 void __cdecl d3_SetObjectColorRgb(int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl d2_ShowStatusBanner(char*);
@@ -35,7 +35,7 @@ void __cdecl d2_ShowCombatSlotStatus(int slotId, char* entity)
 	case 2:
 		opponent = gm_LookupEntityRecordIn32SlotTable(*(int*) (rec + 0x10));
 		sceneObj = *(int*) (*(int*) (opponent + 0x184) + 0x34);
-		if (d3sm_SampleHeight(top, sceneObj + 0x4c, &col, &row, &height)) {
+		if (d3sm_3D2SuperMap(top, sceneObj + 0x4c, &col, &row, &height)) {
 			d3_SetObjectColorRgb(sceneObj, 0xff, 0, 0);
 		}
 		{

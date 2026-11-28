@@ -36,7 +36,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00554b90 */
-void __cdecl he_RunAction0x67(char* e)
+void __cdecl he_RunPacht(char* e)
 {
 	struct { int n; int ids[8]; } L;
 	int vals[8];

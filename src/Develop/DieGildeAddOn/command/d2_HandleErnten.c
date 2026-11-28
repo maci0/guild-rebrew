@@ -34,7 +34,7 @@ extern int gm_AllEntitiesControllable;
 extern int g_14ce8cc;
 extern char* g_14a555c;
 extern char* g_14a5558;
-extern int g_14a79c0[];
+extern int d2_ObjektNameTable[];
 
 char* __cdecl plt_FindRecordByOwner(int, int);
 void __cdecl cm_SendCopyEntityData(char*);
@@ -84,7 +84,7 @@ void __cdecl d2_HandleErnten(char* building, int plant_table)
 	if (entry[0xd] > 1) {
 		char text[0xf8];
 
-		fcn_0064d41a(text, g_14a555c, ((OBJEKT_NAME_ENTRY*)g_14a79c0)[*(unsigned short*) (entry + 0xa)].name);
+		fcn_0064d41a(text, g_14a555c, ((OBJEKT_NAME_ENTRY*)d2_ObjektNameTable)[*(unsigned short*) (entry + 0xa)].name);
 		d2_SetMouseTooltip(text);
 	} else {
 		d2_SetMouseTooltip(g_14a5558);

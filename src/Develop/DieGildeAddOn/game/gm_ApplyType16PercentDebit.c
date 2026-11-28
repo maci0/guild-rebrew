@@ -52,7 +52,7 @@ int __cdecl gm_ApplyType16PercentDebit(void* request)
 		gm_StartFilteredEntitySearch(1, 1, arr[gm_RandomMod(i) & 0xffff]);
 		n = gm_RandomMod(5) & 0xffff;
 		d = (double) n + 2.0;
-		n = gm_WalkEntityChain(*(short*) p);
+		n = gm_CalcPersonWealth(*(short*) p);
 		r = (int) (((double) n * d) * 0.01);
 		io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7, r);
 		cm_RequestTransferCurrencyNoKill(*(int*) request, -1, gm_ActiveTownIndex, r);

@@ -35,7 +35,7 @@ typedef struct
 extern int d2_CurrentWindowId;
 extern char* d2_CurrentWindow;
 extern char* d2_Controls;
-extern int g_14a79c0[];
+extern int d2_ObjektNameTable[];
 extern char gm_TownTable[];
 
 void __cdecl d2_SetForm(int, int);
@@ -64,7 +64,7 @@ void __cdecl d2_PopulateGeldleiheRows(Row* rows, int window, int form, int a4)
 		}
 		((D2_CONTROL_TL*) d2_Controls)[rows[i].icon].value_054 = 1;
 		rows[i].name = d2_ShowTxt((((Screen*)d2_CurrentWindow)->width - 0xbe) >> 1, i * 0x4c + 0x30, "", d2_CurrentWindowId);
-		io_FormatTextBuffer(buf, "%S", g_14a79c0[rows[i].id * 2]);
+		io_FormatTextBuffer(buf, "%S", d2_ObjektNameTable[rows[i].id * 2]);
 		d2_SetLabelText(rows[i].name, buf);
 		d2_SetElementFont(rows[i].icon, 0x54);
 		d2_SetElementFont(rows[i].name, 0x54);

@@ -72,7 +72,7 @@ void __cdecl d2_RunPersonDialog(char* w)
 		}
 	}
 	io_AppendText(0x37, (w[9] != 0 ? 0x11e : 0x114) + *(unsigned char*) (w + 0xd));
-	io_AppendText(0x2e, gm_WalkEntityChain(*(unsigned short*) w));
+	io_AppendText(0x2e, gm_CalcPersonWealth(*(unsigned short*) w));
 	io_AppendText(0x2f);
 	q = gm_LookupEntityRecordById(*(int*) (w + 0x5c));
 	if (q != 0 && *(unsigned char*) (q + 8) > 0) {

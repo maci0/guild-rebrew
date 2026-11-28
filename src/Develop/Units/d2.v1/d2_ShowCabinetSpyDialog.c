@@ -41,7 +41,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 extern int d2_CurrentElementId;
 #include "Develop/DieGildeAddOn/game/client_data.h"
-int __cdecl gm_WalkEntityChain(unsigned short);
+int __cdecl gm_CalcPersonWealth(unsigned short);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -83,7 +83,7 @@ void __cdecl d2_ShowCabinetSpyDialog(char* building)
 	int target;
 	float f;
 
-	act.count = gm_WalkEntityChain(*(unsigned short*) &gm_LocalPlayerSlot);
+	act.count = gm_CalcPersonWealth(*(unsigned short*) &gm_LocalPlayerSlot);
 	f = (float) act.count;
 	act.amt[0] = (int) (f * 0.01f);
 	act.amt[1] = (int) (f * 0.015f);

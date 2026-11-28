@@ -8,7 +8,7 @@ typedef struct OfficeCandidateHit {
 } OfficeCandidateHit;
 
 void __cdecl amt_SendSpecialOfficeSlot(int a1);
-char* __cdecl amt_GetOfficeHolderRecord(int kind);
+char* __cdecl amt_GetOfficeOverlord(int kind);
 float __cdecl amt_ScoreOfficeCandidate(unsigned char* a1, unsigned short* a2, int a3, int a4);
 void __cdecl cm_RequestChangeBits(int a1, int a2, int a3, int a4, int a5);
 int __cdecl io_FormatTextBuffer(char* buf, int a, int b);
@@ -44,7 +44,7 @@ void __cdecl amt_NominateSpecialOfficeCandidates(void)
 	idx--;
 	v6 = *(int*) (idx * 4 + 0x664e34);
 	amt_SendSpecialOfficeSlot(idx);
-	obj = amt_GetOfficeHolderRecord(v4);
+	obj = amt_GetOfficeOverlord(v4);
 	if (obj == 0) {
 		return;
 	}

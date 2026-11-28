@@ -21,7 +21,7 @@ void __cdecl he_NotifyAction0x35Success(void* a1);
 extern pos14_7f4c00 gm_GameTime;
 
 /* ADDRESS: GOLDTL 0x0054c240 */
-void __cdecl he_StartAction53(u8* action)
+void __cdecl he_StartPamphlet(u8* action)
 {
     char* target;
     int cnt = 0;

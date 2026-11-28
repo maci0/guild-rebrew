@@ -26,7 +26,7 @@ void __cdecl d2_SetElementFont(int, int);
 void __cdecl d3_VisitSceneObjects(char*, int, int, void*, int);
 int __cdecl io_AppendText(char*, ...);
 void __cdecl d3_TransformPoint(char*, char*, float*);
-char __cdecl d3sm_SampleHeight(char*, float*, int*, int*, int*);
+char __cdecl d3sm_3D2SuperMap(char*, float*, int*, int*, int*);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl d2_UpdateWindowDrag(char*);
 void __cdecl d2_CloseWindow(int);
@@ -58,7 +58,7 @@ void __cdecl d2_ShowSmapDiagnostics(void)
 		map = *(char**) (((char*)d3_ActiveScene) + 0xb0);
 		e = g_778b20[i];
 		d3_TransformPoint(e, e + 0x4c, v);
-		if (map != 0 && d3sm_SampleHeight(map, v, &x, &y, &z)) {
+		if (map != 0 && d3sm_3D2SuperMap(map, v, &x, &y, &z)) {
 			c = *(int*) (*(char**) (map + 0x24) + (*(int*) (map + 0x20) * y + x) * 28);
 			if (c == 0 || c == 10) {
 				strcat(buf, "smap-pos is blocked  ");

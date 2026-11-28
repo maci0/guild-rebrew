@@ -12,7 +12,7 @@ extern pos14_7f4c00 gm_GameTime;
 void __cdecl gm_AddTime(char*, int, int, int);
 int __cdecl cm_SendSetHE(int, char*);
 
-void __cdecl he_StartAction0x67(char* e)
+void __cdecl he_StartPacht(char* e)
 {
 	if ((e[0x78] & 4) == 0) {
 		*(pos14_7f4c00*) (e + 0x52) = (*(pos14_7f4c00*)&gm_GameTime);

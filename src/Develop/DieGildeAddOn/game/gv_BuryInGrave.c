@@ -18,7 +18,7 @@ typedef struct PoolEntry5 {
 #pragma pack(pop)
 
 /* ADDRESS: GOLDTL 0x004f2350 */
-int __cdecl gv_AddCandidateToOfficePool(int e)
+int __cdecl gv_BuryInGrave(int e)
 {
 	char* p;
 	char* q;

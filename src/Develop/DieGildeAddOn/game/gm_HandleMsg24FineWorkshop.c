@@ -84,7 +84,7 @@ int __cdecl gm_HandleMsg24FineWorkshop(Cmd* cmd)
 		return 0x400;
 	}
 	f = ((gm_RandomMod(2) & 0xffff) + 1.0f) * 0.01f;
-	amount = (int)(gm_WalkEntityChain(e->id) * f);
+	amount = (int)(gm_CalcPersonWealth(e->id) * f);
 	cm_RequestTransferCurrencyNoKill(-1, cmd->handle, gm_ActiveTownIndex, amount);
 	k = gm_RandomMod(n) & 0xffff;
 	o = objs[k];

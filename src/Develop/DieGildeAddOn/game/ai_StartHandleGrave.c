@@ -4,7 +4,7 @@ int __cdecl fcn_0047d220(char* p);
 void* __cdecl fcn_004f18d0(char* a1, char* a2, int a3, int a4, int a5);
 int __cdecl gv_CalcGraveUpgradePrice(int a, int b, int c, int* out);
 int __cdecl gm_GetSeasonTreasury(int a, char b);
-int __cdecl gm_CalcBribeOrPriceScore(char* a1, int a2, int a3, int a4, int* out);
+int __cdecl gv_CalcGravePrice(char* a1, int a2, int a3, int a4, int* out);
 int __cdecl gm_GetEntitySlotIndex(int a, int* b);
 int __cdecl fcn_0042e410(int a);
 extern unsigned char* lpGebaeudePROT;
@@ -105,7 +105,7 @@ int __cdecl ai_StartHandleGrave(int unused0, char* actorEntity, int busy, int* o
 		targetSlot = (int*) fcn_004f18d0(0, (char*) graveSlot, 0, 0x4f1840, 0xff);
 		if (targetSlot != 0) {
 			int price, dummy;
-			price = gm_CalcBribeOrPriceScore((int) actorEntity, 0xff, *targetSlot, 1, &dummy);
+			price = gv_CalcGravePrice((int) actorEntity, 0xff, *targetSlot, 1, &dummy);
 			treasury = gm_GetSeasonTreasury((int) actorEntity, gm_ActiveTownIndex);
 			if ((int) ((float) treasury * g_664160) < price) {
 				return 0;

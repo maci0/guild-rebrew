@@ -44,7 +44,7 @@ extern short io_ActiveCursorY;
 extern int g_7ea380[15];
 extern char str_empty[];
 
-extern char* g_14a79c0[];
+extern char* d2_ObjektNameTable[];
 
 void __cdecl d2_DestroyElement(int id);
 void __cdecl d2_LoadBuildingGroundplan(void);
@@ -195,7 +195,7 @@ void __cdecl d2_UpdateBuildingGroundplan(unsigned int inputFlags)
 							}
 						}
 						if (v8)
-							d2_SetMouseTooltip(g_14a79c0[(unsigned short) *v8 * 2]);
+							d2_SetMouseTooltip(d2_ObjektNameTable[(unsigned short) *v8 * 2]);
 					}
 label_527db2:
 					if (d2_InteriorBuilding) {
@@ -234,7 +234,7 @@ label_527db2:
 							}
 						}
 						if (v8)
-							d2_SetMouseTooltip(g_14a79c0[(unsigned short) *v8 * 2]);
+							d2_SetMouseTooltip(d2_ObjektNameTable[(unsigned short) *v8 * 2]);
 					}
 				}
 			}

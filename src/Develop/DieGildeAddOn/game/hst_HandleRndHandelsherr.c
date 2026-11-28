@@ -101,7 +101,7 @@ int __cdecl hst_HandleRndHandelsherr(int mode, int* pairs, int idx, char* text, 
 		    && (((Rec21c*)gm_EntitySlotTable)[i].cls < 0x28 || ((Rec21c*)gm_EntitySlotTable)[i].cls > 0x2d)
 		    && (((Rec21c*)gm_EntitySlotTable)[i].cls < 0x34 || ((Rec21c*)gm_EntitySlotTable)[i].cls > 0x39)
 		    && gm_IsSlotActivePerson((unsigned short) i) != 0) {
-			v = gm_WalkEntityChain((unsigned short) i);
+			v = gm_CalcPersonWealth((unsigned short) i);
 			if (v > score[4] && hst_IsCandidateUnlisted(((Rec21c*)gm_EntitySlotTable)[i].key) != 0) {
 				score[4] = v;
 				found |= 1;

@@ -13,7 +13,7 @@ struct PLAYER_RANK_ROW {
 };
 
 int __cdecl amt_GetRoleTemplate(int, int*);
-int __cdecl gm_WalkEntityChain(unsigned short);
+int __cdecl gm_CalcPersonWealth(unsigned short);
 float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 int __cdecl sprintf(char*, const char*, ...);
 
@@ -85,9 +85,9 @@ void __cdecl gm_RankPlayers(int* pn, PLAYER_RANK_ROW* rows)
 			}
 		}
 		r->v14 = fsum * 0.01f / (float) cnt;
-		v = gm_WalkEntityChain(r->id);
+		v = gm_CalcPersonWealth(r->id);
 		if (v > 1) {
-			v = gm_WalkEntityChain(r->id);
+			v = gm_CalcPersonWealth(r->id);
 		} else {
 			v = 1;
 		}

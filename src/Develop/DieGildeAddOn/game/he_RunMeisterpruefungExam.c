@@ -62,7 +62,7 @@ void __cdecl he_RunMeisterpruefungExam(char* u)
 	}
 	switch (*(int*) (u + 0x70)) {
 	case 0:
-		t = gm_WalkEntityChain(*(unsigned short*) (u + 8));
+		t = gm_CalcPersonWealth(*(unsigned short*) (u + 8));
 		v = (int) (t * 0.05f);
 		*(int*) (u + 0xb0) = v;
 		if (*(char**) (u + 0x74) == 0) {

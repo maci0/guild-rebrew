@@ -30,7 +30,7 @@ int __cdecl hst_HandleVermoegenSteuer(int sel, int id, char* arg)
 	for (i = 0; i < 0x300; i++) {
 		if (gm_IsSlotActivePerson(i) != 0) {
 			cm_RequestTransferCurrencyNoKill(*(int*) (obj + 2), *(int*) (gm_EntityIdField + i * 0x21c), 0,
-			    (int) ((float) gm_WalkEntityChain(*(unsigned short*) (gm_EntityIdField + i * 0x21c - 4)) * scale));
+			    (int) ((float) gm_CalcPersonWealth(*(unsigned short*) (gm_EntityIdField + i * 0x21c - 4)) * scale));
 		}
 	}
 	return 1;

@@ -7,7 +7,7 @@ extern int g_6a2bf4;
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern short io_ActiveCursorX;
 extern short io_ActiveCursorY;
-extern int g_14a79c0[];
+extern int d2_ObjektNameTable[];
 extern char g_14a6558[];
 extern char d2_HoverTextBuffer[];
 extern int g_67d8cc;
@@ -125,10 +125,10 @@ void __cdecl sv_UpdateSceneHover(void)
 			v = (unsigned int) *(unsigned short*) sv_HoveredObjekt;
 			c = g_item_def_table[v * 0x41];
 			if (!((c != 6 && c != 2) || !(g_7746dc & 0x4000))) {
-				fcn_0064d41a(d2_HoverTextBuffer, s_68b3f8, g_14a79c0[v * 2], *(char**) 0x14a552c);
+				fcn_0064d41a(d2_HoverTextBuffer, s_68b3f8, d2_ObjektNameTable[v * 2], *(char**) 0x14a552c);
 				d2_CursorStateId = 0xb;
 			} else {
-				fcn_0064d41a(d2_HoverTextBuffer, (char*) 0x679060, g_14a79c0[v * 2]);
+				fcn_0064d41a(d2_HoverTextBuffer, (char*) 0x679060, d2_ObjektNameTable[v * 2]);
 				d2_CursorStateId = 0x16;
 			}
 		}
@@ -206,12 +206,12 @@ void __cdecl sv_UpdateSceneHover(void)
 					if (*sv_HoveredInteriorItem == 0xfd) {
 						text = *(char**) 0x14a5530;
 						if (sv_SelectedBuilding) {
-							v = g_14a79c0[*(unsigned short*) sv_SelectedBuilding * 2];
+							v = d2_ObjektNameTable[*(unsigned short*) sv_SelectedBuilding * 2];
 						} else {
 							v = *(unsigned int*) ((unsigned int) *(unsigned char*) target * 0x38 + (int) g_14a6558);
 						}
 					} else {
-						v = g_14a79c0[*sv_HoveredInteriorItem * 2];
+						v = d2_ObjektNameTable[*sv_HoveredInteriorItem * 2];
 						text = *(char**) 0x14a552c;
 					}
 					fcn_0064d41a(d2_HoverTextBuffer, s_68b3f8, v, text);

@@ -32,7 +32,7 @@ extern float g_665be0;
 extern unsigned char* g_entity_type_table; /* 0x868050 */
 extern int g_99e0a0[];
 extern char* lpObjektePROT;
-extern int g_14a79c0[];
+extern int d2_ObjektNameTable[];
 
 #pragma optimize("l", off)
 /* ADDRESS: GOLDTL 0x0050b980 */
@@ -90,7 +90,7 @@ float __cdecl eval_ObjektPreis2Credits(int id, int percent)
             sprintf(buf,
                     "eval_ObjektPreis2Credits:Unterobjekt f\xfcr"
                     " '%s' nicht vorhanden!!!",
-                    g_14a79c0[id * 2]);
+                    d2_ObjektNameTable[id * 2]);
         }
     }
     r->price_cache = (int) (price * 0.06875f);

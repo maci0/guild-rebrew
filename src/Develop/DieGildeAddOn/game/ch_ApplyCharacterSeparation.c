@@ -7,7 +7,7 @@ extern float g_6628b0;
 
 int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
 void __cdecl d3_NormalizeVector(float* v);
-char __cdecl d3sm_SampleHeight(float* tex, float* pt, int* col, int* row, float* out);
+char __cdecl d3sm_3D2SuperMap(float* tex, float* pt, int* col, int* row, float* out);
 
 /* ADDRESS: GOLDTL 0x00402d00 */
 void __cdecl ch_ApplyCharacterSeparation(char* character)
@@ -106,7 +106,7 @@ next:
 		*(float*) (character + 0x5c) = k * direction[2];
 		s = *(char**) (character + 0x88);
 		e = *(char**) (s + 0xb0);
-		if (e != 0 && d3sm_SampleHeight((float*) e, pt, &col, &row, &out) != 0) {
+		if (e != 0 && d3sm_3D2SuperMap((float*) e, pt, &col, &row, &out) != 0) {
 			type = *(int*) (*(char**) (e + 0x24) + (*(int*) (e + 0x20) * row + col) * 0x1c);
 			if (type == 0 || type == 0xd) {
 				*(unsigned short*) (character + 0x8c) &= 0xfe;

@@ -5,7 +5,7 @@
 
 int __cdecl gm_CheckWealthRankMilestone(int);
 
-void __cdecl gm_UpdateAllBuildingLevels(void)
+void __cdecl gm_UpdateAllTitles(void)
 {
 	int i;
 	for (i = 0; i < 0x300; i++) {

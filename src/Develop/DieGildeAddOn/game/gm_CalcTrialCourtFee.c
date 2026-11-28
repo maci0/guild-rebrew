@@ -14,8 +14,8 @@ int __cdecl gm_CalcTrialCourtFee(unsigned short* accuser, unsigned short* accuse
 	int y;
 	double v;
 
-	x = gm_WalkEntityChain(*accuser);
-	y = gm_WalkEntityChain(*accused);
+	x = gm_CalcPersonWealth(*accuser);
+	y = gm_CalcPersonWealth(*accused);
 	v = gm_AmountToUnits(y, gm_ActiveTownIndex) + gm_AmountToUnits(x, gm_ActiveTownIndex);
 	if (10000.0 > v) {
 		v = 10000.0;

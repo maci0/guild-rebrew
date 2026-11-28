@@ -33,7 +33,7 @@ unsigned short __cdecl gm_RandomMod(int);
 int __cdecl cm_GetCommandStatus(int);
 int __cdecl cm_SendSetHE(int, char *);
 char *__cdecl gm_GetChainNodeAtIndex(int, int);
-int __cdecl he_LoadTransportCargoAtStop(void *, char);
+int __cdecl he_UnloadTransportCargoAtStop(void *, char);
 int __cdecl he_BuyTransportCargoAtStop(void *, char);
 void __cdecl cm_RequestSysMessage(int, void *);
 void __cdecl cm_SendKillTransporter(int);
@@ -211,7 +211,7 @@ void __cdecl he_RunTransport(char *e)
 		if (*r == 'G') {
 			c = *(unsigned char *)(r + 0x65);
 		}
-		he_LoadTransportCargoAtStop(pB0, c);
+		he_UnloadTransportCargoAtStop(pB0, c);
 		*(int *)(e + 0x84) = cm_SendSetHE(5, e);
 		return;
 	case 5:

@@ -7,7 +7,7 @@
 #define W(a) (*(unsigned short *)(a))
 #define F(a) (*(float *)(a))
 short *__cdecl gm_GetEntityTableEntry(char *);
-int __cdecl gm_WalkEntityChain(unsigned short);
+int __cdecl gm_CalcPersonWealth(unsigned short);
 int __cdecl gm_AmountToUnits(int, unsigned char);
 int __cdecl gm_ConvertUnitsToAmount(int, int);
 float __cdecl gm_RandomFloat01(void);
@@ -43,7 +43,7 @@ int __cdecl d2_RunCardGameDialog(void)
     previous = -1;
     entry = (char *)gm_GetEntityTableEntry(gm_EntitySlotTable + gm_LocalPlayerSlot * 0x21c);
     if (!entry) return 0;
-    money = gm_AmountToUnits(gm_WalkEntityChain(gm_LocalPlayerSlot), gm_ActiveTownIndex);
+    money = gm_AmountToUnits(gm_CalcPersonWealth(gm_LocalPlayerSlot), gm_ActiveTownIndex);
     if (gm_RandomFloat01() < *(float *)(entry + 0x60) && W(0x7f4c04) > 11 && money >= 10000) {
     *(float *)(entry + 0x60) = *(float *)(entry + 0x60) * F(0x664178) - g_662a3c;
     B(0x14cf71e) = 0;

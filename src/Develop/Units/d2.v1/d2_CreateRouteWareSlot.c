@@ -1,5 +1,5 @@
 #include "Develop/Units/d2.v1/d2_gui.h"
-extern int g_14a79c0[];
+extern int d2_ObjektNameTable[];
 
 int __cdecl gm_GetStorageSlotCapacity(int, int);
 int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
@@ -30,6 +30,6 @@ int __cdecl d2_CreateRouteWareSlot(unsigned short* a1, int a2, int a3, int col, 
 	*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[id].flags_1d0)) = 0x22;
 	*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[id].value_1dc)) = 4;
 	*(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[id].value_1e0)) = 0xf;
-	fcn_0064d41a(((char*)&((D2_CONTROL_TL*)d2_Controls)[id] + 0x0cc), "%s", ((char**)g_14a79c0)[a3 * 2]);
+	fcn_0064d41a(((char*)&((D2_CONTROL_TL*)d2_Controls)[id] + 0x0cc), "%s", ((char**)d2_ObjektNameTable)[a3 * 2]);
 	return id;
 }

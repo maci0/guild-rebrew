@@ -53,7 +53,7 @@ int __cdecl ai_StartZunftAufruhr(int a1, char* e, int a3, char* out)
 	if (amt_CanUpgradeBuildingTier2(e) != 1) {
 		return 0;
 	}
-	v = (int) max(gm_WalkEntityChain(*(unsigned short*) e) * 0.01f, 160.0f);
+	v = (int) max(gm_CalcPersonWealth(*(unsigned short*) e) * 0.01f, 160.0f);
 	if (v > (int) (gm_GetSeasonTreasury(e, (*(char*)&gm_ActiveTownIndex)) * 0.22f)) {
 		return 0;
 	}

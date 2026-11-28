@@ -75,7 +75,7 @@ void __cdecl d2_RunSeanceTreasureDialog(char* e, char* res)
 	else {
 		char ev[0xf8];
 
-		amt = MIN(MAX((int) (gm_WalkEntityChain(gm_LocalPlayerSlot) * 0.25f), 0x27100), 0xc3500);
+		amt = MIN(MAX((int) (gm_CalcPersonWealth(gm_LocalPlayerSlot) * 0.25f), 0x27100), 0xc3500);
 		cm_RequestMoveCredits(((struct house*)gm_EntitySlotTable)[gm_LocalPlayerSlot].handle, -1, gm_ActiveTownIndex, amt);
 		memset(ev, 0, sizeof(ev));
 		ev[4] = (char) 0x8e;

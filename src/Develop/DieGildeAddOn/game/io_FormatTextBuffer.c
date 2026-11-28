@@ -58,7 +58,7 @@ extern char* g_14a5400[];
 extern char* g_14a540c[];
 extern char* g_14a5418[];
 extern char* g_14a5450[];
-extern char* g_14a79c0[];
+extern char* d2_ObjektNameTable[];
 extern int g_6b25b0;
 extern int g_6b23a4;
 extern int txt_EntryCount;
@@ -402,7 +402,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 			cursor += 4;
 			res = *(int*) (cursor - 4);
 			res = (int) io_SelectDelimitedString(
-				g_14a79c0[*(unsigned short*) (0x8680b4 + res * 189 * 4) * 2],
+				d2_ObjektNameTable[*(unsigned short*) (0x8680b4 + res * 189 * 4) * 2],
 				1, 8);
 			strcpy(text.tmp, (char*) res);
 			cp_src = text.tmp;

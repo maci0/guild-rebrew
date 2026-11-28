@@ -3,7 +3,7 @@ extern float g_664330;
 
 char* __cdecl gm_GetEquippedCombatGear(char*);
 unsigned short* __cdecl gm_FindEntityActiveItem(char*);
-char __cdecl d3sm_SampleHeight(char*, float*, int*, int*, float*);
+char __cdecl d3sm_3D2SuperMap(char*, float*, int*, int*, float*);
 unsigned char* __cdecl cut_FindCombatTarget(char*);
 int __cdecl gm_FindBestCombatCell(char*, int, int, int, unsigned int*, unsigned int*);
 int __cdecl cut_AssignTargetOrder(char*, char*, char*, int, int);
@@ -35,7 +35,7 @@ void __cdecl cut_AssignCombatUnitOrder(char* rec, char* e)
 			}
 			if (*(int*) (obj + 0x58) == 2) {
 				map = *(char**) (d3_ActiveScene + 0xb0);
-				if (d3sm_SampleHeight(map, (float*) (*(char**) (*(char**) (e + 0x184) + 0x34) + 0x4c), (int*) &gridX, (int*) &grid_z, &f4)) {
+				if (d3sm_3D2SuperMap(map, (float*) (*(char**) (*(char**) (e + 0x184) + 0x34) + 0x4c), (int*) &gridX, (int*) &grid_z, &f4)) {
 					obj = (char*) gm_FindBestCombatCell(e, gridX, (int) grid_z, (int) (g_664330 / *(float*) (map + 0x10)), &gridX, &grid_z);
 					if (obj != 0) {
 						cut_AssignTargetOrder(rec, e, 0, gridX, (int) grid_z);

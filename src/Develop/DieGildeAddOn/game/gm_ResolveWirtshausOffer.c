@@ -47,7 +47,7 @@ int __cdecl gm_ResolveWirtshausOffer(unsigned char* e, Deal* o, int kind)
 	o->price = 0;
 	k = gm_PickWirtshausGuest(kind);
 	o->x54 = 0;
-	pr = gm_AmountToUnits(gm_WalkEntityChain(*(unsigned short*) e), gm_ActiveTownIndex);
+	pr = gm_AmountToUnits(gm_CalcPersonWealth(*(unsigned short*) e), gm_ActiveTownIndex);
 	x = pr;
 	if (10000.0 > x) {
 		x = 10000.0;

@@ -24,7 +24,7 @@ typedef struct S55cc80Packet {
 extern int g_7746d4;
 int __cdecl gm_CompareGameTime(char*, char*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-float __cdecl gm_GetScaledWorkforceOutput(char*, int, int, int);
+float __cdecl gm_GetHireWage(char*, int, int, int);
 int __cdecl gm_AccumulateTyped2(char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
@@ -41,7 +41,7 @@ void __cdecl gm_AddTime(char*, int, int, int);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 typedef struct S55cc80Proto { unsigned char bytes[0x24d]; } S55cc80Proto;
 /* ADDRESS: GOLDTL 0x0055cc80 */
-void __cdecl he_RunHireGuardJob(char* self)
+void __cdecl he_RunHireMasterJob(char* self)
 {
 	char buf[0x400];
 	S55cc80Packet* packet;
@@ -64,7 +64,7 @@ void __cdecl he_RunHireGuardJob(char* self)
 			return;
 		}
 		row = (char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[packet->slot];
-		t = (int)gm_GetScaledWorkforceOutput(row, packet->idx0, *(unsigned char*)(self + 0xac), -1);
+		t = (int)gm_GetHireWage(row, packet->idx0, *(unsigned char*)(self + 0xac), -1);
 		proto = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[packet->idx0];
 		src = gm_AccumulateTyped2((char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[packet->slot]);
 		if (t > src) {
@@ -121,7 +121,7 @@ void __cdecl he_RunHireGuardJob(char* self)
 				continue;
 			}
 			row = (char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[packet->slot];
-			t = (int)gm_GetScaledWorkforceOutput(row, packet->idx0, *(unsigned char*)(self + 0xac), -1);
+			t = (int)gm_GetHireWage(row, packet->idx0, *(unsigned char*)(self + 0xac), -1);
 			((int*) (self + 0xb0))[count] = ((int*) (self + 0xb0))[count] - 1;
 			if (*(unsigned char*) ((unsigned long)&gm_SlotTableKindView + (*(unsigned short*) (self + 8)) * 0x21c) == 6 ||
 				*(unsigned char*) ((unsigned long)&gm_SlotTableKindView + (*(unsigned short*) (self + 8)) * 0x21c) == 7) {

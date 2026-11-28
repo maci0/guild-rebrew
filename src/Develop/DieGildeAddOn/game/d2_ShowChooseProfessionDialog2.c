@@ -93,7 +93,7 @@ int __cdecl d2_ShowChooseProfessionDialog2(Ent* e, Req* p)
 	char c;
 	int i;
 
-	n = (int)(gm_WalkEntityChain(e->id) * 0.015f);
+	n = (int)(gm_CalcPersonWealth(e->id) * 0.015f);
 	dlg = d2_LoadForm(0, 0, "privillegien\\CHOOSEPROFESSION2");
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);

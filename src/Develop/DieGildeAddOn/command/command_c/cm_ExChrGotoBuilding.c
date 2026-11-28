@@ -31,9 +31,9 @@ char* __cdecl ch_UseGate(char*, char*, char*, int, int, int);
 char* __cdecl d3_FindSceneObject(int, int, int, char*);
 char* __cdecl d3_FindSceneObjectByPtrOrName(char*, int, int, char*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
-char __cdecl d3sm_SampleHeight(char*, float*, int*, int*, float*);
+char __cdecl d3sm_3D2SuperMap(char*, float*, int*, int*, float*);
 char* __cdecl ch_CreateAction(char*, int, ...);
-char* __cdecl he_PickRandomSceneObject(char*);
+char* __cdecl he_PickRandomTransporterDummy(char*);
 char* __cdecl strupr(char*);
 void __cdecl ReportClientMessage(char*);
 
@@ -124,7 +124,7 @@ int __cdecl cm_ExChrGotoBuilding(char* e, char* out)
 			if (u != 0) {
 				m = tp_ch_PathGrid[k * 247];
 				d3_TransformPoint(u, u + 0x4c, pos);
-				if (d3sm_SampleHeight(m, pos, &col, &row, &height) != 0) {
+				if (d3sm_3D2SuperMap(m, pos, &col, &row, &height) != 0) {
 					r = ch_CreateAction(o, 0x2d, col, row, k);
 					if (r != 0)
 						strcpy(r + 0x70, e + 0x3d);
@@ -169,7 +169,7 @@ int __cdecl cm_ExChrGotoBuilding(char* e, char* out)
 			if (u != 0) {
 				m = tp_ch_PathGrid[k * 247];
 				d3_TransformPoint(u, u + 0x4c, pos);
-				if (d3sm_SampleHeight(m, pos, &col, &row, &height) != 0) {
+				if (d3sm_3D2SuperMap(m, pos, &col, &row, &height) != 0) {
 					r = ch_CreateAction(o, 0x2d, col, row, k);
 					if (r != 0)
 						strcpy(r + 0x70, e + 0x3d);
@@ -212,7 +212,7 @@ after:
 		u = d3_FindSceneObject(0, 0x100, 0, e + 0x1d);
 	} else if (*(int*) (B + 0x61) != 0) {
 		if (*(int*) (o + 0x124) != 0) {
-			u = he_PickRandomSceneObject(*(char**) (B + 0x61));
+			u = he_PickRandomTransporterDummy(*(char**) (B + 0x61));
 		} else {
 			u = d3_FindSceneObject(*(int*) (B + 0x61), 0x100, 0,
 			    (char*) &str_dummy_TUER);
@@ -227,7 +227,7 @@ after:
 	if (u != 0) {
 		m = tp_ch_PathGrid[0];
 		d3_TransformPoint(u, u + 0x4c, pos);
-		if (d3sm_SampleHeight(m, pos, &col, &row, &height) != 0) {
+		if (d3sm_3D2SuperMap(m, pos, &col, &row, &height) != 0) {
 			r = ch_CreateAction(o, 0x2d, col, row, 0);
 			if (r != 0)
 				strcpy(r + 0x70, e + 0x3d);
@@ -277,7 +277,7 @@ b3:
 		if (u != 0) {
 			m = tp_ch_PathGrid[0];
 			d3_TransformPoint(u, u + 0x4c, pos);
-			if (d3sm_SampleHeight(m, pos, &col, &row, &height) != 0) {
+			if (d3sm_3D2SuperMap(m, pos, &col, &row, &height) != 0) {
 				r = ch_CreateAction(o, 0x2d, col, row, 0);
 				if (r != 0)
 					strcpy(r + 0x70, e + 0x3d);
@@ -334,7 +334,7 @@ b3:
 			goto saved_exit;
 		m = tp_ch_PathGrid[k * 247];
 		d3_TransformPoint(u, u + 0x4c, pos);
-		if (d3sm_SampleHeight(m, pos, &col, &row, &height) != 0) {
+		if (d3sm_3D2SuperMap(m, pos, &col, &row, &height) != 0) {
 			r = ch_CreateAction(o, 0x2d, col, row, k);
 			if (r != 0)
 				strcpy(r + 0x70, e + 0x3d);

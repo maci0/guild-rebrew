@@ -25,7 +25,7 @@ char __cdecl cut_RunPendingCutscenes(int);
 int __cdecl srv_FormatStatEntity();
 int __cdecl amt_UpdateAllOffices();
 int __cdecl cm_PruneCompletedStraftaten();
-int __cdecl gm_UpdateAllBuildingLevels();
+int __cdecl gm_UpdateAllTitles();
 int __cdecl gm_PushCityHistorySample();
 int __cdecl gm_UpdateEconomyStats();
 int __cdecl gm_GetDisasterState();
@@ -53,7 +53,7 @@ int __cdecl main_PlayOutroMovie();
 int __cdecl he_DispatchFlaggedEvents();
 int __cdecl he_TickEventDeals();
 int __cdecl he_TickApEvents();
-int __cdecl ai_DispatchGuildBuildPlan();
+int __cdecl ai_SpawnRoundImmigrants();
 int __cdecl he_RunDailyActionMaintenance();
 int __cdecl fcn_005490d0();
 int __cdecl io_FormatTextBuffer();
@@ -190,7 +190,7 @@ void __cdecl gm_RunRoundUpdate(void)
 		fcn_005490d0();
 		cm_StepCommandQueue();
 		Sleep(100);
-		gm_UpdateAllBuildingLevels();
+		gm_UpdateAllTitles();
 		cm_StepCommandQueue();
 		Sleep(100);
 		ai_RollNpcActionFlags();
@@ -203,7 +203,7 @@ void __cdecl gm_RunRoundUpdate(void)
 		} else {
 			gm_UpdateDisasterState();
 		}
-		ai_DispatchGuildBuildPlan();
+		ai_SpawnRoundImmigrants();
 		cm_StepCommandQueue();
 		Sleep(100);
 		ptr = (unsigned int*) &gm_EntityIdField;

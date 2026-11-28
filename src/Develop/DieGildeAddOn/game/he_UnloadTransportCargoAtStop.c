@@ -22,7 +22,7 @@ int __cdecl gm_GetSeasonTreasury(char*, int);
 int __cdecl cm_SendSellObjekt(int, int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004c0240 */
-void __cdecl he_LoadTransportCargoAtStop(char* route, int difficulty)
+void __cdecl he_UnloadTransportCargoAtStop(char* route, int difficulty)
 {
 	char* rec;
 	char* t;

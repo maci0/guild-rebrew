@@ -5,7 +5,7 @@ extern float g_6660e8;
 extern int tp_ch_PathGrid;
 extern volatile int gm_GameTicks;
 
-char __cdecl d3sm_SampleHeight(int, float*, int*, int*, float*);
+char __cdecl d3sm_3D2SuperMap(int, float*, int*, int*, float*);
 int __cdecl d3_TraceTerrainSegment(int, float*, float*, int, int, int*, int*);
 
 /* Projectile integration step. Native facts (all from disassembly):
@@ -44,7 +44,7 @@ int __cdecl d3_StepProjectileHeun(char* obj)
 		return 0;
 	}
 	remain = gm_GameTicks - *(int*) (obj + 0x60);
-	if (d3sm_SampleHeight(map, (float*) (obj + 0x30), &ox, &oy, &h) == 0) {
+	if (d3sm_3D2SuperMap(map, (float*) (obj + 0x30), &ox, &oy, &h) == 0) {
 		*(int*) (obj + 0x5c) = 3;
 		*(int*) (obj + 0x58) = 0;
 		return 0;

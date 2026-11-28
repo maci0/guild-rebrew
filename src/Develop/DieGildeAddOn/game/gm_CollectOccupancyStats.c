@@ -18,7 +18,7 @@ extern double g_664e60;
 
 void __cdecl gm_RebuildCrimeGrid(void);
 int __cdecl gm_PosToStatsGrid(char*, int*, int*);
-float __cdecl gm_GetLiteracyRate(void);
+float __cdecl gm_GetJusticeRating(void);
 float __cdecl gm_CalcWeightedLawFactor(int*);
 double __cdecl gm_CalcLaw00And01Factor(int*);
 
@@ -140,7 +140,7 @@ void __cdecl gm_CollectOccupancyStats(float* out)
 	out[5] = (float) ((((double) sum_a / (double) sum_b)
 	    * ((double) sum_d / (double) slot0_e) + g_662908)
 	    * ((double) f / (double) weight_a) * (double) sum_c);
-	out[0] = gm_GetLiteracyRate();
+	out[0] = gm_GetJusticeRating();
 	out[3] = flt_1_0 - (double) slot1_count / f;
 	out[1] = flt_1_0 - (double) slot0_count / f;
 	scale = flt_1_0 / (f + f);

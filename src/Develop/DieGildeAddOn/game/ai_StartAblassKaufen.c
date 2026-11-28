@@ -50,7 +50,7 @@ int __cdecl ai_StartAblassKaufen(int unused, char* e, int busy, char* out, char*
 					t = list[gm_RandomMod(n)];
 					if (*(int*) (e + 0x194) < 4) {
 						funds = gm_GetSeasonTreasury(e, gm_ActiveTownIndex);
-						f1 = gm_WalkEntityChain(*(unsigned short*) e) * 0.005f;
+						f1 = gm_CalcPersonWealth(*(unsigned short*) e) * 0.005f;
 						amt = (int) (v1 * ((200.0f - gm_CalcEntityFavor(*(unsigned short*) e,
 							*(unsigned short*) (t + 0x27), 1)) * 0.01f) * f1);
 						amt = (int) MINV(MAXV(amt * 0.01, 3200.0), 320000.0);

@@ -26,7 +26,7 @@ int __cdecl gm_CalcBardPoemCost(unsigned short* e)
 
 	gm_FindRichestEntity(&s, &n);
 	r = gm_AccumulateTyped2(e);
-	x = (int) MINV(MAXV(gm_WalkEntityChain(*e) * 500.0f / n, 1600.0f), 16000.0f);
+	x = (int) MINV(MAXV(gm_CalcPersonWealth(*e) * 500.0f / n, 1600.0f), 16000.0f);
 	return r > x ? x : 0;
 }
 

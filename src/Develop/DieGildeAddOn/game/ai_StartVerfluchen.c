@@ -66,7 +66,7 @@ int __cdecl ai_StartVerfluchen(int action, unsigned short* entity, int a3, char*
 		return 0;
 	p = ((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id]);
 	money = (int) (gm_SumQueryEntryValues(*(int*) ((char*) entity + 0x178), (*(char*)&gm_ActiveTownIndex)) * 0.25f);
-	gm_WalkEntityChain(*entity);
+	gm_CalcPersonWealth(*entity);
 	for (n = best_v - 1; n > 0; n--) {
 		if (money > (n > 1 ? n : 1) * 32000)
 			break;

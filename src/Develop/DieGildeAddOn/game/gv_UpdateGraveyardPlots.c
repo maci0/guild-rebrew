@@ -19,7 +19,7 @@ extern int __cdecl gm_GetEntitySlotIndex(char* a, void* e);
 extern int __cdecl gv_SendExtendProductionTime(int slot, int record, int item, int value, int a, int b);
 extern int __cdecl gv_SendSetGraveOwner(int a, int record, int item, int value);
 extern int __cdecl gv_RequestUpdateProductionProgress(int record, int item, int value, int delta);
-extern int __cdecl gm_CalcBribeOrPriceScore(int slot, int byte, int item, int zero, int* out);
+extern int __cdecl gv_CalcGravePrice(int slot, int byte, int item, int zero, int* out);
 extern int __cdecl cm_CountOccupiedBuildingStats(char* record);
 extern void __cdecl gv_SendSpawnEntities(char* record, int value);
 extern void* __cdecl gm_LookupEntityRecordById(int id);
@@ -126,7 +126,7 @@ void __cdecl gv_UpdateGraveyardPlots(char* entity)
 			}
 			if (*(unsigned short*) ((char*) entry + 0xa) != gm_GameTime)
 				continue;
-			result = gm_CalcBribeOrPriceScore((int) slot, *(unsigned char*) ((char*) entry + 0xc), entry[0], 0, &out);
+			result = gv_CalcGravePrice((int) slot, *(unsigned char*) ((char*) entry + 0xc), entry[0], 0, &out);
 			if (slot == home) {
 				handle = gv_SendExtendProductionTime((int) slot, (int) entity, entry[0],
 					gm_GetEntitySlotIndex((char*) *(int*) (entity + 0x65), entry), 10, 0);

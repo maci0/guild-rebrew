@@ -21,7 +21,7 @@ int __cdecl gm_HandleMsg0bGrantBonus(void* request)
 	}
 	v = gm_RandomMod(3);
 	d = (double) v + *(double*) 0x662a48;
-	n = (int) (((double) gm_WalkEntityChain(*(unsigned short*) p) * d) *
+	n = (int) (((double) gm_CalcPersonWealth(*(unsigned short*) p) * d) *
 	    *(double*) 0x664e58);
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7, n);
 	cm_RequestTransferCurrencyNoKill(*(int*) request, -1, *(char*) 0x773d75, n);

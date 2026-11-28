@@ -9,7 +9,7 @@ extern char* d2_CurrentWindow;
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 void __cdecl d3_TransformPoint(char*, float*, float*);
-int __cdecl d3sm_SampleHeight(float*, float*, int*, int*, float*);
+int __cdecl d3sm_3D2SuperMap(float*, float*, int*, int*, float*);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl d2_ProjectMapCoordToScreen(char*, int, int);
 void __cdecl d2_FormatPriceText(int, int);
@@ -132,7 +132,7 @@ void __cdecl d2_BuildCityScrollMap(char* town)
 			handle = *(int*) (obj + 0x61);
 			if (handle != 0) {
 				d3_TransformPoint((char*) handle, (float*) (handle + 0x4c), pos);
-				d3sm_SampleHeight((float*) tex, pos, &bld_x, &bld_y, &height);
+				d3sm_3D2SuperMap((float*) tex, pos, &bld_x, &bld_y, &height);
 				slot->x = bld_x;
 				slot->y = bld_y;
 				d2_ProjectMapCoordToScreen((char*) slot, base_x, base_y);
@@ -279,7 +279,7 @@ void __cdecl d2_BuildCityScrollMap(char* town)
 			obj = d3_FindSceneObject(0, 0x100, 0, p);
 			if (obj != 0) {
 				d3_TransformPoint(obj, (float*) (obj + 0x4c), pos);
-				d3sm_SampleHeight((float*) tex, pos, &bld_x, &bld_y, &height);
+				d3sm_3D2SuperMap((float*) tex, pos, &bld_x, &bld_y, &height);
 				tmp.x = bld_x;
 				tmp.y = bld_y;
 				d2_ProjectMapCoordToScreen((char*) &tmp, base_x, base_y);
@@ -306,7 +306,7 @@ void __cdecl d2_BuildCityScrollMap(char* town)
 			obj = (char*) *(int*) (list + i * 4);
 			if (obj != 0) {
 				d3_TransformPoint(obj, (float*) (obj + 0x4c), pos);
-				d3sm_SampleHeight((float*) tex, pos, &bld_x, &bld_y, &height);
+				d3sm_3D2SuperMap((float*) tex, pos, &bld_x, &bld_y, &height);
 				tmp.x = bld_x;
 				tmp.y = bld_y;
 				d2_ProjectMapCoordToScreen((char*) &tmp, base_x, base_y);
@@ -335,7 +335,7 @@ void __cdecl d2_BuildCityScrollMap(char* town)
 	}
 
 	d3_TransformPoint((char*) handle, (float*) (handle + 0x4c), pos);
-	d3sm_SampleHeight((float*) tex, pos, &bld_x, &bld_y, &height);
+	d3sm_3D2SuperMap((float*) tex, pos, &bld_x, &bld_y, &height);
 	tmp.x = bld_x;
 	tmp.y = bld_y;
 	d2_ProjectMapCoordToScreen((char*) &tmp, base_x, base_y);

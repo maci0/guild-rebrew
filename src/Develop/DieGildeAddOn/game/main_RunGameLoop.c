@@ -126,7 +126,7 @@ void __cdecl cm_BeginCommandSync(void);
 void __cdecl cm_EndCommandSync(void);
 int __cdecl cm_AreQueuedCommandsDone(void);
 void __cdecl he_PostSimPersonal(void);
-void __cdecl he_RestartAction03b(void);
+void __cdecl he_RestartMarktSupervisor(void);
 void __cdecl he_RestartAction0xa6(void);
 void __cdecl he_ClearActivePlayerActions(void);
 void __cdecl d2_ToggleActionPopupBar(int);
@@ -512,7 +512,7 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 			if ((gm_ClientModeFlags & 8) ||
 			    ((nt_ClientSocket != -1) && (nt_NetSyncFlags & 8))) {
 				he_PostSimPersonal();
-				he_RestartAction03b();
+				he_RestartMarktSupervisor();
 				he_RestartAction0xa6();
 			}
 			he_ClearActivePlayerActions();

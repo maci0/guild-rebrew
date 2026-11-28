@@ -3,7 +3,7 @@
 
 int __cdecl gm_GetLawEntry(int k, int* info);
 
-float __cdecl gm_GetLiteracyRate(void)
+float __cdecl gm_GetJusticeRating(void)
 {
 	float w[7] = {0.3f, 0.25f, 0.12f, 0.1f, 0.05f, 0.08f, 0.1f};
 	float sum = 0.0f;

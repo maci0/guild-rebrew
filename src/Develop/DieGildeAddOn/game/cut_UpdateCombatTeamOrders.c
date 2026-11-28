@@ -11,7 +11,7 @@ int __cdecl gm_RandomMod(int);
 int __cdecl cut_FindCombatTarget(char*);
 char* __cdecl d3_FindNearestEscapeNode(char*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
-char __cdecl d3sm_SampleHeight(int, float*, int*, int*, float*);
+char __cdecl d3sm_3D2SuperMap(int, float*, int*, int*, float*);
 
 /* ADDRESS: GOLDTL 0x004d4430 */
 void __cdecl cut_UpdateCombatTeamOrders(char* a0)
@@ -72,7 +72,7 @@ void __cdecl cut_UpdateCombatTeamOrders(char* a0)
 		} else {
 			r = d3_FindNearestEscapeNode(e);
 			d3_TransformPoint(r, r + 0x4c, pos);
-			if (d3sm_SampleHeight(*(int*) (d3_ActiveScene + 0xb0), pos, &col, &row, &height)) {
+			if (d3sm_3D2SuperMap(*(int*) (d3_ActiveScene + 0xb0), pos, &col, &row, &height)) {
 				continue;
 			}
 			x = gm_FindOrCreateEntitySlot(a0, e);

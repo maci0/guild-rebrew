@@ -21,7 +21,7 @@ int __cdecl cm_RequestMoveCredits(int, int, char, int);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl cm_StepCommandQueue(void);
 
-void __cdecl gm_ReplenishAiBuildingFunds(void)
+void __cdecl gm_ReplenishPersonFunds(void)
 {
 	int cmd_handle;
 	int batch_count;

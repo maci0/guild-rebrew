@@ -5564,7 +5564,7 @@ placement_method = "link-symbol"
 measured_at = "2026-11-03T20:26:48+00:00"
 ["GOLDTL.0x0068d9a0"]
 file = "src/Develop/DieGildeAddOnServer/server.c"
-name = "g_68d9a0"
+name = "amt_OfficeAffinityMatrix"
 kind = "GLOBAL"
 type = "float[7][7]"
 size = 196
@@ -5572,9 +5572,8 @@ section = ".data"
 storage_kind = "alias"
 link_symbol = "_g_office_float_table"
 note = "Inferred legacy declaration label and shared link spelling. Complete initializer span equals the existing server aemter.c table and native query operands agree. Declaration-only client view: no additional allocation, client owner/backing and linked verdict remain unverified. Rank reads use the low byte at template+8."
-updated_by = "verify"
-updated_at = "2026-10-17T12:27:42+00:00"
-status = "DISPLACED"
+updated_by = "rename"
+updated_at = "2026-11-28T14:54:41+00:00"
 
 ["GOLDTL.0x0068d9a0".verification]
 status = "DISPLACED"
@@ -24817,12 +24816,12 @@ placement_method = "link-symbol"
 measured_at = "2026-11-03T20:26:48+00:00"
 ["GOLDTL.0x014a79c0"]
 type = "int[]"
-name = "g_14a79c0"
+name = "d2_ObjektNameTable"
 section = ".bss"
 file = "src/Develop/Units/d2.v1/d2_CreateRouteWareSlot.c"
 note = "Type conflict canonicalized: majority .c declaration 'int[]' (6 of 9 .c files)."
-updated_by = "rehome"
-updated_at = "2026-11-27T16:08:50+00:00"
+updated_by = "rename"
+updated_at = "2026-11-28T14:56:28+00:00"
 
 ["GOLDTL.0x014a79c0".verification]
 status = "DISPLACED"

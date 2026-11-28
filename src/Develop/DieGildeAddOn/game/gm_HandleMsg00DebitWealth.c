@@ -22,7 +22,7 @@ int __cdecl gm_HandleMsg00DebitWealth(int* a)
 		return 1;
 	}
 	d = gm_RandomMod(3) + 1.0;
-	n = (int) (gm_WalkEntityChain(*(unsigned short*) t) * d * 0.01);
+	n = (int) (gm_CalcPersonWealth(*(unsigned short*) t) * d * 0.01);
 	io_FormatTextBuffer(buf, *(unsigned short*) (a + 1) + 0x12e7, n);
 	cm_RequestTransferCurrencyNoKill(a[0], -1, (*(char*)&gm_ActiveTownIndex), n);
 	he_PostEntityMessage(*(int*) (t + 4), *(int*) (t + 4), buf, strlen(buf) > 0x100 ? strlen(buf) > 0x100 : 0, 0x603, 0);

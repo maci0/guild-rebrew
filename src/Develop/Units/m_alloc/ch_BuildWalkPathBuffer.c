@@ -7,7 +7,7 @@ struct path_421350 {
 };
 
 char* __cdecl d3sm_GetObjectSuperMap(int);
-char __cdecl d3sm_SampleHeight(float*, float*, int*, int*, float*);
+char __cdecl d3sm_3D2SuperMap(float*, float*, int*, int*, float*);
 int __cdecl d3sm_FindNearestValidCell(int, int, int, int*, int*);
 char __cdecl ch_FindWalkableCell(char*, float*, float*, int, int, int*, int*, int, int);
 unsigned short __cdecl FindPath(struct path_421350*, char*, int, int, int, int, int);
@@ -33,12 +33,12 @@ unsigned int __cdecl ch_BuildWalkPathBuffer(int self)
 
 	v1 = *(int*) (self + 0x14);
 	v4 = d3sm_GetObjectSuperMap(v1);
-	if (!d3sm_SampleHeight((float*) v4,
+	if (!d3sm_3D2SuperMap((float*) v4,
 	                  (float*) (*(int*) (*(int*) (self + 0x14) + 0x34) + 0x4c),
 	                  &a0, &v10, (float*) v9)) {
 		return 0;
 	}
-	if (!d3sm_SampleHeight((float*) v4,
+	if (!d3sm_3D2SuperMap((float*) v4,
 	                  (float*) (*(int*) (*(int*) (self + 0x110) + 0x34) + 0x4c),
 	                  (int*) &v12, &v11, (float*) v9)) {
 		return 0;

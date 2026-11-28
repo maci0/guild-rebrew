@@ -94,7 +94,7 @@ int __cdecl gm_CalcScaledWealthValue(unsigned short* e)
 	double x;
 	int pr;
 
-	pr = gm_AmountToUnits(gm_WalkEntityChain(*e), gm_ActiveTownIndex);
+	pr = gm_AmountToUnits(gm_CalcPersonWealth(*e), gm_ActiveTownIndex);
 	x = pr;
 	x = MAXV(MINV(100000.0, x), 10000.0);
 	x = x / (log10(x) + 1.0) * 0.1f;

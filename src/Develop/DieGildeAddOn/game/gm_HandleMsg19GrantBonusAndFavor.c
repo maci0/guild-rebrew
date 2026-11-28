@@ -5,7 +5,7 @@ extern int __cdecl gm_MapEntityStatRange(int type);
 extern int __cdecl gm_HasActiveSpecialObject(unsigned short* rec, int mode);
 extern int __cdecl gm_RandomMod(int range);
 extern void __cdecl cm_RequestCopyEntityData(int a, int b, int c, int d);
-extern int __cdecl gm_WalkEntityChain(unsigned short v);
+extern int __cdecl gm_CalcPersonWealth(unsigned short v);
 extern void __cdecl cm_RequestTransferCurrencyNoKill(int a, int b, char c, int d);
 extern void __cdecl io_FormatTextBuffer(char* buf, int a, int b, int c);
 extern void __cdecl he_PostEntityMessage(int a, int b, char* buf, int c, int d, int e);
@@ -53,7 +53,7 @@ int __cdecl gm_HandleMsg19GrantBonusAndFavor(int* request)
     }
     t = gm_RandomMod(4) & 0xffff;
     d = (double) t + g_6629c8;
-    v = gm_WalkEntityChain(*(unsigned short*) rec);
+    v = gm_CalcPersonWealth(*(unsigned short*) rec);
     r = (int) (0.01 * ((double) v * d));
     cm_RequestTransferCurrencyNoKill(-1, request[0], gm_ActiveTownIndex, r);
     if (rec[0x169] == 0x1e) {

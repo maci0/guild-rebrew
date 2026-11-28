@@ -10,7 +10,7 @@ extern void* __cdecl gm_LookupEntityRecordById(int id);
 extern void* __cdecl gm_ResetMissionEntry(void* entity);
 extern int __cdecl gm_GetBuildingTypeCategory(int type);
 extern int __cdecl gm_AssignBuildingOwner(void* record, int a, int b);
-extern int __cdecl gm_WalkEntityChain(unsigned short raw_idx);
+extern int __cdecl gm_CalcPersonWealth(unsigned short raw_idx);
 extern void __cdecl he_FreeActionsByKind(void* entity);
 extern void __cdecl he_ClearEntityActions(void* entity);
 extern void __cdecl amt_ClearEntityOffices(void* entity);
@@ -66,7 +66,7 @@ int __cdecl gm_TransferDynastyEstate(int sourceId, int targetId)
 	} while (counter != 0);
 
 	p_slot = p->entity_index;
-	value = gm_WalkEntityChain(p_slot);
+	value = gm_CalcPersonWealth(p_slot);
 	q = (EntityStruct*) gm_LookupEntityRecordById(targetId);
 	if (q == 0)
 		return -2;

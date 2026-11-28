@@ -1,5 +1,5 @@
 #include "../../Units/Error/error.h"
-int __cdecl find_zone_record(char* base, int x, int y);
+int __cdecl plt_FindCoveringPlant(char* base, int x, int y);
 #include "plant.h"
 /* Plant records (TANNE, BUCHE, EICHE) and a zero-id terminator, walked by
  * plt_FindPlantInfo.  A struct object 8-aligns this TU's .data, which the
@@ -96,7 +96,7 @@ char* __cdecl plt_FindRecordById(char* base, int id)
 	return 0;
 }
 
-int __cdecl find_zone_record(char* base, int x, int y)
+int __cdecl plt_FindCoveringPlant(char* base, int x, int y)
 {
 	int i;
 	char* rec;
@@ -154,7 +154,7 @@ int __cdecl plt_CheckZoneAvailability(int zone_table, unsigned int x, unsigned i
 		return 0;
 	for (j = 0; j < zone_type; j++) {
 		for (i = 0; i < zone_type; i++) {
-			if (find_zone_record(zone_table, x + i - zone_type / 2, y + j - zone_type / 2))
+			if (plt_FindCoveringPlant(zone_table, x + i - zone_type / 2, y + j - zone_type / 2))
 				return 0;
 		}
 	}

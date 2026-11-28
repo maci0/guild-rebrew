@@ -44,7 +44,7 @@ int __cdecl gm_GetRangeStatId();
 int __cdecl gm_CalculateGebaeudeValue();
 int __cdecl gm_GetTypeProductValue();
 int __cdecl cm_StepCommandQueue();
-int __cdecl gm_ReplenishAiBuildingFunds();
+int __cdecl gm_ReplenishPersonFunds();
 
 #define REC_SIZE 0xa9
 
@@ -65,7 +65,7 @@ int __cdecl gm_ReplenishAiBuildingFunds();
     }
 
 /* ADDRESS: GOLDTL 0x00547770 */
-void __cdecl ai_DispatchGuildBuildPlan(void)
+void __cdecl ai_SpawnRoundImmigrants(void)
 {
     int cnt2[33];
     int cnt[33];
@@ -104,7 +104,7 @@ void __cdecl ai_DispatchGuildBuildPlan(void)
         wi = 0;
     a = gm_GameTime / 4 + 1;
     thr = (float)a / ((float)a + *(float *)(wi * 4 + 0x665e68));
-    gm_ReplenishAiBuildingFunds();
+    gm_ReplenishPersonFunds();
     memset(cnt, 0, 0x84);
     memset(cnt2, 0, 0x84);
     rp = (u8*) lpGebaeudeINST;

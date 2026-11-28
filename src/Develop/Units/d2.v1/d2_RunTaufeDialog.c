@@ -21,7 +21,7 @@ struct house {
 	char pad_7c[0x1a0];
 };
 
-int __cdecl gm_WalkEntityChain(unsigned short);
+int __cdecl gm_CalcPersonWealth(unsigned short);
 void* __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -59,7 +59,7 @@ void __cdecl d2_RunTaufeDialog(char* e, int unused)
 	int i;
 
 	p = &((struct house*) gm_EntitySlotTable)[gm_LocalPlayerSlot];
-	t = (int) (gm_WalkEntityChain(gm_LocalPlayerSlot) * 0.01f);
+	t = (int) (gm_CalcPersonWealth(gm_LocalPlayerSlot) * 0.01f);
 	if (e == 0) {
 		return;
 	}

@@ -41,7 +41,7 @@ int __cdecl gm_GetSeason(int);
 void __cdecl fcn_005015e0(void*, int, int, int);
 int __cdecl fcn_00509570(int);
 int __cdecl gm_CalcWorkMinutesBetween(int*, int*);
-int __cdecl gm_CreditCityTreasury(int);
+int __cdecl gm_DebitCityTreasury(int);
 int __cdecl d3_BindEntitySceneObject(int, void*, int);
 void __cdecl d3_ApplySeasonTextureSet(int);
 void __cdecl d3_CreateEntityFlagPennant(void*);
@@ -114,7 +114,7 @@ LfailB:
 			}
 		}
 		else {
-			*(int*) (buildAction + 0xcc) = gm_CreditCityTreasury(*(int*) (buildAction + 0xb4));
+			*(int*) (buildAction + 0xcc) = gm_DebitCityTreasury(*(int*) (buildAction + 0xb4));
 		}
 		*(int*) (buildAction + 0x84) = cm_SendSetHE(*(int*) (buildAction + 0x70) + 1, (void*) buildAction);
 		return;

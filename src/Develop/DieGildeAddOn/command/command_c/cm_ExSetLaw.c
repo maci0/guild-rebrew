@@ -7,7 +7,7 @@
 
 int __cdecl gm_ApplyLawChange(char* idPtr);
 
-int __cdecl cm_ExFindEntity(int cmd, char* result)
+int __cdecl cm_ExSetLaw(int cmd, char* result)
 {
 	int found;
 

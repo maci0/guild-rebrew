@@ -21,7 +21,7 @@ extern char* g_99ec10;
 extern char* d2_SelectedBuilding;
 extern int g_776c60[];
 extern int g_774698;
-extern int g_14a79c0[];
+extern int d2_ObjektNameTable[];
 
 unsigned short* __cdecl gm_QueryEntities(int, int, ...);
 int __cdecl d2_LoadForm(int, int, char*);
@@ -859,7 +859,7 @@ l_slot_handles:
 					*(int*) ((int) g_00f8f080 + k + 0x5c) = 1;
 				}
 				fcn_0064d41a((int) (g_00f8f080[i].u.text + 0x3c), (int) "%s~ %li %s",
-				             g_14a79c0[(int) (*(unsigned short*) (f.v15C + 0x44 + f.v24 * 2)) * 2],
+				             d2_ObjektNameTable[(int) (*(unsigned short*) (f.v15C + 0x44 + f.v24 * 2)) * 2],
 				             ((int*) (f.v15C + 0x64))[f.v24],
 				             *(int*) 0x144a160);
 			}

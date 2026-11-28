@@ -24,7 +24,7 @@ extern double g_dbl_6653d8;
 extern double g_dbl_6653e0;
 extern double g_dbl_6653e8;
 
-float __cdecl gm_GetLiteracyRate(void);
+float __cdecl gm_GetJusticeRating(void);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl he_PostEntityMessage(int slot, int entity, char* text, int flag, int size, int extra);
 
@@ -55,7 +55,7 @@ void __cdecl gm_PostPeriodicCityReport(void)
 	sum[1] = (g_99ed10 + g_99ed24 + g_99ed38 + g_99ed4c) * 0.25f;
 	sum[2] = (g_99ed14 + g_99ed28 + g_99ed3c + g_99ed50) * 0.25f;
 	sum3 = (g_99ed1c + g_99ed30 + g_99ed44 + g_99ed58) * 0.25f;
-	lit = gm_GetLiteracyRate();
+	lit = gm_GetJusticeRating();
 	id0 = 0x1c11;
 	if (!(sum[0] <= g_dbl_6653e8)) {
 		id0 = 0x1c15;

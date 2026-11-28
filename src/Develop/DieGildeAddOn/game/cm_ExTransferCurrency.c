@@ -14,7 +14,7 @@ void __cdecl gm_SubObjectNoKill(int h, unsigned int w, int v);
 void __cdecl gm_AddObjekt(int h, unsigned int w, int v);
 
 /* ADDRESS: GOLDTL 0x004c7bb0 */
-int __cdecl fcn_004c7bb0(CM_TRANSFER_CURRENCY_CMD* obj, char* out)
+int __cdecl cm_ExTransferCurrency(CM_TRANSFER_CURRENCY_CMD* obj, char* out)
 {
 	int h;
 	unsigned int w;

@@ -7,7 +7,7 @@ extern int io_RightButtonReleased;
 extern int d2_CurrentElementId;
 extern unsigned short g_7f3ee4;
 extern int g_90d520[];
-extern int g_14a79c0[];
+extern int d2_ObjektNameTable[];
 extern char str_fmt_s[];
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 int __cdecl d2_LoadForm(int, int, char*);
@@ -110,7 +110,7 @@ unsigned int __cdecl d2_ShowRoutingChooseGoodDialog(char* building, int a1, unsi
 				*(unsigned int*) (&((D2_CONTROL_TL*) (d2_Controls))[t].value_1dc) = 4;
 				*(unsigned int*) (&((D2_CONTROL_TL*) (d2_Controls))[t].value_1e0) = 0xf;
 				fcn_0064d41a((char*) ((char*) &((D2_CONTROL_TL*) (d2_Controls))[t] + 0xcc),
-					"%s", g_14a79c0[g_90d520[n] * 2]);
+					"%s", d2_ObjektNameTable[g_90d520[n] * 2]);
 				n++;
 			}
 		}

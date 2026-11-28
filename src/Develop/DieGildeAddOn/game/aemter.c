@@ -2138,7 +2138,7 @@ void* __cdecl amt_GetSuperiorHolder(int role)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLD 0x004e7550 */
 /* ADDRESS: GOLDTL 0x004e9110 */
-char* __cdecl amt_GetOfficeHolderRecord(int kind)
+char* __cdecl amt_GetOfficeOverlord(int kind)
 {
 	Rec18_68da68 r;
 
@@ -2468,7 +2468,7 @@ int __cdecl amt_FindVacantRoleBelow(int role)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLD 0x004e78a0 */
 /* ADDRESS: GOLDTL 0x004e9530 */
-int __cdecl amt_FindHighestOccupiedOffice(int n)
+int __cdecl amt_FindOfficeWantingApplicants(int n)
 {
 	Rec18_68da68 r;
 
@@ -3408,14 +3408,14 @@ void __cdecl amt_FillOffice0x1c0x1dFromRichest(void)
 		existing = gm_LookupEntityRecordById(b[1] != -1 ? b[1] : a[1]);
 	}
 	if (existing != 0) {
-		value = gm_WalkEntityChain(*(unsigned short*) existing);
+		value = gm_CalcPersonWealth(*(unsigned short*) existing);
 	} else {
 		value = 0;
 	}
 	best = 0;
 	for (best_i = 0; best_i < count; best_i++) {
 		rec = (char*) cand[best_i];
-		n = gm_WalkEntityChain(*(unsigned short*) rec);
+		n = gm_CalcPersonWealth(*(unsigned short*) rec);
 		if (n > value) {
 			best = rec;
 			value = n;
@@ -3514,13 +3514,13 @@ void __cdecl amt_FillOffice0x22FromRichest(void)
 	}
 	cur = 0;
 	if (rec.b != -1 && (cur = gm_LookupEntityRecordById(rec.b)) != 0) {
-		best_v = gm_WalkEntityChain(cur->entity_index);
+		best_v = gm_CalcPersonWealth(cur->entity_index);
 	} else {
 		best_v = 0;
 	}
 	best = 0;
 	for (j = 0; j < k; j++) {
-		v = gm_WalkEntityChain(list[j]->entity_index);
+		v = gm_CalcPersonWealth(list[j]->entity_index);
 		if (v > best_v) {
 			best = list[j];
 			best_v = v;
@@ -3704,12 +3704,12 @@ void __cdecl amt_calc_zuenfte(unsigned int kind)
 				value = 0;
 				if (info.office[1] != -1 &&
 				    (existing = gm_LookupEntityRecordById(info.office[1])) != 0) {
-					value = gm_WalkEntityChain(*(unsigned short*) existing);
+					value = gm_CalcPersonWealth(*(unsigned short*) existing);
 				}
 				best = 0;
 				for (i = 0; i < count; i++) {
 					rec = (char*) cand[i];
-					n = gm_WalkEntityChain(*(unsigned short*) rec);
+					n = gm_CalcPersonWealth(*(unsigned short*) rec);
 					if (n > value) {
 						best = rec;
 						value = n;

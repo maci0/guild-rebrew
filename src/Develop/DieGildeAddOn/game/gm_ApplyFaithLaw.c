@@ -15,7 +15,7 @@ extern int gm_QueuedCommandCount;
  * the objects selected by the current filter. */
 
 /* ADDRESS: GOLDTL 0x004fd780 */
-void __cdecl gm_TickObjectTable(void)
+void __cdecl gm_ApplyFaithLaw(void)
 {
 	char info[0x1c];
 	char* p;

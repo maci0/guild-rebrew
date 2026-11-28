@@ -4,7 +4,7 @@ extern char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 extern void __cdecl ch_StartMovement(int, int, int, int, int, char*);
 extern int __cdecl gm_FindFilteredEntity(char*, int, int, char*, int, int, unsigned int*);
 extern int __cdecl gm_CalcScaledWealthValue(char*);
-extern int __cdecl gm_WalkEntityChain(int);
+extern int __cdecl gm_CalcPersonWealth(int);
 extern int __cdecl gm_AmountToUnits(int, unsigned char);
 extern int __cdecl gm_RandomMod(int);
 extern void __cdecl he_AcceptDeathPactPayment(char*, char*);
@@ -103,7 +103,7 @@ void __cdecl he_RunDeathPact(char* event)
 				return;
 found_one:
 				ref = gm_CalcScaledWealthValue((char*) ((found & 0xffff) * 0x21c + (unsigned long)&gm_EntitySlotTable));
-				k = gm_AmountToUnits(gm_WalkEntityChain(found), gm_ActiveTownIndex);
+				k = gm_AmountToUnits(gm_CalcPersonWealth(found), gm_ActiveTownIndex);
 				*(unsigned short*) (event + 0xc8 + *(int*) (event + 0xb0) * 2) = (unsigned short) found;
 				if (k > ref &&
 				    (*(unsigned char*) ((found & 0xffff) * 0x21c + 0x7f4e6c) & 1) == 0) {

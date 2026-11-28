@@ -18,7 +18,7 @@ typedef struct MapPos {
 char* __cdecl gm_SearchTable67(unsigned int);
 int __cdecl d2_FindLinkedRecordIndex(char*, char*);
 void __cdecl d3_TransformPoint(char*, float*, float*);
-char __cdecl d3sm_SampleHeight(char*, float*, int*, int*, float*);
+char __cdecl d3sm_3D2SuperMap(char*, float*, int*, int*, float*);
 void __cdecl d2_ProjectMapCoordToScreen(char*, int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl d2_CreateRadioGroup(int, ...);
@@ -52,7 +52,7 @@ int __cdecl d2_AddRoutePointMarker(int* town, char* building, char* routeHead, c
 	obj = *(char**) (obj + 0x61);
 	d3_TransformPoint(obj, (float*) (obj + 0x4c), out);
 	/* The native fourth argument slot also holds the height output. */
-	if (!d3sm_SampleHeight(map, out, &p.col, &p.row, (float*) &point)) {
+	if (!d3sm_3D2SuperMap(map, out, &p.col, &p.row, (float*) &point)) {
 		return -1;
 	}
 	d2_ProjectMapCoordToScreen((char*) &p, a, b);

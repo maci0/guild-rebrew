@@ -786,7 +786,7 @@ typedef struct ChainNode {
 } ChainNode;
 #pragma pack(pop)
 
-int __cdecl ahm_ProcessEntityChain(char* cmd_payload)
+int __cdecl cm_CheckCommandGroup(char* cmd_payload)
 {
 	ChainNode* node;
 	ChainNode* n;
@@ -1072,9 +1072,9 @@ typedef struct war_event_fields {
 unsigned int __cdecl AssignProductionSlot(void*);
 unsigned int __cdecl gv_HireProductionWorker(int);
 unsigned int __cdecl gv_ExtendProductionTime(uint32_t*);
-int __cdecl gv_ReplaceProductionWorker(void*);
+int __cdecl gv_SetGraveHolder(void*);
 int __cdecl gv_ActivateSection(uchar*);
-int __cdecl gv_UpdateProductionProgress(void*);
+int __cdecl gv_UpdateGraveCondition(void*);
 int __cdecl gv_ValidateEntityAction(void*);
 extern int __cdecl gv_MoveSlotEntry(void*);
 
@@ -5704,13 +5704,13 @@ int __cdecl cm_DispatchProduction(int cmd, char* result)
 		status = gv_ExtendProductionTime(data_ptr);
 		return status;
 	case 3:
-		rc = gv_ReplaceProductionWorker(data_ptr);
+		rc = gv_SetGraveHolder(data_ptr);
 		return rc;
 	case 4:
 		rc = gv_ActivateSection((uchar*) data_ptr);
 		return rc;
 	case 5:
-		rc = gv_UpdateProductionProgress(data_ptr);
+		rc = gv_UpdateGraveCondition(data_ptr);
 		return rc;
 	case 6:
 		rc = gv_ValidateEntityAction(data_ptr);

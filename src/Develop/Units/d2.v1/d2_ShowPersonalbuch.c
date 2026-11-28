@@ -158,7 +158,7 @@ int __cdecl gm_CollectBuildingObjectSlots(int, void*);
 int __cdecl d2_PromptSoeldnerAmountDialog(void);
 int __cdecl gm_ConvertUnitsToAmount(int, char);
 #include "Develop/DieGildeAddOn/game/game_data.h"
-float __cdecl gm_GetWorkforceOutput(unsigned char*, int, int, int);
+float __cdecl gm_GetTypeWageBase(unsigned char*, int, int, int);
 int __cdecl gm_CheckEntityStock(int, int);
 int __cdecl fcn_0051af00(char*, int, ...);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
@@ -372,7 +372,7 @@ L69b6:
 			f.v18 = f.v10;
 			t = (unsigned char) f.sel.a20;
 			if (f.sel.a08 == 0 && t != 2) {
-				e = (char*) gm_GetScaledWorkforceOutput(
+				e = (char*) gm_GetHireWage(
 					(char*) ((*(unsigned short*) (a1 + 0x27) * 0x21c) + 0x7f4ca0),
 					*a1, 0, (char*) -1);
 				e = fcn_0064d228();
@@ -575,7 +575,7 @@ L6fa2:
 			f.v34 = -1;
 			f.v18 = k;
 			if (f.rows[k].a08 == 0) {
-				gm_GetScaledWorkforceOutput(
+				gm_GetHireWage(
 					(char*) ((*(unsigned short*) (a1 + 0x27) * 0x21c) + 0x7f4ca0),
 					*a1, -1, 1);
 				e = fcn_0064d228();
@@ -652,10 +652,10 @@ L6fa2:
 				fcn_0051af00(f.txt164c, 0x1a27, 4);
 				d2_ShowModalMessageBox(f.txt164c, 4);
 			} else {
-				t = (int) (gm_GetWorkforceOutput(
+				t = (int) (gm_GetTypeWageBase(
 					(unsigned char*) (*(unsigned short*) (a1 + 0x27) * 0x21c + 0x7f4ca0),
 					*a1, -1, 1) * ((double) *(int*) (a1 + 0x3d) * 0.01));
-				x = (int) (gm_GetWorkforceOutput((unsigned char*) e, *a1, -1, 0) *
+				x = (int) (gm_GetTypeWageBase((unsigned char*) e, *a1, -1, 0) *
 					((double) *(int*) (a1 + 0x3d) * 0.01));
 				if (*(char*) (e + 9)) {
 					fcn_0051af00(f.txt9fc, 0x1a29,

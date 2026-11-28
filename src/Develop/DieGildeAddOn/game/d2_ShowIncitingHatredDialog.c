@@ -30,7 +30,7 @@ extern unsigned char gm_ActiveTownIndex;
 #include "Develop/client_types.h"
 
 char* __cdecl gm_LookupEntityRecordById(int a);
-int __cdecl gm_WalkEntityChain(unsigned short id);
+int __cdecl gm_CalcPersonWealth(unsigned short id);
 int __cdecl gm_AccumulateTyped2(char* a);
 unsigned short __cdecl gm_RandomMod(int a);
 int __cdecl gm_GetEntityRelation(int a, int i);
@@ -90,8 +90,8 @@ int __cdecl d2_ShowIncitingHatredDialog(char* actor, char* request)
 		if (secondEntity == 0) {
 			return 0x20;
 		}
-		bsum = gm_WalkEntityChain(secondEntity->id);
-		bsum = bsum + gm_WalkEntityChain(firstEntity->id);
+		bsum = gm_CalcPersonWealth(secondEntity->id);
+		bsum = bsum + gm_CalcPersonWealth(firstEntity->id);
 		bv = (int) (bsum * g_6628ac);
 		if (gm_AccumulateTyped2(actor) < bv) {
 			return 0x20;
@@ -129,8 +129,8 @@ int __cdecl d2_ShowIncitingHatredDialog(char* actor, char* request)
 	if (secondEntity == 0) {
 		return 0;
 	}
-	sum = gm_WalkEntityChain(secondEntity->id);
-	sum = sum + gm_WalkEntityChain(firstEntity->id);
+	sum = gm_CalcPersonWealth(secondEntity->id);
+	sum = sum + gm_CalcPersonWealth(firstEntity->id);
 	v = (int) (sum * g_6628ac);
 	dialog = d2_LoadForm(0, 0, (char*) 0x6acd58);
 	d2_SetOverlayAnimation(0, 0);

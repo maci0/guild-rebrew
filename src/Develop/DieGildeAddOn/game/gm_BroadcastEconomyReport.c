@@ -2,7 +2,7 @@
 #include "Develop/rebrew_types.h"
 #include "Develop/rebrew_globals.h"
 
-float __cdecl gm_GetLiteracyRate(void);
+float __cdecl gm_GetJusticeRating(void);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl he_PostEntityMessage(int slot, int entity, char* text, int flag, int size, int extra);
 
@@ -33,7 +33,7 @@ void __cdecl gm_BroadcastEconomyReport(void)
 	sum[1] = ((*(float*) 0x91abf0) + (*(float*) 0x91ac04) + (*(float*) 0x91ac18) + (*(float*) 0x91ac2c)) * 0.25f;
 	sum[2] = ((*(float*) 0x91abf4) + (*(float*) 0x91ac08) + (*(float*) 0x91ac1c) + (*(float*) 0x91ac30)) * 0.25f;
 	sum3 = ((*(float*) 0x91abfc) + (*(float*) 0x91ac10) + (*(float*) 0x91ac24) + (*(float*) 0x91ac38)) * 0.25f;
-	lit = gm_GetLiteracyRate();
+	lit = gm_GetJusticeRating();
 	id0 = 0x1c11;
 	if (!(sum[0] <= 0.15)) {
 		id0 = 0x1c15;

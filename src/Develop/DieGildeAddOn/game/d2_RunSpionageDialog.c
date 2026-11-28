@@ -37,7 +37,7 @@ void __cdecl d2_CreateGuiWindow(int, int, int, int, int);
 void __cdecl d2_SetValueGaugeStepLabels(int, int, int, int, int);
 void __cdecl d2_CreateButtonRow(int, int, int*, int, int, int);
 int __cdecl d2_GetControlValue(int);
-int __cdecl gm_WalkEntityChain(unsigned short);
+int __cdecl gm_CalcPersonWealth(unsigned short);
 int __cdecl io_AppendText(int, ...);
 int __cdecl gm_CheckEntityStock(void*, int, unsigned char);
 void __cdecl cm_SendLogAction(char*);
@@ -109,9 +109,9 @@ int __cdecl d2_RunSpionageDialog(char* rec)
 		} else {
 			v = d2_GetControlValue(row2);
 			f = (float) v * 0.33f + 1.0f;
-			w1 = gm_WalkEntityChain(*(unsigned short*) (((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot])));
+			w1 = gm_CalcPersonWealth(*(unsigned short*) (((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot])));
 			f2 = (float) w1 * 0.005f;
-			w2 = gm_WalkEntityChain(*(unsigned short*) rec);
+			w2 = gm_CalcPersonWealth(*(unsigned short*) rec);
 			n = (int) ((float) w2 * 0.005f + f2);
 			n = (int) ((float) n * f);
 			d2_SetForm((int) h, 1);

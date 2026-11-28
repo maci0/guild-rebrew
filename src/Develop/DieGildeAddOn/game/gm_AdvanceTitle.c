@@ -6,7 +6,7 @@ extern char gm_EntitySlotTable[];
 extern pos14_7f4c00 gm_GameTime;
 extern int d3_CurrentContextIndex;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-extern int __cdecl gm_WalkEntityChain(int);
+extern int __cdecl gm_CalcPersonWealth(int);
 extern unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 extern unsigned short* __cdecl gm_QueryEntities(int, int, ...);
 extern void __cdecl cm_RequestChangeBits(int, int, int, int, int);
@@ -27,7 +27,7 @@ extern unsigned char gm_PlayerCount;
 /* Erhoeht den Diebstahls-Zaehler eines Objekts und schickt je nach
  * Objektart ein Aendern-Paket 0x69 oder die Quickjump-Meldung. */
 /* ADDRESS: GOLDTL 0x004f6d60 */
-void __cdecl gm_AdvanceTheftCounter(unsigned int entityIndex)
+void __cdecl gm_AdvanceTitle(unsigned int entityIndex)
 {
 	char text[0x200];
 	char msg[0xf8];
@@ -52,7 +52,7 @@ void __cdecl gm_AdvanceTheftCounter(unsigned int entityIndex)
 	if (*(unsigned char*) (slot + 2) == 0) {
 		return;
 	}
-	v = gm_WalkEntityChain((int) entityIndex);
+	v = gm_CalcPersonWealth((int) entityIndex);
 	count = *(unsigned char*) (slot + 0xd);
 	limit = count + 1;
 	if (limit > 0xa) {

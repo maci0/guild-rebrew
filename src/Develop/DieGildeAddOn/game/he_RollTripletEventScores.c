@@ -17,8 +17,8 @@ void __cdecl he_RollTripletEventScores(char* action, unsigned short* first_ent, 
 	float total_wealth;
 
 	half = amt_GetEffectiveRoleLevel(*first_ent, 0) / 2;
-	wealth_a = MAX(gm_WalkEntityChain(*first_ent), 32000);
-	wealth_b = MAX(gm_WalkEntityChain(*second_ent), 32000);
+	wealth_a = MAX(gm_CalcPersonWealth(*first_ent), 32000);
+	wealth_b = MAX(gm_CalcPersonWealth(*second_ent), 32000);
 	for (i = 0; i < 12; i++) {
 		arr[i] = i + half;
 	}

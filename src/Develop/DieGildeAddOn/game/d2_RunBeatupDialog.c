@@ -1,4 +1,4 @@
-int __cdecl gm_WalkEntityChain(unsigned short id);
+int __cdecl gm_CalcPersonWealth(unsigned short id);
 int __cdecl gm_CheckPrivilege(int, int, void*);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl he_fn_Handlung(void);
@@ -47,7 +47,7 @@ int __cdecl d2_RunBeatupDialog(unsigned short* entity)
 	idx = -1;
 	res = 0;
 	data[0] = 1;
-	r = gm_WalkEntityChain(*(unsigned short*) (timeout * 0x21c + (unsigned long)&gm_EntitySlotTable));
+	r = gm_CalcPersonWealth(*(unsigned short*) (timeout * 0x21c + (unsigned long)&gm_EntitySlotTable));
 	timeout = (int) ((float) r * 0.0085f);
 	if (gm_CheckPrivilege(0x1b, *(unsigned short*) &gm_LocalPlayerSlot * 0x21c + 0x7f4ca0, data) & 2) {
 		timeout /= 2;

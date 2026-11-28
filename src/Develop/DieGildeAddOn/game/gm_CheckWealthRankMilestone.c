@@ -7,7 +7,7 @@ extern int gm_GameTimeHour;
 extern int gm_GameTimeSliceDword;
 extern short gm_GameTimeTailWord;
 
-extern int __cdecl gm_WalkEntityChain(int);
+extern int __cdecl gm_CalcPersonWealth(int);
 extern unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 extern unsigned short* __cdecl gm_QueryEntities(int, int, ...);
 extern void __cdecl cm_RequestChangeBits(int, int, int, int, int);
@@ -48,7 +48,7 @@ void __cdecl gm_CheckWealthRankMilestone(unsigned int packedId)
 	if (*(unsigned char*) (slot + 2) == 0) {
 		return;
 	}
-	v = gm_WalkEntityChain((int) packedId);
+	v = gm_CalcPersonWealth((int) packedId);
 	count = *(unsigned char*) (slot + 0xd);
 	limit = count + 1;
 	if (limit > 0xa) {

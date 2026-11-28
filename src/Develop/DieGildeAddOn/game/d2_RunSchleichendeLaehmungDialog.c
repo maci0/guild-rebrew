@@ -28,7 +28,7 @@ extern int d2_DialogButtonAction;
 extern int io_RightButtonReleased;
 extern int d2_CurrentElementId;
 
-int __cdecl gm_WalkEntityChain(unsigned short);
+int __cdecl gm_CalcPersonWealth(unsigned short);
 char *__cdecl d2_OpenTargetPicker(int *, int, int, int);
 int __cdecl he_HasNoActiveAction0x9b(char *);
 void __cdecl io_FormatTextBuffer(char *, int, ...);
@@ -70,7 +70,7 @@ void __cdecl d2_RunSchleichendeLaehmungDialog(char *gebaeude)
     char *rec;
     F8 f;
 
-    base = gm_WalkEntityChain(gm_LocalPlayerSlot);
+    base = gm_CalcPersonWealth(gm_LocalPlayerSlot);
     memset(query, 0, sizeof(query));
     memset(query + 7, 0xff, 8 * sizeof(int));
     query[0] = 1;
@@ -84,7 +84,7 @@ void __cdecl d2_RunSchleichendeLaehmungDialog(char *gebaeude)
     }
     if (sel == 0)
         return;
-    tmp = gm_WalkEntityChain(*(unsigned short *) sel) + base;
+    tmp = gm_CalcPersonWealth(*(unsigned short *) sel) + base;
     price = (int) (tmp * 0.02f);
     dlg = d2_LoadForm(0, 0, "Locations\\Domizil\\kabinett");
     d2_SetOverlayAnimation(0, 0);

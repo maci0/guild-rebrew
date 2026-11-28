@@ -19,7 +19,7 @@ int __cdecl d2_ShowModalMessageBox(char*, int);
 char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-int __cdecl gm_WalkEntityChain(unsigned short);
+int __cdecl gm_CalcPersonWealth(unsigned short);
 double __cdecl gm_RandomFloat01(void);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -95,7 +95,7 @@ void __cdecl d2_RunLoesegeldDialog(char* rec)
 	} else if (cls == 1) {
 		weight = 0.02f;
 	}
-	v = gm_WalkEntityChain(*(unsigned short*) ent);
+	v = gm_CalcPersonWealth(*(unsigned short*) ent);
 	prob = (double) v;
 	if (((double) gm_RandomFloat01() * 0.5 + dbl_0_75) * g_665fc0
 	    < prob) {

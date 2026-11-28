@@ -24,7 +24,7 @@ int __cdecl gm_HandleMsg0aGrantBonus(void* request)
 	}
 	roll = gm_RandomMod(2);
 	d = (double) roll + 1.0;
-	n = (int) (((double) gm_WalkEntityChain(*(unsigned short*) p) * d) *
+	n = (int) (((double) gm_CalcPersonWealth(*(unsigned short*) p) * d) *
 	    0.0125);
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7, n);
 	cm_RequestTransferCurrencyNoKill(*(int*) request, -1, (*(char*)&gm_ActiveTownIndex), n);

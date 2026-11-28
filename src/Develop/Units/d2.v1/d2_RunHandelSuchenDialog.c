@@ -6,7 +6,7 @@ extern int d2_DialogButtonAction, d2_CurrentElementId, io_RightButtonReleased, d
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern int d2_CurrentWindowId;
 extern s_1015f4c d2_WindowMetricsView[];
-extern int g_14a79c0[];
+extern int d2_ObjektNameTable[];
 
 typedef struct D2_HANDEL_SUCHEN_REQ {
 	int f00;                    /* 0x00 */
@@ -115,7 +115,7 @@ void __cdecl d2_RunHandelSuchenDialog(int gebaeude, int a1)
 		*(unsigned int*)&((D2_CONTROL_TL*)d2_Controls)[h].value_1dc = 100;
 		*(unsigned int*)&((D2_CONTROL_TL*)d2_Controls)[h].value_1e0 = 0x10;
 		*(unsigned int*)&((D2_CONTROL_TL*)d2_Controls)[h].font = 0x54;
-		d2_SetControlText(h, g_14a79c0[(int) ids[cnt] * 2]);
+		d2_SetControlText(h, d2_ObjektNameTable[(int) ids[cnt] * 2]);
 		handles[cnt] = h;
 		d2_SetElementEnabled(h, 1);
 	}

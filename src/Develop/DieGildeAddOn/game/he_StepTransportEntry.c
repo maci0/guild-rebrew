@@ -22,7 +22,7 @@ extern unsigned char g_slot_table[2];
 void* __cdecl gm_StartFilteredEntitySearch(int a, ...);
 char* __cdecl gm_FindRecordById(int id);
 int __cdecl d3_SelectSceneContext(int a, int b);
-char __cdecl d3sm_SampleHeight(char* map, float* out, int* x, int* y, float* z);
+char __cdecl d3sm_3D2SuperMap(char* map, float* out, int* x, int* y, float* z);
 int __cdecl cm_RequestMoveObjekt(int a, int b, int c);
 int __cdecl cm_RequestChangeBits(int a, int b, int c, int d, int e);
 void __cdecl cm_RequestWalkOnPath(int who, int x, int y, int id);
@@ -34,7 +34,7 @@ int __cdecl gm_IsWarehouse(unsigned char* rec);
 int __cdecl init_AllocateGebaeudeSceneSlot(unsigned char* rec);
 void __cdecl io_FormatTextBuffer(char* text, int format, ...);
 int __cdecl ch_IsEntityNearBuildingDoor(char* a, unsigned char* b);
-char* __cdecl he_PickRandomSceneObject(char* o);
+char* __cdecl he_PickRandomTransporterDummy(char* o);
 void __cdecl he_ApplyTransportSpeedModifiers(char* a, char* b);
 int __cdecl he_MessageBoxQuickjump(int id, int arg, char* text1, unsigned char flags,
 	int value, int x, int y, char* name, char* text2);
@@ -82,9 +82,9 @@ void __cdecl he_StepTransportEntry(char* ev)
 		cm_RequestChrMoveToUniverse(*(int*) (e + 2), *(int*) (v8 + 1), 0xffffffff, s_68b1e0);
 		n7 = init_AllocateGebaeudeSceneSlot(v8);
 		d3_SelectSceneContext(n7, 1);
-		if (he_PickRandomSceneObject(0)) {
+		if (he_PickRandomTransporterDummy(0)) {
 			idx = tp_ch_PathGrid[n7 * 247];
-			if (idx != 0 && d3sm_SampleHeight(idx, position, (int*) &cellX, (int*) &cellY, (float*) v10)) {
+			if (idx != 0 && d3sm_3D2SuperMap(idx, position, (int*) &cellX, (int*) &cellY, (float*) v10)) {
 				cm_RequestWalkOnPath(*(int*) (e + 2), cellX, cellY, n7);
 			}
 		}

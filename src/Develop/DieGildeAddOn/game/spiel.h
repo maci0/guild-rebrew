@@ -9,7 +9,7 @@ extern char* lpObjektePROT;
 void __cdecl rt_FreeRoutePoints(char* list);
 #endif
 
-int __cdecl gm_WalkEntityChain(unsigned short raw_idx);
+int __cdecl gm_CalcPersonWealth(unsigned short raw_idx);
 
 #ifndef SPIEL_EARLY_STAT_DECLARATIONS
 int __cdecl gm_MapEntityStatRange(int stat_id);

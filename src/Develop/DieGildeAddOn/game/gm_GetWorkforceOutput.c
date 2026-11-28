@@ -5,7 +5,7 @@ extern unsigned char* lpGebaeudePROT;
 extern int gm_DifficultyLevel;
 extern float flt_0_0;
 
-float __cdecl gm_GetWorkforceOutput(unsigned char* p, int k, int a, int b)
+float __cdecl gm_GetTypeWageBase(unsigned char* p, int k, int a, int b)
 {
 	float r;
 	unsigned char* t;

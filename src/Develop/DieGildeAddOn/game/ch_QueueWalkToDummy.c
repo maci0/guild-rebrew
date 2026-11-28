@@ -2,7 +2,7 @@
 
 void __cdecl d3_TransformPoint(char* src, char* pos, float* out);
 char* __cdecl d3sm_GetSceneSuperMap(char* p);
-char __cdecl d3sm_SampleHeight(char* g, float* v, int* a, int* b, int* c);
+char __cdecl d3sm_3D2SuperMap(char* g, float* v, int* a, int* b, int* c);
 int __cdecl d3_GetContextIndex(char* p);
 char* __cdecl ch_CreateAction(char* e, int kind, int a, int b, int c);
 
@@ -21,7 +21,7 @@ char* __cdecl ch_QueueWalkToDummy(char* owner, char* e)
 	if (g == 0) {
 		g = d3sm_GetSceneSuperMap(*(char**) (e + 0x20c));
 	}
-	if (d3sm_SampleHeight(g, v, &a, &b, &c)) {
+	if (d3sm_3D2SuperMap(g, v, &a, &b, &c)) {
 		result = ch_CreateAction(owner, 0x2d, a, b, d3_GetContextIndex(*(char**) (e + 0x20c)));
 		if (result != 0) {
 			*(int*) (result + 0x160) |= 0x10;

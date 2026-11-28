@@ -1,6 +1,6 @@
 extern volatile int gm_GameTicks;
 extern char *tp_ch_PathGrid[];
-char __cdecl d3sm_SampleHeight(int, float *, int *, int *, float *);
+char __cdecl d3sm_3D2SuperMap(int, float *, int *, int *, float *);
 int __cdecl d3_TraceTerrainSegment(int, float *, float *, int, int, int *, int *);
 
 /* ADDRESS: GOLDTL 0x005e94b0 */
@@ -17,7 +17,7 @@ int __cdecl d3_StepProjectile(char *obj)
     map = (int)tp_ch_PathGrid[0];
     if (*(int *)(obj + 0x5c) != 1) return 0;
     remain = gm_GameTicks - *(int *)(obj + 0x60);
-    if (!d3sm_SampleHeight(map, (float *)(obj + 0x30), &x, &y, &height)) {
+    if (!d3sm_3D2SuperMap(map, (float *)(obj + 0x30), &x, &y, &height)) {
         *(int *)(obj + 0x5c) = 3;
         *(int *)(obj + 0x58) = 0;
         return 0;

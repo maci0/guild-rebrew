@@ -4,7 +4,7 @@ extern int d2_InventoryPanelEntity;
 extern char* lpObjektePROT;
 extern char* d2_InventoryPanelWindowId;
 extern char* g_14b52c4;
-extern int g_14a79c0[];
+extern int d2_ObjektNameTable[];
 void* __cdecl gm_QueryEntities(int container_id, int arg_count, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_LookupSpecialObject(unsigned short id);
@@ -37,7 +37,7 @@ unsigned int __cdecl d2_UpdateActiveItemSlots(void)
 				handle = d2_GetControlValue(slot[-1]);
 				d2_SetElementValue(slot[-1], 0, *(unsigned int*) (*slot + 0xe), handle);
 				fcn_0064d41a(((char*)&((D2_CONTROL_TL*)d2_Controls)[slot[-1]] + 0xcc), "%s~ %li %s",
-				    (unsigned int) g_14a79c0[*(unsigned short*) *slot * 2], *(unsigned int*) (*slot + 0xe), g_14b52c4);
+				    (unsigned int) d2_ObjektNameTable[*(unsigned short*) *slot * 2], *(unsigned int*) (*slot + 0xe), g_14b52c4);
 				used = gm_LookupSpecialObject(*(unsigned short*) *slot);
 				if (used != 0) {
 					if (*(int*) (*slot + 0x21) != 0) {
@@ -85,7 +85,7 @@ unsigned int __cdecl d2_UpdateActiveItemSlots(void)
 						*(unsigned int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[handle].value_1dc)) = 0xffffffff;
 						*(unsigned int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[handle].value_1e0)) = 0;
 						fcn_0064d41a(((char*)&((D2_CONTROL_TL*)d2_Controls)[handle] + 0x0cc), "%s~ %li St",
-						    (unsigned int) g_14a79c0[*match * 2],
+						    (unsigned int) d2_ObjektNameTable[*match * 2],
 						    *(unsigned int*) ((char*) match + 0xe));
 						used = gm_LookupSpecialObject(*match);
 						if (used != 0) {

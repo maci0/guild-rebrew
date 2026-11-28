@@ -9,7 +9,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
-void __cdecl he_InitAction0x02(char* o)
+void __cdecl he_StartUpgradeDummy(char* o)
 {
 	char* t;
 

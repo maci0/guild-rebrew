@@ -3,7 +3,7 @@ extern int d2_DialogButtonAction;
 extern int d2_CurrentElementId;
 extern int io_RightButtonReleased;
 extern int d2_DialogCloseRequested;
-int __cdecl gm_WalkEntityChain(unsigned short);
+int __cdecl gm_CalcPersonWealth(unsigned short);
 int __cdecl gm_AccumulateTyped2(int);
 int __cdecl d2_LoadForm(int, int, int);
 void __cdecl d2_SetForm(int, int);
@@ -46,7 +46,7 @@ int __cdecl d2_ShowWealthOverviewDialog(unsigned short *subjectRecord)
         arr[i][2] = 0;
     }
 
-    edi = gm_WalkEntityChain(*subjectRecord);
+    edi = gm_CalcPersonWealth(*subjectRecord);
     r = gm_AccumulateTyped2((int)subjectRecord);
     dialogWindow = d2_LoadForm(0, 0, 0x6aad0c);
     d2_SetForm(dialogWindow, 0);

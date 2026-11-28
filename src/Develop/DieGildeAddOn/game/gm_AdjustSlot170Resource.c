@@ -9,7 +9,7 @@ extern volatile int gm_GameTicks;
 
 char* __cdecl gm_FindSlot170Entry(int a1);
 
-int __cdecl gm_AdjustSlot170Resource(int* a, int flag)
+int __cdecl gm_ExecCannonFire(int* a, int flag)
 {
 	SLOT170_ACTION_BLK blk;
 	char* p;

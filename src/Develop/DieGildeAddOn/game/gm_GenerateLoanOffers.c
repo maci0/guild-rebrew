@@ -11,7 +11,7 @@ extern double dbl_0_01, g_6629c8, g_662ad8, g_662908, g_6653f8, dbl_1_5;
 extern float g_662914, g_662a98;
 
 int __cdecl gm_QueryEntitySum(int, unsigned char);
-int __cdecl gm_WalkEntityChain(unsigned short);
+int __cdecl gm_CalcPersonWealth(unsigned short);
 int __cdecl he_GetActiveKrediteByLender(int, int, int, char*);
 float __cdecl gm_CalcEntityFavor(unsigned int, unsigned int, unsigned int);
 int __cdecl gm_CheckPrivilege(int, unsigned short*, unsigned int*);
@@ -50,7 +50,7 @@ unsigned int __cdecl gm_GenerateLoanOffers(int bank, unsigned short* borrower, u
 				if (v2 != 6 && v2 != 7) {
 					float have;
 
-					offer = gm_WalkEntityChain(*borrower) * 0.2;
+					offer = gm_CalcPersonWealth(*borrower) * 0.2;
 					have = (float) v21;
 					if (have < offer) {
 						if (!(offer < 64000.0f))
@@ -87,7 +87,7 @@ unsigned int __cdecl gm_GenerateLoanOffers(int bank, unsigned short* borrower, u
 		}
 		if (he_GetActiveKrediteByLender(*(unsigned short*) (bank + 0x27), 0, 0xffff, v15) < 9) {
 			memset(outOffers, 0, maxOffers * 12);
-			total = gm_WalkEntityChain(*borrower);
+			total = gm_CalcPersonWealth(*borrower);
 			memset(v16, 0, 0x220);
 			ratio = 0.3f;
 			v16[0] = 1;

@@ -38,7 +38,7 @@ float __cdecl gm_GetEntitySkill(PREDIGT_ENTITY* e, int k);
 int __cdecl gm_GetLawEntry(int idx, PREDIGT_LAW_STAT* dst);
 int __cdecl gm_GetBuildingTechEffect(char* a, int b, int c);
 float __cdecl gm_RandomFloat01(void);
-int __cdecl gm_WalkEntityChain(unsigned short id);
+int __cdecl gm_CalcPersonWealth(unsigned short id);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 void __cdecl cm_RequestChangeFloat(int a1, int a2, float a3);
 float __cdecl gm_CalcSkillDuelScore(PREDIGT_ENTITY* a, PREDIGT_ENTITY* b, int k);
@@ -93,7 +93,7 @@ int __cdecl gm_ApplyPredigtCollection(char* building, PREDIGT_RESULT* out)
 		if (!(gm_RandomFloat01() * 2.0f <= v))
 			continue;
 		fb = (float) base;
-		amt = (int) ((MAX(gm_WalkEntityChain(ent->id) / fb * 160.0f, 0.0f) + 160.0f) * v);
+		amt = (int) ((MAX(gm_CalcPersonWealth(ent->id) / fb * 160.0f, 0.0f) + 160.0f) * v);
 		total += amt;
 		cm_RequestTransferCurrencyNoKill(-1, ent->h, gm_ActiveTownIndex, amt);
 		count++;

@@ -51,7 +51,7 @@
 extern unsigned short* g_entity_table_end; /* 0x1003546c */
 
 int __cdecl gm_LookupEntityRecordIn32SlotTable(int);
-int __cdecl gm_WalkEntityChain(unsigned short);
+int __cdecl gm_CalcPersonWealth(unsigned short);
 void __cdecl gm_AssignBuildingOwner(char*, int, int);
 int __cdecl gm_GetBuildingTypeCategory(int);
 int __cdecl gm_CheckStatLevel(int, int);
@@ -106,7 +106,7 @@ int __cdecl gm_ChangePlayerIdentityImpl(int from_id, int to_id, int unused)
 	} while (counter != 0);
 
 	chain = *(unsigned short*) from_ent;
-	link = gm_WalkEntityChain(chain);
+	link = gm_CalcPersonWealth(chain);
 	to_ent = (char*) gm_LookupEntityRecordIn32SlotTable(to_id);
 	if (to_ent == NULL) {
 		return -2;

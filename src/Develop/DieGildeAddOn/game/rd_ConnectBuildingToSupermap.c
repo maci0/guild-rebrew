@@ -29,7 +29,7 @@ char* __cdecl rd_GetBKSize(char* name);
 void __cdecl rd_ProjectWorldToSupermap(float* ox, float* oy, float* position, char* object, char** context);
 int __cdecl ai_FindPathFromNearestWalkable(int obj, int x, int y, int i, int j);
 char* __cdecl d3_FindSceneObject(char* o, int flags, char* ptr, char* name);
-char __cdecl d3sm_SampleHeight(char* map, float* pos, int* x, int* y, int* z);
+char __cdecl d3sm_3D2SuperMap(char* map, float* pos, int* x, int* y, int* z);
 char __cdecl d3_MatchObjectByNameAndPos(char* e, char* obj);
 /* ADDRESS: GOLDTL 0x004bd4e0 */
 int __cdecl rd_ConnectBuildingToSupermap(int sceneObjectArg, int typeIdArg)
@@ -192,7 +192,7 @@ int __cdecl rd_ConnectBuildingToSupermap(int sceneObjectArg, int typeIdArg)
 	d3_TransformPoint(dst, dst + 0x4c, pos);
 	i = 0;
 	j = 0;
-	if (d3sm_SampleHeight(g_1005904, pos, &i, &j, 0) != 0) {
+	if (d3sm_3D2SuperMap(g_1005904, pos, &i, &j, 0) != 0) {
 		if (ai_FindPathFromNearestWalkable((int) &g_1005900, i, j, -1, -1) != 0) {
 			gv_Free3Fields(g_1005904);
 			if (g_778d24 >= 0x780) {

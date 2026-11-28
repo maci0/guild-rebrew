@@ -3,7 +3,7 @@
 
 extern char tp_ch_PathGrid[];
 
-char __cdecl d3sm_SampleHeight(char*, int, int*, int*, int*);
+char __cdecl d3sm_3D2SuperMap(char*, int, int*, int*, int*);
 
 int __cdecl gm_PosToStatsGrid(int position, int* column, int* row)
 {
@@ -13,7 +13,7 @@ int __cdecl gm_PosToStatsGrid(int position, int* column, int* row)
 
 	g = (*(char**)tp_ch_PathGrid);
 	div = *(int*) (g + 0x20) / 8;
-	if (d3sm_SampleHeight(g, position, column, row, &tmp) != 0) {
+	if (d3sm_3D2SuperMap(g, position, column, row, &tmp) != 0) {
 		*column /= div;
 		*row /= div;
 		return 1;

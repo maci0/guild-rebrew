@@ -26,7 +26,7 @@ typedef struct {
 	char pad70[0x88];
 } FORGE_EVIDENCE_REQ;
 
-int __cdecl gm_WalkEntityChain(unsigned short);
+int __cdecl gm_CalcPersonWealth(unsigned short);
 void* __cdecl d2_OpenTargetPicker(void*, int, int, int);
 int __cdecl amt_GetRoleLevel(int);
 int __cdecl d2_LoadForm(int, int, char*);
@@ -76,7 +76,7 @@ void __cdecl d2_RunBeweiseFaelschenDialog(int building)
 	int id;
 	FAVOR_MASK_FILTER f;
 
-	total = gm_WalkEntityChain(gm_LocalPlayerSlot);
+	total = gm_CalcPersonWealth(gm_LocalPlayerSlot);
 	memset(&q, 0, sizeof(q));
 	memset(q.f1c, -1, sizeof(q.f1c));
 	q.f0 = 1;
@@ -85,7 +85,7 @@ void __cdecl d2_RunBeweiseFaelschenDialog(int building)
 	selectedEntity = (char*) d2_OpenTargetPicker(&q, *(int*) 0x14b5354, 0, 0);
 	if (selectedEntity == 0)
 		return;
-	total += gm_WalkEntityChain(*(unsigned short*) selectedEntity);
+	total += gm_CalcPersonWealth(*(unsigned short*) selectedEntity);
 	n = amt_GetRoleLevel(*(unsigned char*) (selectedEntity + 0x166)) / 3 + 2;
 	amt[0] = (int) (float) n;
 	amt[1] = (int) (1.5f * (float) n);

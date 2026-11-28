@@ -37,7 +37,7 @@ int __cdecl cm_GetCommandResult(int);
 void __cdecl amt_PurchaseOfficeApplication(int, int);
 void __cdecl gm_AddTime(GAME_TIMESTAMP *, int, int, int);
 int __cdecl cm_SendSetHE(int, Ent *);
-int __cdecl amt_FindHighestOccupiedOffice(int);
+int __cdecl amt_FindOfficeWantingApplicants(int);
 int __cdecl amt_SpawnOfficeCandidate(int);
 short __cdecl gm_RandomMod(int);
 
@@ -70,7 +70,7 @@ void __cdecl he_RunDailyCouncilEvent(Ent *e)
 			e->wait = cm_SendSetHE(0, e);
 			return;
 		}
-		e->ac = amt_FindHighestOccupiedOffice(e->b0);
+		e->ac = amt_FindOfficeWantingApplicants(e->b0);
 		if (e->ac == 0) {
 			gm_AddTime(&e->t, 0x18, 0, 0);
 			e->t.hour = 0x11;

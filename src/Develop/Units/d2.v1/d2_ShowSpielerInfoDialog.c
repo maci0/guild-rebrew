@@ -37,7 +37,7 @@ float __cdecl gm_GetEntityAge(unsigned short);
 void __cdecl gm_GetEntityDate(char *, char *);
 int __cdecl gm_CalcPersonBirthDate(char *, char *);
 int __cdecl gm_AccumulateTyped2(char *);
-int __cdecl gm_WalkEntityChain(unsigned short);
+int __cdecl gm_CalcPersonWealth(unsigned short);
 int __cdecl io_AppendText();
 void __cdecl io_FormatTextBuffer();
 int __cdecl d2_ShowModalMessageBox(char *, int);
@@ -124,9 +124,9 @@ void __cdecl d2_ShowSpielerInfoDialog(unsigned short *person, int read_only)
 		    *((unsigned char *)person + 0x169) + t);
 	}
 	if (ok == 0) {
-		io_AppendText("$5<$R%s$0<$3>$L%T$A$0>", 0x1f58, gm_WalkEntityChain(*person));
+		io_AppendText("$5<$R%s$0<$3>$L%T$A$0>", 0x1f58, gm_CalcPersonWealth(*person));
 	} else {
-		gm_WalkEntityChain(*person);
+		gm_CalcPersonWealth(*person);
 		io_AppendText("$5<$R%s$0<$3>$L%s$A$0>", 0x1f58, 0x679794);
 	}
 	p = gm_LookupEntityRecordById(*(int *)((char *)person + 0x5c));

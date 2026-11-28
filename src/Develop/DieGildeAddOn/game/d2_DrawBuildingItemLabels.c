@@ -37,7 +37,7 @@ extern char* sv_SelectedBuilding;
 extern unsigned char* d2_InteriorBuilding;
 extern char* lpObjektePROT;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern int g_14a79c0[];
+extern int d2_ObjektNameTable[];
 
 void* __cdecl gm_QueryEntities(int, int, int, ...);
 void __cdecl d2_SelectFont(int);
@@ -72,7 +72,7 @@ void __cdecl d2_DrawBuildingItemLabels(void)
 		if (u->model != 0 && w->kind != 6 && w->kind != 2
 			&& d3_GetObjectScreenRect(u->model, r)) {
 			d2_DrawWordWrappedText((r[2] - r[0]) / 2 + r[0] - 0x50, r[1], 0xa0, 0x60, d2_ScreenSurface,
-				((WareName*)g_14a79c0)[u->slot].name, 0x28);
+				((WareName*)d2_ObjektNameTable)[u->slot].name, 0x28);
 		}
 	}
 	if (((Estate*)sv_SelectedBuilding) != 0) {
@@ -85,7 +85,7 @@ void __cdecl d2_DrawBuildingItemLabels(void)
 		if (u->model != 0 && (w->kind == 6 || w->kind == 2)
 			&& d3_GetObjectScreenRect(u->model, r)) {
 			d2_DrawWordWrappedText((r[2] - r[0]) / 2 + r[0] - 0x50, r[1], 0xa0, 0x60, d2_ScreenSurface,
-				((WareName*)g_14a79c0)[u->slot].name, 0x28);
+				((WareName*)d2_ObjektNameTable)[u->slot].name, 0x28);
 		}
 	}
 }

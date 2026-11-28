@@ -32,7 +32,7 @@ int __cdecl gm_ApplyOfficePercentCredit(void* request)
 	}
 	v = gm_RandomMod(4);
 	d = (double) v + 1.0;
-	amount = (int) (((double) gm_WalkEntityChain(*(unsigned short*) entity) * d) *
+	amount = (int) (((double) gm_CalcPersonWealth(*(unsigned short*) entity) * d) *
 	    0.01);
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7, amount);
 	cm_RequestTransferCurrencyNoKill(-1, *(int*) request, (*(char*)&gm_ActiveTownIndex), amount);

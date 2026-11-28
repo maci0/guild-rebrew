@@ -14,7 +14,7 @@ typedef struct {
 } Entry5aa;
 
 int __cdecl gm_QueryEntities(int, int, int, int, int);
-int __cdecl gm_WalkEntityChain(unsigned short);
+int __cdecl gm_CalcPersonWealth(unsigned short);
 int __cdecl gm_AccumulateTyped2(char*);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -75,9 +75,9 @@ void __cdecl d2_RunKircheSpendenDialog(char* gebaeude)
 	if (h == 0) {
 		return;
 	}
-	m = gm_WalkEntityChain(gm_LocalPlayerSlot) > 1 ? gm_WalkEntityChain(gm_LocalPlayerSlot) : 1;
-	n = gm_WalkEntityChain(*(unsigned short*) (gebaeude + 0x27)) > 1
-		? gm_WalkEntityChain(*(unsigned short*) (gebaeude + 0x27)) : 1;
+	m = gm_CalcPersonWealth(gm_LocalPlayerSlot) > 1 ? gm_CalcPersonWealth(gm_LocalPlayerSlot) : 1;
+	n = gm_CalcPersonWealth(*(unsigned short*) (gebaeude + 0x27)) > 1
+		? gm_CalcPersonWealth(*(unsigned short*) (gebaeude + 0x27)) : 1;
 	cnt = (int) ((total = (float) (m + n)) * 0.01f);
 	v = gm_AccumulateTyped2((char*) (gm_LocalPlayerSlot * 0x21c + (int) gm_EntitySlotTable));
 	if (v >= cnt) {

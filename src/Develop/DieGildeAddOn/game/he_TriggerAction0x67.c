@@ -40,7 +40,7 @@ int __cdecl gm_CalculateGebaeudeValue(char*, int);
 float __cdecl gm_RandomFloat01(void);
 void __cdecl cm_SendCopyEntityData(struct msg*);
 
-void __cdecl he_TriggerAction0x67(void)
+void __cdecl he_TriggerLeaseOffer(void)
 {
 	char* cand[3];
 	struct stats info;

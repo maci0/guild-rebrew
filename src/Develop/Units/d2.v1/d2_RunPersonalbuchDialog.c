@@ -77,7 +77,7 @@ void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl cm_SendTraceEnd(int);
 void __cdecl d2_UpdateGauge(unsigned char*, Row*, int);
 void __cdecl d2_ClearGauge(Row*);
-float __cdecl gm_GetScaledWorkforceOutput(unsigned char*, int, int, int);
+float __cdecl gm_GetHireWage(unsigned char*, int, int, int);
 int __cdecl d2_ShowModalMessageBox(char*, int);
 int __cdecl gm_CollectBuildingObjectSlots(unsigned char*, int*);
 void __cdecl d2_DestroyElement(int);
@@ -331,7 +331,7 @@ after_gage:
 				d2_SetForm(gage.win, 2);
 				hD = d2_GetWindowListItem(gage.win, 2,
 				                  io_AppendText((char*) 0x1a22,
-				                                (int) gm_GetScaledWorkforceOutput(
+				                                (int) gm_GetHireWage(
 				                                    (unsigned char*) building, building[0],
 				                                    0, -1),
 				                                (((BUILDING_PROTOTYPE*)ent)->worker_kind[0]) + 0x130));

@@ -1534,7 +1534,7 @@ void __cdecl list_unlink_relink(char* ctx, char* node)
 #include "server_internal.h"
 
 extern int (__cdecl* g_dispatch_table[106])(unsigned char*, int); /* 0x1002c3f8 */
-int __cdecl ahm_ProcessEntityChain(char* cmd_payload);
+int __cdecl cm_CheckCommandGroup(char* cmd_payload);
 int __cdecl srv_PutConnSCommand(unsigned int* player, unsigned char* data);
 extern void __cdecl LogMessageInternal(char* file, unsigned int line, char* msg, int level);
 
@@ -1565,7 +1565,7 @@ int __cdecl cm_ProcessCommandQueue(void* a)
 					held = pkt;
 				}
 			} else if (type == 6) {
-				if (ahm_ProcessEntityChain(held) == 0) {
+				if (cm_CheckCommandGroup(held) == 0) {
 					ok = 0;
 				}
 				nextp = (char**) (held + 0x95);
@@ -1863,7 +1863,7 @@ void __cdecl srv_FormatStatTreasury(unsigned short* entity, char* out)
 	    *(int*) ((char*) entity + 0x190), *(int*) ((char*) entity + 0x194),
 	    *(int*) ((char*) entity + 0x198), *(int*) ((char*) entity + 0x19c),
 	    *(int*) ((char*) entity + 0x1a0), *(int*) ((char*) entity + 0x1a4),
-	    gm_AccumulateTyped2((char*) entity), gm_WalkEntityChain(*entity));
+	    gm_AccumulateTyped2((char*) entity), gm_CalcPersonWealth(*entity));
 }
 #endif
 

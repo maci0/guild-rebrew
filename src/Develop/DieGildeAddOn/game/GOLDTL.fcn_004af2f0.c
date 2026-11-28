@@ -703,7 +703,7 @@ int __cdecl hst_HandleGeld(int mode, int pairs, int idx, char* text, int out)
 	if (gm_IsSlotActivePerson(w) == 0) {
 		return 0;
 	}
-	r = gm_WalkEntityChain(w);
+	r = gm_CalcPersonWealth(w);
 	n = 0x200;
 	p = buf;
 	/* The original's zero-fill is the 24-byte hand-written block-fill prelude

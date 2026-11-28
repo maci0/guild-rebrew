@@ -80,7 +80,7 @@ void __cdecl he_RunAction0x7f(char* u)
 		if (*(int*) (u + 0xb0) != 0) {
 			h = ((char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[*(unsigned short*) (u + 8)]);
 			f = gm_GetEntitySkill(h, 3) > 0.1f ? gm_GetEntitySkill(h, 3) : 0.1f;
-			a = gm_WalkEntityChain(*(unsigned short*) h);
+			a = gm_CalcPersonWealth(*(unsigned short*) h);
 			gm_ApplyEntityHealthDelta(*(unsigned short*) h, -(int) ((int) gm_GetEntityHealth(h) * ((1.0f - f) * 0.5f)));
 			d = (int) (a * f * 0.06f);
 			cm_RequestTransferCurrencyNoKill(*(int*) (u + 0xac), -1, gm_ActiveTownIndex, d);
