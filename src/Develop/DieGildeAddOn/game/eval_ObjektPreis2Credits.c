@@ -18,13 +18,14 @@ typedef struct GOLD_PRICE_RECORD {
 extern char* g_143c860[];
 typedef struct GOLD_PRICE_PROTO { unsigned char unknown00[0x233]; unsigned char costs[2]; char unknown235[0x18]; } GOLD_PRICE_PROTO;
 
+#pragma optimize("l", off)
 /* ADDRESS: GOLD 0x00508820 */
 float __cdecl eval_ObjektPreis2Credits(int id, int percentage)
 {
     GOLD_PRICE_RECORD* record;
     GOLD_PRICE_PROTO* prototype;
     char error[256];
-    double quotient;
+    float quotient;
     float total;
     float price;
     int building;
@@ -42,7 +43,7 @@ float __cdecl eval_ObjektPreis2Credits(int id, int percentage)
         return cached;
     }
     divisor = record->divisor + (record->divisor == 0);
-    quotient = (double) record->capacity / divisor;
+    quotient = (float) record->capacity / divisor;
     building = ((int*) 0x919f80)[id];
     prototype = &((GOLD_PRICE_PROTO*) g_entity_type_table)[building];
     if (building != 0) {
@@ -54,7 +55,7 @@ float __cdecl eval_ObjektPreis2Credits(int id, int percentage)
     } else {
         total = 4.0f;
     }
-    price = (float) (quotient * (total * 0.5));
+    price = quotient * (total * 0.5);
     if (record->kind == 0x17) {
         return price * 2.2f;
     }
@@ -72,5 +73,8 @@ float __cdecl eval_ObjektPreis2Credits(int id, int percentage)
         }
     }
     record->cache = (int) (price * 0.06875f);
-    return (float) (percentage & 0xff) * price * 0.01f * 2.2f;
+    price = (float) (percentage & 0xff) * price;
+    price *= 0.01f;
+    return price * 2.2f;
 }
+#pragma optimize("", on)

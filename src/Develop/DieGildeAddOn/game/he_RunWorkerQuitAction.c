@@ -1,16 +1,6 @@
-
-
-
 // SIZE 0x21c
+#include "Develop/client_types.h"
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-
-
-
-
-
-
-
-
 #include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -28,6 +18,21 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 int __cdecl he_PostEntityMessage(int, int, char*, unsigned char, int, char*);
 void __cdecl he_FreeAction(char*);
+
+/* ADDRESS: GOLDTL 0x005666b0 */
+/* Timed action 0x33 (HE_PERSONAL_KUENDIGEN) START: if the person still exists and is not
+ * class 0x14, due = start; otherwise the action is freed. */
+void __cdecl fcn_005666b0(char* h)
+{
+	char* p;
+
+	p = gm_LookupEntityRecordById(*(int*) (h + 0xac));
+	if (p != 0 && p[2] != 0x14) {
+		*(pos14_7f4c00*) (h + 0x52) = *(pos14_7f4c00*) (h + 0x44);
+		return;
+	}
+	he_FreeAction(h);
+}
 
 void __cdecl he_RunWorkerQuitAction(char* u)
 {

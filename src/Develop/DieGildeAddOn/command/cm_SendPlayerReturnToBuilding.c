@@ -14,23 +14,21 @@ void __cdecl cm_SendPlayerReturnToBuilding(int unused)
 	char* cursor;
 	int idx;
 	char* slot;
-	unsigned short key;
 	int posX;
 	int posY;
 
 	if (unused != 0) {
 		return;
 	}
-	key = gm_LocalPlayerSlot;
-	idx = -1;
+	idx = 0;
 	cursor = gm_EntitySlotTable + 0x16c;
 	for (;;) {
 		char* rec = *(char**) cursor;
-		idx++;
-		if (rec != 0 && *(unsigned short*) (rec + 0x27) == key) {
+		if (rec != 0 && *(unsigned short*) (rec + 0x27) == gm_LocalPlayerSlot) {
 			break;
 		}
 		cursor += sizeof(ENTITY_RECORD);
+		idx++;
 		if ((int) cursor >= (int)(gm_EntitySlotTable + 0x6556c)) {
 			return;
 		}

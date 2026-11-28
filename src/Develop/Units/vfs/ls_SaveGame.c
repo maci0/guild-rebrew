@@ -33,6 +33,9 @@ int __cdecl ls_SaveRoutes(void* stream);
 int __cdecl ls_SaveSlot779d00(void* stream);
 int __cdecl ls_SaveList774a78(void* stream);
 
+/* Each failing step is written as if/else nesting, not a flat run of `if (x == 0) {cleanup; return 0;}`:
+ * flat checks let MSVC6 merge the identical CloseVfsStream/ls_RebindSavedSceneRefs tails into one shared block,
+ * while the original keeps one inline cleanup per check. The last check carries the success tail in its else. */
 /* ADDRESS: GOLDTL 0x0051e080 */
 int __cdecl ls_SaveGame(char* name, char* slot, int flags)
 {
@@ -62,122 +65,147 @@ int __cdecl ls_SaveGame(char* name, char* slot, int flags)
 		CloseVfsStream(stream);
 		ls_RebindSavedSceneRefs();
 		return 0;
-	}
-	if (ls_WriteBuildingEntityState(stream) == 0) {
-		CloseVfsStream(stream);
-		ls_RebindSavedSceneRefs();
-		return 0;
-	}
-	if (ls_SaveDynamicEntities(stream) == 0) {
-		CloseVfsStream(stream);
-		ls_RebindSavedSceneRefs();
-		return 0;
-	}
-	if (ls_SaveEntities(stream) == 0) {
-		CloseVfsStream(stream);
-		ls_RebindSavedSceneRefs();
-		return 0;
-	}
-	if (ls_SaveMarketsAndSeasons(stream) == 0) {
-		CloseVfsStream(stream);
-		ls_RebindSavedSceneRefs();
-		return 0;
-	}
-	if (amt_fio_SaveAemter(stream) == 0) {
-		CloseVfsStream(stream);
-		ls_RebindSavedSceneRefs();
-		return 0;
-	}
-	if (gm_SaveSceneSnapshot(stream) == 0) {
-		CloseVfsStream(stream);
-		ls_RebindSavedSceneRefs();
-		return 0;
-	}
+	} else {
+		if (ls_WriteBuildingEntityState(stream) == 0) {
+			CloseVfsStream(stream);
+			ls_RebindSavedSceneRefs();
+			return 0;
+		} else {
+			if (ls_SaveDynamicEntities(stream) == 0) {
+				CloseVfsStream(stream);
+				ls_RebindSavedSceneRefs();
+				return 0;
+			} else {
+				if (ls_SaveEntities(stream) == 0) {
+					CloseVfsStream(stream);
+					ls_RebindSavedSceneRefs();
+					return 0;
+				} else {
+					if (ls_SaveMarketsAndSeasons(stream) == 0) {
+						CloseVfsStream(stream);
+						ls_RebindSavedSceneRefs();
+						return 0;
+					} else {
+						if (amt_fio_SaveAemter(stream) == 0) {
+							CloseVfsStream(stream);
+							ls_RebindSavedSceneRefs();
+							return 0;
+						} else {
+							if (gm_SaveSceneSnapshot(stream) == 0) {
+								CloseVfsStream(stream);
+								ls_RebindSavedSceneRefs();
+								return 0;
+							}
 	if (!(flags & 2)) {
 		if (ls_SaveCrimeRecords(stream) == 0) {
 			CloseVfsStream(stream);
 			ls_RebindSavedSceneRefs();
 			return 0;
-		}
-		if (ls_SaveRelationMatrices(stream) == 0) {
-			CloseVfsStream(stream);
-			ls_RebindSavedSceneRefs();
-			return 0;
-		}
-		if (ls_SaveCityStatsAndCrimeGrid(stream) == 0) {
-			CloseVfsStream(stream);
-			ls_RebindSavedSceneRefs();
-			return 0;
-		}
-		if (ls_SaveAvatarStatesThunk(stream) == 0) {
-			CloseVfsStream(stream);
-			ls_RebindSavedSceneRefs();
-			return 0;
-		}
-		if (he_SaveEvents(stream) == 0) {
-			CloseVfsStream(stream);
-			ls_RebindSavedSceneRefs();
-			return 0;
-		}
-		if (ls_SaveCutscenes(stream) == 0) {
-			CloseVfsStream(stream);
-			ls_RebindSavedSceneRefs();
-			return 0;
-		}
-		if (ls_SaveHistoryState(stream) == 0) {
-			CloseVfsStream(stream);
-			ls_RebindSavedSceneRefs();
-			return 0;
-		}
-		if (ls_SaveNodePools(stream) == 0) {
-			CloseVfsStream(stream);
-			ls_RebindSavedSceneRefs();
-			return 0;
-		}
-		if (ls_SaveWeatherAndSlots(stream) == 0) {
-			CloseVfsStream(stream);
-			ls_RebindSavedSceneRefs();
-			return 0;
-		}
-		if (ls_SaveFiguresAndAnimQueue(stream) == 0) {
-			CloseVfsStream(stream);
-			ls_RebindSavedSceneRefs();
-			return 0;
-		}
-		if (ls_SaveMissionJobs(stream) == 0) {
-			CloseVfsStream(stream);
-			ls_RebindSavedSceneRefs();
-			return 0;
-		}
-		if (ls_SaveSlot779d00(stream) == 0) {
-			CloseVfsStream(stream);
-			ls_RebindSavedSceneRefs();
-			return 0;
-		}
-		if (ls_SaveList774a78(stream) == 0) {
-			CloseVfsStream(stream);
-			ls_RebindSavedSceneRefs();
-			return 0;
-		}
-		if (ls_SaveAlchemyDrawSlots(stream) == 0) {
-			CloseVfsStream(stream);
-			ls_RebindSavedSceneRefs();
-			return 0;
-		}
-		if (ls_SaveHighOfficeTargets(stream) == 0) {
-			CloseVfsStream(stream);
-			ls_RebindSavedSceneRefs();
-			return 0;
-		}
+		} else {
+			if (ls_SaveRelationMatrices(stream) == 0) {
+				CloseVfsStream(stream);
+				ls_RebindSavedSceneRefs();
+				return 0;
+			} else {
+				if (ls_SaveCityStatsAndCrimeGrid(stream) == 0) {
+					CloseVfsStream(stream);
+					ls_RebindSavedSceneRefs();
+					return 0;
+				} else {
+					if (ls_SaveAvatarStatesThunk(stream) == 0) {
+						CloseVfsStream(stream);
+						ls_RebindSavedSceneRefs();
+						return 0;
+					} else {
+						if (he_SaveEvents(stream) == 0) {
+							CloseVfsStream(stream);
+							ls_RebindSavedSceneRefs();
+							return 0;
+						} else {
+							if (ls_SaveCutscenes(stream) == 0) {
+								CloseVfsStream(stream);
+								ls_RebindSavedSceneRefs();
+								return 0;
+							} else {
+								if (ls_SaveHistoryState(stream) == 0) {
+									CloseVfsStream(stream);
+									ls_RebindSavedSceneRefs();
+									return 0;
+								} else {
+									if (ls_SaveNodePools(stream) == 0) {
+										CloseVfsStream(stream);
+										ls_RebindSavedSceneRefs();
+										return 0;
+									} else {
+										if (ls_SaveWeatherAndSlots(stream) == 0) {
+											CloseVfsStream(stream);
+											ls_RebindSavedSceneRefs();
+											return 0;
+										} else {
+											if (ls_SaveFiguresAndAnimQueue(stream) == 0) {
+												CloseVfsStream(stream);
+												ls_RebindSavedSceneRefs();
+												return 0;
+											} else {
+												if (ls_SaveMissionJobs(stream) == 0) {
+													CloseVfsStream(stream);
+													ls_RebindSavedSceneRefs();
+													return 0;
+												} else {
+													if (ls_SaveSlot779d00(stream) == 0) {
+														CloseVfsStream(stream);
+														ls_RebindSavedSceneRefs();
+														return 0;
+													} else {
+														if (ls_SaveList774a78(stream) == 0) {
+															CloseVfsStream(stream);
+															ls_RebindSavedSceneRefs();
+															return 0;
+														} else {
+															if (ls_SaveAlchemyDrawSlots(stream) == 0) {
+																CloseVfsStream(stream);
+																ls_RebindSavedSceneRefs();
+																return 0;
+															} else {
+																if (ls_SaveHighOfficeTargets(stream) == 0) {
+																	CloseVfsStream(stream);
+																	ls_RebindSavedSceneRefs();
+																	return 0;
+																} else {
 		if (ls_SaveRoutes(stream) == 0) {
 			CloseVfsStream(stream);
 			ls_RebindSavedSceneRefs();
 			return 0;
+		} else {
+			CloseVfsStream(stream);
+			ls_RebindSavedSceneRefs();
+			return 1;
+		}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 		}
 	}
 	CloseVfsStream(stream);
 	ls_RebindSavedSceneRefs();
 	return 1;
+						}
+					}
+				}
+			}
+		}
+	}
 failure:
 	CloseVfsStream(stream);
 	ls_RebindSavedSceneRefs();

@@ -1,6 +1,3 @@
-
-
-
 #define max(a, b) ((a) > (b) ? (a) : (b))
 
 typedef struct F8 {
@@ -11,12 +8,6 @@ typedef struct F8 {
 
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
-
-
-
-
-
-
 extern unsigned char gm_ActiveTownIndex;
 
 unsigned short __cdecl gm_RandomMod(int n);
@@ -25,6 +16,24 @@ int __cdecl amt_CanUpgradeBuildingTier2(char* e);
 int __cdecl gm_GetSeasonTreasury(char* e, char k);
 int __cdecl ai_FindEntityInFavorRange(char* p, int kind, F8 f, int c, float r, int* out);
 
+int __cdecl gm_ExecZunftPreismanipulation(int, int*);
+
+/* ADDRESS: GOLDTL 0x0049fa80 */
+/* AI method 0x36 (Zunft Aufruhr) start callback: forwards {3, e+4, e+0x10, ., .} to
+ * gm_ExecZunftPreismanipulation when the record is kind 0x15. */
+int __cdecl fcn_0049fa80(int a1, char* e)
+{
+	int m[5];
+
+	if (e[0] == 0x15) {
+		m[1] = *(int*) (e + 4);
+		m[0] = 3;
+		m[2] = *(int*) (e + 0x10);
+		gm_ExecZunftPreismanipulation(a1, m);
+		return 0x36;
+	}
+	return 0;
+}
 
 int __cdecl ai_StartZunftAufruhr(int a1, char* e, int a3, char* out)
 {

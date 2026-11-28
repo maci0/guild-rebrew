@@ -2798,10 +2798,6 @@ int __cdecl am_RunBuergermeisterUpgrade(void)
 	return 0;
 }
 
-int __cdecl fcn_0049fa80(void)
-{
-	return 0;
-}
 
 int __cdecl fcn_004a5340(char* e, int a, int* b, int c, float r, int* out)
 {
@@ -3618,10 +3614,6 @@ int __cdecl he_RunHauchDesVerfalls(void)
 	return 0;
 }
 
-int __cdecl fcn_00579320(void)
-{
-	return 0;
-}
 
 int __cdecl fcn_00579460(void)
 {

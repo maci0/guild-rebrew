@@ -1,5 +1,19 @@
+#include "Develop/DieGildeAddOn/game/client_data.h"
 
+int __cdecl gm_GetSeason(int*);
+void __cdecl sim_SetSyncParams(pos14_7f4c00*, int, int, int);
 
+/* ADDRESS: GOLDTL 0x00566fa0 */
+/* Timed action 0x3a (HE_SIM_PERSONAL) START: start = now, due = today 06:15:00. */
+void __cdecl fcn_00566fa0(char* h)
+{
+	*(int*) (h + 0xb0) = 3;
+	*(int*) (h + 0xac) = 0;
+	gm_GetSeason((int*) &gm_GameTime);
+	*(pos14_7f4c00*) (h + 0x52) = gm_GameTime;
+	*(pos14_7f4c00*) (h + 0x44) = gm_GameTime;
+	sim_SetSyncParams((pos14_7f4c00*) (h + 0x52), 6, 0xf, 0);
+}
 
 int __cdecl gm_CheckEntityType(char*);
 char* __cdecl gm_FindBuildingPrimarySlot(char*);
