@@ -1,6 +1,6 @@
 #include "game_data.h"
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
-#include "GOLDTL.fcn_004974e0_gconf.h"
+extern unsigned char g_slot_table[2];
 extern unsigned char g_773d75;
 typedef struct { char x00[0x21]; unsigned char x21; char x22[0x22b]; } BUILDING_LIMIT_VIEW;
 char* __cdecl gm_SearchTable67(int);

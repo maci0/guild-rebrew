@@ -43,7 +43,7 @@ int __cdecl gm_MatchesTargetFilter(unsigned short, unsigned short, int, int);
 Node* __cdecl he_fn_Handlung(void);
 Node* __cdecl he_StartHandlungSearch(int, int, int);
 
-#include "GOLDTL.fcn_005cb440_gconf.h"
+extern unsigned char g_slot_table[2];
 
 /* ADDRESS: GOLDTL 0x005cb440 */
 int __cdecl d2_CollectDynastyCandidates(Ent* subject, int capacity, Row* rows, int filterKind)

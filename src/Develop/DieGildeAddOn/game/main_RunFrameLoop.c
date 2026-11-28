@@ -84,7 +84,7 @@ extern char g_774988[];
 extern int cm_SaveRequestSlot;
 extern unsigned int g_772e84;
 extern int g_14ac5e8;
-#include "GOLDTL.fcn_005373e0_gconf.h"
+extern char g_538060[];
 extern char g_5438c0[];
 extern char g_7e1f70[];
 extern char g_6b5c60[];

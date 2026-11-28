@@ -1,6 +1,0 @@
-#ifndef GOLDTL_FCN_00533090_GCONF_H
-#define GOLDTL_FCN_00533090_GCONF_H
-
-extern float g_14ce880;
-
-#endif /* GOLDTL_FCN_00533090_GCONF_H */

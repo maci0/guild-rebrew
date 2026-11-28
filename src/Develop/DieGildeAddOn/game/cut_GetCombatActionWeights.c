@@ -1,7 +1,7 @@
 #include <string.h>
 extern char* g_772eb4;
 extern int g_772e9c;
-#include "GOLDTL.fcn_004d3c60_gconf.h"
+extern int g_772e98;
 extern int g_772f08;
 extern int g_9b9e40[];
 extern int g_9b43e0[];

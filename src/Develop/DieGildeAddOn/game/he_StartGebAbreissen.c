@@ -1,6 +1,6 @@
 #include "client_types.h"
 
-#include "GOLDTL.fcn_005641b0_gconf.h"
+extern pos14_7f4c00 g_current_year;
 
 char *__cdecl gm_StartFilteredEntitySearch(int arg_count, ...);
 void __cdecl cm_RequestChangeBits(int id, int a2, int a3, int a4, int a5);

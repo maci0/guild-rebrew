@@ -6,7 +6,7 @@ typedef struct {
 } fcn_004a34d0_ring;
 
 extern unsigned int g_7728bc;
-#include "GOLDTL.fcn_004a34d0_gconf.h"
+extern fcn_004a34d0_ring* g_664448;
 
 
 /* ADDRESS: GOLDTL 0x004a34d0 */

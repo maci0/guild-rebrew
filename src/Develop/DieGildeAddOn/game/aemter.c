@@ -20,7 +20,7 @@
 #endif
 
 #if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
-#include "GOLDTL.fcn_004e99e0_gconf.h"
+extern unsigned char g_slot_table[2];
 #endif
 
 extern char g_office_slots[0x3f0];

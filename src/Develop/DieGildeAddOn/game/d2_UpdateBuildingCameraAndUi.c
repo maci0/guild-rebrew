@@ -1,7 +1,7 @@
 extern char* g_1015ea0;
 extern int g_14ce8e0;
 extern char g_14cf950;
-#include "GOLDTL.fcn_00533090_gconf.h"
+extern float g_14ce880;
 extern int d2_CurrentElementId;
 extern int d3_CameraAnimating;
 int d3_ActiveCameraAnimation = 0;

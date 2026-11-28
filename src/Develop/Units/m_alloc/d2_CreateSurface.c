@@ -1,7 +1,8 @@
 #include <string.h>
 
 extern int g_14ce86c;
-#include "GOLDTL.fcn_004770a0_gconf.h"
+extern char g_67d91c;
+extern char g_67d91d;
 extern void* g_6b5de0;
 
 void* __cdecl m_alloc(int size, char* tag);

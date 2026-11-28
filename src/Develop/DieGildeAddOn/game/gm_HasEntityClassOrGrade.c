@@ -1,5 +1,5 @@
 #include <stdarg.h>
-#include "GOLDTL.fcn_00506e70_gconf.h"
+extern unsigned char g_slot_table[2];
 
 /* ADDRESS: GOLDTL 0x00506e70 */
 int __cdecl gm_HasEntityClassOrGrade(unsigned int idx, int count, ...)

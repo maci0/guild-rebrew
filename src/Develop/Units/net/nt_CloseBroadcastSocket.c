@@ -1,6 +1,6 @@
 extern int g_675170;
 
-#include "GOLDTL.fcn_00402320_gconf.h"
+extern int (__stdcall *g_66234c)(int);
 
 void __cdecl nt_CloseBroadcastSocket(void)
 {

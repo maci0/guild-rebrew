@@ -1,7 +1,7 @@
 /* Sums the price of the entities resolved from a building's three linked
  * entries and books the result on the player's record. */
 
-#include "GOLDTL.fcn_004d52a0_gconf.h"
+extern char* g_772e98;
 extern char* g_772e9c;
 extern unsigned char g_773d75;
 extern double g_662908;

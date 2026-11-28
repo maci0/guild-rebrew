@@ -5,7 +5,7 @@ extern float g_662948;
 extern float g_6640b4;
 extern char* lpGebaeudePROT;
 extern char* lpGebaeudeINST;
-#include "GOLDTL.fcn_005522d0_gconf.h"
+extern unsigned char g_slot_table[2];
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 void* __cdecl m_alloc(unsigned int size, const char* tag);
 unsigned short __cdecl gm_RandomMod(int n);

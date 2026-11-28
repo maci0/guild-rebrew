@@ -1,7 +1,7 @@
 #include <math.h>
 
 extern int g_104049c;
-#include "GOLDTL.fcn_00440670_gconf.h"
+extern int g_662ea8[];
 extern double g_662958;
 extern double g_662cd8;
 extern double g_662cd0;

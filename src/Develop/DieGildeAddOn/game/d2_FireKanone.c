@@ -52,7 +52,7 @@ typedef struct {
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_662914, g_662c98, g_662a98, g_664450, g_66444c, g_6660f4;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-#include "GOLDTL.fcn_00588aa0_gconf.h"
+extern unsigned char g_slot_table[2];
 
 int __cdecl d2_GetControlValue(int slot);
 int __cdecl gm_CanFireCannonShot(char* a0, int a1, int a2, int a3, int* o1, int* o2);

@@ -14,7 +14,7 @@ typedef struct {
 
 #include "client_types.h"
 extern Rec2d_9a3800 g_9a3800[512];
-#include "GOLDTL.fcn_005d9f70_gconf.h"
+#include "Develop/Units/d2.v1/crime_description.h"
 extern char g_6ac4c8[];
 extern int d2_CurrentWindowId;
 extern int g_100f1dc;

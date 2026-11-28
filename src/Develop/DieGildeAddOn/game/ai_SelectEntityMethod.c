@@ -10,7 +10,7 @@ typedef struct {
 } AI_METHOD_PLAN;
 
 extern char g_1008540[];
-#include "GOLDTL.fcn_00495180_gconf.h"
+extern unsigned char g_slot_table[2];
 
 /* ADDRESS: GOLDTL 0x00495180 */
 int __cdecl ai_SelectEntityMethod(int entityId)

@@ -7,7 +7,7 @@
 
 extern char* g_entity_type_table;    /* 0x00868050 */
 #include "Develop/DieGildeAddOn/game/game_player.h"      /* 0x00774970 */
-#include "GOLDTL.ob_TransportFromLager_gconf.h"
+extern unsigned char g_slot_table[2]; /* 0x007f4ca0 */
 extern float flt_1;                  /* 0x006628a0 */
 extern float g_6628a8;               /* 0x006628a8 */
 extern double dbl_1_0;               /* 0x006629c8 */

@@ -17,7 +17,7 @@ typedef struct {
 } GebProt_55e4a0;
 extern unsigned char* lpGebaeudePROT;
 extern char* g_1043370[];
-#include "GOLDTL.fcn_0055e4a0_gconf.h"
+extern unsigned char g_slot_table[2];
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 void* __cdecl gm_StartFilteredEntitySearch(int a, ...);
 char* __cdecl gm_FindRecordById(int id);

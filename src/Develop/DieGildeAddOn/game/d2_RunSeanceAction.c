@@ -29,7 +29,7 @@ typedef struct {
 } Dialog_58ee70;
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
-#include "GOLDTL.fcn_0058ee70_gconf.h"
+extern unsigned char g_slot_table[2];
 extern int g_14b5650;
 extern int g_14b5674;
 extern int g_665f78[];

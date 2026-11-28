@@ -15,7 +15,7 @@ extern char* g_7746c8;
 extern char* g_7746cc;
 extern int g_7746f0;
 extern char g_7746f4;
-#include "GOLDTL.sv_HandleObjects_gconf.h"
+extern char* g_7e431c;
 extern char* g_7e4320;
 extern int g_7e4318;
 extern int g_7e2700;

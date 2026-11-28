@@ -29,7 +29,7 @@ extern float g_662acc;
 extern double g_665bd8;
 extern float g_665be0;
 
-#include "GOLDTL.fcn_0050b980_gconf.h"
+extern unsigned char* g_entity_type_table; /* 0x868050 */
 extern int g_99e0a0[];
 extern char* lpObjektePROT;
 extern int g_14a79c0[];
