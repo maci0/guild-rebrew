@@ -22,7 +22,7 @@ from rebrew.cross_import import (
 from rebrew.metadata.bindings import SourceBinding, read_source_bindings
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "src" / "Develop" / "Unassigned" / "GOLD.fcn_0040abd0.c"
+SOURCE = ROOT / "src" / "Develop" / "DieGildeAddOn" / "game" / "ch_DequeueIfIdle.c"
 
 
 def _bindings(target: str) -> list[SourceBinding]:
@@ -80,6 +80,6 @@ def test_shared_bound_function_is_the_transferred_body() -> None:
         dry_run=True,
     )
     assert preview["action"] == "would-import-shared"
-    assert preview["filepath"].endswith("GOLD.fcn_0040abd0.c")
+    assert preview["filepath"].endswith("ch_DequeueIfIdle.c")
     assert preview["dst_va"] == f"0x{goldtl[0].va:08x}"
     assert preview["src_va"] == f"0x{gold[0].va:08x}"

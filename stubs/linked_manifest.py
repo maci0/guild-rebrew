@@ -16,7 +16,7 @@ import json
 import sys
 from pathlib import Path
 
-from rebrew.data_ownership import parse_link_map
+from rebrew.data.ownership import parse_link_map
 
 
 def publics(text: str) -> list[tuple[str, str]]:
