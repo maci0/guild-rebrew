@@ -41,7 +41,7 @@ extern char* d2_Controls;
 extern char* g_14b52c0;
 extern unsigned char gm_ActiveTownIndex;
 
-Group* __cdecl fcn_00502cd0(int a, int b, int c, ...);
+Group* __cdecl gm_QueryEntities(int a, int b, int c, ...);
 int __cdecl d2_AddElementToWindow(int x, int y, int id, int win);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl d2_SetLabelText(int, char*);
@@ -67,9 +67,9 @@ int __cdecl d2_DrawPartyStoreItems(int x, int y, int mode)
 		if (((Party*)g_772eb4)->stores[k] == -1) {
 			continue;
 		}
-		e = (Item*) fcn_00502cd0(0, 2, 7, 1, ((Party*)g_772eb4)->stores[k]);
-		e = (Item*) fcn_00502cd0(((Group*) e)->first, 1, 0, 0x1dd);
-		e = (Item*) fcn_00502cd0(((Group*) e)->first, 1, 5);
+		e = (Item*) gm_QueryEntities(0, 2, 7, 1, ((Party*)g_772eb4)->stores[k]);
+		e = (Item*) gm_QueryEntities(((Group*) e)->first, 1, 0, 0x1dd);
+		e = (Item*) gm_QueryEntities(((Group*) e)->first, 1, 5);
 		for (; e != 0; e = gm_NextEntityQueryMatch()) {
 			if (mode != 0 && (mode != 1 || e->owner != gm_LocalPlayerSlot) && (mode != 2 || e->owner == gm_LocalPlayerSlot)) {
 				continue;

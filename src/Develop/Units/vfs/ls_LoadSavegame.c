@@ -39,7 +39,7 @@ void __cdecl d3_ClearAllSceneContexts(void);
 int __cdecl d3_LoadSceneAndTerrain(void* stream);
 int __cdecl fcn_00524040(void* stream);
 int __cdecl ls_LoadExistingEntities(void* stream);
-int __cdecl fcn_00522510(void* stream);
+int __cdecl ls_LoadClientBuildingEntityState(void* stream);
 void __cdecl m_FreeTracked(char* p);
 int __cdecl amt_fio_LoadAemter(void* stream, int version);
 int __cdecl ls_LoadCrimeRecords(void* stream);
@@ -136,7 +136,7 @@ int __cdecl ls_LoadSavegame(char* cpath)
 	if (ls_LoadExistingEntities(stream) == 0) {
 		goto fail;
 	}
-	if (fcn_00522510(stream) == 0) {
+	if (ls_LoadClientBuildingEntityState(stream) == 0) {
 		goto fail;
 	}
 	if (ls_LoadDynamicEntities(stream) == 0) {

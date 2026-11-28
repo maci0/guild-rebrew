@@ -23,7 +23,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int, int, ...);
 int __cdecl gm_CheckEntityType(char*);
 int __cdecl d3_GetContextIndex(int);
 void __cdecl d3_SelectSceneContext(int, int);
-char* __cdecl fcn_00502cd0(int, int, ...);
+char* __cdecl gm_QueryEntities(int, int, ...);
 int __cdecl init_EnsureObjektSceneContext(char*);
 int __cdecl init_AllocateGebaeudeSceneSlot(char*);
 int __cdecl ch_QueueStandUpAnimation(char*, char*);
@@ -98,11 +98,11 @@ int __cdecl cm_ExChrGotoBuilding(char* e, char* out)
 		if (k < 0)
 			goto end;
 		if (*(int*) (o + 0x30) != -1) {
-			q = fcn_00502cd0(*(int*) (C + 0x5d), 1, 1, *(int*) (o + 0x30));
+			q = gm_QueryEntities(*(int*) (C + 0x5d), 1, 1, *(int*) (o + 0x30));
 			if (q != 0 && *(unsigned short*) q != 0xfd) {
 				fcn_0064d41a(buf, g_68b214,
 				    strupr((char*)&((OBJECT_PROTOTYPE*)lpObjektePROT)[*(unsigned short*) q] + 1));
-				q = fcn_00502cd0(*(int*) (C + 0x5d), 1, 0, 0xfd);
+				q = gm_QueryEntities(*(int*) (C + 0x5d), 1, 0, 0xfd);
 				k = init_AllocateGebaeudeSceneSlot(C);
 				if (k >= 0 && q != 0) {
 					ch_QueueStandUpAnimation(o, g_6756b8);
@@ -238,7 +238,7 @@ after:
 	if (e[0x1c] != 0)
 		goto saved_exit;
 	if (*(int*) (e + 0x18) != -1) {
-		k = init_EnsureObjektSceneContext(fcn_00502cd0(*(int*) (B + 0x5d), 1, 1,
+		k = init_EnsureObjektSceneContext(gm_QueryEntities(*(int*) (B + 0x5d), 1, 1,
 		    *(int*) (e + 0x18)));
 		if (k < 0) {
 			ReportClientMessage(g_68b108);
@@ -248,7 +248,7 @@ after:
 		k = 0;
 	}
 	if (*(int*) (e + 0x18) != -1) {
-		q = fcn_00502cd0(*(int*) (B + 0x5d), 1, 1, *(int*) (e + 0x18));
+		q = gm_QueryEntities(*(int*) (B + 0x5d), 1, 1, *(int*) (e + 0x18));
 		if (q == 0)
 			ReportClientMessage(g_68b13c);
 	} else {
@@ -288,9 +288,9 @@ b3:
 		goto saved_exit;
 
 	/* chunk 9: native ins 900-957 */
-	q = fcn_00502cd0(*(int*) (B + 0x5d), 1, 1, *(int*) (e + 0x18));
+	q = gm_QueryEntities(*(int*) (B + 0x5d), 1, 1, *(int*) (e + 0x18));
 	if (q == 0)
-		q = fcn_00502cd0(*(int*) (B + 0x5d), 1, 0, 0xfd);
+		q = gm_QueryEntities(*(int*) (B + 0x5d), 1, 0, 0xfd);
 	if (q == 0) {
 		k = init_AllocateGebaeudeSceneSlot(B);
 		if (k < 0)

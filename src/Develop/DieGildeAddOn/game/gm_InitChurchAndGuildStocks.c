@@ -6,7 +6,7 @@ extern unsigned char gm_ActiveTownIndex;
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_AddObjekt(void);
-char* __cdecl fcn_00502cd0(int, int, int, int);
+char* __cdecl gm_QueryEntities(int, int, int, int);
 char* __cdecl gm_AllocObjekt(int, int, int);
 int __cdecl cm_SendSellObjekt(int, int, int, int, char, int);
 unsigned short __cdecl gm_RandomMod(int);
@@ -31,8 +31,8 @@ void __cdecl gm_InitChurchAndGuildStocks(void)
 	p = kinds;
 	do {
 		for (s = gm_StartFilteredEntitySearch(1, 0, kind); s != 0; s = gm_FindNextFilteredEntity()) {
-			a = fcn_00502cd0(*(int*) (s + 0x5d), 1, 0, 0xff);
-			b = fcn_00502cd0(*(int*) (s + 0x5d), 1, 0, 0xfe);
+			a = gm_QueryEntities(*(int*) (s + 0x5d), 1, 0, 0xff);
+			b = gm_QueryEntities(*(int*) (s + 0x5d), 1, 0, 0xfe);
 			if (a == 0) {
 				a = gm_AllocObjekt(*(int*) (s + 1), 0xff, 1);
 			}

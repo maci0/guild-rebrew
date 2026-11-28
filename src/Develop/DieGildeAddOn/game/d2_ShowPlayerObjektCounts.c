@@ -32,7 +32,7 @@ int __cdecl d2_CreateWindow(int, int, int, int, int);
 void __cdecl d2_SetElementFont(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl io_AppendText(char*, ...);
-char* __cdecl fcn_00502cd0(int, int, int);
+char* __cdecl gm_QueryEntities(int, int, int);
 char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_LookupSpecialObject(int);
 int __cdecl d2_UpdateWindowDrag(char*);
@@ -59,7 +59,7 @@ void __cdecl d2_ShowPlayerObjektCounts(void)
 			for (i = 0; i < 768; i++) {
 				if (((Player*)gm_EntitySlotTable)[i].x0 != 0xffff) {
 					n = 0;
-					for (e = fcn_00502cd0(((Player*)gm_EntitySlotTable)[i].x178, 1, 5); e != 0; e = gm_NextEntityQueryMatch()) {
+					for (e = gm_QueryEntities(((Player*)gm_EntitySlotTable)[i].x178, 1, 5); e != 0; e = gm_NextEntityQueryMatch()) {
 						if (gm_LookupSpecialObject(*(unsigned short*) e) != 0 && *(int*) (e + 0x21) != 0) {
 							if (n == 0) {
 								io_AppendText(s_6ab848, ((Player*)gm_EntitySlotTable)[i].name);

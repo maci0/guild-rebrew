@@ -11,7 +11,7 @@ extern int gm_GameTimeHour;
 extern int gm_GameTimeSliceDword;
 extern short gm_GameTimeTailWord;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-int __cdecl fcn_00502cd0(int a, int b, ...);
+int __cdecl gm_QueryEntities(int a, int b, ...);
 int __cdecl d2_CheckOwnerBlocked(void* obj);
 void* __cdecl he_StartHandlungSearch(int a, int b, int c, int d, int e);
 void* __cdecl he_fn_Handlung(void);
@@ -63,7 +63,7 @@ void __cdecl d2_ShowHandelSearch(unsigned char* targetBuilding, unsigned char* a
 	ids[0] = 0x1c4;
 	ids[1] = 0x1c5;
 	ids[2] = 0x1c6;
-	ids[6] = fcn_00502cd0(*(int*) (targetBuilding + 0x5d), 2, 6, 0, 0x2a);
+	ids[6] = gm_QueryEntities(*(int*) (targetBuilding + 0x5d), 2, 6, 0, 0x2a);
 	type = *(unsigned char*) targetBuilding;
 	rec = (char*)&((BUILDING_PROTOTYPE*)g_entity_type_table)[type];
 	kind = *(unsigned char*) rec;

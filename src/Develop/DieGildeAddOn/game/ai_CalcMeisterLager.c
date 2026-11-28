@@ -41,7 +41,7 @@ extern int g_100d10c;
 extern float g_100d0f4;
 extern LightState ai_MeisterDebugState;
 
-char *__cdecl fcn_00502cd0(int, int, int, int, int, ...);
+char *__cdecl gm_QueryEntities(int, int, int, int, int, ...);
 void __cdecl gm_TryAutoUpgradeBuildingSlots(char *, char *, int);
 void __cdecl ai_RequestAusbauUpgrade(char *, char *, int);
 char *__cdecl gm_NextEntityQueryMatch(void);
@@ -68,7 +68,7 @@ void __cdecl ai_CalcMeisterLager(char *meister)
 		if (*(int *) (meister + 0x1b4) & 0x20) {
 			return;
 		}
-		warehouse = fcn_00502cd0(*(int *) (*(char **) (meister + 0x16c) + 0x5d), 2, 6, 0, 0x116);
+		warehouse = gm_QueryEntities(*(int *) (*(char **) (meister + 0x16c) + 0x5d), 2, 6, 0, 0x116);
 		if (warehouse == 0) {
 			return;
 		}
@@ -84,7 +84,7 @@ void __cdecl ai_CalcMeisterLager(char *meister)
 		}
 		g_100e74c = 0;
 		bld = *(char **) (meister + 0x16c);
-		for (cart = fcn_00502cd0(*(int *) (bld + 0x5d), 3, 6, 4, 0x1d, 3, *(unsigned short *) (bld + 0x27)); cart != 0;
+		for (cart = gm_QueryEntities(*(int *) (bld + 0x5d), 3, 6, 4, 0x1d, 3, *(unsigned short *) (bld + 0x27)); cart != 0;
 		     cart = gm_NextEntityQueryMatch()) {
 			if (*(int *) (cart + 0x1c) != *(int *) (*(char **) (meister + 0x16c) + 1)) {
 				continue;

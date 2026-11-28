@@ -13,7 +13,7 @@ void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 char* __cdecl he_fn_Handlung(void);
 
-char* __cdecl fcn_00502cd0(int, int, ...);
+char* __cdecl gm_QueryEntities(int, int, ...);
 
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl cm_RequestChangeAttribute(void);
@@ -48,7 +48,7 @@ void __cdecl he_InitDunkleEcke(char* u)
 	if (e == 0) {
 		gm_ResolveEntityById((void**) (&o), 0, 0, *(int*) (u + 0xb0));
 		if (o != 0) {
-			q = fcn_00502cd0(*(int*) (o + 0x5d), 2, 6, 0, 0x12c);
+			q = gm_QueryEntities(*(int*) (o + 0x5d), 2, 6, 0, 0x12c);
 			if (q != 0) {
 				int t = gm_GameTime.a;
 

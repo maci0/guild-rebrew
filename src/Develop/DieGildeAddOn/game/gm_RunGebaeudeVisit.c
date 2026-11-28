@@ -8,7 +8,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl sv_ResetSelectionState(void);
 void __cdecl fcn_005305a0(void);
 int __cdecl sb_PlayVoice(int, void*, int, int, int, int, int);
-int __cdecl fcn_00502cd0(int, int, int, int);
+int __cdecl gm_QueryEntities(int, int, int, int);
 void __cdecl sb_LoadBuildingVoiceBanks(char*);
 int __cdecl fcn_00510c90(int);
 void __cdecl d3_DeinitUniverse(int);
@@ -114,12 +114,12 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
         sb_PlayVoice(g_7747c8, (void*) 0x6aadac, 1, 0x3f, 0x7f, 0, 0);
     strcpy(ch_StepSampleName, "normal_s");
 
-    fcn_00502cd0(*(int*) (o + 0x5d), 1, 0, (int) *(u16*) (o + 0x29));
+    gm_QueryEntities(*(int*) (o + 0x5d), 1, 0, (int) *(u16*) (o + 0x29));
     sb_LoadBuildingVoiceBanks(o);
 
     do {
         g_774658 = g_774650 + 1;
-        msg = (char*) fcn_00502cd0(*(int*) (o + 0x5d), 1, 0, (int) *(u16*) (o + 0x29));
+        msg = (char*) gm_QueryEntities(*(int*) (o + 0x5d), 1, 0, (int) *(u16*) (o + 0x29));
         if (msg != 0) {
             c = ((u8*) &init_SceneContextIndices)[*(u16*) msg];
             if (c != 0xfe) {

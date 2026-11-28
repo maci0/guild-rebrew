@@ -13,7 +13,7 @@ void __cdecl he_PostEntityMessage(int, int, void*, int, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004b8550 */
-int __cdecl fcn_004b8550(void* a1)
+int __cdecl gm_HandleStenchFavorLoss(void* a1)
 {
 	char buf[0x400];
 	int d2;

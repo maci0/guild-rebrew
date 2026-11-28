@@ -7,7 +7,7 @@ extern void* txt_TargetBuildingPrompt;
 
 int __cdecl fcn_005015e0(int* out, int a, int b, int c);
 int __cdecl d2_RunCityScrollMapDialog(int a, int* b, void* c, int d, int e);
-int __cdecl fcn_00502cd0(int a, int b, ...);
+int __cdecl gm_QueryEntities(int a, int b, ...);
 int __cdecl fcn_00502850(void);
 float __cdecl fcn_0042e450(void);
 void __cdecl cm_SendSellObjekt(int a, int b, int c, int d, unsigned char e, int f);
@@ -50,10 +50,10 @@ int __cdecl gm_ObjForceSellBuildingStock(char* actor, char* action)
 	rec = (int*) recordAddr;
 	base = (char*) ((int*) 0x7f4ca0
 	    + (int) *(unsigned short*) ((char*) recordAddr + 0x27) * 135);
-	e = (int*) fcn_00502cd0(*(int*) ((char*) rec + 0x5d), 2, 6, 0, 0x2a);
+	e = (int*) gm_QueryEntities(*(int*) ((char*) rec + 0x5d), 2, 6, 0, 0x2a);
 	if (e != 0) {
-		fcn_00502cd0(*(int*) ((char*) e + 0x14), one, 5);	/* result unused */
-		f = (int*) fcn_00502cd0(*(int*) ((char*) e + 0x14), one, 5);
+		gm_QueryEntities(*(int*) ((char*) e + 0x14), one, 5);	/* result unused */
+		f = (int*) gm_QueryEntities(*(int*) ((char*) e + 0x14), one, 5);
 		while (f != 0) {
 			if (*(int*) ((char*) f + 0xe) > one) {
 				quantity = (((int) ((fcn_0042e450() * g_6629d0 + 0.1f)

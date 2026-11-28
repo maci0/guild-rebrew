@@ -11,7 +11,7 @@ extern char* sv_SelectedBuilding;
 void __cdecl d2_DestroySelectionPanel(void);
 void __cdecl sv_ClearObjectSelection(void);
 void __cdecl d2_SetFormVisibility(int, int);
-int __cdecl fcn_00502cd0(int, int, int, int);
+int __cdecl gm_QueryEntities(int, int, int, int);
 void __cdecl d2_DispatchTutorialInput(int, int, int, int);
 void __cdecl d2_RunTradeInventoryPanel(int, int);
 
@@ -25,7 +25,7 @@ void __cdecl d2_OpenMarktstandPanel(int buildingArg, int queryTypeId)
 	if (g_6a25b8 != -1) {
 		d2_SetFormVisibility(g_6a25b8, 0);
 	}
-	(*(int*)&sv_SelectedBuilding) = fcn_00502cd0(*(int*) (gm_MarketEntity + 0x5d), 1, 0, queryTypeId);
+	(*(int*)&sv_SelectedBuilding) = gm_QueryEntities(*(int*) (gm_MarketEntity + 0x5d), 1, 0, queryTypeId);
 	if ((*(int*)&sv_SelectedBuilding) != 0) {
 		d2_DispatchTutorialInput(0x17, (*(int*)&sv_SelectedBuilding), 0, queryTypeId);
 		while ((*(int*)&sv_SelectedBuilding) != 0) {

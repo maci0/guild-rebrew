@@ -6,7 +6,7 @@ void __cdecl ch_StartMovement(int a, int b, int c, int d, int e, char* label);
 int __cdecl he_AssignActionSlot(int a, int b, int c, int d);
 int __cdecl gm_AddTime(char* sel, int a, int b, int c);
 int __cdecl gm_GetBuildingTechEffect(char* e, int a, int b);
-char* __cdecl fcn_00502cd0(int a, int b, int c, int d);
+char* __cdecl gm_QueryEntities(int a, int b, int c, int d);
 char* __cdecl fcn_00502850(void);
 int __cdecl fcn_0042e410(int code);
 int __cdecl io_FormatTextBuffer(char* buf, int fmt, ...);
@@ -113,7 +113,7 @@ void __cdecl he_RunAngriff(char* ent)
 		slot = gm_GetBuildingTechEffect(e2, 5, 1);
 		prob = (float) ((double) slot * 0.01 + 1.0);
 		e2 = fcn_00503fe0(1, 1, *(int*) (ent + 0xb0));
-		target = fcn_00502cd0(*(int*) (e2 + 0x5d), 1, 0, 0xca);
+		target = gm_QueryEntities(*(int*) (e2 + 0x5d), 1, 0, 0xca);
 		count = (int) target;
 		while (target != 0) {
 			if (*(int*) (target + 0x2a) == *(int*) (e2 + 1)) {

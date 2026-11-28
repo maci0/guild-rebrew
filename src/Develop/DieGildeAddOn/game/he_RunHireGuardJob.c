@@ -34,7 +34,7 @@ int __cdecl cm_GetCommandStatus(int);
 char* __cdecl cm_GetCommandResult(int);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
-char* __cdecl fcn_00502cd0(int, int, int, int);
+char* __cdecl gm_QueryEntities(int, int, int, int);
 void __cdecl cm_RequestChrMoveToUniverse(int, int, int, char*);
 int __cdecl gm_RandomMod(int);
 void __cdecl gm_AddTime(char*, int, int, int);
@@ -136,9 +136,9 @@ void __cdecl he_RunHireGuardJob(char* self)
 			if (t != -1) {
 				goto send;
 			}
-			packet = (S55cc80Packet*) fcn_00502cd0(packet->kind, 1, 0, 0xfd);
+			packet = (S55cc80Packet*) gm_QueryEntities(packet->kind, 1, 0, 0xfd);
 		} else {
-			packet = (S55cc80Packet*) fcn_00502cd0(packet->kind, 1, 0, packet->id);
+			packet = (S55cc80Packet*) gm_QueryEntities(packet->kind, 1, 0, packet->id);
 		}
 		if (packet != 0) {
 			t = *(int*) ((char*) packet + 2);

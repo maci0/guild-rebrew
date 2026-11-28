@@ -7,7 +7,7 @@ typedef struct {
 
 int __cdecl cm_SendSetHE(int, char*);
 
-void __cdecl fcn_0055a8e0(char* e)
+void __cdecl he_StartSideChange(char* e)
 {
 	if ((e[0x78] & 4) == 0) {
 		*(Rec14*) (e + 0x52) = *(Rec14*) (e + 0x44);

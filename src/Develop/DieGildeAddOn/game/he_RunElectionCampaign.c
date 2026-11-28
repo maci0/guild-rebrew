@@ -23,7 +23,7 @@ int __cdecl cm_GetCommandStatus(int);
 void __cdecl gm_ResolveEntityById(char**, int, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl cm_SendSetHE(int, char*);
-char* __cdecl fcn_00502cd0(int, int, int, int, int);
+char* __cdecl gm_QueryEntities(int, int, int, int, int);
 int __cdecl gm_GetElapsedMinutes(pos14_7f4c00*, pos14_7f4c00*);
 void __cdecl gm_HandleAllianceCommand(int, char*, char*, int);
 int __cdecl gm_RandomMod(int);
@@ -61,7 +61,7 @@ void __cdecl he_RunElectionCampaign(char* action)
         cm_SendSetHE(none, o);
         return;
     }
-    sel = fcn_00502cd0(*(int*) (action + 0x5d), 2, 6, 0, 0x12d);
+    sel = gm_QueryEntities(*(int*) (action + 0x5d), 2, 6, 0, 0x12d);
     if (sel == 0) {
         gm_AddTime((pos14_7f4c00*) (o + 0x52), 0, 5, 0);
         cm_SendSetHE(none, o);

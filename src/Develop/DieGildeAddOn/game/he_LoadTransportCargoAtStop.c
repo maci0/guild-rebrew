@@ -14,7 +14,7 @@ int __cdecl gm_CollectBuildingStock(char*, Slots*, int);
 char* __cdecl fcn_0050d490(char*);
 int __cdecl gm_CalcEntityInventoryStats(char*, Slots*);
 char* __cdecl gm_FindCityItemHolder(int);
-char* __cdecl fcn_00502cd0(int, int, int, ...);
+char* __cdecl gm_QueryEntities(int, int, int, ...);
 int __cdecl gm_GetMsgField(char*, char*);
 int __cdecl gm_eval_SlotVoll(char*, int, int);
 float __cdecl gm_GetSeasonPrice(int, unsigned char);
@@ -59,11 +59,11 @@ void __cdecl he_LoadTransportCargoAtStop(char* route, int difficulty)
 			if (((char)(((BUILDING_PROTOTYPE*)t)->category)) == 0xa) {
 				src = gm_FindCityItemHolder(*(int*) rec);
 			} else if (((char)(((BUILDING_PROTOTYPE*)t)->category)) == 0x1c) {
-				src = fcn_00502cd0(*(int*) (pkt + 0x5d), 2, 0, 0x1db, 6);
+				src = gm_QueryEntities(*(int*) (pkt + 0x5d), 2, 0, 0x1db, 6);
 			} else {
 				src = buf.obj;
 			}
-			item = fcn_00502cd0(*(int*) (stats.obj + 0x14), 1, 0, *(int*) rec);
+			item = gm_QueryEntities(*(int*) (stats.obj + 0x14), 1, 0, *(int*) rec);
 			if (item != 0) {
 				n = *(int*) (rec + 4);
 				if (!(n < gm_GetMsgField(stats.obj, item))) {

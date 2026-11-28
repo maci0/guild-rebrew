@@ -7,7 +7,7 @@ extern int gm_NextEntityId;
 extern char cm_LastObjectId[];
 
 char* __cdecl gm_SearchTable67(int);
-char* __cdecl fcn_00502cd0(int, int, int, int);
+char* __cdecl gm_QueryEntities(int, int, int, int);
 char* __cdecl gm_NextEntityQueryMatch(void);
 char* __cdecl gm_AllocObjekt(int, int, int);
 
@@ -40,7 +40,7 @@ int __cdecl fcn_004cd860(char* input, char* response)
 	e2 = gm_SearchTable67(*(int*) (input + 0x14));
 	if (e2 == 0)
 		return 1;
-	for (q = fcn_00502cd0(*(int*) (e2 + 0x5d), 1, 0, 0xca); q != 0; q = gm_NextEntityQueryMatch()) {
+	for (q = gm_QueryEntities(*(int*) (e2 + 0x5d), 1, 0, 0xca); q != 0; q = gm_NextEntityQueryMatch()) {
 		if (*(int*) (q + 0x2a) == *(int*) (e1 + 1))
 			goto found;
 	}

@@ -10,7 +10,7 @@ typedef struct Req {
 extern float g_100991c;
 extern float g_100993c;
 
-unsigned short* __cdecl fcn_00502cd0(int a, int b, int c, int d);
+unsigned short* __cdecl gm_QueryEntities(int a, int b, int c, int d);
 float* __cdecl gm_LookupSpecialObject(int id);
 int __cdecl gm_UseSpecialObject(char* e, Req* r);
 
@@ -21,7 +21,7 @@ int __cdecl ai_RunSecurityObject(char* e, int* p)
 	unsigned short* s;
 	Req r;
 
-	s = fcn_00502cd0(*(int*) (e + 0x178), 1, 1, p[1]);
+	s = gm_QueryEntities(*(int*) (e + 0x178), 1, 1, p[1]);
 	if (!s) {
 		return 0;
 	}

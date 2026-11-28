@@ -26,7 +26,7 @@ extern char g_6ac618[];
 
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl he_fn_Handlung(void);
-unsigned short* __cdecl fcn_00502cd0(int, int, int, int);
+unsigned short* __cdecl gm_QueryEntities(int, int, int, int);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
@@ -113,7 +113,7 @@ void __cdecl d2_RunRoomUpgradeDialog(unsigned char* productionBuilding)
 		}
 		p++;
 	}
-	p = fcn_00502cd0(*(int*) (productionBuilding + 0x5d), 1, 5, 0);
+	p = gm_QueryEntities(*(int*) (productionBuilding + 0x5d), 1, 5, 0);
 	while (p != 0) {
 		if ((g_item_def_table[(int) (*p) * 0x41] == 2 || g_item_def_table[(int) (*p) * 0x41] == 6)
 		    && *p != 0xfd) {
@@ -222,7 +222,7 @@ void __cdecl d2_RunRoomUpgradeDialog(unsigned char* productionBuilding)
 		}
 		removed = 0;
 		for (i = 0; i < nslots; i++) {
-			if (fcn_00502cd0(*(int*) (productionBuilding + 0x5d), 1, 0, slots[i * 3]) != 0) {
+			if (gm_QueryEntities(*(int*) (productionBuilding + 0x5d), 1, 0, slots[i * 3]) != 0) {
 				((D2_CONTROL_TL*) (d2_Controls))[slots[i * 3 + 1]].value_05c = 0;
 				d2_SetLabelText(slots[i * 3 + 2], *(int*) 0x14ab268);
 				removed++;

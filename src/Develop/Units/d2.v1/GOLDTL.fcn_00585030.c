@@ -65,7 +65,7 @@ void __cdecl d3_EndCameraAndUiMode(void);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 /* ADDRESS: GOLDTL 0x00585030 */
-void __cdecl fcn_00585030(int alchemyObjectArg)
+void __cdecl d2_ShowAlchemyFormulaBook(int alchemyObjectArg)
 {
 	char* e;
 	char* data;
@@ -114,7 +114,7 @@ void __cdecl fcn_00585030(int alchemyObjectArg)
 			if (io_RightButtonReleased != 0) {
 				d2_DialogCloseRequested = 1;
 			}
-		} while (main_RunFrameLoop((void*) fcn_00585030, 0x677c7) != 0);
+		} while (main_RunFrameLoop((void*) d2_ShowAlchemyFormulaBook, 0x677c7) != 0);
 		d2_DestroyForm(win);
 		return;
 	}
@@ -219,7 +219,7 @@ void __cdecl fcn_00585030(int alchemyObjectArg)
 				d2_SendAlchemyResearch(e, records);
 			}
 		}
-	} while (main_RunFrameLoop((void*) fcn_00585030, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_ShowAlchemyFormulaBook, 0x677c7) != 0);
 	d2_ClearRadioGroup(list);
 	d2_DestroyForm(win);
 	d3_EndCameraAndUiMode();

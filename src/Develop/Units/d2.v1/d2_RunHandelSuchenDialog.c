@@ -31,7 +31,7 @@ typedef struct D2_HANDEL_SUCHEN_REQ {
 	unsigned char pad64[0x94];
 } D2_HANDEL_SUCHEN_REQ;
 
-int __cdecl fcn_00502cd0(int, int, ...);
+int __cdecl gm_QueryEntities(int, int, ...);
 int __cdecl d2_CheckOwnerBlocked(int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl he_fn_Handlung(void);
@@ -79,7 +79,7 @@ void __cdecl d2_RunHandelSuchenDialog(int gebaeude, int a1)
 	ids[0] = 0x1c1;
 	ids[1] = 0x1c2;
 	ids[2] = 0x1c3;
-	ids[6] = fcn_00502cd0(*(int*) (gebaeude + 0x5d), 2, 6, 0, 0x2a);
+	ids[6] = gm_QueryEntities(*(int*) (gebaeude + 0x5d), 2, 6, 0, 0x2a);
 	if (d2_CheckOwnerBlocked(gebaeude))
 		return;
 	for (i = 3; i < 6; i++) {

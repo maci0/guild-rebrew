@@ -33,7 +33,7 @@ int __cdecl cm_RequestChangeAttribute();
 int __cdecl cm_SendCopyEntityData();
 int __cdecl gm_AddTime();
 int __cdecl fcn_00502850();
-int __cdecl fcn_00502cd0();
+int __cdecl gm_QueryEntities();
 int __cdecl fcn_00503fe0();
 int __cdecl gm_LookupEntityRecordById();
 int __cdecl io_AppendText();
@@ -116,7 +116,7 @@ void __cdecl d2_ShowFestInvitation(int a0,int a1)
   while ((v12 && (*(int *)(v12 + 0x10) != *(int *)(v10 + 1)))) {
     v12 = he_fn_Handlung();
   }
-  v8 = fcn_00502cd0(*(unsigned int *)(v10 + 0x5d),1,0,0x18);
+  v8 = gm_QueryEntities(*(unsigned int *)(v10 + 0x5d),1,0,0x18);
   v10 = a1;
   v37 = (unsigned int)(v8 != 0);
   if (v12) { 

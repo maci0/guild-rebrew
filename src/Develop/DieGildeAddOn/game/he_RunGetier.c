@@ -9,7 +9,7 @@ int __cdecl gm_AddTime(unsigned int*, int, int, int);
 int __cdecl gm_CompareGameTime(int, int);
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
-int __cdecl fcn_00502cd0(int, int, int, ...);
+int __cdecl gm_QueryEntities(int, int, int, ...);
 int __cdecl gm_FindBuildingPrimarySlot(int);
 int __cdecl gm_FindBuildingOwner(int);
 int __cdecl gm_GetBuildingTechEffect(int, int, int);
@@ -84,11 +84,11 @@ void __cdecl he_RunGetier(char* jobState)
 		*(int*) (jobState + 0x70) = -1;
 		return;
 	}
-	v19 = fcn_00502cd0(*(int*) (rec + 0x5d), 1, 0, 0xdd);
+	v19 = gm_QueryEntities(*(int*) (rec + 0x5d), 1, 0, 0xdd);
 	if (v19 == 0) {
 		v19 = gm_FindBuildingPrimarySlot(rec);
 	}
-	ent = fcn_00502cd0(*(int*) (rec + 0x5d), 2, 6, 0, 0x2a);
+	ent = gm_QueryEntities(*(int*) (rec + 0x5d), 2, 6, 0, 0x2a);
 	if (ent != 0) {
 		tmp = gm_FindBuildingOwner(rec);
 		f = (double) gm_GetBuildingTechEffect(rec, 0xb, 1) * 0.01 + g_6629c8;

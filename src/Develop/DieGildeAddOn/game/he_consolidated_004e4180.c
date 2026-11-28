@@ -28,7 +28,7 @@ extern char g_67d67c[];
 int __cdecl d2_ClearSurface(int);
 void __cdecl d2_ReleaseOverlaySprite(unsigned char*);
 void __cdecl d2_StartScreenFade(int, int, int, int, char*, int, int);
-int __cdecl fcn_00502cd0(int, int, int, int);
+int __cdecl gm_QueryEntities(int, int, int, int);
 int __cdecl fcn_00505370(unsigned char*);
 void __cdecl init_LoadGebaeudeScene(int);
 void __cdecl fcn_00510c90(int);
@@ -88,7 +88,7 @@ void __cdecl cut_SwitchEntityScene(unsigned char* entity, unsigned int sceneId)
 		}
 	}
 	else {
-		if (fcn_00502cd0(*(int*) (entity + 0x5d), 1, 0, sceneId)) {
+		if (gm_QueryEntities(*(int*) (entity + 0x5d), 1, 0, sceneId)) {
 			if (!fcn_00505370(entity)) {
 				if (init_SceneContextIndices[sceneId] != -2) {
 					if (init_SceneContextIndices[sceneId] == -1 ||

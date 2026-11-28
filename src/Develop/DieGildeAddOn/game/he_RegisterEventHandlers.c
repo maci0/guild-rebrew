@@ -106,7 +106,7 @@ void __cdecl he_AllocAction0x7f(void);
 void __cdecl he_RunAction0x7f(void);
 void __cdecl he_StartCountdownAction(void);
 void __cdecl he_RunCountdownAction(void);
-void __cdecl fcn_0055a8e0(void);
+void __cdecl he_StartSideChange(void);
 void __cdecl he_RunAction0x81(void);
 void __cdecl he_StartAction0x82SkillModifier(void);
 void __cdecl he_HandleAction0x82SkillModifier(void);
@@ -311,7 +311,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(128, (void*) he_StartCountdownAction, (void*) he_RunCountdownAction) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(129, (void*) fcn_0055a8e0, (void*) he_RunAction0x81) != 0) {
+	if (he_RegisterHandler(129, (void*) he_StartSideChange, (void*) he_RunAction0x81) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(130, (void*) he_StartAction0x82SkillModifier, (void*) he_HandleAction0x82SkillModifier) != 0) {

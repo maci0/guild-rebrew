@@ -35,7 +35,7 @@ extern int d2_CurrentElementId;
 
 
 int __cdecl gm_GetGuildHall(int a);
-int __cdecl fcn_00502cd0(int, int, ...);
+int __cdecl gm_QueryEntities(int, int, ...);
 void __cdecl d2_CenterDialogWindows(int dlg);
 int __cdecl gm_CalcBuildingCost(int a, int b);
 int __cdecl d2_AddElementToWindow(int a, int b, int c, int d);
@@ -83,7 +83,7 @@ void __cdecl d2_RunStadtBauenDialog(void)
 	cats[4] = 0;
 	raw = gm_GetGuildHall(1);
 	raw = *(int*) (raw + 0x5d);
-	query = fcn_00502cd0(raw, 2, 6, 0, 0x115);
+	query = gm_QueryEntities(raw, 2, 6, 0, 0x115);
 	dlg = d2_LoadForm(0, 0, (char*) 0x6aa2a8);
 	d2_CenterDialogWindows(dlg);
 	g_7746f8 = 1;

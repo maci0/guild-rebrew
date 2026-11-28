@@ -3,7 +3,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
-void* __cdecl fcn_00502cd0(int, int, ...);
+void* __cdecl gm_QueryEntities(int, int, ...);
 char __cdecl d3_GetObjectScreenRect(void*, int*);
 void __cdecl d2_DrawWordWrappedText(int, int, int, int, int, char*, int);
 
@@ -30,9 +30,9 @@ void __cdecl d3_DrawBuildingUpgradeLabel(char* sceneNode)
 	}
 	strcpy(key, sceneNode + 0x10);
 	if ((int) d2_InteriorBuilding != 0) {
-		item = (unsigned short*) fcn_00502cd0(*(int*) (ownerRec + 0x5d), 1, 4, 6);
+		item = (unsigned short*) gm_QueryEntities(*(int*) (ownerRec + 0x5d), 1, 4, 6);
 	} else {
-		item = (unsigned short*) fcn_00502cd0(*(int*) (ownerRec + 0x5d), 1, 4, 2);
+		item = (unsigned short*) gm_QueryEntities(*(int*) (ownerRec + 0x5d), 1, 4, 2);
 	}
 	while (item != 0) {
 		if (strcmpi(key,
@@ -45,7 +45,7 @@ void __cdecl d3_DrawBuildingUpgradeLabel(char* sceneNode)
 	if ((int) d2_InteriorBuilding == 0) {
 		return;
 	}
-	hit = (unsigned short*) fcn_00502cd0(*(int*) (ownerRec + 0x5d), 1, 0, 0xfd);
+	hit = (unsigned short*) gm_QueryEntities(*(int*) (ownerRec + 0x5d), 1, 0, 0xfd);
 found:
 	if (hit == 0) {
 		return;

@@ -8,7 +8,7 @@ extern double dbl_1_0;
 
 char* __cdecl gm_FindCityItemHolder(int id);
 char* __cdecl gm_FindKind47ByOwner(int owner);
-char* __cdecl fcn_00502cd0(int a, int b, ...);
+char* __cdecl gm_QueryEntities(int a, int b, ...);
 float __cdecl eval_ObjektPreis2Credits(int id, int arg);
 
 /* Slot price of one season slot: stock against the slot's base rate, clamped
@@ -30,14 +30,14 @@ float __cdecl gm_CalcMarketSlotPrice(int season, int slot)
 	if (store == 0 && season != gm_ActiveTownIndex) {
 		e = gm_FindKind47ByOwner(season);
 		if (e != 0) {
-			store = fcn_00502cd0(*(int*) (e + 0x5d), 2, 0, 0x1db, 6);
+			store = gm_QueryEntities(*(int*) (e + 0x5d), 2, 0, 0x1db, 6);
 		}
 	}
 	stock = 0.0f;
 	if (store == 0) {
 		return eval_ObjektPreis2Credits(id, 100);
 	}
-	e = fcn_00502cd0(*(int*) (store + 0x14), 1, 0, id);
+	e = gm_QueryEntities(*(int*) (store + 0x14), 1, 0, id);
 	if (e != 0) {
 		stock = (float) *(int*) (e + 0xe);
 	}

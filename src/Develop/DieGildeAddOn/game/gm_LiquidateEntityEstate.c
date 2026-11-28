@@ -52,7 +52,7 @@ unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 unsigned char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_CalculateGebaeudeValue(int, int);
 int __cdecl gm_SumTreasury(unsigned short*);
-int __cdecl fcn_00502cd0(int, int, ...);
+int __cdecl gm_QueryEntities(int, int, ...);
 int __cdecl fcn_005085f0(int, unsigned char);
 int __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
@@ -152,7 +152,7 @@ void __cdecl gm_LiquidateEntityEstate(unsigned short* entity, char* outputText, 
 	}
 	r = gm_SumTreasury(entity);
 	cm_RequestMoveCredits(*(int*) (sp + 4), -1, (*(unsigned char*) 0x6f1bc5), r);
-	p = (unsigned char*) fcn_00502cd0(*(int*) (entity + 0xbc), 1, 5);
+	p = (unsigned char*) gm_QueryEntities(*(int*) (entity + 0xbc), 1, 5);
 	while (p != 0) {
 		cm_SendRemoveLinkedObject(*(int*) (entity + 2), -1, *(int*) (p + 2));
 		p = gm_NextEntityQueryMatch();

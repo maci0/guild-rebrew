@@ -14,7 +14,7 @@ extern int gm_AllEntitiesControllable;
 void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
-int __cdecl fcn_00502cd0(int, int, int, int, int);
+int __cdecl gm_QueryEntities(int, int, int, int, int);
 void __cdecl d2_RunChurchSermonDialog(char*);
 void __cdecl d2_RunTaufeDialog(char*, int);
 void __cdecl d2_OpenBeichteDialog(char*);
@@ -38,7 +38,7 @@ void __cdecl d2_RunKircheMenu(char* e, int msg)
 			weih = RegisterStatusText("ob_WEIHWASSERBECKEN", g_14ab8f4, 0x16);
 		}
 		if (*(unsigned short*) (e + 0x27) != gm_LocalPlayerSlot && *(unsigned short*) (e + 0x27) != 0xffff) {
-			if (fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0xf2) != 0) {
+			if (gm_QueryEntities(*(int*) (e + 0x5d), 2, 6, 0, 0xf2) != 0) {
 				beicht = RegisterStatusText("ob_KIRCHE_BEICHTSTUHLRAUM", g_14ab918, 0x16);
 			} else {
 				beicht = 0;

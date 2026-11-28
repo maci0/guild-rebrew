@@ -10,7 +10,7 @@ extern unsigned char gm_ActiveTownIndex;
 /* Callees of this translation unit; see src/GOLDTL.fcn_004af2f0.c, the
  * sibling in the same address family. */
 void* __cdecl gm_GetGuildHall(int);
-void* __cdecl fcn_00502cd0(int, int, ...);
+void* __cdecl gm_QueryEntities(int, int, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);
 void __cdecl hst_SplitFormatPrefix(char*, char*, int*, char**);
 int __cdecl atoi(char*);
@@ -43,10 +43,10 @@ int __cdecl hst_HandleStadtkasse(int unused1, int unused2, int unused3, char* to
 	e = gm_GetGuildHall(1);
 	if (e == 0)
 		return 0;
-	e = fcn_00502cd0(*(int*) ((char*) e + 0x5d), 2, 6, 0, 0x115);
+	e = gm_QueryEntities(*(int*) ((char*) e + 0x5d), 2, 6, 0, 0x115);
 	if (e == 0)
 		return 0;
-	e = fcn_00502cd0(*(int*) ((char*) e + 0x14), 1, 5);
+	e = gm_QueryEntities(*(int*) ((char*) e + 0x14), 1, 5);
 	while (e != 0) {
 		k = *(unsigned short*) e;
 		if (((OBJECT_PROTOTYPE *)(*(int*)&lpObjektePROT))[k].kind == 9) {

@@ -90,7 +90,7 @@ extern int ai_ResourceCount;
 extern int ai_MeisterDebugState;
 extern int g_100dc34;
 
-char* __cdecl fcn_00502cd0(int, int, int, ...);
+char* __cdecl gm_QueryEntities(int, int, int, ...);
 char* __cdecl gm_NextEntityQueryMatch(void);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl plt_FindPlantInfo(int);
@@ -132,15 +132,15 @@ int __cdecl ai_RunResourceMaster(char* meister)
 	int v;
 	char* craft_slot;
 
-	prod_slot = fcn_00502cd0(*(int*) (*(char**) (meister + 0x16c) + 0x5d), 2, 6, 0, 0xff);
+	prod_slot = gm_QueryEntities(*(int*) (*(char**) (meister + 0x16c) + 0x5d), 2, 6, 0, 0xff);
 	if (prod_slot == 0) {
 		return 0;
 	}
-	craft_slot = fcn_00502cd0(*(int*) (*(char**) (meister + 0x16c) + 0x5d), 2, 6, 0, 0x2a);
+	craft_slot = gm_QueryEntities(*(int*) (*(char**) (meister + 0x16c) + 0x5d), 2, 6, 0, 0x2a);
 	if (craft_slot == 0) {
 		return 0;
 	}
-	store_slot = fcn_00502cd0(*(int*) (*(char**) (meister + 0x16c) + 0x5d), 1, 0, 0xfe);
+	store_slot = gm_QueryEntities(*(int*) (*(char**) (meister + 0x16c) + 0x5d), 1, 0, 0xfe);
 	if (store_slot == 0) {
 		return 0;
 	}
@@ -172,7 +172,7 @@ int __cdecl ai_RunResourceMaster(char* meister)
 	ai_BuyStallGoods(meister);
 	if ((*(unsigned char*) (meister + 0x1c8) & 0x10) == 0
 	    && ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) (*(char**) (meister + 0x16c))].category != 0xb) {
-		q = fcn_00502cd0(*(int*) (prod_slot + 0x14), 1, 4, 0x17);
+		q = gm_QueryEntities(*(int*) (prod_slot + 0x14), 1, 4, 0x17);
 		if (q != 0) {
 			while (*(int*) (q + 0xe) != 1) {
 				q = gm_NextEntityQueryMatch();
@@ -252,7 +252,7 @@ found:
 		goto scan;
 	}
 	if (((OBJECT_PROTOTYPE*) lpObjektePROT)[ai_ProductionGoodsPlans[i].goods_id].kind == 0x17) {
-		q = fcn_00502cd0(*(int*) (store_slot + 0x14), 1, 0, ai_ProductionGoodsPlans[i].goods_id);
+		q = gm_QueryEntities(*(int*) (store_slot + 0x14), 1, 0, ai_ProductionGoodsPlans[i].goods_id);
 		if (q == 0) {
 			goto scan;
 		}
@@ -294,7 +294,7 @@ scan:
 			continue;
 		}
 		if (((OBJECT_PROTOTYPE*) lpObjektePROT)[ai_ProductionGoodsPlans[i].goods_id].kind == 0x17) {
-			q = fcn_00502cd0(*(int*) (store_slot + 0x14), 1, 0, ai_ProductionGoodsPlans[i].goods_id);
+			q = gm_QueryEntities(*(int*) (store_slot + 0x14), 1, 0, ai_ProductionGoodsPlans[i].goods_id);
 			if (q == 0) {
 				continue;
 			}
@@ -354,7 +354,7 @@ after:
 			if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) (*(char**) (meister + 0x16c))].category == 0xb) {
 				ai_ProductionGoodsPlans[i].flags |= 0x10;
 			} else {
-				q = fcn_00502cd0(*(int*) (store_slot + 0x14), 1, 0, ai_ProductionGoodsPlans[i].goods_id);
+				q = gm_QueryEntities(*(int*) (store_slot + 0x14), 1, 0, ai_ProductionGoodsPlans[i].goods_id);
 				if (q == 0
 				    || *(int*) (q + 0xe) < (int) ((OBJECT_PROTOTYPE*) lpObjektePROT)[ai_ProductionGoodsPlans[i].goods_id].value_036) {
 					ai_ProductionGoodsPlans[i].flags =

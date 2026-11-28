@@ -9,7 +9,7 @@ extern float d3_SavedCameraPos[3];
 extern float d3_CameraTargetRotation[3];
 extern char g_6a30d4[];
 
-short* __cdecl fcn_00502cd0(int, int, int, int);
+short* __cdecl gm_QueryEntities(int, int, int, int);
 short* __cdecl gm_NextEntityQueryMatch(void);
 void __cdecl d3_SetNodePosition(char*, char*);
 void __cdecl d3_SetObjectRotation(char*, char*);
@@ -21,7 +21,7 @@ void __cdecl gm_ChangeBuildingRoom(int n, short v)
 	int i;
 
 	if (n != -1) {
-		r = fcn_00502cd0(*(int*) (d2_VisitedBuilding + 0x5d), 1, 4, 2);
+		r = gm_QueryEntities(*(int*) (d2_VisitedBuilding + 0x5d), 1, 4, 2);
 		if (r == 0) {
 			return;
 		}

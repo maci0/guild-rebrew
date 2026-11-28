@@ -18,7 +18,7 @@ void __cdecl d2_DestroyForm(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(char* fmt, ...);
 void __cdecl d2_SetBackgroundTexture(const char* name, int win);
-char* __cdecl fcn_00502cd0(int, ...);
+char* __cdecl gm_QueryEntities(int, ...);
 char* __cdecl gm_FindSlotById(int, int);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl d2_DrawPricedItemSlot(int x, int y, int layer, int a4, int a5);
@@ -79,18 +79,18 @@ void __cdecl d2_ShowCityTradeInfoDialog(char* building)
 				d2_SetBackgroundTexture(name, *(int*) windowData);
 				*(int*) (windowData + 0x3a4) = 0;
 				flag = gm_GameTicks;
-				slot = fcn_00502cd0(*(int*) (building + 0x5d), 2, 0, 0x1db, 6);
+				slot = gm_QueryEntities(*(int*) (building + 0x5d), 2, 0, 0x1db, 6);
 				if (slot == 0) {
 					return;
 				}
-				win2 = (int) fcn_00502cd0(*(int*) (building + 0x5d), 2, 0, 0x1dc, 6);
+				win2 = (int) gm_QueryEntities(*(int*) (building + 0x5d), 2, 0, 0x1dc, 6);
 				if (win2 == 0) {
 					return;
 				}
 				n = 0;
 				d2_SetForm(idx, 3);
 				io_AppendText((char*) 0x1a12);
-				it = (unsigned short*) fcn_00502cd0(*(int*) (slot + 0x14), 1, 5);
+				it = (unsigned short*) gm_QueryEntities(*(int*) (slot + 0x14), 1, 5);
 				while (it != 0) {
 					p = (int) gm_FindSlotById(*(int*) (building + 0x65), *it);
 					if (p != 0 && *(int*) (p + 4) != 0) {
@@ -102,7 +102,7 @@ void __cdecl d2_ShowCityTradeInfoDialog(char* building)
 				n = 0;
 				d2_SetForm(idx, 4);
 				io_AppendText((char*) 0x1a13);
-				it = (unsigned short*) fcn_00502cd0(*(int*) (win2 + 0x14), 1, 5);
+				it = (unsigned short*) gm_QueryEntities(*(int*) (win2 + 0x14), 1, 5);
 				while (it != 0) {
 					p = (int) gm_FindSlotById(*(int*) (building + 0x65), *it);
 					if (p != 0 && *(int*) (p + 4) != 0) {

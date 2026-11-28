@@ -15,7 +15,7 @@ extern int g_7746dc;
 extern char g_7746f4;
 extern char str_empty[];
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
-void* __cdecl fcn_00502cd0(int, int, int, ...);
+void* __cdecl gm_QueryEntities(int, int, int, ...);
 int __cdecl d2_SetElementEnabled(int, int);
 int __cdecl gm_GetBuildingTypeCategory(int);
 int __cdecl gm_GetEntityUiFlags(int, unsigned char*, unsigned short*, int);
@@ -54,8 +54,8 @@ void __cdecl d2_UpdateSelectionPanels(void)
     pick = 0;
     if (g_6a25b4 != -1 || gm_InWorldHud == 0)
         return;
-    if (d2_SelectedBuilding != 0 && fcn_00502cd0(*(int*)(d2_SelectedBuilding + 0x5d), 2, 6, 0, 0x2a) == 0
-        && fcn_00502cd0(*(int*)(d2_SelectedBuilding + 0x5d), 2, 6, 0, 0x116) == 0)
+    if (d2_SelectedBuilding != 0 && gm_QueryEntities(*(int*)(d2_SelectedBuilding + 0x5d), 2, 6, 0, 0x2a) == 0
+        && gm_QueryEntities(*(int*)(d2_SelectedBuilding + 0x5d), 2, 6, 0, 0x116) == 0)
         d2_SetElementEnabled(g_6a25e4, 0);
     else
         d2_SetElementEnabled(g_6a25e4, 1);
@@ -67,7 +67,7 @@ void __cdecl d2_UpdateSelectionPanels(void)
                 g_7746dc = gm_GetEntityUiFlags(gm_LocalPlayerSlot, (u8*)d2_VisitedBuilding, 0, 0);
             } else if (d2_InteriorBuilding != 0) {
                 if (sv_SelectedBuilding != 0) {
-                    item = (unsigned short*)fcn_00502cd0(*(int*)(d2_InteriorBuilding + 0x5d),
+                    item = (unsigned short*)gm_QueryEntities(*(int*)(d2_InteriorBuilding + 0x5d),
                         1, 0, *(unsigned short*)(d2_InteriorBuilding + 0x29));
                     g_7746dc = gm_GetEntityUiFlags(gm_LocalPlayerSlot, 0, item, 0);
                 } else {

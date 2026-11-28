@@ -17,7 +17,7 @@ extern char g_6a58ac[];
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AddObjekt(void);
 char* __cdecl gm_FindNextFilteredEntity(void);
-char* __cdecl fcn_00502cd0(int, int, int, ...);
+char* __cdecl gm_QueryEntities(int, int, int, ...);
 void __cdecl cm_SendLogAction(char* s);
 void __cdecl cm_SendTraceEnd(char* s);
 void __cdecl cm_RequestElectionOrTrade(Msg* msg);
@@ -28,11 +28,11 @@ void __cdecl he_ClearDunkleEcke(void)
 	char* w;
 
 	for (e = gm_StartFilteredEntitySearch(1, 5, 0x16); e != 0; e = gm_FindNextFilteredEntity()) {
-		w = fcn_00502cd0(*(int*) (e + 0x5d), 1, 0, 0x120);
+		w = gm_QueryEntities(*(int*) (e + 0x5d), 1, 0, 0x120);
 		if (w == 0) {
 			continue;
 		}
-		w = fcn_00502cd0(*(int*) (w + 0x14), 1, 0, 0x12c);
+		w = gm_QueryEntities(*(int*) (w + 0x14), 1, 0, 0x12c);
 		if (w == 0) {
 			continue;
 		}

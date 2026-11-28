@@ -40,14 +40,14 @@ typedef struct UseObjectQuery {
 
 extern float g_1009638;
 extern float g_1009658;
-char* __cdecl fcn_00502cd0(int, int, int, int);
+char* __cdecl gm_QueryEntities(int, int, int, int);
 int __cdecl gm_LookupSpecialObject(int);
 int __cdecl gm_UseSpecialObject(char* ctx, UseObjectQuery* q);
 
 /* Method 0x1d (UseObject) start callback: looks up the target object record and its
  * type entry, queries it, and stores the resulting speed (+/-) in the shared float. */
 /* ADDRESS: GOLDTL 0x0049a7b0 */
-int __cdecl fcn_0049a7b0(char* ctx, int* arg)
+int __cdecl ai_RunUseObjectAps(char* ctx, int* arg)
 {
 	char* e;
 	char* rec;
@@ -55,7 +55,7 @@ int __cdecl fcn_0049a7b0(char* ctx, int* arg)
 	float t;
 	UseObjectQuery q;
 
-	e = fcn_00502cd0(*(int*) (ctx + 0x178), 1, 1, arg[1]);
+	e = gm_QueryEntities(*(int*) (ctx + 0x178), 1, 1, arg[1]);
 	r = 0;
 	if (!e)
 		return r;

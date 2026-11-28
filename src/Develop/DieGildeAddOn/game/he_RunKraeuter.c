@@ -22,7 +22,7 @@ void __cdecl cm_SendCancelCharacterActions(int);
 void __cdecl ch_StartMovement(int, int, int, int, int, char*);
 int __cdecl gm_IsEntityAtBuilding(int, int);
 void __cdecl he_AssignActionSlot(int, int, int, int);
-int __cdecl fcn_00502cd0(int, int, ...);
+int __cdecl gm_QueryEntities(int, int, ...);
 int __cdecl gm_GetBuildingTechEffect(unsigned char*, int, int);
 int __cdecl gm_RandomMod(unsigned short);
 int __cdecl gm_eval_SlotVoll(char*, int, int);
@@ -170,7 +170,7 @@ void __cdecl he_RunKraeuter(char* action)
 					he_AssignActionSlot(0, 0, *id, 0);
 				}
 			}
-			q = (char*) fcn_00502cd0(*(int*) (v9 + 0x5d), 2, 6, 0, 0x2a);
+			q = (char*) gm_QueryEntities(*(int*) (v9 + 0x5d), 2, 6, 0, 0x2a);
 			if (!q) {
 				break;
 			}

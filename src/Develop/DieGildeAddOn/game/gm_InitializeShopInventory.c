@@ -30,7 +30,7 @@ extern char gm_TownTable[];
 extern unsigned char gm_ActiveTownIndex;
 
 Estate* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-Shop* __cdecl fcn_00502cd0(int, int, int, int, int);
+Shop* __cdecl gm_QueryEntities(int, int, int, int, int);
 
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
 void __cdecl cm_RequestChangeAttribute(void);
@@ -53,7 +53,7 @@ void __cdecl gm_InitializeShopInventory(void)
 	}
 	do {
 		kind = s->variant;
-		w = fcn_00502cd0(s->home, 2, 0, 0x1db, 6);
+		w = gm_QueryEntities(s->home, 2, 0, 0x1db, 6);
 		if (w != 0) {
 			count = 0;
 			for (i = 0; i < 16; i++) {
@@ -75,7 +75,7 @@ void __cdecl gm_InitializeShopInventory(void)
 				p++;
 			}
 		}
-		w = fcn_00502cd0(s->home, 2, 0, 0x1dc, 6);
+		w = gm_QueryEntities(s->home, 2, 0, 0x1dc, 6);
 		if (w != 0) {
 			count = 0;
 			for (i = 0; i < 16; i++) {

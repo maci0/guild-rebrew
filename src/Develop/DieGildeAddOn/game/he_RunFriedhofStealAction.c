@@ -17,7 +17,7 @@ extern unsigned char gm_ActiveTownIndex;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_GetEntityRelation(int, int);
-char* __cdecl fcn_00502cd0();
+char* __cdecl gm_QueryEntities();
 char* __cdecl gm_FindBuildingPrimarySlot(char*);
 char* __cdecl gm_NextEntityQueryMatch(void);
 unsigned short __cdecl gm_RandomMod(int);
@@ -56,15 +56,15 @@ void __cdecl he_RunFriedhofStealAction(char* e)
 		he_FreeAction(e);
 		return;
 	}
-	r = fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x2a);
+	r = gm_QueryEntities(*(int*) (p + 0x5d), 2, 6, 0, 0x2a);
 	if (r == 0) {
-		r = fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, r, 0x116);
+		r = gm_QueryEntities(*(int*) (p + 0x5d), 2, 6, r, 0x116);
 	}
 	q = gm_FindBuildingPrimarySlot(p);
 	if (r != 0) {
 		n = 0;
 		memset(list, 0, sizeof(list));
-		for (c = fcn_00502cd0(*(int*) (r + 0x14), 1, 5); c != 0; c = gm_NextEntityQueryMatch()) {
+		for (c = gm_QueryEntities(*(int*) (r + 0x14), 1, 5); c != 0; c = gm_NextEntityQueryMatch()) {
 			list[n++] = c;
 		}
 		if (n != 0) {

@@ -26,7 +26,7 @@ extern unsigned char* lpGebaeudePROT;
 int __cdecl gm_AccumulateTyped2(void*);
 void* __cdecl gm_StartFilteredEntitySearch(int, ...);
 void* __cdecl gm_FindNextFilteredEntity(void);
-void* __cdecl fcn_00502cd0(int, ...);
+void* __cdecl gm_QueryEntities(int, ...);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 double __cdecl gm_RandomFloat01(void);
 int __cdecl amt_GetRoleTemplate(int, Rec18*);
@@ -65,8 +65,8 @@ unsigned int __cdecl ai_FindDunkleEckeStraftat(int* subject, Msg* firstMessage, 
 					if (*(unsigned short*) (ent + 0x27) != 0xffff &&
 					    *(unsigned short*) (ent + 0x27) != *(unsigned short*) subject &&
 					    ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*ent].level > 1 &&
-					    (obj = (unsigned char*) fcn_00502cd0(*(unsigned int*) (ent + 0x5d), 1, 0, 0x120)) != 0 &&
-					    (obj = (unsigned char*) fcn_00502cd0(*(unsigned int*) (obj + 0x14), 1, 0, 300)) != 0) {
+					    (obj = (unsigned char*) gm_QueryEntities(*(unsigned int*) (ent + 0x5d), 1, 0, 0x120)) != 0 &&
+					    (obj = (unsigned char*) gm_QueryEntities(*(unsigned int*) (obj + 0x14), 1, 0, 300)) != 0) {
 						found[n * 2] = (int) ent;
 						found[n * 2 + 1] = (int) obj;
 						n++;

@@ -1,7 +1,7 @@
 
 
 
-unsigned short* __cdecl fcn_00502cd0(int, int, int);
+unsigned short* __cdecl gm_QueryEntities(int, int, int);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 char* __cdecl gm_LookupWeaponSpec(int);
 
@@ -10,7 +10,7 @@ char* __cdecl gm_GetEquippedCombatGear(char* x)
 	unsigned short* e;
 	char* r;
 
-	e = fcn_00502cd0(*(int*) (x + 0x178), 1, 5);
+	e = gm_QueryEntities(*(int*) (x + 0x178), 1, 5);
 	while (e != 0) {
 		r = gm_LookupWeaponSpec(*e);
 		if (r != 0) {

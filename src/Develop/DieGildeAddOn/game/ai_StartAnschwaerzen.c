@@ -12,7 +12,7 @@ typedef struct Blk24 {
 /* SIZE 0x18 */
 
 unsigned short __cdecl gm_RandomMod(int n);
-unsigned short* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
+unsigned short* __cdecl gm_QueryEntities(int container_id, int arg_count, ...);
 int __cdecl ai_SelectAnschwaerzenTargets(short* a1, int a2, char* a3);
 int __cdecl ai_SelectBestMethod(int kind, unsigned short id, int n, Blk24* b1, Blk24* b2);
 
@@ -51,7 +51,7 @@ int __cdecl ai_StartAnschwaerzen(int a1, char* ent, int a3, Blk24* o1, Blk24* o2
 		}
 		goto fill;
 	}
-	if (fcn_00502cd0(*(int*) (*(char**) (ent + 0x170) + 0x5d), 2, 6, 0, 0x15) == 0) {
+	if (gm_QueryEntities(*(int*) (*(char**) (ent + 0x170) + 0x5d), 2, 6, 0, 0x15) == 0) {
 
 
 		b1.kind = 2;

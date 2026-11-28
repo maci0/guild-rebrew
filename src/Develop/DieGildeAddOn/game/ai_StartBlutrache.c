@@ -5,7 +5,7 @@ extern unsigned char* lpGebaeudePROT;
 extern unsigned char* lpGebaeudeINST;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 int __cdecl gm_CheckStatLevel(int, int);
-int __cdecl fcn_00502cd0(int, int, int, int, int);
+int __cdecl gm_QueryEntities(int, int, int, int, int);
 int __cdecl gm_CountBuildingExtensions(char*);
 int __cdecl gm_RandomMod(unsigned short);
 int __cdecl ai_SelectRankedCandidates(int*, int, int*, int, float, unsigned short*);
@@ -48,7 +48,7 @@ unsigned int __cdecl ai_StartBlutrache(unsigned int a0, unsigned short* entity, 
 			if (*v11 != 0 && *(unsigned short*) (v11 + 0x27) == *entity &&
 			    *(unsigned char*) ((unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)
 			                       [(unsigned int) *v11]) == 0x1f &&
-			    fcn_00502cd0(*(int*) (v11 + 0x5d), 2, 6, 0, 0x27c) != 0) {
+			    gm_QueryEntities(*(int*) (v11 + 0x5d), 2, 6, 0, 0x27c) != 0) {
 				if (v12 == 0) {
 					v12 = (unsigned short*) v11;
 					v6 = gm_CountBuildingExtensions((char*) v11);

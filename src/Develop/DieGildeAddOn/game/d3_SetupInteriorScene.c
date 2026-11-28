@@ -29,7 +29,7 @@ extern unsigned char* lpGebaeudePROT;
 extern int d3_ActiveScene;
 extern int d3_CurrentFloor;
 
-void* __cdecl fcn_00502cd0(int, int, int, ...);
+void* __cdecl gm_QueryEntities(int, int, int, ...);
 Contact* __cdecl d3_FindSceneObject(int, int, int, char*);
 void __cdecl d3_SetObjectVisible(Contact*, int);
 void __cdecl evt_StartShopIntroScript(Player*, void*);
@@ -51,7 +51,7 @@ void __cdecl d3_SetupInteriorScene(Player* p, void* unit)
 
 	o = &((Office*)lpGebaeudePROT)[p->office];
 	if (unit == 0) {
-		unit = fcn_00502cd0(p->home, 2, 6, 0, 0xfd);
+		unit = gm_QueryEntities(p->home, 2, 6, 0, 0xfd);
 	}
 	c = d3_FindSceneObject(0, 0xa0, 0, "contact_EINKAUF");
 	if (c == 0) {

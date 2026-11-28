@@ -9,7 +9,7 @@ typedef Rec15_699058 Rec15;
 
 extern Rec15_699058 g_699058[37];
 
-char* __cdecl fcn_00502cd0(int list, int a, int b, int c, ...);
+char* __cdecl gm_QueryEntities(int list, int a, int b, int c, ...);
 char* __cdecl gm_AllocObjekt(int a, int b, int c);
 
 void __cdecl gm_InitBuildingStartingGoods(unsigned char* e)
@@ -20,7 +20,7 @@ void __cdecl gm_InitBuildingStartingGoods(unsigned char* e)
 
 	for (i = 0; i < 37; i++) {
 		if (e[0] == g_699058[i].k) {
-			o = fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0xff);
+			o = gm_QueryEntities(*(int*) (e + 0x5d), 2, 6, 0, 0xff);
 			if (o == 0) {
 				o = gm_AllocObjekt(*(int*) (e + 1), 0xff, 1);
 				if (o == 0) {
@@ -28,7 +28,7 @@ void __cdecl gm_InitBuildingStartingGoods(unsigned char* e)
 				}
 			}
 			for (j = 0; j < 10; j++) {
-				if (g_699058[i].ids[j] != 0 && !fcn_00502cd0(*(int*) (o + 0x14), 1, 0, g_699058[i].ids[j])) {
+				if (g_699058[i].ids[j] != 0 && !gm_QueryEntities(*(int*) (o + 0x14), 1, 0, g_699058[i].ids[j])) {
 					gm_AllocObjekt(*(int*) (o + 2), g_699058[i].ids[j], 2);
 				}
 			}

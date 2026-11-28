@@ -2758,7 +2758,7 @@ int __cdecl fcn_00498e10(void)
 	return 0;
 }
 
-int __cdecl fcn_00498f40(void)
+int __cdecl ai_RunBetriebUpgraden(void)
 {
 	return 0;
 }
@@ -2773,7 +2773,7 @@ int __cdecl cm_RunApsSparen(void)
 	return 0;
 }
 
-int __cdecl fcn_0049a7b0(void)
+int __cdecl ai_RunUseObjectAps(void)
 {
 	return 0;
 }
@@ -3267,7 +3267,7 @@ int __cdecl fcn_005091d0(int* a, void* b)
 	return 0;
 }
 
-int __cdecl fcn_0050a7e0(unsigned int a, int b, int c, unsigned short d, int e, unsigned int f, unsigned int g, unsigned int h)
+int __cdecl gm_AllocClientSpieler(unsigned int a, int b, int c, unsigned short d, int e, unsigned int f, unsigned int g, unsigned int h)
 {
 	return 0;
 }

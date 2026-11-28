@@ -36828,6 +36828,20 @@
     ]
   },
   {
+    "va": 4820800,
+    "size": 3,
+    "name": "fcn.00498f40",
+    "extent_history": [
+      {
+        "old_size": null,
+        "new_size": 3,
+        "reason": "GoldTL method registrar references 0x498f40 as the run callback for Betrieb upgraden (Credits). Native bytes 33 c0 c3 return zero, followed by 13 NOPs before 0x498f50.",
+        "binary_hash": "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45",
+        "changed_at": "2026-11-28T14:13:24.326319+00:00"
+      }
+    ]
+  },
+  {
     "va": 4820816,
     "size": 88,
     "name": "fcn.00498f50",

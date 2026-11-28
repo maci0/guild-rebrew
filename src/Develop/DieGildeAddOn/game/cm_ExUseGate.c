@@ -7,7 +7,7 @@ extern char* lpObjektePROT;
 int __cdecl fcn_0064d41a(char*, char*, ...);
 char* __cdecl ch_FindCharacterByName(char*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int, ...);
-char* __cdecl fcn_00502cd0(int, int, int, ...);
+char* __cdecl gm_QueryEntities(int, int, int, ...);
 int __cdecl init_EnsureObjektSceneContext(char*);
 int __cdecl init_AllocateGebaeudeSceneSlot(char*);
 void __cdecl ch_UseGate(char*, char*, char*, int, int, int);
@@ -31,12 +31,12 @@ int __cdecl cm_ExUseGate(char* command, char* result)
 	if (!o)
 		return 1;
 	s = gm_StartFilteredEntitySearch(1, 1, *(int*) (command + 0x14));
-	d = fcn_00502cd0(*(int*) (s + 0x5d), 1, 1, *(int*) (command + 0x18));
+	d = gm_QueryEntities(*(int*) (s + 0x5d), 1, 1, *(int*) (command + 0x18));
 	id = *(int*) (o + 0x30);
 	if (id != -1)
-		v4 = fcn_00502cd0(*(int*) (s + 0x5d), 1, 1, id);
+		v4 = gm_QueryEntities(*(int*) (s + 0x5d), 1, 1, id);
 	else
-		v4 = fcn_00502cd0(*(int*) (s + 0x5d), 1, 0, 0xfd);
+		v4 = gm_QueryEntities(*(int*) (s + 0x5d), 1, 0, 0xfd);
 	if (*(unsigned short*) d == 0xfd) {
 		k = init_AllocateGebaeudeSceneSlot(s);
 		fcn_0064d41a(gate, g_68b1f8);

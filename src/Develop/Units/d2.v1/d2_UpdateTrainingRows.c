@@ -18,7 +18,7 @@ extern int g_775334;
 
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_DestroyElement(int);
-unsigned short* __cdecl fcn_00502cd0(int, int, ...);
+unsigned short* __cdecl gm_QueryEntities(int, int, ...);
 int __cdecl io_AppendText(int, ...);
 void __cdecl d2_DrawSegmentedBar(int, int, int, int);
 int __cdecl d2_AddWindowField(int, int, int, int, int);
@@ -74,7 +74,7 @@ unsigned int __cdecl d2_UpdateTrainingRows(unsigned int dialog, unsigned int for
 		d2_CurrentWindowId = d2_TrainingRows[i].window;
 		for (j = 0; j < 6; j++) {
 			if (d2_TrainingRows[i].item[j].objekt_id != 0
-			    && !fcn_00502cd0(*(int*) (d2_TrainingRows[i].entity + 0x178), 1, 0, d2_TrainingRows[i].item[j].objekt_id)) {
+			    && !gm_QueryEntities(*(int*) (d2_TrainingRows[i].entity + 0x178), 1, 0, d2_TrainingRows[i].item[j].objekt_id)) {
 				d2_DestroyElement(d2_TrainingRows[i].item[j].button);
 				d2_TrainingRows[i].item[j].button = -1;
 				d2_TrainingRows[i].item[j].objekt_id = 0;
@@ -87,7 +87,7 @@ unsigned int __cdecl d2_UpdateTrainingRows(unsigned int dialog, unsigned int for
 		d2_DrawSegmentedBar(0x50, 0x16, *(unsigned char*) (d2_TrainingRows[i].entity + 0x83), 0x4f1);
 		io_AppendText(0x16ad);
 		d2_DrawSegmentedBar(0x50, 0x25, *(unsigned char*) (d2_TrainingRows[i].entity + 0x82), 0x4f1);
-		item = fcn_00502cd0(*(int*) (d2_TrainingRows[i].entity + 0x178), 1, 5);
+		item = gm_QueryEntities(*(int*) (d2_TrainingRows[i].entity + 0x178), 1, 5);
 		while (item) {
 			if ((char)((OBJECT_PROTOTYPE*)lpObjektePROT)[*item].kind != '\t') {
 				for (j = 0; j < 6; j++) {

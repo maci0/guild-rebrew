@@ -2,7 +2,7 @@
    record whose owner pointer equals the driver's, resolves its type row
    through 0x100e764/0x100e724 and reports the 0x39 event. */
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
-int __cdecl fcn_00502cd0(int, int, int, int);
+int __cdecl gm_QueryEntities(int, int, int, int);
 int __cdecl gm_LookupWeaponSpec(int);
 int __cdecl gm_CheckBuildingCategoryForItem(int, int);
 void __cdecl cm_SendSellObjekt(int, int, int, int, char, int);
@@ -38,7 +38,7 @@ void __cdecl ai_ArmMeisterWorkers(char* meister, char* building)
 			continue;
 		}
 		found = 0;
-		n = (char*) fcn_00502cd0(*(int*) (p + 0x178), 1, 4, 0xc);
+		n = (char*) gm_QueryEntities(*(int*) (p + 0x178), 1, 4, 0xc);
 		if (n == 0) {
 			return;
 		}

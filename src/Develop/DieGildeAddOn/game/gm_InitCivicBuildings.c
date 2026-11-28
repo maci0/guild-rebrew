@@ -6,7 +6,7 @@ typedef struct {
 } CIVIC_BLK16;
 
 char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int id);
-char* __cdecl fcn_00502cd0(int a, int b, int c, int d, ...);
+char* __cdecl gm_QueryEntities(int a, int b, int c, int d, ...);
 void __cdecl gm_AssignBuildingOwner(char* e, int a, int b);
 void __cdecl d3_UpdateEntityStageMeshes(char* e, char* q, int a);
 int __cdecl cm_SendSellObjekt(int a, int b, int c, int d, unsigned char k, int n);
@@ -27,7 +27,7 @@ void __cdecl gm_InitCivicBuildings(unsigned int ownerSlot)
 	if (bld != 0) {
 		*(CIVIC_BLK16*) (bld + 5) = *(CIVIC_BLK16*) str_Home_Sweet_Home;
 		gm_AssignBuildingOwner(bld, ownerSlot, ownerSlot);
-		slot = fcn_00502cd0(*(int*) (bld + 0x5d), 1, 0, 0x13);
+		slot = gm_QueryEntities(*(int*) (bld + 0x5d), 1, 0, 0x13);
 		if (slot != 0) {
 			d3_UpdateEntityStageMeshes(bld, slot, ownerSlot);
 		}
@@ -45,7 +45,7 @@ void __cdecl gm_InitCivicBuildings(unsigned int ownerSlot)
 			cm_RequestAssignWorker(bld, 0, 10, 0);
 			n--;
 		} while (n);
-		slot = fcn_00502cd0(*(int*) (bld + 0x5d), 2, 6, 0, 0x2a);
+		slot = gm_QueryEntities(*(int*) (bld + 0x5d), 2, 6, 0, 0x2a);
 		if (slot != 0) {
 			cm_BeginCommandSync();
 			cm_SendSellObjekt(*(int*) (slot + 2), -1, 0x1d0, 0x19, gm_ActiveTownIndex, 0);
@@ -58,7 +58,7 @@ void __cdecl gm_InitCivicBuildings(unsigned int ownerSlot)
 	bld = gm_StartFilteredEntitySearch(1, 0, 0x2a);
 	if (bld != 0) {
 		gm_AssignBuildingOwner(bld, ownerSlot, ownerSlot);
-		slot = fcn_00502cd0(*(int*) (bld + 0x5d), 2, 6, 0, 0x2a);
+		slot = gm_QueryEntities(*(int*) (bld + 0x5d), 2, 6, 0, 0x2a);
 		if (slot != 0) {
 			cm_BeginCommandSync();
 			cm_SendSellObjekt(*(int*) (slot + 2), -1, 0x1d0, 0x14, gm_ActiveTownIndex, 0);
@@ -91,7 +91,7 @@ void __cdecl gm_InitCivicBuildings(unsigned int ownerSlot)
 	bld = gm_StartFilteredEntitySearch(1, 0, 0x32);
 	if (bld != 0) {
 		gm_AssignBuildingOwner(bld, ownerSlot, ownerSlot);
-		slot = fcn_00502cd0(*(int*) (bld + 0x5d), 2, 6, 0, 0x2a);
+		slot = gm_QueryEntities(*(int*) (bld + 0x5d), 2, 6, 0, 0x2a);
 		if (slot != 0) {
 			cm_BeginCommandSync();
 			cm_SendSellObjekt(*(int*) (slot + 2), -1, 0x1cb, 10, gm_ActiveTownIndex, 0);
@@ -106,17 +106,17 @@ void __cdecl gm_InitCivicBuildings(unsigned int ownerSlot)
 	bld = gm_StartFilteredEntitySearch(1, 0, 0x21);
 	if (bld != 0) {
 		gm_AssignBuildingOwner(bld, ownerSlot, ownerSlot);
-		fcn_00502cd0(*(int*) (bld + 0x5d), 2, 6, 0, 0x2a);
+		gm_QueryEntities(*(int*) (bld + 0x5d), 2, 6, 0, 0x2a);
 	}
 	bld = gm_StartFilteredEntitySearch(1, 0, 0x19);
 	if (bld != 0) {
 		gm_AssignBuildingOwner(bld, ownerSlot, ownerSlot);
-		fcn_00502cd0(*(int*) (bld + 0x5d), 2, 6, 0, 0x2a);
+		gm_QueryEntities(*(int*) (bld + 0x5d), 2, 6, 0, 0x2a);
 	}
 	bld = gm_StartFilteredEntitySearch(1, 0, 0x34);
 	if (bld != 0) {
 		gm_AssignBuildingOwner(bld, ownerSlot, ownerSlot);
-		slot = fcn_00502cd0(*(int*) (bld + 0x5d), 2, 6, 0, 0x2a);
+		slot = gm_QueryEntities(*(int*) (bld + 0x5d), 2, 6, 0, 0x2a);
 		if (slot != 0) {
 			cm_BeginCommandSync();
 			cm_SendSellObjekt(*(int*) (slot + 2), -1, 0x1cb, 10, gm_ActiveTownIndex, 0);
@@ -133,5 +133,5 @@ void __cdecl gm_InitCivicBuildings(unsigned int ownerSlot)
 		return;
 	}
 	gm_AssignBuildingOwner(bld, ownerSlot, ownerSlot);
-	fcn_00502cd0(*(int*) (bld + 0x5d), 2, 6, 0, 0x2a);
+	gm_QueryEntities(*(int*) (bld + 0x5d), 2, 6, 0, 0x2a);
 }

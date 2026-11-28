@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/client_data.h"
-extern void __cdecl gm_ResolveEntityById(char**, int, int, int); extern char* __cdecl fcn_00502cd0(int, ...);
+extern void __cdecl gm_ResolveEntityById(char**, int, int, int); extern char* __cdecl gm_QueryEntities(int, ...);
 extern void __cdecl he_FreeAction(char*);
 extern char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 extern int __cdecl ai_CheckFavorRankAcceptance(unsigned short*, unsigned short*);
@@ -49,7 +49,7 @@ void __cdecl he_RunInvitation(char* action)
 			he_FreeAction(action);
 			return;
 		}
-		v13 = fcn_00502cd0(*(unsigned int*) (v10 + 0x5d), 1, 0, 0x17);
+		v13 = gm_QueryEntities(*(unsigned int*) (v10 + 0x5d), 1, 0, 0x17);
 		if (v13 == 0) {
 			if (*(int*) (action + 0x74))
 				d2_CloseActionPopup(action);

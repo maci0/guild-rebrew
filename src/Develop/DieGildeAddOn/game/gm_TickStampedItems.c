@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/client_data.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
 int __cdecl gm_GetElapsedMinutes(void*, void*);
-unsigned short* __cdecl fcn_00502cd0(int, int, int);
+unsigned short* __cdecl gm_QueryEntities(int, int, int);
 int __cdecl gm_LookupSpecialObject(int);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -46,7 +46,7 @@ void __cdecl gm_TickStampedItems(void)
 			break;
 		}
 		if (*(unsigned short*) (gm_EntitySlotTable + off) != 0xffff) {
-			item = fcn_00502cd0(*(int*) (gm_EntitySlotTable + 376 + off), 1, 5);
+			item = gm_QueryEntities(*(int*) (gm_EntitySlotTable + 376 + off), 1, 5);
 			while (item != 0) {
 				obj = gm_LookupSpecialObject(*item);
 				if (obj != 0) {

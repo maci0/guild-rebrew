@@ -6,7 +6,7 @@ extern int g_100dc24;
 extern int gm_DifficultyLevel;
 #include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-void *__cdecl fcn_00502cd0(int, int, int, int, int);
+void *__cdecl gm_QueryEntities(int, int, int, int, int);
 void __cdecl ai_CollectGoodsResources(char *, char *);
 void __cdecl ai_PlanMeisterSupplies(char *, char *, int);
 void __cdecl ai_ArmMeisterWorkers(char *, char *);
@@ -52,7 +52,7 @@ void __cdecl ai_CalcMeisterWache(char *meister)
 	int seen;
 	int n;
 
-	res = fcn_00502cd0(*(int *) (*(int *) (meister + 0x16c) + 0x5d), 2, 6, 0, 0x2a);
+	res = gm_QueryEntities(*(int *) (*(int *) (meister + 0x16c) + 0x5d), 2, 6, 0, 0x2a);
 	if (res != 0) {
 		ai_ProductionGoodsCount = 0;
 		ai_ResourceCount = 0;

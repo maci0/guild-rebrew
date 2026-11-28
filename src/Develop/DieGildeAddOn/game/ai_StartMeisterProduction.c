@@ -61,7 +61,7 @@ extern char ai_TrackedGoodPlanEntries[];
 extern unsigned short gm_GameTimeHour;
 extern char gm_EntitySlotTable[];
 
-int __cdecl fcn_00502cd0(int, int, int, int, int);
+int __cdecl gm_QueryEntities(int, int, int, int, int);
 void __cdecl ai_CollectBuildingGoodsPlan(Bld*, int, int);
 void __cdecl ai_ManageMeisterWorkers(Bld*);
 void __cdecl gm_TryAutoUpgradeBuildingSlots(int, Bld*, int);
@@ -101,10 +101,10 @@ void __cdecl ai_StartMeisterProduction(Bld* bld)
 	PRODUCTION_GOODS_RECORD* rec;
 
 	hit = 0;
-	prod = fcn_00502cd0(*(int*) (bld->x16c + 0x5d), 2, 6, 0, 0xff);
+	prod = gm_QueryEntities(*(int*) (bld->x16c + 0x5d), 2, 6, 0, 0xff);
 	if (prod == 0)
 		return;
-	craft = fcn_00502cd0(*(int*) (bld->x16c + 0x5d), 2, 6, 0, 0x2a);
+	craft = gm_QueryEntities(*(int*) (bld->x16c + 0x5d), 2, 6, 0, 0x2a);
 	if (craft == 0)
 		return;
 	ai_CollectBuildingGoodsPlan(bld, prod, craft);

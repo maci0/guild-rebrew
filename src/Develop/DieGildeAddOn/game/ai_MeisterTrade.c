@@ -112,7 +112,7 @@ float __cdecl eval_ObjektPreis2Credits(int id, int n);
 float __cdecl gm_GetSeasonPrice(int id, unsigned char a);
 float __cdecl hp_GetProdSellPriceFactor(char* a);
 int __cdecl gm_AccumulateTyped2(void* m);
-void* __cdecl fcn_00502cd0(int list, int mode, ...);
+void* __cdecl gm_QueryEntities(int list, int mode, ...);
 char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_CollectBuildingStock(char* o, Stock* out, int producers);
 int __cdecl gm_CalcEntityInventoryStats(char* e, Stock* s);
@@ -317,7 +317,7 @@ dump_stock:
 		if ((pr->flags & 6) == 0) {
 			continue;
 		}
-		r = (char*) fcn_00502cd0(*(int*) (bld + 0x14), 1, 0, pr->id);
+		r = (char*) gm_QueryEntities(*(int*) (bld + 0x14), 1, 0, pr->id);
 		if (r == 0) {
 			continue;
 		}
@@ -341,7 +341,7 @@ dump_stock:
 			if ((t->flags54 & 6) != 0) {
 				continue;
 			}
-			r = (char*) fcn_00502cd0(*(int*) (bld + 0x14), 1, 0,
+			r = (char*) gm_QueryEntities(*(int*) (bld + 0x14), 1, 0,
 			    t->id);
 			if (r == 0) {
 				continue;
@@ -360,7 +360,7 @@ dump_stock:
 
 	/* 0x04b7: request loop head */
 	tp = *(char**) (o + 0x16c);
-	r = (char*) fcn_00502cd0(*(int*) (tp + 0x5d), 3, 6, 4, 0x1d, 3,
+	r = (char*) gm_QueryEntities(*(int*) (tp + 0x5d), 3, 6, 4, 0x1d, 3,
 	    *(unsigned short*) (tp + 0x27));
 next_request:
 	if (r == 0) {
@@ -415,9 +415,9 @@ next_request:
 		v.m.slots[3 + i] = -1;
 	}
 	gm_CalcEntityInventoryStats(r, &v.s2);
-	q = (char*) fcn_00502cd0(*(int*) (r + 0x14), 1, 0, 0x1dd);
+	q = (char*) gm_QueryEntities(*(int*) (r + 0x14), 1, 0, 0x1dd);
 	if (q == 0) {
-		q = (char*) fcn_00502cd0(*(int*) (r + 0x14), 1, 0, 0x1dd);
+		q = (char*) gm_QueryEntities(*(int*) (r + 0x14), 1, 0, 0x1dd);
 	}
 
 	/* 0x0630-0x0970: unload every cart position */
@@ -853,7 +853,7 @@ next_auto:
 tail:
 	{
 		char* tpx = *(char**) (o + 0x16c);
-		char* nx = (char*) fcn_00502cd0(*(int*) (tpx + 0x5d), 3, 6,
+		char* nx = (char*) gm_QueryEntities(*(int*) (tpx + 0x5d), 3, 6,
 		    4, 0x1d, 3, *(unsigned short*) (tpx + 0x27));
 
 		if (nx != r) {

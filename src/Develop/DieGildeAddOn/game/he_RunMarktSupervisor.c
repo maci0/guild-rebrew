@@ -63,7 +63,7 @@ void __cdecl he_FreeAction(char*);
 int __cdecl gm_GetSeasonTreasury(int, unsigned char);
 void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
 char* __cdecl gm_FindCityItemHolder(int);
-unsigned short* __cdecl fcn_00502cd0(int, int, int, ...);
+unsigned short* __cdecl gm_QueryEntities(int, int, int, ...);
 int __cdecl gm_GetMsgField(void*, void*);
 int __cdecl gm_RandomMod(unsigned short);
 float __cdecl gm_RandomFloat01(void);
@@ -145,7 +145,7 @@ void __cdecl he_RunMarktSupervisor(char* action)
 			    *(char**) (0x14a79c0 + rec.id * 8));
 			continue;
 		}
-		q = (char*) fcn_00502cd0(*(int*) (ent + 0x14), 2, 6, 0,
+		q = (char*) gm_QueryEntities(*(int*) (ent + 0x14), 2, 6, 0,
 		    rec.id);
 		if (q != 0) {
 			ub.n = gm_GetMsgField(ent, q);
@@ -211,7 +211,7 @@ void __cdecl he_RunMarktSupervisor(char* action)
 		if (ent == 0) {
 			continue;
 		}
-		q = (char*) fcn_00502cd0(*(int*) (ent + 0x14), 1, 0,
+		q = (char*) gm_QueryEntities(*(int*) (ent + 0x14), 1, 0,
 		    rec.id);
 		if (q != 0) {
 			ub.n = gm_GetMsgField(ent, q);
@@ -296,7 +296,7 @@ void __cdecl he_RunMarktSupervisor(char* action)
 			goto next_lager;
 		}
 		hall = q;
-		ent = (char*) fcn_00502cd0(*(int*) (hall + 0x5d), 2, 0, 0x1db, 6);
+		ent = (char*) gm_QueryEntities(*(int*) (hall + 0x5d), 2, 0, 0x1db, 6);
 		if (ent == 0) {
 			goto next_lager;
 		}
@@ -306,7 +306,7 @@ void __cdecl he_RunMarktSupervisor(char* action)
 			if (rec.id == 0) {
 				continue;
 			}
-			q = (char*) fcn_00502cd0(*(int*) (ent + 0x14), 1, 0,
+			q = (char*) gm_QueryEntities(*(int*) (ent + 0x14), 1, 0,
 			    rec.id);
 			if (q == 0) {
 				continue;
@@ -361,7 +361,7 @@ void __cdecl he_RunMarktSupervisor(char* action)
 			}
 			cm_SendMarktSlotDelta(&rec, i);
 		}
-		ent = (char*) fcn_00502cd0(*(int*) (hall + 0x5d), 2, 0, 0x1dc, 6);
+		ent = (char*) gm_QueryEntities(*(int*) (hall + 0x5d), 2, 0, 0x1dc, 6);
 		if (ent == 0) {
 			goto next_lager;
 		}
@@ -371,7 +371,7 @@ void __cdecl he_RunMarktSupervisor(char* action)
 			if (((MarktSlot*) scratch)->id == 0) {
 				continue;
 			}
-			q = (char*) fcn_00502cd0(*(int*) (ent + 0x14), 1, 0,
+			q = (char*) gm_QueryEntities(*(int*) (ent + 0x14), 1, 0,
 			    ((MarktSlot*) scratch)->id);
 			if (q == 0) {
 				continue;

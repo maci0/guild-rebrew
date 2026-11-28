@@ -2,7 +2,7 @@
 
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
-unsigned short* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
+unsigned short* __cdecl gm_QueryEntities(int container_id, int arg_count, ...);
 int __cdecl ai_SelectBestMethod(int who, int idx, int arg, int* out1, int* out2);
 int __cdecl ai_SelectDrohenTarget(char* e, int* a, int* b);
 float __cdecl gm_CalcSkillDuelScore(char* a, char* b, int c);
@@ -45,7 +45,7 @@ int __cdecl ai_StartDrohen(int a0, unsigned short* a1, int a2, int* a3, int* a4)
 			}
 			goto retry;
 		}
-		if (fcn_00502cd0(*(int*) (*(char**) (p + 0x170) + 0x5d), 2, 6, 0, 0x15) != 0) {
+		if (gm_QueryEntities(*(int*) (*(char**) (p + 0x170) + 0x5d), 2, 6, 0, 0x15) != 0) {
 			goto retry;
 		}
 		*(unsigned char*) v7 = 2;

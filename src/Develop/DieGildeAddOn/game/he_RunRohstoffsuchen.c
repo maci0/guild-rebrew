@@ -19,7 +19,7 @@ extern void __cdecl gm_AddTime(void* clock, int a, int b, int c);
 extern void __cdecl he_FreeAction(char* record);
 extern void* __cdecl gm_LookupEntityRecordById(int id);
 extern void* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
-extern void* __cdecl fcn_00502cd0(int list, int a, int b, int c, int d);
+extern void* __cdecl gm_QueryEntities(int list, int a, int b, int c, int d);
 extern int __cdecl gm_GetElapsedMinutes(void* p, int v);
 extern int __cdecl gm_GetBuildingTechEffect(void* p, int a, int b);
 extern int __cdecl he_CountActionActors(char* record);
@@ -88,7 +88,7 @@ void __cdecl he_RunRohstoffsuchen(char* event)
 	search = (unsigned char*) gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (event + 0x10));
 	if (search != 0) {
 		row = (char*) &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*search];
-		param = (char*) fcn_00502cd0(*(unsigned int*) (&search[0x5d]), 2, 6, 0, 0x2a);
+		param = (char*) gm_QueryEntities(*(unsigned int*) (&search[0x5d]), 2, 6, 0, 0x2a);
 		if (param == 0)
 			*(unsigned int*) (event + 0x70) = 0xffffffff;
 	} else {

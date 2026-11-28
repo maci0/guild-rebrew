@@ -5,7 +5,7 @@ extern char* lpObjektePROT;
 extern char* d2_InventoryPanelWindowId;
 extern char* g_14b52c4;
 extern int g_14a79c0[];
-void* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
+void* __cdecl gm_QueryEntities(int container_id, int arg_count, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_LookupSpecialObject(unsigned short id);
 int __cdecl d2_GetControlValue(int handle);
@@ -33,7 +33,7 @@ unsigned int __cdecl d2_UpdateActiveItemSlots(void)
 	}
 	for (slot = (int*) 0x776c64; (int) slot < 0x776c94; slot += 2) {
 		if (*slot != 0) {
-			if (fcn_00502cd0(*(int*) (container + 0x178), 1, 0, *(unsigned short*) *slot) != 0) {
+			if (gm_QueryEntities(*(int*) (container + 0x178), 1, 0, *(unsigned short*) *slot) != 0) {
 				handle = d2_GetControlValue(slot[-1]);
 				d2_SetElementValue(slot[-1], 0, *(unsigned int*) (*slot + 0xe), handle);
 				fcn_0064d41a(((char*)&((D2_CONTROL_TL*)d2_Controls)[slot[-1]] + 0xcc), "%s~ %li %s",
@@ -63,7 +63,7 @@ unsigned int __cdecl d2_UpdateActiveItemSlots(void)
 			}
 		}
 	}
-	match = (unsigned short*) fcn_00502cd0(*(int*) (container + 0x178), 1, 5);
+	match = (unsigned short*) gm_QueryEntities(*(int*) (container + 0x178), 1, 5);
 	for (;;) {
 		if (match == 0) {
 			return result;

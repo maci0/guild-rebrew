@@ -22,7 +22,7 @@ typedef struct {
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 void* __cdecl gm_FindNextFilteredEntity(void);
 void* __cdecl gm_FindKind47ByOwner(int);
-char* __cdecl fcn_00502cd0(int, int, ...);
+char* __cdecl gm_QueryEntities(int, int, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl cm_GetCommandStatus(int);
 char* __cdecl cm_GetCommandResult(int);
@@ -69,12 +69,12 @@ void __cdecl gm_UpdateMarketStockSlots(int player)
 		e = (unsigned char*) gm_StartFilteredEntitySearch(1, 6);
 		while (e != 0) {
 			if ((char)((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*e].category != 0x0a) {
-				ent = fcn_00502cd0(*(int*) (e + 0x5d), 1, 0, 0xff);
+				ent = gm_QueryEntities(*(int*) (e + 0x5d), 1, 0, 0xff);
 				i = 0;
 				if (ent != 0) {
 					for (p = s; i < 0x55; i++, p = (MARKET_STOCK_SLOT*) ((char*) p + 0x80)) {
 						if (p->objekt_id != 0 &&
-						    fcn_00502cd0(*(int*) (ent + 0x14), 1, 0, p->objekt_id) != 0) {
+						    gm_QueryEntities(*(int*) (ent + 0x14), 1, 0, p->objekt_id) != 0) {
 							p->active = 1;
 							item = (unsigned short*) ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[p->objekt_id] + 0x2e);
 							for (q = s, n = 0x55; n != 0; n--) {
@@ -95,9 +95,9 @@ void __cdecl gm_UpdateMarketStockSlots(int player)
 		p = s;
 		for (n = 0x55; n != 0; n--) {
 			rec = *(Slot*)s;
-			ent = fcn_00502cd0(*(int*) (gm_MarketEntity + 0x5d), 1, 0, p->target_id);
+			ent = gm_QueryEntities(*(int*) (gm_MarketEntity + 0x5d), 1, 0, p->target_id);
 			if (ent != 0) {
-				ent2 = fcn_00502cd0(*(int*) (ent + 0x14), 1, 0, 0xff);
+				ent2 = gm_QueryEntities(*(int*) (ent + 0x14), 1, 0, 0xff);
 				if (ent2 == 0) {
 					v = cm_SendSellObjekt(*(int*) (ent + 2), -1, 0xff, 1, (char) gm_ActiveTownIndex, 0);
 					while (cm_GetCommandStatus(v) == 0) {
@@ -106,14 +106,14 @@ void __cdecl gm_UpdateMarketStockSlots(int player)
 					ent2 = cm_GetCommandResult(v);
 				}
 				if (p->active != 0) {
-					if (fcn_00502cd0(*(int*) (ent2 + 0x14), 1, 0, p->objekt_id) == 0) {
+					if (gm_QueryEntities(*(int*) (ent2 + 0x14), 1, 0, p->objekt_id) == 0) {
 						v = cm_SendSellObjekt(*(int*) (ent2 + 2), -1, p->objekt_id, 1, (char) gm_ActiveTownIndex, 0);
 						while (cm_GetCommandStatus(v) == 0) {
 							cm_StepCommandQueue();
 						}
 					}
 				} else {
-					o = fcn_00502cd0(*(int*) (ent2 + 0x14), 1, 0, p->objekt_id);
+					o = gm_QueryEntities(*(int*) (ent2 + 0x14), 1, 0, p->objekt_id);
 					if (o != 0) {
 						v = cm_SendSellObjekt(-1, *(int*) (ent2 + 2), p->objekt_id,
 								 *(int*) (o + 0xe), (char) gm_ActiveTownIndex, 0);
@@ -131,16 +131,16 @@ void __cdecl gm_UpdateMarketStockSlots(int player)
 		for (v = *ip; v != 0; v = *++ip) {
 			int count;
 			count = 0;
-			ent = fcn_00502cd0(*(int*) (gm_MarketEntity + 0x5d), 1, 0, v);
+			ent = gm_QueryEntities(*(int*) (gm_MarketEntity + 0x5d), 1, 0, v);
 			if (ent != 0) {
-				ent2 = fcn_00502cd0(*(int*) (ent + 0x14), 1, 0, 0xff);
+				ent2 = gm_QueryEntities(*(int*) (ent + 0x14), 1, 0, 0xff);
 				if (ent2 != 0) {
-					o = fcn_00502cd0(*(int*) (ent2 + 0x14), 1, 5);
+					o = gm_QueryEntities(*(int*) (ent2 + 0x14), 1, 5);
 					while (o != 0) {
 						count++;
 						o = (char*) gm_NextEntityQueryMatch();
 					}
-					o = fcn_00502cd0(*(int*) (ent + 0x14), 1, 4, 0x11);
+					o = gm_QueryEntities(*(int*) (ent + 0x14), 1, 4, 0x11);
 					if (o != 0 && (int) *(unsigned char*) (o + 0x1c) < count) {
 						count -= *(unsigned char*) (o + 0x1c);
 						cm_BeginPacketFieldDelta(o, *(int*) (o + 2));
@@ -155,11 +155,11 @@ void __cdecl gm_UpdateMarketStockSlots(int player)
 		if (e == 0) {
 			return;
 		}
-		ent = fcn_00502cd0(*(int*) (e + 0x5d), 2, 0, 0x1db, 6);
+		ent = gm_QueryEntities(*(int*) (e + 0x5d), 2, 0, 0x1db, 6);
 		if (ent == 0) {
 			return;
 		}
-		ent2 = fcn_00502cd0(*(int*) (e + 0x5d), 2, 0, 0x1dc, 6);
+		ent2 = gm_QueryEntities(*(int*) (e + 0x5d), 2, 0, 0x1dc, 6);
 		if (ent2 == 0) {
 			return;
 		}
@@ -168,8 +168,8 @@ void __cdecl gm_UpdateMarketStockSlots(int player)
 		for (n = 0x55; n != 0; n--) {
 			rec = *(Slot*)p;
 			if (rec.id != 0) {
-				if (fcn_00502cd0(*(int*) (ent + 0x14), 1, 0, rec.id) != 0 ||
-				    fcn_00502cd0(*(int*) (ent2 + 0x14), 1, 0, rec.id) != 0) {
+				if (gm_QueryEntities(*(int*) (ent + 0x14), 1, 0, rec.id) != 0 ||
+				    gm_QueryEntities(*(int*) (ent2 + 0x14), 1, 0, rec.id) != 0) {
 					if (rec.value == 0) {
 						rec.value = (unsigned char) gm_RandomMod(0xff);
 						rec.active = rec.value <= 0x80;

@@ -5,7 +5,7 @@ extern char gm_EntityIdField[];
 
 
 void* __cdecl gm_GetGuildHall(int);
-void* __cdecl fcn_00502cd0(int, int, int, int, int);
+void* __cdecl gm_QueryEntities(int, int, int, int, int);
 int __cdecl atoi(char*);
 int __cdecl gm_IsSlotActivePerson(int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
@@ -21,7 +21,7 @@ int __cdecl hst_HandleVermoegenSteuer(int sel, int id, char* arg)
 	city = gm_GetGuildHall(1);
 	if (city == 0)
 		return 0;
-	obj = fcn_00502cd0(*(int*) ((char*) city + 0x5d), 2, 6, 0, 0x115);
+	obj = gm_QueryEntities(*(int*) ((char*) city + 0x5d), 2, 6, 0, 0x115);
 	if (obj == 0)
 		return 0;
 	if (*arg != '-')

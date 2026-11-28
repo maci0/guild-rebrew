@@ -18,7 +18,7 @@ extern int(__stdcall* imp_timeGetTime)(void);
 void __cdecl srv_SeedRandom(int);
 int __cdecl cm_ResolveSpecialEntityId(unsigned char*, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-unsigned short __cdecl fcn_0050a7e0(int, int, int, int, int, int, int, int);
+unsigned short __cdecl gm_AllocClientSpieler(int, int, int, int, int, int, int, int);
 char* __cdecl gm_FindRecordById(int);
 void __cdecl init_SpawnBuildingCharacter(int, int, int, int, int);
 char* __cdecl gm_AllocObjekt(int, int, int);
@@ -50,7 +50,7 @@ int __cdecl fcn_004cc590(unsigned char* request, char* response)
 		if (e == 0)
 			return 1;
 	}
-	id = fcn_0050a7e0(request[0x14], -1, -1, 0x14, 0, request[0x1f], request[0x20], 0);
+	id = gm_AllocClientSpieler(request[0x14], -1, -1, 0x14, 0, request[0x1f], request[0x20], 0);
 	if (id == 0xffff)
 		return 1;
 	if (*(int*) (request + 0x1b) != -1 && (r = gm_FindRecordById(*(int*) (request + 0x1b))) != 0)

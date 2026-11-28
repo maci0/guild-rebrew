@@ -20,7 +20,7 @@ extern unsigned short* g_773da4;
 
 void* __cdecl gm_NextEntityQueryMatch(void);
 
-unsigned short* __cdecl fcn_00502cd0(int container_id, int arg_count, ...)
+unsigned short* __cdecl gm_QueryEntities(int container_id, int arg_count, ...)
 {
 	int* arg_ptr;
 	int i;

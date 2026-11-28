@@ -17,7 +17,7 @@ typedef struct
 } Stats;
 // SIZE 0xb8
 
-char* __cdecl fcn_00502cd0(int list, int a, int b, ...);
+char* __cdecl gm_QueryEntities(int list, int a, int b, ...);
 char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_GetStorageSlotCapacity(char* q, int id);
 float __cdecl eval_ObjektPreis2Credits(int id, int n);
@@ -28,11 +28,11 @@ int __cdecl gm_CalcEntityInventoryStats(char* e, Stats* s)
 	char* r;
 
 	memset(s, 0, sizeof(Stats));
-	q = fcn_00502cd0(*(int*) (e + 0x14), 1, 0, 0x1dd);
+	q = gm_QueryEntities(*(int*) (e + 0x14), 1, 0, 0x1dd);
 	if (q == 0) {
 		return 0;
 	}
-	r = fcn_00502cd0(*(int*) (q + 0x14), 1, 5);
+	r = gm_QueryEntities(*(int*) (q + 0x14), 1, 5);
 	s->x0 = *(unsigned char*) (q + 0x1c);
 	while (r != 0) {
 		s->x68[s->n] = *(int*) (r + 0xe);

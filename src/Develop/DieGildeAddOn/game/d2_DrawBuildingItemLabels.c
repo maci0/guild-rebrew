@@ -39,7 +39,7 @@ extern char* lpObjektePROT;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_14a79c0[];
 
-void* __cdecl fcn_00502cd0(int, int, int, ...);
+void* __cdecl gm_QueryEntities(int, int, int, ...);
 void __cdecl d2_SelectFont(int);
 char __cdecl d3_GetObjectScreenRect(void*, int*);
 void __cdecl d2_DrawWordWrappedText(int, int, int, int, int, char*, int);
@@ -59,7 +59,7 @@ void __cdecl d2_DrawBuildingItemLabels(void)
 		if (((Player*)d2_InteriorBuilding) == 0) {
 			return;
 		}
-		e = fcn_00502cd0(((Player*)d2_InteriorBuilding)->home, 1, 0, 0xfd);
+		e = gm_QueryEntities(((Player*)d2_InteriorBuilding)->home, 1, 0, 0xfd);
 		if (e != 0) {
 			home = e->home;
 		} else {
@@ -67,7 +67,7 @@ void __cdecl d2_DrawBuildingItemLabels(void)
 		}
 	}
 	d2_SelectFont(0x54);
-	for (u = fcn_00502cd0(home, 1, 5); u != 0; u = gm_NextEntityQueryMatch()) {
+	for (u = gm_QueryEntities(home, 1, 5); u != 0; u = gm_NextEntityQueryMatch()) {
 		w = &((OBJECT_PROTOTYPE*)lpObjektePROT)[u->slot];
 		if (u->model != 0 && w->kind != 6 && w->kind != 2
 			&& d3_GetObjectScreenRect(u->model, r)) {
@@ -80,7 +80,7 @@ void __cdecl d2_DrawBuildingItemLabels(void)
 	} else if (((Player*)d2_InteriorBuilding) != 0) {
 		home = ((Player*)d2_InteriorBuilding)->home;
 	}
-	for (u = fcn_00502cd0(home, 2, 5, 6); u != 0; u = gm_NextEntityQueryMatch()) {
+	for (u = gm_QueryEntities(home, 2, 5, 6); u != 0; u = gm_NextEntityQueryMatch()) {
 		w = &((OBJECT_PROTOTYPE*)lpObjektePROT)[u->slot];
 		if (u->model != 0 && (w->kind == 6 || w->kind == 2)
 			&& d3_GetObjectScreenRect(u->model, r)) {

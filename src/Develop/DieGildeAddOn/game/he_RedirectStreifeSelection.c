@@ -18,7 +18,7 @@ typedef struct {
 	char p80[0x78];
 } STREIFE_REDIRECT_MSG;
 
-char* __cdecl fcn_00502cd0(int, int, int, int);
+char* __cdecl gm_QueryEntities(int, int, int, int);
 void __cdecl he_AssignActionSlot(char*, int, int, int);
 void __cdecl cm_SendCancelCharacterActions(int);
 void __cdecl ch_StartMovement(int, int, int, int, int, int);
@@ -90,7 +90,7 @@ void __cdecl he_RedirectStreifeSelection(void)
 				}
 				goto next;
 			}
-			r = fcn_00502cd0(*(int*) (g + 0x5d), 1, 0, 0x146);
+			r = gm_QueryEntities(*(int*) (g + 0x5d), 1, 0, 0x146);
 			for (i = 0; i < 4; i++) {
 				if (*(int*) (hit + 0xc4 + i * 4) == *(int*) (row - 0x168)) {
 					*(int*) (hit + 0xc4 + i * 4) = -1;
@@ -121,7 +121,7 @@ void __cdecl he_RedirectStreifeSelection(void)
 				}
 				goto next;
 			}
-			r = fcn_00502cd0(*(int*) (g + 0x5d), 1, 0, 0x146);
+			r = gm_QueryEntities(*(int*) (g + 0x5d), 1, 0, 0x146);
 			for (i = 0; i < 4; i++) {
 				if (*(int*) (hit + 0xc4 + i * 4) == *(int*) (row - 0x168)) {
 					*(int*) (hit + 0xc4 + i * 4) = -1;

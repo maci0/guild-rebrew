@@ -21,7 +21,7 @@ int __cdecl ch_StartMovement(int, int, int, char*, int, char*);
 void __cdecl cm_SendBlockCharacter(int, int, int);
 float __cdecl gm_ApplyEntityHealthDelta(unsigned short, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
-int __cdecl fcn_00502cd0(int, int, int, ...);
+int __cdecl gm_QueryEntities(int, int, int, ...);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_SetupEntityQuery(char*);
 char* __cdecl gm_SearchTable67(int);
@@ -178,7 +178,7 @@ void __cdecl he_RunEntfuehren(char* action)
 				*(int*) (action + 0x70) = -1;
 				return;
 			}
-			r = (char*) fcn_00502cd0(*(int*) (ent + 0x5d), 1, 0, 0x65);
+			r = (char*) gm_QueryEntities(*(int*) (ent + 0x5d), 1, 0, 0x65);
 			if (*(int*) (obj + 0x184) != 0) {
 				cm_SendCancelCharacterActions(*(int*) (obj + 4));
 				cm_RequestChrMoveToUniverse(*(int*) (obj + 4), *(int*) (ent + 1), *(int*) (r + 2),

@@ -10,7 +10,7 @@ typedef struct Req {
 extern float g_10097f4;
 extern float g_1009814;
 
-unsigned short* __cdecl fcn_00502cd0(int a, int b, int c, int d);
+unsigned short* __cdecl gm_QueryEntities(int a, int b, int c, int d);
 float* __cdecl gm_LookupSpecialObject(int id);
 int __cdecl gm_UseSpecialObject(char* e, Req* r);
 
@@ -21,7 +21,7 @@ int __cdecl ai_RunUseDynastyObject(char* entity, int* itemReq, int* targetReq)
 	unsigned short* item;
 	Req req;
 
-	item = fcn_00502cd0(*(int*) (entity + 0x178), 1, 1, itemReq[1]);
+	item = gm_QueryEntities(*(int*) (entity + 0x178), 1, 1, itemReq[1]);
 	if (!item) {
 		return 0;
 	}

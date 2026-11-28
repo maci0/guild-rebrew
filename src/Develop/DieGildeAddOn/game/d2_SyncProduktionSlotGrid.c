@@ -1,6 +1,6 @@
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
-unsigned short* __cdecl fcn_00502cd0(int, int, ...);
+unsigned short* __cdecl gm_QueryEntities(int, int, ...);
 int __cdecl gm_GetStorageSlotCapacity(char*, int);
 int __cdecl gm_GetMsgField(char*, char*);
 void* __cdecl gm_NextEntityQueryMatch(void);
@@ -109,7 +109,7 @@ int __cdecl d2_SyncProduktionSlotGrid(int ctx, char* panel)
         v13 += 5;
     } while ((int) v13 < 0x778d9c);
 
-    v5 = fcn_00502cd0(*(unsigned int*) (v3 + 0x14), 1, 5);
+    v5 = gm_QueryEntities(*(unsigned int*) (v3 + 0x14), 1, 5);
     while (v5) {
         v10 = 0;
         v6 = (unsigned int*) 0x778da0;
@@ -158,7 +158,7 @@ int __cdecl d2_SyncProduktionSlotGrid(int ctx, char* panel)
 
     v13 = (unsigned int*) 0x778dd0;
     do {
-        v9 = fcn_00502cd0(*(unsigned int*) (v3 + 0x14), 1, 0, v13[-0xc]);
+        v9 = gm_QueryEntities(*(unsigned int*) (v3 + 0x14), 1, 0, v13[-0xc]);
         if (v9) {
             if (*(unsigned short*) v3 != 0x1db && *(unsigned short*) v3 != 0x1dc) {
                 v10 = gm_GetStorageSlotCapacity(v3, *v9);
@@ -185,7 +185,7 @@ int __cdecl d2_SyncProduktionSlotGrid(int ctx, char* panel)
         v7 = (int*) 0x778dc0;
         do {
             if (*v7 != -1 && *v7 == d2_CurrentElementId) {
-                v10 = (int) fcn_00502cd0(*(unsigned int*) (v3 + 0x14), 1, 0,
+                v10 = (int) gm_QueryEntities(*(unsigned int*) (v3 + 0x14), 1, 0,
                                          v7[-8]);
                 if (!v10) {
                     break;

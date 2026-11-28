@@ -8,7 +8,7 @@ extern float g_664168;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-char* __cdecl fcn_00502cd0(int, int, int, int);
+char* __cdecl gm_QueryEntities(int, int, int, int);
 int __cdecl gm_ConvertUnitsToAmount(int, unsigned char);
 int __cdecl gm_RandomMod(int);
 int __cdecl cm_SendSetHE(int, char*);
@@ -82,7 +82,7 @@ void __cdecl he_UpdateRobberyAction(char* action)
 		if (ent == 0) {
 			goto ent0;
 		}
-		targetSlot = fcn_00502cd0(*(int*) (ent + 0x5d), 1, 0, 0x146);
+		targetSlot = gm_QueryEntities(*(int*) (ent + 0x5d), 1, 0, 0x146);
 		hits = 0;
 		damage = 0;
 		memberPtr = action + 0xc4;

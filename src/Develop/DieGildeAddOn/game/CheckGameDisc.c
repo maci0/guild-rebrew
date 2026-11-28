@@ -1,5 +1,5 @@
 /* ADDRESS: GOLDTL 0x005435d0 */
-int __cdecl fcn_005435d0(void)
+int __cdecl CheckGameDisc(void)
 {
     return 1;
 }

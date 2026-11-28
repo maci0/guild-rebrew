@@ -2,7 +2,7 @@
 #include <string.h>
 
 char *__cdecl gm_GetGuildHall(int);
-void *__cdecl fcn_00502cd0(int, int, ...);
+void *__cdecl gm_QueryEntities(int, int, ...);
 int __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 extern char *g_item_def_table;
 unsigned short *__cdecl gm_NextEntityQueryMatch(void);
@@ -50,11 +50,11 @@ int __cdecl hst_CmdStadtkasse(int unused1, int unused2, char *argText)
 		if (e == 0) {
 			return 0;
 		}
-		q = fcn_00502cd0(*(int *) (e + 0x5d), 2, 6, 0, 0x115);
+		q = gm_QueryEntities(*(int *) (e + 0x5d), 2, 6, 0, 0x115);
 		if (q == 0) {
 			return 0;
 		}
-		item = fcn_00502cd0(*(int *) ((char *) q + 0x14), 1, 5);
+		item = gm_QueryEntities(*(int *) ((char *) q + 0x14), 1, 5);
 		if (item == 0) {
 			return 1;
 		}

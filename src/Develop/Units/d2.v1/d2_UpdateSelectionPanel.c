@@ -49,7 +49,7 @@ float __cdecl gm_GetEntityHealthRatio(char* e);
 int __cdecl d2_ClearWindowChildren(int win, int keep);
 void __cdecl d2_RunTradeRouteEditor(char* e);
 char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
-char* __cdecl fcn_00502cd0(int a, int b, int c, ...);
+char* __cdecl gm_QueryEntities(int a, int b, int c, ...);
 char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_GetMsgField(int a, int b);
 int __cdecl fcn_0064d41a(char* buf, char* fmt, ...);
@@ -341,11 +341,11 @@ no_target:
 			io_AppendText(g_6a2fe4, (unsigned char) *s * 0xe + 0x48e);
 		}
 	}
-	e = fcn_00502cd0(*(int*) ((char*) d2_SelectedItem + 0x14), 1, 0, 0x1dd);
+	e = gm_QueryEntities(*(int*) ((char*) d2_SelectedItem + 0x14), 1, 0, 0x1dd);
 	if (e == 0) {
 		return;
 	}
-	s = fcn_00502cd0(*(int*) (e + 0x14), 1, 5);
+	s = gm_QueryEntities(*(int*) (e + 0x14), 1, 5);
 	if (s == 0) {
 		return;
 	}

@@ -4,7 +4,7 @@
 #include <string.h>
 
 unsigned short* __cdecl gm_LookupEntityRecordById(int id);
-char* __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
+char* __cdecl gm_QueryEntities(int a, int b, int c, int d, int e);
 void __cdecl gm_RemoveObjectByType(void* list, unsigned int id);
 void __cdecl gm_KillSpieler(unsigned int idx, int param);
 
@@ -17,7 +17,7 @@ int __cdecl ahm_HandleFireCommand(int cmd, int* ids, char* parent)
 
 	entity = gm_LookupEntityRecordById(*ids);
 	if (entity != 0) {
-		query = fcn_00502cd0(*(int*) (parent + 0x5d), 2, 6, 0, 0xff);
+		query = gm_QueryEntities(*(int*) (parent + 0x5d), 2, 6, 0, 0xff);
 		*(int*) (entity + 0xb8) = 0;
 		*(int*) (entity + 0xb6) = 0;
 		slot = (unsigned int*) (ids + 3);

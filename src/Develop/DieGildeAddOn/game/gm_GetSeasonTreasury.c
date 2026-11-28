@@ -2,7 +2,7 @@
 
 
 
-void* __cdecl fcn_00502cd0(int, int, int, ...);
+void* __cdecl gm_QueryEntities(int, int, int, ...);
 
 int __cdecl gm_GetSeasonTreasury(char* entity, char season)
 {
@@ -10,7 +10,7 @@ int __cdecl gm_GetSeasonTreasury(char* entity, char season)
 	char* r;
 
 	result = 0;
-	r = fcn_00502cd0(*(int*) (entity + 0x178), 1, result, (int) (unsigned short) ((int*)g_8680b4)[season * 189]);
+	r = gm_QueryEntities(*(int*) (entity + 0x178), 1, result, (int) (unsigned short) ((int*)g_8680b4)[season * 189]);
 	if (r) {
 		result = *(int*) (r + 0xe);
 	}

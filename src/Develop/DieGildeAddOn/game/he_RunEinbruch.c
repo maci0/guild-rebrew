@@ -37,7 +37,7 @@ int __cdecl he_DetectNearbyPatrolAction(int*);
 int __cdecl gm_TryRecordCrime(int, int, int, int, int);
 int __cdecl he_StartHandlungSearch(int, int, int);
 void __cdecl gm_AddTime(void*, int, int, int);
-int __cdecl fcn_00502cd0(int, int, ...);
+int __cdecl gm_QueryEntities(int, int, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_GetScaledEntitySkill(char*, int);
 char* __cdecl gm_GetEntityTableEntry(char*);
@@ -280,7 +280,7 @@ void __cdecl he_RunEinbruch(char* e)
 		}
 		if (pb != 0) {
 			q = (char*) gm_SetupEntityQuery(pb);
-			num = fcn_00502cd0(*(int*) (pb + 0x5d), 2, 6, 0, 0x116);
+			num = gm_QueryEntities(*(int*) (pb + 0x5d), 2, 6, 0, 0x116);
 			{
 				int* p;
 
@@ -301,7 +301,7 @@ void __cdecl he_RunEinbruch(char* e)
 					p++;
 				} while (--n);
 			}
-			cnt2 = (char*) fcn_00502cd0(*(int*) (pb + 0x5d), 1, 0, 0xca);
+			cnt2 = (char*) gm_QueryEntities(*(int*) (pb + 0x5d), 1, 0, 0xca);
 			if (cnt2 != 0) {
 				while (*(int*) (cnt2 + 0x2a) != *(int*) (pa + 1)) {
 					cnt2 = (char*) gm_NextEntityQueryMatch();
@@ -343,7 +343,7 @@ void __cdecl he_RunEinbruch(char* e)
 			goto after;
 		}
 		if (flag != 0) {
-			num = fcn_00502cd0(*(int*) (pa + 0x5d), 2, 6, 0, 0x2a);
+			num = gm_QueryEntities(*(int*) (pa + 0x5d), 2, 6, 0, 0x2a);
 			gm_EvalEntityInventoryValue(pa, (int*) &cnt2);
 			hits = (int) (((float) (gm_RandomMod(0x32) & 0xffff) * 0.001f
 			        + 1.0) * (float) (int) cnt2);
@@ -374,7 +374,7 @@ void __cdecl he_RunEinbruch(char* e)
 		}
 		if (cnt2 != 0) {
 			if (num != 0) {
-				cnt2 = (char*) fcn_00502cd0(*(int*) (cnt2 + 0x14), 1, 5);
+				cnt2 = (char*) gm_QueryEntities(*(int*) (cnt2 + 0x14), 1, 5);
 				while (cnt2 != 0) {
 					unsigned short r;
 

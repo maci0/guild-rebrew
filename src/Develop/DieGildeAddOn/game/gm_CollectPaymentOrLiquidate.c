@@ -14,7 +14,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_GetBuildingTypeCategory(int);
 char* __cdecl gm_NextEntityQueryMatch(void);
-void* __cdecl fcn_00502cd0(int, int, ...);
+void* __cdecl gm_QueryEntities(int, int, ...);
 float __cdecl gm_GetSeasonPrice(int, unsigned char);
 int __cdecl gm_GetMsgField(void*, void*);
 void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
@@ -62,12 +62,12 @@ int __cdecl gm_CollectPaymentOrLiquidate(int receiverId, char* ownerEntity, int 
 			cat = *(unsigned char*) ent;
 			cat = gm_GetBuildingTypeCategory(cat);
 			if (cat == 1 || cat == 2 || cat == 8) {
-				obj = fcn_00502cd0(*(int*) (ent + 0x5d), 2, 6, 0, 0x2a);
+				obj = gm_QueryEntities(*(int*) (ent + 0x5d), 2, 6, 0, 0x2a);
 				if (obj == 0) {
-					obj = fcn_00502cd0(*(int*) (ent + 0x5d), 2, 6, 0, 0x116);
+					obj = gm_QueryEntities(*(int*) (ent + 0x5d), 2, 6, 0, 0x116);
 				}
 				if (obj != 0) {
-					sub = (unsigned short*) fcn_00502cd0(*(int*) ((char*) obj + 0x14), 1, 5);
+					sub = (unsigned short*) gm_QueryEntities(*(int*) ((char*) obj + 0x14), 1, 5);
 					while (sub != 0 && remaining > 0) {
 						if ((*(char *)&((OBJECT_PROTOTYPE*) lpObjektePROT)[*sub].kind) != 0x17
 							&& (*(char *)&((OBJECT_PROTOTYPE*) lpObjektePROT)[*sub].kind) != 0x25) {
@@ -114,9 +114,9 @@ int __cdecl gm_CollectPaymentOrLiquidate(int receiverId, char* ownerEntity, int 
 			cat = *(unsigned char*) ent;
 			cat = gm_GetBuildingTypeCategory(cat);
 			if (cat == 1 || cat == 2 || cat == 8) {
-				obj = fcn_00502cd0(*(int*) (ent + 0x5d), 2, 6, 0, 0x2a);
+				obj = gm_QueryEntities(*(int*) (ent + 0x5d), 2, 6, 0, 0x2a);
 				if (obj != 0) {
-					sub = (unsigned short*) fcn_00502cd0(*(int*) ((char*) obj + 0x14), 1, 5);
+					sub = (unsigned short*) gm_QueryEntities(*(int*) ((char*) obj + 0x14), 1, 5);
 					while (sub != 0 && remaining > 0) {
 						if ((*(char *)&((OBJECT_PROTOTYPE*) lpObjektePROT)[*sub].kind) == 0x17
 							|| (*(char *)&((OBJECT_PROTOTYPE*) lpObjektePROT)[*sub].kind) == 0x25) {

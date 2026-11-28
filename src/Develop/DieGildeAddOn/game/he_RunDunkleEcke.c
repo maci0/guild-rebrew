@@ -18,7 +18,7 @@ void __cdecl ch_StartMovement(int a, int b, int c, int d, int e, char* s);
 void __cdecl he_FreeAction(char* dlg);
 void __cdecl fcn_005015e0(int* out, int a, int b, int c);
 int __cdecl gm_IsEntityAtBuilding(char* e, char* h);
-char* __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
+char* __cdecl gm_QueryEntities(int a, int b, int c, int d, int e);
 int __cdecl gm_CompareGameTime(char* a, char* b);
 void __cdecl gm_AddTime(int* r, int a, int b, int c);
 float __cdecl gm_GetEntitySkill(char* e, int i);
@@ -238,7 +238,7 @@ void __cdecl he_RunDunkleEcke(char* dlg)
 				    + *(unsigned short*) (hit + 0x27) * 0x21c + 4));
 				j++;
 			}
-			rec = fcn_00502cd0(*(int*) (hit + 0x5d), 2, 6, 0, 0x12c);
+			rec = gm_QueryEntities(*(int*) (hit + 0x5d), 2, 6, 0, 0x12c);
 			if (rec != 0) {
 				cm_BeginPacketFieldDelta(rec, *(int*) (rec + 2));
 				j = 0;
@@ -318,7 +318,7 @@ fail:
 				    + *(unsigned short*) (hit + 0x27) * 0x21c + 4));
 				j++;
 			}
-			rec = fcn_00502cd0(*(int*) (hit + 0x5d), 2, 6, 0, 0x12c);
+			rec = gm_QueryEntities(*(int*) (hit + 0x5d), 2, 6, 0, 0x12c);
 			if (rec != 0) {
 				cm_BeginPacketFieldDelta(rec, *(int*) (rec + 2));
 				j = 0;

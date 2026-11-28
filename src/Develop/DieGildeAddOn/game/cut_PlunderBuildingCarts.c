@@ -7,7 +7,7 @@ extern unsigned char gm_ActiveTownIndex;
 extern double g_662908;
 extern float flt_1_0;
 
-char* __cdecl fcn_00502cd0(int, ...);
+char* __cdecl gm_QueryEntities(int, ...);
 short* __cdecl gm_ResolveParentEntity(short*);
 void* __cdecl gm_NextEntityQueryMatch(void);
 short* __cdecl gm_GetEntityTableEntry(char*);
@@ -31,13 +31,13 @@ int __cdecl cut_PlunderBuildingCarts(int* cutscene, char* building, int* attacke
 	if (cut_CombatDefenderEntity == 0 || g_772e98 == 0) {
 		return 0;
 	}
-	rec = fcn_00502cd0(*(int*) (building + 0x5d), 2, 6, 0, 0x116);
+	rec = gm_QueryEntities(*(int*) (building + 0x5d), 2, 6, 0, 0x116);
 	p = (int*) ((char*) cutscene + 0x100);
 	for (i = 3; i != 0; i--) {
 		if (*p != -1) {
-			ent = fcn_00502cd0(0, 2, 7, 1, *p);
-			ent = fcn_00502cd0(*(int*) (ent + 0x14), 1, 0, 0x1dd);
-			ent = fcn_00502cd0(*(int*) (ent + 0x14), 1, 5);
+			ent = gm_QueryEntities(0, 2, 7, 1, *p);
+			ent = gm_QueryEntities(*(int*) (ent + 0x14), 1, 0, 0x1dd);
+			ent = gm_QueryEntities(*(int*) (ent + 0x14), 1, 5);
 			while (ent != 0) {
 				gm_ResolveParentEntity((short*) ent);
 				v = (float) *(int*) (ent + 0xe) * scale;

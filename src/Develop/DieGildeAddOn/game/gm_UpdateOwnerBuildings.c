@@ -49,7 +49,7 @@ int __cdecl init_SpawnBuildingCharacter(int, int, int, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl cm_StepCommandQueue(void);
 int __cdecl gm_CalcBuildingRoundBalance(unsigned char*, int, int*);
-unsigned short* __cdecl fcn_00502cd0(int, int, ...);
+unsigned short* __cdecl gm_QueryEntities(int, int, ...);
 int __cdecl gm_SumQueryEntryValues(int, char);
 int __cdecl gm_GetEntityRelation(int, int);
 
@@ -138,7 +138,7 @@ void __cdecl gm_UpdateOwnerBuildings(unsigned int arg)
 				}
 			}
 			else {
-				obj = (unsigned char*) fcn_00502cd0(*(int*) (rec + 0x5d), 1, 0, 0xca);
+				obj = (unsigned char*) gm_QueryEntities(*(int*) (rec + 0x5d), 1, 0, 0xca);
 				while (obj != 0) {
 					count++;
 					if (*(unsigned char*) (obj + 0x37) <= 5) {
@@ -383,7 +383,7 @@ void __cdecl gm_UpdateOwnerBuildings(unsigned int arg)
 	while (p != 0) {
 		if (gm_CalcBuildingRoundBalance(p, idx, out) != 0) {
 			if (out[12]) {
-				r = (unsigned char*) fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0xe8);
+				r = (unsigned char*) gm_QueryEntities(*(int*) (p + 0x5d), 2, 6, 0, 0xe8);
 				if (r != 0) {
 					v = gm_SumQueryEntryValues(*(int*) (r + 0x14), (char) gm_ActiveTownIndex);
 					if (v > 0) {
@@ -393,7 +393,7 @@ void __cdecl gm_UpdateOwnerBuildings(unsigned int arg)
 				}
 			}
 			if (out[15]) {
-				r = (unsigned char*) fcn_00502cd0(*(int*) (p + 0x5d), 1, 0, 0xf0);
+				r = (unsigned char*) gm_QueryEntities(*(int*) (p + 0x5d), 1, 0, 0xf0);
 				if (r != 0) {
 					v = gm_SumQueryEntryValues(*(int*) (r + 0x14), (char) gm_ActiveTownIndex);
 					if (v > 0) {

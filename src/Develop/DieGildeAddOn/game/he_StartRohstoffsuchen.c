@@ -1,7 +1,7 @@
 #include "Develop/client_types.h"
 
 int __cdecl fcn_00503fe0(int a, int b, int c);
-void* __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
+void* __cdecl gm_QueryEntities(int a, int b, int c, int d, int e);
 void* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl he_AssignActionSlot(int a, int b, int c, void* d);
 void __cdecl he_FreeAction(void* p);
@@ -21,7 +21,7 @@ void __cdecl he_StartRohstoffsuchen(char* event)
 
 	found = 0;
 	obj = fcn_00503fe0(1, 1, *(int*) (event + 0x10));
-	h = fcn_00502cd0(*(int*) (obj + 0x5d), 2, found, 0xfd, 6);
+	h = gm_QueryEntities(*(int*) (obj + 0x5d), 2, found, 0xfd, 6);
 	p = (int*) (event + 0x8c);
 	for (i = 4; i != 0; i--) {
 		q = gm_LookupEntityRecordById(*p);

@@ -19,9 +19,9 @@ int __cdecl ai_FindEntityInFavorRange(char* p, int kind, F8 f, int c, float r, i
 int __cdecl gm_ExecZunftPreismanipulation(int, int*);
 
 /* ADDRESS: GOLDTL 0x0049fa80 */
-/* AI method 0x36 (Zunft Aufruhr) start callback: forwards {3, e+4, e+0x10, ., .} to
+/* Zunft Preismanipulation run callback: forwards {3, e+4, e+0x10, ., .} to
  * gm_ExecZunftPreismanipulation when the record is kind 0x15. */
-int __cdecl fcn_0049fa80(int a1, char* e)
+int __cdecl ai_RunZunftPreismanipulation(int a1, char* e)
 {
 	int m[5];
 

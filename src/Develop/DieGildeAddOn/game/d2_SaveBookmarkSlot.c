@@ -19,7 +19,7 @@ extern Slot_779d00 main_CameraBookmarks[];
 extern char s_6a9b3c[];
 extern char s_6a9b30[];
 
-char* __cdecl fcn_00502cd0(int, int, int, int, int);
+char* __cdecl gm_QueryEntities(int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl d2_ShowStatusBanner(char*);
 
@@ -40,7 +40,7 @@ void __cdecl d2_SaveBookmarkSlot(int index)
 		if (e != 0) {
 			t = sv_SelectedBuilding;
 			if (t == 0) {
-				t = fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0xfd);
+				t = gm_QueryEntities(*(int*) (e + 0x5d), 2, 6, 0, 0xfd);
 			}
 		} else {
 			e = d2_SelectedBuilding;

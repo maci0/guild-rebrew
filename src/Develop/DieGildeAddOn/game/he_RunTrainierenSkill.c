@@ -30,7 +30,7 @@ void __cdecl cm_AppendPacketFieldValue(int, int, short, unsigned char*);
 void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 char* __cdecl gm_FindBuildingOwner(unsigned char*);
-char* __cdecl fcn_00502cd0(int, int, int, int);
+char* __cdecl gm_QueryEntities(int, int, int, int);
 char* __cdecl gm_SetupEntityQuery(char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, char*, char*);
@@ -100,9 +100,9 @@ void __cdecl he_RunTrainierenSkill(char* e)
 		row = (BUILDING_PROTOTYPE*) lpGebaeudePROT + (unsigned char) *q;
 		s = 0;
 		if (row->category == 4) {
-			s = fcn_00502cd0(*(int*) (q + 0x5d), 1, 0, 0x60);
+			s = gm_QueryEntities(*(int*) (q + 0x5d), 1, 0, 0x60);
 		} else if (row->category == 0x13) {
-			s = fcn_00502cd0(*(int*) (q + 0x5d), 1, 0, 0x145);
+			s = gm_QueryEntities(*(int*) (q + 0x5d), 1, 0, 0x145);
 		}
 		if (s == 0) {
 			s = gm_SetupEntityQuery(q);

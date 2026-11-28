@@ -22,7 +22,7 @@ typedef struct { unsigned char kind; unsigned char unknown01[0x24c]; } COMBAT_BU
 void __cdecl d2_SetMouseTooltip(char*);
 void __cdecl d2_ShowStatusBanner(char*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-char* __cdecl fcn_00502cd0(int, ...);
+char* __cdecl gm_QueryEntities(int, ...);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl gm_CheckCombatGearWear(char*);
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
@@ -105,9 +105,9 @@ int __cdecl d2_ShowCombatEndCutscene(char* ctx)
 	d2_ShowStatusBanner(str_empty);
 	if (*(int*) (self + 0x10c) != -1) {
 		ent = gm_StartFilteredEntitySearch(1, 1, *(int*) (self + 0x10c));
-		rec = fcn_00502cd0(*(int*) (ent + 0x5d), 2, 6, 0, 0x116);
+		rec = gm_QueryEntities(*(int*) (ent + 0x5d), 2, 6, 0, 0x116);
 		if (rec == 0) {
-			rec = fcn_00502cd0(*(int*) (ent + 0x5d), 2, 6, 0, 0x2a);
+			rec = gm_QueryEntities(*(int*) (ent + 0x5d), 2, 6, 0, 0x2a);
 		}
 	}
 	if (g_68b79c == *(int*) (gm_EntityIdField + gm_LocalPlayerSlot * 0x21c)) {
@@ -181,7 +181,7 @@ int __cdecl d2_ShowCombatEndCutscene(char* ctx)
 	} else if (side == cut_CombatDefenderEntity) {
 		io_AppendText(0x118c, *(unsigned short*) g_772e98, *(unsigned short*) cut_CombatDefenderEntity);
 		if (self[0x7c] & 1) {
-			ent = fcn_00502cd0(0, 2, 7, 1, *(int*) (self + 0x100));
+			ent = gm_QueryEntities(0, 2, 7, 1, *(int*) (self + 0x100));
 			if (*(int*) (ent + 0x24) != 0 && gm_SearchTable67(*(int*) (*(int*) (ent + 0x24) + 0xb4)) != 0) {
 				io_AppendText(0x118d);
 			}
@@ -251,9 +251,9 @@ int __cdecl d2_ShowCombatEndCutscene(char* ctx)
 			if (*id == -1) {
 				continue;
 			}
-			cur = fcn_00502cd0(0, 2, 7, 1, *id);
-			cur = fcn_00502cd0(*(int*) (cur + 0x14), 1, 0, 0x1dd);
-			cur = fcn_00502cd0(*(int*) (cur + 0x14), 1, 5);
+			cur = gm_QueryEntities(0, 2, 7, 1, *id);
+			cur = gm_QueryEntities(*(int*) (cur + 0x14), 1, 0, 0x1dd);
+			cur = gm_QueryEntities(*(int*) (cur + 0x14), 1, 5);
 			while (cur != 0) {
 				if (side == cut_CombatDefenderEntity) {
 					*(int*) (cur + 0xa) = *(unsigned short*) cut_CombatDefenderEntity;
@@ -306,9 +306,9 @@ sync:
 			memset(buf + 1, 0, 0x3ff);
 			io_FormatTextBuffer(buf, 0x11a5, *(unsigned short*) cut_CombatDefenderEntity, ent);
 			d2_ShowMessageBox(buf, 0);
-			cur = fcn_00502cd0(*(int*) (ent + 0x5d), 2, 6, 0, 0x2a);
+			cur = gm_QueryEntities(*(int*) (ent + 0x5d), 2, 6, 0, 0x2a);
 			if (cur == 0) {
-				cur = fcn_00502cd0(*(int*) (ent + 0x5d), 2, 6, 0, 0x116);
+				cur = gm_QueryEntities(*(int*) (ent + 0x5d), 2, 6, 0, 0x116);
 			}
 			pay = gm_AccumulateTyped2(g_772e98);
 			if (pay >= 0x9c400) {
@@ -324,7 +324,7 @@ sync:
 			*(int*) &mode = sum;
 			cm_RequestMoveCredits(*(int*) (cut_CombatDefenderEntity + 4), *(int*) (g_772e98 + 4), gm_ActiveTownIndex, sum);
 			if (cur != 0 && rec != 0) {
-				ent = fcn_00502cd0(*(int*) (cur + 0x14), 1, 5);
+				ent = gm_QueryEntities(*(int*) (cur + 0x14), 1, 5);
 				while (ent != 0) {
 					qlo = cut_RandMod(0x14) + 0x50;
 					qhi = 0;
@@ -418,9 +418,9 @@ reduce:
 					memset(buf + 1, 0, 0x3ff);
 					io_FormatTextBuffer(buf, 0x11a5, *(unsigned short*) cut_CombatDefenderEntity, ent);
 					d2_ShowMessageBox(buf, 0);
-					cur = fcn_00502cd0(*(int*) (ent + 0x5d), 2, 6, 0, 0x2a);
+					cur = gm_QueryEntities(*(int*) (ent + 0x5d), 2, 6, 0, 0x2a);
 					if (cur == 0) {
-						cur = fcn_00502cd0(*(int*) (ent + 0x5d), 2, 6, 0, 0x116);
+						cur = gm_QueryEntities(*(int*) (ent + 0x5d), 2, 6, 0, 0x116);
 					}
 					pay = gm_AccumulateTyped2(g_772e98);
 					if (pay >= 0x9c400) {
@@ -435,7 +435,7 @@ reduce:
 					io_FormatTextBuffer(buf, (int) "$Z%T$A", sum);
 					cm_RequestMoveCredits(*(int*) (cut_CombatDefenderEntity + 4), *(int*) (g_772e98 + 4), gm_ActiveTownIndex, sum);
 					if (cur != 0 && rec != 0) {
-						p = fcn_00502cd0(*(int*) (cur + 0x14), 1, 5);
+						p = gm_QueryEntities(*(int*) (cur + 0x14), 1, 5);
 						while (p != 0) {
 							qlo = cut_RandMod(0x14) + 0x50;
 							qhi = 0;

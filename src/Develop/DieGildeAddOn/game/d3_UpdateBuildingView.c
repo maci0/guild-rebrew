@@ -21,7 +21,7 @@ extern float g_67a964;
 
 int __cdecl gm_GetSeason(char*);
 int __cdecl gm_GetBuildingTypeCategory(int);
-unsigned short* __cdecl fcn_00502cd0(int, int, ...);
+unsigned short* __cdecl gm_QueryEntities(int, int, ...);
 void __cdecl d3_SetInteriorLightingDefaults(void);
 void __cdecl d3_SetExteriorLightingDefaults(void);
 char* __cdecl d3_FindSceneObject(char*, int, char*, char*);
@@ -58,7 +58,7 @@ void __cdecl d3_UpdateBuildingView(unsigned char* building, int queryId)
 	mode = gm_GetSeason(&(*(char*) &gm_GameTime));
 	gm_GetBuildingTypeCategory(*building);
 	rec = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*building];
-	entity = (unsigned char*) fcn_00502cd0(*(int*) (building + 0x5d), 1, 0, queryId);
+	entity = (unsigned char*) gm_QueryEntities(*(int*) (building + 0x5d), 1, 0, queryId);
 	if (entity != 0 && *(unsigned short*) entity != 0xfd) {
 		type = ((signed char*) init_SceneContextIndices)[*(unsigned short*) entity];
 		g_7f3b24 = (char*) entity;
@@ -150,7 +150,7 @@ void __cdecl d3_UpdateBuildingView(unsigned char* building, int queryId)
 		}
 		p = (unsigned char**) ((char*) p + 0x21c);
 	} while ((int) p < 0x85a224);
-	p = (unsigned char**) fcn_00502cd0(0, 2, 7, 4, 0x1d);
+	p = (unsigned char**) gm_QueryEntities(0, 2, 7, 4, 0x1d);
 	while (p != 0) {
 		obj = (unsigned char*) *(void**) ((char*) p + 0x3b);
 		if (*(int*) (obj + 0x88) == d3_ActiveScene && *(int*) (obj + 0x2c) == *(int*) (building + 1)) {

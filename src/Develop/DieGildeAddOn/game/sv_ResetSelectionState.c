@@ -1,6 +1,6 @@
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
-void* __cdecl fcn_00502cd0(int, int, ...);
+void* __cdecl gm_QueryEntities(int, int, ...);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char* d2_VisitedBuilding; extern unsigned char* d2_InteriorBuilding; extern int* d2_SelectedItem;
 extern char* d2_SelectedBuilding; extern char* d3_FocusedEntityObject; extern char g_7746f4;
@@ -31,7 +31,7 @@ void __cdecl sv_ResetSelectionState(void)
 		return;
 	}
 	g_7746f4 = 0;
-	entity = fcn_00502cd0(*(int*) ((char*) entity + 0x5d), 1, 5);
+	entity = gm_QueryEntities(*(int*) ((char*) entity + 0x5d), 1, 5);
 	if (entity == 0) {
 		return;
 	}

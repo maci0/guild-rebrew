@@ -3,7 +3,7 @@ extern unsigned char* lpGebaeudePROT;
 extern unsigned char gm_ActiveTownIndex;
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
-unsigned short* __cdecl fcn_00502cd0(int, int, ...);
+unsigned short* __cdecl gm_QueryEntities(int, int, ...);
 char* __cdecl gm_FindRecordById(unsigned int);
 char* __cdecl gm_SearchTable67(unsigned int);
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -48,7 +48,7 @@ int __cdecl ai_StartBuyObjekt(int actionKind, int unused, int argCount, char* it
 		if (kind != 2 && kind != 6) {
 			goto done;
 		}
-		if (fcn_00502cd0(*(int*) (rec + 0x14), 1, 0, *(unsigned int*) (itemCmd + 4)) != 0) {
+		if (gm_QueryEntities(*(int*) (rec + 0x14), 1, 0, *(unsigned int*) (itemCmd + 4)) != 0) {
 			goto fail;
 		}
 		ent = (unsigned char*) gm_SearchTable67(*(unsigned int*) (rec + 6));
@@ -75,12 +75,12 @@ int __cdecl ai_StartBuyObjekt(int actionKind, int unused, int argCount, char* it
 			goto fail;
 		}
 		if (*(unsigned short*) (tbl + i * 4 + 0xa3) != 0) {
-			if (fcn_00502cd0(*(int*) (rec + 0x14), 1, 0, (unsigned int) *(unsigned short*) (tbl + i * 4 + 0xa3)) == 0) {
+			if (gm_QueryEntities(*(int*) (rec + 0x14), 1, 0, (unsigned int) *(unsigned short*) (tbl + i * 4 + 0xa3)) == 0) {
 				goto fail;
 			}
 		}
 		if (*(unsigned short*) (tbl + i * 4 + 0xa5) != 0) {
-			if (fcn_00502cd0(*(int*) (rec + 0x14), 1, 0, (unsigned int) *(unsigned short*) (tbl + i * 4 + 0xa5)) == 0) {
+			if (gm_QueryEntities(*(int*) (rec + 0x14), 1, 0, (unsigned int) *(unsigned short*) (tbl + i * 4 + 0xa5)) == 0) {
 				goto fail;
 			}
 		}
@@ -89,7 +89,7 @@ int __cdecl ai_StartBuyObjekt(int actionKind, int unused, int argCount, char* it
 		if (ent == 0) {
 			goto fail;
 		}
-		if (fcn_00502cd0(*(int*) (ent + 0x5d), 1, 0, *(unsigned int*) (itemCmd + 4)) != 0) {
+		if (gm_QueryEntities(*(int*) (ent + 0x5d), 1, 0, *(unsigned int*) (itemCmd + 4)) != 0) {
 			goto fail;
 		}
 		tbl = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned int) *ent];
@@ -102,12 +102,12 @@ int __cdecl ai_StartBuyObjekt(int actionKind, int unused, int argCount, char* it
 			goto fail;
 		}
 		if (*(unsigned short*) (tbl + i * 4 + 0xa3) != 0) {
-			if (fcn_00502cd0(*(int*) (ent + 0x5d), 1, 0, (unsigned int) *(unsigned short*) (tbl + i * 4 + 0xa3)) == 0) {
+			if (gm_QueryEntities(*(int*) (ent + 0x5d), 1, 0, (unsigned int) *(unsigned short*) (tbl + i * 4 + 0xa3)) == 0) {
 				goto fail;
 			}
 		}
 		if (*(unsigned short*) (tbl + i * 4 + 0xa5) != 0) {
-			if (fcn_00502cd0(*(int*) (ent + 0x5d), 1, 0, (unsigned int) *(unsigned short*) (tbl + i * 4 + 0xa5)) == 0) {
+			if (gm_QueryEntities(*(int*) (ent + 0x5d), 1, 0, (unsigned int) *(unsigned short*) (tbl + i * 4 + 0xa5)) == 0) {
 				goto fail;
 			}
 		}

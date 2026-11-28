@@ -15,7 +15,7 @@ extern float g_1009b94;
 extern float g_1009b9c;
 
 int __cdecl gm_StartFilteredEntitySearch(int a0, int a1, int a2);
-int __cdecl fcn_00502cd0(int a0, int a1, int a2, int a3, int a4);
+int __cdecl gm_QueryEntities(int a0, int a1, int a2, int a3, int a4);
 void __cdecl cm_BeginPacketFieldDelta(int a0, int a1);
 void __cdecl cm_AppendPacketFieldValue(int a0, int a1, int a2, char* a3);
 int __cdecl cm_RequestChangeAttribute(void);
@@ -44,7 +44,7 @@ int __cdecl ai_RunAblassKaufen(int entityArg, char* purchaseReq, char* commandAr
 	if (*(unsigned short*) (rec + 0x27) == 0xffff) {
 		return 0;
 	}
-	itemMatch = fcn_00502cd0(*(int*) (rec + 0x5d), 2, 6, 0, 0xf2);
+	itemMatch = gm_QueryEntities(*(int*) (rec + 0x5d), 2, 6, 0, 0xf2);
 	cmd = *(unsigned char*) commandArg;
 	if (cmd == 0x12) {
 		n = *(int*) (purchaseReq + 0x10);

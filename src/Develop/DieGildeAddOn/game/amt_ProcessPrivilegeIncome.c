@@ -41,7 +41,7 @@ extern int gm_QueuedCommandCount;
 int __cdecl amt_GetRoleTemplate(int idx, Rec18* out);
 int __cdecl gm_GetLawEntry(int idx, void* dst);
 char* __cdecl gm_GetGuildHall(int n);
-char* __cdecl fcn_00502cd0(int, int, int, int, int);
+char* __cdecl gm_QueryEntities(int, int, int, int, int);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl cm_RequestModifyHealth(int, int);
@@ -93,7 +93,7 @@ int __cdecl amt_ProcessPrivilegeIncome(unsigned short id, int pay, PRIVILEGE_INC
 			if (w == 0) {
 				return 0;
 			}
-			if (fcn_00502cd0(*(int*) (w + 0x5d), 2, 6, 0, 0x115) == 0) {
+			if (gm_QueryEntities(*(int*) (w + 0x5d), 2, 6, 0, 0x115) == 0) {
 				return 0;
 			}
 			if (out->va != 0) {

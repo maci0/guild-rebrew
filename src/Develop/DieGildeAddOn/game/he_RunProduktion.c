@@ -13,7 +13,7 @@ void* __cdecl gm_SearchTable67(int id);
 int __cdecl gm_GetMsgField(char* objekt, char* eintrag);
 void __cdecl io_FormatTextBuffer(char* text, int format, ...);
 int __cdecl cm_GetCommandStatus(int id);
-unsigned short* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
+unsigned short* __cdecl gm_QueryEntities(int container_id, int arg_count, ...);
 char* __cdecl gm_FindBuildingPrimarySlot(char* objekt);
 char* __cdecl gm_FindBuildingOwner(int objekt);
 int __cdecl gm_eval_SlotVoll(char* objekt, int ware, int menge);
@@ -106,7 +106,7 @@ void __cdecl he_RunProduktion(char* e)
                 }
                 gm_ResolveEntityById(0, (void**) &lager, 0, *(int*) (e + 0xc0));
                 haushalt = gm_FindBuildingPrimarySlot(gebaeude);
-                if (fcn_00502cd0(*(int*) (lager + 0x14), 1, 0, *(unsigned short*) (e + 0xac)) != 0 &&
+                if (gm_QueryEntities(*(int*) (lager + 0x14), 1, 0, *(unsigned short*) (e + 0xac)) != 0 &&
                     !gm_eval_SlotVoll(lager, *(unsigned short*) (e + 0xac), 1)) {
                     io_FormatTextBuffer(text, 0x1bb3, gebaeude, *(unsigned short*) (e + 0xac) * 2 + 0x9a8);
                     strcpy(bild, "_NACHRICHTEN_HS_04");
@@ -231,7 +231,7 @@ warten:
             (*(short*) lager != 0x2a && *(short*) lager != 0x116)) {
             break;
         }
-        if (fcn_00502cd0(*(int*) (lager + 0x14), 1, 0, *(unsigned short*) (e + 0xac)) != 0 &&
+        if (gm_QueryEntities(*(int*) (lager + 0x14), 1, 0, *(unsigned short*) (e + 0xac)) != 0 &&
             !gm_eval_SlotVoll(lager, *(unsigned short*) (e + 0xac), 1)) {
             io_FormatTextBuffer(text, 0x1bb3, gebaeude, *(unsigned short*) (e + 0xac) * 2 + 0x9a8);
             strcpy(bild, "_NACHRICHTEN_HS_04");
@@ -242,7 +242,7 @@ warten:
             rohstoff = (unsigned short*) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*(unsigned short*) (e + 0xac)]) + 0x2e);
             for (i = 0; i < 4; ++i, ++rohstoff) {
                 if (*rohstoff != 0) {
-                    eintrag = fcn_00502cd0(*(int*) (lager + 0x14), 1, 0, *rohstoff);
+                    eintrag = gm_QueryEntities(*(int*) (lager + 0x14), 1, 0, *rohstoff);
                     if (eintrag == 0 || gm_GetMsgField(lager, (char*) eintrag) < rohstoff[-4]) {
                         io_FormatTextBuffer(text, 0x1bb2, gebaeude, *(unsigned short*) (e + 0xac) * 2 + 0x9a8);
                         if (*typ == 7) strcpy(bild, "_NACHRICHTEN_ROHSTOFFMANGEL_HS_01");
@@ -293,7 +293,7 @@ warten:
                     }
                 }
                 if (*(int*) (e + 0xc4) == -1 &&
-                    fcn_00502cd0(*(int*) (lager + 0x14), 1, 0, *(unsigned short*) (e + 0xac)) == 0) {
+                    gm_QueryEntities(*(int*) (lager + 0x14), 1, 0, *(unsigned short*) (e + 0xac)) == 0) {
                     *(int*) (e + 0xc4) = cm_SendSellObjekt(*(int*) (lager + 2), -1, *(unsigned short*) (e + 0xac), 0, gm_ActiveTownIndex, 0);
                 }
 lager_done:

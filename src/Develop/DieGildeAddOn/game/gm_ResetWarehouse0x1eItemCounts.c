@@ -1,5 +1,5 @@
 unsigned short *__cdecl gm_StartFilteredEntitySearch(int, ...);
-unsigned short *__cdecl fcn_00502cd0(int, int, ...);
+unsigned short *__cdecl gm_QueryEntities(int, int, ...);
 void *__cdecl gm_FindNextFilteredEntity(void);
 void *__cdecl gm_NextEntityQueryMatch(void);
 
@@ -12,9 +12,9 @@ void __cdecl gm_ResetWarehouse0x1eItemCounts(void)
     entity = (char *)gm_StartFilteredEntitySearch(1, 0, 0x1e);
     while (entity != 0) {
         state = 2;
-        entity = (char *)fcn_00502cd0(*(int *)(entity + 0x5d), 1, 0, 0xff);
+        entity = (char *)gm_QueryEntities(*(int *)(entity + 0x5d), 1, 0, 0xff);
         if (entity != 0) {
-            entity = (char *)fcn_00502cd0(*(int *)(entity + 0x14), 1, 5);
+            entity = (char *)gm_QueryEntities(*(int *)(entity + 0x14), 1, 5);
             while (entity != 0) {
                 if (*(int *)(entity + 0xe) != state) {
                     *(int *)(entity + 0xe) = state;

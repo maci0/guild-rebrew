@@ -47,7 +47,7 @@ void __cdecl gm_InitCivicBuildings(int);
 void __cdecl cm_DistributeStartingWares(int, int, int*);
 void __cdecl gm_InitStartingEntitiesAndRelations(void);
 Player* __cdecl gm_GetGuildHall(int);
-Unit* __cdecl fcn_00502cd0(int, int, int, int, int);
+Unit* __cdecl gm_QueryEntities(int, int, int, int, int);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 
 int __cdecl gm_InitCityAndTradeState(int variant)
@@ -124,7 +124,7 @@ int __cdecl gm_InitCityAndTradeState(int variant)
 	gm_InitStartingEntitiesAndRelations();
 	pl = gm_GetGuildHall(1);
 	if (pl != 0) {
-		u = fcn_00502cd0(pl->home, 2, 6, 0, 0x115);
+		u = gm_QueryEntities(pl->home, 2, 6, 0, 0x115);
 		if (u != 0) {
 			cm_RequestTransferCurrencyNoKill(u->id, -1, (*(char*)&gm_ActiveTownIndex), 0x75300);
 		}

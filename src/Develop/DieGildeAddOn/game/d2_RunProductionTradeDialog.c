@@ -24,7 +24,7 @@ void __cdecl d2_ResetBuildingUiSlots(void);
 void __cdecl d2_DrawPanelFrame(int, int, int);
 int __cdecl d2_GetFormWindow(int, int, int, int*, int*, int*);
 void __cdecl d2_CreateWindowScrollbar(int, int, int, int);
-int __cdecl fcn_00502cd0(int, int, ...);
+int __cdecl gm_QueryEntities(int, int, ...);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl he_fn_Handlung(void);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
@@ -110,13 +110,13 @@ int __cdecl d2_RunProductionTradeDialog(char* building)
 	*(unsigned int*) &((D2_CONTROL_TL*) d2_Controls)[item].font = 0x54;
 	do {
 		d2_SetForm(h, 2);
-		t = fcn_00502cd0(*(unsigned int*) (building + 0x5d), 2, 6, 0, 0xff);
+		t = gm_QueryEntities(*(unsigned int*) (building + 0x5d), 2, 6, 0, 0xff);
 		if (!t)
 			return 0;
-		q = fcn_00502cd0(*(unsigned int*) (building + 0x5d), 1, 0, 0xfe);
+		q = gm_QueryEntities(*(unsigned int*) (building + 0x5d), 1, 0, 0xfe);
 		if (!q)
 			return 0;
-		r = fcn_00502cd0(*(unsigned int*) (building + 0x5d), 2, 6, 0, 0x2a);
+		r = gm_QueryEntities(*(unsigned int*) (building + 0x5d), 2, 6, 0, 0x2a);
 		if (!r)
 			return 0;
 		if ((d2_DialogButtonAction != -1) && (g_100f884 == h)) {
@@ -214,7 +214,7 @@ located:
 				d3_EndCameraAndUiMode();
 			}
 		}
-		m = fcn_00502cd0(*(unsigned int*) (t + 0x14), 1, 4, 0x17);
+		m = gm_QueryEntities(*(unsigned int*) (t + 0x14), 1, 4, 0x17);
 		if (m) {
 			acc = (int*) (0x779160 + count * 0x58);
 			do {
@@ -238,12 +238,12 @@ located:
 		if (count > 0) {
 			acc = (int*) 0x779160;
 			for (i = count; i > 0; i--) {
-				m = fcn_00502cd0(*(unsigned int*) (r + 0x14), 1, 0, *acc);
+				m = gm_QueryEntities(*(unsigned int*) (r + 0x14), 1, 0, *acc);
 				if (m)
 					acc[0x14] = *(int*) (m + 0xe);
 				else
 					acc[0x14] = 0;
-				m = fcn_00502cd0(*(unsigned int*) (q + 0x14), 1, 0, *acc);
+				m = gm_QueryEntities(*(unsigned int*) (q + 0x14), 1, 0, *acc);
 				if (m)
 					acc[0x15] = gm_GetMsgField(q, m);
 				else

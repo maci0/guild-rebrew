@@ -3,7 +3,7 @@
 #include "Develop/DieGildeAddOn/game/goods_plan.h"
 extern int ai_MeisterDebugState;
 extern int g_100dc3c;
-int __cdecl fcn_00502cd0(int, int, int, int, int);
+int __cdecl gm_QueryEntities(int, int, int, int, int);
 void __cdecl ai_CollectBuildingGoodsPlan(int, int, int);
 void __cdecl ai_TryHireWorker(int);
 void __cdecl gm_TryAutoUpgradeBuildingSlots(int, int, int);
@@ -60,11 +60,11 @@ void __cdecl ai_PlanMasterProduction(int entityRecord)
 	short mode;
 
 	found = 0;
-	rec0 = (void *) fcn_00502cd0(*(int *) (*(int *) (entityRecord + 0x16c) + 0x5d), 2, 6, 0, 0xff);
+	rec0 = (void *) gm_QueryEntities(*(int *) (*(int *) (entityRecord + 0x16c) + 0x5d), 2, 6, 0, 0xff);
 	if (rec0 == 0) {
 		return;
 	}
-	rec1 = (void *) fcn_00502cd0(*(int *) (*(int *) (entityRecord + 0x16c) + 0x5d), 2, 6, 0, 0x2a);
+	rec1 = (void *) gm_QueryEntities(*(int *) (*(int *) (entityRecord + 0x16c) + 0x5d), 2, 6, 0, 0x2a);
 	if (rec1 == 0) {
 		return;
 	}

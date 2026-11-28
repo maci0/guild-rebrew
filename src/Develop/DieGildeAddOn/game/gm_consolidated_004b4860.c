@@ -9,7 +9,7 @@ extern unsigned char* lpGebaeudePROT;
 int __cdecl gm_JobToBuildingCategory(int);
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned char* __cdecl gm_FindNextFilteredEntity(void);
-void* __cdecl fcn_00502cd0(int, int, int, int, int);
+void* __cdecl gm_QueryEntities(int, int, int, int, int);
 
 /* ADDRESS: GOLD 0x004b46f0 */
 /* ADDRESS: GOLDTL 0x004b4860 */
@@ -51,7 +51,7 @@ int __cdecl gm_HasThreeFullyEquippedBuildings(unsigned short* a1)
 			v = ((BUILDING_PROTOTYPE*)row)->components[j];
 			if (v == 0)
 				break;
-			if (fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, v & 0x7fff) == 0) {
+			if (gm_QueryEntities(*(int*) (e + 0x5d), 2, 6, 0, v & 0x7fff) == 0) {
 				ok = 0;
 				break;
 			}

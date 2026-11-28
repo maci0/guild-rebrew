@@ -88,7 +88,7 @@ int __cdecl cm_SendCopyEntityData(Packet*);
 int __cdecl main_RunFrameLoop(void*, int);
 char* __cdecl he_fn_Handlung(void);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
-int __cdecl fcn_00502cd0(int, int, int, int, int);
+int __cdecl gm_QueryEntities(int, int, int, int, int);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -149,19 +149,19 @@ void __cdecl d2_RunWorkerTrainingDialog(unsigned char* obj)
 	}
 	*(int*) (d2_CurrentWindow + 0x3a4) = 0;
 	start = gm_GameTicks;
-	if (fcn_00502cd0(*(int*) (obj + 0x5d), 2, 6, 0, 0x35) != 0) {
+	if (gm_QueryEntities(*(int*) (obj + 0x5d), 2, 6, 0, 0x35) != 0) {
 		btnA = 1;
 	}
-	if (fcn_00502cd0(*(int*) (obj + 0x5d), 2, 6, 0, 0x34) != 0) {
+	if (gm_QueryEntities(*(int*) (obj + 0x5d), 2, 6, 0, 0x34) != 0) {
 		btnB = 1;
 	}
 	if (t->category == 4) {
-		if (fcn_00502cd0(*(int*) (obj + 0x5d), 2, 6, 0, 0x5d) != 0) {
+		if (gm_QueryEntities(*(int*) (obj + 0x5d), 2, 6, 0, 0x5d) != 0) {
 			btnC = 1;
 		}
 	}
 	else if (t->category == 0x10) {
-		if (fcn_00502cd0(*(int*) (obj + 0x5d), 2, 6, 0, 0x5e) != 0) {
+		if (gm_QueryEntities(*(int*) (obj + 0x5d), 2, 6, 0, 0x5e) != 0) {
 			btnC = 1;
 		}
 	} else { btnC = 1; }

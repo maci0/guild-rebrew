@@ -31,7 +31,7 @@ extern int g_99f724;
 
 void __cdecl gm_GetLawEntry(int kind, Offer* o);
 char* __cdecl gm_GetGuildHall(int n);
-char* __cdecl fcn_00502cd0(int obj, int mode, ...);
+char* __cdecl gm_QueryEntities(int obj, int mode, ...);
 void __cdecl cm_RequestTransferCurrencyNoKill(int a, int b, int c, int d);
 
 int __cdecl gm_ApplySteuerLaw0aToSlots(unsigned short id, Slots* slots, unsigned char flags)
@@ -64,7 +64,7 @@ int __cdecl gm_ApplySteuerLaw0aToSlots(unsigned short id, Slots* slots, unsigned
 		slots->amount[i] = offer.amount;
 		if (flags & 1) {
 			treasury = gm_GetGuildHall(1);
-			treasury = fcn_00502cd0(*(int*) (treasury + 0x5d), 2, 6, 0, 0x115);
+			treasury = gm_QueryEntities(*(int*) (treasury + 0x5d), 2, 6, 0, 0x115);
 			cm_RequestTransferCurrencyNoKill(*(int*) (treasury + 2), (*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id].entity_id), 0, tax_amount);
 			gm_QueuedCommandCount++;
 		}

@@ -17,7 +17,7 @@ typedef struct Msg {
 // SIZE 0x18
 
 int __cdecl gm_StartFilteredEntitySearch(int, int, int, int, int);
-char* __cdecl fcn_00502cd0(int, int, int, int, int);
+char* __cdecl gm_QueryEntities(int, int, int, int, int);
 int __cdecl ai_SelectBestMethod(int, int, int, void*, void*);
 int __cdecl gm_LookupSlot170ByKey(int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
@@ -49,7 +49,7 @@ int __cdecl ai_StartCannonTower(int a0, char* a1, int a2, char* firstAction, cha
 	if (e == 0) {
 		return 0;
 	}
-	if (fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0x256) == 0) {
+	if (gm_QueryEntities(*(int*) (e + 0x5d), 2, 6, 0, 0x256) == 0) {
 		m1.kind = 2;
 		m1.a = 0x256;
 		m1.b = 1;

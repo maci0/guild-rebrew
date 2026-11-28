@@ -43,7 +43,7 @@ extern char str_empty[];
 extern int g_14a79c0[];
 extern char g_6aac70[];
 
-unsigned short* __cdecl fcn_00502cd0(int, int, int, ...);
+unsigned short* __cdecl gm_QueryEntities(int, int, int, ...);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 void __cdecl d2_SetForm(int, int);
 int __cdecl d2_AddWindowField(int, int, int, int, int);
@@ -75,7 +75,7 @@ int __cdecl d2_PopulateInventoryGrid(int list, Row* rows, int a3, int a4, char s
 
 	result = -1;
 	changed = 0;
-	p = fcn_00502cd0(list, 1, 4, 9);
+	p = gm_QueryEntities(list, 1, 4, 9);
 	while (p != 0) {
 		for (i = 0, key = *p; i < 16; i++) {
 			if (rows[i].key == key) {
@@ -119,7 +119,7 @@ int __cdecl d2_PopulateInventoryGrid(int list, Row* rows, int a3, int a4, char s
 		}
 		ent = d2_GetControlValue(r->icon);
 		r->ent = ent;
-		q = (char*) fcn_00502cd0(list, 1, 0, r->key);
+		q = (char*) gm_QueryEntities(list, 1, 0, r->key);
 		if (q != 0 && gm_AmountToTradeUnits(*(int*) (q + 0xe), r->key) != 0) {
 			amount = gm_AmountToTradeUnits(*(int*) (q + 0xe), r->key);
 			d2_SetElementValue(r->icon, 0, amount, ent);

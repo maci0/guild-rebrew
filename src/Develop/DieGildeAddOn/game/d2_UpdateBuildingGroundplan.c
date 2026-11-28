@@ -58,7 +58,7 @@ int __cdecl d2_LockSurface(void* s);
 void __cdecl d2_ReadSurfacePixel(int x, int y, void* s, unsigned char* dst);
 int __cdecl d2_CompareRgb(char* a1, char* a2);
 int __cdecl d2_UnlockSurface(void* o);
-unsigned short* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
+unsigned short* __cdecl gm_QueryEntities(int container_id, int arg_count, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl d2_DispatchTutorialEvent(int a, int b, int c, int d);
 int __cdecl gm_GetEntityUiFlags(int a, int b, void* c, int d);
@@ -153,7 +153,7 @@ void __cdecl d2_UpdateBuildingGroundplan(unsigned int inputFlags)
 						v8 = 0;
 						v9 = 0;
 						if (bp->category == 2) {
-							v8 = fcn_00502cd0(*(int*) (d2_VisitedBuilding + 0x5d),
+							v8 = gm_QueryEntities(*(int*) (d2_VisitedBuilding + 0x5d),
 								1, 4, 2);
 							while (v8) {
 								if (*v8 != 0xfd) {
@@ -171,7 +171,7 @@ void __cdecl d2_UpdateBuildingGroundplan(unsigned int inputFlags)
 										|| ((OBJECT_PROTOTYPE*) lpObjektePROT)[id].kind == 6)
 										&& id != 0xfd) {
 										if (v9 == v6) {
-											v8 = fcn_00502cd0(
+											v8 = gm_QueryEntities(
 												*(int*) (d2_VisitedBuilding + 0x5d),
 												1, 0, id);
 											break;
@@ -209,7 +209,7 @@ label_527db2:
 									|| ((OBJECT_PROTOTYPE*) lpObjektePROT)[id].kind == 6)
 									&& id != 0xfd) {
 									if (v9 == v6) {
-										v8 = fcn_00502cd0(
+										v8 = gm_QueryEntities(
 											*(int*) (d2_InteriorBuilding + 0x5d),
 											1, 0, id);
 										break;

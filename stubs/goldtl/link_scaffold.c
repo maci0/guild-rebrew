@@ -44,7 +44,6 @@ int __cdecl fcn_00472380(void) { return 0; }
 int __cdecl fcn_00476850(void) { return 0; }
 int __cdecl fcn_00478cb0(void) { return 0; }
 int __cdecl fcn_0047d220(void) { return 0; }
-int __cdecl fcn_00498f40(void) { return 0; }
 int __cdecl fcn_004bb6c0(void) { return 0; }
 int __cdecl fcn_004c6230(void) { return 0; }
 int __cdecl fcn_004f08d0(void) { return 0; }

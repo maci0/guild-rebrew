@@ -56,7 +56,7 @@ extern char* lpObjektePROT;
 extern char* lpGebaeudePROT;
 extern float g_664124;
 
-char* __cdecl fcn_00502cd0(int, int, int, ...);
+char* __cdecl gm_QueryEntities(int, int, int, ...);
 char* __cdecl gm_NextEntityQueryMatch(void);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
@@ -84,7 +84,7 @@ void __cdecl ai_CollectBuildingGoodsPlan(char* entity, char* prod, char* craft)
 	unsigned char kind;
 
 	ai_ProductionGoodsCount = 0;
-	goodsSlot = fcn_00502cd0(*(int*) (prod + 0x14), 1, 5);
+	goodsSlot = gm_QueryEntities(*(int*) (prod + 0x14), 1, 5);
 	while (goodsSlot != 0) {
 		if (*(int*) (goodsSlot + 0xe)  > 1 && ai_ProductionGoodsCount < 0x20) {
 			ai_ProductionGoodsPlans[ai_ProductionGoodsCount].goods_id = *(unsigned short*) goodsSlot;
@@ -238,7 +238,7 @@ void __cdecl ai_CollectBuildingGoodsPlan(char* entity, char* prod, char* craft)
 	}
 
 	for (i = 0; i < ai_ProductionGoodsCount; i++) {
-		goodsSlot = fcn_00502cd0(*(int*) (craft + 0x14), 1, 0, ai_ProductionGoodsPlans[i].goods_id);
+		goodsSlot = gm_QueryEntities(*(int*) (craft + 0x14), 1, 0, ai_ProductionGoodsPlans[i].goods_id);
 		if (goodsSlot == 0) {
 			ai_ProductionGoodsPlans[i].unk_3c = 0;
 		} else {
@@ -249,7 +249,7 @@ void __cdecl ai_CollectBuildingGoodsPlan(char* entity, char* prod, char* craft)
 	}
 
 	for (i = 0; i < ai_ResourceCount; i++) {
-		goodsSlot = fcn_00502cd0(*(int*) (craft + 0x14), 1, 0, ai_ResourceRequests[i].goods_id);
+		goodsSlot = gm_QueryEntities(*(int*) (craft + 0x14), 1, 0, ai_ResourceRequests[i].goods_id);
 		if (goodsSlot == 0) {
 			ai_ResourceRequests[i].stock = 0;
 		} else {

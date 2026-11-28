@@ -16,7 +16,7 @@ int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl gm_CollectTradeItemsByKind(int);
-int __cdecl fcn_00502cd0(int, int, ...);
+int __cdecl gm_QueryEntities(int, int, ...);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl fcn_0064d41a(char*, const char*, ...);
@@ -49,12 +49,12 @@ unsigned int __cdecl d2_ShowRoutingChooseGoodDialog(char* building, int a1, unsi
 	d2_SetForm(a2, 2);
 	win = a2;
 	if ((((BUILDING_PROTOTYPE*)src)->category) == 0x1c) {
-		q = (char*) fcn_00502cd0(*(int*) (building + 0x5d), 2, 0, 0x1dc, 6);
+		q = (char*) gm_QueryEntities(*(int*) (building + 0x5d), 2, 0, 0x1dc, 6);
 		n = 0;
 		if (!q) {
 			goto tail;
 		}
-		e = (char*) fcn_00502cd0(*(int*) (q + 0x14), 1, 5);
+		e = (char*) gm_QueryEntities(*(int*) (q + 0x14), 1, 5);
 		if (!e) {
 			goto tail;
 		}
@@ -72,12 +72,12 @@ unsigned int __cdecl d2_ShowRoutingChooseGoodDialog(char* building, int a1, unsi
 			e = (char*) gm_NextEntityQueryMatch();
 		} while (e);
 	} else if ((((BUILDING_PROTOTYPE*)src)->category) == 9) {
-		q = (char*) fcn_00502cd0(*(int*) (building + 0x5d), 2, 0, 0x116, 6);
+		q = (char*) gm_QueryEntities(*(int*) (building + 0x5d), 2, 0, 0x116, 6);
 		n = 0;
 		if (!q) {
 			goto tail;
 		}
-		e = (char*) fcn_00502cd0(*(int*) (q + 0x14), 1, 5);
+		e = (char*) gm_QueryEntities(*(int*) (q + 0x14), 1, 5);
 		if (!e) {
 			goto tail;
 		}
@@ -96,10 +96,10 @@ unsigned int __cdecl d2_ShowRoutingChooseGoodDialog(char* building, int a1, unsi
 		} while (e);
 	} else {
 		gm_CollectTradeItemsByKind((int) building);
-		q = (char*) fcn_00502cd0(*(int*) (building + 0x5d), 2, 0, 0xff, 6);
+		q = (char*) gm_QueryEntities(*(int*) (building + 0x5d), 2, 0, 0xff, 6);
 		n = 0;
 		for (i = 0; i < g_7f3ee4; i++) {
-			e = (char*) fcn_00502cd0(*(int*) (q + 0x14), 1, 0, g_90d520[n]);
+			e = (char*) gm_QueryEntities(*(int*) (q + 0x14), 1, 0, g_90d520[n]);
 			if (e && *(int*) (e + 0xe) > 1) {
 				t = d2_AddElementToWindow((n % 4) * 0x40, (n / 4) * 0x40,
 					g_90d520[n] + 0xdf, d2_CurrentWindowId);

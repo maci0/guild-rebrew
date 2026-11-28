@@ -25,7 +25,7 @@ extern char gm_EntitySlotTable[];
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int count, ...);
 int __cdecl gm_CheckEntityType(unsigned char* e);
-char* __cdecl fcn_00502cd0(int a, int b, int c, int d);
+char* __cdecl gm_QueryEntities(int a, int b, int c, int d);
 int __cdecl cm_SendSellObjekt(int a, int b, int c, int d, char e, int f);
 void __cdecl cm_RequestChangeBits(int a, int b, int c, int d, int e);
 void __cdecl io_FormatTextBuffer(void* out, int id, ...);
@@ -57,7 +57,7 @@ void __cdecl he_RunSellGebaeudeObjekt(char* o)
 	case 1:
 		e = gm_StartFilteredEntitySearch(1, 1, *(int*) (o + 0xac));
 		if (e != 0) {
-			p = fcn_00502cd0(*(int*) (e + 0x5d), 1, 0, *(unsigned short*) (o + 0xb0));
+			p = gm_QueryEntities(*(int*) (e + 0x5d), 1, 0, *(unsigned short*) (o + 0xb0));
 			if (p != 0) {
 				race = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*e];
 				io_FormatTextBuffer(buf, 0x1c2b, e, *(unsigned short*) (o + 0xb0) * 2 + 0x9a8);
@@ -73,7 +73,7 @@ void __cdecl he_RunSellGebaeudeObjekt(char* o)
 			if (gm_CheckEntityType(e)) {
 				Req m;
 
-				p = fcn_00502cd0(*(int*) (e + 0x5d), 1, 4, 2);
+				p = gm_QueryEntities(*(int*) (e + 0x5d), 1, 4, 2);
 				*(pos14_7f4c00*) &m = gm_GameTime;
 				gm_AddTime((pos14_7f4c00*) &m, 0, 0, 1);
 				m.id = *(int*) (e + 1);

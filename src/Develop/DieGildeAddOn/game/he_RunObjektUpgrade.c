@@ -4,7 +4,7 @@ int __cdecl gm_ResolveEntityById();
 int __cdecl gm_GetElapsedMinutes(void*, void*);
 void __cdecl gm_ChangeObjektZustand(int, int);
 void __cdecl gm_AddTime(void*, int, int, int);
-void* __cdecl fcn_00502cd0(int, int, int, int, int);
+void* __cdecl gm_QueryEntities(int, int, int, int, int);
 int __cdecl gm_SearchTable67(int);
 int __cdecl gm_FindBuildingPrimarySlot(unsigned char*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
@@ -32,9 +32,9 @@ void __cdecl he_RunObjektUpgrade(char* e)
 	case 0:
 		msg = (int*) (e + 0x60);
 		i = gm_GetElapsedMinutes(msg, (void*) 0x7f4c00);
-		item = fcn_00502cd0(0, 2, 7, 1, *(int*) (e + 0xac));
+		item = gm_QueryEntities(0, 2, 7, 1, *(int*) (e + 0xac));
 		if (item == 0) {
-			item = fcn_00502cd0(0, 2, 7, 1, *(int*) (e + 0xac));
+			item = gm_QueryEntities(0, 2, 7, 1, *(int*) (e + 0xac));
 			he_FreeAction(e);
 			return;
 		}

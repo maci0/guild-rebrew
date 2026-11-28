@@ -8,7 +8,7 @@ extern unsigned short __cdecl gm_RandomMod(int);
 /* Night-watchman action 0x73 START: due and start are now, picks a random id offset and
  * the announce hour from the table. */
 /* ADDRESS: GOLDTL 0x0056e8e0 */
-void __cdecl fcn_0056e8e0(char* a0)
+void __cdecl he_StartNightWatchmanAnnouncements(char* a0)
 {
 	*(pos14_7f4c00*) (a0 + 0x52) = gm_GameTime;
 	*(pos14_7f4c00*) (a0 + 0x44) = gm_GameTime;

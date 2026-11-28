@@ -6,7 +6,7 @@ extern float g_6652c8;
 extern float g_6652d0;
 extern float g_662960;
 
-int __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
+int __cdecl gm_QueryEntities(int a, int b, int c, int d, int e);
 
 void __cdecl gm_CalcArtillerySpread(char* p, float* o1, float* o2)
 {
@@ -15,15 +15,15 @@ void __cdecl gm_CalcArtillerySpread(char* p, float* o1, float* o2)
 
 	x = 0.02f;
 	y = 0.2f;
-	if (fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x25c)) {
+	if (gm_QueryEntities(*(int*) (p + 0x5d), 2, 6, 0, 0x25c)) {
 		x = 0.02f - 0.003f;
 		y = 0.17f;
 	}
-	if (fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x25f)) {
+	if (gm_QueryEntities(*(int*) (p + 0x5d), 2, 6, 0, 0x25f)) {
 		x -= g_6652d4;
 		y -= g_6652c8;
 	}
-	if (fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x260)) {
+	if (gm_QueryEntities(*(int*) (p + 0x5d), 2, 6, 0, 0x260)) {
 		x -= g_6652d0;
 		y -= g_662960;
 	}

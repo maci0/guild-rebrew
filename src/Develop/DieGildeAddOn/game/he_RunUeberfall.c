@@ -41,7 +41,7 @@ extern char* __cdecl he_StartHandlungSearch(int, int, int);
 extern char* __cdecl he_fn_Handlung(void);
 extern char* __cdecl gm_FindRecordById(int);
 extern int __cdecl gm_CalcEntityInventoryStats(char*, Stats*);
-extern char* __cdecl fcn_00502cd0(int, ...);
+extern char* __cdecl gm_QueryEntities(int, ...);
 extern char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 extern void* __cdecl cut_FindCutscene(int, int);
 extern int __cdecl gm_RandomMod(unsigned short);
@@ -239,7 +239,7 @@ label_56b858:
 					sel[count] = ent;
 					prev = *(int*) ((unsigned int) *(unsigned short*) (ent + 8) * 0x21c + (unsigned long)&gm_EntityIdField);
 					*(char*) (ent + 0xf0) = 1;
-					list[count] = fcn_00502cd0(0, 2, 7, 1, *(int*) (ent + 0xac));
+					list[count] = gm_QueryEntities(0, 2, 7, 1, *(int*) (ent + 0xac));
 					count++;
 				}
 			next:

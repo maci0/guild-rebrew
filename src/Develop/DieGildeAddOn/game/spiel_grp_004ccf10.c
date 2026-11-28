@@ -17,7 +17,7 @@ typedef struct {
 extern char* gm_CityEntity;
 
 int __cdecl fcn_00503fe0(int a, int b, int c);
-int __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
+int __cdecl gm_QueryEntities(int a, int b, int c, int d, int e);
 void __cdecl gm_HandleAllianceCommand(int a, int b, int c, int d);
 
 /* ADDRESS: GOLDTL 0x004ccf10 */
@@ -107,7 +107,7 @@ int __cdecl fcn_004cd090(CM_JOIN_LEAVE_ELECTION_CMD* s, char* out)
 		if (h == 0) {
 			return 1;
 		}
-		p = fcn_00502cd0(*(int*) (h + 0x5d), 2, 6, 0, 0x12d);
+		p = gm_QueryEntities(*(int*) (h + 0x5d), 2, 6, 0, 0x12d);
 		if (p == 0) {
 			return 1;
 		}
@@ -136,7 +136,7 @@ int __cdecl fcn_004cd090(CM_JOIN_LEAVE_ELECTION_CMD* s, char* out)
 		if (h == 0) {
 			return 1;
 		}
-		p = fcn_00502cd0(*(int*) (h + 0x5d), 2, 6, 0, 0x12d);
+		p = gm_QueryEntities(*(int*) (h + 0x5d), 2, 6, 0, 0x12d);
 		if (p == 0) {
 			return 1;
 		}
@@ -170,7 +170,7 @@ int __cdecl fcn_004cd090(CM_JOIN_LEAVE_ELECTION_CMD* s, char* out)
 				return 1;
 			}
 		}
-		p = fcn_00502cd0(*(int*) (h + 0x5d), 2, 6, 0, 0x12d);
+		p = gm_QueryEntities(*(int*) (h + 0x5d), 2, 6, 0, 0x12d);
 		if (p == 0) {
 			return 1;
 		}

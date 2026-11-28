@@ -31,7 +31,7 @@ extern int g_99f768;
 
 void __cdecl gm_GetLawEntry(int kind, Offer* o);
 char* __cdecl gm_GetGuildHall(int n);
-char* __cdecl fcn_00502cd0(int obj, int mode, ...);
+char* __cdecl gm_QueryEntities(int obj, int mode, ...);
 void __cdecl cm_RequestTransferCurrencyNoKill(int a, int b, char c, int d);
 int __cdecl gm_AccumulateTyped2(Obj* o);
 
@@ -48,7 +48,7 @@ int __cdecl gm_CalcLaw0x0dTaxSlot(unsigned short id, Slots* s, unsigned char fla
 	gm_GetLawEntry(0xd, &offer);
 	amt = offer.amount;
 	p = gm_GetGuildHall(1);
-	fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x115);
+	gm_QueryEntities(*(int*) (p + 0x5d), 2, 6, 0, 0x115);
 	for (i = 0; i < 6; i++) {
 		if (s->used[i] == 0) {
 			break;
@@ -69,7 +69,7 @@ int __cdecl gm_CalcLaw0x0dTaxSlot(unsigned short id, Slots* s, unsigned char fla
 		s->amount[i] = amt;
 		if (flags & 1) {
 			p = gm_GetGuildHall(1);
-			p = fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x115);
+			p = gm_QueryEntities(*(int*) (p + 0x5d), 2, 6, 0, 0x115);
 			if (gm_AccumulateTyped2(&((Obj*)gm_EntitySlotTable)[id]) >= v) {
 				cm_RequestTransferCurrencyNoKill(*(int*) (p + 2), ((Obj*)gm_EntitySlotTable)[id].owner, (*(char*)&gm_ActiveTownIndex), v);
 			}

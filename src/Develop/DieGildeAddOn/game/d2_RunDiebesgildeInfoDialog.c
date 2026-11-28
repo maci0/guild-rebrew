@@ -32,7 +32,7 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_GetFormWindow(int k, int j);
 void __cdecl d2_AddWindowScrollButtons(int x, int y, int win, int target, int id);
 void __cdecl d2_ClearRadioGroup(int i);
-unsigned char* __cdecl fcn_00502cd0(int, int, int, int);
+unsigned char* __cdecl gm_QueryEntities(int, int, int, int);
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_EvalEntityInventoryValue(unsigned char* o, int* out);
@@ -89,7 +89,7 @@ void __cdecl d2_RunDiebesgildeInfoDialog(char* p)
 			d2_SetForm(d, 2);
 			io_AppendText(str_dollar_C);
 			j = 0;
-			for (e = fcn_00502cd0(*(int*) (p + 0x5d), 1, 0, 0xca); e != 0 && j < 8; e = gm_NextEntityQueryMatch()) {
+			for (e = gm_QueryEntities(*(int*) (p + 0x5d), 1, 0, 0xca); e != 0 && j < 8; e = gm_NextEntityQueryMatch()) {
 				q = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0x2a));
 				if (q != 0 && *(unsigned short*) (q + 0x27) != 0xffff) {
 					carts[j] = e;

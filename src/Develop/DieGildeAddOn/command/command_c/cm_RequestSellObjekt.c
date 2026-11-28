@@ -27,7 +27,7 @@ unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_AddObjekt(void);
 
 unsigned short __cdecl gm_RandomMod(int);
-char* __cdecl fcn_00502cd0();
+char* __cdecl gm_QueryEntities();
 char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_GetMsgField(char*, char*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
@@ -71,12 +71,12 @@ void __cdecl cm_RequestSellObjekt(char* e)
 			if (n != 0) {
 				sel = list[gm_RandomMod(n)];
 				if (sel != 0) {
-					r = fcn_00502cd0(*(int*) (sel + 0x5d), 2, 6, 0, 0x2a);
+					r = gm_QueryEntities(*(int*) (sel + 0x5d), 2, 6, 0, 0x2a);
 					if (r == 0) {
-						r = fcn_00502cd0(*(int*) (sel + 0x5d), 2, 6, r, 0x116);
+						r = gm_QueryEntities(*(int*) (sel + 0x5d), 2, 6, r, 0x116);
 					}
 					if (r != 0) {
-						for (q = fcn_00502cd0(*(int*) (r + 0x14), 1, 5); q != 0; q = gm_NextEntityQueryMatch()) {
+						for (q = gm_QueryEntities(*(int*) (r + 0x14), 1, 5); q != 0; q = gm_NextEntityQueryMatch()) {
 							v = gm_GetMsgField(r, q);
 							v = (int) (v * 0.25f);
 							if (v < 1) {

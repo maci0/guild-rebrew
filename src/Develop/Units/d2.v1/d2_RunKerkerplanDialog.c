@@ -2,7 +2,7 @@ extern char gm_EntitySlotTable[];
 extern int io_RightButtonReleased;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
-int __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
+int __cdecl gm_QueryEntities(int container_id, int arg_count, ...);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
@@ -21,7 +21,7 @@ void __cdecl d2_RunKerkerplanDialog(char* obj)
 	int next;
 
 	count = 0;
-	if (fcn_00502cd0(*(int*) (obj + 0x5d), 1, 0, 0xba) == 0) {
+	if (gm_QueryEntities(*(int*) (obj + 0x5d), 1, 0, 0xba) == 0) {
 		return;
 	}
 	h = d2_LoadForm(0, 0, "locations\\kerker\\kerkerplan");

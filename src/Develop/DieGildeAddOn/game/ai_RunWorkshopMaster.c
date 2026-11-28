@@ -53,7 +53,7 @@ extern int ai_TrackedGoodPlanCounts[];
 extern int* g_100dc48;
 extern unsigned short gm_GameTimeHour;
 
-void* __cdecl fcn_00502cd0(int, int, int, int, int);
+void* __cdecl gm_QueryEntities(int, int, int, int, int);
 void __cdecl ai_CollectBuildingGoodsPlan(AI_MASTER_ENTITY*, void*, void*);
 void __cdecl ai_ManageMeisterWorkers(AI_MASTER_ENTITY*);
 void __cdecl gm_TryAutoUpgradeBuildingSlots(void*, AI_MASTER_ENTITY*, int);
@@ -144,11 +144,11 @@ void __cdecl ai_RunWorkshopMaster(AI_MASTER_ENTITY* e)
 	int n;
 	int id;
 
-	rec = fcn_00502cd0(*(int*) ((char*) e->root + 0x5d), 2, 6, 0, 0xff);
+	rec = gm_QueryEntities(*(int*) ((char*) e->root + 0x5d), 2, 6, 0, 0xff);
 	if (rec == 0) {
 		return;
 	}
-	stk = fcn_00502cd0(*(int*) ((char*) e->root + 0x5d), 2, 6, 0, 0x2a);
+	stk = gm_QueryEntities(*(int*) ((char*) e->root + 0x5d), 2, 6, 0, 0x2a);
 	if (stk == 0) {
 		return;
 	}

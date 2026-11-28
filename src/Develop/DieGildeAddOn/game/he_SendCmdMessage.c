@@ -2,7 +2,7 @@
 
 char* __cdecl gm_SearchTable67(int);
 int __cdecl gm_CheckEntityType(char*);
-char* __cdecl fcn_00502cd0(int, int, int, int);
+char* __cdecl gm_QueryEntities(int, int, int, int);
 char* __cdecl gm_SetupEntityQuery(char*);
 void __cdecl cm_SendRawEntityPacket(char*, int, char*);
 
@@ -40,7 +40,7 @@ void __cdecl he_SendCmdMessage(int* a1, char* a2, char* text, char* extra)
 				if (query != 0)
 					*(int*) (message + 0x60) = *(int*) (query + 2);
 			} else {
-				query = fcn_00502cd0(*(int*) (entity + 0x5d), 1, 0, 0xfd);
+				query = gm_QueryEntities(*(int*) (entity + 0x5d), 1, 0, 0xfd);
 				if (query != 0)
 					*(int*) (message + 0x60) = *(int*) (query + 2);
 			}

@@ -5,7 +5,7 @@ char* __cdecl gm_FindFallbackPublicBuilding(char*, int*, int*);
 char* __cdecl gm_FindRecordById(int);
 int __cdecl init_AllocateGebaeudeSceneSlot(char*);
 int __cdecl init_EnsureObjektSceneContext(char*);
-char* __cdecl fcn_00502cd0(int, int, int, int);
+char* __cdecl gm_QueryEntities(int, int, int, int);
 char* __cdecl sim_StartEntityQueryByType(char*);
 
 /* ADDRESS: GOLDTL 0x00567170 */
@@ -59,9 +59,9 @@ int __cdecl he_GetEntityHomeTarget(char* h, int* out1, int* out2, int* out3)
 		}
 	} else {
 		if (*(char**) (h + 0x16c) != 0 && gm_CheckEntityType(*(char**) (h + 0x16c)) != 0) {
-			q = fcn_00502cd0(*(int*) (*(char**) (h + 0x16c) + 0x5d), 1, 0, 0x2c);
+			q = gm_QueryEntities(*(int*) (*(char**) (h + 0x16c) + 0x5d), 1, 0, 0x2c);
 			if (q == 0) {
-				q = fcn_00502cd0(*(int*) (*(char**) (h + 0x16c) + 0x5d), 1, 0, 0x109);
+				q = gm_QueryEntities(*(int*) (*(char**) (h + 0x16c) + 0x5d), 1, 0, 0x109);
 				if (q == 0) {
 					return 0;
 				}

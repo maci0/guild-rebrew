@@ -10,7 +10,7 @@ void __cdecl he_FreeAction(char*);
 int __cdecl gm_CompareGameTime(char*, int);
 int __cdecl gm_ResolveEntityById(void**, void**, void**, int);
 char* __cdecl gm_NextEntityQueryMatch(void);
-char* __cdecl fcn_00502cd0(int, int, int, int);
+char* __cdecl gm_QueryEntities(int, int, int, int);
 void __cdecl gm_CollectTradeItemsByKind(int);
 void __cdecl io_FormatTextBuffer(char*, int, int, int, int);
 void __cdecl he_AssignActionSlot(int, int, int, int);
@@ -49,7 +49,7 @@ void __cdecl he_RunResourceSuchen(char* obj)
 				return;
 			}
 			gm_ResolveEntityById(0, (void**) &ref2, 0, *(int*) (obj + 0xb0));
-			ent = fcn_00502cd0(*(int*) (ref2 + 0x14), 1, 4, 0x17);
+			ent = gm_QueryEntities(*(int*) (ref2 + 0x14), 1, 4, 0x17);
 			while (ent != 0) {
 				if (*(int*) (ent + 0xe) == 1) {
 					break;
@@ -78,7 +78,7 @@ void __cdecl he_RunResourceSuchen(char* obj)
 							break;
 						}
 						if (*p != 0 && *p != *(unsigned short*) ent) {
-							rec = fcn_00502cd0(*(int*) (ref2 + 0x14),
+							rec = gm_QueryEntities(*(int*) (ref2 + 0x14),
 								1, 0, *p);
 							if (rec == 0 || *(int*) (rec + 0xe) < 2) {
 								more = 0;

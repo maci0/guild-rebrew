@@ -6,7 +6,7 @@ typedef struct F8 {
 
 extern char* ai_FeudTargetEntity;
 
-int __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
+int __cdecl gm_QueryEntities(int a, int b, int c, int d, int e);
 int __cdecl he_StartHandlungSearch(int a, int b, int c, int d, int e);
 unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl ai_FindEntityInFavorRange(char* p, int kind, F8 f, int c, float r, int* out);
@@ -26,7 +26,7 @@ int __cdecl ai_PlanGraveyardAction0x90(char* actor, char* building, char* req, c
 	if ((unsigned int) ((h + 2) * (w + 2)) > *(unsigned int*) (actor + 0x194)) {
 		return 0;
 	}
-	if (!fcn_00502cd0(*(int*) (building + 0x5d), 2, 0, 0x211, 6)) {
+	if (!gm_QueryEntities(*(int*) (building + 0x5d), 2, 0, 0x211, 6)) {
 		return 0;
 	}
 	if (he_StartHandlungSearch(2, 0, 0x90, 3, *(int*) (building + 1))) {

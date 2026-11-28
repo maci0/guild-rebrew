@@ -3,7 +3,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int g_14abaac;
-int __cdecl he_HasNoActiveAction0x62(char* obj); void* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
+int __cdecl he_HasNoActiveAction0x62(char* obj); void* __cdecl gm_QueryEntities(int container_id, int arg_count, ...);
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 void* __cdecl gm_NextEntityQueryMatch(void);
 void* __cdecl he_StartHandlungSearch(int a, int b, int c, int d, int e);
@@ -54,7 +54,7 @@ void __cdecl d2_ShowBriberyDialog(unsigned int id, char* obj)
 	profile = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*)obj];
 	entity = (int) d2_VisitedBuilding;
 	if (d2_VisitedBuilding != 0 || (entity = (int) d2_InteriorBuilding) != 0) {
-		other = (int) fcn_00502cd0(*(int*) (entity + 0x5d), 1, 0, 0xca);
+		other = (int) gm_QueryEntities(*(int*) (entity + 0x5d), 1, 0, 0xca);
 		while (other != 0) {
 			if (*(int*) (other + 0x2a) != *(int*) (obj + 1)) {
 				list[count] = (char*) other;

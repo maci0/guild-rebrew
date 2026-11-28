@@ -15,7 +15,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void* __cdecl gm_FindNextFilteredEntity(void);
-char* __cdecl fcn_00502cd0(int, ...);
+char* __cdecl gm_QueryEntities(int, ...);
 int __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl io_AppendText(char* fmt, ...);
 int __cdecl d2_BuildPersonStatusDesc(void*);
@@ -93,7 +93,7 @@ void __cdecl d2_RunPlayerStammtischDialog(int building, int table)
 				state = 3;
 				next = (int) gm_StartFilteredEntitySearch(1, 0, 0x37);
 				while (next != 0) {
-					next = (int) fcn_00502cd0(*(int*) (next + 0x5d), 2, 6, 0, 0x12d);
+					next = (int) gm_QueryEntities(*(int*) (next + 0x5d), 2, 6, 0, 0x12d);
 					if (next != 0) {
 						i = 0;
 						p = (int*) (next + 0x1c);

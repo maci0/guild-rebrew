@@ -8,7 +8,7 @@ extern char* lpObjektePROT;
 void* __cdecl gm_AddObjekt(void);
 void* __cdecl gm_FindNextFilteredEntity(void);
 void* __cdecl gm_NextEntityQueryMatch(void);
-unsigned short* __cdecl fcn_00502cd0(int, int, int, ...);
+unsigned short* __cdecl gm_QueryEntities(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
 /* ADDRESS: GOLDTL 0x00501d20 */
@@ -51,10 +51,10 @@ void __cdecl gm_RefreshLocalMarketStock(int season)
 	entity = gm_StartFilteredEntitySearch(1, 6);
 	while (entity != 0) {
 		if (((char) ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) entity].category) != '\n') {
-			query = fcn_00502cd0(*(int*) ((char*) entity + 0x5d), 1, 0, 0xff);
+			query = gm_QueryEntities(*(int*) ((char*) entity + 0x5d), 1, 0, 0xff);
 			for (i = 0; query != 0 && i < 0x55; i++) {
 				if (((MARKET_STOCK_SLOT*)slots)[i].objekt_id != 0 &&
-				    fcn_00502cd0(*(int*) ((char*) query + 0x14), 1, 0, ((MARKET_STOCK_SLOT*)slots)[i].objekt_id) != 0) {
+				    gm_QueryEntities(*(int*) ((char*) query + 0x14), 1, 0, ((MARKET_STOCK_SLOT*)slots)[i].objekt_id) != 0) {
 					((MARKET_STOCK_SLOT*)slots)[i].active = 1;
 					def = (char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[((MARKET_STOCK_SLOT*)slots)[i].objekt_id];
 					for (j = 0; j < 0x55; j++) {
@@ -71,11 +71,11 @@ void __cdecl gm_RefreshLocalMarketStock(int season)
 	}
 
 	for (i = 0; i < 0x55; i++) {
-		result = fcn_00502cd0(*(int*) ((char*) (*(int*)&gm_MarketEntity) + 0x5d), 1, 0, ((MARKET_STOCK_SLOT*)slots)[i].target_id);
+		result = gm_QueryEntities(*(int*) ((char*) (*(int*)&gm_MarketEntity) + 0x5d), 1, 0, ((MARKET_STOCK_SLOT*)slots)[i].target_id);
 		if (result != 0) {
-			result = fcn_00502cd0(*(int*) ((char*) result + 0x14), 1, 0, 0xff);
+			result = gm_QueryEntities(*(int*) ((char*) result + 0x14), 1, 0, 0xff);
 			if (((MARKET_STOCK_SLOT*)slots)[i].active != 0) {
-				if (fcn_00502cd0(*(int*) ((char*) result + 0x14), 1, 0, ((MARKET_STOCK_SLOT*)slots)[i].objekt_id) == 0) {
+				if (gm_QueryEntities(*(int*) ((char*) result + 0x14), 1, 0, ((MARKET_STOCK_SLOT*)slots)[i].objekt_id) == 0) {
 					gm_AllocObjekt(*(int*) ((char*) result + 2), ((MARKET_STOCK_SLOT*)slots)[i].objekt_id, 1);
 				}
 			}
@@ -84,16 +84,16 @@ void __cdecl gm_RefreshLocalMarketStock(int season)
 
 	for (i = 0; ids[i] != 0; i++) {
 		count = 0;
-		result = fcn_00502cd0(*(int*) ((char*) (*(int*)&gm_MarketEntity) + 0x5d), 1, 0, ids[i]);
+		result = gm_QueryEntities(*(int*) ((char*) (*(int*)&gm_MarketEntity) + 0x5d), 1, 0, ids[i]);
 		if (result != 0) {
-			r2 = fcn_00502cd0(*(int*) ((char*) result + 0x14), 1, 0, 0xff);
+			r2 = gm_QueryEntities(*(int*) ((char*) result + 0x14), 1, 0, 0xff);
 			if (r2 != 0) {
-				r2 = fcn_00502cd0(*(int*) ((char*) r2 + 0x14), 1, 5);
+				r2 = gm_QueryEntities(*(int*) ((char*) r2 + 0x14), 1, 5);
 				while (r2 != 0) {
 					count++;
 					r2 = gm_NextEntityQueryMatch();
 				}
-				result = fcn_00502cd0(*(int*) ((char*) result + 0x14), 1, 4, 0x11);
+				result = gm_QueryEntities(*(int*) ((char*) result + 0x14), 1, 4, 0x11);
 				if (result != 0 && *(unsigned char*) ((char*) result + 0x1c) != count)
 					*(unsigned char*) ((char*) result + 0x1c) = (unsigned char) count;
 			}

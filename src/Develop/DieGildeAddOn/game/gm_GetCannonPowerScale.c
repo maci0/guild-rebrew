@@ -2,20 +2,20 @@
 
 
 
-int __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
+int __cdecl gm_QueryEntities(int a, int b, int c, int d, int e);
 
 float __cdecl gm_GetCannonPowerScale(char* p)
 {
 	float v;
 
 	v = 1.0f;
-	if (fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x259)) {
+	if (gm_QueryEntities(*(int*) (p + 0x5d), 2, 6, 0, 0x259)) {
 		v = 1.05f;
 	}
-	if (fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x25b)) {
+	if (gm_QueryEntities(*(int*) (p + 0x5d), 2, 6, 0, 0x25b)) {
 		v = v + 0.05f;
 	}
-	if (fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x261)) {
+	if (gm_QueryEntities(*(int*) (p + 0x5d), 2, 6, 0, 0x261)) {
 		return v + 0.05f;
 	}
 	return v;

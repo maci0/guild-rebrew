@@ -80,7 +80,7 @@ typedef struct WORKER_RECOVERY_RACE {
 
 extern unsigned char* lpGebaeudePROT;
 
-char* __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
+char* __cdecl gm_QueryEntities(int a, int b, int c, int d, int e);
 void __cdecl cm_SendCopyEntityData(WORKER_RECOVERY_MSG* msg);
 
 void __cdecl ai_DispatchWorkerRecovery(WORKER_RECOVERY_UNIT* meister)
@@ -104,9 +104,9 @@ void __cdecl ai_DispatchWorkerRecovery(WORKER_RECOVERY_UNIT* meister)
 	}
 	race = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*)meister->info];
 	if (((char)race->category) == 4) {
-		res = fcn_00502cd0(*(int*)(meister->info + 0x5d), 2, 6, 0, 0x60);
+		res = gm_QueryEntities(*(int*)(meister->info + 0x5d), 2, 6, 0, 0x60);
 	} else if (((char)race->category) == 0x13) {
-		res = fcn_00502cd0(*(int*)(meister->info + 0x5d), 2, 6, 0, 0x145);
+		res = gm_QueryEntities(*(int*)(meister->info + 0x5d), 2, 6, 0, 0x145);
 	} else {
 		res = 0;
 	}

@@ -15,7 +15,7 @@ typedef struct init_Betrieb_Item {
 #pragma pack(pop)
 
 int __cdecl gm_GetBuildingTypeCategory(int arg1);
-char* __cdecl fcn_00502cd0(int a1, int a2, int a3, ...);
+char* __cdecl gm_QueryEntities(int a1, int a2, int a3, ...);
 int __cdecl gm_NextEntityQueryMatch(void);
 float __cdecl eval_ObjektPreis2Credits(int id, int a1);
 int __cdecl gm_GetStorageSlotCapacity(char* a1, int a2);
@@ -40,11 +40,11 @@ void __cdecl init_Betrieb(unsigned char* building)
     if (category != 1 && category != 4) {
         return;
     }
-    ent = fcn_00502cd0(*(int*)(building + 0x5d), 1, 0, 0xff);
+    ent = gm_QueryEntities(*(int*)(building + 0x5d), 1, 0, 0xff);
     if (ent == 0) {
         return;
     }
-    obj = fcn_00502cd0(*(int*)(ent + 0x14), 1, 5);
+    obj = gm_QueryEntities(*(int*)(ent + 0x14), 1, 5);
     while (obj != 0) {
         if (((init_Betrieb_Item*)g_item_def_table)[*(unsigned short*)obj].type
             != '%') {
@@ -75,7 +75,7 @@ void __cdecl init_Betrieb(unsigned char* building)
         if (limit <= 1) {
             limit = 1;
         }
-        obj = fcn_00502cd0(*(int*)(building + 0x5d), 1, 4, 5);
+        obj = gm_QueryEntities(*(int*)(building + 0x5d), 1, 4, 5);
         if (obj == 0) {
             return;
         }

@@ -6,7 +6,7 @@
 extern unsigned char* lpGebaeudePROT;
 
 void __cdecl cm_SendCopyEntityData(int a1);
-char* __cdecl fcn_00502cd0(int, int, int, int, int);
+char* __cdecl gm_QueryEntities(int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00488e10 */
 void __cdecl ai_SendAction0x8f(char* e)
@@ -38,7 +38,7 @@ void __cdecl ai_SendAction0x8f(char* e)
 	if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) q].category != 0x1d) {
 		return;
 	}
-	r = fcn_00502cd0(*(int*) (q + 0x5d), 2, 6, 0, 0x211);
+	r = gm_QueryEntities(*(int*) (q + 0x5d), 2, 6, 0, 0x211);
 	if (r == 0) {
 		return;
 	}

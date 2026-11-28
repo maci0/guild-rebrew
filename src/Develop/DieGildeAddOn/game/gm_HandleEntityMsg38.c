@@ -14,7 +14,7 @@ extern unsigned char gm_ActiveTownIndex;
 unsigned short __cdecl gm_RandomMod(int);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_HasActiveSpecialObject(void*, int);
-unsigned short* __cdecl fcn_00502cd0(int, int, int);
+unsigned short* __cdecl gm_QueryEntities(int, int, int);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 void __cdecl io_FormatTextBuffer(char*, int, int);
@@ -41,7 +41,7 @@ int __cdecl gm_HandleEntityMsg38(int* request)
 	if (gm_HasActiveSpecialObject(p, 0x290) != 0) {
 		return 0x400;
 	}
-	e = fcn_00502cd0(*(int*) (p + 0x178), 1, 5);
+	e = gm_QueryEntities(*(int*) (p + 0x178), 1, 5);
 	while (e != 0 && n < 6) {
 		if ((*(char *)&((OBJECT_PROTOTYPE*)lpObjektePROT)[*e].kind) != 9) {
 			found[n] = e;

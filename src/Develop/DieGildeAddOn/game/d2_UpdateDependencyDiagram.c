@@ -22,7 +22,7 @@ extern int g_7f4c10;
 
 
 
-int __cdecl fcn_00502cd0(int, int, ...);
+int __cdecl gm_QueryEntities(int, int, ...);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl d2_CreateChildWindow(int, int, int, int, int, int);
@@ -50,7 +50,7 @@ void __cdecl d2_UpdateDependencyDiagram(unsigned char* a, unsigned short* b)
 	for (; i < g_85ab60; i++) {
 		st = 0;
 		if (((OBJECT_PROTOTYPE *)lpObjektePROT)[((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].item_id].kind == 6) {
-			if (fcn_00502cd0(*(int*) (a + 0x5d), 1, 0, ((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].item_id) != 0) {
+			if (gm_QueryEntities(*(int*) (a + 0x5d), 1, 0, ((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].item_id) != 0) {
 				st = 1;
 				for (q = he_StartHandlungSearch(2, 0, 0xc, 3, *(int*) (a + 1)); q != 0;
 				     q = he_fn_Handlung()) {
@@ -64,13 +64,13 @@ void __cdecl d2_UpdateDependencyDiagram(unsigned char* a, unsigned short* b)
 					p = (DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes;
 					for (k = i; k != 0; p++, k--) {
 						if (p->item_id == ((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].parent_a &&
-						    (fcn_00502cd0(*(int*) (a + 0x5d), 1, 0, p->item_id) != 0 ||
-						     fcn_00502cd0(*(int*) ((char*) b + 0x14), 1, 0, p->item_id) != 0) &&
+						    (gm_QueryEntities(*(int*) (a + 0x5d), 1, 0, p->item_id) != 0 ||
+						     gm_QueryEntities(*(int*) ((char*) b + 0x14), 1, 0, p->item_id) != 0) &&
 						    *(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[p->unk_24].value_060)) == 0) {
 							n++;
 						} else if (p->item_id == ((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].parent_b &&
-							   (fcn_00502cd0(*(int*) (a + 0x5d), 1, 0, p->item_id) != 0 ||
-							    fcn_00502cd0(*(int*) ((char*) b + 0x14), 1, 0, p->item_id) != 0) &&
+							   (gm_QueryEntities(*(int*) (a + 0x5d), 1, 0, p->item_id) != 0 ||
+							    gm_QueryEntities(*(int*) ((char*) b + 0x14), 1, 0, p->item_id) != 0) &&
 							   *(int*) (((char*)&((D2_CONTROL_TL*)d2_Controls)[p->unk_24].value_060)) == 0) {
 							n++;
 						}
@@ -83,21 +83,21 @@ void __cdecl d2_UpdateDependencyDiagram(unsigned char* a, unsigned short* b)
 				}
 			}
 		} else {
-			if (fcn_00502cd0(*(int*) ((char*) b + 0x14), 1, 0, ((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].item_id) != 0) {
+			if (gm_QueryEntities(*(int*) ((char*) b + 0x14), 1, 0, ((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].item_id) != 0) {
 				st = 1;
 			} else if (*(unsigned short*) b != 0xfd ||
-				   fcn_00502cd0(*(int*) (a + 0x5d), 1, 0, ((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].item_id) == 0) {
+				   gm_QueryEntities(*(int*) (a + 0x5d), 1, 0, ((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].item_id) == 0) {
 				n = 0;
 				if (i > 0) {
 					p = (DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes;
 					for (k = i; k != 0; p++, k--) {
 						if (p->item_id == ((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].parent_a &&
-						    (fcn_00502cd0(*(int*) (a + 0x5d), 1, 0, p->item_id) != 0 ||
-						     fcn_00502cd0(*(int*) ((char*) b + 0x14), 1, 0, p->item_id) != 0)) {
+						    (gm_QueryEntities(*(int*) (a + 0x5d), 1, 0, p->item_id) != 0 ||
+						     gm_QueryEntities(*(int*) ((char*) b + 0x14), 1, 0, p->item_id) != 0)) {
 							n++;
 						} else if (p->item_id == ((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].parent_b &&
-							   (fcn_00502cd0(*(int*) (a + 0x5d), 1, 0, p->item_id) != 0 ||
-							    fcn_00502cd0(*(int*) ((char*) b + 0x14), 1, 0, p->item_id) != 0)) {
+							   (gm_QueryEntities(*(int*) (a + 0x5d), 1, 0, p->item_id) != 0 ||
+							    gm_QueryEntities(*(int*) ((char*) b + 0x14), 1, 0, p->item_id) != 0)) {
 							n++;
 						}
 					}
@@ -208,7 +208,7 @@ skip_st3:
 		}
 		if (((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].state == 3) {
 			if (((OBJECT_PROTOTYPE *)lpObjektePROT)[((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].item_id].kind == 6) {
-				if (fcn_00502cd0(*(int*) (a + 0x5d), 1, 0, ((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].item_id) != 0) {
+				if (gm_QueryEntities(*(int*) (a + 0x5d), 1, 0, ((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].item_id) != 0) {
 					for (q = he_StartHandlungSearch(2, 0, 0xc, 3, *(int*) (a + 1)); q != 0;
 					     q = he_fn_Handlung()) {
 						if (*(int*) (q + 0xb4) == ((DEPENDENCY_DIAGRAM_NODE*)d2_DependencyDiagramNodes)[i].item_id) {

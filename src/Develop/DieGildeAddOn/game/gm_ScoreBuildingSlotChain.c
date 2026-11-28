@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
-extern int __cdecl fcn_00502cd0(int handle, ...);
+extern int __cdecl gm_QueryEntities(int handle, ...);
 extern int __cdecl gm_MatchCraftedItemKind(void* link);
 extern void* __cdecl gm_NextEntityQueryMatch(void);
 extern float flt_100_0;
@@ -42,10 +42,10 @@ int __cdecl gm_ScoreBuildingSlotChain(unsigned char* building)
 		if (*def == 2
 			|| *def == 6) {
 			seen = 1;
-			handle = fcn_00502cd0(*(int*) (building + 0x5d), 1, 0, id);
+			handle = gm_QueryEntities(*(int*) (building + 0x5d), 1, 0, id);
 			if (handle != 0) {
 				match_count += 1;
-				p = (unsigned short*) fcn_00502cd0(*(int*) (handle + 0x14), 1, 5);
+				p = (unsigned short*) gm_QueryEntities(*(int*) (handle + 0x14), 1, 5);
 				while (p != 0) {
 					want = gm_MatchCraftedItemKind(p);
 					repeats = 1;

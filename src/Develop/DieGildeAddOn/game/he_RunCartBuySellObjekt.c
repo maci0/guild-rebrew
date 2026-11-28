@@ -32,7 +32,7 @@ typedef struct Req55c270 {
 
 extern char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 extern int __cdecl gm_CompareGameTime(char*, char*);
-extern unsigned char* __cdecl fcn_00502cd0(int, int, int, int);
+extern unsigned char* __cdecl gm_QueryEntities(int, int, int, int);
 extern int __cdecl cm_SendSellObjekt(int, int, int, int, char, int);
 extern int __cdecl cm_GetCommandStatus(int);
 extern char* __cdecl cm_GetCommandResult(int);
@@ -72,7 +72,7 @@ void __cdecl he_RunCartBuySellObjekt(char* o)
 				he_FreeAction(o);
 				return;
 			}
-			h = fcn_00502cd0(*(int*) (e + 0x5d), 1, 1, *(int*) (o + 0xb0));
+			h = gm_QueryEntities(*(int*) (e + 0x5d), 1, 1, *(int*) (o + 0xb0));
 			*(int*) (o + 0xb4) = cm_SendSellObjekt(*(int*) (o + 0xb0), -1,
 				*(unsigned short*) (o + 0xac), 1, *(char*) &gm_ActiveTownIndex, 0);
 			(*(int*) (o + 0x70))++;
@@ -128,7 +128,7 @@ void __cdecl he_RunCartBuySellObjekt(char* o)
 			char tmp[0x80];
 			char name[0x80];
 
-			h = fcn_00502cd0(*(int*) (e + 0x5d), 1, 1, *(int*) (o + 0xb0));
+			h = gm_QueryEntities(*(int*) (e + 0x5d), 1, 1, *(int*) (o + 0xb0));
 			src = (unsigned char*) (g_item_def_table +
 				*(unsigned short*) (o + 0xac) * 0x41);
 			if (h != 0 && *(unsigned short*) h != 0xfd) {
@@ -166,7 +166,7 @@ void __cdecl he_RunCartBuySellObjekt(char* o)
 		{
 			Req55c270 m;
 
-			h = fcn_00502cd0(*(int*) (e + 0x5d), 1, 1, *(int*) (o + 0xb0));
+			h = gm_QueryEntities(*(int*) (e + 0x5d), 1, 1, *(int*) (o + 0xb0));
 			*(pos14_7f4c00*) &m = gm_GameTime;
 			gm_AddTime((pos14_7f4c00*) &m, 0, 0, 1);
 			m.id = *(int*) (e + 1);

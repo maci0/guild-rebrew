@@ -10,7 +10,7 @@ typedef struct Req {
 extern float g_1008574[];
 extern float g_10099d0[8];
 
-unsigned short* __cdecl fcn_00502cd0(int a, int b, int c, int d);
+unsigned short* __cdecl gm_QueryEntities(int a, int b, int c, int d);
 float* __cdecl gm_LookupSpecialObject(int id);
 int __cdecl gm_UseSpecialObject(char* e, Req* r);
 
@@ -21,7 +21,7 @@ int __cdecl ai_RunUseParfuem(char* actor, int* itemArgs, int* animData)
 	unsigned short* slot;
 	Req req;
 
-	slot = fcn_00502cd0(*(int*) (actor + 0x178), 1, 1, itemArgs[1]);
+	slot = gm_QueryEntities(*(int*) (actor + 0x178), 1, 1, itemArgs[1]);
 	if (!slot) {
 		return 0;
 	}

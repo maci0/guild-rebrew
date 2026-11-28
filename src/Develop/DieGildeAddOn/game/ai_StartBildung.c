@@ -13,7 +13,7 @@ typedef struct {
 int __cdecl ai_SelectBestMethod(int, int, int, Out495a80*, Out495a80*);
 int __cdecl gm_CheckPrivilege(int, char*, int*);
 int __cdecl gm_GetCitySkillAverage(int); /* 0x4fbd20, metadata name is stale */
-int __cdecl fcn_00502cd0(int, int, int, int);
+int __cdecl gm_QueryEntities(int, int, int, int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 unsigned short __cdecl gm_RandomMod(int);
 
@@ -164,7 +164,7 @@ int __cdecl ai_StartBildung(int unused, char* actorEntity, int mode, char* out1,
 		} else {
 			slot = (i == 3) ? 0x17 : 0x14;
 		}
-		if (fcn_00502cd0(*(int*) (*(char**) (actorEntity + 0x170) + 0x5d), 1, 0, slot) == 0) {
+		if (gm_QueryEntities(*(int*) (*(char**) (actorEntity + 0x170) + 0x5d), 1, 0, slot) == 0) {
 			extra.msg.mode = 2;
 			extra.msg.f1 = slot;
 			extra.msg.f2 = 1;

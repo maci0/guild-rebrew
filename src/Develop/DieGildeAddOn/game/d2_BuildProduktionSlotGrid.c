@@ -31,7 +31,7 @@ extern Lane g_778d4c[4];
 extern Slot_778da0 g_778da0[16];
 extern char* d2_Controls;
 
-unsigned short* __cdecl fcn_00502cd0(int, int, int, ...);
+unsigned short* __cdecl gm_QueryEntities(int, int, int, ...);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_GetMsgField(char*, unsigned short*);
 int __cdecl gm_GetStorageSlotCapacity(char*, int);
@@ -118,7 +118,7 @@ int __cdecl d2_BuildProduktionSlotGrid(char* msg, char* src)
 	for (i = 0; i < 4; i++) {
 		g_778d4c[i].kind = tbl[(unsigned char) msg[0x1c]][i];
 	}
-	p = fcn_00502cd0(*(int*) (src + 0x14), 1, 5);
+	p = gm_QueryEntities(*(int*) (src + 0x14), 1, 5);
 	while (p != 0) {
 		for (i = 0, key = *p; i < 16; i++) {
 			if (((Watch*) g_778da0)[i].id == key) {
@@ -143,7 +143,7 @@ int __cdecl d2_BuildProduktionSlotGrid(char* msg, char* src)
 		p = gm_NextEntityQueryMatch();
 	}
 	for (i = 0; i < 16; i++) {
-		q = fcn_00502cd0(*(int*) (msg + 0x14), 1, 0, ((Watch*) g_778da0)[i].id);
+		q = gm_QueryEntities(*(int*) (msg + 0x14), 1, 0, ((Watch*) g_778da0)[i].id);
 		if (q != 0) {
 			((Watch*) g_778da0)[i].field = gm_GetMsgField(msg, q);
 			((Watch*) g_778da0)[i].value = gm_GetStorageSlotCapacity(msg, *q);

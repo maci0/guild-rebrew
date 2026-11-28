@@ -1,7 +1,7 @@
 void __cdecl d2_ShowStatusBanner(char *);
 void __cdecl d2_BroadcastCutscene0xa2(char *);
 int __cdecl d2_RunTradeRouteEditor(char *);
-unsigned short * __cdecl fcn_00502cd0(int, int, ...);
+unsigned short * __cdecl gm_QueryEntities(int, int, ...);
 float __cdecl gm_ApplyEntityHealthDelta(unsigned short, int);
 void __cdecl cm_RequestSysMessage(char, char *);
 
@@ -29,7 +29,7 @@ void __cdecl gm_DispatchDebugSubsystemKeys(void)
         if (object_entry)
             d2_RunTradeRouteEditor(object_entry);
         else
-            d2_RunTradeRouteEditor((char *)fcn_00502cd0(0, 2, 7, 4, 0x1d));
+            d2_RunTradeRouteEditor((char *)gm_QueryEntities(0, 2, 7, 4, 0x1d));
         break;
     case 23:
         if (*(int *)0x6a3434 = (*(int *)0x6a3434 == 0)) {

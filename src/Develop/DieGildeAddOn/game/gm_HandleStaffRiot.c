@@ -1,5 +1,5 @@
 /* ADDRESS: GOLDTL 0x004ba470 */
-int __cdecl fcn_004ba470(void)
+int __cdecl gm_HandleStaffRiot(void)
 {
     /* TODO: Implement based on Ghidra decompilation */
     /* Ghidra name: fcn.004ba470 */

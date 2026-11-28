@@ -57,7 +57,7 @@ extern int d2_DialogButtonAction;
 extern int gm_TargetPersonTypeMask;
 extern int g_66601c;
 
-unsigned short* __cdecl fcn_00502cd0(int container, int count, int arg, int arg2);
+unsigned short* __cdecl gm_QueryEntities(int container, int count, int arg, int arg2);
 char* __cdecl cm_GetCommandResult(int rc);
 int __cdecl cm_GetCommandStatus(int rc);
 int __cdecl cm_AreQueuedCommandsDone(void);
@@ -129,7 +129,7 @@ void __cdecl d2_RunChurchSermonDialog(char* building)
 	if (*(unsigned short*) (building + 0x27) != gm_LocalPlayerSlot) {
 		return;
 	}
-	obj = (char*) fcn_00502cd0(*(int*) (building + 0x5d), 1, 0, 0x1b5);
+	obj = (char*) gm_QueryEntities(*(int*) (building + 0x5d), 1, 0, 0x1b5);
 	if (obj == 0) {
 		tag7 t;
 
@@ -181,7 +181,7 @@ void __cdecl d2_RunChurchSermonDialog(char* building)
 		if ((unsigned int) (gm_GameTicks - prev) > 0x64 && state != 3) {
 			flag = 1;
 			prev = gm_GameTicks;
-			obj = (char*) fcn_00502cd0(*(int*) (building + 0x5d), 1, 0, 0x1b5);
+			obj = (char*) gm_QueryEntities(*(int*) (building + 0x5d), 1, 0, 0x1b5);
 			if (obj == 0 || *(unsigned short*) (building + 0x27) != gm_LocalPlayerSlot) {
 				state = 3;
 				flag = 0;
@@ -279,7 +279,7 @@ void __cdecl d2_RunChurchSermonDialog(char* building)
 				*(int*) (pkt2 + 0xc) = g_66601c;
 				io_FormatTextBuffer(text, 0x19a2);
 				info = d2_OpenTargetPicker(pkt2, text, 0, 0);
-				obj = (char*) fcn_00502cd0(*(int*) (building + 0x5d), 1, 0, 0x1b5);
+				obj = (char*) gm_QueryEntities(*(int*) (building + 0x5d), 1, 0, 0x1b5);
 				if (info != 0 && *(int*) (info + 4) != -1 && obj != 0) {
 					v15 = (char) gm_RandomMod(8);
 					v16 = (char) gm_RandomMod(8);

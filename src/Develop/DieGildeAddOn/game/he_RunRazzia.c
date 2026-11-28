@@ -11,7 +11,7 @@ extern double g_6629c8;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
-char* __cdecl fcn_00502cd0(int, int, ...);
+char* __cdecl gm_QueryEntities(int, int, ...);
 char* __cdecl gm_NextEntityQueryMatch(void);
 char* __cdecl gm_SetupEntityQuery(char*);
 char* __cdecl cut_FindCutsceneById(int);
@@ -105,7 +105,7 @@ void __cdecl he_RunRazzia(char* e)
 			if (own == 0) {
 				goto label_54e513;
 			}
-			slot = fcn_00502cd0(*(int*) (own + 0x5d), 1, 0, 0x146);
+			slot = gm_QueryEntities(*(int*) (own + 0x5d), 1, 0, 0x146);
 			p = e + 0x8c;
 			i = 8;
 			do {
@@ -190,7 +190,7 @@ label_54e6a1:
 			p = (char*) &((ENTITY_RECORD*) gm_EntitySlotTable)[*(unsigned short*) (e + 8)];
 			limit = (float) (gm_GetBuildingTechEffect(own, 5, 1) * 0.01 + g_6629c8);
 			other = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xb0));
-			rec = fcn_00502cd0(*(int*) (other + 0x5d), 1, 0, 0xca);
+			rec = gm_QueryEntities(*(int*) (other + 0x5d), 1, 0, 0xca);
 			while (rec != 0) {
 				if (*(int*) (rec + 0x2a) == *(int*) (own + 1)) {
 					f = (float) ((*(unsigned char*) (rec + 0x37) + 100.0) * 0.01);

@@ -18,7 +18,7 @@ extern char gm_EntityIdField[];
 
 int __cdecl gm_RandomMod(unsigned short);
 char* __cdecl gm_SearchTable67(int);
-char* __cdecl fcn_00502cd0(int, int, int, int);
+char* __cdecl gm_QueryEntities(int, int, int, int);
 char* __cdecl gm_NextEntityQueryMatch(void);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
@@ -132,7 +132,7 @@ int __cdecl ai_CalcAngriff(char* attackerRec, int a2)
 	if (cand != 0) {
 		kind = ((unsigned char*) g_entity_type_table)[*(unsigned char*) cand + *(unsigned char*) cand * 0x24c];
 		if (kind == 0x13 || kind == 4 || kind == 0x10) {
-	for (q = fcn_00502cd0(*(int*) (*(char**) (attackerRec + 0x16c) + 0x5d), 1, 0, 0xca); q != 0; q = gm_NextEntityQueryMatch()) {
+	for (q = gm_QueryEntities(*(int*) (*(char**) (attackerRec + 0x16c) + 0x5d), 1, 0, 0xca); q != 0; q = gm_NextEntityQueryMatch()) {
 		if (*(int*) (q + 0x2a) != *(int*) (cand + 1)) {
 			continue;
 		}

@@ -2,7 +2,7 @@
 extern unsigned char* g_7e3f30;
 
 extern char* g_item_def_table;
-unsigned short* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
+unsigned short* __cdecl gm_QueryEntities(int container_id, int arg_count, ...);
 float __cdecl eval_ObjektPreis2Credits(int, unsigned char);
 
 /* ADDRESS: GOLD 0x00509b40 */
@@ -34,7 +34,7 @@ int __cdecl gm_CalculateGebaeudeValue(unsigned char* a0, int scale)
 			if (*kind != 2 && *kind != 6) {
 				continue;
 			}
-			ent = fcn_00502cd0(*(int*) (a0 + 0x5d), 1, 0, id);
+			ent = gm_QueryEntities(*(int*) (a0 + 0x5d), 1, 0, id);
 			if (ent == 0) {
 				continue;
 			}
@@ -47,7 +47,7 @@ int __cdecl gm_CalculateGebaeudeValue(unsigned char* a0, int scale)
 				seen = 1;
 			}
 		} else if (ent != 0) {
-			rec = fcn_00502cd0(*(int*) ((unsigned char*) ent + 0x14), 1, 0, id);
+			rec = gm_QueryEntities(*(int*) ((unsigned char*) ent + 0x14), 1, 0, id);
 			if (rec != 0) {
 				acc = (int) (eval_ObjektPreis2Credits(rec[0], *((unsigned char*) rec + 0x12)) + acc);
 			}
@@ -85,7 +85,7 @@ extern char* lpObjektePROT;
 
 
 float __cdecl eval_ObjektPreis2Credits(int, unsigned char);
-char* __cdecl fcn_00502cd0(int, int, int, int);
+char* __cdecl gm_QueryEntities(int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x0050cf50 */
 int __cdecl gm_CalculateGebaeudeValue(unsigned char* buildingRecordArg, int percentScale)
@@ -113,7 +113,7 @@ int __cdecl gm_CalculateGebaeudeValue(unsigned char* buildingRecordArg, int perc
 		k = ((OBJECT_PROTOTYPE*) lpObjektePROT)[id].kind;
 		if (!flag) {
 			if (k == 2 || k == 6) {
-				t = fcn_00502cd0(*(int*) (buildingRecordArg + 0x5d), 1, 0, id);
+				t = gm_QueryEntities(*(int*) (buildingRecordArg + 0x5d), 1, 0, id);
 				if (t != 0) {
 					acc[0] = (int) (acc[0] + eval_ObjektPreis2Credits(*(unsigned short*) t, *(unsigned char*) (t + 0x12)));
 					if (i < 0x3f) {
@@ -126,7 +126,7 @@ int __cdecl gm_CalculateGebaeudeValue(unsigned char* buildingRecordArg, int perc
 			}
 		} else {
 			if (t != 0) {
-				q = fcn_00502cd0(*(int*) (t + 0x14), 1, 0, id);
+				q = gm_QueryEntities(*(int*) (t + 0x14), 1, 0, id);
 				if (q != 0) {
 					acc[0] = (int) (acc[0] + eval_ObjektPreis2Credits(*(unsigned short*) q, *(unsigned char*) (q + 0x12)));
 				}

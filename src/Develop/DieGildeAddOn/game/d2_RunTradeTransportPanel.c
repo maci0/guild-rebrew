@@ -23,7 +23,7 @@ extern int g_776c60[];
 extern int g_774698;
 extern int g_14a79c0[];
 
-unsigned short* __cdecl fcn_00502cd0(int, int, ...);
+unsigned short* __cdecl gm_QueryEntities(int, int, ...);
 int __cdecl d2_LoadForm(int, int, char*);
 int __cdecl d2_CreateWindowTextButton(int, int, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -298,16 +298,16 @@ int __cdecl d2_RunTradeTransportPanel(int entity, int flags)
 		f.v70 = flags & 1;
 		if (f.v70 != 0) {
 			/* 0x5bab5a: refresh slot 0xff, then the 0x2a and 0x116 rows */
-			f.v44 = (int) fcn_00502cd0(*(int*) ((int) sv_SelectedBuilding + 0x14), 2, 0, 0xff, 6);
-			f.v18 = (int) fcn_00502cd0(*(int*) ((int) sv_SelectedBuilding + 0x14), 2, 4, 5, 6);
+			f.v44 = (int) gm_QueryEntities(*(int*) ((int) sv_SelectedBuilding + 0x14), 2, 0, 0xff, 6);
+			f.v18 = (int) gm_QueryEntities(*(int*) ((int) sv_SelectedBuilding + 0x14), 2, 4, 5, 6);
 			if (f.v18 == 0) {
-				f.v18 = (int) fcn_00502cd0(*(int*) ((int) sv_SelectedBuilding + 0x14), 1, 4, 0x11);
+				f.v18 = (int) gm_QueryEntities(*(int*) ((int) sv_SelectedBuilding + 0x14), 1, 4, 0x11);
 			}
 			if (f.v18 == 0) {
-				f.v18 = (int) fcn_00502cd0(*(int*) (entity + 0x5d), 2, 0, 0x2a, 6);
+				f.v18 = (int) gm_QueryEntities(*(int*) (entity + 0x5d), 2, 0, 0x2a, 6);
 			}
 			if (f.v18 == 0) {
-				f.v18 = (int) fcn_00502cd0(*(int*) (entity + 0x5d), 2, 0, 0x116, 6);
+				f.v18 = (int) gm_QueryEntities(*(int*) (entity + 0x5d), 2, 0, 0x116, 6);
 			}
 			if (f.v18 != 0) {
 				goto l_packet;
@@ -315,9 +315,9 @@ int __cdecl d2_RunTradeTransportPanel(int entity, int flags)
 		} else {
 			/* 0x5babe5: the a2 == 2 / a2 == 4 rows, nothing otherwise */
 			if (flags == 2) {
-				f.v18 = (int) fcn_00502cd0(*(int*) ((int) sv_SelectedBuilding + 0x14), flags, 0, 0x1db, 6);
+				f.v18 = (int) gm_QueryEntities(*(int*) ((int) sv_SelectedBuilding + 0x14), flags, 0, 0x1db, 6);
 			} else if (flags == 4) {
-				f.v18 = (int) fcn_00502cd0(*(int*) ((int) sv_SelectedBuilding + 0x14), 2, 0, 0x1dc, 6);
+				f.v18 = (int) gm_QueryEntities(*(int*) ((int) sv_SelectedBuilding + 0x14), 2, 0, 0x1dc, 6);
 			} else {
 				goto l_after;
 			}
@@ -330,9 +330,9 @@ int __cdecl d2_RunTradeTransportPanel(int entity, int flags)
 		f.v70 = flags & 1;
 		if (f.v70 == 0) {
 			if (flags == 2) {
-				f.v18 = (int) fcn_00502cd0(*(int*) (entity + 0x5d), flags, 0, 0x1db, 6);
+				f.v18 = (int) gm_QueryEntities(*(int*) (entity + 0x5d), flags, 0, 0x1db, 6);
 			} else if (flags == 4) {
-				f.v18 = (int) fcn_00502cd0(*(int*) (entity + 0x5d), 2, 0, 0x1dc, 6);
+				f.v18 = (int) gm_QueryEntities(*(int*) (entity + 0x5d), 2, 0, 0x1dc, 6);
 			} else {
 				goto l_after;
 			}
@@ -342,11 +342,11 @@ int __cdecl d2_RunTradeTransportPanel(int entity, int flags)
 			goto l_after;
 		} else {
 			/* 0x5bac1b: entity slot rows without an open container */
-			f.v18 = (int) fcn_00502cd0(*(int*) (entity + 0x5d), 2, 0, 0x2a, 6);
+			f.v18 = (int) gm_QueryEntities(*(int*) (entity + 0x5d), 2, 0, 0x2a, 6);
 			if (f.v18 != 0) {
 				goto l_packet;
 			}
-			f.v18 = (int) fcn_00502cd0(*(int*) (entity + 0x5d), 2, 0, 0x116, 6);
+			f.v18 = (int) gm_QueryEntities(*(int*) (entity + 0x5d), 2, 0, 0x116, 6);
 			if (f.v18 != 0) {
 				goto l_packet;
 			}
@@ -547,7 +547,7 @@ l_sel:
 	if (f.v80 != 0 && d2_DialogButtonAction != -1) {
 		for (i = 0; i < 7; i++) {
 			if (d2_CurrentElementId == f.vD4[i]) {
-				f.v88 = (int) fcn_00502cd0(0, 2, 7, 0, f.vF0[i]);
+				f.v88 = (int) gm_QueryEntities(0, 2, 7, 0, f.vF0[i]);
 				d2_DialogCloseRequested = 1;
 			}
 		}
@@ -575,7 +575,7 @@ l_sel:
 	do {
 		idx = e->f00;
 		if (idx != 0) {
-			if (fcn_00502cd0(*(int*) (f.v7c + 0x5d), 2, 1,
+			if (gm_QueryEntities(*(int*) (f.v7c + 0x5d), 2, 1,
 			                 *(int*) (idx + 2), 3,
 			                 (int) (gm_LocalPlayerSlot)) != 0
 			    && e->f04 == 0) {
@@ -619,7 +619,7 @@ l_next:
 	} while (--f.v10 != 0);
 
 	/* 0x5bb419: fill the visible slot table from the trade container */
-	f.v20 = (int) fcn_00502cd0(*(int*) (f.v7c + 0x5d), 2, 4, 0x1d, 3,
+	f.v20 = (int) gm_QueryEntities(*(int*) (f.v7c + 0x5d), 2, 4, 0x1d, 3,
 	                           (int) (gm_LocalPlayerSlot));
 	for (f.v30 = 0;; ) {
 		if (f.v20 == 0) {
@@ -1078,7 +1078,7 @@ l_5bc2f8:
 	d2_ShowStatusBanner((int) (f.v15D8 + 0xc));
 	goto l_5bc1d7;
 l_5bc370:
-	i = (int) fcn_00502cd0(*(int*) (idx + 0x14), 1, 0, 0x1dd);
+	i = (int) gm_QueryEntities(*(int*) (idx + 0x14), 1, 0, 0x1dd);
 	d2_ClearSelectedControl();
 	if (gm_RandomFloat01() < 0.25f) {
 		ob_TransportFromLager(*(int*) (i + 2), f.v18, f.v14, f.v3c, 0, f.v50,
@@ -1114,7 +1114,7 @@ l_5bc253:
 	if ((*(char*) (idx + 0x20) & 1) != 0) {
 		goto l_5bcab6;
 	}
-	f.v98 = (int) fcn_00502cd0(*(int*) (idx + 0x14), 1, 0, 0x1dd);
+	f.v98 = (int) gm_QueryEntities(*(int*) (idx + 0x14), 1, 0, 0x1dd);
 	f.v30 = (int) (((Ent5af320*) f.v24)->fD8);
 	for (f.v20 = 3; f.v20 != 0; f.v20--, f.v30 += 4) {
 		j = *(int*) f.v30;
@@ -1135,7 +1135,7 @@ l_5bc253:
 		f.v10 = i;
 		idx = 1;
 		if (f.v34 != 0
-		    && fcn_00502cd0(*(int*) (f.v34 + 0x14), 1, 0, slot_value) == 0) {
+		    && gm_QueryEntities(*(int*) (f.v34 + 0x14), 1, 0, slot_value) == 0) {
 			idx = 0;
 		}
 		j = d2_GetControlValue(j);
@@ -1255,7 +1255,7 @@ l_5bc453:
 			}
 			idx = 1;
 			if (f.v44 != 0
-			    && fcn_00502cd0(*(int*) (f.v44 + 0x14), 1, 0, slot) == 0) {
+			    && gm_QueryEntities(*(int*) (f.v44 + 0x14), 1, 0, slot) == 0) {
 				idx = 0;
 			}
 			j = gm_eval_SlotVoll(f.v18, slot, j);
@@ -1331,7 +1331,7 @@ l_5bc700:
 	for (idx = (int) g_776c60; idx < (int) (g_776c60 + 12); idx += 8) {
 		int slot;
 
-		f.vA4 = (int) fcn_00502cd0(*(int*) (f.v20 + 0x14), 1, 0, 0x1dd);
+		f.vA4 = (int) gm_QueryEntities(*(int*) (f.v20 + 0x14), 1, 0, 0x1dd);
 		if (*(int*) (idx + 4) == 0) {
 			continue;
 		}
@@ -1386,7 +1386,7 @@ l_5bcb82:
 	if ((*(char*) (idx + 0x20) & 1) != 0) {
 		goto l_5bcc9f;
 	}
-	h = (int) fcn_00502cd0(*(int*) (idx + 0x14), 1, 0, 0x1dd);
+	h = (int) gm_QueryEntities(*(int*) (idx + 0x14), 1, 0, 0x1dd);
 	f.v30 = f.v10 + 0xd8;
 	for (f.v1c = 3; f.v1c != 0; f.v1c--, f.v30 += 4) {
 		j = *(int*) f.v30;
@@ -1395,7 +1395,7 @@ l_5bcb82:
 		}
 		slot_value = g_00f8f080[j].f08 - 0xdf;
 		if (f.v34 != 0
-		    && fcn_00502cd0(*(int*) (f.v34 + 0x14), 1, 1, slot_value) == 0) {
+		    && gm_QueryEntities(*(int*) (f.v34 + 0x14), 1, 1, slot_value) == 0) {
 			continue;
 		}
 		f.v38 = d2_GetControlValue(j);
@@ -1519,7 +1519,7 @@ l_5bcd9a:
 	l_5bced7:
 		idx = *(int*) f.v10;
 		if (idx != 0) {
-			f.vA4 = (int) fcn_00502cd0(*(int*) (idx + 0x14), 1, 0, 0x1dd);
+			f.vA4 = (int) gm_QueryEntities(*(int*) (idx + 0x14), 1, 0, 0x1dd);
 			f.v30 = f.v10 + 0xd8;
 			for (f.v1c = 3; f.v1c != 0; f.v1c--, f.v30 += 4) {
 				if (*(int*) f.v30 == -1) {

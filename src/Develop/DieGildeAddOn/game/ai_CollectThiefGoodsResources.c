@@ -54,7 +54,7 @@ extern unsigned char gm_ActiveTownIndex;
 char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
 char* __cdecl gm_FindNextFilteredEntity(void);
 char* __cdecl gm_NextEntityQueryMatch(void);
-char* __cdecl fcn_00502cd0(int container, int a, ...);
+char* __cdecl gm_QueryEntities(int container, int a, ...);
 char* __cdecl gm_FindSlotById(int a, int b);
 int __cdecl gm_GetBuildingTypeCategory(int a);
 float __cdecl gm_GetSeasonPrice(int id, unsigned char a);
@@ -102,9 +102,9 @@ void __cdecl ai_CollectThiefGoodsResources(char* actor, int building, int skipSe
 	if (!skipSell) {
 		ent = gm_StartFilteredEntitySearch(1, 0, 0x47);
 		while (ent) {
-			cont = fcn_00502cd0(*(int*) (ent + 0x5d), 2, 0, 0x1db, 6);
+			cont = gm_QueryEntities(*(int*) (ent + 0x5d), 2, 0, 0x1db, 6);
 			if (cont) {
-				slot = fcn_00502cd0(*(int*) (cont + 0x14), 1, 5);
+				slot = gm_QueryEntities(*(int*) (cont + 0x14), 1, 5);
 				while (slot) {
 					id = *(unsigned short*) slot;
 					obj = gm_FindSlotById(*(int*) (ent + 0x65), id);
@@ -140,16 +140,16 @@ void __cdecl ai_CollectThiefGoodsResources(char* actor, int building, int skipSe
 						pa[idx].f3c = 0x80;
 						if (idx == ai_ResourceCount)
 							ai_ResourceCount++;
-						q = fcn_00502cd0(*(int*) (cont + 0x14), 1, 5);
+						q = gm_QueryEntities(*(int*) (cont + 0x14), 1, 5);
 						while (q && q != slot)
 							q = gm_NextEntityQueryMatch();
 					}
 label_485b77:
 					slot = gm_NextEntityQueryMatch();
 				}
-				cont = fcn_00502cd0(*(int*) (ent + 0x5d), 2, 0, 0x1db, 6);
+				cont = gm_QueryEntities(*(int*) (ent + 0x5d), 2, 0, 0x1db, 6);
 				if (cont) {
-					slot = fcn_00502cd0(*(int*) (cont + 0x14), 1, 5);
+					slot = gm_QueryEntities(*(int*) (cont + 0x14), 1, 5);
 					while (slot) {
 						id = *(unsigned short*) slot;
 						obj = gm_FindSlotById(*(int*) (ent + 0x65), id);
@@ -187,7 +187,7 @@ label_485b77:
 								pb[idx].f54 = 0x100;
 								if (idx == ai_ProductionGoodsCount)
 									ai_ProductionGoodsCount++;
-								q = fcn_00502cd0(*(int*) (cont + 0x14), 1, 5);
+								q = gm_QueryEntities(*(int*) (cont + 0x14), 1, 5);
 								while (q && q != slot)
 									q = gm_NextEntityQueryMatch();
 							}
@@ -205,10 +205,10 @@ label_485d61:
 		t = *(unsigned char*) rec;
 		if (gm_GetBuildingTypeCategory(t) != 2)
 			continue;
-		cont = fcn_00502cd0(*(int*) (rec + 0x5d), 2, 0, 0x2a, 6);
+		cont = gm_QueryEntities(*(int*) (rec + 0x5d), 2, 0, 0x2a, 6);
 		if (!cont)
 			continue;
-		slot = fcn_00502cd0(*(int*) (cont + 0x14), 1, 5);
+		slot = gm_QueryEntities(*(int*) (cont + 0x14), 1, 5);
 		while (slot) {
 			id = *(unsigned short*) slot;
 			obj = gm_FindSlotById(gm_ActiveTownIndex, id);
@@ -247,7 +247,7 @@ label_485d61:
 				pa[idx].f38 = gm_GetMsgObjektField((int) cont, id);
 				if (idx == ai_ResourceCount)
 					ai_ResourceCount++;
-				q = fcn_00502cd0(*(int*) (cont + 0x14), 1, 5);
+				q = gm_QueryEntities(*(int*) (cont + 0x14), 1, 5);
 				while (q && q != slot)
 					q = gm_NextEntityQueryMatch();
 			}

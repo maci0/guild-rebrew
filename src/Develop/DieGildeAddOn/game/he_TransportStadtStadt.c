@@ -6,7 +6,7 @@ extern void *__cdecl gm_FindRecordById(int);
 extern int __cdecl gm_IsWarehouse(unsigned char *);
 extern char *__cdecl he_PickRandomSceneObject(char *);
 extern void __cdecl he_ApplyTransportSpeedModifiers(char *, char *);
-extern void *__cdecl fcn_00502cd0(int, int, ...);
+extern void *__cdecl gm_QueryEntities(int, int, ...);
 extern char *__cdecl d3sm_GetObjectSuperMap(char *);
 extern char __cdecl d3sm_SampleHeight(char *, float *, int *, int *, float *);
 extern void __cdecl d3_SelectSceneContext(int, int);
@@ -55,9 +55,9 @@ void __cdecl he_TransportStadtStadt(char *transportEvent)
 			v6 = *(char **)(v5 + 0x61);
 		d3_TransformPoint(v6, v6 + 0x4c, l_pos);
 		if (gm_IsWarehouse((unsigned char *)v4))
-			v6 = (char *)fcn_00502cd0(*(int *)(v3 + 0x5d), 1, 1, *(int *)(transportEvent + 0xac));
+			v6 = (char *)gm_QueryEntities(*(int *)(v3 + 0x5d), 1, 1, *(int *)(transportEvent + 0xac));
 		else
-			v6 = (char *)fcn_00502cd0(*(int *)(v4 + 0x5d), 1, 1,
+			v6 = (char *)gm_QueryEntities(*(int *)(v4 + 0x5d), 1, 1,
 						  *(int *)(transportEvent + 0xac));
 		if (!v6)
 			v6 = (char *)gm_FindRecordById(*(int *)(transportEvent + 0xac));
@@ -90,7 +90,7 @@ void __cdecl he_TransportStadtStadt(char *transportEvent)
 								   *(int *)(transportEvent + 0xb0),
 								   *(int *)(transportEvent + 0xac));
 		} else {
-			fcn_00502cd0(0, 2, 7, 1, *(int *)(transportEvent + 0xac));
+			gm_QueryEntities(0, 2, 7, 1, *(int *)(transportEvent + 0xac));
 		}
 		d3_SelectSceneContext(l_saved, 1);
 		*(int *)(transportEvent + 0xc4) = *(int *)(v3 + 1);
@@ -98,9 +98,9 @@ void __cdecl he_TransportStadtStadt(char *transportEvent)
 	}
 	if (*(int *)(transportEvent + 0xc4) != *(int *)(v3 + 1))
 		return;
-	v4 = (char *)fcn_00502cd0(*(int *)(v3 + 0x5d), 1, 1, *(int *)(transportEvent + 0xac));
+	v4 = (char *)gm_QueryEntities(*(int *)(v3 + 0x5d), 1, 1, *(int *)(transportEvent + 0xac));
 	if (!v4)
-		v4 = (char *)fcn_00502cd0(0, 2, 7, 1, *(int *)(transportEvent + 0xac));
+		v4 = (char *)gm_QueryEntities(0, 2, 7, 1, *(int *)(transportEvent + 0xac));
 	if (v4) {
 		v6 = *(char **)(v4 + 0x3b);
 		he_ApplyTransportSpeedModifiers(transportEvent, v4);
@@ -159,6 +159,6 @@ void __cdecl he_TransportStadtStadt(char *transportEvent)
 				*(int *)(0x14a6558 + *(unsigned char *)v5 * 0x38));
 	} else {
 		__asm { int 3 }
-		fcn_00502cd0(0, 2, 7, 1, *(int *)(transportEvent + 0xac));
+		gm_QueryEntities(0, 2, 7, 1, *(int *)(transportEvent + 0xac));
 	}
 }

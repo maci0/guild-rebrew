@@ -15,7 +15,7 @@ extern int g_aux_entity_count;
 extern int g_aux_entity_buffer;
 
 /* ADDRESS: GOLDTL 0x00522510 */
-int __cdecl fcn_00522510(void* stream)
+int __cdecl ls_LoadClientBuildingEntityState(void* stream)
 {
 	int entity_count;
 	int current_index;

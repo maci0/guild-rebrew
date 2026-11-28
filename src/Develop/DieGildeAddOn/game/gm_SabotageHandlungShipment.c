@@ -18,7 +18,7 @@ int __cdecl gm_FindRecordById(int);
 unsigned short __cdecl gm_RandomMod(int);
 
 float __cdecl eval_ObjektPreis2Credits(int, char);
-void *__cdecl fcn_00502cd0(int, int, ...);
+void *__cdecl gm_QueryEntities(int, int, ...);
 void *__cdecl gm_NextEntityQueryMatch(void);
 void __cdecl cm_SendRemoveLinkedObject(int, int, int);
 void __cdecl cm_SendSetHE(int, void *);
@@ -72,7 +72,7 @@ int __cdecl gm_SabotageHandlungShipment(int *msg)
 	item = recs[k];
 	total = (int) eval_ObjektPreis2Credits(*(unsigned short *) item, *(char *) (item + 0x12));
 
-	cargo = (char *) fcn_00502cd0(*(int *) (item + 0x14), 2, 5, 6);
+	cargo = (char *) gm_QueryEntities(*(int *) (item + 0x14), 2, 5, 6);
 	while (cargo != 0) {
 		total = (int) (eval_ObjektPreis2Credits(*(unsigned short *) cargo, *(char *) (item + 0x12))
 		             * *(int *) (cargo + 0xe)

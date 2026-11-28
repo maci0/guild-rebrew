@@ -33,7 +33,7 @@ void __cdecl cut_WaitForScript(int a);
 void __cdecl cut_RunTurnRound(int arg, int* ids);
 void __cdecl cut_WaitTicks(int a);
 int __cdecl gm_GetGuildHall(int a);
-int __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
+int __cdecl gm_QueryEntities(int a, int b, int c, int d, int e);
 void __cdecl cm_SendSetGebBesitzer(int a, int b, int c);
 void __cdecl cut_FadeToBlack(void);
 void __cdecl evt_StopScriptIfActive(int a);
@@ -293,7 +293,7 @@ void __cdecl cut_RunAuction(int* arg)
 			    *(int*) (gm_CityEntity + 4),
 			    *(int*) ((char*) bidders[besti] + 4));
 			other = (int) gm_GetGuildHall(1);
-			other = fcn_00502cd0(*(int*) ((char*) other + 0x5d), 2, 6, 0, 0x115);
+			other = gm_QueryEntities(*(int*) ((char*) other + 0x5d), 2, 6, 0, 0x115);
 			if (found == bidders[besti]) {
 				cm_RequestTransferCurrencyNoKill(*(int*) ((char*) other + 2),
 				    *(int*) ((char*) bidders[besti] + 4), 0,

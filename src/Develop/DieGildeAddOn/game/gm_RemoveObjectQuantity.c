@@ -5,7 +5,7 @@
 extern char g_6997e8[];
 
 
-void* __cdecl fcn_00502cd0(int list, int a, int b, int c);
+void* __cdecl gm_QueryEntities(int list, int a, int b, int c);
 char* __cdecl gm_AllocObjekt(int a, int b, int c);
 int __cdecl gm_RemoveObjectByType(char* list, int b);
 int __cdecl sprintf(char* buf, const char* fmt, ...);
@@ -29,7 +29,7 @@ int __cdecl gm_RemoveObjectQuantity(int a, int b, int c)
 	} else {
 		return 0;
 	}
-	r = fcn_00502cd0(*(int*) list_head, 1, 0, b);
+	r = gm_QueryEntities(*(int*) list_head, 1, 0, b);
 	if (r == 0) {
 		return 0;
 	}

@@ -28,7 +28,7 @@ int __cdecl ai_EvalBlackjackAction();
 int __cdecl gm_UpdateBlackjackState();
 int __cdecl cm_RequestTransferCurrencyNoKill();
 int __cdecl fcn_00502850();
-int __cdecl fcn_00502cd0();
+int __cdecl gm_QueryEntities();
 int __cdecl fcn_00503fe0();
 int __cdecl fcn_00509570();
 int __cdecl gm_AmountToUnits(int a,unsigned char b);

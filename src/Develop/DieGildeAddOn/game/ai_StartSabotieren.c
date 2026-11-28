@@ -28,7 +28,7 @@ extern char gm_EntitySlotTable[];
 
 int __cdecl gm_GetSeasonTreasury(char* e, unsigned char flag);
 int __cdecl ai_SelectBestMethod(int kind, int id, int n, Msg* b1, Msg* b2);
-int __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
+int __cdecl gm_QueryEntities(int a, int b, int c, int d, int e);
 void __cdecl gm_GetLawEntry(int size, Stat* st);
 unsigned short __cdecl gm_RandomMod(int a);
 int __cdecl ai_FindEntityInFavorRange(char* p, int kind, F8 f, int c, float r, int* out);
@@ -80,7 +80,7 @@ int __cdecl ai_StartSabotieren(int who, char* entity, int busy, Msg* out1, Msg* 
 		if ((entity[0x1e8] & 2) == 0) {
 			return 0;
 		}
-	} else if (fcn_00502cd0(*(int*)(*(int*)(entity + 0x170) + 0x5d), 2, 6, 0, 0x14) == 0) {
+	} else if (gm_QueryEntities(*(int*)(*(int*)(entity + 0x170) + 0x5d), 2, 6, 0, 0x14) == 0) {
 		b1.kind = 2;
 		b1.a = 0x14;
 		b1.b = 1;

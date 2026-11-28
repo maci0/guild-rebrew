@@ -12,7 +12,7 @@ typedef struct Msg {
 /* SIZE 0x18 */
 
 unsigned short __cdecl gm_RandomMod(int n);
-char* __cdecl fcn_00502cd0(int, int, int, int, int);
+char* __cdecl gm_QueryEntities(int, int, int, int, int);
 int __cdecl ai_SelectBestMethod(int kind, int id, int n, Msg* b1, Msg* b2);
 int __cdecl ai_SelectPamphletTarget(char* e, char* a2, char* out);
 
@@ -50,7 +50,7 @@ int __cdecl ai_StartPamphlete(int a1, char* e, int busy, Msg* out1, Msg* out2)
 		}
 	} else {
 		if (e[2] != 3) {
-			if (fcn_00502cd0(*(int*) (*(char**) (e + 0x170) + 0x5d), 2, 6, 0, 0x15) == 0) {
+			if (gm_QueryEntities(*(int*) (*(char**) (e + 0x170) + 0x5d), 2, 6, 0, 0x15) == 0) {
 				a.type = 2;
 				a.a = 0x15;
 				a.b = 1;

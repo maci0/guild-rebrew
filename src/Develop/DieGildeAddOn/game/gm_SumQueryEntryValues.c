@@ -1,6 +1,6 @@
 /* fcn_0050b810 — sum one field over the query matches. */
 
-void* __cdecl fcn_00502cd0(int, int, int, int);
+void* __cdecl gm_QueryEntities(int, int, int, int);
 void* __cdecl gm_NextEntityQueryMatch(void);
 
 /* ADDRESS: GOLDTL 0x0050b810 */
@@ -10,7 +10,7 @@ int __cdecl gm_SumQueryEntryValues(int list)
 	int total;
 
 	total = 0;
-	entry = fcn_00502cd0(list, 1, 4, 9);
+	entry = gm_QueryEntities(list, 1, 4, 9);
 	while (entry != 0) {
 		total = total + *(int*) ((char*) entry + 0xe);
 		entry = gm_NextEntityQueryMatch();

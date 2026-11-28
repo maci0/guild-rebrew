@@ -9,7 +9,7 @@ extern int ai_FeudTargetEntity;
 int __cdecl gm_GetSeasonTreasury(char*, char);
 int __cdecl gm_WalkEntityChain(unsigned short);
 int __cdecl gm_CheckPrivilege(int, char*, int*);
-int __cdecl fcn_00502cd0(int, int, int, int, int);
+int __cdecl gm_QueryEntities(int, int, int, int, int);
 int __cdecl ai_SelectBestMethod(int, unsigned short, int, void*, void*);
 int __cdecl gm_GetLawEntry(int, void*);
 unsigned short __cdecl gm_RandomMod(int);
@@ -73,7 +73,7 @@ int __cdecl ai_StartBeatUp(int unused0, char* e, int busy, AI_BEATUP_MSG* out1, 
 		if (kind == 3) {
 			goto check_flag;
 		}
-		if (fcn_00502cd0(*(int*) (*(char**) (e + 0x170) + 0x5d), 2, 6, 0,
+		if (gm_QueryEntities(*(int*) (*(char**) (e + 0x170) + 0x5d), 2, 6, 0,
 				0x14) != 0) {
 			goto main;
 		}

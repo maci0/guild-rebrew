@@ -33,7 +33,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 int __cdecl d2_TutorialAllowsFlag(int);
 void __cdecl d2_DispatchTutorialInput(int, int, int, int);
-void* __cdecl fcn_00502cd0(int, int, ...);
+void* __cdecl gm_QueryEntities(int, int, ...);
 int __cdecl d2_OpenDependencyDiagram(char*, char*, void*);
 int __cdecl d2_ShowModalMessageBox(char*, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -90,9 +90,9 @@ void __cdecl d2_RunTechTreeDialog(char* a0, int a1)
 		d2_DispatchTutorialInput(0x11, (int) a0, 0, a1);
 	}
 	house = (char *)&((ENTITY_RECORD*)gm_EntitySlotTable)[(unsigned int) gm_LocalPlayerSlot];
-	q = fcn_00502cd0(*(int*) (a0 + 0x5d), 1, 0, a1);
+	q = gm_QueryEntities(*(int*) (a0 + 0x5d), 1, 0, a1);
 	if (!q) {
-		q = fcn_00502cd0(*(int*) (a0 + 0x5d), 1, 4, 2);
+		q = gm_QueryEntities(*(int*) (a0 + 0x5d), 1, 4, 2);
 		if (!q)
 			return;
 	}
@@ -122,9 +122,9 @@ void __cdecl d2_RunTechTreeDialog(char* a0, int a1)
 				if (!d2_DispatchTutorialEvent(0x2b, (int) a0, 0, sel)) continue; {
 					node = (char *)&((OBJECT_PROTOTYPE*)lpObjektePROT)[sel];
 					if (q)
-						item = (int) fcn_00502cd0(*(int*) ((char*) q + 0x14), 1, 0, sel);
+						item = (int) gm_QueryEntities(*(int*) ((char*) q + 0x14), 1, 0, sel);
 					else
-						item = (int) fcn_00502cd0(*(int*) (a0 + 0x5d), 2, 6, 0, sel);
+						item = (int) gm_QueryEntities(*(int*) (a0 + 0x5d), 2, 6, 0, sel);
 					if (!item) {
 						*(unsigned char*) (msg + 0x36) = 1;
 						if (*(unsigned char*) ((char *)&((OBJECT_PROTOTYPE*)lpObjektePROT)[sel]) == 6) {

@@ -6,7 +6,7 @@ extern unsigned char gm_ActiveTownIndex;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern char g_6aae08[];
 
-char* __cdecl fcn_00502cd0(int, int, int, int, int);
+char* __cdecl gm_QueryEntities(int, int, int, int, int);
 int __cdecl gm_SumQueryEntryValues(int, char);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
@@ -22,7 +22,7 @@ void __cdecl d2_ShowGildenkasseDialog(char* e)
 	int v;
 	int h;
 
-	r = fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0x115);
+	r = gm_QueryEntities(*(int*) (e + 0x5d), 2, 6, 0, 0x115);
 	v = gm_SumQueryEntryValues(*(int*) (r + 0x14), (*(char*)&gm_ActiveTownIndex));
 	h = d2_LoadForm(0, 0, g_6aae08);
 	d2_CenterDialogWindows(h);

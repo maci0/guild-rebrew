@@ -80728,12 +80728,12 @@ updated_by = "test"
 ["GOLD.0x004ffe90"]
 size = 300
 status = "RELOC"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:28:34+00:00"
+updated_by = "rename"
+updated_at = "2026-11-28T14:14:54+00:00"
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_00502cd0.c"
-symbol = "_fcn_00502cd0"
+symbol = "_gm_QueryEntities"
 kind = "FUNCTION"
-name = "fcn_00502cd0"
+name = "gm_QueryEntities"
 
 ["GOLD.0x004ffe90".verification]
 source_hash = "6ff3d8eb646456b6bf3f9c420353a7c34dab9071be93dc1d51ba1c5d8e491d9d"
@@ -122663,12 +122663,12 @@ measured_at = "2026-11-28T11:56:23+00:00"
 ["GOLDTL.0x0040c630"]
 size = 130
 status = "RELOC"
-updated_by = "rehome"
-updated_at = "2026-11-28T12:57:21+00:00"
+updated_by = "rename"
+updated_at = "2026-11-28T14:15:51+00:00"
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_0040c630.c"
-symbol = "_fcn_0040c630"
+symbol = "_ecmd_Sleep"
 kind = "FUNCTION"
-name = "fcn_0040c630"
+name = "ecmd_Sleep"
 similarity = 92.10526315789474
 
 ["GOLDTL.0x0040c630".verification]
@@ -192563,12 +192563,12 @@ updated_by = "verify"
 ["GOLDTL.0x004b8550"]
 size = 284
 status = "RELOC"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:33:13+00:00"
+updated_by = "rename"
+updated_at = "2026-11-28T14:17:25+00:00"
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_004b8550.c"
-symbol = "_fcn_004b8550"
+symbol = "_gm_HandleStenchFavorLoss"
 kind = "FUNCTION"
-name = "fcn_004b8550"
+name = "gm_HandleStenchFavorLoss"
 similarity = 99.00990099009901
 
 ["GOLDTL.0x004b8550".verification]
@@ -192915,12 +192915,12 @@ updated_by = "test"
 ["GOLDTL.0x004b9bd0"]
 size = 649
 status = "RELOC"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:33:13+00:00"
+updated_by = "rename"
+updated_at = "2026-11-28T14:17:40+00:00"
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_004b9bd0.c"
-symbol = "_fcn_004b9bd0"
+symbol = "_gm_HandleLostLongDistanceTransport"
 kind = "FUNCTION"
-name = "fcn_004b9bd0"
+name = "gm_HandleLostLongDistanceTransport"
 similarity = 96.81818181818181
 
 ["GOLDTL.0x004b9bd0".verification]
@@ -222242,12 +222242,12 @@ updated_by = "test"
 ["GOLDTL.0x00502cd0"]
 size = 300
 status = "RELOC"
-updated_by = "test"
-updated_at = "2026-11-03T05:11:05+00:00"
+updated_by = "rename"
+updated_at = "2026-11-28T14:14:54+00:00"
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_00502cd0.c"
-symbol = "_fcn_00502cd0"
+symbol = "_gm_QueryEntities"
 kind = "FUNCTION"
-name = "fcn_00502cd0"
+name = "gm_QueryEntities"
 similarity = 83.9080459770115
 
 ["GOLDTL.0x00502cd0".verification]
@@ -237853,12 +237853,12 @@ updated_by = "verify"
 ["GOLDTL.0x005490e0"]
 size = 69
 status = "RELOC"
-updated_by = "rehome"
-updated_at = "2026-11-28T12:57:21+00:00"
+updated_by = "rename"
+updated_at = "2026-11-28T14:15:06+00:00"
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_005490e0.c"
-symbol = "_fcn_005490e0"
+symbol = "_he_PostSimPersonal"
 kind = "FUNCTION"
-name = "fcn_005490e0"
+name = "he_PostSimPersonal"
 similarity = 93.75
 
 ["GOLDTL.0x005490e0".verification]
@@ -240905,12 +240905,12 @@ measured_at = "2026-11-28T11:56:28+00:00"
 ["GOLDTL.0x0055a8e0"]
 size = 60
 status = "RELOC"
-updated_by = "rehome"
-updated_at = "2026-11-28T12:57:21+00:00"
+updated_by = "rename"
+updated_at = "2026-11-28T14:15:09+00:00"
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_0055a8e0.c"
-symbol = "_fcn_0055a8e0"
+symbol = "_he_StartSideChange"
 kind = "FUNCTION"
-name = "fcn_0055a8e0"
+name = "he_StartSideChange"
 similarity = 100.0
 
 ["GOLDTL.0x0055a8e0".verification]
@@ -246379,12 +246379,12 @@ updated_by = "verify"
 ["GOLDTL.0x0057c860"]
 size = 109
 status = "RELOC"
-updated_by = "rehome"
-updated_at = "2026-11-28T12:57:21+00:00"
+updated_by = "rename"
+updated_at = "2026-11-28T14:18:13+00:00"
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_0057c860.c"
-symbol = "_fcn_0057c860"
+symbol = "_he_ScheduleZigeunerActionExpiry"
 kind = "FUNCTION"
-name = "fcn_0057c860"
+name = "he_ScheduleZigeunerActionExpiry"
 similarity = 85.71428571428571
 
 ["GOLDTL.0x0057c860".verification]
@@ -599603,11 +599603,11 @@ updated_by = "test"
 ["GOLDTL.0x004c6f70"]
 size = 456
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_004c6f70.c"
-symbol = "_fcn_004c6f70"
-name = "fcn_004c6f70"
+symbol = "_cm_ChkClientSellObjekt"
+name = "cm_ChkClientSellObjekt"
 kind = "FUNCTION"
-updated_by = "test"
-updated_at = "2026-11-16T11:34:16+00:00"
+updated_by = "rename"
+updated_at = "2026-11-28T14:14:49+00:00"
 status = "RELOC"
 similarity = 100.0
 
@@ -623860,11 +623860,11 @@ updated_by = "test"
 ["GOLDTL.0x00522510"]
 size = 1455
 file = "src/Develop/DieGildeAddOn/loadsave/GOLDTL.fcn_00522510.c"
-symbol = "_fcn_00522510"
-name = "fcn_00522510"
+symbol = "_ls_LoadClientBuildingEntityState"
+name = "ls_LoadClientBuildingEntityState"
 kind = "FUNCTION"
-updated_by = "rehome"
-updated_at = "2026-10-27T08:34:54+00:00"
+updated_by = "rename"
+updated_at = "2026-11-28T14:15:02+00:00"
 status = "RELOC"
 similarity = 99.3975903614458
 
@@ -627330,11 +627330,11 @@ updated_by = "test"
 ["GOLDTL.0x00585030"]
 size = 1839
 file = "src/Develop/Units/d2.v1/GOLDTL.fcn_00585030.c"
-symbol = "_fcn_00585030"
-name = "fcn_00585030"
+symbol = "_d2_ShowAlchemyFormulaBook"
+name = "d2_ShowAlchemyFormulaBook"
 kind = "FUNCTION"
-updated_by = "fix-sizes"
-updated_at = "2026-10-29T11:14:46+00:00"
+updated_by = "rename"
+updated_at = "2026-11-28T14:16:16+00:00"
 status = "SIZE_MISMATCH"
 blocker = "Application code — pending per-function decompilation"
 similarity = 71.77637511271415
@@ -633109,11 +633109,11 @@ updated_by = "test"
 ["GOLDTL.0x0050a7e0"]
 size = 3872
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_0050a7e0.c"
-symbol = "_fcn_0050a7e0"
-name = "fcn_0050a7e0"
+symbol = "_gm_AllocClientSpieler"
+name = "gm_AllocClientSpieler"
 kind = "FUNCTION"
-updated_by = "rehome"
-updated_at = "2026-11-28T12:57:21+00:00"
+updated_by = "rename"
+updated_at = "2026-11-28T14:14:59+00:00"
 status = "STUB"
 blocker = "Partial reconstruction kept (no STUB): SIZE_MISMATCH 4/3872, obj 107. Recovered: the two 0x7f4ca0/0x7f4ca2 type-table scans (540-byte stride, 0x300 bound, word 0xffff / byte 0x0f sentinels) and the 0x773d70 decrement on a 0x0f hit. Remaining: the action-table dispatch after 0x50a851 (0x64d41a/0x4eef70/0x42e410/0x42e450/0x4fdec0/0x42e470/0x64d228 calls and the 0x773d70/0x773d74 handlers), i.e. nearly the whole 3872-byte body."
 blocker_delta = 3868
@@ -755509,12 +755509,12 @@ evidence = "Reviewed native GOLDTL 0x405180: three conditional bare INT3 debug t
 
 
 [source.definitions."src/Develop/DieGildeAddOn/game/gm_InitCityAndTradeState.c".gm_InitCityAndTradeState.GOLD]
-source_hash = "6ad53f95ea0f08efcb916ac6b1521f1df4dd0d5bf67ddc034050ee34f51c1ace"
+source_hash = "10078b808e4f0b75d63a2ed269a8258b510304c3271726e22e214e90f945ef50"
 evidence = "Inference: very likely original inline assembly at the reviewed native GOLD core sites 0x511507. Positive structural evidence is the fixed EBX count, LEA(3*EDI)&3 alignment and three REP passes across distinct native contexts. Native building-table instances in both clients spill literal 0x3f0 and reload EBX before the core; that operand homing supports the family inference. Goal108 freshly checks 209 distinct target/site pairs, including these sites; the building-table spill/reload is independently rechecked in both clients. Compiler controls and stock-library exclusions only corroborate that structural inference. Neither an unsuccessful C search nor byte agreement establishes provenance or impossibility of a C spelling. No original macro name, authorship, whole-function verdict, provider, layout or storage owner is claimed. Native checks and historical receipt details: .scratch/goal108-assembly-provenance/native-cores.json and before.json; docs/assembly-audit.md and docs/msvc6-allocator.md."
 
 
 [source.definitions."src/Develop/DieGildeAddOn/game/he_UpdateFest.c".he_UpdateFest.GOLD]
-source_hash = "34d258651930260dc9294a8011049e0e8dc2f6706021e9fc818bea658b523c4d"
+source_hash = "c66899b46bfb524dd6e8814feff4c363497ed32ab2ee601e2cfd212f5f511304"
 evidence = "Inference: very likely original inline assembly at the reviewed native GOLD core sites 0x543b0d. Positive structural evidence is the fixed EBX count, LEA(3*EDI)&3 alignment and three REP passes across distinct native contexts. Native building-table instances in both clients spill literal 0x3f0 and reload EBX before the core; that operand homing supports the family inference. Goal108 freshly checks 209 distinct target/site pairs, including these sites; the building-table spill/reload is independently rechecked in both clients. Compiler controls and stock-library exclusions only corroborate that structural inference. Neither an unsuccessful C search nor byte agreement establishes provenance or impossibility of a C spelling. No original macro name, authorship, whole-function verdict, provider, layout or storage owner is claimed. Native checks and historical receipt details: .scratch/goal108-assembly-provenance/native-cores.json and before.json; docs/assembly-audit.md and docs/msvc6-allocator.md."
 
 
@@ -755620,13 +755620,12 @@ evidence = "Reviewed native fixed-EBX zero-fill at 0x496ea7..0x496ec7: LEA ECX,[
 
 
 [source.definitions."src/Develop/DieGildeAddOn/command/am_RegisterGameMethods.c".am_RegisterGameMethods.GOLD]
-source_hash = "079732f94664eafc806c2a8b6b06d9f1f33360e0e402e610f54d3f2a3aadd0f7"
+source_hash = "be61fc295b52853d90a865ba695edc058803d3694c08b7ca763e7e151cc2a940"
 evidence = "Inference: very likely original inline assembly, not a claim of recovered macro name or authorship. Positive structural evidence in docs/msvc6-allocator.md (hand-written asm section): the same fixed-EBX fill/copy core across 725 diverse native sites, versus varying allocated scratch registers around ordinary compiler expansions, plus operand homing including a literal 0x3f0 spilled and reloaded before the core. This is stronger than an unsuccessful C search; stock-library exclusions and byte agreement only corroborate it. Fresh Goal85 check: this target registry contains all 60 complete 26-byte fill cores (8d0c7f...03cbf3aa) inside its 9106-byte body; all 60 source blocks were preserved in Goal84. Whole-function byte agreement, callback bindings and raw-link provider/placement are separate and are not established by this receipt."
 
 [source.definitions."src/Develop/DieGildeAddOn/command/am_RegisterGameMethods.c".am_RegisterGameMethods.GOLDTL]
-source_hash = "079732f94664eafc806c2a8b6b06d9f1f33360e0e402e610f54d3f2a3aadd0f7"
+source_hash = "be61fc295b52853d90a865ba695edc058803d3694c08b7ca763e7e151cc2a940"
 evidence = "Inference: very likely original inline assembly, not a claim of recovered macro name or authorship. Positive structural evidence in docs/msvc6-allocator.md (hand-written asm section): the same fixed-EBX fill/copy core across 725 diverse native sites, versus varying allocated scratch registers around ordinary compiler expansions, plus operand homing including a literal 0x3f0 spilled and reloaded before the core. This is stronger than an unsuccessful C search; stock-library exclusions and byte agreement only corroborate it. Fresh Goal85 check: this target registry contains all 60 complete 26-byte fill cores (8d0c7f...03cbf3aa) inside its 9106-byte body; all 60 source blocks were preserved in Goal84. Whole-function byte agreement, callback bindings and raw-link provider/placement are separate and are not established by this receipt."
-
 
 [source.definitions."src/Develop/DieGildeAddOn/game/ai_RegisterSocialMethods.c".ai_RegisterSocialMethods.GOLD]
 source_hash = "ce04626f7bdadf6743e2dbe43905a6588f68548b85b5f9f8c2ee3512ba763d96"
@@ -756380,12 +756379,12 @@ symbol = "_fcn_00465e60"
 kind = "FUNCTION"
 ["GOLDTL.0x005435d0"]
 size = 6
-file = "src/Develop/DieGildeAddOn/game/fcn_005435d0.c"
-symbol = "_fcn_005435d0"
-name = "fcn_005435d0"
+file = "src/Develop/DieGildeAddOn/game/CheckGameDisc.c"
+symbol = "_CheckGameDisc"
+name = "CheckGameDisc"
 kind = "FUNCTION"
-updated_by = "rehome"
-updated_at = "2026-11-28T12:57:21+00:00"
+updated_by = "rename"
+updated_at = "2026-11-28T14:18:06+00:00"
 status = "EXACT"
 similarity = 100.0
 
@@ -779450,12 +779449,12 @@ kind = "FUNCTION"
 ["GOLDTL.0x004a7111".binding_history.replacement]
 ["GOLDTL.0x004ba470"]
 size = 3
-file = "src/Develop/DieGildeAddOn/game/fcn_004ba470.c"
-symbol = "_fcn_004ba470"
-name = "fcn_004ba470"
+file = "src/Develop/DieGildeAddOn/game/gm_HandleStaffRiot.c"
+symbol = "_gm_HandleStaffRiot"
+name = "gm_HandleStaffRiot"
 kind = "FUNCTION"
-updated_by = "rehome"
-updated_at = "2026-11-28T12:57:21+00:00"
+updated_by = "rename"
+updated_at = "2026-11-28T14:17:47+00:00"
 status = "EXACT"
 similarity = 100.0
 
@@ -780567,12 +780566,12 @@ changed_at = "2026-10-25T11:17:14.551351+00:00"
 updated_by = "test"
 ["GOLDTL.0x004bb090"]
 size = 6
-file = "src/Develop/DieGildeAddOn/game/fcn_004bb090.c"
-symbol = "_fcn_004bb090"
-name = "fcn_004bb090"
+file = "src/Develop/DieGildeAddOn/game/gm_HandleLeisureBuildingStockEvent.c"
+symbol = "_gm_HandleLeisureBuildingStockEvent"
+name = "gm_HandleLeisureBuildingStockEvent"
 kind = "FUNCTION"
-updated_by = "rehome"
-updated_at = "2026-11-28T12:57:21+00:00"
+updated_by = "rename"
+updated_at = "2026-11-28T14:17:53+00:00"
 status = "EXACT"
 similarity = 100.0
 
@@ -780605,12 +780604,12 @@ changed_at = "2026-10-25T11:29:55.157480+00:00"
 updated_by = "test"
 ["GOLDTL.0x004bb0a0"]
 size = 6
-file = "src/Develop/DieGildeAddOn/game/fcn_004bb0a0.c"
-symbol = "_fcn_004bb0a0"
-name = "fcn_004bb0a0"
+file = "src/Develop/DieGildeAddOn/game/gm_HandleBuildingFireEvent.c"
+symbol = "_gm_HandleBuildingFireEvent"
+name = "gm_HandleBuildingFireEvent"
 kind = "FUNCTION"
-updated_by = "rehome"
-updated_at = "2026-11-28T12:57:21+00:00"
+updated_by = "rename"
+updated_at = "2026-11-28T14:18:00+00:00"
 status = "EXACT"
 similarity = 100.0
 
@@ -798025,12 +798024,12 @@ status = "EXACT"
 measured_at = "2026-11-28T11:56:26+00:00"
 ["GOLDTL.0x004b9bc0"]
 file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_004b9bc0.c"
-name = "fcn_004b9bc0"
+name = "gm_HandleLocalTransportTheft"
 kind = "FUNCTION"
-symbol = "_fcn_004b9bc0"
+symbol = "_gm_HandleLocalTransportTheft"
 status = "EXACT"
-updated_by = "rehome"
-updated_at = "2026-11-28T12:57:21+00:00"
+updated_by = "rename"
+updated_at = "2026-11-28T14:17:33+00:00"
 size = 6
 similarity = 100.0
 
@@ -799425,12 +799424,12 @@ updated_at = "2026-11-12T14:14:56+00:00"
 
 ["GOLDTL.0x0049a7b0"]
 size = 201
-updated_by = "test"
-updated_at = "2026-11-28T13:25:32+00:00"
+updated_by = "rename"
+updated_at = "2026-11-28T14:14:29+00:00"
 file = "src/Develop/DieGildeAddOn/game/ai_StartEducationObject.c"
-name = "fcn_0049a7b0"
+name = "ai_RunUseObjectAps"
 kind = "FUNCTION"
-symbol = "_fcn_0049a7b0"
+symbol = "_ai_RunUseObjectAps"
 status = "RELOC"
 similarity = 100.0
 
@@ -799457,12 +799456,12 @@ writer = "test"
 measured_at = "2026-11-28T13:25:32+00:00"
 ["GOLDTL.0x0049fa80"]
 size = 67
-updated_by = "test"
-updated_at = "2026-11-28T13:25:09+00:00"
+updated_by = "rename"
+updated_at = "2026-11-28T14:14:33+00:00"
 file = "src/Develop/DieGildeAddOn/game/ai_StartZunftAufruhr.c"
-name = "fcn_0049fa80"
+name = "ai_RunZunftPreismanipulation"
 kind = "FUNCTION"
-symbol = "_fcn_0049fa80"
+symbol = "_ai_RunZunftPreismanipulation"
 status = "RELOC"
 similarity = 100.0
 
@@ -799604,12 +799603,12 @@ writer = "test"
 measured_at = "2026-11-28T13:24:59+00:00"
 ["GOLDTL.0x0056e8e0"]
 size = 146
-updated_by = "test"
-updated_at = "2026-11-28T13:25:42+00:00"
+updated_by = "rename"
+updated_at = "2026-11-28T14:15:13+00:00"
 file = "src/Develop/DieGildeAddOn/game/he_RunNightWatchmanAnnouncements.c"
-name = "fcn_0056e8e0"
+name = "he_StartNightWatchmanAnnouncements"
 kind = "FUNCTION"
-symbol = "_fcn_0056e8e0"
+symbol = "_he_StartNightWatchmanAnnouncements"
 status = "RELOC"
 similarity = 85.29411764705883
 
@@ -799668,12 +799667,12 @@ writer = "test"
 measured_at = "2026-11-28T13:27:44+00:00"
 ["GOLDTL.0x00579320"]
 size = 104
-updated_by = "test"
-updated_at = "2026-11-28T13:26:04+00:00"
+updated_by = "rename"
+updated_at = "2026-11-28T14:15:16+00:00"
 file = "src/Develop/DieGildeAddOn/game/he_AcceptDeathPactPayment.c"
-name = "fcn_00579320"
+name = "he_StartDeathPactPrompt"
 kind = "FUNCTION"
-symbol = "_fcn_00579320"
+symbol = "_he_StartDeathPactPrompt"
 status = "RELOC"
 similarity = 93.54838709677419
 
@@ -807333,3 +807332,36 @@ similarity = 70.08849557522124
 writer = "verify"
 status = "SIZE_MISMATCH"
 measured_at = "2026-11-28T11:56:30+00:00"
+
+["GOLDTL.0x00498f40"]
+size = 3
+file = "src/Develop/DieGildeAddOn/game/ai_RunBetriebUpgraden.c"
+symbol = "_ai_RunBetriebUpgraden"
+name = "ai_RunBetriebUpgraden"
+kind = "FUNCTION"
+updated_by = "test"
+updated_at = "2026-11-28T14:19:34+00:00"
+status = "EXACT"
+similarity = 100.0
+
+["GOLDTL.0x00498f40".verification]
+source_hash = "ee20bfcb0ae358c1d2a46f8b97e40cac6e80a332227915754ad4985b6406072b"
+reference_hash = "4bc724f3b1d0caf4fe369c18cba3102e6c4ea057f63fe1587e3973134a7f755e"
+reference_size = "3"
+headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+compiler_hash = "ff6b529cf0debf4ec2b29c665efa5033f8e9f03f26e5ca854e2910695d7a309f"
+toolchain = "(default)"
+cflags = "/O2 /Gd"
+module = "GOLDTL"
+va = "0x498f40"
+context_hash = ""
+defines = "(none)"
+input_hash = "f3f92be8151219af75256de9b412d906d0c6f99fa897e87d5f1185d5c88a9212"
+aligned_pairs = 2
+target_instructions = 2
+candidate_instructions = 2
+hunks = 0
+similarity = 100.0
+status = "EXACT"
+writer = "test"
+measured_at = "2026-11-28T14:19:34+00:00"

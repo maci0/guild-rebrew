@@ -10,7 +10,10 @@ int __cdecl ecmd_RunScriptInt();
 int __cdecl RunScriptInt2();
 int __cdecl RunScriptString();
 int __cdecl StopScript();
-int __cdecl fcn_0040c630();
+#ifdef REBREW_GOLD
+#define ecmd_Sleep fcn_0040c630
+#endif
+int __cdecl ecmd_Sleep();
 int __cdecl FindScript();
 int __cdecl KillLocalScripts();
 int __cdecl CallUserFunction();
@@ -33,7 +36,7 @@ void __cdecl evt_RegisterCoreCommands(void)
 	evt_ImportCommand("RunScriptInt2", RunScriptInt2, 1, 3, 6, 1, 1);
 	evt_ImportCommand("RunScriptString", RunScriptString, 1, 2, 6, 6);
 	evt_ImportCommand("StopScript", StopScript, 5, 1, 1);
-	evt_ImportCommand("Sleep", fcn_0040c630, 5, 1, 1);
+	evt_ImportCommand("Sleep", ecmd_Sleep, 5, 1, 1);
 	evt_ImportCommand("FindScript", FindScript, 1, 1, 6);
 	evt_ImportCommand("KillLocalScripts", KillLocalScripts, 1, 0);
 	evt_ImportCommand("CallUserFunction", CallUserFunction, 1, 2, 1, 1);

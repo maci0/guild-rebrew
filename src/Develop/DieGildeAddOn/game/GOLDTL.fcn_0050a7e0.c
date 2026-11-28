@@ -29,7 +29,7 @@ void __cdecl amt_InitRulerEntity(int type, int a, int b, char* rec);
 #define F(p, o) (*(float*) ((char*) (p) + (o)))
 
 /* ADDRESS: GOLDTL 0x0050a7e0 */
-short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, char* location, int arg6, int arg7, int arg8)
+short __cdecl gm_AllocClientSpieler(int type, int mother_id, int father_id, int arg4, char* location, int arg6, int arg7, int arg8)
 {
     char work[0x400];
     int iv;

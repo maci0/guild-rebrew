@@ -22,7 +22,7 @@ extern unsigned char gm_ActiveTownIndex;
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl gm_GetEntityMood(unsigned char* e);
 int __cdecl gm_CalculateGebaeudeValue(int, int);
-char* __cdecl fcn_00502cd0(int, int, int, int, ...);
+char* __cdecl gm_QueryEntities(int, int, int, int, ...);
 float __cdecl eval_ObjektPreis2Credits(int id, int pct);
 char* __cdecl gm_GetEntityTableEntry(char*);
 void __cdecl cm_SendLogAction(char*);
@@ -119,7 +119,7 @@ void __cdecl ai_BuyStallGoods(char* actor)
 				id = w & 0x7fff;
 				kind = *(char*) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[id]));
 				if (kind != 2 && kind != 6) {
-					if (cand != 0xfd && fcn_00502cd0(*(int*) (*(int*) (actor + 0x16c) + 0x5d), 2, 6, 0, id) == 0) {
+					if (cand != 0xfd && gm_QueryEntities(*(int*) (*(int*) (actor + 0x16c) + 0x5d), 2, 6, 0, id) == 0) {
 						found = *entry & 0x7fff;
 					}
 				} else {
@@ -148,7 +148,7 @@ void __cdecl ai_BuyStallGoods(char* actor)
 			id = w & 0x7fff;
 			kind = *(char*) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[id]));
 			if (kind != 2 && kind != 6) {
-				if (cand == 0xfd && fcn_00502cd0(*(int*) (*(int*) (actor + 0x16c) + 0x5d), 2, 6, 0, id) == 0) {
+				if (cand == 0xfd && gm_QueryEntities(*(int*) (*(int*) (actor + 0x16c) + 0x5d), 2, 6, 0, id) == 0) {
 					found = *entry & 0x7fff;
 				}
 			} else {
@@ -163,7 +163,7 @@ void __cdecl ai_BuyStallGoods(char* actor)
 	}
 
 have:
-	p = fcn_00502cd0(*(int*) (*(int*) (actor + 0x16c) + 0x5d), 1, 0, cand);
+	p = gm_QueryEntities(*(int*) (*(int*) (actor + 0x16c) + 0x5d), 1, 0, cand);
 	if (p != 0) {
 		amount = (int) eval_ObjektPreis2Credits(found, 100);
 		if (*(int*) (actor + 0x1b8) > amount * 3) {

@@ -8,7 +8,7 @@ extern float g_662b10;
 
 unsigned short __cdecl gm_RandomMod(int range);
 float __cdecl gm_RandomFloat01(void);
-void* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
+void* __cdecl gm_QueryEntities(int container_id, int arg_count, ...);
 void __cdecl cm_AppendPacketFieldDelta(int a, int b, int offset, void* value);
 void __cdecl cm_AppendPacketFieldValue(int a, int b, int offset, void* value);
 void __cdecl cm_RequestChangeAttribute(void);
@@ -52,15 +52,15 @@ void __cdecl he_TriggerAhmLabEvent(int city, char* owner, char* object, int mode
 			}
 		}
 	}
-	found[0] = fcn_00502cd0(*(int*) (object + 0x5d), 2, 6, 0, 0x24b);
+	found[0] = gm_QueryEntities(*(int*) (object + 0x5d), 2, 6, 0, 0x24b);
 	if (found[0] != 0 && *(int*) ((char*) found[0] + 0x1c) == 0) {
 		flags[1] = 1;
 	}
-	found[1] = fcn_00502cd0(*(int*) (object + 0x5d), 2, 6, 0, 0x256);
+	found[1] = gm_QueryEntities(*(int*) (object + 0x5d), 2, 6, 0, 0x256);
 	if (found[1] != 0 && *(int*) ((char*) found[1] + 0x1c) == 0) {
 		flags[1] = 1;
 	}
-	found[2] = fcn_00502cd0(*(int*) (object + 0x5d), 2, 6, 0, 0x266);
+	found[2] = gm_QueryEntities(*(int*) (object + 0x5d), 2, 6, 0, 0x266);
 	if (found[2] != 0 && *(int*) ((char*) found[2] + 0x1c) == 0) {
 		flags[1] = 1;
 	}

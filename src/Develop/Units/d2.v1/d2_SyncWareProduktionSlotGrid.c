@@ -5,7 +5,7 @@ extern int d2_SelectedEntityUiFlags;
 extern char* lpObjektePROT;
 extern char* cm_PacketDeltaBase;
 
-char* __cdecl fcn_00502cd0(int, int, int, ...);
+char* __cdecl gm_QueryEntities(int, int, int, ...);
 char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_GetBuildingTypeCategory(int);
 int __cdecl gm_GetStorageSlotCapacity(char*, int);
@@ -96,7 +96,7 @@ int __cdecl d2_SyncWareProduktionSlotGrid(char* building, char* a1)
 		i++;
 	}
 
-	ent = (unsigned short*) fcn_00502cd0(*(int*) (a1 + 0x14), 1, 5);
+	ent = (unsigned short*) gm_QueryEntities(*(int*) (a1 + 0x14), 1, 5);
 	while (ent != 0) {
 		if (cat != 2) {
 			q = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*ent]);
@@ -164,11 +164,11 @@ int __cdecl d2_SyncWareProduktionSlotGrid(char* building, char* a1)
 	}
 
 	for (p = (unsigned int*) 0x778da0; (int) p < 0x779120; p += 0xe) {
-		if (!fcn_00502cd0(*(int*) (a1 + 0x14), 1, 0, *p))
+		if (!gm_QueryEntities(*(int*) (a1 + 0x14), 1, 0, *p))
 			*p = 0;
 	}
 	for (p = (unsigned int*) 0x7796e0; (int) p < 0x7798a0; p += 0xe) {
-		if (!fcn_00502cd0(*(int*) (a1 + 0x14), 1, 0, *p))
+		if (!gm_QueryEntities(*(int*) (a1 + 0x14), 1, 0, *p))
 			*p = 0;
 	}
 
@@ -192,7 +192,7 @@ int __cdecl d2_SyncWareProduktionSlotGrid(char* building, char* a1)
 		for (p = (unsigned int*) 0x778dc0; (int) p < 0x779140; p += 0xe) {
 			if (*p == (unsigned int) -1 || *p != *(unsigned int*) 0x67d370)
 				continue;
-			ent = (unsigned short*) fcn_00502cd0(*(int*) (a1 + 0x14), 1, 0, p[-8]);
+			ent = (unsigned short*) gm_QueryEntities(*(int*) (a1 + 0x14), 1, 0, p[-8]);
 			if (ent == 0)
 				break;
 			if (*(unsigned int*) (ent + 0xe) >= 4)
@@ -207,7 +207,7 @@ int __cdecl d2_SyncWareProduktionSlotGrid(char* building, char* a1)
 		for (p = (unsigned int*) 0x779700; (int) p < 0x7798c0; p += 0xe) {
 			if (*p == (unsigned int) -1 || *p != *(unsigned int*) 0x67d370)
 				continue;
-			ent = (unsigned short*) fcn_00502cd0(*(int*) (a1 + 0x14), 1, 0, p[-8]);
+			ent = (unsigned short*) gm_QueryEntities(*(int*) (a1 + 0x14), 1, 0, p[-8]);
 			if (ent == 0)
 				break;
 			if (*(unsigned int*) (ent + 0xe) >= 4)

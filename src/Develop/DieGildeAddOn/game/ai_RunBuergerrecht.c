@@ -42,7 +42,7 @@ extern pos14_7f4c00 gm_GameTime;
 extern unsigned char gm_PlayerCount;
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-char* __cdecl fcn_00502cd0(int, ...);
+char* __cdecl gm_QueryEntities(int, ...);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 #include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
@@ -68,7 +68,7 @@ int __cdecl ai_RunBuergerrecht(char* entity)
 	if (s == 0) {
 		return 0;
 	}
-	r = fcn_00502cd0(*(int*) (s + 0x5d), 2, 6, 0, 0x115);
+	r = gm_QueryEntities(*(int*) (s + 0x5d), 2, 6, 0, 0x115);
 	if (r == 0) {
 		return 0;
 	}

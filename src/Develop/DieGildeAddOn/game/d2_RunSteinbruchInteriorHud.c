@@ -12,7 +12,7 @@ extern int sv_ClickedObjekt;
 void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
-int __cdecl fcn_00502cd0(int, int, int, int, int);
+int __cdecl gm_QueryEntities(int, int, int, int, int);
 void __cdecl d3_UpdateBuildingInteriorState(void);
 void __cdecl d2_ShowLagerOptions(char*, int);
 void __cdecl d2_RunGelageDialog(char*);
@@ -50,10 +50,10 @@ void __cdecl d2_RunSteinbruchInteriorHud(char* e)
 			prod = RegisterStatusText("contact_PRODUKTION", g_14ad0f8, 0x13);
 			transport = RegisterStatusText("contact_TRANSPORT", g_14ad100, 0x15);
 			gelage = RegisterStatusText("contact_GELAGE", g_14ad0e8, 0x16);
-			if (fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0x35) != 0) {
+			if (gm_QueryEntities(*(int*) (e + 0x5d), 2, 6, 0, 0x35) != 0) {
 				sp = RegisterStatusText("ob_STROHPUPPE", g_14abc30, 0x17);
 			}
-			if (fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0x34) != 0) {
+			if (gm_QueryEntities(*(int*) (e + 0x5d), 2, 6, 0, 0x34) != 0) {
 				zs = RegisterStatusText("ob_ZIELSCHEIBE", g_14abc2c, 0x17);
 			}
 		}

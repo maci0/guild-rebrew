@@ -20,7 +20,7 @@ extern unsigned char* lpGebaeudePROT;
 
 unsigned short __cdecl gm_RandomMod(int n);
 char* __cdecl gm_GetGuildHall(int n);
-char* __cdecl fcn_00502cd0(int, int, int, int, int);
+char* __cdecl gm_QueryEntities(int, int, int, int, int);
 int __cdecl gm_SumQueryEntryValues(int a, unsigned char b);
 int __cdecl ai_SelectBestMethod(int kind, int id, int n, Blk24* b1, Blk24* b2);
 int __cdecl ai_PrepareBuildSite(char* a1, char* e, int a3, Blk24* b1, Blk24* b2, int want);
@@ -49,7 +49,7 @@ int __cdecl ai_StartBaumeister(char* a1, char* e, int a3, Blk24* o1, Blk24* o2)
 	if (q == 0) {
 		return 0;
 	}
-	a1 = fcn_00502cd0(*(int*) (q + 0x5d), 2, 6, 0, 0x115);
+	a1 = gm_QueryEntities(*(int*) (q + 0x5d), 2, 6, 0, 0x115);
 	val = gm_SumQueryEntryValues(*(int*) (a1 + 0x14), gm_ActiveTownIndex);
 	if (val < (gm_RandomMod(3000) + 1000) * 32) {
 		return 0;

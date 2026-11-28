@@ -28,7 +28,7 @@ extern int main_LoopFlags;           /* 0x007e46ac */
 extern char s_6ac7b0[];        /* 0x006ac7b0 */
 
 int __cdecl d2_CheckOwnerBlocked(int);
-int __cdecl fcn_00502cd0(int, int, int, int, int);
+int __cdecl gm_QueryEntities(int, int, int, int, int);
 int __cdecl d2_ShowModalMessageBox(int, int);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
@@ -105,9 +105,9 @@ int __cdecl d2_RunEquipmentDialog(int objectArg)
 
 
 
-	p = (unsigned short*) fcn_00502cd0(*(int*) (v7 + 0x5d), 2, 0, 0x2a, 6);
+	p = (unsigned short*) gm_QueryEntities(*(int*) (v7 + 0x5d), 2, 0, 0x2a, 6);
 	if (p == 0) {
-		p = (unsigned short*) fcn_00502cd0(*(int*) (v7 + 0x5d), 2, 0, 0x116, 6);
+		p = (unsigned short*) gm_QueryEntities(*(int*) (v7 + 0x5d), 2, 0, 0x116, 6);
 	}
 	if (p == 0) {
 		v15 = d2_ShowModalMessageBox(g_14aba98, 0);

@@ -13,7 +13,7 @@ extern int main_LoopFlags;
 extern int d2_CurrentElementId;
 extern int io_RightButtonReleased;
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
-int __cdecl fcn_00502cd0(int, int, ...);
+int __cdecl gm_QueryEntities(int, int, ...);
 int __cdecl d2_CheckOwnerBlocked(int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl he_fn_Handlung(void);
@@ -82,7 +82,7 @@ void __cdecl d2_RunRohstoffsuchenDialog(unsigned char* gebaeude)
 	int screen;
 
 	ids[2] = 0x227;
-	handles[3] = fcn_00502cd0(*(unsigned int*) (gebaeude + 0x5d), 2, 6, 0, 0x2a);
+	handles[3] = gm_QueryEntities(*(unsigned int*) (gebaeude + 0x5d), 2, 6, 0, 0x2a);
 	n = 2;
 	ents = (char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned int) *gebaeude];
 	if (((char)(((BUILDING_PROTOTYPE*)ents)->category)) == 0x1f) {

@@ -27,7 +27,7 @@ char* __cdecl evt_LoadScript(char*);
 int __cdecl vfs_LookupPath(char*, void*, void**);
 int __cdecl evt_CallScriptFunction(char*, int, ...);
 void __cdecl cm_SendChainRecordLookup(int, char, char, short, char, int);
-char* __cdecl fcn_00502cd0(int, int, ...);
+char* __cdecl gm_QueryEntities(int, int, ...);
 int __cdecl cm_SendSellObjekt(int, int, unsigned int, int, char, int);
 void __cdecl cm_SendCopyEntityData(int);
 void __cdecl gm_AddTime(void*, int, int, int);
@@ -138,7 +138,7 @@ void __cdecl he_UpdateErnten(char* ev)
 							int c;
 
 							cm_SendChainRecordLookup(*(int*) (ev + 0xac), *(char*) (v5 + 8), *(char*) (v5 + 9), 0, 0, -1);
-							rec = fcn_00502cd0(*(int*) (v4 + 0x5d), 2, 0, 0x2a, 6);
+							rec = gm_QueryEntities(*(int*) (v4 + 0x5d), 2, 0, 0x2a, 6);
 							if (rec != 0) {
 								cm_SendSellObjekt(*(int*) (rec + 2), -1, *(unsigned short*) (v5 + 0xa),
 								             1 << (*(unsigned char*) (v5 + 0xd) - 1), gm_ActiveTownIndex, 0);

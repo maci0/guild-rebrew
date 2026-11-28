@@ -8,7 +8,7 @@ int __cdecl init_AllocateGebaeudeSceneSlot(unsigned char* a0);
 void __cdecl sb_LoadBuildingVoiceBanks(unsigned char* b);
 int __cdecl main_RunFrameLoop(int a0, int a1);
 void __cdecl init_LoadGebaeudeScene(int a0);
-int __cdecl fcn_00502cd0(int a0, int a1, int a2, int a3, int a4);
+int __cdecl gm_QueryEntities(int a0, int a1, int a2, int a3, int a4);
 int __cdecl d3_SelectSceneContext(int a0, int a1);
 void __cdecl d3_InitUniverse(int a0);
 void __cdecl d3_UpdateBuildingView(unsigned char* a0, int a1);
@@ -90,9 +90,9 @@ void __cdecl d2_EnterGebaeudeInterior(unsigned char* building)
 		*(int*) &d2_InteriorBuilding = (int) buildingPtr;
 		*(int*) &evt_ActiveContextId = *(int*) (buildingPtr + 1);
 		g_67530c = *(int*) (buildingPtr + 1);
-		p = (unsigned char*) fcn_00502cd0(*(int*) (buildingPtr + 0x5d), 2, 6, 0, 0xfd);
+		p = (unsigned char*) gm_QueryEntities(*(int*) (buildingPtr + 0x5d), 2, 6, 0, 0xfd);
 		if (p == 0) {
-			p = (unsigned char*) fcn_00502cd0(*(int*) (buildingPtr + 0x5d), 2, 6, 4, 2);
+			p = (unsigned char*) gm_QueryEntities(*(int*) (buildingPtr + 0x5d), 2, 6, 4, 2);
 		}
 		g_675310 = *(int*) (p + 2);
 		d3_SelectSceneContext(n, 0);

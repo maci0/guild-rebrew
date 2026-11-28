@@ -57,7 +57,7 @@ int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl d2_SetBackgroundTexture(char*, int);
 void __cdecl d2_CreateButtonRow(int, int, Pick*, int, int, char*, char*);
 void __cdecl d2_SetSlotVisibility(int, int);
-int __cdecl fcn_00502cd0(int, int, int, int, int);
+int __cdecl gm_QueryEntities(int, int, int, int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl d2_ResetBuildingUiSlots(void);
 void __cdecl d2_SyncProduktionSlotGrid(char*, int);
@@ -113,7 +113,7 @@ void __cdecl d2_RunTransportDialog(char* b)
 			a = pick.a;
 			c = pick.b;
 			if (sel != 0) {
-				grp = fcn_00502cd0(*(int*) (b + 0x5d), 2, 0, 0x1db, 6);
+				grp = gm_QueryEntities(*(int*) (b + 0x5d), 2, 0, 0x1db, 6);
 				if (grp == 0) {
 					return;
 				}
@@ -121,7 +121,7 @@ void __cdecl d2_RunTransportDialog(char* b)
 				io_AppendText(0x1c47, gm_TownTable + *(int*) (b + 0x65) * 0x2f4);
 			}
 			else {
-				grp = fcn_00502cd0(*(int*) (b + 0x5d), 2, 0, 0x1dc, 6);
+				grp = gm_QueryEntities(*(int*) (b + 0x5d), 2, 0, 0x1dc, 6);
 				if (grp == 0) {
 					return;
 				}

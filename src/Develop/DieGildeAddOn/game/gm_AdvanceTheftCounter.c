@@ -8,7 +8,7 @@ extern int d3_CurrentContextIndex;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 extern int __cdecl gm_WalkEntityChain(int);
 extern unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
-extern unsigned short* __cdecl fcn_00502cd0(int, int, ...);
+extern unsigned short* __cdecl gm_QueryEntities(int, int, ...);
 extern void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 extern void __cdecl io_FormatTextBuffer(char*, char*, ...);
 extern void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
@@ -63,7 +63,7 @@ void __cdecl gm_AdvanceTheftCounter(unsigned int entityIndex)
 		if (found == 0) {
 			return;
 		}
-		alloc = fcn_00502cd0((int) *(unsigned int*) ((char*) found + 0x5d), 2, 6, 0, 0x110);
+		alloc = gm_QueryEntities((int) *(unsigned int*) ((char*) found + 0x5d), 2, 6, 0, 0x110);
 		if (alloc == 0) {
 			return;
 		}

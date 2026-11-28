@@ -19,7 +19,7 @@ void __cdecl d2_DrawPanelFrame(int, int, int);
 int __cdecl d2_CreateWindowScrollbar(int, int, int, int, int, int*, int*, int*);
 int __cdecl d2_GetFormWindow(int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
-int __cdecl fcn_00502cd0(int, int, int, ...);
+int __cdecl gm_QueryEntities(int, int, int, ...);
 int __cdecl gm_eval_SlotVoll(int, int, int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl he_fn_Handlung(void);
@@ -123,11 +123,11 @@ unsigned int __cdecl d2_RunProduktionDialog(unsigned char* building)
 		int* r;
 
 		d2_SetForm(window, 2);
-		limit = fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0xff);
+		limit = gm_QueryEntities(*(int*) (p + 0x5d), 2, 6, 0, 0xff);
 		if (!limit) {
 			return 0;
 		}
-		entry = fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x2a);
+		entry = gm_QueryEntities(*(int*) (p + 0x5d), 2, 6, 0, 0x2a);
 		if (!entry) {
 			return 0;
 		}
@@ -204,7 +204,7 @@ unsigned int __cdecl d2_RunProduktionDialog(unsigned char* building)
 									if (val != 0xffff) {
 										int got;
 
-										got = fcn_00502cd0(*(int*) (entry + 0x14), 1, 0, val);
+										got = gm_QueryEntities(*(int*) (entry + 0x14), 1, 0, val);
 										if (!got ||
 										    *(int*) (got + 0xe) < (int) q[-4]) {
 											ok = 0;
@@ -323,7 +323,7 @@ after_input:
 			unsigned short* shop;
 			int* cell;
 
-			shop = (unsigned short*) fcn_00502cd0(*(int*) (limit + 0x14), 1, 5);
+			shop = (unsigned short*) gm_QueryEntities(*(int*) (limit + 0x14), 1, 5);
 			n = count;
 			if (shop) {
 				cell = (int*) (count * 0x58 + 0x779160);
@@ -377,7 +377,7 @@ after_input:
 						cells[4] = *(unsigned short*) (off + r3[-0x14] * 0x41 +
 						                               (int) lpObjektePROT);
 						if (*cells) {
-							got = fcn_00502cd0(*(int*) (entry + 0x14), 1, 0, *cells);
+							got = gm_QueryEntities(*(int*) (entry + 0x14), 1, 0, *cells);
 							if (!(got)) {
 								*r3 = 0;
 							} else {
@@ -398,7 +398,7 @@ after_input:
 					} while (off < 0x2e);
 					*r3 = *(unsigned short*) (r3[-0x14] * 0x41 + 0x36 +
 					                          (int) lpObjektePROT) * *r3;
-					got = fcn_00502cd0(*(int*) (entry + 0x14), 1, 0, r3[-0x14]);
+					got = gm_QueryEntities(*(int*) (entry + 0x14), 1, 0, r3[-0x14]);
 					if (got) {
 						r3[1] = gm_GetMsgField(entry, got);
 					} else {

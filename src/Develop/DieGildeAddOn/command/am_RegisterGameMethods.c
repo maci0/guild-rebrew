@@ -48,7 +48,7 @@ int __cdecl ai_RunBetriebBauen(void);
 int __cdecl am_StartBetriebUpgradenAP(void);
 int __cdecl ai_RunBetriebUpgradenAP(void);
 int __cdecl ai_StartBetriebUpgraden(void);
-int __cdecl fcn_00498f40(void);
+int __cdecl ai_RunBetriebUpgraden(void);
 int __cdecl ai_StartMedicusAufsuchen(void);
 int __cdecl ai_RunMedicusAufsuchen(void);
 int __cdecl ai_ScoreSabotieren(void);
@@ -66,7 +66,7 @@ int __cdecl ai_RunUseObjectMilitary(void);
 int __cdecl ai_StartUseObjectAnsehen(void);
 int __cdecl ai_RunUseObjectAnsehen(void);
 int __cdecl ai_StartUseObjectAps(void);
-int __cdecl fcn_0049a7b0(void);
+int __cdecl ai_RunUseObjectAps(void);
 int __cdecl ai_StartEducationObject(void);
 int __cdecl ai_RunEducationObject(void);
 int __cdecl ai_StartUseObjectUnversehrtheit(void);
@@ -129,7 +129,7 @@ int __cdecl ai_RunChangeProfession(void);
 int __cdecl ai_StartStammtisch(void);
 int __cdecl ai_RunStammtisch(void);
 int __cdecl ai_StartZunftPreismanipulation(void);
-int __cdecl fcn_0049fa80(void);
+int __cdecl ai_RunZunftPreismanipulation(void);
 int __cdecl ai_StartZunftAufruhr(void);
 int __cdecl ai_RunZunftAufruhr(void);
 int __cdecl ai_StartZunftLevel3(void);
@@ -827,7 +827,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	strcpy(d.name, "Betrieb upgraden (Credits)");
 	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartBetriebUpgraden;
-	d.run = fcn_00498f40;
+	d.run = ai_RunBetriebUpgraden;
 	d.flags = 0x3;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -1099,7 +1099,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	strcpy(d.name, "UseObject (APS)");
 	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartUseObjectAps;
-	d.run = fcn_0049a7b0;
+	d.run = ai_RunUseObjectAps;
 	d.flags = 0x39;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -2017,7 +2017,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	strcpy(d.name, "Zunft Preismanipulation");
 	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartZunftPreismanipulation;
-	d.run = fcn_0049fa80;
+	d.run = ai_RunZunftPreismanipulation;
 	d.flags = 0x3;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;

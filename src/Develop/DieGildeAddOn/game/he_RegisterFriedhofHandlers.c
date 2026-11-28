@@ -13,7 +13,7 @@ void __cdecl he_StartGrabpflege(void);
 void __cdecl he_RunGrabpflege(void);
 void __cdecl he_StartDeathPact(void);
 void __cdecl he_RunDeathPact(void);
-void __cdecl fcn_00579320(void);
+void __cdecl he_StartDeathPactPrompt(void);
 void __cdecl he_HandleDeathPactPrompt(void);
 void __cdecl he_StartAction0x8e(void);
 void __cdecl he_RunDeathPactCollection(void);
@@ -34,7 +34,7 @@ int __cdecl he_RegisterFriedhofHandlers(void)
 {
 	if (he_RegisterHandler(0x88, he_StartAction0x88, he_RunHeimsuchung) || he_RegisterHandler(0x89, he_StartHauchDesVerfalls, he_RunHauchDesVerfalls)
 	    || he_RegisterHandler(0x8c, he_StartRohstoffsuchen, he_RunRohstoffsuchen) || he_RegisterHandler(0x8d, he_StartGrabpflege, he_RunGrabpflege)
-	    || he_RegisterHandler(0x8a, he_StartDeathPact, he_RunDeathPact) || he_RegisterHandler(0x8b, fcn_00579320, he_HandleDeathPactPrompt)
+	    || he_RegisterHandler(0x8a, he_StartDeathPact, he_RunDeathPact) || he_RegisterHandler(0x8b, he_StartDeathPactPrompt, he_HandleDeathPactPrompt)
 	    || he_RegisterHandler(0x8d, he_StartGrabpflege, he_RunGrabpflege) || he_RegisterHandler(0x8e, he_StartAction0x8e, he_RunDeathPactCollection)
 	    || he_RegisterHandler(0x8f, he_StartUpgraden, he_RunUpgraden) || he_RegisterHandler(0x90, he_StartAction0x90, he_RunAction0x90)
 	    || he_RegisterHandler(0x91, he_StartNecromancerFog, he_UpdateNecromancerFog) || he_RegisterHandler(0x93, he_StartAction0x93, he_RunAction0x93)

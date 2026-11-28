@@ -2,7 +2,7 @@
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 
-unsigned short* __cdecl fcn_00502cd0(int, int, int, int);
+unsigned short* __cdecl gm_QueryEntities(int, int, int, int);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 
 /* ADDRESS: GOLDTL 0x004a4fb0 */
@@ -35,10 +35,10 @@ unsigned int __cdecl ai_FindMissingBuildingUpgrade(unsigned int* outItem, unsign
 		if (objKind != '!') {
 			if (objKind != 2 && objKind != 6) {
 label:
-				if (!fcn_00502cd0(container, 1, 0, *compSlot & 0x7fff)) {
+				if (!gm_QueryEntities(container, 1, 0, *compSlot & 0x7fff)) {
 					if (!*(unsigned short*) ((char*) reqSlot - 2) ||
-					    fcn_00502cd0(container, 1, 0, *(unsigned short*) ((char*) reqSlot - 2))) {
-						if (!*reqSlot || fcn_00502cd0(container, 1, 0, *reqSlot)) {
+					    gm_QueryEntities(container, 1, 0, *(unsigned short*) ((char*) reqSlot - 2))) {
+						if (!*reqSlot || gm_QueryEntities(container, 1, 0, *reqSlot)) {
 							*outItem = *(unsigned short*) (rec + 0x23 + idx * 2) & 0x7fff;
 							if (parentItem != 0) {
 								*outContainer = *(unsigned int*) ((char*) parentItem + 2);
@@ -53,7 +53,7 @@ label:
 				hasParent = 0;
 				usedCount = 0;
 				parentItem = 0;
-				match = fcn_00502cd0(*(int*) (bld + 0x5d), 1, 4, 2);
+				match = gm_QueryEntities(*(int*) (bld + 0x5d), 1, 4, 2);
 				while (match != 0) {
 					if (*match != 0xfd) {
 						usedCount += 1;
@@ -67,7 +67,7 @@ label:
 					match = gm_NextEntityQueryMatch();
 				}
 				if (usedCount < (int) (unsigned char) ((BUILDING_PROTOTYPE*)rec)->count_021 && !hasParent) {
-					match = fcn_00502cd0(*(int*) (building + 0x5d), 1, 4, 6);
+					match = gm_QueryEntities(*(int*) (building + 0x5d), 1, 4, 6);
 					do {
 						if (!match) {
 							break;

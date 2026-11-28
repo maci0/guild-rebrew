@@ -94,7 +94,7 @@ void __cdecl d3_TransformPoint(int, int, float*);
 int __cdecl gm_EntityClassCheck(int kind);
 int __cdecl gm_IsInRange(int cls);
 int __cdecl gm_GetEntityRelation(int a, int i);
-int __cdecl fcn_0050a7e0(int a, int b, int c, int d, int e, int f, int g, int h);
+int __cdecl gm_AllocClientSpieler(int a, int b, int c, int d, int e, int f, int g, int h);
 int __cdecl init_SpawnBuildingCharacter(int, int, int, int, int);
 int __cdecl d2_ReadBmp24Dimensions(char* path);
 int __cdecl d2_LoadBmp24Surface(char* path);
@@ -342,7 +342,7 @@ done2:
 		return 0;
 	}
 
-	return (unsigned short) fcn_0050a7e0(
+	return (unsigned short) gm_AllocClientSpieler(
 		0,
 		*(int*) &((unsigned char*)gm_EntitySlotTable)[SIM_ENT_OFF(parentA) + 0x4],
 		*(int*) &((unsigned char*)gm_EntitySlotTable)[SIM_ENT_OFF(parentB) + 0x4],
@@ -726,7 +726,7 @@ char* __cdecl sim_CreateCitizenClient(unsigned char flags, int a2, int a3, int a
 			*(char*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[i].stat_category = (char) a4;
 		}
 	} else {
-		i = fcn_0050a7e0(a2, -1, -1, a3, 0, a4 & 0xff, a5 & 0xff, 2)
+		i = gm_AllocClientSpieler(a2, -1, -1, a3, 0, a4 & 0xff, a5 & 0xff, 2)
 			& 0xffff;
 	}
 	if (i == 0xffff) {

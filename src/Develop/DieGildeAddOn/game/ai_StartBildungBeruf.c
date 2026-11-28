@@ -20,7 +20,7 @@ int __cdecl fcn_0042e410(unsigned short a);
 int __cdecl fcn_004fbd20(int a);
 int __cdecl gm_CheckPrivilege(int a, char* obj, int* frame);
 extern float g_662a94; extern float flt_0_0; extern float g_66413c;
-int __cdecl fcn_00502cd0(int a, int b, int c, int d);
+int __cdecl gm_QueryEntities(int a, int b, int c, int d);
 
 /* ADDRESS: GOLDTL 0x00495fe0 */
 int __cdecl ai_StartBildungBeruf(int unused, char* obj, int flag, int* out1, int* out2)
@@ -180,7 +180,7 @@ int __cdecl ai_StartBildungBeruf(int unused, char* obj, int flag, int* out1, int
 			} else {
 				kind = (idx1 == 3) ? 0x17 : 0x14;
 			}
-			r = fcn_00502cd0(*(int*) (*(int*) (obj + 0x170) + 0x5d), 1, 0, kind);
+			r = gm_QueryEntities(*(int*) (*(int*) (obj + 0x170) + 0x5d), 1, 0, kind);
 			if (r == 0) {
 				action.msg.mode = 2;
 				action.msg.f1 = kind;

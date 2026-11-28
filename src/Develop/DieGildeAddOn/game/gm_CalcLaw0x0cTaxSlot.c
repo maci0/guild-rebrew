@@ -32,7 +32,7 @@ extern int g_99f7ac;
 
 void __cdecl gm_GetLawEntry(int kind, Offer* o);
 char* __cdecl gm_GetGuildHall(int n);
-char* __cdecl fcn_00502cd0(int obj, int mode, ...);
+char* __cdecl gm_QueryEntities(int obj, int mode, ...);
 void __cdecl cm_RequestTransferCurrencyNoKill(int a, int b, int c, int d);
 
 int __cdecl gm_CalcLaw0x0cTaxSlot(unsigned short id, Slots* s, unsigned char flags)
@@ -48,7 +48,7 @@ int __cdecl gm_CalcLaw0x0cTaxSlot(unsigned short id, Slots* s, unsigned char fla
 	gm_GetLawEntry(0xc, &offer);
 	amt = offer.amount;
 	p = gm_GetGuildHall(1);
-	fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x115);
+	gm_QueryEntities(*(int*) (p + 0x5d), 2, 6, 0, 0x115);
 	n = (*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id].value_1a0) + (*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id].value_1a4);
 	f = n * (amt * 0.01f);
 	if (!(f > 0.0f)) {
@@ -69,7 +69,7 @@ int __cdecl gm_CalcLaw0x0cTaxSlot(unsigned short id, Slots* s, unsigned char fla
 		s->value[i] = v;
 		if (flags & 1) {
 			p = gm_GetGuildHall(1);
-			p = fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x115);
+			p = gm_QueryEntities(*(int*) (p + 0x5d), 2, 6, 0, 0x115);
 			cm_RequestTransferCurrencyNoKill(*(int*) (p + 2), (*(int*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[id].entity_id), 0, v);
 			gm_QueuedCommandCount++;
 		}

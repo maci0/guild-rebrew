@@ -5,7 +5,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 
 /* ADDRESS: GOLDTL 0x0057c860 */
-void __cdecl fcn_0057c860(char* o)
+void __cdecl he_ScheduleZigeunerActionExpiry(char* o)
 {
 	*(int*) (o + 0x70) = -1;
 	*(pos14_7f4c00*) (o + 0x44) = gm_GameTime;

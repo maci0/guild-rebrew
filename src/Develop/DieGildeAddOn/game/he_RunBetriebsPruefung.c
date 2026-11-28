@@ -26,7 +26,7 @@ void __cdecl cm_SendCancelCharacterActions(int owner);
 void __cdecl ch_StartMovement(int a, int b, int c, int d, int e, char* tag);
 void __cdecl gm_AddTime(int* pos, int a, int b, int c);
 int __cdecl gm_GetEntityMood(char* e);
-char* __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
+char* __cdecl gm_QueryEntities(int a, int b, int c, int d, int e);
 char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_CalculateGebaeudeValue(char* e, int n);
 void __cdecl cm_RequestTransferCurrencyNoKill(int a, int b, int c, int d);
@@ -77,7 +77,7 @@ void __cdecl he_RunBetriebsPruefung(char* event)
 		}
 		f = (flt_100_0 - (float) gm_GetEntityMood(e)) * 0.01f;
 		found = 0;
-		for (q = fcn_00502cd0(0, 2, 7, 4, 0x1d); q != 0; q = gm_NextEntityQueryMatch()) {
+		for (q = gm_QueryEntities(0, 2, 7, 4, 0x1d); q != 0; q = gm_NextEntityQueryMatch()) {
 			if (*(int*) (q + 0x1c) == *(int*) (e + 1)
 				&& *(unsigned char*) (q + 0x12) < 0x50) {
 				found = 1;

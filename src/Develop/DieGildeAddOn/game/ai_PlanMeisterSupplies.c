@@ -7,7 +7,7 @@ extern int ai_ArmorGoodsIds[];
 extern int ai_WeaponGoodsIds[];
 extern int g_86805c;
 
-char* __cdecl fcn_00502cd0(void* id, int a, int b, int c);
+char* __cdecl gm_QueryEntities(void* id, int a, int b, int c);
 int __cdecl gm_CollectItemSuppliers(int id);
 
 /* ADDRESS: GOLDTL 0x00486c40 */
@@ -25,7 +25,7 @@ void __cdecl ai_PlanMeisterSupplies(ENTITY_RECORD* entity, unsigned int unused, 
 		if (((ENTITY_RECORD*) gm_EntitySlotTable)[i].entity_index != 0xffff &&
 		    ((ENTITY_RECORD*) gm_EntitySlotTable)[i].unk_16c == entity->unk_16c &&
 		    ((ENTITY_RECORD*) gm_EntitySlotTable)[i].unk_165[0] != 0) {
-			q = fcn_00502cd0(((ENTITY_RECORD*) gm_EntitySlotTable)[i].object_list, 1, 4, 0xc);
+			q = gm_QueryEntities(((ENTITY_RECORD*) gm_EntitySlotTable)[i].object_list, 1, 4, 0xc);
 			if (q == 0) {
 				for (k = 0; k < ai_ResourceCount; k++) {
 					if (ai_ResourceRequests[k].goods_id == ai_WeaponGoodsIds[0]) {

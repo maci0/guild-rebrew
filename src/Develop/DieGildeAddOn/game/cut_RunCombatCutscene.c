@@ -58,7 +58,7 @@ void __cdecl cut_RunCombatFlightOutro(COMBAT_CUTSCENE_DLG*);
 void __cdecl cut_CleanupCombatScene(COMBAT_CUTSCENE_DLG*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl d2_ShowMessageBox(char*, unsigned int);
-int __cdecl fcn_00502cd0(int, int, int, ...);
+int __cdecl gm_QueryEntities(int, int, int, ...);
 void __cdecl gm_TransferAndSellAssets(int, int, int, int);
 void __cdecl cut_PlunderBuildingCarts(COMBAT_CUTSCENE_DLG*, int, int, int, float);
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -148,7 +148,7 @@ void __cdecl cut_RunCombatCutscene(COMBAT_CUTSCENE_DLG* p)
 			v = 0;
 			w = gm_StartFilteredEntitySearch(1, 1, *(int*) (*(int*) 0x772eb4 + 0x10c));
 			if (w != 0) {
-				v = fcn_00502cd0(*(int*) (w + 0x5d), 2, 6, 0, 0x116);
+				v = gm_QueryEntities(*(int*) (w + 0x5d), 2, 6, 0, 0x116);
 			}
 			if (*(int*) &cut_PlunderedAmount > 0) {
 				if (v == 0) {

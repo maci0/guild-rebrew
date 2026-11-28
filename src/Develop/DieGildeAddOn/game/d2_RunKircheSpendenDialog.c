@@ -13,7 +13,7 @@ typedef struct {
 	char rest[0x213];
 } Entry5aa;
 
-int __cdecl fcn_00502cd0(int, int, int, int, int);
+int __cdecl gm_QueryEntities(int, int, int, int, int);
 int __cdecl gm_WalkEntityChain(unsigned short);
 int __cdecl gm_AccumulateTyped2(char*);
 int __cdecl d2_LoadForm(int, int, char*);
@@ -71,7 +71,7 @@ void __cdecl d2_RunKircheSpendenDialog(char* gebaeude)
 	if (*(unsigned short*) (gebaeude + 0x27) == gm_LocalPlayerSlot) {
 		return;
 	}
-	h = fcn_00502cd0(*(int*) (gebaeude + 0x5d), 2, 6, 0, 0xe8);
+	h = gm_QueryEntities(*(int*) (gebaeude + 0x5d), 2, 6, 0, 0xe8);
 	if (h == 0) {
 		return;
 	}

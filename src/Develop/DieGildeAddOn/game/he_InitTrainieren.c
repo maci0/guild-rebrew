@@ -6,7 +6,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-char* __cdecl fcn_00502cd0(int, int, int, int, int);
+char* __cdecl gm_QueryEntities(int, int, int, int, int);
 void __cdecl he_AssignActionSlot(char*, char*, int, char*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl he_FreeAction(char*);
@@ -23,7 +23,7 @@ void __cdecl he_InitTrainieren(char* u)
 		e = gm_StartFilteredEntitySearch(1, 1, *(int*) (u + 0x10));
 		if (e != 0) {
 			if (*(int*) (u + 0xb4) != -1) {
-				q = fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 1, *(int*) (u + 0xb4));
+				q = gm_QueryEntities(*(int*) (e + 0x5d), 2, 6, 1, *(int*) (u + 0xb4));
 			}
 			*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
 			*(pos14_7f4c00*) (u + 0x44) = gm_GameTime;

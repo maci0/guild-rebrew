@@ -10,7 +10,7 @@ void __cdecl d2_UnlockSurface(int);
 int __cdecl d2_LoadBmp24Surface(char*);
 char* __cdecl fcn_00475000(char*);
 int __cdecl gm_GetBuildingTypeCategory(int);
-int __cdecl fcn_00502cd0(int, int, ...);
+int __cdecl gm_QueryEntities(int, int, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl d2_LoadBmp24Surface(char*);
 int __cdecl d2_CompareRgb(void*, void*);
@@ -153,7 +153,7 @@ have_image:
 						goto next_pixel;
 					v21 = 0;
 					if (*r == 2) {
-						v4 = (short*) fcn_00502cd0(*(unsigned int*) (v20 + 0x5d), 1, 4, 2);
+						v4 = (short*) gm_QueryEntities(*(unsigned int*) (v20 + 0x5d), 1, 4, 2);
 						do {
 							if (!v4)
 								goto next_pixel;
@@ -183,7 +183,7 @@ have_image:
 			}
 			goto next_pixel;
 found2:
-			v4 = (short*) fcn_00502cd0(*(unsigned int*) (v20 + 0x5d), 1, 0, v5);
+			v4 = (short*) gm_QueryEntities(*(unsigned int*) (v20 + 0x5d), 1, 0, v5);
 found:
 			if (v4 != 0) {
 				v13 = gm_GetWareIconId(v4);

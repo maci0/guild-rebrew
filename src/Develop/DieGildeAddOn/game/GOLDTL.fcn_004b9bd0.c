@@ -27,7 +27,7 @@ void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004b9bd0 */
-int __cdecl fcn_004b9bd0(int* a1)
+int __cdecl gm_HandleLostLongDistanceTransport(int* a1)
 {
 	char* x1;
 	char* x2;

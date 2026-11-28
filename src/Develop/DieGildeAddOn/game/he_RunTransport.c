@@ -39,7 +39,7 @@ void __cdecl cm_RequestSysMessage(int, void *);
 void __cdecl cm_SendKillTransporter(int);
 int __cdecl gm_AddTime(char *, int, int, int);
 int __cdecl gm_CompareGameTime(char *, int);
-char *__cdecl fcn_00502cd0(int, int, int, int, int);
+char *__cdecl gm_QueryEntities(int, int, int, int, int);
 int __cdecl gm_GetBuildingTechEffect(char *, int, int);
 void __cdecl gm_ChangeObjektZustand(char *, int);
 void __cdecl io_FormatTextBuffer(char *, int, ...);
@@ -254,7 +254,7 @@ void __cdecl he_RunTransport(char *e)
 		*(int *)(e + 0x84) = cm_SendSetHE(1, e);
 		return;
 	case -1:
-		r = (char *)fcn_00502cd0(0, 2, 7, 1, *(int *)(e + 0xac));
+		r = (char *)gm_QueryEntities(0, 2, 7, 1, *(int *)(e + 0xac));
 		if ((*(unsigned char *)(e + 0x78) & 2) != 0) {
 			if (r == 0) {
 				goto ret190;

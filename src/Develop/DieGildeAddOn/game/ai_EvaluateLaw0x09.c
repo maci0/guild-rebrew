@@ -5,7 +5,7 @@ int __cdecl gm_MapEntityStatRange(int);
 void __cdecl gm_GetLawEntry(int, int*);
 float __cdecl gm_GetBuildingLevelRatio(void);
 int __cdecl gm_GetGuildHall(int);
-int __cdecl fcn_00502cd0(int, int, int, int, int);
+int __cdecl gm_QueryEntities(int, int, int, int, int);
 int __cdecl gm_SumQueryEntryValues(int, char);
 int __cdecl amt_CalcTotalOfficeSalaries(void);
 int __cdecl gm_RandomMod(int);
@@ -40,7 +40,7 @@ int __cdecl ai_EvaluateLaw0x09(char* entity, int unused, int* outResult)
 			targetVal--;
 		}
 		guildItem = gm_GetGuildHall(1);
-		guildItem = fcn_00502cd0(*(int*) ((char*) guildItem + 0x5d), 2, 6, 0, 0x115);
+		guildItem = gm_QueryEntities(*(int*) ((char*) guildItem + 0x5d), 2, 6, 0, 0x115);
 		treasuryStock = gm_SumQueryEntryValues(*(int*) ((char*) guildItem + 0x14), gm_ActiveTownIndex);
 		if (treasuryStock < 3 * (int) ((float) amt_CalcTotalOfficeSalaries() * 0.25f)) {
 			targetVal = targetVal + 1 + (gm_RandomMod(3) & 0xffff);

@@ -17,7 +17,7 @@ extern char gm_ActiveTownIndex;
 extern char io_LastKeyScancode;
 extern double g_662908;
 
-unsigned short* __cdecl fcn_00502cd0(int a, int b, int c, int d);
+unsigned short* __cdecl gm_QueryEntities(int a, int b, int c, int d);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl d2_LoadForm(int a, int b, char* name);
 void __cdecl d2_SetFormVisibility(int a, int b);
@@ -130,11 +130,11 @@ void __cdecl ob_HandleBepflanzung(int gebaeude)
 		v17 += 0x40;
 		v18 += 1;
 	} while (v17 < 0x200);
-	v17 = fcn_00502cd0(*(unsigned int*) ((char*) gebaeude + 0x5d), 1, 0, 0xff);
+	v17 = gm_QueryEntities(*(unsigned int*) ((char*) gebaeude + 0x5d), 1, 0, 0xff);
 	if (!v17) {
 		return;
 	}
-	v4 = fcn_00502cd0(*(unsigned int*) ((char*) v17 + 0x14), 1, 4, 0x17);
+	v4 = gm_QueryEntities(*(unsigned int*) ((char*) v17 + 0x14), 1, 4, 0x17);
 	if (v4) {
 		do {
 			v16 += 1;

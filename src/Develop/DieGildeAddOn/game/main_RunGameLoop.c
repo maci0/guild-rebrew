@@ -84,7 +84,7 @@ extern char gm_GameTime[];			/* 0x007f4c00 */
 
 void __cdecl srv_InitBuildingTypeTable(void);
 void __cdecl hst_SetHistoryScrollModeFlag(int);
-int __cdecl fcn_005435d0(void);
+int __cdecl CheckGameDisc(void);
 void __cdecl io_FormatTextBuffer(void*, int);
 int __cdecl d2_ShowModalMessageBox(void*, int);
 void __cdecl d2_RenderAndPresentFrame(void);
@@ -125,7 +125,7 @@ void __cdecl sv_WaitForNetworkSync(int);
 void __cdecl cm_BeginCommandSync(void);
 void __cdecl cm_EndCommandSync(void);
 int __cdecl cm_AreQueuedCommandsDone(void);
-void __cdecl fcn_005490e0(void);
+void __cdecl he_PostSimPersonal(void);
 void __cdecl he_RestartAction03b(void);
 void __cdecl he_RestartAction0xa6(void);
 void __cdecl he_ClearActivePlayerActions(void);
@@ -208,7 +208,7 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 		h = -1;
 		hst_SetHistoryScrollModeFlag(0);
 		if (gm_ClientModeFlags & 0x10) {
-			if (fcn_005435d0() != 1) {
+			if (CheckGameDisc() != 1) {
 				int r;
 
 				do {
@@ -265,7 +265,7 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 		d2_DestroyForm(h);
 	} else {
 		nt_ConnectTcp(0, 0);
-		if (fcn_005435d0() != 1) {
+		if (CheckGameDisc() != 1) {
 			for (;;) {
 				d2_SuppressOverlay = 0;
 				main_LoopFlags = 0x24087;
@@ -511,7 +511,7 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 			cm_BeginCommandSync();
 			if ((gm_ClientModeFlags & 8) ||
 			    ((nt_ClientSocket != -1) && (nt_NetSyncFlags & 8))) {
-				fcn_005490e0();
+				he_PostSimPersonal();
 				he_RestartAction03b();
 				he_RestartAction0xa6();
 			}

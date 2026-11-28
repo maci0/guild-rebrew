@@ -10,7 +10,7 @@ extern unsigned char* d2_InteriorBuilding;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char d3_CurrentSeason;
 
-extern void* __cdecl fcn_00502cd0(int list, int a, int b, ...);
+extern void* __cdecl gm_QueryEntities(int list, int a, int b, ...);
 extern void* __cdecl gm_NextEntityQueryMatch(void);
 extern int __cdecl gm_IsRawItem(int handle);
 extern int __cdecl gm_FindObjektPrototypeByName(char* key);
@@ -53,7 +53,7 @@ void __cdecl d3_UpdateBuildingSlotVisibility(char* record)
 			goto label_5a7a;
 		if (*entry == 0x21 || *entry == 6)
 			goto label_59eb;
-		slot = (char*) fcn_00502cd0((int) list, 1, 0, id);
+		slot = (char*) gm_QueryEntities((int) list, 1, 0, id);
 		if (slot == 0)
 			goto label_59eb;
 		*(unsigned int*) (slot + 0x18) = 0;
@@ -64,14 +64,14 @@ void __cdecl d3_UpdateBuildingSlotVisibility(char* record)
 			if (k1 == 1) {
 				unsigned short* other;
 
-				other = (unsigned short*) fcn_00502cd0((int) list, 1, 0, id2);
+				other = (unsigned short*) gm_QueryEntities((int) list, 1, 0, id2);
 				if (other != 0) {
 					d3_SetSubtreeVisible(record, 1);
 					*(char**) (record + 0x204) = slot;
 					*(unsigned int*) (record + 0x224) = 0;
 					*(char**) (slot + 0x18) = record;
 					if (gm_IsRawItem(*(unsigned short*) slot) != 0) {
-						item = (unsigned short*) fcn_00502cd0((int) list, 1, 4, *entry);
+						item = (unsigned short*) gm_QueryEntities((int) list, 1, 4, *entry);
 						while (item != 0) {
 							unsigned short itemId;
 							unsigned short slotId;
@@ -105,7 +105,7 @@ void __cdecl d3_UpdateBuildingSlotVisibility(char* record)
 					}
 					proto = (unsigned char*) &((OBJECT_PROTOTYPE*) lpObjektePROT)[*other];
 					if (gm_IsRawItem(*(unsigned short*) slot) != 0) {
-						item = (unsigned short*) fcn_00502cd0((int) list, 1, 4, *proto);
+						item = (unsigned short*) gm_QueryEntities((int) list, 1, 4, *proto);
 						while (item != 0) {
 							if (*item > *other)
 								d3_SetSubtreeVisible(record, 0);
@@ -122,7 +122,7 @@ void __cdecl d3_UpdateBuildingSlotVisibility(char* record)
 				*(unsigned int*) (record + 0x224) = 0;
 				*(char**) (slot + 0x18) = record;
 				if (gm_IsRawItem(*(unsigned short*) slot) != 0) {
-					item = (unsigned short*) fcn_00502cd0((int) list, 1, 4, *entry);
+					item = (unsigned short*) gm_QueryEntities((int) list, 1, 4, *entry);
 					while (item != 0) {
 						if (*item > *(unsigned short*) slot)
 							d3_SetSubtreeVisible(record, 0);
@@ -138,7 +138,7 @@ void __cdecl d3_UpdateBuildingSlotVisibility(char* record)
 				*(unsigned int*) (record + 0x224) = 0;
 			*(char**) (slot + 0x18) = record;
 			if (gm_IsRawItem(*(unsigned short*) slot) != 0) {
-				item = (unsigned short*) fcn_00502cd0((int) list, 1, 4, *proto);
+				item = (unsigned short*) gm_QueryEntities((int) list, 1, 4, *proto);
 				while (item != 0) {
 					if (*item > *(unsigned short*) slot)
 						d3_SetSubtreeVisible(record, 0);
@@ -149,7 +149,7 @@ void __cdecl d3_UpdateBuildingSlotVisibility(char* record)
 		goto label_5aab;
 label_59eb:
 		if (*entry != 0x1d) {
-			slot = (char*) fcn_00502cd0((int) *(void**) (g_7f3ee0 + 0x5d), 2, 6, 0, id);
+			slot = (char*) gm_QueryEntities((int) *(void**) (g_7f3ee0 + 0x5d), 2, 6, 0, id);
 			if (slot != 0) {
 				d3_SetSubtreeVisible(record, 1);
 				*(char**) (record + 0x204) = slot;
@@ -194,12 +194,12 @@ label_5aab:
 		idx = gm_FindObjektPrototypeByName(record + 6);
 		if (idx != -1) {
 			if (((OBJECT_PROTOTYPE*) lpObjektePROT)[idx].kind == 2) {
-				if (fcn_00502cd0(*(int*) (g_7f3ee0 + 0x5d), 1, 0, idx) != 0)
+				if (gm_QueryEntities(*(int*) (g_7f3ee0 + 0x5d), 1, 0, idx) != 0)
 					d3_SetSubtreeVisible(record, 0);
 				else
 					d3_SetSubtreeVisible(record, 1);
 			} else {
-				if (fcn_00502cd0((int) list, 1, 0, idx) != 0)
+				if (gm_QueryEntities((int) list, 1, 0, idx) != 0)
 					d3_SetSubtreeVisible(record, 0);
 				else
 					d3_SetSubtreeVisible(record, 1);

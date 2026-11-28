@@ -4,23 +4,23 @@
 extern float g_665370;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-int __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
+int __cdecl gm_QueryEntities(int a, int b, int c, int d, int e);
 
 float __cdecl gv_CalcSeanceBonus(char* p)
 {
 	float v;
 
 	v = 0.0f;
-	if (fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x20f)) {
+	if (gm_QueryEntities(*(int*) (p + 0x5d), 2, 6, 0, 0x20f)) {
 		v = 30.0f;
 	}
-	if (fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x21f)) {
+	if (gm_QueryEntities(*(int*) (p + 0x5d), 2, 6, 0, 0x21f)) {
 		v = v + 10.0f;
 	}
-	if (fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x222)) {
+	if (gm_QueryEntities(*(int*) (p + 0x5d), 2, 6, 0, 0x222)) {
 		v = v + 15.0f;
 	}
-	if (fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x223)) {
+	if (gm_QueryEntities(*(int*) (p + 0x5d), 2, 6, 0, 0x223)) {
 		v = v + 25.0f;
 	}
 	return v * 0.0125f * g_6628cc + 0.5f;

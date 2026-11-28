@@ -132,7 +132,7 @@ void __cdecl d2_UpdateHudVisibility(int);
 void __cdecl d2_RestoreHudPanels(void);
 int __cdecl fcn_0050d2a0(void*);
 void* __cdecl fcn_00503fe0(int, int, int);
-void* __cdecl fcn_00502cd0(int, int, int, int);
+void* __cdecl gm_QueryEntities(int, int, int, int);
 int __cdecl fcn_00502850(void);
 int __cdecl gm_IsLocalSimEntity(void*);
 void __cdecl ch_SetVisible(int, int);
@@ -422,7 +422,7 @@ void __cdecl gm_BeginPlayerTurn(void)
 		char* p;
 
 		p = (char*) fcn_00503fe0(1, 0, 0x44);
-		obj = fcn_00502cd0(*(int*) (p + 0x5d), 1, 4, 0x1d);
+		obj = gm_QueryEntities(*(int*) (p + 0x5d), 1, 4, 0x1d);
 		if (obj != 0) {
 			char* s;
 			int ent;

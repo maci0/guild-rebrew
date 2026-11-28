@@ -11,7 +11,7 @@ int __cdecl io_AppendText(char* fmt, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_CreateRadioGroup(int);
 int __cdecl d2_CreateWindowTextButton(int, int, int);
-char* __cdecl fcn_00502cd0(int, int, int, ...);
+char* __cdecl gm_QueryEntities(int, int, int, ...);
 void __cdecl d2_AddToRadioGroup(int, int);
 void __cdecl d2_SelectRadioGroup(int, int);
 void __cdecl d2_ResetSelectionAndInput(void);
@@ -65,7 +65,7 @@ unsigned int __cdecl d2_ChooseRoutingGood(int a0, int a1, unsigned int a2)
 	for (i = 0; i < 7; i++) {
 		v6 = d2_CreateWindowTextButton(0, 4 + i * 0x1e, *(int*) (0x14a56e8 + i * 4));
 		handles[i] = v6;
-		v7 = fcn_00502cd0(*(int*) (a0 + 0x5d), 2, 6, 0, *(int*) (ids + i));
+		v7 = gm_QueryEntities(*(int*) (a0 + 0x5d), 2, 6, 0, *(int*) (ids + i));
 		*(int*) (&((D2_CONTROL_TL*) (d2_Controls))[v6].associated_object) = v7;
 		d2_AddToRadioGroup(k, v6);
 	}
@@ -89,9 +89,9 @@ unsigned int __cdecl d2_ChooseRoutingGood(int a0, int a1, unsigned int a2)
 			} else {
 				v7 = *(unsigned int*) (a0 + 0x5d);
 			}
-			p = fcn_00502cd0(v7, 1, 0, 0xff);
+			p = gm_QueryEntities(v7, 1, 0, 0xff);
 			if (p != 0) {
-				p2 = fcn_00502cd0(*(unsigned int*) (p + 0x14), 1, 5, 0);
+				p2 = gm_QueryEntities(*(unsigned int*) (p + 0x14), 1, 5, 0);
 				while (p2 != 0) {
 					v6 = d2_AddElementToWindow((i % 4) * 0x40, (i / 4) * 0x40, *(unsigned short*) p2 + 0xdf, d2_CurrentWindowId);
 					list[i] = v6;

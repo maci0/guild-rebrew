@@ -22,7 +22,7 @@ typedef struct pkt99 {
 char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_SearchTable67(int);
 int __cdecl gm_CheckEntityType(char*);
-char* __cdecl fcn_00502cd0(int, int, int, int);
+char* __cdecl gm_QueryEntities(int, int, int, int);
 char* __cdecl gm_SetupEntityQuery(char*);
 int __cdecl cm_EnqueueClientPacket(pkt99*);
 
@@ -62,7 +62,7 @@ int __cdecl ch_StartMovement(int who, int key, int target, char* name, int mode,
 		s = gm_SearchTable67(key);
 		if (s != 0) {
 			if (gm_CheckEntityType(s) != 0) {
-				q = fcn_00502cd0(*(int*) (s + 0x5d), 1, 0, 0xfd);
+				q = gm_QueryEntities(*(int*) (s + 0x5d), 1, 0, 0xfd);
 				if (q != 0) {
 					pkt.target = *(int*) (q + 2);
 					goto send;

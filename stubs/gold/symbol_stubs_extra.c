@@ -387,7 +387,7 @@ void __cdecl d2_DrawPanelFrame(int a0, int a1, int a2)
 
 
 
-void __cdecl fcn_0057c860(void)
+void __cdecl he_ScheduleZigeunerActionExpiry(void)
 {
 }
 

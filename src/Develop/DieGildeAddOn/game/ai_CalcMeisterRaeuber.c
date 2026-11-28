@@ -25,7 +25,7 @@ extern int g_100dc24;
 unsigned short __cdecl gm_RandomMod(int);
 double __cdecl gm_RandomFloat01(void);
 int __cdecl gm_AccumulateTyped2(char*);
-char* __cdecl fcn_00502cd0(int, int, int, int, int);
+char* __cdecl gm_QueryEntities(int, int, int, int, int);
 int __cdecl gm_PosToStatsGrid(int, int*, int*);
 int __cdecl gm_AccumulateTyped2(char*);
 int __cdecl gm_CheckEntityType(unsigned char*);
@@ -78,7 +78,7 @@ void __cdecl ai_CalcMeisterRaeuber(char* meister)
 	float w;
 	double rnd;
 
-	res = fcn_00502cd0(*(int*) (*(char**) (meister + 0x16c) + 0x5d), 2, 6, 0, 0x116);
+	res = gm_QueryEntities(*(int*) (*(char**) (meister + 0x16c) + 0x5d), 2, 6, 0, 0x116);
 	if (res != 0) {
 		ai_ProductionGoodsCount = 0;
 		ai_ResourceCount = 0;

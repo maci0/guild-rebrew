@@ -19,7 +19,7 @@ void __cdecl d3_SelectSceneContext(int, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_AddObjekt(void);
 char* __cdecl gm_FindNextFilteredEntity(void);
-char* __cdecl fcn_00502cd0(int, int, int, int, int, int, int);
+char* __cdecl gm_QueryEntities(int, int, int, int, int, int, int);
 char* __cdecl gm_NextEntityQueryMatch(void);
 void __cdecl d3_VisitSceneObjects(int, char*, int, void*, char*);
 char __cdecl d3_ApplyWimpelTextureCallback(char*, char*);
@@ -42,7 +42,7 @@ void __cdecl d3_UpdateBuildingWimpelTextures(int idx)
 			d3_VisitSceneObjects(d3_ActiveScene, *(char**) (e + 0x61), 0x340, (void*) d3_ApplyWimpelTextureCallback, e);
 		}
 	}
-	for (e = fcn_00502cd0(0, 3, 7, 3, idx, 4, 0x1d); e != 0; e = gm_NextEntityQueryMatch()) {
+	for (e = gm_QueryEntities(0, 3, 7, 3, idx, 4, 0x1d); e != 0; e = gm_NextEntityQueryMatch()) {
 		d = *(char**) (e + 0x3b);
 		if (d != 0) {
 			d3_SelectSceneContext(d3_GetContextIndex(*(int*) (d + 0x88)), 1);

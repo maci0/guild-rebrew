@@ -5,7 +5,7 @@ extern char gm_EntityIdField[];
 
 void __cdecl cm_SendCopyEntityData(char*);
 
-void __cdecl fcn_005490e0(void)
+void __cdecl he_PostSimPersonal(void)
 {
 	char msg[0xf8];
 

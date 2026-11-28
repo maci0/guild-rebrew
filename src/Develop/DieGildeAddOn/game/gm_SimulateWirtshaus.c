@@ -9,7 +9,7 @@ extern float g_665e9c;
 extern double dbl_1_5;
 
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);
-char* __cdecl fcn_00502cd0(int, ...);
+char* __cdecl gm_QueryEntities(int, ...);
 char* __cdecl gm_FindNextFilteredEntity(void);
 void __cdecl he_FreeAction(char*);
 int __cdecl gm_FindMatchingSimEntry(short*, int*, int*);
@@ -76,10 +76,10 @@ void __cdecl gm_SimulateWirtshaus(char* action)
 			if (i >= 0x10) {
 				break;
 			}
-			q = fcn_00502cd0(*(int*) (*(char**) p + 0x5d), 2, 0, 0x2a, 6);
+			q = gm_QueryEntities(*(int*) (*(char**) p + 0x5d), 2, 0, 0x2a, 6);
 			if (q != 0) {
-				*(int*) (p + 4) = (int) fcn_00502cd0(*(int*) (q + 0x14), 1, 0, 0x179);
-				*(int*) (p + 8) = (int) fcn_00502cd0(*(int*) (q + 0x14), 1, 0, 0x17a);
+				*(int*) (p + 4) = (int) gm_QueryEntities(*(int*) (q + 0x14), 1, 0, 0x179);
+				*(int*) (p + 8) = (int) gm_QueryEntities(*(int*) (q + 0x14), 1, 0, 0x17a);
 			}
 			i++;
 			p += 0xc;

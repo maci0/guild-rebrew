@@ -10,7 +10,7 @@ extern unsigned char* lpGebaeudeINST;
 extern unsigned char gm_ActiveTownIndex;
 
 int __cdecl gm_CheckStatLevel(int, int);
-char* __cdecl fcn_00502cd0(int, int, int, int, int);
+char* __cdecl gm_QueryEntities(int, int, int, int, int);
 int __cdecl gm_GetBuildingSlotCapacity(unsigned char*);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 int __cdecl ai_SelectRankedCandidates(unsigned short* e, int n, int* lim, float a4, float r, unsigned short* ids);
@@ -46,7 +46,7 @@ int __cdecl ai_StartVerfluchen(int action, unsigned short* entity, int a3, char*
 	for (i = 0; i < 0x100; i++, e += 0xa9) {
 		if (e[0] != 0 && *(unsigned short*) (e + 0x27) == *entity
 		    && ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[e[0]].category == 0x1f
-		    && fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0x28a) != 0) {
+		    && gm_QueryEntities(*(int*) (e + 0x5d), 2, 6, 0, 0x28a) != 0) {
 			if (best == 0) {
 				best = e;
 				best_v = gm_GetBuildingSlotCapacity(e);

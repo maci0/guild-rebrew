@@ -38,7 +38,7 @@ extern char s_68b3f8[];
 char* __cdecl d3_FindSceneObjectAtScreenPoint(float a, float b, int flags, int mask);
 void __cdecl d2_ClearAnimationSlot(int handle);
 int __cdecl gm_GetEntityUiFlags(int a0, char* a1, unsigned short* a2, int a3);
-char* __cdecl fcn_00502cd0(int a0, int a1, int a2, int a3);
+char* __cdecl gm_QueryEntities(int a0, int a1, int a2, int a3);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_0065f220(char* a, char* b);
 int __cdecl gm_FormatEntityTitleAndName(int a1, int a2, int a3, char* a4);
@@ -182,7 +182,7 @@ void __cdecl sv_UpdateSceneHover(void)
 				v = *(unsigned int*) (target + 0x5d);
 				n = 2;
 			}
-			rec = (unsigned short*) fcn_00502cd0(v, 1, 4, n);
+			rec = (unsigned short*) gm_QueryEntities(v, 1, 4, n);
 			while (rec) {
 				name = g_item_def_table + *(unsigned short*) rec * 0x41;
 				if (!fcn_0065f220(key, name + 1)) {
@@ -193,7 +193,7 @@ void __cdecl sv_UpdateSceneHover(void)
 			}
 			if (rec == 0) {
 				if (d2_InteriorBuilding) {
-					rec = (unsigned short*) fcn_00502cd0(*(unsigned int*) (target + 0x5d), 1, 0, 0xfd);
+					rec = (unsigned short*) gm_QueryEntities(*(unsigned int*) (target + 0x5d), 1, 0, 0xfd);
 					sv_HoveredInteriorItem = rec;
 				} else {
 					rec = sv_HoveredInteriorItem;

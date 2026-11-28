@@ -10,7 +10,7 @@ extern char g_6753fc[];
 
 char* __cdecl gm_LookupEntityRecordById(int id);
 char* __cdecl gm_StartFilteredEntitySearch(int mode, int kind, int type);
-char* __cdecl fcn_00502cd0(int obj, int mode, ...);
+char* __cdecl gm_QueryEntities(int obj, int mode, ...);
 int __cdecl gm_CheckEntityType(char* e);
 int __cdecl init_AllocateGebaeudeSceneSlot(char* e);
 int __cdecl init_EnsureObjektSceneContext(char* q);
@@ -40,7 +40,7 @@ char* __cdecl init_SpawnBuildingCharacter(int id, int type, int sub, int x, int 
 		return 0;
 	}
 	if (sub != -1) {
-		q = fcn_00502cd0(*(int*) (b + 0x5d), 1, 1, sub);
+		q = gm_QueryEntities(*(int*) (b + 0x5d), 1, 1, sub);
 		if (q == 0) {
 			return 0;
 		}

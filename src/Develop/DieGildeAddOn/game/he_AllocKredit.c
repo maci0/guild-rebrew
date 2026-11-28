@@ -25,7 +25,7 @@ extern unsigned char gm_ActiveTownIndex;
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
-char* __cdecl fcn_00502cd0(int, int, int, int);
+char* __cdecl gm_QueryEntities(int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
 void __cdecl gm_TryRecordCrime(int, int, int, int, int);
@@ -56,7 +56,7 @@ void __cdecl he_AllocKredit(char* e)
 		return;
 	}
 	v = 0;
-	r = fcn_00502cd0(*(int*) (q + 0x5d), 1, 0, ((struct rec*)g_8680b4)[gm_ActiveTownIndex].v);
+	r = gm_QueryEntities(*(int*) (q + 0x5d), 1, 0, ((struct rec*)g_8680b4)[gm_ActiveTownIndex].v);
 	if (r != 0) {
 		v = *(int*) (r + 0xe);
 	}

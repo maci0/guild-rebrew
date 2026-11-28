@@ -11,7 +11,7 @@ extern float g_100af14;
 extern float g_100af34;
 extern unsigned char gm_ActiveTownIndex;
 
-char* __cdecl fcn_00502cd0(int a, int b, int c, ...);
+char* __cdecl gm_QueryEntities(int a, int b, int c, ...);
 float* __cdecl gm_LookupSpecialObject(int id);
 int __cdecl gm_UseSpecialObject(char* e, Req* r);
 char* __cdecl gm_StartFilteredEntitySearch(int arg_count, ...);
@@ -39,11 +39,11 @@ int __cdecl ai_RunAlchemistryItems(char* e, char* p, char* q)
 		if (t == 0) {
 			return 0;
 		}
-		s = fcn_00502cd0(*(int*) (t + 0x5d), 2, 6, 0, 0x2a);
+		s = gm_QueryEntities(*(int*) (t + 0x5d), 2, 6, 0, 0x2a);
 		if (s == 0) {
 			return 0;
 		}
-		t = fcn_00502cd0(*(int*) (s + 0x14), 2, 6, 0, *(int*) (p + 4));
+		t = gm_QueryEntities(*(int*) (s + 0x14), 2, 6, 0, *(int*) (p + 4));
 		if (t == 0 || *(int*) (t + 0xe) <= 1) {
 			return 0;
 		}
@@ -53,7 +53,7 @@ int __cdecl ai_RunAlchemistryItems(char* e, char* p, char* q)
 	if (*p != 1) {
 		return 0;
 	}
-	s = fcn_00502cd0(*(int*) (e + 0x178), 1, 1, *(int*) (p + 4));
+	s = gm_QueryEntities(*(int*) (e + 0x178), 1, 1, *(int*) (p + 4));
 	if (!s) {
 		return 0;
 	}

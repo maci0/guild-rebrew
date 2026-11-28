@@ -51,7 +51,7 @@ extern char s_6ab1b8[];
 int __cdecl he_HasNoActiveAction0x62(void*);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 int __cdecl d2_ShowModalMessageBox(char* buf, int zero);
-int __cdecl fcn_00502cd0(int val, int a, int b, int c);
+int __cdecl gm_QueryEntities(int val, int a, int b, int c);
 int __cdecl fcn_00502850(void);
 int __cdecl he_StartHandlungSearch(int a, int b, int idx, int c, int d);
 int __cdecl he_fn_Handlung(void);
@@ -103,7 +103,7 @@ int __cdecl d2_ShowThievesGuildSpyDialog(void* a0, char* obj)
 			}
 			typerec = &((TypeRec*) lpGebaeudePROT)[d2_VisitedBuilding[0]];
 			if (rec) {
-				item = fcn_00502cd0(*((int*) (rec + 0x5d)), 1, 0, 0xca);
+				item = gm_QueryEntities(*((int*) (rec + 0x5d)), 1, 0, 0xca);
 				while (item) {
 					if (*((int*) (item + 0x2a)) != *((int*) (obj + 1))) {
 						msg.objs[n] = (unsigned char*) item;

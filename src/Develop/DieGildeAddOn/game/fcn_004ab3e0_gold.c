@@ -3,7 +3,7 @@ extern char* g_entity_type_table;
 #include "Develop/DieGildeAddOn/game/entity.h"
 int __cdecl gm_CheckStatLevel(int, int);
 int __cdecl gm_RandomMod(unsigned short);
-unsigned short* __cdecl fcn_00502cd0(int, int, ...);
+unsigned short* __cdecl gm_QueryEntities(int, int, ...);
 int __cdecl gm_CountBuildingExtensions(char*);
 int __cdecl amt_GetRoleLevel(int);
 int __cdecl ai_SelectRankedCandidates(char*, int, char**, int, float, unsigned short*);
@@ -39,7 +39,7 @@ int __cdecl fcn_004ab3e0_gold(int action, char* actor, int busy, char* first, ch
     for (i = 0x100; i != 0; i--, entry += 0xa9) {
         if (*entry && *(unsigned short*) (entry + 0x27) == *(unsigned short*) actor &&
             ((GOLD_ACTION_PROTO*) g_entity_type_table)[*entry].kind == 0x1f &&
-            fcn_00502cd0(*(int*) (entry + 0x5d), 2, 6, 0, 0x27c)) {
+            gm_QueryEntities(*(int*) (entry + 0x5d), 2, 6, 0, 0x27c)) {
             if (!best) {
                 best = entry;
                 best_score = gm_CountBuildingExtensions((char*) entry);

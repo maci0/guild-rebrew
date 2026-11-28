@@ -12,7 +12,7 @@ typedef unsigned char  u8;
 typedef unsigned short u16;
 typedef unsigned int   u32;
 
-void* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
+void* __cdecl gm_QueryEntities(int container_id, int arg_count, ...);
 int __cdecl gm_GetStorageSlotCapacity(char* a1, int a2);
 int __cdecl gm_GetMsgField(char* msg, char* pkt);
 u16* __cdecl gm_NextEntityQueryMatch(void);
@@ -38,7 +38,7 @@ int __cdecl d2_UpdateProduktionSlotGrid(char* ep)
         g_778d4c[i].kind = tbl[i + b * 4];
     }
 
-    q = (u16*)fcn_00502cd0(*(int*)(ep + 0x14), 1, 5);
+    q = (u16*)gm_QueryEntities(*(int*)(ep + 0x14), 1, 5);
     if (q != 0) {
         do {
             idx = 0;
@@ -69,7 +69,7 @@ int __cdecl d2_UpdateProduktionSlotGrid(char* ep)
     }
 
     for (j = 0; j < 16; j++) {
-        q = (u16*)fcn_00502cd0(*(int*)(ep + 0x14), 1, 0,
+        q = (u16*)gm_QueryEntities(*(int*)(ep + 0x14), 1, 0,
                                 g_778da0[j].x0);
         if (q != 0) {
             g_778da0[j].x30 =

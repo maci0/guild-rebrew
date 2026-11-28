@@ -7,7 +7,7 @@ int __cdecl fcn_0064d3f8(void);
 void __cdecl fcn_0042e4c0(int a0);
 int __cdecl cm_ResolveSpecialEntityId(void* a0, int a1);
 int __cdecl fcn_00503fe0(int a0, int a1, int a2);
-int __cdecl fcn_0050a7e0(int a0, int a1, int a2, unsigned short a3,
+int __cdecl gm_AllocClientSpieler(int a0, int a1, int a2, unsigned short a3,
                         int a4, int a5, int a6, int a7);
 
 /* ADDRESS: GOLDTL 0x004c7790 */
@@ -33,7 +33,7 @@ int __cdecl fcn_004c7790(void* packet, char* reply)
 		if (arg == 0)
 			return 1;
 	}
-	r = (int) (unsigned short) fcn_0050a7e0(
+	r = (int) (unsigned short) gm_AllocClientSpieler(
 		*(unsigned char*) ((char*) packet + 0x14),
 		*(int*) ((char*) packet + 0x15),
 		*(int*) ((char*) packet + 0x19),

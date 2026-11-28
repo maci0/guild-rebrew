@@ -24,7 +24,7 @@ int __cdecl d3_FindSceneObject(int, int, int, char *);
 void __cdecl d3_SetObjectVisible(int, int);
 void __cdecl gm_ShuffleBytes(int, void *);
 void __cdecl d3_SetSubtreeVisible(int, int);
-int __cdecl fcn_00502cd0(int, int, ...);
+int __cdecl gm_QueryEntities(int, int, ...);
 void __cdecl gm_FindRecordById(int);
 int __cdecl gm_NextEntityQueryMatch(void);
 void __cdecl d3_TransformPoint(int, int, void *);
@@ -279,15 +279,15 @@ void __cdecl cut_SetupBattleArena(void *arg)
 			if (*p == -1) {
 				d3_SetSubtreeVisible(h, 0);
 			} else {
-				ent = (int) fcn_00502cd0(0, 2, 7, 1, *p);
+				ent = (int) gm_QueryEntities(0, 2, 7, 1, *p);
 				if (ent == 0) {
 					gm_FindRecordById(*p);
 					*p = -1;
 				} else {
 					containerId = *(int *) (ent + 0x14);
-					v10 = fcn_00502cd0(containerId, 1, 0, 0x1dd);
+					v10 = gm_QueryEntities(containerId, 1, 0, 0x1dd);
 					n = 0;
-					m = fcn_00502cd0(*(int *) (v10 + 0x14), 1, 5, containerId);
+					m = gm_QueryEntities(*(int *) (v10 + 0x14), 1, 5, containerId);
 					while (n < 3 && m != 0) {
 						slots[n] = m;
 						n++;

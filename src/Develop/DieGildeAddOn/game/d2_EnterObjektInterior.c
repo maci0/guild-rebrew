@@ -14,7 +14,7 @@ void* __cdecl evt_FindScriptById(int);
 void __cdecl evt_RequestScriptExit(void*);
 void __cdecl evt_WaitForScriptExit(int);
 void __cdecl d3_DeinitUniverse(int);
-void* __cdecl fcn_00502cd0(int, int, int, int, int);
+void* __cdecl gm_QueryEntities(int, int, int, int, int);
 void __cdecl d2_RunDefaultBuildingInterior(void*);
 void __cdecl d2_RunFriedhofKapelleMenu(void*);
 void __cdecl d2_RunUpgradeTechTreeHud(void*);
@@ -161,7 +161,7 @@ void __cdecl d2_EnterObjektInterior(void* objMessage)
 	*(int*) &evt_ActiveContextId = 0;
 	g_67530c = *(int*) (*(int*) &d2_InteriorBuilding + 1);
 	save10 = *(int*) (*(int*) &d2_InteriorBuilding + 0x5d);
-	g_675310 = *(int*) ((char*) fcn_00502cd0(save10, 2, 6, 0, 0xfd) + 2);
+	g_675310 = *(int*) ((char*) gm_QueryEntities(save10, 2, 6, 0, 0xfd) + 2);
 	g_774658 = g_774650;
 	*(void**)&d3_CameraVerticalStep = objMessage;
 	*(int*) &d3_SavedCameraPos = save[0];

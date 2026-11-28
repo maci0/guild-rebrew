@@ -56,7 +56,7 @@ extern short gm_GameTimeTailWord;
 
 int __cdecl gm_CollectBuildingStock(char*, void*, int);
 int __cdecl gm_CalcEntityInventoryStats(char*, Stats*);
-char* __cdecl fcn_00502cd0(int, int, int, ...);
+char* __cdecl gm_QueryEntities(int, int, int, ...);
 int __cdecl gm_GetStorageSlotCapacity(char*, int);
 float __cdecl gm_GetSeasonPrice(int, unsigned char);
 int __cdecl ai_GetMaxActiveTradeActions(void);
@@ -128,7 +128,7 @@ unsigned int __cdecl ai_RebalanceCityStock(char* o, char* req)
 				m.slots[j + 3] = -1;
 			}
 			gm_CalcEntityInventoryStats(item, &st);
-			q = fcn_00502cd0(*(int*) (item + 0x14), 1, 0, 0x1dd);
+			q = gm_QueryEntities(*(int*) (item + 0x14), 1, 0, 0x1dd);
 			j = 0;
 			if (st.x0 > 0) {
 				for (; j < st.x0; j++) {

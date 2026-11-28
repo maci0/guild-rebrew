@@ -29,7 +29,7 @@ extern char* gm_CityEntity;
 extern char* lpGebaeudePROT;
 extern char* lpObjektePROT;
 
-char* __cdecl fcn_00502cd0(int, int, ...);
+char* __cdecl gm_QueryEntities(int, int, ...);
 int __cdecl gm_ResolveEntityById(void**, void**, void**, int);
 char* __cdecl he_fn_Handlung(void);
 char* __cdecl gm_NextEntityQueryMatch(void);
@@ -120,7 +120,7 @@ void __cdecl he_RunHandelsrouteTrade(char* a)
 		he_FreeAction(a);
 		return;
 	}
-	q = fcn_00502cd0(*(int*) (pktA + 0x14), 1, 0, 0x1dd);
+	q = gm_QueryEntities(*(int*) (pktA + 0x14), 1, 0, 0x1dd);
 	n = *(unsigned char*) (q + 0x1c);
 	if (n >= 3) {
 		n = 3;
@@ -139,9 +139,9 @@ void __cdecl he_RunHandelsrouteTrade(char* a)
 		}
 	}
 	if (!found) {
-		e2 = fcn_00502cd0(*(int*) (pktB + 0x5d), 2, 6, 0, 0x2a);
+		e2 = gm_QueryEntities(*(int*) (pktB + 0x5d), 2, 6, 0, 0x2a);
 		if (e2 != 0) {
-			r = fcn_00502cd0(*(int*) (q + 0x14), 1, 5);
+			r = gm_QueryEntities(*(int*) (q + 0x14), 1, 5);
 			while (r != 0) {
 				*(int*) (a + 0xe8) = cm_SendSellObjekt(*(int*) (e2 + 2),
 				    *(int*) (q + 2), *(unsigned short*) r, *(int*) (r + 0xe),
@@ -149,9 +149,9 @@ void __cdecl he_RunHandelsrouteTrade(char* a)
 				r = gm_NextEntityQueryMatch();
 			}
 		} else {
-			e2 = fcn_00502cd0(*(int*) (pktB + 0x5d), 2, 6, 0, 0x116);
+			e2 = gm_QueryEntities(*(int*) (pktB + 0x5d), 2, 6, 0, 0x116);
 			if (e2 != 0) {
-				r = fcn_00502cd0(*(int*) (q + 0x14), 1, 5);
+				r = gm_QueryEntities(*(int*) (q + 0x14), 1, 5);
 				while (r != 0) {
 					*(int*) (a + 0xe8) = cm_SendSellObjekt(*(int*) (e2 + 2),
 					    *(int*) (q + 2), *(unsigned short*) r, *(int*) (r + 0xe),
@@ -191,16 +191,16 @@ void __cdecl he_RunHandelsrouteTrade(char* a)
 			if (ps[0] == 0 || pi[0] != *(int*) (pktB + 1)) {
 				goto i1next;
 			}
-			r2 = fcn_00502cd0(*(int*) (q + 0x14), 1, 0, ps[0]);
+			r2 = gm_QueryEntities(*(int*) (q + 0x14), 1, 0, ps[0]);
 			if (r2 == 0) {
 				goto i1next;
 			}
 			if (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*) pktB].category == '\n') {
 				e2 = gm_FindCityItemHolder(ps[0]);
 			} else {
-				e2 = fcn_00502cd0(*(int*) (pktB + 0x5d), 2, 6, 0, 0x2a);
+				e2 = gm_QueryEntities(*(int*) (pktB + 0x5d), 2, 6, 0, 0x2a);
 				if (e2 == 0) {
-					e2 = fcn_00502cd0(*(int*) (pktB + 0x5d), 2, 6,
+					e2 = gm_QueryEntities(*(int*) (pktB + 0x5d), 2, 6,
 					    0, 0x116);
 				}
 			}
@@ -255,16 +255,16 @@ i1next:
 		if (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*) pktB].category == '\n') {
 			e2 = gm_FindCityItemHolder(ps[0]);
 		} else {
-			e2 = fcn_00502cd0(*(int*) (pktB + 0x5d), 2, 6, 0, 0x2a);
+			e2 = gm_QueryEntities(*(int*) (pktB + 0x5d), 2, 6, 0, 0x2a);
 			if (e2 == 0) {
-				e2 = fcn_00502cd0(*(int*) (pktB + 0x5d), 2, 6,
+				e2 = gm_QueryEntities(*(int*) (pktB + 0x5d), 2, 6,
 				    0, 0x116);
 			}
 		}
 		if (e2 == 0) {
 			goto i2next;
 		}
-		r2 = fcn_00502cd0(*(int*) (e2 + 0x14), 1, 0, ps[0]);
+		r2 = gm_QueryEntities(*(int*) (e2 + 0x14), 1, 0, ps[0]);
 		if (r2 == 0) {
 			goto i2advance;
 		}

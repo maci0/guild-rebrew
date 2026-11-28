@@ -18,7 +18,7 @@ int __cdecl io_AppendText();
 float __cdecl gm_GetEntitySkill(char*, int);
 int __cdecl gm_GetScaledEntitySkill(char*, int);
 int __cdecl main_RunFrameLoop(void*, int);
-int __cdecl fcn_00502cd0(int, int, ...);
+int __cdecl gm_QueryEntities(int, int, ...);
 int __cdecl gm_SearchTable67(int);
 int __cdecl gm_FindRecordById(int);
 int __cdecl gm_CalcEntityInventoryStats(char*, int*);
@@ -171,7 +171,7 @@ unsigned int __cdecl cut_RunCombatStartDialog(int dialogState)
 			p++;
 			i--;
 		} while (i);
-		sel = *(int*) (fcn_00502cd0(0, 2, 7, 1, *(int*) (dialogState + 0x100)) + 0x24);
+		sel = *(int*) (gm_QueryEntities(0, 2, 7, 1, *(int*) (dialogState + 0x100)) + 0x24);
 		d2_SetForm(win, 1);
 		io_AppendText(0x6811b0);
 		if (sel) {

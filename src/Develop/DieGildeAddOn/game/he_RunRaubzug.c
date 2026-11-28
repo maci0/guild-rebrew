@@ -51,7 +51,7 @@ void __cdecl gm_EvalEntityInventoryValue(char*, int*);
 float __cdecl gm_GetSeasonPrice(int, unsigned char);
 int __cdecl he_HasNoActiveAction0x62(char*);
 int __cdecl _ftol(void);
-int* __cdecl fcn_00502cd0(int, ...);
+int* __cdecl gm_QueryEntities(int, ...);
 int* __cdecl gm_NextEntityQueryMatch(void);
 char* __cdecl gm_GetEntityTableEntry(char*);
 void __cdecl he_FreeAction(char*);
@@ -255,7 +255,7 @@ label_1bc:
 		h = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (actionRecord + 0xb0));
 		if (h != 0) {
 			q = (int) gm_SetupEntityQuery((char*) h);
-			i = (int) fcn_00502cd0(*(int*) (h + 0x5d), 2, 6, 0, 0x116);
+			i = (int) gm_QueryEntities(*(int*) (h + 0x5d), 2, 6, 0, 0x116);
 			cnt = 8;
 			do {
 				if (*(int*) (actionRecord + 0x8c + (8 - cnt) * 4) != -1) {
@@ -283,7 +283,7 @@ label_1bc:
 		msg[0] = str_empty[0];
 		memset(msg + 1, 0, 0x3ff);
 		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (actionRecord + 0xac));
-		h = (int) fcn_00502cd0(*(int*) (rec1 + 0x5d), 2, 6, 0, 0x2a);
+		h = (int) gm_QueryEntities(*(int*) (rec1 + 0x5d), 2, 6, 0, 0x2a);
 		gm_EvalEntityInventoryValue((char*) rec1, req);
 		val = (int) (*(int*) req * 0.35);
 		io_FormatTextBuffer(str, 0x68bea4, val);
@@ -294,7 +294,7 @@ label_1bc:
 		cm_RequestChangeAttribute();
 		if (h != 0) {
 			if (i != 0) {
-				q = (int) fcn_00502cd0(*(int*) (h + 0x14), 1, 5);
+				q = (int) gm_QueryEntities(*(int*) (h + 0x14), 1, 5);
 				while (q != 0) {
 					if (gm_RandomMod(100) > 0x32) {
 						cnt = gm_GetMsgField(h, (int*) q);

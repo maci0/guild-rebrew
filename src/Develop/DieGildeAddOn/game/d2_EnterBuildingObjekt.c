@@ -21,7 +21,7 @@ extern char gm_EntityBlockedField[];
 extern char gm_EntityIdField[];
 extern char g_1043690[];
 
-char* __cdecl fcn_00502cd0(int a0, int a1, int a2, int a3);
+char* __cdecl gm_QueryEntities(int a0, int a1, int a2, int a3);
 int __cdecl gm_CheckEntityType(void* p);
 int __cdecl gm_IsWarehouse(void* p);
 int __cdecl init_EnsureObjektSceneContext(void* p);
@@ -56,9 +56,9 @@ void __cdecl d2_EnterBuildingObjekt(char* buildingRecord, int objektId, char* en
 		hit = d2_InteriorBuilding;
 	}
 	d2_EnteredBuildingEntity = buildingRecord;
-	d2_EnteredBuildingObjekt = fcn_00502cd0(*(int*) (buildingRecord + 0x5d), 1, 1, objektId);
+	d2_EnteredBuildingObjekt = gm_QueryEntities(*(int*) (buildingRecord + 0x5d), 1, 1, objektId);
 	if (*buildingRecord == 0x47) {
-		d2_EnteredBuildingObjekt = fcn_00502cd0(*(int*) (buildingRecord + 0x5d), 1, 0, 0xfd);
+		d2_EnteredBuildingObjekt = gm_QueryEntities(*(int*) (buildingRecord + 0x5d), 1, 0, 0xfd);
 	}
 	strcpy(g_7e2714, entryText);
 	d2_InsideBuildingActive = 1;

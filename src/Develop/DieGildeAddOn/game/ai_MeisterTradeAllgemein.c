@@ -112,7 +112,7 @@ int __cdecl cm_SendSellObjekt(int, int, int, int, int, int);
 int __cdecl cm_RequestClearLagerslot(int, int);
 int __cdecl cm_SendCopyEntityData(void*);
 int __cdecl gm_AddTime(void*, int, int, int);
-char* __cdecl fcn_00502cd0(int, int, int, ...);
+char* __cdecl gm_QueryEntities(int, int, int, ...);
 char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_FindCityItemHolder(int);
 float __cdecl eval_ObjektPreis2Credits(int, int);
@@ -286,7 +286,7 @@ clear_stack:
 			char* tp = *(char**) (o + 0x16c);
 
 			gm_CollectBuildingStock(tp, v.nslot, 0);
-			r = fcn_00502cd0(*(int*) (tp + 0x5d), 3, 6, 4,
+			r = gm_QueryEntities(*(int*) (tp + 0x5d), 3, 6, 4,
 			    0x1d, 3, *(unsigned short*) (tp + 0x27));
 		}
 		if (r == 0) {
@@ -348,7 +348,7 @@ next_request:
 			v.m.slots[3 + i] = -1;
 		}
 		gm_CalcEntityInventoryStats(r, &v.st);
-		q = fcn_00502cd0(*(int*) (r + 0x14), 1, 0, 0x1dd);
+		q = gm_QueryEntities(*(int*) (r + 0x14), 1, 0, 0x1dd);
 		i = 0;
 		if (v.st.x0 <= 0) {
 			goto after_auto;
@@ -783,7 +783,7 @@ Tail:
 		{
 			char* tp = *(char**) (o + 0x16c);
 
-			tmp = (int) fcn_00502cd0(*(int*) (tp + 0x5d),
+			tmp = (int) gm_QueryEntities(*(int*) (tp + 0x5d),
 			    3, 6, 4, 0x1d, 3,
 			    *(unsigned short*) (tp + 0x27));
 		}

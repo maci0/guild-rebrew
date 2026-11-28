@@ -25,7 +25,7 @@ struct STORAGE_SLOT {
 };
 
 extern int __cdecl gm_GetStorageSlotCapacity(char* slot, int unused);
-extern unsigned short* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
+extern unsigned short* __cdecl gm_QueryEntities(int container_id, int arg_count, ...);
 extern int __cdecl gm_NextEntityQueryMatch(void);
 
 /* ADDRESS: GOLDTL 0x0050e170 */
@@ -36,7 +36,7 @@ int __cdecl gm_GetFreeStorageSlotCapacity(STORAGE_SLOT* slot, int itemId, int ma
     int i;
 
     total = gm_GetStorageSlotCapacity((char*) slot, itemId);
-    found = fcn_00502cd0(slot->id, 1, 0, itemId);
+    found = gm_QueryEntities(slot->id, 1, 0, itemId);
     if (found != 0) {
         if (total - *(int*) ((char*) found + 0xe) > maxAmount) {
             return maxAmount;
@@ -44,7 +44,7 @@ int __cdecl gm_GetFreeStorageSlotCapacity(STORAGE_SLOT* slot, int itemId, int ma
         return total - *(int*) ((char*) found + 0xe);
     }
     i = 0;
-    if (fcn_00502cd0(slot->id, 1, 5) != 0) {
+    if (gm_QueryEntities(slot->id, 1, 5) != 0) {
         do {
             i++;
         } while (gm_NextEntityQueryMatch() != 0);

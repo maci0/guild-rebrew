@@ -3910,7 +3910,7 @@ void __cdecl d3_SelectSceneContext(int a, int b);
 void __cdecl d3sm_Rebuild(int a, int b);
 void __cdecl amt_SetSpecialOfficeIndex(int v);
 void __cdecl fcn_004b3d40(int a, int b);
-unsigned short* __cdecl fcn_00502cd0(int, int, ...);
+unsigned short* __cdecl gm_QueryEntities(int, int, ...);
 void __cdecl d3_UpdateBuildingView(void* ent, int v);
 void __cdecl gm_UpdateWeatherAndSky(void* t, int flag);
 void __cdecl d3_UpdateBuildingWimpelTextures(int idx);
@@ -3965,7 +3965,7 @@ int __cdecl cm_ExSysMessage(char* pkt, char* out)
 	case 4:
 		e = (unsigned char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (buf + 0x11));
 		if (e != 0) {
-			r = fcn_00502cd0(*(int*) ((char*) e + 0x5d), 1, 1,
+			r = gm_QueryEntities(*(int*) ((char*) e + 0x5d), 1, 1,
 			                 *(int*) (buf + 0x15));
 			if (r != 0)
 				d3_UpdateBuildingView(e, *r);
@@ -4736,7 +4736,7 @@ extern int d3_CurrentContextIndex;
 extern char* d2_SelectedBuilding;
 extern int g_773dd8;
 void __cdecl sv_ResetSelectionState(void);
-unsigned short* __cdecl fcn_00502cd0(int, int, ...);
+unsigned short* __cdecl gm_QueryEntities(int, int, ...);
 void __cdecl gm_RemoveClientEntityLink(char*);
 void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl d3_RemoveSubTreeFromCellTree(int, int*);
@@ -4782,7 +4782,7 @@ int __cdecl cm_ExDestroyBuilding(int cmd, char* result)
 #ifdef REBREW_SERVER
 	match = gm_ff_Objekt(0, 2, 7, 4, 0x1d);
 #else
-	match = fcn_00502cd0(0, 2, 7, 4, 0x1d);
+	match = gm_QueryEntities(0, 2, 7, 4, 0x1d);
 #endif
 	while (match != (ushort*) 0x0) {
 		if (*(int*) (match + 0xe) == *(int*) ((int) building + 1)) {

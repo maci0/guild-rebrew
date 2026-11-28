@@ -21,10 +21,10 @@ int __cdecl he_GetActionProgress(char*, int*, int*, int);
 void __cdecl d2_ShowModalMessageBox(int, int);
 void __cdecl d2_RunProduktionDialog(char*);
 #ifdef REBREW_GOLD
-#define fcn_00585030 fcn_0057c950
+#define d2_ShowAlchemyFormulaBook fcn_0057c950
 #endif
 
-void __cdecl fcn_00585030(char*);
+void __cdecl d2_ShowAlchemyFormulaBook(char*);
 void __cdecl d2_RunAlchemistryWorkshopDialog(char*);
 void __cdecl d2_RunAlchemyDialog(char*);
 
@@ -76,7 +76,7 @@ void __cdecl d2_RunAlchemistMenu(char* a, char* b)
 					d2_RunProduktionDialog(a);
 				}
 			} else if (sv_ClickedObjekt == alch) {
-				fcn_00585030(a);
+				d2_ShowAlchemyFormulaBook(a);
 			} else if (sv_ClickedObjekt == alchcontract) {
 				d2_RunAlchemistryWorkshopDialog(a);
 			} else if (sv_ClickedObjekt == contract) {

@@ -6,7 +6,7 @@ unsigned char* __cdecl gm_AddObjekt(void);
 unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 
 unsigned short __cdecl gm_RandomMod(unsigned short);
-char* __cdecl fcn_00502cd0(int, int, int, ...);
+char* __cdecl gm_QueryEntities(int, int, int, ...);
 char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 
@@ -36,10 +36,10 @@ int __cdecl gm_DeductRandomBuildingGood(unsigned short* entity, int* outId, floa
 	m = 0;
 	c = arr[gm_RandomMod(n)];
 	*outId = *(int*) (c + 1);
-	q = fcn_00502cd0(*(int*) (c + 0x5d), 2, 6, 0, 0x2a);
+	q = gm_QueryEntities(*(int*) (c + 0x5d), 2, 6, 0, 0x2a);
 	if (q == 0)
 		goto fail;
-	for (s = fcn_00502cd0(*(int*) (q + 0x14), 1, 5); s != 0 && m < 12; s = gm_NextEntityQueryMatch())
+	for (s = gm_QueryEntities(*(int*) (q + 0x14), 1, 5); s != 0 && m < 12; s = gm_NextEntityQueryMatch())
 		arr[m++] = s;
 	if (m != 0) {
 		for (i = 0; i < m; i++) {

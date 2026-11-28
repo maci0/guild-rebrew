@@ -52,7 +52,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl d2_ShowModalMessageBox(void*, int);
 int __cdecl gm_CheckEntityStock(void*, int, char);
 int __cdecl gm_SearchTable67(int);
-int __cdecl fcn_00502cd0(int, int, int, int, int);
+int __cdecl gm_QueryEntities(int, int, int, int, int);
 void* __cdecl gm_GetGuildHall(int);
 int __cdecl gm_FindBuildingTreasury(unsigned char*);
 int __cdecl d2_CheckFundsAndNotify(int, int, int, char);
@@ -152,7 +152,7 @@ void __cdecl d2_RunBuildingUpgradeDialog(unsigned char* buildingEntry)
 	}
 	if (kind == 3) {
 		id = *(int*) ((char*) gm_GetGuildHall(1) + 0x5d);
-		m = fcn_00502cd0(id, 2, 6, 0, 0x115);
+		m = gm_QueryEntities(id, 2, 6, 0, 0x115);
 		if (d2_ShowModalMessageBox(buf, 0x11) == 0) {
 			return;
 		}

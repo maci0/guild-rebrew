@@ -23,7 +23,7 @@ extern int io_RightButtonReleased;
 extern int d2_CurrentElementId;
 extern char g_6aae08[];
 
-unsigned char* __cdecl fcn_00502cd0(int, int, int, int, int);
+unsigned char* __cdecl gm_QueryEntities(int, int, int, int, int);
 int __cdecl gm_SumQueryEntryValues(int a, char b);
 int __cdecl gm_AccumulateTyped2(ENTITY_RECORD* entity);
 int __cdecl d2_LoadForm(int, int, char*);
@@ -60,7 +60,7 @@ void __cdecl d2_RunGildenkasseDialog(unsigned char* p)
 	h1 = -1;
 	b = 0;
 	tbl = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[p[0]];
-	obj = fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x142);
+	obj = gm_QueryEntities(*(int*) (p + 0x5d), 2, 6, 0, 0x142);
 	n = gm_SumQueryEntryValues(*(int*) (obj + 0x14), gm_ActiveTownIndex);
 	acc = gm_AccumulateTyped2(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot]));
 	if ((((BUILDING_PROTOTYPE*)tbl)->category) == 0x17 && ((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot].grade == 0x1e) {

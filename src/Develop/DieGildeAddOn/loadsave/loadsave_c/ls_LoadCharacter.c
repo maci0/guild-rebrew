@@ -19,7 +19,7 @@ extern char s_699784[];
 
 extern char* __cdecl ls_ReadCharacterRecord(void*);
 extern char* __cdecl gm_LookupEntityRecordById(int);
-extern unsigned short* __cdecl fcn_00502cd0(int, int, ...);
+extern unsigned short* __cdecl gm_QueryEntities(int, int, ...);
 extern int __cdecl ch_GetQueueEntryByIndex(int);
 extern int __cdecl gm_SelectEntityHeadSet(int);
 extern int __cdecl vfs_ResolvePath(char*, void*, void*, char*);
@@ -91,7 +91,7 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 		do {
 			e = ls_ReadCharacterRecord((void*) stream);
 			*(unsigned short**) (e + 0x12c) =
-				fcn_00502cd0(0, 2, 7, 1, *(unsigned int*) (e + 0x12c));
+				gm_QueryEntities(0, 2, 7, 1, *(unsigned int*) (e + 0x12c));
 			i++;
 		} while (i < count);
 	}
@@ -102,7 +102,7 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 			alloc = 0;
 			found = gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (rec + 0x2c));
 			if (found != 0) {
-				alloc = fcn_00502cd0((int) *(unsigned int*) ((char*) found + 0x5d),
+				alloc = gm_QueryEntities((int) *(unsigned int*) ((char*) found + 0x5d),
 						     2, 6, 1, *(unsigned int*) (rec + 0x30));
 				if (alloc != 0 && *(short*) alloc != 0xfd) {
 					v = init_EnsureObjektSceneContext((char*) alloc);
@@ -284,7 +284,7 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 		if (*(char*) (rec + 9) == 0x33) {
 			e = (char*) gm_StartFilteredEntitySearch(1, 1, u[0xd]);
 			if (e != 0) {
-				alloc = fcn_00502cd0((int) *(unsigned int*) (e + 0x5d),
+				alloc = gm_QueryEntities((int) *(unsigned int*) (e + 0x5d),
 						     2, 6, 1, u[0xe]);
 				if (alloc != 0 && *(short*) alloc != 0xfd) {
 					v = init_EnsureObjektSceneContext((char*) alloc);

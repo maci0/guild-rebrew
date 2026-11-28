@@ -20,7 +20,7 @@ typedef struct F8 {
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
 unsigned short __cdecl gm_RandomMod(int n);
-int __cdecl fcn_00502cd0(int, int, int, int, int);
+int __cdecl gm_QueryEntities(int, int, int, int, int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int* __cdecl ai_PickIdleGraveyardWorker(char* q);
 int __cdecl ai_SelectRankedCandidates(char* e, int a, int* p, int b, float r, unsigned short* out);
@@ -38,7 +38,7 @@ int __cdecl ai_PlanHauchDesVerfalls(char* e, char* q, Blk24* b1, Blk24* b2)
 	t = 0;
 	b1->d = 2;
 	b1->c = *(int*) (q + 1);
-	if (fcn_00502cd0(*(int*) (q + 0x5d), 2, 0, 0x204, 6) == 0)
+	if (gm_QueryEntities(*(int*) (q + 0x5d), 2, 0, 0x204, 6) == 0)
 		return 0;
 	h = ai_PickIdleGraveyardWorker(q);
 	if (h == 0)

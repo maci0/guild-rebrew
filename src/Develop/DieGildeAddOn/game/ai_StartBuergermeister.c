@@ -7,7 +7,7 @@ extern double g_664360;
 extern float g_664198;
 
 int __cdecl gm_GetGuildHall(int);
-int __cdecl fcn_00502cd0(int, int, int, int, int);
+int __cdecl gm_QueryEntities(int, int, int, int, int);
 int __cdecl gm_SumQueryEntryValues(int, unsigned char);
 float __cdecl gm_GetCityStatsSummary(char*);
 int __cdecl gm_RandomMod(int);
@@ -45,7 +45,7 @@ int __cdecl ai_StartBuergermeister(int a0, unsigned short* a1, int a2,
 	if (r == 0) {
 		return 0;
 	}
-	r = fcn_00502cd0(*(int*) (r + 0x5d), 2, 6, 0, 0x115);
+	r = gm_QueryEntities(*(int*) (r + 0x5d), 2, 6, 0, 0x115);
 	a0 = gm_SumQueryEntryValues(*(int*) (r + 0x14), gm_ActiveTownIndex);
 	gm_GetCityStatsSummary((char*) buf);
 	prot = lpGebaeudePROT;

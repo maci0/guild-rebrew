@@ -26,7 +26,7 @@ extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-char* __cdecl fcn_00502cd0(int, int, int, int, int);
+char* __cdecl gm_QueryEntities(int, int, int, int, int);
 int __cdecl gm_SumQueryEntryValues(int, unsigned char);
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl ai_SelectBestMethod(int kind, int id, int n, Blk24* b1, Blk24* b2);
@@ -74,7 +74,7 @@ int __cdecl ai_StartUpgradeZunft(int a0, char* e, int a2, Blk24* o1, Blk24* o2)
 	if (w == 0) {
 		return 0;
 	}
-	item = fcn_00502cd0(*(int*) (w + 0x5d), 2, 6, 0, 0x142);
+	item = gm_QueryEntities(*(int*) (w + 0x5d), 2, 6, 0, 0x142);
 	price = gm_SumQueryEntryValues(*(int*) (item + 0x14), gm_ActiveTownIndex);
 	lvl = w[0x5c];
 	if (lvl < gm_RandomMod(0x10) + 0x32 && !(w[0x5a] & 4)) {

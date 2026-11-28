@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl cm_ResolveSpecialEntityId(void*, int);
 
-char* __cdecl fcn_00502cd0(int, int, int, ...);
+char* __cdecl gm_QueryEntities(int, int, int, ...);
 int __cdecl gm_RemoveObjectByType(char*, int);
 
 
@@ -16,7 +16,7 @@ int __cdecl cm_ExClearStorageSlot(char* request, char* result)
 		return 1;
 	if (*(short*) f != 0x2a && *(short*) f != 0x116)
 		return 1;
-	e = fcn_00502cd0(*(int*) (f + 0x14), 1, 0, *(unsigned short*) (request + 0x14));
+	e = gm_QueryEntities(*(int*) (f + 0x14), 1, 0, *(unsigned short*) (request + 0x14));
 	if (e == 0)
 		return 1;
 	if (*(int*) (e + 0xe) != 1)

@@ -11,7 +11,7 @@ typedef struct {
 
 int __cdecl gm_CanEvaluateMaster(char* e);
 int __cdecl gm_RandomMod(unsigned short n);
-char* __cdecl fcn_00502cd0(int a, int b, int c, ...);
+char* __cdecl gm_QueryEntities(int a, int b, int c, ...);
 char* __cdecl gm_NextEntityQueryMatch(void);
 void __cdecl gm_AddTime(SIM_CLOCK_489920* clock, int arg2, int arg3, int arg4);
 void __cdecl cm_SendCopyEntityData(int msg);
@@ -29,7 +29,7 @@ void __cdecl ai_RepairMeisterObjects(char* e)
 		return;
 	}
 	o = *(char**) (e + 0x16c);
-	q = fcn_00502cd0(*(int*) (o + 0x5d), 3, 6, 4, 0x1d, 3, *(unsigned short*) (o + 0x27));
+	q = gm_QueryEntities(*(int*) (o + 0x5d), 3, 6, 4, 0x1d, 3, *(unsigned short*) (o + 0x27));
 	if (q == 0) {
 		return;
 	}

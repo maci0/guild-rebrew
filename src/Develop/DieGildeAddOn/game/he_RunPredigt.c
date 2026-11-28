@@ -23,7 +23,7 @@ int __cdecl cm_GetCommandStatus(int);
 void __cdecl gm_ResolveEntityById(int*, int, int, int);
 int __cdecl cm_SendSetHE(int, int);
 void __cdecl gm_AddTime(int, int, int, int);
-int __cdecl fcn_00502cd0(int, int, ...);
+int __cdecl gm_QueryEntities(int, int, ...);
 int __cdecl gm_RandomMod(int);
 int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl he_NotifyThemaPredigt(PredigtEntityRecord*, int, int);
@@ -72,7 +72,7 @@ void __cdecl he_RunPredigt(int action)
 		cm_SendSetHE(0, v2);
 		return;
 	}
-	v3 = fcn_00502cd0(*(int*) (entity + 0x5d), 1, 0, 0x1b5);
+	v3 = gm_QueryEntities(*(int*) (entity + 0x5d), 1, 0, 0x1b5);
 	switch (*(int*) (v2 + 0x70)) {
 	case 2: {
 		char v8;

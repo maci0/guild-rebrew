@@ -5,7 +5,7 @@
 int __cdecl fcn_0064d41a(char*, char*, ...);
 char* __cdecl ch_FindCharacterByName(char*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int, ...);
-char* __cdecl fcn_00502cd0(int, int, int, ...);
+char* __cdecl gm_QueryEntities(int, int, int, ...);
 int __cdecl init_EnsureObjektSceneContext(char*);
 int __cdecl init_AllocateGebaeudeSceneSlot(char*);
 int __cdecl gm_CheckEntityType(char*);
@@ -44,7 +44,7 @@ int __cdecl cm_ExChrGotoSceneObject(char* x, char* out)
 			return 2;
 	}
 	if (*(int*) (x + 0x18) != -1) {
-		d = fcn_00502cd0(*(int*) (s + 0x5d), 1, 1, *(int*) (x + 0x18));
+		d = gm_QueryEntities(*(int*) (s + 0x5d), 1, 1, *(int*) (x + 0x18));
 		if (d == 0)
 			return 3;
 	}
@@ -52,7 +52,7 @@ int __cdecl cm_ExChrGotoSceneObject(char* x, char* out)
 		k = init_EnsureObjektSceneContext(d);
 	} else if (s != 0 && gm_CheckEntityType(s) != 0) {
 		k = init_AllocateGebaeudeSceneSlot(s);
-		d = fcn_00502cd0(*(int*) (s + 0x5d), 1, 0, 0xfd);
+		d = gm_QueryEntities(*(int*) (s + 0x5d), 1, 0, 0xfd);
 	} else {
 		k = 0;
 	}

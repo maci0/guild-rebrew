@@ -22,7 +22,7 @@ extern unsigned char gm_ActiveTownIndex;
 
 int __cdecl ai_FindEntityInFavorRange(char* p, int kind, F8 f, int c, float r, int* out);
 int __cdecl gm_ResolveEntityById(void** out, int a, int b, int c);
-int __cdecl fcn_00502cd0(int, int, int, int, int);
+int __cdecl gm_QueryEntities(int, int, int, int, int);
 int __cdecl gm_SumQueryEntryValues(int a, unsigned char b);
 int __cdecl ai_FindMissingBuildingUpgrade(int* a, int* b, char* q, int c);
 int __cdecl ai_SelectBestMethod(int kind, int id, int n, Blk24* b1, Blk24* b2);
@@ -57,7 +57,7 @@ int __cdecl ai_StartBuergermeisterRathaus(int a1, char* e, char* q, Blk24* o1, B
 	if (q == 0) {
 		return 0;
 	}
-	rec = (char*) fcn_00502cd0(*(int*) (q + 0x5d), 2, 6, 0, 0x115);
+	rec = (char*) gm_QueryEntities(*(int*) (q + 0x5d), 2, 6, 0, 0x115);
 	val = gm_SumQueryEntryValues(*(int*) (rec + 0x14), gm_ActiveTownIndex);
 	if (!(*(unsigned char*) (q + 0x5a) & 4)) {
 		if (*(char*) (q + 0x5c) < gm_RandomMod(0x40) + 0x25) {

@@ -2312,7 +2312,7 @@ int __cdecl gm_AddObjekt(int a, int b, int c)
 #endif
 #if !defined(REBREW_SERVER)
 extern char g_6997e8[];
-void* __cdecl fcn_00502cd0(int list, int a, int b, int c);
+void* __cdecl gm_QueryEntities(int list, int a, int b, int c);
 
 /* ADDRESS: GOLDTL 0x005037c0 */
 /* ADDRESS: GOLD 0x00500970 */
@@ -2341,7 +2341,7 @@ int __cdecl gm_AddObjekt(int a, int b, int c)
 	} else {
 		return 0;
 	}
-	r = fcn_00502cd0(*(int*) list_head, 1, 0, b);
+	r = gm_QueryEntities(*(int*) list_head, 1, 0, b);
 	if (r == 0) {
 		return (int) gm_AllocObjekt(a, b, c);
 	}
@@ -7303,7 +7303,7 @@ limited:
 #include "object_prototype.h"
 
 int __cdecl gm_GetStorageSlotCapacity(char* pkt, int item_id);
-void* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
+void* __cdecl gm_QueryEntities(int container_id, int arg_count, ...);
 
 /* The T&L/Gold build of gm_eval_SlotVoll (SERVER 0x10019d30): a missing entity
  * returns 0 without the LogMessageInternal call. */
@@ -7329,7 +7329,7 @@ int __cdecl gm_eval_SlotVoll(char* obj, int item_id, int requested)
 	}
 	is_cat2 = (gm_GetBuildingTypeCategory((unsigned char) *ent) == 2);
 	size = gm_GetStorageSlotCapacity(pkt, item_id);
-	query_result = fcn_00502cd0(*(int*) (pkt + 0x14), 1, 0, item_id);
+	query_result = gm_QueryEntities(*(int*) (pkt + 0x14), 1, 0, item_id);
 	if (query_result != NULL) {
 		msg_field = gm_GetMsgField(pkt, (char*) query_result);
 		if (size - msg_field > requested) {
@@ -7349,7 +7349,7 @@ int __cdecl gm_eval_SlotVoll(char* obj, int item_id, int requested)
 	}
 	if (*(unsigned short*) pkt == 0x2a) {
 		count = 0;
-		query_result = fcn_00502cd0(*(int*) (pkt + 0x14), 1, 5);
+		query_result = gm_QueryEntities(*(int*) (pkt + 0x14), 1, 5);
 		if (query_result != NULL) {
 			do {
 				q_id = *(unsigned short*) query_result;
@@ -7390,7 +7390,7 @@ int __cdecl gm_eval_SlotVoll(char* obj, int item_id, int requested)
 		goto limited;
 	}
 	count = 0;
-	query_result = fcn_00502cd0(*(int*) (pkt + 0x14), 1, 5);
+	query_result = gm_QueryEntities(*(int*) (pkt + 0x14), 1, 5);
 	if (query_result != NULL) {
 		do {
 			count++;

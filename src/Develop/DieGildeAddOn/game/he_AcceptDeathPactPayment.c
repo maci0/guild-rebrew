@@ -11,7 +11,7 @@ extern void __cdecl gm_AddTime(char*, int, int, int);
 /* Timed action 0x8B (grave debt) START: due is now; late in the day (hour >= 0x17) the
  * action is rescheduled to 0xc with the longer delay, otherwise the short one. */
 /* ADDRESS: GOLDTL 0x00579320 */
-void __cdecl fcn_00579320(char* a0)
+void __cdecl he_StartDeathPactPrompt(char* a0)
 {
 	*(pos14_7f4c00*) (a0 + 0x52) = gm_GameTime;
 	if (*(unsigned short*) (a0 + 0x56) >= 0x17) {

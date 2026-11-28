@@ -1,7 +1,7 @@
 
 
 
-void* __cdecl fcn_00502cd0(int, int, int, ...);
+void* __cdecl gm_QueryEntities(int, int, int, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);
 
 int __cdecl gm_CollectEntityCarts(char* a, void** out)
@@ -10,7 +10,7 @@ int __cdecl gm_CollectEntityCarts(char* a, void** out)
 	char* r;
 
 	n = 0;
-	r = fcn_00502cd0(n, 2, 7, 4, 0x1d);
+	r = gm_QueryEntities(n, 2, 7, 4, 0x1d);
 	while (r != 0 && n < 3) {
 		if (*(int*) (r + 0x1c) == *(int*) (a + 1)) {
 			if (out != 0) {

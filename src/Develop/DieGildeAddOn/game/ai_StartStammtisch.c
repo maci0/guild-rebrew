@@ -27,7 +27,7 @@ extern int gm_EntityIdField[];
 
 unsigned short __cdecl gm_RandomMod(int n);
 float __cdecl gm_RandomFloat01(void);
-char* __cdecl fcn_00502cd0(int id, int a, int b, int c, int d);
+char* __cdecl gm_QueryEntities(int id, int a, int b, int c, int d);
 unsigned short* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 
@@ -67,7 +67,7 @@ int __cdecl ai_StartStammtisch(int busy, unsigned short* self, int pending, Act*
 	while (count < 4 && n != 0) {
 		e = (Rec*) (lpGebaeudeINST + idx * sizeof(Rec));
 		if (e->type == 0x37 && e->owner != 0xffff && e->owner != *self) {
-			r = fcn_00502cd0(e->x5d, 2, 6, 0, 0x12d);
+			r = gm_QueryEntities(e->x5d, 2, 6, 0, 0x12d);
 			if (r != 0) {
 				cand[count] = e;
 				res[count] = r;

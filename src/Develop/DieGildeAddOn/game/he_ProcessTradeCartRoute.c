@@ -147,7 +147,7 @@ extern int __cdecl cm_GetCommandStatus(int);
 extern void __cdecl he_FreeAction(char*);
 extern void* __cdecl gm_StartFilteredEntitySearch(int, ...);
 extern unsigned short* __cdecl gm_NextEntityQueryMatch(void);
-extern char* __cdecl fcn_00502cd0(int, int, int, int, int);
+extern char* __cdecl gm_QueryEntities(int, int, int, int, int);
 
 /* Timed action 0xA6 (route supervisor) FINISH: once the linked record is gone or the
  * phase is 0, walks every matching cart and hands it to he_ProcessTradeCartRoute, then reschedules. */
@@ -167,7 +167,7 @@ void __cdecl fcn_00570870(char* h)
 		if (phase >= 0) {
 			if (phase == 0) {
 				g_7749f0 = gm_StartFilteredEntitySearch(1, 0, 0x44);
-				e = fcn_00502cd0(0, 2, 7, 4, 0x1d);
+				e = gm_QueryEntities(0, 2, 7, 4, 0x1d);
 				if (e) {
 					do {
 						if (*(int*) (e + 0x29) && !(e[0x20] & 1) && !(e[0x13] & 0x20) && e[0x33])

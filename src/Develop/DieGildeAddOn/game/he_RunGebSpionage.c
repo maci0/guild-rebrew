@@ -28,7 +28,7 @@ extern int __cdecl gm_IsEntityAtBuilding(char*, char*);
 extern int __cdecl gm_GetScaledEntitySkill(char*, int);
 extern int __cdecl gm_GetBuildingProtLevel(unsigned char*);
 extern void __cdecl he_FreeAction(char*);
-extern unsigned short* __cdecl fcn_00502cd0(int, int, ...);
+extern unsigned short* __cdecl gm_QueryEntities(int, int, ...);
 extern int __cdecl gm_WalkEntityChain(unsigned short raw_idx);
 extern int __cdecl gm_GetMsgField(char*, char*);
 extern float __cdecl gm_GetSeasonPrice(int, unsigned char);
@@ -173,7 +173,7 @@ void __cdecl he_RunGebSpionage(char* action)
 			return;
 		}
 		r = (char*)&((ENTITY_RECORD*)gm_EntitySlotTable)[*(unsigned short*)(h2 + 0x27)];
-		q = (char*)fcn_00502cd0(*(int*)(h2 + 0x5d), 2, 6, 0, 0x2a);
+		q = (char*)gm_QueryEntities(*(int*)(h2 + 0x5d), 2, 6, 0, 0x2a);
 		i = gm_WalkEntityChain(*(unsigned short*)r);
 		if (i >= 1600000) {
 			i = 1600000;
@@ -181,7 +181,7 @@ void __cdecl he_RunGebSpionage(char* action)
 		m.f12 = (int)(i * 0.1);
 		v = 0;
 		if (q != 0) {
-			e = (char*)fcn_00502cd0(*(int*)(q + 0x14), 1, 5);
+			e = (char*)gm_QueryEntities(*(int*)(q + 0x14), 1, 5);
 			while (e != 0) {
 				amount = (float)gm_GetMsgField(q, e);
 				amount = gm_GetSeasonPrice(*(unsigned short*)e, gm_ActiveTownIndex) * amount;

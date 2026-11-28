@@ -14,7 +14,7 @@ char* __cdecl gm_SearchTable67(int);
 int __cdecl gm_CollectBuildingStock(char*, Slots*, int);
 int __cdecl gm_CalcEntityInventoryStats(char*, Slots*);
 char* __cdecl gm_FindCityItemHolder(int);
-char* __cdecl fcn_00502cd0(int, int, int, ...);
+char* __cdecl gm_QueryEntities(int, int, int, ...);
 int __cdecl gm_GetMsgField(char*, char*);
 int __cdecl gm_eval_SlotVoll(char*, int, int);
 float __cdecl gm_GetSeasonPrice(int, unsigned char);
@@ -69,11 +69,11 @@ void __cdecl he_BuyTransportCargoAtStop(char* e, char who)
 		if (t->category == 10) {
 			src = gm_FindCityItemHolder(p[0]);
 		} else if (t->category == 0x1c) {
-			src = fcn_00502cd0(*(int*) (q + 0x5d), 2, 0, 0x1dc, 6);
+			src = gm_QueryEntities(*(int*) (q + 0x5d), 2, 0, 0x1dc, 6);
 		} else {
 			src = a.obj;
 		}
-		o = fcn_00502cd0(*(int*) (src + 0x14), 1, 0, p[0]);
+		o = gm_QueryEntities(*(int*) (src + 0x14), 1, 0, p[0]);
 		if (o == 0) {
 			continue;
 		}

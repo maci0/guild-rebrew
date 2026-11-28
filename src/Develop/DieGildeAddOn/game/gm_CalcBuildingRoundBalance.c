@@ -26,7 +26,7 @@ extern unsigned char gm_ActiveTownIndex;
 float __cdecl gm_GetWorkforceOutput(unsigned char* p, int k, int a, int b);
 void* __cdecl ahm_GetWorkshopOwner(unsigned char* e);
 int __cdecl ahm_CalcWorkshopOutputScore(char* e);
-char* __cdecl fcn_00502cd0(int, int, int, int, int);
+char* __cdecl gm_QueryEntities(int, int, int, int, int);
 int __cdecl gm_SumQueryEntryValues(int, unsigned char b);
 
 /* ADDRESS: GOLDTL 0x0050c1b0 */
@@ -104,13 +104,13 @@ finalize:
 		var = *(int*) (bld + 0x55);
 	}
 	if (*row == 7) {
-		entry = fcn_00502cd0(*(int*) (bld + 0x5d), 2, 6, 0, 0xe8);
+		entry = gm_QueryEntities(*(int*) (bld + 0x5d), 2, 6, 0, 0xe8);
 		if (entry != 0) {
 			val = gm_SumQueryEntryValues(*(int*) (entry + 0x14), gm_ActiveTownIndex);
 			*(int*) (out + 0x30) += val;
 			var += *(int*) (out + 0x30);
 		}
-		entry = fcn_00502cd0(*(int*) (bld + 0x5d), 2, 6, 0, 0xf0);
+		entry = gm_QueryEntities(*(int*) (bld + 0x5d), 2, 6, 0, 0xf0);
 		if (entry != 0) {
 			val = gm_SumQueryEntryValues(*(int*) (entry + 0x14), gm_ActiveTownIndex);
 			*(int*) (out + 0x3c) += val;

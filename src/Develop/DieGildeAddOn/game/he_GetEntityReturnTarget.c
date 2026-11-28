@@ -17,7 +17,7 @@ void __cdecl fcn_00566fa0(char* h)
 
 int __cdecl gm_CheckEntityType(char*);
 char* __cdecl gm_FindBuildingPrimarySlot(char*);
-char* __cdecl fcn_00502cd0(int, int, int, int);
+char* __cdecl gm_QueryEntities(int, int, int, int);
 
 int __cdecl he_GetEntityReturnTarget(char* h, int* out1, int* out2)
 {
@@ -44,9 +44,9 @@ int __cdecl he_GetEntityReturnTarget(char* h, int* out1, int* out2)
 		}
 	} else {
 		if (h[0x180] == 3 || h[0x180] == 8 || h[0x180] == 9) {
-			q = fcn_00502cd0(*(int*) (*(char**) (h + 0x16c) + 0x5d), 1, 0, 0x37);
+			q = gm_QueryEntities(*(int*) (*(char**) (h + 0x16c) + 0x5d), 1, 0, 0x37);
 		} else {
-			q = fcn_00502cd0(*(int*) (*(char**) (h + 0x16c) + 0x5d), 1, 0, 0xfd);
+			q = gm_QueryEntities(*(int*) (*(char**) (h + 0x16c) + 0x5d), 1, 0, 0xfd);
 		}
 		if (q == 0) {
 			goto out;

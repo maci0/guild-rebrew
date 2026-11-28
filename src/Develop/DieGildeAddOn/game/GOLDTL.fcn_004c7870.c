@@ -4,7 +4,7 @@ extern char gm_EntitySlotTable[];
 
 int __cdecl rand(void);
 void __cdecl srv_SeedRandom(int);
-unsigned short __cdecl fcn_0050a7e0(unsigned int, int, int, unsigned short, int, unsigned int, unsigned int, unsigned int);
+unsigned short __cdecl gm_AllocClientSpieler(unsigned int, int, int, unsigned short, int, unsigned int, unsigned int, unsigned int);
 char* __cdecl strncpy(char*, const char*, unsigned int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -31,7 +31,7 @@ int __cdecl fcn_004c7870(int cmd, char* result)
 			kind = 6;
 		else
 			kind = 7;
-		entity = fcn_0050a7e0(kind,
+		entity = gm_AllocClientSpieler(kind,
 			*(int*) (c + 0x14), *(int*) (c + 0x18),
 			*(unsigned short*) (c + 0x1c), 0,
 			(unsigned char) *(char*) (c + 0x1e), 0,

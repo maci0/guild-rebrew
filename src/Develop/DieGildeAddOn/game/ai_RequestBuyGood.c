@@ -2,7 +2,7 @@ extern char s_67fb68[];
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-char* __cdecl fcn_00502cd0(int, int, int, int);
+char* __cdecl gm_QueryEntities(int, int, int, int);
 void __cdecl cm_SendLogAction(char* s);
 void __cdecl cm_RequestElectionOrTrade(void* msg);
 void __cdecl cm_RequestLinkEvidence(int, int);
@@ -30,10 +30,10 @@ int __cdecl ai_RequestBuyGood(char* actor, char* good, char* target)
 	found = gm_StartFilteredEntitySearch(1, 1, *(int*) (target + 4));
 	if (found == 0)
 		return 0;
-	entry = fcn_00502cd0(*(int*) (found + 0x5d), 1, 0, 0x120);
+	entry = gm_QueryEntities(*(int*) (found + 0x5d), 1, 0, 0x120);
 	if (entry == 0)
 		return 0;
-	entry = fcn_00502cd0(*(int*) (entry + 0x14), 1, 0, 0x12c);
+	entry = gm_QueryEntities(*(int*) (entry + 0x14), 1, 0, 0x12c);
 	if (entry == 0)
 		return 0;
 	for (i = 0; i < 3; i++) {

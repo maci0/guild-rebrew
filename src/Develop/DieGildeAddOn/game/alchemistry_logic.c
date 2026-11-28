@@ -646,7 +646,7 @@ int __cdecl ahm_AllocateEntitySlot(int obj, int tgt, int src)
 extern int nt_ClientSocket;
 extern int gm_NextEntityId;
 extern unsigned char gm_ActiveTownIndex;
-char* __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
+char* __cdecl gm_QueryEntities(int a, int b, int c, int d, int e);
 void __cdecl gm_RefreshLocalMarketStock(int season);
 
 /* ADDRESS: GOLDTL 0x004ee8c0 */
@@ -658,7 +658,7 @@ int __cdecl ahm_AllocateEntitySlot(char* obj, char* tgt, char* src)
 
 	for (i = 0; i < 6; i++) {
 		if (*(int*) (tgt + 0xc + i * 8) == 0) {
-			query = fcn_00502cd0(*(int*) (src + 0x5d), 2, 6, 0, 0xff);
+			query = gm_QueryEntities(*(int*) (src + 0x5d), 2, 6, 0, 0xff);
 			if (nt_ClientSocket != -1) {
 				gm_NextEntityId = *(int*) (obj + 0x14);
 			}

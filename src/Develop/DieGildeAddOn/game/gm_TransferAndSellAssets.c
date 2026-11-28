@@ -3,7 +3,7 @@ extern double g_662a20;
 extern double g_664f18;
 extern double dbl_0_01;
 
-char* __cdecl fcn_00502cd0(int, int, int, ...);
+char* __cdecl gm_QueryEntities(int, int, int, ...);
 int __cdecl gm_AccumulateTyped2(char* entity);
 int __cdecl cm_RequestMoveCredits(int a1, int a2, char a3, int a4);
 int __cdecl cm_SendSellObjekt(int a1, int a2, int a3, int a4, char a5, int a6);
@@ -22,8 +22,8 @@ int __cdecl gm_TransferAndSellAssets(char* bld1, char* bld2, char* entity, char*
 	int v;
 	int delay;
 
-	p1 = fcn_00502cd0(*(int*) (bld2 + 0x5d), 2, 6, 0, 0x116);
-	p2 = fcn_00502cd0(*(int*) (bld1 + 0x5d), 2, 6, 0, 0x2a);
+	p1 = gm_QueryEntities(*(int*) (bld2 + 0x5d), 2, 6, 0, 0x116);
+	p2 = gm_QueryEntities(*(int*) (bld1 + 0x5d), 2, 6, 0, 0x2a);
 	v = gm_AccumulateTyped2(otherEntity);
 	v = v < 0 ? 0 : v;
 	if (v >= 0x9c400) {
@@ -32,7 +32,7 @@ int __cdecl gm_TransferAndSellAssets(char* bld1, char* bld2, char* entity, char*
 	v = (int) (((double) cut_RandMod(0x32) * g_662a20 + g_664f18) * v);
 	cm_RequestMoveCredits(*(int*) (entity + 4), *(int*) (otherEntity + 4), gm_ActiveTownIndex, v);
 	if (p2 != 0 && p1 != 0) {
-		match = fcn_00502cd0(*(int*) (p2 + 0x14), 1, 5);
+		match = gm_QueryEntities(*(int*) (p2 + 0x14), 1, 5);
 		while (match != 0) {
 			delay = (int) (((double) (cut_RandMod(0x14) + 0x50) * 0.01) * *(int*) (match + 0xe));
 			if (delay < 1) {

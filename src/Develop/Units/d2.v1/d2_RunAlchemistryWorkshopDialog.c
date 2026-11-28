@@ -62,7 +62,7 @@ int __cdecl d2_RunDomizilSkillConfirmDialog(char*, int*, int);
 int __cdecl d2_RunDomizilSkillDialog(char*, int*);
 int __cdecl d2_ConfirmFireAlchemist(char*, int*);
 void __cdecl d3_EndCameraAndUiMode(void);
-void __cdecl fcn_00585030(int);
+void __cdecl d2_ShowAlchemyFormulaBook(int);
 
 /* ADDRESS: GOLDTL 0x00585910 */
 void __cdecl d2_RunAlchemistryWorkshopDialog(char* e)
@@ -103,7 +103,7 @@ void __cdecl d2_RunAlchemistryWorkshopDialog(char* e)
 			if (io_RightButtonReleased != 0) {
 				d2_DialogCloseRequested = 1;
 			}
-		} while (main_RunFrameLoop((void*) fcn_00585030, 0x677c7) != 0);
+		} while (main_RunFrameLoop((void*) d2_ShowAlchemyFormulaBook, 0x677c7) != 0);
 		d2_DestroyForm(ids[0]);
 		return;
 	}

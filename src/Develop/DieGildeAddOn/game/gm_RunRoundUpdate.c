@@ -48,7 +48,7 @@ int __cdecl sv_WaitForNetworkSync();
 int __cdecl main_RunFrameLoop();
 int __cdecl gm_ApplyHourlyEntityUpdates();
 int __cdecl gm_UpdateOwnerBuildings();
-int __cdecl fcn_005435d0();
+int __cdecl CheckGameDisc();
 int __cdecl main_PlayOutroMovie();
 int __cdecl he_DispatchFlaggedEvents();
 int __cdecl he_TickEventDeals();
@@ -98,7 +98,7 @@ void __cdecl gm_RunRoundUpdate(void)
 	*(short*) &gm_LocalPlayerSlot = (short) tmpIdx;
 	he_DispatchFlaggedEvents();
 	if (!(gm_ClientModeFlags & 4) && (unsigned short) gm_RandomMod(10) > 6) {
-		loopStat = fcn_005435d0();
+		loopStat = CheckGameDisc();
 		while (loopStat != 1) {
 			d2_SuppressOverlay = 0;
 			*(int*) &main_LoopFlags = 0x24087;
@@ -110,7 +110,7 @@ void __cdecl gm_RunRoundUpdate(void)
 			}
 			d2_RenderAndPresentFrame();
 			Sleep(1000);
-			loopStat = fcn_005435d0();
+			loopStat = CheckGameDisc();
 		}
 	}
 	*(int*) &main_LoopFlags = 0x24087;

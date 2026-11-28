@@ -39,7 +39,7 @@ void __cdecl m_FreeTracked(char*);
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 
 
-int __cdecl fcn_00522510(void* stream);
+int __cdecl ls_LoadClientBuildingEntityState(void* stream);
 
 
 int __cdecl fcn_00524040(void* stream);
@@ -102,7 +102,7 @@ int __cdecl ls_WaitAndLoadNetSave(void)
 		cm_LoadBuf = 0;
 		return 0;
 	}
-	if (fcn_00522510(f) == 0) {
+	if (ls_LoadClientBuildingEntityState(f) == 0) {
 		CloseVfsStream(f);
 		m_FreeTracked(cm_LoadBuf);
 		cm_LoadBuf = 0;

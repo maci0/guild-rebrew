@@ -31,7 +31,7 @@ int __cdecl gm_GetBuildingTypeCategory(int);
 void __cdecl gm_InitBuildingStartingGoods(char*);
 char* __cdecl gv_AllocGraveyardField(char*);
 void __cdecl gm_AssignBuildingResidents(char*, int);
-char* __cdecl fcn_00502cd0(int, int, int, int);
+char* __cdecl gm_QueryEntities(int, int, int, int);
 void __cdecl hp_AddProdSetting(char*);
 char* __cdecl m_alloc(int, char*);
 int __cdecl gm_RandomMod(unsigned short);
@@ -203,7 +203,7 @@ char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 			}
 		}
 	}
-	q = fcn_00502cd0(*(int*) (geb + 0x5d), 1, 4, 2);
+	q = gm_QueryEntities(*(int*) (geb + 0x5d), 1, 4, 2);
 	while (q != 0) {
 		if (*(unsigned short*) q != 0xfd) {
 			*(unsigned short*) (geb + 0x29) = *(unsigned short*) q;

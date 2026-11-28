@@ -4,7 +4,7 @@ extern unsigned char g_slot_table[2];
 extern unsigned char gm_ActiveTownIndex;
 typedef struct { char x00[0x21]; unsigned char x21; char x22[0x22b]; } BUILDING_LIMIT_VIEW;
 char* __cdecl gm_SearchTable67(int);
-unsigned short* __cdecl fcn_00502cd0(int, int, int, int);
+unsigned short* __cdecl gm_QueryEntities(int, int, int, int);
 char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_GetSeasonTreasury(char*, unsigned char);
 float __cdecl gm_GetSeasonPrice(int, unsigned char);
@@ -45,7 +45,7 @@ int __cdecl ai_StartRaumKaufen(int unused, char* entity, int mode, char* itemReq
 		return 0;
 	i = 0;
 	limit = &((BUILDING_LIMIT_VIEW*) lpGebaeudePROT)[*(unsigned char*) building];
-	ent = fcn_00502cd0(*(int*) (building + 0x5d), 1, 4, 2);
+	ent = gm_QueryEntities(*(int*) (building + 0x5d), 1, 4, 2);
 	while (ent != 0) {
 		if (*ent != 0xfd)
 			i++;

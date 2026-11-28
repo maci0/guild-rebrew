@@ -80,7 +80,7 @@ extern pos14_7f4c00 gm_GameTime;
 extern char str_empty[];
 
 
-Group* __cdecl fcn_00502cd0(int, int, int, int);
+Group* __cdecl gm_QueryEntities(int, int, int, int);
 void __cdecl cm_SendSetHE(int, Order*);
 Entity* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_ResolveDinnerParty(Party*, int);
@@ -115,7 +115,7 @@ void __cdecl he_UpdateFest(Order* o)
 	}
 	gm_ResolveEntityById((void**) (&pl), 0, 0, o->owner);
 	if (pl != 0) {
-		g = fcn_00502cd0(pl->home, 1, 0, 0x17);
+		g = gm_QueryEntities(pl->home, 1, 0, 0x17);
 		if (g == 0) {
 			o->stamp = (*(pos14_7f4c00*)&gm_GameTime);
 			cm_SendSetHE(-1, o);

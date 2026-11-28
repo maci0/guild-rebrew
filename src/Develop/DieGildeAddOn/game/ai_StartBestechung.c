@@ -2,7 +2,7 @@
 
 int __cdecl abs(int);
 int __cdecl ai_SelectBestMethod(int, int, int, Cmd*, Cmd*);
-int __cdecl fcn_00502cd0(int, int, int, int, int);
+int __cdecl gm_QueryEntities(int, int, int, int, int);
 int __cdecl gm_RandomMod(unsigned short);
 float __cdecl gm_RandomFloat01(void);
 int __cdecl gm_WalkEntityChain(unsigned short);
@@ -49,7 +49,7 @@ int __cdecl ai_StartBestechung(int targetSlot, short* ent, int mode, Cmd* out1, 
         (unsigned short)gm_RandomMod(8) != 0) return 0;
     if (*((char*)ent + 2) == 3) {
         if ((*((unsigned char*)ent + 0x1e8) & 2) == 0) return 0;
-    } else if (fcn_00502cd0(*(int*)(*(char**)((char*)ent + 0x170) + 0x5d), 2, 6, 0, 0x14) == 0) {
+    } else if (gm_QueryEntities(*(int*)(*(char**)((char*)ent + 0x170) + 0x5d), 2, 6, 0, 0x14) == 0) {
         c1.kind = 2;
         c1.f1 = 0x14;
         c1.f2 = 1;

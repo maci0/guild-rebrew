@@ -27,7 +27,7 @@ void __cdecl d2_ResetBuildingUiSlots(void);
 void __cdecl d2_DrawPanelFrame(int, int, int);
 int __cdecl d2_GetFormWindow(int, int, int, int*, int*, int*);
 void __cdecl d2_CreateWindowScrollbar(int, int, int, int);
-int __cdecl fcn_00502cd0(int, int, ...);
+int __cdecl gm_QueryEntities(int, int, ...);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl he_fn_Handlung(void);
 void __cdecl d3snd_PlayWorkerOrderVoice(void);
@@ -116,10 +116,10 @@ int __cdecl d2_RunMetalProduktionDialog(char* building)
 	*(unsigned int*) (&((D2_CONTROL_TL*) (d2_Controls))[item].font) = 0x54;
 	do {
 		d2_SetForm(h, 2);
-		t = fcn_00502cd0(*(unsigned int*) (building + 0x5d), 2, 6, 0, 0xff);
+		t = gm_QueryEntities(*(unsigned int*) (building + 0x5d), 2, 6, 0, 0xff);
 		if (!t)
 			return 0;
-		q = fcn_00502cd0(*(unsigned int*) (building + 0x5d), 2, 6, 0, 0x2a);
+		q = gm_QueryEntities(*(unsigned int*) (building + 0x5d), 2, 6, 0, 0x2a);
 		if (!q)
 			return 0;
 		if ((d2_DialogButtonAction != -1) && (g_100f884 == h)) {
@@ -186,7 +186,7 @@ located:
 								if (p[4]) {
 									j = sv_SelectedBuilding;
 									if (!j)
-										j = fcn_00502cd0(*(unsigned int*) (building + 0x5d), 1, 0, 0xfd);
+										j = gm_QueryEntities(*(unsigned int*) (building + 0x5d), 1, 0, 0xfd);
 									he_AssignActionSlot(building, j, *p, found);
 									*(char*) (*p * 0x21c + 0x7f4e28) = 0;
 								}
@@ -246,7 +246,7 @@ located:
 				found = 1;
 				for (j = 0; j < 4 && found; j++) {
 					if (((OBJECT_PROTOTYPE *)row)->ingredient_ids[j]) {
-						m = fcn_00502cd0(*(unsigned int*) (t + 0x14), 1, 0, ((OBJECT_PROTOTYPE *)row)->ingredient_ids[j]);
+						m = gm_QueryEntities(*(unsigned int*) (t + 0x14), 1, 0, ((OBJECT_PROTOTYPE *)row)->ingredient_ids[j]);
 						if (!m || (*(int*) (m + 0xe) != 2 && *building != 0x1e))
 							found = 0;
 					}
@@ -278,7 +278,7 @@ nextcand:
 					*(int*) (0x779174 + k * 0x58 + j * 4) = ((OBJECT_PROTOTYPE *)row)->ingredient_amounts[j];
 					if (!*(int*) (0x779164 + k * 0x58 + j * 4))
 						continue;
-					m = fcn_00502cd0(*(unsigned int*) (q + 0x14), 1, 0, *(int*) (0x779164 + k * 0x58 + j * 4));
+					m = gm_QueryEntities(*(unsigned int*) (q + 0x14), 1, 0, *(int*) (0x779164 + k * 0x58 + j * 4));
 					if (m == 0) {
 						*acc = 0;
 					} else {
@@ -287,7 +287,7 @@ nextcand:
 					}
 				}
 				*acc = ((OBJECT_PROTOTYPE *)lpObjektePROT)[*(int*) (0x779160 + k * 0x58)].value_036 * *acc;
-				m = fcn_00502cd0(*(unsigned int*) (q + 0x14), 1, 0, *(int*) (0x779160 + k * 0x58));
+				m = gm_QueryEntities(*(unsigned int*) (q + 0x14), 1, 0, *(int*) (0x779160 + k * 0x58));
 				if (m)
 					acc[1] = gm_GetMsgField(q, m);
 				else

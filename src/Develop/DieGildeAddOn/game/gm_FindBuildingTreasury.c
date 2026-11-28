@@ -7,7 +7,7 @@ extern char gm_EntitySlotTable[];
 
 
 char* __cdecl gm_GetGuildHall(int k);
-void* __cdecl fcn_00502cd0(int list, int a, int b, int c, int d);
+void* __cdecl gm_QueryEntities(int list, int a, int b, int c, int d);
 
 void* __cdecl gm_FindBuildingTreasury(unsigned char* e)
 {
@@ -32,11 +32,11 @@ void* __cdecl gm_FindBuildingTreasury(unsigned char* e)
 			o = 0;
 		}
 		if (o != 0) {
-			r = fcn_00502cd0(*(int*) (o + 0x5d), 2, 6, 0, 0x142);
+			r = gm_QueryEntities(*(int*) (o + 0x5d), 2, 6, 0, 0x142);
 		}
 	} else if (t == 3) {
 		o = gm_GetGuildHall(1);
-		r = fcn_00502cd0(*(int*) (o + 0x5d), 2, 6, 0, 0x115);
+		r = gm_QueryEntities(*(int*) (o + 0x5d), 2, 6, 0, 0x115);
 	}
 	return r;
 }

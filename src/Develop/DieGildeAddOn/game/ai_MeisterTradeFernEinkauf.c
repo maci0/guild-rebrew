@@ -56,7 +56,7 @@ extern int ai_DispatchedTradeCount;
 
 int __cdecl gm_CollectBuildingStock(char*, void*, int);
 int __cdecl gm_CalcEntityInventoryStats(char*, Stats*);
-char* __cdecl fcn_00502cd0(int, int, int, ...);
+char* __cdecl gm_QueryEntities(int, int, int, ...);
 int __cdecl gm_GetStorageSlotCapacity(char*, int);
 float __cdecl gm_GetSeasonPrice(int, unsigned char);
 int __cdecl ai_GetMaxActiveTradeActions(void);
@@ -128,7 +128,7 @@ int __cdecl ai_MeisterTradeFernEinkauf(char* meister, char* warehouse)
 			m.slots[i + 3] = -1;
 		}
 		gm_CalcEntityInventoryStats(ent, &st);
-		cargo = fcn_00502cd0(*(int*) (ent + 0x14), 1, 0, 0x1dd);
+		cargo = gm_QueryEntities(*(int*) (ent + 0x14), 1, 0, 0x1dd);
 		i = 0;
 		if (st.x0 > 0) {
 			for (; i < st.x0; i++) {

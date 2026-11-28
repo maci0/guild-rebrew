@@ -15,7 +15,7 @@ int __cdecl gm_GetMsgField(char* pkt, Ware* q);
 float __cdecl gm_GetSeasonPrice(int id, unsigned char k);
 float __cdecl eval_ObjektPreis2Credits(int id, int pct);
 char* __cdecl gm_FindCityItemHolder(int id);
-Ware* __cdecl fcn_00502cd0(int, int, int, int);
+Ware* __cdecl gm_QueryEntities(int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x0047e0e0 */
 void __cdecl ai_PlanResourceRestock(int building, char* pkt)
@@ -40,7 +40,7 @@ void __cdecl ai_PlanResourceRestock(int building, char* pkt)
 				ai_ResourceRequests[i].requested = want;
 				town = gm_FindCityItemHolder(ai_ResourceRequests[i].goods_id);
 				if (town != 0) {
-					w = fcn_00502cd0(*(int*) (town + 0x14), 1, 0, ai_ResourceRequests[i].goods_id);
+					w = gm_QueryEntities(*(int*) (town + 0x14), 1, 0, ai_ResourceRequests[i].goods_id);
 					if (w != 0) {
 						if (gm_GetMsgField(town, w) - (int) ((unsigned int) (gm_GetStorageSlotCapacity(town, w->id) * w->unit) >> 2) >= 5) {
 							ai_ResourceRequests[i].supplier = gm_MarketEntity;

@@ -12,7 +12,7 @@ char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
 char* __cdecl plt_FindRecordById(char*, int);
 char* __cdecl gm_FindBuildingPrimarySlot(unsigned char*);
-char* __cdecl fcn_00502cd0(int, int, int, ...);
+char* __cdecl gm_QueryEntities(int, int, int, ...);
 void __cdecl he_AssignActionSlot(int, int, unsigned int, int);
 void __cdecl cm_SendCopyEntityData(char*);
 
@@ -145,7 +145,7 @@ void __cdecl ai_DispatchMeisterAction(int* actionCtx)
 		} else {
 			n = actionCtx[6] / actionCtx[5] + actionCtx[8];
 		}
-		rec = fcn_00502cd0(*(int*) (*(int*) (actionCtx[1] + 0x16c) + 0x5d), 2, 6, 0,
+		rec = gm_QueryEntities(*(int*) (*(int*) (actionCtx[1] + 0x16c) + 0x5d), 2, 6, 0,
 		                   0xdd);
 		memset(m, 0, sizeof(m));
 		m[4] = (char) actionCtx[0];
@@ -198,7 +198,7 @@ void __cdecl ai_DispatchMeisterAction(int* actionCtx)
 		return;
 	}
 	if (actionCtx[0] == 0x8c) {
-		fcn_00502cd0(*(int*) (*(int*) (actionCtx[1] + 0x16c) + 0x5d), 1, 0, 0xfd);
+		gm_QueryEntities(*(int*) (*(int*) (actionCtx[1] + 0x16c) + 0x5d), 1, 0, 0xfd);
 		if (actionCtx[5] > 1 && actionCtx[7] == 0) {
 			n = actionCtx[8] + actionCtx[6] % actionCtx[5] + actionCtx[6] / actionCtx[5];
 		} else {
@@ -301,7 +301,7 @@ void __cdecl ai_DispatchMeisterAction(int* actionCtx)
 	}
 	v = 0;
 	if (actionCtx[0] == 8 || actionCtx[0] == 3) {
-		v = (int) fcn_00502cd0(*(int*) (*(int*) (actionCtx[1] + 0x16c) + 0x5d), 1,
+		v = (int) gm_QueryEntities(*(int*) (*(int*) (actionCtx[1] + 0x16c) + 0x5d), 1,
 		                       0, 0x37);
 	} else if (actionCtx[0] == 4) {
 		v = (int) gm_FindBuildingPrimarySlot((unsigned char*) *(int*) (actionCtx[1] + 0x16c));

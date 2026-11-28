@@ -31,7 +31,7 @@ extern char g_6aae78[];
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 
 int __cdecl gm_AccumulateTyped2(ENTITY_RECORD*);
-char* __cdecl fcn_00502cd0(int, int, int, int, int);
+char* __cdecl gm_QueryEntities(int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl d2_ShowModalMessageBox(char*, int);
 void __cdecl d3_EndCameraAndUiMode(void);
@@ -63,7 +63,7 @@ void __cdecl d2_RunBuergerrechtDialog(char* p)
 
 	ent = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)gm_EntitySlotTable)[gm_LocalPlayerSlot]);
 	n = gm_AccumulateTyped2(ent);
-	q = fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x115);
+	q = gm_QueryEntities(*(int*) (p + 0x5d), 2, 6, 0, 0x115);
 	ok = 0;
 	if (n < 0x3e80) {
 		char text[0x100];

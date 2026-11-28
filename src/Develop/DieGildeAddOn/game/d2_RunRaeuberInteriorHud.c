@@ -28,7 +28,7 @@ extern char s_6aa508[];
 void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
-char* __cdecl fcn_00502cd0(int, int, int, int, int);
+char* __cdecl gm_QueryEntities(int, int, int, int, int);
 void __cdecl d3_UpdateBuildingInteriorState(void);
 void __cdecl d2_ShowLagerOptions(char*, int);
 void __cdecl d2_RunGelageDialog(char*);
@@ -75,10 +75,10 @@ void __cdecl d2_RunRaeuberInteriorHud(char* e)
 				a = RegisterStatusText(s_6aa5ac, g_14ad118, 0xd);
 				b = RegisterStatusText(s_6aa594, g_14ad110, 0x15);
 				c = RegisterStatusText(s_6aa584, g_14ad108, 0x17);
-				if (fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0x35) != 0) {
+				if (gm_QueryEntities(*(int*) (e + 0x5d), 2, 6, 0, 0x35) != 0) {
 					d = RegisterStatusText(s_6aa3c0, g_14abc30, 0x17);
 				}
-				if (fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0x34) != 0) {
+				if (gm_QueryEntities(*(int*) (e + 0x5d), 2, 6, 0, 0x34) != 0) {
 					f = RegisterStatusText(s_6aa3b0, g_14abc2c, 0x17);
 				}
 				k = RegisterStatusText(s_6aa564, g_14ad170, 0x17);

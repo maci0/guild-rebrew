@@ -12,7 +12,7 @@ extern float flt_1;                  /* 0x006628a0 */
 extern float flt_0_0;               /* 0x006628a8 */
 extern double dbl_1_0;               /* 0x006629c8 */
 
-unsigned short* __cdecl fcn_00502cd0(int, int, ...);
+unsigned short* __cdecl gm_QueryEntities(int, int, ...);
 void __cdecl ReportClientMessage(const char*);
 void __cdecl cm_BeginCommandSync(void);
 void __cdecl cm_EndCommandSync(void);
@@ -49,7 +49,7 @@ int __cdecl ob_TransportFromLager(int a0, char* a1, char* a2, int a3, int a4,
 		type = g_entity_type_table + (unsigned char)*a2 * 0x24d;
 	}
 	if (!a4) {
-		query = (int)fcn_00502cd0(0, 2, 7, 1, a0);
+		query = (int)gm_QueryEntities(0, 2, 7, 1, a0);
 		if (!query) {
 			ReportClientMessage((const char*)0x6ac37c);
 			return 0;

@@ -36,7 +36,7 @@ void __cdecl d3_EndCameraAndUiMode(void);
 void __cdecl d2_DrawPanelFrame(int, int, int);
 void __cdecl d2_CreateWindowScrollbar(int, int, int, int);
 void __cdecl d2_ResetBuildingUiSlots(void);
-char* __cdecl fcn_00502cd0(int, int, int, ...);
+char* __cdecl gm_QueryEntities(int, int, int, ...);
 int __cdecl gm_GetMsgField(char*, char*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl he_AssignActionSlot(char*, char*, int, char*);
@@ -120,15 +120,15 @@ int __cdecl d2_ShowProductionDialog(char* building)
 	d2_SetOverlayAnimation(0, 0);
 	do {
 		d2_SetForm(h, 2);
-		p1 = fcn_00502cd0(*(int*) (building + 0x5d), 2, 6, 0, 0xff);
+		p1 = gm_QueryEntities(*(int*) (building + 0x5d), 2, 6, 0, 0xff);
 		if (p1 == 0) {
 			return 0;
 		}
-		p2 = fcn_00502cd0(*(int*) (building + 0x5d), 2, 6, 0, 0x2a);
+		p2 = gm_QueryEntities(*(int*) (building + 0x5d), 2, 6, 0, 0x2a);
 		if (p2 == 0) {
 			return 0;
 		}
-		p3 = fcn_00502cd0(*(int*) (building + 0x5d), 1, 0, 0xfe);
+		p3 = gm_QueryEntities(*(int*) (building + 0x5d), 1, 0, 0xfe);
 		if (p3 == 0) {
 			return 0;
 		}
@@ -288,7 +288,7 @@ int __cdecl d2_ShowProductionDialog(char* building)
 				d3_EndCameraAndUiMode();
 			}
 		}
-		e = fcn_00502cd0(*(int*) (p1 + 0x14), 1, 4, 0x17);
+		e = gm_QueryEntities(*(int*) (p1 + 0x14), 1, 4, 0x17);
 		if (e != 0) {
 			k = count;
 			p = (char*) ((int) d2_ProductionPanels + count * 0x58);
@@ -325,7 +325,7 @@ int __cdecl d2_ShowProductionDialog(char* building)
 					prev = *(unsigned short*) (g_item_def_table + i * 0x41 + k);
 					*(int*) (q + 0x10) = prev;
 					if (v != 0) {
-						e = fcn_00502cd0(*(int*) (p2 + 0x14), 1, 0, v);
+						e = gm_QueryEntities(*(int*) (p2 + 0x14), 1, 0, v);
 						if (e == 0) {
 							*(int*) p = 0;
 						}
@@ -351,7 +351,7 @@ int __cdecl d2_ShowProductionDialog(char* building)
 				i = *(int*) (p - 0x50);
 				v = *(unsigned short*) (g_item_def_table + i * 0x41 + 0x36);
 				*(int*) p *= v;
-				e = fcn_00502cd0(*(int*) (p2 + 0x14), 1, 0, i);
+				e = gm_QueryEntities(*(int*) (p2 + 0x14), 1, 0, i);
 				if (e != 0) {
 					*(int*) (p + 4) = gm_GetMsgField(p2, e);
 				}

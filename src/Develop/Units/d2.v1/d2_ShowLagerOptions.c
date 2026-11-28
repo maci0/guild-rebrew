@@ -17,7 +17,7 @@ int __cdecl d2_SetOverlayAnimation();
 int __cdecl cm_GetCommandStatus();
 int __cdecl cm_RequestMoveCredits();
 int __cdecl cm_SendCopyEntityData();
-int __cdecl fcn_00502cd0();
+int __cdecl gm_QueryEntities();
 int __cdecl fcn_00509570();
 int __cdecl gm_SumQueryEntryValues();
 int __cdecl io_AppendText();
@@ -121,15 +121,15 @@ void __cdecl d2_ShowLagerOptions(unsigned char *a0,int a1)
   v18 = v18 + kind * 4;
   v3 = a1;
   if (!a1) {
-    v3 = fcn_00502cd0(*(unsigned int *)&v2[0x5d],1,4,2);
+    v3 = gm_QueryEntities(*(unsigned int *)&v2[0x5d],1,4,2);
     if (v3) // branch-flip
       v3 = *(int *)(v3 + 0x14);
     else {
       v3 = *(int *)&v2[0x5d];
     }
   }
-  v4 = (short *)fcn_00502cd0(v3,2,0,0x2a,6);
-  if (((!v4) && (v4 = (short *)fcn_00502cd0(v3,2,0,0x116,6), !v4)) && (v4 = (short *)fcn_00502cd0(*(unsigned int *)&v2[0x5d],2,0,0x2a,6), !v4))
+  v4 = (short *)gm_QueryEntities(v3,2,0,0x2a,6);
+  if (((!v4) && (v4 = (short *)gm_QueryEntities(v3,2,0,0x116,6), !v4)) && (v4 = (short *)gm_QueryEntities(*(unsigned int *)&v2[0x5d],2,0,0x2a,6), !v4))
     return;
   d2_DispatchTutorialInput(0x1d,v2,0,0);
   dialogId = d2_LoadForm(0,0,(char *)0x6ac468);

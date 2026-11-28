@@ -8,7 +8,7 @@ int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl gm_GetLawEntry(int, int*);
 float __cdecl gm_GetBuildingLevelRatio(void);
 int __cdecl gm_GetGuildHall(int);
-int __cdecl fcn_00502cd0(int, int, int, int, int);
+int __cdecl gm_QueryEntities(int, int, int, int, int);
 int __cdecl gm_SumQueryEntryValues(int, char);
 int __cdecl amt_CalcTotalOfficeSalaries(void);
 int __cdecl gm_RandomMod(int n);
@@ -54,7 +54,7 @@ int __cdecl ai_EvaluateLaw0x0a(char* actor, int unused, int* outValue)
 				r--;
 			}
 			owner = gm_GetGuildHall(1);
-			p = fcn_00502cd0(*(int*) ((char*) owner + 0x5d), 2, 6, 0, 0x115);
+			p = gm_QueryEntities(*(int*) ((char*) owner + 0x5d), 2, 6, 0, 0x115);
 			cur = gm_SumQueryEntryValues(*(int*) ((char*) p + 0x14), gm_ActiveTownIndex);
 			if (cur < amt_CalcTotalOfficeSalaries() * 3) {
 				r = r + 1 + (gm_RandomMod(3) & 0xffff);

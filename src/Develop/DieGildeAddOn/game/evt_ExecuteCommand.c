@@ -33,7 +33,10 @@ extern int g_14cb8ec;
 int __cdecl evt_EvaluateExpression(int);
 void __cdecl evt_LogScriptError(Vm* g, int h, const char* msg);
 void __cdecl evt_RequestScriptExit(Vm*);
-int __cdecl fcn_0040c630();
+#ifdef REBREW_GOLD
+#define ecmd_Sleep fcn_0040c630
+#endif
+int __cdecl ecmd_Sleep();
 
 int __cdecl evt_ExecuteCommand(Cmd* c)
 {
@@ -104,7 +107,7 @@ int __cdecl evt_ExecuteCommand(Cmd* c)
 	if (c->ret == 7) {
 		result = g_14cb8ec;
 	}
-	if ((((Vm*) evt_CurrentScript)->waiting == 1 && ((Vm*) evt_CurrentScript)->wait != 0) || ((Vm*) evt_CurrentScript)->wait == fcn_0040c630) {
+	if ((((Vm*) evt_CurrentScript)->waiting == 1 && ((Vm*) evt_CurrentScript)->wait != 0) || ((Vm*) evt_CurrentScript)->wait == ecmd_Sleep) {
 		for (i = 0; i < c->argc; i++) {
 			((Vm*) evt_CurrentScript)->args[i] = args[i];
 			if (c->types[i] == 6) {

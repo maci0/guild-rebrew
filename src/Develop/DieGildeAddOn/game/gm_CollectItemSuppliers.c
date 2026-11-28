@@ -2,7 +2,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char* g_entity_ptr;
 extern char* gm_MarketEntity;
-int __cdecl fcn_00502cd0(int, ...);
+int __cdecl gm_QueryEntities(int, ...);
 int __cdecl gm_FindCityItemHolder(int);
 int __cdecl gm_GetStorageSlotCapacity(int, int);
 int __cdecl gm_GetMsgField(int, int);
@@ -43,7 +43,7 @@ int __cdecl gm_CollectItemSuppliers(int itemId)
 			if (p == gm_MarketEntity) {
 				v6 = gm_FindCityItemHolder(itemId);
 				if (v6) {
-					v7 = fcn_00502cd0(*(int*) (v6 + 0x14), 1, 0, v5);
+					v7 = gm_QueryEntities(*(int*) (v6 + 0x14), 1, 0, v5);
 					if (v7) {
 						count = *(int*) 0x86805c * 0x18;
 						*(char**) (count + 0x868c40) = p;
@@ -65,18 +65,18 @@ add:
 				}
 			}
 			else {
-				v7 = fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0xff);
+				v7 = gm_QueryEntities(*(int*) (p + 0x5d), 2, 6, 0, 0xff);
 				if (v7) {
-					v7 = fcn_00502cd0(*(int*) (v7 + 0x14), 1, 0, itemId);
+					v7 = gm_QueryEntities(*(int*) (v7 + 0x14), 1, 0, itemId);
 					if (v7) {
 						v4 = 1;
 						*(char**) (*(int*) 0x86805c * 0x18 + 0x868c40) = p;
 						*(int*) (*(int*) 0x86805c * 0x18 + 0x868c54) = 1;
 					}
 				}
-				v6 = fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x2a);
+				v6 = gm_QueryEntities(*(int*) (p + 0x5d), 2, 6, 0, 0x2a);
 				if (v6) {
-					v7 = fcn_00502cd0(*(int*) (v6 + 0x14), 1, 0, itemId);
+					v7 = gm_QueryEntities(*(int*) (v6 + 0x14), 1, 0, itemId);
 					if (v7) {
 						count = *(int*) 0x86805c * 0x18;
 						*(char**) (count + 0x868c40) = p;

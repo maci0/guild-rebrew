@@ -35,7 +35,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 int __cdecl d2_ShowModalMessageBox(char*, int);
-char* __cdecl fcn_00502cd0(int, int, int, int);
+char* __cdecl gm_QueryEntities(int, int, int, int);
 void __cdecl cm_SendCopyEntityData(Packet*);
 
 int __cdecl d2_SendFriedhofUpgradeWorkerCmd(char* building, unsigned short* worker, int level)
@@ -46,7 +46,7 @@ int __cdecl d2_SendFriedhofUpgradeWorkerCmd(char* building, unsigned short* work
 
 	io_FormatTextBuffer(buf, 0x413a, *worker);
 	if (d2_ShowModalMessageBox(buf, 1) != 0) {
-		entry = fcn_00502cd0(*(int*) (building + 0x5d), 1, 0, 0x211);
+		entry = gm_QueryEntities(*(int*) (building + 0x5d), 1, 0, 0x211);
 		memset(&pkt, 0, sizeof(pkt));
 		pkt.type = 0x8f;
 		pkt.x36 = 1;

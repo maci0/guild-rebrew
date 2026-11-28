@@ -21,7 +21,7 @@ int __cdecl gm_GetBuildingTechEffect(char*, int, int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 double __cdecl gm_CalcAvgEntityFavor(int, int, char*);
 int __cdecl gm_CalcElapsedWorkMinutes(char*, char*, int);
-char* __cdecl fcn_00502cd0(int, int, int, int);
+char* __cdecl gm_QueryEntities(int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 int __cdecl gm_CompareGameTime(char*, char*);
@@ -107,7 +107,7 @@ skip_map:
 			*(int*) (self + 0xb0) = (int) (prev - n * total);
 			while (*(int*) (self + 0xb0) <= 0) {
 				gm_ResolveEntityById(0, &o1, 0, *(int*) (self + 0xbc));
-				q = fcn_00502cd0(*(int*) (o1 + 0x14), 1, 0, *(unsigned short*) (self + 0xac));
+				q = gm_QueryEntities(*(int*) (o1 + 0x14), 1, 0, *(unsigned short*) (self + 0xac));
 				gm_ResolveEntityById(0, &o2, 0, *(int*) (self + 0xc0));
 				if (q == 0) {
 					io_FormatTextBuffer(buf, 0x1bb7, *(unsigned short*) (self + 0xac) * 2 + 0x9a8, node);

@@ -44,7 +44,7 @@ unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 unsigned char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_CalculateGebaeudeValue(int, int);
 int __cdecl gm_SumTreasury(unsigned short*);
-int __cdecl fcn_00502cd0(int, int, ...);
+int __cdecl gm_QueryEntities(int, int, ...);
 int __cdecl gm_AmountToUnits(int, unsigned char);
 int __cdecl gm_ConvertUnitsToAmount(int, unsigned char);
 int __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -154,7 +154,7 @@ void __cdecl gm_LiquidateEntityAssets(unsigned short* subjectRecord, char* repor
 	}
 	r = gm_SumTreasury(subjectRecord);
 	cm_RequestMoveCredits(*(int*) (sp + 4), -1, gm_ActiveTownIndex, r);
-	p = (unsigned char*) fcn_00502cd0(*(int*) (subjectRecord + 0xbc), 1, 5);
+	p = (unsigned char*) gm_QueryEntities(*(int*) (subjectRecord + 0xbc), 1, 5);
 	while (p != 0) {
 		cm_SendRemoveLinkedObject(*(int*) (subjectRecord + 2), -1, *(int*) (p + 2));
 		p = gm_NextEntityQueryMatch();

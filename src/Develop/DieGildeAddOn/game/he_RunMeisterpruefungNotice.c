@@ -16,7 +16,7 @@ int __cdecl gm_GetOppositeStatIndex(int);
 int __cdecl sb_FindBankByName(char*);
 void __cdecl d3snd_QueueSound(int, int, char*, int, int);
 int __cdecl io_AppendText(int, ...);
-char* __cdecl fcn_00502cd0(int, int, int, int, int);
+char* __cdecl gm_QueryEntities(int, int, int, int, int);
 void __cdecl d2_EnterBuildingObjekt(char*, int, char*);
 
 void __cdecl he_RunMeisterpruefungNotice(char* u)
@@ -69,7 +69,7 @@ void __cdecl he_RunMeisterpruefungNotice(char* u)
 		if (d2_DialogButtonAction == 2) {
 			h = gm_LookupEntityRecordById(*(int*) (u + 0xac));
 			if (*(char**) (h + 0x170) != 0) {
-				q = fcn_00502cd0(*(int*) (*(char**) (h + 0x170) + 0x5d), 2, 0, 0x13, 6);
+				q = gm_QueryEntities(*(int*) (*(char**) (h + 0x170) + 0x5d), 2, 0, 0x13, 6);
 				d2_EnterBuildingObjekt(*(char**) (h + 0x170), *(int*) (q + 2), str_empty);
 			}
 			d2_CloseActionPopup(u);

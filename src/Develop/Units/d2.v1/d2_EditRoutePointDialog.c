@@ -31,7 +31,7 @@ int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl d2_SelectRadioGroup(int, int);
 int __cdecl io_AppendText(char*, ...);
 void __cdecl d2_CreateButtonRow(int, int, int*, int, ...);
-char* __cdecl fcn_00502cd0(int, int, int, ...);
+char* __cdecl gm_QueryEntities(int, int, int, ...);
 int __cdecl gm_GetStorageSlotCapacity(int, int);
 int __cdecl d2_ShowTxt(int, int, char*, int);
 void __cdecl d2_SetElementValue(int, ...);
@@ -96,7 +96,7 @@ void __cdecl d2_EditRoutePointDialog(int* route_point, int* uiContext)
 	selB = ids[1];
 	
 	n = counts[*(unsigned short*) rec - 0x134];
-	item = fcn_00502cd0(*(int*) (rec + 0x14), 1, 0, 0x1dd);
+	item = gm_QueryEntities(*(int*) (rec + 0x14), 1, 0, 0x1dd);
 	value = gm_GetStorageSlotCapacity((int) item, 0);
 	icons[0] = -1;
 	icons[1] = -1;

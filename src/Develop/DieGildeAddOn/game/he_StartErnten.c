@@ -5,7 +5,7 @@ void __cdecl gm_AddTime(char* dst, int a, int b, int c);
 void* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
 char* __cdecl plt_FindRecordById(int a, int b);
 char* __cdecl gm_LookupEntityRecordById(int id);
-int __cdecl fcn_00502cd0(int a, int b, int c, int d);
+int __cdecl gm_QueryEntities(int a, int b, int c, int d);
 void __cdecl he_AssignActionSlot(char* obj, int a, int id, int b);
 int __cdecl cm_SendChainRecordLookup(int a, char b, char c, short d, char e, int f);
 void __cdecl he_FreeAction(char* obj);
@@ -28,7 +28,7 @@ void __cdecl he_StartErnten(char* obj)
 		if (t != 0 && *(int*) (t + 0x10) == -1) {
 			if (pal != 0) {
 				if (*(unsigned char*) ((char*) pal + 0x180) != 0x28) {
-					v = fcn_00502cd0(*(int*) (e + 0x5d), 1, 0, 0xfd);
+					v = gm_QueryEntities(*(int*) (e + 0x5d), 1, 0, 0xfd);
 					he_AssignActionSlot(e, v, (int) *pal, (int) obj);
 					v = *(int*) (obj + 4);
 					*(int*) (obj + 0xc0) = cm_SendChainRecordLookup(*(int*) (obj + 0xac),

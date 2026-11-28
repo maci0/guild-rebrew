@@ -3,7 +3,7 @@
 
 extern unsigned char* lpGebaeudePROT;
 
-void* __cdecl fcn_00502cd0(int list, int a, int b, int c, int d);
+void* __cdecl gm_QueryEntities(int list, int a, int b, int c, int d);
 int __cdecl gm_GetEntityMood(unsigned char* e);
 
 int __cdecl gm_GetBuildingTechEffect(unsigned char* e, int kind, int flag)
@@ -17,7 +17,7 @@ int __cdecl gm_GetBuildingTechEffect(unsigned char* e, int kind, int flag)
 	t = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[e[0]];
 	for (i = 0; i < 0x40; i++) {
 		w = t->components[i] & 0x7fff;
-		if (w != 0 && t->component_kind[i] == kind && fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, w)) {
+		if (w != 0 && t->component_kind[i] == kind && gm_QueryEntities(*(int*) (e + 0x5d), 2, 6, 0, w)) {
 			sum += t->component_value[i];
 		}
 	}

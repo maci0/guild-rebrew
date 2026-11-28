@@ -41,7 +41,7 @@ extern char* ai_TrackedGoodPlanEntries;
 extern unsigned short* gm_CityEntity;
 extern int gm_DifficultyLevel;
 
-int __cdecl fcn_00502cd0(int, int, int, ...);
+int __cdecl gm_QueryEntities(int, int, int, ...);
 int __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_ResolveEntityById(int, int*, int, int);
 void __cdecl ai_CollectGoodsResources(int, int);
@@ -99,7 +99,7 @@ void __cdecl ai_CalcMeisterDiebe(unsigned char* rec)
 
 	handle = 0;
 	saved = (int) handle;
-	found = fcn_00502cd0(*(int*) (*(int*) (rec + 0x16c) + 0x5d), 2, 6, 0, 0x116);
+	found = gm_QueryEntities(*(int*) (*(int*) (rec + 0x16c) + 0x5d), 2, 6, 0, 0x116);
 	for (;;) {
 		if (found == 0) {
 			break;
@@ -144,7 +144,7 @@ common:
 	gm_TryAutoUpgradeBuildingSlots(saved, (int) rec, 10);
 	ai_RequestAusbauUpgrade(saved, (int) rec, 10);
 	ai_BuyStallGoods((int) rec);
-	if (fcn_00502cd0(*(int*) (*(int*) (rec + 0x16c) + 0x5d), 2, 6, 0, 0x60) != 0) {
+	if (gm_QueryEntities(*(int*) (*(int*) (rec + 0x16c) + 0x5d), 2, 6, 0, 0x60) != 0) {
 		ai_FlagIdleWorkersForRecovery((int) rec);
 	}
 	ai_DispatchWorkerRecovery((int) rec);
@@ -312,7 +312,7 @@ L1a0c2:
 	if (best == 0) {
 		goto L2267;
 	}
-	found = fcn_00502cd0(*(int*) (*(int*) (rec + 0x16c) + 0x5d), 1, 0, 0xca);
+	found = gm_QueryEntities(*(int*) (*(int*) (rec + 0x16c) + 0x5d), 1, 0, 0xca);
 	for (;;) {
 		if (found == 0) {
 			goto Lcae;
@@ -548,7 +548,7 @@ L1a0c:
 			break;
 		}
 	}
-	if (fcn_00502cd0(*(int*) (*(int*) (rec + 0x16c) + 0x5d), 1, 0, 0x65) == 0
+	if (gm_QueryEntities(*(int*) (*(int*) (rec + 0x16c) + 0x5d), 1, 0, 0x65) == 0
 	    || best == 0
 	    || *(int*) (*(int*) (rec + 0x16c) + 0x65) != -1) {
 		goto L2267;
