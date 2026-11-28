@@ -5098,3 +5098,509 @@ GOLDTL.0x004e9580	amt_GetRankLimits	0	RENAMED+CLEANED	src/Develop/Unassigned/GOL
 2026-11-27	--type	Tex47bdd0	D2_TEX	inferred	high	-	File-local texture view struct in GOLDTL.fcn_0047bdd0.c renamed via --type.
 2026-11-27	--type	Sprite47bdd0	D2_SPRITE	inferred	high	-	File-local sprite struct in GOLDTL.fcn_0047bdd0.c renamed via --type.
 2026-11-27	--type	Cell47bdd0	D2_SPRITE_CELL	inferred	high	-	File-local sprite cell struct in GOLDTL.fcn_0047bdd0.c renamed via --type.
+2026-11-28	GOLD.0x005fcc7c	g_67bbe0	d3_SceneAmbientColorG	inferred	high	-	+4 (green channel) view into d3_SceneAmbientColor (g_67bbdc) used in d3_UpdateFloorLighting/d3_ApplySceneLightingPreset
+2026-11-28	GOLD.0x005fcc80	g_67bbe4	d3_SceneAmbientColorB	inferred	high	-	+8 (blue channel) view into d3_SceneAmbientColor (g_67bbdc) used in d3_UpdateFloorLighting/d3_ApplySceneLightingPreset
+2026-11-28	GOLD.0x00601f68	g_680bd0	gm_MissionSpecs	inferred	high	-	48-entry table of Entry680bd0 mission/action specs searched in gm_LookupMissionSpec and gm_PickRandomMissionEntry
+2026-11-28	GOLD.0x00601f6c	g_680bd4	gm_MissionSpecKeyView	inferred	high	-	+4 interior field view into gm_MissionSpecs iterated by stride in gm_CountMissionEntriesByKey
+2026-11-28	GOLD.0x006094b0	g_688118	msx_LocationTrackGroups	inferred	high	-	IdGroup table mapping location/condition keys to music group lists in msx_StartLocationTrack
+2026-11-28	GOLD.0x0060c7a0	g_68b400	gm_WeaponSpecs	inferred	high	-	0x5c-byte weapon spec records ('kampf/stich' etc.) looked up in gm_LookupWeaponSpec
+2026-11-28	GOLD.0x0060ed38	g_68da68	amt_OfficeRoleTemplates	inferred	high	-	office role template array in aemter.c (lsym _g_office_role_templates; aligns with amt_ prefix)
+2026-11-28	GOLD.0x00611238	g_68ff68	gm_LawEntries	inferred	high	-	29 x 0x24-byte law/crime definitions searched by gm_GetLawEntry/gm_FindLawByKindAndSub
+2026-11-28	GOLD.0x00611748	g_690478	gm_PrivilegeHandlers	inferred	high	-	58-entry privilege/action handler function pointer table indexed in gm_CheckPrivilege
+2026-11-28	GOLD.0x0062c420	g_6abb08	gm_SpecialObjectOffers	inferred	high	-	special object offer table searched by gm_LookupSpecialObject and gm_PickRandomOfferId
+2026-11-28	GOLD.0x00fc2700	g_fc2700	d3_SceneRootSentinel	inferred	high	-	intrusive doubly-linked sentinel node for active scene objects in d3_ClearScene/d3_LoadSceneStream/d3_RegisterSceneObject
+2026-11-28	GOLD.0x00fc28f4	g_fc28f4	d3_SceneRootSentinelTail	inferred	high	-	+0x1f4 prev/tail link field inside d3_SceneRootSentinel used during scene list traversal
+2026-11-28	GOLD.0x014673a0	g_14ce8e0	io_RightButtonReleased	inferred	high	-	+0x20 offset in polled mouse snapshot struct checked to cancel dialogs on right-button release
+2026-11-28	GOLD.0x005f74a8	g_678150	msx_MasterFadeScale	inferred	high	-	master volume fade multiplier updated in msx_UpdateTracks and FadeMasterVolume
+2026-11-28	GOLD.0x005f74ac	g_678154	msx_MasterFadeStart	inferred	high	-	starting scale for master volume fade in FadeMasterVolume and msx_UpdateTracks
+2026-11-28	GOLD.0x005f74b0	g_678158	msx_MasterFadeTarget	inferred	high	-	target scale for master volume fade in FadeMasterVolume and msx_UpdateTracks
+2026-11-28	GOLD.0x005f74b4	g_67815c	msx_MasterFadeDuration	inferred	high	-	duration in ticks for master volume fade in FadeMasterVolume and msx_UpdateTracks
+2026-11-28	GOLD.0x005f74b8	g_678160	msx_MasterVolume	inferred	high	-	master audio volume level applied in SetMasterVolume and FadeMasterVolume
+2026-11-28	GOLD.0x006325b0	g_6b7190	msx_MasterFadeStartTime	inferred	high	-	start timestamp recorded when master volume fade begins in FadeMasterVolume/msx_UpdateTracks
+2026-11-28	GOLD.0x006f0b78	g_772d28	msx_MusicOverrideActive	inferred	high	-	flag indicating active music track override set in msx_OverrideMusicTrack and cleared in msx_RestoreMusicVolume
+2026-11-28	GOLD.0x006323a4	g_6b6f84	tp_VideoListHead	inferred	high	-	head pointer of linked video list allocated in AllocVideoListNode
+2026-11-28	GOLD.0x00631050	g_6b5c20	tp_ch_ActionQueue	inferred	high	-	pointer to CH_QUEUE_SLOT array allocated via m_alloc(0xc5440, 'ch:Open:ActionQueue') in ch_InitActionQueue
+2026-11-28	GOLD.0x00fb91c0	g_10405e0	d3_SceneLightingColors	inferred	high	GOLDTL.0x010405e0	scene lighting color preset table initialized in InitColorTable and blended in d3_BlendSceneLightingPreset
+2026-11-28	GOLD.0x00631134	g_6b5d0c	d3snd_ProbeSinTable	inferred	medium	-	sine direction lookup table populated in d3sndw_Init ('d3sndw_Init') for ambient probe offsets
+2026-11-28	GOLD.0x00930400	g_9b4840	d2_CombatUnitCards	inferred	high	-	6-entry GUI_ENTRY array initialized in d2_InitCombatUnitCards
+2026-11-28	GOLD.0x00633400	g_6b7fe0	vfs_ItemPool	inferred	high	-	VFS archive item pool pointer macro-aliased as g_vfs_item_pool in vfs.c
+2026-11-28	GOLD.0x00633404	g_6b7fe4	vfs_StreamPool	inferred	high	-	VFS open stream pool pointer macro-aliased as g_stream_pool in vfs.c
+2026-11-28	GOLD.0x00f31160	g_fb5760	cm_CommandStatusQueue	inferred	high	-	32768-entry COMMAND_STATUS_SLOT table tracking command execution status
+2026-11-28	GOLD.0x006f22a0	g_774654	d2_DialogCloseRequested	inferred	high	-	modal dialog exit flag checked in UI loops and set on cancel/right-click
+2026-11-28	GOLDTL.0x009b0e30	g_9b0e30	cut_TrialVoteRecords	inferred	high	-	42-entry x 0x35c trial participant/vote table populated and scanned in cut_RunProzess
+2026-11-28	GOLDTL.0x009b0eb4	g_9b0eb4	cut_TrialVerdicts	inferred	high	-	+0x84 verdict field view inside cut_TrialVoteRecords checked for guilty votes in cut_RunProzess
+2026-11-28	GOLD.0x006f0cf8	g_772ea8	cut_CombatResolved	inferred	high	GOLDTL.0x00772ea8	flag set in cut_ResolveSimpleCombat when simple combat encounter finishes
+2026-11-28	GOLD.0x006f0cfc	g_772eac	cut_PlunderedAmount	inferred	high	GOLDTL.0x00772eac	accumulated plundered gold/goods count updated in cut_ResolveSimpleCombat
+2026-11-28	GOLD.0x005eba10	g_662b40	dbl_0_0254	attested	high	-	double constant ~0.0254 in .rdata used in sound attenuation/distance calculation
+2026-11-28	GOLD.0x006f0b74	g_772d24	tp_msx_MusicTrack	inferred	high	-	active background music track stream/handle pointer declared in client_sound.h
+2026-11-28	GOLD.0x006f0d4c	g_772efc	tp_cut_CombatAmbientTrack	inferred	high	-	combat cutscene ambient audio track pointer started/stopped in cut_RunCombatCutscene
+2026-11-28	GOLD.0x007e3f40	g_868060	gm_TownTable	inferred	high	GOLDTL.0x00868060	active town/city struct array indexed by town ID in he_NotifyFeudEnded and game logic
+2026-11-28	GOLD.0x00633430	g_6b5df8	d3_GammaBrightness	inferred	medium	-	gamma ramp brightness parameter set in d3_SetGammaParams
+2026-11-28	GOLD.0x005f6b08	g_6777b0	d3_GammaContrast	inferred	medium	-	gamma ramp contrast parameter set in d3_SetGammaParams
+2026-11-28	GOLD.0x005f6b14	g_6777bc	d3_GammaExponent	inferred	medium	-	gamma ramp exponent parameter set in d3_SetGammaParams
+2026-11-28	GOLD.0x00760458	g_7e4538	d3_RainEffect	inferred	medium	-	3D rain weather effect object pointer updated in gm_UpdateWeatherAndSky
+2026-11-28	GOLD.0x0076045c	g_7e453c	d3_SnowEffect	inferred	medium	-	3D snow weather effect object pointer updated in gm_UpdateWeatherAndSky
+2026-11-28	GOLD.0x00760460	g_7e4540	d3_SkyLayers	inferred	medium	-	sky dome layer array updated by time/weather in gm_UpdateWeatherAndSky
+2026-11-28	GOLD.0x005eb34c	g_662450	imp_AIL_sample_status	attested	high	GOLDTL.0x00662450	IAT import slot for mss32.dll!_AIL_sample_status@4 verified in both client binaries
+2026-11-28	GOLD.0x005ee8e0	g_665b88	dbl_2_9081633	attested	high	GOLDTL.0x00665b88	double constant 2.9081633 in .data used for tile distance scaling in gm_GetTileDistance
+2026-11-28	GOLD.0x005fc6b4	g_67b624	str_d3_io_a_AGIPointBuffer	attested	high	GOLDTL.0x0067b624	string literal 'd3:io:a:AGIPointBuffer' used as allocation tag in d3_InitAGIPointBuffer
+2026-11-28	GOLD.0x00617448	g_696178	gm_BuildingSlotLimits	inferred	high	GOLDTL.0x00696178	per-building-type slot capacity table read in gm_GetBuildingSlotLimits
+2026-11-28	GOLD.0x006332ac	g_6b7e8c	sb_VoiceCount	inferred	high	-	number of active speech/soundbank voice entries searched in sb_FindVoiceBySample
+2026-11-28	GOLD.0x014646a0	g_14cbbe0	sb_DummyVoice	inferred	high	-	fallback dummy voice struct returned by sb_FindVoiceBySample when no voice matches
+2026-11-28	GOLD.0x006f0de0	g_772f90	ahm_DrawSlots	inferred	high	GOLDTL.0x00772f90	draw slot table returned by index in ahm_GetDrawSlot
+2026-11-28	GOLD.0x006f25b8	g_774970	gm_LocalPlayerSlot	inferred	high	GOLDTL.0x00774970	local player entity/slot ID passed in cm_SendQuitGameCommand and UI dialogs
+2026-11-28	GOLD.0x007d6a70	g_85ab90	gm_MarketStockTable	inferred	high	GOLDTL.0x0085ab90	global market goods stock/price table indexed in spiel.c and market UI
+2026-11-28	GOLD.0x00f812a0	g_10058a0	d2_RadioSlots	inferred	high	GOLDTL.0x010058a0	radio-button slot table searched by value in d2_FindRadioSlotByValue
+2026-11-28	GOLDTL.0x006b5c28	g_6b5c28	ch_SceneDebugSwitch	inferred	high	GOLD.0x00631058	scene debug flag documented as 'scene debug switch' in ch_WalkOnPath.c
+2026-11-28	GOLDTL.0x014ce820	g_14ce820	d3d_PresentParams	inferred	high	-	D3DPRESENT_PARAMETERS structure passed to Reset in d3_ResetGraphicsDevice
+2026-11-28	GOLDTL.0x00773d75	g_773d75	gm_ActiveTownIndex	inferred	high	GOLD.0x006f1bc5	active town byte index passed in command packets and UI dialogs
+2026-11-28	GOLDTL.0x007e2aa0	g_7e2aa0	d2_SelectedBuilding	inferred	high	-	currently selected building handle used in command.c and d2 selection UI
+2026-11-28	GOLDTL.0x0100e760	g_100e760	ai_WeaponGoodsIds	inferred	high	-	weapon item ID list built in ai_InitContextAndGoodsLists and consumed in ai_CollectGoodsResources
+2026-11-28	GOLDTL.0x0100e720	g_100e720	ai_ArmorGoodsIds	inferred	high	-	armor item ID list built in ai_InitContextAndGoodsLists and consumed in ai_CollectGoodsResources
+2026-11-28	GOLDTL.0x007e2a9c	g_7e2a9c	d2_SelectedItem	inferred	high	-	currently selected inventory/market item pointer displayed in d2_UpdateSelectionPanels
+2026-11-28	GOLDTL.0x007ea360	g_7ea360	d2_SelectedPerson	inferred	high	-	currently selected character/person pointer displayed in d2_UpdateSelectionPanels
+2026-11-28	GOLD.0x005f4610	g_6752a8	ch_StepSampleName	inferred	medium	-	footstep sound sample name array/string used in ch_StartWalkAnimation
+2026-11-28	GOLD.0x005f5a8c	g_676724	str_ecmd_SetPos_Could_not_find	attested	high	-	error message literal 'ecmd_SetPos: Could not find ...' used in ecmd_SetPos
+2026-11-28	GOLD.0x0092c400	g_9b0840	he_EventCallbacks	inferred	medium	-	event handler callback table indexed in he_NotifyHauchDesVerfalls
+2026-11-28	GOLD.0x00fcb840	g_1052c60	tb_TimerCallbacks	inferred	high	-	timer callback table iterated in tb_DispatchTimers
+2026-11-28	GOLD.0x005f46d4	g_67536c	str_ch_Create_Character	attested	high	-	error/debug string literal for ch_CreateCharacter
+2026-11-28	GOLD.0x0060c204	g_68ae64	str_cm_RequestChrMoveToUniverse_dummyname	attested	high	-	debug/placeholder string literal used in cm_RequestChrMoveToUniverse
+2026-11-28	GOLD.0x0062be24	g_6ab50c	str_NACHRICHTEN_FRIEDHOF_00	attested	high	-	message key string literal 'NACHRICHTEN_FRIEDHOF_00' in d2_ConfirmGraveyardAction
+2026-11-28	GOLD.0x00f918a0	g_1015ea0	d2_Controls	inferred	high	-	UI control slot table indexed by control ID in d2_ShowSoundOptions and d2 dialogs
+2026-11-28	GOLD.0x00770b80	g_7f4ca0	gm_EntitySlotTable	inferred	high	-	game entity/occupancy slot table scanned in gm_CollectOccupancyStats
+2026-11-28	GOLD.0x00fbbf50	g_1043370	tp_ch_PathGrid	inferred	high	-	pointer to active character pathfinding grid backed up in ch_BackupGrid
+2026-11-28	GOLD.0x014671e8	g_14ce728	d3_LastReleaseRefCount	inferred	high	-	reference count returned by last IDirect3D8/Device Release in d3_ReleaseGraphicsInterfaces
+2026-11-28	GOLDTL.0x00772540	g_772540	d2_ZOrderStack	inferred	high	-	UI window z-order stack allocated with tag 'd2:zorder' in d2_Open
+2026-11-28	GOLDTL.0x0100f1e4	g_100f1e4	tp_d2_HoveredControl	inferred	high	-	pointer to currently hovered GUI entry updated in d2_HitTestGui
+2026-11-28	GOLDTL.0x006a3440	g_6a3440	gm_SelectedMissionIndex	inferred	high	-	selected mission/card index used in d2_UpdateBuildingCameraAndUi
+2026-11-28	GOLDTL.0x0099f800	g_99f800	cm_CrimeEvidenceLinks	inferred	medium	-	crime/evidence linkage array consulted in gm_CalcSkillDuelScore
+2026-11-28	GOLDTL.0x009b9e40	g_9b9e40	d3_CombatFlagObjects	inferred	medium	-	3D combat flag object table updated in cut_UpdateCombatFlags
+2026-11-28	GOLDTL.0x007d2020	g_7d2020	he_EventDeals	inferred	high	-	active event/diplomatic deal records formatted in gm_BuildDealSummary
+2026-11-28	GOLDTL.0x00774684	g_774684	tp_d2_GroundplanSurface	inferred	high	-	groundplan UI surface/panel pointer created in d2_InitHudPanels
+2026-11-28	GOLDTL.0x007766a0	g_7766a0	msx_AudioVolumeSettings	inferred	medium	-	audio volume configuration struct initialized in msx_Initialize
+2026-11-28	GOLDTL.0x014a558c	g_14a558c	txt_TargetBuildingPrompt	inferred	medium	-	txt_TextEntries[0x9b] prompt pointer passed to d2_RunCityScrollMapDialog in building-action commands
+2026-11-28	GOLDTL.0x00779ce4	g_779ce4	tp_d3_SceneState	inferred	high	-	active scene state struct pointer loaded/updated in d3_LoadSceneStream
+2026-11-28	GOLDTL.0x0077257c	g_77257c	d2_DirtyRectBuffers	inferred	high	-	dirty rectangle buffer array filled in d2_AddClippedDirtyRect
+2026-11-28	GOLDTL.0x0100dc14	g_100dc14	ai_TurnCarryAccumulator	inferred	medium	-	AI turn processing carry accumulator updated across ticks in ai_PlanMeisterSupplies
+2026-11-28	GOLD.0x006293d8	g_6a8428	str_FTInitMainIntro	attested	high	-	Compiler literal string 'FTInitMainIntro' in GOLD.0x006293d8 (d2_InitTutorialMainIntro.c m_alloc tag)
+2026-11-28	GOLD.0x006293bc	g_6a840c	str_TUTORIAL_INTRO_OUTRO_sbf	attested	high	-	Compiler literal string 'TUTORIAL_INTRO_OUTRO.sbf' in GOLD.0x006293bc (d2_InitTutorialMainIntro.c)
+2026-11-28	GOLD.0x006293a8	g_6a83f8	str_TUTORIAL_MAIN_INTRO	attested	high	-	Compiler literal string 'TUTORIAL_MAIN_INTRO' in GOLD.0x006293a8 (d2_InitTutorialMainIntro.c)
+2026-11-28	GOLD.0x006332e8	g_6b7ec8	evt_GfxScriptStackDepth	inferred	high	-	Depth index for g_14c9320 saved script stack in evt_RunGfxScript.c
+2026-11-28	GOLD.0x0145e1e0	g_14c9320	evt_GfxScriptStack	inferred	high	-	32-entry saved evt_CurrentScript pointer stack in evt_RunGfxScript.c
+2026-11-28	GOLD.0x006f2640	g_7749f8	d2_TutorialSampleBanks	inferred	high	-	6-entry sample bank handle array loaded in d2_InitTutorialMainIntro.c and freed in d2_ShutdownTutorial.c
+2026-11-28	GOLDTL.0x014b55a4	g_14b55a4	d2_AlternLassenTitleTextId	inferred	high	-	Title text ID passed to d2_OpenTargetPicker in d2_RunAlternLassenDialog.c
+2026-11-28	GOLDTL.0x00772620	g_772620	ai_DispatchedTradeCount	inferred	high	GOLD.0x006f046c	Count of AI trade packets dispatched in ai_MeisterTrade*.c, reset in cm_ExAdvanceGameTick.c, read in he_CountActiveTradeActions.c
+2026-11-28	GOLDTL.0x014cbcb4	g_14cbcb4	nt_LocalShardIndex	inferred	high	GOLD.0x01460af4	Local client shard index set in command.c and compared to seed % gm_PlayerCount when g_14cbca0 != -1
+2026-11-28	GOLDTL.0x0067529c	g_67529c	ch_LastUpdateTime	inferred	high	GOLD.0x005f1224	Previous g_6b7fac tick timestamp saved in ch_Update.c and subtracted from ch_UpdateTime in ch_WalkOnPath58.c
+2026-11-28	GOLDTL.0x0099f5a0	g_99f5a0	gm_DisasterState	inferred	high	GOLD.0x0091b480	Rec24_99f5a0 disaster state read/updated in gm_GetDisasterState.c, gm_UpdateDisasterState.c, gm_ResetCityStats.c
+2026-11-28	GOLDTL.0x006b7eb8	g_6b7eb8	evt_MemberScopeScript	inferred	high	GOLD.0x006332d8	Temporary member-lookup Script* scope pointer set on token type 0xb in evt_EvaluateExpression.c and evt_FindSymbol.c
+2026-11-28	GOLDTL.0x014cb8e0	g_14cb8e0	evt_GlobalVariables	inferred	high	GOLD.0x014607a0	Dynamic array of registered script variables in evt_RegisterVariable.c, evt_FindSymbol.c, evt_ShutdownScripts.c
+2026-11-28	GOLDTL.0x014cb8e4	g_14cb8e4	evt_GlobalVariableCount	inferred	high	GOLD.0x014607a4	Count of registered script variables in evt_GlobalVariables
+2026-11-28	GOLDTL.0x0067553c	g_67553c	ch_MorphAnimFmt	inferred	high	GOLD.0x005f14c4	Format string 'morph_%i' in ch_CheckAniMorph.c and ch_ReleaseMorphAnimation.c
+2026-11-28	GOLDTL.0x00664260	g_664260	gm_TortureMultipliers	inferred	high	GOLD.0x005ecfd8	7-entry {key, mult, f0, f1} table looked up by gm_CalcTortureCost.c and gm_LookupTortureRecord.c
+2026-11-28	GOLDTL.0x006a24e8	g_6a24e8	main_FrameCounter	inferred	high	GOLD.0x00623798	Frame counter incremented in main_RunFrameLoop.c and sampled/zeroed in main_SampleFrameCounter.c
+2026-11-28	GOLD.0x00770ae4	g_7f4c04	gm_GameTimeHour	inferred	high	GOLDTL.0x007f4c04	Hour component at +4 of gm_GameTime (GAME_TIMESTAMP.hour), wrapped at 23 in gm_AdvanceGameClock.c
+2026-11-28	GOLD.0x005fcfa0	g_662dc8	d3_TerrainSurfaceNames	inferred	high	-	char[15][9] terrain surface names (SAND, ERDE, WIESE, MOOR, PFLASTER, ...) in d3_GetTerrainSurfaceType.c
+2026-11-28	GOLD.0x00633dd8	g_6b89c4	d3_TerrainLayerSurfaceTypes	inferred	high	-	int[8] resolved surface type indices per texture layer in d3_GetTerrainSurfaceType.c and d3sm_GetCellMaterial.c
+2026-11-28	GOLD.0x00633dfc	g_6b89e8	d3_CachedTerrainMap	inferred	high	-	Cached terrain image pointer in d3_GetTerrainSurfaceType.c and d3sm_GetCellMaterial.c
+2026-11-28	GOLDTL.0x0067dac4	g_67dac4	d2_ShapeUCoordsTag	attested	high	-	.rdata m_alloc tag 'shape_u_coords' used in d2_AllocShapeBuffer.c
+2026-11-28	GOLDTL.0x0067dad4	g_67dad4	d2_ShapeSurfTag	attested	high	-	.rdata m_alloc tag 'shape_surf' used in d2_AllocShapeBuffer.c
+2026-11-28	GOLDTL.0x0067dae0	g_67dae0	d2_ShapeTag	attested	high	-	.rdata m_alloc tag 'shape' used in d2_AllocShapeBuffer.c
+2026-11-28	GOLDTL.0x0100dc20	g_100dc20	ai_MeisterDebugState	inferred	high	-	Meister inspection snapshot for player-viewed building in ai_EvaluateMeister.c and ai_CalcMeister*.c, cleared in cm_ExAdvanceGameTick.c
+2026-11-28	GOLDTL.0x007747b4	g_7747b4	gm_DifficultyLevel	inferred	high	-	Difficulty setting (0..4) selected in d2_RunChooseIntroMenu.c, saved in ls_LoadSavegame.c, scaling AI turn rates
+2026-11-28	GOLDTL.0x007746b0	g_7746b0	sv_HoveredBuilding	inferred	high	-	Currently hovered building record in sv_UpdateSceneHover.c, sv_HandleObjects.c, d2_RunWorldHudLoop.c
+2026-11-28	GOLDTL.0x007746b4	g_7746b4	sv_HoveredCharacter	inferred	high	-	Currently hovered character record in sv_UpdateSceneHover.c, d2_UpdateHoverTooltip.c, d2_UpdateSelectionPanels.c
+2026-11-28	GOLDTL.0x007746bc	g_7746bc	sv_HoveredInteriorItem	inferred	high	-	Currently hovered interior item/objekt record in sv_UpdateSceneHover.c and sv_HandleObjects.c
+2026-11-28	GOLD.0x005eb360	g_662398	msx_SetNamedSampleFileFn	inferred	high	GOLDTL.0x00662398	mss32.dll!_AIL_set_named_sample_file@20 IAT function pointer called in msx_SetSampleData.c
+2026-11-28	GOLD.0x005eecd0	g_665f78	he_GraveSlotTextIds	inferred	high	GOLDTL.0x00665f78	4-entry text ID table (3476, 3482, 3490, 3498) used in he_NotifyStorageTransfer.c, d2_RunFriedhofDialog.c, d2_RunSeanceAction.c
+2026-11-28	GOLD.0x005fc6cc	g_67b63c	d3_AgiPolyBufferTag	attested	high	GOLDTL.0x0067b63c	m_alloc tag string 'd3_io_a:AGIPolyBuffer' defined in d3_InitAGIPolyBuffer.c
+2026-11-28	GOLD.0x0061a638	g_699368	cut_NextCutsceneId	inferred	high	GOLDTL.0x00699368	Next cutscene ID assigned in cut_AllocCutscene.c, incremented in command.c, persisted in ls_LoadSavegame.c
+2026-11-28	GOLD.0x006332b4	g_6b7e94	evt_ScriptSlots	inferred	high	GOLDTL.0x006b7e94	128-slot EVT_SCRIPT_SLOT array searched in evt_FindScriptById.c, evt_FindScriptByName.c, ProcessActiveContexts.c
+2026-11-28	GOLD.0x006f1008	g_7731b8	gm_CannonTowers	inferred	high	GOLDTL.0x007731b8	8-slot cannon tower state array searched in gm_FindSlot170Entry.c and used in ai_StartCannonTower.c, gm_SendCannonVolleys.c, d2_RunKanoneUI.c
+2026-11-28	GOLD.0x006f3880	g_7774a0	d2_TrainingRows	inferred	high	GOLDTL.0x007774a0	32-entry D2_TRAINING_ROW UI array reset in d2_ResetTrainingRows.c and used in d2_RunDiebesgildeTraining.c / d2_RunEquipmentDialog.c
+2026-11-28	GOLD.0x007e5360	g_869480	gm_EntityRelationMatrix	inferred	high	GOLDTL.0x00869480	768x768 signed char entity relation matrix in gm_GetEntityRelation.c and cm_ExUpdateRelationMatrix.c
+2026-11-28	GOLD.0x00f82320	g_10069a0	gm_MissionJobs	inferred	high	GOLDTL.0x010069a0	128-entry mission job slot table in gm_ClearMissionJobs.c and gm_AllocMissionJob.c
+2026-11-28	GOLDTL.0x0067db50	g_67db50	ai_DifficultyFactor	inferred	high	-	Float difficulty factor set to (float)gm_DifficultyLevel in ai_StepEntityTurns.c and sent in 0x1b packet by cm_RequestCopyEntityData.c
+2026-11-28	GOLDTL.0x0067db54	g_67db54	ai_DifficultyRate	inferred	high	-	Float rate gm_DifficultyLevel*0.0625f+0.5f set in ai_StepEntityTurns.c and sent in 0x1b packet by cm_RequestCopyEntityData.c
+2026-11-28	GOLDTL.0x007e2760	g_7e2760	sv_EntityGreyTintFlags	inferred	high	-	768-byte per-entity grey tint cache cleared in main_InitFrameProfile.c and updated in sv_UpdateObjectSelection.c
+2026-11-28	GOLDTL.0x009ba1c0	g_9ba1c0	d3_ActiveBombs	inferred	high	-	32-slot spawned bomb array cleared in main_InitFrameProfile.c / cut_SetupBattleArena.c and populated in d3_SpawnBombObject.c
+2026-11-28	GOLDTL.0x007746c4	g_7746c4	d2_VisitedBuilding	inferred	high	-	Active visited building pointer set in gm_RunGebaeudeVisit.c / d3_FocusObjectAndRunInterior.c and checked in sv_UpdateSceneHover.c
+2026-11-28	GOLDTL.0x007746c8	g_7746c8	d2_InteriorBuilding	inferred	high	-	Active entered interior building pointer set in d2_EnterGebaeudeInterior.c and checked in d2_UpdateSelectionPanels.c
+2026-11-28	GOLDTL.0x007e2520	g_7e2520	nt_LocalSessionInfo	inferred	high	-	struct netinfo network session descriptor filled in d2_StartLocalSessionSetup.c, d2_HostNetworkGame.c, ls_LoadNetworkSaveHeader.c
+2026-11-28	GOLDTL.0x007e2510	g_7e2510	nt_ServerPort	inferred	high	-	TCP port stored in nt_LocalSessionInfo.port and passed to nt_ConnectTcp in main_RunGameLoop.c
+2026-11-28	GOLD.0x005f28a4	g_676924	evt_CameraFlightErrStr	attested	high	-	Error string 'CameraFlight(): Could not find one or few dummies' logged in CameraFlight.c
+2026-11-28	GOLD.0x006310ec	g_6b5cc4	d3_FoundSceneObject	inferred	high	-	Scene search match pointer cleared and returned by d3_FindSceneObjectByName.c
+2026-11-28	GOLD.0x00930600	g_930600	gm_SmallEntityTable	inferred	high	-	GOLD 32-slot 0x21c-stride entity record table (gm_SMALL_ENTITY_BASE) in ch_CollectSceneContextCharacters.c and gm_LookupEntityRecordIn32SlotTable.c
+2026-11-28	GOLD.0x014607c0	g_14cb980	sb_NullSampleBank	inferred	high	-	Fallback dummy sample bank returned by sb_GetLastBank.c, sb_FindSampleBank.c, sb_LoadSampleBank.c when g_6b7d7c == 0
+2026-11-28	GOLDTL.0x006761c8	g_6761c8	evt_StopCharacterErrStr	attested	high	-	Error string 'StopCharacter(): Invalid character' logged in StopCharacter.c
+2026-11-28	GOLDTL.0x0068d538	g_68d538	d3_ObjectLodDebugFmt	attested	high	-	Format string 'Name: %s    active_lod: %x    fl.type: %i   fl.oldtype: %i ' in d3_FormatObjectLodDebugInfo.c
+2026-11-28	GOLDTL.0x006ab558	g_6ab558	he_DomizilNotifyKey	attested	high	-	String '_NACHRICHTEN_DOMIZIL_04' passed to he_MessageBoxQuickjump in he_NotifyDomizilAccident.c and he_NotifyDomizilEvent.c
+2026-11-28	GOLDTL.0x006b86e8	g_6b86e8	d3_SceneLightListHead	inferred	high	-	Linked list head of active scene light nodes in Unassigned-fcn_family-004508a0_004508a0.c, d3_CollectSceneLights.c, d3_ClassifySceneLightNode.c
+2026-11-28	GOLDTL.0x0077256c	g_77256c	d2_WhiteSurface	inferred	high	-	32x32 solid white fallback D2_SURFACE* created in d2_Open.c, drawn in d2_DrawValueGauge.c, freed in vfs_ShutdownResources.c
+2026-11-28	GOLDTL.0x0100f8c0	g_100f8c0	d2_HoverTextBuffer	inferred	high	-	Hover tooltip text buffer formatted in sv_UpdateSceneHover.c and rendered in d2_DrawHoverText.c
+2026-11-28	GOLDTL.0x006640f8	g_6640f8	dbl_0_75	attested	high	-	.rdata double constant 0.75 used across cut_EvaluateTortureStep.c, cut_RunCombatStartDialog.c, gm_CalcLaw00And01Factor.c
+2026-11-28	GOLDTL.0x0102cbc8	g_102cbc8	d2_RadioGroupItems	inferred	high	-	Radio group item/count view (+8 offset into g_102cbc0 radio group array) in d2_group.c, d2_ChooseMission.c, d2_OpenPlayerStats.c
+2026-11-28	GOLDTL.0x00773dd4	g_773dd4	d3_CurrentSeason	inferred	high	-	Current season index (0..3) set via gm_GetSeason and passed to SelectTextureSet in d3_ApplyVegetationTextureSet.c
+2026-11-28	GOLDTL.0x0068bef4	g_68bef4	ch_PickupAnimName	attested	high	-	blk24 string 'spezial/einhaendig_vom_boden_nehmen' in cut_StartCombatAttack.c, gm_StartGroundCollectAction.c, he_RunSabotage.c
+2026-11-28	GOLDTL.0x007f3f00	g_7f3f00	d2_DependencyDiagramNodes	inferred	high	-	DEPENDENCY_DIAGRAM_NODE array in d2_CalculateDependencyDepth.c and d2_UpdateDependencyDiagram.c
+2026-11-28	GOLDTL.0x007746c0	g_7746c0	d3_FocusedEntityObject	inferred	high	-	Focused entity's 3D scene object pointer set in d3_FocusCameraOnEntity.c and d3_SnapCameraToEntity.c
+2026-11-28	GOLDTL.0x0077e980	g_77e980	he_ActionSlots	inferred	high	-	1024-entry HE_ACTION table searched/iterated in gm_ResetDynastySlot.c, he_CreateEventFromRequest.c, he_RunDueActions.c
+2026-11-28	GOLDTL.0x00662930	g_662930	dbl_3_0	attested	high	-	.rdata double constant 3.0 used in he_RunMarktSupervisor.c and GOLDTL.fcn_004172e0.c
+2026-11-28	GOLDTL.0x00772908	g_772908	d2_ActiveRouteListHead	inferred	high	-	ROUTING_NODE* linked list head edited in d2_RunRoutingSettingsDialog.c and d2_EditRoutePointDialog.c
+2026-11-28	GOLDTL.0x00772588	g_772588	d2_DirtyRects	inferred	high	-	DirtyRect array (0x400 slots) allocated in d2_Open.c, filled in d2_AddDirtyRect.c, freed in vfs_ShutdownResources.c
+2026-11-28	GOLD.0x00623794	g_6a24e4	main_FrameRate	inferred	high	GOLDTL.0x006a24e4	FPS float updated in main_SampleFrameCounter.c from frame counter g_6a24e8 and compared in d2_ShowCreditsScreen.c
+2026-11-28	GOLDTL.0x006816d8	g_6816d8	d2_RouteRadioGroupId	inferred	high	GOLD.0x00602a70	Trade route radio group handle built in d2_BuildRadioGroupFromSlots.c, selected in d2_RunTradeRouteEditor.c, cleared in d2_ResetRouteRadioGroup.c
+2026-11-28	GOLDTL.0x006a9694	g_6a9694	str_CZ_s	attested	high	GOLD.0x0062a578	.data char[7] "$C$Z%s" passed as io_AppendText format string in dialog renderers
+2026-11-28	GOLDTL.0x00662d34	g_662d34	flt_0_6	attested	high	GOLD.0x005ee020	.rdata float literal 0.6f used in gm_CalcSkillDuelScore.c
+2026-11-28	GOLDTL.0x00774934	g_774934	d3snd_SoundEnabled	inferred	high	GOLD.0x006f257c	SFX enable flag next to msx_MusicEnabled; cleared on sb_Init failure in main_OpenEngine.c:305 and checked in d3snd_*
+2026-11-28	GOLDTL.0x00772f54	g_772f54	cut_StartTick	inferred	high	GOLD.0x006f0da4	Cutscene start tick in g_6b7fac units; (g_6b7fac - cut_StartTick)*14 in d2_DrawElapsedTimer.c, cleared in cut_ReleaseSceneContexts
+2026-11-28	GOLDTL.0x007749ec	g_7749ec	he_SensenmannMusicActive	inferred	high	GOLD.0x006f2634	Tracks DerSeuchenzug.mp3 playback state in EvtSensenmann.c:68-87 for msx_RestoreMusicIfAllowed cleanup
+2026-11-28	GOLDTL.0x007f4c08	g_7f4c08	gm_GameTimeSliceDword	inferred	high	GOLD.0x00770ae8	4-byte interior copy slice at +8 of gm_GameTime (pos14_7f4c00) used in command.c:3957-3961 and action packet builders
+2026-11-28	GOLDTL.0x007f4c0c	g_7f4c0c	gm_GameTimeTailWord	inferred	high	GOLD.0x00770aec	2-byte trailing copy slice at +0xc of gm_GameTime (pos14_7f4c00)
+2026-11-28	GOLDTL.0x006b86c0	g_6b86c0	d3_BinaryChunkDepth	inferred	high	GOLD.0x00633b00	Recursion nesting counter incremented/decremented in d3_DispatchBinaryChunks.c
+2026-11-28	GOLDTL.0x0100ef80	g_100ef80	shp_SuppressDraw	inferred	high	GOLD.0x00f8a630	Set from suppressDraw parameter in shp_InitRenderState.c; checked in d2_BlitShape.c, d2_DrawGrayscaleShapeFrame.c, shp_ShowScaledShapeFromBank.c
+2026-11-28	GOLDTL.0x0067d96c	g_67d96c	d2_RenderSurfaceWidth	inferred	high	GOLD.0x005fed64	.data int initialized to 800; saved/restored to tex->pw / surface+0x10 around RLE sprite blits
+2026-11-28	GOLDTL.0x0100f1bc	g_100f1bc	shp_ShapeBlendMode	inferred	high	GOLD.0x00f8a64c	Set from blendMode parameter in shp_InitRenderState.c; checked in d2_BlitShape.c:50
+2026-11-28	GOLDTL.0x0100b0ac	g_100b0ac	ai_ProductionGoodsCount	inferred	high	GOLD.0x00f86a2c	Count of populated entries (max 0x20) in ai_ProductionGoodsPlans, reset in ai_CollectBuildingGoodsPlan.c
+2026-11-28	GOLDTL.0x0068d6dc	g_68d6dc	str_cut_rndfloat_f	attested	high	GOLD.0x0060ea20	.data format string "cut_rndfloat: %f" adjacent to str_cut_getrandseed_i
+2026-11-28	GOLDTL.0x006a3bb4	g_6a3bb4	str_Home_Sweet_Home	attested	high	GOLD.0x00624cdc	.data char[16] "Home-Sweet-Home" copied into civic building record in gm_InitCivicBuildings.c:28
+2026-11-28	GOLD.0x006f0468	g_77261c	ai_FeudTargetEntity	inferred	high	GOLDTL.0x0077261c	Assigned ai_UpdateEntityFeud(entity) in ai_UpdateEntityTurn.c:112 and cleared at :121; checked in ai_RunSelectedMethod.c
+2026-11-28	GOLD.0x00f88a40	g_100d0c0	ai_ProductionGoodsPlans	inferred	high	GOLDTL.0x0100d0c0	PRODUCTION_GOODS_RECORD[32] array populated by ai_CollectBuildingGoodsPlan.c and iterated in ai_UpdateMeisterBuilding.c
+2026-11-28	GOLDTL.0x006808a4	g_6808a4	str_historie_prefix	attested	high	GOLD.0x00601c3c	.data char[10] "historie\\" prefix compared against txt_TextBanks in txt_ResetHistoryTextBanks.c:37
+2026-11-28	GOLDTL.0x01007bc0	g_1007bc0	hst_HistoryGroups	inferred	high	GOLD.0x00f83540	4 HST_GROUP_SLOT/Group records (272 bytes) saved/loaded in ls_SaveHistoryState.c/ls_LoadHistoryState.c and reset in hst_ResetHistoryState.c
+2026-11-28	GOLD.0x00632384	g_6b6f64	m_TrackedSlotCapacity	inferred	high	GOLDTL.0x006b6f64	Tracked allocation array capacity in m_alloc.c (distinct from m_TrackedCapacity/m_TRACKED_SLOT_COUNT macros)
+2026-11-28	GOLD.0x006323a0	g_6b6f80	m_TrackedSlotArray	inferred	high	GOLDTL.0x006b6f80	TRACKED_MEMORY_BLOCK* pointer in m_alloc.c (distinct from g_array_ptr/m_TRACKED_SLOTS macros)
+2026-11-28	GOLD.0x00f83ea4	g_1008524	ai_ActiveMethodCount	inferred	high	GOLDTL.0x01008524	Active AI method stack depth scanned in ai_IsMethodActive.c and decremented in ai_PopActiveMethod.c
+2026-11-28	GOLD.0x00f86900	g_100af80	ai_ActiveMethodStack	inferred	high	GOLDTL.0x0100af80	Active AI method stack int[] searched in ai_IsMethodActive.c
+2026-11-28	GOLDTL.0x006a2bf8	g_6a2bf8	d2_ScrollPergaForm	inferred	high	-	Form handle from d2_LoadForm(..., "misc\\scroll_perga") in d2_group_00535570.c and d2_DestroyScrollPerga.c
+2026-11-28	GOLDTL.0x006a2bfc	g_6a2bfc	d2_ScrollPergaTopElem	inferred	high	-	Top scroll element handle created at y=0 in d2_group_00535570.c:150 and cleared in d2_DestroyScrollPerga.c
+2026-11-28	GOLDTL.0x006a2c00	g_6a2c00	d2_ScrollPergaBottomElem	inferred	high	-	Bottom scroll element handle created at y=0x1d1 in d2_group_00535570.c:151 and cleared in d2_DestroyScrollPerga.c
+2026-11-28	GOLDTL.0x0100df20	g_100df20	ai_TrackedGoodPlanEntries	inferred	high	-	GOODS_PLAN_ENTRY[4][4] snapshot buffer populated when bld->x16c == g_100dc20 in ai_UpdateMeisterBuilding.c:258
+2026-11-28	GOLDTL.0x0100dc40	g_100dc40	ai_TrackedGoodPlanCounts	inferred	high	-	int[4] per-good ingredient counts into ai_TrackedGoodPlanEntries in ai_UpdateMeisterBuilding.c:259
+2026-11-28	GOLDTL.0x00779cb8	g_779cb8	d2_LobbyLocalPlayerEntry	inferred	high	-	Local player net lobby entry pointer from d3_GetLocalSceneEntry() in d2_RunNetLobbySetup.c:151 and d2_PopulateNetLobbyPlayerList.c:61
+2026-11-28	GOLDTL.0x014a5774	g_14a5774	txt_MaleTitleFirst	inferred	high	-	txt_TextEntries[0x115] male title/salutation string used when gender == 0 in d2_PopulateNetLobbyPlayerList.c:54
+2026-11-28	GOLDTL.0x014a579c	g_14a579c	txt_FemaleTitleFirst	inferred	high	-	txt_TextEntries[0x11f] female title/salutation string used when gender != 0 in d2_PopulateNetLobbyPlayerList.c:54
+2026-11-28	GOLD.0x005eb380	g_6624a0	vfs_Crc32Table	inferred	high	GOLDTL.0x006624a0	256-entry .rdata CRC-32 lookup table used in vfs_CalcCrc32.c
+2026-11-28	GOLD.0x005f10f8	g_675170	nt_BroadcastSocket	inferred	high	GOLDTL.0x00675170	UDP broadcast socket handle (init -1) passed to sendto in nt_SendBroadcast.c
+2026-11-28	GOLD.0x014eaae0	g_1552000	nt_BroadcastAddr	inferred	high	-	struct sin_402220 (sockaddr_in) broadcast destination passed to sendto in nt_SendBroadcast.c
+2026-11-28	GOLD.0x0060ea00	g_68d6bc	str_cut_getrandseed_i	attested	high	GOLDTL.0x0068d6bc	.data char[] "cut_getrandseed: %i" defined in cut_GetRandSeed.c
+2026-11-28	GOLD.0x0062aa88	g_6a9b9c	d2_NetLobbyForm	inferred	high	GOLDTL.0x006a9b9c	menu\netlobby form handle used in d2_InitNetLobbyScrollbar.c, d2_PopulateNetLobbyPlayerList.c, d2_DrawNetLobbyPlayerInfo.c
+2026-11-28	GOLD.0x006332e0	g_6b7ec0	evt_ReturnValue	inferred	high	GOLDTL.0x006b7ec0	Stores evt_EvaluateExpression(0) result in evt_ReturnFromFunction.c:20
+2026-11-28	GOLD.0x006f22e4	g_7746a0	sv_ClickedObjekt	inferred	high	GOLDTL.0x007746a0	Clicked/selected scene object pointer paired with sv_HoveredObjekt, compared across HUD menus and focused in d3_FocusObjectAndRunInterior.c
+2026-11-28	GOLD.0x006f9f60	g_77dda0	d2_KanoneHitTable	inferred	high	GOLDTL.0x0077dda0	KANONE_HIT_GROUP[3] cannon hit table reset in d2_ResetKanoneHitTable.c
+2026-11-28	GOLD.0x0092cae0	g_9b0e20	cut_ParticipantSlots	inferred	high	GOLDTL.0x009b0e20	16 x 0x35c-byte cutscene/combat participant records searched in gm_FindPlayerById.c and cut_RunTurnRound.c
+2026-11-28	GOLD.0x00f8a668	g_100f1dc	d2_DialogButtonAction	inferred	high	GOLDTL.0x0100f1dc	GUI modal action/button ID tested in d2_HandleBookPageButton.c and d2_* dialog loops
+2026-11-28	GOLDTL.0x0068aec4	g_68aec4	str_cm_LoadBuf	attested	high	-	.data char[] "cm_LoadBuf" m_alloc tag in cm_AllocateLoadBuffer.c
+2026-11-28	GOLDTL.0x01005820	g_1005820	cm_LoadBufOffset	inferred	high	-	Current byte write offset into cm_LoadBuf reset in cm_AllocateLoadBuffer.c and incremented in cm_AppendLoadChunk.c
+2026-11-28	GOLDTL.0x010161bc	g_10161bc	d2_WindowElementIdView	inferred	high	-	Interior view at WinRec.slot (+0x27c) inside d2_Windows, read in d2_CloseWindow.c:33
+2026-11-28	GOLDTL.0x010161d0	g_10161d0	d2_WindowActiveView	inferred	high	-	Interior view at WinRec.used (+0x290) inside d2_Windows, read in d2_CloseWindow.c:32
+2026-11-28	GOLDTL.0x006b5d10	g_6b5d10	d3sndw_SlotWaterIds	inferred	high	GOLD.0x00631138	Allocated int[] array storing per-ray-slot water ambient sound IDs in d3sndw_Init.c and d3snd_UpdateAmbientSources.c
+2026-11-28	GOLDTL.0x006b5d14	g_6b5d14	d3sndw_SlotStates	inferred	high	GOLD.0x0063113c	Allocated int[] array storing per-ray-slot scan states 0..3 in d3sndw_Init.c and d3snd_UpdateAmbientSources.c
+2026-11-28	GOLDTL.0x00aed32c	g_aed32c	cm_PacketDeltaBase	inferred	high	GOLD.0x00a68d2c	Entity base pointer saved in cm_BeginPacketFieldDelta.c:32 and indexed in cm_AppendPacketFieldDelta.c:32
+2026-11-28	GOLDTL.0x007f4ca2	g_7f4ca2	gm_SlotTableKindView	inferred	high	GOLD.0x00770b82	Slot7f4ca2[768] interior .kind view at g_slot_table + 2 (g_7f4ca2.h)
+2026-11-28	GOLDTL.0x006abb00	g_6abb00	d2_InventoryPanelWindowId	inferred	high	GOLD.0x0062c418	Quick-slot / inventory popup window ID opened in d2_OpenEntityQuickSlots and closed in d2_CloseInventoryPanel.c
+2026-11-28	GOLDTL.0x00775318	g_775318	d2_InventoryPanelEntity	inferred	high	-	Entity pointer bound to quick-slots/inventory panel in d2_OpenEntityQuickSlots and used in d2_ConfirmUseObjekt.c
+2026-11-28	GOLD.0x005f1f00	g_675f80	str_GetCharacterHandle_not_found	attested	high	-	.data format string "GetCharacterHandle(): character '%s' not found" in GetCharacterHandle.c
+2026-11-28	GOLD.0x005f2b7c	g_676bfc	str_SetEmitterInitFill_invalid	attested	high	-	.data error string "SetEmitterInitFill: invalid handle..." in evt_SetEmitterInitFill.c
+2026-11-28	GOLD.0x00633198	g_6b7d78	sb_BankListHead	inferred	high	GOLDTL.0x006b7d78	Head of linked sample Bank list traversed in sb_FindBankByName.c and sb_FindSampleByName.c
+2026-11-28	GOLDTL.0x006766f0	g_6766f0	str_ecmd_KillObject_not_found	attested	high	-	.rdata error string "ecmd_KillObject: Could not find object to kill.." in ecmd_KillObject.c
+2026-11-28	GOLDTL.0x006a5708	g_6a5708	str_he_RunNone_invalid	attested	high	-	.rdata format string "he_RunNone(): Invalid HE-Type : %i, von Spieler " in he_RunNone.c
+2026-11-28	GOLDTL.0x006ab570	g_6ab570	str_NACHRICHTEN_DOMIZIL_12	attested	high	-	.data char[] "_NACHRICHTEN_DOMIZIL_12" in he_NotifyDomizilStatus.c
+2026-11-28	GOLDTL.0x01015f40	g_1015f40	d2_Windows	inferred	high	GOLD.0x00f8f120	Win_1015f40[0x60] / D2_WIN[0x60] 96-entry GUI window table in d2_ShowTxt.c and d2_CreateWindow.c
+2026-11-28	GOLDTL.0x010432a4	g_10432a4	d3_ProjectionDist	inferred	high	-	Viewport projection plane distance / horizontal scale set from dist in d3_SetViewport.c and used in d3_ScreenRayToHeight.c / d3_Init.c
+2026-11-28	GOLDTL.0x006b86e4	g_6b86e4	d3_DirectionalLightList	inferred	high	-	Linked list head of type-7 directional D3_SCENE_LIGHT_NODEs built in d3_ClassifySceneLightNode.c and read in d3_SelectActiveObjectLights.c
+2026-11-28	GOLDTL.0x0077255c	g_77255c	d2_CurrentWindow	inferred	high	-	Active WinRec* pointer set alongside d2_CurrentWindowId in d2_CreateWindow.c:213
+2026-11-28	GOLDTL.0x01552020	g_1552020	d2_QueuedQuads	inferred	high	-	RENDER_QUAD[0x400] textured quad batch buffer paired with d2_QueuedQuadCount in d2_QueueTexturedQuad.c
+2026-11-28	GOLDTL.0x007728bc	g_7728bc	gm_EntityCandidateCount	inferred	high	-	Count of candidates in g_10082a0 ring, written in ai_BuildActionCandidates.c and wrapped in gm_StepEntityCandidateRing.c
+2026-11-28	GOLDTL.0x00776664	g_776664	d3_GfxDetails	attested	high	-	Packed 4-byte Gfx options starting with INI key "details" loaded in io_LoadIniSettings.c and checked in lc_SetVegetationVisible.c / d2_ShowGraphicsOptions.c
+2026-11-28	GOLDTL.0x006a2c1c	g_6a2c1c	d2_QuickChatLastTick	inferred	high	-	Tick of last broadcast chat message set in cm_ExBroadcastChatMessage.c:39, cleared in d2_RunChatConsole.c:80, checked in d2_UpdateQuickChatOverlay.c
+2026-11-28	GOLDTL.0x0068cb58	g_68cb58	str_bewegung_zu_boden_sinken	attested	high	-	.data blk19 "bewegung/zu_boden_sinken" animation string copied in cut_TriggerUnitCollapse.c
+2026-11-28	GOLDTL.0x014abc28	g_14abc28	txt_NoEntityName	inferred	high	-	txt_TextEntries[0x1a42] placeholder name for invalid/empty entity (-1/0xffff) in gm_FormatEntityTitleAndName.c:32 and d2_PopulateBookActionGauge.c:66
+2026-11-28	GOLDTL.0x007746d8	g_7746d8	d2_SelectedEntityUiFlags	inferred	high	-	Entity UI capability bitmask returned by gm_GetEntityUiFlags in d2_UpdateBuildingCameraAndUi.c:265 and checked across HUD menus
+2026-11-28	GOLDTL.0x007dcae0	g_7dcae0	he_ApEvents	inferred	high	-	HE_AP_EVENT[256] AP event table cleared in he_InitEventSystem.c:58
+2026-11-28	GOLDTL.0x00662ad0	g_662ad0	dbl_4_0	attested	high	-	.rdata double literal 4.0 used in d3_UpdateAnimatedFloorMaterials.c:54
+2026-11-28	GOLDTL.0x00779160	g_779160	d2_ProductionPanels	inferred	high	-	Panel[16] building production panel table reset in d2_ResetBuildingUiSlots.c and updated in d2_UpdateProduktionPanels.c
+2026-11-28	GOLDTL.0x00662324	g_662324	imp_timeGetDevCaps	attested	high	GOLD.0x005eb278	IAT WINMM.dll!timeGetDevCaps used in tb_StartTimer.c
+2026-11-28	GOLDTL.0x00662320	g_662320	imp_timeBeginPeriod	attested	high	GOLD.0x005eb27c	IAT WINMM.dll!timeBeginPeriod used in tb_StartTimer.c
+2026-11-28	GOLDTL.0x0066231c	g_66231c	imp_timeSetEvent	attested	high	GOLD.0x005eb280	IAT WINMM.dll!timeSetEvent used in tb_StartTimer.c
+2026-11-28	GOLDTL.0x00662318	g_662318	imp_timeGetTime	attested	high	GOLD.0x005eb284	IAT WINMM.dll!timeGetTime used in tb_StartTimer.c and GOLDTL.fcn_004cc590.c
+2026-11-28	GOLDTL.0x006b7fa8	g_6b7fa8	tb_TimerId	inferred	high	GOLD.0x006333c8	Multimedia timer handle returned by timeSetEvent and killed in tb_ShutdownTimer.c
+2026-11-28	GOLDTL.0x006b7fc4	g_6b7fc4	tb_TimerOneshot	inferred	high	GOLD.0x006333e4	Volatile oneshot mode flag set in tb_StartTimer.c and checked in tb_TimerCallback.c
+2026-11-28	GOLDTL.0x01052c48	g_1052c48	tb_TimeCaps	inferred	high	GOLD.0x00fe7a80	TIMECAPS[2] filled by timeGetDevCaps(g_1052c48, 8) for min period tb_TimeCaps[0]+5
+2026-11-28	GOLDTL.0x01052c50	g_1052c50	tb_TimerDelay	inferred	high	GOLD.0x00fe7a88	Timer delay/period in ms stored in tb_StartTimer.c and used in tb_TimerCallback.c
+2026-11-28	GOLDTL.0x00772f5a	g_772f5a	cut_DuelAccuracyBoostA	inferred	medium	-	Flag boosting duel shot accuracy for fighter A (g_9afde0) when set in cut_PlayDuelIntroMove
+2026-11-28	GOLDTL.0x00772f5b	g_772f5b	cut_DuelAccuracyBoostB	inferred	medium	-	Flag boosting duel shot accuracy for fighter B (g_9afde4) when set in cut_PlayDuelIntroMove
+2026-11-28	GOLDTL.0x00772f5c	g_772f5c	cut_DuelDamageReductionA	inferred	medium	-	Flag reducing shot damage for fighter A (g_9afde0) in cut_ResolveDuelShot
+2026-11-28	GOLDTL.0x00772f5d	g_772f5d	cut_DuelDamageReductionB	inferred	medium	-	Flag reducing shot damage for fighter B (g_9afde4) in cut_ResolveDuelShot
+2026-11-28	GOLDTL.0x009afde4	g_9afde4	cut_DuelFighterB	inferred	high	-	Pointer to second duel participant snapshot &sB initialized in cut_MainDuell.c
+2026-11-28	GOLDTL.0x00662a08	g_662a08	dbl_1_5	attested	high	-	IEEE-754 double literal 1.5 (0x3ff8000000000000) in .rdata
+2026-11-28	GOLDTL.0x006b8704	g_6b8704	d3_MaxLightListCount	inferred	high	-	Capacity nlist stored in d3_InitLightBuffers bounding d3_LightSortCount in d3_SelectActiveObjectLights
+2026-11-28	GOLDTL.0x006b8708	g_6b8708	d3_LightSortCount	inferred	high	-	Active count of entries written to g_1041d04 sort buffer in d3_SelectActiveObjectLights
+2026-11-28	GOLDTL.0x006b870c	g_6b870c	d3_ActiveLights	inferred	high	-	D3_LIGHT_SLOT* buffer allocated with tag d3l:ActiveLights in d3_InitLightBuffers
+2026-11-28	GOLDTL.0x01041d04	g_1041d04	d3_LightSortList	inferred	high	-	D3_LIGHT_SORT_ENTRY* buffer allocated with tag d3l:LightList in d3_InitLightBuffers
+2026-11-28	GOLDTL.0x0066244c	g_66244c	imp_AIL_set_preference	attested	high	GOLD.0x005eb308	IAT mss32.dll!_AIL_set_preference@8 used in msx_SetSampleHandleLimit
+2026-11-28	GOLDTL.0x006b7f94	g_6b7f94	msx_SampleHandleLimit	inferred	high	GOLD.0x006333b4	Sample handle limit read/set by msx_GetSampleHandleLimit/msx_SetSampleHandleLimit and allocated in msx_OpenDigOutput
+2026-11-28	GOLDTL.0x006628c8	g_6628c8	d3_TwoPi	attested	high	GOLD.0x005eb7a8	Float constant 6.2831855f (2*pi) used in d3_WrapYawDelta, he_ArrangeEntityMarkers, d3snd_UpdateAmbientSources
+2026-11-28	GOLDTL.0x006628f8	g_6628f8	d3_NegPi	attested	high	GOLD.0x005eb7d8	Float constant -3.1415927f (-pi) used in d3_WrapYawDelta and GOLD.fcn_004539e0
+2026-11-28	GOLDTL.0x006640c0	g_6640c0	dbl_0_006	attested	high	GOLD.0x005ece40	IEEE-754 double constant 0.006 (0x3f789374bc6a7efa) in ai_GetMaxActiveTradeActions
+2026-11-28	GOLDTL.0x00773d50	g_773d50	gm_TargetCityPopulation	inferred	high	GOLD.0x006f1ba0	Target city population float stepped toward by g_773d4c and scaled in ai_GetMaxActiveTradeActions
+2026-11-28	GOLDTL.0x00772500	g_772500	d2_FileObjTable	inferred	high	GOLD.0x006ed918	0x2a000-byte d2:fileobj cache table allocated in d2_Open.c and indexed by VfsEntry/BarImg/Font/D2_RES_BOUNDS
+2026-11-28	GOLDTL.0x006b86c4	g_6b86c4	d3_SceneLightingVec	inferred	medium	-	VECTOR3 default lighting field copied to D3_SCENE_SLOT.b, saved/loaded in scene files and CTX_TABLE.fc8
+2026-11-28	GOLDTL.0x006b8480	g_6b8480	d3_SideViewCamera	attested	high	-	Orthographic scene camera spawned with name 'Seite' in d3_CreateSceneCameras.c
+2026-11-28	GOLDTL.0x006b847c	g_6b847c	d3_FrontViewCamera	attested	high	-	Orthographic scene camera spawned with name 'Vorne' in d3_CreateSceneCameras.c
+2026-11-28	GOLDTL.0x006b8478	g_6b8478	d3_TopViewCamera	attested	high	-	Orthographic scene camera spawned with name 'Oben' in d3_CreateSceneCameras.c
+2026-11-28	GOLDTL.0x00772f18	g_772f18	d2_VoteRow1Count	inferred	high	-	Icon count for vote tally row 1 (y=0x3e) in d2_UpdateVoteTallyIcons.c
+2026-11-28	GOLDTL.0x00772f1c	g_772f1c	d2_VoteRow0Count	inferred	high	-	Icon count for vote tally row 0 (y=0x20) in d2_UpdateVoteTallyIcons.c
+2026-11-28	GOLDTL.0x00772f20	g_772f20	d2_VoteRow2Count	inferred	high	-	Icon count for vote tally row 2 (y=0x2f) in d2_UpdateVoteTallyIcons.c
+2026-11-28	GOLDTL.0x014ce8c0	g_14ce8c0	io_ActiveCursorX	inferred	high	-	Mouse cursor X coordinate written by io_PollDirectInputMouse alongside g_14ce8c2 (io_ActiveCursorY)
+2026-11-28	GOLDTL.0x014cf900	g_14cf900	io_PolledCursorState	inferred	high	-	Saved cursor and input button snapshot array copied to g_14ce8c0 and cleared in io_ClearInputButtonFlags
+2026-11-28	GOLDTL.0x014ce920	g_14ce920	io_ActiveInputState	inferred	high	-	Active DirectInput mouse position and button state array updated in io_PollDirectInputMouse and cleared in io_ClearInputState
+2026-11-28	GOLDTL.0x00662d60	g_662d60	d3_BasisUpX	inferred	high	-	Float 0.0f X component of default (0,1,0) up vector in d3_BuildBasisMatrixFromDir and CreateEmitter
+2026-11-28	GOLDTL.0x00662d64	g_662d64	d3_BasisUpY	inferred	high	-	Float 1.0f Y component of default (0,1,0) up vector in d3_BuildBasisMatrixFromDir and CreateEmitter
+2026-11-28	GOLDTL.0x00662d68	g_662d68	d3_BasisUpZ	inferred	high	-	Float 0.0f Z component of default (0,1,0) up vector in d3_BuildBasisMatrixFromDir and CreateEmitter
+2026-11-28	GOLDTL.0x00662910	g_662910	flt_0_01	attested	high	GOLD.0x005eb7f0	IEEE-754 float literal 0.01f (0x3c23d70a) in .rdata
+2026-11-28	GOLD.0x005f1b3c	g_675bbc	str_CallUserFunction_Invalid_userfunction	attested	high	-	Error string literal 'CallUserFunction(): Invalid userfunction' passed to evt_LogScriptError
+2026-11-28	GOLD.0x005f1b68	g_675be8	str_CallUserFunctionExtended_Invalid_userfunction	attested	high	-	Error string literal 'CallUserFunctionExtended(): Invalid userfunction' passed to evt_LogScriptError
+2026-11-28	GOLDTL.0x006b5cf8	g_6b5cf8	SonnenstrahlenObjekt	inferred	high	GOLD.0x00631120	Scene model pointer returned by d3_CreateSceneModelObject(...,'sonnenstrahlen') beside SonnenstrahlenAktiv/SonnenstrahlenPhase
+2026-11-28	GOLDTL.0x006b7f90	g_6b7f90	msx_Initialized	inferred	high	GOLD.0x006333b0	AIL/MSX initialized flag set to -1 in msx_InitAIL and checked across msx_* routines
+2026-11-28	GOLDTL.0x007746cc	g_7746cc	sv_SelectedBuilding	inferred	high	GOLD.0x006f2310	Selected building/estate pointer read in d2_EnterBuildingObjekt, d2_DrawBuildingItemLabels, d2_GetTutCh5SubStep, and ls_WriteSaveHeader
+2026-11-28	GOLDTL.0x007e6068	g_7e6068	d2_HoverTooltipSlots	inferred	high	GOLD.0x00761fc8	0x4300-byte array (64 x 268B entries) cleared in d2_ClearHoverTooltipSlot.c
+2026-11-28	GOLDTL.0x009baae0	g_9baae0	d3_SceneEntries	inferred	high	GOLD.0x009364e0	0x2b8-byte array (8 x 87B scene entries) zeroed in d3_InitSceneState and searched in d3_FindFreeSceneEntry/d3_LookupSceneEntry
+2026-11-28	GOLDTL.0x0102cbc0	g_102cbc0	d2_RadioGroups	inferred	high	GOLD.0x00fa5aa0	Radio button group array (140B stride) cleared in d2_ClearRadioGroup and updated in d2_OpenPlayerStats/d2_UpdateRadioGroup
+2026-11-28	GOLDTL.0x006a2598	g_6a2598	d2_HudTopBarWindowId	inferred	high	-	Window ID created by d2_CreateWindow in d2_InitHudPanels, closed in d2_DestroyAllHudPanels, positioned in d2_RestoreHudPanels
+2026-11-28	GOLDTL.0x0077250c	g_77250c	d2_ScreenSurface	inferred	high	-	Primary 2D surface handle created in d2_Open.c and passed to d2_ClearSurface, d2_DrawWordWrappedText, d2_DrawSpriteFromSet
+2026-11-28	GOLDTL.0x007747b0	g_7747b0	gm_ClientModeFlags	inferred	high	GOLD.0x006f23f8	Client session/mode bitmask (bit 2 network game, bit 3 history/cutscene) checked across command.c, ls_SaveNetworkGame, cut_RunTurnRound
+2026-11-28	GOLDTL.0x010529c8	g_10529c8	d3_ViewportZNear	inferred	high	-	Viewport near-plane distance stored in d3_SetViewport and tested in frustum clipping
+2026-11-28	GOLDTL.0x010421a0	g_10421a0	d3_ViewportZFar	inferred	high	-	Viewport far-plane distance stored in d3_SetViewport, fog range fallback, and frustum clipping
+2026-11-28	GOLDTL.0x006918e8	g_6918e8	gm_MaleHeadSets	inferred	high	-	HEAD_SET[] table selected when entity sex byte is 0 (which=0) in gm_SelectEntityHeadSet/gm_FindOrAllocHeadSet
+2026-11-28	GOLDTL.0x00693228	g_693228	gm_FemaleHeadSets	inferred	high	-	HEAD_SET[] table selected when entity sex byte is 1 (which=1) in gm_SelectEntityHeadSet/gm_FindOrAllocHeadSet
+2026-11-28	GOLDTL.0x00772580	g_772580	d2_RedrawInfo1	attested	high	-	0x4000-byte dirty-rect buffer allocated with tag 'd2:d2_RedrawInfo1' in d2_Open.c and freed in vfs_ShutdownResources.c
+2026-11-28	GOLDTL.0x00772584	g_772584	d2_RedrawInfo2	attested	high	-	0x4000-byte dirty-rect buffer allocated with tag 'd2:d2_RedrawInfo2' in d2_Open.c and freed in vfs_ShutdownResources.c
+2026-11-28	GOLD.0x005f20fc	g_67617c	str_PreloadAnimation_Invalid_character	attested	high	-	Error string literal 'PreloadAnimation(): Invalid character' in PreloadAnimation.c
+2026-11-28	GOLD.0x005f2ba4	g_676c24	str_SetEmitterRebirthFill_invalid_handle	attested	high	-	Error string literal 'SetEmitterRebirthFill: invalid handle...' in evt_SetEmitterRebirthFill.c
+2026-11-28	GOLD.0x006332a8	g_6b7e88	sb_Voices	inferred	high	-	0x30-byte Voice[] array allocated with tag 'sb_Init' in sb_Init.c, scanned in msx_CountActiveVoices, freed in d3snd_Shutdown
+2026-11-28	GOLDTL.0x00662a48	g_662a48	dbl_2_0	attested	high	-	IEEE-754 double literal 2.0 (0x4000000000000000) in .rdata
+2026-11-28	GOLDTL.0x006772b4	g_6772b4	str_fmt_float	attested	high	-	Format string literal '%f' in io_WriteRegistryFloat.c
+2026-11-28	GOLDTL.0x006ab41c	g_6ab41c	str_NACHRICHTEN_HS_46	attested	high	-	Initialized string '_NACHRICHTEN_HS_46' passed to he_PostEntityMessage in he_NotifyCrimeRecorded.c
+2026-11-28	GOLDTL.0x006b7fdc	g_6b7fdc	vfs_RootDir	inferred	high	-	VFS_DIR* root directory handle passed to vfs_LookupPath/vfs_ResolvePath/vfs_Tfopen across 122 VFS call sites
+2026-11-28	GOLDTL.0x0099ef80	g_99ef80	gm_CrimeGrid	inferred	high	-	CRIME_GRID_CELL[9][8] (1536B) updated by cm_SubtractCrimeGrid, gm_AddNeighborhoodLawEffect, ai_CalcMeisterDiebe, reset in gm_ResetCityStats
+2026-11-28	GOLDTL.0x00662950	g_662950	dbl_0_0	attested	high	-	IEEE-754 double literal 0.0 (0x0000000000000000) in .rdata
+2026-11-28	GOLDTL.0x014cb8f0	g_14cb8f0	evt_ScriptErrorLog	inferred	high	-	Ring buffer of 0x84-byte script error log records written in evt_LogScriptError/evt_RunScript/evt_CallScriptFunction and freed in evt_ShutdownScripts
+2026-11-28	GOLDTL.0x01038140	g_1038140	d2_Forms	inferred	high	-	D2_FORM_RECORD[] table accessed across d2_DestroyForm, d2_SetForm, d2_BringFormToFront, d2_Plot
+2026-11-28	GOLDTL.0x00772614	g_772614	tp_d2_QuadVertexBuffer	inferred	high	-	Direct3D quad vertex buffer interface pointer locked/unlocked in d2_DrawSurfaceQuad/d2_BlitSurfaceCore and bound in d2_BindQuadVertexBuffer
+2026-11-28	GOLDTL.0x007728d4	g_7728d4	hst_HistoryTextActive	inferred	high	-	Flag indicating active history chronicle text bank, cleared on load failure/EOF and serialized in ls_LoadHistoryState
+2026-11-28	GOLDTL.0x00772ec4	g_772ec4	cut_BombSampleBank	inferred	high	-	Sample bank handle loaded from 'kampf\\bombeundtopf.sbf' in cut_SetupBattleArena and played in cut_UpdateActiveBombs/d3_UpdateMineExplosions
+2026-11-28	GOLDTL.0x00772fdc	g_772fdc	ahm_PlayerPrototypes	inferred	high	-	ALCHEMY_PLAYER_PROTOTYPE* array read/saved/dealt across ahm_DealPlayerPrototypes, ahm_fio_SaveAlchemyData, and gm_consolidated_004ecaa0
+2026-11-28	GOLDTL.0x00773de8	g_773de8	ls_SaveSlotIndex	inferred	high	-	Selected save slot byte written from d2_RunSaveGameDialog/ls_SaveNetworkGame, cleared in main_RunGameLoop, written in ls_WriteSaveHeader
+2026-11-28	GOLDTL.0x007749e4	g_7749e4	tp_d2_ActiveHudSlot	inferred	high	-	Pointer to active D2_ACTIVE_HUD_SLOT highlighted by d2_HighlightSelectedControl and dispatched in main_RunFrameLoop
+2026-11-28	GOLDTL.0x00666018	g_666018	gm_TargetPersonTypeMask	inferred	high	-	64-bit entity-type filter bitmask constant in .rdata passed to q.mask for espionage/duel/crime target pickers
+2026-11-28	GOLDTL.0x01052bd0	g_1052bd0	d3_RenderQualityFlags	inferred	high	-	Render quality/shadow bitfield Flags set in d3_ConfigureSceneRenderQuality, tested in d3_RenderScene, reset in d3_ResetRenderStates
+2026-11-28	GOLD.0x006f5ec0	g_779d00	main_CameraBookmarks	inferred	high	GOLDTL.0x00779d00	src/Develop/DieGildeAddOn/game/main_ProcessGameHotkeys.c: 11-slot F1-F11 camera bookmark table in main_Proc...
+2026-11-28	GOLD.0x0075e8c0	g_7e2700	d2_InsideBuildingActive	inferred	high	GOLDTL.0x007e2700	src/Develop/DieGildeAddOn/game/main_ProcessGameHotkeys.c: flag set 1 in d2_EnterBuildingObjekt.c, checke...
+2026-11-28	GOLD.0x014681ea	g_14cf72a	io_ShiftKeyDown	inferred	high	GOLDTL.0x014cf72a	src/Develop/DieGildeAddOn/game/main_ProcessGameHotkeys.c: DIK_LSHIFT (0x2a) key state byte checked with TAB/CTR...
+2026-11-28	GOLD.0x01468410	g_14cf950	io_LastKeyScancode	inferred	high	GOLDTL.0x014cf950	src/Develop/DieGildeAddOn/game/main_ProcessGameHotkeys.c: last pressed DIK key scancode in main_ProcessGameH...
+2026-11-28	GOLDTL.0x00779d00	g_779d00	main_CameraBookmarks	inferred	high	GOLD.0x006f5ec0	src/Develop/DieGildeAddOn/game/main_ProcessGameHotkeys.c: 11-slot F1-F11 camera bookmark table in main_Proc...
+2026-11-28	GOLDTL.0x007e2700	g_7e2700	d2_InsideBuildingActive	inferred	high	GOLD.0x0075e8c0	src/Develop/DieGildeAddOn/game/main_ProcessGameHotkeys.c: flag set 1 in d2_EnterBuildingObjekt.c, checke...
+2026-11-28	GOLDTL.0x014cf72a	g_14cf72a	io_ShiftKeyDown	inferred	high	GOLD.0x014681ea	src/Develop/DieGildeAddOn/game/main_ProcessGameHotkeys.c: DIK_LSHIFT (0x2a) key state byte checked with TAB/CTR...
+2026-11-28	GOLDTL.0x014cf950	g_14cf950	io_LastKeyScancode	inferred	high	GOLD.0x01468410	src/Develop/DieGildeAddOn/game/main_ProcessGameHotkeys.c: last pressed DIK key scancode in main_ProcessGameH...
+2026-11-28	GOLD.0x005eb9a0	g_662ac8	flt_4	inferred	high	GOLDTL.0x00662ac8	src/Develop/DieGildeAddOn/game/ai_RunBestechung.c: .rdata float 4.0f (0x40800000) used as chain weight multiplier in ai_Ru...
+2026-11-28	GOLD.0x005ebb1c	g_664164	flt_6	inferred	high	GOLDTL.0x00664164	src/Develop/DieGildeAddOn/game/ai_RunBestechung.c: .rdata float 6.0f (0x40c00000) used as bribe score multiplier in ai_Run...
+2026-11-28	GOLD.0x005ffe48	g_67eab0	str_NACHRICHTEN_HS_22	attested	high	GOLDTL.0x0067eab0	src/Develop/DieGildeAddOn/game/ai_RunBestechung.c: .data string '_NACHRICHTEN_HS_22' in ai_RunBestechung.c
+2026-11-28	GOLDTL.0x00662ac8	g_662ac8	flt_4	inferred	high	GOLD.0x005eb9a0	src/Develop/DieGildeAddOn/game/ai_RunBestechung.c: .rdata float 4.0f (0x40800000) used as chain weight multiplier in ai_Ru...
+2026-11-28	GOLDTL.0x00664164	g_664164	flt_6	inferred	high	GOLD.0x005ebb1c	src/Develop/DieGildeAddOn/game/ai_RunBestechung.c: .rdata float 6.0f (0x40c00000) used as bribe score multiplier in ai_Run...
+2026-11-28	GOLDTL.0x0067eab0	g_67eab0	str_NACHRICHTEN_HS_22	attested	high	GOLD.0x005ffe48	src/Develop/DieGildeAddOn/game/ai_RunBestechung.c: .data string '_NACHRICHTEN_HS_22' in ai_RunBestechung.c
+2026-11-28	GOLD.0x00631428	g_6b6008	d3_OctreePalette	inferred	high	GOLDTL.0x006b6008	src/Develop/Units/d3/d3_CopyOctreePalette.c: unsigned char[3][0x100] R/G/B octree palette in d3_AssignOctreePal...
+2026-11-28	GOLD.0x00631528	g_6b6108	d3_OctreePaletteGreen	inferred	high	GOLDTL.0x006b6108	src/Develop/Units/d3/d3_CopyOctreePalette.c: alias at d3_OctreePalette+0x100 (Green 256-byte plane) in d3_...
+2026-11-28	GOLD.0x00631628	g_6b6208	d3_OctreePaletteBlue	inferred	high	GOLDTL.0x006b6208	src/Develop/Units/d3/d3_CopyOctreePalette.c: alias at d3_OctreePalette+0x200 (Blue 256-byte plane) in d3_Co...
+2026-11-28	GOLDTL.0x006b6008	g_6b6008	d3_OctreePalette	inferred	high	GOLD.0x00631428	src/Develop/Units/d3/d3_CopyOctreePalette.c: unsigned char[3][0x100] R/G/B octree palette in d3_AssignOctreePal...
+2026-11-28	GOLDTL.0x006b6108	g_6b6108	d3_OctreePaletteGreen	inferred	high	GOLD.0x00631528	src/Develop/Units/d3/d3_CopyOctreePalette.c: alias at d3_OctreePalette+0x100 (Green 256-byte plane) in d3_...
+2026-11-28	GOLDTL.0x006b6208	g_6b6208	d3_OctreePaletteBlue	inferred	high	GOLD.0x00631628	src/Develop/Units/d3/d3_CopyOctreePalette.c: alias at d3_OctreePalette+0x200 (Blue 256-byte plane) in d3_Co...
+2026-11-28	GOLD.0x0146735c	g_14ce89c	io_InputHwnd	inferred	high	GOLDTL.0x014ce89c	src/Develop/DieGildeAddOn/game/client_input.h: HWND main window passed to DirectInput SetCooperativeLevel in clien...
+2026-11-28	GOLD.0x01467360	g_14ce8a0	io_MouseDevice	inferred	high	GOLDTL.0x014ce8a0	src/Develop/DieGildeAddOn/game/client_input.h: INPUT_DEVICE* DirectInput mouse device in client_input.h
+2026-11-28	GOLD.0x014673cc	g_14ce90c	io_KeyboardDevice	inferred	high	-	src/Develop/DieGildeAddOn/game/client_input.h: INPUT_DEVICE* DirectInput keyboard device in client_input.h
+2026-11-28	GOLD.0x0146840c	g_14cf94c	io_MouseEventHandle	inferred	high	-	src/Develop/DieGildeAddOn/game/client_input.h: HANDLE DirectInput mouse notification event in client_input.h
+2026-11-28	GOLD.0x01468414	g_14cf954	io_DirectInput	inferred	high	-	src/Develop/DieGildeAddOn/game/client_input.h: INPUT_SYSTEM* DirectInput interface pointer in client_input.h
+2026-11-28	GOLDTL.0x007e3a40	g_7e3a40	d3_SavedCameraPos	inferred	high	-	src/Develop/Units/d3/d3_SetCameraHeightFraction.c: float[3] saved camera position vector in d3_SetCameraHeightFraction.c
+2026-11-28	GOLDTL.0x007e3a44	g_7e3a44	d3_SavedCameraPosY	inferred	high	-	src/Develop/Units/d3/d3_SetCameraHeightFraction.c: alias at d3_SavedCameraPos+4 (.y) in d3_SetCameraHeightFraction.c
+2026-11-28	GOLDTL.0x007e3a48	g_7e3a48	d3_SavedCameraPosZ	inferred	high	-	src/Develop/Units/d3/d3_SetCameraHeightFraction.c: alias at d3_SavedCameraPos+8 (.z) in d3_SetCameraHeightFraction.c
+2026-11-28	GOLDTL.0x007e3a54	g_7e3a54	d3_CameraTargetRotY	inferred	high	-	src/Develop/Units/d3/d3_SetCameraHeightFraction.c: alias at d3_CameraTargetRotation+4 (.y) in d3_SetCameraHeightFraction.c
+2026-11-28	GOLDTL.0x007e3a58	g_7e3a58	d3_CameraTargetRotZ	inferred	high	-	src/Develop/Units/d3/d3_SetCameraHeightFraction.c: alias at d3_CameraTargetRotation+8 (.z) in d3_SetCameraHeightFraction.c
+2026-11-28	GOLD.0x005eb35c	g_6623bc	imp_AIL_release_sample_handle	attested	high	GOLDTL.0x006623bc	src/Develop/Unassigned/GOLDTL.fcn_0042a6a0.c: IAT import mss32.dll!_AIL_release_sample_handle@4 ca...
+2026-11-28	GOLD.0x00633330	g_6b7f10	msx_SampleHandles	inferred	high	GOLDTL.0x006b7f10	src/Develop/Unassigned/GOLDTL.fcn_0042a6a0.c: int*[16] per-driver allocated sample handle arrays alongside msx...
+2026-11-28	GOLDTL.0x006623bc	g_6623bc	imp_AIL_release_sample_handle	attested	high	GOLD.0x005eb35c	src/Develop/Unassigned/GOLDTL.fcn_0042a6a0.c: IAT import mss32.dll!_AIL_release_sample_handle@4 ca...
+2026-11-28	GOLDTL.0x006b7f10	g_6b7f10	msx_SampleHandles	inferred	high	GOLD.0x00633330	src/Develop/Unassigned/GOLDTL.fcn_0042a6a0.c: int*[16] per-driver allocated sample handle arrays alongside msx...
+2026-11-28	GOLD.0x005ebb58	g_662d18	str_space	attested	high	GOLDTL.0x00662d18	src/Develop/Units/m_alloc/d3_io_a_AllocateMaterialBuffer.c: .rdata string ' ' (0x20 0x00) strtok delimiter in d3_Parse...
+2026-11-28	GOLD.0x005fc698	g_67b608	str_d3_io_a_AGIMaterialBuffer	attested	high	GOLDTL.0x0067b608	src/Develop/Units/m_alloc/d3_io_a_AllocateMaterialBuffer.c: .data m_alloc tag 'd3_io_a:AGIMaterial...
+2026-11-28	GOLDTL.0x00662d18	g_662d18	str_space	attested	high	GOLD.0x005ebb58	src/Develop/Units/m_alloc/d3_io_a_AllocateMaterialBuffer.c: .rdata string ' ' (0x20 0x00) strtok delimiter in d3_Parse...
+2026-11-28	GOLDTL.0x0067b608	g_67b608	str_d3_io_a_AGIMaterialBuffer	attested	high	GOLD.0x005fc698	src/Develop/Units/m_alloc/d3_io_a_AllocateMaterialBuffer.c: .data m_alloc tag 'd3_io_a:AGIMaterial...
+2026-11-28	GOLD.0x0060e340	g_68cfc0	str_PA_WERBUNG_EVENT_NACHRICHT_HOCHZEIT_M1_00	attested	high	GOLDTL.0x0068cfc0	src/Develop/DieGildeAddOn/game/gm_NotifyHochzeit.c: .data string '_PA_WERBUNG_EVEN...
+2026-11-28	GOLD.0x0060e36c	g_68cfec	str_PA_WERBUNG_EVENT_ZUSAGE_M1_00	attested	high	GOLDTL.0x0068cfec	src/Develop/DieGildeAddOn/game/gm_NotifyHochzeit.c: .data string '_PA_WERBUNG_EVENT_ZUSAGE_M1_...
+2026-11-28	GOLDTL.0x0068cfc0	g_68cfc0	str_PA_WERBUNG_EVENT_NACHRICHT_HOCHZEIT_M1_00	attested	high	GOLD.0x0060e340	src/Develop/DieGildeAddOn/game/gm_NotifyHochzeit.c: .data string '_PA_WERBUNG_EVEN...
+2026-11-28	GOLDTL.0x0068cfec	g_68cfec	str_PA_WERBUNG_EVENT_ZUSAGE_M1_00	attested	high	GOLD.0x0060e36c	src/Develop/DieGildeAddOn/game/gm_NotifyHochzeit.c: .data string '_PA_WERBUNG_EVENT_ZUSAGE_M1_...
+2026-11-28	GOLD.0x00770b8a	g_7f4caa	gm_EntityAgeField	inferred	high	GOLDTL.0x007f4caa	src/Develop/DieGildeAddOn/game/sim.c: alias at g_7f4ca0+0xa (unsigned short entity age compared in gm_CheckEnt...
+2026-11-28	GOLD.0x00770ba0	g_7f4cc0	gm_EntityAgeLimitField	inferred	high	GOLDTL.0x007f4cc0	src/Develop/DieGildeAddOn/game/sim.c: alias at g_7f4ca0+0x20 (float age limit compared in gm_CheckEntityA...
+2026-11-28	GOLDTL.0x007f4caa	g_7f4caa	gm_EntityAgeField	inferred	high	GOLD.0x00770b8a	src/Develop/DieGildeAddOn/game/sim.c: alias at g_7f4ca0+0xa (unsigned short entity age compared in gm_CheckEnt...
+2026-11-28	GOLDTL.0x007f4cc0	g_7f4cc0	gm_EntityAgeLimitField	inferred	high	GOLD.0x00770ba0	src/Develop/DieGildeAddOn/game/sim.c: alias at g_7f4ca0+0x20 (float age limit compared in gm_CheckEntityA...
+2026-11-28	GOLD.0x00633738	g_6b8300	d3_CurrentFloor	inferred	high	GOLDTL.0x006b8300	src/Develop/Units/d3/client_lighting.h: current floor/terrain object passed to d3_RenderFloor, d3_SaveFloor, d3_...
+2026-11-28	GOLD.0x00633b04	g_6b86d4	d3_SceneRenderLock	inferred	high	-	src/Develop/Units/d3/client_lighting.h: reentrant scene render/save busy lock counter in d3_RenderScene & client_lighting.h
+2026-11-28	GOLD.0x00fb9074	g_104049c	d3_TextureBank	inferred	high	GOLDTL.0x0104049c	src/Develop/Units/d3/client_scene_resources.h: SCENE_RESOURCE*/Tex* stride-0x70 texture resource array in client...
+2026-11-28	GOLD.0x00fb9084	g_10404a0	d3_TextureBankCount	inferred	high	-	src/Develop/Units/d3/client_scene_resources.h: unsigned int slot count of d3_TextureBank in client_scene_resources.h & d3_I...
+2026-11-28	GOLDTL.0x006b7ffa	g_6b7ffa	d3_RenderAmbientOnly	inferred	high	-	src/Develop/Units/d3/d3_BeginScenePass.c: render state override flag disabling directional lights in d3_BeginScenePass.c ...
+2026-11-28	GOLDTL.0x0067bbdc	g_67bbdc	d3_SceneAmbientColor	inferred	high	GOLD.0x005fcc78	src/Develop/Units/d3/d3_BeginScenePass.c: .data VECTOR3 {200,200,200} ambient/clear color in d3_BeginSceneP...
+2026-11-28	GOLDTL.0x0067a2ac	g_67a2ac	d3_LightingEnabled	inferred	high	-	src/Develop/Units/d3/d3_BeginScenePass.c: .data char lighting state flag (=1) in d3_BeginScenePass.c, d3_SetRenderMaterialS...
+2026-11-28	GOLD.0x005eb310	g_662454	imp_AIL_digital_handle_release	attested	high	GOLDTL.0x00662454	src/Develop/Units/Msx/msx_ReleaseDigitalHandle.c: IAT import mss32.dll!_AIL_digital_handle_releas...
+2026-11-28	GOLDTL.0x00662454	g_662454	imp_AIL_digital_handle_release	attested	high	GOLD.0x005eb310	src/Develop/Units/Msx/msx_ReleaseDigitalHandle.c: IAT import mss32.dll!_AIL_digital_handle_releas...
+2026-11-28	GOLD.0x005ece60	g_6640e8	dbl_0_01	inferred	high	GOLDTL.0x006640e8	src/Develop/DieGildeAddOn/game/GOLDTL.fcn_004b6f00.c: .rdata double 0.01 used as percentage scale in GOLDTL.fcn_004b6f0...
+2026-11-28	GOLDTL.0x006640e8	g_6640e8	dbl_0_01	inferred	high	GOLD.0x005ece60	src/Develop/DieGildeAddOn/game/GOLDTL.fcn_004b6f00.c: .rdata double 0.01 used as percentage scale in GOLDTL.fcn_004b6f0...
+2026-11-28	GOLD.0x005f2124	g_6761a4	str_CharacterIdle_Invalid_character	attested	high	GOLDTL.0x006761a4	src/Develop/DieGildeAddOn/game/CharacterIdle.c: .data string 'CharacterIdle(): Invalid chara...
+2026-11-28	GOLDTL.0x006761a4	g_6761a4	str_CharacterIdle_Invalid_character	attested	high	GOLD.0x005f2124	src/Develop/DieGildeAddOn/game/CharacterIdle.c: .data string 'CharacterIdle(): Invalid chara...
+2026-11-28	GOLD.0x0060f188	g_68deb8	str_fmt_s_dollar_A	attested	high	GOLDTL.0x0068deb8	src/Develop/DieGildeAddOn/game/amt_NotifyLowRankEligibility.c: .data format string '%s$A' in amt_NotifyLowRan...
+2026-11-28	GOLDTL.0x0068deb8	g_68deb8	str_fmt_s_dollar_A	attested	high	GOLD.0x0060f188	src/Develop/DieGildeAddOn/game/amt_NotifyLowRankEligibility.c: .data format string '%s$A' in amt_NotifyLowRan...
+2026-11-28	GOLD.0x006326d4	g_6b72b4	msx_PrimaryTrackActive	inferred	high	GOLDTL.0x006b72b4	src/Develop/Units/Msx/msx.h: alias at msx_Tracks[0]+0x104 tracking active playback flag in msx.h
+2026-11-28	GOLDTL.0x006b72b4	g_6b72b4	msx_PrimaryTrackActive	inferred	high	GOLD.0x006326d4	src/Develop/Units/Msx/msx.h: alias at msx_Tracks[0]+0x104 tracking active playback flag in msx.h
+2026-11-28	GOLD.0x006333cc	g_6b7fac	gm_GameTicks	inferred	high	GOLDTL.0x006b7fac	src/Develop/DieGildeAddOn/game/ch_UpdateWait.c: game tick counter incremented in tb_TimerCallback.c, checked in ch_...
+2026-11-28	GOLDTL.0x006b7fac	g_6b7fac	gm_GameTicks	inferred	high	GOLD.0x006333cc	src/Develop/DieGildeAddOn/game/ch_UpdateWait.c: game tick counter incremented in tb_TimerCallback.c, checked in ch_...
+2026-11-28	GOLD.0x006f2448	g_774800	gm_AllEntitiesControllable	inferred	high	GOLDTL.0x00774800	src/Develop/DieGildeAddOn/game/gm_GetEntityControlMask.c: all-entities-controllable debug flag in gm_...
+2026-11-28	GOLDTL.0x00774800	g_774800	gm_AllEntitiesControllable	inferred	high	GOLD.0x006f2448	src/Develop/DieGildeAddOn/game/gm_GetEntityControlMask.c: all-entities-controllable debug flag in gm_...
+2026-11-28	GOLD.0x0076fa60	g_7f3b00	d3_BuildingCategorySceneIndices	inferred	high	GOLDTL.0x007f3b00	src/Develop/Units/d3/d3_ResetSceneContextIndices.c: short[17] building-category to scene context...
+2026-11-28	GOLDTL.0x007f3b00	g_7f3b00	d3_BuildingCategorySceneIndices	inferred	high	GOLD.0x0076fa60	src/Develop/Units/d3/d3_ResetSceneContextIndices.c: short[17] building-category to scene context...
+2026-11-28	GOLD.0x00a68c20	g_aed220	cm_AttributePacketData	inferred	high	GOLDTL.0x00aed220	src/Develop/DieGildeAddOn/command/cm_RequestChangeAttribute.c: 0x7c-byte attribute change/set packet buff...
+2026-11-28	GOLDTL.0x00aed220	g_aed220	cm_AttributePacketData	inferred	high	GOLD.0x00a68c20	src/Develop/DieGildeAddOn/command/cm_RequestChangeAttribute.c: 0x7c-byte attribute change/set packet buff...
+2026-11-28	GOLD.0x01432028	g_149d188	txt_TextBankBuffers	inferred	high	GOLDTL.0x0149d188	src/Develop/Units/vfs/txt_ReleaseTextBank.c: alias into txt_TextBanks (int[i*29]) freed via m_FreeTracked i...
+2026-11-28	GOLDTL.0x0149d188	g_149d188	txt_TextBankBuffers	inferred	high	GOLD.0x01432028	src/Develop/Units/vfs/txt_ReleaseTextBank.c: alias into txt_TextBanks (int[i*29]) freed via m_FreeTracked i...
+2026-11-28	GOLDTL.0x006a56d0	g_6a56d0	str_he_AllocNone_Invalid_HE_Type	attested	high	-	src/Develop/DieGildeAddOn/game/he_AllocNone.c: .data string 'he_AllocNone(): Invalid HE-Type : %i, von Spiele...
+2026-11-28	GOLDTL.0x007f4cd0	g_7f4cd0	gm_EntityNameField	inferred	high	-	src/Develop/DieGildeAddOn/game/he_AllocNone.c: alias at g_7f4ca0+0x30 (entity name string field per 0x21c record) in he_All...
+2026-11-28	GOLD.0x01467380	g_01467380	io_CursorXGold	inferred	high	-	src/Develop/Units/d2.v1/client_cursor.h: GOLD-only active cursor X short updated in io_PollInputSnapshots.c & read in d2_Handle...
+2026-11-28	GOLD.0x01467382	g_01467382	io_CursorYGold	inferred	high	-	src/Develop/Units/d2.v1/client_cursor.h: GOLD-only active cursor Y short updated in io_PollInputSnapshots.c & read in d2_Handle...
+2026-11-28	GOLDTL.0x014ce8c2	g_14ce8c2	io_ActiveCursorY	inferred	high	-	src/Develop/Units/d3/d3_UpdateFreeCameraInput.c: active cursor Y short copied from io_PolledCursorY in client_state.c & read...
+2026-11-28	GOLDTL.0x014cf902	g_14cf902	io_PolledCursorY	inferred	high	-	src/Develop/Units/d3/d3_UpdateFreeCameraInput.c: polled cursor Y short snapshot in client_state.c & d3_UpdateFreeCameraInput.c
+2026-11-28	GOLDTL.0x007e2704	g_7e2704	d2_EnteredBuildingEntity	inferred	high	-	src/Develop/DieGildeAddOn/game/d2_EnterBuildingObjekt.c: entered building entity pointer set in d2_EnterBuildingObjekt.c
+2026-11-28	GOLDTL.0x007e2708	g_7e2708	d2_EnteredBuildingObjekt	inferred	high	-	src/Develop/DieGildeAddOn/game/d2_EnterBuildingObjekt.c: entered building objekt handle returned by fcn_00502cd0 in d...
+2026-11-28	GOLD.0x005eb010	g_662008	imp_RegSetValueExA	attested	high	GOLDTL.0x00662008	src/Develop/DieGildeAddOn/game/io_WriteRegistryString.c: IAT import ADVAPI32.dll!RegSetValueExA called in io_...
+2026-11-28	GOLD.0x005f216c	g_6761ec	str_DeleteCharacterAnimations_Invalid	attested	high	-	src/Develop/DieGildeAddOn/game/KillCharacterAnimations.c: .data string 'DeleteCharacterAnimations(): Inval...
+2026-11-28	GOLD.0x005f2c78	g_676cf8	str_TriggerEmitter_invalid_handle	attested	high	-	src/Develop/Units/m_alloc/d3_TriggerEmitter.c: .data string 'TriggerEmitter: invalid handle...' in d3_TriggerE...
+2026-11-28	GOLD.0x006333d8	g_6b7fb8	tb_TimerTicks	inferred	high	-	src/Develop/Units/m_alloc/d2_CreateOverlaySprite.c: timer interrupt tick counter incremented in tb_TimerCallback.c, used for sprit...
+2026-11-28	GOLD.0x00f8f0a0	g_1015ec0	d2_OverlaySprites	inferred	high	GOLDTL.0x01015ec0	src/Develop/Units/d2.v1/client_sprites.h: Sprite*[32] overlay sprite slot array in client_sprites.h & d2_Crea...
+2026-11-28	GOLDTL.0x00662d40	g_662d40	d3_UnitAxisVectors	inferred	high	GOLD.0x005ebb74	src/Develop/Units/d3/d3_UpdateCannonAimMatrices.c: .rdata 3x4 unit axis vectors (Z,X,Y) passed to d3_Transfor...
+2026-11-28	GOLDTL.0x00679060	g_679060	str_fmt_s	attested	high	GOLD.0x005f8318	src/Develop/Units/d2.v1/d2_RunAlchemistryWorkshopDialog.c: .data format string '%s' in d2_RunAlchemistryWorkshopDialog...
+2026-11-28	GOLDTL.0x006ab4d4	g_6ab4d4	str_NACHRICHTEN_FRIEDHOF_12	attested	high	-	src/Develop/DieGildeAddOn/game/he_NotifyFriedhof12.c: .data string '_NACHRICHTEN_FRIEDHOF_12' in he_NotifyFriedhof...
+2026-11-28	GOLDTL.0x00772ea4	g_772ea4	cut_CombatCancelledEntity	inferred	high	-	src/Develop/DieGildeAddOn/game/cut_CancelActorActions.c: combat entity whose actions are cancelled in cut_CancelActo...
+2026-11-28	GOLD.0x00a68d40	g_aed340	cm_IncomingPacketData	inferred	high	-	src/Develop/DieGildeAddOn/command/client_packet_queue.h: assembled incoming command payload buffer in client_packet_queue....
+2026-11-28	GOLDTL.0x009a3800	g_9a3800	cm_CrimeRecords	inferred	high	-	src/Develop/Units/vfs/ls_SaveCrimeRecords.c: 512-entry CRIME_RECORD/order table saved/loaded in ls_SaveCrimeRecords.c & ls_Loa...
+2026-11-28	GOLDTL.0x00662aa0	g_662aa0	dbl_10	inferred	high	-	src/Develop/DieGildeAddOn/game/ai_StartSpionage.c: .rdata double 10.0 (0x4024000000000000) candidate search radius base in ai_StartSpio...
+2026-11-28	GOLDTL.0x007725ac	g_7725ac	d2_ExcludedShapeNames	inferred	high	-	src/Develop/Units/m_alloc/d2_Show.c: array of 0x30-byte uncached shape bank names searched in d2_Show.c & allocated in d...
+2026-11-28	GOLDTL.0x01038144	g_1038144	d2_FormPageWindows	inferred	high	-	src/Develop/Units/d2.v1/d2_SetFormElementValue.c: alias into form page table window ID array in d2_SetFormElementValue.c
+2026-11-28	GOLDTL.0x006a375c	g_6a375c	gm_PlayerCount	inferred	high	GOLD.0x006248a4	src/Develop/DieGildeAddOn/game/he_CountActiveTradeActions.c: active player count initialized in d2_ChoosePlayerCo...
+2026-11-28	GOLDTL.0x00868080	g_868080	gm_CityDisplayNames	inferred	high	-	src/Develop/DieGildeAddOn/game/hst_ParseDate.c: alias at g_868060+0x20 holding per-city display name string indexed by g_7...
+2026-11-28	GOLDTL.0x00772d14	g_772d14	msx_SavedTrackState	inferred	high	GOLD.0x006f0b64	src/Develop/Units/Msx/msx_OverrideMusicTrack.c: saved low byte of g_772d10 across msx_OverrideMusicTrack.c &...
+2026-11-28	GOLDTL.0x00772e9c	g_772e9c	cut_CombatDefenderEntity	inferred	high	-	src/Develop/Units/d3/cut_UpdateActiveBombs.c: defender combat party entity pointer in d2_ShowCombatEndCutscene.c, cut...
+2026-11-28	GOLDTL.0x00772fe4	g_772fe4	ahm_RecipePrototypes	inferred	high	-	src/Develop/DieGildeAddOn/game/ahm_FindRecipePrototypeByKey.c: ALCHEMY_RECIPE_PROTOTYPE* array allocated in ahm_LoadAlche...
+2026-11-28	GOLDTL.0x007e43a8	g_7e43a8	gm_HourlyWeatherSlots	inferred	high	-	src/Develop/Units/vfs/ls_SaveWeatherAndSlots.c: Tabs_7e43a8 24-hour weather intensity/wind table saved in ls_SaveWeather...
+2026-11-28	GOLDTL.0x01015f4c	g_1015f4c	d2_WindowMetricsView	inferred	high	-	src/Develop/Units/d2.v1/d2_InitWindowBounds.c: alias at g_1015f40+0xc (D2_WIN width/bounds start) in d2_InitWindowBounds.c
+2026-11-28	GOLDTL.0x00774a34	g_774a34	lb_LobbyPlayerList	inferred	high	-	src/Develop/DieGildeAddOn/game/d3_FlushLoadAndPreloadQueue.c: int* lobby player ID array returned by lb_GetPlayerList in d3...
+2026-11-28	GOLDTL.0x00772524	g_772524	d2_CurrentFontBank	inferred	high	-	src/Develop/Units/d2.v1/d2_RenderMarkupLine.c: char* active bitmap font/glyph bank passed to d2_GetBankEntry in d2_RenderMa...
+2026-11-28	GOLDTL.0x007dc420	g_7dc420	he_HandlungSearchCursor	inferred	high	-	src/Develop/DieGildeAddOn/game/he_StartHandlungSearch.c: HE_ACTION* iterator cursor scanning g_77e980 in he_StartHandl...
+2026-11-28	GOLDTL.0x0100dc04	g_100dc04	ai_LastTurnTimestamp	inferred	high	-	src/Develop/DieGildeAddOn/game/ai_InitContextAndGoodsLists.c: GAME_TIMESTAMP last AI turn time initialized in ai_InitCon...
+2026-11-28	GOLD.0x005eb2b0	g_66234c	imp_closesocket	attested	high	GOLDTL.0x0066234c	src/Develop/Units/net/nt_CloseClientConnection.c: IAT slot WS2_32.dll!#3 (closesocket) called in nt_CloseClientConnection
+2026-11-28	GOLD.0x005eb2b8	g_662360	imp_WSACleanup	attested	high	-	src/Develop/Units/net/nt_CloseClientConnection.c: IAT slot WS2_32.dll!#116 (WSACleanup) called in nt_CloseClientConnection
+2026-11-28	GOLD.0x005eb2c8	g_662374	imp_shutdown	attested	high	-	src/Develop/Units/net/nt_CloseClientConnection.c: IAT slot WS2_32.dll!#22 (shutdown) called in nt_CloseClientConnection
+2026-11-28	GOLD.0x00633160	g_6b7d40	nt_WsaInitialized	inferred	high	-	src/Develop/Units/net/nt_CloseClientConnection.c: Winsock startup flag checked/cleared in nt_CloseClientConnection; net.c twin nt_WsaStarted
+2026-11-28	GOLD.0x01460ae0	g_14cbca0	nt_ClientSocket	inferred	high	GOLDTL.0x014cbca0	src/Develop/Units/net/nt_CloseClientConnection.c: Client TCP SOCKET handle closed in nt_CloseClientConnection and checked across main/gm loops; net.c twin nt_Socket
+2026-11-28	GOLD.0x01460af0	g_14cbcb0	nt_ConnectionClosed	inferred	high	-	src/Develop/Units/net/nt_CloseClientConnection.c: Client connection-closed flag set to 1 in nt_CloseClientConnection; net.c twin nt_Closed
+2026-11-28	GOLD.0x005eb788	g_6628a8	flt_0_0	attested	high	GOLDTL.0x006628a8	src/Develop/DieGildeAddOn/game/gm_GetCityStatsSummary.c: 0.0f float literal (__real@00000000) returned by gm_GetCityStatsSummary and compared across game/d3
+2026-11-28	GOLD.0x006f1b9c	g_773d4c	gm_CityPopulation	inferred	high	GOLDTL.0x00773d4c	src/Develop/DieGildeAddOn/game/gm_GetCityStatsSummary.c: Current city population float stepped in gm_StepCityPopulation and copied to summary+0x18 in gm_GetCityStatsSummary
+2026-11-28	GOLD.0x0091b4c0	g_99f5e0	gm_CityStatsBuffer	inferred	high	GOLDTL.0x0099f5e0	src/Develop/DieGildeAddOn/game/gm_GetCityStatsSummary.c: 40-byte float[10] city stats snapshot buffer copied in gm_UpdateCityStats and gm_GetCityStatsSummary
+2026-11-28	GOLDTL.0x006628a8	g_6628a8	flt_0_0	attested	high	GOLD.0x005eb788	src/Develop/DieGildeAddOn/game/gm_GetCityStatsSummary.c: 0.0f float literal (__real@00000000) returned by gm_GetCityStatsSummary and compared across game/d3
+2026-11-28	GOLDTL.0x00773d4c	g_773d4c	gm_CityPopulation	inferred	high	GOLD.0x006f1b9c	src/Develop/DieGildeAddOn/game/gm_GetCityStatsSummary.c: Current city population float stepped in gm_StepCityPopulation and copied to summary+0x18 in gm_GetCityStatsSummary
+2026-11-28	GOLDTL.0x0099f5e0	g_99f5e0	gm_CityStatsBuffer	inferred	high	GOLD.0x0091b4c0	src/Develop/DieGildeAddOn/game/gm_GetCityStatsSummary.c: 40-byte float[10] city stats snapshot buffer copied in gm_UpdateCityStats and gm_GetCityStatsSummary
+2026-11-28	GOLD.0x0060eac0	g_68d780	srv_EntityKindNames	attested	high	-	src/Develop/DieGildeAddOnServer/server_stats.h: char[][24] entity class names starting with 'DUMMY_NPC', indexed by entity[2] in srv_FormatStatIdentity
+2026-11-28	GOLD.0x005ebba4	g_662d70	d3_ZeroVec4	inferred	high	GOLDTL.0x00662d70	src/Develop/DieGildeAddOn/game/ch_motion.h: Zeroed const float[4] {0,0,0,0} used as origin/zero vector in ch_MoveCharacter2Universe, d3_SpawnCityMarkerObject, CreateEmitter
+2026-11-28	GOLD.0x005f122c	g_6752a4	ch_DefaultMirrorFlag	inferred	high	-	src/Develop/DieGildeAddOn/game/ch_motion.h: Default node->flags->mirror/darstellungsflag byte updated in d3_ApplyGraphicsOptions and applied in ch_CreateMesh/ch_MoveCharacter2Universe
+2026-11-28	GOLD.0x005f8430	g_6791c8	evt_ActiveContextId	inferred	high	GOLDTL.0x006791c8	src/Develop/DieGildeAddOn/game/ch_motion.h: Active event context ID reset to -1 by evt_ResetCurrentContextId and compared to evt_CurrentScript+0x104
+2026-11-28	GOLD.0x005fb5b0	g_67a370	d3_ActiveScene	inferred	high	GOLDTL.0x0067a370	src/Develop/DieGildeAddOn/game/ch_motion.h: Active 3D scene/universe pointer passed to d3_VisitSceneObjects/d3sm_GetSceneSuperMap and compared against object owners
+2026-11-28	GOLD.0x006332dc	g_6b7ebc	evt_WaitingScriptTask	inferred	high	GOLDTL.0x006b7ebc	src/Develop/DieGildeAddOn/game/ch_motion.h: Suspended script task pointer whose callback slot +0x44 is checked by WaitForSample, WalkToDummy, NewCameraFlight, etc.
+2026-11-28	GOLDTL.0x01008420	g_1008420	am_MethodIniPath	inferred	high	GOLD.0x00f83da0	src/Develop/DieGildeAddOn/game/am_RegisterMethod.c: Path buffer for ai_method_addon.ini passed as lpFileName to GetPrivateProfileStringA in am_RegisterMethod
+2026-11-28	GOLDTL.0x01008540	g_1008540	am_Methods	inferred	high	GOLD.0x00f83ec0	src/Develop/DieGildeAddOn/game/am_RegisterMethod.c: AM_METHOD[0x49] AI method registry table indexed by d->type in am_RegisterMethod
+2026-11-28	GOLD.0x00f83da0	g_1008420	am_MethodIniPath	inferred	high	GOLDTL.0x01008420	src/Develop/DieGildeAddOn/game/am_RegisterMethod.c: Path buffer for ai_method_addon.ini passed as lpFileName to GetPrivateProfileStringA in am_RegisterMethod
+2026-11-28	GOLD.0x00f83ec0	g_1008540	am_Methods	inferred	high	GOLDTL.0x01008540	src/Develop/DieGildeAddOn/game/am_RegisterMethod.c: AM_METHOD[0x49] AI method registry table indexed by d->type in am_RegisterMethod
+2026-11-28	GOLD.0x00631090	g_6b5c60	str_empty	attested	high	GOLDTL.0x006b5c60	src/Develop/DieGildeAddOn/game/am_RegisterMethod.c: Empty NUL string literal '' passed as default text/reset string across UI, game, and INI calls
+2026-11-28	GOLD.0x005eb348	g_662408	imp_AIL_close_stream	attested	high	GOLDTL.0x00662408	src/Develop/Units/Msx/msx_CloseStream.c: IAT slot mss32.dll!_AIL_close_stream@4 called in msx_CloseStream
+2026-11-28	GOLD.0x00633370	g_6b7f50	msx_StreamHandles	inferred	high	GOLDTL.0x006b7f50	src/Develop/Units/Msx/msx_CloseStream.c: int*[16] per-wave-driver dynamic stream handle arrays managed in msx_OpenStream, msx_CloseStream, msx_CloseAllStreams
+2026-11-28	GOLDTL.0x00662408	g_662408	imp_AIL_close_stream	attested	high	GOLD.0x005eb348	src/Develop/Units/Msx/msx_CloseStream.c: IAT slot mss32.dll!_AIL_close_stream@4 called in msx_CloseStream
+2026-11-28	GOLDTL.0x006b7f50	g_6b7f50	msx_StreamHandles	inferred	high	GOLD.0x00633370	src/Develop/Units/Msx/msx_CloseStream.c: int*[16] per-wave-driver dynamic stream handle arrays managed in msx_OpenStream, msx_CloseStream, msx_CloseAllStreams
+2026-11-28	GOLD.0x005ebb40	g_662cf8	flt_100_0	attested	high	GOLDTL.0x00662cf8	src/Develop/DieGildeAddOn/game/gm_NotifyEntityEventTarget.c: 100.0f float literal (0x42c80000) used in gm_NotifyEntityEventTarget and game/UI scaling
+2026-11-28	GOLD.0x005edbe0	g_664e78	dbl_5_0	attested	high	GOLDTL.0x00664e78	src/Develop/DieGildeAddOn/game/gm_NotifyEntityEventTarget.c: 5.0 double literal (0x4014000000000000) used in gm_NotifyEntityEventTarget
+2026-11-28	GOLDTL.0x00662cf8	g_662cf8	flt_100_0	attested	high	GOLD.0x005ebb40	src/Develop/DieGildeAddOn/game/gm_NotifyEntityEventTarget.c: 100.0f float literal (0x42c80000) used in gm_NotifyEntityEventTarget and game/UI scaling
+2026-11-28	GOLDTL.0x00664e78	g_664e78	dbl_5_0	attested	high	GOLD.0x005edbe0	src/Develop/DieGildeAddOn/game/gm_NotifyEntityEventTarget.c: 5.0 double literal (0x4014000000000000) used in gm_NotifyEntityEventTarget
+2026-11-28	GOLD.0x005eec60	g_665f08	d2_TutorialState	inferred	high	GOLDTL.0x00665f08	src/Develop/Units/d2.v1/d2_TutorialAllowsFlag.c: Pointer to tutorial state object holding form handles, progress gauge, voice handle, and stage flags across d2_tutorial/d2_TutorialAllowsFlag
+2026-11-28	GOLD.0x006333e0	g_6b7fc0	tb_TimerPaused	inferred	high	GOLDTL.0x006b7fc0	src/Develop/Units/d2.v1/d2_TutorialAllowsFlag.c: Volatile int pause flag in tb_TimerCallback (0x6b7fa8..0x6b7fcc timer block) gating periodic callbacks, camera updates, and tutorial checks
+2026-11-28	GOLDTL.0x00665f08	g_665f08	d2_TutorialState	inferred	high	GOLD.0x005eec60	src/Develop/Units/d2.v1/d2_TutorialAllowsFlag.c: Pointer to tutorial state object holding form handles, progress gauge, voice handle, and stage flags across d2_tutorial/d2_TutorialAllowsFlag
+2026-11-28	GOLDTL.0x006b7fc0	g_6b7fc0	tb_TimerPaused	inferred	high	GOLD.0x006333e0	src/Develop/Units/d2.v1/d2_TutorialAllowsFlag.c: Volatile int pause flag in tb_TimerCallback (0x6b7fa8..0x6b7fcc timer block) gating periodic callbacks, camera updates, and tutorial checks
+2026-11-28	GOLD.0x0074df40	g_7d1d80	he_EventCreateHandlers	inferred	high	GOLDTL.0x007d1d80	src/Develop/DieGildeAddOn/game/he_RegisterHandler.c: Table of 0xa7 event creation handlers registered by he_RegisterHandler and invoked in he_CreateEventFromRequest
+2026-11-28	GOLD.0x00758600	g_7dc440	he_EventDispatchHandlers	inferred	high	GOLDTL.0x007dc440	src/Develop/DieGildeAddOn/game/he_RegisterHandler.c: Table of 0xa7 event dispatch handlers registered by he_RegisterHandler and invoked in he_RunDueActions, he_RunQueuedActions, he_DispatchFlaggedEvents
+2026-11-28	GOLDTL.0x007d1d80	g_7d1d80	he_EventCreateHandlers	inferred	high	GOLD.0x0074df40	src/Develop/DieGildeAddOn/game/he_RegisterHandler.c: Table of 0xa7 event creation handlers registered by he_RegisterHandler and invoked in he_CreateEventFromRequest
+2026-11-28	GOLDTL.0x007dc440	g_7dc440	he_EventDispatchHandlers	inferred	high	GOLD.0x00758600	src/Develop/DieGildeAddOn/game/he_RegisterHandler.c: Table of 0xa7 event dispatch handlers registered by he_RegisterHandler and invoked in he_RunDueActions, he_RunQueuedActions, he_DispatchFlaggedEvents
+2026-11-28	GOLD.0x0063317c	g_6b7d5c	nt_SentBytes	inferred	high	-	src/Develop/Units/net/net.h: Total sent byte counter in net.h formatted with nt_ReceivedBytes in nt_FormatPacketStats and zeroed in nt_ResetPacketStats
+2026-11-28	GOLD.0x00633180	g_6b7d60	nt_SentPacketCount	inferred	high	-	src/Develop/Units/net/net.h: Total sent packet counter in net.h formatted with nt_ReceivedPacketCount in nt_FormatPacketStats and zeroed in nt_ResetPacketStats
+2026-11-28	GOLD.0x01460b00	g_14cbcc0	nt_PacketStats	inferred	high	-	src/Develop/Units/net/net.h: int[0x6a][4] per-packet-type recv/send packet and byte stats table zeroed in nt_ResetPacketStats and formatted in nt_FormatPacketStats
+2026-11-28	GOLDTL.0x01042a04	g_1042a04	d3_FrameVertexCount	inferred	high	-	src/Develop/Units/d3/d3_RenderFrame.c: Per-frame traversed vertex count (+f310/vtable+0x14) cleared in d3_RenderFrame and copied to 0x6b8040 in d3_RenderScene
+2026-11-28	GOLDTL.0x01042a08	g_1042a08	d3_RenderedFaceCount	inferred	high	-	src/Develop/Units/d3/d3_RenderFrame.c: Per-frame rendered face count (+f314/vtable+0x10) cleared in d3_RenderFrame and copied to 0x6b802c in d3_RenderScene
+2026-11-28	GOLDTL.0x010432a8	g_10432a8	d3_FrameFaceCount	inferred	high	-	src/Develop/Units/d3/d3_RenderFrame.c: Per-frame traversed face count (+f314/vtable+0x10) cleared in d3_RenderFrame and copied to 0x6b8030 in d3_RenderScene
+2026-11-28	GOLDTL.0x014ce922	g_14ce922	io_MouseY	inferred	high	-	src/Develop/DieGildeAddOn/game/io_InitDirectInputMouse.c: short cursor Y position initialized to 200 in io_InitDirectInputMouse and clamped/updated in io_PollMouseInput and io_PollDirectInputMouse
+2026-11-28	GOLD.0x005eb2ec	g_662428	imp_AIL_stream_status	attested	high	GOLDTL.0x00662428	src/Develop/Units/Msx/msx_GetStreamStatus.c: IAT slot mss32.dll!_AIL_stream_status@4 called in msx_GetStreamStatus
+2026-11-28	GOLDTL.0x00662428	g_662428	imp_AIL_stream_status	attested	high	GOLD.0x005eb2ec	src/Develop/Units/Msx/msx_GetStreamStatus.c: IAT slot mss32.dll!_AIL_stream_status@4 called in msx_GetStreamStatus
+2026-11-28	GOLD.0x005eb320	g_6623b0	imp_AIL_set_digital_master_volume	attested	high	GOLDTL.0x006623b0	src/Develop/Units/Msx/msx_SetMasterVolume.c: IAT slot mss32.dll!_AIL_set_digital_master_volume@8 called in msx_SetMasterVolume
+2026-11-28	GOLDTL.0x006623b0	g_6623b0	imp_AIL_set_digital_master_volume	attested	high	GOLD.0x005eb320	src/Develop/Units/Msx/msx_SetMasterVolume.c: IAT slot mss32.dll!_AIL_set_digital_master_volume@8 called in msx_SetMasterVolume
+2026-11-28	GOLD.0x005ecf1c	g_6641a4	gm_ValidDiceStages	inferred	high	GOLDTL.0x006641a4	src/Develop/DieGildeAddOn/game/gm_IsDiceStageValid.c: Table of valid (diceValue, stage) integer pairs searched in gm_IsDiceStageValid
+2026-11-28	GOLDTL.0x006641a4	g_6641a4	gm_ValidDiceStages	inferred	high	GOLD.0x005ecf1c	src/Develop/DieGildeAddOn/game/gm_IsDiceStageValid.c: Table of valid (diceValue, stage) integer pairs searched in gm_IsDiceStageValid
+2026-11-28	GOLD.0x005fb800	g_67a470	d3_SceneEvents	inferred	high	GOLDTL.0x0067a470	src/Develop/Units/d3/d3_FindEventName.c: SCENE_EVENT_ENTRY[8] table ('NONE','TEST','ZOOM_IN_OBJECT',...) searched by d3_FindEventName and d3_FindSceneEventId
+2026-11-28	GOLDTL.0x0067a470	g_67a470	d3_SceneEvents	inferred	high	GOLD.0x005fb800	src/Develop/Units/d3/d3_FindEventName.c: SCENE_EVENT_ENTRY[8] table ('NONE','TEST','ZOOM_IN_OBJECT',...) searched by d3_FindEventName and d3_FindSceneEventId
+2026-11-28	GOLD.0x0061164c	g_69037c	str_Hm_das_ist_doch_nicht_verboten	attested	high	GOLDTL.0x0069037c	src/Develop/DieGildeAddOn/game/gs_FormatStraftatTextLow.c: Default fallback string 'Hm, das ist doch nicht verboten' copied in gs_FormatStraftatTextLow and gs_FormatStraftatTextMid
+2026-11-28	GOLDTL.0x0069037c	g_69037c	str_Hm_das_ist_doch_nicht_verboten	attested	high	GOLD.0x0061164c	src/Develop/DieGildeAddOn/game/gs_FormatStraftatTextLow.c: Default fallback string 'Hm, das ist doch nicht verboten' copied in gs_FormatStraftatTextLow and gs_FormatStraftatTextMid
+2026-11-28	GOLD.0x0063319c	g_6b7d7c	sb_WaveDriver	inferred	high	GOLDTL.0x006b7d7c	src/Develop/Units/Msx/sb_SetVoiceLoopCount.c: Miles wave driver handle checked by sb_* voice/sample functions and released via msx_ReleaseWaveDriver in d3snd_Shutdown
+2026-11-28	GOLDTL.0x006b7d7c	g_6b7d7c	sb_WaveDriver	inferred	high	GOLD.0x0063319c	src/Develop/Units/Msx/sb_SetVoiceLoopCount.c: Miles wave driver handle checked by sb_* voice/sample functions and released via msx_ReleaseWaveDriver in d3snd_Shutdown
+2026-11-28	GOLD.0x006f0d8c	g_772f3c	cut_SkipMode	inferred	medium	GOLDTL.0x00772f3c	src/Develop/DieGildeAddOn/game/evt_StopScriptIfActive.c: Flag skipping cutscene waits, scripts, ambient tracks, and weather effects when nonzero; cleared in gm_ShutdownGameRuntime
+2026-11-28	GOLDTL.0x00772f3c	g_772f3c	cut_SkipMode	inferred	medium	GOLD.0x006f0d8c	src/Develop/DieGildeAddOn/game/evt_StopScriptIfActive.c: Flag skipping cutscene waits, scripts, ambient tracks, and weather effects when nonzero; cleared in gm_ShutdownGameRuntime
+2026-11-28	GOLD.0x006f25ac	g_774964	gm_InWorldHud	inferred	high	GOLDTL.0x00774964	src/Develop/DieGildeAddOn/loadsave/ls_CanSaveGame.c: Byte flag set to 1 while d2_RunWorldHudLoop is active and 0 on exit/modal subviews; checked by ls_CanSaveGame and cm_ExBlockCharacter
+2026-11-28	GOLDTL.0x00774964	g_774964	gm_InWorldHud	inferred	high	GOLD.0x006f25ac	src/Develop/DieGildeAddOn/loadsave/ls_CanSaveGame.c: Byte flag set to 1 while d2_RunWorldHudLoop is active and 0 on exit/modal subviews; checked by ls_CanSaveGame and cm_ExBlockCharacter
+2026-11-28	GOLD.0x00770b84	g_7f4ca4	gm_EntityIdField	inferred	high	GOLDTL.0x007f4ca4	src/Develop/DieGildeAddOn/game/he_SetActionSubject.c: Interior +4 (entity_id) field view of ENTITY_RECORD g_7f4ca0[0x300] (stride 0x21c)
+2026-11-28	GOLDTL.0x007f4ca4	g_7f4ca4	gm_EntityIdField	inferred	high	GOLD.0x00770b84	src/Develop/DieGildeAddOn/game/he_SetActionSubject.c: Interior +4 (entity_id) field view of ENTITY_RECORD g_7f4ca0[0x300] (stride 0x21c)
+2026-11-28	GOLD.0x00a68ca0	g_aed2a0	cm_SecondaryPacketDelta	inferred	high	GOLDTL.0x00aed2a0	src/Develop/DieGildeAddOn/command/cm_BeginSecondaryPacketDelta.c: Secondary command packet payload buffer initialized in cm_BeginSecondaryPacketDelta and sent via cm_SendChangeDesire
+2026-11-28	GOLDTL.0x00aed2a0	g_aed2a0	cm_SecondaryPacketDelta	inferred	high	GOLD.0x00a68ca0	src/Develop/DieGildeAddOn/command/cm_BeginSecondaryPacketDelta.c: Secondary command packet payload buffer initialized in cm_BeginSecondaryPacketDelta and sent via cm_SendChangeDesire
+2026-11-28	GOLD.0x0144a638	g_14b5798	d2_GrabpflegeTitleId	inferred	medium	GOLDTL.0x014b5798	src/Develop/Units/d2.v1/d2_StartGrabpflege.c: String/title ID passed as titleId to d2_RunGraveyardPickerDialog in d2_StartGrabpflege and d2_ShowGreenMessageBox in d2_ConfirmGrabpflege
+2026-11-28	GOLDTL.0x014b5798	g_14b5798	d2_GrabpflegeTitleId	inferred	medium	GOLD.0x0144a638	src/Develop/Units/d2.v1/d2_StartGrabpflege.c: String/title ID passed as titleId to d2_RunGraveyardPickerDialog in d2_StartGrabpflege and d2_ShowGreenMessageBox in d2_ConfirmGrabpflege
+2026-11-28	GOLDTL.0x006b5c60	g_6b5c60	str_empty	attested	high	GOLD.0x00631090	src/Develop/DieGildeAddOn/game/he_NotifyStraftatExpired.c: Empty NUL string literal '' passed as default text/reset string across UI, game, and INI calls
+2026-11-28	GOLDTL.0x00774a80	g_774a80	io_MessageFormatBuf	inferred	high	GOLD.0x006f26c8	src/Develop/DieGildeAddOn/game/he_NotifyStraftatExpired.c: Shared text formatting buffer populated via io_FormatTextBuffer and posted in he_Notify*/amt_NotifyOfficeSwap messages
+2026-11-28	GOLDTL.0x006628a0	g_6628a0	flt_1_0	attested	high	-	src/Develop/DieGildeAddOn/game/ai_MeisterTrade.c: 1.0f float literal (0x3f800000); flt_1 already used on GOLD.0x005eb780
+2026-11-28	GOLDTL.0x00773d78	g_773d78	gm_MarketEntity	inferred	high	GOLD.0x006f1bc8	src/Develop/DieGildeAddOn/game/ai_MeisterTrade.c: char* pointer to active market entity used in d2_OpenMarktstandPanel, snd_PlayMarketAmbient, d2_InitDefaultBookmarks, ai_PlanResourceRestock
+2026-11-28	GOLDTL.0x014cf736	g_14cf736	io_RightShiftKeyDown	inferred	high	-	src/Develop/Units/d2.v1/d2_SelectClickedCombatWorker.c: DirectInput keystate byte +0x36 (DIK_RSHIFT) in 0x14cf700 array checked in d2_HandleTextInput, d2_SelectClickedCombatWorker, cut_DispatchTacticalOrder
+2026-11-28	GOLDTL.0x007746a4	g_7746a4	d2_HoveredSceneObject	inferred	high	-	src/Develop/Units/d2.v1/d2_SelectClickedCombatWorker.c: char* 3D scene object under cursor returned by d3_FindSceneObjectAtScreenPoint and read in d2_UpdateHoverTooltip and d2_RunChooseCityDialog
+2026-11-28	GOLDTL.0x007f4e51	g_7f4e51	gm_EntityBlockedField	inferred	high	-	src/Develop/DieGildeAddOn/game/d2_UpdateBuildingGroundplan.c: Interior +0x1b1 field view of ENTITY_RECORD g_7f4ca0[0x300] (imprisoned/blocked ticks set in cm_ExBlockCharacter, checked in d2_EnterBuildingObjekt)
+2026-11-28	GOLDTL.0x00774680	g_774680	d2_GroundplanMaskSurface	inferred	high	-	src/Develop/DieGildeAddOn/game/d2_UpdateBuildingGroundplan.c: DirectDraw hit-test mask surface locked and pixel-sampled in d2_UpdateBuildingGroundplan and released in d2_DestroyAllHudPanels
+2026-11-28	GOLD.0x005f2614	g_676694	str_GetObjectHandle_not_found	attested	high	-	src/Develop/Unassigned/GetObjectHandle.c: Error format literal "GetObjectHandle: Could not find object '%s'" in GetObjectHandle.c
+2026-11-28	GOLD.0x005f3244	g_6772c8	str_Error_hex	attested	high	-	src/Develop/DieGildeAddOn/game/io_FormatInputError.c: Error format literal '\n\nError = %08x' in io_FormatInputError.c
+2026-11-28	GOLD.0x00633408	g_6b7fe8	vfs_CaseSensitive	attested	high	-	src/Develop/Units/vfs/vfs.h: Case-sensitive VFS comparison flag (#define g_vfs_case_sensitive g_6b7fe8 in vfs.c; distinct from SERVER.0x10034674)
+2026-11-28	GOLD.0x00fd7ba0	g_10432c0	d3_Universes	inferred	high	GOLDTL.0x010432c0	src/Develop/Units/d3/d3_GetSceneContextIndex.c: 0xf700-byte array of 64 Level universe records (stride 0x3dc) zeroed in d3_Init and indexed in d3_ClearSceneState/GOLDTL.d3_DisposeObject
+2026-11-28	GOLDTL.0x0067534c	g_67534c	str_ch_Create_Too_many_characters	attested	high	-	src/Develop/Units/m_alloc/ch_Create.c: Error message literal 'ch_Create:Too many characters!' in ch_Create.c
+2026-11-28	GOLDTL.0x006811b0	g_6811b0	str_dollar_C	attested	high	GOLD.0x00602548	src/Develop/Units/d2.v1/d2_RunChurchSermonDialog.c: Control formatting literal '$C' passed to io_AppendText across UI dialogs
+2026-11-28	GOLDTL.0x006ab4f0	g_6ab4f0	str_NACHRICHTEN_FRIEDHOF_13	attested	high	-	src/Develop/DieGildeAddOn/game/he_NotifyFriedhof13.c: Message sound/voice key '_NACHRICHTEN_FRIEDHOF_13' in he_NotifyFriedhof13.c
+2026-11-28	GOLDTL.0x009badd0	g_9badd0	lb_LocalClientId	inferred	high	-	src/Develop/DieGildeAddOn/command/lb_RequestLeaveLobby.c: Local client ID set in d3_InitSceneState and sent in lb_RequestToggleReady, lb_RequestLeaveLobby, cm_SendChatMessage
+2026-11-28	GOLDTL.0x0100b0c0	g_100b0c0	ai_ResourceRequests	inferred	high	-	src/Develop/DieGildeAddOn/game/ai_PlanResourceRestock.c: Seg[] array of AI resource stock/capacity/request slots bounded by ai_ResourceCount in ai_PlanResourceRestock/ai_CollectGoodsResources
+2026-11-28	GOLDTL.0x0068149c	g_68149c	str_dummy_TUER	attested	high	-	src/Develop/DieGildeAddOn/game/gm_PickRandomBuildingPoint.c: 'dummy_TUER' string/TLBLK11 constant used as building door dummy node name
+2026-11-28	GOLDTL.0x00772d10	g_772d10	d3snd_AmbientEnabled	inferred	high	GOLD.0x006f0b60	src/Develop/Units/d3/d3snd_UpdateAmbientSources.c: Unsigned char flag enabling d3snd_UpdateRainSoundTier and d3snd_UpdateAmbientSources, temporarily saved/disabled by msx_OverrideMusicTrack
+2026-11-28	GOLDTL.0x006b89e4	g_6b89e4	d3_InteriorSupermap	inferred	high	-	src/Develop/Units/d3/d3_InitUniverse.c: int* secondary interior supermap created in d3_LoadScene when g_6b8300 == 0 and read in d3_RenderProjectedShadow
+2026-11-28	GOLDTL.0x0077253c	g_77253c	d2_BlackTexture	inferred	high	-	src/Develop/Units/d2.v1/d2_DrawElementTooltip.c: Texture loaded from 'BLACK' in d2_Open and drawn for tooltip/word-wrap/window backgrounds
+2026-11-28	GOLDTL.0x007725c4	g_7725c4	d2_CursorStateId	inferred	high	-	src/Develop/Units/d2.v1/d2_DrawCursorAndCounters.c: Active mouse cursor sprite index passed to d2_DrawSpriteFromSet in d2_DrawCursorAndCounters
+2026-11-28	GOLDTL.0x0090e0a0	g_90e0a0	gm_RelationDeltaMatrix	inferred	high	-	src/Develop/DieGildeAddOn/game/amt_InitRulerEntity.c: char[0x300][0x300] secondary signed relation modifier matrix saved/loaded alongside g_869480 and updated in cm_ExUpdateRelationMatrix
+2026-11-28	GOLDTL.0x0077494c	g_77494c	nt_NetSyncFlags	inferred	high	GOLD.0x006f2594	src/Develop/Units/d2.v1/hst_ShowDueHistoryScroll.c: Network sync bitmask cleared and awaited in ls_LoadNetworkGame/ls_StartNetworkGame, ORed in cm_OrCommandFlags, bit 8 tested with socket state
+2026-11-28	GOLDTL.0x00662b20	g_662b20	dbl_0_4	attested	high	-	src/Develop/DieGildeAddOn/game/he_AccumulateEvent0a1Yield.c: 0.4 double literal (0x3fd999999999999a) used in he_AllocTransport
+2026-11-28	GOLDTL.0x00772f24	g_772f24	cut_ActivePlayerEntity	inferred	high	-	src/Develop/Units/d2.v1/d2_InitCombatUnitCards.c: Pointer to current turn/cutscene player entity set in cut_RunTurnRound and read in d2_InitCombatUnitCards/cut_RunTacticalCombat
+2026-11-28	GOLDTL.0x00773d48	g_773d48	gm_QueuedCommandCount	inferred	high	-	src/Develop/DieGildeAddOn/game/gm_CollectCityTaxOffers.c: Counter of queued commands incremented during round updates and flushed via cm_StepCommandQueue when > 0x40 in gm_AdvanceRoundCounters
+2026-11-28	GOLDTL.0x007e1f70	g_7e1f70	gm_SyncGameTime	inferred	high	-	src/Develop/Units/vfs/ls_LoadSavegame.c: pos14_7f4c00 clock initialized from gm_GameTime on save load, ticked in gm_AdvanceGameClock, broadcast by cm_RequestUpdateGameTime
+2026-11-28	GOLDTL.0x007e35c0	g_7e35c0	main_FrameHandlerStack	inferred	high	-	src/Develop/DieGildeAddOn/game/main_ExitToFrameHandler.c: Stack array of active frame loop handlers indexed by g_774650 and searched in main_ExitToFrameHandler
+2026-11-28	GOLDTL.0x00774a78	g_774a78	hp_ProdEntryList	inferred	high	GOLD.0x006f26c0	src/Develop/Units/m_alloc/GOLDTL.fcn_005b1b30.c: Singly linked struct Node* list head maintained by hp_RemoveProdEntry/ls_LoadList774a78/ls_SaveList774a78/ls_FreeList774a78
+2026-11-28	GOLDTL.0x0099f590	g_99f590	gm_LastCityPopTime	inferred	high	-	src/Develop/DieGildeAddOn/game/gm_StepCityPopulation.c: Blob14 timestamp recording last city population update in gm_StepCityPopulation, gm_UpdateCityStats, gm_UpdateEconomyStats
+2026-11-28	GOLDTL.0x014ce880	g_14ce880	d3_CameraTargetPos	inferred	high	-	src/Develop/Units/d3/d3_EndCameraAndUiMode.c: float[3] camera target position set in d3_AnimateObjectToTransform alongside d3_CameraTargetRotation and checked in d3_EndCameraAndUiMode
+2026-11-28	GOLD.0x004011d0	fcn_004011d0	vfs_ReadDword	inferred	high	GOLDTL.0x004011d0	vfs_ReadData(b,4,1,a) dword reader matching vfs_WriteDword
+2026-11-28	GOLD.0x0053f100	fcn_0053f100	he_TickEventDeals	inferred	high	GOLDTL.0x00546ed0	Decrements Deal[256] lifetime byte and clears id when 0
+2026-11-28	GOLDTL.0x004fbd20	fcn_004f97a0	gm_GetCitySkillAverage	inferred	high	GOLD.0x004f97a0	Clamped lookup of average city skill bytes set by gm_UpdateCityEconomyStats
