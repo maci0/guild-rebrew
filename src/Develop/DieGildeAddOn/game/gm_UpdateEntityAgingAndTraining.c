@@ -40,7 +40,7 @@ typedef struct {
 
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldValue(int, int, int, int*);
 void __cdecl cm_RequestChangeAttribute(void);
 int __cdecl gm_GetOppositeStatIndex(int);

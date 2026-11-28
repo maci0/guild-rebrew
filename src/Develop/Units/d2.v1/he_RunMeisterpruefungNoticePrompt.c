@@ -2,7 +2,7 @@
 
 // SIZE 0x2f4
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern trade_868080 g_868080[];
 extern unsigned char g_773d75;

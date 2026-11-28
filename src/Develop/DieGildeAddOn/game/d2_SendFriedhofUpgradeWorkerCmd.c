@@ -1,4 +1,4 @@
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 
 
@@ -30,7 +30,7 @@ typedef struct
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca0[];
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl io_FormatTextBuffer(void*, int, ...);

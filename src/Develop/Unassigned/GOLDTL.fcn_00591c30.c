@@ -17,7 +17,7 @@ typedef struct {
 } Ent591c;
 // SIZE 0xc
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Slot_779d00 g_779d00[];
 
 

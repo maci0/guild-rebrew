@@ -13,7 +13,7 @@ extern float g_6628a8;
 
 int __cdecl gm_GetKindRecord(int k, S0c* s);
 unsigned short __cdecl gm_RandomMod(unsigned short n);
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldDelta(int a, int b, int c, int* v);
 void __cdecl cm_RequestChangeAttribute(void);
 float __cdecl gm_ApplyEntityHealthDelta(unsigned short id, int v);

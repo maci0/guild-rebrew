@@ -1,7 +1,7 @@
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 typedef struct { unsigned char kind; unsigned char rest[0x24c]; } BuildingProto572ff0;
 typedef struct {

@@ -1,4 +1,4 @@
-#include "client_lighting.h"
+#include "Develop/Units/d3/client_lighting.h"
 extern int g_1041d0c;
 void __cdecl d3_SetViewport(float, float, float, float, int, int, int, unsigned int, unsigned int);
 int __cdecl d3_SetActiveCamera(int);

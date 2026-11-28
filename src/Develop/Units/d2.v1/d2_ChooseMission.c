@@ -14,7 +14,7 @@ struct list_4b3fe0 {
 };
 // SIZE 0x8c
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern List8c_102cbc8 g_102cbc8[];
 
 int __cdecl d2_LoadForm(int, int, char*);

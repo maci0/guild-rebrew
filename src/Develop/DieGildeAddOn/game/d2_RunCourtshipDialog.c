@@ -1,6 +1,6 @@
 #include <string.h>
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 char* __cdecl he_StartHandlungSearch(int n, ...);
 char* __cdecl he_fn_Handlung(void);

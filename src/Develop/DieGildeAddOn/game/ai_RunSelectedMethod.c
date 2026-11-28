@@ -1,4 +1,4 @@
-#include "client_method_registry.h"
+#include "Develop/DieGildeAddOn/game/client_method_registry.h"
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 extern AM_METHOD g_1008540[];
 extern char* g_77261c;

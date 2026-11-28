@@ -1,5 +1,5 @@
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 extern int g_772908;
 extern int g_772900;
 extern int d2_CurrentWindowId;

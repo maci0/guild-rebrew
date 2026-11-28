@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 #include <string.h>
-#include "client_types.h"
+#include "Develop/client_types.h"
 /* SIZE 0x21c */
 typedef struct {
 	unsigned short f0;

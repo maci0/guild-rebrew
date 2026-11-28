@@ -9,7 +9,7 @@ struct good {
 };
 #pragma pack()
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern unsigned char* lpGebaeudePROT;
 extern int g_774800;

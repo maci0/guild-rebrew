@@ -9,7 +9,7 @@ typedef struct {
 	char big[0x1fb8];    /* 0x318 work buffer */
 } PLEITE_CUTSCENE_FRAME;
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_data.h"

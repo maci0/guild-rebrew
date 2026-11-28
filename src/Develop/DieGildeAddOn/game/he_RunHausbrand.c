@@ -1,4 +1,4 @@
-#include "client_types.h"
+#include "Develop/client_types.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern volatile int g_6b7fb8;
 extern int d3_CurrentContextIndex;

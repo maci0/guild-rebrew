@@ -1,5 +1,5 @@
-#include "client_packet_queue.h"
-#include "client_types.h"
+#include "Develop/DieGildeAddOn/command/client_packet_queue.h"
+#include "Develop/client_types.h"
 
 #include "Develop/DieGildeAddOn/command/client_queued_packet.h"
 

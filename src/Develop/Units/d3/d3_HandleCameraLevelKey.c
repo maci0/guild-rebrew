@@ -14,7 +14,7 @@ extern int g_7e35c0[];
 
 void __cdecl d2_RunWorldHudLoop(void);
 void __cdecl d2_DispatchTutorialInput(int, int, int, int);
-#include "client_scene_transform.h"
+#include "Develop/Units/d3/client_scene_transform.h"
 void __cdecl d3_AnimateObjectTransform(char*, float*, float*, int, int);
 
 void __cdecl d3_HandleCameraLevelKey(void)

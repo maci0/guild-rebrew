@@ -1,8 +1,8 @@
 
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 
-#include "client_lighting.h"
+#include "Develop/Units/d3/client_lighting.h"
 
 int __cdecl d3_SetSceneLightColor(int* a, int* b, int* c)
 {

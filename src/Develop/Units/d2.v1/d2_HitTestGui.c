@@ -41,7 +41,7 @@ typedef struct Slot {
 // SIZE 0x3cc
 
 extern char* g_1015ea0;
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 extern void** g_772540;
 extern int g_67d38c;

@@ -33,7 +33,7 @@ typedef struct Game {
 } Game;
 
 extern volatile int g_6b7fb8;
-#include "client_sound.h"
+#include "Develop/Units/Msx/client_sound.h"
 extern int g_772e94;
 extern int g_772ea4;
 extern int g_772ea8;

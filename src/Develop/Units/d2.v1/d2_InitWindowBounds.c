@@ -23,7 +23,7 @@ struct s_1015f4c {
 	char pad3[0x20];
 };
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern s_1015f4c g_1015f4c[];
 
 

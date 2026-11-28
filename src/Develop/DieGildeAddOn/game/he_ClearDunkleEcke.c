@@ -10,7 +10,7 @@ typedef struct {
 	int c;
 } Msg;
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern char g_6a58ac[];
 

@@ -17,7 +17,7 @@ typedef struct Ent {
 // SIZE 0x58
 
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-#include "client_types.h"
+#include "Develop/client_types.h"
  
 #include "Develop/DieGildeAddOn/game/game_data.h"
 

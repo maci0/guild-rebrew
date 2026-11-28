@@ -1,7 +1,7 @@
 
 
 
-#include "client_sound.h"
+#include "Develop/Units/Msx/client_sound.h"
 extern int main_LoopFlags;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_68bd78[];

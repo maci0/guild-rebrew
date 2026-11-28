@@ -2,7 +2,7 @@
 
 
 // SIZE 0x30
-#include "client_types.h"
+#include "Develop/client_types.h"
 typedef SOUND_VOICE Voice;
 
 extern int g_6b7d7c;

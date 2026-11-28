@@ -8,7 +8,7 @@ typedef struct {
 } Entry;
 
 extern Entry g_666044[];
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Rec15_699058 g_699058[37];
 
 Entry* __cdecl hp_LookupProdEntry(char* c)

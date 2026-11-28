@@ -23,7 +23,7 @@ typedef struct
 	char pad1d0[0x21c - 0x1d0];
 } AI_STEP_ENTITY;
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern GAME_TIMESTAMP g_100dc04;
 extern int g_100dc00;
@@ -39,7 +39,7 @@ int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl ai_RepairMeisterObjects(AI_STEP_ENTITY* e);
 void __cdecl ai_UpdateEntityTurn(AI_STEP_ENTITY* e);
 int __cdecl gm_IsLocalSimEntity(AI_STEP_ENTITY* e);
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldValue(int, int, int, int*);
 void __cdecl cm_RequestChangeAttribute(void);
 

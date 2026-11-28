@@ -6,7 +6,7 @@ typedef struct
 } fcn_0046f390_Win;
 // SIZE 0x3cc
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 extern int g_77259c;
 

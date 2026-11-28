@@ -5,7 +5,7 @@
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 #include <string.h>
 #include "Develop/Units/d2.v1/d2_gui.h"
-#include "client_types.h"
+#include "Develop/client_types.h"
 typedef pos14_7f4c00 Tbebe;
 
 
@@ -50,7 +50,7 @@ extern int g_14ce8e0;
 extern char* g_1015ea0;
 extern float g_662a98;
 extern float g_664168;
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern s_1015f4c g_1015f4c[];
 

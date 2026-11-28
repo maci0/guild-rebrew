@@ -5,7 +5,7 @@ int __cdecl he_AssignActionSlot(char*, int, int, char*);
 int __cdecl gm_AddTime(char*, int, int, int);
 int __cdecl he_FreeAction(char*);
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 extern pos14_7f4c00 gm_GameTime;
 

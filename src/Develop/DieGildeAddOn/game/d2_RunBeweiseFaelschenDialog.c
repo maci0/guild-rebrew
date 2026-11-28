@@ -1,5 +1,5 @@
 #include <string.h>
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern int d2_CurrentWindowId, g_100f1dc, g_14ce8e0, g_774654, d2_CurrentElementId; extern char* g_1015ea0; extern unsigned short g_774970; extern unsigned char g_773d75;
 #include "Develop/Units/d2.v1/d2_gui.h"

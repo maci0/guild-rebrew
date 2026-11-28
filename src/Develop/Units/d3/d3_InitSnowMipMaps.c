@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "Develop/Units/d3/d3_d3d.h"
-#include "client_scene_resources.h"
+#include "Develop/Units/d3/client_scene_resources.h"
 
 unsigned char __cdecl d3_SetTextureColorKey(SCENE_RESOURCE*, unsigned char);
 void __cdecl d3_ConvertSurfaceFormat(void*, void*, void*, void*);

@@ -73,7 +73,7 @@ typedef D2_CONTROL_TL D2_TEXT_ENTRY;
 
 typedef int D2_TEXT_COORD;
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 extern int d2_DefaultFont;
 extern char g_67d5bc[];

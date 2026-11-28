@@ -1,4 +1,4 @@
-#include "client_lighting.h"
+#include "Develop/Units/d3/client_lighting.h"
 #include "Develop/Units/d3/d3_object.h"
 
 #include "Develop/DieGildeAddOn/game/game_data.h"

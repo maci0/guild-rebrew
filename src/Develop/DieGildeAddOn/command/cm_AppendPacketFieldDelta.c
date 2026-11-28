@@ -6,7 +6,7 @@ struct msgbuf_4c4570 {
 // SIZE 0x78
 
 extern unsigned char g_aed224;
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 
 
 /* ADDRESS: GOLDTL 0x004c4570 */

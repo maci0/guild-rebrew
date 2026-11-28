@@ -1,4 +1,4 @@
-#include "client_types.h"
+#include "Develop/client_types.h"
 #include "Develop/DieGildeAddOn/game/season_slots.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char g_773d75;

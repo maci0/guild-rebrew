@@ -1,7 +1,7 @@
 #ifndef D2_DEPENDENCY_NODE_H
 #define D2_DEPENDENCY_NODE_H
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 typedef struct DEPENDENCY_DIAGRAM_NODE {
 	int item_id;

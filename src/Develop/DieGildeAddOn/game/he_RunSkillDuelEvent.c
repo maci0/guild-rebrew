@@ -1,4 +1,4 @@
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
 float __cdecl gm_CalcSkillDuelScore(char*, char*, int);

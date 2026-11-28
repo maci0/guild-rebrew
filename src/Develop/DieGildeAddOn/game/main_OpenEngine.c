@@ -1,7 +1,7 @@
 #include "Develop/Units/Msx/msx.h"
 
 #include <stdio.h>
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl fcn_00590650(void);
@@ -27,7 +27,7 @@ typedef struct {
 } Screen;
 
 #include "Develop/Units/d2.v1/gold_window.h"
-#include "client_sprites.h"
+#include "Develop/Units/d2.v1/client_sprites.h"
 
 extern int g_6f2460;
 extern int g_6ed9d4;

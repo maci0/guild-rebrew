@@ -1,6 +1,6 @@
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-#include "client_types.h"
+#include "Develop/client_types.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 extern pos14_7f4c00 gm_GameTime;

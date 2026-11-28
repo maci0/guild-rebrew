@@ -12,7 +12,7 @@ typedef struct {
 } MOOD_GRAPH_VALUES;
 // SIZE 0x28
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Pt5d36_99ec2c g_99ec2c[16];
 
 extern float g_6640cc;

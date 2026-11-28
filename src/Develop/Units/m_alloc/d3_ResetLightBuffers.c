@@ -4,7 +4,7 @@ extern int g_6b8704;
 extern void* g_6b870c;
 extern int g_6b8700;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_lighting.h"
+#include "Develop/Units/d3/client_lighting.h"
 
 
 void __cdecl m_FreeTracked(int);

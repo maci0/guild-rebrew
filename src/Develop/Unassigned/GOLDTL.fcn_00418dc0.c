@@ -1,5 +1,5 @@
 #include <string.h>
-#include "client_sound.h"
+#include "Develop/Units/Msx/client_sound.h"
 
 #if defined(REBREW_GOLD)
 #define sound_objekt_link_offset 0x20c

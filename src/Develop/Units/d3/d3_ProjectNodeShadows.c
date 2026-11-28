@@ -1,7 +1,7 @@
 /* per-node lighting/shadow vertex build: 8-vertex loop, d3_TransformPoint/fcn_00455140/fcn_00457140, IDev vtable slot 0x1f0, world matrix at [0x6b8014]+0x18c. */
 
 #include "Develop/Units/d3/d3_camera.h"
-#include "client_lighting.h"
+#include "Develop/Units/d3/client_lighting.h"
 extern char* g_6b86e0; extern float g_662d40[3];
 typedef struct D3_SHADOW_PROJ_VEC4 {
 	float x;

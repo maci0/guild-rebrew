@@ -29,7 +29,7 @@ extern int g_7f4c10;
 extern volatile int g_6b7fac;
 extern int g_7f3ee8;
 extern Item g_1038150[];
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 extern char g_699a9c[];
 extern int g_85ab60;

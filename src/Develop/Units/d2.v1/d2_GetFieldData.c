@@ -34,7 +34,7 @@ typedef struct Slot {
 
 
 // SIZE 0x3cc
-#include "client_types.h"
+#include "Develop/client_types.h"
 typedef D2_FORM_RECORD Obj;
 // SIZE 0x2bc
 

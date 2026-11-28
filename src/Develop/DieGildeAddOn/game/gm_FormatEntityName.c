@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include "client_actions.h"
+#include "Develop/DieGildeAddOn/game/client_actions.h"
 #include "Develop/DieGildeAddOn/game/entity.h"
 extern char g_6b5c60[];
 extern char* txt_TextEntries[];

@@ -39,7 +39,7 @@ extern char g_7f4ca4[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int g_77494c;
 extern unsigned char g_7747b0;
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl gm_AddTime(GAME_TIMESTAMP *, int, int, int);

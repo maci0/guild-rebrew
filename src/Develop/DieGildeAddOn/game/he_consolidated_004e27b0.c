@@ -16,7 +16,7 @@ extern int tp_d2_SelectedControl;
 extern int g_7747f0;
 
 char* __cdecl gm_LookupEntityRecordById(int);
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl cm_RequestChangeAttribute(void);
 int __cdecl sb_LoadLocalizedSampleBankIfAllowed(char*, int);

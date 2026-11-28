@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 #include "Develop/Units/d2.v1/d2_win.h"
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 extern char s_67d54c[];
 

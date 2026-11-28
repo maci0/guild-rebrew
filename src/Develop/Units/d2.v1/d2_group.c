@@ -17,7 +17,7 @@ typedef struct {
 	int kind;
 	char pad24[0x2d0];
 } Obj2f4;
-#include "client_types.h"
+#include "Develop/client_types.h"
 typedef List8c_102cbc8 List8c;
 
 extern char g_772f74;

@@ -1,4 +1,4 @@
-#include "client_method_registry.h"
+#include "Develop/DieGildeAddOn/game/client_method_registry.h"
 extern AM_METHOD g_1008540[];
 extern float g_662918;
 extern float g_662914;

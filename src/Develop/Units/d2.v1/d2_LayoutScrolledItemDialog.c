@@ -25,7 +25,7 @@ typedef struct
 // SIZE 0x38
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern int g_14aadc0[];
 
 int __cdecl d2_ClearAndScrollSubform(int, int, int);

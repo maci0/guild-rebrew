@@ -23,7 +23,7 @@ typedef struct {
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern int g_7747a8;
 extern unsigned short g_773e40[];
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern D2_FORM_RECORD g_1038140[];
 
 void __cdecl d2_MarkDialogFormControls(int mark)

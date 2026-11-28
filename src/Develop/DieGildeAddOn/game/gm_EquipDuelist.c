@@ -2,7 +2,7 @@
 
 extern char* g_773db4[];
 extern unsigned char g_773d75;
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 
 int __cdecl gm_FindFirstFreeDuelistSlot(int* a);
 void __cdecl gm_RemoveSpecialTableItems(char* u);

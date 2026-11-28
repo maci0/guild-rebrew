@@ -11,7 +11,7 @@ typedef struct {
 	char pad18[8];
 } Job;
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern unsigned short g_7f4c04;
 extern s_7e2ac0 g_7e2ac0[48];

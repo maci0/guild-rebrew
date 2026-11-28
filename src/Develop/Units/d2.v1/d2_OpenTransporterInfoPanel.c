@@ -19,7 +19,7 @@ extern int g_1040494;
 extern char g_6a2f80[];
 extern char g_6a2f74[];
 extern int d2_CurrentWindowId;
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 extern char* g_1015ea0;
 #include "Develop/DieGildeAddOn/game/game_player.h"

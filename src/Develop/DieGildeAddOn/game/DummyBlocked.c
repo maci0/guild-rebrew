@@ -7,7 +7,7 @@ extern int g_67a370;
 extern int g_6791c8;
 extern char* evt_CurrentScript;
 void __cdecl d3_TransformPoint(char* src, char* pos, float* out);
-#include "client_scene_transform.h"
+#include "Develop/Units/d3/client_scene_transform.h"
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
 char* __cdecl DummyBlocked(char** a, int* range)

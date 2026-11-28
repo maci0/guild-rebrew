@@ -10,7 +10,7 @@
 #include <string.h>
 
 #include "Develop/Units/d3/d3_camera.h"
-#include "client_lighting.h"
+#include "Develop/Units/d3/client_lighting.h"
 
 extern int evt_LastGfxScriptId;
 extern int g_67a370;

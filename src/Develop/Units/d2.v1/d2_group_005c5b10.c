@@ -1,7 +1,7 @@
 void* __cdecl memset(void*, int, unsigned int);
 #pragma intrinsic(memset)
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 
 
@@ -39,7 +39,7 @@ typedef struct
 
 
 extern char g_7f4ca0[];
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_773d75;

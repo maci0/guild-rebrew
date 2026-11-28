@@ -1,7 +1,7 @@
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern int d2_ScreenHeight;
 extern int g_1040494;
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Anim_100e7a0 g_100e7a0[0x30];
 /* SIZE 0x2f4, g_1015ea0 entries */
 typedef struct {

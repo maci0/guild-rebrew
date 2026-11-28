@@ -1,7 +1,7 @@
 #include <math.h>
 #include <stdlib.h>
-#include "client_types.h"
-#include "client_lighting.h"
+#include "Develop/client_types.h"
+#include "Develop/Units/d3/client_lighting.h"
 #include "Develop/Units/d3/d3_camera.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 

@@ -1,4 +1,4 @@
-#include "client_dialog_helpers.h"
+#include "Develop/Units/d2.v1/client_dialog_helpers.h"
 
 /* Tooltip text builder for the currently hovered object. Picks the target
  * from the cursor selection, formats a message string from the object's

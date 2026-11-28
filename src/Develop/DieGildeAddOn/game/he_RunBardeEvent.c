@@ -21,7 +21,7 @@ int __cdecl sprintf(char*, const char*, ...);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl d3_FreeEventGfxSlot(int);
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 extern pos14_7f4c00 gm_GameTime;
 

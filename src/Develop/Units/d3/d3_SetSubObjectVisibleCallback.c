@@ -3,7 +3,7 @@
 
 #include <string.h>
 
-#include "client_lighting.h"
+#include "Develop/Units/d3/client_lighting.h"
 
 char __cdecl d3_SetSubObjectVisibleCallback(char* o, char on)
 {

@@ -8,7 +8,7 @@
 
 // SIZE 0x8
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Pair_99f800 g_99f800[0x800];
 
 int __cdecl gs_AllocEvidenceSlot(int, int);

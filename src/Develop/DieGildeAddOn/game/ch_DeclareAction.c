@@ -4,7 +4,7 @@
 #include <string.h>
 
 // SIZE 0x4c
-#include "client_types.h"
+#include "Develop/client_types.h"
 typedef CH_ACTION_DECLARATION Entry;
 
 #include "Develop/DieGildeAddOn/game/ch_queue.h"

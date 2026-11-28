@@ -1,7 +1,7 @@
 #ifndef GAME_TIMESTAMP_H
 #define GAME_TIMESTAMP_H
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 #pragma pack(push, 2)
 typedef struct {

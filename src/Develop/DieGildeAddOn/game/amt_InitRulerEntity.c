@@ -50,7 +50,7 @@ typedef struct {
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char g_773d75;
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl amt_SetType26OfficeHolder(int);

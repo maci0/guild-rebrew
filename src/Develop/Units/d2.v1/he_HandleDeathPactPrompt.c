@@ -7,7 +7,7 @@ struct house {
 	char pad1cd[0x4f];
 };
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_player.h"

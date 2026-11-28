@@ -24,7 +24,7 @@ typedef struct {
 	char pad2[0x21a];
 } Ent_5b4c80;
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 extern char* g_1015ea0;
 extern char g_7f4ca0[];

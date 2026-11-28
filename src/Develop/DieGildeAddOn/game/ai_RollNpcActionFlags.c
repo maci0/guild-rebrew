@@ -10,7 +10,7 @@
 
 
 unsigned short __cdecl gm_RandomMod(int n);
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldDelta(int a, int b, int c, int* flags);
 void __cdecl cm_RequestChangeAttribute(void);
 

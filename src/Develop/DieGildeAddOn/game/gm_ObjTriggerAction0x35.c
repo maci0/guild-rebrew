@@ -6,7 +6,7 @@ typedef struct {
 	char b[14];
 } Stamp;
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 

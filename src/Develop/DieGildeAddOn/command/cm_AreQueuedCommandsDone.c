@@ -9,7 +9,7 @@ typedef struct {
 
 extern unsigned int g_100581c;
 extern unsigned int g_aed204;
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern COMMAND_STATUS_SLOT g_fb5760[0x8000];
 
 int __cdecl cm_AreQueuedCommandsDone(void)

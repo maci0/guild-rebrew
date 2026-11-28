@@ -1,6 +1,6 @@
 #include <string.h>
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Anim_100e7a0 g_100e7a0[0x30];
 
 

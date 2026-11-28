@@ -1,4 +1,4 @@
-#include "client_actions.h"
+#include "Develop/DieGildeAddOn/game/client_actions.h"
 
 char* __cdecl gm_GetGuildHall(int);
 void* __cdecl fcn_00502cd0(int, int, int, ...);

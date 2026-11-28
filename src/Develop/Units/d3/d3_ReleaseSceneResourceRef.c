@@ -1,4 +1,4 @@
-#include "client_scene_resources.h"
+#include "Develop/Units/d3/client_scene_resources.h"
 extern unsigned int g_fb91a8;
 void __cdecl d3_ReleaseSceneResourceData(SCENE_RESOURCE*);
 

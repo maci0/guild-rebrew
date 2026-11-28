@@ -5,7 +5,7 @@ typedef struct {
 
 typedef int(__cdecl* fcn_004bbbd0_handler)(fcn_004bbbd0_msg*);
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern fcn_004bbbd0_handler g_6811b8[];
 

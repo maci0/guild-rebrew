@@ -2,11 +2,11 @@
 
 #include <string.h>
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 typedef Msg_aed340 Msg;
 // SIZE 0xf8
 
-#include "client_packet_queue.h"
+#include "Develop/DieGildeAddOn/command/client_packet_queue.h"
 extern char g_aed438[];
 extern int g_14cbca0;
 extern int g_7749d0;

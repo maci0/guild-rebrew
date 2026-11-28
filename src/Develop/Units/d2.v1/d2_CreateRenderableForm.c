@@ -1,6 +1,6 @@
 #include <string.h>
 #include "Develop/Units/d2.v1/d2_gui.h"
-#include "client_types.h"
+#include "Develop/client_types.h"
 #include "Develop/Units/d2.v1/gold_window.h"
 
 typedef struct

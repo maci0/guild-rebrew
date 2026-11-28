@@ -20,7 +20,7 @@ typedef struct
 } D2_TEXT_FIELD_ENT;
 // SIZE 0x2f4
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern UI_FIELD g_102d140[];
 extern char* g_1015ea0;
 

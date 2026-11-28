@@ -3,7 +3,7 @@
 
 #include <windows.h>
 #include <stddef.h>
-#include "../../../client_types.h"
+#include "Develop/client_types.h"
 
 typedef char MSX_TRACK_SIZE_CHECK[(sizeof(Chan_14cc460) == 0x128) ? 1 : -1];
 typedef char MSX_LOCK_SIZE_CHECK[(sizeof(CRITICAL_SECTION) == 24) ? 1 : -1];

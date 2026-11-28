@@ -21,7 +21,7 @@
  */
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
-#include "client_types.h"
+#include "Develop/client_types.h"
 #include "he_tables.h"
 extern HE_AP_EVENT g_7dcae0[256];	/* 0x007dcae0 */
 

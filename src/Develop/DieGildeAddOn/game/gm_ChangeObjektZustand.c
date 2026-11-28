@@ -5,7 +5,7 @@ extern char g_699aa4[];
 
 unsigned char* __cdecl fcn_00502cd0(int list, int a, int b, int c, int d);
 int __cdecl sprintf(char* buf, const char* fmt, ...);
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldValue(int a, int b, int c, char* v);
 void __cdecl cm_RequestChangeAttribute(void);
 

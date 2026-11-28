@@ -2,7 +2,7 @@
 void __cdecl d3_DeactivateObjectAnimation(char*, const char*);
 void __cdecl d3_SetObjectAnimationActive(char*, char*, char);
 
-#include "client_scene_transform.h"
+#include "Develop/Units/d3/client_scene_transform.h"
 
 /* ADDRESS: GOLDTL 0x00405540 */
 void __cdecl ch_SetAnimationPaused(unsigned char* object, int paused)

@@ -2,7 +2,7 @@
 
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_scene_transform.h"
+#include "Develop/Units/d3/client_scene_transform.h"
 
 int __cdecl ch_FindNearbyWalkers(char* self, char** out)
 {

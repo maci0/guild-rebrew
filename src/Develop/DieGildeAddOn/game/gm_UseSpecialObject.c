@@ -31,8 +31,8 @@ typedef struct Desc {
 } Desc;
 // SIZE 0x18
 
-#include "client_packet_builder.h"
-#include "client_types.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern unsigned short g_7f4c04;
 extern int g_7f4c06;

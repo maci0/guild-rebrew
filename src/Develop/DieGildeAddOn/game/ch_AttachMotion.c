@@ -9,7 +9,7 @@ struct kind_404150 {
 
 #include "../../Units/d3/d3_animation.h"
 
-#include "../../../client_types.h"
+#include "Develop/client_types.h"
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 extern int g_675318;
 

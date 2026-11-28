@@ -11,7 +11,7 @@ void __cdecl d3_TransformPoint(char* src, char* pos, float* out);
 char* __cdecl gm_StartFilteredEntitySearch(int, int);
 char* __cdecl gm_AddObjekt(void);
 char* __cdecl gm_FindNextFilteredEntity(void);
-#include "client_scene_transform.h"
+#include "Develop/Units/d3/client_scene_transform.h"
 
 char __cdecl d3_CollectPrefixSceneObjects(char* e, char* pfx)
 {

@@ -1,5 +1,5 @@
-#include "client_scene_resources.h"
-#include "client_scene_loader.h"
+#include "Develop/Units/d3/client_scene_resources.h"
+#include "Develop/Units/d3/client_scene_loader.h"
 
 /* ADDRESS: GOLD 0x00461080 */
 void __cdecl d3_ReloadAllTextures(int selector, SCENE_PROGRESS progress)

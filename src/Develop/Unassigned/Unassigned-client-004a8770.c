@@ -27,7 +27,7 @@ typedef struct {
 	short fb8;
 } CARD_GAME_SETTLE_CTX;
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern slot_1007ce8 g_1007ce8[];
 
 short __cdecl gm_ResolveCardGameWinner(void);

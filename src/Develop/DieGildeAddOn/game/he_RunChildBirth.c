@@ -2,7 +2,7 @@
 
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 extern int gm_GameTime;
-#include "client_actions.h"
+#include "Develop/DieGildeAddOn/game/client_actions.h"
 
 
 

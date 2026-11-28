@@ -3,7 +3,7 @@ extern int g_67a370;
 
 // SIZE 0xc8
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern s_7e46c0 g_7e46c0[32];
 
 

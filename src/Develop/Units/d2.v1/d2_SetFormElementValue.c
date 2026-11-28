@@ -12,7 +12,7 @@ typedef struct
 } D2_FORM_ENTRY_VIEW;
 // SIZE 0x2f4
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 typedef Page_1038144 D2_FORM_PAGE_VIEW;
 // SIZE 0x2bc
 

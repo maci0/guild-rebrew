@@ -1,6 +1,6 @@
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 typedef Rec2d_9a3800 Rec2d;
 typedef Pair_99f800 Pair;

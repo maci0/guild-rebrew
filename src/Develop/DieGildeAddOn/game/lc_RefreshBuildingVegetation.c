@@ -5,7 +5,7 @@
 void __cdecl d3_TransformPoint(char* src, char* pos, float* out);
 char* __cdecl fcn_00501190(int, int);
 char* __cdecl fcn_00501030(void);
-#include "client_scene_transform.h"
+#include "Develop/Units/d3/client_scene_transform.h"
 void __cdecl fcn_0058fa60(char*, int);
 
 void __cdecl lc_RefreshBuildingVegetation(char* sceneNode)

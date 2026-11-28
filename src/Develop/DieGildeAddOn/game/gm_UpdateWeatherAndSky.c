@@ -34,7 +34,7 @@ typedef struct {
 	char pad30[0x3dc - 0x30];
 } D3_CONTEXT_SLOT;
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 extern unsigned char g_773d75;
 extern char g_868060[];

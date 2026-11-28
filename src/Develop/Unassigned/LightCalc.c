@@ -1,6 +1,6 @@
 
 
-#include "client_lighting.h"
+#include "Develop/Units/d3/client_lighting.h"
 
 int __cdecl LightCalc(char* p)
 {

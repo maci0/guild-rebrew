@@ -8,7 +8,7 @@ void __cdecl msx_ShutdownDrivers(void);
 void __cdecl msx_UpdateTracks(void);
 #include <string.h>
 
-#include "../../../client_types.h"
+#include "Develop/client_types.h"
 extern Chan_14cc460 msx_NullTrack;
 extern int msx_TrackDriver;
 extern int msx_AmbientDriver;

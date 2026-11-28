@@ -1,4 +1,4 @@
-#include "client_actions.h"
+#include "Develop/DieGildeAddOn/game/client_actions.h"
 #include "Develop/DieGildeAddOn/game/client_data.h"
 #include "Develop/Units/d2.v1/d2_window_view.h"
 #include "Develop/Units/d2.v1/d2_gui.h"

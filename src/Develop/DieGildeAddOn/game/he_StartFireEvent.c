@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern unsigned char* lpGebaeudePROT;
 
@@ -11,7 +11,7 @@ int __cdecl gm_CheckEntityType(char*);
 int __cdecl gm_IsWarehouse(char*);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl d3_TransformPoint(char*, char*, float*);
-#include "client_scene_transform.h"
+#include "Develop/Units/d3/client_scene_transform.h"
 
 void __cdecl he_StartFireEvent(char* u)
 {

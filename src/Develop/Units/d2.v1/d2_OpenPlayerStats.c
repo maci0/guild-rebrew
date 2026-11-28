@@ -42,7 +42,7 @@ int __cdecl gm_FindBuildingOwner(int);
 int __cdecl main_RunFrameLoop(int, int);
 void __cdecl d2_ClearRadioGroup(int); void __cdecl d2_DestroyForm(int);
 #include "Develop/Units/d2.v1/d2_gui.h"
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 /* ADDRESS: GOLDTL 0x005c8c40 */
 void __cdecl d2_OpenPlayerStats(void)
 {

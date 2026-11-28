@@ -25,7 +25,7 @@ extern int g_6a25f0;
 extern int d2_CurrentValueBar;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int d2_CurrentWindowId;
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 
 int __cdecl d2_LoadForm(int a, int b, char* s);

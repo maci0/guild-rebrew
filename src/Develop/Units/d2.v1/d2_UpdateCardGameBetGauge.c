@@ -3,7 +3,7 @@
 extern int g_6ad580;
 extern int g_6ad568;
 extern int d2_CurrentWindowId;
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern s_1015f4c g_1015f4c[];
 extern int g_776644;
 extern int g_776648;

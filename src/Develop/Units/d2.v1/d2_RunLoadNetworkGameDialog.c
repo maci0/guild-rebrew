@@ -19,7 +19,7 @@ extern int g_14ce8d8;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int d2_HoveredWindow;
 #include "Develop/Units/d2.v1/d2_gui.h"
-#include "client_types.h"
+#include "Develop/client_types.h"
 #include "Develop/Units/d2.v1/d2_win.h"
 extern Win_1015f40 g_1015f40[0x60];
 extern int d2_CurrentElementId;

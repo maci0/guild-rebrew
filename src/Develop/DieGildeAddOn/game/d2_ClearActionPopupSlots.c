@@ -9,7 +9,7 @@ typedef struct {
 } ACTION_POPUP_SLOT_545930;
 // SIZE 0xc
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern D2_ACTION_POPUP_SLOT g_77e8c0[16];
 
 void __cdecl d2_CloseActionPopup(int);

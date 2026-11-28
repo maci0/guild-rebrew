@@ -3,7 +3,7 @@
 extern int* g_665f08;
 extern char g_6a8364[];
 extern int d2_CurrentWindowId;
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern s_1015f4c g_1015f4c[];
 
 int __cdecl d2_LoadForm(int, int, char*);

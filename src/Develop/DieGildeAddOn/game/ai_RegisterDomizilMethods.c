@@ -1,6 +1,6 @@
 #include <string.h>
 
-#include "client_method_registry.h"
+#include "Develop/DieGildeAddOn/game/client_method_registry.h"
 
 int __cdecl ai_ComputeBaseActionScore(float* s1, float* s2, int idx, char* e);
 int __cdecl ai_StartDomizil(void);

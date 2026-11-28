@@ -11,7 +11,7 @@
 
 
 
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_GetEntityRelation(int, int);

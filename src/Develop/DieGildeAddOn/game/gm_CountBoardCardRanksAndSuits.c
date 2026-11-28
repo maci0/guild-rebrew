@@ -3,7 +3,7 @@ extern unsigned char g_773d75;
 
 void __cdecl gm_ConvertUnitsToAmount(int amount, unsigned char k);
 void __cdecl cm_RequestTransferCurrencyNoKill(int a, int b, unsigned char k, int amount);
-#include "client_types.h"
+#include "Develop/client_types.h"
 typedef Card_1007ce0 Card;
 
 extern Card_1007ce0 g_1007ce0[24];

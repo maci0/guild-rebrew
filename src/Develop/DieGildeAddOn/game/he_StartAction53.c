@@ -16,7 +16,7 @@ int __cdecl gm_HasActiveSpecialObject(char* a1, int a2);
 void __cdecl he_NotifyAction0x35Blocked(void* a1, void* a2);
 void __cdecl he_NotifyAction0x35Success(void* a1);
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 extern pos14_7f4c00 gm_GameTime;
 

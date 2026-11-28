@@ -10,7 +10,7 @@ struct job {
 	char pada[6];
 };
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 
 int __cdecl cm_GetCommandStatus(int);

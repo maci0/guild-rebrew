@@ -2,7 +2,7 @@
  * order in a dialog and sends it when confirmed. */
 
 #include <string.h>
-#include "client_types.h"
+#include "Develop/client_types.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 

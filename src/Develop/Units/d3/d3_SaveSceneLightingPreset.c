@@ -15,7 +15,7 @@ extern int g_67a960;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_10425fc;
 extern float g_104329c;
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Pal_1041d20 g_1041d20[6];
 extern char g_1041d80[];
 

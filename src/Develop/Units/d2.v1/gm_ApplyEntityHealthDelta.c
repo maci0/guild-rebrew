@@ -23,8 +23,8 @@ typedef struct
 } HEALTH_DELTA_ENTITY_VIEW;
 
 extern char g_7f4ca0[];
-#include "client_packet_builder.h"
-#include "client_types.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
+#include "Develop/client_types.h"
 
 
 
@@ -35,7 +35,7 @@ extern char g_7f4ca0[];
 // SIZE 0xe
 
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 
 

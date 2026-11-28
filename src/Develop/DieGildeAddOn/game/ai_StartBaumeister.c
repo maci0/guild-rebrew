@@ -11,7 +11,7 @@ typedef struct Blk24 {
 } Blk24;
 // SIZE 0x18
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 extern pos14_7f4c00 gm_GameTime;
 extern unsigned char g_773d75;

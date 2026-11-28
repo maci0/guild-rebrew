@@ -14,7 +14,7 @@ typedef struct Flags {
 } Flags;
 
 extern int d3_CurrentContextIndex;
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Slot_1043340 g_1043340[64];
 extern unsigned int g_10405fc;
 extern unsigned int g_104061c;
@@ -26,7 +26,7 @@ void __cdecl d3_ResetSceneAuxSlots(void);
 void __cdecl d3_ReleaseAllShadowTextures(void);
 void __cdecl d3_AllocShadowTextures(void);
 void __cdecl fcn_0043bbf0(unsigned char);
-#include "client_scene_loader.h"
+#include "Develop/Units/d3/client_scene_loader.h"
 
 void __cdecl d3_ConfigureSceneRenderQuality(unsigned char a1, int a2, unsigned char a3, unsigned int a4, SCENE_PROGRESS progress)
 {

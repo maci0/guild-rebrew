@@ -12,7 +12,7 @@ typedef struct {
 	char path[0x80];
 } Cache;
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern s_7e46c0 g_7e46c0[32];
 extern char g_6a3110[];
 extern char g_6a30e4[];

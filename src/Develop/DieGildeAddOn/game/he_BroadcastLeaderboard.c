@@ -3,7 +3,7 @@
  * per listed entity, each handed to the page builder fcn_00402340. */
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 #include <string.h>
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 extern unsigned char g_773d75;
 extern char g_868080[];

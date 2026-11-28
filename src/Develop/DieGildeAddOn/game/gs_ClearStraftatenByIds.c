@@ -10,7 +10,7 @@ typedef struct {
 #pragma pack()
 
 // SIZE 0x8
-#include "client_types.h"
+#include "Develop/client_types.h"
 typedef Pair_99f800 Pair;
 
 // SIZE 0x21c

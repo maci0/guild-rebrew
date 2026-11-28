@@ -23,7 +23,7 @@ extern int g_100f1dc;
 extern ROUTING_NODE* g_772908;
 extern D2_RADIO_SLOT g_10058a0[8];
 extern int g_772900;
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);

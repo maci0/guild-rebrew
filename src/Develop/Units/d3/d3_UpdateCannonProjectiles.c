@@ -12,7 +12,7 @@
  * +0x18, an object handle at +0x150, a callback at +0x168 and the data
  * pointer at +0x16c.
  */
-#include "client_types.h"
+#include "Develop/client_types.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 #define SLOTS ((D3_PROJECTILE_SLOT*) g_7731b8)

@@ -2,7 +2,7 @@ extern int g_67a370;
 
 
 int __cdecl sprintf(char*, const char*, ...);
-#include "client_scene_loader.h"
+#include "Develop/Units/d3/client_scene_loader.h"
 void __cdecl d3_TraverseSceneObjects(int, int, int, void (__cdecl*)(void));
 void __cdecl d3_InitBuildingSceneAnimRates(void);
 

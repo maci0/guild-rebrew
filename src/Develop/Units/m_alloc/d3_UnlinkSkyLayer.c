@@ -3,7 +3,7 @@
 /* GOLD twin of GOLDTL fcn_004597f0: the list head is owner+0xac0 (GOLDTL 0x24)
  * and the next link n+0x28 (GOLDTL 0x20). */
 
-#include "client_scene_resources.h"
+#include "Develop/Units/d3/client_scene_resources.h"
 void __cdecl m_FreeTracked(void*);
 
 void __cdecl d3_UnlinkSkyLayer(char* owner, char* n)

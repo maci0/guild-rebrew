@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern int g_7749e4;
 extern int g_6a4768;
 extern D2_ACTION_POPUP_SLOT g_77e8c0[16];

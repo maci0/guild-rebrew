@@ -8,7 +8,7 @@ typedef void (__cdecl* node_fn_439490)(char* node);
 
 extern char g_6b8018;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Slot_1043340 g_1043340[64];
 extern int g_6b8484;
 extern int g_6b8300;

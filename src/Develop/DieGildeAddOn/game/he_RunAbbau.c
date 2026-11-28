@@ -12,7 +12,7 @@
  * until it turns positive, and a negative socket test repeats the loop.
  */
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
-#include "client_types.h"
+#include "Develop/client_types.h"
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 void __cdecl gm_ResolveEntityById(void*, void*, int, int);
 void __cdecl he_AssignActionSlot(char*, int, int, int);

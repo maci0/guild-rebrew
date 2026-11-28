@@ -1,4 +1,4 @@
-#include "client_types.h"
+#include "Develop/client_types.h"
 char* __cdecl fcn_00503fe0(int a, int b, int c);
 char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl cm_SendCancelCharacterActions(int id);

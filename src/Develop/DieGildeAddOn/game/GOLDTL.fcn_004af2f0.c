@@ -960,7 +960,7 @@ typedef struct Msg {
 } Msg;
 // SIZE 0x114
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char* gm_RichterKatholisch;

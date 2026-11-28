@@ -13,7 +13,7 @@ extern int __cdecl d3_SetFog(int, int, int);
 
 extern char g_10432c0[];
 extern char g_1041d80[];
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Pal_1041d20 g_1041d20[6];
 extern int g_6b8484;
 extern int g_1041d0c;

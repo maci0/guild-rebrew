@@ -8,7 +8,7 @@ typedef struct {
 	char p34c[0x90];
 } Slot;
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Slot_1043340 g_1043340[64];
 extern int g_6b8300;
 extern int g_6b8484;

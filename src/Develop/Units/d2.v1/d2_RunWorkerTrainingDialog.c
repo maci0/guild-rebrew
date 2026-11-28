@@ -1,4 +1,4 @@
-#include "client_types.h"
+#include "Develop/client_types.h"
 void* __cdecl memset(void*, int, unsigned int);
 #pragma intrinsic(memset)
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
@@ -70,7 +70,7 @@ extern char s_6ac79c[];
 extern char s_6ac7dc[];
 extern char s_6ac7ec[];
 extern char s_6ac7fc[];
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;

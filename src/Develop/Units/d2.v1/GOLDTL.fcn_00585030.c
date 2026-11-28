@@ -31,7 +31,7 @@ extern char* lpObjektePROT;
 extern float g_662cf8;
 extern float g_66413c;
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 #include "Develop/Units/d2.v1/d2_window_view.h"
 extern List8c_102cbc8 g_102cbc8[];
 

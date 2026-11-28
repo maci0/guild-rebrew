@@ -1,7 +1,7 @@
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-#include "client_types.h"
-#include "client_packet_builder.h"
+#include "Develop/client_types.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern unsigned char* lpGebaeudeINST;
 extern unsigned char* lpGebaeudePROT;

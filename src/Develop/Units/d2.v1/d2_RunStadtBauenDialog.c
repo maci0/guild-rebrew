@@ -1,6 +1,6 @@
-#include "client_dialog_helpers.h"
-#include "client_actions.h"
-#include "client_types.h"
+#include "Develop/Units/d2.v1/client_dialog_helpers.h"
+#include "Develop/DieGildeAddOn/game/client_actions.h"
+#include "Develop/client_types.h"
 typedef struct { unsigned char kind, unknown01[0x24c]; } D2_STADT_BAUEN_PROTO;
 typedef struct {
     char unknown00[4]; unsigned char kind; char unknown05[3];

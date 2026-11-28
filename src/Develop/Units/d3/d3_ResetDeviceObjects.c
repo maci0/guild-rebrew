@@ -28,7 +28,7 @@ void __cdecl d3_AllocRenderVertexBuffer(void);
 void __cdecl d3_RebuildFloorMeshes(int a);
 void __cdecl d3_CreateSkyDomeBuffers(int a);
 void __cdecl d3_AllocShadowTextures(void);
-#include "client_lighting.h"
+#include "Develop/Units/d3/client_lighting.h"
 
 /* ADDRESS: GOLDTL 0x0043b360 */
 char __cdecl d3_ResetDeviceObjects(void)

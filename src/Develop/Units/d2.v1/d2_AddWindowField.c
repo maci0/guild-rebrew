@@ -11,7 +11,7 @@ typedef struct
 } D2_WIN_FIELD_ENT;
 // SIZE 0x2f4
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 typedef Tex_102d278 D2_WIN_FIELD_TEX;
 // SIZE 0x160
 

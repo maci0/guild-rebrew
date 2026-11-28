@@ -42,7 +42,7 @@ void __cdecl d2_DestroyForm(int);
 
 
 extern int g_6a9b9c;
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 extern int g_774a3c;
 extern int g_774a38;

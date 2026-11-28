@@ -1,5 +1,5 @@
-#include "client_packet_builder.h"
-#include "client_types.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
+#include "Develop/client_types.h"
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* SIZE 0x21c */
 struct house {

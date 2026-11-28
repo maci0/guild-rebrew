@@ -17,7 +17,7 @@ struct CMD_STATUS_SLOT_VIEW {
 #pragma pack(pop)
 
 extern char g_9bade0[];
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern COMMAND_STATUS_SLOT g_fb5760[0x8000];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_1005780;

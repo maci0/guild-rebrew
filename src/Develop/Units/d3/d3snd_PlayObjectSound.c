@@ -1,4 +1,4 @@
-#include "client_sound.h"
+#include "Develop/Units/Msx/client_sound.h"
 
 void __cdecl sb_StartVoice(char* obj, int a, int b);
 

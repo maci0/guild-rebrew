@@ -26,7 +26,7 @@ int __cdecl gm_AccumulateTyped2(House*);
 void __cdecl cm_RequestMoveCredits(int, int, char, int);
 void __cdecl cm_RequestModifyHealth(int, int);
 unsigned short __cdecl gm_RandomMod(int);
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, unsigned int*);
 void __cdecl cm_RequestChangeAttribute(void);
 int __cdecl d2_LoadForm(int, int, char*);

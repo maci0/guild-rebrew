@@ -1,7 +1,7 @@
 #include <string.h>
 #include <stdio.h>
 
-#include "client_sound.h"
+#include "Develop/Units/Msx/client_sound.h"
 
 int __cdecl gm_GetSeason(char*);
 int __cdecl msx_FindActiveGroup(void);

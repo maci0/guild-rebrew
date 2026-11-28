@@ -19,7 +19,7 @@ typedef struct {
 } FOURTH_CARD_GAME;
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern slot_1007ce8 g_1007ce8[];
 
 int __cdecl gm_DrawCard(int);

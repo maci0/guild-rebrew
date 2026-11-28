@@ -1,4 +1,4 @@
-#include "client_dialog_helpers.h"
+#include "Develop/Units/d2.v1/client_dialog_helpers.h"
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 #pragma optimize("y", off)
 

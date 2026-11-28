@@ -1,4 +1,4 @@
-#include "client_dialog_helpers.h"
+#include "Develop/Units/d2.v1/client_dialog_helpers.h"
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 /* Auction house dialog. Opens the "Versteigerung" cutscene set, builds the
  * auctioneer and bidder actors, runs the bidding rounds and cleans the

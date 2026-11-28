@@ -5,7 +5,7 @@ extern char g_9ba1c0[];
 
 #include <string.h>
 
-#include "client_timer.h"
+#include "Develop/DieGildeAddOn/game/client_timer.h"
 
 void __cdecl main_InitFrameProfile(void)
 {

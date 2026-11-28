@@ -3,7 +3,7 @@
 
 extern char g_696470[];
 extern char g_69645c[];
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern char g_99f6a0[];
 extern int g_14ce8e0;

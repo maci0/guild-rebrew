@@ -1,4 +1,4 @@
-#include "client_scene_resources.h"
+#include "Develop/Units/d3/client_scene_resources.h"
 void __cdecl m_FreeTracked(void*);
 
 typedef struct SLOT_44 {

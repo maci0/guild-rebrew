@@ -17,7 +17,7 @@ typedef struct {
 } Obj2f4;
 // SIZE 0x2f4
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 typedef List8c_102cbc8 List8c;
 // SIZE 0x8c
 

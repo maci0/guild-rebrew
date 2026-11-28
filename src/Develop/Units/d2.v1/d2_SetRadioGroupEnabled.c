@@ -1,5 +1,5 @@
 #include "Develop/Units/d2.v1/d2_gui.h"
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern D2_RADIO_GROUP g_102cbc4[8];
 
 /* ADDRESS: GOLDTL 0x00469540 */

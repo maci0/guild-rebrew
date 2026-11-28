@@ -1,4 +1,4 @@
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 
 #include <string.h>
@@ -28,7 +28,7 @@ typedef struct
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern int g_100f1dc;
 extern int g_14ce8e0;

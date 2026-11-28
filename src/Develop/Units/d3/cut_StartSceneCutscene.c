@@ -3,7 +3,7 @@ extern int g_6b8300;
 extern char g_77666a;
 extern int* cut_ActiveCutscene;
 extern int g_77250c;
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern int g_772f4c;
 extern int g_6791c8;
@@ -20,7 +20,7 @@ typedef void(__cdecl* CutsceneUiCallback)(char*, int, char*, int);
 int __cdecl d3_FindFreeSceneContext(void);
 void __cdecl d3_SelectSceneContext(int, int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
-#include "client_scene_loader.h"
+#include "Develop/Units/d3/client_scene_loader.h"
 void __cdecl d3_SetFloorDetailLevel(char*, int, int);
 void __cdecl d2_ClearSurface(int);
 int __cdecl gm_GetSeason(int*);

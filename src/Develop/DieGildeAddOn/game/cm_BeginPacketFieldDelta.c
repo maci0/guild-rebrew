@@ -14,7 +14,7 @@ typedef struct
 
 extern unsigned int g_aed208;
 extern char g_aed220[];
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 
 
 

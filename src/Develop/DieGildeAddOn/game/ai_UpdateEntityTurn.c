@@ -1,4 +1,4 @@
-#include "client_actions.h"
+#include "Develop/DieGildeAddOn/game/client_actions.h"
 
 #pragma pack(push, 1)
 typedef struct AI_TURN_ENTITY {

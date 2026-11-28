@@ -11,7 +11,7 @@ extern int g_6a25b8;
 extern int g_6a2be0;
 extern int g_6a25fc;
 extern int g_6a2598;
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 extern int g_7ea380[15];
 extern int g_6a2578;

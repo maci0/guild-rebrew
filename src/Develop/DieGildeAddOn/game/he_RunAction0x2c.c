@@ -1,6 +1,6 @@
 #include <string.h>
-#include "client_types.h"
-#include "client_dialog_helpers.h"
+#include "Develop/client_types.h"
+#include "Develop/Units/d2.v1/client_dialog_helpers.h"
 
 extern int gm_GameTime;
 extern int g_7f4c04;

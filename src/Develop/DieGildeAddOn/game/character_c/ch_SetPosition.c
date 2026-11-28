@@ -31,7 +31,7 @@ extern void* ch_CharacterSlots[];
 #include <math.h>
 
 char* __cdecl d3sm_GetObjectSuperMap(char*);
-#include "../client_scene_transform.h"
+#include "Develop/Units/d3/client_scene_transform.h"
 float __cdecl d3_ComputeYawToTarget(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
 char __cdecl d3sm_SampleHeight(char*, float*, int*, int*, float*);

@@ -20,7 +20,7 @@ typedef struct {
 	int task;
 } Action2cCandidate;
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl he_StartHandlungSearch(int, int, int);

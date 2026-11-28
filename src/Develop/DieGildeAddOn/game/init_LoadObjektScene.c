@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
-#include "client_timer.h"
-#include "client_scene_loader.h"
+#include "Develop/DieGildeAddOn/game/client_timer.h"
+#include "Develop/Units/d3/client_scene_loader.h"
 
 extern int d3_CurrentContextIndex;
 extern char* lpObjektePROT;

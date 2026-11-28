@@ -6,7 +6,7 @@ struct EvRec {
 	unsigned char kind;
 	char pad1[15];
 };
-#include "client_actions.h"
+#include "Develop/DieGildeAddOn/game/client_actions.h"
 int __cdecl amt_GetRoleTemplate(int, int*);
 int __cdecl amt_FindOfficeSlotsByKind(int, int, EvRec*);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);

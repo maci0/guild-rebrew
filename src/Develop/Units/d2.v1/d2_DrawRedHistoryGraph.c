@@ -2,7 +2,7 @@
 
 
 // SIZE 0x14
-#include "client_types.h"
+#include "Develop/client_types.h"
 typedef GRAPH_SAMPLE Sample;
 
 // SIZE 0x28

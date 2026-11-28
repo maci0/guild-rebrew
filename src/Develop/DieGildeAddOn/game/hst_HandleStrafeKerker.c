@@ -1,6 +1,6 @@
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl atoi(char*);
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldValue(int, int, int, char*);
 void __cdecl cm_RequestChangeAttribute(void);
 

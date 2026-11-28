@@ -34,7 +34,7 @@ typedef struct
 } fcn_00467240_Ent;
 // SIZE 0x2f4
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern UI_FIELD g_102d140[];
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern char s_67d47c[];

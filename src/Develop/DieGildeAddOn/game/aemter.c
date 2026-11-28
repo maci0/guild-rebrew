@@ -6,7 +6,7 @@
 #if !defined(REBREW_SERVER)
 #include <string.h>
 #include <stdlib.h>
-#include "client_types.h"
+#include "Develop/client_types.h"
 #include "Develop/DieGildeAddOn/game/client_data.h"
 #include "DieGildeAddOn/game/aemter.h"
 #include "DieGildeAddOn/game/building_prototype.h"

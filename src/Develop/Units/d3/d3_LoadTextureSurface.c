@@ -1,4 +1,4 @@
-#include "client_scene_resources.h"
+#include "Develop/Units/d3/client_scene_resources.h"
 
 /* ADDRESS: GOLD 0x00460e40 */
 void __cdecl d3_LoadTextureSurface(SCENE_RESOURCE* resource, int selector)

@@ -1,5 +1,5 @@
 #include <string.h>
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern char* lpGebaeudePROT;
 extern float g_6629d0;

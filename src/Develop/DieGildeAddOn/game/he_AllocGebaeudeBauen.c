@@ -18,7 +18,7 @@ struct pos14 {
 char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl gm_AddTime(struct pos14*, int, int, int);
-#include "client_placement.h"
+#include "Develop/DieGildeAddOn/game/client_placement.h"
 int __cdecl d3_CollectUnusedSceneObjects(char*, char*);
 int __cdecl d3_FindNearestSceneObject(char*, char*);
 void __cdecl d3_SelectSceneContext(int, int);

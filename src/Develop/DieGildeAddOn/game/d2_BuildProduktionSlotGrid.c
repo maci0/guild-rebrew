@@ -25,7 +25,7 @@ typedef struct {
 } Ent;
 // SIZE 0x2f4
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 extern Lane g_778d4c[4];
 extern Slot_778da0 g_778da0[16];

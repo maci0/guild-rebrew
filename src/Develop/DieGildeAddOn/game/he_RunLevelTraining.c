@@ -1,4 +1,4 @@
-#include "client_types.h"
+#include "Develop/client_types.h"
 #pragma pack(push, 1)
 
 
@@ -29,7 +29,7 @@ int __cdecl cm_GetCommandStatus(int id);
 void __cdecl he_FreeAction(char* t);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl gm_GetJobTrainingAttributes(int k, int* a, int* b);
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 int __cdecl gm_RandomMod(int n);
 void __cdecl cm_AppendPacketFieldValue(int, int, int, char*);
 void __cdecl cm_RequestChangeAttribute(void);

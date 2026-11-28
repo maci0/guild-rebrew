@@ -3,7 +3,7 @@ void *memset(void *, int, unsigned int);
 int __cdecl gm_IsSlotLivingPerson(int);
 int __cdecl cm_SendCopyEntityData(void *);
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 extern pos14_7f4c00 gm_GameTime;
 

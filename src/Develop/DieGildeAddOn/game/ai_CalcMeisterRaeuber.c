@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 typedef struct {
 	unsigned short demand;

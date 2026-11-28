@@ -1,6 +1,6 @@
 #include "Develop/Units/d2.v1/gold_window.h"
 #include "Develop/Units/d2.v1/d2_win.h"
-#include "client_types.h"
+#include "Develop/client_types.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 

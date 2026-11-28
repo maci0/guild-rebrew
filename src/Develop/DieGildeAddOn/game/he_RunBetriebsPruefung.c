@@ -1,4 +1,4 @@
-#include "client_types.h"
+#include "Develop/client_types.h"
 /* Location record: 0x21c-byte entries in the g_7f4ca0 table. */
 typedef struct Rec {
 	unsigned short id;       /* 0x000 */

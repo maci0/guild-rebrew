@@ -1,7 +1,7 @@
 /* Black-board ("schwarzes Brett") dialogue: lists up to four messages and
  * runs the modal click loop until the dialogue closes. */
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 typedef struct {
 	char pad0[4];

@@ -1,4 +1,4 @@
-#include "client_dialog_helpers.h"
+#include "Develop/Units/d2.v1/client_dialog_helpers.h"
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 /* ADDRESS: GOLDTL 0x0050fe80 */
 int __cdecl gm_FindLowestRelationSlot(char *base)

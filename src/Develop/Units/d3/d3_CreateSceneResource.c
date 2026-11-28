@@ -1,4 +1,4 @@
-#include "client_scene_resources.h"
+#include "Develop/Units/d3/client_scene_resources.h"
 #include "Develop/Units/d3/d3_d3d.h"
 
 typedef union ResourceStyle {

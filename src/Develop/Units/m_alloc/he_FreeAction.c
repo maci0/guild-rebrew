@@ -22,7 +22,7 @@ struct slot {
 
 
 extern unsigned char* g_7d1980[];
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 extern int he_LastEventSlot;
 extern int g_7749d8;

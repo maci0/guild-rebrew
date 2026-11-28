@@ -14,7 +14,7 @@ typedef struct Kind {
 } Kind;
 // SIZE 0x24d
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_player.h"

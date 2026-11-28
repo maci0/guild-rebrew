@@ -13,7 +13,7 @@ typedef struct {
 	int nargs;
 } Entry;
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 CH_ACTION* __cdecl ch_NewAction(char* e);
 

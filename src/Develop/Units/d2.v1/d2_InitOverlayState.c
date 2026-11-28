@@ -27,7 +27,7 @@ extern short g_7725c4;
 extern void* g_100f8a0;
 extern TexSlot g_100f860[3];
 extern TexSlot g_100f840;
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 
 void* __cdecl d2_CreateSurface(TexDesc* d, int fmt);

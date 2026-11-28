@@ -11,9 +11,9 @@
 
 
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 extern unsigned char* lpGebaeudePROT;
 
 int __cdecl gm_CompareGameTime(pos14_7f4c00*, pos14_7f4c00*);

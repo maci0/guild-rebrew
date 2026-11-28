@@ -52,7 +52,7 @@ extern int g_1040494;
 extern char g_6a2e94[];
 extern char g_6a2ea8[];
 extern int d2_CurrentWindowId;
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 extern char* g_1015ea0;
 extern Row g_7e30c0[32];

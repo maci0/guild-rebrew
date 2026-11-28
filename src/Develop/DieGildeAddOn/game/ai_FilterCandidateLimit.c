@@ -18,7 +18,7 @@ typedef struct {
 } holder;
 // SIZE 0x18
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl sim_SetSyncParams(GAME_TIMESTAMP*, unsigned char, unsigned char, unsigned char);

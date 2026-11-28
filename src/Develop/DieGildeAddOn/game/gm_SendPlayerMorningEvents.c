@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/game_timestamp.h"
 #include <string.h>
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 #pragma pack(2)
 

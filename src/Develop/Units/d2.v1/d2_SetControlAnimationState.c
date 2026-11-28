@@ -7,7 +7,7 @@ typedef struct Slot {
 } Slot;
 // SIZE 0x2f4
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 typedef Anim_100e7a0 Anim;
 // SIZE 0x14
 

@@ -29,7 +29,7 @@ typedef struct
 extern char* g_772500;
 extern char* g_77255c;
 extern int d2_CurrentWindowId;
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 
 int __cdecl he_GetActiveKrediteByBorrower(int, int, char**);

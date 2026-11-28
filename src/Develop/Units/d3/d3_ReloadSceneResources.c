@@ -1,11 +1,11 @@
 
 
-#include "client_scene_loader.h"
+#include "Develop/Units/d3/client_scene_loader.h"
 
 extern int g_67a370;
 
 void __cdecl d3_VisitSceneObjects(int, int, int, void*, void*);
-#include "client_lighting.h"
+#include "Develop/Units/d3/client_lighting.h"
 
 void __cdecl d3_ReloadSceneResources(int mask, int b, SCENE_PROGRESS a)
 {

@@ -3,7 +3,7 @@ extern int d2_CurrentElementId;
 extern int g_14ce8e0;
 #include <string.h>
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 #pragma pack(push, 1)
 typedef struct tag7 {

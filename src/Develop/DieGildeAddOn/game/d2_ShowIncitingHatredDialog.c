@@ -27,7 +27,7 @@ extern int d2_CurrentElementId;
 extern float g_6628ac;
 extern unsigned char g_773d75;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 char* __cdecl gm_LookupEntityRecordById(int a);
 int __cdecl gm_WalkEntityChain(unsigned short id);

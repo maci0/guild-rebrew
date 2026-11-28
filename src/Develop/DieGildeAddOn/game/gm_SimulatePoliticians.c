@@ -1,4 +1,4 @@
-#include "client_actions.h"
+#include "Develop/DieGildeAddOn/game/client_actions.h"
 
 /* SIZE 0x10, matches the job record used by callers in this subsystem. */
 struct job {

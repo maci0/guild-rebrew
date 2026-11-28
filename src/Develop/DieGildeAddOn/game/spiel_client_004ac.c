@@ -11,7 +11,7 @@ void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 int* __cdecl gm_GetBardEventEntry(int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldValue(int, int, short, char*);
 void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);

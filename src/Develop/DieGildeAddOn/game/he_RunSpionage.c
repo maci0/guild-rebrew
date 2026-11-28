@@ -3,7 +3,7 @@
    is delivered.  State 1 scans the residential descriptors for a matching
    house type, state 2 waits for the target, state 3 hands the record over. */
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 extern char g_7f4ca0[];
 #include "game_data.h"

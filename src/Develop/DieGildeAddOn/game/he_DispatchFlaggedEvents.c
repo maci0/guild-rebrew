@@ -2,7 +2,7 @@
 
 
 extern int he_LastEventSlot;
-#include "client_types.h"
+#include "Develop/client_types.h"
 #include "Develop/DieGildeAddOn/game/he_action.h"
 extern void (__cdecl* g_7dc440[])(unsigned char*);
 

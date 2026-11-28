@@ -2,7 +2,7 @@
 
 extern char* gm_RichterKatholisch;
 extern char* gm_RichterEvangelisch;
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 
 void __cdecl cm_BeginCommandSync(void);
 int __cdecl cm_RequestAllocSpieler(int a, int b, int c, int d, int e, int f, int g, int h);

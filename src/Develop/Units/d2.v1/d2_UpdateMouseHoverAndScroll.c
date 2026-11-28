@@ -38,7 +38,7 @@ extern int g_100f1c8;
 extern int g_7725d8;
 extern int g_100f1c0;
 extern int g_100f1c4;
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 extern int tp_d2_SelectedControl;
 #include "Develop/Units/d2.v1/d2_gui.h"

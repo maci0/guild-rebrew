@@ -17,7 +17,7 @@ typedef struct {
 } Slot_52a960;
 // SIZE 0x3dc
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 extern int g_6a2902;
 extern int g_6a290c;

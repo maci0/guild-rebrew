@@ -6,7 +6,7 @@ void __cdecl d3_TraverseSceneObjects(int, int, int, void (__cdecl*)(void));
 void __cdecl d3_ReparentFackelLights(void);
 void __cdecl d3_FreeQuadtreeNode(int);
 int __cdecl d3_BuildSceneQuadtree(int, int, int, int);
-#include "client_lighting.h"
+#include "Develop/Units/d3/client_lighting.h"
 
 void __cdecl d3_RebuildSceneQuadtreeAndLighting(void)
 {

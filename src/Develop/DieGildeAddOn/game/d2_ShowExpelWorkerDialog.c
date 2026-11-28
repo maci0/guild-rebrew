@@ -1,6 +1,6 @@
 #include <string.h>
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-#include "client_actions.h"
+#include "Develop/DieGildeAddOn/game/client_actions.h"
 
 typedef struct {
 	int a;

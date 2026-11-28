@@ -1,5 +1,5 @@
-#include "client_sprites.h"
-#include "client_scene_resources.h"
+#include "Develop/Units/d2.v1/client_sprites.h"
+#include "Develop/Units/d3/client_scene_resources.h"
 
 void __cdecl m_FreeTracked(void*);
 

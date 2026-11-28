@@ -30,7 +30,7 @@ extern char g_6811b0[];
 extern int d2_CurrentWindowId;
 extern char* g_772500;
 extern char* g_77255c;
-#include "client_types.h"
+#include "Develop/client_types.h"
 #include "Develop/Units/d2.v1/d2_win.h"
 extern Win_1015f40 g_1015f40[0x60];
 

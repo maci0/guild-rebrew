@@ -17,7 +17,7 @@ extern int g_67a370;
 
 void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl d3_DisposeSceneContext(int);
-#include "client_scene_loader.h"
+#include "Develop/Units/d3/client_scene_loader.h"
 int __cdecl d3sm_CreateMap(struct D3_FLOOR_HEADER*, int, int);
 void __cdecl d3_TraverseSceneObjects(int, int, int, void*);
 void __cdecl d3_BindBuildingSceneObjects(void);

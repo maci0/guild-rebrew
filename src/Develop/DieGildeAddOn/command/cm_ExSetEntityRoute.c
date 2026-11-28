@@ -1,5 +1,5 @@
 #include <string.h>
-#include "client_packet_queue.h"
+#include "Develop/DieGildeAddOn/command/client_packet_queue.h"
 
 void* __cdecl gm_FindRecordById(int);
 void __cdecl rt_FreeRoutePoints(void*);

@@ -1,5 +1,5 @@
 #include <string.h>
-#include "client_method_registry.h"
+#include "Develop/DieGildeAddOn/game/client_method_registry.h"
 #pragma intrinsic(memset)
 
 extern AM_METHOD g_1008540[];

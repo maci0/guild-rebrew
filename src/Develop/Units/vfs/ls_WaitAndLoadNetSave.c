@@ -3,7 +3,7 @@
 /* Client counterpart of srv_RecvGame: waits until the downloaded savegame
  * (g_fb5740, g_aed328 bytes) is complete, then loads it from memory. */
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 // SIZE 0x21c
 #include "Develop/DieGildeAddOn/game/entity_record.h"
@@ -44,7 +44,7 @@ int __cdecl fcn_00522510(void* stream);
 
 int __cdecl fcn_00524040(void* stream);
 int __cdecl amt_fio_LoadAemter(void* stream, int version);
-#include "client_scene_loader.h"
+#include "Develop/Units/d3/client_scene_loader.h"
 int __cdecl gm_RebuildLoadedReferences(void);
 
 int __cdecl ls_WaitAndLoadNetSave(void)

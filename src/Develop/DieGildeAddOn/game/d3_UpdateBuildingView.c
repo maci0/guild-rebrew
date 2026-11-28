@@ -1,4 +1,4 @@
-#include "client_types.h"
+#include "Develop/client_types.h"
 typedef struct { unsigned char kind, unknown01[0x24c]; } BuildingProto5167c0;
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 extern pos14_7f4c00 gm_GameTime;

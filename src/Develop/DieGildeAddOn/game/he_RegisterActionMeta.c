@@ -9,7 +9,7 @@ struct s_7e2ac0 {
 	int w;
 };
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern s_7e2ac0 g_7e2ac0[48];
 
 

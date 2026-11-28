@@ -20,7 +20,7 @@ typedef struct {
 extern unsigned char g_773d75;
 extern char* gm_RichterKatholisch;
 extern char* gm_RichterEvangelisch;
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 
 void __cdecl fcn_0064d3f8(void);
 unsigned short __cdecl gm_RandomMod(int);

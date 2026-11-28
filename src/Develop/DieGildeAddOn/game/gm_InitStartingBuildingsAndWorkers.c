@@ -31,7 +31,7 @@ typedef struct {
 
 extern unsigned char* lpGebaeudeINST;
 extern unsigned char* lpGebaeudePROT;
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 extern unsigned char g_773d75;
 
 

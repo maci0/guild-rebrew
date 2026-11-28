@@ -1,4 +1,4 @@
-#include "client_lighting.h"
+#include "Develop/Units/d3/client_lighting.h"
 
 float __cdecl d3_CalcFloorFogDistance();
 void __cdecl d3_SetFogRange(float, float);

@@ -1,6 +1,6 @@
 #include <string.h>
-#include "client_types.h"
-#include "client_actions.h"
+#include "Develop/client_types.h"
+#include "Develop/DieGildeAddOn/game/client_actions.h"
 extern int g_100f1dc;
 extern int g_14ce8e0;
 extern int d2_CurrentElementId;

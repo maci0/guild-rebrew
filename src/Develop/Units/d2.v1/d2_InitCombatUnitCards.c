@@ -45,7 +45,7 @@ extern unsigned short* g_772f24;
 extern int d2_CurrentWindowId;
 extern char g_6b5c60[];
 extern char* g_1015ea0;
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 
 int __cdecl gm_GetEntityControlMask(int a1, char* a2);

@@ -10,7 +10,7 @@ struct SAVED_SCENE_REF {
 };
 #pragma pack()
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern COMMAND_STATUS_SLOT g_fb5760[0x8000];
 #define g_f31161 ((struct SAVED_SCENE_REF *)((char *)g_fb5760 + 1))
 

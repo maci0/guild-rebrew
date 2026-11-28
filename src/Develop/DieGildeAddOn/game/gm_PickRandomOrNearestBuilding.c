@@ -5,7 +5,7 @@
 extern char* g_773d78;
 
 void __cdecl d3_SelectSceneContext(int, int);
-#include "client_placement.h"
+#include "Develop/DieGildeAddOn/game/client_placement.h"
 int __cdecl d3_CollectUnusedSceneObjects(char*, char**);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl d3_TransformPoint(char* src, char* pos, float* out);

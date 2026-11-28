@@ -151,15 +151,15 @@ layer = 1
 pad2 = 2
 pad8 = 9
 [types."client.display_counter".GOLDTL]
-file = "src/client_types.h"
+file = "src/Develop/client_types.h"
 symbol = "DISPLAY_COUNTER"
 size = 12
 native_size = 12
 extent = "stride"
-evidence = "TL4737c0/4737e0 and Gold476c60/476c80 iterate six records across 72 bytes; ID at 0 and value at 4. Final four bytes remain uninterpreted. The DISPLAY_COUNTER definition is unchanged after canonical VECTOR3 naming and declaration changes. Reviewed complete native helper and rejecting wrong-table proofs in .scratch/goal23/pool-unification/production-native-proof.json. Names and subsystem inferred; storage owner unresolved. Rebound 2026-11-19 after the reviewed global renames changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after batch r5b49 struct and literal edits changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-21 after the reviewed type renames changed identifiers in its source context; definition, extent and offsets unchanged."
+evidence = "TL4737c0/4737e0 and Gold476c60/476c80 iterate six records across 72 bytes; ID at 0 and value at 4. Final four bytes remain uninterpreted. The DISPLAY_COUNTER definition is unchanged after canonical VECTOR3 naming and declaration changes. Reviewed complete native helper and rejecting wrong-table proofs in .scratch/goal23/pool-unification/production-native-proof.json. Names and subsystem inferred; storage owner unresolved. Rebound 2026-11-28 after its source file was renamed and naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
 source_hash = "33fd3a5a3cb6e66e159784f70cd5da2327eaf9be92cfb51add4617f7fc387eb3"
-headers_hash = "0afa1cd98f8d1d526a9b703d3522a9341d495b3723f17c0280190d617f4058d3"
+headers_hash = "0a3f33f4a46fd9d8b0ed08e2a1956f3d9688bae36868476bf05f8c53a6b0e889"
 context_hash = "c64f764cd83daca788662d56da59758ac73d6c262235b18c9028bd73d3e1b3e0"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
@@ -169,15 +169,15 @@ val = 4
 unknown_08 = 8
 
 [types."client.display_counter".GOLD]
-file = "src/client_types.h"
+file = "src/Develop/client_types.h"
 symbol = "DISPLAY_COUNTER"
 size = 12
 native_size = 12
 extent = "stride"
-evidence = "TL4737c0/4737e0 and Gold476c60/476c80 iterate six records across 72 bytes; ID at 0 and value at 4. Final four bytes remain uninterpreted. The DISPLAY_COUNTER definition is unchanged after canonical VECTOR3 naming and declaration changes. Reviewed complete native helper and rejecting wrong-table proofs in .scratch/goal23/pool-unification/production-native-proof.json. Names and subsystem inferred; storage owner unresolved. Rebound 2026-11-19 after the reviewed global renames changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after batch r5b49 struct and literal edits changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-21 after the reviewed type renames changed identifiers in its source context; definition, extent and offsets unchanged."
+evidence = "TL4737c0/4737e0 and Gold476c60/476c80 iterate six records across 72 bytes; ID at 0 and value at 4. Final four bytes remain uninterpreted. The DISPLAY_COUNTER definition is unchanged after canonical VECTOR3 naming and declaration changes. Reviewed complete native helper and rejecting wrong-table proofs in .scratch/goal23/pool-unification/production-native-proof.json. Names and subsystem inferred; storage owner unresolved. Rebound 2026-11-28 after its source file was renamed and naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
 source_hash = "33fd3a5a3cb6e66e159784f70cd5da2327eaf9be92cfb51add4617f7fc387eb3"
-headers_hash = "0afa1cd98f8d1d526a9b703d3522a9341d495b3723f17c0280190d617f4058d3"
+headers_hash = "0a3f33f4a46fd9d8b0ed08e2a1956f3d9688bae36868476bf05f8c53a6b0e889"
 context_hash = "a690f269814c85cbe10b297816f0bbf61c3efa9e869690883cd30860f5d7cf39"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
@@ -316,10 +316,10 @@ symbol = "CH_QUEUE_SLOT"
 size = 404
 native_size = 404
 extent = "allocation"
-evidence = "Rebound after the Rebrew 6.14.3 upgrade changed the compiler-context hash; the reviewed native extent and every modeled offset are unchanged. Rebound after the Rebrew 6.24.0 upgrade changed the compiler-context hash; the reviewed native extent and modeled offsets are unchanged. Rebound 2026-11-14: header stat metadata changed when hard-linked scratch copies were deleted; header content, sizes and offsets unchanged. Rebound for rebrew 6.49.0: reached-header hash is now content-based; header content, sizes and offsets unchanged. Rebound 2026-11-19 after the reviewed global renames changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after batch r5b49 struct and literal edits changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-20 after the reviewed function renames changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-21 after the reviewed type renames changed identifiers in its source context; definition, extent and offsets unchanged."
+evidence = "Rebound after the Rebrew 6.14.3 upgrade changed the compiler-context hash; the reviewed native extent and every modeled offset are unchanged.24.0 upgrade changed the compiler-context hash; the reviewed native extent and modeled offsets are unchanged. Rebound 2026-11-14: header stat metadata changed when hard-linked scratch copies were deleted; header content, sizes and offsets unchanged. Rebound for rebrew 6.49.0: reached-header hash is now content-based; header content, sizes and offsets unchanged. Rebound 2026-11-28 after naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
-source_hash = "0f90ba65e7524611b2d92379d43fd9c268a934ced3fefe7350dd46913bc6c6cf"
-headers_hash = "85facd272ceb1de9957eea6134f640d8c58c1c386824f0cd653e6b8e5c4fa2af"
+source_hash = "756918ff717aa7a59fcb655ce6cc235a6c05232f32b77c4113d07d991224d66e"
+headers_hash = "c1f1302c2f2cdb15021a1bcc259045c2b92ee44f2b49312a4e9a29bf44c78311"
 context_hash = "c64f764cd83daca788662d56da59758ac73d6c262235b18c9028bd73d3e1b3e0"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
@@ -331,10 +331,10 @@ symbol = "CH_QUEUE_SLOT"
 size = 404
 native_size = 404
 extent = "stride"
-evidence = "Native free-slot helpers TL 0x405080 and Gold 0x404760 scan 2000 records at 0x194 stride; startup allocation 0xc5440 equals 2000 times the stride. Occupancy dword at zero; payload remains opaque. The shared action record is a separate source view, not a storage ownership claim. Rebound after the Rebrew 6.24.0 upgrade changed the compiler-context hash; the reviewed native extent and modeled offsets are unchanged. Rebound 2026-11-14: header stat metadata changed when hard-linked scratch copies were deleted; header content, sizes and offsets unchanged. Rebound for rebrew 6.49.0: reached-header hash is now content-based; header content, sizes and offsets unchanged. Rebound 2026-11-19 after the reviewed global renames changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after batch r5b49 struct and literal edits changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-20 after the reviewed function renames changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-21 after the reviewed type renames changed identifiers in its source context; definition, extent and offsets unchanged."
+evidence = "Native free-slot helpers TL 0x405080 and Gold 0x404760 scan 2000 records at 0x194 stride; startup allocation 0xc5440 equals 2000 times the stride. Occupancy dword at zero; payload remains opaque. The shared action record is a separate source view, not a storage ownership claim.24.0 upgrade changed the compiler-context hash; the reviewed native extent and modeled offsets are unchanged. Rebound 2026-11-14: header stat metadata changed when hard-linked scratch copies were deleted; header content, sizes and offsets unchanged. Rebound for rebrew 6.49.0: reached-header hash is now content-based; header content, sizes and offsets unchanged. Rebound 2026-11-28 after naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
-source_hash = "0f90ba65e7524611b2d92379d43fd9c268a934ced3fefe7350dd46913bc6c6cf"
-headers_hash = "85facd272ceb1de9957eea6134f640d8c58c1c386824f0cd653e6b8e5c4fa2af"
+source_hash = "756918ff717aa7a59fcb655ce6cc235a6c05232f32b77c4113d07d991224d66e"
+headers_hash = "c1f1302c2f2cdb15021a1bcc259045c2b92ee44f2b49312a4e9a29bf44c78311"
 context_hash = "a690f269814c85cbe10b297816f0bbf61c3efa9e869690883cd30860f5d7cf39"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
@@ -342,15 +342,15 @@ binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 belegt = 0
 unbekannt_004 = 4
 [types."ch.action_dispatch_entry".GOLDTL]
-file = "src/client_types.h"
+file = "src/Develop/client_types.h"
 symbol = "CH_ACTION_DECLARATION"
 size = 76
 native_size = 76
 extent = "stride"
-evidence = "Paired native action registration TL406210/Gold405670 use 0x4c stride, fields +0,+4,+5,+0x48 and index <=0x3f; startup clears 64 x 0x4c bytes. Existing handler member is an opaque DWORD view, not a proven callback signature. Rebound 2026-11-19 after the reviewed global renames changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after batch r5b49 struct and literal edits changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-21 to the type's reviewed name CH_ACTION_DECLARATION (renamed from Entry_14d0c40); size, extent and offsets unchanged."
+evidence = "Paired native action registration TL406210/Gold405670 use 0x4c stride, fields +0,+4,+5,+0x48 and index <=0x3f; startup clears 64 x 0x4c bytes. Existing handler member is an opaque DWORD view, not a proven callback signature. Rebound 2026-11-28 after its source file was renamed and naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
 source_hash = "33fd3a5a3cb6e66e159784f70cd5da2327eaf9be92cfb51add4617f7fc387eb3"
-headers_hash = "0afa1cd98f8d1d526a9b703d3522a9341d495b3723f17c0280190d617f4058d3"
+headers_hash = "0a3f33f4a46fd9d8b0ed08e2a1956f3d9688bae36868476bf05f8c53a6b0e889"
 context_hash = "c64f764cd83daca788662d56da59758ac73d6c262235b18c9028bd73d3e1b3e0"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
@@ -361,15 +361,15 @@ name = 5
 param = 72
 
 [types."ch.action_dispatch_entry".GOLD]
-file = "src/client_types.h"
+file = "src/Develop/client_types.h"
 symbol = "CH_ACTION_DECLARATION"
 size = 76
 native_size = 76
 extent = "stride"
-evidence = "Paired native action registration TL406210/Gold405670 use 0x4c stride, fields +0,+4,+5,+0x48 and index <=0x3f; startup clears 64 x 0x4c bytes. Existing handler member is an opaque DWORD view, not a proven callback signature. Rebound 2026-11-19 after the reviewed global renames changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after batch r5b49 struct and literal edits changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-21 to the type's reviewed name CH_ACTION_DECLARATION (renamed from Entry_14d0c40); size, extent and offsets unchanged."
+evidence = "Paired native action registration TL406210/Gold405670 use 0x4c stride, fields +0,+4,+5,+0x48 and index <=0x3f; startup clears 64 x 0x4c bytes. Existing handler member is an opaque DWORD view, not a proven callback signature. Rebound 2026-11-28 after its source file was renamed and naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
 source_hash = "33fd3a5a3cb6e66e159784f70cd5da2327eaf9be92cfb51add4617f7fc387eb3"
-headers_hash = "0afa1cd98f8d1d526a9b703d3522a9341d495b3723f17c0280190d617f4058d3"
+headers_hash = "0a3f33f4a46fd9d8b0ed08e2a1956f3d9688bae36868476bf05f8c53a6b0e889"
 context_hash = "a690f269814c85cbe10b297816f0bbf61c3efa9e869690883cd30860f5d7cf39"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
@@ -417,10 +417,10 @@ symbol = "Kind"
 size = 20
 native_size = 20
 extent = "allocation"
-evidence = "Rebound after game/game_data.h gained client data declarations (header context change); the type definition, native extent and modeled offsets are unchanged. Rebound 2026-11-27 after its source file was renamed and naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
+evidence = "Rebound after game/game_data.h gained client data declarations (header context change); the type definition, native extent and modeled offsets are unchanged. Rebound 2026-11-28 after naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
-source_hash = "c8867cca004c1b341547944963e415e0cd0873d903fe356b4da91c2e288e18b2"
-headers_hash = "b7bc5e9a3e48eb7824b4931f6a784e277d2d506c71396818a9b6d7bb51ef78f6"
+source_hash = "304462fed3070732ae8d624f43fb5900c03ec4b1c9d435549e2431006b42a391"
+headers_hash = "24ca745974eb223072d5d34fe9cdd6bc9527c9c3ae75cbb63d629cca8c0b0539"
 context_hash = "c64f764cd83daca788662d56da59758ac73d6c262235b18c9028bd73d3e1b3e0"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
@@ -432,22 +432,22 @@ symbol = "Kind"
 size = 20
 native_size = 20
 extent = "allocation"
-evidence = "Rebound after game/game_data.h gained client data declarations (header context change); the type definition, native extent and modeled offsets are unchanged. Rebound 2026-11-27 after its source file was renamed and naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
+evidence = "Rebound after game/game_data.h gained client data declarations (header context change); the type definition, native extent and modeled offsets are unchanged. Rebound 2026-11-28 after naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
-source_hash = "c8867cca004c1b341547944963e415e0cd0873d903fe356b4da91c2e288e18b2"
-headers_hash = "b7bc5e9a3e48eb7824b4931f6a784e277d2d506c71396818a9b6d7bb51ef78f6"
+source_hash = "304462fed3070732ae8d624f43fb5900c03ec4b1c9d435549e2431006b42a391"
+headers_hash = "24ca745974eb223072d5d34fe9cdd6bc9527c9c3ae75cbb63d629cca8c0b0539"
 context_hash = "a690f269814c85cbe10b297816f0bbf61c3efa9e869690883cd30860f5d7cf39"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
 [types."event.validator_view".GOLD.offsets]
 fn = 0
 [types."client.timer_callback_slot".GOLDTL]
-file = "src/client_timer.h"
+file = "src/Develop/DieGildeAddOn/game/client_timer.h"
 symbol = "TIMER_CALLBACK_SLOT"
 size = 12
 native_size = 12
 extent = "stride"
-evidence = "TL42dcd0/Gold42e7b0 dispatch 32 slots at 1052c60/fe7aa0 with stride12/end+384: no-argument cdecl callback +0, unsigned divisor +4 and pause integer +8. German field names and header inferred; storage owner unresolved. Rebound 2026-11-27 after naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
+evidence = "TL42dcd0/Gold42e7b0 dispatch 32 slots at 1052c60/fe7aa0 with stride12/end+384: no-argument cdecl callback +0, unsigned divisor +4 and pause integer +8. German field names and header inferred; storage owner unresolved. Rebound 2026-11-28 after its source file was renamed and naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
 source_hash = "caeb0665bccc1616e821fe8d13c179baa6830ba5d770222c3c9b58e0bd89f6ed"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -460,12 +460,12 @@ periode = 4
 pausiert = 8
 
 [types."client.timer_callback_slot".GOLD]
-file = "src/client_timer.h"
+file = "src/Develop/DieGildeAddOn/game/client_timer.h"
 symbol = "TIMER_CALLBACK_SLOT"
 size = 12
 native_size = 12
 extent = "stride"
-evidence = "TL42dcd0/Gold42e7b0 dispatch 32 slots at 1052c60/fe7aa0 with stride12/end+384: no-argument cdecl callback +0, unsigned divisor +4 and pause integer +8. German field names and header inferred; storage owner unresolved. Rebound 2026-11-27 after naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
+evidence = "TL42dcd0/Gold42e7b0 dispatch 32 slots at 1052c60/fe7aa0 with stride12/end+384: no-argument cdecl callback +0, unsigned divisor +4 and pause integer +8. German field names and header inferred; storage owner unresolved. Rebound 2026-11-28 after its source file was renamed and naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
 source_hash = "caeb0665bccc1616e821fe8d13c179baa6830ba5d770222c3c9b58e0bd89f6ed"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -477,12 +477,12 @@ funktion = 0
 periode = 4
 pausiert = 8
 [types."am.effect".GOLDTL]
-file = "src/client_method_registry.h"
+file = "src/Develop/DieGildeAddOn/game/client_method_registry.h"
 symbol = "AM_EFFECT"
 size = 8
 native_size = 8
 extent = "stride"
-evidence = "TL494ed0/Gold495510: effect-value cursor method+0x34 advances8; copy32 bytes from+0x30 to+0x50; indexed final registry copy37 DWORDs at stride0x94. Names/header placement inferred; no allocation claim. See .scratch/goal66/method-review/layout-check.json and method-production-proof.json."
+evidence = "TL494ed0/Gold495510: effect-value cursor method+0x34 advances8; copy32 bytes from+0x30 to+0x50; indexed final registry copy37 DWORDs at stride0x94. Names/header placement inferred; no allocation claim. See .scratch/goal66/method-review/layout-check.json and method-production-proof.json. Rebound 2026-11-28 after its source file was renamed and naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
 source_hash = "4bfd556cb6b592815659f901f18da1064294d85a5082154273c959359b397285"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -494,12 +494,12 @@ type = 0
 value = 4
 
 [types."am.effect".GOLD]
-file = "src/client_method_registry.h"
+file = "src/Develop/DieGildeAddOn/game/client_method_registry.h"
 symbol = "AM_EFFECT"
 size = 8
 native_size = 8
 extent = "stride"
-evidence = "TL494ed0/Gold495510: effect-value cursor method+0x34 advances8; copy32 bytes from+0x30 to+0x50; indexed final registry copy37 DWORDs at stride0x94. Names/header placement inferred; no allocation claim. See .scratch/goal66/method-review/layout-check.json and method-production-proof.json."
+evidence = "TL494ed0/Gold495510: effect-value cursor method+0x34 advances8; copy32 bytes from+0x30 to+0x50; indexed final registry copy37 DWORDs at stride0x94. Names/header placement inferred; no allocation claim. See .scratch/goal66/method-review/layout-check.json and method-production-proof.json. Rebound 2026-11-28 after its source file was renamed and naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
 source_hash = "4bfd556cb6b592815659f901f18da1064294d85a5082154273c959359b397285"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -510,12 +510,12 @@ binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 type = 0
 value = 4
 [types."am.method".GOLDTL]
-file = "src/client_method_registry.h"
+file = "src/Develop/DieGildeAddOn/game/client_method_registry.h"
 symbol = "AM_METHOD"
 size = 148
 native_size = 148
 extent = "stride"
-evidence = "TL494ed0/Gold495510: effect-value cursor method+0x34 advances8; copy32 bytes from+0x30 to+0x50; indexed final registry copy37 DWORDs at stride0x94. Names/header placement inferred; no allocation claim. See .scratch/goal66/method-review/layout-check.json and method-production-proof.json."
+evidence = "TL494ed0/Gold495510: effect-value cursor method+0x34 advances8; copy32 bytes from+0x30 to+0x50; indexed final registry copy37 DWORDs at stride0x94. Names/header placement inferred; no allocation claim. See .scratch/goal66/method-review/layout-check.json and method-production-proof.json. Rebound 2026-11-28 after its source file was renamed and naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
 source_hash = "4bfd556cb6b592815659f901f18da1064294d85a5082154273c959359b397285"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -534,12 +534,12 @@ other_effects = 112
 flags = 144
 
 [types."am.method".GOLD]
-file = "src/client_method_registry.h"
+file = "src/Develop/DieGildeAddOn/game/client_method_registry.h"
 symbol = "AM_METHOD"
 size = 148
 native_size = 148
 extent = "stride"
-evidence = "TL494ed0/Gold495510: effect-value cursor method+0x34 advances8; copy32 bytes from+0x30 to+0x50; indexed final registry copy37 DWORDs at stride0x94. Names/header placement inferred; no allocation claim. See .scratch/goal66/method-review/layout-check.json and method-production-proof.json."
+evidence = "TL494ed0/Gold495510: effect-value cursor method+0x34 advances8; copy32 bytes from+0x30 to+0x50; indexed final registry copy37 DWORDs at stride0x94. Names/header placement inferred; no allocation claim. See .scratch/goal66/method-review/layout-check.json and method-production-proof.json. Rebound 2026-11-28 after its source file was renamed and naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
 source_hash = "4bfd556cb6b592815659f901f18da1064294d85a5082154273c959359b397285"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -556,7 +556,6 @@ effects = 48
 saved_effects = 80
 other_effects = 112
 flags = 144
-
 [types."d3.universe-view".GOLDTL]
 file = "src/Develop/DieGildeAddOn/game/init_EnsureObjektSceneContext.c"
 symbol = "D3_UNIVERSE_VIEW"
@@ -590,12 +589,12 @@ unbekannt_000 = 0
 verwendet = 981
 unbekannt_3d6 = 982
 [types."lc.gebaeude-bauplatz-result".GOLDTL]
-file = "src/client_placement.h"
+file = "src/Develop/DieGildeAddOn/game/client_placement.h"
 symbol = "LC_GEBAEUDE_BAUPLATZ"
 size = 84
 native_size = 84
 extent = "allocation"
-evidence = "Inferred stack result: TL4cc9da-4cc9e8 / Gold4cbe5a-4cbe68 clears 21 DWORDs; placement providers 5985f0/58fd20 and callbacks 598550/58fc80 access name+0, position+40, node+50. Complete native evidence .scratch/goal67/create-building/{tl,gold}-asm.json; stack view, no heap/global owner claim. Rebound 2026-11-27 after naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
+evidence = "Inferred stack result: TL4cc9da-4cc9e8 / Gold4cbe5a-4cbe68 clears 21 DWORDs; placement providers 5985f0/58fd20 and callbacks 598550/58fc80 access name+0, position+40, node+50. Complete native evidence .scratch/goal67/create-building/{tl,gold}-asm.json; stack view, no heap/global owner claim. Rebound 2026-11-28 after its source file was renamed and naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
 source_hash = "2aaaa4ffec0e825d350d3409041f2624dfde155256bef89239c53fe7614b6e0b"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -605,12 +604,12 @@ binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 [types."lc.gebaeude-bauplatz-result".GOLDTL.offsets]
 
 [types."lc.gebaeude-bauplatz-result".GOLD]
-file = "src/client_placement.h"
+file = "src/Develop/DieGildeAddOn/game/client_placement.h"
 symbol = "LC_GEBAEUDE_BAUPLATZ"
 size = 84
 native_size = 84
 extent = "allocation"
-evidence = "Inferred stack result: TL4cc9da-4cc9e8 / Gold4cbe5a-4cbe68 clears 21 DWORDs; placement providers 5985f0/58fd20 and callbacks 598550/58fc80 access name+0, position+40, node+50. Complete native evidence .scratch/goal67/create-building/{tl,gold}-asm.json; stack view, no heap/global owner claim. Rebound 2026-11-27 after naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
+evidence = "Inferred stack result: TL4cc9da-4cc9e8 / Gold4cbe5a-4cbe68 clears 21 DWORDs; placement providers 5985f0/58fd20 and callbacks 598550/58fc80 access name+0, position+40, node+50. Complete native evidence .scratch/goal67/create-building/{tl,gold}-asm.json; stack view, no heap/global owner claim. Rebound 2026-11-28 after its source file was renamed and naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
 source_hash = "2aaaa4ffec0e825d350d3409041f2624dfde155256bef89239c53fe7614b6e0b"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -619,12 +618,12 @@ binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
 [types."lc.gebaeude-bauplatz-result".GOLD.offsets]
 [types."d3.object-selection-list32".GOLDTL]
-file = "src/client_placement.h"
+file = "src/Develop/DieGildeAddOn/game/client_placement.h"
 symbol = "LC_OBJECT_LIST"
 size = 132
 native_size = 132
 extent = "allocation"
-evidence = "Inferred stack list: cm_ExCreateGeb clears 33 DWORDs (TL4cca7c-4cca87 / Gold4cbefc-4cbf07); collectors 5982d0/58fa00 append 4-byte object pointers and use count+80; callers 598330/58fa60 clear 132 bytes. .scratch/goal67/create-building/{tl,gold}-asm.json; stack view, no heap/global owner claim. Rebound 2026-11-27 after naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
+evidence = "Inferred stack list: cm_ExCreateGeb clears 33 DWORDs (TL4cca7c-4cca87 / Gold4cbefc-4cbf07); collectors 5982d0/58fa00 append 4-byte object pointers and use count+80; callers 598330/58fa60 clear 132 bytes. .scratch/goal67/create-building/{tl,gold}-asm.json; stack view, no heap/global owner claim. Rebound 2026-11-28 after its source file was renamed and naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
 source_hash = "2aaaa4ffec0e825d350d3409041f2624dfde155256bef89239c53fe7614b6e0b"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -634,12 +633,12 @@ binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 [types."d3.object-selection-list32".GOLDTL.offsets]
 
 [types."d3.object-selection-list32".GOLD]
-file = "src/client_placement.h"
+file = "src/Develop/DieGildeAddOn/game/client_placement.h"
 symbol = "LC_OBJECT_LIST"
 size = 132
 native_size = 132
 extent = "allocation"
-evidence = "Inferred stack list: cm_ExCreateGeb clears 33 DWORDs (TL4cca7c-4cca87 / Gold4cbefc-4cbf07); collectors 5982d0/58fa00 append 4-byte object pointers and use count+80; callers 598330/58fa60 clear 132 bytes. .scratch/goal67/create-building/{tl,gold}-asm.json; stack view, no heap/global owner claim. Rebound 2026-11-27 after naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
+evidence = "Inferred stack list: cm_ExCreateGeb clears 33 DWORDs (TL4cca7c-4cca87 / Gold4cbefc-4cbf07); collectors 5982d0/58fa00 append 4-byte object pointers and use count+80; callers 598330/58fa60 clear 132 bytes. .scratch/goal67/create-building/{tl,gold}-asm.json; stack view, no heap/global owner claim. Rebound 2026-11-28 after its source file was renamed and naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
 source_hash = "2aaaa4ffec0e825d350d3409041f2624dfde155256bef89239c53fe7614b6e0b"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -757,12 +756,12 @@ binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 c = 0
 tail = 10880
 [types."scene.resource_record".GOLD]
-file = "src/client_scene_resources.h"
+file = "src/Develop/Units/d3/client_scene_resources.h"
 symbol = "SCENE_RESOURCE"
 size = 128
 native_size = 128
 extent = "stride"
-evidence = "Gold native 0x461080 advances array [0xfb9074] by 0x80; worker 0x460e40 and release helper 0x461130 access these offsets. Inferred names; stride only, allocation bounds and storage owner unknown. .scratch/goal83-gold-finalizers/{finalizer,worker}.asm Rebound 2026-11-27 after naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
+evidence = "Gold native 0x461080 advances array [0xfb9074] by 0x80; worker 0x460e40 and release helper 0x461130 access these offsets. Inferred names; stride only, allocation bounds and storage owner unknown. .scratch/goal83-gold-finalizers/{finalizer,worker}.asm Rebound 2026-11-28 after its source file was renamed and naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
 source_hash = "a7fced667979979d2f6736ee7c3862195faae273ac755588032aa0e2b2ea71ef"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -784,12 +783,12 @@ value = 120
 result = 124
 extra = 125
 [types."scene.progress_context".GOLDTL]
-file = "src/client_scene_loader.h"
+file = "src/Develop/Units/d3/client_scene_loader.h"
 symbol = "SCENE_PROGRESS_CONTEXT"
 size = 20
 native_size = 20
 extent = "allocation"
-evidence = "T&L 0x43ac00 builds a 20-byte stack callback context; 0x43aad0 consumes cdecl callback at +0, integer fields +4/+8/+0xc and skip byte +0x10. Full 123 and 292-byte objects preserved by .scratch/goal83-scene-contracts/normalized-preservation.json; inferred names, not persistent storage. Rebound 2026-11-27 after naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
+evidence = "T&L 0x43ac00 builds a 20-byte stack callback context; 0x43aad0 consumes cdecl callback at +0, integer fields +4/+8/+0xc and skip byte +0x10. Full 123 and 292-byte objects preserved by .scratch/goal83-scene-contracts/normalized-preservation.json; inferred names, not persistent storage. Rebound 2026-11-28 after its source file was renamed and naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
 source_hash = "80af6df11233a4f0fd03afe6de7fc2f28a9f97e8656e1be823bd42f715639e59"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -810,8 +809,8 @@ native_size = 972
 extent = "allocation"
 evidence = "Rebound after the Rebrew 6.14.3 upgrade changed the compiler-context hash; the reviewed native extent and every modeled offset are unchanged.24.0 upgrade changed the compiler-context hash; the reviewed native extent and modeled offsets are unchanged. Rebound 2026-11-14: header stat metadata changed when hard-linked scratch copies were deleted; header content, sizes and offsets unchanged. Rebound for rebrew 6.49.0: reached-header hash is now content-based; header content, sizes and offsets unchanged.h, d2_gui.h, game_structs.h and others) were revised; recorded size, extent and offsets rechecked by the compiler. Rebound 2026-11-28 after naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
-source_hash = "b5c3b210eacf12e8e1a08c73f6f287f17d909e4fea287daac6613bf408e65b8c"
-headers_hash = "c3041a854dd8010414d2bd46e88959886c4d47523393048df91a483fe9adbd15"
+source_hash = "a7277c745f4db3d06722faf4a67646f60fb841c794d7fb62e728955ae30206ec"
+headers_hash = "d1d8ca1aa9e1ccffed483f1ad7f153b6419a20e70b8df6d7612700e6266a41fd"
 context_hash = "c64f764cd83daca788662d56da59758ac73d6c262235b18c9028bd73d3e1b3e0"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 

@@ -11,7 +11,7 @@
  * returns 1.
  */
 
-#include "client_lighting.h"
+#include "Develop/Units/d3/client_lighting.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))

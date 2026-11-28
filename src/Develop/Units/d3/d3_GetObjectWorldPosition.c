@@ -3,7 +3,7 @@
 
 
 void __cdecl d3_SelectSceneContext(int, int);
-#include "client_scene_transform.h"
+#include "Develop/Units/d3/client_scene_transform.h"
 
 void __cdecl d3_GetObjectWorldPosition(float* result, char* object)
 {

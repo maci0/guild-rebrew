@@ -1,5 +1,5 @@
 #include <string.h>
-#include "client_actions.h"
+#include "Develop/DieGildeAddOn/game/client_actions.h"
 #include "Develop/DieGildeAddOn/game/client_data.h"
 
 int __cdecl atoi(const char*);

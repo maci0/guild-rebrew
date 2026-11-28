@@ -3,7 +3,7 @@
 #include "Develop/Units/d2.v1/d2_win.h"
 extern int g_14cf900[]; extern short g_14cf902; extern char g_67d908[];
 #include "Develop/Units/d2.v1/d2_gui.h"
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern D2_RADIO_GROUP g_102cbc4[8];
 extern Slot100f200 g_100f200[];
 /* Refreshes the current selection/building view state. */

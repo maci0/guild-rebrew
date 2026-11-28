@@ -1,6 +1,6 @@
 unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream);
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 extern GRAPH_SAMPLE g_99ec20[16];
 extern CRIME_GRID_CELL g_99ef80[9][8];

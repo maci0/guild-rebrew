@@ -52,7 +52,7 @@ extern short g_fb9072;
 extern char g_624144[];
 extern char g_624158[];
 extern int g_6ed938;
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Slot_f8f110 g_f8f110[];
 extern char* g_f8f080;
 extern Row g_75f280[32];

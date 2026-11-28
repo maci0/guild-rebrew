@@ -1,7 +1,7 @@
 #ifndef CH_QUEUE_H
 #define CH_QUEUE_H
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 /* Inferred occupancy view of a 0x194-byte action slot; payload remains opaque. */
 typedef struct CH_QUEUE_SLOT {

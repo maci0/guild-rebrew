@@ -9,7 +9,7 @@ extern int g_699368;
 
 char* __cdecl cut_FindFreeCutscene(void);
 
-#include "client_packet_queue.h"
+#include "Develop/DieGildeAddOn/command/client_packet_queue.h"
 
 char* __cdecl cut_AllocCutscene(void* src)
 {

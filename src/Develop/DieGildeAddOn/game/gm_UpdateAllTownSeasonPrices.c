@@ -8,7 +8,7 @@ typedef struct
 // SIZE 0x2f4
 
 extern char g_868060[];
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl gm_UpdateTownSeasonPrices(int, char*);

@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 extern unsigned char g_14cf950;
 extern char g_6b5c60[];

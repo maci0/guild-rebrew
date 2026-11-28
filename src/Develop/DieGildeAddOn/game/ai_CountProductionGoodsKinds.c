@@ -14,7 +14,7 @@ typedef struct Rec {
 // SIZE 0x58
 
 extern char* lpObjektePROT;
-#include "client_types.h"
+#include "Develop/client_types.h"
  
 
 /* ADDRESS: GOLDTL 0x00487d80 */

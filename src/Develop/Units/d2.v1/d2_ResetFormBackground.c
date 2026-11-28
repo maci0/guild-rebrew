@@ -1,4 +1,4 @@
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern D2_FORM_RECORD g_1038140[];
 
 void __cdecl d2_BlitBufferToSurface(int a, int b, int c, int d, int e, int f, int g, int h);

@@ -12,7 +12,7 @@ typedef struct {
 extern int g_7e1fa0[];
 extern unsigned char g_773d75;
 extern int g_7747f8;
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl cm_BeginCommandSync(void);

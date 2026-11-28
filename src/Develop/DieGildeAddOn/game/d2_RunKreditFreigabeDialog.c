@@ -5,7 +5,7 @@ extern int g_774698;
 typedef unsigned char  u8;
 typedef unsigned short u16;
 typedef unsigned int   u32;
-#include "client_actions.h"
+#include "Develop/DieGildeAddOn/game/client_actions.h"
 void* __cdecl d2_LoadForm(short a, short b, char* c);
 void __cdecl d2_CenterDialogWindows(int a);
 void __cdecl d2_SetForm(int a, int b);

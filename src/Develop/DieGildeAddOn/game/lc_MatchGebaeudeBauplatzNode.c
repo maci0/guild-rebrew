@@ -1,6 +1,6 @@
 #include <string.h>
-#include "client_scene_transform.h"
-#include "client_placement.h"
+#include "Develop/Units/d3/client_scene_transform.h"
+#include "Develop/DieGildeAddOn/game/client_placement.h"
 
 #ifdef REBREW_GOLD
 void __cdecl d3_TransformPoint(char* object, float* position, float* result);

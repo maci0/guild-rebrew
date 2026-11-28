@@ -1,4 +1,4 @@
-#include "client_lighting.h"
+#include "Develop/Units/d3/client_lighting.h"
 void __cdecl d3_ReleaseSceneResourceRef(void*);
 void __cdecl d3_InvalidateFloorChunks(void*);
 

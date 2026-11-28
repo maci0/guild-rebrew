@@ -1,5 +1,5 @@
-#include "client_types.h"
-#include "client_actions.h"
+#include "Develop/client_types.h"
+#include "Develop/DieGildeAddOn/game/client_actions.h"
 
 #pragma pack(push, 1)
 typedef struct {

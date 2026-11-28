@@ -10,7 +10,7 @@ typedef struct {
 } Offer;
 
 // SIZE 0x18
-#include "client_types.h"
+#include "Develop/client_types.h"
 typedef CRIME_GRID_CELL Cell;
 
 extern CRIME_GRID_CELL g_99ef80[9][8];

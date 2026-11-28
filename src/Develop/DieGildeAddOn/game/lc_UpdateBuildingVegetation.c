@@ -6,8 +6,8 @@ void __cdecl d3_TransformPoint(char* src, char* pos, float* out);
 char* __cdecl gm_StartFilteredEntitySearch(int, int);
 char* __cdecl gm_AddObjekt(void);
 char* __cdecl gm_FindNextFilteredEntity(void);
-#include "client_scene_transform.h"
-#include "client_placement.h"
+#include "Develop/Units/d3/client_scene_transform.h"
+#include "Develop/DieGildeAddOn/game/client_placement.h"
 
 void __cdecl lc_UpdateBuildingVegetation(char* e)
 {

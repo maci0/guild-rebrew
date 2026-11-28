@@ -1,7 +1,7 @@
 #include "Develop/Units/d2.v1/gold_gui.h"
 #include "Develop/Units/d2.v1/gold_window.h"
 #include "Develop/Units/d2.v1/d2_window_view.h"
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 typedef D2_FORM_RECORD Obj;
 // SIZE 0x2bc

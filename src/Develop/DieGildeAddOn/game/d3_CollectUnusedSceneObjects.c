@@ -17,7 +17,7 @@ char __cdecl d3_CollectPrefixSceneObjects(char* e, char* pfx);
 char* __cdecl gm_StartFilteredEntitySearch(int, int);
 char* __cdecl gm_AddObjekt(void);
 char* __cdecl gm_FindNextFilteredEntity(void);
-#include "client_scene_transform.h"
+#include "Develop/Units/d3/client_scene_transform.h"
 
 #if defined(REBREW_GOLD)
 /* ADDRESS: GOLD 0x0058f880 */

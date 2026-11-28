@@ -32,7 +32,7 @@ typedef struct Slot {
 } Slot;
 // SIZE 0x2f4
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern D2_FORM_RECORD g_1038140[];
 
 #include "Develop/Units/d2.v1/d2_gui.h"

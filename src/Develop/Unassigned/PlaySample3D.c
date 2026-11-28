@@ -6,7 +6,7 @@ extern int g_6791c8;
 int __cdecl sb_PrepareVoice(int a, int b);
 int __cdecl sb_StartVoice(int o, int a, int b);
 void __cdecl sb_SetVoiceLoopCount(int o, int v);
-#include "client_sound.h"
+#include "Develop/Units/Msx/client_sound.h"
 
 int __cdecl PlaySample3D(int* a, int* b, int* c, int* d)
 {

@@ -31,7 +31,7 @@ char g_679060[] = "%s";
 extern char g_68b3f8[];
 extern char g_6a93c0[];
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/Units/d2.v1/d2_window_view.h"
 

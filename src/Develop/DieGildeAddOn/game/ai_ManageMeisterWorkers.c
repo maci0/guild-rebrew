@@ -1,6 +1,6 @@
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 /* One 0x21c-byte record of the 0x7f4ca0 table. Only the fields this body
  * reads are named; the rest stays padding. */

@@ -20,7 +20,7 @@ extern int g_77465c;
 extern char* g_7746a8;
 extern int g_7e2a9c;
 
-#include "client_scene_transform.h"
+#include "Develop/Units/d3/client_scene_transform.h"
 void __cdecl d3_FreeObjectAnimation(View* v);
 void __cdecl d3_SetNodePosition(View* v, float* p);
 void __cdecl d3_SetObjectRotation(View* v, float* r);

@@ -5,7 +5,7 @@ int __cdecl gm_CheckEntityType(unsigned char*);
 int __cdecl gm_IsWarehouse(unsigned char*);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl d3_TransformPoint(int, int, void*);
-#include "client_scene_transform.h"
+#include "Develop/Units/d3/client_scene_transform.h"
 #include "Develop/DieGildeAddOn/game/ambient_animal_slot.h"
 
 struct D3_AMBIENT_POINT {

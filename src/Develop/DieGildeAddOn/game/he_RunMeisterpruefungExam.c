@@ -28,7 +28,7 @@ struct msg {
 
 
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern char* gm_CityEntity;
 extern unsigned char g_773d75;

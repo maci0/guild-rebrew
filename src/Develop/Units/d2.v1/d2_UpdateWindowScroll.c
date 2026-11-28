@@ -29,7 +29,7 @@ typedef struct
 	char pad8c[0x2f4 - 0x8c];
 } D2_SCROLL_STEP_ENT;
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 extern Win_1015f40 g_1015f40[0x60];
 #include "Develop/Units/d2.v1/d2_gui.h"

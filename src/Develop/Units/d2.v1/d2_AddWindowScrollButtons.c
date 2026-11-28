@@ -1,7 +1,7 @@
 #include "Develop/Units/d2.v1/gold_gui.h"
 #include "Develop/Units/d2.v1/gold_window.h"
 #include "Develop/Units/d2.v1/d2_win.h"
-#include "client_types.h"
+#include "Develop/client_types.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 // SIZE 0x3cc

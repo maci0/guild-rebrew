@@ -1,6 +1,6 @@
 unsigned short __cdecl gm_RandomMod(int n);
 char* __cdecl gm_LookupEntityRecordById(int id);
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldDelta(int a, int b, int off, int* v);
 void __cdecl cm_RequestChangeAttribute(void);
 

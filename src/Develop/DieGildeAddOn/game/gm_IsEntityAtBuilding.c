@@ -3,7 +3,7 @@
 
 char* __cdecl d3_FindSceneObject(char*, int, int, char*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
-#include "client_scene_transform.h"
+#include "Develop/Units/d3/client_scene_transform.h"
 
 int __cdecl gm_IsEntityAtBuilding(char* a, char* b)
 {

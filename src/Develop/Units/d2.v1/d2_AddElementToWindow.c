@@ -1,7 +1,7 @@
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/Units/d2.v1/gold_window.h"
 #include "Develop/Units/d2.v1/d2_win.h"
-#include "client_types.h"
+#include "Develop/client_types.h"
 #include "Develop/Units/Error/error_message.h"
 
 extern GOLD_GUI_WINDOW g_00f8f120[];

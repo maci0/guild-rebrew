@@ -26,7 +26,7 @@ typedef struct {
 } Variant;
 
 extern char g_868060[];
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 extern unsigned char g_773d75;
 
 Estate* __cdecl gm_StartFilteredEntitySearch(int, int, int);

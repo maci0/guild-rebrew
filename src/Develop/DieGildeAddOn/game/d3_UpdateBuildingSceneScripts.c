@@ -2,7 +2,7 @@
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern char* g_7746cc;
 #include "game_data.h"
 typedef struct JobProto { unsigned char kind; unsigned char rest[0x24c]; } JobProto;

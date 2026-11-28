@@ -24,7 +24,7 @@ extern unsigned char g_7747b0;
 extern char g_6a41d4[];
 extern char g_6a41c0[];
 extern int g_7e1d40;
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Page_1038144 g_1038144[];
 extern struct ctlinfo g_1015f50[];
 
@@ -39,7 +39,7 @@ void __cdecl d2_PositionWindow(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 void __cdecl d2_RenderAndPresentFrame(void);
-#include "client_timer.h"
+#include "Develop/DieGildeAddOn/game/client_timer.h"
 void __cdecl d2_LoadingScreenTimerCallback(void);
 
 void __cdecl d2_ShowLoadingScreen(void)

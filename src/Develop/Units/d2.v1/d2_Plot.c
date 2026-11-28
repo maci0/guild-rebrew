@@ -2,7 +2,7 @@
 
 #include "Develop/Units/d2.v1/gold_window.h"
 #include "Develop/Units/d2.v1/d2_win.h"
-#include "client_types.h"
+#include "Develop/client_types.h"
 #include "Develop/Units/Error/error_message.h"
 #include "GOLDTL.fcn_00472960_gconf.h"
 

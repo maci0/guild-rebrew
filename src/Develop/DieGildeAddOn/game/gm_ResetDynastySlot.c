@@ -32,7 +32,7 @@ struct building {
 };
 
 extern char g_7f4ca0[];
-#include "client_types.h"
+#include "Develop/client_types.h"
 #include "Develop/DieGildeAddOn/game/he_action.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_773d68;

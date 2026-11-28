@@ -27,7 +27,7 @@ int __cdecl io_AppendText();
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_CheckActionBlocker(ENTITY_RECORD*, int);
 void __cdecl gm_ModifyHealth(int, int);
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
 int __cdecl cm_RequestChangeAttribute(void);
 int __cdecl cm_GetCommandStatus(int);

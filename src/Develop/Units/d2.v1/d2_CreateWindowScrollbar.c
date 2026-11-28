@@ -31,7 +31,7 @@ typedef struct {
 	char pad1f4[0x2f4 - 0x1f4];
 } Ent;
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 extern char* g_1015ea0;
 extern char g_6b5c60[];

@@ -1,4 +1,4 @@
-#include "client_dialog_helpers.h"
+#include "Develop/Units/d2.v1/client_dialog_helpers.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern unsigned char d2_PlotRadius;
 extern int d2_CurrentWindowId;

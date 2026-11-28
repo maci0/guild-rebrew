@@ -19,7 +19,7 @@ struct step {
 
 
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern char g_77e0a0[];
 extern char g_776709;

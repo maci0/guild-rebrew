@@ -14,7 +14,7 @@ extern unsigned char* g_7746c8;
 extern char* g_7746cc;
 extern char* g_7e2aa0;
 extern char* g_773d78;
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Slot_779d00 g_779d00[];
 extern char s_6a9b3c[];
 extern char s_6a9b30[];

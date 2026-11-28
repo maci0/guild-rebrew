@@ -9,7 +9,7 @@ struct house {
 	char pad8[0x214];
 };
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 // SIZE 0xe
 
 
@@ -21,7 +21,7 @@ struct house {
 
 extern pos14_7f4c00 gm_GameTime;
 extern struct house g_7f4ca0[];
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 extern char g_6b5c60[];
 
 char* __cdecl gm_LookupEntityRecordById(int id);

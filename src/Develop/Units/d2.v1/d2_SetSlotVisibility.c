@@ -36,7 +36,7 @@ typedef struct Slot {
 // SIZE 0x3cc
 
 extern char* g_1015ea0;
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00472170 */

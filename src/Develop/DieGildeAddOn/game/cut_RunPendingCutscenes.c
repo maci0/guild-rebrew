@@ -2,7 +2,7 @@
 
 
 extern char g_7f4ca4[];
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 
 int* __cdecl cut_FindLowestIdFlaggedCutscene(void);
 #include "Develop/DieGildeAddOn/game/event_callbacks.h"

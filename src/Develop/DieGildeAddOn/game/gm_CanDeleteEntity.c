@@ -32,7 +32,7 @@ typedef struct
 // SIZE 0x2d
 #pragma pack(pop)
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Rec2d_9a3800 g_9a3800[512];
 
 int __cdecl gm_CanDeleteEntity(unsigned char* p)

@@ -1,4 +1,4 @@
-#include "client_scene_resources.h"
+#include "Develop/Units/d3/client_scene_resources.h"
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 void __cdecl d3_UnlinkEffect(char*);

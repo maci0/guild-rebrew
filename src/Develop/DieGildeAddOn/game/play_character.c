@@ -4,7 +4,7 @@
 extern char* g_6b7ebc;
 extern char* evt_CurrentScript;
 
-#include "../../../client_sound.h"
+#include "Develop/Units/Msx/client_sound.h"
 char* __cdecl ch_CreateQueuedAction(char*, void (__cdecl*)(), unsigned char, int, ...);
 void __cdecl evt_LogScriptError(char*, int, const char*);
 int __cdecl evt_LoadGfxScript(const char* name);

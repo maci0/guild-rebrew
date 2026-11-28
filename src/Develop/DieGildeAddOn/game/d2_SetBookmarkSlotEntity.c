@@ -1,7 +1,7 @@
 
 
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Slot_779d00 g_779d00[];
 
 char* __cdecl gm_FindBuildingPrimarySlot(char*);

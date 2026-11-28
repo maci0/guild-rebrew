@@ -50,7 +50,7 @@ extern unsigned char g_6b8304;
 
 void __cdecl d3_UpdateSceneDetailLevel(int, int);
 void __cdecl d3_SelectSceneContext(int, int);
-#include "client_scene_loader.h"
+#include "Develop/Units/d3/client_scene_loader.h"
 void __cdecl ch_SetLowPolyMode(unsigned char);
 void __cdecl d3_SetCameraHeightFraction(int);
 void __cdecl fcn_0043bbf0(unsigned char);

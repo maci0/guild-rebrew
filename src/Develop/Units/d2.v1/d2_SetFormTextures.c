@@ -12,7 +12,7 @@ typedef struct Obj {
 } Obj;
 // SIZE 0x2bc
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern D2_FORM_RECORD g_1038140[];
 
 void __cdecl d2_ResetFormBackground(int k);

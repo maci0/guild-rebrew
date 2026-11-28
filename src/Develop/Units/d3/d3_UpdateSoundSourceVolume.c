@@ -1,5 +1,5 @@
 #include <math.h>
-#include "client_sound.h"
+#include "Develop/Units/Msx/client_sound.h"
 
 #include "Develop/Units/d3/d3_camera.h"
 void __cdecl d3_TransformPoint(char*, char*, float*);

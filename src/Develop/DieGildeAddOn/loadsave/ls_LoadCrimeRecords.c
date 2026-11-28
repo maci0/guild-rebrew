@@ -31,7 +31,7 @@ typedef struct
 	int b;
 } CRIME_PAIR;
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Slot_68ff80 g_68ff80[29];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern Rec2d_9a3800 g_9a3800[512];

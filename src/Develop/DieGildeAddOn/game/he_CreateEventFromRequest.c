@@ -57,7 +57,7 @@ struct spawn {
 
 extern void (__cdecl* g_7d1d80[])(HE_ACTION*);
 extern char g_7dc440[];
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 extern unsigned char* g_7d1980[];
 extern int g_7749d0;

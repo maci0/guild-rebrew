@@ -1,7 +1,7 @@
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
-#include "client_types.h"
-#include "client_placement.h"
+#include "Develop/client_types.h"
+#include "Develop/DieGildeAddOn/game/client_placement.h"
 
 /* Message object handed to fcn_004c5530: 0xf8 bytes, same field layout the
  * other packet builders in this unit store into. */

@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern char g_77e0a0[];
 extern short g_77e0a4;

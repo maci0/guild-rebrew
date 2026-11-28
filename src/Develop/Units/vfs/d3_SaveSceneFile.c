@@ -17,7 +17,7 @@ typedef struct
 extern struct VFS_DIR* g_6b7fdc;
 extern char s_6790b0[];
 extern int g_6b86d4;
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern VECTOR3 g_67bbdc;
 extern VECTOR3 g_6b86c4;
 #include "Develop/DieGildeAddOn/game/game_data.h"

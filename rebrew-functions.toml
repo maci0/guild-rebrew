@@ -339033,10 +339033,10 @@ name = "DllMain"
 similarity = 100.0
 
 ["SERVER.0x10009310".verification]
-source_hash = "52a523cee0ead118e0d12b859e622a64c2e4485d9a79c1ad5a7f743923f58a3d"
+source_hash = "3ad5a9f52c5930586ca57c6337be3692c859f3dcf572ba310106cbe78a2953c0"
 reference_hash = "a6bd7b63e4c12708d7f7a7e7d4ba72c1eb5381f5e270fdd13f4a86ae356bac84"
 reference_size = "8"
-headers_hash = "22fb96071ece2c4d7e4d42cbdad771ee06830ebf70fa3b2c093ec8c013e24774"
+headers_hash = "716fe92f4d4b7889265547dc95cfdc2276d6366a9d1d72b9ea1d5a856137dbaf"
 compiler_hash = "de0e27c265b8b7ef6faff7383f1a153dcd858f6f8c2720fdb18db2833a9b5e78"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
@@ -339044,7 +339044,7 @@ module = "SERVER"
 va = "0x10009310"
 context_hash = ""
 defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
-input_hash = "1453d7431ca62aa4fdde3581ba83f4f71da8b1e376e72874fbd79d8cd67b204e"
+input_hash = "864fc6ac831a40f2c511e7c3de7986263075c2e2ea34f5446f92ea7a558b2987"
 aligned_pairs = 2
 target_instructions = 2
 candidate_instructions = 2
@@ -339052,7 +339052,7 @@ hunks = 0
 similarity = 100.0
 writer = "verify"
 status = "EXACT"
-measured_at = "2026-11-28T01:23:46+00:00"
+measured_at = "2026-11-28T08:01:11+00:00"
 
 ["SERVER.0x10009320"]
 size = 42
@@ -339065,13 +339065,12 @@ file = "src/Develop/DieGildeAddOnServer/server.c"
 symbol = "_Init"
 kind = "FUNCTION"
 name = "Init"
-similarity = 93.33333333333333
 
 ["SERVER.0x10009320".verification]
-source_hash = "52a523cee0ead118e0d12b859e622a64c2e4485d9a79c1ad5a7f743923f58a3d"
+source_hash = "3ad5a9f52c5930586ca57c6337be3692c859f3dcf572ba310106cbe78a2953c0"
 reference_hash = "be640b6cc8190fa00228a87c2b37d2f5698813e89f879bfb11ccd938cca765fa"
 reference_size = "42"
-headers_hash = "22fb96071ece2c4d7e4d42cbdad771ee06830ebf70fa3b2c093ec8c013e24774"
+headers_hash = "716fe92f4d4b7889265547dc95cfdc2276d6366a9d1d72b9ea1d5a856137dbaf"
 compiler_hash = "de0e27c265b8b7ef6faff7383f1a153dcd858f6f8c2720fdb18db2833a9b5e78"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
@@ -339081,15 +339080,10 @@ context_hash = ""
 defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "0bd9cb39a37206f2693b8310dd22d466b95fef11f5b5d76fe1813d0795dd2a01"
-aligned_pairs = 14
-target_instructions = 15
-candidate_instructions = 15
-hunks = 1
-similarity = 93.33333333333333
-writer = "verify"
+input_hash = "92eab4ca5b76ca0fd6cca357268c42e07c17d972db2aac5a8cdd04544e2f0ea7"
 status = "EXACT"
-measured_at = "2026-11-28T01:28:22+00:00"
+writer = "verify"
+measured_at = "2026-11-28T08:01:09+00:00"
 
 [["SERVER.0x10009320".status_history]]
 old_status = "RELOC"
@@ -340073,13 +340067,12 @@ file = "src/Develop/DieGildeAddOnServer/server.c"
 symbol = "_Exit"
 kind = "FUNCTION"
 name = "Exit"
-similarity = 100.0
 
 ["SERVER.0x10009350".verification]
-source_hash = "52a523cee0ead118e0d12b859e622a64c2e4485d9a79c1ad5a7f743923f58a3d"
+source_hash = "3ad5a9f52c5930586ca57c6337be3692c859f3dcf572ba310106cbe78a2953c0"
 reference_hash = "a2885e25ee701837dc50d925568ef5b2ffe91dc2bed4f1cf9c5d9834cef9317c"
 reference_size = "68"
-headers_hash = "22fb96071ece2c4d7e4d42cbdad771ee06830ebf70fa3b2c093ec8c013e24774"
+headers_hash = "716fe92f4d4b7889265547dc95cfdc2276d6366a9d1d72b9ea1d5a856137dbaf"
 compiler_hash = "de0e27c265b8b7ef6faff7383f1a153dcd858f6f8c2720fdb18db2833a9b5e78"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
@@ -340089,15 +340082,10 @@ context_hash = ""
 defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "8855b5db2b1f110f1eb67ff25503377ec08e82b4fb32a9213fff2a0b052bebce"
-aligned_pairs = 20
-target_instructions = 20
-candidate_instructions = 20
-hunks = 0
-similarity = 100.0
-writer = "verify"
+input_hash = "840b224a9a6c7e2e9593e0b34fcd835d18546c4a890fff7aa166ea08856742f6"
 status = "EXACT"
-measured_at = "2026-11-28T01:28:22+00:00"
+writer = "verify"
+measured_at = "2026-11-28T08:01:09+00:00"
 
 [["SERVER.0x10009350".status_history]]
 old_status = "RELOC"
@@ -341081,13 +341069,12 @@ file = "src/Develop/DieGildeAddOnServer/server.c"
 symbol = "_ServerMainThread@4"
 kind = "FUNCTION"
 name = "ServerMainThread"
-similarity = 90.1116427432217
 
 ["SERVER.0x100093a0".verification]
-source_hash = "52a523cee0ead118e0d12b859e622a64c2e4485d9a79c1ad5a7f743923f58a3d"
+source_hash = "3ad5a9f52c5930586ca57c6337be3692c859f3dcf572ba310106cbe78a2953c0"
 reference_hash = "fe3dc2f5fa951d8692c2a91c5d1fb075cc58e18833513d47cf5f3abbdf34e9e5"
 reference_size = "2434"
-headers_hash = "22fb96071ece2c4d7e4d42cbdad771ee06830ebf70fa3b2c093ec8c013e24774"
+headers_hash = "716fe92f4d4b7889265547dc95cfdc2276d6366a9d1d72b9ea1d5a856137dbaf"
 compiler_hash = "de0e27c265b8b7ef6faff7383f1a153dcd858f6f8c2720fdb18db2833a9b5e78"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
@@ -341097,15 +341084,10 @@ context_hash = ""
 defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "21dee701d91800afe397553234d51aa928a659129f0f478921cf071c9d05181b"
-aligned_pairs = 565
-target_instructions = 627
-candidate_instructions = 627
-hunks = 57
-similarity = 90.1116427432217
-writer = "verify"
+input_hash = "7c949c62811d6f3e73e82f123f82d19adb910a268f7f661150d7b252f290ae11"
 status = "EXACT"
-measured_at = "2026-11-28T01:28:22+00:00"
+writer = "verify"
+measured_at = "2026-11-28T08:01:09+00:00"
 
 [["SERVER.0x100093a0".status_history]]
 old_status = "RELOC"
@@ -342087,13 +342069,12 @@ file = "src/Develop/DieGildeAddOnServer/server.c"
 symbol = "_srv_Init"
 kind = "FUNCTION"
 name = "srv_Init"
-similarity = 92.47311827956989
 
 ["SERVER.0x10009d30".verification]
-source_hash = "52a523cee0ead118e0d12b859e622a64c2e4485d9a79c1ad5a7f743923f58a3d"
+source_hash = "3ad5a9f52c5930586ca57c6337be3692c859f3dcf572ba310106cbe78a2953c0"
 reference_hash = "58584d2b14b7ff9a4276676b5c5435799382cc454ad9700a353302d55006d1bc"
 reference_size = "296"
-headers_hash = "22fb96071ece2c4d7e4d42cbdad771ee06830ebf70fa3b2c093ec8c013e24774"
+headers_hash = "716fe92f4d4b7889265547dc95cfdc2276d6366a9d1d72b9ea1d5a856137dbaf"
 compiler_hash = "de0e27c265b8b7ef6faff7383f1a153dcd858f6f8c2720fdb18db2833a9b5e78"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
@@ -342103,15 +342084,10 @@ context_hash = ""
 defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "44b378ad3d0398856679639dfc1854777e827ea2ee06a04b066d995d6b22ce64"
-aligned_pairs = 86
-target_instructions = 93
-candidate_instructions = 93
-hunks = 7
-similarity = 92.47311827956989
-writer = "verify"
+input_hash = "8b08d225ef4663cd9b780c67f764ad54af7454f70ab8b09377c7eb4bf47d2cb8"
 status = "EXACT"
-measured_at = "2026-11-28T01:28:22+00:00"
+writer = "verify"
+measured_at = "2026-11-28T08:01:09+00:00"
 
 [["SERVER.0x10009d30".status_history]]
 old_status = "RELOC"
@@ -343093,13 +343069,12 @@ file = "src/Develop/DieGildeAddOnServer/server.c"
 symbol = "_srv_CreateListenSocket"
 kind = "FUNCTION"
 name = "srv_CreateListenSocket"
-similarity = 95.72649572649573
 
 ["SERVER.0x10009e60".verification]
-source_hash = "52a523cee0ead118e0d12b859e622a64c2e4485d9a79c1ad5a7f743923f58a3d"
+source_hash = "3ad5a9f52c5930586ca57c6337be3692c859f3dcf572ba310106cbe78a2953c0"
 reference_hash = "b090d5a3c2abea0272b5dc0f7944ac87ae6eaacf46ac40dd5c01401ac54024eb"
 reference_size = "419"
-headers_hash = "22fb96071ece2c4d7e4d42cbdad771ee06830ebf70fa3b2c093ec8c013e24774"
+headers_hash = "716fe92f4d4b7889265547dc95cfdc2276d6366a9d1d72b9ea1d5a856137dbaf"
 compiler_hash = "de0e27c265b8b7ef6faff7383f1a153dcd858f6f8c2720fdb18db2833a9b5e78"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
@@ -343109,15 +343084,10 @@ context_hash = ""
 defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "d950872fba4a5f9cd9d184dc605b2a15daae5571fe52d0f1640c19ca4a0b6dbc"
-aligned_pairs = 112
-target_instructions = 117
-candidate_instructions = 117
-hunks = 5
-similarity = 95.72649572649573
-writer = "verify"
+input_hash = "32ebf90f6da9d511aa3a2bd463e71c3749a8d38e7bf25be78210a8e7be58df95"
 status = "EXACT"
-measured_at = "2026-11-28T01:28:22+00:00"
+writer = "verify"
+measured_at = "2026-11-28T08:01:09+00:00"
 
 [["SERVER.0x10009e60".status_history]]
 old_status = "RELOC"
@@ -344101,13 +344071,12 @@ file = "src/Develop/DieGildeAddOnServer/server.c"
 symbol = "_srv_CleanupSockets"
 kind = "FUNCTION"
 name = "srv_CleanupSockets"
-similarity = 97.2972972972973
 
 ["SERVER.0x1000a010".verification]
-source_hash = "52a523cee0ead118e0d12b859e622a64c2e4485d9a79c1ad5a7f743923f58a3d"
+source_hash = "3ad5a9f52c5930586ca57c6337be3692c859f3dcf572ba310106cbe78a2953c0"
 reference_hash = "7db4a0ad495e264cf6b5e17cc2aaf586135c3a107f545481d572522aaa30b62f"
 reference_size = "112"
-headers_hash = "22fb96071ece2c4d7e4d42cbdad771ee06830ebf70fa3b2c093ec8c013e24774"
+headers_hash = "716fe92f4d4b7889265547dc95cfdc2276d6366a9d1d72b9ea1d5a856137dbaf"
 compiler_hash = "de0e27c265b8b7ef6faff7383f1a153dcd858f6f8c2720fdb18db2833a9b5e78"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
@@ -344117,15 +344086,10 @@ context_hash = ""
 defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "97b3bdea1ee8dbfdc9b79137035e1cb5ffcb2b886896b7a4eb1ca666b1da24bb"
-aligned_pairs = 36
-target_instructions = 37
-candidate_instructions = 37
-hunks = 1
-similarity = 97.2972972972973
-writer = "verify"
+input_hash = "b6875c7c61d144b40891d48d6179dac4b2cf1ee9d95e33019a2c076a971b3149"
 status = "EXACT"
-measured_at = "2026-11-28T01:28:22+00:00"
+writer = "verify"
+measured_at = "2026-11-28T08:01:09+00:00"
 
 [["SERVER.0x1000a010".status_history]]
 old_status = "RELOC"
@@ -345109,13 +345073,12 @@ file = "src/Develop/DieGildeAddOnServer/server.c"
 symbol = "_srv_AcceptConnections"
 kind = "FUNCTION"
 name = "srv_AcceptConnections"
-similarity = 96.47058823529412
 
 ["SERVER.0x1000a080".verification]
-source_hash = "52a523cee0ead118e0d12b859e622a64c2e4485d9a79c1ad5a7f743923f58a3d"
+source_hash = "3ad5a9f52c5930586ca57c6337be3692c859f3dcf572ba310106cbe78a2953c0"
 reference_hash = "7617e1913bb55fa460981264531489f9a3b237e6899369a52c46c6da9f5057e3"
 reference_size = "600"
-headers_hash = "22fb96071ece2c4d7e4d42cbdad771ee06830ebf70fa3b2c093ec8c013e24774"
+headers_hash = "716fe92f4d4b7889265547dc95cfdc2276d6366a9d1d72b9ea1d5a856137dbaf"
 compiler_hash = "de0e27c265b8b7ef6faff7383f1a153dcd858f6f8c2720fdb18db2833a9b5e78"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
@@ -345125,15 +345088,10 @@ context_hash = ""
 defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "591b84792c7555c9cb5fdad2e804ec6c8fde026572a7020572b15ed8e9a2f985"
-aligned_pairs = 164
-target_instructions = 170
-candidate_instructions = 170
-hunks = 6
-similarity = 96.47058823529412
-writer = "verify"
+input_hash = "ed5304487be374dd60732f94b8c150492735c1f054d0d8fb44e7ee2d3571a7cf"
 status = "EXACT"
-measured_at = "2026-11-28T01:28:22+00:00"
+writer = "verify"
+measured_at = "2026-11-28T08:01:09+00:00"
 
 [["SERVER.0x1000a080".status_history]]
 old_status = "RELOC"
@@ -346117,13 +346075,12 @@ file = "src/Develop/DieGildeAddOnServer/server.c"
 symbol = "_cm_ClosePlayerConnection"
 kind = "FUNCTION"
 name = "cm_ClosePlayerConnection"
-similarity = 93.10344827586206
 
 ["SERVER.0x1000a2e0".verification]
-source_hash = "52a523cee0ead118e0d12b859e622a64c2e4485d9a79c1ad5a7f743923f58a3d"
+source_hash = "3ad5a9f52c5930586ca57c6337be3692c859f3dcf572ba310106cbe78a2953c0"
 reference_hash = "d61e8455ec9e8df1e22217404a645bbb367d79c10f2bbe472a26eaabc2490a0f"
 reference_size = "96"
-headers_hash = "22fb96071ece2c4d7e4d42cbdad771ee06830ebf70fa3b2c093ec8c013e24774"
+headers_hash = "716fe92f4d4b7889265547dc95cfdc2276d6366a9d1d72b9ea1d5a856137dbaf"
 compiler_hash = "de0e27c265b8b7ef6faff7383f1a153dcd858f6f8c2720fdb18db2833a9b5e78"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
@@ -346133,15 +346090,10 @@ context_hash = ""
 defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "11b1906b189937232e81dba64c278d088dc66b11793defeb08e3f0f2f470e2f0"
-aligned_pairs = 27
-target_instructions = 29
-candidate_instructions = 29
-hunks = 2
-similarity = 93.10344827586206
-writer = "verify"
+input_hash = "ec18585094bbb5710eff46c9dda014a18fb622881c73d69f6d0dc418525dfdc5"
 status = "EXACT"
-measured_at = "2026-11-28T01:28:22+00:00"
+writer = "verify"
+measured_at = "2026-11-28T08:01:09+00:00"
 
 [["SERVER.0x1000a2e0".status_history]]
 old_status = "RELOC"
@@ -347153,13 +347105,12 @@ file = "src/Develop/DieGildeAddOnServer/server.c"
 symbol = "_srv_ReceivePacketHeader"
 kind = "FUNCTION"
 name = "srv_ReceivePacketHeader"
-similarity = 96.03960396039604
 
 ["SERVER.0x1000a340".verification]
-source_hash = "52a523cee0ead118e0d12b859e622a64c2e4485d9a79c1ad5a7f743923f58a3d"
+source_hash = "3ad5a9f52c5930586ca57c6337be3692c859f3dcf572ba310106cbe78a2953c0"
 reference_hash = "3765b97d14db2c6d06ea2c70a7a6ff11277e16b60ab2a6dace48e1b116b8a5e7"
 reference_size = "336"
-headers_hash = "22fb96071ece2c4d7e4d42cbdad771ee06830ebf70fa3b2c093ec8c013e24774"
+headers_hash = "716fe92f4d4b7889265547dc95cfdc2276d6366a9d1d72b9ea1d5a856137dbaf"
 compiler_hash = "de0e27c265b8b7ef6faff7383f1a153dcd858f6f8c2720fdb18db2833a9b5e78"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
@@ -347169,15 +347120,10 @@ context_hash = ""
 defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "04c84b4ee1c0ec2b560ab74ebd541d08632f64a56d870f015d187d6378e996d8"
-aligned_pairs = 97
-target_instructions = 101
-candidate_instructions = 101
-hunks = 4
-similarity = 96.03960396039604
-writer = "verify"
+input_hash = "11a1a064065dd5b77a4a0a373eacc0ba7cbb8503caa97d34f813131e6cdd848f"
 status = "EXACT"
-measured_at = "2026-11-28T01:28:22+00:00"
+writer = "verify"
+measured_at = "2026-11-28T08:01:09+00:00"
 
 [["SERVER.0x1000a340".status_history]]
 old_status = "RELOC"
@@ -348197,13 +348143,12 @@ file = "src/Develop/DieGildeAddOnServer/server.c"
 symbol = "_srv_SendPlayerData"
 kind = "FUNCTION"
 name = "srv_SendPlayerData"
-similarity = 96.66666666666667
 
 ["SERVER.0x1000a490".verification]
-source_hash = "52a523cee0ead118e0d12b859e622a64c2e4485d9a79c1ad5a7f743923f58a3d"
+source_hash = "3ad5a9f52c5930586ca57c6337be3692c859f3dcf572ba310106cbe78a2953c0"
 reference_hash = "5f0ef502e7a61f8d2d5bfee47d9501da47237c6f27da3684dce4a4b8d0ba9378"
 reference_size = "211"
-headers_hash = "22fb96071ece2c4d7e4d42cbdad771ee06830ebf70fa3b2c093ec8c013e24774"
+headers_hash = "716fe92f4d4b7889265547dc95cfdc2276d6366a9d1d72b9ea1d5a856137dbaf"
 compiler_hash = "de0e27c265b8b7ef6faff7383f1a153dcd858f6f8c2720fdb18db2833a9b5e78"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
@@ -348213,15 +348158,10 @@ context_hash = ""
 defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "4a62e691c66ff6e5e202fa610cb6e29408e31e8ca784a7c2d9defb4064a5849b"
-aligned_pairs = 58
-target_instructions = 60
-candidate_instructions = 60
-hunks = 2
-similarity = 96.66666666666667
-writer = "verify"
+input_hash = "c53092eace2d91fc76e95fd57a25f7904889ab04059c063093de1f2bc9bd5329"
 status = "EXACT"
-measured_at = "2026-11-28T01:28:22+00:00"
+writer = "verify"
+measured_at = "2026-11-28T08:01:09+00:00"
 
 [["SERVER.0x1000a490".status_history]]
 old_status = "RELOC"
@@ -349235,13 +349175,12 @@ file = "src/Develop/DieGildeAddOnServer/server.c"
 symbol = "_srv_LoadBuf"
 kind = "FUNCTION"
 name = "srv_LoadBuf"
-similarity = 91.5929203539823
 
 ["SERVER.0x1000a570".verification]
-source_hash = "52a523cee0ead118e0d12b859e622a64c2e4485d9a79c1ad5a7f743923f58a3d"
+source_hash = "3ad5a9f52c5930586ca57c6337be3692c859f3dcf572ba310106cbe78a2953c0"
 reference_hash = "8e48bcd60dd23107ea5f2e1c00448df813524049e98fd35028651b1039d4eba4"
 reference_size = "750"
-headers_hash = "22fb96071ece2c4d7e4d42cbdad771ee06830ebf70fa3b2c093ec8c013e24774"
+headers_hash = "716fe92f4d4b7889265547dc95cfdc2276d6366a9d1d72b9ea1d5a856137dbaf"
 compiler_hash = "de0e27c265b8b7ef6faff7383f1a153dcd858f6f8c2720fdb18db2833a9b5e78"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
@@ -349251,15 +349190,10 @@ context_hash = ""
 defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "89aa06dec666026a95b485ee0987a726c449d824a9cd34ca774fca70d5e9c9c6"
-aligned_pairs = 207
-target_instructions = 226
-candidate_instructions = 226
-hunks = 17
-similarity = 91.5929203539823
-writer = "verify"
+input_hash = "33a83c45f3a174e79e0436231590eb9a6bbd90409ee7ab561fa8310f0f6de083"
 status = "EXACT"
-measured_at = "2026-11-28T01:28:22+00:00"
+writer = "verify"
+measured_at = "2026-11-28T08:01:09+00:00"
 
 [["SERVER.0x1000a570".status_history]]
 old_status = "RELOC"
@@ -350241,13 +350175,12 @@ file = "src/Develop/DieGildeAddOnServer/server.c"
 symbol = "_ProcessSendData"
 kind = "FUNCTION"
 name = "ProcessSendData"
-similarity = 98.0
 
 ["SERVER.0x1000a860".verification]
-source_hash = "52a523cee0ead118e0d12b859e622a64c2e4485d9a79c1ad5a7f743923f58a3d"
+source_hash = "3ad5a9f52c5930586ca57c6337be3692c859f3dcf572ba310106cbe78a2953c0"
 reference_hash = "e594a03c8fcbbbbc88ff215aedd0ef64d2198dc5170e5c1a98ff22ac5f1eb8ea"
 reference_size = "131"
-headers_hash = "22fb96071ece2c4d7e4d42cbdad771ee06830ebf70fa3b2c093ec8c013e24774"
+headers_hash = "716fe92f4d4b7889265547dc95cfdc2276d6366a9d1d72b9ea1d5a856137dbaf"
 compiler_hash = "de0e27c265b8b7ef6faff7383f1a153dcd858f6f8c2720fdb18db2833a9b5e78"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
@@ -350257,15 +350190,10 @@ context_hash = ""
 defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "192b8080b47434e0577707a7f5df7f67e3f9e93ee108adccb5a38001f7b8279e"
-aligned_pairs = 49
-target_instructions = 50
-candidate_instructions = 50
-hunks = 1
-similarity = 98.0
-writer = "verify"
+input_hash = "a52bd066500418fb263b545351e35d4986936effc1085bae8773146a3842160f"
 status = "EXACT"
-measured_at = "2026-11-28T01:28:22+00:00"
+writer = "verify"
+measured_at = "2026-11-28T08:01:09+00:00"
 
 [["SERVER.0x1000a860".status_history]]
 old_status = "RELOC"
@@ -351249,13 +351177,12 @@ file = "src/Develop/DieGildeAddOnServer/server.c"
 symbol = "_srv_QueueCommandForProcessing"
 kind = "FUNCTION"
 name = "srv_QueueCommandForProcessing"
-similarity = 96.42857142857143
 
 ["SERVER.0x1000a8f0".verification]
-source_hash = "52a523cee0ead118e0d12b859e622a64c2e4485d9a79c1ad5a7f743923f58a3d"
+source_hash = "3ad5a9f52c5930586ca57c6337be3692c859f3dcf572ba310106cbe78a2953c0"
 reference_hash = "ec34a48d2cdc40c478b1a4278df8d9aa0978a8d5435861fb6cdf10a3cf8170b1"
 reference_size = "170"
-headers_hash = "22fb96071ece2c4d7e4d42cbdad771ee06830ebf70fa3b2c093ec8c013e24774"
+headers_hash = "716fe92f4d4b7889265547dc95cfdc2276d6366a9d1d72b9ea1d5a856137dbaf"
 compiler_hash = "de0e27c265b8b7ef6faff7383f1a153dcd858f6f8c2720fdb18db2833a9b5e78"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
@@ -351265,15 +351192,10 @@ context_hash = ""
 defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "064377a5797d6f5a7db6638c864fdeab90c969a5bcc15f04c768cb8acb2084f2"
-aligned_pairs = 54
-target_instructions = 56
-candidate_instructions = 56
-hunks = 2
-similarity = 96.42857142857143
-writer = "verify"
+input_hash = "4be9f343e508e9930fd5cb9dc02818b460db9518a887a8a24087b4da04f5b26f"
 status = "EXACT"
-measured_at = "2026-11-28T01:28:22+00:00"
+writer = "verify"
+measured_at = "2026-11-28T08:01:09+00:00"
 
 [["SERVER.0x1000a8f0".status_history]]
 old_status = "RELOC"
@@ -352287,13 +352209,12 @@ file = "src/Develop/DieGildeAddOnServer/server.c"
 symbol = "_srv_PutConnSCommand"
 kind = "FUNCTION"
 name = "srv_PutConnSCommand"
-similarity = 96.42857142857143
 
 ["SERVER.0x1000a9a0".verification]
-source_hash = "52a523cee0ead118e0d12b859e622a64c2e4485d9a79c1ad5a7f743923f58a3d"
+source_hash = "3ad5a9f52c5930586ca57c6337be3692c859f3dcf572ba310106cbe78a2953c0"
 reference_hash = "0dcdded4665e195ac3d80cd449ddf347bfae5475096f0e5cac42a4d713bce4c8"
 reference_size = "170"
-headers_hash = "22fb96071ece2c4d7e4d42cbdad771ee06830ebf70fa3b2c093ec8c013e24774"
+headers_hash = "716fe92f4d4b7889265547dc95cfdc2276d6366a9d1d72b9ea1d5a856137dbaf"
 compiler_hash = "de0e27c265b8b7ef6faff7383f1a153dcd858f6f8c2720fdb18db2833a9b5e78"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
@@ -352303,15 +352224,10 @@ context_hash = ""
 defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "46efb5aa068cfabbb7363b259259b28bf3066c34fccfe40d95aead6c8ad53e06"
-aligned_pairs = 54
-target_instructions = 56
-candidate_instructions = 56
-hunks = 2
-similarity = 96.42857142857143
-writer = "verify"
+input_hash = "132f9b83378f3e3999b2ed70fc7e7d134670cd93daf9320f442b4b8c6b4fb052"
 status = "EXACT"
-measured_at = "2026-11-28T01:28:22+00:00"
+writer = "verify"
+measured_at = "2026-11-28T08:01:09+00:00"
 
 [["SERVER.0x1000a9a0".status_history]]
 old_status = "RELOC"
@@ -353327,10 +353243,10 @@ name = "list_unlink_relink"
 similarity = 100.0
 
 ["SERVER.0x1000aa50".verification]
-source_hash = "52a523cee0ead118e0d12b859e622a64c2e4485d9a79c1ad5a7f743923f58a3d"
+source_hash = "3ad5a9f52c5930586ca57c6337be3692c859f3dcf572ba310106cbe78a2953c0"
 reference_hash = "503f5395a171f9399da316958a7467dfa94cb5bf2e783184053ae7e9f0bf29b3"
 reference_size = "97"
-headers_hash = "22fb96071ece2c4d7e4d42cbdad771ee06830ebf70fa3b2c093ec8c013e24774"
+headers_hash = "716fe92f4d4b7889265547dc95cfdc2276d6366a9d1d72b9ea1d5a856137dbaf"
 compiler_hash = "de0e27c265b8b7ef6faff7383f1a153dcd858f6f8c2720fdb18db2833a9b5e78"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
@@ -353338,7 +353254,7 @@ module = "SERVER"
 va = "0x1000aa50"
 context_hash = ""
 defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
-input_hash = "f430cf072541fea97e5b0e542050a9ec1313c6defd81e04267f0d2bfa2012783"
+input_hash = "051ea3e0ad2afa5239da16a20e3e63eef16ca101b80683616f2baec7de1d3d8b"
 aligned_pairs = 22
 target_instructions = 22
 candidate_instructions = 22
@@ -353346,7 +353262,7 @@ hunks = 0
 similarity = 100.0
 writer = "verify"
 status = "EXACT"
-measured_at = "2026-11-28T01:23:46+00:00"
+measured_at = "2026-11-28T08:01:11+00:00"
 
 ["SERVER.0x1000aac0"]
 size = 639
@@ -353359,13 +353275,12 @@ file = "src/Develop/DieGildeAddOnServer/server.c"
 symbol = "_cm_ProcessCommandQueue"
 kind = "FUNCTION"
 name = "cm_ProcessCommandQueue"
-similarity = 94.6341463414634
 
 ["SERVER.0x1000aac0".verification]
-source_hash = "52a523cee0ead118e0d12b859e622a64c2e4485d9a79c1ad5a7f743923f58a3d"
+source_hash = "3ad5a9f52c5930586ca57c6337be3692c859f3dcf572ba310106cbe78a2953c0"
 reference_hash = "adf2c37a043704f06838f95c704d66702762d707d86f8d946f175f9d37344c79"
 reference_size = "639"
-headers_hash = "22fb96071ece2c4d7e4d42cbdad771ee06830ebf70fa3b2c093ec8c013e24774"
+headers_hash = "716fe92f4d4b7889265547dc95cfdc2276d6366a9d1d72b9ea1d5a856137dbaf"
 compiler_hash = "de0e27c265b8b7ef6faff7383f1a153dcd858f6f8c2720fdb18db2833a9b5e78"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
@@ -353375,15 +353290,10 @@ context_hash = ""
 defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "e2207100fe25effe3b107e00048c7d40a506936daa1209414d357c6bb1dde29c"
-aligned_pairs = 194
-target_instructions = 205
-candidate_instructions = 205
-hunks = 10
-similarity = 94.6341463414634
-writer = "verify"
+input_hash = "074fabea5cc28b1c79645cbade1f84dae3b1531cccefea4d487f2c8b22054fea"
 status = "EXACT"
-measured_at = "2026-11-28T01:28:22+00:00"
+writer = "verify"
+measured_at = "2026-11-28T08:01:09+00:00"
 
 [["SERVER.0x1000aac0".status_history]]
 old_status = "RELOC"
@@ -354365,13 +354275,12 @@ file = "src/Develop/DieGildeAddOnServer/server.c"
 symbol = "_srv_LogWinsockError"
 kind = "FUNCTION"
 name = "srv_LogWinsockError"
-similarity = 70.61503416856492
 
 ["SERVER.0x1000ad40".verification]
-source_hash = "52a523cee0ead118e0d12b859e622a64c2e4485d9a79c1ad5a7f743923f58a3d"
+source_hash = "3ad5a9f52c5930586ca57c6337be3692c859f3dcf572ba310106cbe78a2953c0"
 reference_hash = "d8ea16bd21bf50ea94b5580bb9cd102afaa8b3eb5612e57771786d8297efb7db"
 reference_size = "758"
-headers_hash = "22fb96071ece2c4d7e4d42cbdad771ee06830ebf70fa3b2c093ec8c013e24774"
+headers_hash = "716fe92f4d4b7889265547dc95cfdc2276d6366a9d1d72b9ea1d5a856137dbaf"
 compiler_hash = "de0e27c265b8b7ef6faff7383f1a153dcd858f6f8c2720fdb18db2833a9b5e78"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
@@ -354381,15 +354290,10 @@ context_hash = ""
 defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "c6a33eefb653f1452f148b1d42d02786d9737899c8861e75266e784fdd7b3299"
-aligned_pairs = 155
-target_instructions = 214
-candidate_instructions = 225
-hunks = 36
-similarity = 70.61503416856492
-writer = "verify"
+input_hash = "7d76b00f352caa7582d9a8c220d0eaecceefc09584bfdb8fb9c2c8dd9268648d"
 status = "EXACT"
-measured_at = "2026-11-28T01:28:22+00:00"
+writer = "verify"
+measured_at = "2026-11-28T08:01:09+00:00"
 
 [["SERVER.0x1000ad40".status_history]]
 old_status = "RELOC"
@@ -355390,13 +355294,12 @@ name = "srv_InitBuildingTypeTable"
 symbol = "_srv_InitBuildingTypeTable"
 kind = "FUNCTION"
 status = "EXACT"
-similarity = 95.0
 
 ["SERVER.0x1000b040".verification]
-source_hash = "52a523cee0ead118e0d12b859e622a64c2e4485d9a79c1ad5a7f743923f58a3d"
+source_hash = "3ad5a9f52c5930586ca57c6337be3692c859f3dcf572ba310106cbe78a2953c0"
 reference_hash = "a8d22eaa5d83125ebf7662d59d385446eb527bf2266e13c22b516e39f10f1309"
 reference_size = "372"
-headers_hash = "22fb96071ece2c4d7e4d42cbdad771ee06830ebf70fa3b2c093ec8c013e24774"
+headers_hash = "716fe92f4d4b7889265547dc95cfdc2276d6366a9d1d72b9ea1d5a856137dbaf"
 compiler_hash = "de0e27c265b8b7ef6faff7383f1a153dcd858f6f8c2720fdb18db2833a9b5e78"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
@@ -355406,15 +355309,10 @@ context_hash = ""
 defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "7bf4c706f058a29cbbbeddbe41f1e637a863b8cc43d523f09e08c40fc75bb20a"
-aligned_pairs = 76
-target_instructions = 80
-candidate_instructions = 80
-hunks = 4
-similarity = 95.0
-writer = "verify"
+input_hash = "478feb37dba4f9f229ce4a79e5552eab85d0818caf5514ec97aa9b3798f4f554"
 status = "EXACT"
-measured_at = "2026-11-28T01:28:22+00:00"
+writer = "verify"
+measured_at = "2026-11-28T08:01:09+00:00"
 
 [["SERVER.0x1000b040".status_history]]
 old_status = "RELOC"
@@ -356466,13 +356364,12 @@ file = "src/Develop/DieGildeAddOn/game/aemter.c"
 symbol = "_amt_ValidateOfficeCandidate"
 kind = "FUNCTION"
 name = "amt_ValidateOfficeCandidate"
-similarity = 82.85714285714286
 
 ["SERVER.0x1000b1c0".verification]
-source_hash = "9033d3173e578aa1a72203d81970671afa09c4ca4a9ab5b64a1704b6aceff732"
+source_hash = "de743f345e13800867bac078a8ec1e08533b011d19e6d4b492357dded6d08a7b"
 reference_hash = "76b9919219b9ff3bd6d00d6ab62c7e100539e3a7101782cc10246a6f2c1a2434"
 reference_size = "205"
-headers_hash = "f1ec008eb7f3996f7daf73188f58f6be24fc043c1cb0fd9f80cc614a2233c6c4"
+headers_hash = "4810e7f2e3f0ab8455130b4305c8e36184f47e71b3441016db8d630c1c39cea9"
 compiler_hash = "de0e27c265b8b7ef6faff7383f1a153dcd858f6f8c2720fdb18db2833a9b5e78"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
@@ -356482,15 +356379,10 @@ context_hash = ""
 defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "50963db06b8280458778c279c723b3f14b6446e15478aa142d6e45ff90097257"
-aligned_pairs = 58
-target_instructions = 70
-candidate_instructions = 70
-hunks = 12
-similarity = 82.85714285714286
-writer = "verify"
+input_hash = "be8a137de3e395868edc82bf9a07030cffb9ef8d7e301e241c4d06d088f4fb81"
 status = "EXACT"
-measured_at = "2026-11-28T07:55:27+00:00"
+writer = "verify"
+measured_at = "2026-11-28T08:01:09+00:00"
 
 [["SERVER.0x1000b1c0".status_history]]
 old_status = "RELOC"
@@ -357424,13 +357316,12 @@ file = "src/Develop/DieGildeAddOn/game/aemter.c"
 symbol = "_amt_ValidateAndAssignOffice"
 kind = "FUNCTION"
 name = "amt_ValidateAndAssignOffice"
-similarity = 83.46456692913385
 
 ["SERVER.0x1000b290".verification]
-source_hash = "9033d3173e578aa1a72203d81970671afa09c4ca4a9ab5b64a1704b6aceff732"
+source_hash = "de743f345e13800867bac078a8ec1e08533b011d19e6d4b492357dded6d08a7b"
 reference_hash = "7c30cc3359eee9958a0c9e7b372eec275ff05f25d1ecfb368cf67475abd419ca"
 reference_size = "425"
-headers_hash = "f1ec008eb7f3996f7daf73188f58f6be24fc043c1cb0fd9f80cc614a2233c6c4"
+headers_hash = "4810e7f2e3f0ab8455130b4305c8e36184f47e71b3441016db8d630c1c39cea9"
 compiler_hash = "de0e27c265b8b7ef6faff7383f1a153dcd858f6f8c2720fdb18db2833a9b5e78"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
@@ -357440,15 +357331,10 @@ context_hash = ""
 defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "8e7e8b23d955c631e234217cb96d4f66d4306a53fd0a8d5bdee37d1f319e10e2"
-aligned_pairs = 106
-target_instructions = 127
-candidate_instructions = 127
-hunks = 20
-similarity = 83.46456692913385
-writer = "verify"
+input_hash = "8677f14a4331ee20e7ef5076e6802719538652d11640c40619c60b63408fa0b4"
 status = "EXACT"
-measured_at = "2026-11-28T07:55:27+00:00"
+writer = "verify"
+measured_at = "2026-11-28T08:01:09+00:00"
 
 [["SERVER.0x1000b290".status_history]]
 old_status = "RELOC"
@@ -358382,13 +358268,12 @@ file = "src/Develop/DieGildeAddOn/game/aemter.c"
 symbol = "_amt_ValidateCommand"
 kind = "FUNCTION"
 name = "amt_ValidateCommand"
-similarity = 92.85714285714286
 
 ["SERVER.0x1000b440".verification]
-source_hash = "9033d3173e578aa1a72203d81970671afa09c4ca4a9ab5b64a1704b6aceff732"
+source_hash = "de743f345e13800867bac078a8ec1e08533b011d19e6d4b492357dded6d08a7b"
 reference_hash = "af88b6c17e3642c10c3adbcfe68927a103f56f7e0c931a28e677adcc04e0f0cd"
 reference_size = "133"
-headers_hash = "f1ec008eb7f3996f7daf73188f58f6be24fc043c1cb0fd9f80cc614a2233c6c4"
+headers_hash = "4810e7f2e3f0ab8455130b4305c8e36184f47e71b3441016db8d630c1c39cea9"
 compiler_hash = "de0e27c265b8b7ef6faff7383f1a153dcd858f6f8c2720fdb18db2833a9b5e78"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
@@ -358398,15 +358283,10 @@ context_hash = ""
 defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "89168ea097a297a327f67b2a7d39e4013a326307a156ae04c6b6b910b056cfc2"
-aligned_pairs = 52
-target_instructions = 56
-candidate_instructions = 56
-hunks = 4
-similarity = 92.85714285714286
-writer = "verify"
+input_hash = "42af6fc8da4e12f0aee54fb4e06cc4afa3844a93281269b68ba686cdbf3fe3d9"
 status = "EXACT"
-measured_at = "2026-11-28T07:55:27+00:00"
+writer = "verify"
+measured_at = "2026-11-28T08:01:09+00:00"
 
 [["SERVER.0x1000b440".status_history]]
 old_status = "RELOC"
@@ -359342,13 +359222,12 @@ file = "src/Develop/DieGildeAddOn/game/aemter.c"
 symbol = "_amt_ExecuteOfficeAssignment"
 kind = "FUNCTION"
 name = "amt_ExecuteOfficeAssignment"
-similarity = 86.82170542635659
 
 ["SERVER.0x1000b4d0".verification]
-source_hash = "9033d3173e578aa1a72203d81970671afa09c4ca4a9ab5b64a1704b6aceff732"
+source_hash = "de743f345e13800867bac078a8ec1e08533b011d19e6d4b492357dded6d08a7b"
 reference_hash = "9c84cf31ae84410022cdd9326e8d39ac824e45c278d1a6f2ca2d5d8852dac81a"
 reference_size = "836"
-headers_hash = "f1ec008eb7f3996f7daf73188f58f6be24fc043c1cb0fd9f80cc614a2233c6c4"
+headers_hash = "4810e7f2e3f0ab8455130b4305c8e36184f47e71b3441016db8d630c1c39cea9"
 compiler_hash = "de0e27c265b8b7ef6faff7383f1a153dcd858f6f8c2720fdb18db2833a9b5e78"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
@@ -359358,15 +359237,10 @@ context_hash = ""
 defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "01c925d2916d37ab1572c89a6a1daf4a1e1e4a2b0b58b7f96e93d9eb5f6a86ac"
-aligned_pairs = 224
-target_instructions = 258
-candidate_instructions = 258
-hunks = 30
-similarity = 86.82170542635659
-writer = "verify"
+input_hash = "b8706ee8405db2184716af5d44e1ec03f4c1ba8b3217c5470adf22d3ef2fc149"
 status = "EXACT"
-measured_at = "2026-11-28T07:55:27+00:00"
+writer = "verify"
+measured_at = "2026-11-28T08:01:09+00:00"
 
 [["SERVER.0x1000b4d0".status_history]]
 old_status = "RELOC"
@@ -360300,13 +360174,12 @@ file = "src/Develop/DieGildeAddOn/game/aemter.c"
 symbol = "_amt_FindEntity26"
 kind = "FUNCTION"
 name = "amt_FindEntity26"
-similarity = 76.92307692307693
 
 ["SERVER.0x1000b820".verification]
-source_hash = "9033d3173e578aa1a72203d81970671afa09c4ca4a9ab5b64a1704b6aceff732"
+source_hash = "de743f345e13800867bac078a8ec1e08533b011d19e6d4b492357dded6d08a7b"
 reference_hash = "66c26c453f97d6a6ae34a3692cd508020f29ec4364e82aec90988aa3a6e2d125"
 reference_size = "42"
-headers_hash = "f1ec008eb7f3996f7daf73188f58f6be24fc043c1cb0fd9f80cc614a2233c6c4"
+headers_hash = "4810e7f2e3f0ab8455130b4305c8e36184f47e71b3441016db8d630c1c39cea9"
 compiler_hash = "de0e27c265b8b7ef6faff7383f1a153dcd858f6f8c2720fdb18db2833a9b5e78"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
@@ -360316,15 +360189,10 @@ context_hash = ""
 defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "0e556d6ad4d3a17483e8a9fe6e021066c4f994b41fefe39a427db8ac9662931d"
-aligned_pairs = 10
-target_instructions = 13
-candidate_instructions = 13
-hunks = 3
-similarity = 76.92307692307693
-writer = "verify"
+input_hash = "61108a54df33a485e473366748c3aaf8d065e9c3127d13866d8f0c72dd586dd7"
 status = "EXACT"
-measured_at = "2026-11-28T07:55:27+00:00"
+writer = "verify"
+measured_at = "2026-11-28T08:01:09+00:00"
 
 [["SERVER.0x1000b820".status_history]]
 old_status = "RELOC"
@@ -361258,13 +361126,12 @@ file = "src/Develop/DieGildeAddOn/game/aemter.c"
 symbol = "_amt_FindEntity27"
 kind = "FUNCTION"
 name = "amt_FindEntity27"
-similarity = 76.92307692307693
 
 ["SERVER.0x1000b850".verification]
-source_hash = "9033d3173e578aa1a72203d81970671afa09c4ca4a9ab5b64a1704b6aceff732"
+source_hash = "de743f345e13800867bac078a8ec1e08533b011d19e6d4b492357dded6d08a7b"
 reference_hash = "6297831a90e80ffa632b517ceb18956d1adcb122ceb46a4761065f4e798676ac"
 reference_size = "42"
-headers_hash = "f1ec008eb7f3996f7daf73188f58f6be24fc043c1cb0fd9f80cc614a2233c6c4"
+headers_hash = "4810e7f2e3f0ab8455130b4305c8e36184f47e71b3441016db8d630c1c39cea9"
 compiler_hash = "de0e27c265b8b7ef6faff7383f1a153dcd858f6f8c2720fdb18db2833a9b5e78"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
@@ -361274,15 +361141,10 @@ context_hash = ""
 defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "c009b939a57c6269a3111d3f6bc4c0fa15212074b4657b9cd9d5236170639bfb"
-aligned_pairs = 10
-target_instructions = 13
-candidate_instructions = 13
-hunks = 3
-similarity = 76.92307692307693
-writer = "verify"
+input_hash = "4336dec5519b5a36241d8aca22c3e35229eda1dfca1c466b38a0ec8fefdb8874"
 status = "EXACT"
-measured_at = "2026-11-28T07:55:27+00:00"
+writer = "verify"
+measured_at = "2026-11-28T08:01:09+00:00"
 
 [["SERVER.0x1000b850".status_history]]
 old_status = "RELOC"
@@ -362216,13 +362078,12 @@ file = "src/Develop/DieGildeAddOn/game/aemter.c"
 symbol = "_amt_SwapOfficeHolders"
 kind = "FUNCTION"
 name = "amt_SwapOfficeHolders"
-similarity = 94.9579831932773
 
 ["SERVER.0x1000b880".verification]
-source_hash = "9033d3173e578aa1a72203d81970671afa09c4ca4a9ab5b64a1704b6aceff732"
+source_hash = "de743f345e13800867bac078a8ec1e08533b011d19e6d4b492357dded6d08a7b"
 reference_hash = "090b6403ee0c0a76b4d598161d901869b8923a6d90f360ffda4cec2f1527131f"
 reference_size = "263"
-headers_hash = "f1ec008eb7f3996f7daf73188f58f6be24fc043c1cb0fd9f80cc614a2233c6c4"
+headers_hash = "4810e7f2e3f0ab8455130b4305c8e36184f47e71b3441016db8d630c1c39cea9"
 compiler_hash = "de0e27c265b8b7ef6faff7383f1a153dcd858f6f8c2720fdb18db2833a9b5e78"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
@@ -362232,15 +362093,10 @@ context_hash = ""
 defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "e50ba4964b46b7b910942b9fd4b3839229953c9a84cd45448bfde00f13ec913d"
-aligned_pairs = 113
-target_instructions = 119
-candidate_instructions = 119
-hunks = 6
-similarity = 94.9579831932773
-writer = "verify"
+input_hash = "21b7ce744129b1434d14c5142c44ee6c191d6dbc7446c64c627181a6338d1071"
 status = "EXACT"
-measured_at = "2026-11-28T07:55:27+00:00"
+writer = "verify"
+measured_at = "2026-11-28T08:01:09+00:00"
 
 [["SERVER.0x1000b880".status_history]]
 old_status = "RELOC"
@@ -363174,13 +363030,12 @@ file = "src/Develop/DieGildeAddOn/game/aemter.c"
 symbol = "_amt_ClearEntityLinks"
 kind = "FUNCTION"
 name = "amt_ClearEntityLinks"
-similarity = 91.83673469387756
 
 ["SERVER.0x1000b990".verification]
-source_hash = "9033d3173e578aa1a72203d81970671afa09c4ca4a9ab5b64a1704b6aceff732"
+source_hash = "de743f345e13800867bac078a8ec1e08533b011d19e6d4b492357dded6d08a7b"
 reference_hash = "9059600c4467abfcbc3644daf92cca854e7f586a230501ee5a1cbc322a6efc2b"
 reference_size = "157"
-headers_hash = "f1ec008eb7f3996f7daf73188f58f6be24fc043c1cb0fd9f80cc614a2233c6c4"
+headers_hash = "4810e7f2e3f0ab8455130b4305c8e36184f47e71b3441016db8d630c1c39cea9"
 compiler_hash = "de0e27c265b8b7ef6faff7383f1a153dcd858f6f8c2720fdb18db2833a9b5e78"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
@@ -363190,15 +363045,10 @@ context_hash = ""
 defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "d1b95c3ae9a543ca5be94a3df333245b4047c82fe0cf29f1e8e3701176356923"
-aligned_pairs = 45
-target_instructions = 49
-candidate_instructions = 49
-hunks = 4
-similarity = 91.83673469387756
-writer = "verify"
+input_hash = "32f48d50f69443886185d21f7293a1076fb9c4fa904c5867b15cdf4616c1fa64"
 status = "EXACT"
-measured_at = "2026-11-28T07:55:27+00:00"
+writer = "verify"
+measured_at = "2026-11-28T08:01:09+00:00"
 
 [["SERVER.0x1000b990".status_history]]
 old_status = "RELOC"
@@ -364134,13 +363984,12 @@ file = "src/Develop/DieGildeAddOn/game/aemter.c"
 symbol = "_amt_UpdateEntityLinks"
 kind = "FUNCTION"
 name = "amt_UpdateEntityLinks"
-similarity = 92.85714285714286
 
 ["SERVER.0x1000ba30".verification]
-source_hash = "9033d3173e578aa1a72203d81970671afa09c4ca4a9ab5b64a1704b6aceff732"
+source_hash = "de743f345e13800867bac078a8ec1e08533b011d19e6d4b492357dded6d08a7b"
 reference_hash = "14eca5117166eeb4d20c89a721a7290544d1cdc51c57db2cf5b0d90e3a142455"
 reference_size = "179"
-headers_hash = "f1ec008eb7f3996f7daf73188f58f6be24fc043c1cb0fd9f80cc614a2233c6c4"
+headers_hash = "4810e7f2e3f0ab8455130b4305c8e36184f47e71b3441016db8d630c1c39cea9"
 compiler_hash = "de0e27c265b8b7ef6faff7383f1a153dcd858f6f8c2720fdb18db2833a9b5e78"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
@@ -364150,15 +363999,10 @@ context_hash = ""
 defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "9ebcf07caf7ff9d101c43e5473594820002a4ffabdeab4b889cf017ad643913d"
-aligned_pairs = 52
-target_instructions = 56
-candidate_instructions = 56
-hunks = 4
-similarity = 92.85714285714286
-writer = "verify"
+input_hash = "d23431f5901c582edea5a721d1ef52a513f800fa419784cc102eb993a5a6f4ba"
 status = "EXACT"
-measured_at = "2026-11-28T07:55:27+00:00"
+writer = "verify"
+measured_at = "2026-11-28T08:01:09+00:00"
 
 [["SERVER.0x1000ba30".status_history]]
 old_status = "RELOC"
@@ -365093,13 +364937,12 @@ file = "src/Develop/DieGildeAddOn/game/aemter.c"
 symbol = "_amt_fio_LoadAemter"
 kind = "FUNCTION"
 name = "amt_fio_LoadAemter"
-similarity = 92.05607476635514
 
 ["SERVER.0x1000baf0".verification]
-source_hash = "9033d3173e578aa1a72203d81970671afa09c4ca4a9ab5b64a1704b6aceff732"
+source_hash = "de743f345e13800867bac078a8ec1e08533b011d19e6d4b492357dded6d08a7b"
 reference_hash = "6b4a5e9aa7251ccf221881b4874486c68566f2a7020bf9b59a430d4c22dc63c3"
 reference_size = "606"
-headers_hash = "f1ec008eb7f3996f7daf73188f58f6be24fc043c1cb0fd9f80cc614a2233c6c4"
+headers_hash = "4810e7f2e3f0ab8455130b4305c8e36184f47e71b3441016db8d630c1c39cea9"
 compiler_hash = "de0e27c265b8b7ef6faff7383f1a153dcd858f6f8c2720fdb18db2833a9b5e78"
 toolchain = "(default)"
 cflags = "/O2 /Gd"
@@ -365109,15 +364952,10 @@ context_hash = ""
 defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
-input_hash = "5209c68be179c61a33ec65f61df3883feb322e6269df0a5ddad35b2d5164d0f4"
-aligned_pairs = 197
-target_instructions = 214
-candidate_instructions = 214
-hunks = 17
-similarity = 92.05607476635514
-writer = "verify"
+input_hash = "ecc9d7b0086e2eaa07c7d874409984b79e1211b235573b844964904b219a0458"
 status = "EXACT"
-measured_at = "2026-11-28T07:55:27+00:00"
+writer = "verify"
+measured_at = "2026-11-28T08:01:09+00:00"
 
 [["SERVER.0x1000baf0".status_history]]
 old_status = "RELOC"
@@ -755629,12 +755467,6 @@ purpose = "Historical CRT replacement-link experiment, excluded from the current
 [source.files."src/crt_region/data_restore.c".SERVER]
 purpose = "Historical raw .data gap blob for the retired postlink experiment; excluded from the current server build."
 
-[source.files."src/client_scene_transform.h".GOLDTL]
-purpose = "Canonical client scene-transform pointer declarations; inferred header placement"
-
-[source.files."src/client_method_registry.h".GOLDTL]
-purpose = "Inferred shared action-method/effect layout and registration contract."
-
 [source.files."src/Develop/DieGildeAddOn/loadsave/loadsave.h".GOLDTL]
 purpose = "Canonical opaque stream contracts for loadsave callers across server and clients"
 
@@ -755643,12 +755475,6 @@ purpose = "Canonical opaque stream contracts for loadsave callers across server 
 
 [source.files."src/Develop/DieGildeAddOn/loadsave/loadsave.h".GOLD]
 purpose = "Canonical opaque stream contracts for loadsave callers across server and clients"
-
-[source.files."src/client_scene_resources.h".GOLD]
-purpose = "Inferred Gold scene resource record and worker contract; native stride 0x80, no storage definitions"
-
-[source.files."src/client_sprites.h".GOLD]
-purpose = "Gold sprite bank declaration and cleanup contract; declaration-only unsized bank, storage owner unknown"
 
 [source.files."src/client_video_list.h".GOLDTL]
 purpose = "Inferred canonical declaration home for the existing opaque video-list head. No original source path, complete node definition or native storage owner claimed."
@@ -755676,6 +755502,18 @@ purpose = "Canonical existing client town record declarations; no storage defini
 
 [source.files."src/Develop/DieGildeAddOn/game/client_town.h".SERVER]
 purpose = "Canonical existing client town record declarations; no storage definition"
+
+[source.files."src/Develop/Units/d3/client_scene_resources.h".GOLD]
+purpose = "Inferred Gold scene resource record and worker contract; native stride 0x80, no storage definitions"
+
+[source.files."src/Develop/Units/d3/client_scene_transform.h".GOLDTL]
+purpose = "Canonical client scene-transform pointer declarations; inferred header placement"
+
+[source.files."src/Develop/Units/d2.v1/client_sprites.h".GOLD]
+purpose = "Gold sprite bank declaration and cleanup contract; declaration-only unsized bank, storage owner unknown"
+
+[source.files."src/Develop/DieGildeAddOn/game/client_method_registry.h".GOLDTL]
+purpose = "Inferred shared action-method/effect layout and registration contract."
 ["GOLD.0x004cfe70"]
 size = 50
 updated_by = "rehome"

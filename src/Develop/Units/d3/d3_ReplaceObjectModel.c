@@ -6,7 +6,7 @@ char* __cdecl d3_NextVisibleSceneNode(char*);
 
 void __cdecl d3_LoadModel(int, int);
 void __cdecl d3_AttachCachedModelParts(char*, int, int);
-#include "client_scene_loader.h"
+#include "Develop/Units/d3/client_scene_loader.h"
 
 char __cdecl d3_ReplaceObjectModel(char* o, int a2)
 {

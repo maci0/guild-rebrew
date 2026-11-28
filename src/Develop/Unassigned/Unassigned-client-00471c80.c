@@ -1,5 +1,5 @@
 void __cdecl d2_PositionControl(int, int, int);
-#include "client_types.h"
+#include "Develop/client_types.h"
 typedef D2_FORM_RECORD Obj;
 
 extern D2_FORM_RECORD g_1038140[];

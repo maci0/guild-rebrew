@@ -12,7 +12,7 @@ typedef struct {
 	int pad[4];
 } D2_TRIAL_CRIME_KIND;
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Rec2d_9a3800 g_9a3800[512];
 #include "Develop/Units/d2.v1/crime_description.h"
 extern char g_6ac4c8[];

@@ -2,7 +2,7 @@ extern int g_67a370;
 extern int g_7e4530;
 extern float g_6a2a18[7][4];
 extern float g_6a2b68[7][4];
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern VECTOR3 g_67bbdc;
 extern float g_67bbe0;
 extern float g_67bbe4;

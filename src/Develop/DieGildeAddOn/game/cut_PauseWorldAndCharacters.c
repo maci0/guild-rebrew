@@ -3,7 +3,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl gm_AdvanceGameClock(void);
-#include "client_timer.h"
+#include "Develop/DieGildeAddOn/game/client_timer.h"
 void __cdecl ch_SetAnimationPaused(char*, int);
 
 void __cdecl cut_PauseWorldAndCharacters(void)

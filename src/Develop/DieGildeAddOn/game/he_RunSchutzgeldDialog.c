@@ -1,4 +1,4 @@
-#include "client_dialog_helpers.h"
+#include "Develop/Units/d2.v1/client_dialog_helpers.h"
 
 /* Protection money message box. State 0 opens the dialog and seeds the
  * message ids, state 1 waits for the player choice and pushes the answer

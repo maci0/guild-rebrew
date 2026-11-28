@@ -9,8 +9,8 @@ struct cut_4c9d10 {
 // SIZE 0x35c
 
 extern char g_9b0e20[];
-#include "client_types.h"
-#include "client_packet_queue.h"
+#include "Develop/client_types.h"
+#include "Develop/DieGildeAddOn/command/client_packet_queue.h"
 extern int* cut_ActiveCutscene;
 extern volatile int g_6b7fac;
 

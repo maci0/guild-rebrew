@@ -15,7 +15,7 @@ typedef long (__stdcall* D3_TEXTURE_SET_FN)(D3D_DEVICE_VIEW*, int, int);
 
 
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern VECTOR3 g_67bbdc;
 extern float g_1052bd8;
 extern int g_1052bdc;

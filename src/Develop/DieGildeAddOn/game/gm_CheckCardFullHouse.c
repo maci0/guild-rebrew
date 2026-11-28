@@ -8,7 +8,7 @@ typedef struct {
 	int d;
 } Slot10;
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Card_1007ce0 g_1007ce0[24];
 
 int __cdecl gm_FindCardThreeOfAKind(int* ids, int* out, int flag);

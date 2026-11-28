@@ -39,7 +39,7 @@ typedef struct {
 	char pad1e4[0x2ec - 0x1e4];
 } Ent;
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Slot_f8f110 g_f8f110[];
 
 extern char* g_f8f080;

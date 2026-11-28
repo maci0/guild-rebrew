@@ -23,7 +23,7 @@ extern char* g_77255c;
 extern char* g_1015ea0;
 extern int g_100f1dc;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern List8c_102cbc8 g_102cbc8[];
 extern char g_14cf950;
 #include "Develop/Units/d2.v1/client_dialog_state.h"

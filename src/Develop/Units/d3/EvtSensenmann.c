@@ -1,5 +1,5 @@
 #include "Develop/Units/d3/d3_object.h"
-#include "client_sound.h"
+#include "Develop/Units/Msx/client_sound.h"
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 // Plague event ("Sensenmann") state step: plays the plague track, then walks

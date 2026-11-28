@@ -9,7 +9,7 @@ typedef struct
 } Slot170;
 // SIZE 0x170
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Slot170_7731b8 g_7731b8[8];
 
 int __cdecl d3_ReleaseSlot170(int id)

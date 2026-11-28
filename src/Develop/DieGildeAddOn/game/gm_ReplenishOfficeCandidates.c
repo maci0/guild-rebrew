@@ -30,7 +30,7 @@ void __cdecl cm_StepCommandQueue(void);
 float __cdecl gm_RandomFloat01(void);
 char *__cdecl cm_GetCommandResult(int);
 void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, int *);
 void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);

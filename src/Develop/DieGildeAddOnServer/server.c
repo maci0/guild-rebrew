@@ -249,7 +249,7 @@ void __cdecl srv_FormatStatFamily(char* x, char* out);
 
 #if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
 #include <stdlib.h>
-#include "../../client_types.h"
+#include "Develop/client_types.h"
 
 int __cdecl amt_GetOfficeGroup(int);
 int __cdecl amt_GetRoleTemplate(int, Rec18_68da68*);

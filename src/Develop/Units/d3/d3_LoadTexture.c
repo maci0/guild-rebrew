@@ -1,4 +1,4 @@
-#include "client_scene_resources.h"
+#include "Develop/Units/d3/client_scene_resources.h"
 
 /* ADDRESS: GOLD 0x004605b0 */
 SCENE_RESOURCE* __cdecl d3_LoadTexture(const char* name, unsigned int style, unsigned char flags, unsigned char control)

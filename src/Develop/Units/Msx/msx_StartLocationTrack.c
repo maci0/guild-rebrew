@@ -1,4 +1,4 @@
-#include "client_sound.h"
+#include "Develop/Units/Msx/client_sound.h"
 #include "Develop/Units/Msx/msx.h"
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 #include <string.h>
@@ -11,7 +11,7 @@ typedef struct MSX_LOCATION_TRACK_MAP {
 	char names[6][0x60];
 } MSX_LOCATION_TRACK_MAP;
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 #include "Develop/Units/Msx/id_group.h"
 
 extern char* g_7746c4;

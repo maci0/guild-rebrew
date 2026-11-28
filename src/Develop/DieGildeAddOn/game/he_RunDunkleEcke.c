@@ -1,5 +1,5 @@
-#include "client_dialog_helpers.h"
-#include "client_types.h"
+#include "Develop/Units/d2.v1/client_dialog_helpers.h"
+#include "Develop/client_types.h"
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* Dark corner dialog ("Dunkle Ecke"). Resolves the current target, offers
  * the neighbouring entities as the next target and books the skill checks

@@ -31,7 +31,7 @@ typedef struct Msg {
 } Msg;
 // SIZE 0x18
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca4[];

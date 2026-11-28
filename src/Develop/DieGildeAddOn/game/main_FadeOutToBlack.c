@@ -5,7 +5,7 @@ extern int g_7e1d40;
 
 
 
-#include "client_timer.h"
+#include "Develop/DieGildeAddOn/game/client_timer.h"
 void __cdecl d2_LoadingScreenTimerCallback(void);
 unsigned char* __cdecl d2_StartScreenFade(int, int, int, int, char*, int, int);
 int __cdecl main_RunFrameLoop(void*, int);

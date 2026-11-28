@@ -23,7 +23,7 @@ extern char g_6a2f5c[];
 extern char* g_7746c4;
 extern unsigned char* g_7746c8;
 extern int d2_CurrentWindowId;
-#include "client_types.h"
+#include "Develop/client_types.h"
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern char* lpObjektePROT;

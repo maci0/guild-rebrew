@@ -26,7 +26,7 @@ typedef struct {
 
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern char* g_7746a4;
 extern int g_7746f0;

@@ -25,7 +25,7 @@ typedef struct
 // SIZE 0x3cc
 
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned char g_773d75;

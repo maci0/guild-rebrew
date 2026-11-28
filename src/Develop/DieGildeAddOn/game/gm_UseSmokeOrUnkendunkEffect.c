@@ -1,5 +1,5 @@
 #include <string.h>
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 
 extern int gm_GameTime;
 extern int g_7f4c04;

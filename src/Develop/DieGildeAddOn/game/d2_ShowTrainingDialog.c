@@ -1,4 +1,4 @@
-#include "client_types.h"
+#include "Develop/client_types.h"
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 void* __cdecl memset(void*, int, unsigned int);
@@ -49,7 +49,7 @@ typedef struct
 extern char g_7f4ca0[];
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_player.h"
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern int g_14abc44;
 #include "Develop/DieGildeAddOn/game/game_data.h"

@@ -26,7 +26,7 @@ typedef struct
 } Panel;
 // SIZE 0x58
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 typedef Slot_778da0 Slot;
 // SIZE 0x38
 

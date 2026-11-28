@@ -2,7 +2,7 @@
 #ifndef CLIENT_SOUND_H
 #define CLIENT_SOUND_H
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 /* Positional sound record, reconstructed from shared users.
  * Size 0x54 on the Win32 targets. The constructor copies 50 name bytes;

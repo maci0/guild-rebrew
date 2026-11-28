@@ -4,7 +4,7 @@
 extern int g_100dc20;
 extern int g_100dc24;
 extern int g_7747b4;
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 void *__cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl ai_CollectGoodsResources(char *, char *);

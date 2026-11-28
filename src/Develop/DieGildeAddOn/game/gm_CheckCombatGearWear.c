@@ -1,4 +1,4 @@
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 /* Owned (both targets) by src/GOLDTL.fcn_004cef70.c. */
 extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/entity_record.h"

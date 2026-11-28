@@ -1,7 +1,7 @@
 #include <string.h>
 
-#include "client_types.h"
-#include "client_actions.h"
+#include "Develop/client_types.h"
+#include "Develop/DieGildeAddOn/game/client_actions.h"
 
 extern int gm_GameTime;
 extern unsigned char g_773d75;

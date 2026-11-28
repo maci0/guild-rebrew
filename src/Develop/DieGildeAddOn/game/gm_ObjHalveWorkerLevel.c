@@ -15,7 +15,7 @@ typedef struct Ent {
 // SIZE 0x21c
 
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 
 void __cdecl io_FormatTextBuffer(char*, int);
 int __cdecl d2_RunCityScrollMapDialog(int, int*, char*, int, int);

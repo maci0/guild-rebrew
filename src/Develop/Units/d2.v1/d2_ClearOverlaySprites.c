@@ -1,4 +1,4 @@
-#include "client_sprites.h"
+#include "Develop/Units/d2.v1/client_sprites.h"
 
 void __cdecl d2_ClearOverlaySprites(void)
 {

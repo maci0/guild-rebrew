@@ -1,4 +1,4 @@
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 void __cdecl cm_AppendCommandSyncField(int a, int b, int c, int* d);
 void __cdecl cm_SendSetAttribute(void);
 

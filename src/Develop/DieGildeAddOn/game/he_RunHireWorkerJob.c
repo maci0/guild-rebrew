@@ -2,7 +2,7 @@
    book the move-in, wait for the booking to be accepted, then take one
    resident out of the house counters and report the result. */
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 extern char g_7f4ca0[];
 extern int g_7f4ca4;

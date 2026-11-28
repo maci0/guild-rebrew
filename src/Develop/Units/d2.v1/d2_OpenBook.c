@@ -1,6 +1,6 @@
 #include <stdarg.h>
 #include <stdio.h>
-#include "client_types.h"
+#include "Develop/client_types.h"
 void* __cdecl m_alloc(unsigned int, const char*);
 void __cdecl m_FreeTracked(void*);
 int __cdecl d3_FindSceneObjectByName(int, int);

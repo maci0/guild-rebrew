@@ -18,7 +18,7 @@ typedef struct {
 	float f8;
 } Pal;
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Pal_1041d20 g_1041d20[6];
 extern float g_67a964;
 

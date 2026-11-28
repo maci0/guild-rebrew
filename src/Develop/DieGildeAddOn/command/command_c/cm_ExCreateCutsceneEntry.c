@@ -1,5 +1,5 @@
 #include <string.h>
-#include "client_packet_queue.h"
+#include "Develop/DieGildeAddOn/command/client_packet_queue.h"
 extern unsigned char g_7747b0;
 void __cdecl ReportClientMessage(const char* message);
 

@@ -3,7 +3,7 @@
 #include <string.h>
 #pragma intrinsic(memset)
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 typedef D2_RADIO_GROUP Group;
 // SIZE 0x8c
 
@@ -27,7 +27,7 @@ extern char g_7f4ca0[];
 extern int d2_CurrentWindowId;
 extern int g_100f1dc;
 #include "Develop/Units/d2.v1/client_dialog_state.h"
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 extern char g_6ac80c[];
 
 int __cdecl d2_LoadForm(int, int, char*);

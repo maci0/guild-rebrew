@@ -1,4 +1,4 @@
-#include "client_dialog_helpers.h"
+#include "Develop/Units/d2.v1/client_dialog_helpers.h"
 
 int __cdecl abs(int);
 int __cdecl ai_SelectBestMethod(int, int, int, Cmd*, Cmd*);

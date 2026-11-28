@@ -39,7 +39,7 @@ void __cdecl he_ApplyTransportSpeedModifiers(char* e, char* r);
 void __cdecl cm_SendCancelCharacterActions(int);
 void __cdecl ch_StartMovement(int, int, int, int, int, char*);
 int __cdecl cm_RequestMoveObjekt(int, int, int);
-#include "client_scene_transform.h"
+#include "Develop/Units/d3/client_scene_transform.h"
 int __cdecl gm_IsWarehouse(char*);
 void __cdecl cm_SendCreateAction0x38(int, int);
 int __cdecl cm_RequestChangeBits(int, int, int, int, int);

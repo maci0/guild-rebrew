@@ -2,7 +2,7 @@
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 extern char* lpObjektePROT;
-#include "client_types.h"
+#include "Develop/client_types.h"
 #include "Develop/Units/d2.v1/d2_win.h"
 extern D2_FORM_RECORD g_1038140[];
 extern Win_1015f40 g_1015f40[0x60];

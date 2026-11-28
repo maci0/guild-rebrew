@@ -3,7 +3,7 @@
 
 extern int g_774714;
 extern int g_774950;
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_774958;
@@ -22,7 +22,7 @@ extern unsigned char* g_7746c8;
 
 void __cdecl he_InitEventSystem(void);
 void __cdecl gm_AdvanceGameClock(void);
-#include "client_timer.h"
+#include "Develop/DieGildeAddOn/game/client_timer.h"
 void __cdecl fcn_0053f100(void);
 void __cdecl cm_InitCrimeRecords(void);
 void __cdecl gm_ResetCityStats(void);

@@ -8,7 +8,7 @@ extern int g_6652f8[];
 extern float g_6652d8[];
 extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 int __cdecl gv_CheckSlotActive(void* slot, int type);
 void* __cdecl FindSlotEntryFiltered(void* a, void* b, int c, void* d, int e);

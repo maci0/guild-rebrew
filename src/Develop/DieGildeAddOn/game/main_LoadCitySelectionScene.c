@@ -1,4 +1,4 @@
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern unsigned short g_7f4c04;
 extern int g_7f4c06;
@@ -15,7 +15,7 @@ void __cdecl gm_ResetAllEntities(void);
 void __cdecl gm_CleanupObjectEntities(void);
 void __cdecl d3_ClearAllSceneContexts(void);
 int __cdecl main_GetLanguage(void);
-#include "client_scene_loader.h"
+#include "Develop/Units/d3/client_scene_loader.h"
 
 void __cdecl main_LoadCitySelectionScene(char* name, int net)
 {

@@ -22,7 +22,7 @@ typedef struct Calc {
 } Calc;
 // SIZE 0xb4
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Rec15_699058 g_699058[37];
 extern unsigned char g_773d75;
 

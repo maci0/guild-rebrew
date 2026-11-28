@@ -1,7 +1,7 @@
 
 
 
-#include "client_packet_queue.h"
+#include "Develop/DieGildeAddOn/command/client_packet_queue.h"
 
 void __cdecl cm_RequestModifyHealth(int entityId, int delta)
 {

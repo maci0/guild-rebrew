@@ -37,14 +37,14 @@ typedef struct {
 } CITIZENSHIP_ENTITY;
 
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern unsigned char g_6a375c;
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl fcn_00502cd0(int, ...);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);

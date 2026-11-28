@@ -1,4 +1,4 @@
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 int __cdecl amt_GetRoleTemplate(int idx, Rec18_68da68* out);
 char* __cdecl gm_LookupEntityRecordById(int a1);

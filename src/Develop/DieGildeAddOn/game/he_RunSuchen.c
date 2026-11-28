@@ -22,7 +22,7 @@ struct house {
 	char pad180[0x9c];
 };
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 extern char* lpObjektePROT;

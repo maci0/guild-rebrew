@@ -33,7 +33,7 @@ typedef struct {
 } Pick;
 // SIZE 0x20
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 extern int g_14ce8e0;
 #include "Develop/Units/d2.v1/client_dialog_state.h"

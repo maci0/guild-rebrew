@@ -2,7 +2,7 @@
 /* Twin of GOLDTL 0x5270c0; the GOLD slot records are 0x3c4 bytes, not 0x3cc. */
 
 // SIZE 0x3c4
-#include "client_types.h"
+#include "Develop/client_types.h"
 #include "Develop/Units/d2.v1/gold_window.h"
 
 extern int g_623868;

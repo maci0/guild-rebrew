@@ -1,4 +1,4 @@
-#include "client_types.h"
+#include "Develop/client_types.h"
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 /* Panel table entry. The 0x58 entry stride comes from the entry addressing in
  * this body (index * 0x58). The named fields are the offsets this body reads

@@ -1,5 +1,5 @@
-#include "client_scene_loader.h"
-#include "client_types.h"
+#include "Develop/Units/d3/client_scene_loader.h"
+#include "Develop/client_types.h"
 #include <string.h>
 extern void* g_6b7fdc;
 extern unsigned char g_6339e4;

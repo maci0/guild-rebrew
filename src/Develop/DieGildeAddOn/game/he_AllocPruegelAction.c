@@ -12,7 +12,7 @@ typedef struct F8 {
 	int b;
 } F8;
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 
 extern __int64 g_666018;

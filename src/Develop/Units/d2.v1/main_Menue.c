@@ -38,7 +38,7 @@ int __cdecl main_RunFrameLoop(int, int);
 void __cdecl d3_SelectSceneContext(int, int);
 int __cdecl d3_ClearSceneState(void);
 int __cdecl main_GetLanguage(void);
-#include "client_scene_loader.h"
+#include "Develop/Units/d3/client_scene_loader.h"
 void __cdecl ReportClientMessage(char *);
 void __cdecl d3_SetViewport(float, float, int, int, int, int, int, int, int);
 void __cdecl d2_ClearScreen(void);

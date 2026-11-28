@@ -18,7 +18,7 @@ typedef struct
 } Player;
 // SIZE 0x21c
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_data.h"

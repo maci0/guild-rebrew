@@ -1,6 +1,6 @@
 #include <string.h>
 
-#include "client_method_registry.h"
+#include "Develop/DieGildeAddOn/game/client_method_registry.h"
 
 int __cdecl ai_ComputeBaseActionScore(float* s1, float* s2, int idx, char* e);
 int __cdecl am_StartDummyRechtschaffenheit(void);
@@ -109,7 +109,7 @@ int __cdecl ai_StartUsePrivs(void);
 int __cdecl ai_RunUsePrivs(void);
 int __cdecl ai_ScoreBuergermeister(void);
 int __cdecl ai_StartBuergermeister(void);
-#include "client_actions.h"
+#include "Develop/DieGildeAddOn/game/client_actions.h"
 int __cdecl ai_StartBuergermeisterUpgrade(void);
 int __cdecl am_RunBuergermeisterUpgrade(void);
 int __cdecl ai_StartBuergermeisterRathaus(void);

@@ -1,4 +1,4 @@
-#include "client_lighting.h"
+#include "Develop/Units/d3/client_lighting.h"
 
 #if defined(REBREW_GOLD)
 #include "Develop/DieGildeAddOn/game/ch_motion.h"

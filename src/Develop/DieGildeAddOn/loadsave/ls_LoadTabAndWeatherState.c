@@ -10,7 +10,7 @@ struct s_7e43a8 {
 	int e;
 };
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Tabs_7e43a8 g_7e43a8;
 
 

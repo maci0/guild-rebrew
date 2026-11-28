@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
-#include "client_types.h"
+#include "Develop/client_types.h"
 // SIZE 0x3cc
 #include "Develop/Units/d2.v1/d2_window_view.h"
 

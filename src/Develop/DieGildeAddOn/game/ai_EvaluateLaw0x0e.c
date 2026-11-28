@@ -14,7 +14,7 @@ typedef struct Ent {
 void __cdecl gm_GetLawEntry(int a, Stat* st);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 
 unsigned short __cdecl gm_RandomMod(int n);

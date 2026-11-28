@@ -19,7 +19,7 @@ struct s_1015f4c {
 	char pad[0x3c4];
 };
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 extern s_1015f4c g_1015f4c[];
 extern int d2_CurrentWindowId;

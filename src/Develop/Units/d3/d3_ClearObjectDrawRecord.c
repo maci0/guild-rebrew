@@ -1,5 +1,5 @@
 #include <string.h>
-#include "client_scene_resources.h"
+#include "Develop/Units/d3/client_scene_resources.h"
 #include "Develop/Units/m_alloc/m_alloc.h"
 typedef struct GOLD_RESET_COLOR { unsigned char a, b, c, d; } GOLD_RESET_COLOR;
 void __cdecl d3_ChangeObjectTransparency(void*, void*, GOLD_RESET_COLOR);

@@ -3,7 +3,7 @@
 
 
 void __cdecl d3_TransformPoint(int, int, float*);
-#include "client_scene_transform.h"
+#include "Develop/Units/d3/client_scene_transform.h"
 
 
 int __cdecl gm_CanTradeWithObject(char* building, char* target)

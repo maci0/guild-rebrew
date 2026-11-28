@@ -50,7 +50,7 @@ typedef struct {
 
 extern CARD_ROW_WIN g_6ad584[];
 extern CARD_PLAYER_SLOT g_7765a0[];
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 extern char* g_1015ea0;
 extern char* g_772500;

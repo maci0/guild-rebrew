@@ -1,7 +1,7 @@
 /* DATA TODO: .data native date0x770ae0 extent14, player records0x770b84 stride0x21c, relationship matrix0x7e5360 0x300*0x300 bytes, current entity0x6f25b8 word. */
 #include <string.h>
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 #define gm_GameTime (*(pos14_7f4c00*) 0x770ae0)
 extern char g_7f4ca4[];

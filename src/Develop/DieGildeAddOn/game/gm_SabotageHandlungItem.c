@@ -19,7 +19,7 @@ char *__cdecl gm_FindRecordById(int);
 int __cdecl gm_CheckEntityType(char *);
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl _ftol(void);
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, char *);
 void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl io_FormatTextBuffer(char *, int, ...);

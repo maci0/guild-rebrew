@@ -2,7 +2,7 @@ extern void* g_1468ae0[];
 extern void* ch_CharacterSlots[];
 extern char g_10432c0[];
 
-#include "client_scene_transform.h"
+#include "Develop/Units/d3/client_scene_transform.h"
 
 #if defined(REBREW_GOLD)
 /* ADDRESS: GOLD 0x00402720 */

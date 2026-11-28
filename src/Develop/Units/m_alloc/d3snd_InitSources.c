@@ -1,5 +1,5 @@
 #include <string.h>
-#include "client_sound.h"
+#include "Develop/Units/Msx/client_sound.h"
 extern void* __cdecl m_alloc(unsigned int size, const char* file_and_line);
 
 #pragma optimize("y", off)

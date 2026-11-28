@@ -1,4 +1,4 @@
-#include "client_types.h"
+#include "Develop/client_types.h"
 void __cdecl sim_SetSyncParams(pos14_7f4c00*, int, int, int);
 
 extern pos14_7f4c00 gm_GameTime;

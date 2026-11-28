@@ -34,7 +34,7 @@ typedef struct {
 extern int g_67d8cc;
 extern short g_7725c4;
 extern char* g_7725c0;
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Anim_100e7a0 g_100e7a0[0x30];
 
 extern char* g_772500;

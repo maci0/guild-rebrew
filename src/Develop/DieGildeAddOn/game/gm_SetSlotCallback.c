@@ -30,7 +30,7 @@ typedef struct
 } Set;
 // SIZE 0x38
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Slot170_7731b8 g_7731b8[8];
 extern Set g_772ff8[8];
 

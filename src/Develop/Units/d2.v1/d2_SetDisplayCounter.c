@@ -5,7 +5,7 @@ typedef struct Tag {
 } Tag;
 // SIZE 0xc
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 
 /* ADDRESS: GOLDTL 0x00473750 */

@@ -13,7 +13,7 @@ typedef struct
 #pragma pack(pop)
 
 extern Blob14 g_99f590;
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 extern float g_773d4c;
 extern float g_773d50;

@@ -1,7 +1,7 @@
 #include <string.h>
 
 extern char* g_6b5c20;
-#include "client_types.h"
+#include "Develop/client_types.h"
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_1551f40[0x30];

@@ -1,6 +1,6 @@
 #include <math.h>
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 extern pos14_7f4c00 gm_GameTime;
 extern int g_7f4c04;

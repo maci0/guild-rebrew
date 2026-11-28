@@ -1,5 +1,5 @@
 #include "Develop/Units/d2.v1/gold_gui.h"
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 extern GuiObj g_00fb1020[]; /* 0x00fb1020 */
 extern D2_FORM_RECORD g_1038140[];

@@ -7,7 +7,7 @@ typedef struct {
 	char pad[0x28];
 } VOICE_ENTRY;
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern SOUND_VOICE g_14cbbe0;
 extern char* g_6b7e88;
 #include "Develop/DieGildeAddOn/game/game_data.h"

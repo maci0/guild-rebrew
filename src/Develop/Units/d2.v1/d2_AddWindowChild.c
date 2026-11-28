@@ -11,7 +11,7 @@ typedef struct
 } fcn_00465eb0_Ent;
 // SIZE 0x2f4
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern char s_67d420[];

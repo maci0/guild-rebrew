@@ -18,7 +18,7 @@ typedef struct
 } Blob14;
 // SIZE 0xe
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Slot170_7731b8 g_7731b8[8];
 extern pos14_7f4c00 g_772fe8;
 extern pos14_7f4c00 gm_GameTime;

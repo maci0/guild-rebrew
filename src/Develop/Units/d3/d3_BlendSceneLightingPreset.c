@@ -1,7 +1,7 @@
 /* Morphs the colour/position tables between animation slots a0 and a0+1 by
  * factor t, scales the first vector by scale, and blends the six palette
  * entries of the slot into g_1041d20. */
-#include "client_types.h"
+#include "Develop/client_types.h"
 #include "Develop/Units/d3/d3_object.h"
 extern float g_6628a8;
 extern float g_6628a0;

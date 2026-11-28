@@ -3,7 +3,7 @@
  * counterpart (fcn_00525b40) with the per-version steps. */
 
 #include <string.h>
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 extern char* cm_LoadBuf;
 extern int ls_SaveVersion;

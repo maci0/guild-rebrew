@@ -1,6 +1,6 @@
 #include <string.h>
 #include "game_data.h"
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 char* __cdecl gm_GetEquippedCombatGear(char*);

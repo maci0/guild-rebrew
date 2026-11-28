@@ -1,4 +1,4 @@
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 
 void __cdecl gm_UpdateEntityAgingAndTraining(int);
 

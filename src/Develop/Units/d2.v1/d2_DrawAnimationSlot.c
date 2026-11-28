@@ -12,7 +12,7 @@ typedef struct Anim {
 } Anim;
 // SIZE 0x14
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Anim_100e7a0 g_100e7a0[0x30];
 
 void __cdecl d2_DrawDimmedSpriteFrame(int x, int y, int tex, void* seq, int frame);

@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "client_scene_loader.h"
+#include "Develop/Units/d3/client_scene_loader.h"
 void __cdecl d3_VisitSceneNodes(int obj, int a, int b, int cb);
 
 /* ADDRESS: GOLD 0x0050d6d0 */

@@ -1,7 +1,7 @@
 #include <string.h>
 #include <stdio.h>
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
-#include "client_types.h"
+#include "Develop/client_types.h"
 
 extern unsigned char g_773d75;
 extern char* gm_CityEntity;

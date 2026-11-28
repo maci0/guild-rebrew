@@ -1,4 +1,4 @@
-#include "client_types.h"
+#include "Develop/client_types.h"
 void* __cdecl memset(void*, int, unsigned int);
 #pragma intrinsic(memset)
 char* __cdecl strcat(char*, const char*);
@@ -36,7 +36,7 @@ extern int g_66602c;
 extern int g_aed32c;
 extern char g_7f4ca4[];
 extern char s_6999a8[];
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);

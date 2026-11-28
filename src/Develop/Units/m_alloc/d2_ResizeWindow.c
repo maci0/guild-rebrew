@@ -71,7 +71,7 @@ typedef struct
 	char pad294[0x3cc - 0x294];
 } fcn_0046eda0_Win;
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 extern char* g_1015ea0;
 extern char* g_772500;

@@ -1,6 +1,6 @@
-#include "../../../client_sound.h"
+#include "Develop/Units/Msx/client_sound.h"
 
-#include "../../../client_lighting.h"
+#include "Develop/Units/d3/client_lighting.h"
 SOUND_VOICE* __cdecl sb_PrepareVoice(int a, int b);
 
 void __cdecl PlayEntitySound(char* cmd)

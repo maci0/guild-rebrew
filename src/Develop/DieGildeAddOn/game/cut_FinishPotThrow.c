@@ -1,6 +1,6 @@
 extern unsigned short* g_772f24;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 
 char* __cdecl gm_FindEntityActiveItem(char* o);
 

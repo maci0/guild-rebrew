@@ -6,7 +6,7 @@ extern unsigned char* lpGebaeudePROT;
 extern char g_699adc[];
 extern char g_699af0[];
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
-#include "client_packet_builder.h"
+#include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldValue(int a, int b, int off, char* v);
 void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);

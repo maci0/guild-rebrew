@@ -3,7 +3,7 @@
 
 #include <string.h>
 
-#include "client_types.h"
+#include "Develop/client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, ...);
@@ -12,7 +12,7 @@ char* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_CheckEntityType(char*);
 int __cdecl gm_IsWarehouse(char*);
 unsigned short __cdecl gm_RandomMod(unsigned short);
-#include "client_scene_transform.h"
+#include "Develop/Units/d3/client_scene_transform.h"
 
 void __cdecl he_StartWeatherStorm(char* u)
 {
