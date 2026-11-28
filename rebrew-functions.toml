@@ -356466,6 +356466,7 @@ file = "src/Develop/DieGildeAddOn/game/aemter.c"
 symbol = "_amt_ValidateOfficeCandidate"
 kind = "FUNCTION"
 name = "amt_ValidateOfficeCandidate"
+similarity = 82.85714285714286
 
 ["SERVER.0x1000b1c0".verification]
 source_hash = "9033d3173e578aa1a72203d81970671afa09c4ca4a9ab5b64a1704b6aceff732"
@@ -356482,9 +356483,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "50963db06b8280458778c279c723b3f14b6446e15478aa142d6e45ff90097257"
-status = "EXACT"
+aligned_pairs = 58
+target_instructions = 70
+candidate_instructions = 70
+hunks = 12
+similarity = 82.85714285714286
 writer = "verify"
-measured_at = "2026-11-28T01:40:55+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:27+00:00"
 
 [["SERVER.0x1000b1c0".status_history]]
 old_status = "RELOC"
@@ -357418,6 +357424,7 @@ file = "src/Develop/DieGildeAddOn/game/aemter.c"
 symbol = "_amt_ValidateAndAssignOffice"
 kind = "FUNCTION"
 name = "amt_ValidateAndAssignOffice"
+similarity = 83.46456692913385
 
 ["SERVER.0x1000b290".verification]
 source_hash = "9033d3173e578aa1a72203d81970671afa09c4ca4a9ab5b64a1704b6aceff732"
@@ -357434,9 +357441,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "8e7e8b23d955c631e234217cb96d4f66d4306a53fd0a8d5bdee37d1f319e10e2"
-status = "EXACT"
+aligned_pairs = 106
+target_instructions = 127
+candidate_instructions = 127
+hunks = 20
+similarity = 83.46456692913385
 writer = "verify"
-measured_at = "2026-11-28T01:40:55+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:27+00:00"
 
 [["SERVER.0x1000b290".status_history]]
 old_status = "RELOC"
@@ -358370,6 +358382,7 @@ file = "src/Develop/DieGildeAddOn/game/aemter.c"
 symbol = "_amt_ValidateCommand"
 kind = "FUNCTION"
 name = "amt_ValidateCommand"
+similarity = 92.85714285714286
 
 ["SERVER.0x1000b440".verification]
 source_hash = "9033d3173e578aa1a72203d81970671afa09c4ca4a9ab5b64a1704b6aceff732"
@@ -358386,9 +358399,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "89168ea097a297a327f67b2a7d39e4013a326307a156ae04c6b6b910b056cfc2"
-status = "EXACT"
+aligned_pairs = 52
+target_instructions = 56
+candidate_instructions = 56
+hunks = 4
+similarity = 92.85714285714286
 writer = "verify"
-measured_at = "2026-11-28T01:40:55+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:27+00:00"
 
 [["SERVER.0x1000b440".status_history]]
 old_status = "RELOC"
@@ -359324,6 +359342,7 @@ file = "src/Develop/DieGildeAddOn/game/aemter.c"
 symbol = "_amt_ExecuteOfficeAssignment"
 kind = "FUNCTION"
 name = "amt_ExecuteOfficeAssignment"
+similarity = 86.82170542635659
 
 ["SERVER.0x1000b4d0".verification]
 source_hash = "9033d3173e578aa1a72203d81970671afa09c4ca4a9ab5b64a1704b6aceff732"
@@ -359340,9 +359359,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "01c925d2916d37ab1572c89a6a1daf4a1e1e4a2b0b58b7f96e93d9eb5f6a86ac"
-status = "EXACT"
+aligned_pairs = 224
+target_instructions = 258
+candidate_instructions = 258
+hunks = 30
+similarity = 86.82170542635659
 writer = "verify"
-measured_at = "2026-11-28T01:40:55+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:27+00:00"
 
 [["SERVER.0x1000b4d0".status_history]]
 old_status = "RELOC"
@@ -360276,6 +360300,7 @@ file = "src/Develop/DieGildeAddOn/game/aemter.c"
 symbol = "_amt_FindEntity26"
 kind = "FUNCTION"
 name = "amt_FindEntity26"
+similarity = 76.92307692307693
 
 ["SERVER.0x1000b820".verification]
 source_hash = "9033d3173e578aa1a72203d81970671afa09c4ca4a9ab5b64a1704b6aceff732"
@@ -360292,9 +360317,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "0e556d6ad4d3a17483e8a9fe6e021066c4f994b41fefe39a427db8ac9662931d"
-status = "EXACT"
+aligned_pairs = 10
+target_instructions = 13
+candidate_instructions = 13
+hunks = 3
+similarity = 76.92307692307693
 writer = "verify"
-measured_at = "2026-11-28T01:40:55+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:27+00:00"
 
 [["SERVER.0x1000b820".status_history]]
 old_status = "RELOC"
@@ -361228,6 +361258,7 @@ file = "src/Develop/DieGildeAddOn/game/aemter.c"
 symbol = "_amt_FindEntity27"
 kind = "FUNCTION"
 name = "amt_FindEntity27"
+similarity = 76.92307692307693
 
 ["SERVER.0x1000b850".verification]
 source_hash = "9033d3173e578aa1a72203d81970671afa09c4ca4a9ab5b64a1704b6aceff732"
@@ -361244,9 +361275,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "c009b939a57c6269a3111d3f6bc4c0fa15212074b4657b9cd9d5236170639bfb"
-status = "EXACT"
+aligned_pairs = 10
+target_instructions = 13
+candidate_instructions = 13
+hunks = 3
+similarity = 76.92307692307693
 writer = "verify"
-measured_at = "2026-11-28T01:40:55+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:27+00:00"
 
 [["SERVER.0x1000b850".status_history]]
 old_status = "RELOC"
@@ -362180,6 +362216,7 @@ file = "src/Develop/DieGildeAddOn/game/aemter.c"
 symbol = "_amt_SwapOfficeHolders"
 kind = "FUNCTION"
 name = "amt_SwapOfficeHolders"
+similarity = 94.9579831932773
 
 ["SERVER.0x1000b880".verification]
 source_hash = "9033d3173e578aa1a72203d81970671afa09c4ca4a9ab5b64a1704b6aceff732"
@@ -362196,9 +362233,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "e50ba4964b46b7b910942b9fd4b3839229953c9a84cd45448bfde00f13ec913d"
-status = "EXACT"
+aligned_pairs = 113
+target_instructions = 119
+candidate_instructions = 119
+hunks = 6
+similarity = 94.9579831932773
 writer = "verify"
-measured_at = "2026-11-28T01:40:55+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:27+00:00"
 
 [["SERVER.0x1000b880".status_history]]
 old_status = "RELOC"
@@ -363132,6 +363174,7 @@ file = "src/Develop/DieGildeAddOn/game/aemter.c"
 symbol = "_amt_ClearEntityLinks"
 kind = "FUNCTION"
 name = "amt_ClearEntityLinks"
+similarity = 91.83673469387756
 
 ["SERVER.0x1000b990".verification]
 source_hash = "9033d3173e578aa1a72203d81970671afa09c4ca4a9ab5b64a1704b6aceff732"
@@ -363148,9 +363191,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "d1b95c3ae9a543ca5be94a3df333245b4047c82fe0cf29f1e8e3701176356923"
-status = "EXACT"
+aligned_pairs = 45
+target_instructions = 49
+candidate_instructions = 49
+hunks = 4
+similarity = 91.83673469387756
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:27+00:00"
 
 [["SERVER.0x1000b990".status_history]]
 old_status = "RELOC"
@@ -364086,6 +364134,7 @@ file = "src/Develop/DieGildeAddOn/game/aemter.c"
 symbol = "_amt_UpdateEntityLinks"
 kind = "FUNCTION"
 name = "amt_UpdateEntityLinks"
+similarity = 92.85714285714286
 
 ["SERVER.0x1000ba30".verification]
 source_hash = "9033d3173e578aa1a72203d81970671afa09c4ca4a9ab5b64a1704b6aceff732"
@@ -364102,9 +364151,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "9ebcf07caf7ff9d101c43e5473594820002a4ffabdeab4b889cf017ad643913d"
-status = "EXACT"
+aligned_pairs = 52
+target_instructions = 56
+candidate_instructions = 56
+hunks = 4
+similarity = 92.85714285714286
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:27+00:00"
 
 [["SERVER.0x1000ba30".status_history]]
 old_status = "RELOC"
@@ -365039,6 +365093,7 @@ file = "src/Develop/DieGildeAddOn/game/aemter.c"
 symbol = "_amt_fio_LoadAemter"
 kind = "FUNCTION"
 name = "amt_fio_LoadAemter"
+similarity = 92.05607476635514
 
 ["SERVER.0x1000baf0".verification]
 source_hash = "9033d3173e578aa1a72203d81970671afa09c4ca4a9ab5b64a1704b6aceff732"
@@ -365055,9 +365110,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "5209c68be179c61a33ec65f61df3883feb322e6269df0a5ddad35b2d5164d0f4"
-status = "EXACT"
+aligned_pairs = 197
+target_instructions = 214
+candidate_instructions = 214
+hunks = 17
+similarity = 92.05607476635514
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:27+00:00"
 
 [["SERVER.0x1000baf0".status_history]]
 old_status = "RELOC"
@@ -378510,6 +378570,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_ahm_ProcessEntityChain"
 kind = "FUNCTION"
 name = "ahm_ProcessEntityChain"
+similarity = 97.95918367346938
 
 ["SERVER.0x1000ca00".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -378526,9 +378587,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "6d2d34cb21a4a1523633f0e7ba5068094c9820fc9ac5e1409f028821d66f9b69"
-status = "EXACT"
+aligned_pairs = 48
+target_instructions = 49
+candidate_instructions = 49
+hunks = 1
+similarity = 97.95918367346938
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:27+00:00"
 
 [["SERVER.0x1000ca00".status_history]]
 old_status = "RELOC"
@@ -379600,6 +379666,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_gm_GetFieldByType"
 kind = "FUNCTION"
 name = "gm_GetFieldByType"
+similarity = 100.0
 
 ["SERVER.0x1000ca90".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -379616,9 +379683,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "507ea6bfd20ee0e071b807e97556b29bb98941d4f97f62219941a6ec6ef92be4"
-status = "EXACT"
+aligned_pairs = 46
+target_instructions = 46
+candidate_instructions = 46
+hunks = 0
+similarity = 100.0
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000ca90".status_history]]
 old_status = "EXACT"
@@ -380666,6 +380738,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ChkMoveCredits"
 kind = "FUNCTION"
 name = "cm_ChkMoveCredits"
+similarity = 95.0
 
 ["SERVER.0x1000cb20".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -380682,9 +380755,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "d75e5074624db35917c10822c75d0d25d5e3cf2aee7ad9d32f5e67aba055cb07"
-status = "EXACT"
+aligned_pairs = 57
+target_instructions = 60
+candidate_instructions = 60
+hunks = 3
+similarity = 95.0
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000cb20".status_history]]
 old_status = "RELOC"
@@ -381744,6 +381822,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ChkSellObjekt"
 kind = "FUNCTION"
 name = "cm_ChkSellObjekt"
+similarity = 94.76744186046511
 
 ["SERVER.0x1000cbd0".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -381760,9 +381839,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "af108a7ae9a5ba695536ad1a91774f142684e16fa18b3bf6f234c3138a047d0a"
-status = "EXACT"
+aligned_pairs = 163
+target_instructions = 172
+candidate_instructions = 172
+hunks = 9
+similarity = 94.76744186046511
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000cbd0".status_history]]
 old_status = "RELOC"
@@ -382804,6 +382888,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ChkChangeAttribute"
 kind = "FUNCTION"
 name = "cm_ChkChangeAttribute"
+similarity = 96.03174603174604
 
 ["SERVER.0x1000cde0".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -382820,9 +382905,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "6d8f656ef52ebbf5699aa37b534745985c2dc3a11a2aa3cb93de65eebcffb041"
-status = "EXACT"
+aligned_pairs = 121
+target_instructions = 126
+candidate_instructions = 126
+hunks = 5
+similarity = 96.03174603174604
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000cde0".status_history]]
 old_status = "RELOC"
@@ -383882,6 +383972,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ChkChangeBits"
 kind = "FUNCTION"
 name = "cm_ChkChangeBits"
+similarity = 94.64285714285714
 
 ["SERVER.0x1000cf30".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -383898,9 +383989,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "eba9bdc6e676b1e59705ae45a3977d1a963e5a0e9ea40159d84e8d66a86931a6"
-status = "EXACT"
+aligned_pairs = 53
+target_instructions = 56
+candidate_instructions = 56
+hunks = 3
+similarity = 94.64285714285714
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000cf30".status_history]]
 old_status = "RELOC"
@@ -384972,6 +385068,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ChkSetGebBesitzer"
 kind = "FUNCTION"
 name = "cm_ChkSetGebBesitzer"
+similarity = 90.47619047619048
 
 ["SERVER.0x1000cfe0".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -384988,9 +385085,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "bf9fe8e4bf0fd03f7b7d58ae8ebdc1a65b342429464cbde4c0db53c71958eee5"
-status = "EXACT"
+aligned_pairs = 19
+target_instructions = 21
+candidate_instructions = 21
+hunks = 2
+similarity = 90.47619047619048
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000cfe0".status_history]]
 old_status = "RELOC"
@@ -386062,6 +386164,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ChkOfficeCandidate"
 kind = "FUNCTION"
 name = "cm_ChkOfficeCandidate"
+similarity = 100.0
 
 ["SERVER.0x1000d020".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -386078,9 +386181,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "2d72421712568f021b836e52bafa08489a3a518336df768124b4b1e28dcec414"
-status = "EXACT"
+aligned_pairs = 9
+target_instructions = 9
+candidate_instructions = 9
+hunks = 0
+similarity = 100.0
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000d020".status_history]]
 old_status = "RELOC"
@@ -387152,6 +387260,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ValidateGeneric"
 kind = "FUNCTION"
 name = "cm_ValidateGeneric"
+similarity = 100.0
 
 ["SERVER.0x1000d040".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -387168,9 +387277,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "6c47c6d264f15114399b3d60bd458933167d7da2e44236b46ee2d978957439c1"
-status = "EXACT"
+aligned_pairs = 9
+target_instructions = 9
+candidate_instructions = 9
+hunks = 0
+similarity = 100.0
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000d040".status_history]]
 old_status = "RELOC"
@@ -388242,6 +388356,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ChkElectionOrTrade"
 kind = "FUNCTION"
 name = "cm_ChkElectionOrTrade"
+similarity = 100.0
 
 ["SERVER.0x1000d060".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -388258,9 +388373,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "8ed9781e7f9f494a79cf02a6ab3654772f1e50d084dbf71bf8882c6ef4cc9d18"
-status = "EXACT"
+aligned_pairs = 66
+target_instructions = 66
+candidate_instructions = 66
+hunks = 0
+similarity = 100.0
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000d060".status_history]]
 old_status = "RELOC"
@@ -389302,6 +389422,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ChkJoinLeaveElection"
 kind = "FUNCTION"
 name = "cm_ChkJoinLeaveElection"
+similarity = 99.20634920634922
 
 ["SERVER.0x1000d110".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -389318,9 +389439,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "3348050b3ed55f7470d156248ae94f709c41883e9972dca08ccf17114f2b4e63"
-status = "EXACT"
+aligned_pairs = 125
+target_instructions = 126
+candidate_instructions = 126
+hunks = 1
+similarity = 99.20634920634922
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000d110".status_history]]
 old_status = "RELOC"
@@ -390362,6 +390488,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ChkCutsceneReady"
 kind = "FUNCTION"
 name = "cm_ChkCutsceneReady"
+similarity = 95.91836734693877
 
 ["SERVER.0x1000d260".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -390378,9 +390505,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "47a2d02b2271037f5f94e606f2cee6eeee6d1b8b2412a676fedb6df40efc14df"
-status = "EXACT"
+aligned_pairs = 47
+target_instructions = 49
+candidate_instructions = 49
+hunks = 2
+similarity = 95.91836734693877
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000d260".status_history]]
 old_status = "RELOC"
@@ -391440,6 +391572,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ChkCommandType"
 kind = "FUNCTION"
 name = "cm_ChkCommandType"
+similarity = 88.46153846153845
 
 ["SERVER.0x1000d2e0".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -391456,9 +391589,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "e478ee739dc165058664ef762c6cecd5b079bdbddbc53cf3f44792a5e136a8e1"
-status = "EXACT"
+aligned_pairs = 23
+target_instructions = 26
+candidate_instructions = 26
+hunks = 3
+similarity = 88.46153846153845
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000d2e0".status_history]]
 old_status = "RELOC"
@@ -392582,6 +392720,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExAllocRaum"
 kind = "FUNCTION"
 name = "cm_ExAllocRaum"
+similarity = 93.10344827586206
 
 ["SERVER.0x1000d350".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -392598,9 +392737,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "7475c6d35ebaf8201814a388da10f5dc0e5c857f024dc4599130c548aff38187"
-status = "EXACT"
+aligned_pairs = 81
+target_instructions = 87
+candidate_instructions = 87
+hunks = 6
+similarity = 93.10344827586206
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000d350".status_history]]
 old_status = "RELOC"
@@ -393642,6 +393786,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExAllocSpieler"
 kind = "FUNCTION"
 name = "cm_ExAllocSpieler"
+similarity = 93.47826086956522
 
 ["SERVER.0x1000d460".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -393658,9 +393803,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "968db031a9676bf2fe776531c91dfd080a3fa449f6212b985c670018640b16bb"
-status = "EXACT"
+aligned_pairs = 86
+target_instructions = 92
+candidate_instructions = 92
+hunks = 6
+similarity = 93.47826086956522
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000d460".status_history]]
 old_status = "RELOC"
@@ -394702,6 +394852,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExAllocClientSpieler"
 kind = "FUNCTION"
 name = "cm_ExAllocClientSpieler"
+similarity = 90.2439024390244
 
 ["SERVER.0x1000d570".prove_constraints.arg0]
 type = "pointer"
@@ -394726,9 +394877,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "55a66fb10f5897c2b5b6ef995a4c5d9a9cd640feea3c884739e293a6854f22e6"
-status = "EXACT"
+aligned_pairs = 111
+target_instructions = 123
+candidate_instructions = 123
+hunks = 12
+similarity = 90.2439024390244
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000d570".status_history]]
 old_status = "RELOC"
@@ -395770,6 +395926,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExChangePlayerIdentity"
 kind = "FUNCTION"
 name = "cm_ExChangePlayerIdentity"
+similarity = 83.33333333333334
 
 ["SERVER.0x1000d6e0".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -395786,9 +395943,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "e253e86177bc69beb8a58977bed82775458d243ca85fc08430dcb285ef296d22"
-status = "EXACT"
+aligned_pairs = 20
+target_instructions = 24
+candidate_instructions = 24
+hunks = 4
+similarity = 83.33333333333334
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000d6e0".status_history]]
 old_status = "RELOC"
@@ -396848,6 +397010,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExFree"
 kind = "FUNCTION"
 name = "cm_ExFree"
+similarity = 95.16129032258065
 
 ["SERVER.0x1000d730".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -396864,9 +397027,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "3b32b13e656ef6ee9b9cf39b3377e49171ff3661f774540f9f262186bd06a26c"
-status = "EXACT"
+aligned_pairs = 59
+target_instructions = 62
+candidate_instructions = 62
+hunks = 3
+similarity = 95.16129032258065
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000d730".status_history]]
 old_status = "RELOC"
@@ -397926,6 +398094,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExMoveCredits"
 kind = "FUNCTION"
 name = "cm_ExMoveCredits"
+similarity = 96.82539682539682
 
 ["SERVER.0x1000d7f0".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -397942,9 +398111,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "78e66ec0363cd5c78929acc237f2482a5f9ad81a74052126c72c5dc522ac7e80"
-status = "EXACT"
+aligned_pairs = 61
+target_instructions = 63
+candidate_instructions = 63
+hunks = 2
+similarity = 96.82539682539682
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000d7f0".status_history]]
 old_status = "RELOC"
@@ -398986,6 +399160,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExTransferCurrencyNoKill"
 kind = "FUNCTION"
 name = "cm_ExTransferCurrencyNoKill"
+similarity = 96.22641509433963
 
 ["SERVER.0x1000d8a0".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -399002,9 +399177,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "66b100e328749c965f26038bd20da33d1a2e4981d646883e1defa4c635f7d33f"
-status = "EXACT"
+aligned_pairs = 51
+target_instructions = 53
+candidate_instructions = 53
+hunks = 2
+similarity = 96.22641509433963
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000d8a0".status_history]]
 old_status = "RELOC"
@@ -400046,6 +400226,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExSellObjekt"
 kind = "FUNCTION"
 name = "cm_ExSellObjekt"
+similarity = 96.85157421289355
 
 ["SERVER.0x1000d930".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -400062,9 +400243,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "54dfa95b2b1b25e02301ebd6f687b637c6125bde76f75483d7465a1c3193e92a"
-status = "EXACT"
+aligned_pairs = 646
+target_instructions = 667
+candidate_instructions = 667
+hunks = 21
+similarity = 96.85157421289355
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000d930".status_history]]
 old_status = "RELOC"
@@ -401106,6 +401292,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExProdObjekt"
 kind = "FUNCTION"
 name = "cm_ExProdObjekt"
+similarity = 97.45762711864407
 
 ["SERVER.0x1000e140".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -401122,9 +401309,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "38d526329bff620e1a2dd9142209b9f8672901037f1d3d64f140ca159132fa31"
-status = "EXACT"
+aligned_pairs = 345
+target_instructions = 354
+candidate_instructions = 354
+hunks = 9
+similarity = 97.45762711864407
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000e140".status_history]]
 old_status = "RELOC"
@@ -402166,6 +402358,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExMoveObjekt"
 kind = "FUNCTION"
 name = "cm_ExMoveObjekt"
+similarity = 96.8503937007874
 
 ["SERVER.0x1000e530".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -402182,9 +402375,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "5df7e66db239d9eb0d22d10b44aec4655dd9660d776df6fe7061e2a1c0c1bc50"
-status = "EXACT"
+aligned_pairs = 123
+target_instructions = 127
+candidate_instructions = 127
+hunks = 4
+similarity = 96.8503937007874
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000e530".status_history]]
 old_status = "RELOC"
@@ -403256,6 +403454,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExClearLagerslot"
 kind = "FUNCTION"
 name = "cm_ExClearLagerslot"
+similarity = 95.65217391304348
 
 ["SERVER.0x1000e690".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -403272,9 +403471,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "3411713207293c22e979295cafda7e6764a9f0afd7bdbafbdb15ef73cf11e2be"
-status = "EXACT"
+aligned_pairs = 66
+target_instructions = 69
+candidate_instructions = 69
+hunks = 3
+similarity = 95.65217391304348
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000e690".status_history]]
 old_status = "RELOC"
@@ -404346,6 +404550,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExAllocObjekt"
 kind = "FUNCTION"
 name = "cm_ExAllocObjekt"
+similarity = 100.0
 
 ["SERVER.0x1000e750".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -404362,9 +404567,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "566a67d18834f25ca52d5ddd875a370670fac476ba291da6861a8ac7d12dbd74"
-status = "EXACT"
+aligned_pairs = 48
+target_instructions = 48
+candidate_instructions = 48
+hunks = 0
+similarity = 100.0
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000e750".status_history]]
 old_status = "RELOC"
@@ -405406,6 +405616,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExChangeAttribute"
 kind = "FUNCTION"
 name = "cm_ExChangeAttribute"
+similarity = 98.09523809523809
 
 ["SERVER.0x1000e7d0".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -405422,9 +405633,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "9ff239509abacdd9ed43136d416475cf2fae2d1ebfa0e64d9921aab72b05bc44"
-status = "EXACT"
+aligned_pairs = 103
+target_instructions = 105
+candidate_instructions = 105
+hunks = 2
+similarity = 98.09523809523809
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000e7d0".status_history]]
 old_status = "RELOC"
@@ -406496,6 +406712,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExSetAttribute"
 kind = "FUNCTION"
 name = "cm_ExSetAttribute"
+similarity = 98.05825242718447
 
 ["SERVER.0x1000e8d0".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -406512,9 +406729,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "9e0a43ebfe75e532f6251a64d3ddb19f3449a707bdf9e4cc4bc36a96769f73ba"
-status = "EXACT"
+aligned_pairs = 101
+target_instructions = 103
+candidate_instructions = 103
+hunks = 2
+similarity = 98.05825242718447
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000e8d0".status_history]]
 old_status = "RELOC"
@@ -407586,6 +407808,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExChangeDesire"
 kind = "FUNCTION"
 name = "cm_ExChangeDesire"
+similarity = 97.43589743589743
 
 ["SERVER.0x1000e9c0".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -407602,9 +407825,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "f225001abd6ca17c1a38efd601a219ca00ce44d8e835d5d05a870bba766e0356"
-status = "EXACT"
+aligned_pairs = 76
+target_instructions = 78
+candidate_instructions = 78
+hunks = 2
+similarity = 97.43589743589743
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000e9c0".status_history]]
 old_status = "RELOC"
@@ -408676,6 +408904,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExChangeBits"
 kind = "FUNCTION"
 name = "cm_ExChangeBits"
+similarity = 97.5
 
 ["SERVER.0x1000eaa0".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -408692,9 +408921,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "9b4dfdfd1f86b886a14a8e97a917445c0bf757414e59856e55d36363e79a6ef9"
-status = "EXACT"
+aligned_pairs = 78
+target_instructions = 80
+candidate_instructions = 80
+hunks = 2
+similarity = 97.5
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000eaa0".status_history]]
 old_status = "RELOC"
@@ -409766,6 +410000,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExChangeFloat"
 kind = "FUNCTION"
 name = "cm_ExChangeFloat"
+similarity = 95.91836734693877
 
 ["SERVER.0x1000eb70".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -409782,9 +410017,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "5e5efce1968952ad96ec0a994cf64044f2c01f4c7301c96c790594f1e4fab3e6"
-status = "EXACT"
+aligned_pairs = 47
+target_instructions = 49
+candidate_instructions = 49
+hunks = 2
+similarity = 95.91836734693877
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000eb70".status_history]]
 old_status = "RELOC"
@@ -410856,6 +411096,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExCopyEntityData"
 kind = "FUNCTION"
 name = "cm_ExCopyEntityData"
+similarity = 88.75502008032129
 
 ["SERVER.0x1000ec00".prove_constraints.arg0]
 type = "pointer"
@@ -410880,9 +411121,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "39c9f27955d7ac84b0a0cb75ec6b26a86817b3bdf739a15730b76e76f50de4d7"
-status = "EXACT"
+aligned_pairs = 221
+target_instructions = 249
+candidate_instructions = 249
+hunks = 23
+similarity = 88.75502008032129
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000ec00".status_history]]
 old_status = "RELOC"
@@ -411924,6 +412170,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExSetHE"
 kind = "FUNCTION"
 name = "cm_ExSetHE"
+similarity = 100.0
 
 ["SERVER.0x1000ef90".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -411940,9 +412187,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "40435dce8f018231418a9c96d4c99d8fafa121dffcaf4b00f37cdcf0df1a5b33"
-status = "EXACT"
+aligned_pairs = 8
+target_instructions = 8
+candidate_instructions = 8
+hunks = 0
+similarity = 100.0
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000ef90".status_history]]
 old_status = "RELOC"
@@ -412984,6 +413236,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExSysMessage"
 kind = "FUNCTION"
 name = "cm_ExSysMessage"
+similarity = 92.10526315789474
 
 ["SERVER.0x1000efb0".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -413000,9 +413253,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "7c9689886df7ccaeef56e7c664566e06df052c566feab2c557e16670b45b7206"
-status = "EXACT"
+aligned_pairs = 35
+target_instructions = 38
+candidate_instructions = 38
+hunks = 3
+similarity = 92.10526315789474
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000efb0".status_history]]
 old_status = "RELOC"
@@ -414044,6 +414302,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExKillSpieler"
 kind = "FUNCTION"
 name = "cm_ExKillSpieler"
+similarity = 92.5925925925926
 
 ["SERVER.0x1000f030".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -414060,9 +414319,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "815c30f06c47c82d612d0e41fd8a37900e6c01d9e60184749ba3bb3b6df234d0"
-status = "EXACT"
+aligned_pairs = 25
+target_instructions = 27
+candidate_instructions = 27
+hunks = 2
+similarity = 92.5925925925926
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000f030".status_history]]
 old_status = "RELOC"
@@ -415122,6 +415386,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExAddStraftat"
 kind = "FUNCTION"
 name = "cm_ExAddStraftat"
+similarity = 100.0
 
 ["SERVER.0x1000f080".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -415138,9 +415403,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "80e3f70ab6ef6436397367bba34d7a1879e68dc5296c044d85d5b4d5237cad59"
-status = "EXACT"
+aligned_pairs = 8
+target_instructions = 8
+candidate_instructions = 8
+hunks = 0
+similarity = 100.0
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000f080".status_history]]
 old_status = "RELOC"
@@ -416182,6 +416452,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExAllocCutscene"
 kind = "FUNCTION"
 name = "cm_ExAllocCutscene"
+similarity = 100.0
 
 ["SERVER.0x1000f0a0".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -416198,9 +416469,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "1ba3886f4eeb90e063846dab4949d9d05fdd2717128aebd4ccb53b32eecd7ba5"
-status = "EXACT"
+aligned_pairs = 12
+target_instructions = 12
+candidate_instructions = 12
+hunks = 0
+similarity = 100.0
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000f0a0".status_history]]
 old_status = "RELOC"
@@ -417272,6 +417548,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExRemoveLinkedObject"
 kind = "FUNCTION"
 name = "cm_ExRemoveLinkedObject"
+similarity = 100.0
 
 ["SERVER.0x1000f0d0".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -417288,9 +417565,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "7f15b55624a15216f73429d39bbfb2af76afc04cd4addbe5b62a294bd5168502"
-status = "EXACT"
+aligned_pairs = 87
+target_instructions = 87
+candidate_instructions = 87
+hunks = 0
+similarity = 100.0
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000f0d0".status_history]]
 old_status = "RELOC"
@@ -418368,6 +418650,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ChainRecordLookup"
 kind = "FUNCTION"
 name = "cm_ChainRecordLookup"
+similarity = 100.0
 
 ["SERVER.0x1000f1a0".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -418384,9 +418667,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "a65f074ef28636543765bfabf33a8af66d593055cd82895cc1087a672ce0a388"
-status = "EXACT"
+aligned_pairs = 139
+target_instructions = 139
+candidate_instructions = 139
+hunks = 0
+similarity = 100.0
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000f1a0".status_history]]
 old_status = "RELOC"
@@ -419428,6 +419716,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExAllocThemaPredigt"
 kind = "FUNCTION"
 name = "cm_ExAllocThemaPredigt"
+similarity = 96.66666666666667
 
 ["SERVER.0x1000f2f0".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -419444,9 +419733,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "b6ac91aa0bb191dd66f57ccac140bf53f979adf0229c5dd3127c65343449b1ba"
-status = "EXACT"
+aligned_pairs = 58
+target_instructions = 60
+candidate_instructions = 60
+hunks = 2
+similarity = 96.66666666666667
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000f2f0".status_history]]
 old_status = "RELOC"
@@ -420519,6 +420813,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExSetGebBesitzer"
 kind = "FUNCTION"
 name = "cm_ExSetGebBesitzer"
+similarity = 93.42105263157895
 
 ["SERVER.0x1000f3b0".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -420535,9 +420830,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "6294abb5166f2d7fa41c9d1e57a80ecf57e04246b7553d6e08d5694dcb7e1c4e"
-status = "EXACT"
+aligned_pairs = 71
+target_instructions = 76
+candidate_instructions = 76
+hunks = 5
+similarity = 93.42105263157895
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000f3b0".status_history]]
 old_status = "RELOC"
@@ -421597,6 +421897,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExSetWohnsitz"
 kind = "FUNCTION"
 name = "cm_ExSetWohnsitz"
+similarity = 95.83333333333334
 
 ["SERVER.0x1000f480".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -421613,9 +421914,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "9008a5c27bcf4f1caaea7bee36ee73e967c42046172d824aa3f7175375d19918"
-status = "EXACT"
+aligned_pairs = 92
+target_instructions = 96
+candidate_instructions = 96
+hunks = 4
+similarity = 95.83333333333334
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000f480".status_history]]
 old_status = "RELOC"
@@ -422657,6 +422963,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExSetGebUpgrade"
 kind = "FUNCTION"
 name = "cm_ExSetGebUpgrade"
+similarity = 96.29629629629629
 
 ["SERVER.0x1000f590".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -422673,9 +422980,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "895ef13fa3741448e66b58c6f85d70a8354d8ccb66779e727c3e0007facfcb4e"
-status = "EXACT"
+aligned_pairs = 78
+target_instructions = 81
+candidate_instructions = 81
+hunks = 3
+similarity = 96.29629629629629
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000f590".status_history]]
 old_status = "RELOC"
@@ -423718,6 +424030,7 @@ symbol = "_cm_ExDestroyBuilding"
 kind = "FUNCTION"
 name = "cm_ExDestroyBuilding"
 note = "Inferred cm_ExDestroyBuilding name; native command dispatch index 0x3b pairs SERVER 1000f680, GOLDTL 4cbc90 and GOLD 4cb100. Shared lookup/traversal/slot clearing/reply; native client renderer extras and server missing-building diagnostic preserved. Complete 171/265/265-byte comparisons pass. Client helper providers remain independently bound and not yet unified; caller agreement does not verify them or full client links. See docs/naming_conventions.md and .scratch/goal38/destroy-native-proof.json."
+similarity = 93.10344827586206
 
 ["SERVER.0x1000f680".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -423734,9 +424047,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "4a37888728ed65063f64d4828136812c2fb0ec0e6f5d03c4a5b720d2251d14d4"
-status = "EXACT"
+aligned_pairs = 54
+target_instructions = 58
+candidate_instructions = 58
+hunks = 4
+similarity = 93.10344827586206
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000f680".status_history]]
 old_status = "RELOC"
@@ -424778,6 +425096,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExEmployWorker"
 kind = "FUNCTION"
 name = "cm_ExEmployWorker"
+similarity = 98.38709677419355
 
 ["SERVER.0x1000f730".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -424794,9 +425113,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "4ae82cf7354c3907c6ffc41badfc945347fbcd8e056f35e9644716672b373a18"
-status = "EXACT"
+aligned_pairs = 183
+target_instructions = 186
+candidate_instructions = 186
+hunks = 3
+similarity = 98.38709677419355
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000f730".status_history]]
 old_status = "RELOC"
@@ -425856,6 +426180,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExAssignOffice"
 kind = "FUNCTION"
 name = "cm_ExAssignOffice"
+similarity = 100.0
 
 ["SERVER.0x1000f940".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -425872,9 +426197,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "07170ea3961972726d2676ea04bf24f1d005cfcad73d4934c943d1c87459ad0b"
-status = "EXACT"
+aligned_pairs = 9
+target_instructions = 9
+candidate_instructions = 9
+hunks = 0
+similarity = 100.0
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000f940".status_history]]
 old_status = "RELOC"
@@ -426946,6 +427276,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExExecuteOffice"
 kind = "FUNCTION"
 name = "cm_ExExecuteOffice"
+similarity = 100.0
 
 ["SERVER.0x1000f960".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -426962,9 +427293,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "880198570c156d95983189be40ae341df774b60465f5bb5bf9f90920bc4ac385"
-status = "EXACT"
+aligned_pairs = 9
+target_instructions = 9
+candidate_instructions = 9
+hunks = 0
+similarity = 100.0
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000f960".status_history]]
 old_status = "RELOC"
@@ -428036,6 +428372,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExAllocCharacter"
 kind = "FUNCTION"
 name = "cm_ExAllocCharacter"
+similarity = 92.85714285714286
 
 ["SERVER.0x1000f980".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -428052,9 +428389,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "f4ac4e5d2a724e145400ed028e3ef6d90bbff2637d1a74158e4489c38f6094d6"
-status = "EXACT"
+aligned_pairs = 104
+target_instructions = 112
+candidate_instructions = 112
+hunks = 7
+similarity = 92.85714285714286
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000f980".status_history]]
 old_status = "RELOC"
@@ -429096,6 +429438,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExKillTransporter"
 kind = "FUNCTION"
 name = "cm_ExKillTransporter"
+similarity = 92.3076923076923
 
 ["SERVER.0x1000fad0".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -429112,9 +429455,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "fd0d7eb892d068c0692e9ebca62096c68ff4bae443719878de1d6d764d4fc9f5"
-status = "EXACT"
+aligned_pairs = 24
+target_instructions = 26
+candidate_instructions = 26
+hunks = 2
+similarity = 92.3076923076923
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000fad0".status_history]]
 old_status = "RELOC"
@@ -430174,6 +430522,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExCreateGeb"
 kind = "FUNCTION"
 name = "cm_ExCreateGeb"
+similarity = 94.23076923076923
 
 ["SERVER.0x1000fb30".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -430190,9 +430539,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "6809e709c7edfbfe96a4c411e19905c7ab8826214493acb64eeda03bb58fdd01"
-status = "EXACT"
+aligned_pairs = 49
+target_instructions = 52
+candidate_instructions = 52
+hunks = 3
+similarity = 94.23076923076923
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000fb30".status_history]]
 old_status = "RELOC"
@@ -431296,6 +431650,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExElectionOrTrade"
 kind = "FUNCTION"
 name = "cm_ExElectionOrTrade"
+similarity = 100.0
 
 ["SERVER.0x1000fc10".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -431312,9 +431667,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "380899781d8a0d87cf28fdca4fe716487dab100903a38801ddec0faedfd61522"
-status = "EXACT"
+aligned_pairs = 116
+target_instructions = 116
+candidate_instructions = 116
+hunks = 0
+similarity = 100.0
 writer = "verify"
-measured_at = "2026-11-28T01:40:56+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000fc10".status_history]]
 old_status = "RELOC"
@@ -432356,6 +432716,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExJoinLeaveElection"
 kind = "FUNCTION"
 name = "cm_ExJoinLeaveElection"
+similarity = 99.40119760479041
 
 ["SERVER.0x1000fd50".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -432372,9 +432733,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "c5b316fa38641b68b350bc9b7f858f151508488d46ccbedb5440dd5526c1335f"
-status = "EXACT"
+aligned_pairs = 166
+target_instructions = 167
+candidate_instructions = 167
+hunks = 1
+similarity = 99.40119760479041
 writer = "verify"
-measured_at = "2026-11-28T01:40:57+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000fd50".status_history]]
 old_status = "RELOC"
@@ -433447,6 +433813,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ChkEntityLookup"
 kind = "FUNCTION"
 name = "cm_ChkEntityLookup"
+similarity = 100.0
 
 ["SERVER.0x1000ff30".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -433463,9 +433830,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "e6ce165312831595b483a2d1eacb0b7b7d9465b81947ba76311d6db739bf44f0"
-status = "EXACT"
+aligned_pairs = 16
+target_instructions = 16
+candidate_instructions = 16
+hunks = 0
+similarity = 100.0
 writer = "verify"
-measured_at = "2026-11-28T01:40:57+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000ff30".status_history]]
 old_status = "RELOC"
@@ -434525,6 +434897,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExCutsceneReady"
 kind = "FUNCTION"
 name = "cm_ExCutsceneReady"
+similarity = 100.0
 
 ["SERVER.0x1000ff60".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -434541,9 +434914,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "f761f91787472fbaf78e1a0255b8e791818553cfeb0101f713044e73554f56a6"
-status = "EXACT"
+aligned_pairs = 34
+target_instructions = 34
+candidate_instructions = 34
+hunks = 0
+similarity = 100.0
 writer = "verify"
-measured_at = "2026-11-28T01:40:57+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000ff60".status_history]]
 old_status = "RELOC"
@@ -435603,6 +435981,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExModifyHealth"
 kind = "FUNCTION"
 name = "cm_ExModifyHealth"
+similarity = 100.0
 
 ["SERVER.0x1000ffc0".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -435619,9 +435998,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "ded81eae22f5456feed45e7deea3da4eab4af0a1a7cdcdad0abc6bb62edaf606"
-status = "EXACT"
+aligned_pairs = 25
+target_instructions = 25
+candidate_instructions = 25
+hunks = 0
+similarity = 100.0
 writer = "verify"
-measured_at = "2026-11-28T01:40:57+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x1000ffc0".status_history]]
 old_status = "RELOC"
@@ -436681,6 +437065,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExModifyStamina"
 kind = "FUNCTION"
 name = "cm_ExModifyStamina"
+similarity = 100.0
 
 ["SERVER.0x10010010".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -436697,9 +437082,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "e4e074c6e24205152d849128d4b1c28c786f31d50abf76a19ca7cb4c314b9806"
-status = "EXACT"
+aligned_pairs = 38
+target_instructions = 38
+candidate_instructions = 38
+hunks = 0
+similarity = 100.0
 writer = "verify"
-measured_at = "2026-11-28T01:40:57+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x10010010".status_history]]
 old_status = "RELOC"
@@ -437759,6 +438149,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExSimCommand"
 kind = "FUNCTION"
 name = "cm_ExSimCommand"
+similarity = 100.0
 
 ["SERVER.0x10010080".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -437775,9 +438166,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "e599868edbd337fda343442416ba1ba76d3182909cb85aed6bdea38cd8edaaaf"
-status = "EXACT"
+aligned_pairs = 9
+target_instructions = 9
+candidate_instructions = 9
+hunks = 0
+similarity = 100.0
 writer = "verify"
-measured_at = "2026-11-28T01:40:57+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x10010080".status_history]]
 old_status = "RELOC"
@@ -438849,6 +439245,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExModifyStat"
 kind = "FUNCTION"
 name = "cm_ExModifyStat"
+similarity = 100.0
 
 ["SERVER.0x100100a0".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -438865,9 +439262,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "8353ed0d9c0f03bc1d74beb22c39ece083f98741d8c09b1911da189f2cb066c0"
-status = "EXACT"
+aligned_pairs = 57
+target_instructions = 57
+candidate_instructions = 57
+hunks = 0
+similarity = 100.0
 writer = "verify"
-measured_at = "2026-11-28T01:40:57+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x100100a0".status_history]]
 old_status = "RELOC"
@@ -439927,6 +440329,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExAllocWarEvent"
 kind = "FUNCTION"
 name = "cm_ExAllocWarEvent"
+similarity = 100.0
 
 ["SERVER.0x10010140".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -439943,9 +440346,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "eff0f6a40ff31139a63b5ec8a2e311a0ae83cf8a6af92f200990f09516abe5f5"
-status = "EXACT"
+aligned_pairs = 112
+target_instructions = 112
+candidate_instructions = 112
+hunks = 0
+similarity = 100.0
 writer = "verify"
-measured_at = "2026-11-28T01:40:57+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x10010140".status_history]]
 old_status = "RELOC"
@@ -440987,6 +441395,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_DispatchProduction"
 kind = "FUNCTION"
 name = "cm_DispatchProduction"
+similarity = 76.36363636363637
 
 ["SERVER.0x10010260".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -441003,9 +441412,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "bc355a8c97b98a5f43e3111af9a5e87da2684d10a93de8a98dca4635a45acae2"
-status = "EXACT"
+aligned_pairs = 42
+target_instructions = 53
+candidate_instructions = 57
+hunks = 2
+similarity = 76.36363636363637
 writer = "verify"
-measured_at = "2026-11-28T01:40:57+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x10010260".status_history]]
 old_status = "RELOC"
@@ -442065,6 +442479,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_DispatchMoveSlot"
 kind = "FUNCTION"
 name = "cm_DispatchMoveSlot"
+similarity = 100.0
 
 ["SERVER.0x100102f0".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -442081,9 +442496,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "cf9ad2117f5448e107b76e57f768e07b6487eae0ffb73fdecd06248c48026439"
-status = "EXACT"
+aligned_pairs = 6
+target_instructions = 6
+candidate_instructions = 6
+hunks = 0
+similarity = 100.0
 writer = "verify"
-measured_at = "2026-11-28T01:40:57+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x100102f0".status_history]]
 old_status = "RELOC"
@@ -443155,6 +443575,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExAllocGraveyardWorker"
 kind = "FUNCTION"
 name = "cm_ExAllocGraveyardWorker"
+similarity = 100.0
 
 ["SERVER.0x10010310".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -443171,9 +443592,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "fd0ea1670d295a36ec935fdaa8e85e939167b00ac0287b5a5bb682eec468a351"
-status = "EXACT"
+aligned_pairs = 19
+target_instructions = 19
+candidate_instructions = 19
+hunks = 0
+similarity = 100.0
 writer = "verify"
-measured_at = "2026-11-28T01:40:57+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x10010310".status_history]]
 old_status = "RELOC"
@@ -444239,6 +444665,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExAllocAlchemist"
 kind = "FUNCTION"
 name = "cm_ExAllocAlchemist"
+similarity = 100.0
 
 ["SERVER.0x10010350".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -444255,9 +444682,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "7fac73e8f8fcf3b87cfcea42fc761f901135e8c31b2d5900399c0a49dcc5ff5e"
-status = "EXACT"
+aligned_pairs = 19
+target_instructions = 19
+candidate_instructions = 19
+hunks = 0
+similarity = 100.0
 writer = "verify"
-measured_at = "2026-11-28T01:40:57+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x10010350".status_history]]
 old_status = "RELOC"
@@ -445323,6 +445755,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_ExSimSpecialAction"
 kind = "FUNCTION"
 name = "cm_ExSimSpecialAction"
+similarity = 100.0
 
 ["SERVER.0x10010390".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -445339,9 +445772,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "516750f0d4076fdc9406a6e922317a240392ad531bd5ec0f19d2621e389a2d79"
-status = "EXACT"
+aligned_pairs = 105
+target_instructions = 105
+candidate_instructions = 105
+hunks = 0
+similarity = 100.0
 writer = "verify"
-measured_at = "2026-11-28T01:40:57+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:28+00:00"
 
 [["SERVER.0x10010390".status_history]]
 old_status = "RELOC"
@@ -446407,6 +446845,7 @@ file = "src/Develop/DieGildeAddOn/command/command.c"
 symbol = "_cm_GetBuildingStatCount"
 kind = "FUNCTION"
 name = "cm_GetBuildingStatCount"
+similarity = 100.0
 
 ["SERVER.0x100104a0".verification]
 source_hash = "148752e7c78a164b93aa9d93143ce40acdc6a4a7e326f3c32afdc9d287c07cd1"
@@ -446423,9 +446862,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "f796c238c5319c682e3697a8029c5ca36d8109ab1d2fd15df0eae200d68cd764"
-status = "EXACT"
+aligned_pairs = 52
+target_instructions = 52
+candidate_instructions = 52
+hunks = 0
+similarity = 100.0
 writer = "verify"
-measured_at = "2026-11-28T01:40:57+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:29+00:00"
 
 [["SERVER.0x100104a0".status_history]]
 old_status = "RELOC"
@@ -485864,6 +486308,7 @@ file = "src/Develop/DieGildeAddOn/game/sim.c"
 symbol = "_sim_FindAndMatchParents"
 kind = "FUNCTION"
 name = "sim_FindAndMatchParents"
+similarity = 91.66666666666666
 
 ["SERVER.0x100151e0".verification]
 source_hash = "e5abd8fbd0a2213e88ecfa7d6b2269bcdfb7d3e82276f573da1fd25c495015c4"
@@ -485880,9 +486325,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "effa1644b3004a4032aac170866dcf20fdbb609e3997c6e8afb8a55b39028724"
-status = "EXACT"
+aligned_pairs = 154
+target_instructions = 168
+candidate_instructions = 168
+hunks = 14
+similarity = 91.66666666666666
 writer = "verify"
-measured_at = "2026-11-28T01:40:57+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:29+00:00"
 
 [["SERVER.0x100151e0".status_history]]
 old_status = "RELOC"
@@ -486782,6 +487232,7 @@ file = "src/Develop/DieGildeAddOn/game/sim.c"
 symbol = "_sim_PriorityUpdate"
 kind = "FUNCTION"
 name = "sim_PriorityUpdate"
+similarity = 100.0
 
 ["SERVER.0x10015400".verification]
 source_hash = "e5abd8fbd0a2213e88ecfa7d6b2269bcdfb7d3e82276f573da1fd25c495015c4"
@@ -486798,9 +487249,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "8baf614fbff3061c2eefb9d7e81bd6524d189e89354253195c3c07ae8ee8f57f"
-status = "EXACT"
+aligned_pairs = 29
+target_instructions = 29
+candidate_instructions = 29
+hunks = 0
+similarity = 100.0
 writer = "verify"
-measured_at = "2026-11-28T01:40:57+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:29+00:00"
 
 [["SERVER.0x10015400".status_history]]
 old_status = "RELOC"
@@ -487728,6 +488184,7 @@ file = "src/Develop/DieGildeAddOn/game/sim.c"
 symbol = "_sim_StartEntityQueryByType"
 kind = "FUNCTION"
 name = "sim_StartEntityQueryByType"
+similarity = 100.0
 
 ["SERVER.0x10015460".verification]
 source_hash = "e5abd8fbd0a2213e88ecfa7d6b2269bcdfb7d3e82276f573da1fd25c495015c4"
@@ -487744,9 +488201,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "15ad1537cca3c025170ac574936189bcd342e7f8975ab32bef19ab86bf638f95"
-status = "EXACT"
+aligned_pairs = 62
+target_instructions = 62
+candidate_instructions = 62
+hunks = 0
+similarity = 100.0
 writer = "verify"
-measured_at = "2026-11-28T01:40:57+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:29+00:00"
 
 [["SERVER.0x10015460".status_history]]
 old_status = "RELOC"
@@ -488650,6 +489112,7 @@ file = "src/Develop/DieGildeAddOn/game/sim.c"
 symbol = "_sim_CreateCitizen"
 kind = "FUNCTION"
 name = "sim_CreateCitizen"
+similarity = 91.07142857142857
 
 ["SERVER.0x10015500".verification]
 source_hash = "e5abd8fbd0a2213e88ecfa7d6b2269bcdfb7d3e82276f573da1fd25c495015c4"
@@ -488666,9 +489129,14 @@ defines = "REBREW_LEGACY_SERVER_LAYOUT\u0000REBREW_SERVER"
 linked_image = "build/server.dll"
 linked_image_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 input_hash = "f4b7dd7d52092e99df8cda6b4ac09fee0d8ded7545c89ffc33aab5f6fb865e7d"
-status = "EXACT"
+aligned_pairs = 51
+target_instructions = 56
+candidate_instructions = 56
+hunks = 5
+similarity = 91.07142857142857
 writer = "verify"
-measured_at = "2026-11-28T01:40:57+00:00"
+status = "EXACT"
+measured_at = "2026-11-28T07:55:29+00:00"
 
 [["SERVER.0x10015500".status_history]]
 old_status = "RELOC"
@@ -755176,15 +755644,6 @@ purpose = "Canonical opaque stream contracts for loadsave callers across server 
 [source.files."src/Develop/DieGildeAddOn/loadsave/loadsave.h".GOLD]
 purpose = "Canonical opaque stream contracts for loadsave callers across server and clients"
 
-[source.files."src/client_town.h".SERVER]
-purpose = "Canonical existing client town record declarations; no storage definition"
-
-[source.files."src/client_town.h".GOLDTL]
-purpose = "Canonical existing client town record declarations; no storage definition"
-
-[source.files."src/client_town.h".GOLD]
-purpose = "Canonical existing client town record declarations; no storage definition"
-
 [source.files."src/client_scene_resources.h".GOLD]
 purpose = "Inferred Gold scene resource record and worker contract; native stride 0x80, no storage definitions"
 
@@ -755209,6 +755668,14 @@ purpose = "shared body: the TL client links this definition while only the GOLD 
 [source.files."src/Develop/Units/m_alloc/hp_UpdateProdSetting.c".GOLDTL]
 purpose = "shared body: the TL client links this definition while only the GOLD row carries its VA"
 
+[source.files."src/Develop/DieGildeAddOn/game/client_town.h".GOLD]
+purpose = "Canonical existing client town record declarations; no storage definition"
+
+[source.files."src/Develop/DieGildeAddOn/game/client_town.h".GOLDTL]
+purpose = "Canonical existing client town record declarations; no storage definition"
+
+[source.files."src/Develop/DieGildeAddOn/game/client_town.h".SERVER]
+purpose = "Canonical existing client town record declarations; no storage definition"
 ["GOLD.0x004cfe70"]
 size = 50
 updated_by = "rehome"

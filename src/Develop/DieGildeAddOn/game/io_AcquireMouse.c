@@ -1,6 +1,6 @@
 
 
-#include "client_input.h"
+#include "Develop/DieGildeAddOn/game/client_input.h"
 
 int __cdecl io_AcquireMouse(int enable)
 {

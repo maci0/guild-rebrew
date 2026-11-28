@@ -1,4 +1,4 @@
-#include "client_town.h"
+#include "Develop/DieGildeAddOn/game/client_town.h"
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 extern char* lpObjektePROT;
 extern int __cdecl gm_CalcTownSlotTargetStock(int a, int b);

@@ -87,7 +87,7 @@ struct DevData {
 	unsigned int app;
 };
 
-#include "client_input.h"
+#include "Develop/DieGildeAddOn/game/client_input.h"
 
 /* Drain the keyboard device. The loop is a do/while on the HRESULT so
  * the failure path is a jl to the tail and GetDeviceData is emitted

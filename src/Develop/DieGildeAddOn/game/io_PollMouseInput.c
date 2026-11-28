@@ -1,4 +1,4 @@
-#include "client_input.h"
+#include "Develop/DieGildeAddOn/game/client_input.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_14ce920[];
 extern short g_14ce922;

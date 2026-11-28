@@ -653,10 +653,10 @@ symbol = "DD_DEVICE"
 size = 824
 native_size = 824
 extent = "allocation"
-evidence = "GOLD rebind after source edits; enumeration writes description/name/flag at unchanged offsets in the 824-byte stride.24.0 upgrade changed the compiler-context hash; the reviewed native extent and modeled offsets are unchanged. Rebound 2026-11-14: header stat metadata changed when hard-linked scratch copies were deleted; header content, sizes and offsets unchanged. Rebound for rebrew 6.49.0: reached-header hash is now content-based; header content, sizes and offsets unchanged. Rebound 2026-11-27 after its source file was renamed and naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
+evidence = "GOLD rebind after source edits; enumeration writes description/name/flag at unchanged offsets in the 824-byte stride.24.0 upgrade changed the compiler-context hash; the reviewed native extent and modeled offsets are unchanged. Rebound 2026-11-14: header stat metadata changed when hard-linked scratch copies were deleted; header content, sizes and offsets unchanged. Rebound for rebrew 6.49.0: reached-header hash is now content-based; header content, sizes and offsets unchanged. Rebound 2026-11-28 after naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
-source_hash = "43773c2fa9db877869141ff060002e08513812b0e4dbca7337d0dad9ec116af3"
-headers_hash = "ebe28fd68e51936130b3faed3c0f36e5ee4b2b17c6d05328529777e615181369"
+source_hash = "f6c7891c07b4b016ce1ba8cff7702fc5c960df71225bb9884189cb3a3d47a419"
+headers_hash = "9b5dba391d24fc516c9df88902336c51f9e5269aeff65c6a2a449741472f7be7"
 context_hash = "a690f269814c85cbe10b297816f0bbf61c3efa9e869690883cd30860f5d7cf39"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
@@ -671,10 +671,10 @@ symbol = "DD_DRIVER"
 size = 532
 native_size = 532
 extent = "allocation"
-evidence = "GOLD rebind after source edits; enumeration writes guid/description/name at unchanged offsets in the 532-byte stride.24.0 upgrade changed the compiler-context hash; the reviewed native extent and modeled offsets are unchanged. Rebound 2026-11-14: header stat metadata changed when hard-linked scratch copies were deleted; header content, sizes and offsets unchanged. Rebound for rebrew 6.49.0: reached-header hash is now content-based; header content, sizes and offsets unchanged. Rebound 2026-11-27 after its source file was renamed and naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
+evidence = "GOLD rebind after source edits; enumeration writes guid/description/name at unchanged offsets in the 532-byte stride.24.0 upgrade changed the compiler-context hash; the reviewed native extent and modeled offsets are unchanged. Rebound 2026-11-14: header stat metadata changed when hard-linked scratch copies were deleted; header content, sizes and offsets unchanged. Rebound for rebrew 6.49.0: reached-header hash is now content-based; header content, sizes and offsets unchanged. Rebound 2026-11-28 after naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
-source_hash = "43773c2fa9db877869141ff060002e08513812b0e4dbca7337d0dad9ec116af3"
-headers_hash = "ebe28fd68e51936130b3faed3c0f36e5ee4b2b17c6d05328529777e615181369"
+source_hash = "f6c7891c07b4b016ce1ba8cff7702fc5c960df71225bb9884189cb3a3d47a419"
+headers_hash = "9b5dba391d24fc516c9df88902336c51f9e5269aeff65c6a2a449741472f7be7"
 context_hash = "a690f269814c85cbe10b297816f0bbf61c3efa9e869690883cd30860f5d7cf39"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
@@ -683,12 +683,12 @@ guid = 0
 description = 20
 name = 276
 [types."town.cell_record".GOLDTL]
-file = "src/client_town.h"
+file = "src/Develop/DieGildeAddOn/game/client_town.h"
 symbol = "Cell502450"
 size = 128
 native_size = 128
 extent = "stride"
-evidence = "Existing inferred client table layout, no complete array extent or storage owner claim. TL0x502450/Gold0x4ff8c0 native index arithmetic: row=((a*17*5*8)+a)*16=0x2a90*a, cell=b<<7; word+0x10,float+0x18. TL town0x524040 independently steps0x2a90. .scratch/goal82-vfs/town-record-game-native.json, town-record-gold-native.json, town-contract-after.json."
+evidence = "Existing inferred client table layout, no complete array extent or storage owner claim. TL0x502450/Gold0x4ff8c0 native index arithmetic: row=((a*17*5*8)+a)*16=0x2a90*a, cell=b<<7; word+0x10,float+0x18. TL town0x524040 independently steps0x2a90. .scratch/goal82-vfs/town-record-game-native.json, town-record-gold-native.json, town-contract-after.json. Rebound 2026-11-28 after its source file was renamed and naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
 source_hash = "9f33b2e43600a246b659af24fc21a2acf6f84ad6fef1d9ef52ab56d699444fc3"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -704,12 +704,12 @@ f34 = 52
 ent = 80
 
 [types."town.cell_record".GOLD]
-file = "src/client_town.h"
+file = "src/Develop/DieGildeAddOn/game/client_town.h"
 symbol = "Cell502450"
 size = 128
 native_size = 128
 extent = "stride"
-evidence = "Existing inferred client table layout, no complete array extent or storage owner claim. TL0x502450/Gold0x4ff8c0 native index arithmetic: row=((a*17*5*8)+a)*16=0x2a90*a, cell=b<<7; word+0x10,float+0x18. TL town0x524040 independently steps0x2a90. .scratch/goal82-vfs/town-record-game-native.json, town-record-gold-native.json, town-contract-after.json."
+evidence = "Existing inferred client table layout, no complete array extent or storage owner claim. TL0x502450/Gold0x4ff8c0 native index arithmetic: row=((a*17*5*8)+a)*16=0x2a90*a, cell=b<<7; word+0x10,float+0x18. TL town0x524040 independently steps0x2a90. .scratch/goal82-vfs/town-record-game-native.json, town-record-gold-native.json, town-contract-after.json. Rebound 2026-11-28 after its source file was renamed and naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
 source_hash = "9f33b2e43600a246b659af24fc21a2acf6f84ad6fef1d9ef52ab56d699444fc3"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -724,12 +724,12 @@ f30 = 48
 f34 = 52
 ent = 80
 [types."town.row_record".GOLDTL]
-file = "src/client_town.h"
+file = "src/Develop/DieGildeAddOn/game/client_town.h"
 symbol = "Row502450"
 size = 10896
 native_size = 10896
 extent = "stride"
-evidence = "Existing inferred client table layout, no complete array extent or storage owner claim. TL0x502450/Gold0x4ff8c0 native index arithmetic: row=((a*17*5*8)+a)*16=0x2a90*a, cell=b<<7; word+0x10,float+0x18. TL town0x524040 independently steps0x2a90. .scratch/goal82-vfs/town-record-game-native.json, town-record-gold-native.json, town-contract-after.json."
+evidence = "Existing inferred client table layout, no complete array extent or storage owner claim. TL0x502450/Gold0x4ff8c0 native index arithmetic: row=((a*17*5*8)+a)*16=0x2a90*a, cell=b<<7; word+0x10,float+0x18. TL town0x524040 independently steps0x2a90. .scratch/goal82-vfs/town-record-game-native.json, town-record-gold-native.json, town-contract-after.json. Rebound 2026-11-28 after its source file was renamed and naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
 source_hash = "9f33b2e43600a246b659af24fc21a2acf6f84ad6fef1d9ef52ab56d699444fc3"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -741,12 +741,12 @@ c = 0
 tail = 10880
 
 [types."town.row_record".GOLD]
-file = "src/client_town.h"
+file = "src/Develop/DieGildeAddOn/game/client_town.h"
 symbol = "Row502450"
 size = 10896
 native_size = 10896
 extent = "stride"
-evidence = "Existing inferred client table layout, no complete array extent or storage owner claim. TL0x502450/Gold0x4ff8c0 native index arithmetic: row=((a*17*5*8)+a)*16=0x2a90*a, cell=b<<7; word+0x10,float+0x18. TL town0x524040 independently steps0x2a90. .scratch/goal82-vfs/town-record-game-native.json, town-record-gold-native.json, town-contract-after.json."
+evidence = "Existing inferred client table layout, no complete array extent or storage owner claim. TL0x502450/Gold0x4ff8c0 native index arithmetic: row=((a*17*5*8)+a)*16=0x2a90*a, cell=b<<7; word+0x10,float+0x18. TL town0x524040 independently steps0x2a90. .scratch/goal82-vfs/town-record-game-native.json, town-record-gold-native.json, town-contract-after.json. Rebound 2026-11-28 after its source file was renamed and naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
 source_hash = "9f33b2e43600a246b659af24fc21a2acf6f84ad6fef1d9ef52ab56d699444fc3"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -756,7 +756,6 @@ binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 [types."town.row_record".GOLD.offsets]
 c = 0
 tail = 10880
-
 [types."scene.resource_record".GOLD]
 file = "src/client_scene_resources.h"
 symbol = "SCENE_RESOURCE"
