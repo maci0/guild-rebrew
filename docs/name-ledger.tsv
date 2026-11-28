@@ -5044,3 +5044,57 @@ GOLDTL.0x004e9580	amt_GetRankLimits	0	RENAMED+CLEANED	src/Develop/Unassigned/GOL
 2026-11-27	GOLDTL.0x005224f0	fcn_005224f0	d3_ClearSceneObjectActiveFlag	inferred	medium	-	d3_LoadSceneAndTerrain callback clearing cell-tree/active-mesh flag (bit 0 of obj[0x217]).
 2026-11-27	GOLD.0x0040f4f0	fcn_0040f4f0	d3_UpdateParticleTimeAndAlpha	inferred	high	GOLDTL.0x00410400	GOLD twin of SetEmitterTimeAndAlpha; avoids GOLDTL symbol collision.
 2026-11-27	GOLD.0x00472a50	fcn_00472a50	d2_TickFadeOverlays	inferred	high	GOLDTL.0x00473320	Re-proposed after n14 refusal; GOLD twin of d2_SweepFadeOverlays sweeping fade overlay timers.
+2026-11-27	-	Map_531620	SELECTION_SCENE_MAP	inferred	high	-	File-local scene map view struct in GOLDTL.fcn_00531620.c (--type, proposed).
+2026-11-27	-	Cell_531620	SELECTION_MAP_CELL	inferred	high	-	File-local scene map cell struct in GOLDTL.fcn_00531620.c (--type, proposed).
+2026-11-27	-	Slot_531620	SELECTION_ENTITY_SLOT	inferred	high	-	File-local g_7f4ca0 entity slot struct in GOLDTL.fcn_00531620.c (--type, proposed).
+2026-11-27	-	s87_4ce430	NET_SCENE_ENTRY	inferred	high	-	File-local network scene entry struct in GOLDTL.fcn_004ce430.c (--type, proposed).
+2026-11-27	-	s72_4ce430	NET_CHAT_LOG_PAYLOAD	inferred	high	-	File-local network chat log payload struct in GOLDTL.fcn_004ce430.c (--type, proposed).
+2026-11-27	-	ent_555490	SIM_ENTITY_ENTRY	inferred	high	-	File-local simulation entity entry struct in GOLDTL.fcn_00555490.c (--type, proposed).
+2026-11-27	-	fcn_00564f90_rec	HE_END_TIME_REC	inferred	high	-	File-local 14-byte timestamp copy struct in GOLDTL.fcn_00564f90.c (--type, proposed).
+2026-11-27	-	Ctx_44de70	D3_MESH_STREAM_CTX	inferred	high	-	File-local mesh reader context struct in fcn_0044de70.c (--type, proposed).
+2026-11-27	-	Rec_44de70	D3_FACE_MAT_REC	inferred	high	-	File-local face material record struct in fcn_0044de70.c (--type, proposed).
+2026-11-27	-	Node_4bf8e0	ROUTING_NODE	inferred	high	-	File-local routing waypoint node struct in GOLDTL.fcn_004bf8e0.c (--type, proposed).
+2026-11-27	-	SEL_54f600	DUELL_PERSON_SLOT	inferred	high	-	File-local duell participant slot struct in GOLDTL.fcn_0054f600.c (--type, proposed).
+2026-11-27	-	TILE_54f600	DUELL_TILE_VIEW	inferred	high	-	File-local duell tile view struct in GOLDTL.fcn_0054f600.c (--type, proposed).
+2026-11-27	-	date_4bb640	PACKED_DATE_MSG	inferred	high	-	File-local packed date struct in GOLDTL.fcn_004bb640.c (gm_HandlePostSpouseSeasonMsg); proposed --type.
+2026-11-27	-	pkt2c	TACTICAL_SLOT_PKT	inferred	high	-	File-local 0x2c tactical slot packet struct in GOLDTL.fcn_004d15c0.c (cut_DispatchTacticalOrder); proposed --type.
+2026-11-27	-	slot_4d4640	BATTLE_UNIT_SLOT	inferred	high	-	File-local battle unit slot struct in GOLDTL.fcn_004d4640.c (cut_RunBattleFrameLoop); proposed --type.
+2026-11-27	-	StatRow	PLAYER_RANK_ROW	inferred	high	-	File-local player ranking struct in GOLDTL.fcn_005091d0.c (gm_RankPlayers); proposed --type.
+2026-11-27	-	BuildingProto5279f0	GROUNDPLAN_BLD_PROTO	inferred	high	-	File-local building prototype view in GOLDTL.fcn_005279f0.c (d2_UpdateBuildingGroundplan); proposed --type.
+2026-11-27	-	fcn_004be2a0_block	ROUTE_BLOCK	inferred	high	-	File-local route coordinate block struct in GOLDTL.fcn_004be2a0.c (rt_CloneRoutePoints)
+2026-11-27	-	fcn_004be2a0_node	ROUTE_NODE	inferred	high	-	File-local doubly-linked route waypoint node struct in GOLDTL.fcn_004be2a0.c (rt_CloneRoutePoints)
+2026-11-27	-	node_4c3e30	CMD_FREE_NODE	inferred	high	-	File-local command queue free-list node struct in GOLDTL.fcn_004c3e30.c (cm_InitCommandQueue)
+2026-11-27	-	slot_4c3e30	CMD_STATUS_SLOT_VIEW	inferred	high	-	File-local command status slot view struct in GOLDTL.fcn_004c3e30.c (cm_InitCommandQueue)
+2026-11-27	-	Hist14	CITY_HISTORY_SAMPLE	inferred	high	-	File-local 20-byte city history ring buffer entry in GOLDTL.fcn_004facb0.c (gm_PushCityHistorySample)
+2026-11-27	-	Rec500e	OBJ_PRODUCER_PROTO	inferred	high	-	File-local object prototype view in GOLDTL.fcn_00500e40.c (init_BuildObjectProducerTables)
+2026-11-27	-	Bld500e	BLD_PRODUCER_PROTO	inferred	high	-	File-local building prototype view in GOLDTL.fcn_00500e40.c (init_BuildObjectProducerTables)
+2026-11-27	-	DlgRow_596d70	PRODUKTION_SLOT_ROW	inferred	high	-	File-local 0x38 production slot row struct in GOLDTL.fcn_00596d70.c (d2_UpdateProduktionSlotTile)
+2026-11-27	-	Row5d04	MAP_TABLE_MARKER	inferred	high	-	File-local type in src/Develop/Units/d3/GOLDTL.fcn_005d04c0.c
+2026-11-27	-	fcn_0043bcf0_vtbl	D3_RENDER_CTX_VTBL	inferred	high	-	File-local type in src/Develop/Units/m_alloc/GOLDTL.fcn_0043bcf0.c
+2026-11-27	-	fcn_0047b5d0_list	D2_ANIM_TRACK_LIST	inferred	high	-	File-local type in src/Develop/Units/m_alloc/GOLDTL.fcn_0047b5d0.c
+2026-11-27	-	fcn_0044b200_Tile	TXS_TILE_NAME	inferred	high	-	File-local type in src/Develop/Units/vfs/GOLDTL.fcn_0044b200.c
+2026-11-27	-	TextBank_42d6b0	TEXT_BANK_ENTRY	inferred	high	-	File-local type in src/Develop/Units/vfs/vfs_text.c
+2026-11-27	-	dev_436df0	D3D_DEV_CTX	inferred	high	-	File-local type in src/Develop/Unassigned/Unassigned-fcn_family-00436df0.c
+2026-11-27	-	devvtbl_436df0	D3D_DEV_CTX_VTBL	inferred	high	-	File-local type in src/Develop/Unassigned/Unassigned-fcn_family-00436df0.c
+2026-11-27	-	viewport_436df0	D3D_VIEWPORT8	inferred	high	-	File-local type in src/Develop/Unassigned/Unassigned-fcn_family-00436df0.c
+2026-11-27	-	fcn_00456630_Slot	D3_SHADOW_TEX_CACHE_SLOT	inferred	high	-	File-local type in src/Develop/Unassigned/Unassigned-fcn_family-00456590.c
+2026-11-27	-	ref_f31161	SAVED_SCENE_REF	inferred	high	-	File-local type in src/Develop/Unassigned/gold_client.c
+2026-11-27	-	rec_4cc590	ALLOC_CHAR_RECORD	inferred	high	-	File-local type in src/Develop/DieGildeAddOn/game/GOLDTL.fcn_004cc590.c
+2026-11-27	GOLDTL.0x0042a6a0	fcn_0042a6a0	msx_ReleaseSampleHandle	attested	high	-	C body already named msx_ReleaseSampleHandle; sync shared GOLD/GOLDTL TOML binding
+2026-11-27	-	list_52dd80	D3_WIMPEL_NODE_LIST	inferred	high	-	type: src/Develop/Units/d3/GOLDTL.fcn_0052dd80.c; 0x104-byte node array collecting wimpels.
+2026-11-27	-	fcn_00449f90_Part	D3_MODEL_PART	inferred	high	-	type: src/Develop/Units/m_alloc/GOLDTL.fcn_00449f90.c; 0x3c-byte cached model part entry.
+2026-11-27	-	fcn_00449f90_Mesh	D3_MODEL_MESH	inferred	high	-	type: src/Develop/Units/m_alloc/GOLDTL.fcn_00449f90.c; mesh container with parts[3] and extra.
+2026-11-27	-	fcn_0046fcd0_Ent	D2_SHOWTXT_ENT	inferred	high	-	type: src/Develop/Units/m_alloc/GOLDTL.fcn_0046fcd0.c; UI text widget struct.
+2026-11-27	-	fcn_00475f80_com	D2_SURFACE_COM	inferred	high	-	type: src/Develop/Units/m_alloc/GOLDTL.fcn_00475f80.c; COM interface wrapper.
+2026-11-27	-	fcn_00475f80_vtbl	D2_SURFACE_COM_VTBL	inferred	high	-	type: src/Develop/Units/m_alloc/GOLDTL.fcn_00475f80.c; COM vtbl holding release pointer.
+2026-11-27	-	fcn_00475f80_obj	D2_SURFACE_REC	inferred	high	-	type: src/Develop/Units/m_alloc/GOLDTL.fcn_00475f80.c; surface record (avoids D2_SURFACE_OBJ).
+2026-11-27	-	snd_4c0b40	D3SND_VOICE_NODE	inferred	high	-	type: src/Develop/Units/m_alloc/GOLDTL.fcn_004c0b40.c; 0x10-byte tracked voice queue node.
+2026-11-27	-	T_4cd090	CM_JOIN_LEAVE_ELECTION_CMD	inferred	high	-	type: src/Develop/DieGildeAddOn/game/spiel_grp_004ccf10.c; command payload for cm_ExJoinLeaveElection.
+2026-11-27	-	cam_412610	IO_CURSOR_STATE	inferred	high	-	type: src/Develop/Unassigned/client_state.c; 0x5c-byte input cursor snapshot block.
+2026-11-27	--type	fcn_0047cd20_set	D2_SPRITE_BANK_SET	inferred	high	-	file-local sprite bank set struct in GOLDTL.fcn_0047cd20.c renamed via --type; RELOC(25) kept
+2026-11-27	--type	S495F80	AI_BILDUNG_MSG	inferred	high	-	file-local cmd 0x60 message struct typedef in GOLDTL.fcn_00495f80.c renamed via --type; parked before keep-check rebrew test
+2026-11-27	--type	Vtx47bdd0	D2_VERTEX	inferred	high	-	File-local vertex struct in GOLDTL.fcn_0047bdd0.c renamed via --type.
+2026-11-27	--type	Quad47bdd0	D2_QUAD	inferred	high	-	File-local quad struct in GOLDTL.fcn_0047bdd0.c renamed via --type.
+2026-11-27	--type	Tex47bdd0	D2_TEX	inferred	high	-	File-local texture view struct in GOLDTL.fcn_0047bdd0.c renamed via --type.
+2026-11-27	--type	Sprite47bdd0	D2_SPRITE	inferred	high	-	File-local sprite struct in GOLDTL.fcn_0047bdd0.c renamed via --type.
+2026-11-27	--type	Cell47bdd0	D2_SPRITE_CELL	inferred	high	-	File-local sprite cell struct in GOLDTL.fcn_0047bdd0.c renamed via --type.

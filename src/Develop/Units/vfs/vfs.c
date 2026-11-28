@@ -262,6 +262,25 @@ int __cdecl vfs_CompareKeyNoCase(const char* key, const char** file)
 	return stricmp(key, *file);
 }
 
+#if !defined(REBREW_SERVER)
+/* ADDRESS: GOLDTL 0x0042e640 */
+/* ADDRESS: GOLD 0x0042ee10 */
+int __cdecl vfs_CompareFileKey(const char* a, const char** b)
+{
+	return strcmp(a, *b);
+}
+#endif
+
+#if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
+int __cdecl fcn_0065f220(int, int);
+
+/* ADDRESS: GOLDTL 0x0042e680 */
+int __cdecl fcn_0042e680(int a1, int* a2)
+{
+	return fcn_0065f220(a1, *a2);
+}
+#endif
+
 /* Binary-searches dir's sorted files for name, optionally recursing into subdirectories; stores the
  * owning directory in *found_dir. */
 VFS_FILE* __cdecl vfs_FindFile(const char* name, VFS_DIR* dir, VFS_DIR** found_dir, char recurse)
@@ -502,6 +521,34 @@ void __cdecl vfs_AddPath(char* path, VFS_DIR* parent, VFS_DIR* source, int stamp
 	}
 }
 
+#if !defined(REBREW_SERVER)
+/* ADDRESS: GOLD 0x0042f4d0 */
+/* ADDRESS: GOLDTL 0x0042ed00 */
+void __cdecl vfs_AddFilePath(char* path, void* parent, int a3, int a4, int a5, int a6, int a7)
+{
+	char buf[0x100];
+	char part[0x100];
+	char* s;
+	char* p;
+	void* node;
+
+	if (path[strlen(path) - 1] != '/') {
+		node = parent;
+		strcpy(buf, path);
+		s = buf;
+		p = strchr(buf, '/');
+		while (p != 0) {
+			strcpy(part, s);
+			strchr(part, '/')[1] = 0;
+			node = vfs_GetSubDir(part, (VFS_DIR*) node);
+			s = p + 1;
+			p = strchr(s, '/');
+		}
+		vfs_AddFile(s, (VFS_DIR*) node, (VFS_DIR*) a3, a4, a5, a6, a7);
+	}
+}
+#endif
+
 /* qsort comparator: orders two file entries by name. */
 int __cdecl vfs_CompareFiles(const char** a, const char** b)
 {
@@ -614,6 +661,62 @@ VFS_DIR* __cdecl vfs_FindDir(char* path, VFS_DIR* dir)
 	return cur;
 }
 
+#if defined(REBREW_GOLD)
+/* ADDRESS: GOLD 0x0042f7e0 */
+int __cdecl vfs_FindPathNode(void)
+{
+	/* stub */
+	return 0;
+}
+#endif
+
+#if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
+typedef struct NODE042F010 {
+	char pad0[0x108];
+	struct NODE042F010* next;
+	struct NODE042F010* child;
+} NODE042F010;
+
+char* __cdecl fcn_0064e790(const char* s, int c);
+
+/* ADDRESS: GOLDTL 0x0042f010 */
+char* __cdecl vfs_FindPathNode(char* name, NODE042F010* node)
+{
+	char buf[0x100];
+	char path[0x100];
+	NODE042F010* n;
+	char* p;
+	char c;
+
+	n = node;
+	if (name == 0) {
+		return 0;
+	}
+	c = *name;
+	if (c == 0) {
+		return (char*) n;
+	}
+	strcpy(buf, name);
+	vfs_NormalizeCase(buf);
+	if (buf[strlen(buf) - 1] != '/') {
+		strcat(buf, "/");
+	}
+	strcpy(path, buf);
+	p = fcn_0064e790(path, '/');
+	while (n != 0 && p != 0) {
+		strcpy(buf, p + 1);
+		p[1] = 0;
+		n = n->child;
+		while (n != 0 && vfs_CompareNames((char*) n, path) != 0) {
+			n = n->next;
+		}
+		strcpy(path, buf);
+		p = fcn_0064e790(path, '/');
+	}
+	return (char*) n;
+}
+#endif
+
 /* Looks a path up: resolves its directory part, then the file name, which may start with '*' to search
  * the subdirectories too; returns the file entry and stores its directory in *found_dir. */
 VFS_FILE* __cdecl vfs_LookupPath(char* path, VFS_DIR* root, VFS_DIR** found_dir)
@@ -701,6 +804,57 @@ char* __cdecl vfs_GetFilePath(VFS_FILE* file, VFS_DIR* dir, VFS_DIR* stop, char*
 	return out;
 }
 
+#if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
+/* ADDRESS: GOLDTL 0x0042f240 */
+char* __cdecl fcn_0042f240(unsigned int* a0, char* a1, char* a2, char* out)
+{
+	char buf[0x100];
+	char* cur;
+	char** link;
+
+	if (a1 == 0) {
+		return 0;
+	}
+	if (a1 != a2) {
+		strcpy(out, a1);
+		if (a0 != 0) {
+			strcat(out, (char*) *a0);
+			link = (char**) (a1 + 0x110);
+			if (*link == 0)
+				goto done;
+			do {
+				cur = *link;
+				if (cur == a2)
+					goto done;
+				strcpy(buf, cur);
+				strcat(buf, out);
+				strcpy(out, buf);
+				link = (char**) (cur + 0x110);
+			} while (*link != 0);
+			return out;
+		} else {
+			out[strlen(out) - 1] = '\0';
+			link = (char**) (a1 + 0x110);
+			if (*link == 0)
+				goto done;
+			do {
+				cur = *link;
+				if (cur == a2)
+					goto done;
+				strcpy(buf, cur);
+				strcat(buf, out);
+				strcpy(out, buf);
+				link = (char**) (cur + 0x110);
+			} while (*link != 0);
+			return out;
+		}
+	}
+	strcpy(out, (char*) *a0);
+done:
+	return out;
+}
+#endif
+
 /* Writes the path of dir relative to its ancestor stop into out. */
 char* __cdecl vfs_GetDirPath(VFS_DIR* dir, VFS_DIR* stop, char* out)
 {
@@ -725,6 +879,44 @@ char* __cdecl vfs_GetDirPath(VFS_DIR* dir, VFS_DIR* stop, char* out)
 	}
 	return out;
 }
+
+#if !defined(REBREW_SERVER)
+/* SIZE 0x11c */
+typedef struct Node {
+	char name[0x100];
+	int count;
+	int data;
+	struct Node* next;
+	struct Node* child;
+	struct Node* parent;
+	int pad114;
+	char flag;
+} Node;
+
+/* ADDRESS: GOLDTL 0x0042f420 */
+/* ADDRESS: GOLD 0x0042fbf0 */
+char* __cdecl vfs_BuildDirPath(Node* n, Node* stop, char* out)
+{
+	char tmp[0x100];
+	Node* p;
+
+	p = n;
+	if (p == 0) {
+		return 0;
+	}
+	strcpy(out, p->name);
+	while (p != 0) {
+		if (p->parent == stop) {
+			break;
+		}
+		p = p->parent;
+		strcpy(tmp, p->name);
+		strcat(tmp, out);
+		strcpy(out, tmp);
+	}
+	return out;
+}
+#endif
 
 /* Strips the directory path of dir (root first) from the front of path and
  * writes the remainder into out; returns 0 when path is not below dir. */
@@ -806,6 +998,26 @@ char* __cdecl vfs_GetFilePathOf(char* path, VFS_DIR* root, VFS_DIR* stop, char* 
 	REBREW_VFS_LAYOUT_LOG("D:\\Develop\\Units\\vfs\\vfs.c", 793, "vfs_GetFilePathOf(): file not found", 1);
 	return 0;
 }
+
+#if !defined(REBREW_SERVER)
+#if defined(REBREW_GOLD)
+char* __cdecl fcn_0042f240(unsigned int*, char*, char*, char*);
+#endif
+
+/* ADDRESS: GOLDTL 0x0042f690 */
+/* ADDRESS: GOLD 0x0042fca0 */
+int __cdecl vfs_ResolvePath(int path, int root, int a3, int a4)
+{
+	VFS_FILE* file;
+
+	file = vfs_LookupPath((char*) path, (VFS_DIR*) root, (VFS_DIR**) &root);
+	if (file != 0) {
+		fcn_0042f240((unsigned int*) file, (char*) root, (char*) a3, (char*) a4);
+		return a4;
+	}
+	return 0;
+}
+#endif
 
 /* Mounts path below parent: a .BIN archive directly, or a directory tree
  * whose files and .BIN archives are added recursively; returns the new
@@ -913,6 +1125,114 @@ VFS_DIR* __cdecl vfs_ScanDir(char* path, VFS_DIR* parent)
 	return dir;
 }
 
+
+#if !defined(REBREW_SERVER)
+/* Mounts path below parent: a .BIN archive directly, or a directory tree whose
+ * files and .BIN archives are added recursively; returns the new directory
+ * node (sorted when parent is 0). */
+/* ADDRESS: GOLDTL 0x0042f6d0 */
+/* ADDRESS: GOLD 0x0042fce0 */
+VFS_DIR* __cdecl vfs_MountPath(char* path, VFS_DIR* parent)
+{
+	VFS_DIR* dir;
+	char* ext;
+	HANDLE h;
+	SYSTEMTIME st;
+	FILETIME ft;
+	char buf[0x100];
+	char dirpath[0x100];
+	WIN32_FIND_DATAA fd;
+	char name[0x100];
+	char sub[0x100];
+	char* s;
+	char found;
+	int i;
+	int n;
+
+	dir = 0;
+	strcpy(dirpath, path);
+	vfs_NormalizeCase(dirpath);
+	if (parent == 0) {
+		vfs_ToSlashes(dirpath);
+	}
+	ext = strrchr(dirpath, '.');
+	n = strlen(dirpath) - 1;
+	if ((n <= 0 || (dirpath[n] != '/' && dirpath[n] != '\\')) && ext != 0) {
+		for (i = 0; i <= 6; i++) {
+			if (vfs_CompareNames(ext, g_file_extension_names + i * 6) == 0) {
+				vfs_ScanArchive(dirpath, parent, i);
+			}
+		}
+	} else {
+		if (dirpath[strlen(dirpath) - 1] != '/') {
+			strcat(dirpath, "/");
+		}
+		strcpy(buf, dirpath);
+		strcat(buf, "*");
+		strcpy(sub, buf);
+		h = FindFirstFileA(buf, &fd);
+		if (h != INVALID_HANDLE_VALUE) {
+			if (parent != 0) {
+				strcpy(buf, dirpath);
+				s = strrchr(buf, '/');
+				if (s != 0) {
+					*s = 0;
+					s = strrchr(buf, '/');
+				}
+				if (s != 0) {
+					strcpy(name, s + 1);
+					strcat(name, "/");
+				} else {
+					strcpy(name, "");
+				}
+			} else {
+				strcpy(name, dirpath);
+			}
+			dir = vfs_GetSubDir(name, parent);
+			do {
+				if (strcmp(fd.cFileName, ".") == 0 || strcmp(fd.cFileName, "..") == 0) {
+					continue;
+				}
+				if (fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
+					strcpy(buf, dirpath);
+					strcat(buf, fd.cFileName);
+					strcat(buf, "/");
+					vfs_MountPath(buf, dir);
+					continue;
+				}
+				found = 0;
+				strcpy(buf, fd.cFileName);
+				vfs_NormalizeCase(buf);
+				ext = strrchr(buf, '.');
+				if (ext != 0) {
+					for (i = 0; i <= 6; i++) {
+						if (vfs_CompareNames(ext, g_file_extension_names + i * 6) == 0) {
+							strcpy(sub, dirpath);
+							strcat(sub, buf);
+							vfs_MountPath(sub, dir);
+							found = 1;
+						}
+					}
+					if (found) {
+						continue;
+					}
+				}
+				FileTimeToLocalFileTime(&fd.ftLastWriteTime, &ft);
+				FileTimeToSystemTime(&ft, &st);
+				vfs_AddFile(buf, dir, 0, 0, 0, 0,
+					((unsigned long) (st.wYear - 1980) << 25) | ((unsigned long) st.wMonth << 21)
+					 | ((unsigned long) st.wDay << 16) | ((unsigned long) st.wHour << 11)
+					 | ((unsigned long) st.wMinute << 5) | (st.wSecond >> 1));
+			} while (FindNextFileA(h, &fd));
+			FindClose(h);
+		}
+	}
+	if (parent == 0 && dir != 0) {
+		vfs_FinishFiles(dir, 1);
+	}
+	return dir;
+}
+#endif
 
 char* __cdecl unzOpen(const char* path);
 int __cdecl unzGetCurrentFileInfo(char* file, unsigned long* info, char* name, unsigned long name_size, void* extra, unsigned long extra_size, char* comment, unsigned long comment_size);
@@ -1263,6 +1583,204 @@ done:
 	return stream;
 }
 #endif
+#if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
+typedef struct VFS_FILE_42ff50 {
+	char* name;
+	unsigned int offset;
+	struct VFS_DIR* source;
+	int packed;
+	int stamp;
+	unsigned int archive;
+} VFS_FILE_42ff50;
+
+typedef struct {
+	unsigned char read : 1;
+	unsigned char b1 : 1;
+	unsigned char b2 : 1;
+	unsigned char compressed : 1;
+	unsigned char b4 : 1;
+	unsigned char b5 : 1;
+	unsigned char b6 : 1;
+	unsigned char b7 : 1;
+} VFS_MODE_BITS_42ff50;
+
+int __cdecl unzGoToFilePos(char* file, unsigned long pos, unsigned long num);
+int __cdecl unzOpenCurrentFile(char* file);
+void __cdecl ReportClientMessage(char*);
+
+/* ADDRESS: GOLDTL 0x0042ff50 */
+void* __cdecl vfs_Tfopen(char* path, char* mode, struct VFS_DIR* root)
+{
+	char* stream;
+	unsigned char packed;
+	unsigned char binary;
+	unsigned char read;
+	struct VFS_DIR* dir;
+	char* modes[2];
+	char* p;
+	VFS_FILE_42ff50* file;
+	char* zip;
+	void* h;
+	int err;
+	char name[0x100];
+	char entry[0x100];
+	char arch[0x100];
+	unsigned long info[0x14];
+
+	stream = 0;
+	if (!path || !*path || !mode || !root)
+		return stream;
+	read = 1;
+	binary = 1;
+	packed = 1;
+	for (p = mode; *p; p++) {
+		switch (toupper(*p)) {
+		case 'B':
+			binary = 1;
+			break;
+		case 'N':
+			packed = 0;
+			break;
+		case 'R':
+			read = 1;
+			break;
+		case 'T':
+			binary = 0;
+			break;
+		case 'W':
+			read = 0;
+			break;
+		case 'Z':
+			packed = 1;
+			break;
+		}
+	}
+	if (read) {
+		file = (VFS_FILE_42ff50*) vfs_LookupPath(path, root, &dir);
+		if (!file)
+			goto not_found;
+		if (file->source) {
+			if (!binary) {
+				ReportClientMessage("Unsupported Read-Mode in vfs:Open (textfile inside zip)");
+				return 0;
+			}
+			fcn_0042f240(0, (char*) file->source, 0, arch);
+			strcat(arch, g_file_extension_names + file->archive * 6);
+			vfs_ToBackslashes(arch);
+			zip = unzOpen(arch);
+			if (!zip)
+				goto not_found;
+			fcn_0042f240((unsigned int*) file, (char*) dir, (char*) file->source, entry);
+			strupr(entry);
+			if ((unsigned long) file->stamp > 0) {
+				err = unzGoToFilePos(zip, file->stamp, file->packed);
+				if (unzGetCurrentFileInfo(zip, info, name, 0x100, 0, 0, 0, 0) == 0) {
+					strupr(name);
+					vfs_ToSlashes(name);
+					if (info[8] > 0 && strcmp(entry, name) == 0) {
+						if (unzOpenCurrentFile(zip) != 0)
+							goto close_zip;
+allocate_member:
+						stream = (char*) m_PoolAlloc(g_6b7fe4, 0x140, 0x10);
+						((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->b2 = 1;
+						((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->b4 = 1;
+						*(char**) (stream + 0x100) = zip;
+						goto opened;
+					}
+				} else {
+					goto close_zip;
+				}
+				if (err != 0)
+					goto close_zip;
+				goto allocate_member;
+			}
+			do {
+				if (unzGetCurrentFileInfo(zip, info, name, 0x100, 0, 0, 0, 0) == 0) {
+					strupr(name);
+					vfs_ToSlashes(name);
+					if (info[8] > 0 && strcmp(entry, name) == 0) {
+						if (unzOpenCurrentFile(zip) == 0)
+							goto allocate_member;
+						break;
+					}
+				}
+			} while (unzGoToNextFile(zip) == 0);
+close_zip:
+			unzClose(zip);
+not_found:
+			sprintf(entry, "vfs_Tfopen: Could not find \"%s\"!!", path);
+			return stream;
+		}
+		modes[0] = "rt";
+		modes[1] = "rb";
+		fcn_0042f240((unsigned int*) file, (char*) dir, 0, arch);
+		vfs_ToBackslashes(arch);
+		if (packed) {
+			h = gzopen(arch, modes[binary]);
+		} else {
+			h = fopen(arch, modes[binary]);
+		}
+		if (h == 0)
+			goto not_found;
+		stream = (char*) m_PoolAlloc(g_6b7fe4, 0x140, 0x10);
+		*(void**) (stream + 0x100) = h;
+		((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->b4 = 0;
+opened:
+		strcpy(stream, path);
+		((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->b5 = 0;
+		((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->read = 1;
+		((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->b1 = binary;
+		((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->compressed = packed;
+		g_6b7fec = g_6b7fec + 1;
+		return stream;
+	} else {
+		for (p = path; *p && (*p == '\\' || *p == '/'); p++) {
+		}
+		strcpy(name, p);
+		vfs_ToSlashes(name);
+		strcpy(entry, name);
+		vfs_NormalizeCase(name);
+		file = (VFS_FILE_42ff50*) vfs_LookupPath(name, root, &dir);
+		if (!file || file->source) {
+			if (!vfs_MakeDirs(entry, root))
+				return 0;
+			if (!file) {
+				vfs_AddFilePath(name, root, 0, 0, 0, 0, -1);
+				file = (VFS_FILE_42ff50*) vfs_LookupPath(name, root, &dir);
+			}
+		}
+		if (file) {
+			modes[0] = "wt";
+			modes[1] = "wb";
+			file->offset = -1;
+			file->source = 0;
+			file->stamp = 0;
+			fcn_0042f240((unsigned int*) file, (char*) dir, 0, arch);
+			vfs_ToBackslashes(arch);
+			if (packed) {
+				h = gzopen(arch, modes[binary]);
+			} else {
+				h = fopen(arch, modes[binary]);
+			}
+			if (h == 0)
+				return stream;
+			stream = (char*) m_PoolAlloc(g_6b7fe4, 0x140, 0x10);
+			*(void**) (stream + 0x100) = h;
+			strcpy(stream, path);
+			((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->read = 0;
+			((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->b5 = 0;
+			((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->b1 = binary;
+			((VFS_MODE_BITS_42ff50*) (stream + 0x13c))->compressed = packed;
+			g_6b7fec = g_6b7fec + 1;
+			return stream;
+		}
+		sprintf(entry, "vfs_Tfopen: Could write to \"%s\"!!", path);
+		ReportClientMessage(entry);
+		return stream;
+	}
+}
+#endif
+
 #if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 int __cdecl CloseVfsStream(void* stream)
 {
@@ -1615,6 +2133,96 @@ done:
 }
 #endif
 
+#if defined(REBREW_GOLD)
+int __cdecl fcn_004616e0(z_streamp, int);
+
+/* ADDRESS: GOLD 0x00430bd0 */
+int __cdecl vfs_ReadData(char* buffer, int size, int count, char* file)
+{
+    unsigned int bytes;
+    unsigned int result;
+    unsigned char flags;
+    unsigned char memory;
+    void* copySrc;
+    char text[0x100];
+
+    result = (unsigned int) -1;
+    if (!file)
+        goto done;
+    flags = (unsigned char) file[0x13c];
+    if (!(flags & 1) || (!*(void**) (file + 0x100) && !(flags & 0x20)))
+        goto done;
+    bytes = (unsigned int) size * (unsigned int) count;
+    memory = (flags >> 5) & 1;
+    if (memory && !(flags & 8) && *(unsigned int*) (file + 0x104) < bytes)
+        bytes = *(unsigned int*) (file + 0x104);
+    if (!bytes) {
+        result = bytes;
+        goto done;
+    }
+    if (!buffer)
+        goto done;
+    if (memory) {
+        if (flags & 8) {
+            *(void**) (file + 0x10c) = buffer;
+            *(unsigned int*) (file + 0x110) = bytes;
+            fcn_004616e0((z_streamp) (file + 0x100), 2);
+            result = bytes - *(unsigned int*) (file + 0x110);
+            goto done;
+        }
+        copySrc = *(void**) (file + 0x100);
+        /* Reviewed original operand-homed copy core at 0x430c99..ba. */
+        __asm {
+            mov edi, buffer
+            mov esi, copySrc
+            mov ebx, bytes
+            lea ecx, [edi+edi*2]
+            and ecx, 3
+            sub ebx, ecx
+            jle short read_tail
+            rep movsb
+            mov ecx, ebx
+            and ebx, 3
+            shr ecx, 2
+            rep movsd
+        read_tail:
+            add ecx, ebx
+            rep movsb
+        }
+        result = bytes;
+        *(char**) (file + 0x100) += bytes;
+        {
+            unsigned int avail;
+            unsigned int consumed;
+            avail = *(unsigned int*) (file + 0x104);
+            consumed = *(unsigned int*) (file + 0x108);
+            avail -= bytes;
+            consumed += bytes;
+            *(unsigned int*) (file + 0x104) = avail;
+            *(unsigned int*) (file + 0x108) = consumed;
+        }
+        goto done;
+    }
+    if (flags & 0x10) {
+        result = unzReadCurrentFile(*(int*) (file + 0x100), buffer, bytes);
+        if ((file[0x13c] & 4) && result >= 2) {
+            file[0x13c] &= 0xfb;
+            if (((unsigned char*) buffer)[0] == *(int*) 0x5f9004 &&
+                ((unsigned char*) buffer)[1] == *(int*) 0x5f9008)
+                sprintf(text, "vfs: gz-compressed file (\"%s\") in zip found!", file);
+        }
+        goto done;
+    }
+    if (flags & 8) {
+        result = gzread(*(gzFile*) (file + 0x100), buffer, bytes);
+        goto done;
+    }
+    result = fread(buffer, (unsigned int) size, (unsigned int) count, *(FILE**) (file + 0x100));
+done:
+    return (int) result;
+}
+#endif
+
 /* Client-only stream helpers (TL client 0x430870..0x430c50, between vfs_ReadData and vfs_OpenStream;
  * discarded). */
 
@@ -1630,6 +2238,20 @@ int __cdecl vfs_fgetc(char* stream)
 	}
 	return -1;
 }
+
+#if !defined(REBREW_SERVER)
+/* ADDRESS: GOLD 0x00430d90 */
+/* ADDRESS: GOLDTL 0x00430870 */
+int __cdecl vfs_GetChar(void* stream)
+{
+	char c;
+
+	if (vfs_ReadData(&c, 1, 1, stream) == 1) {
+		return c;
+	}
+	return -1;
+}
+#endif
 
 /* Reads one line of at most max characters into buf, dropping the line end. */
 char* __cdecl vfs_fgets(char* buf, int max, char* stream)
@@ -1851,6 +2473,54 @@ long __cdecl vfs_ftell(char* a)
 	}
 	return r;
 }
+#if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
+typedef struct VfsFlags {
+	unsigned char plain : 1;
+	unsigned char b1 : 1;
+	unsigned char b2 : 1;
+	unsigned char gz : 1;
+	unsigned char zip : 1;
+	unsigned char mem : 1;
+	unsigned char b6 : 1;
+	unsigned char b7 : 1;
+} VfsFlags;
+/* SIZE 0x1 */
+
+long __cdecl unztell(void* file);
+long __cdecl fcn_0045fa50(void* h);
+long __cdecl fcn_0064e30c(void* h);
+
+/* ADDRESS: GOLDTL 0x00430c50 */
+long __cdecl fcn_00430c50(char* a)
+{
+	void* h;
+	long r;
+
+	r = -1;
+	if (a != 0) {
+		h = *(void**) (a + 0x100);
+		if (h != 0 || ((VfsFlags*) (a + 0x13c))->mem) {
+			if (((VfsFlags*) (a + 0x13c))->mem) {
+				r = *(long*) (a + 0x108);
+			} else if (((VfsFlags*) (a + 0x13c))->plain) {
+				if (((VfsFlags*) (a + 0x13c))->zip) {
+					r = unztell(h);
+				} else if (((VfsFlags*) (a + 0x13c))->gz) {
+					r = fcn_0045fa50(h);
+				} else {
+					r = fcn_0064e30c(h);
+				}
+			} else if (((VfsFlags*) (a + 0x13c))->gz) {
+				r = fcn_0045fa50(h);
+			} else {
+				r = fcn_0064e30c(h);
+			}
+		}
+	}
+	return r;
+}
+#endif
+
 #if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 void* __cdecl vfs_OpenStream(unsigned char* buf, unsigned int size, char* mode_flags)
 {
