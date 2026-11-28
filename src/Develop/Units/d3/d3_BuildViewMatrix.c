@@ -26,6 +26,7 @@ void __cdecl d3_BuildViewMatrix(int source, char* view, int flags, float* out)
 }
 #else
 /* ADDRESS: GOLDTL 0x00455700 */
+/* ADDRESS: GOLDDE 0x0044aec0 */
 void __cdecl d3_BuildViewMatrix(char* node, char flag, float* mat, float* out)
 {
 	float tmp[16];

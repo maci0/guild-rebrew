@@ -6,6 +6,7 @@ extern unsigned char* lpGebaeudePROT;
 
 int __cdecl d2_CheckTutMsg1aNotCat12Node74(int* m);
 
+/* ADDRESS: GOLDDE 0x005657e0 */
 int __cdecl d2_CheckTutCh3Cat0aBuildGate(int* m)
 {
 	if (d2_TutorialState[14] >= 0 && m[0] == 0x25 && m[3] == 0x155) {

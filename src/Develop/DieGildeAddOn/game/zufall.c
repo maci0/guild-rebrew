@@ -14,6 +14,8 @@ extern const float g_const_0_0;
 extern float g_const_neg_1_0;
 
 /* Returns a random integer in [0, n), or 0 for n == 0. */
+/* ADDRESS: GOLDDE 0x00427ef0 */
+/* ADDRESS: SERVERDE 0x10008640 */
 int __cdecl gm_RandomMod(unsigned short n)
 {
 	if (n) {
@@ -30,11 +32,15 @@ int __cdecl gm_RandomRange(int n)
 }
 
 /* Returns a random float in [0, 1): rand() scaled by 1/32767. */
+/* ADDRESS: GOLDDE 0x00427f10 */
+/* ADDRESS: SERVERDE 0x10008660 */
 double __cdecl gm_RandomFloat01(void)
 {
 	return (float) rand() * g_const_1_over_32767;
 }
 
+/* ADDRESS: GOLDDE 0x00427f30 */
+/* ADDRESS: SERVERDE 0x10008680 */
 float __cdecl gm_RandomQuadratic(void)
 {
 	float rand_val;
@@ -45,6 +51,7 @@ float __cdecl gm_RandomQuadratic(void)
 }
 
 /* Returns gm_RandomFloat01() squared. */
+/* ADDRESS: GOLDDE 0x00427f60 */
 double __cdecl gm_RandomFloat01Squared(void)
 {
 	double v;
@@ -53,11 +60,14 @@ double __cdecl gm_RandomFloat01Squared(void)
 	return v * v;
 }
 
+/* ADDRESS: GOLDDE 0x00427f70 */
+/* ADDRESS: SERVERDE 0x100086b0 */
 void __cdecl srv_SeedRandomWithTime(void)
 {
 	srand(timeGetTime());
 }
 
+/* ADDRESS: GOLDDE 0x00427f80 */
 void __cdecl srv_SeedRandom(unsigned int seed)
 {
 	srand(seed);

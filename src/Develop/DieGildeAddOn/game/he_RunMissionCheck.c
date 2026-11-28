@@ -39,6 +39,7 @@ int __cdecl gm_CheckMissionCondition(rec24*);
 int __cdecl cm_RequestSysMessage(int, struct req*);
 int __cdecl cm_GetCommandStatus(int);
 
+/* ADDRESS: GOLDDE 0x0055b440 */
 void __cdecl he_RunMissionCheck(char* u)
 {
 	struct req q;

@@ -40,6 +40,7 @@ int __cdecl ai_FindEntityInFavorRange(char* p, int kind, F8 f, int c, float r, i
 int __cdecl ai_SelectBestMethod(int kind, int id, int a3, Msg* b, Msg* a);
 
 /* ADDRESS: GOLDTL 0x0049b1f0 */
+/* ADDRESS: GOLDDE 0x00489c30 */
 int __cdecl ai_StartUseObjectGemeinheit(int kind, char* e, int busy, Msg* out1, Msg* out2)
 {
 	Slot slot[12];

@@ -37,6 +37,7 @@ void __cdecl d2_UpdateCityScrollMap(void *);
 void __cdecl d2_DestroyMapDialog(void *);
 
 /* ADDRESS: GOLDTL 0x004bfe00 */
+/* ADDRESS: GOLDDE 0x004ad980 */
 int __cdecl d2_RunTradeRouteEditor(char *obj)
 {
 	char town[0x27ac]; int forms[3]; char changed;

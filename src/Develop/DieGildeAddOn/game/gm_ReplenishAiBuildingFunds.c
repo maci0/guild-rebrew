@@ -21,6 +21,7 @@ int __cdecl cm_RequestMoveCredits(int, int, char, int);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl cm_StepCommandQueue(void);
 
+/* ADDRESS: GOLDDE 0x0052dbd0 */
 void __cdecl gm_ReplenishPersonFunds(void)
 {
 	int cmd_handle;

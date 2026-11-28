@@ -9,6 +9,7 @@ extern Slot_779d00 main_CameraBookmarks[];
 
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 
+/* ADDRESS: GOLDDE 0x00578020 */
 int __cdecl ls_LoadSlot779d00(void* fh)
 {
 	int n;

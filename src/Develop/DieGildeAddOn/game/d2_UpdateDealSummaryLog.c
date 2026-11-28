@@ -37,6 +37,7 @@ void __cdecl d2_SetFormVisibility(int, int);
 
 int __cdecl io_AppendText(int, ...);
 
+/* ADDRESS: GOLDDE 0x0056dcc0 */
 void __cdecl d2_UpdateDealSummaryLog(char* w)
 {
 	int i;

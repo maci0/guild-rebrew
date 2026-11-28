@@ -4,6 +4,7 @@ extern char gm_EntityNameField[];
 
 void __cdecl fcn_0064d41a(void*, void*, int, void*);
 
+/* ADDRESS: GOLDDE 0x0052baa0 */
 void __cdecl he_RunNone(void* event)
 {
 	char buf[0x100];

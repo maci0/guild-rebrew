@@ -3,6 +3,7 @@
 char* __cdecl gm_GetGuildHall(int);
 void* __cdecl gm_QueryEntities(int, int, int, ...);
 
+/* ADDRESS: GOLDDE 0x004f2c50 */
 char* __cdecl gm_FindPublicTreasury(int building_slot)
 {
 	char* building;

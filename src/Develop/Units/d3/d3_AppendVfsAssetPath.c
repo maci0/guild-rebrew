@@ -10,6 +10,7 @@ extern char g_6b85c0[];
 
 int __cdecl vfs_ResolvePath(char*, int, int, char*);
 
+/* ADDRESS: GOLDDE 0x004401a0 */
 void __cdecl d3_AppendVfsAssetPath(char* a, char* b)
 {
 	char buf[0x100];

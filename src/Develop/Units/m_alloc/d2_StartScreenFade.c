@@ -20,6 +20,7 @@ void* __cdecl m_alloc(int size, const char* tag);
 void* __cdecl d3_LoadTextureWithDefaultTint(int name, int a2);
 
 /* ADDRESS: GOLDTL 0x004730c0 */
+/* ADDRESS: GOLDDE 0x004660d0 */
 Sprite* __cdecl d2_StartScreenFade(int a1, int a2, int a3, int a4, int textureName, int a6, int a7)
 {
 	int i;

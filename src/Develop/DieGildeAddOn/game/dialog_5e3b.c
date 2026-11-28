@@ -33,6 +33,7 @@ void __cdecl ls_CaptureSavePreview(void);
 void __cdecl ls_SaveGame(char*, char*, int);
 
 /* ADDRESS: GOLDTL 0x005e3b70 */
+/* ADDRESS: GOLDDE 0x005c50c0 */
 void __cdecl d2_EnterMenuScreen(void)
 {
 	int flags;
@@ -58,6 +59,7 @@ void __cdecl d2_EnterMenuScreen(void)
 
 /* ADDRESS: GOLD 0x005d7580 */
 /* ADDRESS: GOLDTL 0x005e40b0 */
+/* ADDRESS: GOLDDE 0x005c54c0 */
 void __cdecl ls_QuickSave(void)
 {
 	SaveReq s;

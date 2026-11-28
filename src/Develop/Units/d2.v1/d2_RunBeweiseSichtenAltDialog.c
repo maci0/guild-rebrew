@@ -48,6 +48,7 @@ void __cdecl d2_DestroyForm(int);
 int __cdecl d2_RunBeweiseSichtenDialog(char*, char*);
 
 /* ADDRESS: GOLDTL 0x005da820 */
+/* ADDRESS: GOLDDE 0x005bbdc0 */
 int __cdecl d2_RunBeweiseSichtenAltDialog(char* e, char* request)
 {
 	int result;

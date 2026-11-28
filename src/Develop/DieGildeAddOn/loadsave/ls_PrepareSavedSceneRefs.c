@@ -17,6 +17,7 @@ extern struct ref_fb5761 g_fb5761[0x8000];
 
 void __cdecl d3_SelectSceneContext(int, int);
 
+/* ADDRESS: GOLDDE 0x00507ca0 */
 void __cdecl ls_PrepareSavedSceneRefs(void)
 {
 	int save;

@@ -80,6 +80,7 @@ void __cdecl msx_StopTrack(int, int);
 #pragma optimize("y", off)
 
 /* ADDRESS: GOLDTL 0x0053a400 */
+/* ADDRESS: GOLDDE 0x00521c00 */
 void __cdecl main_Menue(void)
 {
 	char v7[260];

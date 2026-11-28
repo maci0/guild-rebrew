@@ -30,6 +30,7 @@ void __cdecl d2_CaptureFormPageTextures(int slot, void* upper, void* lower)
 }
 #else
 /* ADDRESS: GOLDTL 0x004713b0 */
+/* ADDRESS: GOLDDE 0x004648b0 */
 void __cdecl d2_CaptureFormPageTextures(int slot, char* upperName, char* lowerName)
 {
 	Obj* form;

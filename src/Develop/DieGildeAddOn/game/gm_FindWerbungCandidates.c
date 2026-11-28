@@ -5,6 +5,7 @@
 
 int __cdecl gm_FindSimilarEntities(char*, int, int, int, float, unsigned short*);
 
+/* ADDRESS: GOLDDE 0x005b4140 */
 void __cdecl gm_FindWerbungCandidates(char* e, int* count, int* out)
 {
 	unsigned short ids[10];

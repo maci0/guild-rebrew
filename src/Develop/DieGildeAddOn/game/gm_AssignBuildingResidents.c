@@ -1,3 +1,4 @@
+void __cdecl gv_IsGraveSlotFree();
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 #include <string.h>
 extern char* lpGebaeudePROT;
@@ -12,6 +13,7 @@ char* __cdecl FindSlotEntryFiltered(int mode, void* table, int flags, void* filt
 char* __cdecl gm_FindOrAllocHeadSet(int gender, int age);
 
 /* ADDRESS: GOLDTL 0x004f1ad0 */
+/* ADDRESS: GOLDDE 0x004ddb90 */
 int __cdecl gm_AssignBuildingResidents(void* building, int count)
 {
 	char* hit;
@@ -33,7 +35,7 @@ int __cdecl gm_AssignBuildingResidents(void* building, int count)
 
 
 	for (; i < count; i++) {
-		hit = FindSlotEntryFiltered(0, building, 0, (void*) 0x4f1840, 0);
+		hit = FindSlotEntryFiltered(0, building, 0, (void*) gv_IsGraveSlotFree, 0);
 		if (hit == 0) {
 			return i;
 		}

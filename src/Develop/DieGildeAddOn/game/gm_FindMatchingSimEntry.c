@@ -9,6 +9,7 @@ struct SIM_ENTITY_ENTRY {
 
 
 /* ADDRESS: GOLDTL 0x00555490 */
+/* ADDRESS: GOLDDE 0x0053b840 */
 int __cdecl gm_FindMatchingSimEntry(char* o, struct SIM_ENTITY_ENTRY* tab, int* out)
 {
 	int i;

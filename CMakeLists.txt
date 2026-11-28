@@ -558,6 +558,10 @@ if(REBREW_BUILD_GOLDTL)
   # Naming batch n17: names GOLDTL callers use that no GOLDTL body defines yet (from its link log).
   rebrew_append_scaffold(GOLDTL_SOURCES
     "${PROJECT_SOURCE_DIR}/stubs/goldtl/symbol_stubs_naming_n17.c")
+  # German twins: data globals that raw English addresses in shared bodies now name and no GOLDTL
+  # body defines yet (rebrew build symbol-stubs from the GoldTL link log; placeholders link, they do not run).
+  rebrew_append_scaffold(GOLDTL_SOURCES
+    "${PROJECT_SOURCE_DIR}/stubs/goldtl/symbol_stubs_de_twins.c")
   # Two shim definitions call GOLD-side symbols; the callee bodies belong to
   # the other client and are not part of this image, so the symbols come from
   # link_scaffold.c instead of dragging that target's closures in.

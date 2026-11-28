@@ -1,3 +1,5 @@
+extern char g_14a5320[];
+extern char str_fmt_s[];
 #include <stdio.h>
 #include <string.h>
 
@@ -7,6 +9,7 @@ extern int hst_HistoryTextBase;
 void __cdecl io_FormatTextBuffer(int, int, ...);
 
 /* ADDRESS: GOLDTL 0x004b2e20 */
+/* ADDRESS: GOLDDE 0x004a1140 */
 void __cdecl hst_ParseText_Real(int out, int src)
 {
 	char buf[0x17d0];
@@ -44,7 +47,7 @@ void __cdecl hst_ParseText_Real(int out, int src)
 		rep stosb
 	}
 	if (src < 0x4800) {
-		p = *(char**) (src * 4 + 0x14a5320);
+		p = *(char**) (src * 4 + (int) &g_14a5320);
 		if (p == 0) {
 			return;
 		}
@@ -60,21 +63,21 @@ void __cdecl hst_ParseText_Real(int out, int src)
 		c = *scan;
 		if (c == '[') {
 			if (open != 0) {
-				sprintf(msg, (char*) 0x680b28, src - hst_HistoryTextBase);
+				sprintf(msg, (char*) ((int) &hst_HistoryTextBase + 0xe88), src - hst_HistoryTextBase);
 				return;
 			}
 			open = scan;
 			scan++;
 		} else if (c == '#') {
 			if (open == 0 || hash != 0) {
-				sprintf(msg, (char*) 0x680b28, src - hst_HistoryTextBase);
+				sprintf(msg, (char*) ((int) &hst_HistoryTextBase + 0xe88), src - hst_HistoryTextBase);
 				return;
 			}
 			hash = scan;
 			scan++;
 		} else if (c == ']') {
 			if (open == 0 || hash == 0) {
-				sprintf(msg, (char*) 0x680b28, src - hst_HistoryTextBase);
+				sprintf(msg, (char*) ((int) &hst_HistoryTextBase + 0xe88), src - hst_HistoryTextBase);
 				return;
 			}
 			memmove(hash, scan + 1, strlen(scan + 1) + 1);
@@ -92,5 +95,5 @@ void __cdecl hst_ParseText_Real(int out, int src)
 	if (hash != 0) {
 		return;
 	}
-	io_FormatTextBuffer(out, 0x679060, buf);
+	io_FormatTextBuffer(out, (int) &str_fmt_s, buf);
 }

@@ -20,6 +20,7 @@ void __cdecl he_DispatchZigeunerEvent(ENTITY_RECORD*, char*, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 unsigned short __cdecl gm_RandomMod(int);
 
+/* ADDRESS: GOLDDE 0x00561bb0 */
 void __cdecl he_RunAction0x9d(char* u)
 {
 	char* h2;

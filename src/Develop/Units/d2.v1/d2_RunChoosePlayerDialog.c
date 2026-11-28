@@ -54,6 +54,7 @@ int __cdecl d2_CreateButtonRow(int, int, int*, int, int, int);
 int __cdecl main_RunFrameLoop(int (__cdecl*)(void), int);
 
 /* ADDRESS: GOLDTL 0x0053d490 */
+/* ADDRESS: GOLDDE 0x00524730 */
 int __cdecl d2_RunChoosePlayerDialog(int a0, int a1)
 {
 	int list;

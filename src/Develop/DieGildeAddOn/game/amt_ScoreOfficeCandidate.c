@@ -5,6 +5,7 @@ float __cdecl amt_GetOfficeAffinityScore(unsigned char*, int);
 
 
 /* ADDRESS: GOLDTL 0x004ad500 */
+/* ADDRESS: GOLDDE 0x0049b840 */
 float __cdecl amt_ScoreOfficeCandidate(unsigned char* subjectEntity, unsigned short* otherEntity, int unusedOfficeId, int doubleFavor)
 {
 	float d;

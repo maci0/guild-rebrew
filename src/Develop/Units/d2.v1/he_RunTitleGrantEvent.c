@@ -39,6 +39,7 @@ void __cdecl d3snd_QueueSound(int, int, char*, int, int);
 void __cdecl io_AppendText(int, ...);
 
 /* ADDRESS: GOLDTL 0x00554f00 */
+/* ADDRESS: GOLDDE 0x0053b2b0 */
 void __cdecl he_RunTitleGrantEvent(char* obj)
 {
 	char* rec;

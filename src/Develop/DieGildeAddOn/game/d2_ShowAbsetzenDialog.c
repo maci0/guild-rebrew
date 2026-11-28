@@ -40,6 +40,7 @@ int __cdecl cm_GetCommandStatus(int);
 void __cdecl cm_StepCommandQueue(void);
 void __cdecl d2_ShowModalMessageBox(char*, int);
 
+/* ADDRESS: GOLDDE 0x005b81b0 */
 int __cdecl d2_ShowAbsetzenDialog(unsigned char* e, int* o)
 {
 	Info x;

@@ -5,6 +5,7 @@ extern unsigned char* lpGebaeudePROT;
 
 #include <string.h>
 
+/* ADDRESS: GOLDDE 0x004fbd10 */
 int __cdecl init_GetGebaeudeSceneName(int idx, char* out)
 {
 	unsigned char* t;

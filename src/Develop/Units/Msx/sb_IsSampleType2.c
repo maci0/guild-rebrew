@@ -4,6 +4,7 @@
 extern int sb_WaveDriver;
 char* __cdecl sb_FindSampleByName(int, int);
 
+/* ADDRESS: GOLDDE 0x00420250 */
 int __cdecl sb_IsSampleType2(int bank, int name)
 {
 	char* entry;

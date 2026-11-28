@@ -6,6 +6,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b3fc0 */
 void __cdecl cm_SendUpdateCutsceneEntitySlot(int slotId, void* payload)
 {
 	char buf[0x9c];

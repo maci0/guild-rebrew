@@ -27,6 +27,7 @@ extern short gm_GameTimeTailWord;
 #pragma optimize("y", off)
 
 /* ADDRESS: GOLDTL 0x004fb7a0 */
+/* ADDRESS: GOLDDE 0x004e73f0 */
 void __cdecl gm_UpdateDisasterState(void)
 {
 	int st[9];

@@ -22,6 +22,7 @@ int __cdecl d2_DrawBankSpriteColored(int x, int y, int surface, void* font, int 
 void __cdecl d2_DrawTexturedQuad(int width, int y, int x, int height, int color, float alpha);
 
 /* ADDRESS: GOLDTL 0x0046bd20 */
+/* ADDRESS: GOLDDE 0x0045f3a0 */
 int __cdecl d2_DrawWordWrappedText(int x, int y, int width, int height, int surface,
                          int text_address, int flags)
 {

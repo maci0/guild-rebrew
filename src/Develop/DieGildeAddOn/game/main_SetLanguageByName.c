@@ -6,6 +6,7 @@ extern char g_665c18[5][64];
 
 #include <string.h>
 
+/* ADDRESS: GOLDDE 0x005072b0 */
 int __cdecl main_SetLanguageByName(char* s)
 {
 	char buf[64];

@@ -7,6 +7,7 @@ void __cdecl d3_InvalidateSubTreeFlags(char*, int);
 void __cdecl d3_TraverseSceneObjects(int, char*, int, void*);
 void __cdecl d3_ClearAuxSlotState(void);
 
+/* ADDRESS: GOLDDE 0x00431db0 */
 void __cdecl d3_SetObjectPosition(char* o, int* v)
 {
 	d3_InvalidateSubTreeFlags(o, 1);

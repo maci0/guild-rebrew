@@ -39,6 +39,7 @@ extern float g_1043294;
 /* Rebuilds the view frustum: the four side planes from the half-angles of the
  * viewport, the four corner rays and the near and far planes. */
 /* ADDRESS: GOLDTL 0x00437bc0 */
+/* ADDRESS: GOLDDE 0x00430e10 */
 void __cdecl d3_UpdateViewFrustum(void)
 {
 	double angle_x;
@@ -117,6 +118,7 @@ void __cdecl d3_UpdateViewFrustum(void)
  * depths. Returns the plane mask; bit 6 marks a corner outside every plane.
  * When the ray set is not culled, stores the extreme depths. */
 /* ADDRESS: GOLDTL 0x00437ee0 */
+/* ADDRESS: GOLDDE 0x00431130 */
 unsigned char __cdecl d3_TestBoxAgainstFrustum(float* p, float* pmin, float* pmax)
 {
 	Mask f;

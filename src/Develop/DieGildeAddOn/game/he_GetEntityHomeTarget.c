@@ -9,6 +9,7 @@ char* __cdecl gm_QueryEntities(int, int, int, int);
 char* __cdecl sim_StartEntityQueryByType(char*);
 
 /* ADDRESS: GOLDTL 0x00567170 */
+/* ADDRESS: GOLDDE 0x0054d1b0 */
 int __cdecl he_GetEntityHomeTarget(char* h, int* out1, int* out2, int* out3)
 {
 	char* q;

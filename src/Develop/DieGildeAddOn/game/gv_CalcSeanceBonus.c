@@ -6,6 +6,7 @@ extern float g_665370;
 
 int __cdecl gm_QueryEntities(int a, int b, int c, int d, int e);
 
+/* ADDRESS: GOLDDE 0x004e0830 */
 float __cdecl gv_CalcSeanceBonus(char* p)
 {
 	float v;

@@ -11,6 +11,7 @@ int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl io_AppendText(char*, ...);
 void __cdecl d2_DrawSkillBar(int, int, char*, int, int);
 
+/* ADDRESS: GOLDDE 0x005ab080 */
 void __cdecl d2_DrawLawCandidateStatus(int* o)
 {
 	int info[9];

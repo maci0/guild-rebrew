@@ -1,3 +1,7 @@
+extern char g_14ad1b0[];
+extern char d2_SelectedEntityUiFlags[];
+extern char g_14a7d28[];
+extern char sv_ClickedObjekt[];
 void __cdecl d2_ClearStatusTextSlots(void);
 int __cdecl main_RunFrameLoop(void* p, int n);
 char* __cdecl RegisterStatusText(char* name, int id, int len);
@@ -9,6 +13,7 @@ void __cdecl d2_RunGeldleiheWechselDialog(char* obj);
 void __cdecl d2_RunKreditGeberDialog(char* obj);
 
 /* ADDRESS: GOLDTL 0x005a7200 */
+/* ADDRESS: GOLDDE 0x0058bf10 */
 void __cdecl d2_RunBankContactMenu(char* subject)
 {
 	char* s1;
@@ -20,27 +25,27 @@ void __cdecl d2_RunBankContactMenu(char* subject)
 	s3 = 0;
 	s4 = 0;
 	d2_ClearStatusTextSlots();
-	if (!main_RunFrameLoop((void*) 0x5a7200, 0x67fff)) {
+	if (!main_RunFrameLoop((void*) d2_RunBankContactMenu, 0x67fff)) {
 		return;
 	}
 	do {
-		s1 = RegisterStatusText((char*) 0x6aad78, *(int*) 0x14ab6f0, 0x10);
-		s2 = RegisterStatusText((char*) 0x6aad68, *(int*) 0x14ab640, 0x10);
-		if (*(int*) 0x7746d8 & 0x200) {
-			s3 = RegisterStatusText((char*) 0x6aad50, *(int*) 0x14a7d28, 0x16);
-			s4 = RegisterStatusText((char*) 0x6aad30, *(int*) 0x14ad1b0, 0x16);
+		s1 = RegisterStatusText("contact_GELDWECHSEL", *(int*) ((int) &g_14a7d28 + 0x39c8), 0x10);
+		s2 = RegisterStatusText("contact_KREDITE", *(int*) ((int) &g_14a7d28 + 0x3918), 0x10);
+		if (*(int*) &d2_SelectedEntityUiFlags & 0x200) {
+			s3 = RegisterStatusText("contact_MEISTERBRIEF", *(int*) &g_14a7d28, 0x16);
+			s4 = RegisterStatusText("contact_VERMOEGENSUEBERSICHT", *(int*) &g_14ad1b0, 0x16);
 		}
-		obj = *(char**) 0x7746a0;
+		obj = *(char**) &sv_ClickedObjekt;
 		if (obj) {
 			if (obj == s3) {
 				d2_OpenMeisterbriefDialog(subject);
-				obj = *(char**) 0x7746a0;
+				obj = *(char**) &sv_ClickedObjekt;
 			} else if (obj == s4) {
 				d2_SelectWealthOverviewTarget(subject);
-				obj = *(char**) 0x7746a0;
+				obj = *(char**) &sv_ClickedObjekt;
 			}
 			if (obj) {
-				if (*(unsigned short*) (subject + 0x27) == *(unsigned short*) 0x774970) {
+				if (*(unsigned short*) (subject + 0x27) == *(unsigned short*) ((int) &d2_SelectedEntityUiFlags + 0x298)) {
 					if (obj == s1) {
 						d2_RunGeldleiheWechselDialog(subject);
 					} else if (obj == s2) {
@@ -55,5 +60,5 @@ void __cdecl d2_RunBankContactMenu(char* subject)
 				}
 			}
 		}
-	} while (main_RunFrameLoop((void*) 0x5a7200, 0x67fff));
+	} while (main_RunFrameLoop((void*) d2_RunBankContactMenu, 0x67fff));
 }

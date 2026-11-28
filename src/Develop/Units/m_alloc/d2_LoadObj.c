@@ -23,6 +23,7 @@ extern char s_6750e8[];
 char* __cdecl m_alloc(int size, const char* tag);
 
 /* ADDRESS: GOLDTL 0x00465ba0 */
+/* ADDRESS: GOLDDE 0x004597d0 */
 char* __cdecl d2_LoadObj(int idx, const char* path)
 {
 	char* buf;

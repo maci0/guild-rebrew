@@ -40,6 +40,7 @@ int __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x004a75e0 */
 int __cdecl gm_HandleMsg24FineWorkshop(Cmd* cmd)
 {
 	char* shop;

@@ -5,6 +5,7 @@ int __cdecl ai_RunSecretRoomSpyKiller(int a1, char* p, int a3);
 
 /* ADDRESS: GOLD 0x0048eaa0 */
 /* ADDRESS: GOLDTL 0x0048e050 */
+/* ADDRESS: GOLDDE 0x0047cf20 */
 int __cdecl ai_RunSecretRoom(int a1, char* p, int a3)
 {
 	switch (*(int*) (p + 0x10)) {

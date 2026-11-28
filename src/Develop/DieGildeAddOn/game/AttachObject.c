@@ -8,6 +8,7 @@ void __cdecl ch_SetBodyAttachment(char* e, int slot, int v);
 
 /* `slot` is left unset for an unknown name; the reference reads it from the
  * homed parameter slot. */
+/* ADDRESS: GOLDDE 0x0040ce00 */
 int __cdecl AttachObject(char** a, const char* name, int* v)
 {
 	int slot;

@@ -10,6 +10,7 @@ typedef struct Vtx {
 // SIZE 0x1c
 
 /* ADDRESS: GOLDTL 0x0047b8b0 */
+/* ADDRESS: GOLDDE 0x0046a8a0 */
 int __cdecl d2_BuildQuadVertices(int x, int y, int w, int h, Vtx* v)
 {
 	v[0].x = (x - 0.5f);

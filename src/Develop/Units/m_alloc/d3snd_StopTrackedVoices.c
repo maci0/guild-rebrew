@@ -16,6 +16,7 @@ void __cdecl m_FreeTracked(void*);
 
 
 /* ADDRESS: GOLDTL 0x004c09b0 */
+/* ADDRESS: GOLDDE 0x004ae530 */
 void __cdecl d3snd_StopTrackedVoices(void)
 {
 	TRACKED_VOICE_NODE* next;

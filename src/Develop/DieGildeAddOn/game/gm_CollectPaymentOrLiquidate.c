@@ -23,6 +23,7 @@ int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 
 /* ADDRESS: GOLDTL 0x005c4ec0 */
+/* ADDRESS: GOLDDE 0x005a7140 */
 int __cdecl gm_CollectPaymentOrLiquidate(int receiverId, char* ownerEntity, int requestedAmount, char* outLog)
 {
 	char buf[0x100];

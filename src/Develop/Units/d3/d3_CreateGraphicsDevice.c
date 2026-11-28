@@ -13,6 +13,7 @@ extern char __cdecl d3_ShowDisplaySetupDialog(int a, int b);
 extern int __cdecl d3_RestoreDeviceResources(void);
 
 /* ADDRESS: GOLDTL 0x0041a970 */
+/* ADDRESS: GOLDDE 0x004186b0 */
 char __cdecl d3_CreateGraphicsDevice(int hwnd, INDEXFN indexCallback, unsigned char windowed, unsigned char triple_buffer)
 {
 	int ready;

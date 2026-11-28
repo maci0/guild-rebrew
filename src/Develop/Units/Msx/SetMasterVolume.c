@@ -11,6 +11,7 @@ extern char g_6b7090[];
 extern CRITICAL_SECTION msx_TrackLock;
 void __cdecl msx_SetMasterVolume(int h, int vol);
 
+/* ADDRESS: GOLDDE 0x0041cc90 */
 void __cdecl SetMasterVolume(int vol)
 {
 	if (msx_TrackDriver == 0) {

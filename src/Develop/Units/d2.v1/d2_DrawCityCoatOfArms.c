@@ -13,6 +13,7 @@ int __cdecl d2_FindResourceByName(char* name);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00593200 */
+/* ADDRESS: GOLDDE 0x00578eb0 */
 void __cdecl d2_DrawCityCoatOfArms(void)
 {
 	char s1[0x100];

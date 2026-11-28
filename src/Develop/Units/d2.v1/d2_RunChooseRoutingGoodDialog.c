@@ -1,3 +1,4 @@
+extern char g_6816e8[];
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
@@ -32,6 +33,7 @@ typedef struct D2_ROUTE_NODE {
  * dialog closes and returns the picked target. */
 
 /* ADDRESS: GOLDTL 0x004bea00 */
+/* ADDRESS: GOLDDE 0x004ac580 */
 int __cdecl d2_RunChooseRoutingGoodDialog(int ctx, D2_ROUTE_NODE* list)
 {
 	D2_ROUTE_NODE* node;
@@ -58,7 +60,7 @@ int __cdecl d2_RunChooseRoutingGoodDialog(int ctx, D2_ROUTE_NODE* list)
 			}
 			item++; } while (--i);
 	}
-	menu = d2_LoadForm(0, 0, (char*) 0x6816e8);
+	menu = d2_LoadForm(0, 0, (char*) &g_6816e8);
 	d2_CenterDialogWindows(menu);
 	d2_SetForm(menu, 4);
 	active = d2_GetWindowListItem(menu, 4, io_AppendText(0x7d));
@@ -80,7 +82,7 @@ int __cdecl d2_RunChooseRoutingGoodDialog(int ctx, D2_ROUTE_NODE* list)
 	*(int*) ((char*) ((char*)&((D2_CONTROL_TL*)d2_Controls)[entry]) + 0x5c) = 1;
 	*(int*) ((char*) ((char*)&((D2_CONTROL_TL*)d2_Controls)[entry]) + 0x1d0) = 3;
 
-	while (main_RunFrameLoop(0x4bea00, 0x657c7) != 0) {
+	while (main_RunFrameLoop((int) d2_RunChooseRoutingGoodDialog, 0x657c7) != 0) {
 
 
 		if (io_RightButtonReleased != 0 || result != 0) {

@@ -6,6 +6,7 @@
 int __cdecl ahm_CheckFlag(void*);
 int __cdecl cm_RequestAhmCommand(int*);
 
+/* ADDRESS: GOLDDE 0x004daf20 */
 int __cdecl ahm_SendSetFloatValue(char* object, int value)
 {
 	int buf[6];

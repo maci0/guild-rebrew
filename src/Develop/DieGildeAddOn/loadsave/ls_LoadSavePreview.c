@@ -13,6 +13,7 @@ unsigned short __cdecl d2_PackColorForPixelFormat(unsigned char, unsigned char, 
 void __cdecl m_FreeTracked(void*);
 #include "Develop/Units/vfs/vfs.h"
 
+/* ADDRESS: GOLDDE 0x005c53b0 */
 void __cdecl ls_LoadSavePreview(char* name)
 {
 	void* fh;

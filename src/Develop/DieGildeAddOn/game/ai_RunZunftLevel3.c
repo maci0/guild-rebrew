@@ -2,6 +2,7 @@ void __cdecl amt_HandleOfficeAction(int, int*);
 
 
 /* ADDRESS: GOLDTL 0x004a0380 */
+/* ADDRESS: GOLDDE 0x0048edb0 */
 int __cdecl ai_RunZunftLevel3(int a, char* e)
 {
 	int msg[5];

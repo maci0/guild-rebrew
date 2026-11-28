@@ -6,6 +6,7 @@ unsigned int __cdecl cut_RandMod(int);
 
 
 /* ADDRESS: GOLDTL 0x004e3ff0 */
+/* ADDRESS: GOLDDE 0x004d0a00 */
 void __cdecl cut_HandleAuctionEvent(char* participant, int* bidCtx)
 {
 	int i;

@@ -23,6 +23,7 @@ void __cdecl evt_RegisterVariable(const char*, void*, ...);
 
 /* Registers the sound script commands and constants. */
 /* ADDRESS: GOLDTL 0x00411130 */
+/* ADDRESS: GOLDDE 0x0040ff30 */
 void __cdecl evt_RegisterSoundCommands(void)
 {
 	evt_ImportCommand("LoadSampleBank", LoadSampleBank, 1, 1, 6);

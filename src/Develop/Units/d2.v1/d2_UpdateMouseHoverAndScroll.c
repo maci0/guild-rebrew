@@ -50,6 +50,7 @@ void __cdecl io_ClearInputButtonFlags(unsigned char mask);
 char* __cdecl d2_SelectFont(int idx);
 void __cdecl d2_ScrollWindow(int delta, int step, int k);
 
+/* ADDRESS: GOLDDE 0x00466810 */
 void __cdecl d2_UpdateMouseHoverAndScroll(void)
 {
 	int sel;

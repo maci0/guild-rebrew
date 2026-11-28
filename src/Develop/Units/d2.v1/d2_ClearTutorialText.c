@@ -7,6 +7,7 @@ extern int* d2_TutorialState;
 void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(void*);
 
+/* ADDRESS: GOLDDE 0x00565e80 */
 int __cdecl d2_ClearTutorialText(void)
 {
 	char* p;

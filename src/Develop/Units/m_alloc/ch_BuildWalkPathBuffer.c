@@ -16,6 +16,7 @@ int __cdecl m_alloc(int, char*);
 int __cdecl ch_DownsamplePath(char*, void*, char*, void*);
 
 /* ADDRESS: GOLDTL 0x004090d0 */
+/* ADDRESS: GOLDDE 0x004081c0 */
 unsigned int __cdecl ch_BuildWalkPathBuffer(int self)
 {
 	int a0;

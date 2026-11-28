@@ -12,6 +12,7 @@ unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl ai_SelectRankedCandidates(char* e, int n, int* lim, float a4, float r, unsigned short* ids);
 
 /* ADDRESS: GOLDTL 0x004a96f0 */
+/* ADDRESS: GOLDDE 0x00497a30 */
 int __cdecl ai_CheckAction031Predicate(int unused1, char* e, int unused3, int unused4, char* out)
 {
 	int lim;

@@ -9,6 +9,7 @@ extern short gm_GameTimeTailWord;
 void __cdecl cm_SendCopyEntityData(char* msg);
 
 /* ADDRESS: GOLDTL 0x0048fa60 */
+/* ADDRESS: GOLDDE 0x0047e930 */
 int __cdecl ai_SendHauchDesVerfalls(char* a1, char* a2, int a3, char* p)
 {
 	char msg[0xf8];

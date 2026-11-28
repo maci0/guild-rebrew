@@ -1,3 +1,11 @@
+extern char g_662da0[];
+extern char g_10405fc[];
+extern char g_10405f8[];
+extern char g_1040601[];
+extern char g_104061c[];
+extern char dbl_0_0[];
+extern char g_6b8008[];
+extern char d3_UnitAxisVectors[];
 typedef struct D3_SHADOW_MAP_ITEM D3_SHADOW_MAP_ITEM;
 typedef struct D3_SHADOW_MAP_MASTER D3_SHADOW_MAP_MASTER;
 typedef struct D3_SHADOW_MAP_NODE D3_SHADOW_MAP_NODE;
@@ -92,6 +100,7 @@ int __cdecl d3_SubmitShadowPatch(D3_SHADOW_MAP_ITEM* rec, unsigned int map);
 #include <string.h>
 
 /* ADDRESS: GOLDTL 0x00457290 */
+/* ADDRESS: GOLDDE 0x0044ca50 */
 char __cdecl d3_UpdateNodeShadowMap(D3_SHADOW_MAP_NODE* node, D3_SHADOW_MAP_NODE* other, char* a2, char* a3)
 {
 	D3_SHADOW_MAP_MASTER* m;
@@ -107,12 +116,12 @@ char __cdecl d3_UpdateNodeShadowMap(D3_SHADOW_MAP_NODE* node, D3_SHADOW_MAP_NODE
 	int r;
 
 	rec = 0;
-	if (*(int*) 0x104061c != 0
+	if (*(int*) &g_104061c != 0
 	    && node->f218 < 5
 	    && (node->f215 & 1) != 0
 	    && node->p1ec != 0
 	    && (other->f215 & 1) != 0
-	    && other->f94 != *(double*) 0x662950) {
+	    && other->f94 != *(double*) &dbl_0_0) {
 		m = node->p1ec;
 		i = 0;
 		do {
@@ -147,7 +156,7 @@ alloc:
 				memset(&c, 0, sizeof(c));
 				c.a = 0x7f;
 				c.c1 = 1;
-				t = d3_LoadOrReuseTexture((char*) 0x67bcb8, c, 0, 0);
+				t = d3_LoadOrReuseTexture("Schatten", c, 0, 0);
 				rec->f0 = t;
 				if (t != 0 && t->f50 == 0) {
 					d3_LoadTextureSurfaceTl(t);
@@ -159,24 +168,24 @@ alloc:
 				float v;
 
 				q = node->p1cc;
-				lim = *(unsigned int*) 0x104061c;
+				lim = *(unsigned int*) ((int) &g_104061c);
 				e = q->p318;
-				if (e != 0 && *(char*) 0x10405f8 != 0) {
+				if (e != 0 && *(char*) &g_10405f8 != 0) {
 					v = *(float*) ((char*) e + 0x1d8);
 					off = 0;
 					do {
-						if (v < *(float*) (0x662da0 + off)) {
+						if (v < *(float*) ((int) &g_662da0 + off)) {
 							break;
 						}
 						off += 4;
 						lim += lim;
 					} while (off < 8);
-					if (lim >= *(unsigned int*) 0x10405fc) {
-						lim = *(unsigned int*) 0x10405fc;
+					if (lim >= *(unsigned int*) &g_10405fc) {
+						lim = *(unsigned int*) &g_10405fc;
 					}
 				}
 				rec->f0 = (D3_SHADOW_MAP_TEX*) d3_AcquireCachedShadowTexture(rec,
-				    *(char*) 0x1040601, lim, *(unsigned int*) 0x6b8008,
+				    *(char*) &g_1040601, lim, *(unsigned int*) ((int) &g_6b8008),
 				    (int) &rec->fc);
 			}
 		}
@@ -190,7 +199,7 @@ alloc:
 			goto end;
 		}
 		if (rec->fc != 0) {
-			*(int*) (rec->fc + 8) = *(int*) 0x6b8008;
+			*(int*) (rec->fc + 8) = *(int*) &g_6b8008;
 		}
 		m = node->p1ec;
 		p1 = (char*) node->p1cc;
@@ -201,7 +210,7 @@ alloc:
 		d3_TransformPoint((char*) other, (float*) ((char*) other + 0x4c), vb);
 		if ((other->f215 & 4) != 0) {
 			tol = 0.01f;
-			d3_TransformDirection((char*) other, (float*) 0x662d40, va);
+			d3_TransformDirection((char*) other, (float*) &d3_UnitAxisVectors, va);
 		} else {
 			tol = 1.0f;
 			d3_TransformPoint((char*) node, (float*) ((char*) node + 0x4c), vc);
@@ -249,7 +258,7 @@ alloc:
 		}
 submit:
 		d3_RenderProjectedShadow((char*) node, (char*) q, p1, a2, va, vb, (char*) other, rec, a3);
-		d3_SubmitShadowPatch(rec, *(unsigned int*) 0x6b8300);
+		d3_SubmitShadowPatch(rec, *(unsigned int*) ((int) &g_6b8008 + 0x2f8));
 	}
 end:
 	return 0;

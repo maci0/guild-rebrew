@@ -89,6 +89,7 @@ unsigned short __cdecl gm_RandomMod(int);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 void __cdecl he_FreeAction(Order*);
 
+/* ADDRESS: GOLDDE 0x00531de0 */
 void __cdecl he_UpdateFest(Order* o)
 {
 	char msg[0x800];

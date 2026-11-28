@@ -40,6 +40,7 @@ void __cdecl cm_SendCopyEntityData(struct msg*);
 void __cdecl gm_ModifyHealth(int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x00560560 */
 void __cdecl he_StartAction0x90(char* u)
 {
 	struct msg m;

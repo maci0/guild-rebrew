@@ -1,3 +1,10 @@
+extern char g_666028[];
+extern char g_85a0a2[];
+extern char g_10085d0[];
+extern char g_90e094[];
+extern char gm_SlotTableKindView[];
+extern char g_7f4c06[];
+extern char ai_FeudTargetEntity[];
 #include "Develop/DieGildeAddOn/game/client_actions.h"
 
 #pragma pack(push, 1)
@@ -45,6 +52,7 @@ int __cdecl gm_GetBuildingTypeCategory(int);
 int __cdecl sprintf(char*, char*, ...);
 
 /* ADDRESS: GOLDTL 0x0047d810 */
+/* ADDRESS: GOLDDE 0x0046c7d0 */
 void __cdecl ai_UpdateEntityTurn(AI_TURN_ENTITY* entity)
 {
 	int remaining;
@@ -66,7 +74,7 @@ void __cdecl ai_UpdateEntityTurn(AI_TURN_ENTITY* entity)
 		return;
 	}
 	remaining = 0x100;
-	building = *(AI_TURN_BUILDING**) 0x90e094;
+	building = *(AI_TURN_BUILDING**) &g_90e094;
 	do {
 		if (building->kind) {
 			proto = &((AI_TURN_PROTO*) lpGebaeudePROT)[building->kind];
@@ -79,11 +87,11 @@ void __cdecl ai_UpdateEntityTurn(AI_TURN_ENTITY* entity)
 				lo = 1 << proto->kind;
 			}
 			if (building->x27 == entity->id && !(building->x5a & 1)
-			 && ((*(unsigned int*) 0x666028 & lo) || (*(unsigned int*) 0x66602c & hi))) {
+			 && ((*(unsigned int*) &g_666028 & lo) || (*(unsigned int*) ((int) &g_666028 + 0x4) & hi))) {
 				found = 0;
-				candidate = (char*) 0x7f4ca2;
+				candidate = (char*) &gm_SlotTableKindView;
 				do {
-					if ((int) candidate >= 0x85a0a2) {
+					if ((int) candidate >= (int) &g_85a0a2) {
 						break;
 					}
 					if (*(unsigned short*) (candidate - 2) != 0xffff
@@ -98,8 +106,8 @@ void __cdecl ai_UpdateEntityTurn(AI_TURN_ENTITY* entity)
 					x223 = proto->x223;
 					x230 = proto->x230;
 					cm_RequestAssignWorker(building, 1, x230, x223);
-					sprintf(buf, (char*) 0x67db58, *(unsigned short*) &gm_GameTimeHour,
-					 *(int*) 0x7f4c06, (char*) entity + 0x30, building->name);
+					sprintf(buf, "%li:%02li - %s stellt Meister f\374r '%s' ein", *(unsigned short*) &gm_GameTimeHour,
+					 *(int*) &g_7f4c06, (char*) entity + 0x30, building->name);
 				}
 			}
 		}
@@ -109,14 +117,14 @@ void __cdecl ai_UpdateEntityTurn(AI_TURN_ENTITY* entity)
 	if (*(unsigned char*) ((char*) entity + 8) <= 0) {
 		return;
 	}
-	*(int*) 0x77261c = (int) ai_UpdateEntityFeud(entity);
+	*(int*) &ai_FeudTargetEntity = (int) ai_UpdateEntityFeud(entity);
 	ai_BuildActionCandidates(entity);
 	state = *((unsigned char*) entity + 0x132);
 	if (!*((char*) entity + 0x1b1) && ai_SelectEntityMethod(entity->id)) {
 		if (*((unsigned char*) entity + 0x132) != state
-		 || (*(unsigned int*) (0x10085d0 + *((unsigned char*) entity + 0x132) * 0x94) & 0x200)) {
+		 || (*(unsigned int*) ((int) &g_10085d0 + *((unsigned char*) entity + 0x132) * 0x94) & 0x200)) {
 			ai_RunSelectedMethod(entity->id);
 		}
 	}
-	*(int*) 0x77261c = 0;
+	*(int*) &ai_FeudTargetEntity = 0;
 }

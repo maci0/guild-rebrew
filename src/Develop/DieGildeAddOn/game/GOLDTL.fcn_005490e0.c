@@ -5,6 +5,7 @@ extern char gm_EntityIdField[];
 
 void __cdecl cm_SendCopyEntityData(char*);
 
+/* ADDRESS: GOLDDE 0x0052f630 */
 void __cdecl he_PostSimPersonal(void)
 {
 	char msg[0xf8];

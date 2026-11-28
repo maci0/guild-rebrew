@@ -10,6 +10,7 @@ typedef struct
 } EVIDENCE_CLEAR_ARGS;
 // SIZE 0xc
 
+/* ADDRESS: GOLDDE 0x004b3290 */
 void __cdecl cm_RequestClearEvidenceLink(int key, int owner, int unused)
 {
 	char buf[0x9c];

@@ -17,6 +17,7 @@ char* __cdecl d3_FindNearestEscapeNode(char*);
 int __cdecl gm_IssueEscapeOrder(char*, char*, char*);
 
 /* ADDRESS: GOLDTL 0x004d4250 */
+/* ADDRESS: GOLDDE 0x004c1470 */
 void __cdecl cut_AssignCombatUnitOrder(char* rec, char* e)
 {
 	char* obj;

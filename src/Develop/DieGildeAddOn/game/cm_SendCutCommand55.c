@@ -6,6 +6,7 @@ int __cdecl cm_EnqueueClientPacket(void* p);
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int id);
 
 /* ADDRESS: GOLDTL 0x004c6940 */
+/* ADDRESS: GOLDDE 0x004b4140 */
 int __cdecl cm_SendCutCommand55(void* entity, int kind, void* data)
 {
 	char buf[0x9c];

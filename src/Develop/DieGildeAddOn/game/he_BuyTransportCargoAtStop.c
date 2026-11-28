@@ -25,6 +25,7 @@ void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 int __cdecl cm_SendSellObjekt(int, int, int, int, char, int);
 
 /* ADDRESS: GOLDTL 0x004c0460 */
+/* ADDRESS: GOLDDE 0x004adfe0 */
 void __cdecl he_BuyTransportCargoAtStop(char* e, char who)
 {
 	int* p;

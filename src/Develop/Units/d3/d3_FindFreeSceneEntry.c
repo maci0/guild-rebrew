@@ -3,6 +3,7 @@ extern char d3_SceneEntries[];
 
 /* ADDRESS: GOLD 0x004cd350 */
 /* ADDRESS: GOLDTL 0x004cded0 */
+/* ADDRESS: GOLDDE 0x004bb6b0 */
 char* __cdecl d3_FindFreeSceneEntry(void)
 {
 	int i;

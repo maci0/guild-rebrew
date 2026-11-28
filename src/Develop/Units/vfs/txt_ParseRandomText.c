@@ -7,6 +7,7 @@ extern char g_679964[];
 int __cdecl fcn_0064f170(const char* a, const char* b, unsigned int n);
 #include "Develop/Units/Error/error_message.h"
 
+/* ADDRESS: GOLDDE 0x00425c40 */
 void __cdecl txt_ParseRandomText(char* s)
 {
 	int v;

@@ -6,6 +6,7 @@ int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl d3_RemoveObjectAnimation(char*, char*);
 #include "Develop/Units/d3/d3_animation.h"
 
+/* ADDRESS: GOLDDE 0x00403a90 */
 void __cdecl ch_ReleaseMorphAnimation(char* p)
 {
 	char buf[0x60];

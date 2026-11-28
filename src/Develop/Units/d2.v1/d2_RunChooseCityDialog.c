@@ -64,6 +64,7 @@ void __cdecl d3_AnimateObjectTransform(char*, float*, float*, int, int);
 
 /* Local frame layout; the 0x8984-byte frame is mostly the city name table. */
 /* ADDRESS: GOLDTL 0x0053ed60 */
+/* ADDRESS: GOLDDE 0x00525880 */
 int __cdecl d2_RunChooseCityDialog(int unused, int network)
 {
 	struct {

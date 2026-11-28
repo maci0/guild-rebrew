@@ -14,6 +14,7 @@ void __cdecl d3_UpdateBuildingInteriorState(void);
 void __cdecl d2_OpenShopTradePanel(int);
 void __cdecl d2_OpenLagerTradeMode2(int);
 
+/* ADDRESS: GOLDDE 0x00583220 */
 void __cdecl d2_RunKontorTradeHud(int a)
 {
 	int x;

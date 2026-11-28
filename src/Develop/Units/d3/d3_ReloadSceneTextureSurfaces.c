@@ -19,6 +19,7 @@ extern int g_6b8af0;
 
 void __cdecl d3_LoadTextureSurfaceTl(D3_TEX_RELOAD_REC* r);
 
+/* ADDRESS: GOLDDE 0x00451f50 */
 void __cdecl d3_ReloadSceneTextureSurfaces(SCENE_PROGRESS cb)
 {
 	D3_TEX_RELOAD_REC* r;

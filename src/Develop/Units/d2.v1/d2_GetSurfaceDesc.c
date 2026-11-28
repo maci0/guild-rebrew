@@ -15,6 +15,7 @@ typedef struct {
 
 
 /* ADDRESS: GOLDTL 0x004760c0 */
+/* ADDRESS: GOLDDE 0x00468470 */
 int __cdecl d2_GetSurfaceDesc(D2_SURFACE_OBJ* surface, void* desc)
 {
 	D2_TEX_COM* com;

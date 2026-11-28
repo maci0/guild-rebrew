@@ -3,6 +3,7 @@
 
 extern int g_7749f4;
 
+/* ADDRESS: GOLDDE 0x00563d40 */
 void __cdecl d2_ToggleMessageFilterFlag(int id, int on)
 {
 	switch (id) {

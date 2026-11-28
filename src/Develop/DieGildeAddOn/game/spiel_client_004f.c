@@ -25,6 +25,7 @@ int __cdecl gm_AmountToUnits(int a, unsigned char k);
 int __cdecl gm_ConvertUnitsToAmount(int a, unsigned char k);
 
 /* ADDRESS: GOLDTL 0x004f25a0 */
+/* ADDRESS: GOLDDE 0x004de660 */
 int __cdecl gv_RentGravePlot(char* req)
 {
 	void* entity1;
@@ -89,6 +90,7 @@ int __cdecl gv_RentGravePlot(char* req)
 /* ADDRESS: GOLD 0x4f24a0 */
 
 /* ADDRESS: GOLDTL 0x004f45b0 */
+/* ADDRESS: GOLDDE 0x004e0670 */
 int __cdecl gm_CalcScaledWealthValue(unsigned short* e)
 {
 	double x;

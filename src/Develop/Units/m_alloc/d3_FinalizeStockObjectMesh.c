@@ -76,6 +76,7 @@ void __cdecl m_FreeTracked(void* p);
 StockPlane* __stdcall D3DXPlaneFromPoints(StockPlane* out, StockVec3* a, StockVec3* b, StockVec3* c);
 StockPlane* __stdcall D3DXPlaneNormalize(StockPlane* out, StockPlane* in);
 
+/* ADDRESS: GOLDDE 0x00440d50 */
 void __cdecl d3_FinalizeStockObjectMesh(StockObjectData* m, char normals)
 {
 	StockVec3 pts[3];

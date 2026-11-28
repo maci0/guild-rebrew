@@ -33,6 +33,7 @@ int __cdecl gm_HasActiveSpecialObject(unsigned char*, int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x005be740 */
 int __cdecl gm_ObjGrantAffinity25(unsigned char* obj, int* arg)
 {
 	Req req;

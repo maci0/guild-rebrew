@@ -69,6 +69,7 @@ void __cdecl d3snd_PlaySoundEffect(int, int, char*, int);
 void __cdecl d3_EndCameraAndUiMode(void);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00589930 */
+/* ADDRESS: GOLDDE 0x0056f5f0 */
 void __cdecl d2_ShowCabinetSpyDialog(char* building)
 {
 	struct act act;

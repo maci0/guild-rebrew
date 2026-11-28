@@ -7,6 +7,7 @@
 
 int __cdecl gm_ApplyLawChange(char* idPtr);
 
+/* ADDRESS: GOLDDE 0x004b9c70 */
 int __cdecl cm_ExSetLaw(int cmd, char* result)
 {
 	int found;

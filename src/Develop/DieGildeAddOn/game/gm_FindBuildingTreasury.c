@@ -9,6 +9,7 @@ extern char gm_EntitySlotTable[];
 char* __cdecl gm_GetGuildHall(int k);
 void* __cdecl gm_QueryEntities(int list, int a, int b, int c, int d);
 
+/* ADDRESS: GOLDDE 0x004f2bb0 */
 void* __cdecl gm_FindBuildingTreasury(unsigned char* e)
 {
 	void* r;

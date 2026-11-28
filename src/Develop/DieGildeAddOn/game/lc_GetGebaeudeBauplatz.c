@@ -23,6 +23,7 @@ char __cdecl d3_VisitSceneObjects(char*, char*, unsigned int, char (__cdecl*)(ch
 #define lc_WalkScene d3_VisitSceneObjects
 #define lc_SavedRender d3_CurrentContextIndex
 #endif
+/* ADDRESS: GOLDDE 0x0057dda0 */
 int __cdecl lc_GetGebaeudeBauplatz(LC_GEBAEUDE_BAUPLATZ* out, unsigned char* obj)
 {
 	char buf[0x100];

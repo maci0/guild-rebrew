@@ -52,6 +52,7 @@ extern void __cdecl d2_DestroyForm(int);
 /* Oeffnet den Jahrmarkt-Dialog eines Objekts, bietet seine zwei Eintraege an
  * und schickt beim Anklicken das Nachrichtenpaket 0x62. */
 /* ADDRESS: GOLDTL 0x0059d380 */
+/* ADDRESS: GOLDDE 0x00582620 */
 int __cdecl d2_RunRaeuberlagerTargetDialog(int unusedFlags, char* object)
 {
 	Msg_59d380 message;

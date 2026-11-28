@@ -25,6 +25,7 @@
 
 
 
+/* ADDRESS: GOLDDE 0x00410770 */
 void __cdecl io_ShutdownInput(void)
 {
 	io_InputHwnd = 0;

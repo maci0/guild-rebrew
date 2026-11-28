@@ -12,6 +12,7 @@ unsigned char __cdecl gm_GetCitySkillAverage(int a);
 void __cdecl gm_GetLawEntry(int a, void* out);
 
 /* ADDRESS: GOLDTL 0x004918a0 */
+/* ADDRESS: GOLDDE 0x00480750 */
 int __cdecl ai_EvaluateLaw0x14(char* entity, int unused, int* out)
 {
 	float fA;

@@ -2,6 +2,7 @@
 
 extern int g_006b7e98; /* 0x006b7e98 */
 
+/* ADDRESS: GOLDDE 0x00421fd0 */
 void __cdecl evt_SetScriptFlowState1(void)
 {
     *(int*) (*(char**) 0x006b7e98 + 0xc84) = 1;

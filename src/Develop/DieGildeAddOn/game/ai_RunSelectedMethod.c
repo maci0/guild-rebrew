@@ -12,6 +12,7 @@ void __cdecl cm_AppendDesireDelta(int, float);
 void* __cdecl fcn_0064d740(void* dst, const void* src, unsigned int n);
 
 /* ADDRESS: GOLDTL 0x00495690 */
+/* ADDRESS: GOLDDE 0x00484150 */
 int __cdecl ai_RunSelectedMethod(int entity_idx)
 {
 	ENTITY_RECORD* entity;

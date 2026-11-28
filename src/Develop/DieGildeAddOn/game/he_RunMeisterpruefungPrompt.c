@@ -28,6 +28,7 @@ int __cdecl d2_CreateActionPopupSlot(char*, int, int, char*, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 
+/* ADDRESS: GOLDDE 0x00536bd0 */
 void __cdecl he_RunMeisterpruefungPrompt(char* u)
 {
 	int v;

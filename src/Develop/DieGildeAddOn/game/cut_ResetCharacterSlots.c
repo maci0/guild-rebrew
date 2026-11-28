@@ -8,6 +8,7 @@ void __cdecl cut_ResetCharacterSlots(void)
 }
 #else
 /* ADDRESS: GOLDTL 0x004da190 */
+/* ADDRESS: GOLDDE 0x004c6e80 */
 void __cdecl cut_ResetCharacterSlots(void)
 {
 	memset((void*) 0x9b0dc0, 0, 0x40);

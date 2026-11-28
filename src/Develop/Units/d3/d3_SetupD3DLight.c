@@ -60,6 +60,7 @@ void __stdcall fcn_005eb225(D3_D3DLIGHT_VEC3*, D3_D3DLIGHT_VEC3*, float*);
 void __stdcall fcn_005eb250(D3_D3DLIGHT_VEC3*, D3_D3DLIGHT_VEC3*, float*);
 
 /* ADDRESS: GOLDTL 0x00451150 */
+/* ADDRESS: GOLDDE 0x00446d30 */
 char __cdecl d3_SetupD3DLight(int index, char* e, float scale, float* m4, float* m7)
 {
 	D3_D3DLIGHT8 light;

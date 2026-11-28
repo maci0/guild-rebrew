@@ -2,6 +2,7 @@ void __cdecl gm_SummarizeBuildingOwnership(int, float*);
 
 
 /* ADDRESS: GOLDTL 0x004b4ec0 */
+/* ADDRESS: GOLDDE 0x004a31b0 */
 int __cdecl gm_HasMinBuildingOwnershipShare(int unused, char* spec)
 {
 	float v[3];

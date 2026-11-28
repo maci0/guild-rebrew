@@ -20,6 +20,7 @@ extern int g_6b5c4c;
 extern int g_6b5c50;
 
 /* ADDRESS: GOLDTL 0x00405a50 */
+/* ADDRESS: GOLDDE 0x00404cf0 */
 int __cdecl ch_MarkGridDiamond(int a, int b, int id, int value, int radius)
 {
 	Grid* g;

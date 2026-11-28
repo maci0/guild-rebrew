@@ -65,6 +65,7 @@ static __inline void send_hit(int id)
 
 
 /* ADDRESS: GOLDTL 0x005dcbb0 */
+/* ADDRESS: GOLDDE 0x005be150 */
 int __cdecl gm_UseSkillModifier82Stats0And4(char* e, char* request)
 {
 	Req req;

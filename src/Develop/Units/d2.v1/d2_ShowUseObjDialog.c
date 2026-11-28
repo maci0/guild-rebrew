@@ -14,6 +14,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 /* ADDRESS: GOLD 0x5cf970 */
 
+/* ADDRESS: GOLDDE 0x005bd430 */
 void __cdecl d2_ShowUseObjDialog(char* text)
 {
 	int h;

@@ -1,3 +1,18 @@
+extern char d3_Universes[];
+extern char g_6b5c24[];
+extern char g_662928[];
+extern char d3_ActiveScene[];
+extern char g_66293c[];
+extern char g_662938[];
+extern char dbl_3_0[];
+extern char g_662914[];
+extern char g_662918[];
+extern char ch_SceneDebugSwitch[];
+extern char g_6b5c38[];
+extern char g_66292c[];
+extern char g_662924[];
+extern char g_662920[];
+extern char g_66291c[];
 #include <math.h>
 #include <string.h>
 
@@ -14,6 +29,7 @@ int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
 extern char __cdecl d3_GridPointToWorld(void *, int, int, float *);
 
 /* ADDRESS: GOLDTL 0x00409c90 */
+/* ADDRESS: GOLDDE 0x00408b90 */
 unsigned int __cdecl ch_UpdateWalkOnPath(int a0, int a1)
 {
     char *eventEntry;
@@ -38,8 +54,8 @@ unsigned int __cdecl ch_UpdateWalkOnPath(int a0, int a1)
     if (*(int *)(character + 0x70) != 0 &&
         (*(unsigned char *)(*(int *)(character + 0x70) + 0x74) & 8))
         goto Lafter;
-    if (*(int *)0x67a370 != *(int *)(character + 0x88) &&
-        *(int *)(character + 0x88) != 0x10432c0)
+    if (*(int *) &d3_ActiveScene != *(int *)(character + 0x88) &&
+        *(int *)(character + 0x88) != (int) &d3_Universes)
         goto Lafter;
     v8 = ch_FindNearbyWalkers(character, buffer);
     if (!v8)
@@ -49,15 +65,15 @@ unsigned int __cdecl ch_UpdateWalkOnPath(int a0, int a1)
         if (!*(int *)(character + 0x70))
             goto Lafter;
     if (*(int *)(character + 4) & 8)
-        v13 = *(float *)0x66293c;
+        v13 = *(float *) &g_66293c;
     else if (*(int *)(character + 4) & 0x10)
-        v13 = *(float *)0x66293c;
+        v13 = *(float *) &g_66293c;
     else
-        v13 = *(float *)0x662938;
+        v13 = *(float *) &g_662938;
     if (*(int *)(*(int *)(character + 0x88) + 0xac))
-        v13 = (float)(v13 * *(double *)0x662930);
-    v14 = *(float *)0x662914 / *(float *)(v5 + 0x10);
-    ct = *(float *)0x662918;
+        v13 = (float)(v13 * *(double *) &dbl_3_0);
+    v14 = *(float *) &g_662914 / *(float *)(v5 + 0x10);
+    ct = *(float *) &g_662918;
     if (ct < v14)
         v14 = v13;
     *(float *)(*(int *)(character + 0x70) + 0x5c) = v14 + v13;
@@ -78,11 +94,11 @@ unsigned int __cdecl ch_UpdateWalkOnPath(int a0, int a1)
     } else if (v8 == -1) {
         if (*(int *)(character + 0x70))
             *(int *)(*(int *)(character + 0x70) + 0x60) = 0x3c23d70a;
-        *(int *)(eventEntry + 0x154) = *(int *)0x6b5c24;
+        *(int *)(eventEntry + 0x154) = *(int *) &g_6b5c24;
         return 0;
     } else if (v8 == -2) {
         ch_FinishAni(character);
-        if (*(char *)0x6b5c28)
+        if (*(char *) &ch_SceneDebugSwitch)
             *(unsigned char *)(*(int *)(eventEntry + 0x14) + 0x8c) |= 8;
         if (*(int *)(eventEntry + 0xf4)) {
             m_FreeTracked(*(void **)(eventEntry + 0xf4));
@@ -115,7 +131,7 @@ Lafter:
             *(int *)(eventEntry + 0xf4) = 0;
         }
         if (*(unsigned int *)(eventEntry + 0x160) & 0x10) {
-            if (*(int *)(character + 0x88) == 0x10432c0 &&
+            if (*(int *)(character + 0x88) == (int) &d3_Universes &&
                 *(unsigned char *)(eventEntry + 0x158) > 4)
                 *(unsigned int *)(eventEntry + 0x160) =
                     *(unsigned int *)(eventEntry + 0x160) & 0xffffffef;
@@ -149,7 +165,7 @@ Lafter:
             ch_PlaceOnGround(character, 1);
         }
         ch_FinishAni(character);
-        if (*(char *)0x6b5c28)
+        if (*(char *) &ch_SceneDebugSwitch)
             *(unsigned char *)(*(int *)(eventEntry + 0x14) + 0x8c) |= 8;
         ch_RemoveQueueEntry(eventEntry);
         return 0;
@@ -157,11 +173,11 @@ Lafter:
     v2 = (float *)(eventEntry + 0x124);
     d3_GridPointToWorld(v5, *(unsigned char *)(*(int *)(eventEntry + 0xf4) + v9 * 2),
         *(unsigned char *)(*(int *)(eventEntry + 0xf4) + 1 + v9 * 2), v2);
-    v14 = *(float *)0x6b5c38;
+    v14 = *(float *) &g_6b5c38;
     *v2 = v14 + *v2;
-    v14 = *(float *)0x6b5c3c;
+    v14 = *(float *)((int) &g_6b5c38 + 0x4);
     *(float *)(eventEntry + 0x128) = v14 + *(float *)(eventEntry + 0x128);
-    v14 = *(float *)0x6b5c40;
+    v14 = *(float *)((int) &g_6b5c38 + 0x8);
     *(float *)(eventEntry + 0x12c) = v14 + *(float *)(eventEntry + 0x12c);
     *(float *)(eventEntry + 0x108) = d3_ComputeYawToTarget(*(int *)(character + 0x34), v2);
     v8 = *(int *)(*(int *)(eventEntry + 0x14) + 0x34);
@@ -174,19 +190,19 @@ Lafter:
         if (*(int *)(eventEntry + 0xf8) >= *(int *)(eventEntry + 0xf0) - 1 &&
             *(int *)(eventEntry + 0xf0) > 1) {
             if (*(int *)(character + 4) & 8)
-                v13 = *(float *)0x66292c;
+                v13 = *(float *) &g_66292c;
             else if (*(int *)(character + 4) & 0x10)
-                v13 = *(float *)0x662928;
+                v13 = *(float *) &g_662928;
             else
-                v13 = *(float *)0x662924;
+                v13 = *(float *) &g_662924;
         } else if (*(int *)(character + 4) & 8)
-            v13 = *(float *)0x662920;
+            v13 = *(float *) &g_662920;
         else if (*(int *)(character + 4) & 0x10)
-            v13 = *(float *)0x66291c;
+            v13 = *(float *) &g_66291c;
         else
-            v13 = *(float *)0x662938;
+            v13 = *(float *) &g_662938;
         if (*(int *)(*(int *)(character + 0x88) + 0xac))
-            v13 = (float)(v13 * *(double *)0x662930);
+            v13 = (float)(v13 * *(double *) &dbl_3_0);
         *(int *)(*(int *)(character + 0x70) + 0x4c) = *(int *)v2;
         *(int *)(*(int *)(character + 0x70) + 0x50) = *(int *)(eventEntry + 0x128);
         *(int *)(*(int *)(character + 0x70) + 0x54) = *(int *)(eventEntry + 0x12c);

@@ -35,6 +35,7 @@ void __cdecl cm_SendCopyEntityData(void*);
  * current shop; the first pass prefers a partner that the guild filter does
  * not already lock out, the fallback pass only accepts the first free one. */
 /* ADDRESS: GOLDTL 0x00487470 */
+/* ADDRESS: GOLDDE 0x00476420 */
 void __cdecl ai_BuyStallGoods(char* actor)
 {
 	unsigned int found;

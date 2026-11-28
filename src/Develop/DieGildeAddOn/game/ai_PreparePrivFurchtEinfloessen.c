@@ -13,6 +13,7 @@ int __cdecl ai_SelectRankedCandidates(char* e, int n, int* lim, float a4, float 
 int __cdecl he_HasNoActiveEvent04b(char* e, ENTITY_RECORD* t);
 
 /* ADDRESS: GOLDTL 0x004a9540 */
+/* ADDRESS: GOLDDE 0x00497880 */
 int __cdecl ai_PreparePrivFurchtEinfloessen(int unused1, char* actor, int unused3, int unused4, char* out)
 {
 	int filterMask;

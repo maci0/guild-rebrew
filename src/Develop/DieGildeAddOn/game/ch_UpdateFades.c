@@ -37,6 +37,7 @@ void __cdecl ch_SetVisible(char* obj, int shown);
 
 /* Steps every running fade: writes the alpha key and ends the fade at 0 or 255. */
 /* ADDRESS: GOLDTL 0x004027b0 */
+/* ADDRESS: GOLDDE 0x00402120 */
 void __cdecl ch_UpdateFades(void)
 {
 	char* obj;

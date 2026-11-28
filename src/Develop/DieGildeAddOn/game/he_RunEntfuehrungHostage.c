@@ -23,6 +23,7 @@ void __cdecl cm_SendCopyEntityData(int);
 /* Entity event handler: state 0 builds and posts the event message, state -1
  * clears the entity's event flag and frees its track. */
 /* ADDRESS: GOLDTL 0x00569760 */
+/* ADDRESS: GOLDDE 0x0054f7a0 */
 void __cdecl he_RunEntfuehrungHostage(char* eventTrack)
 {
 	float f;

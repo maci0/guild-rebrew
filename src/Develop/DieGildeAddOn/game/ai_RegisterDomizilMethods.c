@@ -15,6 +15,7 @@ int __cdecl ai_StartAlchemistryItems(void);
 int __cdecl ai_RunAlchemistryItems(void);
 
 /* ADDRESS: GOLDTL 0x0048f110 */
+/* ADDRESS: GOLDDE 0x0047dfe0 */
 int __cdecl ai_RegisterDomizilMethods(char* e)
 {
 	AM_METHOD d;

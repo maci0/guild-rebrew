@@ -23,6 +23,7 @@ extern int __cdecl evt_CallScriptFunction(char* handle, int a, ...);
 extern void __cdecl SelectTextureSet(char* record, int target, char mode, int flag);
 
 /* ADDRESS: GOLDTL 0x005156a0 */
+/* ADDRESS: GOLDDE 0x00500110 */
 void __cdecl d3_UpdateBuildingSlotVisibility(char* record)
 {
 	char* list;

@@ -8,6 +8,7 @@ extern char* tp_SoundSources;
 void __cdecl d3snd_StopSourceVoice(char*);
 
 /* ADDRESS: GOLD 0x00417990 */
+/* ADDRESS: GOLDDE 0x00416c90 */
 void __cdecl d3snd_StopAllObjectSounds(void)
 {
 	int i;

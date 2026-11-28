@@ -14,6 +14,7 @@ extern ALCHEMY_PLAYER_PROTOTYPE* ahm_PlayerPrototypes;
 
 void __cdecl ahm_ResetAlchemyState(int a);
 
+/* ADDRESS: GOLDDE 0x004d8e30 */
 void __cdecl ahm_DealPlayerPrototypes(void)
 {
 	int i;

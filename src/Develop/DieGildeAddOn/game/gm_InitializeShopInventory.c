@@ -38,6 +38,7 @@ int __cdecl cm_SendSellObjekt(int, int, int, int, char, int);
 Estate* __cdecl gm_AddObjekt(void);
 Estate* __cdecl gm_FindNextFilteredEntity(void);
 
+/* ADDRESS: GOLDDE 0x004fd4b0 */
 void __cdecl gm_InitializeShopInventory(void)
 {
 	Estate* s;

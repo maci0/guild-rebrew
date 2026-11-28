@@ -9,6 +9,7 @@ char* __cdecl vfs_ReadCString(void* stream, char* text);
 char* __cdecl strchr(const char* s, int c);
 
 /* ADDRESS: GOLDTL 0x0044d9c0 */
+/* ADDRESS: GOLDDE 0x00443700 */
 void __cdecl d3_ReadMatEnvMap(void* stream, D3_BIN_MAT_ENV_CTX* c)
 {
 	char buf[0x100];

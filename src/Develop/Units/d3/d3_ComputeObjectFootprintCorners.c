@@ -7,6 +7,7 @@ void __cdecl d3_UpdateObjectCameraTransform(char*, char*, int);
 void __cdecl d3_TransformToObjectSpace(char*, float*, float*);
 
 /* ADDRESS: GOLDTL 0x00413480 */
+/* ADDRESS: GOLDDE 0x00411a30 */
 int __cdecl d3_ComputeObjectFootprintCorners(char* obj, float a1, float* a2, float* a3, float* a4, float* a5)
 {
 	float lo[4];

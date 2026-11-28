@@ -3,6 +3,7 @@
 
 void* __cdecl gm_QueryEntities(int, int, int, ...);
 
+/* ADDRESS: GOLDDE 0x004fb1d0 */
 int __cdecl gm_GetBuildingBonusTier(char* building)
 {
 	int n;

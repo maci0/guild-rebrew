@@ -19,6 +19,7 @@ MISSION_RECORD* __cdecl gm_FindMissionByEntityId(int);
 
 
 /* ADDRESS: GOLDTL 0x004b3c00 */
+/* ADDRESS: GOLDDE 0x004a1ef0 */
 MISSION_RECORD* __cdecl gm_ResetMissionEntry(int a)
 {
 	MISSION_RECORD* p;

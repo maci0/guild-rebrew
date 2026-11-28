@@ -41,6 +41,7 @@ void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
 /* Parses a while head: evaluates the condition and pushes a loop level. */
 /* ADDRESS: GOLDTL 0x00427070 */
+/* ADDRESS: GOLDDE 0x00421ad0 */
 int __cdecl evt_ParseWhile(void)
 {
 	struct tok_427070 t;

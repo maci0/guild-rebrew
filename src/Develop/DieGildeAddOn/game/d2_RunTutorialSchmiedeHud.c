@@ -17,6 +17,7 @@ void __cdecl d2_ShowPersonalbuch(char*, char*);
 void __cdecl d2_OpenMeisterbriefDialog(char*);
 void __cdecl d2_OpenContactEinkaufPanel(char*);
 
+/* ADDRESS: GOLDDE 0x005832b0 */
 void __cdecl d2_RunTutorialSchmiedeHud(char* e)
 {
 	int lager;

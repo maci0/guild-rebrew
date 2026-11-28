@@ -3,6 +3,7 @@
 
 void __cdecl m_FreeTracked(void*);
 
+/* ADDRESS: GOLDDE 0x00566a60 */
 void __cdecl d2_FreeTutorialNodes(char* node)
 {
 	if (node != 0) {

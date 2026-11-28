@@ -15,6 +15,7 @@ extern char* sb_Voices;
 
 /* ADDRESS: GOLD 0x004262f0 */
 /* ADDRESS: GOLDTL 0x00422760 */
+/* ADDRESS: GOLDDE 0x0041f5e0 */
 VOICE_ENTRY* __cdecl sb_FindVoiceBySample(int key, int* idx)
 {
 	VOICE_ENTRY* result = 0;

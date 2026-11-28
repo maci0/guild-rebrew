@@ -46,6 +46,7 @@ unsigned char __cdecl d3_TestBoxAgainstFrustum(float*, int, int);
 void __cdecl d3_UpdateNodeShadowMap(char*, char*, int, float);
 
 /* ADDRESS: GOLDTL 0x00456ef0 */
+/* ADDRESS: GOLDDE 0x0044c6b0 */
 void __cdecl d3_ProjectNodeShadows(char* node)
 {
 	D3_SHADOW_PROJ_VEC4 position;

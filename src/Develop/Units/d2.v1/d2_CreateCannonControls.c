@@ -16,6 +16,7 @@ int __cdecl d2_AddWindowValueGauge(int x, int y, int a3, int a4, int a5, int a6,
 float __cdecl gm_GetNormalizedWeatherStrength(int a0);
 extern char * d2_Controls; extern char d2_WindowElementIdView[]; extern float flt_100_0; extern int gm_GameTicks; extern char * d2_FileObjTable; extern int d2_CurrentWindowId;
 /* ADDRESS: GOLDTL 0x005893d0 */
+/* ADDRESS: GOLDDE 0x0056f090 */
 void __cdecl d2_CreateCannonControls(int w, int a1)
 {
 	int width;

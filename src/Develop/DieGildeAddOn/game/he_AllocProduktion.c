@@ -40,6 +40,7 @@ void __cdecl gm_AddTime(struct pos14*, int, int, int);
 void __cdecl he_AssignActionSlot(char*, int, int, char*);
 float __cdecl gm_CalcAvgEntityFavor(int, int, char*);
 
+/* ADDRESS: GOLDDE 0x005576d0 */
 void __cdecl he_AllocProduktion(char* e)
 {
 	char buf[0x200];

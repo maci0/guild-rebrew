@@ -12,6 +12,7 @@ int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 
 
 /* ADDRESS: GOLDTL 0x004bac00 */
+/* ADDRESS: GOLDDE 0x004a8ca0 */
 int __cdecl gm_DeductRandomBuildingGood(unsigned short* entity, int* outId, float factor)
 {
 	char* arr[12];

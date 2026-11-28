@@ -9,6 +9,7 @@ extern ALCHEMY_RECIPE_PROTOTYPE* ahm_RecipePrototypes;
 
 void __cdecl m_FreeTracked(int);
 
+/* ADDRESS: GOLDDE 0x004da130 */
 void __cdecl ahm_FreeAlchemyPrototypes(void)
 {
 	if (ahm_PlayerPrototypes != 0) {

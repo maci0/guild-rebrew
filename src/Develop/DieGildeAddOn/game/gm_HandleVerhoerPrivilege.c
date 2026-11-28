@@ -6,6 +6,7 @@ extern char str_fmt_s[];
 int __cdecl d2_OpenVerhoerDialog(void*, void*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 
+/* ADDRESS: GOLDDE 0x004e6010 */
 int __cdecl gm_HandleVerhoerPrivilege(void* entity, void* request)
 {
 	int result;

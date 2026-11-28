@@ -17,6 +17,7 @@ struct D2_DIRTY_SLOT {
 };
 
 /* ADDRESS: GOLDTL 0x00465e60 */
+/* ADDRESS: GOLDDE 0x00459a90 */
 void __cdecl d2_ClearOwnerDirtyRects(struct D2_DIRTY_OWNER* e)
 {
 	int i;

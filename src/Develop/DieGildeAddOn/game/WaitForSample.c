@@ -5,6 +5,7 @@ extern int* evt_WaitingScriptTask;
 extern int* evt_CurrentScript;
 
 /* ADDRESS: GOLDTL 0x004110e0 */
+/* ADDRESS: GOLDDE 0x0040fee0 */
 void __cdecl WaitForSample(int* sample)
 {
 	int handle;

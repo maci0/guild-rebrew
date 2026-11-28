@@ -13,6 +13,7 @@ extern char gm_MissionJobs[];
 
 void __cdecl d2_ShowMissionSpecDialog(int handle, int flags);
 
+/* ADDRESS: GOLDDE 0x004a3770 */
 void __cdecl d2_ShowMissionForEntity(int key)
 {
 	int i;

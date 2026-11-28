@@ -23,6 +23,7 @@ extern int __cdecl gm_CompareGameTime(pos14_7f4c00*, pos14_7f4c00*);
 extern pos14_7f4c00 gm_GameTime;
 
 /* ADDRESS: GOLDTL 0x00554170 */
+/* ADDRESS: GOLDDE 0x0053a520 */
 void __cdecl he_RunUmlandPatrol(char* obj)
 {
 	unsigned char msg[0x114];

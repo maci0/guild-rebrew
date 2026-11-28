@@ -1,3 +1,6 @@
+extern char g_6750e8[];
+extern char vfs_RootDir[];
+extern char gm_GameTicks[];
 void __cdecl d3_FreeObjectAnimation(void*);
 char* __cdecl d3_AppendVfsAssetPath(char*, char*);
 void* __cdecl vfs_Tfopen(const char*, const char*, void*);
@@ -15,6 +18,7 @@ typedef struct {
 int __cdecl d3_StepAnimFrame(T4321a0, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x0044c460 */
+/* ADDRESS: GOLDDE 0x00442900 */
 char* __cdecl d3_LoadObjectAnim(char* path, char* object, char loop)
 {
 	char* r;
@@ -28,12 +32,12 @@ char* __cdecl d3_LoadObjectAnim(char* path, char* object, char loop)
 	if (*(char**) (object + 0x1d0)) {
 		d3_FreeObjectAnimation(object);
 	}
-	p = d3_AppendVfsAssetPath(path, (char*) 0x67b044);
+	p = d3_AppendVfsAssetPath(path, ".oam");
 	if ((p && *(int*) (object + 0x218) == 4) || *(int*) (object + 0x218) == 3) {
-		h = vfs_Tfopen(p, (char*) 0x6750e8, *(void**) 0x6b7fdc);
+		h = vfs_Tfopen(p, (char*) &g_6750e8, *(void**) &vfs_RootDir);
 		fcn_004011f0(h, &hdr);
 		if (hdr == 0x3a610001) {
-			r = m_alloc(0x44, (char*) 0x67b034);
+			r = m_alloc(0x44, "d3_io:ObjAnim");
 			fcn_004011f0(h, r);
 			fcn_004011f0(h, r + 0x2c);
 			((unsigned char*) r)[0x2d] &= 0xdf;
@@ -42,7 +46,7 @@ char* __cdecl d3_LoadObjectAnim(char* path, char* object, char loop)
 				^ ((unsigned char*) r)[0x34];
 			n = bio_rd_array_quick(h, 0x58, (void**) (r + 0x40));
 			if (n != *(int*) r) {
-				ReportClientMessage((char*) 0x67aff4);
+				ReportClientMessage("d3_LoadObjectAnim: Wrong number of KeyFrames in saved array!");
 			}
 			*(int*) (*(char**) (r + 0x40) + (*(int*) r - 1) * 0x58) =
 				*(int*) (*(char**) (r + 0x40) + (*(int*) r - 2) * 0x58);
@@ -73,6 +77,6 @@ char* __cdecl d3_LoadObjectAnim(char* path, char* object, char loop)
 		CloseVfsStream(h);
 	}
 	*(char**) (object + 0x1d0) = r;
-	*(int*) (object + 0x40) = *(int*) 0x6b7fac;
+	*(int*) (object + 0x40) = *(int*) &gm_GameTicks;
 	return r;
 }

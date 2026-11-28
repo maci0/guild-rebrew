@@ -44,6 +44,7 @@ typedef Vec3* (__cdecl *BoxFn)(char* obj, char* mesh, int arg);
 
 /* Flags every selectable object whose box centre projects into the
  * drag rectangle. */
+/* ADDRESS: GOLDDE 0x0051d190 */
 void __cdecl d3_UpdateSelectionBoxCharacters(void)
 {
 	int x0;

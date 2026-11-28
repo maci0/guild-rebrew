@@ -3,6 +3,7 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
+/* ADDRESS: GOLDDE 0x004254b0 */
 int __cdecl msx_FindFreeWaveDriver(void)
 {
 	int i;

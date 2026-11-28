@@ -4,6 +4,7 @@
 
 void __cdecl evt_FreeScript(void*);
 
+/* ADDRESS: GOLDDE 0x00424300 */
 void __cdecl evt_CloseAllScripts(void)
 {
 	int o;

@@ -9,6 +9,7 @@ extern pos14_7f4c00 gm_GameTime;
 char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 void __cdecl gm_GenerateShuffledIndices(int, char*);
 
+/* ADDRESS: GOLDDE 0x00556190 */
 void __cdecl he_InitEvent0x84Rumors(char* action)
 {
 	pos14_7f4c00* ts;

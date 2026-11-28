@@ -3,6 +3,7 @@
 
 void __cdecl cm_RequestChangeFloat(int, int, float);
 
+/* ADDRESS: GOLDDE 0x0055e1c0 */
 void __cdecl gm_IncreaseEntityStat(char* entity, int steps)
 {
 	float f;

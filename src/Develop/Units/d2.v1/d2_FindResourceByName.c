@@ -3,6 +3,7 @@
 extern char* d2_FileObjTable;
 
 /* ADDRESS: GOLDTL 0x00465950 */
+/* ADDRESS: GOLDDE 0x00459580 */
 int __cdecl d2_FindResourceByName(const char* name)
 {
 	int i;

@@ -20,6 +20,7 @@ char* __cdecl gm_FindNextFilteredEntity(void);
 void __cdecl d3_DestroyEntityWimpelNodes(char*);
 void __cdecl d3_CreateEntityFlagPennant(char*);
 
+/* ADDRESS: GOLDDE 0x005167e0 */
 void __cdecl d3_RefreshBuildingPennants(void)
 {
 	int save;

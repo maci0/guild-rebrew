@@ -7,6 +7,7 @@ typedef struct {
 
 
 /* ADDRESS: GOLDTL 0x00514d30 */
+/* ADDRESS: GOLDDE 0x004ff7a0 */
 char __cdecl d3_CollectFackelObjects(char* name, FACKEL_LIST* list)
 {
 	if (strstr(name, "ub_FACKEL_") != 0) {

@@ -5,6 +5,7 @@ extern char* d2_Controls;
 void __cdecl d2_CenterElement(int);
 
 /* ADDRESS: GOLDTL 0x00469110 */
+/* ADDRESS: GOLDDE 0x0045ca90 */
 void __cdecl d2_SetElementWidth(int index, int width)
 {
 	((D2_CONTROL_TL*)d2_Controls)[index].width = width;

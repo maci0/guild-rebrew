@@ -16,6 +16,7 @@ extern char g_68ae9c[];
 int __cdecl cm_EnqueueClientPacket(char*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
+/* ADDRESS: GOLDDE 0x004b3e60 */
 int __cdecl cm_RequestCreateGeb(int a, int b, float* v, tri12* w)
 {
 	char buf[0x19c];

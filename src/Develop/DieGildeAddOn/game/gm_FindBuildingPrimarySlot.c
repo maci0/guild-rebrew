@@ -7,6 +7,7 @@ int __cdecl gm_QueryEntities(int, int, int, int);
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 /* ADDRESS: GOLDTL 0x005049a0 */
+/* ADDRESS: GOLDDE 0x004efd20 */
 int __cdecl gm_FindBuildingPrimarySlot(unsigned char* building)
 {
 	BUILDING_PROTOTYPE* type;

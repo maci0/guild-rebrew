@@ -15,6 +15,7 @@ int __cdecl gm_LookupSpecialObjectRecord(int, char*);
 void __cdecl d2_ShowUseObjDialog(char*);
 
 /* ADDRESS: GOLDTL 0x005dd5a0 */
+/* ADDRESS: GOLDDE 0x005beb40 */
 unsigned int __cdecl gm_LowerTargetStandingWithPeers(ENTITY_RECORD_VIEW* actor, unsigned int* request)
 {
 	char pickerTitle[256];

@@ -37,6 +37,7 @@ void __cdecl d2_DestroyForm(int);
 typedef struct { char pad[0x48]; int x48; int x4c; } S58;
 
 /* ADDRESS: GOLDTL 0x0058e220 */
+/* ADDRESS: GOLDDE 0x00573ee0 */
 int __cdecl d2_RunSeance(int a1, S58* scriptSubject)
 {
 	int h;

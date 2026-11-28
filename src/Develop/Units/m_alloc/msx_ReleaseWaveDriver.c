@@ -5,6 +5,7 @@ int __cdecl msx_FindWaveDriverIndex(int a1);
 void __cdecl m_FreeTracked(void* p);
 
 /* ADDRESS: GOLDTL 0x0042a2d0 */
+/* ADDRESS: GOLDDE 0x00424c60 */
 int __cdecl msx_ReleaseWaveDriver(int* waveDriver)
 {
     int r;

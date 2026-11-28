@@ -40,6 +40,7 @@ int* __cdecl d3_SpawnBlutEffect(int unused, int mode, int v0, int v1, int v2, in
 #else
 
 /* ADDRESS: GOLDTL 0x00417b50 */
+/* ADDRESS: GOLDDE 0x00415950 */
 int* __cdecl d3_SpawnBlutEffect(int a1, int a2, int v0, int v1, int v2, int v3)
 {
 	Bytes4 f;

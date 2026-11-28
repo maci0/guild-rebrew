@@ -4,6 +4,7 @@
 void* __cdecl gm_QueryEntities(int, int, int, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);
 
+/* ADDRESS: GOLDDE 0x004f7230 */
 int __cdecl gm_CollectEntityCarts(char* a, void** out)
 {
 	int n;

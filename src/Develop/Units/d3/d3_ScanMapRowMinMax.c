@@ -8,6 +8,7 @@ typedef struct {
 	unsigned char* data;
 } Map;
 
+/* ADDRESS: GOLDDE 0x00411d90 */
 int __cdecl d3_ScanMapRowMinMax(Map* map, int* lo, int* hi, int x0, int x1, int y)
 {
 	int tmp;

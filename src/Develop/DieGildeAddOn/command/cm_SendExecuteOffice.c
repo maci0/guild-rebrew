@@ -17,6 +17,7 @@ typedef struct
 #pragma pack(pop)
 // SIZE 0xf
 
+/* ADDRESS: GOLDDE 0x004b3c60 */
 int __cdecl cm_SendExecuteOffice(char* data)
 {
 	char buf[0x9c];

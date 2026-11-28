@@ -7,6 +7,7 @@ extern pos14_7f4c00 gm_GameTime;
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_QueryEntities(int, int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x004b4b40 */
 int __cdecl cm_ChkClientElectionOrTrade(char* x)
 {
 	char* e;

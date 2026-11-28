@@ -30,6 +30,7 @@ extern char* txt_TextEntries[];
 int __cdecl he_PostEntityMessage(int, int, char*, unsigned char, int, char*);
 void __cdecl he_FreeAction(char*);
 
+/* ADDRESS: GOLDDE 0x00556090 */
 void __cdecl he_RunEvent0x83TextQueue(char* u)
 {
 	int t;

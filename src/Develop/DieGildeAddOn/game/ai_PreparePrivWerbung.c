@@ -16,6 +16,7 @@ int __cdecl ai_SelectRankedCandidates(char* e, int n, int* lim, float a4, float 
 float __cdecl gm_RandomFloat01(void);
 
 /* ADDRESS: GOLDTL 0x004a9600 */
+/* ADDRESS: GOLDDE 0x00497940 */
 int __cdecl ai_PreparePrivWerbung(int unused1, char* actor, int unused3, int unused4, char* out)
 {
 	int mask;

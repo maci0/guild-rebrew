@@ -10,6 +10,7 @@ typedef struct {
 
 GM_ACTION_REC* __cdecl gm_FindMissionByEntityId(int);
 
+/* ADDRESS: GOLDDE 0x004a2940 */
 int __cdecl gm_IncrementMissionActionCount(int entity_id, int kind)
 {
 	GM_ACTION_REC* p;

@@ -69,6 +69,7 @@ void __cdecl sv_ResetSelectionState(void);
 void __cdecl io_SetMouseCursorPos(int x, int y);
 
 /* ADDRESS: GOLDTL 0x0059a340 */
+/* ADDRESS: GOLDDE 0x0057f660 */
 void __cdecl d2_RunWorldHudLoop(void)
 {
 	int v7;

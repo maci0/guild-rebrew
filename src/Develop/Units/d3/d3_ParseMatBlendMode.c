@@ -5,6 +5,7 @@ extern char g_662d1c[];
 char* __cdecl fcn_0064f026(char*, char*);
 
 /* ADDRESS: GOLDTL 0x0044d080 */
+/* ADDRESS: GOLDDE 0x00442e70 */
 void __cdecl d3_ParseMatBlendMode(int a1, int* o)
 {
 	char* s;

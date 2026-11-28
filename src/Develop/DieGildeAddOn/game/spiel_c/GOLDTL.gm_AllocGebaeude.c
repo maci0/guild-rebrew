@@ -68,6 +68,7 @@ typedef struct {
  * its type defaults: name, the object ids of its prototype record, its room
  * layout, the owner's position block and the per-type fields. */
 /* ADDRESS: GOLDTL 0x005043d0 */
+/* ADDRESS: GOLDDE 0x004ef750 */
 char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 {
 	char tmp[0x100];

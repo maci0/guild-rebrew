@@ -7,6 +7,7 @@ void __cdecl cm_StepCommandQueue(void);
 
 
 /* ADDRESS: GOLDTL 0x004e63e0 */
+/* ADDRESS: GOLDDE 0x004d2c30 */
 int __cdecl cut_CheckMaster(int* event)
 {
 	int flag;

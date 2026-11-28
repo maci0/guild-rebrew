@@ -12,6 +12,7 @@ extern int g_7e4310;
 #define MAX_(a, b) ((a) > (b) ? (a) : (b))
 #define MIN_(a, b) ((a) < (b) ? (a) : (b))
 
+/* ADDRESS: GOLDDE 0x0051ce10 */
 void __cdecl d3_BeginSelectionBox(void)
 {
 	int a;

@@ -18,6 +18,7 @@ extern __int64 gm_TargetPersonTypeMask;
 
 void __cdecl d2_ShowTabbedSelectionDialog(Desc*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x005ac800 */
 void __cdecl d2_OpenEntityPicker(int unused, int title)
 {
 	Desc d;

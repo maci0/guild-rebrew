@@ -37,6 +37,7 @@ void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, ch
 void __cdecl he_AssignActionSlot(char*, int, int, int);
 void __cdecl he_FreeAction(char*);
 
+/* ADDRESS: GOLDDE 0x00558780 */
 void __cdecl he_RunSuchen(char* e)
 {
 	char* r;

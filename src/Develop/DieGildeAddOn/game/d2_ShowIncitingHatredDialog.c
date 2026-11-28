@@ -1,3 +1,4 @@
+extern char g_6a59fc[];
 
 #include <string.h>
 
@@ -53,6 +54,7 @@ void __cdecl d2_ShowModalMessageBox(char* text, int a);
 int __cdecl main_RunFrameLoop(void* fn, int a);
 
 /* ADDRESS: GOLDTL 0x005d78e0 */
+/* ADDRESS: GOLDDE 0x005b9140 */
 int __cdecl d2_ShowIncitingHatredDialog(char* actor, char* request)
 {
 	Query req;
@@ -106,11 +108,11 @@ int __cdecl d2_ShowIncitingHatredDialog(char* actor, char* request)
 		cm_RequestModifyHealth(*(int*) (actor + 4), -4);
 		if (firstEntity->type == 6 || firstEntity->type == 7) {
 			io_FormatTextBuffer(buf, 0x1dd3, secondEntity->id, secondEntity->id);
-			he_PostEntityMessage(firstEntity->handle, firstEntity->handle, buf, 0, 0x5fb, (char*) 0x6a59fc);
+			he_PostEntityMessage(firstEntity->handle, firstEntity->handle, buf, 0, 0x5fb, (char*) &g_6a59fc);
 		}
 		if (secondEntity->type == 6 || secondEntity->type == 7) {
 			io_FormatTextBuffer(buf, 0x1dd3, firstEntity->id, firstEntity->id);
-			he_PostEntityMessage(secondEntity->handle, secondEntity->handle, buf, 0, 0x5fb, (char*) 0x6a59fc);
+			he_PostEntityMessage(secondEntity->handle, secondEntity->handle, buf, 0, 0x5fb, (char*) &g_6a59fc);
 		}
 		return 0x10;
 	}
@@ -132,7 +134,7 @@ int __cdecl d2_ShowIncitingHatredDialog(char* actor, char* request)
 	sum = gm_CalcPersonWealth(secondEntity->id);
 	sum = sum + gm_CalcPersonWealth(firstEntity->id);
 	v = (int) (sum * g_6628ac);
-	dialog = d2_LoadForm(0, 0, (char*) 0x6acd58);
+	dialog = d2_LoadForm(0, 0, "privillegien\\hass_erzeugen");
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(dialog);
 	d2_SetForm(dialog, 1);
@@ -161,12 +163,12 @@ int __cdecl d2_ShowIncitingHatredDialog(char* actor, char* request)
 					if (firstEntity->type == 6 || firstEntity->type == 7) {
 						io_FormatTextBuffer(buf, 0x1dd3, secondEntity->id, secondEntity->id);
 						he_PostEntityMessage(firstEntity->handle, firstEntity->handle, buf,
-							     0, 0x5fb, (char*) 0x6a59fc);
+							     0, 0x5fb, (char*) &g_6a59fc);
 					}
 					if (secondEntity->type == 6 || secondEntity->type == 7) {
 						io_FormatTextBuffer(buf, 0x1dd3, firstEntity->id, firstEntity->id);
 						he_PostEntityMessage(secondEntity->handle, secondEntity->handle, buf,
-							     0, 0x5fb, (char*) 0x6a59fc);
+							     0, 0x5fb, (char*) &g_6a59fc);
 					}
 					d2_DialogCloseRequested = 1;
 					rc = 1;
@@ -178,7 +180,7 @@ int __cdecl d2_ShowIncitingHatredDialog(char* actor, char* request)
 		if (io_RightButtonReleased) {
 			d2_DialogCloseRequested = 1;
 		}
-	} while (main_RunFrameLoop((void*) 0x5d78e0, 0x657c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_ShowIncitingHatredDialog, 0x657c7) != 0);
 	d2_DestroyForm(dialog);
 	return rc;
 }

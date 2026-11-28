@@ -17,6 +17,7 @@ int __cdecl gm_PickRandomBuildingPoint(float*);
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
 void __cdecl ch_CreateAction(char*, int, int);
 
+/* ADDRESS: GOLDDE 0x004aa130 */
 void __cdecl gm_SpawnAmbientCat(AMBIENT_ANIMAL_SLOT* s)
 {
 	float v[4];

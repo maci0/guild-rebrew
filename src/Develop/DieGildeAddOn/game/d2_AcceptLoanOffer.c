@@ -13,6 +13,7 @@ void __cdecl cm_RequestMoveCredits(int, int, char, int);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
 void __cdecl he_FreeAction(char*);
 
+/* ADDRESS: GOLDDE 0x00589070 */
 void __cdecl d2_AcceptLoanOffer(char* building, char* offer)
 {
 	char txt[0x200];

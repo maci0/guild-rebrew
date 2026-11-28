@@ -3,6 +3,7 @@ extern float main_FrameRate;
 
 
 /* ADDRESS: GOLDTL 0x00525e90 */
+/* ADDRESS: GOLDDE 0x0050f150 */
 void __cdecl main_SampleFrameCounter(void)
 {
 	float f;

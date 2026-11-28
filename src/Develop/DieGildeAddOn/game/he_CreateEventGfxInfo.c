@@ -19,6 +19,7 @@ unsigned short* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl d3_FindSceneObject(int a, int b, int c, char* name);
 void __cdecl he_CreateGfxInfo(unsigned char* p, char* fmt, int v);
 
+/* ADDRESS: GOLDDE 0x0052ced0 */
 void __cdecl he_CreateEventGfxInfo(unsigned char* p)
 {
 	char* r;

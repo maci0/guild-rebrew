@@ -8,6 +8,7 @@ char* __cdecl gm_FindNextFilteredEntity(void);
 
 
 /* ADDRESS: GOLDTL 0x004b5020 */
+/* ADDRESS: GOLDDE 0x004a3310 */
 int __cdecl gm_HasNoType5Owner(void)
 {
 	char* entity;

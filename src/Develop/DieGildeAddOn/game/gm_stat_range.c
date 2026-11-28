@@ -2,6 +2,7 @@
 
 /* ADDRESS: GOLD 0x00503fa0 */
 /* ADDRESS: GOLDTL 0x00506fd0 */
+/* ADDRESS: GOLDDE 0x004f2170 */
 int __cdecl gm_JobToBuildingCategory(int a)
 {
 	int k;
@@ -45,6 +46,7 @@ int __cdecl gm_JobToBuildingCategory(int a)
 
 /* ADDRESS: GOLD 0x00504290 */
 /* ADDRESS: GOLDTL 0x005072c0 */
+/* ADDRESS: GOLDDE 0x004f2460 */
 int __cdecl gm_JobToBuildingType(int a)
 {
 	int k;

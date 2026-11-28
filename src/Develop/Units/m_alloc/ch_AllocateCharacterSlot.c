@@ -7,6 +7,7 @@ extern char str_ch_Create_Character[];
 
 int __cdecl m_alloc(int, char*);
 
+/* ADDRESS: GOLDDE 0x004027a0 */
 void* __cdecl ch_AllocateCharacterSlot(int index)
 {
 	void* p;

@@ -4,6 +4,7 @@
 extern int* d2_TutorialState;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
+/* ADDRESS: GOLDDE 0x00566740 */
 int __cdecl d2_BindTutorialAction(int action)
 {
 	int* p;

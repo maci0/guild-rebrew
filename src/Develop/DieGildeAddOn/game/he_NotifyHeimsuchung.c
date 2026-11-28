@@ -8,6 +8,7 @@ unsigned short __cdecl gm_RandomMod(int);
 void __cdecl io_FormatTextBuffer(void*, int, int, int, void*, int);
 void __cdecl he_PostEntityMessage(int, int, void*, int, int, void*);
 
+/* ADDRESS: GOLDDE 0x005978e0 */
 void __cdecl he_NotifyHeimsuchung(void* subject, void* recipient, void* target)
 {
 	switch (main_GetLanguage()) {

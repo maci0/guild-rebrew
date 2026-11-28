@@ -44,6 +44,7 @@ void __cdecl d2_DestroyForm(int);
 void __cdecl d2_RestoreHudAfterDialog(void);
 
 /* ADDRESS: GOLDTL 0x005944d0 */
+/* ADDRESS: GOLDDE 0x00579f90 */
 unsigned int __cdecl d2_RunProduktionDialog(unsigned char* building)
 {
 	unsigned char* p;

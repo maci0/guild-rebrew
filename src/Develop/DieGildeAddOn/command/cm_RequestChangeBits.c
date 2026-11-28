@@ -3,6 +3,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b2de0 */
 void __cdecl cm_RequestChangeBits(int entityId, int offset, int size, int setMask, int clearMask)
 {
 	char buf[0x9c];

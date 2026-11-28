@@ -7,6 +7,7 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl io_AppendText(int);
 void __cdecl main_RunFrameLoop(int, int);
 
+/* ADDRESS: GOLDDE 0x0050fb80 */
 int __cdecl d2_OpenMessageBox(int a, char flags)
 {
 	int h;

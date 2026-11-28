@@ -20,6 +20,7 @@ void __cdecl d2_OpenBlutracheDialog(int);
 void __cdecl d2_ShowPersonalbuch(int, char*);
 void __cdecl d3_UpdateBuildingInteriorState(void);
 
+/* ADDRESS: GOLDDE 0x005c7cb0 */
 void __cdecl d2_RunZigeunerInteriorHud(int a)
 {
 	int zig;

@@ -29,6 +29,7 @@ extern float g_774730;
 float __cdecl d3_SampleAverageTerrainHeight(float* p);
 void __cdecl d3_SetNodePosition(View* v, Vec4* p);
 
+/* ADDRESS: GOLDDE 0x00513f80 */
 void __cdecl d3_AdjustCameraHeight(void)
 {
 	float step;

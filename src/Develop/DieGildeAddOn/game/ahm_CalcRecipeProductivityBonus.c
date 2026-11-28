@@ -7,6 +7,7 @@ extern float flt_1_0;
 int __cdecl ahm_CheckFlag(void*);
 float __cdecl ahm_GetEssenceValue(char*, int);
 
+/* ADDRESS: GOLDDE 0x004d9300 */
 float __cdecl ahm_CalcRecipeProductivityBonus(char* entity, int key)
 {
 	float* e;

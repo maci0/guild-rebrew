@@ -46,6 +46,7 @@ int __cdecl main_RunFrameLoop(void* fn, int msg);
 void __cdecl d2_DestroyForm(int a);
 
 /* ADDRESS: GOLDTL 0x005ceef0 */
+/* ADDRESS: GOLDDE 0x005b0910 */
 void __cdecl d2_RunProdSettingsDialog(int building, unsigned short* actor)
 {
 	int v12[7];
@@ -86,7 +87,7 @@ void __cdecl d2_RunProdSettingsDialog(int building, unsigned short* actor)
 	} else {
 		hp_SyncProdSetting(building);
 	}
-	v28 = d2_LoadForm(0, 0, (char*) 0x6aca84);
+	v28 = d2_LoadForm(0, 0, "berufe\\_meisterbrief_2");
 	d2_SetForm(v28, 0);
 	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_CenterDialogWindows(v28);

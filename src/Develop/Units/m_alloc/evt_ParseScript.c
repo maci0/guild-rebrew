@@ -17,6 +17,7 @@ int __cdecl evt_ParseVarDecl(char* g, int v);
 void __cdecl evt_IncludeScript(void);
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
+/* ADDRESS: GOLDDE 0x00422960 */
 int __cdecl evt_ParseScript(char* g)
 {
 	int tok[0x19];

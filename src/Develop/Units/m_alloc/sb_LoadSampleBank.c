@@ -42,6 +42,7 @@ void* __cdecl m_alloc(int size, char* tag);
 void __cdecl m_FreeTracked(void* p);
 
 /* ADDRESS: GOLDTL 0x00422dc0 */
+/* ADDRESS: GOLDDE 0x0041fc40 */
 Bank* __cdecl sb_LoadSampleBank(char* name, int init)
 {
 	Bank* bank;

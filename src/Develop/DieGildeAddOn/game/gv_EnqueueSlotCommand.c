@@ -6,6 +6,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b4430 */
 void __cdecl gv_EnqueueSlotCommand(char* data)
 {
 	char buf[0x9c];

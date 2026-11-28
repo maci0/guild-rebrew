@@ -38,6 +38,7 @@ void __cdecl cm_SendCopyEntityData(MsgF8* m);
 void __cdecl gm_ModifyHealth(int id, int v);
 
 #pragma optimize("y", off)
+/* ADDRESS: GOLDDE 0x00499410 */
 int __cdecl ai_DispatchDunkleEcke(char* actor, char* target, char* secondary)
 {
 	MsgF8 m;

@@ -16,6 +16,7 @@ extern char gm_MissionJobs[];
 unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream);
 
 /* ADDRESS: GOLDTL 0x004b64b0 */
+/* ADDRESS: GOLDDE 0x004a4740 */
 int __cdecl ls_SaveMissionJobs(char* file)
 {
 	int i;

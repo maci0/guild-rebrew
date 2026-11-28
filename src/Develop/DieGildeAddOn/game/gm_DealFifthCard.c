@@ -26,6 +26,7 @@ int __cdecl gm_DrawCard(int);
 
 
 /* ADDRESS: GOLDTL 0x004a8700 */
+/* ADDRESS: GOLDDE 0x00496a50 */
 void __cdecl gm_DealFifthCard(void)
 {
 	int i;

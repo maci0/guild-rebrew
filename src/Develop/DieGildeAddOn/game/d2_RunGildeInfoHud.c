@@ -15,6 +15,7 @@ void __cdecl d2_OpenMeisterbriefDialog(int);
 void __cdecl d2_ShowPersonalbuch(int, char*);
 void __cdecl d2_RunDiebesgildeInfoDialog(int);
 
+/* ADDRESS: GOLDDE 0x00581fc0 */
 void __cdecl d2_RunGildeInfoHud(int a)
 {
 	int x;

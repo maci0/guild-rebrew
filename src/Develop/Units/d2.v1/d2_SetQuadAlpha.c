@@ -11,6 +11,7 @@ typedef struct {
 
 
 /* ADDRESS: GOLDTL 0x0047b9f0 */
+/* ADDRESS: GOLDDE 0x0046a9e0 */
 void __cdecl d2_SetQuadAlpha(D2_QUAD_VERTEX* verts, unsigned char alpha)
 {
 	int i;

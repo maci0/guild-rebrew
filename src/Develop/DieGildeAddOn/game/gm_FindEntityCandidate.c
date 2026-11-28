@@ -24,6 +24,7 @@ extern unsigned int gm_EntityCandidateCount;
 int __cdecl gm_MatchesTargetFilter(unsigned short a, unsigned short b, Query* q, int c);
 ENTITY_CANDIDATE* __cdecl gm_StepEntityCandidateRing(void);
 
+/* ADDRESS: GOLDDE 0x00493ea0 */
 int __cdecl gm_FindEntityCandidate(unsigned short* actor, int queryFlags, unsigned int excludedCount, char* excludedIds, float minScore, float maxScore, unsigned short* outId)
 {
 	Query query;

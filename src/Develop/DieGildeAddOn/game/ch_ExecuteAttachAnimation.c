@@ -13,6 +13,7 @@ int __cdecl ch_AttachAni(void* owner, void* name, int flags);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 
 /* ADDRESS: GOLDTL 0x00406e70 */
+/* ADDRESS: GOLDDE 0x00406010 */
 void __cdecl ch_ExecuteAttachAnimation(char* task)
 {
 	OWNER_406e70* owner;

@@ -37,6 +37,7 @@ extern Win_1015f40 d2_Windows[0x60];
 void __cdecl d2_PositionControl(int x, int y, int slot);
 
 /* ADDRESS: GOLDTL 0x0046c310 */
+/* ADDRESS: GOLDDE 0x0045f990 */
 void __cdecl d2_UpdateWindowScroll(int win)
 {
 	D2_SCROLL_STEP_WIN* w;

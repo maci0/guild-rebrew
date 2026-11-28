@@ -40,6 +40,7 @@ extern char* d2_Controls;
 
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00472170 */
+/* ADDRESS: GOLDDE 0x00465500 */
 void __cdecl d2_SetSlotVisibility(int slot, int flag)
 {
 	Slot* s;

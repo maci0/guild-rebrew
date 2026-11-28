@@ -12,6 +12,7 @@ char* __cdecl gm_QueryEntities(int, int, int, int);
 void __cdecl he_AssignActionSlot(char*, char*, int, char*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x0055fb50 */
 void __cdecl he_StartGrabpflege(char* o)
 {
 	unsigned short* x;

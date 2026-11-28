@@ -26,6 +26,7 @@ float __cdecl gm_RandomFloat01(void);
 void __cdecl cm_SendBlockCharacter(int, int, int);
 void __cdecl d2_ShowUseObjDialog(char*);
 
+/* ADDRESS: GOLDDE 0x005c0060 */
 int __cdecl gm_ObjApplyAction0x5b(char* e, char* action)
 {
 	Req req;

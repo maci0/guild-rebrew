@@ -22,6 +22,7 @@ void __cdecl cm_SendTraceEnd(char* s);
 int __cdecl cm_SendAllocCharacter(int, int, int, int, int, int, char*);
 int __cdecl cm_SendSetHE(int, char*);
 
+/* ADDRESS: GOLDDE 0x0053d5d0 */
 void __cdecl he_InitDunkleEcke(char* u)
 {
 	char* e;

@@ -33,6 +33,7 @@ void __cdecl d2_RunGesetzbuchDialog(int);
 void __cdecl d2_RunBuergerrechtDialog(int);
 void __cdecl d2_ShowOfficeApplicationDialog(void);
 
+/* ADDRESS: GOLDDE 0x0058e760 */
 void __cdecl d2_RunRathausCouncilMenu(int building)
 {
 	int a;

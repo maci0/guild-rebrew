@@ -13,6 +13,7 @@ extern unsigned int nt_LocalShardIndex;
 extern unsigned char gm_PlayerCount;
 
 /* ADDRESS: GOLDTL 0x0047dd60 */
+/* ADDRESS: GOLDDE 0x0046cd20 */
 int __cdecl gm_CanEvaluateMaster(char* e)
 {
 	char* p;

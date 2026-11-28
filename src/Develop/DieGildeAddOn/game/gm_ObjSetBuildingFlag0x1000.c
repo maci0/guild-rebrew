@@ -21,6 +21,7 @@ char* __cdecl d2_RunCityScrollMapDialog(int, Req*, char*, int, int);
 char* __cdecl gm_SearchTable67(int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x005c0bb0 */
 int __cdecl gm_ObjSetBuildingFlag0x1000(char* e, char* context)
 {
 	Req req;

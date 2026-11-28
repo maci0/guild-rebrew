@@ -6,6 +6,7 @@ extern unsigned char* lpGebaeudePROT;
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl ahm_CheckFlag(unsigned char*);
 
+/* ADDRESS: GOLDDE 0x005122e0 */
 void __cdecl gm_CountBuildingWorkers(char* o)
 {
 	int i;

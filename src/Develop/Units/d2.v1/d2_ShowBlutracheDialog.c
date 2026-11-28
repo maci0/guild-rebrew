@@ -94,6 +94,7 @@ void __cdecl d2_DestroyForm(int);
 void __cdecl d3_EndCameraAndUiMode(void);
 
 /* ADDRESS: GOLDTL 0x005e5ea0 */
+/* ADDRESS: GOLDDE 0x005c7160 */
 void __cdecl d2_ShowBlutracheDialog(char* participant)
 {
 	GAME_TIMESTAMP st;
@@ -136,7 +137,7 @@ void __cdecl d2_ShowBlutracheDialog(char* participant)
 			if (entity != 0) {
 				st = *(GAME_TIMESTAMP*) (entity + 0x52);
 				st.hour += *(int*) (entity + 0x70) ? 0 : 2;
-				value = gm_GetElapsedMinutes(entity + 0x44, (void*) 0x7f4c00);
+				value = gm_GetElapsedMinutes(entity + 0x44, (void*) ((int) &gm_GameTime));
 				n = gm_GetElapsedMinutes(entity + 0x44, &st);
 				d2_SetElementValue(timer1, 0, 100,
 					(int) ((((float) value / n < 1.0f) ? ((float) value / n) : 1.0f) * 100.0f));

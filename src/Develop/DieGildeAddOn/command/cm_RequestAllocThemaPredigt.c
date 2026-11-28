@@ -10,6 +10,7 @@ typedef struct
 
 int __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b3430 */
 int __cdecl cm_RequestAllocThemaPredigt(int ownerId, int topic, ShortChar extra)
 {
 	char buf[0x9c];

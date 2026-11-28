@@ -97,6 +97,7 @@ extern int g_1040494;
 extern Win_1015f40 d2_Windows[0x60];
 
 /* ADDRESS: GOLDTL 0x005e4970 */
+/* ADDRESS: GOLDDE 0x005c5c30 */
 void __cdecl d2_ShowCreditsScreen(void)
 {
 	unsigned char* fade;

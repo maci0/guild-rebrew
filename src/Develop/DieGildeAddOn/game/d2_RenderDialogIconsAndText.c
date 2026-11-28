@@ -8,6 +8,7 @@ int __cdecl io_AppendText(char*, ...);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl d2_AddElementToWindow(int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x005858c0 */
 void __cdecl d2_RenderDialogIconsAndText(int a)
 {
 	int i;

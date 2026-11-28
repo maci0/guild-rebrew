@@ -36,6 +36,7 @@ void __cdecl d2_DestroyElement(int);
 void __cdecl d2_SetSlotVisibility(int, int);
 
 /* ADDRESS: GOLDTL 0x004d0a20 */
+/* ADDRESS: GOLDDE 0x004bdd10 */
 void __cdecl d2_UpdateCombatUnitHud(void)
 {
 	char buf[0x100];

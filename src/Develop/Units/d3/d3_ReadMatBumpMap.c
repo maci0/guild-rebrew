@@ -4,6 +4,7 @@
 char* __cdecl vfs_ReadCString(void* stream, char* text);
 char* __cdecl fcn_0064d1a0(char*, int);
 
+/* ADDRESS: GOLDDE 0x004436a0 */
 void __cdecl d3_ReadMatBumpMap(void* r, int* o)
 {
 	char buf[0x100];

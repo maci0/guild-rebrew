@@ -3,6 +3,7 @@
 
 char* __cdecl gm_LookupEntityRecordById(int);
 
+/* ADDRESS: GOLDDE 0x004f4650 */
 int __cdecl gm_CountChildren(char* e, int* out_count)
 {
 	int flag;

@@ -7,6 +7,7 @@ void __cdecl m_ShutdownAllocator(void);
 void __cdecl ShutdownClientLogAndErrorHandler(void);
 void __cdecl ShutdownVideo(void);
 
+/* ADDRESS: GOLDDE 0x0051ff90 */
 void __cdecl main_ShutdownClientSubsystems(void)
 {
 	tb_ShutdownTimer();

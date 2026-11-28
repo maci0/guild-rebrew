@@ -4,6 +4,7 @@
 void* __cdecl gm_QueryEntities(int, int, int, int);
 int __cdecl gm_LookupSpecialObject(int);
 
+/* ADDRESS: GOLDDE 0x005a84f0 */
 int __cdecl gm_HasActiveSpecialObject(char* entity, int objId)
 {
 	char* match;

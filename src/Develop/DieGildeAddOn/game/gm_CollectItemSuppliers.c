@@ -9,6 +9,7 @@ int __cdecl gm_GetMsgField(int, int);
 float __cdecl gm_GetSeasonPrice(int id, unsigned char a);
 
 /* ADDRESS: GOLDTL 0x00503a70 */
+/* ADDRESS: GOLDDE 0x004eedf0 */
 int __cdecl gm_CollectItemSuppliers(int itemId)
 {
 	char* p;

@@ -3,6 +3,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b3620 */
 void __cdecl cm_RequestSpawnBuildingCharacter(int id, int type, int sub)
 {
 	char buf[0x9c];

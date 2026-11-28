@@ -9,6 +9,7 @@ extern Rec18_68da68 amt_OfficeSlots[42];
 
 #include "Develop/DieGildeAddOn/game/aemter.h"
 
+/* ADDRESS: GOLDDE 0x004d8bd0 */
 void __cdecl amt_TriggerOfficeActionByType(int type)
 {
 	int i;

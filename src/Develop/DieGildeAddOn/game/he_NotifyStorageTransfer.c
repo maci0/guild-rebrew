@@ -9,6 +9,7 @@ int  __cdecl main_GetLanguage(void);
 void __cdecl io_FormatTextBuffer(void*, int, int, int, int);
 void __cdecl he_PostEntityMessage(int, int, void*, int, int, void*);
 
+/* ADDRESS: GOLDDE 0x00597850 */
 void __cdecl he_NotifyStorageTransfer(void* entity, void* otherEntity, int count, int tableIndex)
 {
 	char t;

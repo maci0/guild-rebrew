@@ -9,6 +9,7 @@ extern g_662408_f imp_AIL_close_stream;
 int __cdecl msx_FindStreamDriverIndex(int);
 int __cdecl msx_FindStreamIndex(int);
 
+/* ADDRESS: GOLDDE 0x00425210 */
 int __cdecl msx_CloseStream(int streamId)
 {
 	int r = 0;

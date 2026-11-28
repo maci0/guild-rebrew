@@ -20,6 +20,7 @@ void __cdecl cut_HandleAuctionEvent(void);
 void __cdecl cut_MainDuell(char*);
 
 /* ADDRESS: GOLDTL 0x004e7160 */
+/* ADDRESS: GOLDDE 0x004d3900 */
 void __cdecl cut_RegisterEventCallbacks(int idx, EVENT_RUN runEvent, void* a3, void* a4, EVENT_CHECK checkEvent, unsigned char a6)
 {
 	int o;
@@ -33,6 +34,7 @@ void __cdecl cut_RegisterEventCallbacks(int idx, EVENT_RUN runEvent, void* a3, v
 }
 
 /* ADDRESS: GOLDTL 0x004e71a0 */
+/* ADDRESS: GOLDDE 0x004d3940 */
 void __cdecl cut_InitCutsceneRegistry(void)
 {
 	int i;

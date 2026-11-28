@@ -6,6 +6,7 @@ int __cdecl sprintf(char*, const char*, ...);
 void __cdecl d3_TraverseSceneObjects(int, int, int, void (__cdecl*)(void));
 void __cdecl d3_InitBuildingSceneAnimRates(void);
 
+/* ADDRESS: GOLDDE 0x004fb840 */
 char __cdecl d3_LoadCityScene(const char* name)
 {
 	char path[256];

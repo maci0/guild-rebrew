@@ -26,6 +26,7 @@ void __cdecl d3_UpdateBuildingView(unsigned char*, int);
 void __cdecl d3_SetupInteriorScene(unsigned char*, int);
 void __cdecl d2_OpenContactEinkaufPanel(unsigned char*);
 
+/* ADDRESS: GOLDDE 0x0057f400 */
 void __cdecl d3_UpdateBuildingInteriorState(void)
 {
 	int x;

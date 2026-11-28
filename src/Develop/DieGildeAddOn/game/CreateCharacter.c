@@ -6,6 +6,7 @@ extern char* evt_CurrentScript;
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
+/* ADDRESS: GOLDDE 0x0040b740 */
 char* __cdecl CreateCharacter(char** a, float* b, float* c, float* d)
 {
 	float v[4];

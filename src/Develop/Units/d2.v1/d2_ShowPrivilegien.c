@@ -60,6 +60,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl main_RunFrameLoop(void*, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005d4a20 */
+/* ADDRESS: GOLDDE 0x005b6280 */
 void __cdecl d2_ShowPrivilegien(void)
 {
 	char* ptr;

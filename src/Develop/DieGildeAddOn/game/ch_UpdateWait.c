@@ -4,6 +4,7 @@ extern volatile int gm_GameTicks;
 
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 
+/* ADDRESS: GOLDDE 0x0040ac80 */
 void __cdecl ch_UpdateWait(char* entry)
 {
 	if (*(int*) (entry + 0xc) == 0) {

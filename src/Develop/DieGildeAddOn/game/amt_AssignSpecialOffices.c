@@ -47,6 +47,7 @@ void __cdecl amt_SendSpecialOfficeSlot(int a1);
 /* Rates every listed entity against the office record, then hands the highest
  * scoring owner to the office and notifies the other guild masters. */
 /* ADDRESS: GOLDTL 0x004ad6a0 */
+/* ADDRESS: GOLDDE 0x0049b9e0 */
 void __cdecl amt_AssignSpecialOffices(void)
 {
 	Hit4ad6a0 hits[4];

@@ -12,6 +12,7 @@ void __cdecl gm_CalcLaw0x0dTaxSlot(unsigned short id, int* out, int c);
 void __cdecl gm_CalcLaw0x0cTaxSlot(unsigned short id, int* out, int c);
 
 /* ADDRESS: GOLDTL 0x004fcb50 */
+/* ADDRESS: GOLDDE 0x004e8680 */
 int __cdecl gm_CalcEntityTaxSlots(unsigned short id, int* out, int flag)
 {
 	int offset;

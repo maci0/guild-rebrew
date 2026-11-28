@@ -31,6 +31,7 @@ float __cdecl gm_GetSeasonPrice(int id, unsigned char k);
 float __cdecl gm_CalcGoodBaseValue(int id);
 
 /* ADDRESS: GOLDTL 0x00486500 */
+/* ADDRESS: GOLDDE 0x004754b0 */
 void __cdecl ai_CalcProductionGoodProfit(PRODUCTION_GOODS_RECORD* good)
 {
 	GOODS_PLAN_ENTRY* ingredient;

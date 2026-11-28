@@ -26,6 +26,7 @@ void __cdecl ch_UpdateHeldObjectAttachment(struct ALLOC_CHAR_RECORD*);
 
 
 /* ADDRESS: GOLDTL 0x004cc590 */
+/* ADDRESS: GOLDDE 0x004b9d70 */
 int __cdecl fcn_004cc590(unsigned char* request, char* response)
 {
 	char* e;

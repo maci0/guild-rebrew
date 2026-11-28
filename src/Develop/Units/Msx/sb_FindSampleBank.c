@@ -5,6 +5,7 @@ extern int* sb_BankListHead;
 extern int sb_WaveDriver;
 extern char sb_NullSampleBank[];
 
+/* ADDRESS: GOLDDE 0x0041f740 */
 char* __cdecl sb_FindSampleBank(char* key)
 {
 	char* p;

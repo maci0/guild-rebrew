@@ -20,6 +20,7 @@ int __cdecl d2_GetControlValue(int);
 void __cdecl d2_ToggleMessageFilterFlag(int, int);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x005c5f90 */
 void __cdecl d2_RunMessageFilterDialog(void)
 {
 	int h;

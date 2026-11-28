@@ -46,6 +46,7 @@ union word4 {
 };
 
 #pragma optimize("y", off)
+/* ADDRESS: GOLDDE 0x0040eca0 */
 void __cdecl CreateEmitter(union word4 u, int* emitterKind, int* count, int* scale, int* parentNode, unsigned char* tagLow, unsigned char* tagFlag)
 {
 	int len;

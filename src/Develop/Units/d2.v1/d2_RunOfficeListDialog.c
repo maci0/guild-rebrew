@@ -45,6 +45,7 @@ int __cdecl main_RunFrameLoop(int, int);
 void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005cadc0 */
+/* ADDRESS: GOLDDE 0x005ac850 */
 char* __cdecl d2_RunOfficeListDialog(int officeKind, int arg1, int titleId, int fallbackTitleId, int (__cdecl* cb)(char*, int))
 {
 	D2_AMT_TARGET_ROW rec[8];

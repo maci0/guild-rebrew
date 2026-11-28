@@ -30,6 +30,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl d2_SetElementEnabled(int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
+/* ADDRESS: GOLDDE 0x005721b0 */
 void __cdecl d2_RefreshRentAGraveOptions(char* a, int dlg, int mode, int* ids, int* sel)
 {
 	char* s;

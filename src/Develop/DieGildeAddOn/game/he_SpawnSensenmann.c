@@ -18,6 +18,7 @@ typedef struct
 } VEC;
 
 /* ADDRESS: GOLDTL 0x00558370 */
+/* ADDRESS: GOLDDE 0x0053e6d0 */
 int __cdecl he_SpawnSensenmann(int action)
 {
     int savedContext;

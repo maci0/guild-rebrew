@@ -10,6 +10,7 @@ void __cdecl d3_UpdateFloorLighting(char* a0);
 long __stdcall D3DXCreateMeshFVF(int a0, int a1, int a2, int a3, char* a4, char* a5);
 
 /* ADDRESS: GOLDTL 0x0043b990 */
+/* ADDRESS: GOLDDE 0x00434740 */
 void __cdecl d3_RebuildFloorMeshes(char* terrainObject)
 {
 	char* rec;

@@ -1,3 +1,4 @@
+extern char* g_773d44;
 #include "../../Units/Error/error.h"
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
@@ -263,6 +264,7 @@ done2:
 
 /* ADDRESS: GOLDTL 0x004ffd90 */
 /* ADDRESS: GOLD 0x004fd5c0 */
+/* ADDRESS: GOLDDE 0x004eb7a0 */
 unsigned short __cdecl sim_FindAndMatchParents(unsigned int param)
 {
 	int weights[6];
@@ -363,6 +365,7 @@ int __cdecl sim_IsUnderage(int slot)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLD 0x004fd7e0 */
 /* ADDRESS: GOLDTL 0x004fffb0 */
+/* ADDRESS: GOLDDE 0x004eb9c0 */
 int __cdecl gm_CheckEntityAgeLimit(int index)
 {
 	unsigned short w;
@@ -448,6 +451,8 @@ char* __cdecl gm_FindAvailableResidence(int unused, int nearEntity)
  * tick to adjust entity processing order based on game state. */
 
 
+/* ADDRESS: GOLDDE 0x004ebbf0 */
+/* ADDRESS: SERVERDE 0x10013e80 */
 void __cdecl sim_PriorityUpdate(char* ctx, char* entity)
 {
 	unsigned short tmp[4];
@@ -514,6 +519,7 @@ unsigned char* __cdecl sim_ClaimResident(char* who, int kind, int group)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLDTL 0x00500240 */
 /* ADDRESS: GOLD 0x004fda70 */
+/* ADDRESS: GOLDDE 0x004ebc50 */
 Obj* __cdecl gm_FindAndReserveEntity(char* who, int kind, int group)
 {
 	int i;
@@ -557,6 +563,8 @@ found:
  * other entity categories based on the type selector. */
 
 
+/* ADDRESS: GOLDDE 0x004ebdf0 */
+/* ADDRESS: SERVERDE 0x10013ee0 */
 unsigned short* __cdecl sim_StartEntityQueryByType(unsigned char* arg1)
 {
 	unsigned short* result = 0;
@@ -637,6 +645,7 @@ char* __cdecl sim_NextServiceBuilding(char* entity, int* id, int* sub)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLDTL 0x00500480 */
 /* ADDRESS: GOLD 0x004fdcb0 */
+/* ADDRESS: GOLDDE 0x004ebe90 */
 char* __cdecl gm_FindFallbackPublicBuilding(char* entity, int* id, int* sub)
 {
 	char* found_ent;
@@ -712,6 +721,7 @@ error:
 
 #if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
 /* ADDRESS: GOLDTL 0x00500580 */
+/* ADDRESS: GOLDDE 0x004ebf90 */
 char* __cdecl sim_CreateCitizenClient(unsigned char flags, int a2, int a3, int a4, int a5,
 	char* queryEntity)
 {
@@ -875,6 +885,7 @@ void __cdecl sim_LoadBmpShape(char* path)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLDTL 0x00500900 */
 /* ADDRESS: GOLD 0x004fde90 */
+/* ADDRESS: GOLDDE 0x004ec070 */
 void __cdecl init_LoadCharacterNames(void)
 {
 	char path[260];
@@ -909,11 +920,12 @@ void __cdecl init_LoadCharacterNames(void)
 
 #if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
 /* ADDRESS: GOLDTL 0x00500a20 */
+/* ADDRESS: GOLDDE 0x004ec190 */
 void __cdecl gm_FreeBuffer773d44(void)
 {
-	if (*(int*) 0x773d44 != 0) {
-		m_FreeTracked((void*) *(int*) 0x773d44);
-		*(int*) 0x773d44 = 0;
+	if (*(int*) &g_773d44 != 0) {
+		m_FreeTracked((void*) *(int*) &g_773d44);
+		*(int*) &g_773d44 = 0;
 	}
 }
 #endif
@@ -933,6 +945,7 @@ void __cdecl gm_FreeBuffer773d44(void)
 
 #if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
 /* ADDRESS: GOLDTL 0x00500a40 */
+/* ADDRESS: GOLDDE 0x004ec1b0 */
 void __cdecl gm_CollectPopulationStats(void)
 {
 	char* p;
@@ -1039,6 +1052,7 @@ void __cdecl sim_AdvanceGameClock(SIM_CLOCK* clock, int arg2, int arg3, int arg4
 #if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
 #pragma optimize("a", on)
 /* ADDRESS: GOLDTL 0x00500bb0 */
+/* ADDRESS: GOLDDE 0x004ec320 */
 void __cdecl gm_AddTime(Time* clock, int arg2, int arg3, int arg4)
 {
 	unsigned short* p4 = &clock->hour;
@@ -1106,6 +1120,8 @@ void __cdecl gm_AddTime(TIME_4FE140* clock, int hours, int minutes, int seconds)
 
 /* ADDRESS: GOLDTL 0x00500c50 */
 /* ADDRESS: GOLD 0x004fe1e0 */
+/* ADDRESS: GOLDDE 0x004ec3c0 */
+/* ADDRESS: SERVERDE 0x100140c0 */
 void __cdecl sim_SetSyncParams(int target, unsigned char type_id, unsigned int field_6, unsigned int field_10)
 {
 	*(unsigned int*) (target + 10) = field_10 & 0xff;

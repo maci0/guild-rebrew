@@ -27,6 +27,7 @@ char* __cdecl ch_AttachAni(char* e, char* name, int flag);
 #include "Develop/Units/Error/error_message.h"
 void __cdecl ch_UpdateFades(void);
 
+/* ADDRESS: GOLDDE 0x00405050 */
 int __cdecl ch_Update(void)
 {
 	char** p;

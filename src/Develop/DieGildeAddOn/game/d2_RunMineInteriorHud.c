@@ -14,6 +14,7 @@ int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_ShowProductionDialog(int);
 void __cdecl d2_RunProductionTradeDialog(int);
 
+/* ADDRESS: GOLDDE 0x00581a00 */
 void __cdecl d2_RunMineInteriorHud(int a)
 {
 	int x;

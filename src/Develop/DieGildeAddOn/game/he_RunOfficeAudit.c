@@ -19,6 +19,7 @@ void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl he_FreeAction(void*);
 
 /* ADDRESS: GOLDTL 0x0055a0b0 */
+/* ADDRESS: GOLDDE 0x005403f0 */
 void __cdecl he_RunOfficeAudit(char* action)
 {
 	int cnt;

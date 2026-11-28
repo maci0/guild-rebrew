@@ -124,6 +124,7 @@ char __cdecl d3_GetObjectBoundingSphere(D3_BOUNDING_OBJ* o, int arg, D3_SPHERE_V
 }
 #else
 /* ADDRESS: GOLDTL 0x0043a820 */
+/* ADDRESS: GOLDDE 0x004335e0 */
 char __cdecl d3_GetObjectBoundingSphere(D3_BOUNDING_OBJ* o, char* arg, D3_SPHERE_VEC4* out, float* radius)
 {
 	D3_BOUNDING_CTX* ctx;

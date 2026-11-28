@@ -4,6 +4,7 @@
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
+/* ADDRESS: GOLDDE 0x005aae90 */
 int __cdecl d2_ClampAmountToRange(int lo, int v, int n, int* out)
 {
 	int hi;

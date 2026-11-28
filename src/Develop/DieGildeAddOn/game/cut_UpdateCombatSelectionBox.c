@@ -21,6 +21,7 @@ void __cdecl d3_SetObjectGreyTint(int, int);
 void __cdecl cut_ClearStatusOverlaySlots(void);
 
 /* ADDRESS: GOLDTL 0x004d1790 */
+/* ADDRESS: GOLDDE 0x004bea80 */
 void __cdecl cut_UpdateCombatSelectionBox(int a0)
 {
 	char** q;

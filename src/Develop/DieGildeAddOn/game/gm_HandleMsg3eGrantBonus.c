@@ -11,6 +11,7 @@ void __cdecl he_PostEntityMessage(int, int, void *, int, int, void *);
 int __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 
 /* ADDRESS: GOLDTL 0x004bb720 */
+/* ADDRESS: GOLDDE 0x004a9790 */
 unsigned int __cdecl gm_HandleMsg3eGrantBonus(void *request)
 {
     char buf[1024];

@@ -27,6 +27,7 @@ typedef long (__stdcall* D3_CREATE_IB_FN)(D3D_DEVICE_VIEW*, unsigned int, unsign
 
 extern unsigned long d3_LastReleaseRefCount;
 
+/* ADDRESS: GOLDDE 0x0044f1d0 */
 void __cdecl d3_CreateSkyDomeBuffers(IUnk** o)
 {
 	IUnk** ib;

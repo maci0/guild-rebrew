@@ -23,6 +23,7 @@ extern char gm_EntitySlotTable[];
 void* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl FindStraftatIndexById(int b);
 
+/* ADDRESS: GOLDDE 0x004e2250 */
 int __cdecl gs_CollectEvidenceForTarget(int targetId, int* outIds, unsigned short holderSlot)
 {
 	char* holder;

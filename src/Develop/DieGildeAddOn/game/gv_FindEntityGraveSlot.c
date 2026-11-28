@@ -6,6 +6,7 @@ extern unsigned char* lpGebaeudePROT;
 void* __cdecl FindSlotEntryFiltered(int a, unsigned char* rec, void* prev, void* filter, int mask);
 int __cdecl gm_SameEntityId(void);
 
+/* ADDRESS: GOLDDE 0x004e07a0 */
 int __cdecl gv_FindEntityGraveSlot(int entity, unsigned char** out_building, void** out_slot)
 {
 	unsigned char* rec;

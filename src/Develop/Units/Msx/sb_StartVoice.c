@@ -11,6 +11,7 @@ void __cdecl msx_SetSampleLoopCount(int a0, int a1);
 void __cdecl msx_StartSample(int a0);
 
 /* ADDRESS: GOLDTL 0x00423670 */
+/* ADDRESS: GOLDDE 0x00420400 */
 int __cdecl sb_StartVoice(int* voice, int fade_in, int limit)
 {
 	int result;

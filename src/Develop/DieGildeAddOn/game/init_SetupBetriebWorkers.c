@@ -59,6 +59,7 @@ Site* __cdecl gm_FindBuildingPrimarySlot(Player*);
 void __cdecl cm_RequestChrMoveToUniverse(int, int, int, char*);
 void __cdecl init_Betrieb(Player*);
 
+/* ADDRESS: GOLDDE 0x004fd8c0 */
 void __cdecl init_SetupBetriebWorkers(Player* p)
 {
 	BUILDING_PROTOTYPE * o;

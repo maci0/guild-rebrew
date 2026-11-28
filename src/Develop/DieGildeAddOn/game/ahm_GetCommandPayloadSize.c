@@ -3,6 +3,7 @@
 // the code.
 
 /* ADDRESS: GOLDTL 0x004c3a50 */
+/* ADDRESS: GOLDDE 0x004b1500 */
 int __cdecl ahm_GetCommandPayloadSize(unsigned char* cmd_payload)
 {
 	int count;

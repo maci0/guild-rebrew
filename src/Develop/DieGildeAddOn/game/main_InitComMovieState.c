@@ -11,6 +11,7 @@ int __cdecl main_InitComMovieState(void)
 }
 #else
 /* ADDRESS: GOLDTL 0x0041e620 */
+/* ADDRESS: GOLDDE 0x0041c050 */
 int __cdecl main_InitComMovieState(void)
 {
 	((void* (__stdcall*)(int)) *(void**) 0x662470)(0);

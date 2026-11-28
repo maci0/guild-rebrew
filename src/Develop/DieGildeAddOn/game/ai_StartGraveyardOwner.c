@@ -27,6 +27,7 @@ int __cdecl ai_PlanGraveyardAction0x90(char* e, char* q, Blk24* b1, Blk24* b2);
 int __cdecl ai_PlanHauchDesVerfalls(char* e, char* q, Blk24* b1, Blk24* b2);
 int __cdecl ai_PlanDeathPact(char* e, char* q, Blk24* b1, Blk24* b2);
 
+/* ADDRESS: GOLDDE 0x0047eb00 */
 int __cdecl ai_StartGraveyardOwner(int a1, char* e, int a3, Blk24* o1, Blk24* o2)
 {
 	char* target;

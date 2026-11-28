@@ -10,6 +10,7 @@ int sprintf(char* buf, const char* fmt, ...);
 int __cdecl txt_FindEntryIndex(const char* name);
 
 /* ADDRESS: GOLDTL 0x00524040 */
+/* ADDRESS: GOLDDE 0x0050d310 */
 int __cdecl fcn_00524040(void* stream)
 {
 	char buf[256];

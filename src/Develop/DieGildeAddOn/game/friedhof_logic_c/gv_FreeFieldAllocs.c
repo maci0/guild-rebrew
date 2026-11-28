@@ -8,6 +8,7 @@ extern void __cdecl m_FreeTracked(void* ptr);
  * (0x4f2060) calls this; the +0x24/+0x28 variant that gv_Free3Fields
  * (0x45b790) frees belongs to a different structure. */
 
+/* ADDRESS: GOLDDE 0x004de350 */
 void __cdecl gv_FreeFieldAllocs(int* slot)
 {
 	if (slot == 0) {

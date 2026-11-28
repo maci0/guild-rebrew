@@ -14,6 +14,7 @@ void __cdecl evt_ParseScript(char* s);
 void __cdecl evt_LogScriptError(char* g, char* pos, const char* msg);
 int __cdecl evt_RequestScriptExit(char* c);
 
+/* ADDRESS: GOLDDE 0x00421ee0 */
 void __cdecl evt_IncludeScript(void)
 {
 	Token tok;

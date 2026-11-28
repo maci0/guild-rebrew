@@ -102,6 +102,7 @@ float __cdecl d3_CalcFloorFogDistance(float* floor, float* camPos, float* camRot
  * literals. */
 
 /* ADDRESS: GOLDTL 0x004424c0 */
+/* ADDRESS: GOLDDE 0x0043a910 */
 float __cdecl d3_CalcFloorFogDistance(float* floor, float* camPos, float* camRot)
 {
 	float* tp;

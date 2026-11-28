@@ -6,6 +6,7 @@ extern int g_6b7d70;
 char* __cdecl sb_FindOldestUnusedSample(void);
 void __cdecl m_FreeTracked(void* p);
 
+/* ADDRESS: GOLDDE 0x0041f790 */
 int __cdecl sb_EnsureSampleMemory(int need)
 {
 	char* s;

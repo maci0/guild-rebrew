@@ -3,6 +3,7 @@
 
 extern int* d2_TutorialState;
 
+/* ADDRESS: GOLDDE 0x005658c0 */
 int __cdecl d2_CheckTutCh5Msg29Node155Gate(int* msg)
 {
 	int* g;

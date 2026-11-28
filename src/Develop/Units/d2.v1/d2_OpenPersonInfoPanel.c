@@ -43,6 +43,7 @@ int __cdecl d2_AddWindowValueGauge(int a, int b, int c, int d, int e, int f, int
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl d2_DrawSegmentedBar(int x, int y, int v, int kind);
 
+/* ADDRESS: GOLDDE 0x00517140 */
 void __cdecl d2_OpenPersonInfoPanel(char* e)
 {
 	char buf[512];

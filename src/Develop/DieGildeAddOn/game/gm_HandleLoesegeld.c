@@ -1,3 +1,4 @@
+extern char g_7f4c00[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int cm_PacketDeltaBase;
 extern unsigned char gm_ActiveTownIndex;
@@ -27,6 +28,7 @@ int __cdecl he_StartHandlungSearch(int, int, int);
 int __cdecl gm_RandomMod(int);
 
 /* ADDRESS: GOLDTL 0x00569a90 */
+/* ADDRESS: GOLDDE 0x0054fad0 */
 void __cdecl gm_HandleLoesegeld(char* action)
 {
 	unsigned short* v3;
@@ -41,7 +43,7 @@ void __cdecl gm_HandleLoesegeld(char* action)
 	if (v3 != 0 && v4 != 0) {
 		if (*(char*) ((char*) v3 + 2) != 6 && *(char*) ((char*) v3 + 2) != 7) {
 			if (*(int*) (action + 0x70) == 0 || *(int*) (action + 0x70) == 2) {
-				if (gm_CompareGameTime(action + 0x52, (void*) (char*) 0x7f4c00) > 0)
+				if (gm_CompareGameTime(action + 0x52, (void*) (char*) &g_7f4c00) > 0)
 					return;
 				*(int*) (action + 0x70) = 2;
 			}

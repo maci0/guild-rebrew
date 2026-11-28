@@ -1,3 +1,4 @@
+extern char g_68b7a0[];
 int __cdecl d2_FreeWindowSlot(int);
 void __cdecl d2_DestroyForm(int);
 
@@ -14,11 +15,12 @@ void __cdecl d2_DestroyHudForm(void)
 }
 #else
 /* ADDRESS: GOLDTL 0x004d0050 */
+/* ADDRESS: GOLDDE 0x004bd340 */
 void __cdecl d2_DestroyHudForm(void)
 {
-	if (*(int*) 0x68b7a0 != -1) {
-		d2_DestroyForm(*(int*) 0x68b7a0);
-		*(int*) 0x68b7a0 = -1;
+	if (*(int*) &g_68b7a0 != -1) {
+		d2_DestroyForm(*(int*) &g_68b7a0);
+		*(int*) &g_68b7a0 = -1;
 	}
 }
 #endif

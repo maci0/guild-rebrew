@@ -13,6 +13,7 @@ int __cdecl msx_StartStream(int h);
 int __cdecl msx_SetStreamMsPosition(int h, int pos);
 int __cdecl msx_SetStreamLoopCount(int h, int f);
 
+/* ADDRESS: GOLDDE 0x0041cc20 */
 void __cdecl msx_SetTrackVolume(Chan_14cc460* p, int a2)
 {
 	if (msx_TrackDriver != 0 && p != 0) {
@@ -28,6 +29,7 @@ void __cdecl msx_SetTrackVolume(Chan_14cc460* p, int a2)
 	}
 }
 
+/* ADDRESS: GOLDDE 0x0041cd80 */
 Chan_14cc460* __cdecl msx_StartTrack(const char* name, int restart)
 {
 	Chan_14cc460* c;
@@ -54,6 +56,7 @@ Chan_14cc460* __cdecl msx_StartTrack(const char* name, int restart)
 	return c;
 }
 
+/* ADDRESS: GOLDDE 0x0041ce20 */
 int __cdecl msx_StartTrackInternal(Chan_14cc460* c, int restart)
 {
 	char path[0x100];
@@ -138,6 +141,7 @@ int __cdecl msx_StartTrackInternal(Chan_14cc460* c, int restart)
 	return 0;
 }
 
+/* ADDRESS: GOLDDE 0x0041d0e0 */
 void __cdecl msx_StopTrack(Chan_14cc460* hTrack, int fade)
 {
     if (msx_TrackDriver != 0) {
@@ -156,6 +160,7 @@ void __cdecl msx_StopTrack(Chan_14cc460* hTrack, int fade)
     }
 }
 
+/* ADDRESS: GOLDDE 0x0041d540 */
 Chan_14cc460* __cdecl FindTrackByName(const char* name)
 {
 	int i;
@@ -168,6 +173,7 @@ Chan_14cc460* __cdecl FindTrackByName(const char* name)
 	return 0;
 }
 
+/* ADDRESS: GOLDDE 0x0041d5b0 */
 Chan_14cc460* __cdecl msx_FindActiveTrack(void)
 {
 	int i;
@@ -180,6 +186,7 @@ Chan_14cc460* __cdecl msx_FindActiveTrack(void)
 	return 0;
 }
 
+/* ADDRESS: GOLDDE 0x0041d5f0 */
 Chan_14cc460* __cdecl FindFreeTrack(void)
 {
 	int i;
@@ -197,6 +204,7 @@ Chan_14cc460* __cdecl FindFreeTrack(void)
 	return 0;
 }
 
+/* ADDRESS: GOLDDE 0x0041d660 */
 void __cdecl msx_StartTrackFade(Chan_14cc460* hTrack, int mode)
 {
     if (hTrack == 0) {
@@ -214,11 +222,13 @@ void __cdecl msx_StartTrackFade(Chan_14cc460* hTrack, int mode)
     hTrack->f114 = mode;
 }
 
+/* ADDRESS: GOLDDE 0x0041d6c0 */
 void __cdecl SetTrackPath(const char* path)
 {
 	strcpy(msx_TrackPath, path);
 }
 
+/* ADDRESS: GOLDDE 0x0041d6e0 */
 Chan_14cc460* __cdecl msx_StartAmbientTrack(const char* name, int a)
 {
 	Chan_14cc460* c;
@@ -251,6 +261,7 @@ Chan_14cc460* __cdecl msx_StartAmbientTrack(const char* name, int a)
 	return 0;
 }
 
+/* ADDRESS: GOLDDE 0x0041d7a0 */
 void __cdecl msx_StopAmbientTrack(Chan_14cc460* hTrack)
 {
     if (msx_AmbientDriver != 0) {

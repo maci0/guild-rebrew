@@ -53,6 +53,7 @@ void __cdecl gm_AddTime(GAME_TIMESTAMP*, int, int, int);
 void __cdecl cm_SendCopyEntityData(CITIZENSHIP_MSG*);
 
 #pragma optimize("y", off)
+/* ADDRESS: GOLDDE 0x00488510 */
 int __cdecl ai_RunBuergerrecht(char* entity)
 {
 	CITIZENSHIP_MSG m;

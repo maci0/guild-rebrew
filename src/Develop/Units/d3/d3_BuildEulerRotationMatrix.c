@@ -3,6 +3,7 @@
 
 #include <math.h>
 
+/* ADDRESS: GOLDDE 0x004474e0 */
 void __cdecl d3_BuildEulerRotationMatrix(float* a, float* m)
 {
 	float sx;

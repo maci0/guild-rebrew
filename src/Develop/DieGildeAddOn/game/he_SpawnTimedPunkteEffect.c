@@ -14,6 +14,7 @@ void __cdecl d3_CreateObjectParticleEffect(int, char*, int, struct EFFECT_RGBA, 
 
 
 /* ADDRESS: GOLDTL 0x00557f70 */
+/* ADDRESS: GOLDDE 0x0053e2d0 */
 void __cdecl he_SpawnTimedPunkteEffect(char* o)
 {
 	struct EFFECT_RGBA c;

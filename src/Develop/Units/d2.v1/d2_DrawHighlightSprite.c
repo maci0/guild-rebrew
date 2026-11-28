@@ -8,6 +8,7 @@ int __cdecl d2_DrawTintedSprite(int, int, int, float, unsigned char, unsigned ch
 
 
 /* ADDRESS: GOLDTL 0x0047ccd0 */
+/* ADDRESS: GOLDDE 0x0046bca0 */
 int __cdecl d2_DrawHighlightSprite(int x, int y, int unusedSurf, D2_HIGHLIGHT_SPRITE_SET* s, int idx)
 {
 	if (s == 0)

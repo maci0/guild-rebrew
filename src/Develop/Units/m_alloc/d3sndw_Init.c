@@ -11,6 +11,7 @@ extern char g_67779c[];
 void* __cdecl m_alloc(int size, char* tag);
 void __cdecl m_FreeTracked(void* p);
 
+/* ADDRESS: GOLDDE 0x004171c0 */
 int __cdecl d3sndw_Init(unsigned short n)
 {
 	int cnt;

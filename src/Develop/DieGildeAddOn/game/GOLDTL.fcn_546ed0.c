@@ -2,6 +2,7 @@
 // fcn_0053f100 — for each 0xa4-strided byte: if(--*p==0) *(p-4)=0.
 
 /* ADDRESS: GOLDTL 0x00546ed0 */
+/* ADDRESS: GOLDDE 0x0052d4c0 */
 void __cdecl he_TickEventDeals(void)
 {
 	int p;

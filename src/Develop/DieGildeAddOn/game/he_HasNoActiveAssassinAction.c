@@ -5,6 +5,7 @@ extern int g_14b52fc;
 void* __cdecl he_HasActiveAction0x99(int);
 void __cdecl d2_ShowModalMessageBox(int, int);
 
+/* ADDRESS: GOLDDE 0x0056f5b0 */
 int __cdecl he_HasNoActiveAssassinAction(void* entry)
 {
 	void* match;

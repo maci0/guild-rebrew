@@ -11,6 +11,7 @@ typedef struct Buf18 {
 int __cdecl ai_SelectPrivTarget(int, int, int, void*, void*);
 
 /* ADDRESS: GOLDTL 0x0049d180 */
+/* ADDRESS: GOLDDE 0x0048bbc0 */
 int __cdecl ai_StartUsePrivs(int a1, int a2, int a3, void* firstOut, void* secondOut)
 {
 	Buf18 b1;

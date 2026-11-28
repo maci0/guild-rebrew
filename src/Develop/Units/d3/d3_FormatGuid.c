@@ -11,6 +11,7 @@ typedef struct {
 	unsigned char d4[8];
 } Guid;
 
+/* ADDRESS: GOLDDE 0x00418f20 */
 char* __cdecl d3_FormatGuid(Guid* guid, char* out)
 {
 	char* r;

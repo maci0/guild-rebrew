@@ -7,6 +7,7 @@ int __cdecl _strnicmp(char*, char*, int);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 #include "Develop/Units/d3/client_scene_transform.h"
 
+/* ADDRESS: GOLDDE 0x004aba30 */
 char __cdecl d3_MatchObjectByNameAndPos(char* e, char* obj)
 {
 	float v[4];

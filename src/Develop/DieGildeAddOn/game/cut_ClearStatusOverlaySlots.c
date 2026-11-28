@@ -16,6 +16,7 @@ void __cdecl d2_DestroyHudForm(void);
 
 
 /* ADDRESS: GOLDTL 0x004d1910 */
+/* ADDRESS: GOLDDE 0x004bec00 */
 void __cdecl cut_ClearStatusOverlaySlots(void)
 {
 	int i;

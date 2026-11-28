@@ -11,6 +11,7 @@ void __cdecl sb_SetVoiceLoopCount(char*, int);
 void __cdecl d3snd_PlaySource(char*, int, int, int);
 
 
+/* ADDRESS: GOLDDE 0x00416e10 */
 void __cdecl d3_UpdateSoundSourceVolume(SOUND_SOURCE* source)
 {
     float position[4];

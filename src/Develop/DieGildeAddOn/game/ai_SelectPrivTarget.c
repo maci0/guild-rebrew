@@ -19,6 +19,7 @@ extern int __cdecl ai_PreparePrivFurchtEinfloessen(int a0, int obj, void *rec, c
 extern int __cdecl ai_PreparePrivWerbung(int a0, int obj, void *rec, char *out, int a4);
 
 /* ADDRESS: GOLDTL 0x004aa240 */
+/* ADDRESS: GOLDDE 0x00498580 */
 unsigned int __cdecl ai_SelectPrivTarget(int unused0, int entity, int unused2, char *request, int extraOut)
 {
     int n;

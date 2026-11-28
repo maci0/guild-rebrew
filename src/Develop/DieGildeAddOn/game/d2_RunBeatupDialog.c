@@ -1,3 +1,4 @@
+extern char g_6ac494[];
 int __cdecl gm_CalcPersonWealth(unsigned short id);
 int __cdecl gm_CheckPrivilege(int, int, void*);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
@@ -26,6 +27,7 @@ extern int io_RightButtonReleased;
 extern int d2_CurrentElementId;
 extern int d2_DialogCloseRequested;
 /* ADDRESS: GOLDTL 0x005bf9e0 */
+/* ADDRESS: GOLDDE 0x005a1e20 */
 int __cdecl d2_RunBeatupDialog(unsigned short* entity)
 {
 	unsigned int data[136];
@@ -49,7 +51,7 @@ int __cdecl d2_RunBeatupDialog(unsigned short* entity)
 	data[0] = 1;
 	r = gm_CalcPersonWealth(*(unsigned short*) (timeout * 0x21c + (unsigned long)&gm_EntitySlotTable));
 	timeout = (int) ((float) r * 0.0085f);
-	if (gm_CheckPrivilege(0x1b, *(unsigned short*) &gm_LocalPlayerSlot * 0x21c + 0x7f4ca0, data) & 2) {
+	if (gm_CheckPrivilege(0x1b, *(unsigned short*) &gm_LocalPlayerSlot * 0x21c + (int) &gm_EntitySlotTable, data) & 2) {
 		timeout /= 2;
 	}
 	query = he_StartHandlungSearch(2, 2, *(unsigned short*) &gm_LocalPlayerSlot, 0, 0x1a);
@@ -61,25 +63,25 @@ int __cdecl d2_RunBeatupDialog(unsigned short* entity)
 		}
 		query = he_fn_Handlung();
 	}
-	if (!gm_CheckEntityStock(*(unsigned short*) &gm_LocalPlayerSlot * 0x21c + 0x7f4ca0, timeout, *(char*) &gm_ActiveTownIndex)) {
+	if (!gm_CheckEntityStock(*(unsigned short*) &gm_LocalPlayerSlot * 0x21c + (int) &gm_EntitySlotTable, timeout, *(char*) &gm_ActiveTownIndex)) {
 		return 0;
 	}
-	if (!he_HasNoActiveEvent04b(entity, *(unsigned short*) &gm_LocalPlayerSlot * 0x21c + 0x7f4ca0)) {
+	if (!he_HasNoActiveEvent04b(entity, *(unsigned short*) &gm_LocalPlayerSlot * 0x21c + (int) &gm_EntitySlotTable)) {
 		io_FormatTextBuffer((char*) evt, 0x170b, *entity);
 		d2_ShowModalMessageBox((char*) evt, 0);
 		return 0;
 	}
-	if (!he_HasNoActiveAction0x2e(entity, *(unsigned short*) &gm_LocalPlayerSlot * 0x21c + 0x7f4ca0)) {
+	if (!he_HasNoActiveAction0x2e(entity, *(unsigned short*) &gm_LocalPlayerSlot * 0x21c + (int) &gm_EntitySlotTable)) {
 		io_FormatTextBuffer((char*) evt, 0x170c, *entity);
 		d2_ShowModalMessageBox((char*) evt, 0);
 		return 0;
 	}
-	if (!he_HasNoActiveAction0x88(entity, *(unsigned short*) &gm_LocalPlayerSlot * 0x21c + 0x7f4ca0)) {
+	if (!he_HasNoActiveAction0x88(entity, *(unsigned short*) &gm_LocalPlayerSlot * 0x21c + (int) &gm_EntitySlotTable)) {
 		io_FormatTextBuffer((char*) evt, 0x409f);
 		d2_ShowModalMessageBox((char*) evt, 0);
 		return 0;
 	}
-	hwnd = d2_LoadForm(0, 0, (char*) 0x6ac494);
+	hwnd = d2_LoadForm(0, 0, (char*) &g_6ac494);
 	d2_CenterDialogWindows(hwnd);
 	d2_SetForm(hwnd, 1);
 	d2_SetOverlayAnimation(0, 0);
@@ -97,7 +99,7 @@ int __cdecl d2_RunBeatupDialog(unsigned short* entity)
 	t[4] = 3;
 	t[5] = 0x15;
 	d2_DrawLawCandidateStatus(t);
-	while (main_RunFrameLoop(0x5bf9e0, 0x677c7)) {
+	while (main_RunFrameLoop((int) d2_RunBeatupDialog, 0x677c7)) {
 		if (io_RightButtonReleased || *(int*) &d2_DialogButtonAction == 1) {
 			d2_DialogCloseRequested = 1;
 		}
@@ -109,9 +111,9 @@ int __cdecl d2_RunBeatupDialog(unsigned short* entity)
 			*(unsigned int*) (evt + 0x84) = timeout;
 			*(unsigned int*) (evt + 0x60) = *(unsigned int*) (entity + 2);
 			*(unsigned int*) (evt + 0x58) = gm_SelectRandomEntityCandidate(entity);
-			cm_SendLogAction((char*) 0x6ac4c0);
+			cm_SendLogAction((char*) ((int) &g_6ac494 + 0x2c));
 			cm_SendCopyEntityData(evt);
-			cm_SendTraceEnd((char*) 0x6ac4c0);
+			cm_SendTraceEnd((char*) ((int) &g_6ac494 + 0x2c));
 			io_FormatTextBuffer(text, 0x1709, *entity);
 			d2_ShowModalMessageBox(text, 0);
 			d2_DialogCloseRequested = 1;

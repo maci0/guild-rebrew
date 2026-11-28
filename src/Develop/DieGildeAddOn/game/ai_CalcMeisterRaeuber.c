@@ -45,6 +45,7 @@ void __cdecl ai_DispatchWorkerRecovery(char*);
 void __cdecl ai_CalcAngriff(char*, int);
 
 /* ADDRESS: GOLDTL 0x004823c0 */
+/* ADDRESS: GOLDDE 0x00471370 */
 void __cdecl ai_CalcMeisterRaeuber(char* meister)
 {
 	char buf[0x400];

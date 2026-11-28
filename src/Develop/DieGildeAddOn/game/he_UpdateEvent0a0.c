@@ -22,6 +22,7 @@ void __cdecl he_AwardEvent0a0Bonus(char*);
 int __cdecl cm_SendSetHE(int, char*);
 
 /* ADDRESS: GOLDTL 0x0057cbc0 */
+/* ADDRESS: GOLDDE 0x005629f0 */
 void __cdecl he_UpdateEvent0a0(char* p)
 {
     char buf[0x400];

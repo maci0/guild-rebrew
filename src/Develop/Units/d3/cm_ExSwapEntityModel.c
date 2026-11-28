@@ -12,6 +12,7 @@ char* __cdecl d3_CreateSceneModelObject(int, float*, float*, char*);
 
 
 /* ADDRESS: GOLDTL 0x004cc030 */
+/* ADDRESS: GOLDDE 0x004b9810 */
 int __cdecl cm_ExSwapEntityModel(char* cmd, char* result)
 {
 	char* o;

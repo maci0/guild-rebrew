@@ -23,6 +23,7 @@ int __cdecl d2_OpenTargetPicker(Req*, char*, int, void*);
 void __cdecl d3_EndCameraAndUiMode(void);
 void __cdecl d2_RunPaymentTargetDialog(void);
 
+/* ADDRESS: GOLDDE 0x005a2ab0 */
 void __cdecl d2_OpenPaymentTargetPicker(void)
 {
 	Req req;

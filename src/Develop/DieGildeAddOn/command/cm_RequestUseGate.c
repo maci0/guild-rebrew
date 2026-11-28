@@ -3,6 +3,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b37e0 */
 void __cdecl cm_RequestUseGate(int actorId, int buildingId, int value)
 {
 	char buf[0x9c];

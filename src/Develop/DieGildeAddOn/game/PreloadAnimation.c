@@ -7,6 +7,7 @@ extern char str_PreloadAnimation_Invalid_character[];
 void __cdecl ch_PreloadCharacterMotions(void*, int, int, int, int, int);
 void __cdecl evt_LogScriptError(void*, int, char*);
 
+/* ADDRESS: GOLDDE 0x0040c870 */
 int __cdecl PreloadAnimation(void** objectRef, int* a2, int* a3, int* a4, int* a5)
 {
 	void* object;

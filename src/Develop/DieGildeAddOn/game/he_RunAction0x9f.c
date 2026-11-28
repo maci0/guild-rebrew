@@ -3,6 +3,7 @@
 
 int __cdecl he_FreeAction(int*);
 
+/* ADDRESS: GOLDDE 0x00562700 */
 int __cdecl he_RunAction0x9f(int* event)
 {
 	int state;

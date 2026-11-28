@@ -257,6 +257,7 @@ void __cdecl gm_GetLawEntry(int, int*);
 #endif
 
 #if defined(REBREW_SERVER)
+/* ADDRESS: SERVERDE 0x10008cb0 */
 int __stdcall DllMain(int a, int b, int c)
 {
 	return 1;
@@ -931,6 +932,7 @@ cleanup_wsa:
 
 
 #if defined(REBREW_SERVER)
+/* ADDRESS: SERVERDE 0x100097d0 */
 void __cdecl srv_CleanupSockets(void)
 {
 	int slot_walk;
@@ -1395,6 +1397,7 @@ done:
 void __cdecl list_unlink_relink(char* ctx, char* node);
 
 #pragma optimize("w", on)
+/* ADDRESS: SERVERDE 0x10009f70 */
 int __cdecl ProcessSendData(void)
 {
 	unsigned char* slot_cursor;
@@ -1498,6 +1501,7 @@ int __cdecl srv_PutConnSCommand(unsigned int* player_slot, unsigned char* cmd_da
 /* Unlinks a node from its current position in a doubly-linked
  * list and relinks it at the head. Used for LRU ordering. */
 
+/* ADDRESS: SERVERDE 0x1000a140 */
 void __cdecl list_unlink_relink(char* ctx, char* node)
 {
 	int prev;
@@ -1801,6 +1805,7 @@ void __cdecl srv_FormatStatDumpBegin(void)
 
 #if !defined(REBREW_SERVER)
 /* Name and unit inferred from the adjacent client statistic formatters. */
+/* ADDRESS: GOLDDE 0x004d3ab0 */
 void __cdecl srv_FormatStatIdentity(unsigned char* entity, char* out)
 {
 	char* name;
@@ -1817,6 +1822,7 @@ void __cdecl srv_FormatStatIdentity(unsigned char* entity, char* out)
 }
 #endif
 
+/* ADDRESS: GOLDDE 0x004d3b50 */
 void __cdecl srv_FormatStatAttributes(char* entity, char* out)
 {
 	unsigned int f;
@@ -1834,6 +1840,7 @@ void __cdecl srv_FormatStatAttributes(char* entity, char* out)
 	    (f >> 25) & 0xf);
 }
 
+/* ADDRESS: GOLDDE 0x004d3c10 */
 void __cdecl srv_FormatStatSkills(unsigned char* entity, char* out)
 {
 #if defined(REBREW_SERVER) && defined(REBREW_LEGACY_SERVER_LAYOUT)
@@ -1845,6 +1852,7 @@ void __cdecl srv_FormatStatSkills(unsigned char* entity, char* out)
 
 #if !defined(REBREW_SERVER)
 /* Name and unit inferred from the adjacent client statistic formatters. */
+/* ADDRESS: GOLDDE 0x004d3c60 */
 void __cdecl srv_FormatStatAemter(unsigned char* entity, char* out)
 {
 	sprintf(out, "%s\t%s\t%s\t%s\t",
@@ -1855,6 +1863,7 @@ void __cdecl srv_FormatStatAemter(unsigned char* entity, char* out)
 
 #if !(defined(REBREW_SERVER) && defined(REBREW_LEGACY_SERVER_LAYOUT))
 /* Name and unit inferred from the adjacent client statistic formatters. */
+/* ADDRESS: GOLDDE 0x004d3cc0 */
 void __cdecl srv_FormatStatTreasury(unsigned short* entity, char* out)
 {
 	int __cdecl gm_AccumulateTyped2(char* entity);
@@ -1868,6 +1877,7 @@ void __cdecl srv_FormatStatTreasury(unsigned short* entity, char* out)
 #endif
 
 #if !defined(REBREW_SERVER)
+/* ADDRESS: GOLDDE 0x004d3d20 */
 void __cdecl srv_FormatStatFamily(char* x, char* out)
 {
 	char buf[0x100];
@@ -1888,6 +1898,7 @@ void __cdecl srv_FormatStatFamily(char* x, char* out)
 #endif
 
 #if !defined(REBREW_SERVER)
+/* ADDRESS: GOLDDE 0x004d3dc0 */
 void __cdecl srv_FormatStatEntity(unsigned short* e)
 {
 	char buf[0x1fb8];
@@ -2157,6 +2168,8 @@ extern char g_office_slots[0x3f0];
 
 
 #pragma optimize("y", off)
+/* ADDRESS: GOLDDE 0x004d3ea0 */
+/* ADDRESS: SERVERDE 0x1000a470 */
 void __cdecl srv_InitBuildingTypeTable(void)
 {
 	char* slot_cursor;
@@ -2243,6 +2256,7 @@ void __cdecl srv_InitBuildingTypeTable(void)
 
 #if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
 /* ADDRESS: GOLDTL 0x004e7990 */
+/* ADDRESS: GOLDDE 0x004d4020 */
 float __cdecl amt_CalcOfficeFavor(int actor, int target, unsigned int buildingQual, int includeRoleBonus)
 {
 	float v;
@@ -2326,6 +2340,7 @@ float __cdecl amt_CalcOfficeFavor(int actor, int target, unsigned int buildingQu
 /* Client-only office queries (the Gold T&L client places them after
  * srv_InitBuildingTypeTable).  Discarded, like the formatters above. */
 
+/* ADDRESS: GOLDDE 0x004d4200 */
 int __cdecl srv_GetEntityOfficeSlot(unsigned char* entity, void* role_out, void* slot_out)
 {
 	typedef struct {
@@ -2386,6 +2401,7 @@ int __cdecl srv_GetEntityCouncilSlot(unsigned char* entity, void* role_out, void
 	return found;
 }
 
+/* ADDRESS: GOLDDE 0x004d4280 */
 int __cdecl amt_GetOfficeAffinity(unsigned char* entity, int role, float* out)
 {
 	extern OFFICE_ROLE_TEMPLATE g_office_role_templates[40];

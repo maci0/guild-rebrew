@@ -6,6 +6,7 @@ unsigned short* __cdecl gm_QueryEntities(int, int, int, int);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 
 /* ADDRESS: GOLDTL 0x004a4fb0 */
+/* ADDRESS: GOLDDE 0x004939b0 */
 unsigned int __cdecl ai_FindMissingBuildingUpgrade(unsigned int* outItem, unsigned int* outContainer, unsigned char* building)
 {
 	unsigned char* rec;

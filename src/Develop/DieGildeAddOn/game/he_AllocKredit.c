@@ -30,6 +30,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
 void __cdecl gm_TryRecordCrime(int, int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x0054ab80 */
 void __cdecl he_AllocKredit(char* e)
 {
 	char* o;

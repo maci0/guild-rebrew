@@ -34,6 +34,7 @@ void __cdecl d2_AddRefcount(int def);
 int __cdecl d2_AllocateElement(void);
 
 /* ADDRESS: GOLDTL 0x00466cb0 */
+/* ADDRESS: GOLDDE 0x0045a830 */
 int __cdecl d2_CreateField(int x, int y, int def, unsigned char flags)
 {
 	int i;

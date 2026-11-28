@@ -13,6 +13,7 @@ int __cdecl d3_FindSceneObject(int, int, int, char*);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_OpenTransportPanel(char*);
 
+/* ADDRESS: GOLDDE 0x0057d670 */
 void __cdecl d2_OpenContactEinkaufPanel(char* e)
 {
 	int r;

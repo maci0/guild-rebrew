@@ -8,6 +8,7 @@ char __cdecl d3_GetObjectScreenRect(void*, int*);
 void __cdecl d2_DrawWordWrappedText(int, int, int, int, int, char*, int);
 
 /* ADDRESS: GOLDTL 0x00532750 */
+/* ADDRESS: GOLDDE 0x0051b0d0 */
 void __cdecl d3_DrawBuildingUpgradeLabel(char* sceneNode)
 {
 	int rc[4];

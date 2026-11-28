@@ -1,5 +1,6 @@
 #include <stdlib.h>
 
+/* ADDRESS: GOLDDE 0x00404b70 */
 int __cdecl ch_RandomIndex(unsigned short si)
 {
 	int r;

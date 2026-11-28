@@ -13,6 +13,7 @@ typedef struct {
 
 
 /* ADDRESS: GOLDTL 0x004b2020 */
+/* ADDRESS: GOLDDE 0x004a0340 */
 int __cdecl hst_ResetHistoryGroup(unsigned short g)
 {
 	int i;

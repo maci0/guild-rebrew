@@ -27,6 +27,7 @@ void __cdecl cm_SendCopyEntityData(void*);
 
 
 /* ADDRESS: GOLDTL 0x004b0e80 */
+/* ADDRESS: GOLDDE 0x0049f1a0 */
 int __cdecl cm_ParseChurchDebugArgument(int a1, int a2, char* argumentText)
 {
 	char m[0xf8];

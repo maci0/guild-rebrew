@@ -11,6 +11,7 @@ float __cdecl gm_CalcCombatStrength(char*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 
 /* ADDRESS: GOLDTL 0x004d3c60 */
+/* ADDRESS: GOLDDE 0x004c0f50 */
 int __cdecl cut_GetCombatActionWeights(int id)
 {
 	char* e;

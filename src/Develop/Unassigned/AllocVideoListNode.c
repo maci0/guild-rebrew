@@ -14,6 +14,7 @@ struct Node {
 
 #include "client_video_list.h"
 
+/* ADDRESS: GOLDDE 0x0041c950 */
 Node* __cdecl AllocVideoListNode(void)
 {
 	Node* node;

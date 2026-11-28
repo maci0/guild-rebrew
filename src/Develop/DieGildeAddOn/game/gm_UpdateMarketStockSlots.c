@@ -37,6 +37,7 @@ unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl cm_StepCommandQueue(void);
 
 /* ADDRESS: GOLDTL 0x005017a0 */
+/* ADDRESS: GOLDDE 0x004ecde0 */
 void __cdecl gm_UpdateMarketStockSlots(int player)
 {
 	Slot rec;

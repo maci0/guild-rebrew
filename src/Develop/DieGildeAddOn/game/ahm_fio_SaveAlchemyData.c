@@ -10,6 +10,7 @@ unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream);
 int __cdecl CloseVfsStream(void* stream);
 
 /* ADDRESS: GOLDTL 0x004edae0 */
+/* ADDRESS: GOLDDE 0x004d9f30 */
 int __cdecl ahm_fio_SaveAlchemyData(void)
 {
 	void* f;
@@ -19,7 +20,7 @@ int __cdecl ahm_fio_SaveAlchemyData(void)
 
 
 	magic = 0x61486d52;
-	f = vfs_Tfopen((char*) 0x68dfec, g_6790b0, vfs_RootDir);
+	f = vfs_Tfopen("/gamedata/ai/alchemy.dfn", g_6790b0, vfs_RootDir);
 	if (f == 0) {
 		goto no_file;
 	}

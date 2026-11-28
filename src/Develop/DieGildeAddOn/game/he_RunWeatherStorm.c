@@ -13,6 +13,7 @@ unsigned short __cdecl gm_RandomMod(int n);
 void __cdecl gm_AdjustGebaeudeCondition(char* o, int delta);
 void __cdecl he_FreeAction(char* p);
 
+/* ADDRESS: GOLDDE 0x00553a20 */
 void __cdecl he_RunWeatherStorm(char* p)
 {
 	int i;

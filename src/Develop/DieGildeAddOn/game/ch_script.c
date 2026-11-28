@@ -9,6 +9,7 @@ void __cdecl evt_LogScriptError(char*, unsigned int, const char*);
 int __cdecl evt_ImportCommand(const char*, void*, int, int, ...);
 
 /* ADDRESS: GOLDTL 0x0040cae0 */
+/* ADDRESS: GOLDDE 0x0040b8f0 */
 int __cdecl WalkToDummy(char** character, char** dummy)
 {
     if (evt_WaitingScriptTask != 0 && *(void**) (evt_WaitingScriptTask + 0x44) == (void*) WalkToDummy) {
@@ -34,6 +35,7 @@ int __cdecl WalkToDummy(char** character, char** dummy)
 }
 
 /* ADDRESS: GOLDTL 0x0040d980 */
+/* ADDRESS: GOLDDE 0x0040c790 */
 int __cdecl MoveCharacterCamera(char** character, char** view, int* mode)
 {
     if (*character == 0) {
@@ -62,6 +64,7 @@ int __cdecl PreloadSitMesh(char** character)
 
 /* Inferred name and source placement; native recipes are identical in both clients. */
 /* ADDRESS: GOLDTL 0x0040e1a0 */
+/* ADDRESS: GOLDDE 0x0040cfa0 */
 void __cdecl ch_RegisterScriptCommands(void)
 {
     evt_ImportCommand("CreateCharacter", (void*) CreateCharacter, 1, 4, 6, 7, 7, 7);

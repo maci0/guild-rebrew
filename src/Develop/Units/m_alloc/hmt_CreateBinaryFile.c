@@ -28,6 +28,7 @@ int __cdecl hmt_WriteHistoricalDfn(HistPair* p);
 
 /* ADDRESS: GOLD 0x004ac440 */
 /* ADDRESS: GOLDTL 0x004ac560 */
+/* ADDRESS: GOLDDE 0x0049a8a0 */
 unsigned int __cdecl hmt_CreateBinaryFile(void)
 {
 	char path[0x104];

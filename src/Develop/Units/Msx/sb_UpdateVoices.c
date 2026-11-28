@@ -29,6 +29,7 @@ typedef struct
 } PART;
 
 /* ADDRESS: GOLDTL 0x00422150 */
+/* ADDRESS: GOLDDE 0x0041f010 */
 void __cdecl sb_UpdateVoices(void)
 {
     int now;

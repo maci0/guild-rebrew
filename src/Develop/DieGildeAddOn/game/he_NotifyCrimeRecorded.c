@@ -6,6 +6,7 @@ char str_NACHRICHTEN_HS_46[] = "_NACHRICHTEN_HS_46";
 void __cdecl io_FormatTextBuffer(void*, int, int);
 void __cdecl he_PostEntityMessage(int, int, void*, int, int, void*);
 
+/* ADDRESS: GOLDDE 0x00597140 */
 void __cdecl he_NotifyCrimeRecorded(void* offender, void* recipient)
 {
 	char t;

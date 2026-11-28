@@ -1,3 +1,4 @@
+extern char g_14aad40[];
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern unsigned int g_775344;
 extern int d2_CurrentWindowId;
@@ -48,6 +49,7 @@ void __cdecl d2_ClearTabGroups(void);
 void __cdecl d2_UpdateMatchAttitudeBars(int, int, void*);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x005ccca0 */
+/* ADDRESS: GOLDDE 0x005ae730 */
 int __cdecl d2_ShowTabbedSelectionDialog(void* ent, char* name, int tab, int callback)
 {
 	SelRow_5ccca0 rows[16];
@@ -102,7 +104,7 @@ int __cdecl d2_ShowTabbedSelectionDialog(void* ent, char* name, int tab, int cal
 	for (i = 0; i < 8;) {
 		g_6ac8a8[i].element = d2_AddWindowTextButton(
 				(((D2_WIN*)d2_Windows)[d2_CurrentWindowId].width - 0xb9) / 2, y, 0xbf,
-				*(int*) (0x14aad40 + g_6ac8a8[i].bild * 4), d2_CurrentWindowId);
+				*(int*) ((int) &g_14aad40 + g_6ac8a8[i].bild * 4), d2_CurrentWindowId);
 		d2_SetElementWidth(g_6ac8a8[i].element, 0xb9);
 		i++;
 		y += 0x21 + step + (--rem >= 0);

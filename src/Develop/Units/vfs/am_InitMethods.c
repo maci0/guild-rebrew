@@ -41,6 +41,7 @@ int __cdecl ai_RegisterDomizilMethods(char* ini);
 int __cdecl ai_RegisterSocialMethods(char* ini);
 
 /* ADDRESS: GOLDTL 0x00494820 */
+/* ADDRESS: GOLDDE 0x004832e0 */
 int __cdecl am_InitMethods(void)
 {
 	AM_METHOD_DATA tmp;

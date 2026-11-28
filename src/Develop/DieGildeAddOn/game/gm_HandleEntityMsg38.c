@@ -22,6 +22,7 @@ void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004bb0b0 */
+/* ADDRESS: GOLDDE 0x004a9120 */
 int __cdecl gm_HandleEntityMsg38(int* request)
 {
 	unsigned short* found[6];

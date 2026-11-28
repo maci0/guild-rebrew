@@ -26,6 +26,7 @@ int __cdecl gm_CalcPersonWealth(unsigned short);
 int __cdecl gm_AmountToUnits(int, unsigned char);
 
 /* ADDRESS: GOLDTL 0x0051e490 */
+/* ADDRESS: GOLDDE 0x00507760 */
 int __cdecl ls_WriteSaveHeader(void* outputStream, int a1)
 {
 	char hdr[0x10];

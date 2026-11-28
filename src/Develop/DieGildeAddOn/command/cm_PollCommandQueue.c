@@ -9,6 +9,7 @@ extern char g_1005780;
 void __cdecl nt_Recv(void);
 int __cdecl cm_EnqueueCommand(char*);
 
+/* ADDRESS: GOLDDE 0x004b2350 */
 int __cdecl cm_PollCommandQueue(void)
 {
 	if (nt_ClientSocket == -1) {

@@ -12,6 +12,7 @@ typedef struct {
 float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
+/* ADDRESS: GOLDDE 0x005ae690 */
 void __cdecl d2_UpdateMatchAttitudeBars(unsigned short* self, unsigned int n, Match* arr)
 {
 	unsigned int i;

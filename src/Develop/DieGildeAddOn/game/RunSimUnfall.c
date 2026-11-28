@@ -43,6 +43,7 @@ void __cdecl gm_AddTime(Clock* c, int a, int b, int d);
 
 /* One step of the accident simulation: walks twelve players in a
  * pseudo-random order and rolls an accident for each. */
+/* ADDRESS: GOLDDE 0x0053abd0 */
 void __cdecl RunSimUnfall(char* s)
 {
 	float f;

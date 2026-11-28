@@ -20,6 +20,7 @@ void __cdecl cm_SendCopyEntityData(char*);
    +8/+0xc entity ids, +0x10 selection counter, +0x28..+0x36 stamp, +0x38
    entity id list, +0x58 count/length, +0x5a..+0x6c per-type fields. */
 /* ADDRESS: GOLDTL 0x00487f90 */
+/* ADDRESS: GOLDDE 0x00476e60 */
 void __cdecl ai_DispatchMeisterAction(int* actionCtx)
 {
 	char m[0xf8];

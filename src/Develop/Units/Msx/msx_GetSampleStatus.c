@@ -8,6 +8,7 @@ extern g_662450_f imp_AIL_sample_status;
 
 int __cdecl msx_FindSampleHandleIndex(int);
 
+/* ADDRESS: GOLDDE 0x00425170 */
 int __cdecl msx_GetSampleStatus(int sampleHandle)
 {
 	int r = -1;

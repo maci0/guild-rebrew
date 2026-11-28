@@ -63,6 +63,7 @@ void __cdecl d3_EndCameraAndUiMode(void);
 /* Builds the stock-trade dialog for the selected building, pumps the dialog
  * message loop and hands the scene back to the shared frame function. */
 /* ADDRESS: GOLDTL 0x0058a250 */
+/* ADDRESS: GOLDDE 0x0056ff10 */
 void __cdecl d2_RunSpyCabinetDialog(int a0)
 {
 	int ids[3];

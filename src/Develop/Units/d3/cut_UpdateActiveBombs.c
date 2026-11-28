@@ -25,6 +25,7 @@ char __cdecl d3_DestroyObject(void* object);
 double __cdecl sqrt(double x);
 
 /* ADDRESS: GOLDTL 0x004cf180 */
+/* ADDRESS: GOLDDE 0x004bc660 */
 int __cdecl cut_UpdateActiveBombs(void)
 {
     char* r;

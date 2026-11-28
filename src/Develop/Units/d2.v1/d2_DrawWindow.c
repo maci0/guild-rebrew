@@ -21,6 +21,7 @@ char* __cdecl itoa(int, char*, int);
 /* Draw one window slot: sync the item states, size the frame, then blit the
  * border and the hatch pattern for the selected building. */
 /* ADDRESS: GOLDTL 0x0046dff0 */
+/* ADDRESS: GOLDDE 0x00461670 */
 void __cdecl d2_DrawWindow(int windowIndex, int a1)
 {
 	char* b;

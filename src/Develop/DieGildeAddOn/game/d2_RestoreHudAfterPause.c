@@ -20,6 +20,7 @@ void __cdecl d2_ReleaseOverlaySprite(unsigned char*);
 void __cdecl d2_UpdateHudVisibility(int);
 void __cdecl d2_RestoreHudPanels(void);
 
+/* ADDRESS: GOLDDE 0x005c5190 */
 void __cdecl d2_RestoreHudAfterPause(void)
 {
 	unsigned char* p;

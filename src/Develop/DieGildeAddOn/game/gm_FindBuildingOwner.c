@@ -3,6 +3,7 @@
 
 extern char gm_EntitySlotTable[];
 
+/* ADDRESS: GOLDDE 0x004f89e0 */
 char* __cdecl gm_FindBuildingOwner(int building)
 {
 	int i;

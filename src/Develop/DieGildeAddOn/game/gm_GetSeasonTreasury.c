@@ -4,6 +4,7 @@
 
 void* __cdecl gm_QueryEntities(int, int, int, ...);
 
+/* ADDRESS: GOLDDE 0x004f80b0 */
 int __cdecl gm_GetSeasonTreasury(char* entity, char season)
 {
 	int result;

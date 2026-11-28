@@ -14,6 +14,7 @@ int __cdecl amt_CalcTotalOfficeSalaries(void);
 int __cdecl gm_RandomMod(int n);
 
 /* ADDRESS: GOLDTL 0x00490e20 */
+/* ADDRESS: GOLDDE 0x0047fcd0 */
 int __cdecl ai_EvaluateLaw0x0a(char* actor, int unused, int* outValue)
 {
 	int lawInfo[9];

@@ -5,6 +5,7 @@ unsigned int __cdecl vfs_fwrite(void*, int, int, void*);
 
 
 /* ADDRESS: GOLDTL 0x004c0740 */
+/* ADDRESS: GOLDDE 0x004ae2c0 */
 int __cdecl ls_SaveRoutes(void* stream)
 {
 	int count;

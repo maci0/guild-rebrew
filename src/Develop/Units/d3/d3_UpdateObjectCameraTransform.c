@@ -76,6 +76,7 @@ void __cdecl d3_UpdateObjectCameraTransform(char* object, char* parent, int forc
 }
 #else
 /* ADDRESS: GOLDTL 0x00438100 */
+/* ADDRESS: GOLDDE 0x00431350 */
 void __cdecl d3_UpdateObjectCameraTransform(char* obj, char* cam, char force)
 {
 	float m[16];

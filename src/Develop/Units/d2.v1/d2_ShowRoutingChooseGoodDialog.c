@@ -28,6 +28,7 @@ void __cdecl io_ClearInputState(void);
  * window, walk the candidate query, spawn one icon record per hit, then keep
  * dispatching until the master loop closes the dialog. */
 /* ADDRESS: GOLDTL 0x004be560 */
+/* ADDRESS: GOLDDE 0x004ac0e0 */
 unsigned int __cdecl d2_ShowRoutingChooseGoodDialog(char* building, int a1, unsigned int a2)
 {
 	int items[10];

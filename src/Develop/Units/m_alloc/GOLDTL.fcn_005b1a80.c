@@ -4,6 +4,7 @@ extern Node* hp_ProdEntryList;
 
 
 /* ADDRESS: GOLDTL 0x005b1a80 */
+/* ADDRESS: GOLDDE 0x00596480 */
 char* __cdecl hp_FindProdSettingNode(int key)
 {
 	char* p;
@@ -22,6 +23,7 @@ void __cdecl hp_UpdateProdSetting(int a, char* o);
 
 
 /* ADDRESS: GOLDTL 0x005b1e20 */
+/* ADDRESS: GOLDDE 0x00596820 */
 void __cdecl hp_SyncProdSetting(char* p)
 {
 	char* o;
@@ -37,6 +39,7 @@ extern float flt_100_0;
 
 
 /* ADDRESS: GOLDTL 0x005b1e40 */
+/* ADDRESS: GOLDDE 0x00596840 */
 int __cdecl hp_PickWeightedProdItem(char* p)
 {
 	char* o;

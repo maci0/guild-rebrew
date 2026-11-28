@@ -49,6 +49,7 @@ int __cdecl amt_GetRoleTemplate(int idx, Rec18* out);
 int __cdecl ai_SelectRankedCandidates(char* e, int a, int* b, float c, float r, unsigned short* out);
 
 /* ADDRESS: GOLDTL 0x0049a0c0 */
+/* ADDRESS: GOLDDE 0x00488b00 */
 int __cdecl ai_StartUseObjectAnsehen(int kind, char* entity, int busy, Msg* out1, Msg* out2)
 {
 	Slot slot[12];

@@ -38,6 +38,7 @@ unsigned short __cdecl gm_RandomMod(int n);
 void __cdecl cm_SendCopyEntityData(char* msg);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x005a31d0 */
 int __cdecl d2_RunAction0x35Dialog(unsigned short* obj)
 {
 	int res;

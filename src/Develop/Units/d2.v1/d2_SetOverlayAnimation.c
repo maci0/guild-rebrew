@@ -7,6 +7,7 @@ void __cdecl d2_ClearAnimationSlot(int h);
 int __cdecl d2_AllocAnimationSlot(short x, short y, void* img, int a4);
 
 /* ADDRESS: GOLDTL 0x00473a90 */
+/* ADDRESS: GOLDDE 0x00466790 */
 void __cdecl d2_SetOverlayAnimation(int unused_arg, int resource_id)
 {
 	if (resource_id) {

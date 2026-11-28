@@ -27,6 +27,7 @@ extern TexSlot g_100f840;
 void __cdecl d2_ReleaseSurface(void* p);
 
 /* ADDRESS: GOLDTL 0x00473ed0 */
+/* ADDRESS: GOLDDE 0x00466bd0 */
 void __cdecl d2_ShutdownOverlayState(void)
 {
 	int i;

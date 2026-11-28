@@ -11,6 +11,7 @@ void __cdecl vfs_WriteInt(int, int);
 void __cdecl vfs_WriteCString(int, char*);
 char* __cdecl d3_FindEventName(int);
 
+/* ADDRESS: GOLDDE 0x004344f0 */
 void __cdecl d3_WriteEventTable(int w, Event* ev)
 {
 	int n;

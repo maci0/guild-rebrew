@@ -9,6 +9,7 @@ void __cdecl gm_RolloverBuilding0x16Stats(void);
 void __cdecl he_EnsureAhmAction0x98(void);
 
 /* ADDRESS: GOLDTL 0x005490a0 */
+/* ADDRESS: GOLDDE 0x0052f600 */
 void __cdecl he_RunDailyActionMaintenance(void)
 {
 	he_EnsureCityBuilding0x2bActions();

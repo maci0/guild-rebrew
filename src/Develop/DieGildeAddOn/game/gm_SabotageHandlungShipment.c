@@ -26,6 +26,7 @@ void __cdecl io_FormatTextBuffer(char *, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char *, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004b9030 */
+/* ADDRESS: GOLDDE 0x004a70e0 */
 int __cdecl gm_SabotageHandlungShipment(int *msg)
 {
 	char *a;

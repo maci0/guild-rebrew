@@ -76,6 +76,7 @@ void __cdecl d3_ClearSelectionBox(void);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
 /* ADDRESS: GOLDTL 0x00531620 */
+/* ADDRESS: GOLDDE 0x00519fa0 */
 void __cdecl sv_UpdateObjectSelection(void)
 {
 	SELECTION_SCENE_MAP* map;

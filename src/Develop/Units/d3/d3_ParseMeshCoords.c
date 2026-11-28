@@ -8,6 +8,7 @@ extern double __cdecl atof(const char *s);
 extern char g_00662d18;
 
 /* ADDRESS: GOLDTL 0x0044d480 */
+/* ADDRESS: GOLDDE 0x00443220 */
 void __cdecl d3_ParseMeshCoords(int unused, char *obj)
 {
     int i;

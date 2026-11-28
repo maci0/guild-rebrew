@@ -1,3 +1,6 @@
+extern char g_6b5c90[];
+extern char g_67d67c[];
+extern char g_6a3658[];
 #include <stdio.h>
 
 int __cdecl fcn_0041e620(void);
@@ -24,6 +27,7 @@ extern unsigned char d3snd_AmbientEnabled;
 extern char io_LastKeyScancode;
 
 /* ADDRESS: GOLDTL 0x005448e0 */
+/* ADDRESS: GOLDDE 0x0052b170 */
 void __cdecl main_PlayOutroMovie(void)
 {
 	char buf[0x104];
@@ -32,11 +36,11 @@ void __cdecl main_PlayOutroMovie(void)
 	int saved;
 	float vol;
 
-	if (*(int*) 0x77492c == 0) {
+	if (*(int*) ((int) &g_7747d4 + 0x158) == 0) {
 		fcn_0041e620();
 	}
 	fcn_004c2d90(0.0f, 0x3e8);
-	h = d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, (char*) 0x67d67c, 0x5a, 1);
+	h = d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, (char*) &g_67d67c, 0x5a, 1);
 	for (;;) {
 		if ((*h & 4) && !(msx_MasterFadeTarget >= 0.0f)) {
 			break;
@@ -46,10 +50,10 @@ void __cdecl main_PlayOutroMovie(void)
 	b = buf;
 	saved = d3snd_AmbientEnabled;
 	d3snd_AmbientEnabled = 0;
-	sprintf(b, (char*) 0x6a4538, (char*) 0x6a3658);
-	*(int*) 0x6b5c90 = 1;
+	sprintf(b, "%soutro.mpg", (char*) &g_6a3658);
+	*(int*) &g_6b5c90 = 1;
 	io_PollKeyboardInput();
-	*(int*) 0x6b5c90 = 0;
+	*(int*) &g_6b5c90 = 0;
 	io_AcquireKeyboard(0);
 	io_AcquireMouse(0);
 	main_PumpWindowMessages();
@@ -62,13 +66,13 @@ void __cdecl main_PlayOutroMovie(void)
 	g_662264((int) g_774940);
 	io_AcquireKeyboard(1);
 	io_AcquireMouse(1);
-	*(int*) 0x6b5c90 = 1;
+	*(int*) &g_6b5c90 = 1;
 	io_PollKeyboardInput();
-	vol = (float) *(unsigned char*) 0x7766a2;
-	*(int*) 0x6b5c90 = 0;
+	vol = (float) *(unsigned char*) ((int) &g_774940 + 0x1d62);
+	*(int*) &g_6b5c90 = 0;
 	io_LastKeyScancode = 0;
 	fcn_004c2d90(vol * (1.0f / 127.0f), 0x3e8);
-	if (*(int*) 0x77492c == 0) {
+	if (*(int*) ((int) &g_7747d4 + 0x158) == 0) {
 		d3snd_AmbientEnabled = (unsigned char) saved;
 		ShutdownVideo();
 	} else {

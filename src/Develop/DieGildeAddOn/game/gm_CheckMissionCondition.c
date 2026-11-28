@@ -44,6 +44,7 @@ int __cdecl gm_HasNoType5Owner(char* t, Spec* s);
 
 /* ADDRESS: GOLD 0x004b4f00 */
 /* ADDRESS: GOLDTL 0x004b5070 */
+/* ADDRESS: GOLDDE 0x004a3360 */
 int __cdecl gm_CheckMissionCondition(Cmd* c)
 {
 	Spec* s;

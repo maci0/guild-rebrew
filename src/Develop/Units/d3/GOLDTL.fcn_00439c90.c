@@ -21,6 +21,7 @@ void __cdecl d3_ReleaseTexture(int);
 void __cdecl m_FreeTracked(void*);
 #include "Develop/Units/d3/d3_animation.h"
 
+/* ADDRESS: GOLDDE 0x00432ba0 */
 void __cdecl fcn_00439c90(char* o)
 {
 	Col col;

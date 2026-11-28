@@ -9,6 +9,7 @@ extern char g_67bcf4[];
 void* __cdecl m_alloc(int, void*);
 void __cdecl d3sm_Rebuild(char*, int);
 
+/* ADDRESS: GOLDDE 0x004507c0 */
 char* __cdecl d3sm_CreateMap(int a1, int n, int a3)
 {
 	char* g = 0;

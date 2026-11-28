@@ -11,6 +11,7 @@ void __cdecl d3_RebuildFloorMeshes(int);
 void __cdecl fcn_0043f6a0(int);
 void __cdecl d3sm_Rebuild(int, int);
 
+/* ADDRESS: GOLDDE 0x004337f0 */
 char __cdecl d3_InitUniverse(int flags)
 {
 	char buf[0x100];

@@ -34,6 +34,7 @@ void __cdecl d2_RenderFormToTextures(int slot)
 }
 #else
 /* ADDRESS: GOLDTL 0x00471490 */
+/* ADDRESS: GOLDDE 0x00464990 */
 void __cdecl d2_RenderFormToTextures(int k)
 {
 	char** pp;

@@ -31,6 +31,7 @@ void __cdecl d2_ShowMeisterbriefDialog(unsigned char*);
 void __cdecl d2_ShowMeisterbriefPendingDialog(unsigned char*);
 void __cdecl d3_EndCameraAndUiMode(void);
 
+/* ADDRESS: GOLDDE 0x005b0f80 */
 void __cdecl d2_OpenMeisterbriefDialog(unsigned char* obj)
 {
 	Player* me;

@@ -18,6 +18,7 @@ typedef long(__stdcall* LockFn)(void*, int, void*);
 typedef long(__stdcall* UnlockFn)(void*);
 
 /* ADDRESS: GOLDTL 0x0044aec0 */
+/* ADDRESS: GOLDDE 0x004414a0 */
 int __cdecl d3_BuildStockObjectMesh(char* o)
 {
     int** mesh;

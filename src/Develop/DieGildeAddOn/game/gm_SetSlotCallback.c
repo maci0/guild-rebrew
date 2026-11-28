@@ -37,6 +37,7 @@ extern Set g_772ff8[8];
 Slot170* __cdecl gm_FindSlot170Entry(int id);
 int __cdecl gm_NotifyDomizilCallback(Set* p);
 
+/* ADDRESS: GOLDDE 0x004dd0b0 */
 void __cdecl gm_SetSlotCallback(int id, void* fn, void* ctx)
 {
 	Slot170* slot;

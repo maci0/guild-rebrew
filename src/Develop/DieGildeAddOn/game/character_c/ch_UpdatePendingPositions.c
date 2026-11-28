@@ -68,6 +68,7 @@ void __cdecl d3_PreloadLowPolyAnims(char*, int, ...);
 #endif
 
 #undef ch_UNIVERSE_STRIDE
+/* ADDRESS: GOLDDE 0x00402570 */
 void __cdecl ch_UpdatePendingPositions(void)
 {
 	char** p;

@@ -9,6 +9,7 @@ typedef struct {
 
 extern T41b1c0 g_662b68[];
 
+/* ADDRESS: GOLDDE 0x00418f00 */
 T41b1c0* __cdecl d3_GetFormatName(int index)
 {
 	if (index >= 0x14 && index <= 0x1f) {

@@ -22,6 +22,7 @@ CH_ACTION* __cdecl ch_NewAction(char* e);
  * params. i is the copy counter, so i = -1 reuses ecx (or ecx,-1) for
  * the kind 0x33 checks. Those checks are two separate ifs: an else
  * would jump over the second test instead of retesting param. */
+/* ADDRESS: GOLDDE 0x0040b020 */
 CH_ACTION* __cdecl ch_CreateAction(char* e, int kind, ...)
 {
 	CH_ACTION* t;

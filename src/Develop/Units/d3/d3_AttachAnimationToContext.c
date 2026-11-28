@@ -21,6 +21,7 @@ char* __cdecl d3_AttachAnimationToContext(char* context, char* name, D3_ANIMATIO
 /* Claims the first free animation slot of the context, fills it from the
  * named animation and the 12-byte options block, and returns the slot. */
 /* ADDRESS: GOLDTL 0x00434970 */
+/* ADDRESS: GOLDDE 0x0042df30 */
 char* __cdecl d3_AttachAnimationToContext(char* context, char* name, D3_ANIMATION_OPTIONS options)
 {
 	char* object;

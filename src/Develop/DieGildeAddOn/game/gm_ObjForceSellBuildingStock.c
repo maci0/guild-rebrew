@@ -1,3 +1,4 @@
+extern char gm_EntitySlotTable[];
 #include <string.h>
 
 extern float g_6629d0;
@@ -16,6 +17,7 @@ void __cdecl he_PostEntityMessage(int a, int b, char* buf, int c, int d, int e);
 void __cdecl d2_ShowUseObjDialog(char* buf);
 
 /* ADDRESS: GOLDTL 0x005de420 */
+/* ADDRESS: GOLDDE 0x005bf9c0 */
 int __cdecl gm_ObjForceSellBuildingStock(char* actor, char* action)
 {
 	int one;
@@ -48,7 +50,7 @@ int __cdecl gm_ObjForceSellBuildingStock(char* actor, char* action)
 	}
 
 	rec = (int*) recordAddr;
-	base = (char*) ((int*) 0x7f4ca0
+	base = (char*) ((int*) &gm_EntitySlotTable
 	    + (int) *(unsigned short*) ((char*) recordAddr + 0x27) * 135);
 	e = (int*) gm_QueryEntities(*(int*) ((char*) rec + 0x5d), 2, 6, 0, 0x2a);
 	if (e != 0) {

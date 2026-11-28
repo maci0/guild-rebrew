@@ -1,5 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x0042b2c0 */
+/* ADDRESS: GOLDDE 0x00425670 */
 int __cdecl msx_CountActiveWaveDrivers(void)
 {
 	int a;

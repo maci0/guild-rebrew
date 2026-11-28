@@ -29,6 +29,7 @@ struct house {
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 extern pos14_7f4c00 gm_GameTime;
 
+/* ADDRESS: GOLDDE 0x0052d260 */
 void __cdecl he_CancelInvalidBuildingAction(struct unit* u)
 {
 	if (u->house == 0xffff) {

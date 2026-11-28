@@ -5,6 +5,7 @@ void __cdecl rd_AllBauplatzToSupermap(int, int);
 
 
 /* ADDRESS: GOLDTL 0x004bdd40 */
+/* ADDRESS: GOLDDE 0x004ab8c0 */
 void __cdecl rd_AddUnusedBauplatzToSupermap(int ctx)
 {
 	int list[256];

@@ -24,6 +24,7 @@ char* __cdecl fcn_0064d1a0(char* s, int c);
 void __cdecl d3_ValidateTextureDimensions(char* name, int flag);
 
 /* ADDRESS: GOLDTL 0x0044d010 */
+/* ADDRESS: GOLDDE 0x00442e00 */
 void __cdecl d3_ParseMatEnvMap(void* stream, D3_MAT_PARSER_CTX* ctx)
 {
 	char* tok;

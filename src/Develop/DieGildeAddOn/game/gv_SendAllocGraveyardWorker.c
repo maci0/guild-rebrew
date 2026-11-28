@@ -22,6 +22,7 @@ extern char* gm_CityEntity;
 void __cdecl gm_TryRecordCrime(int a, int b, int c, int d, int e);
 int __cdecl cm_SendAllocGraveyardWorker(GV_WORKER_ALLOC_MSG* m);
 
+/* ADDRESS: GOLDDE 0x004df340 */
 int __cdecl gv_SendAllocGraveyardWorker(char* obj, int fieldId, int slotIndex, int workerId, int actionKind)
 {
 	GV_WORKER_ALLOC_MSG m;

@@ -1,6 +1,7 @@
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* ADDRESS: GOLDTL 0x0050c7d0 */
+/* ADDRESS: GOLDDE 0x004f7570 */
 int __cdecl gm_SumBuildingComponentValues(int idx, int type)
 {
 	BUILDING_PROTOTYPE* e;

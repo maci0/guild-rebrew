@@ -15,6 +15,7 @@ int __cdecl gm_PosToStatsGrid(char* pos, int* x, int* y);
 int __cdecl gm_CalculateGebaeudeValue(void* e, int k);
 
 /* ADDRESS: GOLDTL 0x004fa750 */
+/* ADDRESS: GOLDDE 0x004e6530 */
 void __cdecl gm_UpdateBuildingGridStats(void)
 {
     float values[64];

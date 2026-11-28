@@ -40,6 +40,7 @@ void __cdecl d2_DrawSpriteFromSet(int x, int y, int surf, char* font, int c);
 void __cdecl d2_DrawDimmedSpriteFrame(int x, int y, int surf, char* font, int c);
 
 /* ADDRESS: GOLDTL 0x00466550 */
+/* ADDRESS: GOLDDE 0x0045a0d0 */
 void __cdecl d2_DrawField(int idx, int surf)
 {
 	UI_FIELD* f;

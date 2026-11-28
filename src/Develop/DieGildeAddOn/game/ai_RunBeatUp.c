@@ -11,6 +11,7 @@ int __cdecl cm_SendCopyEntityData(char* msg);
 int __cdecl cm_SendTraceEnd(char* name);
 
 /* ADDRESS: GOLDTL 0x00499950 */
+/* ADDRESS: GOLDDE 0x00488390 */
 int __cdecl ai_RunBeatUp(int actor, char* request)
 {
     char buf[0xf8];

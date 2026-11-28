@@ -10,6 +10,7 @@ int __cdecl he_FreeAction(char*);
 extern pos14_7f4c00 gm_GameTime;
 
 /* ADDRESS: GOLDTL 0x0057a260 */
+/* ADDRESS: GOLDDE 0x005600c0 */
 int __cdecl he_StartUpgraden(char* p)
 {
 	int v;

@@ -56,6 +56,7 @@ typedef struct {
  * object type selects one of two scene-hook paths, then the shown object is
  * replaced by a4. */
 /* ADDRESS: GOLDTL 0x00529160 */
+/* ADDRESS: GOLDDE 0x00512370 */
 void __cdecl he_AssignActionSlot(unsigned char* activeRec, char* sceneObj, unsigned int index, unsigned char* newShown)
 {
 	ACTION_SLOT_VIEW* slot;

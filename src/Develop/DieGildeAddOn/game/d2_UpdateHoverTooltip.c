@@ -30,6 +30,7 @@ float __cdecl gm_GetBuildingLevelRatio(void);
 
 struct Building_531d20 { unsigned char class_id; char pad1[0x24c]; };
 /* ADDRESS: GOLDTL 0x00531d20 */
+/* ADDRESS: GOLDDE 0x0051a6a0 */
 void __cdecl d2_UpdateHoverTooltip(void)
 {
 	int id;

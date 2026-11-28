@@ -69,6 +69,7 @@ void __cdecl d3_PreloadLowPolyAnims(char*, int, ...);
 #endif
 
 #undef ch_UNIVERSE_STRIDE
+/* ADDRESS: GOLDDE 0x0040c220 */
 int __cdecl TakeObjectScript(char** ch, char** ani, int* kind, char** dummy, unsigned char* level, char** func)
 {
 	char* task;

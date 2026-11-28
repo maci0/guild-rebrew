@@ -3,6 +3,7 @@
 
 int __cdecl cm_EnqueueClientPacket(char*);
 
+/* ADDRESS: GOLDDE 0x004b29d0 */
 int __cdecl cm_RequestAllocSpieler(char type, int motherId, int fatherId, short parentId, int locationId, char statA, char statB, char flags)
 {
 	char buf[0x9c];

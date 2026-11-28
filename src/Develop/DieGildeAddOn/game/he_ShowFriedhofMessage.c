@@ -6,6 +6,7 @@ extern char str_NACHRICHTEN_FRIEDHOF_00[];
 void __cdecl io_FormatTextBuffer(void*, int, int, int, int, int);
 void __cdecl he_PostEntityMessage(int, int, void*, int, int, void*);
 
+/* ADDRESS: GOLDDE 0x00597ac0 */
 void __cdecl he_ShowFriedhofMessage(void* recipient, void* a2, void* a3)
 {
 	io_FormatTextBuffer(io_MessageFormatBuf, 0x40af, 0x40a3, *(unsigned short*) a2,

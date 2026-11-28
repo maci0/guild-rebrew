@@ -39,6 +39,7 @@ void __cdecl ch_SetVisible(char* character, int visible)
 }
 #else
 /* ADDRESS: GOLDTL 0x00402a00 */
+/* ADDRESS: GOLDDE 0x004022c0 */
 void __cdecl ch_SetVisible(char* e, int on)
 {
 	if (e != 0 && *(void**) (e + 0x34) != 0) {

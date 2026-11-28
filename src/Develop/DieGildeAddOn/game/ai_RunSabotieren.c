@@ -11,6 +11,7 @@ void __cdecl cm_SendLogAction(char* s);
 void __cdecl cm_SendTraceEnd(char* s);
 void __cdecl cm_SendCopyEntityData(char* msg);
 
+/* ADDRESS: GOLDDE 0x00487f00 */
 int __cdecl ai_RunSabotieren(char* actor, char* cmd)
 {
 	char msg[0xf8];

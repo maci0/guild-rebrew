@@ -13,6 +13,7 @@ extern char g_6a4870[];
 int __cdecl cm_EnqueueClientPacket(char*);
 void __cdecl cm_StageRawPacketPayload(int, void*);
 
+/* ADDRESS: GOLDDE 0x004b2fe0 */
 int __cdecl cm_SendSetHE(char mode, unsigned char* e)
 {
 	char buf[0x9c];

@@ -1,3 +1,4 @@
+extern char g_7e1d60[];
 /* Drop every entry of a second pointer table. */
 
 int __cdecl sb_UnloadSampleBank(int);
@@ -16,11 +17,12 @@ void __cdecl d3_FreeTable7e1d60(void)
 }
 #else
 /* ADDRESS: GOLDTL 0x0053f8f0 */
+/* ADDRESS: GOLDDE 0x00526400 */
 void __cdecl d3_FreeTable7e1d60(void)
 {
 	int* entry;
 
-	for (entry = (int*) 0x7e1d60; (int) entry < (int) 0x7e1f60; entry++) {
+	for (entry = (int*) &g_7e1d60; (int) entry < (int) ((int) &g_7e1d60 + 0x200); entry++) {
 		if (*entry != 0) {
 			sb_ReleaseSampleBank(*entry);
 		}

@@ -8,6 +8,7 @@ unsigned short __cdecl gm_RandomMod(int n);
 char* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 
+/* ADDRESS: GOLDDE 0x00497b60 */
 int __cdecl ai_CheckAction035Predicate(char* unused, char* entity, char* ctx, char* unused2, char* out)
 {
 	int id;

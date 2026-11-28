@@ -86,6 +86,7 @@ fail_1:
 }
 #else
 /* ADDRESS: GOLDTL 0x00441720 */
+/* ADDRESS: GOLDDE 0x0043a0a0 */
 unsigned char __cdecl d3_GetFloorHeight(int* floor, float* worldPos, unsigned int coarse, unsigned int* gridX, unsigned int* gridZ, float* heightOut)
 {
 	float pp[4];

@@ -39,6 +39,7 @@ void __cdecl io_FormatTextBuffer(void* out, int id, ...);
 void __cdecl he_MessageBoxQuickjump(int a, int b, char* text, int c, int d, int e, int f, int g, int h);
 
 /* ADDRESS: GOLD 0x4884a0 */
+/* ADDRESS: GOLDDE 0x00476920 */
 void __cdecl gm_TryAutoUpgradeBuildingSlots(char* building, char* owner, int chance)
 {
 	char msg[0xf8];

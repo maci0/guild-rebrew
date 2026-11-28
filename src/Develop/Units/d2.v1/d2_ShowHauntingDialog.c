@@ -1,3 +1,4 @@
+extern char g_6a96d8[];
 #include "Develop/client_types.h"
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 extern int d2_CurrentWindowId;
@@ -45,6 +46,7 @@ void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl sv_ClearObjectSelection(void);
 
 /* ADDRESS: GOLDTL 0x0058f310 */
+/* ADDRESS: GOLDDE 0x00574fd0 */
 int __cdecl d2_ShowHauntingDialog(char* subject)
 {
 	int q[20];
@@ -76,7 +78,7 @@ int __cdecl d2_ShowHauntingDialog(char* subject)
 		return d3_EndCameraAndUiMode();
 	}
 	d2_InitPlayerBar(subject, 0);
-	h = d2_LoadForm(0, 0, (char*) 0x6a96d8);
+	h = d2_LoadForm(0, 0, (char*) &g_6a96d8);
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);

@@ -9,6 +9,7 @@ typedef Card_1007ce0 Card;
 extern Card_1007ce0 g_1007ce0[24];
 
 /* ADDRESS: GOLDTL 0x004a7b40 */
+/* ADDRESS: GOLDDE 0x00495e90 */
 void __cdecl gm_CollectCardGameBets(void)
 {
 	int i;

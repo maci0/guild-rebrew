@@ -77,6 +77,7 @@ extern char ch_StepSampleName[];
 char* __cdecl strcpy(char*, const char*);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x005a76b0 */
+/* ADDRESS: GOLDDE 0x0058c3b0 */
 int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
 {
     int r;

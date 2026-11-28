@@ -7,6 +7,7 @@ extern float g_662c98;
 int __cdecl gm_SumStraftatSeverity(int);
 
 /* ADDRESS: GOLDTL 0x004a4680 */
+/* ADDRESS: GOLDDE 0x00493080 */
 int __cdecl ai_ComputeActionScore(float* o0, float* o1, int idx, char* s, int* p4)
 {
 	float base;

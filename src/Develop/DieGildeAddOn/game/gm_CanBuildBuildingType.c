@@ -20,6 +20,7 @@ int __cdecl gm_CheckStatLevel(int id, int kind);
 int __cdecl gm_FindBuildingPrototypesByCategory(int kind, int* out);
 
 /* ADDRESS: GOLDTL 0x00504f30 */
+/* ADDRESS: GOLDDE 0x004f02b0 */
 unsigned int __cdecl gm_CanBuildBuildingType(int buildingType, int playerIndex)
 {
 	Loc* rec;

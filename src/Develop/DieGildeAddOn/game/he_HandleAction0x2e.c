@@ -12,6 +12,7 @@ void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl cm_SendSetHE(int, char*);
 void __cdecl he_FreeAction(char*);
 
+/* ADDRESS: GOLDDE 0x00531770 */
 void __cdecl he_HandleAction0x2e(char* u)
 {
 	char text[0x100];

@@ -222,6 +222,7 @@ void __cdecl d3_PreloadLowPolyAnims(char*, int, ...);
 
 #undef ch_UNIVERSE_STRIDE
 /* ADDRESS: GOLDTL 0x004033e0 */
+/* ADDRESS: GOLDDE 0x00402910 */
 void __cdecl ch_Updatelowpoly(char* obj)
 {
 	D3_ANIMATION_OPTIONS opt;

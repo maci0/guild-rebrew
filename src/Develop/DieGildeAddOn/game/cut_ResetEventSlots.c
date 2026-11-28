@@ -4,6 +4,7 @@
 
 /* Inferred name and source home; byte views preserve the native strided accesses. */
 /* ADDRESS: GOLDTL 0x004e4f10 */
+/* ADDRESS: GOLDDE 0x004d1890 */
 void __cdecl cut_ResetEventSlots(int* event)
 {
     int* slot;

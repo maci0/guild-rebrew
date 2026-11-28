@@ -18,6 +18,7 @@ void __cdecl d3snd_StopSourceVoice(char* p)
 }
 #else
 /* ADDRESS: GOLDTL 0x00418d70 */
+/* ADDRESS: GOLDDE 0x00416ab0 */
 void __cdecl d3snd_StopSourceVoice(char* p)
 {
 	if (*(char**) (p + 0x34) != 0) {

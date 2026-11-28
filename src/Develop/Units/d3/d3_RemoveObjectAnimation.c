@@ -16,6 +16,7 @@ typedef struct Slot {
 void __cdecl d3_BindAnimTrackNodes(int);
 void __cdecl d3_UpdateObjectAnimPose(int);
 
+/* ADDRESS: GOLDDE 0x0042eac0 */
 void __cdecl d3_RemoveObjectAnimation(char* o, char* name)
 {
 	int h;

@@ -1,5 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x00533880 */
+/* ADDRESS: GOLDDE 0x0051c170 */
 void __cdecl d3_ClearSceneObjectCache(void)
 {
 	int a;

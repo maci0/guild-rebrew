@@ -14,6 +14,7 @@ void __cdecl ch_UseGate(char*, char*, char*, int, int, int);
 char* __cdecl strupr(char*);
 
 /* ADDRESS: GOLDTL 0x004cb450 */
+/* ADDRESS: GOLDDE 0x004b8c30 */
 int __cdecl cm_ExUseGate(char* command, char* result)
 {
 	char gate2[0x80];

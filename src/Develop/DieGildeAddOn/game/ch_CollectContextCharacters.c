@@ -16,6 +16,7 @@ extern char* ch_ContextCharacters[32];
 #include <string.h>
 
 
+/* ADDRESS: GOLDDE 0x00519380 */
 void __cdecl ch_CollectContextCharacters(char* b)
 {
 	struct s_7f4ca0** out;

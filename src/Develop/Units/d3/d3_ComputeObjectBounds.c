@@ -1,3 +1,4 @@
+extern char g_6b8014[];
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
@@ -7,6 +8,7 @@ void __cdecl d3_UpdateObjectCameraTransform(char* e, char* cam, int f);
 char* __cdecl d3_ComputeNodeBoundsBox(char* e, int h, char* p);
 
 /* ADDRESS: GOLDTL 0x004546e0 */
+/* ADDRESS: GOLDDE 0x00449f90 */
 char __cdecl d3_ComputeObjectBounds(char* e, float* lo, float* hi)
 {
 	float* q;
@@ -14,7 +16,7 @@ char __cdecl d3_ComputeObjectBounds(char* e, float* lo, float* hi)
 	int h;
 
 	if (!(*(unsigned char*) (e + 0x216) & 0x20))
-		d3_UpdateObjectCameraTransform(e, *(char**) 0x6b8014, 0);
+		d3_UpdateObjectCameraTransform(e, *(char**) &g_6b8014, 0);
 	h = *(int*) (e + 0x1ec);
 	q = (float*) d3_ComputeNodeBoundsBox(e, h + 0xf4, (char*) (h + 8));
 	if (q != 0) {

@@ -31,6 +31,7 @@ typedef struct Cell {
 
 extern unsigned long d3_LastReleaseRefCount;
 
+/* ADDRESS: GOLDDE 0x004346a0 */
 void __cdecl d3_ReleaseTerrainSurfaces(char* o)
 {
 	Cell (*cells)[8];

@@ -25,6 +25,7 @@ void __cdecl d2_DestroyForm(int);
 
 
 /* ADDRESS: GOLDTL 0x004e3de0 */
+/* ADDRESS: GOLDDE 0x004d07f0 */
 void __cdecl cut_RunAuctionBidDialog(char* a, int* b)
 {
 	int i;

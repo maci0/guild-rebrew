@@ -40,6 +40,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 int __cdecl gm_HandleGegenspionage();
 
+/* ADDRESS: GOLDDE 0x005b8ea0 */
 int __cdecl d2_RunGegenspionageDialog(ENTITY_RECORD* ent, Cmd* cmd)
 {
 	ENTITY_RECORD* pa;

@@ -11,6 +11,7 @@ float* __stdcall D3DXMatrixTranspose(float* out, const float* in);
 /* Projects the screen point into map space and steps along the ray until a
  * map cell (x, z) is at least as high as the ray's y. */
 /* ADDRESS: GOLDTL 0x0045bad0 */
+/* ADDRESS: GOLDDE 0x00450b90 */
 char __cdecl d3sm_RaycastScreenPoint(char* e, int gx, int gy, int* ox, int* oy)
 {
 	float m[16];

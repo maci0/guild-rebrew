@@ -9,6 +9,7 @@ void __cdecl d2_SetClipRect(int x, int y, int w, int h)
 }
 #else
 /* ADDRESS: GOLDTL 0x0047a040 */
+/* ADDRESS: GOLDDE 0x004692f0 */
 void __cdecl d2_SetClipRect(int left, int top, int right, int bottom)
 {
 	*(int*) 0x7725f8 = left;

@@ -59,6 +59,7 @@ float* __stdcall fcn_005eb970(float*, float*, float*);
 void __cdecl d3_SetRenderMaterialState(unsigned char, unsigned char, int, unsigned char, unsigned char);
 
 /* ADDRESS: GOLDTL 0x00441400 */
+/* ADDRESS: GOLDDE 0x00439dc0 */
 void __cdecl d3_RenderFloorTerrain(char* o)
 {
 	D3_FLOOR_TERRAIN* t;

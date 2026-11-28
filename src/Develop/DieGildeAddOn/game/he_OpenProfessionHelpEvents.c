@@ -21,6 +21,7 @@ extern int g_77e0a8;
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl he_OpenHelpEvents(char*);
 
+/* ADDRESS: GOLDDE 0x00555fc0 */
 void __cdecl he_OpenProfessionHelpEvents(char* o)
 {
 	int k;

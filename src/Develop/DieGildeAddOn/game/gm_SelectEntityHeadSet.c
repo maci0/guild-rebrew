@@ -11,6 +11,7 @@ int __cdecl gm_RandomMod(unsigned short n);
 void __cdecl gm_ResolveHeadSetIcons(HEAD_SET* hs);
 
 /* ADDRESS: GOLDTL 0x004fda30 */
+/* ADDRESS: GOLDDE 0x004e9560 */
 HEAD_SET* __cdecl gm_SelectEntityHeadSet(unsigned int entityIndex)
 {
 	char* srcName;

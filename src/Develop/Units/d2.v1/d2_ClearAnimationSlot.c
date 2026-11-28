@@ -5,6 +5,7 @@ extern Anim_100e7a0 g_100e7a0[0x30];
 
 
 /* ADDRESS: GOLDTL 0x0047a2b0 */
+/* ADDRESS: GOLDDE 0x00469530 */
 void __cdecl d2_ClearAnimationSlot(int i)
 {
 	memset(((int(*)[5])g_100e7a0)[i], 0, sizeof(((int(*)[5])g_100e7a0)[i]));

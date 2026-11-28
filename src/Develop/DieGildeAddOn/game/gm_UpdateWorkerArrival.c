@@ -20,6 +20,7 @@ float __cdecl gm_RandomFloat01(void);
 void __cdecl he_SetEntityScriptFlag(Ent* e, int a2);
 
 /* ADDRESS: GOLDTL 0x004833a0 */
+/* ADDRESS: GOLDDE 0x00472350 */
 void __cdecl gm_UpdateWorkerArrival(Ent* entity)
 {
 	Ent* found;

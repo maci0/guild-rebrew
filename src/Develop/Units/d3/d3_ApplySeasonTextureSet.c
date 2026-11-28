@@ -4,6 +4,7 @@ extern char d3_CurrentSeason;
 
 void __cdecl SelectTextureSet(char*, int, char, int);
 
+/* ADDRESS: GOLDDE 0x00501020 */
 char __cdecl d3_ApplySeasonTextureSet(char* obj)
 {
 	int s;

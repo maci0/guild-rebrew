@@ -42,6 +42,7 @@ typedef struct DialogState {
  * type, marks the selected row and clears the unused rows. */
 
 /* ADDRESS: GOLDTL 0x0058b1f0 */
+/* ADDRESS: GOLDDE 0x00570eb0 */
 void __cdecl d2_PopulateBuildingSlotList(char* building, DialogState* st, unsigned int type)
 {
 	SlotItem* item;

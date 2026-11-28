@@ -1,5 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x004eeb10 */
+/* ADDRESS: GOLDDE 0x004daee0 */
 int __cdecl ahm_SetMatchingSlotValue(int* a1, char* a2)
 {
 	int i;

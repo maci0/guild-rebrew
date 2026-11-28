@@ -24,6 +24,7 @@ extern char g_1005780;
 
 
 /* ADDRESS: GOLDTL 0x004c3e30 */
+/* ADDRESS: GOLDDE 0x004b18e0 */
 void __cdecl cm_InitCommandQueue(void)
 {
 	int i;

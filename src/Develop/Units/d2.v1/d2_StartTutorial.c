@@ -18,6 +18,7 @@ int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetFormVisibility(int, int);
 void __cdecl d2_CenterForm(int, int);
 
+/* ADDRESS: GOLDDE 0x005667a0 */
 int __cdecl d2_StartTutorial(void)
 {
 	char* p;

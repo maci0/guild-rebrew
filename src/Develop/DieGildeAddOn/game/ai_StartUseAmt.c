@@ -10,6 +10,7 @@ struct rec9c760 {
 extern int __cdecl ai_SelectPrivilegeAction(int, int, int, void *, void *);
 
 /* ADDRESS: GOLDTL 0x0049c760 */
+/* ADDRESS: GOLDDE 0x0048b1a0 */
 int __cdecl ai_StartUseAmt(int a, int b, int c, int *o1, int *o2)
 {
     struct rec9c760 first;

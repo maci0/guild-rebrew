@@ -22,6 +22,7 @@ int __cdecl d3_CreateObjectAnimation(char* obj, FLAGS fl, int n, FRAME* frames);
 #pragma optimize("y", off)
 
 /* ADDRESS: GOLDTL 0x00414fb0 */
+/* ADDRESS: GOLDDE 0x00413560 */
 int __cdecl d3_CreateFlightAnimation(int* obj, int duration, int count, void** list)
 {
 	FRAME frames[64];

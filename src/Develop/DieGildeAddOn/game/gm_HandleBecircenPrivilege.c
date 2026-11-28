@@ -5,6 +5,7 @@ void __cdecl gm_HandleBecircen(char*, int*);
 
 
 /* ADDRESS: GOLDTL 0x004f8aa0 */
+/* ADDRESS: GOLDDE 0x004e4880 */
 int __cdecl gm_HandleBecircenPrivilege(char* e, int* s)
 {
 	char* p;

@@ -49,6 +49,7 @@ float __cdecl gm_CalcActionCompletionTime(int, int*);
 void __cdecl cm_SendCopyEntityData(Msg*);
 void __cdecl gm_ModifyHealth(int, int);
 
+/* ADDRESS: GOLDDE 0x00528880 */
 void __cdecl gm_UpdateEntityAgingAndTraining(int index)
 {
 	float grade;

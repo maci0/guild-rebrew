@@ -11,6 +11,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 
 
 /* ADDRESS: GOLDTL 0x004c7870 */
+/* ADDRESS: GOLDDE 0x004b5050 */
 int __cdecl fcn_004c7870(int cmd, char* result)
 {
 	unsigned int entity;

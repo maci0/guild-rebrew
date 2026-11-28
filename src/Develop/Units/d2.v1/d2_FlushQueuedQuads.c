@@ -61,6 +61,7 @@ void __cdecl d2_ResetQuadDeviceState(void);
 void __cdecl d3_SetRenderMaterialState(int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x0047c560 */
+/* ADDRESS: GOLDDE 0x0046b530 */
 int __cdecl d2_FlushQueuedQuads(int idx, Snd* snd, char* src)
 {
 	int start;

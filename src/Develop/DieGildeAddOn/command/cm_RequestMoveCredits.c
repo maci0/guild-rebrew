@@ -3,6 +3,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b2b60 */
 void __cdecl cm_RequestMoveCredits(int dst_id, int src_id, char kind, int amount)
 {
 	char buf[0x9c];

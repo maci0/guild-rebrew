@@ -1,3 +1,5 @@
+extern char gm_EntityIdField[];
+extern char g_6a68b0[];
 extern int cm_PacketDeltaBase;
 
 int __cdecl gm_LookupEntityRecordById(int a0);
@@ -13,6 +15,7 @@ void __cdecl ch_StartMovement(int a0, int a1, int a2, int a3, int a4, char* a5);
 void __cdecl he_FreeAction(int a0);
 
 /* ADDRESS: GOLDTL 0x00566110 */
+/* ADDRESS: GOLDDE 0x0054c220 */
 void __cdecl he_HandleEntlassen(int event)
 {
 	char* ent;
@@ -40,15 +43,15 @@ void __cdecl he_HandleEntlassen(int event)
 			}
 			v2 = *(unsigned short*) (*(int*) (ent + 0x16c) + 0x27);
 			v5 = v6;
-			cm_RequestCopyEntityData(*(int*) (v2 * 0x21c + 0x7f4ca4), *(int*) (ent + 4), v5, 1);
+			cm_RequestCopyEntityData(*(int*) (v2 * 0x21c + (int) &gm_EntityIdField), *(int*) (ent + 4), v5, 1);
 		}
 		cm_RequestChangePlayerHe(*(int*) (ent + 4), 0, 0);
 		cm_RequestCancelEntityEvent(*(int*) (ent + 4));
 		if (gm_FindFallbackPublicBuilding(ent, &v8, &v7) != 0) {
 			if (v7 != -1) {
-				ch_StartMovement(*(int*) (ent + 4), v8, v7, 0, 0, (char*) 0x6a68b0);
+				ch_StartMovement(*(int*) (ent + 4), v8, v7, 0, 0, (char*) &g_6a68b0);
 			} else {
-				ch_StartMovement(*(int*) (ent + 4), v8, -1, 0, 1, (char*) 0x6a68b0);
+				ch_StartMovement(*(int*) (ent + 4), v8, -1, 0, 1, (char*) &g_6a68b0);
 			}
 		}
 		he_FreeAction(event);

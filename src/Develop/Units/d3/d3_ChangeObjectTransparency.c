@@ -18,6 +18,7 @@ void __cdecl d3_ChangeObjectTransparency(char* a, char* b, V43a3f0 c)
 }
 #else
 /* ADDRESS: GOLDTL 0x0043a3f0 */
+/* ADDRESS: GOLDDE 0x00433300 */
 void __cdecl d3_ChangeObjectTransparency(char* a, char* b, V43a3f0 c)
 {
 	int i;

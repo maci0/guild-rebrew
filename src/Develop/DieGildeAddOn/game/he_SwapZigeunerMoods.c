@@ -18,6 +18,7 @@ void __cdecl cm_RequestModifyEntityLevel(int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl he_PostEntityMessage(int, int, char*, unsigned char, int, char*);
 
+/* ADDRESS: GOLDDE 0x00562110 */
 void __cdecl he_SwapZigeunerMoods(struct house* a, struct house* b)
 {
 	char name[0x64];

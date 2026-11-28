@@ -1,6 +1,7 @@
 char __cdecl d3sm_3D2SuperMap(char* map, float* pos, int* col, int* row, float* height);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00413d10 */
+/* ADDRESS: GOLDDE 0x004122c0 */
 float __cdecl d3_SampleAverageTerrainHeight(float* pos)
 {
 	char* world;

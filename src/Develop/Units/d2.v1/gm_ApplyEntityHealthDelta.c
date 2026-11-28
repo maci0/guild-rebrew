@@ -47,6 +47,7 @@ void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl cm_RequestChangeFloat(int a1, int a2, float a3);
 
 /* ADDRESS: GOLDTL 0x004ff210 */
+/* ADDRESS: GOLDDE 0x004eac20 */
 float __cdecl gm_ApplyEntityHealthDelta(unsigned short id, int delta)
 {
 	char dead;

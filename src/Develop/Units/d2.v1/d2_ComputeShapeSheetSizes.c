@@ -6,6 +6,7 @@ extern int g_67dac0;
 
 
 /* ADDRESS: GOLDTL 0x0047a570 */
+/* ADDRESS: GOLDDE 0x00469560 */
 int __cdecl d2_ComputeShapeSheetSizes(int shapeCount, int cellW, int cellH, int* countOut, int* sizesOut, int allowSplit)
 {
 	int tmp[8];

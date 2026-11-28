@@ -6,6 +6,7 @@ extern const double dbl_0_75;
 
 void __cdecl gm_GetLawEntry(int, int*);
 
+/* ADDRESS: GOLDDE 0x004e7eb0 */
 double __cdecl gm_CalcLaw00And01Factor(void)
 {
 	int a[9];

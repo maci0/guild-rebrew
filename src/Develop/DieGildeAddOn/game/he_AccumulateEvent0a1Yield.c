@@ -14,6 +14,7 @@ int __cdecl gm_GetBuildingTechEffect(int, int, int);
 float __cdecl gm_RandomFloat01(void);
 unsigned short __cdecl gm_PickUniqueOfferId(int, unsigned short*);
 
+/* ADDRESS: GOLDDE 0x00563660 */
 void __cdecl he_AccumulateEvent0a1Yield(char* u, int count)
 {
 	int found;

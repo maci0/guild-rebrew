@@ -4,6 +4,7 @@
 int __cdecl gm_GetLawEntry(int, void*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 
+/* ADDRESS: GOLDDE 0x004e11b0 */
 int __cdecl gm_FormatLawName(void* buf, int a2)
 {
 	unsigned char local[0x24];

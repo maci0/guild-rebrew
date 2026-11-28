@@ -1,3 +1,7 @@
+extern char g_1015eac[];
+extern char g_67d368[];
+extern int g_1040494;
+extern char g_1040490[];
 void __cdecl d2_PositionControl(int, int, int);
 #include "Develop/client_types.h"
 typedef D2_FORM_RECORD Obj;
@@ -33,6 +37,7 @@ typedef struct Slot {
 int __cdecl d2_GetControlValue(int id);
 
 /* ADDRESS: GOLDTL 0x00471c80 */
+/* ADDRESS: GOLDDE 0x00465180 */
 void __cdecl d2_CenterWindow(int idx, unsigned char flags)
 {
 	int* p;
@@ -40,25 +45,25 @@ void __cdecl d2_CenterWindow(int idx, unsigned char flags)
 	float bound;
 	int t;
 
-	p = (int*) (0x1015f40 + idx * 0x3cc);
+	p = (int*) ((int) &d2_Windows + idx * 0x3cc);
 	if (flags & 1) {
 		t = p[3] / 2;
 		value = (float) (p[1] + t)
-			- (float) *(int*) 0x1015eac / *(float*) 0x67d368
-			+ (float) *(int*) 0x1015eac - (float) t;
+			- (float) *(int*) &g_1015eac / *(float*) &g_67d368
+			+ (float) *(int*) &g_1015eac - (float) t;
 	} else {
 		value = (float) p[1];
 	}
 	if (flags & 2) {
-		bound = (float) (p[2] + p[4] / 2) * *(float*) 0x67d368 - (float) (p[4] / 2);
+		bound = (float) (p[2] + p[4] / 2) * *(float*) &g_67d368 - (float) (p[4] / 2);
 	} else {
 		bound = (float) p[2];
 	}
-	t = *(int*) 0x1040494 - p[3];
+	t = *(int*) &g_1040494 - p[3];
 	if ((float) t < value) {
 		value = (float) t;
 	}
-	t = *(int*) 0x1040490 - p[4];
+	t = *(int*) &g_1040490 - p[4];
 	if ((float) t < bound) {
 		bound = (float) t;
 	}
@@ -66,6 +71,7 @@ void __cdecl d2_CenterWindow(int idx, unsigned char flags)
 }
 
 /* ADDRESS: GOLDTL 0x00471d80 */
+/* ADDRESS: GOLDDE 0x00465280 */
 void __cdecl d2_CenterForm(int k, int flags)
 {
 	d2_CenterWindow(d2_Forms[k].wins[0], flags);

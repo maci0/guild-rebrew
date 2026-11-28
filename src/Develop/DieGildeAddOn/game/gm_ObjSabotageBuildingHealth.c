@@ -54,6 +54,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 void __cdecl d2_ShowUseObjDialog(char*);
 
+/* ADDRESS: GOLDDE 0x005bf750 */
 int __cdecl gm_ObjSabotageBuildingHealth(unsigned char* obj, int* arg)
 {
 	Unit* q;

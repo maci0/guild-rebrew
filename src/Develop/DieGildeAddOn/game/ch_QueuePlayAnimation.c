@@ -8,6 +8,7 @@
 CH_ACTION* __cdecl ch_NewAction(char* e);
 void __cdecl ch_ExecPlayAnimation(CH_ACTION* t);
 
+/* ADDRESS: GOLDDE 0x004054e0 */
 int __cdecl ch_QueuePlayAnimation(char* e, const char* name, int param)
 {
 	CH_ACTION* t;

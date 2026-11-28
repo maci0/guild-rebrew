@@ -37,6 +37,7 @@ int __cdecl ls_SaveList774a78(void* stream);
  * flat checks let MSVC6 merge the identical CloseVfsStream/ls_RebindSavedSceneRefs tails into one shared block,
  * while the original keeps one inline cleanup per check. The last check carries the success tail in its else. */
 /* ADDRESS: GOLDTL 0x0051e080 */
+/* ADDRESS: GOLDDE 0x00507350 */
 int __cdecl ls_SaveGame(char* name, char* slot, int flags)
 {
 	void* stream;

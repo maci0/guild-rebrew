@@ -55,6 +55,7 @@ void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 void __cdecl cm_SendCopyEntityData(Packet*);
 
 /* ADDRESS: GOLDTL 0x004ba080 */
+/* ADDRESS: GOLDDE 0x004a8130 */
 int __cdecl gm_HandleMsg2aSendAction31(Req* r)
 {
 	char* o;

@@ -9,6 +9,7 @@ typedef struct
 } Body9;
 // SIZE 0x24
 
+/* ADDRESS: GOLDDE 0x004b44f0 */
 void __cdecl cm_SendAllocAlchemist(Body9* source)
 {
 	char buf[0x9c];

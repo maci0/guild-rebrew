@@ -4,6 +4,7 @@ int __cdecl vfs_ReadStreamToken(void* h);
 int __cdecl FindTableEntryIndex(int a1, int* p, int kind);
 
 /* ADDRESS: GOLDTL 0x0044d7e0 */
+/* ADDRESS: GOLDDE 0x00443530 */
 void __cdecl d3_DispatchBinaryChunks(void* stream, int* table, int kind, void* extra)
 {
 	int* rec;

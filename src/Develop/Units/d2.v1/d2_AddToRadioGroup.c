@@ -31,6 +31,7 @@ void __cdecl d2_AddToRadioGroup(int g, int id)
 }
 #else
 /* ADDRESS: GOLDTL 0x00469470 */
+/* ADDRESS: GOLDDE 0x0045cdf0 */
 void __cdecl d2_AddToRadioGroup(int g, int id)
 {
 	g_102cbc4[g].ids[g_102cbc4[g].count] = id;

@@ -12,6 +12,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_RunWorkerTrainingDialog(int);
 
+/* ADDRESS: GOLDDE 0x00593000 */
 void __cdecl d2_RunWachstubeRegenMenu(int building)
 {
 	int a;

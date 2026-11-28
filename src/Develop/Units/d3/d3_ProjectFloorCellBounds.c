@@ -37,6 +37,7 @@ typedef struct {
     out[2] = g_1042168 * z + t.z
 
 /* ADDRESS: GOLDTL 0x00440260 */
+/* ADDRESS: GOLDDE 0x00438c20 */
 unsigned int __cdecl d3_ProjectFloorCellBounds(int floor, int cell, int gridX, int gridY)
 {
     PROJECTED_VECTOR q;

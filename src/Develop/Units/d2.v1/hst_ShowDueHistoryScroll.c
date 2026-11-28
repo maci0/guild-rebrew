@@ -12,6 +12,7 @@ void __cdecl cm_StepCommandQueue(void);
 void __cdecl hst_ShowDueTextScroll(void);
 void __cdecl d2_ShowHistoryScrollDialog(int);
 
+/* ADDRESS: GOLDDE 0x004a1dc0 */
 void __cdecl hst_ShowDueHistoryScroll(int mode)
 {
 	int buf[0x1f];

@@ -6,6 +6,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004bb8e0 */
+/* ADDRESS: GOLDDE 0x004a9950 */
 int __cdecl gm_HandleMsg40ConsumeSlotBit(int* request)
 {
 	char buf[0x400];

@@ -41,6 +41,7 @@ extern unsigned char g_6b7ff9;
 /* Sets the viewport and the perspective projection, skipping whichever of
  * the two did not change since the last call. */
 /* ADDRESS: GOLDTL 0x00436df0 */
+/* ADDRESS: GOLDDE 0x00430310 */
 void __cdecl d3_SetViewportAndProjection(float fov, float aspect, float width, float height, float x, float y, float znear, float zfar)
 {
 	struct D3D_DEV_CTX* dev;
@@ -73,6 +74,7 @@ void __cdecl d3_SetViewportAndProjection(float fov, float aspect, float width, f
 }
 
 /* ADDRESS: GOLDTL 0x00436f70 */
+/* ADDRESS: GOLDDE 0x00430490 */
 void __cdecl d3_SetFogEnabled(char on)
 {
 	if (((void**)g_6b5de0) != 0 && (g_14ce764 & 0x40000) != 0 && on != (*(char *)&g_6b7ff9)) {

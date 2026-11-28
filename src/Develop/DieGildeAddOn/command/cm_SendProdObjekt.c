@@ -3,6 +3,7 @@
 
 
 /* ADDRESS: GOLDTL 0x004c5250 */
+/* ADDRESS: GOLDDE 0x004b2c60 */
 int __cdecl cm_SendProdObjekt(int building_id, unsigned short item_id, int amount)
 {
 	char buf[0x9c];

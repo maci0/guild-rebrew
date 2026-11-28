@@ -13,6 +13,7 @@ extern char am_Methods[];
 extern unsigned char g_slot_table[2];
 
 /* ADDRESS: GOLDTL 0x00495180 */
+/* ADDRESS: GOLDDE 0x00483c40 */
 int __cdecl ai_SelectEntityMethod(int entityId)
 {
 	int posA[6];

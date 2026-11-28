@@ -52,6 +52,7 @@ void __cdecl cm_StepCommandQueue(void);
 void __cdecl ls_SaveGame(char*, char*, int);
 void __cdecl d2_ShowStatusBanner(char*);
 
+/* ADDRESS: GOLDDE 0x005c55c0 */
 void __cdecl ls_SaveNetworkGame(char* name, char* title)
 {
 	unsigned int crc;

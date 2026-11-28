@@ -84,6 +84,7 @@ void __cdecl d2_ShowStatusBanner(char*);
 int __cdecl cm_RequestSysMessage(int, Msg*);
 void __cdecl d2_DestroyForm(int);
 #include "Develop/Units/d2.v1/d2_gui.h"
+/* ADDRESS: GOLDDE 0x005c24f0 */
 int __cdecl d2_ShowNetworkLoadGame(void)
 {
 	int i;

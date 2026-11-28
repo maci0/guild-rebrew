@@ -11,6 +11,7 @@ unsigned short __cdecl gm_RandomMod(unsigned short);
 char* __cdecl d3_FindSceneObject(int, int, int, char*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 
+/* ADDRESS: GOLDDE 0x004aa740 */
 int __cdecl gm_PickRandomBuildingPoint(float* out)
 {
 	char* list[0x100];

@@ -17,6 +17,7 @@ void __cdecl gv_SendSetGraveOwner(int, int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x00572330 */
 int __cdecl d2_ShowGraveyardConfirm(int building, int itemId, unsigned char slotIndex)
 {
 	int dlg;

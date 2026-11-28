@@ -69,6 +69,7 @@ int __cdecl sprintf(char*, const char*, ...);
 char* __cdecl strupr(char*);
 
 /* ADDRESS: GOLDTL 0x005279f0 */
+/* ADDRESS: GOLDDE 0x00510c00 */
 void __cdecl d2_UpdateBuildingGroundplan(unsigned int inputFlags)
 {
 	int v9;

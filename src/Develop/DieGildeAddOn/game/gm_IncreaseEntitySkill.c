@@ -11,6 +11,7 @@ extern float g_665368;
 float __cdecl gm_RandomFloat01(void);
 void __cdecl cm_RequestModifyEntityLevel(int, int, int);
 
+/* ADDRESS: GOLDDE 0x005be4e0 */
 int __cdecl gm_IncreaseEntitySkill(unsigned char* e, int idx)
 {
 	int cur;

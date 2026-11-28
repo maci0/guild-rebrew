@@ -39,6 +39,7 @@ extern unsigned long d3_LastReleaseRefCount;
 #pragma optimize("y", off)
 
 /* ADDRESS: GOLDTL 0x0043db70 */
+/* ADDRESS: GOLDDE 0x00436740 */
 void __cdecl PrepareFloorWater(char* e)
 {
 	char flag;

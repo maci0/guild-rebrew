@@ -1,5 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x00495120 */
+/* ADDRESS: GOLDDE 0x00483be0 */
 void __cdecl ai_PushActiveMethod(int methodType)
 {
 	int i;

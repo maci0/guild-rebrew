@@ -15,6 +15,7 @@ int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl cm_SendSetHE(int, char*);
 
+/* ADDRESS: GOLDDE 0x00533ce0 */
 void __cdecl he_InitStreife(char* e)
 {
 	int cand[8];

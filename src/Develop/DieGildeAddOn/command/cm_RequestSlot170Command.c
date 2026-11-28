@@ -3,6 +3,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b45b0 */
 void __cdecl cm_RequestSlot170Command(int* values)
 {
 	char buf[0x9c];

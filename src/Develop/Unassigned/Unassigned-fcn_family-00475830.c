@@ -37,6 +37,7 @@ void __cdecl d2_LoadBmpToSurface(const char* name, void* t);
 void __cdecl d2_UnlockSurface(void* t);
 
 /* ADDRESS: GOLDTL 0x00475830 */
+/* ADDRESS: GOLDDE 0x00468000 */
 int __cdecl d2_ReadBmp24Dimensions(const char* name)
 {
 	BmpInfo bi;
@@ -56,6 +57,7 @@ int __cdecl d2_ReadBmp24Dimensions(const char* name)
 }
 
 /* ADDRESS: GOLDTL 0x00475c10 */
+/* ADDRESS: GOLDDE 0x00468290 */
 void* __cdecl d2_LoadBmp24Surface(const char* name)
 {
 	TexDesc d;

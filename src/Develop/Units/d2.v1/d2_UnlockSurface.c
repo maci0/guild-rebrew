@@ -24,6 +24,7 @@ typedef struct {
 
 
 /* ADDRESS: GOLDTL 0x00476060 */
+/* ADDRESS: GOLDDE 0x00468410 */
 int __cdecl d2_UnlockSurface(fcn_00476060_obj* o)
 {
 	if (o->f3c == 0)

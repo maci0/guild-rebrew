@@ -9,6 +9,7 @@ extern Card_1007ce0 g_1007ce0[24];
 int __cdecl gm_DrawCard(int owner);
 
 /* ADDRESS: GOLDTL 0x004a8640 */
+/* ADDRESS: GOLDDE 0x00496990 */
 void __cdecl gm_DealInitialCards(void)
 {
 	int j;

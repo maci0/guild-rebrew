@@ -26,6 +26,7 @@ int __cdecl d2_EqualizeWindowButtonWidths(int, int, char*, int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
 /* ADDRESS: GOLDTL 0x00593360 */
+/* ADDRESS: GOLDDE 0x00579010 */
 void __cdecl d2_DrawNetLobbyPlayerInfo(void)
 {
 	char buf[0x100];

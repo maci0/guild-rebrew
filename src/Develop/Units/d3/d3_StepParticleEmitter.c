@@ -12,6 +12,7 @@
    expired slots, replenish the pool up to the wanted count and write the
    transformed positions. Returns 0 once the slot budget is filled. */
 /* ADDRESS: GOLDTL 0x00453d80 */
+/* ADDRESS: GOLDDE 0x00449630 */
 unsigned char __cdecl d3_StepParticleEmitter(void* emitterArg, unsigned int tick)
 {
 	char* emitter;

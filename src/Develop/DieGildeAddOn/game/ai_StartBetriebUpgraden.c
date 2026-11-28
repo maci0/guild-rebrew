@@ -22,6 +22,7 @@ void __cdecl gm_ResolveEntityById(void** out, int, int, int id);
 extern float g_66417c;
 
 /* ADDRESS: GOLDTL 0x00498e20 */
+/* ADDRESS: GOLDDE 0x00487870 */
 int __cdecl ai_StartBetriebUpgraden(int actionKind, char* actor, int busy, Blk24* out1, Blk24* out2)
 {
 	Blk24 b2;

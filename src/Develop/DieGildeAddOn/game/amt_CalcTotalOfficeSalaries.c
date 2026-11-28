@@ -23,6 +23,7 @@ extern float g_665264[];
 
 void __cdecl gm_GetLawEntry(int kind, int* out);
 
+/* ADDRESS: GOLDDE 0x004d8b60 */
 int __cdecl amt_CalcTotalOfficeSalaries(void)
 {
 	int buf[9];

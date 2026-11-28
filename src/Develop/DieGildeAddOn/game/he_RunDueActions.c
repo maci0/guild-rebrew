@@ -21,6 +21,7 @@ void __cdecl he_CreateEventGfxInfo(HE_ACTION*);
 int __cdecl gm_CompareGameTime(char*, char*);
 void __cdecl he_CancelInvalidBuildingAction(HE_ACTION*);
 
+/* ADDRESS: GOLDDE 0x0052d390 */
 void __cdecl he_RunDueActions(void)
 {
 	int i;

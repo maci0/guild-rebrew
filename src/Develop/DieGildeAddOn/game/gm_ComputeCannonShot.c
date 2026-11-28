@@ -41,6 +41,7 @@ extern float flt_100_0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 /* ADDRESS: GOLDTL 0x004a6210 */
+/* ADDRESS: GOLDDE 0x00494c10 */
 int __cdecl gm_ComputeCannonShot(char* actor, char* building, int targetEnt)
 {
 	int col;

@@ -1,6 +1,7 @@
 void __cdecl d3_InterpolateObjectKeyframe(int a, unsigned int i, float f);
 
 /* ADDRESS: GOLDTL 0x00445d20 */
+/* ADDRESS: GOLDDE 0x0043dab0 */
 char __cdecl d3_InterpolateObjectSlotCallback(int obj, float* slotPos)
 {
 	float x;

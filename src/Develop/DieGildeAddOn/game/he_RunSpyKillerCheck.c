@@ -11,6 +11,7 @@ void __cdecl io_FormatTextBuffer(char* buf, char* fmt, ...);
 void __cdecl he_PostEntityMessage();
 
 /* ADDRESS: GOLDTL 0x00577e70 */
+/* ADDRESS: GOLDDE 0x0055dd40 */
 unsigned int __cdecl he_RunSpyKillerCheck(char* assassin, char* action, char* spyAction)
 {
 	char message[1024];

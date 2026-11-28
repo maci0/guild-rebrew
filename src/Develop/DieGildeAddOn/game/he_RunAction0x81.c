@@ -15,6 +15,7 @@ void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl cm_SendSetHE(char, char*);
 
 /* ADDRESS: GOLDTL 0x0055a920 */
+/* ADDRESS: GOLDDE 0x00540bd0 */
 void __cdecl he_RunAction0x81(char* rec)
 {
 	int cnt;

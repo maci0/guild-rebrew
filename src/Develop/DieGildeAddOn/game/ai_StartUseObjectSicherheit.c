@@ -35,6 +35,7 @@ int __cdecl ai_SelectBestMethod(int kind, int id, int a3, Msg* b, Msg* a);
 /* Each arm declares its own message pair (block scope) so the pair lands in
  * the reference slots; every arm keeps its own call-and-copy tail, which c2
  * cross-jumps into one call site as in the reference. */
+/* ADDRESS: GOLDDE 0x0048a200 */
 int __cdecl ai_StartUseObjectSicherheit(int kind, char* entity, int busy, Msg* out1, Msg* out2)
 {
 	Slot slots[10];

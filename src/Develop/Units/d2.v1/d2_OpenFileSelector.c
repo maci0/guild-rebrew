@@ -59,6 +59,7 @@ int __cdecl d2_GetControlValue(int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x005c10d0 */
 int __cdecl d2_OpenFileSelector(int wait, int mode, int title, int a4, int a5, char* out)
 {
 	int list;

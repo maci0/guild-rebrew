@@ -5,6 +5,7 @@ int __cdecl abs(int);
 
 
 /* ADDRESS: GOLDTL 0x004aacb0 */
+/* ADDRESS: GOLDDE 0x00498ff0 */
 int __cdecl ai_CompareOfficeCandidates(unsigned short* subjectEntity, unsigned short* candidateA, unsigned short* candidateB, int* comparisonOut)
 {
 	float d2;

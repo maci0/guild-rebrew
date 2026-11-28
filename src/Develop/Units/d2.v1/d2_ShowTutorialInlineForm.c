@@ -13,6 +13,7 @@ int __cdecl sb_CheckVoicePlaying(int);
 void __cdecl sb_StopVoice(int, int);
 int __cdecl d3snd_PlaySoundEffect(int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x005660c0 */
 void __cdecl d2_ShowTutorialInlineForm(void)
 {
 	if (d2_TutorialState[6] != 0 && *(int*) (d2_TutorialState[6] + 0x14) != 0) {

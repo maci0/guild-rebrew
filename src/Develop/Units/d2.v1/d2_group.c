@@ -47,6 +47,7 @@ void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLD 0x004e53e0 */
 /* ADDRESS: GOLDTL 0x004e6e20 */
+/* ADDRESS: GOLDDE 0x004d35c0 */
 int __cdecl d2_UpdateProgressBar(int h, int total, int reset)
 {
 	int pct;
@@ -66,6 +67,7 @@ int __cdecl d2_UpdateProgressBar(int h, int total, int reset)
 }
 
 /* ADDRESS: GOLDTL 0x004e6eb0 */
+/* ADDRESS: GOLDDE 0x004d3650 */
 int __cdecl d2_ShowMessageBox(char *text, unsigned int flags)
 {
 	int mode;

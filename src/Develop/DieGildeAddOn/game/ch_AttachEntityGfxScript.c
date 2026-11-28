@@ -5,6 +5,7 @@ int sprintf(char*, const char*, ...);
 char* __cdecl evt_LoadGfxScript(int);
 void __cdecl evt_CallScriptFunction(char*, int, char*);
 
+/* ADDRESS: GOLDDE 0x00519570 */
 char* __cdecl ch_AttachEntityGfxScript(char* ent, int script_id)
 {
 	char buf[0x80];

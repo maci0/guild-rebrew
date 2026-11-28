@@ -2,6 +2,7 @@ extern char* g_entity_type_table;
 extern unsigned char g_slot_table[2];
 
 /* ADDRESS: GOLDTL 0x00505d00 */
+/* ADDRESS: GOLDDE 0x004f1080 */
 int __cdecl gm_CollectBuildingObjectSlots(unsigned char* building, int* out)
 {
 	unsigned char* type;

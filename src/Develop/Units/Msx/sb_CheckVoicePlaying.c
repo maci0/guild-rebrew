@@ -4,6 +4,7 @@ extern int sb_WaveDriver;
 
 int __cdecl msx_GetSampleStatus(int);
 
+/* ADDRESS: GOLDDE 0x00420210 */
 int __cdecl sb_CheckVoicePlaying(int* voice)
 {
 	int status;

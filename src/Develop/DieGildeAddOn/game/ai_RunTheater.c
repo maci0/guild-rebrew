@@ -10,6 +10,7 @@ void __cdecl gm_ModifyHealth(int id, int amount);
 void __cdecl cm_SendCopyEntityData(char* msg);
 
 /* ADDRESS: GOLDTL 0x004abd80 */
+/* ADDRESS: GOLDDE 0x0049a0c0 */
 int __cdecl ai_RunTheater(char* actor, char* x)
 {
 	char msg[0xf8];

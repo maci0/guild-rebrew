@@ -7,6 +7,7 @@ extern char gm_EntitySlotTable[];
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x00565bf0 */
 void __cdecl d2_GrantTutorialCh5Reward(int a)
 {
 	char* p;

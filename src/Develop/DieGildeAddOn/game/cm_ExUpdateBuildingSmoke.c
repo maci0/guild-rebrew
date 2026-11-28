@@ -5,6 +5,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl gm_CheckEntityType(char*);
 void __cdecl gm_UpdateBuildingSmokeEffect(char*);
 
+/* ADDRESS: GOLDDE 0x004b9b50 */
 int __cdecl cm_ExUpdateBuildingSmoke(char* packet, char* reply)
 {
 	char* building;

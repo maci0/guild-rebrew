@@ -7,6 +7,7 @@ extern float g_665284;
 
 float __cdecl ahm_GetEssenceValue(int entityId, int which);
 
+/* ADDRESS: GOLDDE 0x004d9280 */
 float __cdecl ahm_ConsumeEssenceCapacity(int entityId, int which, int* cap)
 {
 	float v;

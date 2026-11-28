@@ -14,6 +14,7 @@ char* __cdecl gm_NextEntityQueryMatch(void);
 short* __cdecl gm_GetEntityTableEntry(char* entity);
 
 /* ADDRESS: GOLDTL 0x004d5110 */
+/* ADDRESS: GOLDDE 0x004c2060 */
 int __cdecl gm_TransferAndSellAssets(char* bld1, char* bld2, char* entity, char* otherEntity)
 {
 	char* p1;

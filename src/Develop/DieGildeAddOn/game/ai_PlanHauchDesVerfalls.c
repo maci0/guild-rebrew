@@ -27,6 +27,7 @@ int __cdecl ai_SelectRankedCandidates(char* e, int a, int* p, int b, float r, un
 int __cdecl ai_FindEntityInFavorRange(char* p, int kind, F8 f, int c, float r, int* out);
 
 /* ADDRESS: GOLDTL 0x0048f8f0 */
+/* ADDRESS: GOLDDE 0x0047e7c0 */
 int __cdecl ai_PlanHauchDesVerfalls(char* e, char* q, Blk24* b1, Blk24* b2)
 {
 	char* p;

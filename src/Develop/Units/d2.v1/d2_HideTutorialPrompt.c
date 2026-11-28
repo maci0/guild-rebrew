@@ -10,6 +10,7 @@ void __cdecl d2_SetFormVisibility(int, int);
 int __cdecl sb_CheckVoicePlaying(int);
 void __cdecl sb_StopVoice(int, int);
 
+/* ADDRESS: GOLDDE 0x00566290 */
 void __cdecl d2_HideTutorialPrompt(void)
 {
 	d2_SetForm(d2_TutorialState[13], 0);

@@ -4,6 +4,7 @@
 extern unsigned char* lpGebaeudePROT;
 extern char* sv_SelectedBuilding;
 
+/* ADDRESS: GOLDDE 0x00564b30 */
 int __cdecl d2_CheckTutCh2RathausGate(int* msg)
 {
 	if (msg[0] == 0x19 && msg[1] != 0) {

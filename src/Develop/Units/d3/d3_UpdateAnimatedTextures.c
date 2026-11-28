@@ -17,6 +17,7 @@ unsigned int __cdecl vfs_CalcCrc32(void* buf, unsigned int n);
 int __cdecl d3_FindTextureVariant(int idx, int frame);
 
 /* ADDRESS: GOLDTL 0x0045cbe0 */
+/* ADDRESS: GOLDDE 0x00451b90 */
 char __cdecl d3_UpdateAnimatedTextures(char* o, unsigned int t)
 {
 	char* m;

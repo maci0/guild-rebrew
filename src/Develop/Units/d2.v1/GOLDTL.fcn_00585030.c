@@ -65,6 +65,7 @@ void __cdecl d3_EndCameraAndUiMode(void);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 /* ADDRESS: GOLDTL 0x00585030 */
+/* ADDRESS: GOLDDE 0x0056acf0 */
 void __cdecl d2_ShowAlchemyFormulaBook(int alchemyObjectArg)
 {
 	char* e;

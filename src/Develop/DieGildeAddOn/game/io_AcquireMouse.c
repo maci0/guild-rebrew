@@ -2,6 +2,7 @@
 
 #include "Develop/DieGildeAddOn/game/client_input.h"
 
+/* ADDRESS: GOLDDE 0x00410450 */
 int __cdecl io_AcquireMouse(int enable)
 {
 	INPUT_DEVICE* obj;

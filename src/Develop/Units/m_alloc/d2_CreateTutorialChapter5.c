@@ -44,6 +44,7 @@ void __cdecl d2_GrantTutorialCh5Reward(void);
 void __cdecl d2_RunTutorialOfficeStep(void);
 void __cdecl d2_SendTutorialTownMsgA0(void);
 
+/* ADDRESS: GOLDDE 0x005694d0 */
 int* __cdecl d2_CreateTutorialChapter5(void)
 {
 	int* first;

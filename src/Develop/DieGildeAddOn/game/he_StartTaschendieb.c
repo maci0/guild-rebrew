@@ -18,6 +18,7 @@ extern pos14_7f4c00 gm_GameTime;
 void __cdecl he_FreeAction(char* p);
 void __cdecl gm_AddTime(pos14_7f4c00* s, int a, int b, int c);
 
+/* ADDRESS: GOLDDE 0x00538d50 */
 void __cdecl he_StartTaschendieb(char* p)
 {
 	int i;

@@ -5,6 +5,7 @@ int __cdecl d2_CreateBitmapElement(int x, int y, int a3, int a4, int a5);
 void __cdecl d2_AddWindowChild(int r, int i);
 
 /* ADDRESS: GOLDTL 0x004692c0 */
+/* ADDRESS: GOLDDE 0x0045cc40 */
 int __cdecl d2_AddWindowBitmapElement(int dx, int dy, int width, int height, int src, int win)
 {
 	int r;

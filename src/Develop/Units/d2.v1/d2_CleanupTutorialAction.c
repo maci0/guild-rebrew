@@ -5,6 +5,7 @@ extern int* d2_TutorialState;
 
 void __cdecl d2_CloseActionPopup(void*);
 
+/* ADDRESS: GOLDDE 0x00565e50 */
 int __cdecl d2_CleanupTutorialAction(void)
 {
 	char* p;

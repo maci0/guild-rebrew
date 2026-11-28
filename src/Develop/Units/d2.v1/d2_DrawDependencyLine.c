@@ -3,6 +3,7 @@
 void __cdecl d2_DrawLine(int, int, int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x0050f750 */
+/* ADDRESS: GOLDDE 0x004fa490 */
 void __cdecl d2_DrawDependencyLine(int x0, int y0, int x1, int y1)
 {
 	d2_DrawLine(x0, y0, x1, y1, 0x58, 0x1f, 0x14);

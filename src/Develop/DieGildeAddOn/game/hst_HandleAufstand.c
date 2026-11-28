@@ -14,6 +14,7 @@ extern char* gm_CityEntity;
 
 void __cdecl cm_SendCopyEntityData(void*);
 
+/* ADDRESS: GOLDDE 0x0049e390 */
 int __cdecl hst_HandleAufstand(void)
 {
 	char msg[0xf8];

@@ -8,6 +8,7 @@ void __cdecl d3_GridPointToWorld(char*, int, int, int);
 
 /* Places a marker on a free cell near a position of the current room map. */
 /* ADDRESS: GOLDTL 0x00405c70 */
+/* ADDRESS: GOLDDE 0x00404ea0 */
 int __cdecl ch_SelectNearbyPosition(float* pos, int marker)
 {
 	char* map;

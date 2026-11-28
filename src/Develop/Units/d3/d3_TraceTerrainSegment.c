@@ -24,6 +24,7 @@ extern float flt_1_0;
 
 void __cdecl d3sm_3D2SuperMap(void*, V3*, int*, int*, float*);
 
+/* ADDRESS: GOLDDE 0x005cadf0 */
 int __cdecl d3_TraceTerrainSegment(void* map, V3* from, V3* to, int gx, int gy, int* ox, int* oy)
 {
 	int cx;

@@ -14,6 +14,7 @@ int __cdecl atoi(const char* s);
 void __cdecl hst_ResetHistoryGroup(int n);
 
 /* ADDRESS: GOLDTL 0x004b24c0 */
+/* ADDRESS: GOLDDE 0x004a07e0 */
 Slot* __cdecl hst_ParseCommandline_1st_Pass(int id)
 {
 	char buf[0x17d0];

@@ -43,6 +43,7 @@ int __cdecl gm_CollectBuildingSlotObjects(unsigned char* s, int* out)
 
 /* ADDRESS: GOLD 0x00508cf0 */
 /* ADDRESS: GOLDTL 0x0050bf30 */
+/* ADDRESS: GOLDDE 0x004f6e90 */
 int __cdecl gm_CollectBuildingSubObjects(unsigned char* s, unsigned short* key, int* out)
 {
 	BUILDING_SLOT_PROTO* k;

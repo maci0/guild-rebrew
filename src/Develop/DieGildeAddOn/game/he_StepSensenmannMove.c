@@ -16,6 +16,7 @@ void __cdecl d3_SetNodePosition(char*, float*);
 int __cdecl gm_GetGameSpeedSetting(void);
 
 /* ADDRESS: GOLDTL 0x00558680 */
+/* ADDRESS: GOLDDE 0x0053e9e0 */
 int __cdecl he_StepSensenmannMove(char* action)
 {
 	float pos1[4];

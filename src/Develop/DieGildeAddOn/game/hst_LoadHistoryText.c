@@ -31,6 +31,7 @@ int __cdecl txt_FindTextBank(const char* name);
 int __cdecl txt_ReloadTextFile(const char* name);
 
 /* ADDRESS: GOLDTL 0x004b1e60 */
+/* ADDRESS: GOLDDE 0x004a0180 */
 void __cdecl hst_LoadHistoryText(void)
 {
 	char buf[0x40];

@@ -17,6 +17,7 @@ void __cdecl d3_TransformPoint(char*, float*, float*);
 int __cdecl evt_CallScriptFunction(int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x0052db70 */
+/* ADDRESS: GOLDDE 0x00516500 */
 void __cdecl gm_UpdateBuildingSmokeEffect(char* buildingRecord)
 {
 	float v[4];

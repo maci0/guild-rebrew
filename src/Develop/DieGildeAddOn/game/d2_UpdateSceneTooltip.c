@@ -10,6 +10,7 @@ int __cdecl d2_ShowPersonTooltip(int*);
 void __cdecl d2_BringFormToFront(int);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00590670 */
+/* ADDRESS: GOLDDE 0x00576320 */
 void __cdecl d2_UpdateSceneTooltip(void)
 {
 	unsigned short* p;

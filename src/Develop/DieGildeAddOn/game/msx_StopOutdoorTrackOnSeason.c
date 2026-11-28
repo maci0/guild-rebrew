@@ -39,6 +39,7 @@ typedef struct { unsigned char kind; unsigned char unknown01[0x24c]; } BUILDING_
  * running channel changed, otherwise decides at random whether to interrupt
  * the current track and pick a new one. */
 /* ADDRESS: GOLDTL 0x004c2860 */
+/* ADDRESS: GOLDDE 0x004b0380 */
 void __cdecl msx_StopOutdoorTrackOnSeason(void)
 {
 	int now;

@@ -3,6 +3,7 @@ void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 
 
 /* ADDRESS: GOLDTL 0x0049ccb0 */
+/* ADDRESS: GOLDDE 0x0048b6f0 */
 int __cdecl ai_RunPamphlete(char* a, int b, int c)
 {
 	if (aip_ExecPamphlet(a, b, c) != 0) {

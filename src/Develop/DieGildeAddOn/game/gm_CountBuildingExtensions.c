@@ -3,6 +3,7 @@
 
 void* __cdecl gm_QueryEntities(int, int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x004fb0d0 */
 int __cdecl gm_CountBuildingExtensions(char* p)
 {
 	int r;

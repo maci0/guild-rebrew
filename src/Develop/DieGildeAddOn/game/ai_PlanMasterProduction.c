@@ -36,6 +36,7 @@ typedef struct {
 } MEISTER_COPY_BLK64;
 
 /* ADDRESS: GOLDTL 0x00483480 */
+/* ADDRESS: GOLDDE 0x00472430 */
 void __cdecl ai_PlanMasterProduction(int entityRecord)
 {
 	void *rec1;

@@ -17,6 +17,7 @@ void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl d3_TransformPoint(char*, char*, struct vec4*);
 float __cdecl d3_WrapYawDelta(struct vec4*, char*);
 
+/* ADDRESS: GOLDDE 0x0053ed30 */
 int __cdecl he_AimSensenmann(char* u)
 {
 	char* x;

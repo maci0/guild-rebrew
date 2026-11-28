@@ -35,6 +35,7 @@ char* __cdecl gm_GetGuildHall(int n);
 char* __cdecl gm_QueryEntities(int obj, int mode, ...);
 void __cdecl cm_RequestTransferCurrencyNoKill(int a, int b, int c, int d);
 
+/* ADDRESS: GOLDDE 0x004e8470 */
 int __cdecl gm_CalcLaw0x0cTaxSlot(unsigned short id, Slots* s, unsigned char flags)
 {
 	int amt;

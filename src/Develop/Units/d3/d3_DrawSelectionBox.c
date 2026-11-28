@@ -10,6 +10,7 @@ void __cdecl dd_BeginLines(void);
 void __cdecl dd_Line(int, int, int, int, int);
 void __cdecl dd_EndLines(void);
 
+/* ADDRESS: GOLDDE 0x0051d480 */
 void __cdecl d3_DrawSelectionBox(void)
 {
 	if (d3_SelectionBoxActive != 0) {

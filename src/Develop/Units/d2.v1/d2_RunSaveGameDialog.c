@@ -85,6 +85,7 @@ int __cdecl d2_OpenMessageBox(char*, int);
 void __cdecl ls_SaveGame(char*, char*, int);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x005c21b0 */
 int __cdecl d2_RunSaveGameDialog(Blob* src)
 {
 	int i;

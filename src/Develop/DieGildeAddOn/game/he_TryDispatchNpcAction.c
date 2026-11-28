@@ -37,6 +37,7 @@ void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl cm_RequestSpawnBuildingCharacter(int, int, int);
 
+/* ADDRESS: GOLDDE 0x0053fac0 */
 int __cdecl he_TryDispatchNpcAction(char* s, int n, int m)
 {
 	int tgt;

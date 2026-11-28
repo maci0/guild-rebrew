@@ -6,6 +6,7 @@ extern char str_CharacterIdle_Invalid_character[];
 
 void __cdecl evt_LogScriptError(void*, int, void*);
 
+/* ADDRESS: GOLDDE 0x0040c8d0 */
 int __cdecl CharacterIdle(int** charakter_argument)
 {
 	void* g;

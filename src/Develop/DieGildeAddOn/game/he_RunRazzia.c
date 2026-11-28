@@ -33,6 +33,7 @@ void __cdecl he_AssignActionSlot(char*, char*, unsigned int, char*);
 void __cdecl he_FreeAction(char*);
 
 /* ADDRESS: GOLDTL 0x0054e390 */
+/* ADDRESS: GOLDDE 0x00534830 */
 void __cdecl he_RunRazzia(char* e)
 {
 	int n;

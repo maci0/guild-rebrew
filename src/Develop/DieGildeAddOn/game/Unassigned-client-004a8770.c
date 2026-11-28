@@ -34,6 +34,7 @@ short __cdecl gm_ResolveCardGameWinner(void);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 
 /* ADDRESS: GOLDTL 0x004a8770 */
+/* ADDRESS: GOLDDE 0x00496ac0 */
 void __cdecl gm_CollectCardGameAnte(void)
 {
 	((CARD_GAME_ANTE_CTX*)g_1007cd4)->fa0 = ((CARD_GAME_ANTE_CTX*)g_1007cd4)->fac * 3;
@@ -41,6 +42,7 @@ void __cdecl gm_CollectCardGameAnte(void)
 }
 
 /* ADDRESS: GOLDTL 0x004a87b0 */
+/* ADDRESS: GOLDDE 0x00496b00 */
 void __cdecl gm_SettleCardGameRound(void)
 {
 	int i;

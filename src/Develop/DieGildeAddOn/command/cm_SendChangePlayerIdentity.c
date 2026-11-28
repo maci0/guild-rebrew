@@ -3,6 +3,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b2af0 */
 void __cdecl cm_SendChangePlayerIdentity(int player_id, int identity_id)
 {
 	char buf[0x9c];

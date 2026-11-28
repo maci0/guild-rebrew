@@ -48,6 +48,7 @@ typedef struct {
 #pragma pack(pop)
 
 /* ADDRESS: GOLDTL 0x005705a0 */
+/* ADDRESS: GOLDDE 0x00556560 */
 void __cdecl he_ProcessTradeCartRoute(int action, char* rec)
 {
 	TIME_JOB job;

@@ -16,6 +16,7 @@ unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl ai_SelectRankedCandidates(char* e, int a, int* b, float c, float r, unsigned short* out);
 float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 
+/* ADDRESS: GOLDDE 0x00497380 */
 int __cdecl ai_CheckAction02aPredicate(char* unused1, char* e, char* ctx, char* unused2, char* out)
 {
 	unsigned short idx[2];

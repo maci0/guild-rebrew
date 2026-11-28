@@ -6,6 +6,7 @@
 
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 
+/* ADDRESS: GOLDDE 0x0050d8e0 */
 int __cdecl ls_LoadGameMatrices(void* x)
 {
 	int n;

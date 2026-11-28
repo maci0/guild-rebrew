@@ -27,6 +27,7 @@ int __cdecl he_PostEntityMessage(int, int, char*, unsigned char, int, char*);
 int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 void __cdecl he_FreeAction(char*);
 
+/* ADDRESS: GOLDDE 0x0054b9d0 */
 void __cdecl he_RunAction0x27(char* u)
 {
 	char text[0x400];

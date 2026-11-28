@@ -9,6 +9,7 @@ extern pos14_7f4c00 gm_GameTime;
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl gm_TryRecordCrime(int, int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x00561ae0 */
 void __cdecl he_StartAction0x9d(char* o)
 {
 	char* x;

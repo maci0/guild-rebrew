@@ -78,6 +78,7 @@ void __cdecl d2_Plot(int x, int y, int r, int g, int b)
 extern Win_1015f40 d2_Windows[0x60];
 
 /* ADDRESS: GOLDTL 0x00472960 */
+/* ADDRESS: GOLDDE 0x00465b20 */
 void __cdecl d2_Plot(int x, int y, unsigned char r, unsigned char g, unsigned char b)
 {
 	D2_WIN* w;

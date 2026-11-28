@@ -5,6 +5,7 @@ extern unsigned char* lpGebaeudeINST;
 extern unsigned char* lpGebaeudePROT;
 extern float flt_0_0;
 
+/* ADDRESS: GOLDDE 0x004e7990 */
 float __cdecl gm_GetBuildingLevelRatio(void)
 {
 	int s1;

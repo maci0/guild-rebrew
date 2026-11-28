@@ -36,6 +36,7 @@ void __cdecl he_FreeAction(char*);
  * cell, pick the nearest matching entity or neighbour, place the icon and
  * advance the state. */
 /* ADDRESS: GOLDTL 0x00560290 */
+/* ADDRESS: GOLDDE 0x00546460 */
 void __cdecl he_RunKraeuter(char* action)
 {
 	char name[512];

@@ -45,6 +45,7 @@ void __cdecl fcn_004e4eb0(void);
 int __cdecl cm_RequestTransferCurrencyNoKill(int a, int b, unsigned char kind, int amount);
 
 /* ADDRESS: GOLDTL 0x004e33a0 */
+/* ADDRESS: GOLDDE 0x004cfdb0 */
 void __cdecl cut_RunAuction(int* arg)
 {
 	char temp[0x200];

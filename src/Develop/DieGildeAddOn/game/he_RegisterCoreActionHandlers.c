@@ -34,6 +34,7 @@ void __cdecl he_RunMissionCheck(char*);
 void __cdecl fcn_005756f0(char*);
 void __cdecl fcn_00575700(char*);
 
+/* ADDRESS: GOLDDE 0x0055b660 */
 int __cdecl he_RegisterCoreActionHandlers(void)
 {
 	if (he_RegisterHandler(3, he_StartAbbau, he_RunAbbau) != 0) {

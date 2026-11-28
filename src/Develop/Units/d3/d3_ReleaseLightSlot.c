@@ -12,6 +12,7 @@ typedef struct
 #include "Develop/client_types.h"
 extern Slot170_7731b8 gm_CannonTowers[8];
 
+/* ADDRESS: GOLDDE 0x004dc0e0 */
 void __cdecl d3_ReleaseLightSlot(int id)
 {
 	int i;

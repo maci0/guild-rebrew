@@ -6,6 +6,7 @@ void __cdecl d3_ClearMatchingAuxSlot(void);
 
 
 
+/* ADDRESS: GOLDDE 0x00432770 */
 void __cdecl d3_CleanupObjectResources(char* o)
 {
 	int h;

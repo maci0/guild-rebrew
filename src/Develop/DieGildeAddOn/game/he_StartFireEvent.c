@@ -13,6 +13,7 @@ unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 #include "Develop/Units/d3/client_scene_transform.h"
 
+/* ADDRESS: GOLDDE 0x005528f0 */
 void __cdecl he_StartFireEvent(char* u)
 {
 	unsigned short n;

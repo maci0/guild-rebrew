@@ -4,6 +4,7 @@
 
 void __cdecl d3_InvalidateSceneRenderCache(unsigned char);
 
+/* ADDRESS: GOLDDE 0x00432b70 */
 void __cdecl d3_SetActiveCamera(char* camera)
 {
 	if (camera == d3_ActiveCamera) {

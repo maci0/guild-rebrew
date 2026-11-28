@@ -17,6 +17,7 @@ void __cdecl d3_DeinitUniverse(int flags);
 
 /* ADDRESS: GOLD 0x00402140 */
 /* ADDRESS: GOLDTL 0x00402610 */
+/* ADDRESS: GOLDDE 0x00401f80 */
 int __cdecl d3sm_GetObjectSuperMap(char* obj)
 {
 	int saved;
@@ -56,6 +57,7 @@ int __cdecl d3sm_GetObjectSuperMap(char* obj)
 
 /* ADDRESS: GOLD 0x00402220 */
 /* ADDRESS: GOLDTL 0x004026f0 */
+/* ADDRESS: GOLDDE 0x00402060 */
 int __cdecl d3sm_GetSceneSuperMap(char* scene)
 {
 	int supermap;

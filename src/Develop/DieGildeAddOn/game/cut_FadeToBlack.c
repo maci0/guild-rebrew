@@ -9,6 +9,7 @@ extern int g_1040494;
 unsigned char* __cdecl d2_StartScreenFade(int, int, int, int, char*, int, int);
 int __cdecl main_RunFrameLoop(int, int);
 
+/* ADDRESS: GOLDDE 0x004d1250 */
 void __cdecl cut_FadeToBlack(void)
 {
 	if (cut_SkipMode == 0) {

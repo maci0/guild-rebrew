@@ -34,6 +34,7 @@ char* __cdecl d2_CreateSurface(Desc* d, int kind);
 int __cdecl d2_BlitSurfaceCore(int x, int y, int w, int h, char* img, int sx, int sy, Target* t);
 void __cdecl d2_ReleaseSurface(char* img);
 
+/* ADDRESS: GOLDDE 0x00468a10 */
 int __cdecl d2_BlitBufferToSurface(int x, int y, int w, int h, char* src, int sx, int sy, Target* t)
 {
 	Desc d;

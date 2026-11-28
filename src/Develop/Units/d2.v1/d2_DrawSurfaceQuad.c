@@ -80,6 +80,7 @@ void __cdecl d2_BindQuadVertexBuffer(void);
 void __cdecl d3_SetRenderMaterialState(int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x0047c7b0 */
+/* ADDRESS: GOLDDE 0x0046b780 */
 void __cdecl d2_DrawSurfaceQuad(int x, int y, int w, int h, Tex* tex, float alpha)
 {
 	TexDesc desc;

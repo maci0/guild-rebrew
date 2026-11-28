@@ -33,6 +33,7 @@ int __cdecl d3_BuildFloorGeometry(int m);
 int __cdecl d3_UpdateFloorLighting(int m);
 
 /* ADDRESS: GOLDTL 0x004cf6b0 */
+/* ADDRESS: GOLDDE 0x004bcb90 */
 int __cdecl d3_UpdateMineExplosions(void)
 {
 	int count;

@@ -14,6 +14,7 @@ extern int g_9b4a40[];
 void __cdecl d2_CloseAllEntityStatusPopups(void);
 void __cdecl d2_OpenEntityStatusPopup(int, Ent21c*);
 
+/* ADDRESS: GOLDDE 0x004bd0e0 */
 void __cdecl d2_UpdateEntityOverlays(int context)
 {
 	Ent21c* entity;

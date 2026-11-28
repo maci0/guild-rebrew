@@ -15,6 +15,7 @@ void __cdecl cm_RequestChangeAttribute(void);
 float __cdecl gm_ApplyEntityHealthDelta(unsigned short, int);
 
 /* ADDRESS: GOLDTL 0x00508280 */
+/* ADDRESS: GOLDDE 0x004f3400 */
 int __cdecl gm_ApplyRandomDisease(char* entity, unsigned int* selectionOut, float* valueOut)
 {
 	int flags;

@@ -17,6 +17,7 @@ int __cdecl ai_SendHauchDesVerfalls(char* e, char* home, Msg* m, Msg* out);
 int __cdecl ai_RunDeathPact(char* e, char* home, Msg* m, Msg* out);
 
 /* ADDRESS: GOLDTL 0x0048fdd0 */
+/* ADDRESS: GOLDDE 0x0047eca0 */
 int __cdecl ai_RunGraveyardOwner(char* e, Msg* m, Msg* out)
 {
 	{

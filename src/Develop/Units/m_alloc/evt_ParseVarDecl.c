@@ -1,3 +1,6 @@
+extern char g_6794a0[];
+extern char g_679490[];
+extern char g_679480[];
 #include <string.h>
 
 extern char* evt_CurrentScript;
@@ -9,6 +12,7 @@ extern int __cdecl evt_ParseFunctionArgs(int a0, void *rec);
 extern int __cdecl fcn_0064e790(int a0, int a1);
 
 /* ADDRESS: GOLDTL 0x00427830 */
+/* ADDRESS: GOLDDE 0x00422290 */
 unsigned int __cdecl evt_ParseVarDecl(int script, unsigned int kind)
 {
     char name[32];
@@ -93,7 +97,7 @@ unsigned int __cdecl evt_ParseVarDecl(int script, unsigned int kind)
     else
     {
         v3 = 1;
-        evt_LogScriptError(script, *(unsigned int *)(script + 0x118), (char *)0x6794a0);
+        evt_LogScriptError(script, *(unsigned int *)(script + 0x118), (char *) &g_6794a0);
     }
     if (!evt_FindSymbol(v2, name))
     {
@@ -103,10 +107,10 @@ unsigned int __cdecl evt_ParseVarDecl(int script, unsigned int kind)
     }
     evt_ReadToken(*(unsigned int *)(evt_CurrentScript + 0x118), &tok.status);
     if (tok.data[0] != 0x1c)
-        evt_LogScriptError(v2, *(unsigned int *)(v2 + 0x118), (char *)0x679490);
+        evt_LogScriptError(v2, *(unsigned int *)(v2 + 0x118), (char *) &g_679490);
     evt_ReadToken(*(unsigned int *)(evt_CurrentScript + 0x118), &tok.status);
     if (tok.data[0] == 10)
         return 1;
-    evt_LogScriptError(v2, *(unsigned int *)(v2 + 0x118), (char *)0x679480);
+    evt_LogScriptError(v2, *(unsigned int *)(v2 + 0x118), (char *) &g_679480);
     return 1;
 }

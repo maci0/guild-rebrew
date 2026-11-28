@@ -3,6 +3,7 @@ int __cdecl ai_ComputeActionScore(void*, void*, int, int, void*);
 int __cdecl ai_ComputeBaseActionScore(void*, void*, int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x0049ca80 */
+/* ADDRESS: GOLDDE 0x0048b4c0 */
 int __cdecl ai_ScorePamphlete(int* firstScore, int* secondScore, int a3, int a4, int a5, int a6, int a7)
 {
 	char local[0x24];

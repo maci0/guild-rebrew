@@ -15,6 +15,7 @@ extern char g_67bc28[];
 
 void* __cdecl m_alloc(int, void*);
 
+/* ADDRESS: GOLDDE 0x00446650 */
 void __cdecl d3_InitLightBuffers(int nlist, int nactive)
 {
 	int i;

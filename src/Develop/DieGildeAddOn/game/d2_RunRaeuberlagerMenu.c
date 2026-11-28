@@ -40,6 +40,7 @@ void __cdecl d2_ShowPersonalbuch(unsigned char*, char*);
 void __cdecl d2_RunDiebesgildeInfoDialog(unsigned char*);
 void __cdecl d2_OpenMeisterbriefDialog(unsigned char*);
 
+/* ADDRESS: GOLDDE 0x00592cc0 */
 void __cdecl d2_RunRaeuberlagerMenu(unsigned char* building)
 {
 	int a;

@@ -7,6 +7,7 @@ void __cdecl d3_GridPointToWorld(char*, int, int, float*);
 
 
 /* ADDRESS: GOLDTL 0x004bc8a0 */
+/* ADDRESS: GOLDDE 0x004aa7f0 */
 int __cdecl ch_GenerateNearbyWalkablePoints(float* position, int count, float* out)
 {
 	int ny;

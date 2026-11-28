@@ -18,6 +18,7 @@ extern int d3_ActiveScene;
 extern int g_14d1f40[];
 extern int g_1511f40[];
 
+/* ADDRESS: GOLDDE 0x00404b90 */
 void __cdecl ch_BackupGrid(Grid* grid)
 {
 	int* dst;

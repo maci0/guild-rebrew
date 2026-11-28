@@ -1,3 +1,21 @@
+void __cdecl fcn_00549b30();
+void __cdecl fcn_00549b40();
+void __cdecl he_RunAction0x2c();
+void __cdecl he_FinishCourtAction();
+void __cdecl he_RunFreeActionStub();
+void __cdecl he_StartPamphlet();
+void __cdecl he_RunAction0x42EntityMsg();
+void __cdecl he_StartDuellCutscene();
+void __cdecl he_StartRaubritter();
+void __cdecl he_StepActionTimer();
+void __cdecl he_StartMeisterpruefungPrompt();
+void __cdecl cm_RequestSellObjekt();
+void __cdecl he_StartPeriodicApDrain();
+void __cdecl he_StartSchutzgeldDialog();
+void __cdecl he_RunSchutzgeldDialog();
+void __cdecl he_StartAllocGeliebte();
+void __cdecl EvtSensenmann();
+void __cdecl fcn_0055a030();
 int __cdecl he_RegisterHandler(int, void*, void*);
 int __cdecl he_RegisterActionMeta(int, char*, int, int, int);
 void __cdecl fcn_00549b50(void);
@@ -118,9 +136,10 @@ void __cdecl he_InitTitleAward(void);
 void __cdecl d2_ShowTitleAward(void);
 
 /* ADDRESS: GOLDTL 0x0055b3e0 */
+/* ADDRESS: GOLDDE 0x00541690 */
 int __cdecl he_RegisterEventHandlers(void)
 {
-	if (he_RegisterHandler(34, (void*) 0x549b30, (void*) 0x549b40) != 0) {
+	if (he_RegisterHandler(34, (void*) fcn_00549b30, (void*) fcn_00549b40) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(41, (void*) fcn_00549b50, (void*) fcn_00549b80) != 0) {
@@ -132,10 +151,10 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(43, (void*) he_AllocPredigt, (void*) he_RunPredigt) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(44, (void*) he_StartCourtTrial, (void*) 0x0054ac70) != 0) {
+	if (he_RegisterHandler(44, (void*) he_StartCourtTrial, (void*) he_RunAction0x2c) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(45, (void*) he_StartCourtAction, (void*) 0x54b140) != 0) {
+	if (he_RegisterHandler(45, (void*) he_StartCourtAction, (void*) he_FinishCourtAction) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(46, (void*) he_StartAction0x2e, (void*) he_HandleAction0x2e) != 0) {
@@ -144,7 +163,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(47, (void*) he_StartSkillDuelEvent, (void*) he_RunSkillDuelEvent) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(48, (void*) he_StartFreeActionStub, (void*) 0x54b810) != 0) {
+	if (he_RegisterHandler(48, (void*) he_StartFreeActionStub, (void*) he_RunFreeActionStub) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(55, (void*) he_StartFest, (void*) he_UpdateFest) != 0) {
@@ -153,13 +172,13 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(54, (void*) he_InitInvitation, (void*) he_RunInvitation) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(53, (void*) 0x0054c240, (void*) he_RunAction53) != 0) {
+	if (he_RegisterHandler(53, (void*) he_StartPamphlet, (void*) he_RunAction53) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(65, (void*) he_StartCourtship, (void*) he_RunCourtship) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(66, (void*) he_StartRandomEvent, (void*) 0x0054d810) != 0) {
+	if (he_RegisterHandler(66, (void*) he_StartRandomEvent, (void*) he_RunAction0x42EntityMsg) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(67, (void*) he_InitStreife, (void*) he_UpdateRobberyAction) != 0) {
@@ -175,7 +194,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(70, (void*) he_InitDuellIntro, (void*) he_RunDuellIntro) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(71, (void*) 0x0054f910, (void*) he_RunDuellCutscene) != 0) {
+	if (he_RegisterHandler(71, (void*) he_StartDuellCutscene, (void*) he_RunDuellCutscene) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(74, (void*) he_AllocRndGeselle, (void*) he_RunHireJourneymanAction) != 0) {
@@ -184,7 +203,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(75, (void*) he_StartAction0x4b, (void*) he_HandleAction0x4b) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(81, (void*) 0x550480, (void*) 0x5504c0) != 0) {
+	if (he_RegisterHandler(81, (void*) he_StartRaubritter, (void*) he_StepActionTimer) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(82, (void*) he_InitAction0x52, (void*) he_RunAction0x52) != 0) {
@@ -193,7 +212,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(83, (void*) he_InitEvent053, (void*) he_RunEvent053) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(84, (void*) 0x00550770, (void*) he_RunMeisterpruefungPrompt) != 0) {
+	if (he_RegisterHandler(84, (void*) he_StartMeisterpruefungPrompt, (void*) he_RunMeisterpruefungPrompt) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(85, (void*) he_InitMeisterpruefDialog, (void*) he_RunMeisterpruefungExam) != 0) {
@@ -202,7 +221,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(86, (void*) he_InitAction0x56, (void*) he_RunGambleBet) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(87, (void*) he_AllocSellObjekt, (void*) 0x00550de0) != 0) {
+	if (he_RegisterHandler(87, (void*) he_AllocSellObjekt, (void*) cm_RequestSellObjekt) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(88, (void*) he_AllocBuildingDamageEvent, (void*) he_RunBuildingDamageEvent) != 0) {
@@ -214,7 +233,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(91, (void*) he_StartPeriodicStipend, (void*) he_RunPeriodicStipend) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(92, (void*) 0x5512f0, (void*) he_RunPeriodicApDrain) != 0) {
+	if (he_RegisterHandler(92, (void*) he_StartPeriodicApDrain, (void*) he_RunPeriodicApDrain) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(93, (void*) he_InitAction0x5d, (void*) he_RunChildBirth) != 0) {
@@ -236,7 +255,7 @@ int __cdecl he_RegisterEventHandlers(void)
 		return 1;
 	}
 	he_RegisterActionMeta(97, 0, 0, 1287, -1);
-	if (he_RegisterHandler(99, (void*) 0x005530d0, (void*) 0x00553110) != 0) {
+	if (he_RegisterHandler(99, (void*) he_StartSchutzgeldDialog, (void*) he_RunSchutzgeldDialog) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(98, (void*) he_InitSchutzgeld, (void*) he_RunSchutzgeld) != 0) {
@@ -272,7 +291,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(109, (void*) he_InitAction0x6d, (void*) he_RunCityPopulationEvent) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(111, (void*) 0x556a20, (void*) he_RunAction0x6f) != 0) {
+	if (he_RegisterHandler(111, (void*) he_StartAllocGeliebte, (void*) he_RunAction0x6f) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(112, (void*) he_InitSimKrankheiten, (void*) RunSimKrankheiten) != 0) {
@@ -287,7 +306,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(119, (void*) he_AllocUnkendunk, (void*) he_RunUnkendunk) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(120, (void*) he_PickNextSensenmannTarget, (void*) 0x00558e80) != 0) {
+	if (he_RegisterHandler(120, (void*) he_PickNextSensenmannTarget, (void*) EvtSensenmann) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(121, (void*) he_InitAction0x79Report, (void*) he_BroadcastLeaderboard) != 0) {
@@ -296,7 +315,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(122, (void*) he_InitPoliticians, (void*) he_RunPoliticians) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(123, (void*) fcn_0055a020, (void*) 0x55a030) != 0) {
+	if (he_RegisterHandler(123, (void*) fcn_0055a020, (void*) fcn_0055a030) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(125, (void*) he_InitOfficeAudit, (void*) he_RunOfficeAudit) != 0) {

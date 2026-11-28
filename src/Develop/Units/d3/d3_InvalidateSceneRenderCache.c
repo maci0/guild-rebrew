@@ -7,6 +7,7 @@ void __cdecl d3_VisitSceneObjects(int list, int a, int mask, char(__cdecl* fn)(v
 void __cdecl d3_ResetSkyDomeNormals(int a, int b);
 
 /* ADDRESS: GOLDTL 0x00438af0 */
+/* ADDRESS: GOLDDE 0x00431cd0 */
 void __cdecl d3_InvalidateSceneRenderCache(unsigned char a)
 {
 	d3_VisitSceneObjects(d3_ActiveScene, 0, 0x1ff, d3_InvalidateNodeRenderCacheCallback, a);

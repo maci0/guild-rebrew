@@ -27,6 +27,7 @@ extern int g_7725e0;
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl d2_UpdateSpinValue(Spin* p, int v, int a3, int a4);
 
+/* ADDRESS: GOLDDE 0x00467480 */
 int __cdecl d2_UpdateSelectedControlDrag(void)
 {
 	int step;

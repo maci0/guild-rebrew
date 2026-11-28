@@ -8,6 +8,7 @@ int __cdecl sb_StartVoice(int o, int a, int b);
 void __cdecl sb_SetVoiceLoopCount(int o, int v);
 #include "Develop/Units/Msx/client_sound.h"
 
+/* ADDRESS: GOLDDE 0x0040fdc0 */
 int __cdecl PlaySample3D(int* a, int* b, int* c, int* d)
 {
 	int o;

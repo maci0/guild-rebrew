@@ -8,6 +8,7 @@ extern Pair_99f800 cm_CrimeEvidenceLinks[0x800];
 
 /* The scan is a goto loop tested at the top: a for or while loop gives the
  * same instructions but lays the -1 exit out ahead of the shared epilogue. */
+/* ADDRESS: GOLDDE 0x004e1950 */
 int __cdecl gs_AllocEvidenceSlot(int owner, int key)
 {
 	int found;

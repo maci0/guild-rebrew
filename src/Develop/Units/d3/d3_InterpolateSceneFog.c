@@ -26,6 +26,7 @@ void __cdecl d3_SetFog(float, float, Col);
 
 
 /* ADDRESS: GOLDTL 0x004463f0 */
+/* ADDRESS: GOLDDE 0x0043de50 */
 char __cdecl d3_InterpolateSceneFog(unsigned int slotA, unsigned int slotB, float t)
 {
 	Col col;

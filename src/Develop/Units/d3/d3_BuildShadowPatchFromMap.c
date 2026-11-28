@@ -46,6 +46,7 @@ typedef struct GOLDTL_TileUv {
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 /* ADDRESS: GOLDTL 0x00457c10 */
+/* ADDRESS: GOLDDE 0x0044d3d0 */
 void* __cdecl d3_BuildShadowPatchFromMap(void* vb, void* ib, GOLDTL_TileMap* map, int step,
 	int* rect, GOLDTL_TileUv* uv, unsigned long diffuse)
 {

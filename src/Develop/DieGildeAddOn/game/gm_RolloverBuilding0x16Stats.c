@@ -24,6 +24,7 @@ void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, ch
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl cm_RequestChangeAttribute(void);
 
+/* ADDRESS: GOLDDE 0x0052f460 */
 void __cdecl gm_RolloverBuilding0x16Stats(void)
 {
 	short zero2;

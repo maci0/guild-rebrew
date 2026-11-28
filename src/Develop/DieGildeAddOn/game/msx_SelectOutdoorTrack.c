@@ -1,3 +1,6 @@
+extern char g_688128[];
+extern char g_7f4c00[];
+extern char g_772910[];
 #include <string.h>
 #include <stdio.h>
 
@@ -11,6 +14,7 @@ void* __cdecl msx_StartTrack(char*, int);
 unsigned short __cdecl gm_RandomMod(int);
 
 /* ADDRESS: GOLDTL 0x004c2430 */
+/* ADDRESS: GOLDDE 0x004aff50 */
 void __cdecl msx_SelectOutdoorTrack(void)
 {
 	char* dst;
@@ -19,23 +23,23 @@ void __cdecl msx_SelectOutdoorTrack(void)
 	int idx;
 	int roll;
 
-	season = gm_GetSeason((char*) 0x7f4c00);
+	season = gm_GetSeason((char*) &g_7f4c00);
 	slot = msx_FindActiveGroup();
 	if (slot >= 0) {
 		idx = slot * 0x114;
-		*(short*) (0x688228 + idx) = (short) (*(short*) (0x688228 + idx) - 0x1e);
-		*(char*) (0x68822a + idx) = 0;
+		*(short*) (((int) &g_688128 + 0x100) + idx) = (short) (*(short*) (((int) &g_688128 + 0x100) + idx) - 0x1e);
+		*(char*) (((int) &g_688128 + 0x102) + idx) = 0;
 	}
 	slot = msx_FindGroupByKey(0x2694);
 	if (slot < 0) {
 		return;
 	}
 	idx = slot * 0x114;
-	dst = (char*) (0x688128 + idx);
+	dst = (char*) ((int) &g_688128 + idx);
 	if (strlen(dst) != 0) {
-		sprintf((char*) 0x772910, "Resuming Outdoor-Track %s !", dst);
-		*(short*) (0x688228 + idx) = (short) (*(short*) (0x688228 + idx) + 0x1e);
-		*(char*) (0x68822a + idx) = 1;
+		sprintf((char*) &g_772910, "Resuming Outdoor-Track %s !", dst);
+		*(short*) (((int) &g_688128 + 0x100) + idx) = (short) (*(short*) (((int) &g_688128 + 0x100) + idx) + 0x1e);
+		*(char*) (((int) &g_688128 + 0x102) + idx) = 1;
 		tp_msx_CurrentTrack = g_772d20 = (Chan_14cc460*) msx_StartTrack(dst, 0);
 		return;
 	}
@@ -54,7 +58,7 @@ void __cdecl msx_SelectOutdoorTrack(void)
 					memcpy(dst, "CD3\\Crescendo.mp3", 18);
 				}
 			}
-			sprintf((char*) 0x772910, "Outdoor-Track for GM_SPRING selected: %s.", dst);
+			sprintf((char*) &g_772910, "Outdoor-Track for GM_SPRING selected: %s.", dst);
 			break;
 		case 1:
 			if (gm_RandomMod(0xb) < 3) {
@@ -68,7 +72,7 @@ void __cdecl msx_SelectOutdoorTrack(void)
 					strcpy(dst, "CD3\\MitFlinkemStich.mp3");
 				}
 			}
-			sprintf((char*) 0x772910, "Outdoor-Track for GM_SUMMER selected: %s.", dst);
+			sprintf((char*) &g_772910, "Outdoor-Track for GM_SUMMER selected: %s.", dst);
 			break;
 		case 2:
 			if (gm_RandomMod(0xb) < 3) {
@@ -82,7 +86,7 @@ void __cdecl msx_SelectOutdoorTrack(void)
 					strcpy(dst, "CD3\\BurgUndFeste.mp3");
 				}
 			}
-			sprintf((char*) 0x772910, "Outdoor-Track for GM_AUTUMN selected: %s.", dst);
+			sprintf((char*) &g_772910, "Outdoor-Track for GM_AUTUMN selected: %s.", dst);
 			break;
 		case 3:
 			if (gm_RandomMod(0xb) < 4) {
@@ -96,7 +100,7 @@ void __cdecl msx_SelectOutdoorTrack(void)
 					strcpy(dst, "cd1\\ImmerKalt.mp3");
 				}
 			}
-			sprintf((char*) 0x772910, "Outdoor-Track for GM_WINTER selected: %s.", dst);
+			sprintf((char*) &g_772910, "Outdoor-Track for GM_WINTER selected: %s.", dst);
 			break;
 		default:
 			break;
@@ -105,9 +109,9 @@ void __cdecl msx_SelectOutdoorTrack(void)
 			break;
 		}
 	} while (strcmp(g_772d58, dst) == 0);
-	*(short*) (0x688228 + idx) = (short) (*(short*) (0x688228 + idx) + 0x1e);
+	*(short*) (((int) &g_688128 + 0x100) + idx) = (short) (*(short*) (((int) &g_688128 + 0x100) + idx) + 0x1e);
 	g_772d58[0] = 0;
-	*(char*) (0x68822a + idx) = 1;
+	*(char*) (((int) &g_688128 + 0x102) + idx) = 1;
 	tp_msx_CurrentTrack = g_772d20 = (Chan_14cc460*) msx_StartTrack(dst, 0);
 	return;
 }

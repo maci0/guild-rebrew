@@ -48,6 +48,7 @@ extern volatile unsigned int gm_GameTicks;
 void __cdecl d2_HideTutorialPrompt(void);
 void __cdecl d2_UpdateTutorialArrow(int);
 
+/* ADDRESS: GOLDDE 0x00564670 */
 void __cdecl d2_DispatchTutorialInput(int a, int b, int c, int d)
 {
 	Msg m;

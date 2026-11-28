@@ -20,6 +20,7 @@ struct HST_LAW_RANGE {
 
 
 /* ADDRESS: GOLDTL 0x004b0c90 */
+/* ADDRESS: GOLDDE 0x0049efb0 */
 int __cdecl hst_HandleGesetzRel(int unused1, int unused2, char* text)
 {
 	int ids[2];

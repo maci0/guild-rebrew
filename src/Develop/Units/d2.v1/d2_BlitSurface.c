@@ -31,6 +31,7 @@ int __cdecl d2_BlitSurface(int x, int y, int w, int h, BlitSurf* src, int sx, in
 
 
 /* ADDRESS: GOLDTL 0x004763e0 */
+/* ADDRESS: GOLDDE 0x00468790 */
 int __cdecl d2_BlitSurface(int x, int y, int w, int h, BlitSurf* src, int sx, int sy, BlitSurf* dst, int unused)
 {
 	unsigned char shift = 3;

@@ -43,6 +43,7 @@ void __cdecl gm_AddTime(GAME_TIMESTAMP* t, int a, int b, int c);
 void __cdecl he_FreeAction(char* e);
 
 /* ADDRESS: GOLDTL 0x0057b390 */
+/* ADDRESS: GOLDDE 0x005611f0 */
 void __cdecl he_RunAction0x93(char* e)
 {
 	int count;

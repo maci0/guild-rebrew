@@ -3,6 +3,7 @@ void __cdecl d3_FillDiamondAreaIfHeight(int, int, int, int, unsigned char*, int,
 void __cdecl d3_RasterizeFlatHeightSpan(int, int, int, int, unsigned char*);
 
 /* ADDRESS: GOLDTL 0x00455d30 */
+/* ADDRESS: GOLDDE 0x0044b4f0 */
 void __cdecl d3_RasterizeTriangleSpans(int count, int stride, unsigned char flags, int unused, int startY)
 {
 	CALLBACK cb;

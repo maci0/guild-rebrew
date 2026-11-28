@@ -12,6 +12,7 @@ void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004b7b60 */
+/* ADDRESS: GOLDDE 0x004a5c10 */
 int __cdecl gm_HandleMsg14FineEntity(int* request)
 {
 	char buf[0x400];

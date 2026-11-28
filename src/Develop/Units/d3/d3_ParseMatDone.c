@@ -1,4 +1,5 @@
 /* ADDRESS: GOLDTL 0x0044cf20 */
+/* ADDRESS: GOLDDE 0x00442d10 */
 void* __cdecl d3_ParseMatDone(void* a0, void* object)
 {
 	(void) a0;

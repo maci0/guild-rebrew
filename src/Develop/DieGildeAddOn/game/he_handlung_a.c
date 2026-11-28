@@ -9,6 +9,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
 
 /* ADDRESS: GOLD 0x0050a150 */
 /* ADDRESS: GOLDTL 0x0050d5d0 */
+/* ADDRESS: GOLDDE 0x004f8320 */
 int __cdecl he_GetActiveKrediteByBorrower(int id, char* owner, char** out)
 {
 	char* action;
@@ -30,6 +31,7 @@ int __cdecl he_GetActiveKrediteByBorrower(int id, char* owner, char** out)
 
 /* ADDRESS: GOLD 0x0050a1c0 */
 /* ADDRESS: GOLDTL 0x0050d640 */
+/* ADDRESS: GOLDDE 0x004f8390 */
 int __cdecl he_GetActiveKrediteByLender(int key, char* obj, unsigned int id, char** out)
 {
 	char* action;

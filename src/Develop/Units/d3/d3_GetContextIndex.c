@@ -2,6 +2,7 @@
 
 extern char d3_Universes[];
 
+/* ADDRESS: GOLDDE 0x00411900 */
 int __cdecl d3_GetContextIndex(char* p)
 {
 	int r;

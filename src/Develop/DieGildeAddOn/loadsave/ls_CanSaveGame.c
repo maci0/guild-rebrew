@@ -5,6 +5,7 @@ extern char gm_InWorldHud;
 
 extern char gm_EntitySlotTable[];
 
+/* ADDRESS: GOLDDE 0x005c5470 */
 int __cdecl ls_CanSaveGame(void)
 {
 	unsigned char* entity;

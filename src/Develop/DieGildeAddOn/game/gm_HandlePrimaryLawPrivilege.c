@@ -8,6 +8,7 @@ void __cdecl gm_FormatLawName(void*, int);
 int __cdecl d2_ShowGesetzDialog(void*, void*);
 
 /* ADDRESS: GOLDTL 0x004f8140 */
+/* ADDRESS: GOLDDE 0x004e3f20 */
 int __cdecl gm_HandlePrimaryLawPrivilege(char* a1, int* a2)
 {
 	Rec24 rec;

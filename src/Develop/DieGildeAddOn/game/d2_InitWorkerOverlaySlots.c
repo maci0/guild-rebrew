@@ -15,6 +15,7 @@ void __cdecl io_AppendText(int a1, ...);
 void __cdecl io_FormatTextBuffer(char* buf, int fmt, ...);
 
 /* ADDRESS: GOLDTL 0x005b5eb0 */
+/* ADDRESS: GOLDDE 0x005986b0 */
 void __cdecl d2_InitWorkerOverlaySlots(int windowContext, char* entityName)
 {
     int workerIcons[4];

@@ -3,6 +3,7 @@ int __cdecl ai_ComputeActionScore(void* o0, void* o1, int idx, char* s, void* p4
 int __cdecl ai_ComputeBaseActionScore(void* o0, void* o1, int idx, char* s, int a4, int a5, void* a6);
 
 /* ADDRESS: GOLDTL 0x0049bd50 */
+/* ADDRESS: GOLDDE 0x0048a790 */
 int __cdecl ai_ScoreUseTrank(void* firstScore, void* secondScore, int idx, char* entity, int extraA, int extraB, void* action)
 {
 	char lawInfo[0x24];

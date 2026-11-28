@@ -67,6 +67,7 @@ void __cdecl d3_DestroySkyLayer(void);
 void __cdecl d2_ReleaseOverlaySprite(char *);
 
 /* ADDRESS: GOLDTL 0x0053c560 */
+/* ADDRESS: GOLDDE 0x00523d60 */
 int __cdecl d2_RunParentProfessionSelection(void)
 {
 	int ret = 0;

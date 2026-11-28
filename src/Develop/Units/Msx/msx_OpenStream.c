@@ -11,6 +11,7 @@ typedef void (__stdcall* AILLastErrorFn)(void);
 extern AILOpenStreamFn g_662404;
 extern AILLastErrorFn g_6623b8;
 
+/* ADDRESS: GOLDDE 0x004251a0 */
 int __cdecl msx_OpenStream(int* device, int filename, int* outHandle)
 {
 	int r = 0;

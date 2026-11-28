@@ -19,6 +19,7 @@ void __cdecl sb_StopVoice(int, int);
 
 
 /* ADDRESS: GOLDTL 0x004b3ec0 */
+/* ADDRESS: GOLDDE 0x004a21b0 */
 int __cdecl d2_ShowMissionBriefingDialog(int a1, int flags)
 {
 	char buf[0x100];

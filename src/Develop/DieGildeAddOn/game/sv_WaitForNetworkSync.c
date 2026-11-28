@@ -14,6 +14,7 @@ int __cdecl cm_GetCommandStatus(int);
 void __cdecl main_RunFrameLoop(int, int);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x0051dfd0 */
 void __cdecl sv_WaitForNetworkSync(int flags)
 {
 	char buf[0x7c];

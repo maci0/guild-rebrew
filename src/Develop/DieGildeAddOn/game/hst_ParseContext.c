@@ -8,6 +8,7 @@ typedef int (__cdecl *HST_HANDLER)(int, int*, int, char*, int*);
 
 /* Attested name: hst_ParseContext (log strings at 0x68092c, 0x68095c, 0x680990) */
 /* ADDRESS: GOLDTL 0x004b2300 */
+/* ADDRESS: GOLDDE 0x004a0620 */
 int __cdecl hst_ParseContext(char* text, int* arg, int* out)
 {
 	int id;

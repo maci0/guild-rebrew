@@ -2,6 +2,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b2e40 */
 void __cdecl cm_RequestChangeFloat(int entity_id, int offset, int delta)
 {
 	char buf[0x9c];

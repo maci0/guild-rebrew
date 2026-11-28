@@ -11,6 +11,7 @@ extern char* g_14a9a20;
 extern char str_empty[];
 
 /* ADDRESS: GOLDTL 0x004e32c0 */
+/* ADDRESS: GOLDDE 0x004cfcd0 */
 int __cdecl cut_BroadcastCutsceneNotice(char* cutscene)
 {
 	char buf[0x200];

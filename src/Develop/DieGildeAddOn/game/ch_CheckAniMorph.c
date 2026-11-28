@@ -26,6 +26,7 @@ void __cdecl ReportClientMessage(const char*);
  * its name is resolved. The entity's animation slot is cleared in each
  * completed path. */
 /* ADDRESS: GOLDTL 0x004045c0 */
+/* ADDRESS: GOLDDE 0x00403af0 */
 void __cdecl ch_CheckAniMorph(char* obj)
 {
 	int cleared;

@@ -7,6 +7,7 @@ char* __cdecl d2_GetResourceData(int idx);
 void __cdecl d2_DrawCursorAndCounters(int a, int x, int y, int w, int h);
 
 /* ADDRESS: GOLDTL 0x00473a10 */
+/* ADDRESS: GOLDDE 0x00466710 */
 int __cdecl d2_DrawMouseCursor(int x, int y)
 {
 	int px;

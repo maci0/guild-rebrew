@@ -4,6 +4,7 @@
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
+/* ADDRESS: GOLDDE 0x00565650 */
 int __cdecl d2_CheckTutCh4Cat02ActionGate(int* m)
 {
 	if (m[0] == 0x2b && m[1] != 0 && ((char)(((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*) m[1]].category)) == 2 &&

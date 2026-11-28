@@ -7,6 +7,7 @@ extern pos14_7f4c00 gm_GameTime;
 double __cdecl gm_GetCityStatsSummary(float*);
 int __cdecl ai_FilterCandidateLimit(int, int, int);
 
+/* ADDRESS: GOLDDE 0x004a3220 */
 int __cdecl gm_CheckEconomyCandidateLimit(int entity, int cmd, char* spec)
 {
 	float buf[10];

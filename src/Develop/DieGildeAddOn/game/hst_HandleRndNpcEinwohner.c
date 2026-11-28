@@ -15,6 +15,7 @@ void __cdecl io_FormatTextBuffer(void*, int, ...);
  * addresses the 0x200 scratch buffer off ebp; section 13 of
  * archived docs/msvc6-c-shapes.md. */
 #pragma optimize("y", off)
+/* ADDRESS: GOLDDE 0x0049dd30 */
 int __cdecl hst_HandleRndNpcEinwohner(int selectionMode, int pairs, int idx, char* text, int out)
 {
 	char buf[0x200];

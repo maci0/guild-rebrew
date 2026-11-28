@@ -8,6 +8,7 @@ void __cdecl m_FreeTracked(void* p);
 
 /* ADDRESS: GOLD 0x00413b30 */
 /* ADDRESS: GOLDTL 0x00415310 */
+/* ADDRESS: GOLDDE 0x00413710 */
 int* __cdecl d3_CreateRain(int count)
 {
 	int* info;

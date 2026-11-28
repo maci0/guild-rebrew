@@ -7,6 +7,7 @@ int __cdecl fcn_0064d41a(char*, char*, ...);
 int __cdecl fcn_0065f220(char*, char*);
 void __cdecl ch_SetBodyAttachment(char*, int, char*);
 
+/* ADDRESS: GOLDDE 0x004bc180 */
 void __cdecl ch_UpdateHeldObjectAttachment(char* entity)
 {
 	char buf[0x80];

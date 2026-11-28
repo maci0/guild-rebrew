@@ -3,6 +3,7 @@
 
 unsigned short __cdecl gm_RandomMod(int);
 
+/* ADDRESS: GOLDDE 0x00574160 */
 void __cdecl d2_RollSeanceAudioPairs(int n, int* a, int* b, int base)
 {
 	int i;

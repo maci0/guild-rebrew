@@ -47,6 +47,7 @@ int __cdecl amt_fio_LoadAemter(void* stream, int version);
 #include "Develop/Units/d3/client_scene_loader.h"
 int __cdecl gm_RebuildLoadedReferences(void);
 
+/* ADDRESS: GOLDDE 0x0050ee10 */
 int __cdecl ls_WaitAndLoadNetSave(void)
 {
 	int hdr[0x3f];

@@ -15,6 +15,7 @@ typedef struct
 
 #pragma pack(pop)
 
+/* ADDRESS: GOLDDE 0x004b3c20 */
 void __cdecl cm_SendAssignOffice(ASSIGN_OFFICE_CMD* body)
 {
 	char buf[0x9c];

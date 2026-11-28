@@ -18,6 +18,7 @@ void __cdecl m_FreeTracked(void* p);
 void __cdecl gv_FreeFieldAllocs(int* slot);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
+/* ADDRESS: GOLDDE 0x004ef4b0 */
 int __cdecl gm_FreeGebaeude(unsigned char* o)
 {
 	int i;

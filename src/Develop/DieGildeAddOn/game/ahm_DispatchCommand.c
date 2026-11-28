@@ -8,6 +8,7 @@ int __cdecl ahm_SlotClearMatch(char*, int, char*);
 int __cdecl ahm_AllocateEntitySlot(char*, int, char*);
 
 /* ADDRESS: GOLDTL 0x004cdb90 */
+/* ADDRESS: GOLDDE 0x004bb370 */
 int __cdecl ahm_DispatchCommand(char* cfg, char* out)
 {
 	char* s;

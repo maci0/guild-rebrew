@@ -1,6 +1,7 @@
 extern int __cdecl d2_FindFreeElementSlot(void);
 extern int d2_ZOrderStack, g_772528, d2_Controls;
 /* ADDRESS: GOLDTL 0x00469890 */
+/* ADDRESS: GOLDDE 0x0045d1b0 */
 int __cdecl d2_AllocateElement(void)
 {
 	int id;

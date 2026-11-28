@@ -10,6 +10,7 @@ void __cdecl d3_TransformPoint(char* src, char* pos, float* out);
 #include "Develop/Units/d3/client_scene_transform.h"
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
+/* ADDRESS: GOLDDE 0x0040c9b0 */
 char* __cdecl DummyBlocked(char** a, int* range)
 {
 	float pos[4];

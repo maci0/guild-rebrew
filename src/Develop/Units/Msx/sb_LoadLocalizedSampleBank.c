@@ -8,6 +8,7 @@ extern char g_68a4f4[];
 int __cdecl fcn_0064d41a(char*, char*, ...);
 int __cdecl sb_LoadSampleBank(char*, int);
 
+/* ADDRESS: GOLDDE 0x004b0bb0 */
 int __cdecl sb_LoadLocalizedSampleBank(char* name, int flags)
 {
 	char buf[0x104];

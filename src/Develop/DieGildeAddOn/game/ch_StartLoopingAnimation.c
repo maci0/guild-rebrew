@@ -4,6 +4,7 @@
 char* __cdecl ch_AttachAni(char* e, char* name, int flag);
 void __cdecl d3_SetAnimFrame(int h, char* s, int n);
 
+/* ADDRESS: GOLDDE 0x0040b260 */
 void __cdecl ch_StartLoopingAnimation(char* e, char* name)
 {
 	char* s;

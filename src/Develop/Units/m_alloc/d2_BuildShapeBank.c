@@ -37,6 +37,7 @@ long __stdcall fcn_006114ff(int, int, int*, int, int, int*, int, unsigned int);
 
 
 /* ADDRESS: GOLDTL 0x0047acf0 */
+/* ADDRESS: GOLDDE 0x00469ce0 */
 char* __cdecl d2_BuildShapeBank(char* list)
 {
 	int hdr[0x17];

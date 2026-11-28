@@ -79,6 +79,7 @@ void __cdecl d3_BeginScenePass(int, int, int);
 void __cdecl d3_SetRenderMaterialState(int, int, int, int, int);
 void __cdecl d3_EndScenePass(void);
 
+/* ADDRESS: GOLDDE 0x00414170 */
 void __cdecl d3_RenderRainLines(Lines *l)
 {
 	int span;

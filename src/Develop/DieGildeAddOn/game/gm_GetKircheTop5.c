@@ -15,6 +15,7 @@ typedef struct
 
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
+/* ADDRESS: GOLDDE 0x004f93b0 */
 void __cdecl gm_GetKircheTop5(int* ids, int* vals)
 {
 	int i;

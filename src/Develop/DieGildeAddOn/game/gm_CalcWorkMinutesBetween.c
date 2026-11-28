@@ -8,6 +8,7 @@ int __cdecl gm_CompareGameTime(int* a, int* b);
 int __cdecl sim_SetSyncParams(int* a, int mode, int b, int c);
 
 /* ADDRESS: GOLDTL 0x0050cad0 */
+/* ADDRESS: GOLDDE 0x004f7870 */
 int __cdecl gm_CalcWorkMinutesBetween(int* startTime, int* endTime)
 {
     pos14_7f4c00 cur;

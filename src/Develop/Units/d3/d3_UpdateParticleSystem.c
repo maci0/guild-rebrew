@@ -10,6 +10,7 @@ void __cdecl d3_NormalizeVector(float *v);
  * P->count particles (stride 0x54) from E = P->particles. Returns 1 when the
  * update ran; P+0x20 bit 1 is set when no active particle was updated. */
 /* ADDRESS: GOLDTL 0x00416d50 */
+/* ADDRESS: GOLDDE 0x00415150 */
 char __cdecl d3_UpdateParticleSystem(unsigned char *P, int pos)
 {
     float normal[4];    /* 16-byte slot: fcn_004518a0 normalizes v3[0..2] */

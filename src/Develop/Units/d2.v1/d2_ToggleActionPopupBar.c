@@ -20,6 +20,7 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl d2_PositionControl(int, int, int);
 void __cdecl d2_SetFormVisibility(int, int);
 
+/* ADDRESS: GOLDDE 0x0052c020 */
 void __cdecl d2_ToggleActionPopupBar(int a)
 {
 	int i;

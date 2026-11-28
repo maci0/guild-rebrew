@@ -28,6 +28,7 @@ extern VFS_DIR* vfs_RootDir;
 
 DirList* __cdecl vfs_FindPathNode(char*, int);
 
+/* ADDRESS: GOLDDE 0x005c0fd0 */
 int __cdecl vfs_ListFilesByExtension(char* dir, char* ext, FileSlot* out)
 {
 	int n;

@@ -47,6 +47,7 @@ void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 
 /* ADDRESS: GOLD 0x5524c0 */
+/* ADDRESS: GOLDDE 0x005408a0 */
 void __cdecl he_RunAction0x7f(char* u)
 {
 	float f;

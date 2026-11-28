@@ -23,6 +23,7 @@ void __cdecl d3_TraverseSceneObjects(int, int, int, void*);
 void __cdecl d3_BindBuildingSceneObjects(void);
 void __cdecl d3_ClearSceneObjectActiveFlag(void);
 
+/* ADDRESS: GOLDDE 0x0050b570 */
 int __cdecl d3_LoadSceneAndTerrain(void* stream)
 {
 	int save;

@@ -27,6 +27,7 @@ void __cdecl d2_OpenSpionageTargetPicker(char*);
 void __cdecl d2_ShowWeinkellerDialog(char*);
 void __cdecl d2_ShowGeliebteDialog(char*);
 
+/* ADDRESS: GOLDDE 0x00585640 */
 void __cdecl d2_RunCharacterActionsHud(char* e, int mode)
 {
 	int handwerk;

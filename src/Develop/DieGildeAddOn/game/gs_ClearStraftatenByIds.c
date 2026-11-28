@@ -30,6 +30,7 @@ char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl cm_SendRemoveStraftat(int id, int v);
 void __cdecl he_NotifyStraftatExpired(char* o, char* p);
 
+/* ADDRESS: GOLDDE 0x004e1d10 */
 int __cdecl gs_ClearStraftatenByIds(int target, int count, int* ids)
 {
 	int n;

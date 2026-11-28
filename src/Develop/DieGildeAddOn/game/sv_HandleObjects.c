@@ -59,6 +59,7 @@ typedef int (__cdecl* Fn_5305d0)(char*, int, char*, int);
 /* Aktualisiert die Szenenauswahl aus den Quickjump-Kontaktfeldern; die
  * Auswahl wird auf die Objektliste abgebildet und neu gezeichnet. */
 /* ADDRESS: GOLDTL 0x005305d0 */
+/* ADDRESS: GOLDDE 0x00518f50 */
 void __cdecl sv_HandleObjects(void)
 {
 	char buf[0x80];

@@ -10,6 +10,7 @@ void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004bb320 */
+/* ADDRESS: GOLDDE 0x004a9390 */
 int __cdecl gm_HandleMsg3aBoostSkill(int* request)
 {
 	char buf[0x100];

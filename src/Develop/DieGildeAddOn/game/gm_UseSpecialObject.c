@@ -52,6 +52,7 @@ char* __cdecl gm_LookupSpecialObjectRecord(int, int*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl d2_ShowUseObjDialog(char*);
 
+/* ADDRESS: GOLDDE 0x005bd4b0 */
 int __cdecl gm_UseSpecialObject(Ent* ent, Cmd* cmd)
 {
 	char one;

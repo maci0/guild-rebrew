@@ -16,6 +16,7 @@ void __cdecl d2_SetQuadVertexColor(Vtx47ba20* v, unsigned char r, unsigned char 
                           unsigned char b);
 
 /* ADDRESS: GOLDTL 0x0047ba20 */
+/* ADDRESS: GOLDDE 0x0046aa10 */
 int __cdecl d2_QueueScaledQuad(int x, int y, char* image, float scale)
 {
 	char* rec;

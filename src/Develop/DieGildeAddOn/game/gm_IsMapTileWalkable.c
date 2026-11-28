@@ -3,6 +3,7 @@
 
 extern int d3_ActiveScene;
 
+/* ADDRESS: GOLDDE 0x004bc340 */
 int __cdecl gm_IsMapTileWalkable(int x, int y)
 {
 	char* m;

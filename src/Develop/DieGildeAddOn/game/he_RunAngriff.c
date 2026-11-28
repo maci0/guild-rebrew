@@ -24,6 +24,7 @@ int __cdecl gm_TransferAndSellAssets(char* a, char* b, char* c, char* d);
 int __cdecl memset(void* dst, int c, unsigned int n);
 extern pos14_7f4c00 gm_GameTime;
 /* ADDRESS: GOLDTL 0x0056bfd0 */
+/* ADDRESS: GOLDDE 0x00551fd0 */
 void __cdecl he_RunAngriff(char* ent)
 {
 	int count;

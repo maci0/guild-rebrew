@@ -22,6 +22,7 @@ void __cdecl gv_SendSetGraveOwner(int, unsigned char*, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl he_NotifyStorageTransfer(ENTITY_RECORD*, char*, unsigned char*, int);
 
+/* ADDRESS: GOLDDE 0x00560fc0 */
 void __cdecl he_RemoveAction0x92Favor(char* u)
 {
 	unsigned char* e;

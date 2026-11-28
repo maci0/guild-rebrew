@@ -14,6 +14,7 @@ extern char g_67a5bc[];
 void* __cdecl m_alloc(int, void*);
 void __cdecl m_FreeTracked(void*);
 
+/* ADDRESS: GOLDDE 0x00434410 */
 char __cdecl d3e_RegisterSceneEvent(char* o, int idx, int id, char* name)
 {
 	Event* e;

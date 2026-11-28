@@ -60,6 +60,7 @@ int __cdecl d2_DrawHighlightSprite(int, int, int, char*, int);
 int __cdecl d2_DrawBankSpriteColored(int, int, int, char*, int);
 
 /* ADDRESS: GOLDTL 0x0046b5f0 */
+/* ADDRESS: GOLDDE 0x0045ec70 */
 void __cdecl d2_RenderMarkupLine(int unused, int y, int surf, int win, int flag, int newflags, int xstart, int xlimit)
 {
 	D2_WIN* w;

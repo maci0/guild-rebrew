@@ -18,6 +18,7 @@ struct CITY_MAP_PANEL {
 
 
 /* ADDRESS: GOLDTL 0x004bfca0 */
+/* ADDRESS: GOLDDE 0x004ad820 */
 void __cdecl d2_UpdateRouteMapControlStates(char* list, struct CITY_MAP_PANEL* panel)
 {
 	char* out[8];

@@ -8,6 +8,7 @@ extern float g_662960;
 
 int __cdecl gm_QueryEntities(int a, int b, int c, int d, int e);
 
+/* ADDRESS: GOLDDE 0x004dd430 */
 void __cdecl gm_CalcArtillerySpread(char* p, float* o1, float* o2)
 {
 	float x;

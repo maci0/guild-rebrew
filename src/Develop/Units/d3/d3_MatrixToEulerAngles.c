@@ -3,6 +3,7 @@
 
 #include <math.h>
 
+/* ADDRESS: GOLDDE 0x004475b0 */
 void __cdecl d3_MatrixToEulerAngles(float* m, float* e)
 {
 	float c;

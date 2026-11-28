@@ -15,6 +15,7 @@ float* __cdecl gm_LookupSpecialObject(int id);
 int __cdecl gm_UseSpecialObject(char* e, Req* r);
 
 /* ADDRESS: GOLDTL 0x0049be10 */
+/* ADDRESS: GOLDDE 0x0048a850 */
 int __cdecl ai_RunUseTrank(char* entity, int* args, int* ctx)
 {
 	float* d;

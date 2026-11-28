@@ -9,6 +9,7 @@ int __cdecl sprintf(char* buf, const char* fmt, ...);
 void __cdecl cm_AppendPacketFieldValue(int a, int b, int c, char* v);
 void __cdecl cm_RequestChangeAttribute(void);
 
+/* ADDRESS: GOLDDE 0x004fabc0 */
 void __cdecl gm_ChangeObjektZustand(int id, int delta)
 {
 	char buf[0x80];

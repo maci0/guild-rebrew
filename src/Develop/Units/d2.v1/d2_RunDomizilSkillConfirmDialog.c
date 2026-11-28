@@ -53,6 +53,7 @@ void __cdecl d2_DestroyForm(int);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl cm_SendCopyEntityData(struct msg*);
 
+/* ADDRESS: GOLDDE 0x0056c2b0 */
 int __cdecl d2_RunDomizilSkillConfirmDialog(char* entity, int* who, int kind)
 {
 	int item_idx;

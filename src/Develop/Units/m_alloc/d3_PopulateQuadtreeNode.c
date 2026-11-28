@@ -6,6 +6,7 @@ void __cdecl d3_VisitSceneObjects(int list, int a, int mask, char(__cdecl* fn)(v
 void __cdecl d3_SplitQuadtreeNode(int* n, int a, int b, int c);
 
 /* ADDRESS: GOLDTL 0x004550e0 */
+/* ADDRESS: GOLDDE 0x0044a990 */
 void __cdecl d3_PopulateQuadtreeNode(int a1, int* n)
 {
 	int i;

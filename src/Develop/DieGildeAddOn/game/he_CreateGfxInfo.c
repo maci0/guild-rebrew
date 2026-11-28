@@ -1,3 +1,4 @@
+extern char g_7766bb[];
 #include <stdio.h>
 #include "he_tables.h"
 
@@ -9,6 +10,7 @@ char* __cdecl d3_FindSceneObject(char*, int, char*, char*);
 char* __cdecl he_CreateAnimatedEntityMarker(char*, char*, char*);
 
 /* ADDRESS: GOLDTL 0x00546720 */
+/* ADDRESS: GOLDDE 0x0052cda0 */
 void __cdecl he_CreateGfxInfo(unsigned char* p, char* name, char* entity)
 {
 	char buf[0x200];
@@ -18,10 +20,10 @@ void __cdecl he_CreateGfxInfo(unsigned char* p, char* name, char* entity)
 	int i;
 
 	saved = d3_CurrentContextIndex;
-	if (*(unsigned char*) 0x7766bb == 0)
+	if (*(unsigned char*) &g_7766bb == 0)
 		goto done;
 	for (i = 0; i < 0x40; i++) {
-		if (*(int*) (0x7dc6e4 + i * 0x10) == 0)
+		if (*(int*) (((int) &g_7dc6e0 + 0x4) + i * 0x10) == 0)
 			break;
 	}
 	if (i == 0x40)

@@ -47,6 +47,7 @@ int __cdecl fcn_0064f170(char* a, char* b, unsigned int n);
 int __cdecl fcn_0064d41a(char* buf, char* fmt, ...);
 
 /* ADDRESS: GOLDTL 0x0052fde0 */
+/* ADDRESS: GOLDDE 0x00518760 */
 void __cdecl sv_UpdateSceneHover(void)
 {
 	char key[0x60];

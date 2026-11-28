@@ -1,3 +1,4 @@
+extern char d2_WindowMetricsView[];
 
 #include <stdio.h>
 
@@ -38,6 +39,7 @@ void __cdecl d2_DestroyForm(int);
 void __cdecl d3_EndCameraAndUiMode(void);
 
 /* ADDRESS: GOLDTL 0x005c0020 */
+/* ADDRESS: GOLDDE 0x005a2460 */
 void __cdecl fcn_005c0020(void)
 {
 	int ids[32];
@@ -57,8 +59,8 @@ void __cdecl fcn_005c0020(void)
 	int y;
 	int h2;
 
-	ent = (char*) 0x7f4ca0 + gm_LocalPlayerSlot * 0x21c;
-	dlg = d2_LoadForm(0, 0, (char*) 0x6ac4f4);
+	ent = (char*) &gm_EntitySlotTable + gm_LocalPlayerSlot * 0x21c;
+	dlg = d2_LoadForm(0, 0, "privillegien\\Beweise_Sichten");
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x173f);
@@ -87,13 +89,13 @@ void __cdecl fcn_005c0020(void)
 		for (i = 0; i < count; i++) {
 			rec = &recs[i];
 			y = 10 + i * 0x69;
-			sprintf(buf, (char*) 0x6ac4e8, rec->x2c, rec->x34,
+			sprintf(buf, "%i (%i) %s", rec->x2c, rec->x34,
 			    (rec->x2c != 1) + 0x1748);
 			rec->x10 = 0x32;
 			rec->x14 = y;
 			d2_DrawPersonCard(0x32, y, d2_CurrentWindowId, 0x56, rec, 1);
 			d2_CreateRightAlignedText(buf,
-			    *(int*) (0x1015f4c + d2_CurrentWindowId * 0x3cc) - 0xf,
+			    *(int*) ((int) &d2_WindowMetricsView + d2_CurrentWindowId * 0x3cc) - 0xf,
 			    y + 0x2d, 200, 0x55);
 
 		}
@@ -114,7 +116,7 @@ void __cdecl fcn_005c0020(void)
 				if (d2_CurrentElementId == recs[i].x4) { selected = i; break; }
 			}
 			if (selected > -1)
-				d2_ShowBeweiseDetails((char*) 0x7f4ca0 + gm_LocalPlayerSlot * 0x21c,
+				d2_ShowBeweiseDetails((char*) &gm_EntitySlotTable + gm_LocalPlayerSlot * 0x21c,
 				    recs[selected].x0);
 		}
 	} while (main_RunFrameLoop((void*) fcn_005c0020, 0x657c7) != 0);

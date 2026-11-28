@@ -12,6 +12,7 @@ int __cdecl cm_RequestUpdateStraftatState(int, int, int, int);
 int __cdecl cm_SendSetHE(int, char*);
 
 /* ADDRESS: GOLDTL 0x0054aa70 */
+/* ADDRESS: GOLDDE 0x00530f50 */
 void __cdecl he_StartCourtTrial(char* action)
 {
 	char* accused;

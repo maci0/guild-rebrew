@@ -93,6 +93,7 @@ struct DevData {
  * the failure path is a jl to the tail and GetDeviceData is emitted
  * once. */
 /* ADDRESS: GOLDTL 0x004124b0 */
+/* ADDRESS: GOLDDE 0x00411000 */
 void __cdecl io_PollKeyboardInput(void)
 {
 	DevData ev;

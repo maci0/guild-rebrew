@@ -13,6 +13,7 @@ extern SCENE_EVENT_ENTRY d3_SceneEvents[8];
 
 /* ADDRESS: GOLD 0x0043e710 */
 /* ADDRESS: GOLDTL 0x0043b550 */
+/* ADDRESS: GOLDDE 0x00434300 */
 char* __cdecl d3_FindEventName(int eventId)
 {
 	int i;

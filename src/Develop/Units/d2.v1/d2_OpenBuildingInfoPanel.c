@@ -38,6 +38,7 @@ int __cdecl d2_AddElementToWindow(int x, int y, int kind, int owner);
 int __cdecl d2_AddWindowValueGauge(int a, int b, int c, int d, int e, int f, int g, int h);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
+/* ADDRESS: GOLDDE 0x00516f30 */
 void __cdecl d2_OpenBuildingInfoPanel(void)
 {
 	char name[128];

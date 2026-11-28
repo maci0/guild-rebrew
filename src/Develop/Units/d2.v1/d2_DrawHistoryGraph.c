@@ -15,6 +15,7 @@ extern Pt5d36_99ec2c g_99ec2c[16];
 
 void __cdecl d2_DrawLine(int, int, int, int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x005b4f50 */
 int __cdecl d2_DrawHistoryGraph(Arg5d36 s, int w, int h)
 {
 	int steps[9];

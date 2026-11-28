@@ -35,6 +35,7 @@ void __cdecl d2_PromptDuellAcceptDialog(void);
 void __cdecl d2_PromptDuellChoiceDialog(void);
 
 /* ADDRESS: GOLDTL 0x004e15c0 */
+/* ADDRESS: GOLDDE 0x004cdfe0 */
 void __cdecl d2_PromptDuellAcceptDialog(char* state)
 {
 	int h;
@@ -63,6 +64,7 @@ void __cdecl d2_PromptDuellAcceptDialog(char* state)
 }
 
 /* ADDRESS: GOLDTL 0x004e16e0 */
+/* ADDRESS: GOLDDE 0x004ce100 */
 void __cdecl d2_PromptDuellChoiceDialog(char* state, int* event)
 {
 	int b2;
@@ -110,6 +112,7 @@ void __cdecl d2_PromptDuellChoiceDialog(char* state, int* event)
 }
 
 /* ADDRESS: GOLDTL 0x004e1900 */
+/* ADDRESS: GOLDDE 0x004ce320 */
 void __cdecl d2_RunDuellPromptDialog(void)
 {
 	if (g_772f2c == 0) {

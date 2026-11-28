@@ -26,6 +26,7 @@ void __cdecl d2_DestroyForm(int);
 void __cdecl d3_EndCameraAndUiMode(void);
 
 /* ADDRESS: GOLDTL 0x005a4e00 */
+/* ADDRESS: GOLDDE 0x00589b10 */
 void __cdecl d2_RunKreditGeberDialog(char* building)
 {
 	int items[16][3];
@@ -54,7 +55,7 @@ void __cdecl d2_RunKreditGeberDialog(char* building)
 		items[i][2] = 0;
 	}
 	d2_SetOverlayAnimation(0, 0);
-	h = d2_LoadForm(0, 0, (char*) 0x6aac2c);
+	h = d2_LoadForm(0, 0, "locations\\geldleihe\\geldleihe_KreditGeber");
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
 	d2_DrawPanelFrame(d2_CurrentWindowId, 0x73b, 0x73f);

@@ -13,6 +13,7 @@ unsigned short __cdecl gm_RandomMod(int);
 int __cdecl gm_GetRangeStatId(int, int);
 int __cdecl cm_RequestAllocSpieler(int, int, int, short, int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x00553e60 */
 void __cdecl he_StartInitBetrieb(char* o)
 {
 	int x;

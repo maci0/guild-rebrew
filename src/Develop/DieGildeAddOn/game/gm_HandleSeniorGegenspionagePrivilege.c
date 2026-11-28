@@ -5,6 +5,7 @@ void __cdecl d2_RunGegenspionageDialog(char*, int*);
 
 
 /* ADDRESS: GOLDTL 0x004f91f0 */
+/* ADDRESS: GOLDDE 0x004e4fd0 */
 int __cdecl gm_HandleSeniorGegenspionagePrivilege(char* e, int* s)
 {
 	char* p;

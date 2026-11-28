@@ -29,6 +29,7 @@ void __cdecl d2_ScrollWindow(int, int, int);
 char* __cdecl fcn_0050d490(char*);
 
 /* ADDRESS: GOLDTL 0x005b11f0 */
+/* ADDRESS: GOLDDE 0x00595bf0 */
 void __cdecl d2_UpdateCityScrollMap(int* state)
 {
 	char* view;

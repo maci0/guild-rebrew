@@ -44,6 +44,7 @@ void __cdecl d3_EndCameraAndUiMode(void);
 /* Residence ("Wohnsitz") dialog: lists the player's lovers' residences as
  * buttons and runs the dialog loop until it closes. */
 /* ADDRESS: GOLDTL 0x0059fe60 */
+/* ADDRESS: GOLDDE 0x00584ce0 */
 void __cdecl d2_ShowGeliebteDialog(char *building)
 {
 	int item;

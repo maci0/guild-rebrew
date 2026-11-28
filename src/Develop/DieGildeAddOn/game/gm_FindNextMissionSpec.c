@@ -1,6 +1,7 @@
 #include "g_680bd0.h"
 extern Entry680bd0 gm_MissionSpecs[48];
 /* ADDRESS: GOLDTL 0x004b3ce0 */
+/* ADDRESS: GOLDDE 0x004a1fd0 */
 int* __cdecl gm_FindNextMissionSpec(int key, int* previous)
 {
 	int i;

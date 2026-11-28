@@ -51,6 +51,7 @@ void __cdecl d3_SetObjectRotation(char*, float*);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 
 /* ADDRESS: GOLDTL 0x004079f0 */
+/* ADDRESS: GOLDDE 0x00406b90 */
 void __cdecl ch_ExecuteTurn90(char* task)
 {
 	D3_OBJ_ANIM_FRAME frames[2];

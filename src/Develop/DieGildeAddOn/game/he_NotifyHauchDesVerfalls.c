@@ -10,6 +10,7 @@ char* __cdecl strcat(char*, const char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 
+/* ADDRESS: GOLDDE 0x00597a00 */
 void __cdecl he_NotifyHauchDesVerfalls(char* recipient, unsigned char* entity, unsigned short* id, int includeDetails)
 {
 	io_FormatTextBuffer(io_MessageFormatBuf, 0x40ad, 0x40a3, *(unsigned short*) entity, *(int*) (entity + 0x16c), *id);

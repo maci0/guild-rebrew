@@ -7,6 +7,7 @@ void __cdecl sb_SetVoiceLoopCount(char* o, int v);
 int __cdecl sb_StartVoice(char* o, int a, int b);
 void __cdecl sb_ResumeOrStartVoice(char* o);
 
+/* ADDRESS: GOLDDE 0x00416ff0 */
 void __cdecl d3snd_PlaySource(char* r, int a2, int a3, int a4)
 {
 	char buf[0x100];

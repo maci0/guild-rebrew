@@ -1,3 +1,4 @@
+#include "Develop/Units/d2.v1/d2_capacity.h"
 #include <string.h>
 #include "Develop/client_types.h"
 
@@ -19,6 +20,7 @@ void* __cdecl fcn_0064d740(void* dst, const void* src, unsigned int n);
 /* Releases one entity slot: runs the state-specific teardown, detaches it from
  * its window list and panel, then clears the slot record. */
 /* ADDRESS: GOLDTL 0x0046b2b0 */
+/* ADDRESS: GOLDDE 0x0045e930 */
 void __cdecl d2_DestroyElement(int id)
 {
 	char* e;
@@ -91,12 +93,12 @@ void __cdecl d2_DestroyElement(int id)
 	if (list != 0 && *(int*) (list + 0x198) != 0) {
 		d2_AddDirtyRect((*(D2_CONTROL_TL*) e).x, (*(D2_CONTROL_TL*) e).y, (*(D2_CONTROL_TL*) e).width, (*(D2_CONTROL_TL*) e).height, list);
 	}
-	for (i = 0; i < 0x3ff; i++) {
+	for (i = 0; i < d2_ELEMENT_CAPACITY - 1; i++) {
 		if (d2_ZOrderStack[i] == (void*) e) {
-			if (i == 0x3ff) {
-				d2_ZOrderStack[0x3ff] = 0;
+			if (i == d2_ELEMENT_CAPACITY - 1) {
+				d2_ZOrderStack[d2_ELEMENT_CAPACITY - 1] = 0;
 			} else {
-				fcn_0064d740(&d2_ZOrderStack[i], &d2_ZOrderStack[i + 1], (0x3fe - i) * 4);
+				fcn_0064d740(&d2_ZOrderStack[i], &d2_ZOrderStack[i + 1], (d2_ELEMENT_CAPACITY - 2 - i) * 4);
 			}
 			break;
 		}

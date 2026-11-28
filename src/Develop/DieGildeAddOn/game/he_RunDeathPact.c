@@ -46,6 +46,7 @@ typedef struct Msg578 {
 /* Death-pact action state machine; resolves the target entity and reports the
  * chosen announcement to the message queue. */
 /* ADDRESS: GOLDTL 0x00578ed0 */
+/* ADDRESS: GOLDDE 0x0055eda0 */
 void __cdecl he_RunDeathPact(char* event)
 {
 	Msg578 msg;

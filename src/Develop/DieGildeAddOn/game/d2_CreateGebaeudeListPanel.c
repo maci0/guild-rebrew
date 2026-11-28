@@ -14,6 +14,7 @@ int __cdecl d2_GetFormWindow(int, int);
 void __cdecl d2_CreateWindowScrollbar(int, int, int, int, int, int*, int*, int*);
 
 /* ADDRESS: GOLDTL 0x005c86b0 */
+/* ADDRESS: GOLDDE 0x005aa510 */
 int __cdecl d2_CreateGebaeudeListPanel(void)
 {
 	int a;
@@ -23,14 +24,14 @@ int __cdecl d2_CreateGebaeudeListPanel(void)
 	unsigned short* p;
 
 	p = (unsigned short*) &((EntityStruct*) g_slot_table)[gm_LocalPlayerSlot];
-	h = d2_LoadForm(0, 0, (char*) 0x6ac834);
+	h = d2_LoadForm(0, 0, "panel\\geb_liste_2");
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
 	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetForm(h, 1);
 	io_AppendText(0xb2);
 	d2_SetForm(h, 2);
-	g_775338 = d2_PopulateOwnerBuildingList(p, 0x80, (int*) 0x778900);
+	g_775338 = d2_PopulateOwnerBuildingList(p, 0x80, (int*) ((int) &g_775338 + 0x35c8));
 	d2_SetForm(h, 0);
 	d2_CreateWindowScrollbar(0x206, 0x167, d2_CurrentWindowId,
 				 d2_GetFormWindow(h, 2), 0x40, &c, &b, &a);

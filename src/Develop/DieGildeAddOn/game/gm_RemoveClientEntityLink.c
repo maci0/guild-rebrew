@@ -10,6 +10,7 @@ void __cdecl ch_DestroyCharacter(char* r);
 char* __cdecl gm_EntityAccumulate(char* p);
 int __cdecl gm_RemoveLinkedNodeById(char* list, int id);
 
+/* ADDRESS: GOLDDE 0x004f1680 */
 void __cdecl gm_RemoveClientEntityLink(char* p)
 {
 	int save;

@@ -6,6 +6,7 @@
 char* __cdecl gm_QueryEntities(int, int, ...);
 int __cdecl gm_GetBuildingTechEffect(char*, int, int);
 
+/* ADDRESS: GOLDDE 0x0054d450 */
 int __cdecl he_PickNearestWirtshaus(char* h, int n, char** list, int* out1, int* out2)
 {
 	float dist[0x20];

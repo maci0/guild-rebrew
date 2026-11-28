@@ -49,6 +49,7 @@ void __cdecl d3_WriteEventTable(void*, int);
 
 
 /* ADDRESS: GOLDTL 0x00446f70 */
+/* ADDRESS: GOLDDE 0x0043e6f0 */
 void __cdecl d3_SaveScene(const char* name, void* stream)
 {
 	void* s;

@@ -11,6 +11,7 @@ extern char g_696488[];
 
 int __cdecl _strcmpi(const char* a, const char* b);
 
+/* ADDRESS: GOLDDE 0x004e9940 */
 int __cdecl gm_FindHeadIconIndex(char* name)
 {
 	char base[128];

@@ -1,3 +1,5 @@
+extern char d2_WindowActiveView[];
+extern char g_102ce50[];
 #include <stdio.h>
 
 typedef struct VfsEntry {
@@ -43,6 +45,7 @@ void __cdecl d2_ReleaseRenderToSurface(void);
 /* Shuts the resource system down: drops the animation tracks, every entry of
  * the file table, the open archive handles and the tracked allocations. */
 /* ADDRESS: GOLDTL 0x00465c60 */
+/* ADDRESS: GOLDDE 0x00459890 */
 void __cdecl vfs_ShutdownResources(void)
 {
 	int* track;
@@ -54,14 +57,14 @@ void __cdecl vfs_ShutdownResources(void)
 
 	d2_FreeAllSprites();
 	i = 0;
-	track = (int*) 0x10161d0;
+	track = (int*) &d2_WindowActiveView;
 	do {
 		if (*track == 1) {
 			d2_CloseWindow(i);
 		}
 		track = (int*) ((char*) track + 0x3cc);
 		i++;
-	} while ((int) track < 0x102ce50);
+	} while ((int) track < (int) &g_102ce50);
 	i = 0;
 	do {
 		d2_DestroyElement(i);

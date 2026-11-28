@@ -24,6 +24,7 @@ void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004ba690 */
+/* ADDRESS: GOLDDE 0x004a8730 */
 int __cdecl gm_BoostRandomBuildingLevel(int* request)
 {
 	char* ents[8];

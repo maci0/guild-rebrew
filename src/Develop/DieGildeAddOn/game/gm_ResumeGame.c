@@ -6,6 +6,7 @@ void __cdecl gm_AdvanceGameClock(void);
 #include "Develop/DieGildeAddOn/game/client_timer.h"
 void __cdecl ch_SetAnimationPaused(char*, int);
 
+/* ADDRESS: GOLDDE 0x004d2210 */
 void __cdecl gm_ResumeGame(void)
 {
 	char** p;

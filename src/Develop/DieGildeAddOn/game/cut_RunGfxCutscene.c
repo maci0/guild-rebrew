@@ -20,6 +20,7 @@ char* __cdecl evt_LoadGfxScript(char*);
 void __cdecl evt_RunScript(char*);
 void __cdecl evt_WaitAndCancelScript(int);
 
+/* ADDRESS: GOLDDE 0x004c0150 */
 void __cdecl cut_RunGfxCutscene(void)
 {
 	int r;

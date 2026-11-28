@@ -49,6 +49,7 @@ int __cdecl d2_AddElementToWindow(int x, int y, int id, int win);
 int __cdecl d2_CreateChildWindow(int x, int y, int cx, int cy, int a5, int win);
 char* __cdecl gm_SearchTable67(int);
 
+/* ADDRESS: GOLDDE 0x005aa260 */
 int __cdecl d2_RunGeldInfoDialog(void)
 {
 	int i;

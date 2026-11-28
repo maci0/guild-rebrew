@@ -60,6 +60,7 @@ int __cdecl gm_GetMsgField(int, int*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
 /* ADDRESS: GOLDTL 0x0056ee80 */
+/* ADDRESS: GOLDDE 0x00554e40 */
 void __cdecl he_RunRaubzug(char* actionRecord)
 {
 	char msg[0x400];

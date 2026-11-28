@@ -1,3 +1,4 @@
+extern char g_6ac95c[];
 /* Item cell used by the gold-trade grid. */
 typedef struct D2_PERSON_CARD_ITEM {
 	int* obj;		/* +0x00 */
@@ -24,6 +25,7 @@ int __cdecl d2_SetElementEnabled();
 int __cdecl gm_MatchesTargetFilter(unsigned short, unsigned short, int, int);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x005c99a0 */
+/* ADDRESS: GOLDDE 0x005ab430 */
 int __cdecl d2_DrawPersonCardGrid(int a0, int mode, int filter, int itemCount, D2_PERSON_CARD_ITEM* items, int owner)
 {
 	D2_PERSON_CARD_ITEM* item;
@@ -128,14 +130,14 @@ int __cdecl d2_DrawPersonCardGrid(int a0, int mode, int filter, int itemCount, D
 			}
 			d2_AddElementToWindow((int) *(short*) (d2_FileObjTable + 0x1ebd8) - 0x10 + (left), (int) *(short*) (d2_FileObjTable + 0x1ebda) - 0x13 + y, item->cw28, d2_CurrentWindowId);
 			if (mode == 7) {
-				io_FormatTextBuffer(buf, 0x6ac964, (*(char*) ((int) item->obj + 9) ? 0x11e : 0x114) + (unsigned int) *(unsigned char*) ((int) item->obj + 0xd), *(unsigned short*) item->obj);
+				io_FormatTextBuffer(buf, ((int) &g_6ac95c + 0x8), (*(char*) ((int) item->obj + 9) ? 0x11e : 0x114) + (unsigned int) *(unsigned char*) ((int) item->obj + 0xd), *(unsigned short*) item->obj);
 				d2_ShowCenteredText(buf, x, item->y, 0xca, 0x56);
-				io_FormatTextBuffer(buf, 0x679060, (*(char*) ((int) item->obj + 9) ? 0x27b : 0x253) + (unsigned int) *(unsigned char*) ((int) item->obj + 0x169));
+				io_FormatTextBuffer(buf, (int) &str_fmt_s, (*(char*) ((int) item->obj + 9) ? 0x27b : 0x253) + (unsigned int) *(unsigned char*) ((int) item->obj + 0x169));
 				d2_ShowCenteredText(buf, x, item->y + 0xf, 0xca, 0x56);
 			} else {
-				io_FormatTextBuffer(buf, 0x6ac964, (*(char*) ((int) item->obj + 9) ? 0x11e : 0x114) + (unsigned int) *(unsigned char*) ((int) item->obj + 0xd), *(unsigned short*) item->obj);
+				io_FormatTextBuffer(buf, ((int) &g_6ac95c + 0x8), (*(char*) ((int) item->obj + 9) ? 0x11e : 0x114) + (unsigned int) *(unsigned char*) ((int) item->obj + 0xd), *(unsigned short*) item->obj);
 				d2_ShowCenteredText(buf, x, item->y, 0xca, 0x56);
-				io_FormatTextBuffer(buf, 0x6ac95c, *(unsigned short*) item->obj);
+				io_FormatTextBuffer(buf, (int) &g_6ac95c, *(unsigned short*) item->obj);
 				d2_ShowCenteredText(buf, x, item->y + 0xf, 0xca, 0x56);
 			}
 			if (item->obj != (int*) owner && *(char*) ((int) item->obj + 2) != 6) {

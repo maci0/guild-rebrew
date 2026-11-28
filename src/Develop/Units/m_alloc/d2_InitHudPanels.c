@@ -66,6 +66,7 @@ void __cdecl d2_ClearSurface(Surface*);
 int __cdecl d2_CreateElement(int, int, int);
 void __cdecl d2_SetSlotVisibility(int, int);
 
+/* ADDRESS: GOLDDE 0x00510060 */
 void __cdecl d2_InitHudPanels(char* name)
 {
 	SurfaceDesc desc2;

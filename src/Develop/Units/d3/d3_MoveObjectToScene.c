@@ -34,6 +34,7 @@ void __cdecl d3_TransferObjectSceneCallback(void);
 void __cdecl d3_InitSceneLevel(D3_SCENE_CTX* s);
 
 /* ADDRESS: GOLDTL 0x00443900 */
+/* ADDRESS: GOLDDE 0x0043bd50 */
 char __cdecl d3_MoveObjectToScene(D3_SCENE_OBJ* o, D3_SCENE_CTX* from, D3_SCENE_CTX* to)
 {
 	D3_SCENE_OBJ* p;

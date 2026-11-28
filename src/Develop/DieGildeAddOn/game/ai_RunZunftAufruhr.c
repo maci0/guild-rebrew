@@ -2,6 +2,7 @@ void __cdecl gm_ExecZunftAufruhr(int, int*);
 
 
 /* ADDRESS: GOLDTL 0x0049fc30 */
+/* ADDRESS: GOLDDE 0x0048e660 */
 int __cdecl ai_RunZunftAufruhr(int a, char* e)
 {
 	int msg[5];

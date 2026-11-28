@@ -70,6 +70,7 @@ int __cdecl gm_AddTime(void*, int, int, int);
 int __cdecl gm_QueryEntitySum(int, int);
 
 /* ADDRESS: GOLDTL 0x0048c5b0 */
+/* ADDRESS: GOLDDE 0x0047b480 */
 int __cdecl ai_MeisterTradeFernEinkauf(char* meister, char* warehouse)
 {
 	int i;

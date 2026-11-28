@@ -1859,6 +1859,7 @@ unsigned char _dpad_14683c2[1822] = {
 };
 #else
 /* ADDRESS: GOLDTL 0x00403200 */
+/* ADDRESS: GOLDDE 0x00402730 */
 void* __cdecl ch_Create(void)
 {
 	int i = 0;

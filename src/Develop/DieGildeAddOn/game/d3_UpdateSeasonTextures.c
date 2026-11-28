@@ -11,6 +11,7 @@ void __cdecl d3_ApplyVegetationTextureSet(void);
 void __cdecl d3_ApplySeasonTextureSet(void);
 void __cdecl d3_UpdateTerrainSeasonTextures(void);
 
+/* ADDRESS: GOLDDE 0x004d1840 */
 void __cdecl d3_UpdateSeasonTextures(void)
 {
 	gm_GetSeason(((char*)&gm_GameTime));

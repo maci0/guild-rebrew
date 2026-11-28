@@ -7,6 +7,7 @@ extern char g_679478[];
 char* __cdecl m_alloc(int size, char* tag);
 
 /* ADDRESS: GOLDTL 0x00427740 */
+/* ADDRESS: GOLDDE 0x004221a0 */
 int __cdecl evt_AllocVariable(char* obj, int type, int count)
 {
 	int size;

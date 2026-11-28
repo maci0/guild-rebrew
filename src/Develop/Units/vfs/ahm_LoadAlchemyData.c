@@ -18,6 +18,7 @@ void __cdecl CloseVfsStream(void* f);
  * then the prototype row count and rows, then the recipe row count and
  * rows. Any short read frees both tables again. */
 /* ADDRESS: GOLDTL 0x004ed800 */
+/* ADDRESS: GOLDDE 0x004d9c50 */
 int __cdecl ahm_LoadAlchemyData(void)
 {
 	void* f;

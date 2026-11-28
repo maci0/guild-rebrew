@@ -4,6 +4,7 @@
 void __cdecl d3_ComposeObserverMatrix(void*, char*, int, void*);
 void __cdecl d3_MatrixToEulerAngles(void*, int);
 
+/* ADDRESS: GOLDDE 0x0044aaf0 */
 void __cdecl d3_GetObjectEulerRotation(void* obj, int a2)
 {
 	char buf[0x40];

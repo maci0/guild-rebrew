@@ -3,6 +3,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b4270 */
 void __cdecl cm_RequestRemoveCutscene(int cutsceneId)
 {
 	char buf[0x9c];

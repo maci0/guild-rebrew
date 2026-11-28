@@ -25,6 +25,7 @@ int __cdecl gm_GetElapsedMinutes(char*, char*);
 int __cdecl sprintf(char*, const char*, ...);
 
 /* ADDRESS: GOLDTL 0x0054da10 */
+/* ADDRESS: GOLDDE 0x00533eb0 */
 void __cdecl he_UpdateRobberyAction(char* action)
 {
 	char text[0x40];

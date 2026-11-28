@@ -24,6 +24,7 @@ extern unsigned char* g_14cbca8;
 int __cdecl cm_EnqueueCommand(node99*);
 void __cdecl nt_FlushSend(void);
 
+/* ADDRESS: GOLDDE 0x004b1a00 */
 int __cdecl cm_FlushCommandQueue(void)
 {
 	if ((*(node99**)&g_1005760) == 0)

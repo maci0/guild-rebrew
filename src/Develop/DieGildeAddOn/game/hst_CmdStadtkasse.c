@@ -9,6 +9,7 @@ unsigned short *__cdecl gm_NextEntityQueryMatch(void);
 
 /* Native body ends at 0x4b03d6; the stored 448-byte extent adds 10 alignment NOPs. */
 /* ADDRESS: GOLDTL 0x004b0220 */
+/* ADDRESS: GOLDDE 0x0049e540 */
 int __cdecl hst_CmdStadtkasse(int unused1, int unused2, char *argText)
 {
 	if (*argText != '-') {

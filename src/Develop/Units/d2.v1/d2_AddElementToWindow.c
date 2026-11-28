@@ -54,6 +54,7 @@ int __cdecl d2_AddElementToWindow(short x, short y, int image, int window)
 }
 #else
 /* ADDRESS: GOLDTL 0x0046f740 */
+/* ADDRESS: GOLDDE 0x00462ca0 */
 int __cdecl d2_AddElementToWindow(int x, int y, int a3, int win)
 {
 	D2_WIN* w;

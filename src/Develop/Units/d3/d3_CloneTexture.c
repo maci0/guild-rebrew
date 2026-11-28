@@ -27,6 +27,7 @@ Tex* __cdecl d3_AllocTextureSlot(int, int);
 
 
 /* ADDRESS: GOLDTL 0x0045d1e0 */
+/* ADDRESS: GOLDDE 0x00452190 */
 Tex* __cdecl d3_CloneTexture(Tex* src, int color, char recurse)
 {
 	Tex* p;

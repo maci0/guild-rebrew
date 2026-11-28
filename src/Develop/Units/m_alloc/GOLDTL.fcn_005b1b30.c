@@ -13,6 +13,7 @@ void __cdecl hp_UpdateProdSetting(char*, char*);
  * from edx after the call. With only a prototype it reloads from the frame. */
 
 /* ADDRESS: GOLDTL 0x005b1b10 */
+/* ADDRESS: GOLDDE 0x00596510 */
 char* __cdecl hp_FindProdSetting(int id)
 {
 	char* p;
@@ -30,6 +31,7 @@ char* __cdecl hp_FindProdSetting(int id)
 /* Both zero-fills are the original's hand-written block-fill prelude; no
  * msvc6 C memset spelling emits it (archived docs/codegen-walls.md section 6b). */
 /* ADDRESS: GOLDTL 0x005b1b30 */
+/* ADDRESS: GOLDDE 0x00596530 */
 char* __cdecl hp_AddProdSetting(char* a)
 {
 	char* p;

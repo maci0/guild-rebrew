@@ -10,6 +10,7 @@ void* __cdecl malloc(unsigned int size);
 void __cdecl d3_SiftDownOctreeHeap(unsigned int idx);
 
 /* ADDRESS: GOLDTL 0x0041bf90 */
+/* ADDRESS: GOLDDE 0x00419c30 */
 int __cdecl d3_BuildOctreeHistogram(unsigned char* pixels, unsigned int count)
 {
 	unsigned int left;

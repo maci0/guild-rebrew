@@ -7,6 +7,7 @@ extern unsigned int g_6b5de8;
 void __cdecl m_FreeTracked(void* p);
 void* __cdecl fcn_0064d740(void* dst, const void* src, unsigned int n);
 
+/* ADDRESS: GOLDDE 0x00418000 */
 void __cdecl d3_RemoveDisplayAdapter(int idx)
 {
 	m_FreeTracked(g_6b5dd0[idx].data);

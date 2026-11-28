@@ -8,6 +8,7 @@
 void __cdecl d3_UpdateObjectCameraTransform(char* e, char* cam, int f);
 char* __cdecl d3_ComputeNodeBoundsBox(char* e, int h, char* p);
 
+/* ADDRESS: GOLDDE 0x00411990 */
 int __cdecl d3_GetObjectVerticalBounds(char* e, float* lo, float* hi)
 {
 	float* q;

@@ -8,6 +8,7 @@ void __cdecl d3_TransformDirection(char* src, float* v, float* out);
 float __cdecl d3_SignedPlanarAngle(float* a, float* b);
 void __cdecl d3_SetObjectRotation(char* h, float* v);
 
+/* ADDRESS: GOLDDE 0x004023b0 */
 void __cdecl ch_SetToDummy(char* obj, char* src)
 {
 	float v[3];

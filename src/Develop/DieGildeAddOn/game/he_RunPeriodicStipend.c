@@ -9,6 +9,7 @@ void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl he_FreeAction(void*);
 
 /* ADDRESS: GOLDTL 0x00551250 */
+/* ADDRESS: GOLDDE 0x00537640 */
 void __cdecl he_RunPeriodicStipend(char* u)
 {
 	switch (*(int*) (u + 0x70)) {

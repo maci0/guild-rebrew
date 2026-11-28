@@ -1,15 +1,17 @@
+extern char str_space[];
 /* fcn_0044d290 — store the current value into the record's 0xd0 slot. */
 
 void* __cdecl fcn_0064f026(int, int);
 float __cdecl fcn_0064d62e(void*);
 
 /* ADDRESS: GOLDTL 0x0044d290 */
+/* ADDRESS: GOLDDE 0x00443040 */
 void __cdecl d3_ParseMatVTile(int unused, int ctx)
 {
 	char* base;
 	float value;
 
-	value = fcn_0064d62e(fcn_0064f026(0, 0x662d18));
+	value = fcn_0064d62e(fcn_0064f026(0, (int) &str_space));
 	base = *(char**) (ctx + 0x10);
 	*(float*) (base + *(int*) (ctx + 8) * 0xe0 + 0xd0) = value;
 }

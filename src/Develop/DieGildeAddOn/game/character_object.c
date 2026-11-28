@@ -14,6 +14,7 @@ void __cdecl ch_CheckAniMorph(char*);
 /* Steps a play-motion event: loads the motion on the first step, fires the
  * follow-up command at its trigger frame and finishes once it has run out. */
 /* ADDRESS: GOLDTL 0x004068e0 */
+/* ADDRESS: GOLDDE 0x00405a80 */
 void __cdecl ch_TakingObject(char* ev)
 {
 	char* obj;
@@ -54,6 +55,7 @@ void __cdecl ch_TakingObject(char* ev)
 /* Steps a drop-object event: plays the drop motion and releases the object
  * at the motion's trigger frame. */
 /* ADDRESS: GOLDTL 0x00406b50 */
+/* ADDRESS: GOLDDE 0x00405cf0 */
 void __cdecl ch_DroppingObject(char* ev)
 {
 	char* obj;

@@ -9,6 +9,7 @@ float __cdecl gm_CalcSkillDuelScore(char* a, char* b, int c);
 int __cdecl gm_HasActiveSpecialObject(char* a1, int a2);
 
 /* ADDRESS: GOLDTL 0x00493a30 */
+/* ADDRESS: GOLDDE 0x00482880 */
 int __cdecl ai_ShouldAcquitTrial(unsigned short* assessor, char* trial)
 {
 	char* accused;

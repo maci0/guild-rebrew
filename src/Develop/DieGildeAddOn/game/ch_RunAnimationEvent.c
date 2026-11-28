@@ -26,6 +26,7 @@ int __cdecl d3_GetContextIndex(char* p);
 void __cdecl d3_SelectSceneContext(int a, int b);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 
+/* ADDRESS: GOLDDE 0x004055b0 */
 void __cdecl ch_RunAnimationEvent(char* ev)
 {
 	char* obj;

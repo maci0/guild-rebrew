@@ -13,6 +13,7 @@ void __cdecl d3_RebuildSceneQuadtreeAndLighting(void);
 void __cdecl d3_ReleaseUnusedSceneObjects(void);
 void __cdecl d3sm_Rebuild(int, int);
 
+/* ADDRESS: GOLDDE 0x004ff980 */
 void __cdecl d3_RebuildWorldScene(void)
 {
 	char* e;

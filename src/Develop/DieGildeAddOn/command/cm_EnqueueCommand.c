@@ -6,6 +6,7 @@ void __cdecl nt_CloseClientConnection(void);
 unsigned short __cdecl ahm_GetCommandPayloadSize(char* n);
 
 /* ADDRESS: GOLDTL 0x004c49f0 */
+/* ADDRESS: GOLDDE 0x004b2400 */
 int __cdecl cm_EnqueueCommand(char* src)
 {
 	char* p;

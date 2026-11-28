@@ -4,6 +4,7 @@ extern float flt_0_0;
 extern float flt_1_0;
 
 /* ADDRESS: GOLDTL 0x004518a0 */
+/* ADDRESS: GOLDDE 0x00447480 */
 void __cdecl d3_NormalizeVector(float* v)
 {
 	float x;

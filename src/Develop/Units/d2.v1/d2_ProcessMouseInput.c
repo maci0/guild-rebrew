@@ -27,6 +27,7 @@ void __cdecl d2_CreateGuiWindow(int object, int selected);
 void __cdecl fcn_0046e790(int index);
 
 /* ADDRESS: GOLDTL 0x00474e80 */
+/* ADDRESS: GOLDDE 0x00467b80 */
 void __cdecl d2_ProcessMouseInput(void)
 {
 	int v4;

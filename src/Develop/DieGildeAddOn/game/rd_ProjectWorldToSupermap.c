@@ -2,6 +2,7 @@
 
 
 /* ADDRESS: GOLDTL 0x004bdfb0 */
+/* ADDRESS: GOLDDE 0x004abb30 */
 void __cdecl rd_ProjectWorldToSupermap(float* ox, float* oy, float* position, char* object, char** ctx)
 {
 	float v[4];

@@ -39,6 +39,7 @@ char *__cdecl evt_FindScriptById(int);
 int __cdecl evt_RequestScriptExit(char *);
 void __cdecl ch_StartMovement(int, int, int, int, int, char *);
 
+/* ADDRESS: GOLDDE 0x0052fdf0 */
 void __cdecl he_ResolveAccidentOutcome(char *a1, char *entity, char *a3, char *a4, int a5, float value)
 {
 	int x0;

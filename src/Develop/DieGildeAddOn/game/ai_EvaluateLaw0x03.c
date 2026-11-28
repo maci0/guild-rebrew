@@ -4,6 +4,7 @@
 unsigned char __cdecl gm_GetCitySkillAverage(int a);
 int __cdecl gm_GetLawEntry(int idx, void* dst);
 
+/* ADDRESS: GOLDDE 0x0047f750 */
 int __cdecl ai_EvaluateLaw0x03(char* entity, int unused, int* out)
 {
 	int info[9];

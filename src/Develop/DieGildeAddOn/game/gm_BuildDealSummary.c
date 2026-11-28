@@ -39,6 +39,7 @@ char* __cdecl gm_AddObjekt(void);
 char* __cdecl gm_FindNextFilteredEntity(void);
 void __cdecl gm_CollectBuildingObjectSlots(char* obj, Sorted* out);
 
+/* ADDRESS: GOLDDE 0x004f90d0 */
 int __cdecl gm_BuildDealSummary(int owner, Summary* out)
 {
 	Sorted sorted;

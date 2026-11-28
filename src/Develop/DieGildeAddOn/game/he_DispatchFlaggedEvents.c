@@ -8,6 +8,7 @@ extern void (__cdecl* he_EventDispatchHandlers[])(unsigned char*);
 
 void __cdecl he_CancelInvalidBuildingAction(unsigned char*);
 
+/* ADDRESS: GOLDDE 0x0052d460 */
 void __cdecl he_DispatchFlaggedEvents(void)
 {
 	int i;

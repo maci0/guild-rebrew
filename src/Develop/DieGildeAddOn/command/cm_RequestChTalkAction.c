@@ -5,6 +5,7 @@
 
 int __cdecl cm_EnqueueClientPacket(char*);
 
+/* ADDRESS: GOLDDE 0x004b3f40 */
 int __cdecl cm_RequestChTalkAction(char* actorName, int arg1, int arg2, char* targetName)
 {
 	char buf[0x9c];

@@ -14,6 +14,7 @@ extern char g_6a9b98[];
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_CreateButtonRow(int, int, char*, int, ...);
 
+/* ADDRESS: GOLDDE 0x00578dc0 */
 void __cdecl d2_InitNetLobbyButtons(void)
 {
 	d2_SetForm(d2_NetLobbyForm, 4);

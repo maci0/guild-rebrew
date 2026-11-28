@@ -21,6 +21,7 @@ int __cdecl gm_GetMsgField(char* pkt, unsigned short* q);
 int __cdecl gm_GetStorageSlotCapacity(char* pkt, int item_id);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 
+/* ADDRESS: GOLDDE 0x004f7bb0 */
 int __cdecl gm_CollectStockEntries(char* o, Stock* out, int producers)
 {
 	char* b;

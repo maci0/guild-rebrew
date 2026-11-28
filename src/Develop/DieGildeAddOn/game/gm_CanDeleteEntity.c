@@ -35,6 +35,7 @@ typedef struct
 #include "Develop/client_types.h"
 extern Rec2d_9a3800 cm_CrimeRecords[512];
 
+/* ADDRESS: GOLDDE 0x004f5790 */
 int __cdecl gm_CanDeleteEntity(unsigned char* p)
 {
 	int id;

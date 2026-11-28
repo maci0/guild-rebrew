@@ -8,6 +8,7 @@ extern char d3_TwoPi[];
 extern char d3_TwoPi[];
 /* ADDRESS: GOLD 0x00453b30 */
 /* ADDRESS: GOLDTL 0x004514d0 */
+/* ADDRESS: GOLDDE 0x004470b0 */
 float __cdecl d3_WrapYawDelta(int left, int right)
 {
 	float value;

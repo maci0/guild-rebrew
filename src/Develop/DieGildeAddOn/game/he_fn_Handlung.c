@@ -12,6 +12,7 @@ extern int g_6a4764;
 void __cdecl ReportClientMessage(const char* msg);
 
 /* ADDRESS: GOLDTL 0x005462a0 */
+/* ADDRESS: GOLDDE 0x0052c920 */
 HE_ACTION* __cdecl he_fn_Handlung(void)
 {
 	HE_ACTION* e;

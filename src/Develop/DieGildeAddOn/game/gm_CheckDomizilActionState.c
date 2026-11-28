@@ -16,6 +16,7 @@ extern int g_772624;
 int __cdecl gm_StartFilteredEntitySearch(int a, int b, int c, int d, int id);
 
 /* ADDRESS: GOLDTL 0x0048d610 */
+/* ADDRESS: GOLDDE 0x0047c4e0 */
 int __cdecl gm_CheckDomizilActionState(ENTITY_RECORD* entity, int* out)
 {
 	int i;

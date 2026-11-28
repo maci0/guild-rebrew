@@ -21,6 +21,7 @@ extern char g_6b89a4[];
 
 void __cdecl m_pool_free(void*, void*);
 
+/* ADDRESS: GOLDDE 0x0044a8b0 */
 char __cdecl d3_RemoveObjectFromCellTree(char* e, Cell* c)
 {
 	Link* l;

@@ -1,3 +1,7 @@
+extern char gm_ActiveTownIndex[];
+extern char flt_0_01[];
+extern char g_664150[];
+extern char g_6628ac[];
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
 
@@ -17,6 +21,7 @@ int __cdecl gm_SumQueryEntryValues(int a, char b);
 int __cdecl gm_CalcPersonWealth(unsigned short raw_idx);
 
 /* ADDRESS: GOLDTL 0x0048ddd0 */
+/* ADDRESS: GOLDDE 0x0047cca0 */
 int __cdecl ai_SetupSecretRoomMode2(char* actor, char* thresholdOut, char* resultOut)
 {
 	int mask;
@@ -48,12 +53,12 @@ int __cdecl ai_SetupSecretRoomMode2(char* actor, char* thresholdOut, char* resul
 	} else {
 		return 0;
 	}
-	gm_SumQueryEntryValues(*(int*) (actor + 0x178), *(char*) 0x773d75);
+	gm_SumQueryEntryValues(*(int*) (actor + 0x178), *(char*) &gm_ActiveTownIndex);
 	total = gm_CalcPersonWealth(*(unsigned short*) actor);
 	total += gm_CalcPersonWealth(target->entity_index);
-	tot[0] = (int) ((float) total * *(float*) 0x662910);
-	tot[1] = (int) ((float) total * *(float*) 0x664150);
-	tot[2] = (int) ((float) total * *(float*) 0x6628ac);
+	tot[0] = (int) ((float) total * *(float*) &flt_0_01);
+	tot[1] = (int) ((float) total * *(float*) &g_664150);
+	tot[2] = (int) ((float) total * *(float*) &g_6628ac);
 	if (total >= thr[2]) {
 		nv = 2;
 	} else if (total >= thr[1]) {

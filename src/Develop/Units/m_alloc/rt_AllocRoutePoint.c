@@ -16,6 +16,7 @@ RT_POINT_NODE* __cdecl m_alloc(int, char*);
 
 
 /* ADDRESS: GOLDTL 0x004be1f0 */
+/* ADDRESS: GOLDDE 0x004abd70 */
 RT_POINT_NODE* __cdecl rt_AllocRoutePoint(RT_POINT_NODE* head)
 {
 	int n;

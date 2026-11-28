@@ -6,6 +6,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004bb980 */
+/* ADDRESS: GOLDDE 0x004a99f0 */
 int __cdecl gm_HandleMsg41ClearSickness(int* request)
 {
 	char buf[0x400];

@@ -18,6 +18,7 @@ int __cdecl fcn_004fbd20(int a);
 void __cdecl gm_GetLawEntry(int a, void* out);
 
 /* ADDRESS: GOLDTL 0x004909f0 */
+/* ADDRESS: GOLDDE 0x0047f8a0 */
 int __cdecl ai_EvaluateLaw0x04(char* entity, int unused, int* out)
 {
 	float fA;

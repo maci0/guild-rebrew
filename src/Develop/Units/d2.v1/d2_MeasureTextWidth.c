@@ -5,6 +5,7 @@ void* __cdecl d2_GetResourceData(int idx);
 char* __cdecl d2_GetBankEntry(char* p, int i);
 
 /* ADDRESS: GOLDTL 0x0046b520 */
+/* ADDRESS: GOLDDE 0x0045eba0 */
 int __cdecl d2_MeasureTextWidth(char* inputText, int fontId)
 {
 	int len;

@@ -9,6 +9,7 @@ typedef Card_1007ce0 Card;
 extern Card_1007ce0 g_1007ce0[24];
 
 /* ADDRESS: GOLDTL 0x004a7f90 */
+/* ADDRESS: GOLDDE 0x004962e0 */
 void __cdecl gm_CountBoardCardRanksAndSuits(int* h, int* rank_n, int* rank, int* suit_n, int* suit)
 {
 	int suits[4] = { 0 };

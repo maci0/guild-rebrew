@@ -66,6 +66,7 @@ void __cdecl he_FreeAction(Order_5635b0*);
 /* Order step: from the third try on, sends message 0x6e with a chance
  * scaled by the order's value, then re-arms the order. */
 /* ADDRESS: GOLDTL 0x005635b0 */
+/* ADDRESS: GOLDDE 0x00549780 */
 void __cdecl he_RunBuildingOfferAction(Order_5635b0* o)
 {
 	char m[0xf8];

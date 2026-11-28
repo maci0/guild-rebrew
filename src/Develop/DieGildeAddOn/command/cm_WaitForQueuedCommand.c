@@ -7,6 +7,7 @@ extern volatile int gm_GameTicks;
 void __cdecl cm_FlushCommandQueue(void);
 int __cdecl cm_PollCommandQueue(void);
 
+/* ADDRESS: GOLDDE 0x004b23b0 */
 char* __cdecl cm_WaitForQueuedCommand(char kind, int timeout)
 {
 	unsigned int end;

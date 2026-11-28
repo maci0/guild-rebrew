@@ -29,6 +29,7 @@ float* __stdcall fcn_005eb970(float*, float*, float*);
 void __cdecl d3_UpdateAnimatedFloorMaterials(int, int, int);
 void __cdecl d3_RenderFloorCellWater(char*, Cell*);
 
+/* ADDRESS: GOLDDE 0x00439930 */
 void __cdecl d3_RenderWaterFloorCells(char* o, char flag)
 {
 	float m[16];

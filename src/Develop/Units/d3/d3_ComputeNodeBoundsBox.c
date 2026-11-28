@@ -1,4 +1,5 @@
 /* ADDRESS: GOLDTL 0x00455910 */
+/* ADDRESS: GOLDDE 0x0044b0d0 */
 int __cdecl d3_ComputeNodeBoundsBox(int unused, int node, float* matrix)
 {
 	float corners[32];

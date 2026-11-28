@@ -7,6 +7,7 @@ char* __cdecl fcn_0064f026(char*, char*);
 char* __cdecl fcn_0064d1a0(char*, int);
 void __cdecl d3_ValidateTextureDimensions(char*, int);
 
+/* ADDRESS: GOLDDE 0x00442d20 */
 void __cdecl d3_ParseMatBaseMap(int unused, int* o)
 {
 	char* s;

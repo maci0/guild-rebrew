@@ -3,6 +3,7 @@ char* __cdecl cut_FindCutsceneById(int id);
 
 /* Inferred distinct client handler name. */
 /* ADDRESS: GOLDTL 0x004c9f50 */
+/* ADDRESS: GOLDDE 0x004b7730 */
 int __cdecl cm_ExAddCutsceneParticipant(char* command, char* result)
 {
     if (cut_FindCutsceneById(*(int*) (command + 0x10)) == 0)

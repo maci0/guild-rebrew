@@ -102,6 +102,7 @@ int __cdecl d2_LockSurface(char *s)
 }
 #else
 /* ADDRESS: GOLDTL 0x00475fd0 */
+/* ADDRESS: GOLDDE 0x00468380 */
 int __cdecl d2_LockSurface(D2_LOCK_SURFACE* surface)
 {
 	D2_LOCKED_RECT lockedRect;

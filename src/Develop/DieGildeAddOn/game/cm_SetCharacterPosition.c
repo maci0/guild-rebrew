@@ -9,6 +9,7 @@ char* __cdecl ch_FindCharacterByName(char*);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 void __cdecl ch_CreateAction(char*, int, int);
 
+/* ADDRESS: GOLDDE 0x004b8010 */
 int __cdecl cm_SetCharacterPosition(char* x, char* out)
 {
 	char buf[0x80];

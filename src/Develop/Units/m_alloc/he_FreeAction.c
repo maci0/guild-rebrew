@@ -31,6 +31,7 @@ extern int g_7dc424;
 void __cdecl m_FreeTracked(void*);
 void __cdecl d2_CloseActionPopup(HE_ACTION*);
 
+/* ADDRESS: GOLDDE 0x0052c810 */
 void __cdecl he_FreeAction(HE_ACTION* u)
 {
 	int i;

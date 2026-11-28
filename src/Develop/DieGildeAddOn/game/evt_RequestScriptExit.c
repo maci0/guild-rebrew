@@ -7,6 +7,7 @@ void __cdecl evt_RunGfxScript(char* c);
 void __cdecl evt_LogScriptError(char* c, int h, const char* msg);
 void __cdecl evt_LogScriptError(char* c, int h, const char* msg);
 
+/* ADDRESS: GOLDDE 0x00423180 */
 int __cdecl evt_RequestScriptExit(char* c)
 {
 	unsigned int flags;

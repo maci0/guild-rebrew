@@ -14,6 +14,7 @@ int* __cdecl d2_LoadBmp24Surface(char*);
 int __cdecl d2_CreateTiledSurface(int, int, int, int, int*, int);
 void __cdecl d2_ReleaseSurface(int*);
 
+/* ADDRESS: GOLDDE 0x0059ffc0 */
 void __cdecl d2_LoadCityMapImage(void)
 {
 	char path[0x104];

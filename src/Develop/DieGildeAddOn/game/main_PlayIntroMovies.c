@@ -13,6 +13,7 @@ int __cdecl OpenMovieWindow(char*, int, int, int, int, int, int, int);
 void __cdecl PlayVideo(int);
 void __cdecl main_PumpWindowMessages(void);
 
+/* ADDRESS: GOLDDE 0x0052afe0 */
 void __cdecl main_PlayIntroMovies(void)
 {
 	char path[0x104];

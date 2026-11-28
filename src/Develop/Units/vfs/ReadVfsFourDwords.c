@@ -4,6 +4,7 @@
 
 int __cdecl vfs_ReadDword(void* stream, void* dst);
 
+/* ADDRESS: GOLDDE 0x00401270 */
 void __cdecl ReadVfsFourDwords(void* stream, void* dst)
 {
 	vfs_ReadDword(stream, dst);

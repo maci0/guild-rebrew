@@ -5,6 +5,7 @@ char* __cdecl he_StartHandlungSearch(int, ...);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl he_AbortActionIfFlag2(char*);
 
+/* ADDRESS: GOLDDE 0x005570b0 */
 void __cdecl he_CancelEntityActions0x23(char* a)
 {
 	char* u;

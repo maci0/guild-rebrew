@@ -45,6 +45,7 @@ extern float g_14cbc80;
 unsigned short __cdecl ExpandPathNode(PathGrid* grid, unsigned short node);
 void __cdecl ReversePathLinks(PathGrid* grid, unsigned short node);
 
+/* ADDRESS: GOLDDE 0x0041e760 */
 unsigned short __cdecl RunForwardPathSearch(PathGrid* grid, int x, int y, int goal_x, int goal_y, int kind)
 {
 	int t;

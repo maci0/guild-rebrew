@@ -26,6 +26,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int id);
 
 
 /* ADDRESS: GOLDTL 0x004a8ed0 */
+/* ADDRESS: GOLDDE 0x00497210 */
 int __cdecl ai_CheckAction028Predicate(char* unused1, char* actor, char* unused3, char* unused4, char* out)
 {
 	int found;

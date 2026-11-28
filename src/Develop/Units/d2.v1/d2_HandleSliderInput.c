@@ -47,6 +47,7 @@ extern short io_ActiveCursorY;
 
 Glyph* __cdecl d2_GetBankEntry(char* font, int c);
 
+/* ADDRESS: GOLDDE 0x00466d40 */
 void __cdecl d2_HandleSliderInput(void)
 {
 	int flags;

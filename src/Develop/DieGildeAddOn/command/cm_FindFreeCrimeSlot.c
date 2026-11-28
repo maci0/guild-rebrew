@@ -9,6 +9,7 @@
 #pragma pack(pop)
 
 
+/* ADDRESS: GOLDDE 0x004e1880 */
 int __cdecl cm_FindFreeCrimeSlot(void)
 {
 	int slot;

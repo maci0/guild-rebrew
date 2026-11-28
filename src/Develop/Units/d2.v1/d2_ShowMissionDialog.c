@@ -15,6 +15,7 @@ int __cdecl main_RunFrameLoop(void (__cdecl* cb)(int), int flags);
 void __cdecl d2_DestroyForm(int h);
 void __cdecl main_ExitToGameLoop(int arg);
 
+/* ADDRESS: GOLDDE 0x004a44a0 */
 void __cdecl d2_ShowMissionDialog(int arg)
 {
 	int mode;

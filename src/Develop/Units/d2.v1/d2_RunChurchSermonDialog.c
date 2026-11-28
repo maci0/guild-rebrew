@@ -92,6 +92,7 @@ int __cdecl gm_RandomMod(unsigned short range);
 void __cdecl d3_EndCameraAndUiMode(void);
 
 /* ADDRESS: GOLDTL 0x005ac2d0 */
+/* ADDRESS: GOLDDE 0x00590de0 */
 void __cdecl d2_RunChurchSermonDialog(char* building)
 {
 	SERMON_ACTION_PKT pkt;

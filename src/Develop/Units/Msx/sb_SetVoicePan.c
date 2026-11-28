@@ -4,6 +4,7 @@ extern int sb_WaveDriver;
 
 int __cdecl msx_SetSamplePan(int, int);
 
+/* ADDRESS: GOLDDE 0x004205e0 */
 int __cdecl sb_SetVoicePan(int* voice, int pan)
 {
 	int r;

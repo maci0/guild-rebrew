@@ -6,6 +6,7 @@ extern char str_empty[];
 void __cdecl io_FormatTextBuffer(void*, int, int, int, int, int);
 void __cdecl he_PostEntityMessage(int, int, void*, int, int, void*);
 
+/* ADDRESS: GOLDDE 0x00597750 */
 void __cdecl he_NotifyContractBatch(void* recipient, int sourceName, int count, int total)
 {
 	char t;

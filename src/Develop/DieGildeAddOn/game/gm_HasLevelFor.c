@@ -5,6 +5,7 @@ extern unsigned char* lpGebaeudePROT;
 
 int __cdecl gm_GetBuildingProtLevel(unsigned char* e);
 
+/* ADDRESS: GOLDDE 0x004f72f0 */
 int __cdecl gm_HasLevelFor(unsigned char* e, unsigned char* x)
 {
 	BUILDING_PROTOTYPE *t;

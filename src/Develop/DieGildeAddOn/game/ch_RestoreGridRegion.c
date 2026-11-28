@@ -22,6 +22,7 @@ extern int g_675324;
 extern int g_6b5c4c;
 extern int g_6b5c50;
 
+/* ADDRESS: GOLDDE 0x00404c00 */
 void __cdecl ch_RestoreGridRegion(Grid* m)
 {
 	int* dst;

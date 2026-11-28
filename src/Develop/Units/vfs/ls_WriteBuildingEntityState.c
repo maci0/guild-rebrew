@@ -12,6 +12,7 @@ int __cdecl ahm_fio_SaveAhmInfo(char* stream, char* rec);
 int __cdecl gv_SaveGraveyardField(char* stream, char* rec);
 
 /* ADDRESS: GOLDTL 0x0051ecf0 */
+/* ADDRESS: GOLDDE 0x00507fc0 */
 int __cdecl ls_WriteBuildingEntityState(char* file)
 {
 	int count;

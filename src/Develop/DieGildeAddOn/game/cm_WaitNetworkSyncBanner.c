@@ -10,6 +10,7 @@ int __cdecl cm_GetCommandStatus(int);
 void __cdecl d2_ShowStatusBanner(char*);
 void __cdecl main_RunFrameLoop(int, int);
 
+/* ADDRESS: GOLDDE 0x0051e140 */
 void __cdecl cm_WaitNetworkSyncBanner(char* name)
 {
 	char buf[0x7c];

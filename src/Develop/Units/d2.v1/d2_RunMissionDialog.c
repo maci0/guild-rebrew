@@ -55,6 +55,7 @@ void __cdecl d2_ShowMissionSpecDialog(int a1, int flags);
 void __cdecl main_ExitToGameLoop(int flags);
 
 /* ADDRESS: GOLDTL 0x004b5df0 */
+/* ADDRESS: GOLDDE 0x004a4080 */
 void __cdecl d2_RunMissionDialog(int flags)
 {
 	int level;

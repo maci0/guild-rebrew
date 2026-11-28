@@ -14,6 +14,7 @@ unsigned char* __cdecl he_StartHandlungSearch(int, int, int);
 unsigned char* __cdecl he_fn_Handlung(void);
 void __cdecl cm_SendSetHE(int, unsigned char*);
 
+/* ADDRESS: GOLDDE 0x004d95e0 */
 void __cdecl he_CancelErforschenActions(char* object)
 {
 	unsigned char* p;

@@ -5,6 +5,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 
 /* ADDRESS: GOLDTL 0x00575470 */
+/* ADDRESS: GOLDDE 0x0055b3d0 */
 void __cdecl he_StartMissionCheck(char* o)
 {
 	*(pos14_7f4c00*) (o + 0x52) = *(pos14_7f4c00*) (o + 0x44);

@@ -3,6 +3,7 @@ void* __cdecl d3_LoadOrReuseTexture(int a0, unsigned int a1, int a2, int a3);
 void __cdecl d3_LoadTextureSurfaceTl(void* a0);
 
 /* ADDRESS: GOLDTL 0x00459870 */
+/* ADDRESS: GOLDDE 0x0044f030 */
 unsigned int* __cdecl d3_CreateSkyLayer(char* a0, unsigned int a1, int a2, unsigned int a3, unsigned int a4, unsigned int a5, unsigned int a6, unsigned int a7)
 {
 	unsigned int* node;

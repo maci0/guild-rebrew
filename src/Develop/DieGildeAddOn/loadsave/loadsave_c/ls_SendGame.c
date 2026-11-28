@@ -20,6 +20,7 @@ int __cdecl cm_SendLoadChunk(char*);
 void __cdecl main_PumpWindowMessages(void);
 void __cdecl cm_StepCommandQueue(void);
 
+/* ADDRESS: GOLDDE 0x0050ecc0 */
 int __cdecl ls_SendGame(char* path)
 {
 	int n;

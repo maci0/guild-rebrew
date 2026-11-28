@@ -8,6 +8,7 @@ void __cdecl d2_RunDunkleEckeOwnerDialog(char*, char*, char*);
 void __cdecl d2_ShowDunkleEcke(char*, char*);
 void __cdecl d3_EndCameraAndUiMode(void);
 
+/* ADDRESS: GOLDDE 0x00587be0 */
 void __cdecl d2_OpenDunkleEcke(char* building, char* context)
 {
 	char* entry;

@@ -27,6 +27,7 @@ char* __cdecl sb_FindVoiceBySample(int, int*);
 void __cdecl sb_StopVoice(void*, int);
 
 /* ADDRESS: GOLDTL 0x004232f0 */
+/* ADDRESS: GOLDDE 0x004200a0 */
 void __cdecl snd_ReleaseAllSampleBanks(void)
 {
 	Bank* bank;

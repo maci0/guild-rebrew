@@ -5,6 +5,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 
 /* ADDRESS: GOLDTL 0x00573a10 */
+/* ADDRESS: GOLDDE 0x00559990 */
 void __cdecl he_StartAction0x0c(char* action)
 {
 	*(pos14_7f4c00*) (action + 0x52) = *(pos14_7f4c00*) (action + 0x44);

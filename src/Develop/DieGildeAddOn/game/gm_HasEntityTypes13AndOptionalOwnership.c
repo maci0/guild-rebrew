@@ -12,6 +12,7 @@ extern float flt_1_0;
 
 void __cdecl gm_SummarizeEntityOwnership(int, int, stat12*);
 
+/* ADDRESS: GOLDDE 0x004a2dc0 */
 int __cdecl gm_HasEntityTypes13AndOptionalOwnership(int key)
 {
 	stat12 s;

@@ -1,3 +1,4 @@
+extern char d3_ZeroVec4[];
 extern char main_LoopFlags;
 extern int d2_VisitedBuilding;
 extern int d2_InteriorBuilding;
@@ -21,6 +22,7 @@ extern void __cdecl d2_SetClipRect(int a0, int a1, int a2, int a3);
 extern void __cdecl d2_DrawSpriteFromSet(int a0, int a1, int a2, int a3, int a4);
 
 /* ADDRESS: GOLDTL 0x00532bd0 */
+/* ADDRESS: GOLDDE 0x0051b4c0 */
 void __cdecl d2_DrawCameraScrollArrows(void)
 {
     int rightState = 0;
@@ -51,39 +53,39 @@ void __cdecl d2_DrawCameraScrollArrows(void)
     if (d3_CameraHorizontalIndex == -1)
     {
         rightState = 1;
-        if (!CompareVector3WithinTolerance(d3_ActiveCamera + 0xfc, 0x662d70, 0.2f))
+        if (!CompareVector3WithinTolerance(d3_ActiveCamera + 0xfc, (int) &d3_ZeroVec4, 0.2f))
             rightState = 2;
     }
     else if (d3_CameraHorizontalIndex == 1)
     {
         leftState = 1;
-        if (!CompareVector3WithinTolerance(d3_ActiveCamera + 0xe4, 0x662d70, 0.2f))
+        if (!CompareVector3WithinTolerance(d3_ActiveCamera + 0xe4, (int) &d3_ZeroVec4, 0.2f))
             leftState = 2;
     }
     else if (d3_CameraHorizontalIndex == 0)
     {
-        if (!CompareVector3WithinTolerance(d3_ActiveCamera + 0xe4, 0x662d70, 0.2f))
+        if (!CompareVector3WithinTolerance(d3_ActiveCamera + 0xe4, (int) &d3_ZeroVec4, 0.2f))
             leftState = 1;
-        if (!CompareVector3WithinTolerance(d3_ActiveCamera + 0xfc, 0x662d70, 0.2f))
+        if (!CompareVector3WithinTolerance(d3_ActiveCamera + 0xfc, (int) &d3_ZeroVec4, 0.2f))
             rightState = 1;
     }
     if (d3_CameraVerticalStep == -1)
     {
         bottomState = 1;
-        if (!CompareVector3WithinTolerance(d3_ActiveCamera + 0xb4, 0x662d70, 0.2f))
+        if (!CompareVector3WithinTolerance(d3_ActiveCamera + 0xb4, (int) &d3_ZeroVec4, 0.2f))
             bottomState = 2;
     }
     else if (d3_CameraVerticalStep == 1)
     {
         topState = 1;
-        if (!CompareVector3WithinTolerance(d3_ActiveCamera + 0xcc, 0x662d70, 0.2f))
+        if (!CompareVector3WithinTolerance(d3_ActiveCamera + 0xcc, (int) &d3_ZeroVec4, 0.2f))
             topState = 2;
     }
     else if (d3_CameraVerticalStep == 0)
     {
-        if (!CompareVector3WithinTolerance(d3_ActiveCamera + 0xb4, 0x662d70, 0.2f))
+        if (!CompareVector3WithinTolerance(d3_ActiveCamera + 0xb4, (int) &d3_ZeroVec4, 0.2f))
             bottomState = 1;
-        if (!CompareVector3WithinTolerance(d3_ActiveCamera + 0xcc, 0x662d70, 0.2f))
+        if (!CompareVector3WithinTolerance(d3_ActiveCamera + 0xcc, (int) &d3_ZeroVec4, 0.2f))
             topState = 1;
     }
     d2_SetClipRect(0, 0, *(int *)(d2_ScreenSurface + 4), *(int *)(d2_ScreenSurface + 8));

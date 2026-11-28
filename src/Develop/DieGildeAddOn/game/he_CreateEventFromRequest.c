@@ -67,6 +67,7 @@ extern int g_7dc424;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 
+/* ADDRESS: GOLDDE 0x0052c660 */
 HE_ACTION* __cdecl he_CreateEventFromRequest(struct spawn* t)
 {
 	char* e;

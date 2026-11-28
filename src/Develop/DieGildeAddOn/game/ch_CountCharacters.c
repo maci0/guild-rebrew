@@ -2,6 +2,7 @@
 extern char d3_Universes[];
 
 /* ADDRESS: GOLDTL 0x00402ba0 */
+/* ADDRESS: GOLDDE 0x00402430 */
 int __cdecl ch_CountCharacters(int contextIndexArg, int includeTypeOne)
 {
 	int count;
@@ -22,6 +23,6 @@ int __cdecl ch_CountCharacters(int contextIndexArg, int includeTypeOne)
 			}
 		}
 		p++;
-	} while ((int) p < 0x14d0c20);
+	} while ((int) p < ((int) &ch_CharacterSlots + 0xc00));
 	return count;
 }

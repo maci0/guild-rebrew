@@ -5,6 +5,7 @@ int __cdecl d2_RunUnterschlagungDialog(char*, int*);
 
 
 /* ADDRESS: GOLDTL 0x004f8f30 */
+/* ADDRESS: GOLDDE 0x004e4d10 */
 int __cdecl gm_HandleUnterschlagungPrivilege(char* e, int* s)
 {
 	int r;

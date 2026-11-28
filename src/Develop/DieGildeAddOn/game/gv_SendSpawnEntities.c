@@ -20,6 +20,7 @@ typedef struct
 
 int __cdecl gv_EnqueueSlotCommand(void*);
 
+/* ADDRESS: GOLDDE 0x004def40 */
 int __cdecl gv_SendSpawnEntities(int building, int count)
 {
 	GV_SPAWN_ENTITIES_MSG msg;

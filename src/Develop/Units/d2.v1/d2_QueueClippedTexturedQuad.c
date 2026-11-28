@@ -30,6 +30,7 @@ typedef struct Tex {
 int __cdecl d2_BuildQuadVertices(int x, int y, int w, int h, RENDER_QUAD* q);
 void __cdecl d2_SetQuadVertexColor(RENDER_QUAD* q, unsigned char r, unsigned char g, unsigned char b);
 
+/* ADDRESS: GOLDDE 0x0046b1e0 */
 RENDER_QUAD* __cdecl d2_QueueClippedTexturedQuad(float u, float v, int w, int h, Tex* tex, int x, int y)
 {
 	int cw;

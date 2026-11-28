@@ -69,6 +69,7 @@ void __cdecl d3_EndCameraAndUiMode(void);
 #define v47 (*(unsigned int *)(frame + 0x374))
 
 /* ADDRESS: GOLDTL 0x005a1430 */
+/* ADDRESS: GOLDDE 0x005862b0 */
 void __cdecl d2_ShowWirtshausDialog(void)
 {
 	unsigned int *  v1;

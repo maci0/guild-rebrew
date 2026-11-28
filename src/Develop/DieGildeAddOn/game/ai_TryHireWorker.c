@@ -19,6 +19,7 @@ extern unsigned char* lpGebaeudePROT;
 unsigned short __cdecl gm_RandomMod(int n);
 void __cdecl gv_AssignGraveyardField(char* o);
 
+/* ADDRESS: GOLDDE 0x00476310 */
 void __cdecl ai_TryHireWorker(char* e)
 {
 	short k;

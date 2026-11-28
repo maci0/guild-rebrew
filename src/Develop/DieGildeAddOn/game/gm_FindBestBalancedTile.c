@@ -3,6 +3,7 @@ extern int d3_ActiveScene;
 float __cdecl gm_ScorePositionBalance(char* self, int x, int z, float range);
 
 /* ADDRESS: GOLDTL 0x004d31d0 */
+/* ADDRESS: GOLDDE 0x004c04c0 */
 int __cdecl gm_FindBestBalancedTile(char* self, int centerColumn, int centerRow, int searchRadius,
 	unsigned int* resultColumn, unsigned int* resultRow)
 {

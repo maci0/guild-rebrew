@@ -18,6 +18,7 @@ extern char g_68b300[];
 void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(char*);
 
+/* ADDRESS: GOLDDE 0x004d1990 */
 void __cdecl d2_AppendPendingPlayerNames(unsigned char* ctx)
 {
 	int i;

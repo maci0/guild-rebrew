@@ -10,6 +10,7 @@ int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_RunBlutracheDialog(int);
 
 /* ADDRESS: GOLD 0x5a3c70 */
+/* ADDRESS: GOLDDE 0x005c7ba0 */
 void __cdecl d2_RunFortuneTellerHud(int a)
 {
 	int x;

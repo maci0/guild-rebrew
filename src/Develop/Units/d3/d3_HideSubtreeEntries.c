@@ -10,6 +10,7 @@ void __cdecl d3_SetSubtreeVisible(void*, int);
 
 
 /* ADDRESS: GOLDTL 0x004bd1a0 */
+/* ADDRESS: GOLDDE 0x004ab020 */
 void __cdecl d3_HideSubtreeEntries(SUBTREE_SLOT_ENTRY* slots)
 {
 	int i;

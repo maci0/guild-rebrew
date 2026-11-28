@@ -26,6 +26,7 @@ typedef struct Tex {
 extern char* d3_TextureBank;
 extern unsigned int d3_TextureBankCount;
 
+/* ADDRESS: GOLDDE 0x00451ac0 */
 Tex* __cdecl d3_FindTextureVariant(int idx, char kind)
 {
 	Tex* p;

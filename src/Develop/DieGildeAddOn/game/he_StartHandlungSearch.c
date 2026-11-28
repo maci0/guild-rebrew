@@ -21,6 +21,7 @@ extern int g_6a4764;
 
 HE_ACTION* __cdecl he_fn_Handlung(void);
 
+/* ADDRESS: GOLDDE 0x0052ca20 */
 HE_ACTION* __cdecl he_StartHandlungSearch(int n, ...)
 {
 	va_list ap;

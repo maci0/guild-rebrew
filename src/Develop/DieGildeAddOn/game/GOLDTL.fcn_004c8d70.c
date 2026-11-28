@@ -3,6 +3,7 @@ int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_
 
 
 /* ADDRESS: GOLDTL 0x004c8d70 */
+/* ADDRESS: GOLDDE 0x004b6550 */
 int __cdecl cm_ClientExChangeFloat(char* m, char* out)
 {
 	void* dyn;

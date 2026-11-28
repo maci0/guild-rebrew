@@ -32,6 +32,7 @@ void __cdecl d2_SelectFont(int font);
 void __cdecl d2_DrawWordWrappedText(int x, int y, int w, int h, int surf, char* text, int flags);
 
 /* ADDRESS: GOLDTL 0x004663e0 */
+/* ADDRESS: GOLDDE 0x00459f60 */
 void __cdecl d2_DrawFieldSliderPopup(char* f, int surf)
 {
 	D2_POPUP_ELEMENT* e;

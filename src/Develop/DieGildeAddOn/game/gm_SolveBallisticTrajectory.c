@@ -3,6 +3,7 @@ void __cdecl d3_NormalizeVector(float *);
 float __cdecl d3_WrapYawDelta(int, int);
 
 /* ADDRESS: GOLDTL 0x005ea4d0 */
+/* ADDRESS: GOLDDE 0x005caff0 */
 int __cdecl gm_SolveBallisticTrajectory(void *a, void *b, void *c, void *d, void *e, void *f, void *g, void *h, void *i)
 {
     float *origin, *target, *bounds, *angle, *bearing, *speed, *velocity, *direction, *normal;

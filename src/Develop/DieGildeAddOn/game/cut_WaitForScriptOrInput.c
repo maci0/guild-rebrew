@@ -7,6 +7,7 @@ extern int cut_SkipMode;
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl evt_FindScriptById(int);
 
+/* ADDRESS: GOLDDE 0x004d0f30 */
 int __cdecl cut_WaitForScriptOrInput(int id, int(__cdecl* cb)(int), int arg)
 {
 	if (cut_SkipMode != 0)

@@ -55,6 +55,7 @@ void __cdecl evt_RequestScriptExit(char* g);
 /* Evaluates one script expression from the lexer position, stopping at the
  * expression end ("," , ";" or the pEnd bound) or at a ")" / "]" token. */
 /* ADDRESS: GOLDTL 0x00428800 */
+/* ADDRESS: GOLDDE 0x00423220 */
 int __cdecl evt_EvaluateExpression(char* pEnd)
 {
 	struct tok_428800 t;

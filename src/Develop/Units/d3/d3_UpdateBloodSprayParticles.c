@@ -30,6 +30,7 @@ extern float g_662a40;
  * expires; the live records are counted and, once the emitter is enabled, the
  * free records up to half its capacity are seeded and the dirty flag cleared. */
 /* ADDRESS: GOLDTL 0x00417870 */
+/* ADDRESS: GOLDDE 0x00415670 */
 char __cdecl d3_UpdateBloodSprayParticles(char* a0, int timeNow)
 {
 	Rec* rec;

@@ -6,6 +6,7 @@ void __cdecl d2_AddElementToWindow(int, int, int, int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 
 /* ADDRESS: GOLDTL 0x005a0ad0 */
+/* ADDRESS: GOLDDE 0x00585950 */
 void __cdecl d2_RenderDiceRollIcons(int a, unsigned char* p)
 {
 	int y, x, i;

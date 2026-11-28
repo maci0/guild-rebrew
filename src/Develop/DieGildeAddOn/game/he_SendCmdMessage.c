@@ -9,6 +9,7 @@ void __cdecl cm_SendRawEntityPacket(char*, int, char*);
 
 /* ADDRESS: GOLD 0x004e48b0 */
 /* ADDRESS: GOLDTL 0x004e6240 */
+/* ADDRESS: GOLDDE 0x004d2a90 */
 void __cdecl he_SendCmdMessage(int* a1, char* a2, char* text, char* extra)
 {
 	char message[0xf8];

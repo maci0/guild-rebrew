@@ -6,6 +6,7 @@
 
 int __cdecl cm_RequestSlot170Command(int*);
 
+/* ADDRESS: GOLDDE 0x004dcc40 */
 void __cdecl cm_SendSlotAddNCta(char* a)
 {
 	int x[2];

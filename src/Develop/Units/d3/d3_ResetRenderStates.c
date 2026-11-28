@@ -29,6 +29,7 @@ extern char d3_RenderQualityFlags[];
 
 #pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x00436aa0 */
+/* ADDRESS: GOLDDE 0x0042ffc0 */
 void __cdecl d3_ResetRenderStates(unsigned char* flags)
 {
     float m[16];

@@ -59,6 +59,7 @@ char* __cdecl d2_GetControlValue(int);
 void __cdecl cm_RequestSendChat(Chat*);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x0051e1d0 */
 void __cdecl d2_RunChatConsole(void)
 {
 	int ids[8];

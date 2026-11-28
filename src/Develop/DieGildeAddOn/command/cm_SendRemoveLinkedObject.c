@@ -2,6 +2,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b3390 */
 void __cdecl cm_SendRemoveLinkedObject(int entityId, int slotKind, int nodeId)
 {
 	char buf[0x9c];

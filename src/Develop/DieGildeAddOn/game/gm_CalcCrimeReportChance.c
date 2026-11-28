@@ -8,6 +8,7 @@ extern unsigned char* lpGebaeudePROT;
 
 int __cdecl gm_GetBuildingTechEffect(unsigned char* rec, int a, int b);
 
+/* ADDRESS: GOLDDE 0x004e0f70 */
 float __cdecl gm_CalcCrimeReportChance(unsigned short* key)
 {
 	unsigned char* rec;

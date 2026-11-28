@@ -6,6 +6,7 @@ extern char g_6ab528[];
 void __cdecl io_FormatTextBuffer(void*, int, void*, void*, int);
 void __cdecl he_MessageBoxQuickjump(int, int, void*, int, int, int, int, int, void*);
 
+/* ADDRESS: GOLDDE 0x00597b20 */
 void __cdecl he_NotifyAlchemistEssence(void* slot, void* actor, void* building, int essenceId)
 {
 	char t;

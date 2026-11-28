@@ -5,6 +5,7 @@
 
 extern ALCHEMY_DRAW_SLOT ahm_DrawSlots[3];
 
+/* ADDRESS: GOLDDE 0x004da4c0 */
 void __cdecl ahm_ClearDrawSlot(ALCHEMY_DRAW_SLOT* slot)
 {
 	int i;

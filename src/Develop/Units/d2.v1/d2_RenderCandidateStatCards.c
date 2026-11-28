@@ -18,6 +18,7 @@ void __cdecl d2_FormatWorkerFullName(void* a1, void* a2);
 void __cdecl d2_FormatCandidateRolePair(char* o, char* buf);
 
 /* ADDRESS: GOLDTL 0x0058bfd0 */
+/* ADDRESS: GOLDDE 0x00571c90 */
 void __cdecl d2_RenderCandidateStatCards(int* ctx)
 {
 	int i;

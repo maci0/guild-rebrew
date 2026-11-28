@@ -9,6 +9,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_QueryEntities(int, int, int, int);
 void __cdecl d2_EnterBuildingObjekt(char*, int, char*);
 
+/* ADDRESS: GOLDDE 0x00565b00 */
 void __cdecl d2_FocusTutorialBuilding0x12(int a)
 {
 	char* e;

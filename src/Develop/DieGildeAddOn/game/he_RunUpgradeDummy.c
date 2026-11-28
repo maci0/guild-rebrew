@@ -1,3 +1,6 @@
+extern char g_6a6234[];
+extern char g_68b7ac[];
+extern char g_6a6248[];
 #include <string.h>
 #include <stdio.h>
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
@@ -49,6 +52,7 @@ extern void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, 
  * up, reports it to the action handler and advances the entity's queue. */
 #pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x0055c270 */
+/* ADDRESS: GOLDDE 0x005424c0 */
 void __cdecl he_RunUpgradeDummy(char* o)
 {
 	unsigned char* rec;
@@ -66,7 +70,7 @@ void __cdecl he_RunUpgradeDummy(char* o)
 		*(int*) (o + 0x70) = 1;
 		break;
 	case 1:
-		if (gm_CompareGameTime(o + 0x52, (char*) 0x7f4c00) < 0) {
+		if (gm_CompareGameTime(o + 0x52, (char*) ((int) &gm_GameTime)) < 0) {
 			e = (unsigned char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (o + 0x10));
 			if (e == 0) {
 				he_FreeAction(o);
@@ -88,13 +92,13 @@ void __cdecl he_RunUpgradeDummy(char* o)
 			return;
 		}
 		if (*(unsigned short*) rec == 0x1f9) {
-			gv_RequestActivateSection((char*) &((ENTITY_RECORD*) 0x7f4ca0)[*(unsigned short*) (e + 0x27)],
+			gv_RequestActivateSection((char*) &((ENTITY_RECORD*) &gm_EntitySlotTable)[*(unsigned short*) (e + 0x27)],
 				(char*) e, 1);
 		} else if (*(unsigned short*) rec == 0x1fd) {
-			gv_RequestActivateSection((char*) &((ENTITY_RECORD*) 0x7f4ca0)[*(unsigned short*) (e + 0x27)],
+			gv_RequestActivateSection((char*) &((ENTITY_RECORD*) &gm_EntitySlotTable)[*(unsigned short*) (e + 0x27)],
 				(char*) e, 2);
 		} else if (*(unsigned short*) rec == 0x201) {
-			gv_RequestActivateSection((char*) &((ENTITY_RECORD*) 0x7f4ca0)[*(unsigned short*) (e + 0x27)],
+			gv_RequestActivateSection((char*) &((ENTITY_RECORD*) &gm_EntitySlotTable)[*(unsigned short*) (e + 0x27)],
 				(char*) e, 3);
 		} else if (*(unsigned short*) rec == 0x12d) {
 			Msg55c270 msg;
@@ -141,12 +145,12 @@ void __cdecl he_RunUpgradeDummy(char* o)
 				}
 				strcpy(tmp, (char*) src + 1);
 				_strupr(tmp);
-				sprintf(name, (char*) 0x68b7ac, tmp);
+				sprintf(name, (char*) &g_68b7ac, tmp);
 				io_FormatTextBuffer(buf, 0x1c2b, e, *(unsigned short*) (o + 0xac) * 2 + 0x9a8);
-				he_MessageBoxQuickjump(*(int*) &((ENTITY_RECORD*) 0x7f4ca0)[
+				he_MessageBoxQuickjump(*(int*) &((ENTITY_RECORD*) &gm_EntitySlotTable)[
 						*(unsigned short*) (e + 0x27)].entity_id,
 					*(int*) (o + 0x10), buf, 0, kind, *(int*) (e + 1),
-					*(int*) (o + 0xb0), name, (char*) 0x6a6248);
+					*(int*) (o + 0xb0), name, (char*) &g_6a6248);
 			} else {
 				kind = 0x606;
 				if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*e].category != 6) {
@@ -156,10 +160,10 @@ void __cdecl he_RunUpgradeDummy(char* o)
 						kind = 0x60b;
 				}
 				io_FormatTextBuffer(buf, 0x1c2d, e, *(unsigned short*) (o + 0xac) * 2 + 0x9a8);
-				he_MessageBoxQuickjump(*(int*) &((ENTITY_RECORD*) 0x7f4ca0)[
+				he_MessageBoxQuickjump(*(int*) &((ENTITY_RECORD*) &gm_EntitySlotTable)[
 						*(unsigned short*) (e + 0x27)].entity_id,
 					*(int*) (o + 0x10), buf, 0, kind, *(int*) (e + 1),
-					-1, 0, (char*) 0x6a6234);
+					-1, 0, (char*) &g_6a6234);
 			}
 			rec[0x13] |= 0xa0;
 		}

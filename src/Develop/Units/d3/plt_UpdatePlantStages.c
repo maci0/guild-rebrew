@@ -15,6 +15,7 @@ typedef struct
 void __cdecl d3_ShowPflanzenMapEntries(fcn_004bceb0_Entry* tab);
 
 /* ADDRESS: GOLDTL 0x004bceb0 */
+/* ADDRESS: GOLDDE 0x004aad30 */
 void __cdecl plt_UpdatePlantStages(fcn_004bceb0_Entry* tab)
 {
 	unsigned char* r;

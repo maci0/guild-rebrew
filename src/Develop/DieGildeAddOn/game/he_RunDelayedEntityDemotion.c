@@ -26,6 +26,7 @@ void __cdecl cm_SendCopyEntityData(struct msg*);
 void __cdecl cm_RequestSetEntityLevel(int, int);
 void __cdecl he_FreeAction(char*);
 
+/* ADDRESS: GOLDDE 0x0054b140 */
 void __cdecl he_RunMeisterpruefungFinish(char* action)
 {
 	struct msg msg;

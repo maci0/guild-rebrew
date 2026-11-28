@@ -3,6 +3,7 @@
 #include "Develop/Units/d3/client_lighting.h"
 SOUND_VOICE* __cdecl sb_PrepareVoice(int a, int b);
 
+/* ADDRESS: GOLDDE 0x0040bc90 */
 void __cdecl PlayEntitySound(char* cmd)
 {
     char* e;

@@ -9,6 +9,7 @@ extern void __cdecl LogMessageInternal(char* file, unsigned int line, char* msg,
 // SIZE 0x24
 typedef struct { int count; int ids[8]; } PlayerList9;
 
+/* ADDRESS: SERVERDE 0x10013640 */
 int __cdecl lb_ExPlayerlist(unsigned int* player, unsigned char* msg)
 {
 	PlayerList9 list;
@@ -283,6 +284,7 @@ int __cdecl lb_ExPlayerRecordBroadcast(unsigned int* player, unsigned char* msg)
 	return 0;
 }
 #else
+/* ADDRESS: GOLDDE 0x004e50e0 */
 int __cdecl lb_ExPlayerRecordBroadcast(unsigned int* player, unsigned char* msg)
 {
 	int state;

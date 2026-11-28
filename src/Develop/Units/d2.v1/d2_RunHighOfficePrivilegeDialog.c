@@ -33,6 +33,7 @@ void __cdecl d2_RunOfficeDiscordDialog(int);
 void __cdecl d2_RunOfficeFeudDialog(int);
 void __cdecl d3_EndCameraAndUiMode(void);
 
+/* ADDRESS: GOLDDE 0x0058f730 */
 void __cdecl d2_RunHighOfficePrivilegeDialog(void)
 {
 	Query q;

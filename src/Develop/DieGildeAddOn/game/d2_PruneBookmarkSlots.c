@@ -13,6 +13,7 @@ int __cdecl gm_FindRecordById(int);
 char __cdecl gm_GetEntityUiFlags(int, int, int, int);
 void __cdecl d2_ClearBookmarkSlot(Slot*);
 
+/* ADDRESS: GOLDDE 0x00577930 */
 void __cdecl d2_PruneBookmarkSlots(void)
 {
 	int i;

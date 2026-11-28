@@ -16,6 +16,7 @@ extern char gm_EntitySlotTable[];
 unsigned short __cdecl gm_RandomMod(int n);
 
 /* ADDRESS: GOLDTL 0x0048f450 */
+/* ADDRESS: GOLDDE 0x0047e320 */
 Ent* __cdecl ai_PickIdleGraveyardWorker(int owner)
 {
 	unsigned short list[8];

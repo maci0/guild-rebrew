@@ -5,6 +5,7 @@
 
 double __cdecl gm_GetCityStatsSummary(float*);
 
+/* ADDRESS: GOLDDE 0x004a3290 */
 int __cdecl gm_CheckCityStatThresholds(void)
 {
 	float buf[10];

@@ -49,6 +49,7 @@ void __cdecl d2_RunSeanceTreasureDialog(char*, char*);
 void __cdecl d2_ShowModalMessageBox(int, int);
 
 /* ADDRESS: GOLDTL 0x0058ee70 */
+/* ADDRESS: GOLDDE 0x00574b30 */
 void __cdecl d2_RunSeanceAction(char* e)
 {
 	Result_58ee70 result;

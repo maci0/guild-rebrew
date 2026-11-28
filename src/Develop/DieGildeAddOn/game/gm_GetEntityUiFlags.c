@@ -10,6 +10,7 @@ int __cdecl gm_MapEntityStatRange(int typ);
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int, int, int);
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 /* ADDRESS: GOLDTL 0x00506380 */
+/* ADDRESS: GOLDDE 0x004f1700 */
 int __cdecl gm_GetEntityUiFlags(int playerIndex, unsigned char* building, unsigned short* object, int actor)
 {
 	unsigned char* rec;

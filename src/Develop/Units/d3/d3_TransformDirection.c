@@ -48,6 +48,7 @@ void __cdecl d3_TransformDirection(D3_XFORM_NODE* n, float* in, float* out)
 }
 #else
 /* ADDRESS: GOLDTL 0x00455140 */
+/* ADDRESS: GOLDDE 0x0044a9f0 */
 void __cdecl d3_TransformDirection(D3_DIR_XFORM_NODE* node, float* in, float* out)
 {
 	D3_DIR_XFORM_NODE* p;

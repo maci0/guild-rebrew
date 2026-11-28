@@ -4,6 +4,7 @@ int __cdecl cm_ResolveSpecialEntityId(char*, int);
 
 
 /* ADDRESS: GOLDTL 0x004c87d0 */
+/* ADDRESS: GOLDDE 0x004b5fb0 */
 int __cdecl fcn_004c87d0(char* command, char* result)
 {
 	char* dyn;

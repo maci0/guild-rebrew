@@ -13,6 +13,7 @@ extern float g_77658c;
 
 unsigned int __cdecl vfs_fwrite(void*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x005c9eb0 */
 int __cdecl ls_SaveWeatherState(int fh)
 {
 	if (vfs_fwrite(&g_7763a0, 4, 1, fh) <= 0) {

@@ -16,6 +16,7 @@ char __cdecl d3_VisitSceneObjects(char*, char*, unsigned int, char (__cdecl*)(ch
 /* 0x442d50 / Gold 0x447300 keeps a numeric object context. */
 char __cdecl d3_SetSubtreeVisible(int, unsigned char);
 
+/* ADDRESS: GOLDDE 0x0057dae0 */
 void __cdecl lc_SetVegetationVisible(char* node, int flag)
 {
 	LC_OBJECT_LIST list;

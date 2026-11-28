@@ -1,3 +1,8 @@
+extern char str_dollar_C[];
+extern char g_7f4c00[];
+extern char g_100f884[];
+extern char d2_DialogButtonAction[];
+extern char g_6a5a10[];
 #include "Develop/client_types.h"
 
 extern pos14_7f4c00 gm_GameTime;
@@ -14,6 +19,7 @@ int __cdecl io_AppendText(int a, ...);
 int __cdecl gm_CompareGameTime(void* a, void* b);
 
 /* ADDRESS: GOLDTL 0x0057b1f0 */
+/* ADDRESS: GOLDDE 0x00561050 */
 void __cdecl he_RunMeisterpruefung(char* a)
 {
 	int state;
@@ -27,23 +33,23 @@ void __cdecl he_RunMeisterpruefung(char* a)
 	}
 	switch (state) {
 	case 1:
-		if (gm_CompareGameTime((void*) 0x7f4c00, a + 0x52) > 0)
+		if (gm_CompareGameTime((void*) &g_7f4c00, a + 0x52) > 0)
 			goto activate;
 		if (*(int*) (a + 0x74) == 0) {
 			*(int*) (a + 0x70) = 0;
 			return;
 		}
-		if (*(int*) 0x100f884 != *(int*) (*(int*) (a + 0x74) + 8))
+		if (*(int*) &g_100f884 != *(int*) (*(int*) (a + 0x74) + 8))
 			return;
-		if (*(int*) 0x100f1dc == -1)
+		if (*(int*) &d2_DialogButtonAction == -1)
 			return;
-		if (*(int*) 0x100f1dc == 2) {
+		if (*(int*) &d2_DialogButtonAction == 2) {
 			he_ApplyAction0x92Favor(a);
 			d2_CloseActionPopup(a);
 			he_FreeAction(a);
 			return;
 		}
-		if (*(int*) 0x100f1dc != 1)
+		if (*(int*) &d2_DialogButtonAction != 1)
 			return;
 	activate:
 		he_RemoveAction0x92Favor(a);
@@ -52,16 +58,16 @@ void __cdecl he_RunMeisterpruefung(char* a)
 		return;
 	case 0:
 		if (*(int*) (a + 0x74) == 0)
-			d2_CreateActionPopupSlot(a, 0, 0, (char*) 0x6a5a10, 0x5ec);
+			d2_CreateActionPopupSlot(a, 0, 0, (char*) &g_6a5a10, 0x5ec);
 	if (*(int*) (a + 0x74) == 0) {
 		he_FreeAction(a);
 		return;
 	}
 	d2_CenterDialogWindows(*(int*) (*(int*) (a + 0x74) + 8));
 	d2_SetForm(*(int*) (*(int*) (a + 0x74) + 8), 0);
-	io_AppendText(0x6811b0);
+	io_AppendText((int) &str_dollar_C);
 	io_AppendText(0x411c, *(int*) (a + 0xb8));
-	d3snd_QueueSound(-7, 0, (char*) 0x6a8034, -1, 0);
+	d3snd_QueueSound(-7, 0, "_NACHRICHTEN_FRIEDHOF_07", -1, 0);
 	*(int*) (a + 0x70) = 1;
 	}
 }

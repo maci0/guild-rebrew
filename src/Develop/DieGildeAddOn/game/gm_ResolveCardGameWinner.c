@@ -4,6 +4,7 @@ int __cdecl gm_EvaluateCardHand(int, int*, int*, int*, int*);
 int __cdecl gm_GetHighestCard(int*, int);
 
 /* ADDRESS: GOLDTL 0x004a82b0 */
+/* ADDRESS: GOLDDE 0x00496600 */
 int __cdecl gm_ResolveCardGameWinner(void)
 {
 	int a[3];

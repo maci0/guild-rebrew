@@ -17,6 +17,7 @@ void __cdecl ch_FreeMap(void* p);
 void __cdecl m_FreeTracked(void* p);
 void __cdecl ch_DestroyCharacter(char* e);
 
+/* ADDRESS: GOLDDE 0x0040aed0 */
 void __cdecl ch_ShutdownCharacters(void)
 {
 	int i;

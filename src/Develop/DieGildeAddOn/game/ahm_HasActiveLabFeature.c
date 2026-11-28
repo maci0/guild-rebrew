@@ -3,6 +3,7 @@
 
 char* __cdecl gm_QueryEntities(int, int, int, ...);
 
+/* ADDRESS: GOLDDE 0x0055c3d0 */
 int __cdecl ahm_HasActiveLabFeature(char* e, unsigned short t)
 {
 	char* r;

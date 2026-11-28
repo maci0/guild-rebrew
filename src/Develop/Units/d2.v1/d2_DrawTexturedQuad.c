@@ -63,6 +63,7 @@ void __cdecl d3_SetRenderMaterialState(int, int, int, int, int);
 
 
 /* ADDRESS: GOLDTL 0x0047c9c0 */
+/* ADDRESS: GOLDDE 0x0046b990 */
 void __cdecl d2_DrawTexturedQuad(int a1, int a2, int a3, int a4, int tex, float alpha)
 {
 	Quad quad;

@@ -8,6 +8,7 @@ extern g_662428_f imp_AIL_stream_status;
 
 int __cdecl msx_FindStreamIndex(int);
 
+/* ADDRESS: GOLDDE 0x00425400 */
 int __cdecl msx_GetStreamStatus(int streamIdArg)
 {
 	if (msx_Initialized != 0) {

@@ -24,6 +24,7 @@ int __cdecl d2_StartLocalSessionSetup(void);
 int __cdecl d2_ShowServerBrowser(int);
 int __cdecl d2_ShowNetworkLoadDialog(void);
 
+/* ADDRESS: GOLDDE 0x00521960 */
 int __cdecl d2_ShowChooseNetworkDialog(void)
 {
 	int list;

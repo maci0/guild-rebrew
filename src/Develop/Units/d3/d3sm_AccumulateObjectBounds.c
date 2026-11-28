@@ -1,3 +1,4 @@
+extern char g_6b8014[];
 typedef float* (__cdecl* Corners45a910)(char* obj, char* m, char* p);
 
 void __cdecl d3_UpdateObjectCameraTransform(char* obj, char* cam, int flag);
@@ -5,6 +6,7 @@ void __cdecl d3_UpdateObjectCameraTransform(char* obj, char* cam, int flag);
 /* Clamps eight 0x50-byte rows of the corner buffer against the first
  * three floats: low corner to the minimum, +0x10 corner to the maximum. */
 /* ADDRESS: GOLDTL 0x0045a910 */
+/* ADDRESS: GOLDDE 0x0044f9d0 */
 char __cdecl d3sm_AccumulateObjectBounds(char* object, float* bounds)
 {
 	unsigned int v4;
@@ -22,7 +24,7 @@ char __cdecl d3sm_AccumulateObjectBounds(char* object, float* bounds)
 			flags = *(unsigned char*) (object + 0x216);
 			if ((flags & 3) == 0 || (flags & 0xc) != 0) {
 				if ((flags & 0x20) == 0) {
-					d3_UpdateObjectCameraTransform(object, *(char**) 0x6b8014, 0);
+					d3_UpdateObjectCameraTransform(object, *(char**) &g_6b8014, 0);
 				}
 				src = (*(Corners45a910*) (*(char**) (m + 0x318) + 0x1f0))(object, m, *(char**) (object + 0x1ec) + 8);
 				for (j = 0; j < 8; j++) {

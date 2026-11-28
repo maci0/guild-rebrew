@@ -30,6 +30,7 @@ int __cdecl d2_GetHudThemeResourceId(void);
 void __cdecl d2_EnterMenuScreen(void);
 
 /* ADDRESS: GOLDTL 0x005e3520 */
+/* ADDRESS: GOLDDE 0x005c4a70 */
 void __cdecl d2_ShowGameOptions(void)
 {
   int v1, sel0, sel1, selection[2];

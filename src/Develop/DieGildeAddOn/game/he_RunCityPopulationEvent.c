@@ -35,6 +35,7 @@ typedef struct {
 	*(UIPos*) ((q) + 0x52) = *(UIPos*) ((char*) gm_GameTime)
 
 /* ADDRESS: GOLDTL 0x00556170 */
+/* ADDRESS: GOLDDE 0x0053c520 */
 void __cdecl he_RunCityPopulationEvent(char* p)
 {
 	float ts[0xa];

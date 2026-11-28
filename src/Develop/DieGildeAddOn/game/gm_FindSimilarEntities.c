@@ -34,6 +34,7 @@ float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int 
  * table from a random start with a random stride: first those with a job
  * other than 0x52, then jobless ones. */
 /* ADDRESS: GOLDTL 0x004a5960 */
+/* ADDRESS: GOLDDE 0x00494360 */
 unsigned int __cdecl gm_FindSimilarEntities(unsigned short* e, unsigned int max, int a2, float lo, float hi, unsigned short* out)
 {
 	Query q;

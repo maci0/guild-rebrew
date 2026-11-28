@@ -43,6 +43,7 @@ extern void __cdecl io_FormatTextBuffer(char*, int, ...);
 extern void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, char*, char*);
 
 /* ADDRESS: GOLDTL 0x0056aef0 */
+/* ADDRESS: GOLDDE 0x00550ef0 */
 void __cdecl he_RunGebSpionage(char* action)
 {
 	char* e;

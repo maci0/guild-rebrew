@@ -21,6 +21,7 @@ void __cdecl d2_RestoreHudAfterDialog(void);
 int __cdecl d3_EndCameraAndUiMode(void);
 
 /* ADDRESS: GOLDTL 0x005ae000 */
+/* ADDRESS: GOLDDE 0x00592b10 */
 int __cdecl d2_ShowTaschendiebstahlDialog(char* obj)
 {
 	char packet[0xf8];
@@ -85,7 +86,7 @@ int __cdecl d2_ShowTaschendiebstahlDialog(char* obj)
 				d2_DialogCloseRequested = 1;
 			}
 		}
-	} while (main_RunFrameLoop(0x5ae000, 0x677c7) != 0);
+	} while (main_RunFrameLoop((int) d2_ShowTaschendiebstahlDialog, 0x677c7) != 0);
 	d2_DestroyForm(dlg);
 	d2_RestoreHudAfterDialog();
 	return d3_EndCameraAndUiMode();

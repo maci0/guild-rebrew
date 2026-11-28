@@ -524,6 +524,8 @@ extern struct ALLOC_GROUP_NODE g_14cc5c0;
 #define g_stat4 g_6b6f74
 #endif
 
+/* ADDRESS: GOLDDE 0x0041b660 */
+/* ADDRESS: SERVERDE 0x10006190 */
 void* __cdecl m_alloc(unsigned int size, const char* tag)
 {
 	char name[0x100];
@@ -540,7 +542,7 @@ void* __cdecl m_alloc(unsigned int size, const char* tag)
 	void* cur;
 
 	if (g_array_ptr == 0) {
-#ifdef REBREW_SERVER
+#if defined(REBREW_SERVER) && !defined(REBREW_SERVERDE)
 		ReportFatalError("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x93, "m_alloc() called without prior call to m_init()!");
 #endif
 		return 0;
@@ -604,7 +606,7 @@ void* __cdecl m_alloc(unsigned int size, const char* tag)
 	mem = malloc(sz);
 	if (mem == 0) {
 		sprintf(buf, "Out of Memory Error: Malloc - Failed %s for %u bytes", tag, size);
-#ifdef REBREW_SERVER
+#if defined(REBREW_SERVER) && !defined(REBREW_SERVERDE)
 		ReportFatalError("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0xcd, buf);
 #endif
 		return 0;
@@ -683,7 +685,7 @@ void* __cdecl m_alloc(unsigned int size, const char* tag)
 			node->count_max = node->count_total;
 		}
 	} else {
-#ifdef REBREW_SERVER
+#if defined(REBREW_SERVER) && !defined(REBREW_SERVERDE)
 		ReportFatalError("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0xf0, "No more free memory slots...\nCall m_init() with more slots!");
 #endif
 	}
@@ -736,6 +738,7 @@ extern void* __cdecl malloc(unsigned int size);
 #endif
 
 /* Returns 1 when ptr is null or a tracked allocation. */
+/* ADDRESS: GOLDDE 0x0041b880 */
 int __cdecl m_is_tracked(void* ptr)
 {
 	char* entry;
@@ -758,6 +761,8 @@ int __cdecl m_is_tracked(void* ptr)
 	return 1;
 }
 
+/* ADDRESS: GOLDDE 0x0041b8c0 */
+/* ADDRESS: SERVERDE 0x100063b0 */
 void __cdecl m_FreeTracked(void* ptr)
 {
 #ifdef REBREW_SERVER
@@ -792,9 +797,11 @@ void __cdecl m_FreeTracked(void* ptr)
 	g_stat1 -= size;
 	block = *(int**) pool;
 	block[4] -= size;
+#if !defined(REBREW_SERVERDE) /* the German server build has no underflow check */
 	if (g_stat1 < 0) {
 		ReportFatalError("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x17a, "Memory-Underflow Error");
 	}
+#endif
 #else
 	TRACKED_MEMORY_BLOCK* s;
 	int i;
@@ -834,6 +841,8 @@ void __cdecl m_FreeTracked(void* ptr)
 // 162/162. All other functions in this file stay pure C.
 
 #pragma optimize("y", off)
+/* ADDRESS: GOLDDE 0x0041b940 */
+/* ADDRESS: SERVERDE 0x10006430 */
 void __cdecl m_init(int n)
 {
 	int len;
@@ -928,6 +937,7 @@ extern struct ALLOC_GROUP_NODE g_14cc5c0;
 #define m_TrackedCapacity m_TRACKED_SLOT_COUNT
 #endif
 
+/* ADDRESS: GOLDDE 0x0041b9f0 */
 void __cdecl m_ReportGroupInfo(const char* toggle)
 {
 	char buf[0x400];
@@ -1022,6 +1032,8 @@ extern char* g_14cc5e4;
 #define g_alloc_report_groups g_6b6f7c
 #define ReportMessage ReportClientMessage
 #endif
+/* ADDRESS: GOLDDE 0x0041bbb0 */
+/* ADDRESS: SERVERDE 0x100066a0 */
 void __cdecl m_ShutdownAllocator(void)
 {
 	char buf[0x400];
@@ -1127,6 +1139,8 @@ struct M_POOL_BLOCK {
  * length (239, obj 264), unsigned length (245), the two homes swapped (241),
  * and an arithmetic no-op on the length (245). */
 #pragma optimize("y", off)
+/* ADDRESS: GOLDDE 0x0041bcc0 */
+/* ADDRESS: SERVERDE 0x100067b0 */
 void* __cdecl m_PoolAlloc(struct M_POOL_BLOCK** head, int size, int max_items)
 {
 	int asize;
@@ -1223,6 +1237,7 @@ void* __cdecl m_PoolAlloc(struct M_POOL_BLOCK** head, int size, int max_items)
 #pragma optimize("", on)
 
 
+/* ADDRESS: GOLDDE 0x0041bdd0 */
 void __cdecl m_pool_free(int* pool, int* block)
 {
 	int* slot;
@@ -1264,6 +1279,7 @@ void __cdecl m_pool_free(int* pool, int* block)
 /* Client-only pool helpers (TL 0x41e350..0x41e4d0, after m_pool_free; discarded). An iterator is
  * three ints: the current block, the next slot index in it, and the block's used slots left. */
 #include "m_pool.h"
+/* ADDRESS: GOLDDE 0x0041be40 */
 void* __cdecl m_pool_next(int* it)
 {
 	int idx;
@@ -1302,6 +1318,7 @@ void* __cdecl m_pool_next(int* it)
 	return 0;
 }
 
+/* ADDRESS: GOLDDE 0x0041bed0 */
 void* __cdecl m_pool_first(struct M_POOL_BLOCK* head, int* it)
 {
 #if defined(REBREW_SERVER) && defined(REBREW_LEGACY_SERVER_LAYOUT)
@@ -1317,6 +1334,7 @@ void* __cdecl m_pool_first(struct M_POOL_BLOCK* head, int* it)
 	return 0;
 }
 
+/* ADDRESS: GOLDDE 0x0041bf00 */
 void __cdecl m_pool_free_all(struct M_POOL_BLOCK** head)
 {
 	struct M_POOL_BLOCK* block;
@@ -1338,6 +1356,7 @@ void __cdecl m_pool_free_all(struct M_POOL_BLOCK** head)
 	*head = 0;
 }
 
+/* ADDRESS: GOLDDE 0x0041bf30 */
 int __cdecl m_pool_clear(struct M_POOL_BLOCK** head)
 {
 	int n;

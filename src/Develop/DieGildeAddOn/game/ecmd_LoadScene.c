@@ -2,6 +2,7 @@
 #include "client_script_runtime.h"
 
 /* ADDRESS: GOLDTL 0x0040ed00 */
+/* ADDRESS: GOLDDE 0x0040db00 */
 int __cdecl ecmd_LoadScene(char** filename)
 {
     if (!d3_LoadScene(*filename, 0, 0)) {

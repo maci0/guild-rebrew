@@ -6,6 +6,7 @@ extern int msx_AmbientDriver;
 void __cdecl msx_CloseAllStreams(void);
 int __cdecl msx_ReleaseWaveDriver(int);
 
+/* ADDRESS: GOLDDE 0x0041cbd0 */
 void __cdecl msx_ShutdownDrivers(void)
 {
 	g_6b71a0 = 1;

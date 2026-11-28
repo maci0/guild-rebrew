@@ -84,6 +84,7 @@ void __cdecl ai_MeisterTrade(Bld*, int);
 /* Starts the production of the current goods if any producer in the building
  * table can run it in the current town. */
 /* ADDRESS: GOLDTL 0x0047e270 */
+/* ADDRESS: GOLDDE 0x0046d220 */
 void __cdecl ai_UpdateMeisterBuilding(Bld* bld)
 {
 	char name[0x100];

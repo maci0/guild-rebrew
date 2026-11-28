@@ -9,6 +9,7 @@ typedef struct {
 
 extern DiceStageEdge g_6641a0[];
 
+/* ADDRESS: GOLDDE 0x00481840 */
 int __cdecl gm_AdvanceDiceStage(char* p, int entity, int stage)
 {
 	int* slot;

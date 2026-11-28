@@ -50,6 +50,7 @@ struct item_table {
 /* Modal sub-dialog for picking the guard shift. The first block drives the
  * generic selection page, the second the concrete shift of one guard. */
 /* ADDRESS: GOLDTL 0x004d5940 */
+/* ADDRESS: GOLDDE 0x004c2890 */
 unsigned int __cdecl cut_RunCombatStartDialog(int dialogState)
 {
 	char str[1024];
@@ -75,7 +76,7 @@ unsigned int __cdecl cut_RunCombatStartDialog(int dialogState)
 	answer = 1;
 	count = 0;
 	sel = 0;
-	win = d2_LoadForm(0, 0, (char*) 0x68be84);
+	win = d2_LoadForm(0, 0, "cutscenes\\combat_start");
 	d2_CenterForm(win, 3);
 	cut_CombatResolved = 0;
 	id = (int) gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (dialogState + 0x14));
@@ -131,7 +132,7 @@ unsigned int __cdecl cut_RunCombatStartDialog(int dialogState)
 		d2_DrawCombatParticipants((char*) (dialogState + 0xc0), 0, 0xb4);
 		d2_GetWindowListItem(win, 2, sel);
 		d2_GetWindowListItem(win, 2, sel + 1);
-		t = main_RunFrameLoop(0x4d5940, 0x7d6c6);
+		t = main_RunFrameLoop((int) cut_RunCombatStartDialog, 0x7d6c6);
 		while (t) {
 			if (io_RightButtonReleased) {
 				d2_DialogCloseRequested = 1;
@@ -148,7 +149,7 @@ unsigned int __cdecl cut_RunCombatStartDialog(int dialogState)
 			}
 
 
-			t = main_RunFrameLoop(0x4d5940, 0x7d6c6);
+			t = main_RunFrameLoop((int) cut_RunCombatStartDialog, 0x7d6c6);
 		}
 	}
 	if ((*(unsigned char*) (dialogState + 0x7c) & 1) && *((char*) g_772e98 + 2) == 6 && !cut_CombatResolved) {
@@ -173,7 +174,7 @@ unsigned int __cdecl cut_RunCombatStartDialog(int dialogState)
 		} while (i);
 		sel = *(int*) (gm_QueryEntities(0, 2, 7, 1, *(int*) (dialogState + 0x100)) + 0x24);
 		d2_SetForm(win, 1);
-		io_AppendText(0x6811b0);
+		io_AppendText((int) &str_dollar_C);
 		if (sel) {
 			sel = gm_SearchTable67(*(unsigned int*) (sel + 0xb4));
 			r = 0;
@@ -221,7 +222,7 @@ unsigned int __cdecl cut_RunCombatStartDialog(int dialogState)
 			i--;
 		} while (i);
 		d2_SetForm(win, 2);
-		io_AppendText(0x6811b0);
+		io_AppendText((int) &str_dollar_C);
 		t = io_AppendText(0x1141, (int) (total * 0.1), (int) (total * 0.5), (int) (total * g_664108));
 		sel = d2_GetWindowListItem(win, 2, t);
 		r = d2_GetWindowListItem(win, 2, t + 1);
@@ -240,7 +241,7 @@ unsigned int __cdecl cut_RunCombatStartDialog(int dialogState)
 		if (!clicked) {
 			d2_SetSlotVisibility(t4, 0);
 		}
-		t = main_RunFrameLoop(0x4d5940, 0x7d6c6);
+		t = main_RunFrameLoop((int) cut_RunCombatStartDialog, 0x7d6c6);
 		while (t) {
 			if (io_RightButtonReleased) {
 				d2_DialogCloseRequested = 1;
@@ -276,7 +277,7 @@ unsigned int __cdecl cut_RunCombatStartDialog(int dialogState)
 					}
 				}
 			}
-			t = main_RunFrameLoop(0x4d5940, 0x7d6c6);
+			t = main_RunFrameLoop((int) cut_RunCombatStartDialog, 0x7d6c6);
 		}
 	} else if ((*(unsigned char*) (dialogState + 0x7c) & 1) && *((char*) g_772e98 + 2) != 6 && !cut_CombatResolved) {
 

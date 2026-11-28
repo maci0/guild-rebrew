@@ -1,3 +1,5 @@
+extern char gm_GameTicks[];
+extern char g_662a18[];
 #include <stdlib.h>
 
 typedef struct D3_FLICKER_ANIM {
@@ -27,6 +29,7 @@ extern int d3_MaxLightListCount;
 void __cdecl d3_UpdateLightFlicker(char* p);
 
 /* ADDRESS: GOLDTL 0x004508a0 */
+/* ADDRESS: GOLDDE 0x004464c0 */
 void __cdecl d3_UpdateLightFlicker(D3_FLICKER_OBJ* o)
 {
 	D3_FLICKER_ANIM* a;
@@ -39,7 +42,7 @@ void __cdecl d3_UpdateLightFlicker(D3_FLICKER_OBJ* o)
 	int now;
 	int i;
 
-	now = *(int*) 0x6b7fac;
+	now = *(int*) &gm_GameTicks;
 	a = o->anim;
 	period = a->period;
 	t = now - a->start;
@@ -54,12 +57,12 @@ void __cdecl d3_UpdateLightFlicker(D3_FLICKER_OBJ* o)
 		}
 		s = (float)(o->base * a->scale / m);
 		if (a->start == 0) {
-			f = rand() * *(float*) 0x662a18 * s;
+			f = rand() * *(float*) &g_662a18 * s;
 			o->prev = f + f - s + 1.0f;
 		} else {
 			o->prev = o->next;
 		}
-		f = rand() * *(float*) 0x662a18 * s;
+		f = rand() * *(float*) &g_662a18 * s;
 		o->next = f + f - s + 1.0f;
 		o->anim->start = now;
 		t = 0;
@@ -69,6 +72,7 @@ void __cdecl d3_UpdateLightFlicker(D3_FLICKER_OBJ* o)
 }
 
 /* ADDRESS: GOLDTL 0x004509c0 */
+/* ADDRESS: GOLDDE 0x004465e0 */
 void __cdecl d3_UpdateSceneLightFlickers(void)
 {
 	char* p;

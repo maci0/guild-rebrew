@@ -84,6 +84,7 @@ void __cdecl d2_BlitSurfaceToSurface(int a1, int a2, int w, int h, fcn_0046eda0_
 void __cdecl d2_ReleaseSurface(fcn_0046eda0_Surf* s);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x0046eda0 */
+/* ADDRESS: GOLDDE 0x004623d0 */
 void __cdecl d2_ResizeWindow(int w, int h, int win)
 {
 	fcn_0046eda0_Desc d;

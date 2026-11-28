@@ -11,6 +11,7 @@ int __cdecl d2_GetControlValue(int element);
 void __cdecl d2_SetDisplayCounter(int a1, int a2);
 
 /* ADDRESS: GOLDTL 0x00596b10 */
+/* ADDRESS: GOLDDE 0x0057c5d0 */
 void __cdecl d2_LayoutProduktionSlotGrid(int a0, int a1, int a2, unsigned int a3)
 {
     int* r;
@@ -21,7 +22,7 @@ void __cdecl d2_LayoutProduktionSlotGrid(int a0, int a1, int a2, unsigned int a3
     int col;
     int value;
 
-    r = (int*) (*(int*) ((a1 + a0 * 0xaf) * 4 + 0x1038144) * 0x3cc + 0x1015f40);
+    r = (int*) (*(int*) ((a1 + a0 * 0xaf) * 4 + 0x1038144) * 0x3cc + ((int) &d2_Controls + 0xa0));
     width = r[3];
     d2_SetForm(a0, a1);
 

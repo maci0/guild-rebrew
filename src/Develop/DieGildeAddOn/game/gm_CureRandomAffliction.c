@@ -6,6 +6,7 @@ unsigned short __cdecl gm_RandomMod(int n);
 void __cdecl cm_AppendPacketFieldDelta(int a, int b, int off, unsigned int* v);
 void __cdecl cm_RequestChangeAttribute(void);
 
+/* ADDRESS: GOLDDE 0x004f3a10 */
 int __cdecl gm_CureRandomAffliction(char* o)
 {
 	int has[8];

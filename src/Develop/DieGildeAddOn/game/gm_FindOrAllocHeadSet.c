@@ -13,6 +13,7 @@ extern HEAD_SET gm_MaleHeadSets[];
 
 void __cdecl gm_ResolveHeadSetIcons(HEAD_SET*);
 
+/* ADDRESS: GOLDDE 0x004e9500 */
 HEAD_SET* __cdecl gm_FindOrAllocHeadSet(int which, int key)
 {
 	HEAD_SET* base;

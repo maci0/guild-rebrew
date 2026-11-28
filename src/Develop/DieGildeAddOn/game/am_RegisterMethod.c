@@ -11,6 +11,7 @@ extern char str_empty[];
 extern AM_METHOD am_Methods[];
 int __cdecl amt_GetDesireByName(char* name);
 /* ADDRESS: GOLDTL 0x00494ed0 */
+/* ADDRESS: GOLDDE 0x00483990 */
 int __cdecl am_RegisterMethod(AM_METHOD* d, char* ini)
 {
  char key[64];

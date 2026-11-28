@@ -28,6 +28,7 @@ extern char* txt_TextEntries[];
 int __cdecl d2_MeasureTextWidth(char* s, int font);
 
 /* ADDRESS: GOLDTL 0x00466fe0 */
+/* ADDRESS: GOLDDE 0x0045ab60 */
 void __cdecl d2_SetFieldTextId(int fld, int str)
 {
 	D2_TEXTID_FIELD* f;

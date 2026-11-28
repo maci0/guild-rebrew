@@ -1,5 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x00507380 */
+/* ADDRESS: GOLDDE 0x004f2520 */
 int __cdecl gm_GetItemGuild(int k)
 {
 	if (k >= 1 && k <= 6) {

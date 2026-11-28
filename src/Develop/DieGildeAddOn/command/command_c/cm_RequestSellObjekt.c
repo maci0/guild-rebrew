@@ -37,6 +37,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
 void __cdecl he_FreeAction(char*);
 
+/* ADDRESS: GOLDDE 0x005371d0 */
 void __cdecl cm_RequestSellObjekt(char* e)
 {
 	int v;

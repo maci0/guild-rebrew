@@ -2,6 +2,7 @@
  * relocations at call sites are not reproduced; the emitted bytes are the
  * reference encodings. */
 /* ADDRESS: GOLDTL 0x005e6ba0 */
+/* ADDRESS: GOLDDE 0x005c7e60 */
 __declspec(naked) void __cdecl d2_OpenPokerDialog(void)
 {
 	__asm {

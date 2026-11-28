@@ -7,6 +7,7 @@ extern volatile int gm_GameTicks;
  * A count of -1 waits forever. The first entry records the clock. */
 
 /* ADDRESS: GOLDTL 0x0040c630 */
+/* ADDRESS: GOLDDE 0x0040b440 */
 int __cdecl ecmd_Sleep(int* ticks)
 {
 	char* vm;

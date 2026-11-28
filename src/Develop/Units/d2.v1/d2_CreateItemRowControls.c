@@ -6,6 +6,7 @@ extern int g_10161cc[];
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl d2_CreateChildWindow(int, int, int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x005a9790 */
 int __cdecl d2_CreateItemRowControls(int row, int id, int* out, int layer)
 {
 	out[1] = d2_AddElementToWindow(0, row * 120, 0x74c, layer);

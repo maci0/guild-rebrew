@@ -28,6 +28,7 @@ void __cdecl d3_AllocShadowTextures(void);
 void __cdecl fcn_0043bbf0(unsigned char);
 #include "Develop/Units/d3/client_scene_loader.h"
 
+/* ADDRESS: GOLDDE 0x004325a0 */
 void __cdecl d3_ConfigureSceneRenderQuality(unsigned char a1, int a2, unsigned char a3, unsigned int a4, SCENE_PROGRESS progress)
 {
 	int save;

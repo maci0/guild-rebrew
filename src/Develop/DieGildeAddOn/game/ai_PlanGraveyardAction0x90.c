@@ -12,6 +12,7 @@ unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl ai_FindEntityInFavorRange(char* p, int kind, F8 f, int c, float r, int* out);
 
 /* ADDRESS: GOLDTL 0x0048f710 */
+/* ADDRESS: GOLDDE 0x0047e5e0 */
 int __cdecl ai_PlanGraveyardAction0x90(char* actor, char* building, char* req, char* out)
 {
 	int w;

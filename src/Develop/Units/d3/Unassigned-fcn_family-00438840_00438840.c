@@ -36,6 +36,7 @@ void __cdecl d3_SetViewport(float, float, float, float, float, float, float, flo
 
 /* ADDRESS: GOLD 0x0043a610 */
 /* ADDRESS: GOLDTL 0x00438840 */
+/* ADDRESS: GOLDDE 0x00431a90 */
 void __cdecl d3_SetFogRange(float a, float b)
 {
 	float lim;
@@ -60,6 +61,7 @@ void __cdecl d3_SetFogRange(float a, float b)
 }
 
 /* ADDRESS: GOLDTL 0x00438920 */
+/* ADDRESS: GOLDDE 0x00431b70 */
 void __cdecl d3_SetFog(float fog_start, float fog_end, int fog_color)
 {
 	char on;

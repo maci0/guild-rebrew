@@ -25,6 +25,7 @@ int* __cdecl m_alloc(int size, const char* tag);
 void __cdecl m_FreeTracked(void* p);
 
 /* ADDRESS: GOLDTL 0x0042d630 */
+/* ADDRESS: GOLDDE 0x004275d0 */
 int __cdecl txt_FindTextBank(const char* name)
 {
 	int i;
@@ -39,6 +40,7 @@ int __cdecl txt_FindTextBank(const char* name)
 
 /* Reloads a text bank from its language resource file. */
 /* ADDRESS: GOLDTL 0x0042d6b0 */
+/* ADDRESS: GOLDDE 0x00427650 */
 int __cdecl txt_ReloadTextFile(const char* name)
 {
 	int idx;

@@ -53,6 +53,7 @@ void __cdecl sv_ClearObjectSelection(void);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x00582cf0 */
 void __cdecl d2_OpenRaubzugDialog(int unused, char* e)
 {
 	int btn1;

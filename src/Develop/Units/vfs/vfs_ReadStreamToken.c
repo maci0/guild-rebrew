@@ -1,6 +1,7 @@
 int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream);
 
 /* ADDRESS: GOLDTL 0x0044d770 */
+/* ADDRESS: GOLDDE 0x004434c0 */
 int __cdecl vfs_ReadStreamToken(void* h)
 {
 	int c;

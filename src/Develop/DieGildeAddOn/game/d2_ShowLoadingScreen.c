@@ -42,6 +42,7 @@ void __cdecl d2_RenderAndPresentFrame(void);
 #include "Develop/DieGildeAddOn/game/client_timer.h"
 void __cdecl d2_LoadingScreenTimerCallback(void);
 
+/* ADDRESS: GOLDDE 0x00525fd0 */
 void __cdecl d2_ShowLoadingScreen(void)
 {
 	d2_SuppressOverlay = 1;

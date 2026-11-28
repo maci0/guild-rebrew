@@ -136,6 +136,7 @@ unsigned char _dpad_6a2be8[4] = {
 };
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00535570 */
+/* ADDRESS: GOLDDE 0x0051ddd0 */
 int __cdecl d2_CreateScrollPerga(void)
 {
 	if (d2_ScrollPergaForm != -1) {
@@ -153,6 +154,7 @@ int __cdecl d2_CreateScrollPerga(void)
 }
 
 /* ADDRESS: GOLDTL 0x00535630 */
+/* ADDRESS: GOLDDE 0x0051de90 */
 void __cdecl d2_UpdateScrollPerga(void)
 {
 	int v;

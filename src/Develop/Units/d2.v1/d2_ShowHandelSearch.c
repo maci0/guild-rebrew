@@ -40,6 +40,7 @@ void __cdecl d2_ShowModalMessageBox(char* buf, int flag);
 void __cdecl d3_EndCameraAndUiMode(void);
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* ADDRESS: GOLDTL 0x0059e740 */
+/* ADDRESS: GOLDDE 0x005835c0 */
 void __cdecl d2_ShowHandelSearch(unsigned char* targetBuilding, unsigned char* a1)
 {
 	int count;

@@ -46,6 +46,7 @@ void __cdecl cm_StepCommandQueue(void);
 void __cdecl main_ExitToGameLoop(int flags);
 
 /* ADDRESS: GOLDTL 0x004b62e0 */
+/* ADDRESS: GOLDDE 0x004a4570 */
 void __cdecl d2_FinishHistoryMissionDialog(int flags)
 {
 	int level;

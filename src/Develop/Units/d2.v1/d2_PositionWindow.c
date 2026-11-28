@@ -19,6 +19,7 @@
 
 void __cdecl d2_PositionControl(int x, int y, int slot);
 
+/* ADDRESS: GOLDDE 0x00465100 */
 void __cdecl d2_PositionWindow(int k, unsigned char center)
 {
 	D2_WIN* w;

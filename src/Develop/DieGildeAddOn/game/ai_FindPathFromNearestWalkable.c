@@ -2,6 +2,7 @@ unsigned short __cdecl FindPath(void* path, char* map, int x0, int y0, int x1, i
 
 /* Picks the nearest walkable cell to (x, y) when no grid index was supplied. */
 /* ADDRESS: GOLDTL 0x004bdbe0 */
+/* ADDRESS: GOLDDE 0x004ab760 */
 int __cdecl ai_FindPathFromNearestWalkable(int obj, int x, int y, int i, int j)
 {
 	char* map;

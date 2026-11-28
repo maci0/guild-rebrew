@@ -12,6 +12,7 @@ void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
 /* ADDRESS: GOLD 0x0040ee10 */
 /* ADDRESS: GOLDTL 0x0040fd20 */
+/* ADDRESS: GOLDDE 0x0040eb20 */
 int __cdecl SetCameraToDummy(char** name)
 {
 	char buf[0x80];

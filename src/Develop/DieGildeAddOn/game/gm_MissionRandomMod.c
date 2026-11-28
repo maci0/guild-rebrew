@@ -2,6 +2,7 @@ extern unsigned int g_7e1f60;
 
 
 /* ADDRESS: GOLDTL 0x004b3b80 */
+/* ADDRESS: GOLDDE 0x004a1e70 */
 unsigned int __cdecl gm_MissionRandomMod(unsigned int n)
 {
 	g_7e1f60 = g_7e1f60 * 0x41c64e6d + 0x3039;

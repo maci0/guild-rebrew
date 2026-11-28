@@ -23,6 +23,7 @@ extern void __cdecl gm_AddObjekt(int record, int item, int value);
 extern void __cdecl gm_KillSpieler(int slot, int value);
 
 /* ADDRESS: GOLDTL 0x00509620 */
+/* ADDRESS: GOLDDE 0x004f46a0 */
 int __cdecl gm_TransferDynastyEstate(int sourceId, int targetId)
 {
 	int counter;

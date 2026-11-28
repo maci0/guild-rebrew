@@ -7,6 +7,7 @@ extern int g_7749c8;
 
 void __cdecl d2_SetProgressPercent(int, int);
 
+/* ADDRESS: GOLDDE 0x005261b0 */
 void __cdecl d2_UpdateSceneLoadProgress(int mode, int a, int b)
 {
 	int v;

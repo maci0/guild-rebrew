@@ -21,6 +21,7 @@ extern char g_1041d80[];
 void __cdecl d3_VisitSceneObjects(char*, int, int, void*, void*);
 char __cdecl d3_ApplyLightingVectorsToObject(char*);
 
+/* ADDRESS: GOLDDE 0x005139e0 */
 void __cdecl d3_ApplySceneLightingPreset(void)
 {
 	float (*src)[4];

@@ -53,6 +53,7 @@ void __cdecl d2_EnterBuildingObjekt(char*, int, char*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x0058d930 */
 void __cdecl d2_OpenRathausGebInfo(void)
 {
 	int flag;

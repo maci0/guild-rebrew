@@ -26,6 +26,7 @@ int __cdecl main_RunFrameLoop(void* fn, int msg);
 int __cdecl d2_CheckActionBlocker(int a, int b);
 
 /* ADDRESS: GOLDTL 0x005d6c50 */
+/* ADDRESS: GOLDDE 0x005b84b0 */
 int __cdecl d2_RunUnterschlagungDialog(int actor, int a1)
 {
     char frame[0x114];

@@ -15,6 +15,7 @@ int __cdecl gm_QueryEntities(int, int, int, int);
 void __cdecl d2_DispatchTutorialInput(int, int, int, int);
 void __cdecl d2_RunTradeInventoryPanel(int, int);
 
+/* ADDRESS: GOLDDE 0x00588750 */
 void __cdecl d2_OpenMarktstandPanel(int buildingArg, int queryTypeId)
 {
 	(*(int*)&d2_SelectedBuilding) = 0;

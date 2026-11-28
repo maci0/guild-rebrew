@@ -6,6 +6,7 @@ void __cdecl cm_RequestChangeAttribute(void);
 
 
 /* ADDRESS: GOLDTL 0x004b0a20 */
+/* ADDRESS: GOLDDE 0x0049ed40 */
 int __cdecl hst_HandleStrafeKerker(int* record, int slot, char* arg)
 {
 	char c = 0;

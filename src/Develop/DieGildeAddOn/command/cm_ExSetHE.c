@@ -1,3 +1,4 @@
+extern char cm_IncomingPacketData[];
 #include <stdio.h>
 #include <string.h>
 
@@ -17,6 +18,7 @@ char* __cdecl he_StartHandlungSearch(int, int, int);
  * fcn_005463a0 and copies the 0xa0-byte message template into it. Native extent
  * is 244 bytes (ret at 0x004c9433); the stored 101-byte size is a stale split. */
 /* ADDRESS: GOLDTL 0x004c9340 */
+/* ADDRESS: GOLDDE 0x004b6b20 */
 int __cdecl cm_ExSetHE(char* cmd, char* result)
 {
 	char buf[0x100];
@@ -37,7 +39,7 @@ int __cdecl cm_ExSetHE(char* cmd, char* result)
 	*(Hdr14*) (p + 0x52) = *(Hdr14*) (cmd + 0x22);
 	*(Hdr14*) (p + 0x60) = *(Hdr14*) (cmd + 0x30);
 	*(int*) (p + 0x70) = (int) *(signed char*) (cmd + 0x3e);
-	memcpy(p + 0xac, (void*) 0xaed340, 0xa0);
+	memcpy(p + 0xac, (void*) &cm_IncomingPacketData, 0xa0);
 	if (result != 0) {
 		result[0] = 1;
 		result[1] = 4;

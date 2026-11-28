@@ -15,6 +15,7 @@ extern float flt_0_01;
 extern double dbl_10;
 
 /* ADDRESS: GOLDTL 0x00496810 */
+/* ADDRESS: GOLDDE 0x004852b0 */
 int __cdecl ai_StartBestechung(int targetSlot, short* ent, int mode, Cmd* out1, Cmd* out2, int extra)
 {
     Cmd c1;

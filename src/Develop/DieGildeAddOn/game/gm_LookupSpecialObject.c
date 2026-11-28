@@ -4,6 +4,7 @@
 
 extern Offer gm_SpecialObjectOffers[];
 
+/* ADDRESS: GOLDDE 0x005a8460 */
 char* __cdecl gm_LookupSpecialObject(int id)
 {
 	int index;

@@ -9,6 +9,7 @@ int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl fcn_0043f690(int);
 void __cdecl d3_ReleaseTerrainSurfaces(int);
 
+/* ADDRESS: GOLDDE 0x00433780 */
 char __cdecl d3_DeinitUniverse(int flags)
 {
 	char buf[0x100];

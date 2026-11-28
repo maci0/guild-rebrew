@@ -75,6 +75,7 @@ void __cdecl d2_DrawSegmentedBar(int x0, int y, int len, int t);
 int __cdecl gm_GetEntityRelation(int a1, int a2);
 
 /* ADDRESS: GOLDTL 0x005b58a0 */
+/* ADDRESS: GOLDDE 0x005980a0 */
 void __cdecl d2_CreateGauge(int x, int y, Gauge* s)
 {
 	int i;
@@ -101,6 +102,7 @@ void __cdecl d2_CreateGauge(int x, int y, Gauge* s)
 }
 
 /* ADDRESS: GOLDTL 0x005b59c0 */
+/* ADDRESS: GOLDDE 0x005981c0 */
 void __cdecl d2_UpdateGauge(unsigned char* e, fcn_005b59c0_Gauge* g, int full)
 {
 	char buf[0x80];

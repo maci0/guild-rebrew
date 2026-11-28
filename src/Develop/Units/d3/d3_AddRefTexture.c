@@ -12,6 +12,7 @@ typedef struct Tex {
 extern char* d3_TextureBank;
 extern unsigned int d3_TextureBankCount;
 
+/* ADDRESS: GOLDDE 0x004512c0 */
 void __cdecl d3_AddRefTexture(Tex* t, char all)
 {
 	unsigned int i;

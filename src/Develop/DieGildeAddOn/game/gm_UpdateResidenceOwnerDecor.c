@@ -7,6 +7,7 @@ void* __cdecl gm_QueryEntities(int list, int a, int b, int c);
 void* __cdecl gm_NextEntityQueryMatch(void);
 void __cdecl d3_UpdateEntityStageMeshes(unsigned char* e, void* q, int k);
 
+/* ADDRESS: GOLDDE 0x004f1000 */
 void __cdecl gm_UpdateResidenceOwnerDecor(unsigned char* e)
 {
 	void* list[32];

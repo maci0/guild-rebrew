@@ -117,6 +117,7 @@ char __cdecl d3_UpdateAnimatedTextures(char*, unsigned int);
 #define BF(e) ((char*) ((BldFrm*) (frames) + (e)))
 
 /* ADDRESS: GOLDTL 0x00432480 */
+/* ADDRESS: GOLDDE 0x0042ba40 */
 char __cdecl d3_UpdateSceneObjectAnimCallback(char* o, void* ctx)
 {
 	Frame frame;

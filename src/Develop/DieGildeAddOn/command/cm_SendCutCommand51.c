@@ -6,6 +6,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b4020 */
 void __cdecl cm_SendCutCommand51(int cutscene_id, void* payload)
 {
 	char buf[0x9c];

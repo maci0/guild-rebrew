@@ -2,6 +2,7 @@
 
 /* ADDRESS: GOLD 0x0050c520 */
 /* ADDRESS: GOLDTL 0x0050f950 */
+/* ADDRESS: GOLDDE 0x004fa690 */
 int __cdecl gm_GetEntityRelation(int row, int column)
 {
 	if (row == column) {

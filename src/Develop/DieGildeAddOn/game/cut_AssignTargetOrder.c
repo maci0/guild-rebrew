@@ -26,6 +26,7 @@ void __cdecl d2_ShowStatusBanner(char* a);
 int __cdecl cm_SendUpdateCutsceneEntitySlot(int a1, void* a2);
 
 /* ADDRESS: GOLDTL 0x004d1020 */
+/* ADDRESS: GOLDDE 0x004be310 */
 int __cdecl cut_AssignTargetOrder(char* context, char* e, char* obj, int col, int row)
 {
 	Msg2c m;

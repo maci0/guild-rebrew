@@ -19,6 +19,7 @@ typedef struct
 
 void __cdecl cm_RequestMoveSlot(void*);
 
+/* ADDRESS: GOLDDE 0x004df050 */
 void __cdecl gv_SendMoveSlotEntry(int payer, int dstWorktype, int building, int srcWorktype, char srcSlotIndex, int cost)
 {
 	GV_MOVE_SLOT_MSG message;

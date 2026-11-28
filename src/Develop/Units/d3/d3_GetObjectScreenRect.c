@@ -106,6 +106,7 @@ unsigned char __cdecl d3_GetObjectScreenRect(char* e, int* rect)
 /* Projects an object's bounds into screen space and fills a left/top/right/
  * bottom rectangle. */
 /* ADDRESS: GOLDTL 0x00443e10 */
+/* ADDRESS: GOLDDE 0x0043c0f0 */
 char __cdecl d3_GetObjectScreenRect(char* obj, int* rc)
 {
 	float p[4];

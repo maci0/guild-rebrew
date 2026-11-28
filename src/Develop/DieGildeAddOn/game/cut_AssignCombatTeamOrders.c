@@ -9,6 +9,7 @@ double __cdecl gm_RandomFloat01(void);
 void __cdecl cut_AssignCombatUnitOrder(char*, char*);
 
 /* ADDRESS: GOLDTL 0x004d3fe0 */
+/* ADDRESS: GOLDDE 0x004c12d0 */
 void __cdecl cut_AssignCombatTeamOrders(char* teamActor)
 {
 	char* rec;

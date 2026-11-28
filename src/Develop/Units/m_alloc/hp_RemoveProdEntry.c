@@ -7,6 +7,7 @@ void __cdecl m_FreeTracked(void*);
 
 extern struct Node* hp_ProdEntryList;
 
+/* ADDRESS: GOLDDE 0x00596690 */
 int __cdecl hp_RemoveProdEntry(int id)
 {
 	Node* prev;

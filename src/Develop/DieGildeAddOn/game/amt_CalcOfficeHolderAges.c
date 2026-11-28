@@ -5,6 +5,7 @@ unsigned short __cdecl gm_RandomMod(int);
 void __cdecl amt_FindOfficeSlotByKey(char, char*);
 int __cdecl amt_GetRoleLevel(int);
 
+/* ADDRESS: GOLDDE 0x004fc710 */
 void __cdecl amt_CalcOfficeHolderAges(int n, int* dst, int* src)
 {
 	char buf[0x18];

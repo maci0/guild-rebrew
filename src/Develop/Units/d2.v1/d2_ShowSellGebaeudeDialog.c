@@ -39,6 +39,7 @@ int __cdecl d2_ShowModalMessageBox(int, int);
 void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005c23b0 */
+/* ADDRESS: GOLDDE 0x005a47f0 */
 void __cdecl d2_ShowSellGebaeudeDialog(char* e)
 {
 	Msg5c23b0 m;

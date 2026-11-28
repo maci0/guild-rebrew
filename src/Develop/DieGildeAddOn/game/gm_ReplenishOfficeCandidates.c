@@ -36,6 +36,7 @@ void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 
 /* ADDRESS: GOLD 0x4ad7a0 */
+/* ADDRESS: GOLDDE 0x0049bc00 */
 void __cdecl gm_ReplenishOfficeCandidates(void)
 {
 	int cnt;

@@ -19,6 +19,7 @@ void __cdecl d2_DestroyElement(int slot);
 void __cdecl d2_SetSlotVisibility(int slot, int flag);
 
 /* ADDRESS: GOLDTL 0x004cfca0 */
+/* ADDRESS: GOLDDE 0x004bd180 */
 void __cdecl d2_UpdateFloatingStatTexts(void)
 {
 	int r[4];

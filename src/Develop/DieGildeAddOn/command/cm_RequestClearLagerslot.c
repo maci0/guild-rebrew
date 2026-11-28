@@ -3,6 +3,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b2ce0 */
 void __cdecl cm_RequestClearLagerslot(int entity_id, unsigned short item_id)
 {
 	char buf[0x9c];

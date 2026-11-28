@@ -4,6 +4,7 @@ int __cdecl io_FormatTextBuffer(char*, char*, int);
 int __cdecl gm_HandleVerhoer(int, int);
 
 /* ADDRESS: GOLDTL 0x004f9f70 */
+/* ADDRESS: GOLDDE 0x004e5d50 */
 int __cdecl gm_DispatchVerhoerAction(int actor, int req)
 {
 	int res;

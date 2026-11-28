@@ -4,6 +4,7 @@ extern int d3_TerrainLayerSurfaceTypes[8];
 extern char d3_TerrainSurfaceNames[15][9];
 
 
+/* ADDRESS: GOLDDE 0x0044f3a0 */
 int __cdecl d3sm_GetCellMaterial(int x, int y, int* img)
 {
 	int off;

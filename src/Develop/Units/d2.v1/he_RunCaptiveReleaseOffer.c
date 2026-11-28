@@ -1,3 +1,6 @@
+extern char g_7f4c00[];
+extern char g_6a5a10[];
+extern char d2_DialogButtonAction[];
 int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_CompareGameTime(void*, int);
 void __cdecl d2_CreateActionPopupSlot(int, int, int, int, int);
@@ -12,6 +15,7 @@ int __cdecl gm_RollFavorRatioCheck(int, int, int, int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00566d00 */
+/* ADDRESS: GOLDDE 0x0054cd40 */
 void __cdecl he_RunCaptiveReleaseOffer(int action)
 {
 	char buf[256];
@@ -30,7 +34,7 @@ void __cdecl he_RunCaptiveReleaseOffer(int action)
 		return;
 	}
 	if (*(char*) ((char*) b + 2) != 6 && *(char*) ((char*) b + 2) != 7) {
-		if (gm_CompareGameTime((char*) action + 0x52, 0x7f4c00) > 0) {
+		if (gm_CompareGameTime((char*) action + 0x52, (int) &g_7f4c00) > 0) {
 			return;
 		}
 		*(int*) (action + 0x70) = 2;
@@ -38,17 +42,17 @@ void __cdecl he_RunCaptiveReleaseOffer(int action)
 	state = *(int*) (action + 0x70);
 	switch (state) {
 	case 0:
-		d2_CreateActionPopupSlot(action, 0, 0, 0x6a5a10, 0x5ec);
+		d2_CreateActionPopupSlot(action, 0, 0, (int) &g_6a5a10, 0x5ec);
 		d2_SetForm(*(int*) (*(int*) (action + 0x74) + 8), 0);
 		entityId = *a;
 		io_AppendText(0x19b2, entityId, *(int*) (action + 0xb4), entityId, entityId);
 		*(int*) (action + 0x70) = *(int*) (action + 0x70) + 1;
 		return;
 	case 1:
-		if (*(int*) 0x100f884 != *(int*) (*(int*) (action + 0x74) + 8)) {
+		if (*(int*) ((int) &d2_DialogButtonAction + 0x6a8) != *(int*) (*(int*) (action + 0x74) + 8)) {
 			return;
 		}
-		selection = *(int*) 0x100f1dc;
+		selection = *(int*) &d2_DialogButtonAction;
 		if (selection == -1) {
 			return;
 		}

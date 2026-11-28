@@ -3,6 +3,7 @@
 
 #include <math.h>
 
+/* ADDRESS: GOLDDE 0x00447300 */
 void __cdecl d3_WrapEulerAnglesPi(float* a, float* b, float* oa, float* ob)
 {
 	int k;

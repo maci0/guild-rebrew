@@ -118,6 +118,7 @@ void* __cdecl d2_RunCityScrollMapDialog(int, char*, int, void*, int);
 int __cdecl main_RunFrameLoop(int, int);
 
 /* ADDRESS: GOLDTL 0x005988b0 */
+/* ADDRESS: GOLDDE 0x0057e060 */
 int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 {
 	LC_GEBAEUDE_FRAME f;

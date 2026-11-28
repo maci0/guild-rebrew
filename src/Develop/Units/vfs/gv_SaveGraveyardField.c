@@ -20,6 +20,7 @@ typedef struct {
 
 /* ADDRESS: GOLD 0x004f17f0 */
 /* ADDRESS: GOLDTL 0x004f3900 */
+/* ADDRESS: GOLDDE 0x004df9c0 */
 int __cdecl gv_SaveGraveyardField(void* stream_ctx, unsigned char* field)
 {
 	GraveyardSlot* slot;

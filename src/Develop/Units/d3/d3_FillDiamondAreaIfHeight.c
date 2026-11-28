@@ -1,4 +1,5 @@
 /* ADDRESS: GOLDTL 0x00455f80 */
+/* ADDRESS: GOLDDE 0x0044b720 */
 void __cdecl d3_FillDiamondAreaIfHeight(int value, int unused, int storeval, int count,
 	unsigned char* p, int base, int centerX, int centerY, int stride, int areaRadius)
 {

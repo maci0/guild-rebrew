@@ -7,6 +7,7 @@ int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_CheckPrivilege(int, void*, void*);
 
 /* ADDRESS: GOLDTL 0x004aa550 */
+/* ADDRESS: GOLDDE 0x00498890 */
 int __cdecl ai_DispatchPrivilege(unsigned short* a0, char* request, char* a2)
 {
 	char text[0x40];

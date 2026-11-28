@@ -8,6 +8,7 @@ extern unsigned char g_772628[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 /* ADDRESS: GOLDTL 0x00492590 */
+/* ADDRESS: GOLDDE 0x00481440 */
 unsigned int __cdecl gm_PickWirtshausGuest(int kind)
 {
 	float tab[15];

@@ -3,6 +3,7 @@
 
 #include <string.h>
 
+/* ADDRESS: GOLDDE 0x00420d10 */
 char* __cdecl evt_FindChildScript(char* o, const char* name)
 {
 	int i;

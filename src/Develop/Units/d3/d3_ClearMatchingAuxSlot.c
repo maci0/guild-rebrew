@@ -1,6 +1,7 @@
 void __cdecl d3_ReleaseMeshSlotTextures(void* entry);
 
 /* ADDRESS: GOLDTL 0x00456d50 */
+/* ADDRESS: GOLDDE 0x0044c510 */
 char __cdecl d3_ClearMatchingAuxSlot(char* this, int id)
 {
 	int i;

@@ -11,6 +11,7 @@ char* __cdecl ch_CreateAction(char*, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004bc410 */
+/* ADDRESS: GOLDDE 0x004aa360 */
 void __cdecl ch_SpawnAmbientLivestock(AMBIENT_ANIMAL_SLOT* entry, int kind)
 {
 	float pos[4];

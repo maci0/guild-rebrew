@@ -27,6 +27,7 @@ struct script_427b40 {
 /* Returns from the current script function to its caller frame; returns 0
  * when the outermost frame ended. */
 /* ADDRESS: GOLDTL 0x00427b40 */
+/* ADDRESS: GOLDDE 0x004225a0 */
 int __cdecl evt_PopCallFrame(struct script_427b40* s)
 {
 	int i;

@@ -7,6 +7,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b3a50 */
 void __cdecl cm_SendUpdateSlot80(char* data, char slot_kind)
 {
 	char buf[0x9c];

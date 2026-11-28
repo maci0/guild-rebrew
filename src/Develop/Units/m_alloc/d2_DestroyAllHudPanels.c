@@ -19,6 +19,7 @@ void __cdecl d2_DestroyHudOverlay(void);
 void __cdecl d2_CloseWindow(int h);
 void __cdecl d2_DestroySelectionPanel(void);
 
+/* ADDRESS: GOLDDE 0x00510630 */
 void __cdecl d2_DestroyAllHudPanels(void)
 {
 	int i;

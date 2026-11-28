@@ -6,6 +6,7 @@
 int __cdecl fcn_00501190(int, int, int);
 int __cdecl init_AllocateGebaeudeSceneSlot(int);
 
+/* ADDRESS: GOLDDE 0x005006b0 */
 void __cdecl init_AllocateKind0bSceneSlot(void)
 {
 	int r;

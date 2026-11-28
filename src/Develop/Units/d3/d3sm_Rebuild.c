@@ -15,6 +15,7 @@ void __cdecl d3sm_BuildFromTerrain(int*, int*);
 void __cdecl d3_RelabelMatchingCells(int*, int, int);
 
 /* ADDRESS: GOLDTL 0x0045b290 */
+/* ADDRESS: GOLDDE 0x00450350 */
 void __cdecl d3sm_Rebuild(int* m, unsigned char* t)
 {
 	D3SM_BBOX box;

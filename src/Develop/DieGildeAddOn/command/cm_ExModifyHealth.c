@@ -6,6 +6,7 @@
 
 char* __cdecl gm_LookupEntityRecordById(int);
 
+/* ADDRESS: GOLDDE 0x004bae00 */
 int __cdecl cm_ExModifyHealth(char* cmd, char* result)
 {
 	char* e;

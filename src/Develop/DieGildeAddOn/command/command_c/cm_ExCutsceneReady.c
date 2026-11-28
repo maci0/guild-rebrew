@@ -7,6 +7,7 @@ void* __cdecl gm_LookupEntityRecordById(int id);
  * reports success into the result packet. */
 /* ADDRESS: GOLD 0x004cca10 */
 /* ADDRESS: GOLDTL 0x004cd590 */
+/* ADDRESS: GOLDDE 0x004bad70 */
 int __cdecl cm_ExCutsceneReady(int* a, unsigned char* result)
 {
 	void* rec;

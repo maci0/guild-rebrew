@@ -9,6 +9,7 @@ int __cdecl gm_AmountToUnits(int a, unsigned char k);
 int __cdecl gm_ConvertUnitsToAmount(int a, unsigned char k);
 
 /* ADDRESS: GOLDTL 0x004f4440 */
+/* ADDRESS: GOLDDE 0x004e0500 */
 int __cdecl gv_CalcGravePrice(int handle, int value, int mode, int flag, int* out)
 {
 	double v;

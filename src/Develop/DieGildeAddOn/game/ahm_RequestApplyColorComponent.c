@@ -20,6 +20,7 @@ typedef struct {
 int __cdecl ahm_CheckFlag(void* a);
 int __cdecl cm_RequestAhmCommand(AHM_APPLY_COLOR_MSG* m);
 
+/* ADDRESS: GOLDDE 0x004dab10 */
 int __cdecl ahm_RequestApplyColorComponent(char* obj, int arg, float factor)
 {
 	AHM_APPLY_COLOR_MSG m;

@@ -6,6 +6,7 @@ extern int cut_SkipMode;
 char* __cdecl evt_LoadGfxScript(int);
 void __cdecl evt_RunScriptLine(char*, int);
 
+/* ADDRESS: GOLDDE 0x004d0ea0 */
 int __cdecl evt_StartGfxScript(int scriptPath, int args)
 {
 	char* p;

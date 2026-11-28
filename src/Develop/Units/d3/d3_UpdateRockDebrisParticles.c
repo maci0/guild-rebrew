@@ -3,6 +3,7 @@
 int __cdecl fcn_0064d3f8(void);
 
 /* ADDRESS: GOLDTL 0x00418210 */
+/* ADDRESS: GOLDDE 0x00416010 */
 int __cdecl d3_UpdateRockDebrisParticles(char* obj, int now)
 {
 	int flags;

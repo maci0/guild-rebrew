@@ -7,6 +7,7 @@ extern char str_DeleteCharacterAnimations_Invalid[];
 extern char* evt_CurrentScript;
 void __cdecl evt_LogScriptError(void*, int, char*);
 
+/* ADDRESS: GOLDDE 0x0040c950 */
 int __cdecl KillCharacterAnimations(char** target)
 {
 	char* p;

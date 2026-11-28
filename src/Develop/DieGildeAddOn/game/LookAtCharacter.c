@@ -8,6 +8,7 @@ void __cdecl d3_WrapEulerAnglesPi(float* out, char* base, float* a, float* b);
 char* __cdecl ch_CreateAction(char* e, int kind, ...);
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
+/* ADDRESS: GOLDDE 0x0040cad0 */
 int __cdecl LookAtCharacter(char** a, char** b)
 {
 	float d;

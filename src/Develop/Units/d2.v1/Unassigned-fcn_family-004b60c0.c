@@ -15,6 +15,7 @@ int __cdecl d2_DispatchMissionBriefing(void);
 int __cdecl d2_FinishHistoryMissionDialog(void);
 
 /* ADDRESS: GOLDTL 0x004b60c0 */
+/* ADDRESS: GOLDDE 0x004a4350 */
 int __cdecl d2_DispatchMissionDialog(void)
 {
 	if (gm_SelectedMissionIndex == 5)
@@ -23,6 +24,7 @@ int __cdecl d2_DispatchMissionDialog(void)
 }
 
 /* ADDRESS: GOLDTL 0x004b62c0 */
+/* ADDRESS: GOLDDE 0x004a4550 */
 int __cdecl d2_DispatchMissionBriefing(void)
 {
 	if (gm_SelectedMissionIndex == 5)
@@ -31,6 +33,7 @@ int __cdecl d2_DispatchMissionBriefing(void)
 }
 
 /* ADDRESS: GOLDTL 0x004b6470 */
+/* ADDRESS: GOLDDE 0x004a4700 */
 int __cdecl d2_HandleMissionTurnEnd(void)
 {
 	if (nt_ClientSocket != -1) {

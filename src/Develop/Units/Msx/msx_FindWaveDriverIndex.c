@@ -3,6 +3,7 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
+/* ADDRESS: GOLDDE 0x004254d0 */
 int __cdecl msx_FindWaveDriverIndex(int a1)
 {
 	int i;

@@ -5,6 +5,7 @@ extern char* evt_CurrentScript;
 char* __cdecl CreateAnimationEvent(char* owner, char* name);
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
+/* ADDRESS: GOLDDE 0x0040c5a0 */
 int __cdecl SitDownAtOnce(char** a, char** v)
 {
 	char* r;

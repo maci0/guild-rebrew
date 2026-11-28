@@ -11,6 +11,7 @@ void __cdecl io_ClearInputState(void);
 void __cdecl d2_ShowStatusBanner(char*);
 void __cdecl d2_SetMouseTooltip(char*);
 
+/* ADDRESS: GOLDDE 0x0050f1b0 */
 void __cdecl d2_ResetUiInputAndBounds(void)
 {
 	d2_SetOverlayAnimation(0, 0);

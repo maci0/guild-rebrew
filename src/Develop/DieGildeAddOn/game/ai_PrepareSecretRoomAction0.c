@@ -18,6 +18,7 @@ int __cdecl ai_SelectRankedCandidates(char* e, int a, int* b, int c, float r, in
 int __cdecl gm_SumQueryEntryValues(int a, char b);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
+/* ADDRESS: GOLDDE 0x0047ca90 */
 int __cdecl ai_PrepareSecretRoomAction0(char* actor, char* action_out, char* target_out)
 {
 	int mask;

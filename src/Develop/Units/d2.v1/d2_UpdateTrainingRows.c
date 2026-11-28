@@ -33,6 +33,7 @@ void __cdecl d2_AddDisplayCounter(int, int);
 float __cdecl gm_GetEntityHealthRatio(int);
 
 /* ADDRESS: GOLDTL 0x005c6a10 */
+/* ADDRESS: GOLDDE 0x005a8c90 */
 unsigned int __cdecl d2_UpdateTrainingRows(unsigned int dialog, unsigned int form)
 {
 	unsigned short* item;

@@ -45,6 +45,7 @@ typedef struct {
 } D2_AMT_CANDIDATE_REC;
 
 /* ADDRESS: GOLDTL 0x005cd810 */
+/* ADDRESS: GOLDDE 0x005af2a0 */
 void __cdecl d2_RunAmtCandidatesDialog(int office)
 {
 	char src1[0x90];

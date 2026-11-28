@@ -21,6 +21,7 @@ void __cdecl d2_DestroyForm(int);
 int __cdecl ls_LoadNetworkSaveHeader(void);
 int __cdecl d2_ShowServerBrowser(int);
 
+/* ADDRESS: GOLDDE 0x00521820 */
 int __cdecl d2_ShowNetworkLoadDialog(void)
 {
 	int radio_group;

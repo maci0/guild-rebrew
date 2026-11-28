@@ -2,6 +2,7 @@
 
 /* ADDRESS: GOLD 0x004e50e0 */
 /* ADDRESS: GOLDTL 0x004e6a70 */
+/* ADDRESS: GOLDDE 0x004d32c0 */
 int __cdecl gm_FindPlayerById(int id)
 {
 	int i;

@@ -24,6 +24,7 @@ extern char gm_EntitySlotTable[];
 char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int kind);
 void __cdecl he_NotifyDomizilStatus(char* e, char* r, int mode);
 
+/* ADDRESS: GOLDDE 0x004db5c0 */
 int __cdecl gm_NotifyDomizilCallback(Set* p)
 {
 	int i;

@@ -12,6 +12,7 @@ char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 char* __cdecl ch_CreateQueuedAction(int, void*, int, int, int);
 void __cdecl ch_HideAttachedCharacter(void);
 
+/* ADDRESS: GOLDDE 0x004c52e0 */
 void __cdecl cut_QueueHideCharacter(int* a)
 {
 	char* e;

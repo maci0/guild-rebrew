@@ -50,6 +50,7 @@ float __cdecl gm_GetEntityHealth(char*);
 
 /* ADDRESS: GOLD 0x004e0e90 */
 /* ADDRESS: GOLDTL 0x004e27b0 */
+/* ADDRESS: GOLDDE 0x004cf1c0 */
 int __cdecl gm_NotifyGeburt(char* event)
 {
 	char buf[0x200];
@@ -75,6 +76,7 @@ int __cdecl gm_NotifyGeburt(char* event)
 }
 
 /* ADDRESS: GOLDTL 0x004e2890 */
+/* ADDRESS: GOLDDE 0x004cf2a0 */
 void __cdecl cut_PlayBirthCutscene(char* event)
 {
 	char buf[0x10];
@@ -158,6 +160,7 @@ void __cdecl cut_PlayBirthCutscene(char* event)
 }
 
 /* ADDRESS: GOLDTL 0x004e2b40 */
+/* ADDRESS: GOLDDE 0x004cf550 */
 int __cdecl cut_CheckDeathCutscene(char* event)
 {
 	if (gm_GetEntityHealth(gm_LookupEntityRecordById(*(int*) (event + 0x34))) > 0.0f)

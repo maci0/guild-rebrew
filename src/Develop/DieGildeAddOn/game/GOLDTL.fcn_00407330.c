@@ -15,6 +15,7 @@ int __cdecl ch_RandomIndex(unsigned short);
 /* Original source-unit home is unproved; retained beside its selection caller. */
 /* ADDRESS: GOLD 0x00406340 */
 /* ADDRESS: GOLDTL 0x00406ee0 */
+/* ADDRESS: GOLDDE 0x00406080 */
 int __cdecl ch_CollectMatchingDummyNodes(char* object, CH_DUMMY_PICKS* picks)
 {
     char names[15][64] = {
@@ -41,6 +42,7 @@ int __cdecl ch_CollectMatchingDummyNodes(char* object, CH_DUMMY_PICKS* picks)
  * entry, or 0 when p.count is 0. The inventory entry also holds a second
  * function at 0x407390 (632 bytes). */
 /* ADDRESS: GOLDTL 0x00407330 */
+/* ADDRESS: GOLDDE 0x004064d0 */
 char* __cdecl ch_SelectRandomDummy(void)
 {
 	CH_DUMMY_PICKS p;

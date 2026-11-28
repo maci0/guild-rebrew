@@ -7,6 +7,7 @@ extern char* evt_CurrentScript;
 int __cdecl ch_QueuePlayAnimation(char* e, char* name, int param);
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
+/* ADDRESS: GOLDDE 0x0040bbf0 */
 int __cdecl PlayAnimation(char** a, char** name, int* param)
 {
 	if (evt_WaitingScriptTask != 0 && *(void**) (evt_WaitingScriptTask + 0x44) == (void*) PlayAnimation) {

@@ -12,6 +12,7 @@ int __cdecl d2_DestroyElement(int);
 void __cdecl d2_EvalCubicBezier2D(float*, float*, float*, float*, float, float*);
 
 /* ADDRESS: GOLDTL 0x00584160 */
+/* ADDRESS: GOLDDE 0x00569ed0 */
 void __cdecl d2_UpdateTutorialArrow(int a0)
 {
 	char* o;

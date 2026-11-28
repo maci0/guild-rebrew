@@ -71,6 +71,7 @@ int __cdecl gm_QueryEntitySum(int, int);
 
 
 /* ADDRESS: GOLDTL 0x0048cdb0 */
+/* ADDRESS: GOLDDE 0x0047bc80 */
 unsigned int __cdecl ai_RebalanceCityStock(char* o, char* req)
 {
 	Msg m;

@@ -37,6 +37,7 @@ extern D2_FORM_RECORD d2_Forms[];
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 /* ADDRESS: GOLDTL 0x00471a30 */
+/* ADDRESS: GOLDDE 0x00464f30 */
 void __cdecl d2_SetGroupVisibility(int k, int flag)
 {
 	Obj* o;

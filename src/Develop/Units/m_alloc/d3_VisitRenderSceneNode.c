@@ -61,6 +61,7 @@ void __stdcall fcn_005ec410(SceneMatrix* out, float x, float y, float z);
 void __cdecl d3_SelectActiveObjectLights(float a, float b, char* c, SceneMatrix* d, SceneMatrix* e);
 void __cdecl d3_SetRenderMaterialState(unsigned char a, unsigned char b, int c, unsigned char d, unsigned char e);
 
+/* ADDRESS: GOLDDE 0x00447830 */
 char __cdecl d3_VisitRenderSceneNode(char* e, void* parent)
 {
 	char* o;

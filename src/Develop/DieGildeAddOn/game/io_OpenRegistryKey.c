@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <windows.h>
 
+/* ADDRESS: GOLDDE 0x004100b0 */
 int __cdecl io_OpenRegistryKey(const char* sub, int mode)
 {
 	HKEY key;

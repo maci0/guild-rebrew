@@ -31,6 +31,7 @@ extern char* d2_CurrentWindow;
 
 /* Inferred name and source home; the native registry selects this two-argument callback. */
 /* ADDRESS: GOLDTL 0x004df1b0 */
+/* ADDRESS: GOLDDE 0x004cbc80 */
 void __cdecl cut_PromptProzessChoice(char* participant, int* action)
 {
     /* Reference allocator order needs two extra register candidates here. */

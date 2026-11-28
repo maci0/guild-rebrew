@@ -40,6 +40,7 @@ extern int __cdecl d3_CompareDisplayModes(const void* a, const void* b);
 #define MODEAT(k) ((unsigned int*) ((char*) MODES + (k) * 0x10))
 
 /* ADDRESS: GOLDTL 0x0041a380 */
+/* ADDRESS: GOLDDE 0x004180c0 */
 int __cdecl d3_EnumerateDisplayAdapters(unsigned int minWidth, unsigned int minHeight, unsigned char windowed)
 {
 	MODE8 cur;

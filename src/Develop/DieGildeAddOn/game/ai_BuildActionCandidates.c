@@ -27,6 +27,7 @@ float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int 
 int __cdecl gm_RandomMod(int n);
 
 /* ADDRESS: GOLDTL 0x004a3530 */
+/* ADDRESS: GOLDDE 0x00491f60 */
 void __cdecl ai_BuildActionCandidates(char* subjectEnt)
 {
 	Rec18 out[6];

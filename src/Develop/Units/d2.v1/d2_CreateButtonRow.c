@@ -11,6 +11,7 @@ int __cdecl d2_AddWindowTextButton(int a1, int a2, int a3, int a4, int i);
 void __cdecl d2_SetElementWidth(int a1, int a2);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00533a60 */
+/* ADDRESS: GOLDDE 0x0051c350 */
 void __cdecl d2_CreateButtonRow(int windowId, int y, int* outIds, int labelCount, ...)
 {
 	D2_WIN* winp;

@@ -17,6 +17,7 @@ void __cdecl cm_SendDecreaseGameSpeed(void);
 void __cdecl gm_ApplyGameSettings(void);
 void __cdecl d2_ShowStatusBanner(int);
 
+/* ADDRESS: GOLDDE 0x00578180 */
 void __cdecl main_HandleHotkeyAction(void)
 {
 	int lvl;

@@ -12,6 +12,7 @@ void __cdecl he_PostEntityMessage(int, int, void*, int, int, void*);
 
 
 /* ADDRESS: GOLDTL 0x004bb540 */
+/* ADDRESS: GOLDDE 0x004a95b0 */
 int __cdecl gm_HandleMsgGrantPercentWealth(void* record)
 {
 	int n;

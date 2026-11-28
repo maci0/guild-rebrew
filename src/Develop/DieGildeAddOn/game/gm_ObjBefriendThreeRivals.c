@@ -23,6 +23,7 @@ void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 char* __cdecl gm_LookupSpecialObjectRecord(int, int*);
 void __cdecl d2_ShowUseObjDialog(char*);
 
+/* ADDRESS: GOLDDE 0x005bf000 */
 int __cdecl gm_ObjBefriendThreeRivals(Ent* ent, int* arg)
 {
 	Ent* picks[3];

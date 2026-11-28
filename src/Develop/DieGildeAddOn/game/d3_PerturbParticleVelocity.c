@@ -3,6 +3,7 @@
 
 float __cdecl gm_RandomFloat01(void);
 
+/* ADDRESS: GOLDDE 0x005ca290 */
 int __cdecl d3_PerturbParticleVelocity(float* p, float spread, float* dir, float lift, float* up, float scale)
 {
 	float b[3];

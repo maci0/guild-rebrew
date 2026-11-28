@@ -20,6 +20,7 @@ void __cdecl d3_AttachModelPart(char* o, void* part, char* name);
 char __cdecl d3_FormatModelVariantName(char* a, int b, int mode, char* key, char* val);
 
 /* ADDRESS: GOLDTL 0x00449f90 */
+/* ADDRESS: GOLDDE 0x00440670 */
 void __cdecl d3_AttachCachedModelParts(char* o, void* part, char* name)
 {
 	int i;

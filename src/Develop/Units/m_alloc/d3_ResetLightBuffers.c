@@ -9,6 +9,7 @@ extern int g_6b8700;
 
 void __cdecl m_FreeTracked(int);
 
+/* ADDRESS: GOLDDE 0x004466f0 */
 void __cdecl d3_ResetLightBuffers(void)
 {
 	d3_LightSortCount = 0;

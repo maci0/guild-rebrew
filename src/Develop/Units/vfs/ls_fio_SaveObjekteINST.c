@@ -5,6 +5,7 @@ extern unsigned short* lpObjekteINST;
 
 unsigned int __cdecl vfs_fwrite(void* p, int size, int n, void* file);
 
+/* ADDRESS: GOLDDE 0x00507e90 */
 int __cdecl ls_fio_SaveObjekteINST(void* file)
 {
 	int count;

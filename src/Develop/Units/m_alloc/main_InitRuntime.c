@@ -16,6 +16,7 @@ void __cdecl tb_StartTimer(int, int);
 void __cdecl main_ShutdownEngine(void);
 void __cdecl main_NoopCrashCallback(void);
 
+/* ADDRESS: GOLDDE 0x0051ff10 */
 int __cdecl main_InitRuntime(void)
 {
 	char path[0x104];

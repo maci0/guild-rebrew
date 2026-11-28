@@ -16,6 +16,7 @@ int __cdecl d2_IsPrivilegeMessageEnabled(int);
 char *__cdecl he_CreateEventFromRequest(Msg *);
 char *__cdecl m_alloc(int, char *);
 
+/* ADDRESS: GOLDDE 0x004b6940 */
 int __cdecl fcn_004c9160(char *packet, char *reply)
 {
 	Msg m;

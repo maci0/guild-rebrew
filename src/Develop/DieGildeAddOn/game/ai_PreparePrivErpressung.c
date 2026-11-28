@@ -10,6 +10,7 @@ char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl amt_GetRoleTemplate(int job, Info* info);
 
 /* ADDRESS: GOLDTL 0x004a9470 */
+/* ADDRESS: GOLDDE 0x004977b0 */
 int __cdecl ai_PreparePrivErpressung(int unused1, char* actor, int unused3, int unused4, char* out)
 {
 	Info info;

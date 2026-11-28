@@ -16,6 +16,7 @@ typedef struct
 
 int __cdecl gm_RandomMod(int);
 
+/* ADDRESS: GOLDDE 0x0053bdf0 */
 void __cdecl he_StartTalentLevelAction(void* action)
 {
 	*(S14*) ((char*) action + 0x52) = *(S14*) ((char*) action + 0x44);

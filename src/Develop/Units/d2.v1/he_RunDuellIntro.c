@@ -42,6 +42,7 @@ int __cdecl d2_DrawPersonTile(int, int, int, DUELL_PERSON_SLOT*);
 void __cdecl cm_SendSetHE(int, void*);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x0054f600 */
+/* ADDRESS: GOLDDE 0x00535aa0 */
 void __cdecl he_RunDuellIntro(char* o)
 {
 	char* entity;

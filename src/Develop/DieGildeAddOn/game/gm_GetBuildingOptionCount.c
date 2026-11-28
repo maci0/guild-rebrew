@@ -3,6 +3,7 @@
 
 void* __cdecl gm_QueryEntities(int, int, int, ...);
 
+/* ADDRESS: GOLDDE 0x004fb220 */
 int __cdecl gm_GetBuildingOptionCount(char* building)
 {
 	int n;

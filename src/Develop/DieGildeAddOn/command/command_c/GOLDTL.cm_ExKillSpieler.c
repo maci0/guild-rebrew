@@ -1,3 +1,4 @@
+extern char g_6b7e98[];
 
 /*
  * Ghidra decompilation reference:
@@ -30,6 +31,7 @@
 int __cdecl d3_FreeMeshObject(int);
 int __cdecl evt_LogScriptError(void*, int, char*);
 
+/* ADDRESS: GOLDDE 0x0040ead0 */
 int __cdecl cm_ExKillSpieler(int cmd)
 {
 	void* e;
@@ -37,7 +39,7 @@ int __cdecl cm_ExKillSpieler(int cmd)
 	if (e != 0) {
 		d3_FreeMeshObject(*(int*) cmd);
 	} else {
-		evt_LogScriptError(*(void**) 0x6b7e98, *(int*) ((char*) *(void**) 0x6b7e98 + 0x118), (char*) 0x676988);
+		evt_LogScriptError(*(void**) &g_6b7e98, *(int*) ((char*) *(void**) &g_6b7e98 + 0x118), "ecmd_KillParticle: invalid handle...");
 	}
 	return 0;
 }

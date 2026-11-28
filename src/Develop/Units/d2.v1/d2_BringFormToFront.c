@@ -18,6 +18,7 @@ void __cdecl d2_BringFormToFront(int k)
 }
 #else
 /* ADDRESS: GOLDTL 0x004707d0 */
+/* ADDRESS: GOLDDE 0x00463d10 */
 void __cdecl d2_BringFormToFront(int k)
 {
 	int j;

@@ -49,6 +49,7 @@ void __cdecl d2_DestroyForm(int);
  * 0x40 calls fcn_004707d0 each frame.
  * Returns the chosen entry + 1, or 0. */
 /* ADDRESS: GOLDTL 0x00526120 */
+/* ADDRESS: GOLDDE 0x0050f3e0 */
 int __cdecl d2_ShowModalMessageBox(char* text, int flags)
 {
 	int wait;

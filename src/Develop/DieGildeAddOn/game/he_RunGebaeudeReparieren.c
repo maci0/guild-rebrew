@@ -15,6 +15,7 @@ void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl he_FreeAction(void*);
 
 /* ADDRESS: GOLDTL 0x005639a0 */
+/* ADDRESS: GOLDDE 0x00549b70 */
 void __cdecl he_RunGebaeudeReparieren(int a)
 {
 	char buf[0x100];
@@ -55,7 +56,7 @@ void __cdecl he_RunGebaeudeReparieren(int a)
 		if (*(unsigned short*) (a + 8) != 0xffff) {
 			ofs = *(unsigned short*) (a + 8) * 0x21c;
 			if (*(char*) (gm_EntitySlotTable + ofs + 2) == 6 || *(char*) (gm_EntitySlotTable + ofs + 2) == 7) {
-				he_MessageBoxQuickjump(*(int*) (gm_EntitySlotTable + ofs + 4), -1, buf, 0, id, *(int*) (r + 1), -1, 0, (void*) 0x6a65b8);
+				he_MessageBoxQuickjump(*(int*) (gm_EntitySlotTable + ofs + 4), -1, buf, 0, id, *(int*) (r + 1), -1, 0, "_NACHRICHTEN_HS_68");
 			}
 		}
 		*(int*) (a + 0x70) = -1;

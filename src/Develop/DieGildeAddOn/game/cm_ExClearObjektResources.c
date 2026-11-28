@@ -4,6 +4,7 @@
 char* __cdecl gm_FindRecordById(int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
+/* ADDRESS: GOLDDE 0x004bb650 */
 int __cdecl cm_ExClearObjektResources(char* packet, char* reply)
 {
 	char* node;

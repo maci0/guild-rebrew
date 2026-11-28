@@ -30,6 +30,7 @@ void __cdecl he_RunFriedhofStealAction(char*);
 void __cdecl he_StartMeisterpruefung(void);
 void __cdecl he_RunMeisterpruefung(void);
 
+/* ADDRESS: GOLDDE 0x0055df80 */
 int __cdecl he_RegisterFriedhofHandlers(void)
 {
 	if (he_RegisterHandler(0x88, he_StartAction0x88, he_RunHeimsuchung) || he_RegisterHandler(0x89, he_StartHauchDesVerfalls, he_RunHauchDesVerfalls)

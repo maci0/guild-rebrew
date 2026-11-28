@@ -44,6 +44,7 @@ void __cdecl d2_ClearRadioGroup(int); void __cdecl d2_DestroyForm(int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/command/client_packet_builder.h"
 /* ADDRESS: GOLDTL 0x005c8c40 */
+/* ADDRESS: GOLDDE 0x005aaaa0 */
 void __cdecl d2_OpenPlayerStats(void)
 {
 	int out[3];

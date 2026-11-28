@@ -24,6 +24,7 @@ extern pos14_7f4c00 gm_GameTime;
 void __cdecl sim_SetSyncParams(GAME_TIMESTAMP*, unsigned char, unsigned char, unsigned char);
 int __cdecl gm_GetElapsedMinutes(GAME_TIMESTAMP*, GAME_TIMESTAMP*);
 
+/* ADDRESS: GOLDDE 0x004a35c0 */
 int __cdecl ai_FilterCandidateLimit(holder* p, int flag, int limit)
 {
 	if (flag != 0) {

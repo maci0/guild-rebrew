@@ -9,6 +9,7 @@ extern short gm_GameTimeTailWord;
 void __cdecl cm_SendCopyEntityData(char* msg);
 
 /* ADDRESS: GOLDTL 0x0048f850 */
+/* ADDRESS: GOLDDE 0x0047e720 */
 int __cdecl ai_SendNecromancerFog(char* actor, char* home, int req, char* plan)
 {
 	char msg[0xf8];

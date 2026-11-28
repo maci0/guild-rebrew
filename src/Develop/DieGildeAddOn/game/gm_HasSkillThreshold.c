@@ -1,5 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x004b47e0 */
+/* ADDRESS: GOLDDE 0x004a2ad0 */
 int __cdecl gm_HasSkillThreshold(unsigned char* stats, char* thr)
 {
 	int i;

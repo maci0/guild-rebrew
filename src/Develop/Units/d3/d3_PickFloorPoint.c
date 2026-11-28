@@ -25,6 +25,7 @@ float* __stdcall fcn_005eb970(float*, float*, float*);
 float* __stdcall fcn_005eb2e4(float*, float*, D3_PICK_VIEWPORT*, float*, float*, float*);
 
 /* ADDRESS: GOLDTL 0x00441ab0 */
+/* ADDRESS: GOLDDE 0x0043a430 */
 int __cdecl d3_PickFloorPoint(char* floor, int mx, int my, float radius, float* out)
 {
 	float world[16];

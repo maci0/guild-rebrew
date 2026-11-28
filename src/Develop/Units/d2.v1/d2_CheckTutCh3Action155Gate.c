@@ -5,6 +5,7 @@ extern int* d2_TutorialState;
 
 int __cdecl d2_CheckTutMsg1aNotCat12Node74(int* m);
 
+/* ADDRESS: GOLDDE 0x00565710 */
 int __cdecl d2_CheckTutCh3Action155Gate(int* m)
 {
 	if (m[0] == 0x20) {

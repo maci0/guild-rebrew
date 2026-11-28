@@ -5,6 +5,7 @@ extern char* d3sndw_SlotWaterIds;
 extern char* d3sndw_SlotStates;
 
 /* ADDRESS: GOLDTL 0x004195f0 */
+/* ADDRESS: GOLDDE 0x00417330 */
 void __cdecl d3sndw_Shutdown(void)
 {
 	if (d3snd_ProbeSinTable != 0) {

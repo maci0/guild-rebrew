@@ -5,6 +5,7 @@
 
 #include "Develop/Units/d3/client_lighting.h"
 
+/* ADDRESS: GOLDDE 0x0043b100 */
 char __cdecl d3_SetSubObjectVisibleCallback(char* o, char on)
 {
 	char buf[0x40];

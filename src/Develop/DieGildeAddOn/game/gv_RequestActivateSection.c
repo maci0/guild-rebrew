@@ -3,6 +3,7 @@
 
 int __cdecl gv_EnqueueSlotCommand(char*);
 
+/* ADDRESS: GOLDDE 0x004dec60 */
 int __cdecl gv_RequestActivateSection(char* owner, char* entity, int fieldType)
 {
 	char buf[0x20];

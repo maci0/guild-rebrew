@@ -7,6 +7,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b44b0 */
 void __cdecl cm_SendAllocGraveyardWorker(char* source)
 {
 	char buf[0x9c];

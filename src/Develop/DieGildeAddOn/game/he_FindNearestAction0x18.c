@@ -9,6 +9,7 @@ char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 
 
+/* ADDRESS: GOLDDE 0x0055dc00 */
 char* __cdecl he_FindNearestAction0x18(char* who, char* self, int skip)
 {
 	char* best_e;

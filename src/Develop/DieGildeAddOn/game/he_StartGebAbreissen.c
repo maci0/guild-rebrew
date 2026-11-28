@@ -6,6 +6,7 @@ char *__cdecl gm_StartFilteredEntitySearch(int arg_count, ...);
 void __cdecl cm_RequestChangeBits(int id, int a2, int a3, int a4, int a5);
 
 /* ADDRESS: GOLDTL 0x005641b0 */
+/* ADDRESS: GOLDDE 0x0054a360 */
 void __cdecl he_StartGebAbreissen(void *event)
 {
     char *entity;

@@ -24,6 +24,7 @@ extern unsigned int g_6b8710;
 
 void __cdecl d3_UpdateAndRenderEffect(char*);
 
+/* ADDRESS: GOLDDE 0x00448470 */
 void __cdecl d3_RenderSceneList(void)
 {
 	char* p;

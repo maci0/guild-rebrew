@@ -8,6 +8,7 @@ float __cdecl gm_GetSeasonPrice(int id, unsigned char a);
 void __cdecl d2_FormatCurrencyString(int, int, char*);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
+/* ADDRESS: GOLDDE 0x00587f40 */
 int __cdecl d2_DrawPricedItemSlot(int x, int y, int layer, int itemId, int a5)
 {
 	char text[0x40];

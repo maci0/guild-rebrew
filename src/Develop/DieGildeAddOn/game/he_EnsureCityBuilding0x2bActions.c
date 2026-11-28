@@ -32,6 +32,7 @@ char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl cm_SendCopyEntityData(struct msg*);
 
+/* ADDRESS: GOLDDE 0x0052d7b0 */
 void __cdecl he_EnsureCityBuilding0x2bActions(void)
 {
 	struct msg m;

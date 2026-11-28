@@ -11,6 +11,7 @@ char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 char* __cdecl gm_LookupEntityRecordById(int);
 int* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
 
+/* ADDRESS: GOLDDE 0x004ba510 */
 int __cdecl cm_ExUpdateCutsceneEntitySlot(char* x, char* out)
 {
 	int i;

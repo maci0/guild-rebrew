@@ -35,6 +35,7 @@ void* __cdecl m_alloc(unsigned int size, const char* tag);
 int __cdecl vfs_ReadData(char* buf, int size, int count, char* f);
 
 /* ADDRESS: GOLDTL 0x00401500 */
+/* ADDRESS: GOLDDE 0x00401380 */
 int __cdecl bio_rd_array_quick(void* f, int count, void** out)
 {
 	int size;

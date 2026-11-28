@@ -117,6 +117,7 @@ void __cdecl d2_RunFireExtinguishDialog(int a);
 int __cdecl main_RunFrameLoop(void* fn, int message);
 
 /* ADDRESS: GOLDTL 0x005c3f10 */
+/* ADDRESS: GOLDDE 0x005a6350 */
 void __cdecl d2_RunGebaeudeOptionenDialog(char* ent)
 {
 	Vars v;

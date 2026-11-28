@@ -19,6 +19,7 @@ char* __cdecl he_fn_Handlung(void);
 char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl gm_CheckPrivilege(int k, char* e, Query* q);
 
+/* ADDRESS: GOLDDE 0x00498400 */
 int __cdecl ai_ExecuteAmtAction(char* entity, char* cmd, char* params)
 {
 	Query query;

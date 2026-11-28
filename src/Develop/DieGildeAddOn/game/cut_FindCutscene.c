@@ -20,6 +20,7 @@ typedef struct
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
+/* ADDRESS: GOLDDE 0x004d3230 */
 Ent114* __cdecl cut_FindCutscene(int type, int key)
 {
 	int i;

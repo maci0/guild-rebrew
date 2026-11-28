@@ -18,6 +18,7 @@ int __cdecl gm_AdvanceGameTime(char* p, int id, int a, int b, int c);
 int __cdecl cm_SendCopyEntityData(void* p);
 
 /* ADDRESS: GOLDTL 0x0054f910 */
+/* ADDRESS: GOLDDE 0x00535db0 */
 void __cdecl he_StartDuellCutscene(char* action)
 {
 	char* challenger;

@@ -19,6 +19,7 @@ long __cdecl PollVideoEvents(int id, long* p1, long* p2);
 int __cdecl CloseVideo(int id);
 char* __cdecl FindVideoByWindow(void* hwnd);
 
+/* ADDRESS: GOLDDE 0x0041bf80 */
 long __stdcall VideoWindowProc(void* hwnd, unsigned int msg, unsigned int wp, long lp)
 {
 	char* video;

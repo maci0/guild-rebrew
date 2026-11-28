@@ -25,6 +25,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl cm_SendSetHE(int, char*);
 
+/* ADDRESS: GOLDDE 0x00534770 */
 void __cdecl he_StartRazzia(char* o)
 {
 	if (o[0x78] & 2) {

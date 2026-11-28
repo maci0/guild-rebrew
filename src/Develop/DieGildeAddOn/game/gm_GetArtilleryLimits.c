@@ -3,6 +3,7 @@
 
 int __cdecl gm_QueryEntities(int a, int b, int c, int d, int e);
 
+/* ADDRESS: GOLDDE 0x004dd340 */
 void __cdecl gm_GetArtilleryLimits(char* p, int* a, int* b)
 {
 	*b = 0;

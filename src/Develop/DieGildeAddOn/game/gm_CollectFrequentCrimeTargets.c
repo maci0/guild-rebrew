@@ -21,6 +21,7 @@ extern char gm_EntitySlotTable[];
 int __cdecl FindStraftatIndexById(int b);
 
 /* ADDRESS: GOLDTL 0x004f6040 */
+/* ADDRESS: GOLDDE 0x004e1e20 */
 int __cdecl gm_CollectFrequentCrimeTargets(int* ids, int* d, unsigned short k)
 {
 	int list[0x200];

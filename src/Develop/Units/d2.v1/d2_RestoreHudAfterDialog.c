@@ -10,6 +10,7 @@ void __cdecl d2_DestroyForm(int);
 void __cdecl d2_SetFormVisibility(int, int);
 void __cdecl d2_UpdateSelectionPanels(void);
 
+/* ADDRESS: GOLDDE 0x005134e0 */
 void __cdecl d2_RestoreHudAfterDialog(void)
 {
 	d2_DestroyForm(g_6a25b4);

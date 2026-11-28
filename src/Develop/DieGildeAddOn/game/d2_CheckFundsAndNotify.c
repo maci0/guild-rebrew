@@ -5,6 +5,7 @@ int __cdecl gm_QueryEntitySum(int, int);
 void __cdecl io_FormatTextBuffer(char*, int, int);
 void __cdecl d2_ShowModalMessageBox(char*, int);
 
+/* ADDRESS: GOLDDE 0x0050f330 */
 int __cdecl d2_CheckFundsAndNotify(short* container, int account_id, int lim, int player_idx)
 {
 	char buf[0x200];

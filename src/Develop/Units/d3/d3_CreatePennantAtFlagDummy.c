@@ -1,3 +1,4 @@
+extern char g_7f4cf4[];
 int __cdecl _strcmpi(const char*, const char*);
 void __cdecl d3_TransformPoint(char*, float*, float*);
 int __cdecl d3_CreateSceneModelObject(void*, void*, void*, const char*);
@@ -7,6 +8,7 @@ char __cdecl SelectTextureSet(void*, int, unsigned char, char);
 int __cdecl d3_ApplyObjectAnimation(void*, const char*, int);
 
 /* ADDRESS: GOLDTL 0x0052d860 */
+/* ADDRESS: GOLDDE 0x005161f0 */
 char __cdecl d3_CreatePennantAtFlagDummy(char* e, char* o)
 {
 	float rot[3];
@@ -29,7 +31,7 @@ char __cdecl d3_CreatePennantAtFlagDummy(char* e, char* o)
 	d3_ApplyWorldTransformToObject(obj, name, m);
 	if (*(unsigned short*) (o + 0x27) != 0xffff) {
 		SelectTextureSet(obj, *(int*) ((char*) obj + 0x1cc),
-		    (unsigned char) (*(char*) (*(unsigned short*) (o + 0x27) * 0x21c + 0x7f4cf4) + 0x66), 1);
+		    (unsigned char) (*(char*) (*(unsigned short*) (o + 0x27) * 0x21c + (int) &g_7f4cf4) + 0x66), 1);
 		*(int*) ((char*) obj + 0x220) = 4;
 	}
 	d3_ApplyObjectAnimation(obj, "sonstiges\\sp_WIMPEL.baf", 1);

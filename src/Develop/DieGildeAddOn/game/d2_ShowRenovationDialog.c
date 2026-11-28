@@ -33,6 +33,7 @@ int __cdecl main_RunFrameLoop(void*, int);
  * polls its own dialog until the user closes it and dispatches the order to
  * the owning building or to the local player entity. */
 /* ADDRESS: GOLDTL 0x005c2580 */
+/* ADDRESS: GOLDDE 0x005a49c0 */
 void __cdecl d2_ShowRenovationDialog(char* e)
 {
 	char msg[0xf8];

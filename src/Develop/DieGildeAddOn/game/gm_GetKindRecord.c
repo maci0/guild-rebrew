@@ -10,6 +10,7 @@ typedef struct {
 
 extern Rec12 g_696560[];
 
+/* ADDRESS: GOLDDE 0x004f33a0 */
 int __cdecl gm_GetKindRecord(int idx, Rec12* out)
 {
 	if (idx >= 10) {

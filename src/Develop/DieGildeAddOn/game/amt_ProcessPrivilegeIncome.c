@@ -47,6 +47,7 @@ unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl cm_RequestModifyHealth(int, int);
 
 /* ADDRESS: GOLDTL 0x004fcda0 */
+/* ADDRESS: GOLDDE 0x004e88d0 */
 int __cdecl amt_ProcessPrivilegeIncome(unsigned short id, int pay, PRIVILEGE_INCOME_INFO* out)
 {
 	Rec18 q;

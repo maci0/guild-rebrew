@@ -17,6 +17,7 @@ void __cdecl d3_SelectSceneContext(int a, int b);
 void __cdecl ch_SetVisible(char* obj, int shown);
 
 /* ADDRESS: GOLDTL 0x00407390 */
+/* ADDRESS: GOLDDE 0x00406530 */
 void __cdecl ch_Move2Universe(char* a0)
 {
 	char* action;

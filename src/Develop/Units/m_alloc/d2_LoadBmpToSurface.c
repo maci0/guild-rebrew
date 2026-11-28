@@ -32,6 +32,7 @@ void* __cdecl m_alloc(int, int);
 void __cdecl m_FreeTracked(void*);
 
 /* ADDRESS: GOLDTL 0x00475a00 */
+/* ADDRESS: GOLDDE 0x00468080 */
 int __cdecl d2_LoadBmpToSurface(char* name, Surface* s)
 {
 	BmpInfo bi;

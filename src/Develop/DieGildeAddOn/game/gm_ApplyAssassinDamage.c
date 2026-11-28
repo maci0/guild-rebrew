@@ -5,6 +5,7 @@
 float __cdecl gm_RandomFloat01(void);
 float __cdecl gm_ApplyEntityHealthDelta(unsigned short, int);
 
+/* ADDRESS: GOLDDE 0x0055d8e0 */
 int __cdecl gm_ApplyAssassinDamage(char* a, unsigned short* b, int c)
 {
 	float fa;

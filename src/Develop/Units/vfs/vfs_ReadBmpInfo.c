@@ -25,6 +25,7 @@ void __cdecl vfs_fseek(void* f, int off, int whence);
 int __cdecl vfs_ReadData(char* buf, int size, int count, char* f);
 void __cdecl CloseVfsStream(void* f);
 
+/* ADDRESS: GOLDDE 0x00401410 */
 char __cdecl vfs_ReadBmpInfo(const char* name, int* width, int* height, int* bpp)
 {
 	BmpInfoHeader bih;

@@ -36,6 +36,7 @@ int __cdecl gm_GetSeasonTreasury(char* e, unsigned char b);
 
 /* r[] is block-scoped so it shares the slot of the Rec6 return temporary.
  * `p[8] > 0` on the unsigned byte gives the reference's jbe. */
+/* ADDRESS: GOLDDE 0x0048f850 */
 int __cdecl ai_StartStudium(int a1, char* actor, int a3, Blk24* o1, Blk24* o2)
 {
 	Share sh[3];

@@ -7,6 +7,7 @@ extern int d2_CurrentWindowId;
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_CreateWindowScrollbar(int, int, int, int, int, int*, int*, int*);
 
+/* ADDRESS: GOLDDE 0x00578e50 */
 void __cdecl d2_InitNetLobbyScrollbar(void)
 {
 	int a;

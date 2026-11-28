@@ -28,6 +28,7 @@ void __cdecl d2_ShowAlchemyFormulaBook(char*);
 void __cdecl d2_RunAlchemistryWorkshopDialog(char*);
 void __cdecl d2_RunAlchemyDialog(char*);
 
+/* ADDRESS: GOLDDE 0x00570790 */
 void __cdecl d2_RunAlchemistMenu(char* a, char* b)
 {
 	int book;

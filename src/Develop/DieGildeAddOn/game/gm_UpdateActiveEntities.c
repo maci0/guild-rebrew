@@ -25,6 +25,7 @@ void __cdecl cm_SendSwapEntityModel(int entity_id, char* model_name);
 void __cdecl gm_MaintainNpcPopulation(void);
 
 /* ADDRESS: GOLDTL 0x004ff0f0 */
+/* ADDRESS: GOLDDE 0x004eab00 */
 void __cdecl gm_UpdateActiveEntities(void)
 {
 	ENTITY_UPDATE_SLOT* p;

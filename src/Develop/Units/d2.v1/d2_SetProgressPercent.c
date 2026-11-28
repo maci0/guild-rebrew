@@ -8,6 +8,7 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl d2_RenderAndPresentFrame(void);
 
+/* ADDRESS: GOLDDE 0x00526140 */
 void __cdecl d2_SetProgressPercent(int a, int pct)
 {
 	int t;

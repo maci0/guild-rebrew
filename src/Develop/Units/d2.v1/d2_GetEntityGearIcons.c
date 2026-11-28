@@ -8,6 +8,7 @@ extern s_7e2ac0 g_7e2ac0[48];
 
 
 /* ADDRESS: GOLDTL 0x00529800 */
+/* ADDRESS: GOLDDE 0x00512a10 */
 int __cdecl d2_GetEntityGearIcons(char* entity, int* out)
 {
 	int n;

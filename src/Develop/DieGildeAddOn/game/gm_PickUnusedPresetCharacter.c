@@ -8,6 +8,7 @@ extern double g_662a20;
 
 unsigned short __cdecl gm_RandomMod(unsigned short n);
 
+/* ADDRESS: GOLDDE 0x004db340 */
 char* __cdecl gm_PickUnusedPresetCharacter(void)
 {
 	unsigned int idx;

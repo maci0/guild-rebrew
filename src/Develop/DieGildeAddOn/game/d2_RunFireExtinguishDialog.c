@@ -27,6 +27,7 @@ int __cdecl cm_SendSetHE(int, int);
 void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005c3cc0 */
+/* ADDRESS: GOLDDE 0x005a6100 */
 void __cdecl d2_RunFireExtinguishDialog(char* e)
 {
 	char* ent;

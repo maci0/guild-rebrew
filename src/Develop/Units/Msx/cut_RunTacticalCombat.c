@@ -61,6 +61,7 @@ void __cdecl cut_ResolveCombatWinner(Party*);
 void __cdecl gm_UpdateTaskProgress(Slot*);
 void __cdecl d2_DestroyCombatHud(void);
 
+/* ADDRESS: GOLDDE 0x004c6c10 */
 void __cdecl cut_RunTacticalCombat(int arg)
 {
 	unsigned int last;

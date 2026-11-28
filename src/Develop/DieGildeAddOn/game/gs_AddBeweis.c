@@ -15,6 +15,7 @@ extern char g_6903a8[];
 int __cdecl gs_AllocEvidenceSlot(int b, int a);
 int __cdecl sprintf(char* buf, const char* fmt, ...);
 
+/* ADDRESS: GOLDDE 0x004e1810 */
 int __cdecl gs_AddBeweis(int a, int b)
 {
 	char buf[0x200];

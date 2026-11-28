@@ -4,6 +4,7 @@
 extern unsigned char* lpGebaeudePROT;
 extern char* sv_SelectedBuilding;
 
+/* ADDRESS: GOLDDE 0x00564ae0 */
 int __cdecl d2_CheckTutMsg1aNotCat12Node74(int* msg)
 {
 	unsigned char* e;

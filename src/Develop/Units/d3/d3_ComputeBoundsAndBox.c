@@ -12,6 +12,7 @@ typedef struct Vert {
 /* Stores the bounding radius of o's vertices at 0x1d4 and appends the eight
  * corners of their bounding box after the last vertex. */
 /* ADDRESS: GOLDTL 0x0044f8e0 */
+/* ADDRESS: GOLDDE 0x00445500 */
 void __cdecl d3_ComputeBoundsAndBox(char* o)
 {
 	float bb[6];

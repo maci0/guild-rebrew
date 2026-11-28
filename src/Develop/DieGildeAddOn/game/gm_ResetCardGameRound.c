@@ -34,6 +34,7 @@ extern Card_1007ce0 g_1007ce0[24];
 
 int __cdecl gm_RandomMod(int id);
 
+/* ADDRESS: GOLDDE 0x004958a0 */
 int __cdecl gm_ResetCardGameRound(State* game_state)
 {
 	int i;

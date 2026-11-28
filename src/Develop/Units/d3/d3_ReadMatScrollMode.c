@@ -18,6 +18,7 @@ typedef struct
 int __cdecl vfs_ReadByte(void* stream, void* dst);
 
 /* ADDRESS: GOLDTL 0x0044dba0 */
+/* ADDRESS: GOLDDE 0x004438e0 */
 void __cdecl d3_ReadMatScrollMode(void* stream, D3_BIN_MAT_SCROLL_CTX* ctx)
 {
 	vfs_ReadByte(stream, &ctx->recs[ctx->n].fc8);

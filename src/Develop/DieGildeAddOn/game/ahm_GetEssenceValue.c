@@ -6,6 +6,7 @@ extern float g_66416c;
 
 int __cdecl ahm_CheckFlag(char* p);
 
+/* ADDRESS: GOLDDE 0x004d8cf0 */
 float __cdecl ahm_GetEssenceValue(char* p, int which)
 {
 	if (ahm_CheckFlag(p)) {

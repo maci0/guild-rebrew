@@ -8,6 +8,7 @@ extern int g_1040494;
 
 
 /* ADDRESS: GOLDTL 0x00537320 */
+/* ADDRESS: GOLDDE 0x0051ecd0 */
 void __cdecl d2_UpdateViewportCenter(int flags)
 {
 	if (flags & 0x40) {

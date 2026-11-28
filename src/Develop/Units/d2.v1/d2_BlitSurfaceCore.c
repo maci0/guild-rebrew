@@ -30,6 +30,7 @@ int __cdecl d2_BlitSurfaceCore(int x, int y, int w, int h, char* src, int sx, in
 int __cdecl d2_BlitSurface(int x, int y, int w, int h, BlitSurf* src, int sx, int sy, BlitSurf* dst, int unused);
 
 /* ADDRESS: GOLDTL 0x00476120 */
+/* ADDRESS: GOLDDE 0x004684d0 */
 int __cdecl d2_BlitSurfaceCore(int left, int top, int width, int height, char* src,
 						  int sx, int sy, char* dest)
 {

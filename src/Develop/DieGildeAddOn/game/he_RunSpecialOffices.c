@@ -13,6 +13,7 @@ void __cdecl amt_AssignSpecialOffices(void);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl sim_SetSyncParams(pos14_7f4c00*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x00561900 */
 void __cdecl he_RunSpecialOffices(char* o)
 {
 	if (o[0x78] & 4) {

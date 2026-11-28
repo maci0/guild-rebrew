@@ -4,6 +4,7 @@
 int __cdecl gm_IsEntityHomeInLocalShard(unsigned short*);
 int __cdecl gm_IsLocalSimEntity(unsigned short*);
 
+/* ADDRESS: GOLDDE 0x0053d1e0 */
 int __cdecl he_IsEntityEligibleForIllness(unsigned short* e)
 {
 	if (*e == 0xffff) {

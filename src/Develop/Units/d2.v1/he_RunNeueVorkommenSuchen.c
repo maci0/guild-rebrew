@@ -9,6 +9,7 @@ int __cdecl io_AppendText();
 void __cdecl d2_CloseActionPopup(char*);
 void __cdecl he_FreeAction(char*);
 
+/* ADDRESS: GOLDDE 0x00558d20 */
 void __cdecl he_RunNeueVorkommenSuchen(char* e)
 {
 	int id;

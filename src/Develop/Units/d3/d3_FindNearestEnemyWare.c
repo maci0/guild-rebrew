@@ -11,6 +11,7 @@ int __cdecl d3_CollectEnemyWareNode(char*, char*);
 void __cdecl d3_VisitSceneObjects(char*, int, int, int(__cdecl*)(char*, char*), char*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 
+/* ADDRESS: GOLDDE 0x004c08f0 */
 char* __cdecl d3_FindNearestEnemyWare(char* e)
 {
 	float best;

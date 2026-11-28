@@ -88,6 +88,7 @@ float __cdecl eval_ObjektPreis2Credits(int, unsigned char);
 char* __cdecl gm_QueryEntities(int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x0050cf50 */
+/* ADDRESS: GOLDDE 0x004f7ce0 */
 int __cdecl gm_CalculateGebaeudeValue(unsigned char* buildingRecordArg, int percentScale)
 {
 	BUILDING_PROTOTYPE* lvl;

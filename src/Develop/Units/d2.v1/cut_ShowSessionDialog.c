@@ -23,6 +23,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x004dc3a0 */
+/* ADDRESS: GOLDDE 0x004c8e70 */
 int __cdecl cut_ShowSessionDialog(char* a0, int a1, int* entityIds, int* a3)
 {
 	char info[0x18];

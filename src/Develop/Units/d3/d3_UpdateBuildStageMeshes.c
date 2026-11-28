@@ -28,6 +28,7 @@ typedef struct ObjList {
  * state 5 and clears their pending flag, or selects the object whose
  * underscore-separated numeric range contains the requested value. */
 /* ADDRESS: GOLDTL 0x00573e10 */
+/* ADDRESS: GOLDDE 0x00559d90 */
 void __cdecl d3_UpdateBuildStageMeshes(int action)
 {
 	ObjList list;

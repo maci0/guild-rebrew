@@ -11,6 +11,7 @@
 #include "Develop/client_types.h"
 extern Pair_99f800 cm_CrimeEvidenceLinks[0x800];
 
+/* ADDRESS: GOLDDE 0x004b7490 */
 int __cdecl cm_ExClearEvidenceLink(char* command, char* response)
 {
 	int i;

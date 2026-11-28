@@ -4,6 +4,7 @@ extern Slot170_7731b8 gm_CannonTowers[8];
 
 /* ADDRESS: GOLD 0x004eedd0 */
 /* ADDRESS: GOLDTL 0x004f0c90 */
+/* ADDRESS: GOLDDE 0x004dcfa0 */
 int __cdecl gm_FindSlot170Entry(int value)
 {
 	int i;

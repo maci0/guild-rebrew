@@ -44,6 +44,7 @@ char* __cdecl strupr(char*);
 
 /* ADDRESS: GOLD 0x004a47c0 */
 /* ADDRESS: GOLDTL 0x004a4200 */
+/* ADDRESS: GOLDDE 0x00492c30 */
 int __cdecl amt_GetDesireByName(char* name)
 {
 	char buf[0x80];

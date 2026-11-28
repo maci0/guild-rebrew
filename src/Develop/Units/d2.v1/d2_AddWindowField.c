@@ -25,6 +25,7 @@ int __cdecl d2_CreateField(int x, int y, int a3, int a4);
 void __cdecl d2_InsertControlAfterWindow(int slot, D2_WIN* parent);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00466ee0 */
+/* ADDRESS: GOLDDE 0x0045aa60 */
 int __cdecl d2_AddWindowField(int x, int y, int def, int flags, int win)
 {
 	D2_WIN* w;

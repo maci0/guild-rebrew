@@ -78,6 +78,7 @@ char __cdecl gm_GetRangeStatId(int, int);
 void __cdecl cm_SendCopyEntityData(struct msg*);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x005bce80 */
 int __cdecl d2_ShowChooseProfessionDialog2(Ent* e, Req* p)
 {
 	int colw;

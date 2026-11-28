@@ -13,6 +13,7 @@ int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_ShowKircheTop5(void);
 void __cdecl d2_RunAblassDialog(int, int);
 
+/* ADDRESS: GOLDDE 0x00591930 */
 void __cdecl d2_RunKircheAltarMenu(int building, int msg)
 {
 	int x;

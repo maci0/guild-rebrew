@@ -5,6 +5,7 @@ int __cdecl ls_ReadVfsDataChecked(void *, int, int, void *);
 extern int ls_SaveVersion;
 
 /* ADDRESS: GOLDTL 0x00524b50 */
+/* ADDRESS: GOLDDE 0x0050de20 */
 int __cdecl ls_LoadActionsAndEvents(unsigned char *S)
 {
     unsigned char *rec, *p;

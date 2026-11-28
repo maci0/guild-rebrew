@@ -6,6 +6,7 @@ extern char* evt_CurrentScript;
 char* __cdecl ch_QueueStandUpAnimation(char* e, int v);
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
+/* ADDRESS: GOLDDE 0x0040c640 */
 int __cdecl GetUp(char** a, int* v)
 {
 	if (evt_WaitingScriptTask != 0 && *(void**) (evt_WaitingScriptTask + 0x44) == (void*) GetUp) {

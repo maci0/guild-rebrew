@@ -8,6 +8,7 @@ char* __cdecl d3_LoadAnimStream(char* path, char* name, char loop);
 void __cdecl d3_RemoveObjectAnimation(char* a, char* b);
 
 /* ADDRESS: GOLDTL 0x0040eed0 */
+/* ADDRESS: GOLDDE 0x0040dcd0 */
 int __cdecl PreloadAnim(char*** arg1, char** arg2)
 {
 	D3_ANIMATION_OPTIONS opt;

@@ -6,6 +6,7 @@ int d2_ScrollPergaBottomElem = 0xffffffff;
 
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x0051de50 */
 void __cdecl d2_DestroyScrollPerga(void)
 {
 	if (d2_ScrollPergaForm != -1) {

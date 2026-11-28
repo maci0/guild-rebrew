@@ -4,6 +4,7 @@
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl cm_RequestPlayAnimation(int, char*, int);
 
+/* ADDRESS: GOLDDE 0x0053fd20 */
 void __cdecl ch_PlayRandomGesture(char* o)
 {
 	switch (gm_RandomMod(4)) {

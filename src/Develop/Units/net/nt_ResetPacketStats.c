@@ -5,6 +5,7 @@
 
 #pragma intrinsic(memcpy, memset)
 
+/* ADDRESS: GOLDDE 0x0041dad0 */
 void __cdecl nt_ResetPacketStats(void)
 {
 	memset(nt_PacketStats, 0, sizeof(nt_PacketStats));

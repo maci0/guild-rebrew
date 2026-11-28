@@ -11,6 +11,7 @@ float __cdecl d3_SignedPlanarAngle(float* a, float* b);
 void __cdecl d3_SetObjectRotation(char* h, float* v);
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
+/* ADDRESS: GOLDDE 0x0040cc40 */
 int __cdecl SetCharacterToDummy(char** a, char** b)
 {
 	float v[3];

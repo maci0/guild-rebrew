@@ -1,3 +1,4 @@
+extern char g_14ce724[];
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
@@ -133,6 +134,7 @@ char g_log_default_name[12] = {
  * would resolve to those copies instead of the ones this code targets. */
 #if defined(REBREW_SERVER)
 /* ADDRESS: SERVER 0x10002640 */
+/* ADDRESS: SERVERDE 0x10002620 */
 void __cdecl DispatchLogOutput(const char* msg, int flags, int level)
 {
 	char buf[260];
@@ -141,12 +143,10 @@ void __cdecl DispatchLogOutput(const char* msg, int flags, int level)
 	int idx;
 
 	if (flags & 1) {
-		idx = 0;
-		while (idx < 3) {
+		for (idx = 0; idx < 3; idx++) {
 			if (level == g_log_level_table[idx]) {
 				goto found;
 			}
-			idx++;
 		}
 		goto fallback;
 
@@ -184,6 +184,7 @@ void __cdecl DispatchLogOutput(const char* msg, int flags, int level)
 #else
 /* ADDRESS: GOLD 0x004214a0 */
 /* ADDRESS: GOLDTL 0x0041caa0 */
+/* ADDRESS: GOLDDE 0x0041a740 */
 void __cdecl DispatchLogOutput(const char* msg, int flags_arg, int level)
 {
 	char buf[260];
@@ -418,6 +419,7 @@ unsigned char _dpad_677acc[1824] = {
  * fold are in msvc6-allocator.md Finding 73. */
 #if defined(REBREW_SERVER)
 /* ADDRESS: SERVER 0x10002770 */
+/* ADDRESS: SERVERDE 0x10002740 */
 int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPointers)
 {
 	unsigned int nBytesWritten;
@@ -728,6 +730,7 @@ done_walk:
 /* Client build has no LogMessageInternal error arms, so every failure path
  * shares the single VirtualFree(pDbgBuf) and CloseHandle(hDbgFile) tail. */
 /* ADDRESS: GOLDTL 0x0041cbc0 */
+/* ADDRESS: GOLDDE 0x0041a860 */
 int __stdcall CrashDumpClientUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPointers)
 {
 	unsigned int nBytesWritten;
@@ -1024,6 +1027,8 @@ done_walk:
 /* ADDRESS: SERVER 0x10002fc0 */
 /* ADDRESS: GOLD 0x00421d50 */
 /* ADDRESS: GOLDTL 0x0041d350 */
+/* ADDRESS: GOLDDE 0x0041aff0 */
+/* ADDRESS: SERVERDE 0x10002ed0 */
 unsigned char __cdecl EmitCrashModuleLine(int* st)
 {
 	int* mod;
@@ -1113,6 +1118,8 @@ found:
 /* ADDRESS: SERVER 0x10003140 */
 /* ADDRESS: GOLD 0x00421ed0 */
 /* ADDRESS: GOLDTL 0x0041d4d0 */
+/* ADDRESS: GOLDDE 0x0041b170 */
+/* ADDRESS: SERVERDE 0x10003050 */
 char* __cdecl GetDebugRecordByIndex(char* arg1, unsigned int arg2)
 {
 	char* result;
@@ -1136,6 +1143,8 @@ char* __cdecl GetDebugRecordByIndex(char* arg1, unsigned int arg2)
 /* ADDRESS: SERVER 0x10003170 */
 /* ADDRESS: GOLD 0x00421f00 */
 /* ADDRESS: GOLDTL 0x0041d500 */
+/* ADDRESS: GOLDDE 0x0041b1a0 */
+/* ADDRESS: SERVERDE 0x10003080 */
 char __cdecl check_memory_protection(unsigned int protect)
 {
 	MEMORY_BASIC_INFORMATION mbi;
@@ -1162,6 +1171,8 @@ char __cdecl check_memory_protection(unsigned int protect)
 /* ADDRESS: SERVER 0x10003260 */
 /* ADDRESS: GOLD 0x00421ff0 */
 /* ADDRESS: GOLDTL 0x0041d5f0 */
+/* ADDRESS: GOLDDE 0x0041b290 */
+/* ADDRESS: SERVERDE 0x10003170 */
 char __cdecl AnalyzeInstruction(int arg1, int arg2, int arg3, int* arg4)
 {
 	*arg4 = 0;
@@ -1184,6 +1195,7 @@ char __cdecl AnalyzeInstruction(int arg1, int arg2, int arg3, int* arg4)
 
 #if defined(REBREW_SERVER)
 /* ADDRESS: SERVER 0x10003320 */
+/* ADDRESS: SERVERDE 0x10003230 */
 void __cdecl InitializeLogAndErrorHandler(int a, int b, unsigned int c, unsigned int d)
 {
 	int now;
@@ -1233,6 +1245,7 @@ void __cdecl InitializeLogAndErrorHandler(int a, int b, unsigned int c, unsigned
 #else
 /* ADDRESS: GOLD 0x004220b0 */
 /* ADDRESS: GOLDTL 0x0041d6b0 */
+/* ADDRESS: GOLDDE 0x0041b350 */
 void __cdecl InitializeLogAndErrorHandler(int a, int b, unsigned int c, unsigned int d)
 {
 	int now;
@@ -1285,6 +1298,7 @@ void __cdecl InitializeLogAndErrorHandler(int a, int b, unsigned int c, unsigned
 
 #if defined(REBREW_SERVER)
 /* ADDRESS: SERVER 0x100034c0 */
+/* ADDRESS: SERVERDE 0x100033d0 */
 void __cdecl ShutdownLogAndErrorHandler(void)
 {
 	int i;
@@ -1302,20 +1316,21 @@ void __cdecl ShutdownLogAndErrorHandler(void)
 }
 #elif !defined(REBREW_GOLD)
 /* ADDRESS: GOLDTL 0x0041d850 */
+/* ADDRESS: GOLDDE 0x0041b4f0 */
 void __cdecl ShutdownClientLogAndErrorHandler(void)
 {
 	int a;
 
-	for (a = 0x677918; a < 0x677948; a += 4) {
-		DispatchLogOutput((char*) 0x677d18, *(int*) 0x6b6f50, *(int*) a);
+	for (a = (int) &g_677918; a < ((int) &g_677918 + 0x30); a += 4) {
+		DispatchLogOutput("Error-Handler closed.\n", *(int*) &g_6b6f50, *(int*) a);
 	}
-	if (*(unsigned char*) 0x6b6f50 & 8) {
-		((void (__stdcall*)(void)) *(void**) 0x662060)();
-		*(int*) 0x14ce724 = 0;
+	if (*(unsigned char*) &g_6b6f50 & 8) {
+		FreeConsole();
+		*(int*) &g_14ce724 = 0;
 	}
-	*(int*) 0x6b6f48 = 0;
-	*(int*) 0x14ce600 = 0;
-	*(int*) 0x6b6f50 = 0;
+	*(int*) &g_6b6f48 = 0;
+	*(int*) &g_14ce600 = 0;
+	*(int*) &g_6b6f50 = 0;
 }
 #endif
 
@@ -1386,6 +1401,7 @@ void __cdecl ReportError(char* modulePath, unsigned int lineNumber, char* messag
  * Dispatches to DispatchLogOutput with default severity. */
 
 /* ADDRESS: SERVER 0x100035c0 */
+/* ADDRESS: SERVERDE 0x10003430 */
 void __cdecl ReportMessage(char* msg)
 {
 	if (!g_panic_callback) {
@@ -1406,6 +1422,7 @@ void __cdecl ReportMessage(char* msg)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLD 0x004222b0 */
 /* ADDRESS: GOLDTL 0x0041d9e0 */
+/* ADDRESS: GOLDDE 0x0041b550 */
 void __cdecl ReportClientMessage(const char* msg)
 {
 	if (g_6b6f48 == 0) {
@@ -1429,9 +1446,11 @@ void __cdecl ReportClientMessage(const char* msg)
  * with source module path, line number, message text, and
  * severity level (1=error, 8=info, etc.). */
 
+#if !defined(REBREW_SERVERDE) /* the German server has no LogMessageInternal (serverde_build.h) */
 /* ADDRESS: SERVER 0x10003640 */
 /* ADDRESS: GOLD 0x00422330 */
 /* ADDRESS: GOLDTL 0x0041da60 */
+/* ADDRESS: GOLDDE 0x0041b5d0 */
 void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int severity)
 {
 	unsigned char flags;
@@ -1450,6 +1469,7 @@ void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int 
 		DispatchLogOutput((char*) &g_log_message_buffer, *(int*) &g_log_mode_flags, severity);
 	}
 }
+#endif
 
 /* Writes a message to the log outputs as it is, without a source location.
  * Client-only code (TL 0x41daf0, unreferenced there and absent from
@@ -1471,7 +1491,7 @@ void __cdecl LogMessage(char* msg)
 void __cdecl LogClientMessage(int msg)
 {
 	if (*(int*) 0x6b6f48 == 0) {
-		MessageBoxA(0, (char*) 0x677d68, (char*) 0x677d90, 0x10030);
+		MessageBoxA(0, "ERROR-Handler has not been started...", "Error!", 0x10030);
 		return;
 	}
 	if (*(int*) 0x6b6f50 & 1) {

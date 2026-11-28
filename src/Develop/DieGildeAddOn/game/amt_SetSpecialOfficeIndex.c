@@ -8,6 +8,7 @@ void __cdecl amt_SetSpecialOfficeIndex(int value)
 }
 #else
 /* ADDRESS: GOLDTL 0x004ad2d0 */
+/* ADDRESS: GOLDDE 0x0049b610 */
 void __cdecl amt_SetSpecialOfficeIndex(int index)
 {
 	*(int*) 0x7728d0 = index;

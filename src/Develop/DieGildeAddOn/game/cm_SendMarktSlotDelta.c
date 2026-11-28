@@ -40,6 +40,7 @@ typedef struct {
 slot80* __cdecl gm_FindSlotById(int, int);
 int __cdecl cm_EnqueueClientPacket(msg9c*);
 
+/* ADDRESS: GOLDDE 0x004b3a90 */
 int __cdecl cm_SendMarktSlotDelta(slot80* e, unsigned char kind)
 {
 	slot80 l;

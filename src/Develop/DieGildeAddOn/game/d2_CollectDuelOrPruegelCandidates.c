@@ -5,6 +5,7 @@ void __cdecl d2_BuildPersonStatusDesc(int *out);
 int __cdecl gm_MatchesTargetFilter(unsigned short a, unsigned short b, int c, int d);
 
 /* ADDRESS: GOLDTL 0x005cbe00 */
+/* ADDRESS: GOLDDE 0x005ad890 */
 int __cdecl d2_CollectDuelOrPruegelCandidates(int *src, unsigned limit, int *out, int filterKind)
 {
 	int *rec;

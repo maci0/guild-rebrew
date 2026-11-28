@@ -39,6 +39,7 @@ int __cdecl d2_CreateChildWindow(int, int, int, int, int, int);
 void* __cdecl gm_SearchTable67(int);
 int __cdecl io_AppendText(int, ...);
 
+/* ADDRESS: GOLDDE 0x005ab170 */
 void __cdecl d2_PopulateKreditCards(unsigned short* who, int max, Row* rows, int dlg, int n)
 {
 	char* list[9];

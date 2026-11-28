@@ -16,6 +16,7 @@ typedef struct {
 
 unsigned char* __cdecl hp_LookupProdEntry(int);
 
+/* ADDRESS: GOLDDE 0x00596380 */
 void __cdecl hp_UpdateProdSetting(int building, Owner* setting)
 {
 	unsigned char* prod_entry;

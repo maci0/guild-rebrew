@@ -7,6 +7,7 @@ int __cdecl fcn_0064d41a(char*, const char*, ...);
 void __cdecl d2_DrawWordWrappedText(int, int, int, int, int, char*, int);
 
 /* ADDRESS: GOLDTL 0x004da1b0 */
+/* ADDRESS: GOLDDE 0x004c6ea0 */
 void __cdecl d2_DrawElapsedTimer(void)
 {
 	char buf[0x80];

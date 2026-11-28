@@ -28,6 +28,7 @@ int __cdecl evt_CallScriptFunction(char*, int, ...);
 void __cdecl init_GetGebaeudeSceneName(int, char*);
 
 /* ADDRESS: GOLDTL 0x00530c60 */
+/* ADDRESS: GOLDDE 0x005195e0 */
 void __cdecl d3_UpdateBuildingSceneScripts(unsigned char* building)
 {
 	int mode;

@@ -3,6 +3,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b3180 */
 void __cdecl cm_RequestKillSpieler(int entityId, int flag)
 {
 	char buf[0x9c];

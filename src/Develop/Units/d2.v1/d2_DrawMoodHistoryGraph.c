@@ -19,6 +19,7 @@ extern float g_6640cc;
 
 void __cdecl d2_DrawLine(int, int, int, int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x005b50e0 */
 void __cdecl d2_DrawMoodHistoryGraph(MOOD_GRAPH_VALUES s, int w, int h)
 {
 	int step;

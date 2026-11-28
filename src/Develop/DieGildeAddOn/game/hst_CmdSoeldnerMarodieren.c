@@ -15,6 +15,7 @@ extern char gm_EntityIdField[];
 int __cdecl gm_IsSlotLivingPerson(int);
 void __cdecl cm_SendCopyEntityData(void*);
 
+/* ADDRESS: GOLDDE 0x0049fb40 */
 int __cdecl hst_CmdSoeldnerMarodieren(void)
 {
 	GAME_TIMESTAMP st;

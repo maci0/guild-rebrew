@@ -20,6 +20,7 @@ void __cdecl d2_RunTaufeDialog(char*, int);
 void __cdecl d2_OpenBeichteDialog(char*);
 void __cdecl d2_RunKircheSpendenDialog(char*);
 
+/* ADDRESS: GOLDDE 0x00591790 */
 void __cdecl d2_RunKircheMenu(char* e, int msg)
 {
 	int predigt;

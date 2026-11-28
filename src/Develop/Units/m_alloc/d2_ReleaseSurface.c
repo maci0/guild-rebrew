@@ -22,6 +22,7 @@ void __cdecl m_FreeTracked(void*);
 
 
 /* ADDRESS: GOLDTL 0x00475f80 */
+/* ADDRESS: GOLDDE 0x00468330 */
 int __cdecl d2_ReleaseSurface(D2_SURFACE_REC* o)
 {
 	if (o == 0)

@@ -58,6 +58,7 @@ void __cdecl d2_RunWechselGebuehrenDialog(char*);
 void __cdecl d2_ShowMoneyExchangeDialog(char*);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005a6880 */
+/* ADDRESS: GOLDDE 0x0058b590 */
 void __cdecl d2_RunGeldleiheWechselDialog(char* obj)
 {
 	ListRow list1[16];

@@ -12,6 +12,7 @@ int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_OpenMeisterbriefDialog(int);
 void __cdecl d2_ShowPersonalbuch(int, char*);
 
+/* ADDRESS: GOLDDE 0x005803d0 */
 void __cdecl d2_RunWorkshopBookHud(int a)
 {
 	int x;

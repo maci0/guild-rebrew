@@ -23,6 +23,7 @@ void __cdecl m_FreeTracked(int);
 
 
 /* ADDRESS: GOLDTL 0x004437a0 */
+/* ADDRESS: GOLDDE 0x0043bbf0 */
 char __cdecl d3_DisposeSceneContext(int idx)
 {
 	int prev;

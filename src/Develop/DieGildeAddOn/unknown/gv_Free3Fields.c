@@ -8,6 +8,7 @@ extern void __cdecl m_FreeTracked(void* ptr);
 /* Frees a 3-field slot: releases the two tracked pointers at
  * +0x24 and +0x28 (if set), then the slot itself. */
 
+/* ADDRESS: GOLDDE 0x00450850 */
 void __cdecl gv_Free3Fields(int* slot)
 {
 	if (slot == 0)

@@ -24,6 +24,7 @@ typedef struct {
 int __cdecl cm_EnqueueClientPacket(msg9c*);
 char* __cdecl fcn_0064d530(char*, char*, int);
 
+/* ADDRESS: GOLDDE 0x004bba40 */
 int __cdecl cm_SendChatMessage(int channel, char* text)
 {
 	info48 info;

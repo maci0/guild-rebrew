@@ -6,6 +6,7 @@ extern double g_665de0;
 
 double __cdecl gm_RandomFloat01(void);
 
+/* ADDRESS: GOLDDE 0x00513b20 */
 char __cdecl d3_ToggleSceneObjFlag(char* e, int flag)
 {
 	float v;

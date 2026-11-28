@@ -9,6 +9,7 @@ typedef struct
 } SCHEDULER_STATE_CMD;
 // SIZE 0x28
 
+/* ADDRESS: GOLDDE 0x004b4200 */
 void __cdecl cm_SendRandomEventState(SCHEDULER_STATE_CMD* body)
 {
 	char buf[0x9c];

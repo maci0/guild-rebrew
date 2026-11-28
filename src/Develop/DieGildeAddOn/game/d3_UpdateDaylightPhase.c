@@ -53,6 +53,7 @@ void __cdecl d3_BlendSceneLightingPreset(int idx, float frac, float w, int chang
 /* Day-light phase from the clock. v is reused for the truncated phase so it
  * shares the dead parameter slot, and the 0.2 test is written !(d > 0.2)
  * for the reference's `and eax, 0x4100` form. */
+/* ADDRESS: GOLDDE 0x00513b70 */
 void __cdecl d3_UpdateDaylightPhase(Stamp* now)
 {
 	int s;

@@ -27,6 +27,7 @@ int __cdecl ahm_FindRecipeSlot(int p, int id);
 
 /* ADDRESS: GOLD 0x004ead20 */
 /* ADDRESS: GOLDTL 0x004ecaa0 */
+/* ADDRESS: GOLDDE 0x004d8ef0 */
 void __cdecl ahm_ResetAlchemyState(int reseed)
 {
 	if (reseed) {
@@ -45,6 +46,7 @@ void __cdecl ahm_ResetAlchemyState(int reseed)
 
 /* ADDRESS: GOLD 0x004eadc0 */
 /* ADDRESS: GOLDTL 0x004ecb40 */
+/* ADDRESS: GOLDDE 0x004d8f90 */
 void __cdecl ahm_ShufflePlayerPrototypes(void)
 {
 	int n;
@@ -67,6 +69,7 @@ void __cdecl ahm_ShufflePlayerPrototypes(void)
 
 /* ADDRESS: GOLD 0x004eaea0 */
 /* ADDRESS: GOLDTL 0x004ecc20 */
+/* ADDRESS: GOLDDE 0x004d9070 */
 ALCHEMY_RECIPE_PROTOTYPE* __cdecl ahm_PickRandomUnknownRecipe(int player)
 {
 	int step;

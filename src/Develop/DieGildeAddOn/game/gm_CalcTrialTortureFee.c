@@ -9,6 +9,7 @@ int __cdecl gm_AmountToUnits(int a, unsigned char b);
 
 /* ADDRESS: GOLD 0x494820 */
 /* ADDRESS: GOLDTL 0x00493e50 */
+/* ADDRESS: GOLDDE 0x00482ca0 */
 int __cdecl gm_CalcTrialTortureFee(unsigned short* accuser, unsigned short* accused)
 {
 	int x;

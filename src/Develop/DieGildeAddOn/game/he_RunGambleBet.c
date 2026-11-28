@@ -9,6 +9,7 @@ void __cdecl cm_RequestMoveCredits(int a1, int a2, char a3, int a4);
 int __cdecl he_FreeAction(char* entity);
 
 /* ADDRESS: GOLDTL 0x00550be0 */
+/* ADDRESS: GOLDDE 0x00537010 */
 void __cdecl he_RunGambleBet(char* entity)
 {
 	char buf[0x418];

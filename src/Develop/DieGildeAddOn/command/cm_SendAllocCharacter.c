@@ -5,6 +5,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b3d70 */
 void __cdecl cm_SendAllocCharacter(char entityType, int buildingId, int targetRecordId, char gender, char variant, char itemId, char* name)
 {
 	char buf[0x9c];

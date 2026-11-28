@@ -19,6 +19,7 @@ int __cdecl d2_ShowPrivilegMessage(void*, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004f7e70 */
+/* ADDRESS: GOLDDE 0x004e3c50 */
 int __cdecl gm_HandleOfficeIncomePrivilege(unsigned char* entity, int* context)
 {
 	Info info;

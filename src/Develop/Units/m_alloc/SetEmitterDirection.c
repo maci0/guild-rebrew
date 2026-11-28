@@ -4,6 +4,7 @@ extern char* evt_CurrentScript;
 #include "Develop/Units/m_alloc/m_alloc_checks.h"
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
+/* ADDRESS: GOLDDE 0x0040ef60 */
 int __cdecl SetEmitterDirection(char** a, int* x, int* y, int* z)
 {
 	char* e;

@@ -9,6 +9,7 @@ extern char cm_AttributePacketData[];
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b2d20 */
 void __cdecl cm_RequestChangeAttribute(void)
 {
 	char buf[0x9c];

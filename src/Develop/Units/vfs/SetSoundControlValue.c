@@ -18,6 +18,7 @@ int __cdecl vfs_FlushAndClose(int);
 /* Stores a sound-object control value, resetting the object for a nonzero value.
  * The vfs file location is a legacy reconstruction label. */
 
+/* ADDRESS: GOLDDE 0x004170d0 */
 void __cdecl SetSoundControlValue(int stream, unsigned int value)
 {
 	if (value != 0)

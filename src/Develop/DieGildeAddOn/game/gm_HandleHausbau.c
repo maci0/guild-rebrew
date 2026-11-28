@@ -60,6 +60,7 @@ int __cdecl fcn_0064d41a(char*, char*, ...);
 double __cdecl sqrt(double);
 
 /* ADDRESS: GOLDTL 0x005744c0 */
+/* ADDRESS: GOLDDE 0x0055a440 */
 void __cdecl gm_HandleHausbau(int a0)
 {
 	int buildAction;

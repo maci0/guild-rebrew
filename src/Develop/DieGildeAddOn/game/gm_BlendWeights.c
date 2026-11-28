@@ -3,6 +3,7 @@ extern float g_6628d8;
 extern float g_6628cc;
 
 /* ADDRESS: GOLDTL 0x00507ed0 */
+/* ADDRESS: GOLDDE 0x004f3050 */
 float __cdecl gm_BlendWeights(float a, float b)
 {
 	return (((a - b * b) * 0.6f + 0.4f)

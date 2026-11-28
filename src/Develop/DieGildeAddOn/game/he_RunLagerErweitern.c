@@ -19,6 +19,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 
 /* ADDRESS: GOLDTL 0x0055ffe0 */
+/* ADDRESS: GOLDDE 0x005461b0 */
 void __cdecl he_RunLagerErweitern(char* action)
 {
 	char* q;

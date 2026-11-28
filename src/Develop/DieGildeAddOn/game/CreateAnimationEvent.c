@@ -6,6 +6,7 @@
 void* __cdecl ch_NewAction(char*);
 void __cdecl ch_RunAnimationEvent(char*);
 
+/* ADDRESS: GOLDDE 0x004056b0 */
 char* __cdecl CreateAnimationEvent(char* owner, char* name)
 {
 	unsigned char* obj;

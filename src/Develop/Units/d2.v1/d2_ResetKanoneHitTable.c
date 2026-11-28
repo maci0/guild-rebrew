@@ -18,6 +18,7 @@ typedef struct {
 } KANONE_HIT_GROUP;
 // SIZE 0x38
 
+/* ADDRESS: GOLDDE 0x0056f050 */
 void __cdecl d2_ResetKanoneHitTable(void)
 {
 	KANONE_HIT_GROUP* base;

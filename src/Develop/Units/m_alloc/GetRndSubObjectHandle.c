@@ -16,6 +16,7 @@ extern int d3_ActiveScene;
 void __cdecl d3_VisitSceneObjects(int a, int b, int c, void (__cdecl* cb)(void), Query* q);
 void __cdecl d3_CollectMatchingSubObjects(void);
 
+/* ADDRESS: GOLDDE 0x0040d4e0 */
 int __cdecl GetRndSubObjectHandle(int* a, char** name)
 {
 	Query q;

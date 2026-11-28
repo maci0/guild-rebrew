@@ -8,6 +8,7 @@ char* __cdecl ch_AttachAni(char* e, char* name, int flag);
 int __cdecl ch_FinishAnimation(CH_ACTION* t);
 
 
+/* ADDRESS: GOLDDE 0x00405760 */
 void __cdecl ch_RunStandUpAnimation(CH_ACTION* t)
 {
 	char* e;

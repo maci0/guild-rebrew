@@ -975,6 +975,8 @@ void __cdecl gm_GetGameTime(struct blk14* out)
 	*out = *(struct blk14*) &g_current_year;
 }
 
+/* ADDRESS: GOLDDE 0x004ec9c0 */
+/* ADDRESS: SERVERDE 0x10014570 */
 void __cdecl gm_ResetAllEntities(void)
 {
 	int i;
@@ -995,6 +997,8 @@ void __cdecl gm_ResetAllEntities(void)
 	}
 }
 
+/* ADDRESS: GOLDDE 0x004eca00 */
+/* ADDRESS: SERVERDE 0x100145b0 */
 void __cdecl gm_CleanupObjectEntities(void)
 {
 	int i;
@@ -1032,6 +1036,8 @@ void __cdecl gm_CleanupObjectEntities(void)
  * pointer or NULL. */
 
 
+/* ADDRESS: GOLDDE 0x004ecb50 */
+/* ADDRESS: SERVERDE 0x10014680 */
 Record* __cdecl gm_FindRecordById(int id)
 {
 	int i;
@@ -1053,6 +1059,8 @@ Record* __cdecl gm_FindRecordById(int id)
  * linked item chains from all active entities. */
 
 
+/* ADDRESS: GOLDDE 0x004ecb90 */
+/* ADDRESS: SERVERDE 0x100146c0 */
 void __cdecl gm_CleanupAllEntities(void)
 {
 	int ent;
@@ -1085,6 +1093,8 @@ void __cdecl gm_CleanupAllEntities(void)
  * entities including buildings, citizens, and objects. */
 
 
+/* ADDRESS: GOLDDE 0x004ecc20 */
+/* ADDRESS: SERVERDE 0x10014750 */
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id)
 {
 	EntityQueryRecord* query_cursor;
@@ -1152,6 +1162,7 @@ int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_
  * The previous body spelled the walks as cursors and sat at 25 linked
  * bytes of ebx/edi role swap. */
 
+/* ADDRESS: SERVERDE 0x10014830 */
 void __cdecl gm_ObjectsAvailble(int season)
 {
 	unsigned int ids[8];
@@ -1464,6 +1475,7 @@ float __cdecl gm_GetObjektPrice(int season, int id)
 
 
 #if defined(REBREW_SERVER)
+/* ADDRESS: SERVERDE 0x10014af0 */
 char* __cdecl gm_FindSlotById(int arg1, int arg2)
 {
 	int i;
@@ -1480,6 +1492,7 @@ char* __cdecl gm_FindSlotById(int arg1, int arg2)
 #include "season_slots.h"
 
 /* ADDRESS: GOLDTL 0x005027d0 */
+/* ADDRESS: GOLDDE 0x004ede10 */
 char* __cdecl gm_FindSlotById(int arg1, int arg2)
 {
 	int i;
@@ -1514,6 +1527,8 @@ double __cdecl gm_GetTileDistance(int x1, int y1, int x2, int y2)
 /* ADDRESS: SERVER 0x10016290 */
 /* ADDRESS: GOLDTL 0x00502850 */
 /* ADDRESS: GOLD 0x004ffcc0 */
+/* ADDRESS: GOLDDE 0x004ede90 */
+/* ADDRESS: SERVERDE 0x10014b40 */
 void* __cdecl gm_NextEntityQueryMatch(void)
 {
     unsigned short* current;
@@ -1771,6 +1786,7 @@ next:
  * (byte), 5 = flag3, 6 = flag2, 7 = flag1. When flag1 is set the cursor
  * starts at the global query base; otherwise the container id is used.
  * Returns the first match, or NULL when no container id was given. */
+/* ADDRESS: SERVERDE 0x10014d10 */
 unsigned short* __cdecl gm_ff_Objekt(int container_id, int arg_count, int first_arg, ...)
 {
 	int* arg_ptr;
@@ -1857,6 +1873,8 @@ query_tail:
 }
 /* ADDRESS: GOLDTL 0x00502e00 */
 /* ADDRESS: GOLD 0x004fffc0 */
+/* ADDRESS: GOLDDE 0x004ee190 */
+/* ADDRESS: SERVERDE 0x10014e40 */
 char* __cdecl gm_AllocateObjectSlot(void)
 {
 	char* node;
@@ -1879,6 +1897,7 @@ char* __cdecl gm_AllocateObjectSlot(void)
 /* Removes the first node whose type id equals b from the list headed by *a.
  * Returns 0 on success, -1 if the list is empty, -2 if the id is not found.
  * Also decrements the global query limit counter. */
+/* ADDRESS: GOLDDE 0x004ee1c0 */
 int __cdecl gm_RemoveObjectByType(int a, int b)
 {
 	LinkedNode** head;
@@ -1915,6 +1934,8 @@ int __cdecl gm_RemoveObjectByType(int a, int b)
 	return 0;
 }
 
+/* ADDRESS: GOLDDE 0x004ee250 */
+/* ADDRESS: SERVERDE 0x10014f00 */
 void __cdecl gm_ClearObjektResources(LinkedNode* node)
 {
 #ifndef REBREW_SERVER
@@ -1925,6 +1946,8 @@ void __cdecl gm_ClearObjektResources(LinkedNode* node)
 #endif
 }
 /* Removes an id, decrements the query count; returns -1 for empty, -2 for missing. */
+/* ADDRESS: GOLDDE 0x004ee290 */
+/* ADDRESS: SERVERDE 0x10014f10 */
 int __cdecl gm_RemoveLinkedNodeById(int a, int b, int c)
 {
 	LinkedNode** head;
@@ -1959,6 +1982,8 @@ int __cdecl gm_RemoveLinkedNodeById(int a, int b, int c)
 	return 0;
 }
 
+/* ADDRESS: GOLDDE 0x004ee310 */
+/* ADDRESS: SERVERDE 0x10014f90 */
 int __cdecl gm_FreeObjectListRecursive(LinkedNode** head)
 {
 	LinkedNode* node;
@@ -1997,6 +2022,8 @@ void __cdecl ch_SetVisible(char*, int);
 #endif
 
 /* ADDRESS: GOLDTL 0x00502fe0 */
+/* ADDRESS: GOLDDE 0x004ee360 */
+/* ADDRESS: SERVERDE 0x10014fe0 */
 char* __cdecl gm_AllocObjekt(int parent_id, int type, int param3)
 {
 	void* dynamic;
@@ -2280,6 +2307,7 @@ char* __cdecl gm_AllocObjekt(int parent_id, int type, int param3)
  * created). */
 
 #if defined(REBREW_SERVER)
+/* ADDRESS: SERVERDE 0x100154f0 */
 int __cdecl gm_AddObjekt(int a, int b, int c)
 {
 	char* list_head;
@@ -2316,6 +2344,7 @@ void* __cdecl gm_QueryEntities(int list, int a, int b, int c);
 
 /* ADDRESS: GOLDTL 0x005037c0 */
 /* ADDRESS: GOLD 0x00500970 */
+/* ADDRESS: GOLDDE 0x004eeb40 */
 int __cdecl gm_AddObjekt(int a, int b, int c)
 {
 	char* list_head;
@@ -2355,30 +2384,32 @@ int __cdecl gm_AddObjekt(int a, int b, int c)
  * removed from the list.  Returns 1 on success, 0 on failure. */
 
 
+/* ADDRESS: SERVERDE 0x100155c0 */
 int __cdecl gm_SubObjekt(int a, int b, int c)
 {
 	char* list_head;
 	void* dyn;
+	void* exi;
 	void* sta;
 
-	if (!gm_ResolveEntityById(&dyn, (void**) &a, &sta, a)) {
+	if (!gm_ResolveEntityById(&dyn, &exi, &sta, a)) {
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0xe2d,
 		                   "gm_SubObjekt(): Parent not found", 1);
 		return 0;
 	}
 	if (dyn != 0) list_head = (char*) dyn + 0x5d;
-	else if (a != 0) list_head = (char*) a + 0x14;
+	else if (exi != 0) list_head = (char*) exi + 0x14;
 	else if (sta != 0) list_head = (char*) sta + 0x178;
 	else return 0;
-	a = (int) gm_ff_Objekt(*(int*) list_head, 1, 0, b);
-	if (a == 0) {
+	exi = (void*) gm_ff_Objekt(*(int*) list_head, 1, 0, b);
+	if (exi == 0) {
 		return 0;
 	}
-	if (*(int*) (a + 0xe) < c) {
+	if (*(int*) ((char*) exi + 0xe) < c) {
 		return 0;
 	}
-	*(int*) (a + 0xe) -= c;
-	if (*(int*) (a + 0xe) <= 0) {
+	*(int*) ((char*) exi + 0xe) -= c;
+	if (*(int*) ((char*) exi + 0xe) <= 0) {
 		gm_RemoveObjectByType(list_head, b);
 	}
 	return 1;
@@ -2395,6 +2426,8 @@ int __cdecl gm_SubObjekt(int a, int b, int c)
  * not an early `return 1` on the non-zero path. */
 
 
+/* ADDRESS: GOLDDE 0x004eecb0 */
+/* ADDRESS: SERVERDE 0x10015660 */
 int __cdecl gm_SubObjectNoKill(int a, int b, int c)
 {
 	char* list_head;
@@ -2453,6 +2486,7 @@ char* __cdecl gm_FindTavernServing(int item)
 	return 0;
 }
 
+/* ADDRESS: GOLDDE 0x004ef1d0 */
 void* __cdecl gm_FindKind47ByOwner(int owner)
 {
 	void* entry;
@@ -2497,6 +2531,8 @@ void* __cdecl gm_FindKind47ByOwner(int owner)
 
 
 
+/* ADDRESS: GOLDDE 0x004ef200 */
+/* ADDRESS: SERVERDE 0x10015710 */
 void* __cdecl gm_FindNextFilteredEntity(void)
 {
 	unsigned char* list_head;
@@ -2597,6 +2633,8 @@ void* __cdecl gm_FindNextFilteredEntity(void)
  * Type 0 = extra5 (byte), 1 = extra1 (int), 2 = dynasty string copy,
  * 3 = extra2 (short), 4 = extra3 (short), 5 = extra4 (byte), 6 = field_48.
  * Returns the first filtered entity. */
+/* ADDRESS: GOLDDE 0x004ef360 */
+/* ADDRESS: SERVERDE 0x10015870 */
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int arg_count, ...)
 {
 	int* arg_ptr;
@@ -2661,6 +2699,8 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int arg_count, ...)
 	g_query_filter_base = g_entity_ptr;
 	return (unsigned short*) gm_FindNextFilteredEntity();
 }
+/* ADDRESS: GOLDDE 0x004ef480 */
+/* ADDRESS: SERVERDE 0x10015990 */
 char* __cdecl gm_SearchStruct(void)
 {
 	EntityQueryRecord* entity_cursor;
@@ -2687,6 +2727,7 @@ char* __cdecl gm_SearchStruct(void)
 
 /* g_entity_records: base of entity array, stride 0x21c (0x87 dwords), 768 entries */
 
+/* ADDRESS: SERVERDE 0x100159c0 */
 int __cdecl gm_CleanupBuildingEntity(unsigned char* building)
 {
 	int* entity_scan;
@@ -2788,6 +2829,8 @@ void __cdecl gm_AllocBuildingDefaults(unsigned char* building)
  * upgrade level. Reads from the building type table. */
 
 
+/* ADDRESS: GOLDDE 0x004ef680 */
+/* ADDRESS: SERVERDE 0x10015b60 */
 void __cdecl gm_SetBuildingWorkerLimits(unsigned char* building)
 {
 	unsigned char* entry;
@@ -3117,6 +3160,8 @@ void* __cdecl gm_FindBuildingStore(unsigned char* building)
 	return found;
 }
 
+/* ADDRESS: GOLDDE 0x004efeb0 */
+/* ADDRESS: SERVERDE 0x10016040 */
 unsigned short* __cdecl gm_SetupEntityQuery(unsigned char* entity)
 {
 	char* type_entry;
@@ -3144,6 +3189,8 @@ unsigned short* __cdecl gm_SetupEntityQuery(unsigned char* entity)
 
 
 
+/* ADDRESS: GOLDDE 0x004eff50 */
+/* ADDRESS: SERVERDE 0x100160e0 */
 int __cdecl gm_GetBuildingTypeCategory(int arg1)
 {
 	switch (*(unsigned char*) (g_entity_type_table + arg1 * 0x24d)) {
@@ -3231,6 +3278,8 @@ unsigned char* __cdecl gm_FindNearestOfKind(unsigned char* self, int kind)
  * entry. Used for specialized entity lookups. */
 
 
+/* ADDRESS: GOLDDE 0x004f01f0 */
+/* ADDRESS: SERVERDE 0x100161a0 */
 void* __cdecl gm_SearchTable67(int id)
 {
 	char* query_cursor;
@@ -3293,6 +3342,8 @@ int __cdecl gm_IsWarehouse(unsigned char* building)
  * Returns non-zero if the entity type field matches. */
 
 
+/* ADDRESS: GOLDDE 0x004f06f0 */
+/* ADDRESS: SERVERDE 0x100161e0 */
 int __cdecl gm_CheckEntityType(unsigned char* entity_ptr)
 {
 	char* type_entry;
@@ -3358,6 +3409,7 @@ int __cdecl gm_CollectBuildingResidents(unsigned char* building, unsigned char* 
 }
 
 #if defined(REBREW_SERVER) /* the clients link their own twin of this function */
+/* ADDRESS: SERVERDE 0x10016230 */
 void __cdecl gm_AssignBuildingOwner(unsigned char* building, unsigned short new_owner, unsigned int owner_slot)
 {
 	char building_class;
@@ -3499,6 +3551,7 @@ void __cdecl d3_CreateEntityFlagPennant(Estate*);
 
 #if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
 /* ADDRESS: GOLDTL 0x00505840 */
+/* ADDRESS: GOLDDE 0x004f0bc0 */
 unsigned char __cdecl d3_CollectEntityStageMeshNode(char* obj, char* list)
 {
 	unsigned int idx;
@@ -3516,6 +3569,7 @@ unsigned char __cdecl d3_CollectEntityStageMeshNode(char* obj, char* list)
 #endif
 /* ADDRESS: GOLDTL 0x005059b0 */
 /* ADDRESS: GOLD 0x00502b60 */
+/* ADDRESS: GOLDDE 0x004f0d30 */
 void __cdecl gm_AssignBuildingOwner(Estate* building, unsigned short owner, int slot)
 {
 	char* rec;
@@ -3732,6 +3786,7 @@ char* __cdecl gm_AllocRaum(char* geb, int obj_id)
 	return obj;
 }
 #else
+/* ADDRESS: GOLDDE 0x004f1380 */
 char* __cdecl gm_AllocRaum(char* geb, int obj_id)
 {
 	char* obj;
@@ -3861,6 +3916,7 @@ char* __cdecl gm_AllocRaum(char* geb, int obj_id)
 #line 3464
 
 #if defined(REBREW_SERVER) /* the clients link their own twin of this function */
+/* ADDRESS: SERVERDE 0x10016640 */
 int __cdecl gm_RemoveObjectWrapper(int entity_record, unsigned int obj_type)
 {
 	int remove_result;
@@ -3877,6 +3933,7 @@ int __cdecl gm_RemoveObjectWrapper(int entity_record, unsigned int obj_type)
  * reference field, breaking the association. */
 
 
+/* ADDRESS: SERVERDE 0x10016670 */
 void __cdecl gm_RemoveEntityLink(int entity)
 {
 	int parent_entity;
@@ -3899,6 +3956,7 @@ void __cdecl gm_InitEntityIfValid(short* entity)
 
 /* 0x1001a299 */
 #if defined(REBREW_SERVER) || defined(REBREW_GOLD)
+/* ADDRESS: SERVERDE 0x100166c0 */
 void __cdecl gm_KillSpieler(unsigned int index, int arg2)
 {
 	char buffer[0x200];
@@ -3961,6 +4019,7 @@ void __cdecl ch_DestroyCharacter(int*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
 /* ADDRESS: GOLDTL 0x00506ab0 */
+/* ADDRESS: GOLDDE 0x004f1e30 */
 void __cdecl gm_KillSpieler(int slotIndex, int removeMode)
 {
 	char* e;
@@ -4076,6 +4135,7 @@ void __cdecl gm_KillSpieler(int slotIndex, int removeMode)
 }
 #endif
 
+/* ADDRESS: GOLDDE 0x004f2050 */
 void __cdecl gm_KillAllSpieler(void)
 {
 	int i;
@@ -4116,6 +4176,7 @@ STAT_REC __cdecl gm_GetStatRecord(int stat)
 }
 #endif
 #if defined(REBREW_SERVER)
+/* ADDRESS: SERVERDE 0x10016840 */
 int __cdecl gm_IsInRange(int x)
 {
 	int stat_range;
@@ -4129,6 +4190,8 @@ int __cdecl gm_IsInRange(int x)
 /* Checks if an entity type is of a specific class. Returns
  * non-zero if the type matches the expected entity class. */
 
+/* ADDRESS: GOLDDE 0x004f2120 */
+/* ADDRESS: SERVERDE 0x10016860 */
 int __cdecl gm_EntityClassCheck(int type)
 {
 	switch (type) {
@@ -4530,6 +4593,8 @@ int __cdecl gm_GetRangeStatId(int range, int level)
 
 
 
+/* ADDRESS: GOLDDE 0x004f2680 */
+/* ADDRESS: SERVERDE 0x100168b0 */
 int __cdecl gm_CheckStatLevel(int entity_idx, int stat_id)
 {
 	int idx;
@@ -4617,6 +4682,8 @@ void __cdecl gm_RingGuildHallBell(int guild)
  * Codes 0 and 82, and out-of-range codes, return zero. */
 
 
+/* ADDRESS: GOLDDE 0x004f2ca0 */
+/* ADDRESS: SERVERDE 0x10016910 */
 int __cdecl gm_MapEntityStatRange(int stat_id)
 {
 	switch (stat_id) {
@@ -4801,6 +4868,8 @@ int __cdecl gm_MapItemPairRange(unsigned int item)
  *   groupStart -> groupStart+5, groupStart+1 -> groupStart+4, etc.
  * Returns 0 if the index doesn't belong to any known group.
  */
+/* ADDRESS: GOLDDE 0x004f2eb0 */
+/* ADDRESS: SERVERDE 0x10016a40 */
 int __cdecl gm_GetOppositeStatIndex(int stat_id)
 {
 	int result;
@@ -4939,6 +5008,8 @@ void __cdecl gm_ShuffleBytes(unsigned char n, unsigned char* arr)
 
 //   PROVEN (msvc6: float-cast compare with fcomp [const], shared ternary call)
 
+/* ADDRESS: GOLDDE 0x004f3f70 */
+/* ADDRESS: SERVERDE 0x10016b60 */
 char __cdecl gm_RandomStatModifier(char stat_value)
 {
 	char result;
@@ -4961,6 +5032,7 @@ char __cdecl gm_RandomStatModifier(char stat_value)
  * the global entity table and returns a pointer to the
  * matching entity, or 0 if not found. */
 #if defined(REBREW_SERVER) || defined(REBREW_GOLD)
+/* ADDRESS: SERVERDE 0x10016bb0 */
 int __cdecl gm_LookupEntityRecordById(int search_id)
 {
 	char* base_cursor;
@@ -4983,6 +5055,7 @@ int __cdecl gm_LookupEntityRecordById(int search_id)
 extern char gm_EntityIdField[];
 
 /* ADDRESS: GOLDTL 0x00508e40 */
+/* ADDRESS: GOLDDE 0x004f3fc0 */
 int __cdecl gm_LookupEntityRecordById(int id)
 {
 	int i;
@@ -5185,6 +5258,7 @@ int __cdecl gm_CanMarry(char* a, char* b)
 
 
 #ifdef REBREW_SERVER
+/* ADDRESS: SERVERDE 0x10016bf0 */
 short* __cdecl gm_GetEntityTableEntry(char* param)
 {
 	char type;
@@ -5204,6 +5278,7 @@ short* __cdecl gm_GetEntityTableEntry(char* param)
 	return (short*) 0;
 }
 #else
+/* ADDRESS: GOLDDE 0x004f4600 */
 short* __cdecl gm_GetEntityTableEntry(char* param)
 {
 	char type;
@@ -5252,6 +5327,7 @@ int __cdecl gm_CountChildren(char* entity, int* count_out)
 }
 #endif
 #if defined(REBREW_SERVER) || defined(REBREW_GOLD)
+/* ADDRESS: SERVERDE 0x10016c40 */
 int __cdecl gm_ChangePlayerIdentityImpl(int from_id, int to_id, int unused)
 {
 	int counter;
@@ -6018,6 +6094,7 @@ int __cdecl gm_AmountToUnitsById(int amount, int id)
 	return amount / g_spiel_space_fill[id - 61];
 }
 
+/* ADDRESS: GOLDDE 0x004f6830 */
 int __cdecl gm_QueryEntitySum(int entity, unsigned int obj_type)
 {
 	short* ent;
@@ -6074,6 +6151,7 @@ float __cdecl gm_GetManufacturerRating(int item)
 }
 #if defined(REBREW_SERVER) /* Gold 0x508820 is the GoldTL body (GOLD.fcn_00508820.c), not this one */
 #pragma optimize("a", on)
+/* ADDRESS: SERVERDE 0x10017d80 */
 double __cdecl eval_ObjektPreis2Credits(int entity_index, int param2)
 {
 	char* entity; extern char g_minimum_manufacturer[];
@@ -6738,6 +6816,7 @@ int __cdecl gm_GetBuildingFoodStock(char* building, void* stock, int producers)
 //   around the inner call flips the registers but reverts the schedule, and
 //   `query_result == comp_ptr` style dead compares flip them at the cost of a
 //   `sub esp,8` frame and a `have_query` spill.
+/* ADDRESS: SERVERDE 0x10017f10 */
 int __cdecl gm_SumBuildingProductionValues(char* obj, int param2)
 {
 	char* record;
@@ -6823,6 +6902,8 @@ int __cdecl gm_GetTypeProductValue(int type_index)
 }
 #endif
 
+/* ADDRESS: GOLDDE 0x004f8030 */
+/* ADDRESS: SERVERDE 0x10018080 */
 int __cdecl gm_AccumulateTyped2(char* entity)
 {
 	int sum;
@@ -6843,6 +6924,7 @@ int __cdecl gm_AccumulateTyped2(char* entity)
 
 /* Client-only treasury sums (discarded). */
 
+/* ADDRESS: GOLDDE 0x004f8080 */
 int __cdecl gm_SumTreasury(char* entity)
 {
 	char* r;
@@ -6880,6 +6962,7 @@ int __cdecl gm_GetSeasonTreasury(char* entity, char season)
 }
 #endif
 
+/* ADDRESS: GOLDDE 0x004f80f0 */
 int __cdecl gm_SumSlotTreasury(int slot)
 {
 	char* owner;
@@ -6905,6 +6988,8 @@ int __cdecl gm_SumSlotTreasury(int slot)
 	return sum;
 }
 
+/* ADDRESS: GOLDDE 0x004f8150 */
+/* ADDRESS: SERVERDE 0x100180d0 */
 int __cdecl gm_EntityQuerySum(int arg1)
 {
 	int sum;
@@ -6946,6 +7031,8 @@ short* __cdecl gm_ResolveEntityRecord(short* entity)
  * A missing record or link index 0xffff returns null. */
 
 
+/* ADDRESS: GOLDDE 0x004f8220 */
+/* ADDRESS: SERVERDE 0x10018140 */
 short* __cdecl gm_ResolveParentEntity(short* entity)
 {
 	void* dynamic_ent;
@@ -6982,6 +7069,8 @@ unsigned short __cdecl gm_ResolveEntitySlot(short* entity)
  * Returns 0xffff when both resolver outputs are null. */
 
 
+/* ADDRESS: GOLDDE 0x004f8280 */
+/* ADDRESS: SERVERDE 0x100181a0 */
 unsigned short __cdecl gm_GetEntityType(short* entity)
 {
 	void* dynamic_ent;
@@ -7000,6 +7089,8 @@ unsigned short __cdecl gm_GetEntityType(short* entity)
  * Traverses linked entity lists for processing. */
 
 
+/* ADDRESS: GOLDDE 0x004f82c0 */
+/* ADDRESS: SERVERDE 0x100181e0 */
 int __cdecl gm_EntityAccumulate(void* entity)
 {
 	int result;
@@ -7030,6 +7121,8 @@ int __cdecl gm_EntityAccumulate(void* entity)
  * Combines query iteration with field accumulation. */
 
 
+/* ADDRESS: GOLDDE 0x004f8810 */
+/* ADDRESS: SERVERDE 0x10018240 */
 int __cdecl gm_CalcPersonWealth(unsigned short raw_idx)
 {
 	unsigned short idx;
@@ -7065,6 +7158,7 @@ int __cdecl gm_CalcPersonWealth(unsigned short raw_idx)
  * emits the address recomputation inside the body instead.  The result
  * local zeroed before the arg1 test lets both no-match exits share one
  * `xor eax,eax` and puts arg1 in edi / the index in esi. */
+/* ADDRESS: SERVERDE 0x100182c0 */
 char* __cdecl gm_FindEntityByOwner(int arg1)
 {
 	int i;
@@ -7163,6 +7257,8 @@ int __cdecl gm_GetWorkshopStock(char* building, void* stock)
 /* Finds an entity by its owner. Searches for an entity
  * whose owner field matches the given ID. */
 
+/* ADDRESS: GOLDDE 0x004f8cc0 */
+/* ADDRESS: SERVERDE 0x10018330 */
 int __cdecl gm_GetMsgField(char* msg, char* pkt)
 {
 	unsigned short type;
@@ -7191,6 +7287,7 @@ int __cdecl gm_GetStoreItemField(char* store, int item)
 /* Gets a message field from a command packet. Reads a
  * specific field from the packet's payload section. */
 
+/* ADDRESS: SERVERDE 0x10018360 */
 int __cdecl compute_size(char* pkt)
 {
 	if (*(short*) pkt == 0x1dd) {
@@ -7309,6 +7406,7 @@ void* __cdecl gm_QueryEntities(int container_id, int arg_count, ...);
  * returns 0 without the LogMessageInternal call. */
 /* ADDRESS: GOLDTL 0x0050e000 */
 /* ADDRESS: GOLD 0x0050ab80 */
+/* ADDRESS: GOLDDE 0x004f8d50 */
 int __cdecl gm_eval_SlotVoll(char* obj, int item_id, int requested)
 {
 	char* pkt;
@@ -7445,6 +7543,8 @@ int __cdecl gm_GetStoreRoom(char* store, int item, int limit)
  * returns 0 (the `jge` at 0x1001a02d skips `mov ebp,3`), and the query,
  * used+requested and count paths share one clamp epilogue at 0x1001a03f,
  * so they all fall into `return ((cap < 0) - 1) & cap;`. */
+/* ADDRESS: GOLDDE 0x004f8f40 */
+/* ADDRESS: SERVERDE 0x10018500 */
 int __cdecl gm_CheckInventoryCapacity(char* obj, int entity_index, int requested)
 {
 	int list[8];
@@ -7673,6 +7773,7 @@ int __cdecl gm_HasNoGuildHouse(char* entity)
 	return 1;
 }
 
+/* ADDRESS: SERVERDE 0x10018690 */
 void __cdecl gm_EntitySetField(void)
 {
 	int entity;

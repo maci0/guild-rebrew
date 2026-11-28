@@ -6,6 +6,7 @@ void __cdecl d3_ReleaseTextureInterface(char*);
 void __cdecl d3_ReleaseTexture(int);
 
 /* ADDRESS: GOLDTL 0x0045bfb0 */
+/* ADDRESS: GOLDDE 0x00451070 */
 void __cdecl d3_ReleaseTexture(int obj)
 {
 	char* o;

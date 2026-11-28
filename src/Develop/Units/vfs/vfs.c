@@ -146,6 +146,7 @@ char* __cdecl vfs_GetDirPath(VFS_DIR* dir, VFS_DIR* stop, char* out);
 void __cdecl vfs_ScanArchive(char* path, VFS_DIR* parent, unsigned int archive);
 
 /* Compares two VFS names: case-insensitively when g_vfs_case_sensitive is set. */
+/* ADDRESS: GOLDDE 0x00427f90 */
 int __cdecl vfs_CompareNames(const char* a, const char* b)
 {
 	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
@@ -157,6 +158,7 @@ int __cdecl vfs_CompareNames(const char* a, const char* b)
 }
 
 /* Upper-cases a name unless the file system is case-sensitive. */
+/* ADDRESS: GOLDDE 0x00427fe0 */
 char* __cdecl vfs_NormalizeCase(char* name)
 {
 	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
@@ -168,6 +170,7 @@ char* __cdecl vfs_NormalizeCase(char* name)
 }
 
 /* Turns backslashes into slashes. */
+/* ADDRESS: GOLDDE 0x00428000 */
 void __cdecl vfs_ToSlashes(char* p)
 {
 	int n;
@@ -191,6 +194,7 @@ void __cdecl vfs_ToSlashes(char* p)
 }
 
 /* Turns slashes into backslashes. */
+/* ADDRESS: GOLDDE 0x00428030 */
 void __cdecl vfs_ToBackslashes(char* p)
 {
 	int n;
@@ -214,6 +218,7 @@ void __cdecl vfs_ToBackslashes(char* p)
 }
 
 /* Returns parent's child directory called name, creating and appending it when missing. */
+/* ADDRESS: GOLDDE 0x00428060 */
 VFS_DIR* __cdecl vfs_GetSubDir(char* name, VFS_DIR* parent)
 {
 	VFS_DIR* p;
@@ -265,6 +270,7 @@ int __cdecl vfs_CompareKeyNoCase(const char* key, const char** file)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLDTL 0x0042e640 */
 /* ADDRESS: GOLD 0x0042ee10 */
+/* ADDRESS: GOLDDE 0x00428100 */
 int __cdecl vfs_CompareFileKey(const char* a, const char** b)
 {
 	return strcmp(a, *b);
@@ -275,6 +281,7 @@ int __cdecl vfs_CompareFileKey(const char* a, const char** b)
 int __cdecl fcn_0065f220(int, int);
 
 /* ADDRESS: GOLDTL 0x0042e680 */
+/* ADDRESS: GOLDDE 0x00428140 */
 int __cdecl fcn_0042e680(int a1, int* a2)
 {
 	return fcn_0065f220(a1, *a2);
@@ -283,6 +290,7 @@ int __cdecl fcn_0042e680(int a1, int* a2)
 
 /* Binary-searches dir's sorted files for name, optionally recursing into subdirectories; stores the
  * owning directory in *found_dir. */
+/* ADDRESS: GOLDDE 0x00428150 */
 VFS_FILE* __cdecl vfs_FindFile(const char* name, VFS_DIR* dir, VFS_DIR** found_dir, char recurse)
 {
 	VFS_FILE* f;
@@ -316,6 +324,7 @@ VFS_FILE* __cdecl vfs_FindFile(const char* name, VFS_DIR* dir, VFS_DIR** found_d
  * already present is overwritten when the new offset is larger or -1 or its
  * archive index is lower, and cleared when it repeats the offset with no
  * source; a pending-list collision also formats a message that is unused. */
+/* ADDRESS: GOLDDE 0x00428200 */
 void __cdecl vfs_AddFile(char* name, VFS_DIR* dir, VFS_DIR* source, int stamp, int packed, unsigned int archive, unsigned int offset)
 {
 	VFS_FILE* f;
@@ -524,6 +533,7 @@ void __cdecl vfs_AddPath(char* path, VFS_DIR* parent, VFS_DIR* source, int stamp
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLD 0x0042f4d0 */
 /* ADDRESS: GOLDTL 0x0042ed00 */
+/* ADDRESS: GOLDDE 0x004287c0 */
 void __cdecl vfs_AddFilePath(char* path, void* parent, int a3, int a4, int a5, int a6, int a7)
 {
 	char buf[0x100];
@@ -550,6 +560,7 @@ void __cdecl vfs_AddFilePath(char* path, void* parent, int a3, int a4, int a5, i
 #endif
 
 /* qsort comparator: orders two file entries by name. */
+/* ADDRESS: GOLDDE 0x004288b0 */
 int __cdecl vfs_CompareFiles(const char** a, const char** b)
 {
 	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
@@ -558,6 +569,7 @@ int __cdecl vfs_CompareFiles(const char** a, const char** b)
 }
 
 /* qsort comparator: orders two file entries by name, ignoring case. */
+/* ADDRESS: GOLDDE 0x004288f0 */
 int __cdecl vfs_CompareFilesNoCase(const void* a, const void* b)
 {
 	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
@@ -567,6 +579,7 @@ int __cdecl vfs_CompareFilesNoCase(const void* a, const void* b)
 
 /* Turns a directory's pending items into its sorted file array, then does the same for its
  * subdirectories and following siblings when recurse is set. */
+/* ADDRESS: GOLDDE 0x00428910 */
 void __cdecl vfs_FinishFiles(VFS_DIR* dir, char recurse)
 {
 	VFS_ITEM* e;
@@ -680,6 +693,7 @@ typedef struct NODE042F010 {
 char* __cdecl fcn_0064e790(const char* s, int c);
 
 /* ADDRESS: GOLDTL 0x0042f010 */
+/* ADDRESS: GOLDDE 0x00428ad0 */
 char* __cdecl vfs_FindPathNode(char* name, NODE042F010* node)
 {
 	char buf[0x100];
@@ -719,6 +733,7 @@ char* __cdecl vfs_FindPathNode(char* name, NODE042F010* node)
 
 /* Looks a path up: resolves its directory part, then the file name, which may start with '*' to search
  * the subdirectories too; returns the file entry and stores its directory in *found_dir. */
+/* ADDRESS: GOLDDE 0x00428be0 */
 VFS_FILE* __cdecl vfs_LookupPath(char* path, VFS_DIR* root, VFS_DIR** found_dir)
 {
 	VFS_DIR* dir;
@@ -806,6 +821,7 @@ char* __cdecl vfs_GetFilePath(VFS_FILE* file, VFS_DIR* dir, VFS_DIR* stop, char*
 
 #if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
 /* ADDRESS: GOLDTL 0x0042f240 */
+/* ADDRESS: GOLDDE 0x00428d00 */
 char* __cdecl fcn_0042f240(unsigned int* a0, char* a1, char* a2, char* out)
 {
 	char buf[0x100];
@@ -895,6 +911,7 @@ typedef struct Node {
 
 /* ADDRESS: GOLDTL 0x0042f420 */
 /* ADDRESS: GOLD 0x0042fbf0 */
+/* ADDRESS: GOLDDE 0x00428ee0 */
 char* __cdecl vfs_BuildDirPath(Node* n, Node* stop, char* out)
 {
 	char tmp[0x100];
@@ -1006,6 +1023,7 @@ char* __cdecl fcn_0042f240(unsigned int*, char*, char*, char*);
 
 /* ADDRESS: GOLDTL 0x0042f690 */
 /* ADDRESS: GOLD 0x0042fca0 */
+/* ADDRESS: GOLDDE 0x00428f90 */
 int __cdecl vfs_ResolvePath(int path, int root, int a3, int a4)
 {
 	VFS_FILE* file;
@@ -1132,6 +1150,7 @@ VFS_DIR* __cdecl vfs_ScanDir(char* path, VFS_DIR* parent)
  * node (sorted when parent is 0). */
 /* ADDRESS: GOLDTL 0x0042f6d0 */
 /* ADDRESS: GOLD 0x0042fce0 */
+/* ADDRESS: GOLDDE 0x00428fd0 */
 VFS_DIR* __cdecl vfs_MountPath(char* path, VFS_DIR* parent)
 {
 	VFS_DIR* dir;
@@ -1240,6 +1259,7 @@ int __cdecl unzGetFilePos(char* file, unsigned long* pos, unsigned long* num);
 int __cdecl unzGoToNextFile(char* file);
 
 /* Mounts every entry of a zip archive under a directory named after the archive. */
+/* ADDRESS: GOLDDE 0x00429420 */
 void __cdecl vfs_ScanArchive(char* path, VFS_DIR* parent, unsigned int archive)
 {
 	char* zip;
@@ -1283,6 +1303,7 @@ void __cdecl vfs_ScanArchive(char* path, VFS_DIR* parent, unsigned int archive)
 #ifndef REBREW_SERVER
 extern char vfs_ItemPool[];
 #endif
+/* ADDRESS: GOLDDE 0x00429550 */
 void __cdecl vfs_FreeDirs(VFS_DIR* n)
 {
 	VFS_DIR* next;
@@ -1315,6 +1336,7 @@ void __cdecl vfs_FreeDirs(VFS_DIR* n)
 #endif
 
 /* Creates every missing directory of path below dir. */
+/* ADDRESS: GOLDDE 0x004295d0 */
 char __cdecl vfs_MakeDirs(char* path, VFS_DIR* dir)
 {
 	char* s;
@@ -1609,6 +1631,7 @@ int __cdecl unzOpenCurrentFile(char* file);
 void __cdecl ReportClientMessage(char*);
 
 /* ADDRESS: GOLDTL 0x0042ff50 */
+/* ADDRESS: GOLDDE 0x00429760 */
 void* __cdecl vfs_Tfopen(char* path, char* mode, struct VFS_DIR* root)
 {
 	char* stream;
@@ -1845,6 +1868,7 @@ int __cdecl CloseVfsStream(void* stream)
 int __cdecl vfs_FlushAndClose(int);
 
 /* ADDRESS: GOLDTL 0x00430580 */
+/* ADDRESS: GOLDDE 0x00429d90 */
 int __cdecl CloseVfsStream(void* stream)
 {
 	int result;
@@ -1906,6 +1930,7 @@ int __cdecl CloseVfsStream(void* stream)
 #endif
 int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream);
 #if defined(REBREW_SERVER)
+/* ADDRESS: SERVERDE 0x10008800 */
 int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream)
 {
 	char name[0x100];
@@ -2027,6 +2052,7 @@ struct z_stream_s;
 extern int __cdecl fcn_004616e0(struct z_stream_s* zstrm, int flush);
 
 /* ADDRESS: GOLDTL 0x004306b0 */
+/* ADDRESS: GOLDDE 0x00429ec0 */
 int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream)
 {
 	int result;
@@ -2242,6 +2268,7 @@ int __cdecl vfs_fgetc(char* stream)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLD 0x00430d90 */
 /* ADDRESS: GOLDTL 0x00430870 */
+/* ADDRESS: GOLDDE 0x0042a080 */
 int __cdecl vfs_GetChar(void* stream)
 {
 	char c;
@@ -2254,6 +2281,7 @@ int __cdecl vfs_GetChar(void* stream)
 #endif
 
 /* Reads one line of at most max characters into buf, dropping the line end. */
+/* ADDRESS: GOLDDE 0x0042a0b0 */
 char* __cdecl vfs_fgets(char* buf, int max, char* stream)
 {
 	int c;
@@ -2284,6 +2312,7 @@ char* __cdecl vfs_fgets(char* buf, int max, char* stream)
 
 /* Writes count items of size bytes: into a memory stream (deflated when compressed), through gzwrite, or
  * through fwrite. Returns the bytes or items written, -1 on error. */
+/* ADDRESS: GOLDDE 0x0042a120 */
 unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream)
 {
 	int result;
@@ -2372,6 +2401,7 @@ done:
 }
 
 /* Seeks a plain, gzip or zip-member stream opened for reading; a zip member seeks forward by reading. */
+/* ADDRESS: GOLDDE 0x0042a290 */
 int __cdecl vfs_fseek(char* s, int off, int whence)
 {
 	extern long __cdecl unztell(void* file);
@@ -2491,6 +2521,7 @@ long __cdecl fcn_0045fa50(void* h);
 long __cdecl fcn_0064e30c(void* h);
 
 /* ADDRESS: GOLDTL 0x00430c50 */
+/* ADDRESS: GOLDDE 0x0042a460 */
 long __cdecl fcn_00430c50(char* a)
 {
 	void* h;
@@ -2522,6 +2553,7 @@ long __cdecl fcn_00430c50(char* a)
 #endif
 
 #if defined(REBREW_SERVER) || defined(REBREW_GOLD)
+/* ADDRESS: SERVERDE 0x100089c0 */
 void* __cdecl vfs_OpenStream(unsigned char* buf, unsigned int size, char* mode_flags)
 {
 	char* stream;
@@ -2648,6 +2680,7 @@ typedef struct {
 } vfs_mode_bits_tl;
 
 /* ADDRESS: GOLDTL 0x00430cb0 */
+/* ADDRESS: GOLDDE 0x0042a4c0 */
 void* __cdecl vfs_OpenStream(unsigned char* buf, unsigned int size, char* mode_flags)
 {
 	char* stream;
@@ -2813,6 +2846,7 @@ char __cdecl vfs_ForEachFile(VFS_DIR* start, char siblings, char* ext, char (__c
 
 /* Mounts the file system rooted at name; flag selects case-insensitive compares. Returns whether the
  * root was found. TL client 0x431070; getcwd is called by its old name. */
+/* ADDRESS: GOLDDE 0x0042a780 */
 int __cdecl vfs_init(char* name, char flag)
 {
 	char cwd[0x100];
@@ -2842,6 +2876,7 @@ extern char vfs_CaseSensitive;
 #include "Develop/Units/Error/error_message.h"
 #define ReportMessage ReportClientMessage
 #endif
+/* ADDRESS: GOLDDE 0x0042a800 */
 void __cdecl vfs_exit(char verbose)
 {
 

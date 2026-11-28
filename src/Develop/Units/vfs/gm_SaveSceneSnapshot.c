@@ -6,6 +6,7 @@ extern unsigned char* lpGebaeudeINST;
 void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl d3_SaveScene(int, int);
 
+/* ADDRESS: GOLDDE 0x00507df0 */
 int __cdecl gm_SaveSceneSnapshot(int a)
 {
 	int save;

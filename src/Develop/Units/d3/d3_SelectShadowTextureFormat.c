@@ -18,6 +18,7 @@ extern char g_6b89bd;
 	    g_14ce86c, 1, 3, (f))
 
 /* ADDRESS: GOLDTL 0x00456750 */
+/* ADDRESS: GOLDDE 0x0044bf10 */
 void __cdecl d3_SelectShadowTextureFormat(unsigned int minSize, unsigned int maxSize, int unused2, int unused3,
                           char formatFlag, char tryAdditionalModes, int shadowDepth)
 {

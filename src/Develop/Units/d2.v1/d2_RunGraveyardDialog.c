@@ -1,3 +1,8 @@
+void __cdecl gm_SameEntityId();
+extern char gm_EntitySlotTable[];
+extern char gm_LocalPlayerSlot[];
+extern char g_14b5f00[];
+extern char he_GraveSlotTextIds[];
 typedef struct View {
 	int x0;
 	char pad4[0x18];
@@ -25,6 +30,7 @@ int __cdecl d2_ShowModalMessageBox(int a, int b);
 void __cdecl d3_EndCameraAndUiMode(void);
 
 /* ADDRESS: GOLDTL 0x0058fa40 */
+/* ADDRESS: GOLDDE 0x00575700 */
 void __cdecl d2_RunGraveyardDialog(unsigned char* input)
 {
 	unsigned char text[0x100];
@@ -33,14 +39,14 @@ void __cdecl d2_RunGraveyardDialog(unsigned char* input)
 	void* obj;
 
 	obj = FindSlotEntryFiltered(
-		(int) (0x7f4ca0 + (*(unsigned short*) 0x774970) * 0x21c), input, 0,
-		(void*) 0x4f1820, 0xff);
+		(int) ((int) &gm_EntitySlotTable + (*(unsigned short*) &gm_LocalPlayerSlot) * 0x21c), input, 0,
+		(void*) gm_SameEntityId, 0xff);
 	if (obj != 0) {
 		view.x20 = *(int*) obj;
 		view.x1c = (int) obj;
 		view.x24 = (unsigned char) gm_GetEntitySlotIndex((char*) *(int*) (input + 0x65),
 			(Elem*) obj);
-		io_FormatTextBuffer(text, 0x4107, ((char**) 0x665f78)[*(int*) obj]);
+		io_FormatTextBuffer(text, 0x4107, ((char**) &he_GraveSlotTextIds)[*(int*) obj]);
 		if (d2_CreateRentAGraveDialog(&view, (char*) text) != 0) {
 			d2_RunRentAGraveMenu(input, &view);
 			d2_DestroyForm(view.x0);
@@ -49,11 +55,11 @@ void __cdecl d2_RunGraveyardDialog(unsigned char* input)
 		}
 		return;
 	}
-	if (gv_FindEntityGraveSlot((int) (0x7f4ca0 + (*(unsigned short*) 0x774970) * 0x21c),
+	if (gv_FindEntityGraveSlot((int) ((int) &gm_EntitySlotTable + (*(unsigned short*) &gm_LocalPlayerSlot) * 0x21c),
 			&rec, &obj) == 0) {
 		d2_OpenRentAGraveDialog(input);
 		d3_EndCameraAndUiMode();
 		return;
 	}
-	d2_ShowModalMessageBox(*(int*) 0x14b5f00, 0);
+	d2_ShowModalMessageBox(*(int*) &g_14b5f00, 0);
 }

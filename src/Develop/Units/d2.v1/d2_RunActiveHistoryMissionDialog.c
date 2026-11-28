@@ -38,6 +38,7 @@ typedef struct DLG_MSG {
  * dialog, resolves three choice strings, waits for the selection, then tears
  * the dialog and the arena down. Native body: 684 bytes, frame 0x190. */
 /* ADDRESS: GOLDTL 0x004b5b40 */
+/* ADDRESS: GOLDDE 0x004a3dd0 */
 void __cdecl d2_RunActiveHistoryMissionDialog(int mode)
 {
 	DLG_MSG m1;

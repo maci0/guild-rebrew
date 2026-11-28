@@ -7,6 +7,7 @@ int __cdecl d2_AllocateElement(void);
 void* __cdecl d2_GetResourceData(int);
 
 /* ADDRESS: GOLDTL 0x004675f0 */
+/* ADDRESS: GOLDDE 0x0045b020 */
 int __cdecl d2_CreateValueGauge(int x, int y, int barLength, int value, int maxValue, int resourceId, int flags)
 {
 	int id;

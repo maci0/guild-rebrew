@@ -1,6 +1,7 @@
 void __cdecl gm_PostPeriodicCityReport(void);
 extern float gm_CityPopulation, gm_TargetCityPopulation;
 /* ADDRESS: GOLDTL 0x004fb4e0 */
+/* ADDRESS: GOLDDE 0x004e71f0 */
 void __cdecl gm_UpdateCityEconomyStats(char* a)
 {
 	int count;

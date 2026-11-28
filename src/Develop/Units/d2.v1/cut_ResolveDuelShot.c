@@ -31,6 +31,7 @@ void __cdecl d3_ScheduleActionTimer(char*, int, int);
  * the bullet hits, the victim takes damage and the matching gesture and log
  * message are played. */
 /* ADDRESS: GOLDTL 0x004dff50 */
+/* ADDRESS: GOLDDE 0x004cc970 */
 void __cdecl cut_ResolveDuelShot(char* task)
 {
 	char* e;

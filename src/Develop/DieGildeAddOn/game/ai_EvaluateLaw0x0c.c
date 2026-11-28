@@ -20,6 +20,7 @@ extern pos14_7f4c00 gm_GameTime;
 unsigned short __cdecl gm_RandomMod(int n);
 
 /* ADDRESS: GOLDTL 0x004910e0 */
+/* ADDRESS: GOLDDE 0x0047ff90 */
 int __cdecl ai_EvaluateLaw0x0c(Ent* entity, int unused, int* out)
 {
 	Stat st;

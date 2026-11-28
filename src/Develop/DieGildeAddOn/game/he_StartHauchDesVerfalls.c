@@ -25,6 +25,7 @@ void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl gm_ModifyHealth(int, int);
 void __cdecl gm_TryRecordCrime(int, int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x0055e730 */
 void __cdecl he_StartHauchDesVerfalls(char* e)
 {
 	char buf[0x400];

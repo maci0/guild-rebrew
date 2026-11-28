@@ -15,6 +15,7 @@ void __cdecl d3_SetObjectRotation(void* a0, void* a1);
 /* The native body keeps an EBP frame (/Oy-, non-frame-omitted build). */
 #pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x00412b10 */
+/* ADDRESS: GOLDDE 0x004113a0 */
 unsigned int __cdecl d3_AnimateObjectToTransform(
 	char* object, float targetX, float targetY, float targetZ,
 	float targetRotX, float targetRotY, float targetRotZ,

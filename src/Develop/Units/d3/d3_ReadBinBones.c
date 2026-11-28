@@ -12,6 +12,7 @@ int __cdecl vfs_ReadByte(void* stream, void* dst);
 char* __cdecl vfs_ReadCString(void* stream, char* text);
 void __cdecl vfs_ReadVec3(void* stream, void* dst);
 
+/* ADDRESS: GOLDDE 0x00443e00 */
 void __cdecl d3_ReadBinBones(void* stream, char* obj)
 {
 	int n;

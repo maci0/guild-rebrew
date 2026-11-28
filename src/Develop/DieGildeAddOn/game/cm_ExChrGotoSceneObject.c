@@ -17,6 +17,7 @@ char* __cdecl d3_FindSceneObject(int, int, int, char*);
 void __cdecl d3_TransformPoint(char*, char*, char*);
 
 /* ADDRESS: GOLDTL 0x004ca560 */
+/* ADDRESS: GOLDDE 0x004b7d40 */
 int __cdecl cm_ExChrGotoSceneObject(char* x, char* out)
 {
 	char buf[0x80];

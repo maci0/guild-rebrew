@@ -16,6 +16,7 @@ typedef struct D2_SCROLL_WINDOW {
 #include "Develop/client_types.h"
 extern Win_1015f40 d2_Windows[0x60];
 
+/* ADDRESS: GOLDDE 0x00462330 */
 void __cdecl d2_ScrollWindow(int delta, int step, int k)
 {
 	int scroll;

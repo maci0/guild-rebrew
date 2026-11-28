@@ -10,6 +10,7 @@ void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 
 /* ADDRESS: GOLD 0x004b04a0 */
 /* ADDRESS: GOLDTL 0x004b05e0 */
+/* ADDRESS: GOLDDE 0x0049e900 */
 int __cdecl hst_HandleAnsehenBeiAmtstraegern(int* record, int index, char* text)
 {
 	char* e;

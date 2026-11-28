@@ -55,6 +55,7 @@ extern int __cdecl d2_RefreshNetLobbyChatLog(void);
 extern int __cdecl fcn_0064d41a(char*, char*, int);
 
 /* ADDRESS: GOLDTL 0x005926f0 */
+/* ADDRESS: GOLDDE 0x005783a0 */
 int __cdecl d2_RunNetLobbySetup(void)
 {
 	char v11[0x100];

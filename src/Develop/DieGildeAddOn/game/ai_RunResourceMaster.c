@@ -116,6 +116,7 @@ int __cdecl hp_PickWeightedProdItem(int);
 int __cdecl plt_CheckZoneAvailability(int, int, int, int);
 int __cdecl gm_RandomMod(int);
 /* ADDRESS: GOLDTL 0x0047f6b0 */
+/* ADDRESS: GOLDDE 0x0046e660 */
 int __cdecl ai_RunResourceMaster(char* meister)
 {
 	Msg st;

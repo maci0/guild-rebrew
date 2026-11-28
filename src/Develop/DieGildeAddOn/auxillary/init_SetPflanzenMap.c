@@ -16,6 +16,7 @@ extern void __cdecl d3_SetNodePosition(void*, float*);
 /* Loads the 3D object named by the plant info record, appends the caller's
  * object name and places it with the two axes of the placement cell. */
 /* ADDRESS: GOLDTL 0x004bcf20 */
+/* ADDRESS: GOLDDE 0x004aada0 */
 void __cdecl init_SetPflanzenMap(char* a0, int a1)
 {
 	char b1[256];

@@ -15,6 +15,7 @@ int __cdecl gm_GetOppositeStatIndex(int job);
 int __cdecl ai_FindDunkleEckeTarget(unsigned short* e, Blk24* o1, Blk24* o2);
 int __cdecl ai_FindDunkleEckeStraftat(unsigned short* e, Blk24* o1, Blk24* o2);
 
+/* ADDRESS: GOLDDE 0x0048d180 */
 int __cdecl ai_StartDunkleEcke(int a1, unsigned short* e, int a3, Blk24* o1, Blk24* o2)
 {
 	Blk24 b1;

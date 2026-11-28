@@ -34,6 +34,7 @@ int __cdecl ch_CountCharactersNear(int a1, int a2, float* position, float tolera
 }
 #else
 /* ADDRESS: GOLDTL 0x00402c00 */
+/* ADDRESS: GOLDDE 0x00402490 */
 int __cdecl ch_CountCharactersNear(int a1, int a2, float* pos, float tolerance)
 {
 	int count;
@@ -57,7 +58,7 @@ int __cdecl ch_CountCharactersNear(int a1, int a2, float* pos, float tolerance)
 			}
 		}
 		cursor++;
-	} while ((int) cursor < 0x14d0c20);
+	} while ((int) cursor < ((int) &ch_CharacterSlots + 0xc00));
 	return count;
 }
 #endif

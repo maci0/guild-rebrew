@@ -62,6 +62,7 @@ int __cdecl d2_WriteSurfacePixel(int x, int y, unsigned char r, unsigned char g,
 }
 #else
 /* ADDRESS: GOLDTL 0x00476b10 */
+/* ADDRESS: GOLDDE 0x00468ce0 */
 int __cdecl d2_WriteSurfacePixel(int x, int y, unsigned char r, unsigned char g, unsigned char b, Surf* s)
 {
 	short c;

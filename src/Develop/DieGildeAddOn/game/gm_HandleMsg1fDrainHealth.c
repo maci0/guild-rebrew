@@ -16,6 +16,7 @@ float __cdecl gm_ApplyEntityHealthDelta(unsigned short, int);
 
 
 /* ADDRESS: GOLDTL 0x004b8a70 */
+/* ADDRESS: GOLDDE 0x004a6b20 */
 int __cdecl gm_HandleMsg1fDrainHealth(int* request)
 {
 	char* ents[8];

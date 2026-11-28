@@ -27,6 +27,7 @@ static __inline int any_pending(void)
 
 
 /* ADDRESS: GOLDTL 0x004e4680 */
+/* ADDRESS: GOLDDE 0x004d1070 */
 void __cdecl cut_WaitForPendingScripts(void)
 {
 	while (main_RunFrameLoop(0, 0x79706) != 0) {

@@ -48,6 +48,7 @@ void __cdecl cm_RequestRemoveCutscene(int);
 #include "Develop/DieGildeAddOn/game/cutscene.h"
 
 /* ADDRESS: GOLDTL 0x004e6650 */
+/* ADDRESS: GOLDDE 0x004d2ea0 */
 int __cdecl cut_UpdateCutscenes(void)
 {
 	GAME_TIMESTAMP t;

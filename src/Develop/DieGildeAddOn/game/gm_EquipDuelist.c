@@ -14,6 +14,7 @@ void __cdecl cm_RequestChangeAttribute(void);
 
 /* v is a separate local: c2 homes it in the dead slot of mode, and mode
  * stays a register load (an &mode argument would force byte reloads). */
+/* ADDRESS: GOLDDE 0x004bf030 */
 void __cdecl gm_EquipDuelist(char* obj, unsigned char mode)
 {
 	int i;

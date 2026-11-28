@@ -1,5 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x0043c140 */
+/* ADDRESS: GOLDDE 0x00434e00 */
 char __cdecl d3_IsFloorBlockUniform(int* img, int x, int y, int n)
 {
 	unsigned char c = 0xff;

@@ -24,6 +24,7 @@ void __cdecl gm_PackGameTime(int* src, char* dst);
 
 /* ADDRESS: GOLD 0x506000 */
 /* ADDRESS: GOLDTL 0x00509050 */
+/* ADDRESS: GOLDDE 0x004f41d0 */
 void __cdecl gm_GetEntityDate(char* entity, PACKED_TIME509050* out)
 {
 	struct blk14_509050 time;

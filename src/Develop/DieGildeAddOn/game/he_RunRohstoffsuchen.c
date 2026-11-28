@@ -32,6 +32,7 @@ extern void __cdecl he_MessageBoxQuickjump(int a, int b, char* c, int d, int e,
 extern void __cdecl he_AssignActionSlot(int a, int b, int c, int d);
 
 /* ADDRESS: GOLDTL 0x005797a0 */
+/* ADDRESS: GOLDDE 0x0055f600 */
 void __cdecl he_RunRohstoffsuchen(char* event)
 {
 	char text[1024];

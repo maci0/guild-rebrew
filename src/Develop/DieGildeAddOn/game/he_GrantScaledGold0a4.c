@@ -8,6 +8,7 @@ float __cdecl gm_GetSeasonPrice(int, unsigned char);
 double __cdecl gm_RandomFloat01(void);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 
+/* ADDRESS: GOLDDE 0x00563ba0 */
 void __cdecl he_GrantScaledGold0a4(char* e)
 {
 	float v;

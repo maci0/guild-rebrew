@@ -43,6 +43,7 @@ void __cdecl d2_DestroyForm(int);
 void __cdecl d3_EndCameraAndUiMode(void);
 
 /* ADDRESS: GOLDTL 0x005ab810 */
+/* ADDRESS: GOLDDE 0x00590320 */
 void __cdecl d2_RunTaufeDialog(char* e, int unused)
 {
 	struct house* p;

@@ -22,6 +22,7 @@ extern char g_9a3816[];
 
 /* Client crime-record counter; the server readiness function is separate. */
 
+/* ADDRESS: GOLDDE 0x004e2300 */
 int __cdecl CountMatchingStraftatEntries(int arg0, int arg2)
 {
 	int count;

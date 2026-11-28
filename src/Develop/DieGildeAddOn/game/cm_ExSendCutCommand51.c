@@ -10,6 +10,7 @@ extern char gm_EntityIdField[];
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 int* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
 
+/* ADDRESS: GOLDDE 0x004ba5d0 */
 int __cdecl cm_ExSendCutCommand51(char* x, char* out)
 {
 	int i;

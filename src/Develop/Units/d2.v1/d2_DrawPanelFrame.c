@@ -16,6 +16,7 @@ extern unsigned char* d2_InteriorBuilding;
 
 void __cdecl d2_AddElementToWindow(int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x0051c6b0 */
 void __cdecl d2_DrawPanelFrame(int wnd, int page, int icon)
 {
 	unsigned char* p;

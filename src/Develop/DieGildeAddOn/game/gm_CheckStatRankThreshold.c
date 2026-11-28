@@ -5,6 +5,7 @@
 
 int __cdecl gm_GetOppositeStatIndex(int);
 
+/* ADDRESS: GOLDDE 0x004a29f0 */
 int __cdecl gm_CheckStatRankThreshold(char* a, char* b, int u)
 {
 	(void) u;

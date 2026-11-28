@@ -10,6 +10,7 @@ void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004bad30 */
+/* ADDRESS: GOLDDE 0x004a8dd0 */
 int __cdecl gm_HandleMsg32DeductGood(int* request)
 {
 	float ratio;

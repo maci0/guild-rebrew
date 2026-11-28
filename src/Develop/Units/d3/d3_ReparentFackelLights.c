@@ -24,6 +24,7 @@ void __cdecl d3_ReparentObject(char*, int);
 
 char __cdecl d3_CollectFackelObjects(char*, struct FACKEL_OBJ_LIST*);
 
+/* ADDRESS: GOLDDE 0x004ff7f0 */
 void __cdecl d3_ReparentFackelLights(int x)
 {
 	struct FACKEL_OBJ_LIST l;

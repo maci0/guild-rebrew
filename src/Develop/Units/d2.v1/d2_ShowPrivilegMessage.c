@@ -15,6 +15,7 @@ void __cdecl io_AppendText(char* x);
 int __cdecl main_RunFrameLoop(void* fn, int y);
 void __cdecl d2_DestroyForm(int h);
 
+/* ADDRESS: GOLDDE 0x004e63d0 */
 void __cdecl d2_ShowPrivilegMessage(char* x, int mode, int y)
 {
 	int h;

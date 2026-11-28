@@ -1,3 +1,4 @@
+extern char gm_EntitySlotTable[];
 #include <string.h>
 
 extern float g_66291c;
@@ -7,6 +8,7 @@ void __cdecl d2_BuildPersonStatusDesc(void*);
 int __cdecl gm_MatchesTargetFilter(unsigned short, unsigned short, int, int);
 
 /* ADDRESS: GOLDTL 0x005cb670 */
+/* ADDRESS: GOLDDE 0x005ad100 */
 int __cdecl d2_CollectHighFavorEntities(char* sourceRecord, int n, char* results, int a3)
 {
 	char* h;
@@ -17,8 +19,8 @@ int __cdecl d2_CollectHighFavorEntities(char* sourceRecord, int n, char* results
 
 	count = 0;
 	if (n == 0) {
-		h = (char*) 0x7f4ca0;
-		while ((int) h < 0x85a0a0) {
+		h = (char*) &gm_EntitySlotTable;
+		while ((int) h < ((int) &gm_EntitySlotTable + 0x65400)) {
 			if (h != sourceRecord && *(unsigned short*) h != 0xffff
 			    && *(unsigned char*) (h + 2) >= 2 && *(unsigned char*) (h + 2) <= 7) {
 				d = gm_CalcEntityFavor(*(unsigned short*) sourceRecord, *(unsigned short*) h, 1);
@@ -31,8 +33,8 @@ int __cdecl d2_CollectHighFavorEntities(char* sourceRecord, int n, char* results
 		return count;
 	}
 	memset(results, 0, n * 0x38);
-	h = (char*) 0x7f4ca0;
-	while ((int) h < 0x85a0a0) {
+	h = (char*) &gm_EntitySlotTable;
+	while ((int) h < ((int) &gm_EntitySlotTable + 0x65400)) {
 		if (h != sourceRecord && *(unsigned short*) h != 0xffff
 		    && *(unsigned char*) (h + 2) >= 2 && *(unsigned char*) (h + 2) <= 7) {
 			d = gm_CalcEntityFavor(*(unsigned short*) sourceRecord, *(unsigned short*) h, 1);

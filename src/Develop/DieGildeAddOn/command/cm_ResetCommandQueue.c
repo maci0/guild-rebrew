@@ -29,6 +29,7 @@ void __cdecl cm_SendCommandQueueInit(void);
 int __cdecl cm_RecvSceneInitPacket(void);
 void __cdecl nt_CloseClientConnection(void);
 
+/* ADDRESS: GOLDDE 0x004b1800 */
 void __cdecl cm_ResetCommandQueue(void)
 {
 	int i;

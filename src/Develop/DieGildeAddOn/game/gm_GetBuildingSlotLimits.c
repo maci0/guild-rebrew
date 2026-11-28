@@ -9,6 +9,7 @@ typedef struct {
 	int b;
 } fcn_004fac80_E;
 
+/* ADDRESS: GOLDDE 0x004e6a60 */
 int __cdecl gm_GetBuildingSlotLimits(int idx, int* out)
 {
 	fcn_004fac80_E* t;

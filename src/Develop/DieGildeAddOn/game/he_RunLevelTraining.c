@@ -41,6 +41,7 @@ void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 void __cdecl he_RegisterApEvent(int, char*, int, int);
 
 /* ADDRESS: GOLDTL 0x005516e0 */
+/* ADDRESS: GOLDDE 0x00537a90 */
 void __cdecl he_RunLevelTraining(char* t)
 {
 	char c;

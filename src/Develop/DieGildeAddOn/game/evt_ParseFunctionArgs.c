@@ -16,6 +16,7 @@ void __cdecl evt_LogScriptError(char* script, unsigned int position, const char*
 void __cdecl evt_RequestScriptExit(char* c);
 
 /* ADDRESS: GOLDTL 0x00427600 */
+/* ADDRESS: GOLDDE 0x00422060 */
 int __cdecl evt_ParseFunctionArgs(char* g, int arg)
 {
 	char* e;

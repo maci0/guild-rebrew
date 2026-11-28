@@ -1,4 +1,5 @@
 /* ADDRESS: GOLDTL 0x00507130 */
+/* ADDRESS: GOLDDE 0x004f22d0 */
 int __cdecl gm_GetJobTrainingAttributes(int skill, int* first, int* second)
 {
 	switch (skill) {

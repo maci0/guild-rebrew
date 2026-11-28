@@ -5,6 +5,7 @@ extern char* gm_MarketEntity;
 
 char* __cdecl gm_QueryEntities(int obj, int mode, ...);
 
+/* ADDRESS: GOLDDE 0x004ef090 */
 char* __cdecl gm_FindCityItemHolder(int who)
 {
 	char* list[8];

@@ -20,6 +20,7 @@ typedef struct
 
 int __cdecl gv_EnqueueSlotCommand(void*);
 
+/* ADDRESS: GOLDDE 0x004dedf0 */
 int __cdecl gv_RequestUpdateProductionProgress(int building, int slot_type, int slot_index, int delta)
 {
 	GV_PROGRESS_MSG msg;

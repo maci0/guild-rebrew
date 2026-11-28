@@ -19,6 +19,7 @@ void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
 unsigned short __cdecl gm_RandomMod(int);
 
 /* ADDRESS: GOLDTL 0x0050d6d0 */
+/* ADDRESS: GOLDDE 0x004f8420 */
 unsigned int __cdecl gm_GenerateLoanOffers(int bank, unsigned short* borrower, unsigned int maxOffers,
                                   int* outOffers)
 {

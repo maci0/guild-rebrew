@@ -8,6 +8,7 @@ extern int g_9ba9f4;
 extern TEXT_LOG_RECORD g_9ba3a0[15];
 
 /* ADDRESS: GOLD 0x004cd4c0 */
+/* ADDRESS: GOLDDE 0x004bb820 */
 char* __cdecl d2_NextTextLogRecord(void)
 {
 	int n;

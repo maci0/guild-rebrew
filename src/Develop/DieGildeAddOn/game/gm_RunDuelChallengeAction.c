@@ -18,6 +18,7 @@ int __cdecl d2_ShowDuelChallengeDialog(unsigned char*);
  * the owner id and four random-range globals; the quest path fills a
  * five-dword descriptor and looks up the record for id 0x1d66. */
 /* ADDRESS: GOLDTL 0x005d6030 */
+/* ADDRESS: GOLDDE 0x005b7890 */
 int __cdecl gm_RunDuelChallengeAction(char* actor, char* request)
 {
 	unsigned char rec[0xf8];

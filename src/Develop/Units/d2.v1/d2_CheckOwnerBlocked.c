@@ -5,6 +5,7 @@ void* __cdecl gm_FindBuildingOwner(void*);
 void  __cdecl io_FormatTextBuffer(void*, int, ...);
 int   __cdecl d2_ShowModalMessageBox(void*, int);
 
+/* ADDRESS: GOLDDE 0x0050f270 */
 int __cdecl d2_CheckOwnerBlocked(void* entity)
 {
 	char buf[0x100];

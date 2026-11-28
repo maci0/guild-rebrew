@@ -6,6 +6,7 @@ extern volatile int tb_TimerPaused;
 
 /* ADDRESS: GOLD 0x00576680 */
 /* ADDRESS: GOLDTL 0x0057ec20 */
+/* ADDRESS: GOLDDE 0x005649f0 */
 int __cdecl d2_TutorialAllowsFlag(int a1)
 {
 	int* p;

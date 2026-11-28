@@ -18,6 +18,7 @@ int __cdecl d2_FindFreeElementSlot(void)
 }
 #else
 /* ADDRESS: GOLDTL 0x00465920 */
+/* ADDRESS: GOLDDE 0x00459550 */
 int __cdecl d2_FindFreeElementSlot(void)
 {
 	int i;

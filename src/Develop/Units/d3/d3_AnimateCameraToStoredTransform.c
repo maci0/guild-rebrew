@@ -11,6 +11,7 @@ extern float d3_CameraTargetRotZ;
 
 int __cdecl d3_AnimateObjectToTransform(char* a, float b, float c, float d, float e, float f, float g, int h, int i);
 
+/* ADDRESS: GOLDDE 0x005161b0 */
 void __cdecl d3_AnimateCameraToStoredTransform(void)
 {
 	d3_AnimateObjectToTransform(d3_ActiveCamera, d3_SavedCameraPos[0], d3_SavedCameraPosY, d3_SavedCameraPosZ, d3_CameraTargetRotation[0], d3_CameraTargetRotY, d3_CameraTargetRotZ, g_6a256c, 8);

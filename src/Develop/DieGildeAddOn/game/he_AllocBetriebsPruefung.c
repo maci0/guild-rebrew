@@ -8,6 +8,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x0053a010 */
 void __cdecl he_AllocBetriebsPruefung(char* e)
 {
 	char* t;

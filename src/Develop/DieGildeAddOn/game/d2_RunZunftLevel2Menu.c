@@ -13,6 +13,7 @@ int __cdecl amt_CanUpgradeBuildingTier2(char*);
 void __cdecl d2_StartZunftLevel2Action(int);
 
 /* ADDRESS: GOLD 0x5a1a20 */
+/* ADDRESS: GOLDDE 0x0058f850 */
 void __cdecl d2_RunZunftLevel2Menu(int a)
 {
 	int x;

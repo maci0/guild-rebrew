@@ -8,6 +8,7 @@ typedef struct {
 
 int __cdecl gm_RandomMod(int);
 
+/* ADDRESS: GOLDDE 0x005369c0 */
 void __cdecl he_InitEvent053(char* e)
 {
 	*(int*) (e + 0xb0) = -1;

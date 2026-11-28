@@ -20,6 +20,7 @@ int __cdecl hst_ParseContext(char* label, char* out, Slot* slot);
 /* Second pass over a fake text line: every "_name--<n>" label is closed by
  * expanding its context through fcn_004b2300, everything else is copied. */
 /* ADDRESS: GOLDTL 0x004b2a10 */
+/* ADDRESS: GOLDDE 0x004a0d30 */
 int __cdecl hst_ParseText_Fake_2nd_Pass(char* out, int id)
 {
 	char buf[0x17d0];

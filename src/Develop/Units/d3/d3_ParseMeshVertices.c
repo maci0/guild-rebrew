@@ -15,6 +15,7 @@ char* __cdecl vfs_ReadConfigLine(void*);
 char* __cdecl fcn_0064f026(char*, char*);
 double __cdecl fcn_0064d62e(char*);
 
+/* ADDRESS: GOLDDE 0x004433d0 */
 void __cdecl d3_ParseMeshVertices(void* r, char* o)
 {
 	int i;

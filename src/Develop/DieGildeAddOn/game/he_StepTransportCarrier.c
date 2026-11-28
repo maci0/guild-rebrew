@@ -45,6 +45,7 @@ void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl d2_RunTradeInventoryPanel(void*, int);
 
 /* ADDRESS: GOLDTL 0x0055dab0 */
+/* ADDRESS: GOLDDE 0x00543cc0 */
 void __cdecl he_StepTransportCarrier(char* e)
 {
 	char* s44;
@@ -81,7 +82,7 @@ void __cdecl he_StepTransportCarrier(char* e)
 		*(int*) (e + 0xec) = cm_RequestMoveObjekt(*(int*) (c + 1), *(int*) (s44 + 1), *(int*) (r + 2));
 		if (*(unsigned char*) c == 0x47) {
 			io_FormatTextBuffer(msg, 0x1c3b, 1, 0x1c39, gm_TownTable + *(int*) (c + 0x65) * 0x2f4);
-			if ((main_FrameHandlerStack[g_774650][0] != 0x5ba910 || d2_InteriorBuilding != c) &&
+			if ((main_FrameHandlerStack[g_774650][0] != (int) d2_RunTradeInventoryPanel || d2_InteriorBuilding != c) &&
 			    !(r[0x20] & 1) && e[0xf2] == 0) {
 				he_MessageBoxQuickjump(gm_EntitySlotTable[*(unsigned short*) (e + 8)].id, *(int*) (r + 2), msg, 0,
 				    0x609, *(int*) (c + 1), -1, 0, "_NACHRICHTEN_HS_60");
@@ -89,7 +90,7 @@ void __cdecl he_StepTransportCarrier(char* e)
 		} else if (*(unsigned char*) b == 0x47) {
 			io_FormatTextBuffer(msg, 0x1c3d, 1, 0x1c39, gm_TownTable + *(int*) (b + 0x65) * 0x2f4,
 			    *(unsigned short*) (c + 0x27), c);
-			if ((main_FrameHandlerStack[g_774650][0] != 0x5ba910 || d2_InteriorBuilding != c) &&
+			if ((main_FrameHandlerStack[g_774650][0] != (int) d2_RunTradeInventoryPanel || d2_InteriorBuilding != c) &&
 			    !(r[0x20] & 1) && e[0xf2] == 0) {
 				he_MessageBoxQuickjump(gm_EntitySlotTable[*(unsigned short*) (e + 8)].id, *(int*) (r + 2), msg, 0,
 				    0x609, *(int*) (c + 1), -1, 0, "_NACHRICHTEN_HS_59");
@@ -116,7 +117,7 @@ void __cdecl he_StepTransportCarrier(char* e)
 					io_FormatTextBuffer(msg, 0x1c44, c);
 				}
 			}
-			if ((main_FrameHandlerStack[g_774650][0] != 0x5ba910 || d2_InteriorBuilding != c) &&
+			if ((main_FrameHandlerStack[g_774650][0] != (int) d2_RunTradeInventoryPanel || d2_InteriorBuilding != c) &&
 			    !(r[0x20] & 1) && e[0xf2] == 0) {
 				if (text[0] != 0) {
 					he_MessageBoxQuickjump(gm_EntitySlotTable[*(unsigned short*) (e + 8)].id, *(int*) (r + 2),

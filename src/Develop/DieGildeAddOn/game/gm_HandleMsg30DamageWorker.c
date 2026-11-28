@@ -1,3 +1,4 @@
+extern char gm_EntitySlotTable[];
 #include <string.h>
 
 int __cdecl fcn_0042e410(int n);
@@ -11,6 +12,7 @@ void __cdecl io_FormatTextBuffer(char* buf, int fmt, int a, int b, int c, int d)
 void __cdecl he_PostEntityMessage(int a, int b, char* buf, int overflow, int msg, int zero);
 
 /* ADDRESS: GOLDTL 0x004ba830 */
+/* ADDRESS: GOLDDE 0x004a88d0 */
 int __cdecl gm_HandleMsg30DamageWorker(unsigned short* request)
 {
 	char buf[0x100];
@@ -46,9 +48,9 @@ int __cdecl gm_HandleMsg30DamageWorker(unsigned short* request)
 			if (count != 0) {
 				pick = list[fcn_0042e410(count) & 0xffff];
 				i = 0;
-				for (p = (char*) 0x7f4e0c; (int) p < 0x85a20c; p += 0x21c, i++) {
+				for (p = (char*) ((int) &gm_EntitySlotTable + 0x16c); (int) p < ((int) &gm_EntitySlotTable + 0x6556c); p += 0x21c, i++) {
 					if (*(unsigned char*) (p - 0x16a) == 1 && *(int*) p == pick) {
-						slot = (unsigned short*) (0x7f4ca0 + i * 0x21c);
+						slot = (unsigned short*) ((int) &gm_EntitySlotTable + i * 0x21c);
 						break;
 					}
 				}

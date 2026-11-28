@@ -23,6 +23,7 @@ int __cdecl main_RunFrameLoop(int a, int b);
 void __cdecl d2_DestroyForm(int dlg);
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* ADDRESS: GOLDTL 0x0059d6b0 */
+/* ADDRESS: GOLDDE 0x00582950 */
 void __cdecl d2_ShowBriberyDialog(unsigned int id, char* obj)
 {
 	char msg[0x400];

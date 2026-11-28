@@ -33,6 +33,7 @@ int __cdecl gm_CalcEscortCost(int, int);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl d2_DispatchTutorialInput(int, char*, int, int);
 
+/* ADDRESS: GOLDDE 0x0059c5f0 */
 int __cdecl cm_DispatchCartTransfer(int playerIdx, char* cart, char* origin, char* dest)
 {
 	int res;

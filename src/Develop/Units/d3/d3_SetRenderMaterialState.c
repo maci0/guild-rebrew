@@ -30,6 +30,7 @@ char d3_LightingEnabled = 1;
 
 void __cdecl d3_SetScaledMaterial(float a, char* b, int c, char d);
 
+/* ADDRESS: GOLDDE 0x004307d0 */
 void __cdecl d3_SetRenderMaterialState(unsigned char alpha, unsigned char flags, int color, unsigned char test, unsigned char cull)
 {
 	float f;

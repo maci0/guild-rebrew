@@ -17,6 +17,7 @@ char* __cdecl cm_AreQueuedCommandsDone(void);
 void __cdecl cm_StepCommandQueue(void);
 
 /* ADDRESS: GOLDTL 0x0053abe0 */
+/* ADDRESS: GOLDDE 0x005223e0 */
 void __cdecl gm_InitCivicBuildings(unsigned int ownerSlot)
 {
 	char* bld;

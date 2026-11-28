@@ -11,6 +11,7 @@ int __cdecl fcn_004011f0(void* stream, void* dst);
 int __cdecl fcn_0041db70(int flags, const char* name);
 
 /* ADDRESS: GOLDTL 0x0044df60 */
+/* ADDRESS: GOLDDE 0x00443c70 */
 void __cdecl d3_ReadBinPointBufferHeader(void* stream, D3_BIN_POINT_BUF* r)
 {
 	fcn_004011f0(stream, &r->n);

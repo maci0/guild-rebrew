@@ -6,6 +6,7 @@
 
 char* __cdecl cut_FindCutsceneById(int);
 
+/* ADDRESS: GOLDDE 0x004d3360 */
 void __cdecl cut_FreeCutscene(int a1)
 {
 	char* p;
@@ -31,6 +32,7 @@ void __cdecl cut_FreeAllCutscenes(void)
 
 #endif
 
+/* ADDRESS: GOLDDE 0x004d3390 */
 int __cdecl cut_AddParticipant(int id, int v)
 {
 	char* p;
@@ -55,6 +57,7 @@ int __cdecl cut_AddParticipant(int id, int v)
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
+/* ADDRESS: GOLDDE 0x004d33f0 */
 int __cdecl cut_RemoveParticipant(int a, int b)
 {
 	unsigned char* s;

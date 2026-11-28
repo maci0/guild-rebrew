@@ -19,6 +19,7 @@ extern int d2_ResourceOffset;
 void __cdecl d2_Show(int resource_id, int arg);
 
 /* ADDRESS: GOLDTL 0x00466190 */
+/* ADDRESS: GOLDDE 0x00459d10 */
 void* __cdecl d2_GetResourceData(int resource_id)
 {
 	int original_resource_id;

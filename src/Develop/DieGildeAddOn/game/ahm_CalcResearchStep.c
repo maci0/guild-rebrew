@@ -7,6 +7,7 @@ int* __cdecl ahm_FindRecipeSlot(char*, unsigned int);
 int __cdecl ahm_CalcResearchDuration(char*, char*);
 
 /* ADDRESS: GOLDTL 0x004ecd50 */
+/* ADDRESS: GOLDDE 0x004d91a0 */
 float __cdecl ahm_CalcResearchStep(char* actor, unsigned int* recipe, int* maxDuration)
 {
 	float x;

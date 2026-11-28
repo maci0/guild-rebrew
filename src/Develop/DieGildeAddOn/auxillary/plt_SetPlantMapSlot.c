@@ -19,6 +19,7 @@ typedef struct PLANT_SLOT {
 void __cdecl init_SetPflanzenMap(PLANT_SLOT* slot, int mode);
 
 /* ADDRESS: GOLDTL 0x004bcda0 */
+/* ADDRESS: GOLDDE 0x004aac20 */
 char* __cdecl plt_SetPlantMapSlot(void* tab, unsigned int a2, unsigned int a3, int id, unsigned int mode)
 {
 	PLANT_SLOT* table;

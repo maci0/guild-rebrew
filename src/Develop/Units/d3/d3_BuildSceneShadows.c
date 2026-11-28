@@ -25,6 +25,7 @@ extern float g_1052c00[16];
 void __cdecl d3_SetRenderMaterialState(int, int, int, int, int);
 void __cdecl d3_ProjectNodeShadows(char*);
 
+/* ADDRESS: GOLDDE 0x0044c610 */
 void __cdecl d3_BuildSceneShadows(void)
 {
 	char* p;

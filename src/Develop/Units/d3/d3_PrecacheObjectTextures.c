@@ -20,6 +20,7 @@
 /* Inferred name, source home and context/texture access views. */
 /* ADDRESS: GOLD 0x00447800 */
 /* ADDRESS: GOLDTL 0x00443270 */
+/* ADDRESS: GOLDDE 0x0043b6c0 */
 void __cdecl d3_PrecacheObjectTextures(char* object)
 {
     char* context;

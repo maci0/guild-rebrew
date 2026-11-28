@@ -48,6 +48,7 @@ int __cdecl d2_GetControlValue(int);
 void __cdecl d2_CloseInventoryPanel(void);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x005a8a50 */
 void __cdecl d2_ShowInventoryDialog(void)
 {
 	int dlg;

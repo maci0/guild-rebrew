@@ -10,6 +10,7 @@ typedef struct
 int __cdecl vfs_ReadByte(void* stream, void* dst);
 
 /* ADDRESS: GOLDTL 0x0044da90 */
+/* ADDRESS: GOLDDE 0x004437d0 */
 void __cdecl d3_ReadMatProperties(void* stream, F4dRec* r)
 {
 	vfs_ReadByte(stream, &stream);

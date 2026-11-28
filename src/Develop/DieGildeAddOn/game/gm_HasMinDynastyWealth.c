@@ -5,6 +5,7 @@ int __cdecl gm_AmountToUnits(int, char);
 
 
 /* ADDRESS: GOLDTL 0x004b4760 */
+/* ADDRESS: GOLDDE 0x004a2a50 */
 int __cdecl gm_HasMinDynastyWealth(short* e, char* thr)
 {
 	return gm_AmountToUnits(gm_CalcPersonWealth(*e), (*(char*)&gm_ActiveTownIndex)) >= *(int*) (thr + 0x14);

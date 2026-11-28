@@ -9,6 +9,7 @@ void __cdecl gm_ModifyHealth(int, int);
 int __cdecl cm_SendAdjustResourceSlots(void*);
 
 /* ADDRESS: GOLDTL 0x004f0a30 */
+/* ADDRESS: GOLDDE 0x004dcd40 */
 int __cdecl gm_SendCannonVolleys(char* building, char* payer, unsigned int* firstPayload,
 	unsigned int* secondPayload, unsigned int* thirdPayload, unsigned int priority, int hpDelta, unsigned int goldCost)
 {

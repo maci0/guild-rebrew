@@ -29,6 +29,7 @@ void __cdecl gm_InitTownGoodsTable(int);
 void __cdecl init_AssignBuildingNames(void);
 void __cdecl gm_ResetWarehouseStock(void);
 
+/* ADDRESS: GOLDDE 0x004ffcc0 */
 void __cdecl init_LocalData(void)
 {
 	ENTITY_RECORD** p;

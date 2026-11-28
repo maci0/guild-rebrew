@@ -22,6 +22,7 @@ typedef struct
 
 void* __cdecl cut_FindCutsceneById(unsigned int);
 
+/* ADDRESS: GOLDDE 0x004d3120 */
 void* __cdecl cut_FindLowestIdFlaggedCutscene(void)
 {
 	unsigned int best;

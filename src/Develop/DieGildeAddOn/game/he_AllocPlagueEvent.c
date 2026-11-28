@@ -9,6 +9,7 @@ extern pos14_7f4c00 gm_GameTime;
 char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 char* __cdecl he_fn_Handlung(void);
 
+/* ADDRESS: GOLDDE 0x005385d0 */
 void __cdecl he_AllocPlagueEvent(char* o)
 {
 	char* p;

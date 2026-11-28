@@ -7,6 +7,7 @@ void __cdecl he_CancelEntityActions0x23(unsigned short*);
 void __cdecl fcn_005758f0(unsigned short*);
 void __cdecl amt_ClearEntityOffices(unsigned short*);
 
+/* ADDRESS: GOLDDE 0x004f1df0 */
 void __cdecl gm_CleanupPlayerActions(unsigned short* e)
 {
 	if (e != 0 && *e != 0xffff) {

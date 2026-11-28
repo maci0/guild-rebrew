@@ -27,6 +27,7 @@ typedef struct {
 void __cdecl cm_SendCopyEntityData(AHM_ACTION_0X98_MSG*);
 
 /* ADDRESS: GOLDTL 0x005473a0 */
+/* ADDRESS: GOLDDE 0x0052d990 */
 void __cdecl he_EnsureAhmAction0x98(void)
 {
 	AHM_ACTION_0X98_MSG msg;

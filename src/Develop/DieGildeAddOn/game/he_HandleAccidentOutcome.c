@@ -45,6 +45,7 @@ int __cdecl he_MessageBoxQuickjump(int a, int b, char* text, int c, int d,
                                    int e, int f, int g, void* h);
 
 /* ADDRESS: GOLDTL 0x00549580 */
+/* ADDRESS: GOLDDE 0x0052fac0 */
 void __cdecl he_HandleAccidentOutcome(int action, char* subject, char* owner,
                                       char* home, float health, int silent)
 {

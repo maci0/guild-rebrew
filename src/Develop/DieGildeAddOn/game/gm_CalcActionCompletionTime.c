@@ -26,6 +26,7 @@ int __cdecl gm_GetElapsedMinutes(GAME_TIMESTAMP* a, GAME_TIMESTAMP* b);
 void __cdecl gm_AddTime(GAME_TIMESTAMP* t, int a, int b, int c);
 
 /* ADDRESS: GOLDTL 0x00507540 */
+/* ADDRESS: GOLDDE 0x004f26e0 */
 float __cdecl gm_CalcActionCompletionTime(int idx, GAME_TIMESTAMP* out)
 {
 	int r;

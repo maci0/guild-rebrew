@@ -1,7 +1,9 @@
+extern char str_fmt_s[];
 void __cdecl io_FormatTextBuffer(void* buffer, int format, ...);
 void __cdecl gm_HandleAbbitte(void* rec, void* ctx);
 
 /* ADDRESS: GOLDTL 0x004f98e0 */
+/* ADDRESS: GOLDDE 0x004e56c0 */
 int __cdecl gm_HandleAbbittePrivilege(char* rec, int* ctx)
 {
 	int action;
@@ -9,7 +11,7 @@ int __cdecl gm_HandleAbbittePrivilege(char* rec, int* ctx)
 	action = *ctx;
 	if (action == 3 || action == 1) {
 		if (*(char*) (rec + 2) == 6) {
-			io_FormatTextBuffer(&ctx[5], 0x679060, 0x1de9);
+			io_FormatTextBuffer(&ctx[5], (int) &str_fmt_s, 0x1de9);
 		}
 		if (*(char*) (rec + 0x166) != 0x18) {
 			return 1;
@@ -34,7 +36,7 @@ int __cdecl gm_HandleAbbittePrivilege(char* rec, int* ctx)
 			return 10;
 		}
 		if (*(char*) (rec + 2) == 6) {
-			io_FormatTextBuffer(&ctx[5], 0x679060, 0x1de9);
+			io_FormatTextBuffer(&ctx[5], (int) &str_fmt_s, 0x1de9);
 		}
 		return 10;
 	}

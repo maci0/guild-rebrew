@@ -27,6 +27,7 @@ void __cdecl d3_LoadTextureFromFile(int a1, int a2, void* a3, int a4, int a5, in
 void __cdecl d3_SyncClonedTextureHandles(Tex* a0);
 
 /* ADDRESS: GOLDTL 0x0045ce90 */
+/* ADDRESS: GOLDDE 0x00451e40 */
 void __cdecl d3_LoadTextureSurfaceTl(Tex* texture)
 {
 	Tex* p;

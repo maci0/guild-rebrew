@@ -49,6 +49,7 @@ float __cdecl gm_GetSeasonPrice(int, unsigned char);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 Item* __cdecl gm_NextEntityQueryMatch(void);
 
+/* ADDRESS: GOLDDE 0x004c23e0 */
 int __cdecl d2_DrawPartyStoreItems(int x, int y, int mode)
 {
 	int n;

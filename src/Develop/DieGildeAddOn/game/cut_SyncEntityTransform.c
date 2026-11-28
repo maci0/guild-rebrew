@@ -5,6 +5,7 @@
 void __cdecl d3_SetNodePosition(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
 
+/* ADDRESS: GOLDDE 0x004baa80 */
 void __cdecl cut_SyncEntityTransform(char* entity, float* pos, float* rot, int state)
 {
 	if (entity != 0 && *(char**) (entity + 0x184) != 0) {

@@ -11,6 +11,7 @@ void __cdecl io_CloseRegistryKey(int value)
 }
 #else
 /* ADDRESS: GOLDTL 0x00411340 */
+/* ADDRESS: GOLDDE 0x00410140 */
 void __cdecl io_CloseRegistryKey(int value)
 {
     ((thunk_t) *(void**) 0x00662010)(value);

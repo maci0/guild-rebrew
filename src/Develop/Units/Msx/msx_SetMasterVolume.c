@@ -6,6 +6,7 @@ extern g_6623b0_f imp_AIL_set_digital_master_volume;
 
 int __cdecl msx_FindWaveDriverIndex(int);
 
+/* ADDRESS: GOLDDE 0x00424a70 */
 int __cdecl msx_SetMasterVolume(int* audio, int value)
 {
 	int result = 0;

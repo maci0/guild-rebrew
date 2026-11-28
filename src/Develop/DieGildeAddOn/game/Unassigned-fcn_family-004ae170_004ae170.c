@@ -2,6 +2,7 @@ extern char gm_EntitySlotTable[];
 
 /* ADDRESS: GOLD 0x004ae030 */
 /* ADDRESS: GOLDTL 0x004ae170 */
+/* ADDRESS: GOLDDE 0x0049c490 */
 int __cdecl gm_IsSlotLivingPerson(int slot)
 {
 	unsigned char c;
@@ -22,6 +23,7 @@ int __cdecl gm_IsSlotLivingPerson(int slot)
 
 /* ADDRESS: GOLD 0x004ae120 */
 /* ADDRESS: GOLDTL 0x004ae260 */
+/* ADDRESS: GOLDDE 0x0049c580 */
 int __cdecl gm_IsSlotActiveBuilding(int slot)
 {
 	int o;

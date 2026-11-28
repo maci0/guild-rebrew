@@ -1,3 +1,4 @@
+extern char gm_SlotTableKindView[];
 #include <string.h>
 
 extern unsigned char gm_ActiveTownIndex;
@@ -13,6 +14,7 @@ void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004b6830 */
+/* ADDRESS: GOLDDE 0x004a4ac0 */
 int __cdecl gm_HandleMsg02PayOfficeHolder(int* request)
 {
 	unsigned char msg[0x90];
@@ -52,7 +54,7 @@ int __cdecl gm_HandleMsg02PayOfficeHolder(int* request)
 		if (*(rec + 4) != 3 || *(int*) rec == 0) {
 			continue;
 		}
-		for (j = 0, s = (unsigned char*) 0x7f4ca2; (int) s < 0x85a0a2; s += 0x21c, j++) {
+		for (j = 0, s = (unsigned char*) &gm_SlotTableKindView; (int) s < ((int) &gm_SlotTableKindView + 0x65400); s += 0x21c, j++) {
 			if (*(s + 0x166) != msg[8 + i * 0x18]) {
 				continue;
 			}

@@ -107,6 +107,7 @@ struct town_frame {
 };
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00527f60 */
+/* ADDRESS: GOLDDE 0x00511170 */
 void __cdecl d2_RefreshTownView(unsigned char a0, int a1)
 {
 	struct town_frame fr;

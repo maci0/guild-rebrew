@@ -10,6 +10,7 @@ void __cdecl d2_SetMouseTooltip(char* text)
 }
 #else
 /* ADDRESS: GOLDTL 0x00475220 */
+/* ADDRESS: GOLDDE 0x00467f20 */
 void __cdecl d2_SetMouseTooltip(char* text)
 {
 	strcpy((char*) 0x100f8c0, text);

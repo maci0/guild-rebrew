@@ -5,6 +5,7 @@ void __cdecl d3_TransformWorldToParent(int, int, int, void*, void*);
 void __cdecl d3_SetNodePosition(char*, void*);
 void __cdecl d3_SetObjectRotation(char*, void*);
 
+/* ADDRESS: GOLDDE 0x0043d630 */
 void __cdecl d3_ApplyWorldTransformToObject(int object, int pos, int rotMatrix)
 {
 	char a[0xc];

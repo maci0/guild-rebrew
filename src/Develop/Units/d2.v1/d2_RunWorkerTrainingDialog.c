@@ -101,6 +101,7 @@ void __cdecl d2_DrawPanelFrame(int, int, int);
 int __cdecl d2_CreateItemRowControls(int, int, int*, int);
 
 /* ADDRESS: GOLDTL 0x005c79a0 */
+/* ADDRESS: GOLDDE 0x005a9840 */
 void __cdecl d2_RunWorkerTrainingDialog(unsigned char* obj)
 {
 	char buf[0x800];

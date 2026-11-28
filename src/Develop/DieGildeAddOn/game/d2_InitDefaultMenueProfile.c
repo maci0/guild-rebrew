@@ -31,6 +31,7 @@ char* __cdecl strcpy(char*, const char*);
 int __cdecl gm_FindHeadIconIndex(char*);
 Name6 __cdecl gm_GetStatRecord(int);
 
+/* ADDRESS: GOLDDE 0x0056a2a0 */
 void __cdecl d2_InitDefaultMenueProfile(void)
 {
 	Name6 r;

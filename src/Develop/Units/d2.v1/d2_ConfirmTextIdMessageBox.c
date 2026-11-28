@@ -39,6 +39,7 @@ void __cdecl d2_BringFormToFront(int);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x005c1410 */
 int __cdecl d2_ConfirmTextIdMessageBox(int arg, unsigned int flags)
 {
 	int h;

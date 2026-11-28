@@ -9,6 +9,7 @@ int __cdecl ch_IsAnimationFinished(char* e);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 void __cdecl ch_CheckAniMorph(char* e);
 
+/* ADDRESS: GOLDDE 0x00405420 */
 void __cdecl ch_ExecPlayAnimation(CH_ACTION* t)
 {
 	char* e;

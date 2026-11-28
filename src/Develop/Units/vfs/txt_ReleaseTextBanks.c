@@ -5,6 +5,7 @@
 void __cdecl m_FreeTracked(void* p);
 
 /* ADDRESS: GOLDTL 0x0042d5f0 */
+/* ADDRESS: GOLDDE 0x00427590 */
 void __cdecl txt_ReleaseTextBanks(void)
 {
 	int i;

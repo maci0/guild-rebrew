@@ -19,6 +19,7 @@ void __cdecl d2_TurnBookPagesBack(Panel*);
 void __cdecl d2_TurnBookPagesForward(Panel*);
 void __cdecl d2_RenderFormToTextures(int);
 
+/* ADDRESS: GOLDDE 0x0051d9c0 */
 void __cdecl d2_UpdatePagedPanel(Panel* panel)
 {
 	int i;

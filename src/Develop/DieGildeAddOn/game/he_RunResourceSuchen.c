@@ -1,3 +1,4 @@
+extern char g_7f4c00[];
 extern char* lpObjektePROT;
 extern char gm_EntitySlotTable[];
 extern unsigned char gm_ActiveTownIndex;
@@ -20,6 +21,7 @@ void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, ch
 /* Advances a message action through its states, resolves the sender entity
  * and updates the message-table entry it belongs to. */
 /* ADDRESS: GOLDTL 0x00572a50 */
+/* ADDRESS: GOLDDE 0x005589e0 */
 void __cdecl he_RunResourceSuchen(char* obj)
 {
 	int ref1;
@@ -40,7 +42,7 @@ void __cdecl he_RunResourceSuchen(char* obj)
 		return;
 	case 1:
 		if (*(int*) (obj + 0x14) != 0 || *(int*) (obj + 0x18) != 0) {
-			if (gm_CompareGameTime(obj + 0x52, 0x7f4c00) >= 0) {
+			if (gm_CompareGameTime(obj + 0x52, (int) &g_7f4c00) >= 0) {
 				return;
 			}
 			gm_ResolveEntityById((void**) &ref1, 0, 0, *(int*) (obj + 0xac));
@@ -101,7 +103,7 @@ void __cdecl he_RunResourceSuchen(char* obj)
 					-1, msg, 0, 0x5f1, *(int*) ((char*) ref1 + 1), -1, 0,
 					"_NACHRICHTEN_HS_08");
 			}
-			for (p = (unsigned short*) 0x7f4ca0; (int) p < 0x85a0a0;
+			for (p = (unsigned short*) ((int) &g_7f4c00 + 0xa0); (int) p < ((int) &g_7f4c00 + 0x654a0);
 				p += 0x10e) {
 				if (*(int*) ((char*) p + 0x17c) == (int) obj) {
 					he_AssignActionSlot(ref1, 0, *p, 0);
@@ -113,7 +115,7 @@ void __cdecl he_RunResourceSuchen(char* obj)
 		break;
 	case -2:
 	case -1:
-		for (p = (unsigned short*) 0x7f4ca0; (int) p < 0x85a0a0;
+		for (p = (unsigned short*) ((int) &g_7f4c00 + 0xa0); (int) p < ((int) &g_7f4c00 + 0x654a0);
 			p += 0x10e) {
 			if (*(int*) ((char*) p + 0x17c) == (int) obj) {
 				he_AssignActionSlot(0, 0, *p, 0);

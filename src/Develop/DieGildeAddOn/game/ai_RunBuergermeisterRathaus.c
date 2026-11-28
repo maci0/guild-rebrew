@@ -1,3 +1,4 @@
+extern char g_67eb10[];
 #include <string.h>
 
 #include "Develop/client_types.h"
@@ -21,6 +22,7 @@ void __cdecl cm_SendCopyEntityData(char* msg);
  * and the open flag, then runs the fcn_004c4eb0/fcn_004c5150/fcn_004c5530 chain
  * and returns 0x31. */
 /* ADDRESS: GOLDTL 0x0049dc70 */
+/* ADDRESS: GOLDDE 0x0048c6a0 */
 int __cdecl ai_RunBuergermeisterRathaus(unsigned char* rec, unsigned char* obj, unsigned char* out)
 {
 	char msg[0xf8];
@@ -46,9 +48,9 @@ int __cdecl ai_RunBuergermeisterRathaus(unsigned char* rec, unsigned char* obj, 
 	*(int*) (msg + 0x30) = gm_GameTimeSliceDword;
 	*(short*) (msg + 0x34) = gm_GameTimeTailWord;
 	*(int*) (msg + 0x58) = *(int*) (out + 4);
-	cm_SendLogAction((char*) 0x67eb10);
+	cm_SendLogAction((char*) &g_67eb10);
 	cm_RequestMoveCredits(-1, *(int*) (dialog + 2), (*(char*)&gm_ActiveTownIndex), (int) (gm_GetTypeProductValue(*(int*) (obj + 4)) * 0.3f));
 	cm_SendCopyEntityData(msg);
-	cm_SendTraceEnd((char*) 0x67eb10);
+	cm_SendTraceEnd((char*) &g_67eb10);
 	return 0x31;
 }

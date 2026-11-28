@@ -6,6 +6,7 @@
 
 void __cdecl he_FreeAction(char*);
 
+/* ADDRESS: GOLDDE 0x0052bbc0 */
 void __cdecl he_FreeAllActions(void)
 {
 	int i;

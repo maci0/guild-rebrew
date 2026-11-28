@@ -15,6 +15,7 @@ typedef struct Rec6 {
 } Rec6;
 
 /* ADDRESS: GOLDTL 0x0048e850 */
+/* ADDRESS: GOLDDE 0x0047d720 */
 int __cdecl ai_StartSculpture(int action, char* ent, char* opt, char* out1, char* out2)
 {
 	Rec6 rec1;

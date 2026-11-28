@@ -47,6 +47,7 @@ int __cdecl ai_FindEntityInFavorRange(char* p, int kind, F8 f, int c, float r, i
  * select either a pickup or a drop message, and one slot is
  * picked at random. */
 /* ADDRESS: GOLDTL 0x0048eba0 */
+/* ADDRESS: GOLDDE 0x0047da70 */
 int __cdecl ai_StartAlchemistryItems(int kind, char* e, int busy, Msg* a, Msg* b)
 {
 	Slot slot[0xf];

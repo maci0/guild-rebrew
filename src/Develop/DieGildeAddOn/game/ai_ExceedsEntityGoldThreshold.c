@@ -5,6 +5,7 @@ int __cdecl gm_AmountToUnits(int, char);
 
 
 /* ADDRESS: GOLDTL 0x004b46c0 */
+/* ADDRESS: GOLDDE 0x004a29b0 */
 int __cdecl ai_ExceedsEntityGoldThreshold(int id, char* thr)
 {
 	char* p;

@@ -18,6 +18,7 @@ extern void __cdecl d3_SetupRightEdgeStep(int i, int j);
 extern void __cdecl d3_RasterizeTriangleSpans(int count, int size, unsigned char flags, int arg3, int y);
 
 /* ADDRESS: GOLDTL 0x00456080 */
+/* ADDRESS: GOLDDE 0x0044b840 */
 void __cdecl d3_RasterizeHeightTriangle(float* v, unsigned char* colors, int base, int size,
 	unsigned char flags, int grid, int r)
 {

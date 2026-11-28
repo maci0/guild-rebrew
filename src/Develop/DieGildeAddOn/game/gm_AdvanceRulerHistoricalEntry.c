@@ -6,6 +6,7 @@ extern Entry2c* g_67fbb4;
 
 
 /* ADDRESS: GOLDTL 0x004adf80 */
+/* ADDRESS: GOLDDE 0x0049c2c0 */
 void __cdecl gm_AdvanceRulerHistoricalEntry(void)
 {
 	int i;

@@ -4,6 +4,7 @@
 
 int __cdecl gm_QueryEntities(int a, int b, int c, int d, int e);
 
+/* ADDRESS: GOLDDE 0x004dd500 */
 float __cdecl gm_GetCannonPowerScale(char* p)
 {
 	float v;

@@ -5,6 +5,7 @@
 
 unsigned int __cdecl vfs_fwrite(void*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x00509b30 */
 int __cdecl ls_SaveRelationMatrices(int x)
 {
 	int i;

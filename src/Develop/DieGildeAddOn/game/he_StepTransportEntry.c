@@ -1,3 +1,4 @@
+void __cdecl d2_RunTradeInventoryPanel();
 extern char s_6a6310[];
 extern char s_6a6318[];
 extern char s_6a632c[];
@@ -40,6 +41,7 @@ int __cdecl he_MessageBoxQuickjump(int id, int arg, char* text1, unsigned char f
 	int value, int x, int y, char* name, char* text2);
 
 /* ADDRESS: GOLDTL 0x0055e4a0 */
+/* ADDRESS: GOLDDE 0x005446b0 */
 void __cdecl he_StepTransportEntry(char* ev)
 {
 	char buf[1024];
@@ -92,7 +94,7 @@ void __cdecl he_StepTransportEntry(char* ev)
 		if (*(char*) v8 == 0x47) {
 			io_FormatTextBuffer(buf, 0x1c3b, 1, 0x1c39,
 				*(int*) (v8 + 0x65) * 0x2f4 + (int) gm_TownTable);
-			if ((*(int*) ((char*) main_FrameHandlerStack + g_774650 * 8) != 0x5ba910
+			if ((*(int*) ((char*) main_FrameHandlerStack + g_774650 * 8) != (int) d2_RunTradeInventoryPanel
 				|| d2_InteriorBuilding != v8) && !(*(unsigned char*) (e + 0x20) & 1)
 				&& !*(char*) (ev + 0xf2)) {
 				he_MessageBoxQuickjump(
@@ -106,7 +108,7 @@ void __cdecl he_StepTransportEntry(char* ev)
 			io_FormatTextBuffer(buf, 0x1c3d, 1, 0x1c39,
 				*(int*) (v7 + 0x65) * 0x2f4 + (int) gm_TownTable,
 				*(unsigned short*) (v8 + 0x27), v8);
-			if ((*(int*) ((char*) main_FrameHandlerStack + g_774650 * 8) != 0x5ba910
+			if ((*(int*) ((char*) main_FrameHandlerStack + g_774650 * 8) != (int) d2_RunTradeInventoryPanel
 				|| d2_InteriorBuilding != v8) && !(*(unsigned char*) (e + 0x20) & 1)
 				&& !*(char*) (ev + 0xf2)) {
 				he_MessageBoxQuickjump(
@@ -155,7 +157,7 @@ void __cdecl he_StepTransportEntry(char* ev)
 			else {
 				io_FormatTextBuffer(buf, 0x1c44, v8);
 			}
-			if ((*(int*) ((char*) main_FrameHandlerStack + g_774650 * 8) != 0x5ba910
+			if ((*(int*) ((char*) main_FrameHandlerStack + g_774650 * 8) != (int) d2_RunTradeInventoryPanel
 				|| d2_InteriorBuilding != v8) && !(*(unsigned char*) (e + 0x20) & 1)
 				&& !*(char*) (ev + 0xf2)) {
 				if (key[0]) {

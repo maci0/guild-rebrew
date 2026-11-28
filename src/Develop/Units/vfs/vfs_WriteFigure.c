@@ -47,6 +47,7 @@ typedef struct {
 
 unsigned int __cdecl vfs_fwrite(void*, int, int, void*);
 
+/* ADDRESS: GOLDDE 0x00509020 */
 int __cdecl vfs_WriteFigure(Figure* o, int value, void* f)
 {
 	float pos[3];

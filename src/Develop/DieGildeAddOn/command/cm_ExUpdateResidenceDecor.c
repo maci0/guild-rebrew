@@ -4,6 +4,7 @@
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl gm_UpdateResidenceOwnerDecor(int);
 
+/* ADDRESS: GOLDDE 0x004b9bb0 */
 int __cdecl cm_ExUpdateResidenceDecor(char* x, char* out)
 {
 	char* e;

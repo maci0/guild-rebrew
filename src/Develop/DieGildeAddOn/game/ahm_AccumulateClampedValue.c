@@ -1,4 +1,5 @@
 /* ADDRESS: GOLDTL 0x004eebb0 */
+/* ADDRESS: GOLDDE 0x004daf80 */
 int __cdecl ahm_AccumulateClampedValue(void *a, void *b)
 {
     float t;

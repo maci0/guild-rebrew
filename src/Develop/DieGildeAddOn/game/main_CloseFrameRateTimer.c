@@ -1,3 +1,4 @@
+void __cdecl main_SampleFrameCounter();
 void __cdecl fcn_0042e9d0(void* p);
 
 #if defined(REBREW_GOLD)
@@ -8,8 +9,9 @@ void __cdecl main_CloseFrameRateTimer(void)
 }
 #else
 /* ADDRESS: GOLDTL 0x00525ee0 */
+/* ADDRESS: GOLDDE 0x0050f1a0 */
 void __cdecl main_CloseFrameRateTimer(void)
 {
-    fcn_0042e9d0((void*) 0x00525e90);
+    fcn_0042e9d0((void*) main_SampleFrameCounter);
 }
 #endif

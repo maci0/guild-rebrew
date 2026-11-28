@@ -40,6 +40,7 @@ void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl cm_StepCommandQueue(void);
 int __cdecl cm_SendSellObjekt(int, int, int, int, char, int);
 
+/* ADDRESS: GOLDDE 0x004fc240 */
 void __cdecl gm_InitCityOfficialsAndCitizens(void)
 {
 	int flag;

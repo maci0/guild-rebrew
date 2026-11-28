@@ -24,6 +24,7 @@ void __cdecl evt_LogScriptError(char*, int, const char*);
 /* PlayCharacterAniSound(): queues a character animation task with a sound;
  * the calling script waits for it when it blocks. */
 /* ADDRESS: GOLDTL 0x0040cee0 */
+/* ADDRESS: GOLDDE 0x0040bcf0 */
 int __cdecl PlayCharacterAniSound(char** ch, char** ani, int* kind, unsigned char* level, char** sound)
 {
 	char* task;
@@ -52,6 +53,7 @@ int __cdecl PlayCharacterAniSound(char** ch, char** ani, int* kind, unsigned cha
 /* Task callback for PlayCharacterAniScript(): loads the script named in the
  * task, runs it, and passes the task parameter to it. */
 /* ADDRESS: GOLDTL 0x0040cfb0 */
+/* ADDRESS: GOLDDE 0x0040bdc0 */
 void __cdecl ch_RunAnimationScript(char* task)
 {
 	char* script;
@@ -66,6 +68,7 @@ void __cdecl ch_RunAnimationScript(char* task)
 /* PlayCharacterAniScript(): queues a character animation task that runs a
  * script; the calling script waits for it when it blocks. */
 /* ADDRESS: GOLDTL 0x0040cff0 */
+/* ADDRESS: GOLDDE 0x0040be00 */
 int __cdecl PlayCharacterAniScript(char** ch, char** script, int* kind, unsigned char* level, char** func)
 {
 	char* task;
@@ -99,6 +102,7 @@ int __cdecl PlayCharacterAniScript(char** ch, char** script, int* kind, unsigned
 /* PlayCharacterAniScriptInt(): like PlayCharacterAniScript() with an
  * integer parameter handed to the script. */
 /* ADDRESS: GOLDTL 0x0040d130 */
+/* ADDRESS: GOLDDE 0x0040bf40 */
 int __cdecl PlayCharacterAniScriptInt(char** ch, char** script, int* kind, unsigned char* level, char** func, int* param)
 {
 	char* task;

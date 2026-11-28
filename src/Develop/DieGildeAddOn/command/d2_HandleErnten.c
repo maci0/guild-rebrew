@@ -42,6 +42,7 @@ void __cdecl cm_ExProdObjekt(void);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl d2_SetMouseTooltip(char*);
 
+/* ADDRESS: GOLDDE 0x005a7c10 */
 void __cdecl d2_HandleErnten(char* building, int plant_table)
 {
 	char* entry;

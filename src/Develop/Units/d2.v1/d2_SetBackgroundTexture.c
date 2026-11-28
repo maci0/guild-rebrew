@@ -23,6 +23,7 @@ int __cdecl d2_WriteSurfacePixel(int x, int y, unsigned char r, unsigned char g,
 void __cdecl d2_UnlockSurface(void*);
 
 /* ADDRESS: GOLDTL 0x0046e7a0 */
+/* ADDRESS: GOLDDE 0x00461dd0 */
 void __cdecl d2_SetBackgroundTexture(const char* name, int win)
 {
 	char msg[0x400];

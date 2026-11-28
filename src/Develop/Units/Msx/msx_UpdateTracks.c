@@ -15,6 +15,7 @@ int __cdecl msx_GetStreamStatus(int h);
 int __cdecl msx_SetStreamVolume(int h, int v);
 void __cdecl SetMasterVolume(int vol);
 
+/* ADDRESS: GOLDDE 0x0041d170 */
 void __cdecl msx_UpdateTracks(void)
 {
 	int i;

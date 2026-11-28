@@ -18,6 +18,7 @@ typedef struct Tex {
 extern char* d3_TextureBank;
 extern unsigned int d3_TextureBankCount;
 
+/* ADDRESS: GOLDDE 0x00451dd0 */
 void __cdecl d3_SyncClonedTextureHandles(Tex* t)
 {
 	Tex* list;

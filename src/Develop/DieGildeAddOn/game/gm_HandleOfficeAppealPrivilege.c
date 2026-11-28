@@ -6,6 +6,7 @@ int __cdecl d2_ShowPrivilegMessage(void*, int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 
 /* ADDRESS: GOLDTL 0x004f89b0 */
+/* ADDRESS: GOLDDE 0x004e4790 */
 int __cdecl gm_HandleOfficeAppealPrivilege(unsigned char* entity, int* context)
 {
 	char buf[0x400];

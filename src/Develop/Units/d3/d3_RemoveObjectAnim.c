@@ -21,6 +21,7 @@ int __cdecl d3_RemoveObjectAnim(char* model)
 }
 #else
 /* ADDRESS: GOLDTL 0x00413120 */
+/* ADDRESS: GOLDDE 0x00411890 */
 int __cdecl d3_RemoveObjectAnim(char* p)
 {
 	int i;

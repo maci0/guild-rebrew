@@ -48,6 +48,7 @@ void __cdecl gm_AdvanceGameClock(void);
 char* __cdecl d2_StartScreenFade(int, int, int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00510c90 */
+/* ADDRESS: GOLDDE 0x004fb960 */
 void __cdecl init_LoadObjektScene(int objectTypeIndex)
 {
 	char path[0x100];

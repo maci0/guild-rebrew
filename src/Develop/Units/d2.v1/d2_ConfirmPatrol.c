@@ -66,6 +66,7 @@ void __cdecl cm_ExProdObjekt(void);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x005941f0 */
 int __cdecl d2_ConfirmPatrol(int unused, char* str)
 {
 	int btn2;

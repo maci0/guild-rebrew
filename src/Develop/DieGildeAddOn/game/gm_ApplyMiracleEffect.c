@@ -29,6 +29,7 @@ void __cdecl io_FormatTextBuffer(char *, int, ...);
 int __cdecl fcn_0064d41a(char *, char *, ...);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x005d9000 */
+/* ADDRESS: GOLDDE 0x005ba860 */
 void __cdecl gm_ApplyMiracleEffect(unsigned char *e, int mode)
 {
 	char msg[0x400];

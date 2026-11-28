@@ -12,6 +12,7 @@ extern Rec15_699058 g_699058[37];
 char* __cdecl gm_QueryEntities(int list, int a, int b, int c, ...);
 char* __cdecl gm_AllocObjekt(int a, int b, int c);
 
+/* ADDRESS: GOLDDE 0x004ef5d0 */
 void __cdecl gm_InitBuildingStartingGoods(unsigned char* e)
 {
 	char* o;

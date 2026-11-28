@@ -1,3 +1,6 @@
+extern char g_6a59fc[];
+extern char g_7f4c00[];
+extern char d2_DialogButtonAction[];
 #include "Develop/client_types.h"
 
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
@@ -18,6 +21,7 @@ void __cdecl gm_AddTime(void*, int, int, int);
 extern pos14_7f4c00 gm_GameTime;
 extern float flt_1_0;
 /* ADDRESS: GOLDTL 0x0054b450 */
+/* ADDRESS: GOLDDE 0x00531910 */
 void __cdecl he_RunSkillDuelEvent(char* a0)
 {
 	float dist;
@@ -42,7 +46,7 @@ void __cdecl he_RunSkillDuelEvent(char* a0)
 		*(int*) (a + 0x70) = 2;
 	switch (*(int*) (a + 0x70)) {
 	case 0:
-		d2_CreateActionPopupSlot(a, 0, 0, (char*) 0x6a5a10, 0x5ec);
+		d2_CreateActionPopupSlot(a, 0, 0, (char*) ((int) &g_6a59fc + 0x14), 0x5ec);
 		if (*(int*) (a + 0x74) == 0) {
 			he_FreeAction(a);
 			return;
@@ -52,23 +56,23 @@ void __cdecl he_RunSkillDuelEvent(char* a0)
 		*(pos14_7f4c00*) (a + 0x44) = gm_GameTime;
 		*(pos14_7f4c00*) (a + 0x52) = gm_GameTime;
 		gm_AddTime(a + 0x52, 0x18, 0, 0);
-		d3snd_PlaySoundEffect(-7, 0, (char*) 0x6a59fc, 0);
+		d3snd_PlaySoundEffect(-7, 0, (char*) &g_6a59fc, 0);
 		(*(int*) (a + 0x70))++;
 		return;
 	case 1:
-		if (gm_CompareGameTime((void*) 0x7f4c00, a0 + 0x52) > 0) {
+		if (gm_CompareGameTime((void*) &g_7f4c00, a0 + 0x52) > 0) {
 			d2_CloseActionPopup(a);
 			*(int*) (a + 0x70) = 2;
 			return;
 		}
-		if (*(int*) 0x100f884 == *(int*) (*(int*) (a + 0x74) + 8) &&
-		    *(int*) 0x100f1dc != -1) {
-			if (*(int*) 0x100f1dc == 2) {
+		if (*(int*) ((int) &d2_DialogButtonAction + 0x6a8) == *(int*) (*(int*) (a + 0x74) + 8) &&
+		    *(int*) &d2_DialogButtonAction != -1) {
+			if (*(int*) &d2_DialogButtonAction == 2) {
 				io_FormatTextBuffer((int) buf, 0x1764, *(unsigned short*) entityC,
 				             *(unsigned short*) entityA);
 				he_PostEntityMessage(*(int*) (v4 + 2), *(int*) (v4 + 2), buf, 0, 0x5fa, 0);
 				cm_RequestCopyEntityData(*(int*) (entityA + 2), *(int*) (entityC + 2), -0x14, 1);
-			} else if (*(int*) 0x100f1dc == 1) {
+			} else if (*(int*) &d2_DialogButtonAction == 1) {
 				io_FormatTextBuffer((int) buf, 0x1765, *(unsigned short*) entityC,
 				             *(unsigned short*) entityA);
 				he_PostEntityMessage(*(int*) (v4 + 2), *(int*) (v4 + 2), buf, 0, 0x5fa, 0);

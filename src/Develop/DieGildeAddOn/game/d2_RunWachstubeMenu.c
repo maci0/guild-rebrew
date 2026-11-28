@@ -16,6 +16,7 @@ void __cdecl d2_OpenTransportPanel(char*);
 void __cdecl d2_RunEquipmentDialog(char*);
 void __cdecl d2_RunWorkerTrainingDialog(char*);
 
+/* ADDRESS: GOLDDE 0x00592ef0 */
 void __cdecl d2_RunWachstubeMenu(char* e)
 {
 	int lager;

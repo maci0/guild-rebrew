@@ -17,6 +17,7 @@ void __cdecl d2_RunStammtischDialog(char*, char*);
 void __cdecl d2_RunPlayerStammtischDialog(char*, char*);
 void __cdecl d3_EndCameraAndUiMode(void);
 
+/* ADDRESS: GOLDDE 0x00587380 */
 void __cdecl d2_OpenStammtischDialog(char* building, char* room)
 {
 	char* table;

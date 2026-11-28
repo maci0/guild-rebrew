@@ -18,6 +18,7 @@ extern char cm_AttributePacketData[];
 
 
 
+/* ADDRESS: GOLDDE 0x004b1f20 */
 void __cdecl cm_BeginPacketFieldDelta(char* src, int id)
 {
 	void* l0;

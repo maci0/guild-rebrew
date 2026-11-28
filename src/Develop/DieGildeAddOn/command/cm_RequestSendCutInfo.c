@@ -7,6 +7,7 @@ extern char g_68ae34[];
 int __cdecl sprintf(char*, const char*, ...);
 int __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b32d0 */
 int __cdecl cm_RequestSendCutInfo(int a1, int a2)
 {
 	char buf[0x19c];

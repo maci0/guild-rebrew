@@ -47,6 +47,7 @@ void __cdecl d3_DrawObjectShadowPatches(Ent*);
 
 
 /* ADDRESS: GOLDTL 0x00458bf0 */
+/* ADDRESS: GOLDDE 0x0044e3b0 */
 void __cdecl d3_RenderShadowPatches(Ent* n)
 {
 	Mat m;

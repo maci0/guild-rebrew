@@ -14,6 +14,7 @@ int __cdecl gm_DrawCard(int);
 
 
 /* ADDRESS: GOLDTL 0x004a7af0 */
+/* ADDRESS: GOLDDE 0x00495e40 */
 void __cdecl gm_ReplaceCardSlot(CARD_SEAT* seat, int slotIdx)
 {
 	int oldState;

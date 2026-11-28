@@ -35,6 +35,7 @@ void __cdecl vfs_ToSlashes(char*);
 void __cdecl ch_WalkOnPathRotation(char*);
 
 /* ADDRESS: GOLDTL 0x0040a600 */
+/* ADDRESS: GOLDDE 0x00409500 */
 void __cdecl ch_WalkOnPath(char* obj)
 {
 	char buf[256];

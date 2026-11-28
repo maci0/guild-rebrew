@@ -15,6 +15,7 @@ extern char gm_MissionJobs[];
 
 void __cdecl sim_SetSyncParams(int*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x004a2100 */
 rec24* __cdecl gm_AllocMissionJob(int entityId, int missionId)
 {
 	int i;

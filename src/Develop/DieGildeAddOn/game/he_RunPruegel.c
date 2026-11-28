@@ -22,6 +22,7 @@ void __cdecl cm_RequestKillSpieler(int a0, int a1);
 void __cdecl he_FreeAction(int a0);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00562ba0 */
+/* ADDRESS: GOLDDE 0x00548d70 */
 void __cdecl he_RunPruegel(int eventCursor)
 {
 	int eventBase;

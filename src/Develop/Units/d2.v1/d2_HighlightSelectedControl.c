@@ -18,6 +18,7 @@ extern unsigned char** tp_d2_ActiveHudSlot;
 void __cdecl d2_SetFormVisibility(int, int);
 void __cdecl d2_BringFormToFront(int);
 
+/* ADDRESS: GOLDDE 0x0052c2d0 */
 void __cdecl d2_HighlightSelectedControl(struct D2_ACTIVE_HUD_SLOT* ne)
 {
 	unsigned char* e;

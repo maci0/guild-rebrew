@@ -12,6 +12,7 @@ void __cdecl d3snd_StopObjectVoice(int, int);
 void __cdecl d3snd_StopSourceVoice(int);
 
 /* ADDRESS: GOLDTL 0x004c39b0 */
+/* ADDRESS: GOLDDE 0x004b1460 */
 void __cdecl snd_PlayMarketAmbient(void)
 {
 	int h;
@@ -31,6 +32,7 @@ void __cdecl snd_PlayMarketAmbient(void)
 }
 
 /* ADDRESS: GOLDTL 0x004c3a10 */
+/* ADDRESS: GOLDDE 0x004b14c0 */
 void __cdecl snd_StopMarketAmbient(void)
 {
 	if (g_772d30 != 0) {

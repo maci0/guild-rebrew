@@ -23,6 +23,7 @@ void __cdecl d2_ShowCabinetSpyDialog(int);
 void __cdecl d2_RunSchleichendeLaehmungDialog(int);
 void __cdecl d2_RunBeweiseFaelschenDialog(int);
 
+/* ADDRESS: GOLDDE 0x00570bc0 */
 void __cdecl d2_RunDomizilKabinettMenu(int entityId, char* msg)
 {
 	int k1;

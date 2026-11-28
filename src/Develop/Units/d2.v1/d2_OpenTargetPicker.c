@@ -22,6 +22,7 @@ int __cdecl d2_RunOfficeListDialog(int, char*, char*, int, void*);
 int __cdecl d2_ShowTabbedSelectionDialog(char*, char*, int, void*);
 
 /* ADDRESS: GOLDTL 0x005cd440 */
+/* ADDRESS: GOLDDE 0x005aeed0 */
 int __cdecl d2_OpenTargetPicker(char* query, int titleTextId, int unused, void* callback)
 {
 	int btn[9];

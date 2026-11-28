@@ -21,6 +21,7 @@ void __cdecl CloseVfsStream(void* a0);
 extern char* d3_TextureBank;
 
 /* ADDRESS: GOLDTL 0x0044f250 */
+/* ADDRESS: GOLDDE 0x00444e70 */
 int __cdecl d3_LoadFastChunk(unsigned int a0, unsigned int a1, int a2, int a3, int a4)
 {
 	unsigned char* chunk;

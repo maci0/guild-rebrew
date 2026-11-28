@@ -23,6 +23,7 @@ int __cdecl gm_NextRandMod(int);
 void __cdecl cm_SendCopyEntityData(void*);
 
 /* ADDRESS: GOLDTL 0x004bbbd0 */
+/* ADDRESS: GOLDDE 0x004a9b20 */
 int __cdecl gm_DispatchEntityMessage(fcn_004bbbd0_msg* msg)
 {
 	char* entity;
@@ -41,6 +42,7 @@ int __cdecl gm_DispatchEntityMessage(fcn_004bbbd0_msg* msg)
 
 /* ADDRESS: GOLD 0x004bb720 */
 /* ADDRESS: GOLDTL 0x004bbc30 */
+/* ADDRESS: GOLDDE 0x004a9b80 */
 int __cdecl gm_SendRandomTurnEvents(int maxExtra, int entityId)
 {
 	char packet[0xf8];
@@ -64,6 +66,7 @@ int __cdecl gm_SendRandomTurnEvents(int maxExtra, int entityId)
 }
 
 /* ADDRESS: GOLDTL 0x004bbce0 */
+/* ADDRESS: GOLDDE 0x004a9c30 */
 unsigned int __cdecl gm_NextRandMod(unsigned int n)
 {
 	if (n == 0)

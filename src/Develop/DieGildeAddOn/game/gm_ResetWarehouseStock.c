@@ -4,6 +4,7 @@ void *__cdecl gm_FindNextFilteredEntity(void);
 void *__cdecl gm_NextEntityQueryMatch(void);
 
 /* ADDRESS: GOLDTL 0x00510100 */
+/* ADDRESS: GOLDDE 0x004fadd0 */
 void __cdecl gm_ResetWarehouseStock(void)
 {
     char *entity;

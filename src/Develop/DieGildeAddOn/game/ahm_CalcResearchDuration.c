@@ -7,6 +7,7 @@ extern float g_6628cc;
 
 float __cdecl ahm_GetEssenceValue(char*, int);
 
+/* ADDRESS: GOLDDE 0x004d9120 */
 int __cdecl ahm_CalcResearchDuration(char* entity, char* recipe)
 {
 	int t;

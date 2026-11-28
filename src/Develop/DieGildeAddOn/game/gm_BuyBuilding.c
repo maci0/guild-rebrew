@@ -70,6 +70,7 @@ int __cdecl cm_SendSetHE(int, Order*);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl cm_SendTraceEnd(char*);
 
+/* ADDRESS: GOLDDE 0x004f11a0 */
 void __cdecl gm_BuyBuilding(int search, int buyer, int price, Order* o, int notify)
 {
 	BUILDING_PROTOTYPE* office;

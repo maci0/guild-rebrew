@@ -84,6 +84,7 @@ void __cdecl fcn_00489a70(Bld*, int);
 /* Starts the production of the current goods if any producer in the building
  * table can run it in the current town. */
 /* ADDRESS: GOLDTL 0x0047ebc0 */
+/* ADDRESS: GOLDDE 0x0046db70 */
 void __cdecl ai_StartMeisterProduction(Bld* bld)
 {
 	char name[0x100];

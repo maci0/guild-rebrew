@@ -6,6 +6,7 @@ extern char str_ecmd_SetPos_Could_not_find[];
 void __cdecl d3_SetNodePosition(char*, char*);
 void __cdecl evt_LogScriptError(void*, int, char*);
 
+/* ADDRESS: GOLDDE 0x0040d760 */
 int __cdecl ecmd_SetPos(char** objectRef, int* posX, int* posY, int* posZ)
 {
 	if (*objectRef != 0) {

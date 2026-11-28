@@ -1,6 +1,7 @@
 int __cdecl vfs_ReadByte(void* stream, void* dst);
 
 /* ADDRESS: GOLDTL 0x0044e0a0 */
+/* ADDRESS: GOLDDE 0x00443db0 */
 void __cdecl d3_ReadFlInfoFlags(void* stream, char* out)
 {
 	unsigned char b;

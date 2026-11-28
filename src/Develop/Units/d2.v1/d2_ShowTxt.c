@@ -104,6 +104,7 @@ typedef char D2_TEXT_ENTRY_SIZE_CHECK[sizeof(D2_TEXT_ENTRY) == 0x2f4 ? 1 : -1];
 /* Inferred from allocation label d2:ShowTxt, not an attested C identifier. */
 /* ADDRESS: GOLD 0x00473640 */
 /* ADDRESS: GOLDTL 0x0046fac0 */
+/* ADDRESS: GOLDDE 0x00463020 */
 int __cdecl d2_ShowTxt(D2_TEXT_COORD x, D2_TEXT_COORD y, char* text, int win)
 {
 	D2_TEXT_WINDOW* w;

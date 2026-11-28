@@ -13,6 +13,7 @@ void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl he_PostEntityMessage(int h, int a, char* text, int b, int c, char* snd);
 void __cdecl cm_RequestDestroyBuilding(int h);
 #include "Develop/DieGildeAddOn/game/entity_record.h"
+/* ADDRESS: GOLDDE 0x004fac40 */
 void __cdecl gm_AdjustGebaeudeCondition(char* o, int delta)
 {
 	char d;

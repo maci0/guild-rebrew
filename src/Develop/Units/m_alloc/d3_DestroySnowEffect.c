@@ -3,6 +3,7 @@
 void __cdecl d3_ReleaseTexture(int);
 void __cdecl m_FreeTracked(void*);
 
+/* ADDRESS: GOLDDE 0x004146c0 */
 void __cdecl d3_DestroySnowEffect(char* p)
 {
 	if (p == 0) {

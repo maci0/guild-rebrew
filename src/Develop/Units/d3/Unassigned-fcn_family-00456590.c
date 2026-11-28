@@ -40,6 +40,7 @@ extern unsigned int g_6b89ac;
 int __cdecl d3_BindShadowMapTexture(D3_SHADOW_TEX_CACHE_SLOT* s, int a, char b, unsigned int key, unsigned int stamp);
 
 /* ADDRESS: GOLDTL 0x00456590 */
+/* ADDRESS: GOLDDE 0x0044bd50 */
 int __cdecl d3_BindShadowMapTexture(Tex* t, int* owner, char flag, unsigned int id, int x8)
 {
 	Col c;
@@ -65,6 +66,7 @@ int __cdecl d3_BindShadowMapTexture(Tex* t, int* owner, char flag, unsigned int 
 }
 
 /* ADDRESS: GOLDTL 0x00456630 */
+/* ADDRESS: GOLDDE 0x0044bdf0 */
 int __cdecl d3_AcquireCachedShadowTexture(int a, char b, unsigned int key, unsigned int stamp, int unused)
 {
 	D3_SHADOW_TEX_CACHE_SLOT* s;

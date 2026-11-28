@@ -39,6 +39,7 @@ void __cdecl snd_PlayMarketAmbient(void);
 void __cdecl d2_ResumeTutorialUpdates(void);
 
 /* ADDRESS: GOLDTL 0x005e43f0 */
+/* ADDRESS: GOLDDE 0x005c5800 */
 void __cdecl d2_RunPauseOptionsMenu(void)
 {
     char message[0x200], preview[0x9600];

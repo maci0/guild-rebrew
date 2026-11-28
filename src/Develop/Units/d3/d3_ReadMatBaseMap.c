@@ -2,6 +2,7 @@ char* __cdecl vfs_ReadCString(void* a, char* buf);
 char* __cdecl fcn_0064d1a0(char* s, int c);
 
 /* ADDRESS: GOLDTL 0x0044d900 */
+/* ADDRESS: GOLDDE 0x00443640 */
 void __cdecl d3_ReadMatBaseMap(void* stream, char* ctx)
 {
 	char buf[0x100];

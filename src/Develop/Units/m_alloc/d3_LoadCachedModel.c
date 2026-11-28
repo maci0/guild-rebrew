@@ -13,6 +13,7 @@ void __cdecl d3_ComputeNodeBoundsBox(void);
 float __cdecl d3_GetModelRadius(int, char*);
 
 /* ADDRESS: GOLDTL 0x0044c0e0 */
+/* ADDRESS: GOLDDE 0x00442580 */
 char* __cdecl d3_LoadCachedModel(char* path, char* name)
 {
 	char* r;

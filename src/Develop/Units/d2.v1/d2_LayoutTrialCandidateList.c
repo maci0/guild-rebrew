@@ -29,6 +29,7 @@ void __cdecl d2_DrawPersonCard(int, int, int, int, Item*, int);
 void __cdecl d2_CreateRightAlignedText(int, int, int, int, int);
 void __cdecl d2_EnableDialogItems(unsigned int, Item*);
 
+/* ADDRESS: GOLDDE 0x005ae1b0 */
 int __cdecl d2_LayoutTrialCandidateList(int dialogId, int formId, int altFormId, unsigned int n, Item* items)
 {
 	int y;

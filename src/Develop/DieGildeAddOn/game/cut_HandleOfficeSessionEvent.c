@@ -7,6 +7,7 @@ int __cdecl ai_CompareOfficeCandidates(unsigned short* a1, unsigned short* a2, u
 int __cdecl ai_SelectOfficeCandidate(char a1, unsigned short* a2, int* a3, int* a4);
 
 /* ADDRESS: GOLDTL 0x004dc6e0 */
+/* ADDRESS: GOLDDE 0x004c91b0 */
 void __cdecl cut_HandleOfficeSessionEvent(char* obj, int* request)
 {
 	char* entity;

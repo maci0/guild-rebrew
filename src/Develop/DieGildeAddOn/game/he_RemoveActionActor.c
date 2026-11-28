@@ -3,6 +3,7 @@
 
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
+/* ADDRESS: GOLDDE 0x00512270 */
 void __cdecl he_RemoveActionActor(int slot_idx, char* action)
 {
 	char* rec;

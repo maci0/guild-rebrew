@@ -268,6 +268,7 @@ int __cdecl gv_fio_SaveGraveyardData(void* stream_ctx, unsigned char* field)
  * g_field_entry_count (x2) and g_field_worker_count (x2), all confirmed against
  * db/server.dll_functions.csv and the target disassembly. */
 
+/* ADDRESS: GOLDDE 0x004dfc70 */
 int __cdecl ls_LoadGraveyardData(void* stream_ctx, unsigned char* field)
 {
 	GraveyardSlot* slot;
@@ -750,6 +751,7 @@ int __cdecl ls_SaveDynamicEntities(void* f)
  * the server reads that field into a local because it has no such variable; and the client writes the
  * fields at slot + 0x54 and + 0x18c less 0x59a and 0x639, which its loader adds back and the server's
  * loader does not. */
+/* ADDRESS: GOLDDE 0x00508750 */
 int __cdecl ls_SaveEntities(void* file)
 {
 	extern unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream);
@@ -1269,6 +1271,8 @@ int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream);
 /* ADDRESS: SERVER 0x10012440 */
 /* ADDRESS: GOLDTL 0x005218f0 */
 /* ADDRESS: GOLD 0x0051c950 */
+/* ADDRESS: GOLDDE 0x0050abc0 */
+/* ADDRESS: SERVERDE 0x10011170 */
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx)
 {
 	/* vfs_ReadData wrapper: nonzero on success (unsigned > 0 carry idiom). */
@@ -1288,6 +1292,7 @@ extern int g_file_version; /* 0x1002d4ec */
 #include "save_header_tail.h"
 extern char g_save_header_tail[]; /* 0x1002d4f0 */
 #if defined(REBREW_SERVER) || defined(REBREW_GOLD)
+/* ADDRESS: SERVERDE 0x100111a0 */
 int __cdecl ls_LoadSavegameHeader(void* stream, char* dest)
 {
 	void* buf;
@@ -1406,6 +1411,7 @@ extern unsigned short ls_SavePreviewPixels[];
 int __cdecl d2_PackColorForPixelFormat(char a, char b, char c);
 
 /* ADDRESS: GOLDTL 0x00521eb0 */
+/* ADDRESS: GOLDDE 0x0050b180 */
 int __cdecl ls_LoadSavegameHeader(void* stream, char* dest)
 {
 	unsigned char* buf;
@@ -1534,6 +1540,8 @@ extern int g_query_limit; /* 0x10035450 */
 /* ADDRESS: SERVER 0x100127d0 */
 /* ADDRESS: GOLDTL 0x00522390 */
 /* ADDRESS: GOLD 0x0051d400 */
+/* ADDRESS: GOLDDE 0x0050b660 */
+/* ADDRESS: SERVERDE 0x10011500 */
 int __cdecl ls_LoadExistingEntities(void* arg1)
 {
 	int count;
@@ -1894,6 +1902,7 @@ extern int g_file_version; /* 0x1002d4ec */
  * production slots, worker assignments, and field states
  * for graveyard buildings. */
 
+/* ADDRESS: GOLDDE 0x0050bd90 */
 int __cdecl ls_LoadDynamicEntities(void* file)
 {
     int i;
@@ -2016,6 +2025,7 @@ int __cdecl ls_LoadDynamicEntities(void* file)
 #include "Develop/DieGildeAddOn/game/game_player.h"
 #endif
 
+/* ADDRESS: GOLDDE 0x0050c100 */
 int __cdecl ls_LoadEntities(void* ctx)
 {
 	int id;

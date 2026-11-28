@@ -27,6 +27,7 @@ int __cdecl d3_CollectEntityStageMeshNode(void);
 void __cdecl d3_VisitSceneObjects(int h, int a, int b, int (__cdecl* cb)(void), Hits* out);
 void __cdecl d3_SetSubtreeVisible(int id, int on);
 
+/* ADDRESS: GOLDDE 0x004f0c30 */
 void __cdecl d3_UpdateEntityStageMeshes(int unused, int who, int id)
 {
 	int want[5];

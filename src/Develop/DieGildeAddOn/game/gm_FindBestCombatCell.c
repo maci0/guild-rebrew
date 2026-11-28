@@ -6,6 +6,7 @@ extern int d3_ActiveScene;
 float __cdecl gm_ScorePositionBalance(char* self, int x, int z, float range);
 
 /* ADDRESS: GOLDTL 0x004d3330 */
+/* ADDRESS: GOLDDE 0x004c0620 */
 int __cdecl gm_FindBestCombatCell(char* self, int centerCol, int centerRow, int searchRadius,
 	unsigned int* outCol, unsigned int* outRow)
 {

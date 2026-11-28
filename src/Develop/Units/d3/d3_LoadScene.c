@@ -54,6 +54,7 @@ typedef struct {
 } VEC4;
 
 /* ADDRESS: GOLDTL 0x00448360 */
+/* ADDRESS: GOLDDE 0x0043fae0 */
 char __cdecl d3_LoadScene(const char* filename, void* stream, SCENE_PROGRESS progress)
 {
 	char name[256];

@@ -1,5 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x00426620 */
+/* ADDRESS: GOLDDE 0x004210f0 */
 char* __cdecl evt_FindLogicalOp(char* s, int unused, char* end)
 {
 	int i;

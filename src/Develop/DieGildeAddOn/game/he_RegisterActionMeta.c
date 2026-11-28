@@ -17,6 +17,7 @@ extern s_7e2ac0 g_7e2ac0[48];
 
 #include <string.h>
 
+/* ADDRESS: GOLDDE 0x00519430 */
 int __cdecl he_RegisterActionMeta(int key, char* name, int a, int v, int w)
 {
 	int i;

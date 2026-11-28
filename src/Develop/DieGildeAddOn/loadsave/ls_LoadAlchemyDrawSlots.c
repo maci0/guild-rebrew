@@ -14,6 +14,7 @@ extern ALCHEMY_DRAW_SLOT ahm_DrawSlots[3];
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 void __cdecl ahm_ResetAlchemyState(int v);
 
+/* ADDRESS: GOLDDE 0x004da310 */
 int __cdecl ls_LoadAlchemyDrawSlots(void* file)
 {
 	int i;

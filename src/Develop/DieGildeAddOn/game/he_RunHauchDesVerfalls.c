@@ -29,6 +29,7 @@ void __cdecl he_NotifyHauchDesVerfalls(char*, char*, char*, int);
 void __cdecl he_ShowFriedhofMessage(char*, char*, char*);
 
 /* ADDRESS: GOLDTL 0x00578a10 */
+/* ADDRESS: GOLDDE 0x0055e8e0 */
 int __cdecl he_RunHauchDesVerfalls(char* event)
 {
 	char* p;

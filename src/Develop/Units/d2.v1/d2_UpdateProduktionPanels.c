@@ -36,6 +36,7 @@ void* __cdecl he_fn_Handlung(void);
 void __cdecl io_AppendText(int a, ...);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00594de0 */
+/* ADDRESS: GOLDDE 0x0057a8a0 */
 void __cdecl d2_UpdateProduktionPanels(int formIdArg, int formTabArg, int panelCountArg)
 {
 	Panel* p;

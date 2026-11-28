@@ -121,6 +121,7 @@ int __cdecl d2_TurnBookPages(Book* book, signed char dir)
 }
 #else
 /* ADDRESS: GOLDTL 0x00535270 */
+/* ADDRESS: GOLDDE 0x0051dad0 */
 int __cdecl d2_TurnBookPages(Book* b, signed char dir)
 {
 	char top[0x40];

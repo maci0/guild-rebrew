@@ -5,6 +5,7 @@ void __cdecl gm_ModifyHealth(int, int);
 
 
 /* ADDRESS: GOLDTL 0x0049f230 */
+/* ADDRESS: GOLDDE 0x0048dc60 */
 int __cdecl ai_RunChangeProfession(char* a, char* b, int c)
 {
 	if (amt_ExecGebaeudeBauen(a, b, c) != 0) {

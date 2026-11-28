@@ -6,6 +6,7 @@ extern int evt_ActiveContextId;
 int __cdecl sb_PrepareVoice(int a, int b);
 int __cdecl sb_StartVoice(int o, int a, int b);
 
+/* ADDRESS: GOLDDE 0x0040fd10 */
 int __cdecl PlaySampleHandle(int* a, int* b)
 {
 	int o;

@@ -8,6 +8,7 @@ extern int __cdecl cm_SendSetHE(int a, void* b);
 
 
 /* ADDRESS: GOLDTL 0x005511a0 */
+/* ADDRESS: GOLDDE 0x00537590 */
 void __cdecl he_RunAction0x5a(char* a0)
 {
 	int state;

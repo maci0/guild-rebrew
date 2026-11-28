@@ -8,6 +8,7 @@ int __cdecl d2_DrawTintedSprite(int, int, int, float, unsigned char, unsigned ch
 
 
 /* ADDRESS: GOLDTL 0x0047cc40 */
+/* ADDRESS: GOLDDE 0x0046bc10 */
 int __cdecl d2_DrawBankSpriteScaled(int x, int y, int unused, D2_SPRITE_BANK* bank, int idx, float scale)
 {
 	if (bank == 0)

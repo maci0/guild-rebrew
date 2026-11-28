@@ -10,6 +10,7 @@ unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_AddObjekt(void);
 unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 
+/* ADDRESS: GOLDDE 0x005782e0 */
 void __cdecl d2_InitDefaultBookmarks(void)
 {
 	int i;

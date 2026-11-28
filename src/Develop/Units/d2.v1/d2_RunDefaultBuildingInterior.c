@@ -13,6 +13,7 @@ void __cdecl d2_RunDefaultBuildingInterior(void)
 }
 #else
 /* ADDRESS: GOLDTL 0x00597fd0 */
+/* ADDRESS: GOLDDE 0x0057d780 */
 void __cdecl d2_RunDefaultBuildingInterior(void)
 {
 	int r;

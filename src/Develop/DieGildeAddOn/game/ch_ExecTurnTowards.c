@@ -9,6 +9,7 @@ void __cdecl d3_WrapEulerAnglesPi(float*, float*, float*, float*);
  * character and the event's target object. */
 /* ADDRESS: GOLD 0x00406210 */
 /* ADDRESS: GOLDTL 0x00406db0 */
+/* ADDRESS: GOLDDE 0x00405f50 */
 void __cdecl ch_ExecTurnTowards(char* ev)
 {
 	char* obj;

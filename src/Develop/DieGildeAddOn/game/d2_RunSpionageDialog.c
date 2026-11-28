@@ -45,6 +45,7 @@ void __cdecl cm_SendTraceEnd(char*);
 void __cdecl cm_SendCopyEntityData(void*);
 
 /* ADDRESS: GOLDTL 0x005bf580 */
+/* ADDRESS: GOLDDE 0x005a19c0 */
 int __cdecl d2_RunSpionageDialog(char* rec)
 {
 	char* q;

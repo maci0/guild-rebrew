@@ -17,6 +17,7 @@ void __cdecl d2_UnlockSurface(Surf*);
 
 
 /* ADDRESS: GOLDTL 0x004772e0 */
+/* ADDRESS: GOLDDE 0x004690b0 */
 void __cdecl d2_ClearSurfaceRect(int x, int y, int w, int h, Surf* s)
 {
 	int locked;

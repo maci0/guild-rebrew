@@ -59,6 +59,7 @@ static __inline void send_hit(int id)
 
 
 /* ADDRESS: GOLDTL 0x005deda0 */
+/* ADDRESS: GOLDDE 0x005c0340 */
 int __cdecl gm_UseSkillModifier82Stats3And5(char* e, char* request)
 {
 	int out;

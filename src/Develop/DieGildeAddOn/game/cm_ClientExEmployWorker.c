@@ -26,6 +26,7 @@ int __cdecl ahm_ResetEntityState(char*);
 
 
 /* ADDRESS: GOLDTL 0x004cbde0 */
+/* ADDRESS: GOLDDE 0x004b95c0 */
 int __cdecl cm_ClientExEmployWorker(int cmd, char* result)
 {
 	ushort* building_entity;

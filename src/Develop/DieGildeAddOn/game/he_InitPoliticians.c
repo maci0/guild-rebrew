@@ -13,6 +13,7 @@ struct POLITICIANS_SLOT {
 
 
 /* ADDRESS: GOLDTL 0x005595e0 */
+/* ADDRESS: GOLDDE 0x0053f940 */
 void __cdecl he_InitPoliticians(char* o)
 {
 	int i;

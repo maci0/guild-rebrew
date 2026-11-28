@@ -10,6 +10,7 @@ extern volatile int gm_GameTicks;
 void __cdecl d2_SelectFont(int);
 void __cdecl d2_DrawWordWrappedText(int, int, int, int, int, char*, int);
 
+/* ADDRESS: GOLDDE 0x0051c0e0 */
 void __cdecl d2_DrawStatusBannerText(void)
 {
 	int x;

@@ -14,6 +14,7 @@ void __cdecl d3_CreateObjectParticleEffect(int, char*, int, struct RGBA_COLOR, f
 
 
 /* ADDRESS: GOLDTL 0x00557f00 */
+/* ADDRESS: GOLDDE 0x0053e260 */
 void __cdecl he_SpawnTimedRauchEffect(char* o)
 {
 	struct RGBA_COLOR c;

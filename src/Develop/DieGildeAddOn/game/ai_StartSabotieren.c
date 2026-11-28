@@ -44,6 +44,7 @@ int __cdecl he_HasNoActiveAction0x2e(char* obj, char* e);
 int __cdecl he_HasNoActiveAction0x62(int* p);
 
 /* ADDRESS: GOLDTL 0x00499090 */
+/* ADDRESS: GOLDDE 0x00487ad0 */
 int __cdecl ai_StartSabotieren(int who, char* entity, int busy, Msg* out1, Msg* out2)
 {
 	int targetRec;

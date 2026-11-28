@@ -42,6 +42,7 @@ V4* __cdecl d3_GetDefaultParticleColor(void);
 
 
 /* ADDRESS: GOLDTL 0x005e8de0 */
+/* ADDRESS: GOLDDE 0x005ca090 */
 int __cdecl d3_CalcParticleSphereMass(float a, float b, float* out)
 {
 	float b2;
@@ -60,6 +61,7 @@ int __cdecl d3_CalcParticleSphereMass(float a, float b, float* out)
 
 
 /* ADDRESS: GOLDTL 0x005e8e80 */
+/* ADDRESS: GOLDDE 0x005ca130 */
 int __cdecl d3_SpawnPhysicsParticle(Particle* o, V3* pos, V3* dir, float speed, float b, float a)
 {
 	float info[5];

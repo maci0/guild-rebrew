@@ -14,6 +14,7 @@ typedef struct Msg {
 int __cdecl ai_SelectPrivTarget(int a1, int a2, int a3, Msg* a, Msg* b);
 
 /* ADDRESS: GOLDTL 0x0049d0d0 */
+/* ADDRESS: GOLDDE 0x0048bb10 */
 int __cdecl ai_StartErpressen(int a1, int a2, int k, Msg* out1, Msg* out2)
 {
 	Msg a;

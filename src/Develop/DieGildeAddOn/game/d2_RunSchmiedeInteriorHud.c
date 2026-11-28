@@ -19,6 +19,7 @@ void __cdecl d2_RunMetalProduktionDialog(char*);
 void __cdecl d2_RunGelageDialog(char*);
 void __cdecl d2_RunWorkerTrainingDialog(char*);
 
+/* ADDRESS: GOLDDE 0x00581aa0 */
 void __cdecl d2_RunSchmiedeInteriorHud(char* e)
 {
 	int d;

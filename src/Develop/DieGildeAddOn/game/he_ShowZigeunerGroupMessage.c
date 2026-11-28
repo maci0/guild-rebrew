@@ -9,6 +9,7 @@ void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, void*, int, int, void*);
 
 /* ADDRESS: GOLDTL 0x005b2a40 */
+/* ADDRESS: GOLDDE 0x00597440 */
 void __cdecl he_ShowZigeunerGroupMessage(unsigned short* senderEntity, int n, char** arr)
 {
 	char buf[0x80];
@@ -26,7 +27,7 @@ void __cdecl he_ShowZigeunerGroupMessage(unsigned short* senderEntity, int n, ch
 	for (i = 0; i < n; i++) {
 		e = arr[i];
 		if (e[2] == 6 || e[2] == 7) {
-			he_PostEntityMessage(*(int*) (e + 4), -1, io_MessageFormatBuf, 1, 0x5fb, (void*) 0x6ab480);
+			he_PostEntityMessage(*(int*) (e + 4), -1, io_MessageFormatBuf, 1, 0x5fb, "_NACHRICHTEN_ZIGEUNER_06");
 		}
 	}
 	e = g_14b5a08;
@@ -66,5 +67,5 @@ void __cdecl he_ShowZigeunerGroupMessage(unsigned short* senderEntity, int n, ch
 		}
 		strcat(io_MessageFormatBuf, g_14b5a14);
 	}
-	he_PostEntityMessage(*(int*) (senderEntity + 2), -1, io_MessageFormatBuf, 1, 0x5fb, (void*) 0x6ab464);
+	he_PostEntityMessage(*(int*) (senderEntity + 2), -1, io_MessageFormatBuf, 1, 0x5fb, "_NACHRICHTEN_ZIGEUNER_05");
 }

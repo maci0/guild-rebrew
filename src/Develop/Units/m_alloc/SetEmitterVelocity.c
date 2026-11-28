@@ -6,6 +6,7 @@ void __cdecl evt_LogScriptError(char*, int, const char*);
 
 /* SetEmitterVelocity: sets a particle emitter's velocity in hundredths. */
 /* ADDRESS: GOLDTL 0x00410230 */
+/* ADDRESS: GOLDDE 0x0040f030 */
 int __cdecl SetEmitterVelocity(char** obj, int* x, int* y, int* z)
 {
 	char* o;

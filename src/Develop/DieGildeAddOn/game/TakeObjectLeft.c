@@ -6,6 +6,7 @@ extern char* evt_CurrentScript;
 int __cdecl ch_QueueTakeObjectLeft(char* e, char* name, char* src, int param);
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
+/* ADDRESS: GOLDDE 0x0040c170 */
 int __cdecl TakeObjectLeft(char** a, char** name, int* param, char** src)
 {
 	if (evt_WaitingScriptTask != 0 && *(void**) (evt_WaitingScriptTask + 0x44) == (void*) TakeObjectLeft) {

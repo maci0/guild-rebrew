@@ -7,6 +7,7 @@ extern Slot_779d00 main_CameraBookmarks[];
 char* __cdecl gm_FindBuildingPrimarySlot(char*);
 char* __cdecl gm_SetupEntityQuery(char*);
 
+/* ADDRESS: GOLDDE 0x00578290 */
 void __cdecl d2_SetBookmarkSlotEntity(int idx, char* e)
 {
 	char* r;

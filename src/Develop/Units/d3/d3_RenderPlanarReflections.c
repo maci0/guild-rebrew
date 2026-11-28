@@ -70,6 +70,7 @@ void __cdecl d3_VisitRenderSceneNode(void);
 
 
 /* ADDRESS: GOLDTL 0x00451df0 */
+/* ADDRESS: GOLDDE 0x004476a0 */
 void __cdecl d3_RenderPlanarReflections(Ent* e)
 {
 	Plane p;

@@ -3,6 +3,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b2bb0 */
 void __cdecl cm_RequestTransferCurrencyNoKill(int destId, int srcId, char slotKind, int amount)
 {
 	char buf[0x9c];

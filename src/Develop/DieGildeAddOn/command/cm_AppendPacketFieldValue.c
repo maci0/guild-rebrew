@@ -7,6 +7,7 @@ extern unsigned int g_aed208;
 extern unsigned char g_aed224;
 extern char g_aed225[];
 
+/* ADDRESS: GOLDDE 0x004b2080 */
 int __cdecl cm_AppendPacketFieldValue(unsigned char type, unsigned char count, short id, void* data)
 {
 	unsigned int n;

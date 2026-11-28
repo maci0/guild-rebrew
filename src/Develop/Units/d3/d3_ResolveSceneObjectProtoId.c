@@ -9,6 +9,7 @@ extern char* lpObjektePROT;
 
 int __cdecl _strcmpi(const char* a, const char* b);
 
+/* ADDRESS: GOLDDE 0x004fb270 */
 int __cdecl d3_ResolveSceneObjectProtoId(char* obj)
 {
 	char tail[128];

@@ -24,6 +24,7 @@ extern char gm_EntitySlotTable[];
 unsigned short __cdecl gm_RandomMod(int n);
 
 /* ADDRESS: GOLDTL 0x00488a20 */
+/* ADDRESS: GOLDDE 0x004778f0 */
 int __cdecl ai_FlagWorkerTrainingNeeded(Ent* e)
 {
 	int found;

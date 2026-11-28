@@ -1,5 +1,6 @@
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* ADDRESS: GOLDTL 0x00507910 */
+/* ADDRESS: GOLDDE 0x004f2ab0 */
 int __cdecl gm_MapBuildingCatToGuildSlot(int k)
 {
 	switch (k) {
@@ -51,6 +52,7 @@ float __cdecl gm_GetTypeWageBase(unsigned char* p, int k, int a, int b);
 /* Lives in this file because it must see fcn_00507910 above it: msvc6 then
  * knows the callee leaves edx alone and keeps k there across the call. */
 /* ADDRESS: GOLDTL 0x005101e0 */
+/* ADDRESS: GOLDDE 0x004faeb0 */
 float __cdecl gm_GetHireWage(unsigned char* p, int k, int a, int b)
 {
 	int c;

@@ -2,6 +2,7 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
+/* ADDRESS: GOLDDE 0x004255b0 */
 int __cdecl msx_FindStreamIndex(int key)
 {
 	int i;

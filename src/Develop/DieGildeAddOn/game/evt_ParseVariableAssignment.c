@@ -26,6 +26,7 @@ int __cdecl evt_EvaluateExpression(int a);
 
 /* Parses an assignment, increment or decrement on a script variable. */
 /* ADDRESS: GOLDTL 0x00428d50 */
+/* ADDRESS: GOLDDE 0x00423770 */
 int __cdecl evt_ParseVariableAssignment(struct var_428d50* v)
 {
 	struct tok_428d50 t;

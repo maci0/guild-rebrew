@@ -190,6 +190,7 @@ extern void cm_SaveGameAndWait();
 
 
 /* ADDRESS: GOLDTL 0x005373e0 */
+/* ADDRESS: GOLDDE 0x0051ed60 */
 int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 {
 	int result;

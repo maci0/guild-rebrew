@@ -18,6 +18,7 @@ extern Timer14 g_9b4900[16];
 #endif
 void __cdecl d2_DestroyElement(int);
 
+/* ADDRESS: GOLDDE 0x004bd300 */
 void __cdecl d3_ClearActionTimers(void)
 {
 	int i;

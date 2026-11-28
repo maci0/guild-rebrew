@@ -4,6 +4,7 @@
 unsigned short* __cdecl gm_QueryEntities(int, int, int, int, int);
 int __cdecl gm_LookupSpecialObject(unsigned int);
 
+/* ADDRESS: GOLDDE 0x005a8540 */
 int __cdecl gm_HasActiveSpecialObjectOnEntity(char* entity, int objekt_id)
 {
 	unsigned short* obj;

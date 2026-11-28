@@ -14,6 +14,7 @@ char* __cdecl gm_QueryEntities(int a, int b, int c, int d);
 int __cdecl he_StartHandlungSearch(int a, int b, int c, int d, int e);
 
 /* ADDRESS: GOLDTL 0x004ab010 */
+/* ADDRESS: GOLDDE 0x00499350 */
 int __cdecl ai_FindDunkleEckeTarget(unsigned short* actor, char* first_out, char* second_out)
 {
 	char* building;

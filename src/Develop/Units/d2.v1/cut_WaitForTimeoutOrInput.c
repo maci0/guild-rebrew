@@ -11,6 +11,7 @@ void __cdecl d2_UpdateFloatingStatTexts(void);
 void __cdecl d2_AppendPendingPlayerNames(int);
 void __cdecl cut_WaitSeconds(int);
 
+/* ADDRESS: GOLDDE 0x004d1680 */
 int __cdecl cut_WaitForTimeoutOrInput(int secs, int(__cdecl* cb)(int), int arg)
 {
 	int start;

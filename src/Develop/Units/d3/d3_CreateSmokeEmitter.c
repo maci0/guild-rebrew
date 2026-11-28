@@ -17,6 +17,7 @@ extern volatile int gm_GameTicks;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 /* ADDRESS: GOLDTL 0x00418000 */
+/* ADDRESS: GOLDDE 0x00415e00 */
 int* __cdecl d3_CreateSmokeEmitter(int a1, float* pos, int n, int a4, int a5, int v0, float f6,
     int v2, float f8, float* p, int v3, int timeStep, Bytes4 color)
 {

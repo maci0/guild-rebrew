@@ -46,6 +46,7 @@ char __cdecl d3_PickClosestObjectCallback(char* e, char* ctx)
 }
 #else
 /* ADDRESS: GOLDTL 0x00443b00 */
+/* ADDRESS: GOLDDE 0x0043bf50 */
 char __cdecl d3_PickClosestObjectCallback(char* e, char* ctx)
 {
 	float v[4];

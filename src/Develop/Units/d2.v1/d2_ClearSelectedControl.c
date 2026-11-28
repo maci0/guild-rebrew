@@ -6,6 +6,7 @@ extern int g_100f1e0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00473fe0 */
+/* ADDRESS: GOLDDE 0x00466ce0 */
 void __cdecl d2_ClearSelectedControl(void)
 {
 	if ((*(char**)&tp_d2_SelectedControl) != 0) {

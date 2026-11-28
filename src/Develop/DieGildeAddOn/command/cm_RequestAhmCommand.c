@@ -9,6 +9,7 @@ typedef struct
 } Body6;
 // SIZE 0x18
 
+/* ADDRESS: GOLDDE 0x004b4530 */
 void __cdecl cm_RequestAhmCommand(Body6* source)
 {
 	char buf[0x9c];

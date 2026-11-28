@@ -22,6 +22,7 @@ void __cdecl cm_SendLogAction(char* s);
 void __cdecl cm_SendTraceEnd(char* s);
 void __cdecl cm_RequestElectionOrTrade(Msg* msg);
 
+/* ADDRESS: GOLDDE 0x0052db20 */
 void __cdecl he_ClearDunkleEcke(void)
 {
 	char* e;

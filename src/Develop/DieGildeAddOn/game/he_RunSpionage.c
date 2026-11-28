@@ -1,3 +1,4 @@
+extern char g_6a6578[];
 /* Spionage job.  Picks a spy target in the watched house's neighbourhood,
    books the operation and walks it through the spy states until the report
    is delivered.  State 1 scans the residential descriptors for a matching
@@ -35,6 +36,7 @@ int __cdecl gm_IsEntityAtBuilding(void*, void*);
 char* __cdecl gm_GetEntityTableEntry(char*);
 
 /* ADDRESS: GOLDTL 0x005624a0 */
+/* ADDRESS: GOLDDE 0x00548670 */
 void __cdecl he_RunSpionage(char* ctx)
 {
 	char text[0x400];
@@ -121,7 +123,7 @@ void __cdecl he_RunSpionage(char* ctx)
 			*(int*) (ctx + 0x84) = cm_SendSetHE(-1, ctx);
 			return;
 		}
-		io_FormatTextBuffer(text, 0x6a6578, hit);
+		io_FormatTextBuffer(text, (int) &g_6a6578, hit);
 		ent = gm_LookupEntityRecordById(*(int*) (ctx + 0xd8));
 		if (ent != 0) {
 			cm_SendCancelCharacterActions(*(int*) (ent + 4));

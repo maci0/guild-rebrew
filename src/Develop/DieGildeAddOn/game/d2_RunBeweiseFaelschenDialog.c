@@ -57,6 +57,7 @@ void __cdecl d3snd_PlaySoundEffect(int, int, char*, int);
 void __cdecl d3_EndCameraAndUiMode(void);
 
 /* ADDRESS: GOLDTL 0x00589d00 */
+/* ADDRESS: GOLDDE 0x0056f9c0 */
 void __cdecl d2_RunBeweiseFaelschenDialog(int building)
 {
 	char* selectedEntity;

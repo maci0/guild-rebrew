@@ -20,6 +20,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl gm_CompareGameTime(void*, void*);
 
 /* ADDRESS: GOLDTL 0x0055b020 */
+/* ADDRESS: GOLDDE 0x005412d0 */
 void __cdecl d2_ShowTitleAward(char* o)
 {
 	short* slot;

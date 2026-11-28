@@ -10,6 +10,7 @@ extern char gm_EntityIdField[];
 extern volatile int gm_GameTicks;
 extern int d2_QuickChatLastTick;
 
+/* ADDRESS: GOLDDE 0x004b9f30 */
 int __cdecl cm_ExBroadcastChatMessage(char* cmd, char* result)
 {
 	char* p;

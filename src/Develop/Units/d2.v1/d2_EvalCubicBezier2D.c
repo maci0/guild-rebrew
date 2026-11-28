@@ -1,5 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x005840d0 */
+/* ADDRESS: GOLDDE 0x00569e40 */
 void __cdecl d2_EvalCubicBezier2D(float* a, float* b, float* c, float* d, float t, float* out)
 {
 	float u;

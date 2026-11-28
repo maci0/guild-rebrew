@@ -1,3 +1,6 @@
+extern char g_664198[];
+extern char g_6629c8[];
+extern double g_6628f0;
 #include <stdio.h>
 #include "Units/Error/error.h"
 #include "game_structs.h"
@@ -365,6 +368,8 @@ OFFICE_ROLE_TEMPLATE g_office_role_templates[40] = {
 /* ADDRESS: SERVER 0x1000b1c0 */
 /* ADDRESS: GOLD 0x004e6360 */
 /* ADDRESS: GOLDTL 0x004e7f20 */
+/* ADDRESS: GOLDDE 0x004d4530 */
+/* ADDRESS: SERVERDE 0x1000a5f0 */
 int __cdecl amt_ValidateOfficeCandidate(int* arg1)
 {
 	unsigned char* rec;
@@ -412,6 +417,7 @@ int __cdecl amt_ValidateOfficeCandidate(int* arg1)
 
 #if defined(REBREW_SERVER)
 /* ADDRESS: SERVER 0x1000b290 */
+/* ADDRESS: SERVERDE 0x1000a6c0 */
 unsigned int __cdecl amt_ValidateAndAssignOffice(unsigned int* arg1)
 {
 	unsigned char* cmd;
@@ -490,6 +496,7 @@ unsigned int __cdecl amt_ValidateAndAssignOffice(unsigned int* arg1)
 
 #if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
 /* ADDRESS: GOLDTL 0x004e7ff0 */
+/* ADDRESS: GOLDDE 0x004d4600 */
 int __cdecl amt_ValidateOfficeApplication(unsigned char* arg)
 {
 	unsigned char* owner;
@@ -589,6 +596,7 @@ found2:
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLD 0x004e65e0 */
 /* ADDRESS: GOLDTL 0x004e81a0 */
+/* ADDRESS: GOLDDE 0x004d47b0 */
 int __cdecl amt_VacateOfficeSlot(unsigned char id)
 {
 	return amt_SendOfficeCommand(id, 0, 0, 3, 0xff);
@@ -598,6 +606,7 @@ int __cdecl amt_VacateOfficeSlot(unsigned char id)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLD 0x004e6600 */
 /* ADDRESS: GOLDTL 0x004e81c0 */
+/* ADDRESS: GOLDDE 0x004d47d0 */
 int __cdecl amt_AssignEntityOfficeDefault(unsigned char* entity, unsigned char* other_entity)
 {
 	int l0[6];
@@ -616,6 +625,7 @@ int __cdecl amt_AssignEntityOfficeDefault(unsigned char* entity, unsigned char* 
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLD 0x004e6650 */
 /* ADDRESS: GOLDTL 0x004e8210 */
+/* ADDRESS: GOLDDE 0x004d4820 */
 int __cdecl amt_AssignOfficeHolder(int office_id, unsigned char* payload, int mode)
 {
 	if (payload == 0) {
@@ -628,6 +638,7 @@ int __cdecl amt_AssignOfficeHolder(int office_id, unsigned char* payload, int mo
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLD 0x004e6680 */
 /* ADDRESS: GOLDTL 0x004e8240 */
+/* ADDRESS: GOLDDE 0x004d4850 */
 int __cdecl amt_SendOfficeCommand(unsigned char id, unsigned char* ea, unsigned char* eb, int x1, int x2)
 {
 	char m[0x10];
@@ -658,6 +669,7 @@ int __cdecl amt_SendOfficeCommand(unsigned char id, unsigned char* ea, unsigned 
 
 #if defined(REBREW_SERVER)
 /* ADDRESS: SERVER 0x1000b440 */
+/* ADDRESS: SERVERDE 0x1000a870 */
 int __cdecl amt_ValidateCommand(char* arg1)
 {
 	int i;
@@ -692,6 +704,7 @@ int __cdecl amt_ValidateCommand(char* arg1)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLD 0x004e6710 */
 /* ADDRESS: GOLDTL 0x004e82d0 */
+/* ADDRESS: GOLDDE 0x004d48e0 */
 int __cdecl amt_ValidateOfficeRequest(unsigned char* m)
 {
 	int i;
@@ -943,6 +956,7 @@ after_old_clear:
 
 #if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
 /* ADDRESS: GOLDTL 0x004e8360 */
+/* ADDRESS: GOLDDE 0x004d4970 */
 int __cdecl amt_ApplyOfficeAssignment(char* requestData)
 {
 	char* ent;
@@ -1083,6 +1097,7 @@ int __cdecl amt_ApplyOfficeAssignment(char* requestData)
 
 #if defined(REBREW_SERVER)
 /* ADDRESS: SERVER 0x1000b820 */
+/* ADDRESS: SERVERDE 0x1000ac40 */
 void __cdecl amt_FindEntity26(int val)
 {
 	unsigned int i;
@@ -1099,6 +1114,7 @@ void __cdecl amt_FindEntity26(int val)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLD 0x004e6b40 */
 /* ADDRESS: GOLDTL 0x004e8700 */
+/* ADDRESS: GOLDDE 0x004d4d10 */
 void __cdecl amt_SetType26OfficeHolder(int holder)
 {
 	int i;
@@ -1114,6 +1130,7 @@ void __cdecl amt_SetType26OfficeHolder(int holder)
 
 #if defined(REBREW_SERVER)
 /* ADDRESS: SERVER 0x1000b850 */
+/* ADDRESS: SERVERDE 0x1000ac70 */
 void __cdecl amt_FindEntity27(int val)
 {
 	unsigned int i;
@@ -1129,6 +1146,7 @@ void __cdecl amt_FindEntity27(int val)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLD 0x004e6b70 */
 /* ADDRESS: GOLDTL 0x004e8730 */
+/* ADDRESS: GOLDDE 0x004d4d40 */
 void __cdecl amt_SetOfficeType0x27Handle(int v)
 {
 	int i;
@@ -1145,6 +1163,7 @@ void __cdecl amt_SetOfficeType0x27Handle(int v)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLD 0x004e6ba0 */
 /* ADDRESS: GOLDTL 0x004e8760 */
+/* ADDRESS: GOLDDE 0x004d4d70 */
 int __cdecl amt_SendSameOfficeCommand(char* x, unsigned char* firstEntity, unsigned char* secondEntity)
 {
 	char message[0xc];
@@ -1171,6 +1190,7 @@ int __cdecl amt_SendSameOfficeCommand(char* x, unsigned char* firstEntity, unsig
 
 #if defined(REBREW_SERVER)
 /* ADDRESS: SERVER 0x1000b880 */
+/* ADDRESS: SERVERDE 0x1000aca0 */
 int __cdecl amt_SwapOfficeHolders(int* arg1)
 {
 	OFFICE_SLOT* slot_a;
@@ -1238,6 +1258,7 @@ int __cdecl amt_SwapOfficeHolders(int* arg1)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLD 0x004e6c50 */
 /* ADDRESS: GOLDTL 0x004e8810 */
+/* ADDRESS: GOLDDE 0x004d4e20 */
 int __cdecl amt_SwapOfficeOccupants(unsigned char* request)
 {
 	char* e;
@@ -1334,6 +1355,7 @@ int __cdecl amt_ClearEntityLinks(char* entity)
 
 #if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
 /* ADDRESS: GOLDTL 0x004e8940 */
+/* ADDRESS: GOLDDE 0x004d4f50 */
 int __cdecl amt_ClearEntityOffices(char* obj)
 {
 	int a;
@@ -1386,6 +1408,7 @@ int __cdecl amt_ClearEntityOffices(char* obj)
 #define BASE_B 0x9a922c
 #define END_B  0x9a961c
 /* ADDRESS: GOLDTL 0x004e89e0 */
+/* ADDRESS: GOLDDE 0x004d4ff0 */
 void __cdecl amt_ReleaseEntityOffices(char* obj, int flag)
 {
 	int a;
@@ -1489,6 +1512,7 @@ int __cdecl amt_GetSlotByRole(int role, OFFICE_SLOT* out)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLD 0x004e6ec0 */
 /* ADDRESS: GOLDTL 0x004e8a80 */
+/* ADDRESS: GOLDDE 0x004d5090 */
 int __cdecl amt_FindOfficeSlotByType(int type, Rec18_68da68* out)
 {
 	int i;
@@ -1518,6 +1542,7 @@ int __cdecl amt_GetRoleGroup(int role)
 
 #if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
 /* ADDRESS: GOLDTL 0x004e8ad0 */
+/* ADDRESS: GOLDDE 0x004d50e0 */
 int __cdecl amt_GetOfficeGroup(int role)
 {
 	if (role >= 0x28) {
@@ -1560,6 +1585,7 @@ int __cdecl amt_GetSlotByType(unsigned char type, OFFICE_SLOT* out)
 #pragma intrinsic(memcpy, memset)
 /* ADDRESS: GOLD 0x004e6f30 */
 /* ADDRESS: GOLDTL 0x004e8af0 */
+/* ADDRESS: GOLDDE 0x004d5100 */
 int __cdecl amt_FindOfficeSlotByKey(unsigned char key, void* dst)
 {
 	int i;
@@ -1587,6 +1613,7 @@ int __cdecl amt_FindOfficeSlotByKey(unsigned char key, void* dst)
 
 /* ADDRESS: GOLD 0x004e6f80 */
 /* ADDRESS: GOLDTL 0x004e8b40 */
+/* ADDRESS: GOLDDE 0x004d5150 */
 int __cdecl amt_GetRoleTemplate(int role, OFFICE_ROLE_TEMPLATE* out)
 {
 	if (role >= 0x28) {
@@ -1629,6 +1656,7 @@ int __cdecl amt_ListSlotsOfGroup(int group, int max, OFFICE_SLOT* out)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLD 0x004e6fc0 */
 /* ADDRESS: GOLDTL 0x004e8b80 */
+/* ADDRESS: GOLDDE 0x004d5190 */
 int __cdecl amt_FindOfficeSlotsByKind(int kind, int max, OFFICE_SLOT* out)
 {
 	int n;
@@ -1685,6 +1713,7 @@ int __cdecl amt_ListHeldSlotsOfGroup(int group, int max, OFFICE_SLOT* out)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLD 0x004e7040 */
 /* ADDRESS: GOLDTL 0x004e8c00 */
+/* ADDRESS: GOLDDE 0x004d5210 */
 int __cdecl amt_CollectOfficeSlotsByGroup(int group, int max, OFFICE_SLOT* out)
 {
 	int n;
@@ -1734,6 +1763,7 @@ int __cdecl amt_ListCouncilSlots(int all, int max, OFFICE_SLOT* out)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLD 0x004e70f0 */
 /* ADDRESS: GOLDTL 0x004e8cb0 */
+/* ADDRESS: GOLDDE 0x004d52c0 */
 int __cdecl amt_CollectOfficeGroup7(int all, int max, Rec18_68da68* out)
 {
 	int n;
@@ -1826,6 +1856,7 @@ int __cdecl amt_RankOpenOffices(unsigned char* who, int n, OFFICE_PICK* picks)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLD 0x004e7150 */
 /* ADDRESS: GOLDTL 0x004e8d10 */
+/* ADDRESS: GOLDDE 0x004d5320 */
 int __cdecl amt_SelectOfficeCandidates(char* who, int n, OFFICE_PICK* picks)
 {
 	float score;
@@ -1991,6 +2022,7 @@ int __cdecl amt_RankAllOffices(unsigned char* who, int n, OFFICE_PICK* picks, in
 
 #if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
 /* ADDRESS: GOLDTL 0x004e8ee0 */
+/* ADDRESS: GOLDDE 0x004d54f0 */
 int __cdecl amt_RankAvailableOffices(char* who, int n, OFFICE_PICK* picks, int* full_out)
 {
 	int count;
@@ -2102,6 +2134,7 @@ void* __cdecl amt_GetRoleHolder(int role)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLD 0x004e7510 */
 /* ADDRESS: GOLDTL 0x004e90d0 */
+/* ADDRESS: GOLDDE 0x004d56e0 */
 char* __cdecl amt_FindOfficeHolderByType(int value)
 {
 	int index;
@@ -2138,6 +2171,7 @@ void* __cdecl amt_GetSuperiorHolder(int role)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLD 0x004e7550 */
 /* ADDRESS: GOLDTL 0x004e9110 */
+/* ADDRESS: GOLDDE 0x004d5720 */
 char* __cdecl amt_GetOfficeOverlord(int kind)
 {
 	Rec18_68da68 r;
@@ -2192,6 +2226,7 @@ int __cdecl amt_IsNextRoleStep(unsigned char* entity, int role)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLD 0x004e75c0 */
 /* ADDRESS: GOLDTL 0x004e9180 */
+/* ADDRESS: GOLDDE 0x004d5790 */
 int __cdecl amt_IsNextOfficeStep(void* rec, int role)
 {
 	Rec18_68da68 r[2];
@@ -2303,6 +2338,7 @@ int __cdecl amt_ListSuperiors(int role, int max, unsigned char** out)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLD 0x004e76b0 */
 /* ADDRESS: GOLDTL 0x004e9310 */
+/* ADDRESS: GOLDDE 0x004d5880 */
 int __cdecl amt_CollectOfficeCandidates(int k, int max, unsigned char** out)
 {
 	Rec18_68da68 a;
@@ -2375,6 +2411,7 @@ int __cdecl amt_ListPromotionRoles(unsigned char* entity, int max, int* out)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLD 0x004e7770 */
 /* ADDRESS: GOLDTL 0x004e93d0 */
+/* ADDRESS: GOLDDE 0x004d5940 */
 int __cdecl amt_ListPromotionOffices(unsigned char* entity, int max, int* out)
 {
 	int want;
@@ -2468,6 +2505,7 @@ int __cdecl amt_FindVacantRoleBelow(int role)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLD 0x004e78a0 */
 /* ADDRESS: GOLDTL 0x004e9530 */
+/* ADDRESS: GOLDDE 0x004d5a70 */
 int __cdecl amt_FindOfficeWantingApplicants(int n)
 {
 	Rec18_68da68 r;
@@ -2490,6 +2528,7 @@ int __cdecl amt_FindOfficeWantingApplicants(int n)
 
 /* ADDRESS: GOLD 0x004e78f0 */
 /* ADDRESS: GOLDTL 0x004e9580 */
+/* ADDRESS: GOLDDE 0x004d5ac0 */
 int __cdecl amt_GetRankLimits(int role, OFFICE_RANK_LIMITS* out)
 {
 	OFFICE_ROLE_TEMPLATE tmpl;
@@ -2558,6 +2597,7 @@ int __cdecl amt_GetRankLimits(int role, OFFICE_RANK_LIMITS* out)
 
 #if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
 /* ADDRESS: GOLDTL 0x004e9730 */
+/* ADDRESS: GOLDDE 0x004d5c70 */
 unsigned int __cdecl amt_SpawnOfficeCandidate(unsigned int role)
 {
 	OFFICE_RANK_LIMITS t;
@@ -2585,6 +2625,7 @@ unsigned int __cdecl amt_SpawnOfficeCandidate(unsigned int role)
 
 #if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
 /* ADDRESS: GOLDTL 0x004e97f0 */
+/* ADDRESS: GOLDDE 0x004d5d30 */
 int __cdecl amt_PurchaseOfficeApplication(unsigned char* entity, int office_id)
 {
 	int mode;
@@ -2661,6 +2702,7 @@ int __cdecl amt_ListRolesOfLevel(int level, int max, int* out)
 
 /* ADDRESS: GOLD 0x004e7c40 */
 /* ADDRESS: GOLDTL 0x004e99c0 */
+/* ADDRESS: GOLDDE 0x004d5e10 */
 int __cdecl amt_GetRoleLevel(int role)
 {
 	OFFICE_ROLE_TEMPLATE tmpl;
@@ -2671,6 +2713,7 @@ int __cdecl amt_GetRoleLevel(int role)
 
 #if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
 /* ADDRESS: GOLDTL 0x004e99e0 */
+/* ADDRESS: GOLDDE 0x004d5e30 */
 void __cdecl amt_ResolveOfficeApplications(int office, int count, OFFICE_SLOT* list)
 {
 	int remain;
@@ -2902,6 +2945,7 @@ void __cdecl amt_ResolveOfficeApplications(int office, int count, OFFICE_SLOT* l
 
 #if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
 /* ADDRESS: GOLDTL 0x004e9ee0 */
+/* ADDRESS: GOLDDE 0x004d6330 */
 int __cdecl amt_ProcessOfficeElections(void)
 {
 	int flags[6] = {0, 0, 0, 0, 0, 0};
@@ -3031,6 +3075,7 @@ int __cdecl amt_GetGroupVacancyFlags(int group)
 
 #if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
 /* ADDRESS: GOLDTL 0x004ea130 */
+/* ADDRESS: GOLDDE 0x004d6580 */
 unsigned int __cdecl amt_GetOfficeGroupHumanFlags(unsigned int officeKind)
 {
 	EVT_ARG args[6];
@@ -3128,6 +3173,7 @@ int __cdecl amt_IsPendingAssignment(int group, char* slot)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLD 0x004e8530 */
 /* ADDRESS: GOLDTL 0x004ea2b0 */
+/* ADDRESS: GOLDDE 0x004d6700 */
 int __cdecl amt_IsCandidateInOffice(int kind, char* x)
 {
 	OFFICE_SLOT list[6];
@@ -3153,6 +3199,7 @@ int __cdecl amt_IsCandidateInOffice(int kind, char* x)
 
 #if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
 /* ADDRESS: GOLDTL 0x004ea350 */
+/* ADDRESS: GOLDDE 0x004d67a0 */
 void __cdecl amt_SyncAllOfficeSlots(void)
 {
 	unsigned char* r;
@@ -3228,6 +3275,7 @@ int __cdecl amt_HasCouncilHolder(void)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLD 0x004e86e0 */
 /* ADDRESS: GOLDTL 0x004ea460 */
+/* ADDRESS: GOLDDE 0x004d68b0 */
 int __cdecl amt_HasOccupiedOfficeType7(void)
 {
 	int n;
@@ -3255,6 +3303,7 @@ int __cdecl amt_HasOccupiedOfficeType7(void)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLD 0x004e8730 */
 /* ADDRESS: GOLDTL 0x004ea4b0 */
+/* ADDRESS: GOLDDE 0x004d6900 */
 void __cdecl amt_NotifyOfficeAppointed(unsigned char* e, int k)
 {
 	char buf[0x200];
@@ -3275,6 +3324,7 @@ void __cdecl amt_NotifyOfficeAppointed(unsigned char* e, int k)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLD 0x004e87e0 */
 /* ADDRESS: GOLDTL 0x004ea560 */
+/* ADDRESS: GOLDDE 0x004d69b0 */
 void __cdecl amt_NotifyOfficeLost(void* entity, char* role)
 {
 	char buf[0x200];
@@ -3303,6 +3353,7 @@ void __cdecl amt_NotifyOfficeLost(void* entity, char* role)
 
 #if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
 /* ADDRESS: GOLDTL 0x004ea620 */
+/* ADDRESS: GOLDDE 0x004d6a70 */
 void __cdecl amt_FillOffice0x1c0x1dFromRichest(void)
 {
 	int a[6];
@@ -3465,6 +3516,7 @@ void __cdecl amt_FillOffice0x1c0x1dFromRichest(void)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLD 0x004e8c20 */
 /* ADDRESS: GOLDTL 0x004ea9a0 */
+/* ADDRESS: GOLDDE 0x004d6df0 */
 void __cdecl amt_FillOffice0x22FromRichest(void)
 {
 	int k;
@@ -3541,6 +3593,7 @@ void __cdecl amt_FillOffice0x22FromRichest(void)
 
 #if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
 /* ADDRESS: GOLDTL 0x004eab40 */
+/* ADDRESS: GOLDDE 0x004d6f90 */
 void __cdecl amt_calc_zuenfte(unsigned int kind)
 {
 	union {
@@ -3733,6 +3786,7 @@ void __cdecl amt_calc_zuenfte(unsigned int kind)
 
 #if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
 /* ADDRESS: GOLDTL 0x004eafe0 */
+/* ADDRESS: GOLDDE 0x004d7430 */
 void __cdecl amt_UpdateAllOffices(void)
 {
 	Rec_4eafe0 out[7];
@@ -3821,6 +3875,7 @@ void __cdecl amt_UpdateAllOffices(void)
 
 #if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
 /* ADDRESS: GOLDTL 0x004eb180 */
+/* ADDRESS: GOLDDE 0x004d75d0 */
 int __cdecl amt_CheckZunftTaxLaw(int rankRange)
 {
 	int officeType;
@@ -3925,6 +3980,7 @@ int __cdecl amt_CanUpgradeBuildingTier1(char* building)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLD 0x004e94a0 */
 /* ADDRESS: GOLDTL 0x004eb220 */
+/* ADDRESS: GOLDDE 0x004d7670 */
 int __cdecl gm_CheckZunftPreismanipulation(char* entity)
 {
 	unsigned char kind;
@@ -3989,6 +4045,7 @@ int __cdecl amt_CanUpgradeBuildingTier2(unsigned char* building)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLD 0x004e94e0 */
 /* ADDRESS: GOLDTL 0x004eb260 */
+/* ADDRESS: GOLDDE 0x004d76b0 */
 int __cdecl amt_CanUpgradeBuildingTier2(unsigned char* obj)
 {
 	unsigned char* building;
@@ -4071,6 +4128,7 @@ int __cdecl amt_CanUpgradeBuildingTier3(unsigned char* building)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLD 0x004e95a0 */
 /* ADDRESS: GOLDTL 0x004eb320 */
+/* ADDRESS: GOLDDE 0x004d7770 */
 int __cdecl amt_CheckHighOfficeEligibility(unsigned char* obj)
 {
 	unsigned char* r;
@@ -4111,6 +4169,7 @@ int __cdecl amt_CheckHighOfficeEligibility(unsigned char* obj)
 
 #if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
 /* ADDRESS: GOLDTL 0x004eb3e0 */
+/* ADDRESS: GOLDDE 0x004d7830 */
 unsigned int __cdecl gm_ExecZunftPreismanipulation(char* self, int* packet)
 {
 	slot80 ent;
@@ -4191,10 +4250,10 @@ found:
 	}
 	t = gm_GetEntitySkill(self, 2);
 	if (packet[2] == 1) {
-		scale = (float) (gm_RandomFloat01() + flt_1_0) * t * 0.4f + *(float*) 0x664198;
+		scale = (float) (gm_RandomFloat01() + flt_1_0) * t * 0.4f + 1.2f;
 	} else {
-		scale = *(double*) 0x6629c8 -
-			((float) (gm_RandomFloat01() + flt_1_0) * t * 0.3f + *(double*) 0x6628f0);
+		scale = *(double*) &g_6629c8 -
+			((float) (gm_RandomFloat01() + flt_1_0) * t * 0.3f + 0.2);
 	}
 
 	e = gm_FindSlotById(gm_ActiveTownIndex, v20);
@@ -4225,7 +4284,7 @@ found:
 		for (q = (unsigned char*) 0x7f4ca4; (int) q < (int) 0x85a0a4; q += 0x21c) {
 			if ((*(unsigned char*) (q - 2) == 7 || *(unsigned char*) (q - 2) == 6) &&
 			    *(int*) (self + 4) != *(int*) q)
-				he_PostEntityMessage(*(int*) q, -1, buf2, 1, 0x5ec, (void*) 0x6b5c60);
+				he_PostEntityMessage(*(int*) q, -1, buf2, 1, 0x5ec, (void*) &str_empty);
 		}
 		if (*(unsigned char*) (self + 2) == 6)
 			d2_ShowModalMessageBox(buf2, 0x10);
@@ -4236,6 +4295,7 @@ found:
 
 #if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
 /* ADDRESS: GOLDTL 0x004eb780 */
+/* ADDRESS: GOLDDE 0x004d7bd0 */
 int __cdecl gm_ExecZunftAufruhr(char* e, int* msg)
 {
 	char* h;
@@ -4296,6 +4356,7 @@ int __cdecl gm_ExecZunftAufruhr(char* e, int* msg)
 
 #if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
 /* ADDRESS: GOLDTL 0x004eba60 */
+/* ADDRESS: GOLDDE 0x004d7eb0 */
 unsigned int __cdecl amt_HandleOfficeAction(char* e, unsigned int* target)
 {
 	float f;
@@ -4495,6 +4556,7 @@ unsigned int __cdecl amt_HandleOfficeAction(char* e, unsigned int* target)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLD 0x004ea550 */
 /* ADDRESS: GOLDTL 0x004ec2d0 */
+/* ADDRESS: GOLDDE 0x004d8720 */
 void __cdecl amt_AdjustOfficeHoldersFavor(char* p, int kind, int arg)
 {
 	OFFICE_SLOT recs[6];
@@ -4516,6 +4578,7 @@ void __cdecl amt_AdjustOfficeHoldersFavor(char* p, int kind, int arg)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLD 0x004ea5c0 */
 /* ADDRESS: GOLDTL 0x004ec340 */
+/* ADDRESS: GOLDDE 0x004d8790 */
 float __cdecl amt_GetOfficeAffinityScore(unsigned short* p, int kind)
 {
 	OFFICE_SLOT recs[6];
@@ -4549,6 +4612,7 @@ float __cdecl amt_GetOfficeAffinityScore(unsigned short* p, int kind)
 
 /* ADDRESS: GOLD 0x004ea690 */
 /* ADDRESS: GOLDTL 0x004ec410 */
+/* ADDRESS: GOLDDE 0x004d8860 */
 int __cdecl amt_fio_SaveAemter(void* file)
 {
 	extern unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream);
@@ -4654,6 +4718,7 @@ int __cdecl amt_fio_LoadAemter(void* streamCtx, int version)
 #if !defined(REBREW_SERVER)
 /* ADDRESS: GOLD 0x004ea7a0 */
 /* ADDRESS: GOLDTL 0x004ec520 */
+/* ADDRESS: GOLDDE 0x004d8970 */
 int __cdecl amt_fio_LoadAemter(void* file, int version)
 {
 	int cnt;

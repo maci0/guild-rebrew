@@ -57,6 +57,7 @@ void __cdecl d2_DrawAnimationSlot(int i, int tex);
 void __cdecl d2_GetElementResourceSize(int a, int* w, int* h);
 
 /* ADDRESS: GOLDTL 0x0046a110 */
+/* ADDRESS: GOLDDE 0x0045d900 */
 void __cdecl d2_RenderAllElements(int clearAll)
 {
 	struct { D2_RENDER_CLIP_RECT screen; float uv[2]; } loc;

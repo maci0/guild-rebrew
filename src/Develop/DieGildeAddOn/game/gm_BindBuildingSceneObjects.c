@@ -9,6 +9,7 @@ int __cdecl strcmpi(const char* a0, const char* a1);
 int __cdecl sprintf(char* a0, const char* a1, ...);
 
 /* ADDRESS: GOLDTL 0x005109f0 */
+/* ADDRESS: GOLDDE 0x004fb6c0 */
 void __cdecl gm_BindBuildingSceneObjects(int sceneObject)
 {
 	char name[128];

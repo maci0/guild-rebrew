@@ -3,6 +3,7 @@
 
 
 /* ADDRESS: GOLDTL 0x004c51f0 */
+/* ADDRESS: GOLDDE 0x004b2c00 */
 int __cdecl cm_SendSellObjekt(int targetId, int buildingId, short itemId, int amount, char marketId, int flags)
 {
 	char buf[0x9c];

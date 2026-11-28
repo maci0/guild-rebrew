@@ -10,6 +10,7 @@ void __cdecl d2_UpdateProduktionSlotTile(int a0, int a1, int* rect, int w, int n
                           unsigned int a5);
 
 /* ADDRESS: GOLDTL 0x005963f0 */
+/* ADDRESS: GOLDDE 0x0057beb0 */
 void __cdecl d2_RefreshWorkshopInventoryGrids(int dialog, int form, int a2, unsigned int a3)
 {
 	int idx;

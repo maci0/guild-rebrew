@@ -11,6 +11,7 @@ extern Entry g_666044[];
 #include "Develop/client_types.h"
 extern Rec15_699058 g_699058[37];
 
+/* ADDRESS: GOLDDE 0x005964a0 */
 Entry* __cdecl hp_LookupProdEntry(char* c)
 {
 	int i;

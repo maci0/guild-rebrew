@@ -5,6 +5,7 @@ void __cdecl gm_HandleGegenspionage(char*, int*);
 
 
 /* ADDRESS: GOLDTL 0x004f8bb0 */
+/* ADDRESS: GOLDDE 0x004e4990 */
 int __cdecl gm_HandleGegenspionagePrivilege(char* entity, int* request)
 {
 	char* target;

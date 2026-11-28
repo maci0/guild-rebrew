@@ -6,6 +6,7 @@
 struct Node;
 void __cdecl d3_TransformPoint(struct Node*, float*, float*);
 
+/* ADDRESS: GOLDDE 0x0044adf0 */
 void __cdecl d3_TransformToObjectSpace(char* o, float* v, float* out)
 {
 	float t[4];

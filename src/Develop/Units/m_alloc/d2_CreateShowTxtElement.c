@@ -15,6 +15,7 @@ int __cdecl m_alloc(int, char*);
 int __cdecl d2_MeasureTextWidth(char*, int);
 
 /* ADDRESS: GOLDTL 0x0046fcd0 */
+/* ADDRESS: GOLDDE 0x00463230 */
 int __cdecl d2_CreateShowTxtElement(int xpos, int ypos, char* name)
 {
 	int idx;

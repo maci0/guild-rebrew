@@ -14,6 +14,7 @@ extern void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 /* Collects the entity ids in the given building's filter chain, drops repeated
  * ids, emits the remaining ones and announces the building's road segment. */
 /* ADDRESS: GOLDTL 0x004b7f70 */
+/* ADDRESS: GOLDDE 0x004a6020 */
 int __cdecl gm_HandleEntityMsg18(unsigned int* request)
 {
 	unsigned short* ent;

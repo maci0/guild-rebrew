@@ -23,6 +23,7 @@ extern int sb_WaveDriver;
 extern int* sb_BankListHead;
 extern char g_14cbc20[];
 
+/* ADDRESS: GOLDDE 0x0041f3b0 */
 Sample* __cdecl sb_FindSampleByName(Bank* bank, const char* name)
 {
 	Sample* r;

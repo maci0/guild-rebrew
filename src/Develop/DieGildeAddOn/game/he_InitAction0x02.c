@@ -9,6 +9,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x00542440 */
 void __cdecl he_StartUpgradeDummy(char* o)
 {
 	char* t;

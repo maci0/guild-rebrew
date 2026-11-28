@@ -3,6 +3,7 @@
 
 void __cdecl d2_AddElementToWindow(int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x004c6fa0 */
 void __cdecl d2_AddCouncilSeatMarker(int a1, void* ctx)
 {
 	d2_AddElementToWindow(0x8c, (short) (0x44 - *(short*) ((char*) ctx + 0x2c) * 10),

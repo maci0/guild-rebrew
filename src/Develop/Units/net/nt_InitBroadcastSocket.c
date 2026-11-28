@@ -18,6 +18,7 @@ __declspec(dllimport) void* __stdcall LocalFree(void*);
 /* Opens the UDP broadcast socket once: bound to any address, with the
  * broadcast destination on the given port. */
 /* ADDRESS: GOLDTL 0x00402220 */
+/* ADDRESS: GOLDDE 0x00401b90 */
 void __cdecl nt_InitBroadcastSocket(unsigned short port)
 {
 	int one;

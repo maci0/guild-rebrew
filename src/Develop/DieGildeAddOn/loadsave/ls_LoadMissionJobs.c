@@ -18,6 +18,7 @@ extern char gm_MissionJobs[];
 
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 
+/* ADDRESS: GOLDDE 0x004a4810 */
 int __cdecl ls_LoadMissionJobs(void* stream)
 {
 	int i;

@@ -41,6 +41,7 @@ void __cdecl d2_SelectSchutzgeldTarget(char*);
 void __cdecl d2_SelectBriberyTarget(char*);
 void __cdecl d2_StartRaubzugTargetSelect(char*);
 
+/* ADDRESS: GOLDDE 0x00582f90 */
 void __cdecl d2_RunRaeuberInteriorHud(char* e)
 {
 	int a;

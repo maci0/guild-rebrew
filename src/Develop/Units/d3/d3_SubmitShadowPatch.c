@@ -60,6 +60,7 @@ int __cdecl d3_BuildShadowPatchFromHeightGrid(void* vb, void* ib, int* rect, int
  * 0x88/0x8c buffer capacities, 0x90/0x94 written counts, 0x98 skip flag.
  * The byte return matches the original: only al is defined on the 0 path. */
 /* ADDRESS: GOLDTL 0x00457630 */
+/* ADDRESS: GOLDDE 0x0044cdf0 */
 char __cdecl d3_SubmitShadowPatch(void* obj, void* map)
 {
 	char* s;

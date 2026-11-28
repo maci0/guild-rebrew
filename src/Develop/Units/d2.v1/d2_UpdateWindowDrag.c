@@ -25,6 +25,7 @@ extern int d2_MouseY;
 void __cdecl io_SetMouseCursorPos(int x, int y);
 
 /* ADDRESS: GOLDTL 0x005b0f00 */
+/* ADDRESS: GOLDDE 0x00595900 */
 int __cdecl d2_UpdateWindowDrag(char* w)
 {
 	int r;

@@ -7,6 +7,7 @@ void __cdecl cm_RequestChangeAttribute(void);
 float __cdecl gm_ApplyEntityHealthDelta(unsigned short id, int v);
 
 /* ADDRESS: GOLDTL 0x0057a890 */
+/* ADDRESS: GOLDDE 0x005606f0 */
 int __cdecl he_InflictAffliction(char* off, float chance, int kind, float* out)
 {
 	int type;

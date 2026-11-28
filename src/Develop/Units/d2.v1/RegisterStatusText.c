@@ -19,6 +19,7 @@ extern char g_6a30e4[];
 
 char* __cdecl d3_FindSceneObjectByName(char* name, int mode);
 
+/* ADDRESS: GOLDDE 0x0051c1c0 */
 char* __cdecl RegisterStatusText(char* name, char* path, int arg)
 {
 	char buf[256];

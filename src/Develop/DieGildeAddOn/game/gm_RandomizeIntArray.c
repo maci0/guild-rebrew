@@ -3,6 +3,7 @@
 
 unsigned short __cdecl gm_RandomMod(unsigned short n);
 
+/* ADDRESS: GOLDDE 0x004f3f00 */
 void __cdecl gm_RandomizeIntArray(unsigned int n, int* arr)
 {
 	unsigned int c;

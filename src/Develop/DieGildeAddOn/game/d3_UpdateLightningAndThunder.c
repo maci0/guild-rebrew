@@ -24,6 +24,7 @@ unsigned short __cdecl gm_RandomMod(int);
 int __cdecl sb_PlayVoice(int, char*, int, int, int, int, int);
 #include "Develop/DieGildeAddOn/game/sonnenstrahlen.h"
 
+/* ADDRESS: GOLDDE 0x0051ea40 */
 void __cdecl d3_UpdateLightningAndThunder(void)
 {
 	if (d3_RainEffect != 0) {

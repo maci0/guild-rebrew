@@ -19,6 +19,7 @@ void __cdecl he_PostEntityMessage(int a, int b, char* buf, int c, int d, int e);
 /* Handles the two result kinds of a diebesgilde spionage dialog: report the
  * outcome packet and tear the slot down. Native body: 869 bytes. */
 /* ADDRESS: GOLDTL 0x005dc270 */
+/* ADDRESS: GOLDDE 0x005bd810 */
 int __cdecl gm_ObjInflictTargetAffliction(char* cmd, char* action)
 {
 	int dlg[0x14];

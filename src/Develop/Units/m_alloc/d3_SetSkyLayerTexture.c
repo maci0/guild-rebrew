@@ -4,6 +4,7 @@ void __cdecl d3_ReleaseTexture(int);
 int __cdecl d3_LoadOrReuseTexture(int, int, int, int);
 void __cdecl d3_LoadTextureSurfaceTl(int);
 
+/* ADDRESS: GOLDDE 0x0044f190 */
 void __cdecl d3_SetSkyLayerTexture(void* a1, int assetName)
 {
 	int asset;

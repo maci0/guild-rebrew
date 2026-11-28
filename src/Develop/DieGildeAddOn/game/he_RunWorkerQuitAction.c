@@ -34,6 +34,7 @@ void __cdecl he_StartWorkerQuitAction(char* h)
 	he_FreeAction(h);
 }
 
+/* ADDRESS: GOLDDE 0x0054c810 */
 void __cdecl he_RunWorkerQuitAction(char* u)
 {
 	int v;

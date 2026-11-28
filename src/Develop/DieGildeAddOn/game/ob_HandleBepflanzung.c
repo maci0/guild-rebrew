@@ -50,6 +50,7 @@ void __cdecl d2_ClearRadioGroup(int a);
 void __cdecl d2_DestroyForm(int a);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005c5310 */
+/* ADDRESS: GOLDDE 0x005a7590 */
 void __cdecl ob_HandleBepflanzung(int gebaeude)
 {
 	int v1;

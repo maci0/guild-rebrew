@@ -7,6 +7,7 @@ extern pos14_7f4c00 gm_GameTime;
 int __cdecl cm_SendSetHE(int, char*);
 void __cdecl he_FreeAction(char*);
 
+/* ADDRESS: GOLDDE 0x00540e50 */
 void __cdecl he_HandleAction0x82SkillModifier(char* u)
 {
 	if (*(int*) (u + 0x70) != -1 && *(int*) (u + 0x70) != -2) {

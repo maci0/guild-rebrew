@@ -7,6 +7,7 @@ extern char d3_ActiveBombs[];
 
 #include "Develop/DieGildeAddOn/game/client_timer.h"
 
+/* ADDRESS: GOLDDE 0x0050f170 */
 void __cdecl main_InitFrameProfile(void)
 {
 	tb_OpenFunction(main_SampleFrameCounter, 0x47);

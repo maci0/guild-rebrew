@@ -21,6 +21,7 @@ extern void* evt_ScriptErrorLog;
 void __cdecl evt_FreeScript(Ctx* c);
 void __cdecl m_FreeTracked(void* p);
 
+/* ADDRESS: GOLDDE 0x00424220 */
 void __cdecl evt_ShutdownScripts(void)
 {
 	int i;

@@ -7,6 +7,7 @@ int __cdecl amt_GetEffectiveRoleLevel(unsigned short, int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl gm_RandomizeIntArray(int, int*);
 
+/* ADDRESS: GOLDDE 0x00532bc0 */
 void __cdecl he_RollTripletEventScores(char* action, unsigned short* first_ent, unsigned short* second_ent)
 {
 	int arr[12];

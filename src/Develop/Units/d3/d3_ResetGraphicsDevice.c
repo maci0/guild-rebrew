@@ -9,6 +9,7 @@ typedef struct
 } D3_DEVICE_RESET_VTBL;
 // SIZE 0x3c
 
+/* ADDRESS: GOLDDE 0x00419490 */
 char __cdecl d3_ResetGraphicsDevice(void)
 {
 	int hr;

@@ -9,6 +9,7 @@ extern pos14_7f4c00 gm_GameTime;
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl cm_SendSetHE(int, char*);
 
+/* ADDRESS: GOLDDE 0x00540b50 */
 void __cdecl he_RunCountdownAction(char* action)
 {
 	if (*(int*) (action + 0x70) < 0 || *(int*) (action + 0xac) <= 0) {

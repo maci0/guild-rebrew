@@ -44,6 +44,7 @@ struct ACTION_MSG {
 int __cdecl he_StartHandlungSearch(int, int, int);
 void __cdecl cm_SendCopyEntityData(struct ACTION_MSG*);
 
+/* ADDRESS: GOLDDE 0x0052d600 */
 void __cdecl he_EnsureAction0x6d(void)
 {
 	struct ACTION_MSG m;

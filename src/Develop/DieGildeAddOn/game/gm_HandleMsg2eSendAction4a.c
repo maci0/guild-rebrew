@@ -31,6 +31,7 @@ void __cdecl cm_SendCopyEntityData(void*);
 
 
 /* ADDRESS: GOLDTL 0x004ba480 */
+/* ADDRESS: GOLDDE 0x004a8520 */
 int __cdecl gm_HandleMsg2eSendAction4a(int* request)
 {
 	unsigned short* e;

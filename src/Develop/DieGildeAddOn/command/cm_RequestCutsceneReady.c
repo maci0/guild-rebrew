@@ -9,6 +9,7 @@ typedef struct
 } CUTSCENE_READY_BODY;
 // SIZE 0x48
 
+/* ADDRESS: GOLDDE 0x004b42a0 */
 void __cdecl cm_RequestCutsceneReady(CUTSCENE_READY_BODY* body)
 {
 	char buf[0x9c];

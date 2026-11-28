@@ -1,5 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x00451340 */
+/* ADDRESS: GOLDDE 0x00446f20 */
 void __cdecl d3_LerpVec3(float* start, float* end, float t, float* out)
 {
 	out[0] = (end[0] - start[0]) * t + start[0];

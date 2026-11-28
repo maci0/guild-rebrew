@@ -1,6 +1,7 @@
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* ADDRESS: GOLDTL 0x0050c4e0 */
+/* ADDRESS: GOLDDE 0x004f7280 */
 int __cdecl gm_GetBuildingProtLevel(unsigned char* arg)
 {
 	unsigned char* p;

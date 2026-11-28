@@ -25,6 +25,7 @@ typedef struct CUTSCENE_LOAD_SLOT {
  * stream. Records written by version 0x1003f and later carry a timestamp;
  * older ones reuse g_7f4c00. */
 /* ADDRESS: GOLDTL 0x00524fc0 */
+/* ADDRESS: GOLDDE 0x0050e290 */
 int __cdecl ls_LoadCutscenes(void* fp)
 {
 	char buf[0x1000];

@@ -4,6 +4,7 @@
 int __cdecl gm_QueryEntities(int, int, int, int);
 int __cdecl gm_GetMsgField(void*, int);
 
+/* ADDRESS: GOLDDE 0x004f8cf0 */
 int __cdecl gm_GetMsgObjektField(void* msg, int obj_id)
 {
 	int r;

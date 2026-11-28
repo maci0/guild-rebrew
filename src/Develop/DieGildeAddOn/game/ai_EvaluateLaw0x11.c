@@ -6,6 +6,7 @@ int __cdecl gm_MapEntityStatRange(int raw_idx);
 void __cdecl gm_GetLawEntry(int idx, Stat* st);
 
 /* ADDRESS: GOLDTL 0x00491570 */
+/* ADDRESS: GOLDDE 0x00480420 */
 int __cdecl ai_EvaluateLaw0x11(char* entity, int unused, int* out)
 {
 	Stat st;

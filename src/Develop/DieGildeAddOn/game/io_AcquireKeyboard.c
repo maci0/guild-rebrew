@@ -2,6 +2,7 @@
 
 typedef int (__stdcall* INPUT_ACQUIRE_FN)(int*);
 
+/* ADDRESS: GOLDDE 0x00410420 */
 int __cdecl io_AcquireKeyboard(int acquire)
 {
 	int* obj;

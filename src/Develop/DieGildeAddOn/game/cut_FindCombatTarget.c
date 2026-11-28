@@ -7,6 +7,7 @@ float __cdecl gm_GetEntityHealthRatio(unsigned char*);
 
 
 /* ADDRESS: GOLDTL 0x004d2f70 */
+/* ADDRESS: GOLDDE 0x004c0260 */
 unsigned char* __cdecl cut_FindCombatTarget(char* actor)
 {
 	float best;

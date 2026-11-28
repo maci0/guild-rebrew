@@ -8,6 +8,7 @@ extern char str_fmt_s[];
 int __cdecl d2_ShowPrivilegMessage(void*, int, int);
 void __cdecl io_FormatTextBuffer(void*, int, short);
 
+/* ADDRESS: GOLDDE 0x004e4f00 */
 int __cdecl gm_HandleBuergermeisterPrivilege(unsigned char* entity, int* command)
 {
 	char buf[0x800];

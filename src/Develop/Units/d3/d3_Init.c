@@ -67,6 +67,7 @@ void __cdecl d3_SetViewport(float, float, float, float, int, int, int, unsigned 
 void __cdecl d3_InitRenderVertexBuffer(void);
 
 /* ADDRESS: GOLDTL 0x00439020 */
+/* ADDRESS: GOLDDE 0x00432100 */
 char __cdecl d3_Init(D3_INIT_CONFIG* cfg)
 {
 	unsigned int n;

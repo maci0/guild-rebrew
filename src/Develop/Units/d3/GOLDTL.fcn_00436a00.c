@@ -6,6 +6,7 @@
 
 /* ADDRESS: GOLD 0x004324e0 */
 /* ADDRESS: GOLDTL 0x004321a0 */
+/* ADDRESS: GOLDDE 0x0042b7d0 */
 int __cdecl d3_StepAnimFrame(D3_ANIMATION_OPTIONS flags, int v, int lo, int hi, int max)
 {
 	unsigned char f;
@@ -37,6 +38,7 @@ int __cdecl d3_StepAnimFrame(D3_ANIMATION_OPTIONS flags, int v, int lo, int hi, 
 void __cdecl d3_InvalidateSubTreeFlags(int a1, int a2);
 
 /* ADDRESS: GOLDTL 0x00436a00 */
+/* ADDRESS: GOLDDE 0x0042ff20 */
 void __cdecl d3_SetAnimFrame(int object, char* animState, int index)
 {
 	char* owner;

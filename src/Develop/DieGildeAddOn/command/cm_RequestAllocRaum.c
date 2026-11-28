@@ -24,6 +24,7 @@ typedef struct {
 
 int __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b2940 */
 int __cdecl cm_RequestAllocRaum(unsigned char id, int value, ALLOC_RAUM_BLK* block, unsigned short extra)
 {
 	ALLOC_RAUM_MSG msg;

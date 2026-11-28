@@ -9,6 +9,7 @@ extern Slot7f4ca2 gm_SlotTableKindView[768];
 
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
+/* ADDRESS: GOLDDE 0x005102b0 */
 int __cdecl d2_GetHudThemeResourceId(void)
 {
 	int r;

@@ -23,6 +23,7 @@ int __cdecl cm_SendSellObjekt(int a1, int a2, int a3, int a4, char a5, int a6);
 void __cdecl ReportClientMessage(const char* msg);
 
 /* ADDRESS: GOLDTL 0x00512b40 */
+/* ADDRESS: GOLDDE 0x004fd6e0 */
 void __cdecl init_Betrieb(unsigned char* building)
 {
     char* geb;

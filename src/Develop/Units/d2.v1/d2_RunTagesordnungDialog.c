@@ -1,3 +1,6 @@
+extern char g_85a0a0[];
+extern char io_RightButtonReleased[];
+extern char d2_DialogCloseRequested[];
 extern int d2_CurrentWindowId;
 extern char gm_EntitySlotTable[];
 
@@ -14,6 +17,7 @@ void __cdecl d2_OpenTagesordnungDialog(void);
 void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005ce110 */
+/* ADDRESS: GOLDDE 0x005afba0 */
 void __cdecl d2_RunTagesordnungDialog(int a0, int a1, int level)
 {
 	char rec[0x90];
@@ -90,7 +94,7 @@ void __cdecl d2_RunTagesordnungDialog(int a0, int a1, int level)
 						k += 1;
 					}
 					h = (unsigned short*) ((char*) h + 0x21c);
-				} while ((int) h < 0x85a0a0);
+				} while ((int) h < (int) &g_85a0a0);
 				if (found == 0) {
 					io_AppendText(0x139d);
 				}
@@ -115,7 +119,7 @@ void __cdecl d2_RunTagesordnungDialog(int a0, int a1, int level)
 		i = 0;
 		h = (unsigned short*) gm_EntitySlotTable;
 		do {
-			if ((int) h >= 0x85a0a0) {
+			if ((int) h >= (int) &g_85a0a0) {
 				break;
 			}
 			if ((*(unsigned int*) ((char*) h + 0x1cc) & v9) != 0) {
@@ -141,8 +145,8 @@ void __cdecl d2_RunTagesordnungDialog(int a0, int a1, int level)
 		io_AppendText(0x139d);
 	}
 	do {
-		if (*(int*) 0x14ce8e0 != 0) {
-			*(int*) 0x774654 = 1;
+		if (*(int*) &io_RightButtonReleased != 0) {
+			*(int*) &d2_DialogCloseRequested = 1;
 		}
 	} while (main_RunFrameLoop((void*) d2_OpenTagesordnungDialog, 0x657c7) != 0);
 	d2_DestroyForm(dialog);

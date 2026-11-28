@@ -19,6 +19,7 @@ void __cdecl d2_DrawDimmedSpriteFrame(int x, int y, int tex, void* seq, int fram
 void __cdecl d2_DrawSpriteFromSet(int x, int y, int tex, void* seq, int frame);
 
 /* ADDRESS: GOLDTL 0x0047cd70 */
+/* ADDRESS: GOLDDE 0x0046bd40 */
 void __cdecl d2_DrawAnimationSlot(int i, int tex)
 {
 	short x;

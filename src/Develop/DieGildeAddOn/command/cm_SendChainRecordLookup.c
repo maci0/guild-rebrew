@@ -3,6 +3,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b33d0 */
 void __cdecl cm_SendChainRecordLookup(int target_id, char op, char mode, short slot, char flag, int param)
 {
 	char buf[0x9c];

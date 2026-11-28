@@ -17,6 +17,7 @@ void __cdecl d3_SafeReleaseSceneResource(int tex);
 void __cdecl d2_SubRefcount(int id);
 
 /* ADDRESS: GOLDTL 0x0046f390 */
+/* ADDRESS: GOLDDE 0x00462920 */
 int __cdecl d2_DestroyWindow(int win)
 {
 	fcn_0046f390_Win* w;

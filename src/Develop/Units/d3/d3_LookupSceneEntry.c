@@ -4,6 +4,7 @@
 char* __cdecl d3_FindFreeSceneEntry(void);
 extern char d3_SceneEntries[];
 
+/* ADDRESS: GOLDDE 0x004bb6e0 */
 char* __cdecl d3_LookupSceneEntry(int id)
 {
 	int i;

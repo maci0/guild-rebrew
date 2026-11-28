@@ -8,6 +8,7 @@ extern char* txt_TextEntries[];
 int sprintf(char*, const char*, ...);
 int __cdecl txt_FindEntryIndex(char*);
 
+/* ADDRESS: GOLDDE 0x00502580 */
 int __cdecl txt_GetCitySelectInfo(char* key, char* out)
 {
 	char buf[256];

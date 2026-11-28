@@ -14,6 +14,7 @@ extern double dbl_4_0;
 int __cdecl d3_FindTextureVariant(int, int);
 
 /* ADDRESS: GOLDTL 0x00440670 */
+/* ADDRESS: GOLDDE 0x00439030 */
 void __cdecl d3_UpdateAnimatedFloorMaterials(unsigned int time, unsigned int count, char* matList)
 {
 	char* e;

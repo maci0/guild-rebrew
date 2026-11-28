@@ -35,6 +35,7 @@ void __cdecl d2_CheckTutCh4Cat02ActionGate(void);
 void __cdecl d2_GrantTutorialGold(void);
 void __cdecl d2_FocusTutorialBuilding0x12(void);
 
+/* ADDRESS: GOLDDE 0x005690a0 */
 int* __cdecl d2_CreateTutorialChapter4(void)
 {
 	int* first;

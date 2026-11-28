@@ -7,6 +7,7 @@ int __cdecl fcn_0065f220(const char*, const char*);
 
 /* Loads a character's motion into its motion slot and takes a reference. */
 /* ADDRESS: GOLDTL 0x00404300 */
+/* ADDRESS: GOLDDE 0x00403830 */
 char* __cdecl ch_LoadCharacterMotion(char* obj, char* name, char slot)
 {
 	int looped;

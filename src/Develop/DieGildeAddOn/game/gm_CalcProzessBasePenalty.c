@@ -5,6 +5,7 @@ int __cdecl gm_LookupEntityRecordById(int a0);
 int __cdecl gm_HasActiveSpecialObject(int a0, int a1);
 
 /* ADDRESS: GOLDTL 0x00493be0 */
+/* ADDRESS: GOLDDE 0x00482a30 */
 int __cdecl gm_CalcProzessBasePenalty(void* action)
 {
 	char* p;

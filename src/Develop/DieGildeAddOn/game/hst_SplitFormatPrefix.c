@@ -3,6 +3,7 @@
 
 #include <string.h>
 
+/* ADDRESS: GOLDDE 0x0049c3a0 */
 void __cdecl hst_SplitFormatPrefix(char* src, char* out, int* consumed, int* rest)
 {
 	int dashes;

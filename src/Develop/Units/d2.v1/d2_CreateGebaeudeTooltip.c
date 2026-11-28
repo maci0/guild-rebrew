@@ -14,6 +14,7 @@ int __cdecl io_AppendText(int, ...);
 void __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl gm_CalcBuildingCost(void*, int);
 
+/* ADDRESS: GOLDDE 0x00576680 */
 int __cdecl d2_CreateGebaeudeTooltip(int i)
 {
 	char roman[7][4] = { "", "I", "II", "III", "IV", "V", "VI" };

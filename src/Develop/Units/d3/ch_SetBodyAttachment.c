@@ -7,6 +7,7 @@ int* __cdecl d3_CreateSceneModelObject(int, float*, float*, char*);
 void __cdecl d3_StartChildAnimByName(int*, char*);
 
 /* ADDRESS: GOLDTL 0x00407800 */
+/* ADDRESS: GOLDDE 0x004069a0 */
 void __cdecl ch_SetBodyAttachment(char* e, int mode, char* name)
 {
 	int* slot;

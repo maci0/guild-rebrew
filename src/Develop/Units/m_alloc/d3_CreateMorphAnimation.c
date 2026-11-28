@@ -13,6 +13,7 @@ extern char* g_1052ba4;
  * it here instead of overriding the locked CFLAGS. */
 #pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x00433be0 */
+/* ADDRESS: GOLDDE 0x0042d1a0 */
 char* __cdecl d3_CreateMorphAnimation(char* a0, char* a1, char* a2, char* a3, char* a4, char* a5, char* name, int a7)
 {
 	char* p;

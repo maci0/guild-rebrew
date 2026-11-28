@@ -9,6 +9,7 @@ int __cdecl cut_ShowSessionDialog(char c, char* a, int* args, int* out);
 int __cdecl fcn_0064d41a(char* buf, char* fmt, ...);
 /* ADDRESS: GOLD 0x4dada0 */
 
+/* ADDRESS: GOLDDE 0x004c90c0 */
 void __cdecl cut_HandleOfficeSessionStep(char* o, int* m)
 {
 	char* a;

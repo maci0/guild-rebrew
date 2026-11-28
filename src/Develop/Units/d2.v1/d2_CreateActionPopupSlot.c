@@ -13,6 +13,7 @@ void __cdecl d2_SetFormVisibility(int, int);
 int __cdecl d2_SetForm(int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00545670 */
+/* ADDRESS: GOLDDE 0x0052bd20 */
 int __cdecl d2_CreateActionPopupSlot(char* e, short a2, short a3, int a4, int a5)
 {
 	int a;
@@ -23,7 +24,7 @@ int __cdecl d2_CreateActionPopupSlot(char* e, short a2, short a3, int a4, int a5
 		*(int*) (e + 0x74) = 0;
 		return 1;
 	}
-	for (i = 0, a = 0x77e8c4; a < 0x77e984; a += 0xc, i++) {
+	for (i = 0, a = ((int) &g_77e8c0 + 0x4); a < ((int) &g_77e8c0 + 0xc4); a += 0xc, i++) {
 		if (*(int*) a == -1) {
 			goto found_slot;
 		}

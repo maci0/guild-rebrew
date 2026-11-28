@@ -2,6 +2,7 @@ int __cdecl gm_CountStraftatenForEntity(int);
 
 
 /* ADDRESS: GOLDTL 0x004a9150 */
+/* ADDRESS: GOLDDE 0x00497490 */
 int __cdecl ai_CheckAction02bPredicate(int a, char* e, int b, char* out)
 {
 	int n;

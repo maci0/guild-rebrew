@@ -34,6 +34,7 @@ extern void* g_6b5df4;
 long __stdcall D3DXCreateFont(Device* dev, HFONT font, Font** out);
 int __cdecl d3_ApplyGammaRamp(void);
 
+/* ADDRESS: GOLDDE 0x004196e0 */
 int __cdecl d3_RestoreDeviceResources(void)
 {
 	if ((*(Font**)&g_6b5de4) == 0) {

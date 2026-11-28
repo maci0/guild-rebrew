@@ -60,6 +60,7 @@ void __cdecl d2_DestroyForm(int);
 void __cdecl d3_EndCameraAndUiMode(void);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005e53b0 */
+/* ADDRESS: GOLDDE 0x005c6670 */
 void __cdecl d2_RunZigeunerBlutracheDialog(void *arg)
 {
     ITEM items[5];

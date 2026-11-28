@@ -7,6 +7,7 @@ int __cdecl evt_FindScriptById(int);
 void __cdecl evt_RequestScriptExit(int);
 void __cdecl gm_KillSpieler(int, int);
 
+/* ADDRESS: GOLDDE 0x004b7160 */
 int __cdecl cm_ExRemoveSpieler(char* x, char* out)
 {
 	unsigned short* e;

@@ -11,6 +11,7 @@ int __cdecl gm_RandomMod(int);
 void __cdecl ReportClientMessage(char*);
 
 /* ADDRESS: GOLDTL 0x00515010 */
+/* ADDRESS: GOLDDE 0x004ffa80 */
 void __cdecl init_AssignBuildingNames(void)
 {
 	int cnt;

@@ -10,6 +10,7 @@ void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, void*, int, int, void*);
 int __cdecl gm_RandomMod(int);
 
+/* ADDRESS: GOLDDE 0x00596eb0 */
 void __cdecl he_NotifyFeudEnded(void* subject, void* recipient)
 {
 	char t;

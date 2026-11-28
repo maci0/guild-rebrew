@@ -18,6 +18,7 @@ extern int d2_CurrentWindowId;
    non-empty entries from the supplier record, build one icon plus five price
    gauges per row, then draw the detail text for the selected entry. */
 /* ADDRESS: GOLDTL 0x0058b440 */
+/* ADDRESS: GOLDDE 0x00571100 */
 void __cdecl d2_PopulateHireCandidateRows(unsigned int a0, unsigned int* a1, int a2, int a3)
 {
     int* v1;

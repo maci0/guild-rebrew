@@ -66,6 +66,7 @@ void __cdecl d3snd_PlaySource(char* voice, int a2, int vol, int pan);
 void* __cdecl d3snd_GetObjectVoiceStatus(char* voice);
 
 /* ADDRESS: GOLDTL 0x00419990 */
+/* ADDRESS: GOLDDE 0x004176d0 */
 void __cdecl d3snd_UpdateAmbientSources(void)
 {
 	int i;

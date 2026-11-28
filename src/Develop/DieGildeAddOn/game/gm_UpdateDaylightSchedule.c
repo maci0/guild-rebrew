@@ -17,6 +17,7 @@ extern struct hm_6a2900 g_6a2900[5];
 
 int __cdecl gm_GetSeason(int);
 
+/* ADDRESS: GOLDDE 0x00513aa0 */
 void __cdecl gm_UpdateDaylightSchedule(int date)
 {
 	int season;

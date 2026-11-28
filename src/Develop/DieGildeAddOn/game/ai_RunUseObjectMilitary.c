@@ -15,6 +15,7 @@ float* __cdecl gm_LookupSpecialObject(int id);
 int __cdecl gm_UseSpecialObject(char* e, Req* r);
 
 /* ADDRESS: GOLDTL 0x00499fe0 */
+/* ADDRESS: GOLDDE 0x00488a20 */
 int __cdecl ai_RunUseObjectMilitary(char* e, int* p, int* q)
 {
 	float* d;

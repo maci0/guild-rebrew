@@ -59,6 +59,7 @@ void __cdecl d2_DestroyElement(int);
 void __cdecl d2_AddDisplayCounter(int key, int amt);
 void __cdecl d2_LayoutEntityList(int);
 
+/* ADDRESS: GOLDDE 0x0058a150 */
 int __cdecl d2_PopulateInventoryGrid(int list, Row* rows, int a3, int a4, char sel)
 {
 	int changed;

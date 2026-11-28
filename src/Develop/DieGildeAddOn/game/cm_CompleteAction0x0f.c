@@ -13,6 +13,7 @@ char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl cm_SendSetHE(int, char*);
 
+/* ADDRESS: GOLDDE 0x0059c7b0 */
 void __cdecl cm_CompleteAction0x0f(char* e)
 {
 	char* p;

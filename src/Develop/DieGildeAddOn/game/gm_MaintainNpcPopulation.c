@@ -19,6 +19,7 @@ int __cdecl gm_GetRangeStatId(int, int);
 int __cdecl gm_IsNpcEntityState(void*);
 
 /* ADDRESS: GOLDTL 0x004ff8f0 */
+/* ADDRESS: GOLDDE 0x004eb300 */
 void __cdecl gm_MaintainNpcPopulation(void)
 {
 	unsigned char* s;

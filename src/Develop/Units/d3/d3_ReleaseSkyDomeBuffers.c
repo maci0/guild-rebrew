@@ -2,6 +2,7 @@
 
 typedef int (__stdcall* f)(void*);
 
+/* ADDRESS: GOLDDE 0x0044f250 */
 void __cdecl d3_ReleaseSkyDomeBuffers(char* p)
 {
 	void* q;

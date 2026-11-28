@@ -55,6 +55,7 @@ int __cdecl d2_GetControlValue(int slot)
 }
 #else
 /* ADDRESS: GOLDTL 0x00471f80 */
+/* ADDRESS: GOLDDE 0x004653e0 */
 int __cdecl d2_GetControlValue(int slot)
 {
 	Slot* s;

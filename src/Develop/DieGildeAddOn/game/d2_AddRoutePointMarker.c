@@ -1,3 +1,4 @@
+extern char g_86834c[];
 #include "Develop/Units/d2.v1/d2_radio_slot.h"
 extern unsigned char gm_ActiveTownIndex;
 extern char* tp_ch_PathGrid;
@@ -25,6 +26,7 @@ int __cdecl d2_CreateRadioGroup(int, ...);
 void __cdecl d2_AddToRadioGroup(int, int);
 
 /* ADDRESS: GOLDTL 0x004be3d0 */
+/* ADDRESS: GOLDDE 0x004abf50 */
 int __cdecl d2_AddRoutePointMarker(int* town, char* building, char* routeHead, char* point)
 {
 	float out[4];
@@ -43,8 +45,8 @@ int __cdecl d2_AddRoutePointMarker(int* town, char* building, char* routeHead, c
 	map = tp_ch_PathGrid;
 	rec = point;
 	idx = idx * 12;
-	a = *(int*) (0x86834c + idx);
-	b = *(int*) (0x868350 + idx);
+	a = *(int*) ((int) &g_86834c + idx);
+	b = *(int*) (((int) &g_86834c + 0x4) + idx);
 	obj = gm_SearchTable67(*(unsigned int*) (rec + 4));
 	if (obj == 0) {
 		return -1;

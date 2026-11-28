@@ -18,6 +18,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 
 /* ADDRESS: GOLD 0x5d9c70 */
 /* ADDRESS: GOLDTL 0x005acf90 */
+/* ADDRESS: GOLDDE 0x00591aa0 */
 void __cdecl d2_RunKerkerplanHotspot(int a)
 {
 	int x;
@@ -34,6 +35,7 @@ void __cdecl d2_RunKerkerplanHotspot(int a)
 /* ADDRESS: GOLD 0x5d7fe0 */
 
 /* ADDRESS: GOLDTL 0x005e4c50 */
+/* ADDRESS: GOLDDE 0x005c5f10 */
 void __cdecl d2_PauseGameLoop(void)
 {
 	int flags;

@@ -15,6 +15,7 @@ void __cdecl d3_RenderFrame(int pass, int overlay, int mode)
 }
 #else
 /* ADDRESS: GOLDTL 0x0043b320 */
+/* ADDRESS: GOLDDE 0x004340e0 */
 void __cdecl d3_RenderFrame(void* a1, void* a2, int a3)
 {
 	d3_RenderScene(a1, a2);

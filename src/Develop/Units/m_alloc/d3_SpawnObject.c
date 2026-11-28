@@ -8,6 +8,7 @@ void __cdecl d3_InitSceneObject(char* o);
 void __cdecl fcn_0064d530(char* dst, char* src, int n);
 
 /* ADDRESS: GOLDTL 0x00439750 */
+/* ADDRESS: GOLDDE 0x00432660 */
 char* __cdecl d3_SpawnObject(int kind, char* name)
 {
 	char* o;

@@ -56,6 +56,7 @@ int __cdecl d2_MeasureTextWidth(char* s, int font);
 int __cdecl d2_GetElementResourceSize(int slot, int* w, int* h);
 void __cdecl fcn_0064d530(char* dst, char* src, int n);
 /* ADDRESS: GOLDTL 0x0046f9b0 */
+/* ADDRESS: GOLDDE 0x00462f10 */
 void __cdecl d2_SetControlText(int idx, char* text)
 {
 	D2_CTRL_TEXT_ENT* e;

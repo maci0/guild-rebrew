@@ -5,6 +5,7 @@ extern int gm_AllEntitiesControllable;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 /* ADDRESS: GOLD 0x004ce170 */
 /* ADDRESS: GOLDTL 0x004cef70 */
+/* ADDRESS: GOLDDE 0x004bc4d0 */
 int __cdecl gm_GetEntityControlMask(int entityIndex, char* entityRecord)
 {
 	int r;

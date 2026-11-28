@@ -32,6 +32,7 @@ typedef struct SUNRAY_COLOR {
 void __cdecl d3_ChangeObjectTransparency(char*, char*, SUNRAY_COLOR);
 
 /* ADDRESS: GOLDTL 0x00418860 */
+/* ADDRESS: GOLDDE 0x00416660 */
 void __cdecl d3_UpdateSunRays(char* obj)
 {
 	float vec[3];

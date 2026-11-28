@@ -1,6 +1,7 @@
 unsigned int __cdecl vfs_fwrite(void* outBuffer, int elementSize, int elementCount, char* streamCtx);
 
 /* ADDRESS: GOLDTL 0x004ef2e0 */
+/* ADDRESS: GOLDDE 0x004db650 */
 int __cdecl ls_SaveRenderSlots(void* stream)
 {
 	int p;

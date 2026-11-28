@@ -13,6 +13,7 @@ void __cdecl d2_SetFormVisibility(int h, int v);
 void __cdecl d2_DestroyElement(int h);
 void __cdecl d2_SetSlotVisibility(int h, int v);
 
+/* ADDRESS: GOLDDE 0x005104f0 */
 void __cdecl d2_DestroyHudOverlay(void)
 {
 	if (g_6a25b8 != -1) {

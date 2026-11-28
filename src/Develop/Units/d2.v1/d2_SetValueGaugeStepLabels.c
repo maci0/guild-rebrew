@@ -10,6 +10,7 @@ typedef struct Slot {
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 /* ADDRESS: GOLDTL 0x00468bb0 */
+/* ADDRESS: GOLDDE 0x0045c530 */
 void __cdecl d2_SetValueGaugeStepLabels(int slot, int n, ...)
 {
 	Slot* p;

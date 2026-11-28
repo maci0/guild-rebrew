@@ -9,6 +9,7 @@ void __cdecl d3_NormalizeVector(float* v);
 int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
 
 /* ADDRESS: GOLDTL 0x00451380 */
+/* ADDRESS: GOLDDE 0x00446f60 */
 float __cdecl d3_SignedPlanarAngle(float* vecA, float* vecB)
 {
 	float va[4];

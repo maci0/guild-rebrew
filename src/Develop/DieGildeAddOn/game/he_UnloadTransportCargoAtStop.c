@@ -22,6 +22,7 @@ int __cdecl gm_GetSeasonTreasury(char*, int);
 int __cdecl cm_SendSellObjekt(int, int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004c0240 */
+/* ADDRESS: GOLDDE 0x004addc0 */
 void __cdecl he_UnloadTransportCargoAtStop(char* route, int difficulty)
 {
 	char* rec;

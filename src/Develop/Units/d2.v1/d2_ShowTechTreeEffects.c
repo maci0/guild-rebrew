@@ -25,6 +25,7 @@ void __cdecl d2_DestroyForm(int);
 void __cdecl d2_SetElementValue(int, ...);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005c3820 */
+/* ADDRESS: GOLDDE 0x005a5c60 */
 void __cdecl d2_ShowTechTreeEffects(unsigned char* building, unsigned char* a1)
 {
 	int table[37] = { 1, 2, 0xb, 0xc, 9, 5, 6, 3, 4, 0xa, 0xd, 0xe, 0xf,

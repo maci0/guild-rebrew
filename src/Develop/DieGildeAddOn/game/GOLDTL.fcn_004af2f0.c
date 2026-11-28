@@ -39,6 +39,7 @@ unsigned short __cdecl gm_RandomMod(int);
  * `w` to a callee-saved register (object 267 bytes instead of 264). */
 /* ADDRESS: GOLD 0x004adff0 */
 /* ADDRESS: GOLDTL 0x004ae130 */
+/* ADDRESS: GOLDDE 0x0049c450 */
 int __cdecl gm_IsSlotActivePerson(unsigned short slot)
 {
 	int o;
@@ -55,6 +56,7 @@ int __cdecl gm_IsSlotActivePerson(unsigned short slot)
 
 /* ADDRESS: GOLD 0x004ae080 */
 /* ADDRESS: GOLDTL 0x004ae1c0 */
+/* ADDRESS: GOLDDE 0x0049c4e0 */
 int __cdecl gm_IsSlotNpcPerson(int slot)
 {
 	unsigned char c;
@@ -78,6 +80,7 @@ int __cdecl gm_IsSlotNpcPerson(int slot)
 
 /* ADDRESS: GOLD 0x004ae0d0 */
 /* ADDRESS: GOLDTL 0x004ae210 */
+/* ADDRESS: GOLDDE 0x0049c530 */
 int __cdecl gm_IsSlotPlayerPerson(int slot)
 {
 	unsigned char c;
@@ -100,6 +103,7 @@ int __cdecl gm_IsSlotPlayerPerson(int slot)
 
 
 #pragma optimize("y", off)
+/* ADDRESS: GOLDDE 0x0049c5c0 */
 int __cdecl hst_HandleBuergermeister(int mode, int* pairs, int idx, char* text, void* out)
 {
 	char buf[0x200];
@@ -159,6 +163,7 @@ int __cdecl hst_HandleBuergermeister(int mode, int* pairs, int idx, char* text, 
 
 
 #pragma optimize("y", off)
+/* ADDRESS: GOLDDE 0x0049c6e0 */
 int __cdecl hst_HandleBischof(int mode, int* pairs, int idx, char* text, void* out)
 {
 	char buf[0x200];
@@ -218,6 +223,7 @@ int __cdecl hst_HandleBischof(int mode, int* pairs, int idx, char* text, void* o
 
 
 #pragma optimize("y", off)
+/* ADDRESS: GOLDDE 0x0049c800 */
 int __cdecl hst_HandleRndGildenmeister(int mode, int* pairs, int idx, char* text, void* out)
 {
 	char buf[0x200];
@@ -322,6 +328,7 @@ send:
 
 
 #pragma optimize("y", off)
+/* ADDRESS: GOLDDE 0x0049ca60 */
 int __cdecl hst_HandleRndAmtstraegerin(int mode, int* pairs, int idx, char* text, void* out)
 {
 	char buf[0x200];
@@ -440,6 +447,7 @@ send:
 
 
 #pragma optimize("y", off)
+/* ADDRESS: GOLDDE 0x0049cd60 */
 int __cdecl hst_HandleRndAmtstraeger(int mode, int* pairs, int idx, char* text, void* out)
 {
 	char buf[0x200];
@@ -560,6 +568,7 @@ send:
 
 
 #pragma optimize("y", off)
+/* ADDRESS: GOLDDE 0x0049d060 */
 int __cdecl hst_HandleRndAmtsperson(int mode, int* pairs, int idx, char* text, void* out)
 {
 	char buf[0x200];
@@ -683,6 +692,7 @@ send:
  * addresses the 0x200 scratch buffer off ebp; section 13 of
  * docs/msvc6-c-shapes.md. */
 #pragma optimize("y", off)
+/* ADDRESS: GOLDDE 0x0049d610 */
 int __cdecl hst_HandleGeld(int mode, int pairs, int idx, char* text, int out)
 {
 	char buf[0x200];
@@ -740,6 +750,7 @@ int __cdecl hst_HandleGeld(int mode, int pairs, int idx, char* text, int out)
 
 
 #pragma optimize("y", off)
+/* ADDRESS: GOLDDE 0x0049d850 */
 int __cdecl hst_HandleRndKirchenberuf(int mode, int* pairs, int idx, char* text, void* out)
 {
 	char buf[0x200];
@@ -854,6 +865,7 @@ send:
 
 
 #pragma optimize("y", off)
+/* ADDRESS: GOLDDE 0x0049e090 */
 int __cdecl hst_HandleRndSpieler(int mode, int* pairs, int idx, char* text, void* out)
 {
 	char buf[0x200];
@@ -976,6 +988,7 @@ void __cdecl cm_EnqueueStagedPacket(Msg*);
  * fcn_004ae130/1c0/210 in view, c2 keeps the zero in edx across the first
  * call; declared from another file the object is 16 bytes longer. */
 /* ADDRESS: GOLDTL 0x004b0780 */
+/* ADDRESS: GOLDDE 0x0049eaa0 */
 int __cdecl hst_HandleStrafeHinrichtung(int* pairs, int idx, char* text)
 {
 	int n;

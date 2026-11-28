@@ -73,6 +73,7 @@ static __inline float v3len(Vec57aa* v)
 }
 
 /* ADDRESS: GOLDTL 0x0057aab0 */
+/* ADDRESS: GOLDDE 0x00560910 */
 void __cdecl he_ApplyBuildingAura(Bld57aa* self, int mode, int who, int side)
 {
 	float range;

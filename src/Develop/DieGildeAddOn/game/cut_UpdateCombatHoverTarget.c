@@ -9,6 +9,7 @@ int __cdecl fcn_0064f170(char*, char*, int);
 #include <string.h>
 
 /* ADDRESS: GOLDTL 0x004d06d0 */
+/* ADDRESS: GOLDDE 0x004bd9c0 */
 void __cdecl cut_UpdateCombatHoverTarget(void)
 {
 	float buf[3];

@@ -41,6 +41,7 @@ int __cdecl cut_RandMod(int);
 int __cdecl gm_HasActiveSpecialObject(int, int);
 
 /* ADDRESS: GOLDTL 0x004d89c0 */
+/* ADDRESS: GOLDDE 0x004c56b0 */
 unsigned int __cdecl cut_ExecuteCombatAttack(int ctx, unsigned int actorArg, int targetEnt)
 {
 	Ev_4d89c0 ev;

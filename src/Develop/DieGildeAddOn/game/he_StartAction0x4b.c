@@ -11,6 +11,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl he_PostEntityMessage(int, int, char*, unsigned char, int, char*);
 int __cdecl cm_SendSetHE(int, char*);
 
+/* ADDRESS: GOLDDE 0x00536770 */
 void __cdecl he_StartAction0x4b(char* u)
 {
 	char text[0x400];

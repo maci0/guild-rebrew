@@ -39,6 +39,7 @@ void __cdecl d2_ResetBookmarkSlots(void);
 void __cdecl d3_ResetSceneContextIndices(void);
 void __cdecl cut_InitCutsceneRegistry(void);
 
+/* ADDRESS: GOLDDE 0x00526430 */
 void __cdecl gm_InitGameSession(void)
 {
 	he_InitEventSystem();

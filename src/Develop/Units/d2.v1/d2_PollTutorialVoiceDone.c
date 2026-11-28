@@ -10,6 +10,7 @@ extern char io_LastKeyScancode;
 int __cdecl sb_CheckVoicePlaying(int);
 void __cdecl sb_StopVoice(int, int);
 
+/* ADDRESS: GOLDDE 0x00566030 */
 int __cdecl d2_PollTutorialVoiceDone(void)
 {
 	int o;

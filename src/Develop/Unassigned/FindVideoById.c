@@ -1,6 +1,7 @@
 #include "client_video_list.h"
 
 /* ADDRESS: GOLDTL 0x0041f9b0 */
+/* ADDRESS: GOLDDE 0x0041ca10 */
 char* __cdecl FindVideoById(int id)
 {
     char* node;

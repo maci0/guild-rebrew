@@ -64,6 +64,7 @@ extern const uInt g_67d0b0[];
 
 
 /* ADDRESS: GOLDTL 0x0045fd70 */
+/* ADDRESS: GOLDDE 0x00454550 */
 int fcn_0045fd70(s, z, r)
 inflate_blocks_statef *s;
 z_streamp z;

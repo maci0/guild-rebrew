@@ -34,6 +34,7 @@ __declspec(dllimport) int __stdcall closesocket(int);
 
 /* Listens on the UDP port for server announcements until the timeout
  * expires or max hosts are listed; returns the host count. */
+/* ADDRESS: GOLDDE 0x00401ce0 */
 int __cdecl nt_ListenForServerAnnouncements(unsigned short port, unsigned long timeout, Host* hosts, int max)
 {
 	char wsa[0x190];

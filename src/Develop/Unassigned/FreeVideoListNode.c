@@ -12,6 +12,7 @@ struct Node {
 #include "client_video_list.h"
 void __cdecl free(void* p);
 
+/* ADDRESS: GOLDDE 0x0041c9a0 */
 void __cdecl FreeVideoListNode(Node* node)
 {
 	if (node == 0) {

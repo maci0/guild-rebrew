@@ -1,3 +1,4 @@
+extern char g_67adf0[];
 #include <stdio.h>
 #include <string.h>
 
@@ -6,6 +7,7 @@
 int __cdecl d3_AppendVfsAssetPath(char*, char*);
 
 /* ADDRESS: GOLDTL 0x00449db0 */
+/* ADDRESS: GOLDDE 0x00440490 */
 char __cdecl d3_FormatModelVariantName(char* baseName, int altName, int mode, char* key, char* val)
 {
 	int i;
@@ -27,9 +29,9 @@ char __cdecl d3_FormatModelVariantName(char* baseName, int altName, int mode, ch
 			i = 2;
 			do {
 				if (i > 0) {
-					sprintf(key, (char*) 0x67adf0, baseName, i - 1);
+					sprintf(key, (char*) &g_67adf0, baseName, i - 1);
 					if (altName != 0 && val != 0) {
-						sprintf(val, (char*) 0x67adf0, (char*) altName, i - 1);
+						sprintf(val, (char*) &g_67adf0, (char*) altName, i - 1);
 					}
 				} else {
 					strcpy(key, baseName);
@@ -37,7 +39,7 @@ char __cdecl d3_FormatModelVariantName(char* baseName, int altName, int mode, ch
 						strcpy(val, (char*) altName);
 					}
 				}
-				if (d3_AppendVfsAssetPath(key, (char*) 0x67ade8)) {
+				if (d3_AppendVfsAssetPath(key, ".bgf")) {
 					return 1;
 				}
 			} while (--i >= 0);
@@ -53,9 +55,9 @@ char __cdecl d3_FormatModelVariantName(char* baseName, int altName, int mode, ch
 		} else {
 			i = mode;
 		}
-		sprintf(key, (char*) 0x67adf0, baseName, i - 1);
+		sprintf(key, (char*) &g_67adf0, baseName, i - 1);
 		if (altName != 0 && val != 0) {
-			sprintf(val, (char*) 0x67adf0, (char*) altName, i - 1);
+			sprintf(val, (char*) &g_67adf0, (char*) altName, i - 1);
 		}
 	}
 	return 1;

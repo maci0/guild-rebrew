@@ -12,6 +12,7 @@ void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 void __cdecl cm_SendCopyEntityData(char* msg);
 
 /* ADDRESS: GOLDTL 0x004abb10 */
+/* ADDRESS: GOLDDE 0x00499e50 */
 int __cdecl ai_RunVerfluchen(char* actor, char* action)
 {
 	char msg[0xf8];

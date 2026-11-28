@@ -1,5 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x005ccbe0 */
+/* ADDRESS: GOLDDE 0x005ae670 */
 void __cdecl d2_ClearTabGroups(void)
 {
 	int a;

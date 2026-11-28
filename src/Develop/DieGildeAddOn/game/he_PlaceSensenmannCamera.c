@@ -1,3 +1,4 @@
+extern char d3_UnitAxisVectors[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_665ea0;
 
@@ -12,6 +13,7 @@ void __cdecl d3_AnimateObjectTransform(void*, float*, float*, int, int);
  * camera chain and the resolved entity expose a view target. The aim vector
  * is rotated by the view direction and sent as a placement message. */
 /* ADDRESS: GOLDTL 0x00558b70 */
+/* ADDRESS: GOLDDE 0x0053eed0 */
 unsigned int __cdecl he_PlaceSensenmannCamera(char* eventRecord)
 {
 	float from[4];
@@ -64,7 +66,7 @@ unsigned int __cdecl he_PlaceSensenmannCamera(char* eventRecord)
 	delta[0] = from[0] - to[0];
 	delta[1] = from[1] - to[1];
 	delta[2] = from[2] - to[2];
-	d3_TransformDirection(*(char**) (eventRecord + 0xc8), (char*) 0x662d40, aim);
+	d3_TransformDirection(*(char**) (eventRecord + 0xc8), (char*) &d3_UnitAxisVectors, aim);
 	angle = d3_WrapYawDelta(aim, delta);
 	view = *(char**) (eventRecord + 0xc8);
 	if (view == 0) {

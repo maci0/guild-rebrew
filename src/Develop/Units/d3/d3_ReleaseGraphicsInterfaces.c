@@ -22,6 +22,7 @@ void __cdecl d3_InvalidateDeviceResources(void);
 
 /* Releases the Direct3D sprite, device and interface objects. */
 /* ADDRESS: GOLDTL 0x0041b4b0 */
+/* ADDRESS: GOLDDE 0x004191f0 */
 void __cdecl d3_ReleaseGraphicsInterfaces(void)
 {
 	d3_InvalidateDeviceResources();

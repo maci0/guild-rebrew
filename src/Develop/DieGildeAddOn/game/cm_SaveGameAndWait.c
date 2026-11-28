@@ -10,6 +10,7 @@ int __cdecl cm_GetCommandStatus(int);
 void __cdecl d2_ShowStatusBanner(char*);
 void __cdecl main_RunFrameLoop(int, int);
 
+/* ADDRESS: GOLDDE 0x0051e0b0 */
 void __cdecl cm_SaveGameAndWait(int flags, char* name)
 {
 	char buf[0x7c];

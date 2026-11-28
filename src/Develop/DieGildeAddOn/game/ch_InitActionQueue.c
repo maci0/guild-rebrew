@@ -31,6 +31,7 @@ int __cdecl ch_AllocMap(float);
 
 /* Allocates the character action queue and registers the action handlers. */
 /* ADDRESS: GOLDTL 0x0040bde0 */
+/* ADDRESS: GOLDDE 0x0040ace0 */
 int __cdecl ch_InitActionQueue(void)
 {
 	tp_ch_ActionQueue = m_alloc(0xc5440, "ch:Open:ActionQueue");

@@ -1,3 +1,4 @@
+extern char g_6b5d08[];
 void __cdecl m_FreeTracked(void*);
 
 #if defined(REBREW_GOLD)
@@ -13,11 +14,12 @@ void __cdecl d3_FreeBuffer6b5d08(void)
 }
 #else
 /* ADDRESS: GOLDTL 0x00418c60 */
+/* ADDRESS: GOLDDE 0x004169f0 */
 void __cdecl d3_FreeBuffer6b5d08(void)
 {
-	if (*(int*) 0x6b5d08 != 0) {
-		m_FreeTracked((void*) *(int*) 0x6b5d08);
+	if (*(int*) &g_6b5d08 != 0) {
+		m_FreeTracked((void*) *(int*) &g_6b5d08);
 	}
-	*(int*) 0x6b5d08 = 0;
+	*(int*) &g_6b5d08 = 0;
 }
 #endif

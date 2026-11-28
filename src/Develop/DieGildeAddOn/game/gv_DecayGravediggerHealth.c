@@ -8,6 +8,7 @@ extern float flt_0_0;
 float __cdecl gv_CalcDecayReduction(char* o);
 void __cdecl cm_RequestChangeFloat(int id, int kind, float v);
 
+/* ADDRESS: GOLDDE 0x004df830 */
 int __cdecl gm_DecayServantHealth(char* entity)
 {
 	char* graveyard;

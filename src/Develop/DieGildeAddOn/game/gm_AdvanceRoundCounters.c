@@ -18,6 +18,7 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 void* __cdecl gm_FindNextFilteredEntity(void);
 
 /* ADDRESS: GOLDTL 0x004fd280 */
+/* ADDRESS: GOLDDE 0x004e8db0 */
 void __cdecl gm_AdvanceRoundCounters(int flag)
 {
 	char* p;

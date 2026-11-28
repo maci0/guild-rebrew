@@ -12,6 +12,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_ShowGildenkasseDialog(int);
 
+/* ADDRESS: GOLDDE 0x0058dc30 */
 void __cdecl d2_RunStadtkasseMenu(int building)
 {
 	int x;

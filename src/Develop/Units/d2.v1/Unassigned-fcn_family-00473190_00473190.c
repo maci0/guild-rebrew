@@ -1,3 +1,4 @@
+extern char d2_OverlaySprites[];
 extern volatile int tb_TimerTicks; extern char d2_ScreenSurface[];
 
 typedef struct Fade Fade;
@@ -20,6 +21,7 @@ void __cdecl d2_ReleaseOverlaySprite(Fade*);
 void __cdecl d2_UpdateScreenFade(int, int);
 
 /* ADDRESS: GOLDTL 0x00473190 */
+/* ADDRESS: GOLDDE 0x004661a0 */
 void __cdecl d2_UpdateScreenFade(Fade* t)
 {
 	float elapsed;
@@ -53,12 +55,13 @@ void __cdecl d2_UpdateScreenFade(Fade* t)
 }
 
 /* ADDRESS: GOLDTL 0x004732c0 */
+/* ADDRESS: GOLDDE 0x004662d0 */
 void __cdecl d2_UpdateAllScreenFades(void)
 {
 	int a;
 	int v;
 
-	for (a = 0x1015ec0; a < 0x1015f40; a += 4) {
+	for (a = (int) &d2_OverlaySprites; a < ((int) &d2_OverlaySprites + 0x80); a += 4) {
 		v = *(int*) a;
 		if (v != 0) {
 			d2_UpdateScreenFade(v, *(int*) &d2_ScreenSurface);

@@ -28,6 +28,7 @@ int __cdecl d2_OpenInputIcon(int x, int y, int a3, int a4, int a5);
 void __cdecl d2_InsertControlAfterWindow(int slot, D2_WIN* parent);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00467480 */
+/* ADDRESS: GOLDDE 0x0045aec0 */
 int __cdecl d2_AddWindowInputIcon(int x, int y, int width, int height, int flags, int win)
 {
 	D2_WIN* par;

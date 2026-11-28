@@ -31,6 +31,7 @@ int __cdecl d2_AddWindowValueGauge(int x, int y, int a3, int a4, int a5, int a6,
                          int a7, int win);
 
 /* ADDRESS: GOLDTL 0x005ce800 */
+/* ADDRESS: GOLDDE 0x005b0220 */
 void __cdecl d2_InitProdSettingControls(int id, int* out, int* value, int* slots,
                           unsigned char* type, int text,
                           unsigned int flags, int pad7, int pad8, int pad9,

@@ -21,6 +21,7 @@ void __cdecl cm_SendSetHE(int, char*);
 int __cdecl gm_QueryEntities(int, int, int, int);
 void __cdecl cm_RequestAllocThemaPredigt(int, struct target7);
 
+/* ADDRESS: GOLDDE 0x00530a80 */
 void __cdecl he_AllocPredigt(char* u)
 {
 	char* found;

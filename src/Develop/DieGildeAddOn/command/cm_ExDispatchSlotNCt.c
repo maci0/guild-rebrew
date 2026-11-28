@@ -4,6 +4,7 @@
 int __cdecl d3_AcquireSlot170(int);
 int __cdecl d3_ReleaseSlot170(int);
 
+/* ADDRESS: GOLDDE 0x004bb4e0 */
 int __cdecl cm_ExDispatchSlotNCt(char* request, char* response)
 {
 	int result;

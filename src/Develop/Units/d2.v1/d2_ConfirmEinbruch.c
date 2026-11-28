@@ -55,6 +55,7 @@ void __cdecl sv_ClearObjectSelection(void);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x00591e90 */
 int __cdecl d2_ConfirmEinbruch(int unused, char* e)
 {
 	int r;

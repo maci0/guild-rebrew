@@ -16,6 +16,7 @@ typedef struct {
 } rec35c;
 // SIZE 0x3d4
 
+/* ADDRESS: GOLDDE 0x004bc260 */
 ent2c* __cdecl gm_FindOrCreateEntitySlot(rec35c* rec, char* e)
 {
 	int i;

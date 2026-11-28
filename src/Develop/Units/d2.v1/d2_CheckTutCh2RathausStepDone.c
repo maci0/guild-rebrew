@@ -1,6 +1,8 @@
+extern volatile int gm_GameTicks;
 extern int *d2_TutorialState;
 
 /* ADDRESS: GOLDTL 0x0057f180 */
+/* ADDRESS: GOLDDE 0x00564f50 */
 int __cdecl d2_CheckTutCh2RathausStepDone(int* msg)
 {
 	short* e;
@@ -10,7 +12,7 @@ int __cdecl d2_CheckTutCh2RathausStepDone(int* msg)
 		if (e != 0 && *e == 0x110) {
 			d2_TutorialState[0] = 0xb;
 			d2_TutorialState[1] = 0xb;
-			d2_TutorialState[3] = *(int*) 0x6b7fac;
+			d2_TutorialState[3] = gm_GameTicks;
 			return 1;
 		}
 	}

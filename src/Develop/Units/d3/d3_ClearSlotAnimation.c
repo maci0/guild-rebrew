@@ -4,6 +4,7 @@ int __cdecl fcn_0065f220(int, int);
 void __cdecl d3_RemoveObjectAnimation(char*, int);
 void __cdecl d3_InvalidateSubTreeFlags(char*, int);
 
+/* ADDRESS: GOLDDE 0x00411820 */
 int __cdecl d3_ClearSlotAnimation(char* p, int a2)
 {
 	int i;

@@ -14,6 +14,7 @@ char* __cdecl ch_CreateQueuedAction(int, void*, int, int, int);
 void __cdecl cut_CollectGroundItem(void);
 
 /* ADDRESS: GOLD 0x004d7000 */
+/* ADDRESS: GOLDDE 0x004c5350 */
 void __cdecl gm_StartGroundCollectAction(int* args)
 {
 	char* e;

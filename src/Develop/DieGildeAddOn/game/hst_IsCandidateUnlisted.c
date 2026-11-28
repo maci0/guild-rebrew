@@ -13,6 +13,7 @@ typedef struct {
 
 
 /* ADDRESS: GOLDTL 0x004ae0f0 */
+/* ADDRESS: GOLDDE 0x0049c410 */
 int __cdecl hst_IsCandidateUnlisted(int id)
 {
 	int j;

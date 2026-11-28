@@ -1,6 +1,7 @@
 char* __cdecl ahm_FindRecipePrototypeByKey(int id);
 
 /* ADDRESS: GOLDTL 0x004ee0b0 */
+/* ADDRESS: GOLDDE 0x004da4f0 */
 int __cdecl ahm_CalcRecipeScore(char* p)
 {
 	char* q;

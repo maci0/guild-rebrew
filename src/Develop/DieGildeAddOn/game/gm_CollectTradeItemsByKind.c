@@ -12,6 +12,7 @@ extern Rec15_699058 g_699058[37];
 extern unsigned short g_7f3ee4;
 extern int g_90d520[];
 
+/* ADDRESS: GOLDDE 0x004eed60 */
 int __cdecl gm_CollectTradeItemsByKind(unsigned char* p)
 {
 	Rec15* r;

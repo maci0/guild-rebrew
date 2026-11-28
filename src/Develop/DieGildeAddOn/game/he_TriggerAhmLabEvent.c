@@ -20,6 +20,7 @@ void __cdecl he_NotifyAlchemistDiscovery(char* slot, int a, char* object, void* 
 void __cdecl he_NotifyDomizilSkillGain(char* slot, int a, char* object, int id);
 
 /* ADDRESS: GOLDTL 0x00576750 */
+/* ADDRESS: GOLDDE 0x0055c680 */
 void __cdecl he_TriggerAhmLabEvent(int city, char* owner, char* object, int mode)
 {
 	int flags[5];
@@ -86,7 +87,7 @@ void __cdecl he_TriggerAhmLabEvent(int city, char* owner, char* object, int mode
 				cm_AppendPacketFieldDelta(4, 1, 0x1c, &one);
 				cm_AppendPacketFieldDelta(4, 1, 0x20, &amount);
 				cm_RequestChangeAttribute();
-				he_NotifyAlchemistDiscovery((char*) (*(unsigned short*) (object + 0x27) * 0x21c + 0x7f4ca0),
+				he_NotifyAlchemistDiscovery((char*) (*(unsigned short*) (object + 0x27) * 0x21c + (int) &gm_EntitySlotTable),
 				    city, object, found[index]);
 				break;
 			}
@@ -106,12 +107,12 @@ void __cdecl he_TriggerAhmLabEvent(int city, char* owner, char* object, int mode
 		cm_BeginPacketFieldDelta(object, *(int*) (object + 1));
 		cm_AppendPacketFieldValue(1, 1, 0x5c, &byte);
 		cm_RequestChangeAttribute();
-		he_NotifyDomizilAccident((char*) (*(unsigned short*) (object + 0x27) * 0x21c + 0x7f4ca0),
+		he_NotifyDomizilAccident((char*) (*(unsigned short*) (object + 0x27) * 0x21c + (int) &gm_EntitySlotTable),
 		    city, object);
 		break;
 	case 3:
 		gm_IncreaseEntityStat(city, gm_RandomMod(3) + 1);
-		he_NotifyDomizilEvent((char*) (*(unsigned short*) (object + 0x27) * 0x21c + 0x7f4ca0),
+		he_NotifyDomizilEvent((char*) (*(unsigned short*) (object + 0x27) * 0x21c + (int) &gm_EntitySlotTable),
 		    city, object);
 		break;
 	case 4:
@@ -124,7 +125,7 @@ void __cdecl he_TriggerAhmLabEvent(int city, char* owner, char* object, int mode
 				f = *(float*) (vertices + 0x10 + index * 8)
 				    - (gm_RandomFloat01() * 0.1f + g_662b10);
 				ahm_RequestSetMatchingSlotValue(city, *(int*) (vertices + 0xc + index * 8), f);
-				he_NotifyDomizilSkillGain((char*) (*(unsigned short*) (object + 0x27) * 0x21c + 0x7f4ca0),
+				he_NotifyDomizilSkillGain((char*) (*(unsigned short*) (object + 0x27) * 0x21c + (int) &gm_EntitySlotTable),
 				    city, object, *(int*) (vertices + 0xc + index * 8));
 				break;
 			}

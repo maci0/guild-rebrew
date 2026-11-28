@@ -31,6 +31,7 @@ unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl gm_GetTypeProductValue(int n);
 
 /* ADDRESS: GOLDTL 0x0049d930 */
+/* ADDRESS: GOLDDE 0x0048c360 */
 int __cdecl ai_StartBuergermeisterRathaus(int a1, char* e, char* q, Blk24* o1, Blk24* o2)
 {
 	int v0;

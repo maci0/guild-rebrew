@@ -1,5 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x00477420 */
+/* ADDRESS: GOLDDE 0x004691e0 */
 int __cdecl d2_NextPowerOfTwo(int n)
 {
 	int i;

@@ -8,6 +8,7 @@ void __cdecl d3_LoadModel(int, int);
 void __cdecl d3_AttachCachedModelParts(char*, int, int);
 #include "Develop/Units/d3/client_scene_loader.h"
 
+/* ADDRESS: GOLDDE 0x0043b1e0 */
 char __cdecl d3_ReplaceObjectModel(char* o, int a2)
 {
 	char* p;

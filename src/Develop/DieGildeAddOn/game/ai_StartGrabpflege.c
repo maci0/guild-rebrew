@@ -12,6 +12,7 @@ int __cdecl gm_GetEntitySlotIndex(char* a, void* e);
 void __cdecl cm_SendCopyEntityData(int a1);
 
 /* ADDRESS: GOLDTL 0x004831f0 */
+/* ADDRESS: GOLDDE 0x004721a0 */
 void __cdecl ai_StartGrabpflege(char* obj)
 {
 	ENTITY_RECORD* p;

@@ -6,6 +6,7 @@ extern int d3_ActiveScene;
 void __cdecl d3_VisitSceneObjects(int, int, int, void*, int);
 void __cdecl d3_MatchObjectNameCallback(void);
 
+/* ADDRESS: GOLDDE 0x00411620 */
 int __cdecl d3_FindSceneObjectByName(int a1, int flags)
 {
 	d3_FoundSceneObject = 0;

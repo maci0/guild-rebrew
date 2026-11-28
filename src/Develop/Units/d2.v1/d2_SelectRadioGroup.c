@@ -7,6 +7,7 @@ extern D2_RADIO_GROUP g_102cbc4[8];
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 /* ADDRESS: GOLDTL 0x004695a0 */
+/* ADDRESS: GOLDDE 0x0045cec0 */
 void __cdecl d2_SelectRadioGroup(int g, int sel)
 {
 	int i;

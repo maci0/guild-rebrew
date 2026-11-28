@@ -5,6 +5,7 @@ int  __cdecl d2_ShowMedicusDialog(void*, void*);
 extern char str_fmt_s[];
 void __cdecl io_FormatTextBuffer(void*, int, int);
 
+/* ADDRESS: GOLDDE 0x004e3240 */
 int __cdecl he_HandleMedicusRequest(void* entity, void* request)
 {
 	int mode;

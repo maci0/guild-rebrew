@@ -7,6 +7,7 @@ typedef struct Cell {
 	int pad[6];
 } Cell;
 
+/* ADDRESS: GOLDDE 0x00450290 */
 void __cdecl d3_RelabelMatchingCells(char* g, int from, int to)
 {
 	int j;

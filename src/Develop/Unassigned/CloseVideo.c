@@ -4,6 +4,7 @@ struct Node;
 void __cdecl FreeVideoListNode(struct Node* node);
 
 /* ADDRESS: GOLDTL 0x0041f5f0 */
+/* ADDRESS: GOLDDE 0x0041c820 */
 int __cdecl CloseVideo(int id)
 {
 	char* node;

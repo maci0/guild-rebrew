@@ -7,6 +7,7 @@ extern unsigned char* lpGebaeudePROT;
 
 void __cdecl SelectTextureSet(char*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x00501060 */
 char __cdecl d3_ApplyBuildingTextureSet(char* obj, unsigned char* ent)
 {
 	BUILDING_PROTOTYPE *proto;

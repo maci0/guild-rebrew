@@ -12,6 +12,7 @@ int __cdecl d2_DrawTintedSprite(int, int, int, float, unsigned char, unsigned ch
 
 
 /* ADDRESS: GOLDTL 0x0047cd20 */
+/* ADDRESS: GOLDDE 0x0046bcf0 */
 int __cdecl d2_DrawBankSpriteColored(int x, int y, int surface, D2_SPRITE_BANK_SET* bank, int idx)
 {
 	if (bank == 0)

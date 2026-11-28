@@ -21,6 +21,7 @@ void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl he_FreeAction(char*);
 
 /* ADDRESS: GOLDTL 0x00566360 */
+/* ADDRESS: GOLDDE 0x0054c470 */
 void __cdecl he_RunBefoerdern(char* action)
 {
 	int v3;

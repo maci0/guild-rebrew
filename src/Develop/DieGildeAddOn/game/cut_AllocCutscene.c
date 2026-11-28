@@ -11,6 +11,7 @@ char* __cdecl cut_FindFreeCutscene(void);
 
 #include "Develop/DieGildeAddOn/command/client_packet_queue.h"
 
+/* ADDRESS: GOLDDE 0x004d3330 */
 char* __cdecl cut_AllocCutscene(void* src)
 {
 	char* p;

@@ -30,6 +30,7 @@ void __cdecl d3snd_PlayWorkerOrderVoice(void);
 void __cdecl sv_ClearObjectSelection(void);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x005ae6a0 */
+/* ADDRESS: GOLDDE 0x005930a0 */
 int __cdecl d2_RunEntfuehrungDialog(void* a0)
 {
 	char msg[0xf8];

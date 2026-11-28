@@ -13,6 +13,7 @@ int __cdecl ch_GenerateNearbyWalkablePoints(int, int, float (*)[4]);
 char __cdecl d3sm_3D2SuperMap(int, float*, int*, int*, int*);
 char* __cdecl ch_CreateAction(char*, int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x0052f8a0 */
 void __cdecl he_CharacterBehavior(char* u, int where)
 {
 	int* p;

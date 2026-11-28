@@ -1,3 +1,7 @@
+extern char g_664398[];
+extern char g_7f4e06[];
+extern char dbl_0_0[];
+extern char g_662c38[];
 #include <stdlib.h>
 #include <string.h>
 
@@ -9,6 +13,7 @@ float __cdecl gm_CalcEntityFavor(unsigned int, unsigned int, unsigned int);
 int __cdecl amt_GetRoleLevel(int);
 
 /* ADDRESS: GOLDTL 0x004a5c40 */
+/* ADDRESS: GOLDDE 0x00494640 */
 unsigned int __cdecl ai_CollectEligibleEntities(unsigned short* source, unsigned int count, unsigned int actionKind,
 				  float minFavor, float maxFavor, int range, unsigned short* out)
 {
@@ -23,7 +28,7 @@ unsigned int __cdecl ai_CollectEligibleEntities(unsigned short* source, unsigned
 	int diff;
 	float favor;
 
-	step = *(int*) ((gm_RandomMod(0x10) & 0xffff) * 4 + 0x664398);
+	step = *(int*) ((gm_RandomMod(0x10) & 0xffff) * 4 + (int) &g_664398);
 	memset(query, 0, 0x50);
 	memset((char*) query + 0x1c, 0xff, 0x20);
 	*(int*) ((char*) query + 0x14) = 2;
@@ -37,7 +42,7 @@ unsigned int __cdecl ai_CollectEligibleEntities(unsigned short* source, unsigned
 			*out = *(unsigned short*) ai_FeudTargetEntity;
 		}
 	}
-	if ((minFavor > *(double*) 0x662950 || maxFavor < *(double*) 0x662c38) && minFavor < maxFavor) {
+	if ((minFavor > *(double*) &dbl_0_0 || maxFavor < *(double*) &g_662c38) && minFavor < maxFavor) {
 		checkFavor = 1;
 	}
 	base = amt_GetRoleLevel(*(unsigned char*) ((char*) source + 0x166));
@@ -65,7 +70,7 @@ unsigned int __cdecl ai_CollectEligibleEntities(unsigned short* source, unsigned
 					}
 					diff = abs(base - amt_GetRoleLevel(
 								     *(unsigned char*) (cand * 0x21c +
-										0x7f4e06)));
+										(int) &g_7f4e06)));
 					if (diff <= range) {
 						hit = 1;
 						out[have] = cand;

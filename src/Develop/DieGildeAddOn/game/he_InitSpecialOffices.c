@@ -3,6 +3,7 @@ extern int gm_GameTimeHour;
 void __cdecl gm_AddTime(void *, int, int, int);
 
 /* ADDRESS: GOLDTL 0x0057ba50 */
+/* ADDRESS: GOLDDE 0x005618b0 */
 void __cdecl he_InitSpecialOffices(void *self)
 {
     char *rec;

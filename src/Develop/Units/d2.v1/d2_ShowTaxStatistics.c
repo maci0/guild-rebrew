@@ -17,6 +17,7 @@ void __cdecl io_AppendText(char* fmt, ...);
 int __cdecl main_RunFrameLoop(void* fn, int y);
 void __cdecl d2_DestroyForm(int h);
 
+/* ADDRESS: GOLDDE 0x004e8000 */
 void __cdecl d2_ShowTaxStatistics(void)
 {
 	int h;

@@ -7,6 +7,7 @@ void __cdecl cm_RequestChangeBits(int a, int b, int c, int d, int e);
 void __cdecl d2_ShowUseObjDialog(void* buf);
 
 /* ADDRESS: GOLDTL 0x005de9a0 */
+/* ADDRESS: GOLDDE 0x005bff40 */
 int __cdecl gm_ObjSetEntityFlag0x200000(char* actor, char* action)
 {
 	char desc[0x50];

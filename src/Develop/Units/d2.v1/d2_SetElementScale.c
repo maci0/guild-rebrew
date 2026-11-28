@@ -50,6 +50,7 @@ void __cdecl d2_SetElementScale(int id, int scale)
 }
 #else
 /* ADDRESS: GOLDTL 0x00472680 */
+/* ADDRESS: GOLDDE 0x00465870 */
 void __cdecl d2_SetElementScale(int id, int scale)
 {
 	int h;

@@ -1,3 +1,23 @@
+__declspec(dllimport) void __stdcall SetCursorPos(int, int);
+extern int g_6772c4;
+extern int g_14ce8cc;
+extern int g_14ce8d0;
+extern int g_14ce8d4;
+extern int g_14ce8d8;
+extern char g_14ce8dc[];
+extern int io_RightButtonReleased;
+extern int g_14ce8e4;
+extern int g_14ce8e8;
+extern char g_14ce8ec[];
+extern char g_14ce8f0[];
+extern char g_14ce8f4[];
+extern char g_14ce8f8[];
+extern char g_14ce8fc[];
+extern char g_14ce904[];
+extern char g_14ce900[];
+extern char g_14ce8c6[];
+extern char g_14ce8c8[];
+extern char g_14ce8ca[];
 extern int io_PolledCursorState[];
 extern int io_ActiveInputState[];
 extern short io_ActiveCursorX;
@@ -12,6 +32,7 @@ void __cdecl io_PollKeyboardInput(void);
 void __cdecl io_PollKeyboardInput(void);
 
 /* ADDRESS: GOLDTL 0x004125c0 */
+/* ADDRESS: GOLDDE 0x00411110 */
 void __cdecl io_SetMouseCursorPos(int x, int y)
 {
 	((short*)io_PolledCursorState)[0] = (short) x;
@@ -21,7 +42,7 @@ void __cdecl io_SetMouseCursorPos(int x, int y)
 	((short*)&io_ActiveCursorX)[0] = (short) x;
 	((short*)&io_ActiveCursorX)[1] = (short) y;
 	if (g_6772c4 == 0) {
-		((void (__stdcall*)(int, int)) *(void**) 0x662300)(x, y);
+		SetCursorPos(x, y);
 	}
 }
 
@@ -35,12 +56,13 @@ void __cdecl io_ResetInputToCursor(void)
 }
 
 /* ADDRESS: GOLDTL 0x00412630 */
+/* ADDRESS: GOLDDE 0x00411160 */
 void __cdecl io_PopQueuedInputState(void)
 {
 	int i;
 	unsigned char* rec;
 
-	if (*(int*) 0x6772c4 != 0) {
+	if (*(int*) &g_6772c4 != 0) {
 		(&io_ActiveCursorX)[0] = ((short*) io_PolledCursorState)[0];
 		(&io_ActiveCursorX)[1] = ((short*) io_PolledCursorState)[1];
 		(&io_ActiveCursorX)[2] = ((short*) io_PolledCursorState)[2];
@@ -55,24 +77,24 @@ void __cdecl io_PopQueuedInputState(void)
 	for (; i < 32; i++) {
 		if (*(int*) (0x14ce9c8 + i * 0x4c) != 0) {
 			rec = (unsigned char*) (0x14ce986 + i * 0x4c);
-			*(int*) 0x14ce8cc = *(int*) (rec + 6);
-			*(int*) 0x14ce8d0 = *(int*) (rec + 0xa);
-			*(int*) 0x14ce8d4 = *(int*) (rec + 0xe);
-			*(int*) 0x14ce8d8 = *(int*) (rec + 0x12);
-			*(int*) 0x14ce8dc = *(int*) (rec + 0x16);
-			*(int*) 0x14ce8e0 = *(int*) (rec + 0x1a);
-			*(int*) 0x14ce8e4 = *(int*) (rec + 0x1e);
-			*(int*) 0x14ce8e8 = *(int*) (rec + 0x22);
-			*(int*) 0x14ce8ec = *(int*) (rec + 0x26);
-			*(int*) 0x14ce8f0 = *(int*) (rec + 0x2a);
-			*(int*) 0x14ce8f4 = *(int*) (rec + 0x2e);
-			*(int*) 0x14ce8f8 = *(int*) (rec + 0x32);
-			*(int*) 0x14ce8fc = *(int*) (rec + 0x36);
-			*(int*) 0x14ce904 = *(int*) (rec + 0x3e);
-			*(int*) 0x14ce900 = *(int*) (rec + 0x3a);
-			*(short*) 0x14ce8c6 = *(short*) (rec + 0);
-			*(short*) 0x14ce8c8 = *(short*) (rec + 2);
-			*(short*) 0x14ce8ca = *(short*) (rec + 4);
+			*(int*) &g_14ce8cc = *(int*) (rec + 6);
+			*(int*) &g_14ce8d0 = *(int*) (rec + 0xa);
+			*(int*) &g_14ce8d4 = *(int*) (rec + 0xe);
+			*(int*) &g_14ce8d8 = *(int*) (rec + 0x12);
+			*(int*) &g_14ce8dc = *(int*) (rec + 0x16);
+			*(int*) &io_RightButtonReleased = *(int*) (rec + 0x1a);
+			*(int*) &g_14ce8e4 = *(int*) (rec + 0x1e);
+			*(int*) &g_14ce8e8 = *(int*) (rec + 0x22);
+			*(int*) &g_14ce8ec = *(int*) (rec + 0x26);
+			*(int*) &g_14ce8f0 = *(int*) (rec + 0x2a);
+			*(int*) &g_14ce8f4 = *(int*) (rec + 0x2e);
+			*(int*) &g_14ce8f8 = *(int*) (rec + 0x32);
+			*(int*) &g_14ce8fc = *(int*) (rec + 0x36);
+			*(int*) &g_14ce904 = *(int*) (rec + 0x3e);
+			*(int*) &g_14ce900 = *(int*) (rec + 0x3a);
+			*(short*) &g_14ce8c6 = *(short*) (rec + 0);
+			*(short*) &g_14ce8c8 = *(short*) (rec + 2);
+			*(short*) &g_14ce8ca = *(short*) (rec + 4);
 			*(int*) (0x14ce9c8 + i * 0x4c) = 0;
 			io_PollKeyboardInput();
 			return;

@@ -125,6 +125,7 @@ char* __cdecl he_fn_Handlung(void);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x0048b220 */
+/* ADDRESS: GOLDDE 0x0047a0f0 */
 int __cdecl ai_MeisterTradeAllgemein(char* o, char* bld)
 {
 	int j;

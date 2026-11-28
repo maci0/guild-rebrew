@@ -3,6 +3,7 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
+/* ADDRESS: GOLDDE 0x004d3300 */
 char* __cdecl cut_FindFreeCutscene(void)
 {
 	int a;

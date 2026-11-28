@@ -15,6 +15,7 @@ void __cdecl d3_SetNodePosition(char*, char*);
 void __cdecl d3_SetObjectRotation(char*, char*);
 void __cdecl sb_PlayVoice(int, char*, int, int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x0058c030 */
 void __cdecl gm_ChangeBuildingRoom(int n, short v)
 {
 	short* r;

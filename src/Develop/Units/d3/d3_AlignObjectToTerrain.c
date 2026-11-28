@@ -37,6 +37,7 @@ int __cdecl d3_ComputeQuadHeightRange(char*, float*, float*, float*, float*, flo
 int __cdecl d3_AccumulateMeshHeightRange(S143b0Box*, char*);
 
 /* ADDRESS: GOLDTL 0x004143b0 */
+/* ADDRESS: GOLDDE 0x00412960 */
 int __cdecl d3_AlignObjectToTerrain(char* self, int arg1, int arg2)
 {
 	S143b0Box box;

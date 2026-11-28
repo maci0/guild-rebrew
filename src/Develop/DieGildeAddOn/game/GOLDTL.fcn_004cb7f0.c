@@ -55,6 +55,7 @@ void __cdecl gm_RefreshLocalMarketStock(int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
 /* ADDRESS: GOLDTL 0x004cb7f0 */
+/* ADDRESS: GOLDDE 0x004b8fd0 */
 int __cdecl fcn_004cb7f0(char* upgradeCmd, char* replyData)
 {
 	unsigned char* upgradeBuilding;

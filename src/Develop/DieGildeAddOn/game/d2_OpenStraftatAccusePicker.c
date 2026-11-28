@@ -20,6 +20,7 @@ extern __int64 gm_TargetPersonTypeMask;
 void __cdecl d2_OpenTargetPicker(Desc*, int, int, void*);
 void __cdecl d2_RunStraftatAccuseDialog(void);
 
+/* ADDRESS: GOLDDE 0x005a2e70 */
 void __cdecl d2_OpenStraftatAccusePicker(void)
 {
 	Desc d;

@@ -16,6 +16,7 @@ extern void __cdecl d3_SetFogEnabled(int a0);
 extern void __cdecl sb_PlayVoice(int a0, char *a1, int a2, int a3, int a4, int a5, int a6);
 
 /* ADDRESS: GOLDTL 0x00534c40 */
+/* ADDRESS: GOLDDE 0x0051d530 */
 int *__cdecl d2_OpenJournalBook(unsigned int a0, int a1, char a2, ...)
 {
     int *blk;

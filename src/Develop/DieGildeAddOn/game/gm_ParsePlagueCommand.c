@@ -6,6 +6,7 @@ int __cdecl atoi(const char*);
 void __cdecl cm_SendCopyEntityData(void*);
 
 /* ADDRESS: GOLDTL 0x004b1d10 */
+/* ADDRESS: GOLDDE 0x004a0030 */
 int __cdecl gm_ParsePlagueCommand(int a1, int a2, char* s)
 {
 	char buf[0xf8];

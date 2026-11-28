@@ -24,6 +24,7 @@ extern pos14_7f4c00 g_772fe8;
 extern pos14_7f4c00 gm_GameTime;
 extern int g_9a9200[8];
 
+/* ADDRESS: GOLDDE 0x004dbfc0 */
 void __cdecl gm_ResetSlot170Table(void)
 {
 	int i;

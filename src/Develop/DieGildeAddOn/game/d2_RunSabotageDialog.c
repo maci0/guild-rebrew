@@ -1,3 +1,7 @@
+extern char g_6628ac[];
+extern char g_662b10[];
+extern char g_6ac494[];
+extern char g_67eac4[];
 #include <string.h>
 
 extern unsigned char gm_ActiveTownIndex;
@@ -36,6 +40,7 @@ void __cdecl cm_SendTraceEnd(char* s);
 void __cdecl d2_DestroyForm(int dlg);
 
 /* ADDRESS: GOLDTL 0x005bf0d0 */
+/* ADDRESS: GOLDDE 0x005a1510 */
 int __cdecl d2_RunSabotageDialog(unsigned short* obj, unsigned char* record)
 {
 	unsigned int count;
@@ -55,17 +60,17 @@ int __cdecl d2_RunSabotageDialog(unsigned short* obj, unsigned char* record)
 		return 0;
 	}
 	memset(slots, 0, sizeof(slots));
-	idx = *(unsigned short*) 0x774970;
+	idx = *(unsigned short*) ((int) &gm_LocalPlayerSlot);
 	slots[0] = 1;
-	value = (int) ((float) gm_CalcPersonWealth(*(unsigned short*) (0x7f4ca0 + idx * 0x21c)) * *(float*) 0x6628ac
-		+ (float) gm_CalculateGebaeudeValue(record, 100) * *(float*) 0x662b10);
-	if (gm_CheckPrivilege(0x1b, (void*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c), slots) & 2) {
+	value = (int) ((float) gm_CalcPersonWealth(*(unsigned short*) ((int) &gm_EntitySlotTable + idx * 0x21c)) * *(float*) &g_6628ac
+		+ (float) gm_CalculateGebaeudeValue(record, 100) * *(float*) &g_662b10);
+	if (gm_CheckPrivilege(0x1b, (void*) ((int) &gm_EntitySlotTable + *(unsigned short*) ((int) &gm_LocalPlayerSlot) * 0x21c), slots) & 2) {
 		value = value / 2;
 	}
-	if (gm_CheckEntityStock((void*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c), value, gm_ActiveTownIndex) == 0) {
+	if (gm_CheckEntityStock((void*) ((int) &gm_EntitySlotTable + *(unsigned short*) ((int) &gm_LocalPlayerSlot) * 0x21c), value, gm_ActiveTownIndex) == 0) {
 		return 0;
 	}
-	entity = he_StartHandlungSearch(2, 2, *(unsigned short*) 0x774970, 0, 0x19);
+	entity = he_StartHandlungSearch(2, 2, *(unsigned short*) ((int) &gm_LocalPlayerSlot), 0, 0x19);
 	while (entity != 0) {
 		if (*(int*) ((char*) entity + 0xac) == *(int*) (record + 1)) {
 			io_FormatTextBuffer(text, 0x1702, *(unsigned short*) (record + 0x27), record);
@@ -74,12 +79,12 @@ int __cdecl d2_RunSabotageDialog(unsigned short* obj, unsigned char* record)
 		}
 		entity = he_fn_Handlung();
 	}
-	if (he_HasNoActiveEvent04b(obj, (void*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c)) == 0) {
+	if (he_HasNoActiveEvent04b(obj, (void*) ((int) &gm_EntitySlotTable + *(unsigned short*) ((int) &gm_LocalPlayerSlot) * 0x21c)) == 0) {
 		io_FormatTextBuffer(text, 0x1703, *(unsigned short*) (record + 0x27), record);
 		d2_ShowModalMessageBox(text, 0);
 		return 0;
 	}
-	if (he_HasNoActiveAction0x2e(obj, (void*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c)) == 0) {
+	if (he_HasNoActiveAction0x2e(obj, (void*) ((int) &gm_EntitySlotTable + *(unsigned short*) ((int) &gm_LocalPlayerSlot) * 0x21c)) == 0) {
 		io_FormatTextBuffer(text, 0x1704, *(unsigned short*) obj);
 		d2_ShowModalMessageBox(text, 0);
 		return 0;
@@ -89,12 +94,12 @@ int __cdecl d2_RunSabotageDialog(unsigned short* obj, unsigned char* record)
 		d2_ShowModalMessageBox(ev, 0);
 		return 0;
 	}
-	if (he_HasNoActiveAction0x88(obj, (void*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c)) == 0) {
+	if (he_HasNoActiveAction0x88(obj, (void*) ((int) &gm_EntitySlotTable + *(unsigned short*) ((int) &gm_LocalPlayerSlot) * 0x21c)) == 0) {
 		io_FormatTextBuffer(text, 0x409f, *(unsigned short*) obj);
 		d2_ShowModalMessageBox(text, 0);
 		return 0;
 	}
-	dlg = d2_LoadForm(0, 0, (char*) 0x6ac494);
+	dlg = d2_LoadForm(0, 0, (char*) &g_6ac494);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	d2_SetOverlayAnimation(0, 0);
@@ -122,9 +127,9 @@ int __cdecl d2_RunSabotageDialog(unsigned short* obj, unsigned char* record)
 			ev[0x36] = 1;
 			*(int*) (ev + 0x7c) = value;
 			*(int*) (ev + 0x58) = *(int*) (record + 1);
-			cm_SendLogAction((char*) 0x67eac4);
+			cm_SendLogAction((char*) &g_67eac4);
 			cm_SendCopyEntityData(ev);
-			cm_SendTraceEnd((char*) 0x67eac4);
+			cm_SendTraceEnd((char*) &g_67eac4);
 			io_FormatTextBuffer(text2, 0x1701, *(unsigned short*) (record + 0x25),
 				*(unsigned char*) record * 0xe + 0x48e);
 			d2_ShowModalMessageBox(text2, 0);

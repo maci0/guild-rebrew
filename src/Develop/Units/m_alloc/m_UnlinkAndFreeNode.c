@@ -5,6 +5,7 @@
 
 int __cdecl m_FreeTracked(int);
 
+/* ADDRESS: GOLDDE 0x004abdd0 */
 int __cdecl m_UnlinkAndFreeNode(char* a)
 {
 	char* p;

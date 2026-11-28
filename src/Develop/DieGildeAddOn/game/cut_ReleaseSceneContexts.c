@@ -15,6 +15,7 @@ void __cdecl cut_WaitForScript(int);
 void __cdecl cut_CleanupCutscene(void);
 void __cdecl msx_RestoreMusicIfAllowed(void);
 
+/* ADDRESS: GOLDDE 0x004cea00 */
 int __cdecl cut_ReleaseSceneContexts(int* scene)
 {
 	cut_FadeToBlack();

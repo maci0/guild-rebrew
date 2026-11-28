@@ -6,6 +6,7 @@
 
 typedef int (__stdcall* fcn_0057ddc0_fn)(int, int, int, char*);
 
+/* ADDRESS: GOLDDE 0x00563bf0 */
 void __cdecl main_LoadMessageFilterMask(char* text)
 {
 	strcpy((char*) 0x77df20, text);

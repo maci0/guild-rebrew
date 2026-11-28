@@ -10,6 +10,7 @@ int __cdecl gm_MatchesTargetFilter();
 
 extern char * d2_Controls; extern char * d2_FileObjTable; extern int d2_CurrentWindowId; extern unsigned short gm_LocalPlayerSlot;
 /* ADDRESS: GOLDTL 0x005c9f10 */
+/* ADDRESS: GOLDDE 0x005ab9a0 */
 int __cdecl d2_DrawOfficeCandidateGrid(int a0, int a1, int a2, int a3, int a4, unsigned short* a5)
 {
 	char v1;

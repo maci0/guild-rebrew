@@ -83,6 +83,7 @@ extern unsigned char* lpGebaeudePROT;
 char* __cdecl gm_QueryEntities(int a, int b, int c, int d, int e);
 void __cdecl cm_SendCopyEntityData(WORKER_RECOVERY_MSG* msg);
 
+/* ADDRESS: GOLDDE 0x00477ad0 */
 void __cdecl ai_DispatchWorkerRecovery(WORKER_RECOVERY_UNIT* meister)
 {
 	WORKER_RECOVERY_MSG msg;

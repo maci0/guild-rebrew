@@ -1,3 +1,4 @@
+extern char gm_EntitySlotTable[];
 #include <string.h>
 
 int __cdecl gm_LookupEntityRecordById(int);
@@ -8,6 +9,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004b7c70 */
+/* ADDRESS: GOLDDE 0x004a5d20 */
 int __cdecl gm_HandleMsg15BoostFavor(int* request)
 {
 	int frame[2];
@@ -23,7 +25,7 @@ int __cdecl gm_HandleMsg15BoostFavor(int* request)
 	frame[1] = 0x600c00;
 	if (gm_FindEntityCandidatesInRange(ent, 1, &frame[1], 0, 0x42c80000, &frame[0]) == 0)
 		return 0x400;
-	slot = (int*) (0x7f4ca0 + (frame[0] & 0xffff) * 0x21c);
+	slot = (int*) ((int) &gm_EntitySlotTable + (frame[0] & 0xffff) * 0x21c);
 	code = (fcn_0042e410(4) & 0xffff) * 2 + 4;
 	cm_RequestCopyEntityData(ent[1], *(int*) ((char*) slot + 4), code, 1);
 	id = *(unsigned short*) slot;

@@ -28,6 +28,7 @@ int __cdecl gm_GetEntityMood(unsigned char*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x005aa5d0 */
 void __cdecl d2_ShowBuildingStatsDetail(unsigned char* a)
 {
 	int st[21];

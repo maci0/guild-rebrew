@@ -58,6 +58,7 @@ extern char s_68a124[];
 #define flt_time_scale (0.0005f)
 
 /* ADDRESS: GOLDTL 0x004c16c0 */
+/* ADDRESS: GOLDDE 0x004af1e0 */
 int __cdecl gm_UpdateAmbientAudio(void)
 {
 	char buf[16];

@@ -13,6 +13,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl gm_UpdateTownSeasonPrices(int, char*);
 
+/* ADDRESS: GOLDDE 0x004ecd00 */
 void __cdecl gm_UpdateAllTownSeasonPrices(void)
 {
 	int i;

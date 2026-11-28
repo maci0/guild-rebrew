@@ -4,6 +4,7 @@ void __cdecl d3_RemoveSkyLayer(void*, void*);
 void __cdecl d3_ReleaseSkyDomeBuffers(void*);
 void __cdecl m_FreeTracked(void*);
 
+/* ADDRESS: GOLDDE 0x0044f300 */
 void __cdecl d3_FreeSkyDome(char* p)
 {
 	if (p == 0) {

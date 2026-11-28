@@ -27,6 +27,7 @@ void __cdecl cm_SendCopyEntityData(void*);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x005c35d0 */
+/* ADDRESS: GOLDDE 0x005a5a10 */
 void __cdecl d2_RunSellGebaeudeDialog(char* e)
 {
 	char pkt[0xf8];

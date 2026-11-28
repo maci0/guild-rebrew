@@ -7,6 +7,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b3130 */
 void __cdecl cm_RequestSysMessage(char kind, char* data)
 {
 	char buf[0x9c];

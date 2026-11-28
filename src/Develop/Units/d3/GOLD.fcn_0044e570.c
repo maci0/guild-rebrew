@@ -1,6 +1,7 @@
 // fcn_0044e570 — (popcount32(a) == 1).
 
 /* ADDRESS: GOLDTL 0x0044cba0 */
+/* ADDRESS: GOLDDE 0x00442b90 */
 unsigned char __cdecl d3_IsPowerOfTwo(int value)
 {
 	int i;
@@ -23,6 +24,7 @@ unsigned char __cdecl d3_IsPowerOfTwo(int value)
 char* __cdecl d3_ResolveTexturePath(int tex);
 unsigned char __cdecl vfs_ReadBmpInfo(char* name, int* w, int* h, int z);
 
+/* ADDRESS: GOLDDE 0x00442bc0 */
 int __cdecl d3_ValidateTextureDimensions(int tex, char verbose)
 {
 	char* name;

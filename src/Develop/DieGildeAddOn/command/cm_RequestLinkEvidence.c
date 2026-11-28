@@ -3,6 +3,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b3250 */
 void __cdecl cm_RequestLinkEvidence(int evidenceKey, int ownerId)
 {
 	char buf[0x9c];

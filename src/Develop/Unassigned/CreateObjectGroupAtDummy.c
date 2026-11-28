@@ -6,6 +6,7 @@ void __cdecl d3_SetNodePosition(char* h, float* pos);
 void __cdecl d3_GetObjectEulerRotation(char* src, float* out);
 void __cdecl d3_SetObjectRotation(char* h, float* v);
 
+/* ADDRESS: GOLDDE 0x0040d6b0 */
 int __cdecl CreateObjectGroupAtDummy(char** name, char** a)
 {
 	float rot[3];

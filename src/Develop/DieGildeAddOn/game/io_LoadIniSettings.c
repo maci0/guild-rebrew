@@ -4,6 +4,7 @@ __declspec(dllimport) unsigned int __stdcall GetPrivateProfileIntA(const char *,
 __declspec(dllimport) unsigned int __stdcall GetPrivateProfileStringA(const char *, const char *, const char *, char *, unsigned int, const char *);
 
 /* ADDRESS: GOLDTL 0x005e1ca0 */
+/* ADDRESS: GOLDDE 0x005c3200 */
 void __cdecl io_LoadIniSettings(void)
 {
     unsigned char resIndex;

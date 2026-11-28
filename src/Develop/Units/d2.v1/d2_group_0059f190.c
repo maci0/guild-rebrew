@@ -29,6 +29,7 @@ void __cdecl d2_OpenMeisterbriefDialog(char*);
 
 /* ADDRESS: GOLD 0x00595fb0 */
 /* ADDRESS: GOLDTL 0x0059f190 */
+/* ADDRESS: GOLDDE 0x00584010 */
 void __cdecl d2_RunParfumerieProductionMenu(char* building, int searchArg)
 {
 	int prod;
@@ -77,6 +78,7 @@ void __cdecl d2_RunParfumerieProductionMenu(char* building, int searchArg)
 
 /* ADDRESS: GOLD 0x00596200 */
 /* ADDRESS: GOLDTL 0x0059f3e0 */
+/* ADDRESS: GOLDDE 0x00584260 */
 void __cdecl d2_RunMixingProductionMenu(char* e, int a2)
 {
 	int prod;

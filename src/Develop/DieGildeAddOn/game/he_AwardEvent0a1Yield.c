@@ -25,6 +25,7 @@ float __cdecl gm_GetSeasonPrice(int id, unsigned char a);
 int __cdecl he_PostEntityMessage(int id, int arg, char* text1, unsigned char flags, int value, char* text2);
 
 /* ADDRESS: GOLDTL 0x0057ceb0 */
+/* ADDRESS: GOLDDE 0x00562ce0 */
 void __cdecl he_AwardEvent0a1Yield(char* entity)
 {
 	char buf[0x200];

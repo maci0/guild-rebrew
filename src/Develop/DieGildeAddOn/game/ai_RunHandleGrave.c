@@ -4,6 +4,7 @@ void __cdecl gv_RequestRentGrave(int a1, int x, int a3, int a4, int a5);
 void __cdecl gv_SendMoveSlotEntry(int a1, int a2, int x, int a4, int a5, int a6);
 
 /* ADDRESS: GOLDTL 0x00490130 */
+/* ADDRESS: GOLDDE 0x0047f000 */
 int __cdecl ai_RunHandleGrave(int a1, char* p, char* q)
 {
 	int targetEntity;

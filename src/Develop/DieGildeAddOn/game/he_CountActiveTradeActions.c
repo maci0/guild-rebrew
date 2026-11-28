@@ -6,6 +6,7 @@ char* __cdecl he_fn_Handlung(void);
 
 
 /* ADDRESS: GOLDTL 0x0047d1e0 */
+/* ADDRESS: GOLDDE 0x0046c1a0 */
 int __cdecl he_CountActiveTradeActions(void)
 {
 	int n;

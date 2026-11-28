@@ -35,6 +35,7 @@ extern short gm_GameTimeTailWord;
 int __cdecl amt_ProcessOfficeElections(void);
 void __cdecl cm_EnqueueStagedPacket(Msg*);
 
+/* ADDRESS: GOLDDE 0x00565cc0 */
 void __cdecl d2_SendTutorialTownMsgA0(int a)
 {
 	Msg msg;

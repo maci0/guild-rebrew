@@ -14,6 +14,7 @@ int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_ShowBlutracheDialog(int);
 int __cdecl d2_RunCardGameDialog(void);
 
+/* ADDRESS: GOLDDE 0x005c7c10 */
 void __cdecl d2_RunTheaterInteriorHud(int a)
 {
 	int x;

@@ -1,5 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x004c0a60 */
+/* ADDRESS: GOLDDE 0x004ae590 */
 void* __cdecl d3snd_GetLastTrackedVoice(void)
 {
 	void* result;

@@ -14,6 +14,7 @@ typedef struct
 CUT_ENTITY_SLOT_MSG* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
 void __cdecl cm_SendUpdateCutsceneEntitySlot(int, CUT_ENTITY_SLOT_MSG*);
 
+/* ADDRESS: GOLDDE 0x004be860 */
 void __cdecl cut_SendExitSlotCommand(char* ctx, char* entity)
 {
 	CUT_ENTITY_SLOT_MSG* s;

@@ -2,6 +2,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
+/* ADDRESS: GOLDDE 0x004b1980 */
 void __cdecl cm_SendCommandQueueInit(void)
 {
 	char buf[0x9c];

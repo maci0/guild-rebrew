@@ -5,6 +5,7 @@ extern int sb_WaveDriver;
 extern volatile int gm_GameTicks;
 int __cdecl msx_EndSample(int);
 
+/* ADDRESS: GOLDDE 0x00420580 */
 void __cdecl sb_StopVoice(int* p, int fade)
 {
 	if (sb_WaveDriver != 0 && p != 0) {

@@ -9,6 +9,7 @@ void __cdecl cm_StepCommandQueue(void);
 int* __cdecl lb_GetPlayerList(void);
 int __cdecl cm_RequestPreloadSceneEntry(int);
 
+/* ADDRESS: GOLDDE 0x00579180 */
 void __cdecl d3_FlushLoadAndPreloadQueue(void)
 {
 	int h;

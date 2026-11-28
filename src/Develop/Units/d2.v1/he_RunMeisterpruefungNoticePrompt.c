@@ -20,6 +20,7 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 
+/* ADDRESS: GOLDDE 0x005406c0 */
 void __cdecl he_RunMeisterpruefungNoticePrompt(char* u)
 {
 	char* o;

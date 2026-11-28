@@ -21,6 +21,7 @@ void __cdecl d2_OpenMarktstandPanel(int, int);
 void __cdecl d2_RunSchwarzesBrettDialog(void);
 void __cdecl d2_ShowBardPoemDialog(void);
 
+/* ADDRESS: GOLDDE 0x00588840 */
 void __cdecl d2_HandleMarketSquareObjects(int arg)
 {
 	char* c;

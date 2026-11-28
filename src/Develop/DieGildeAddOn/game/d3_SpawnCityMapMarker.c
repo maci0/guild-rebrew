@@ -18,6 +18,7 @@ void __cdecl d3_TransformPoint(char*, char*, struct vec4*);
 char* __cdecl d3_CreateSceneModelObject(int, struct vec4*, struct vec4*, char*);
 void __cdecl d3_ApplyObjectAnimation(char*, char*, int);
 
+/* ADDRESS: GOLDDE 0x005252c0 */
 char* __cdecl d3_SpawnCityMapMarker(char* name)
 {
 	struct vec4 v;

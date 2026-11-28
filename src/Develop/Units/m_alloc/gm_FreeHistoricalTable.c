@@ -10,6 +10,7 @@ void __cdecl m_FreeTracked(void*);
 
 
 /* ADDRESS: GOLDTL 0x004acf00 */
+/* ADDRESS: GOLDDE 0x0049b240 */
 int __cdecl gm_FreeHistoricalTable(void)
 {
 	if (g_67fbb4 != 0) {

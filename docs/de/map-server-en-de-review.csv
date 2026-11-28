@@ -1,0 +1,4 @@
+en_va,de_va,method,evidence
+10016680,10014f10,review,"follows gm_ClearObjektResources (EXACT 0x10014f00) as in the English link; mnemonic similarity 0.912; replaces gap pair 0x10014e70 (retired)"
+10006c00,100066a0,review,"m_ShutdownAllocator: mnemonic similarity 0.912; replaces gap pair 10006d20->100066a0 (retired)"
+10006d20,100067b0,review,"m_PoolAlloc: German vfs_OpenStream calls 0x100067b0 where English calls m_PoolAlloc; follows m_ShutdownAllocator as in the English link; 261 bytes"

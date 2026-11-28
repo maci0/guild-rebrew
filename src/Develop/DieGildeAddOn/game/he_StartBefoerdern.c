@@ -12,6 +12,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x0054c3b0 */
 void __cdecl he_StartBefoerdern(char* o)
 {
 	char* p;

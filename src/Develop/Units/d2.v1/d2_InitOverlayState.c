@@ -33,6 +33,7 @@ extern TexSlot g_100f840;
 void* __cdecl d2_CreateSurface(TexDesc* d, int fmt);
 
 /* ADDRESS: GOLDTL 0x00473df0 */
+/* ADDRESS: GOLDDE 0x00466af0 */
 void __cdecl d2_InitOverlayState(void)
 {
 	TexDesc d;

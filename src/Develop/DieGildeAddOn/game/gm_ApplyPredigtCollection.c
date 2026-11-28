@@ -45,6 +45,7 @@ float __cdecl gm_CalcSkillDuelScore(PREDIGT_ENTITY* a, PREDIGT_ENTITY* b, int k)
 void __cdecl cm_RequestCopyEntityData(int a1, int a2, int a3, int a4);
 
 /* ADDRESS: GOLDTL 0x004fd4f0 */
+/* ADDRESS: GOLDDE 0x004e9020 */
 int __cdecl gm_ApplyPredigtCollection(char* building, PREDIGT_RESULT* out)
 {
 	float mult;

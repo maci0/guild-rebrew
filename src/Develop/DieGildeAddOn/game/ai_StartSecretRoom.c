@@ -20,6 +20,7 @@ int __cdecl ai_SetupSecretRoomMode2(char* e, Msg* a, Msg* b);
 int __cdecl ai_SetupSecretRoomMode3(char* e, Msg* a, Msg* b);
 
 /* ADDRESS: GOLDTL 0x0048da10 */
+/* ADDRESS: GOLDDE 0x0047c8e0 */
 int __cdecl ai_StartSecretRoom(int kind, char* e, int busy, Msg* out1, Msg* out2)
 {
 	Msg a;

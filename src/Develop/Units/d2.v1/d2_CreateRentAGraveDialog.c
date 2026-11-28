@@ -13,6 +13,7 @@ void __cdecl d2_InitWindowBounds(int);
 int __cdecl io_AppendText(char*, ...);
 void __cdecl d2_RenderCandidateStatCards(int*);
 
+/* ADDRESS: GOLDDE 0x005720d0 */
 int __cdecl d2_CreateRentAGraveDialog(int* s, int a2)
 {
 	if (s[7] == 0) {

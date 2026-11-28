@@ -46,6 +46,7 @@ void __cdecl d2_SetEditControlText(int slot, char* text)
 }
 #else
 /* ADDRESS: GOLDTL 0x0046ff90 */
+/* ADDRESS: GOLDDE 0x004634f0 */
 void __cdecl d2_SetEditControlText(int slot, char* text)
 {
 	Slot* s;

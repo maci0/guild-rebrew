@@ -33,6 +33,7 @@ void __cdecl d3_EndCameraAndUiMode(void);
 void __cdecl d2_ShowModalMessageBox(int, int);
 void __cdecl d2_RunEntfuehrungDialog(void);
 
+/* ADDRESS: GOLDDE 0x00593360 */
 void __cdecl d2_StartEntfuehrungDialog(char* building)
 {
 	Req req;

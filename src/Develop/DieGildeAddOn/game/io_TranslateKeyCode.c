@@ -3,6 +3,7 @@
 
 extern unsigned short g_14cf300[];
 
+/* ADDRESS: GOLDDE 0x00410270 */
 char __cdecl io_TranslateKeyCode(int shift, int ctrl, int alt, char key)
 {
 	int k;

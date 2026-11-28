@@ -28,6 +28,7 @@ extern s_1015f4c d2_WindowMetricsView[];
 
 
 /* ADDRESS: GOLDTL 0x005340f0 */
+/* ADDRESS: GOLDDE 0x0051c9e0 */
 void __cdecl d2_InitWindowBounds(int i)
 {
 	struct D2_RES_BOUNDS* p;

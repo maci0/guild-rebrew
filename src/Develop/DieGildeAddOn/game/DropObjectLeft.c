@@ -7,6 +7,7 @@ int __cdecl d3_FindSceneObject(int a, int b, char* c, int d);
 int __cdecl ch_QueueDropObjectLeft(char* e, char* name, char* name2, int param);
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
+/* ADDRESS: GOLDDE 0x0040c450 */
 int __cdecl DropObjectLeft(char** a, char** name, int* param, char** name2)
 {
 	if (*a == 0) {

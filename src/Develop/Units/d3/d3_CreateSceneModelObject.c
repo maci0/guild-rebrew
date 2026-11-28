@@ -35,6 +35,7 @@ void __cdecl d3_SetObjectRotation(MODEL_SCENE_OBJ* o, int a);
 void __cdecl d3_RegisterSceneObjectTl(MODEL_SCENE_OBJ* o);
 void __cdecl d3_DisposeObject(MODEL_SCENE_OBJ* o);
 
+/* ADDRESS: GOLDDE 0x0043ad60 */
 MODEL_SCENE_OBJ* __cdecl d3_CreateSceneModelObject(MODEL_SCENE_OBJ* parent, int a, int b, int id)
 {
 	MODEL_SCENE_OBJ* o;

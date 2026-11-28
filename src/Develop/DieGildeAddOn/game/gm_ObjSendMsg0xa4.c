@@ -26,6 +26,7 @@ extern short gm_GameTimeTailWord;
 
 void __cdecl cm_SendCopyEntityData(Msg*);
 
+/* ADDRESS: GOLDDE 0x005c0b40 */
 int __cdecl gm_ObjSendMsg0xa4(char* obj)
 {
 	Msg msg;

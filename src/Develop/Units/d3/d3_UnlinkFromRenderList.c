@@ -4,6 +4,7 @@
 extern char g_1040960[];
 extern int d3_ActiveScene;
 
+/* ADDRESS: GOLDDE 0x00447c50 */
 void __cdecl d3_UnlinkFromRenderList(char* node)
 {
 	char* owner;

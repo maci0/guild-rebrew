@@ -15,6 +15,7 @@ int __cdecl gm_eval_SlotVoll(char*, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004c8460 */
+/* ADDRESS: GOLDDE 0x004b5c40 */
 int __cdecl cm_ExProdObjekt(int msg, char* result)
 {
 	int quantity;

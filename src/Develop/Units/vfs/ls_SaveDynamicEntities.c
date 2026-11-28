@@ -43,6 +43,7 @@ extern Entry g_85a0a0[16];
 
 unsigned int __cdecl vfs_fwrite(void*, int, int, void*);
 
+/* ADDRESS: GOLDDE 0x00508440 */
 int __cdecl ls_SaveDynamicEntities(void* stream)
 {
 	int i;

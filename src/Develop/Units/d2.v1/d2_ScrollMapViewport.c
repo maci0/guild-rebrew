@@ -6,6 +6,7 @@ extern short io_ActiveCursorY;
 extern int g_774a58;
 extern int g_774a4c;
 
+/* ADDRESS: GOLDDE 0x00595ae0 */
 int __cdecl d2_ScrollMapViewport(char* w)
 {
 	int r;

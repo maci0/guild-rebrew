@@ -1,3 +1,5 @@
+extern char g_6a2f5c[];
+extern char g_681140[];
 #include "Develop/Units/d2.v1/client_dialog_state.h"
 extern int io_RightButtonReleased, d2_DialogButtonAction, d2_CurrentElementId;
 extern char io_LastKeyScancode;
@@ -14,6 +16,7 @@ int __cdecl main_RunFrameLoop(char*, int);
 typedef struct { int i[0x2f4 / 4]; } Row_5845e0;
 
 /* ADDRESS: GOLDTL 0x005845e0 */
+/* ADDRESS: GOLDDE 0x0056a350 */
 int __cdecl d2_ChooseTutorial(void)
 {
 	char* menu;
@@ -28,13 +31,13 @@ int __cdecl d2_ChooseTutorial(void)
 	int flag;
 
 	i = 0; flag = 0;
-	menu = d2_LoadForm(0, 0, (char*) 0x6a9298);
+	menu = d2_LoadForm(0, 0, "tutorial\\CHOOSE_tutorial");
 	d2_CenterDialogWindows(menu);
 	d2_SetForm(menu, 1);
-	io_AppendText((char*) 0x6a2f5c, 0x3f1a);
+	io_AppendText((char*) &g_6a2f5c, 0x3f1a);
 	d2_SetForm(menu, 2);
 	for (; i < 5; i++) {
-		item = io_AppendText((char*) 0x681140, 0x3f1b + i);
+		item = io_AppendText((char*) &g_681140, 0x3f1b + i);
 		item = d2_GetWindowListItem(menu, 2, item);
 		ids[i] = (int) item;
 		index = (int) item;
@@ -42,13 +45,13 @@ int __cdecl d2_ChooseTutorial(void)
 		(*(int*)&((D2_CONTROL_TL*)d2_Controls)[index].value_038) = g_6a81dc[i];
 		(*(int*)&((D2_CONTROL_TL*)d2_Controls)[index].flags_1d0) &= -3;
 	}
-	item = io_AppendText((char*) 0x681140, 0x3f20);
+	item = io_AppendText((char*) &g_681140, 0x3f20);
 	result = (int) d2_GetWindowListItem(menu, 2, item);
-	item = io_AppendText((char*) 0x681140, 0x3f21);
+	item = io_AppendText((char*) &g_681140, 0x3f21);
 	result2 = (int) d2_GetWindowListItem(menu, 2, item);
 	d2_SetForm(menu, 2);
 
-	if (main_RunFrameLoop((char*) 0x5845e0, 0x86) != 0) {
+	if (main_RunFrameLoop((char*) d2_ChooseTutorial, 0x86) != 0) {
 		do {
 			n = k = 0;
 			for (; k < 5; k++) {
@@ -89,7 +92,7 @@ int __cdecl d2_ChooseTutorial(void)
 					}
 				}
 			}
-		} while (main_RunFrameLoop((char*) 0x5845e0, 0x86) != 0);
+		} while (main_RunFrameLoop((char*) d2_ChooseTutorial, 0x86) != 0);
 	}
 	d2_DestroyForm(menu);
 	return flag;

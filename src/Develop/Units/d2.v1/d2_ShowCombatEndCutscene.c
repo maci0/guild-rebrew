@@ -63,6 +63,7 @@ int __cdecl gm_RandomMod(unsigned short);
 void __cdecl gm_AdjustGebaeudeCondition(char*, int);
 
 /* ADDRESS: GOLDTL 0x004d6170 */
+/* ADDRESS: GOLDDE 0x004c30c0 */
 int __cdecl d2_ShowCombatEndCutscene(char* ctx)
 {
 	int mode;

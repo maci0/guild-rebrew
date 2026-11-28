@@ -23,6 +23,7 @@ void __cdecl io_FormatTextBuffer(void*, int, ...);
 int __cdecl d2_OpenTargetPicker(Query*, char*, int, void*);
 int __cdecl d2_ShowBecircenDialog(unsigned short*);
 
+/* ADDRESS: GOLDDE 0x005b8920 */
 int __cdecl gm_HandleBecircen(char* e, char* o)
 {
 	int r;

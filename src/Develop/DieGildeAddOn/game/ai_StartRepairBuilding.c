@@ -9,6 +9,7 @@ int __cdecl gm_CalcBuildingRepairCost(char*, int);
 
 /* The inventory entry also holds a second function at 0x4978d0 (180 bytes). */
 /* ADDRESS: GOLDTL 0x004976e0 */
+/* ADDRESS: GOLDDE 0x00486160 */
 int __cdecl ai_StartRepairBuilding(int unused, char* e, int unused2, char* out, char* out2)
 {
 	int minv;

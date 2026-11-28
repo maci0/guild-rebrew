@@ -23,6 +23,7 @@ int __cdecl sprintf(char*, const char*, ...);
 
 /* Sends one behaviour event to the server when its delay has elapsed. */
 /* ADDRESS: GOLDTL 0x00551d50 */
+/* ADDRESS: GOLDDE 0x00538100 */
 void __cdecl he_RunTalentBoost(char* actionRecord)
 {
 	char buf[0x800];

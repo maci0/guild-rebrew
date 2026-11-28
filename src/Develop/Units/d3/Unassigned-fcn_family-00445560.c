@@ -6,6 +6,7 @@ int __cdecl d3_MatchSceneObjectCallback(char*, char**);
 
 /* ADDRESS: GOLD 0x004495f0 */
 /* ADDRESS: GOLDTL 0x00445560 */
+/* ADDRESS: GOLDDE 0x0043d2f0 */
 int __cdecl d3_MatchSceneObjectCallback(char* obj, char** state)
 {
 	char* trimmedName;
@@ -26,6 +27,7 @@ int __cdecl d3_MatchSceneObjectCallback(char* obj, char** state)
 }
 
 /* ADDRESS: GOLDTL 0x00445600 */
+/* ADDRESS: GOLDDE 0x0043d390 */
 char* __cdecl d3_FindSceneObject(char* rootObj, int flags, char* matchPtr, char* matchName)
 {
 	char* state[3];

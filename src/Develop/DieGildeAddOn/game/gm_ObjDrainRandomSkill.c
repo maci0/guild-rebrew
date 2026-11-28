@@ -26,6 +26,7 @@ void __cdecl cm_RequestModifyEntityLevel(int, int, int);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 void __cdecl d2_ShowUseObjDialog(char*);
 
+/* ADDRESS: GOLDDE 0x005bf5b0 */
 int __cdecl gm_ObjDrainRandomSkill(unsigned char* e, char* request)
 {
 	int ids[5];

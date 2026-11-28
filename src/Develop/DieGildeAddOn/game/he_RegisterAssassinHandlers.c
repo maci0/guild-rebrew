@@ -9,6 +9,7 @@ void __cdecl fcn_00577720(void);
 void __cdecl he_StartAction0x9b(void);
 void __cdecl he_RunAction0x9b(void);
 
+/* ADDRESS: GOLDDE 0x0055ca10 */
 int __cdecl he_RegisterAssassinHandlers(void)
 {
 	if (he_RegisterHandler(0x99, he_StartAssassinAction, he_RunAssassinAction) || he_RegisterHandler(0x9a, he_StartAction0x9a, fcn_00577720) ||

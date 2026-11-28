@@ -1,4 +1,5 @@
 
+/* ADDRESS: GOLDDE 0x00443500 */
 int __cdecl FindTableEntryIndex(int value, int* p)
 {
 	int i;

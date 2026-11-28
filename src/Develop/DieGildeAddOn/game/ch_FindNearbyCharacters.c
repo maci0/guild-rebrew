@@ -4,6 +4,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d3/client_scene_transform.h"
 
+/* ADDRESS: GOLDDE 0x00404fa0 */
 int __cdecl ch_FindNearbyCharacters(char* self, char** out, float range)
 {
 	int count;

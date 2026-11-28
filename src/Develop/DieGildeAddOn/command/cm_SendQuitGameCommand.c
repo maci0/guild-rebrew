@@ -5,6 +5,7 @@ extern char gm_EntityIdField[];
 
 int __cdecl cm_RequestSysMessage(int, void*);
 
+/* ADDRESS: GOLDDE 0x004b2310 */
 void __cdecl cm_SendQuitGameCommand(void)
 {
 	char buf[0x7c];

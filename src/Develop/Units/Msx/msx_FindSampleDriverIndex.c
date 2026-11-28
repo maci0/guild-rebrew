@@ -1,6 +1,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 /* ADDRESS: GOLDTL 0x0042b240 */
+/* ADDRESS: GOLDDE 0x004255f0 */
 int __cdecl msx_FindSampleDriverIndex(int id)
 {
 	int i;

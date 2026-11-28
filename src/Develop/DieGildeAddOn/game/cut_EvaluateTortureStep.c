@@ -7,6 +7,7 @@ float __cdecl cut_RandFloat(void);
 int __cdecl cut_RandMod(int);
 
 /* ADDRESS: GOLDTL 0x00493920 */
+/* ADDRESS: GOLDDE 0x00482770 */
 int __cdecl cut_EvaluateTortureStep(char* e)
 {
 	float delta;

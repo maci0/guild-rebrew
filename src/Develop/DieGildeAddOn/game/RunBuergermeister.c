@@ -10,6 +10,7 @@ void __cdecl cm_RequestMoveCredits(int a, int b, char c, int preis);
 void __cdecl cm_SendCopyEntityData(char* paket);
 int __cdecl amt_ExecGebaeudeBauen(char* kontext, char* ziel, char* aktion);
 
+/* ADDRESS: GOLDDE 0x0048c080 */
 int __cdecl RunBuergermeister(char* objekt, char* ziel, char* aktion)
 {
     char paket[0xf8];

@@ -70,6 +70,7 @@ void __cdecl io_FormatInputError(int a1, int a2, char* fmt, ...);
 
 int __cdecl io_BuildKeyTranslateTable(void);
 
+/* ADDRESS: GOLDDE 0x00410480 */
 int __cdecl io_InitDirectInputMouse(HWND hwnd, HINSTANCE hinst, int flags)
 {
 	HRESULT hr;

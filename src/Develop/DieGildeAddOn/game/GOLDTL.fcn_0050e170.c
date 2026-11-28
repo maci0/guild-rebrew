@@ -1,6 +1,7 @@
 
 /* ADDRESS: GOLDTL 0x0050dfd0 */
 /* 52 native calls supply an unused second dword; int is an inferred carrier. */
+/* ADDRESS: GOLDDE 0x004f8d20 */
 int __cdecl gm_GetStorageSlotCapacity(char* slot, int unused)
 {
 	int n;
@@ -29,6 +30,7 @@ extern unsigned short* __cdecl gm_QueryEntities(int container_id, int arg_count,
 extern int __cdecl gm_NextEntityQueryMatch(void);
 
 /* ADDRESS: GOLDTL 0x0050e170 */
+/* ADDRESS: GOLDDE 0x004f8ec0 */
 int __cdecl gm_GetFreeStorageSlotCapacity(STORAGE_SLOT* slot, int itemId, int maxAmount)
 {
     int total;

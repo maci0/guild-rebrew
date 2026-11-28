@@ -7,6 +7,7 @@ void __cdecl io_FormatTextBuffer(void*, int);
 void __cdecl he_PostEntityMessage(int, int, void*, int, int, void*);
 
 /* ADDRESS: GOLD 0x005a8e50 */
+/* ADDRESS: GOLDDE 0x00596cd0 */
 void __cdecl he_NotifyObjektMessage(void* noticeEntity)
 {
 	char entityKind;

@@ -4,6 +4,7 @@
 int __cdecl d2_CheckActionBlocker(char*, int);
 void __cdecl gm_ModifyHealth(int, int);
 
+/* ADDRESS: GOLDDE 0x005bff00 */
 int __cdecl gm_ObjSpendThreeActionPoints(char* e)
 {
 	if (e[2] == 6) {

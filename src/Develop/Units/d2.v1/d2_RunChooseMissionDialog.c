@@ -24,6 +24,7 @@ void __cdecl d2_DestroyForm(int);
 
 
 /* ADDRESS: GOLDTL 0x004b41b0 */
+/* ADDRESS: GOLDDE 0x004a24a0 */
 int __cdecl d2_RunChooseMissionDialog(void)
 {
 	int b1;

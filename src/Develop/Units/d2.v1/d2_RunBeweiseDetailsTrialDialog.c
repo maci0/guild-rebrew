@@ -41,6 +41,7 @@ void __cdecl d2_SetElementEnabled(int, int);
 int __cdecl gs_StartCourtTrial(unsigned short*, unsigned short*, int, int);
 
 /* ADDRESS: GOLDTL 0x005d9f70 */
+/* ADDRESS: GOLDDE 0x005bb7d0 */
 int __cdecl d2_RunBeweiseDetailsTrialDialog(unsigned short* entity, unsigned short* other)
 {
 	int flag;

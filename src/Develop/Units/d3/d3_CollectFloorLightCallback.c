@@ -22,6 +22,7 @@ int __cdecl d3_GetFloorHeight(int* a0, float* a1, unsigned int a2, unsigned int*
                          unsigned int* a4, float* a5);
 
 /* ADDRESS: GOLDTL 0x0043ed30 */
+/* ADDRESS: GOLDDE 0x00437900 */
 char __cdecl d3_CollectFloorLightCallback(char* node, LightIter* it)
 {
 	float pt[4];

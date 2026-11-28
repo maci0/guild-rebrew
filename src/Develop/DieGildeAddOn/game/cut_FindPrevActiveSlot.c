@@ -1,5 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x004e51a0 */
+/* ADDRESS: GOLDDE 0x004d19f0 */
 int __cdecl cut_FindPrevActiveSlot(char* cutscene, int count)
 {
 	int i;

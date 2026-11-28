@@ -45,6 +45,7 @@ char __cdecl d3_GetObjectScreenRect(void*, int*);
 void __cdecl d2_DrawWordWrappedText(int, int, int, int, int, char*, int);
 Unit* __cdecl gm_NextEntityQueryMatch(void);
 
+/* ADDRESS: GOLDDE 0x0051b320 */
 void __cdecl d2_DrawBuildingItemLabels(void)
 {
 	int r[4];

@@ -19,6 +19,7 @@ extern char hst_HistoryTextActive;
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 void __cdecl hst_LoadHistoryText(void);
 
+/* ADDRESS: GOLDDE 0x0050e490 */
 int __cdecl ls_LoadHistoryState(void* file)
 {
 	int v;

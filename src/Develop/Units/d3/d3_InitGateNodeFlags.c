@@ -1,4 +1,5 @@
 #include <string.h>
+/* ADDRESS: GOLDDE 0x00500960 */
 void __cdecl d3_InitGateNodeFlags(char* e)
 {
 	if (strstr(e, "gate")) {

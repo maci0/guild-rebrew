@@ -5,6 +5,7 @@ extern unsigned long d3_LastReleaseRefCount;
 void __cdecl d3_LoadTextureSurfaceTl(char* a);
 
 /* ADDRESS: GOLDTL 0x0045d040 */
+/* ADDRESS: GOLDDE 0x00451ff0 */
 char __cdecl d3_ReloadTexture(char* a)
 {
 	void** t;

@@ -14,6 +14,7 @@ void __cdecl io_FormatTextBuffer(char* buf, char* fmt, ...);
 void __cdecl d2_EnterBuildingObjekt(char* text, int a2, int a3);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005b6130 */
+/* ADDRESS: GOLDDE 0x00598930 */
 void __cdecl d2_UpdateWorkerOverlaySlots(int panelState, char* ownerName)
 {
     char label[512];

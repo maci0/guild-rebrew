@@ -7,6 +7,7 @@ int __cdecl cm_SendSetHE(char a1, unsigned char* e);
 struct unit* __cdecl he_StartHandlungSearch(int n, ...);
 
 /* ADDRESS: GOLDTL 0x00551650 */
+/* ADDRESS: GOLDDE 0x00537a00 */
 void __cdecl he_AllocLevelTraining(char* e)
 {
 	int entry;

@@ -14,6 +14,7 @@ int __cdecl ai_FindDunkleEckeTarget(unsigned short* e, Blk24* o1, Blk24* o2);
 int __cdecl ai_ComputeBaseActionScore(float* o1, float* o2, int a3, unsigned short* e, int a5, Blk24* a6, Blk24* a7);
 int __cdecl ai_CalculateMatchingMethodEffects(float* o1, float* o2, int a3, unsigned short* e, int a5, Blk24* a6, Blk24* a7);
 
+/* ADDRESS: GOLDDE 0x0048d080 */
 int __cdecl ai_ScoreDunkleEcke(float* o1, float* o2, int a3, unsigned short* e, int skip, Blk24* firstResult, Blk24* secondResult)
 {
 	Blk24 b1;

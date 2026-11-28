@@ -27,6 +27,7 @@ void __cdecl d2_ShowHandelSearch(char*, int);
 void __cdecl d2_SelectPlauschTarget(char*, int);
 void __cdecl d2_OpenContactEinkaufPanel(char*);
 
+/* ADDRESS: GOLDDE 0x005c64b0 */
 void __cdecl d2_RunSchneiderMenu(char* obj, int arg)
 {
 	int info;

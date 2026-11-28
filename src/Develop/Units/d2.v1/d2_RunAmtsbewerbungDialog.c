@@ -56,6 +56,7 @@ void __cdecl d2_ShowAmtInfo(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x0058e1b0 */
 int __cdecl d2_RunAmtsbewerbungDialog(char* who, int id)
 {
 	int d;

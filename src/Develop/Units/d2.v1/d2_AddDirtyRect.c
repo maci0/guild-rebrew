@@ -1,3 +1,4 @@
+#include "d2_capacity.h"
 typedef struct DirtyRect {
 	int x;
 	int y;
@@ -11,6 +12,7 @@ typedef struct DirtyRect {
 extern DirtyRect* d2_DirtyRects;
 
 /* ADDRESS: GOLDTL 0x00465ff0 */
+/* ADDRESS: GOLDDE 0x00459c10 */
 void __cdecl d2_AddDirtyRect(int x, int y, int w, int h, char* owner)
 {
 	int i;
@@ -43,9 +45,9 @@ void __cdecl d2_AddDirtyRect(int x, int y, int w, int h, char* owner)
 	if (h < 0) {
 		h = 1;
 	}
-	for (i = 0; d2_DirtyRects[i].owner != 0 && i < 0x400; i++) {
+	for (i = 0; d2_DirtyRects[i].owner != 0 && i < d2_ELEMENT_CAPACITY; i++) {
 	}
-	if (i < 0x400) {
+	if (i < d2_ELEMENT_CAPACITY) {
 		d2_DirtyRects[i].x = x;
 		d2_DirtyRects[i].y = y;
 		d2_DirtyRects[i].w = w;

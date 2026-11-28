@@ -32,6 +32,7 @@ typedef struct Actor {
 extern AM_METHOD am_Methods[];
 
 /* ADDRESS: GOLDTL 0x004a4410 */
+/* ADDRESS: GOLDDE 0x00492e10 */
 int __cdecl ai_ComputeBaseActionScore(float* s1, float* s2, int idx, Actor* e)
 {
 	AM_METHOD* t;

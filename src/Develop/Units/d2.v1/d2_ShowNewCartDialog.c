@@ -31,6 +31,7 @@ extern int __cdecl gm_GetEntityTableEntry(int a0);
 extern void __cdecl cm_SendSellObjekt(int a0, int a1, int a2, int a3, char a4, int a5);
 
 /* ADDRESS: GOLDTL 0x005b9980 */
+/* ADDRESS: GOLDDE 0x0059c180 */
 void __cdecl d2_ShowNewCartDialog(int sourceObj)
 {
     int choiceIndex;

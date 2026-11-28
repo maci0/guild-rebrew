@@ -3,6 +3,7 @@
 
 char* __cdecl gm_LookupEntityRecordById(int);
 
+/* ADDRESS: GOLDDE 0x004b4d40 */
 int __cdecl cm_ChkCutsceneReady(char* a1)
 {
 	int i;

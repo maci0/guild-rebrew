@@ -12,6 +12,7 @@ int __cdecl gm_MapEntityStatRange(int);
 int __cdecl gm_GetRangeStatId(int, int);
 
 /* ADDRESS: GOLDTL 0x004a0bb0 */
+/* ADDRESS: GOLDDE 0x0048f5e0 */
 int __cdecl ai_StartBerufsausbildung(int busy, char* ent, int pending, char* out1, char* out2)
 {
 	char* q;

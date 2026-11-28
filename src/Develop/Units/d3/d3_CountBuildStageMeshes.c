@@ -21,6 +21,7 @@ int __cdecl d3_FindSceneObject(int, int, int, char*);
 void __cdecl d3_VisitSceneObjects(int, int, int, void*, struct list*);
 char __cdecl d3_CollectObjectCallback(int v, int* list);
 
+/* ADDRESS: GOLDDE 0x0055a0d0 */
 int __cdecl d3_CountBuildStageMeshes(char* action)
 {
 	int best;

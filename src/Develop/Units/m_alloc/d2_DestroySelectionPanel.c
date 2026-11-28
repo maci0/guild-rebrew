@@ -15,6 +15,7 @@ void __cdecl d2_DestroyElement(int);
 void __cdecl d2_DestroyForm(int);
 /* ADDRESS: GOLD 0x529ff0 */
 
+/* ADDRESS: GOLDDE 0x005180a0 */
 void __cdecl d2_DestroySelectionPanel(void)
 {
 	int i;

@@ -21,6 +21,7 @@ void __cdecl ai_PlayCardGameTurn(void);
 void __cdecl gm_DealFifthCard(void);
 void __cdecl gm_SettleCardGameRound(void);
 
+/* ADDRESS: GOLDDE 0x00495950 */
 short __cdecl gm_StepCardGameRound(void)
 {
 	switch (((Seq*)g_1007cd4)->state) {

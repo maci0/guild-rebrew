@@ -12,6 +12,7 @@ extern Slot170_7731b8 gm_CannonTowers[8];
 void __cdecl d3_SelectSceneContext(int, int);
 
 
+/* ADDRESS: GOLDDE 0x004dc040 */
 void __cdecl d3_DestroySceneSlotObjects(void)
 {
 	int save;

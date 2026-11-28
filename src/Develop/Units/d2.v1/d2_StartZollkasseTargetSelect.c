@@ -21,6 +21,7 @@ void __cdecl d2_RunCityScrollMapDialog(int, Req*, char*, void*, int);
 void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl sv_ClearObjectSelection(void);
 
+/* ADDRESS: GOLDDE 0x005946a0 */
 void __cdecl d2_StartZollkasseTargetSelect(int building)
 {
 	Req req;

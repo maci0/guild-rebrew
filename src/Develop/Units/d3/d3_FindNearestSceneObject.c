@@ -5,6 +5,7 @@ double __cdecl sqrt(double);
 #pragma intrinsic(sqrt)
 void __cdecl d3_TransformPoint(int, int, float*);
 
+/* ADDRESS: GOLDDE 0x0057df70 */
 int __cdecl d3_FindNearestSceneObject(float* pos, int* list)
 {
 	float best;

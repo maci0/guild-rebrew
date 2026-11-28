@@ -13,6 +13,7 @@ void __cdecl d3_EndCameraAndUiMode(void);
 void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005aceb0 */
+/* ADDRESS: GOLDDE 0x005919c0 */
 void __cdecl d2_RunKerkerplanDialog(char* obj)
 {
 	char* entry;

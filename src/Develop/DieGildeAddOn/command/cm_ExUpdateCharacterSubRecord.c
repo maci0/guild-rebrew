@@ -3,6 +3,7 @@
 
 char* __cdecl ch_FindCharacterByName(char*);
 
+/* ADDRESS: GOLDDE 0x004ba470 */
 int __cdecl cm_ExUpdateCharacterSubRecord(char* x, char* out)
 {
 	char* a;

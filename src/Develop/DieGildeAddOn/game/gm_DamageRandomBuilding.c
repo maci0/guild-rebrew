@@ -12,6 +12,7 @@ void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004ba9f0 */
+/* ADDRESS: GOLDDE 0x004a8a90 */
 int __cdecl gm_DamageRandomBuilding(int* noticeRequest)
 {
 	char buf[0x100];

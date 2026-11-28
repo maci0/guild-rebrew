@@ -7,6 +7,7 @@ void  __cdecl d2_RunBeweiseSichtenDialog(void*, void*);
 void  __cdecl io_FormatTextBuffer(void*, int, int);
 extern char str_fmt_s[];
 
+/* ADDRESS: GOLDDE 0x004e32c0 */
 int __cdecl he_HandleBeweiseSichtenRequest(void* entity, void* request)
 {
 	void* p;

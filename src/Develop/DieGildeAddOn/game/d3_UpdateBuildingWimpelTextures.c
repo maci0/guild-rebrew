@@ -26,6 +26,7 @@ char __cdecl d3_ApplyWimpelTextureCallback(char*, char*);
 int __cdecl d3_GetContextIndex(int);
 void __cdecl SelectTextureSet(char*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x00516400 */
 void __cdecl d3_UpdateBuildingWimpelTextures(int idx)
 {
 	int save;

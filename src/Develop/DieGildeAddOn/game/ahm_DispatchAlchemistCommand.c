@@ -24,6 +24,7 @@ typedef struct
 int __cdecl ahm_FindRecipePrototypeByKey(int id);
 int __cdecl cm_SendAllocAlchemist(Msg24* m);
 
+/* ADDRESS: GOLDDE 0x004da660 */
 int __cdecl ahm_DispatchAlchemistCommand(char* building, char* order)
 {
 	Msg24 m;

@@ -16,6 +16,7 @@ void __cdecl d3_LoadTextureSurfaceTl(int h);
  * and cl,2 / xor), which is cl's one-bit bitfield assignment, not a whole-byte
  * xor; keep the bitfield in Tint. */
 /* ADDRESS: GOLDTL 0x0047ce00 */
+/* ADDRESS: GOLDDE 0x0046bdd0 */
 int __cdecl d3_LoadTextureWithDefaultTint(char* name, unsigned char flag)
 {
 	Tint tint;

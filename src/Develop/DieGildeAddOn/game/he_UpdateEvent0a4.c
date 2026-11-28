@@ -8,6 +8,7 @@ void __cdecl he_GrantSmallSkillOrFavor0a4(char*);
 void __cdecl he_GrantScaledGold0a4(char*);
 void __cdecl he_FreeAction(char*);
 
+/* ADDRESS: GOLDDE 0x005639d0 */
 void __cdecl he_UpdateEvent0a4(char* o)
 {
 	char* x;

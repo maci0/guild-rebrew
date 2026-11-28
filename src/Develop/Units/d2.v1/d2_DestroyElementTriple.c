@@ -5,6 +5,7 @@ void __cdecl d2_DestroyElement(int);
 
 
 /* ADDRESS: GOLDTL 0x004bf150 */
+/* ADDRESS: GOLDDE 0x004accd0 */
 void __cdecl d2_DestroyElementTriple(int* p)
 {
 	if (p[0] != -1)

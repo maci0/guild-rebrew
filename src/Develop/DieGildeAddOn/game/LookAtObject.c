@@ -9,6 +9,7 @@ float __cdecl d3_ComputeYawToTarget(int h, float* pos);
 char* __cdecl ch_CreateAction(char* e, int kind, ...);
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
+/* ADDRESS: GOLDDE 0x0040cbc0 */
 int __cdecl LookAtObject(char** a, char** b)
 {
 	float pos[4];

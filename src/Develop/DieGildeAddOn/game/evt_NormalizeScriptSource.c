@@ -5,6 +5,7 @@ extern char g_6792a8[];
 void* __cdecl fcn_0064d740(void* dst, const void* src, unsigned int n);
 
 /* ADDRESS: GOLDTL 0x00426ac0 */
+/* ADDRESS: GOLDDE 0x00421590 */
 int __cdecl evt_NormalizeScriptSource(char* src, char* dst, int* lines)
 {
 	char* q;

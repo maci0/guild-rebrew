@@ -29,6 +29,7 @@ char* __cdecl d2_BuildShapeBank(char* p);
 void __cdecl m_FreeTracked(char* p);
 
 /* ADDRESS: GOLDTL 0x004659c0 */
+/* ADDRESS: GOLDDE 0x004595f0 */
 int __cdecl d2_Show(int idx, char* path)
 {
 	int i;

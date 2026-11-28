@@ -16,6 +16,7 @@ int __cdecl d2_BuildPersonStatusDesc(Action6fCandidate*);
 int __cdecl gm_MatchesTargetFilter(unsigned short, unsigned short, int, int);
 
 /* ADDRESS: GOLDTL 0x005cba60 */
+/* ADDRESS: GOLDDE 0x005ad4f0 */
 int __cdecl d2_CollectAction6fCandidates(unsigned short* who, unsigned int max, Action6fCandidate* out, int kind)
 {
 	unsigned short* ps[4];

@@ -36,6 +36,7 @@ void __cdecl he_MessageBoxQuickjump(int a, int b, char* text, int c, int d, int 
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 
 /* ADDRESS: GOLDTL 0x00553cd0 */
+/* ADDRESS: GOLDDE 0x0053a080 */
 void __cdecl he_RunBetriebsPruefung(char* event)
 {
 	char buf[1024];

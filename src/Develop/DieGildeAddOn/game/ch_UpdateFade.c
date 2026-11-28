@@ -37,6 +37,7 @@ int __cdecl ch_FindNearbyCharacters(char* self, char** out, float range);
 
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 
+/* ADDRESS: GOLDDE 0x0040a930 */
 void __cdecl ch_UpdateFade(Fade* f)
 {
 	char* e;

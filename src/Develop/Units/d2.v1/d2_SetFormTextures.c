@@ -20,6 +20,7 @@ void __cdecl d2_CaptureFormPageTextures(int k, char* a, char* b);
 void __cdecl d2_RenderFormToTextures(int k);
 
 /* ADDRESS: GOLDTL 0x004712d0 */
+/* ADDRESS: GOLDDE 0x004647d0 */
 int __cdecl d2_SetFormTextures(int formId, char* topTex, char* bottomTex)
 {
 	Obj* form;

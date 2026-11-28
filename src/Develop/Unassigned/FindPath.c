@@ -21,6 +21,7 @@ unsigned short __cdecl RunBidirectionalPathSearch(char*, int, int, int, int, int
 
 /* Finds a path on a map and unrolls it into the caller's cell list. */
 /* ADDRESS: GOLDTL 0x00421350 */
+/* ADDRESS: GOLDDE 0x0041e220 */
 unsigned short __cdecl FindPath(struct path_421350* path, char* map, int x0, int y0, int x1, int y1, int flags)
 {
 	unsigned short r;

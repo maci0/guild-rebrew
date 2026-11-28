@@ -44,6 +44,7 @@ unsigned short __cdecl ExpandPathNode(PathGrid* grid, unsigned short node);
 void __cdecl ReversePathLinks(PathGrid* grid, unsigned short node);
 
 /* ADDRESS: GOLDTL 0x004214c0 */
+/* ADDRESS: GOLDDE 0x0041e390 */
 unsigned short __cdecl RunBidirectionalPathSearch(PathGrid* grid, int x, int y, int goal_x, int goal_y, int kind)
 {
 	int t;

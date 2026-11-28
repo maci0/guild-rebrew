@@ -122,6 +122,7 @@ static __inline void start_production(AI_MASTER_ENTITY* e, PRODUCTION_GOODS_RECO
 }
 
 /* ADDRESS: GOLDTL 0x00483f20 */
+/* ADDRESS: GOLDDE 0x00472ed0 */
 void __cdecl ai_RunWorkshopMaster(AI_MASTER_ENTITY* e)
 {
 	PRODUCTION_GOODS_RECORD* prod;

@@ -17,6 +17,7 @@ void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 
 /* ADDRESS: GOLD 0x004972c0 */
 /* ADDRESS: GOLDTL 0x00496ca0 */
+/* ADDRESS: GOLDDE 0x00485740 */
 int __cdecl ai_RunBestechung(int obj, char* target_desc, int bribe_data)
 {
 	char buf[0x400];

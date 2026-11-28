@@ -25,6 +25,7 @@ void __cdecl d3_SetSkyLayerTransition(void*, void*, unsigned char, float);
 void __cdecl d3_SetSkyLayerScrollSpeed(void*, void*, float);
 
 /* ADDRESS: GOLDTL 0x00536bb0 */
+/* ADDRESS: GOLDDE 0x0051e570 */
 void __cdecl d3_UpdateWeatherAndSkyBlend(void)
 {
 	float f1;

@@ -5,6 +5,7 @@ extern char gm_EntitySlotTable[];
 
 void __cdecl cm_RequestCopyEntityData(int a, int b, int c, int d);
 
+/* ADDRESS: GOLDDE 0x004fab80 */
 void __cdecl gm_AdjustOfficeHoldersFavor(unsigned short entityId, int delta)
 {
 	int i;

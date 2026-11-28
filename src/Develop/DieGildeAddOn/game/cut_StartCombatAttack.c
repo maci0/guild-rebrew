@@ -36,6 +36,7 @@ extern int g_102d024;
    entity, picks the dialog page by order kind and entity state, and creates the
    message task. */
 /* ADDRESS: GOLDTL 0x004d8200 */
+/* ADDRESS: GOLDDE 0x004c4ef0 */
 void __cdecl cut_StartCombatAttack(int* p)
 {
 	char* map;

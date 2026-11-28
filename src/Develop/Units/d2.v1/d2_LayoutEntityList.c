@@ -10,6 +10,7 @@ void __cdecl d2_PositionControl(int, int, int);
  * EAX (overwrites at 0x005a574c). Return 0 documented as scoped
  * limitation, not native-evidenced void. */
 /* ADDRESS: GOLDTL 0x005a51c0 */
+/* ADDRESS: GOLDDE 0x00589ed0 */
 int __cdecl d2_LayoutEntityList(unsigned char* entity)
 {
 	int* p;

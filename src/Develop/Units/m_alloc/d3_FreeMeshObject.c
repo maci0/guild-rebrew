@@ -6,6 +6,7 @@ void __cdecl d3_UnlinkFromRenderList(char*);
 void __cdecl d3_ReleaseTexture(int);
 void __cdecl m_FreeTracked(void*);
 
+/* ADDRESS: GOLDDE 0x00447cd0 */
 void __cdecl d3_FreeMeshObject(char* o)
 {
 	char* owner;

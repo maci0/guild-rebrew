@@ -57,6 +57,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005af550 */
+/* ADDRESS: GOLDDE 0x00593f50 */
 int __cdecl d2_RunStadtwacheDispatchDialog(int unused, char* param)
 {
 	Packet pkt;

@@ -35,6 +35,7 @@ void __cdecl d3_InvalidateSubTreeFlags(Model*, int);
 void __cdecl ch_PreloadCharacterMotions(Figure*, int, char*);
 void __cdecl RegisterStatusText(Model*, int, int);
 
+/* ADDRESS: GOLDDE 0x00522890 */
 Figure* __cdecl ch_CreateCharacterAtSceneObject(char* res, char* kind, int anim)
 {
 	float box[4];

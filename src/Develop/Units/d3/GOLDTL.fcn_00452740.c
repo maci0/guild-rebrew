@@ -13,6 +13,7 @@ void __cdecl d3_ComposeObserverMatrix(char*, char*, int, float*);
 void __cdecl d3_SetRenderMaterialState(unsigned char, unsigned char, int, unsigned char, unsigned char);
 
 /* ADDRESS: GOLDTL 0x00452740 */
+/* ADDRESS: GOLDDE 0x00447ff0 */
 void __cdecl d3_UpdateAndRenderEffect(void *arg)
 {
 	unsigned char *obj;

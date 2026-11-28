@@ -7,6 +7,7 @@ char __cdecl d3_MatchObjectTypeMask(int, unsigned int);
 /* Walks a scene subtree and calls cb for every node whose type matches the
  * flags; flag 0x200 limits the walk to the given node. */
 /* ADDRESS: GOLDTL 0x00437ac0 */
+/* ADDRESS: GOLDDE 0x00430d10 */
 char __cdecl d3_TraverseSceneObjects(char* scene, char* node, unsigned int flags, void (__cdecl* cb)(char*))
 {
 	char* n;

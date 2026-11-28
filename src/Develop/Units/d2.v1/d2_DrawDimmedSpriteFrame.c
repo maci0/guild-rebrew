@@ -8,6 +8,7 @@ int __cdecl d2_DrawTintedSprite(int, int, int, float, unsigned char, unsigned ch
 
 
 /* ADDRESS: GOLDTL 0x0047cbf0 */
+/* ADDRESS: GOLDDE 0x0046bbc0 */
 int __cdecl d2_DrawDimmedSpriteFrame(int x, int y, int unusedSurface, D2_SPRITE_FRAME_SET* set, int idx)
 {
 	if (set == 0)

@@ -1,4 +1,5 @@
 #include <string.h>
+/* ADDRESS: GOLDDE 0x0040d410 */
 int __cdecl d3_CollectMatchingSubObjects(char* name, char* query)
 {
 	if (strstr(name, query + 0x84) != 0) {

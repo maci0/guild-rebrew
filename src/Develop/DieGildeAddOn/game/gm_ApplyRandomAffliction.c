@@ -19,6 +19,7 @@ typedef struct {
 /* Picks the first free animation slot from a random start, updates the four
  * packed flags fields for the chosen slot and hands the record to the pool. */
 /* ADDRESS: GOLDTL 0x005086f0 */
+/* ADDRESS: GOLDDE 0x004f3870 */
 unsigned int __cdecl gm_ApplyRandomAffliction(unsigned short* objectContext)
 {
 	int ids[4];

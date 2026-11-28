@@ -51,6 +51,7 @@ char* __cdecl fcn_00657a73(int value, char* buf, int radix);
 #define BANK(i) ((TextBank_42bf20*) txt_TextBanks)[i]
 
 /* ADDRESS: GOLDTL 0x0042bf20 */
+/* ADDRESS: GOLDDE 0x00425eb0 */
 int __cdecl txt_OpenText(char* definitionPath, char* writeHeader)
 {
 	int v10;

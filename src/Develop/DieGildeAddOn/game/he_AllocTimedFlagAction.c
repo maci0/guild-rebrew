@@ -10,6 +10,7 @@ void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl he_FreeAction(char*);
 
+/* ADDRESS: GOLDDE 0x00545400 */
 void __cdecl he_StartReparatur(char* action)
 {
 	unsigned char* subentity;

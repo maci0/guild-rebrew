@@ -28,6 +28,7 @@ void __cdecl d2_EnterBuildingObjekt(unsigned char*, int, char*);
 unsigned char __cdecl gm_GetEntityUiFlags(int, unsigned char*, int, int);
 void __cdecl d3_FocusCameraOnEntity(unsigned char*);
 
+/* ADDRESS: GOLDDE 0x0057f2b0 */
 void __cdecl d2_HandleEntityChooser(void)
 {
 	Query q;

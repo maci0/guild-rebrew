@@ -19,6 +19,7 @@ typedef struct {
 
 
 /* ADDRESS: GOLDTL 0x0047ac20 */
+/* ADDRESS: GOLDDE 0x00469c10 */
 void __cdecl d2_AppendShapeNode(D2_SHAPE_NODE* n, D2_SHAPE_BANK* l)
 {
 	int i;

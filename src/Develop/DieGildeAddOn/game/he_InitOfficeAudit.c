@@ -7,6 +7,7 @@ extern void __cdecl gm_GenerateShuffledIndices(int a, void* p);
 
 
 /* ADDRESS: GOLDTL 0x0055a040 */
+/* ADDRESS: GOLDDE 0x00540380 */
 void __cdecl he_InitOfficeAudit(char* action)
 {
 	int* p;

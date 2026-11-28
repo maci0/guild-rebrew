@@ -2,6 +2,7 @@
 
 void __cdecl d3_SetObjectRotation(char*, void*);
 
+/* ADDRESS: GOLDDE 0x00431eb0 */
 void __cdecl d3_SetObjectEulerRotation(int object, int x, int y, int z)
 {
 	int buf[3];

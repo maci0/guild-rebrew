@@ -12,6 +12,7 @@ void __cdecl cm_AppendPacketFieldDelta(int a, int b, int offset, void* value);
 void __cdecl cm_RequestChangeAttribute(void);
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 /* ADDRESS: GOLDTL 0x00493200 */
+/* ADDRESS: GOLDDE 0x00482050 */
 int __cdecl ai_SelectThemaPredigt(char* actorEntity, char* sermonObj)
 {
 	char slots[0x90];

@@ -28,6 +28,7 @@ void* __cdecl evt_FindChildScript(char*, char*);
 
 /* Lexes the next token of the script text at s. */
 /* ADDRESS: GOLDTL 0x00426680 */
+/* ADDRESS: GOLDDE 0x00421150 */
 void __cdecl evt_ReadToken(char* s, struct tok_426680* t)
 {
 	char buf[0x100];
@@ -59,7 +60,7 @@ void __cdecl evt_ReadToken(char* s, struct tok_426680* t)
 			break;
 		}
 		for (j = 1; j < 0x1e; j++) {
-			if (s[i] == *(char*) (0x14cb840 + j * 5)) {
+			if (s[i] == *(char*) (((int) &g_14cb3b0 + 0x490) + j * 5)) {
 				if (j == 0x1d) {
 					if (g_6b25b0 > 1) {
 						r = _isctype(s[i - 1], 4);
@@ -72,8 +73,8 @@ void __cdecl evt_ReadToken(char* s, struct tok_426680* t)
 				}
 				if (i - start == 0) {
 					for (j = 1; j < 0x1e; j++) {
-						if (evt_MatchTokenPrefix(s + i, (char*) (0x14cb840 + j * 5))) {
-							i += (int) strlen((char*) (0x14cb840 + j * 5));
+						if (evt_MatchTokenPrefix(s + i, (char*) (((int) &g_14cb3b0 + 0x490) + j * 5))) {
+							i += (int) strlen((char*) (((int) &g_14cb3b0 + 0x490) + j * 5));
 							break;
 						}
 					}
@@ -97,7 +98,7 @@ void __cdecl evt_ReadToken(char* s, struct tok_426680* t)
 		}
 	}
 	for (j = 1; j < 0x1e; j++) {
-		if (c == *(char*) (0x14cb840 + j * 5) && evt_MatchTokenPrefix(buf, (char*) (0x14cb840 + j * 5)) != 0) {
+		if (c == *(char*) (((int) &g_14cb3b0 + 0x490) + j * 5) && evt_MatchTokenPrefix(buf, (char*) (((int) &g_14cb3b0 + 0x490) + j * 5)) != 0) {
 			t->type = 1;
 			t->u.num = j;
 			if (j == 0xe) {

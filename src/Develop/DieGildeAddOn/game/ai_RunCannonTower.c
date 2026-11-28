@@ -3,6 +3,7 @@
 int __cdecl ai_FireCannonVolley(int a1, int x);
 
 /* ADDRESS: GOLDTL 0x0048e780 */
+/* ADDRESS: GOLDDE 0x0047d650 */
 int __cdecl ai_RunCannonTower(int a1, char* firstEntry, char* secondEntry)
 {
 	int firstEntity;

@@ -13,6 +13,7 @@ extern int msx_SavedTrackState;
 
 void __cdecl msx_FadeMasterVolumeIfTrackActive(float, int);
 
+/* ADDRESS: GOLDDE 0x004b0770 */
 void __cdecl msx_OverrideMusicTrack(char* snd)
 {
 	if (msx_MusicOverrideActive == 0) {

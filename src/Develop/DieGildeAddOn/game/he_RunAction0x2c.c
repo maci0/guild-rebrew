@@ -17,6 +17,7 @@ void __cdecl he_FreeAction(char* unit);
 char* __cdecl gm_LookupEntityRecordById(int id);
 
 /* ADDRESS: GOLDTL 0x0054ac70 */
+/* ADDRESS: GOLDDE 0x00531150 */
 void __cdecl he_RunAction0x2c(char* action)
 {
 	unsigned int pkt[0x45];

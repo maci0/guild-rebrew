@@ -4,6 +4,7 @@ extern char sb_WaveDriver[];
 
 int __cdecl fcn_0042b780(int, int);
 
+/* ADDRESS: GOLDDE 0x00420660 */
 void __cdecl sb_SetMasterVolume(int volume)
 {
 	int driver_handle;

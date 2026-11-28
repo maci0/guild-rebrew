@@ -4,6 +4,7 @@ extern char g_699b08;
 void __cdecl d3_SetFloorDetailLevel(char*, unsigned char, char);
 
 /* ADDRESS: GOLDTL 0x00516de0 */
+/* ADDRESS: GOLDDE 0x00501850 */
 void __cdecl d3_UpdateSceneDetailLevel(char* scene, unsigned char force)
 {
 	unsigned char al;

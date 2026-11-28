@@ -11,6 +11,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 int __cdecl gm_RandomMod(int);
 
+/* ADDRESS: GOLDDE 0x00533c50 */
 void __cdecl he_StartRandomEvent(char* e)
 {
 	*(pos14_7f4c00*) (e + 0x52) = (*(pos14_7f4c00*)&gm_GameTime);

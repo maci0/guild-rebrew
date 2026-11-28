@@ -24,6 +24,7 @@ unsigned short __cdecl gm_RandomMod(int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl cm_SendSetHE(int, char*);
 
+/* ADDRESS: GOLDDE 0x00542110 */
 int __cdecl he_DetectNearbyPatrolAction(struct search* query)
 {
 	char* found;

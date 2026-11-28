@@ -24,6 +24,7 @@ char __cdecl d3sm_3D2SuperMap(int, float*, int*, int*, int*);
 ent2c* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
 int __cdecl cm_SendUpdateCutsceneEntitySlot(int, ent2c*);
 
+/* ADDRESS: GOLDDE 0x004be6c0 */
 int __cdecl he_QueueTradeWareCommand(char* rec, char* e, char* obj)
 {
 	float v[4];

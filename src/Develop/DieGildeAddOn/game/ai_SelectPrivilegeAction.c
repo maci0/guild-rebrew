@@ -31,6 +31,7 @@ int __cdecl ai_SelectAction037Target(char*, char*, int, char*, int);
 int __cdecl fcn_004a8d30(char*, char*, int, char*, int);
 
 /* ADDRESS: GOLDTL 0x004a9b20 */
+/* ADDRESS: GOLDDE 0x00497e60 */
 int __cdecl ai_SelectPrivilegeAction(char* unused0, char* actorEntity, int unused2, char* ctx, int unused4)
 {
 	sel_ctx c;

@@ -8,6 +8,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
+/* ADDRESS: GOLDDE 0x0053a480 */
 void __cdecl he_AllocMultiActorAction(char* action)
 {
 	if ((action[0x78] & 4) == 0) {

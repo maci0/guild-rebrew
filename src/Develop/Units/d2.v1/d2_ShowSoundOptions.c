@@ -48,6 +48,7 @@ void __cdecl io_SaveIniSettings(void);
 void __cdecl msx_ApplyAudioSettings(void);
 void __cdecl d2_DestroyForm(int);
 
+/* ADDRESS: GOLDDE 0x005c46a0 */
 void __cdecl d2_ShowSoundOptions(void)
 {
 	int s2;

@@ -5,6 +5,7 @@ extern char dbl_0_006[];
 
 /* ADDRESS: GOLD 0x0047dcf0 */
 /* ADDRESS: GOLDTL 0x0047d1b0 */
+/* ADDRESS: GOLDDE 0x0046c170 */
 int __cdecl ai_GetMaxActiveTradeActions(void)
 {
 	int v;

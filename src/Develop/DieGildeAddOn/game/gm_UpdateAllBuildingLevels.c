@@ -5,6 +5,7 @@
 
 int __cdecl gm_CheckWealthRankMilestone(int);
 
+/* ADDRESS: GOLDDE 0x004e2ee0 */
 void __cdecl gm_UpdateAllTitles(void)
 {
 	int i;

@@ -22,6 +22,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl gm_CollectPaymentOrLiquidate(int, Entity*, int, char*);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 
+/* ADDRESS: GOLDDE 0x004f8890 */
 int __cdecl gm_CheckAndCollectEntityDebt(Entity* e, int extra)
 {
 	char msg[0x800];

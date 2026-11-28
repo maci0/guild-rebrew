@@ -14,6 +14,7 @@ int __cdecl main_RunFrameLoop(void *, int);
 void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005e7e30 */
+/* ADDRESS: GOLDDE 0x005c90e0 */
 void __cdecl d2_ShowPokerHandsDialog(void)
 {
   int *v1, v2, v3, v4, v5, v6, v7, v8;

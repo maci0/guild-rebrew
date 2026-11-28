@@ -34,6 +34,7 @@ void __cdecl d2_RebuildQuadVertexBuffer(void);
 #define D3DERR_DEVICELOST_VALUE 0x88760869
 
 /* ADDRESS: GOLDTL 0x00538250 */
+/* ADDRESS: GOLDDE 0x0051fb20 */
 LRESULT CALLBACK main_WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	int hr;

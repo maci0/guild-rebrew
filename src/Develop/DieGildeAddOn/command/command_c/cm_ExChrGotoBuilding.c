@@ -53,6 +53,7 @@ extern char* lpObjektePROT;
 extern char* tp_ch_PathGrid[];
 
 /* ADDRESS: GOLDTL 0x004ca970 */
+/* ADDRESS: GOLDDE 0x004b8150 */
 int __cdecl cm_ExChrGotoBuilding(char* e, char* out)
 {
 	char* C;

@@ -37,6 +37,7 @@ int __cdecl gm_GetSeasonTreasury(char*, unsigned char);
 float __cdecl gm_GetSeasonPrice(int, unsigned char);
 
 /* ADDRESS: GOLDTL 0x004a04b0 */
+/* ADDRESS: GOLDDE 0x0048eee0 */
 int __cdecl ai_StartUpgradeZunft(int a0, char* e, int a2, Blk24* o1, Blk24* o2)
 {
 	Blk24 d;

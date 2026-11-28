@@ -3,6 +3,7 @@
 char* __cdecl fcn_0064f026(char* s, const char* delim);
 
 /* ADDRESS: GOLDTL 0x0044d700 */
+/* ADDRESS: GOLDDE 0x00443470 */
 void __cdecl d3_ParseSpaceType(int unused, char* out)
 {
 	char* t;

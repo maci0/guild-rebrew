@@ -3,6 +3,7 @@
 char* __cdecl hp_FindProdSettingNode(int id);
 
 /* ADDRESS: GOLDTL 0x005b1ce0 */
+/* ADDRESS: GOLDDE 0x005966e0 */
 void __cdecl gm_AdjustProductionShare(char* building, int entryKey, unsigned char requestedShare)
 {
 	char* p;

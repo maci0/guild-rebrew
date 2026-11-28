@@ -24,6 +24,7 @@ char __cdecl d3_InterpolateObjectSlotCallback(int a, float* v);
 char __cdecl d3_ScaleNodeIntensityCallback(char* p, float* q);
 
 /* ADDRESS: GOLDTL 0x00445f50 */
+/* ADDRESS: GOLDDE 0x0043daf0 */
 char __cdecl d3_BlendSceneLightingPreset(unsigned int slot, float t, float scale, int updateLighting)
 {
 	float pos;

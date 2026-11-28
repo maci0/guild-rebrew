@@ -4,6 +4,7 @@
 #include <ctype.h>
 #include <string.h>
 
+/* ADDRESS: GOLDDE 0x00502600 */
 int __cdecl io_CopyTrailingDigits(char* s, int end, char* out)
 {
 	int i;

@@ -16,6 +16,7 @@ void __cdecl evt_RequestScriptExit(char* g);
 int __cdecl evt_AllocateLocalVariable(char* g, int arg, int kind, char* name);
 
 /* ADDRESS: GOLDTL 0x00425fe0 */
+/* ADDRESS: GOLDDE 0x00420ab0 */
 int __cdecl evt_ParseSymbolDeclaration(char* g, int arg)
 {
 	struct tok_425fe0 t;

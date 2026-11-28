@@ -10,6 +10,7 @@ int __cdecl d3_CollectEscapePointsCallback(char*, char**);
 void __cdecl d3_VisitSceneObjects(char*, int, int, int(__cdecl*)(char*, char**), char**);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 
+/* ADDRESS: GOLDDE 0x004c07e0 */
 char* __cdecl d3_FindNearestEscapeNode(char* e)
 {
 	float best;

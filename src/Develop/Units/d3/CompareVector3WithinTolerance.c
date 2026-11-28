@@ -2,6 +2,7 @@
 #include "Develop/Units/d3/client_scene_transform.h"
 
 /* ADDRESS: GOLDTL 0x00451840 */
+/* ADDRESS: GOLDDE 0x00447420 */
 int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps)
 {
 	if (!(fabs(b[0] - a[0]) <= eps) || !(fabs(b[1] - a[1]) <= eps) || !(fabs(b[2] - a[2]) <= eps)) {

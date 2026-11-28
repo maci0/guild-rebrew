@@ -21,6 +21,7 @@ void __cdecl d2_ShowLagerOptions(char*, int);
 void __cdecl d2_OpenMeisterbriefDialog(char*);
 
 /* ADDRESS: GOLDTL 0x0058fdc0 */
+/* ADDRESS: GOLDDE 0x00575a80 */
 void __cdecl d2_RunFriedhofKapelleMenu(char* e)
 {
 	int r1;

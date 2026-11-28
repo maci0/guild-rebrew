@@ -49,6 +49,7 @@ int __cdecl he_StartHandlungSearch();
 int __cdecl d2_OpenTargetPicker();
 
 /* ADDRESS: GOLDTL 0x005c18e0 */
+/* ADDRESS: GOLDDE 0x005a3d20 */
 void __cdecl d2_ShowFestInvitation(int a0,int a1)
 {
   unsigned int *v1;

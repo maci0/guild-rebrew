@@ -29,6 +29,7 @@ void __cdecl cm_SendEntityLookup(int);
 void __cdecl cm_SendCancelCharacterActions(int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 
+/* ADDRESS: GOLDDE 0x0053f9c0 */
 int __cdecl he_ReturnPoliticianFromJob(struct slot* s)
 {
 	struct obj* o;

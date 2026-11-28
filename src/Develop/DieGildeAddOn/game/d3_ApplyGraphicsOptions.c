@@ -58,6 +58,7 @@ void __cdecl d3_ReleaseUnusedSceneObjects(void);
 void __cdecl d3_SetHighlightMode(int);
 void __cdecl d3_SetGammaParams(float*, float*, float*);
 
+/* ADDRESS: GOLDDE 0x005c3800 */
 void __cdecl d3_ApplyGraphicsOptions(void)
 {
 	unsigned char hi;

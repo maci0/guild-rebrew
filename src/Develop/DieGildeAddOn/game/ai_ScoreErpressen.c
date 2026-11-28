@@ -6,6 +6,7 @@ extern int ai_ComputeActionScore(int* a1, int* a2, int a3, int a4, void* s);
 extern int ai_ComputeBaseActionScore(int* a1, int* a2, int a3, int a4, int z, int a6, int a7);
 
 /* ADDRESS: GOLDTL 0x0049d030 */
+/* ADDRESS: GOLDDE 0x0048ba70 */
 int __cdecl ai_ScoreErpressen(int* firstOut, int* secondOut, int a3, int a4, int a5, int a6, int a7)
 {
 	char s[0x24];

@@ -27,6 +27,7 @@ int __cdecl d3_GetFloorWaterType(int* g, int x, int y)
 }
 #else
 /* ADDRESS: GOLDTL 0x00441f10 */
+/* ADDRESS: GOLDDE 0x0043a890 */
 int __cdecl d3_GetFloorWaterType(int* floor, int x, int y)
 {
 	Run* p;

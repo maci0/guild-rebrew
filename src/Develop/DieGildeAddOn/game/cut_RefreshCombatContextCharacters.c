@@ -14,6 +14,7 @@ extern int d3_ActiveScene;
 extern int g_9b4a40[];
 extern char* ch_ContextCharacters[32];
 
+/* ADDRESS: GOLDDE 0x004bed70 */
 void __cdecl cut_RefreshCombatContextCharacters(void)
 {
 	int self;

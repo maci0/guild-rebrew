@@ -15,6 +15,7 @@ typedef struct tagS495F80 {
 } AI_BILDUNG_MSG;
 
 /* ADDRESS: GOLDTL 0x00495f80 */
+/* ADDRESS: GOLDDE 0x00484a20 */
 int __cdecl ai_RunBildung(int *actor, int *req)
 {
     AI_BILDUNG_MSG s;

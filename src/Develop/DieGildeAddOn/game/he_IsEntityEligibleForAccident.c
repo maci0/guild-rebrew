@@ -3,6 +3,7 @@
 
 int __cdecl gm_IsEntityHomeInLocalShard(unsigned short*);
 
+/* ADDRESS: GOLDDE 0x0053ab70 */
 int __cdecl he_IsEntityEligibleForAccident(unsigned short* e)
 {
 	int ok;

@@ -23,6 +23,7 @@ struct slot_4b11a0 {
 
 
 /* ADDRESS: GOLDTL 0x004b11a0 */
+/* ADDRESS: GOLDDE 0x0049f4c0 */
 int __cdecl hst_HandleGildensitzeBrach(int unused1, int unused2, char* arg)
 {
 	struct slot_4b11a0 s;

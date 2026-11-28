@@ -14,6 +14,7 @@ typedef struct D3_MESH_BUILD_CTX {
 } D3_MESH_BUILD_CTX;
 // SIZE 0x30
 
+/* ADDRESS: GOLDDE 0x004432e0 */
 void __cdecl d3_FinalizeMeshSection(int unused, D3_MESH_BUILD_CTX* ctx)
 {
 	ctx->f1c += ctx->f14;

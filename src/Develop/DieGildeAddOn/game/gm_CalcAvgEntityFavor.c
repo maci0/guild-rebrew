@@ -6,6 +6,7 @@
 unsigned short* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 
+/* ADDRESS: GOLDDE 0x004faaf0 */
 float __cdecl gm_CalcAvgEntityFavor(int entityIdx, int count, int* ids)
 {
 	float sum;

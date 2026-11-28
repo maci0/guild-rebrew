@@ -45,6 +45,7 @@ void __cdecl d2_DestroyForm(int);
 void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl sv_ClearObjectSelection(void);
 
+/* ADDRESS: GOLDDE 0x00575d30 */
 void __cdecl d2_RunFriedhofUpgradeWorkerDialog(char* who)
 {
 	int b2;

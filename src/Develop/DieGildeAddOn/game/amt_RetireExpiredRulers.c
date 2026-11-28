@@ -20,6 +20,7 @@ struct HISTORICAL_OFFICE_SLOT {
 
 
 /* ADDRESS: GOLDTL 0x004acf60 */
+/* ADDRESS: GOLDDE 0x0049b2a0 */
 void __cdecl amt_RetireExpiredRulers(void)
 {
 	int out;

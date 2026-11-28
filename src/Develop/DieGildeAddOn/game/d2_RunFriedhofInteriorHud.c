@@ -14,6 +14,7 @@ int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_RunFriedhofUpgradeWorkerDialog(int);
 void __cdecl d2_OpenFriedhofFogDialog(int);
 
+/* ADDRESS: GOLDDE 0x00575ff0 */
 void __cdecl d2_RunFriedhofInteriorHud(int a)
 {
 	int x;

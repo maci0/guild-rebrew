@@ -29,6 +29,7 @@ void __cdecl init_LoadObjektScene(int id);
 void __cdecl main_ExitToFrameHandler(void* p);
 
 /* ADDRESS: GOLDTL 0x00526920 */
+/* ADDRESS: GOLDDE 0x0050fbe0 */
 void __cdecl d2_EnterBuildingObjekt(char* buildingRecord, int objektId, char* entryText)
 {
 	char* hit;

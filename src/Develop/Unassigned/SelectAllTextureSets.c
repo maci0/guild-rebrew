@@ -16,6 +16,7 @@ int __cdecl d3_SelectMatchingTextureSet();
 void __cdecl d3_VisitSceneObjects(char*, int, int, int (__cdecl*)(), struct query_40f4b0*);
 
 /* ADDRESS: GOLDTL 0x0040f4b0 */
+/* ADDRESS: GOLDDE 0x0040e2b0 */
 int __cdecl SelectAllTextureSets(char** args, char* pflag)
 {
 	struct query_40f4b0 q;

@@ -11,6 +11,7 @@ char* __cdecl gm_QueryEntities(void* id, int a, int b, int c);
 int __cdecl gm_CollectItemSuppliers(int id);
 
 /* ADDRESS: GOLDTL 0x00486c40 */
+/* ADDRESS: GOLDDE 0x00475bf0 */
 void __cdecl ai_PlanMeisterSupplies(ENTITY_RECORD* entity, unsigned int unused, int budget)
 {
 	char* q;
