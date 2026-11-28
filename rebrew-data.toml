@@ -3856,13 +3856,13 @@ section = ".data"
 section = ".data"
 
 ["GOLD.0x01432028"]
-file = "src/Develop/Units/m_alloc/txt_ReleaseTextBank.c"
+file = "src/Develop/Units/vfs/txt_ReleaseTextBank.c"
 name = "g_149d188"
 kind = "GLOBAL"
 type = "int[]"
 section = ".data"
 updated_by = "rehome"
-updated_at = "2026-11-27T16:11:47+00:00"
+updated_at = "2026-11-28T01:15:54+00:00"
 
 ["GOLD.0x01432028".verification]
 status = "DISPLACED"
@@ -7837,13 +7837,13 @@ built_va = "0x70bf44"
 placement_method = "link-symbol"
 measured_at = "2026-11-03T20:26:48+00:00"
 ["GOLDTL.0x0149d188"]
-file = "src/Develop/Units/m_alloc/txt_ReleaseTextBank.c"
+file = "src/Develop/Units/vfs/txt_ReleaseTextBank.c"
 name = "g_149d188"
 kind = "GLOBAL"
 type = "int[]"
 section = ".data"
 updated_by = "rehome"
-updated_at = "2026-11-27T16:11:47+00:00"
+updated_at = "2026-11-28T01:15:54+00:00"
 
 ["GOLDTL.0x0149d188".verification]
 status = "DISPLACED"
