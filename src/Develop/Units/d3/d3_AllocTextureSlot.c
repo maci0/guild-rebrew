@@ -12,7 +12,7 @@ typedef struct Col {
 } Col;
 
 #if defined(REBREW_GOLD)
-#include "g_fb9074.h"
+#include "tex_slot.h"
 
 extern TexSlot* g_fb9074;
 extern unsigned int g_fb9084;

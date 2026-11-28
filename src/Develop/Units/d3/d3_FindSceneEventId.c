@@ -1,4 +1,4 @@
-#include "g_67a470.h"
+#include "scene_event_entry.h"
 
 extern SCENE_EVENT_ENTRY g_67a470[8];
 

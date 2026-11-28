@@ -1,7 +1,7 @@
 
 
 
-#include "g_6abb08.h"
+#include "offer.h"
 
 extern Offer g_6abb08[];
 extern int g_6ac240;

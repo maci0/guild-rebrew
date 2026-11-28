@@ -1,4 +1,4 @@
-#include "g_6abb08.h"
+#include "offer.h"
 extern Offer g_6abb08[];
 
 /* ADDRESS: GOLD 0x005ba7b0 */
